@@ -76,7 +76,7 @@ interpretation); phases checked (N ≡ r mod q) before arithmetic; no
 3-power-term fits (the 3-term trap returned 7/5 where the truth is
 2/5 while its residual was 1e-9 — convergence, not fitting).
 
-## Road (what v0 does NOT contain)
+## Stage map (what v0 does NOT contain) — cross-ref README §program
 
 1. **10⁷ certification** (in progress): corrected N(10⁷), S(10⁷),
    2K(10⁷), the dead-chunk Δ.

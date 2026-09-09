@@ -4,9 +4,33 @@
 they generate, the onset at which zero content first enters the budget —
 and a separation program with explicit falsifiers.**
 
-*Preliminary abstract, v0 · 2026-09-09. This repository is a note to
-mathematicians, not a claim. Every number below has a script, a
-precision label, and a reproducer in `results/` and `scripts/`.*
+*Preliminary note, staged experimental program · v0 · 2026-09-09.
+Status: stages 0–1 PASS, stage 2 certified to 10⁶ **with no ghosts**, stage 3
+in progress. This is a note to mathematicians, not a claim. Every number
+has a script, a precision label, and a reproducer in `results/` and `scripts/`.*
+
+---
+
+## The program: hypotheses in stages
+
+This is a **staged experimental program** aimed at RH, not a single
+result. Each stage tests one hypothesis with a pre-registered
+falsifier, and the outcome of stage *n* determines what stage *n*+1 is
+allowed to claim. As of v0: **no ghosts** — no off-line zero, no
+violation of the width laws, no unexplained S growth. Fingers crossed.
+
+| Stage | Hypothesis | Test | Status (v0) |
+|---|---|---|---|
+| **0 — Instrument** | H0: dual float64 stack + dps oracle + twin-floor protocol certify their own counts (no systematic error) | dt/2 stability re-walks; two-engine agreement; measured chunk reliability | **PASS** — reliability model measured (1 dead chunk in ~70,000) with demonstrated detect-and-correct pipeline |
+| **1 — Identity & ladder** | H1: the Dirichlet tail is a *flat action*; the series-side laws (D = −P, the M₁ tables, the symmetries) are universal | E7a identity at dps-50 on generic paths; E2-exact: 18/18 phases at 1e-10, zero fits | **PASS** |
+| **2 — Counterexample search** | H2: if RH fails below T, the certified walk finds it (off-line pair ⇒ 2K jump; S growth beyond O(1)) | GPU walk dt = 5×10⁻⁴ + dt/2 stability endpoints + dps-40 2K/S certificate | **10⁶ certified: no ghosts.** 10⁷ in progress |
+| **3 — Zero-side identification** | H3: the measured onset C *is* the Riemann-1859 kernel's zero-side budget (nearest zero dominates, coefficient matches) | E7b: decompose C over the 138,065-zero list with the 1859 density kernel; E5: the zero-sum in missing-tail language | In progress (reads verbatim; test designed) |
+| **4 — Generalization** | H4: the width laws extend beyond odd-prime quadratic cells (F₂₄ non-multiplicative; q = 17) | E4/E6 F₂₄ rolling invariants; q = 17 exact table | Queued |
+| **5 — Reduction (not claimed)** | If H3 passes: RH ⟺ no off-line pair ∀t, with the zero side pinned to the explicit-formula kernel | E5 bridge + structural write-up | **Not run. Not claimed.** |
+
+What follows is the report of stages 0–2 (the abstract and the tables),
+the certificates, the falsifier for each hypothesis, and the road for
+stages 3–5.
 
 ---
 
@@ -57,7 +81,7 @@ overtakes the *edge (cell) action* in the missing-tail budget. The
 classic ½ of the Euler–Maclaurin half-term is the same width object
 M₁ in the smooth-path slot: one ladder, two entry points.
 
-**What this gives us today (certified).** A certified exclusion: no
+**What gives us today (stage 2, certified).** A certified exclusion: no
 off-critical-line zero pair below 10⁶ (exact N(10⁵) = 138,065 and
 N(10⁶) = 1,747,142; S(10⁵) = −2.558419306, S(10⁶) = −2.508632116 at
 40+ digits; the parity certificate 2K = −2 at 10⁶ and 5·10⁵), the
@@ -68,7 +92,8 @@ dead counting chunk in ~70,000 (the 10⁷ run is in progress; the
 certified bound at v0 is 10⁶).
 
 **What it does not claim.** The Riemann hypothesis is open in this
-repository. Nothing here is believed to be inexplicable to a seasoned
+repository: stages 3–5 are open or not-run, and stage 5 is a shape, not
+a result. Nothing here is believed to be inexplicable to a seasoned
 reader: every ingredient (Abel summation, Euler–Maclaurin, Hurwitz
 zeta, the 1859 explicit formula, optimal truncation) is classical.
 What we add is the exactness-as-computation, the measured structure at
