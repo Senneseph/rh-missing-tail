@@ -21,11 +21,11 @@ violation of the width laws, no unexplained S growth. Fingers crossed.
 
 | Stage | Hypothesis | Test | Status (v0) |
 |---|---|---|---|
-| **0 — Instrument** | H0: dual float64 stack + dps oracle + twin-floor protocol certify their own counts (no systematic error) | dt/2 stability re-walks; two-engine agreement; measured chunk reliability | **PASS** — reliability model measured (1 dead chunk in ~70,000) with demonstrated detect-and-correct pipeline |
+| **0 — Instrument** | H0: dual float64 stack + dps oracle + twin-floor protocol certify their own counts (no systematic error) | dt/2 stability re-walks; two-engine agreement; measured chunk reliability | **PASS** — reliability model measured (1 dead chunk in ~70,000) with demonstrated detect-and-correct pipeline; Day-007 port-as-audit bonus (a TS port caught a ψ‴ defect in the float engine, dps-verified and fixed) |
 | **1 — Identity & ladder** | H1: the Dirichlet tail is a *flat action*; the series-side laws (D = −P, the M₁ tables, the symmetries) are universal | E7a identity at dps-50 on generic paths; E2-exact: 18/18 phases at 1e-10, zero fits | **PASS** |
 | **2 — Counterexample search** | H2: if RH fails below T, the certified walk finds it (off-line pair ⇒ 2K jump; S growth beyond O(1)) | GPU walk dt = 5×10⁻⁴ + dt/2 stability endpoints + dps-40 2K/S certificate | **10⁶ certified: no ghosts.** 10⁷ in progress |
 | **3 — Zero-side identification** | H3: the measured onset C *is* the Riemann-1859 kernel's zero-side budget (nearest zero dominates, coefficient matches) | E7b: decompose C over the 138,065-zero list with the 1859 density kernel; E5: the zero-sum in missing-tail language | In progress (reads verbatim; test designed) |
-| **4 — Generalization** | H4: the width laws extend beyond odd-prime quadratic cells (F₂₄ non-multiplicative; q = 17) | E4/E6 F₂₄ rolling invariants; q = 17 exact table | Queued |
+| **4 — Generalization** | H4: the width laws extend beyond odd-prime quadratic cells (even-modulus antipodal structure; F₂₄ non-multiplicative; q = 17) | τ₁₂ (2×4×3) exact table; F₂₄ front/back raw + M₁; E6 F₂₄ rolling invariants; q = 17 exact table | **τ₁₂ + F₂₄ measured** (antipode sign-flip vs near-identity — two cell classes, two laws); q = 17 running |
 | **5 — Reduction (not claimed)** | If H3 passes: RH ⟺ no off-line pair ∀t, with the zero side pinned to the explicit-formula kernel | E5 bridge + structural write-up | **Not run. Not claimed.** |
 
 What follows is the report of stages 0–2 (the abstract and the tables),
@@ -104,8 +104,15 @@ kernel — is specific enough to fail.
 
 ## Materials
 
-- `results/width-ladder-tables.md` — the M₁ tables, the D = −P
-  certificate, the drift coefficient, the onset ratio; with file
+- `results/zero-finder.md` — **the certified zero finder**: n →
+  ρₙ = ½ + iγₙ computed (RVM bracket → certified twin-floor walk from a
+  dps-certified anchor → float bisection → dps tail), with the first
+  dps-certified output γ₁₃₈,₀₆₆ = 100000.74372338832472… and the honest
+  precision statement (the dps floor at these heights, not the dps
+  setting).
+- `results/width-ladder-tables.md` — the M₁ tables (χ₅, χ₁₃, τ₁₂, F₂₄),
+  the D = −P certificate, the drift coefficient, the onset ratio, the
+  front/back (antipodal) structure at the first even modulus; with file
   pointers to the raw dps outputs.
 - `results/certified-zero-survey.md` — N, S, 2K, twins, max|S|
   per decade, the walk-defect post-mortem; dps and engine labels on

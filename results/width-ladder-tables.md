@@ -101,9 +101,49 @@ structure — i.e. the moment the zero-side interior action overtakes
 the edge action in the budget. At onset the boundary cell holds
 1/π of one zero-wavelength in log-space.
 
-## 8. What the q = 17 run will answer (queued)
+## 8. The q = 17 run (running at v0 write-up)
 
 - integer-valuedness of M₁(χ₁₇) at all 17 phases;
 - mirror symmetry + zero-sum trace (the rolling law's third modulus);
 - whether a two-valued pattern re-emerges or the q = 5 pattern is
   q-specific (measured: q-specific at q = 13).
+
+## 9. τ₁₂ (q = 12, primitive real Dirichlet) — the first even modulus, 2 × 4 × 3
+
+Measured with the same exact machinery (dps-35, N ≈ 10⁶, zero fits):
+
+| r | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 |
+|---|---|---|---|---|---|---|---|---|----|----|----|----|
+| P(r) | 0 | 1 | 1 | 1 | 1 | 0 | 0 | −1 | −1 | −1 | −1 | 0 |
+| M₁(r) | 2 | 2 | 1 | 0 | −1 | −2 | −2 | −2 | −1 | 0 | 1 | 2 |
+
+- All integers (the r = 3, 9 entries are 0 to 2×10⁻¹⁴).
+- **Antipode (front ↔ back, r ↔ r+6): M₁(r+6) = −M₁(r) at 10⁻¹⁰…10⁻¹⁴**
+  — sign flip, *measured*. (The character itself carries it:
+  τ₁₂(r+6) = −τ₁₂(r) on its support {1,5,7,11}.)
+- Mirror M₁(r) = M₁(−r) at 6.5×10⁻¹⁴; trace Σ M₁ = 0 at 3.3×10⁻¹⁴.
+- Quadrant 4-tuples (step 3 = 90°): (2, 0, −2, 0), (2, −1, −2, 1),
+  (1, −2, −1, 2) — antipode sign-flip pairs, each orbit sums to 0.
+
+In 2×4×3 language: 2 = antipodal sign flip; 4 = zero-sum quadrant orbit;
+3 = the three orbits. Status: measured at q = 12 (single instance) →
+conjecture until τ₂₀/τ₂₈ (queued) and the odd q = 17.
+
+## 10. F₂₄ front/back (the Fibonacci-mod-12 cell, mean-centered)
+
+Two cell classes, two front-back laws (both measured):
+
+- **RAW (exact, no approximation).** front = [1,1,2,3,5,8,1,9,10,7,5,0],
+  back = [5,5,10,3,1,4,5,9,2,11,1,0]. back − front (mod 12) =
+  4·[1,1,2,0,2,2,1,0,1,1,2,0]: every entry divisible by 4 — **the two
+  halves are identical mod 4 (the quadrant part of the cell); the front/
+  back slide is a mod-3 shift.** "The next 12 sweep the back quadrants" is
+  literally true at the mod-4 level.
+- **M₁ (dps-40, 6-cut least-squares, per-phase relative guard 10⁻⁶).**
+  All 24 phases = a common mass (−17,470 ± 349,150i, scale a genuine cell
+  feature: half-integer values, t = 10 phase) + per-phase structure ≤ ~40.
+  **Antipode max|M₁(r) − M₁(r+12)| = 42: back = front to ~99%** (near-
+  identity, NOT the τ₁₂ sign flip). Non-multiplicative cells organize
+  front/back differently from multiplicative ones.
+- **Open (E7c):** the t-dependent drift (second rung, §6) is the live
+  t-object; whether it respects the 4-tuple decomposition is unmeasured.
