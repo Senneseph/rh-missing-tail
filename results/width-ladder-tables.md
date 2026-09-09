@@ -190,10 +190,24 @@ than the shape scale 28 (the §10 ~1% mismatch, geometric). The F₂₄
 
 So the multiplicative cell flattens to a symmetric pinched circle; the
 non-multiplicative cell flattens to a skewed open two-petal figure — the
-two front-back laws (§9–§10) in geometric form. **Queued, not claimed:**
-denser cells (q = 24/48) to resolve cusp curvature (circle vs. cardioid);
-separate lobe-circle / cusp-circle fits; the drift-tilt test (does the
-live t-version of a multiplicative loop gain a small measurable skew?).
+two front-back laws (§9–§10) in geometric form.
+
+**Denser grid (q = 24, χ₂₄ = (2/n)(3/n), a composite-even conductor):**
+24/24 all-integer M₁ (to 8.4×10⁻⁹), mirror 1.5×10⁻¹², trace 0,
+antipode sign-flip 2.2×10⁻¹³ (the even-modulus law at a composite
+even modulus). The cusp is again exactly at the quadrant cells (r = 6, 18),
+and the 22 non-cusp vertices fit ONE circle through the center (center
+(3.001, 0), R = 3.005, **passes within 0.0045 of the origin**; max
+deviation 3.2% — sharper relatively than q = 12's 9%). The cusp corner
+opens 120° → 150° along 180° − 4π/q: the continuum limit is the curve
+passing through the center SMOOTHLY — a circle crossing the origin —
+which a cardioid cusp (angle → 0°) does not do. Measured verdict:
+**circle through the center, not cardioid**; the "bend-back to the
+stem" is the circle crossing the center itself; there is exactly one
+circle (no second small one). Skew: zero in both multiplicative cells;
+skew remains the non-multiplicative signature. Next denser cells:
+conductor 28 = (7/n) and its even doubling 56 = (8/n)(7/n) (48 is not
+fundamental: (48/n) = (12/n), a duplicate of q = 12).
 ```text
   tau_12 flattened loop (M1 at 12-gon angles):   F_24 (schematic):
 
