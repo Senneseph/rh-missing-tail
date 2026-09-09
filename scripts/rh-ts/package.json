@@ -1,0 +1,20 @@
+{
+  "name": "rh-attack-ts",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "tsc --noEmit && eslint \"src/**/*.ts\" \"test/**/*.ts\"",
+    "run-l5": "npx tsx src/run-law-chi5.ts",
+    "run-bands": "npx tsx src/run-band-density.ts",
+    "test": "node --import tsx --test \"test/**/*.test.ts\""
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^26.5.0",
+    "eslint": "^10.10.0",
+    "tsx": "^4.23.13",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.70.0"
+  }
+}

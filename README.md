@@ -7,7 +7,8 @@ and a separation program with explicit falsifiers.**
 *Preliminary note, staged experimental program · v0 · 2026-09-09.
 Status: stages 0–1 PASS, stage 2 certified to 10⁶ **with no ghosts**, stage 3
 in progress. This is a note to mathematicians, not a claim. Every number
-has a script, a precision label, and a reproducer in `results/` and `scripts/`.*
+has a script (in the working tree, §Materials), a precision label, and a
+named raw output.*
 
 ---
 
@@ -123,12 +124,17 @@ kernel — is specific enough to fail.
   and the falsifier for each.
 - `references.md` — everything cited, with the prior-art line drawn
   explicitly: what is classical (and whose), what is new here.
-- `scripts/` — reproduction: the TypeScript stack (strict functional
-  lint: no `for`/`if`, one function per file) for all
-  measurement-side code, and the dps (mpmath) scripts for the
-  exact-identity and high-precision verification. Dual-stack is
-  policy: every measured number has a float64 twin and an
-  arbitrary-precision twin that must agree.
+- **Reproducer scripts (working tree):** the code has one home — the
+  private working tree (`kainos-logos/scripts/`, sibling of this
+  repository; a local checkout carries it here as the `scripts/`
+  symlink: `rh/` the measurement + dps (mpmath) scripts and their raw
+  outputs, `rh-ts/` the TypeScript zero-finder stack — strict functional
+  lint: no `for`/`if`, one function per file). This repo deliberately
+  carries only the measured record, the plan, and the references — so no
+  number in `results/` exists without a named script and a named raw
+  output file. The census file `rh/zeros_T100000.txt` (138,065 dps-
+  certified zeros to t = 10⁵) lives there too. All paths cited in
+  `results/` resolve from the working-tree root.
 
 ## Authors and disclosure
 
@@ -142,7 +148,8 @@ kernel — is specific enough to fail.
   Strix-Halo APU, ROCm GPU; mpmath, CuPy, TypeScript, Node).
 - **AI disclosure.** A large language model substantially contributed
   to the investigation, implementation, and text. All numerical
-  claims in this repository are reproducible from `scripts/`; the
+  claims in this repository are reproducible from the working tree
+  (§Materials); the
   model was not permitted to substitute recalled values for computed
   ones, and the discipline that caught every recall-vs-
   computation incident the instrument committed (for example:
