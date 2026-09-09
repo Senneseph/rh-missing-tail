@@ -56,12 +56,13 @@ evaluated by 2-cut linear-in-1/N extrapolation (guard residual
   exactly 0.
 - D = −P verified at 1e-10 on all 13 phases.
 
-## 5. Structural laws measured at both moduli (conjecture until q = 17)
+## 5. Structural laws measured at three moduli (conjecture: odd-prime quadratic cells generally)
 
-1. **Mirror symmetry**: M₁(r) = M₁(−r mod q) for every r.
-2. **Zero-sum rolling trace**: Σ_{r=0}^{q−1} M₁(r) = 0 (the
-   "centroid height of the period roll" is zero — the rolling/
-   tautochrone layer, see PLAN.md P-A).
+1. **Mirror symmetry**: M₁(r) = M₁(−r mod q) for every r — measured at
+   q = 5, 13, 17.
+2. **Zero-sum rolling trace**: Σ_{r=0}^{q−1} M₁(r) = 0 — measured at
+   q = 5, 13, 17 (the "centroid height of the period roll" is zero — the
+   rolling/tautochrone layer, see PLAN.md P-A).
 3. **t-independence**: M₁ depends on (r, χ) only, to 1e-10 (checked
    at t = 3 and t = 10).
 4. **Integer-valuedness** (q = 13; q = 5 fifth-multiples): the
@@ -101,12 +102,22 @@ structure — i.e. the moment the zero-side interior action overtakes
 the edge action in the budget. At onset the boundary cell holds
 1/π of one zero-wavelength in log-space.
 
-## 8. The q = 17 run (running at v0 write-up)
 
-- integer-valuedness of M₁(χ₁₇) at all 17 phases;
-- mirror symmetry + zero-sum trace (the rolling law's third modulus);
-- whether a two-valued pattern re-emerges or the q = 5 pattern is
-  q-specific (measured: q-specific at q = 13).
+
+## 8. χ₁₇ (q = 17), t = 10 — 1e-9, ALL INTEGERS (the third odd modulus)
+
+| r | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 |
+|---|---|---|---|---|---|---|---|---|----|----|----|----|----|----|----|----|----|
+| P(r) | 0 | 1 | 2 | 1 | 2 | 1 | 0 | −1 | 0 | 1 | 0 | −1 | −2 | −1 | −2 | −1 | 0 |
+| M₁(r) | 4 | 4 | 3 | 1 | 0 | −2 | −3 | −3 | −2 | −2 | −3 | −3 | −2 | 0 | 1 | 3 | 4 |
+
+- All 17 values integers to the measured 1e-9 (r = 4, 13 are 0 to 1e-10);
+  2-cut internal spread 7e-15..1.9e-13.
+- D = −P verified 17/17 at 1e-10.
+- Mirror M₁(r) = M₁(−r) exact at table precision; trace Σ M₁ = 0 exact —
+  the rolling zero-centroid law now holds at **three moduli (5, 13, 17)**.
+- The two-valued q = 5 pattern stays q-specific: q = 17 is six-valued
+  ({−3, −2, 0, 1, 3, 4}).
 
 ## 9. τ₁₂ (q = 12, primitive real Dirichlet) — the first even modulus, 2 × 4 × 3
 

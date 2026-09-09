@@ -23,16 +23,20 @@ The 1D summation-by-parts identity (README §Abstract) is a flat
   **NEXT.** PASS certifies the zero side of the recognition map;
   FAIL finds non-explicit-formula content.
 
-## P-W — the Width Postulate — MEASURED to 1e-10 at q = 5, 13
+## P-W — the Width Postulate — MEASURED at q = 5, 13 (1e-10) and q = 17 (1e-9)
 
 `tail = −P(r)N^{−s} + s·M₁(r)N^{−s−1} + s(s+1)·M₂N^{−s−2} + …` with
 the M_k cell-moment (Lebesgue-width) functions of (r, χ, q) only.
 Verified exact tables: see `results/width-ladder-tables.md` (the
 q = 5 fifth-multiples; the q = 13 all-integer table; mirror symmetry;
 zero-sum trace; t-independence).
-- Falsifier: q = 17 (all 17 phases, exact form) — queued.
+- Falsifier: q = 17 (all 17 phases, exact form) — **PASSED** (all integers
+  to 1e-9, mirror exact, trace 0, D = −P 17/17; see tables §8).
 - Falsifier: F₂₄ (non-multiplicative period-24 cell from the Fibonacci
-  ladder; cell sum 108, mean 9/2 code-verified) — queued.
+  ladder; cell sum 108, mean 9/2 code-verified) — **MEASURED** (raw front/
+  back = mod-4 identical + mod-3 slide; M₁ halves near-identity to ~99%;
+  tables §10). Extension beyond odd-prime quadratic cells is thus
+  measured on both an even-multiplicative and a non-multiplicative cell.
 
 ## P-G — the Half Postulate — MEASURED (6 homes), INTERPRETATION (unity)
 
@@ -82,8 +86,10 @@ interpretation); phases checked (N ≡ r mod q) before arithmetic; no
    2K(10⁷), the dead-chunk Δ.
 2. **E7b** — the zero-side spectral test (days, not weeks; data on
    hand).
-3. **E4/E6 — F₂₄** (the non-multiplicative cell) + **q = 17** (the
-   next modulus).
+3. **E4/E6 — F₂₄** rolling invariants (the front/back M₁ measurement is
+   done — tables §10; the rolling-invariant form is open) and the
+   **t-dependence of the drift** (does it respect the 4-tuple /
+   quadrant-orbit decomposition? E7c).
 4. **E5** — write the explicit zero-sum in missing-tail language and
    identify it with the measured onset (the zero-side bridge; the
    step after E7b).
