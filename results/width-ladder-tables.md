@@ -205,9 +205,26 @@ which a cardioid cusp (angle → 0°) does not do. Measured verdict:
 **circle through the center, not cardioid**; the "bend-back to the
 stem" is the circle crossing the center itself; there is exactly one
 circle (no second small one). Skew: zero in both multiplicative cells;
-skew remains the non-multiplicative signature. Next denser cells:
-conductor 28 = (7/n) and its even doubling 56 = (8/n)(7/n) (48 is not
-fundamental: (48/n) = (12/n), a duplicate of q = 12).
+skew remains the non-multiplicative signature.
+
+**The four-point grid (q = 12, 24, 28, 56):** the cusp is at the
+quadrant cells in every case ((q/4, 3q/4)); the measured corner sequence
+is **120.00°, 150.00°, 154.29°, 167.14° = 180° − 720°/q to the printed
+digit all four times** — monotone to 180°, i.e. the continuum cusp is an
+OPEN (smooth) passage, not a pinched cardioid cusp (which closes to 0°).
+The limacon parameter |a/b| (0 = circle through center, 1 = cardioid)
+reads 0.043, 0.065, 0.172, 0.250 — the circle–limacon range, drifting
+slowly up with q, still far from the cardioid end. So the continuum
+object is a limacon with an open cusp passing near the center —
+circle-like at some moduli (q = 24: passes within 0.0045 of the center),
+slightly rounded at others (M₁-staircase plateaus bow the arc). Not a
+cardioid at any measured grid, no second small circle. The P-W laws
+hold at every new modulus: χ₂₄ (24/24 integers), τ₂₈ = (7/n) — the
+Q(√7) family (28/28 integers), χ₅₆ = (2/n)(7/n) (56/56 integers);
+mirror / zero-sum trace / antipode sign-flip at each (10⁻¹²–10⁻⁷ levels).
+So P-W is now measured at 5, 12, 13, 17, 24, 28, 56 (odd primes, even,
+composite-even, and a second prime field). 48 is not a new cell: (48/n) =
+(12/n).
 ```text
   tau_12 flattened loop (M1 at 12-gon angles):   F_24 (schematic):
 
