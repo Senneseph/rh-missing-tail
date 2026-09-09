@@ -124,6 +124,13 @@ kernel — is specific enough to fail.
   and the falsifier for each.
 - `references.md` — everything cited, with the prior-art line drawn
   explicitly: what is classical (and whose), what is new here.
+- **Master formula ledger (working tree):** `plan/40-prize-islands/
+  rh-attack/FORMULAS.md` — every formula this work uses, labeled
+  (verbatim-read / measured + file + precision / derived + file /
+  classical + source / read-pending) and indexed to its home file.
+  Disciplinary rule enforced there: a formula is read from its primary
+  source *before* first use — no training-memory recall for zero-side
+  or engine formulas.
 - **Reproducer scripts (working tree):** the code has one home — the
   private working tree (`kainos-logos/scripts/`, sibling of this
   repository; a local checkout carries it here as the `scripts/`
