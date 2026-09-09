@@ -134,7 +134,7 @@ kernel — is specific enough to fail.
 
 - **Jesse S. Miller** — conception, experimental design,
   direction, interpretation. (BS- and MS-equivalent training in
-  mathematics and computer science, Emory University; working interest in physics and
+  Mathematics and Computer Science, Emory University; working interest in physics and
   histories of the sciences.)
 - **Qwen (Alibaba Qwen team)** — co-developing instrument:
   implementation, computation, drafting, and cross-checking, running
