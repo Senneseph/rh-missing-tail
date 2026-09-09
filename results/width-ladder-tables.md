@@ -158,3 +158,50 @@ Two cell classes, two front-back laws (both measured):
   front/back differently from multiplicative ones.
 - **Open (E7c):** the t-dependent drift (second rung, §6) is the live
   t-object; whether it respects the 4-tuple decomposition is unmeasured.
+
+## 11. The flattening — front/back as ONE closed curve (measured shape)
+
+Object (computed from the measured tables; shape-level, float64):
+place each cell's M₁(r) at its natural polygon angle,
+w(r) = M₁(r)·e^{2πir/q}.
+
+**τ₁₂ (multiplicative):**
+
+- **The back half lands on the front half: w(r+6) = w(r) to 1.2×10⁻¹⁵.**
+  The antipodal sign-flip (×−1) and the antipodal angle (×e^{iπ} = −1)
+  cancel exactly — the 24-cell object is a single closed curve traced
+  twice, measured.
+- Vertices: (2, 0), (√3, ±1), (½, ±√3/2), (0, 0). The curve passes
+  **through the center exactly at the two M₁ = 0 cells (r = 3, 9 — the
+  quadrant angles 90°/270°).**
+- The five non-cusp vertices fit **one circle** (center (1.110, 0),
+  radius 1.078; max deviation 0.188 ≈ 17%; the circle passes within 0.03
+  of the origin). A perfect cardioid r = a(1+cos φ) fits worse (max
+  deviation ≈ 1.0). At 12-gon resolution the cusp is a 60° corner — the
+  continuum limit of the corner is the cardioid cusp. Measured shape:
+  *a circle pinched through the center* (cardioid = its idealization).
+- Zero skew about the lobe axis (M₁ strictly real).
+
+**F₂₄ (non-multiplicative):** the global skew is present — the common
+mass sits at arg 92.86° (≈93° tilt) — and the front/back loop does NOT
+close: the back half is a 180°-rotated front with residual 42, larger
+than the shape scale 28 (the §10 ~1% mismatch, geometric). The F₂₄
+"ear" is genuinely open/skewed.
+
+So the multiplicative cell flattens to a symmetric pinched circle; the
+non-multiplicative cell flattens to a skewed open two-petal figure — the
+two front-back laws (§9–§10) in geometric form. **Queued, not claimed:**
+denser cells (q = 24/48) to resolve cusp curvature (circle vs. cardioid);
+separate lobe-circle / cusp-circle fits; the drift-tilt test (does the
+live t-version of a multiplicative loop gain a small measurable skew?).
+```text
+  tau_12 flattened loop (M1 at 12-gon angles):   F_24 (schematic):
+
+        (1.73, 1)                              ,-'"-.  '"
+       /          \                           /        \
+   (0.5, 0.87)     (2, 0)  <- lobe tip   '---'   '---'   lobe
+       \          /                           \
+        (0.5,-0.87)  ...                 '---'   '---'   (open, tilted)
+       \          /                           \
+        (1.73,-1)  cusp at origin (0,0)
+```
