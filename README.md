@@ -132,10 +132,10 @@ kernel — is specific enough to fail.
 
 ## Authors and disclosure
 
-- **[Owner full name]** — conception, experimental design,
+- **Jesse S. Miller** — conception, experimental design,
   direction, interpretation. (BS- and MS-equivalent training in
-  mathematics and computer science; working interest in physics and
-  the history of experiments.)
+  mathematics and computer science, Emory University; working interest in physics and
+  histories of the sciences.)
 - **Qwen (Alibaba Qwen team)** — co-developing instrument:
   implementation, computation, drafting, and cross-checking, running
   locally as `pi-qwen-vast` on the first author's hardware (AMD
