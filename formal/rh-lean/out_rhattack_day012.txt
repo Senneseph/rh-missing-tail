@@ -1,0 +1,138 @@
+Lean 4.34.0-rc2 + Mathlib v4.34.0-rc2 — lake exe rhattack (E7a + B-4 sections)
+recorded: 2026-09-10 (day-012, independent re-run of the committed tree @ 9620ff4)
+==============================================================
+ℹ [8763/8768] Replayed RhAttack.E7a
+info: RhAttack/E7a.lean:67:0: -1
+info: RhAttack/E7a.lean:68:0: -1
+info: RhAttack/E7a.lean:69:0: 0
+info: RhAttack/E7a.lean:70:0: 0
+info: RhAttack/E7a.lean:71:0: 0
+info: RhAttack/E7a.lean:72:0: 0
+info: RhAttack/E7a.lean:73:0: -5
+info: RhAttack/E7a.lean:74:0: 1
+info: RhAttack/E7a.lean:75:0: 0
+info: RhAttack/E7a.lean:76:0: -1
+info: RhAttack/E7a.lean:121:0: (-0.393575, 0.321814)
+info: RhAttack/E7a.lean:124:0: (-0.343922, 0.577720)
+info: RhAttack/E7a.lean:127:0: (-0.002035, 0.014884)
+info: RhAttack/E7a.lean:130:0: (0.412162, 0.899758)
+info: RhAttack/E7a.lean:133:0: (-0.046331, -0.269450)
+⚠ [8764/8768] Replayed RhAttack.B4
+info: RhAttack/B4.lean:98:0: Bv (γ : ℝ) : ℝ
+info: RhAttack/B4.lean:99:0: sLine (t : ℝ) : ℂ
+info: RhAttack/B4.lean:100:0: rhoP (γ : ℝ) : ℂ
+info: RhAttack/B4.lean:101:0: rhoM (γ : ℝ) : ℂ
+info: RhAttack/B4.lean:102:0: fac (ρ s : ℂ) : ℂ
+info: RhAttack/B4.lean:103:0: pairProd (γ t : ℝ) : ℂ
+warning: RhAttack/B4.lean:162:46: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: RhAttack/B4.lean:144:6: `simp [rhoP, rhoM, add_re, inv_re]` is a flexible tactic modifying `⊢`. Try `simp?` and use the suggested `simp only [...]`. Alternatively, use `suffices` to explicitly state the simplified form.
+
+Note: This linter can be disabled with `set_option linter.flexible false`
+info: RhAttack/B4.lean:144:6: Try this:
+  [apply] simp only [add_re, inv_re]
+info: RhAttack/B4.lean:145:6: `rw [normSqLine halfR γ, normSqMinusLine halfR γ]`
+modifies the current goal, which was modified by the flexible tactic `simp` on line 144!
+warning: RhAttack/B4.lean:144:6: `simp [rhoP, rhoM, add_re, inv_re]` is a flexible tactic modifying `⊢`. Try `simp?` and use the suggested `simp only [...]`. Alternatively, use `suffices` to explicitly state the simplified form.
+
+Note: This linter can be disabled with `set_option linter.flexible false`
+info: RhAttack/B4.lean:144:6: Try this:
+  [apply] simp only [add_re, inv_re]
+info: RhAttack/B4.lean:147:6: `rw [Bv]`
+modifies the current goal, which was modified by the flexible tactic `simp` on line 144!
+warning: RhAttack/B4.lean:151:6: `simp [rhoP, rhoM, add_im, inv_im]` is a flexible tactic modifying `⊢`. Try `simp?` and use the suggested `simp only [...]`. Alternatively, use `suffices` to explicitly state the simplified form.
+
+Note: This linter can be disabled with `set_option linter.flexible false`
+info: RhAttack/B4.lean:151:6: Try this:
+  [apply] simp only [add_im, inv_im]
+info: RhAttack/B4.lean:152:6: `rw [normSqLine halfR γ, normSqMinusLine halfR γ]`
+modifies the current goal, which was modified by the flexible tactic `simp` on line 151!
+warning: RhAttack/B4.lean:162:46: Unused tactic linter: `ring` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: RhAttack/B4.lean:199:28: `simp [Bv]` is a flexible tactic modifying `⊢`. Try `simp?` and use the suggested `simp only [...]`. Alternatively, use `suffices` to explicitly state the simplified form.
+
+Note: This linter can be disabled with `set_option linter.flexible false`
+info: RhAttack/B4.lean:199:39: `positivity`
+modifies the current goal, which was modified by the flexible tactic `simp` on line 199!
+warning: RhAttack/B4.lean:223:72: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: RhAttack/B4.lean:214:28: `simp [Bv]` is a flexible tactic modifying `⊢`. Try `simp?` and use the suggested `simp only [...]`. Alternatively, use `suffices` to explicitly state the simplified form.
+
+Note: This linter can be disabled with `set_option linter.flexible false`
+info: RhAttack/B4.lean:214:39: `positivity`
+modifies the current goal, which was modified by the flexible tactic `simp` on line 214!
+warning: RhAttack/B4.lean:223:72: Unused tactic linter: `ring` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: RhAttack/B4.lean:293:72: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: RhAttack/B4.lean:254:28: `simp [Bv]` is a flexible tactic modifying `⊢`. Try `simp?` and use the suggested `simp only [...]`. Alternatively, use `suffices` to explicitly state the simplified form.
+
+Note: This linter can be disabled with `set_option linter.flexible false`
+info: RhAttack/B4.lean:254:39: `positivity`
+modifies the current goal, which was modified by the flexible tactic `simp` on line 254!
+warning: RhAttack/B4.lean:264:6: `simp [rhoP] at this` is a flexible tactic modifying `this`. Try `simp?` and use the suggested `simp only [...]`. Alternatively, use `suffices` to explicitly state the simplified form.
+
+Note: This linter can be disabled with `set_option linter.flexible false`
+info: RhAttack/B4.lean:265:6: `exact hγ.ne' this`
+uses `this`, which was modified by the flexible tactic `simp` on line 264!
+warning: RhAttack/B4.lean:271:4: `simp [sLine, rhoP] at this` is a flexible tactic modifying `this`. Try `simp?` and use the suggested `simp only [...]`. Alternatively, use `suffices` to explicitly state the simplified form.
+
+Note: This linter can be disabled with `set_option linter.flexible false`
+info: RhAttack/B4.lean:272:4: `exact hne this`
+uses `this`, which was modified by the flexible tactic `simp` on line 271!
+warning: RhAttack/B4.lean:293:72: Unused tactic linter: `ring` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: RhAttack/B4.lean:323:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: RhAttack/B4.lean:372:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+info: RhAttack/B4.lean:480:0: pairClosedForm {γ t : ℝ} (hγ : 0 < γ) (ht : 0 < t) : pairProd γ t = ↑((γ ^ 2 - t ^ 2) * Bv γ) * cexp (sLine t * ↑(Bv γ))
+info: RhAttack/B4.lean:481:0: pairPolyNeZero {γ t : ℝ} (hne : t ≠ γ) (hγ : 0 < γ) (ht : 0 < t) : (γ ^ 2 - t ^ 2) * Bv γ ≠ 0
+info: RhAttack/B4.lean:482:0: pairLogAbs {γ t : ℝ} (hγ : 0 < γ) (ht : 0 < t) (hne : t ≠ γ) :
+  Real.log ‖pairProd γ t‖ = halfR * Bv γ + Real.log |1 - (t ^ 2 + 1 / 4) * Bv γ|
+info: RhAttack/B4.lean:483:0: pairArgAngle {γ t : ℝ} (hγ : 0 < γ) (ht : 0 < t) (hne : t ≠ γ) :
+  ↑(fac (rhoP γ) (sLine t)).arg + ↑(fac (rhoM γ) (sLine t)).arg = ↑(t * Bv γ) + if t > γ then ↑Real.pi else 0
+info: RhAttack/B4.lean:484:0: pairArLedger {γ t : ℝ} (hγ : 0 < γ) (ht : 0 < t) (hne : t ≠ γ) :
+  ∃ k,
+    (fac (rhoP γ) (sLine t)).arg + (fac (rhoM γ) (sLine t)).arg =
+      (t * Bv γ - if t > γ then Real.pi else 0) + ↑k * (2 * Real.pi)
+E7a Lean float64 pipeline — cross-check vs Python oracle (out_day011_e7a_oracle20.txt, dps-20)
+
+  chi5 t=10    N=3  M=133  : LHS = (-0.393575, 0.321814i)   |diff|·1e12 = 0.001887
+  chi5 t=100   N=7  M=307  : LHS = (-0.343922, 0.577720i)   |diff|·1e12 = 0.019664
+  chi5 t=1     N=12 M=1012 : LHS = (-0.002035, 0.014884i)   |diff|·1e12 = 0.000160
+  rng  t=10    N=7  M=1007 : LHS = (0.412162, 0.899758i)   |diff|·1e12 = 0.005030
+  rng  t=30    N=1  M=100  : LHS = (-0.046331, -0.269450i)   |diff|·1e12 = 0.000149
+
+exact ℤ data check: A(133)=-1 A(3)=-1 A(307)=0 A(7)=0 A(1012)=0 A(12)=0 | A(1007)=-5 A(7)=1 A(100)=0 A(1)=-1
+
+CROSS-CHECK PASS: worst |diff|·1e12 = 0.019664   (expected ~O(0.01..1)·10⁻¹² scale, i.e. ~1e-13; a transcription error would show ~1e12·O(1))
+Identity itself: eulerAction (RhAttack/EulerAction.lean) — PROVEN exact in Lean.
+
+B-4 Lean float64 pipeline — on-line pair identity (16 recorded points;
+ledger closed form T2/T3 vs direct fac-product evaluation; record: out_day010_pair_unit.txt)
+  g=30.424880  t=50.000000:  dLa·1e15 = 0.222045   dAr·1e15 = 0.444089
+  g=30.424880  t=30.124880:  dLa·1e15 = 0.000000   dAr·1e15 = 0.027756
+  g=30.424880  t=30.724880:  dLa·1e15 = 11.102230   dAr·1e15 = 0.000000
+  g=30.424880  t=2000.000000:  dLa·1e15 = 3.552714   dAr·1e15 = 0.000000
+  g=72.067160  t=50.000000:  dLa·1e15 = 0.333067   dAr·1e15 = 0.000000
+  g=72.067160  t=71.767160:  dLa·1e15 = 6.217249   dAr·1e15 = 0.107553
+  g=72.067160  t=72.367160:  dLa·1e15 = 18.651747   dAr·1e15 = 0.000000
+  g=72.067160  t=2000.000000:  dLa·1e15 = 2.664535   dAr·1e15 = 0.000000
+  g=146.000980  t=50.000000:  dLa·1e15 = 0.041633   dAr·1e15 = 0.001301
+  g=146.000980  t=145.700980:  dLa·1e15 = 85.265128   dAr·1e15 = 0.273219
+  g=146.000980  t=146.300980:  dLa·1e15 = 4.440892   dAr·1e15 = 0.000000
+  g=146.000980  t=2000.000000:  dLa·1e15 = 0.888178   dAr·1e15 = 0.000000
+  g=236.524230  t=50.000000:  dLa·1e15 = 0.242861   dAr·1e15 = 0.000325
+  g=236.524230  t=236.224230:  dLa·1e15 = 57.731597   dAr·1e15 = 0.086736
+  g=236.524230  t=236.824230:  dLa·1e15 = 29.309888   dAr·1e15 = 0.000000
+  g=236.524230  t=2000.000000:  dLa·1e15 = 0.888178   dAr·1e15 = 0.000000
+B-4 CROSS-CHECK PASS: worst dLa·1e15 = 85.265128, worst dAr·1e15 = 0.444089 (threshold 1e-12)
