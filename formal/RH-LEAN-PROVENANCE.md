@@ -47,9 +47,12 @@ ledger entry), `scripts/rh/day006_e7a_action_identity.py` (Python
 oracle, dps-50 residuals), `scripts/rh/out_day011_e7a_oracle20.txt`
 (dps-20 port values). In this repo the same record is summarized in
 README §Abstract (the identity) and `references.md`. The copy in
-`formal/rh-lean/` is byte-identical to the working tree at sync time —
-if a path above is unresolvable here, it resolves from the working
-tree root, per this repo's Materials policy.
+`formal/rh-lean/` is byte-identical to the working tree at sync time,
+save one deliberate omission: the `.github/` CI scaffolding (its
+placement here would install a build hook on this repo; the working
+tree keeps it). If a path above is unresolvable
+here, it resolves from the working tree root, per this repo's
+Materials policy.
 
 ## Claim policy
 
