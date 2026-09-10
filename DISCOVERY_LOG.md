@@ -1,0 +1,344 @@
+# DISCOVERY_LOG — the chronicle
+
+*Living document, 2026-09-10. This file chronicles the **approach** and
+the **pieces we found along the way**, in the order they were found, and
+how they combine. It does not track setbacks. It **does** track
+important contradictions — disagreements between a measurement, an
+expectation, or a recorded value, and how each was resolved. Every
+number below traces to a certified output named in
+`results/`, or to a labeled status (MEASURED / EXACT / IN-FLIGHT) in
+the staged scaffold (`docs/`). New entries are appended in order; an
+entry is written only when its evidence file lands.*
+
+---
+
+## 1. The approach
+
+**RH is a question about the primes. The zeros are the side question.**
+
+The classical view attacks the zeros directly (bounds for S(t),
+density theorems…). We do the opposite: treat the **prime side** as
+primary — the truncated prime data, the zeta value computed *from its
+definition* (Riemann–Siegel), the partial sums, the integral — treat
+all of it as computable at every height **without using any zero** —
+and ask where, and at what size, the **zero content** must enter that
+budget. RH then reduces to a counting statement (`D ≡ 0`, no off-line
+pair at any height), and the whole program is: build an instrument
+that certifies its own counts, measure the exact prime-side laws, find
+the measurable point where zero content first enters, and show that
+entry is *exactly* the Riemann-1859 zero product kernel.
+
+The working method is the **four operations** on the approximation
+(add / remove / duplicate / alter one term, one cell, one zero, one
+height at a time), run on an instrument that is disciplined like a lab:
+two engines must agree, every count is self-certified (twin-floor),
+every constant is computed not recalled, every claim is labeled. The
+owner's standing intuition — that **½ is the central object** (the
+critical line, the half-term, the onset at ½·t = N, (−½)! = √π, the
+power-tower half-attractor…) — enters as a *measurement target*: each
+home of ½ is measured separately, and the unity claim stays labeled
+INTERPRETATION (PLAN.md, P-G).
+
+The pieces below are the findings, in order.
+
+---
+
+## 2. The pieces, as found
+
+### 2.1 The self-certifying instrument (days 1–4)
+
+A float64 zero-finding engine (dual dt-stacks + dps oracle spot
+checks) that **certifies its own counts**: a count is accepted only if
+two floor spacings agree (dt/dt2 twin-floor), and the count at each
+certified height is spot-verified at high precision (2K parity, S
+value, dps). **What it caught on its own:** one dead counting chunk in
+~70,000 at the 10⁷ walk (a flat |S| ≈ 247 plateau where flips
+stopped) — localized by S-*size*, not by parity, corrected as +246
+flips, and the whole walk re-certified (`results/certified-zero-survey.md`).
+This is the referee every later number is measured in front of.
+**Crown jewel of the instrument:** a program that takes n and returns
+the n-th non-trivial zero *by computation, not lookup* (dps-certified
+bracket → twin-floor walk from a dps anchor → float bisection → dps
+tail; first output γ₁₃₈₀₆₆ = 100000.74372338832472…,
+`results/zero-finder.md`).
+
+### 2.2 The missing-tail / width ladder (days 3–5)
+
+Truncate the zeta series at n = N: the missing tail has an **exact
+residue split** per Dirichlet cell (Hurwitz zeta per residue class).
+Used as a *computation* (no asymptotic fitting) it yields, to 10⁻¹⁰:
+
+- the edge law **D = −P** (the edge term is exactly minus the cell
+  partial sum) on 18/18 phases at χ₅ and χ₁₃, 17/17 at χ₁₇;
+- the **width (cell-moment) tables** M₁ — all rational: χ₅ in fifths
+  {2/5, 2/5, −3/5, −3/5, 2/5}, χ₁₃ **all integers** (13 phases),
+  χ₁₇ all integers to 1e-9;
+- two structural laws at every odd-prime modulus measured:
+  **M₁(r) = M₁(−r mod q)** (mirror) and **Σ_r M₁(r) = 0** (zero-sum
+  trace); t-independence of M₁;
+- a complex drift coefficient (3/5 + 2i/5)·(t/N) at the χ₅ r = 1
+  rung, decay exponent −1.0005 ± 0.001, whose real and imaginary parts
+  carry *different* phase-group moments — the first measured
+  cross-phase coupling in a truncation ladder.
+
+**The reading (labeled):** the Dirichlet tail is a **flat action** —
+the exact part is cell data computable at every order, the remainder
+is zero content. Universality of the ladder is then *by construction*
+(a closed action cannot see zeros or t), which is what the ½
+intuition is about on the prime side. (`results/width-ladder-tables.md`.)
+
+### 2.3 The Euler action identity — E7a (day 6)
+
+The finite summation-by-parts identity (README §Abstract):
+
+```
+Σ_{n=N+1}^{M} a(n)·n^{−s} = A(M)M^{−s} − A(N)N^{−s} + s ∫_N^M A(u)·u^{−s−1} du
+```
+
+holds **exactly** for every step path a(n), every s, every N < M;
+verified at 50 digits on periodic and non-periodic paths (residuals
+10⁻⁵¹–10⁻⁵³, `FORMULAS.md` §2.1). This is the bridge object: series
+side, action side, and zero-side remainder all speak the same
+language. Used as a *computer* it produced the E2-exact infinite-form
+test (18/18 phases at 1e-10, zero fits). **2026-09-10: the identity is
+now PROVEN in Lean** (any commutative ring, one-induction proof) with
+a 5/5 independent float64 cross-check against the Python oracle
+(worst deviation 2×10⁻¹⁴) — `formal/rh-lean/`, one-command
+verifiable. A finite identity that was "measured exact" is now
+"machine-checked exact".
+
+### 2.4 The onset (days 4–5) — where zero content first enters
+
+For the ζ tail (unbounded path, regularized), the measured
+zero-oscillatory term C obeys, in the onset window,
+
+**C/|I| = ½·(t/N)** — to **four digits**, **N-independent** across
+N ∈ {10³, 10⁴, 10⁵}, first visible at **½·t = N** (the
+unit-magnification configuration of the reciprocal lens). Beyond
+t/N ≈ 2 the scaling changes regime (measured, in the width
+ladder tables). Reading (labeled): ½·t = N is the moment the
+zero-side interior action overtakes the edge (cell) action in the
+missing-tail budget. The classic ½ of the Euler–Maclaurin half-term
+is the same width object M₁ in the smooth-path slot — one ladder, two
+entry points. (P-G in PLAN.md: the six measured homes of ½.)
+
+### 2.5 Certified counterexample search (days 5–9) — and the 246
+
+Certified, no-ghost results standing at v0:
+
+- N(10⁵) = 138,065; N(3×10⁵) = 466,655 (GPU, dt/dt2 exact, gate
+  6.5×10⁻¹⁰); N(10⁶) = 1,747,142; S(10⁵) = −2.558419306,
+  S(10⁶) = −2.508632116 (40+ digits); 2K = −2 at 10⁶ (parity: even,
+  no off-line pair); twin census 19 in (10⁵, 10⁶];
+- **N(10⁷) = 21,136,123 — triple-certified** (dt/dt2-stable window
+  227,197; corrected +246 chunk; dps-40 spot); S(10⁷) = −1.2057
+  (O(1)); 2K(10⁷) = 0 at 2.25×10⁻⁹ (dps-40). One final redundancy
+  re-walk was still in flight at the sync of this document
+  (IN-FLIGHT — closes the last redundancy slot; no scaffold change).
+
+The 246 itself is the instrument's design point made concrete: an
+off-line pair (or a defect) is **invisible to the parity certificate**
+(2K counts parity only) and is found by **S-size** instead. The
+detector family the proof later needs (off-line ⇒ measurable
+deviation) was *already in the pipeline*, proven on a real defect
+before the zero-side theory existed. (`results/certified-zero-survey.md`.)
+
+### 2.6 The 24-adic front/back — two cell classes, two laws (days 6–8)
+
+The ladder was generalized past odd-prime quadratic cells:
+
+- **τ₁₂** (the 2×4×3 multiplicative period-12 cell): exact M₁ table;
+- **F₂₄** (the *non-multiplicative* period-24 cell from the
+  Fibonacci ladder; cell sum 108, code-verified mean 9/2): the raw
+  front/back split is mod-4 identical + a mod-3 slide; M₁ halves are
+  **near-identity** (contrast: the multiplicative even cell τ₁₂ has
+  the **antipode sign-flip** M₁(r+6) = −M₁(r) at 1e-10..1e-14);
+  the F₂₄ cyclotomic pole sits at 9/2 (the "9/2 pole", measured, not
+  conflation with τ₁₂'s structure — τ₁₂ and F₂₄ are different
+  objects that both live near 24);
+- the quadruple corner law 180°−720°/q and the multiplicative /
+  non-multiplicative cell split.
+
+The owner's 12/24 "front sweeps the front quadrants, back sweeps the
+back" image was **measured**: the antipode law is real at 1e-10..1e-14
+on the multiplicative cell; the 24-cell M₁ landscape is near-identity
+rather than sign-flip. The unification ("3 units per quadrant in π")
+did **not** become a load-bearing object: the side-quest was **sealed
+v0.5–v0.7** after its measured parts passed — a boundary decision,
+recorded here because the measurement stands while the interpretation
+is deliberately left out of the proof path. (Contradiction log §3.2.)
+
+### 2.7 The zero-side bridge — E7b Stage 1 (day 9)
+
+Read the primary sources verbatim (Riemann 1859, p. 9; DLMF 25.2 /
+25.4): the **product over zeros** is DLMF **25.2.12** —
+
+```
+ζ(s) = (2π)^s e^{−(1+γ_E/2)s} / (2(s−1)Γ(s/2+1)) · Π_ρ (1−s/ρ)·e^{s/ρ}
+```
+
+— with the analytic density tail appended. Two structural facts
+measured: (i) on the critical line each conjugate **pair-factor is
+exactly real** (the two principal arguments sum to a multiple of π;
+atan2 constants cancel in-pair); (ii) the zero side reduces to a
+float64-vectorizable sum (B-4: closed per-pair form, dps-25
+unit-checked, cross-validated point-for-point against the certified
+table by the vector re-run). **Stage 1 result:** the zero-side kernel
+(over the certified 466,655-zero list + analytic tail) **reproduces
+the measured 4-digit onset** — (N=10³, t/N=1): +0.29%; (N=10⁴,
+t/N=0.1): −1.2%; two borderlines +4.2/+5.8%; the rest below the
+quantified zero-side error floor (the density tail saturates once
+G ≫ t). A prime-side law (computed without using zeros) is reproduced
+by the zero side (which uses *only* the zero list + textbook
+analysis), at the predicted heights, with 4-digit agreement and a
+quantified error budget: the bridge is **real**, and its constants are
+measured. (`spec/onset-bridge-e7b1.md`, `FORMULAS.md` E7b-1.)
+
+### 2.8 The detector — off-line pair ⇒ forced deviation (day 10)
+
+The G2 question (would an off-line zero be *detectable*?) answered in
+two layers:
+
+- **Exact core (B-5, v0.5):** replace one on-line pair in the 25.2.12
+  kernel by an off-line pair at δ = β − ½ ≠ 0. The kernel-deviation
+  ratio R = P_off4 / P_on2 has a **closed form from 4 lines of
+  algebra** (real-signed prefactor × constant-rate phase; the only
+  branch is the on-line prefactor's sign flip at t = γ; δ > 0 has a
+  *no-zero-window*, its magnitude is a δ-polynomial with all-positive
+  coefficients). Measured regimes, all 56 grid points: near resonance
+  |R − 1| ≈ 1 (≥ 0.998); at twice the pair's height exactly 4.0000;
+  in the far regime |R−1| = (t₀/γ*)² to 6 digits — the detector margin
+  **grows quadratically** with height ratio. Verified dps-30, three
+  levels (formula vs definition ≤ 6×10⁻²⁶; formula vs measurement ≤
+  5×10⁻⁴ = the last printed digit).
+- **Mechanism (settled, measured + structural):** an off-line
+  4-tuple is **argumentically invisible on the central line** (its
+  near-pair factor is real-negative, never zero ⇒ net phase 0.000
+  across the straddle window, vs −π on-line) while the
+  Riemann–von Mangoldt count *does* count it ⇒ **2K takes a +2 size
+  step, parity is preserved, no flip**. The detector is therefore
+  exactly the *S-size family that already found the 246* — the
+  instrument built in §2.1 is the theorem's eye. Route-A
+  signal-to-noise, measured against the fine local audit floor: ≥ 8.9×
+  worst configuration, ≥ 14× at the pair's own height; in the
+  relative form |ΔK|/|K| ≥ 0.998 uniformly, no audit floor needed.
+  (`results/e7b1-detector-b5-core.md`, `docs/RH-PROOF-OUTLINE.md` B-5.)
+
+### 2.9 The staged proof skeleton (day 10)
+
+The pieces combine into a skeleton with numbered blanks
+(`docs/RH-PROOF-OUTLINE.md`, v0.5):
+
+**RH ⇔ D(t) ≡ 0** (B-0, a 2-line counting equivalence from classical
+inputs) where D = N_total − N_on-line jumps by 2 at each off-line pair
+height. The proof contains **two sides of one identity**: the
+definition side (ζ from Riemann–Siegel, P_n, I, hence W(t) — no zero
+input, computable ∀t) and the zero-side kernel 25.2.12 + tail. The
+three propositions: (i) on-line ⇒ explicit dynamics (the measured
+onset + exact pair form + rigorous tail — B-1, B-2, B-3, B-4 filled);
+(ii) off-line ⇒ forced deviation (B-5, **core FILLED, exact**);
+(iii) the ∀t closure — the one open wall, with three candidate routes
+(A: prime-oracle + residual floor; B: uniform S/2K dynamics; C:
+hybrid interim) and a written **decision rule on incoming data**
+(D1 tail-saturation walk, D2 beyond-4-digit fits, D3 W-audit, D4
+detector margin, D5 10⁷ redundancy — D4 all landed; D1, D5 in flight
+at sync). The skeleton is explicitly **not a proof**: every step is
+labeled, every blank names its data trigger, and the document states
+what would kill it.
+
+### 2.10 The formal instrument (days 10–11)
+
+The reasoning tooling itself became part of the artifact:
+
+- **kainos-logos store trained on the proof object:** a Prolog-style
+  proof store discharged the skeleton's implications, ran the
+  circularity query (**CLEAN** — no cycle touches the target; the
+  "substitute the on-line zero set into ζ" knot is a mechanically
+  checked property, not a discipline prayer), honored the invariant
+  that `rh` stays status = hypothesis (**no `theorem:riemann`
+  assertion exists anywhere**), and demonstrated the *drop-in*
+  property four times (new data files appeared ⇒ corresponding
+  assertions flipped candidate→established automatically, no module
+  edited).
+- **Lean 4 + Mathlib:** the E7a identity proven over any commutative
+  ring; 5/5 oracle instances cross-checked by an independent Lean
+  float64 pipeline (worst 2×10⁻¹⁴); `formal/rh-lean/` in this repo,
+  one-command verifiable. The finite core of the proof is now an
+  external, machine-auditable fact.
+
+---
+
+## 3. Important contradictions (recorded, resolved or standing)
+
+By the owner's rule, setbacks are not logged here; contradictions are.
+
+### 3.1 The ledger mis-attribution (DLMF 25.2.11 vs 25.2.12) — RESOLVED
+
+The formula ledger carried "25.2.11 = product over zeros". The
+verbatim read gate (raw TeX captured, committed) found **25.2.11 is
+the Euler *prime* product**; the zero product is **25.2.12**. Corrected
+in the ledger before any zero-side formula first used it. This is the
+computed-not-recalled discipline working exactly as designed: a
+recorded value disagreed with the primary source, and the primary
+source won. (Also caught in the same read pass: the 25.11 Hurwitz
+correction to the earlier on-line pair-factor note.)
+
+### 3.2 The 12/24 front/back image vs the 24-cell measurements — SEALED, measurement kept
+
+The owner's image (front 12 / back 12, "3 units per quadrant in π")
+split under measurement: the **antipode sign-flip law is real**
+(M₁(r+6) = −M₁(r) at 1e-10..1e-14, multiplicative cell) but the
+non-multiplicative 24-cell (F₂₄) shows **near-identity** halves
+instead of sign flip, and no 12/24 split of the π structure was
+measured at the claimed strength. Resolution: the *measurements*
+stand and are in the width tables (two cell classes, two laws —
+genuinely informative); the *unifying interpretation* was sealed as a
+closed side-quest (v0.5–v0.7) and is **excluded from the proof path**
+deliberately. Important not because it was wrong, but because the
+project demonstrated it can kill one of its own images on data — and
+chose the measurement over the picture.
+
+### 3.3 The 3-term trap (convergence vs truth) — RESOLVED, discipline written
+
+A three-term fit of the χ₅ edge moment returned **7/5** with a
+residual of 1e-9 — "converged" to the wrong value while the exact
+table (no fitting involved) said **2/5**. Resolution: exact tables
+only; the no-3-power-term-fits rule was written into P-0. This is the
+one standing reminder in the store that *precision of a fit is not
+truth of a value*; every width table in `results/` is fitted-or-not
+labeled accordingly.
+
+### 3.4 2K(10⁶) = −2 vs 2K(10⁷) = 0 — RESOLVED by the instrument
+
+Not a contradiction once read, but a near-miss one that was caught:
+the parity certificate is even at both heights, but the 10⁶ value
+(−2) is the *un-corrected* count (2K counts flips mod 2: −2 ≡ 0),
+while the 10⁷ walk carried the +246 defect correction and the
+dps-40 2K = 0 at 2.25×10⁻⁹. Both are consistent with no off-line
+content; the discrepancy is bookkeeping, logged with the defect
+post-mortem in `results/certified-zero-survey.md`.
+
+### 3.5 Standing tension (not resolved — this is the open problem)
+
+**What is measured vs what is closed:** the prime-side law is
+measured to 4 digits and N-independent; the zero side reproduces it
+inside a quantified floor; the exact finite core is machine-checked;
+the *∀t* closure (B-6, the (iii) proposition) is **open**, with its
+candidate routes, margins, and decision rules written. The skeleton
+is a scaffold with numbered blanks, not a proof; the repository claims
+exactly what the labels say (README §What it does not claim) and no
+more.
+
+---
+
+## 4. Where the chronicle stands (sync 2026-09-10)
+
+Found and in force: the instrument (§2.1), the flat-action ladder
+(§2.2), E7a EXACT → machine-checked (§2.3), the onset (§2.4), the
+certified no-ghost bound 10⁶ / 10⁷-triple (§2.5), two cell classes
+(§2.6), the reproduced bridge (§2.7), the exact detector (§2.8).
+Combining: the staged skeleton (§2.9) + the formal instrument
+(§2.10). In flight at sync: the G = 6×10⁶ list walk (decides B-2's
+tail model and the A/B route) and the final 10⁷ redundancy (closes
+§2.5's last slot). Next entry is written when the first of those
+lands.

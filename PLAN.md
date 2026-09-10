@@ -108,6 +108,26 @@ edited locally. Filled so far: B-4 (per-pair closed form) and the B-5
 core (the E7b detector, `results/e7b1-detector-b5-core.md`); the
 remaining blanks are named with their exact data triggers (D1–D5).
 
+**Machine-checked core (mirror).** `formal/rh-lean/` (synced from
+kainos-logos head `eaa7a7f`, 2026-09-10; provenance and the
+no-local-edits rule in `formal/RH-LEAN-PROVENANCE.md`): theorem
+`eulerAction` — the E7a identity — proven in Lean 4.34 + Mathlib over
+any commutative ring, with the five oracle instances cross-checked
+two ways (exact-ℤ `#eval` layer + independent Lean float64 pipeline,
+worst deviation 2×10⁻¹⁴ vs the dps-20 Python oracle; recorded run
+`formal/rh-lean/out_rhattack_day011.txt`). Status: the finite core is
+machine-checked; this changes no status line in this plan's
+postulates (P-E's EXACT label is reinforced, not replaced).
+
+## Living documents
+
+- `DISCOVERY_LOG.md` — the chronicle: approach + the pieces as found
+  (in order) + how they combine; important contradictions recorded;
+  no setbacks; appended as evidence files land.
+- `PUBLICUM.md` — the public digest (science-magazine/news readership):
+  plain words, no fancy mathematics, measured vs open stated,
+  credit + AI disclosure.
+
 ## Stage map (what v0 does NOT contain) — cross-ref README §program
 
 1. **10⁷ certification** (in progress): corrected N(10⁷), S(10⁷),

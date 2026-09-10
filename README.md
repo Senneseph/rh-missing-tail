@@ -122,8 +122,20 @@ kernel — is specific enough to fail.
   P-A action-and-rolling layer, P-E action identity, P-0 discipline)
   with per-item status: verified / measured (precision) / conjecture,
   and the falsifier for each.
-- `references.md` — everything cited, with the prior-art line drawn
-  explicitly: what is classical (and whose), what is new here.
+- `DISCOVERY_LOG.md` — **the chronicle**: the approach and the pieces
+  as found (in order), how they combine, and the important
+  contradictions (recorded and resolved or standing). Living document;
+  entries are appended when the evidence files land. Does not track
+  setbacks.
+- `PUBLICUM.md` — **the public digest**: what the work is and why it
+  may work, in plain words for science-magazine / news readers; no
+  fancy mathematics; states what is measured vs open; carries the
+  credit and AI-disclosure lines.
+- `formal/rh-lean/` — **the machine-checked core** (mirror, provenance
+  in `formal/RH-LEAN-PROVENANCE.md`): the E7a identity proven in Lean
+  4.34 + Mathlib over any commutative ring, plus the 5/5 oracle
+  cross-check (run + recorded output in the tree). One-command
+  verifiable: `lake build && lake exe rhattack`.
 - **Master formula ledger (working tree):** `plan/40-prize-islands/
   rh-attack/FORMULAS.md` — every formula this work uses, labeled
   (verbatim-read / measured + file + precision / derived + file /
@@ -137,9 +149,10 @@ kernel — is specific enough to fail.
   symlink: `rh/` the measurement + dps (mpmath) scripts and their raw
   outputs, `rh-ts/` the TypeScript zero-finder stack — strict functional
   lint: no `for`/`if`, one function per file). This repo deliberately
-  carries only the measured record, the plan, and the references — so no
-  number in `results/` exists without a named script and a named raw
-  output file. The census file `rh/zeros_T100000.txt` (138,065 dps-
+  carries only the measured record, the plan, the references, and the
+  machine-checked core (`formal/`, a mirror — see its provenance
+  file) — so no number in `results/` exists without a named script and
+  a named raw output file. The census file `rh/zeros_T100000.txt` (138,065 dps-
   certified zeros to t = 10⁵) lives there too. All paths cited in
   `results/` resolve from the working-tree root.
 
@@ -147,8 +160,7 @@ kernel — is specific enough to fail.
 
 - **Jesse S. Miller** — conception, experimental design,
   direction, interpretation. (BS- and MS-equivalent training in
-  Mathematics and Computer Science, Emory University; working interest in physics and
-  histories of the sciences.)
+  Mathematics and Computer Science, Emory University; working interest in the histories of the Natural Sciences.)
 - **Qwen (Alibaba Qwen team)** — co-developing instrument:
   implementation, computation, drafting, and cross-checking, running
   locally as `pi-qwen-vast` on the first author's hardware (AMD

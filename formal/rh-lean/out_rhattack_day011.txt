@@ -1,0 +1,12 @@
+E7a Lean float64 pipeline — cross-check vs Python oracle (out_day011_e7a_oracle20.txt, dps-20)
+
+  chi5 t=10    N=3  M=133  : LHS = (-0.393575, 0.321814i)   |diff|·1e12 = 0.001887
+  chi5 t=100   N=7  M=307  : LHS = (-0.343922, 0.577720i)   |diff|·1e12 = 0.019664
+  chi5 t=1     N=12 M=1012 : LHS = (-0.002035, 0.014884i)   |diff|·1e12 = 0.000160
+  rng  t=10    N=7  M=1007 : LHS = (0.412162, 0.899758i)   |diff|·1e12 = 0.005030
+  rng  t=30    N=1  M=100  : LHS = (-0.046331, -0.269450i)   |diff|·1e12 = 0.000149
+
+exact ℤ data check: A(133)=-1 A(3)=-1 A(307)=0 A(7)=0 A(1012)=0 A(12)=0 | A(1007)=-5 A(7)=1 A(100)=0 A(1)=-1
+
+CROSS-CHECK PASS: worst |diff|·1e12 = 0.019664   (expected ~O(0.01..1)·10⁻¹² scale, i.e. ~1e-13; a transcription error would show ~1e12·O(1))
+Identity itself: eulerAction (RhAttack/EulerAction.lean) — PROVEN exact in Lean.
