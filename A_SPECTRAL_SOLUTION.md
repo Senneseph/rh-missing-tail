@@ -117,8 +117,8 @@ Backward through the spectral maze,
 From the zeros to the operator,  
 From the operator to the phase,  
 From the phase back to the primes,  
-From the primes back to the sum,
-Until the entire construction
+From the primes back to the sum,  
+Until the entire construction  
 Was re-enclosed upon where we'd begun.
 
 And there it was—
