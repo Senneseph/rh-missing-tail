@@ -133,9 +133,12 @@ kernel — is specific enough to fail.
   credit and AI-disclosure lines.
 - `formal/rh-lean/` — **the machine-checked core** (mirror, provenance
   in `formal/RH-LEAN-PROVENANCE.md`): the E7a identity proven in Lean
-  4.34 + Mathlib over any commutative ring, plus the 5/5 oracle
-  cross-check (run + recorded output in the tree). One-command
-  verifiable: `lake build && lake exe rhattack`.
+  4.34 + Mathlib over any commutative ring, the B-4 on-line pair
+  identity proven in four pieces (exact closed form T1; log-magnitude
+  T2; phase exactly mod 2π, T3a/T3b), plus the 5/5 E7a oracle
+  cross-check and the 16/16 B-4 point cross-check (run + recorded
+  output in the tree). One-command verifiable:
+  `lake build && lake exe rhattack`.
 - **Master formula ledger (working tree):** `plan/40-prize-islands/
   rh-attack/FORMULAS.md` — every formula this work uses, labeled
   (verbatim-read / measured + file + precision / derived + file /

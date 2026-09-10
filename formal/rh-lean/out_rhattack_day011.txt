@@ -1,3 +1,6 @@
+Lean 4.34.0-rc2 + Mathlib v4.34.0-rc2 — lake exe rhattack (E7a + B-4 sections)
+recorded: 2026-09-10 (day-011, Phase 2 B-4 closeout)
+==============================================================
 E7a Lean float64 pipeline — cross-check vs Python oracle (out_day011_e7a_oracle20.txt, dps-20)
 
   chi5 t=10    N=3  M=133  : LHS = (-0.393575, 0.321814i)   |diff|·1e12 = 0.001887
@@ -10,3 +13,23 @@ exact ℤ data check: A(133)=-1 A(3)=-1 A(307)=0 A(7)=0 A(1012)=0 A(12)=0 | A(10
 
 CROSS-CHECK PASS: worst |diff|·1e12 = 0.019664   (expected ~O(0.01..1)·10⁻¹² scale, i.e. ~1e-13; a transcription error would show ~1e12·O(1))
 Identity itself: eulerAction (RhAttack/EulerAction.lean) — PROVEN exact in Lean.
+
+B-4 Lean float64 pipeline — on-line pair identity (16 recorded points;
+ledger closed form T2/T3 vs direct fac-product evaluation; record: out_day010_pair_unit.txt)
+  g=30.424880  t=50.000000:  dLa·1e15 = 0.222045   dAr·1e15 = 0.444089
+  g=30.424880  t=30.124880:  dLa·1e15 = 0.000000   dAr·1e15 = 0.027756
+  g=30.424880  t=30.724880:  dLa·1e15 = 11.102230   dAr·1e15 = 0.000000
+  g=30.424880  t=2000.000000:  dLa·1e15 = 3.552714   dAr·1e15 = 0.000000
+  g=72.067160  t=50.000000:  dLa·1e15 = 0.333067   dAr·1e15 = 0.000000
+  g=72.067160  t=71.767160:  dLa·1e15 = 6.217249   dAr·1e15 = 0.107553
+  g=72.067160  t=72.367160:  dLa·1e15 = 18.651747   dAr·1e15 = 0.000000
+  g=72.067160  t=2000.000000:  dLa·1e15 = 2.664535   dAr·1e15 = 0.000000
+  g=146.000980  t=50.000000:  dLa·1e15 = 0.041633   dAr·1e15 = 0.001301
+  g=146.000980  t=145.700980:  dLa·1e15 = 85.265128   dAr·1e15 = 0.273219
+  g=146.000980  t=146.300980:  dLa·1e15 = 4.440892   dAr·1e15 = 0.000000
+  g=146.000980  t=2000.000000:  dLa·1e15 = 0.888178   dAr·1e15 = 0.000000
+  g=236.524230  t=50.000000:  dLa·1e15 = 0.242861   dAr·1e15 = 0.000325
+  g=236.524230  t=236.224230:  dLa·1e15 = 57.731597   dAr·1e15 = 0.086736
+  g=236.524230  t=236.824230:  dLa·1e15 = 29.309888   dAr·1e15 = 0.000000
+  g=236.524230  t=2000.000000:  dLa·1e15 = 0.888178   dAr·1e15 = 0.000000
+B-4 CROSS-CHECK PASS: worst dLa·1e15 = 85.265128, worst dAr·1e15 = 0.444089 (threshold 1e-12)

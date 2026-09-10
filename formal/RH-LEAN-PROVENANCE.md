@@ -1,9 +1,11 @@
 # PROVENANCE — `formal/rh-lean/` (machine-checked core)
 
 **MIRROR — a certified artifact, planning-adjacent.** Source of record:
-`kainos-logos` `scripts/rh-lean/`, repo head `eaa7a7f` (2026-09-10).
-Synced 2026-09-10. **No edits here** — updates propagate only by
-explicit copy from the source repo — never edited locally.
+`kainos-logos` `scripts/rh-lean/`, repo head `9620ff4` (2026-09-10,
+day-011 Phase 2 B-4 closeout). Synced 2026-09-10 (twice — the v1.1
+mirror at `eaa7a7f` was extended the same day). **No edits here** —
+updates propagate only by explicit copy from the source repo — never
+edited locally.
 
 ## What it is
 
@@ -18,12 +20,29 @@ A Lean 4.34 + Mathlib package that
    layer (all ten recorded partial-sum values) and an independent Lean
    float64 re-implementation of the left side against the Python
    oracle values — recorded run: `formal/rh-lean/out_rhattack_day011.txt`
-   (**CROSS-CHECK PASS 5/5, worst deviation 2×10⁻¹⁴** vs dps-20).
+   (**CROSS-CHECK PASS 5/5, worst deviation 2×10⁻¹⁴** vs dps-20);
+3. **proves the B-4 on-line pair identity** in four pieces
+   (`formal/rh-lean/RhAttack/B4.lean`): T1 `pairClosedForm` — the two
+   DLMF-25.2.12 on-line factors for a certified zero height γ collapse
+   *exactly*, for all γ,t > 0, to a real signed prefactor times one
+   exponential: F_ρ1·F_ρ2 = (γ²−t²)·Bv(γ)·e^{s·Bv(γ)}, s = ½+it,
+   Bv(γ) = 1/(¼+γ²) (holds even at t = γ); T2 `pairLogAbs` — the
+   log-magnitude in the ledger's verbatim form; T3a `pairArgAngle` /
+   T3b `pairArLedger` — the additive phase, exactly mod 2π (stated in
+   the branch-cut-free circle type `Real.Angle`, and in ℝ with an
+   explicit 2πℤ multiple), t ≠ γ. Plus a PART-4 float64 cross-check on
+   the 16 recorded points: the ledger closed form vs a direct
+   float64 fac-product evaluation — **16/16 PASS, worst dLa ≈ 8.5×10⁻¹⁴,
+   dAr ≈ 4.4×10⁻¹⁶** (the predicted double-roundoff scale; the record
+   is cross-validated independently at dps-25 in the source repo).
 
 This upgrades the identity's status from "verified at 50 digits in
-Python" to **machine-checked**: the statement is a theorem of Lean, and
-the numeric layer is an independent implementation agreeing to
-float64-level. Nothing here touches zeros, RH, or analytic statements.
+Python" to **machine-checked**: the statements are theorems of Lean,
+and the numeric layer is an independent implementation agreeing to
+float64-level. The B-4 theorems are the *per-pair factor* of the
+zero-side bridge (E7b) as a certified artifact — they are statements
+about the DLMF-25.2.12 factors evaluated on the critical line, not
+about the zeros of ζ, RH, or analytic continuation.
 
 ## Run it yourself
 
@@ -33,7 +52,7 @@ float64-level. Nothing here touches zeros, RH, or analytic statements.
 # one-time: install elan + Lean 4 (https://www.lean-lang.org)
 cd formal/rh-lean
 lake build          # fetches the prebuilt Mathlib cache (minutes)
-lake exe rhattack   # prints the 5-instance cross-check table + PASS line
+lake exe rhattack   # E7a 5-instance table + B-4 16-point table + PASS lines
 ```
 
 No GPU, no mpmath, no network beyond the Mathlib cache.

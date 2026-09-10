@@ -265,6 +265,20 @@ The reasoning tooling itself became part of the artifact:
   float64 pipeline (worst 2×10⁻¹⁴); `formal/rh-lean/` in this repo,
   one-command verifiable. The finite core of the proof is now an
   external, machine-auditable fact.
+- **The B-4 pair identity joined the machine-checked core (same
+  day):** the two DLMF-25.2.12 on-line factors for a certified zero
+  height, `RhAttack/B4.lean` — T1: they collapse *exactly*, for all
+  γ,t > 0 (even at the crossing t = γ), to a real signed prefactor
+  times one exponential; T2: the log-magnitude in the ledger's
+  verbatim form; T3: the additive phase exactly mod 2π — stated in
+  the branch-cut-free circle type (no `atan2` principal-value
+  machinery at all) and in ℝ with an explicit 2πℤ multiple. Cross-
+  checked on the 16 recorded points inside Lean float64 (closed form
+  vs direct fac product): 16/16, worst deviations ~10⁻¹⁴ — the
+  predicted double-roundoff scale. What this means for the story:
+  the per-pair content of the zero-side bridge — "the constants
+  cancel in-pair, and the crossing is a sign flip, nothing else" —
+  is now an external, machine-auditable fact, in the same package.
 
 ---
 

@@ -37,3 +37,7 @@ def main : IO Unit := do
     else
     s!"\nCROSS-CHECK FAILED: worst |diff|·1e12 = {worst * 1e12}")
   IO.println "Identity itself: eulerAction (RhAttack/EulerAction.lean) — PROVEN exact in Lean."
+  IO.println ""
+  IO.println "B-4 Lean float64 pipeline — on-line pair identity (16 recorded points;"
+  IO.println "ledger closed form T2/T3 vs direct fac-product evaluation; record: out_day010_pair_unit.txt)"
+  let _w4 ← B4Float.run
