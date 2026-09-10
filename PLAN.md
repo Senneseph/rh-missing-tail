@@ -99,7 +99,7 @@ interpretation); phases checked (N ≡ r mod q) before arithmetic; no
 
 `docs/RH-PROOF-OUTLINE.md` (v0.5) + `docs/RH-OUTLINE.md` (v0.1) are
 mirrors of the proof scaffold in the working repo (kainos-logos @
-head 9b848df, synced 2026-09-10). They are plans, not results: every
+head 4633916, synced 2026-09-10). They are plans, not results: every
 item is labeled MEASURED / CLASSICAL / INFERENCE / TO-BUILD, every
 number must trace to this repo's certified ledger (see
 `results/certified-zero-survey.md`), and the documents make no claim.

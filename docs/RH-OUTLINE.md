@@ -2,7 +2,7 @@
 
 > **MIRROR — a planning artifact, not a result.** Source of record:
 > `kainos-logos` `plan/40-prize-islands/rh-attack/RH-OUTLINE.md`,
-> synced from repo head `9b848df` on 2026-09-10 (content v0.1).
+> synced from repo head `4633916` on 2026-09-10 (content v0.1).
 > No edits here — updates propagate only by explicit copy from the
 > source repo (PLAN.md, "Staged proof scaffold"). NOT a proof. No claim.
 
@@ -11,6 +11,10 @@
 MEASURED / CLASSICAL / INFERENCE / TO-BUILD. Built to be re-opened: §4 lists exactly
 which measurements should change it. Companion files: `day-*.md`, `spec/*.md`,
 `prompts/M*.md`, `FORMULAS.md` (ledger), `POSTULATES.md` (P-0.x discipline).
+
+**Mirror:** `rh-missing-tail` `docs/RH-OUTLINE.md` (synced 2026-09-10,
+v0.1). Propagate by explicit copy after commit — never edit the mirror
+locally.
 
 ---
 

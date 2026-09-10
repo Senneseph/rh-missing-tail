@@ -2,12 +2,12 @@
 
 > **MIRROR — a planning artifact, not a result.** Source of record:
 > `kainos-logos` `plan/40-prize-islands/rh-attack/RH-PROOF-OUTLINE.md`,
-> synced from repo head `9b848df` on 2026-09-10 (content v0.5).
+> synced from repo head `4633916` on 2026-09-10 (content v0.5).
 > No edits here — updates propagate only by explicit copy from the
 > source repo (PLAN.md, "Staged proof scaffold"). NOT a proof. No claim.
 
 
-**Status: DRAFT PROOF SKELETON v0.3 (2026-09-10).** v0.2: B-5 v0 MEASURED
+**Status: DRAFT PROOF SKELETON v0.5 (2026-09-10).** v0.2: B-5 v0 MEASURED
 (D4/D3; 2K mechanism settled; δ-robust f-scale; far-point correction). v0.3:
 D3-FINE landed — local audit floor pinned (median 2.9e-3 / p90 1.86e-2 / max
 3.89e-2), Route-A SNR measured (≥8.9× worst config; ≥14× at the pair's own
@@ -22,6 +22,10 @@ measured 6-digit table (worst |formula−measured| 5×10⁻⁴ = last printed
 digit; |formula−direct| 6×10⁻²⁶); see `out_day010_b5core_check.txt`.
 NOT a proof. No claim. Every step is labeled **MEASURED** / **CLASSICAL** /
 **TO-BUILD** / **■ filled**.
+
+**Mirror:** `rh-missing-tail` `docs/RH-PROOF-OUTLINE.md` (synced 2026-09-10,
+v0.5 @ 9b848df). Propagate by explicit copy after commit — never edit
+the mirror locally.
 Blanks are `[B-n]` with exact statements; the blank ledger at the end maps each to
 its data trigger. Companion: `RH-OUTLINE.md` (state + strategy + triggers D1–D5).
 Discipline: formulas only from `FORMULAS.md` (ledger); certified numbers carry
