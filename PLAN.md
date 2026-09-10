@@ -95,6 +95,19 @@ interpretation); phases checked (N ≡ r mod q) before arithmetic; no
 3-power-term fits (the 3-term trap returned 7/5 where the truth is
 2/5 while its residual was 1e-9 — convergence, not fitting).
 
+## Staged proof scaffold (planning artifact, NOT a result)
+
+`docs/RH-PROOF-OUTLINE.md` (v0.5) + `docs/RH-OUTLINE.md` (v0.1) are
+mirrors of the proof scaffold in the working repo (kainos-logos @
+head 9b848df, synced 2026-09-10). They are plans, not results: every
+item is labeled MEASURED / CLASSICAL / INFERENCE / TO-BUILD, every
+number must trace to this repo's certified ledger (see
+`results/certified-zero-survey.md`), and the documents make no claim.
+Mirrors update only by explicit copy from the source repo — never
+edited locally. Filled so far: B-4 (per-pair closed form) and the B-5
+core (the E7b detector, `results/e7b1-detector-b5-core.md`); the
+remaining blanks are named with their exact data triggers (D1–D5).
+
 ## Stage map (what v0 does NOT contain) — cross-ref README §program
 
 1. **10⁷ certification** (in progress): corrected N(10⁷), S(10⁷),
