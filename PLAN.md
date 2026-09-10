@@ -17,11 +17,16 @@ The 1D summation-by-parts identity (README §Abstract) is a flat
 
 - E7a (finite form, generic paths): **PASS** (dps-50, 5/5).
 - E2-exact (infinite form, 18/18 phases, 1e-10, zero fits): **PASS**.
-- E7b (the big one): spectral decomposition of the measured onset C
-  over the zero list with the Riemann-1859 density kernel
-  (1/lnx − 2Σ x^{−1/2}cos(γ lnx)/lnx), nearest zero dominant.
-  **NEXT.** PASS certifies the zero side of the recognition map;
-  FAIL finds non-explicit-formula content.
+- E7b (the zero-side identification): **Stage 1 complete (2026-09-09)** —
+  the onset is predicted from the Riemann zero product (25.2.12 kernel,
+  full canonical factor (1−s/ρ)e^{s/ρ} over the certified 466,655-zero
+  list + analytic density tail). The 4-digit onset points are
+  reproduced: N=10³, t/N=1 → +0.29%; N=10⁴, t/N=0.1 → −1.2% (two
+  borderline +4/+6%); the remaining points sit below the quantified
+  zero-side error floor (the density tail saturates once G ≫ t), and
+  the N=10⁵ row needs G ≳ 5–6×10⁶ (deferred, on demand). PASS here =
+  the zero side of the recognition map is the measured onset; FAIL
+  would find non-explicit-formula content.
 
 ## P-W — the Width Postulate — MEASURED at q = 5, 13 (1e-10) and q = 17 (1e-9)
 
@@ -84,8 +89,9 @@ interpretation); phases checked (N ≡ r mod q) before arithmetic; no
 
 1. **10⁷ certification** (in progress): corrected N(10⁷), S(10⁷),
    2K(10⁷), the dead-chunk Δ.
-2. **E7b** — the zero-side spectral test (days, not weeks; data on
-   hand).
+2. **E7b** — the zero-side identification (Stage 1 PASS on the
+   certified 466,655-zero list, 2026-09-09; the N=10⁵ row awaits the
+   G ≳ 5–6×10⁶ walk, on demand).
 3. **E4/E6 — F₂₄** rolling invariants (the front/back M₁ measurement is
    done — tables §10; the rolling-invariant form is open) and the
    **t-dependence of the drift** (does it respect the 4-tuple /

@@ -12,10 +12,16 @@ agreeing exactly — is the true count certificate**).
 | T | N(T) | S(T) |
 |---|------|------|
 | 10⁵ | 138,065 | −2.558419306 |
+| 3×10⁵ | 466,655 | (dps pending — next M3 batch) |
 | 10⁶ | 1,747,142 | −2.508632116 |
 
 - Both S values reproduced at dps-40 against the float64 dual-stack
   walks to the printed digits.
+- N(3×10⁵) = 466,655 (2026-09-09): GPU flip walk on [10⁵, 3×10⁵] at
+  dt = 5×10⁻⁴ AND dt/2 — flip counts agree exactly (466,655 both
+  passes), engine gate GPU-vs-host 6.5×10⁻¹⁰, min twin gap 0.005750
+  (at t ≈ 273,193.66, above the twin floor), anchor N(10⁵) = 138,065.
+  This is the zero list (466,655 +γ) that E7b-1 Stage-1 runs on.
 - The 10⁵ census (138,065 zeros) is the zero list used by the
   upcoming E7b spectral test.
 
