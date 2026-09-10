@@ -41,3 +41,8 @@ def main : IO Unit := do
   IO.println "B-4 Lean float64 pipeline — on-line pair identity (16 recorded points;"
   IO.println "ledger closed form T2/T3 vs direct fac-product evaluation; record: out_day010_pair_unit.txt)"
   let _w4 ← B4Float.run
+  IO.println ""
+  IO.println "B-5 Lean float64 pipeline — exact off-line/on-line ratio R(s,δ) (12 recorded"
+  IO.println "configs: closed form pref·e^{s·ωδ} vs the direct 6-factor definition vs the"
+  IO.println "dps-30 record; record: out_day010_b5core_check.txt)"
+  let _w5 ← B5Float.run

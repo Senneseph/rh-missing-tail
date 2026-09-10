@@ -1,16 +1,20 @@
 # PROVENANCE — `formal/rh-lean/` (machine-checked core)
 
 **MIRROR — a certified artifact, planning-adjacent.** Source of record:
-`kainos-logos` `scripts/rh-lean/`, repo head `6fe8841` (2026-09-10,
-day-011 Phase 3 B-0 closeout). Synced 2026-09-10 (three times — the
-v1.1 mirror at `eaa7a7f` and the B-4 mirror at `7acc024` were both
-extended the same day; this third sync adds `RhAttack/B0.lean`). **No edits here** —
+`kainos-logos` `scripts/rh-lean/`, repo head `89b8065` (2026-09-11,
+day-012: stable-toolchain move + B-5 CORE proven). Synced 2026-09-11
+(fourth sync; the three 2026-09-10 syncs preceded it). **No edits here** —
 updates propagate only by explicit copy from the source repo — never
-edited locally.
+edited locally. **Toolchain (2026-09-11):** the package is pinned to
+**Lean 4.33.1 (stable) + Mathlib 4.33.1** — moved from 4.34.0-rc2 at
+the owner's direction (4.34 has no stable tag yet, and the rc carries
+verified regressions); the two 4.33.1-compat shims are in the synced
+files (E7a: `Int.toFloat` → core `Float.ofInt`; B4: two-line
+`ite_eq_left`/`ite_eq_right` shim over `ite_cond_eq_true`/`eq_true`).
 
 ## What it is
 
-A Lean 4.34 + Mathlib package that
+A Lean 4.33.1 (stable) + Mathlib 4.33.1 package that
 
 1. **proves** the Euler action identity (E7a — the exact
    summation-by-parts identity, README §Abstract of this repo) over
@@ -57,6 +61,26 @@ A Lean 4.34 + Mathlib package that
    structural properties — most directly, the zeros of a function F
    with the same HFE/HJR shape. It is NOT a statement about ζ and does
    not constitute a proof of RH.
+5. **proves the B-5 CORE exact ratio** for the off-line/on-line kernel
+   deviation (`formal/rh-lean/RhAttack/B5.lean`): for s = ½+it (t > 0,
+   t ≠ γ) and the four off-line zeros {½±δ±iγ} against the on-line
+   pair {½±iγ}, the 25.2.12-factor ratio R(s,δ) = P_off/P_on equals
+   EXACTLY
+   (¼+γ²)((γ−t)²+δ²)((γ+t)²+δ²) / ((γ²−t²)((½+δ)²+γ²)((½−δ)²+γ²)) ·
+   e^{s·ω_δ} with the real ω_δ = (1+2δ)/((½+δ)²+γ²) + (1−2δ)/
+   ((½−δ)²+γ²) − 1/(¼+γ²) — `b5Ratio` (the ratio; sign flip of
+   (γ²−t²) at t = γ is the only branch, `b5PrefSign`), `b5Abs`
+   (‖R‖ = |pref|·e^{ω_δ/2}), `b5NoffPos` + `b5NoffIsPolynomial` (the
+   off-line numerator is (t²−γ²)²+2δ²(t²+γ²)+δ⁴, all-positive
+   coefficients — no δ > 0 zero-window). Float layer `B5Float`, run in
+   `Main.lean`: closed form vs the DIRECT 6-factor definition vs the
+   dps-30 recorded values, 12 configs — **12/12 PASS, worst
+   closed-vs-direct 1.9×10⁻¹⁴ rel, worst vs-record 4.2×10⁻⁸ rel**
+   (recorded run: `formal/rh-lean/out_rhattack_day012.txt`).
+   Honesty: an algebraic identity for products of the canonical
+   factors over the stated zero SETS — it uses no property of ζ and
+   proves neither RH nor the floor composition (that is the outline's
+   B-6A).
 
 This upgrades the identity's status from "verified at 50 digits in
 Python" to **machine-checked**: the statements are theorems of Lean,
@@ -74,7 +98,7 @@ about the zeros of ζ, RH, or analytic continuation.
 # one-time: install elan + Lean 4 (https://www.lean-lang.org)
 cd formal/rh-lean
 lake build          # fetches the prebuilt Mathlib cache (minutes)
-lake exe rhattack   # E7a 5-instance table + B-4 16-point table + PASS lines
+lake exe rhattack   # E7a 5-instance + B-4 16-point + B-5 12-config tables + PASS lines
 ```
 
 No GPU, no mpmath, no network beyond the Mathlib cache.

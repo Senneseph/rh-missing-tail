@@ -110,7 +110,7 @@ def Fscal (r : Float) (z : Float × Float) : Float × Float :=
     pipeline, deliberately outside Mathlib's arithmetic layer.) -/
 def FLHS (a : ℕ → Int) (s : (Float × Float)) (N M : ℕ) : Float × Float :=
   (M - N).rec (0.0, 0.0) fun L acc =>
-    let t := Fscal (a (N + L + 1)).toFloat (Fwt s (N + L + 1))
+    let t := Fscal (Float.ofInt (a (N + L + 1))) (Fwt s (N + L + 1))
     (acc.1 + t.1, acc.2 + t.2)
 
 -- ===========================================================================

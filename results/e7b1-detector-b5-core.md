@@ -59,6 +59,19 @@ sums are real.
    (`scripts/rh/b5core_check.py`, host mpmath; no tail integrals — the
    ratio involves only the 8 moved zeros).
 
+## PROVEN in Lean (2026-09-11)
+
+The exact ratio above is now a theorem of Lean (**4.33.1 stable** +
+Mathlib 4.33.1): `formal/rh-lean/RhAttack/B5.lean` proves `b5Ratio`
+(the T1 closed form, as stated in this file), `b5Abs` (T2 magnitude),
+`b5NoffPos`/`b5NoffIsPolynomial` (no δ > 0 zero-window), `b5PrefSign`
+(the (γ²−t²) sign flip at t = γ is the only branch). The mirror's
+`B5Float` layer re-derives R from the 6 factors in float64 and checks
+the closed form against the direct definition and the dps-30
+recorded values — **12/12 PASS** (worst closed-vs-direct
+1.9×10⁻¹⁴ rel; worst vs-record 4.2×10⁻⁸ rel; recorded run
+`formal/rh-lean/out_rhattack_day012.txt`).
+
 ## What this does NOT claim
 
 - It is a statement about the 25.2.12 *product* — the bridge to ζ (25.2.12

@@ -58,6 +58,19 @@ open Complex
 
 variable {γ t : ℝ}
 
+/-- 4.33.1 compatibility — Lean 4.34 (rc/core) added `ite_eq_left` /
+    `ite_eq_right` to `Init/Core.lean` (lines 1179/1188 in the rc2 source);
+    stable 4.33.1's sanctioned forms are `ite_cond_eq_true` /
+    `ite_cond_eq_false` with `eq_true` / `eq_false` (Init/SimpLemmas.lean).
+    These shims keep the rc2-era spellings below valid, proofs unmodified. -/
+theorem ite_eq_left {α : Sort u} {c : Prop} {d : Decidable c} (hc : c) {a b : α} :
+    (if c then a else b) = a :=
+  ite_cond_eq_true _ _ (h := eq_true hc)
+
+theorem ite_eq_right {α : Sort u} {c : Prop} {d : Decidable c} (hnc : ¬ c) {a b : α} :
+    (if c then a else b) = b :=
+  ite_cond_eq_false _ _ (h := eq_false hnc)
+
 /-- Half, as a single elaborated real constant (def and rewrite sites must
     carry the identical term — numeral literals re-elaborate per context). -/
 def halfR : ℝ := (2 : ℝ)⁻¹

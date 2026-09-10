@@ -1,13 +1,22 @@
 # RH-PROOF-OUTLINE — full proof skeleton with numbered blanks
 
-> **MIRROR — a planning artifact, not a result.** Source of record:
-> `kainos-logos` `plan/40-prize-islands/rh-attack/RH-PROOF-OUTLINE.md`,
-> synced from repo head `4633916` on 2026-09-10 (content v0.5).
-> No edits here — updates propagate only by explicit copy from the
-> source repo (PLAN.md, "Staged proof scaffold"). NOT a proof. No claim.
-
-
-**Status: DRAFT PROOF SKELETON v0.5 (2026-09-10).** v0.2: B-5 v0 MEASURED
+**Status: DRAFT PROOF SKELETON v0.7 (2026-09-11).** v0.7: **B-5 CORE now
+PROVEN in Lean** — `b5Ratio` (T1 exact ratio), `b5Abs` (T2), `b5NoffPos`,
+`b5PrefSign`, `b5NoffIsPolynomial`, in `scripts/rh-lean/RhAttack/B5.lean`,
+with the 12-config float64 cross-check wired into `Main.lean` (worst
+closed-vs-direct 1.9×10⁻¹⁴ rel, worst vs dps-30 record 4.2×10⁻⁸ rel —
+12/12 PASS). The whole Lean line moved to the STABLE toolchain
+(lean4 v4.33.1 + mathlib v4.33.1) at the owner's direction; rc2 had
+multiple regressions (day-012 §1). E7a/B-4/B-0 re-verified green on the
+stable pin (5/5, 16/16, #eval!). v0.6: D1 LANDED — the
+corrected 6×10⁶ list (N(6×10⁶) = 12,193,869; an off-by-one had truncated it
+at 5.9×10⁶, found via the chain's own S-line flag, fixed and re-certified)
+and the G = 6×10⁶ onset rows: the Stage-1 five-row onset pattern is
+reproduced within ≤6% (zero-side residuals 5.9×10⁻⁵–1.8×10⁻³ of |ζ|); the
+tail error E(G,s) is tabled row-by-row and the honest method ceiling
+t ≲ 10⁴–2×10⁴ is CONFIRMED at G = 6×10⁶ (B-2's remaining task is to bound
+this E). B-4 label upgraded MEASURED → PROVEN (Lean, `formal/rh-lean`).
+v0.5: B-5 core theorem FILLED
 (D4/D3; 2K mechanism settled; δ-robust f-scale; far-point correction). v0.3:
 D3-FINE landed — local audit floor pinned (median 2.9e-3 / p90 1.86e-2 / max
 3.89e-2), Route-A SNR measured (≥8.9× worst config; ≥14× at the pair's own
@@ -77,9 +86,13 @@ W_n(t) := ζ(½+it) − P_n(½+it) − I(n,½+it); C_n(t) = |W_n(t)|. All defini
   product; ledger FORMULAS.md E7b): for a zero set 𝒵,
   K(s;𝒵) = Main_25.2.12(s) · Π_{ρ∈𝒵, |Imρ|≤G} (1−s/ρ)e^{s/ρ} · e^{T(G,s)},
   T the analytic density tail (closed-form integrand, ledger).
-- **[B-4]** **■ FILLED (MEASURED, 2026-09-10)** On-line per-pair closed form,
-  dps-25 unit-checked (`/tmp/rh/d4_unit_pair.py`, first 100 certified zeros,
-  t both sides of each γ):
+- **[B-4]** **■ FILLED — PROVEN IN LEAN (2026-09-10)** On-line per-pair
+  closed form: T1–T3b machine-checked in `rh-lean` (`formal/rh-lean`
+  `RhAttack/B4.lean`: `pairClosedForm` exact with no exclusion,
+  `pairLogAbs` = la_pair verbatim, `pairArgAngle`/`pairArLedger` the phase
+  exactly mod 2π) + 16/16 float64 cross-check; measure record below
+  (`/tmp/rh/d4_unit_pair.py`, first 100 certified zeros, t both sides of
+  each γ):
   - la_pair(g,t) = ½/(¼+g²) + log|1 − (¼+t²)/(¼+g²)|
   - ar_pair(g,t) = t/(¼+g²) − π·[g < t]   (sum of the two principal args;
     atan2 constants cancel in-pair)
@@ -99,9 +112,16 @@ W_n(t) := ζ(½+it) − P_n(½+it) − I(n,½+it); C_n(t) = |W_n(t)|. All defini
   · ln(γ/2π)/(2π) dγ + E(G,s) with an explicit |E(G,s)| ≤ M(G,t). MEASURED:
   the density-tail error saturates in G once G ≫ t (S-scale sum-vs-∫ against
   actual spacings; coefficient ~20–40) — M is non-vanishing; the honest
-  method ceiling at current G is t ≲ 10⁴–2×10⁴. Data trigger: D1 (G=6×10⁶
-  list walk **in flight** 2026-09-10 06:26 UTC, ~7 h; chain runs the G=6×10⁶
-  onset rows and writes `out_day010_onset_G6e6.txt`).
+  method ceiling at current G is t ≲ 10⁴–2×10⁴. **D1 LANDED (2026-09-10,
+  `out_day010_onset_G6e6.txt`, verified docker mpmath 1.3.0, complete
+  corrected list):** the G = 6×10⁶ product side reproduces the onset at the
+  five near rows within ≤6% (residuals: (10³,1.0) 5.9×10⁻⁵, (10³,2.0)
+  1.8×10⁻³, (10⁴,0.1) 5.9×10⁻⁵, (10⁴,0.2) 1.8×10⁻³; the (10³,0.1/0.5)
+  rows +70% are the known N-scale onset-window correction, Stage-1
+  identical); E(G,s) grows past 8×10⁻² by t = 10⁴ and is O(1)–O(10) at
+  t = 5×10⁴–2×10⁵ — the ceiling is CONFIRMED, and B-2's remaining task is
+  the explicit bound M(G,t) ≥ this E. The zero side is now validated on a
+  12.2M-zero list; the definition side (W_n) is unchanged.
 - **[B-3]** (TO-BUILD, = H3 lift) **Bridge identity**: for the actual zero set
   𝒵_ℂ,  ζ(s) = K(s;𝒵_ℂ) in the product sense (25.2.12), finite-G residual
   governed by B-2's M(G,s). Evidence: Stage-1 MEASURED at G=3×10⁵ (certified
@@ -260,6 +280,18 @@ W_n(t) := ζ(½+it) − P_n(½+it) − I(n,½+it); C_n(t) = |W_n(t)|. All defini
   theorem) with the rigorous local floor (B-2, from D1) into a
   contradiction — that is B-6A's construction, not B-5's.
 
+  **✓ PROVEN in Lean (2026-09-11, stable 4.33.1).** `b5Ratio` (T1 above,
+  as stated — the theorem statement carries the (½±δ)²+γ² form), `b5Abs`
+  (T2: ‖R‖ = |pref|·exp(ω_δ/2)), `b5NoffIsPolynomial` (the (c)-polynomial
+  identity), `b5NoffPos` ((c): the off-line numerator > 0 for t > 0,
+  t ≠ γ, all δ), `b5PrefSign` (t > γ ⇔ pref < 0 — the only branch).
+  Float layer `B5Float`: closed form vs the DIRECT 6-factor definition
+  vs the dps-30 record, 12/12 PASS (day-012 §3). Toolchain note: def
+  bodies `omegaD`/`pref` use the flat monomial form of the denominators
+  (identical reals — the ring normalizer cannot see through the `halfR`
+  def constant); B-4 carries a documented two-line compat shim for the
+  4.34-core lemmas `ite_eq_left`/`ite_eq_right`.
+
 ## §4 Closure (conditional on the blanks)
 
 Assume RH fails. By F-0.3 take an off-line pair of **minimal** positive
@@ -280,10 +312,10 @@ height t₀ (members β+iγ₀, (1−β)+iγ₀; δ = β−½ ≠ 0).
 |---|---------|---------|--------------|--------|
 | B-0 | counting equivalence RH⇔D≡0 | writing; Lean M4 | — | TO-BUILD (LOW) |
 | B-1 | exact onset law + remainder (G4) | Euler–Maclaurin lifting | D2 (fits beyond 4 digits) | TO-BUILD |
-| B-2 | rigorous tail remainder M(G,t) (G3) | tail analysis | **D1 (6×10⁶ list — in flight)** | TO-BUILD |
+| B-2 | rigorous tail remainder M(G,t) (G3) | tail analysis | **D1 LANDED 2026-09-10 (ceiling t ≲ 2×10⁴ confirmed; E tabled in `out_day010_onset_G6e6.txt`)** | TO-BUILD (statement ready; bound open) |
 | B-3 | bridge identity as identity+residual (H3 lift) | follows B-1∧B-2; TS kernel (M2) | D1, D3 | TO-BUILD |
-| B-4 | on-line per-pair closed form (la, ar) + validation | DPS-25 unit check | — | **■ FILLED** (MEASURED today) |
-| B-5 | detector lemma f(δ,t) + S/2K mechanism | 4-zero algebra + D4/D3/D4-far + dps-30 check | **ALL DATA LANDED; CORE THEOREM EXACT** (R closed form; \|formula−measured\| ≤5×10⁻⁴, \|formula−direct\| ≤6×10⁻²⁶) | **■ core FILLED (v0.5)** — composition with the floor is B-6A's |
+| B-4 | on-line per-pair closed form (la, ar) + validation | Lean T1–T3b + dps-25 + float64 16/16 | — | **■ FILLED — PROVEN (Lean)** |
+| B-5 | detector lemma f(δ,t) + S/2K mechanism | 4-zero algebra + D4/D3/D4-far + dps-30 check | **ALL DATA LANDED; CORE THEOREM EXACT + PROVEN IN LEAN** (R closed form; \|formula−measured\| ≤5×10⁻⁴, \|formula−direct\| ≤6×10⁻²⁶; Lean 4.33.1: b5Ratio/b5Abs/b5NoffPos/b5PrefSign + 12/12 float cross-check) | **■ core FILLED (v0.5, PROVEN v0.7)** — composition with the floor is B-6A's |
 | B-6A/B | ∀t closure (route decision) | lifting theorem | D1+D4 margin | **TO-BUILD (the wall)** |
 | B-6C | hybrid interim claim (RH to T) | H2 instrument | D5 (10⁷ redundancy — in flight) | ■ partial |
 
@@ -292,8 +324,17 @@ height t₀ (members β+iγ₀, (1−β)+iγ₀; δ = β−½ ≠ 0).
 
 ## What the incoming data does to this document
 
-- **6×10⁶ chain lands** (`out_day010_onset_G6e6.txt` + `zeros_T6000000_ext_full.txt`):
-  verdict for D1 → updates B-2's M-model and the §3 route decision.
+- **6×10⁶ chain LANDED (2026-09-10)** (`out_day010_onset_G6e6.txt` +
+  `zeros_T6000000_ext_full.txt`): D1 verdict as above. Incident on the
+  record: the first-issued list was silently truncated at 5.9×10⁶ by an
+  off-by-one in the walk's segment boundary loop; the chain's own
+  informational S-line flagged it (−219,016.93 where O(1) expected), it was
+  fixed and the list re-certified (S(6×10⁶) = −2.93, true O(1)) BEFORE any
+  onset run was used — no onset row in this file rests on the truncated
+  list. Route-decision input: D4's relative margin (|R−1| ≥ 0.998) still
+  sits above the residual floor up to t ≈ 5×10⁴ (0.42) on this table; the
+  ceiling t ≲ 2×10⁴ stands for the route-A audit; route choice is a
+  v0.7 decision (needs the B-2 bound to make the comparison at a fixed t).
 - **D4 prototype LANDED** (2026-09-10): B-5 v0 measured — mechanism
   settled (off-line pair = argumentically invisible, 2K +2 size step,
   parity preserved), δ-robust f-scale (≥99.8% of |K| forced change on the
