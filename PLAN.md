@@ -27,6 +27,16 @@ The 1D summation-by-parts identity (README §Abstract) is a flat
   the N=10⁵ row needs G ≳ 5–6×10⁶ (deferred, on demand). PASS here =
   the zero side of the recognition map is the measured onset; FAIL
   would find non-explicit-formula content.
+- **E7b detector (off-line pair kernel deviation): EXACT formula +
+  MEASURED(6 digits) (2026-09-10)** — R = P_off4/P_on2 = (¼+γ²)
+  ((γ−t)²+δ²)((γ+t)²+δ²)e^{(½+it)ω_δ} / ((γ²−t²)((½+δ)²+γ²)
+  ((½−δ)²+γ²)) (4-line algebra; only branch = on-line (γ²−t²) sign
+  flip; δ > 0 has no zero window). Consequences: near |R−1| → 1; far
+  |R| = (t/γ)²(1+O(δ²/γ²+1/γ²+(γ/t)²)); off-line 4-tuple
+  argumentically invisible (measured −π on-line vs 0.000 off-line)
+  ⇒ 2K +2 size step, parity preserved. Verified dps-30 (3 levels,
+  worst 5×10⁻⁴ = last printed digit). See
+  `results/e7b1-detector-b5-core.md` + `scripts/rh/out_day010_*.txt`.
 
 ## P-W — the Width Postulate — MEASURED at q = 5, 13 (1e-10) and q = 17 (1e-9)
 

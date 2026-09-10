@@ -1,0 +1,79 @@
+list: 466655 zeros (<=3e5: 466655)
+D4: gamma* = 999.791572 (certified zero nearest 1000)
+
+--- D4: K deviation under pair move (delta grid), N=1000 context ---
+t=  998.7916  |K|=0.168047  |zeta-K|=6.423992e-02  (floor@first=6.424e-02)
+   delta=0.005  |R-1|=9.9800e-01  dev=|K|(R-1)=1.6771e-01 | jump_on=-3.142 jump_off4=+0.000 rad
+   delta=0.010  |R-1|=9.9800e-01  dev=|K|(R-1)=1.6771e-01 | jump_on=-3.142 jump_off4=+0.000 rad
+   delta=0.020  |R-1|=9.9800e-01  dev=|K|(R-1)=1.6771e-01 | jump_on=-3.142 jump_off4=+0.000 rad
+   delta=0.050  |R-1|=9.9800e-01  dev=|K|(R-1)=1.6771e-01 | jump_on=-3.142 jump_off4=+0.000 rad
+   delta=0.100  |R-1|=9.9798e-01  dev=|K|(R-1)=1.6771e-01 | jump_on=-3.142 jump_off4=+0.000 rad
+   delta=0.250  |R-1|=9.9788e-01  dev=|K|(R-1)=1.6769e-01 | jump_on=-3.142 jump_off4=+0.000 rad
+   delta=0.500  |R-1|=9.9750e-01  dev=|K|(R-1)=1.6763e-01 | jump_on=-3.142 jump_off4=+0.000 rad
+t=  999.5416  |K|=0.945496  |zeta-K|=6.615292e-02  (floor@first=6.424e-02)
+   delta=0.005  |R-1|=9.9950e-01  dev=|K|(R-1)=9.4502e-01 | jump_on=-3.142 jump_off4=+0.000 rad
+   delta=0.010  |R-1|=9.9950e-01  dev=|K|(R-1)=9.4502e-01 | jump_on=-3.142 jump_off4=+0.000 rad
+   delta=0.020  |R-1|=9.9950e-01  dev=|K|(R-1)=9.4502e-01 | jump_on=-3.142 jump_off4=+0.000 rad
+   delta=0.050  |R-1|=9.9948e-01  dev=|K|(R-1)=9.4500e-01 | jump_on=-3.142 jump_off4=+0.000 rad
+   delta=0.100  |R-1|=9.9942e-01  dev=|K|(R-1)=9.4495e-01 | jump_on=-3.142 jump_off4=+0.000 rad
+   delta=0.250  |R-1|=9.9900e-01  dev=|K|(R-1)=9.4455e-01 | jump_on=-3.142 jump_off4=+0.000 rad
+   delta=0.500  |R-1|=9.9750e-01  dev=|K|(R-1)=9.4313e-01 | jump_on=-3.142 jump_off4=+0.000 rad
+t= 1000.0416  |K|=1.192031  |zeta-K|=6.425635e-02  (floor@first=6.424e-02)
+   delta=0.005  |R-1|=1.0005e+00  dev=|K|(R-1)=1.1926e+00 | jump_on=-3.142 jump_off4=+0.000 rad
+   delta=0.010  |R-1|=1.0005e+00  dev=|K|(R-1)=1.1926e+00 | jump_on=-3.142 jump_off4=+0.000 rad
+   delta=0.020  |R-1|=1.0005e+00  dev=|K|(R-1)=1.1926e+00 | jump_on=-3.142 jump_off4=+0.000 rad
+   delta=0.050  |R-1|=1.0005e+00  dev=|K|(R-1)=1.1927e+00 | jump_on=-3.142 jump_off4=+0.000 rad
+   delta=0.100  |R-1|=1.0006e+00  dev=|K|(R-1)=1.1927e+00 | jump_on=-3.142 jump_off4=+0.000 rad
+   delta=0.250  |R-1|=1.0010e+00  dev=|K|(R-1)=1.1932e+00 | jump_on=-3.142 jump_off4=+0.000 rad
+   delta=0.500  |R-1|=1.0025e+00  dev=|K|(R-1)=1.1950e+00 | jump_on=-3.142 jump_off4=+0.000 rad
+t= 1000.7916  |K|=2.253329  |zeta-K|=6.997056e-02  (floor@first=6.424e-02)
+   delta=0.005  |R-1|=1.0020e+00  dev=|K|(R-1)=2.2578e+00 | jump_on=-3.142 jump_off4=+0.000 rad
+   delta=0.010  |R-1|=1.0020e+00  dev=|K|(R-1)=2.2578e+00 | jump_on=-3.142 jump_off4=+0.000 rad
+   delta=0.020  |R-1|=1.0020e+00  dev=|K|(R-1)=2.2578e+00 | jump_on=-3.142 jump_off4=+0.000 rad
+   delta=0.050  |R-1|=1.0020e+00  dev=|K|(R-1)=2.2578e+00 | jump_on=-3.142 jump_off4=+0.000 rad
+   delta=0.100  |R-1|=1.0020e+00  dev=|K|(R-1)=2.2579e+00 | jump_on=-3.142 jump_off4=+0.000 rad
+   delta=0.250  |R-1|=1.0021e+00  dev=|K|(R-1)=2.2581e+00 | jump_on=-3.142 jump_off4=+0.000 rad
+   delta=0.500  |R-1|=1.0025e+00  dev=|K|(R-1)=2.2590e+00 | jump_on=-3.142 jump_off4=+0.000 rad
+t= 1009.7916  |K|=0.031752  |zeta-K|=6.268959e-02  (floor@first=6.424e-02)
+   delta=0.005  |R-1|=1.0201e+00  dev=|K|(R-1)=3.2390e-02 | jump_on=-3.142 jump_off4=+0.000 rad
+   delta=0.010  |R-1|=1.0201e+00  dev=|K|(R-1)=3.2390e-02 | jump_on=-3.142 jump_off4=+0.000 rad
+   delta=0.020  |R-1|=1.0201e+00  dev=|K|(R-1)=3.2390e-02 | jump_on=-3.142 jump_off4=+0.000 rad
+   delta=0.050  |R-1|=1.0201e+00  dev=|K|(R-1)=3.2390e-02 | jump_on=-3.142 jump_off4=+0.000 rad
+   delta=0.100  |R-1|=1.0201e+00  dev=|K|(R-1)=3.2391e-02 | jump_on=-3.142 jump_off4=+0.000 rad
+   delta=0.250  |R-1|=1.0201e+00  dev=|K|(R-1)=3.2391e-02 | jump_on=-3.142 jump_off4=+0.000 rad
+   delta=0.500  |R-1|=1.0202e+00  dev=|K|(R-1)=3.2392e-02 | jump_on=-3.142 jump_off4=+0.000 rad
+t= 1999.5831  |K|=0.125082  |zeta-K|=3.144112e-02  (floor@first=6.424e-02)
+   delta=0.005  |R-1|=4.0000e+00  dev=|K|(R-1)=5.0033e-01 | jump_on=-3.142 jump_off4=+0.000 rad
+   delta=0.010  |R-1|=4.0000e+00  dev=|K|(R-1)=5.0033e-01 | jump_on=-3.142 jump_off4=+0.000 rad
+   delta=0.020  |R-1|=4.0000e+00  dev=|K|(R-1)=5.0033e-01 | jump_on=-3.142 jump_off4=+0.000 rad
+   delta=0.050  |R-1|=4.0000e+00  dev=|K|(R-1)=5.0033e-01 | jump_on=-3.142 jump_off4=+0.000 rad
+   delta=0.100  |R-1|=4.0000e+00  dev=|K|(R-1)=5.0033e-01 | jump_on=-3.142 jump_off4=+0.000 rad
+   delta=0.250  |R-1|=4.0000e+00  dev=|K|(R-1)=5.0033e-01 | jump_on=-3.142 jump_off4=+0.000 rad
+   delta=0.500  |R-1|=4.0000e+00  dev=|K|(R-1)=5.0033e-01 | jump_on=-3.142 jump_off4=+0.000 rad
+
+--- D3: W-audit resid(t)=|zeta(1/2+it) - K_on(t)|, N-free ---
+D3 t= 950.000  resid=1.778161e-03
+D3 t= 955.000  resid=2.762361e-03
+D3 t= 960.000  resid=4.788407e-03
+D3 t= 965.000  resid=1.424770e-03
+D3 t= 970.000  resid=8.939847e-04
+D3 t= 975.000  resid=2.633799e-04
+D3 t= 980.000  resid=2.464740e-02
+D3 t= 985.000  resid=5.030368e-04
+D3 t= 990.000  resid=2.377217e-03
+D3 t= 995.000  resid=3.964356e-03
+D3 t=1000.000  resid=6.425867e-05
+D3 t=1005.000  resid=6.476528e-03
+D3 t=1010.000  resid=5.831620e-04
+D3 t=1015.000  resid=6.926565e-03
+D3 t=1020.000  resid=2.383281e-04
+D3 t=1025.000  resid=8.071947e-03
+D3 t=1030.000  resid=1.553124e-02
+D3 t=1035.000  resid=2.355128e-03
+D3 t=1040.000  resid=1.152245e-04
+D3 t=1045.000  resid=5.983899e-04
+D3 t=1050.000  resid=8.515467e-06
+
+D3 SUMMARY: n=21  median=1.778e-03  p90=8.072e-03  max=2.465e-02 at t=980.0000
+D3 spike ratio (max/median) = 13.861  (stage-1 floor class ~1e-3; spike>=5x = investigation)
+D4+D3 RUN COMPLETE

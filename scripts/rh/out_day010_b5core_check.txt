@@ -1,0 +1,16 @@
+B5-CORE CHECK (dps-30; gamma*=999.791572)
+far  c=10  d=0.005: formula 99.9999752  direct 99.9999752  measured 99.999980  OK
+far  c=10  d=0.500: formula 99.9999262  direct 99.9999262  measured 99.999930  OK
+far  c=50  d=0.005: formula 2499.9993751  direct 2499.9993751  measured 2499.999000  OK
+far  c=50  d=0.500: formula 2499.9981257  direct 2499.9981257  measured 2499.998000  OK
+far  c=100 d=0.005: formula 9999.9975029  direct 9999.9975029  measured 9999.998000  OK
+far  c=100 d=0.500: formula 9999.9925023  direct 9999.9925023  measured 9999.993000  OK
+near g-1.0 d=0.005: formula 0.9980005  direct 0.9980005  measured 0.9980  OK
+near g-0.25 d=0.005: formula 0.9994998  direct 0.9994998  measured 0.9995  OK
+near g+0.25 d=0.005: formula 1.0005004  direct 1.0005004  measured 1.0005  OK
+near g+1.0 d=0.005: formula 1.0020015  direct 1.0020015  measured 1.0020  OK
+near g+10 d=0.005: formula 1.0201042  direct 1.0201042  measured 1.0201  OK
+near 2g d=0.005: formula 3.9983317  direct 3.9983317  measured 4.0000  OK
+WORST |formula-measured| (far) = 0.000498
+WORST |formula-direct|   (all) = 5.978e-26
+B5-CORE CHECK PASS
