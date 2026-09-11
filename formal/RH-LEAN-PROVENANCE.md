@@ -1,126 +1,49 @@
 # PROVENANCE — `formal/rh-lean/` (machine-checked core)
 
-**MIRROR — a certified artifact, planning-adjacent.** Source of record:
-`kainos-logos` `scripts/rh-lean/`, repo head `89b8065` (2026-09-11,
-day-012: stable-toolchain move + B-5 CORE proven). Synced 2026-09-11
-(fourth sync; the three 2026-09-10 syncs preceded it). **No edits here** —
-updates propagate only by explicit copy from the source repo — never
-edited locally. **Toolchain (2026-09-11):** the package is pinned to
-**Lean 4.33.1 (stable) + Mathlib 4.33.1** — moved from 4.34.0-rc2 at
-the owner's direction (4.34 has no stable tag yet, and the rc carries
-verified regressions); the two 4.33.1-compat shims are in the synced
-files (E7a: `Int.toFloat` → core `Float.ofInt`; B4: two-line
-`ite_eq_left`/`ite_eq_right` shim over `ite_cond_eq_true`/`eq_true`).
+**HOME AND SOURCE OF RECORD.** Since 2026-09-14 this repo
+(`rh-missing-tail`) is where the Lean package **lives**.
+`kainos-logos/scripts/rh-lean` is a **symlink into this directory**:
 
-## What it is
+    kainos-logos/scripts/rh-lean -> ../../rh-missing-tail/formal/rh-lean
 
-A Lean 4.33.1 (stable) + Mathlib 4.33.1 package that
+All daily work happens through that path; every file lives and is
+committed here. (Older revisions of this document described a
+one-way "copy-only mirror" scheme — superseded and wrong; the copy
+scheme is what lost visibility of the B-3 work.)
 
-1. **proves** the Euler action identity (E7a — the exact
-   summation-by-parts identity, README §Abstract of this repo) over
-   *any* commutative ring, for all step paths and all heights:
-   `formal/rh-lean/RhAttack/EulerAction.lean`, theorem `eulerAction`;
-2. **cross-checks** the five certified oracle instances (χ₅ at three
-   heights, an LCG ±1 path at two) two ways: an exact-integer `#eval`
-   layer (all ten recorded partial-sum values) and an independent Lean
-   float64 re-implementation of the left side against the Python
-   oracle values — recorded run: `formal/rh-lean/out_rhattack_day011.txt`
-   (**CROSS-CHECK PASS 5/5, worst deviation 2×10⁻¹⁴** vs dps-20);
-3. **proves the B-4 on-line pair identity** in four pieces
-   (`formal/rh-lean/RhAttack/B4.lean`): T1 `pairClosedForm` — the two
-   DLMF-25.2.12 on-line factors for a certified zero height γ collapse
-   *exactly*, for all γ,t > 0, to a real signed prefactor times one
-   exponential: F_ρ1·F_ρ2 = (γ²−t²)·Bv(γ)·e^{s·Bv(γ)}, s = ½+it,
-   Bv(γ) = 1/(¼+γ²) (holds even at t = γ); T2 `pairLogAbs` — the
-   log-magnitude in the ledger's verbatim form; T3a `pairArgAngle` /
-   T3b `pairArLedger` — the additive phase, exactly mod 2π (stated in
-   the branch-cut-free circle type `Real.Angle`, and in ℝ with an
-   explicit 2πℤ multiple), t ≠ γ. Plus a PART-4 float64 cross-check on
-   the 16 recorded points: the ledger closed form vs a direct
-   float64 fac-product evaluation — **16/16 PASS, worst dLa ≈ 8.5×10⁻¹⁴,
-   dAr ≈ 4.4×10⁻¹⁶** (the predicted double-roundoff scale; the record
-   is cross-validated independently at dps-25 in the source repo).
-4. **proves the B-0 counting equivalence** over an abstract zero set
-   (`formal/rh-lean/RhAttack/B0.lean`). A `ZeroSet` bundles the four
-   structural facts the counting argument spends (non-real 4-tuples,
-   conjugation closure, the 1−ρ pairing, and finite positive-height
-   slices) and the file proves, in pure Set/Finset cardinal arithmetic
-   (no analysis, no ζ): `eqNtotMinusNon` (D(t) = N_total(t) − N_on(t),
-   literal), `nondec` (D is a non-decreasing step), `offSliceEven`
-   (off-line zeros at one positive height are 2-cycles under the
-   fixed-point-free involution ρ ↦ 1−ρ̄ ⇒ the slice count — hence every
-   D-jump — is even), `zeroD_of_RH` / `RH_of_zeroD` (both halves), and
-   **`RH_iff_Dzero`: RH ⇔ D ≡ 0**. The theorem layer is classical;
-   the exact cross-check is the `B0Model` namespace, the same counting
-   re-implemented over finite `(ℚ × ℚ)` zero lists and evaluated with
-   `#eval!` (three synthetic models: RH=true/D≡0; one off-line pair ⇒
-   D jumps 0→2; two off-line heights ⇒ D steps 0→2→4; identity row
-   D = N_total − N_on at every model height).
+## State at head (day-014, 2026-09-14)
 
-   Honesty: this is a statement about any zero set carrying those four
-   structural properties — most directly, the zeros of a function F
-   with the same HFE/HJR shape. It is NOT a statement about ζ and does
-   not constitute a proof of RH.
-5. **proves the B-5 CORE exact ratio** for the off-line/on-line kernel
-   deviation (`formal/rh-lean/RhAttack/B5.lean`): for s = ½+it (t > 0,
-   t ≠ γ) and the four off-line zeros {½±δ±iγ} against the on-line
-   pair {½±iγ}, the 25.2.12-factor ratio R(s,δ) = P_off/P_on equals
-   EXACTLY
-   (¼+γ²)((γ−t)²+δ²)((γ+t)²+δ²) / ((γ²−t²)((½+δ)²+γ²)((½−δ)²+γ²)) ·
-   e^{s·ω_δ} with the real ω_δ = (1+2δ)/((½+δ)²+γ²) + (1−2δ)/
-   ((½−δ)²+γ²) − 1/(¼+γ²) — `b5Ratio` (the ratio; sign flip of
-   (γ²−t²) at t = γ is the only branch, `b5PrefSign`), `b5Abs`
-   (‖R‖ = |pref|·e^{ω_δ/2}), `b5NoffPos` + `b5NoffIsPolynomial` (the
-   off-line numerator is (t²−γ²)²+2δ²(t²+γ²)+δ⁴, all-positive
-   coefficients — no δ > 0 zero-window). Float layer `B5Float`, run in
-   `Main.lean`: closed form vs the DIRECT 6-factor definition vs the
-   dps-30 recorded values, 12 configs — **12/12 PASS, worst
-   closed-vs-direct 1.9×10⁻¹⁴ rel, worst vs-record 4.2×10⁻⁸ rel**
-   (recorded run: `formal/rh-lean/out_rhattack_day012.txt`).
-   Honesty: an algebraic identity for products of the canonical
-   factors over the stated zero SETS — it uses no property of ζ and
-   proves neither RH nor the floor composition (that is the outline's
-   B-6A).
+- Toolchain: **Lean 4.33.1 (stable) + Mathlib 4.33.1** (pinned; no
+  rc/nightly).
+- **PROVEN and float-cross-checked:**
+  - E7a — Euler action identity over any commutative ring
+    (`RhAttack/EulerAction.lean`, `eulerAction`) + 5/5 oracle
+    cross-check (`out_rhattack_day012.txt`).
+  - B-4 — on-line pair identity, 4 parts + 16/16 float cross-check
+    (`RhAttack/B4.lean`).
+  - B-0 — counting equivalence, RH iff D = 0 (`RhAttack/B0.lean`).
+  - B-5 CORE — `b5Ratio`/`b5Abs`/`b5NoffPos`/`b5PrefSign` + 12/12
+    float cross-check (`RhAttack/B5.lean`).
+  - B-2 — on-line tail bound (proven day-013; its Lean realization is
+    §5 of B-3 — the explicit finite bound, B-2's M(G,t), finite-B form).
+- **WIP:** B-3 Lean skeleton (`RhAttack/B3.lean`) — finite explicit
+  tail bound + ζ-free residual decomposition. §1–§3 model
+  definitions/derivatives/bounds and §7 `B3Float` cross-check
+  (PASS) are in place; §4–§6 (finite Abel, smooth IBP, Kbar bound,
+  explicit finite bound) are mid atomic-repair — 48 elaboration
+  errors mapped, API pins in `ProbeJ/K/K2/K3.lean`.
+- `Main.lean` wires the A/B gate (`lake exe rhattack`).
+- `references/LEAN4-4331-QUICKREF.md` — the extracted 4.33.1 API
+  quickref (permanent lookup: verified names, signatures, behaviors,
+  pitfalls). `references/mathlib-4.33.1` → `.lake/packages/mathlib`
+  (local symlink). `references/lean4-core-4.33.1/` — vendored Lean
+  core source, **gitignored (local-only, 772 MB)**.
+- `Bt*.lean`, `Probe*.lean` — standalone test files and
+  API-pin-probes; the verified evidence behind the quickref.
 
-This upgrades the identity's status from "verified at 50 digits in
-Python" to **machine-checked**: the statements are theorems of Lean,
-and the numeric layer is an independent implementation agreeing to
-float64-level. The B-4 theorems are the *per-pair factor* of the
-zero-side bridge (E7b) as a certified artifact — they are statements
-about the DLMF-25.2.12 factors evaluated on the critical line, not
-about the zeros of ζ, RH, or analytic continuation.
+## Build
 
-## Run it yourself
-
-`formal/rh-lean/README.md` has the full instructions; in short:
-
-```sh
-# one-time: install elan + Lean 4 (https://www.lean-lang.org)
-cd formal/rh-lean
-lake build          # fetches the prebuilt Mathlib cache (minutes)
-lake exe rhattack   # E7a 5-instance + B-4 16-point + B-5 12-config tables + PASS lines
-```
-
-No GPU, no mpmath, no network beyond the Mathlib cache.
-
-## Path notes (the mirror vs the working tree)
-
-The mirrored `README.md` and `.lean` headers cite provenance paths
-(relative to the **kainos-logos working tree**, the project home):
-`plan/40-prize-islands/rh-attack/FORMULAS.md` §2.1 (the identity's
-ledger entry), `scripts/rh/day006_e7a_action_identity.py` (Python
-oracle, dps-50 residuals), `scripts/rh/out_day011_e7a_oracle20.txt`
-(dps-20 port values). In this repo the same record is summarized in
-README §Abstract (the identity) and `references.md`. The copy in
-`formal/rh-lean/` is byte-identical to the working tree at sync time,
-save one deliberate omission: the `.github/` CI scaffolding (its
-placement here would install a build hook on this repo; the working
-tree keeps it). If a path above is unresolvable
-here, it resolves from the working tree root, per this repo's
-Materials policy.
-
-## Claim policy
-
-Certified artifact, no claim: a proof of a finite identity + a
-reproducible cross-check. It is evidence for the stage-1 program
-(README §program), not a result about RH.
+    cd <this directory>          # or through the symlink
+    export PATH="$HOME/.elan/bin:$PATH"
+    lake build
+    lake exe rhattack            # A/B gate: E7a, B-4, B-0, B-5, B-3

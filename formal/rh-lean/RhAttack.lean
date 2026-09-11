@@ -11,3 +11,9 @@ import RhAttack.B0
 -- R(s,δ) = real prefactor · e^{s·ω_δ}, plus exact magnitude/sign facts
 -- and the B5Float 12-point cross-check (RhAttack.B5).
 import RhAttack.B5
+
+-- The B-3 bridge identity: the finite exact Abel decomposition for the
+-- counting step N_L, the RVM-comparator bridge (N = NHat + S), the
+-- explicit finite bound (Platt–Trudgian S̄), and the ζ-free residual
+-- decomposition (RhAttack.B3).
+import RhAttack.B3
