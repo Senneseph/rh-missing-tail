@@ -1,0 +1,1976 @@
+
+
+  
+    
+    
+    
+    
+    Tactics
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+      
+        
+
+      
+        
+            Theorem Proving in Lean 4
+
+          
+
+      
+    
+      
+
+      
+        
+          
+              Theorem Proving in Lean 4
+
+            
+            
+              
+                Table of Contents
+
+              1.Introduction
+2.Dependent Type Theory
+3.Propositions and Proofs
+4.Quantifiers and Equality
+5.Tactics
+6.Interacting with Lean
+7.Inductive Types
+8.Induction and Recursion
+9.Structures and Records
+10.Type Classes
+11.The Conversion Tactic Mode
+12.Axioms and Computation
+
+            
+              
+                5. Tactics
+
+              5.1.Entering Tactic Mode
+5.2.Basic Tactics
+5.3.More Tactics
+5.4.Structuring Tactic Proofs
+5.5.Tactic Combinators
+5.6.Rewriting
+5.7.Using the Simplifier
+5.8.Split Tactic
+5.9.Extensible Tactics
+5.10.Exercises
+
+            
+
+          
+
+        
+          
+            
+              Source Code
+
+            
+              Report Issues
+
+            
+          
+
+        
+      
+
+      
+          
+            ←4. Quantifiers and Equality6. Interacting with Lean→
+          
+            
+              5. Tactics🔗
+
+            
+              In this chapter, we describe an alternative approach to constructing
+proofs, using tactics.  A proof term is a representation of a
+mathematical proof; tactics are commands, or instructions, that
+describe how to build such a proof. Informally, you might begin a
+mathematical proof by saying “to prove the forward direction, unfold
+the definition, apply the previous lemma, and simplify.” Just as these
+are instructions that tell the reader how to find the relevant proof,
+tactics are instructions that tell Lean how to construct a proof
+term. They naturally support an incremental style of writing proofs,
+in which you decompose a proof and work on goals one step at a time.
+
+            
+              We will describe proofs that consist of sequences of tactics as
+“tactic-style” proofs, to contrast with the ways of writing proof
+terms we have seen so far, which we will call “term-style”
+proofs. Each style has its own advantages and disadvantages. For
+example, tactic-style proofs can be harder to read, because they
+require the reader to predict or guess the results of each
+instruction. But they can also be shorter and easier to
+write. Moreover, tactics offer a gateway to using Lean's automation,
+since automated procedures are themselves tactics.
+
+            
+              
+                5.1. Entering Tactic Mode🔗
+
+              
+                Conceptually, stating a theorem or introducing a have statement
+creates a goal, namely, the goal of constructing a term with the
+expected type. For example, the following creates the goal of
+constructing a term of type p ∧ q ∧ p, in a context with constants
+p q : Prop, hp : p and hq : q:
+
+              
+                theorem declaration uses `sorry`test (p q : Prop) (hp : p) (hq : q) : p ∧ q ∧ p := byp:Propq:Prophp:phq:q⊢ p ∧ q ∧ p
+  sorryAll goals completed! 🐙
+
+              
+              
+                You can write this goal as follows:
+
+              
+                p:Propq:Prophp:phq:q⊢ p ∧ q ∧ p
+
+              
+                Indeed, if you replace the “sorry” by an underscore in the example
+above, Lean will report that it is exactly this goal that has been
+left unsolved.
+
+              
+                Ordinarily, you meet such a goal by writing an explicit term. But
+wherever a term is expected, Lean allows us to insert instead a
+by <tactics> block, where <tactics> is a sequence of commands,
+separated by semicolons or line breaks. You can prove the theorem above
+in that way:
+
+              
+                theorem test (p q : Prop) (hp : p) (hq : q) : p ∧ q ∧ p :=
+  byp:Propq:Prophp:phq:q⊢ p ∧ q ∧ p apply And.introleftp:Propq:Prophp:phq:q⊢ prightp:Propq:Prophp:phq:q⊢ q ∧ p
+     exact hprightp:Propq:Prophp:phq:q⊢ q ∧ p
+     apply And.introright.leftp:Propq:Prophp:phq:q⊢ qright.rightp:Propq:Prophp:phq:q⊢ p
+     exact hqright.rightp:Propq:Prophp:phq:q⊢ p
+     exact hpAll goals completed! 🐙
+
+              
+              
+                We often put the by keyword on the preceding line, and write the
+example above as:
+
+              
+                theorem test (p q : Prop) (hp : p) (hq : q) : p ∧ q ∧ p := byp:Propq:Prophp:phq:q⊢ p ∧ q ∧ p
+  apply And.introleftp:Propq:Prophp:phq:q⊢ prightp:Propq:Prophp:phq:q⊢ q ∧ p
+  exact hprightp:Propq:Prophp:phq:q⊢ q ∧ p
+  apply And.introright.leftp:Propq:Prophp:phq:q⊢ qright.rightp:Propq:Prophp:phq:q⊢ p
+  exact hqright.rightp:Propq:Prophp:phq:q⊢ p
+  exact hpAll goals completed! 🐙
+
+              
+              
+                The apply tactic applies an expression, viewed as denoting a
+function with zero or more arguments. It unifies the conclusion with
+the expression in the current goal, and creates new goals for the
+remaining arguments, provided that no later arguments depend on
+them. In the example above, the command apply And.intro yields two
+subgoals:
+
+              
+                leftp:Propq:Prophp:phq:q⊢ prightp:Propq:Prophp:phq:q⊢ q ∧ p
+
+              
+                The first goal is met with the command exact hp. The exact
+command is just a variant of apply which signals that the
+expression given should fill the goal exactly. It is good form to use
+it in a tactic proof, since its failure signals that something has
+gone wrong. It is also more robust than apply, since the
+elaborator takes the expected type, given by the target of the goal,
+into account when processing the expression that is being applied. In
+this case, however, apply would work just as well.
+
+              
+                You can see the resulting proof term with the #print command:
+
+              
+                
+                  theorem test (p q : Prop) (hp : p) (hq : q) : p ∧ q ∧ p := byp:Propq:Prophp:phq:q⊢ p ∧ q ∧ p
+  apply And.introleftp:Propq:Prophp:phq:q⊢ prightp:Propq:Prophp:phq:q⊢ q ∧ p
+  exact hprightp:Propq:Prophp:phq:q⊢ q ∧ p
+  apply And.introright.leftp:Propq:Prophp:phq:q⊢ qright.rightp:Propq:Prophp:phq:q⊢ p
+  exact hqright.rightp:Propq:Prophp:phq:q⊢ p
+  exact hpAll goals completed! 🐙
+
+                theorem test : ∀ (p q : Prop), p → q → p ∧ q ∧ p :=
+fun p q hp hq => ⟨hp, ⟨hq, hp⟩⟩#print testtheorem test : ∀ (p q : Prop), p → q → p ∧ q ∧ p :=
+fun p q hp hq => ⟨hp, ⟨hq, hp⟩⟩
+
+              
+              
+                You can write a tactic script incrementally. In VS Code, you can open
+a window to display messages by pressing CtrlShiftEnter, and
+that window will then show you the current goal whenever the cursor is
+in a tactic block. If the proof is incomplete, the token by is
+decorated with a red squiggly line, and the error message contains the
+remaining goals.
+
+              
+                Tactic commands can take compound expressions, not just single
+identifiers. The following is a shorter version of the preceding
+proof:
+
+              
+                theorem test (p q : Prop) (hp : p) (hq : q) : p ∧ q ∧ p := byp:Propq:Prophp:phq:q⊢ p ∧ q ∧ p
+  apply And.intro hpp:Propq:Prophp:phq:q⊢ q ∧ p
+  exact And.intro hq hpAll goals completed! 🐙
+
+              
+              
+                Unsurprisingly, it produces exactly the same proof term:
+
+              
+                
+                  theorem test (p q : Prop) (hp : p) (hq : q) : p ∧ q ∧ p := byp:Propq:Prophp:phq:q⊢ p ∧ q ∧ p
+ apply And.intro hpp:Propq:Prophp:phq:q⊢ q ∧ p
+ exact And.intro hq hpAll goals completed! 🐙
+
+                theorem test : ∀ (p q : Prop), p → q → p ∧ q ∧ p :=
+fun p q hp hq => ⟨hp, ⟨hq, hp⟩⟩#print testtheorem test : ∀ (p q : Prop), p → q → p ∧ q ∧ p :=
+fun p q hp hq => ⟨hp, ⟨hq, hp⟩⟩
+
+              
+              
+                Multiple tactic applications can be written in a single line by concatenating with a semicolon.
+
+              
+                theorem test (p q : Prop) (hp : p) (hq : q) : p ∧ q ∧ p := byp:Propq:Prophp:phq:q⊢ p ∧ q ∧ p
+  apply And.intro hpp:Propq:Prophp:phq:q⊢ q ∧ p; exact And.intro hq hpAll goals completed! 🐙
+
+              
+              
+                Tactics that may produce multiple subgoals often tag them. For
+example, the tactic apply And.intro tagged the first subgoal as
+leftleftp:Propq:Prophp:phq:q⊢ p, and the second as rightrightp:Propq:Prophp:phq:q⊢ q ∧ p. In the case of the apply
+tactic, the tags are inferred from the parameters' names used in the
+And.intro declaration. You can structure your tactics using the
+notation case <tag> => <tactics>. The following is a structured
+version of our first tactic proof in this chapter.
+
+              
+                theorem test (p q : Prop) (hp : p) (hq : q) : p ∧ q ∧ p := byp:Propq:Prophp:phq:q⊢ p ∧ q ∧ p
+  apply And.introleftp:Propq:Prophp:phq:q⊢ prightp:Propq:Prophp:phq:q⊢ q ∧ p
+  case left =>p:Propq:Prophp:phq:q⊢ p exact hpAll goals completed! 🐙
+  case right =>p:Propq:Prophp:phq:q⊢ q ∧ p
+    apply And.introleftp:Propq:Prophp:phq:q⊢ qrightp:Propq:Prophp:phq:q⊢ p
+    case left =>p:Propq:Prophp:phq:q⊢ q exact hqAll goals completed! 🐙
+    case right =>p:Propq:Prophp:phq:q⊢ p exact hpAll goals completed! 🐙
+
+              
+              
+                You can solve the subgoal rightrightp:Propq:Prophp:phq:q⊢ q ∧ p before leftleftp:Propq:Prophp:phq:q⊢ p using the case
+notation:
+
+              
+                theorem test (p q : Prop) (hp : p) (hq : q) : p ∧ q ∧ p := byp:Propq:Prophp:phq:q⊢ p ∧ q ∧ p
+  apply And.introleftp:Propq:Prophp:phq:q⊢ prightp:Propq:Prophp:phq:q⊢ q ∧ p
+  case right =>p:Propq:Prophp:phq:q⊢ q ∧ p
+    apply And.introleftp:Propq:Prophp:phq:q⊢ qrightp:Propq:Prophp:phq:q⊢ p
+    case left =>p:Propq:Prophp:phq:q⊢ q exact hqAll goals completed! 🐙
+    case right =>p:Propq:Prophp:phq:q⊢ p exact hpAll goals completed! 🐙
+  case left =>p:Propq:Prophp:phq:q⊢ p exact hpAll goals completed! 🐙
+
+              
+              
+                Note that Lean hides the other goals inside the case block. After case left =>,
+the proof state is:
+
+              
+                p:Propq:Prophp:phq:q⊢ q
+
+              
+                We say that case is “focusing” on the selected goal.  Moreover, Lean flags an error
+if the selected goal is not fully solved at the end of the case
+block.
+
+              
+                For simple subgoals, it may not be worth selecting a subgoal using its
+tag, but you may still want to structure the proof. Lean also provides
+the “bullet” notation . <tactics> (or · <tactics>) for
+structuring proofs:
+
+              
+                theorem test (p q : Prop) (hp : p) (hq : q) : p ∧ q ∧ p := byp:Propq:Prophp:phq:q⊢ p ∧ q ∧ p
+  apply And.introleftp:Propq:Prophp:phq:q⊢ prightp:Propq:Prophp:phq:q⊢ q ∧ p
+  .leftp:Propq:Prophp:phq:q⊢ p exact hpAll goals completed! 🐙
+  .rightp:Propq:Prophp:phq:q⊢ q ∧ p apply And.introright.leftp:Propq:Prophp:phq:q⊢ qright.rightp:Propq:Prophp:phq:q⊢ p
+    .right.leftp:Propq:Prophp:phq:q⊢ q exact hqAll goals completed! 🐙
+    .right.rightp:Propq:Prophp:phq:q⊢ p exact hpAll goals completed! 🐙
+
+              
+              
+            
+              
+                5.2. Basic Tactics🔗
+
+              
+                In addition to apply and exact, another useful tactic is
+intro, which introduces a hypothesis. What follows is an example
+of an identity from propositional logic that we proved in a previous
+chapter, now proved using tactics.
+
+              
+                example (p q r : Prop) : p ∧ (q ∨ r) ↔ (p ∧ q) ∨ (p ∧ r) := byp:Propq:Propr:Prop⊢ p ∧ (q ∨ r) ↔ p ∧ q ∨ p ∧ r
+  apply Iff.intrompp:Propq:Propr:Prop⊢ p ∧ (q ∨ r) → p ∧ q ∨ p ∧ rmprp:Propq:Propr:Prop⊢ p ∧ q ∨ p ∧ r → p ∧ (q ∨ r)
+  .mpp:Propq:Propr:Prop⊢ p ∧ (q ∨ r) → p ∧ q ∨ p ∧ r intro hmpp:Propq:Propr:Proph:p ∧ (q ∨ r)⊢ p ∧ q ∨ p ∧ r
+    apply Or.elim (And.right h)mp.leftp:Propq:Propr:Proph:p ∧ (q ∨ r)⊢ q → p ∧ q ∨ p ∧ rmp.rightp:Propq:Propr:Proph:p ∧ (q ∨ r)⊢ r → p ∧ q ∨ p ∧ r
+    .mp.leftp:Propq:Propr:Proph:p ∧ (q ∨ r)⊢ q → p ∧ q ∨ p ∧ r intro hqmp.leftp:Propq:Propr:Proph:p ∧ (q ∨ r)hq:q⊢ p ∧ q ∨ p ∧ r
+      apply Or.inlmp.leftp:Propq:Propr:Proph:p ∧ (q ∨ r)hq:q⊢ p ∧ q
+      apply And.intromp.left.leftp:Propq:Propr:Proph:p ∧ (q ∨ r)hq:q⊢ pmp.left.rightp:Propq:Propr:Proph:p ∧ (q ∨ r)hq:q⊢ q
+      .mp.left.leftp:Propq:Propr:Proph:p ∧ (q ∨ r)hq:q⊢ p exact And.left hAll goals completed! 🐙
+      .mp.left.rightp:Propq:Propr:Proph:p ∧ (q ∨ r)hq:q⊢ q exact hqAll goals completed! 🐙
+    .mp.rightp:Propq:Propr:Proph:p ∧ (q ∨ r)⊢ r → p ∧ q ∨ p ∧ r intro hrmp.rightp:Propq:Propr:Proph:p ∧ (q ∨ r)hr:r⊢ p ∧ q ∨ p ∧ r
+      apply Or.inrmp.rightp:Propq:Propr:Proph:p ∧ (q ∨ r)hr:r⊢ p ∧ r
+      apply And.intromp.right.leftp:Propq:Propr:Proph:p ∧ (q ∨ r)hr:r⊢ pmp.right.rightp:Propq:Propr:Proph:p ∧ (q ∨ r)hr:r⊢ r
+      .mp.right.leftp:Propq:Propr:Proph:p ∧ (q ∨ r)hr:r⊢ p exact And.left hAll goals completed! 🐙
+      .mp.right.rightp:Propq:Propr:Proph:p ∧ (q ∨ r)hr:r⊢ r exact hrAll goals completed! 🐙
+  .mprp:Propq:Propr:Prop⊢ p ∧ q ∨ p ∧ r → p ∧ (q ∨ r) intro hmprp:Propq:Propr:Proph:p ∧ q ∨ p ∧ r⊢ p ∧ (q ∨ r)
+    apply Or.elim hmpr.leftp:Propq:Propr:Proph:p ∧ q ∨ p ∧ r⊢ p ∧ q → p ∧ (q ∨ r)mpr.rightp:Propq:Propr:Proph:p ∧ q ∨ p ∧ r⊢ p ∧ r → p ∧ (q ∨ r)
+    .mpr.leftp:Propq:Propr:Proph:p ∧ q ∨ p ∧ r⊢ p ∧ q → p ∧ (q ∨ r) intro hpqmpr.leftp:Propq:Propr:Proph:p ∧ q ∨ p ∧ rhpq:p ∧ q⊢ p ∧ (q ∨ r)
+      apply And.intrompr.left.leftp:Propq:Propr:Proph:p ∧ q ∨ p ∧ rhpq:p ∧ q⊢ pmpr.left.rightp:Propq:Propr:Proph:p ∧ q ∨ p ∧ rhpq:p ∧ q⊢ q ∨ r
+      .mpr.left.leftp:Propq:Propr:Proph:p ∧ q ∨ p ∧ rhpq:p ∧ q⊢ p exact And.left hpqAll goals completed! 🐙
+      .mpr.left.rightp:Propq:Propr:Proph:p ∧ q ∨ p ∧ rhpq:p ∧ q⊢ q ∨ r apply Or.inlmpr.left.rightp:Propq:Propr:Proph:p ∧ q ∨ p ∧ rhpq:p ∧ q⊢ q
+        exact And.right hpqAll goals completed! 🐙
+    .mpr.rightp:Propq:Propr:Proph:p ∧ q ∨ p ∧ r⊢ p ∧ r → p ∧ (q ∨ r) intro hprmpr.rightp:Propq:Propr:Proph:p ∧ q ∨ p ∧ rhpr:p ∧ r⊢ p ∧ (q ∨ r)
+      apply And.intrompr.right.leftp:Propq:Propr:Proph:p ∧ q ∨ p ∧ rhpr:p ∧ r⊢ pmpr.right.rightp:Propq:Propr:Proph:p ∧ q ∨ p ∧ rhpr:p ∧ r⊢ q ∨ r
+      .mpr.right.leftp:Propq:Propr:Proph:p ∧ q ∨ p ∧ rhpr:p ∧ r⊢ p exact And.left hprAll goals completed! 🐙
+      .mpr.right.rightp:Propq:Propr:Proph:p ∧ q ∨ p ∧ rhpr:p ∧ r⊢ q ∨ r apply Or.inrmpr.right.rightp:Propq:Propr:Proph:p ∧ q ∨ p ∧ rhpr:p ∧ r⊢ r
+        exact And.right hprAll goals completed! 🐙
+
+              
+              
+                The intro command can more generally be used to introduce a variable of any type:
+
+              
+                example (α : Type) : α → α := byα:Type⊢ α → α
+  intro aα:Typea:α⊢ α
+  exact aAll goals completed! 🐙
+
+example (α : Type) : ∀ x : α, x = x := byα:Type⊢ ∀ (x : α), x = x
+  intro xα:Typex:α⊢ x = x
+  exact Eq.refl xAll goals completed! 🐙
+
+              
+              
+                You can use it to introduce several variables:
+
+              
+                example : ∀ a b c : Nat, a = b → a = c → c = b := by⊢ ∀ (a b c : Nat), a = b → a = c → c = b
+  intro a b c h₁ h₂a:Natb:Natc:Nath₁:a = bh₂:a = c⊢ c = b
+  exact Eq.trans (Eq.symm h₂) h₁All goals completed! 🐙
+
+              
+              
+                As the apply tactic is a command for constructing function
+applications interactively, the intro tactic is a command for
+constructing function abstractions interactively (i.e., terms of the
+form fun x => e).  As with lambda abstraction notation, the
+intro tactic allows us to use an implicit match.
+
+              
+                example (p q : α → Prop) : (∃ x, p x ∧ q x) → ∃ x, q x ∧ p x := byα:Sort u_1p:α → Propq:α → Prop⊢ (∃ x, p x ∧ q x) → ∃ x, q x ∧ p x
+  intro ⟨w, hpw, hqw⟩α:Sort u_1p:α → Propq:α → Propw:αhpw:p whqw:q w⊢ ∃ x, q x ∧ p x
+  exact ⟨w, hqw, hpw⟩All goals completed! 🐙
+
+              
+              
+                You can also provide multiple alternatives like in the match expression.
+
+              
+                example (p q : α → Prop) : (∃ x, p x ∨ q x) → ∃ x, q x ∨ p x := byα:Sort u_1p:α → Propq:α → Prop⊢ (∃ x, p x ∨ q x) → ∃ x, q x ∨ p x
+  intro
+  | ⟨w, Or.inl h⟩ =>α:Sort u_1p:α → Propq:α → Propx✝:∃ x, p x ∨ q xw:αh:p w⊢ ∃ x, q x ∨ p x exact ⟨w, Or.inr h⟩All goals completed! 🐙
+  | ⟨w, Or.inr h⟩ =>α:Sort u_1p:α → Propq:α → Propx✝:∃ x, p x ∨ q xw:αh:q w⊢ ∃ x, q x ∨ p x exact ⟨w, Or.inl h⟩All goals completed! 🐙
+
+              
+              
+                The intros tactic can be used without any arguments, in which
+case, it chooses names and introduces as many variables as it can. You
+will see an example of this in a moment.
+
+              
+                The assumption tactic looks through the assumptions in context of
+the current goal, and if there is one matching the conclusion, it
+applies it.
+
+              
+                variable (x y z w : Nat)
+
+example (h₁ : x = y) (h₂ : y = z) (h₃ : z = w) : x = w := byx:Naty:Natz:Natw:Nath₁:x = yh₂:y = zh₃:z = w⊢ x = w
+  apply Eq.trans h₁x:Naty:Natz:Natw:Nath₁:x = yh₂:y = zh₃:z = w⊢ y = w
+  apply Eq.trans h₂x:Naty:Natz:Natw:Nath₁:x = yh₂:y = zh₃:z = w⊢ z = w
+  assumptionAll goals completed! 🐙   -- applied h₃
+
+              
+              
+                It will unify metavariables in the conclusion if necessary:
+
+              
+                variable (x y z w : Nat)
+
+example (h₁ : x = y) (h₂ : y = z) (h₃ : z = w) : x = w := byx:Naty:Natz:Natw:Nath₁:x = yh₂:y = zh₃:z = w⊢ x = w
+  apply Eq.transh₁x:Naty:Natz:Natw:Nath₁:x = yh₂:y = zh₃:z = w⊢ x = ?bh₂x:Naty:Natz:Natw:Nath₁:x = yh₂:y = zh₃:z = w⊢ ?b = wbx:Naty:Natz:Natw:Nath₁:x = yh₂:y = zh₃:z = w⊢ Nat
+  assumptionh₂x:Naty:Natz:Natw:Nath₁:x = yh₂:y = zh₃:z = w⊢ y = w      -- solves x = ?b with h₁
+  apply Eq.transh₂.h₁x:Naty:Natz:Natw:Nath₁:x = yh₂:y = zh₃:z = w⊢ y = ?h₂.bh₂.h₂x:Naty:Natz:Natw:Nath₁:x = yh₂:y = zh₃:z = w⊢ ?h₂.b = wh₂.bx:Naty:Natz:Natw:Nath₁:x = yh₂:y = zh₃:z = w⊢ Nat
+  assumptionh₂.h₂x:Naty:Natz:Natw:Nath₁:x = yh₂:y = zh₃:z = w⊢ z = w      -- solves y = ?h₂.b with h₂
+  assumptionAll goals completed! 🐙      -- solves z = w with h₃
+
+              
+              
+                The following example uses the intros command to introduce the three variables and two hypotheses automatically:
+
+              
+                example : ∀ a b c : Nat, a = b → a = c → c = b := by⊢ ∀ (a b c : Nat), a = b → a = c → c = b
+  introsa✝²:Natb✝:Natc✝:Nata✝¹:a✝² = b✝a✝:a✝² = c✝⊢ c✝ = b✝
+  apply Eq.transh₁a✝²:Natb✝:Natc✝:Nata✝¹:a✝² = b✝a✝:a✝² = c✝⊢ c✝ = ?bh₂a✝²:Natb✝:Natc✝:Nata✝¹:a✝² = b✝a✝:a✝² = c✝⊢ ?b = b✝ba✝²:Natb✝:Natc✝:Nata✝¹:a✝² = b✝a✝:a✝² = c✝⊢ Nat
+  apply Eq.symmh₁a✝²:Natb✝:Natc✝:Nata✝¹:a✝² = b✝a✝:a✝² = c✝⊢ ?b✝ = c✝h₂a✝²:Natb✝:Natc✝:Nata✝¹:a✝² = b✝a✝:a✝² = c✝⊢ ?b = b✝ba✝²:Natb✝:Natc✝:Nata✝¹:a✝² = b✝a✝:a✝² = c✝⊢ Nat
+  assumptionh₂a✝²:Natb✝:Natc✝:Nata✝¹:a✝² = b✝a✝:a✝² = c✝⊢ a✝² = b✝
+  assumptionAll goals completed! 🐙
+
+              
+              
+                Note that names automatically generated by Lean are inaccessible by default. The motivation is to
+ensure your tactic proofs do not rely on automatically generated names, and are consequently more robust.
+However, you can use the combinator unhygienic to disable this restriction.
+
+              
+                example : ∀ a b c : Nat, a = b → a = c → c = b := by⊢ ∀ (a b c : Nat), a = b → a = c → c = b unhygienic
+  introsa:Natb:Natc:Nata_1:a = ba_2:a = c⊢ c = b
+  apply Eq.transh₁a:Natb:Natc:Nata_1:a = ba_2:a = c⊢ c = ?bh₂a:Natb:Natc:Nata_1:a = ba_2:a = c⊢ ?b = bba:Natb:Natc:Nata_1:a = ba_2:a = c⊢ Nat
+  apply Eq.symmh₁a:Natb:Natc:Nata_1:a = ba_2:a = c⊢ ?b✝ = ch₂a:Natb:Natc:Nata_1:a = ba_2:a = c⊢ ?b = bba:Natb:Natc:Nata_1:a = ba_2:a = c⊢ Nat
+  exact a_2h₂a:Natb:Natc:Nata_1:a = ba_2:a = c⊢ a = b
+  exact a_1All goals completed! 🐙
+
+              
+              
+                You can also use the rename_i tactic to rename the most recent inaccessible names in your context.
+In the following example, the tactic rename_i h1 _ h2 renames two of the last three hypotheses in
+your context.
+
+              
+                example : ∀ a b c d : Nat, a = b → a = d → a = c → c = b := by⊢ ∀ (a b c d : Nat), a = b → a = d → a = c → c = b
+  introsa✝³:Natb✝:Natc✝:Natd✝:Nata✝²:a✝³ = b✝a✝¹:a✝³ = d✝a✝:a✝³ = c✝⊢ c✝ = b✝
+  rename_i h1 _ h2a✝¹:Natb✝:Natc✝:Natd✝:Nath1:a✝³ = b✝a✝:a✝³ = d✝h2:a✝³ = c✝⊢ c✝ = b✝
+  apply Eq.transh₁a✝¹:Natb✝:Natc✝:Natd✝:Nath1:a✝³ = b✝a✝:a✝³ = d✝h2:a✝³ = c✝⊢ c✝ = ?bh₂a✝¹:Natb✝:Natc✝:Natd✝:Nath1:a✝³ = b✝a✝:a✝³ = d✝h2:a✝³ = c✝⊢ ?b = b✝ba✝¹:Natb✝:Natc✝:Natd✝:Nath1:a✝³ = b✝a✝:a✝³ = d✝h2:a✝³ = c✝⊢ Nat
+  apply Eq.symmh₁a✝¹:Natb✝:Natc✝:Natd✝:Nath1:a✝³ = b✝a✝:a✝³ = d✝h2:a✝³ = c✝⊢ ?b✝ = c✝h₂a✝¹:Natb✝:Natc✝:Natd✝:Nath1:a✝³ = b✝a✝:a✝³ = d✝h2:a✝³ = c✝⊢ ?b = b✝ba✝¹:Natb✝:Natc✝:Natd✝:Nath1:a✝³ = b✝a✝:a✝³ = d✝h2:a✝³ = c✝⊢ Nat
+  exact h2h₂a✝¹:Natb✝:Natc✝:Natd✝:Nath1:a✝³ = b✝a✝:a✝³ = d✝h2:a✝³ = c✝⊢ a✝³ = b✝
+  exact h1All goals completed! 🐙
+
+              
+              
+                The rfl tactic solves goals that are reflexive relations applied to definitionally equal arguments.
+Equality is reflexive:
+
+              
+                example (y : Nat) : (fun Variable name `x` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _x
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`x : Nat => 0) y = 0 := byy:Nat⊢ (fun x => 0) y = 0
+  rflAll goals completed! 🐙
+
+              
+              
+                The repeat combinator can be used to apply a tactic several times:
+
+              
+                example : ∀ a b c : Nat, a = b → a = c → c = b := by⊢ ∀ (a b c : Nat), a = b → a = c → c = b
+  introsa✝²:Natb✝:Natc✝:Nata✝¹:a✝² = b✝a✝:a✝² = c✝⊢ c✝ = b✝
+  apply Eq.transh₁a✝²:Natb✝:Natc✝:Nata✝¹:a✝² = b✝a✝:a✝² = c✝⊢ c✝ = ?bh₂a✝²:Natb✝:Natc✝:Nata✝¹:a✝² = b✝a✝:a✝² = c✝⊢ ?b = b✝ba✝²:Natb✝:Natc✝:Nata✝¹:a✝² = b✝a✝:a✝² = c✝⊢ Nat
+  apply Eq.symmh₁a✝²:Natb✝:Natc✝:Nata✝¹:a✝² = b✝a✝:a✝² = c✝⊢ ?b✝ = c✝h₂a✝²:Natb✝:Natc✝:Nata✝¹:a✝² = b✝a✝:a✝² = c✝⊢ ?b = b✝ba✝²:Natb✝:Natc✝:Nata✝¹:a✝² = b✝a✝:a✝² = c✝⊢ Nat
+  repeat assumptionAll goals completed! 🐙
+
+              
+              
+                Another tactic that is sometimes useful is the revert tactic,
+which is, in a sense, an inverse to intro:
+
+              
+                example (x : Nat) : x = x := byx:Nat⊢ x = x
+  revert x⊢ ∀ (x : Nat), x = x
+  intro yy:Nat⊢ y = y
+  rflAll goals completed! 🐙
+
+              
+              
+                After revert x, the proof state is:
+
+              
+                ⊢ ∀ (x : Nat), x = x
+
+              
+                After intro y, it is:
+
+              
+                y:Nat⊢ y = y
+
+              
+                Moving a hypothesis into the goal yields an implication:
+
+              
+                example (x y : Nat) (h : x = y) : y = x := byx:Naty:Nath:x = y⊢ y = x
+  revert hx:Naty:Nat⊢ x = y → y = x
+  intro h₁x:Naty:Nath₁:x = y⊢ y = x
+  -- goal is x y : Nat, h₁ : x = y ⊢ y = x
+  apply Eq.symmx:Naty:Nath₁:x = y⊢ x = y
+  assumptionAll goals completed! 🐙
+
+              
+              
+                After revert h, the proof state is:
+
+              
+                x:Naty:Nat⊢ x = y → y = x
+
+              
+                After intro h₁, it is:
+
+              
+                x:Naty:Nath₁:x = y⊢ y = x
+
+              
+                But revert is even more clever, in that it will revert not only an
+element of the context but also all the subsequent elements of the
+context that depend on it. For example, reverting x in the example
+above brings h along with it:
+
+              
+                example (x y : Nat) (h : x = y) : y = x := byx:Naty:Nath:x = y⊢ y = x
+  revert xy:Nat⊢ ∀ (x : Nat), x = y → y = x
+  introsy:Natx✝:Nath✝:x✝ = y⊢ y = x✝
+  apply Eq.symmy:Natx✝:Nath✝:x✝ = y⊢ x✝ = y
+  assumptionAll goals completed! 🐙
+
+              
+              
+                After revert x, the goal is:
+
+              
+                y:Nat⊢ ∀ (x : Nat), x = y → y = x
+
+              
+                You can also revert multiple elements of the context at once:
+
+              
+                example (x y : Nat) (h : x = y) : y = x := byx:Naty:Nath:x = y⊢ y = x
+  revert x y⊢ ∀ (x y : Nat), x = y → y = x
+  introsx✝:Naty✝:Nath✝:x✝ = y✝⊢ y✝ = x✝
+  apply Eq.symmx✝:Naty✝:Nath✝:x✝ = y✝⊢ x✝ = y✝
+  assumptionAll goals completed! 🐙
+
+              
+              
+                After revert x y, the goal is:
+
+              
+                ⊢ ∀ (x y : Nat), x = y → y = x
+
+              
+                You can only revert an element of the local context, that is, a
+local variable or hypothesis. But you can replace an arbitrary
+expression in the goal by a fresh variable using the generalize
+tactic:
+
+              
+                example : 3 = 3 := by⊢ 3 = 3
+  generalize 3 = xx:Nat⊢ x = x
+  revert x⊢ ∀ (x : Nat), x = x
+  intro yy:Nat⊢ y = y
+  rflAll goals completed! 🐙
+
+              
+              
+                In particular, after generalize, the goal is
+
+              
+                x:Nat⊢ x = x
+
+              
+                The mnemonic in the notation above is that you are generalizing the
+goal by setting 3 to an arbitrary variable x. Be careful: not
+every generalization preserves the validity of the goal. Here,
+generalize replaces a goal that could be proved using
+rfl with one that is not provable:
+
+              
+                declaration uses `sorry`example : 2 + 3 = 5 := by⊢ 2 + 3 = 5
+  generalize 3 = xx:Nat⊢ 2 + x = 5
+  sorryAll goals completed! 🐙
+
+              
+              
+                In this example, the sorry tactic is the analogue of the sorry
+proof term. It closes the current goal, producing the usual warning
+that sorry has been used. To preserve the validity of the previous
+goal, the generalize tactic allows us to record the fact that
+3 has been replaced by x. All you need to do is to provide a
+label, and generalize uses it to store the assignment in the local
+context:
+
+              
+                example : 2 + 3 = 5 := by⊢ 2 + 3 = 5
+  generalize h : 3 = xx:Nath:3 = x⊢ 2 + x = 5
+  rw [← hx:Nath:3 = x⊢ 2 + 3 = 5]All goals completed! 🐙
+
+              
+              
+                Following generalize h : 3 = x, h is a proof that 3 = x:
+
+              
+                x:Nath:3 = x⊢ 2 + x = 5
+
+              
+                Here the rewriting tactic rw uses h to replace
+x by 3 again. The rw tactic will be discussed below.
+
+              
+            
+              
+                5.3. More Tactics🔗
+
+              
+                Some additional tactics are useful for constructing and destructing
+propositions and data. For example, when applied to a goal of the form
+p ∨ q, you use tactics such as apply Or.inl and
+apply Or.inr.  Conversely, the cases tactic can be used to decompose a
+disjunction:
+
+              
+                example (p q : Prop) : p ∨ q → q ∨ p := byp:Propq:Prop⊢ p ∨ q → q ∨ p
+  intro hp:Propq:Proph:p ∨ q⊢ q ∨ p
+  cases h with
+  | inl hp =>inlp:Propq:Prophp:p⊢ q ∨ p apply Or.inrinlp:Propq:Prophp:p⊢ p; exact hpAll goals completed! 🐙
+  | inr hq =>inrp:Propq:Prophq:q⊢ q ∨ p apply Or.inlinrp:Propq:Prophq:q⊢ q; exact hqAll goals completed! 🐙
+
+              
+              
+                Note that the syntax is similar to the one used in match expressions.
+The new subgoals can be solved in any order:
+
+              
+                example (p q : Prop) : p ∨ q → q ∨ p := byp:Propq:Prop⊢ p ∨ q → q ∨ p
+  intro hp:Propq:Proph:p ∨ q⊢ q ∨ p
+  cases h with
+  | inr hq =>inrp:Propq:Prophq:q⊢ q ∨ p apply Or.inlinrp:Propq:Prophq:q⊢ q; exact hqAll goals completed! 🐙
+  | inl hp =>inlp:Propq:Prophp:p⊢ q ∨ p apply Or.inrinlp:Propq:Prophp:p⊢ p; exact hpAll goals completed! 🐙
+
+              
+              
+                You can also use a (unstructured) cases without the with and a tactic
+for each alternative:
+
+              
+                example (p q : Prop) : p ∨ q → q ∨ p := byp:Propq:Prop⊢ p ∨ q → q ∨ p
+  intro hp:Propq:Proph:p ∨ q⊢ q ∨ p
+  cases hinlp:Propq:Proph✝:p⊢ q ∨ pinrp:Propq:Proph✝:q⊢ q ∨ p
+  apply Or.inrinlp:Propq:Proph✝:p⊢ pinrp:Propq:Proph✝:q⊢ q ∨ p
+  assumptioninrp:Propq:Proph✝:q⊢ q ∨ p
+  apply Or.inlinrp:Propq:Proph✝:q⊢ q
+  assumptionAll goals completed! 🐙
+
+              
+              
+                The (unstructured) cases is particularly useful when you can close several
+subgoals using the same tactic:
+
+              
+                example (p : Prop) : p ∨ p → p := byp:Prop⊢ p ∨ p → p
+  intro hp:Proph:p ∨ p⊢ p
+  cases hinlp:Proph✝:p⊢ pinrp:Proph✝:p⊢ p
+  repeat assumptionAll goals completed! 🐙
+
+              
+              
+                You can also use the combinator tac1 <;> tac2 to apply tac2 to each
+subgoal produced by tactic tac1:
+
+              
+                example (p : Prop) : p ∨ p → p := byp:Prop⊢ p ∨ p → p
+  intro hp:Proph:p ∨ p⊢ p
+  cases hinlp:Proph✝:p⊢ pinrp:Proph✝:p⊢ p <;>inlp:Proph✝:p⊢ pinrp:Proph✝:p⊢ p assumptionAll goals completed! 🐙
+
+              
+              
+                You can combine the unstructured cases tactic with the case and . notation:
+
+              
+                example (p q : Prop) : p ∨ q → q ∨ p := byp:Propq:Prop⊢ p ∨ q → q ∨ p
+  intro hp:Propq:Proph:p ∨ q⊢ q ∨ p
+  cases hinlp:Propq:Proph✝:p⊢ q ∨ pinrp:Propq:Proph✝:q⊢ q ∨ p
+  .inlp:Propq:Proph✝:p⊢ q ∨ p apply Or.inrinlp:Propq:Proph✝:p⊢ p
+    assumptionAll goals completed! 🐙
+  .inrp:Propq:Proph✝:q⊢ q ∨ p apply Or.inlinrp:Propq:Proph✝:q⊢ q
+    assumptionAll goals completed! 🐙
+
+example (p q : Prop) : p ∨ q → q ∨ p := byp:Propq:Prop⊢ p ∨ q → q ∨ p
+  intro hp:Propq:Proph:p ∨ q⊢ q ∨ p
+  cases hinlp:Propq:Proph✝:p⊢ q ∨ pinrp:Propq:Proph✝:q⊢ q ∨ p
+  case inr h =>p:Propq:Proph:q⊢ q ∨ p
+    apply Or.inlp:Propq:Proph:q⊢ q
+    assumptionAll goals completed! 🐙
+  case inl h =>p:Propq:Proph:p⊢ q ∨ p
+    apply Or.inrp:Propq:Proph:p⊢ p
+    assumptionAll goals completed! 🐙
+
+example (p q : Prop) : p ∨ q → q ∨ p := byp:Propq:Prop⊢ p ∨ q → q ∨ p
+  intro hp:Propq:Proph:p ∨ q⊢ q ∨ p
+  cases hinlp:Propq:Proph✝:p⊢ q ∨ pinrp:Propq:Proph✝:q⊢ q ∨ p
+  case inr h =>p:Propq:Proph:q⊢ q ∨ p
+    apply Or.inlp:Propq:Proph:q⊢ q
+    assumptionAll goals completed! 🐙
+  .inlp:Propq:Proph✝:p⊢ q ∨ p apply Or.inrinlp:Propq:Proph✝:p⊢ p
+    assumptionAll goals completed! 🐙
+
+              
+              
+                The cases tactic can also be used to
+decompose a conjunction:
+
+              
+                example (p q : Prop) : p ∧ q → q ∧ p := byp:Propq:Prop⊢ p ∧ q → q ∧ p
+  intro hp:Propq:Proph:p ∧ q⊢ q ∧ p
+  cases h with
+  | intro hp hq =>introp:Propq:Prophp:phq:q⊢ q ∧ p constructorintro.leftp:Propq:Prophp:phq:q⊢ qintro.rightp:Propq:Prophp:phq:q⊢ p; exact hqintro.rightp:Propq:Prophp:phq:q⊢ p; exact hpAll goals completed! 🐙
+
+              
+              
+                In this example, there is only one goal after the cases tactic is
+applied, with h : p ∧ q replaced by a pair of assumptions,
+hp : p and hq : q:
+
+              
+                introp:Propq:Prophp:phq:q⊢ q ∧ p
+
+              
+                The constructor tactic applies the unique
+constructor for conjunction, And.intro.
+
+              
+                With these tactics, an
+example from the previous section can be rewritten as follows:
+
+              
+                example (p q r : Prop) : p ∧ (q ∨ r) ↔ (p ∧ q) ∨ (p ∧ r) := byp:Propq:Propr:Prop⊢ p ∧ (q ∨ r) ↔ p ∧ q ∨ p ∧ r
+  apply Iff.intrompp:Propq:Propr:Prop⊢ p ∧ (q ∨ r) → p ∧ q ∨ p ∧ rmprp:Propq:Propr:Prop⊢ p ∧ q ∨ p ∧ r → p ∧ (q ∨ r)
+  .mpp:Propq:Propr:Prop⊢ p ∧ (q ∨ r) → p ∧ q ∨ p ∧ r intro hmpp:Propq:Propr:Proph:p ∧ (q ∨ r)⊢ p ∧ q ∨ p ∧ r
+    cases h with
+    | intro hp hqr =>mp.introp:Propq:Propr:Prophp:phqr:q ∨ r⊢ p ∧ q ∨ p ∧ r
+      cases hqrmp.intro.inlp:Propq:Propr:Prophp:ph✝:q⊢ p ∧ q ∨ p ∧ rmp.intro.inrp:Propq:Propr:Prophp:ph✝:r⊢ p ∧ q ∨ p ∧ r
+      .mp.intro.inlp:Propq:Propr:Prophp:ph✝:q⊢ p ∧ q ∨ p ∧ r apply Or.inlmp.intro.inlp:Propq:Propr:Prophp:ph✝:q⊢ p ∧ q; constructormp.intro.inl.leftp:Propq:Propr:Prophp:ph✝:q⊢ pmp.intro.inl.rightp:Propq:Propr:Prophp:ph✝:q⊢ q <;>mp.intro.inl.leftp:Propq:Propr:Prophp:ph✝:q⊢ pmp.intro.inl.rightp:Propq:Propr:Prophp:ph✝:q⊢ q assumptionAll goals completed! 🐙
+      .mp.intro.inrp:Propq:Propr:Prophp:ph✝:r⊢ p ∧ q ∨ p ∧ r apply Or.inrmp.intro.inrp:Propq:Propr:Prophp:ph✝:r⊢ p ∧ r; constructormp.intro.inr.leftp:Propq:Propr:Prophp:ph✝:r⊢ pmp.intro.inr.rightp:Propq:Propr:Prophp:ph✝:r⊢ r <;>mp.intro.inr.leftp:Propq:Propr:Prophp:ph✝:r⊢ pmp.intro.inr.rightp:Propq:Propr:Prophp:ph✝:r⊢ r assumptionAll goals completed! 🐙
+  .mprp:Propq:Propr:Prop⊢ p ∧ q ∨ p ∧ r → p ∧ (q ∨ r) intro hmprp:Propq:Propr:Proph:p ∧ q ∨ p ∧ r⊢ p ∧ (q ∨ r)
+    cases h with
+    | inl hpq =>mpr.inlp:Propq:Propr:Prophpq:p ∧ q⊢ p ∧ (q ∨ r)
+      cases hpq with
+      | intro hp hq =>mpr.inl.introp:Propq:Propr:Prophp:phq:q⊢ p ∧ (q ∨ r)
+        constructormpr.inl.intro.leftp:Propq:Propr:Prophp:phq:q⊢ pmpr.inl.intro.rightp:Propq:Propr:Prophp:phq:q⊢ q ∨ r; exact hpmpr.inl.intro.rightp:Propq:Propr:Prophp:phq:q⊢ q ∨ r; apply Or.inlmpr.inl.intro.rightp:Propq:Propr:Prophp:phq:q⊢ q; exact hqAll goals completed! 🐙
+    | inr hpr =>mpr.inrp:Propq:Propr:Prophpr:p ∧ r⊢ p ∧ (q ∨ r)
+      cases hpr with
+      | intro hp hr =>mpr.inr.introp:Propq:Propr:Prophp:phr:r⊢ p ∧ (q ∨ r)
+        constructormpr.inr.intro.leftp:Propq:Propr:Prophp:phr:r⊢ pmpr.inr.intro.rightp:Propq:Propr:Prophp:phr:r⊢ q ∨ r; exact hpmpr.inr.intro.rightp:Propq:Propr:Prophp:phr:r⊢ q ∨ r; apply Or.inrmpr.inr.intro.rightp:Propq:Propr:Prophp:phr:r⊢ r; exact hrAll goals completed! 🐙
+
+              
+              
+                You will see in Inductive Types that
+these tactics are quite general. The cases tactic can be used to
+decompose any element of an inductively defined type; constructor
+always applies the first applicable constructor of an inductively defined type.
+For example, you can use cases and constructor with an existential quantifier:
+
+              
+                example (p q : Nat → Prop) : (∃ x, p x) → ∃ x, p x ∨ q x := byp:Nat → Propq:Nat → Prop⊢ (∃ x, p x) → ∃ x, p x ∨ q x
+  intro hp:Nat → Propq:Nat → Proph:∃ x, p x⊢ ∃ x, p x ∨ q x
+  cases h with
+  | intro x px =>introp:Nat → Propq:Nat → Propx:Natpx:p x⊢ ∃ x, p x ∨ q x constructorintro.hp:Nat → Propq:Nat → Propx:Natpx:p x⊢ p ?intro.w ∨ q ?intro.wintro.wp:Nat → Propq:Nat → Propx:Natpx:p x⊢ Nat; apply Or.inlintro.hp:Nat → Propq:Nat → Propx:Natpx:p x⊢ p ?intro.wintro.wp:Nat → Propq:Nat → Propx:Natpx:p x⊢ Nat; exact pxAll goals completed! 🐙
+
+              
+              
+                Here, the constructor tactic leaves the first component of the
+existential assertion, the value of x, implicit. It is represented
+by a metavariable, which should be instantiated later on. In the
+previous example, the proper value of the metavariable is determined
+by the tactic exact px, since px has type p x. If you want
+to specify a witness to the existential quantifier explicitly, you can
+use the exists tactic instead:
+
+              
+                example (p q : Nat → Prop) : (∃ x, p x) → ∃ x, p x ∨ q x := byp:Nat → Propq:Nat → Prop⊢ (∃ x, p x) → ∃ x, p x ∨ q x
+  intro hp:Nat → Propq:Nat → Proph:∃ x, p x⊢ ∃ x, p x ∨ q x
+  cases h with
+  | intro x px =>introp:Nat → Propq:Nat → Propx:Natpx:p x⊢ ∃ x, p x ∨ q x exists xintrop:Nat → Propq:Nat → Propx:Natpx:p x⊢ p x ∨ q x; apply Or.inlintrop:Nat → Propq:Nat → Propx:Natpx:p x⊢ p x; exact pxAll goals completed! 🐙
+
+              
+              
+                Here is another example:
+
+              
+                example (p q : Nat → Prop) : (∃ x, p x ∧ q x) → ∃ x, q x ∧ p x := byp:Nat → Propq:Nat → Prop⊢ (∃ x, p x ∧ q x) → ∃ x, q x ∧ p x
+  intro hp:Nat → Propq:Nat → Proph:∃ x, p x ∧ q x⊢ ∃ x, q x ∧ p x
+  cases h with
+  | intro x hpq =>introp:Nat → Propq:Nat → Propx:Nathpq:p x ∧ q x⊢ ∃ x, q x ∧ p x
+    cases hpq with
+    | intro hp hq =>intro.introp:Nat → Propq:Nat → Propx:Nathp:p xhq:q x⊢ ∃ x, q x ∧ p x
+      exists xAll goals completed! 🐙
+
+              
+              
+                These tactics can be used on data just as well as propositions. In the
+next example, they are used to define functions which swap the
+components of the product and sum types:
+
+              
+                def swap_pair : α × β → β × α := byα:Type ?u.6β:Type ?u.5⊢ α × β → β × α
+  intro pα:Type ?u.6β:Type ?u.5p:α × β⊢ β × α
+  cases pmkα:Type ?u.6β:Type ?u.5fst✝:αsnd✝:β⊢ β × α
+  constructormk.fstα:Type ?u.6β:Type ?u.5fst✝:αsnd✝:β⊢ βmk.sndα:Type ?u.6β:Type ?u.5fst✝:αsnd✝:β⊢ α <;>mk.fstα:Type ?u.6β:Type ?u.5fst✝:αsnd✝:β⊢ βmk.sndα:Type ?u.6β:Type ?u.5fst✝:αsnd✝:β⊢ α assumptionAll goals completed! 🐙
+
+def swap_sum : Sum α β → Sum β α := byα:Type ?u.6β:Type ?u.5⊢ α ⊕ β → β ⊕ α
+  intro pα:Type ?u.6β:Type ?u.5p:α ⊕ β⊢ β ⊕ α
+  cases pinlα:Type ?u.6β:Type ?u.5val✝:α⊢ β ⊕ αinrα:Type ?u.6β:Type ?u.5val✝:β⊢ β ⊕ α
+  .inlα:Type ?u.6β:Type ?u.5val✝:α⊢ β ⊕ α apply Sum.inrinlα:Type ?u.6β:Type ?u.5val✝:α⊢ α; assumptionAll goals completed! 🐙
+  .inrα:Type ?u.6β:Type ?u.5val✝:β⊢ β ⊕ α apply Sum.inlinrα:Type ?u.6β:Type ?u.5val✝:β⊢ β; assumptionAll goals completed! 🐙
+
+              
+              
+                Note that up to the names we have chosen for the variables, the
+definitions are identical to the proofs of the analogous propositions
+for conjunction and disjunction. The cases tactic will also do a
+case distinction on a natural number:
+
+              
+                open Nat
+example (P : Nat → Prop)
+    (h₀ : P 0) (h₁ : ∀ n, P (succ n))
+    (m : Nat) : P m := byP:Nat → Proph₀:P 0h₁:∀ (n : Nat), P n.succm:Nat⊢ P m
+  cases m with
+  | zero    =>zeroP:Nat → Proph₀:P 0h₁:∀ (n : Nat), P n.succ⊢ P 0 exact h₀All goals completed! 🐙
+  | succ m' =>succP:Nat → Proph₀:P 0h₁:∀ (n : Nat), P n.succm':Nat⊢ P (m' + 1) exact h₁ m'All goals completed! 🐙
+
+              
+              
+                The cases tactic, and its companion, the induction tactic, are discussed in greater detail in
+the Tactics for Inductive Types section.
+
+              
+                The contradiction tactic searches for a contradiction among the hypotheses of the current goal:
+
+              
+                example (p q : Prop) : p ∧ ¬ p → q := byp:Propq:Prop⊢ p ∧ ¬p → q
+  intro hp:Propq:Proph:p ∧ ¬p⊢ q
+  cases hintrop:Propq:Propleft✝:pright✝:¬p⊢ q
+  contradictionAll goals completed! 🐙
+
+              
+              
+                You can also use match in tactic blocks.
+
+              
+                example (p q r : Prop) : p ∧ (q ∨ r) ↔ (p ∧ q) ∨ (p ∧ r) := byp:Propq:Propr:Prop⊢ p ∧ (q ∨ r) ↔ p ∧ q ∨ p ∧ r
+  apply Iff.intrompp:Propq:Propr:Prop⊢ p ∧ (q ∨ r) → p ∧ q ∨ p ∧ rmprp:Propq:Propr:Prop⊢ p ∧ q ∨ p ∧ r → p ∧ (q ∨ r)
+  .mpp:Propq:Propr:Prop⊢ p ∧ (q ∨ r) → p ∧ q ∨ p ∧ r intro hmpp:Propq:Propr:Proph:p ∧ (q ∨ r)⊢ p ∧ q ∨ p ∧ r
+    match h with
+    | ⟨_, Or.inl _⟩ =>p:Propq:Propr:Proph:p ∧ (q ∨ r)left✝:ph✝:q⊢ p ∧ q ∨ p ∧ r
+      apply Or.inlp:Propq:Propr:Proph:p ∧ (q ∨ r)left✝:ph✝:q⊢ p ∧ q; constructorleftp:Propq:Propr:Proph:p ∧ (q ∨ r)left✝:ph✝:q⊢ prightp:Propq:Propr:Proph:p ∧ (q ∨ r)left✝:ph✝:q⊢ q <;>leftp:Propq:Propr:Proph:p ∧ (q ∨ r)left✝:ph✝:q⊢ prightp:Propq:Propr:Proph:p ∧ (q ∨ r)left✝:ph✝:q⊢ q assumptionAll goals completed! 🐙
+    | ⟨_, Or.inr _⟩ =>p:Propq:Propr:Proph:p ∧ (q ∨ r)left✝:ph✝:r⊢ p ∧ q ∨ p ∧ r
+      apply Or.inrp:Propq:Propr:Proph:p ∧ (q ∨ r)left✝:ph✝:r⊢ p ∧ r; constructorleftp:Propq:Propr:Proph:p ∧ (q ∨ r)left✝:ph✝:r⊢ prightp:Propq:Propr:Proph:p ∧ (q ∨ r)left✝:ph✝:r⊢ r <;>leftp:Propq:Propr:Proph:p ∧ (q ∨ r)left✝:ph✝:r⊢ prightp:Propq:Propr:Proph:p ∧ (q ∨ r)left✝:ph✝:r⊢ r assumptionAll goals completed! 🐙
+  .mprp:Propq:Propr:Prop⊢ p ∧ q ∨ p ∧ r → p ∧ (q ∨ r) intro hmprp:Propq:Propr:Proph:p ∧ q ∨ p ∧ r⊢ p ∧ (q ∨ r)
+    match h with
+    | Or.inl ⟨hp, hq⟩ =>p:Propq:Propr:Proph:p ∧ q ∨ p ∧ rhp:phq:q⊢ p ∧ (q ∨ r)
+      constructorleftp:Propq:Propr:Proph:p ∧ q ∨ p ∧ rhp:phq:q⊢ prightp:Propq:Propr:Proph:p ∧ q ∨ p ∧ rhp:phq:q⊢ q ∨ r; exact hprightp:Propq:Propr:Proph:p ∧ q ∨ p ∧ rhp:phq:q⊢ q ∨ r; apply Or.inlrightp:Propq:Propr:Proph:p ∧ q ∨ p ∧ rhp:phq:q⊢ q; exact hqAll goals completed! 🐙
+    | Or.inr ⟨hp, hr⟩ =>p:Propq:Propr:Proph:p ∧ q ∨ p ∧ rhp:phr:r⊢ p ∧ (q ∨ r)
+      constructorleftp:Propq:Propr:Proph:p ∧ q ∨ p ∧ rhp:phr:r⊢ prightp:Propq:Propr:Proph:p ∧ q ∨ p ∧ rhp:phr:r⊢ q ∨ r; exact hprightp:Propq:Propr:Proph:p ∧ q ∨ p ∧ rhp:phr:r⊢ q ∨ r; apply Or.inrrightp:Propq:Propr:Proph:p ∧ q ∨ p ∧ rhp:phr:r⊢ r; exact hrAll goals completed! 🐙
+
+              
+              
+                You can “combine” intro with match and write the previous examples as follows:
+
+              
+                example (p q r : Prop) : p ∧ (q ∨ r) ↔ (p ∧ q) ∨ (p ∧ r) := byp:Propq:Propr:Prop⊢ p ∧ (q ∨ r) ↔ p ∧ q ∨ p ∧ r
+  apply Iff.intrompp:Propq:Propr:Prop⊢ p ∧ (q ∨ r) → p ∧ q ∨ p ∧ rmprp:Propq:Propr:Prop⊢ p ∧ q ∨ p ∧ r → p ∧ (q ∨ r)
+  .mpp:Propq:Propr:Prop⊢ p ∧ (q ∨ r) → p ∧ q ∨ p ∧ r intro
+    | ⟨hp, Or.inl hq⟩ =>p:Propq:Propr:Propx✝:p ∧ (q ∨ r)hp:phq:q⊢ p ∧ q ∨ p ∧ r
+      apply Or.inlp:Propq:Propr:Propx✝:p ∧ (q ∨ r)hp:phq:q⊢ p ∧ q; constructorleftp:Propq:Propr:Propx✝:p ∧ (q ∨ r)hp:phq:q⊢ prightp:Propq:Propr:Propx✝:p ∧ (q ∨ r)hp:phq:q⊢ q <;>leftp:Propq:Propr:Propx✝:p ∧ (q ∨ r)hp:phq:q⊢ prightp:Propq:Propr:Propx✝:p ∧ (q ∨ r)hp:phq:q⊢ q assumptionAll goals completed! 🐙
+    | ⟨hp, Or.inr hr⟩ =>p:Propq:Propr:Propx✝:p ∧ (q ∨ r)hp:phr:r⊢ p ∧ q ∨ p ∧ r
+      apply Or.inrp:Propq:Propr:Propx✝:p ∧ (q ∨ r)hp:phr:r⊢ p ∧ r; constructorleftp:Propq:Propr:Propx✝:p ∧ (q ∨ r)hp:phr:r⊢ prightp:Propq:Propr:Propx✝:p ∧ (q ∨ r)hp:phr:r⊢ r <;>leftp:Propq:Propr:Propx✝:p ∧ (q ∨ r)hp:phr:r⊢ prightp:Propq:Propr:Propx✝:p ∧ (q ∨ r)hp:phr:r⊢ r assumptionAll goals completed! 🐙
+  .mprp:Propq:Propr:Prop⊢ p ∧ q ∨ p ∧ r → p ∧ (q ∨ r) intro
+    | Or.inl ⟨hp, hq⟩ =>p:Propq:Propr:Propx✝:p ∧ q ∨ p ∧ rhp:phq:q⊢ p ∧ (q ∨ r)
+      constructorleftp:Propq:Propr:Propx✝:p ∧ q ∨ p ∧ rhp:phq:q⊢ prightp:Propq:Propr:Propx✝:p ∧ q ∨ p ∧ rhp:phq:q⊢ q ∨ r; assumptionrightp:Propq:Propr:Propx✝:p ∧ q ∨ p ∧ rhp:phq:q⊢ q ∨ r; apply Or.inlrightp:Propq:Propr:Propx✝:p ∧ q ∨ p ∧ rhp:phq:q⊢ q; assumptionAll goals completed! 🐙
+    | Or.inr ⟨hp, hr⟩ =>p:Propq:Propr:Propx✝:p ∧ q ∨ p ∧ rhp:phr:r⊢ p ∧ (q ∨ r)
+      constructorleftp:Propq:Propr:Propx✝:p ∧ q ∨ p ∧ rhp:phr:r⊢ prightp:Propq:Propr:Propx✝:p ∧ q ∨ p ∧ rhp:phr:r⊢ q ∨ r; assumptionrightp:Propq:Propr:Propx✝:p ∧ q ∨ p ∧ rhp:phr:r⊢ q ∨ r; apply Or.inrrightp:Propq:Propr:Propx✝:p ∧ q ∨ p ∧ rhp:phr:r⊢ r; assumptionAll goals completed! 🐙
+
+              
+              
+            
+              
+                5.4. Structuring Tactic Proofs🔗
+
+              
+                Tactics often provide an efficient way of building a proof, but long
+sequences of instructions can obscure the structure of the
+argument. In this section, we describe some means that help provide
+structure to a tactic-style proof, making such proofs more readable
+and robust.
+
+              
+                One thing that is nice about Lean's proof-writing syntax is that it is
+possible to mix term-style and tactic-style proofs, and pass between
+the two freely. For example, the tactics apply and exact
+expect arbitrary terms, which you can write using have, show,
+and so on. Conversely, when writing an arbitrary Lean term, you can
+always invoke the tactic mode by inserting a by
+block. The following is a somewhat toy example:
+
+              
+                example (p q r : Prop) : p ∧ (q ∨ r) → (p ∧ q) ∨ (p ∧ r) := byp:Propq:Propr:Prop⊢ p ∧ (q ∨ r) → p ∧ q ∨ p ∧ r
+  intro hp:Propq:Propr:Proph:p ∧ (q ∨ r)⊢ p ∧ q ∨ p ∧ r
+  exact
+    have hp : p := h.left
+    have hqr : q ∨ r := h.right
+    show (p ∧ q) ∨ (p ∧ r) byp:Propq:Propr:Prop⊢ p ∧ (q ∨ r) → p ∧ q ∨ p ∧ r
+      cases hqr with
+      | inl hq =>inlp:Propq:Propr:Proph:p ∧ (q ∨ r)hp:phq:q⊢ p ∧ q ∨ p ∧ r exact Or.inl ⟨hp, hq⟩All goals completed! 🐙
+      | inr hr =>inrp:Propq:Propr:Proph:p ∧ (q ∨ r)hp:phr:r⊢ p ∧ q ∨ p ∧ r exact Or.inr ⟨hp, hr⟩All goals completed! 🐙
+
+              
+              
+                The following is a more natural example:
+
+              
+                example (p q r : Prop) : p ∧ (q ∨ r) ↔ (p ∧ q) ∨ (p ∧ r) := byp:Propq:Propr:Prop⊢ p ∧ (q ∨ r) ↔ p ∧ q ∨ p ∧ r
+  apply Iff.intrompp:Propq:Propr:Prop⊢ p ∧ (q ∨ r) → p ∧ q ∨ p ∧ rmprp:Propq:Propr:Prop⊢ p ∧ q ∨ p ∧ r → p ∧ (q ∨ r)
+  .mpp:Propq:Propr:Prop⊢ p ∧ (q ∨ r) → p ∧ q ∨ p ∧ r intro hmpp:Propq:Propr:Proph:p ∧ (q ∨ r)⊢ p ∧ q ∨ p ∧ r
+    cases h.right with
+    | inl hq =>mp.inlp:Propq:Propr:Proph:p ∧ (q ∨ r)hq:q⊢ p ∧ q ∨ p ∧ r exact Or.inl ⟨h.left, hq⟩All goals completed! 🐙
+    | inr hr =>mp.inrp:Propq:Propr:Proph:p ∧ (q ∨ r)hr:r⊢ p ∧ q ∨ p ∧ r exact Or.inr ⟨h.left, hr⟩All goals completed! 🐙
+  .mprp:Propq:Propr:Prop⊢ p ∧ q ∨ p ∧ r → p ∧ (q ∨ r) intro hmprp:Propq:Propr:Proph:p ∧ q ∨ p ∧ r⊢ p ∧ (q ∨ r)
+    cases h with
+    | inl hpq =>mpr.inlp:Propq:Propr:Prophpq:p ∧ q⊢ p ∧ (q ∨ r) exact ⟨hpq.left, Or.inl hpq.right⟩All goals completed! 🐙
+    | inr hpr =>mpr.inrp:Propq:Propr:Prophpr:p ∧ r⊢ p ∧ (q ∨ r) exact ⟨hpr.left, Or.inr hpr.right⟩All goals completed! 🐙
+
+              
+              
+                In fact, there is a show tactic, which is similar to the
+show expression in a proof term. It simply declares the type of the
+goal that is about to be solved, while remaining in tactic
+mode.
+
+              
+                example (p q r : Prop) : p ∧ (q ∨ r) ↔ (p ∧ q) ∨ (p ∧ r) := byp:Propq:Propr:Prop⊢ p ∧ (q ∨ r) ↔ p ∧ q ∨ p ∧ r
+  apply Iff.intrompp:Propq:Propr:Prop⊢ p ∧ (q ∨ r) → p ∧ q ∨ p ∧ rmprp:Propq:Propr:Prop⊢ p ∧ q ∨ p ∧ r → p ∧ (q ∨ r)
+  .mpp:Propq:Propr:Prop⊢ p ∧ (q ∨ r) → p ∧ q ∨ p ∧ r intro hmpp:Propq:Propr:Proph:p ∧ (q ∨ r)⊢ p ∧ q ∨ p ∧ r
+    cases h.right with
+    | inl hq =>mp.inlp:Propq:Propr:Proph:p ∧ (q ∨ r)hq:q⊢ p ∧ q ∨ p ∧ r
+      show (p ∧ q) ∨ (p ∧ r)mp.inlp:Propq:Propr:Proph:p ∧ (q ∨ r)hq:q⊢ p ∧ q ∨ p ∧ r
+      exact Or.inl ⟨h.left, hq⟩All goals completed! 🐙
+    | inr hr =>mp.inrp:Propq:Propr:Proph:p ∧ (q ∨ r)hr:r⊢ p ∧ q ∨ p ∧ r
+      show (p ∧ q) ∨ (p ∧ r)mp.inrp:Propq:Propr:Proph:p ∧ (q ∨ r)hr:r⊢ p ∧ q ∨ p ∧ r
+      exact Or.inr ⟨h.left, hr⟩All goals completed! 🐙
+  .mprp:Propq:Propr:Prop⊢ p ∧ q ∨ p ∧ r → p ∧ (q ∨ r) intro hmprp:Propq:Propr:Proph:p ∧ q ∨ p ∧ r⊢ p ∧ (q ∨ r)
+    cases h with
+    | inl hpq =>mpr.inlp:Propq:Propr:Prophpq:p ∧ q⊢ p ∧ (q ∨ r)
+      show p ∧ (q ∨ r)mpr.inlp:Propq:Propr:Prophpq:p ∧ q⊢ p ∧ (q ∨ r)
+      exact ⟨hpq.left, Or.inl hpq.right⟩All goals completed! 🐙
+    | inr hpr =>mpr.inrp:Propq:Propr:Prophpr:p ∧ r⊢ p ∧ (q ∨ r)
+      show p ∧ (q ∨ r)mpr.inrp:Propq:Propr:Prophpr:p ∧ r⊢ p ∧ (q ∨ r)
+      exact ⟨hpr.left, Or.inr hpr.right⟩All goals completed! 🐙
+
+              
+              
+                The show tactic can actually be used to rewrite a goal to something definitionally equivalent:
+
+              
+                example (n : Nat) : n + 1 = Nat.succ n := byn:Nat⊢ n + 1 = n.succ
+  show Nat.succ n = Nat.succ nn:Nat⊢ n.succ = n.succ
+  rflAll goals completed! 🐙
+
+              
+              
+                There is also a have tactic, which introduces a new subgoal, just as when writing proof terms:
+
+              
+                example (p q r : Prop) : p ∧ (q ∨ r) → (p ∧ q) ∨ (p ∧ r) := byp:Propq:Propr:Prop⊢ p ∧ (q ∨ r) → p ∧ q ∨ p ∧ r
+  intro ⟨hp, hqr⟩p:Propq:Propr:Prophp:phqr:q ∨ r⊢ p ∧ q ∨ p ∧ r
+  show (p ∧ q) ∨ (p ∧ r)p:Propq:Propr:Prophp:phqr:q ∨ r⊢ p ∧ q ∨ p ∧ r
+  cases hqr with
+  | inl hq =>inlp:Propq:Propr:Prophp:phq:q⊢ p ∧ q ∨ p ∧ r
+    have hpq : p ∧ q := And.intro hp hqinlp:Propq:Propr:Prophp:phq:qhpq:p ∧ q⊢ p ∧ q ∨ p ∧ r
+    apply Or.inlinlp:Propq:Propr:Prophp:phq:qhpq:p ∧ q⊢ p ∧ q
+    exact hpqAll goals completed! 🐙
+  | inr hr =>inrp:Propq:Propr:Prophp:phr:r⊢ p ∧ q ∨ p ∧ r
+    have hpr : p ∧ r := And.intro hp hrinrp:Propq:Propr:Prophp:phr:rhpr:p ∧ r⊢ p ∧ q ∨ p ∧ r
+    apply Or.inrinrp:Propq:Propr:Prophp:phr:rhpr:p ∧ r⊢ p ∧ r
+    exact hprAll goals completed! 🐙
+
+              
+              
+                As with proof terms, you can omit the label in the have tactic, in
+which case, the default label this is used:
+
+              
+                example (p q r : Prop) : p ∧ (q ∨ r) → (p ∧ q) ∨ (p ∧ r) := byp:Propq:Propr:Prop⊢ p ∧ (q ∨ r) → p ∧ q ∨ p ∧ r
+  intro ⟨hp, hqr⟩p:Propq:Propr:Prophp:phqr:q ∨ r⊢ p ∧ q ∨ p ∧ r
+  show (p ∧ q) ∨ (p ∧ r)p:Propq:Propr:Prophp:phqr:q ∨ r⊢ p ∧ q ∨ p ∧ r
+  cases hqr with
+  | inl hq =>inlp:Propq:Propr:Prophp:phq:q⊢ p ∧ q ∨ p ∧ r
+    have : p ∧ q := And.intro hp hqinlp:Propq:Propr:Prophp:phq:qthis:p ∧ q⊢ p ∧ q ∨ p ∧ r
+    apply Or.inlinlp:Propq:Propr:Prophp:phq:qthis:p ∧ q⊢ p ∧ q
+    exact thisAll goals completed! 🐙
+  | inr hr =>inrp:Propq:Propr:Prophp:phr:r⊢ p ∧ q ∨ p ∧ r
+    have : p ∧ r := And.intro hp hrinrp:Propq:Propr:Prophp:phr:rthis:p ∧ r⊢ p ∧ q ∨ p ∧ r
+    apply Or.inrinrp:Propq:Propr:Prophp:phr:rthis:p ∧ r⊢ p ∧ r
+    exact thisAll goals completed! 🐙
+
+              
+              
+                The types in a have tactic can be omitted, so you can write
+have hp := h.left and have hqr := h.right.  In fact, with this
+notation, you can even omit both the type and the label, in which case
+the new fact is introduced with the label this:
+
+              
+                example (p q r : Prop) : p ∧ (q ∨ r) → (p ∧ q) ∨ (p ∧ r) := byp:Propq:Propr:Prop⊢ p ∧ (q ∨ r) → p ∧ q ∨ p ∧ r
+  intro ⟨hp, hqr⟩p:Propq:Propr:Prophp:phqr:q ∨ r⊢ p ∧ q ∨ p ∧ r
+  cases hqr with
+  | inl hq =>inlp:Propq:Propr:Prophp:phq:q⊢ p ∧ q ∨ p ∧ r
+    have := And.intro hp hqinlp:Propq:Propr:Prophp:phq:qthis:p ∧ q⊢ p ∧ q ∨ p ∧ r
+    apply Or.inlinlp:Propq:Propr:Prophp:phq:qthis:p ∧ q⊢ p ∧ q; exact thisAll goals completed! 🐙
+  | inr hr =>inrp:Propq:Propr:Prophp:phr:r⊢ p ∧ q ∨ p ∧ r
+    have := And.intro hp hrinrp:Propq:Propr:Prophp:phr:rthis:p ∧ r⊢ p ∧ q ∨ p ∧ r
+    apply Or.inrinrp:Propq:Propr:Prophp:phr:rthis:p ∧ r⊢ p ∧ r; exact thisAll goals completed! 🐙
+
+              
+              
+                Lean also has a let tactic, which is similar to the have
+tactic, but is used to introduce local definitions instead of
+auxiliary facts. It is the tactic analogue of a let in a proof
+term:
+
+              
+                example : ∃ x, x + 2 = 8 := by⊢ ∃ x, x + 2 = 8
+  let a : Nat := 3 * 2a:Nat := 3 * 2⊢ ∃ x, x + 2 = 8
+  exists aAll goals completed! 🐙
+
+              
+              
+                As with have, you can leave the type implicit by writing
+let a := 3 * 2. The difference between let and have is that
+let introduces a local definition in the context, so that the
+definition of the local declaration can be unfolded in the proof.
+
+              
+                We have used . to create nested tactic blocks.  In a nested block,
+Lean focuses on the first goal, and generates an error if it has not
+been fully solved at the end of the block. This can be helpful in
+indicating the separate proofs of multiple subgoals introduced by a
+tactic. The notation . is whitespace sensitive and relies on the indentation
+to detect whether the tactic block ends. Alternatively, you can
+define tactic blocks using curly braces and semicolons:
+
+              
+                example (p q r : Prop) : p ∧ (q ∨ r) ↔ (p ∧ q) ∨ (p ∧ r) := byp:Propq:Propr:Prop⊢ p ∧ (q ∨ r) ↔ p ∧ q ∨ p ∧ r
+  apply Iff.intrompp:Propq:Propr:Prop⊢ p ∧ (q ∨ r) → p ∧ q ∨ p ∧ rmprp:Propq:Propr:Prop⊢ p ∧ q ∨ p ∧ r → p ∧ (q ∨ r)
+  {mpp:Propq:Propr:Prop⊢ p ∧ (q ∨ r) → p ∧ q ∨ p ∧ r intro hmpp:Propq:Propr:Proph:p ∧ (q ∨ r)⊢ p ∧ q ∨ p ∧ r;
+    cases h.rightmp.inlp:Propq:Propr:Proph:p ∧ (q ∨ r)h✝:q⊢ p ∧ q ∨ p ∧ rmp.inrp:Propq:Propr:Proph:p ∧ (q ∨ r)h✝:r⊢ p ∧ q ∨ p ∧ r;
+    {mp.inlp:Propq:Propr:Proph:p ∧ (q ∨ r)h✝:q⊢ p ∧ q ∨ p ∧ r show (p ∧ q) ∨ (p ∧ r)mp.inlp:Propq:Propr:Proph:p ∧ (q ∨ r)h✝:q⊢ p ∧ q ∨ p ∧ r;
+      exact Or.inl ⟨h.left, ‹q›⟩All goals completed! 🐙 }
+    {mp.inrp:Propq:Propr:Proph:p ∧ (q ∨ r)h✝:r⊢ p ∧ q ∨ p ∧ r show (p ∧ q) ∨ (p ∧ r)mp.inrp:Propq:Propr:Proph:p ∧ (q ∨ r)h✝:r⊢ p ∧ q ∨ p ∧ r;
+      exact Or.inr ⟨h.left, ‹r›⟩All goals completed! 🐙 } }
+  {mprp:Propq:Propr:Prop⊢ p ∧ q ∨ p ∧ r → p ∧ (q ∨ r) intro hmprp:Propq:Propr:Proph:p ∧ q ∨ p ∧ r⊢ p ∧ (q ∨ r);
+    cases hmpr.inlp:Propq:Propr:Proph✝:p ∧ q⊢ p ∧ (q ∨ r)mpr.inrp:Propq:Propr:Proph✝:p ∧ r⊢ p ∧ (q ∨ r);
+    {mpr.inlp:Propq:Propr:Proph✝:p ∧ q⊢ p ∧ (q ∨ r) show p ∧ (q ∨ r)mpr.inlp:Propq:Propr:Proph✝:p ∧ q⊢ p ∧ (q ∨ r);
+      rename_i hpqmpr.inlp:Propq:Propr:Prophpq:p ∧ q⊢ p ∧ (q ∨ r);
+      exact ⟨hpq.left, Or.inl hpq.right⟩All goals completed! 🐙 }
+    {mpr.inrp:Propq:Propr:Proph✝:p ∧ r⊢ p ∧ (q ∨ r) show p ∧ (q ∨ r)mpr.inrp:Propq:Propr:Proph✝:p ∧ r⊢ p ∧ (q ∨ r);
+      rename_i hprmpr.inrp:Propq:Propr:Prophpr:p ∧ r⊢ p ∧ (q ∨ r);
+      exact ⟨hpr.left, Or.inr hpr.right⟩All goals completed! 🐙 } }
+
+              
+              
+                It is useful to use indentation to structure proof: every time a tactic
+leaves more than one subgoal, we separate the remaining subgoals by
+enclosing them in blocks and indenting.  Thus if the application of
+theorem foo to a single goal produces four subgoals, one would
+expect the proof to look like this:
+
+                apply foo
+  . <proof of first goal>
+  . <proof of second goal>
+  . <proof of third goal>
+  . <proof of final goal>
+
+                or
+
+                apply foo
+  case <tag of first goal>  => <proof of first goal>
+  case <tag of second goal> => <proof of second goal>
+  case <tag of third goal>  => <proof of third goal>
+  case <tag of final goal>  => <proof of final goal>
+
+                or
+
+                apply foo
+  { <proof of first goal>  }
+  { <proof of second goal> }
+  { <proof of third goal>  }
+  { <proof of final goal>  }
+
+            
+              
+                5.5. Tactic Combinators🔗
+
+              
+                Tactic combinators are operations that form new tactics from old
+ones. A sequencing combinator is already implicit in the by block:
+
+              
+                example (p q : Prop) (hp : p) : p ∨ q :=
+  byp:Propq:Prophp:p⊢ p ∨ q apply Or.inlp:Propq:Prophp:p⊢ p; assumptionAll goals completed! 🐙
+
+              
+              
+                Here, apply Or.inl; assumption is functionally equivalent to a
+single tactic which first applies apply Or.inl and then applies
+assumption.
+
+              
+                In t₁ <;> t₂, the <;> operator provides a parallel version of the sequencing operation:
+t₁ is applied to the current goal, and then t₂ is applied to all the resulting subgoals:
+
+              
+                example (p q : Prop) (hp : p) (hq : q) : p ∧ q :=
+  byp:Propq:Prophp:phq:q⊢ p ∧ q constructorleftp:Propq:Prophp:phq:q⊢ prightp:Propq:Prophp:phq:q⊢ q <;>leftp:Propq:Prophp:phq:q⊢ prightp:Propq:Prophp:phq:q⊢ q assumptionAll goals completed! 🐙
+
+              
+              
+                This is especially useful when the resulting goals can be finished off
+in a uniform way, or, at least, when it is possible to make progress
+on all of them uniformly.
+
+              
+                The first | t₁ | t₂ | ... | tₙ applies each tᵢ until one succeeds, or else fails:
+
+              
+                example (p q : Prop) (hp : p) : p ∨ q := byp:Propq:Prophp:p⊢ p ∨ q
+  first | apply Or.inlp:Propq:Prophp:p⊢ p; assumptionAll goals completed! 🐙 | apply Or.inr; assumption
+
+example (p q : Prop) (hq : q) : p ∨ q := byp:Propq:Prophq:q⊢ p ∨ q
+  first | apply Or.inlp:Propq:Prophq:q⊢ p; assumptionp:Propq:Prophq:q⊢ p | apply Or.inrp:Propq:Prophq:q⊢ q; assumptionAll goals completed! 🐙
+
+              
+              
+                In the first example, the left branch succeeds, whereas in the second one, it is the right one that succeeds.
+In the next three examples, the same compound tactic succeeds in each case:
+
+              
+                example (p q r : Prop) (hp : p) : p ∨ q ∨ r := byp:Propq:Propr:Prophp:p⊢ p ∨ q ∨ r
+  repeat (first | apply Or.inlp:Propq:Propr:Prophp:p⊢ p; assumptionAll goals completed! 🐙 | apply Or.inr | assumption)
+
+example (p q r : Prop) (hq : q) : p ∨ q ∨ r := byp:Propq:Propr:Prophq:q⊢ p ∨ q ∨ r
+  repeat (first | apply Or.inlp:Propq:Propr:Prophq:q⊢ q; assumptionAll goals completed! 🐙 | apply Or.inrp:Propq:Propr:Prophq:q⊢ q ∨ r | assumption)
+
+example (p q r : Prop) (hr : r) : p ∨ q ∨ r := byp:Propq:Propr:Prophr:r⊢ p ∨ q ∨ r
+  repeat (first | apply Or.inlp:Propq:Propr:Prophr:r⊢ r; assumptionp:Propq:Propr:Prophr:r⊢ q | apply Or.inrp:Propq:Propr:Prophr:r⊢ r | assumptionAll goals completed! 🐙)
+
+              
+              
+                The tactic tries to solve the left disjunct immediately by assumption;
+if that fails, it tries to focus on the right disjunct; and if that
+doesn't work, it invokes the assumption tactic.
+
+              
+                You will have no doubt noticed by now that tactics can fail. Indeed,
+it is the “failure” state that causes the first combinator to
+backtrack and try the next tactic. The try combinator builds a
+tactic that always succeeds, though possibly in a trivial way:
+try t executes t and reports success, even if t fails. It is
+equivalent to first| t |skip, where skip is a tactic that does
+nothing (and succeeds in doing so). In the next example, the second
+constructor succeeds on the right conjunct q ∧ r (remember that
+disjunction and conjunction associate to the right) but fails on the
+first. The try tactic ensures that the sequential composition
+succeeds:
+
+              
+                example (p q r : Prop) (hp : p) (hq : q) (hr : r) : p ∧ q ∧ r := byp:Propq:Propr:Prophp:phq:qhr:r⊢ p ∧ q ∧ r
+  constructorleftp:Propq:Propr:Prophp:phq:qhr:r⊢ prightp:Propq:Propr:Prophp:phq:qhr:r⊢ q ∧ r <;>leftp:Propq:Propr:Prophp:phq:qhr:r⊢ prightp:Propq:Propr:Prophp:phq:qhr:r⊢ q ∧ r (try constructorright.leftp:Propq:Propr:Prophp:phq:qhr:r⊢ qright.rightp:Propq:Propr:Prophp:phq:qhr:r⊢ r) <;>leftp:Propq:Propr:Prophp:phq:qhr:r⊢ pright.leftp:Propq:Propr:Prophp:phq:qhr:r⊢ qright.rightp:Propq:Propr:Prophp:phq:qhr:r⊢ r assumptionAll goals completed! 🐙
+
+              
+              
+                Be careful: repeat (try t) will loop forever, because the inner tactic never fails.
+
+              
+                In a proof, there are often multiple goals outstanding. Parallel
+sequencing is one way to arrange it so that a single tactic is applied
+to multiple goals, but there are other ways to do this. For example,
+all_goals t applies t to all open goals:
+
+              
+                example (p q r : Prop) (hp : p) (hq : q) (hr : r) : p ∧ q ∧ r := byp:Propq:Propr:Prophp:phq:qhr:r⊢ p ∧ q ∧ r
+  constructorleftp:Propq:Propr:Prophp:phq:qhr:r⊢ prightp:Propq:Propr:Prophp:phq:qhr:r⊢ q ∧ r
+  all_goals (try constructorright.leftp:Propq:Propr:Prophp:phq:qhr:r⊢ qright.rightp:Propq:Propr:Prophp:phq:qhr:r⊢ r)
+  all_goals assumptionAll goals completed! 🐙
+
+              
+              
+                In this case, the any_goals tactic provides a more robust solution.
+It is similar to all_goals, except it succeeds if its argument
+succeeds on at least one goal:
+
+              
+                example (p q r : Prop) (hp : p) (hq : q) (hr : r) : p ∧ q ∧ r := byp:Propq:Propr:Prophp:phq:qhr:r⊢ p ∧ q ∧ r
+  constructorleftp:Propq:Propr:Prophp:phq:qhr:r⊢ prightp:Propq:Propr:Prophp:phq:qhr:r⊢ q ∧ r
+  any_goals constructorright.leftp:Propq:Propr:Prophp:phq:qhr:r⊢ qright.rightp:Propq:Propr:Prophp:phq:qhr:r⊢ r
+  any_goals assumptionAll goals completed! 🐙
+
+              
+              
+                The first tactic in the by block below repeatedly splits
+conjunctions:
+
+              
+                example (p q r : Prop) (hp : p) (hq : q) (hr : r) :
+      p ∧ ((p ∧ q) ∧ r) ∧ (q ∧ r ∧ p) := byp:Propq:Propr:Prophp:phq:qhr:r⊢ p ∧ ((p ∧ q) ∧ r) ∧ q ∧ r ∧ p
+  repeat (any_goals constructorright.right.right.rightp:Propq:Propr:Prophp:phq:qhr:r⊢ p)
+  all_goals assumptionAll goals completed! 🐙
+
+              
+              
+                In fact, we can compress the full tactic down to one line:
+
+              
+                example (p q r : Prop) (hp : p) (hq : q) (hr : r) :
+      p ∧ ((p ∧ q) ∧ r) ∧ (q ∧ r ∧ p) := byp:Propq:Propr:Prophp:phq:qhr:r⊢ p ∧ ((p ∧ q) ∧ r) ∧ q ∧ r ∧ p
+  repeat (any_goals (first | constructorright.right.right.rightp:Propq:Propr:Prophp:phq:qhr:r⊢ p | assumptionAll goals completed! 🐙))
+
+              
+              
+                The combinator focus t ensures that t only effects the current
+goal, temporarily hiding the others from the scope. So, if t
+ordinarily only effects the current goal, focus (all_goals t) has
+the same effect as t.
+
+              
+            
+              
+                5.6. Rewriting🔗
+
+              
+                The rw tactic and the simp tactic
+were introduced briefly in Calculational Proofs. In this
+section and the next, we discuss them in greater detail.
+
+              
+                The rw tactic provides a basic mechanism for applying
+substitutions to goals and hypotheses, providing a convenient and
+efficient way of working with equality. The most basic form of the
+tactic is rw [t], where t is a term whose type asserts an
+equality. For example, t can be a hypothesis h : x = y in the
+context; it can be a general lemma, like
+add_comm : ∀ x y, x + y = y + x, in which the rewrite tactic tries to find suitable
+instantiations of x and y; or it can be any compound term
+asserting a concrete or general equation. In the following example, we
+use this basic form to rewrite the goal using a hypothesis.
+
+              
+                variable (k : Nat) (f : Nat → Nat)
+
+example (h₁ : f 0 = 0) (h₂ : k = 0) : f k = 0 := byk:Natf:Nat → Nath₁:f 0 = 0h₂:k = 0⊢ f k = 0
+  rw [h₂k:Natf:Nat → Nath₁:f 0 = 0h₂:k = 0⊢ f 0 = 0]k:Natf:Nat → Nath₁:f 0 = 0h₂:k = 0⊢ f 0 = 0 -- replace k with 0
+  rw [h₁k:Natf:Nat → Nath₁:f 0 = 0h₂:k = 0⊢ 0 = 0]All goals completed! 🐙 -- replace f 0 with 0
+
+              
+              
+                In the example above, the first use of rw replaces k with
+0 in the goal f k = 0. Then, the second one replaces f 0
+with 0. The tactic automatically closes any goal of the form
+t = t. Here is an example of rewriting using a compound expression:
+
+              
+                example (x y : Nat) (p : Nat → Prop) (q : Prop) (h : q → x = y)
+        (h' : p y) (hq : q) : p x := byx:Naty:Natp:Nat → Propq:Proph:q → x = yh':p yhq:q⊢ p x
+  rw [h hqx:Naty:Natp:Nat → Propq:Proph:q → x = yh':p yhq:q⊢ p y]x:Naty:Natp:Nat → Propq:Proph:q → x = yh':p yhq:q⊢ p y; assumptionAll goals completed! 🐙
+
+              
+              
+                Here, h hq establishes the equation x = y.
+
+              
+                Multiple rewrites can be combined using the notation rw [t_1, ..., t_n],
+which is just shorthand for rw[t_1]; ...;rw [t_n]. The previous example can be written as follows:
+
+              
+                variable (k : Nat) (f : Nat → Nat)
+
+example (h₁ : f 0 = 0) (h₂ : k = 0) : f k = 0 := byk:Natf:Nat → Nath₁:f 0 = 0h₂:k = 0⊢ f k = 0
+  rw [h₂,k:Natf:Nat → Nath₁:f 0 = 0h₂:k = 0⊢ f 0 = 0 h₁k:Natf:Nat → Nath₁:f 0 = 0h₂:k = 0⊢ 0 = 0]All goals completed! 🐙
+
+              
+              
+                By default, rw uses an equation in the forward direction, matching
+the left-hand side with an expression, and replacing it with the
+right-hand side. The notation ←t can be used to instruct the
+tactic to use the equality t in the reverse direction.
+
+              
+                variable (a b : Nat) (f : Nat → Nat)
+
+example (h₁ : a = b) (h₂ : f a = 0) : f b = 0 := bya:Natb:Natf:Nat → Nath₁:a = bh₂:f a = 0⊢ f b = 0
+  rw [←h₁,a:Natb:Natf:Nat → Nath₁:a = bh₂:f a = 0⊢ f a = 0 h₂a:Natb:Natf:Nat → Nath₁:a = bh₂:f a = 0⊢ 0 = 0]All goals completed! 🐙
+
+              
+              
+                In this example, the term ←h₁ instructs the rewriter to replace
+b with a. In the editors, you can type the backwards arrow as
+\l. You can also use the ASCII equivalent, <-.
+
+              
+                Sometimes the left-hand side of an identity can match more than one
+subterm in the pattern, in which case the rw tactic chooses the
+first match it finds when traversing the term. If that is not the one
+you want, you can use additional arguments to specify the appropriate
+subterm.
+
+              
+                example (a b c : Nat) : a + b + c = a + c + b := bya:Natb:Natc:Nat⊢ a + b + c = a + c + b
+  rw [Nat.add_assoc,a:Natb:Natc:Nat⊢ a + (b + c) = a + c + b Nat.add_comm b,a:Natb:Natc:Nat⊢ a + (c + b) = a + c + b ← Nat.add_assoca:Natb:Natc:Nat⊢ a + c + b = a + c + b]All goals completed! 🐙
+
+example (a b c : Nat) : a + b + c = a + c + b := bya:Natb:Natc:Nat⊢ a + b + c = a + c + b
+  rw [Nat.add_assoc,a:Natb:Natc:Nat⊢ a + (b + c) = a + c + b Nat.add_assoc,a:Natb:Natc:Nat⊢ a + (b + c) = a + (c + b) Nat.add_comm ba:Natb:Natc:Nat⊢ a + (c + b) = a + (c + b)]All goals completed! 🐙
+
+example (a b c : Nat) : a + b + c = a + c + b := bya:Natb:Natc:Nat⊢ a + b + c = a + c + b
+  rw [Nat.add_assoc,a:Natb:Natc:Nat⊢ a + (b + c) = a + c + b Nat.add_assoc,a:Natb:Natc:Nat⊢ a + (b + c) = a + (c + b) Nat.add_comm _ ba:Natb:Natc:Nat⊢ a + (b + c) = a + (b + c)]All goals completed! 🐙
+
+              
+              
+                In the first example above, the first step rewrites a + b + c to
+a + (b + c). The next step applies commutativity to the term
+b + c; without specifying the argument, the tactic would instead rewrite
+a + (b + c) to (b + c) + a. Finally, the last step applies
+associativity in the reverse direction, rewriting a + (c + b) to
+a + c + b. The next two examples instead apply associativity to
+move the parenthesis to the right on both sides, and then switch b
+and c. Notice that the last example specifies that the rewrite
+should take place on the right-hand side by specifying the second
+argument to Nat.add_comm.
+
+              
+                By default, the rw tactic affects only the goal. The notation
+rw [t] at h applies the rewrite
+
+              
+                example (f : Nat → Nat) (a : Nat) (h : a + 0 = 0) : f a = f 0 := byf:Nat → Nata:Nath:a + 0 = 0⊢ f a = f 0
+  rw [Nat.add_zerof:Nat → Nata:Nath:a = 0⊢ f a = f 0] at hf:Nat → Nata:Nath:a = 0⊢ f a = f 0
+  rw [hf:Nat → Nata:Nath:a = 0⊢ f 0 = f 0]All goals completed! 🐙
+
+              
+              
+                The first step, rw [Nat.add_zero] at h, rewrites the hypothesis a + 0 = 0 to a = 0.
+Then the new hypothesis a = 0 is used to rewrite the goal to f 0 = f 0.
+
+              
+                The rw tactic is not restricted to propositions.
+In the following example, we use rw [h] at t to rewrite the hypothesis t : Tuple α n to t : Tuple α 0.
+
+              
+                def Tuple (α : Type) (n : Nat) :=
+  { as : List α // as.length = n }
+
+example (n : Nat) (h : n = 0) (t : Tuple α n) : Tuple α 0 := byα:Typen:Nath:n = 0t:Tuple α n⊢ Tuple α 0
+  rw [hα:Typen:Nath:n = 0t:Tuple α 0⊢ Tuple α 0] at tα:Typen:Nath:n = 0t:Tuple α 0⊢ Tuple α 0
+  exact tAll goals completed! 🐙
+
+              
+              
+            
+              
+                5.7. Using the Simplifier🔗
+
+              
+                Whereas rw is designed as a surgical tool for manipulating a
+goal, the simplifier offers a more powerful form of automation. A
+number of identities in Lean's library have been tagged with the
+[simp] attribute, and the simp tactic uses them to iteratively
+rewrite subterms in an expression.
+
+              
+                example (x y z : Nat) : (x + 0) * (0 + y * 1 + z * 0) = x * y := byx:Naty:Natz:Nat⊢ (x + 0) * (0 + y * 1 + z * 0) = x * y
+  simpAll goals completed! 🐙
+
+example (x y z : Nat) (p : Nat → Prop) (h : p (x * y))
+        : p ((x + 0) * (0 + y * 1 + z * 0)) := byx:Naty:Natz:Natp:Nat → Proph:p (x * y)⊢ p ((x + 0) * (0 + y * 1 + z * 0))
+  simpx:Naty:Natz:Natp:Nat → Proph:p (x * y)⊢ p (x * y); assumptionAll goals completed! 🐙
+
+              
+              
+                In the first example, the left-hand side of the equality in the goal
+is simplified using the usual identities involving 0 and 1, reducing
+the goal to x * y = x * y. At that point, simp applies
+reflexivity to finish it off. In the second example, simp reduces
+the goal to p (x * y), at which point the assumption h
+finishes it off. Here are some more examples
+with lists:
+
+              
+                open List
+
+example (xs : List Nat)
+        : reverse (xs ++ [1, 2, 3]) = [3, 2, 1] ++ reverse xs := byxs:List Nat⊢ (xs ++ [1, 2, 3]).reverse = [3, 2, 1] ++ xs.reverse
+  simpAll goals completed! 🐙
+
+example (xs ys : List α)
+        : length (reverse (xs ++ ys)) = length xs + length ys := byα:Type u_1xs:List αys:List α⊢ (xs ++ ys).reverse.length = xs.length + ys.length
+  simp [Nat.add_comm]All goals completed! 🐙
+
+              
+              
+                As with rw, you can use the keyword at to simplify a hypothesis:
+
+              
+                example (x y z : Nat) (p : Nat → Prop)
+        (h : p ((x + 0) * (0 + y * 1 + z * 0))) : p (x * y) := byx:Naty:Natz:Natp:Nat → Proph:p ((x + 0) * (0 + y * 1 + z * 0))⊢ p (x * y)
+  simp at hx:Naty:Natz:Natp:Nat → Proph:p (x * y)⊢ p (x * y); assumptionAll goals completed! 🐙
+
+              
+              
+                Moreover, you can use a “wildcard” asterisk to simplify all the hypotheses and the goal:
+
+              
+                attribute [local simp] Nat.mul_comm Nat.mul_assoc Nat.mul_left_comm
+attribute [local simp] Nat.add_assoc Nat.add_comm Nat.add_left_comm
+
+example (w x y z : Nat) (p : Nat → Prop)
+        (h : p (x * y + z * w * x)) : p (x * w * z + y * x) := byw:Natx:Naty:Natz:Natp:Nat → Proph:p (x * y + z * w * x)⊢ p (x * w * z + y * x)
+  simp at *w:Natx:Naty:Natz:Natp:Nat → Proph:p (x * y + w * (x * z))⊢ p (x * y + w * (x * z)); assumptionAll goals completed! 🐙
+
+example (x y z : Nat) (p : Nat → Prop)
+        (h₁ : p (1 * x + y)) (h₂ : p (x * z * 1))
+        : p (y + 0 + x) ∧ p (z * x) := byx:Naty:Natz:Natp:Nat → Proph₁:p (1 * x + y)h₂:p (x * z * 1)⊢ p (y + 0 + x) ∧ p (z * x)
+  simp at *x:Naty:Natz:Natp:Nat → Proph₁:p (x + y)h₂:p (x * z)⊢ p (x + y) ∧ p (x * z) <;>x:Naty:Natz:Natp:Nat → Proph₁:p (x + y)h₂:p (x * z)⊢ p (x + y) ∧ p (x * z) constructorleftx:Naty:Natz:Natp:Nat → Proph₁:p (x + y)h₂:p (x * z)⊢ p (x + y)rightx:Naty:Natz:Natp:Nat → Proph₁:p (x + y)h₂:p (x * z)⊢ p (x * z) <;>leftx:Naty:Natz:Natp:Nat → Proph₁:p (x + y)h₂:p (x * z)⊢ p (x + y)rightx:Naty:Natz:Natp:Nat → Proph₁:p (x + y)h₂:p (x * z)⊢ p (x * z) assumptionAll goals completed! 🐙
+
+              
+              
+                For operations that are commutative and associative, like
+multiplication on the natural numbers, the simplifier uses these two
+facts to rewrite an expression, as well as left commutativity. In
+the case of multiplication the latter is expressed as follows:
+x * (y * z) = y * (x * z). The local modifier tells the simplifier
+to use these rules in the current file (or section or namespace, as
+the case may be). It may seem that commutativity and
+left-commutativity are problematic, in that repeated application of
+either causes looping. But the simplifier detects identities that
+permute their arguments, and uses a technique known as ordered
+rewriting. This means that the system maintains an internal ordering
+of terms, and only applies the identity if doing so decreases the
+order. With the three identities mentioned above, this has the effect
+that all the parentheses in an expression are associated to the right,
+and the expressions are ordered in a canonical (though somewhat
+arbitrary) way. Two expressions that are equivalent up to
+associativity and commutativity are then rewritten to the same
+canonical form.
+
+              
+                
+                  attribute [local simp] Nat.mul_comm Nat.mul_assoc Nat.mul_left_comm
+attribute [local simp] Nat.add_assoc Nat.add_comm Nat.add_left_comm
+
+                example (w x y z : Nat) (Variable name `p` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _p
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`p : Nat → Prop)
+        : x * y + z * w * x = x * w * z + y * x := byw:Natx:Naty:Natz:Natp:Nat → Prop⊢ x * y + z * w * x = x * w * z + y * x
+  simpAll goals completed! 🐙
+
+example (w x y z : Nat) (p : Nat → Prop)
+        (h : p (x * y + z * w * x)) : p (x * w * z + y * x) := byw:Natx:Naty:Natz:Natp:Nat → Proph:p (x * y + z * w * x)⊢ p (x * w * z + y * x)
+  simpw:Natx:Naty:Natz:Natp:Nat → Proph:p (x * y + z * w * x)⊢ p (x * y + w * (x * z)); simp at hw:Natx:Naty:Natz:Natp:Nat → Proph:p (x * y + w * (x * z))⊢ p (x * y + w * (x * z)); assumptionAll goals completed! 🐙
+
+              
+              
+                As with rw, you can send simp a list of facts to use,
+including general lemmas, local hypotheses, definitions to unfold, and
+compound expressions. The simp tactic also recognizes the ←t
+syntax that rewrite does. In any case, the additional rules are
+added to the collection of identities that are used to simplify a
+term.
+
+              
+                def f (m n : Nat) : Nat :=
+  m + n + m
+
+example {m n : Nat} (h : n = 1) (h' : 0 = m) : (f m n) = n := bym:Natn:Nath:n = 1h':0 = m⊢ f m n = n
+  simp [h, ←h', f]All goals completed! 🐙
+
+              
+              
+                A common idiom is to simplify a goal using local hypotheses:
+
+              
+                variable (k : Nat) (f : Nat → Nat)
+
+example (h₁ : f 0 = 0) (h₂ : k = 0) : f k = 0 := byk:Natf:Nat → Nath₁:f 0 = 0h₂:k = 0⊢ f k = 0
+  simp [h₁, h₂]All goals completed! 🐙
+
+              
+              
+                To use all the hypotheses present in the local context when
+simplifying, we can use the wildcard symbol, *:
+
+              
+                variable (k : Nat) (f : Nat → Nat)
+
+example (h₁ : f 0 = 0) (h₂ : k = 0) : f k = 0 := byk:Natf:Nat → Nath₁:f 0 = 0h₂:k = 0⊢ f k = 0
+  simp [*]All goals completed! 🐙
+
+              
+              
+                Here is another example:
+
+              
+                example (u w x y z : Nat) (h₁ : x = y + z) (h₂ : w = u + x)
+        : w = z + y + u := byu:Natw:Natx:Naty:Natz:Nath₁:x = y + zh₂:w = u + x⊢ w = z + y + u
+  simp [*, Nat.add_comm]All goals completed! 🐙
+
+              
+              
+                The simplifier will also do propositional rewriting. For example,
+using the hypothesis p, it rewrites p ∧ q to q and p ∨ q to True,
+which it then proves trivially. Iterating such
+rewrites produces nontrivial propositional reasoning.
+
+              
+                example (p q : Prop) (hp : p) : p ∧ q ↔ q := byp:Propq:Prophp:p⊢ p ∧ q ↔ q
+  simp [*]All goals completed! 🐙
+
+example (p q : Prop) (hp : p) : p ∨ q := byp:Propq:Prophp:p⊢ p ∨ q
+  simp [*]All goals completed! 🐙
+
+example (p q r : Prop) (hp : p) (hq : q) : p ∧ (q ∨ r) := byp:Propq:Propr:Prophp:phq:q⊢ p ∧ (q ∨ r)
+  simp [*]All goals completed! 🐙
+
+              
+              
+                The next example simplifies all the hypotheses, and then uses them to prove the goal.
+
+              
+                
+                  set_option linter.unusedVariables false
+
+                example (u w x x' y y' z : Nat) (p : Nat → Prop)
+        (h₁ : x + 0 = x') (h₂ : y + 0 = y')
+        : x + y + 0 = x' + y' := byu:Natw:Natx:Natx':Naty:Naty':Natz:Natp:Nat → Proph₁:x + 0 = x'h₂:y + 0 = y'⊢ x + y + 0 = x' + y'
+  simp at *u:Natw:Natx:Natx':Naty:Naty':Natz:Natp:Nat → Proph₁:x = x'h₂:y = y'⊢ x + y = x' + y'
+  simp [*]All goals completed! 🐙
+
+              
+              
+                One thing that makes the simplifier especially useful is that its
+capabilities can grow as a library develops. For example, suppose we
+define a list operation that symmetrizes its input by appending its
+reversal:
+
+              
+                def mk_symm (xs : List α) :=
+  xs ++ xs.reverse
+
+              
+              
+                Then for any list xs, (mk_symm xs).reverse is equal to mk_symm xs,
+which can easily be proved by unfolding the definition:
+
+              
+                
+                  def mk_symm (xs : List α) :=
+ xs ++ xs.reverse
+
+                theorem reverse_mk_symm (xs : List α)
+        : (mk_symm xs).reverse = mk_symm xs := byα:Type u_1xs:List α⊢ (mk_symm xs).reverse = mk_symm xs
+  simp [mk_symm]All goals completed! 🐙
+
+              
+              
+                We can now use this theorem to prove new results:
+
+              
+                
+                  def mk_symm (xs : List α) :=
+ xs ++ xs.reverse
+theorem reverse_mk_symm (xs : List α)
+       : (mk_symm xs).reverse = mk_symm xs := byα:Type u_1xs:List α⊢ (mk_symm xs).reverse = mk_symm xs
+ simp [mk_symm]All goals completed! 🐙
+
+                example (xs ys : List Nat)
+        : (xs ++ mk_symm ys).reverse = mk_symm ys ++ xs.reverse := byxs:List Natys:List Nat⊢ (xs ++ mk_symm ys).reverse = mk_symm ys ++ xs.reverse
+  simp [reverse_mk_symm]All goals completed! 🐙
+
+example (xs ys : List Nat) (p : List Nat → Prop)
+        (h : p (xs ++ mk_symm ys).reverse)
+        : p (mk_symm ys ++ xs.reverse) := byxs:List Natys:List Natp:List Nat → Proph:p (xs ++ mk_symm ys).reverse⊢ p (mk_symm ys ++ xs.reverse)
+  simp [reverse_mk_symm] at hxs:List Natys:List Natp:List Nat → Proph:p (mk_symm ys ++ xs.reverse)⊢ p (mk_symm ys ++ xs.reverse); assumptionAll goals completed! 🐙
+
+              
+              
+                But using reverse_mk_symm is generally the right thing to do, and
+it would be nice if users did not have to invoke it explicitly. You can
+achieve that by marking it as a simplification rule when the theorem
+is defined:
+
+              
+                
+                  def mk_symm (xs : List α) :=
+ xs ++ xs.reverse
+
+                @[simp] theorem reverse_mk_symm (xs : List α)
+        : (mk_symm xs).reverse = mk_symm xs := byα:Type u_1xs:List α⊢ (mk_symm xs).reverse = mk_symm xs
+  simp [mk_symm]All goals completed! 🐙
+
+example (xs ys : List Nat)
+        : (xs ++ mk_symm ys).reverse = mk_symm ys ++ xs.reverse := byxs:List Natys:List Nat⊢ (xs ++ mk_symm ys).reverse = mk_symm ys ++ xs.reverse
+  simpAll goals completed! 🐙
+
+example (xs ys : List Nat) (p : List Nat → Prop)
+        (h : p (xs ++ mk_symm ys).reverse)
+        : p (mk_symm ys ++ xs.reverse) := byxs:List Natys:List Natp:List Nat → Proph:p (xs ++ mk_symm ys).reverse⊢ p (mk_symm ys ++ xs.reverse)
+  simp at hxs:List Natys:List Natp:List Nat → Proph:p (mk_symm ys ++ xs.reverse)⊢ p (mk_symm ys ++ xs.reverse); assumptionAll goals completed! 🐙
+
+              
+              
+                The notation @[simp] declares reverse_mk_symm to have the
+[simp] attribute, and can be spelled out more explicitly:
+
+              
+                
+                  def mk_symm (xs : List α) :=
+ xs ++ xs.reverse
+
+                theorem reverse_mk_symm (xs : List α)
+        : (mk_symm xs).reverse = mk_symm xs := byα:Type u_1xs:List α⊢ (mk_symm xs).reverse = mk_symm xs
+  simp [mk_symm]All goals completed! 🐙
+
+attribute [simp] reverse_mk_symm
+
+example (xs ys : List Nat)
+        : (xs ++ mk_symm ys).reverse = mk_symm ys ++ xs.reverse := byxs:List Natys:List Nat⊢ (xs ++ mk_symm ys).reverse = mk_symm ys ++ xs.reverse
+  simpAll goals completed! 🐙
+
+example (xs ys : List Nat) (p : List Nat → Prop)
+        (h : p (xs ++ mk_symm ys).reverse)
+        : p (mk_symm ys ++ xs.reverse) := byxs:List Natys:List Natp:List Nat → Proph:p (xs ++ mk_symm ys).reverse⊢ p (mk_symm ys ++ xs.reverse)
+  simp at hxs:List Natys:List Natp:List Nat → Proph:p (mk_symm ys ++ xs.reverse)⊢ p (mk_symm ys ++ xs.reverse); assumptionAll goals completed! 🐙
+
+              
+              
+                The attribute can also be applied any time after the theorem is declared:
+
+              
+                
+                  def mk_symm (xs : List α) :=
+ xs ++ xs.reverse
+
+                theorem reverse_mk_symm (xs : List α)
+        : (mk_symm xs).reverse = mk_symm xs := byα:Type u_1xs:List α⊢ (mk_symm xs).reverse = mk_symm xs
+  simp [mk_symm]All goals completed! 🐙
+
+example (xs ys : List Nat)
+        : (xs ++ mk_symm ys).reverse = mk_symm ys ++ xs.reverse := byxs:List Natys:List Nat⊢ (xs ++ mk_symm ys).reverse = mk_symm ys ++ xs.reverse
+  simp [reverse_mk_symm]All goals completed! 🐙
+
+attribute [simp] reverse_mk_symm
+
+example (xs ys : List Nat) (p : List Nat → Prop)
+        (h : p (xs ++ mk_symm ys).reverse)
+        : p (mk_symm ys ++ xs.reverse) := byxs:List Natys:List Natp:List Nat → Proph:p (xs ++ mk_symm ys).reverse⊢ p (mk_symm ys ++ xs.reverse)
+  simp at hxs:List Natys:List Natp:List Nat → Proph:p (mk_symm ys ++ xs.reverse)⊢ p (mk_symm ys ++ xs.reverse); assumptionAll goals completed! 🐙
+
+              
+              
+                Once the attribute is applied, however, there is no way to permanently
+remove it; it persists in any file that imports the one where the
+attribute is assigned. As we will discuss further in
+Attributes, one can limit the scope of an attribute to the
+current file or section using the local modifier:
+
+              
+                
+                  def mk_symm (xs : List α) :=
+ xs ++ xs.reverse
+
+                theorem reverse_mk_symm (xs : List α)
+        : (mk_symm xs).reverse = mk_symm xs := byα:Type u_1xs:List α⊢ (mk_symm xs).reverse = mk_symm xs
+  simp [mk_symm]All goals completed! 🐙
+
+section
+attribute [local simp] reverse_mk_symm
+
+example (xs ys : List Nat)
+        : (xs ++ mk_symm ys).reverse = mk_symm ys ++ xs.reverse := byxs:List Natys:List Nat⊢ (xs ++ mk_symm ys).reverse = mk_symm ys ++ xs.reverse
+  simpAll goals completed! 🐙
+
+example (xs ys : List Nat) (p : List Nat → Prop)
+        (h : p (xs ++ mk_symm ys).reverse)
+        : p (mk_symm ys ++ xs.reverse) := byxs:List Natys:List Natp:List Nat → Proph:p (xs ++ mk_symm ys).reverse⊢ p (mk_symm ys ++ xs.reverse)
+  simp at hxs:List Natys:List Natp:List Nat → Proph:p (mk_symm ys ++ xs.reverse)⊢ p (mk_symm ys ++ xs.reverse); assumptionAll goals completed! 🐙
+end
+
+              
+              
+                Outside the section, the simplifier will no longer use
+reverse_mk_symm by default.
+
+              
+                Note that the various simp options we have discussed—giving an
+explicit list of rules, and using at to specify the location—can be combined,
+but the order they are listed is rigid. You can see the correct order
+in an editor by placing the cursor on the simp identifier to see
+the documentation string that is associated with it.
+
+              
+                There are two additional modifiers that are useful. By default,
+simp includes all theorems that have been marked with the
+attribute [simp]. Writing simp only excludes these defaults,
+allowing you to use a more explicitly crafted list of
+rules. In the examples below, the minus sign and
+only are used to block the application of reverse_mk_symm.
+
+              
+                def mk_symm (xs : List α) :=
+  xs ++ xs.reverse
+@[simp] theorem reverse_mk_symm (xs : List α)
+        : (mk_symm xs).reverse = mk_symm xs := byα:Type u_1xs:List α⊢ (mk_symm xs).reverse = mk_symm xs
+  simp [mk_symm]All goals completed! 🐙
+
+example (xs ys : List Nat) (p : List Nat → Prop)
+        (h : p (xs ++ mk_symm ys).reverse)
+        : p (mk_symm ys ++ xs.reverse) := byxs:List Natys:List Natp:List Nat → Proph:p (xs ++ mk_symm ys).reverse⊢ p (mk_symm ys ++ xs.reverse)
+  simp at hxs:List Natys:List Natp:List Nat → Proph:p (mk_symm ys ++ xs.reverse)⊢ p (mk_symm ys ++ xs.reverse); assumptionAll goals completed! 🐙
+
+example (xs ys : List Nat) (p : List Nat → Prop)
+        (h : p (xs ++ mk_symm ys).reverse)
+        : p ((mk_symm ys).reverse ++ xs.reverse) := byxs:List Natys:List Natp:List Nat → Proph:p (xs ++ mk_symm ys).reverse⊢ p ((mk_symm ys).reverse ++ xs.reverse)
+  simp [-reverse_mk_symm] at hxs:List Natys:List Natp:List Nat → Proph:p ((mk_symm ys).reverse ++ xs.reverse)⊢ p ((mk_symm ys).reverse ++ xs.reverse); assumptionAll goals completed! 🐙
+
+example (xs ys : List Nat) (p : List Nat → Prop)
+        (h : p (xs ++ mk_symm ys).reverse)
+        : p ((mk_symm ys).reverse ++ xs.reverse) := byxs:List Natys:List Natp:List Nat → Proph:p (xs ++ mk_symm ys).reverse⊢ p ((mk_symm ys).reverse ++ xs.reverse)
+  simp only [List.reverse_append] at hxs:List Natys:List Natp:List Nat → Proph:p ((mk_symm ys).reverse ++ xs.reverse)⊢ p ((mk_symm ys).reverse ++ xs.reverse); assumptionAll goals completed! 🐙
+
+              
+              
+                The simp tactic has many configuration options. For example, we can enable contextual simplifications as follows:
+
+              
+                example : if x = 0 then y + x = y else x ≠ 0 := byx:Naty:Nat⊢ if x = 0 then y + x = y else x ≠ 0
+  simp +contextualAll goals completed! 🐙
+
+              
+              
+                With +contextual, the simp tactic uses the fact that x = 0 when simplifying y + x = y, and
+x ≠ 0 when simplifying the other branch. Here is another example:
+
+              
+                example : ∀ (x : Nat) (Variable name `h` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _h
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`h : x = 0), y + x = y := byy:Nat⊢ ∀ (x : Nat), x = 0 → y + x = y
+  simp +contextualAll goals completed! 🐙
+
+              
+              
+                Another useful configuration option is +arith which enables arithmetical simplifications.
+
+              
+                example : 0 < 1 + x ∧ x + y + 2 ≥ y + 1 := byx:Naty:Nat⊢ 0 < 1 + x ∧ x + y + 2 ≥ y + 1
+  simp +arithAll goals completed! 🐙
+
+              
+              
+            
+              
+                5.8. Split Tactic🔗
+
+              
+                The split tactic is useful for breaking nested if-then-else and match expressions in cases.
+For a match expression with n cases, the split tactic generates at most n subgoals. Here is an example:
+
+              
+                def f (x y z : Nat) : Nat :=
+  match x, y, z with
+  | 5, _, _ => y
+  | _, 5, _ => y
+  | _, _, 5 => y
+  | _, _, _ => 1
+
+example (x y z : Nat) : x ≠ 5 → y ≠ 5 → z ≠ 5 → z = w → f x y w = 1 := byw:Natx:Naty:Natz:Nat⊢ x ≠ 5 → y ≠ 5 → z ≠ 5 → z = w → f x y w = 1
+  introsw:Natx:Naty:Natz:Nata✝³:x ≠ 5a✝²:y ≠ 5a✝¹:z ≠ 5a✝:z = w⊢ f x y w = 1
+  simp [f]w:Natx:Naty:Natz:Nata✝³:x ≠ 5a✝²:y ≠ 5a✝¹:z ≠ 5a✝:z = w⊢ (match x, y, w with
+  | 5, x, x_1 => y
+  | x, 5, x_1 => y
+  | x, x_1, 5 => y
+  | x, x_1, x_2 => 1) =
+  1
+  splith_1w:Naty:Natz:Nata✝³:y ≠ 5a✝²:z ≠ 5a✝¹:z = wx✝:Naty✝:Natz✝:Nata✝:5 ≠ 5⊢ y = 1h_2w:Natx:Natz:Nata✝³:x ≠ 5a✝²:z ≠ 5a✝¹:z = wx✝¹:Naty✝:Natz✝:Natx✝:x = 5 → Falsea✝:5 ≠ 5⊢ 5 = 1h_3x:Naty:Natz:Nata✝³:x ≠ 5a✝²:y ≠ 5a✝¹:z ≠ 5x✝²:Naty✝:Natz✝:Natx✝¹:x = 5 → Falsex✝:y = 5 → Falsea✝:z = 5⊢ y = 1h_4w:Natx:Naty:Natz:Nata✝³:x ≠ 5a✝²:y ≠ 5a✝¹:z ≠ 5a✝:z = wx✝³:Naty✝:Natz✝:Natx✝²:x = 5 → Falsex✝¹:y = 5 → Falsex✝:w = 5 → False⊢ 1 = 1
+  .h_1w:Naty:Natz:Nata✝³:y ≠ 5a✝²:z ≠ 5a✝¹:z = wx✝:Naty✝:Natz✝:Nata✝:5 ≠ 5⊢ y = 1 contradictionAll goals completed! 🐙
+  .h_2w:Natx:Natz:Nata✝³:x ≠ 5a✝²:z ≠ 5a✝¹:z = wx✝¹:Naty✝:Natz✝:Natx✝:x = 5 → Falsea✝:5 ≠ 5⊢ 5 = 1 contradictionAll goals completed! 🐙
+  .h_3x:Naty:Natz:Nata✝³:x ≠ 5a✝²:y ≠ 5a✝¹:z ≠ 5x✝²:Naty✝:Natz✝:Natx✝¹:x = 5 → Falsex✝:y = 5 → Falsea✝:z = 5⊢ y = 1 contradictionAll goals completed! 🐙
+  .h_4w:Natx:Naty:Natz:Nata✝³:x ≠ 5a✝²:y ≠ 5a✝¹:z ≠ 5a✝:z = wx✝³:Naty✝:Natz✝:Natx✝²:x = 5 → Falsex✝¹:y = 5 → Falsex✝:w = 5 → False⊢ 1 = 1 rflAll goals completed! 🐙
+
+              
+              
+                We can compress the tactic proof above as follows.
+
+              
+                
+                  def f (x y z : Nat) : Nat :=
+ match x, y, z with
+ | 5, _, _ => y
+ | _, 5, _ => y
+ | _, _, 5 => y
+ | _, _, _ => 1
+
+                example (x y z : Nat) :
+  x ≠ 5 → y ≠ 5 → z ≠ 5 → z = w →
+  f x y w = 1 := byw:Natx:Naty:Natz:Nat⊢ x ≠ 5 → y ≠ 5 → z ≠ 5 → z = w → f x y w = 1
+  introsw:Natx:Naty:Natz:Nata✝³:x ≠ 5a✝²:y ≠ 5a✝¹:z ≠ 5a✝:z = w⊢ f x y w = 1; simp [f]w:Natx:Naty:Natz:Nata✝³:x ≠ 5a✝²:y ≠ 5a✝¹:z ≠ 5a✝:z = w⊢ (match x, y, w with
+  | 5, x, x_1 => y
+  | x, 5, x_1 => y
+  | x, x_1, 5 => y
+  | x, x_1, x_2 => 1) =
+  1; splith_1w:Naty:Natz:Nata✝³:y ≠ 5a✝²:z ≠ 5a✝¹:z = wx✝:Naty✝:Natz✝:Nata✝:5 ≠ 5⊢ y = 1h_2w:Natx:Natz:Nata✝³:x ≠ 5a✝²:z ≠ 5a✝¹:z = wx✝¹:Naty✝:Natz✝:Natx✝:x = 5 → Falsea✝:5 ≠ 5⊢ 5 = 1h_3x:Naty:Natz:Nata✝³:x ≠ 5a✝²:y ≠ 5a✝¹:z ≠ 5x✝²:Naty✝:Natz✝:Natx✝¹:x = 5 → Falsex✝:y = 5 → Falsea✝:z = 5⊢ y = 1h_4w:Natx:Naty:Natz:Nata✝³:x ≠ 5a✝²:y ≠ 5a✝¹:z ≠ 5a✝:z = wx✝³:Naty✝:Natz✝:Natx✝²:x = 5 → Falsex✝¹:y = 5 → Falsex✝:w = 5 → False⊢ 1 = 1 <;>h_1w:Naty:Natz:Nata✝³:y ≠ 5a✝²:z ≠ 5a✝¹:z = wx✝:Naty✝:Natz✝:Nata✝:5 ≠ 5⊢ y = 1h_2w:Natx:Natz:Nata✝³:x ≠ 5a✝²:z ≠ 5a✝¹:z = wx✝¹:Naty✝:Natz✝:Natx✝:x = 5 → Falsea✝:5 ≠ 5⊢ 5 = 1h_3x:Naty:Natz:Nata✝³:x ≠ 5a✝²:y ≠ 5a✝¹:z ≠ 5x✝²:Naty✝:Natz✝:Natx✝¹:x = 5 → Falsex✝:y = 5 → Falsea✝:z = 5⊢ y = 1h_4w:Natx:Naty:Natz:Nata✝³:x ≠ 5a✝²:y ≠ 5a✝¹:z ≠ 5a✝:z = wx✝³:Naty✝:Natz✝:Natx✝²:x = 5 → Falsex✝¹:y = 5 → Falsex✝:w = 5 → False⊢ 1 = 1 first | contradictionh_4w:Natx:Naty:Natz:Nata✝³:x ≠ 5a✝²:y ≠ 5a✝¹:z ≠ 5a✝:z = wx✝³:Naty✝:Natz✝:Natx✝²:x = 5 → Falsex✝¹:y = 5 → Falsex✝:w = 5 → False⊢ 1 = 1 | rflAll goals completed! 🐙
+
+              
+              
+                The tactic split <;> first | contradiction | rfl first applies the split tactic,
+and then for each generated goal it tries contradiction, and then rfl if contradiction fails.
+Like simp, we can apply split to a particular hypothesis:
+
+              
+                def g (xs ys : List Nat) : Nat :=
+  match xs, ys with
+  | [a, b], _ => a+b+1
+  | _, [b, _] => b+1
+  | _, _      => 1
+
+example (xs ys : List Nat) (h : g xs ys = 0) : False := byxs:List Natys:List Nath:g xs ys = 0⊢ False
+  simp [g] at hxs:List Natys:List Nath:(match xs, ys with
+  | [a, b], x => a + b + 1
+  | x, [b, head] => b + 1
+  | x, x_1 => 1) =
+  0⊢ False; split at hh_1ys:List Natxs✝:List Natys✝:List Nata✝:Natb✝:Nath:a✝ + b✝ + 1 = 0⊢ Falseh_2xs:List Natxs✝:List Natys✝:List Natb✝:Nathead✝:Natx✝:∀ (a b : Nat), xs = [a, b] → Falseh:b✝ + 1 = 0⊢ Falseh_3xs:List Natys:List Natxs✝:List Natys✝:List Natx✝¹:∀ (a b : Nat), xs = [a, b] → Falsex✝:∀ (b head : Nat), ys = [b, head] → Falseh:1 = 0⊢ False <;>h_1ys:List Natxs✝:List Natys✝:List Nata✝:Natb✝:Nath:a✝ + b✝ + 1 = 0⊢ Falseh_2xs:List Natxs✝:List Natys✝:List Natb✝:Nathead✝:Natx✝:∀ (a b : Nat), xs = [a, b] → Falseh:b✝ + 1 = 0⊢ Falseh_3xs:List Natys:List Natxs✝:List Natys✝:List Natx✝¹:∀ (a b : Nat), xs = [a, b] → Falsex✝:∀ (b head : Nat), ys = [b, head] → Falseh:1 = 0⊢ False simp +arith at hAll goals completed! 🐙
+
+              
+              
+            
+              
+                5.9. Extensible Tactics🔗
+
+              
+                In the following example, we define the notation triv using the command syntax.
+Then, we use the command macro_rules to specify what should
+be done when triv is used. You can provide different expansions, and the tactic
+interpreter will try all of them until one succeeds:
+
+              
+                -- Define a new tactic notation
+syntax "triv" : tactic
+
+macro_rules
+  | `(tactic| triv) => `(tactic| assumption)
+
+example (h : p) : p := byp:Sort ?u.2h:p⊢ p
+  trivAll goals completed! 🐙
+
+-- You cannot prove the following theorem using `triv`
+-- example (x : α) : x = x := by
+--  triv
+
+-- Let's extend `triv`. The tactic interpreter
+-- tries all possible macro extensions for `triv` until one succeeds
+macro_rules
+  | `(tactic| triv) => `(tactic| rfl)
+
+example (x : α) : x = x := byα:Sort u_1x:α⊢ x = x
+  trivAll goals completed! 🐙
+
+example (x : α) (h : p) : x = x ∧ p := byα:Sort u_1p:Propx:αh:p⊢ x = x ∧ p
+  apply And.introleftα:Sort u_1p:Propx:αh:p⊢ x = xrightα:Sort u_1p:Propx:αh:p⊢ p <;>leftα:Sort u_1p:Propx:αh:p⊢ x = xrightα:Sort u_1p:Propx:αh:p⊢ p trivAll goals completed! 🐙
+
+-- We now add a (recursive) extension
+macro_rules | `(tactic| triv) => `(tactic| apply And.intro <;> triv)
+
+example (x : α) (h : p) : x = x ∧ p := byα:Sort u_1p:Propx:αh:p⊢ x = x ∧ p
+  trivAll goals completed! 🐙
+
+              
+              
+            
+              
+                5.10. Exercises🔗
+
+              
+                
+                  
+                    Go back to the exercises in Propositions and Proofs and
+Quantifiers and Equality and
+redo as many as you can now with tactic proofs, using also rw
+and simp as appropriate.
+
+                  
+
+                
+                  
+                    Use tactic combinators to obtain a one-line proof of the following:
+
+                  
+
+                
+              
+                declaration uses `sorry`example (p q r : Prop) (hp : p)
+        : (p ∨ q ∨ r) ∧ (q ∨ p ∨ r) ∧ (q ∨ r ∨ p) := byp:Propq:Propr:Prophp:p⊢ (p ∨ q ∨ r) ∧ (q ∨ p ∨ r) ∧ (q ∨ r ∨ p)
+  sorryAll goals completed! 🐙
+
+              
+              
+            
+          
+            ←4. Quantifiers and Equality6. Interacting with Lean→
+          
+
+        
+
+    
+  
+

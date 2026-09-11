@@ -295,7 +295,7 @@ theorem negLog1mY_le (y : ℝ) (hy0 : 0 < y) (hy1 : y < 1) :
       have hxc : x ∈ uIcc (1 - y) 1 := by
         rw [uIcc_of_le (by linarith : (1 : ℝ) - y ≤ 1)]
         exact ⟨le_of_lt hx.1, le_of_lt hx.2⟩
-      exact heq x hxc
+      exact heq hxc
     rw [integral_congr_uIoo heq']
     exact intervalIntegral.integral_deriv_of_contDiffOn_Icc hC1
       (by linarith : (1 - y) ≤ 1)
@@ -321,8 +321,8 @@ theorem negLog1mY_le (y : ℝ) (hy0 : 0 < y) (hy1 : y < 1) :
         (one_div_le_one_div (show 0 < z from by linarith [show 1 - y ≤ z from hz'.1, hz])
             hz).mpr hz'.1)
   have htarget : ∫ z in (1 - y)..1, (1 / (1 - y)) = y / (1 - y) := by
-    rw [intervalIntegral.integral_const,
-        show (1 - y)⁻¹ * (1 - (1 - y)) = y * (1 - y)⁻¹ by ring]
+    rw [intervalIntegral.integral_const, smul_eq_mul]
+    ring
   linarith [hbound, htarget]
 
 /-- |f_t(x)| ≤ Bf(t,G) for G > t, x ≥ G (spec §2 Lemma 1). -/
@@ -356,24 +356,26 @@ theorem fT_bound (t x G : ℝ) (ht : 0 < t) (hGt : t < G) (hxG : G ≤ x) :
       have hwN : 0 ≤ w t := by dsimp only [w]; nlinarith
       exact mul_le_mul_of_nonneg_left hg2u hwN
     have hP : (w t / u x) / (1 - w t / u x) = 1 / (1 - w t / u x) - 1 := by
+      -- (e)/(1-e) = 1/(1-e) - 1 with e := w t / u x; denominator isolated via `set d`
       have hPn : 1 - w t / u x ≠ 0 := ne_of_gt (sub_pos.mpr hwu1)
-      have hPs : 1 - (1 - w t / u x) = w t / u x := by ring
+      set d := 1 - w t / u x with hd
+      have heqw : w t / u x = 1 - d := by ring
       calc (w t / u x) / (1 - w t / u x)
-          = (1 - (1 - w t / u x)) / (1 - w t / u x) := by rw [← hPs]
-        _ = 1 / (1 - w t / u x) - (1 - w t / u x) / (1 - w t / u x) := by
-            rw [sub_div]
-        _ = 1 / (1 - w t / u x) - 1 := by rw [div_self hPn]
+          = (1 - d) / d := by rw [hd, ← heqw]
+        _ = 1 / d - d / d := by rw [sub_div (1 : ℝ) d d]
+        _ = 1 / d - 1 := by rw [div_self hPn]
+        _ = 1 / (1 - w t / u x) - 1 := by rw [hd]
     have hQ : (w t / (G * G + 1 / 4)) / (1 - w t / (G * G + 1 / 4)) =
         1 / (1 - w t / (G * G + 1 / 4)) - 1 := by
+      -- same shape as hP with denominator 1 - w t / (G*G+1/4)
       have hQn : 1 - w t / (G * G + 1 / 4) ≠ 0 := ne_of_gt (sub_pos.mpr hq1)
-      have hQs : 1 - (1 - w t / (G * G + 1 / 4)) = w t / (G * G + 1 / 4) := by ring
+      set d := 1 - w t / (G * G + 1 / 4) with hd
+      have heqw : w t / (G * G + 1 / 4) = 1 - d := by ring
       calc (w t / (G * G + 1 / 4)) / (1 - w t / (G * G + 1 / 4))
-          = (1 - (1 - w t / (G * G + 1 / 4))) / (1 - w t / (G * G + 1 / 4)) :=
-            by rw [← hQs]
-        _ = 1 / (1 - w t / (G * G + 1 / 4)) -
-            (1 - w t / (G * G + 1 / 4)) / (1 - w t / (G * G + 1 / 4)) := by
-            rw [sub_div]
-        _ = 1 / (1 - w t / (G * G + 1 / 4)) - 1 := by rw [div_self hQn]
+          = (1 - d) / d := by rw [hd, ← heqw]
+        _ = 1 / d - d / d := by rw [sub_div (1 : ℝ) d d]
+        _ = 1 / d - 1 := by rw [div_self hQn]
+        _ = 1 / (1 - w t / (G * G + 1 / 4)) - 1 := by rw [hd]
     rw [hP, hQ]
     have h5 : 1 / (1 - w t / u x) ≤ 1 / (1 - w t / (G * G + 1 / 4)) :=
       (one_div_le_one_div (sub_pos.mpr hwu1) (sub_pos.mpr hq1)).mpr (by nlinarith [hAB])
@@ -463,12 +465,14 @@ theorem fTp_bound (t x G : ℝ) (ht : 0 < t) (hGt : t < G) (hxG : G ≤ x) :
       2 * x * w t / (u x * (x * x - t * t)) ≤ 2 * w t / (x * (x * x - t * t)) := hdenom
       _ = (2 * w t * (x * x / (x * x - t * t))) / x^3 := hsplit
       _ ≤ (2 * w t * (G * G / (G * G - t * t))) / x^3 := by
+        -- same positive denominator on both sides: monotone (· / x^3) carries
+        -- the numerator inequality (monotone_div_right_of_nonneg,
+        -- Algebra/Order/Field/Basic.lean:168 in pinned mathlib)
         have hwn2 : 0 ≤ 2 * w t := by
           dsimp only [w]
           nlinarith
-        rw [div_le_iff₀ (by nlinarith [hx0])]
-        field_simp [show x^3 ≠ 0 from pow_ne_zero 3 hx0.ne']
-        exact mul_le_mul_of_nonneg_left hratio hwn2
+        exact monotone_div_right_of_nonneg (pow_nonneg hx0.le 3)
+          (mul_le_mul_of_nonneg_left hratio hwn2)
       _ = (2 * w t * (G * G) / (G * G - t * t)) / x^3 := by ring_nf
   calc
     |fTp t x| = |(-x / (u x)^2) + (2 * x * w t / (u x * (x * x - t * t)))| := rfl
@@ -543,7 +547,7 @@ theorem rayIntegrable (c : ℝ) (h'ab : a < b)
       (fun x (hx : x ∈ Ioo a b) => by
         have hcxe : c ≤ x := by linarith [hc', hx.1]
         dsimp only [rayIntegrand]
-        exact if_pos hcxe
+        exact (if_pos hcxe).symm
       ) measurableSet_Ioo
   · by_cases hcb : b ≤ c
     · -- b ≤ c: ray integrand = 0 pointwise on uIoc a b
@@ -575,9 +579,12 @@ theorem rayIntegrable (c : ℝ) (h'ab : a < b)
           by_cases hc : c < x
           · exact Or.inr ⟨hc, hxb⟩
           · exact Or.inl ⟨ha, not_lt.mp hc⟩
-        · rintro (Or.inl ⟨ha, hxc⟩ | Or.inr ⟨hc, hxb⟩)
-          · exact ⟨ha, le_trans hxc (le_of_lt hc'b)⟩
-          · exact ⟨le_trans (le_of_lt (by linarith : a < c)) hc, hxb⟩
+        · rintro h
+          cases h with
+          | inl h1 =>
+            exact ⟨h1.1, le_trans h1.2 (le_of_lt hc'b)⟩
+          | inr h1 =>
+            exact ⟨lt_trans (by linarith : a < c) h1.1, h1.2⟩
       have hL : IntegrableOn (fun x : ℝ => rayIntegrand f c x) (uIoc a c) := by
         have hz : IntervalIntegrable (fun _ : ℝ => (0 : ℝ)) volume a c :=
           continuousOn_const (c := (0 : ℝ)) (s := Icc a c)
@@ -630,11 +637,10 @@ theorem NListRayIntegrable (L : List ℝ) (h'ab : a < b)
       (fun x (hx : x ∈ Ioo a b) => by
         by_cases hg : g ≤ x
         · dsimp only [NList, rayIntegrand]
-          rw [dif_pos hg]
+          simp [hg]
           ring
         · dsimp only [NList, rayIntegrand]
-          rw [dif_neg hg]
-          ring
+          simp [hg]
       ) measurableSet_Ioo
 
 -- ---------------------------------------------------------------------
@@ -674,7 +680,7 @@ theorem rayInt_eval (c : ℝ) (h'ab : a < b)
       have hfdc' : ContinuousOn (deriv f) (Icc c b) :=
         hf'cont.mono (Icc_subset_Icc (le_of_lt (by linarith)) le_rfl)
       have hadd : ∫ x in a..b, rayIntegrand f c x =
-          ∫ x in a..c, rayIntegrand f c x + ∫ x in c..b, rayIntegrand f c x :=
+          (∫ x in a..c, rayIntegrand f c x) + (∫ x in c..b, rayIntegrand f c x) :=
         (integral_add_adjacent_intervals
           (rayIntegrable c (by linarith : a < c) hfda')
           (rayIntegrable c (by linarith : c < b) hfdc')).symm
@@ -699,6 +705,7 @@ theorem rayInt_eval (c : ℝ) (h'ab : a < b)
           exact if_pos hcxe
         rw [integral_congr_uIoo hCong]
       rw [hleft, hright]
+      rw [zero_add]
       exact integral_eq_sub_of_hasDerivAt
         (fun x (hx : x ∈ uIcc c b) =>
           let hx' : x ∈ Icc c b := by simpa [uIcc_of_le (le_of_lt hcb)] using hx
@@ -723,11 +730,42 @@ theorem rayInt_eval (c : ℝ) (h'ab : a < b)
 /-- The three-case ray value (the RHS of rayInt_eval) rewritten in
     endpoint-sum form — the algebraic bridge b3Abel uses to fold
     rayInt_eval into the Abel sum. -/
-theorem rayEndFormEq (a b g : ℝ) (f : ℝ → ℝ) :
+theorem rayEndFormEq (a b g : ℝ) (f : ℝ → ℝ) (h'ab : a < b) :
     f b * (if g ≤ b then (1 : ℝ) else 0) - f a * (if g ≤ a then (1 : ℝ) else 0)
       - (if a < g ∧ g ≤ b then f g else 0) =
       if g ≤ a then f b - f a else if g < b then f b - f g else 0 := by
-  split_ifs <;> (try linarith) <;> ring
+  -- Needs a < b: without it the g ≤ a, ¬g ≤ b branch (only possible when b < g ≤ a)
+  -- makes the two sides unequal for general f.
+  split_ifs <;>
+  (try linarith) <;>
+  (try ring) <;>
+  (try {
+    -- infeasible: ¬g ≤ a gives a < g and g < b gives g ≤ b
+    have hconj : a < g ∧ g ≤ b := by
+      constructor
+      · linarith
+      · linarith
+    contradiction
+  }) <;>
+  (try {
+    -- g = b and ¬(a < g ∧ g ≤ b): infeasible with a < b
+    have hg0 : g = b := le_antisymm (by linarith) (by intro hlt; linarith)
+    have hcon3 : a < g ∧ g ≤ b := by
+      rw [hg0]
+      exact ⟨h'ab, le_rfl⟩
+    contradiction
+  }) <;>
+  (try {
+    -- g = b (top endpoint): f b - f g = f b - f b
+    have hg0 : g = b := le_antisymm (by linarith) (by intro hlt; linarith)
+    rw [hg0]
+    ring
+  }) <;>
+  (try {
+    -- g ≤ a < b forces g ≤ b, contradicting ¬g ≤ b
+    have hg0 : g ≤ b := by linarith
+    contradiction
+  })
 
 /-- The exact finite Abel identity: for the counting step N_L over the
     finite height list L,
@@ -764,7 +802,7 @@ theorem b3Abel (L : List ℝ) (h'ab : a < b)
     have hpt2 : ∫ x in a..b, rayIntegrand f g x =
         f b * (if g ≤ b then (1 : ℝ) else 0) - f a * (if g ≤ a then (1 : ℝ) else 0)
           - (if a < g ∧ g ≤ b then f g else 0) := by
-      rw [rayInt_eval g h'ab hfderiv hf'cont, ← rayEndFormEq a b g f]
+      rw [rayInt_eval g h'ab hfderiv hf'cont, ← rayEndFormEq a b g f h'ab]
     rw [hpt2, hsum]
     dsimp only [NList]
     simp
@@ -816,7 +854,7 @@ theorem nHatIBP {f : ℝ → ℝ} {a b : ℝ} (h'ab : a < b) (h'a : 0 < a)
     (hfderiv : ∀ x ∈ Icc a b, HasDerivAt f (deriv f x) x)
     (hf'cont : ContinuousOn (deriv f) (Icc a b)) :
     ∫ x in a..b, nHat x * f x =
-      NHat b * f b - NHat a * f a - ∫ x in a..b, NHat x * deriv f x := by
+      NHat b * f b - NHat a * f a - (∫ x in a..b, NHat x * deriv f x) := by
   set H := fun x : ℝ => NHat x * f x with hH
   have hposx (x : ℝ) (hx : x ∈ Icc a b) : 0 < x := by linarith [h'a, hx.1]
   have hHderiv : ∀ x ∈ Icc a b, HasDerivAt H (nHat x * f x + NHat x * deriv f x) x := by
@@ -845,16 +883,16 @@ theorem nHatIBP {f : ℝ → ℝ} {a b : ℝ} (h'ab : a < b) (h'a : 0 < a)
         ) measurableSet_Ioo
     exact (hII_nHatf.add hII_NHatf').congr_ae hae.symm
   calc ∫ x in a..b, nHat x * f x
-      = ∫ x in a..b, (nHat x * f x + NHat x * deriv f x) - ∫ x in a..b, NHat x * deriv f x :=
+      = (∫ x in a..b, nHat x * f x + NHat x * deriv f x) - (∫ x in a..b, NHat x * deriv f x) :=
         eq_sub_of_add_eq (intervalIntegral.integral_add hII_nHatf hII_NHatf').symm
-    _ = ∫ x in a..b, deriv H x - ∫ x in a..b, NHat x * deriv f x := by
+    _ = (∫ x in a..b, deriv H x) - (∫ x in a..b, NHat x * deriv f x) := by
       have hCong2 : ∀ x ∈ uIoo a b, (nHat x * f x + NHat x * deriv f x : ℝ) = deriv H x := by
         intro x hx
         rw [uIoo_of_lt h'ab] at hx
         exact (HasDerivAt.deriv (hHderiv x ⟨le_of_lt hx.1, le_of_lt hx.2⟩)).symm
       rw [integral_congr_uIoo hCong2]
       rfl
-    _ = NHat b * f b - NHat a * f a - ∫ x in a..b, NHat x * deriv f x := by
+    _ = NHat b * f b - NHat a * f a - (∫ x in a..b, NHat x * deriv f x) := by
       have hHftc : ∫ x in a..b, deriv H x = NHat b * f b - NHat a * f a :=
         integral_eq_sub_of_hasDerivAt
           (fun x (hx : x ∈ uIcc a b) => by
@@ -1166,7 +1204,7 @@ theorem Kbar_le (G B : ℝ) (hG : Real.exp 1 ≤ G) (h'GB : G < B) :
     rw [uIoo_of_lt h'GB] at hx
     exact ⟨le_of_lt hx.1, le_of_lt hx.2⟩
   have vS : ∫ x in G..B, Sbar x / x^3 =
-      (P011 B - P011 G) + (Q029 B - Q029 G) + ∫ x in G..B, 0.290 / (2 * x^3 * log x) +
+      (P011 B - P011 G) + (Q029 B - Q029 G) + (∫ x in G..B, 0.290 / (2 * x^3 * log x)) +
         (R229 B - R229 G) := by
     have hpt : ∀ x ∈ Icc G B, (Sbar x / x^3) =
         (0.110 * log x / x^3) + (0.290 * log (log x) / x^3) + (2.290 / x^3) := by
@@ -1251,15 +1289,15 @@ theorem Kbar_le (G B : ℝ) (hG : Real.exp 1 ≤ G) (h'GB : G < B) :
     ring
   -- assemble
   calc ∫ x in G..B, Sbar x / x^3
-      = (P011 B - P011 G) + (Q029 B - Q029 G) + ∫ x in G..B, 0.290 / (2 * x^3 * log x) +
+      = (P011 B - P011 G) + (Q029 B - Q029 G) + (∫ x in G..B, 0.290 / (2 * x^3 * log x)) +
           (R229 B - R229 G) := by
         rw [vS]
-      _ ≤ (0 - P011 G) + (0 - Q029 G) + ∫ x in G..B, 0.290 / (2 * x^3 * log x) +
+      _ ≤ (0 - P011 G) + (0 - Q029 G) + (∫ x in G..B, 0.290 / (2 * x^3 * log x)) +
           (0 - R229 G) := by
         nlinarith [hPn, hQn, hRn]
-      _ = -P011 G - Q029 G + ∫ x in G..B, 0.290 / (2 * x^3 * log x) - R229 G := by
+      _ = -P011 G - Q029 G + (∫ x in G..B, 0.290 / (2 * x^3 * log x)) - R229 G := by
         ring
-      _ ≤ -P011 G - Q029 G + ∫ x in G..B, 0.290 / (2 * x^3) - R229 G := by
+      _ ≤ -P011 G - Q029 G + (∫ x in G..B, 0.290 / (2 * x^3)) - R229 G := by
         add_le_add (add_le_add (add_le_add le_rfl le_rfl) hremle) le_rfl
       _ = -P011 G - Q029 G + (0.290 / (2 * 2.290)) * (R229 B - R229 G) - R229 G := by
         rw [v029]
@@ -1360,12 +1398,12 @@ theorem b3BoundExplicit (L : List ℝ) (t G B : ℝ) (ht : 0 < t) (hGt : t < G)
         (L.map (fun (g : ℝ) => if G < g ∧ g ≤ B then fT t g else 0)).sum :=
     b3Abel L (by linarith : G < B) hfderiv hf'cont
   have hIBP : ∫ x in G..B, nHat x * fT t x =
-      NHat B * fT t B - NHat G * fT t G - ∫ x in G..B, NHat x * deriv (fun x : ℝ => fT t x) x :=
+      NHat B * fT t B - NHat G * fT t G - (∫ x in G..B, NHat x * deriv (fun x : ℝ => fT t x) x) :=
     nHatIBP (by linarith : G < B) (by linarith : 0 < G) hfderiv hf'cont
   set Δfun := fun x : ℝ => (NList L x - NHat x) * deriv (fun x : ℝ => fT t x) x with hΔ
   have hΔeq : ∫ x in G..B, Δfun x =
-      ∫ x in G..B, NList L x * deriv (fun x : ℝ => fT t x) x -
-        ∫ x in G..B, NHat x * deriv (fun x : ℝ => fT t x) x := by
+      (∫ x in G..B, NList L x * deriv (fun x : ℝ => fT t x) x) -
+        (∫ x in G..B, NHat x * deriv (fun x : ℝ => fT t x) x) := by
     have hptΔ : ∀ x ∈ uIoo G B, Δfun x =
         NList L x * deriv (fun x : ℝ => fT t x) x - NHat x * deriv (fun x : ℝ => fT t x) x := by
       intro x hx

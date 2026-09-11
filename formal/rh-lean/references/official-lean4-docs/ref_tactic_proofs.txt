@@ -1,0 +1,196 @@
+
+
+  
+                        
+                        
+    
+    
+    
+    
+    Tactic Proofs
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+      
+        
+
+      
+        
+            The Lean Language Reference
+
+          
+
+      
+    
+      
+
+      
+        
+          
+              The Lean Language Reference
+
+            
+            
+              
+                Table of Contents
+
+              1.Introduction
+2.Elaboration and Compilation
+3.Interacting with Lean
+4.The Type System
+5.Source Files and Modules
+6.Namespaces and Sections
+7.Definitions
+8.Axioms
+9.Attributes
+10.Type Classes
+11.Coercions
+12.Run-Time Code
+13.Terms
+14.Tactic Proofs
+15.The Simplifier
+16.The grind tactic
+17.The mvcgen tactic
+18.Functors, Monads and do-Notation
+19.Basic Propositions
+20.Basic Types
+21.IO
+22.Iterators
+23.Notations and Macros
+24.Build Tools and Distribution
+Validating a Lean Proof
+Error Explanations
+Release Notes
+Supported Platforms
+Index
+
+            
+              
+                14. Tactic Proofs
+
+              14.1.Running Tactics
+14.2.Reading Proof States
+14.3.The Tactic Language
+14.4.Options
+14.5.Tactic Reference
+14.6.Targeted Rewriting with conv
+14.7.Naming Bound Variables
+14.8.Custom Tactics
+
+            
+
+          
+
+        
+          
+            
+              Source Code
+
+            
+              Report Issues
+
+            
+          
+
+        
+      
+
+      
+          
+            ←13.13. Proofs14.1. Running Tactics→
+          
+            
+              14. Tactic Proofs🔗
+
+            
+              The tactic language is a special-purpose programming language for constructing proofs.
+In Lean, propositions are represented by types, and proofs are terms that inhabit these types.
+The section on propositions describes propositions in more detail.
+While terms are designed to make it convenient to indicate a specific inhabitant of a type, tactics are designed to make it convenient to demonstrate that a type is inhabited.
+This distinction exists because it's important that definitions pick out the precise objects of interest and that programs return the intended results, but proof irrelevance means that there's no technical reason to prefer one proof term over another.
+For example, given two assumptions of a given type, a program must be carefully written to use the correct one, while a proof may use either without consequence.
+
+            
+              Tactics are imperative programs that modify a proof state.
+A proof state consists of an ordered sequence of goals, which are contexts of local assumptions together with types to be inhabited; a tactic may either succeed with a possibly-empty sequence of further goals (called subgoals) or fail if it cannot make progress.
+If a tactic succeeds with no subgoals, then the proof is complete.
+If it succeeds with one or more subgoals, then its goal or goals will be proved when those subgoals have been proved.
+The first goal in the proof state is called the main goal.
+While most tactics affect only the main goal, operators such as <;> and all_goals can be used to apply a tactic to many goals, and operators such as bullets, next or case can narrow the focus of subsequent tactics to only a single goal in the proof state.
+
+            
+              Behind the scenes, tactics construct proof terms.
+Proof terms are independently checkable evidence of a theorem's truth, written in Lean's type theory.
+Each proof is checked in the kernel, and can be verified with independently-implemented external checkers, so the worst outcome from a bug in a tactic is a confusing error message, rather than an incorrect proof.
+Each goal in a tactic proof corresponds to an incomplete portion of a proof term.
+
+            
+              
+                14.1. Running Tactics
+
+              
+                14.2. Reading Proof States
+
+              
+                14.3. The Tactic Language
+
+              
+                14.4. Options
+
+              
+                14.5. Tactic Reference
+
+              
+                14.6. Targeted Rewriting with conv
+
+              
+                14.7. Naming Bound Variables
+
+              
+                14.8. Custom Tactics
+
+              
+            
+          
+            ←13.13. Proofs14.1. Running Tactics→
+          
+
+        
+
+    
+  
+
