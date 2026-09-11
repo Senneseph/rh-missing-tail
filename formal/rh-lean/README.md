@@ -71,6 +71,7 @@ form used in the B-3 repair has a probe behind it.
 | `ProbeK5` | **named-arg** `ContinuousAt.comp (g := log) …` green (the hmid fix); `continuity` tactic **dead** for log∘mul; 3-arg `sub_div` green |
 | `ProbeL` | `field_simp` + `ring_nf` closers (fTp_bound inverse-atom behavior) |
 | `ProbeM` | NList cons-case: `rw [dif_pos hg]` **fails** (map-binder hygiene), `simp [hg]` closes — the proven recipe |
+| `ProbeN`/`ProbeN2` | top-level decls keep their SHORT names across modules (the split of B3.lean into B3Core/B3Abel rests on this pin) |
 
 ### References & toolchain
 
