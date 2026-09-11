@@ -274,8 +274,13 @@ theorem rayEndFormEq (a b g : ℝ) (f : ℝ → ℝ) (h'ab : a < b) :
     contradiction
   }) <;>
   (try {
-    -- g = b (top endpoint): f b - f g = f b - f b
-    have hg0 : g = b := le_antisymm (by linarith) (by intro hlt; linarith)
+    -- g = b (top endpoint): f b - f g = f b - f b.
+    -- 4.33.1 pin (doc-verified online 2026-09-13): linarith does NOT turn
+    -- ¬(g < b) into b ≤ g; not_lt : ¬a < b ↔ b ≤ a is a [simp] lemma
+    -- (Mathlib/Order/Defs/LinearOrder.lean), so simp it into the context
+    -- first, then linarith derives g = b from g ≤ b ∧ b ≤ g.
+    simp only [not_lt] at *
+    have hg0 : g = b := by linarith
     rw [hg0]
     ring
   }) <;>
@@ -297,23 +302,23 @@ theorem b3Abel (L : List ℝ) (h'ab : a < b)
       := by
   induction L with
   | nil =>
-    have h0 : ∀ x, NList [] x * deriv f x = 0 := by
-      intro x
-      dsimp only [NList]
-      ring
     dsimp only [NList]
-    rw [integral_congr_uIoo h0, integral_zero]
-    ring
+    -- 4.33.1: the goal now shows UNFOLDED list sums, so the h0-congruence
+    -- pattern (folded) doesn't occur; simp the nil-algebra away instead
+    -- (pins: List.map_nil/List.sum_nil core Init.Data.List.Lemmas; integral_zero
+    -- as used in rayInt_eval).
+    simp only [List.map_nil, List.sum_nil, mul_zero, zero_mul, sub_zero]
+    exact integral_zero
   | cons g tail ih =>
     have hpt : ∀ x, NList (g :: tail) x * deriv f x =
         rayIntegrand f g x + NList tail x * deriv f x := by
       intro x
-      dsimp only [NList, rayIntegrand]
       by_cases hg : g ≤ x
-      · rw [dif_pos hg]
+      · dsimp only [NList, rayIntegrand]
+        simp [hg]
         ring
-      · rw [dif_neg hg]
-        ring
+      · dsimp only [NList, rayIntegrand]
+        simp [hg]
     rw [integral_congr_uIoo (fun x _ => hpt x)]
     rw [integral_add (rayIntegrable g h'ab hf'cont) (NListRayIntegrable tail h'ab hf'cont)]
     have hsum := ih
@@ -340,11 +345,16 @@ theorem nHatContinuousOn {s : Set ℝ} (hs : ∀ x ∈ s, 0 < x) : ContinuousOn 
   have h1 : ContinuousAt (fun z : ℝ => z * twoPiInv) x :=
     (continuousAt_id' (x : ℝ)).mul continuousAt_const
   have h2 : ContinuousAt (fun w : ℝ => log w) (x * twoPiInv) :=
-    Real.continuousAt_log (ne_of_lt hpos)
+    Real.continuousAt_log (ne_of_gt hpos)
   have h3 : ContinuousAt (fun w : ℝ => w * twoPiInv) (log (x * twoPiInv)) :=
-    (continuousAt_id' (log (x * twoPiInv))).mul
-      (continuousAt_const (twoPiInv : ℝ))
-  exact (h3.comp (h2.comp h1)).continuousWithinAt (s := s)
+    (continuousAt_id' (log (x * twoPiInv))).mul continuousAt_const  -- 4.33.1: zero
+    -- explicit args (pinned source Mathlib/Topology/Continuous.lean) — y and x are
+    -- both implicit from the expected type
+  exact (ContinuousAt.comp (g := fun w : ℝ => w * twoPiInv)
+      (f := fun z : ℝ => log (z * twoPiInv)) (x := x)
+      h3 (ContinuousAt.comp (g := log) (f := fun w : ℝ => w * twoPiInv) (x := x) h2 h1)
+    ).continuousWithinAt (s := s)  -- 4.33.1 pin (ProbeK5-Q1 green): named-arg comp;
+    -- term-mode h3.comp (h2.comp h1) fails to match the surface shapes
 
 /-- N̂ is continuous off 0. -/
 theorem NHatContinuousOn {s : Set ℝ} (hs : ∀ x ∈ s, 0 < x) : ContinuousOn NHat s := by
@@ -354,8 +364,9 @@ theorem NHatContinuousOn {s : Set ℝ} (hs : ∀ x ∈ s, 0 < x) : ContinuousOn 
   have h1 : ContinuousAt (fun z : ℝ => z * twoPiInv) x :=
     (continuousAt_id' (x : ℝ)).mul continuousAt_const
   have h2 : ContinuousAt (fun w : ℝ => log w) (x * twoPiInv) :=
-    Real.continuousAt_log (ne_of_lt hpos)
-  have hmid : ContinuousAt (fun z : ℝ => log (z * twoPiInv)) x := h2.comp h1
+    Real.continuousAt_log (ne_of_gt hpos)
+  have hmid : ContinuousAt (fun z : ℝ => log (z * twoPiInv)) x :=
+    ContinuousAt.comp (g := log) (f := fun w : ℝ => w * twoPiInv) (x := x) h2 h1  -- 4.33.1 pin (ProbeK5-Q1 green): named-arg comp (term-mode fails)
   have h6 : ContinuousAt (fun z : ℝ => log (z * twoPiInv) - 1) x :=
     hmid.sub continuousAt_const
   have h7 : ContinuousAt (fun z : ℝ => (z * twoPiInv) * (log (z * twoPiInv) - 1)) x :=
@@ -409,7 +420,8 @@ theorem nHatIBP {f : ℝ → ℝ} {a b : ℝ} (h'ab : a < b) (h'a : 0 < a)
         rw [uIoo_of_lt h'ab] at hx
         exact (HasDerivAt.deriv (hHderiv x ⟨le_of_lt hx.1, le_of_lt hx.2⟩)).symm
       rw [integral_congr_uIoo hCong2]
-      rfl
+      -- 4.33.1: that rw already closed the goal (rw auto-close pin); the old
+      -- trailing `rfl` was "No goals to be solved"
     _ = NHat b * f b - NHat a * f a - (∫ x in a..b, NHat x * deriv f x) := by
       have hHftc : ∫ x in a..b, deriv H x = NHat b * f b - NHat a * f a :=
         integral_eq_sub_of_hasDerivAt
