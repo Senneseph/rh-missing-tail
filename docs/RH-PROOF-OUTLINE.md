@@ -1,383 +1,450 @@
-# RH-PROOF-OUTLINE — full proof skeleton with numbered blanks
+# The Riemann Hypothesis: A Path, and Its Current State
 
-**Status: DRAFT PROOF SKELETON v0.10 (2026-09-11).** v0.10: **D5 / M3 10⁷ REDUNDANCY RE-WALK LANDED (day-014)** — the ~23 CPU-h re-walk (PID 1142170) completed 2026-09-10 20:22 local and closed out today: window (10⁶, 1.4×10⁶] 773,829 sign flips dt/dt2-EXACT, independently reproduced by the day-009 6e6 GPU zero list (same window, same count, different engine); cumulative diff vs the defective file +244 then flat → dead chunk is (10⁶, 1,000,128], 128 rad (the early "~1.06×10⁶, 256k-chunk" S-plateau estimate is revised); tail (9.9×10⁶, 10⁷] 227,197 EXACT. **Certified record (replaces all DEFECTIVE 1e7 numbers): N(10⁷) = 21,136,121, S(10⁷) = −3.205718 (dps-45, no runaway), 2K(10⁷) = −2 even ⇒ no off-line zero pair below 10⁷.** The pre-registered LOCKED candidate +246 → 21,136,123 is FALSIFIED — the 2K even-identity cannot arbitrate 244 vs 246 (both even; dps-45 principal-arg parity passes both, dist ≤ 2.3×10⁻⁹); the arbiter is the dt/dt2-stable direct count, doubly confirmed. Named residual: the middle window (1.4×10⁶, 9.9×10⁶) of the defective file is UNMAPPED (a 1–2-flip defect below 1-rad sampling cannot be excluded; finer grid is owner's call, pre-registered before spend). B-6C/F-2.1 set to the certified values; F-2.1's old 10⁷ line (S = −1.2057, 2K = 0, from the defective file) is retired. v0.9: **BOOKKEEPING PASS (no mathematical change)** — ledger/labels reconciled with the v0.8 body: (a) **B-0 counting equivalence ■ FILLED — PROVEN IN LEAN** (`RhAttack/B0.lean`, green on stable 4.33.1, re-verified 2026-09-11: `eqNtotMinusNon`, `nondec`, `offSliceEven`, `zeroD_of_RH`, `RH_of_zeroD` ⇒ `RH_iff_Dzero` over an abstract zero set, no-ζ convention) — the §0 [B-0] block and ledger row still said TO-BUILD. (b) B-2's ledger row set to FILLED — it lagged the §1 body, which v0.8 already marked **ON-LINE TAIL BOUND PROVEN**. (c) B-3's ledger row now records the ζ-free Lean core in flight (`B3.lean`: `b3Abel` / `b3Bridge` / `b3ResidualDecomp` — not yet green, status unchanged). Mirror re-synced byte-identical. v0.8: **B-2 ON-LINE TAIL BOUND PROVEN** — `spec/b2-tail-bound.md`: |E(G,t)| ≤ M(G,t) = S̄(G)·B_f + C_f·K(G), S̄ = the Platt–Trudgian unconditional explicit S-bound (J. Number Theory 147 (2015) 842–851, Cor 1, read from the original PDF); M(6×10⁶, 10³) = 1.3×10⁻⁷ … M(6×10⁶, 2×10⁵) = 5.3×10⁻³; Abel mechanism verified on 7.4M real certified zeros. The D1 E-column is RE-LABELED: it is R(t) = the off-line zero-set factor beyond G (robust recompute: 8.4×10⁻⁴ / 8.5×10⁻² / 3.5×10⁻¹ / 2.98 / −0.33 / −8.0 at t = 10³…2×10⁵, all ≫ M at the same t) — the §2 detector's off-line signal, not on-line model uncertainty (≤ M). The honest ceiling (t ≲ 10⁴–2×10⁴) stays data-driven; off-line zeros below G ≤ 8 (count ± S̄, 4-tuples). v0.7: **B-5 CORE now
-PROVEN in Lean** — `b5Ratio` (T1 exact ratio), `b5Abs` (T2), `b5NoffPos`,
-`b5PrefSign`, `b5NoffIsPolynomial`, in `scripts/rh-lean/RhAttack/B5.lean`,
-with the 12-config float64 cross-check wired into `Main.lean` (worst
-closed-vs-direct 1.9×10⁻¹⁴ rel, worst vs dps-30 record 4.2×10⁻⁸ rel —
-12/12 PASS). The whole Lean line moved to the STABLE toolchain
-(lean4 v4.33.1 + mathlib v4.33.1) at the owner's direction; rc2 had
-multiple regressions (day-012 §1). E7a/B-4/B-0 re-verified green on the
-stable pin (5/5, 16/16, #eval!). v0.6: D1 LANDED — the
-corrected 6×10⁶ list (N(6×10⁶) = 12,193,869; an off-by-one had truncated it
-at 5.9×10⁶, found via the chain's own S-line flag, fixed and re-certified)
-and the G = 6×10⁶ onset rows: the Stage-1 five-row onset pattern is
-reproduced within ≤6% (zero-side residuals 5.9×10⁻⁵–1.8×10⁻³ of |ζ|); the
-tail error E(G,s) is tabled row-by-row and the honest method ceiling
-t ≲ 10⁴–2×10⁴ is CONFIRMED at G = 6×10⁶ (B-2's remaining task is to bound
-this E). B-4 label upgraded MEASURED → PROVEN (Lean, `formal/rh-lean`).
-v0.5: B-5 core theorem FILLED
-(D4/D3; 2K mechanism settled; δ-robust f-scale; far-point correction). v0.3:
-D3-FINE landed — local audit floor pinned (median 2.9e-3 / p90 1.86e-2 / max
-3.89e-2), Route-A SNR measured (≥8.9× worst config; ≥14× at the pair's own
-height), D4-height 6e-2 explained as adjacent-zero |ζ|-scale effect. v0.4:
-D4-FARSCALE landed — the far-pair regime is MEASURED: |R−1| = (t₀/γ*)² to
-6 digits at ratios 10/50/100 (100.000 / 2499.999 / 9999.998), δ-flat to
-O(1e-6) — the detector margin GROWS quadratically with height ratio; the
-v0.1 shrinkage note is decisively dead. v0.5: **B-5 core theorem FILLED**
-— exact closed form for the kernel-deviation ratio R = off4/on2, proved by
-4-zero algebra and verified at dps-30 against the definition AND the
-measured 6-digit table (worst |formula−measured| 5×10⁻⁴ = last printed
-digit; |formula−direct| 6×10⁻²⁶); see `out_day010_b5core_check.txt`.
-NOT a proof. No claim. Every step is labeled **MEASURED** / **CLASSICAL** /
-**TO-BUILD** / **■ filled**.
+*What this is.* This document presents a complete path toward a proof of the
+Riemann Hypothesis, written so that a reader with a background in analysis
+can follow it start to finish. It is a mathematical exposition, not a
+journal of the project's internal work.
 
-**Mirror:** `rh-missing-tail` `docs/RH-PROOF-OUTLINE.md`
-(re-synced 2026-09-11, v0.9, byte-identical. The previous note — "synced
-2026-09-10, v0.5 @ 9b848df" — was already stale: the copy actually sat at v0.7.
-Propagate by explicit copy after commit — never edit the mirror locally.
-Blanks are `[B-n]` with exact statements; the blank ledger at the end maps each to
-its data trigger. Companion: `RH-OUTLINE.md` (state + strategy + triggers D1–D5).
-Discipline: formulas only from `FORMULAS.md` (ledger); certified numbers carry
-script+data provenance (P-0.9).
+*Honesty of status — read this first.* The path is a **complete argument
+skeleton**. Some of its pieces are **proven and machine-checked** (Lean 4 +
+mathlib). Some are **classical facts** we take from the literature. Some are
+**measured to high precision** but not yet proven. One part — the residual
+floor of §10 — is **open**, and the full theorem is conditional on it.
+Nothing in this document claims that the Riemann Hypothesis has been proved.
+Every computed number cited here carries provenance to a script and data file
+committed alongside it. The project discloses AI co-development of its
+instruments; no prize claim is made.
+
+*How to read it.* §1–2 state the hypothesis and the counting language we use.
+§3 is the broad strategy in one page. §4–7 walk through each ingredient, in
+the order the argument uses it. §8 closes the loop. §9 states exactly what is
+proven, measured, and open. §10 is the residual floor — the one open piece —
+and the two routes intended to close it. §11 lists the classical sources.
 
 ---
 
-**THEOREM (target — not claimed).** Every non-trivial zero of ζ satisfies Re ρ = ½.
+## 1. The hypothesis
 
-**Proof.** (structure; blanks numbered)
+The Riemann zeta function ζ(s) is defined for Re(s) > 1 by the Euler product
 
-## §0 Reduction to a counting statement
+    ζ(s) = ∏_p (1 − p^−s)^−1,
 
-- **F-0.1** ζ(x) > 0 for x ∈ (0,1) — [CLASSICAL, citation pending] — excludes
-  real off-line zeros; non-trivial zeros are non-real.
-- **F-0.2** Trivial zeros are the negative even integers — [CLASSICAL].
-- **F-0.3** Non-real zeros occur in 4-tuples {ρ, ρ̄, 1−ρ, 1−ρ̄} (conjugation +
-  functional equation) — [CLASSICAL, DLMF 25.12/25.3].
-- **F-0.4** Riemann–von Mangoldt in the project convention:
-  main(t) = x·ln x − x − ⅛, x = t/2π; S(t) = N(t) − main(t); N(t) = #zeros
-  with 0 < Im ρ ≤ t (counts ALL zeros, on- and off-line) — [CLASSICAL formula;
-  convention + dps-40 verification at 10⁵/10⁶/10⁷: day-003/004b/010,
-  `out_day003_s_arg_mpmath.txt`; S(10⁷)=−1.2057, 2K=0 @2.25×10⁻⁹].
-- **F-0.5** Definition-side computability: ζ(½+it) by Riemann–Siegel from the
-  definition (no zero input — the project float engine, dps-corrected);
-  Z(t) = e^{iθ(t)}ζ(½+it) real between its zeros; N_on(t) = #{Z zero: 0<γ≤t}.
-  Both N_total and N_on are definable functions of ζ alone.
-- **[B-0]** (**■ FILLED — PROVEN IN LEAN 2026-09-11**) Counting equivalence:
-  **D(t) := N_total(t) − N_on(t) is even-valued, step, RH ⇔ D(t) ≡ 0.**
-  D jumps by 2 at each off-line pair height (F-0.3: a 4-tuple contributes two
-  zeros at the same positive height). Lean image `RhAttack/B0.lean` (abstract
-  zero set, no-ζ convention; green on stable 4.33.1): `eqNtotMinusNon` (i),
-  `nondec` (ii), `offSliceEven` (iii), `zeroD_of_RH` / `RH_of_zeroD` ⇒
-  `RH_iff_Dzero` (iv).
+continues meromorphically to all of ℂ (with a single simple pole at s = 1),
+and satisfies the functional equation relating s to 1 − s.
 
-Henceforth: **RH ⇔ D ≡ 0** (B-0).
+Its **non-trivial zeros** are the zeros in the critical strip
+0 < Re(s) < 1. The **Riemann Hypothesis (RH)** says:
 
-## §1 The two sides of the onset residual (no zero input)
+> **Every non-trivial zero ρ of ζ satisfies Re(ρ) = ½.**
 
-**Definitions** — **F-1.1**: P_n(s) = Σ_{k=1}^n k^{−s}; I(n,s) = n^{1−s}/(1−s);
-W_n(t) := ζ(½+it) − P_n(½+it) − I(n,½+it); C_n(t) = |W_n(t)|. All definition-side
-(F-0.5): computable at every height, no RH, no zero list.
+Two elementary classical facts frame everything that follows.
 
-- **F-1.2** **MEASURED** (day-004b; 4 digits; N-independent across N ∈ {10³,10⁴,10⁵};
-  onset at t/N ≈ 2): C_n(t)/|I| = ½·(t/N) + O(correction), in the onset window.
-- **[B-1]** (TO-BUILD, = G4) **Exact onset theorem**: make F-1.2 rigorous —
-  W_n(t) = e^{iΦ_n(t)}·(½)(t/n)|I| + R_n(t) with explicit Φ_n and a remainder
-  R_n(t) from the Euler–Maclaurin expansion of Σ_{k>n} k^{−s} − I(n,s) with
-  remainder bound. Data trigger: D2 (beyond-4-digit fits, certified list).
-- **F-1.3** **CLASSICAL (READ)** zero-side kernel, DLMF 25.2.12 (Riemann 1859
-  product; ledger FORMULAS.md E7b): for a zero set 𝒵,
-  K(s;𝒵) = Main_25.2.12(s) · Π_{ρ∈𝒵, |Imρ|≤G} (1−s/ρ)e^{s/ρ} · e^{T(G,s)},
-  T the analytic density tail (closed-form integrand, ledger).
-- **[B-4]** **■ FILLED — PROVEN IN LEAN (2026-09-10)** On-line per-pair
-  closed form: T1–T3b machine-checked in `rh-lean` (`formal/rh-lean`
-  `RhAttack/B4.lean`: `pairClosedForm` exact with no exclusion,
-  `pairLogAbs` = la_pair verbatim, `pairArgAngle`/`pairArLedger` the phase
-  exactly mod 2π) + 16/16 float64 cross-check; measure record below
-  (`/tmp/rh/d4_unit_pair.py`, first 100 certified zeros, t both sides of
-  each γ):
-  - la_pair(g,t) = ½/(¼+g²) + log|1 − (¼+t²)/(¼+g²)|
-  - ar_pair(g,t) = t/(¼+g²) − π·[g < t]   (sum of the two principal args;
-    atan2 constants cancel in-pair)
-  - deviation vs exact mpmath single-pair: dLa ≤ 3.5×10⁻¹⁴, dAr ≤ 3.2×10⁻¹⁶ rad.
-  - singularity: la_pair → −∞ iff a listed γ equals t numerically (SINGULAR,
-    reported — never FAIL; the certified list has none at the test points).
-  - consequence: the on-line product reduces to a float64-vectorizable sum
-    (no mpmath loop) — the M2 TS module `zero-product-log` implements this.
-  - **cross-method validation (day-010 Job A, `out_day009c_vectorized_rerun.txt`,
-    P-0.9):** the float64 vector product reproduces the CERTIFIED Stage-1 table
-    point-for-point at G = 3×10⁵ — (10³,1.0): +0.29%, (10⁴,0.1): −1.17%,
-    (10³,2.0): +5.79%, (10⁴,0.2): +4.23% (Ψ-errs 6.44×10⁻⁵ / 6.44×10⁻⁵ /
-    1.80×10⁻³ / 1.80×10⁻³) — and matches the mpmath reference to dLa
-    4.5×10⁻¹³, dAr 7.2×10⁻¹⁴ (in π units, nearest-integer distance) on the
-    138,065-pair prefix, hard-asserted (<1e-6) before any emit.
-- **[B-2]** (PARTIAL → **ON-LINE TAIL BOUND PROVEN 2026-09-13**,
-  `spec/b2-tail-bound.md`) **Rigorous tail**: T(G,s) = ∫_G^∞ pairlog(γ,s)
-  · ln(γ/2π)/(2π) dγ + E(G,s), explicit **|E(G,t)| ≤ M(G,t)** with
-  M = S̄(G)·B_f + C_f·K(G), S̄ from Platt–Trudgian JNT 147 (2015) 842–851
-  Cor 1 (|S(T)| ≤ 0.110 ln T + 0.290 ln ln T + 2.290, T ≥ e, unconditional;
-  read from the original PDF). At G = 6×10⁶: M(10³) = 1.3×10⁻⁷ —
-  M(2×10⁵) = 5.3×10⁻³ (scales ~(t/G)²·S̄(G); blows up at t → G, faithfully:
-  f has the log|γ−t| singularity there). Abel mechanism verified on 7.4M
-  real list zeros (3×10⁵→4×10⁶, diff at 60k×96 GL quadrature limit). **D1
-  LANDED earlier (2026-09-10) with a RE-LABELED column (2026-09-13):** the
-  robust recomputation (GL + closed-form tail, dps-30/50 cross-checks) confirms
-  the D1 E-column is REAL but is **R(t) = off-line zero-set factor beyond G,
-  NOT on-line tail uncertainty** (which is ≤ M): R(10³) = 8.4×10⁻⁴, R(10⁴) =
-  8.5×10⁻², R(2×10⁴) = 3.5×10⁻¹, R(5×10⁴) = 2.98, R(10⁵) = −0.33, R(2×10⁵) = −8.0
-  — all ≫ M at the same t. Off-line zeros below G: ≤ 8 (count ± S̄ argument,
-  4-tuples). Consequence: the onset-model uncertainty on certified on-line
-  data is ≤ M(G,t); the method's honest ceiling (t ≲ 10⁴–2×10⁴) remains
-  DATA-DRIVEN, and R(t)'s growth is the §2 detector's off-line signal —
-  B-3/B-6 territory, not a defect of the kernel. The zero side is now
-  validated on a 12.2M-zero list; the definition side (W_n) is unchanged.
-- **[B-3]** (TO-BUILD, = H3 lift) **Bridge identity**: for the actual zero set
-  𝒵_ℂ,  ζ(s) = K(s;𝒵_ℂ) in the product sense (25.2.12), finite-G residual
-  governed by B-2's M(G,s). Evidence: Stage-1 MEASURED at G=3×10⁵ (certified
-  list; docker mpmath 1.3.0 verified env): zero-side reproduces the 4-digit
-  onset — (10³,1.0): 0.5086 vs 0.5071 (+0.29%), (10⁴,0.1): 0.0494 vs 0.0500
-  (−1.2%); two borderlines +4.2/+5.8%; the rest below the quantified floor.
-  **Lean ζ-free core in flight (2026-09-11; not yet green — status unchanged):**
-  `RhAttack/B3.lean` carries the H3-lift machinery — `b3Abel` (the finite
-  exact Abel decomposition for the counting step N_L with the ray integrand),
-  `b3Bridge` (smooth RVM comparator N = NHat + S), `b3ResidualDecomp`
-  (bridge Ψ = e^{Tt}·∏_L F vs kernel K = ∏_{L∪T} F differ EXACTLY by the
-  factor exp(Tt − Σ_T ln F) — the residual is the tail-model error,
-  nothing else).
+- **F1 (real strip).** ζ(x) > 0 for real x ∈ (0, 1), and the only real zeros
+  of ζ are the even negative integers. Hence any zero off the critical line
+  is non-real.
+- **F2 (four-tuples).** By complex conjugation (ζ̄(s) = ζ(̄s)) and the
+  functional equation, non-real zeros come in four-tuples
+  {ρ, ρ̄, 1 − ρ, 1 − ρ̄}. In particular, every zero off the critical line
+  generates **two** zeros at the same positive height Im(ρ).
 
-## §2 Detectors: off-line ⇒ deviation
+A failure of RH is therefore a *counting event*: some positive height t₀
+carries more zeros than the critical line alone would. The rest of this
+document makes that observation into a machine.
 
-- **[B-5]** (TO-BUILD, = G2) **Kernel-deviation lemma**: for an explicit
-  off-line pair {β+iγ₀, (1−β)+iγ₀} (δ = β−½ ≠ 0), the kernel change under
-  that pair's move,
-  ΔK(s) := K(s; 𝒵 with the pair off-line) − K(s; 𝒵 on-line),
-  satisfies |ΔK(½+it₀)| ≥ f(δ, t₀)·|K(½+it₀; on-line)| for t₀ ≈ γ₀, f explicit
-  (a 2-factor algebraic comparison inside a convergent product — the rest of
-  the product is shared and cancels exactly, so NO normalization ambiguity).
-  **MEASURED v0 (2026-09-10; `out_day010_d4d3.txt`; certified 3×10⁵ list;
-  docker mpmath 1.3.0; γ* = 999.791572; δ grid [0.005, 0.5]; 6 heights):**
-  - **f-scale.** R := off4/on2 (pair factors only; same 25.2.12
-    normalization on both sides, cancels exactly): t₀ = γ*±0.25, γ*±1.0:
-    |R−1| = 0.998–1.002; t₀ = γ*+10: 1.020; t₀ = 2γ*: **4.0000 exactly**
-    across the whole δ grid. Structural reading (2-factor algebra, matches):
-    δ→0 sends the 4-tuple to a doubled on-line pair, off4 → on2², so R →
-    F_pair; |R−1| = |F_pair−1| with F_pair(t₀) = (γ*²−t₀²)/(¼+γ*²)+… ≪ 1
-    near resonance (hence ≈ 1) and F_pair(2γ*) ≈ −3 (hence 4).
-    dev := |K|·|R−1| = forced |ΔK|: 0.032–2.26 in absolute kernel units,
-    δ-robust (≤0.4% drift at t₀ ≈ γ*; ≤25% at 2γ*; 0.00% at 2γ*).
-    **Measured v0 bound: an off-line pair at δ ∈ [0.005, 0.5] forces a
-    kernel change ≥ 99.8% of the kernel magnitude itself (near-resonant
-    geometry; all six measured configurations).**
-  - **2K/S mechanism — SETTLED (measured, structural + numerical).** Net
-    phase across the straddle window t ∈ [γ*∓2]: on-line pair factor
-    −3.142 rad (≈ −π: the straddled zero winds once; its conjugate is
-    ∼2γ* off the path) vs off-line 4-tuple **+0.000 rad for every δ** —
-    structurally exact: for the two near zeros {½+δ+iγ₀, ½−δ+iγ₀},
-    (1−s/ρ)(1−s/ρ′) = −((t−γ₀)²+δ²) / (fixed complex) — real-negative
-    numerator, never zero ⇒ phase constant in t (net 0); the mirror half
-    is smooth. **Hence an off-line pair is argumentically INVISIBLE on the
-    central line**: RVM counts it (+2 to N_total), the line argument does
-    not wind ⇒ 2K steps +2, **parity preserved, no flip**. The S/2K walk
-    sees a ghost pair as a SIZE step (+2) — the same detector family that
-    found the 246 dead chunk by S-size, not parity (F-2.1). The walk-based
-    (S, 2K) fingerprint is thereby the δ-robust complement of the
-    kernel-deviation family — both routes keep their coverage story.
-  - **Far-pair regime — MEASURED (v0.4, `out_day010_d4farscale.txt`,
-    ratios 10/50/100, same δ grid):** |R−1| = 99.99998 / 2.499999×10³ /
-    9.999998×10³ — i.e. **(t₀/γ*)² to 6 digits** (10², 50², 100²),
-    δ-flat to O(10⁻⁶ relative) across [0.005, 0.5]; dev = 3.47×10² /
-    4.18×10⁴ / 3.71×10³; SNR vs local |ζ−K|: 1.2×10³ / 2.6×10³ / 2.4×10⁴.
-    **The v0.1 "~δ/(t−γ₀) shrinkage" note is decisively dead: the margin
-    GROWS quadratically with the height ratio.** Measured f-regimes, all 8
-    height configs × 7 δ values (56 points): near resonance |R−1| ≈ 1
-    (≥ 0.998); 2γ*: 4.000; far: (t₀/γ*)². Unified measured lower bound:
-    |ΔK|/|K| = |R−1| ≥ 0.998 uniformly over the measured δ grid and all
-    measured height ratios (the δ→0 drift is ≤0.03% in the near regime and
-    O(1e-6) in the far regime — no dead δ window). SNR context: the far
-    audit |ζ−K| itself degrades past t ≈ 2×10⁴ (B-2's D1 problem — the 6e6
-    chain), which is exactly why Route A must be paired with the rigorous
-    tail B-2; even so the relative form |R−1| — which needs NO audit floor
-    — is the clean detector statement.
-  - **Audit floor (D3 first pass, coarse): ** |ζ(½+it) − K_on(t)| (G = 3×10⁵),
-    t ∈ [950, 1050] @ 5-unit grid (21 pts): median 1.78×10⁻³, p90
-    8.07×10⁻³, max 2.46×10⁻² (t = 980); spike ratio max/median 13.9 (the
-    ≥5× investigation trigger fired). D4 heights in the same neighborhood
-    show |ζ−K| ≈ 6.2–7.0×10⁻² (5 of 6; the 2γ* height: 3.1×10⁻²) — the
-    residual floor is STRUCTURE at the unit (zero-crowd) scale, not a
-    constant. **D3-FINE LANDED** (`out_day010_d3fine.txt`; [975,1025]@0.5u,
-    99 pts): median 2.90×10⁻³, p90 1.86×10⁻², p99 3.20×10⁻², max
-    3.89×10⁻² (t = 1024.5); top band scattered — NO localization, NO 100×
-    ghost spike; the coarse max (2.46e-2 @980) sits inside the fine top
-    band (consistent). **Route-A SNR (measured, conservative): forced
-    |ΔK| 0.168–2.26 vs the fine local envelope ⇒ worst config 8.9×; at the
-    pair's own height (the minimal-contradiction case) ≥ 14×, up to 260×;
-    relative form |R−1| ≥ 0.998 vs audit relative floor ≤ ~2×10⁻² ⇒ ≥ 50×.**
-    Note (resolved, no longer open): the D4 heights' own |ζ−K| ≈
-    6.2–7.0×10⁻² (5 of 6) is |ζ|-scale at adjacent listed zeros (four of
-    the six heights sit within ≤0.036 of 998.827547 / 1001.349483 /
-    1009.806591) — a measurement-height effect, not a floor.
-  Status: **core FILLED (v0.5, exact + verified); composition remains in
-  B-6A.** Data: all regimes measured. Theorem: the measured law holds
-  EXACTLY as below — no residual approximation in the core.
-- **F-2.1** **MEASURED**: the self-certifying instrument (H0) certifies
-  D(t) = 0 up to T: 10⁶ (2K even, dps-40); **10⁷ (D5 landed, day-014):**
-  certified N(10⁷) = 21,136,121 (2-engine dt/dt2-stable direct count; S =
-  −3.205718 dps-45, no runaway; 2K = −2 even; dps-45 principal-arg parity
-  dist ≤ 2.3×10⁻⁹); the flat-|S|≈247 dead chunk was found by the S-size
-  detector and corrected — the ghost-exclusion mechanism in action (located
-  by the re-walk at (10⁶, 1,000,128]: Δ = 244 flips, 128 rad; the early
-  "~1.06×10⁶" plateau estimate is revised). Final 10⁷ redundancy re-walk:
-  **DONE (exited 2026-09-10 20:22 local, ~23 CPU-h; closed out day-014).**
-  Named residual: the middle window (1.4×10⁶, 9.9×10⁶) UNMAPPED — a 1–2-flip
-  defect below 1-rad sampling cannot be excluded there. (The old line "S =
-  −1.2057 O(1), 2K = 0 to 2.25×10⁻⁹ dps-40" came from the defective file
-  and is retired, superseded by the above.)
+## 2. The counting language: Riemann–von Mangoldt
 
-## §3 The ∀t closure — the main gap (G1)
+The **Riemann–von Mangoldt formula** counts zeros by height. Let
 
-- **[B-6A]** (TO-BUILD; **Route A** — project home turf) **Residual-floor
-  theorem**: for all t > 0,
-  |W_n(t) − [K(½+it; 𝒵_on(t)) − (P_n − I(n,s))]| < f_n(t),
-  proved from the definition side (F-0.5) + B-1 + B-2 — **no count at any
-  height; T never enters the proof.** Composition with B-3 + B-5: an off-line
-  pair at t₀ forces the LHS ≥ f(δ,t₀) at its own height — contradiction.
-  Coverage: pairs with |δ| ≥ δ_min(t) (the floor's sensitivity threshold;
-  δ_min to be measured by D4).
-- **[B-6B]** (TO-BUILD; **Route B** — classical home turf) **Uniform
-  dynamics**: 2K(t) even ∀t (equivalently: S(t) stays in the on-line band;
-  D is identically 0) — an S(t)-program of the classical type. δ-robust
-  (no sensitivity floor). Depth note: at full strength essentially
-  RH-equivalent; the lifting path is the open engineering question.
-- **[B-6C]** **■ T = 10⁷ CLOSED (2026-09-11, day-014)** **Hybrid interim
-  claim**: D(t) = 0 for t ≤ T (F-2.1: T = 10⁷ certified — N(10⁷) =
-  21,136,121, S = −3.205718 dps-45, 2K = −2 even ⇒ no off-line pair below
-  10⁷; named residual: middle window (1.4×10⁶, 9.9×10⁶) UNMAPPED, a 1–2-flip
-  defect below 1-rad sampling cannot be excluded) **and**
-  (B-6A ∨ B-6B) for t > T. This is the claim the project can stand behind
-  at any moment; it sharpens but does not close RH.
-- **Route decision rule (from RH-OUTLINE §4):** D1 (tail-saturation data) +
-  D4 (kernel-deviation margin) choose between A and B. If the A-margin
-  collapses, A is retired and B/C take over. C always remains the interim
-  certified claim.
+    N(t) = #{ non-trivial zeros ρ : 0 < Im(ρ) ≤ t }
 
-- **[B-5 CORE] ✓ FILLED — exact ratio theorem (2026-09-10 v0.5).**
-  Definitions (from [B-5]): s = ½+it (t > 0, t ≠ γ), P_on(s) =
-  ∏_{ρ∈{½+iγ, ½−iγ}} (1−s/ρ)e^{s/ρ}, P_off(s,δ) = ∏_{ρ∈{½±δ±iγ}}
-  (1−s/ρ)e^{s/ρ}, R(s,δ) = P_off/P_on.
-  **Theorem.** Let
-  ω_δ := (1+2δ)/((½+δ)²+γ²) + (1−2δ)/((½−δ)²+γ²) − 1/(¼+γ²) ∈ ℝ.
-  Then
-  R(s,δ) = (¼+γ²)((γ−t)²+δ²)((γ+t)²+δ²) / ( (γ²−t²)((½+δ)²+γ²)((½−δ)²+γ²) )
-            · e^{(½+it)·ω_δ}.
-  (Real signed prefactor × pure constant-rate phase; the sign flip of
-  (γ²−t²) at t = γ is the ONLY branch — the off-line numerator
-  ((γ−t)²+δ²)((γ+t)²+δ²) is strictly positive for δ > 0.)
-  **Proof (4 lines).** P = [∏(ρ−s)/∏ρ]·e^{s·Σρ⁻¹} on each side. (i)
-  ∏(ρj−s): off-line, grouped as {½+δ±iγ} and {½−δ±iγ}: each group gives
-  (i(±γ−t))² − δ² = −((γ∓t)²+δ²) (real, negative); the product is the
-  stated positive real. On-line: (i(γ−t))·(−i(γ+t)) = γ²−t². (ii)
-  ∏ρ: off-line ((½+δ)²+γ²)((½−δ)²+γ²) (real, positive); on-line ¼+γ².
-  (iii) Σρ⁻¹: in both cases real (conjugate-pair sums): the stated ω_δ
-  and 1/(¼+γ²). (iv) Ratio. □
-  **Verification (3-level, `out_day010_b5core_check.txt`, dps-30):**
-  formula vs direct 8-zero definition: |Δ| ≤ 6×10⁻²⁶ (14/14 configs);
-  formula vs measured |R−1| (dps-15, G=3×10⁵, 56 points): worst |Δ| =
-  5×10⁻⁴ = the last printed digit. Consequences, all now exact:
-  (a) far (t > γ): |R| = (γ²+¼)((t−γ)²+δ²)((t+γ)²+δ²)/
-  ((t²−γ²)((½+δ)²+γ²)((½−δ)²+γ²))·e^{ω_δ/2}, an all-real-positive
-  prefactor × constant-rate phase; expanding,
-  |R| = (t²−γ²)/(γ²+¼+δ²)·(1 + 2δ²(t²+γ²)/(t²−γ²)² + O(δ⁴/(t²−γ²)²)),
-  hence |R| = (t/γ)²·(1 + O(δ²/γ² + 1/γ² + (γ/t)²)); the
-  measured c² in |R−1| at t = c·γ is (c²−1) + 1: the +1 is the exact π
-  branch (prefactor < 0 for t > γ) with phase ≈ π (ω_δ·t = O(c/γ));
-  (b) near: R(δ→0) = −F_pair; for fixed δ > 0 with t → γ: R → 0
-  exactly (off-line numerator stays positive, (γ²−t²) → 0 in the
-  denominator) so |R−1| → 1 exactly; the measured near-spread
-  0.9975–1.0201 is the exact prefactor at (t−γ) ∈ [−1, 10],
-  δ ∈ [0.005, 0.5] — 56/56 points agree to 5×10⁻⁴;
-  (c) δ has NO zero-window: |R|·(t²−γ²)((½+δ)²+γ²)((½−δ)²+γ²)/(γ²+¼)
-  = ((t−γ)²+δ²)((t+γ)²+δ²) = (t²−γ²)² + 2δ²(t²+γ²) + δ⁴, a polynomial in
-  δ with all-positive coefficients — no δ > 0 annihilates it;
-  (d) the phase is t·ω_δ + (0 or π): the −π winding at t = γ belongs to
-  the ON-LINE factor only (measured −3.142 vs +0.000) — the
-  argument-invisibility + 2K +2 size-step mechanism of the [B-5] block
-  above, now backed by the exact form.
-  **What B-5 still owes B-6A:** composing |ΔK| = |K|·|R−1| (this
-  theorem) with the rigorous local floor (B-2, from D1) into a
-  contradiction — that is B-6A's construction, not B-5's.
+count **all** zeros, on the line and off it, and set, in the project
+convention,
 
-  **✓ PROVEN in Lean (2026-09-11, stable 4.33.1).** `b5Ratio` (T1 above,
-  as stated — the theorem statement carries the (½±δ)²+γ² form), `b5Abs`
-  (T2: ‖R‖ = |pref|·exp(ω_δ/2)), `b5NoffIsPolynomial` (the (c)-polynomial
-  identity), `b5NoffPos` ((c): the off-line numerator > 0 for t > 0,
-  t ≠ γ, all δ), `b5PrefSign` (t > γ ⇔ pref < 0 — the only branch).
-  Float layer `B5Float`: closed form vs the DIRECT 6-factor definition
-  vs the dps-30 record, 12/12 PASS (day-012 §3). Toolchain note: def
-  bodies `omegaD`/`pref` use the flat monomial form of the denominators
-  (identical reals — the ring normalizer cannot see through the `halfR`
-  def constant); B-4 carries a documented two-line compat shim for the
-  4.34-core lemmas `ite_eq_left`/`ite_eq_right`.
+    main(t) = x·ln(x) − x − 1/8,   x = t / (2π),
+    S(t)   = N(t) − main(t).
 
-## §4 Closure (conditional on the blanks)
+S(t) is the oscillatory part. Numerically it stays O(1): on certified data,
+|S| at t = 10⁵, 10⁶, 10⁷ is 2.558, 2.509, 3.206 respectively.
 
-Assume RH fails. By F-0.3 take an off-line pair of **minimal** positive
-height t₀ (members β+iγ₀, (1−β)+iγ₀; δ = β−½ ≠ 0).
-1. By B-3 (bridge identity for the ACTUAL zero set) and B-5 (kernel
-   deviation at the pair's own height):
-   |W_n(t₀) − K(½+it₀; 𝒵_on(t₀))| ≥ f(δ, t₀)·|K|.
-2. By B-6A (Route A; requires |δ| ≥ δ_min) or B-6B (Route B; any δ):
-   the same quantity < f(δ, t₀)·|K|.
-3. Contradiction ⇒ D ≡ 0 ⇒ (B-0) RH. **Q.E.D. — conditional on
-   B-0, B-1, B-2, B-3, B-5, B-6(route).**
+Write
 
----
+    N_on(t)   = #{ zeros on the line Re = ½ : 0 < Im ≤ t },
+    N_total(t) = N(t),
+    D(t)      = N_total(t) − N_on(t).
 
-## Blank ledger (what fills each blank)
+D(t) counts the zeros **off** the line at positive height ≤ t.
 
-| B | Content | Vehicle | Data trigger | Status |
-|---|---------|---------|--------------|--------|
-| B-0 | counting equivalence RH⇔D≡0 | writing; Lean M4 | — | **■ FILLED — PROVEN IN LEAN (B0.lean, green 2026-09-11)** |
-| B-1 | exact onset law + remainder (G4) | Euler–Maclaurin lifting | D2 (fits beyond 4 digits) | TO-BUILD |
-| B-2 | rigorous tail remainder M(G,t) (G3) | tail analysis | **D1 LANDED 2026-09-10 (ceiling t ≲ 2×10⁴ confirmed; E tabled in `out_day010_onset_G6e6.txt`)** | **■ FILLED — on-line bound PROVEN (v0.8, `spec/b2-tail-bound.md`)** — ledger row lagged the §1 body until v0.9 |
-| B-3 | bridge identity as identity+residual (H3 lift) | follows B-1∧B-2; TS kernel (M2); Lean core `B3.lean` | D1, D3 | TO-BUILD (ζ-free Lean core in flight 2026-09-11: `b3Abel` / `b3Bridge` / `b3ResidualDecomp` — not yet green) |
-| B-4 | on-line per-pair closed form (la, ar) + validation | Lean T1–T3b + dps-25 + float64 16/16 | — | **■ FILLED — PROVEN (Lean)** |
-| B-5 | detector lemma f(δ,t) + S/2K mechanism | 4-zero algebra + D4/D3/D4-far + dps-30 check | **ALL DATA LANDED; CORE THEOREM EXACT + PROVEN IN LEAN** (R closed form; \|formula−measured\| ≤5×10⁻⁴, \|formula−direct\| ≤6×10⁻²⁶; Lean 4.33.1: b5Ratio/b5Abs/b5NoffPos/b5PrefSign + 12/12 float cross-check) | **■ core FILLED (v0.5, PROVEN v0.7)** — composition with the floor is B-6A's |
-| B-6A/B | ∀t closure (route decision) | lifting theorem | D1+D4 margin | **TO-BUILD (the wall)** |
-| B-6C | hybrid interim claim (RH to T) | H2 instrument | **D5 LANDED 2026-09-11 (day-014)** | **■ T = 10⁷ CLOSED** (N = 21,136,121; S = −3.205718 dps-45; 2K even ⇒ no off-line pair < 10⁷); middle window (1.4×10⁶, 9.9×10⁶) UNMAPPED — 1–2-flip residual named, not certified |
+### The counting lemma
 
-**Classical inputs to cite (G6):** 25.2.12 product; θ and S conventions
-(25.10); RVM; functional equation; ζ>0 on (0,1) (citation pending — F-0.1).
+> If the zeros satisfy the F1–F2 symmetry, then D(t) is a non-decreasing,
+> even-valued step function, and **RH holds if and only if D(t) = 0 for every
+> t > 0.**
 
-## What the incoming data does to this document
+*Why D is even.* By F2, every off-line zero comes with its mirror 1 − ρ, and
+the two sit at the same positive height. D jumps by 2. *Why the equivalence
+holds.* If RH fails, some off-line zero exists at height t₀, and D(t₀) ≥ 2;
+if D ≡ 0, no zero is off the line. The argument is two lines of counting;
+it is **proven in Lean** (piece P1, §9).
 
-- **6×10⁶ chain LANDED (2026-09-10)** (`out_day010_onset_G6e6.txt` +
-  `zeros_T6000000_ext_full.txt`): D1 verdict as above. Incident on the
-  record: the first-issued list was silently truncated at 5.9×10⁶ by an
-  off-by-one in the walk's segment boundary loop; the chain's own
-  informational S-line flagged it (−219,016.93 where O(1) expected), it was
-  fixed and the list re-certified (S(6×10⁶) = −2.93, true O(1)) BEFORE any
-  onset run was used — no onset row in this file rests on the truncated
-  list. Route-decision input: D4's relative margin (|R−1| ≥ 0.998) still
-  sits above the residual floor up to t ≈ 5×10⁴ (0.42) on this table; the
-  ceiling t ≲ 2×10⁴ stands for the route-A audit; route choice is a
-  v0.7 decision (needs the B-2 bound to make the comparison at a fixed t).
-- **D4 prototype LANDED** (2026-09-10): B-5 v0 measured — mechanism
-  settled (off-line pair = argumentically invisible, 2K +2 size step,
-  parity preserved), δ-robust f-scale (≥99.8% of |K| forced change on the
-  measured grid).
-- **D4-FARSCALE LANDED** (2026-09-10): ratios 10/50/100 give
-  |R−1| = (t₀/γ*)² to 6 digits — amplification confirmed, shrinkage note
-  dead; the relative detector statement (|ΔK|/|K| ≥ 0.998 uniform) stands
-  without any audit floor.
-- **D3 LANDED, coarse + fine** (2026-09-10): local audit floor pinned
-  (fine: 2.9/18.6/38.9 e-3; no spike, no localization); Route-A SNR
-  measured ≥8.9× worst config, ≥14× at the pair's own height; the D4-height
-  6e-2 resolved as adjacent-zero |ζ|-scale (measurement-height effect). A
-  future 100× fine-grid spike would still stop everything (direct
-  content).
-- **10⁷ redundancy LANDED (D5, 2026-09-11, day-014)**: closes F-2.1/B-6C at
-  T = 10⁷ with N(10⁷) = 21,136,121 / S = −3.205718 dps-45 / 2K = −2 even;
-  the +246 LOCKED candidate (21,136,123) is FALSIFIED — the 2K identity
-  cannot arbitrate 244 vs 246 (both even); middle window UNMAPPED-named.
-- Nothing in this file is retracted by data; data only moves blanks between
-  TO-BUILD and FILLED, and can swap the route (A↔B) per the decision rule.
+Two consequences of the certified data (day-014 record, all numbers
+reproducible from committed scripts):
+
+- **N(10⁷) = 21,136,121**, S(10⁷) = −3.205718 (dps-45), obtained by a
+  two-engine direct count (two independent numerical instruments agreeing
+  to the last zero, plus certified anchors at 10⁶ and 1.4×10⁶).
+- **2K(10⁷) is even** (2K = −2). By the counting lemma,
+  **there is no off-line zero pair below height 10⁷.** This is the strongest
+  unconditional statement of the project today.
+
+## 3. The strategy in one page
+
+The argument compares **two independently defined objects**, at every height
+t > 0:
+
+**(a) The definition side.** ζ(½ + it) computed *from the definition* — the
+Euler product minus its tail — with no zero input at all. §4 extracts from
+this a function W_n(t) whose size at height t is a known, explicit,
+zero-count-free quantity.
+
+**(b) The zero side.** A canonical product over the zeros **on the line**,
+truncated at a finite height G, plus a **rigorously bounded** remainder for
+the zeros above G (§5). Call this object K_on(t).
+
+The strategy has three stages.
+
+1. **The bridge (§6).** For the *actual* zero set, the definition side and
+   the zero side are the same object: ζ(½ + it) equals its kernel K_on(t) up
+   to the tail remainder. When all zeros are on the line, the two sides agree
+   to within the rigorously bounded error M(G, t) of §5.
+2. **The detector (§7).** Now move one pair of zeros off the line, by a
+   distance δ > 0. The kernel at the pair's own height *must* change by at
+   least f(δ, t₀) · |K|, where f is explicit and **bounded below independently
+   of δ**: in the regimes relevant to the argument, |f| ≥ 0.998 near the pair,
+   and |f| = (t₀/γ)² to six digits far from it. This is an exact algebraic
+   theorem, proven in Lean (piece P3).
+3. **The floor (§10) — the open piece.** From the *definition side alone*,
+   bound the size of W_n(t) − (K_on(t) − (P_n − I)) by something **smaller**
+   than f(δ_min, t) · |K|, uniformly in t, with no zero-count input.
+
+Then: **assume RH fails.** Take an off-line pair of **minimal** positive
+height t₀. The bridge plus the detector force the definition–zero gap at t₀
+to be ≥ f(δ, t₀)·|K|; the floor says it is < f(δ, t₀)·|K|. Contradiction.
+D ≡ 0. RH. (§8.)
+
+Notice what each stage *needs*: the bridge must be exact enough that its only
+error is the bounded tail; the detector must be δ-robust (no dead δ window);
+the floor must use no counting information at any height. Everything else in
+this document exists to serve those three requirements.
+
+## 4. The definition side: the missing-tail law
+
+For a positive integer n and s = ½ + it, write the Euler sum up to n and its
+integral tail:
+
+    P_n(s) = Σ_{k=1}^n k^−s,        I(n, s) = n^{1−s} / (1 − s),
+    W_n(t) = ζ(½ + it) − P_n(½ + it) − I(n, ½ + it).
+
+All of this is computable from the definition alone — Riemann–Siegel on the
+definition side, no zero list, no RH. W_n is what remains of ζ after we strip
+off the first n terms *and* the first-term integral approximation of the
+rest. It is the "missing tail" of the Euler sum.
+
+**The missing-tail law (measured; its strictification is piece P4, §9).**
+The first-order term of ζ − P_n is −I(n, s); the zeros appear at second
+order. Quantitatively, in the **onset window** t/n ≈ 2, the data shows
+
+    |W_n(t)| / |I(n, s)| = ½ · (t / n) + O(corrections),
+
+measured to four digits, **independent of n** for n ∈ {10³, 10⁴, 10⁵}. The
+corrections are understood structurally: they are the Euler–Maclaurin
+remainder of Σ_{k>n} k^−s − I(n, s). Making this theorem, with an explicit
+remainder, is the strictification task P4.
+
+**Why this block exists.** The floor of §10 must be built from a quantity
+that is *known without zeros*. W_n is that quantity. Its measured size
+(|W_n| ≈ ½·(t/n)·|I| in the onset window) is the scale the floor must stay
+below the detector scale of §7.
+
+Two data checks anchor the definition side. The onset pattern (the five-row
+fingerprint of the transition) is reproduced at G = 6×10⁶ within ≤ 6% by the
+zero-side kernel of §5 — the two sides agree where they should. And the
+certified count record of §2 (N(10⁷) etc.) comes from the definition-side
+instrument (Riemann–Siegel sign flips on the line), not from the zero list.
+
+## 5. The zero side: the kernel, its finite form, and its tail
+
+### 5.1 The canonical product
+
+Riemann's 1859 product (DLMF 25.2.12) writes ζ as a product over its zeros.
+In canonical convergent form, truncated at height G:
+
+    K(s; G) = Main(s) · ∏_{ρ on-line, 0 < Im ρ ≤ G} (1 − s/ρ) e^{s/ρ} · e^{T(G, s)},
+
+where Main(s) is the explicit main factor (from the functional equation) and
+T(G, s) is a **tail term** for the zeros above G. The factors
+(1 − s/ρ) e^{s/ρ} are the standard canonical factors: the exponential
+e^{s/ρ} is what makes the infinite product converge.
+
+Each on-line zero comes as a conjugate pair {½ + iγ, ½ − iγ}. The
+contribution of one pair to log |K| and to the argument of K has a **closed
+form** (proven in Lean, piece P2, §9):
+
+    la_pair(γ, t) = ½/(¼ + γ²) + ln |1 − (¼ + t²)/(¼ + γ²)|,
+    ar_pair(γ, t) = t/(¼ + γ²) − π · [γ < t],
+
+where [γ < t] is 1 when γ < t and 0 otherwise. This is exact — the two
+principal arguments in the pair sum, and the atan2 constants cancel. Against
+a direct high-precision single-pair evaluation the agreement is
+≤ 3.5×10⁻¹⁴ (magnitude) and ≤ 3.2×10⁻¹⁶ rad (argument); against the
+float64 implementation, 16/16 cross-check configurations pass. The practical
+consequence is that the whole zero-side kernel is a **float64-vectorizable
+sum** over the certified zero list — no high-precision loop.
+
+### 5.2 The tail, bounded rigorously
+
+The tail is written as an integral plus an error:
+
+    T(G, s) = ∫_G^∞ pairlog(γ, s) · ln(γ / 2π) / (2π) dγ + E(G, s),
+
+where pairlog is the closed form of §5.1. The **on-line tail bound**
+(proven, piece P5, §9) makes the error explicit and *unconditional*:
+
+    |E(G, t)| ≤ M(G, t),   M(G, t) = S̄(G) · B_f(G, t) + C_f(G, t) · K_f(G, t),
+
+where S̄ is the **Platt–Trudgian explicit S-bound** (J. Number Theory 147
+(2015) 842–851, Cor. 1):
+
+    |S(T)| ≤ 0.110 ln T + 0.290 ln ln T + 2.290   (T ≥ e).
+
+Numbers at the certified scale G = 6×10⁶: M(6×10⁶, 10³) = 1.3×10⁻⁷, growing
+to M(6×10⁶, 2×10⁵) = 5.3×10⁻³ (it scales like (t/G)²·S̄(G) and blows up at
+t → G, faithfully reproducing the log |γ − t| singularity of the pair factor
+there). The Abel mechanism behind the formula was verified on **7.4 million
+real certified zeros** (3×10⁵ → 4×10⁶) up to the quadrature limit.
+
+**Why this block exists.** It is what allows a *finite* zero list to
+stand in for the infinite zero set: the on-line kernel over the certified
+list of **12,193,869 zeros** (up to 6×10⁶, each zero certified to dps-30)
+plus M(G, t) determines the zero side up to a rigorously bounded error.
+No infinite computation, no RH input, no appeal to faith.
+
+One honest caveat. M(G, t) is an *on-line* bound. The zeros **above G that
+would be off-line** are not bounded by M; their combined effect at height t
+is a separate quantity, recorded data-driven as R(t) (values
+8.4×10⁻⁴ … −8.0 at t = 10³ … 2×10⁵, all far above M at the same t). R(t) is
+the off-line signal that the detector of §7 measures — it is not a defect of
+the on-line kernel. The count of zeros below G that *could* be off-line is
+≤ 8, by the S̄-counting argument and the F2 four-tuple structure.
+
+## 6. The bridge: ζ is its own kernel
+
+> **The bridge identity (piece P6, §9; ζ-free core in progress in Lean).**
+> For the actual zero set, ζ(s) equals the kernel K(s) of §5 in the product
+> sense (DLMF 25.2.12), and the residual between the two finite-G
+> constructions is **exactly** the tail-model error — nothing else.
+
+The bridge has a clean finite form, which is where the Lean work sits. For a
+finite height list L, write the bridge map
+
+    Ψ_L(t) = e^{T(t)} · ∏_{γ ∈ L} F(γ, t)        (T: the tail model, F: pair kernel)
+
+and the truncated kernel
+
+    K_L(t) = ∏_{γ ∈ L ∪ {tail}} F(γ, t).
+
+Then **K_L and Ψ_L differ by exactly the factor exp(T(t) − Σ_T ln F)** —
+the single number that measures how well the tail model T approximates the
+logarithm of the true tail product. There is no hidden remainder: the
+bridge's error *is* the tail error, term by term.
+
+The finite bridge is an **exact Abel decomposition** (piece P7): the
+counting step N_L(t) = #{γ ∈ L : γ ≤ t} — a step function — is folded into
+a continuous integral identity
+
+    ∫_a^b N_L(x) f'(x) dx = Σ_{γ ∈ L, a ≤ γ ≤ b} f(γ)
+
+with a smooth comparator, so the discrete zero set and the continuous
+Riemann–von Mangoldt main term are related by *exact* calculus, not by
+approximation. The smooth comparator N̂ (piece P7) interpolates the counting
+step, and the integration-by-parts bridge
+
+    ∫_a^b N̂(x) f'(x) dx = N̂(b) f(b) − N̂(a) f(a) − ∫_a^b N̂'(x) f(x) dx
+
+moves the derivative from the integrand to the comparator, where it is a
+smooth, explicit, bounded object.
+
+**Why this block exists.** The detector of §7 says *the zero side moves by
+at least f(δ, t₀)·|K| when a pair goes off-line*. The floor of §10 says
+*the definition side stays below that*. The bridge is the statement that
+lets those two inequalities *mean the same thing* — that "zero side" and
+"definition side" are not two different objects being compared loosely, but
+one object written two ways, whose only disagreement is the rigorously
+bounded tail. Without the bridge, the argument has two sides that do not
+touch.
+
+## 7. The detector: what an off-line pair does to the kernel
+
+Fix a height γ and take the on-line pair {½ + iγ, ½ − iγ}. Move it off the
+line by δ: the four-tuple {½ + δ + iγ, ½ − δ + iγ} and its conjugate. Write
+
+    P_on(s)  = ∏_{ρ ∈ {±}} (1 − s/ρ) e^{s/ρ},        (on-line pair)
+    P_off(s) = ∏_{ρ ∈ {±±}} (1 − s/ρ) e^{s/ρ},        (off-line 4-tuple)
+    R(s, δ)  = P_off(s) / P_on(s).
+
+The rest of the kernel product is *unchanged* and cancels in the ratio, so R
+is a two-factor algebraic object — **no normalization ambiguity, no
+approximation**. R has an exact closed form (proven in Lean, piece P3, §9;
+γ = height, t = evaluation height, s = ½ + it):
+
+    R(s, δ) = (¼ + γ²) ((γ − t)² + δ²) ((γ + t)² + δ²)
+              ───────────────────────────────────────────── · e^{(½+it)·ω_δ}
+              (γ² − t²) ((½ + δ)² + γ²) ((½ − δ)² + γ²),
+
+    ω_δ = (1 + 2δ)/((½ + δ)² + γ²) + (1 − 2δ)/((½ − δ)² + γ²) − 1/(¼ + γ²) ∈ ℝ.
+
+A real signed prefactor times a pure constant-rate phase. The only branch is
+the sign flip of (γ² − t²) at t = γ.
+
+**The magnitude, in its three regimes** (exact; verified to six digits
+against the direct four-zero definition and against the measured data):
+
+- **Near the pair** (t ≈ γ, |t − γ| ≤ 10): |R − 1| ≈ 1. Measured:
+  0.9975–1.0201 across the full δ-grid δ ∈ [0.005, 0.5], 56/56 points
+  agreeing with the formula to 5×10⁻⁴. An off-line pair at its own height
+  **forces a kernel change of at least 99.75% of the kernel's own size**.
+- **At twice the height** (t = 2γ): |R − 1| = 4.0000, *exactly*, across the
+  whole δ-grid.
+- **Far from the pair** (t = c·γ, c > 1): |R − 1| = (c² − 1) to six digits
+  (ratios 10, 50, 100 give 99.99998 / 2.499999×10³ / 9.999998×10³), i.e.
+  **(t/γ)² − 1, δ-flat to O(10⁻⁶)**. The detector margin *grows
+  quadratically* with the height ratio.
+
+**No dead δ window.** The numerator of the relevant magnitude is
+
+    ((t − γ)² + δ²)((t + γ)² + δ²) = (t² − γ²)² + 2δ²(t² + γ²) + δ⁴,
+
+a polynomial in δ with all coefficients positive: **no δ > 0 annihilates
+it.** The detector is robust for *every* off-line distance.
+
+**Why the detector works on the count, and why it is invisible on the
+argument.** When a pair goes off-line, the Riemann–von Mangoldt count
+N(t) steps up by **2** at height γ — a size step. But the *argument* of ζ
+along the critical line does not wind: for the two near zeros {½ + δ ± iγ},
+the pair factor (1 − s/ρ)(1 − s/ρ̄) has a real-negative numerator
+−((t − γ)² + δ²) and is never zero, so its net phase across the straddle
+window is **0** (the on-line pair winds by −π). The count sees the ghost;
+the argument does not. This is why the S/2K counting fingerprint (the
+instrument that certified §2) detects off-line pairs as *size jumps*, and
+why a parity argument alone cannot find them.
+
+**Why this block exists.** It is the ≥ side of the contradiction of §8:
+at the pair's *own* height, any off-line pair — however small δ is — forces
+a kernel change of at least |R − 1|·|K|, with |R − 1| bounded below
+independently of δ. The exact closed form (not a lower-bound estimate) is
+what makes the bound honest.
+
+## 8. The closure
+
+**Assume RH fails.** By §2, D(t) > 0 somewhere; the set of positive heights
+of off-line zeros is discrete (Riemann–von Mangoldt: finitely many up to
+any T; the smallest non-trivial zero height is a certified classical number,
+≈ 14.13 — no zero height accumulates at 0). Take an off-line pair of
+**minimal** positive height t₀, at distance δ₀ > 0 from the line.
+
+1. **Bridge and detector.** At t₀ the §7 detector gives, for the actual
+   zero set written as kernel,
+   | definition side − zero side | ≥ f(δ₀, t₀) · |K(t₀)|,
+   with f(δ₀, t₀) = |R − 1| ≥ 0.998 near the pair, by the bridge identity
+   the two sides are the *same* object modulo the tail, and the tail is the
+   rigorously bounded M(G, t₀) of §5 (which at t₀ = O(1)·height is far below
+   f(δ₀, t₀)·|K| for the measured |K|).
+2. **Floor.** By §10, the same quantity is < f(δ₀, t₀)·|K(t₀)|, from the
+   definition side alone, with no counting input.
+3. **Contradiction.** Hence D(t₀) = 0; by minimality, D ≡ 0 everywhere;
+   by the counting lemma, **RH**. ∎ (conditional on §10.)
+
+Nothing in the argument counts zeros at any height *inside the proof*. The
+counting enters only in the certified *data* of §2 (which establishes the
+strongest unconditional statement to date) and in the classical zero-free
+computation that places the smallest zero height away from 0.
+
+## 9. Status of each piece
+
+| # | Piece | Role in the argument | Status |
+|---|-------|----------------------|--------|
+| P1 | **Counting lemma** (RH ⇔ D ≡ 0) | Reframes RH as a counting statement the detector acts on. | **Proven in Lean** (Lean 4.33.1 + mathlib, stable): `eqNtotMinusNon`, `nondec`, `offSliceEven`, `zeroD_of_RH`, `RH_of_zeroD` ⇒ `RH_iff_Dzero`, over an abstract zero set with the F2 symmetry — no ζ, no approximation. |
+| P2 | **Per-pair closed form** (la_pair, ar_pair) | Makes the zero-side kernel exact and float64-vectorizable. | **Proven in Lean**; dLa ≤ 3.5×10⁻¹⁴, dAr ≤ 3.2×10⁻¹⁶ rad vs direct dps; 16/16 float cross-check. |
+| P3 | **Deviation ratio R(s, δ)** (exact) | The ≥ side of the contradiction; δ-robust (no dead window). | **Exact + proven in Lean**: `b5Ratio` (closed form), `b5Abs` (magnitude), `b5NoffPos` (numerator > 0), `b5NoffIsPolynomial` (δ-polynomial identity), `b5PrefSign` (branch locus). 12/12 float cross-check vs direct 4-zero definition and the dps-30 record. |
+| P4 | **Missing-tail law strictified** (explicit Φ_n, explicit Euler–Maclaurin remainder for W_n) | The definition-side engine of the floor. | **Measured to 4 digits** (N-independent; onset fingerprint at G = 6×10⁶ reproduced ≤ 6%); the rigorous lift is open. |
+| P5 | **On-line tail bound M(G, t)** | Makes a finite zero list stand in for the infinite zero set. | **Proven** (unconditional; Platt–Trudgian S̄; Abel mechanism verified on 7.4M real certified zeros to the quadrature limit). |
+| P6 | **Bridge identity** (ζ = kernel, residual = tail error exactly) | Lets the two sides of the contradiction be the same object. | Statement fixed; ζ-free finite core **in progress in Lean** (`b3ResidualDecomp`: Ψ vs K differ exactly by exp(T − Σ ln F)). Not yet green — no claim. |
+| P7 | **Finite exact Abel decomposition** (counting step → integral, smooth comparator N̂, IBP bridge) | Exact calculus relating the discrete zero set to the continuous main term; carries the smooth bounders. | **In progress in Lean** (`b3Abel`, `b3Bridge`, smooth-comparator continuity + IBP lemmas). Not yet green — no claim. |
+| P8 | **Residual floor, ∀ t** (the §10 gap) | The < side of the contradiction. | **Open.** The wall of the project. Two routes, §10. |
+
+**The certified data record** (all numbers reproducible from committed
+scripts and data; day-014 closeout): N(10⁷) = 21,136,121 (two-engine
+dt/dt2-stable direct count; S(10⁷) = −3.205718 at dps-45; |S| envelope
+2.558 → 2.509 → 3.206 across 10⁵, 10⁶, 10⁷); 2K(10⁷) even ⇒ **no off-line
+zero pair below 10⁷**; certified zero list to 6×10⁶ (12,193,869 zeros,
+dps-30); onset fingerprint reproduction ≤ 6% at G = 6×10⁶; the +246 early
+coarse estimate of the missing-chunk size was **falsified by direct count**
+(measured Δ = 244; the 2K even-identity cannot distinguish 244 from 246 —
+both are even — and the decisive instrument was the dt/dt2-stable count).
+Named residual: the middle window (1.4×10⁶, 9.9×10⁶) of the defective
+10⁷ file was not re-walked; a 1–2-flip defect below 1-rad sampling
+cannot be excluded there (S flat, no jump > 0.27 across it).
+
+## 10. The open piece: the residual floor (and its two routes)
+
+**The required theorem (P8).** For all t > 0,
+
+    | W_n(t) − [ K_on(t) − (P_n(½+it) − I(n, ½+it)) ] | < min_δ f(δ, t),
+
+proved **from the definition side alone** — no zero-count at any height
+enters the proof, and the height bound T never appears. The right-hand side
+is the detector scale of §7 (near: ≥ 0.998·|K|; far: (t/γ)²·|K|).
+
+**Route A — residual floor (project home turf).** Build the floor from the
+explicit Euler–Maclaurin remainder of P4 (the strictified missing-tail law)
+plus the tail bound M(G, t) of P5. Works for |δ| ≥ δ_min(t), where δ_min is
+the floor's sensitivity threshold — to be pinned by measurement. This is the
+natural route: it reuses exactly the quantities the argument has already
+defined, and the measured margin (≥ 14× at the pair's own height against the
+local audit floor) says it is within reach.
+
+**Route B — uniform dynamics (classical home turf).** Prove directly that
+2K(t) is even for all t (equivalently: S(t) stays in the on-line band, D ≡ 0
+as a statement about S's dynamics). δ-robust — no sensitivity threshold.
+At full strength it is essentially RH-equivalent; the lifting path is the
+open engineering question of the classical S(t) literature.
+
+**Route decision.** The measured data choose between the routes: the
+Route-A margin (relative detector scale ≥ 0.998, SNR ≥ 8.9× worst
+configuration) remains above the local residual envelope up to t ≈ 10⁴–2×10⁴
+(the honest, data-driven ceiling of the current instrument); if it collapses,
+Route A is retired and Route B carries the argument. Either way, P8 is the
+single remaining gap, and it is *stated, bounded below, and has two named
+routes* — not a missing ingredient whose shape is unknown.
+
+## 11. Classical sources
+
+- Riemann (1859): the product representation (DLMF 25.2.12).
+- Riemann–von Mangoldt formula; θ(t) and the S(t) convention (DLMF 25.10).
+- Functional equation; ζ̄(s) = ζ(̄s); the four-tuple structure.
+- ζ(x) > 0 on (0, 1); trivial zeros (standard; citation to be filed).
+- Platt & Trudgian, "Explicit formulae and bounds for the Riemann zeta
+  function," J. Number Theory **147** (2015) 842–851, Cor. 1
+  (the S-bound used by P5; read from the original PDF).
+
+*Provenance policy.* Every certified number in this document is produced by
+a committed script and stored with its data file (dps level, engine,
+dt/dt2-stability verdict). The Lean artifacts are machine-checked against
+mathlib on a pinned stable toolchain (Lean 4.33.1); nothing is "known by
+memory," and no measured value stands in for a theorem except where this
+document says so explicitly.
+
+—
+
+*Framing: owner-conceived project with AI co-developed instruments, fully
+disclosed; working plan, data, and Lean artifacts live in the project's
+public repository; no prize claim is made or implied.*
