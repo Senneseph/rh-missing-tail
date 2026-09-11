@@ -356,3 +356,48 @@ Combining: the staged skeleton (§2.9) + the formal instrument
 tail model and the A/B route) and the final 10⁷ redundancy (closes
 §2.5's last slot). Next entry is written when the first of those
 lands.
+
+---
+
+## 5. The 10⁷ redundancy lands — and the LOCKED candidate falls (2026-09-11)
+
+*Supersedes §4's in-flight list (both slots now landed: the G = 6×10⁶ chain,
+day-010/11, and the final 10⁷ redundancy). Entry written because an
+evidence file landed — and because this is the log's contradiction case.*
+
+**The contradiction (the log's own purpose).** The pre-registered LOCKED
+candiate for the dead-chunk size was **+246** (a coarse |ΔS| estimate from
+the S-plateau, never a direct count). The completed re-walk (PID 1142170,
+~23 CPU-h, exited 2026-09-10 20:22 local; record
+`scripts/rh/out_day006_early_rewalk.txt`) **measured +244**. Both are even —
+and that is the honest wall: the 2K even-identity **cannot arbitrate 244
+vs 246 at any precision** (N enters mod 2; 2K = −2 and 2K = 0 are both
+even; the dps-45 principal-arg test passes both families, dist ≤ 2.3×10⁻⁹).
+The arbiter is the dt/dt2-stable direct count, doubly confirmed: the
+re-walk's window (10⁶, 1.4×10⁶] count **773,829** is independently
+reproduced to the last zero by the day-009 6e6 GPU zero list (same window,
+same count, different engine).
+
+**Certified (day-014 record; replaces all DEFECTIVE 1e7 numbers).**
+N(10⁷) = **21,136,121** · S(10⁷) = **−3.205718** (dps-45) · 2K even ⇒
+**no off-line zero pair below 10⁷**. Dead chunk located precisely:
+(10⁶, 1,000,128], Δ = 244 flips, 128 rad (the early "~1.06×10⁶ plateau"
+localization is revised). Named residual: the middle window
+(1.4×10⁶, 9.9×10⁶) was not re-walked — a 1–2-flip defect below 1-rad
+sampling is not excluded there (S flat, no jump > 0.27).
+
+**Logged bug (P-0.9).** The pre-staged verifier `day005h_verify_1e7.py` was
+broken two ways and had never run to completion (payload concatenated into
+source; principal-arg where the identity only has principal-arg strength).
+Fixed (`day005h_mp.py` companion); the buggy first run is kept as
+`out_day014_dps45_d244.BUGGY-verified-gamma-arg.txt`. The code-beats-
+memory rule worked, and the broken check cost exactly the one re-check the
+owner demanded before trusting the number.
+
+**Repository structure (same day).** The Lean package now **lives in this
+repository** (`formal/rh-lean/`, source of record; the kainos-logos path is
+a symlink) — `formal/RH-LEAN-PROVENANCE.md`; the proof path was rewritten as
+a public linear exposition with named pieces P1–P8 (`docs/RH-PROOF-OUTLINE.md`,
+byte-identical with the working-repo source of record); every Lean file
+carries a purpose header (what it is / role / status); reference material
+moved to the working repo (`kainos-logos/references/`).

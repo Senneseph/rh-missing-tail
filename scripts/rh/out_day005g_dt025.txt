@@ -1,0 +1,5 @@
+window      : [9900000, 10000000]
+coarse dt=0.0005: 227197 sign flips in window
+fine   dt=0.00025: 227197 sign flips in window
+count agreement: STABLE (exact agreement)
+vartheta/pi @ 9.9e6 = 20908927.312166   @ 1e7 = 21136124.205718

@@ -26,6 +26,20 @@ document needs, so only the referential subset ships.
   | `zeta_core.py` | the validated float64 Z(t) engine (Riemann–Siegel) |
   | `out_*.txt` | the raw dps outputs the tables quote, verbatim |
 
+  **The 10⁷ closeout set (day-014; backs `results/certified-zero-survey.md` v1):**
+
+  | file | produces / backs |
+  |---|---|
+  | `day006_early_rewalk.py` + `out_day006_early_rewalk.txt` | the independent CPU re-walk (10⁶, 1.4×10⁶] — 773,829 flips, dt/dt2-EXACT; dead chunk (10⁶, 1,000,128], Δ = 244 |
+  | `day009b_zero_walk_1e5_6e6_gpu.py`, `day010_ext6e6_supervisor.sh`, `chain_verify_6e6.py` | the second engine: the 6×10⁶ GPU zero walk + supervisor + chain verification (its same-window count, 773,829, is the independent confirmation) |
+  | `day005g_dt025_window.py` + `out_day005g_dt025.txt` | the tail re-walk (9.9×10⁶, 10⁷] — 227,197 = 227,197 EXACT |
+  | `day014_dps45_arg1e7.py` + `out_day014_dps45_arg1e7.txt` | the dps-45 principal-arg parity layer at the four certified heights (both +244 and +246 families pass — recorded as the honest wall that parity cannot arbitrate them) |
+  | `day005h_verify_1e7.py` + `day005h_mp.py` | the pre-staged M3 verifier, broken two ways, then fixed (companion) — the P-0.9 bug log entry |
+  | `out_day014_dps45_d244.BUGGY-verified-gamma-arg.txt` | the broken verifier's first run, kept verbatim as provenance |
+
+  (The 6×10⁶ list itself is a multi-MB data artifact of the working repo;
+  the snapshot ships the scripts, not the list.)
+
 - `rh-ts/` — the TypeScript zero-finder stack (`n → ρₙ = ½ + iγₙ`): the
   Riemann–Siegel engine port, the Riemann–von Mangoldt bracket, the
   certified twin-floor walk, and the bisection — plus all tests. Strict

@@ -1,11 +1,8 @@
-# RH-OUTLINE — preliminary outline & proof scaffold
-
 > **MIRROR — a planning artifact, not a result.** Source of record:
 > `kainos-logos` `plan/40-prize-islands/rh-attack/RH-OUTLINE.md`,
-> synced from repo head `4633916` on 2026-09-10 (content v0.1).
+> re-synced 2026-09-11 (content v0.1; prior sync 2026-09-10 from head `4633916`).
 > No edits here — updates propagate only by explicit copy from the
 > source repo (PLAN.md, "Staged proof scaffold"). NOT a proof. No claim.
-
 
 **Status: SCAFFOLD v0.1 (2026-09-10).** Not a proof. No claim. Every item is labeled
 MEASURED / CLASSICAL / INFERENCE / TO-BUILD. Built to be re-opened: §4 lists exactly

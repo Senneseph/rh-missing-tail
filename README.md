@@ -4,11 +4,13 @@
 they generate, the onset at which zero content first enters the budget —
 and a separation program with explicit falsifiers.**
 
-*Preliminary note, staged experimental program · v0 · 2026-09-09.
-Status: stages 0–1 PASS, stage 2 certified to 10⁶ **with no ghosts**, stage 3
-in progress. This is a note to mathematicians, not a claim. Every number
-has a script (in the working tree, §Materials), a precision label, and a
-named raw output.*
+*Preliminary note, staged experimental program · v0 · 2026-09-09;
+2026-09-11 update: stage 2 is now certified to **10⁷ — no off-line zero pair
+below 10⁷** (`results/certified-zero-survey.md`, v1); the proof path is
+written for a reader in `docs/RH-PROOF-OUTLINE.md`; the machine-checked core
+**lives in this repository** at `formal/rh-lean/`. This is a note to
+mathematicians, not a claim. Every number has a script (in the working tree,
+§Materials), a precision label, and a named raw output.*
 
 ---
 
@@ -24,7 +26,7 @@ violation of the width laws, no unexplained S growth. Fingers crossed.
 |---|---|---|---|
 | **0 — Instrument** | H0: dual float64 stack + dps oracle + twin-floor protocol certify their own counts (no systematic error) | dt/2 stability re-walks; two-engine agreement; measured chunk reliability | **PASS** — reliability model measured (1 dead chunk in ~70,000) with demonstrated detect-and-correct pipeline; Day-007 port-as-audit bonus (a TS port caught a ψ‴ defect in the float engine, dps-verified and fixed) |
 | **1 — Identity & ladder** | H1: the Dirichlet tail is a *flat action*; the series-side laws (D = −P, the M₁ tables, the symmetries) are universal | E7a identity at dps-50 on generic paths; E2-exact: 18/18 phases at 1e-10, zero fits | **PASS** |
-| **2 — Counterexample search** | H2: if RH fails below T, the certified walk finds it (off-line pair ⇒ 2K jump; S growth beyond O(1)) | GPU walk dt = 5×10⁻⁴ + dt/2 stability endpoints + dps-40 2K/S certificate | **10⁶ certified: no ghosts.** 10⁷ in progress |
+| **2 — Counterexample search** | H2: if RH fails below T, the certified walk finds it (off-line pair ⇒ 2K jump; S growth beyond O(1)) | GPU walk dt = 5×10⁻⁴ + dt/2 stability endpoints + dps-40 2K/S certificate | **10⁶ and 10⁷ certified: no off-line zero pair below 10⁷** (day-014 closeout: N(10⁷) = 21,136,121, S = −3.205718 dps-45, 2K even — the early +246 estimate was falsified by the two-engine direct count; `results/certified-zero-survey.md`) |
 | **3 — Zero-side identification** | H3: the measured onset C *is* the zero-side explicit-formula budget (the Riemann-1859 zero product, not just the nearest zero) | E7b: predict the 4-digit onset law from the zero product over the certified list + analytic tail; E5: the zero-sum in missing-tail language | **Stage 1 complete (2026-09-09):** zero-side product kernel reproduces the 4-digit onset points — N=10³, t/N=1: +0.29%; N=10⁴, t/N=0.1: −1.2% (two borderline +4/+6%); the rest lie below the quantified zero-side error floor (density tail saturates once G ≫ t). The N=10⁵ row needs G ≳ 5–6×10⁶ — deferred, on demand |
 | **4 — Generalization** | H4: the width laws extend beyond odd-prime quadratic cells (even-modulus antipodal structure; F₂₄ non-multiplicative) | τ₁₂ (2×4×3) exact table; F₂₄ front/back raw + M₁; E6 F₂₄ rolling invariants | **τ₁₂ + F₂₄ measured** (antipode sign-flip vs near-identity — two cell classes, two laws); q = 17 table in §8 (third odd modulus, all integers, mirror + trace exact) |
 | **5 — Reduction (not claimed)** | If H3 passes: RH ⟺ no off-line pair ∀t, with the zero side pinned to the explicit-formula kernel | E5 bridge + structural write-up | **Not run. Not claimed.** |

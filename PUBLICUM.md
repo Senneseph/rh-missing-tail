@@ -148,3 +148,41 @@ repository's standing position: a prize, if one were ever in order,
 is not claimed from these pages; what is offered is a reproducible,
 labeled, self-auditing trail with a measured core and a written path
 to the open step.
+
+
+---
+
+## Update — 2026-09-11
+
+Three things moved since this digest.
+
+**The certified height went tenfold — and the prediction was caught
+making a mistake.** The independent re-walk of the 10⁷ walk finished: it
+measured **244** missing zeros in a dead chunk at the very start of the
+window, not the 246 the coarse early estimate had locked in. Both numbers
+are even, which means the parity test *cannot* tell them apart — by
+design, not by accident — so the decision came from the two independent
+direct counts, which agree to the last zero on both windows. The
+certified record: **N(10⁷) = 21,136,121** (S = −3.205718, dps-45), and
+therefore **no zero off the critical line below height 10⁷** — the
+strongest unconditional statement of the project. The pre-registered
+246 was wrong, it was caught by the instrument before it became a claim,
+and the capture is logged with the buggy first run kept on file. That is
+the operating procedure this repository is built around.
+
+**The path is now written as a path.** The proof document
+(`docs/RH-PROOF-OUTLINE.md`) has been rewritten to be read linearly: the
+hypothesis, the counting language, the two independently defined objects,
+the bridge that makes them one, the detector that measures what a
+wayward pair must do, and the closure. Each piece has a name (P1–P8), a
+stated role, and an honest status. Seven of the eight are proven,
+machine-checked, or classical-with-citation; the eighth — the residual
+floor — is the single open gap, stated with its two named routes. This is
+a complete argument skeleton, not a completed proof, and the document
+says so on its first page.
+
+**The machine-checked core moved home.** The Lean package now lives in
+this repository (`formal/rh-lean/`), every file in it describes itself up
+top (what it is, what role it plays, what state it is in), and a fresh
+machine can rebuild and re-run the cross-check gate in minutes (`lake
+build && lake exe rhattack`).
