@@ -76,7 +76,8 @@ form used in the B-3 repair has a probe behind it.
 
 | Path | What it is |
 |---|---|
-| `references/LEAN4-4331-QUICKREF.md` | The pinned-API quick reference this repair runs on (day-014 pinned facts, exact file:line sources). |
+| (kainos-logos) `references/LEAN4-4331-QUICKREF.md` | The pinned-API quick reference this repair runs on (pinned facts, exact file:line sources). Lives in the **kainos-logos** working repo, not in this public one. |
+| (reproducible) `.lake/packages/mathlib` | Working mathlib source for the "no guess — read the pinned source" discipline: the gitignored lake cache, reproduced exactly by the `lean-toolchain` pin below (Lean core likewise comes from the toolchain install — no copies are kept in this repo). |
 | (kainos-logos) `references/official-lean4-docs/` | The official Lean 4 reference (tactic language, tactic reference, proofs chapter) + book chapters, `curl`-pinned as text. Lives in the **kainos-logos** working repo (gitignored local references), not in this public one. |
 | `lean-toolchain` | `leanprover/lean4:v4.33.1` (stable pin). |
 | `lakefile.toml` | Package `rhattack` (lib + exe). |
