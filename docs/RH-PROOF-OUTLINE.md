@@ -1,6 +1,6 @@
 # RH-PROOF-OUTLINE — full proof skeleton with numbered blanks
 
-**Status: DRAFT PROOF SKELETON v0.7 (2026-09-11).** v0.7: **B-5 CORE now
+**Status: DRAFT PROOF SKELETON v0.9 (2026-09-11).** v0.9: **BOOKKEEPING PASS (no mathematical change)** — ledger/labels reconciled with the v0.8 body: (a) **B-0 counting equivalence ■ FILLED — PROVEN IN LEAN** (`RhAttack/B0.lean`, green on stable 4.33.1, re-verified 2026-09-11: `eqNtotMinusNon`, `nondec`, `offSliceEven`, `zeroD_of_RH`, `RH_of_zeroD` ⇒ `RH_iff_Dzero` over an abstract zero set, no-ζ convention) — the §0 [B-0] block and ledger row still said TO-BUILD. (b) B-2's ledger row set to FILLED — it lagged the §1 body, which v0.8 already marked **ON-LINE TAIL BOUND PROVEN**. (c) B-3's ledger row now records the ζ-free Lean core in flight (`B3.lean`: `b3Abel` / `b3Bridge` / `b3ResidualDecomp` — not yet green, status unchanged). Mirror re-synced byte-identical. v0.8: **B-2 ON-LINE TAIL BOUND PROVEN** — `spec/b2-tail-bound.md`: |E(G,t)| ≤ M(G,t) = S̄(G)·B_f + C_f·K(G), S̄ = the Platt–Trudgian unconditional explicit S-bound (J. Number Theory 147 (2015) 842–851, Cor 1, read from the original PDF); M(6×10⁶, 10³) = 1.3×10⁻⁷ … M(6×10⁶, 2×10⁵) = 5.3×10⁻³; Abel mechanism verified on 7.4M real certified zeros. The D1 E-column is RE-LABELED: it is R(t) = the off-line zero-set factor beyond G (robust recompute: 8.4×10⁻⁴ / 8.5×10⁻² / 3.5×10⁻¹ / 2.98 / −0.33 / −8.0 at t = 10³…2×10⁵, all ≫ M at the same t) — the §2 detector's off-line signal, not on-line model uncertainty (≤ M). The honest ceiling (t ≲ 10⁴–2×10⁴) stays data-driven; off-line zeros below G ≤ 8 (count ± S̄, 4-tuples). v0.7: **B-5 CORE now
 PROVEN in Lean** — `b5Ratio` (T1 exact ratio), `b5Abs` (T2), `b5NoffPos`,
 `b5PrefSign`, `b5NoffIsPolynomial`, in `scripts/rh-lean/RhAttack/B5.lean`,
 with the 12-config float64 cross-check wired into `Main.lean` (worst
@@ -32,9 +32,10 @@ digit; |formula−direct| 6×10⁻²⁶); see `out_day010_b5core_check.txt`.
 NOT a proof. No claim. Every step is labeled **MEASURED** / **CLASSICAL** /
 **TO-BUILD** / **■ filled**.
 
-**Mirror:** `rh-missing-tail` `docs/RH-PROOF-OUTLINE.md` (synced 2026-09-10,
-v0.5 @ 9b848df). Propagate by explicit copy after commit — never edit
-the mirror locally.
+**Mirror:** `rh-missing-tail` `docs/RH-PROOF-OUTLINE.md`
+(re-synced 2026-09-11, v0.9, byte-identical. The previous note — "synced
+2026-09-10, v0.5 @ 9b848df" — was already stale: the copy actually sat at v0.7.
+Propagate by explicit copy after commit — never edit the mirror locally.
 Blanks are `[B-n]` with exact statements; the blank ledger at the end maps each to
 its data trigger. Companion: `RH-OUTLINE.md` (state + strategy + triggers D1–D5).
 Discipline: formulas only from `FORMULAS.md` (ledger); certified numbers carry
@@ -62,11 +63,13 @@ script+data provenance (P-0.9).
   definition (no zero input — the project float engine, dps-corrected);
   Z(t) = e^{iθ(t)}ζ(½+it) real between its zeros; N_on(t) = #{Z zero: 0<γ≤t}.
   Both N_total and N_on are definable functions of ζ alone.
-- **[B-0]** (TO-BUILD, LOW) Counting equivalence:
+- **[B-0]** (**■ FILLED — PROVEN IN LEAN 2026-09-11**) Counting equivalence:
   **D(t) := N_total(t) − N_on(t) is even-valued, step, RH ⇔ D(t) ≡ 0.**
   D jumps by 2 at each off-line pair height (F-0.3: a 4-tuple contributes two
-  zeros at the same positive height). Statement is a 2-line counting argument
-  from F-0.1–F-0.5. Lean M4 can house B-0 + B-4.
+  zeros at the same positive height). Lean image `RhAttack/B0.lean` (abstract
+  zero set, no-ζ convention; green on stable 4.33.1): `eqNtotMinusNon` (i),
+  `nondec` (ii), `offSliceEven` (iii), `zeroD_of_RH` / `RH_of_zeroD` ⇒
+  `RH_iff_Dzero` (iv).
 
 Henceforth: **RH ⇔ D ≡ 0** (B-0).
 
@@ -108,26 +111,39 @@ W_n(t) := ζ(½+it) − P_n(½+it) − I(n,½+it); C_n(t) = |W_n(t)|. All defini
     1.80×10⁻³ / 1.80×10⁻³) — and matches the mpmath reference to dLa
     4.5×10⁻¹³, dAr 7.2×10⁻¹⁴ (in π units, nearest-integer distance) on the
     138,065-pair prefix, hard-asserted (<1e-6) before any emit.
-- **[B-2]** (TO-BUILD, = G3) **Rigorous tail**: T(G,s) = ∫_G^∞ pairlog(γ,s)
-  · ln(γ/2π)/(2π) dγ + E(G,s) with an explicit |E(G,s)| ≤ M(G,t). MEASURED:
-  the density-tail error saturates in G once G ≫ t (S-scale sum-vs-∫ against
-  actual spacings; coefficient ~20–40) — M is non-vanishing; the honest
-  method ceiling at current G is t ≲ 10⁴–2×10⁴. **D1 LANDED (2026-09-10,
-  `out_day010_onset_G6e6.txt`, verified docker mpmath 1.3.0, complete
-  corrected list):** the G = 6×10⁶ product side reproduces the onset at the
-  five near rows within ≤6% (residuals: (10³,1.0) 5.9×10⁻⁵, (10³,2.0)
-  1.8×10⁻³, (10⁴,0.1) 5.9×10⁻⁵, (10⁴,0.2) 1.8×10⁻³; the (10³,0.1/0.5)
-  rows +70% are the known N-scale onset-window correction, Stage-1
-  identical); E(G,s) grows past 8×10⁻² by t = 10⁴ and is O(1)–O(10) at
-  t = 5×10⁴–2×10⁵ — the ceiling is CONFIRMED, and B-2's remaining task is
-  the explicit bound M(G,t) ≥ this E. The zero side is now validated on a
-  12.2M-zero list; the definition side (W_n) is unchanged.
+- **[B-2]** (PARTIAL → **ON-LINE TAIL BOUND PROVEN 2026-09-13**,
+  `spec/b2-tail-bound.md`) **Rigorous tail**: T(G,s) = ∫_G^∞ pairlog(γ,s)
+  · ln(γ/2π)/(2π) dγ + E(G,s), explicit **|E(G,t)| ≤ M(G,t)** with
+  M = S̄(G)·B_f + C_f·K(G), S̄ from Platt–Trudgian JNT 147 (2015) 842–851
+  Cor 1 (|S(T)| ≤ 0.110 ln T + 0.290 ln ln T + 2.290, T ≥ e, unconditional;
+  read from the original PDF). At G = 6×10⁶: M(10³) = 1.3×10⁻⁷ —
+  M(2×10⁵) = 5.3×10⁻³ (scales ~(t/G)²·S̄(G); blows up at t → G, faithfully:
+  f has the log|γ−t| singularity there). Abel mechanism verified on 7.4M
+  real list zeros (3×10⁵→4×10⁶, diff at 60k×96 GL quadrature limit). **D1
+  LANDED earlier (2026-09-10) with a RE-LABELED column (2026-09-13):** the
+  robust recomputation (GL + closed-form tail, dps-30/50 cross-checks) confirms
+  the D1 E-column is REAL but is **R(t) = off-line zero-set factor beyond G,
+  NOT on-line tail uncertainty** (which is ≤ M): R(10³) = 8.4×10⁻⁴, R(10⁴) =
+  8.5×10⁻², R(2×10⁴) = 3.5×10⁻¹, R(5×10⁴) = 2.98, R(10⁵) = −0.33, R(2×10⁵) = −8.0
+  — all ≫ M at the same t. Off-line zeros below G: ≤ 8 (count ± S̄ argument,
+  4-tuples). Consequence: the onset-model uncertainty on certified on-line
+  data is ≤ M(G,t); the method's honest ceiling (t ≲ 10⁴–2×10⁴) remains
+  DATA-DRIVEN, and R(t)'s growth is the §2 detector's off-line signal —
+  B-3/B-6 territory, not a defect of the kernel. The zero side is now
+  validated on a 12.2M-zero list; the definition side (W_n) is unchanged.
 - **[B-3]** (TO-BUILD, = H3 lift) **Bridge identity**: for the actual zero set
   𝒵_ℂ,  ζ(s) = K(s;𝒵_ℂ) in the product sense (25.2.12), finite-G residual
   governed by B-2's M(G,s). Evidence: Stage-1 MEASURED at G=3×10⁵ (certified
   list; docker mpmath 1.3.0 verified env): zero-side reproduces the 4-digit
   onset — (10³,1.0): 0.5086 vs 0.5071 (+0.29%), (10⁴,0.1): 0.0494 vs 0.0500
   (−1.2%); two borderlines +4.2/+5.8%; the rest below the quantified floor.
+  **Lean ζ-free core in flight (2026-09-11; not yet green — status unchanged):**
+  `RhAttack/B3.lean` carries the H3-lift machinery — `b3Abel` (the finite
+  exact Abel decomposition for the counting step N_L with the ray integrand),
+  `b3Bridge` (smooth RVM comparator N = NHat + S), `b3ResidualDecomp`
+  (bridge Ψ = e^{Tt}·∏_L F vs kernel K = ∏_{L∪T} F differ EXACTLY by the
+  factor exp(Tt − Σ_T ln F) — the residual is the tail-model error,
+  nothing else).
 
 ## §2 Detectors: off-line ⇒ deviation
 
@@ -310,10 +326,10 @@ height t₀ (members β+iγ₀, (1−β)+iγ₀; δ = β−½ ≠ 0).
 
 | B | Content | Vehicle | Data trigger | Status |
 |---|---------|---------|--------------|--------|
-| B-0 | counting equivalence RH⇔D≡0 | writing; Lean M4 | — | TO-BUILD (LOW) |
+| B-0 | counting equivalence RH⇔D≡0 | writing; Lean M4 | — | **■ FILLED — PROVEN IN LEAN (B0.lean, green 2026-09-11)** |
 | B-1 | exact onset law + remainder (G4) | Euler–Maclaurin lifting | D2 (fits beyond 4 digits) | TO-BUILD |
-| B-2 | rigorous tail remainder M(G,t) (G3) | tail analysis | **D1 LANDED 2026-09-10 (ceiling t ≲ 2×10⁴ confirmed; E tabled in `out_day010_onset_G6e6.txt`)** | TO-BUILD (statement ready; bound open) |
-| B-3 | bridge identity as identity+residual (H3 lift) | follows B-1∧B-2; TS kernel (M2) | D1, D3 | TO-BUILD |
+| B-2 | rigorous tail remainder M(G,t) (G3) | tail analysis | **D1 LANDED 2026-09-10 (ceiling t ≲ 2×10⁴ confirmed; E tabled in `out_day010_onset_G6e6.txt`)** | **■ FILLED — on-line bound PROVEN (v0.8, `spec/b2-tail-bound.md`)** — ledger row lagged the §1 body until v0.9 |
+| B-3 | bridge identity as identity+residual (H3 lift) | follows B-1∧B-2; TS kernel (M2); Lean core `B3.lean` | D1, D3 | TO-BUILD (ζ-free Lean core in flight 2026-09-11: `b3Abel` / `b3Bridge` / `b3ResidualDecomp` — not yet green) |
 | B-4 | on-line per-pair closed form (la, ar) + validation | Lean T1–T3b + dps-25 + float64 16/16 | — | **■ FILLED — PROVEN (Lean)** |
 | B-5 | detector lemma f(δ,t) + S/2K mechanism | 4-zero algebra + D4/D3/D4-far + dps-30 check | **ALL DATA LANDED; CORE THEOREM EXACT + PROVEN IN LEAN** (R closed form; \|formula−measured\| ≤5×10⁻⁴, \|formula−direct\| ≤6×10⁻²⁶; Lean 4.33.1: b5Ratio/b5Abs/b5NoffPos/b5PrefSign + 12/12 float cross-check) | **■ core FILLED (v0.5, PROVEN v0.7)** — composition with the floor is B-6A's |
 | B-6A/B | ∀t closure (route decision) | lifting theorem | D1+D4 margin | **TO-BUILD (the wall)** |
