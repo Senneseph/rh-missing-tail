@@ -46,6 +46,29 @@ open Real Set MeasureTheory intervalIntegral
     - Flat-def discipline (B-5 lesson): every def feeding ring /
       nlinarith / HasDerivAt is in flat monomial form.
 -/
+/-
+  OUTLINE PIECE MAPPING (docs/RH-PROOF-OUTLINE.md §6, §9 rows P6/P7):
+    P6 (the bridge identity — ζ-free finite core): `b3ResidualDecomp`
+       — the bridge map Ψ = e^{Tt}·∏_L F and the truncated kernel
+       K = ∏_{L∪T} F differ by EXACTLY exp(Tt − Σ_T ln F); the bridge
+       residual IS the tail-model error, nothing else. `b3Abel` — the
+       finite exact Abel decomposition (counting step N_L, §4).
+    P7 (the finite Abel / IBP machinery): `b3Bridge` (smooth RVM
+       comparator N = NHat + S); §2 the NHat/fT derivatives; §5 the
+       S-bound kernel integrands P011/Q029/R229 (the Platt–Trudgian
+       coefficients 0.110 / 0.290 / 2.290); the continuity lemmas +
+       the IBP bridge `nHatIBP` (§6).
+  ROLE    : makes "definition side" and "zero side" the SAME object
+             modulo the rigorous tail of the outline's §5 — without
+             it, the two sides of the contradiction never touch. The
+             smooth comparator carries the boundedness the residual
+             floor (P8) will consume.
+  STATUS (2026-09-11) : WIP — atomic one-thing-at-a-time repair in
+             progress (48 → 30 errors last run; the next target is
+             logged in the day-015 journal). NOT yet green;
+             intentionally NOT imported by RhAttack.lean until it is.
+             No claim is made on its content.
+-/
 namespace B3
 
 noncomputable section

@@ -1,75 +1,115 @@
-# rh-lean — the E7a identity and the B-4 on-line pair identity, machine-checked (Lean 4 + Mathlib)
+# rh-lean — the RH-attack Lean package (Lean 4.33.1 + Mathlib, stable pin)
 
-Formal core of the kainos-logos RH-attack exact-identity lines:
-**the Euler action identity (E7a) is proven exactly in Lean**, and its
-five certified oracle instances are cross-checked by an independent
-Lean float64 re-implementation against the Python oracle (dps-20
-values); **the B-4 on-line pair identity is proven in four pieces**
-(T1 exact closed form; T2 log-magnitude; T3a/T3b the phase, exactly
-mod 2π in the circle type `Real.Angle` / in ℝ with an explicit 2πℤ
-multiple) and cross-checked on its 16 recorded points (float64
-closed form vs direct fac-product evaluation).
+The machine-checked core of the kainos-logos RH-attack. This directory is the
+**source of record** for the Lean artifacts (the kainos-logos
+`scripts/rh-lean` path is a symlink into it).
 
-This is the first step of the M4 plan
-(`plan/40-prize-islands/rh-attack/prompts/M4-lean-e7a.md`): exact identities
-as computers — the finite algebraic core first, zero-side analytic
-statements later (out of phase 1 by design).
+The proof path this package serves is written for a human reader in
+[`docs/RH-PROOF-OUTLINE.md`](../docs/RH-PROOF-OUTLINE.md) — read that first.
+The outline's §9 names the pieces **P1–P8**; the file map below is the bridge
+between those names and the files here. The internal project IDs
+(`B0`–`B5`, `E7a`, …) are kept as *file names* for stability — journals,
+verifier scripts, and import paths reference them by name.
 
-## What is in here
+**Toolchain (pinned, stable only):** `leanprover/lean4:v4.33.1` + mathlib
+v4.33.1 (`lean-toolchain`). rc/nightly are banned (rc2 regressions burned a
+session; see the day-012 journal).
 
-| File | Content |
+## File map (outline piece → file)
+
+### The proof pieces (`RhAttack/`)
+
+| File | Outline piece | What it is | Status |
+|---|---|---|---|
+| `RhAttack/B0.lean` | **P1** — counting lemma | RH ⇔ D ≡ 0 over an abstract zero set (no ζ): `eqNtotMinusNon`, `nondec`, `offSliceEven`, `zeroD_of_RH` / `RH_of_zeroD` ⇒ `RH_iff_Dzero`. | **GREEN** (re-verified 2026-09-11) |
+| `RhAttack/B4.lean` | **P2** — per-pair closed form | The zero-side kernel per conjugate pair: `pairClosedForm` (T1 exact), `pairLogAbs` (T2), `pairArgAngle` / `pairArLedger` (T3a/T3b phase), + `B4Float` 16-point cross-check. | **GREEN** |
+| `RhAttack/B5.lean` | **P3** — deviation ratio | The off-line pair's effect on the kernel, exact: `b5Ratio` (closed form `pref·e^{sω_δ}`), `b5Abs`, `b5NoffPos`, `b5NoffIsPolynomial` (no δ-dead-window), `b5PrefSign`, + `B5Float` 12-config cross-check. | **GREEN** |
+| `RhAttack/B3.lean` | **P6 / P7** — the bridge + finite Abel/IBP machinery | ζ-free bridge core: `b3ResidualDecomp` (bridge Ψ vs kernel K differ **exactly** by exp(Tt − Σ_T ln F)), `b3Abel` (finite exact Abel decomposition, counting step N_L), `b3Bridge` (smooth RVM comparator N = NHat + S), §2 NHat/fT derivatives, §5 S-bound integrands P011/Q029/R229, §6 continuity + IBP (`nHatIBP`). | **WIP** — atomic repair in progress (48→30 at last run, day-014/15); **not** imported until green; no claim |
+| `RhAttack/EulerAction.lean` | supporting exact identity | `eulerAction`: the Euler-action / Abel-summation identity, exact in **every commutative ring** (pure finite algebra; the machine-checked engine behind E7a). | **GREEN** |
+| `RhAttack/E7a.lean` | supporting (data provenance) | The five certified oracle instances of the Euler action, ported (exact-ℤ data via `#eval`; float64 LHS pipeline vs the dps-20 Python record). | **GREEN** (5/5 via `Main.lean`) |
+
+### The harness
+
+| File | What it is | Status |
+|---|---|---|
+| `Main.lean` | The executable **`rhattack`** — runtime cross-check gate: E7a 5/5, B-4 16/16, B-5 12/12 (Lean float64 vs Python oracle records). A red gate is structurally impossible to misread. | **GREEN** |
+| `RhAttack.lean` | Library root — imports the green pieces. `RhAttack.B3` is deliberately **not** imported until green (one line, then). | **GREEN** |
+
+### Test files (recipe locks before porting into B3)
+
+| File | What it is |
 |---|---|
-| `RhAttack/EulerAction.lean` | **The theorem.** `eulerAction`: for every commutative ring `K`, every `a,b : ℕ → K`, and `N ≤ M`,  `Σ_{n=N+1}^{M} a(n)·b(n) = A(M)·b(M) − A(N)·b(N) + Σ_{m=N}^{M−1} A(m)·(b(m)−b(m+1))`  with `A(k) = Σ_{i≤k} a(i)`. Proof: induction on the segment length, closed by `abel`/`ring`. No numerics, no analysis — pure finite algebra. |
-| `RhAttack/E7a.lean` | The five oracle instances, ported. (A) Exact integer cross-checks: the χ₅ and LCG ±1 paths, all ten recorded `A(M)`, `A(N)` values — via `#eval` (kernel-exact `ℤ`). (B) The full LHS pipeline `Σ a(n)·n^(−s)` in lean float64 (raw `Float` pairs; the additive pipeline is a bare recursive sum — Float carries no provable ring axioms, so this is deliberately outside Mathlib's arithmetic layer), cross-checked against the oracle. |
-| `RhAttack/B4.lean` | **The B-4 theorems.** `pairClosedForm` (T1: F_ρ1·F_ρ2 = (γ²−t²)·Bv·e^{s·Bv}, exact, all γ,t>0); `pairLogAbs` (T2: log ‖·‖ = ½·Bv + log |1−(t²+¼)·Bv|, t≠γ); `pairArgAngle` (T3a: arg sum = t·Bv + (π if t>γ else 0), exact mod 2π in `Real.Angle`, t≠γ); `pairArLedger` (T3b: same, ℝ form ∃ k : ℤ, t≠γ). Plus the `B4Float` cross-check (16 recorded points). |
-| `Main.lean` | Executable `rhattack`: recomputes the five E7a instances, the exact-ℤ A-values, and the B-4 16-point table; reports all deviations. |
-| `out_rhattack_day011.txt` | Recorded run (2026-09-10): **E7a CROSS-CHECK PASS 5/5 (worst |diff| = 0.019664 × 10⁻¹²) + B-4 CROSS-CHECK PASS 16/16 (worst dLa = 85.27 × 10⁻¹⁵, dAr = 0.44 × 10⁻¹⁵).** |
+| `Bt2.lean` | B-3 §2 derivative recipe (NHat_deriv / fT_deriv): surface-`have` → `lift` transport → `congr_deriv` scalar bridge; canonical-atom discipline. |
+| `Bt5.lean` | B-3 §5 antiderivative derivatives for the S-bound kernel integrands P011 / Q029 / R229 (Platt–Trudgian 0.110 / 0.290 / 2.290). |
+| `Bt6.lean` | Atomic probes for B3 §4.4/§5 continuity rewrites (ContinuousAt chains, the =ᶠ[𝓝x] bridge, List ∑/∏, NList simp behavior). |
+| `BtF.lean` | `B3Float` — float64 pair-kernel layer F, Fp for the B-3 bridge (not green until the B-3 float cross-check lands). |
+| `BtL.lean` | `lift` — HasDerivAt transport through function equality (ported into B3 §2) + canonical-atom goals. |
 
-## Provenance (no recall — every number traces)
+### API pin probes (`Probe*.lean`, days 013–15)
 
-- Identity source of record: `plan/40-prize-islands/rh-attack/FORMULAS.md` §2.1
-  (E7a), oracle file `plan/40-prize-islands/rh-attack/THE-EULER-ACTION.md`.
-- Python oracle: `../rh/day006_e7a_action_identity.py`
-  (dps-50, 5/5 PASS, residuals ~1e-51..1e-53 in
-  `../rh/out_day006_euler_action_identity.txt`).
-- Port values (dps-20 LHS of each instance): `../rh/out_day011_e7a_oracle20.txt`.
+One-shot instruments: each probes a mathlib fact or tactic behavior in this
+pinned 4.33.1, is run to green, and its recipe is ported into `B3.lean` / the
+test files. They keep the "no guess-iterate" rule auditable — every syntax
+form used in the B-3 repair has a probe behind it.
+
+| File | Pins |
+|---|---|
+| `ProbeA` | `.abs` composition of continuity; `log` monotone; `¬a<b ⇒ b≤a` |
+| `ProbeB` | ray value, cases p1 (c ≤ a) / p2 (a < c < b) |
+| `ProbeC` | `derivIntegrableCont` + p8/p9 |
+| `ProbeD` | rayInt_eval v1/v2 (c < b branch) |
+| `ProbeE` | rayInt_eval v3/v4 (c ≤ a branch) |
+| `ProbeF` | IntervalIntegrable ↔ IntegrableOn (Ioc/Icc), tiny pins |
+| `ProbeG` | IntegrableOn over uIoc; IntervalIntegrable add; abs/nlinarith |
+| `ProbeH` | ContinuousAt through affine maps; membership lemmas |
+| `ProbeI` | `eq_sub_of_add_eq`; one-way div forms (calc) |
+| `ProbeJ` | EqOn with implicit point; `integral_const` smul target |
+| `ProbeK` | EqOn dot-apply; `integral_const` → `(1-y)⁻¹` smul |
+| `ProbeK2` | 2-point abs via `abs_add_le` + `abs_neg` (no 2-arg `abs_sub` here) |
+| `ProbeK3` | `not_le.mp` / `not_lt.mp`; rayEndFormEq Strategy A |
+| `ProbeK4` | `hf'cont (x := x) hx \|>.abs` green; htarget smul green; single-expression comp **failed**; 4-arg `sub_div` **failed** (true signature 3-arg) |
+| `ProbeK5` | **named-arg** `ContinuousAt.comp (g := log) …` green (the hmid fix); `continuity` tactic **dead** for log∘mul; 3-arg `sub_div` green |
+| `ProbeL` | `field_simp` + `ring_nf` closers (fTp_bound inverse-atom behavior) |
+| `ProbeM` | NList cons-case: `rw [dif_pos hg]` **fails** (map-binder hygiene), `simp [hg]` closes — the proven recipe |
+
+### References & toolchain
+
+| Path | What it is |
+|---|---|
+| `references/LEAN4-4331-QUICKREF.md` | The pinned-API quick reference this repair runs on (day-014 pinned facts, exact file:line sources). |
+| `references/official-lean4-docs/` | The official Lean 4 reference (tactic language, tactic reference, proofs chapter) + book chapters, pulled with `curl` and pinned as text for this toolchain. |
+| `lean-toolchain` | `leanprover/lean4:v4.33.1` (stable pin). |
+| `lakefile.toml` | Package `rhattack` (lib + exe). |
 
 ## Reproduce from scratch (fresh machine)
 
 ```sh
 # 1. toolchain (https://www.lean-lang.org): installs elan + lean + lake
-#    (in this environment elan.leanlang.org is unreachable — install elan
-#    manually from its GitHub release, then `elan-init -y`.)
-# 2. build (fetches the prebuilt Mathlib cache from the community store —
-#    minutes, not an hours-long build)
+#    (in this environment elan.leanlang.org was unreachable — install
+#    elan manually from its GitHub release, then `elan-init -y`.)
+# 2. build (fetches the prebuilt Mathlib cache from the community store)
 lake build
-# 3. run the cross-check
+# 3. run the cross-check gate
 lake exe rhattack
 ```
 
-Expected output: five LHS lines within ~1e-13 of the oracle values, the
-exact ℤ data line
-`A(133)=-1 A(3)=-1 A(307)=0 A(7)=0 A(1012)=0 A(12)=0 | A(1007)=-5 A(7)=1 A(100)=0 A(1)= -1`,
-`CROSS-CHECK PASS`, then the 16-row B-4 table and `B-4 CROSS-CHECK PASS`.
+Expected: **E7a 5/5 + B-4 16/16 + B-5 12/12 CROSS-CHECK PASS**, worst
+deviations ~1e-13 scale (a transcription error would show ~1e-12·O(1)).
+`lake build` compiles the green set; `RhAttack/B3.lean` is checked
+individually (`lake env lean RhAttack/B3.lean`) until it goes green and
+joins the library root.
 
-A transcription error anywhere in the ported paths/heights/endpoints would
-appear as a difference of order 1 (≈ 10¹² in the scaled units shown), so the
-PASS line is a genuine statement about the port.
+## Provenance (no recall — every number traces)
 
-## Honesty labels
+- Proof path (human-readable): `../docs/RH-PROOF-OUTLINE.md` (byte-identical
+  twin of `plan/40-prize-islands/rh-attack/RH-PROOF-OUTLINE.md`).
+- Formula ledger: `plan/40-prize-islands/rh-attack/FORMULAS.md` (E7b block:
+  per-pair closed form; §2.1: Euler action).
+- Python oracle records (the cross-check targets): `../rh/out_day006_euler_action_identity.txt`
+  (dps-50), `../rh/out_day011_e7a_oracle20.txt` (dps-20 port values),
+  `../rh/out_day010_pair_unit.txt` (B-4 16 points),
+  `../rh/out_day010_b5core_check.txt` (B-5 dps-30).
+- Toolchain discipline: pinned stable 4.33.1 + mathlib 4.33.1 — no rc.
 
-- `eulerAction` — **proved** in Lean (exact, `lake build`-verified).
-- The five-instance numeric agreement — **measured** (float64 vs dps-20;
-  expected ~1e-13, observed worst 2×10⁻¹⁴).
-- `pairClosedForm` (T1), `pairLogAbs` (T2), `pairArgAngle` (T3a),
-  `pairArLedger` (T3b) — **proved** in Lean (exact; T2/T3 carry the
-  t ≠ γ exclusion exactly as the record does; T1 holds even at t = γ).
-  The statements are the per-pair closed form of DLMF 25.2.12 for the
-  on-line conjugate pair — the zero-side *factor*, not a statement about
-  the zeros of ζ.
-- The 16-point B-4 numeric agreement — **measured** (float64 closed form
-  vs float64 direct product; expected ~1e-14 double roundoff, observed
-  worst dLa ≈ 8.5×10⁻¹⁴, dAr ≈ 4.4×10⁻¹⁶ — the same order as the
-  independent dps-25 cross-validation in `out_day010_pair_unit.txt`).
-- Nothing here touches RH. The zero-side analytic statements (E7b and
-  beyond) are later milestones.
+*Owner-conceived project, AI co-developed instruments (disclosed); no prize
+claim (see the project README in the kainos-logos plan directory).*

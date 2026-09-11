@@ -1,3 +1,6 @@
+/-
+  day-015: NList/rayIntegrand cons-case repro — `rw [dif_pos hg]` FAILS (hygiene of the map binder) while `simp [hg]` closes: the proven recipe. Ported: B3.lean NListRayIntegrable.
+-/ 
 import Mathlib
 import Mathlib.Tactic
 

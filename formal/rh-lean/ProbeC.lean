@@ -1,3 +1,6 @@
+/-
+  day-013: B3 §4.2 — `derivIntegrableCont` (the ray integrand is IntervalIntegrable) + p8/p9 variants. Ported: B3.lean.
+-/ 
 import Mathlib
 open Set
 open intervalIntegral

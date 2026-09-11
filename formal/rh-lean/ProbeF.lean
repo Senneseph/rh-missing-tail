@@ -1,3 +1,6 @@
+/-
+  day-013 small pins: IntervalIntegrable ↔ IntegrableOn on Ioc/Icc, continuity-on closure, `¬c<x ⇒ c≤x`. Ported: B3.lean rayIntegrable.
+-/ 
 import Mathlib
 open Set
 open intervalIntegral

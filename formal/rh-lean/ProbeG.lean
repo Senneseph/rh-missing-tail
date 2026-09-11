@@ -1,3 +1,6 @@
+/-
+  day-013 small pins: IntegrableOn over uIoc, IntervalIntegrable add, abs/nlinarith micro-facts. Ported: B3.lean §4.
+-/ 
 import Mathlib
 open Set MeasureTheory
 open intervalIntegral

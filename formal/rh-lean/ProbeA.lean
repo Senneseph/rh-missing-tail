@@ -1,3 +1,6 @@
+/-
+  day-013 API pins B3 §2: abs-composition of ContinuousAt (`.abs`), `Real.log` monotone, `¬a<b ⇒ b≤a`. Ported: B3.lean continuity lemmas.
+-/ 
 import Mathlib
 
 #check abs_add

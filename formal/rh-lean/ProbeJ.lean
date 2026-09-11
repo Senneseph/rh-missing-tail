@@ -1,3 +1,6 @@
+/-
+  day-013 small pins: EqOn application with an implicit point; the smul target left by `intervalIntegral.integral_const`. Ported: B3.lean htarget/aeEq_restrict.
+-/ 
 import Mathlib
 import Mathlib.Tactic
 

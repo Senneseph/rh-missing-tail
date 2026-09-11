@@ -1,3 +1,9 @@
+/-
+  BtL — HasDerivAt transport probe: `lift` (function-equality transport
+  of a derivative fact: S = C and S hasDerivAt D at x ⇒ C hasDerivAt D
+  at x) plus canonical-atom test goals. Ported into B3.lean §2 as the
+  NHat_deriv / fT_deriv recipe surface.
+-/
 import Mathlib
 noncomputable section
 open Real

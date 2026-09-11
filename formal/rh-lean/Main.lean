@@ -1,3 +1,17 @@
+/-
+  The executable `rhattack` — the project's runtime cross-check gate.
+  Recomputes, in Lean float64:
+    (1) the five E7a oracle instances   (vs the dps-20 Python record),
+    (2) the B-4 16-point per-pair table (B4Float.run),
+    (3) the B-5 12-config ratio table   (B5Float.run).
+  GATE RULE: each table PASSes when the Lean port matches the Python
+  oracle within ~1e-13; a transcription error shows as O(1) — the run
+  aborts its own PASS line, so a red gate is impossible to misread.
+  RUN:  lake exe rhattack
+  PROVENANCE: out_day011_e7a_oracle20.txt · out_day010_pair_unit.txt ·
+  out_day010_b5core_check.txt (records of the last green run live in
+  the day journals).
+-/
 import Mathlib
 import RhAttack
 

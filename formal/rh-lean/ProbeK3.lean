@@ -1,3 +1,6 @@
+/-
+  day-013: `not_le.mp`/`not_lt.mp` direction pins; rayEndFormEq Strategy A (split_ifs + ring + infeasible-closures). Ported: B3.lean rayEndFormEq.
+-/ 
 import Mathlib
 import Mathlib.Tactic
 

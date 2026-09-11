@@ -3,6 +3,31 @@ Copyright (c) 2026 kainos-logos rh-attack (owner-directed research;
 AI co-developed instrument; no prize claim — see
 plan/40-prize-islands/rh-attack/README.md).
 -/
+
+/-
+  **PIECE P3 — the deviation ratio R(s, δ), exact.**  What one pair
+  moved OFF the line does to the kernel: R = P_off / P_on in closed
+  form — a real signed prefactor times the constant-rate phase
+  e^{s·ω_δ} — plus the exact magnitude, the branch sign (t > γ ⇔
+  prefactor < 0, the single branch), and the δ-polynomial
+  no-zero-window identity.
+
+  OUTLINE : docs/RH-PROOF-OUTLINE.md §7 (the detector) and §9 row P3.
+  ROLE    : the ≥ side of the closure — at the pair's own height an
+             off-line pair forces a kernel change of at least
+             0.998·|K| (near), 4·|K| (at 2γ), (t/γ)²−1 (far, 6 digits),
+             with NO dead δ window (all-positive polynomial in δ²).
+  APPROACH: 4-zero algebra (group the product by conjugate pairs; the
+             rest of the kernel cancels in the ratio exactly — no
+             normalization ambiguity).
+  STATUS  : GREEN (4.33.1): `b5Ratio` (closed form) · `b5Abs`
+             (magnitude) · `b5NoffPos` (numerator > 0) ·
+             `b5NoffIsPolynomial` (δ-polynomial) · `b5PrefSign` (branch
+             locus). `B5Float` 12-config cross-check runs from
+             Main.lean (record out_day010_b5core_check.txt).
+  Imports RhAttack.B4 (the on-line pair factor it normalizes against).
+-/
+
 import Mathlib
 import RhAttack.B4
 

@@ -1,3 +1,6 @@
+/-
+  day-014: Q1 NAMED-ARG comp `ContinuousAt.comp (g := log) (f := …) (x := z)` GREEN (the hmid fix); Q2a/Q2b `continuity` tactic DEAD for log∘mul in 4.33.1; Q3 single-expression comp FAILED; P4fix 3-arg `sub_div` GREEN; hnz ≠0 pattern GREEN.
+-/ 
 import Mathlib
 import Mathlib.Tactic
 

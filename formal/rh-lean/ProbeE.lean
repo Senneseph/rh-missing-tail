@@ -1,3 +1,6 @@
+/-
+  day-013: B3 §4.2 — rayInt_eval variants v3/v4 for the c ≤ a branch. Ported: B3.lean.
+-/ 
 import Mathlib
 open Set
 open intervalIntegral

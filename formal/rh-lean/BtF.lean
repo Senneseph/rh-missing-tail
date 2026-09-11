@@ -1,3 +1,10 @@
+/-
+  BtF — the `B3Float` float layer for the B-3 bridge (outline pieces
+  P6/P7): F, Fp (pair-kernel magnitude and its derivative in float64)
+  plus the cross-check scaffolding — the Lean image of the float64
+  kernel the TS engine evaluates. Not part of the proven set until
+  the B-3 float cross-check lands (day-015 queue).
+-/
 namespace B3Float
 
 def piF : Float := 3.141592653589793

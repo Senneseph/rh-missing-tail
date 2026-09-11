@@ -1,3 +1,6 @@
+/-
+  day-014: Q1/Q2 `field_simp` + `ring_nf` closers for the fTp_bound region (inverse-atom behavior). Ported: B3.lean §6.
+-/ 
 import Mathlib
 import Mathlib.Tactic
 

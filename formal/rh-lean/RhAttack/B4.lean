@@ -1,6 +1,13 @@
 /-
   B4.lean — the on-line per-pair closed form (B-4), theorem + cross-check.
 
+  OUTLINE PIECE: P2 (per-pair closed form) — docs/RH-PROOF-OUTLINE.md
+  §5.1 and §9 row P2.
+  ROLE : makes the zero-side kernel exact and float64-vectorizable —
+         the certified 12,193,869-zero list drives the kernel through
+         these two formulas, no high-precision loop.
+  STATUS : GREEN (4.33.1) + 16/16 float cross-check (Main.lean).
+
   PROVENANCE (no recall — every reference resolves):
     Ledger      : plan/40-prize-islands/rh-attack/FORMULAS.md (E7b block,
                   per-pair closed form la_pair / ar_pair) and

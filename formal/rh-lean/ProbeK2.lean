@@ -1,3 +1,6 @@
+/-
+  day-013: 2-point abs fact via `abs_add_le A (-B)` + `abs_neg` (this version has no 2-arg `abs_sub` lemma) + the plain triangle pin. Ported: B3.lean bound region.
+-/ 
 import Mathlib
 import Mathlib.Tactic
 

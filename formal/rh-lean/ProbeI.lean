@@ -1,3 +1,6 @@
+/-
+  day-013 small pins: `eq_sub_of_add_eq`, one-way `a/a ≤ b/a` forms for calc steps. Ported: B3.lean hP/hQ calc recipe.
+-/ 
 import Mathlib
 open Set Real MeasureTheory
 open intervalIntegral

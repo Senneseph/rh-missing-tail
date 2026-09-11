@@ -1,6 +1,12 @@
 /-
   E7a instances — the five certified oracle instances, ported and
   cross-checked.
+  OUTLINE ROLE : supporting exact identity (not one of P1–P8): the
+  identity its instances instantiate is RhAttack/EulerAction.lean
+  (`eulerAction`, proven). This file is data provenance — the 5/5
+  cross-check vs the dps-20 Python record — not part of the RH
+  argument itself.
+  STATUS : GREEN (4.33.1); the 5/5 PASS runs from Main.lean (out_rhattack_*).
 
   PROVENANCE:
     Python oracle : scripts/rh/day006_e7a_action_identity.py

@@ -1,3 +1,6 @@
+/-
+  day-013: K1 EqOn dot-apply form; K2 `integral_const` leaves a smul target on `(1-y)⁻¹`. Ported: B3.lean.
+-/ 
 import Mathlib
 import Mathlib.Tactic
 

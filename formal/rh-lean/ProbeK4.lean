@@ -1,3 +1,6 @@
+/-
+  day-014: P1 `hf'cont (x := x) hx |>.abs` (dot on to_additive) GREEN; P3 htarget smul recipe GREEN; P2 single-expression NHat comp FAILED (wrong-side unification); P4 4-arg `sub_div` FAILED (true signature is 3-arg). Ported: named-arg comp + 3-arg sub_div.
+-/ 
 import Mathlib
 import Mathlib.Tactic
 

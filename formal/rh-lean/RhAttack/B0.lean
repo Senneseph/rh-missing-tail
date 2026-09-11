@@ -4,6 +4,31 @@ AI co-developed instrument; no prize claim — see
 plan/40-prize-islands/rh-attack/README.md).
 -/
 
+/-
+  **PIECE P1 — the counting lemma (RH ⇔ D ≡ 0).**  The counting
+  reformulation of the Riemann Hypothesis over an *abstract* zero set —
+  no ζ anywhere. Defines N_total / N_on / D on the zero set, proves D
+  is a non-decreasing even-valued step, and proves
+  RH(q) ↔ (∀ t > 0, D q t = 0).
+
+  OUTLINE : docs/RH-PROOF-OUTLINE.md §2 (the counting language) and §9
+             row P1.
+  ROLE    : reframes RH as the counting statement D ≡ 0 that the
+             detector acts on; the `zeroD_of_RH` / `RH_of_zeroD` halves
+             are exactly what the certified 10⁷ record consumes
+             (2K even ⇒ no off-line zero pair below 10⁷).
+  APPROACH: the F2 four-tuple symmetry (each off-line zero carries its
+             mirror 1 − ρ at the same height) + finiteness of the slice
+             Finset. No analysis.
+  STATUS  : GREEN on stable Lean 4.33.1 + mathlib (exit 0, re-verified
+             2026-09-11).
+  THEOREMS: `eqNtotMinusNon` (i) · `nondec` (ii) · `offSliceEven` (iii)
+             · `zeroD_of_RH` + `RH_of_zeroD` ⇒ `RH_iff_Dzero` (iv).
+             A Bool-level mirror (hyps / RHm / offSlice) sits at the
+             bottom of the file for the data layer.
+-/
+
+
 import Mathlib
 
 -- linter.style.header (new in 4.34-rc2) wants the module doc-string as

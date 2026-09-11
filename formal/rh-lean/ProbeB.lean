@@ -1,3 +1,6 @@
+/-
+  day-013: B3 §4.2 ray value — the three-case evaluation of (c ≤ x) ⟼ deriv f x, cases p1 (c ≤ a) and p2 (a < c < b). Ported: rayInt_eval in B3.lean.
+-/ 
 import Mathlib
 open Set
 open intervalIntegral
