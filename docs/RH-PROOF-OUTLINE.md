@@ -1,6 +1,6 @@
 # RH-PROOF-OUTLINE — full proof skeleton with numbered blanks
 
-**Status: DRAFT PROOF SKELETON v0.9 (2026-09-11).** v0.9: **BOOKKEEPING PASS (no mathematical change)** — ledger/labels reconciled with the v0.8 body: (a) **B-0 counting equivalence ■ FILLED — PROVEN IN LEAN** (`RhAttack/B0.lean`, green on stable 4.33.1, re-verified 2026-09-11: `eqNtotMinusNon`, `nondec`, `offSliceEven`, `zeroD_of_RH`, `RH_of_zeroD` ⇒ `RH_iff_Dzero` over an abstract zero set, no-ζ convention) — the §0 [B-0] block and ledger row still said TO-BUILD. (b) B-2's ledger row set to FILLED — it lagged the §1 body, which v0.8 already marked **ON-LINE TAIL BOUND PROVEN**. (c) B-3's ledger row now records the ζ-free Lean core in flight (`B3.lean`: `b3Abel` / `b3Bridge` / `b3ResidualDecomp` — not yet green, status unchanged). Mirror re-synced byte-identical. v0.8: **B-2 ON-LINE TAIL BOUND PROVEN** — `spec/b2-tail-bound.md`: |E(G,t)| ≤ M(G,t) = S̄(G)·B_f + C_f·K(G), S̄ = the Platt–Trudgian unconditional explicit S-bound (J. Number Theory 147 (2015) 842–851, Cor 1, read from the original PDF); M(6×10⁶, 10³) = 1.3×10⁻⁷ … M(6×10⁶, 2×10⁵) = 5.3×10⁻³; Abel mechanism verified on 7.4M real certified zeros. The D1 E-column is RE-LABELED: it is R(t) = the off-line zero-set factor beyond G (robust recompute: 8.4×10⁻⁴ / 8.5×10⁻² / 3.5×10⁻¹ / 2.98 / −0.33 / −8.0 at t = 10³…2×10⁵, all ≫ M at the same t) — the §2 detector's off-line signal, not on-line model uncertainty (≤ M). The honest ceiling (t ≲ 10⁴–2×10⁴) stays data-driven; off-line zeros below G ≤ 8 (count ± S̄, 4-tuples). v0.7: **B-5 CORE now
+**Status: DRAFT PROOF SKELETON v0.10 (2026-09-11).** v0.10: **D5 / M3 10⁷ REDUNDANCY RE-WALK LANDED (day-014)** — the ~23 CPU-h re-walk (PID 1142170) completed 2026-09-10 20:22 local and closed out today: window (10⁶, 1.4×10⁶] 773,829 sign flips dt/dt2-EXACT, independently reproduced by the day-009 6e6 GPU zero list (same window, same count, different engine); cumulative diff vs the defective file +244 then flat → dead chunk is (10⁶, 1,000,128], 128 rad (the early "~1.06×10⁶, 256k-chunk" S-plateau estimate is revised); tail (9.9×10⁶, 10⁷] 227,197 EXACT. **Certified record (replaces all DEFECTIVE 1e7 numbers): N(10⁷) = 21,136,121, S(10⁷) = −3.205718 (dps-45, no runaway), 2K(10⁷) = −2 even ⇒ no off-line zero pair below 10⁷.** The pre-registered LOCKED candidate +246 → 21,136,123 is FALSIFIED — the 2K even-identity cannot arbitrate 244 vs 246 (both even; dps-45 principal-arg parity passes both, dist ≤ 2.3×10⁻⁹); the arbiter is the dt/dt2-stable direct count, doubly confirmed. Named residual: the middle window (1.4×10⁶, 9.9×10⁶) of the defective file is UNMAPPED (a 1–2-flip defect below 1-rad sampling cannot be excluded; finer grid is owner's call, pre-registered before spend). B-6C/F-2.1 set to the certified values; F-2.1's old 10⁷ line (S = −1.2057, 2K = 0, from the defective file) is retired. v0.9: **BOOKKEEPING PASS (no mathematical change)** — ledger/labels reconciled with the v0.8 body: (a) **B-0 counting equivalence ■ FILLED — PROVEN IN LEAN** (`RhAttack/B0.lean`, green on stable 4.33.1, re-verified 2026-09-11: `eqNtotMinusNon`, `nondec`, `offSliceEven`, `zeroD_of_RH`, `RH_of_zeroD` ⇒ `RH_iff_Dzero` over an abstract zero set, no-ζ convention) — the §0 [B-0] block and ledger row still said TO-BUILD. (b) B-2's ledger row set to FILLED — it lagged the §1 body, which v0.8 already marked **ON-LINE TAIL BOUND PROVEN**. (c) B-3's ledger row now records the ζ-free Lean core in flight (`B3.lean`: `b3Abel` / `b3Bridge` / `b3ResidualDecomp` — not yet green, status unchanged). Mirror re-synced byte-identical. v0.8: **B-2 ON-LINE TAIL BOUND PROVEN** — `spec/b2-tail-bound.md`: |E(G,t)| ≤ M(G,t) = S̄(G)·B_f + C_f·K(G), S̄ = the Platt–Trudgian unconditional explicit S-bound (J. Number Theory 147 (2015) 842–851, Cor 1, read from the original PDF); M(6×10⁶, 10³) = 1.3×10⁻⁷ … M(6×10⁶, 2×10⁵) = 5.3×10⁻³; Abel mechanism verified on 7.4M real certified zeros. The D1 E-column is RE-LABELED: it is R(t) = the off-line zero-set factor beyond G (robust recompute: 8.4×10⁻⁴ / 8.5×10⁻² / 3.5×10⁻¹ / 2.98 / −0.33 / −8.0 at t = 10³…2×10⁵, all ≫ M at the same t) — the §2 detector's off-line signal, not on-line model uncertainty (≤ M). The honest ceiling (t ≲ 10⁴–2×10⁴) stays data-driven; off-line zeros below G ≤ 8 (count ± S̄, 4-tuples). v0.7: **B-5 CORE now
 PROVEN in Lean** — `b5Ratio` (T1 exact ratio), `b5Abs` (T2), `b5NoffPos`,
 `b5PrefSign`, `b5NoffIsPolynomial`, in `scripts/rh-lean/RhAttack/B5.lean`,
 with the 12-config float64 cross-check wired into `Main.lean` (worst
@@ -220,11 +220,18 @@ W_n(t) := ζ(½+it) − P_n(½+it) − I(n,½+it); C_n(t) = |W_n(t)|. All defini
   B-6A.** Data: all regimes measured. Theorem: the measured law holds
   EXACTLY as below — no residual approximation in the core.
 - **F-2.1** **MEASURED**: the self-certifying instrument (H0) certifies
-  D(t) = 0 up to T: 10⁶ (2K even, dps-40); 10⁷ (S = −1.2057 O(1), 2K = 0 to
-  2.25×10⁻⁹ dps-40, dt/dt2-STABLE window 227,197); the flat-|S|≈247 dead
-  chunk at ~1.06×10⁶ was found by the S-size detector and corrected (+246) —
-  the ghost-exclusion mechanism in action. Final 10⁷ redundancy re-walk: in
-  flight (day-006 early re-walk, started day 9).
+  D(t) = 0 up to T: 10⁶ (2K even, dps-40); **10⁷ (D5 landed, day-014):**
+  certified N(10⁷) = 21,136,121 (2-engine dt/dt2-stable direct count; S =
+  −3.205718 dps-45, no runaway; 2K = −2 even; dps-45 principal-arg parity
+  dist ≤ 2.3×10⁻⁹); the flat-|S|≈247 dead chunk was found by the S-size
+  detector and corrected — the ghost-exclusion mechanism in action (located
+  by the re-walk at (10⁶, 1,000,128]: Δ = 244 flips, 128 rad; the early
+  "~1.06×10⁶" plateau estimate is revised). Final 10⁷ redundancy re-walk:
+  **DONE (exited 2026-09-10 20:22 local, ~23 CPU-h; closed out day-014).**
+  Named residual: the middle window (1.4×10⁶, 9.9×10⁶) UNMAPPED — a 1–2-flip
+  defect below 1-rad sampling cannot be excluded there. (The old line "S =
+  −1.2057 O(1), 2K = 0 to 2.25×10⁻⁹ dps-40" came from the defective file
+  and is retired, superseded by the above.)
 
 ## §3 The ∀t closure — the main gap (G1)
 
@@ -241,8 +248,11 @@ W_n(t) := ζ(½+it) − P_n(½+it) − I(n,½+it); C_n(t) = |W_n(t)|. All defini
   D is identically 0) — an S(t)-program of the classical type. δ-robust
   (no sensitivity floor). Depth note: at full strength essentially
   RH-equivalent; the lifting path is the open engineering question.
-- **[B-6C]** **■ partial** **Hybrid interim claim**: D(t) = 0 for t ≤ T
-  (F-2.1: T = 10⁶ certified; T = 10⁷ pending final redundancy) **and**
+- **[B-6C]** **■ T = 10⁷ CLOSED (2026-09-11, day-014)** **Hybrid interim
+  claim**: D(t) = 0 for t ≤ T (F-2.1: T = 10⁷ certified — N(10⁷) =
+  21,136,121, S = −3.205718 dps-45, 2K = −2 even ⇒ no off-line pair below
+  10⁷; named residual: middle window (1.4×10⁶, 9.9×10⁶) UNMAPPED, a 1–2-flip
+  defect below 1-rad sampling cannot be excluded) **and**
   (B-6A ∨ B-6B) for t > T. This is the claim the project can stand behind
   at any moment; it sharpens but does not close RH.
 - **Route decision rule (from RH-OUTLINE §4):** D1 (tail-saturation data) +
@@ -333,7 +343,7 @@ height t₀ (members β+iγ₀, (1−β)+iγ₀; δ = β−½ ≠ 0).
 | B-4 | on-line per-pair closed form (la, ar) + validation | Lean T1–T3b + dps-25 + float64 16/16 | — | **■ FILLED — PROVEN (Lean)** |
 | B-5 | detector lemma f(δ,t) + S/2K mechanism | 4-zero algebra + D4/D3/D4-far + dps-30 check | **ALL DATA LANDED; CORE THEOREM EXACT + PROVEN IN LEAN** (R closed form; \|formula−measured\| ≤5×10⁻⁴, \|formula−direct\| ≤6×10⁻²⁶; Lean 4.33.1: b5Ratio/b5Abs/b5NoffPos/b5PrefSign + 12/12 float cross-check) | **■ core FILLED (v0.5, PROVEN v0.7)** — composition with the floor is B-6A's |
 | B-6A/B | ∀t closure (route decision) | lifting theorem | D1+D4 margin | **TO-BUILD (the wall)** |
-| B-6C | hybrid interim claim (RH to T) | H2 instrument | D5 (10⁷ redundancy — in flight) | ■ partial |
+| B-6C | hybrid interim claim (RH to T) | H2 instrument | **D5 LANDED 2026-09-11 (day-014)** | **■ T = 10⁷ CLOSED** (N = 21,136,121; S = −3.205718 dps-45; 2K even ⇒ no off-line pair < 10⁷); middle window (1.4×10⁶, 9.9×10⁶) UNMAPPED — 1–2-flip residual named, not certified |
 
 **Classical inputs to cite (G6):** 25.2.12 product; θ and S conventions
 (25.10); RVM; functional equation; ζ>0 on (0,1) (citation pending — F-0.1).
@@ -365,7 +375,9 @@ height t₀ (members β+iγ₀, (1−β)+iγ₀; δ = β−½ ≠ 0).
   6e-2 resolved as adjacent-zero |ζ|-scale (measurement-height effect). A
   future 100× fine-grid spike would still stop everything (direct
   content).
-- **10⁷ redundancy lands** (day-006 early re-walk): closes F-2.1/B-6C at
-  T = 10⁷.
+- **10⁷ redundancy LANDED (D5, 2026-09-11, day-014)**: closes F-2.1/B-6C at
+  T = 10⁷ with N(10⁷) = 21,136,121 / S = −3.205718 dps-45 / 2K = −2 even;
+  the +246 LOCKED candidate (21,136,123) is FALSIFIED — the 2K identity
+  cannot arbitrate 244 vs 246 (both even); middle window UNMAPPED-named.
 - Nothing in this file is retracted by data; data only moves blanks between
   TO-BUILD and FILLED, and can swap the route (A↔B) per the decision rule.
