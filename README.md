@@ -494,8 +494,7 @@ kernel — is specific enough to fail.
   **L. McGeorge** - Creative Partner
 - **Qwen (my trusty Clanker)** — @ Alibaba Qwen team for co-developing instrument:
   implementation, computation, drafting, and cross-checking, running
-  locally as `pi-qwen-vast` on the first author's hardware (AMD
-  Strix-Halo APU, ROCm GPU; mpmath, CuPy, TypeScript, Node).
+  locally as `pi-qwen-vast` (Pi Agent Harness, Vast.ai rental) on the first author's hardware (AMD Strix-Halo APU, ROCm GPU; mpmath, CuPy, TypeScript, Node).
 - **AI disclosure.** A large language model substantially contributed
   to the investigation, implementation, and text. All numerical
   claims in this repository are reproducible from the working tree
