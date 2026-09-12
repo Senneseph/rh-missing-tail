@@ -401,3 +401,32 @@ a public linear exposition with named pieces P1–P8 (`docs/RH-PROOF-OUTLINE.md`
 byte-identical with the working-repo source of record); every Lean file
 carries a purpose header (what it is / role / status); reference material
 moved to the working repo (`kainos-logos/references/`).
+
+## 6. The P4 line turns green — and a formalization trap worth naming (2026-09-12)
+
+**State of the P4 line (rh-missing-tail).** Four machine-checked atoms,
+one per commit, zero sorry: `P4Em` (1st-order EM, verbatim port of the
+published proof), `P4Tail` (per-period 2nd-order identity + the periodic
+`B2` kernel), `P4Em2` (the global finite 2nd-order law
+`∑ f = ∫ f + ½Δf + (1/12)Δf′ − ½∫ B̂₂f″`), and `P4Limit` L1+L2
+(the `x ↦ x^{−s}` derivative family + the exact finite law with the
+antiderivative `x^{1−s}/(1−s)` and the `B2` remainder explicit —
+`7d42ced`). L3–L5 (kernel convergence at `M→∞`, the OP1/OP2 remainder
+bounds, the stated bound `|W_n(t)| ≤ B_n(t)`) are queued. Every `lake
+build` green (17426 jobs); all four runtime cross-check gates PASS.
+
+**The trap (named for the record).** In Lean 4 / mathlib, a term printed
+as `↑(B2 x) * deriv (deriv f) x` can hide *which* coercion instantiated
+the `↑`. A theorem stated for generic `[RCLike 𝕜]` (like `em2_finite`)
+elaborates the real scalar through the RCLike coercion
+(`ofReal := Algebra.cast`); the same printed term in a concrete `ℂ` file
+elaborates through the higher-priority `Coe ℝ ℂ` (`Complex.ofReal`). The
+two kernels print identically but are **not unification-equal**, so
+`rw [h]` silently fails with "did not find an occurrence of the pattern"
+— a failure mode with no error pointing at the cause. The probe that
+root-caused it (four cast forms against the live goal; only
+`algebraMap`/`Algebra.cast` match) is logged in the day-019 §12 journal
+and pinned in the `P4Limit` header. Rule for this codebase: when
+rewriting into a generic-`RCLike`-land term, spell the scalar as
+`algebraMap (R := ℝ) (A := ℂ) (·)`. Costs nothing (`algebraMap x = (x : ℂ)`
+is `rfl`); saves a day.
