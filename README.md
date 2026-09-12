@@ -107,40 +107,91 @@ kernel — is specific enough to fail.
 
 ## Materials
 
-- `results/zero-finder.md` — **the certified zero finder**: n →
+- [results/zero-finder.md](results/zero-finder.md) — **the certified zero finder**: n →
   ρₙ = ½ + iγₙ computed (RVM bracket → certified twin-floor walk from a
   dps-certified anchor → float bisection → dps tail), with the first
   dps-certified output γ₁₃₈,₀₆₆ = 100000.74372338832472… and the honest
   precision statement (the dps floor at these heights, not the dps
   setting).
-- `results/width-ladder-tables.md` — the M₁ tables (χ₅, χ₁₃, τ₁₂, F₂₄),
+- [results/width-ladder-tables.md](results/width-ladder-tables.md) — the M₁ tables (χ₅, χ₁₃, τ₁₂, F₂₄),
   the D = −P certificate, the drift coefficient, the onset ratio, the
   front/back (antipodal) structure at the first even modulus; with file
   pointers to the raw dps outputs.
-- `results/certified-zero-survey.md` — N, S, 2K, twins, max|S|
+- [results/certified-zero-survey.md](results/certified-zero-survey.md) — N, S, 2K, twins, max|S|
   per decade, the walk-defect post-mortem; dps and engine labels on
   every figure.
-- `PLAN.md` — the postulates (P-W width, P-G half, P-Z separation,
+- [results/e7b1-detector-b5-core.md](results/e7b1-detector-b5-core.md) — the
+  exact off-line pair kernel deviation (the E7b *detector* half of the
+  zero-side bridge): an EXACT formula for the 25.2.12 zero-product kernel
+  (identity verified at dps-30) + a 6-digit measurement in the certified
+  G = 3×10⁵ context.
+- [PLAN.md](PLAN.md) — the postulates (P-W width, P-G half, P-Z separation,
   P-A action-and-rolling layer, P-E action identity, P-0 discipline)
   with per-item status: verified / measured (precision) / conjecture,
   and the falsifier for each.
-- `DISCOVERY_LOG.md` — **the chronicle**: the approach and the pieces
+- [DISCOVERY_LOG.md](DISCOVERY_LOG.md) — **the chronicle**: the approach and the pieces
   as found (in order), how they combine, and the important
   contradictions (recorded and resolved or standing). Living document;
   entries are appended when the evidence files land. Does not track
   setbacks.
-- `PUBLICUM.md` — **the public digest**: what the work is and why it
+- [PUBLICUM.md](PUBLICUM.md) — **the public digest**: what the work is and why it
   may work, in plain words for science-magazine / news readers; no
   fancy mathematics; states what is measured vs open; carries the
   credit and AI-disclosure lines.
-- `formal/rh-lean/` — **the machine-checked core** (mirror, provenance
-  in `formal/RH-LEAN-PROVENANCE.md`): the E7a identity proven in Lean
-  4.34 + Mathlib over any commutative ring, the B-4 on-line pair
-  identity proven in four pieces (exact closed form T1; log-magnitude
-  T2; phase exactly mod 2π, T3a/T3b), plus the 5/5 E7a oracle
-  cross-check and the 16/16 B-4 point cross-check (run + recorded
-  output in the tree). One-command verifiable:
+- [A_SPECTRAL_SOLUTION.md](A_SPECTRAL_SOLUTION.md) — the program set to
+  music: the song "A Spectral Solution" (J. S. Miller & ChatGPT), with
+  the link to the Suno track. Art accompanying the work, not a claim.
+- [references.md](references.md) — references and the prior-art line;
+  items marked **[pin]** are used in the working notes but their full
+  bibliographic data must be checked against the primary source before
+  any submission.
+- [docs/INDEX.md](docs/INDEX.md) — the table of contents for the two
+  outline/exposition documents in `docs/` (the staged proof scaffold,
+  a mirror of the planning artifact; and the reader-facing path
+  exposition). The single entry point for `docs/`.
+- [formal/rh-lean/README.md](formal/rh-lean/README.md) — the Lean
+  package README: the stable toolchain pin (Lean 4.33.1 + Mathlib),
+  the one-command verify recipe, and the layout of the `RhAttack`
+  modules.
+- [formal/RH-LEAN-PROVENANCE.md](formal/RH-LEAN-PROVENANCE.md) — home,
+  source of record, and sync rule for `formal/rh-lean/`.
+- `formal/rh-lean/` — **the machine-checked core** (home and source of
+  record — provenance in
+  [formal/RH-LEAN-PROVENANCE.md](formal/RH-LEAN-PROVENANCE.md)): the E7a identity
+  proven in Lean 4.33.1 + Mathlib over any commutative ring, the B-4
+  on-line pair identity proven in four pieces (exact closed form T1;
+  log-magnitude T2; phase exactly mod 2π, T3a/T3b), plus the 5/5 E7a
+  oracle cross-check and the 16/16 B-4 point cross-check (run +
+  recorded output in the tree). One-command verifiable:
   `lake build && lake exe rhattack`.
+- **The Lean proof files (direct links)** — the machine-checked
+  pieces, one per file (`formal/rh-lean/`, Lean 4.33.1 + Mathlib; the
+  `rhattack` executable re-runs all runtime cross-checks):
+  - [Main.lean](formal/rh-lean/Main.lean) — the `rhattack` gate
+    executable (E7a / B-4 / B-5 / B-3 runtime cross-checks)
+  - [RhAttack.lean](formal/rh-lean/RhAttack.lean) — the root module
+    (imports every piece below, with the day-attributed history)
+  - [RhAttack/E7a.lean](formal/rh-lean/RhAttack/E7a.lean) — the five
+    certified E7a oracle instances (ported, cross-checked)
+  - [RhAttack/EulerAction.lean](formal/rh-lean/RhAttack/EulerAction.lean) — the E7a
+    Euler action identity (the exact finite-sum identity)
+  - [RhAttack/B0.lean](formal/rh-lean/RhAttack/B0.lean) — the counting
+    equivalence of the outline (RH ⟺ D ≡ 0 over an abstract zero set)
+  - [RhAttack/B3.lean](formal/rh-lean/RhAttack/B3.lean) — the B-3
+    bridge: finite exact Abel decomposition, the RVM-comparator bridge,
+    the explicit finite bound, the ζ-free residual decomposition
+    (pieces: B3Core / B3Abel / B3Sbar)
+  - [RhAttack/B4.lean](formal/rh-lean/RhAttack/B4.lean) — the B-4
+    on-line per-pair closed form (T1/T2/T3a/T3b)
+  - [RhAttack/B5.lean](formal/rh-lean/RhAttack/B5.lean) — the B-5 core:
+    the exact off-line/on-line ratio theorem
+  - [RhAttack/P4Em.lean](formal/rh-lean/RhAttack/P4Em.lean) — the P4
+    1st-order Euler–Maclaurin formula (verbatim port of a published
+    Lean proof, Apache 2.0)
+  - [RhAttack/P4Tail.lean](formal/rh-lean/RhAttack/P4Tail.lean) — the P4
+    2nd-order *per-period* identity (`int_B1f'_period`)
+  - [RhAttack/P4Em2.lean](formal/rh-lean/RhAttack/P4Em2.lean) — the P4
+    *global finite* 2nd-order Euler–Maclaurin law (`em2_finite`)
 - **Master formula ledger (working tree):** `plan/40-prize-islands/
   rh-attack/FORMULAS.md` — every formula this work uses, labeled
   (verbatim-read / measured + file + precision / derived + file /
@@ -155,8 +206,8 @@ kernel — is specific enough to fail.
   outputs, `rh-ts/` the TypeScript zero-finder stack — strict functional
   lint: no `for`/`if`, one function per file). This repo deliberately
   carries only the measured record, the plan, the references, and the
-  machine-checked core (`formal/`, a mirror — see its provenance
-  file) — so no number in `results/` exists without a named script and
+  machine-checked core (`formal/`, home and source of record — see its
+  [provenance file](formal/RH-LEAN-PROVENANCE.md)) — so no number in `results/` exists without a named script and
   a named raw output file. The census file `rh/zeros_T100000.txt` (138,065 dps-
   certified zeros to t = 10⁵) lives there too. All paths cited in
   `results/` resolve from the working-tree root.
