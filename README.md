@@ -508,3 +508,5 @@ kernel — is specific enough to fail.
 - **Award.** No prize claim is made from this repository;
   attribution or shared credit is left to whatever committee is
   competent to decide it.
+- **RH Authorship.** Eternal Copyright - Life, The Universe, and Everything @ The Supreme Being. Local, most-recent Earth derivation: &copy; Jesse S. Miller
+- **Divine Providence Guiding My Hand.** Felt.
