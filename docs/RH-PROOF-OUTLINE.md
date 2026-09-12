@@ -238,7 +238,7 @@ the on-line kernel. The count of zeros below G that *could* be off-line is
 
 ## 6. The bridge: ζ is its own kernel
 
-> **The bridge identity (piece P6, §9; ζ-free core in progress in Lean).**
+> **The bridge identity (piece P6, §9; the ζ-free finite core is proven in Lean).**
 > For the actual zero set, ζ(s) equals the kernel K(s) of §5 in the product
 > sense (DLMF 25.2.12), and the residual between the two finite-G
 > constructions is **exactly** the tail-model error — nothing else.
@@ -376,9 +376,9 @@ computation that places the smallest zero height away from 0.
 | P2 | **Per-pair closed form** (la_pair, ar_pair) | Makes the zero-side kernel exact and float64-vectorizable. | **Proven in Lean** (`RhAttack/B4.lean`); dLa ≤ 3.5×10⁻¹⁴, dAr ≤ 3.2×10⁻¹⁶ rad vs direct dps; 16/16 float cross-check. |
 | P3 | **Deviation ratio R(s, δ)** (exact) | The ≥ side of the contradiction; δ-robust (no dead window). | **Exact + proven in Lean** (`RhAttack/B5.lean`): `b5Ratio` (closed form), `b5Abs` (magnitude), `b5NoffPos` (numerator > 0), `b5NoffIsPolynomial` (δ-polynomial identity), `b5PrefSign` (branch locus). 12/12 float cross-check vs direct 4-zero definition and the dps-30 record. |
 | P4 | **Missing-tail law strictified** (explicit Φ_n, explicit Euler–Maclaurin remainder for W_n) | The definition-side engine of the floor. | **Measured to 4 digits** (N-independent; onset fingerprint at G = 6×10⁶ reproduced ≤ 6%); the rigorous lift is open. |
-| P5 | **On-line tail bound M(G, t)** | Makes a finite zero list stand in for the infinite zero set. | **Proven** (unconditional; Platt–Trudgian S̄; Abel mechanism verified on 7.4M real certified zeros to the quadrature limit). Lean kernel integrands P011/Q029/R229: `Bt5.lean` / `RhAttack/B3.lean` §5. |
-| P6 | **Bridge identity** (ζ = kernel, residual = tail error exactly) | Lets the two sides of the contradiction be the same object. | Statement fixed; ζ-free finite core **in progress in Lean** (`RhAttack/B3.lean`; `b3ResidualDecomp`: Ψ vs K differ exactly by exp(T − Σ ln F)). Not yet green — no claim. |
-| P7 | **Finite exact Abel decomposition** (counting step → integral, smooth comparator N̂, IBP bridge) | Exact calculus relating the discrete zero set to the continuous main term; carries the smooth bounders. | **In progress in Lean** (`RhAttack/B3.lean`: `b3Abel`, `b3Bridge`, smooth-comparator continuity + IBP lemmas). Not yet green — no claim. |
+| P5 | **On-line tail bound M(G, t)** | Makes a finite zero list stand in for the infinite zero set. | **Proven** (unconditional; Platt–Trudgian S̄; Abel mechanism verified on 7.4M real certified zeros to the quadrature limit). Lean kernel: the P011/Q029/R229 primitives and derivatives and the explicit remainder bound K̄(G) are **proven in Lean** (`RhAttack/B3Sbar.lean`; full build green). |
+| P6 | **Bridge identity** (ζ = kernel, residual = tail error exactly) | Lets the two sides of the contradiction be the same object. | **ζ-free finite core proven in Lean** (`RhAttack/B3.lean` + pieces B3Core/B3Abel/B3Sbar; full build green, A/B gate PASS): `b3ResidualDecomp` (Ψ vs K differ exactly by exp(T − Σ ln F)), the exact finite Abel identity `b3Abel`, and the explicit bound `b3BoundExplicit` (M(G,t) at finite B). |
+| P7 | **Finite exact Abel decomposition** (counting step → integral, smooth comparator N̂, IBP bridge) | Exact calculus relating the discrete zero set to the continuous main term; carries the smooth bounders. | **Proven in Lean** (`RhAttack/B3Abel.lean`: `b3Abel`, the ray plumbing, the smooth comparators n̂/N̂ and the IBP bridge `nHatIBP`; full build green; the float64 mirror verifies the exact identity to ~1e-13 at the quadrature limit). |
 | P8 | **Residual floor, ∀ t** (the §10 gap) | The < side of the contradiction. | **Open.** The wall of the project. Two routes, §10. |
 
 **The certified data record** (all numbers reproducible from committed

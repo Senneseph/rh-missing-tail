@@ -24,7 +24,10 @@ session; see the day-012 journal).
 | `RhAttack/B0.lean` | **P1** — counting lemma | RH ⇔ D ≡ 0 over an abstract zero set (no ζ): `eqNtotMinusNon`, `nondec`, `offSliceEven`, `zeroD_of_RH` / `RH_of_zeroD` ⇒ `RH_iff_Dzero`. | **GREEN** (re-verified 2026-09-11) |
 | `RhAttack/B4.lean` | **P2** — per-pair closed form | The zero-side kernel per conjugate pair: `pairClosedForm` (T1 exact), `pairLogAbs` (T2), `pairArgAngle` / `pairArLedger` (T3a/T3b phase), + `B4Float` 16-point cross-check. | **GREEN** |
 | `RhAttack/B5.lean` | **P3** — deviation ratio | The off-line pair's effect on the kernel, exact: `b5Ratio` (closed form `pref·e^{sω_δ}`), `b5Abs`, `b5NoffPos`, `b5NoffIsPolynomial` (no δ-dead-window), `b5PrefSign`, + `B5Float` 12-config cross-check. | **GREEN** |
-| `RhAttack/B3.lean` | **P6 / P7** — the bridge + finite Abel/IBP machinery | ζ-free bridge core: `b3ResidualDecomp` (bridge Ψ vs kernel K differ **exactly** by exp(Tt − Σ_T ln F)), `b3Abel` (finite exact Abel decomposition, counting step N_L), `b3Bridge` (smooth RVM comparator N = NHat + S), §2 NHat/fT derivatives, §5 S-bound integrands P011/Q029/R229, §6 continuity + IBP (`nHatIBP`). | **WIP** — atomic repair in progress (48→30 at last run, day-014/15); **not** imported until green; no claim |
+| `RhAttack/B3Core.lean` | **P6 / P7** — shared atoms | The B-3 atoms: `twoPiInv`, `nHat`, `NHat`, `Sbar`, `u`, `w`, `fT`, `fTp`, `Bf`, `Cf`, `Kbar`, §1/§2 derivatives (`lift`, `NHat_deriv`, `fT_deriv`), `fT_bound` / `fTp_bound` / `negLog1mY_le`. | **GREEN** |
+| `RhAttack/B3Abel.lean` | **P7** — finite exact Abel decomposition | `NList` (counting step), the ray plumbing (`rayIntegrand`, `rayIntegrable`, `NListRayIntegrable`, `rayInt_eval`, `rayEndFormEq`), `b3Abel` (Σ_L f vs ∫ N_L f′ exact), §4.4 smooth comparators n̂/N̂ (`nHatContinuousOn` …) + the IBP bridge `nHatIBP`. | **GREEN** |
+| `RhAttack/B3Sbar.lean` | **P5 / P6** — the S-bound kernel + remainder | Antiderivative primitives `P011` / `Q029` / `R229` (Platt–Trudgian 0.110 / 0.290 / 2.290) + `sqInv_deriv`, their derivatives, `Kbar_le` (∫ S̄/x³ ≤ K̄(G)), `b3BoundExplicit` (the explicit M(G,t) at finite B: `|Σ_L fT − ∫ nHat·fT| ≤ Bf·(S̄ B + S̄ G) + Cf·K̄(G)`). | **GREEN** |
+| `RhAttack/B3.lean` | **P6 / P7** — the bridge + the A/B gate | Composes the three pieces + `b3ResidualDecomp` (bridge Ψ vs kernel K differ **exactly** by exp(T − Σ_T ln F)) + §7 `B3Float`: the float64 mirror (exact finite Abel identity at the quadrature limit + the explicit bound) run by the gate. | **GREEN** — full build green; A/B gate PASS (day-016) |
 | `RhAttack/EulerAction.lean` | supporting exact identity | `eulerAction`: the Euler-action / Abel-summation identity, exact in **every commutative ring** (pure finite algebra; the machine-checked engine behind E7a). | **GREEN** |
 | `RhAttack/E7a.lean` | supporting (data provenance) | The five certified oracle instances of the Euler action, ported (exact-ℤ data via `#eval`; float64 LHS pipeline vs the dps-20 Python record). | **GREEN** (5/5 via `Main.lean`) |
 
@@ -32,8 +35,8 @@ session; see the day-012 journal).
 
 | File | What it is | Status |
 |---|---|---|
-| `Main.lean` | The executable **`rhattack`** — runtime cross-check gate: E7a 5/5, B-4 16/16, B-5 12/12 (Lean float64 vs Python oracle records). A red gate is structurally impossible to misread. | **GREEN** |
-| `RhAttack.lean` | Library root — imports the green pieces. `RhAttack.B3` is deliberately **not** imported until green (one line, then). | **GREEN** |
+| `Main.lean` | The executable **`rhattack`** — runtime cross-check gate: E7a 5/5, B-4 16/16, B-5 12/12, B-3 A/B gate (Lean float64 vs the machine-checked theorems + Python oracle records). A red gate is structurally impossible to misread. | **GREEN** |
+| `RhAttack.lean` | Library root — imports all the pieces, **including `RhAttack.B3`** (day-016; the split pieces are green). | **GREEN** |
 
 ### Test files (recipe locks before porting into B3)
 
@@ -42,7 +45,7 @@ session; see the day-012 journal).
 | `Bt2.lean` | B-3 §2 derivative recipe (NHat_deriv / fT_deriv): surface-`have` → `lift` transport → `congr_deriv` scalar bridge; canonical-atom discipline. |
 | `Bt5.lean` | B-3 §5 antiderivative derivatives for the S-bound kernel integrands P011 / Q029 / R229 (Platt–Trudgian 0.110 / 0.290 / 2.290). |
 | `Bt6.lean` | Atomic probes for B3 §4.4/§5 continuity rewrites (ContinuousAt chains, the =ᶠ[𝓝x] bridge, List ∑/∏, NList simp behavior). |
-| `BtF.lean` | `B3Float` — float64 pair-kernel layer F, Fp for the B-3 bridge (not green until the B-3 float cross-check lands). |
+| `BtF.lean` | `B3Float` — the float64 pair-kernel layer F, Fp for the B-3 bridge (now wired into `Main.lean` as the B-3 A/B gate, day-016; the production layer lives in `B3.lean` §7). |
 | `BtL.lean` | `lift` — HasDerivAt transport through function equality (ported into B3 §2) + canonical-atom goals. |
 
 ### API pin probes (`Probe*.lean`, days 013–15)
@@ -72,6 +75,12 @@ form used in the B-3 repair has a probe behind it.
 | `ProbeL` | `field_simp` + `ring_nf` closers (fTp_bound inverse-atom behavior) |
 | `ProbeM` | NList cons-case: `rw [dif_pos hg]` **fails** (map-binder hygiene), `simp [hg]` closes — the proven recipe |
 | `ProbeN`/`ProbeN2` | top-level decls keep their SHORT names across modules (the split of B3.lean into B3Core/B3Abel rests on this pin) |
+| `ProbeN3` | `linarith` does **not** flip `¬(g<b)` to `b≤g`; `simp only [not_lt] at h` does (the rayEndFormEq g=b branch) |
+| `ProbeN4` | the g=b derivation menu under the split_ifs context (all alternatives pinned) |
+| `ProbeN5` | `-e ≤ 0` goals: `.neg_le` field **invalid** in 4.33.1; `positivity` **refuses** the form; `div_le_iff₀` + `norm_num` closes (the Kbar_le hRn fix) |
+| `ProbeN6` | calc-step justifications: SAME-LINE tactic or `by { }` block only (bare `:= by` + next-line leaks into calc-continuation parse); `field_simp` auto-closes; `positivity` sees `0 ≤ 2·x³` where `nlinarith [hx0]` does not |
+| `ProbeN7` | building `=ᶠ[𝓝[s] x]`: set-pointwise `simpa using hfg` **fails**; `EventuallyEq.of_eq` from full equality works (`nhdsWithin x s` long form) |
+| `ProbeN8` | `continuity` (aesop) **cannot** close `z^3` / `c / z^3` at a point (all 3 forms red); explicit `.mul`/`.congr`/`ContinuousAt.div` + `.continuousWithinAt` is the green route (the B3Sbar hInv3 fix) |
 
 ### References & toolchain
 
@@ -95,11 +104,12 @@ lake build
 lake exe rhattack
 ```
 
-Expected: **E7a 5/5 + B-4 16/16 + B-5 12/12 CROSS-CHECK PASS**, worst
-deviations ~1e-13 scale (a transcription error would show ~1e-12·O(1)).
-`lake build` compiles the green set; `RhAttack/B3.lean` is checked
-individually (`lake env lean RhAttack/B3.lean`) until it goes green and
-joins the library root.
+Expected: **E7a 5/5 + B-4 16/16 + B-5 12/12 + B-3 CROSS-CHECK PASS**, worst
+deviations ~1e-13 scale (a transcription error would show ~1e-12·O(1)); the
+B-3 gate reports the Abel rel-err, the explicit-bound margin (must be > 0),
+and the quadrature self-check.
+`lake build` compiles the whole package (all pieces, including B-3, green —
+day-016).
 
 ## Provenance (no recall — every number traces)
 
