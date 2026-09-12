@@ -49,11 +49,51 @@ header for the uIcc/Nat.cast_add/ContinuousOn.mono conventions):
     evaluation (L2).
   * `DifferentiableOn.continuousOn` (Calculus/FDeriv/Basic.lean:664).
 
-STATUS (2026-09-12, Lean 4.33.1): atoms L1 and L2 GREEN (L2 drafted
-after the day-019 L1 turn); L3–L5 pending per the sketch. No sorry.
+STATUS (2026-09-12, Lean 4.33.1): atoms L1, L2, L3 GREEN (L3: kernel
+absolute convergence + M→∞ passage); L4–L5 pending per the sketch.
+No sorry.
 THEOREMS (L1): p4_f_hasDerivAt, p4_f1_hasDerivAt, p4_f2_hasDerivAt,
  p4_f1_at, p4_f2_at, p4_f1_on_Icc, p4_f2_on_Icc.
 THEOREMS (L2): p4_integral_closed, p4_finite_em2.
+THEOREMS (L3): p4_f2_abs_eq, p4_f2_continuousOn_Ioi, p4_f2_integrableOn_Ioi,
+ p4_f2_integral_Ioi_eq, p4_kernel_integrableOn_Ioi, p4_kernel_tendsto,
+ p4_f2_tendsto.
+
+L3 TRANSFERABLE NOTES (keep — drafted from the published Gamma example,
+Mathlib/Analysis/SpecialFunctions/Gamma/Basic.lean, `Complex.
+GammaIntegral_convergent` / `tendsto_partialGamma`):
+  * `IntegrableOn f s` = `Integrable f (volume.restrict s)` = the pair
+    `⟨AEStronglyMeasurable, HasFiniteIntegral⟩` on that restricted measure;
+    `constructor` splits it.  Set integrals `∫ x in s, f x` are
+    definitionally `∫ x, f x ∂ (volume.restrict s)`, so univariate
+    lemmas (`MeasureTheory.integral_smul`, `integral_Ioi_cpow_of_lt`)
+    match set integrals directly.
+  * `MeasureTheory.ae_of_all {p} (μ : F) (hp : ∀ a, p a) : ∀ᵐ a ∂μ, p a`
+    — the MEASURE (outer measure) is the FIRST explicit argument; passing
+    the `by`-block first sends it into the `μ : F` slot (goal becomes a
+    bare meta, `introN` fails on `?m` — the symptom).
+  * After `← hasFiniteIntegral_norm_iff`, mono' sees the NORM of the norm:
+    `‖(‖f x‖ : ℝ)‖` — strip it with a one-line `have h1 := by simp`
+    (verified by probe: `‖(‖z‖ : ℝ)‖ = ‖z‖` is a simp fact).
+  * `ContinuousOn.aestronglyMeasurable (hf : ContinuousOn f s)
+    (hs : MeasurableSet s) : AEStronglyMeasurable f (μ.restrict s)`;
+    narrowing the set: `ContinuousOn.mono (hf : ContinuousOn f s0)
+    (h : t ⊆ s0)`; `Ioi c ⊆ Ioi 0` via `Ioi_subset_Ioi_iff.mpr` (there is
+    NO `Ioi_subset_Ioi_left` in 4.33.1).
+  * `continuousOn_const` is argument-free in 4.33.1 (`fun_prop` lemma,
+    both s and c implicit) — spell the type in a `have`.
+  * For ℂ-smul over ℂ, `c • z = c * z` is DEFINITIONAL (`rfl` closes it;
+    verified by probe) — no `smul_def` needed; bare `smul_def` is a trap
+    here: `open Finset` makes it resolve to `Finset.smul_def`.
+  * Kernel B2-side aes: P4Tail's `fun_prop` aes +
+    `Continuous.comp_aestronglyMeasurable (hg := Complex.continuous_ofReal)`
+    + `AEStronglyMeasurable.mono_measure` (aes descends to smaller
+    measures; `Measure.restrict_mono (Ioi c).subset_univ le_rfl` trans
+    `le_of_eq Measure.restrict_univ`).
+  * The `0` in `Set.Ioi 0` and lambda binders `fun (x : ℝ) => ...` must be
+    explicitly typed — underdetermined `0`/`x` default to ℂ here.
+  * `Complex.add_re` (NOT `re_add`), `Complex.neg_re`, `Complex.norm_def`,
+    `Complex.normSq_ofReal`, `Real.sqrt_sq_eq_abs` — the |B2| bridge chain.
 
 L2 REMAINDER-TERM MATCHING (transferable technique, keep for L3–L5):
 `em2_finite` lives in a `[RCLike 𝕜]` context, where its tail integrand
@@ -279,5 +319,214 @@ theorem p4_finite_em2 (s : ℂ) (hs1 : s ≠ 0) (hs2 : s ≠ -1) (hs3 : s ≠ 1)
   rw [p4_integral_closed s hs3 hn hnm,
     p4_f1_at hs1 (m : ℝ) hmn, p4_f1_at hs1 (n : ℝ) hnn,
     hRem]
+
+  -- ==================================================================
+  --  P4 atom L3: absolute convergence of the kernel, the M→∞ passage
+  --  (module sketch §1, atom L3)
+  --
+  --  Goal: the B̂₂·f″ kernel of the finite 2nd-order EM law (L2) is
+  --  absolutely integrable on (c, ∞) for c > 0 and ℜs > -1 (line:
+  --  ℜs = ½), so the remainder integral of A(M, s) has a limit as
+  --  M → ∞ — namely the improper tail integral — by the finite
+  --  identity (L2), not by any series argument (the raw series
+  --  diverges at σ = ½; spec §T1).
+  --
+  --  METHOD — borrowed from the PUBLISHED Gamma-function example
+  --  (Mathlib/Analysis/SpecialFunctions/Gamma/Basic.lean:
+  --  `Complex.GammaIntegral_convergent`, `tendsto_partialGamma` —
+  --  same shape: a complex-power kernel on Ioi, integrability by
+  --  `constructor` + aes + norm comparison, limit by
+  --  `intervalIntegral_tendsto_integral_Ioi a hIntegrableOn tendsto_id`):
+  --   * `IntegrableOn f (Ioi c)` unfolds to a pair on
+  --     `volume.restrict (Ioi c)`; set integrals `∫ x in s, f x`
+  --     are definitionally `∫ x, f x ∂ (volume.restrict s)` (mathlib
+  --     docs, set-integral), so univariate lemmas such as
+  --     `integral_smul` match set integrals directly.
+  --   * kernel aes: `AEStronglyMeasurable.mul` — the B2 side from
+  --     P4Tail's `fun_prop` aes + `Continuous.comp_aestronglyMeasurable`
+  --     + `mono_measure` (aes descends to smaller measures);
+  --     the f″ side from `ContinuousOn.aestronglyMeasurable`.
+  --   * kernel finiteness: `HasFiniteIntegral.mono'` domination by
+  --     (1/6)·‖s(s+1)‖·x^{−(ℜs+2)} (abs_B2_le + p4_f2_abs_eq), whose
+  --     integrability is `integrableOn_Ioi_rpow_of_lt`.
+  --   * limit: the verbatim Gamma idiom.
+  --  Pinned mathlib 4.33.1 lemmas (checked in this checkout):
+  --   * Complex.continuousAt_ofReal_cpow_const (Pow/Continuity.lean:365)
+  --   * Complex.norm_cpow_eq_rpow_re_of_pos (Pow/Real.lean:337)
+  --   * integrableOn_Ioi_rpow_of_lt (ImproperIntegrals.lean:130)
+  --   * integral_Ioi_cpow_of_lt (ImproperIntegrals.lean:245)
+  --   * intervalIntegral_tendsto_integral_Ioi (IntegralEqImproper.lean)
+  --   * integral_smul (Bochner/Basic.lean:275, unconditional)
+  --   * integral_congr_ae (Bochner/Basic.lean:299)
+  --   * HasFiniteIntegral.mono' (L1Space/HasFiniteIntegral.lean:130)
+  --   * hasFiniteIntegral_norm_iff (L1Space/HasFiniteIntegral.lean:273)
+  --   * AEStronglyMeasurable.mul (AEStronglyMeasurable.lean:300),
+  --     .mono_measure (:202), Continuous.comp_aestronglyMeasurable (:232),
+  --     ContinuousOn.aestronglyMeasurable (IntegrableOn.lean:760)
+  --   * ae_restrict_iff' (Measure/Restrict.lean:627),
+  --     Filter.ae_of_all (OuterMeasure/AE.lean:94)
+  --   * Measure.restrict_mono (Measure/Restrict.lean:87),
+  --     Measure.restrict_univ (:245)
+  --   * Complex.norm_def (Analysis/Complex/Norm.lean:29),
+  --     Complex.normSq_ofReal (Data/Complex/Basic.lean),
+  --     Real.sqrt_sq_eq_abs
+  --  Kernel convention: the new L3 statements write the B̂₂ scalar in
+  --  `Coe` form `(B2 x : ℂ)` (matches the aes machinery directly);
+  --  L5 bridges to L2's `algebraMap` form by pointwise `rfl`
+  --  (algebraMap ℝ ℂ = Coe ℝ ℂ = ofReal — L2 note above).
+
+  --/ Atom L3.a — pointwise magnitude of the second-derivative kernel:
+  --| ‖p4_f2 s x‖ = ‖s·(s+1)‖ · x^{−(ℜs + 2)}  (0 < x).
+  --| At the line ℜs = ½ this is |f″(x)| = |s|·|s+1|·x^{−5/2}, a
+  --| decreasing p-power (p = ℜs + 2 > 3) — the OP1/OP2 input of L4. -/
+  theorem p4_f2_abs_eq {s : ℂ} {x : ℝ} (hx : 0 < x) :
+      ‖p4_f2 s x‖ = ‖s * (s + 1)‖ * x ^ (-(s.re + 2)) := by
+    dsimp only [p4_f2]
+    rw [norm_mul, Complex.norm_cpow_eq_rpow_re_of_pos hx _]
+    rw [show (-s - 2 : ℂ).re = -(s.re + 2) from by
+      rw [show (-s - 2 : ℂ) = -((s : ℂ) + 2) from by ring,
+        Complex.neg_re, Complex.add_re, show (2 : ℂ).re = 2 from by norm_num]]
+
+  --/ Atom L3.b — f″ is continuous on (0, ∞) (no hypothesis on s):
+  --| the only possible kink of x ↦ (x : ℂ) ^ c is at 0. -/
+  theorem p4_f2_continuousOn_Ioi {s : ℂ} : ContinuousOn (p4_f2 s) (Set.Ioi (0 : ℝ)) := by
+    have hbase : ContinuousOn (fun (x : ℝ) => (x : ℂ) ^ (-s - 2)) (Set.Ioi (0 : ℝ)) := by
+      intro x hx
+      exact (Complex.continuousAt_ofReal_cpow_const x (-s - 2)
+        (Or.inr (ne_of_gt hx))).continuousWithinAt
+    have hConst : ContinuousOn (fun _ => (s * (s + 1) : ℂ)) (Set.Ioi (0 : ℝ)) := continuousOn_const
+    have hprod : ContinuousOn (fun (x : ℝ) => (s * (s + 1)) * (x : ℂ) ^ (-s - 2)) (Set.Ioi (0 : ℝ)) :=
+      hConst.mul hbase
+    exact hprod.congr (fun x _ => by dsimp only [p4_f2])
+
+  --/ Atom L3.c — absolute (Bochner) integrability of f″ on (c, ∞),
+  --|  c > 0, under ℜs > -1. Comparison: ‖f″(x)‖ = ‖s(s+1)‖·x^{−(ℜs+2)}
+  --|  (L3.a), a p-power with p = ℜs + 2 > 1 — exactly
+  --|  `integrableOn_Ioi_rpow_of_lt`.  Gamma-style proof shape:
+  --|  `constructor` + aes + `HasFiniteIntegral.mono'` norm domination. -/
+  theorem p4_f2_integrableOn_Ioi {s : ℂ} (hsre : s.re > -1) {c : ℝ} (hc : 0 < c) :
+      IntegrableOn (p4_f2 s) (Set.Ioi c) := by
+    have hRpow : Integrable (fun x : ℝ => x ^ (-(s.re + 2))) (volume.restrict (Set.Ioi c)) :=
+      (integrableOn_Ioi_rpow_of_lt (by linarith) hc).integrable
+    have hMajor : HasFiniteIntegral (fun x : ℝ => ‖s * (s + 1)‖ * x ^ (-(s.re + 2)))
+        (volume.restrict (Set.Ioi c)) :=
+      Integrable.hasFiniteIntegral (hRpow.const_mul (‖s * (s + 1)‖ : ℝ))
+    constructor
+    · refine ContinuousOn.aestronglyMeasurable ?_ measurableSet_Ioi
+      exact (p4_f2_continuousOn_Ioi).mono (Ioi_subset_Ioi_iff.mpr hc.le)
+    · rw [← hasFiniteIntegral_norm_iff]
+      exact HasFiniteIntegral.mono' hMajor (by
+        rw [ae_restrict_iff' measurableSet_Ioi]
+        exact MeasureTheory.ae_of_all (μ := (volume : Measure ℝ)) (fun x hx =>
+          le_of_eq (by
+            have h1 : ‖(‖p4_f2 s x‖ : ℝ)‖ = ‖p4_f2 s x‖ := by simp
+            rw [h1, p4_f2_abs_eq (hc.trans hx)]))
+      )
+
+  --/ Atom L3.d — the closed value of the f″ tail (corollary of the pinned
+  --|  `integral_Ioi_cpow_of_lt`; cross-check target of the P4Float gate):
+  --|  ∫_{(c,∞)} p4_f2 s = s · c^{−s−1}   (ℜs > -1, c > 0; s+1 ≠ 0 follows). -/
+  theorem p4_f2_integral_Ioi_eq {s : ℂ} (hsre : s.re > -1) {c : ℝ} (hc : 0 < c) :
+      (∫ x : ℝ in Set.Ioi c, p4_f2 s x) = s * (c : ℂ) ^ (-s - 1) := by
+    have hs1 : (s + 1 : ℂ) ≠ 0 := by
+      intro h
+      have hre : (s + 1 : ℂ).re = 0 := by rw [h]; simp
+      rw [Complex.add_re, Complex.one_re] at hre
+      linarith [hsre, hre]
+    have ha : (-s - 2 : ℂ).re < -1 := by
+      rw [show (-s - 2 : ℂ) = -((s : ℂ) + 2) from by ring,
+        Complex.neg_re, Complex.add_re, show (2 : ℂ).re = 2 from by norm_num]
+      linarith
+    have hNeg : -s - 1 ≠ 0 := by
+      intro h
+      rw [show (-s - 1 : ℂ) = -((s : ℂ) + 1) from by ring, neg_eq_zero] at h
+      exact hs1 h
+    have hEqForm : (∫ x : ℝ in Set.Ioi c, p4_f2 s x) =
+        (∫ x : ℝ in Set.Ioi c, (s * (s + 1)) • (x : ℂ) ^ (-s - 2)) := by
+      apply MeasureTheory.integral_congr_ae
+      exact MeasureTheory.ae_of_all (μ := (volume.restrict (Set.Ioi c))) (fun x =>
+        by
+          dsimp only [p4_f2]
+          rfl)
+    rw [hEqForm]
+    have hPull : (∫ x : ℝ in Set.Ioi c, (s * (s + 1)) • (x : ℂ) ^ (-s - 2)) =
+        (s * (s + 1)) • (∫ x : ℝ in Set.Ioi c, (x : ℂ) ^ (-s - 2)) := by
+      rw [MeasureTheory.integral_smul]
+    rw [hPull, integral_Ioi_cpow_of_lt ha hc]
+    rw [show (-s - 2 + 1 : ℂ) = -s - 1 from by ring]
+    have hSm : (s * (s + 1)) • (-(c : ℂ) ^ (-s - 1) / (-s - 1)) =
+        (s * (s + 1)) * (-(c : ℂ) ^ (-s - 1) / (-s - 1)) := rfl
+    rw [hSm]
+    have hFrac : (-(c : ℂ) ^ (-s - 1)) / (-s - 1) =
+        (c : ℂ) ^ (-s - 1) / (s + 1) := by
+      rw [show (-s - 1 : ℂ) = -((s : ℂ) + 1) from by ring]
+      field_simp [hNeg, hs1]
+    rw [hFrac]
+    field_simp [hs1]
+
+  --/ Atom L3.e — the star: the B̂₂·f″ kernel is absolutely integrable on
+  --|  (c, ∞) (c > 0, ℜs > -1) — the M→∞-passage hypothesis of
+  --|  `intervalIntegral_tendsto_integral_Ioi`.  Gamma-style proof shape:
+  --|  aes = product of two aes functions (B2 side via P4Tail's `fun_prop`
+  --|  aes + continuous ℝ→ℂ embedding + restriction monotonicity; f″ side
+  --|  via L3.b); HasFiniteIntegral = `HasFiniteIntegral.mono'` domination
+  --|  by (1/6)·‖s(s+1)‖·x^{−(ℜs+2)} (abs_B2_le + L3.a). -/
+  theorem p4_kernel_integrableOn_Ioi {s : ℂ} (hsre : s.re > -1) {c : ℝ} (hc : 0 < c) :
+      IntegrableOn (fun x => (B2 x : ℂ) * p4_f2 s x) (Set.Ioi c) := by
+    have hB2aes : AEStronglyMeasurable (fun x => (B2 x : ℂ)) (volume.restrict (Set.Ioi c)) := by
+      exact (AEStronglyMeasurable.mono_measure
+        (Continuous.comp_aestronglyMeasurable (hg := Complex.continuous_ofReal)
+          (aestronglyMeasurable_B2 : AEStronglyMeasurable B2))
+        ((Measure.restrict_mono (Set.Ioi c).subset_univ le_rfl).trans (le_of_eq Measure.restrict_univ)))
+    have hF2aes : AEStronglyMeasurable (p4_f2 s) (volume.restrict (Set.Ioi c)) :=
+      ContinuousOn.aestronglyMeasurable
+        ((p4_f2_continuousOn_Ioi).mono (Ioi_subset_Ioi_iff.mpr hc.le)) measurableSet_Ioi
+    have hRpow : Integrable (fun x : ℝ => x ^ (-(s.re + 2))) (volume.restrict (Set.Ioi c)) :=
+      (integrableOn_Ioi_rpow_of_lt (by linarith) hc).integrable
+    have hMajor : HasFiniteIntegral
+        (fun x : ℝ => (1 / 6) * (‖s * (s + 1)‖ * x ^ (-(s.re + 2))))
+        (volume.restrict (Set.Ioi c)) :=
+      Integrable.hasFiniteIntegral ((hRpow.const_mul (‖s * (s + 1)‖ : ℝ)).const_mul ((1 / 6) : ℝ))
+    constructor
+    · exact hB2aes.mul hF2aes
+    · rw [← hasFiniteIntegral_norm_iff]
+      exact HasFiniteIntegral.mono' hMajor (by
+        rw [ae_restrict_iff' measurableSet_Ioi]
+        exact MeasureTheory.ae_of_all (μ := (volume : Measure ℝ)) (fun x hx => by
+          have hxpos : 0 < x := hc.trans hx
+          have h1 : ‖(‖(B2 x : ℂ) * p4_f2 s x‖ : ℝ)‖ = ‖(B2 x : ℂ) * p4_f2 s x‖ := by simp
+          rw [h1]
+          calc ‖(B2 x : ℂ) * p4_f2 s x‖
+              _ = ‖(B2 x : ℂ)‖ * ‖p4_f2 s x‖ := by rw [norm_mul]
+              _ ≤ (1 / 6) * ‖p4_f2 s x‖ := by
+                gcongr
+                calc ‖(B2 x : ℂ)‖
+                    _ = Real.sqrt (((B2 x : ℝ) ^ 2)) := by
+                      rw [Complex.norm_def, Complex.normSq_ofReal, ← pow_two]
+                    _ = |B2 x| := by rw [Real.sqrt_sq_eq_abs]
+                    _ ≤ 1 / 6 := abs_B2_le hxpos.le
+              _ ≤ (1 / 6) * (‖s * (s + 1)‖ * x ^ (-(s.re + 2))) := by
+                gcongr
+                exact le_of_eq (p4_f2_abs_eq hxpos)))
+
+  --/ Atom L3.f — the M→∞ passage for the kernel (the verbatim Gamma
+  --|  `tendsto_partialGamma` idiom): under L3.e,
+  --|  `∫_n^M B̂₂·f″ → ∫_n^∞ B̂₂·f″` as M → ∞ (n ≥ 1). -/
+  theorem p4_kernel_tendsto {s : ℂ} (hsre : s.re > -1) (n : ℕ) (hn : 0 < n) :
+      Tendsto (fun M : ℝ => ∫ x in (n : ℝ)..M, (B2 x : ℂ) * p4_f2 s x)
+          atTop (𝓝 (∫ x : ℝ in Set.Ioi (n : ℝ), (B2 x : ℂ) * p4_f2 s x)) :=
+    intervalIntegral_tendsto_integral_Ioi (a := (n : ℝ))
+      (p4_kernel_integrableOn_Ioi hsre (Nat.cast_pos.mpr hn)) tendsto_id
+
+  --/ Atom L3.g — the M→∞ passage for the bare f″ integral, with closed
+  --|  value (L3.d): `∫_n^M f″ → s·n^{−s−1}` — the limit of the A(M, s)
+  --|  integral term. -/
+  theorem p4_f2_tendsto {s : ℂ} (hsre : s.re > -1) (n : ℕ) (hn : 0 < n) :
+      Tendsto (fun M : ℝ => ∫ x in (n : ℝ)..M, p4_f2 s x)
+          atTop (𝓝 (s * (n : ℂ) ^ (-s - 1))) := by
+    have hLim := intervalIntegral_tendsto_integral_Ioi (a := (n : ℝ))
+        (p4_f2_integrableOn_Ioi hsre (Nat.cast_pos.mpr hn)) tendsto_id
+    rw [p4_f2_integral_Ioi_eq hsre (Nat.cast_pos.mpr hn)] at hLim
+    exact hLim
 
 end
