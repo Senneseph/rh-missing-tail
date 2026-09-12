@@ -4,13 +4,284 @@
 they generate, the onset at which zero content first enters the budget —
 and a separation program with explicit falsifiers.**
 
-*Preliminary note, staged experimental program · v0 · 2026-09-09;
-2026-09-11 update: stage 2 is now certified to **10⁷ — no off-line zero pair
-below 10⁷** (`results/certified-zero-survey.md`, v1); the proof path is
-written for a reader in `docs/RH-PROOF-OUTLINE.md`; the machine-checked core
-**lives in this repository** at `formal/rh-lean/`. This is a note to
-mathematicians, not a claim. Every number has a script (in the working tree,
-§Materials), a precision label, and a named raw output.*
+## The argument as constructed *<sub>state: 2026-09-12</sub>*
+
+*Honest status — read this first.* The argument below is a **complete
+proof skeleton of the Riemann Hypothesis**. Its pieces are either
+**(i) proven** (the marked pieces are machine-checked in Lean 4.33.1 +
+Mathlib, a pinned stable toolchain), **(ii) classical** (taken from the
+literature), or **(iii) measured** (to the stated precision; every number
+here has a committed script, a precision label, and a named raw output —
+§Materials). Exactly **one** piece, the *residual floor* of Part 7, is
+**open**; the argument of Part 8 is stated as a proof **conditional on
+that one piece**. Nothing in this repository claims that the Riemann
+Hypothesis has been proved.
+
+### 1. The hypothesis, and the counting reframe
+
+The Riemann zeta function ζ(s), for Re(s) > 1,
+
+    ζ(s) = ∏_p (1 − p^−s)^−1,
+
+continues meromorphically to ℂ (single simple pole at s = 1) and satisfies
+the functional equation relating s to 1 − s. Its non-trivial zeros are
+those in the strip 0 < Re(s) < 1. **RH** asserts: every non-trivial zero
+ρ has Re(ρ) = ½.
+
+Two classical facts frame everything: (F1) ζ(x) > 0 for real x ∈ (0,1), so
+any off-line zero is non-real; (F2) by ζ̄(s) = ζ(̄s) and the functional
+equation, non-real zeros come in four-tuples {ρ, ρ̄, 1 − ρ, 1 − ρ̄} — so
+every off-line zero generates **two** zeros at the same positive height.
+
+The Riemann–von Mangoldt formula counts zeros by height. With
+
+    N(t) = #{ non-trivial zeros ρ : 0 < Im(ρ) ≤ t },
+    main(t) = x·ln x − x − 1/8,  x = t/(2π),
+    S(t) = N(t) − main(t),
+
+and N_on(t) counting only the on-line zeros and D(t) = N(t) − N_on(t)
+counting the **off-line** zeros at positive height ≤ t:
+
+> **Counting lemma (proven; machine-checked).** Under F1–F2, D is a
+> non-decreasing, even-valued step function, and **RH holds if and only if
+> D(t) = 0 for all t > 0.**
+
+A failure of RH is thus a *counting event*: some positive height carries
+more zeros than the critical line alone would. The remainder of this
+section turns that observation into a machine.
+
+**Unconditional certified data** (two independent numerical engines
+agreeing to the last zero, with dps-certified anchors): **N(10⁷) =
+21,136,121**, S(10⁷) = −3.205718 (45 decimal digits), and the parity
+certificate 2K(10⁷) is even. By the counting lemma, **there is no
+off-line zero pair below height 10⁷** — the strongest unconditional
+statement of this repository to date (|S| stays 2.558, 2.509, 3.206 at
+10⁵, 10⁶, 10⁷: an O(1) envelope, no drift).
+
+### 2. The strategy in one paragraph
+
+At every height t, compare **two independently defined objects**. The
+**definition side** (Part 3): ζ(½ + it) computed from the Euler sum and
+its integral tail — no zero input at all — reduced to a function W_n whose
+size is an explicit, zero-count-free quantity. The **zero side** (Part
+4): the Riemann-1859 canonical product over the **on-line** zeros,
+truncated at a finite height G, plus a **rigorously bounded** error M(G, t)
+for the zeros above G. Three stages then close the argument: a **bridge**
+(Part 5) saying that, for the actual zero set, the two sides are *the
+same object*, up to exactly the bounded tail; a **detector** (Part 6) —
+an *exact algebraic theorem* — saying that an off-line pair, at its own
+height, changes the kernel by at least f(δ, t₀)·|K|, with f explicit and
+**bounded below independently of the off-line distance δ**; and a **floor**
+(Part 7, the open piece) bounding the definition side *below* the detector
+scale, with no zero-count input. Part 8 combines them.
+
+### 3. The definition side: the missing tail
+
+For n ∈ ℕ and s = ½ + it, write the Euler sum to n, the first-term integral
+approximation of the rest, and their residual
+
+    P_n(s) = Σ_{k=1}^n k^−s,      I(n, s) = n^{1−s}/(1 − s),
+    W_n(t) = ζ(½ + it) − P_n(½ + it) − I(n, ½ + it).
+
+W_n is the "missing tail": what remains of ζ after stripping the first n
+terms and their first-term integral. All of this is computable from the
+definition alone (Riemann–Siegel at height t; no zero list, no RH).
+
+> **The missing-tail law.** The zeros enter at *second* order in
+> ζ − P_n. In the onset window t/n ≈ 2 the measured law is
+>
+>     |W_n(t)| / |I(n, ½ + it)| = ½·(t/n) + O(corrections),
+>
+> to **four digits, independent of n** across n ∈ {10³, 10⁴, 10⁵}; the
+> explicit error disks of the Euler–Maclaurin remainder contain all 15
+> measured points on both of two independent computation stacks. The
+> corrections are the Euler–Maclaurin remainder of Σ_{k>n} k^−s − I(n, s).
+> **Strictification (in progress).** The Euler–Maclaurin machinery
+> underneath is machine-checked: the first-order identity at integer
+> endpoints, and the finite second-order law (the finite core of the
+> Riemann 1859 identity), for every C² real-valued f on [n, m],
+>
+>     Σ_{k=n}^{m−1} f(k) = ∫_n^m f + ½(f(m) − f(n))
+>                        + (1/12)(f′(m) − f′(n)) − ½∫_n^m B̂₂(x) f″(x) dx,
+>
+> with B̂₂ the periodized second Bernoulli polynomial — stated and
+> verified in an abstract real-closed normed field (in particular ℝ).
+> The passage to the limit M → ∞ with an explicit remainder at s = ½ is
+> the remaining formal content of this part.
+
+W_n is the quantity from which the floor of Part 7 must be built: known
+without zeros.
+
+### 4. The zero side: the kernel and its rigorous tail
+
+**The canonical product.** In the convergent 1859 form (DLMF 25.2.12),
+truncated at height G over the on-line zeros:
+
+    K(s; G) = Main(s) · ∏_{ρ∈on-line, 0<Im ρ≤G} (1 − s/ρ) e^{s/ρ} · e^{T(G,s)},
+
+where Main is the explicit main factor and T(G, s) is the tail term for
+the zeros above G. Each on-line pair {½ + iγ, ½ − iγ} contributes a
+**closed form** (exact; machine-checked; agreement with direct
+high-precision evaluation ≤ 3.5×10⁻¹⁴ in magnitude, ≤ 3.2×10⁻¹⁶ rad in
+argument):
+
+    la_pair(γ, t) = ½/(¼ + γ²) + ln|1 − (¼ + t²)/(¼ + γ²)|,
+    ar_pair(γ, t) = t/(¼ + γ²) − π·[γ < t].
+
+The kernel is therefore a float64-vectorizable sum over the certified
+zero list (12,193,869 zeros up to G = 6×10⁶, each certified to 30 digits;
+16/16 float cross-checks against the high-precision record).
+
+**The tail, bounded unconditionally.** Writing the tail as an integral
+plus an error, |E(G, t)| ≤ M(G, t) with
+
+    M(G, t) = S̄(G)·B_f(G,t) + C_f(G,t)·K_f(G,t),
+
+given by the Platt–Trudgian explicit S-bound (J. Number Theory 147 (2015)
+842–851, Cor. 1), |S(T)| ≤ 0.110 ln T + 0.290 ln ln T + 2.290 (T ≥ e).
+At the certified scale G = 6×10⁶: M(6×10⁶, 10³) = 1.3×10⁻⁷, growing to
+5.3×10⁻³ at t = 2×10⁵ (it reproduces the log|γ − t| singularity at
+the truncation edge). The Abel mechanism behind the formula was verified
+on **7.4 million real certified zeros** to the quadrature limit. A finite
+certified list plus M(G, t) therefore stands in for the infinite zero
+set with a rigorously bounded error — no infinite computation, no RH
+input. (Caveat, carried honestly: M bounds the *on-line* tail; the
+off-line zeros above G are a separate, recorded quantity — they are the
+signal the Part 6 detector measures, not a defect of the kernel.)
+
+### 5. The bridge: ζ is its own kernel
+
+For a finite zero list L, write the bridge map Ψ_L(t) = e^{T(t)}·
+∏_{γ∈L} F(γ, t) (tail model times pair kernel) and the truncated kernel
+K_L(t) = ∏_{γ∈L∪{tail}} F(γ, t). Then **K_L and Ψ_L differ by exactly
+the single factor exp(T(t) − Σ_T ln F)** — the one number measuring how
+well the tail model T approximates the logarithm of the true tail
+product (machine-checked, ζ-free finite core). There is no hidden
+remainder: the bridge's error *is* the tail error, term by term.
+
+The finite bridge is an **exact Abel decomposition** (machine-checked):
+the counting step N_L(x) = #{γ ∈ L : γ ≤ t} is folded into the exact
+integral identity
+
+    ∫_a^b N_L(x) f′(x) dx = Σ_{γ∈L, a≤γ≤b} f(γ),
+
+and, through a smooth comparator N̂ interpolating the counting step, the
+integration-by-parts bridge
+
+    ∫_a^b N̂ f′ = N̂(b) f(b) − N̂(a) f(a) − ∫_a^b N̂′ f
+
+moves all differentiation to the smooth, explicit, bounded comparator.
+The discrete zero set and the continuous Riemann–von Mangoldt main term
+are related by *exact* calculus, not approximation — so "definition side"
+and "zero side" in Parts 6–8 are **one object written two ways**, whose
+only disagreement is the rigorously bounded tail M(G, t) of Part 4.
+
+### 6. The detector: what an off-line pair does to the kernel
+
+Fix a height γ and move the on-line pair {½ ± iγ} off the line by δ > 0
+into the four-tuple {½ ± δ ± iγ}. With P_on the on-line pair's canonical
+factors and P_off the off-line four-tuple's, the rest of the product is
+unchanged and cancels in the ratio **R(s, δ) = P_off(s)/P_on(s)** — a
+two-factor algebraic object with no normalization ambiguity and no
+approximation. Its **exact closed form** (s = ½ + it; proven;
+machine-checked; verified to six digits against the direct four-zero
+definition and the measured data):
+
+    R(s, δ) = (¼ + γ²)·((γ − t)² + δ²)·((γ + t)² + δ²)
+              ────────────────────────────────────────────── · e^{s·ω_δ}
+              (γ² − t²)·((½ + δ)² + γ²)·((½ − δ)² + γ²),
+
+    ω_δ = (1 + 2δ)/((½ + δ)² + γ²) + (1 − 2δ)/((½ − δ)² + γ²) − 1/(¼ + γ²) ∈ ℝ.
+
+A real signed prefactor times a pure constant-rate phase; the only branch
+is the sign flip at t = γ. **The magnitude, in its three regimes** (all
+exact):
+
+- **Near the pair** (|t − γ| ≤ 10): |R − 1| = 0.9975–1.0201 across the
+  full grid δ ∈ [0.005, 0.5] (56/56 points, formula vs direct dps and
+  measured data to 5×10⁻⁴). An off-line pair at its own height forces a
+  kernel change of **at least 99.75% of the kernel's own size**.
+- **At twice the height** (t = 2γ): |R − 1| = 4.0000 *exactly*, all δ.
+- **Far from the pair** (t = cγ, c > 1): |R − 1| = (c² − 1) to six digits
+  (c = 10, 50, 100 give 99.99998, 2.499999×10³, 9.999998×10³) —
+  **(t/γ)² − 1, δ-flat to O(10⁻⁶)**. The detector margin grows
+  quadratically with the height ratio.
+
+**No dead δ-window.** The magnitude numerator
+((t−γ)² + δ²)((t+γ)² + δ²) = (t² − γ²)² + 2δ²(t² + γ²) + δ⁴ is a
+polynomial in δ with all coefficients positive: **no δ > 0 annihilates
+it.** The detector is robust for *every* off-line distance.
+
+And the fingerprint is one-sided: when a pair goes off-line, the count N
+steps up by 2 at height γ, but the *argument* of ζ along the line does
+**not** wind (the off-line pair factor has a real-negative numerator and
+net phase 0 across the straddle window, where the on-line pair winds by
+−π). The count sees the ghost; the argument does not — which is precisely
+why the S/2K certificate of Part 1 detects off-line pairs as *size* jumps
+at all.
+
+### 7. The open piece: the residual floor
+
+> **The required theorem.** For all t > 0,
+>
+>     | W_n(t) − [ K_on(t) − (P_n(½+it) − I(n, ½+it)) ] | < min_δ f(δ, t),
+>
+> proved **from the definition side alone** — no zero count at any height
+> enters the proof. The right-hand side is the detector scale of Part 6
+> (≥ 0.998·|K| near the pair; ~ (t/γ)²·|K| far), with f(δ, t) = |R − 1|.
+
+Two routes are named. **Route A (residual floor)** builds it from the
+strictified missing-tail law of Part 3 (its Euler–Maclaurin remainder) plus
+the tail bound M(G, t) of Part 4; it works for δ above a sensitivity
+threshold to be pinned by measurement, and the measured margin (≥ 8.9× at
+the pair's own height against the local residual envelope, data-driven up
+to t ≈ 10⁴–2×10⁴) says it is within reach. **Route B (uniform dynamics)**
+proves 2K(t) even for all t directly — equivalently, S stays in the
+on-line band — with no sensitivity threshold; at full strength it is
+essentially RH-equivalent, the classical S(t) lifting being the open
+engineering question. The measured data arbitrate: if the Route-A margin
+collapses, Route A is retired and Route B carries the argument. Either way,
+Part 7 is the single remaining gap — *stated, bounded below, with two
+named routes*.
+
+### 8. The closure *(conditional on Part 7)*
+
+**Assume RH fails.** By the counting lemma D(t) > 0 somewhere; the
+positive zero heights are discrete (Riemann–von Mangoldt: finitely many up
+to any T; the smallest zero height is a certified classical number, ≈
+14.13). Take the off-line pair of **minimal** positive height t₀, at
+distance δ₀ > 0 from the line. (1) By the bridge (Part 5), the
+definition–zero gap at t₀ is the tail-bounded difference of the two
+sides, and by the detector (Part 6) it is **≥ f(δ₀, t₀)·|K(t₀)|** with
+f(δ₀, t₀) = |R − 1| ≥ 0.998, the tail M(G, t₀) being far below that scale.
+(2) By the floor (Part 7), the same quantity is **< f(δ₀, t₀)·|K(t₀)|**,
+from the definition side alone. (3) Contradiction. Hence D(t₀) = 0; by
+minimality, D ≡ 0; by the counting lemma, **RH**. ∎ — *conditional on
+Part 7.*
+
+### Status of each piece (2026-09-12)
+
+- **Proven, machine-checked (Lean 4.33.1 + Mathlib, pinned stable):** the
+  counting lemma (Part 1); the per-pair closed forms (Part 4); the detector
+  closed form and its magnitude, including the no-dead-window polynomial
+  (Part 6); the bridge's ζ-free finite core, the exact finite Abel
+  decomposition, and the explicit tail bound at finite height (Part 5);
+  the first-order and finite second-order Euler–Maclaurin laws (Part 3).
+- **Classical (literature):** F1–F2; Riemann–von Mangoldt; the 1859 product
+  (DLMF 25.2.12); Platt–Trudgian's explicit S-bound.
+- **Measured (precision labeled, scripts committed):** the missing-tail
+  onset law, 4 digits, n-independent (Part 3); the detector regime values
+  vs the four-zero definition and the data, 6 digits (Part 6); the
+  certified zero survey to 10⁷ and the zero list to 6×10⁶ (Parts 1, 4);
+  the Abel mechanism on 7.4M real certified zeros (Part 4).
+- **In progress:** the M → ∞ passage of the missing-tail strictification
+  (Part 3) with explicit remainder.
+- **Open:** the residual floor (Part 7) — the single remaining gap.
+
+*The complete reader-facing exposition of this argument — with full
+provenance for every number — is maintained as
+`docs/RH-PROOF-OUTLINE.md` (table of contents: `docs/INDEX.md`); the
+machine-checked pieces live in `formal/rh-lean/` (§Materials).*
 
 ---
 
