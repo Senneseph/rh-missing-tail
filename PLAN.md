@@ -108,9 +108,8 @@ edited locally. Filled so far: B-4 (per-pair closed form) and the B-5
 core (the E7b detector, `results/e7b1-detector-b5-core.md`); the
 remaining blanks are named with their exact data triggers (D1–D5).
 
-**Machine-checked core (mirror).** `formal/rh-lean/` (synced from
-kainos-logos head `9620ff4`, 2026-09-10; provenance and the
-no-local-edits rule in `formal/RH-LEAN-PROVENANCE.md`): theorem
+**Machine-checked core (home and source of record).** `formal/` (provenance
+and the no-local-edits rule in `formal/RH-LEAN-PROVENANCE.md`): theorem
 `eulerAction` — the E7a identity — proven in Lean 4.34 + Mathlib over
 any commutative ring, with the five oracle instances cross-checked
 two ways (exact-ℤ `#eval` layer + independent Lean float64 pipeline,
@@ -119,7 +118,7 @@ on-line pair identity in four pieces — `pairClosedForm` (T1, exact,
 no exclusion), `pairLogAbs` (T2), `pairArgAngle`/`pairArLedger`
 (T3a/T3b, the phase exactly mod 2π) — cross-checked on the 16
 recorded points (16/16, worst ~10⁻¹⁴ inside Lean float64). Recorded
-run: `formal/rh-lean/out_rhattack_day011.txt`. Status: the finite
+run: `formal/out_rhattack_day011.txt`. Status: the finite
 core **and the per-pair zero-side factor** are machine-checked; this
 changes no status line in this plan's postulates (P-E's EXACT label
 is reinforced, not replaced).

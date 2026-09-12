@@ -182,7 +182,7 @@ a complete argument skeleton, not a completed proof, and the document
 says so on its first page.
 
 **The machine-checked core moved home.** The Lean package now lives in
-this repository (`formal/rh-lean/`), every file in it describes itself up
+this repository (`formal/`), every file in it describes itself up
 top (what it is, what role it plays, what state it is in), and a fresh
 machine can rebuild and re-run the cross-check gate in minutes (`lake
 build && lake exe rhattack`).

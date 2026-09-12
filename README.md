@@ -6,7 +6,7 @@ and a separation program with explicit falsifiers.**
 
 ## The argument as constructed *<sub>state: 2026-09-12</sub>*
 
-*Honest status — read this first.* The argument below is a **complete
+The argument below is a **complete
 proof skeleton of the Riemann Hypothesis**. Its pieces are either
 **(i) proven** (the marked pieces are machine-checked in Lean 4.33.1 +
 Mathlib, a pinned stable toolchain), **(ii) classical** (taken from the
@@ -110,7 +110,9 @@ definition alone (Riemann–Siegel at height t; no zero list, no RH).
 > the remaining formal content of this part.
 
 W_n is the quantity from which the floor of Part 7 must be built: known
-without zeros.
+without zeros. The action-principle reading of this identity — and the
+width-ladder structure it explains — is documented in
+`docs/THE-EULER-ACTION.md`.
 
 ### 4. The zero side: the kernel and its rigorous tail
 
@@ -281,7 +283,7 @@ Part 7.*
 *The complete reader-facing exposition of this argument — with full
 provenance for every number — is maintained as
 `docs/RH-PROOF-OUTLINE.md` (table of contents: `docs/INDEX.md`); the
-machine-checked pieces live in `formal/rh-lean/` (§Materials).*
+machine-checked pieces live in `formal/` (§Materials).*
 
 ---
 
@@ -297,7 +299,7 @@ violation of the width laws, no unexplained S growth. Fingers crossed.
 |---|---|---|---|
 | **0 — Instrument** | H0: dual float64 stack + dps oracle + twin-floor protocol certify their own counts (no systematic error) | dt/2 stability re-walks; two-engine agreement; measured chunk reliability | **PASS** — reliability model measured (1 dead chunk in ~70,000) with demonstrated detect-and-correct pipeline; Day-007 port-as-audit bonus (a TS port caught a ψ‴ defect in the float engine, dps-verified and fixed) |
 | **1 — Identity & ladder** | H1: the Dirichlet tail is a *flat action*; the series-side laws (D = −P, the M₁ tables, the symmetries) are universal | E7a identity at dps-50 on generic paths; E2-exact: 18/18 phases at 1e-10, zero fits | **PASS** |
-| **2 — Counterexample search** | H2: if RH fails below T, the certified walk finds it (off-line pair ⇒ 2K jump; S growth beyond O(1)) | GPU walk dt = 5×10⁻⁴ + dt/2 stability endpoints + dps-40 2K/S certificate | **10⁶ and 10⁷ certified: no off-line zero pair below 10⁷** (day-014 closeout: N(10⁷) = 21,136,121, S = −3.205718 dps-45, 2K even — the early +246 estimate was falsified by the two-engine direct count; `results/certified-zero-survey.md`) |
+| **2 — Counterexample search** | H2: if RH fails below T, the certified walk finds it (off-line pair ⇒ 2K jump; S growth beyond O(1)) | GPU walk dt = 5×10⁻⁴ + dt/2 stability endpoints + dps-40 2K/S certificate | **10⁶ and 10⁷ certified: no off-line zero pair below 10⁷** (day-014 closeout: N(10⁷) = 21,136,121, S = −3.205718 dps-45, 2K even — the early +246 estimate was falsified by the two-engine direct count; `docs/certified-zero-survey.md`) |
 | **3 — Zero-side identification** | H3: the measured onset C *is* the zero-side explicit-formula budget (the Riemann-1859 zero product, not just the nearest zero) | E7b: predict the 4-digit onset law from the zero product over the certified list + analytic tail; E5: the zero-sum in missing-tail language | **Stage 1 complete (2026-09-09):** zero-side product kernel reproduces the 4-digit onset points — N=10³, t/N=1: +0.29%; N=10⁴, t/N=0.1: −1.2% (two borderline +4/+6%); the rest lie below the quantified zero-side error floor (density tail saturates once G ≫ t). The N=10⁵ row needs G ≳ 5–6×10⁶ — deferred, on demand |
 | **4 — Generalization** | H4: the width laws extend beyond odd-prime quadratic cells (even-modulus antipodal structure; F₂₄ non-multiplicative) | τ₁₂ (2×4×3) exact table; F₂₄ front/back raw + M₁; E6 F₂₄ rolling invariants | **τ₁₂ + F₂₄ measured** (antipode sign-flip vs near-identity — two cell classes, two laws); q = 17 table in §8 (third odd modulus, all integers, mirror + trace exact) |
 | **5 — Reduction (not claimed)** | If H3 passes: RH ⟺ no off-line pair ∀t, with the zero side pinned to the explicit-formula kernel | E5 bridge + structural write-up | **Not run. Not claimed.** |
@@ -378,20 +380,20 @@ kernel — is specific enough to fail.
 
 ## Materials
 
-- [results/zero-finder.md](results/zero-finder.md) — **the certified zero finder**: n →
+- [docs/zero-finder.md](docs/zero-finder.md) — **the certified zero finder**: n →
   ρₙ = ½ + iγₙ computed (RVM bracket → certified twin-floor walk from a
   dps-certified anchor → float bisection → dps tail), with the first
   dps-certified output γ₁₃₈,₀₆₆ = 100000.74372338832472… and the honest
   precision statement (the dps floor at these heights, not the dps
   setting).
-- [results/width-ladder-tables.md](results/width-ladder-tables.md) — the M₁ tables (χ₅, χ₁₃, τ₁₂, F₂₄),
+- [docs/width-ladder-tables.md](docs/width-ladder-tables.md) — the M₁ tables (χ₅, χ₁₃, τ₁₂, F₂₄),
   the D = −P certificate, the drift coefficient, the onset ratio, the
   front/back (antipodal) structure at the first even modulus; with file
   pointers to the raw dps outputs.
-- [results/certified-zero-survey.md](results/certified-zero-survey.md) — N, S, 2K, twins, max|S|
+- [docs/certified-zero-survey.md](docs/certified-zero-survey.md) — N, S, 2K, twins, max|S|
   per decade, the walk-defect post-mortem; dps and engine labels on
   every figure.
-- [results/e7b1-detector-b5-core.md](results/e7b1-detector-b5-core.md) — the
+- [docs/e7b1-detector-b5-core.md](docs/e7b1-detector-b5-core.md) — the
   exact off-line pair kernel deviation (the E7b *detector* half of the
   zero-side bridge): an EXACT formula for the 25.2.12 zero-product kernel
   (identity verified at dps-30) + a 6-digit measurement in the certified
@@ -416,17 +418,19 @@ kernel — is specific enough to fail.
   items marked **[pin]** are used in the working notes but their full
   bibliographic data must be checked against the primary source before
   any submission.
-- [docs/INDEX.md](docs/INDEX.md) — the table of contents for the two
-  outline/exposition documents in `docs/` (the staged proof scaffold,
-  a mirror of the planning artifact; and the reader-facing path
-  exposition). The single entry point for `docs/`.
-- [formal/rh-lean/README.md](formal/rh-lean/README.md) — the Lean
+- [docs/INDEX.md](docs/INDEX.md) — the documents in `docs/`: the
+  reader-facing proof exposition, the proof scaffold, the Euler action
+  identity document, the four measured-record documents (zero finder,
+  width ladders, certified zero survey, E7b detector record), and the
+  provenance of the machine-checked core. The single entry point for
+  `docs/`.
+- [formal/README.md](formal/README.md) — the Lean
   package README: the stable toolchain pin (Lean 4.33.1 + Mathlib),
   the one-command verify recipe, and the layout of the `RhAttack`
   modules.
 - [formal/RH-LEAN-PROVENANCE.md](formal/RH-LEAN-PROVENANCE.md) — home,
-  source of record, and sync rule for `formal/rh-lean/`.
-- `formal/rh-lean/` — **the machine-checked core** (home and source of
+  source of record, and sync rule for `formal/`.
+- `formal/` — **the machine-checked core** (home and source of
   record — provenance in
   [formal/RH-LEAN-PROVENANCE.md](formal/RH-LEAN-PROVENANCE.md)): the E7a identity
   proven in Lean 4.33.1 + Mathlib over any commutative ring, the B-4
@@ -436,32 +440,32 @@ kernel — is specific enough to fail.
   recorded output in the tree). One-command verifiable:
   `lake build && lake exe rhattack`.
 - **The Lean proof files (direct links)** — the machine-checked
-  pieces, one per file (`formal/rh-lean/`, Lean 4.33.1 + Mathlib; the
+  pieces, one per file (`formal/`, Lean 4.33.1 + Mathlib; the
   `rhattack` executable re-runs all runtime cross-checks):
-  - [Main.lean](formal/rh-lean/Main.lean) — the `rhattack` gate
+  - [Main.lean](formal/Main.lean) — the `rhattack` gate
     executable (E7a / B-4 / B-5 / B-3 runtime cross-checks)
-  - [RhAttack.lean](formal/rh-lean/RhAttack.lean) — the root module
+  - [RhAttack.lean](formal/RhAttack.lean) — the root module
     (imports every piece below, with the day-attributed history)
-  - [RhAttack/E7a.lean](formal/rh-lean/RhAttack/E7a.lean) — the five
+  - [RhAttack/E7a.lean](formal/RhAttack/E7a.lean) — the five
     certified E7a oracle instances (ported, cross-checked)
-  - [RhAttack/EulerAction.lean](formal/rh-lean/RhAttack/EulerAction.lean) — the E7a
+  - [RhAttack/EulerAction.lean](formal/RhAttack/EulerAction.lean) — the E7a
     Euler action identity (the exact finite-sum identity)
-  - [RhAttack/B0.lean](formal/rh-lean/RhAttack/B0.lean) — the counting
+  - [RhAttack/B0.lean](formal/RhAttack/B0.lean) — the counting
     equivalence of the outline (RH ⟺ D ≡ 0 over an abstract zero set)
-  - [RhAttack/B3.lean](formal/rh-lean/RhAttack/B3.lean) — the B-3
+  - [RhAttack/B3.lean](formal/RhAttack/B3.lean) — the B-3
     bridge: finite exact Abel decomposition, the RVM-comparator bridge,
     the explicit finite bound, the ζ-free residual decomposition
     (pieces: B3Core / B3Abel / B3Sbar)
-  - [RhAttack/B4.lean](formal/rh-lean/RhAttack/B4.lean) — the B-4
+  - [RhAttack/B4.lean](formal/RhAttack/B4.lean) — the B-4
     on-line per-pair closed form (T1/T2/T3a/T3b)
-  - [RhAttack/B5.lean](formal/rh-lean/RhAttack/B5.lean) — the B-5 core:
+  - [RhAttack/B5.lean](formal/RhAttack/B5.lean) — the B-5 core:
     the exact off-line/on-line ratio theorem
-  - [RhAttack/P4Em.lean](formal/rh-lean/RhAttack/P4Em.lean) — the P4
+  - [RhAttack/P4Em.lean](formal/RhAttack/P4Em.lean) — the P4
     1st-order Euler–Maclaurin formula (verbatim port of a published
     Lean proof, Apache 2.0)
-  - [RhAttack/P4Tail.lean](formal/rh-lean/RhAttack/P4Tail.lean) — the P4
+  - [RhAttack/P4Tail.lean](formal/RhAttack/P4Tail.lean) — the P4
     2nd-order *per-period* identity (`int_B1f'_period`)
-  - [RhAttack/P4Em2.lean](formal/rh-lean/RhAttack/P4Em2.lean) — the P4
+  - [RhAttack/P4Em2.lean](formal/RhAttack/P4Em2.lean) — the P4
     *global finite* 2nd-order Euler–Maclaurin law (`em2_finite`)
 - **Master formula ledger (working tree):** `plan/40-prize-islands/
   rh-attack/FORMULAS.md` — every formula this work uses, labeled
@@ -478,10 +482,10 @@ kernel — is specific enough to fail.
   lint: no `for`/`if`, one function per file). This repo deliberately
   carries only the measured record, the plan, the references, and the
   machine-checked core (`formal/`, home and source of record — see its
-  [provenance file](formal/RH-LEAN-PROVENANCE.md)) — so no number in `results/` exists without a named script and
+  [provenance file](formal/RH-LEAN-PROVENANCE.md)) — so no number in `docs/` exists without a named script and
   a named raw output file. The census file `rh/zeros_T100000.txt` (138,065 dps-
   certified zeros to t = 10⁵) lives there too. All paths cited in
-  `results/` resolve from the working-tree root.
+  `docs/` resolve from the working-tree root.
 
 ## Authors and disclosure
 

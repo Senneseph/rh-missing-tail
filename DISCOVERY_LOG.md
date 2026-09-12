@@ -103,7 +103,7 @@ language. Used as a *computer* it produced the E2-exact infinite-form
 test (18/18 phases at 1e-10, zero fits). **2026-09-10: the identity is
 now PROVEN in Lean** (any commutative ring, one-induction proof) with
 a 5/5 independent float64 cross-check against the Python oracle
-(worst deviation 2×10⁻¹⁴) — `formal/rh-lean/`, one-command
+(worst deviation 2×10⁻¹⁴) — `formal/`, one-command
 verifiable. A finite identity that was "measured exact" is now
 "machine-checked exact".
 
@@ -262,7 +262,7 @@ The reasoning tooling itself became part of the artifact:
   edited).
 - **Lean 4 + Mathlib:** the E7a identity proven over any commutative
   ring; 5/5 oracle instances cross-checked by an independent Lean
-  float64 pipeline (worst 2×10⁻¹⁴); `formal/rh-lean/` in this repo,
+  float64 pipeline (worst 2×10⁻¹⁴); `formal/` in this repo,
   one-command verifiable. The finite core of the proof is now an
   external, machine-auditable fact.
 - **The B-4 pair identity joined the machine-checked core (same
@@ -395,7 +395,7 @@ memory rule worked, and the broken check cost exactly the one re-check the
 owner demanded before trusting the number.
 
 **Repository structure (same day).** The Lean package now **lives in this
-repository** (`formal/rh-lean/`, source of record; the kainos-logos path is
+repository** (`formal/`, source of record; the kainos-logos path is
 a symlink) — `formal/RH-LEAN-PROVENANCE.md`; the proof path was rewritten as
 a public linear exposition with named pieces P1–P8 (`docs/RH-PROOF-OUTLINE.md`,
 byte-identical with the working-repo source of record); every Lean file
