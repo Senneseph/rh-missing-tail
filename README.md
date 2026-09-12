@@ -492,7 +492,7 @@ kernel — is specific enough to fail.
 - **Jesse S. Miller** — conception, experimental design,
   direction, interpretation. (BS - Mathematics and Computer Science, Emory University; working interest in the histories of the Natural Sciences.)  
   **L. McGeorge** - Creative Partner
-- **Qwen (Alibaba Qwen team)** — co-developing instrument:
+- **Qwen (my trusty Clanker)** — @ Alibaba Qwen team for co-developing instrument:
   implementation, computation, drafting, and cross-checking, running
   locally as `pi-qwen-vast` on the first author's hardware (AMD
   Strix-Halo APU, ROCm GPU; mpmath, CuPy, TypeScript, Node).

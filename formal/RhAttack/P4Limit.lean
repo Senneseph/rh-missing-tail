@@ -49,12 +49,29 @@ header for the uIcc/Nat.cast_add/ContinuousOn.mono conventions):
     evaluation (L2).
   * `DifferentiableOn.continuousOn` (Calculus/FDeriv/Basic.lean:664).
 
-STATUS (2026-09-12, Lean 4.33.1): atom L1 GREEN (drafted day-019 goal
-turn); L2–L5 pending per the sketch. No sorry.
+STATUS (2026-09-12, Lean 4.33.1): atoms L1 and L2 GREEN (L2 drafted
+after the day-019 L1 turn); L3–L5 pending per the sketch. No sorry.
 THEOREMS (L1): p4_f_hasDerivAt, p4_f1_hasDerivAt, p4_f2_hasDerivAt,
- p4_f1_at, p4_f2_at, p4_f1_on_Icc, p4_f2_on_Icc -/
+ p4_f1_at, p4_f2_at, p4_f1_on_Icc, p4_f2_on_Icc.
+THEOREMS (L2): p4_integral_closed, p4_finite_em2.
+
+L2 REMAINDER-TERM MATCHING (transferable technique, keep for L3–L5):
+`em2_finite` lives in a `[RCLike 𝕜]` context, where its tail integrand
+`B2 x * deriv (deriv f) x` elaborates the ℝ→𝕜 scalar through the
+RCLike coercion `ofReal := Algebra.cast` (= `algebraMap ℝ 𝕜`). In a
+concrete `ℂ` file the same printed term `B2 x * d` — or even the
+explicit cast `(B2 x : ℂ) * d` — elaborates through the higher-priority
+`Coe ℝ ℂ` (Data/Complex, `Complex.ofReal`). The two kernel terms print
+identically (`↑(B2 x) * d`) but are NOT unification-equal, so
+`rw [hRem]` silently fails with "did not find an occurrence". Fix:
+spell the scalar explicitly as `algebraMap (R := ℝ) (A := ℂ) (B2 x)`
+in both the congruence hypothesis (hIC) and the remainder equality
+(hRem) — verified by a four-form probe (bare / Coe / Algebra.cast /
+algebraMap): only the last two rewrite-match. `algebraMap x = (x : ℂ)`
+itself closes by `rfl`, so this costs nothing mathematically. -/
 import Mathlib
 import RhAttack.P4Em2
+import RhAttack.P4Tail
 
 open Real Set Filter MeasureTheory intervalIntegral Finset
 
@@ -121,9 +138,10 @@ theorem p4_f1_at {s : ℂ} (hs : s ≠ 0) (x : ℝ) (hx : x ≠ 0) :
   dsimp only [p4_f1]
   exact (p4_f_hasDerivAt hs x hx).deriv
 
-/-- Atom L1.e — pointwise: `deriv (deriv f) = p4_f2` at every 0 < x. -/
-theorem p4_f2_at {s : ℂ} (hs1 : s ≠ 0) (hs2 : s ≠ -1) {x : ℝ} (hxpos : 0 < x) :
-    deriv (deriv (p4_f s)) x = p4_f2 s x := by
+/-- Atom L1.e — `deriv (p4_f s)` has the explicit second derivative at every 0 < x
+    (locality of differentiability: on Ioi 0, `deriv (p4_f s) = p4_f1 s`). -/
+theorem p4_f1_deriv_hasDerivAt {s : ℂ} (hs1 : s ≠ 0) (hs2 : s ≠ -1) {x : ℝ} (hxpos : 0 < x) :
+    HasDerivAt (deriv (p4_f s)) (p4_f2 s x) x := by
   -- On a neighborhood of x (the open set Ioi 0), `deriv (p4_f s)` equals
   -- the named function `p4_f1 s`; differentiability (and the derivative
   -- value) are local, so the statement transfers.
@@ -134,9 +152,12 @@ theorem p4_f2_at {s : ℂ} (hs1 : s ≠ 0) (hs2 : s ≠ -1) {x : ℝ} (hxpos : 0
     simpa [nhdsWithin_univ] using hL
   have hpt : deriv (p4_f s) x = p4_f1 s x := p4_f1_at hs1 x hxpos.ne'
   have hd1 : HasDerivAt (p4_f1 s) (p4_f2 s x) x := p4_f1_hasDerivAt hs1 hs2 x hxpos.ne'
-  have hd2 : HasDerivAt (deriv (p4_f s)) (p4_f2 s x) x := by
-    simpa using (Filter.EventuallyEq.hasDerivWithinAt_iff hLw hpt).mpr hd1.hasDerivWithinAt
-  exact hd2.deriv
+  simpa using (Filter.EventuallyEq.hasDerivWithinAt_iff hLw hpt).mpr hd1.hasDerivWithinAt
+
+/-- Atom L1.e2 — pointwise: `deriv (deriv f) = p4_f2` at every 0 < x. -/
+theorem p4_f2_at {s : ℂ} (hs1 : s ≠ 0) (hs2 : s ≠ -1) {x : ℝ} (hxpos : 0 < x) :
+    deriv (deriv (p4_f s)) x = p4_f2 s x :=
+  (p4_f1_deriv_hasDerivAt hs1 hs2 hxpos).deriv
 
 /-- Atom L1.f — on a positive integral interval, the derivative function
     equals `p4_f1` (function equality on `Icc`, for `em2_finite`-style
@@ -158,5 +179,105 @@ theorem p4_f2_on_Icc {s : ℂ} (hs1 : s ≠ 0) (hs2 : s ≠ -1) (n m : ℕ) (hn 
     have hlo : (n : ℝ) ≤ t := ht.1
     exact lt_of_lt_of_le (Nat.cast_pos.mpr hn) hlo
   exact p4_f2_at hs1 hs2 hpos
+
+/-! ### L2 — the exact finite second-order EM identity (no limits, no ζ) -/
+
+/-- Antiderivative family `F_s(x) = x^{1-s}` (written `x^{-s+1}` to match the
+    real-cpow antiderivative theorem's native form; used with the factor `1/(1-s)` when `s ≠ 1`). -/
+def p4_A (s : ℂ) (x : ℝ) : ℂ := (x : ℂ) ^ (-s + 1)
+
+/-- Atom L2.a — the elementary integral in closed form, `[x^{1-s}/(1-s)]_n^m`,
+    by the FTC (`integral_eq_sub_of_hasDerivAt`) with the real-cpow
+    antiderivative (`hasDerivAt_ofReal_cpow_const'`). -/
+theorem p4_integral_closed (s : ℂ) (hs3 : s ≠ 1) {n m : ℕ} (hn : 0 < n) (hnm : n ≤ m) :
+    (∫ x in (n : ℝ)..(m : ℝ), p4_f s x) =
+      (p4_A s (m : ℝ) - p4_A s (n : ℝ)) / (1 - s) := by
+  have hnmR : (n : ℝ) ≤ (m : ℝ) := Nat.cast_le.mpr hnm
+  set G := fun x : ℝ => (x : ℂ) ^ (-s + 1) / (-s + 1)
+  have hF' : ∀ x ∈ Set.uIcc (n : ℝ) (m : ℝ), HasDerivAt G (p4_f s x) x := by
+    intro x ht
+    rw [uIcc_of_le hnmR] at ht
+    have hxpos : 0 < x := lt_of_lt_of_le (Nat.cast_pos.mpr hn) ht.1
+    simpa [p4_f] using
+      hasDerivAt_ofReal_cpow_const' (r := -s) hxpos.ne' (by
+        intro h
+        rw [neg_inj] at h
+        exact hs3 h)
+  have hC : ContinuousOn (p4_f s) (Set.Icc (n : ℝ) (m : ℝ)) := by
+    intro x hx
+    exact (Complex.continuousAt_ofReal_cpow_const x (-s)
+      (Or.inr (lt_of_lt_of_le (Nat.cast_pos.mpr hn) hx.1).ne')).continuousWithinAt
+  have hint : IntervalIntegrable (p4_f s) volume (n : ℝ) (m : ℝ) :=
+    hC.intervalIntegrable_of_Icc hnmR
+  have hds : (-s + 1 : ℂ) = 1 - s := by ring
+  rw [integral_eq_sub_of_hasDerivAt hF' hint]
+  simp only [G, p4_A]
+  rw [hds]
+  ring
+
+/-- Atom L2.b — the exact finite second-order Euler–Maclaurin identity for
+    `f(x) = x^{-s}` on `[n, m]`, with every endpoint term and the periodic-`B2`
+    remainder made explicit.  Pure rearrangement:
+    `em2_finite` (P4Em2) + the L1 derivative family + L2.a.  No limit, no ζ. -/
+theorem p4_finite_em2 (s : ℂ) (hs1 : s ≠ 0) (hs2 : s ≠ -1) (hs3 : s ≠ 1)
+    {n m : ℕ} (hn : 0 < n) (hnm : n ≤ m) :
+  (∑ k ∈ Finset.Ioc n m, p4_f s k) =
+    (p4_A s (m : ℝ) - p4_A s (n : ℝ)) / (1 - s) +
+    (1 / 2) * (p4_f s (m : ℝ) - p4_f s (n : ℝ)) +
+    (1 / 12) * (p4_f1 s (m : ℝ) - p4_f1 s (n : ℝ)) -
+    (1 / 2) * (∫ x in (n : ℝ)..(m : ℝ), algebraMap (R := ℝ) (A := ℂ) (B2 x) * p4_f2 s x) := by
+  set S := Set.Icc (n : ℝ) (m : ℝ) with hSdef
+  have hnmR : (n : ℝ) ≤ (m : ℝ) := Nat.cast_le.mpr hnm
+  have hdiff : ∀ t ∈ S, DifferentiableAt ℝ (p4_f s) t := by
+    intro t ht
+    exact (p4_f_hasDerivAt hs1 t
+      (lt_of_lt_of_le (Nat.cast_pos.mpr hn) ht.1).ne').differentiableAt
+  have hC1 : ContinuousOn (p4_f1 s) S := by
+    intro x hx
+    have hpos : x ≠ 0 := (lt_of_lt_of_le (Nat.cast_pos.mpr hn) hx.1).ne'
+    have hbase : ContinuousWithinAt (fun y : ℝ => (y : ℂ) ^ (-s - 1)) S x :=
+      (Complex.continuousAt_ofReal_cpow_const x (-s - 1) (Or.inr hpos)).continuousWithinAt
+    have hfn : p4_f1 s = (fun y : ℝ => (-s : ℂ) * (y : ℂ) ^ (-s - 1)) := by
+      funext y
+      rfl
+    rw [hfn]
+    exact hbase.const_smul (-s : ℂ)
+  have hC1d : ContinuousOn (deriv (p4_f s)) S :=
+    hC1.congr (p4_f1_on_Icc hs1 n m hn hnm)
+  have hdiff2 : ∀ t ∈ Set.uIcc (n : ℝ) (m : ℝ), DifferentiableAt ℝ (deriv (p4_f s)) t := by
+    intro t ht
+    rw [uIcc_of_le hnmR] at ht
+    exact (p4_f1_deriv_hasDerivAt hs1 hs2
+      (lt_of_lt_of_le (Nat.cast_pos.mpr hn) ht.1)).differentiableAt
+  have hC2 : ContinuousOn (p4_f2 s) S := by
+    intro x hx
+    have hpos : x ≠ 0 := (lt_of_lt_of_le (Nat.cast_pos.mpr hn) hx.1).ne'
+    have hbase : ContinuousWithinAt (fun y : ℝ => (y : ℂ) ^ (-s - 2)) S x :=
+      (Complex.continuousAt_ofReal_cpow_const x (-s - 2) (Or.inr hpos)).continuousWithinAt
+    have hfn : p4_f2 s = (fun y : ℝ => (s * (s + 1) : ℂ) * (y : ℂ) ^ (-s - 2)) := by
+      funext y
+      rfl
+    rw [hfn]
+    exact hbase.const_smul (s * (s + 1) : ℂ)
+  have hC2d : ContinuousOn (deriv (deriv (p4_f s))) S :=
+    hC2.congr (p4_f2_on_Icc hs1 hs2 n m hn hnm)
+  -- the finite second-order law itself, then make every term explicit
+  have hem := em2_finite (p4_f s) n m hnm hdiff hC1d hdiff2 hC2d
+  rw [hem]
+  have hmn : (m : ℝ) ≠ 0 :=
+    (lt_of_lt_of_le (Nat.cast_pos.mpr hn) (Nat.cast_le.mpr hnm)).ne'
+  have hnn : (n : ℝ) ≠ 0 := (Nat.cast_pos.mpr hn).ne'
+  have hIC : EqOn (fun x => algebraMap (R := ℝ) (A := ℂ) (B2 x) * deriv (deriv (p4_f s)) x)
+      (fun x => algebraMap (R := ℝ) (A := ℂ) (B2 x) * p4_f2 s x) (Set.uIcc (n : ℝ) (m : ℝ)) := by
+    intro x hx
+    dsimp
+    rw [uIcc_of_le hnmR] at hx
+    rw [p4_f2_at hs1 hs2 (lt_of_lt_of_le (Nat.cast_pos.mpr hn) hx.1)]
+  have hRem : (∫ x in (n : ℝ)..(m : ℝ), algebraMap (R := ℝ) (A := ℂ) (B2 x) * deriv (deriv (p4_f s)) x) =
+      (∫ x in (n : ℝ)..(m : ℝ), algebraMap (R := ℝ) (A := ℂ) (B2 x) * p4_f2 s x) := by
+    simpa using (intervalIntegral.integral_congr (μ := (MeasureTheory.volume : Measure ℝ)) hIC)
+  rw [p4_integral_closed s hs3 hn hnm,
+    p4_f1_at hs1 (m : ℝ) hmn, p4_f1_at hs1 (n : ℝ) hnn,
+    hRem]
 
 end
