@@ -142,7 +142,7 @@ theorem b3ResidualDecomp (L T : List ℝ) (Tt : ℝ) (F : ℝ → ℝ)
     _ = ((L ++ T).map (fun (g : ℝ) => F g)).prod *
         Real.exp (Tt - (T.map (fun (g : ℝ) => Real.log (F g))).sum) := by
         rw [← List.prod_append, ← List.map_append]
-        ring
+        -- 4.33.1: the List.prod_append / map_append rw auto-closes; no `ring`
 end
 end B3
 -- =====================================================================

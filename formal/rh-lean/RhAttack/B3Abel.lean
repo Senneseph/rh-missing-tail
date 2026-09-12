@@ -292,7 +292,7 @@ theorem rayEndFormEq (a b g : ℝ) (f : ℝ → ℝ) (h'ab : a < b) :
 
 /-- The exact finite Abel identity: for the counting step N_L over the
     finite height list L,
-      ∫_a^b N_L(x) f'(x) dx = f(b) N_L(b) − f(a) N_L(a) − Σ_{a<g≤b} f(g).
+      ∫_a^b N_L(x) f'(x) dx = f(b) N_L(b) − f(a) N_L(a) − Σ_{a<g≤b} f(g). 
     -/
 theorem b3Abel (L : List ℝ) (h'ab : a < b)
     (hfderiv : ∀ x ∈ Icc a b, HasDerivAt f (deriv f x) x)

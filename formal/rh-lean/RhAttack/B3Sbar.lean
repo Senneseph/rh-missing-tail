@@ -352,30 +352,32 @@ theorem Kbar_le (G B : ℝ) (hG : Real.exp 1 ≤ G) (h'GB : G < B) :
     ring_nf
     nlinarith [h1]
   have hRn : R229 B ≤ 0 := by
+    -- 4.33.1 pin (ProbeN5): linarith can't see the sign of a nonlinear
+    -- quotient; div_le_iff₀ (already used in this proof) pushes it through
+    -- to the constant goal.
     dsimp only [R229]
-    have h1 : 0 < (2.290 / 2) / (B * B) := by
-      apply div_pos
-      · norm_num
-      · nlinarith [hposB]
-    linarith [h1]
+    rw [div_le_iff₀ (by nlinarith [hposB])]
+    norm_num
   -- the remainder is bounded by removing the ln: 1/ln x ≤ 1 for x ≥ e
   have hremle : ∫ x in G..B, 0.290 / (2 * x^3 * log x) ≤ ∫ x in G..B, 0.290 / (2 * x^3) := by
     have hpt : ∀ x ∈ Icc G B, 0.290 / (2 * x^3 * log x) ≤ 0.290 / (2 * x^3) := by
       intro x hx
       have hx0 : 0 < x := by linarith [hposG, hx.1]
       have hlx : 1 ≤ log x := by
-        linarith [hlogG, log_le_log hposG (le_of_lt (lt_of_le_of_lt hx.1 h'GB))]
+        linarith [hlogG, log_le_log hposG hx.1]  -- 4.33.1: log_le_log needs only G ≤ x (hx.1); the old lt_of_le_of_lt chain passed h'GB (G < B) where x < B was expected
       have hinv : 1 / log x ≤ 1 := (div_le_one (by linarith [hlx])).mpr hlx
-      calc 0.290 / (2 * x^3 * log x) = (0.290 / (2 * x^3)) * (1 / log x) := by
-        field_simp [hx0.ne', show log x ≠ 0 from by linarith [hlx]]
-        <;> ring_nf
-        <;> field_simp [hx0.ne', show log x ≠ 0 from by linarith [hlx]]
-        <;> ring
-      _ ≤ (0.290 / (2 * x^3)) * 1 := by
+      have hlnz : log x ≠ 0 := by linarith [hlx]
+      -- 4.33.1 pin (ProbeN6): calc-step justifications take SAME-LINE tactic
+      -- or { }-braced block; bare `:= by` + next-line tactic leaks into
+      -- calc-continuation parse. field_simp closes this step alone (the old
+      -- ring_nf/field_simp/ring dance hit "No goals to be solved" auto-close).
+      calc 0.290 / (2 * x^3 * log x) = (0.290 / (2 * x^3)) * (1 / log x) := by field_simp [hx0.ne', hlnz]  -- 4.33.1: calc justification is SAME-LINE only
+      _ ≤ (0.290 / (2 * x^3)) * 1 := by {
         apply mul_le_mul_of_nonneg_left hinv
         apply div_nonneg
         · norm_num
-        · nlinarith [hx0]
+        · positivity  -- 0 ≤ 2*x^3 from 0 < x (nlinarith [hx0] cannot see x^3)
+      }
       _ = 0.290 / (2 * x^3) := by ring
     haveI : IntervalIntegrable (fun x : ℝ => 0.290 / (2 * x^3 * log x)) volume G B := hIIrem
     haveI : IntervalIntegrable (fun x : ℝ => 0.290 / (2 * x^3)) volume G B := hIIrem2
@@ -389,35 +391,39 @@ theorem Kbar_le (G B : ℝ) (hG : Real.exp 1 ≤ G) (h'GB : G < B) :
         rw [uIoo_of_lt h'GB] at hx
         exact hx
       have hx0 : 0 < x := by linarith [hposG, hxIoo.1]
-      field_simp [hx0.ne']
-      ring
+      field_simp [hx0.ne']  -- 4.33.1 pin: closes the hpt goal (old trailing `ring` = no goals)
     rw [integral_congr_uIoo hpt]
-    rw [show ∫ x in G..B, (0.290 / (2 * 2.290)) * (2.290 / x^3) =
-        ∫ x in G..B, (2.290 / x^3) * (0.290 / (2 * 2.290)) from by
-      rw [integral_congr_uIoo (fun x _ => by ring)]
-    rw [integral_mul_const (0.290 / (2 * 2.290)) (fun x : ℝ => 2.290 / x^3), vR]
+    rw [integral_congr_uIoo (fun x _ => mul_comm _ _)]  -- 4.33.1: integrand swap is mul_comm;
+    -- the old `show … from by ring` form left a metavar (`ring` cannot
+    -- normalize decimal-literal coefficients on ℝ)
+    rw [intervalIntegral.integral_mul_const (0.290 / (2 * 2.290)) (fun x : ℝ => 2.290 / x^3), vR]  -- 4.33.1: `integral_mul_const` ambiguous unqualified
     ring
   -- assemble
+  -- 4.33.1 pin (ProbeN6): calc justifications are SAME-LINE only (or { }-braced);
+  -- `:= by` + next-line tactics leak into calc-continuation parse mode.
+  have hxGne0 : G ≠ 0 := by linarith [hposG]
   calc ∫ x in G..B, Sbar x / x^3
       = (P011 B - P011 G) + (Q029 B - Q029 G) + (∫ x in G..B, 0.290 / (2 * x^3 * log x)) +
-          (R229 B - R229 G) := by
-        rw [vS]
+          (R229 B - R229 G) := by rw [vS]
       _ ≤ (0 - P011 G) + (0 - Q029 G) + (∫ x in G..B, 0.290 / (2 * x^3 * log x)) +
-          (0 - R229 G) := by
-        nlinarith [hPn, hQn, hRn]
-      _ = -P011 G - Q029 G + (∫ x in G..B, 0.290 / (2 * x^3 * log x)) - R229 G := by
-        ring
-      _ ≤ -P011 G - Q029 G + (∫ x in G..B, 0.290 / (2 * x^3)) - R229 G := by
-        add_le_add (add_le_add (add_le_add le_rfl le_rfl) hremle) le_rfl
-      _ = -P011 G - Q029 G + (0.290 / (2 * 2.290)) * (R229 B - R229 G) - R229 G := by
-        rw [v029]
-      _ ≤ -P011 G - Q029 G + (0.290 / (2 * 2.290)) * (0 - R229 G) - R229 G := by
-        have hc : 0 < 0.290 / (2 * 2.290) := by norm_num
-        nlinarith [hc, hRn]
-      _ = Kbar G := by
+          (0 - R229 G) := by nlinarith [hPn, hQn, hRn]
+      _ = -P011 G - Q029 G + (∫ x in G..B, 0.290 / (2 * x^3 * log x)) - R229 G := by ring
+      _ ≤ -P011 G - Q029 G + (∫ x in G..B, 0.290 / (2 * x^3)) - R229 G :=
+        add_le_add (add_le_add (add_le_add le_rfl le_rfl) hremle) le_rfl  -- calc slot takes the TERM (4.33.1: `by <term>` = unknown tactic)
+      _ = -P011 G - Q029 G + (0.290 / (2 * 2.290)) * (R229 B - R229 G) - R229 G := by rw [v029]
+      _ ≤ -P011 G - Q029 G + (0.290 / (2 * 2.290)) * (0 - R229 G) - R229 G := by {
+        have hc : (0 : ℝ) < 0.290 / (2 * 2.290) := by norm_num  -- 4.33.1: decimal literals default to Float when unconstrained; pin (0 : ℝ)
+        -- 4.33.1: the gap is c·(R229 B) ≤ 0, nonlinear for nlinarith; pin the
+        -- product and go linear.
+        have hb : (0.290 / (2 * 2.290)) * R229 B ≤ 0 :=
+          mul_nonpos_of_nonneg_of_nonpos (le_of_lt hc) hRn
+        linarith [hb]
+      }
+      _ = Kbar G := by {
         dsimp only [P011, Q029, R229, Kbar]
-        field_simp [show G ≠ 0 from by linarith [hposG]]
+        field_simp [hxGne0]
         ring
+      }
 
 /-- The explicit finite bound (B-2's M(G,t), finite-B form): for a
     counting step N_L approximating the RVM main term N̂ with fluctuation
@@ -615,9 +621,12 @@ theorem b3BoundExplicit (L : List ℝ) (t G B : ℝ) (ht : 0 < t) (hGt : t < G)
           (fT t G * (NList L G - NHat G) + ∫ x in G..B, Δfun x)
     _ ≤ |(fT t B * (NList L B - NHat B))| + |(fT t G * (NList L G - NHat G))| +
           |∫ x in G..B, Δfun x| := by
-      apply add_le_add_left
-      simpa using abs_sub (fT t G * (NList L G - NHat G))
-        (-(∫ x in G..B, Δfun x))
+      have hE : |fT t G * (NList L G - NHat G) + ∫ x in G..B, Δfun x| ≤
+          |fT t G * (NList L G - NHat G)| + |∫ x in G..B, Δfun x| := by
+        simpa [abs_neg] using abs_sub (fT t G * (NList L G - NHat G))
+          (-(∫ x in G..B, Δfun x))
+      linarith [hE]  -- 4.33.1 pin: atoms {A,|a+b|,|a|,|b|} are each linear once; the
+      -- `apply add_le_add_left` form cannot unify differing last addends
     _ = |fT t B| * |NList L B - NHat B| + |fT t G| * |NList L G - NHat G| +
           |∫ x in G..B, Δfun x| := by
         rw [abs_mul, abs_mul]
@@ -638,8 +647,7 @@ theorem b3BoundExplicit (L : List ℝ) (t G B : ℝ) (ht : 0 < t) (hGt : t < G)
           · exact hG
         · exact le_rfl
     _ = Bf t G * (Sbar B + Sbar G) + |∫ x in G..B, Δfun x| := by
-        rw [mul_add]
-        ring
+        rw [mul_add]  -- 4.33.1 pin: closes (reflexive auto-close); trailing `ring` = no goals
     _ ≤ Bf t G * (Sbar B + Sbar G) + Cf t G * Kbar G := by
         have hcZ : |∫ x in G..B, Δfun x| ≤ Cf t G * Kbar G := by
           have hIIdiff : IntervalIntegrable (fun x => NList L x * deriv (fun x : ℝ => fT t x) x -
@@ -661,66 +669,82 @@ theorem b3BoundExplicit (L : List ℝ) (t G B : ℝ) (ht : 0 < t) (hGt : t < G)
             have hpt2 : ∀ x ∈ uIoo G B, Δfun x =
                 (NList L x - NHat x) * deriv (fun x : ℝ => fT t x) x := by
               intro x hx
-              dsimp only [Δfun]
-              ring
+              dsimp only [Δfun]  -- 4.33.1 pin: closes (Δfun unfolds definitionally); no `ring`
             have hI : ∫ x in G..B, Δfun x =
                 ∫ x in G..B, (NList L x - NHat x) * deriv (fun x : ℝ => fT t x) x := by
               rw [integral_congr_uIoo hpt2]
             rw [hI]
-            exact abs_integral_le_integral_abs
+            exact intervalIntegral.abs_integral_le_integral_abs (by linarith : G ≤ B)  -- 4.33.1: unqualified `abs_integral_le_integral_abs` is overloaded (interval vs measure form); qualify
           have hf'pt : ∀ x ∈ Icc G B,
               |(NList L x - NHat x) * deriv (fun x : ℝ => fT t x) x| ≤
-                Sbar x * |deriv (fun x : ℝ => fT t x) x| := by
+                Sbar x * |fTp t x| := by
             intro x hx
             calc |(NList L x - NHat x) * deriv (fun x : ℝ => fT t x) x|
                 = |NList L x - NHat x| * |deriv (fun x : ℝ => fT t x) x| := by rw [abs_mul]
               _ ≤ Sbar x * |deriv (fun x : ℝ => fT t x) x| := by
                 apply mul_le_mul_of_nonneg_right (hS x hx)
                 exact abs_nonneg _
-          have hSbarf'cont : ContinuousOn
-              (fun x : ℝ => Sbar x * |deriv (fun x : ℝ => fT t x) x|) (Icc G B) := by
+              _ = Sbar x * |fTp t x| := by
+                rw [show |deriv (fun x : ℝ => fT t x) x| = |fTp t x| from congr_arg abs (hf'eq x hx)]  -- 4.33.1: no `abs_congr`; congr_arg abs
+          have hSbarOn : ContinuousOn Sbar (Icc G B) := by
+            -- 4.33.1 (09-13): `continuity` over the full deriv/fTp terms blows up
+            -- (aesop / heartbeat timeouts); assemble from pointwise pieces:
+            -- Sbar pointwise (dsimp + haveI + continuity) × |fTp| from hFtpCont.
             intro x hx
             have hx0 : 0 < x := by linarith [hGt, hx.1]
             have h1 : 1 ≤ log x := by
-              linarith [show log G ≤ log x from log_le_log (by linarith [ht, hGt]) hG,
+              linarith [show log G ≤ log x from log_le_log (by linarith [ht, hGt]) hx.1,
                 show 1 ≤ log G from by
                   calc (1 : ℝ) = log (Real.exp 1) := (Real.log_exp 1).symm
                     _ ≤ log G := log_le_log (Real.exp_pos 1) hG]
-            have h2 : 0 < log x := by linarith [h1]
-            have hd : deriv (fun x : ℝ => fT t x) x = fTp t x :=
-              hf'eq x hx
-            rw [hd]
-            haveI : 0 < x := hx0
-            haveI : 0 < log x := h2
-            haveI : 0 < u x := by nlinarith
-            haveI : 0 < x * x - t * t := by nlinarith [hGt, hx.1]
-            continuity
-          have hIISbarf' : IntervalIntegrable
-              (fun x : ℝ => Sbar x * |deriv (fun x : ℝ => fT t x) x|) volume G B :=
-            hSbarf'cont.intervalIntegrable_of_Icc (μ := volume) (le_of_lt hGB)
+            have h1l : 0 < log x := by linarith [h1]
+            have hFun : (Sbar : ℝ → ℝ) = (fun z : ℝ => 0.110 * log z + 0.290 * log (log z) + 2.290) := by
+              ext z
+              dsimp only [Sbar]  -- 4.33.1: dsimp cannot unfold unapplied Sbar in the goal;
+            -- rewrite the function first, then assemble pointwise
+            rw [hFun]
+            -- 4.33.1: `continuity` (aesop) exhausts itself on the log-log term;
+            -- build the pointwise continuity explicitly (hFtpCont template).
+            have hLog : ContinuousAt (fun z : ℝ => log z) x := continuousAt_log (ne_of_gt hx0)
+            have hLogLog : ContinuousAt (fun z : ℝ => log (log z)) x := by
+              apply ContinuousAt.comp'
+              · exact continuousAt_log (ne_of_gt h1l)
+              · exact hLog
+            have hC1 : ContinuousAt (fun _ : ℝ => (0.110 : ℝ)) x := continuousAt_const
+            have hC2 : ContinuousAt (fun _ : ℝ => (0.290 : ℝ)) x := continuousAt_const
+            have hC3 : ContinuousAt (fun _ : ℝ => (2.290 : ℝ)) x := continuousAt_const
+            exact (hC1.mul hLog |>.add (hC2.mul hLogLog) |>.add hC3).continuousWithinAt
+          have hSbarfTpCont : ContinuousOn
+              (fun x : ℝ => Sbar x * |fTp t x|) (Icc G B) := by
+            have habsC : Continuous (fun x : ℝ => |x|) := by continuity
+            have hFtpAbs : ContinuousOn (fun x : ℝ => |fTp t x|) (Icc G B) :=
+              ContinuousOn.comp habsC.continuousOn hFtpCont (fun _ _ => Set.mem_univ _)  -- 4.33.1: `by simp` makes no progress on MapsTo … univ
+            exact ContinuousOn.mul hSbarOn hFtpAbs
+          have hIISbarfTp : IntervalIntegrable
+              (fun x : ℝ => Sbar x * |fTp t x|) volume G B :=
+            hSbarfTpCont.intervalIntegrable_of_Icc (μ := volume) (le_of_lt hGB)
           have hZ2 : ∫ x in G..B, |(NList L x - NHat x) * deriv (fun x : ℝ => fT t x) x| ≤
-              ∫ x in G..B, Sbar x * |deriv (fun x : ℝ => fT t x) x| := by
+              ∫ x in G..B, Sbar x * |fTp t x| := by
             haveI := hIIabs
-            haveI := hIISbarf'
-            exact intervalIntegral.integral_mono_on (by linarith : G ≤ B) hIIabs hIISbarf' hf'pt
+            haveI := hIISbarfTp
+            exact intervalIntegral.integral_mono_on (by linarith : G ≤ B) hIIabs hIISbarfTp hf'pt
           have hf'bound : ∀ x ∈ Icc G B,
-              Sbar x * |deriv (fun x : ℝ => fT t x) x| ≤ Sbar x * (Cf t G / x^3) := by
+              Sbar x * |fTp t x| ≤ Sbar x * (Cf t G / x^3) := by
             intro x hx
-            have hf'd : |deriv (fun x : ℝ => fT t x) x| ≤ Cf t G / x^3 := by
-              have hd : deriv (fun x : ℝ => fT t x) x = fTp t x :=
-                hf'eq x hx
-              rw [hd]
-              exact fTp_bound t x G ht hGt (by linarith [hx.1])
+            -- 4.33.1: use fTp_bound directly (|fTp| = |deriv| pointwise via hf'eq;
+            -- the old `rw [hd]` detour died under the lambda binder)
             have hsx : 0 ≤ Sbar x := by
               dsimp only [Sbar]
               have h1 : 1 ≤ log x := by
-                linarith [show log G ≤ log x from log_le_log (by linarith [ht, hGt]) hG,
+                linarith [show log G ≤ log x from log_le_log (by linarith [ht, hGt]) hx.1,
                   show 1 ≤ log G from by
                     calc (1 : ℝ) = log (Real.exp 1) := (Real.log_exp 1).symm
                       _ ≤ log G := log_le_log (Real.exp_pos 1) hG]
               have h2l : 0 ≤ log (log x) := by
                 calc 0 = log 1 := (Real.log_one).symm
-                  _ ≤ log (log x) := log_le_log (by linarith [h1]) (le_of_lt (by linarith [h1]))
+                  _ ≤ log (log x) := log_le_log (by norm_num) h1  -- 4.33.1: `1 ≤ log x` (h1) suffices;
+                -- the old `le_of_lt (1 < log x)` is not derivable and fails linarith
+
               apply add_nonneg
               · apply add_nonneg
                 · apply mul_nonneg
@@ -730,27 +754,26 @@ theorem b3BoundExplicit (L : List ℝ) (t G B : ℝ) (ht : 0 < t) (hGt : t < G)
                   · norm_num
                   · exact h2l
               · norm_num
-            apply mul_le_mul_of_nonneg_left hf'd
-            exact hsx
+            exact mul_le_mul_of_nonneg_left (fTp_bound t x G ht hGt (by linarith [hx.1])) hsx
           have hIISc : IntervalIntegrable (fun x : ℝ => Sbar x * (Cf t G / x^3)) volume G B := by
-            have hcont : ContinuousOn (fun x : ℝ => Sbar x * (Cf t G / x^3)) (Icc G B) := by
+            have hInv3 : ContinuousOn (fun x : ℝ => Cf t G / x^3) (Icc G B) := by
+              -- 4.33.1: `continuity` (aesop) cannot close z^3 / c/z^3 (ProbeN8 red, 3 forms);
+              -- build pointwise in the hFtpCont style: mul^3, congr to z^3, div.
               intro x hx
               have hx0 : 0 < x := by linarith [hGt, hx.1]
-              have h1 : 1 ≤ log x := by
-                linarith [show log G ≤ log x from log_le_log (by linarith [ht, hGt]) hG,
-                  show 1 ≤ log G from by
-                    calc (1 : ℝ) = log (Real.exp 1) := (Real.log_exp 1).symm
-                      _ ≤ log G := log_le_log (Real.exp_pos 1) hG]
-              have h2 : 0 < log x := by linarith [h1]
-              haveI : 0 < x := hx0
-              haveI : 0 < log x := h2
-              continuity
-            exact hcont.intervalIntegrable_of_Icc (μ := volume) (le_of_lt hGB)
-          have hZ3 : ∫ x in G..B, Sbar x * |deriv (fun x : ℝ => fT t x) x| ≤
+              have hx3 : 0 < x^3 := by positivity
+              have hC : ContinuousAt (fun _ : ℝ => (Cf t G : ℝ)) x := continuousAt_const
+              have hId : ContinuousAt (fun z : ℝ => z) x := continuousAt_id' (x : ℝ)
+              have hx3c : ContinuousAt (fun z : ℝ => z * z * z) x := hId.mul hId |>.mul hId
+              have hPow : (fun z : ℝ => z * z * z) = (fun z : ℝ => z^3) := by ext z; ring
+              have hX3 : ContinuousAt (fun z : ℝ => z^3) x := hx3c.congr hPow.eventuallyEq
+              exact (hC.div hX3 (ne_of_gt hx3)).continuousWithinAt  -- pointwise goal is ContinuousWithinAt
+            exact (ContinuousOn.mul hSbarOn hInv3).intervalIntegrable_of_Icc (μ := volume) (le_of_lt hGB)
+          have hZ3 : ∫ x in G..B, Sbar x * |fTp t x| ≤
               ∫ x in G..B, Sbar x * (Cf t G / x^3) := by
-            haveI := hIISbarf'
+            haveI := hIISbarfTp
             haveI := hIISc
-            exact intervalIntegral.integral_mono_on (by linarith : G ≤ B) hIISbarf' hIISc hf'bound
+            exact intervalIntegral.integral_mono_on (by linarith : G ≤ B) hIISbarfTp hIISc hf'bound
           have hZ4 : ∫ x in G..B, Sbar x * (Cf t G / x^3) =
               Cf t G * ∫ x in G..B, Sbar x / x^3 := by
             have hpt : ∀ x ∈ uIoo G B, (Sbar x * (Cf t G / x^3)) =
@@ -766,9 +789,11 @@ theorem b3BoundExplicit (L : List ℝ) (t G B : ℝ) (ht : 0 < t) (hGt : t < G)
             ring
           calc |∫ x in G..B, Δfun x|
               ≤ ∫ x in G..B, |(NList L x - NHat x) * deriv (fun x : ℝ => fT t x) x| := hZ1
-            _ ≤ ∫ x in G..B, Sbar x * |deriv (fun x : ℝ => fT t x) x| := hZ2
+            _ ≤ ∫ x in G..B, Sbar x * |fTp t x| := hZ2  -- re-targeted: deriv form unreachable
+
             _ ≤ ∫ x in G..B, Sbar x * (Cf t G / x^3) := hZ3
             _ = Cf t G * ∫ x in G..B, Sbar x / x^3 := by rw [hZ4]
             _ ≤ Cf t G * Kbar G :=
               mul_le_mul_of_nonneg_left (Kbar_le G B hG hGB) hCfN
-        exact add_le_add (by rw [← mul_add]) hcZ
+        exact add_le_add le_rfl hcZ  -- 4.33.1: first subgoal reduces reflexively; the old
+        -- `rw [← mul_add]` found no sum pattern (both sides already one product)

@@ -3,7 +3,10 @@
   Recomputes, in Lean float64:
     (1) the five E7a oracle instances   (vs the dps-20 Python record),
     (2) the B-4 16-point per-pair table (B4Float.run),
-    (3) the B-5 12-config ratio table   (B5Float.run).
+    (3) the B-5 12-config ratio table   (B5Float.run),
+    (4) the B-3 A/B gate: the exact finite Abel identity (b3Abel) at
+        quadrature limit + the explicit bound (b3BoundExplicit) —
+        B3Float.run (t=2.5, G=6, B=40, toy off-line list).
   GATE RULE: each table PASSes when the Lean port matches the Python
   oracle within ~1e-13; a transcription error shows as O(1) — the run
   aborts its own PASS line, so a red gate is impossible to misread.
@@ -60,3 +63,8 @@ def main : IO Unit := do
   IO.println "configs: closed form pref·e^{s·ωδ} vs the direct 6-factor definition vs the"
   IO.println "dps-30 record; record: out_day010_b5core_check.txt)"
   let _w5 ← B5Float.run
+  IO.println ""
+  IO.println "B-3 Lean float64 pipeline — exact finite Abel identity + explicit bound"
+  IO.println "(t=2.5, G=6, B=40, toy off-line list; A/B gate vs the theorems b3Abel /"
+  IO.println "b3BoundExplicit — same formulas, machine precision)"
+  let _w3 ← B3Float.run
