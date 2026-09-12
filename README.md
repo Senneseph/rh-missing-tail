@@ -164,7 +164,8 @@ kernel — is specific enough to fail.
 ## Authors and disclosure
 
 - **Jesse S. Miller** — conception, experimental design,
-  direction, interpretation. (BS - Mathematics and Computer Science, Emory University; working interest in the histories of the Natural Sciences.)
+  direction, interpretation. (BS - Mathematics and Computer Science, Emory University; working interest in the histories of the Natural Sciences.)  
+  **L. McGeorge** - Creative Partner
 - **Qwen (Alibaba Qwen team)** — co-developing instrument:
   implementation, computation, drafting, and cross-checking, running
   locally as `pi-qwen-vast` on the first author's hardware (AMD
