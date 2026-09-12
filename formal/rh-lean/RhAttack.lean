@@ -35,6 +35,11 @@ import RhAttack.P4Em
 -- int_B1f'_period (the −½f(n)+(1/12)(f′m−f′n)+B̂₂·f″ kernel) via one
 -- polynomial IBP per unit period + the a.e. endpoint conversion + the
 -- pinned additivity lemma. The only local invention of the P4 line.
--- Day-017: proven green (int_B1f'_period). The global em2_finite
--- summation (atom-2b) is next.
+-- Day-017: proven green (int_B1f'_period).
 import RhAttack.P4Tail
+
+-- Day-019 (2026-09-12): the GLOBAL finite 2nd-order Euler–Maclaurin law
+-- (atom-2b): ico_sum_telescope + em2_finite, stitching the per-period
+-- identity over [n, m] via sum_integral_adjacent_intervals_Ico.
+-- (First red pass day-017; green day-019 — state in the day journal.)
+import RhAttack.P4Em2
