@@ -43,3 +43,9 @@ import RhAttack.P4Tail
 -- identity over [n, m] via sum_integral_adjacent_intervals_Ico.
 -- (First red pass day-017; green day-019 — state in the day journal.)
 import RhAttack.P4Em2
+
+-- Day-019 (2026-09-12, goal turn): the M→∞ passage (P4 atoms L1–L5): the
+-- derivative family for x ↦ (x:ℂ)^{−s} (L1), the finite EM identity (L2),
+-- kernel convergence (L3), the OP1/OP2 remainder bounds (L4), and the
+-- stated zero-free bound |W_n(t)| ≤ B_n(t) (L5).
+import RhAttack.P4Limit
