@@ -23,3 +23,9 @@ import RhAttack.B5
 -- explicit finite bound (Platt–Trudgian S̄), and the ζ-free residual
 -- decomposition (RhAttack.B3).
 import RhAttack.B3
+
+-- RhAttack.P4Em (outline piece P4 — the rigorous missing-tail law,
+-- atom-1): the 1st-order Euler–Maclaurin formula, verbatim port from
+-- the published Lean proof (PrimeNumberTheoremAnd, Apache 2.0).
+-- Engine of the P4 second-order EM + remainder atoms.
+import RhAttack.P4Em
