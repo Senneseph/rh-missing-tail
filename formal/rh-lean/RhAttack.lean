@@ -13,9 +13,10 @@ import RhAttack.B0
 import RhAttack.B5
 
 -- RhAttack.B3 (outline pieces P6/P7 — the bridge identity and the
--- finite Abel/IBP machinery) is intentionally NOT imported: it is not
--- yet green (atomic repair in progress, day-015 journal). Import it
--- here, one line, once it compiles clean — nothing else changes.
+-- finite Abel/IBP machinery) joined the root day-016: the pieces
+-- (B3Core/B3Abel/B3Sbar) + B3 are green and imported below; the A/B
+-- gate (B3Float) runs as part of `lake exe rhattack`. One progress
+-- report per day; state in the day-016 journal.
 
 -- The B-3 bridge identity: the finite exact Abel decomposition for the
 -- counting step N_L, the RVM-comparator bridge (N = NHat + S), the
