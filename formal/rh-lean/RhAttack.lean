@@ -29,3 +29,12 @@ import RhAttack.B3
 -- the published Lean proof (PrimeNumberTheoremAnd, Apache 2.0).
 -- Engine of the P4 second-order EM + remainder atoms.
 import RhAttack.P4Em
+
+-- RhAttack.P4Tail (outline piece P4 — the rigorous missing-tail law,
+-- atom-2): the 2nd-order finite Euler–Maclaurin per-period identity
+-- int_B1f'_period (the −½f(n)+(1/12)(f′m−f′n)+B̂₂·f″ kernel) via one
+-- polynomial IBP per unit period + the a.e. endpoint conversion + the
+-- pinned additivity lemma. The only local invention of the P4 line.
+-- Day-017: proven green (int_B1f'_period). The global em2_finite
+-- summation (atom-2b) is next.
+import RhAttack.P4Tail
