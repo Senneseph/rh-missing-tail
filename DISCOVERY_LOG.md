@@ -926,3 +926,29 @@ the per-point package is exactly three measurement facts:
   Trudguan.  OPTIONAL: C1b (the t != g window floor promotion).
 The full build is 17430 jobs, 0 errors, 0 sorry; B5-CORE CHECK
 PASS; the rhattack smoke PASSes; probe deleted.
+
+## 17. C7 — the record arithmetic, machine-verified (2026-09-17)
+
+The two closing records carry arithmetic claims computed from
+printed point values; C7 makes those claims exact-rational
+machine-checked facts (norm_num; the printed decimals are exact
+rationals) — "computed, never recalled" now extends from the
+measurement to the verification of the measurement's own arithmetic:
+
+  p9_worstcase_record_margin : 9.198 >= 112.6 * 0.08168
+    (out_day020_worstcase.txt, overall worst point t = 1006.7916,
+     pair g = 999.791572; the closing number 112.6 re-verifies
+     from the printed resid/dev)
+  p9_xval_record_headroom : 3.9665418656908 >= 206 * 0.019253844165493
+    (out_day020_xval_pin.txt, t = 1000.041572, band
+     (2000.083144, 10^5]; the 206x pin re-verifies at 15 digits)
+
+Precision discipline: per-pair printed values (e.g. the 980 pair's
+"118.6") can FAIL such re-verification at 4-significant-figure
+print precision (1.949/0.01644 = 118.55...); only closing numbers
+are machine-checked, and the closing number is the overall worst
+case. If a future audit adds a new closing constant, its C7 check
+travels with it.
+
+RhAttack/Closure.lean C7 section; full build 17430 jobs 0 errors
+0 sorry; B5-CORE PASS; smoke PASS; probe deleted.

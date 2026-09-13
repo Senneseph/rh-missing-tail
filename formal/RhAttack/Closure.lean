@@ -38,7 +38,10 @@ non-critical for the closure — day021_c1b_worstpoint audit) — and
 C6 — the audit-point margin wire: the three point-measured facts per
 off-line pair (hZero / hDef / hStrict, day-020 worstcase + xval pin
 records) instantiate the C5b hmargin predicate, so the §8 closure at
-the AUDIT POINT is one statement: p9_closure_at_audit_point.
+the AUDIT POINT is one statement: p9_closure_at_audit_point — and
+C7 — the record arithmetic, machine-verified: the printed point
+values of the two closing records re-verify their own margin claims
+exactly (computed, never recalled).
 
 HONEST SPLIT (per-atom):
   C0 (B0 counting interface): LEAN-PROVEN (imported); the minimal
@@ -70,7 +73,14 @@ HONEST SPLIT (per-atom):
     p9_audited_package_strict (the three point-measured facts pack
     into the hmargin witness tuple, flo := dev) and
     p9_closure_at_audit_point (C5b composed with that packaging —
-    one statement).  Their MEASUREMENT inputs are PINNED per point:
+    one statement).  C7 (record arithmetic): LEAN-PROVEN exact
+    rational checks (norm_num) that the two closing records'
+    printed point values re-verify their margin claims —
+    p9_worstcase_record_margin (9.198 >= 112.6 * 0.08168, the
+    overall worst case) and p9_xval_record_headroom (Xval >=
+    206 * |x|, the 206x pin).  (Per-pair printed values can fail
+    such re-verification at print precision and are deliberately
+    NOT checked — the closing number is the overall worst case.)  Their MEASUREMENT inputs are PINNED per point:
     hZero (the zero side, bridge S6 + detector S7, day-010 d4d3 +
     day-020 worstcase), hDef (measured resid below the A4.3-wired
     bound at Xval, the xval pin record), hStrict (the audited strict
@@ -591,3 +601,32 @@ theorem p9_closure_at_audit_point (q : ZeroSet)
   obtain ⟨dev, Q, Mf, Bf, Mr, h⟩ := hAudit t0 d0 ht0 hd0 hpair
   obtain ⟨hZero, hDef, hStrict⟩ := h
   exact p9_audited_package_strict dev Q Mf Bf Mr hZero hDef hStrict
+
+/-! P9 · C7 — the record arithmetic, machine-verified (computed, never
+recalled).
+
+The closing PINNED constants of the audit records carry an
+arithmetic claim (margin >= threshold from the printed point
+values).  C7 makes that arithmetic a machine-checked exact-rational
+fact (norm_num on the printed decimals, which are exact rationals).
+Precision note: the check applies to the OVERALL worst case (112.6,
+the closing number); per-pair rounded values (e.g. the 980 pair's
+118.6) can fail re-verification at 4-significant-figure print
+precision and are deliberately NOT checked.
+-/
+
+/-- C7.1 (the day-020 worstcase record, out_day020_worstcase.txt, the
+    overall worst point t = 1006.7916, pair g = 999.791572): with the
+    printed point values resid = 0.08168, dev = 9.198 the record's
+    claim "MARGIN >= 112.6" holds exactly — 9.198 >= 112.6 * 0.08168. -/
+theorem p9_worstcase_record_margin : (9.198 : ℝ) >= (112.6 : ℝ) * (0.08168 : ℝ) := by
+  norm_num
+
+/-- C7.2 (the Xval pin record, out_day020_xval_pin.txt, t =
+    1000.041572, band (2000.083144, 10^5]): with the printed 15-digit
+    values |x| = 0.019253844165493 and Xval = 3.9665418656908 the
+    record's claim "MARGIN = Xval/|x| = 206.013 >= 206" holds exactly
+    — Xval >= 206 * |x|. -/
+theorem p9_xval_record_headroom :
+    (3.9665418656908 : ℝ) >= (206 : ℝ) * (0.019253844165493 : ℝ) := by
+  norm_num

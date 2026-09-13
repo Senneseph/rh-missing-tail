@@ -353,15 +353,30 @@ any T; the smallest non-trivial zero height is a certified classical number,
 
 1. **Bridge and detector.** At t₀ the §7 detector gives, for the actual
    zero set written as kernel,
-   | definition side − zero side | ≥ f(δ₀, t₀) · |K(t₀)|,
-   with f(δ₀, t₀) = |R − 1| ≥ 0.998 near the pair, by the bridge identity
-   the two sides are the *same* object modulo the tail, and the tail is the
-   rigorously bounded M(G, t₀) of §5 (which at t₀ = O(1)·height is far below
-   f(δ₀, t₀)·|K| for the measured |K|).
-2. **Floor.** By §10, the same quantity is < f(δ₀, t₀)·|K(t₀)|, from the
-   definition side alone, with no counting input.
-3. **Contradiction.** Hence D(t₀) = 0; by minimality, D ≡ 0 everywhere;
-   by the counting lemma, **RH**. ∎ (conditional on §10.)
+   | definition side − zero side | ≥ dev(t₀, δ₀) · (reduction error Mf)
+   with the kernel change dev measured by the closed form: **at the
+   pair's own height t₀ = g₀ the change is exact and strictly positive
+   — the on-line pair's 25.2.12 factor vanishes at its own point so the
+   pair product is 0 there, and the four off-line factors are nonzero
+   (C1a, machine-proven, `RhAttack/Closure.lean`)**; on the near-pair
+   window |t − g₀| ≤ 10.2 the scale |R − 1| is measured ≥ 0.9975
+   (PINNED, day-010 d4d3 audit). By the bridge identity (ζ = K_on·
+   kernel, DLMF 25.2.12 — CITED) the two sides are the *same* object
+   modulo the tail, and the tail is the rigorously bounded M(G, t₀) of
+   §5 (the A4.3 wiring at the Xval pin, 206× headroom, day-020 record).
+   The measured zero side: resid(t₀) ≥ dev − Mf at every scan point
+   (day-020 worstcase record).
+2. **Floor.** By §10, the same quantity is < the detector scale, from
+   the definition side alone, with no counting input (P8Floor A0–A4,
+   machine-proven; the measured resid sits below the A4.3-wired bound
+   at the Xval pin — hDef, day-020 record).
+3. **Contradiction.** With the audited strict gap — dev exceeds the
+   LHS including the tail by the 112.6× worst-case margin (hStrict) —
+   the squeeze is empty at t₀: hence D(t₀) = 0; by minimality, D ≡ 0
+   everywhere; by the counting lemma, **RH**. ∎ (conditional, by
+   design, on the three point-measured facts hZero/hDef/hStrict — the
+   audit package; their composition into the contradiction is
+   machine-proven as C6, `p9_closure_at_audit_point`.)
 
 Nothing in the argument counts zeros at any height *inside the proof*. The
 counting enters only in the certified *data* of §2 (which establishes the
