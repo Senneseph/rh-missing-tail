@@ -583,3 +583,70 @@ sides expand, so the final `ring` closes.
 Full repo build GREEN (17426 jobs, 0 errors); gates A-D PASS. The P4Limit
 module (all of L1-L5) is now complete: the P4 missing-tail line — exact
 law on Re s > 1, bound + ratio corollary at Re s = ½ — is machine-proven.
+
+## 10. P8Floor module GREEN through A4.1 — the residual-floor line (2026-09-16)
+
+Route A of the §10 residual floor, formalized in `formal/RhAttack/P8Floor.lean`
+from the spec `kainos-logos/.../spec/p8floor-routeA-abstract.md`. Seven green
+commits, one per atom: `18f9b2e` (A0+A1), `7c07343` (A2a), `775174b` (A2b.1),
+`4d4a5d5` (A2b.2), `d571f70` (A3.1+A3.2a), `ef1aff1` (A3.2b.1), `63fdae8`
+(A4.1).
+
+**What is machine-proven (LEAN-PROVEN):**
+- A0+A1: the same-object reduction — the outline's LHS
+  `|W_n(t) − [K_on(t) − (P_n − I)]|` is EXACTLY `‖δK‖ + bridge residual +
+  floor` under `p8_triangle` (reverse triangle via `norm_sub_le`); `p4_Wn`
+  fixes the definition-side W_n so no ζ appears anywhere.
+- A2a: `p8_B_floor` — the three-term P4 floor at s = ½+it is literally
+  `p4_T4_bound` (half-critical-line instantiation).
+- A2b: `p8_residual_exact` factors the bridge residual
+  `e^{Tt}·∏_L F − ∏_{L∪T} F = ∏_{L∪T} F·(e^{Tt − Σ_T ln F} − 1)` (B3
+  `b3ResidualDecomp` + ring); `p8_abs_exp_sub_one_le` proves
+  `|e^x − 1| ≤ e^{|x|}·|x|` with a BOTH-sign analysis built on
+  `add_one_lt_exp` (`x ≠ 0 → x+1 < e^x`) + `one_le_exp` — no MVT (the MVT
+  route's resolution friction: `hasDerivAt_exp` ambiguity,
+  `differentiableAt` vs `differentiableWithinAt`, `div_mul_cancel` arg
+  order — abandoned cleanly); `p8_residual_bound` then makes the residual
+  the product's own mass × a function of the ONE model-defect number
+  x := Tt − Σ_T ln F. Zeta-free, counting-free.
+- A3: `p8_noff_delta_min` — B5's off-line numerator
+  `((t−γ)²+δ²)((t+γ)²+δ²) = (t²−γ²)² + 2δ²(t²+γ²) + δ⁴` (all
+  coefficients ≥ 0) is δ-monotone, minimized at δ = 0 — no dead δ window;
+  `p8_detector_abs_lower` — reverse triangle (`abs_dist_sub_le R 1 0`)
+  routes `‖R − 1‖ ≥ |‖R‖ − 1|` into B5 `b5Abs`' closed magnitude;
+  `p8_pref_omega_zero` / `p8_detector_norm_at_zero` — at δ = 0 the closed
+  form collapses to explicit numbers (pref = (γ²−t²)/(¼+γ²), ω₀ =
+  1/(¼+γ²), ‖R(0)‖ = |γ²−t²|/(¼+γ²)·e^{ω₀/2}) — the far-regime seeds.
+- A4.1: far regime, γ ≥ 1, t ≥ 2γ: `‖R(γ,0,t)‖ ≥ 2` and hence
+  `‖R − 1‖ ≥ 1` — the zero-decision inequality (outline §7: floor +
+  residual < detector) reduces there to bounding floor + residual below 1.
+
+**Honest split (per the honesty rule):**
+- The W_n = EM-expression equality AT Re s = ½: CITED (DLMF 25.2.8 /
+  Apostol 12.21) — same split as P4Limit L5.e.
+- The NEAR-regime detector floor (t ≈ γ, the branch locus excluded from
+  B5's closed form at t = γ): PINNED by the day-017/019 near-regime audit
+  (0.9975 – 1.0201 across the grid; margin ≥ 14× at the pair's own
+  height) — A4.2 is the next atom and will state this as a
+  measurement-pinned constant.
+- The M(G,t) wire (B3Sbar `b3BoundExplicit` composition into the residual
+  chain): next after A4.2.
+
+**New 4.33.1 pins/lessons:** `mul_lt_mul_of_pos` in this mathlib is the
+4-argument 2-sided form (a<b, c<d, 0<a, 0<d) — single-sided lemmas are
+`mul_lt_mul_of_pos_left`/`_right`; `abs_dist_sub_le (x y z) :
+|dist x z − dist y z| ≤ dist x y`; `div_le_div_iff₀ hb hd` (field form; the
+Unbundled `div_le_div_iff_right` needs `Group`, which ℝ's multiplicative
+monoid is not); `le_div_iff₀`; `abs_div (a b)` takes ELEMENT args (no proof,
+field default); `mul_eq_zero : (a·b = 0) ↔ …` — use `.mp`; `sq_lt_sq` is
+an IFF (nlinarith squares positive atoms instead); `show E, from P` and
+`show E := by P` are UNPARSEABLE in 4.33.1 in tactic lists and as terms —
+annotated by-terms `(by t : E)` or named haves only; CJK brackets 〈〉
+(U+3008/9) vs Lean angle brackets ⟨⟩ (U+27E8/9) keep getting confused —
+`obtain ⟨a, b, c⟩ := …` needs the latter; a bare `calc` step whose LHS
+carries a `·1` factor needs `simpa [mul_one]`; calc mixing one strict `<`
+step makes the whole calc's type strict — promote to `le_of_lt` first.
+
+Full-repo build GREEN (17428 jobs, 0 errors); zero `sorry`/`admit` in
+P8Floor; B5-CORE CHECK PASS (worst 5.978e-26); rhattack smoke exe: E7a /
+B-4 / B-5 / B-3 all CROSS-CHECK PASS.
