@@ -503,3 +503,52 @@ Two numeric findings, both recorded as they actually are:
 Full repo build green (0 errors); all four runtime gates PASS. P4Limit
 now holds L1+L2+L3+L4; the remaining P4 layer is L5 (assemble the P4
 statement `|W_n(t)| ≤ B_n(t)` from the atoms).
+
+## 8. L5 GREEN — the P4 line composes: identity at Re s > 1, bound at Re s = 1/2 (2026-09-15)
+
+One composition atom at a time (owner's one-at-a-time rule), each built
+green before the next:
+
+- **L5.a `p4_Tn_Tendsto`** (816d77f): the M→∞ limit of the tail partial
+  sums `∑_{n<k≤m} k^{−s}` is the closed constant `p4_Tn_lim` — endpoint
+  terms + the bare f″ kernel tail. Built on L3's `p4_kernel_tendsto` +
+  `tendsto_rpow_neg_atTop` for `x ↔ x^{−s−1}` on ℕ.
+- **L5.b `p4_zeta_split`**: the 1-indexed split
+  `riemannZeta s = ∑_{0≤k<n} 1/(k+1)^{-s} + ∑_{k≥n} 1/(k+1)^{-s}` via
+  `zeta_eq_tsum_one_div_nat_add_one_cpow` (avoids the `0^s` singularity of
+  `zeta_eq_tsum_one_div_nat_cpow`) + `Complex.summable_one_div_nat_cpow`
+  + `Summable.sum_add_tsum_nat_add'`.
+- **L5.c `p4_Tn_eq`**: the second tsum = `∑_{0≤k<n} k^{−s} +
+  p4_Tn_lim s n` — `Summable.tendsto_sum_tsum_nat` (tail partial sums →
+  tsum, with the L5.a `congr'` for eventual equality) + L2's finite EM
+  law `em2_finite` on every prefix + `FunLike.funext` to absorb the
+  `fun i => (i:ℝ)` cast.
+- **L5.d `p4_identity`** — **the P4 line-statement, machine-proven for
+  Re s > 1**: `riemannZeta s − P_n s + I(n,s) = p4_em_expr s n`, where
+  `p4_em_expr := −½n^{−s} + (s/12)n^{−s−1} − ½∫_n^∞ B̂₂({x})·f″(x)dx`
+  (kernel form; `f″` = `p4_f2` = `s(s+1)x^{−s−2}`, so the explicit
+  `s(s+1)` form is a one-line simp corollary). Assembly: L5.b + L5.c +
+  `norm_cast` on the single-cast/natural-cast complex powers + `ring`.
+- **L5.e `p4_T4_bound`** — **the P4 bound at Re s = ½**:
+  `‖p4_em_expr s n‖ ≤ ½n^{−1/2} + (‖s‖/12)n^{−3/2} + (√3/540)·
+  ‖s(s+1)(s+2)‖·n^{−5/2}` — triangle inequality on the three display
+  terms; the kernel term is L4.4 (`p4_f2_tail_bound`, sharp √3/270) with
+  the leading ½. The equality `W_n = p4_em_expr` **at Re s = ½ itself**
+  is CITED (DLMF 25.2.8 / Apostol Thm 12.21: both sides agree on
+  Re s > 1 by L5.d and are analytic on {Re s > −1}\{−1,−2}); the bound
+  on the EM expression is fully Lean-proven there.
+
+Honest split, documented in `P4Limit.lean`'s L5 header: Lean proves the
+identity on Re s > 1 and the bound on the expression at Re s = ½; the
+bridge at the critical line is the published EM extension (cited).
+
+New tooling pins: `zeta_eq_tsum_one_div_nat_add_one_cpow`,
+`Summable.sum_add_tsum_nat_add'`, `Summable.tendsto_sum_tsum_nat`,
+`summable_nat_add_iff`, `tendsto_nhds_unique`, `Filter.Tendsto.congr'`
+(set-valued eventual-equality congruence), `Finset.sum_range_add` +
+`Finset.sum_union` for the range↔Ioc bridge, `Complex.one_re`,
+`Complex.norm_cpow_eq_rpow_re_of_pos` (after the single-cast bridge
+`(n : ℂ) = ((n : ℝ) : ℂ)`), `norm_sub_le`, `norm_add_le`, `le_rfl` as a
+calc-closer.
+
+Full repo build GREEN (0 errors, 17426 jobs); gates A-D PASS.
