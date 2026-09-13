@@ -2416,3 +2416,37 @@ from a closure intuition (shell -> k-shell; addition -> count;
 off-line prime -> off-line zero's components); the last mile is a
 certificate, not a contradiction — which is the publishable content.
 Full note: working-tree spec/fib-shell-probe.md §7.
+
+### 23c — owner round-4 (2026-09-13, same day): "from the ground up" —
+SUM SERIES = log zeta; zeroe are the closed spectrum of the prime-
+count deviation; RH = rotation-closure. Examined: NOT straws —
+reconstructs the standard deep structure, each link exact: (1) log:
+(Q*, x) -> direct-sum_p Z log p — addition meets multiplication IS
+the log map, the primes are the additive atoms of the multiplicative
+field; (2) the prime sum series psi(x) = Sum_{n<=x} Lambda(n) with
+Lambda = Moebius inversion log n = Sum_{d|n} Lambda(d) — the
+ADDITIVE CLOSURE of the multiplicative monoid (the fundamental form
+of "closed under addition"; deeper than Zeckendorf: same object N,
+different generating set; this is the one zeta uses); (3) sum series
+vs zeta series differ by the log/exp pair (log zeta = Sum Lambda
+n^{-s}); (4) the explicit formula psi(x) = x - Sum_rho x^rho/rho -
+... is the SPECTRAL closure — the zeroe are the closed exponential
+spectrum of the count's deviation from baseline x ("the output is
+the closure of the additive field" — true in the Pontryagin sense).
+RH in this language: an off-line component = its on-line twin times a
+PURE AMPLIFICATION e^{delta u} (u = log x; growth e^{2pi d/gamma}
+per log-period); RH = pure rotation / no amplification = every delta
+= 0; off-line = amplifying spiral (NOT closed). New exact statement:
+the BSY measure (1/pi)dt/(1/4+t^2) is EXACTLY the Poisson measure of
+the half-plane {Re w > 1/2} at the pole w = 1 — I = interior
+singularity mass at the pole; our I[0,1e6] = +1.59e-6 (budget
+2.2e-5) = "no spiral under the floor at the pole w = 1."
+Consequences: P1.2's name = "no spiral under the floor, uniform in
+t"; instrument horizon map — on-line completeness exact to the list
+(1e7); off-line delta seen where 2d/gamma^2 >~ 6.5e-5 (BSY) or
+4kd/t^2 >~ floor (pins, t <~ 2e3..1e4); union blind spot = small-
+delta large-gamma pairs = EXACTLY the P1.2 domain. The transposition
+family is spent: four walks independently re-derived the k-shells,
+closure-by-count, the (COUNT, delta) components, and the bridge
+itself; the region beyond is a theorem (the uniform statement), not
+a perspective. Full note: working-tree spec/fib-shell-probe.md §8.
