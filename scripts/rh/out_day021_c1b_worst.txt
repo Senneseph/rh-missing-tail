@@ -1,0 +1,71 @@
+day021 C1b Step 0: worst point of |R| = |pref| e^{omega/2}, t != g
+==========================================================================
+
+[1] gamma-direction (u fixed at 0.5, 5, 10, 12; delta = 0.1):
+  g =     14.13473:  u=  0.5: 7.496598e-02  u=  5.0: 8.339064e-01  u= 10.0: 1.917885e+00  u= 12.0: 2.421664e+00
+  g =     50.00000:  u=  0.5: 2.090594e-02  u=  5.0: 2.101035e-01  u= 10.0: 4.400848e-01  u= 12.0: 5.376872e-01
+  g =    100.00000:  u=  0.5: 1.042624e-02  u=  5.0: 1.025434e-01  u= 10.0: 2.100259e-01  u= 12.0: 2.544236e-01
+  g =    999.79157:  u=  0.5: 1.040477e-03  u=  5.0: 1.003111e-02  u= 10.0: 2.010623e-02  u= 12.0: 2.415075e-02
+  g =  10000.00000:  u=  0.5: 1.040026e-04  u=  5.0: 1.000650e-03  u= 10.0: 2.001200e-03  u= 12.0: 2.401607e-03
+  g = 100000.00000:  u=  0.5: 1.040003e-05  u=  5.0: 1.000425e-04  u= 10.0: 2.000300e-04  u= 12.0: 2.400311e-04
+  g = 300000.00000:  u=  0.5: 3.466670e-06  u=  5.0: 3.334694e-05  u= 10.0: 6.667444e-05  u= 12.0: 8.000716e-05
+
+[2] |R| extremes on the window (g0..3e5 x |u| <= 12 x d in grid):
+  Rmag MAX = 3.536696873e+00   at g = 14.134725142, u = 0.01, sgn = 1.0, d = 0.5
+  Rmag MIN = 8.333333195e-08  at g = 300000.0, u = 0.01, sgn = -1.0, d = 0.005
+  |R| CROSSES 1 in the window (region-dependent floor):
+   |R| <= 1 region: 1 - max|R| = 0.000494777
+   |R| >= 1 region: min|R| - 1 = 0.000093796
+  phase theta = (1/2+t)*omega range: min 0.000003, max 0.133147 rad
+  unit-circle (R=1) candidate floor 2|sin(theta_min/2)| = 0.000003
+
+[3] the d -> 0+ edge (pref(0) = (g^2 - t^2)/(1/4+g^2)):
+  g =     14.13473:  u=  0.5: 7.1909e-02 [OK]  u=  5.0: 8.3157e-01 [OK]  u= 10.0: 1.9131e+00 [OK]  u= 12.0: 2.4157e+00 [OK]
+  g =    100.00000:  u=  0.5: 1.0025e-02 [OK]  u=  5.0: 1.0250e-01 [OK]  u= 10.0: 2.0999e-01 [OK]  u= 12.0: 2.5439e-01 [OK]
+  g =    999.79157:  u=  0.5: 1.0005e-03 [OK]  u=  5.0: 1.0027e-02 [OK]  u= 10.0: 2.0104e-02 [OK]  u= 12.0: 2.4149e-02 [OK]
+  g =  10000.00000:  u=  0.5: 1.0000e-04 [OK]  u=  5.0: 1.0002e-03 [OK]  u= 10.0: 2.0010e-03 [OK]  u= 12.0: 2.4014e-03 [OK]
+  (the d=0 edge value is tiny ~ u/g * (1/(1/4+g^2)) * (t^2+g^2)...
+   check the actual size per row above)
+
+[4] the d = 0.5 edge:
+  g =     14.13473:  u=  0.5: 1.4386e-01  u=  5.0: 8.4006e-01  u= 10.0: 1.9182e+00  u= 12.0: 2.4202e+00
+  g =    999.79157:  u=  0.5: 2.0009e-03  u=  5.0: 1.0127e-02  u= 10.0: 2.0154e-02  u= 12.0: 2.4191e-02
+  g =  10000.00000:  u=  0.5: 2.0000e-04  u=  5.0: 1.0103e-03  u= 10.0: 2.0060e-03  u= 12.0: 2.4056e-03
+
+[5] decision comparison (day-020 audits):
+  audit near floor (d4, pinned at g ~ 1e3) : 0.9975
+  this run floor estimate              : 0.000003
+  decision threshold 1/112.6           : 0.008881
+  floor vs threshold ratio             : 0.0x
+  (the margin audit verified resid/dev >= 1/112.6 on the windows;
+   the floor only needs to beat the local resid/dev, ~2.1e-2..1e-2
+   in the worstcase record — the 0.9975 near floor is conservative)
+
+[6] t<g vs t>g at g = 999.791572, d = 0.1, u sweep:
+  u =   0.05:  t>g: 5.001169e-04   t<g: 5.000918e-04
+  u =   0.50:  t>g: 1.040477e-03   t<g: 1.039957e-03
+  u =   5.00:  t>g: 1.003111e-02   t<g: 9.981067e-03
+  u =  10.00:  t>g: 2.010623e-02   t<g: 1.990612e-02
+  u =  12.00:  t>g: 2.415075e-02   t<g: 2.386261e-02
+
+[7] the |R| = 1 crossing (floor candidates at the crossing):
+  g =     14.13473 (t > g side)
+   d = 0.005: u_c =   5.8500, theta = 0.102403, floor_cand = 0.102358
+   d = 0.010: u_c =   5.8500, theta = 0.102403, floor_cand = 0.102358
+   d = 0.020: u_c =   5.8500, theta = 0.102402, floor_cand = 0.102357
+   d = 0.050: u_c =   5.8500, theta = 0.102395, floor_cand = 0.102351
+   d = 0.100: u_c =   0.0060, theta = 0.073167, floor_cand = 0.073151
+   d = 0.200: u_c =   0.0060, theta = 0.073101, floor_cand = 0.073085
+   d = 0.300: u_c =   0.0180, theta = 0.073052, floor_cand = 0.073035
+   d = 0.400: u_c =   0.0240, theta = 0.072928, floor_cand = 0.072912
+   d = 0.500: u_c =   0.0360, theta = 0.072791, floor_cand = 0.072775
+  g =     50.00000 (t > g side)
+   d = 0.200: u_c =   0.0060, theta = 0.020198, floor_cand = 0.020198
+   d = 0.300: u_c =   0.0060, theta = 0.020196, floor_cand = 0.020196
+   d = 0.400: u_c =   0.0120, theta = 0.020195, floor_cand = 0.020195
+   d = 0.500: u_c =   0.0120, theta = 0.020191, floor_cand = 0.020190
+  g =    100.00000 (t > g side)
+   d = 0.300: u_c =   0.0060, theta = 0.010050, floor_cand = 0.010050
+   d = 0.400: u_c =   0.0060, theta = 0.010049, floor_cand = 0.010049
+   d = 0.500: u_c =   0.0060, theta = 0.010049, floor_cand = 0.010049
+  g =    999.79157: no |R| = 1 crossing in u in (0, 12]

@@ -811,3 +811,62 @@ conditional by design: instantiating hmargin with the pinned
 constants (f_pin, d_min, m_pin + the P8Floor A4/Xval wires) is the
 day-020 numerical verification, and C1b is the remaining analysis
 price.
+
+## 15. C1a — the branch locus IS the pole: the own-height detector facts GREEN (2026-09-16/17, after the P9 module went green)
+
+**Setup.** The P9 closure (section 14) left one priced item: the
+detector floor at the candidate pair's own height (the "own regime"),
+recorded as PINNED (0.9975, day-010 d4d3 straddle audit). The closure
+itself — C5b — evaluates the squeezed margin exactly at the MINIMAL
+off-line pair height t0 = g. So the question sharpens: what is the
+detector AT t = g, not just near g?
+
+**Finding (day021_c1b_worstpoint.py, scripts/rh/out_day021_c1b_worst.txt).**
+The ratio R(g, d, t) has a POLE at t = g: the on-line pair's 25.2.12
+factor (1 − (s/ρ + ρ/s)/2) vanishes at s = ρ (its own point), so
+pairProd(g, g) = 0 while all four off-line factors remain nonzero for
+0 < d < 1/2 (their real parts are 1/2 ± d, δ, 1/2 ∓ δ, all > 0 at
+t = g). The kernel change the zero side of the contradiction carries
+at own height is therefore the off-line product mass poff(g, d, g) —
+a finite, nonzero, POSITIVE-constant factor times the bridge exp. The
+window-floor scan (the audit's original target) shows the rest:
+|R| crosses |R| = 1 with phase jump π (a unit-circle crossing = a
+sign flip of Re(R − 1)) on |t − g| ≲ O(1/γ), the worst |R − 1| dips
+scale ~ 1/γ (measured: ~1/γ·0.06–0.11 at γ ≈ 1000 with δ = 0.005–
+0.02, worst δ = 0.06 at γ = 129.98) — i.e. the t ≠ g window is
+well-behaved but NOT the closure's evaluation point.
+
+**Lean (C1a, RhAttack/Closure.lean, all 7 atoms LEAN-PROVEN,
+deterministic tactics only).**
+  p9_fac_self_zero            — (1 − 2·(z/z)/2)·e¹ = 0 (div_self)
+  p9_pairProd_at_own_height   — pairProd γ γ = 0 (ρ ≠ 0; Re(ρ) = 1/2 > 0)
+  p9_fac_ne_zero_of_ne        — fac ρ s ≠ 0 iff s ≠ ρ, ρ ≠ 0 (field_simp)
+  p9_poff_own_height_nz_full  — poff γ δ γ ≠ 0 for 0 < δ < 1/2 (the four
+                                factors: Re = 1/2 ± δ / δ nonzero; s ≠ ρᵢ
+                                by the add_right_inj/lt_irrefl route)
+  p9_kernel_change_at_own_height — poff − pairProd = poff ≠ 0 (exact)
+  p9_detector_at_own_height   — ‖poff − pairProd‖ = ‖poff‖ (simp)
+  p9_poff_own_height_pos      — 0 < ‖poff γ δ γ‖ (norm_pos_iff)
+
+**Consequence for the §8 closure.** The "0.998 at own height" line of
+the outline is not a floor at all — it is the pole: the ≥ side at t0
+is exact and its mass is strictly positive. The PINNED 0.9975 window
+floor remains an honest recorded audit of the t ≠ g regime (its C1b
+promotion — the branch-locus d,t two-variable minimum of |R − 1| —
+is now OPTIONAL for the closure; the pin is a conservative statement
+about window behavior the closure does not need). The conditional
+closure stays conditional only on its measurement inputs (margins),
+as designed; no detector-side pin is on the critical path anymore.
+
+**Toolchain pin (Lean 4.33.1).** Hit a NONDETERMINISTIC linarith
+failure while proving the C1a factor lemmas: "synthetic hole has
+already been defined" (termElabSyntheticMVar, the lt_irrefl route),
+same file failing once then passing repeatedly; a micro-probe
+isolated it to linarith on equality goals with strict hypotheses in
+the context (ring on the same identity is fine). Online search
+(2026-09-13) found no published mathlib4 issue with this exact trace
+(general synthetic-hole / congr hole-hogging threads only).
+Workaround adopted: the C1a section uses deterministic tactics only
+(simp/rw/norm_num/field_simp/add_right_inj/lt_irrefl) and keeps
+1/2 out of the decision procedures. Recorded here so a future
+commit does not reintroduce a flaky linarith.

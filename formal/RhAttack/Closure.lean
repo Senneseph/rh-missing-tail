@@ -28,11 +28,13 @@ STATUS (2026-09-16, Lean 4.33.1): pins (f_pin, d_min, margin_min,
 m_pin), C1-far, C5, C0 (p9_min_offline_height), C5b
 (p9_closure_rh_of_margin) GREEN — the 8 conditional closure is
 complete (bridge + detector >= side, P8Floor definition-side < side,
-B0 minimality, squeezed margin as the explicit measurement input).
-The open analysis atom is C1b (spec closure-module-abstract.md 1):
-the branch-locus d,t two-variable minimum of |R - 1| as a Lean
-theorem — the promotion that would make the own-regime detector
-floor (currently p9_f_pin, PINNED) a Lean-proven bound.
+B0 minimality, squeezed margin as the explicit measurement input),
+with C1a — the own-height (pole) detector facts: the branch locus is
+the POLE at t = g (the pair's own height), where the on-line pair
+product vanishes and the off-line product mass is a nonzero finite
+positive constant (the exact kernel change the closure needs; the
+ratio R has a pole there, so the window-floor question for t != g is
+non-critical for the closure — day021_c1b_worstpoint audit).
 
 HONEST SPLIT (per-atom):
   C0 (B0 counting interface): LEAN-PROVEN (imported); the minimal
@@ -42,8 +44,16 @@ HONEST SPLIT (per-atom):
     (P8Floor A4.1 import, restated at f_pin); own regime PINNED
     (day-010 d4d3 audit: 0.9975-1.0201 across the d-grid 0.005-0.5 on
     straddle windows |t - g| <= 10; closed form vs direct 4-zero to
-    1e-16, day-020 worstcase run).  C1b (promoting the own regime to
-    a Lean theorem) is OPEN.
+    1e-16, day-020 worstcase run).
+  C1a — the own-height (pole) facts: LEAN-PROVEN (p9_fac_self_zero,
+    p9_pairProd_at_own_height = 0, p9_fac_ne_zero_of_ne,
+    p9_poff_own_height_nz_full, p9_kernel_change_at_own_height,
+    p9_detector_at_own_height, p9_poff_own_height_pos — deterministic
+    tactics only; the 4.33.1 linarith synthetic-hole failure on
+    equality goals is nondeterministic and is avoided, recorded in the
+    C1a section header).  C1b (promoting the t != g WINDOW floor to
+    a Lean theorem) stays optional: the closure evaluates at the own
+    height, where C1a gives the EXACT value.
   C5 (the arithmetic squeeze): LEAN-PROVEN.
   C5b (the 8 closure): LEAN-PROVEN under the explicit squeezed-
     margin hypothesis hmargin — its real witnesses ARE the pinned/
@@ -83,11 +93,17 @@ COMPOSITION ROOT (how the atoms bring the 8 closure together):
        zero exists at any height: RH q (C5b).
   The composition is conditional by design: hmargin is a hypothesis
   (its instantiation with the pin constants is verified numerically,
-  not in Lean — the C1b promotion is the remaining price).
+  not in Lean).  At step 2 the detector quantity is evaluated at the
+  pair's OWN height t0 = g, where C1a gives the exact kernel change:
+  the on-line pair product is 0 and the off-line product mass is a
+  nonzero finite positive constant (p9_poff_own_height_pos) — the
+  ratio form of R has a pole there; the PINNED window floor p9_f_pin
+  bounds only the t != g window (C1b optional).
 -/
 
 import Mathlib
 import RhAttack.B0
+import RhAttack.B5
 import RhAttack.P8Floor
 
 open Real Finset Set
@@ -340,3 +356,172 @@ theorem p9_closure_rh_of_margin (q : ZeroSet)
     ⟨ρ0, hρ0, hre0, him0, rfl⟩
   obtain ⟨Q, dev, flo, Mf, Bfloor, Mr, hQge, hDev, hQle, hMargin⟩ := hmargin
   exact p9_point_contradiction Q dev flo Mf Bfloor Mr hQge hDev hQle hMargin
+
+/-! P9 · C1a — the own-height (pole) detector facts.
+
+The C1b audit (day021_c1b_worstpoint.py, spec
+c1b-branch-locus-abstract.md) found the branch locus of the detector
+ratio R is the POLE at t = g (the candidate pair's own height): the
+on-line pair's 25.2.12 factor vanishes at its own point, so
+pairProd g g = 0 while the four off-line factors are nonzero there
+(0 < d < 1/2).  The §8 closure evaluates the detector exactly at its
+own height t0 = g, so the >= side is the EXACT finite kernel change
+poff g d g (a nonzero positive constant), not the window floor — the
+0.9975 pin bounds only the t != g window.
+
+Tactic note (4.33.1 pin): the linarith "synthetic hole has already
+been defined" failure on equality goals containing strict hypotheses
+is NONDETERMINISTIC (observed: same file fails once, then passes
+repeatedly; no published mathlib4 issue found, search 2026-09-13).
+This section therefore uses deterministic tactics only
+(simp/rw/norm_num/field_simp/add_right_inj/lt_irrefl) for the
+complex-component contradictions, keeping the committed file stable.
+-/
+
+theorem p9_fac_self_zero (z : Complex) (hz : z ≠ 0) : fac z z = 0 := by
+  unfold fac
+  have hq : z / z = 1 := div_self hz
+  rw [hq, sub_self, zero_mul]
+
+/-- C1a.1: the on-line pair product vanishes at the pair's own height. -/
+theorem p9_pairProd_at_own_height (γ : ℝ) : pairProd γ γ = 0 := by
+  unfold pairProd
+  have hP : rhoP γ ≠ 0 := by
+    intro h
+    have hre : (rhoP γ).re = 0 := congr_arg Complex.re h
+    have hpos : 0 < (rhoP γ).re := by
+      rw [rhoP, halfR]
+      norm_num
+    have hs0 : (0 : ℝ) < 0 := by simpa [hre] using hpos
+    exact lt_irrefl (0 : ℝ) hs0
+  have hsg : sLine γ = rhoP γ := rfl
+  rw [hsg]
+  rw [p9_fac_self_zero (rhoP γ) hP]
+  simp [mul_zero]
+
+/-- C1a.2a: a single canonical factor is nonzero when s ≠ ρ (ρ ≠ 0). -/
+theorem p9_fac_ne_zero_of_ne (ρ s : Complex) (hρ : ρ ≠ 0) (hne : s ≠ ρ) :
+    fac ρ s ≠ 0 := by
+  unfold fac
+  refine mul_ne_zero (by
+    intro h
+    have heq : s / ρ = 1 := sub_eq_zero.mp h |>.symm
+    have hs : s = ρ := by
+      have hs1 : s = s / ρ * ρ := by field_simp [hρ]
+      rw [hs1, heq, one_mul]
+    exact hne hs
+  ) (Complex.exp_ne_zero (s / ρ))
+
+/- C1a.2b: the four off-line factors are nonzero at their own height.
+   Deterministic only: simp/rw/add_right_inj/lt_irrefl — no ring or
+   linarith on the 1 / 2 HDiv terms (the 4.33.1 linarith synthetic-
+   hole failure on equality goals is nondeterministic). -/
+theorem p9_poff_own_height_nz_full (γ δ : ℝ) (hδ : 0 < δ) (hδh : δ < 1 / 2) :
+    poff γ δ γ ≠ 0 := by
+  unfold poff
+  have hρPP : rhoPP γ δ ≠ 0 := by
+    intro h
+    have hre : (rhoPP γ δ).re = 0 := congr_arg Complex.re h
+    have hpos : 0 < (rhoPP γ δ).re := by
+      rw [rhoPP, halfR]
+      norm_num
+      linarith [hδ]
+    have hs0 : (0 : ℝ) < 0 := by simpa [hre] using hpos
+    exact lt_irrefl (0 : ℝ) hs0
+  have hnePP : sLine γ ≠ rhoPP γ δ := by
+    intro h
+    have hre : (sLine γ).re = (rhoPP γ δ).re := congr_arg Complex.re h
+    have hreL : (sLine γ).re = 1 / 2 := by simp [sLine, halfR]
+    have hreR : (rhoPP γ δ).re = 1 / 2 + δ := by simp [rhoPP, halfR]
+    rw [hreL, hreR] at hre
+    have h0 : (δ : ℝ) = 0 := by
+      simpa [add_zero] using (add_right_inj (1 / 2 : ℝ)).mp
+        (by simpa [add_zero] using hre.symm)
+    exact lt_irrefl (0 : ℝ) (by simpa [h0] using hδ)
+  have hρPM : rhoPM γ δ ≠ 0 := by
+    intro h
+    have hre : (rhoPM γ δ).re = 0 := congr_arg Complex.re h
+    have hpos : 0 < (rhoPM γ δ).re := by
+      rw [rhoPM, halfR]
+      norm_num
+      linarith [hδ]
+    have hs0 : (0 : ℝ) < 0 := by simpa [hre] using hpos
+    exact lt_irrefl (0 : ℝ) hs0
+  have hnePM : sLine γ ≠ rhoPM γ δ := by
+    intro h
+    have hre : (sLine γ).re = (rhoPM γ δ).re := congr_arg Complex.re h
+    have hreL : (sLine γ).re = 1 / 2 := by simp [sLine, halfR]
+    have hreR : (rhoPM γ δ).re = 1 / 2 + δ := by simp [rhoPM, halfR]
+    rw [hreL, hreR] at hre
+    have h0 : (δ : ℝ) = 0 := by
+      simpa [add_zero] using (add_right_inj (1 / 2 : ℝ)).mp
+        (by simpa [add_zero] using hre.symm)
+    exact lt_irrefl (0 : ℝ) (by simpa [h0] using hδ)
+  have hρNP : rhoNP γ δ ≠ 0 := by
+    intro h
+    have hre : (rhoNP γ δ).re = 0 := congr_arg Complex.re h
+    have hpos : 0 < (rhoNP γ δ).re := by
+      rw [rhoNP, halfR]
+      norm_num
+      linarith [hδh]
+    have hs0 : (0 : ℝ) < 0 := by simpa [hre] using hpos
+    exact lt_irrefl (0 : ℝ) hs0
+  have hneNP : sLine γ ≠ rhoNP γ δ := by
+    intro h
+    have hre : (sLine γ).re = (rhoNP γ δ).re := congr_arg Complex.re h
+    have hreL : (sLine γ).re = 1 / 2 := by simp [sLine, halfR]
+    have hreR : (rhoNP γ δ).re = 1 / 2 - δ := by simp [rhoNP, halfR]
+    rw [hreL, hreR] at hre
+    have hsum : (1 / 2 : ℝ) = 1 / 2 + δ := by
+      rw [← sub_eq_iff_eq_add]
+      exact hre.symm
+    have h0 : (δ : ℝ) = 0 := by
+      simpa [add_zero] using (add_right_inj (1 / 2 : ℝ)).mp
+        (by simpa [add_zero] using hsum.symm)
+    exact lt_irrefl (0 : ℝ) (by simpa [h0] using hδ)
+  have hρNM : rhoNM γ δ ≠ 0 := by
+    intro h
+    have hre : (rhoNM γ δ).re = 0 := congr_arg Complex.re h
+    have hpos : 0 < (rhoNM γ δ).re := by
+      rw [rhoNM, halfR]
+      norm_num
+      linarith [hδh]
+    have hs0 : (0 : ℝ) < 0 := by simpa [hre] using hpos
+    exact lt_irrefl (0 : ℝ) hs0
+  have hneNM : sLine γ ≠ rhoNM γ δ := by
+    intro h
+    have hre : (sLine γ).re = (rhoNM γ δ).re := congr_arg Complex.re h
+    have hreL : (sLine γ).re = 1 / 2 := by simp [sLine, halfR]
+    have hreR : (rhoNM γ δ).re = 1 / 2 - δ := by simp [rhoNM, halfR]
+    rw [hreL, hreR] at hre
+    have hsum : (1 / 2 : ℝ) = 1 / 2 + δ := by
+      rw [← sub_eq_iff_eq_add]
+      exact hre.symm
+    have h0 : (δ : ℝ) = 0 := by
+      simpa [add_zero] using (add_right_inj (1 / 2 : ℝ)).mp
+        (by simpa [add_zero] using hsum.symm)
+    exact lt_irrefl (0 : ℝ) (by simpa [h0] using hδ)
+  refine mul_ne_zero (mul_ne_zero (mul_ne_zero ?h1 ?h2) ?h3) ?h4
+  · exact p9_fac_ne_zero_of_ne (rhoPP γ δ) (sLine γ) hρPP hnePP
+  · exact p9_fac_ne_zero_of_ne (rhoPM γ δ) (sLine γ) hρPM hnePM
+  · exact p9_fac_ne_zero_of_ne (rhoNP γ δ) (sLine γ) hρNP hneNP
+  · exact p9_fac_ne_zero_of_ne (rhoNM γ δ) (sLine γ) hρNM hneNM
+
+/- C1a.3/C1a.4: the composition — the kernel change at the pair's own
+   height is exactly the off-line product mass (the on-line pair's
+   contribution is zero there): the §8 detector at own height, as an
+   EXACT finite positive value instead of a ratio. -/
+
+theorem p9_kernel_change_at_own_height (γ δ : ℝ) (hδ : 0 < δ) (hδh : δ < 1 / 2) :
+    poff γ δ γ - pairProd γ γ = poff γ δ γ ∧ poff γ δ γ ≠ 0 := by
+  rw [p9_pairProd_at_own_height, sub_zero]
+  exact ⟨rfl, p9_poff_own_height_nz_full γ δ hδ hδh⟩
+
+theorem p9_detector_at_own_height (γ δ : ℝ) (hδ : 0 < δ) (hδh : δ < 1 / 2) :
+    ‖poff γ δ γ - pairProd γ γ‖ = ‖poff γ δ γ‖ := by
+  rw [p9_pairProd_at_own_height]
+  simp
+
+theorem p9_poff_own_height_pos (γ δ : ℝ) (hδ : 0 < δ) (hδh : δ < 1 / 2) :
+    0 < ‖poff γ δ γ‖ := by
+  exact norm_pos_iff.mpr (p9_poff_own_height_nz_full γ δ hδ hδh)
