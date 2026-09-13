@@ -2081,3 +2081,84 @@ values are sound; the margin collapse is STRUCTURAL, not numerical:
 **Sticker on the wall:** never extend a measurement statistic past
 the regime where its scale cancels; when a run prints a dramatic
 result, probe the scale before believing the verdict.
+
+## 20. STICKY POINT #2 — the composite kernel's (B,∞) tail model inflates |K|; the "1.053 closing" is the inflation asymptote (2026-09-13)
+
+**Trigger.** The P1.1b regime-guarded run to 6e6 (out_day022_p11b_regime.txt)
+showed 0.0% regime support at 10^6..6e6: |K_comp(t)| ~ 1e-11..1e-26 while
+|zeta| ~ O(0.1-100).  Probing the 1e6 point part-by-part
+(probe_K_highT.py): each part verified sound — logmain vs Stirling,
+la (float64 12M sum) vs longdouble/mpmath block to 3e-9, tail
+quadrature dps-20 = dps-50 to 2 decimals — yet Re K_comp = -23.95
+vs ln|zeta| = -2.59: the composite kernel is 21.36 NATS = e^21 LOW
+in magnitude at t = 1e6 (B = 6e6 list cap).  By elimination the
+error is in the (B,∞) tail MODEL (integral nHat·pairlog replacing
+the product over zeros beyond the list cap) — the one part the
+theory covers only via a bound, not a computation.
+
+**The error curve (computed, out_day022_tailerr_curve):**
+E(t) := ln|zeta(1/2+it)| - Re K_comp(t), B = 6e6 fixed:
+  t = 1e3: E = -0.004  (0.4%)
+  t = 2e3: E = +0.001  (0.1%)
+  t = 5e3: E = -0.018  (1.8%)
+  t = 7.5e3: E = -0.058 (5.6%)
+  t = 1e4: E = -0.085  (8.2%)
+  t = 2e4: E = -0.356  (30%)
+  t = 5e4: E = -2.98   (f = e^{-E} = 19.73)
+  t = 1e6: E = -21.36  (f = e^21)
+Crossover to the error-dominated regime: ~5-6e3 (genuine margins
+below it: 112.6 -> 87 -> 73 -> 62 -> 46 -> 34.7).
+
+**The fingerprint (the decisive check):** in the error regime the
+composite K_comp = f·K_true (f = e^{-E}, real), so the measured
+margin at a closing point = dev/resid ≈ (f|zeta|·floor)/((f-1)|zeta|)
+= f·floor/(f-1) -> f/(f-1) (floor = min|R-1| ≈ 1 near the pair).
+Measured vs predicted:
+  2e4:  measured 3.3247  vs f/(f-1) = 3.3236  (4 digits)
+  5e4:  measured 1.0529  vs f/(f-1) = 1.0534  (3 digits)
+  5009 (g = 5000.234317): measured 34.68 with resid = 8.14e-4 in
+  the BRIDGE-DEFECT class (local E ~ 0) — GENUINE statistic.
+The "closing 1.053 @ 5*10^4" — headline of the day-021 cross-band
+work — is the TAIL-MODEL INFLATION ASYMPTOTE, not a measured
+squeeze.  Retracted as a closing claim; kept as a measurement
+record of the composite statistic.  The "recovery to 2.269 @ 10^5"
+is the error curve saturating (f = 19.73 there too-class), not a
+recovery.
+
+**Consequences (honest, machine-wired):**
+  1. `p9_margin_min` RE-PINNED 1.0529 -> 33.9864 (new verified-
+     regime closing 34.68 @ t = 5009.2343, g = 5000.234317, with
+     the 2% model-error envelope deducted; C7 re-anchored to
+     p9_5e3_record_margin; the old record kept verbatim as
+     p9_weakspot_record_kept with its reclassification).  The
+     machine-proven core (C0/C1a/C5/C5b/C6) is UNAFFECTED — it
+     consumes the pin abstractly.
+  2. The "erosion curve" 112.6 -> 1.053 (day-020/021) re-reads as:
+     GENUINE erosion 112.6 -> 34.68 over [~1e3, ~5e3] (the verified
+     regime, envelope <= 2%), then MASKED 5e3..~1e5 (measured
+     values track f/(f-1), the true margins UNKNOWN there), then
+     BLIND >= 1e5 (0% regime support; |K_comp| ~ e^{-21}|zeta| at
+     1e6).  The true high-band margin is an OPEN MEASUREMENT
+     question, not a measured 1.05.
+  3. The tail-model (B,∞) inflation means the composite kernel is
+     a valid audit object only where |E(t)| <= ~2%: t <= ~5-6e3 for
+     B = 6e6 (envelope 2%), t <= ~1e3 for the older B = 3e5 / 1e5
+     lists at similar envelope.  All future audits must carry the
+     E(t) check as a first-class output.
+  4. Two fix routes for the masked band (5e3..1e5) and beyond:
+     (a) P1.1c — an ERROR-BUDGET statistic: renormalize with the
+         measured bridge (|zeta| Riemann-Siegel dps-25, independent)
+         + the measured E(t) + the Sbar-class phase-error budget,
+         so the audit is "margin vs worst-case model error" —
+         local, no new data; (b) a LARGER zero list (T ~ 2-3e8,
+         ~3.3e8 zeros, file ~4 GB, generation hours-days on this
+         box — the rented-compute decision point) so that t/B
+         returns to ~1/200 and the plain composite is faithful
+         again.  (a) first (hours, not days); (b) if the prize
+         case proceeds (the final certification wants the plain
+         statistic on a wide band).
+
+**Sticker:** a model's error curve can MASQUERADE as the thing under
+measurement — the fingerprint check (measured margin vs the
+model-predicted asymptote) is what separates the two.  Measure E
+before trusting any |K|-based number.

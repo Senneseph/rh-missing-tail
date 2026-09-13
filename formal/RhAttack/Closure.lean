@@ -22,7 +22,9 @@ this closes 8: D = 0, hence RH.
 inside the proof." — the counting enters only through B0's structural
 ZeroSet interface and the pinned constants of the margin/detector
 hypotheses (CITED: the bridge zeta = kernel, DLMF 25.2.12; PINNED:
-detector floor 0.9975 and margin 112.6x, day-020 audits).
+detector floor 0.9975 and margin 33.9864x — verified-regime
+closing 34.68 @ t = 5009.2343 (g = 5000.234317), day-022 audits,
+2% tail-model envelope deducted; DISCOVERY_LOG 20).
 
 STATUS (2026-09-16, Lean 4.33.1): pins (f_pin, d_min, margin_min,
 m_pin), C1-far, C5, C0 (p9_min_offline_height), C5b
@@ -76,23 +78,25 @@ HONEST SPLIT (per-atom):
     one statement).  C7 (record arithmetic): LEAN-PROVEN exact
     rational checks (norm_num) that the closing records' printed
     point values re-verify their margin claims —
-    p9_weakspot_record_margin (69.40177926 >= 1.0529 * 65.91129441,
-    the CLOSING number, the overall worst point over all measured
-    bands, day-021b record), p9_worstcase_record_margin (9.198 >=
+    p9_5e3_record_margin (0.02823 >= 34.68 * 0.98 * 0.0008141,
+    the VERIFIED-regime CLOSING number day-022 re-anchor; the
+    former closing — the 5*10^4 weak spot 69.40177926 >= 1.0529 *
+    65.91129441, kept as p9_weakspot_record_kept — is the
+    tail-model inflation asymptote, DISCOVERY_LOG 20), p9_worstcase_record_margin (9.198 >=
     112.6 * 0.08168, the t ~ 10^3 region record) and
     p9_xval_record_headroom (Xval >= 206 * |x|, the 206x pin).
     (Per-pair printed values can fail such re-verification at print
     precision and are deliberately NOT checked — the closing number
-    is the overall worst case; when the closing number moved to the
-    5*10^4 weak spot (day-021 cross-band record), its printed value
-    re-verified only at the under-estimate 1.0529 of the exact
-    1.05295731 — the pin is the under-estimate, by construction.)
+    is the overall worst case of the VERIFIED regime (tail-model
+    error <= ~2%): day-022 5*10^3 record 34.68; the 5*10^3..10^5
+    measured erosion curve is tail-model MASKED (DISCOVERY_LOG 20).
     Their MEASUREMENT inputs are PINNED per point:
     hZero (the zero side, bridge S6 + detector S7, day-010 d4d3 +
     day-020/021 cross-band records), hDef (measured resid below the
     A4.3-wired bound at Xval, the xval pin record), hStrict (the
-    audited strict gap — closing margin 1.053 full band; t ~ 10^3
-    region alone 112.6).  The zero-side IDENTITY behind
+    audited strict gap — verified-regime closing 34.68 @ 5*10^3
+    with 2% envelope; t ~ 10^3 region alone 112.6; the 5*10^3..
+    10^5 measured band is tail-model masked, DISCOVERY_LOG 20).  The zero-side IDENTITY behind
     hZero (zeta = K_on * kernel, DLMF 25.2.12) is CITED, not
     re-proven (the kernel product over n zeros with the P4 tail is
     the measurement side; E7b1 audit trail, day-009 records).
@@ -135,23 +139,32 @@ COMPOSITION ROOT (how the atoms bring the 8 closure together):
   bounds only the t != g window (C1b optional).
   4. C6 (p9_closure_at_audit_point): the same closure composed with
      the audit-point package — per point, THREE point-measured facts
-     (hZero, hDef, hStrict; records: the day-020/021 cross-band
-     coverage, closing margin 1.053 + xval pin 206x) pack into
+     (hZero, hDef, hStrict; records: the day-020/022 cross-band
+     coverage, verified-regime closing 34.68 @ 5*10^3 + xval pin
+     206x; DISCOVERY_LOG 20) pack into
      hmargin (C6.1) and close RH.  This is the final composition:
      the S8 argument at the audit point is one statement whose only
      non-machine inputs are those three PINNED measurement facts.
-  5. The measurement coverage (day-021 cross-band record, the audit
-     side of step 4): the package is verified on the straddle
+  5. The measurement coverage (day-021/022 cross-band records, the
+     audit side of step 4): the package is verified on the straddle
      windows of 15 candidate pair heights across [~970, 10^5]
-     (DT = 0.5, 7-delta grid; the weak spot at 5*10^4 refined to
-     DT = 0.25 + 10-delta grid).  Per-region worst-point margins:
-     112.6 (10^3) -> 11.3 (10^4) -> 1.053 (5*10^4, CLOSING) ->
-     2.269 (10^5, recovery — resid oscillatory, not monotone
-     erosion).  The pointwise decision resid < dev HOLDS at every
-     scanned point.  The remaining measurement price, stated as
-     such: the g-space gaps between the 15 candidate heights, the
-     bands below ~970 and beyond 10^5, and the sub-grid structure
-     (the closing margin 1.053 is a 5% gap at grid resolution).
+     (DT = 0.5, 7-delta grid).  DAY-022 RECLASSIFICATION
+     (DISCOVERY_LOG 20): the composite kernel's (B, infinity) tail
+     model inflates |K| by f = e^{-E(t)} with E measured (0.4% @
+     10^3, 8% @ 10^4, 30% @ 2*10^4, 95% @ 5*10^4, e^21 @ 10^6); the
+     measured margins 112.6 (10^3) -> 34.68 (5*10^3) are GENUINE
+     (verified regime, envelope <= 2%; closing = 34.68 @ t =
+     5009.2343); the measured 11.3 (10^4) -> 1.053 (5*10^4) -> 2.27
+     (10^5) band is TAIL-MODEL MASKED (fingerprint: measured 3.325
+     @ 2*10^4 = f/(f-1) to 4 digits; 1.0529 @ 5*10^4 to 3 digits);
+     >= 10^5 the statistic has 0% regime support (|K_comp| ~ e^-21 |zeta|).
+     The pointwise decision resid < dev holds at every scanned point
+     (of the composite statistic).  The remaining measurement price,
+     stated as such: the g-space gaps between the 15 candidate
+     heights, the bands below ~970 and beyond 10^5, the sub-grid
+     structure, and — NEW DAY-022 — an ERROR-CORRECTED trend
+     statistic (or a larger zero list) for the 5*10^3..10^5 band,
+     where the true margin is currently masked, not measured.
 -/
 
 import Mathlib
@@ -178,21 +191,26 @@ def p9_f_pin : ℝ := 0.9975
     measured edge is the operative threshold. -/
 def p9_d_min : ℝ := 0.005
 
-/-- PINNED margin constant (day-020 worstcase audit, record
-    scripts/rh/out_day020_worstcase.txt): on the scanned windows
-    (4 candidate pair heights g, straddle |t - g| <= 12, step 0.5)
-    the pointwise decision has closing margin 1.0529 (the OVERALL
-    worst point over all measured bands: the day-021b cross-band
-    record, weak-spot refinement pair g = 50000.406752,
-    t = 49990.656752, resid = 65.91129441, dev = 69.40177926,
-    exact margin 1.05295731 — the pin is the computed UNDER-estimate
-    so that the printed values re-verify in C7).  The t ~ 10^3
-    region alone has margin 112.6 (day-020, worst at t =
-    1006.7916, g = 999.791572); the band envelope erodes with t
-    (112.6 at 10^3 -> 11.3 at 10^4 -> 1.76 at 3*10^4 -> 1.053 at
-    5*10^4) and RECOVERS to 2.269 at 10^5 (resid is oscillatory,
-    day-022 records). -/
-def p9_margin_min : ℝ := 1.0529
+/-- PINNED margin constant.  DAY-022 RE-PIN (DISCOVERY_LOG 20:
+    composite-kernel TAIL-MODEL inflation curve E(t) measured).
+    The previous pin 1.0529 (the 5*10^4 weak-spot record g =
+    50000.406752, t = 49990.656752, resid = 65.91129441, dev =
+    69.40177926) is RECLASSIFIED: its measured margin equals the
+    model-inflation asymptote f/(f-1) (f = e^{-E} = 19.73 there;
+    f/(f-1) = 1.0534 vs measured 1.05295) — an artifact of the
+    (B, infinity) tail model of the composite kernel, NOT the
+    squeeze.  CLOSING of the VERIFIED regime (composite faithful:
+    |E(t)| <= ~2% envelope; locally ~0 at the point, resid 8.1e-4
+    in the bridge-defect class): day-022 extension record
+    (scripts/rh/out_day022_worstcase_ext.txt), candidate pair
+    g = 5000.234317, window point t = 5009.2343: resid = 0.0008141,
+    dev = 0.02823, margin = 34.68.  Pin = 34.68 with the 2%
+    model-error envelope deducted: 34.68 * 0.98 = 33.9864.  The
+    t ~ 10^3 region record 112.6 (day-020, E ~ 0.4%) survives;
+    the 5*10^4..10^5 measured "erosion" (5.5 / 3.3 / 1.05 / 2.3)
+    is TAIL-MODEL MASKED (fingerprint: 3.325 @ 2*10^4 = f/(f-1) to
+    4 digits; 1.0529 @ 5*10^4 to 3 digits — DISCOVERY_LOG 20). -/
+def p9_margin_min : ℝ := 33.9864  -- verified-regime closing, envelope deducted
 
 /-- The margin as a fraction: floor + tails < detector * p9_m_pin. -/
 noncomputable def p9_m_pin : ℝ := 1 / p9_margin_min
@@ -660,13 +678,21 @@ theorem p9_xval_record_headroom :
     (3.9665418656908 : ℝ) >= (206 : ℝ) * (0.019253844165493 : ℝ) := by
   norm_num
 
-/-- C7.3 (the day-021b CLOSING record, scripts/rh/out_day021b_weakspot.txt,
-    the overall worst point over all measured bands: pair
-    g = 50000.406752, t = 49990.656752, DT = 0.25 weak-spot
-    refinement, 10-delta grid): the printed 8-digit point values
-    re-verify the pinned closing margin p9_margin_min = 1.0529
-    (the computed under-estimate of the exact 1.05295731) —
-    dev >= 1.0529 * resid. -/
-theorem p9_weakspot_record_margin :
+/-- C7.3 (DAY-022 RE-ANCHOR, DISCOVERY_LOG 20): the new VERIFIED-
+    regime closing record (scripts/rh/out_day022_worstcase_ext.txt,
+    pair g = 5000.234317, window point t = 5009.2343: resid =
+    0.0008141, dev = 0.02823, margin = 34.68; local tail-model
+    error ~ 0, envelope <= 2%) re-verifies its own margin claim
+    against the re-pinned bound: dev >= 34.68 * 0.98 * resid. -/
+theorem p9_5e3_record_margin :
+    (0.02823 : ℝ) >= (34.68 : ℝ) * (0.98 : ℝ) * (0.0008141 : ℝ) := by
+  norm_num
+
+/-- The former C7.3 (day-021b 5*10^4 weak-spot record): KEPT as a
+    measurement record of the composite statistic only.  Its 1.0529
+    value is the tail-model inflation asymptote f/(f-1) (f = 19.73;
+    f/(f-1) = 1.0534 vs measured 1.05295), NOT a squeeze claim —
+    DISCOVERY_LOG 20. -/
+theorem p9_weakspot_record_kept :
     (69.40177926 : ℝ) >= (1.0529 : ℝ) * (65.91129441 : ℝ) := by
   norm_num

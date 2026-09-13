@@ -1,0 +1,54 @@
+P1.1b run: 7 pairs, list = 12193869 zeros
+g = 1999999.812200 (nearest 2000000) -> {'n_points': 48, 'n_supported': 0, 'supported_frac': 0.0, 'worst_supported_margin': None, 'worst_point_t': None, 'min_K_supported': None}
+g = 999999.793500 (nearest 1000000) -> {'n_points': 48, 'n_supported': 0, 'supported_frac': 0.0, 'worst_supported_margin': None, 'worst_point_t': None, 'min_K_supported': None}
+g = 49990.451284 (5e4 weak-spot anchor) -> {'n_points': 48, 'n_supported': 48, 'supported_frac': 1.0, 'worst_supported_margin': 1.0527989184335305, 'worst_point_t': 49981.951284, 'min_K_supported': 1.936758490602051}
+g = 4000000.041500 (nearest 4000000) -> {'n_points': 48, 'n_supported': 0, 'supported_frac': 0.0, 'worst_supported_margin': None, 'worst_point_t': None, 'min_K_supported': None}
+g = 2999999.812800 (nearest 3000000) -> {'n_points': 48, 'n_supported': 0, 'supported_frac': 0.0, 'worst_supported_margin': None, 'worst_point_t': None, 'min_K_supported': None}
+g = 5000000.393000 (nearest 5000000) -> {'n_points': 48, 'n_supported': 0, 'supported_frac': 0.0, 'worst_supported_margin': None, 'worst_point_t': None, 'min_K_supported': None}
+g = 5999999.897000 (nearest 6000000) -> {'n_points': 48, 'n_supported': 0, 'supported_frac': 0.0, 'worst_supported_margin': None, 'worst_point_t': None, 'min_K_supported': None}
+
+--- P1.1b REGIME-GUARDED TREND (10^3-anchor .. 6*10^6) ---
+g = 999999.793500 (nearest 1000000)        support    0.0%  worst supported margin = n/a (regime gap)
+g = 1999999.812200 (nearest 2000000)       support    0.0%  worst supported margin = n/a (regime gap)
+g = 2999999.812800 (nearest 3000000)       support    0.0%  worst supported margin = n/a (regime gap)
+g = 4000000.041500 (nearest 4000000)       support    0.0%  worst supported margin = n/a (regime gap)
+g = 5000000.393000 (nearest 5000000)       support    0.0%  worst supported margin = n/a (regime gap)
+g = 5999999.897000 (nearest 6000000)       support    0.0%  worst supported margin = n/a (regime gap)
+g = 49990.451284 (5e4 weak-spot anchor)    support  100.0%  worst supported margin = 1.0528
+worst supported margin across all g = 1.0528
+interpretation: supported-margin < 1 anywhere = genuine (regime-valid)
+  audit weakness to investigate; 'n/a' = statistic blind at that g
+  (regime gap — NOT a violation, NOT a pass).
+P1.1b RUN COMPLETE
+P1.1b run: 7 pairs, list = 12193869 zeros
+g = 1999999.812200 (nearest 2000000) -> {'n_points': 48, 'n_supported': 0, 'supported_frac': 0.0, 'worst_supported_margin': None, 'worst_point_t': None, 'min_K_supported': None}
+g = 999999.793500 (nearest 1000000) -> {'n_points': 48, 'n_supported': 0, 'supported_frac': 0.0, 'worst_supported_margin': None, 'worst_point_t': None, 'min_K_supported': None}
+g = 49990.451284 (5e4 weak-spot anchor) -> {'n_points': 48, 'n_supported': 48, 'supported_frac': 1.0, 'worst_supported_margin': 1.0527989184335305, 'worst_point_t': 49981.951284, 'min_K_supported': 1.936758490602051}
+g = 4000000.041500 (nearest 4000000) -> {'n_points': 48, 'n_supported': 0, 'supported_frac': 0.0, 'worst_supported_margin': None, 'worst_point_t': None, 'min_K_supported': None}
+g = 2999999.812800 (nearest 3000000) -> {'n_points': 48, 'n_supported': 0, 'supported_frac': 0.0, 'worst_supported_margin': None, 'worst_point_t': None, 'min_K_supported': None}
+g = 5000000.393000 (nearest 5000000) -> {'n_points': 48, 'n_supported': 0, 'supported_frac': 0.0, 'worst_supported_margin': None, 'worst_point_t': None, 'min_K_supported': None}
+g = 5999999.897000 (nearest 6000000) -> {'n_points': 48, 'n_supported': 0, 'supported_frac': 0.0, 'worst_supported_margin': None, 'worst_point_t': None, 'min_K_supported': None}
+
+--- P1.1b REGIME-GUARDED TREND (10^3-anchor .. 6*10^6) ---
+g = 999999.793500 (nearest 1000000)        support    0.0%  worst supported margin = n/a (regime gap)
+g = 1999999.812200 (nearest 2000000)       support    0.0%  worst supported margin = n/a (regime gap)
+g = 2999999.812800 (nearest 3000000)       support    0.0%  worst supported margin = n/a (regime gap)
+g = 4000000.041500 (nearest 4000000)       support    0.0%  worst supported margin = n/a (regime gap)
+g = 5000000.393000 (nearest 5000000)       support    0.0%  worst supported margin = n/a (regime gap)
+g = 5999999.897000 (nearest 6000000)       support    0.0%  worst supported margin = n/a (regime gap)
+g = 49990.451284 (5e4 weak-spot anchor)    support  100.0%  worst supported margin = 1.0528
+worst supported margin across all g = 1.0528
+interpretation: supported-margin < 1 anywhere = genuine (regime-valid)
+  audit weakness to investigate; 'n/a' = statistic blind at that g
+  (regime gap — NOT a violation, NOT a pass).
+P1.1b RUN COMPLETE
+
+--- NOTE (appended after analysis, see DISCOVERY_LOG 20) ---
+The 0.0% support at 10^6..6*10^6 is the COMPOSITE KERNEL's (B,inf)
+tail-model inflation (E = -21.36 at 10^6: |K_comp| ~ e^-21 |zeta|),
+not a regime of the RH side.  The 5e4 anchor reproduces 1.0528
+(cross-list stability of the composite statistic itself:
+B = 6e6 vs 3e5 lists agree to ~1e-4).  The 0.0% result is
+therefore: the composite-audit statistic is BLIND at these
+heights; the true (error-corrected) trend is P1.1c / P0.3,
+the larger-list route is P0.3(b).

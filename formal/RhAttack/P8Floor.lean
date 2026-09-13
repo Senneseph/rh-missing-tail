@@ -37,10 +37,13 @@ HONEST SPLIT (per-atom):
 
 CITATIONS (outline §11 + day logs): DLMF 25.2.8/25.2.9/25.2.12;
   Apostol 12.21; Platt–Trudgian (S̄, M(G,t)); the measured margin
-  (the day-021 cross-band record: 15 candidate pairs across
-  [~970, 10⁵], closing worst point 1.053 at g ≈ 5·10⁴, recovery to
-  2.269 at 10⁵; the t ~ 10³ region alone is 112.6) — PINNED, not
-  proven here.
+  (DAY-022 RE-PIN, DISCOVERY_LOG 20: verified-regime closing 34.68
+  at t = 5009.2343 (g = 5000.234317, 2% tail-model envelope
+  deducted); the 5×10³..10⁵ measured erosion curve is TAIL-MODEL
+  MASKED — the composite kernel's (B,∞) tail model inflates |K|
+  by f = e^{-E(t)} (E measured: 8%@10⁴, 30%@2×10⁴, 95%@5×10⁴,
+  e^21@10⁶); the t ~ 10³ region alone is 112.6 (E ~ 0.4%)) —
+  PINNED, not proven here.
 
 DISCIPLINE: constants are computed, never recalled; no
 `theorem ... riemann`; one green commit per atom; probe files deleted
