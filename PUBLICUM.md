@@ -224,20 +224,33 @@ wrong question: exactly at the pair's own height the ratio has a
 the off-line mass stays a strictly positive constant, so the kernel
 change there is an EXACT value, not a floor. Seven atoms of this
 fact are machine-proven. The 99.8% number survives as a statement
-about the window away from the pair — and the closure, it turns
-out, only needs the exact one.
+about the window away from the pair; a later audit (DISCOVERY_LOG 21)
+found the closure's point is actually *free* — it is evaluated at the
+measured straddle heights, as in the original probe protocol — so the
+window floor is a genuine input to the closure's picture, not a
+demotable footnote.
 
 **And trapdoors are traps, so we tested them across the band.** The
 closure's per-point facts had been verified around height 10³ (worst
 margin 112.6×). We extended the scan to fifteen candidate pair
-heights from 2×10³ to 10⁵. The margin erodes with height — 112.6 at
-10³ down to **1.053 at 5×10⁴ (the closing worst point, re-pinned and
-machine-checked as an arithmetic fact)** — and then the 10⁵ window
-*recovers* to 2.27 (the residual oscillates; the decay is an
-envelope, not a monotone collapse). Every scanned point up to 10⁵
-still passes the pointwise decision. The weak spot at 5×10⁴ was
-re-tested at finer resolution and confirmed: a real plateau at
-about 5% margin, not a numerical accident.
+heights from 2×10³ to 10⁵ — and then the instrument caught itself:
+the apparent "erosion" at higher heights (the readings 11.3 at 10⁴
+and 1.053 at 5×10⁴) was traced to the composite kernel's (B,∞) tail
+*model*: its error inflates the composite's own magnitude, which
+flattens the measured ratio to about 1 (the 1.053 matches the model's
+own inflation asymptote to 4 sig-figs, and the 2.27 "recovery" at 10⁵
+is its (f−1)⁻¹ — fingerprints, DISCOVERY_LOG 20). The genuine,
+regime-verified margins are 112.6 at 10³ and **34.7 at 5×10³ — the
+closing, re-pinned and machine-checked as an arithmetic fact** — and
+the best-straddle trend (the closure-faithful statistic, DISCOVERY_LOG
+21) stays comfortably above 1 through 2×10⁴. Every scanned point in
+the verified regime still passes the pointwise decision, and the
+pre-registered rule stands: if the squeezed margin ever collapses
+below 1 **in a verified regime**, the route retires rather than the
+claim being papered over. The repair — a 1×10⁷ zero list (running,
+day-023) — is expected to push the verified regime to roughly
+10⁵–2.5×10⁵, and the verdict at the boundary will be recorded when it
+lands.
 
 **Where this leaves the claim — stated plainly.** The machine-
 proven core (counting lemma through closure, every piece named P1–P9)
@@ -246,11 +259,12 @@ minutes on a fresh machine. What is *measured, not proven in the
 machine*: the three per-point trapdoor numbers, verified on the
 recorded band [~10³, 10⁵] at grid resolution for fifteen candidate
 pair heights. What that honestly allows: a hypothetical off-line pair
-*inside the measured band, at a measured height, at a grid point*
+*inside the verified regime, at a measured height, at a grid point*
 cannot exist without contradicting the squeeze. What it does not
 allow: a claim about an off-line pair at an unmeasured height — the
-gaps between the candidate heights, the bands beyond the record, and
-the 5% margin at the weak spot are stated as the remaining
+gaps between the candidate heights, the bands beyond the record, and —
+now traced to the composite tail-model error rather than the squeeze —
+the sub-1 readings in the masked band are stated as the remaining
 measurement price, in the outline and in the module header. No prize
 is claimed from these pages, as before; the repository's position is
 unchanged: a reproducible, labeled, self-auditing trail, with the

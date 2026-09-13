@@ -371,7 +371,9 @@ any T; the smallest non-trivial zero height is a certified classical number,
    machine-proven; the measured resid sits below the A4.3-wired bound
    at the Xval pin — hDef, day-020 record).
 3. **Contradiction.** With the audited strict gap — dev exceeds the
-   LHS including the tail by the 112.6× worst-case margin (hStrict) —
+   LHS including the tail by the audited strict-gap margin
+   (hStrict — day-022 re-pin: the closing 34.68× @ t = 5009.2343 records
+   it; the t~10³ region record is 112.6×) —
    the squeeze is empty at t₀: hence D(t₀) = 0; by minimality, D ≡ 0
    everywhere; by the counting lemma, **RH**. ∎ (conditional, by
    design, on the three point-measured facts hZero/hDef/hStrict — the
@@ -383,7 +385,7 @@ counting enters only in the certified *data* of §2 (which establishes the
 strongest unconditional statement to date) and in the classical zero-free
 computation that places the smallest zero height away from 0.
 
-## 9. Status of each piece
+## 9. Status of each piece (2026-09-13)
 
 | # | Piece | Role in the argument | Status |
 |---|-------|----------------------|--------|
@@ -395,7 +397,27 @@ computation that places the smallest zero height away from 0.
 | P6 | **Bridge identity** (ζ = kernel, residual = tail error exactly) | Lets the two sides of the contradiction be the same object. | **ζ-free finite core proven in Lean** (`RhAttack/B3.lean` + pieces B3Core/B3Abel/B3Sbar; full build green, A/B gate PASS): `b3ResidualDecomp` (Ψ vs K differ exactly by exp(T − Σ ln F)), the exact finite Abel identity `b3Abel`, and the explicit bound `b3BoundExplicit` (M(G,t) at finite B). |
 | P7 | **Finite exact Abel decomposition** (counting step → integral, smooth comparator N̂, IBP bridge) | Exact calculus relating the discrete zero set to the continuous main term; carries the smooth bounders. | **Proven in Lean** (`RhAttack/B3Abel.lean`: `b3Abel`, the ray plumbing, the smooth comparators n̂/N̂ and the IBP bridge `nHatIBP`; full build green; the float64 mirror verifies the exact identity to ~1e-13 at the quadrature limit). |
 | P8 | **Residual floor, ∀ t** (the §10 gap) | The < side of the contradiction. | **Route A formalized and machine-proven through A4.3** (`RhAttack/P8Floor.lean`, MODULE COMPLETE A0-A4: `p8_same_object`/`p8_triangle` the same-object reduction + split; `p8_B_floor` the three-term floor = `p4_T4_bound` at s = ½+it; `p8_residual_bound`/`p8_residual_wired` the bridge residual = product mass × e^Xval·Xval with Xval ← B3Sbar `b3BoundExplicit` (the M(G,t) wire); `p8_detector_*` the detector on the B5 closed form incl. the exact δ = 0 values; `p8_far_detector_scale_ge_one` ‖R−1‖ ≥ 1 far regime, γ ≥ 1, t ≥ 2γ — LEAN-PROVEN; `p8_zero_decision_far` the §10 decision inequality). Honest split: the W_n = EM-expression equality at Re s = ½ is CITED (DLMF 25.2.8 / Apostol 12.21); the NEAR-regime detector floor (0.9975) is PINNED by the day-017/019 audit — the wall's remaining open item was that pin's promotion + the final closure at the measurement point (P9) — P9 is now COMPLETE (day-021: C1a promoted the own-height question to an exact Lean fact; the t ≠ g window pin stays as a recorded audit, its C1b promotion optional). |
-| P9 | **The §8 closure** (minimal off-line pair height + the squeezed floor/detector) | The final step: D(t₀) = 0 at the minimal pair ⇒ D ≡ 0 ⇒ RH. | **Conditional closure PROVEN in Lean** (`RhAttack/Closure.lean`, MODULE COMPLETE: pins `p9_f_pin = 0.9975` / `p9_d_min = 0.005` / `p9_margin_min = 33.9864` (day-022 RE-PIN: verified-regime closing 34.68 @ t = 5009.2343 (g = 5000.234317), 2% tail-model error envelope deducted; DISCOVERY_LOG 20; the former pins 112.6 / 1.0529 survive as region record / reclassified composite statistic, respectively); `p9_far_detector_ge_pin` the far-regime detector floor (restated from A4.1b); `p9_point_contradiction` the arithmetic squeeze C5; `p9_min_offline_height` the minimal positive off-line pair height over B0's ZeroSet (structural HNR/HCJ/HFIN, no counting value); `p9_closure_rh_of_margin` the §8 closure under the EXPLICIT squeezed-margin hypothesis — its real witnesses are the pinned/cited constants (Mf ← B3Sbar `b3BoundExplicit` at the Xval pin, flo ← the detector floor, Bfloor+Mr ← the P8Floor A4 composition)). Honest split: C0/C5/C5b/C1-far/C1a LEAN-PROVEN — **C1a (day-021) resolves the branch locus as the POLE at t = g**: the on-line pair product is 0 at its own point and the off-line product mass is a nonzero finite positive constant, so the closure's own-height detector value is exact (`p9_poff_own_height_pos`); the t ≠ g window floor stays PINNED (0.9975, audits) and its C1b promotion is optional (non-critical: the closure evaluates at the own height). **C6 (day-021) is the final composition**: `p9_closure_at_audit_point` — the §8 closure at the audit point as ONE statement: per off-line pair, the three point-measured facts (hZero: zero side, bridge+detector audit; hDef: measured resid ≤ A4.3-wired bound at the Xval pin; hStrict: the audited strict gap) instantiate the hmargin predicate (C6.1, LEAN-PROVEN) and close RH (C5b). The argument's non-machine inputs are exactly those three PINNED per-point facts (script + record); everything else is machine-proven. **Cross-band audit (day-021/022 records; DISCOVERY_LOG 20 reclassification)**: the package is verified on 15 candidate pair heights across [~970, 10⁵] (DT = 0.5). DAY-022 FINDING: the composite kernel's (B,∞) tail model inflates |K| by f = e^{-E(t)} (E measured: 0.4% @ 10³, 8% @ 10⁴, 30% @ 2×10⁴, 95% @ 5×10⁴, e²¹ @ 10⁶) — GENUINE verified-regime margins: 112.6 (10³) → **34.68 (5×10³, CLOSING, re-pinned)**; the measured 11.3 (10⁴) → 1.053 (5×10⁴) → 2.27 (10⁵) band is TAIL-MODEL MASKED (fingerprint: measured 3.325 @ 2×10⁴ = f/(f−1) to 4 digits; 1.0529 @ 5×10⁴ to 3 digits — the old "closing 1.053" is the inflation asymptote, retracted as a closing claim); ≥ 10⁵ the statistic is blind (0% regime support). resid < dev holds at every scanned point of the composite statistic. Remaining measurement price: g-space gaps, bands outside [~970, 10⁵], sub-grid structure, and — NEW — an error-corrected trend statistic (P1.1c) or a larger zero list (the t/B ratio repair, ~2–3×10⁸ zeros: the compute decision point) for the masked 5×10³..10⁵ band and beyond. |
+| P9 | **The §8 closure** (minimal off-line pair height + the squeezed floor/detector) | The final step: D(t₀) = 0 at the minimal pair ⇒ D ≡ 0 ⇒ RH. | **Conditional closure PROVEN in Lean** (`RhAttack/Closure.lean`, MODULE COMPLETE: pins `p9_f_pin = 0.9975` / `p9_d_min = 0.005` / `p9_margin_min = 33.9864` (day-022 RE-PIN: verified-regime closing 34.68 @ t = 5009.2343 (g = 5000.234317), 2% tail-model error envelope deducted; DISCOVERY_LOG 20; the former pins 112.6 / 1.0529 survive as region record / reclassified composite statistic, respectively); `p9_far_detector_ge_pin` the far-regime detector floor (restated from A4.1b); `p9_point_contradiction` the arithmetic squeeze C5; `p9_min_offline_height` the minimal positive off-line pair height over B0's ZeroSet (structural HNR/HCJ/HFIN, no counting value); `p9_closure_rh_of_margin` the §8 closure under the EXPLICIT squeezed-margin hypothesis — its real witnesses are the pinned/cited constants (Mf ← B3Sbar `b3BoundExplicit` at the Xval pin, flo ← the detector floor, Bfloor+Mr ← the P8Floor A4 composition)). Honest split: C0/C5/C5b/C1-far/C1a LEAN-PROVEN — **C1a (day-021) resolves the branch locus as the POLE at t = g**: the on-line pair product is 0 at its own point and the off-line product mass is a nonzero finite positive constant, so the closure's own-height detector value is exact (`p9_poff_own_height_pos`); the t ≠ g window floor stays PINNED (0.9975, audits) and its C1b promotion is optional (non-critical: the closure evaluates at the own height). **C6 (day-021) is the final composition**: `p9_closure_at_audit_point` — the §8 closure at the audit point as ONE statement: per off-line pair, the three point-measured facts (hZero: zero side, bridge+detector audit; hDef: measured resid ≤ A4.3-wired bound at the Xval pin; hStrict: the audited strict gap) instantiate the hmargin predicate (C6.1, LEAN-PROVEN) and close RH (C5b). The argument's non-machine inputs are exactly those three PINNED per-point facts (script + record); everything else is machine-proven. **Cross-band audit (day-021/022 records; DISCOVERY_LOG 20 reclassification)**: the package is verified on 15 candidate pair heights across [~970, 10⁵] (DT = 0.5). DAY-022 FINDING: the composite kernel's (B,∞) tail model inflates |K| by f = e^{-E(t)} (E measured: 0.4% @ 10³, 8% @ 10⁴, 30% @ 2×10⁴, 95% @ 5×10⁴, e²¹ @ 10⁶) — GENUINE verified-regime margins: 112.6 (10³) → **34.68 (5×10³, CLOSING, re-pinned)**; the measured 11.3 (10⁴) → 1.053 (5×10⁴) → 2.27 (10⁵) band is TAIL-MODEL MASKED (fingerprint: measured 3.325 @ 2×10⁴ = f/(f−1) to 4 digits; 1.0529 @ 5×10⁴ to 3 digits — the old "closing 1.053" is the inflation asymptote, retracted as a closing claim); ≥ 10⁵ the statistic is blind (0% regime support). resid < dev holds at every scanned point of the composite statistic.
+   **DAY-023 update (DISCOVERY_LOG 21/22):** the P1.1e best-straddle trend
+   statistic (the closure-faithful reading: max over the straddle window of
+   |ζ|·min_δ‖R−1‖ divided by the definition-side floor B(t)+resid(t); the
+   bridge gives ‖K_true‖ = ‖ζ‖ exactly, so the statistic scales with the
+   true kernel) ran: 122 (10³), 33.1 (5×10³), 16.2 (7.5×10³), 10.2 (10⁴),
+   4.6 (1.5×10⁴), 2.3 (2×10⁴), **0.75 (3×10⁴ — crossing 1)**, 0.05 (5×10⁴),
+   3.4 (10⁵, masked band). Verified-regime margins stay comfortably above 1
+   through 2×10⁴; the sub-1 crossing at T\* ≈ 2.5×10⁴ is the composite
+   kernel's (B,∞) tail-model ERROR boundary (measured model error E:
+   −0.001 → −7.4 across t = 10³ → 10⁵), NOT the squeeze — the zero-side
+   factor |ζ| stays O(1)–17 throughout the range, and no verified-regime
+   tripwire fired. The 1×10⁷ repair list (32-way CPU walk, day-023, running;
+   extends the (B,∞) model to 6–10× t) will push the verified regime to
+   ~10⁵–2.5×10⁵, with the trend verdict on the repaired list recorded when
+   it lands. The PinCensus completeness audit (22, `day023_pincensus.py`)
+   independently certifies the 12.19M zero list (R_k ≤ O(−3.4×10⁻⁹…−3.5×10⁻⁷),
+   k = 1, 2, 3, 5, 10; the three pin routes agree; the day-022 6.7% probe-gap
+   retracted as a probe-path artifact). Remaining measurement price: the
+   g-space gaps between candidate heights, sub-grid structure, and — the
+   mathematical gap itself — the residual-floor theorem of §10. |
 
 **The certified data record** (all numbers reproducible from committed
 scripts and data; day-014 closeout): N(10⁷) = 21,136,121 (two-engine
@@ -435,12 +457,16 @@ At full strength it is essentially RH-equivalent; the lifting path is the
 open engineering question of the classical S(t) literature.
 
 **Route decision.** The measured data choose between the routes: the
-Route-A margin (relative detector scale ≥ 0.998, SNR ≥ 8.9× worst
-configuration) remains above the local residual envelope up to t ≈ 10⁴–2×10⁴
-(the honest, data-driven ceiling of the current instrument); if it collapses,
-Route A is retired and Route B carries the argument. Either way, P8 is the
-single remaining gap, and it is *stated, bounded below, and has two named
-routes* — not a missing ingredient whose shape is unknown.
+Route-A margin (verified-regime closing 34.68× at t = 5×10³, day-022 re-pin;
+best-straddle trend 122× @ 10³ → 2.3× @ 2×10⁴ sound; the sub-1 crossing at
+≈ 2.5×10⁴ is the composite (B,∞) tail-model error boundary at list scale
+6×10⁶ — DISCOVERY_LOG 20/21 — not a margin of the squeeze) remains above the
+local residual envelope in the verified regime, with the 1×10⁷ list repair
+(running) expected to extend the verified band to ~10⁵–2.5×10⁵;
+if it collapses below 1 **in a verified regime**, Route A is retired and
+Route B carries the argument. Either way, P8 is the single remaining gap,
+and it is *stated, bounded below, and has two named routes* — not a missing
+ingredient whose shape is unknown.
 
 ## 11. Classical sources
 

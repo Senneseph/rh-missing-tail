@@ -12,7 +12,7 @@ committed here. (Older revisions of this document described a
 one-way "copy-only mirror" scheme — superseded and wrong; the copy
 scheme is what lost visibility of the B-3 work.)
 
-## State of the tree (2026-09-12)
+## State of the tree (2026-09-13)
 
 - **Toolchain:** Lean **4.33.1 (stable) + Mathlib 4.33.1 pinned** (no
   rc/nightly); the pin is `formal/lean-toolchain`.
@@ -28,7 +28,13 @@ scheme is what lost visibility of the B-3 work.)
   parts), `B5.lean` (B-5 core exact ratio theorem), `P4Em.lean` (P4
   1st-order Euler–Maclaurin, verbatim port of a published proof),
   `P4Tail.lean` (P4 per-period 2nd-order identity), `P4Em2.lean`
-  (P4 global finite 2nd-order law).
+  (P4 global finite 2nd-order law), `P4Limit.lean` (P4 strictification
+  L1–L5: the M→∞ passage with explicit remainder, the P4 identity and
+  the ‖W_n‖ bound at Re s = ½, the T4 corollary), `P8Floor.lean`
+  (P8 residual-floor line A0–A4: the same-object definition-side
+  floor, the bridge-wired residual, the B5 closed-form detector atoms,
+  the zero-decision inequality), `Closure.lean` (P9 conditional
+  closure: C0/C5/C5b/C1-far/C1a/C6/C7 + the audit pins, machine-checked).
 - `formal/Main.lean` — the `rhattack` gate executable (E7a 5/5, B-4
   16/16, B-5 12/12, B-3 A/B checks at float64 vs the committed record).
 - `formal/out_rhattack_day01{1,2}.txt` — the committed records of the

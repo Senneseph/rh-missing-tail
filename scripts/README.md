@@ -40,6 +40,25 @@ document needs, so only the referential subset ships.
   (The 6×10⁶ list itself is a multi-MB data artifact of the working repo;
   the snapshot ships the scripts, not the list.)
 
+  **The closure-audit set (day-020–023; backs the DISCOVERY_LOG 15–22
+  records — the CLOSING pins, the re-pin, the P1.1 statistics, the
+  PinCensus, the 1×10⁷ repair):**
+
+  | file | produces / backs |
+  |---|---|
+  | `day020_worstcase.py` + `out_day020_worstcase.txt` | the all-band worst-case audit: the 112.6× region record at t = 1006.7916 (Closure.lean C7.1) |
+  | `day020_xval_pin.py` + `out_day020_xval_pin.txt` | the Xval pin (206× headroom at t = 1000.0416; C7.2) |
+  | `day021b_weakspot.py` + `out_day021b_weakspot.txt` | the 5×10⁴ weak-spot record (reclassified as the composite tail-model inflation asymptote; C7.4) |
+  | `day021_c1b_dps.py` + `out_day021_c1b_dps.txt`, `day021_c1b_worstpoint.py` + `out_day021_c1b_worst.txt` | the C1b window-floor dps oracle + worst straddle point (the 0.9975 pin) |
+  | `day022_worstcase_ext.py` + `out_day022_worstcase_ext.txt` | the day-022 re-pin record: verified-regime closing 34.68 @ t = 5009.2343 (C7.3) |
+  | `day022_p11b_regime.py` + `out_day022_p11b_regime.txt` | the 10⁶–6×10⁶ regime bound (0.0% regime support — the statistic is blind ≥ 10⁵ at list scale 6×10⁶) |
+  | `day022_p11c_corrected.py`, `day022_p11d_ownheight.py`, `day022_p11e_straddle.py` + outputs | the P1.1 statistics sequence: window-min → own-height → **best-straddle (the closure-faithful trend)**: 122 → 2.3 sound, crossing 1 at 3×10⁴ = the composite (B,∞) model-error boundary T* ≈ 2.5×10⁴ (DISCOVERY_LOG 21) |
+  | `day022_scalefree_tripwire.py` + `out_day022_scalefree.txt`, `day022_tripwire_6e6.py` + `out_day022_tripwire_6e6.txt` | the verified-regime tripwires (scale-free decay; B(t) growth) — none fired |
+  | `out_day022b_upperband.txt`, `out_day022c_upperband.txt` | the upper-band straddle audit records (scripts in the working tree) |
+  | `day022_trivial0_probe.py` + `out_day022_trivial0_probe.txt` | the trivial-zero detector probe (retired as a detector — the own-height channel is 10³–10⁶× stronger; became the PinCensus below; DISCOVERY_LOG 21) |
+  | `day023_pincensus.py` + `out_day023_pincensus.txt` | the PinCensus completeness audit: R_k ≤ O(−3.4×10⁻⁹…−3.5×10⁻⁷) for k = 1, 2, 3, 5, 10 — the 12,193,869-zero list independently certified (DISCOVERY_LOG 22) |
+  | `day023_ext1e7_seg.py`, `day023_ext1e7_supervisor.py`, `ext1e7/` | the 1×10⁷ repair-list walk (32-way CPU, **running** at snapshot time; merges to `ext1e7/zeros_T10000000_ext_full.txt`, then PinCensus + P1.1e re-runs on the repaired list) |
+
 - `rh-ts/` — the TypeScript zero-finder stack (`n → ρₙ = ½ + iγₙ`): the
   Riemann–Siegel engine port, the Riemann–von Mangoldt bracket, the
   certified twin-floor walk, and the bisection — plus all tests. Strict

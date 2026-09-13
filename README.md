@@ -4,7 +4,7 @@
 they generate, the onset at which zero content first enters the budget —
 and a separation program with explicit falsifiers.**
 
-## The argument as constructed *<sub>state: 2026-09-12</sub>*
+## The argument as constructed *<sub>state: 2026-09-13</sub>*
 
 The argument below is a **complete
 proof skeleton of the Riemann Hypothesis**. Its pieces are either
@@ -235,9 +235,12 @@ at all.
 Two routes are named. **Route A (residual floor)** builds it from the
 strictified missing-tail law of Part 3 (its Euler–Maclaurin remainder) plus
 the tail bound M(G, t) of Part 4; it works for δ above a sensitivity
-threshold to be pinned by measurement, and the measured margin (≥ 8.9× at
-the pair's own height against the local residual envelope, data-driven up
-to t ≈ 10⁴–2×10⁴) says it is within reach. **Route B (uniform dynamics)**
+threshold to be pinned by measurement, and the measured margin (verified-
+regime closing **34.68×**, day-022 re-pin at t = 5×10³; the P1.1e
+best-straddle trend 122× @ 10³ → 2.3× @ 2×10⁴ stays sound — DISCOVERY_LOG
+19/20/21) says it is within reach, with the 1×10⁷ zero-list repair (running,
+1×10⁷ ≈ 2.5× the current list) expected to extend the verified regime to
+~10⁵–2.5×10⁵. **Route B (uniform dynamics)**
 proves 2K(t) even for all t directly — equivalently, S stays in the
 on-line band — with no sensitivity threshold; at full strength it is
 essentially RH-equivalent, the classical S(t) lifting being the open
@@ -261,23 +264,36 @@ from the definition side alone. (3) Contradiction. Hence D(t₀) = 0; by
 minimality, D ≡ 0; by the counting lemma, **RH**. ∎ — *conditional on
 Part 7.*
 
-### Status of each piece (2026-09-12)
+### Status of each piece (2026-09-13)
 
 - **Proven, machine-checked (Lean 4.33.1 + Mathlib, pinned stable):** the
   counting lemma (Part 1); the per-pair closed forms (Part 4); the detector
   closed form and its magnitude, including the no-dead-window polynomial
   (Part 6); the bridge's ζ-free finite core, the exact finite Abel
   decomposition, and the explicit tail bound at finite height (Part 5);
-  the first-order and finite second-order Euler–Maclaurin laws (Part 3).
+  the first-order and finite second-order Euler–Maclaurin laws, and the
+  M → ∞ passage with the T4 bound of the strictified missing-tail law
+  (Part 3, `formal/RhAttack/P4Limit.lean` L1–L5); the residual-floor line
+  A0–A4 (Part 7, `formal/RhAttack/P8Floor.lean`); the conditional closure
+  module with its audit records machine-verified against the re-pinned
+  closing (Part 8, `formal/RhAttack/Closure.lean` — C0/C5/C5b/C1a/C6/C7,
+  pin 33.9864, day-022 re-pin).
 - **Classical (literature):** F1–F2; Riemann–von Mangoldt; the 1859 product
   (DLMF 25.2.12); Platt–Trudgian's explicit S-bound.
 - **Measured (precision labeled, scripts committed):** the missing-tail
   onset law, 4 digits, n-independent (Part 3); the detector regime values
   vs the four-zero definition and the data, 6 digits (Part 6); the
   certified zero survey to 10⁷ and the zero list to 6×10⁶ (Parts 1, 4);
-  the Abel mechanism on 7.4M real certified zeros (Part 4).
-- **In progress:** the M → ∞ passage of the missing-tail strictification
-  (Part 3) with explicit remainder.
+  the Abel mechanism on 7.4M real certified zeros (Part 4); the closure
+  audit package (cross-band straddle audits; the re-pinned verified-regime
+  closing 34.68 @ t = 5009.2343; the P1.1e best-straddle trend 122 → 2.3
+  sound through 2×10⁴, the 1×10⁴–10⁵ readings explained as the composite
+  (B,∞) tail-model error curve, not the squeeze — DISCOVERY_LOG 20/21).
+- **In progress:** the residual-floor theorem itself (Part 7, Routes A/B)
+  — the P4/P8/P9 formal machinery beneath it is complete; the 1×10⁷
+  zero-list repair walk (day-023, 32-way CPU) runs to extend the verified
+  closure regime to ~10⁵–2.5×10⁵, with the trend verdict on the repaired
+  list recorded when it lands.
 - **Open:** the residual floor (Part 7) — the single remaining gap.
 
 *The complete reader-facing exposition of this argument — with full
@@ -364,8 +380,8 @@ N(10⁶) = 1,747,142; S(10⁵) = −2.558419306, S(10⁶) = −2.508632116 at
 twin-census in (10⁵, 10⁶] (19 twins, gaps 0.0295×10⁻²–0.174×10⁻²),
 a per-decade S-envelope that stays O(1) through 10⁶, and a measured
 reliability model for the GPU walk that found and localized a single
-dead counting chunk in ~70,000 (the 10⁷ run is in progress; the
-certified bound at v0 is 10⁶).
+dead counting chunk in ~70,000 (the 10⁷ closeout landed on day-014:
+N(10⁷) = 21,136,121, S(10⁷) = −3.205718 at dps-45, 2K even).
 
 **What it does not claim.** The Riemann hypothesis is open in this
 repository: stages 3–5 are open or not-run, and stage 5 is a shape, not
@@ -467,6 +483,17 @@ kernel — is specific enough to fail.
     2nd-order *per-period* identity (`int_B1f'_period`)
   - [RhAttack/P4Em2.lean](formal/RhAttack/P4Em2.lean) — the P4
     *global finite* 2nd-order Euler–Maclaurin law (`em2_finite`)
+  - [RhAttack/P4Limit.lean](formal/RhAttack/P4Limit.lean) — the P4
+    *strictification* L1–L5: the M → ∞ passage with explicit remainder,
+    the P4 identity and the ‖W_n‖ bound at Re s = ½, the T4 corollary
+  - [RhAttack/P8Floor.lean](formal/RhAttack/P8Floor.lean) — the P8
+    *residual-floor line* A0–A4: the same-object definition-side floor,
+    the bridge-wired residual (the M(G,t) wire), the B5 closed-form
+    detector atoms, the zero-decision inequality
+  - [RhAttack/Closure.lean](formal/RhAttack/Closure.lean) — the P9
+    *conditional closure*: C0/C5/C5b/C1a/C6/C7 + the audit pins (pin 33.9864,
+    the re-pinned verified-regime closing, day-022) — the machine core of
+    the §8 contradiction argument
 - **Master formula ledger (working tree):** `plan/40-prize-islands/
   rh-attack/FORMULAS.md` — every formula this work uses, labeled
   (verbatim-read / measured + file + precision / derived + file /
