@@ -49,3 +49,9 @@ import RhAttack.P4Em2
 -- kernel convergence (L3), the OP1/OP2 remainder bounds (L4), and the
 -- stated zero-free bound |W_n(t)| ≤ B_n(t) (L5).
 import RhAttack.P4Limit
+
+-- Day-020 (2026-09-16, goal turn): P8 Route A — the residual floor (the
+-- < side of the §8 contradiction): A0 same-object reduction + A1
+-- triangle split (GREEN); A2–A4 in progress per the spec
+-- (kainos-logos plan/.../spec/p8floor-routeA-abstract.md).
+import RhAttack.P8Floor
