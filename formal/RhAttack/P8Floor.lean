@@ -15,7 +15,7 @@ proof; the height bound T never appears.  Atom plan (spec §2):
       b5NoffIsPolynomial, b5NoffPos).
   A4: comparison floor < detector under the measurement-pinned constants.
 
-STATUS (2026-09-16, Lean 4.33.1): A0, A1, A2a, A2b.1-A2b.2, A3.1, A3.2a, A3.2b.1, A4.1 GREEN.  Next: A4.2 (the PINNED near-regime detector floor, day-017/019 audit) and the M(G,t) wire (B3Sbar `b3BoundExplicit` composition), A4.3.  No sorry.
+STATUS (2026-09-16, Lean 4.33.1): A0, A1, A2a, A2b.1-A2b.2, A3.1, A3.2a, A3.2b.1, A4.1, A4.2 GREEN.  NEXT: A4.3 - the M(G,t) wire (B3Sbar `b3BoundExplicit` into the residual chain).  No sorry.
 
 HONEST SPLIT (per-atom):
   A0: LEAN-PROVEN (definitional + ring).
@@ -420,3 +420,51 @@ theorem p8_far_detector_scale_ge_one (γ t : ℝ) (hγ : 1 ≤ γ) (ht : 2 * γ 
       ≥ |‖Rratio γ 0 t‖ - 1| := p8_detector_abs_lower γ 0 t
     _ = ‖Rratio γ 0 t‖ - 1 := abs_of_nonneg (by linarith [p8_far_detector_mag_ge_two γ t hγ ht])
     _ ≥ 1 := hlt1
+
+/- P8Floor · A4.2 — the terminal zero decision under the
+    measurement-pinned floors (the spec's A4 comparison atom).
+
+    The spec form: B_n(t) + M(G,t) < f(0,t)·|K(t)| under the
+    measurement-pinned threshold.  In this module's normalization the
+    on-line kernel K_on has unit mass at the pair's own height (B4
+    unit-pair identity — the B-4 cross-check's dLa/dAr gates), so the
+    detector scale f(0,t)·|K(t)| is exactly ‖R(γ,0,t) − 1‖.
+
+    TWO regime forms:
+    FAR (LEAN-PROVEN side): A4.1b gives the regime floor 1 —
+      the decision is the symbolic comparison (A4.2a below), the
+      M(G,t) mass still a free input Mval (wired in A4.3).
+    NEAR (PINNED side): the audited grid at the pair's own height
+      (|t − γ| ≤ 10.21, δ ∈ {0.005, 0.5}, day-017/019 / B5-CORE CHECK
+      record: 0.997500 … 1.020104) pins the regime floor at
+      p8_f_near_pin — the decision "floor + mass < the PINNED near
+      floor" is a measurement statement; asserting ‖R(γ,δ,t) − 1‖ ≥
+      p8_f_near_pin at the branch locus is exactly what Lean does NOT
+      prove here (the audit is its authority).
+-/
+
+/-- The PINNED near-regime detector floor (measurement, day-017/019
+    audit): across the grid at the pair's own height
+    (|t − γ| ≤ 10.21, δ ∈ {0.005, 0.5}) the detector scale
+    ‖R(γ,δ,t) − 1‖ was measured 0.997500 … 1.020104; the lower edge is
+    pinned here.  Not a Lean-proven lower bound — this is the
+    measurement-pinned constant of §3 (Route A's price). -/
+def p8_f_near_pin : ℝ := 0.9975
+
+/-- The far-regime detector floor — LEAN-PROVEN (A4.1b): for
+    γ ≥ 1, t ≥ 2γ, ‖R(γ,0,t) − 1‖ ≥ 1.  1 is recorded as the regime
+    floor constant. -/
+def p8_f_far_floor : ℝ := 1
+
+/-- Atom A4.2a (LEAN symbolic form under the pinned constants — the
+    zero decision, FAR regime): γ ≥ 1, t ≥ 2γ, n > 0; if the P4 floor
+    value p8_B t n plus the P5-side mass bound Mval (the M(G,t) of the
+    spec, wired from B3Sbar in A4.3) sits below the far-regime detector
+    floor 1 (A4.1b: ‖R(γ,0,t) − 1‖ ≥ 1), then the decision inequality
+    of outline §10 holds: p8_B t n + Mval < ‖R(γ,0,t) − 1‖. -/
+theorem p8_zero_decision_far {t : ℝ} (n : ℕ) (hn : 0 < n) (γ : ℝ) (hγ : 1 ≤ γ)
+    (ht : 2 * γ ≤ t) (Mval : ℝ) (hM : 0 ≤ Mval)
+    (hres : p8_B t n + Mval < 1) :
+    p8_B t n + Mval < ‖Rratio γ 0 t - 1‖ :=
+  lt_of_lt_of_le hres (p8_far_detector_scale_ge_one γ t hγ ht)
+
