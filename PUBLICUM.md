@@ -186,3 +186,72 @@ this repository (`formal/`), every file in it describes itself up
 top (what it is, what role it plays, what state it is in), and a fresh
 machine can rebuild and re-run the cross-check gate in minutes (`lake
 build && lake exe rhattack`).
+
+## Update — 2026-09-13
+
+**The last two named gaps closed — as machine, and as price.** The
+2026-09-11 update left two open rows: the residual floor (P8) and the
+closure (P9). Both are now complete in the machine, each with its
+honest split written in the file's own header.
+
+**P8 — the "less than" side — is machine-proven** (the `P8Floor`
+module, A0–A4): the same-object reduction, the three-term floor from
+the missing-tail law, the bridge residual wired to the certified
+on-line tail bound, and the decision inequality. Two things are
+carried honestly: the near-pair detector floor (0.9975) is a
+measured pin, and one equality (the tail's value on the line) is
+cited from the standard references rather than re-proven.
+
+**P9 — the closure — is machine-proven as a conditional argument,
+and the condition is now one named statement** (the `Closure`
+module, C0–C7). What the machine proves: if a zero pair sat off the
+line, there would be a *lowest* such pair (over the certified zero
+set, structural only); at that pair the zero-side and definition-side
+quantities squeeze together; the arithmetic squeeze is impossible;
+hence no off-line pair, hence the Hypothesis. The one input the
+machine does not re-derive is the *measurement* that feeds the
+squeeze at that pair — three numbers per point, each traced to a
+named script and a named output. The composition of those three
+numbers into the contradiction is itself machine-checked; that is
+the statement `p9_closure_at_audit_point`.
+
+**A surprise on the detector side, now in the machine (C1a).** The
+original plan carried a pinned lower bound ("at least 99.8% of the
+kernel's magnitude, near the pair") as the near-field detector
+floor. The machine work found the floor question was slightly the
+wrong question: exactly at the pair's own height the ratio has a
+*pole* — the on-line pair's product vanishes at its own point while
+the off-line mass stays a strictly positive constant, so the kernel
+change there is an EXACT value, not a floor. Seven atoms of this
+fact are machine-proven. The 99.8% number survives as a statement
+about the window away from the pair — and the closure, it turns
+out, only needs the exact one.
+
+**And trapdoors are traps, so we tested them across the band.** The
+closure's per-point facts had been verified around height 10³ (worst
+margin 112.6×). We extended the scan to fifteen candidate pair
+heights from 2×10³ to 10⁵. The margin erodes with height — 112.6 at
+10³ down to **1.053 at 5×10⁴ (the closing worst point, re-pinned and
+machine-checked as an arithmetic fact)** — and then the 10⁵ window
+*recovers* to 2.27 (the residual oscillates; the decay is an
+envelope, not a monotone collapse). Every scanned point up to 10⁵
+still passes the pointwise decision. The weak spot at 5×10⁴ was
+re-tested at finer resolution and confirmed: a real plateau at
+about 5% margin, not a numerical accident.
+
+**Where this leaves the claim — stated plainly.** The machine-
+proven core (counting lemma through closure, every piece named P1–P9)
+is complete: it is a reproducible package, rebuilt and re-gated in
+minutes on a fresh machine. What is *measured, not proven in the
+machine*: the three per-point trapdoor numbers, verified on the
+recorded band [~10³, 10⁵] at grid resolution for fifteen candidate
+pair heights. What that honestly allows: a hypothetical off-line pair
+*inside the measured band, at a measured height, at a grid point*
+cannot exist without contradicting the squeeze. What it does not
+allow: a claim about an off-line pair at an unmeasured height — the
+gaps between the candidate heights, the bands beyond the record, and
+the 5% margin at the weak spot are stated as the remaining
+measurement price, in the outline and in the module header. No prize
+is claimed from these pages, as before; the repository's position is
+unchanged: a reproducible, labeled, self-auditing trail, with the
+open part named rather than papered over.
