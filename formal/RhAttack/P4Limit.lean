@@ -49,9 +49,9 @@ header for the uIcc/Nat.cast_add/ContinuousOn.mono conventions):
     evaluation (L2).
   * `DifferentiableOn.continuousOn` (Calculus/FDeriv/Basic.lean:664).
 
-STATUS (2026-09-13, Lean 4.33.1): atoms L1, L2, L3, L4 GREEN.  L4 is the
-missing-tail law (IBP route: `p4_op2c_bound` + `p4_f2_tail_bound`); L5
-(the `f1 ⊣ f2` closure) is assembled downstream.  No sorry.
+STATUS (2026-09-15, Lean 4.33.1): atoms L1, L2, L3, L4, L5.a GREEN.  L4 is the
+missing-tail law (IBP route: `p4_op2c_bound` + `p4_f2_tail_bound`); L5.a is
+`p4_Tn_Tendsto` (tail partial sums → closed-form limit `p4_Tn_lim`).  No sorry.
 THEOREMS (L1): p4_f_hasDerivAt, p4_f1_hasDerivAt, p4_f2_hasDerivAt,
  p4_f1_at, p4_f2_at, p4_f1_on_Icc, p4_f2_on_Icc.
 THEOREMS (L2): p4_integral_closed, p4_finite_em2.
@@ -1238,5 +1238,264 @@ theorem p4_finite_em2 (s : ℂ) (hs1 : s ≠ 0) (hs2 : s ≠ -1) (hs3 : s ≠ 1)
     apply mul_le_mul_of_nonneg_left
     · simpa [f] using (p4_op2c_bound hsre n hn)
     · exact norm_nonneg (s * (s + 1))
+
+
+/-! P4Limit · L5 — the composition root (P4 statement + T4 corollary).
+
+STATUS: L5.a GREEN (`p4_Tn_Tendsto`); L5.b → L5.f in progress, one at a time.
+
+The P4 statement, composed from the GREEN atoms L1–L4 + the pinned mathlib
+tsum layer (all names `#print`-verified 2026-09-13; module sketch §7):
+
+  P4-id (Re s > 1, machine-lean):
+    riemannZeta s − P_n s + I(n,s)
+        = −½·(n:ℂ)^{−s} + (s/12)·(n:ℂ)^{−s−1}
+          − ½·s·(s+1)·∫_n^∞ B̂₂({x})·(x:ℂ)^{−s−2} dx
+    where P_n s := ∑_{k < n} 1/((k+1):ℂ)^s, I(n,s) := (n:ℂ)^{1−s}/(1−s).
+  P4-bnd (Re s = ½, machine-lean, for the EM expression; the W_n-equality
+    at Re s = ½ is [CITED: DLMF 25.2.8 / Apostol Thm 12.21 — analytic
+    continuation of the EM tail identity; numerically verified day-017] = T4.
+-/
+
+variable {α : Type*}
+
+-- The P4 tail objects (stated for ALL s — the identity holds Re s > 1, the
+-- bound holds Re s = ½; see atom docstrings).
+def p4_P (n : ℕ) (s : ℂ) : ℂ := ∑ k ∈ Finset.range n, (1 : ℂ) / ((k + 1) : ℂ) ^ s
+
+/-- First-order tail constant `I(n,s) := n^{1−s}/(1−s)` (the P4 anchor;
+    the sign correction of spec p4-tail-law §0.5: W_n := ζ − P_n + I). -/
+def p4_I (n : ℕ) (s : ℂ) : ℂ := (n : ℂ) ^ (-s + 1) / (1 - s)
+
+/-- Atom L5.0 — `p4_f1` is continuous off 0 (the missing half of the L1
+    smoothness pair; L3 already has this for `p4_f2`). -/
+theorem p4_f1_continuousOn_Ioi {s : ℂ} : ContinuousOn (p4_f1 s) (Set.Ioi (0 : ℝ)) := by
+  have hbase : ContinuousOn (fun (x : ℝ) => (x : ℂ) ^ (-s - 1)) (Set.Ioi (0 : ℝ)) := by
+    intro x hx
+    exact (Complex.continuousAt_ofReal_cpow_const x (-s - 1)
+      (Or.inr (ne_of_gt hx))).continuousWithinAt
+  have hConst : ContinuousOn (fun _ => (-s : ℂ)) (Set.Ioi (0 : ℝ)) := continuousOn_const
+  have hprod : ContinuousOn (fun (x : ℝ) => -s * (x : ℂ) ^ (-s - 1)) (Set.Ioi (0 : ℝ)) :=
+    hConst.mul hbase
+  exact hprod.congr (fun x _ => by dsimp only [p4_f1])
+
+/-- Atom L5.0b — pointwise neighborhood transfer (L1.c idiom):
+    `deriv (deriv (p4_f s))` is continuous within `Ioi 0` (it equals `p4_f2 s`,
+    which is differentiable (hence continuous) at every 0 < x, on a
+    neighborhood of `x`). -/
+theorem p4_f2_deriv_continuousWithinAt_Ioi {s : ℂ} (hs1 : s ≠ 0) (hs2 : s ≠ -1)
+    (hs3 : s ≠ -2) {x : ℝ} (hxpos : 0 < x) :
+    ContinuousWithinAt (deriv (deriv (p4_f s))) (Set.Ioi (0 : ℝ)) x := by
+  have hL : deriv (deriv (p4_f s)) =ᶠ[𝓝 x] (p4_f2 s) := by
+    filter_upwards [isOpen_Ioi.mem_nhds hxpos] with u hu
+    exact p4_f2_at hs1 hs2 (by simpa using hu)
+  have hCA : ContinuousAt (p4_f2 s) x :=
+    (p4_f2_hasDerivAt hs1 hs2 hs3 x (ne_of_gt hxpos)).continuousAt
+  exact (continuousAt_congr hL).mpr hCA |>.continuousWithinAt
+
+/-- `p4_Tn_lim s n` — closed form of the tail partial-sum limit (Re s > 1):
+    −n^{1−s}/(1−s) − ½ n^{−s} + (s/12) n^{−s−1} − ½ s(s+1) ∫_n^∞ B̂₂ x^{−s−2}. -/
+noncomputable def p4_Tn_lim (s : ℂ) (n : ℕ) : ℂ :=
+    -(((n : ℝ) : ℂ) ^ (-s + 1) / (1 - s)) -
+      ((1 / 2) : ℂ) * ((n : ℝ) : ℂ) ^ (-s) +
+      ((1 / 12) : ℂ) * (s * ((n : ℝ) : ℂ) ^ (-s - 1)) -
+      ((1 / 2) : ℂ) * (∫ x : ℝ in Set.Ioi (n : ℝ), (B2 x : ℂ) * p4_f2 s x)
+
+/-- The EM tail expression (all terms defined for every s ≠ 1 by the
+    underlying objects; used at Re s = ½ for the P4 bound, where its
+    equality with `riemannZeta s − p4_P n s + p4_I n s` is CITED — DLMF
+    25.2.8 / Apostol Thm 12.21; at Re s > 1 see `p4_identity` (LEAN)). -/
+noncomputable def p4_em_expr (s : ℂ) (n : ℕ) : ℂ :=
+    -((1 / 2) : ℂ) * (n : ℂ) ^ (-s) +
+      ((1 / 12) : ℂ) * (s * (n : ℂ) ^ (-s - 1)) -
+      ((1 / 2) : ℂ) * (s * (s + 1)) *
+        (∫ x : ℝ in Set.Ioi (n : ℝ), (B2 x : ℂ) * (x : ℂ) ^ (-s - 2))
+
+/-- Atom L5.a — the tail partial sums (Re s > 1) converge to `p4_Tn_lim`. -/
+theorem p4_Tn_Tendsto {s : ℂ} (hsσ : 1 < s.re) (n : ℕ) (hn : 0 < n) :
+    Tendsto (fun m : ℕ => ∑ k ∈ Finset.Ioc n m, (k : ℂ) ^ (-s))
+        atTop (nhds (p4_Tn_lim s n)) := by
+  set f := p4_f s with hf
+  set f2 := p4_f2 s with hf2
+  have hs0 : s ≠ 0 := by
+    intro h0
+    have hre : (s : ℂ).re = 0 := by simpa [h0]
+    linarith [hsσ]
+  have hs1 : s ≠ 1 := by
+    intro h1
+    have hre : (s : ℂ).re = 1 := by simpa [h1]
+    linarith [hsσ]
+  have hs1n : s ≠ -1 := by
+    intro h1
+    have hre : (s : ℂ).re = -1 := by simpa [h1]
+    linarith [hsσ]
+  have hs2 : s ≠ -2 := by
+    intro h2
+    have hre : (s : ℂ).re = -2 := by simpa [h2]
+    linarith [hsσ]
+  have hsre2 : s.re > -1 := by
+    linarith [hsσ]
+  have hnpos : 0 < (n : ℝ) := Nat.cast_pos.mpr hn
+  -- Smoothness of f on every Icc n m (m ≥ n ≥ 1 > 0).
+  have hdiff (m : ℕ) (hnm : n ≤ m) (t : ℝ) (ht : t ∈ Set.Icc (n : ℝ) (m : ℝ)) :
+      DifferentiableAt ℝ f t := by
+    have hpos : 0 < t := lt_of_lt_of_le hnpos ht.1
+    exact (p4_f_hasDerivAt hs0 t (ne_of_gt hpos)).differentiableAt
+  have hfdiff (m : ℕ) (hnm : n ≤ m) (t : ℝ) (ht : t ∈ Set.uIcc (n : ℝ) (m : ℝ)) :
+      DifferentiableAt ℝ (deriv f) t := by
+    have hmacR : min (n : ℝ) (m : ℝ) = n := min_eq_left (Nat.cast_le.mpr hnm)
+    have hpos : 0 < t := lt_of_lt_of_le hnpos (hmacR ▸ ht.1)
+    dsimp only [f]
+    exact (p4_f1_deriv_hasDerivAt hs0 hs1n hpos).differentiableAt
+  have hcont' (m : ℕ) (hnm : n ≤ m) : ContinuousOn (deriv f) (Set.Icc (n : ℝ) (m : ℝ)) := by
+    dsimp only [f]
+    intro x hx
+    have hpos : 0 < x := lt_of_lt_of_le hnpos hx.1
+    exact (p4_f1_deriv_hasDerivAt hs0 hs1n hpos).continuousAt.continuousWithinAt
+  have hcont'' (m : ℕ) (hnm : n ≤ m) :
+      ContinuousOn (deriv (deriv f)) (Set.Icc (n : ℝ) (m : ℝ)) := by
+    dsimp only [f]
+    intro x hx
+    have hpos : 0 < x := lt_of_lt_of_le hnpos hx.1
+    have hsub : Set.Icc (n : ℝ) (m : ℝ) ⊆ Set.Ioi (0 : ℝ) := by
+      intro u hu
+      exact Set.mem_Ioi.mpr (lt_of_lt_of_le hnpos hu.1)
+    exact ContinuousWithinAt.mono (p4_f2_deriv_continuousWithinAt_Ioi hs0 hs1n hs2 hpos) hsub
+  -- Pointwise: m ≥ n → ∑_{Ioc n m} (k:ℂ)^{−s} = the closed EM expression.
+  have hFin (m : ℕ) (hnm : n ≤ m) :
+      (∑ k ∈ Finset.Ioc n m, (k : ℂ) ^ (-s)) =
+        (p4_A s (m : ℝ) - p4_A s (n : ℝ)) / (1 - s) +
+        ((1 / 2) : ℂ) * (f (m : ℝ) - f (n : ℝ)) +
+        ((1 / 12) : ℂ) * (p4_f1 s (m : ℝ) - p4_f1 s (n : ℝ)) -
+        ((1 / 2) : ℂ) * (∫ x : ℝ in (n : ℝ)..(m : ℝ), (B2 x : ℂ) * f2 x) := by
+    have hnmR : (n : ℝ) ≤ (m : ℝ) := Nat.cast_le.mpr hnm
+    have hEm := em2_finite f n m hnm (hdiff m hnm) (hcont' m hnm) (hfdiff m hnm) (hcont'' m hnm)
+    -- (1) the LHS sum: f (k:ℝ) = (k:ℂ)^{−s} up to natCast.
+    have hSum : (∑ k ∈ Finset.Ioc n m, f ↑k) = (∑ k ∈ Finset.Ioc n m, (k : ℂ) ^ (-s)) := by
+      apply Finset.sum_congr rfl (fun k _ => by
+        dsimp only [f]
+        norm_cast)
+    -- (2) first integral → antiderivative (L2 atom).
+    have hInt1 : (∫ x : ℝ in (n : ℝ)..(m : ℝ), f x) = (p4_A s (m : ℝ) - p4_A s (n : ℝ)) / (1 - s) := by
+      dsimp only [f]
+      exact p4_integral_closed s hs1 hn hnm
+    -- (3) endpoint derivatives → p4_f1 (L1 atom).
+    have hDerM : deriv f (m : ℝ) = p4_f1 s (m : ℝ) := by
+      dsimp only [f]
+      exact p4_f1_on_Icc hs0 n m hn hnm (m : ℝ) ⟨hnmR, le_rfl⟩
+    have hDerN : deriv f (n : ℝ) = p4_f1 s (n : ℝ) := by
+      dsimp only [f]
+      exact p4_f1_on_Icc hs0 n m hn hnm (n : ℝ) ⟨le_rfl, hnmR⟩
+    -- (4) kernel integrand: deriv (deriv f) = p4_f2 on uIcc (L1.e2, L4 bridge).
+    have hKer : (∫ x : ℝ in (n : ℝ)..(m : ℝ), (B2 x : ℂ) * deriv (deriv f) x) =
+        (∫ x : ℝ in (n : ℝ)..(m : ℝ), (B2 x : ℂ) * f2 x) := by
+      dsimp only [f]
+      have hEqU : EqOn (fun x : ℝ => (B2 x : ℂ) * deriv (deriv (p4_f s)) x)
+          (fun x : ℝ => (B2 x : ℂ) * f2 x) (Set.uIcc (n : ℝ) (m : ℝ)) := by
+        intro x hx
+        have hmin : min (n : ℝ) (m : ℝ) = n := min_eq_left hnmR
+        have hpos : 0 < x := lt_of_lt_of_le hnpos (hmin ▸ hx.1)
+        dsimp only
+        rw [p4_f2_at hs0 hs1n hpos, hf2]
+      exact intervalIntegral.integral_congr (μ := MeasureTheory.volume) hEqU
+    calc (∑ k ∈ Finset.Ioc n m, (k : ℂ) ^ (-s))
+        _ = (∑ k ∈ Finset.Ioc n m, f ↑k) := hSum.symm
+        _ = (∫ x : ℝ in (n : ℝ)..(m : ℝ), f x) +
+            ((1 / 2) : ℂ) * (f (m : ℝ) - f (n : ℝ)) +
+            ((1 / 12) : ℂ) * (deriv f (m : ℝ) - deriv f (n : ℝ)) -
+            ((1 / 2) : ℂ) * (∫ x : ℝ in (n : ℝ)..(m : ℝ), (B2 x : ℂ) * deriv (deriv f) x) := hEm
+        _ = _ := by
+          rw [hInt1, hDerM, hDerN, hKer]
+  -- Decay of the three endpoint powers (Re < 0).
+  -- === decay + assembly (L5.a completion) ===
+  -- Decay primitive (Re r < 0): the real-base power (x:ℂ)^r tends to 0
+  -- at +∞ along ℕ.  Chain: norm (Complex.norm_cpow_eq_rpow_re_of_pos)
+  -- + tendsto_rpow_neg_atTop (Analysis/SpecialFunctions/Pow/Asymptotics.lean:48,
+  --   fetched/read online 2026-09-13) + natCast cofinality (hK precedent) +
+  --   tendsto_zero_iff_norm_tendsto_zero.
+  have hre1 : (-s + 1 : ℂ).re < 0 := by
+    have hre : (-s + 1 : ℂ).re = -s.re + 1 := by
+      rw [Complex.add_re, Complex.neg_re, Complex.one_re]
+    linarith [hsσ]
+  have hre2 : (-s : ℂ).re < 0 := by
+    rw [show (-s : ℂ).re = -s.re from by rw [Complex.neg_re]]
+    linarith [hsσ]
+  have hre3 : (-s - 1 : ℂ).re < 0 := by
+    have hEq : (-s - 1 : ℂ) = -((s : ℂ) + 1) := by ring
+    rw [hEq, Complex.neg_re, Complex.add_re, Complex.one_re]
+    linarith [hsσ]
+  have hDecay2 (r : ℂ) (hrre : r.re < 0) :
+      Tendsto (fun m : ℕ => ((m : ℝ) : ℂ) ^ r) atTop (nhds 0) := by
+    rw [tendsto_zero_iff_norm_tendsto_zero]
+    apply Tendsto.congr'
+    · exact mem_atTop_sets.2 ⟨1, fun m hm => by
+        have hm0 : 0 < m := lt_of_lt_of_le (zero_lt_one : (0 : ℕ) < 1) hm
+        exact (Complex.norm_cpow_eq_rpow_re_of_pos (Nat.cast_pos.mpr hm0) r).symm
+      ⟩
+    · convert (tendsto_rpow_neg_atTop (neg_pos.mpr hrre)).comp (tendsto_natCast_atTop_atTop (R := ℝ))
+      rw [Function.comp_apply, neg_neg]
+  -- the three endpoint decays, in the exact shapes of the hFin-RHS:
+  have hM1 : Tendsto (fun m : ℕ => p4_A s (m : ℝ)) atTop (nhds 0) := by
+    dsimp only [p4_A]
+    exact hDecay2 (-s + 1) hre1
+  have hM2 : Tendsto (fun m : ℕ => f (m : ℝ)) atTop (nhds 0) := by
+    dsimp only [f]
+    exact hDecay2 (-s) hre2
+  have hM3 : Tendsto (fun m : ℕ => p4_f1 s (m : ℝ)) atTop (nhds 0) := by
+    dsimp only [p4_f1]
+    convert (hDecay2 (-s - 1) hre3).const_mul (-s) using 1
+    · simp
+  -- (1) (p4_A m − p4_A n)/(1−s) → −p4_A n/(1−s)
+  have hTA : Tendsto (fun m : ℕ => p4_A s (m : ℝ) / (1 - s)) atTop (nhds 0) := by
+    convert hM1.div_const (1 - s)
+    simp only [zero_div]
+  have hT1 : Tendsto (fun m : ℕ => (p4_A s (m : ℝ) - p4_A s (n : ℝ)) / (1 - s))
+      atTop (nhds (0 - p4_A s (n : ℝ) / (1 - s))) := by
+    have hD : ∀ (m : ℕ), (p4_A s (m : ℝ) - p4_A s (n : ℝ)) / (1 - s) =
+        p4_A s (m : ℝ) / (1 - s) - p4_A s (n : ℝ) / (1 - s) :=
+      fun m => by ring
+    have hSub : Tendsto (fun m : ℕ => p4_A s (m : ℝ) / (1 - s) - p4_A s (n : ℝ) / (1 - s))
+        atTop (nhds (0 - p4_A s (n : ℝ) / (1 - s))) :=
+      hTA.sub (tendsto_const_nhds :
+        Tendsto (fun _ : ℕ => p4_A s (n : ℝ) / (1 - s)) atTop (nhds (p4_A s (n : ℝ) / (1 - s))))
+    exact hSub.congr' (Eventually.of_forall (fun m => (hD m).symm))
+  -- (2) ½(f m − f n) → −½ f n
+  have hT2 : Tendsto (fun m : ℕ => ((1 / 2) : ℂ) * (f (m : ℝ) - f (n : ℝ)))
+      atTop (nhds (((1 / 2) : ℂ) * (0 - f (n : ℝ)))) :=
+    (hM2.sub (tendsto_const_nhds : Tendsto (fun _ : ℕ => f (n : ℝ)) atTop (nhds (f (n : ℝ))))).const_mul (1 / 2 : ℂ)
+  -- (3) (1/12)(f' m − f' n) → −(1/12) f' n
+  have hT3 : Tendsto (fun m : ℕ => ((1 / 12) : ℂ) * (p4_f1 s (m : ℝ) - p4_f1 s (n : ℝ)))
+      atTop (nhds (((1 / 12) : ℂ) * (0 - p4_f1 s (n : ℝ)))) :=
+    (hM3.sub (tendsto_const_nhds : Tendsto (fun _ : ℕ => p4_f1 s (n : ℝ)) atTop (nhds (p4_f1 s (n : ℝ))))).const_mul (1 / 12 : ℂ)
+  -- kernel: ∫_n^m B• f'' → ∫_{Ioi n} B• f'' (L3 atom, composed with natCast)
+  have hK : Tendsto (fun m : ℕ => ∫ x : ℝ in (n : ℝ)..(m : ℝ), (B2 x : ℂ) * f2 x)
+      atTop (nhds (∫ x : ℝ in Set.Ioi (n : ℝ), (B2 x : ℂ) * f2 x)) :=
+    (p4_kernel_tendsto hsre2 n hn).comp (tendsto_natCast_atTop_atTop (R := ℝ))
+  -- (4) ½ ∫_n^m B• f'' → ½ ∫_{Ioi n} B• f'' (L3 kernel, positive form for sub)
+  have hT4p : Tendsto (fun m : ℕ => ((1 / 2) : ℂ) * (∫ x : ℝ in (n : ℝ)..(m : ℝ), (B2 x : ℂ) * f2 x))
+      atTop (nhds (((1 / 2) : ℂ) * (∫ x : ℝ in Set.Ioi (n : ℝ), (B2 x : ℂ) * f2 x))) :=
+    hK.const_mul ((1 / 2) : ℂ)
+  -- assemble: the closed form tends to the four-limit sum, which unfolds to p4_Tn_lim
+  have hLim : Tendsto (fun m : ℕ =>
+      (p4_A s (m : ℝ) - p4_A s (n : ℝ)) / (1 - s) +
+      ((1 / 2) : ℂ) * (f (m : ℝ) - f (n : ℝ)) +
+      ((1 / 12) : ℂ) * (p4_f1 s (m : ℝ) - p4_f1 s (n : ℝ)) -
+      ((1 / 2) : ℂ) * (∫ x : ℝ in (n : ℝ)..(m : ℝ), (B2 x : ℂ) * f2 x))
+      atTop (nhds (p4_Tn_lim s n)) := by
+    convert (hT1.add hT2).add hT3 |>.sub hT4p
+    · rw [hf, hf2]
+      dsimp [p4_Tn_lim, p4_f1, p4_A, p4_f, p4_f2]
+      ring_nf
+  -- final: congr' with hFin (eventual pointwise equality, m ≥ n)
+  have hEven : {m : ℕ |
+      (p4_A s (m : ℝ) - p4_A s (n : ℝ)) / (1 - s) +
+      ((1 / 2) : ℂ) * (f (m : ℝ) - f (n : ℝ)) +
+      ((1 / 12) : ℂ) * (p4_f1 s (m : ℝ) - p4_f1 s (n : ℝ)) -
+      ((1 / 2) : ℂ) * (∫ x : ℝ in (n : ℝ)..(m : ℝ), (B2 x : ℂ) * f2 x)
+      = (∑ k ∈ Finset.Ioc n m, (k : ℂ) ^ (-s))} ∈ atTop := by
+    apply mem_of_superset (mem_atTop_sets.2 ⟨n, fun m hm => hm⟩)
+    intro m hm
+    exact (hFin m hm).symm
+  exact hLim.congr' hEven
 
 end
