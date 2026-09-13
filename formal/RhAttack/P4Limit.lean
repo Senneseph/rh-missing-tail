@@ -49,7 +49,7 @@ header for the uIcc/Nat.cast_add/ContinuousOn.mono conventions):
     evaluation (L2).
   * `DifferentiableOn.continuousOn` (Calculus/FDeriv/Basic.lean:664).
 
-STATUS (2026-09-15, Lean 4.33.1): atoms L1, L2, L3, L4, L5.a-e GREEN.  L4 is the missing-tail law (IBP route: `p4_op2c_bound` + `p4_f2_tail_bound`); L5 is the composition root: `p4_Tn_Tendsto` (L5.a, the M-to-infinity limit of the tail partial sums), `p4_zeta_split` (L5.b), `p4_Tn_eq` (L5.c, the tsum passage to `p4_Tn_lim`), `p4_identity` (L5.d, the P4 line-statement for Re s > 1) and `p4_T4_bound` (L5.e, the bound on `p4_em_expr` at Re s = 1/2; the W_n-equality at Re s = 1/2 is cited, DLMF 25.2.8 / Apostol 12.21 - see section doc).  No sorry.
+STATUS (2026-09-15, Lean 4.33.1): atoms L1, L2, L3, L4, L5.a-e GREEN.  L4 is the missing-tail law (IBP route: `p4_op2c_bound` + `p4_f2_tail_bound`); L5 is the composition root: `p4_Tn_Tendsto` (L5.a, the M-to-infinity limit of the tail partial sums), `p4_zeta_split` (L5.b), `p4_Tn_eq` (L5.c, the tsum passage to `p4_Tn_lim`), `p4_identity` (L5.d, the P4 line-statement for Re s > 1) and `p4_T4_bound` (L5.e, the bound on `p4_em_expr` at Re s = 1/2; the W_n-equality at Re s = 1/2 is cited, DLMF 25.2.8 / Apostol 12.21 - see section doc) and L5.f (`p4_one_minus_s_conj`, `p4_T4_ratio`) the T4 ratio corollary - the correction scale |1-s| = |s| on the critical line and the three-term ratio bound, pure division algebra from L5.e.  No sorry.
 THEOREMS (L1): p4_f_hasDerivAt, p4_f1_hasDerivAt, p4_f2_hasDerivAt,
  p4_f1_at, p4_f2_at, p4_f1_on_Icc, p4_f2_on_Icc.
 THEOREMS (L2): p4_integral_closed, p4_finite_em2.
@@ -1240,7 +1240,7 @@ theorem p4_finite_em2 (s : ℂ) (hs1 : s ≠ 0) (hs2 : s ≠ -1) (hs3 : s ≠ 1)
 
 /-! P4Limit · L5 — the composition root (P4 statement + T4 corollary).
 
-STATUS: L5.a-L5.e GREEN (`p4_Tn_Tendsto`, `p4_zeta_split`, `p4_Tn_eq`, `p4_identity`, `p4_T4_bound`); L5.f (T4 corollary) next.  The W_n-equality at Re s = 1/2 remains CITED (DLMF 25.2.8 / Apostol 12.21); the bound `p4_T4_bound` on the EM expression itself is machine-proven.
+STATUS: L5.a-L5.e GREEN (`p4_Tn_Tendsto`, `p4_zeta_split`, `p4_Tn_eq`, `p4_identity`, `p4_T4_bound`, `p4_one_minus_s_conj`, `p4_T4_ratio`) - ALL GREEN.  The W_n-equality at Re s = 1/2 remains CITED (DLMF 25.2.8 / Apostol 12.21); the bound `p4_T4_bound` on the EM expression itself is machine-proven.
 
 The P4 statement, composed from the GREEN atoms L1–L4 + the pinned mathlib
 tsum layer (all names `#print`-verified 2026-09-13; module sketch §7):
@@ -1741,3 +1741,82 @@ theorem p4_T4_bound {s : ℂ} (hsre : s.re = 1 / 2) {n : ℕ} (hn : 0 < n) :
     have hadd := norm_add_le t1 t2
     linarith [hsub, hadd]
   linarith [hTri, h1, h2, hK]
+
+/-! P4Limit · L5.f — the T4 corollary (the strictified measured law),
+    pure division algebra from the P4 statement.
+
+    At Re s = ½ the correction scale is |I(n,s)| = n^{1/2}/|1−s| and
+    `p4_one_minus_s_conj` gives |1−s| = |s| (1 − s = conj s on the
+    critical line), so the ratio |W_n(s)|/|I(n,s)| is bounded by
+    (using p4_identity + p4_T4_bound for W_n at Re s = ½, as cited):
+
+      ‖p4_em_expr s n‖ · |1−s| · n^{−1/2}
+          ≤ (‖s‖/2)·n^{−1} + (‖s‖²/12)·n^{−2}
+            + (√3/540)·‖s‖·‖s(s+1)(s+2)‖·n^{−3}.
+
+    (The module sketch's draft line in (t²+¼)(|s|+1) form was wrong for
+    large t and is replaced by this exact product form, which holds for
+    every t ≥ 0.)
+-/
+
+/-/ Atom L5.f.1 — on the critical line Re s = ½: 1 − s = conj s, hence
+    |1 − s| = |s| (the correction scale simplifies). -/
+theorem p4_one_minus_s_conj {s : ℂ} (hsre : s.re = 1 / 2) : (1 : ℂ) - s = star s := by
+  apply Complex.ext
+  · simp [Complex.conj_re, hsre]
+    norm_num
+  · simp [Complex.conj_im]
+
+/-/ Atom L5.f.2 — the T4 ratio corollary: the corrected-tail ratio
+    |W_n(s)|/|I(n,s)| (W_n at Re s = ½ is the EM expression by the cited
+    identity) is bounded by the sharp three-term expression.  Stated as a
+    product (no quotients) for ℝ-algebra hygiene. -/
+theorem p4_T4_ratio {s : ℂ} (hsre : s.re = 1 / 2) {n : ℕ} (hn : 0 < n) :
+    ‖p4_em_expr s n‖ * ‖1 - s‖ * (n : ℝ) ^ (-1 / 2 : ℝ) ≤
+        (‖s‖ / 2) * (n : ℝ) ^ (-1 : ℝ) +
+        (‖s‖ ^ 2 / 12) * (n : ℝ) ^ (-2 : ℝ) +
+        (Real.sqrt 3 / 540) * ‖s‖ * ‖s * (s + 1) * (s + 2)‖ * (n : ℝ) ^ (-3 : ℝ) := by
+  have hnR : 0 < (n : ℝ) := Nat.cast_pos.mpr hn
+  have hbB : ‖p4_em_expr s n‖ ≤
+      (1 / 2) * (n : ℝ) ^ (-1 / 2 : ℝ) +
+      (‖s‖ / 12) * (n : ℝ) ^ (-3 / 2 : ℝ) +
+      (Real.sqrt 3 / 540) * ‖s * (s + 1) * (s + 2)‖ * (n : ℝ) ^ (-5 / 2 : ℝ) :=
+    p4_T4_bound hsre hn
+  have hconj : (1 : ℂ) - s = star s := p4_one_minus_s_conj hsre
+  have hnorm : ‖(1 : ℂ) - s‖ = ‖s‖ := by
+    rw [hconj, norm_star]
+  have hrpow1 : (n : ℝ) ^ (-1 / 2 : ℝ) * (n : ℝ) ^ (-1 / 2 : ℝ) =
+      (n : ℝ) ^ (-1 : ℝ) := by
+    rw [← Real.rpow_add hnR (-1 / 2 : ℝ) (-1 / 2 : ℝ)]
+    ring_nf
+  have hrpow2 : (n : ℝ) ^ (-1 / 2 : ℝ) * (n : ℝ) ^ (-3 / 2 : ℝ) =
+      (n : ℝ) ^ (-2 : ℝ) := by
+    rw [← Real.rpow_add hnR (-1 / 2 : ℝ) (-3 / 2 : ℝ)]
+    ring_nf
+  have hrpow3 : (n : ℝ) ^ (-1 / 2 : ℝ) * (n : ℝ) ^ (-5 / 2 : ℝ) =
+      (n : ℝ) ^ (-3 : ℝ) := by
+    rw [← Real.rpow_add hnR (-1 / 2 : ℝ) (-5 / 2 : ℝ)]
+    ring_nf
+  calc ‖p4_em_expr s n‖ * ‖(1 : ℂ) - s‖ * (n : ℝ) ^ (-1 / 2 : ℝ)
+      ≤ ((1 / 2) * (n : ℝ) ^ (-1 / 2 : ℝ) +
+          (‖s‖ / 12) * (n : ℝ) ^ (-3 / 2 : ℝ) +
+          (Real.sqrt 3 / 540) * ‖s * (s + 1) * (s + 2)‖ * (n : ℝ) ^ (-5 / 2 : ℝ)) *
+          ((‖s‖ * (n : ℝ) ^ (-1 / 2 : ℝ))) := by
+        rw [hnorm, mul_assoc]
+        exact mul_le_mul_of_nonneg_right hbB (by positivity)
+      _ = (‖s‖ / 2) * (n : ℝ) ^ (-1 : ℝ) +
+          (‖s‖ ^ 2 / 12) * (n : ℝ) ^ (-2 : ℝ) +
+          (Real.sqrt 3 / 540) * ‖s‖ * ‖s * (s + 1) * (s + 2)‖ * (n : ℝ) ^ (-3 : ℝ) := by
+        ring_nf
+        have hK : (n : ℝ) ^ (-1 / 2 : ℝ) * ‖s‖ * Real.sqrt 3 *
+            ‖s * 2 + s ^ 2 * 3 + s ^ 3‖ * (n : ℝ) ^ (-5 / 2 : ℝ) * (1 / 540) =
+            (n : ℝ) ^ (-1 / 2 : ℝ) * (n : ℝ) ^ (-5 / 2 : ℝ) * ‖s‖ * Real.sqrt 3 *
+            ‖s * 2 + s ^ 2 * 3 + s ^ 3‖ * (1 / 540) := by ring
+        have hT : (n : ℝ) ^ (-1 / 2 : ℝ) * ‖s‖ ^ 2 *
+            (n : ℝ) ^ (-3 / 2 : ℝ) * (1 / 12) =
+            (n : ℝ) ^ (-1 / 2 : ℝ) * (n : ℝ) ^ (-3 / 2 : ℝ) * ‖s‖ ^ 2 * (1 / 12) := by ring
+        have hSq : ((n : ℝ) ^ (-1 / 2 : ℝ)) ^ 2 = (n : ℝ) ^ (-1 : ℝ) := by
+          simp only [pow_two]
+          rw [hrpow1]
+        rw [hK, hrpow3, hT, hrpow2, hSq]
+        ring

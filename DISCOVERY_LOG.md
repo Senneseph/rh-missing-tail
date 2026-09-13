@@ -552,3 +552,34 @@ New tooling pins: `zeta_eq_tsum_one_div_nat_add_one_cpow`,
 calc-closer.
 
 Full repo build GREEN (0 errors, 17426 jobs); gates A-D PASS.
+
+## 9. L5.f GREEN — the T4 ratio corollary (2026-09-15)
+
+`p4_one_minus_s_conj`: on the critical line Re s = ½, `1 − s = star s`
+(conj-re/im via `Complex.conj_re`/`conj_im`, which plain `simp` applies
+even though `rw`/`simp only` cannot match their `starRingEnd` pattern).
+Hence the correction scale |I| = n^{1/2}/|1−s| simplifies to
+n^{1/2}/|s|.
+
+`p4_T4_ratio`: the three-term ratio bound
+‖em_expr‖·|1−s|·n^{−1/2} ≤ (‖s‖/2)n^{−1} + (‖s‖²/12)n^{−2} +
+(√3/540)‖s‖·‖s(s+1)(s+2)‖n^{−3} — p4_T4_bound multiplied by
+|1−s|·n^{−1/2} = |s|·n^{−1/2}, with the rpow products (−1/2)+(−k/2)
+via `Real.rpow_add ←`.
+
+Honesty note: the module sketch's draft T4 line in (t²+¼)(|s|+1) form
+was checked and is WRONG for large t (fails at t = 10); the exact
+product form above is what holds for every t, and is what the measured
+15-point table (0.0500 … 1.0620) is checked against (P4Float gate).
+
+New pins/lessons: `|·|` (abs) notation fails on ℂ with "Lattice ℂ" —
+use `‖·‖`; plain `simp` (not `simp only`) is needed for
+`Complex.conj_re`/`conj_im`; `ring_nf` keeps `x^2` as a power (does not
+expand to `x·x`) — `simp only [pow_two]` first; `rw [h1, …, hn]` skips
+non-matching entries (order matters for failure reporting); `‖s(s+1)(s+2)‖`
+gets its interior expanded to `‖s·2 + s²·3 + s³‖` under `ring_nf` — both
+sides expand, so the final `ring` closes.
+
+Full repo build GREEN (17426 jobs, 0 errors); gates A-D PASS. The P4Limit
+module (all of L1-L5) is now complete: the P4 missing-tail line — exact
+law on Re s > 1, bound + ratio corollary at Re s = ½ — is machine-proven.
