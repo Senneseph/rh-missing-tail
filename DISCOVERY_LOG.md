@@ -870,3 +870,59 @@ Workaround adopted: the C1a section uses deterministic tactics only
 (simp/rw/norm_num/field_simp/add_right_inj/lt_irrefl) and keeps
 1/2 out of the decision procedures. Recorded here so a future
 commit does not reintroduce a flaky linarith.
+
+## 16. C6 — the audit-point margin wire: §8 at the audit point is one statement (2026-09-17)
+
+**Goal.** C5b (`p9_closure_rh_of_margin`) closes §8 under the
+explicit hmargin hypothesis.  The remaining work was to NAME the
+audit-point instantiation: which measurement facts, in which form,
+make hmargin at the audit point hold.
+
+**Spec.** `kainos-logos/.../spec/c6-margin-wire-abstract.md`.
+
+**The audit package (formulas from scripts/rh/day020_worstcase.py).**
+At each candidate pair height g and scan height t:
+  resid(t) = |zeta(1/2+it) - K_on(t)|     (= Q, the S10 LHS, A0
+                                              same-object)
+  dev(t)   = |K_on(t)| * min_d |R(g,d,t)-1| (kernel change, S7
+                                              detector)
+  MARGIN(t) = dev/resid                    (record: worst 112.6 over
+                                             4 candidate pairs x
+                                             straddle windows)
+The hmargin witness tuple is (Q, dev, flo := dev, Mf, Bf, Mr), so
+the per-point package is exactly three measurement facts:
+  hZero   Q >= dev - Mf      (zero side: bridge S6 + detector S7;
+                              the CITED identity zeta = K_on *
+                              kernel (DLMF 25.2.12) + measured
+                              reduction — day-010 d4d3 / day-020)
+  hDef    Q <= Bf + Mr       (measured resid below the A4.3-wired
+                              bound at the Xval pin — out_day020_
+                              xval_pin.txt, 206x headroom)
+  hStrict Bf + Mr + Mf < dev (the audited strict gap — the 112.6x
+                              margin is this inequality in point
+                              form)
+
+**Lean (RhAttack/Closure.lean, C6, both atoms LEAN-PROVEN).**
+  C6.1 p9_audited_package_strict — the package packs into the
+    hmargin witness tuple: (Q, dev, dev, Mf, Bf, Mr) with hZero,
+    le_rfl (dev >= dev), hDef, hStrict.  Six-line term; the value is
+    the NAMED interface between the audit and the closure.
+  C6.2 p9_closure_at_audit_point — the TOTAL composition:
+    RH q  from  (per off-line pair (t0,d0), the three fact package),
+    body = p9_closure_rh_of_margin q (hmargin := C6.1 o hAudit).
+    One line; the content is the statement itself: §8 at the audit
+    point, no unnamed hypothesis.
+
+**Where the §8 argument stands (honest split, final).**
+  Machine-proven: C0 minimality, C5 squeeze, C5b closure, C1-far,
+  C1a (the own-height pole + positive mass), C6.1/C6.2 composition,
+  P8Floor A0-A4 (definition side), P4Limit L1-L5, B0/B2/B3/B4/B5.
+  PINNED per point (script + record, computed never recalled):
+    hZero  — the zero-side measurement (day-010 d4d3 + day-020)
+    hDef   — the resid-vs-wired-bound measurement at Xval (xval pin)
+    hStrict — the 112.6x strict-gap measurement (worstcase record)
+  CITED: the bridge identity (DLMF 25.2.12); W_n = EM-expression at
+  Re s = 1/2 (DLMF 25.2.8 / Apostol 12.21); Sbar/M(G,t) Platt-
+  Trudguan.  OPTIONAL: C1b (the t != g window floor promotion).
+The full build is 17430 jobs, 0 errors, 0 sorry; B5-CORE CHECK
+PASS; the rhattack smoke PASSes; probe deleted.

@@ -1,0 +1,39 @@
+day021 C1b dps verification (dps = 50)
+==========================================================================
+
+[V1] worst point of the float sweep:
+  |R|(g0, d=0.5, u=0.01) = 3.53669687317028    (float64: 3.536696873e+00)
+
+[V2] the W=12 edge at the audit pair (continuous-window floor there):
+  |R|(g1, d=0.5, u=12) = 0.0241909842623872
+  -> 1 - |R| = 0.975809015737613    (float64: 2.4191e-02 -> 0.9758)
+  (the day-010 discrete straddle grid had min |R-1| = 0.99750; the
+   scope difference is exactly the window: 0.9975 is a pin on the
+   audited discrete straddle set at g ~ 1e3, not a uniform floor on
+   one continuous W-window)
+
+[V3] the |R| = 1 crossing at g = 100, d = 0.5 (bisection on u):
+  u_c = 0.00500053134924911
+  theta = (1/2+t)*omega = 0.0100487414103341 rad
+  chord floor 2|sin(theta/2)| = 0.0100486991314787   (float64: 0.010049)
+
+[V4] omega bound  omega_d <= 2/(g^2 + 1) for 0 < d <= 1/2:
+  g = 14.134725142, d = 0.5: omega = 0.004961644, bound = 0.0099606328, ok = True
+  g = 100.0, d = 0.5: omega = 9.9982502e-5, bound = 0.00019998, ok = True
+  g = 999.791572, d = 0.5: omega = 1.0004152e-6, bound = 2.000832e-6, ok = True
+  g = 14.134725142, d = 0.005: omega = 0.0049989851, bound = 0.0099606328, ok = True
+
+[V5] window theta constant 2 (g + 12.5)/(g^2 + 1) at g0
+     (the family is decreasing for g >= 1):
+  2 (g0 + 12.5)/(g0^2 + 1) = 0.265298718141148 rad
+  pi = 3.14159265358979   (constant is far below pi, hence below 2 pi too)
+
+[V6] gamma -> infinity: infimum of the detector scale on W = 12
+      (u in (0,12], both sides, d in 9 grid pts, dps grid):
+  g =        100:  min ||R-1|| = 0.499909892153509
+  g =       1000:  min ||R-1|| = 0.949980310840936
+  g =      10000:  min ||R-1|| = 0.994998002560527
+  g =     100000:  min ||R-1|| = 0.999499800025069
+  (the detector scale -> 0 as g -> inf along the |R| = 1 crossing:
+   the near-regime floor is NOT a positive uniform constant on the
+   whole window; the C1b statement is re-formulated, spec updated)

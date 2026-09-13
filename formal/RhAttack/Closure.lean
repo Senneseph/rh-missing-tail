@@ -34,7 +34,11 @@ the POLE at t = g (the pair's own height), where the on-line pair
 product vanishes and the off-line product mass is a nonzero finite
 positive constant (the exact kernel change the closure needs; the
 ratio R has a pole there, so the window-floor question for t != g is
-non-critical for the closure — day021_c1b_worstpoint audit).
+non-critical for the closure — day021_c1b_worstpoint audit) — and
+C6 — the audit-point margin wire: the three point-measured facts per
+off-line pair (hZero / hDef / hStrict, day-020 worstcase + xval pin
+records) instantiate the C5b hmargin predicate, so the §8 closure at
+the AUDIT POINT is one statement: p9_closure_at_audit_point.
 
 HONEST SPLIT (per-atom):
   C0 (B0 counting interface): LEAN-PROVEN (imported); the minimal
@@ -62,6 +66,18 @@ HONEST SPLIT (per-atom):
     definition-side floor = the P8Floor A4 composition, margin =
     p9_m_pin); the module does not re-invent the measurements and
     does not assume them inside Lean.
+  C6 (the audit-point margin wire): LEAN-PROVEN —
+    p9_audited_package_strict (the three point-measured facts pack
+    into the hmargin witness tuple, flo := dev) and
+    p9_closure_at_audit_point (C5b composed with that packaging —
+    one statement).  Their MEASUREMENT inputs are PINNED per point:
+    hZero (the zero side, bridge S6 + detector S7, day-010 d4d3 +
+    day-020 worstcase), hDef (measured resid below the A4.3-wired
+    bound at Xval, the xval pin record), hStrict (the audited strict
+    gap, the 112.6x margin record).  The zero-side IDENTITY behind
+    hZero (zeta = K_on * kernel, DLMF 25.2.12) is CITED, not
+    re-proven (the kernel product over n zeros with the P4 tail is
+    the measurement side; E7b1 audit trail, day-009 records).
 
 CITATIONS (outline 11 + day logs): DLMF 25.2.12 (the bridge);
   Platt-Trudgian (Sbar, M(G,t), J. Number Theory 147 (2015));
@@ -99,6 +115,13 @@ COMPOSITION ROOT (how the atoms bring the 8 closure together):
   nonzero finite positive constant (p9_poff_own_height_pos) — the
   ratio form of R has a pole there; the PINNED window floor p9_f_pin
   bounds only the t != g window (C1b optional).
+  4. C6 (p9_closure_at_audit_point): the same closure composed with
+     the audit-point package — per point, THREE point-measured facts
+     (hZero, hDef, hStrict; records: day-020 worstcase 112.6x +
+     xval pin 206x) pack into hmargin (C6.1) and close RH.  This is
+     the final composition: the S8 argument at the audit point is
+     one statement whose only non-machine inputs are those three
+     PINNED measurement facts.
 -/
 
 import Mathlib
@@ -525,3 +548,46 @@ theorem p9_detector_at_own_height (γ δ : ℝ) (hδ : 0 < δ) (hδh : δ < 1 / 
 theorem p9_poff_own_height_pos (γ δ : ℝ) (hδ : 0 < δ) (hδh : δ < 1 / 2) :
     0 < ‖poff γ δ γ‖ := by
   exact norm_pos_iff.mpr (p9_poff_own_height_nz_full γ δ hδ hδh)
+
+/-! P9 · C6 — the audit-point margin wire (the final composition).
+
+SPEC: kainos-logos plan/40-prize-islands/rh-attack/spec/
+c6-margin-wire-abstract.md
+
+The C5b hmargin predicate is instantiated at the audit point by the
+three point-measured facts of the day-020 worstcase record
+(out_day020_worstcase.txt; Xval: out_day020_xval_pin.txt):
+  hZero   Q >= dev - Mf         (zero side: bridge S6 + detector S7;
+                                the CITED identity zeta = K_on *
+                                kernel, DLMF 25.2.12, + the measured
+                                detector reduction, day-010 d4d3)
+  hDef    Q <= Bf + Mr          (measured resid below the A4.3-wired
+                                definition-side bound at the Xval pin)
+  hStrict Bf + Mr + Mf < dev    (the audited strict gap — the 112.6x
+                                worst-case margin over the 4
+                                candidate pairs x straddle windows)
+The witness tuple of hmargin is (Q, dev, flo := dev, Mf, Bf, Mr):
+  dev >= flo is rfl; the other three conjuncts ARE the package.
+-/
+
+/-- C6.1: the audit package (hZero, hDef, hStrict) instantiates the C5b
+   hmargin witness tuple with flo := dev. -/
+theorem p9_audited_package_strict (dev Q Mf Bf Mr : ℝ)
+    (hZero : Q >= dev - Mf) (hDef : Q <= Bf + Mr) (hStrict : Bf + Mr + Mf < dev) :
+    ∃ (Q' dev' flo' Mf' Bf' Mr' : ℝ), Q' >= dev' - Mf' ∧ dev' >= flo' ∧
+        Q' <= Bf' + Mr' ∧ Bf' + Mr' + Mf' < flo' :=
+  ⟨Q, dev, dev, Mf, Bf, Mr, hZero, le_rfl, hDef, hStrict⟩
+
+/-- C6.2: the §8 closure at the audit point — one statement. -/
+theorem p9_closure_at_audit_point (q : ZeroSet)
+    (hAudit : ∀ (t0 d0 : ℝ) (ht0 : 0 < t0) (hd0 : 0 < d0)
+      (hpair : ∃ ρ ∈ q.Z, ρ.re ≠ 1 / 2 ∧ (|ρ.im| : ℝ) = t0 ∧
+        |(ρ.re : ℝ) - 1 / 2| = d0),
+      ∃ (dev Q Mf Bf Mr : ℝ),
+        Q >= dev - Mf ∧ Q <= Bf + Mr ∧ Bf + Mr + Mf < dev) :
+    RH q := by
+  refine p9_closure_rh_of_margin q ?hm
+  intro t0 d0 ht0 hd0 hpair
+  obtain ⟨dev, Q, Mf, Bf, Mr, h⟩ := hAudit t0 d0 ht0 hd0 hpair
+  obtain ⟨hZero, hDef, hStrict⟩ := h
+  exact p9_audited_package_strict dev Q Mf Bf Mr hZero hDef hStrict
