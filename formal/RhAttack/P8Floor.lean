@@ -15,7 +15,7 @@ proof; the height bound T never appears.  Atom plan (spec §2):
       b5NoffIsPolynomial, b5NoffPos).
   A4: comparison floor < detector under the measurement-pinned constants.
 
-STATUS (2026-09-16, Lean 4.33.1): A0, A1, A2a GREEN.  A2b (the M(G,t) wire) next, then A3-A4, one at a time.  No sorry.
+STATUS (2026-09-16, Lean 4.33.1): A0, A1, A2a, A2b.1 GREEN.  A2b (the M(G,t) wire) next, then A3-A4, one at a time.  No sorry.
 
 HONEST SPLIT (per-atom):
   A0: LEAN-PROVEN (definitional + ring).
@@ -39,6 +39,7 @@ after use; numerics sanity-check only.
 
 import Mathlib
 import RhAttack.P4Limit
+import RhAttack.B3
 
 open Real Finset List
 
@@ -109,3 +110,28 @@ theorem p8_B_floor {t : ℝ} {n : ℕ} (hn : 0 < n) :
     dsimp only [s]
     simp
   exact p4_T4_bound hsre hn
+
+/- P8Floor · A2b — the kernel-residual floor (ζ-free; the P6 assets).
+
+A2b.1 (LEAN-PROVEN): the bridge residual in its exact factorized form —
+    `Real.exp Tt · ∏_L F − ∏_{L∪T} F = ∏_{L∪T} F · (e^{Tt − Σ_T ln F} − 1)`
+    (P6 `b3ResidualDecomp` + ring).  The entire bridge error is one
+    number: the model defect x := Tt − Σ_T ln F, acting on the product.
+    No zero-count enters; F is any positive kernel (the on-line pair
+    magnitudes of B4 when instantiated).
+-/
+
+/-- Atom A2b.1 (LEAN-PROVEN; ζ-free): the exact factored form of the P6
+    bridge residual.  For a positive real kernel F on L ++ T,
+    e^{Tt}·∏_{g∈L} F(g) − ∏_{g∈L∪T} F(g) = ∏_{g∈L∪T} F(g)·(e^x − 1),
+    x := Tt − Σ_{g∈T} ln(F(g)).  This is the bridge of the outline §6
+    with the sign made explicit: the residual IS the tail-model error,
+    nothing else. -/
+theorem p8_residual_exact (L T : List ℝ) (Tt : ℝ) (F : ℝ → ℝ)
+    (hpos : ∀ g ∈ L ++ T, 0 < F g) :
+    Real.exp Tt * (L.map F).prod - ((L ++ T).map F).prod =
+        ((L ++ T).map F).prod *
+        (Real.exp (Tt - (T.map (fun (g : ℝ) => Real.log (F g))).sum) - 1) := by
+  have h := B3.b3ResidualDecomp L T Tt F hpos
+  rw [h]
+  ring
