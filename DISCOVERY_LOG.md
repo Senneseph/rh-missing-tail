@@ -2450,3 +2450,90 @@ family is spent: four walks independently re-derived the k-shells,
 closure-by-count, the (COUNT, delta) components, and the bridge
 itself; the region beyond is a theorem (the uniform statement), not
 a perspective. Full note: working-tree spec/fib-shell-probe.md §8.
+
+## 24 — day-023 — PUBLIC ZERO DATASETS exist and are verified; our 6e6
+## list is count-certified, NOT position-certified (t > 1.7e4); exactly
+## 4 zeros missing (two twin pairs); plan switch: canonical lists will
+## come from LMFDB (103.8B zeros, ±2.5e-31), our lists become cross-checks
+
+Owner caught the process flaw (research-before-build): "Surely someone
+has computed this?" — searched online (2026-09-13, per his standing
+directive) instead of assuming:
+
+**The public landscape (verified, sources in hand):**
+- **LMFDB** (lmfdb.org/zeros/zeta/): the first **103,800,788,359 zeros**,
+  all Re = 1/2, imaginary parts to ±2.5×10⁻³¹. Plain-text API:
+  https://www.lmfdb.org/zets/zeta/list?N=<start>&limit=<n>&download=yes
+  (limit 100k verified clean with curl; **limit ≥ 200k returns a
+  reCAPTCHA page** (HTTP 200, 32-line HTML); repeated probes (200k/300k/
+  500k/1M/5M) put the IP in a captcha state — even 100k went captcha
+  ~5 min later. Human browser + solved CAPTCHA is the clean path for
+  the big range (one request: limit=21.5M, ~800MB file). Bulk
+  dataset (whole 103.8B) behind a human-gate at
+  beta.lmfdb.org/riemann-zeta-zeros/ (TB-scale .dat + 1.2GB sqlite
+  index — not needed for our ranges).
+- **Odlyzko's classic tables** (www-users.cse.umn.edu/~odlyzko/
+  zeta_tables/): zeros6.gz = the first **2,001,052 zeros to 4×10⁻⁹**
+  (14 MB gzip; downloaded day-023), covers [14.13, 1,132,490.658714411].
+  No 10-million table there (largest continuous = 2,001,052).
+  Gourdon (2004) verified RH to the 10¹³-th zero; modern finders
+  (zetasl GPU, riemann-sniper) exist but are unnecessary now.
+
+**Verification of Odlyzko zeros6 vs our certified 6e6 list** (script
+below this log line; /tmp/zeta-dl/):
+- Format: clean (one value per line, 9 decimals, strictly increasing).
+- First 18,858 zeros (t < 17,143): agree with our list to < 1e-4
+  (measured max 6.9e-5 below 13.4e3).
+- t ≳ 1.7e4: SAME zeros, but OUR list is at a lower precision class:
+  (1.7e4, 1e5): off the 2.5e-4 grid by ≤ 1.25e-4 (half-grid refined);
+  (1e5, 6e6): **EXACTLY on the 2.5e-4 grid** (max distance 5e-5 — i.e.
+  the day-009 GPU-walk flip points were stored unreﬁned). So our "6e6
+  certified list" is CERTIFIED AS A COUNT (N(t) censuses, dt/dt2 twin
+  agreement) but NOT position-certified beyond ~1e-4-5e-4 precision
+  above t ≈ 1.7e4. Documentation that implied 1e-9 positions for the
+  whole list is wrong; this is the correction.
+- **REAL COUNT DISCREPANCY: our list is missing exactly 4 zeros below
+  1.132e6 — two close pairs: (66678.075857, 66678.095342) gap 0.019485
+  and (71732.901208, 71732.915909) gap 0.014701** — the classical twin-
+  gate drop of the early walk pipeline (the "52 extras" were our list
+  overshooting Odlyzko's file end, not real). True N(6e6) is therefore
+  12,193,873 pending the LMFDB cross-check over (1.132e6, 6e6] (no
+  public table covers that stretch — LMFDB does).
+- Impact check on existing measurements (all UNCHANGED): PinCensus R_k
+  (per-zero derivative ~ 4k/t²·δt ≤ 1e-13 at t=1e5, k=10); BSY-1
+  (boundary shifts of ±2.5e-4 cancel between the two adjacent cells of
+  each zero to first order; within the 2e-5 quadrature budget); P1.1e
+  best-straddle (R-ratio per-zero shift ~ δγ²/t²-class, ~1e-8); N(t)
+  counts invariant; min-gap floor (2.5e-4 quantization ≪ 0.0023 twin
+  floor) unchanged. So no prior VERDICT is affected; the correction is
+  to the list's precision class and 4 count values.
+
+**Decision (plan switch):**
+1. The running 32-worker (6e6,1e7] walk finishes its dt2 twin pass
+   imminently; KEEP (its count census of (6e6,1e7] is our only
+   independent check of that stretch — positions remain quantized,
+   count is the value). Not killed.
+2. Canonical lists from now on = **LMFDB** (±2.5e-31): first 21.5M
+   zeros = [14.13, ~1.03e7] in ONE request (owner's browser, CAPTCHA
+   seat; URL: lmfdb.org/zeros/zeta/list?N=1&t=&limit=21500000&
+   download=yes). Fallback if the big range is captcha-walled even
+   after solve: my 1-request-at-a-time 100k-page puller (script
+   /tmp/zeta-dl/day023_lmfdb_pull.sh) after the captcha state cools.
+3. Verification protocol when the file lands (script staged in
+   scripts/rh/day024_lmfdb_verify.py — to be written): format,
+   monotone, first zero 14.13472514173469379..., N(1e7) vs main term,
+   3-way cross-check vs Odlyzko zeros6 (2M) + our 6e6 list (counts +
+   the 4 twin-pair slots), then the whole post-walk pipeline runs on
+   the LMFDB list (PinCensus, P1.1e, BSY→1e7) — and the 10⁸ "bigger
+   list" step (prize plan step 7) collapses from a 2-week compute
+   projection to a ~40GB download decision.
+4. Provenance split per the honesty rule: list VALUES = CITED (LMFDB,
+   URL + ±2.5e-31 spec + Reliability page); our 6e6 list + the 1e7
+   walk remain as INDEPENDENT count audits of the public data (our
+   engine, our twin passes) — that pair is now the cross-check
+   artifact, which is exactly what independent provenance was for.
+5. Process note (honest): the 32-worker walk launched without a
+   public-dataset search first — a violation of the owner's research-
+   order directive on this atom (the early-day list was built before
+   that directive existed; the 1e7 extension should have searched).
+   Recorded so the pattern is visible.
