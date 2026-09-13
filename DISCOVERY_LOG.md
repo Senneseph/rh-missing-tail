@@ -2537,3 +2537,28 @@ below this log line; /tmp/zeta-dl/):
    order directive on this atom (the early-day list was built before
    that directive existed; the 1e7 extension should have searched).
    Recorded so the pattern is visible.
+
+## 24b — LMFDB/Platt list acquired, canonical 1e7 dataset built + verified (2026-09-13)
+Per the research-first order: the dataset is the public one, downloaded — not computed.
+- Source: beta.lmfdb.org/riemann-zeta-zeros/ data/ (Platt-format shards, cookie-open); 15 shards
+  zeros_14 … zeros_21446000 (650 MB), filename = start-t; blocks: [t0,t1,Nt0,Nt1] header + 13-byte
+  cumulative 104-bit deltas; zero = t0 + Z·2^−101. Format from the server's own
+  examples/every_millionth_zero/platt_zeros.py (Bober), not guessed.
+- Decoder verified BEFORE trust: first 2000 zeros vs the independent 31-digit API list →
+  float-identical (max diff 0.0 @ float64); zero #1 = 14.134725141734693790457251983562477 (31 digits).
+- **Canonical: scripts/rh/zeros_T10000000_lmfdb.txt = 21,136,125 zeros, t ∈ [14.134… , 9,999,999.327],
+  strictly monotone, sha256 in scripts/rh/lmfdb_lists.sha256 (505 MB on disk; repo carries the
+  HEAD-2.1M anchor + regeneration scripts — full list regenerates in ~15 min via convert_shards.py).**
+- (6e6,1e7] slice: scripts/rh/zeros_hi1e7_band.txt = 8,942,252 zeros (for the running 32-way walk's merge).
+- Cross-checks ALL PASS:
+  (a) N(1e7) = 21,136,125 = our certified 6e6 count (12,193,869) + slice − … i.e. +4 vs the 21,136,121
+      extrapolated from our list — the +4 = the 4 missing zeros, confirmed below.
+  (b) vs Odlyzko zeros6 (2,001,052 zeros, 9 digits): max diff 3.0e-9 = their precision. PASS.
+  (c) vs our 6e6 list on [14,6e6]: exactly 4 LMFDB extras, zero others within 5e-4 = our known
+      missing twin pairs, now at full precision:
+      (66678.0758573116…, 66678.0953419418…) gap 0.0194846 and
+      (71732.90120787236…, 71732.91590934775…) gap 0.01470147.
+  (d) min gap on [14,1e7] = 0.0023234 (1,519 twin pairs < 0.02) — the 6e6 twin floor 0.002300 HOLDS at 1e7.
+- Impact: every instrument now runs on ±2.5e-31 positions instead of our 2.5e-4 grid:
+  PinCensus (B=1e7), P1.1e best-straddle (the T* verdict), BSY-1 → 1e7, P0.1 certify. The 32-way
+  walk keeps running for its (6e6,1e7] count cross-check only (positions already superseded).

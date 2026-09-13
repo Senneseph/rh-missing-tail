@@ -2,3 +2,6 @@
 node_modules/
 __pycache__/
 *.pyc
+# full 1e7 zero lists (regenerable: scripts/rh/convert_shards.py over 15 LMFDB/Platt shards; see DISCOVERY_LOG 24b)
+scripts/rh/zeros_T10000000_lmfdb.txt
+scripts/rh/zeros_hi1e7_band.txt
