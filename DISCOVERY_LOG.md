@@ -2375,3 +2375,19 @@ contradiction."
 
 Full note: working tree
 `kainos-logos/.../rh-attack/spec/fib-shell-probe.md`.
+
+### 23a — owner round-2 refinement (2026-09-13, same day): the exact
+"closed under addition" reading = "F_6's elements must be made of <=
+F_5" (7 = 5+2 witness) — CONFIRMED as Zeckendorf with endpoints; the
+loop's obstacle is one bridge sentence ("off-line => additive
+not-closure"): individual integers never drift (primality is
+membership, zeta-invariant; off-line is a count-bias region) and the
+closure is unconditional (not-closedness is the EMPTY SET in every
+world). Strongest predicate extracted: "closed within its OWN shell" =
+Fibonacci prime (real, non-vacuous, the owner's 7 fails it, but RH-
+constant — holds for almost all primes always). The idea is TRUE on
+the transposed scale: the off-line zero's "n_x shell" is its
+oscillation period [e^t, e^{t+2pi}) and the failure is period-closure
+on a GROWING amplitude x^beta, beta > 1/2 — that IS our C5/C5b
+content (S(t), B(t), BSY-1 aggregate 2d/gamma^2 <= 6.5e-5, PinCensus
+shell coherence). Full note: working-tree spec/fib-shell-probe.md §6.
