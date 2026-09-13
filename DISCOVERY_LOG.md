@@ -2315,3 +2315,63 @@ squaring: |∏_{t>0}(1−s/ρ)e^{s/ρ}|² = P(s) for real s — a 4.5%
 "gap" was exactly the missing square (1.046926² = 1.0960635 = c_1
 to all printed digits). Both errors are code-checked now (script is
 the single source; hand arithmetic retired).
+
+## 23 — day-023 — CONSIDERED (owner intuition probe, no stick): the
+## F-shell "closed under addition" route — Zeckendorf is the reference,
+## the loop type-checks false, the transposed kernel is the PinCensus
+
+Owner walk-thought (2026-09-13): "Fibonacci groups are closed under
+addition — F-numbers up to n construct all members of each n_x shell by
+addition; hypothesize off-line primes must belong to an F-shell; an
+off-line number would be not-closed by addition for its shell —
+contradiction."
+
+- **The solid reference (missing one) exists and compiles in our
+  toolchain**: Zeckendorf's theorem (Zeckendorf 1972) — every positive
+  integer = sum of distinct NON-CONSECUTIVE Fibonacci numbers, uniquely;
+  equivalently every m in [1, F_{k+1}) is additively constructed from
+  F_2..F_k (max non-consecutive sum with F_2..F_k = F_{k+1} − 1).
+  `Mathlib.Data.Nat.Fib.Zeckendorf` (`Nat.zeckendorf`) verified on disk
+  in our pinned v4.33.1 mathlib. The sharp "closed under addition"
+  version: addition in φ-based Ostrowski numeration is a finite-state
+  computation for the quadratic base φ (Baranwal–Schaeffer–Shallit,
+  arXiv 1407.7000; Schmitthenner) — geometrically: bounded carries,
+  Sturmian/golden-rotation/cut-and-project (φ-quasicrystal) geometry.
+- **Where the loop breaks (exactly)**: step "off-line ⇒ additively not
+  closed" is false for EVERY integer — Zeckendorf is unconditional (it
+  sees no ζ, no RH). Off-line zeros produce, per the explicit formula,
+  −x^ρ/ρ in ψ(x) — a log-scale OSCILLATION (x^β·cos(t log x) bias of
+  prime position), not an additive DEFECT. Dirichlet/log-scale algebra
+  vs additive-monoid algebra: the bridge proposition is asked for free
+  and does not exist. Off-line = bias, not defect. (On-line analogues:
+  Littlewood's prime-counting oscillations; the S(t) wobble in our
+  closure is the zero-side face of the same oscillation.)
+- **The transposed kernel (real, measured, already designed)**: in the
+  algebra where off-line zeros DO leave a trace (P(s) at trivial
+  points), "shells + additive closure" is exactly the PinCensus: each
+  k ∈ {1,2,3,5,10} is a shell and the same off-line pair contributes
+  −4k/t + 4kδ/t² — the SAME term, LINEAR in k, in every shell; the
+  census tests precisely that additive coherence. Measured null result,
+  all five shells (R_k all negative, k² tail-model terms, no +4k²/t²
+  missing-pair signature), three-route-verified pins, 12.19M certified
+  zeros. Coincidence noted honestly: {1,2,3,5} ⊂ {1,2,3,5,10} are the
+  Fibonacci numbers 1,2,3,5 — the design needs no F-ness (k-linearity
+  is in the identity), but it is where the hunch touched.
+- **Geometry, measured**: zero ladder is log-structured (γ_k ~ 2πk/
+  log(2πk), GUE gaps to 10²⁰ per Montgomery–Odlyzko; our list
+  reproduces it, twin floor 0.002300) — an F-shell is a binning of a
+  log ladder, not its native scale; no φ self-similarity exists to
+  exploit. No computation needed this turn.
+- **The right habitat for "not-closed" fib structures is a finite
+  quotient** (owner's own verified law, wiki 2026-08-28): c ≡ 3 (mod 5)
+  does not merge into the main 20-cycle of the fib-pair dynamics, it
+  closes on its own 4-cycle — a verified orphan component. On the ζ
+  side the finite-quotient habitat is residue bias/oscillation, again
+  not additive defect.
+- **Verdict**: not an RH route in literal form (step-3 falsehood is a
+  type mismatch, not a missing bound); the kernel is transposed and
+  already measured null. Banked reference: Zeckendorf 1972. No tripwire,
+  no stick, no parked compute.
+
+Full note: working tree
+`kainos-logos/.../rh-attack/spec/fib-shell-probe.md`.
