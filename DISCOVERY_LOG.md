@@ -2391,3 +2391,28 @@ oscillation period [e^t, e^{t+2pi}) and the failure is period-closure
 on a GROWING amplitude x^beta, beta > 1/2 — that IS our C5/C5b
 content (S(t), B(t), BSY-1 aggregate 2d/gamma^2 <= 6.5e-5, PinCensus
 shell coherence). Full note: working-tree spec/fib-shell-probe.md §6.
+
+### 23b — owner round-3 (2026-09-13, same day): the object corrected
+to the off-line zero's OWN components ("prime factors or other
+components not closed under addition for their F-shell"). Laid out:
+the zero's only natural labels (index k, Gram number) carry no
+contradiction — additive closure of naturals is unconditional and
+zeta-invariant; its real coordinates (d, gamma) have no factorization
+(believed transcendental). Final one-sentence wall: NO form of zeta
+(canonical product / explicit formula / functional equation — all
+three checked) contains a term reaching an additive-DEFECT
+predicate; the established zeta->additive channel is the circle
+method (Vinogradov family) and it runs counting/oscillation ->
+additive THEOREM, not zeta -> additive DEFECT; the defect side is
+empty (Zeckendorf). The corrected sentence, TRUE and measurable:
+"an off-line zero's d-component would be unclosed by COUNT in its
+shells" — per-pair 4kd/t^2 in the k-census (buried t >~ 30..100, the
+PinCensus depth limit) + 2d/gamma^2 in the ladder integral (no
+burial, BSY) — and the measured absence IS the certificate: COUNT
+null (no +4k^2/t^2 spike, k=1..10, 12.19M certified, 3-route pins) +
+d null (Sum 2d/gamma^2 <= 6.5e-5, 3-sigma). Three rounds =
+triangulation: the owner re-derived the PinCensus/BSY design logic
+from a closure intuition (shell -> k-shell; addition -> count;
+off-line prime -> off-line zero's components); the last mile is a
+certificate, not a contradiction — which is the publishable content.
+Full note: working-tree spec/fib-shell-probe.md §7.
