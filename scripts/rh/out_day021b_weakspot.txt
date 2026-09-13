@@ -1,0 +1,29 @@
+list: 466655 zeros (<=3e5: 466655)
+g = 50000.406752 (candidate nearest 50000): closed-vs-direct R(t=50001.1984, d=0.005): |diff| = 2.17e-16
+  g = 50000.406752 (candidate nearest 50000) progress t=49990.41
+  g = 50000.406752 (candidate nearest 50000) progress t=49992.41
+  g = 50000.406752 (candidate nearest 50000) progress t=49994.41
+  g = 50000.406752 (candidate nearest 50000) progress t=49996.41
+  g = 50000.406752 (candidate nearest 50000) progress t=49998.41
+  g = 50000.406752 (candidate nearest 50000) progress t=50000.41
+  g = 50000.406752 (candidate nearest 50000) progress t=50002.41
+  g = 50000.406752 (candidate nearest 50000) progress t=50004.41
+  g = 50000.406752 (candidate nearest 50000) progress t=50006.41
+  g = 50000.406752 (candidate nearest 50000) progress t=50008.41
+  g = 50000.406752 (candidate nearest 50000) progress t=50010.41
+  g = 50000.406752 (candidate nearest 50000) progress t=50012.41
+
+g = 50000.406752 (candidate nearest 50000): WORST over [49988.4, 50012.4] at t = 49990.656752: resid = 65.91129441, dev = 69.40177926, MARGIN = 1.05295731
+g = 50000.406752 (candidate nearest 50000): 5 smallest margins:
+   t = 49990.6568  resid = 65.9  dev = 69.4  margin = 1.05
+   t = 49992.1568  resid = 3.13  dev = 3.3  margin = 1.05
+   t = 49992.9068  resid = 17.5  dev = 18.4  margin = 1.05
+   t = 49989.9068  resid = 40.7  dev = 42.8  margin = 1.05
+   t = 49996.1568  resid = 2.0  dev = 2.11  margin = 1.05
+
+--- DAY-021b WEAK-SPOT REFINEMENT SUMMARY ---
+weak-spot refinement: pair near t = 50000, DT = 0.25, 10-delta grid
+extension worst margin = 1.053  (t = 49990.6568)
+day-020 baseline (t ~ 1000 region): worst margin = 112.6
+route-A pointwise decision resid < dev: HOLDS on the extended windows
+RUN COMPLETE

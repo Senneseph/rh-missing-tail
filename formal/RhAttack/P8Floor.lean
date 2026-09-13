@@ -37,8 +37,10 @@ HONEST SPLIT (per-atom):
 
 CITATIONS (outline §11 + day logs): DLMF 25.2.8/25.2.9/25.2.12;
   Apostol 12.21; Platt–Trudgian (S̄, M(G,t)); the measured margin
-  (≥ 14× at the pair's own height vs the local audit floor; ceiling
-  t ≈ 10⁴–2×10⁴) — PINNED, not proven here.
+  (the day-021 cross-band record: 15 candidate pairs across
+  [~970, 10⁵], closing worst point 1.053 at g ≈ 5·10⁴, recovery to
+  2.269 at 10⁵; the t ~ 10³ region alone is 112.6) — PINNED, not
+  proven here.
 
 DISCIPLINE: constants are computed, never recalled; no
 `theorem ... riemann`; one green commit per atom; probe files deleted

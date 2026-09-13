@@ -952,3 +952,64 @@ travels with it.
 
 RhAttack/Closure.lean C7 section; full build 17430 jobs 0 errors
 0 sorry; B5-CORE PASS; smoke PASS; probe deleted.
+
+## 18. The cross-band record: coverage to 10^5, the closing margin re-pins to 1.053 (2026-021 records)
+
+**Why.** The C6 audit-point closure needs the per-point package at
+the hypothetical minimal off-line pair — of arbitrary height.  The
+day-020 record covered the t ~ 10^3 region (4 pairs, worst margin
+112.6).  This step extends the band to its feasible ceiling and
+characterizes the margin's dependence on t.
+
+**The runs** (scripts `day022_worstcase_ext.py` family, records
+`out_day022_worstcase_ext.txt`, `out_day022b_upperband.txt`,
+`out_day022c_upperband.txt`, `out_day021b_weakspot.txt`; same
+functions verbatim from day020, W = 12, 7-delta grid; the weak spot
+refined to DT = 0.25 + 10-delta grid):
+
+  candidate pair g (nearest actual zero)   worst-point margin
+  -----------------------------------------  ------------------
+  ~980/1000/1020/1040 (day-020, 4 pairs)     112.6 (t = 1006.79)
+  2000.434515   87.39      2499.862043     73.07
+  2999.494493   62.46      4000.017285     45.99
+  5000.234317   34.68      7499.635017     19.09
+  10000.065344  11.29      15000.008791    5.494
+  20000.128166  3.325      29999.710030    1.756
+  50000.406752  1.053 (CLOSING, t = 49990.656752,
+                     resid = 65.91129441, dev = 69.40177926,
+                     exact margin 1.05295731)
+  100000 (pair 99999.700948)  2.269 (RECOVERY — resid =
+                     0.03019; the LHS is oscillatory, the
+                     envelope decays, the point values
+                     fluctuate)
+
+**Findings.**
+  1. The pointwise decision resid < dev HOLDS at every scanned
+     point up to t = 10^5 (15 candidate pairs, straddle windows,
+     DT = 0.5, weak spot DT = 0.25).  No sub-1 point measured.
+  2. The per-region worst margin erodes from 112.6 at 10^3 to the
+     closing 1.053 at 5*10^4 — roughly C/t on the envelope — then
+     the 10^5 window recovers to 2.269 (resid oscillatory; the
+     decay is an envelope statement, not monotone).
+  3. The weak spot is a REAL 1.05 plateau, not a grid artifact
+     (refined grid confirms the same margin at a different t,
+     49990.656752; resid/dev ~ 0.95 across the local neighborhood).
+  4. The closing number RE-PINS: p9_margin_min 112.6 -> 1.0529
+     (computed under-estimate of 1.05295731 — the printed 8-digit
+     values re-verify only at the under-estimate; C7.3
+     p9_weakspot_record_margin machine-checks it).  The t ~ 10^3
+     value 112.6 survives as the region record (C7.1).
+
+**Honest state of the S8 claim (updated).** Verified on the
+measured band [~970, 10^5] at grid resolution for 15 candidate
+pair heights. Remaining measurement price, stated: (i) g-space
+gaps between the 15 candidate heights (a hypothetical pair at an
+unscanned height has no package record at its own height); (ii)
+bands below ~970 and beyond 10^5; (iii) the 5% margin at the weak
+spot is within the grid-resolution comfort zone.  The Lean
+composition (C0/C5/C5b/C1a/C6/C7) is unchanged by this step — it
+consumes whatever the record says at each point.
+
+Leaning: the re-pin is a DOCUMENTATION + pin change (p9_m_pin
+follows); C7.3 added; full build 17430 jobs 0 errors 0 sorry;
+B5-CORE PASS; smoke PASS.

@@ -1,0 +1,38 @@
+list: 466655 zeros (<=3e5: 466655)
+g = 50000.406752 (candidate nearest 50000): closed-vs-direct R(t=50001.1984, d=0.005): |diff| = 2.17e-16
+  g = 50000.406752 (candidate nearest 50000) progress t=49992.41
+  g = 50000.406752 (candidate nearest 50000) progress t=49996.41
+  g = 50000.406752 (candidate nearest 50000) progress t=50000.41
+  g = 50000.406752 (candidate nearest 50000) progress t=50004.41
+  g = 50000.406752 (candidate nearest 50000) progress t=50008.41
+  g = 50000.406752 (candidate nearest 50000) progress t=50012.41
+
+g = 50000.406752 (candidate nearest 50000): WORST over [49988.4, 50012.4] at t = 49992.9068: resid = 17.5, dev = 18.43, MARGIN = 1.053
+g = 50000.406752 (candidate nearest 50000): 5 smallest margins:
+   t = 49992.9068  resid = 17.5  dev = 18.4  margin = 1.05
+   t = 49989.9068  resid = 40.7  dev = 42.8  margin = 1.05
+   t = 49988.4068  resid = 0.486  dev = 0.512  margin = 1.05
+   t = 49998.4068  resid = 11.9  dev = 12.5  margin = 1.05
+   t = 49991.4068  resid = 27.8  dev = 29.3  margin = 1.05
+g = 99999.700948 (candidate nearest 100000): closed-vs-direct R(t=100000.4925, d=0.005): |diff| = 8.36e-17
+  g = 99999.700948 (candidate nearest 100000) progress t=99991.70
+  g = 99999.700948 (candidate nearest 100000) progress t=99995.70
+  g = 99999.700948 (candidate nearest 100000) progress t=99999.70
+  g = 99999.700948 (candidate nearest 100000) progress t=100003.70
+  g = 99999.700948 (candidate nearest 100000) progress t=100007.70
+  g = 99999.700948 (candidate nearest 100000) progress t=100011.70
+
+g = 99999.700948 (candidate nearest 100000): WORST over [99987.7, 100011.7] at t = 100007.2009: resid = 0.03019, dev = 0.0685, MARGIN = 2.269
+g = 99999.700948 (candidate nearest 100000): 5 smallest margins:
+   t = 100007.2009  resid = 0.0302  dev = 0.0685  margin = 2.27
+   t = 100010.2009  resid = 0.035  dev = 0.0799  margin = 2.28
+   t = 100001.2009  resid = 0.0869  dev = 0.203  margin = 2.33
+   t = 99997.7009  resid = 0.134  dev = 0.313  margin = 2.34
+   t = 99987.7009  resid = 0.0194  dev = 0.0453  margin = 2.34
+
+--- DAY-022c HIGH-BAND EXTENSION SUMMARY ---
+extension band: candidate pairs near t = 50000, 100000
+extension worst margin = 1.053  (t = 49992.9068)
+day-020 baseline (t ~ 1000 region): worst margin = 112.6
+route-A pointwise decision resid < dev: HOLDS on the extended windows
+RUN COMPLETE

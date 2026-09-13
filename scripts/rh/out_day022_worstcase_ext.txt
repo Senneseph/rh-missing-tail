@@ -1,0 +1,113 @@
+list: 466655 zeros (<=3e5: 466655)
+g = 2000.434515 (candidate nearest 2000): closed-vs-direct R(t=2001.2261, d=0.005): |diff| = 1.77e-16
+  g = 2000.434515 (candidate nearest 2000) progress t=1992.43
+  g = 2000.434515 (candidate nearest 2000) progress t=1996.43
+  g = 2000.434515 (candidate nearest 2000) progress t=2000.43
+  g = 2000.434515 (candidate nearest 2000) progress t=2004.43
+  g = 2000.434515 (candidate nearest 2000) progress t=2008.43
+  g = 2000.434515 (candidate nearest 2000) progress t=2012.43
+
+g = 2000.434515 (candidate nearest 2000): WORST over [1988.4, 2012.4] at t = 2003.9345: resid = 0.01651, dev = 1.442, MARGIN = 87.39
+g = 2000.434515 (candidate nearest 2000): 5 smallest margins:
+   t =  2003.9345  resid = 0.0165  dev = 1.44  margin = 87.4
+   t =  1992.9345  resid = 0.00604  dev = 0.547  margin = 90.5
+   t =  2009.4345  resid = 0.0082  dev = 0.775  margin = 94.5
+   t =  1991.4345  resid = 0.0259  dev = 2.8  margin = 108.0
+   t =  1988.4345  resid = 0.0043  dev = 0.482  margin = 112.0
+g = 2499.862043 (candidate nearest 2500): closed-vs-direct R(t=2500.6536, d=0.005): |diff| = 3.3e-16
+  g = 2499.862043 (candidate nearest 2500) progress t=2491.86
+  g = 2499.862043 (candidate nearest 2500) progress t=2495.86
+  g = 2499.862043 (candidate nearest 2500) progress t=2499.86
+  g = 2499.862043 (candidate nearest 2500) progress t=2503.86
+  g = 2499.862043 (candidate nearest 2500) progress t=2507.86
+  g = 2499.862043 (candidate nearest 2500) progress t=2511.86
+
+g = 2499.862043 (candidate nearest 2500): WORST over [2487.9, 2511.9] at t = 2509.8620: resid = 0.0322, dev = 2.353, MARGIN = 73.07
+g = 2499.862043 (candidate nearest 2500): 5 smallest margins:
+   t =  2509.8620  resid = 0.0322  dev = 2.35  margin = 73.1
+   t =  2494.3620  resid = 0.0495  dev = 3.93  margin = 79.5
+   t =  2504.3620  resid = 0.0127  dev = 1.02  margin = 80.7
+   t =  2488.8620  resid = 0.0164  dev = 1.43  margin = 86.9
+   t =  2511.3620  resid = 0.0418  dev = 3.8  margin = 91.0
+g = 2999.494493 (candidate nearest 3000): closed-vs-direct R(t=3000.2861, d=0.005): |diff| = 3.58e-16
+  g = 2999.494493 (candidate nearest 3000) progress t=2991.49
+  g = 2999.494493 (candidate nearest 3000) progress t=2995.49
+  g = 2999.494493 (candidate nearest 3000) progress t=2999.49
+  g = 2999.494493 (candidate nearest 3000) progress t=3003.49
+  g = 2999.494493 (candidate nearest 3000) progress t=3007.49
+  g = 2999.494493 (candidate nearest 3000) progress t=3011.49
+
+g = 2999.494493 (candidate nearest 3000): WORST over [2987.5, 3011.5] at t = 3003.4945: resid = 0.001388, dev = 0.08668, MARGIN = 62.46
+g = 2999.494493 (candidate nearest 3000): 5 smallest margins:
+   t =  3003.4945  resid = 0.00139  dev = 0.0867  margin = 62.5
+   t =  2987.9945  resid = 0.00455  dev = 0.306  margin = 67.2
+   t =  2997.9945  resid = 0.0314  dev = 2.16  margin = 68.9
+   t =  2994.9945  resid = 0.00481  dev = 0.35  margin = 72.8
+   t =  3004.9945  resid = 0.0103  dev = 0.771  margin = 75.1
+g = 4000.017285 (candidate nearest 4000): closed-vs-direct R(t=4000.8089, d=0.005): |diff| = 7.41e-17
+  g = 4000.017285 (candidate nearest 4000) progress t=3992.02
+  g = 4000.017285 (candidate nearest 4000) progress t=3996.02
+  g = 4000.017285 (candidate nearest 4000) progress t=4000.02
+  g = 4000.017285 (candidate nearest 4000) progress t=4004.02
+  g = 4000.017285 (candidate nearest 4000) progress t=4008.02
+  g = 4000.017285 (candidate nearest 4000) progress t=4012.02
+
+g = 4000.017285 (candidate nearest 4000): WORST over [3988.0, 4012.0] at t = 3996.5173: resid = 0.03197, dev = 1.47, MARGIN = 45.99
+g = 4000.017285 (candidate nearest 4000): 5 smallest margins:
+   t =  3996.5173  resid = 0.032  dev = 1.47  margin = 46.0
+   t =  4002.0173  resid = 0.00702  dev = 0.336  margin = 47.8
+   t =  4007.5173  resid = 0.0687  dev = 3.52  margin = 51.2
+   t =  4003.5173  resid = 0.053  dev = 2.83  margin = 53.4
+   t =  3988.0173  resid = 0.0992  dev = 5.34  margin = 53.8
+g = 5000.234317 (candidate nearest 5000): closed-vs-direct R(t=5001.0259, d=0.005): |diff| = 2.58e-17
+  g = 5000.234317 (candidate nearest 5000) progress t=4992.23
+  g = 5000.234317 (candidate nearest 5000) progress t=4996.23
+  g = 5000.234317 (candidate nearest 5000) progress t=5000.23
+  g = 5000.234317 (candidate nearest 5000) progress t=5004.23
+  g = 5000.234317 (candidate nearest 5000) progress t=5008.23
+  g = 5000.234317 (candidate nearest 5000) progress t=5012.23
+
+g = 5000.234317 (candidate nearest 5000): WORST over [4988.2, 5012.2] at t = 5009.2343: resid = 0.0008141, dev = 0.02823, MARGIN = 34.68
+g = 5000.234317 (candidate nearest 5000): 5 smallest margins:
+   t =  5009.2343  resid = 0.000814  dev = 0.0282  margin = 34.7
+   t =  5003.7343  resid = 0.1  dev = 3.56  margin = 35.5
+   t =  5010.7343  resid = 0.00487  dev = 0.182  margin = 37.4
+   t =  4998.2343  resid = 0.0226  dev = 0.846  margin = 37.4
+   t =  4993.7343  resid = 0.0768  dev = 2.91  margin = 37.8
+g = 7499.635017 (candidate nearest 7500): closed-vs-direct R(t=7500.4266, d=0.005): |diff| = 1.84e-17
+  g = 7499.635017 (candidate nearest 7500) progress t=7491.64
+  g = 7499.635017 (candidate nearest 7500) progress t=7495.64
+  g = 7499.635017 (candidate nearest 7500) progress t=7499.64
+  g = 7499.635017 (candidate nearest 7500) progress t=7503.64
+  g = 7499.635017 (candidate nearest 7500) progress t=7507.64
+  g = 7499.635017 (candidate nearest 7500) progress t=7511.64
+
+g = 7499.635017 (candidate nearest 7500): WORST over [7487.6, 7511.6] at t = 7509.1350: resid = 0.06657, dev = 1.271, MARGIN = 19.09
+g = 7499.635017 (candidate nearest 7500): 5 smallest margins:
+   t =  7509.1350  resid = 0.0666  dev = 1.27  margin = 19.1
+   t =  7491.1350  resid = 0.13  dev = 2.5  margin = 19.2
+   t =  7489.6350  resid = 0.011  dev = 0.212  margin = 19.2
+   t =  7510.6350  resid = 0.134  dev = 2.64  margin = 19.7
+   t =  7502.1350  resid = 0.0347  dev = 0.686  margin = 19.8
+g = 10000.065344 (candidate nearest 10000): closed-vs-direct R(t=10000.8569, d=0.005): |diff| = 8.6e-17
+  g = 10000.065344 (candidate nearest 10000) progress t=9992.07
+  g = 10000.065344 (candidate nearest 10000) progress t=9996.07
+  g = 10000.065344 (candidate nearest 10000) progress t=10000.07
+  g = 10000.065344 (candidate nearest 10000) progress t=10004.07
+  g = 10000.065344 (candidate nearest 10000) progress t=10008.07
+  g = 10000.065344 (candidate nearest 10000) progress t=10012.07
+
+g = 10000.065344 (candidate nearest 10000): WORST over [9988.1, 10012.1] at t = 10006.5653: resid = 0.5177, dev = 5.846, MARGIN = 11.29
+g = 10000.065344 (candidate nearest 10000): 5 smallest margins:
+   t = 10006.5653  resid = 0.518  dev = 5.85  margin = 11.3
+   t =  9991.0653  resid = 0.408  dev = 4.67  margin = 11.4
+   t = 10005.0653  resid = 0.0661  dev = 0.762  margin = 11.5
+   t = 10008.0653  resid = 0.0343  dev = 0.396  margin = 11.5
+   t =  9992.5653  resid = 0.0407  dev = 0.472  margin = 11.6
+
+--- DAY-022 CROSS-BAND EXTENSION SUMMARY ---
+extension band: candidate pairs near t = 2000, 2500, 3000, 4000, 5000, 7500, 10000
+extension worst margin = 11.29  (t = 10006.5653)
+day-020 baseline (t ~ 1000 region): worst margin = 112.6
+route-A pointwise decision resid < dev: HOLDS on the extended windows
+RUN COMPLETE
