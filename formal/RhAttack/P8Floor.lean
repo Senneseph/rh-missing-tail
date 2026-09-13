@@ -15,17 +15,16 @@ proof; the height bound T never appears.  Atom plan (spec §2):
       b5NoffIsPolynomial, b5NoffPos).
   A4: comparison floor < detector under the measurement-pinned constants.
 
-STATUS (2026-09-16, Lean 4.33.1): A0 + A1 GREEN.  A2–A4 in progress,
-one at a time.  No sorry.
+STATUS (2026-09-16, Lean 4.33.1): A0, A1, A2a GREEN.  A2b (the M(G,t) wire) next, then A3-A4, one at a time.  No sorry.
 
 HONEST SPLIT (per-atom):
   A0: LEAN-PROVEN (definitional + ring).
   A1: LEAN-PROVEN (norm_sub_le).
-  A2 (coming): B-term LEAN-PROVEN (P4Limit `p4_T4_bound`); the
+  A2a: B-term LEAN-PROVEN (P4Limit `p4_T4_bound`); the
     Re s = ½ equality `W_n = p4_em_expr` CITED (DLMF 25.2.8 / Apostol
     Thm 12.21 — see P4Limit L5 header); M-term from the B3/B3Sbar
     finite core (see those headers).
-  A3/A4 (coming): see the spec; constants PINNED by measurement
+  A2b/A3/A4 (coming): see the spec; constants PINNED by measurement
     (P4Float gate; day-017/019 audit).
 
 CITATIONS (outline §11 + day logs): DLMF 25.2.8/25.2.9/25.2.12;
@@ -76,3 +75,37 @@ theorem p8_triangle (s : ℂ) (n : ℕ) (K : ℂ) :
     ‖riemannZeta s - K‖ ≤ ‖p4_Wn s n‖ + ‖K - (p4_P n s - p4_I n s)‖ := by
   rw [(p8_same_object s n K).symm]
   exact norm_sub_le (p4_Wn s n) (K - (p4_P n s - p4_I n s))
+
+/- P8Floor · A2 — the definition-side floor bound.
+
+A2a (LEAN-PROVEN): the B_n(t) bound for the EM expression at the critical
+    line s = ½ + it — `p4_T4_bound` (P4Limit L5.e) instantiated.
+A2c (CITED): the equality `W_n(s) = p4_em_expr s n` at Re s = ½ —
+    DLMF 25.2.8 / Apostol Thm 12.21 (both sides agree on Re s > 1 by
+    P4Limit `p4_identity` and are analytic on {Re s > −1}\{−1,−2};
+    numerics confirm at the 1/√M rate).  So the machine-provable floor
+    for the W_n term is: ‖W_n(½+it)‖ = ‖em_expr‖ ≤ p8_B t n — the
+    equality is the cited bridge, the inequality is the proven bound.
+A2b (next atom): ‖K − (P_n − I)‖ ≤ M(G, t) — the finite-kernel gap,
+    wired to the P5/P6 assets (B3/B3Sbar: `b3BoundExplicit`, K̄(G)).
+-/
+
+/-- The P4 floor at the critical line: B_n(t) (three terms, all
+    machine-proven by `p4_T4_bound`; s = ½ + it). -/
+noncomputable def p8_B (t : ℝ) (n : ℕ) : ℝ :=
+    (1 / 2) * (n : ℝ) ^ (-1 / 2 : ℝ) +
+    (‖((1 / 2 : ℝ) : ℂ) + (t : ℂ) * Complex.I‖ / 12) * (n : ℝ) ^ (-3 / 2 : ℝ) +
+    (Real.sqrt 3 / 540) *
+      ‖(((1 / 2 : ℝ) : ℂ) + (t : ℂ) * Complex.I) *
+        (((1 / 2 : ℝ) : ℂ) + (t : ℂ) * Complex.I + 1) *
+        (((1 / 2 : ℝ) : ℂ) + (t : ℂ) * Complex.I + 2)‖ * (n : ℝ) ^ (-5 / 2 : ℝ)
+
+/-- Atom A2a (LEAN-PROVEN): ‖p4_em_expr s n‖ ≤ p8_B t n for
+    s = ½ + it — `p4_T4_bound` instantiated at the critical line. -/
+theorem p8_B_floor {t : ℝ} {n : ℕ} (hn : 0 < n) :
+    ‖p4_em_expr (((1 / 2 : ℝ) : ℂ) + (t : ℂ) * Complex.I) n‖ ≤ p8_B t n := by
+  set s := ((1 / 2 : ℝ) : ℂ) + (t : ℂ) * Complex.I with hs
+  have hsre : s.re = 1 / 2 := by
+    dsimp only [s]
+    simp
+  exact p4_T4_bound hsre hn
