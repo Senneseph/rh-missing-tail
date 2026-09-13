@@ -1,0 +1,28 @@
+list: 12193869 zeros (G = 6000000.0)
+
+--- (1) AUDIT: composite product at trivial zeros vs Bernoulli target ---
+      zeta'(-2): closed-form = -0.030448457 | mpmath diff = -0.030448457 | fwd-diff = -0.030448457
+s0 =   -2  (first-order) target = zeta'/main' = (1.09606 + 3.70465e-33j)
+        composite = (1.02303 + 0.0j)
+        REL GAP = 0.06663   (E_left = ln|target| - Re comp = 0.06896)
+      zeta'(-4): closed-form = 0.0079838115 | mpmath diff = 0.0079838115 | fwd-diff = 0.0079838115
+s0 =   -4  (first-order) target = zeta'/main' = (1.43687 + 4.85657e-33j)
+        composite = (1.14459 + 0.0j)
+        REL GAP = 0.2034   (E_left = ln|target| - Re comp = 0.2274)
+      zeta'(-6): closed-form = -0.0058997591 | mpmath diff = -0.0058997591 | fwd-diff = -0.0058997591
+s0 =   -6  (first-order) target = zeta'/main' = (2.22962 + 7.536e-33j)
+        composite = (1.39325 + 0.0j)
+        REL GAP = 0.3751   (E_left = ln|target| - Re comp = 0.4702)
+
+--- (2) CHANNEL BOUND: single-zero move effect at s0 = -2k ---
+  |f_off/f_on - 1| ~ 2 k |delta| / t^2  (detection scale of the
+  trivial-zero channel for a zero of height t moved by delta)
+t =       1000 | k=1: 1.00e-08 2.00e-07 1.00e-05 | k=2: 2.00e-08 4.00e-07 2.00e-05 | k=3: 3.00e-08 6.00e-07 3.00e-05
+t =      10000 | k=1: 1.00e-10 2.00e-09 1.00e-07 | k=2: 2.00e-10 4.00e-09 2.00e-07 | k=3: 3.00e-10 6.00e-09 3.00e-07
+t =     100000 | k=1: 1.00e-12 2.00e-11 1.00e-09 | k=2: 2.00e-12 4.00e-11 2.00e-09 | k=3: 3.00e-12 6.00e-11 3.00e-09
+t =    1000000 | k=1: 1.00e-14 2.00e-13 1.00e-11 | k=2: 2.00e-14 4.00e-13 2.00e-11 | k=3: 3.00e-14 6.00e-13 3.00e-11
+
+comparison: the closure's own-height channel sees O(1) kernel
+change (|R-1| >= 0.9975, day-010 d4d3) from the SAME zero — the
+trivial-zero channel is weaker by ~ t^2/(2 k delta) at height t.
+TRIVIAL0 PROBE COMPLETE

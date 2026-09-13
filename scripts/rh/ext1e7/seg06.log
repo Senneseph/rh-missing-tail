@@ -1,0 +1,7 @@
+P-0.8 ECHO [seg06]: W0=6750000.0 W1=6875000.0 width=125000.0
+  N(W0) = 12193869 (certified list; N(6e6) = 12193869)
+  DT=5.0e-04 (n=250000000)  DT2=2.5e-04 (n=500000000)  BLK=4096  MAXN=1262
+  t_end check: W0+DT*n = 6875000.000000 (W1=6875000.0)
+  twin floor 0.002300 (DT/floor = 0.217; DT2/floor = 0.109)
+  expected wall ~ 12500 s at 6.00e+04 samples/s (measured)
+  engine gate numpy-vs-host max |diff| = 4.682e-08 (tol 1e-6)

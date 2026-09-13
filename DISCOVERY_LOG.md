@@ -2162,3 +2162,100 @@ recovery.
 measurement — the fingerprint check (measured margin vs the
 model-predicted asymptote) is what separates the two.  Measure E
 before trusting any |K|-based number.
+
+## 21 — day-023 — the statistics disentangled: straddle is the closure
+## metric, the pole is not, and the crossing at ~2.5e4 is the composite's
+## error curve, not the squeeze (list repair launched)
+
+### 21.1 — Three candidate statistics, one closure-faithful (Lean-wired)
+P1.1 diagnostics (this day) produced three forms of the per-candidate
+pair statistic. Which is THE closure metric settled from the Lean
+statement itself (Closure.lean, `p9_closure_rh_of_margin`): the margin
+hypothesis `hmargin (t0 d0) ... ∃ Q dev flo Mf Bfloor Mr, Q >= dev − Mf ∧ ...`
+contains **no evaluation point for Q** — the witness is free. The witness
+is what the audit packs: the day-010 d4d3 audit protocol evaluated the
+LHS/zero/def sides at **straddle points** of the candidate height (g±ε),
+never at the pole g itself (R is singular there). So:
+
+  (a) **window-min** (P1.1c as originally run: min over the 0.5-step
+      window of |ζ|·floor_R/(B+resid)) — over-strict: tests points where
+      |ζ| → small (zeta minima), fails for the wrong reason (0.24 at the
+      10³ anchor where the day-010 audit found the 14× class).
+  (b) **pole form** (P1.1d: K^no-g(g)·off4(g) vs B(g)+defect(g)) —
+      C1a-exact but ~(d/g)²-class (1e-10 at g~1e3, d~0.005): positive
+      (C1a true) yet BELOW the P4 floor (0.044 at 1e3) — the pole mass
+      does not power a squeeze. The day-021 spec sentence "the closure
+      is evaluated at the pole where C1a gives the exact value; the
+      window floor is non-critical" was an over-read of the free-witness
+      statement. **Correction (this log):** the closure witnesses are
+      realized at straddle points; the C1b window-floor context is the
+      closure's zero-side input (it is NOT demotable); C1a remains a
+      true pole-branch characterization, not the squeeze engine.
+  (c) **best-straddle** (P1.1e: max over the window of
+      |ζ(t)|·min_δ|R(g,δ,t)−1|/(B(t)+resid(t))) — the closure-faithful
+      statistic (witness t_eval free = best straddle).
+
+### 21.2 — The corrected trend (best-straddle, bridge-true zero side)
+`scripts/rh/day022_p11e_straddle.py` → `out_day022_p11e_straddle.txt`:
+
+  g~      best_margin   argmax t    E(t_best)   def side
+  999.79  122.1         988.29      −0.001      B+0.0065 sound
+  5000.2  33.1          5004.73     −0.023      B+0.249  sound
+  7500    16.2          7507.1      −0.042      defect growing
+  10000   10.2          9997.6      −0.083      defect growing
+  15000   4.56          15011.5     −0.188      defect > B
+  20000   2.30          19996.6     −0.349      defect-dominated
+  30000   0.753         29994.2     −0.831      defect-dominated
+  50000   0.054         49989.9     −2.97       (f−1)|ζ| = 40.4
+  75000   0.001         75009.9     −7.39       (f−1)|ζ| = 1552
+  100000  3.42          100011.2    +0.32       (f−1)|ζ| = 4.6
+
+  **Crossing 1 at T\* ≈ 2.5×10⁴.** Diagnosis: the ZERO side
+  (|ζ|·floor_R) stays O(1–17) all the way — no visible decay of the
+  squeeze's zero side. The deficit side is the measured composite defect
+  (f−1)|ζ| with f = e^{−E} the log-convex (B,∞) model inflation of
+  DISCOVERY_LOG 20 (E: −0.001 → −7.39 over the band). **The crossing is
+  the composite-kernel model error, not the squeeze.** The composite is
+  the closure's object of analysis (Q, Mf, Mr are all composite-relative);
+  when it is bad (t/B large), the squeeze is unmeasurable through it no
+  matter how the statistic is written.
+
+  Verified-regime anchors hold: 122× (10³, day-010 14× class at the
+  specific audited straddle; 122× is the best over the ±12 window) and
+  33× (5e3, consistent with the 33.9864 pin's 34.68 window record).
+
+### 21.3 — Consequence (pre-registered rule, honest reading)
+The tripwire ("corrected own-height margin < 1 in verified regime") did
+NOT fire: in the regime where the composite is sound (|E| ≲ 0.1,
+t ≲ 2×10⁴ at B = 6e6) the best-straddle margin is 2.3–122 — no crossing.
+The 2.5×10⁴ crossing is a **composite-validity boundary** (t/B = 1/240
+there, (t/B)² growth per DAY-010 D1), not a route-A death signal. The
+true trend above 2.5×10⁴ is UNKNOWN with B = 6e6 (masked).
+
+**Repair, now running** (locally, 32-core, ~1.5–2 h wall per measured
+7.2e4 samples/s per process — inside the owner's ≤1-day local rule):
+`scripts/rh/day023_ext1e7_supervisor.py` (+ `_seg.py` worker), 32
+parallel P-0.8-compliant flip-walk segments covering (6e6, 1e7]
+(DT=5e-4 + DT2 twin certificate; twin floor 0.002300 re-measured from
+the certified 6e6 list; engine gate numpy-vs-host < 1e-6 per segment).
+Output: `zeros_T10000000_ext_full.txt` (~21.1e6 zeros; merge + N-main
+check at completion). With B = 1e7: t/B = 1/10 at t = 1e5 (sound),
+1/40 at 2.5e5 — the P1.1e re-run on the repaired list answers
+DEFINITIVELY whether the true squeeze survives 2.5×10⁴→1e5 (the
+T\* question), after which P1.2 (uniform theorem, the open-math part)
+takes the trend data as its empirical premise.
+
+### 21.4 — Trivial-zero channel (owner question, probed, closed)
+"Does an off-line zero show at the trivials?" — the channel is real but
+weak and is NOT a contradiction route: at s₀ = −2k the nontrivial-zero
+product is pinned to a zero-set-independent constant
+(ζ′(s₀)/main′(s₀), all three cross-verified to < 1e-8: closed form,
+mpmath diff, one-sided diff — `day022_trivial0_probe.py`,
+`out_day022_trivial0_probe.txt`); a single off-line zero at height t
+moves that pin by O(k·δ/t²) (1e-8 at t = 1e³, 1e-14 at 1e⁶) — the
+own-height C1a channel is ~1e3–1e6× stronger per zero. Side value
+retained: the probe is an independent machine audit, and it confirmed
+the DISCOVERY_LOG 20 localization — the 12M product machinery is
+honest at low heights (composite at s₀ = −2 within 6.7% of the
+zero-set-invariant target, degrading 20.3% at −4 and 37.5% at −6 in
+step with the t/B tail-model E-curve, not a machinery bug).

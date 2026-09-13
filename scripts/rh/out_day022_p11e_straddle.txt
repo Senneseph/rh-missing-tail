@@ -1,0 +1,31 @@
+P1.1e run: 10 candidates (best-straddle closure statistic)
+
+--- P1.1e BEST-STRADDLE CLOSURE STATISTIC ---
+g          best_marg     t_best    zero_c    def_c    resid      zeta        E
+999.7916     122.124   988.2916    6.1322   0.0502   0.0065    6.2760  -0.0010
+   (worst over window = 0.242 at t = 1008.7916; 10^3 ANCHOR (day-010 straddle 14x class))
+5000.2343     33.137  5004.7343   10.7014   0.3229   0.2494   10.6821  -0.0231
+   (worst over window = 0.370 at t = 5009.2343; 5e3 VERIFIED-REGIME ANCHOR)
+7499.6350     16.209  7507.1350    4.5653   0.2816   0.1941    4.5562  -0.0417
+   (worst over window = 1.171 at t = 7494.1350; 7500 mask)
+10000.0653    10.180  9997.5653    8.7317   0.8577   0.7581    8.7363  -0.0832
+   (worst over window = 0.295 at t = 10011.5653; 10000 mask)
+15000.0088     4.564 15011.5088    9.4226   2.0644   1.9441    9.4081  -0.1878
+   (worst over window = 0.511 at t = 14989.0088; 15000 mask)
+20000.1282     2.302 19996.6282    7.9500   3.4535   3.3157    7.9529  -0.3485
+   (worst over window = 0.091 at t = 20002.1282; 20000 mask)
+29999.7100     0.753 29994.2100    5.0562   6.7187   6.5511    5.0581  -0.8308
+   (worst over window = 0.076 at t = 29993.7100; 30000 mask)
+50000.4068     0.054 49989.9068    2.1747  40.5762  40.3612    2.1756  -2.9731
+   (worst over window = 0.030 at t = 49994.4068; 50000 mask)
+75000.3706     0.001 75009.8706    0.9621 1552.2930 1552.0304    0.9619  -7.3868
+   (worst over window = 0.001 at t = 74993.8706; 75000 mask)
+99999.7009     3.423 100011.2009   16.8605   4.9250   4.6223   16.8566   0.3205
+   (worst over window = 0.163 at t = 99990.2009; 100000 mask)
+
+BEST across all g = 122.124 at g = 999.7916;  WORST best-straddle = 0.001 at g = 75000.3706
+reading: best-straddle margin > 1 at g  => that g's pair
+package could squeeze (composite valid there, E ~ 0);
+E >> 0 (mask band) => the COMPOSITE is the limiting object
+(repair list; DISCOVERY_LOG 20/21).
+P1.1e RUN COMPLETE

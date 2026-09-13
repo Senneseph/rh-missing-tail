@@ -1,0 +1,30 @@
+P1.1d run: 10 candidates (own-height closure metric, 32-core)
+
+--- P1.1d OWN-HEIGHT CLOSURE METRIC (corrected) ---
+g            margin_own        E       e^E zero_own        B  def_own   worst_d
+999.7916        0.0000  -0.0090    0.9911   0.0000   0.0438   0.0438     0.005
+   (K^no-g = 2270.6459, |off4|@worst = 0.0000, g ~ 10^3  (DAY-010 ANCHOR: own-height story ~14x class))
+5000.2343       0.0000  -0.0160    0.9841   0.0000   0.0735   0.0735     0.005
+   (K^no-g = 8687.0374, |off4|@worst = 0.0000, g = 5000.23 (verified-regime anchor: O(10) class expected))
+7499.6350       0.0000  -0.0418    0.9591   0.0000   0.0875   0.0875     0.005
+   (K^no-g = 16576.4915, |off4|@worst = 0.0000, g ~ 7500 (mask band))
+10000.0653      0.0000  -0.0869    0.9167   0.0000   0.0996   0.0996     0.005
+   (K^no-g = 25342.5010, |off4|@worst = 0.0000, g ~ 10000 (mask band))
+15000.0088      0.0000  -0.1898    0.8271   0.0000   0.1202   0.1202     0.005
+   (K^no-g = 20412.2325, |off4|@worst = 0.0000, g ~ 15000 (mask band))
+20000.1282      0.0000  -0.3592    0.6982   0.0000   0.1378   0.1378     0.005
+   (K^no-g = 154583.1633, |off4|@worst = 0.0000, g ~ 20000 (mask band))
+29999.7100      0.0000  -0.8377    0.4327   0.0000   0.1675   0.1675     0.005
+   (K^no-g = 85571.7124, |off4|@worst = 0.0000, g ~ 30000 (mask band))
+50000.4068      0.0000  -2.9853    0.0505   0.0000   0.2150   0.2150     0.005
+   (K^no-g = 5995566.5147, |off4|@worst = 0.0000, g ~ 50000 (mask band))
+75000.3706      0.0000  -7.4104    0.0006   0.0000   0.2625   0.2625     0.005
+   (K^no-g = 809594096.4795, |off4|@worst = 0.0000, g ~ 75000 (mask band))
+99999.7009      0.0000   0.3238    1.3824   0.0000   0.3027   0.3027     0.005
+   (K^no-g = 667345.5112, |off4|@worst = 0.0000, g ~ 100000 (mask band))
+
+OVERALL WORST margin_own = 0.0000 at g = 29999.7100
+candidates with margin_own > 1: 0;  <= 1: 10
+PRE-REGISTERED TRIPWIRE: a corrected own-height margin crossing 1
+at height T* => route-A pointwise squeeze dies above T* (ceiling).
+P1.1d RUN COMPLETE
