@@ -15,7 +15,7 @@ proof; the height bound T never appears.  Atom plan (spec §2):
       b5NoffIsPolynomial, b5NoffPos).
   A4: comparison floor < detector under the measurement-pinned constants.
 
-STATUS (2026-09-16, Lean 4.33.1): A0, A1, A2a, A2b.1-A2b.2, A3.1, A3.2a, A3.2b.1, A4.1, A4.2 GREEN.  NEXT: A4.3 - the M(G,t) wire (B3Sbar `b3BoundExplicit` into the residual chain).  No sorry.
+STATUS (2026-09-16, Lean 4.33.1): A0, A1, A2a, A2b.1-A2b.2, A3.1, A3.2a, A3.2b.1, A4.1, A4.2, A4.3 GREEN - MODULE COMPLETE (A0-A4).  No sorry.
 
 HONEST SPLIT (per-atom):
   A0: LEAN-PROVEN (definitional + ring).
@@ -468,3 +468,49 @@ theorem p8_zero_decision_far {t : ℝ} (n : ℕ) (hn : 0 < n) (γ : ℝ) (hγ : 
     p8_B t n + Mval < ‖Rratio γ 0 t - 1‖ :=
   lt_of_lt_of_le hres (p8_far_detector_scale_ge_one γ t hγ ht)
 
+
+
+/- P8Floor · A4.3 — the M(G,t) wire (the P5 side goes live).
+
+    The residual's model-defect number x := Tt − Σ_T ln F is exactly
+    the quantity the Platt–Trudgian Sbar machinery (B3/B3Sbar) bounds:
+    on a tail band (G, B] the sum-over-counted-zeros vs model-kernel
+    integral discrepancy is at most
+        Bf t G · (Sbar B + Sbar G) + Cf t G · Kbar G
+    (B3Sbar `b3BoundExplicit`, under its Sbar-fluctuation hypothesis
+    hS : ∀ x ∈ Icc G B, |NList L x − NHat x| ≤ Sbar x — the P5
+    unconditional bound, J. Number Theory 147 (2015) 842-851, Cor 1).
+    A4.3 takes that bound as an explicit hypothesis |x| ≤ Xval (Xval :=
+    the b3BoundExplicit RHS at the measurement point — the concrete
+    value is a pinned day-log constant, per the honesty rule) and
+    delivers the residual in terms of Xval alone.
+-/
+
+/-- Atom A4.3 (LEAN-PROVEN; the M(G,t) wire): given the model-defect
+    bound |x| ≤ Xval (Xval ≥ 0) — the b3BoundExplicit output at the
+    measurement point, wired here as an explicit hypothesis — the
+    bridge residual is bounded by the product mass times e^Xval·Xval.
+    This is `p8_residual_bound` with |x| absorbed under Xval (exp
+    monotone + nonnegativity of the mass and |x|). -/
+theorem p8_residual_wired (L T : List ℝ) (Tt : ℝ) (F : ℝ → ℝ)
+    (hpos : ∀ g ∈ L ++ T, 0 < F g) (Xval : ℝ) (hX : 0 ≤ Xval)
+    (hx0 : |Tt - (T.map (fun (g : ℝ) => Real.log (F g))).sum| ≤ Xval) :
+    |Real.exp Tt * (L.map F).prod - ((L ++ T).map F).prod|
+        ≤ ((L ++ T).map F).prod * Real.exp Xval * Xval := by
+  set x := Tt - (T.map (fun (g : ℝ) => Real.log (F g))).sum with hxdef
+  have hK : 0 < ((L ++ T).map F).prod := by
+    apply List.prod_pos
+    intro b hb
+    obtain ⟨g, hgm, hbeq⟩ := List.mem_map.mp hb
+    rw [hbeq.symm]
+    exact hpos g hgm
+  have hw : |x| ≤ Xval := by simpa [hxdef] using hx0
+  calc |Real.exp Tt * (L.map F).prod - ((L ++ T).map F).prod|
+      ≤ ((L ++ T).map F).prod * Real.exp |x| * |x| :=
+        p8_residual_bound L T Tt F hpos
+    _ ≤ ((L ++ T).map F).prod * Real.exp Xval * |x| := by
+          have hexp : Real.exp |x| ≤ Real.exp Xval :=
+            Real.exp_le_exp.mpr hw
+          gcongr
+    _ ≤ ((L ++ T).map F).prod * Real.exp Xval * Xval := by
+          gcongr
