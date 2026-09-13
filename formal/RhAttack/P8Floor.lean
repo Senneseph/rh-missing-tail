@@ -24,8 +24,16 @@ HONEST SPLIT (per-atom):
     Re s = ½ equality `W_n = p4_em_expr` CITED (DLMF 25.2.8 / Apostol
     Thm 12.21 — see P4Limit L5 header); M-term from the B3/B3Sbar
     finite core (see those headers).
-  A2b/A3/A4 (coming): see the spec; constants PINNED by measurement
-    (P4Float gate; day-017/019 audit).
+  A2b: LEAN-PROVEN (B3 `b3ResidualDecomp` + ring; `p8_abs_exp_sub_one_le`
+    both-sign on `add_one_lt_exp` + `one_le_exp`; no MVT).
+  A3: LEAN-PROVEN (`p8_noff_delta_min` on `b5NoffIsPolynomial`;
+    `p8_detector_abs_lower` on `abs_dist_sub_le`; the δ = 0 closed forms
+    `p8_pref_omega_zero` / `p8_detector_norm_at_zero` on `b5Abs`).
+  A4.1: LEAN-PROVEN (far regime ‖R−1‖ ≥ 1).  A4.2: far decision
+    LEAN-PROVEN symbolically; near floor PINNED (day-017/019 audit).
+    A4.3: LEAN-PROVEN (the Sbar-side |x| ≤ Xval hypothesis is the
+    `b3BoundExplicit` output at the measurement point — the concrete
+    Xval is a pinned day-log constant).
 
 CITATIONS (outline §11 + day logs): DLMF 25.2.8/25.2.9/25.2.12;
   Apostol 12.21; Platt–Trudgian (S̄, M(G,t)); the measured margin
@@ -35,6 +43,26 @@ CITATIONS (outline §11 + day logs): DLMF 25.2.8/25.2.9/25.2.12;
 DISCIPLINE: constants are computed, never recalled; no
 `theorem ... riemann`; one green commit per atom; probe files deleted
 after use; numerics sanity-check only.
+
+COMPOSITION ROOT (how the atoms bring the §10 statement together):
+  the outline's LHS is split by A1 (`p8_triangle`) into
+  ‖W_n‖ + ‖K − (P_n − I)‖.
+    1. ‖W_n‖ — the P4 side: A2a (`p8_B_floor`) instantiates the
+       P4Limit L5 bound at s = ½+it as p8_B t n (the three-term floor).
+    2. ‖K − (P_n − I)‖ — the P5/P6 side: A2b (`p8_residual_exact` +
+       `p8_residual_bound`) is the product mass times a function of
+       the model-defect x; A4.3 (`p8_residual_wired`) then absorbs
+       |x| under Xval = the B3Sbar `b3BoundExplicit` output — the M(G,t)
+       of the spec — so this side becomes mass·e^Xval·Xval.
+    3. The RHS — min_δ f(δ,t): A3 routes it through B5's closed form
+       (`p8_detector_abs_lower` → `b5Abs`); A3.2b.1 gives the exact δ = 0
+       value; A4.1 proves the far-regime floor (‖R−1‖ ≥ 1, γ ≥ 1,
+       t ≥ 2γ); A4.2 pins the near-regime floor (0.9975) and states the
+       decision `p8_B t n + Mval < ‖R(γ,0,t) − 1‖` (far) / the pinned
+       near counterpart.
+  The statement then holds pointwise wherever the floor + mass sit
+  below the regime's detector floor — far: LEAN-PROVEN arithmetic;
+  near: under the measurement-pinned constant (the spec's §3 price).
 -/
 
 import Mathlib

@@ -650,3 +650,41 @@ step makes the whole calc's type strict — promote to `le_of_lt` first.
 Full-repo build GREEN (17428 jobs, 0 errors); zero `sorry`/`admit` in
 P8Floor; B5-CORE CHECK PASS (worst 5.978e-26); rhattack smoke exe: E7a /
 B-4 / B-5 / B-3 all CROSS-CHECK PASS.
+
+## 11. P8Floor completes — A4.2 + A4.3, module (A0-A4) green (2026-09-16)
+
+Two atoms close the line (commits `04a633d`, `1d8e68f`):
+
+**A4.2 — the decision under the pinned floors.** `p8_f_near_pin := 0.9975`
+stated as the *measurement-pinned* near-regime floor (day-017/019 audit
+grid: |t−γ| ≤ 10.21, δ ∈ {0.005, 0.5}, measured 0.997500–1.020104) —
+explicitly NOT a Lean-proven bound (the audit is its authority);
+`p8_f_far_floor := 1` (the A4.1b LEAN-PROVEN far floor); and
+`p8_zero_decision_far`: outline §10's decision inequality in symbolic
+form — `p8_B t n + Mval < ‖R(γ,0,t) − 1‖` for γ ≥ 1, t ≥ 2g whenever
+floor + P5-mass < 1 (`lt_of_lt_of_le` over A4.1b).
+
+**A4.3 — the M(G,t) wire (P5 side live).** `p8_residual_wired`: given
+the model-defect bound `|x| ≤ Xval` (Xval = the B3Sbar
+`b3BoundExplicit` RHS `Bf t G·(Sbar B + Sbar G) + Cf t G·Kbar G` at the
+measurement point, wired as an explicit hypothesis per the honesty
+rule), the bridge residual `e^{Tt}∏_L F − ∏_{L∪T} F` is
+`mass·e^Xval·Xval`. Two `gcongr` steps (exp monotone + nonnegativity of
+mass and |x|).
+
+**Module composition (header now carries it):** the §10 LHS splits by
+A1 into ‖W_n‖ + ‖K − (P_n − I)‖; side 1 = p8_B (A2a, P4Limit L5 bound
+at ½+it); side 2 = mass·e^Xval·Xval (A2b + A4.3 + Sbar); the RHS
+detector routed through B5 closed forms (A3), far floor 1 (A4.1,
+LEAN-PROVEN), near floor 0.9975 (A4.2, PINNED). The statement holds
+pointwise wherever floor + mass sit below the regime floor.
+
+New lessons: bare `gcongr` in 4.33.1 auto-discharges core + side goals
+from local context — bullets cause "No goals to be solved"; quoted
+heredocs carry `\uXXXX` VERBATIM into Lean (use literal UTF-8 or a
+python pass after); a python `s[:i]` slice before writing truncated the
+A4.3 block once (caught by re-reading the file tail before committing —
+verify after every slice-based rewrite).
+
+Full-repo build GREEN (17428 jobs); zero sorry/admit; B5-CORE CHECK
+PASS; gate smoke all PASS.
