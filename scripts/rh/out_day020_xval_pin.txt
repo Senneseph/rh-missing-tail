@@ -1,0 +1,16 @@
+list: 138065 zeros, heights up to 99999.7
+
+--- Xval pin: audit point t=1000.041572, band (2t, 1e5] ---
+t = 1000.041572   band (G, B] = (2000.083144, 100000.0]   n_band = 136548
+actual sum  = -543.74112770383
+Tt (model)  = -543.72187385967
+x = Tt - sum = 0.019253844165493   |x| = 0.019253844165493
+Sbar G = 3.714302855   Sbar B = 4.265028205
+Bf = 0.3335835312   Cf = 2666890.055   Kbar G = 4.892471781e-7
+Xval (b3BoundExplicit RHS) = 3.9665418656908
+hS at G: |NList - NHat| = 0.06933189267 <= Sbar G = 3.714302855   True
+hS at B: |NList - NHat| = 3.55841924 <= Sbar B = 4.265028205   True
+MARGIN  = Xval / |x| = 206.013
+hS-premise + |x| <= Xval : PASS
+
+XVAL PIN PASS (hS premise verified + |x| <= Xval)

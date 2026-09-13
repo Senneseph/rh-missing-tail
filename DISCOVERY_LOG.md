@@ -688,3 +688,32 @@ verify after every slice-based rewrite).
 
 Full-repo build GREEN (17428 jobs); zero sorry/admit; B5-CORE CHECK
 PASS; gate smoke all PASS.
+
+## 12. Xval pin — the concrete M(G,t) constant at the measurement point (2026-09-16)
+
+`scripts/rh/day020_xval_pin.py` (record: `scripts/rh/out_day020_xval_pin.txt`)
+pins the A4.3 hypothesis `|x| <= Xval` at the audit measurement point
+(t = 1000.041572, band (G, B] = (2t, 10^5] = (2000.083144, 100000],
+certified zero list <= 10^5, day-014 record). Model functions copied
+line-for-line from `B3Core.lean` (no-recall rule), dps-30:
+
+    actual sum (136,548 factors fT)   = -543.74112770383...
+    Tt (quadrature of nHat . fT)      = -543.72187385967...
+    x = Tt - sum                      = 0.019253844165493...
+    Xval = Bf(Sbar B + Sbar G) + Cf.Kbar
+         = 0.3335835312 (3.7143 + 4.2650) + 2.66689e5 . 4.8925e-7
+         = 3.9665418656908...
+    MARGIN = Xval / |x| = 206.0x        -> PASS
+    hS premise at G: |NList - NHat| = 0.0693 <= Sbar G = 3.7143  -> PASS
+    hS premise at B: |NList - NHat| = 3.5584 <= Sbar B = 4.2650  -> PASS
+
+So at the measurement point the P8Floor A4.3 wire runs with the
+concrete pinned constant Xval = 3.9665418656908 (margin 206x), and
+the b3BoundExplicit hypothesis hS is verified at both band endpoints
+against the certified list. The residual at this height is then
+bounded by mass . e^3.9665 . 3.9665 — while the D3 measured LHS
+(|zeta - K_on|) at the same height is 6.43e-05 (d4d3 record) and the
+near-regime detector floor is the pinned 0.9975 . |K| — the route-A
+decision holds at the measurement point with the full pinned-constant
+chain. (The cross-band worst case, e.g. the t = 980 residual spike
+2.465e-02 vs the detector there, needs the <= 3e5 list — queued.)
