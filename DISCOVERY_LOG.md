@@ -430,3 +430,76 @@ and pinned in the `P4Limit` header. Rule for this codebase: when
 rewriting into a generic-`RCLike`-land term, spell the scalar as
 `algebraMap (R := ℝ) (A := ℂ) (·)`. Costs nothing (`algebraMap x = (x : ℂ)`
 is `rfl`); saves a day.
+
+## 7. The missing-tail law turns green — and the draft constant had to die (2026-09-13)
+
+**L4 of the P4 line is green** (`e1e3402`, on top of L1 `0af15f0`, L2
+`7d42ced`, L3 `5506b8f`): the two tail theorems of the rigorous P4
+statement,
+
+- `p4_op2c_bound` — |∫_{n..∞} B̂₂(x)·x^{−s−2} dx| ≤ √3/270 · ‖s+2‖ ·
+  n^{−5/2} (|s.re| = 1/2), proven by a **per-period integration by parts**
+  with the cubic period-1 extension `B3poly` of `B3` (periodicity from
+  the Bernoulli-3 identity, `B3poly(0)=B3poly(1)=0` kills the boundary
+  terms on every `[k, k+1]`, and `∫_0^1 B2 u · B3poly' du =
+  B3poly(1) − B3poly(0)` closed by `ring` — the identity B2 = B3'/3 is
+  what supplies the factor 1/3);
+- `p4_f2_tail_bound` — ‖∫_{n..∞} f̂″_{≥n}‖ = ‖s(s+1)‖ · ‖∫ B̂₂ x·x^{−s−2}‖
+  ≤ ‖s(s+1)‖ · √3/270 · ‖s+2‖ · n^{−5/2}, via `integral_congr_ae` +
+  `integral_smul`, the FTC for the `x^{−7/2}` integral (antiderivative
+  `−(2/5)·x^{−5/2}`, derivative bridge closed by `ring` on the rpow atom).
+
+**The constant, computed (the P4 numeric rule), and one wall of the
+numeric itself.** The final constant comes from the per-period IBP route:
+the factor 1/3 (B2 = B3'/3) times max `|B3poly|` = √3/36 (at
+u = (3±√3)/6, exact) times `∫_n^∞ x^{−(s.re+3)} dx` = (2/5)·n^{−5/2}
+— pure multiplication, `(1/3)·(√3/36)·(2/5) = 2√3/540 = √3/270`, i.e.
+**√3/270 · ‖s+2‖ · n^{−5/2}**, with no slack anywhere.
+
+Two numeric findings, both recorded as they actually are:
+
+1. **A false alarm, corrected.** Early in the day a direct
+   `mp.quad(integrand, [n, ∞])` evaluation of the B̂₂-kernel tail
+   appeared to violate the draft constant √3/108 at large n
+   (ratios up to ~9). Cross-checking with two independent reliable routes
+   — (a) an infinite quad of the IBP-transformed integrand B̂₃·x^{−s−3}
+   and (b) a per-period chunked quad sum with an analytic
+   max-kernel tail correction — agreed with each other to <1% and were
+   **5.4× smaller** than the direct-route value. The direct
+   infinite-quad over the periodic kernel is the broken number; the
+   corrected 35-point grid (t ∈ {0,1,2,5,10}, n ∈ {1,2,3,5,10,21,50},
+   overestimated tail) gives **0/35 violations for BOTH constants**,
+   worst ratios **LHS/(C108·|s+2|·n^{−5/2}) = 0.341** and
+   **LHS/(C270·|s+2|·n^{−5/2}) = 0.853**. Conclusion: the draft
+   constant √3/108 was **not** refuted — it simply has ~3× more slack;
+   the adopted √3/270 is the sharp one the IBP route produces exactly.
+   Lesson (filed): never let a single numeric integrator's verdict kill
+   or bless a formal constant; cross-route agreement first.
+2. The formal √3/270 theorem is consistent with the corrected numerics
+   (worst observed usage 0.853 < 1), as expected since the Lean proof
+   is the exact arithmetic of the IBP route.
+
+**Transferable Lean lessons (pinned in the P4Limit header):**
+
+1. `HasDerivAt.comp` in 4.33.1 takes the point as an explicit **first**
+   argument: `HasDerivAt.comp x hh₂ hh`.
+2. `ContinuousOn.intervalIntegrable` takes **no** endpoint arguments.
+3. `uIcc`'s lower bound is `min a b` — bridge with `min_eq_left` before
+   `nlinarith`.
+4. `tendsto_order` unpacks `Tendsto f l (𝓝 a)` into the two one-sided
+   eventual inequalities; and `le_of_tendsto (lim) (h : ∀ᶠ c, f c ≤ b) :
+   a ≤ b` takes an eventual upper bound straight to the limit — the
+   by_contra + `filter_upwards` dance is unnecessary (and
+   `filter_upwards` does not work on a goal of `False` anyway; it needs a
+   π-goal).
+5. `∀ᶠ` is a Prop, not a structure: no `.imp` dot; compose with
+   `filter_upwards [h1, h2] with x h1 h2`.
+6. `Nat.cast_pos`'s algebra argument is `α` — spell `(α := ℝ)` or the
+   instance search sticks.
+7. `ring` closes coefficient identities with rpow atoms
+   (`−(2/5)·(−5/2)·x^{−7/2} = x^{−7/2}`) — treat the rpow as a monomial
+   atom.
+
+Full repo build green (0 errors); all four runtime gates PASS. P4Limit
+now holds L1+L2+L3+L4; the remaining P4 layer is L5 (assemble the P4
+statement `|W_n(t)| ≤ B_n(t)` from the atoms).

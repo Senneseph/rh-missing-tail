@@ -49,15 +49,51 @@ header for the uIcc/Nat.cast_add/ContinuousOn.mono conventions):
     evaluation (L2).
   * `DifferentiableOn.continuousOn` (Calculus/FDeriv/Basic.lean:664).
 
-STATUS (2026-09-12, Lean 4.33.1): atoms L1, L2, L3 GREEN (L3: kernel
-absolute convergence + M→∞ passage); L4–L5 pending per the sketch.
-No sorry.
+STATUS (2026-09-13, Lean 4.33.1): atoms L1, L2, L3, L4 GREEN.  L4 is the
+missing-tail law (IBP route: `p4_op2c_bound` + `p4_f2_tail_bound`); L5
+(the `f1 ⊣ f2` closure) is assembled downstream.  No sorry.
 THEOREMS (L1): p4_f_hasDerivAt, p4_f1_hasDerivAt, p4_f2_hasDerivAt,
  p4_f1_at, p4_f2_at, p4_f1_on_Icc, p4_f2_on_Icc.
 THEOREMS (L2): p4_integral_closed, p4_finite_em2.
 THEOREMS (L3): p4_f2_abs_eq, p4_f2_continuousOn_Ioi, p4_f2_integrableOn_Ioi,
  p4_f2_integral_Ioi_eq, p4_kernel_integrableOn_Ioi, p4_kernel_tendsto,
  p4_f2_tendsto.
+THEOREMS (L4): B3poly, B3poly_at_0, B3poly_at_1, B3poly_max_val,
+ B3poly_min_val, abs_B3poly_le, p4_op2c_bound, p4_f2_tail_bound.
+
+L4 TRANSFERABLE NOTES (the IBP/missing-tail route):
+  * The missing-tail constant is NOT `sqrt(3)/108`.  Integrating by parts
+    twice with the periodic `B3poly` gives
+    `INT B2 x * x^(-s-2) = B3poly(x)*x^(-s-2)| + INT B3poly *
+    ((s+1)(s+2) * x^(-s-3))` and `|B3poly| <= sqrt(3)/36` at
+    `u=(3±sqrt 3)/6` (computed, never recalled).  The numeric refutation of
+    `sqrt(3)/108` happened on day-019; the `sqrt(3)/270 * ||s+2||` form is
+    what holds on a 15-point grid before formalization (P4 numeric rule).
+  * `HasDerivAt.comp` in 4.33.1 takes the point `x` as an explicit first
+    argument: `HasDerivAt.comp x (h2 : HasDerivAt h2 h2' (h x))
+    (h : HasDerivAt h h' x) : HasDerivAt (h2 ∘ h) (h2' * h') x`.
+  * `intervalIntegral.intervalIntegrable` (ContinuousOn form) takes NO
+    explicit endpoint arguments in 4.33.1; the pointwise
+    `continuousAt_rpow_const ... |>.continuousWithinAt` is the
+    one-sided-continuity idiom, and `uIcc`'s lower bound is a `min`
+    (bridge with `min_eq_left` before feeding it to `nlinarith`).
+  * `tendsto_order : Tendsto f l (𝓝 a) ↔
+    (∀ a' < a, ∀ᶠ b, a' < f b) ∧ (∀ a' > a, ∀ᶠ b, f b < a')` — the
+    one-sided eventual-inequality idiom.  AND: the eventual upper bound
+    passes to the limit directly via `le_of_tendsto (lim : Tendsto f x
+    (𝓝 a)) (h : ∀ᶠ c, f c ≤ b) : a ≤ b` (ClosedIicTopology + x.NeBot
+    instance) — this REPLACES the by_contra + `filter_upwards`-on-`False`
+    dance (`filter_upwards` needs a pi-goal, not `False`).
+  * `Filter.Eventually` is a Prop (`l.Eventually p = {x | p x} ∈ l`), so
+    there is NO `.imp` dot-notation on a `∀ᶠ`; to compose eventuals,
+    `filter_upwards [h1, h2] with x h1 h2` and feed separate names.
+  * For a real-constant times an interval integral, pull the constant out
+    with `intervalIntegral.integral_const_mul`, not `integral_smul` (which
+    is the `•` form — for ℂ-smul over ℂ, `c • z = c * z` is definitional).
+  * `Complex.norm_cpow_eq_rpow_re_of_pos` needs STRICT `0 < x`, and must be
+    applied BEFORE rewriting the exponent's real part; the endpoint forms
+    `((k+1 : ℕ) : ℝ)` vs `(k : ℝ) + 1` are not definitionally equal —
+    bridge with `Nat.cast_succ`.
 
 L3 TRANSFERABLE NOTES (keep — drafted from the published Gamma example,
 Mathlib/Analysis/SpecialFunctions/Gamma/Basic.lean, `Complex.
