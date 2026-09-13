@@ -753,3 +753,61 @@ d_min pin (S10, Route A's price): min over the measured grid edges
 d >= 0.005 — the floor is d-independent (P4 limit law) and the detector
 has no dead d window (P3: numerator a positive polynomial in d^2), so
 the measured lower edge d_min = 0.005 is the operative threshold.
+
+## 14. P9 Closure module GREEN — the §8 conditional closure (2026-09-16, goal turn)
+
+The next outline gap after P8 (spec: kainos-logos
+`plan/40-prize-islands/rh-attack/spec/closure-module-abstract.md`) is
+the §8 closure itself. New module `formal/RhAttack/Closure.lean`
+(P9), registered at `RhAttack.lean`. Full build GREEN (17430 jobs,
+0 errors, 0 sorry); B5-CORE CHECK PASS; rhattack smoke all PASS.
+
+Atoms (all machine-proven under the explicit measurement input):
+  - Pins: `p9_f_pin = 0.9975` (the near-regime detector floor,
+    day-010 d4d3 audit: |R−1| = 0.997500…1.020104 across d = 0.005
+    … 0.5 on |t−g| ≤ 10; closed form vs direct 4-zero to ~1e-16 in
+    the §13 run), `p9_d_min = 0.005` (the measured d-grid edge —
+    Route A's price; the floor is d-independent and the detector has
+    no dead-d window), `p9_margin_min = 112.6`, `p9_m_pin = 1/112.6`
+    (the §13 worstcase audit minimum margin; note: `p9_m_pin` is a
+    `noncomputable def` — ℝ division — a 4.33.1 gate to know).
+  - C1-far `p9_far_detector_ge_pin`: far regime (γ ≥ 1, t ≥ 2γ)
+    ‖R(γ,0,t)−1‖ ≥ f_pin — restated from P8Floor A4.1b (≥ 1 ≥
+    f_pin). The near/own-regime half stays PINNED; its promotion to a
+    Lean theorem is the open atom C1b (the branch-locus d,t
+    two-variable minimum of |R−1|) — the remaining "Route A's price".
+  - C5 `p9_point_contradiction`: the arithmetic squeeze — Q ≥ dev −
+    Mf (bridge + detector, ≥ side), dev ≥ flo, Q ≤ Bfloor + Mr
+    (P8Floor definition side, < side), Bfloor + Mr + Mf < flo → the
+    point is empty. Pure `linarith`.
+  - C0 `p9_min_offline_height`: over B0's structural ZeroSet (HNR/
+    HCJ/HFIN — no counting value enters), an off-line zero exists
+    iff a MINIMUM positive off-line pair height t0 exists, with an
+    off-line zero at exactly t0 and every off-line zero height ≥ t0.
+    Technique: positive-height representative (conjugation, the B0
+    RH_of_zeroD idiom), the finite slice as an explicit `set … with`
+    equation (local `let`s are opaque to the checker — the B5
+    lesson), membership iff's by `simpa [Finite.mem_toFinset,
+    Set.mem_inter_iff]`, then the Finset.image of the heights and
+    `Finset.isLeast_min'` (4.33.1 shape: `min'_le`/`min'_mem` take
+    (s, proof-of-nonempty) as EXPLICIT arguments in that order; the
+    `IsLeast`/`lowerBounds` route gives the minimum inequality for
+    the SAME nonempty proof — the subtype-instance `min' ⟨x, hx⟩`
+    form is a different noncomputable `inf'` value and does not `rfl`
+    against the `H`-instance).
+  - C5b `p9_closure_rh_of_margin`: the §8 closure. RH fails ⇒
+    (C0) a minimal off-line pair (t0, d0) exists ⇒ the squeezed
+    margin hypothesis at (t0, d0) (its six real witnesses ARE the
+    pinned/cited constants: the bridge-tail bound Mf, the detector
+    floor flo, the definition-side floor Bfloor + Mr) ⇒ C5 empty ⇒
+    contradiction ⇒ RH. Counting-free per §8's own words: only the
+    structural ZeroSet interface and the explicit measurement input
+    enter.
+
+Honest split: C0/C5/C5b/C1-far LEAN-PROVEN (C5b under the explicit
+hmargin — the module does not assume the measurements inside Lean);
+the near-regime detector floor PINNED (C1b OPEN). The composition is
+conditional by design: instantiating hmargin with the pinned
+constants (f_pin, d_min, m_pin + the P8Floor A4/Xval wires) is the
+day-020 numerical verification, and C1b is the remaining analysis
+price.

@@ -51,7 +51,17 @@ import RhAttack.P4Em2
 import RhAttack.P4Limit
 
 -- Day-020 (2026-09-16, goal turn): P8 Route A — the residual floor (the
--- < side of the §8 contradiction): A0 same-object reduction + A1
--- triangle split (GREEN); A2–A4 in progress per the spec
--- (kainos-logos plan/.../spec/p8floor-routeA-abstract.md).
+-- < side of the §8 contradiction): A0 same-object reduction, A1 triangle
+-- split, A2 B-floor + residual exact/bound, A3 detector δ-analysis, A4
+-- floor < detector decisions (far LEAN-PROVEN, near PINNED) + A4.3 the
+-- Sbar-side |x| ≤ Xval wire. MODULE COMPLETE (A0–A4), no sorry.
 import RhAttack.P8Floor
+
+-- Day-020 (2026-09-16, goal turn): P9 — the closure (outline §8): floor vs
+-- detector -> no off-line pair. The five machine-proven/pinned pieces
+-- composed into the conditional contradiction: pins (f_pin, d_min,
+-- margin_min, m_pin), C1-far (far-regime detector floor), C5 (the point
+-- squeeze), C0 (the minimal off-line pair height over B0), C5b (the §8
+-- closure under the explicit squeezed-margin hypothesis; the C1b
+-- own-regime detector-floor promotion remains the open analysis atom).
+import RhAttack.Closure
