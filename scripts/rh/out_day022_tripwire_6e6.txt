@@ -1,0 +1,153 @@
+list: 12193869 zeros (<=3e5: 12193869)
+g = 999999.793500 (candidate nearest 1000000): closed-vs-direct R(t=1000000.5851, d=0.005): |diff| = 3.29e-18
+  g = 999999.793500 (candidate nearest 1000000) progress t=999991.79
+  g = 999999.793500 (candidate nearest 1000000) progress t=999995.79
+  g = 999999.793500 (candidate nearest 1000000) progress t=999999.79
+  g = 999999.793500 (candidate nearest 1000000) progress t=1000003.79
+  g = 999999.793500 (candidate nearest 1000000) progress t=1000007.79
+  g = 999999.793500 (candidate nearest 1000000) progress t=1000011.79
+
+g = 999999.793500 (candidate nearest 1000000): WORST over [999987.8, 1000011.8] at t = 1000005.2935: resid = 0.07514, dev = 3.966e-11, MARGIN = 5.278e-10
+g = 999999.793500 (candidate nearest 1000000): 5 smallest margins:
+   t = 1000005.2935  resid = 0.0751  dev = 3.97e-11  margin = 5.28e-10
+   t = 999992.7935  resid = 0.75  dev = 3.96e-10  margin = 5.28e-10
+   t = 999993.2935  resid = 3.53  dev = 1.87e-9  margin = 5.29e-10
+   t = 999987.7935  resid = 0.353  dev = 1.87e-10  margin = 5.29e-10
+   t = 1000010.2935  resid = 0.546  dev = 2.89e-10  margin = 5.29e-10
+g = 1999999.812200 (candidate nearest 2000000): closed-vs-direct R(t=2000000.6038, d=0.005): |diff| = 8.26e-17
+  g = 1999999.812200 (candidate nearest 2000000) progress t=1999991.81
+  g = 1999999.812200 (candidate nearest 2000000) progress t=1999995.81
+  g = 1999999.812200 (candidate nearest 2000000) progress t=1999999.81
+  g = 1999999.812200 (candidate nearest 2000000) progress t=2000003.81
+  g = 1999999.812200 (candidate nearest 2000000) progress t=2000007.81
+  g = 1999999.812200 (candidate nearest 2000000) progress t=2000011.81
+
+g = 1999999.812200 (candidate nearest 2000000): WORST over [1999987.8, 2000011.8] at t = 2000003.8122: resid = 0.3322, dev = 6.661e-13, MARGIN = 2.005e-12
+g = 1999999.812200 (candidate nearest 2000000): 5 smallest margins:
+   t = 2000003.8122  resid = 0.332  dev = 6.66e-13  margin = 2.01e-12
+   t = 2000009.3122  resid = 0.0315  dev = 6.37e-14  margin = 2.02e-12
+   t = 1999988.3122  resid = 3.13  dev = 6.33e-12  margin = 2.02e-12
+   t = 1999991.3122  resid = 1.54  dev = 3.11e-12  margin = 2.02e-12
+   t = 2000000.8122  resid = 1.94  dev = 3.93e-12  margin = 2.02e-12
+g = 4000000.041500 (candidate nearest 4000000): closed-vs-direct R(t=4000000.8331, d=0.005): |diff| = 4.72e-17
+  g = 4000000.041500 (candidate nearest 4000000) progress t=3999992.04
+  g = 4000000.041500 (candidate nearest 4000000) progress t=3999996.04
+  g = 4000000.041500 (candidate nearest 4000000) progress t=4000000.04
+  g = 4000000.041500 (candidate nearest 4000000) progress t=4000004.04
+  g = 4000000.041500 (candidate nearest 4000000) progress t=4000008.04
+  g = 4000000.041500 (candidate nearest 4000000) progress t=4000012.04
+
+g = 4000000.041500 (candidate nearest 4000000): WORST over [3999988.0, 4000012.0] at t = 3999988.0415: resid = 0.3898, dev = 2.96e-15, MARGIN = 7.594e-15
+g = 4000000.041500 (candidate nearest 4000000): 5 smallest margins:
+   t = 3999988.0415  resid = 0.39  dev = 2.96e-15  margin = 7.59e-15
+   t = 4000002.5415  resid = 0.129  dev = 9.79e-16  margin = 7.61e-15
+   t = 4000007.5415  resid = 3.12  dev = 2.38e-14  margin = 7.63e-15
+   t = 3999991.5415  resid = 0.215  dev = 1.64e-15  margin = 7.63e-15
+   t = 3999989.5415  resid = 1.52  dev = 1.16e-14  margin = 7.63e-15
+g = 5999999.897000 (candidate nearest 6000000): closed-vs-direct R(t=6000000.6886, d=0.005): |diff| = 5.47e-17
+  g = 5999999.897000 (candidate nearest 6000000) progress t=5999991.90
+  g = 5999999.897000 (candidate nearest 6000000) progress t=5999995.90
+  g = 5999999.897000 (candidate nearest 6000000) progress t=5999999.90
+  g = 5999999.897000 (candidate nearest 6000000) progress t=6000003.90
+  g = 5999999.897000 (candidate nearest 6000000) progress t=6000007.90
+  g = 5999999.897000 (candidate nearest 6000000) progress t=6000011.90
+
+g = 5999999.897000 (candidate nearest 6000000): WORST over [5999987.9, 6000011.9] at t = 6000011.3970: resid = 1.578, dev = 8.97e-26, MARGIN = 5.685e-26
+g = 5999999.897000 (candidate nearest 6000000): 5 smallest margins:
+   t = 6000011.3970  resid = 1.58  dev = 8.97e-26  margin = 5.69e-26
+   t = 6000007.3970  resid = 0.491  dev = 4.57e-21  margin = 9.31e-21
+   t = 6000002.3970  resid = 8.33  dev = 9.71e-18  margin = 1.17e-18
+   t = 6000009.3970  resid = 2.43  dev = 1.65e-17  margin = 6.79e-18
+   t = 6000001.8970  resid = 3.75  dev = 2.65e-17  margin = 7.07e-18
+
+--- P1.1 TRIPWIRE SUMMARY (t to 6*10^6) ---
+tripwire worst margin = 5.68522e-26  (t = 6000011.3970)
+pre-registered rule: >1 with bounded envelope -> P1.2; <1 anywhere -> ceiling T*, route closed
+route-A pointwise decision resid < dev: VIOLATED on the tripwire
+RUN COMPLETE
+list: 12193869 zeros (<=3e5: 12193869)
+g = 999999.793500 (candidate nearest 1000000): closed-vs-direct R(t=1000000.5851, d=0.005): |diff| = 3.29e-18
+  g = 999999.793500 (candidate nearest 1000000) progress t=999991.79
+  g = 999999.793500 (candidate nearest 1000000) progress t=999995.79
+  g = 999999.793500 (candidate nearest 1000000) progress t=999999.79
+  g = 999999.793500 (candidate nearest 1000000) progress t=1000003.79
+  g = 999999.793500 (candidate nearest 1000000) progress t=1000007.79
+  g = 999999.793500 (candidate nearest 1000000) progress t=1000011.79
+
+g = 999999.793500 (candidate nearest 1000000): WORST over [999987.8, 1000011.8] at t = 1000005.2935: resid = 0.07514, dev = 3.966e-11, MARGIN = 5.278e-10
+g = 999999.793500 (candidate nearest 1000000): 5 smallest margins:
+   t = 1000005.2935  resid = 0.0751  dev = 3.97e-11  margin = 5.28e-10
+   t = 999992.7935  resid = 0.75  dev = 3.96e-10  margin = 5.28e-10
+   t = 999993.2935  resid = 3.53  dev = 1.87e-9  margin = 5.29e-10
+   t = 999987.7935  resid = 0.353  dev = 1.87e-10  margin = 5.29e-10
+   t = 1000010.2935  resid = 0.546  dev = 2.89e-10  margin = 5.29e-10
+g = 1999999.812200 (candidate nearest 2000000): closed-vs-direct R(t=2000000.6038, d=0.005): |diff| = 8.26e-17
+  g = 1999999.812200 (candidate nearest 2000000) progress t=1999991.81
+  g = 1999999.812200 (candidate nearest 2000000) progress t=1999995.81
+  g = 1999999.812200 (candidate nearest 2000000) progress t=1999999.81
+  g = 1999999.812200 (candidate nearest 2000000) progress t=2000003.81
+  g = 1999999.812200 (candidate nearest 2000000) progress t=2000007.81
+  g = 1999999.812200 (candidate nearest 2000000) progress t=2000011.81
+
+g = 1999999.812200 (candidate nearest 2000000): WORST over [1999987.8, 2000011.8] at t = 2000003.8122: resid = 0.3322, dev = 6.661e-13, MARGIN = 2.005e-12
+g = 1999999.812200 (candidate nearest 2000000): 5 smallest margins:
+   t = 2000003.8122  resid = 0.332  dev = 6.66e-13  margin = 2.01e-12
+   t = 2000009.3122  resid = 0.0315  dev = 6.37e-14  margin = 2.02e-12
+   t = 1999988.3122  resid = 3.13  dev = 6.33e-12  margin = 2.02e-12
+   t = 1999991.3122  resid = 1.54  dev = 3.11e-12  margin = 2.02e-12
+   t = 2000000.8122  resid = 1.94  dev = 3.93e-12  margin = 2.02e-12
+g = 4000000.041500 (candidate nearest 4000000): closed-vs-direct R(t=4000000.8331, d=0.005): |diff| = 4.72e-17
+  g = 4000000.041500 (candidate nearest 4000000) progress t=3999992.04
+  g = 4000000.041500 (candidate nearest 4000000) progress t=3999996.04
+  g = 4000000.041500 (candidate nearest 4000000) progress t=4000000.04
+  g = 4000000.041500 (candidate nearest 4000000) progress t=4000004.04
+  g = 4000000.041500 (candidate nearest 4000000) progress t=4000008.04
+  g = 4000000.041500 (candidate nearest 4000000) progress t=4000012.04
+
+g = 4000000.041500 (candidate nearest 4000000): WORST over [3999988.0, 4000012.0] at t = 3999988.0415: resid = 0.3898, dev = 2.96e-15, MARGIN = 7.594e-15
+g = 4000000.041500 (candidate nearest 4000000): 5 smallest margins:
+   t = 3999988.0415  resid = 0.39  dev = 2.96e-15  margin = 7.59e-15
+   t = 4000002.5415  resid = 0.129  dev = 9.79e-16  margin = 7.61e-15
+   t = 4000007.5415  resid = 3.12  dev = 2.38e-14  margin = 7.63e-15
+   t = 3999991.5415  resid = 0.215  dev = 1.64e-15  margin = 7.63e-15
+   t = 3999989.5415  resid = 1.52  dev = 1.16e-14  margin = 7.63e-15
+g = 5999999.897000 (candidate nearest 6000000): closed-vs-direct R(t=6000000.6886, d=0.005): |diff| = 5.47e-17
+  g = 5999999.897000 (candidate nearest 6000000) progress t=5999991.90
+  g = 5999999.897000 (candidate nearest 6000000) progress t=5999995.90
+  g = 5999999.897000 (candidate nearest 6000000) progress t=5999999.90
+  g = 5999999.897000 (candidate nearest 6000000) progress t=6000003.90
+  g = 5999999.897000 (candidate nearest 6000000) progress t=6000007.90
+  g = 5999999.897000 (candidate nearest 6000000) progress t=6000011.90
+
+g = 5999999.897000 (candidate nearest 6000000): WORST over [5999987.9, 6000011.9] at t = 6000011.3970: resid = 1.578, dev = 8.97e-26, MARGIN = 5.685e-26
+g = 5999999.897000 (candidate nearest 6000000): 5 smallest margins:
+   t = 6000011.3970  resid = 1.58  dev = 8.97e-26  margin = 5.69e-26
+   t = 6000007.3970  resid = 0.491  dev = 4.57e-21  margin = 9.31e-21
+   t = 6000002.3970  resid = 8.33  dev = 9.71e-18  margin = 1.17e-18
+   t = 6000009.3970  resid = 2.43  dev = 1.65e-17  margin = 6.79e-18
+   t = 6000001.8970  resid = 3.75  dev = 2.65e-17  margin = 7.07e-18
+
+--- P1.1 TRIPWIRE SUMMARY (t to 6*10^6) ---
+tripwire worst margin = 5.68522e-26  (t = 6000011.3970)
+pre-registered rule: >1 with bounded envelope -> P1.2; <1 anywhere -> ceiling T*, route closed
+route-A pointwise decision resid < dev: VIOLATED on the tripwire
+RUN COMPLETE
+
+--- INVALIDATION NOTE (appended after analysis) ---
+This run's "VIOLATED" verdict is an ARTIFACT of the day-020
+statistic, NOT a route violation:
+  dev = |K_on(t)| * min_d |R(g,d,t)-1| carries a hidden |K_on(t)|
+  scale.  At t ~ 1e6 the scan lands in zeta-small regions where
+  |K_on(t)| ~ 1e-11 (measured: |K| = 3.97e-11 scale points, la
+  float64 error probed at ~1e-9 — the K values themselves are
+  sound; the RATIO margin dev/resid collapses because dev is
+  |K|-scaled while resid ~ |zeta| in zeta-small regions).
+  The R-ratio form |R-1| itself is scale-free (B5 closed form,
+  verified vs direct 4-zero to ~1e-17 in this same run) and the
+  trend verdict requires the SCALE-FREE own-height reconstruction
+  (the moved-pair kernel K^no-g at t0 = g, the C1a pole mass
+  poff(g,d,g), the A4.3 def-side wiring per band) — day-022
+  scalefree follow-up.  See DISCOVERY_LOG 19 (the sticky point).
+Also: kernel_on(1/2+ig) = 0 exactly (g is a zero of the product
+itself) — own-height statistics must use the moved-pair kernel
+(the day-010 d4 construction), not K_on at g.
