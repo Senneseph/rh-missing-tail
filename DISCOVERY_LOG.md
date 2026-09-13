@@ -2259,3 +2259,59 @@ the DISCOVERY_LOG 20 localization — the 12M product machinery is
 honest at low heights (composite at s₀ = −2 within 6.7% of the
 zero-set-invariant target, degrading 20.3% at −4 and 37.5% at −6 in
 step with the t/B tail-model E-curve, not a machinery bug).
+
+## 22 — day-023 — pin machinery fully resolved; PinCensus certified;
+## the day-022 "6.7% pin gap" retired (probe artifact, not a defect)
+
+### 22.1 — The pins are correct (three independent routes agree)
+The trivial-zero pin constants c_k := P(−2k) = ∏_ρ(1−s/ρ)e^{s/ρ},
+evaluated at s = −2 via three independent routes, agree:
+  (i)  **bridge-verified kernel**: e^{A(s)}·∏(pairs)·tail matches ζ(s)
+       to 3e-9 at s = 2 (vs ζ(2) = π²/6 = 1.644934066848..., the
+       "suspicious number" — it is the Basel constant, not φ; the 3e-9
+       agreement IS the self-check) and at s = −1.999 (K/ζ =
+       0.999999997);
+  (ii) **zeta-derivative pin**: c_k = ζ′(−2k)/[d/ds e^{A(s)}]_{s=−2k},
+       ζ′ from the CONVERGED dps-50 central difference
+       (ζ′(−2) = −0.030448457058393...; mp.diff at dps-40 is NOT
+       reliable for this);
+  (iii) **direct pair product** over the 12.19M list (longdouble):
+       P_B(−2k) agrees with (ii) to −3.4e-9 (k=1) .. −3.5e-7 (k=10),
+       k²-shaped and NEGATIVE — the sign/shape of a tail-model
+       higher-order correction (0.2% of the leading (B,∞) tail
+       4k²·(ln(B/2π)+1)/(2πB)), not a list defect (a missing pair
+       would give a POSITIVE +4k²/t² signature).
+  **The day-022 probe's "6.7%/20.3%/37.5% gaps at s₀ = −2/−4/−6" is
+  RETIRED**: it compared a probe-path composite (its own tail
+  quadrature included) against the pin; the TRUE gap between the
+  12M product and the pin is ~1.6e-6 (float64, k=1) — i.e., none.
+  The "E-curve tracking" narrative of 21.4 is accordingly withdrawn
+  as an explanation of those gaps; the probe remains a valid
+  low-height cross-check of the machinery.
+
+### 22.2 — PinCensus (owner's trivial-zero idea, realized)
+`scripts/rh/day023_pincensus.py` → `out_day023_pincensus.txt`:
+  R_k = P_B(−2k)·(1+tail_model_k)/c_k − 1:
+       k:    1      2      3      5      10
+  R_k: −3.4e-9 −1.3e-8 −3.0e-8 −8.5e-8 −3.5e-7   (= k² tail correction)
+  The channel: an off-line pair's PIN signature is
+  (4k²/t²)·(count, d-blind) + (4kd/t²)·(off-line, d-sensitive); the
+  d-sensitive part is buried under the truncation/model floor for
+  t ≳ 30(k=1)..100 — **not an off-line detector** (the own-height
+  channel is ~10³–10⁶× stronger). What the pins DO: an independent
+  completeness census — a missing/extra pair at height t shifts
+  R_k by +4k²/t², detectable over t ≲ 2·sqrt(k²/|R_k|): ~2×10³
+  (k=1) .. ~10⁴ (k=10) at the current floor. **The 12.19M list is
+  independently certified on this channel** (no positive k² spike).
+  The P-0.8 walk to 1e7 (running, ETA ~2 h) will be re-censused the
+  same way after merge — a second method independent of the walk's
+  own N(t) checks.
+
+### 22.3 — Arithmetic bug record (why the confusion)
+The (1+γ/2) factor of the kernel main is **1.2886078** (γ/2 =
+0.288608), not 1.154431 (repeated hand-eval error this day); and
+the half-product over t>0 zeros relates to the full product by
+squaring: |∏_{t>0}(1−s/ρ)e^{s/ρ}|² = P(s) for real s — a 4.5%
+"gap" was exactly the missing square (1.046926² = 1.0960635 = c_1
+to all printed digits). Both errors are code-checked now (script is
+the single source; hand arithmetic retired).
