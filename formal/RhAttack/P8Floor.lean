@@ -15,7 +15,7 @@ proof; the height bound T never appears.  Atom plan (spec §2):
       b5NoffIsPolynomial, b5NoffPos).
   A4: comparison floor < detector under the measurement-pinned constants.
 
-STATUS (2026-09-16, Lean 4.33.1): A0, A1, A2a, A2b.1 GREEN.  A2b (the M(G,t) wire) next, then A3-A4, one at a time.  No sorry.
+STATUS (2026-09-16, Lean 4.33.1): A0, A1, A2a, A2b.1-A2b.2 GREEN.  A2b (the M(G,t) wire) next, then A3-A4, one at a time.  No sorry.
 
 HONEST SPLIT (per-atom):
   A0: LEAN-PROVEN (definitional + ring).
@@ -135,3 +135,97 @@ theorem p8_residual_exact (L T : List ℝ) (Tt : ℝ) (F : ℝ → ℝ)
   have h := B3.b3ResidualDecomp L T Tt F hpos
   rw [h]
   ring
+
+/-- Real-analysis pin (LEAN-PROVEN): |e^x − 1| ≤ e^{|x|}·|x| for all x.
+    Pins: `Real.add_one_lt_exp` (x ≠ 0 ⇒ x + 1 < e^x), `Real.one_le_exp`
+    (0 ≤ x ⇒ 1 ≤ e^x), `Real.exp_lt_exp`, `abs_of_nonneg`/`abs_of_neg`.
+    No MVT needed: for x ≥ 0, e^x − 1 ≤ x·e^x (since
+    e^x − 1 − x·e^x = e^x(1 − x) − 1 < 0); for x < 0,
+    1 − e^x < −x (i.e. x + 1 < e^x at x ≠ 0). -/
+theorem p8_abs_exp_sub_one_le (x : ℝ) :
+    |Real.exp x - 1| ≤ Real.exp |x| * |x| := by
+  by_cases hx0 : 0 ≤ x
+  · have hlt : Real.exp x - 1 ≤ x * Real.exp x := by
+      by_cases hx' : x = 0
+      · subst x
+        norm_num
+      · -- e^x − 1 − x·e^x = e^x(1 − x) − 1, and
+        --     e^x(1 − x) < 1 via −x + 1 < e^{−x} (add_one_lt_exp at −x)
+        have hB : -x + 1 < Real.exp (-x) := add_one_lt_exp (neg_ne_zero.mpr hx')
+        have hB' : (1 - x : ℝ) < Real.exp (-x) := by
+          rw [sub_eq_add_neg, add_comm]
+          exact hB
+        have hC : Real.exp x * (1 - x) < 1 := by
+          have hD : Real.exp x * (1 - x) < Real.exp x * Real.exp (-x) := by
+            simpa [mul_comm] using mul_lt_mul_of_pos_right hB' (Real.exp_pos x)
+          calc Real.exp x * (1 - x)
+              < Real.exp x * Real.exp (-x) := hD
+            _ = 1 := by
+                  rw [← Real.exp_add x (-x)]
+                  simp
+        rw [← sub_nonpos]
+        have hE : Real.exp x - 1 - x * Real.exp x = Real.exp x * (1 - x) - 1 := by
+          ring
+        rw [hE]
+        linarith [le_of_lt hC]
+    have hge : 1 ≤ Real.exp x := one_le_exp hx0
+    calc |Real.exp x - 1|
+        = Real.exp x - 1 := abs_of_nonneg (by linarith)
+      _ ≤ x * Real.exp x := hlt
+      _ = Real.exp |x| * |x| := by rw [mul_comm, abs_of_nonneg hx0]
+  · have hneg : x < 0 := not_le.mp hx0
+    have hlt2 : 1 - Real.exp x < -x := by
+      have hA : x + 1 < Real.exp x := add_one_lt_exp (by linarith)
+      linarith
+    have hlt3 : Real.exp x < 1 := by
+      simpa [Real.exp_zero] using Real.exp_lt_exp.mpr hneg
+    calc |Real.exp x - 1|
+        = 1 - Real.exp x := by rw [abs_of_neg (by linarith [hlt3]), neg_sub]
+      _ ≤ 0 - x := by simpa using le_of_lt hlt2
+      _ = |x| := by simpa using (abs_of_neg hneg).symm
+      _ = 1 * |x| := by ring
+      _ ≤ Real.exp |x| * |x| :=
+          mul_le_mul_of_nonneg_right (one_le_exp (abs_nonneg x)) (abs_nonneg x)
+
+/- P8Floor · A2b.2 — the floor bound itself: the factored residual is
+    bounded by the product times the subadditive exp estimate in the
+    model defect x := Tt − Σ_T ln F.  (LEAN-PROVEN; ζ-free; no counting
+    input.)  This is the < side at the kernel-model level: the size of
+    the bridge error is the size of the product (the kernel's own mass)
+    times a function of the ONE model-defect number — which the P5/P6
+    S̄ machinery (B3Sbar `b3BoundExplicit`) then bounds in terms of G
+    alone.
+-/
+
+/-- Atom A2b.2 (LEAN-PROVEN; ζ-free): |e^{Tt}·∏_L F − ∏_{L∪T} F| ≤
+    (∏_{L∪T} F)·e^{|x|}·|x| with x := Tt − Σ_{g∈T} ln(F(g)) — the
+    A2b.1 factored form + `p8_abs_exp_sub_one_le` + positivity of the
+    product. -/
+theorem p8_residual_bound (L T : List ℝ) (Tt : ℝ) (F : ℝ → ℝ)
+    (hpos : ∀ g ∈ L ++ T, 0 < F g) :
+    |Real.exp Tt * (L.map F).prod - ((L ++ T).map F).prod| ≤
+        ((L ++ T).map F).prod *
+        Real.exp |Tt - (T.map (fun (g : ℝ) => Real.log (F g))).sum| *
+        |Tt - (T.map (fun (g : ℝ) => Real.log (F g))).sum| := by
+  set x := Tt - (T.map (fun (g : ℝ) => Real.log (F g))).sum with hx
+  have hFact : Real.exp Tt * (L.map F).prod - ((L ++ T).map F).prod =
+      ((L ++ T).map F).prod * (Real.exp x - 1) := by
+    rw [p8_residual_exact L T Tt F hpos, ← hx]
+  have hK : 0 < ((L ++ T).map F).prod := by
+    apply List.prod_pos
+    intro b hb
+    obtain ⟨g, hgm, hbeq⟩ := List.mem_map.mp hb
+    rw [hbeq.symm]
+    exact hpos g hgm
+  have hFact' : Real.exp Tt * (L.map F).prod - ((L ++ T).map F).prod =
+      ((L ++ T).map F).prod * (Real.exp x - 1) := hFact
+  calc |Real.exp Tt * (L.map F).prod - ((L ++ T).map F).prod|
+      = |((L ++ T).map F).prod * (Real.exp x - 1)| := by rw [hFact']
+    _ = ((L ++ T).map F).prod * |Real.exp x - 1| := by
+          rw [abs_mul, abs_of_pos hK]
+    _ ≤ ((L ++ T).map F).prod * (Real.exp |x| * |x|) :=
+          mul_le_mul_of_nonneg_left (p8_abs_exp_sub_one_le x) (le_of_lt hK)
+    _ = ((L ++ T).map F).prod * Real.exp |Tt - (T.map (fun (g : ℝ) => Real.log (F g))).sum| *
+          |Tt - (T.map (fun (g : ℝ) => Real.log (F g))).sum| := by
+          rw [hx]
+          ring
