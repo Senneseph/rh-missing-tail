@@ -15,7 +15,7 @@ proof; the height bound T never appears.  Atom plan (spec §2):
       b5NoffIsPolynomial, b5NoffPos).
   A4: comparison floor < detector under the measurement-pinned constants.
 
-STATUS (2026-09-16, Lean 4.33.1): A0, A1, A2a, A2b.1-A2b.2, A3.1, A3.2a, A3.2b.1 GREEN.  A2b (the M(G,t) wire) next, then A3-A4, one at a time.  No sorry.
+STATUS (2026-09-16, Lean 4.33.1): A0, A1, A2a, A2b.1-A2b.2, A3.1, A3.2a, A3.2b.1, A4.1 GREEN.  A2b (the M(G,t) wire) next, then A3-A4, one at a time.  No sorry.
 
 HONEST SPLIT (per-atom):
   A0: LEAN-PROVEN (definitional + ring).
@@ -342,3 +342,81 @@ theorem p8_detector_norm_at_zero (γ t : ℝ) (hγ : 0 < γ) (ht : 0 < t) (hne :
         Real.exp (1 / (2 * (1 / 4 + γ ^ 2))) := by
           rw [hw0]
           field_simp
+
+/- P8Floor · A4 — the comparison (floor + residual < detector), far regime.
+
+    A4.1 (LEAN-PROVEN): the far-regime detector is unconditionally large —
+      ‖R(γ, 0, t)‖ ≥ 2  for  γ ≥ 1, t ≥ 2γ
+    from A3.2b.1 (‖R(0)‖ = |γ²−t²|/(¼+γ²)·e^{ω₀/2}) + e^x ≥ 1 +
+    monotone reduction |γ²−t²|/(¼+γ²) ≥ 3γ²/(¼+γ²) ≥ 2.
+    With A3.2a (reverse triangle): ‖R − 1‖ ≥ ‖R‖ − 1 ≥ 1 in the far
+    regime — the detector scale is ≥ 1 there, so the zero-decision
+    inequality (outline §7) reduces to bounding floor + residual below 1.
+    The near regime (t ≈ γ, the branch locus t = γ excluded from B5's
+    closed form) is carried by the measurement pin (day-017/019 audit:
+    0.9975 – 1.0201 across the grid; margin ≥ 14× at the pair's own
+    height) — A4.2, next.
+-/
+
+/-- Atom A4.1a (LEAN-PROVEN): the far-regime δ = 0 detector magnitude is
+    at least 2 — for γ ≥ 1 and t ≥ 2γ:
+    ‖R(γ,0,t)‖ = |γ²−t²|/(¼+γ²)·e^{ω₀/2} ≥ 3γ²/(¼+γ²) ≥ 2. -/
+theorem p8_far_detector_mag_ge_two (γ t : ℝ) (hγ : 1 ≤ γ) (ht : 2 * γ ≤ t) :
+    2 ≤ ‖Rratio γ 0 t‖ := by
+  have ht0 : 0 < t := by nlinarith
+  have hne : t ≠ γ := by
+    intro h
+    nlinarith
+  have hnorm : ‖Rratio γ 0 t‖ = |γ ^ 2 - t ^ 2| / (1 / 4 + γ ^ 2) *
+      Real.exp (1 / (2 * (1 / 4 + γ ^ 2))) :=
+    p8_detector_norm_at_zero γ t (by nlinarith) ht0 hne
+  have hsign : |γ ^ 2 - t ^ 2| = t ^ 2 - γ ^ 2 := by
+    have hsq : γ ^ 2 < t ^ 2 := by
+      have a : 0 < γ := by nlinarith
+      have b : 0 < t := by nlinarith
+      have c : γ < t := by nlinarith
+      nlinarith [a, b, c]
+    rw [abs_of_neg (by nlinarith [hsq]), neg_sub]
+  have hnum : (4 * γ ^ 2 - γ ^ 2) / (1 / 4 + γ ^ 2) ≤ (t ^ 2 - γ ^ 2) /
+      (1 / 4 + γ ^ 2) := by
+    have hden : 0 < 1 / 4 + γ ^ 2 := by nlinarith
+    have h4 : 4 * γ ^ 2 ≤ t ^ 2 := by
+      have hgpos : 0 < γ := by nlinarith
+      nlinarith [sq_nonneg (t - 2 * γ), (by nlinarith : (0 : ℝ) ≤ 2 * γ)]
+    rw [div_le_div_iff₀ hden hden]
+    nlinarith [h4, hden]
+  have hlower : 2 ≤ (3 * γ ^ 2) / (1 / 4 + γ ^ 2) := by
+    have hden : 0 < 1 / 4 + γ ^ 2 := by nlinarith
+    have hA : 2 * (1 / 4 + γ ^ 2) ≤ 3 * γ ^ 2 := by
+      have hg : 0 ≤ γ := by nlinarith
+      nlinarith [sq_nonneg γ, hg]
+    exact (le_div_iff₀ hden).mpr hA
+  have hX : 0 ≤ (t ^ 2 - γ ^ 2) / (1 / 4 + γ ^ 2) := by
+    have hden : 0 < 1 / 4 + γ ^ 2 := by nlinarith
+    have hnumN : 0 ≤ t ^ 2 - γ ^ 2 := by nlinarith [sq_nonneg (t - 2 * γ)]
+    exact div_nonneg hnumN hden.le
+  have ha : 0 ≤ 1 / (2 * (1 / 4 + γ ^ 2)) := by
+    positivity
+  have hE : (4 * γ ^ 2 - γ ^ 2) / (1 / 4 + γ ^ 2) =
+      3 * γ ^ 2 / (1 / 4 + γ ^ 2) := by ring
+  rw [hE] at hnum
+  rw [hnorm, hsign]
+  calc (t ^ 2 - γ ^ 2) / (1 / 4 + γ ^ 2) * Real.exp (1 / (2 * (1 / 4 + γ ^ 2)))
+      ≥ (t ^ 2 - γ ^ 2) / (1 / 4 + γ ^ 2) * 1 := by
+        simpa [mul_comm] using mul_le_mul_of_nonneg_right (one_le_exp ha) hX
+    _ ≥ 2 := by
+        simpa [mul_one] using le_trans hlower hnum
+
+/-- Atom A4.1b (LEAN-PROVEN): the far-regime detector SCALE itself is at
+    least 1 — A3.2a (reverse triangle) + A4.1a (magnitude ≥ 2):
+    for γ ≥ 1, t ≥ 2γ: ‖R(γ,0,t) − 1‖ ≥ ‖R‖ − 1 ≥ 1.
+    The zero-decision inequality (outline §7) in the far regime thus
+    reduces to: bound floor + residual below 1. -/
+theorem p8_far_detector_scale_ge_one (γ t : ℝ) (hγ : 1 ≤ γ) (ht : 2 * γ ≤ t) :
+    1 ≤ ‖Rratio γ 0 t - 1‖ := by
+  have hlt1 : ‖Rratio γ 0 t‖ - 1 ≥ 1 := by
+    nlinarith [p8_far_detector_mag_ge_two γ t hγ ht]
+  calc ‖Rratio γ 0 t - 1‖
+      ≥ |‖Rratio γ 0 t‖ - 1| := p8_detector_abs_lower γ 0 t
+    _ = ‖Rratio γ 0 t‖ - 1 := abs_of_nonneg (by linarith [p8_far_detector_mag_ge_two γ t hγ ht])
+    _ ≥ 1 := hlt1
