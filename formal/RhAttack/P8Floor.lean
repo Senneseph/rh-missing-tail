@@ -15,7 +15,7 @@ proof; the height bound T never appears.  Atom plan (spec §2):
       b5NoffIsPolynomial, b5NoffPos).
   A4: comparison floor < detector under the measurement-pinned constants.
 
-STATUS (2026-09-16, Lean 4.33.1): A0, A1, A2a, A2b.1-A2b.2, A3.1, A3.2a GREEN.  A2b (the M(G,t) wire) next, then A3-A4, one at a time.  No sorry.
+STATUS (2026-09-16, Lean 4.33.1): A0, A1, A2a, A2b.1-A2b.2, A3.1, A3.2a, A3.2b.1 GREEN.  A2b (the M(G,t) wire) next, then A3-A4, one at a time.  No sorry.
 
 HONEST SPLIT (per-atom):
   A0: LEAN-PROVEN (definitional + ring).
@@ -282,3 +282,63 @@ A3.2b (PINNED floor — next atom): the explicit near/far lower bound
 theorem p8_detector_abs_lower (γ δ t : ℝ) :
     ‖Rratio γ δ t - 1‖ ≥ |‖Rratio γ δ t‖ - 1| := by
   simpa [dist_eq_norm] using abs_dist_sub_le (Rratio γ δ t) (1 : ℂ) 0
+
+/- P8Floor · A3.2b — the detector at δ = 0 (the on-line degeneration),
+    exact closed forms.
+
+    At δ = 0 the off-line 4-tuple collapses onto the on-line pair and
+    the B5 closed form simplifies to explicit numbers:
+      pref(γ, 0, t) = (γ² − t²) / (¼ + γ²)      (signed; the only
+                   branch of b5PrefSign: < 0 ⟺ t > γ)
+      ω_0(γ)       = 1 / (¼ + γ²) > 0
+    hence (B5 `b5Abs`):
+      ‖R(γ, 0, t)‖ = |γ² − t²| / (¼ + γ²) · e^{1 / (2(¼ + γ²))}.
+    These are the far-regime seeds: at t = c·γ the leading factor is
+    |c² − 1|·(¼/γ² + 1)⁻¹ — the measured (t/γ)²−1 family's base.
+    The near-pair limit (t → γ, δ → 0 jointly; the branch locus) is the
+    remaining A3.2b piece, PINNED by the day-017/019 near-regime audit
+    (0.9975 – 1.0201 across the measured grid).
+-/
+
+/-- Atom A3.2b.1i (LEAN-PROVEN): the δ = 0 closed forms of the B5
+    prefactor and the real phase constant (t ≠ γ): pref collapses to
+    (γ² − t²)/(¼ + γ²) and ω_0 to 1/(¼ + γ²). -/
+theorem p8_pref_omega_zero (γ t : ℝ) (hγ : 0 < γ) (ht : 0 < t) (hne : t ≠ γ) :
+    pref γ 0 t = (γ ^ 2 - t ^ 2) / (1 / 4 + γ ^ 2) ∧
+    omegaD γ 0 = 1 / (1 / 4 + γ ^ 2) := by
+  have hDnz : (γ ^ 2 - t ^ 2) ≠ 0 := by
+    rintro h
+    have h2 : (γ - t) * (γ + t) = 0 := by ring_nf at h ⊢ <;> simpa using h
+    obtain (hA | hB) := mul_eq_zero.mp h2
+    · exact hne (by nlinarith [hA])
+    · exfalso
+      nlinarith [hB]
+  have hNnz : (1 / 4 + γ ^ 2) ≠ 0 := by nlinarith
+  constructor
+  · dsimp only [pref]
+    field_simp [hDnz, hNnz]
+    ring
+  · dsimp only [omegaD]
+    field_simp [hNnz]
+    ring
+
+/-- Atom A3.2b.1ii (LEAN-PROVEN): the detector magnitude at δ = 0 is
+    explicit (B5 `b5Abs` + `p8_pref_omega_zero`):
+    ‖R(γ,0,t)‖ = |γ²−t²|/(¼+γ²) · e^{1/(2(¼+γ²))} for t ≠ γ. -/
+theorem p8_detector_norm_at_zero (γ t : ℝ) (hγ : 0 < γ) (ht : 0 < t) (hne : t ≠ γ) :
+    ‖Rratio γ 0 t‖ = |γ ^ 2 - t ^ 2| / (1 / 4 + γ ^ 2) *
+      Real.exp (1 / (2 * (1 / 4 + γ ^ 2))) := by
+  have hw0 : omegaD γ 0 = 1 / (1 / 4 + γ ^ 2) := (p8_pref_omega_zero γ t hγ ht hne).2
+  have hp0 : pref γ 0 t = (γ ^ 2 - t ^ 2) / (1 / 4 + γ ^ 2) :=
+    (p8_pref_omega_zero γ t hγ ht hne).1
+  have hpos : 0 < 1 / 4 + γ ^ 2 := by nlinarith
+  calc ‖Rratio γ 0 t‖
+      = |pref γ 0 t| * Real.exp (omegaD γ 0 / 2) :=
+        b5Abs hγ ht hne 0
+    _ = (|γ ^ 2 - t ^ 2| / (1 / 4 + γ ^ 2)) * Real.exp (omegaD γ 0 / 2) := by
+          rw [hp0]
+          rw [abs_div (γ ^ 2 - t ^ 2) (1 / 4 + γ ^ 2), abs_of_pos hpos]
+    _ = (|γ ^ 2 - t ^ 2| / (1 / 4 + γ ^ 2)) *
+        Real.exp (1 / (2 * (1 / 4 + γ ^ 2))) := by
+          rw [hw0]
+          field_simp
