@@ -15,7 +15,7 @@ proof; the height bound T never appears.  Atom plan (spec §2):
       b5NoffIsPolynomial, b5NoffPos).
   A4: comparison floor < detector under the measurement-pinned constants.
 
-STATUS (2026-09-16, Lean 4.33.1): A0, A1, A2a, A2b.1-A2b.2 GREEN.  A2b (the M(G,t) wire) next, then A3-A4, one at a time.  No sorry.
+STATUS (2026-09-16, Lean 4.33.1): A0, A1, A2a, A2b.1-A2b.2, A3.1, A3.2a GREEN.  A2b (the M(G,t) wire) next, then A3-A4, one at a time.  No sorry.
 
 HONEST SPLIT (per-atom):
   A0: LEAN-PROVEN (definitional + ring).
@@ -40,6 +40,7 @@ after use; numerics sanity-check only.
 import Mathlib
 import RhAttack.P4Limit
 import RhAttack.B3
+import RhAttack.B5
 
 open Real Finset List
 
@@ -229,3 +230,55 @@ theorem p8_residual_bound (L T : List ℝ) (Tt : ℝ) (F : ℝ → ℝ)
           |Tt - (T.map (fun (g : ℝ) => Real.log (F g))).sum| := by
           rw [hx]
           ring
+
+/- P8Floor · A3 — the detector's δ-structure (builds on B5).
+
+A3.1 (LEAN-PROVEN): the off-line numerator
+    N(δ) := ((t−γ)²+δ²)·((t+γ)²+δ²)
+is a δ-polynomial with all-nonnegative coefficients —
+B5 `b5NoffIsPolynomial`: N(δ) = (t²−γ²)² + 2δ²(t²+γ²) + δ⁴ —
+hence N is monotone nondecreasing in δ² and minimized at δ = 0:
+    N(0) ≤ N(δ) for all δ.
+This is the algebraic core of the outline §7 "no dead δ window"
+(`b5NoffPos`: N(δ) > 0 for every δ when t ≠ γ — also already
+LEAN-PROVEN in B5).  The δ-minimum of the FULL detector scale
+‖R − 1‖ (with pref + phase, B5 `b5Abs`/`b5PrefSign`) is A3.2 —
+next atom; its branch locus (t = γ) is handled by the limit
+analysis, pinned by the measured near-regime (0.9975–1.0201).
+-/
+
+/-- Atom A3.1 (LEAN-PROVEN; the δ-minimum of the off-line numerator at
+    δ = 0): for all γ, t, δ,
+    ((t−γ)² + 0²)·((t+γ)² + 0²) ≤ ((t−γ)² + δ²)·((t+γ)² + δ²) —
+    B5 `b5NoffIsPolynomial` twice: both sides = (t²−γ²)² +
+    2δ²(t²+γ²) + δ⁴ (left with δ = 0), and the extra terms are
+    nonnegative.  The detector's numerator therefore cannot shrink
+    by moving the pair off the line — no dead δ window (outline §7). -/
+theorem p8_noff_delta_min (γ t : ℝ) (δ : ℝ) :
+    ((t - γ) ^ 2 + 0 ^ 2) * ((t + γ) ^ 2 + 0 ^ 2) ≤
+      ((t - γ) ^ 2 + δ ^ 2) * ((t + γ) ^ 2 + δ ^ 2) := by
+  rw [b5NoffIsPolynomial γ t δ, b5NoffIsPolynomial γ t 0]
+  nlinarith [sq_nonneg δ, sq_nonneg (δ ^ 2), sq_nonneg t, sq_nonneg γ]
+
+/- P8Floor · A3.2 — the detector magnitude lower bound (reverse triangle
+    + the B5 closed form).
+
+A3.2a (LEAN-PROVEN): ‖R − 1‖ ≥ |‖R‖ − 1| (reverse triangle) so the
+     detector scale is controlled below by the closed magnitude of B5
+     `b5Abs`: |‖R‖ − 1| = ||pref|·e^{ω/2} − 1|.
+A3.2b (PINNED floor — next atom): the explicit near/far lower bound
+     for |‖R‖ − 1| (near pair: the measured 0.9975; far: the
+     (t/γ)²−1 family, B5 `b5Abs` + the δ-monotone numerator of A3.1);
+     the sharp δ-analysis at the branch locus (t = γ, where
+     b5Ratio's hypotheses exclude t = γ) is carried by the limit
+     pinned by the day-017/019 near-regime audit.
+-/
+
+/-- Atom A3.2a (LEAN-PROVEN): reverse triangle — the detector scale
+    ‖R − 1‖ is bounded below by |‖R‖ − 1| in any normed group.  With B5
+    `b5Abs` this routes the detector's ≥ side through the closed
+    magnitude |pref|·e^{ω/2}.  Pin: `abs_dist_sub_le` (x y z:
+    |dist x z − dist y z| ≤ dist x y) at x := R, y := 1, z := 0. -/
+theorem p8_detector_abs_lower (γ δ t : ℝ) :
+    ‖Rratio γ δ t - 1‖ ≥ |‖Rratio γ δ t‖ - 1| := by
+  simpa [dist_eq_norm] using abs_dist_sub_le (Rratio γ δ t) (1 : ℂ) 0
