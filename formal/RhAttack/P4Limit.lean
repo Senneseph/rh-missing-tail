@@ -529,4 +529,678 @@ theorem p4_finite_em2 (s : ℂ) (hs1 : s ≠ 0) (hs2 : s ≠ -1) (hs3 : s ≠ 1)
     rw [p4_f2_integral_Ioi_eq hsre (Nat.cast_pos.mpr hn)] at hLim
     exact hLim
 
+
+  --/ ===== L4 — the OP family (spec sketch §6, post numeric refutation) =====
+  --| L4.0: the B3 kernel + max |B3| = sqrt(3)/36.  L4.3: OP2c (complex
+  --|  decaying exponential — the atom P4 uses).  L4.4: application to f''.
+  --|  (L4.1 OP1 / L4.2 OP2 — the real valued monotone atoms — are the next
+  --|  step; P4's critical path is L4.3/L4.4.)
+  --| B3 mirrors the P4Tail.B2 local-kernel convention; mathlib's
+  --| `bernoulliFun 3` (NumberTheory/ZetaValues) is the same polynomial —
+  --|  cross-check only (P4 no-ζ-core convention).  Constants computed,
+  --|  never recalled (/tmp/l4_b3max.py, /tmp/l4_check2.py, /tmp/ibp_check.py). -/
+
+  --/ Atom L4.0a — the 3rd periodic Bernoulli function and its polynomial. -/
+  def B3 (x : ℝ) : ℝ := (x - ⌊x⌋₊) ^ 3 - (3 / 2) * (x - ⌊x⌋₊) ^ 2 + (1 / 2) * (x - ⌊x⌋₊)
+
+  def B3poly (u : ℝ) : ℝ := u ^ 3 - (3 / 2) * u ^ 2 + (1 / 2) * u
+
+  --/ Atom L4.0b — endpoints (B₃(0) = B₃(1) = 0): the per-period IBP
+  --|  boundary terms below vanish because of these. -/
+  @[simp]
+  lemma B3poly_at_0 : B3poly 0 = 0 := by dsimp only [B3poly]; norm_num
+
+  @[simp]
+  lemma B3poly_at_1 : B3poly 1 = 0 := by dsimp only [B3poly]; norm_num
+
+  --/ Atom L4.0c — derivative: B₃'(u) = 3·(u²−u+1/6) (the B₃/3 primitive
+  --|  of B₂; cross-checked against mathlib's `antideriv_bernoulliFun`). -/
+  lemma B3poly_hasDerivAt (u : ℝ) :
+      HasDerivAt B3poly (3 * (u ^ 2 - u + 1 / 6)) u := by
+    -- (a) the polynomial is differentiable at u (explicit-lambda form:
+    --     `dsimp` does not delta-unfold a bare def in 4.33.1)
+    have hd : DifferentiableAt ℝ (fun u : ℝ => u ^ 3 - (3 / 2) * u ^ 2 + (1 / 2) * u) u := by
+      fun_prop
+    -- (b) the derivative value, by linearity of deriv
+    have hId : DifferentiableAt ℝ (fun u : ℝ => u) u := (hasDerivAt_id' u).differentiableAt
+    have h1 : DifferentiableAt ℝ ((fun u : ℝ => u) ^ 3) u := by
+      fun_prop
+    have h2sq : DifferentiableAt ℝ ((fun u : ℝ => u) ^ 2) u := by
+      fun_prop
+    have h2 : DifferentiableAt ℝ (fun u : ℝ => (3 / 2) * u ^ 2) u := by
+      fun_prop
+    have h3 : DifferentiableAt ℝ (fun u : ℝ => (1 / 2) * u) u := by
+      fun_prop
+    have h12 : DifferentiableAt ℝ (((fun u : ℝ => u) ^ 3) - (fun u : ℝ => (3 / 2) * u ^ 2)) u :=
+      DifferentiableAt.sub h1 h2
+    have hIdDer : deriv (fun u : ℝ => u) u = 1 := by
+      rw [deriv_id'']
+    have h2dF : (fun u : ℝ => (3 / 2) * u ^ 2) = (fun y : ℝ => (3 / 2) * (((fun y : ℝ => y) ^ 2) y)) := by
+      funext y
+      dsimp
+    have h3dF : (fun u : ℝ => (1 / 2) * u) = (fun y : ℝ => (1 / 2) * ((fun y : ℝ => y) y)) := by
+      funext y
+      dsimp
+    have h2deriv : deriv (fun u : ℝ => (3 / 2) * u ^ 2) u = (3 / 2) * (2 * u) := by
+      rw [h2dF]
+      rw [deriv_const_mul ((3 / 2 : ℝ)) h2sq, deriv_pow hId 2, hIdDer]
+      ring
+    have h3deriv : deriv (fun u : ℝ => (1 / 2) * u) u = 1 / 2 := by
+      rw [h3dF]
+      rw [deriv_const_mul ((1 / 2 : ℝ)) hId, hIdDer]
+      ring
+    have hder : deriv ((((fun u : ℝ => u) ^ 3) - (fun u : ℝ => (3 / 2) * u ^ 2)) +
+        (fun u : ℝ => (1 / 2) * u)) u =
+        3 * (u ^ 2 - u + 1 / 6) := by
+      rw [deriv_add h12 h3, deriv_sub h1 h2, deriv_pow hId 3, h2deriv, h3deriv, hIdDer]
+      ring
+    -- (c) glue: HasDerivAt with the derivative value
+    have hFin : HasDerivAt B3poly (deriv B3poly u) u := hd.hasDerivAt
+    have hAddL : (fun u : ℝ => u ^ 3 - (3 / 2) * u ^ 2 + (1 / 2) * u) =
+        (((fun u : ℝ => u) ^ 3) - (fun u : ℝ => (3 / 2) * u ^ 2)) + (fun u : ℝ => (1 / 2) * u) := by
+      funext x
+      dsimp
+    have hDerivB3 : deriv B3poly u = 3 * (u ^ 2 - u + 1 / 6) := by
+      rw [show deriv B3poly u =
+               deriv (fun u : ℝ => u ^ 3 - (3 / 2) * u ^ 2 + (1 / 2) * u) u from rfl]
+      rw [hAddL]
+      exact hder
+    rw [← hDerivB3]
+    exact hFin
+
+  --/ Atom L4.0d — the two extremal values (symbolic; /tmp/l4_b3max.py at
+  --|  50 digits): B₃((3−√3)/6) = +√3/36, B₃((3+√3)/6) = −√3/36. -/
+  lemma B3poly_max_val : B3poly ((3 - Real.sqrt 3) / 6) = Real.sqrt 3 / 36 := by
+    dsimp only [B3poly]
+    have hw : (Real.sqrt 3) ^ 2 = 3 := Real.sq_sqrt (by norm_num)
+    have hU2 : ((3 - Real.sqrt 3) / 6) ^ 2 = (2 - Real.sqrt 3) / 6 := by
+      field_simp [pow_two]
+      nlinarith [hw]
+    have hMid : ((3 - Real.sqrt 3) / 6) ^ 2 - (3 / 2) * ((3 - Real.sqrt 3) / 6) + 1 / 2 =
+        (1 + Real.sqrt 3) / 12 := by
+      rw [hU2]
+      field_simp
+      nlinarith [hw]
+    have hFac : ((3 - Real.sqrt 3) / 6) ^ 3 - (3 / 2) * ((3 - Real.sqrt 3) / 6) ^ 2 +
+          (1 / 2) * ((3 - Real.sqrt 3) / 6) =
+        ((3 - Real.sqrt 3) / 6) * ((((3 - Real.sqrt 3) / 6) ^ 2 -
+          (3 / 2) * ((3 - Real.sqrt 3) / 6) + 1 / 2)) := by
+      ring
+    rw [hFac, hMid]
+    field_simp
+    nlinarith [hw]
+
+  lemma B3poly_min_val : B3poly ((3 + Real.sqrt 3) / 6) = -(Real.sqrt 3 / 36) := by
+    dsimp only [B3poly]
+    have hw : (Real.sqrt 3) ^ 2 = 3 := Real.sq_sqrt (by norm_num)
+    have hU2 : ((3 + Real.sqrt 3) / 6) ^ 2 = (2 + Real.sqrt 3) / 6 := by
+      field_simp [pow_two]
+      nlinarith [hw]
+    have hMid : ((3 + Real.sqrt 3) / 6) ^ 2 - (3 / 2) * ((3 + Real.sqrt 3) / 6) + 1 / 2 =
+        (1 - Real.sqrt 3) / 12 := by
+      rw [hU2]
+      field_simp
+      nlinarith [hw]
+    have hFac : ((3 + Real.sqrt 3) / 6) ^ 3 - (3 / 2) * ((3 + Real.sqrt 3) / 6) ^ 2 +
+          (1 / 2) * ((3 + Real.sqrt 3) / 6) =
+        ((3 + Real.sqrt 3) / 6) * ((((3 + Real.sqrt 3) / 6) ^ 2 -
+          (3 / 2) * ((3 + Real.sqrt 3) / 6) + 1 / 2)) := by
+      ring
+    rw [hFac, hMid]
+    field_simp
+    nlinarith [hw]
+
+  --/ Atom L4.0e — **max |B₃| on [0,1] = √3/36** (the OP2c constant).
+  --|  Proof: 3u²−3u+1/2 = 3(u−u₁)(u−u₂) with u₁ = (3−√3)/6 < u₂ =
+  --|  (3+√3)/6; B₃ rises on [0,u₁], falls on [u₁,u₂], rises on [u₂,1];
+  --|  |B₃| on [0,1] is attained at u₁ (max) or u₂ (min). -/
+  theorem abs_B3poly_le (u : ℝ) (hu : u ∈ Set.Icc 0 1) :
+      |B3poly u| ≤ Real.sqrt 3 / 36 := by
+    set w := Real.sqrt 3 with hw_def
+    set u1 := (3 - w) / 6 with hu1_def
+    set u2 := (3 + w) / 6 with hu2_def
+    have hw : w ^ 2 = 3 := Real.sq_sqrt (by norm_num)
+    have hwnn : 0 ≤ w := Real.sqrt_nonneg 3
+    have h0u1 : 0 < u1 := by nlinarith [hw, hwnn]
+    have hu1u2 : u1 < u2 := by nlinarith [hw, hwnn]
+    have hu21 : u2 < 1 := by nlinarith [hw, hwnn]
+    have h0u2 : 0 < u2 := by nlinarith [hw, hwnn]
+    have hFact : ∀ t : ℝ, 3 * t ^ 2 - 3 * t + 1 / 2 = 3 * (t - u1) * (t - u2) := by
+      intro t
+      have hsum : u1 + u2 = 1 := by nlinarith [hw, hwnn]
+      have hprod : u1 * u2 = 1 / 6 := by nlinarith [hw, hwnn]
+      have h1 : (t - u1) * (t - u2) = t ^ 2 - (u1 + u2) * t + u1 * u2 := by ring
+      calc 3 * t ^ 2 - 3 * t + 1 / 2
+          _ = 3 * (t ^ 2 - t + 1 / 6) := by ring
+          _ = 3 * (t ^ 2 - (u1 + u2) * t + u1 * u2) := by rw [hsum, hprod]; ring
+          _ = 3 * ((t - u1) * (t - u2)) := by rw [← h1]
+          _ = 3 * (t - u1) * (t - u2) := by ring
+    -- deriv B3poly x = 3x² − 3x + 1/2 (from B3poly_hasDerivAt via HasDerivAt.deriv)
+    have hDeriv : ∀ x : ℝ, deriv B3poly x = 3 * x ^ 2 - 3 * x + 1 / 2 := by
+      intro x
+      rw [HasDerivAt.deriv (B3poly_hasDerivAt x)]
+      ring
+    have hCont (t : Set ℝ) : ContinuousOn B3poly t := by
+      intro x _
+      have hc : Continuous fun u : ℝ => u ^ 3 - (3 / 2) * u ^ 2 + (1 / 2) * u := by
+        continuity
+      exact hc.continuousWithinAt
+    have hDiff (t : Set ℝ) : DifferentiableOn ℝ B3poly t :=
+      fun x _ => (B3poly_hasDerivAt x).differentiableAt.differentiableWithinAt
+    have hMax : B3poly u1 = Real.sqrt 3 / 36 := by simpa [hw_def] using B3poly_max_val
+    have hMin : B3poly u2 = -(Real.sqrt 3 / 36) := by simpa [hw_def] using B3poly_min_val
+    by_cases hL : u ≤ u1
+    · -- u ∈ [0, u1]: B3poly nondecreasing (deriv ≥ 0 on (0, u1))
+      have hmono : MonotoneOn B3poly (Set.Icc 0 u1) :=
+        monotoneOn_of_deriv_nonneg (convex_Icc (0 : ℝ) u1) (hCont (Set.Icc 0 u1))
+          (hDiff (interior (Set.Icc 0 u1))) (fun x hx => by
+            have hIo : x ∈ Set.Ioo 0 u1 := by
+              simpa [interior_Icc] using hx
+            rw [hDeriv x, hFact x]
+            nlinarith [h0u1, hIo.1, hIo.2, hu1u2])
+      have hA : B3poly 0 ≤ B3poly u :=
+        hmono ⟨le_rfl, h0u1.le⟩ ⟨hu.1, hL⟩ hu.1
+      have hpos : 0 ≤ B3poly u := by simpa [B3poly_at_0] using hA
+      have hB : B3poly u ≤ B3poly u1 :=
+        hmono ⟨hu.1, hL⟩ ⟨h0u1.le, le_rfl⟩ hL
+      rw [abs_of_nonneg hpos]
+      nlinarith [hB, hMax]
+    · push_neg at hL
+      by_cases hR : u ≥ u2
+      · -- u ∈ [u2, 1]: B3poly nondecreasing (deriv ≥ 0 on (u2, 1))
+        have hmono : MonotoneOn B3poly (Set.Icc u2 1) :=
+          monotoneOn_of_deriv_nonneg (convex_Icc u2 1) (hCont (Set.Icc u2 1))
+            (hDiff (interior (Set.Icc u2 1))) (fun x hx => by
+              have hIo : x ∈ Set.Ioo u2 1 := by
+                simpa [interior_Icc] using hx
+              rw [hDeriv x, hFact x]
+              nlinarith [h0u1, hIo.1, hIo.2, hu1u2])
+        have hA : B3poly u2 ≤ B3poly u :=
+          hmono ⟨le_rfl, hu21.le⟩ ⟨hR, hu.2⟩ hR
+        have hneg : B3poly u ≤ 0 := by
+          have hB : B3poly u ≤ B3poly 1 :=
+            hmono ⟨hR, hu.2⟩ ⟨hu21.le, le_rfl⟩ hu.2
+          simpa [B3poly_at_1] using hB
+        rw [abs_of_nonpos hneg]
+        nlinarith [hA, hMin]
+      · -- u₁ < u < u₂: B3poly nonincreasing (deriv ≤ 0 on (u1, u2))
+        push_neg at hR
+        have hanti : AntitoneOn B3poly (Set.Icc u1 u2) :=
+          antitoneOn_of_deriv_nonpos (convex_Icc u1 u2) (hCont (Set.Icc u1 u2))
+            (hDiff (interior (Set.Icc u1 u2))) (fun x hx => by
+              have hIo : x ∈ Set.Ioo u1 u2 := by
+                simpa [interior_Icc] using hx
+              rw [hDeriv x, hFact x]
+              nlinarith [hIo.1, hIo.2])
+        have hA : B3poly u2 ≤ B3poly u :=
+          hanti ⟨le_of_lt hL, hR.le⟩ ⟨hu1u2.le, le_rfl⟩ hR.le
+        have hB : B3poly u ≤ B3poly u1 :=
+          hanti ⟨le_rfl, hu1u2.le⟩ ⟨le_of_lt hL, hR.le⟩ (le_of_lt hL)
+        rw [abs_le]
+        constructor
+        · nlinarith [hA, hMin]
+        · nlinarith [hB, hMax]
+
+  --/ Atom L4.3 — **OP2c (complex decaying exponential — the atom P4 uses)**:
+  --|  for Re s = 1/2, n ≥ 1:
+  --|    |∫_n^∞ B̂₂(x)·(x:ℂ)^{−s−2} dx| ≤ (√3/270)·‖s+2‖·n^{−5/2}.
+  --|  Proof per the spec: per-period IBP (lemma-u := (x:ℂ)^{−s−2},
+  --|  lemma-v := B₃(x−k)/3 with v' = B̂₂ on [k,k+1], u' =
+  --|  (−s−2)(x:ℂ)^{−s−3}); boundary terms vanish (B₃(0) = B₃(1) = 0);
+  --|  |B₃poly| ≤ √3/36; the per-period x^{-7/2} integrals reassemble into
+  --|  ∫_n^N ≤ (2/5)n^{−5/2} (FTC with antiderivative −(2/5)x^{-5/2});
+  --|  then the L3 M→∞ passage (L3 pattern) + a bounded-limit argument.
+  --|  IBP sign verified numerically (/tmp/ibp_check.py). -/
+  theorem p4_op2c_bound {s : ℂ} (hsre : s.re = 1 / 2) (n : ℕ) (hn : 0 < n) :
+      ‖∫ x : ℝ in Set.Ioi (n : ℝ), (B2 x : ℂ) * (x : ℂ) ^ (-s - 2)‖
+          ≤ Real.sqrt 3 / 270 * ‖s + 2‖ * (n : ℝ) ^ (-5 / 2 : ℝ) := by
+    have hnpos : 0 < (n : ℝ) := Nat.cast_pos.mpr hn
+    set f : ℝ → ℂ := fun (x : ℝ) => (B2 x : ℂ) * (x : ℂ) ^ (-s - 2) with hf
+    -- (0) the tail integrand is integrable on (n, ∞)  [mirror of L3.c]
+    have hCpowCO : ContinuousOn (fun x : ℝ => (x : ℂ) ^ (-s - 2)) (Set.Ioi (n : ℝ)) := by
+      intro x hx
+      exact (Complex.continuousAt_ofReal_cpow_const x (-s - 2) (Or.inr (ne_of_gt (hnpos.trans hx)))).continuousWithinAt
+    have hB2aesIoi : AEStronglyMeasurable (fun x : ℝ => (B2 x : ℂ))
+        (volume.restrict (Set.Ioi (n : ℝ))) :=
+      AEStronglyMeasurable.mono_measure
+        (Continuous.comp_aestronglyMeasurable (hg := Complex.continuous_ofReal)
+          (aestronglyMeasurable_B2 : AEStronglyMeasurable B2))
+        ((Measure.restrict_mono (Set.Ioi (n : ℝ)).subset_univ le_rfl).trans
+          (le_of_eq Measure.restrict_univ))
+    have hCpowaes : AEStronglyMeasurable (fun x : ℝ => (x : ℂ) ^ (-s - 2))
+        (volume.restrict (Set.Ioi (n : ℝ))) :=
+      ContinuousOn.aestronglyMeasurable hCpowCO measurableSet_Ioi
+    have hRe : (-(s.re + 2) : ℝ) < -1 := by nlinarith [hsre]
+    have hRpow : Integrable (fun x : ℝ => x ^ (-(s.re + 2)))
+        (volume.restrict (Set.Ioi (n : ℝ))) :=
+      (integrableOn_Ioi_rpow_of_lt (a := (-(s.re + 2) : ℝ)) hRe hnpos).integrable
+    have hMajor : HasFiniteIntegral (fun x : ℝ => (1 / 6 : ℝ) * x ^ (-(s.re + 2)))
+        (volume.restrict (Set.Ioi (n : ℝ))) :=
+      Integrable.hasFiniteIntegral (hRpow.const_mul (1 / 6 : ℝ))
+    have hInt : IntegrableOn f (Set.Ioi (n : ℝ)) := by
+      refine ⟨hB2aesIoi.mul hCpowaes, ?_⟩
+      rw [← hasFiniteIntegral_norm_iff]
+      exact HasFiniteIntegral.mono' hMajor (by
+        rw [ae_restrict_iff' measurableSet_Ioi]
+        exact MeasureTheory.ae_of_all (μ := (volume : Measure ℝ)) (fun x hx => by
+          have hxpos : 0 < x := hnpos.trans hx
+          have h1 : ‖(‖f x‖ : ℝ)‖ = ‖f x‖ := by simp
+          rw [h1]
+          calc ‖f x‖
+              _ = ‖(B2 x : ℂ)‖ * ‖(x : ℂ) ^ (-s - 2)‖ := by
+                rw [hf, norm_mul]
+              _ = |B2 x| * ‖(x : ℂ) ^ (-s - 2)‖ := by
+                have hb2 : ‖(B2 x : ℂ)‖ = Real.sqrt ((B2 x : ℝ) ^ 2) := by
+                  rw [Complex.norm_def, Complex.normSq_ofReal, ← pow_two]
+                rw [hb2, Real.sqrt_sq_eq_abs]
+              _ ≤ (1 / 6 : ℝ) * ‖(x : ℂ) ^ (-s - 2)‖ := by
+                gcongr
+                exact abs_B2_le (le_of_lt hxpos)
+              _ = (1 / 6 : ℝ) * (x : ℝ) ^ (-(s.re + 2)) := by
+                rw [Complex.norm_cpow_eq_rpow_re_of_pos hxpos]
+                rw [show (-(s : ℂ) - 2).re = -(s.re + 2) from by
+                  rw [show (-(s : ℂ) - 2 : ℂ) = -((s : ℂ) + 2) from by ring,
+                    Complex.neg_re, Complex.add_re,
+                    show (2 : ℂ).re = 2 from by norm_num]]))
+    -- (1) continuity of the tail integrand on each unit period [k, k+1]
+    have hCpow3CO : ContinuousOn (fun x : ℝ => (x : ℂ) ^ (-s - 3)) (Set.Ioi (n : ℝ)) := by
+      intro x hx
+      exact (Complex.continuousAt_ofReal_cpow_const x (-s - 3) (Or.inr (ne_of_gt (hnpos.trans hx)))).continuousWithinAt
+    have hPeriodCont (k : ℕ) (hk : n ≤ k) :
+        ContinuousOn f (Set.Icc (k : ℝ) (k + 1 : ℝ)) := by
+      have hco2 : ContinuousOn (fun x : ℝ => (B2 x : ℂ)) (Set.Icc (k : ℝ) (k + 1 : ℝ)) := by
+        have hpoly : ContinuousOn
+            (fun x : ℝ => (((x - (k : ℝ)) ^ 2 - (x - (k : ℝ)) + 1 / 6 : ℝ) : ℂ))
+            (Set.Icc (k : ℝ) (k + 1 : ℝ)) := by fun_prop
+        exact ContinuousOn.congr hpoly (by
+          intro x hx
+          dsimp only
+          rw [B2_of_Icc_int (n := (k : ℕ)) hx])
+      exact hco2.mul (by
+        intro x hx
+        have hpos : 0 < x := by
+          calc 0 < (n : ℝ) := Nat.cast_pos.mpr hn
+            _ ≤ (k : ℝ) := (Nat.cast_le (α := ℝ)).mpr hk
+            _ ≤ x := hx.1
+        exact (Complex.continuousAt_ofReal_cpow_const x (-s - 2) (Or.inr (ne_of_gt hpos))).continuousWithinAt)
+    -- (2) derivatives for the per-period IBP
+    have hGderiv (k : ℕ) (hk : n ≤ k) :
+        ∀ x ∈ Set.uIcc (k : ℝ) (k + 1 : ℝ),
+          HasDerivAt (fun x : ℝ => (x : ℂ) ^ (-s - 2))
+              ((-s - 2) * (x : ℂ) ^ (-s - 3)) x := by
+      intro x hx
+      have hx0 : x ≠ 0 := by
+        intro h
+        have hxge : (n : ℝ) ≤ x :=
+          (Nat.cast_le.mpr hk).trans (by
+            simpa [show min (k : ℝ) (k + 1) = (k : ℝ) from min_eq_left (by nlinarith)]
+              using hx.1)
+        linarith [hn, hxge, h]
+      have hsc : -s - 2 ≠ 0 := by
+        intro h
+        have hre0 : (-(s : ℂ) - 2).re = 0 := by simpa [h]
+        rw [show (-(s : ℂ) - 2 : ℂ) = -((s : ℂ) + 2) from by ring,
+          Complex.neg_re, Complex.add_re,
+          show (2 : ℂ).re = 2 from by norm_num] at hre0
+        linarith [hsre]
+      have hexp : (-s - 2 : ℂ) - 1 = -s - 3 := by ring
+      simpa [hexp] using hasDerivAt_ofReal_cpow_const hx0 hsc
+    have hVderiv (k : ℕ) :
+        ∀ x ∈ Set.uIcc (k : ℝ) (k + 1 : ℝ),
+          HasDerivAt (fun x : ℝ => (B3poly (x - (k : ℝ)) / 3 : ℂ))
+              (((x - (k : ℝ)) ^ 2 - (x - (k : ℝ)) + 1 / 6 : ℂ)) x := by
+      intro x _
+      have hU : HasDerivAt (fun t : ℝ => t - (k : ℝ)) 1 x := by
+        have hsub : HasDerivAt ((id : ℝ → ℝ) - (fun _ : ℝ => (k : ℝ))) (1 - 0) x := by
+          simpa using (hasDerivAt_id x).sub (hasDerivAt_const x (k : ℝ))
+        have hfun : (id : ℝ → ℝ) - (fun _ : ℝ => (k : ℝ)) = (fun t : ℝ => t - (k : ℝ)) := by
+          funext t
+          dsimp
+        simpa [hfun] using hsub
+      have hW : HasDerivAt (fun t : ℝ => B3poly (t - (k : ℝ)))
+          (3 * ((x - (k : ℝ)) ^ 2 - (x - (k : ℝ)) + 1 / 6)) x := by
+        have hW0 := HasDerivAt.comp x (B3poly_hasDerivAt (x - (k : ℝ))) hU
+        have hfun : (B3poly ∘ (fun t : ℝ => t - (k : ℝ))) =
+            (fun t : ℝ => B3poly (t - (k : ℝ))) := by
+          funext t
+          dsimp
+        have hder : 3 * ((x - (k : ℝ)) ^ 2 - (x - (k : ℝ)) + 1 / 6) * 1 =
+            3 * ((x - (k : ℝ)) ^ 2 - (x - (k : ℝ)) + 1 / 6) := by ring
+        simpa [hfun, hder] using hW0
+      have hV2 : HasDerivAt (fun t : ℝ => (B3poly (t - (k : ℝ))) / 3)
+          ((x - (k : ℝ)) ^ 2 - (x - (k : ℝ)) + 1 / 6) x := by
+        simpa using hW.div_const 3
+      simpa using HasDerivAt.ofReal_comp hV2
+    -- (3) the per-period IBP identity
+    have hIBP (k : ℕ) (hk : n ≤ k) :
+        (∫ x in (k : ℝ)..(k + 1 : ℝ), f x) =
+            (s + 2) / 3 * (∫ x in (k : ℝ)..(k + 1 : ℝ),
+              (B3poly (x - (k : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 3)) := by
+      set u : ℝ → ℂ := (fun (x : ℝ) => (x : ℂ) ^ (-s - 2)) with hu
+      set v : ℝ → ℂ := (fun (x : ℝ) => (B3poly (x - (k : ℝ)) / 3 : ℂ)) with hv
+      have hU : ∀ x ∈ Set.uIcc (k : ℝ) (k + 1 : ℝ),
+          HasDerivAt u ((-s - 2) * (x : ℂ) ^ (-s - 3)) x := hGderiv k hk
+      have hV : ∀ x ∈ Set.uIcc (k : ℝ) (k + 1 : ℝ),
+          HasDerivAt v (((x - (k : ℝ)) ^ 2 - (x - (k : ℝ)) + 1 / 6 : ℂ)) x :=
+        hVderiv k
+      have hUint : IntervalIntegrable (fun x : ℝ => (-s - 2) * (x : ℂ) ^ (-s - 3))
+          volume (k : ℝ) (k + 1 : ℝ) := by
+        have hm : ContinuousOn (fun x : ℝ => (-s - 2) * (x : ℂ) ^ (-s - 3))
+            (Set.uIcc (k : ℝ) (k + 1 : ℝ)) :=
+          continuousOn_const.mul (by
+            intro x hx
+            have hpos : 0 < x := by
+              calc 0 < (n : ℝ) := Nat.cast_pos.mpr hn
+                _ ≤ (k : ℝ) := (Nat.cast_le (α := ℝ)).mpr hk
+                _ ≤ x := by
+                  simpa [show min (k : ℝ) (k + 1) = (k : ℝ) from min_eq_left (by nlinarith)]
+                    using hx.1
+            exact (Complex.continuousAt_ofReal_cpow_const x (-s - 3)
+                (Or.inr (ne_of_gt hpos))).continuousWithinAt)
+        exact hm.intervalIntegrable
+      have hVint : IntervalIntegrable
+          (fun x : ℝ => ((x - (k : ℝ)) ^ 2 - (x - (k : ℝ)) + 1 / 6 : ℂ))
+          volume (k : ℝ) (k + 1 : ℝ) := by
+        have hm : ContinuousOn
+            (fun x : ℝ => ((x - (k : ℝ)) ^ 2 - (x - (k : ℝ)) + 1 / 6 : ℂ))
+            (Set.uIcc (k : ℝ) (k + 1 : ℝ)) := by fun_prop
+        exact hm.intervalIntegrable
+      have H : (∫ x in (k : ℝ)..(k + 1 : ℝ),
+                u x * (((x - (k : ℝ)) ^ 2 - (x - (k : ℝ)) + 1 / 6 : ℂ))) =
+          u (k + 1 : ℝ) * v (k + 1 : ℝ) - u (k : ℝ) * v (k : ℝ) -
+            (∫ x in (k : ℝ)..(k + 1 : ℝ), ((-s - 2) * (x : ℂ) ^ (-s - 3)) * v x) :=
+        (intervalIntegral.integral_mul_deriv_eq_deriv_mul
+          (fun x hx => hU x hx)
+          (fun x hx => hV x hx)
+          hUint hVint : _ = _)
+      calc (∫ x in (k : ℝ)..(k + 1 : ℝ), f x)
+          _ = (∫ x in (k : ℝ)..(k + 1 : ℝ),
+                u x * (((x - (k : ℝ)) ^ 2 - (x - (k : ℝ)) + 1 / 6 : ℂ))) := by
+            have hEq : EqOn (fun x : ℝ => (B2 x : ℂ) * (x : ℂ) ^ (-s - 2))
+                (fun x : ℝ => u x * (((x - (k : ℝ)) ^ 2 - (x - (k : ℝ)) + 1 / 6 : ℂ)))
+                (Set.Icc (k : ℝ) (k + 1 : ℝ)) := by
+              intro x hx
+              dsimp only [f, u]
+              rw [B2_of_Icc_int (n := (k : ℕ)) hx]
+              rw [mul_comm]
+              congr 1
+              apply Complex.ext
+              · simp [Complex.ofReal_re]
+              · simp [Complex.ofReal_im]
+            have hEqU : EqOn f (fun x : ℝ => u x * (((x - (k : ℝ)) ^ 2 - (x - (k : ℝ)) + 1 / 6 : ℂ)))
+                (Set.uIcc (k : ℝ) (k + 1 : ℝ)) :=
+              (hf.symm ▸ hEq).mono (by
+                intro x hx
+                simpa [show min (k : ℝ) (k + 1) = (k : ℝ) from min_eq_left (by nlinarith),
+                  show max (k : ℝ) (k + 1) = (k + 1 : ℝ) from max_eq_right (by nlinarith)]
+                  using hx)
+            simpa using (intervalIntegral.integral_congr (μ := (MeasureTheory.volume : Measure ℝ)) hEqU)
+          _ = u (k + 1 : ℝ) * v (k + 1 : ℝ) - u (k : ℝ) * v (k : ℝ) -
+              (∫ x in (k : ℝ)..(k + 1 : ℝ), ((-s - 2) * (x : ℂ) ^ (-s - 3)) * v x) :=
+            H
+          _ = - (∫ x in (k : ℝ)..(k + 1 : ℝ),
+                ((-s - 2) * (x : ℂ) ^ (-s - 3)) * v x) := by
+            have hvk1 : v (k + 1 : ℝ) = 0 := by
+              dsimp only [v]
+              rw [show ((k + 1 : ℝ) - (k : ℝ) : ℝ) = 1 by ring, B3poly_at_1]
+              norm_num
+            have hvk0 : v (k : ℝ) = 0 := by
+              dsimp only [v]
+              rw [show ((k : ℝ) - (k : ℝ) : ℝ) = 0 by ring, B3poly_at_0]
+              norm_num
+            rw [hvk1, hvk0]
+            ring
+          _ = ((s + 2) / 3 : ℂ) * (∫ x in (k : ℝ)..(k + 1 : ℝ),
+                (B3poly (x - (k : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 3)) := by
+            have hX : (∫ x in (k : ℝ)..(k + 1 : ℝ),
+                      ((-s - 2) * (x : ℂ) ^ (-s - 3)) * v x) =
+                ((-(s + 2 : ℂ)) / 3) *
+                  (∫ x in (k : ℝ)..(k + 1 : ℝ),
+                    (B3poly (x - (k : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 3)) := by
+              have hEq : EqOn
+                  (fun x : ℝ => ((-s - 2) * (x : ℂ) ^ (-s - 3)) * v x)
+                  (fun x : ℝ => (-(s + 2 : ℂ)) / 3 *
+                    ((B3poly (x - (k : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 3)))
+                  (Set.uIcc (k : ℝ) (k + 1 : ℝ)) := by
+                intro x _
+                dsimp only [v]
+                ring
+              exact (intervalIntegral.integral_congr (μ := (MeasureTheory.volume : Measure ℝ)) hEq).trans (by
+                rw [intervalIntegral.integral_const_mul ((-(s + 2 : ℂ)) / 3)])
+            rw [hX]
+            ring
+    -- (4) the per-period bound after the IBP
+    have hper (k : ℕ) (hk : n ≤ k) :
+        ‖∫ x in (k : ℝ)..(k + 1 : ℝ), (B3poly (x - (k : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 3)‖
+            ≤ (∫ x in (k : ℝ)..(k + 1 : ℝ), Real.sqrt 3 / 36 * (x ^ (-7 / 2 : ℝ))) := by
+      apply intervalIntegral.norm_integral_le_of_norm_le
+        (g := fun x : ℝ => Real.sqrt 3 / 36 * (x ^ (-7 / 2 : ℝ)))
+      · linarith
+      · exact MeasureTheory.ae_of_all (μ := (volume : Measure ℝ)) (fun t htx => by
+          have htxpos : 0 < t := by
+            calc 0 < (n : ℝ) := Nat.cast_pos.mpr hn
+              _ ≤ (k : ℝ) := (Nat.cast_le (α := ℝ)).mpr hk
+              _ ≤ t := le_of_lt htx.1
+          have hB3 : |B3poly (t - (k : ℝ))| ≤ Real.sqrt 3 / 36 :=
+            abs_B3poly_le (t - (k : ℝ))
+              ⟨by linarith [htx.1], by nlinarith [htx.2]⟩
+          calc ‖(B3poly (t - (k : ℝ)) : ℂ) * (t : ℂ) ^ (-s - 3)‖
+              _ = ‖(B3poly (t - (k : ℝ)) : ℂ)‖ * ‖(t : ℂ) ^ (-s - 3)‖ := by
+                rw [norm_mul]
+              _ = |B3poly (t - (k : ℝ))| * ‖(t : ℂ) ^ (-s - 3)‖ := by
+                have hb3 : ‖(B3poly (t - (k : ℝ)) : ℂ)‖ =
+                    Real.sqrt ((B3poly (t - (k : ℝ)) : ℝ) ^ 2) := by
+                  rw [Complex.norm_def, Complex.normSq_ofReal, ← pow_two]
+                rw [hb3, Real.sqrt_sq_eq_abs]
+              _ ≤ Real.sqrt 3 / 36 * ‖(t : ℂ) ^ (-s - 3)‖ := by
+                gcongr
+              _ = Real.sqrt 3 / 36 * (t : ℝ) ^ (-(s.re + 3)) := by
+                rw [Complex.norm_cpow_eq_rpow_re_of_pos htxpos ((-s : ℂ) - 3)]
+                rw [show (-(s : ℂ) - 3).re = -(s.re + 3) from by
+                  rw [show (-(s : ℂ) - 3 : ℂ) = -((s : ℂ) + 3) from by ring,
+                    Complex.neg_re, Complex.add_re,
+                    show (3 : ℂ).re = 3 from by norm_num]]
+              _ = Real.sqrt 3 / 36 * (t ^ (-7 / 2 : ℝ)) := by
+                rw [show (-(s.re + 3) : ℝ) = (-7 / 2 : ℝ) from by
+                  rw [hsre]
+                  norm_num])
+      · have hco : ContinuousOn (fun x : ℝ => x ^ (-7 / 2 : ℝ))
+              (Set.uIcc (k : ℝ) (k + 1 : ℝ)) := by
+          intro x hx
+          exact (continuousAt_rpow_const x (-7 / 2)
+              (Or.inl (ne_of_gt (by
+                calc 0 < (n : ℝ) := Nat.cast_pos.mpr hn
+                  _ ≤ (k : ℝ) := (Nat.cast_le (α := ℝ)).mpr hk
+                  _ ≤ x := by
+                    simpa [show min (k : ℝ) (k + 1) = (k : ℝ) from min_eq_left (by nlinarith)]
+                      using hx.1)))).continuousWithinAt
+        have hc : ContinuousOn (fun _ : ℝ => (Real.sqrt 3 / 36 : ℝ) : ℝ → ℝ)
+            (Set.uIcc (k : ℝ) (k + 1 : ℝ)) := continuousOn_const
+        exact (hc.mul hco).intervalIntegrable
+    -- (5) the finite bound over [n, N]  (N ≥ n, natural)
+    have hSum (N : ℕ) (hN : n ≤ N) :
+        (∫ x in (n : ℝ)..(N : ℝ), f x) =
+            ∑ k ∈ Finset.Ico n N, ∫ x in (k : ℝ)..(k + 1 : ℝ), f x := by
+      rw [← sum_integral_adjacent_intervals_Ico (a := fun k : ℕ => (k : ℝ))
+        (by exact hN)
+        (fun (k : ℕ) hk => by
+          have hco0 := hPeriodCont k (Set.mem_Ico.mp hk |>.1)
+          have hco : ContinuousOn f (Set.Icc (k : ℝ) ((k + 1 : ℕ) : ℝ)) :=
+            hco0.mono (by
+              intro x hx
+              rw [show (k : ℝ) + 1 = ((k + 1 : ℕ) : ℝ) from (Nat.cast_succ k).symm]
+              exact hx)
+          exact hco.intervalIntegrable_of_Icc (by norm_num))
+      ]
+      rw [Finset.sum_congr rfl (fun k hk => by
+        rw [show ((k + 1 : ℕ) : ℝ) = (k : ℝ) + 1 from Nat.cast_succ k])]
+    have hBoundN (N : ℕ) (hN : n ≤ N) :
+        ‖∫ x in (n : ℝ)..(N : ℝ), f x‖ ≤
+            Real.sqrt 3 / 270 * ‖s + 2‖ * (n : ℝ) ^ (-5 / 2 : ℝ) := by
+      have hper2 (k : ℕ) (hk : n ≤ k) :
+          ‖∫ x in (k : ℝ)..(k + 1 : ℝ), f x‖ ≤
+              Real.sqrt 3 / 108 * ‖s + 2‖ * (∫ x in (k : ℝ)..(k + 1 : ℝ), x ^ (-7 / 2 : ℝ)) := by
+        calc ‖∫ x in (k : ℝ)..(k + 1 : ℝ), f x‖
+            _ = ‖((s + 2) / 3 : ℂ) * (∫ x in (k : ℝ)..(k + 1 : ℝ),
+                  (B3poly (x - (k : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 3))‖ := by
+              rw [hIBP k hk]
+            _ = ‖s + 2‖ / 3 * ‖∫ x in (k : ℝ)..(k + 1 : ℝ),
+                  (B3poly (x - (k : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 3)‖ := by
+              rw [norm_mul]
+              rw [show ‖((s + 2) / 3 : ℂ)‖ = ‖s + 2‖ / 3 from by
+                rw [norm_div]
+                norm_num]
+            _ ≤ ‖s + 2‖ / 3 *
+                (Real.sqrt 3 / 36 * (∫ x in (k : ℝ)..(k + 1 : ℝ), x ^ (-7 / 2 : ℝ))) := by
+              gcongr
+              simpa using hper k hk
+            _ = Real.sqrt 3 / 108 * ‖s + 2‖ *
+                (∫ x in (k : ℝ)..(k + 1 : ℝ), x ^ (-7 / 2 : ℝ)) := by
+              ring
+      calc ‖∫ x in (n : ℝ)..(N : ℝ), f x‖
+          _ = ‖∑ k ∈ Finset.Ico n N, ∫ x in (k : ℝ)..(k + 1 : ℝ), f x‖ := by
+            rw [hSum N hN]
+          _ ≤ ∑ k ∈ Finset.Ico n N, ‖∫ x in (k : ℝ)..(k + 1 : ℝ), f x‖ :=
+            norm_sum_le (Finset.Ico n N) (fun k : ℕ => ∫ x in (k : ℝ)..(k + 1 : ℝ), f x)
+          _ ≤ ∑ k ∈ Finset.Ico n N,
+                (Real.sqrt 3 / 108 * ‖s + 2‖ * (∫ x in (k : ℝ)..(k + 1 : ℝ), x ^ (-7 / 2 : ℝ))) := by
+            apply Finset.sum_le_sum
+            intro k hk
+            simpa using hper2 k (Finset.mem_Ico.mp hk |>.1)
+          _ = (Real.sqrt 3 / 108 * ‖s + 2‖) * (∫ x in (n : ℝ)..(N : ℝ), x ^ (-7 / 2 : ℝ)) := by
+            rw [← Finset.mul_sum (Finset.Ico n N)
+              (fun k : ℕ => ∫ x in (k : ℝ)..(k + 1 : ℝ), x ^ (-7 / 2 : ℝ))
+              (Real.sqrt 3 / 108 * ‖s + 2‖)]
+            rw [show ∫ x in (n : ℝ)..(N : ℝ), x ^ (-7 / 2 : ℝ) =
+                  ∑ k ∈ Finset.Ico n N, ∫ x in (k : ℝ)..(k + 1 : ℝ), x ^ (-7 / 2 : ℝ) from by
+              have hS : (∫ x in (n : ℝ)..(N : ℝ), x ^ (-7 / 2 : ℝ)) =
+                  (∑ k ∈ Finset.Ico n N, ∫ x in (k : ℝ)..((k + 1 : ℕ) : ℝ), x ^ (-7 / 2 : ℝ)) :=
+                (sum_integral_adjacent_intervals_Ico (a := fun k : ℕ => (k : ℝ)) hN
+                  (fun k hk => by
+                    have hco0 : ContinuousOn (fun x : ℝ => x ^ (-7 / 2 : ℝ))
+                        (Set.Icc (k : ℝ) (k + 1 : ℝ)) := by
+                      intro x hx
+                      have hxpos : 0 < x := by nlinarith [hx.1,
+                      (Nat.cast_le (α := ℝ)).mpr (Set.mem_Ico.mp hk |>.1),
+                      (Nat.cast_pos (α := ℝ)).mpr hn]
+                      exact (continuousAt_rpow_const x (-7 / 2) (Or.inl (ne_of_gt hxpos))).continuousWithinAt
+                    have hco : ContinuousOn (fun x : ℝ => x ^ (-7 / 2 : ℝ))
+                        (Set.Icc (k : ℝ) ((k + 1 : ℕ) : ℝ)) :=
+                      hco0.mono (by
+                        intro x hx
+                        rw [show (k : ℝ) + 1 = ((k + 1 : ℕ) : ℝ) from (Nat.cast_succ k).symm]
+                        exact hx)
+                    exact hco.intervalIntegrable_of_Icc (μ := (MeasureTheory.volume : Measure ℝ)) (by
+                      rw [Nat.cast_succ]
+                      nlinarith))).symm
+              rw [hS, Finset.sum_congr rfl (fun k hk => by
+                rw [show ((k + 1 : ℕ) : ℝ) = (k : ℝ) + 1 from Nat.cast_succ k])
+              ]
+              ]
+          _ ≤ (Real.sqrt 3 / 108 * ‖s + 2‖) * ((2 / 5) * (n : ℝ) ^ (-5 / 2 : ℝ)) := by
+            gcongr
+            -- ∫_n^N x^{−7/2} = (2/5)·(n^{−5/2} − N^{−5/2}) ≤ (2/5)·n^{−5/2}
+            have hFTC : (∫ x in (n : ℝ)..(N : ℝ), x ^ (-7 / 2 : ℝ)) =
+                (-(2 / 5)) * ((N : ℝ) ^ (-5 / 2 : ℝ) - (n : ℝ) ^ (-5 / 2 : ℝ)) := by
+              have hDeriv : ∀ x ∈ Set.Ioo (n : ℝ) (N : ℝ),
+                  HasDerivAt (fun x : ℝ => (-(2 / 5)) * (x ^ (-5 / 2 : ℝ))) (x ^ (-7 / 2 : ℝ)) x := by
+                intro x hx
+                have hxpos : 0 < x := by nlinarith [hx.1, (Nat.cast_pos (α := ℝ)).mpr hn]
+                have hrp : HasDerivAt (fun x : ℝ => x ^ (-5 / 2 : ℝ))
+                    (((-5 / 2) : ℝ) * (x ^ (((-5 / 2) : ℝ) - 1))) x :=
+                  hasDerivAt_rpow_const (Or.inl (ne_of_gt hxpos))
+                have hm : HasDerivAt (fun x : ℝ => (-(2 / 5)) * (x ^ (-5 / 2 : ℝ)))
+                    (-(2 / 5) * (((-5 / 2) : ℝ) * (x ^ ((-5 / 2 : ℝ) - 1)))) x :=
+                  HasDerivAt.const_mul (c := (-(2 / 5) : ℝ)) hrp
+                have hd : (-(2 / 5)) * (((-5 / 2) : ℝ) * (x ^ ((-5 / 2 : ℝ) - 1))) =
+                    x ^ (-7 / 2 : ℝ) := by
+                  rw [show (((-5 / 2) : ℝ) - 1) = (-7 / 2 : ℝ) from by norm_num]
+                  ring
+                simpa [hd] using hm
+              have hCont : ContinuousOn (fun x : ℝ => (-(2 / 5)) * (x ^ (-5 / 2 : ℝ)))
+                  (Set.Icc (n : ℝ) (N : ℝ)) := by
+                have hR : ContinuousOn (fun x : ℝ => x ^ (-5 / 2 : ℝ))
+                    (Set.Icc (n : ℝ) (N : ℝ)) := by
+                  intro x hx
+                  have hxpos : 0 < x := by nlinarith [hx.1, (Nat.cast_pos (α := ℝ)).mpr hn]
+                  exact (continuousAt_rpow_const x (-5 / 2) (Or.inl (ne_of_gt hxpos))).continuousWithinAt
+                have hc : ContinuousOn (fun _ : ℝ => (-(2 / 5) : ℝ) : ℝ → ℝ)
+                    (Set.Icc (n : ℝ) (N : ℝ)) := continuousOn_const
+                exact hc.mul hR
+              have hIntg : IntervalIntegrable (fun x : ℝ => x ^ (-7 / 2 : ℝ))
+                  volume (n : ℝ) (N : ℝ) := by
+                have hco : ContinuousOn (fun x : ℝ => x ^ (-7 / 2 : ℝ))
+                    (Set.uIcc (n : ℝ) (N : ℝ)) := by
+                  intro x hx
+                  have hxpos : 0 < x := by
+                    calc 0 < (n : ℝ) := (Nat.cast_pos (α := ℝ)).mpr hn
+                      _ = min (n : ℝ) (N : ℝ) := (min_eq_left ((Nat.cast_le (α := ℝ)).mpr hN)).symm
+                      _ ≤ x := hx.1
+                  exact (continuousAt_rpow_const x (-7 / 2) (Or.inl (ne_of_gt hxpos))).continuousWithinAt
+                exact hco.intervalIntegrable
+              have hH := integral_eq_sub_of_hasDerivAt_of_le ((Nat.cast_le (α := ℝ)).mpr hN) hCont hDeriv hIntg
+              simpa [show ((-(2 / 5) : ℝ)) * ((N : ℝ) ^ (-5 / 2 : ℝ) - (n : ℝ) ^ (-5 / 2 : ℝ)) =
+                  (-(2 / 5) : ℝ) * (N : ℝ) ^ (-5 / 2 : ℝ) + (2 / 5) * (n : ℝ) ^ (-5 / 2 : ℝ) from by ring] using hH
+            rw [hFTC]
+            nlinarith [show 0 ≤ (N : ℝ) ^ (-5 / 2 : ℝ) from by
+              apply Real.rpow_nonneg
+              norm_num]
+          _ = Real.sqrt 3 / 270 * ‖s + 2‖ * (n : ℝ) ^ (-5 / 2 : ℝ) := by
+            ring
+    -- (6) the M→∞ passage (L3 pattern) + the bounded-limit argument
+    set L := (∫ x, f x ∂ volume.restrict (Set.Ioi (n : ℝ))) with hLdef
+    have hSeq : Tendsto (fun N : ℕ => ∫ x in (n : ℝ)..(N : ℝ), f x) atTop (𝓝 L) := by
+      have hSeqR : Tendsto (fun M : ℝ => ∫ x in (n : ℝ)..M, f x) atTop (𝓝 L) :=
+        intervalIntegral_tendsto_integral_Ioi (a := (n : ℝ)) hInt tendsto_id
+      exact hSeqR.comp (tendsto_natCast_atTop_atTop (R := ℝ))
+    have hNorm : Tendsto (fun N : ℕ => ‖∫ x in (n : ℝ)..(N : ℝ), f x‖) atTop (𝓝 ‖L‖) := by
+      have hcn : Continuous (fun z : ℂ => ‖z‖) := by continuity
+      exact (hcn.tendsto L).comp hSeq
+    set C := Real.sqrt 3 / 270 * ‖s + 2‖ * (n : ℝ) ^ (-5 / 2 : ℝ) with hCdef
+    have hBoundSeq : ∀ᶠ (N : ℕ) in atTop, ‖∫ x in (n : ℝ)..(N : ℝ), f x‖ ≤ C := by
+      filter_upwards [eventually_ge_atTop n] with N hN
+      exact hBoundN N hN
+    -- the eventual bound passes to the limit (mathlib `le_of_tendsto`)
+    have hLbound : ‖L‖ ≤ C := le_of_tendsto hNorm hBoundSeq
+    simpa [f] using hLbound
+
+  --/ Atom L4.4 — application to f'' (the bridge from L5 to L4.3): for
+  --|  Re s = 1/2, n ≥ 1,
+  --|    ‖∫_n^∞ B̂₂(x)·f″(x) dx‖ ≤ (√3/270)·‖s(s+1)‖·‖s+2‖·n^{−5/2}
+  --|  (f″ = s(s+1)·(x:ℂ)^{−s−2}: scalar factor out of the integral,
+  --|  then L4.3 + norm_mul).  Note: this checkout's ℂ has no `Abs`
+  --|  instance — complex absolute value is the norm ‖·‖. -/
+  theorem p4_f2_tail_bound {s : ℂ} (hsre : s.re = 1 / 2) (n : ℕ) (hn : 0 < n) :
+      ‖∫ x : ℝ in Set.Ioi (n : ℝ), (B2 x : ℂ) * p4_f2 s x‖
+          ≤ Real.sqrt 3 / 270 * ‖s * (s + 1)‖ * ‖s + 2‖ * (n : ℝ) ^ (-5 / 2 : ℝ) := by
+    set f : ℝ → ℂ := fun (x : ℝ) => (B2 x : ℂ) * (x : ℂ) ^ (-s - 2) with hf
+    dsimp only [p4_f2]
+    have hFactor : (∫ x : ℝ in Set.Ioi (n : ℝ), (B2 x : ℂ) * (s * (s + 1) * (x : ℂ) ^ (-s - 2))) =
+        (s * (s + 1)) • (∫ x : ℝ in Set.Ioi (n : ℝ), f x) := by
+      have hM : Integrable (fun x : ℝ => (B2 x : ℂ) * (s * (s + 1) * (x : ℂ) ^ (-s - 2)))
+          (volume.restrict (Set.Ioi (n : ℝ))) :=
+        (p4_kernel_integrableOn_Ioi (by nlinarith [hsre]) (Nat.cast_pos.mpr hn)).integrable.congr
+        (MeasureTheory.ae_of_all (μ := (volume.restrict (Set.Ioi (n : ℝ))))
+          (fun x => by dsimp only [p4_f2]))
+      rw [show (∫ x : ℝ in Set.Ioi (n : ℝ),
+                (B2 x : ℂ) * (s * (s + 1) * (x : ℂ) ^ (-s - 2))) =
+                (∫ x : ℝ in Set.Ioi (n : ℝ), (s * (s + 1)) • f x) from by
+        refine (MeasureTheory.integral_congr_ae ?_)
+        exact MeasureTheory.ae_of_all (μ := (volume.restrict (Set.Ioi (n : ℝ)))) (fun x => by
+          dsimp only [f]
+          rw [show (s * (s + 1) : ℂ) • ((B2 x : ℂ) * (x : ℂ) ^ (-s - 2)) =
+                   (s * (s + 1)) * ((B2 x : ℂ) * (x : ℂ) ^ (-s - 2)) from rfl]
+          ring)]
+      rw [MeasureTheory.integral_smul]
+    rw [hFactor]
+    rw [show ‖(s * (s + 1)) • (∫ x : ℝ in Set.Ioi (n : ℝ), f x)‖ =
+          ‖(s * (s + 1)) * (∫ x : ℝ in Set.Ioi (n : ℝ), f x)‖ from rfl]
+    rw [norm_mul]
+    have hRHS : Real.sqrt 3 / 270 * ‖s * (s + 1)‖ * ‖s + 2‖ * (n : ℝ) ^ (-5 / 2 : ℝ) =
+        ‖s * (s + 1)‖ * (Real.sqrt 3 / 270 * ‖s + 2‖ * (n : ℝ) ^ (-5 / 2 : ℝ)) := by ring
+    rw [hRHS]
+    apply mul_le_mul_of_nonneg_left
+    · simpa [f] using (p4_op2c_bound hsre n hn)
+    · exact norm_nonneg (s * (s + 1))
+
 end
