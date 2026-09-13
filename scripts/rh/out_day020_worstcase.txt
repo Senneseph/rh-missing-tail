@@ -1,0 +1,66 @@
+list: 466655 zeros (<=3e5: 466655)
+g = 999.791572 (candidate nearest 1000): closed-vs-direct R(t=1000.5832, d=0.005): |diff| = 2.57e-16
+  g = 999.791572 (candidate nearest 1000) progress t=991.79
+  g = 999.791572 (candidate nearest 1000) progress t=995.79
+  g = 999.791572 (candidate nearest 1000) progress t=999.79
+  g = 999.791572 (candidate nearest 1000) progress t=1003.79
+  g = 999.791572 (candidate nearest 1000) progress t=1007.79
+  g = 999.791572 (candidate nearest 1000) progress t=1011.79
+
+g = 999.791572 (candidate nearest 1000): WORST over [987.8, 1011.8] at t = 1006.7916: resid = 0.08168, dev = 9.198, MARGIN = 112.6
+g = 999.791572 (candidate nearest 1000): 5 smallest margins:
+   t =  1006.7916  resid = 0.0817  dev = 9.2  margin = 113.0
+   t =   996.7916  resid = 0.025  dev = 3.05  margin = 122.0
+   t =  1001.2916  resid = 0.00175  dev = 0.246  margin = 140.0
+   t =  1005.7916  resid = 0.0149  dev = 2.11  margin = 142.0
+   t =   998.2916  resid = 0.0145  dev = 2.23  margin = 154.0
+g = 980.578001 (candidate nearest 980): closed-vs-direct R(t=981.3696, d=0.005): |diff| = 1.11e-16
+  g = 980.578001 (candidate nearest 980) progress t=972.58
+  g = 980.578001 (candidate nearest 980) progress t=976.58
+  g = 980.578001 (candidate nearest 980) progress t=980.58
+  g = 980.578001 (candidate nearest 980) progress t=984.58
+  g = 980.578001 (candidate nearest 980) progress t=988.58
+  g = 980.578001 (candidate nearest 980) progress t=992.58
+
+g = 980.578001 (candidate nearest 980): WORST over [968.6, 992.6] at t = 978.5780: resid = 0.01644, dev = 1.949, MARGIN = 118.6
+g = 980.578001 (candidate nearest 980): 5 smallest margins:
+   t =   978.5780  resid = 0.0164  dev = 1.95  margin = 119.0
+   t =   982.5780  resid = 0.00536  dev = 0.648  margin = 121.0
+   t =   973.0780  resid = 0.00302  dev = 0.394  margin = 131.0
+   t =   991.0780  resid = 0.00787  dev = 1.09  margin = 139.0
+   t =   976.0780  resid = 0.00218  dev = 0.322  margin = 148.0
+g = 1019.912440 (candidate nearest 1020): closed-vs-direct R(t=1020.7040, d=0.005): |diff| = 4.45e-17
+  g = 1019.912440 (candidate nearest 1020) progress t=1011.91
+  g = 1019.912440 (candidate nearest 1020) progress t=1015.91
+  g = 1019.912440 (candidate nearest 1020) progress t=1019.91
+  g = 1019.912440 (candidate nearest 1020) progress t=1023.91
+  g = 1019.912440 (candidate nearest 1020) progress t=1027.91
+  g = 1019.912440 (candidate nearest 1020) progress t=1031.91
+
+g = 1019.912440 (candidate nearest 1020): WORST over [1007.9, 1031.9] at t = 1016.9124: resid = 0.01471, dev = 1.794, MARGIN = 122.0
+g = 1019.912440 (candidate nearest 1020): 5 smallest margins:
+   t =  1016.9124  resid = 0.0147  dev = 1.79  margin = 122.0
+   t =  1022.4124  resid = 0.0176  dev = 2.23  margin = 127.0
+   t =  1021.4124  resid = 0.00191  dev = 0.245  margin = 128.0
+   t =  1027.9124  resid = 0.00273  dev = 0.393  margin = 144.0
+   t =  1026.9124  resid = 0.0127  dev = 2.03  margin = 160.0
+g = 1040.264038 (candidate nearest 1040): closed-vs-direct R(t=1041.0556, d=0.005): |diff| = 1.58e-16
+  g = 1040.264038 (candidate nearest 1040) progress t=1032.26
+  g = 1040.264038 (candidate nearest 1040) progress t=1036.26
+  g = 1040.264038 (candidate nearest 1040) progress t=1040.26
+  g = 1040.264038 (candidate nearest 1040) progress t=1044.26
+  g = 1040.264038 (candidate nearest 1040) progress t=1048.26
+  g = 1040.264038 (candidate nearest 1040) progress t=1052.26
+
+g = 1040.264038 (candidate nearest 1040): WORST over [1028.3, 1052.3] at t = 1041.2640: resid = 0.02275, dev = 2.65, MARGIN = 116.5
+g = 1040.264038 (candidate nearest 1040): 5 smallest margins:
+   t =  1041.2640  resid = 0.0228  dev = 2.65  margin = 116.0
+   t =  1051.2640  resid = 0.0232  dev = 2.87  margin = 124.0
+   t =  1045.7640  resid = 0.0226  dev = 2.86  margin = 127.0
+   t =  1050.2640  resid = 0.0132  dev = 1.69  margin = 128.0
+   t =  1031.7640  resid = 0.00178  dev = 0.254  margin = 143.0
+
+--- DAY-020 WORST-CASE AUDIT SUMMARY ---
+overall worst margin = 112.6  (t = 1006.7916)
+route-A pointwise decision resid < dev: HOLDS on the scanned windows
+RUN COMPLETE

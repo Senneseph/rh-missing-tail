@@ -717,3 +717,39 @@ near-regime detector floor is the pinned 0.9975 . |K| — the route-A
 decision holds at the measurement point with the full pinned-constant
 chain. (The cross-band worst case, e.g. the t = 980 residual spike
 2.465e-02 vs the detector there, needs the <= 3e5 list — queued.)
+
+## 13. Cross-band worst-case audit — route A HOLDS, min margin >= 112x (2026-09-16)
+
+`scripts/rh/day020_worstcase.py` (record: `scripts/rh/out_day020_worstcase.txt`)
+scans the queued cross-band question. Provenance: functions copied
+verbatim from the d4 generator (day009c blob 63ea96d5, per its header);
+certified list <= 3e5 (466,655 zeros); dps-15; closed-form R (P3/B5,
+Lean-proven) spot-checked against the direct 4-zero definition at each
+candidate (|diff| ~ 1e-16, matching the P3 5e-4 class record).
+
+Setup (the S8 pairing, made explicit): for each candidate pair height
+g (an ACTUAL zero height), on the straddle window t in [g-12, g+12]
+(step 0.5), the pointwise route-A decision is
+    resid(t) = |zeta(1/2+it) - K_on(t)|   (S10 LHS; A0: zeta - K_on)
+    dev(t)   = |K_on(t)| * min_{d in {0.005..0.5}} |R(g,d,t) - 1|
+    margin(t) = dev / resid.
+
+Results (overall worst in bracket):
+    g = 999.791572 (the d4 pair):  worst t = 1006.7916  resid = 0.0817  dev = 9.20  margin = 112.6
+    g = 980.578001 (queued t=980 cross-band):  WORST t = 978.578  resid = 0.0164  dev = 1.95  margin = 118.6
+    g = 1019.912440:  worst t = 1016.9124  margin = 122.0
+    g = 1040.264038:  worst t = 1041.264  margin = 116.5
+    OVERALL: min margin = 112.6, decision HOLDS on every scanned window.
+
+Key finding: the apparent sub-1 margin at t = 1009.79 in the d4 record
+(dev 0.0324 vs resid 0.0627) is the WRONG pairing — it uses the d4 pair
+(g = 999.79) at an evaluation height 10.2 units away, where |K| is small
+near a foreign zero. The S8 closure compares at the candidate pair's
+OWN height with its OWN pair; under that pairing the min margin is >= 112x
+across [968.6, 1052.3]. The queued t = 980 spike (resid 2.465e-2 in the
+D3 scan) is dominated ~120x at g = 980.58.
+
+d_min pin (S10, Route A's price): min over the measured grid edges
+d >= 0.005 — the floor is d-independent (P4 limit law) and the detector
+has no dead d window (P3: numerator a positive polynomial in d^2), so
+the measured lower edge d_min = 0.005 is the operative threshold.
