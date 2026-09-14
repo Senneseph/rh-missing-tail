@@ -440,18 +440,18 @@ theorem hZbound (t : ℝ) (ht : 1000 ≤ t) (htu : t ≤ T0) : Zbound t ≤ RZ :
 /-- exp(RX) ≤ 1.002, from 1 − RX ≤ exp(−RX) (inverted), then exact
     rational arithmetic on 1/(1 − RX). -/
 theorem hExpRX : Real.exp RX ≤ 1.002 := by
-  have hneg : (−RX) + 1 ≤ Real.exp (−RX) := Real.add_one_le_exp (−RX)
-  have hexp : 0 < Real.exp (−RX) := Real.exp_pos (−RX)
-  have hden2 : 0 < (−RX) + 1 := by
+  have hneg : (-RX : ℝ) + 1 ≤ Real.exp (-RX) := Real.add_one_le_exp (-RX)
+  have hexp : 0 < Real.exp (-RX) := Real.exp_pos (-RX)
+  have hden2 : 0 < (-RX) + 1 := by
     norm_num [RX]
   calc (Real.exp RX : ℝ)
-      = (Real.exp (−RX))⁻¹ := by
-        rw [← Real.exp_neg (−RX), inv_inv (Real.exp RX)]
-      _ ≤ ((−RX) + 1)⁻¹ := by
-        apply (one_div_le_one_div hexp hden2).mpr
-        exact hneg
-      _ = (1 − RX)⁻¹ := by
-        rw [show (−RX) + 1 = 1 − RX from by ring]
+      = (Real.exp (-RX))⁻¹ := by
+        rw [Real.exp_neg RX, inv_inv (Real.exp RX)]
+      _ ≤ ((-RX) + 1)⁻¹ := by
+        rw [inv_eq_one_div (Real.exp (-RX)), inv_eq_one_div ((-RX) + 1)]
+        exact (one_div_le_one_div (a := Real.exp (-RX)) (b := (-RX) + 1) hexp hden2).mpr hneg
+      _ = (1 - RX)⁻¹ := by
+        rw [show (-RX) + 1 = 1 - RX from by ring]
       _ ≤ (1.002 : ℝ) := by
         norm_num [RX]
 
@@ -606,6 +606,363 @@ theorem hTerm2 (t : ℝ) (ht : 1000 ≤ t) :
               norm_num [R2]
 
 /- — Bwire term 3, the Xwire/Zbound wires, and
+
+/- — Bwire term 3: (sqrt3/540) · ‖s(s+1)(s+2)‖ · n^{-5/2} ≤ R3,
+    s = 1/2 + it, t ∈ [1000, T0] — -/
+
+/-- (x : ℝ)^(-5/2) = 1/(x·x·√x) for x > 0. -/
+theorem hpow5 (x : ℝ) (hx : 0 < x) :
+    x ^ (-5 / 2 : ℝ) = 1 / (x * x * Real.sqrt x) := by
+  have hA : x ^ (-5 / 2 : ℝ) = x ^ (-(5 / 2) : ℝ) := by
+    congr
+    ring
+  rw [hA]
+  rw [Real.rpow_neg (by positivity : 0 ≤ x) (5 / 2)]
+  have hB : x ^ (5 / 2 : ℝ) = x * x * Real.sqrt x := by
+    have h5 : (5 / 2 : ℝ) = 1 + 3 / 2 := by norm_num
+    rw [h5]
+    rw [Real.rpow_add hx 1 (3 / 2)]
+    have h3 : (3 / 2 : ℝ) = 1 + 1 / 2 := by norm_num
+    rw [h3]
+    rw [Real.rpow_add hx 1 (1 / 2)]
+    rw [Real.rpow_one, (Real.sqrt_eq_rpow x).symm]
+    ring
+  rw [hB]
+  simp
+
+/-- Bwire term 3 on the window: (sqrt3/540)·‖(1/2+it)(3/2+it)(5/2+it)‖·n^{-5/2} ≤ R3
+    for 1000 ≤ t ≤ T0, n = ⌊13t/8⌋. -/
+theorem hTerm3 (t : ℝ) (ht : 1000 ≤ t) (htu : t ≤ T0) :
+    (Real.sqrt 3 / 540) *
+      ‖(((1 / 2 : ℝ) : ℂ) + (t : ℂ) * Complex.I) *
+        (((1 / 2 : ℝ) : ℂ) + (t : ℂ) * Complex.I + 1) *
+        (((1 / 2 : ℝ) : ℂ) + (t : ℂ) * Complex.I + 2)‖ *
+      (Nat.floor (13 * t / 8) : ℝ) ^ (-5 / 2 : ℝ) ≤ R3 := by
+  set s := ((1 / 2 : ℝ) : ℂ) + (t : ℂ) * Complex.I with hs
+  have hnN : ‖(s * (s + 1) * (s + 2))‖ = ‖s‖ * ‖s + 1‖ * ‖s + 2‖ := by
+    rw [norm_mul, norm_mul]
+  have hN1 : ‖s‖ = Real.sqrt (1 / 4 + t * t) := by
+    show Real.sqrt (normSq s) = Real.sqrt (1 / 4 + t * t)
+    have ha : normSq s = 1 / 4 + t * t := by
+      dsimp only [s]
+      rw [normSq_add_mul_I (1 / 2 : ℝ) t, show (1 / 2 : ℝ) ^ 2 = 1 / 4 by norm_num, sq]
+      ring
+    rw [ha]
+  have hN2 : ‖s + 1‖ = Real.sqrt (9 / 4 + t * t) := by
+    show Real.sqrt (normSq (s + 1)) = Real.sqrt (9 / 4 + t * t)
+    have hb : s + 1 = ((3 / 2 : ℝ) : ℂ) + (t : ℂ) * Complex.I := by
+      dsimp only [s]
+      ring
+    rw [hb]
+    have ha : normSq (((3 / 2 : ℝ) : ℂ) + (t : ℂ) * Complex.I) = 9 / 4 + t * t := by
+      rw [normSq_add_mul_I (3 / 2 : ℝ) t, show (3 / 2 : ℝ) ^ 2 = 9 / 4 by norm_num, sq]
+      ring
+    rw [ha]
+  have hN3 : ‖s + 2‖ = Real.sqrt (25 / 4 + t * t) := by
+    show Real.sqrt (normSq (s + 2)) = Real.sqrt (25 / 4 + t * t)
+    have hb : s + 2 = ((5 / 2 : ℝ) : ℂ) + (t : ℂ) * Complex.I := by
+      dsimp only [s]
+      ring
+    rw [hb]
+    have ha : normSq (((5 / 2 : ℝ) : ℂ) + (t : ℂ) * Complex.I) = 25 / 4 + t * t := by
+      rw [normSq_add_mul_I (5 / 2 : ℝ) t, show (5 / 2 : ℝ) ^ 2 = 25 / 4 by norm_num, sq]
+      ring
+    rw [ha]
+  have hsq1 : Real.sqrt (1 / 4 + t * t) ≤ t + 1 / 2 := by
+    rw [Real.sqrt_le_iff]
+    constructor
+    · nlinarith
+    · nlinarith
+  have hsq2 : Real.sqrt (9 / 4 + t * t) ≤ t + 1 := by
+    rw [Real.sqrt_le_iff]
+    constructor
+    · nlinarith
+    · nlinarith [ht]
+  have hsq3 : Real.sqrt (25 / 4 + t * t) ≤ t + 2 := by
+    rw [Real.sqrt_le_iff]
+    constructor
+    · nlinarith
+    · nlinarith [ht]
+  have hnorm : ‖s * (s + 1) * (s + 2)‖ ≤ (t + 1 / 2) * (t + 1) * (t + 2) := by
+    rw [hnN, hN1, hN2, hN3]
+    have h1 : Real.sqrt (1 / 4 + t * t) * Real.sqrt (9 / 4 + t * t) ≤
+        (t + 1 / 2) * (t + 1) := by
+      exact mul_le_mul hsq1 hsq2 (by nlinarith) (by nlinarith)
+    have h2 : (Real.sqrt (1 / 4 + t * t) * Real.sqrt (9 / 4 + t * t)) *
+        Real.sqrt (25 / 4 + t * t) ≤ ((t + 1 / 2) * (t + 1)) * (t + 2) := by
+      exact mul_le_mul h1 hsq3 (by nlinarith) (by nlinarith)
+    simpa [mul_assoc, mul_comm, mul_left_comm] using h2
+  have hNpos : 0 ≤ (Real.sqrt 3 / 540) *
+      (Nat.floor (13 * t / 8) : ℝ) ^ (-5 / 2 : ℝ) := by
+    positivity
+  calc (Real.sqrt 3 / 540) *
+      ‖s * (s + 1) * (s + 2)‖ *
+      (Nat.floor (13 * t / 8) : ℝ) ^ (-5 / 2 : ℝ)
+      ≤ (Real.sqrt 3 / 540) * ((t + 1 / 2) * (t + 1) * (t + 2)) *
+          (Nat.floor (13 * t / 8) : ℝ) ^ (-5 / 2 : ℝ) := by
+        have hstep : (Real.sqrt 3 / 540) * ‖s * (s + 1) * (s + 2)‖ ≤
+            (Real.sqrt 3 / 540) * ((t + 1 / 2) * (t + 1) * (t + 2)) := by
+          exact mul_le_mul_of_nonneg_left hnorm (by
+            positivity)
+        exact mul_le_mul_of_nonneg_right hstep (by
+          positivity)
+      _ = (Real.sqrt 3 / 540) * ((t + 1 / 2) * (t + 1) * (t + 2)) *
+          (1 / ((Nat.floor (13 * t / 8) : ℝ) * (Nat.floor (13 * t / 8)) *
+            Real.sqrt (Nat.floor (13 * t / 8)))) := by
+        rw [hpow5 (Nat.floor (13 * t / 8) : ℝ) (hFloorPos t ht)]
+      _ ≤ (Real.sqrt 3 / 540) * ((t + 1 / 2) * (t + 1) * (t + 2)) *
+          (1 / (((13 * t / 8) * (1624 / 1625)) * ((13 * t / 8) * (1624 / 1625)) *
+            Real.sqrt ((13 * t / 8) * (1624 / 1625)))) := by
+        have hbase : (13 * t / 8 : ℝ) * (1624 / 1625) ≤ (Nat.floor (13 * t / 8) : ℝ) :=
+          hFloorBase t ht
+        have hpos : 0 < (13 * t / 8 : ℝ) := by nlinarith
+        have hApos : 0 < (13 * t / 8) * (1624 / 1625) := by
+          apply mul_pos hpos
+          norm_num
+        have hden1 : ((13 * t / 8) * (1624 / 1625)) * ((13 * t / 8) * (1624 / 1625)) *
+            Real.sqrt ((13 * t / 8) * (1624 / 1625)) ≤
+            ((13 * t / 8) * (1624 / 1625)) * ((13 * t / 8) * (1624 / 1625)) *
+            Real.sqrt (Nat.floor (13 * t / 8)) := by
+          exact mul_le_mul_of_nonneg_right (Real.sqrt_le_sqrt hbase) (by
+            positivity)
+        have hden2 : ((13 * t / 8) * (1624 / 1625)) * ((13 * t / 8) * (1624 / 1625)) *
+            Real.sqrt (Nat.floor (13 * t / 8)) ≤
+            (Nat.floor (13 * t / 8)) * (Nat.floor (13 * t / 8)) *
+            Real.sqrt (Nat.floor (13 * t / 8)) := by
+          have hn : ((13 * t / 8) * (1624 / 1625)) * ((13 * t / 8) * (1624 / 1625)) ≤
+              (Nat.floor (13 * t / 8)) * (Nat.floor (13 * t / 8)) := by
+            exact mul_le_mul hbase hbase (by positivity) (by positivity)
+          exact mul_le_mul_of_nonneg_right hn (by
+            positivity)
+        have hden3 : ((13 * t / 8) * (1624 / 1625)) *
+            ((13 * t / 8) * (1624 / 1625)) *
+            Real.sqrt ((13 * t / 8) * (1624 / 1625)) ≤
+            (Nat.floor (13 * t / 8)) * (Nat.floor (13 * t / 8)) *
+            Real.sqrt (Nat.floor (13 * t / 8)) := by
+          nlinarith [hden1, hden2]
+        have hinv : 1 / ((Nat.floor (13 * t / 8) : ℝ) * (Nat.floor (13 * t / 8)) *
+            Real.sqrt (Nat.floor (13 * t / 8))) ≤
+            1 / (((13 * t / 8) * (1624 / 1625)) * ((13 * t / 8) * (1624 / 1625)) *
+            Real.sqrt ((13 * t / 8) * (1624 / 1625))) := by
+          apply (one_div_le_one_div _ _).mpr
+          · exact hden3
+          · positivity
+          · positivity
+        have hC : 0 ≤ (Real.sqrt 3 / 540) * ((t + 1 / 2) * (t + 1) * (t + 2)) := by
+          positivity
+        have hrew1 : (Real.sqrt 3 / 540) * ((t + 1 / 2) * (t + 1) * (t + 2)) *
+            (1 / ((Nat.floor (13 * t / 8) : ℝ) * (Nat.floor (13 * t / 8)) *
+            Real.sqrt (Nat.floor (13 * t / 8)))) =
+            (1 / ((Nat.floor (13 * t / 8) : ℝ) * (Nat.floor (13 * t / 8)) *
+            Real.sqrt (Nat.floor (13 * t / 8)))) *
+            ((Real.sqrt 3 / 540) * ((t + 1 / 2) * (t + 1) * (t + 2))) := by
+          ring
+        have hrew2 : (Real.sqrt 3 / 540) * ((t + 1 / 2) * (t + 1) * (t + 2)) *
+            (1 / (((13 * t / 8) * (1624 / 1625)) * ((13 * t / 8) * (1624 / 1625)) *
+            Real.sqrt ((13 * t / 8) * (1624 / 1625)))) =
+            (1 / (((13 * t / 8) * (1624 / 1625)) * ((13 * t / 8) * (1624 / 1625)) *
+            Real.sqrt ((13 * t / 8) * (1624 / 1625)))) *
+            ((Real.sqrt 3 / 540) * ((t + 1 / 2) * (t + 1) * (t + 2))) := by
+          ring
+        rw [hrew1, hrew2]
+        exact mul_le_mul_of_nonneg_right hinv hC
+      _ = (Real.sqrt 3 / 540) * ((t + 1 / 2) * (t + 1) * (t + 2)) *
+          ((8 / 13) * (8 / 13) * (1625 / 1624) * (1625 / 1624)) /
+          (t * t * Real.sqrt (13 * t / 8) * Real.sqrt (1624 / 1625)) := by
+        have hden : ((13 * t / 8) * (1624 / 1625)) * ((13 * t / 8) * (1624 / 1625)) *
+            Real.sqrt ((13 * t / 8) * (1624 / 1625)) =
+            (13 * t / 8) * (13 * t / 8) * (1624 / 1625) * (1624 / 1625) *
+            Real.sqrt (13 * t / 8) * Real.sqrt (1624 / 1625) := by
+          have ha : Real.sqrt ((13 * t / 8) * (1624 / 1625)) =
+              Real.sqrt (13 * t / 8) * Real.sqrt (1624 / 1625) := by
+            rw [Real.sqrt_mul (by positivity : 0 ≤ (13 * t / 8 : ℝ)) (1624 / 1625)]
+          have hb : ((13 * t / 8) * (1624 / 1625)) * ((13 * t / 8) * (1624 / 1625)) =
+              (13 * t / 8) * (13 * t / 8) * (1624 / 1625) * (1624 / 1625) := by
+            ring
+          rw [hb, ha]
+          ring
+        have hmain : 1 / (((13 * t / 8) * (1624 / 1625)) * ((13 * t / 8) * (1624 / 1625)) *
+            Real.sqrt ((13 * t / 8) * (1624 / 1625))) =
+            1 / ((13 * t / 8) * (13 * t / 8) * (1624 / 1625) * (1624 / 1625) *
+            Real.sqrt (13 * t / 8) * Real.sqrt (1624 / 1625)) := by
+          rw [hden]
+        rw [hmain]
+        have hfield : (Real.sqrt 3 / 540) * ((t + 1 / 2) * (t + 1) * (t + 2)) *
+            (1 / ((13 * t / 8) * (13 * t / 8) * (1624 / 1625) * (1624 / 1625) *
+            Real.sqrt (13 * t / 8) * Real.sqrt (1624 / 1625))) =
+            (Real.sqrt 3 / 540) * ((t + 1 / 2) * (t + 1) * (t + 2)) *
+            ((8 / 13) * (8 / 13) * (1625 / 1624) * (1625 / 1624)) /
+            (t * t * Real.sqrt (13 * t / 8) * Real.sqrt (1624 / 1625)) := by
+          field_simp
+          ring
+        rw [hfield]
+      _ ≤ (1.7321 / 540) * (8 / 13) * (8 / 13) * (1625 / 1624) * (1625 / 1624) *
+          (7845 / 10000) * 332 * (10005 / 10000) * (1001 / 1000) * (1002 / 1000) *
+          1.00031 := by
+        set M := (t + 1 / 2) * (t + 1) * (t + 2) with hM
+        have hposT : 0 < t := by nlinarith
+        have hM3 : M / (t * t * t) = ((t + 1 / 2) / t) * ((t + 1) / t) * ((t + 2) / t) := by
+          field_simp
+          ring
+        have hM3b : ((t + 1 / 2) / t) * ((t + 1) / t) * ((t + 2) / t) ≤
+            (10005 / 10000) * (1001 / 1000) * (1002 / 1000) := by
+          have h1 : (t + 1 / 2) / t ≤ (10005 / 10000 : ℝ) := by
+            calc (t + 1 / 2) / t
+                = 1 + 1 / (2 * t) := by
+                  field_simp
+                  ring
+                _ ≤ 1 + 1 / 2000 := by
+                  apply add_le_add_right
+                  have h2t : 2 * t ≥ 2000 := by nlinarith [ht]
+                  apply (one_div_le_one_div _ _).mpr
+                  · exact h2t
+                  · nlinarith [ht]
+                  · norm_num
+                _ = (10005 / 10000 : ℝ) := by norm_num
+          have h2 : (t + 1) / t ≤ (1001 / 1000 : ℝ) := by
+            calc (t + 1) / t
+                = 1 + 1 / t := by
+                  field_simp
+                  ring
+                _ ≤ 1 + 1 / 1000 := by
+                  apply add_le_add_right
+                  apply (one_div_le_one_div _ _).mpr
+                  · nlinarith [ht]
+                  · nlinarith [ht]
+                  · norm_num
+                _ = (1001 / 1000 : ℝ) := by norm_num
+          have h3 : (t + 2) / t ≤ (1002 / 1000 : ℝ) := by
+            calc (t + 2) / t
+                = 1 + 2 / t := by
+                  field_simp
+                  ring
+                _ ≤ 1 + 2 / 1000 := by
+                  have hinv : 1 / t ≤ 1 / 1000 := by
+                    apply (one_div_le_one_div _ _).mpr
+                    · nlinarith [ht]
+                    · nlinarith [ht]
+                    · norm_num
+                  apply add_le_add_right
+                  exact mul_le_mul_of_nonneg_left hinv (by norm_num : 0 ≤ (2 : ℝ))
+                _ = (1002 / 1000 : ℝ) := by norm_num
+          calc ((t + 1 / 2) / t) * ((t + 1) / t) * ((t + 2) / t)
+              ≤ (10005 / 10000) * ((t + 1) / t) * ((t + 2) / t) := by
+                exact mul_le_mul_of_nonneg_left h1 (by positivity)
+              _ ≤ (10005 / 10000) * (1001 / 1000) * ((t + 2) / t) := by
+                exact mul_le_mul_of_nonneg_left h2
+                    (by norm_num : 0 ≤ (10005 / 10000 : ℝ))
+              _ ≤ (10005 / 10000) * (1001 / 1000) * (1002 / 1000) := by
+                exact mul_le_mul_of_nonneg_left h3
+                    (by norm_num : 0 ≤ (10005 / 10000 : ℝ) * (1001 / 1000))
+        have hdiv : t / Real.sqrt (13 * t / 8) = Real.sqrt t * Real.sqrt (8 / 13) := by
+          have hpos1 : 0 < Real.sqrt (13 * t / 8) := by
+            exact Real.sqrt_pos.mpr (by nlinarith)
+          calc t / Real.sqrt (13 * t / 8)
+              = Real.sqrt ((t / Real.sqrt (13 * t / 8)) * (t / Real.sqrt (13 * t / 8))) := by
+                rw [Real.sqrt_sq (by positivity)]
+              _ = Real.sqrt (8 * t / 13) := by
+                have hx : 0 < 13 * t / 8 := by nlinarith
+                field_simp [hx.ne', show (Real.sqrt (13 * t / 8)) ^ 2 = 13 * t / 8 from by
+                  rw [Real.sq_sqrt (by positivity)]]
+              _ = Real.sqrt t * Real.sqrt (8 / 13) := by
+                have hx : 0 ≤ t := by nlinarith
+                rw [show 8 * t / 13 = t * (8 / 13) from by ring]
+                rw [Real.sqrt_mul hx (8 / 13)]
+        have hdivb : M / (t * t * Real.sqrt (13 * t / 8) * Real.sqrt (1624 / 1625)) =
+            (M / (t * t * t)) * (t / Real.sqrt (13 * t / 8)) * (1 / Real.sqrt (1624 / 1625)) := by
+          field_simp
+          ring
+        have hsq813 : Real.sqrt (8 / 13) ≤ (7845 / 10000 : ℝ) := by
+          rw [Real.sqrt_le_iff]
+          constructor
+          · norm_num
+          · norm_num
+        have hst : Real.sqrt t ≤ 332 := by
+          have ht2 : 0 ≤ t := by nlinarith
+          have hT : t ≤ T0 := htu
+          calc Real.sqrt t
+              ≤ Real.sqrt T0 := Real.sqrt_le_sqrt Ht
+              _ ≤ 332 := hsT0
+        calc (Real.sqrt 3 / 540) * M * ((8 / 13) * (8 / 13) * (1625 / 1624) * (1625 / 1624)) /
+            (t * t * Real.sqrt (13 * t / 8) * Real.sqrt (1624 / 1625))
+            = (Real.sqrt 3 / 540) * (8 / 13) * (8 / 13) * (1625 / 1624) * (1625 / 1624) *
+                (M / (t * t * Real.sqrt (13 * t / 8) * Real.sqrt (1624 / 1625))) := by
+              field_simp
+              ring
+            _ = (Real.sqrt 3 / 540) * (8 / 13) * (8 / 13) * (1625 / 1624) * (1625 / 1624) *
+                ((M / (t * t * t)) * (t / Real.sqrt (13 * t / 8)) *
+                  (1 / Real.sqrt (1624 / 1625))) := by
+              rw [show M / (t * t * Real.sqrt (13 * t / 8) * Real.sqrt (1624 / 1625)) =
+                  (M / (t * t * t)) * (t / Real.sqrt (13 * t / 8)) *
+                  (1 / Real.sqrt (1624 / 1625)) from hdivb]
+            _ = (Real.sqrt 3 / 540) * (8 / 13) * (8 / 13) * (1625 / 1624) * (1625 / 1624) *
+                ((M / (t * t * t)) * (Real.sqrt t * Real.sqrt (8 / 13)) *
+                  (1 / Real.sqrt (1624 / 1625))) := by
+              rw [show t / Real.sqrt (13 * t / 8) = Real.sqrt t * Real.sqrt (8 / 13) from hdiv]
+            _ ≤ (Real.sqrt 3 / 540) * (8 / 13) * (8 / 13) * (1625 / 1624) * (1625 / 1624) *
+                (((10005 / 10000) * (1001 / 1000) * (1002 / 1000)) *
+                  (332 * (7845 / 10000)) * (1.00031)) := by
+              have hX : (M / (t * t * t)) * (Real.sqrt t * Real.sqrt (8 / 13)) *
+                  (1 / Real.sqrt (1624 / 1625)) ≤
+                  ((10005 / 10000) * (1001 / 1000) * (1002 / 1000)) *
+                    (332 * (7845 / 10000)) * (1.00031) := by
+                calc (M / (t * t * t)) * (Real.sqrt t * Real.sqrt (8 / 13)) *
+                      (1 / Real.sqrt (1624 / 1625))
+                    ≤ ((10005 / 10000) * (1001 / 1000) * (1002 / 1000)) *
+                      (Real.sqrt t * Real.sqrt (8 / 13)) *
+                      (1 / Real.sqrt (1624 / 1625)) := by
+                      exact mul_le_mul_of_nonneg_left
+                        (calc (M / (t * t * t))
+                            = ((t + 1 / 2) / t) * ((t + 1) / t) * ((t + 2) / t) :=
+                                by rw [hM3]
+                            _ ≤ (10005 / 10000) * (1001 / 1000) * (1002 / 1000) :=
+                                by exact hM3b)
+                        (by positivity)
+                    _ ≤ ((10005 / 10000) * (1001 / 1000) * (1002 / 1000)) *
+                        (332 * (7845 / 10000)) * (1 / Real.sqrt (1624 / 1625)) := by
+                      have hstep : Real.sqrt t * Real.sqrt (8 / 13) ≤
+                          (332 : ℝ) * (7845 / 10000) := by
+                        exact mul_le_mul hst hsq813
+                          (by norm_num : 0 ≤ 7845 / 10000) (by positivity)
+                      exact mul_le_mul_of_nonneg_right hstep (by positivity)
+                    _ ≤ ((10005 / 10000) * (1001 / 1000) * (1002 / 1000)) *
+                        (332 * (7845 / 10000)) * (1.00031) := by
+                      exact mul_le_mul_of_nonneg_right h1624recip (by positivity)
+              exact mul_le_mul_of_nonneg_left hX (by
+                positivity)
+            _ ≤ ((1.7321 : ℝ) / 540) * (8 / 13) * (8 / 13) * (1625 / 1624) * (1625 / 1624) *
+                (7845 / 10000) * 332 * (10005 / 10000) * (1001 / 1000) * (1002 / 1000) *
+                1.00031 := by
+              have hstep : (Real.sqrt 3 / 540) * (8 / 13) * (8 / 13) * (1625 / 1624) *
+                  (1625 / 1624) *
+                  (((10005 / 10000) * (1001 / 1000) * (1002 / 1000)) *
+                    (332 * (7845 / 10000)) * (1.00031)) ≤
+                  ((1.7321 : ℝ) / 540) * (8 / 13) * (8 / 13) * (1625 / 1624) *
+                  (1625 / 1624) *
+                  (((10005 / 10000) * (1001 / 1000) * (1002 / 1000)) *
+                    (332 * (7845 / 10000)) * (1.00031)) := by
+                have hle : (Real.sqrt 3 / 540 : ℝ) ≤ (1.7321 / 540) := by
+                  calc (Real.sqrt 3 / 540)
+                      = (1 / 540) * Real.sqrt 3 := by field_simp
+                      _ ≤ (1 / 540) * (1.7321 : ℝ) := by
+                        exact mul_le_mul_of_nonneg_left hs3
+                            (by norm_num : 0 ≤ (1 / 540 : ℝ))
+                      _ = 1.7321 / 540 := by field_simp
+                exact mul_le_mul_of_nonneg_left hle (by
+                  norm_num)
+              calc (Real.sqrt 3 / 540) * (8 / 13) * (8 / 13) * (1625 / 1624) *
+                  (1625 / 1624) *
+                  (((10005 / 10000) * (1001 / 1000) * (1002 / 1000)) *
+                    (332 * (7845 / 10000)) * (1.00031))
+                  ≤ ((1.7321 : ℝ) / 540) * (8 / 13) * (8 / 13) * (1625 / 1624) *
+                      (1625 / 1624) *
+                      (((10005 / 10000) * (1001 / 1000) * (1002 / 1000)) *
+                        (332 * (7845 / 10000)) * (1.00031)) := hstep
+                  _ = ((1.7321 : ℝ) / 540) * (8 / 13) * (8 / 13) * (1625 / 1624) *
+                      (1625 / 1624) * (7845 / 10000) * 332 * (10005 / 10000) *
+                      (1001 / 1000) * (1002 / 1000) * 1.00031 := by ring
+      _ ≤ R3 := by norm_num
+
     s4a_window_squeeze: next atoms (see DISCOVERY_LOG 25m and
     scripts/rh/day023_s4a_constants.py for the certified constants
     R2, R3, RX, RZ, RM and their bound structures) — -/
