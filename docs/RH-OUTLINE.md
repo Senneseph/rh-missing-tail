@@ -4,6 +4,14 @@
 > No edits here — updates propagate only by explicit copy from the
 > source repo (PLAN.md, "Staged proof scaffold"). NOT a proof. No claim.
 
+> **SUPERSEDED (day-023, 2026-09-14).** This mirror is a v0.1 planning
+> snapshot (2026-09-11, pre-10⁷-closeout). Its status table and numbers
+> (10⁷ "NEARLY DONE", S(10⁷) = −1.2057, pin-era margins) are historical —
+> the CURRENT state is `docs/RH-PROOF-OUTLINE.md` (day-023 25f:
+> N(10⁷) = 21,136,121, verified region [10³, 10⁶] certified +
+> [10⁶, 3.15×10⁷] screened, dps-30 certified closing 143.341847457,
+> P1.2 uniform statement formalized). Do not cite numbers from this file.
+
 **Status: SCAFFOLD v0.1 (2026-09-10).** Not a proof. No claim. Every item is labeled
 MEASURED / CLASSICAL / INFERENCE / TO-BUILD. Built to be re-opened: §4 lists exactly
 which measurements should change it. Companion files: `day-*.md`, `spec/*.md`,

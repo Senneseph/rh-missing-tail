@@ -235,12 +235,16 @@ at all.
 Two routes are named. **Route A (residual floor)** builds it from the
 strictified missing-tail law of Part 3 (its Euler–Maclaurin remainder) plus
 the tail bound M(G, t) of Part 4; it works for δ above a sensitivity
-threshold to be pinned by measurement, and the measured margin (verified-
-regime closing **34.68×**, day-022 re-pin at t = 5×10³; the P1.1e
-best-straddle trend 122× @ 10³ → 2.3× @ 2×10⁴ stays sound — DISCOVERY_LOG
-19/20/21) says it is within reach, with the 1×10⁷ zero-list repair (running,
-1×10⁷ ≈ 2.5× the current list) expected to extend the verified regime to
-~10⁵–2.5×10⁵. **Route B (uniform dynamics)**
+threshold to be pinned by measurement, and the measured margin — dps-30-
+certified verified-regime closing **143.341847457×** (t = 5004.7343,
+corrected discrete tail, 1e12 remainder; **145.563762319** with the 1e15
+remainder — DISCOVERY_LOG 25c/25d) — plus the verified region [10³, 10⁶]
+(margin ≥ 13.9, certified) extended on real zeros to 3.15×10⁷ (margin ≥
+1.4, screened — DISCOVERY_LOG 25f) with the 1×10⁷ zero list DONE (25b:
+independent 100-h walk, N(10⁷) = 21,136,121 = LMFDB − 4 documented twins)
+says it is within reach, and the old "erosion" numbers (34.68, the
+122 → 2.3 trend, the 1.053 at 5×10⁴) are RETIRED — day-023 found and
+fixed a kernel tail-integration defect that had masked them (25b). **Route B (uniform dynamics)**
 proves 2K(t) even for all t directly — equivalently, S stays in the
 on-line band — with no sensitivity threshold; at full strength it is
 essentially RH-equivalent, the classical S(t) lifting being the open
@@ -258,13 +262,14 @@ to any T; the smallest zero height is a certified classical number, ≈
 distance δ₀ > 0 from the line. (1) By the bridge (Part 5), the
 definition–zero gap at t₀ is the tail-bounded difference of the two
 sides, and by the detector (Part 6) it is **≥ f(δ₀, t₀)·|K(t₀)|** with
-f(δ₀, t₀) = |R − 1| ≥ 0.998, the tail M(G, t₀) being far below that scale.
+f(δ₀, t₀) = |R − 1| ≥ 0.9975 (day-010 straddle pin, C1's t ≠ g window),
+the tail M(G, t₀) being far below that scale.
 (2) By the floor (Part 7), the same quantity is **< f(δ₀, t₀)·|K(t₀)|**,
 from the definition side alone. (3) Contradiction. Hence D(t₀) = 0; by
 minimality, D ≡ 0; by the counting lemma, **RH**. ∎ — *conditional on
 Part 7.*
 
-### Status of each piece (2026-09-13)
+### Status of each piece (2026-09-14, day-023 25f)
 
 - **Proven, machine-checked (Lean 4.33.1 + Mathlib, pinned stable):** the
   counting lemma (Part 1); the per-pair closed forms (Part 4); the detector
@@ -277,7 +282,10 @@ Part 7.*
   A0–A4 (Part 7, `formal/RhAttack/P8Floor.lean`); the conditional closure
   module with its audit records machine-verified against the re-pinned
   closing (Part 8, `formal/RhAttack/Closure.lean` — C0/C5/C5b/C1a/C6/C7,
-  pin 33.9864, day-022 re-pin).
+  pin **143.341847457**, day-023 re-pin; 33.9864/34.68 RETIRED — old
+  kernel tail, DISCOVERY_LOG 25b/25c); **the P1.2 uniform statement
+  (S1–S4 decomposition, `formal/RhAttack/P12Uniform.lean`, GREEN — the
+  formal name of the single open gap, day-023 25e).
 - **Classical (literature):** F1–F2; Riemann–von Mangoldt; the 1859 product
   (DLMF 25.2.12); Platt–Trudgian's explicit S-bound.
 - **Measured (precision labeled, scripts committed):** the missing-tail
@@ -285,15 +293,19 @@ Part 7.*
   vs the four-zero definition and the data, 6 digits (Part 6); the
   certified zero survey to 10⁷ and the zero list to 6×10⁶ (Parts 1, 4);
   the Abel mechanism on 7.4M real certified zeros (Part 4); the closure
-  audit package (cross-band straddle audits; the re-pinned verified-regime
-  closing 34.68 @ t = 5009.2343; the P1.1e best-straddle trend 122 → 2.3
-  sound through 2×10⁴, the 1×10⁴–10⁵ readings explained as the composite
-  (B,∞) tail-model error curve, not the squeeze — DISCOVERY_LOG 20/21).
+  audit package (cross-band straddle audits; dps-30 CERTIFIED closing
+  143.341847457 (1e12 tail) / 145.563762319 (1e15 tail) @ t = 5004.7343
+  and anchor 140.202502242 / 140.286237277 @ 10³; verified region
+  [10³, 10⁶] + screened [10⁶, 3.15×10⁷] margin ≥ 1.4 — DISCOVERY_LOG
+  25c/25f; all earlier "erosion" readings (34.68, 122 → 2.3, 1.053)
+  RETIRED — day-023 25b found the true cause: the (B,∞) tail
+  QUADRATURE (not the model) under-integrated the near mass; the
+  day-020/21 "tail-model error" explanation is itself superseded by 25b).
 - **In progress:** the residual-floor theorem itself (Part 7, Routes A/B)
-  — the P4/P8/P9 formal machinery beneath it is complete; the 1×10⁷
-  zero-list repair walk (day-023, 32-way CPU) runs to extend the verified
-  closure regime to ~10⁵–2.5×10⁵, with the trend verdict on the repaired
-  list recorded when it lands.
+  — the P4/P8/P9/P12 formal machinery beneath it is complete; the 1×10⁷
+  zero list is DONE (day-023 25b: independent 100-h walk, N(10⁷) =
+  21,136,121 = LMFDB − 4 documented twins) and the verified regime is
+  [10³, 10⁶] certified + [10⁶, 3.15×10⁷] screened (25f).
 - **Open:** the residual floor (Part 7) — the single remaining gap.
 
 *The complete reader-facing exposition of this argument — with full
@@ -491,9 +503,13 @@ kernel — is specific enough to fail.
     the bridge-wired residual (the M(G,t) wire), the B5 closed-form
     detector atoms, the zero-decision inequality
   - [RhAttack/Closure.lean](formal/RhAttack/Closure.lean) — the P9
-    *conditional closure*: C0/C5/C5b/C1a/C6/C7 + the audit pins (pin 33.9864,
-    the re-pinned verified-regime closing, day-022) — the machine core of
-    the §8 contradiction argument
+    *conditional closure*: C0/C5/C5b/C1a/C6/C7 + the audit pins (pin
+    **143.341847457**, day-023 re-pin, dps-30 certified; 33.9864 RETIRED,
+    25b/25c) — the machine core of the §8 contradiction argument
+  - [RhAttack/P12Uniform.lean](formal/RhAttack/P12Uniform.lean) — the P1.2
+    *uniform statement*: the S1–S4 decomposition (zero side / detector
+    floor / definition side / the uniform squeeze) + `squeeze_gives_margin`
+    + `p1_2` — the formal name of the single open gap (day-023 25e)
 - **Master formula ledger (working tree):** `plan/40-prize-islands/
   rh-attack/FORMULAS.md` — every formula this work uses, labeled
   (verbatim-read / measured + file + precision / derived + file /
@@ -519,6 +535,7 @@ kernel — is specific enough to fail.
 - **Jesse S. Miller** — conception, experimental design,
   direction, interpretation. (BS - Mathematics and Computer Science, Emory University; working interest in the histories of the Natural Sciences.)  
   **L. McGeorge** - Creative Partner
+  **hagr** - Spiritual Support
 - **Qwen (my trusty Clanker)** — @ Alibaba Qwen team for co-developing instrument:
   implementation, computation, drafting, and cross-checking, running
   locally as `pi-qwen-vast` (Pi Agent Harness, Vast.ai rental) on the first author's hardware (AMD Strix-Halo APU, ROCm GPU; mpmath, CuPy, TypeScript, Node).

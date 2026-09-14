@@ -134,8 +134,10 @@ is reinforced, not replaced).
 
 ## Stage map (what v0 does NOT contain) — cross-ref README §program
 
-1. **10⁷ certification** (in progress): corrected N(10⁷), S(10⁷),
-   2K(10⁷), the dead-chunk Δ.
+1. **10⁷ certification** (DONE, day-023 25b): N(10⁷) = 21,136,121
+   (= LMFDB 31-digit 21,136,125 − 4 documented twins), S(10⁷) =
+   −3.205718 (dps-45), 2K(10⁷) even; independent 100-h walk, 0
+   failures, dt/dt2 agree on every segment.
 2. **E7b** — the zero-side identification (Stage 1 PASS on the
    certified 466,655-zero list, 2026-09-09; the N=10⁵ row awaits the
    G ≳ 5–6×10⁶ walk, on demand).

@@ -231,41 +231,51 @@ window floor is a genuine input to the closure's picture, not a
 demotable footnote.
 
 **And trapdoors are traps, so we tested them across the band.** The
-closure's per-point facts had been verified around height 10³ (worst
-margin 112.6×). We extended the scan to fifteen candidate pair
-heights from 2×10³ to 10⁵ — and then the instrument caught itself:
-the apparent "erosion" at higher heights (the readings 11.3 at 10⁴
-and 1.053 at 5×10⁴) was traced to the composite kernel's (B,∞) tail
-*model*: its error inflates the composite's own magnitude, which
-flattens the measured ratio to about 1 (the 1.053 matches the model's
-own inflation asymptote to 4 sig-figs, and the 2.27 "recovery" at 10⁵
-is its (f−1)⁻¹ — fingerprints, DISCOVERY_LOG 20). The genuine,
-regime-verified margins are 112.6 at 10³ and **34.7 at 5×10³ — the
-closing, re-pinned and machine-checked as an arithmetic fact** — and
-the best-straddle trend (the closure-faithful statistic, DISCOVERY_LOG
-21) stays comfortably above 1 through 2×10⁴. Every scanned point in
-the verified regime still passes the pointwise decision, and the
-pre-registered rule stands: if the squeezed margin ever collapses
-below 1 **in a verified regime**, the route retires rather than the
-claim being papered over. The repair — a 1×10⁷ zero list (running,
-day-023) — is expected to push the verified regime to roughly
-10⁵–2.5×10⁵, and the verdict at the boundary will be recorded when it
-lands.
+closure's per-point facts had been verified around height 10³; the
+scan was extended across candidate pair heights all the way to
+3.15×10⁷ — and the instrument caught itself, in two layers. The first
+(day-020/022) looked like the margins "eroding" up the band (the
+readings 11.3 at 10⁴, 1.053 at 5×10⁴); that was traced to the
+composite kernel's tail *model* error, with an exact fingerprint, and
+reclassified. The second (day-023, on the day the 10⁷ zero list
+landed) went deeper: the kernel's (B,∞) tail had been *integrated
+wrong* — one interval of a continuous quadrature was silently
+under-measuring the mass right next to the scanned heights. The fix
+replaces the tail with an exact sum over the actual zeros — 47.5
+million of them between 10⁷ and 3×10⁷, read straight from the public
+31-digit record — and every "erosion" reading in the old tables is a
+fingerprint of that one defect. Re-pinned with 30-decimal
+certification: the closing margin is **143.34** at t = 5004.7
+(145.56 with the widest audited tail), the anchor at 10³ is
+**140.20**. The verified region's boundary moved from 2×10⁴ to
+**10⁶** — certified, margin ≥ 13.9 at every reported height — and the
+band scan extends it, on real zeros, to 3.15×10⁷ with margin ≥ 1.4
+(screened level; the binding floor there is the theory's own B(t)
+term, not numerical error). Every scanned point in the verified
+regime still passes the pointwise decision — the margins went *up*,
+not down — and the pre-registered rule stands: if the squeezed margin
+ever collapses below 1 **in a verified regime**, the route retires
+rather than the claim being papered over.
 
 **Where this leaves the claim — stated plainly.** The machine-
-proven core (counting lemma through closure, every piece named P1–P9)
-is complete: it is a reproducible package, rebuilt and re-gated in
-minutes on a fresh machine. What is *measured, not proven in the
-machine*: the three per-point trapdoor numbers, verified on the
-recorded band [~10³, 10⁵] at grid resolution for fifteen candidate
-pair heights. What that honestly allows: a hypothetical off-line pair
+proven core (counting lemma through closure, every piece named P1–P9,
+plus the P1.2 uniform-statement skeleton — the formal name of the one
+remaining mathematical gap) is complete: it is a reproducible
+package, rebuilt and re-gated in minutes on a fresh machine. What is
+*measured, not proven in the machine*: the per-point trapdoor facts
+(dps-certified closing 143.34 @ 5×10³; verified region [10³, 10⁶],
+screened on real zeros to 3.15×10⁷) and the detector window floor
+0.9975 (day-010 audit). What that honestly allows: a hypothetical off-line pair
 *inside the verified regime, at a measured height, at a grid point*
 cannot exist without contradicting the squeeze. What it does not
-allow: a claim about an off-line pair at an unmeasured height — the
-gaps between the candidate heights, the bands beyond the record, and —
-now traced to the composite tail-model error rather than the squeeze —
-the sub-1 readings in the masked band are stated as the remaining
-measurement price, in the outline and in the module header. No prize
-is claimed from these pages, as before; the repository's position is
+allow: a claim about an off-line pair where the instrument has not
+reached — the gaps between candidate heights, the uniform statement
+itself (P1.2: "no off-line spiral descends under the floor, uniform
+in t" — the formal skeleton's single open hypothesis, S4, named in
+`formal/RhAttack/P12Uniform.lean`), and the band beyond 3.15×10⁷
+(where the public zero record on disk stops — extending it needs the
+shard above, optionally) are stated as the remaining
+measurement-and-mathematics price, in the outline and in the module
+header. No prize is claimed from these pages, as before; the repository's position is
 unchanged: a reproducible, labeled, self-auditing trail, with the
 open part named rather than papered over.
