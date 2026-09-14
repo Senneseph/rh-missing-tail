@@ -5,3 +5,6 @@
 [1e7band-closing] 10000000/21136125 zeros  16191/s  eta 688 s
 [1e7band-closing] 12000000/21136125 zeros  16378/s  eta 558 s
 [1e7band-closing] 14000000/21136125 zeros  16505/s  eta 432 s
+[1e7band-closing] 16000000/21136125 zeros  16617/s  eta 309 s
+[1e7band-closing] 18000000/21136125 zeros  16657/s  eta 188 s
+[1e7band-closing] 20000000/21136125 zeros  16653/s  eta 68 s

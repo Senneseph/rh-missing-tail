@@ -230,3 +230,6 @@ if __name__ == "__main__":
     print("margin_c < 1 anywhere -> refine that point (DT 0.25) and report")
     print("honestly (route-A pointwise weakness at that (g, t)).")
     print("P1.1c RUN COMPLETE")
+
+def B_best_raw(t, n):
+    return p8_B(t, n)

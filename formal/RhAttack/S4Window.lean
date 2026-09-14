@@ -64,12 +64,14 @@ def T0 : ℝ := 110000
 
 /-- The explicit Xval wire: the `b3BoundExplicit` RHS as a def (the
     theorem form is A4.2/A4.3; this is its numeric spine). -/
+@[reducible]
 noncomputable def Xwire (t : ℝ) : ℝ :=
     Bf t Gc * (Sbar Bc + Sbar Gc) + Cf t Gc * Kbar Gc
 
 /-- CITED convexity-type bound for |ζ(½+it)|, t ≥ 2 (conservative
     constant 1.6). -/
-noncomputable def Zbound (t : ℝ) : ℝ := 1.6 * t ^ (1 / 4) * Real.log t
+@[reducible]
+noncomputable def Zbound (t : ℝ) : ℝ := 1.6 * t ^ (1 / 4 : ℝ) * Real.log t
 
 /- Padded endpoint bounds, certified by day023_s4a_constants.py. -/
 def R1 : ℝ := 0.01242
@@ -326,6 +328,132 @@ lemma h1624recip : 1 / Real.sqrt (1624 / 1625) ≤ 1.00031 := by
     nlinarith [h9d]
   have h9sum : 0 < (1.00031 : ℝ) + 1 / Real.sqrt (1624 / 1625) := by positivity
   nlinarith
+
+/- — Zbound mass wire: 1.6·t^{1/4}·ln t ≤ RZ on [1000, T0].
+    The ln ≤ 12 part routes through an elementary exp lower bound
+    (finite-geometric, no tsum / Taylor machinery): -/
+
+/-- exp(1) ≥ (51/50)^50, from 1 + 1/50 ≤ exp(1/50) raised to the 50th. -/
+theorem hEbound : (51 / 50 : ℝ) ^ 50 ≤ Real.exp 1 := by
+  have h1 : 1 + 1 / 50 ≤ Real.exp (1 / 50) := by
+    rw [show (1 : ℝ) + 1 / 50 = (1 / 50) + 1 from by ring]
+    exact Real.add_one_le_exp (1 / 50)
+  have h2 : (1 + 1 / 50) ^ 50 ≤ (Real.exp (1 / 50)) ^ 50 :=
+    pow_le_pow_left₀ (by norm_num : 0 ≤ (1 : ℝ) + 1 / 50) h1 50
+  have h3 : (Real.exp (1 / 50)) ^ 50 = Real.exp (50 * (1 / 50)) :=
+    (Real.exp_nat_mul (1 / 50) 50).symm
+  have h4 : Real.exp (50 * (1 / 50)) = Real.exp 1 := by
+    rw [show (50 * (1 / 50) : ℝ) = 1 from by norm_num]
+  calc (51 / 50 : ℝ) ^ 50
+      = (1 + 1 / 50) ^ 50 := by norm_num
+      _ ≤ (Real.exp (1 / 50)) ^ 50 := h2
+      _ = Real.exp (50 * (1 / 50)) := by rw [h3]
+      _ = Real.exp 1 := by rw [h4]
+
+/-- 110000 ≤ exp(12) — chain: 110000 ≤ 3.2^10 ≤ (((51/50)^6)^10)^10 = (51/50)^600
+    = ((51/50)^50)^12 ≤ (exp 1)^12 = exp 12. -/
+theorem hE12 : (110000 : ℝ) ≤ Real.exp 12 := by
+  have h1 : (51 / 50 : ℝ) ^ 50 ≤ Real.exp 1 := hEbound
+  have h2 : ((51 / 50 : ℝ) ^ 50) ^ 12 ≤ (Real.exp 1) ^ 12 :=
+    pow_le_pow_left₀ (by positivity : 0 ≤ (51 / 50 : ℝ) ^ 50) h1 12
+  have h3 : (Real.exp 1) ^ 12 = Real.exp 12 := by
+    have hA : (Real.exp 1) ^ 12 = Real.exp ((12 : ℝ) * 1) := (Real.exp_nat_mul 1 12).symm
+    have hB : Real.exp ((12 : ℝ) * 1) = Real.exp 12 := by
+      rw [show (12 : ℝ) * 1 = 12 from by norm_num]
+    rw [hA, hB]
+  have h4 : ((51 / 50 : ℝ) ^ 50) ^ 12 = (((51 / 50 : ℝ) ^ 6) ^ 10) ^ 10 := by
+    have hL : ((51 / 50 : ℝ) ^ 50) ^ 12 = (51 / 50 : ℝ) ^ 600 := by
+      rw [← pow_mul, show (50 : ℕ) * 12 = 600 from by norm_num]
+    have hR : (((51 / 50 : ℝ) ^ 6) ^ 10) ^ 10 = (51 / 50 : ℝ) ^ 600 := by
+      rw [← pow_mul, ← pow_mul, show (6 : ℕ) * (10 * 10) = 600 from by norm_num]
+    rw [hL, hR.symm]
+  have h6 : (110000 : ℝ) ≤ (32 / 10 : ℝ) ^ 10 := by norm_num
+  calc (110000 : ℝ)
+      ≤ (32 / 10 : ℝ) ^ 10 := h6
+      _ ≤ (((51 / 50 : ℝ) ^ 6) ^ 10) ^ 10 :=
+        pow_le_pow_left₀ (by norm_num : 0 ≤ (32 / 10 : ℝ))
+          (by norm_num : (32 / 10 : ℝ) ≤ ((51 / 50 : ℝ) ^ 6) ^ 10) 10
+      _ = ((51 / 50 : ℝ) ^ 50) ^ 12 := by rw [h4]
+      _ ≤ (Real.exp 1) ^ 12 := h2
+      _ = Real.exp 12 := by rw [h3]
+/-- t^{1/4} ≤ 18.23 for 0 < t ≤ T0 (18.23⁴ = 110445.02 ≥ 110000). -/
+theorem hTqr (t : ℝ) (ht : 0 < t) (htu : t ≤ T0) : t ^ (1 / 4 : ℝ) ≤ 18.23 := by
+  have h1 : (1 / 2 : ℝ) * (1 / 2) = 1 / 4 := by norm_num
+  have hA : (t ^ (1 / 2 : ℝ)) ^ (1 / 2 : ℝ) = t ^ (1 / 4 : ℝ) := by
+    rw [← h1, ← Real.rpow_mul (by positivity : 0 ≤ t) (1 / 2 : ℝ) (1 / 2 : ℝ)]
+  have hB : (t ^ (1 / 2 : ℝ)) ^ (1 / 2 : ℝ) = Real.sqrt (Real.sqrt t) := by
+    rw [show Real.sqrt t = t ^ (1 / 2 : ℝ) from Real.sqrt_eq_rpow t,
+      show Real.sqrt (t ^ (1 / 2 : ℝ)) = (t ^ (1 / 2 : ℝ)) ^ (1 / 2 : ℝ) from
+        Real.sqrt_eq_rpow (t ^ (1 / 2 : ℝ))]
+  have hC : t ^ (1 / 4 : ℝ) = Real.sqrt (Real.sqrt t) := by
+    rw [← hA, hB]
+  rw [hC]
+  rw [Real.sqrt_le_iff]
+  constructor
+  · norm_num
+  · rw [Real.sqrt_le_iff]
+    constructor
+    · positivity
+    · have : (18.23 : ℝ) * 18.23 = 332.3329 := by norm_num
+      have : (332.3329 : ℝ) * 332.3329 ≥ 110000 := by norm_num
+      have : (110000 : ℝ) = T0 := by norm_num [T0]
+      nlinarith [htu, ‹(110000 : ℝ) = T0›, ‹(332.3329 : ℝ) * 332.3329 ≥ 110000›,
+        ‹(18.23 : ℝ) * 18.23 = 332.3329›]
+
+/-- ln t ≤ 12 for 0 < t ≤ T0 (110000 < exp 12). -/
+theorem hLog12 (t : ℝ) (ht : 0 < t) (htu : t ≤ T0) : Real.log t ≤ 12 := by
+  have h1 : Real.log t ≤ Real.log T0 := by
+    have hT : 0 < T0 := by norm_num [T0]
+    exact Real.log_le_log ht (by nlinarith [htu, show (110000 : ℝ) = T0 from by norm_num [T0]])
+  have h2 : Real.log T0 ≤ 12 := by
+    rw [Real.log_le_iff_le_exp (by norm_num [T0] : 0 < T0)]
+    rw [show (T0 : ℝ) = 110000 from by norm_num [T0]]
+    exact hE12
+  linarith [h1, h2]
+
+/-- The convexity mass wire on the band: Zbound t ≤ RZ for t ∈ [1000, T0]. -/
+theorem hZbound (t : ℝ) (ht : 1000 ≤ t) (htu : t ≤ T0) : Zbound t ≤ RZ := by
+  have hpos : 0 < t := by nlinarith
+  have hq : t ^ (1 / 4 : ℝ) ≤ 18.23 := hTqr t hpos htu
+  have hl : Real.log t ≤ 12 := hLog12 t hpos htu
+  calc (Zbound t)
+      = 1.6 * t ^ (1 / 4 : ℝ) * Real.log t := by rfl
+      _ = 1.6 * (t ^ (1 / 4 : ℝ) * Real.log t) := by
+        exact mul_assoc (1.6 : ℝ) (t ^ (1 / 4 : ℝ)) (Real.log t)
+      _ ≤ (1.6 : ℝ) * (18.23 * 12) := by
+        have hll : 0 ≤ Real.log t := by
+          have h2 : (1 : ℝ) ≤ t := by nlinarith
+          exact Real.log_nonneg h2
+        have hstep : t ^ (1 / 4 : ℝ) * Real.log t ≤ (18.23 : ℝ) * 12 := by
+          have h1 : t ^ (1 / 4 : ℝ) * Real.log t ≤ (18.23 : ℝ) * Real.log t := by
+            exact mul_le_mul_of_nonneg_right hq hll
+          have h2b : (18.23 : ℝ) * Real.log t ≤ (18.23 : ℝ) * 12 := by
+            exact mul_le_mul_of_nonneg_left hl (by norm_num : (0 : ℝ) ≤ 18.23)
+          calc (t ^ (1 / 4 : ℝ) * Real.log t)
+              ≤ (18.23 : ℝ) * Real.log t := by exact h1
+              _ ≤ (18.23 : ℝ) * 12 := by exact h2b
+        exact mul_le_mul_of_nonneg_left hstep (by norm_num : (0 : ℝ) ≤ 1.6)
+      _ = (1.6 : ℝ) * 18.23 * 12 := by
+        exact (mul_assoc (1.6 : ℝ) 18.23 12).symm
+      _ ≤ RZ := by norm_num [RZ]
+
+/-- exp(RX) ≤ 1.002, from 1 − RX ≤ exp(−RX) (inverted), then exact
+    rational arithmetic on 1/(1 − RX). -/
+theorem hExpRX : Real.exp RX ≤ 1.002 := by
+  have hneg : (−RX) + 1 ≤ Real.exp (−RX) := Real.add_one_le_exp (−RX)
+  have hexp : 0 < Real.exp (−RX) := Real.exp_pos (−RX)
+  have hden2 : 0 < (−RX) + 1 := by
+    norm_num [RX]
+  calc (Real.exp RX : ℝ)
+      = (Real.exp (−RX))⁻¹ := by
+        rw [← Real.exp_neg (−RX), inv_inv (Real.exp RX)]
+      _ ≤ ((−RX) + 1)⁻¹ := by
+        apply (one_div_le_one_div hexp hden2).mpr
+        exact hneg
+      _ = (1 − RX)⁻¹ := by
+        rw [show (−RX) + 1 = 1 − RX from by ring]
+      _ ≤ (1.002 : ℝ) := by
+        norm_num [RX]
 
 /- — Bwire term 2: sqrt(t²+¼)/12 · n^(-3/2) ≤ R2 — -/
 
