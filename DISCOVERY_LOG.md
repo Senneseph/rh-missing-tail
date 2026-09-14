@@ -2867,3 +2867,13 @@ ridge approaching the POLE COLUMN from u -> 0- at d -> 0.5-:
   This is the atom that, once proven, replaces the window pin's
   "measured" status with "proven per-point bounds on the evaluation
   set" — the ridge is excluded by the grid, not by an estimate.
+
+## 25j — S3 wire domain note (band points)
+
+The A4.3 Xval wire (B3Sbar) is in domain G > t (fT needs x > t).  The
+list scale is G = 1e7, so: the 1e7-row (t = 9.9999997e6 < G) pins PASS
+with margin 1.02948e+08 (out_day023_band_hzero.txt); the rows at
+t in (1e7, 3.15e7] are above the list scale and OUT of the wire's
+domain — their pointwise verification is the 25f margin identity itself
+(Q = |zeta|*dev vs def_c = B + |zeta - K|; margin > 1; S1 automatic for
+|zeta| > 1).  The Xval-pinned wiring serves [1e3, 1e6] as before.

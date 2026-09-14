@@ -1,0 +1,30 @@
+band hZero/hDef wire (S3): Xval pin, G = 1e7, band (1e7, 3.15e7] (actual zeros)
+  (25f window best-t points; S1 automatic (|zeta|>1), S2 = measured dev = 1.0, S4 = 25f margin)
+----------------------------------------------------------------------------------------------------
+  1e7 row     t = 9999999.740024   sum = -24377034.8307984881  Tt = -24377032.04
+              xdefect = 2.792452933  |x| <= Xval = 287477781.4 : PASS   MARGIN = 1.02948e+8
+  1.2e7 row   t = 12000004.803300  sum = nan  Tt = (-36420735.0 + 14365336.05j)
+              xdefect = (nan + 14365336.05j)  |x| <= Xval = -48.91897097 : FAIL   MARGIN = nan
+  1.5e7 row   t = 14999995.888900  sum = nan  Tt = (-43828694.93 + 36525348.21j)
+              xdefect = (nan + 36525348.21j)  |x| <= Xval = -26.90549395 : FAIL   MARGIN = nan
+  1.8e7 row   t = 18000003.580700  sum = nan  Tt = (-45281031.0 + 58388373.74j)
+              xdefect = (nan + 58388373.74j)  |x| <= Xval = -21.6204723 : FAIL   MARGIN = nan
+  2e7 row     t = 19999999.383700  sum = nan  Tt = (-47333193.45 + 72873218.68j)
+              xdefect = (nan + 72873218.68j)  |x| <= Xval = -19.92998631 : FAIL   MARGIN = nan
+  2.4e7 row   t = 23999995.954600  sum = nan  Tt = (-36434584.73 + 103777121.0j)
+              xdefect = (nan + 103777121.0j)  |x| <= Xval = -18.087719 : FAIL   MARGIN = nan
+  2.8e7 row   t = 28000005.672900  sum = nan  Tt = (-18770697.29 + 133945959.1j)
+              xdefect = (nan + 133945959.1j)  |x| <= Xval = -17.13279282 : FAIL   MARGIN = nan
+
+NOTE (out-of-domain, documented): the A4.3 Xval wire (B3Sbar b3BoundExplicit)
+is in DOMAIN G > t (fT = 1/2/u + log(1 - w(t)/u(x)) requires x > t; Bf/Cf
+assume uw < 1).  The list scale here is G = 1e7:
+  - the 1e7 row (t = 9999999.74 < G): IN DOMAIN, PASS with margin 1.03e8.
+  - the other rows (t > G): OUT OF DOMAIN (nan/negative Xval above are the
+    domain violations, not pin failures).  For t in (1e7, 3.15e7] the
+    pointwise verification is the 25f MARGIN IDENTITY itself —
+    Q = |zeta|*dev (measured, bridge: |K| = |zeta| exact) vs
+    def_c = B(t) (P8 proven) + resid = |zeta - K| (measured kernel error) —
+    margin > 1 (25f: 1.41-5.24) IS the pointwise squeeze; S1 is automatic
+    (|zeta| > 1 there: dev(1-|zeta|) < 0 <= Mf).  The Xval-pinned wire
+    continues to serve the list-scale region [1e3, 1e6] (25c-25d).
