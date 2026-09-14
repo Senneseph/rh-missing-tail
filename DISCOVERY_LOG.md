@@ -2707,3 +2707,27 @@ fixed; the DONE-line "N(W1)" label in segment logs is the seeded
 N(6e6)+window-flips, not the cumulative N — the flip FILES are the data
 and are correct; documented here so no one re-reads the logs wrong.)
 93022da18f2021c5c5f253e7501382f4041ddeccb706c93f3c806f89ce53ea6d
+
+## 25c/25d — dps-30 pins landed; 1e15 cutoff pushed the boundary past 1e6
+
+### 25c — dps-30 CERTIFIED pins (true tail)
+  out_day023_p01_certify_5e3_v2.txt:  MARGIN = 143.341847457   (E = -1.068e-4, 1360 s)
+  out_day023_p01_certify_1e3_v2.txt:  MARGIN = 140.202502242   (E = -4.165e-6, 1371 s)
+Both agree with the independent float64 re-issue to 7-9 digits.  The Lean
+pin p9_margin_min was re-pinned 33.9864 -> 143.341847457 with full
+provenance (DISCIPLINE: PINNED = measurement + script + day-ref); the
+day-022 34.68 record arithmetic is preserved as a historical record.
+formal package rebuilt GREEN (lake build, 17430 jobs).
+
+### 25d — cutoff 1e12 -> 1e15 (out_day023_reeissue_1e15.txt)
+Extending the audited quadrature to 1e15 (env TAIL_REM_HI=1e15, 120 pts
++ analytic bound) shrinks E(1e6) from -4.26 to -0.0055.  Margins:
+140.3 (1e3), 145.6 (5e3), 87.7 (1e4), 55.5 (1e5), 24.4 (2e5),
+18.6 (2.5e5), 15.6 (5e5), **13.86 (1e6)**.  Sound region [1e3, 1e6]
+with margin >= 13.9 at every printed point; beyond ~1e5 the binding
+floors are B(t) (the P8 ln-t floor) + resid, NOT kernel error
+(def_c(1e6) = 1.03 = B 0.95 + resid 0.08).  The Lean pin keeps the
+CONSERVATIVE dps-30 certified 143.34 (1e12 kernel) per discipline —
+the 1e15 value 145.56 is a float64 measurement, not yet dps-30 certified.
+Old boundaries ("2.5e4 artifact", "sound to 1e6" from the broken-quad
+tables) are all superseded by this table.
