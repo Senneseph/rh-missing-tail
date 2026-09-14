@@ -3123,3 +3123,60 @@ dps-40); the S4b own-strip scale is CONFIRMED with the exact form
     the leading-order regime where they agree.  The Lean proof is
     the final authority; the script verification is only a
     pre-flight.
+
+---
+
+## 25o. S4b own-strip atom COMPLETE (hMownScale green) — e0e050f + this commit
+
+The 25n atom is now finished end-to-end in `formal/RhAttack/S4Own.lean`
+(namespace S4O), Lean 4.33.1 + Mathlib (pinned). Full package build: 17430
+jobs, 0 errors. Contents:
+
+- **hMownProd** — the exact identity: `ownKer (t d) = mown (t d)`, the 8-factor
+  C1a own-height kernel at the candidate point equals
+  `d^2 (d^2 + 4 t^2) / (A B) * exp(c)` exactly (no pins).
+- **hCown / hExpC** — `0 ≤ c < 1/t^2` and `1 ≤ e^c ≤ e^{1/t^2}`.
+- **hMownScaleLo/Hi/hMownScale** — the (4 d^2 / t^2) scale window on
+  `0 < d ≤ 1/2`:
+  `(4 d^2/t^2)(t^2/(t^2+1))^2 ≤ mown ≤ (4 d^2/t^2)(1 + 1/(16 t^2)) e^{1/t^2}`.
+  Lower half: D ≥ 4t^2, A,B ≤ t^2+1, e^c ≥ 1. Upper half: d^2 ≤ 1/4 so
+  D ≤ 4t^2 + 1/4, A,B ≥ t^2 (hence AB ≥ t^4), e^c ≤ e^{1/t^2}.
+
+### Online-first API check (owner directive honored)
+- **`gcongr` is absent in pinned Lean 4.33.1** (`#check gcongr` →
+  unknownIdentifier) — master's `@[gcongr, bound]` division lemmas are NOT the
+  shortcut here; gcongr is a newer tactic. Confirmed locally via probe, then
+  deleted the probe.
+- `mul_self_le` does NOT exist (online or local). The real name is
+  **`mul_self_le_mul_self [PosMulMono] [MulPosMono] (ha : 0 ≤ a) (hab : a ≤ b):
+  a*a ≤ b*b`** (Mathlib/Algebra/Order/GroupWithZero/Basic.lean:105, local copy
+  verified).
+- Division monotonicity available in 4.33.1: `le_div_iff₀ (hc : 0 < c) :
+  a ≤ b/c ↔ a*c ≤ b`; `div_le_iff₀`; `div_le_div_of_nonneg_left (ha : 0 ≤ a)
+  (hc : 0 < c) (h : c ≤ b) : a/b ≤ a/c`; `div_le_div_of_nonneg_right
+  (hab : a ≤ b) (hc : 0 ≤ c) : a/c ≤ b/c`; `div_le_div_iff_of_pos_left (ha :
+  0 < a) (hb : 0 < b) (hc : 0 < c) : a/b ≤ a/c ↔ c ≤ b` (all verified with
+  `#check` against the pinned copy).
+- **Pitfall recorded**: `apply le_trans (mul_self_le_mul_self (by nlinarith)
+  (by nlinarith))` leaks unassigned metavariables — the `nlinarith` arguments
+  elaborate BEFORE the `le_trans` application assigns the shared `?a`/`?b`.
+  Robust pattern: bind `hb : 0 ≤ x` and `hu : x ≤ 1` as explicit `have`s, then
+  `rw [pow_two]; exact le_trans (mul_self_le_mul_self hb hu) (by norm_num)`.
+- **Pitfall recorded**: `^2` (HPow/npowRec) is not definitionally `x * x` —
+  `mul_le_mul` and `le_trans` on `x^2` goals need a `rw [pow_two]` bridge first
+  (or a `show x^4 = x^2 * x^2 by ring`-style bridge for higher powers).
+- **Pitfall recorded**: `mul_le_mul` arg order in 4.33.1 is
+  `(h₁ : a ≤ b) (h₂ : c ≤ d) (c0 : 0 ≤ c) (b0 : 0 ≤ b)` — the nonnegativity
+  args attach to `c` and `b`, not to a/c.
+
+### Honest split (S4b atom)
+- **LEAN-PROVEN**: the entire `formal/RhAttack/S4Own.lean` (exact identity,
+  c-window, scale window). No pins, no measurements.
+- **PINNED (numeric pre-flight, not a proof)**: `scripts/rh/day023_s4_sweep.py`
+  (25n, dps-40, worst rel 7.2e-39) — the grid-exact check of the corrected
+  closed form.
+
+### Status
+S4a (window) = 4 green atoms; S4b (own strip) = 2 green commits
+(e0e050f core + this scale commit). Remaining S4: the wire terms + assembly
+into the P1.2 uniform squeeze (the prize-scale gap, see 25g/25h).

@@ -417,6 +417,126 @@ theorem hMownProd (t d : ℝ) (ht : 0 < t) (hd0 : 0 < d) (hd : d ≤ 1 / 2) :
       show (Real.sqrt (Bown t d) : ℝ) ^ 2 = Bown t d from
         by rw [sq, Real.mul_self_sqrt (hBpos t d ht).le]]
 
+/-- THE 25n SCALE (lower half): on the strip 0 < d <= 1/2 the own
+    mass is at least (4 d^2/t^2) (t^2/(t^2+1))^2 — it lands on the
+    4 d^2/t^2 scale with pinned O(1/t^2) relative correction.
+    Proof data: D := d^2 + 4 t^2 >= 4 t^2;  A, B <= t^2 + 1
+    (1/2 + d <= 1, |1/2 - d| <= 1/2);  e^c >= 1. -/
+theorem hMownScaleLo (t d : ℝ) (ht : 0 < t) (hd0 : 0 < d) (hd : d ≤ 1 / 2) :
+    (4 * d ^ 2 / t ^ 2) * (t ^ 2 / (t ^ 2 + 1)) ^ 2 ≤ mown t d := by
+  dsimp only [mown]
+  set D := d ^ 2 + 4 * t ^ 2 with hdD
+  have hsqA : (1 / 2 + d) ^ 2 ≤ 1 := by
+    have hb : 0 ≤ 1 / 2 + d := by nlinarith [hd0]
+    have hu : 1 / 2 + d ≤ 1 := by nlinarith
+    rw [pow_two]
+    exact le_trans (mul_self_le_mul_self hb hu) (by norm_num)
+  have hA : Aown t d ≤ t ^ 2 + 1 := by
+    dsimp only [Aown]
+    nlinarith [hsqA]
+  have hsqB : (1 / 2 - d) ^ 2 ≤ 1 := by
+    have hb : 0 ≤ 1 / 2 - d := by nlinarith [hd]
+    have hu : 1 / 2 - d ≤ 1 := by nlinarith [hd0]
+    rw [pow_two]
+    exact le_trans (mul_self_le_mul_self hb hu) (by norm_num)
+  have hB : Bown t d ≤ t ^ 2 + 1 := by
+    dsimp only [Bown]
+    nlinarith [hsqB]
+  have hD : 4 * t ^ 2 ≤ D := by
+    dsimp only [D]
+    nlinarith
+  have hc : 1 ≤ Real.exp (Cown t d) := (hExpC t d ht hd0 hd).1
+  have hposA : 0 < Aown t d * Bown t d := by
+    nlinarith [hApos t d ht, hBpos t d ht]
+  have hposT : 0 < (t ^ 2 + 1) ^ 2 := by positivity
+  have hnum : 0 < d ^ 2 * 4 * t ^ 2 := by positivity
+  have hABle : Aown t d * Bown t d ≤ (t ^ 2 + 1) ^ 2 := by
+    rw [pow_two]
+    exact mul_le_mul hA hB (hBpos t d ht).le (by nlinarith [pow_pos ht 2])
+  have hD2 : (4 * d ^ 2 / t ^ 2) * (t ^ 2 / (t ^ 2 + 1)) ^ 2 =
+      d ^ 2 * 4 * t ^ 2 / (t ^ 2 + 1) ^ 2 := by
+    field_simp
+  calc (4 * d ^ 2 / t ^ 2) * (t ^ 2 / (t ^ 2 + 1)) ^ 2
+      = d ^ 2 * 4 * t ^ 2 / (t ^ 2 + 1) ^ 2 := hD2
+    _ ≤ d ^ 2 * 4 * t ^ 2 / (Aown t d * Bown t d) := by
+      apply (div_le_div_iff_of_pos_left hnum hposT hposA).mpr
+      exact hABle
+    _ ≤ d ^ 2 * D / (Aown t d * Bown t d) := by
+      apply div_le_div_of_nonneg_right
+      · nlinarith [hD]
+      · exact hposA.le
+    _ ≤ d ^ 2 * D / (Aown t d * Bown t d) * Real.exp (Cown t d) := by
+      have hx : 0 ≤ d ^ 2 * D / (Aown t d * Bown t d) := by
+        apply div_nonneg
+        · nlinarith
+        · exact hposA.le
+      rw [<- mul_one (d ^ 2 * D / (Aown t d * Bown t d)),
+        show (d ^ 2 * D / (Aown t d * Bown t d) : ℝ) * 1 * Real.exp (Cown t d) =
+              (d ^ 2 * D / (Aown t d * Bown t d)) * Real.exp (Cown t d) by ring]
+      exact mul_le_mul_of_nonneg_left hc hx
+/-- THE 25n SCALE (upper half): mown <= (4 d^2/t^2) (1 + 1/(16 t^2))
+    e^{1/t^2} on the strip.
+    Proof data: D := d^2 + 4 t^2 <= 4 t^2 + 1/4 (d <= 1/2);
+    A, B >= t^2 so A B >= t^4;  e^c <= e^{1/t^2}. -/
+theorem hMownScaleHi (t d : ℝ) (ht : 0 < t) (hd0 : 0 < d) (hd : d ≤ 1 / 2) :
+    mown t d ≤ (4 * d ^ 2 / t ^ 2) * (1 + 1 / (16 * t ^ 2)) *
+        Real.exp (1 / t ^ 2) := by
+  dsimp only [mown]
+  set D := d ^ 2 + 4 * t ^ 2 with hdD
+  have hd4 : d ^ 2 ≤ 1 / 4 := by
+    have hb : 0 ≤ d := hd0.le
+    rw [pow_two]
+    exact le_trans (mul_self_le_mul_self hb hd) (by norm_num)
+  have hD : D ≤ 4 * t ^ 2 + 1 / 4 := by
+    dsimp only [D]
+    nlinarith [hd4]
+  have hc : Real.exp (Cown t d) ≤ Real.exp (1 / t ^ 2) :=
+    (hExpC t d ht hd0 hd).2
+  have hposA : 0 < Aown t d * Bown t d := by
+    nlinarith [hApos t d ht, hBpos t d ht]
+  have hposT : 0 < t ^ 4 := pow_pos ht 4
+  have hE : 0 ≤ Real.exp (1 / t ^ 2) := Real.exp_nonneg _
+  have hDnum : 0 < d ^ 2 * (4 * t ^ 2 + 1 / 4) := by positivity
+  have hnum : d ^ 2 * D ≤ d ^ 2 * (4 * t ^ 2 + 1 / 4) := by
+    nlinarith [hD]
+  have hABt4 : t ^ 4 ≤ Aown t d * Bown t d := by
+    have hAt : t ^ 2 ≤ Aown t d := by
+      dsimp only [Aown]
+      nlinarith
+    have hBt : t ^ 2 ≤ Bown t d := by
+      dsimp only [Bown]
+      nlinarith
+    have ht2p : 0 ≤ t ^ 2 := pow_nonneg ht.le 2
+    rw [show (t ^ 4 : ℝ) = t ^ 2 * t ^ 2 by ring]
+    exact mul_le_mul hAt hBt ht2p (hApos t d ht).le
+  calc (d ^ 2 * D / (Aown t d * Bown t d) * Real.exp (Cown t d))
+      ≤ d ^ 2 * D / (Aown t d * Bown t d) * Real.exp (1 / t ^ 2) := by
+        have hx : 0 ≤ d ^ 2 * D / (Aown t d * Bown t d) := by
+          apply div_nonneg
+          · nlinarith
+          · exact hposA.le
+        exact mul_le_mul_of_nonneg_left hc hx
+    _ ≤ d ^ 2 * (4 * t ^ 2 + 1 / 4) / (Aown t d * Bown t d) *
+          Real.exp (1 / t ^ 2) := by
+        apply mul_le_mul_of_nonneg_right
+        · apply div_le_div_of_nonneg_right hnum hposA.le
+        · exact hE
+    _ ≤ d ^ 2 * (4 * t ^ 2 + 1 / 4) / t ^ 4 * Real.exp (1 / t ^ 2) := by
+        apply mul_le_mul_of_nonneg_right
+        · apply (div_le_div_iff_of_pos_left hDnum hposA hposT).mpr
+          exact hABt4
+        · exact hE
+    _ = (4 * d ^ 2 / t ^ 2) * (1 + 1 / (16 * t ^ 2)) * Real.exp (1 / t ^ 2) := by
+        field_simp
+        ring
+/-- The combined 25n scale window: the definition-side kernel at its
+    own point lands on the 4 d^2/t^2 scale with pinned O(1/t^2)
+    relative correction. -/
+theorem hMownScale (t d : ℝ) (ht : 0 < t) (hd0 : 0 < d) (hd : d ≤ 1 / 2) :
+    (4 * d ^ 2 / t ^ 2) * (t ^ 2 / (t ^ 2 + 1)) ^ 2 ≤ mown t d ∧
+    mown t d ≤ (4 * d ^ 2 / t ^ 2) * (1 + 1 / (16 * t ^ 2)) *
+        Real.exp (1 / t ^ 2) :=
+  ⟨hMownScaleLo t d ht hd0 hd, hMownScaleHi t d ht hd0 hd⟩
 /-- The 25n scale: (4 d^2 / t^2) (1/4)^2 * exp 0 <= mown <= (4 d^2 / t^2) (1) (1)
     at the extremes — the sharp bound is proven numerically in 25n; the
     Lean atom certifies the exact form and the exp window. -/
