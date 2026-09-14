@@ -3180,3 +3180,78 @@ jobs, 0 errors. Contents:
 S4a (window) = 4 green atoms; S4b (own strip) = 2 green commits
 (e0e050f core + this scale commit). Remaining S4: the wire terms + assembly
 into the P1.2 uniform squeeze (the prize-scale gap, see 25g/25h).
+
+---
+
+## 25p. S4c GAP CERTIFICATE green — the blind spot is machine-verified (formal/RhAttack/S4Gap.lean)
+
+The 25l blind spot is no longer a measurement: it is a THEOREM.
+`formal/RhAttack/S4Gap.lean` (namespace S4G, 0 sorries, full package
+17430 jobs green) proves, for every t >= 1000 and every 0 < d <= 1/2:
+
+    mown(t, d) < BwireO(t) = p8_B(t, floor(13t/8))
+
+i.e. the own-height detector floor (exact by S4b hMownProd) lies
+STRICTLY BELOW the first — already the dominant — termwise-nonnegative
+term of the P4-floor definition-side wire. Consequence (also proven):
+
+    s4c_squeeze_impossible :
+      0 <= Mr, 0 <= Mf  ==>  ¬(BwireO t + Mr + Mf < mown t d)
+
+The S4 uniform squeeze (P12Uniform hs4) CANNOT hold at the bound level
+on the own strip for ANY nonnegative residual/bridge-tail terms. The
+gap is not an artifact of the pin choices; it is structural:
+mown = O(t^{-2}) while Bwire >= (1/2)(13t/8)^{-1/2} = O(t^{-1/2}).
+
+Chain (all LEAN-PROVEN in S4Gap.lean):
+  mown <= (16001/15984)/t^2     (S4b hMownScaleHi; 4d^2 <= 1;
+                                 1/(16t^2) <= 1/16000;
+                                 e^{1/t^2} <= e^{1/1000} <= 1000/999)
+       < (1/2)(13t/8)^{-1/2}    (squaring: A^2(13/8) < (1/4)t^3,
+                                 A := 16001/15984, t >= 1000)
+       <= (1/2) n^{-1/2}        (n = floor(13t/8) <= 13t/8,
+                                 neg-exponent reversal via
+                                 Real.rpow_le_rpow + one_div_le_one_div)
+       <= p8_B(t, n)            (termwise nonnegativity)
+
+Note: the exp pin e^{1/1000} <= 1000/999 is LEAN-PROVEN from P8Floor's
+p8_abs_exp_sub_one_le (|e^x − 1| <= e^x x) — no new measurement.
+
+### 4.33.1 API findings (online-first, owner directive)
+- `pow_le_pow_of_le_left` and `pow_le_pow_left` do NOT exist in 4.33.1.
+  The real names: `pow_le_pow_left'` (requires MulLeftMono/MulRightMono —
+  NO instance for ℝ, multiplication is not all-factors-monotone there)
+  and **`pow_le_pow_left₀ (ha : 0 ≤ a) (hab : a ≤ b) : ∀ n, a^n ≤ b^n`**
+  (Algebra/Order/GroupWithZero/Basic.lean:470) — the usable one for ℝ.
+  Verified locally after the web search (mathlib naming PR #9095).
+- `Real.one_le_exp` in 4.33.1 takes the proof: `∀ {x}, 0 ≤ x → 1 ≤ exp x`
+  (x implicit).
+- `Nat.floor_le` in 4.33.1 takes the nonnegativity proof:
+  `0 ≤ a → ⌊a⌋ ≤ a`.
+- `Real.sqrt_eq_rpow (x : ℝ) : √x = x^{1/2}` (no side-condition arg).
+- `inv_le_inv` (ordered-field positive version) absent; use
+  `inv_eq_one_div` + `one_div_le_one_div (hb : 0 < b) (ha : 0 < a) :
+  1/b ≤ 1/a ↔ a ≤ b`.
+- `div_lt_div_iff` absent; the zero-suffixed family is the 4.33.1 API:
+  `div_lt_div_iff₀ (hb : 0 < b) (hd : 0 < d) : a/b < c/d ↔ a*d < c*b`.
+- Confirmed systemic traps (again): greedy ascriptions
+  (`1 / 1000 : ℝ` binds the ascription to `1000`; `by norm_num : 0 < 1000`
+  defaults the literals to ℕ unless the goal itself is ascribed
+  `(0 : ℝ) < 1000`); `^2` vs `*` (pow_two bridges before
+  mul_self_le_mul_self / mul_self_sqrt); factor order under
+  `mul_le_mul_of_nonneg_left` (ring_nf both sides in calc steps);
+  nested `show ... by ...` inside `rw [` lists (parse hazards — use
+  `have` bindings).
+
+### Honest split
+- **LEAN-PROVEN**: all of S4Gap.lean (gap certificate + squeeze
+  impossibility). No pins.
+- S4 status: S4a window [1e3, 1.1e5] GREEN (25m); S4b own-strip
+  identity+scale GREEN (25n/25o); S4c bound-level OWN-REGIME FAILURE
+  GREEN (25p). Remaining open content (prize-scale): window-regime
+  squeeze beyond t* ~ 6.9e5 (Bwire ~ sqrt(t) vs measured O(1) deficit —
+  25l[3]) and own-regime bound sharpness (this certificate quantifies it:
+  a t^{3/2}-wide gap).
+
+Next atom: S4Asm — assemble S4a+S4b+S4c into the single
+residue statement of the P1.2 open hypotheses (named gaps GAP-W / GAP-O).
