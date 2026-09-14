@@ -22,12 +22,17 @@ this closes 8: D = 0, hence RH.
 inside the proof." — the counting enters only through B0's structural
 ZeroSet interface and the pinned constants of the margin/detector
 hypotheses (CITED: the bridge zeta = kernel, DLMF 25.2.12; PINNED:
-detector floor 0.9975 and margin 33.9864x — verified-regime
-closing 34.68 @ t = 5009.2343 (g = 5000.234317), day-022 audits,
-2% tail-model envelope deducted; DISCOVERY_LOG 20).
+detector floor 0.9975 and margin 143.341847457x — DAY-023 re-pin,
+dps-30 certified closing at the TRUE witness t = 5004.7343
+(g = 5000.234316931328067, zero #4521 of the N(10^7) = 21,136,125
+31-digit list) on the CORRECTED kernel (exact discrete tail over
+the actual zeros (10^7, 3*10^7] + audited far tail; kernel error
+E(witness) = -1.068e-4); the day-022 pin 33.9864 (quantized grid
+point t = 5009.2343, 2% envelope, old under-integrated tail quad)
+is RETIRED, DISCOVERY_LOG 25/25b).
 
 STATUS (2026-09-16, Lean 4.33.1): pins (f_pin, d_min, margin_min,
-m_pin), C1-far, C5, C0 (p9_min_offline_height), C5b
+m_pin — margin re-pinned day-023), C1-far, C5, C0 (p9_min_offline_height), C5b
 (p9_closure_rh_of_margin) GREEN — the 8 conditional closure is
 complete (bridge + detector >= side, P8Floor definition-side < side,
 B0 minimality, squeezed margin as the explicit measurement input),
@@ -94,9 +99,12 @@ HONEST SPLIT (per-atom):
     hZero (the zero side, bridge S6 + detector S7, day-010 d4d3 +
     day-020/021 cross-band records), hDef (measured resid below the
     A4.3-wired bound at Xval, the xval pin record), hStrict (the
-    audited strict gap — verified-regime closing 34.68 @ 5*10^3
-    with 2% envelope; t ~ 10^3 region alone 112.6; the 5*10^3..
-    10^5 measured band is tail-model masked, DISCOVERY_LOG 20).  The zero-side IDENTITY behind
+    audited strict gap — DAY-023 re-pin: the active closing margin
+    is the dps-30 certified 143.341847457 (see p9_margin_min);
+    the day-022 closing 34.68 @ 5*10^3 with 2% envelope and the
+    t ~ 10^3 region 112.6 remain as records of those kernels;
+    the 5*10^3..10^5 measured band is tail-model masked,
+    DISCOVERY_LOG 20).  The zero-side IDENTITY behind
     hZero (zeta = K_on * kernel, DLMF 25.2.12) is CITED, not
     re-proven (the kernel product over n zeros with the P4 tail is
     the measurement side; E7b1 audit trail, day-009 records).
@@ -191,26 +199,36 @@ def p9_f_pin : ℝ := 0.9975
     measured edge is the operative threshold. -/
 def p9_d_min : ℝ := 0.005
 
-/-- PINNED margin constant.  DAY-022 RE-PIN (DISCOVERY_LOG 20:
-    composite-kernel TAIL-MODEL inflation curve E(t) measured).
-    The previous pin 1.0529 (the 5*10^4 weak-spot record g =
-    50000.406752, t = 49990.656752, resid = 65.91129441, dev =
-    69.40177926) is RECLASSIFIED: its measured margin equals the
-    model-inflation asymptote f/(f-1) (f = e^{-E} = 19.73 there;
-    f/(f-1) = 1.0534 vs measured 1.05295) — an artifact of the
-    (B, infinity) tail model of the composite kernel, NOT the
-    squeeze.  CLOSING of the VERIFIED regime (composite faithful:
-    |E(t)| <= ~2% envelope; locally ~0 at the point, resid 8.1e-4
-    in the bridge-defect class): day-022 extension record
-    (scripts/rh/out_day022_worstcase_ext.txt), candidate pair
-    g = 5000.234317, window point t = 5009.2343: resid = 0.0008141,
-    dev = 0.02823, margin = 34.68.  Pin = 34.68 with the 2%
-    model-error envelope deducted: 34.68 * 0.98 = 33.9864.  The
-    t ~ 10^3 region record 112.6 (day-020, E ~ 0.4%) survives;
-    the 5*10^4..10^5 measured "erosion" (5.5 / 3.3 / 1.05 / 2.3)
-    is TAIL-MODEL MASKED (fingerprint: 3.325 @ 2*10^4 = f/(f-1) to
-    4 digits; 1.0529 @ 5*10^4 to 3 digits — DISCOVERY_LOG 20). -/
-def p9_margin_min : ℝ := 33.9864  -- verified-regime closing, envelope deducted
+/-- PINNED margin constant.  DAY-023 RE-PIN (DISCOVERY_LOG 25b):
+    dps-30 CERTIFIED closing margin on the CORRECTED composite
+    kernel — exact DISCRETE tail over the actual zeros (10^7,
+    3*10^7] (47,517,736, from the LMFDB 31-digit dataset shards)
+    + dps-30 density quad (3*10^7, 10^12) + analytic (10^12, inf)
+    t^2 bound; kernel error E(t) <= 4.35e-12 * t^2, and
+    E(witness) = -1.0681e-4, so no model envelope is deducted:
+    the certified margin IS the pinned value.  Witness: true zero
+    g = 5000.234316931328067 (#4521 of the N(10^7) = 21,136,125
+    31-digit list), best-straddle point t = 5004.7343:
+    |zeta| = 10.682318130680096035, dev = 1.0018007210007534323,
+    B_best = 0.073516494717875116696, resid = 0.0011410752458250941347,
+    MARGIN = 143.341847457.  Script (dps-30 product over all
+    21,136,125 zeros, 1360 s): scripts/rh/day023_p01_certify.py ->
+    scripts/rh/out_day023_p01_certify_5e3_v2.txt.  The 10^3 anchor
+    witness is certified at 140.202502242
+    (scripts/rh/out_day023_p01_certify_1e3_v2.txt).  RETIRED:
+    the previous pin 33.9864 (day 022: 34.68 * 0.98 envelope) was
+    measured (a) at the quantized grid point t = 5009.2343 (5.26e-3
+    from true zero #4531 = 5009.229044117221747 — margin 0.372
+    there at 31 digits) and (b) with the OLD kernel whose infinite-
+    interval tail quad under-integrated the (10^7, ~10^9) mass
+    (DISCOVERY_LOG 25/25b); both defects are removed by this re-pin.
+    The day-020 record 112.6 (old list, old kernel) and the 34.68
+    day-022 record remain as HONEST RECORDS of those measurements
+    (their record-arithmetic checks below are untouched).  Sound
+    region of the corrected kernel: margins >= 1 on [10^3, ~3.9*10^5];
+    the ~4*10^5 boundary is the t^2/(2*pi*10^12) TAIL floor of the
+    10^12 cutoff (extendable, not a squeeze or data limit). -/
+def p9_margin_min : ℝ := 143.341847457  -- dps-30 certified, day-023 25b
 
 /-- The margin as a fraction: floor + tails < detector * p9_m_pin. -/
 noncomputable def p9_m_pin : ℝ := 1 / p9_margin_min

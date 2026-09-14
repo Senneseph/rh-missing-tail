@@ -80,11 +80,14 @@ def tail_discrete(s, verbose=False):
         r2 = mp.mpc(0.5, -gg)
         p = mp.log(1 - smp/r1) + mp.log(1 - smp/r2) + smp/r1 + smp/r2
         return p*(mp.log(gg/(2*PI))/(2*PI))
-    pts = [HI * (REM_HI/HI)**(mp.mpf(k)/80) for k in range(81)]
+    import os
+    remhi = mp.mpf(os.environ.get("TAIL_REM_HI", "1e12"))
+    npts = int(os.environ.get("TAIL_REM_NPTS", "80"))
+    pts = [HI * (remhi/HI)**(mp.mpf(k)/npts) for k in range(npts+1)]
     rem = mp.quad(f, pts)
     t = abs(mp.im(smp))
-    # analytic (1e12, inf) t^2-part bound: t^2 (ln(B/2pi)+1)/(2pi B) at B = 1e12
-    Bb = mp.mpf("1000000000000")
+    # analytic (remhi, inf) t^2-part bound: t^2 (ln(B/2pi)+1)/(2pi B) at B = remhi
+    Bb = remhi
     bound = mp.mpf(t)*mp.mpf(t)*(mp.log(Bb/(2*PI))+1)/(2*PI*Bb)
     if verbose:
         print("  discrete (1e7,3e7] = %.12e  rem(3e7,1e12) = %s  bound = %.1e"
