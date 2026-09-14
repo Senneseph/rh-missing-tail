@@ -3506,3 +3506,72 @@ obstacles (like GAP-W).
 **Honest split:** 25v[1] NUMERIC (Python, 7-digit Kgap check);
 25v[2] LEAN-PROVEN (whole S4S module, exact rationals + Kgap as an
 exact real); 25v[4] DECISION (classification).
+
+## 25w (09-14) — ITEM #4 (the (3.15e7, 1e9] data band) SET UP AS A BACKGROUND JOB
+
+Owner: "set up 4 to run in the background."  Execution follows the
+owner's research-order (24b): the dataset is the PUBLIC one —
+download, verify, store; do not recompute.
+
+**25w[1] DATA SOURCE RESOLVED (CITED public):**
+beta.lmfdb.org/riemann-zeta-zeros/data/ (Platt-format shards, the 24b
+source) — the server's index reaches t ≈ 3.06×10¹⁰ (14,580 shards;
+last = zeros_30607946000.dat).  The whole band (3.15×10⁷, 10⁹] is
+publicly downloadable: 464 shards, start-t in [31946000, 1006346000]
+(the last overshoots 10⁹ by ~8.4×10⁵ rad), ~30 GB raw, ~5.1–7.3 M
+zeros each.  md5.txt (14,580 entries) fetched for per-shard integrity.
+NOTE: the server gates directory listings + md5.txt behind a JS
+cookie-setter ("human=1"); the .dat shards themselves are open.
+
+**25w[2] FRONTIER EXACT (PINNED, today):** the last local shard
+zeros_29846000.dat ends at **t = 31946000.000000, final zero #
+73426758** (1-based; metadata walk over its 1000 blocks of
+~2100 rad / ~5.1 M zeros).  The docs' "3.15×10⁷" nominal edge was a
+rounding of 3.1946×10⁷ — the new stream starts exactly where the
+on-disk shards end.
+
+**25w[3] FAST DECODER BUILT + VERIFIED (P-0.8, day024_platt_fast.py):**
+pure-python float64 port of the 24b-verified Platt arithmetic, ~2 s
+per 5.2 M-zero shard (the mpmath decoder's dps-40 rate cannot
+absorb 2.77×10⁹ zeros).  Verification chain (all today, all PASS):
+ (a) FIRST ZETA ZERO: 14.13472514173469379045725198… decoded
+     BIT-IDENTICAL at float64 (31-digit source);
+ (b) CROSS-IMPLEMENTATION: 2000 zeros at the 2.9846×10⁷ frontier
+     BIT-IDENTICAL vs a fresh dps-50 mpmath exact decode;
+ (c) STRUCTURAL (full-shard, zeros_29846000, 5,149,767 zeros):
+     Nt continuity, block seams (t0_{k+1} = t1_k), strict
+     monotone, zero in (t0,t1) per block (t1 = interval end
+     EXCLUSIVE, not a zero — corrected a gate misread), header
+     walk consumes the file exactly.
+Format lesson: block = (t0,t1) interval + per-zero 13-byte steps;
+cumulative Z is an unbounded int; earlier assumption "104-bit
+cumulative" was wrong (104 bits is per STEP).
+
+**25w[4] BACKGROUND JOB RUNNING (launched 2026-09-14 19:15 UTC):**
+`scripts/rh/day024_band_1e9.sh` (setsid, pid recorded at launch),
+~9 s/shard observed in the first 19 shards → **ETA ≈ 70 min**
+(finish gates: RVM |diff| ≤ 3 on N(10⁹) and on the band end; strict
+monotone; BAND-1E9-DONE marker).  Output:
+`scripts/rh/hi1e9/zeros_hi31946e6_to_1e9.f64` (raw LE float64,
+~2.77×10⁹ zeros, ~22 GB — NOT in git, .gitignore entry added)
++ manifest.tsv (per shard: md5, Nt0/Nt1, t0/t1, count, mingap)
++ state.txt (resumable) + lastN.txt (the cross-shard Nt continuity
+chain; seeded with 73426758 = the 25w[2] frontier — the first shard's
+decode asserted Nt0 = 73426758 and PASSED).  Every shard: md5 gate →
+decode with Nt continuity → append → rm.
+Check: `tail scripts/rh/hi1e9/supervisor.log`.
+
+**25w[5] WHAT COMPLETES NEXT (follow-on atom, after BAND-1E9-DONE):**
+re-run the band screening (25f protocol, day023_taildiscrete.py
+discrete-tail over the ACTUAL zeros) on (3.1946×10⁷, 10⁹] — the
+nominal rows become REAL rows, closing the data half of item #4;
+the independent local-walk layer past 10⁷ (a ~30-day 32-way CPU job,
+~108 GB) is deliberately NOT started — the screening level is the
+established practice for (10⁷, 3.15×10⁷] and the walk depth remains
+a decision item.
+
+**Honest split:** 25w[1] CITED (public dataset, 24b chain of trust);
+25w[2] PINNED (measurement: metadata walk, today's date); 25w[3]
+VERIFIED-TODAY (bit-exact cross-implementation, not a sorry-class
+claim but a data pipeline — verified before trust per 24b);
+25w[4] RUNNING (machine log is the record).
