@@ -2819,3 +2819,51 @@ is [1e3, 1e6] certified + [1e6, 3.15e7] screened (margin >= 1.4); this
 cert anchors the upper end of the screen ladder at a dps-30 point.
 The Lean pin stays 143.341847457 (closing = minimum-margin witness of
 the record; band pins are anchors, not closings).
+
+## 25i — C1b Step 0: the pole-ridge map (the t ≠ g window floor, re-shaped)
+
+The C1b promotion atom (promote the t ≠ g window pin 0.9975 to a
+theorem of the B5 closed form) starts with the worst-point map
+(`day023_c1b_globalmin.py`, out_day023_c1b_globalmin.txt;
+R = pref·exp(s·ω_d), mirrored line-for-line from RhAttack/B5.lean):
+
+[1] the CONTINUOUS own-regime window (|u| <= 12, 0 < d <= 0.5, u = t −
+gamma) has NO positive uniform floor.  The global minimum sits on a
+ridge approaching the POLE COLUMN from u -> 0- at d -> 0.5-:
+    dps-30: ||R - 1|| = 0.0201349167917  at gamma = 49.667300022,
+            u = -0.01, d = 0.498;  |R| = 0.9988886, arg(R) = 0.02011574.
+  The mechanism: as (u, d) -> (0-, 0.5-), R -> e^{i*theta(gamma)} * 1
+  with theta(gamma) ~= 1/gamma (measured 0.02011574 vs 1/49.667 =
+  0.02013389; |R| -> 1 through the 1/u pref pole at u* ~= 0.5/gamma).
+  The ridge value ~= 1/gamma -> 0 as gamma -> inf.  (Day-021's own
+  closing comment — "the near-regime floor is NOT a positive uniform
+  constant on the whole window" — is now QUANTIFIED; its V6 table's
+  "min -> 0.9995 as g -> 1e5" was a grid-resolution artifact that
+  missed the ridge below du = 0.01.)
+  No singularity is involved: the d = 1/2 denominator factor is
+  g^2 + (d - 1/2)^2 (never 0 for g > 0) — the d = 1/2 "branch point"
+  is at g = 0, off the zero set (B5 branch locus, C1a).
+
+[2] CONSEQUENCE for the closure's input (honest split): the 0.9975
+  pin (day-010, g ~ 1e3) is a DISCRETE-STRADDLE pin — the closure is
+  evaluated at the measured straddle heights u in 0.5*Z \ {0} (+ the
+  pole column = the proven C1a regime).  On that discrete set the
+  ridge point u* ~= 0.5/gamma falls BETWEEN grid points, and the
+  DISCRETE floor is a different, much larger object:
+  floor_disc(gamma) = min over u = 0.5k (|u| <= 12, u != 0), d of
+  ||R - 1||  ~  min( corner(gamma), 1 - c/gamma ),
+  where the |u| = 12 corner carries |R| ~= 24/gamma (asymptote
+  2(u^2 + 0.25)/(g|u|)) and the small-gamma region a corner minimum
+  (measured 0.02384820641 at gamma = 14.1347, u = -12, d = 0.5,
+  coarse grid).  The pin 0.9975 is consistent with the discrete floor
+  at its own audit height: 1 - 24/1000 = 0.9976 ~= 0.9975.
+
+[3] Step 0b (running): dense dps-30 map of floor_disc(gamma) on the
+  0.5*Z grid, log gamma in [14.13, 1e7], to fix the constants
+  (m_corner, c) of the candidate theorem
+      ||R - 1|| >= min(m_corner, 1 - c/gamma)
+  on the discrete straddle set — then Step 1 (elementary lower bounds
+  of |pref|/arg on the grid from the closed form) and Step 2 (Lean).
+  This is the atom that, once proven, replaces the window pin's
+  "measured" status with "proven per-point bounds on the evaluation
+  set" — the ridge is excluded by the grid, not by an estimate.
