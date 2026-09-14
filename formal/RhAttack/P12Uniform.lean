@@ -31,12 +31,22 @@ squeeze theorem.  STATUS MAP (honest split, day-023; DISCOVERY_LOG
            `p9_poff_own_height_pos` / `p9_detector_at_own_height` —
            the ratio R has its pole there; the detector mass is
            positive and exact).
-       (c) WINDOW (|t - g| <= 10 off the pole, 0.005 <= d <= 0.5):
-           PINNED at 0.9975 (d4d3 audit, day-010; closed form
-           cross-checked vs direct 4-zero to 1e-16) — the promotion
-           is the OPEN ANALYSIS ATOM C1b (removable-singularity +
-           compactness argument on B5's closed form;
-           closure-module-abstract 1 — this spec's target atom).
+       (c) WINDOW (|t - g| up to 12 off the pole, 0 < d <= 0.5):
+           two records, one truth (25i / 25k-25t):
+           - CONTINUOUS window floor 0.9975: REFUTED as stated
+             (25i: pole + ridge — |R - 1| reaches 1/γ scale OFF
+             the 0.5·ℤ straddle grid; no uniform 0.9975 window
+             floor exists).
+           - DISCRETE straddle grid (u = 0.5k, k = ±1..±24,
+             0 < δ <= 1/2, γ >= 707/50): LEAN-PROVEN floor
+             (25s/25t, C1b `c1b_disc_floor` / `p9_c1b_disc_floor`):
+             |R - 1| >= min (23/1000) (1 - 25/γ).  The day-010 pin
+             0.9975 IS the u = -12 corner of this same curve at its
+             audit height (1 - 24.0458/10³, 25k[3]) and stays the
+             witness-scale constant of the hmargin instantiation
+             (25k[4] scope: the closure measures dev per witness
+             point) — on the discrete grid the floor no longer
+             needs a measurement input.
 
   S3 (definition side, Q <= Bfloor + Mr):  LEAN-PROVEN POINTWISE
      under the wired mass inputs (P8Floor A4 composition:

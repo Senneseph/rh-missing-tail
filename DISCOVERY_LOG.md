@@ -3380,3 +3380,39 @@ Next open work (unchanged by C1b): S1 bridge-tail uniformity in
 height; gapW (window squeeze beyond T0 = 690349.0568, prize-scale);
 own-strip wire sharpness (S4c certificate); nominal band (3.15e7,1e9]
 data (LMFDB 31-digit list ends at 1e7; 3e7 shards partial).
+
+## 25u. Post-C1b doc alignment — every living doc at the resolved state (this commit)
+
+C1b is closed; the documents that still described it as an open
+analysis atom are now at the split record (25i refutation + 25s/25t
+proofs), one line per doc:
+- `formal/RhAttack/P12Uniform.lean` — the P1.2 S2(c) status map: the
+  continuous 0.9975 window floor is REFUTED as stated; the DISCRETE
+  straddle-grid floor is LEAN-PROVEN (`c1b_disc_floor` /
+  `p9_c1b_disc_floor`); the pin stays the witness-scale constant
+  (25k[4]).
+- `docs/RH-PROOF-OUTLINE.md` — the P8 row (the "C1b promotion
+  optional" tail), the P9 row (the "stays PINNED, promotion optional"
+  clause), the P12 row (S2 = discrete-window floor LEAN-PROVEN), and
+  the §9 "remaining price" line (the C1b promotion removed from the
+  open list).
+- `formal/README.md` — the Closure row (the C1b window-floor input:
+  discrete version proven, continuous refuted, pin = witness
+  constant).
+- kainos-logos specs: `closure-module-abstract.md` (C1 + C1b rows —
+  C1b (open) → C1b (closed day-023) with the split record) and
+  `p1.2-uniform-squeeze-abstract.md` (S2(c) block → RESOLVED).
+
+The resolved split, verbatim for the record: C1b CONTINUOUS (|t−γ|
+≤ 10..12 window, uniform 0.9975 floor) = REFUTED (25i: pole-ridge,
+‖R−1‖ reaches 1/γ scale off the 0.5·ℤ grid); C1b DISCRETE (u = 0.5k,
+k = ±1..±24, 0 < δ ≤ 1/2, γ ≥ 707/50) = LEAN-PROVEN (‖R−1‖ ≥
+min(23/1000, 1−25/γ)); the pin p9_f_pin = 0.9975 = the u = −12
+corner of the same curve at its audit height (25k[3]), kept as the
+witness-scale constant (25k[4] scope).
+
+Open work after 25u (unchanged list, now without C1b): S1
+bridge-tail uniformity in the height (Xval-uniformity = S(t)-type
+condition at every height); gapW (window squeeze beyond
+T0 = 690349.0568, prize-scale); the own-strip wire sharpness (S4c);
+the nominal band (3.15e7, 1e9] data.
