@@ -2987,3 +2987,67 @@ RHS, band (1e7, 1e8]; Mf = mass·e^X·X with mass = measured |zeta|).
     closed form (p8_B formula + monotone-in-t argument + Xval
     formula + a |zeta| bound constant) — the first green-able piece
     of S4.
+
+================================================================
+2026-09-10 — DAY 23 — 25m: S4a WINDOW ATOM GREEN — THE S4-WINDOW
+LEAN THEOREM ON [1e3, T0] (commit e4d10b4)
+================================================================
+
+[1] WHAT CAME GREEN (formal/RhAttack/S4Window.lean, 0 sorries,
+    full package 17430 jobs):
+
+    s4a_window_squeeze :
+      (1000 <= t <= T0=110000, 0 <= M <= Zbound t, Xwire T0 <= RX)
+        => p8_B t (floor(13t/8)) + M exp(Xwire t) Xwire t < 0.9975
+
+    The three closed-form wires of the S4a window regime, each
+    Lean-proven end to end:
+      Bwire = p8_B t (floor(13t/8))  <= R1 + R2 + R3  (0.01242
+        + 0.00128 + 0.3181) — the m=1,2,4 onset-edge chain
+        (hTerm1/hTerm2/hTerm3; floor >= (13t/8)(1624/1625) at
+        13t >= 13000).
+      Mr = Xwire t = Bf t G (Sbar B + Sbar G) + Cf t G (Kbar G)
+        <= Xwire T0 <= RX (0.00185) — Xwire NON-NEGATIVE
+        (hXwire_pos: Sbar B + Sbar G >= 0 via the e-route
+        hEub25/hEub25b, Kbar G > 0) and INCREASING in t
+        (hBf_inc/hCf_inc, each a calc-free monotone chain), so
+        the endpoint cap at T0 carries the whole band.
+      Mf = M exp(Xwire t) Xwire t <= RM (0.649) — M <= Zbound
+        t <= RZ (350.1), exp(Xwire t) <= exp RX <= 1.002, and
+        Xwire t <= Xwire T0 <= RX with the monotone product
+        x exp x on [0, RX] (hMterm).
+    Total: R1 + R2 + R3 + RM = 0.9808 < 0.9975 = p8_f_near_pin,
+    margin 0.0167 (1.67%) — hTotal.
+
+[2] HONEST SPLIT (per atom, unchanged discipline):
+    LEAN-PROVEN: all of [1] — floor arithmetic, the three Bwire
+      term chains, Sbar/Kbar/Bf/Cf monotonicity and positivity,
+      the M-term chain, the squeeze.
+    PINNED: Xwire T0 := ... <= RX — day023_s4a_pin.py (dps-100):
+      Xwire(110000) = 0.001827275272878064..., Xwire(1000) =
+      1.510957e-07; margin to RX = 2.27e-5.  The theorem takes
+      it as an explicit hypothesis (hX), documented in-line.
+
+[3] SYSTEMIC LEAN 4.33.1 PARSER TRAP (root-caused this atom,
+    reproducible in 9 lines — recorded for every future atom):
+    A calc that is NOT the LAST statement of its by-block makes
+    the parser swallow the following statement as calc steps:
+    'invalid calc step, relation expected' /
+    "'calc' expression has type ... Prop but expected Sort ?u",
+    with cascading 'Unknown identifier' for local names declared
+    after the calc.  Fix: calc must be the last statement of
+    the block (or the step must close with a named have +
+    le_trans).  hdivb's 1-step calc (field_simp close) was
+    flattened to the direct field_simp call.
+    Related traps re-confirmed: norm_num fails on big
+    decimal-integer product goals in a nested local context
+    (use positivity / explicit mul_nonneg); the side-goal
+    metavariable of mul_le_mul_of_nonneg_left under an inline
+    (by ...) proof can unify to the wrong factor (name the side
+    proof in a have first).
+
+[4] STATE: S4a (window-regime atoms) COMPLETE.  Remaining S4
+    scope per 25l: S4b own-strip blind-spot atoms (t >= gamma0,
+    0 < d <= 1/2, the 4 d^2/t^2 effective-identity floor) and
+    the t* = 6.9e5 extension question.  Nothing blocked on data
+    or tooling for the next Lean atom.
