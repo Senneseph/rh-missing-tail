@@ -2562,3 +2562,66 @@ Per the research-first order: the dataset is the public one, downloaded — not 
 - Impact: every instrument now runs on ±2.5e-31 positions instead of our 2.5e-4 grid:
   PinCensus (B=1e7), P1.1e best-straddle (the T* verdict), BSY-1 → 1e7, P0.1 certify. The 32-way
   walk keeps running for its (6e6,1e7] count cross-check only (positions already superseded).
+
+## 25 — T* verdict on the 31-digit list: the 2.5e4 boundary was COMPOSITE ERROR (2026-09-13)
+
+Post-walk pipeline step 1 (the pre-registered question: "does the verified-regime
+margin reach 1e5-2.5e5, or drop below 1?"), re-measured on the LMFDB 31-digit list
+(scripts/rh/zeros_T10000000_lmfdb.txt; G_MAX 6e6 -> 1e7 in the composite).
+
+### The component-level proof (before/after table out_day022_p11e_straddle.txt vs
+out_day023_p11e_1e7.txt)
+                      zero_c  resid(old -> new)        E(old -> new)      margin(old -> new)
+     g = 1e3      6.1322 (same)   0.0065 -> 0.0014      -0.001 -> -0.000    122.1 -> 136.1
+     g = 5e3     10.7014 (same)   0.2494 -> 0.0216      -0.023 -> -0.002     33.1 -> 112.5
+     g = 1e4      8.7317 (same)   0.7581 -> 0.0133      -0.083 -> +0.002     10.2 ->  77.4
+     g = 3e4      5.06 ->  9.34   6.5511 -> 0.0217      -0.831 -> -0.002      0.753 -> 49.4
+     g = 5e4      2.17 -> 11.16  40.3612 -> 0.0133      -2.973 -> +0.001      0.054 -> 48.9
+     g = 7.5e4    0.96 -> 11.07 1552.03 -> 0.0708       -7.387 -> -0.006      0.001 -> 33.2
+     g = 1e5     16.8605 (same)   4.6223 -> 0.1408      +0.321 -> -0.008      3.42 ->  38.0
+  (new)  g = 1.25e5  13.15    residual 0.117   E +0.009   margin 28.9
+         g = 1.5e5   14.12    residual 0.0008  E -0.0001  margin 38.1
+         g = 2e5     10.46    residual 0.056   E -0.005   margin 21.7
+         g = 2.5e5    8.95    residual 0.100   E +0.011   margin 15.5
+  BEST = 136.1 @ 1e3; WORST = 15.5 @ 2.5e5.  NO margin < 1 anywhere in [1e3, 2.5e5].
+
+Reading (unambiguous): the SQUEEZE side (zero_c = |zeta| * min_d |R-1|) did NOT move —
+identical at the matching witness points (1e3, 5e3, 1e4, 1e5). The defect side
+(def_c = B + resid) shrank 12x to 22,000x exactly where the old run collapsed. The
+old 6e6 composite (G_MAX = 6e6 dps-25 tail + 2.5e-4-quantized product list) was
+simply WRONG past ~1e4 (resid 0.25 -> 1552, E to -7.4, i.e. the composite off by a
+factor e^7.4 at 7.5e4). **The 2.5e4 "T* boundary" is 100% composite/model error —
+the day-023 diagnosis, now proven at component level, not a squeeze limitation.**
+With the 31-digit list + G_MAX = 1e7 the composite is good (E <= 0.011, resid <= 0.14)
+to at least 2.5e5; the next mask band, if any, should sit where the (1e7, inf) tail
+quadrature degrades — i.e. at/above ~1e6. Extension run (3e5..1e6) in flight.
+
+### Collateral finding (honest, important)
+The old 'verified-regime closing' t = 5009.2343 (margin 34.68, pin 33.9864) was
+evaluated at a QUANTIZED location: true zero #4531 = 5009.2290441172 (5.26e-3
+from the old printed point; |zeta| = 0.027229 exactly at 5009.2343 -> margin 0.372
+at 31 digits). The quantized old
+list mislabeled a near-zero point as an ordinary point with |zeta| ~ 10.7. The
+closure therefore RE-PINS to the true witness t = 5004.7343 of the same pair
+(g = 5000.2343169313): margin 112.479 (E = -0.002, resid 0.0216, B 0.0735, |zeta|
+10.68, dev 1.0018). The 1e3 anchor re-pins 122.124 -> 136.062 (witness unchanged
+988.2916). Closure EXISTENCE is stronger on the real data; the old numeric pin was
+an artifact. All per-point pins measured on the quantized list are suspect in the
+same class and re-pin on demand (P0.1 certify targets the new witness).
+
+### Count side (Pipeline step 0, day023_pincensus_1e7.py)
+PinCensus at B = 1e7 on the 21,136,125-zero list:
+    k=1  R = -4.247e-13   k=2  -7.356e-12   k=3  -3.784e-11
+    k=5  R = -2.944e-10   k=10 -4.726e-09
+All negative, k^2-shaped (a missing pair would print a POSITIVE k^2 bump of
++4k^2/t^2): the full 21.14M list is count-certified on the trivial-zero-pin channel;
+k=1 covers missing pairs to t ~= 3e6.
+
+### Standing items
+- BSY-1 -> 1e7 run in flight (day023_bsy1_1e7.py; same audits: census, sign-flips,
+  dps-30 spots, convexity tail).
+- P0.1 certify (dps-30) at the NEW witness (5004.7343 / 112.479) + 1e3 anchor:
+  moves the closing pin MEASURED -> CERTIFIED.
+- 32-way repair walk: (6e6, 1e7] count cross-check when it lands (positions
+  superseded by LMFDB).
+- No tripwire: no margin < 1 in a verified regime anywhere on the 31-digit data.
