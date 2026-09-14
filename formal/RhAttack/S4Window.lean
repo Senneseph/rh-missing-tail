@@ -605,8 +605,6 @@ theorem hTerm2 (t : ℝ) (ht : 1000 ≤ t) :
             _ ≤ R2 := by
               norm_num [R2]
 
-/- — Bwire term 3, the Xwire/Zbound wires, and
-
 /- — Bwire term 3: (sqrt3/540) · ‖s(s+1)(s+2)‖ · n^{-5/2} ≤ R3,
     s = 1/2 + it, t ∈ [1000, T0] — -/
 
@@ -642,32 +640,52 @@ theorem hTerm3 (t : ℝ) (ht : 1000 ≤ t) (htu : t ≤ T0) :
   have hnN : ‖(s * (s + 1) * (s + 2))‖ = ‖s‖ * ‖s + 1‖ * ‖s + 2‖ := by
     rw [norm_mul, norm_mul]
   have hN1 : ‖s‖ = Real.sqrt (1 / 4 + t * t) := by
-    show Real.sqrt (normSq s) = Real.sqrt (1 / 4 + t * t)
-    have ha : normSq s = 1 / 4 + t * t := by
+    show Real.sqrt (Complex.normSq s) = Real.sqrt (1 / 4 + t * t)
+    have ha : Complex.normSq s = 1 / 4 + t * t := by
       dsimp only [s]
-      rw [normSq_add_mul_I (1 / 2 : ℝ) t, show (1 / 2 : ℝ) ^ 2 = 1 / 4 by norm_num, sq]
-      ring
+      rw [Complex.normSq_add_mul_I (1 / 2 : ℝ) t,
+          show (1 / 2 : ℝ) ^ 2 = 1 / 4 from by norm_num, pow_two]
     rw [ha]
   have hN2 : ‖s + 1‖ = Real.sqrt (9 / 4 + t * t) := by
-    show Real.sqrt (normSq (s + 1)) = Real.sqrt (9 / 4 + t * t)
     have hb : s + 1 = ((3 / 2 : ℝ) : ℂ) + (t : ℂ) * Complex.I := by
       dsimp only [s]
-      ring
+      refine Complex.ext ?_ ?_
+      · norm_num [Complex.add_re, Complex.mul_re, Complex.ofReal_re,
+          Complex.ofReal_im, Complex.I_re, Complex.I_im, Complex.one_re,
+          Complex.natCast_re, Complex.natCast_im]
+      · norm_num [Complex.add_im, Complex.mul_im, Complex.ofReal_re,
+          Complex.ofReal_im, Complex.I_re, Complex.I_im, Complex.one_im,
+          Complex.natCast_re, Complex.natCast_im]
     rw [hb]
-    have ha : normSq (((3 / 2 : ℝ) : ℂ) + (t : ℂ) * Complex.I) = 9 / 4 + t * t := by
-      rw [normSq_add_mul_I (3 / 2 : ℝ) t, show (3 / 2 : ℝ) ^ 2 = 9 / 4 by norm_num, sq]
-      ring
-    rw [ha]
+    have ha : Complex.normSq (((3 / 2 : ℝ) : ℂ) + (t : ℂ) * Complex.I) =
+        9 / 4 + t * t := by
+      rw [Complex.normSq_add_mul_I (3 / 2 : ℝ) t,
+          show (3 / 2 : ℝ) ^ 2 = 9 / 4 from by norm_num, pow_two]
+    calc ‖((3 / 2 : ℝ) : ℂ) + (t : ℂ) * Complex.I‖
+        = Real.sqrt
+            (Complex.normSq (((3 / 2 : ℝ) : ℂ) + (t : ℂ) * Complex.I)) :=
+          Complex.norm_def _
+        _ = Real.sqrt (9 / 4 + t * t) := by rw [ha]
   have hN3 : ‖s + 2‖ = Real.sqrt (25 / 4 + t * t) := by
-    show Real.sqrt (normSq (s + 2)) = Real.sqrt (25 / 4 + t * t)
     have hb : s + 2 = ((5 / 2 : ℝ) : ℂ) + (t : ℂ) * Complex.I := by
       dsimp only [s]
-      ring
+      refine Complex.ext ?_ ?_
+      · norm_num [Complex.add_re, Complex.mul_re, Complex.ofReal_re,
+          Complex.ofReal_im, Complex.I_re, Complex.I_im, Complex.one_re,
+          Complex.natCast_re, Complex.natCast_im]
+      · norm_num [Complex.add_im, Complex.mul_im, Complex.ofReal_re,
+          Complex.ofReal_im, Complex.I_re, Complex.I_im, Complex.one_im,
+          Complex.natCast_re, Complex.natCast_im]
     rw [hb]
-    have ha : normSq (((5 / 2 : ℝ) : ℂ) + (t : ℂ) * Complex.I) = 25 / 4 + t * t := by
-      rw [normSq_add_mul_I (5 / 2 : ℝ) t, show (5 / 2 : ℝ) ^ 2 = 25 / 4 by norm_num, sq]
-      ring
-    rw [ha]
+    have ha : Complex.normSq (((5 / 2 : ℝ) : ℂ) + (t : ℂ) * Complex.I) =
+        25 / 4 + t * t := by
+      rw [Complex.normSq_add_mul_I (5 / 2 : ℝ) t,
+          show (5 / 2 : ℝ) ^ 2 = 25 / 4 from by norm_num, pow_two]
+    calc ‖((5 / 2 : ℝ) : ℂ) + (t : ℂ) * Complex.I‖
+        = Real.sqrt
+            (Complex.normSq (((5 / 2 : ℝ) : ℂ) + (t : ℂ) * Complex.I)) :=
+          Complex.norm_def _
+        _ = Real.sqrt (25 / 4 + t * t) := by rw [ha]
   have hsq1 : Real.sqrt (1 / 4 + t * t) ≤ t + 1 / 2 := by
     rw [Real.sqrt_le_iff]
     constructor
@@ -687,10 +705,10 @@ theorem hTerm3 (t : ℝ) (ht : 1000 ≤ t) (htu : t ≤ T0) :
     rw [hnN, hN1, hN2, hN3]
     have h1 : Real.sqrt (1 / 4 + t * t) * Real.sqrt (9 / 4 + t * t) ≤
         (t + 1 / 2) * (t + 1) := by
-      exact mul_le_mul hsq1 hsq2 (by nlinarith) (by nlinarith)
+      exact mul_le_mul hsq1 hsq2 (by positivity) (by nlinarith)
     have h2 : (Real.sqrt (1 / 4 + t * t) * Real.sqrt (9 / 4 + t * t)) *
         Real.sqrt (25 / 4 + t * t) ≤ ((t + 1 / 2) * (t + 1)) * (t + 2) := by
-      exact mul_le_mul h1 hsq3 (by nlinarith) (by nlinarith)
+      exact mul_le_mul h1 hsq3 (by positivity) (by positivity)
     simpa [mul_assoc, mul_comm, mul_left_comm] using h2
   have hNpos : 0 ≤ (Real.sqrt 3 / 540) *
       (Nat.floor (13 * t / 8) : ℝ) ^ (-5 / 2 : ℝ) := by
@@ -723,7 +741,7 @@ theorem hTerm3 (t : ℝ) (ht : 1000 ≤ t) (htu : t ≤ T0) :
             Real.sqrt ((13 * t / 8) * (1624 / 1625)) ≤
             ((13 * t / 8) * (1624 / 1625)) * ((13 * t / 8) * (1624 / 1625)) *
             Real.sqrt (Nat.floor (13 * t / 8)) := by
-          exact mul_le_mul_of_nonneg_right (Real.sqrt_le_sqrt hbase) (by
+          exact mul_le_mul_of_nonneg_left (Real.sqrt_le_sqrt hbase) (by
             positivity)
         have hden2 : ((13 * t / 8) * (1624 / 1625)) * ((13 * t / 8) * (1624 / 1625)) *
             Real.sqrt (Nat.floor (13 * t / 8)) ≤
@@ -746,7 +764,8 @@ theorem hTerm3 (t : ℝ) (ht : 1000 ≤ t) (htu : t ≤ T0) :
             Real.sqrt ((13 * t / 8) * (1624 / 1625))) := by
           apply (one_div_le_one_div _ _).mpr
           · exact hden3
-          · positivity
+          · have hf := hFloorPos t ht
+            positivity
           · positivity
         have hC : 0 ≤ (Real.sqrt 3 / 540) * ((t + 1 / 2) * (t + 1) * (t + 2)) := by
           positivity
@@ -794,23 +813,21 @@ theorem hTerm3 (t : ℝ) (ht : 1000 ≤ t) (htu : t ≤ T0) :
             ((8 / 13) * (8 / 13) * (1625 / 1624) * (1625 / 1624)) /
             (t * t * Real.sqrt (13 * t / 8) * Real.sqrt (1624 / 1625)) := by
           field_simp
-          ring
         rw [hfield]
       _ ≤ (1.7321 / 540) * (8 / 13) * (8 / 13) * (1625 / 1624) * (1625 / 1624) *
           (7845 / 10000) * 332 * (10005 / 10000) * (1001 / 1000) * (1002 / 1000) *
-          1.00031 := by
-        set M := (t + 1 / 2) * (t + 1) * (t + 2) with hM
+          (1.00031 : ℝ) := by
+        set M := (t + 1 / 2) * (t + 1) * (t + 2)
         have hposT : 0 < t := by nlinarith
         have hM3 : M / (t * t * t) = ((t + 1 / 2) / t) * ((t + 1) / t) * ((t + 2) / t) := by
+          dsimp only [M]
           field_simp
-          ring
         have hM3b : ((t + 1 / 2) / t) * ((t + 1) / t) * ((t + 2) / t) ≤
             (10005 / 10000) * (1001 / 1000) * (1002 / 1000) := by
           have h1 : (t + 1 / 2) / t ≤ (10005 / 10000 : ℝ) := by
             calc (t + 1 / 2) / t
                 = 1 + 1 / (2 * t) := by
                   field_simp
-                  ring
                 _ ≤ 1 + 1 / 2000 := by
                   apply add_le_add_right
                   have h2t : 2 * t ≥ 2000 := by nlinarith [ht]
@@ -823,7 +840,6 @@ theorem hTerm3 (t : ℝ) (ht : 1000 ≤ t) (htu : t ≤ T0) :
             calc (t + 1) / t
                 = 1 + 1 / t := by
                   field_simp
-                  ring
                 _ ≤ 1 + 1 / 1000 := by
                   apply add_le_add_right
                   apply (one_div_le_one_div _ _).mpr
@@ -835,7 +851,6 @@ theorem hTerm3 (t : ℝ) (ht : 1000 ≤ t) (htu : t ≤ T0) :
             calc (t + 2) / t
                 = 1 + 2 / t := by
                   field_simp
-                  ring
                 _ ≤ 1 + 2 / 1000 := by
                   have hinv : 1 / t ≤ 1 / 1000 := by
                     apply (one_div_le_one_div _ _).mpr
@@ -843,52 +858,81 @@ theorem hTerm3 (t : ℝ) (ht : 1000 ≤ t) (htu : t ≤ T0) :
                     · nlinarith [ht]
                     · norm_num
                   apply add_le_add_right
+                  rw [show (2 : ℝ) / t = 2 * (1 / t) from by field_simp,
+                      show (2 : ℝ) / 1000 = 2 * (1 / 1000) from by field_simp]
                   exact mul_le_mul_of_nonneg_left hinv (by norm_num : 0 ≤ (2 : ℝ))
                 _ = (1002 / 1000 : ℝ) := by norm_num
           calc ((t + 1 / 2) / t) * ((t + 1) / t) * ((t + 2) / t)
-              ≤ (10005 / 10000) * ((t + 1) / t) * ((t + 2) / t) := by
-                exact mul_le_mul_of_nonneg_left h1 (by positivity)
-              _ ≤ (10005 / 10000) * (1001 / 1000) * ((t + 2) / t) := by
-                exact mul_le_mul_of_nonneg_left h2
-                    (by norm_num : 0 ≤ (10005 / 10000 : ℝ))
-              _ ≤ (10005 / 10000) * (1001 / 1000) * (1002 / 1000) := by
-                exact mul_le_mul_of_nonneg_left h3
-                    (by norm_num : 0 ≤ (10005 / 10000 : ℝ) * (1001 / 1000))
+              ≤ (10005 / 10000 : ℝ) * ((t + 1) / t) * ((t + 2) / t) := by
+                have hr1 : ((t + 1 / 2) / t) * ((t + 1) / t) * ((t + 2) / t) =
+                    ((t + 1 / 2) / t) * (((t + 1) / t) * ((t + 2) / t)) := by ring
+                have hr2 : (10005 / 10000 : ℝ) * ((t + 1) / t) * ((t + 2) / t) =
+                    (10005 / 10000) * (((t + 1) / t) * ((t + 2) / t)) := by ring
+                rw [hr1, hr2]
+                exact mul_le_mul_of_nonneg_right h1 (by positivity)
+              _ ≤ (10005 / 10000 : ℝ) * (1001 / 1000) * ((t + 2) / t) := by
+                have hs0 : 0 ≤ (10005 / 10000 : ℝ) := by norm_num
+                have hmid : (10005 / 10000 : ℝ) * ((t + 1) / t) ≤
+                    (10005 / 10000) * (1001 / 1000) :=
+                  mul_le_mul_of_nonneg_left h2 hs0
+                have hr3 : (10005 / 10000 : ℝ) * ((t + 1) / t) * ((t + 2) / t) =
+                    ((10005 / 10000) * ((t + 1) / t)) * ((t + 2) / t) := by ring
+                have hr4 : (10005 / 10000 : ℝ) * (1001 / 1000) * ((t + 2) / t) =
+                    ((10005 / 10000) * (1001 / 1000)) * ((t + 2) / t) := by ring
+                rw [hr3, hr4]
+                exact mul_le_mul_of_nonneg_right hmid (by positivity)
+              _ ≤ (10005 / 10000 : ℝ) * (1001 / 1000) * (1002 / 1000) := by
+                have hs1 : 0 ≤ (10005 / 10000 : ℝ) * (1001 / 1000) := by norm_num
+                have hmid2 : ((10005 / 10000 : ℝ) * (1001 / 1000)) * ((t + 2) / t) ≤
+                    ((10005 / 10000) * (1001 / 1000)) * (1002 / 1000) :=
+                  mul_le_mul_of_nonneg_left h3 hs1
+                have hr5 : (10005 / 10000 : ℝ) * (1001 / 1000) * ((t + 2) / t) =
+                    ((10005 / 10000) * (1001 / 1000)) * ((t + 2) / t) := by ring
+                rw [hr5]
+                exact hmid2
         have hdiv : t / Real.sqrt (13 * t / 8) = Real.sqrt t * Real.sqrt (8 / 13) := by
           have hpos1 : 0 < Real.sqrt (13 * t / 8) := by
-            exact Real.sqrt_pos.mpr (by nlinarith)
+            exact Real.sqrt_pos.mpr (by nlinarith only [ht, htu])
           calc t / Real.sqrt (13 * t / 8)
               = Real.sqrt ((t / Real.sqrt (13 * t / 8)) * (t / Real.sqrt (13 * t / 8))) := by
-                rw [Real.sqrt_sq (by positivity)]
+                rw [← pow_two]
+                have hposx : 0 ≤ t / Real.sqrt (13 * t / 8) := by positivity
+                exact (Real.sqrt_sq hposx).symm
               _ = Real.sqrt (8 * t / 13) := by
-                have hx : 0 < 13 * t / 8 := by nlinarith
-                field_simp [hx.ne', show (Real.sqrt (13 * t / 8)) ^ 2 = 13 * t / 8 from by
-                  rw [Real.sq_sqrt (by positivity)]]
+                have hx : (t / Real.sqrt (13 * t / 8)) ^ 2 = 8 * t / 13 := by
+                  have hsq : (Real.sqrt (13 * t / 8)) ^ 2 = 13 * t / 8 := by
+                    rw [Real.sq_sqrt (by positivity)]
+                  have hpos1 : 0 < t := by nlinarith only [ht]
+                  rw [div_pow, hsq]
+                  field_simp [hpos1.ne']
+                  <;> nlinarith only [hpos1]
+                rw [show (t / Real.sqrt (13 * t / 8)) * (t / Real.sqrt (13 * t / 8)) =
+                        (t / Real.sqrt (13 * t / 8)) ^ 2 from by ring, hx]
               _ = Real.sqrt t * Real.sqrt (8 / 13) := by
-                have hx : 0 ≤ t := by nlinarith
+                have hx : 0 ≤ t := by nlinarith only [ht]
                 rw [show 8 * t / 13 = t * (8 / 13) from by ring]
                 rw [Real.sqrt_mul hx (8 / 13)]
         have hdivb : M / (t * t * Real.sqrt (13 * t / 8) * Real.sqrt (1624 / 1625)) =
             (M / (t * t * t)) * (t / Real.sqrt (13 * t / 8)) * (1 / Real.sqrt (1624 / 1625)) := by
-          field_simp
-          ring
+          set s1 := Real.sqrt (13 * t / 8) with hs1e
+          set s2 := Real.sqrt (1624 / 1625) with hs2e
+          have hpos1 : 0 < t := by nlinarith only [ht]
+          have hc1 : 0 < s1 := Real.sqrt_pos.mpr (by nlinarith only [ht, htu])
+          have hc2 : 0 < s2 := Real.sqrt_pos.mpr (by norm_num)
+          have hs1s2 : 0 < s1 * s2 := mul_pos hc1 hc2
+          field_simp [hpos1.ne', hc1.ne', hc2.ne', hs1s2.ne']
         have hsq813 : Real.sqrt (8 / 13) ≤ (7845 / 10000 : ℝ) := by
           rw [Real.sqrt_le_iff]
           constructor
           · norm_num
           · norm_num
         have hst : Real.sqrt t ≤ 332 := by
-          have ht2 : 0 ≤ t := by nlinarith
-          have hT : t ≤ T0 := htu
           calc Real.sqrt t
-              ≤ Real.sqrt T0 := Real.sqrt_le_sqrt Ht
+              ≤ Real.sqrt T0 := Real.sqrt_le_sqrt htu
               _ ≤ 332 := hsT0
-        calc (Real.sqrt 3 / 540) * M * ((8 / 13) * (8 / 13) * (1625 / 1624) * (1625 / 1624)) /
-            (t * t * Real.sqrt (13 * t / 8) * Real.sqrt (1624 / 1625))
-            = (Real.sqrt 3 / 540) * (8 / 13) * (8 / 13) * (1625 / 1624) * (1625 / 1624) *
+        calc (Real.sqrt 3 / 540) * M * ((8 / 13) * (8 / 13) * (1625 / 1624) * (1625 / 1624)) / (t * t * Real.sqrt (13 * t / 8) * Real.sqrt (1624 / 1625)) = (Real.sqrt 3 / 540) * (8 / 13) * (8 / 13) * (1625 / 1624) * (1625 / 1624) *
                 (M / (t * t * Real.sqrt (13 * t / 8) * Real.sqrt (1624 / 1625))) := by
               field_simp
-              ring
             _ = (Real.sqrt 3 / 540) * (8 / 13) * (8 / 13) * (1625 / 1624) * (1625 / 1624) *
                 ((M / (t * t * t)) * (t / Real.sqrt (13 * t / 8)) *
                   (1 / Real.sqrt (1624 / 1625))) := by
@@ -901,46 +945,54 @@ theorem hTerm3 (t : ℝ) (ht : 1000 ≤ t) (htu : t ≤ T0) :
               rw [show t / Real.sqrt (13 * t / 8) = Real.sqrt t * Real.sqrt (8 / 13) from hdiv]
             _ ≤ (Real.sqrt 3 / 540) * (8 / 13) * (8 / 13) * (1625 / 1624) * (1625 / 1624) *
                 (((10005 / 10000) * (1001 / 1000) * (1002 / 1000)) *
-                  (332 * (7845 / 10000)) * (1.00031)) := by
+                  (332 * (7845 / 10000)) * ((1.00031 : ℝ))) := by
               have hX : (M / (t * t * t)) * (Real.sqrt t * Real.sqrt (8 / 13)) *
                   (1 / Real.sqrt (1624 / 1625)) ≤
                   ((10005 / 10000) * (1001 / 1000) * (1002 / 1000)) *
-                    (332 * (7845 / 10000)) * (1.00031) := by
+                    (332 * (7845 / 10000)) * ((1.00031 : ℝ)) := by
                 calc (M / (t * t * t)) * (Real.sqrt t * Real.sqrt (8 / 13)) *
                       (1 / Real.sqrt (1624 / 1625))
                     ≤ ((10005 / 10000) * (1001 / 1000) * (1002 / 1000)) *
                       (Real.sqrt t * Real.sqrt (8 / 13)) *
                       (1 / Real.sqrt (1624 / 1625)) := by
-                      exact mul_le_mul_of_nonneg_left
-                        (calc (M / (t * t * t))
-                            = ((t + 1 / 2) / t) * ((t + 1) / t) * ((t + 2) / t) :=
-                                by rw [hM3]
-                            _ ≤ (10005 / 10000) * (1001 / 1000) * (1002 / 1000) :=
-                                by exact hM3b)
-                        (by positivity)
+                      have hA : M / (t * t * t) ≤
+                          ((10005 / 10000) * (1001 / 1000) * (1002 / 1000)) := by
+                        rw [hM3]
+                        exact hM3b
+                      have hmid : (M / (t * t * t)) *
+                          (Real.sqrt t * Real.sqrt (8 / 13)) ≤
+                          ((10005 / 10000) * (1001 / 1000) * (1002 / 1000)) *
+                          (Real.sqrt t * Real.sqrt (8 / 13)) :=
+                        mul_le_mul_of_nonneg_right hA (by positivity)
+                      exact mul_le_mul_of_nonneg_right hmid (by positivity)
                     _ ≤ ((10005 / 10000) * (1001 / 1000) * (1002 / 1000)) *
                         (332 * (7845 / 10000)) * (1 / Real.sqrt (1624 / 1625)) := by
                       have hstep : Real.sqrt t * Real.sqrt (8 / 13) ≤
                           (332 : ℝ) * (7845 / 10000) := by
                         exact mul_le_mul hst hsq813
-                          (by norm_num : 0 ≤ 7845 / 10000) (by positivity)
-                      exact mul_le_mul_of_nonneg_right hstep (by positivity)
+                          (by positivity) (by norm_num : 0 ≤ (332 : ℝ))
+                      have hstep2 : ((10005 / 10000) * (1001 / 1000) * (1002 / 1000)) *
+                          (Real.sqrt t * Real.sqrt (8 / 13)) ≤
+                          ((10005 / 10000) * (1001 / 1000) * (1002 / 1000)) *
+                          (332 * (7845 / 10000)) :=
+                        mul_le_mul_of_nonneg_left hstep (by positivity)
+                      exact mul_le_mul_of_nonneg_right hstep2 (by positivity)
                     _ ≤ ((10005 / 10000) * (1001 / 1000) * (1002 / 1000)) *
-                        (332 * (7845 / 10000)) * (1.00031) := by
-                      exact mul_le_mul_of_nonneg_right h1624recip (by positivity)
+                        (332 * (7845 / 10000)) * ((1.00031 : ℝ)) := by
+                      exact mul_le_mul_of_nonneg_left h1624recip (by norm_num)
               exact mul_le_mul_of_nonneg_left hX (by
                 positivity)
             _ ≤ ((1.7321 : ℝ) / 540) * (8 / 13) * (8 / 13) * (1625 / 1624) * (1625 / 1624) *
                 (7845 / 10000) * 332 * (10005 / 10000) * (1001 / 1000) * (1002 / 1000) *
-                1.00031 := by
+                (1.00031 : ℝ) := by
               have hstep : (Real.sqrt 3 / 540) * (8 / 13) * (8 / 13) * (1625 / 1624) *
                   (1625 / 1624) *
                   (((10005 / 10000) * (1001 / 1000) * (1002 / 1000)) *
-                    (332 * (7845 / 10000)) * (1.00031)) ≤
+                    (332 * (7845 / 10000)) * ((1.00031 : ℝ))) ≤
                   ((1.7321 : ℝ) / 540) * (8 / 13) * (8 / 13) * (1625 / 1624) *
                   (1625 / 1624) *
                   (((10005 / 10000) * (1001 / 1000) * (1002 / 1000)) *
-                    (332 * (7845 / 10000)) * (1.00031)) := by
+                    (332 * (7845 / 10000)) * ((1.00031 : ℝ))) := by
                 have hle : (Real.sqrt 3 / 540 : ℝ) ≤ (1.7321 / 540) := by
                   calc (Real.sqrt 3 / 540)
                       = (1 / 540) * Real.sqrt 3 := by field_simp
@@ -948,23 +1000,508 @@ theorem hTerm3 (t : ℝ) (ht : 1000 ≤ t) (htu : t ≤ T0) :
                         exact mul_le_mul_of_nonneg_left hs3
                             (by norm_num : 0 ≤ (1 / 540 : ℝ))
                       _ = 1.7321 / 540 := by field_simp
-                exact mul_le_mul_of_nonneg_left hle (by
-                  norm_num)
-              calc (Real.sqrt 3 / 540) * (8 / 13) * (8 / 13) * (1625 / 1624) *
-                  (1625 / 1624) *
+                have hr1 : (Real.sqrt 3 / 540) * (8 / 13) * (8 / 13) * (1625 / 1624) *
+                    (1625 / 1624) * (((10005 / 10000) * (1001 / 1000) *
+                      (1002 / 1000)) * (332 * (7845 / 10000)) *
+                      ((1.00031 : ℝ))) =
+                    (Real.sqrt 3 / 540) *
+                    ((8 / 13) * (8 / 13) * (1625 / 1624) * (1625 / 1624) *
+                      (((10005 / 10000) * (1001 / 1000) *
+                        (1002 / 1000)) * (332 * (7845 / 10000)) *
+                        ((1.00031 : ℝ)))) := by
+                  ring
+                have hmid : (Real.sqrt 3 / 540) *
+                    ((8 / 13) * (8 / 13) * (1625 / 1624) * (1625 / 1624) *
+                      (((10005 / 10000) * (1001 / 1000) *
+                        (1002 / 1000)) * (332 * (7845 / 10000)) *
+                        ((1.00031 : ℝ)))) ≤
+                    (1.7321 / 540) *
+                    ((8 / 13) * (8 / 13) * (1625 / 1624) * (1625 / 1624) *
+                      (((10005 / 10000) * (1001 / 1000) *
+                        (1002 / 1000)) * (332 * (7845 / 10000)) *
+                        ((1.00031 : ℝ)))) := by
+                  have hG0 : 0 ≤
+                      (8 / 13 * (8 / 13) * (1625 / 1624) * (1625 / 1624) *
+                        (((10005 / 10000) * (1001 / 1000) *
+                          (1002 / 1000)) * (332 * (7845 / 10000)) *
+                          (1.00031 : ℝ))) := by
+                    positivity
+                  exact mul_le_mul_of_nonneg_right hle hG0
+                have hr2 : (1.7321 / 540) *
+                    ((8 / 13) * (8 / 13) * (1625 / 1624) * (1625 / 1624) *
+                      (((10005 / 10000) * (1001 / 1000) *
+                        (1002 / 1000)) * (332 * (7845 / 10000)) *
+                        ((1.00031 : ℝ)))) =
+                    ((1.7321 : ℝ) / 540) * (8 / 13) * (8 / 13) *
+                    (1625 / 1624) * (1625 / 1624) *
+                    (((10005 / 10000) * (1001 / 1000) *
+                      (1002 / 1000)) * (332 * (7845 / 10000)) *
+                      ((1.00031 : ℝ))) := by
+                  ring
+                exact le_trans (le_of_eq hr1)
+                    (le_trans hmid (le_of_eq hr2))
+              have hflat : ((1.7321 : ℝ) / 540) * (8 / 13) * (8 / 13) *
+                  (1625 / 1624) * (1625 / 1624) *
                   (((10005 / 10000) * (1001 / 1000) * (1002 / 1000)) *
-                    (332 * (7845 / 10000)) * (1.00031))
-                  ≤ ((1.7321 : ℝ) / 540) * (8 / 13) * (8 / 13) * (1625 / 1624) *
-                      (1625 / 1624) *
-                      (((10005 / 10000) * (1001 / 1000) * (1002 / 1000)) *
-                        (332 * (7845 / 10000)) * (1.00031)) := hstep
-                  _ = ((1.7321 : ℝ) / 540) * (8 / 13) * (8 / 13) * (1625 / 1624) *
-                      (1625 / 1624) * (7845 / 10000) * 332 * (10005 / 10000) *
-                      (1001 / 1000) * (1002 / 1000) * 1.00031 := by ring
-      _ ≤ R3 := by norm_num
+                    (332 * (7845 / 10000)) * (1.00031 : ℝ)) =
+                  ((1.7321 : ℝ) / 540) * (8 / 13) * (8 / 13) * (1625 / 1624) *
+                  (1625 / 1624) * (7845 / 10000) * 332 * (10005 / 10000) *
+                  (1001 / 1000) * (1002 / 1000) * (1.00031 : ℝ) := by
+                ring
+              exact le_trans hstep (by
+                rw [← hflat])
+      _ ≤ R3 := by
+        norm_num [R3]
 
-    s4a_window_squeeze: next atoms (see DISCOVERY_LOG 25m and
-    scripts/rh/day023_s4a_constants.py for the certified constants
-    R2, R3, RX, RZ, RM and their bound structures) — -/
+/- — S4a closing: the e upper bound, wire monotonicity and positivity,
+    the M term, and the squeeze itself.
+
+    Honest split (25m):
+    * LEAN-PROVEN here:
+        - e ≤ 3 (geometric upper bound + exact bignum 25^25 ≤ 3·24^25),
+        - ln x ≥ 3 for x ≥ 27 (via e^3 ≤ 27),
+        - Sbar x ≥ 0 for x ≥ 27 and Kbar Gc > 0,
+        - Bf(t, Gc) and Cf(t, Gc) increasing in t (0 ≤ t < Gc),
+          hence Xwire t ≤ Xwire T0,
+        - Xwire t ≥ 0 on the band,
+        - the M term: M · exp(Xwire t) · Xwire t ≤ RM for
+          0 ≤ M ≤ Zbound t and Xwire t ≤ RX,
+        - the squeeze assembly: for t ∈ [1000, T0],
+          p8_B t (floor(13 t / 8)) + M · exp(Xwire t) · Xwire t
+          < p8_f_near_pin, given Xwire T0 ≤ RX.
+    * PINNED (measurement): Xwire T0 ≤ RX.
+      scripts/rh/day023_s4a_pin.py, dps-100, 2026-09-16:
+      Xwire(1000)   = 1.5109571917805448e-07
+      Xwire(110000) = 0.0018272752728780645
+      Xwire is increasing in t on the band (all t-dependence is
+      rational and monotone in t; the Sbar/Kbar constants are
+      independent of t), so the maximum is attained at T0;
+      margin to RX = 0.00185 is 2.2725e-05.
+      Witness values (dps-100): Sbar(1e8) = 5.1611823380438198,
+      Sbar(1e7) = 4.8691738739533632, Kbar(1e7) = 2.534528e-14. -/
+
+/-- e ≤ (25/24)^25: from 1 − 1/25 ≤ exp(−1/25) (inverted), raised to 25. -/
+theorem hEub25 : Real.exp 1 ≤ (25 / 24 : ℝ) ^ 25 := by
+  set x := (1 / 25 : ℝ) with hx
+  have hneg : 1 - x ≤ Real.exp (-x) := by
+    rw [show (1 : ℝ) - x = (-x) + 1 from by ring]
+    exact Real.add_one_le_exp (-x)
+  have hexp : 0 < Real.exp (-x) := Real.exp_pos (-x)
+  have hden : 0 < 1 - x := by dsimp only [x]; norm_num
+  have hinv : Real.exp x ≤ (1 - x)⁻¹ := by
+    calc (Real.exp x : ℝ)
+        = (Real.exp (-x))⁻¹ := by
+          rw [Real.exp_neg x, inv_inv (Real.exp x)]
+        _ ≤ (1 - x)⁻¹ := by
+          rw [inv_eq_one_div (Real.exp (-x)), inv_eq_one_div (1 - x)]
+          exact (one_div_le_one_div (a := Real.exp (-x)) (b := 1 - x) hexp hden).mpr hneg
+  calc (Real.exp 1 : ℝ)
+      = (Real.exp x) ^ 25 := by
+        have he : Real.exp (25 * x) = (Real.exp x : ℝ) ^ 25 :=
+          Real.exp_nat_mul x 25
+        have hx : 25 * x = 1 := by dsimp only [x]; norm_num
+        rw [← hx, he]
+      _ ≤ ((1 - x)⁻¹) ^ 25 :=
+        pow_le_pow_left₀ (by positivity) hinv 25
+      _ = (25 / 24 : ℝ) ^ 25 := by
+        dsimp only [x]
+        norm_num
+
+/-- (25/24)^25 ≤ 3 — exact bignum 25^25 ≤ 3·24^25. -/
+theorem hEub25b : (25 / 24 : ℝ) ^ 25 ≤ 3 := by
+  norm_num
+
+/-- e ≤ 3. -/
+theorem hE3 : Real.exp 1 ≤ 3 := le_trans hEub25 hEub25b
+
+/-- ln x ≥ 3 for x ≥ 27 (e^3 ≤ 27, via e ≤ 3). -/
+theorem hLn27 (x : ℝ) (hx : 27 ≤ x) : 3 ≤ Real.log x := by
+  have he3 : Real.exp 3 ≤ 27 := by
+    have h1 : (Real.exp 1 : ℝ) ^ 3 ≤ (3 : ℝ) ^ 3 :=
+      pow_le_pow_left₀ (by positivity) hE3 3
+    have h2 : (3 : ℝ) ^ 3 = 27 := by norm_num
+    have h3 : Real.exp 3 = (Real.exp 1) ^ 3 := by
+      rw [← Real.exp_nat_mul (1 : ℝ) 3]
+      ring
+    nlinarith [h1, h2, h3]
+  have hx' : 0 < x := by nlinarith [hx]
+  by_contra h
+  have hg : Real.log x < 3 := by linarith
+  have hexp : x < Real.exp 3 := by
+    calc x
+        = Real.exp (Real.log x) := (Real.exp_log hx').symm
+      _ < Real.exp 3 := Real.exp_lt_exp.mpr hg
+  nlinarith
+
+/-- Sbar x ≥ 0 for x ≥ 27. -/
+theorem hSbar27 (x : ℝ) (hx : 27 ≤ x) : 0 ≤ Sbar x := by
+  dsimp only [Sbar]
+  have hl : 3 ≤ Real.log x := hLn27 x hx
+  have hll : 0 ≤ Real.log (Real.log x) :=
+    Real.log_nonneg (by nlinarith [hl])
+  nlinarith
+
+/-- Kbar Gc > 0. -/
+theorem hKbar_pos : 0 < Kbar Gc := by
+  dsimp only [Kbar]
+  have hl : 3 ≤ Real.log Gc := hLn27 Gc (by norm_num [Gc])
+  have hllhalf : 0 ≤ Real.log (Real.log Gc) + 1 / 2 := by
+    have he : Real.exp (-(1 / 2 : ℝ)) ≤ 1 := by
+      rw [Real.exp_le_one_iff]
+      norm_num
+    have h1 : (1 : ℝ) ≤ Real.log Gc := by nlinarith [hl]
+    have h3 : Real.exp (-(1 / 2 : ℝ)) ≤ Real.log Gc := by
+      calc Real.exp (-(1 / 2 : ℝ))
+          ≤ 1 := he
+          _ ≤ Real.log Gc := h1
+    have hcalc : Real.log (Real.log Gc) ≥ -(1 / 2) := by
+      calc (Real.log (Real.log Gc) : ℝ)
+          ≥ Real.log (Real.exp (-(1 / 2 : ℝ))) := by
+              exact (Real.log_le_log (Real.exp_pos (-(1 / 2 : ℝ))) h3).ge
+          _ = -(1 / 2) := by rw [Real.log_exp]
+    nlinarith [hcalc]
+  have h1 : 0 ≤ 0.110 * (Real.log Gc + 1 / 2) := by
+    have h1a : 0.110 * (Real.log Gc + 1 / 2) ≥ 0.110 * ((3 : ℝ) + 1 / 2) :=
+      mul_le_mul_of_nonneg_left (by nlinarith [hl]) (by norm_num)
+    have h1b : (0.110 : ℝ) * ((3 : ℝ) + 1 / 2) > 0 := by norm_num
+    nlinarith [h1a, h1b]
+  have h2 : 0 ≤ 0.290 * (Real.log (Real.log Gc) + 1 / 2) :=
+    mul_nonneg (by norm_num) hllhalf
+  refine (div_pos_iff).mpr (Or.inl ⟨?_, ?_⟩)
+  · nlinarith [h1, h2]
+  · nlinarith [show 0 < Gc from by norm_num [Gc]]
+
+/-- Bf(t, Gc) is increasing in t (0 ≤ t < Gc). -/
+theorem hBf_inc (t1 t2 : ℝ) (ht0 : 0 ≤ t1) (ht : t1 ≤ t2) (hlt : t2 < Gc) :
+    Bf t1 Gc ≤ Bf t2 Gc := by
+  dsimp only [Bf]
+  set u := Gc * Gc + 1 / 4 with hu
+  have hus : 0 < u := by dsimp only [u]; nlinarith
+  have h1sq : t1 * t1 ≤ t2 * t2 := by
+    calc t1 * t1 ≤ t2 * t1 := mul_le_mul_of_nonneg_right ht (by nlinarith [ht0])
+      _ ≤ t2 * t2 := mul_le_mul_of_nonneg_left (by nlinarith [ht]) (by
+        nlinarith [ht0, ht])
+  have hw : w t1 ≤ w t2 := by
+    dsimp only [w]
+    nlinarith [h1sq]
+  have hr2 : w t2 < u := by
+    dsimp only [w, u]
+    have hdiff : 0 < Gc - t2 := by nlinarith
+    have hsum : 0 < Gc + t2 := by nlinarith
+    have hpos : 0 < (Gc - t2) * (Gc + t2) := mul_pos hdiff hsum
+    have heq : (Gc - t2) * (Gc + t2) = Gc * Gc - t2 * t2 := by ring
+    have hlt' : t2 * t2 < Gc * Gc := by nlinarith [hpos, heq]
+    nlinarith
+  have hterm1 : (w t1 / u) / (1 - w t1 / u) ≤ (w t2 / u) / (1 - w t2 / u) := by
+    have hwr1 : w t1 < u := by nlinarith [hw, hr2]
+    have hd1 : 0 < u - w t1 := by nlinarith [hwr1]
+    have hd2 : 0 < u - w t2 := by nlinarith [hr2]
+    have h1 : (w t1 / u) / (1 - w t1 / u) = w t1 / (u - w t1) := by
+      field_simp [hd1.ne', hus.ne']
+    have h2 : (w t2 / u) / (1 - w t2 / u) = w t2 / (u - w t2) := by
+      field_simp [hd2.ne', hus.ne']
+    rw [h1, h2]
+    have hA : w t1 / (u - w t1) ≤ w t2 / (u - w t1) := by
+      rw [le_div_iff₀ hd1]
+      field_simp
+      exact hw
+    have hB : w t2 / (u - w t1) ≤ w t2 / (u - w t2) := by
+      have hrecip : (1 : ℝ) / (u - w t1) ≤ (1 : ℝ) / (u - w t2) :=
+        (one_div_le_one_div hd1 hd2).mpr (by nlinarith)
+      calc w t2 / (u - w t1)
+          = w t2 * ((1 : ℝ) / (u - w t1)) := by field_simp
+          _ ≤ w t2 * ((1 : ℝ) / (u - w t2)) := by
+            exact mul_le_mul_of_nonneg_left hrecip (by
+              dsimp only [w]; nlinarith [ht0, ht])
+          _ = w t2 / (u - w t2) := by field_simp
+    exact le_trans hA hB
+  have hterm2 : t1 / u ≤ t2 / u := by
+    rw [le_div_iff₀ hus]
+    field_simp
+    exact ht
+  nlinarith
+
+/-- Cf(t, Gc) is increasing in t (0 ≤ t < Gc). -/
+theorem hCf_inc (t1 t2 : ℝ) (ht0 : 0 ≤ t1) (ht : t1 ≤ t2) (hlt : t2 < Gc) :
+    Cf t1 Gc ≤ Cf t2 Gc := by
+  dsimp only [Cf]
+  set w1 := w t1 with hw1
+  set w2 := w t2 with hw2
+  set d1 := Gc * Gc - t1 * t1 with hd1
+  set d2 := Gc * Gc - t2 * t2 with hd2
+  have hd1p : 0 < d1 := by
+    dsimp only [d1]
+    have hdiff : 0 < Gc - t1 := by nlinarith
+    have hsum : 0 < Gc + t1 := by nlinarith
+    have hpos : 0 < (Gc - t1) * (Gc + t1) := mul_pos hdiff hsum
+    have heq : (Gc - t1) * (Gc + t1) = Gc * Gc - t1 * t1 := by ring
+    nlinarith
+  have hd2p : 0 < d2 := by
+    dsimp only [d2]
+    have hdiff : 0 < Gc - t2 := by nlinarith
+    have hsum : 0 < Gc + t2 := by nlinarith
+    have hpos : 0 < (Gc - t2) * (Gc + t2) := mul_pos hdiff hsum
+    have heq : (Gc - t2) * (Gc + t2) = Gc * Gc - t2 * t2 := by ring
+    nlinarith
+  have h1sq : t1 * t1 ≤ t2 * t2 := by
+    calc t1 * t1 ≤ t2 * t1 :=
+        mul_le_mul_of_nonneg_right ht (by nlinarith only [ht0])
+      _ ≤ t2 * t2 := mul_le_mul_of_nonneg_left (by nlinarith only [ht])
+          (by nlinarith only [ht0, ht])
+  have hw20 : 0 ≤ w2 := by
+    dsimp only [w2, w]
+    nlinarith [sq_nonneg t2]
+  have hw : w1 ≤ w2 := by
+    dsimp only [w1, w2, w]
+    nlinarith [h1sq]
+  have hd : d2 ≤ d1 := by
+    dsimp only [d1, d2]
+    nlinarith [h1sq]
+  have hA : w1 / d1 ≤ w2 / d1 := by
+    rw [le_div_iff₀ hd1p]
+    field_simp
+    exact hw
+  have hrecip : (1 : ℝ) / d1 ≤ (1 : ℝ) / d2 :=
+    (one_div_le_one_div hd1p hd2p).mpr hd
+  have hB : w2 / d1 ≤ w2 / d2 := by
+    calc w2 / d1
+        = w2 * ((1 : ℝ) / d1) := by field_simp
+        _ ≤ w2 * ((1 : ℝ) / d2) :=
+          mul_le_mul_of_nonneg_left hrecip hw20
+        _ = w2 / d2 := by field_simp
+  have hmain : w1 / d1 ≤ w2 / d2 := le_trans hA hB
+  have hg : w1 / d1 * (Gc * Gc) ≤ w2 / d2 * (Gc * Gc) :=
+    mul_le_mul_of_nonneg_right hmain (by norm_num [Gc])
+  have hg1 : w1 * (Gc * Gc) / d1 ≤ w2 * (Gc * Gc) / d2 := by
+    calc w1 * (Gc * Gc) / d1
+        = w1 / d1 * (Gc * Gc) := by ring
+        _ ≤ w2 / d2 * (Gc * Gc) :=
+            mul_le_mul_of_nonneg_right hmain (by norm_num [Gc])
+        _ = w2 * (Gc * Gc) / d2 := by ring
+  have hg2 : (2 * w1) * (Gc * Gc) / d1 ≤ (2 * w2) * (Gc * Gc) / d2 := by
+    calc (2 * w1) * (Gc * Gc) / d1
+        = 2 * (w1 * (Gc * Gc) / d1) := by ring
+        _ ≤ 2 * (w2 * (Gc * Gc) / d2) :=
+            mul_le_mul_of_nonneg_left hg1 (by norm_num)
+        _ = (2 * w2) * (Gc * Gc) / d2 := by ring
+  exact add_le_add (by norm_num : (1 : ℝ) ≤ 1) hg2
+
+/-- Xwire t ≥ 0 on the band (t ≤ T0). -/
+theorem hXwire_pos (t : ℝ) (ht : 0 ≤ t) (htu : t ≤ T0) : 0 ≤ Xwire t := by
+  dsimp only [Xwire]
+  have hB0 : 0 ≤ Bf t Gc := by
+    dsimp only [Bf]
+    have hus : 0 < Gc * Gc + 1 / 4 := by
+      norm_num [Gc]
+    have hwu : w t < Gc * Gc + 1 / 4 := by
+      dsimp only [w]
+      have htG : t < Gc := lt_of_le_of_lt htu (by norm_num [T0, Gc])
+      have hdiff : 0 < Gc - t := by nlinarith
+      have hsum : 0 < Gc + t := by nlinarith
+      have hpos : 0 < (Gc - t) * (Gc + t) := mul_pos hdiff hsum
+      have heq : (Gc - t) * (Gc + t) = Gc * Gc - t * t := by ring
+      have hlt' : t * t < Gc * Gc := by nlinarith [hpos, heq]
+      nlinarith
+    have hfrac : w t / (Gc * Gc + 1 / 4) < 1 := by
+      have hrecip : 0 < (1 : ℝ) / (Gc * Gc + 1 / 4) := by
+        norm_num [Gc]
+      have hmult : w t * ((1 : ℝ) / (Gc * Gc + 1 / 4)) <
+          (Gc * Gc + 1 / 4) * ((1 : ℝ) / (Gc * Gc + 1 / 4)) :=
+        mul_lt_mul_of_pos_right hwu hrecip
+      have he : w t * ((1 : ℝ) / (Gc * Gc + 1 / 4)) =
+          w t / (Gc * Gc + 1 / 4) := by ring
+      have he2 : (Gc * Gc + 1 / 4) * ((1 : ℝ) / (Gc * Gc + 1 / 4)) = 1 := by
+        field_simp
+      nlinarith
+    have hh : 0 ≤ (w t / (Gc * Gc + 1 / 4)) / (1 - w t / (Gc * Gc + 1 / 4)) := by
+      have hden : 0 < 1 - w t / (Gc * Gc + 1 / 4) := sub_pos.mpr hfrac
+      have hnum : 0 ≤ w t / (Gc * Gc + 1 / 4) := by
+        apply div_nonneg
+        · dsimp only [w]
+          nlinarith [sq_nonneg t]
+        · norm_num [Gc]
+      exact div_nonneg hnum hden.le
+    have h1 : 0 < 1 / (2 * (Gc * Gc + 1 / 4)) := by
+      norm_num [Gc]
+    have h3 : 0 ≤ t / (Gc * Gc + 1 / 4) := by
+      apply div_nonneg
+      · exact ht
+      · norm_num [Gc]
+    exact add_nonneg (add_nonneg h1.le hh) h3
+  have hs1 : 0 ≤ Sbar Bc := hSbar27 Bc (by norm_num [Bc])
+  have hs2 : 0 ≤ Sbar Gc := hSbar27 Gc (by norm_num [Gc])
+  have hs : 0 ≤ Sbar Bc + Sbar Gc := by nlinarith
+  have hk : 0 ≤ Kbar Gc := by nlinarith [hKbar_pos]
+  have hC0 : 0 ≤ Cf t Gc := by
+    dsimp only [Cf]
+    have hd : 0 < Gc * Gc - t * t := by
+      have htG : t < Gc := lt_of_le_of_lt htu (by norm_num [T0, Gc])
+      have hdiff : 0 < Gc - t := by nlinarith
+      have hsum : 0 < Gc + t := by nlinarith
+      have hpos : 0 < (Gc - t) * (Gc + t) := mul_pos hdiff hsum
+      have heq : (Gc - t) * (Gc + t) = Gc * Gc - t * t := by ring
+      nlinarith
+    have hw0 : 0 ≤ 2 * w t * (Gc * Gc) := by
+      dsimp only [w]
+      nlinarith [show Gc * Gc = Gc ^ 2 from by ring, sq_nonneg Gc, sq_nonneg t]
+    have hterm : 0 ≤ 2 * w t * (Gc * Gc) / (Gc * Gc - t * t) :=
+      div_nonneg hw0 hd.le
+    nlinarith
+  have h1 : 0 ≤ Bf t Gc * (Sbar Bc + Sbar Gc) := mul_nonneg hB0 hs
+  have h2 : 0 ≤ Cf t Gc * Kbar Gc := mul_nonneg hC0 hk
+  nlinarith
+
+/-- Xwire t ≤ Xwire T0 on the band (each factor increasing, both
+    Sbar-sum and Kbar nonnegative). -/
+theorem hXwire_mono (t : ℝ) (ht : 0 ≤ t) (htu : t ≤ T0) : Xwire t ≤ Xwire T0 := by
+  dsimp only [Xwire]
+  have hT0G : T0 < Gc := by norm_num [T0, Gc]
+  have hB : Bf t Gc ≤ Bf T0 Gc := hBf_inc t T0 ht htu hT0G
+  have hC : Cf t Gc ≤ Cf T0 Gc := hCf_inc t T0 ht htu hT0G
+  have hs : 0 ≤ Sbar Bc + Sbar Gc := by
+    have hs1 : 0 ≤ Sbar Bc := hSbar27 Bc (by norm_num [Bc])
+    have hs2 : 0 ≤ Sbar Gc := hSbar27 Gc (by norm_num [Gc])
+    nlinarith
+  have hk : 0 ≤ Kbar Gc := by nlinarith [hKbar_pos]
+  calc Xwire t
+      = Bf t Gc * (Sbar Bc + Sbar Gc) + Cf t Gc * Kbar Gc := by
+        dsimp only [Xwire]
+      _ ≤ Bf T0 Gc * (Sbar Bc + Sbar Gc) + Cf t Gc * Kbar Gc := by
+        have h1 : Bf t Gc * (Sbar Bc + Sbar Gc) ≤ Bf T0 Gc * (Sbar Bc + Sbar Gc) :=
+          mul_le_mul_of_nonneg_right hB hs
+        nlinarith
+      _ ≤ Bf T0 Gc * (Sbar Bc + Sbar Gc) + Cf T0 Gc * Kbar Gc := by
+        have h2 : Cf t Gc * Kbar Gc ≤ Cf T0 Gc * Kbar Gc :=
+          mul_le_mul_of_nonneg_right hC hk
+        nlinarith
+      _ = Xwire T0 := by dsimp only [Xwire]
+
+/-- The M term on the window: M · exp(Xwire t) · Xwire t ≤ RM for
+    0 ≤ M ≤ Zbound t and Xwire t ≤ RX. -/
+theorem hMterm (t : ℝ) (ht : 1000 ≤ t) (htu : t ≤ T0) (M : ℝ) (hM : 0 ≤ M)
+    (hMz : M ≤ Zbound t) (hX : Xwire t ≤ RX) :
+    M * Real.exp (Xwire t) * Xwire t ≤ RM := by
+  have hz0 : 0 ≤ Zbound t := by
+    dsimp only [Zbound]
+    refine mul_nonneg ?_ ?_
+    · refine mul_nonneg ?_ ?_
+      · norm_num
+      · exact Real.rpow_nonneg (by nlinarith) (1 / 4)
+    · exact Real.log_nonneg (by nlinarith)
+  have hX0 : 0 ≤ Xwire t := hXwire_pos t (by nlinarith) htu
+  have hrx0 : 0 ≤ RX := by norm_num [RX]
+  have h1 : M * Real.exp (Xwire t) * Xwire t ≤
+      Zbound t * Real.exp (Xwire t) * Xwire t := by
+    calc M * Real.exp (Xwire t) * Xwire t
+        = Real.exp (Xwire t) * Xwire t * M := by ring
+        _ ≤ Real.exp (Xwire t) * Xwire t * Zbound t := by
+          exact mul_le_mul_of_nonneg_left hMz (by
+            nlinarith [Real.exp_pos (Xwire t), hX0])
+        _ = Zbound t * Real.exp (Xwire t) * Xwire t := by ring
+  have h2 : Xwire t * Real.exp (Xwire t) ≤ RX * Real.exp (Xwire t) :=
+    mul_le_mul_of_nonneg_right hX (by positivity)
+  have h3 : Real.exp (Xwire t) ≤ Real.exp RX := Real.exp_le_exp_of_le hX
+  have h4 : Zbound t * (Xwire t * Real.exp (Xwire t)) ≤
+      Zbound t * (RX * Real.exp (Xwire t)) :=
+    mul_le_mul_of_nonneg_left h2 (by nlinarith [hz0])
+  have h5 : Zbound t * (RX * Real.exp (Xwire t)) =
+      Zbound t * RX * Real.exp (Xwire t) := by ring
+  have h6 : Zbound t * RX * Real.exp (Xwire t) ≤
+      Zbound t * RX * Real.exp RX := by
+    calc Zbound t * RX * Real.exp (Xwire t)
+        = (Zbound t * RX) * Real.exp (Xwire t) := by ring
+        _ ≤ (Zbound t * RX) * Real.exp RX := by
+          exact mul_le_mul_of_nonneg_left h3 (by
+            nlinarith [hz0, hrx0])
+        _ = Zbound t * RX * Real.exp RX := by ring
+  have h7 : Zbound t ≤ RZ := hZbound t ht htu
+  have h8 : Real.exp RX ≤ 1.002 := hExpRX
+  have h9 : Zbound t * RX * Real.exp RX ≤ RZ * RX * (1.002 : ℝ) := by
+    calc Zbound t * RX * Real.exp RX
+        = (Zbound t * RX) * Real.exp RX := by ring
+        _ ≤ (RZ * RX) * Real.exp RX := by
+          have h9a : Zbound t * RX ≤ RZ * RX :=
+            mul_le_mul_of_nonneg_right h7 hrx0
+          exact mul_le_mul_of_nonneg_right h9a (by positivity)
+        _ ≤ (RZ * RX) * (1.002 : ℝ) := by
+          exact mul_le_mul_of_nonneg_left h8 (by
+            nlinarith [show 0 ≤ RZ from by norm_num [RZ]])
+        _ = RZ * RX * (1.002 : ℝ) := by ring
+  have h10 : RZ * RX * (1.002 : ℝ) ≤ RM := by
+    norm_num [RZ, RX, RM]
+  calc M * Real.exp (Xwire t) * Xwire t
+      ≤ Zbound t * Real.exp (Xwire t) * Xwire t := h1
+      _ = Zbound t * (Xwire t * Real.exp (Xwire t)) := by ring
+      _ ≤ Zbound t * (RX * Real.exp (Xwire t)) := h4
+      _ = Zbound t * RX * Real.exp (Xwire t) := by ring
+      _ ≤ Zbound t * RX * Real.exp RX := h6
+      _ ≤ RZ * RX * (1.002 : ℝ) := h9
+      _ ≤ RM := h10
+
+/- The S4a window squeeze — the first green S4 atom.
+
+For t ∈ [1000, T0 = 110000], 0 ≤ M ≤ Zbound t, and
+Xwire T0 ≤ RX (PINNED — see the section header above; the whole
+band follows by Xwire monotonicity),
+
+    p8_B t (⌊13t/8⌋) + M · exp(Xwire t) · Xwire t < p8_f_near_pin.
+
+LEAN-PROVEN: all three Bwire terms ≤ R1/R2/R3 (hTerm1/hTerm2/hTerm3),
+Zbound t ≤ RZ, exp RX ≤ 1.002, Xwire monotone/positive, the whole
+M-term chain (hMterm), and the total R1+R2+R3+RM = 0.9808 <
+0.9975 (margin 0.0167).  PINNED: Xwire T0 ≤ RX. -/
+theorem s4a_window_squeeze (t : ℝ) (ht : 1000 ≤ t) (htu : t ≤ T0)
+    (hX : Xwire T0 ≤ RX) (M : ℝ) (hM : 0 ≤ M) (hMz : M ≤ Zbound t) :
+    p8_B t (Nat.floor (13 * t / 8)) + M * Real.exp (Xwire t) * Xwire t <
+        p8_f_near_pin := by
+  have htot : R1 + R2 + R3 + RM < p8_f_near_pin := by
+    norm_num [R1, R2, R3, RM, p8_f_near_pin]
+  have hb1 : (1 / 2) * (Nat.floor (13 * t / 8) : ℝ) ^ (-1 / 2 : ℝ) ≤ R1 :=
+    hTerm1 t ht
+  have hb2 : (Real.sqrt (1 / 4 + t * t) / 12) *
+      (Nat.floor (13 * t / 8) : ℝ) ^ (-3 / 2 : ℝ) ≤ R2 := hTerm2 t ht
+  have hnorm : ‖((1 / 2 : ℝ) : ℂ) + (t : ℂ) * Complex.I‖ =
+      Real.sqrt (1 / 4 + t * t) := by
+    change Real.sqrt (Complex.normSq (((1 / 2 : ℝ) : ℂ) + (t : ℂ) * Complex.I)) =
+        Real.sqrt (1 / 4 + t * t)
+    rw [Complex.normSq_add_mul_I (1 / 2 : ℝ) t,
+        show (1 / 2 : ℝ) ^ 2 = 1 / 4 from by norm_num, pow_two]
+  have hb2b : (‖((1 / 2 : ℝ) : ℂ) + (t : ℂ) * Complex.I‖ / 12) *
+      (Nat.floor (13 * t / 8) : ℝ) ^ (-3 / 2 : ℝ) ≤ R2 := by
+    have hsub : (‖((1 / 2 : ℝ) : ℂ) + (t : ℂ) * Complex.I‖ / 12) *
+        (Nat.floor (13 * t / 8) : ℝ) ^ (-3 / 2 : ℝ) =
+        (Real.sqrt (1 / 4 + t * t) / 12) *
+          (Nat.floor (13 * t / 8) : ℝ) ^ (-3 / 2 : ℝ) := by
+      rw [hnorm]
+    rw [hsub]
+    exact hb2
+  have hb3 : (Real.sqrt 3 / 540) *
+      ‖(((1 / 2 : ℝ) : ℂ) + (t : ℂ) * Complex.I) *
+        (((1 / 2 : ℝ) : ℂ) + (t : ℂ) * Complex.I + 1) *
+        (((1 / 2 : ℝ) : ℂ) + (t : ℂ) * Complex.I + 2)‖ *
+      (Nat.floor (13 * t / 8) : ℝ) ^ (-5 / 2 : ℝ) ≤ R3 :=
+    hTerm3 t ht htu
+  have hsum : p8_B t (Nat.floor (13 * t / 8)) =
+      (1 / 2) * (Nat.floor (13 * t / 8) : ℝ) ^ (-1 / 2 : ℝ) +
+      ((‖((1 / 2 : ℝ) : ℂ) + (t : ℂ) * Complex.I‖ / 12) *
+        (Nat.floor (13 * t / 8) : ℝ) ^ (-3 / 2 : ℝ)) +
+      ((Real.sqrt 3 / 540) *
+        ‖(((1 / 2 : ℝ) : ℂ) + (t : ℂ) * Complex.I) *
+          (((1 / 2 : ℝ) : ℂ) + (t : ℂ) * Complex.I + 1) *
+          (((1 / 2 : ℝ) : ℂ) + (t : ℂ) * Complex.I + 2)‖ *
+        (Nat.floor (13 * t / 8) : ℝ) ^ (-5 / 2 : ℝ)) := by
+    rfl
+  have hB : p8_B t (Nat.floor (13 * t / 8)) ≤ R1 + R2 + R3 := by
+    rw [hsum]
+    nlinarith [hb1, hb2b, hb3]
+  have hMterm : M * Real.exp (Xwire t) * Xwire t ≤ RM :=
+    hMterm t ht htu M hM hMz (by
+      calc Xwire t
+          ≤ Xwire T0 := hXwire_mono t (by nlinarith) htu
+          _ ≤ RX := hX)
+  calc p8_B t (Nat.floor (13 * t / 8)) + M * Real.exp (Xwire t) * Xwire t
+      ≤ (R1 + R2 + R3) + RM := by
+        nlinarith [hB, hMterm]
+      _ < p8_f_near_pin := htot
 
 end S4W
