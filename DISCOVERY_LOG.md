@@ -2731,3 +2731,73 @@ CONSERVATIVE dps-30 certified 143.34 (1e12 kernel) per discipline —
 the 1e15 value 145.56 is a float64 measurement, not yet dps-30 certified.
 Old boundaries ("2.5e4 artifact", "sound to 1e6" from the broken-quad
 tables) are all superseded by this table.
+
+## 25f — (1e7, 1e9] band scan (per-t exact tail), v3 dps-30 certs, kernel bug #3 trio
+
+### v3 dps-30 CERTIFIED pins, 1e15 tail (out_day023_p01_certify_*_v3_1e15.txt)
+  5e3 closing:  MARGIN = 145.563762319   (E = -1.392e-7, 1346 s)
+  1e3 anchor:   MARGIN = 140.286237277   (E = -5.618e-9, 1356 s)
+Both agree with the float64 1e15 re-issue to 9 digits.  The Lean pin
+keeps the CONSERVATIVE dps-30 certified 143.341847457 (1e12 kernel) per
+discipline; 145.563762319 (1e15 kernel) is now certified too and strictly
+supersedes 143.34 as the best certified closing — the pin stays at the
+more conservative of the two.
+
+### Kernel bug #3 trio (all found by the (1e7, 1e9] scan, all fixed)
+1. PHASE BROADCAST: _pairlog_complex's per-zero +i*pi*nlt was BROADCAST
+   into all 47.5M array elements before the sum (net +47.5M*pi*nlt
+   garbage in the phase).  Invisible for every earlier pin (nlt = 0 for
+   t < 1e7); fired for t > 1e7.  Fix: add to the SUM, not the array.
+2. POLE COLUMN: t = g makes one discrete factor EXACTLY 0 (the ratio's
+   numerator) -> log = -inf; that point is the own-height detector regime
+   (S2b / C1a pole), not the straddle window.  Fix: guarded return
+   (re = -inf, the correct limit) + k = 0 skipped in the scan windows.
+3. QUAD INTERIOR SINGULARITY: for t in (3e7, REM_HI) the density quad
+   (3e7, REM_HI] contains gg = t where a log(1 - s/rho) factor is
+   log(0).  mpmath docs (integration.html): "Neither tanh-sinh nor
+   Gauss-Legendre copes well with mid-interval singularities. The best
+   solution is to split the integral into parts."  Fix: append g = t to
+   the point list (verified online first, per research order).  The
+   infs (E ~ +-1e4..1e5) collapsed to finite E.
+   Regression check: the s = -2 pin and all t <= 1e6 pins are on code
+   paths the trio does not change (nlt = 0, no interior singular, no
+   pole column) — the 143.34/140.20/145.56 pins stand untouched.
+
+### (1e7, 1e9] band scan (out_day023_straddle_hi.txt, REM 1e18 / 200 pts)
+      g             t_best      margin    def_c     resid    zeta    E
+  10000000.24   9999999.74      5.24    3.349    0.336  17.54   -0.019   real
+  11999999.80  12000004.80      1.97    3.497    0.196   6.88   -0.028   real
+  14999999.89  14999995.89      1.49    3.971    0.281   5.93   -0.046   real
+  18000000.08  18000003.58      2.59    5.004    0.962  12.96   -0.072   real
+  19999999.88  19999999.38      1.41    4.952    0.691   7.00   -0.094   real
+  23999999.95  23999995.95      1.46    6.287    1.619   9.16   -0.163   real
+  28000000.17  28000005.67      1.71   14.615    9.572  25.02   -0.324   real
+  31000000.00* 31000001.50      0.78   18.645   13.340  14.47   +2.247   nominal
+  ...3.75e7*     0.66  E +2.18 ; 5e7* 0.37 E +1.45 ; 7.5e7* 0.53 E +2.36 ;
+  1e8* 0.54 E +2.66 ; 1.5e8* 0.43 E +2.48 ; 2.5e8* 0.28 E +1.98 ;
+  4e8* 0.42 E +2.38 ; 6e8* 0.13 E -0.16 ; 1e9* 0.07 E -2.65
+
+Reading (honest split):
+  - REAL rows (t <= 3.15e7, discrete tail over actual zeros): SOUND at
+    screen level.  margin >= 1.4 at every printed window's best t; the
+    binding floor is B(t) (P8 ln-t floor, 3.0 @ 1e7 -> 14.6 @ 2.8e7);
+    kernel error |zeta - K| <= 10% of the floor on every real row
+    (E within -0.33).  The detector is OFF-LINE-INVISIBLE here (dev =
+    min_d |R-1| = 1.0000: R ~ O(1/g) -> 0) — the blind spot is OPEN and
+    behaving exactly as S4 predicts; the margin is floor-dominated, not
+    error-dominated.
+  - NOMINAL rows (*, t > 3.15e7): NOT CERTIFIABLE with current data.
+    The density quad cannot resolve the discrete zeros NEAR t (zero
+    spacing ~ 0.05-0.2 vs quad node spacing ~ 1e6-1e7 in log g):
+    |K| error e^{E} ~ 7-14x (E ~ +-2.5).  Directionally margin < 1 at
+    most printed points but the number is a screen, not a pin.
+    EXTENDING THE REAL REGION PAST 3.15e7 REQUIRES actual zeros there
+    (LMFDB shards (3.15e7, 1e9] — the optional data ask; the 19 shards
+    on disk reach t ~ 3.15e7).
+  - SOUND REGION EXTENDED: [1e3, 1e6] (25d, certified) + [1e6, 3.15e7]
+    (screened, real zeros, margin >= 1.4) — the 2.5e4/1e5/1e6 boundary
+    claims of the old tables remain fully superseded.
+
+A dps-30 CERTIFIED re-issue at the strongest real-band window
+(g = 10000000.240023555, t = 9999999.740023555, float margin 5.24,
+REM 1e18 / 400 pts) is running: out_day023_p01_certify_1e7band.txt.

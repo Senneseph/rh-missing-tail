@@ -50,10 +50,25 @@ def load_g_range(lo, hi):
 
 
 def _pairlog_complex(t, g):
-    """per-pair pairlog for s = 1/2 + i t, g array (float64, g >> t)."""
+    """(re, im) vectorized part-log of the discrete tail for s = 1/2 + i t.
+    float64 t scalar, float64 g array.  Per-pair factor = ((g^2 - t^2)/(g^2+1/4))
+    * e^{s/(g^2+1/4)}: for g < t the algebraic factor is NEGATIVE -> the log
+    contributes +i*pi ONCE PER SUCH ZERO (branch; matches the module product's
+    -pi*count(g<t) mod 2pi).  NOTE (day-023): the per-zero phase + pi*nlt was
+    BROADCAST into every element before the sum (+47.5M x pi*nlt garbage) --
+    it must be added to the SUM, not the array.  For t < 1e7 (all earlier
+    pins) nlt = 0 and the bug was invisible; it fires for t > 1e7."""
     A = g*g + 0.25
-    ratio = (g*g - t*t)/A            # > 0 for g > t
-    return (np.log(ratio) + 0.5/A + 1j*t/A)
+    ratio = np.abs(g*g - t*t)/A
+    nlt = int(np.sum(g < t))
+    nz = int(np.sum(g == t))
+    if nz > 0:
+        # POLE COLUMN: the factor ((g^2-t^2)/(g^2+1/4)) is EXACTLY 0 -> the
+        # tail product is 0 -> log = -inf (correct, not an error).
+        return float('-inf'), float(np.sum(t/A, dtype=np.longdouble)) + nlt * np.pi
+    re = float(np.sum(np.log(ratio) + 0.5/A, dtype=np.longdouble))
+    im = float(np.sum(t/A, dtype=np.longdouble)) + nlt * np.pi
+    return re, im
 
 
 def _pairlog_s0minus2(g):
@@ -69,9 +84,8 @@ def tail_discrete(s, verbose=False):
         disc = float(np.sum(terms, dtype=np.longdouble))
     else:
         t = float(mp.im(s))
-        terms = _pairlog_complex(t, g)
-        disc = complex(np.sum(terms.real, dtype=np.longdouble),
-                       np.sum(terms.imag, dtype=np.longdouble))
+        re, im = _pairlog_complex(t, g)
+        disc = re + 1j*im
     mp.dps = 30
     smp = s if isinstance(s, mp.mpc) else mp.mpc(s)
 
@@ -83,9 +97,17 @@ def tail_discrete(s, verbose=False):
     import os
     remhi = mp.mpf(os.environ.get("TAIL_REM_HI", "1e12"))
     npts = int(os.environ.get("TAIL_REM_NPTS", "80"))
-    pts = [HI * (remhi/HI)**(mp.mpf(k)/npts) for k in range(npts+1)]
-    rem = mp.quad(f, pts)
     t = abs(mp.im(smp))
+    pts = [HI * (remhi/HI)**(mp.mpf(k)/npts) for k in range(npts+1)]
+    if HI < t < remhi:
+        # mpmath docs (integration.html): 'Both tanh-sinh and Gauss-
+        # Legendre ... Neither copes well with mid-interval singularities.
+        # The best solution is to split the integral into parts.'  At
+        # gg = t one log(1 - s/rho) factor is log(0) (the zero under t
+        # sits inside the density quad range for t > 3e7): split there.
+        pts.append(mp.mpf(repr(float(t))))
+        pts.sort()
+    rem = mp.quad(f, pts)
     # analytic (remhi, inf) t^2-part bound: t^2 (ln(B/2pi)+1)/(2pi B) at B = remhi
     Bb = remhi
     bound = mp.mpf(t)*mp.mpf(t)*(mp.log(Bb/(2*PI))+1)/(2*PI*Bb)
