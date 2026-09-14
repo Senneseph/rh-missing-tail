@@ -2918,3 +2918,72 @@ domain — their pointwise verification is the 25f margin identity itself
     Theorem constants are recorded here for a future
     `p9_c1b_disc_floor` if the pin is ever to be formally
     eliminated.
+
+## 25l — S4 scoping: the squeeze deficit map (the blind spot, quantified)
+
+`day023_s4_sweep.py` (out_day023_s4_sweep.txt) — the S4 squeeze of
+P12Uniform.lean, `Bwire(t) + Mr(t) + Mf(t) < flo(t, d0)`, mapped in
+closed form (all wires Lean-authoritative, mirrored verbatim:
+p8_B/B_best onset-band argmin; A4.3 composition Xval b3BoundExplicit
+RHS, band (1e7, 1e8]; Mf = mass·e^X·X with mass = measured |zeta|).
+
+[1] THE OWN-HEIGHT BLIND-SPOT FLOOR — C1a's exact kernel-change mass
+    at a candidate off-line zero (t, d) at its OWN height, in closed
+    form (VERIFIED against the direct 4-factor product
+    fac(rho, s) = (1 - s/rho) e^{s/rho} to 6.9e-17, dps-30):
+
+        m_own(t, d) = |poff(t, d, t)|
+                    = 4 d^2 t^2 e^{(1/2+d)/A + (1/2-d)/B} / (A B),
+        A = (1/2+d)^2 + t^2,  B = (1/2-d)^2 + t^2.
+
+    (Four (1-s/rho) factors: d/(1/2+d+it), -2it/(1/2+d-it),
+    -d/(1/2-d+it), -2it/(1/2-d-it) -> -4 d^2 t^2/(A B).
+    The earlier squared-denominator form was an algebra slip; the
+    direct product is authoritative.)  Leading terms:
+        m_own(t, d) ~ 4 d^2 / t^2            (t -> inf, d fixed)
+        max_{d <= 1/2} m_own(t, d) = m_own(t, 1/2)
+            = 1/t^2 * (1 + O(1/t^2))         (measured exactly:
+            1e-6 @ 1e3, 1e-12 @ 1e6, 1.0078e-15 @ 3.15e7).
+
+[2] THE BAND (full-strip deficit): the squeeze fails at OWN-regime
+    pairs for EVERY d in (0, 1/2] and EVERY t >= ~12.4 (t0, just
+    below the lowest certified zero gamma0 = 14.1347):
+        Bwire(t) (0.0438 @ 1e3 rising to 5.35 @ 3.15e7, ~ the m=40
+        onset edge of the P4 floor, Bwire ~ k sqrt(t))
+        vs max m_own ~ 1/t^2.
+    d_vis(t) = t sqrt(Bwire(t)/4) > 1/2 for all t >= t0: the
+    visibility boundary is OFF the strip — the whole strip
+    (t >= gamma0, 0 < d <= 1/2) is the S4 blind spot, deficit
+    delta(t, d) = Bwire + Mr + Mf - m_own(t, d) ~ Bwire(t).
+
+[3] THE WINDOW-REGIME SQUEEZE HOLDS TO t* = 690349.0568: 
+    Bwire(t) + Xval_wire(t)(1 + |zeta(1/2+it)|) < 0.9975 (the pin
+    floor) for t <= t* (bisection on the closed-form wires; the
+    Xval wire's uw = (t/G)^2 -> 1 divergence at G = 1e7 is in-domain
+    documented, 25j).  Above t*: deficit grows (0.54 @ 1e6,
+    +4.35 @ 3.15e7, Bwire-dominated).
+
+[4] CONSISTENCY: the 25f MEASURED-margin statistic (Q = |zeta|*dev
+    vs def_c = B + resid; margins 1.41-5.24 on (1e6, 3.15e7]) stays
+    > 1 in exactly the region where the S4 WIRE squeeze fails — the
+    measured zero side (growing |zeta|) beats the measured defin-
+    ition side (O(1) resid); the S4 wire squeeze is the
+    CONSERVATIVE (bound-level) statement.  S4 is a statement about
+    the WIRES, not about the measurements.
+
+[5] THE PRIZE CONTENT, REFORMULATED (from the map): S4 =
+    (i) WINDOW region, t in (6.9e5, inf): the definition-side wire
+        must drop below 0.9975 - Bwire(t) (i.e. below ~1 and
+        decreasing): Bwire is O(sqrt(t)) as a bound while the
+        MEASURED deficit is O(1) — the gap is BOUND SHARPNESS (the
+        m=40 onset edge of the P4 floor is not sharp at large t).
+    (ii) OWN region (strip, t >= gamma0, 0 < d <= 1/2): the
+        definition-side wire below m_own(t, d) ~ 4 d^2/t^2 — an
+        EFFECTIVE IDENTITY at the 4 d^2/t^2 scale on the line
+        (the "no spiral under the floor" = the d -> 0 spiral of the
+        definition side must land at the same 4 d^2/t^2 scale as
+        the detector's own-height mass, not at the sqrt(t) wire).
+    Next atom: the S4-WINDOW Lean theorem on [1e3, t*] — everything
+    closed form (p8_B formula + monotone-in-t argument + Xval
+    formula + a |zeta| bound constant) — the first green-able piece
+    of S4.
