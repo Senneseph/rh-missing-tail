@@ -3255,3 +3255,47 @@ p8_abs_exp_sub_one_le (|e^x − 1| <= e^x x) — no new measurement.
 
 Next atom: S4Asm — assemble S4a+S4b+S4c into the single
 residue statement of the P1.2 open hypotheses (named gaps GAP-W / GAP-O).
+
+---
+
+## 25q. S4 ASSEMBLY GREEN — the residue statement, one import (formal/RhAttack/S4Asm.lean)
+
+The S4 program (25l scoping) is now COMPLETE as a formal body of
+work: `S4Asm.lean` (namespace S4A, 0 sorries, full package 17430
+jobs green) imports S4a+S4b+S4c+P1.2 and packages the exact open
+content into two named gaps:
+
+- **gapW** (window regime, t > T0 = 1.1e5): the S4a inequality
+  `p8_B + M e^{Xwire} Xwire < 0.9975` beyond the green window.
+  `s4a_is_gapw_low_window` = S4a on [1000, T0] (LEAN-PROVEN);
+  `tStar := 690349.0568` = the pinned numeric reach of the squeeze
+  (25l[3] bisection — MEASUREMENT, not a proof).
+- **gapO** (own regime, strip): `BwireO + Mr + Mf < mown(t,d)`.
+  **`gapO_current_wires_impossible`** (LEAN-PROVEN, from S4c): for
+  ANY nonnegative Mr, Mf the squeeze fails at the current wires —
+  closing gapO REQUIRES a strictly sharper P4-floor wire than
+  p8_B at list scale.
+- **rh_from_structural_hypotheses**: S1+S2+S3+S4 ⟹ RH (the P1.2
+  composition, restated self-contained).
+
+### The prize, named (final form)
+RH at the bound level = S1 (bridge-tail uniformity in height) +
+S2 (C1b window-floor promotion 0.9975 → theorem) + **gapW** (window
+squeeze beyond T0) + **a sharper own-regime wire** (any wire
+W <= mown − Mr − Mf on the strip).  The S4c certificate makes the
+last item a BOUND-SHARPNESS requirement with a quantified deficit
+(t^{3/2}-wide structural gap, not a pin artifact): the measured
+statistics (25l[4]) pass because the measured deficit is O(1)
+while the wire bound grows O(sqrt(t)).
+
+### S4 program ledger (all green commits)
+- 25m / e4d10b4 + 65247d3 — S4a window [1000, 1.1e5] (S4Window).
+- 25n / 9615d01 — m_own closed-form correction (dps-40).
+- 25n / e0e050f — S4b core: hMownProd exact identity + hCown window (S4Own).
+- 25o / 4d15513 — S4b scale: hMownScale 4d^2/t^2 window (S4Own).
+- 25p / ebdb9de — S4c gap certificate: mown < BwireO, squeeze
+  impossible (S4Gap).
+- 25q / this commit — S4 assembly + named residue (S4Asm).
+
+No probes left in formal/RhAttack (all deleted at commit time).
+Lean 4.33.1 + Mathlib (pinned); no sorries anywhere in the S4 body.
