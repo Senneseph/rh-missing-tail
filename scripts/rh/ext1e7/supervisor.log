@@ -1,1 +1,9 @@
 launched 32 segments (segw=125000.0); logs in /home/jsmille/Projects/rh-missing-tail/scripts/rh/ext1e7
+all segments done: wall 603.2 min; failures: []
+Traceback (most recent call last):
+  File "/home/jsmille/Projects/rh-missing-tail/scripts/rh/day023_ext1e7_supervisor.py", line 82, in <module>
+    main()
+  File "/home/jsmille/Projects/rh-missing-tail/scripts/rh/day023_ext1e7_supervisor.py", line 67, in main
+    N_main = (W1G / (2.0 * math.pi)) \
+                           ^^^^
+UnboundLocalError: cannot access local variable 'math' where it is not associated with a value

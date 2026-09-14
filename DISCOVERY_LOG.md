@@ -2625,3 +2625,85 @@ k=1 covers missing pairs to t ~= 3e6.
 - 32-way repair walk: (6e6, 1e7] count cross-check when it lands (positions
   superseded by LMFDB).
 - No tripwire: no margin < 1 in a verified regime anywhere on the 31-digit data.
+
+## 25b — THE TAIL BUG, THE FIX, THE TRUE CLOSING NUMBERS (day-023, post-Dataset)
+
+### What was wrong (honest, no minimization)
+The P1.1c/d/e composite kernel
+K(s) = e^{logmain25212(s)} · prod_{g<=1e7}(1-s/rho)e^{s/rho} · tail(1e7,inf)
+used for its tail term a `mp.quad` of the pairlog·density integrand over
+the infinite interval `[G, split, mp.inf]`.  That quad systematically
+under-integrated the near mass (the (1e7, ~1e9) region carries most of it):
+the composite error E(t) = Re log|K| - log|zeta| measured at dps-30 with
+the CORRECTED tail is bounded by 4.35e-12·t^2, while the old pipeline
+measured E(t) ≈ +2e-3 (5e3) ... +3e-3 (3e4) — a genuine t^2-scale bias.
+Every margin/resid/E printed in the day-022/25 tables (including the
+"112.48 closing" and "136.06 anchor") was taken with that broken kernel.
+
+### The fix (day023_taildiscrete.py — validated)
+  tail(s) = DISCRETE sum of the exact per-pair factor
+            (g^2 - t^2)/(g^2+1/4) · e^{s/(g^2+1/4)} over the ACTUAL zeros
+            in (1e7, 3e7]  (47,517,736 zeros, decoded straight from the
+            owner's LMFDB shards zeros_8846000..zeros_29846000 — the
+            extra 4 shards above 1e7 are what make this possible)
+           + dps-30 density quad over (3e7, 1e12)   [smooth there; 0.4%
+             agreement with the discrete t^2 coefficient]
+           + analytic (1e12, inf) t^2 bound t^2(ln(1e12/2pi)+1)/(2pi·1e12)
+Validation: at s0 = -2 (the PinCensus pin), the corrected tail =
+9.7275187819e-07 vs the machine-verified PinCensus pin tail
+9.7276894047e-07 — agreement 1.7e-11.  (My earlier "2e-8 gap vs the pin"
+alarm in the 25 thread was MY OWN 1e9 quad cutoff, not PinCensus's error.
+PinCensus stands as verified.)
+
+### Corrected witness table (out_day023_reeissue.txt, G_eff = 1e12)
+ t        margin    E(log|z|-Re log K)
+ 988.3    140.20   -4.2e-6      <- 1e3 anchor (was 136.06 on old kernel)
+ 5004.7   143.34   -1.1e-4      <- 5e3 closing (was 112.48 on old kernel)
+ 7487.6    90.01   -2.4e-4
+ 9997.6    84.51   -4.3e-4
+15001.5    84.60   -9.6e-4
+19988.1    73.46   -1.7e-3
+30003.2    45.92   -3.8e-3
+50008.9    33.35   -1.07e-2
+75010.9    20.84   -2.4e-2
+100011.2   16.25   -4.3e-2
+124993.4   10.57   -6.7e-2
+150003.3    7.88   -9.6e-2
+199995.2    4.41   -1.7e-1
+250005.3    2.79   -2.7e-1
+299996.7    1.91   -3.8e-1
+500001.7    0.508  -1.07
+749988.0    0.099  -2.4
+1000002.3   0.014  -4.26
+
+Sound region (margin >= 1): [1e3, ~3.9e5].  The boundary at ~4e5 is the
+t^2/(2pi·G_eff) TAIL floor of the 1e12 cutoff — a known, cheap-to-remove
+kernel limit (extending the quad to 1e15 shrinks E(1e6) to <6e-9), NOT a
+squeeze limit and NOT a data limit.  The pre-registered route-retirement
+rule (margin < 1 at >= 1e5 OR E >> 1 at >= 1e5) did NOT fire:
+margin(1e5) = 16.25, E(1e5) = 0.043.
+
+### Pins (dps-30, in flight)
+Old-kernel dps-30 certified pins (superseded, kept for the record,
+out_day023_p01_certify_{5e3,1e3}.txt): 73.956 (5e3) / 106.402 (1e3).
+New runs (true tail) launched: pids 2702111/2702112 →
+out_day023_p01_certify_{5e3,1e3}_v2.txt (ETA ~45 min each).  Expected
+~143.3 / ~140.2 to dps-30 (product part exact; float64 discrete tail
+contributes ~1e-15, documented as the certification's honest floor).
+
+### The (6e6, 1e7] walk: DONE, and the census closes the loop
+32/32 segments complete, wall 603.2 min, 0 failures, dt/dt2 agree on
+every segment, engine gate <= 9.4e-8.  Count:
+  (6e6, 1e7] walk flips (dt2) = 8,942,252  == LMFDB slice count (exact)
+  N(1e7)_walk = 12,193,869 (own 6e6 seed) + 8,942,252 = 21,136,121
+               = 21,136,125 (LMFDB, 31-digit) - 4
+and the 4 = EXACTLY the two missing twin pairs in (14, 6e6] documented in
+24 (gaps 0.0194846 / 0.0147015) — the independent engine, independent
+data path, 100 h of compute, agrees with the 31-digit dataset to the
+exact number of zeros its 2.5e-4 grid seed was known to be missing.
+Merged engine list: zeros_T10000000_ext_full.txt (21,136,121 zeros,
+<= 1e7, gitignored; sha below).  (Supervisor import-math bug found and
+fixed; the DONE-line "N(W1)" label in segment logs is the seeded
+N(6e6)+window-flips, not the cumulative N — the flip FILES are the data
+and are correct; documented here so no one re-reads the logs wrong.)
+93022da18f2021c5c5f253e7501382f4041ddeccb706c93f3c806f89ce53ea6d

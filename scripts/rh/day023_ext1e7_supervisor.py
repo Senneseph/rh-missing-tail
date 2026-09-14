@@ -2,6 +2,7 @@
 """Day-023 — repair-list supervisor: 32 parallel zero-walk segments
 covering (6e6, 1e7], then merge + final check.  Expected wall ~2.5-3 h
 (measured rate, DISCOVERY_LOG 21 / day023 bench)."""
+import math
 import os
 import subprocess
 import sys
@@ -73,10 +74,8 @@ def main():
     out = os.path.join(ROOT, "zeros_T10000000_ext_full.txt")
     np.savetxt(out, full, fmt="%.10e")
     print("WROTE %s (%d zeros, <= %.0f)" % (out, full.size, full[-1]))
-    import math  # noqa: E402
     print("SUPERVISOR DONE")
 
 
-import math  # noqa: E402
 if __name__ == "__main__":
     main()

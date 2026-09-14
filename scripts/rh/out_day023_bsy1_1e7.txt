@@ -1,0 +1,22 @@
+======================================================================
+BSY-1 (day-023):  I = (1/pi) Int_0^inf log|Z(t)|/(1/4+t^2) dt
+Burnol 2001 Thm 1.2 + BSY 1999 (Adv. Math. 143:284):
+  I = Sum_{Re rho > 1/2} log|rho/(1-rho)|   (each term >= 0)
+  I = 0  <=>  no off-line zeros  <=>  RH
+======================================================================
+I[0, 1e6]                = +1.287796091377e-06
+zero cells (census)      = 21136125   certified N(1e6) = 21136125 : PASS
+engine sign-flip at zeros= 21136112 / 21136112 (vec-band zeros; the 13
+  scalar-band zeros are covered by the dps spot checks) : PASS
+total smooth+zero cells  = 41574446
+tail Cmax (audited)      = 0.0000   on [1e6, ~2e10] grid
+tail [1e6, inf] bound    = 1.9511e-07
+dps-30 spot checks       = 200/200 (worst err 6.00e-07)
+total error budget       = 2.0195e-05  (quad 2e-5 + tail)
+----------------------------------------------------------------------
+VERDICT: I(1e6) = +1.29e-06 — CONSISTENT WITH I = 0 (RH-consistent;
+  all audits pass).  Certificate: excludes off-line PAIRS with
+  Sum 2d/gamma^2 > 6.1e-05 (3-sigma); e^I - 1 = 1.29e-06 (the
+  measured-band B(1) Blaschke-norm defect).  Independent of the
+  zero walk, the S/2K parity, and the counting census.
+elapsed 763 s
