@@ -2801,3 +2801,21 @@ Reading (honest split):
 A dps-30 CERTIFIED re-issue at the strongest real-band window
 (g = 10000000.240023555, t = 9999999.740023555, float margin 5.24,
 REM 1e18 / 400 pts) is running: out_day023_p01_certify_1e7band.txt.
+
+## 25h — dps-30 CERTIFIED anchor at t ≈ 1e7 (band-closeout pin)
+
+  out_day023_p01_certify_1e7band.txt (g = 10000000.240023555,
+  t = 9999999.740023555, REM 1e18 / 400 pts, 1373 s):
+    |zeta| = 17.538178570639131088
+    dev    = 0.99999980000000980047   (off-line invisible: 1 - 2e-7)
+    B_best = 3.0133746499998848836    (the P8 ln-t floor, 1e7)
+    resid  = 0.33603043443449723443   (pure kernel error: 11% of the floor)
+    MARGIN = 5.23620601895            (dps-30 certified)
+    E      = -0.018978698904          (1.9% in |K| — matches the 25f screen E)
+The certified anchor ladder is now: 1.40e2 @ 10³ (140.202502242/
+140.286237277) → 1.43e2 @ 5×10³ (143.341847457/145.563762319) →
+5.24 @ 10⁷ (5.23620601895).  The (25f) screen says the verified region
+is [1e3, 1e6] certified + [1e6, 3.15e7] screened (margin >= 1.4); this
+cert anchors the upper end of the screen ladder at a dps-30 point.
+The Lean pin stays 143.341847457 (closing = minimum-margin witness of
+the record; band pins are anchors, not closings).
