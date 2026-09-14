@@ -3051,3 +3051,75 @@ LEAN THEOREM ON [1e3, T0] (commit e4d10b4)
     0 < d <= 1/2, the 4 d^2/t^2 effective-identity floor) and
     the t* = 6.9e5 extension question.  Nothing blocked on data
     or tooling for the next Lean atom.
+
+================================================================
+2026-09-10 — DAY 23 — 25n: CORRECTION — the m_own closed form in
+25l is algebraically wrong (caught by re-running the identity at
+dps-40); the S4b own-strip scale is CONFIRMED with the exact form
+================================================================
+
+[1] THE ERROR: 25l records m_own(t, d) = 4 d^2 t^2 / (A B) · e^c
+    "verified to 6.9e-17" against the direct 4-factor product
+    fac(rho, s) = (1 - s/rho) e^{s/rho} at s = 1/2 + it, zeros
+    rho in {1/2±d±it}.  Re-checking at dps-40 over the grid
+    t in [15, 1e8], d in (0.001, 1/2): the swept form is WRONG —
+    rel err 2.5e-11 (1e3, 0.01), 2.25e-8 (1e3, 0.3), 6.2e-6
+    (100, 0.499999) — exactly the missing d^4.
+
+    The four |1 - S/rho| factors (S = 1/2 + it):
+        rho = 1/2+d+it :  |rho - S| = d             ->  d/sqrt(A)
+        rho = 1/2+d-it :  |rho - S| = sqrt(d^2+4t^2) ->  sqrt(d^2+4t^2)/sqrt(A)
+        rho = 1/2-d+it :  |rho - S| = d             ->  d/sqrt(B)
+        rho = 1/2-d-it :  |rho - S| = sqrt(d^2+4t^2) ->  sqrt(d^2+4t^2)/sqrt(B)
+    product = d^2 (d^2 + 4 t^2) / (A B),  A = (1/2+d)^2+t^2,
+    B = (1/2-d)^2+t^2.  The 25l "verification" was fooled: the
+    two forms agree to relative O(d^2/(4t^2)) — 2.5e-11 at the
+    smallest-d test point — and the logged 6.9e-17 came from the
+    dps-30 display of the (incorrect) run.  The exp part of 25l
+    (c = (1/2+d)/A + (1/2-d)/B) is CORRECT (conjugate pairing:
+    re(S/rho + S/rhoconj) = (1/2 Re rho·2)/|rho|^2).
+
+[2] CORRECTED IDENTITY (dps-40 EXACT on the grid, worst rel
+    7.2e-39 = precision limit):
+        m_own(t, d) = d^2 (d^2 + 4 t^2) / (A B) · e^c,
+        0 <= c < 1/t^2 on 0 < d <= 1/2 (sup at d -> 0:
+        c = 1/(t^2 + 1/4)).
+    script day023_s4_sweep.py corrected and re-run; the sweep
+    map is UNCHANGED in its conclusions:
+      window-regime hold boundary t* = 690349.0568 (untouched);
+      own regime: the ENTIRE strip (t >= ~12.4, 0 < d <= 1/2)
+      is deficit vs the naive Bwire (0.0438 @ 1e3 -> 5.35 @
+      3.15e7 vs max_d m_own = 1.000000e-6 -> 1.007811e-15);
+      max_d m_own(t, 1/2) = 1/t^2 · (1 + 6.25e-16-ish at 3.15e7)
+      — the "1.0078e-15 @ 3.15e7" logged in 25l was the CORRECT
+      value all along (the d = 1/2 point is where the two forms
+      are closest... no: the d = 1/2 value is exact in both
+      forms to O(1/t^4) — the small mismatch at 3.15e7 is the
+      e^c vs 1 piece; corrected form is authoritative now).
+
+[3] THE S4b OWN-STRIP ATOM (next Lean work, new file
+    formal/RhAttack/S4Own.lean) — pure closed form, NO pins:
+      (i)  hMownProd : the 8-factor kernel product at (t, d)
+          equals m_own(t, d) exactly (Complex algebra:
+          |1 - S/rho| = |rho - S|/|rho|, normSq_add_mul_I,
+          conjugate-pair real parts).
+      (ii) hCown : 0 <= c(t, d) < 1/t^2 on the strip
+          (c <= 1/B = 1/(t^2 + (1/2-d)^2) for d < 1/2 by
+          A >= B; d = 1/2: c = 1/(t^2+1) < 1/t^2).
+      (iii) hMownScale — THE EFFECTIVE IDENTITY at the 4d^2/t^2
+          scale:
+              (4 d^2 / t^2) · (t^2/(t^2+1))^2 <= m_own(t, d)
+              m_own(t, d) <= (4 d^2 / t^2) · (1 + 1/(16 t^2))
+                              · e^{1/t^2}
+          (d^2+4t^2 <= 4t^2 + 1/4; A, B in [t^2, t^2+1];
+          1 <= e^c <= e^{1/t^2}).  The definition-side kernel at
+          its own point lands on the 4d^2/t^2 scale with pinned
+          relative correction O(1/t^2) — 25l [5](ii), now exact.
+
+[4] LESSON (systemic): a "verification to X digits" claim that
+    compares two ALGEBRAICALLY NEARING forms must be checked at a
+    point where the relative gap between candidate forms is
+    RESOLVED (here d ~ t^-1 or d fixed with t moderate), not at
+    the leading-order regime where they agree.  The Lean proof is
+    the final authority; the script verification is only a
+    pre-flight.

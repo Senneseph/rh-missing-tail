@@ -16,11 +16,11 @@ regimes the pair can sit in):
          kernel-change mass (B5 poff at t = gamma).  Closed form
          (verified below against the DIRECT 4-factor product fac(rho,
          s) = (1 - s/rho) e^{s/rho}, s = 1/2 + i t):
-             m_own = d^2 (d^2 + 4 t^2)
-                     / (((1/2+d)^2 + t^2)^2 * ((1/2-d)^2 + t^2)^2)
-                     * exp(c),
-             c = (1/2+d)/((1/2+d)^2 + t^2) + (1/2-d)/((1/2-d)^2 + t^2)
-         (t -> inf:  4 d^2 / t^2 * (1 + O(1/t^2))).
+             m_own = d^2 (d^2 + 4 t^2) / (A B) * exp(c)      (25n)
+                     A = (1/2+d)^2 + t^2    B = (1/2-d)^2 + t^2
+             c = (1/2+d)/A + (1/2-d)/B,   0 <= c < 1/t^2 on 0<d<=1/2,
+         (t -> inf:  4 d^2 / t^2 * (1 + O(1/t^2)) — the EFFECTIVE
+         IDENTITY scale of the S4b own strip).
   window: ||R(gamma*, d0, t) - 1||, nearest certified zero gamma*
          (B5 closed form) — ~ 1 in the gap for small d0.
   far   : 1 (LEAN-proven A4.1b).
@@ -49,16 +49,20 @@ def poff_direct(t, d):
     return abs(pr)
 
 def m_own(t, d):
-    # CORRECTED (verified vs direct 4-factor product): the four
-    # (1 - s/rho) factors are  d/(half+d+it),  -2it/(half+d-it),
-    #  -d/(half-d+it),  -2it/(half-d-it)  ->  product -4 d^2 t^2 / (A B)
-    # (single powers of A, B; the squared-denominator form was the
-    # algebra slip).  exp part: Re(s * sum 1/rho) = (half+d)/A + (half-d)/B.
+    # CORRECTED 25n (dps-40, exact vs direct 4-factor product on the
+    # grid t in [15, 1e8], d in (0, 1/2]): the four |1 - s/rho|
+    # factors are  d/sqrt(A),  sqrt(d^2 + 4 t^2)/sqrt(A),  d/sqrt(B),
+    #  sqrt(d^2 + 4 t^2)/sqrt(B)  ->  product d^2 (d^2 + 4 t^2) / (A B).
+    # (The 4 d^2 t^2 / (A B) form in 25l missed the d^4 in
+    # (d^2 + 4 t^2); the two agree to relative O(d^2 / (4 t^2)), which
+    # is invisible at small d — the 25l "verification" was fooled.)
+    # exp part unchanged: Re(s * sum 1/rho) = (half+d)/A + (half-d)/B,
+    # with 0 <= c < 1/t^2 on 0 < d <= 1/2 (sup at d -> 0: 1/(t^2 + 1/4)).
     t, d = mp.mpf(t), mp.mpf(d)
     A = (mp.mpf("0.5") + d)**2 + t*t
     B = (mp.mpf("0.5") - d)**2 + t*t
     c = (mp.mpf("0.5") + d)/A + (mp.mpf("0.5") - d)/B
-    return 4*d*d*t*t/(A*B) * mp.e**c
+    return d*d*(d*d + 4*t*t)/(A*B) * mp.e**c
 
 print("C1a closed-form verification (direct 4-factor product vs closed form):")
 for (t, d) in [(14.134725, mp.mpf("0.005")), (1e3, mp.mpf("0.01")),
