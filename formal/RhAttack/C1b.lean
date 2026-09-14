@@ -186,3 +186,138 @@ theorem c1b_F_incr (x y : ℝ) (hx : 1 / 2 <= x) (hxy : x <= y) :
   apply div_nonneg
   · nlinarith [h4xy, hxy]
   · nlinarith
+
+/-- Exact |pref| identity on the straddle (t = gamma + u, u != 0): all
+    denominator factors except -(u*(2*gamma+u)) are positive on the
+    pinned range, so the absolute values close to the positive
+    rational form. -/
+theorem c1b_pref_exact (γ δ u : ℝ) (hγ : 707 / 50 ≤ γ) (hd : 0 < δ) (hdL : δ ≤ 1 / 2)
+    (hu : 0 < |u|) (huL : |u| ≤ 12) :
+    |pref γ δ (γ + u)| =
+        (1 / 4 + γ ^ 2) * (u ^ 2 + δ ^ 2) * ((2 * γ + u) ^ 2 + δ ^ 2) /
+          (|u| * (2 * γ + u) * (1 / 4 + δ + δ ^ 2 + γ ^ 2) * (1 / 4 - δ + δ ^ 2 + γ ^ 2)) := by
+  dsimp only [pref]
+  have h2gu : 0 < 2 * γ + u := by
+    have h2g : 2 * γ ≥ 2 * (707 / 50) := by nlinarith
+    nlinarith [neg_abs_le u, huL, h2g]
+  have hCsq : 1 / 4 - δ + δ ^ 2 = (δ - 1 / 2) ^ 2 := by ring
+  have hCpos : 0 < 1 / 4 - δ + δ ^ 2 + γ ^ 2 := by
+    rw [hCsq]
+    nlinarith [hγ, pow_two_nonneg (δ - 1 / 2)]
+  have hsA : 0 < 1 / 4 + δ + δ ^ 2 + γ ^ 2 := by nlinarith
+  have hsq1 : (γ - (γ + u)) ^ 2 = u ^ 2 := by ring
+  have hsq2 : (γ + (γ + u)) ^ 2 = (2 * γ + u) ^ 2 := by ring
+  have hden : γ ^ 2 - (γ + u) ^ 2 = -(u * (2 * γ + u)) := by ring
+  have hus : u ≠ 0 := by
+    rintro h0
+    rw [h0] at hu
+    simpa using hu
+  have hnumpos : 0 ≤ (1 / 4 + γ ^ 2) * (u ^ 2 + δ ^ 2) * ((2 * γ + u) ^ 2 + δ ^ 2) := by
+    repeat' (apply mul_nonneg <;> nlinarith)
+  rw [hsq1, hsq2, hden]
+  have hPabs : |-(u * (2 * γ + u)) * (1 / 4 + δ + δ ^ 2 + γ ^ 2) * (1 / 4 - δ + δ ^ 2 + γ ^ 2)| =
+      |u| * (2 * γ + u) * (1 / 4 + δ + δ ^ 2 + γ ^ 2) * (1 / 4 - δ + δ ^ 2 + γ ^ 2) := by
+    rw [abs_mul, abs_mul, abs_neg, abs_mul, abs_of_pos h2gu, abs_of_pos hsA, abs_of_pos hCpos]
+  have hnu : u * (2 * γ + u) ≠ 0 := mul_ne_zero hus (ne_of_gt h2gu)
+  have hPnz : -(u * (2 * γ + u)) * (1 / 4 + δ + δ ^ 2 + γ ^ 2) * (1 / 4 - δ + δ ^ 2 + γ ^ 2) ≠ 0 := by
+    rw [mul_assoc]
+    exact mul_ne_zero (neg_ne_zero.mpr hnu)
+      (mul_ne_zero (ne_of_gt hsA) (ne_of_gt hCpos))
+  rw [abs_div, abs_of_nonneg hnumpos, hPabs]
+
+
+set_option maxHeartbeats 400000 in
+
+/-- |pref(γ,δ,γ+u)| in the (m := |u|) rational shape, the worst case
+    δ = 1/2:  |pref| <= (u²+1/4)·((2γ+m)²+1/4) / (m·(2γ+m)·(¼+γ²)).
+    Chain: exact form = grouped product --(δ² → 1/4 in the numerator
+    factor)--(R1 ≤ 1 via c1b_R1_le_one)--(F-increasing via
+    c1b_F_incr on [1/2, ∞)).  Scoped heartbeat bump: the calc normalizes
+    6-factor rational expressions (elaboration cost, not stuck). -/
+theorem c1b_pref_shape (γ δ u : ℝ) (hγ : 707 / 50 ≤ γ) (hd : 0 < δ) (hdL : δ ≤ 1 / 2)
+    (hu : 0 < |u|) (huL : |u| ≤ 12) :
+    |pref γ δ (γ + u)| ≤
+        (u ^ 2 + 1 / 4) * ((2 * γ + |u|) ^ 2 + 1 / 4) /
+          (|u| * (2 * γ + |u|) * (1 / 4 + γ ^ 2)) := by
+  have hApos : 0 < 1 / 4 + γ ^ 2 := by nlinarith
+  have hBpos : 0 < 1 / 4 + δ + δ ^ 2 + γ ^ 2 := by nlinarith
+  have hCpos : 0 < 1 / 4 - δ + δ ^ 2 + γ ^ 2 := by
+    nlinarith [show 1 / 4 - δ + δ ^ 2 = (δ - 1 / 2) ^ 2 by ring]
+  have h2g : 2 * γ ≥ 2 * (707 / 50) := by nlinarith
+  have h2gu : 0 < 2 * γ + u := by
+    nlinarith [neg_abs_le u, huL, h2g]
+  have h2gm : 0 < 2 * γ + |u| := by nlinarith
+  have hR1 : (1 / 4 + γ ^ 2) ^ 2 ≤
+      (1 / 4 + δ + δ ^ 2 + γ ^ 2) * (1 / 4 - δ + δ ^ 2 + γ ^ 2) :=
+    c1b_R1_le_one γ δ hγ hd hdL
+  have hmnz : |u| ≠ 0 := (ne_of_lt hu).symm
+  have hnzA : 1 / 4 + γ ^ 2 ≠ 0 := ne_of_gt hApos
+  have hnzB : 1 / 4 + δ + δ ^ 2 + γ ^ 2 ≠ 0 := ne_of_gt hBpos
+  have hnzC : 1 / 4 - δ + δ ^ 2 + γ ^ 2 ≠ 0 := ne_of_gt hCpos
+  have hnz2gu : 2 * γ + u ≠ 0 := ne_of_gt h2gu
+  have hnz2gm : 2 * γ + |u| ≠ 0 := ne_of_gt h2gm
+  have hdelta : δ ^ 2 ≤ 1 / 4 := by
+    nlinarith [pow_two_nonneg δ, hdL]
+  have hnum1 : u ^ 2 + δ ^ 2 ≤ u ^ 2 + 1 / 4 := by nlinarith [hdelta]
+  have hnum2 : (2 * γ + u) ^ 2 + δ ^ 2 ≤ (2 * γ + u) ^ 2 + 1 / 4 := by nlinarith [hdelta]
+  have hnum12 : (u ^ 2 + δ ^ 2) * ((2 * γ + u) ^ 2 + δ ^ 2) ≤
+      (u ^ 2 + 1 / 4) * ((2 * γ + u) ^ 2 + 1 / 4) := by
+    apply mul_le_mul
+    · exact hnum1
+    · exact hnum2
+    · nlinarith
+    · nlinarith
+  have hst1 : (1 / 4 + γ ^ 2) / ((1 / 4 + δ + δ ^ 2 + γ ^ 2) * (1 / 4 - δ + δ ^ 2 + γ ^ 2)) ≤
+      1 / (1 / 4 + γ ^ 2) := by
+    apply (div_le_div_iff₀ (by nlinarith [hBpos, hCpos]) (by nlinarith [hApos])).mpr
+    nlinarith [hR1]
+  have hfu : ((2 * γ + u) ^ 2 + 1 / 4) / (2 * γ + u) =
+      (2 * γ + u) + 1 / (4 * (2 * γ + u)) := by
+    field_simp [hnz2gu]
+    try ring
+  have hfm : ((2 * γ + |u|) ^ 2 + 1 / 4) / (2 * γ + |u|) =
+      (2 * γ + |u|) + 1 / (4 * (2 * γ + |u|)) := by
+    field_simp [hnz2gm]
+    try ring
+  have hx1 : 1 / 2 ≤ 2 * γ + u := by
+    nlinarith [neg_abs_le u, huL, h2g]
+  have hxy : 2 * γ + u ≤ 2 * γ + |u| := by nlinarith [le_abs_self u]
+  have hF : ((2 * γ + u) ^ 2 + 1 / 4) / (2 * γ + u) ≤
+      ((2 * γ + |u|) ^ 2 + 1 / 4) / (2 * γ + |u|) := by
+    rw [hfu, hfm]
+    exact c1b_F_incr (2 * γ + u) (2 * γ + |u|) hx1 hxy
+  have hstep3 : 0 ≤ (u ^ 2 + 1 / 4) / (|u| * (1 / 4 + γ ^ 2)) := by
+    apply div_nonneg
+    · nlinarith
+    · apply mul_nonneg
+      · exact abs_nonneg u
+      · nlinarith
+  have hden01 : 0 ≤ |u| * (2 * γ + u) := by
+    apply mul_nonneg
+    · exact abs_nonneg u
+    · nlinarith
+  have hfac : 0 ≤ (1 / 4 + γ ^ 2) / ((1 / 4 + δ + δ ^ 2 + γ ^ 2) * (1 / 4 - δ + δ ^ 2 + γ ^ 2)) := by
+    apply div_nonneg
+    · nlinarith
+    · nlinarith
+  have hstep4 : 0 ≤ (u ^ 2 + 1 / 4) * ((2 * γ + u) ^ 2 + 1 / 4) / (|u| * (2 * γ + u)) := by
+    apply div_nonneg
+    · nlinarith
+    · exact hden01
+  have hexact := c1b_pref_exact γ δ u hγ hd hdL hu huL
+  rw [hexact]
+  calc _
+    _ = ((u ^ 2 + δ ^ 2) * ((2 * γ + u) ^ 2 + δ ^ 2) / (|u| * (2 * γ + u))) *
+        ((1 / 4 + γ ^ 2) / ((1 / 4 + δ + δ ^ 2 + γ ^ 2) * (1 / 4 - δ + δ ^ 2 + γ ^ 2))) := by { field_simp [hmnz, hnz2gu, hnzB, hnzC]; try ring }
+    _ ≤ ((u ^ 2 + 1 / 4) * ((2 * γ + u) ^ 2 + 1 / 4) / (|u| * (2 * γ + u))) *
+        ((1 / 4 + γ ^ 2) / ((1 / 4 + δ + δ ^ 2 + γ ^ 2) * (1 / 4 - δ + δ ^ 2 + γ ^ 2))) := (mul_le_mul_of_nonneg_right (div_le_div_of_nonneg_right hnum12 hden01) hfac)
+    _ ≤ ((u ^ 2 + 1 / 4) * ((2 * γ + u) ^ 2 + 1 / 4) / (|u| * (2 * γ + u))) *
+        (1 / (1 / 4 + γ ^ 2)) := (mul_le_mul_of_nonneg_left hst1 hstep4)
+    _ = ((u ^ 2 + 1 / 4) * ((2 * γ + u) ^ 2 + 1 / 4)) /
+          (|u| * (2 * γ + u) * (1 / 4 + γ ^ 2)) := by { field_simp [hmnz, hnz2gu, hnzA]; try ring }
+    _ = ((u ^ 2 + 1 / 4) / (|u| * (1 / 4 + γ ^ 2))) *
+          (((2 * γ + u) ^ 2 + 1 / 4) / (2 * γ + u)) := by { field_simp [hmnz, hnz2gu, hnzA]; try ring }
+    _ ≤ ((u ^ 2 + 1 / 4) / (|u| * (1 / 4 + γ ^ 2))) *
+          (((2 * γ + |u|) ^ 2 + 1 / 4) / (2 * γ + |u|)) := by { apply mul_le_mul_of_nonneg_left hF; exact hstep3 }
+    _ = (u ^ 2 + 1 / 4) * ((2 * γ + |u|) ^ 2 + 1 / 4) /
+          (|u| * (2 * γ + |u|) * (1 / 4 + γ ^ 2)) := by { field_simp [hmnz, hnz2gm, hnzA]; try ring }
