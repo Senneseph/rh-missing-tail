@@ -2877,3 +2877,44 @@ t in (1e7, 3.15e7] are above the list scale and OUT of the wire's
 domain — their pointwise verification is the 25f margin identity itself
 (Q = |zeta|*dev vs def_c = B + |zeta - K|; margin > 1; S1 automatic for
 |zeta| > 1).  The Xval-pinned wiring serves [1e3, 1e6] as before.
+
+## 25k — C1b Step 0b: the discrete-floor constants (map complete)
+
+`day023_c1b_discrete.py` (out_day023_c1b_discrete.txt), corrected
+δ-grid 0.005 ≤ δ ≤ 0.5, u = 0.5k (k = ±1..±24), γ from γ₀ to 1e7
+(38 log points), dps-30:
+
+[1] floor_disc(γ) is MONOTONE INCREASING in γ:
+    0.02384820641  (γ₀ = 14.134725, u = −12, δ = 0.5)
+        0.982975220  (γ = 1413)
+        0.997492013 / 0.997504985 (γ ≈ 9630)   <- the 0.9975 pin's
+        0.999997596  (γ = 1e7)
+    asymptote  1 − 24.0458/γ·(1 + o(1))  (fits |R| ~ 2(u²+δ²)/(γ|u|)
+    at the u = −½·12 corner: 2·144.25/(12γ) = 24.04/γ ✓).
+
+[2] CANDIDATE THEOREM (zero violations over the whole grid):
+      ‖R(γ, δ, γ + 0.5k) − 1‖ ≥ min(0.023, 1 − 25/γ)
+    for γ ≥ γ₀, k = ±1..±24, 0 < δ ≤ ½,  (0.023 vs measured corner
+    0.02384820641; 25 vs measured c = 24.0458 — 4% margin).
+
+[3] CONSISTENCY: at the pin's own audit height γ ~ 10³:
+    1 − 24.04/1000 = 0.997596 ≈ 0.9975 (day-010 pin) ✓ — the pin IS
+    the discrete u = −12 corner floor at its height.
+
+[4] SCOPE DECISION (honest split): the C1b promotion is OPTIONAL for
+    the closure, now confirmed structurally: the closure evaluates the
+    detector at its MEASURED witness points (per-point measured dev,
+    which exceeds the pin) — it can never evaluate the pole-ridge
+    (u* ≈ 0.5/γ is off the 0.5·ℤ grid), and at the witness the
+    per-point dev is recorded, not the window floor.  The promotion
+    would replace a working pin with the (coarser) proven
+    min(0.023, 1 − 25/γ) — bookkeeping value only.  The MAP is the
+    real output: the S4 blind-spot theorem is now PRECISELY SCOPED —
+    the own-regime window is fully characterized (pole column = C1a
+    proven; ridge = R → e^{i/γ}·1, off-grid, 1/γ scale; window floor
+    = min(0.023 corner, 1 − 24.0458/γ) monotone ↑), leaving S4 = the
+    squeeze theorem on the genuinely uncovered sets (the g-gaps
+    between measured zeros, heights > 3.15e7 pending data, γ < γ₀).
+    Theorem constants are recorded here for a future
+    `p9_c1b_disc_floor` if the pin is ever to be formally
+    eliminated.

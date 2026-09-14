@@ -26,8 +26,8 @@ W = mp.mpf("12")
 def rabs(g, u, d):
     t = g + u
     num = (mp.mpf("0.25") + g*g) * (u*u + d*d) * ((g + t)*(g + t) + d*d)
-    den = (g*g - t*t) * (mp.mpf("0.25") + d + d*d + g*g)
-          * (mp.mpf("0.25") - d + d*d + g*g)
+    den = ((g*g - t*t) * (mp.mpf("0.25") + d + d*d + g*g)
+           * (mp.mpf("0.25") - d + d*d + g*g))
     w = ((mp.mpf(1) + 2*d) / (mp.mpf("0.25") + d + d*d + g*g)
          + (mp.mpf(1) - 2*d) / (mp.mpf("0.25") - d + d*d + g*g)
          - mp.mpf(1) / (mp.mpf("0.25") + g*g))
@@ -42,7 +42,7 @@ def main():
     p("  u = 0.5k, k = +-1..+-24 (|u| <= 12, u != 0);  d in (0, 0.5] (dd = 0.005)")
     p("=" * 74)
     us = [mp.mpf(k) * mp.mpf("0.5") for k in range(-24, 25) if k != 0]
-    ds = [mp.mpf(i) / 100 for i in range(1, 101)]
+    ds = [mp.mpf(i) / 200 for i in range(1, 101)]  # 0.005..0.5 (window edge)
     gammas = [G0]
     g = G0
     step = mp.mpf(10)**(mp.mpf(1)/6)   # 1.468x log steps
