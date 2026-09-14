@@ -189,6 +189,22 @@ theorem hpow1 (hn : 0 < (n : ℝ)) :
     (Real.sqrt_eq_rpow (n : ℝ)).symm]
   simp
 
+/-- (x : ℝ)^(-3/2) = 1/(x·√x) for x > 0. -/
+theorem hpow3 (x : ℝ) (hx : 0 < x) :
+    x ^ (-3 / 2 : ℝ) = 1 / (x * Real.sqrt x) := by
+  have hA : x ^ (-3 / 2 : ℝ) = x ^ (-(3 / 2) : ℝ) := by
+    congr
+    ring
+  rw [hA]
+  rw [Real.rpow_neg (by positivity : 0 ≤ x) (3 / 2)]
+  have hB : x ^ (3 / 2 : ℝ) = x * Real.sqrt x := by
+    have : (3 / 2 : ℝ) = 1 + 1 / 2 := by norm_num
+    rw [this]
+    rw [Real.rpow_add hx 1 (1 / 2)]
+    rw [Real.rpow_one, (Real.sqrt_eq_rpow x).symm]
+  rw [hB]
+  simp
+
 /- — Bwire term 1: (1/2)·n^(-1/2) ≤ R1 — -/
 
 theorem hTerm1 (t : ℝ) (ht : 1000 ≤ t) :
@@ -284,7 +300,184 @@ theorem hTerm1 (t : ℝ) (ht : 1000 ≤ t) :
             linarith [this]
           ))
 
-/- — Bwire term 2 and term 3, the Xwire/Zbound wires, and
+/- — 1/√(1624/1625) pad (reused by terms 2 and 3) — -/
+
+/-- 1/√(1624/1625) ≤ 1.00031 [squared: 1625/1624 ≤ 1.00031²]. -/
+lemma h1624recip : 1 / Real.sqrt (1624 / 1625) ≤ 1.00031 := by
+  have h9sq : Real.sqrt (1624 / 1625) * Real.sqrt (1624 / 1625) = 1624 / 1625 := by
+    rw [show Real.sqrt (1624 / 1625) * Real.sqrt (1624 / 1625) =
+        (Real.sqrt (1624 / 1625)) ^ 2 from by ring,
+      Real.sq_sqrt (show 0 ≤ (1624 / 1625 : ℝ) from by norm_num)]
+  have h9h : (1 / Real.sqrt (1624 / 1625)) ^ 2 = 1625 / 1624 := by
+    have : (1 / Real.sqrt (1624 / 1625)) ^ 2 =
+        (1 / Real.sqrt (1624 / 1625)) * (1 / Real.sqrt (1624 / 1625)) := by ring
+    rw [this]
+    have hq : Real.sqrt (1624 / 1625) ≠ 0 := by positivity
+    have hq2 : (1 / Real.sqrt (1624 / 1625)) * (1 / Real.sqrt (1624 / 1625)) =
+        1 / (Real.sqrt (1624 / 1625) * Real.sqrt (1624 / 1625)) := by field_simp [hq]
+    rw [hq2, h9sq]
+    norm_num
+  have h9d : (1 / Real.sqrt (1624 / 1625)) ^ 2 ≤ (1.00031 : ℝ) ^ 2 := by
+    rw [h9h]
+    norm_num
+  have h9x : 0 ≤ 1 / Real.sqrt (1624 / 1625) := by positivity
+  have h9diff : 0 ≤ ((1.00031 : ℝ) - 1 / Real.sqrt (1624 / 1625)) *
+        ((1.00031 : ℝ) + 1 / Real.sqrt (1624 / 1625)) := by
+    nlinarith [h9d]
+  have h9sum : 0 < (1.00031 : ℝ) + 1 / Real.sqrt (1624 / 1625) := by positivity
+  nlinarith
+
+/- — Bwire term 2: sqrt(t²+¼)/12 · n^(-3/2) ≤ R2 — -/
+
+theorem hTerm2 (t : ℝ) (ht : 1000 ≤ t) :
+    Real.sqrt (1 / 4 + t * t) / 12 * (Nat.floor (13 * t / 8) : ℝ) ^ (-3 / 2 : ℝ) ≤ R2 := by
+  have hbase : (13 * t / 8 : ℝ) * (1624 / 1625) ≤ (Nat.floor (13 * t / 8) : ℝ) :=
+    hFloorBase t ht
+  have hpos : 0 < (13 * t / 8 : ℝ) := by nlinarith
+  have hfloor : Real.sqrt (1 / 4 + t * t) ≤ t + 1 / 2 := by
+    rw [Real.sqrt_le_iff]
+    constructor
+    · nlinarith
+    · nlinarith
+  have hfloor12 : Real.sqrt (1 / 4 + t * t) / 12 ≤ (t + 1 / 2) / 12 := by
+    have hl : Real.sqrt (1 / 4 + t * t) / 12 =
+        Real.sqrt (1 / 4 + t * t) * (1 / 12) := by field_simp
+    have hr : (t + 1 / 2) / 12 = (t + 1 / 2) * (1 / 12) := by field_simp
+    rw [hl, hr]
+    exact mul_le_mul_of_nonneg_right hfloor (by
+      norm_num : (0 : ℝ) ≤ 1 / 12)
+  have h1 : (Nat.floor (13 * t / 8) : ℝ) ^ (-3 / 2 : ℝ) =
+      1 / ((Nat.floor (13 * t / 8) : ℝ) * Real.sqrt (Nat.floor (13 * t / 8))) := by
+    rw [hpow3 (Nat.floor (13 * t / 8) : ℝ) (hFloorPos t ht)]
+  have h2 : ((13 * t / 8 : ℝ) * (1624 / 1625)) ^ (-3 / 2 : ℝ) =
+      1 / (((13 * t / 8) * (1624 / 1625)) * Real.sqrt ((13 * t / 8) * (1624 / 1625))) := by
+    rw [hpow3 ((13 * t / 8 : ℝ) * (1624 / 1625)) (mul_pos hpos (by
+      norm_num : 0 < (1624 / 1625 : ℝ)))]
+  have hnpos : 0 < (Nat.floor (13 * t / 8) : ℝ) := hFloorPos t ht
+  have h3 : (Nat.floor (13 * t / 8) : ℝ) * Real.sqrt (Nat.floor (13 * t / 8)) ≥
+      (13 * t / 8) * (1624 / 1625) * Real.sqrt ((13 * t / 8) * (1624 / 1625)) := by
+    have h4 : (13 * t / 8) * (1624 / 1625) * Real.sqrt ((13 * t / 8) * (1624 / 1625)) ≤
+        (13 * t / 8) * (1624 / 1625) * Real.sqrt (Nat.floor (13 * t / 8)) := by
+      exact mul_le_mul_of_nonneg_left (Real.sqrt_le_sqrt hbase)
+          (by nlinarith [show 0 ≤ (1624 : ℝ) from by norm_num, ht])
+    have h5 : (13 * t / 8) * (1624 / 1625) * Real.sqrt (Nat.floor (13 * t / 8)) ≤
+        (Nat.floor (13 * t / 8)) * Real.sqrt (Nat.floor (13 * t / 8)) := by
+      exact mul_le_mul_of_nonneg_right hbase (by
+        positivity)
+    nlinarith [h4, h5]
+  have h4 : 1 / ((Nat.floor (13 * t / 8) : ℝ) * Real.sqrt (Nat.floor (13 * t / 8))) ≤
+      1 / (((13 * t / 8) * (1624 / 1625)) * Real.sqrt ((13 * t / 8) * (1624 / 1625))) := by
+    apply (one_div_le_one_div _ _).mpr
+    · exact h3
+    · positivity
+    · positivity
+  calc Real.sqrt (1 / 4 + t * t) / 12 * (Nat.floor (13 * t / 8) : ℝ) ^ (-3 / 2 : ℝ)
+      ≤ (t + 1 / 2) / 12 * (Nat.floor (13 * t / 8) : ℝ) ^ (-3 / 2 : ℝ) := by
+        exact mul_le_mul_of_nonneg_right hfloor12 (by
+          apply le_of_lt
+          exact Real.rpow_pos_of_pos (hFloorPos t ht) (-3 / 2))
+      _ = (t + 1 / 2) / 12 * (1 / ((Nat.floor (13 * t / 8) : ℝ) * Real.sqrt (Nat.floor (13 * t / 8)))) := by
+        rw [h1]
+      _ ≤ (t + 1 / 2) / 12 * (1 / (((13 * t / 8) * (1624 / 1625)) * Real.sqrt ((13 * t / 8) * (1624 / 1625)))) := by
+        rw [show (t + 1 / 2) / 12 * (1 / ((Nat.floor (13 * t / 8) : ℝ) * Real.sqrt (Nat.floor (13 * t / 8)))) =
+            (1 / ((Nat.floor (13 * t / 8) : ℝ) * Real.sqrt (Nat.floor (13 * t / 8)))) * ((t + 1 / 2) / 12) from by ring,
+          show (t + 1 / 2) / 12 * (1 / (((13 * t / 8) * (1624 / 1625)) * Real.sqrt ((13 * t / 8) * (1624 / 1625)))) =
+            (1 / (((13 * t / 8) * (1624 / 1625)) * Real.sqrt ((13 * t / 8) * (1624 / 1625)))) * ((t + 1 / 2) / 12) from by ring]
+        exact mul_le_mul_of_nonneg_right h4 (by
+          positivity : 0 ≤ (t + 1 / 2) / 12)
+      _ = (t + 1 / 2) / 12 * (1 / ((13 * t / 8) * (1624 / 1625) * Real.sqrt (13 * t / 8) * Real.sqrt (1624 / 1625))) := by
+        have hden : ((13 * t / 8) * (1624 / 1625)) * Real.sqrt ((13 * t / 8) * (1624 / 1625)) =
+            (13 * t / 8) * (1624 / 1625) * Real.sqrt (13 * t / 8) * Real.sqrt (1624 / 1625) := by
+          rw [Real.sqrt_mul (by positivity : 0 ≤ (13 * t / 8 : ℝ)) (1624 / 1625)]
+          ring
+        rw [show 1 / (((13 * t / 8) * (1624 / 1625)) * Real.sqrt ((13 * t / 8) * (1624 / 1625))) =
+            1 / ((13 * t / 8) * (1624 / 1625) * Real.sqrt (13 * t / 8) * Real.sqrt (1624 / 1625)) from by
+          rw [hden]]
+      _ = (t + 1 / 2) / 12 * (8 / 13) * (1625 / 1624) / (t * Real.sqrt (13 * t / 8) * Real.sqrt (1624 / 1625)) := by
+        field_simp
+      _ = ((t + 1 / 2) / t) * (8 / 13) * (1625 / 1624) / (12 * Real.sqrt (13 * t / 8) * Real.sqrt (1624 / 1625)) := by
+        field_simp
+      _ ≤ 1.0005 * (8 / 13) * (1625 / 1624) / (12 * Real.sqrt 1625 * Real.sqrt (1624 / 1625)) := by
+        have h1000 : (t + 1 / 2) / t ≤ 1.0005 := by
+          have hinv : 1 / t ≤ 1 / 1000 := by
+            apply (one_div_le_one_div _ _).mpr
+            · nlinarith [ht]
+            · nlinarith [ht]
+            · norm_num
+          have : 0 < t := by nlinarith [ht]
+          calc (t + 1 / 2) / t
+              = 1 + 1 / (2 * t) := by
+                field_simp
+                <;> ring
+              _ ≤ 1 + 1 / 2000 := by
+                have h2t : 2 * t ≥ 2000 := by nlinarith [ht]
+                have h2i : 1 / (2 * t) ≤ 1 / 2000 := by
+                  apply (one_div_le_one_div _ _).mpr
+                  · exact h2t
+                  · nlinarith [ht]
+                  · norm_num
+                exact add_le_add_right h2i 1
+              _ = 1.0005 := by norm_num
+        have hrec : 1 / Real.sqrt (13 * t / 8) ≤ 1 / Real.sqrt 1625 := by
+          have h1625 : 13 * t / 8 ≥ 1625 := by
+            have h10 : (13 * 1000 / 8 : ℝ) = 1625 := by norm_num
+            nlinarith [h10, ht]
+          apply (one_div_le_one_div _ _).mpr
+          · exact Real.sqrt_le_sqrt h1625
+          · positivity
+          · positivity
+        have hstep : ((t + 1 / 2) / t) * (1 / Real.sqrt (13 * t / 8)) ≤
+            1.0005 * (1 / Real.sqrt 1625) := by
+          have h1 : ((t + 1 / 2) / t) * (1 / Real.sqrt (13 * t / 8)) ≤
+              1.0005 * (1 / Real.sqrt (13 * t / 8)) := by
+            exact mul_le_mul_of_nonneg_right h1000 (by
+              positivity)
+          have h2 : 1.0005 * (1 / Real.sqrt (13 * t / 8)) ≤
+              1.0005 * (1 / Real.sqrt 1625) := by
+            exact mul_le_mul_of_nonneg_left hrec (by
+              norm_num : (0 : ℝ) ≤ 1.0005)
+          calc ((t + 1 / 2) / t) * (1 / Real.sqrt (13 * t / 8))
+              ≤ 1.0005 * (1 / Real.sqrt (13 * t / 8)) := h1
+              _ ≤ 1.0005 * (1 / Real.sqrt 1625) := h2
+        have hC : 0 ≤ (8 / 13) * (1625 / 1624) / 12 * (1 / Real.sqrt (1624 / 1625)) := by
+          positivity
+        rw [show ((t + 1 / 2) / t) * (8 / 13) * (1625 / 1624) /
+            (12 * Real.sqrt (13 * t / 8) * Real.sqrt (1624 / 1625)) =
+            (((t + 1 / 2) / t) * (1 / Real.sqrt (13 * t / 8))) *
+            ((8 / 13) * (1625 / 1624) / 12 * (1 / Real.sqrt (1624 / 1625))) from by
+          field_simp]
+        rw [show 1.0005 * (8 / 13) * (1625 / 1624) /
+            (12 * Real.sqrt 1625 * Real.sqrt (1624 / 1625)) =
+            (1.0005 * (1 / Real.sqrt 1625)) *
+            ((8 / 13) * (1625 / 1624) / 12 * (1 / Real.sqrt (1624 / 1625))) from by
+          field_simp]
+        exact mul_le_mul_of_nonneg_right hstep hC
+      _ ≤ R2 := by
+        calc 1.0005 * (8 / 13) * (1625 / 1624) /
+            (12 * Real.sqrt 1625 * Real.sqrt (1624 / 1625))
+            = ((1 / Real.sqrt 1625) * (1 / Real.sqrt (1624 / 1625))) *
+            (1.0005 * (8 / 13) * (1625 / 1624) / 12) := by
+              field_simp
+            _ ≤ ((2481 / 100000) * 1.00031) * (1.0005 * (8 / 13) * (1625 / 1624) / 12) := by
+              have hX : (1 / Real.sqrt 1625) * (1 / Real.sqrt (1624 / 1625)) ≤
+                  (2481 / 100000) * 1.00031 := by
+                have h1 : (1 / Real.sqrt 1625) * (1 / Real.sqrt (1624 / 1625)) ≤
+                    (2481 / 100000) * (1 / Real.sqrt (1624 / 1625)) := by
+                  exact mul_le_mul_of_nonneg_right hs1625inv (by
+                    positivity)
+                have h2 : (2481 / 100000) * (1 / Real.sqrt (1624 / 1625)) ≤
+                    (2481 / 100000) * 1.00031 := by
+                  exact mul_le_mul_of_nonneg_left h1624recip (by
+                    norm_num : (0 : ℝ) ≤ 2481 / 100000)
+                calc (1 / Real.sqrt 1625) * (1 / Real.sqrt (1624 / 1625))
+                    ≤ (2481 / 100000) * (1 / Real.sqrt (1624 / 1625)) := h1
+                    _ ≤ (2481 / 100000) * 1.00031 := h2
+              exact mul_le_mul_of_nonneg_right hX (by
+                norm_num : (0 : ℝ) ≤ 1.0005 * (8 / 13) * (1625 / 1624) / 12)
+            _ ≤ R2 := by
+              norm_num [R2]
+
+/- — Bwire term 3, the Xwire/Zbound wires, and
     s4a_window_squeeze: next atoms (see DISCOVERY_LOG 25m and
     scripts/rh/day023_s4a_constants.py for the certified constants
     R2, R3, RX, RZ, RM and their bound structures) — -/
