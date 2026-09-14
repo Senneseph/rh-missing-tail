@@ -3416,3 +3416,93 @@ bridge-tail uniformity in the height (Xval-uniformity = S(t)-type
 condition at every height); gapW (window squeeze beyond
 T0 = 690349.0568, prize-scale); the own-strip wire sharpness (S4c);
 the nominal band (3.15e7, 1e9] data.
+
+## 25v (09-14) — OWN-STRIP WIRE SHARPNESS: the requirement is now an exact certificate
+
+User choice: atom **#3 — own-strip wire sharpness** (the S4c follow-up).
+
+**25v[1] NUMERIC (day023_c1b_discrete.py precedent — mown vs wire, closure d-edge):**
+the own-regime strip squeeze `W + Mr + Mf < mown t d` at the closure
+d-edge `d = 1/200` (the largest d the closure's `hmargin` allows at
+its audit scale) demands a wire below a **t^{-2} envelope**:
+`mown t (1/200) = (1/10000)(16001/15984)·t^{-2} =: Eenv t`
+(via `S4O.hMownScaleHi` at d = 1/200, exact constant 16001/15984
+= 1 + 17/15984). The current wire's first term
+`(1/2)(13t/8)^{-1/2} = (1/2)(8/13)^{1/2}·t^{-1/2}` exceeds Eenv by
+a **power of t**: the ratio is `Kgap·t^{3/2}`, `Kgap =
+(1/2)(8/13)^{1/2}·10^4·16001/15984 ≈ 3926.4943423` (7 digits,
+checked in Python; the Lean proof carries the exact constant `Kgap`).
+No constant-factor sharpening of the O(t^{-1/2}) wire family can
+close GAP-O: any family member with scale n <= list scale 13t/8
+sits above Eenv for every t >= 1000 (its first term alone is
+(1/2)n^{-1/2} >= (1/2)(13t/8)^{-1/2}).
+
+**25v[2] LEAN-PROVEN — `formal/RhAttack/S4Sharp.lean` (ns `S4S`), green:**
+- `hMown_ds` — the hMownScaleHi form at a fixed d (strip 0 < d <= 1/2).
+- `s4d_mown_dmin` — `mown t (1/200) <= Eenv t` (exact constants:
+  (4)(1/200)^2 = 1/10000, so mown = (1/10000)(16001/15984)·t^{-2}).
+- `s4d_wire_demand` — **THE WIRE DEMAND**: any wire W (with its own
+  residuals Mr, Mf) closing the strip squeeze on d >= 1/200 obeys
+  `W + Mr + Mf < Eenv t`.
+- `hwire_first_term_exact` —
+  (1/2)(13t/8)^{-1/2} = (1/2)(8/13)^{1/2}·t^{-1/2} exactly.
+- `hKgap_env_collapse` — Kgap·t^{3/2}·Eenv t =
+  (1/2)(8/13)^{1/2}·t^{-1/2} exactly (constants cancel).
+- `s4d_wire_deficit` — current first term > Kgap·t^{3/2}·Eenv t
+  (i.e. exceeds the demand by the power factor Kgap·t^{3/2}).
+- `s4d_scale_demand` — if a p8_B-family first term (1/2)n^{-1/2} is
+  below Eenv then `n > (5000·15984/16001)^2·t^4 ~ 2.49469e7·t^4`:
+  the demand scale exceeds the list scale 13t/8 by a factor
+  (5000·15984/16001)^2·8/13 ~ 1.53519e7·t³ (Python-checked).
+- `s4d_list_scale_impossible` — **THE LIST-SCALE WALL**: for every
+  t >= 1000, no scale n <= 13t/8 (the list scale floor(13t/8) is
+  <= 13t/8) has its first term below Eenv. The p8_B wire family is
+  dead for the strip squeeze at every t of the program's range.
+
+**25v[3] S4Asm header updated**: the "SHARPER OWN-REGIME WIRE"
+requirement now points at S4S — the replacement wire must be of
+genuinely O(t^{-2}) shape (not a constant-factor improvement of the
+O(t^{-1/2}) family), below Eenv, AND must come with its own residuals
+whose sum stays below the d-edge margin. This is the honest wall,
+quantified: GAP-O is a **bound-sharpness requirement of power-gap
+size Kgap·t^{3/2}**, not a fudge constant.
+
+**25v[4] Classification decision:** the wire sharpness atom is
+**CLOSED AS A REQUIREMENT** (it is now a precisely quantified
+certificate, not a fuzzy open item). The *construction* of an
+O(t^{-2}) own-regime wire is a distinct mathematical program (a new
+P4-floor-type bound with a t^{-2} main term at the LIST scale is
+structurally impossible — the list scale is O(t); the O(t^{-2}) wire
+would need a scale n = Θ(t²), i.e. a different family or a
+cancellation argument beyond the P4-floor form). If such a wire
+cannot be found, GAP-O folds into the prize-scale gapW-class
+obstacles (like GAP-W).
+
+**25v[5] Lean 4.33.1 pitfalls hit (S4Sharp):**
+- ofNat vs natCast exponents: `t ^ (2 : ℝ)` does NOT rw-match the
+  rpow_natCast pattern `t ^ (↑2 : ℝ)` (display looks identical);
+  bridge via `rw [h2.symm, h1]` style or term-mode `exact
+  rpow_natCast t 2` (type-level isDefEq accepts, rw-pattern does not).
+- `-1/2` vs `-(1/2)`: rpow_neg needs `rw [show (-1/2 : ℝ) =
+  (-(1/2 : ℝ)) by ring]` first (recurring).
+- `mul_rpow` in term mode leaves the exponent metavariable stuck
+  (`?z`) — use it in tactic mode (`rw [← mul_rpow (hc1) (hc2)]`).
+- `mul_inv_self`/`mul_right_inj` do not exist under those names in
+  4.33.1: use `mul_inv_cancel₀ (h : a ≠ 0)` and
+  `mul_right_injective₀ (ha : a ≠ 0) : Injective (a * ·)`
+  (apply-style, strict-implicit x,y).
+- `mul_lt_mul_of_pos_left (hbc : b < c) (ha : 0 < a) : a*b < a*c`
+  (multiplier LEFT); the `ha` slot must be given with the constant
+  known ((by norm_num : 0 < c)), else the constant stays a stuck
+  metavariable.
+- `Real.sqrt_eq_rpow`/`Real.sq_sqrt (le_of_lt hn)` replace the
+  exponent-juggling `n = (n^{1/2})²` (ring/calc with rpow is
+  association-fragile).
+- `gcongr` needs the goal already in multiplication form
+  (a·1 < a·b); `13/8 < (13/8)·t³` alone does not trigger it —
+  build the a·1 < a·b have explicitly + `rwa [mul_one] at hA`.
+
+**Build:** S4Sharp standalone green; full package green (17430 jobs).
+**Honest split:** 25v[1] NUMERIC (Python, 7-digit Kgap check);
+25v[2] LEAN-PROVEN (whole S4S module, exact rationals + Kgap as an
+exact real); 25v[4] DECISION (classification).

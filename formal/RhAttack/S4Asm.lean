@@ -34,6 +34,18 @@ import RhAttack.P12Uniform
    SHARPER OWN-REGIME WIRE (any wire W with W <= mown - Mr - Mf
    on the strip replaces BwireO in gapO).
 
+   25v QUANTIFIED that requirement (RhAttack.S4Sharp, namespace S4S):
+   any such wire W (with its own P4-floor residuals) must sit below
+   the demand envelope Eenv(t) = (1/10^4)(16001/15984)·t^{-2} at the
+   closure d-edge d = 1/200 (s4d_wire_demand); the current wire's
+   first term (1/2)(13t/8)^{-1/2} exceeds that demand by
+   Kgap·t^{3/2} with Kgap = (1/2)(8/13)^{1/2}·10^4·16001/15984,
+   3926.494 to 7 digits (s4d_wire_deficit); and no p8_B-family scale
+   n <= list scale 13t/8 sits below the demand for any t >= 1000
+   (s4d_list_scale_impossible). The deficit is a POWER of t: the
+   replacement wire must be of genuinely O(t^{-2}) shape, not a
+   constant-factor sharpening of the O(t^{-1/2}) wire family.
+
    Honest split: LEAN-PROVEN — the gap definitions, the
    impossibility (S4c), the low-window green (S4a), and the
    P1.2 composition (P12).  PINNED — tStar (25l[3] bisection,
