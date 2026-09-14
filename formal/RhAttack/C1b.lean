@@ -25,8 +25,15 @@ import RhAttack.Closure
      c1b_omega_ub   — ω_δ <= 3/(¼+γ²)
      c1b_exp_ub     — e^{ω/2} <= 120/119
      c1b_F_incr     — F(x) = x + 1/(4x) increasing for x >= 1/2
-   Next atoms: the |pref| shape bound, the 25/γ corner polynomial
-   (J > 0 on the grid), and the ‖R - 1‖ composition.
+   COMPLETE (25s/25t): all atoms green —
+     c1b_pref_exact / c1b_pref_shape      — (25r) |pref| exact + shape
+     c1b_pref_shape_minus                 — (25s) u = -m shape
+     c1b_G_ub / c1b_Fm_ub / c1b_rat_decr  — (25s) rational chain
+     c1b_exp_half_ub / c1b_th_ub          — (25s) exp + phase bounds
+     c1b_Z_ub                             — (25s) signed Z <= 977/1000
+     c1b_disc_floor                       — (25s) THE FLOOR THEOREM
+     p9_c1b_disc_floor                    — (25t) P9 closure bridge
+   (the p9_f_pin deprecation bridge, 25k [4] scope).
 
    Honest split: LEAN-PROVEN (no pins in this file); the window
    constants (γ0 = 14.14 lower edge, W = 12, δmax = 1/2) are the
@@ -693,3 +700,25 @@ theorem c1b_disc_floor (γ δ u : ℝ) (hγ : 707 / 50 ≤ γ) (hd : 0 < δ) (hd
         rw [div_neg_iff]
         exact Or.inr ⟨by nlinarith, hγp⟩
       linarith [min_le_right (23 / 1000) (1 - 25 / γ), norm_nonneg (Rratio γ δ (γ + u) - 1), h1]
+
+/- (25t) The P9 closure bridge: the discrete-floor theorem restated
+   against the closure's pin, with the deprecation note (25k [4]). -/
+
+/-- (C1b → P9) THE DISCRETE-STRADDLE FLOOR AT THE CLOSURE LEVEL:
+    ‖R(g,δ,g+u) - 1‖ ≥ min (23/1000) (1 - 25/g)  for  707/50 ≤ g,
+    0 < δ ≤ 1/2,  u ∈ (1/2·ℤ) \ {0}, |u| ≤ 12.
+
+    DEPRECATION NOTE (25k [3][4]): the day-010 measured window pin
+    p9_f_pin = 0.9975 IS the u = -12 corner of this same discrete
+    curve at its audit height (1 - 24.0458/10³ ≈ 0.9975; the proven
+    constants 23/1000 and 25 carry the 4% margin).  This theorem
+    replaces the MEASURED window floor by a PROVEN one on the
+    discrete grid: no measurement input remains for the grid floor.
+    Per the 25k scope decision the pin itself stays the
+    witness-scale constant of the hmargin instantiation (the closure
+    measures dev per witness point and never evaluates the window
+    floor) — the promotion's value is bookkeeping-grade. -/
+theorem p9_c1b_disc_floor (g δ u : ℝ) (hg : 707 / 50 ≤ g) (hd : 0 < δ) (hdL : δ ≤ 1 / 2)
+    (hum : 1 / 2 ≤ |u|) (huL : |u| ≤ 12) (hu0 : u ≠ 0) :
+    ‖Rratio g δ (g + u) - 1‖ ≥ min (23 / 1000) (1 - 25 / g) :=
+  c1b_disc_floor g δ u hg hd hdL hum huL hu0

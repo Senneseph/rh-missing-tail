@@ -3299,3 +3299,84 @@ while the wire bound grows O(sqrt(t)).
 
 No probes left in formal/RhAttack (all deleted at commit time).
 Lean 4.33.1 + Mathlib (pinned); no sorries anywhere in the S4 body.
+
+## 25r. C1b atom 1 GREEN — the |pref| exact form + (m := |u|) shape (formal/RhAttack/C1b.lean, a4f07c6 + this trail)
+
+The floor theorem's arithmetic core:
+- `c1b_pref_exact`: on the straddle the detector's real prefactor is
+  the exact all-positive rational
+  `A·(u²+δ²)·((2γ+u)²+δ²) / (|u|(2γ+u)(A+δ+δ²+γ²)(A−δ+δ²+γ²))`,
+  `A := ¼+γ²` — every factor positive, no sign case.
+- `c1b_pref_shape` (u := +|u|) and `c1b_pref_shape_minus` (u := −|u|):
+  worst-case δ = 1/2 shape bounds in (2γ+|u|) / (2γ−|u|) form via the
+  R1 grouping (c1b_R1_le_one), δ² ≤ ¼, and the F-increasing step
+  (c1b_F_incr) — the −|u| variant skips F-increasing (its exact form
+  already carries 2γ−|u|).
+
+Lean 4.33.1 notes that shaped the proofs (house file): `set_option
+maxHeartbeats N in` must sit between the docstring position and the
+theorem (docstring may follow it); big-equality `have`s leak into
+nlinarith contexts (prove them last); `div_le_div_iff₀ /
+div_le_div_of_nonneg_left / mul_le_mul_of_nonneg_left` are the 0-
+suffixed / directional names in this pin; `open Complex` is needed in
+C1b for ofReal_re/mul_I_re/sub_re (imported from B5's pattern);
+`min_le_right _ _` with bare holes STUCK a LinearOrder metavariable
+(needed explicit args); `rw [show P from by ...]` with ring works,
+`ring` does not delta-reduce `set`-bound locals (hRe needed
+`simpa [hZ_def]` in a second have); `pow_two` in a simp list
+rewrites squares to `x·x` and breaks the final calc equality —
+keep ²-forms if the statement uses them.
+
+## 25s. C1b floor THEOREM GREEN — the discrete-straddle floor is now LEAN-PROVEN (bd66c43)
+
+`c1b_disc_floor` in formal/RhAttack/C1b.lean (16 theorems in the
+module, 0 sorry):
+
+    ‖R(γ,δ,γ+u) − 1‖ ≥ min (23/1000) (1 − 25/γ)
+    for 707/50 ≤ γ,  0 < δ ≤ 1/2,  u ≠ 0,  1/2 ≤ |u| ≤ 12.
+
+The seven chain atoms (all green, all-positive polynomial style,
+only analytic input = `Real.exp_le_two_add_div_two_sub`):
+- `c1b_pref_shape_minus`, `c1b_G_ub` ((m²+¼)/m ≤ 577/48 on
+  [½,12], factor (m−12)(48m−1) ≤ 0), `c1b_Fm_ub` (F(2γ−m) ≤
+  2γ+1/152), `c1b_rat_decr` ((2γ+1/152)/(γ²+¼) decreasing for
+  γ ≥ 25, gap (γ−25)(7601γ−51) ≥ 0), `c1b_exp_half_ub`
+  (exp(ω/2) ≤ 1252/1249 via ω/2 ≤ 6/2501 < 2 and
+  exp x ≤ (2+x)/(2−x)), `c1b_th_ub` (phase θ ≤ 444/2501 for
+  γ ≥ 25), `c1b_Z_ub` (signed Z := pref·exp(ω/2) ≤ 977/1000
+  for γ ≥ 25 via the product (577/48)(7601/95038)(1252/1249) ≤ 977/1000).
+
+The theorem body splits on sign of Z = Re R before the cos (Re R =
+Z·cos θ, b5Ratio + the exp real-part):
+- Z ≥ 0: b5PrefSign (T3c) forces u < 0, so t = γ−|u|; c1b_Z_ub
+  gives Z ≤ 977/1000;  |Re R − 1| = 1 − Z·cosθ ≥ 1 − Z ≥ 23/1000.
+- Z < 0:  θ ≤ 444/2501 and 1 − x²/2 ≤ cos x  give
+  Re R = Z·cosθ ≤ Z(1 − (444/2501)²/2) < 0, so |Re R − 1| ≥ 1.
+- γ < 25:  1 − 25/γ < 0, min negative, ‖·‖ ≥ 0.
+
+Margin structure against the measured corner (25k): 0.95405 bound vs
+0.97858 measured worst z (2.5% headroom below the 0.977 threshold the
+floor needs); 23/1000 vs corner 0.02384820641 (4%); 25 vs c =
+24.0458 (4%). Full package build green (17430 jobs).
+
+## 25t. C1b workstream COMPLETE — the p9_f_pin deprecation bridge (formal/RhAttack/C1b.lean, this commit)
+
+`p9_c1b_disc_floor` restates the floor at the closure level with the
+deprecation note.  Scope is exactly 25k [4]: the closure's hmargin
+instantiation measures dev per WITNESS point and never evaluates the
+window floor, so the pin p9_f_pin = 0.9975 stays the witness-scale
+constant — the promotion's value is bookkeeping-grade: the
+DISCRETE-GRID detector floor is now LEAN-PROVEN with zero
+measurement input (the grid floor previously existed only as the day
+010/023 measurements behind the pin and 25k constants).
+
+C1b program ledger (all green commits):
+- 6a84326 — C1b atom 0 foundations (R1, ω bounds, exp ub, F inc).
+- a4f07c6 — C1b atom 1 (pref exact + u=+|u| shape) (25r).
+- bd66c43 — C1b atom 2 + FLOOR THEOREM (25s: 7 chain atoms + c1b_disc_floor).
+- this commit — P9 bridge + header closeout (25t).
+
+Next open work (unchanged by C1b): S1 bridge-tail uniformity in
+height; gapW (window squeeze beyond T0 = 690349.0568, prize-scale);
+own-strip wire sharpness (S4c certificate); nominal band (3.15e7,1e9]
+data (LMFDB 31-digit list ends at 1e7; 3e7 shards partial).
