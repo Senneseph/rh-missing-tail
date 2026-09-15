@@ -1,0 +1,38 @@
+=== 25ae v4 final anchor ===
+
+--- F3: closed-form |T3| and FA at list scale, n = floor(13t/8), dps 50 (8 heights, 1e3..1e8) ---
+t=1.000000e+03              |T3_closed| = 8.10247355e-06   FA = 1.40153033e-03
+t=1.000000e+04              |T3_closed| = 2.56221639e-06   FA = 1.40153054e-03
+t=1.371148e+05              |T3_closed| = 6.91954892e-07   FA = 1.40153061e-03
+t=1.000000e+06              |T3_closed| = 2.56221678e-07   FA = 1.40153054e-03
+t=1.000002e+07              |T3_closed| = 8.10243189e-08   FA = 1.40153054e-03
+t=2.500000e+07              |T3_closed| = 5.12443243e-08   FA = 1.40153054e-03
+t=5.000000e+07              |T3_closed| = 3.62352104e-08   FA = 1.40153054e-03
+t=1.000000e+08              |T3_closed| = 2.56221632e-08   FA = 1.40153054e-03
+
+--- F2: complex residuals, zeta-route T3 (float64, 25ad-validated) vs closed form (dps 50) ---
+t=1.000000e+03              |meas| = 8.102480e-06   residual = 6.949e-12   residual/|meas| = 8.577e-07
+t=3.000000e+03              |meas| = 4.677951e-06   residual = 5.117e-12   residual/|meas| = 1.094e-06
+t=1.000000e+04              |meas| = 2.562203e-06   residual = 1.895e-11   residual/|meas| = 7.397e-06
+t=3.000000e+04              |meas| = 1.479303e-06   residual = 2.744e-11   residual/|meas| = 1.855e-05
+t=1.371148e+05              |meas| = 6.918779e-07   residual = 7.741e-11   residual/|meas| = 1.119e-04
+t=1.000000e+06              |meas| = 2.553816e-07   residual = 8.519e-10   residual/|meas| = 3.336e-03
+
+--- F4: wall arithmetic at list scale (n = 13t/8); all ratios computed directly from the term formulas ---
+|T2|/|T1| = (1/6)(8/13) = 0.102564
+
+t         |T1|            old T3UB/|T1| (L5.e)    new T3UB/|T1| (25ae 4-term)    TRUE |T3|/|T1| (closed form)
+1.000e+03     1.240347e-02    2.429350e+00                    1.013254e-02                      6.532423e-04
+1.000e+04     3.922323e-03    2.429350e+01                    9.549686e-02                      6.532396e-04
+1.000e+05     1.240347e-03    2.429350e+02                    9.491418e-01                      6.532395e-04
+3.700e+05     6.448259e-04    8.988596e+02                    3.510076e+00                      6.532395e-04
+1.000e+06     3.922323e-04    2.429350e+03                    9.485591e+00                      6.532395e-04
+1.000e+07     1.240347e-04    2.429350e+04                    9.485008e+01                      6.532395e-04
+3.000e+07     7.161149e-05    7.288051e+04                    2.845490e+02                      6.532395e-04
+1.000e+08     3.922323e-05    2.429350e+05                    9.484950e+02                      6.532395e-04
+3.000e+08     2.264554e-05    7.288051e+05                    2.845484e+03                      6.532395e-04
+
+crossovers where T3UB/|T1| = 1 - |T2|/|T1| = 0.897436 (wall still positive below):
+  old (L5.e):  (sqrt(3)/270) t (8/13)^2 = 0.897436   -> t = 3.694140e+02
+  new (25ae 4-term triangle): solved numerically   -> t = 9.454865e+04
+  TRUE (closed form |T3|, F3): ratio = constant 2(8/13)^3 * 1.401531e-3 = 6.532398e-04 (wall = 1 - 0.102564 - that = 0.896783 for ALL t)

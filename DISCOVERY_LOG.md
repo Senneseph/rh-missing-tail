@@ -4181,3 +4181,124 @@ extension).  CITED — the 25v/25l demand statements it measures.
 NEXT: (a) the strip-composition residual scale (the action item),
 or (b) the 25ae sharpened T3 bound (the nearer-term provable
 extension of the wall).  Neither is decision shaped.
+
+## 25ae — the sharpened T3 bound: exact EM expansion, pinned constants, wall re-anchored (2026-09-15)
+
+Owner: "ok 25ae it is". Scope: replace the t-growing (√3/540)·‖s(s+1)(s+2)‖·n^{−5/2}
+T3 term of `p4_T4_bound` (L5.e) with a bound whose list-scale ratio to |T1| is
+not O(t). Anchor scripts: `scripts/rh/day026_25ae_t3_sharpen.py` (v2, zeta route,
+p4_I power fixed to the Lean convention n^{1−s}/(1−s), `P4Limit.lean:1266`),
+`out_day026_25ae_t3_sharpen.txt`, `day026_25ae_v3_longdouble.py`,
+`out_day026_25ae_v3_longdouble.txt`, `day026_25ae_final.py`,
+`out_day026_25ae_final.txt` (the consolidated certificate, F1–F4 below).
+
+**F1 — EXACT IDENTITY (Re s = ½, n ≥ 1), per-period IBP ladder**
+(B̂₂ → B₃/3 → B₄/4 → B₅/20 → B₆/120 → B₇/840 → B₈/6720; endpoint values
+B₃(0)=B₃(1)=B₅(0)=B₅(1)=B₇(0)=B₇(1)=0, B₄(0)=B₄(1)=−1/30, B₆(0)=B₆(1)=1/42,
+B₈(0)=B₈(1)=−1/30; antiderivatives (B₃/3)'=B̂₂, (B₄/4)'=B₃, (B₅/20)'=B₄/4,
+(B₆/120)'=B₅/20, (B₇/840)'=B₆/120, (B₈/6720)'=B₇/840):
+
+    T3(s,n) = −S₂·n^{−s−3}/720 + S₄·n^{−s−5}/30240 − S₆·n^{−s−7}/1209600
+              − [S₆·(s+7)/40320]·∫_n^∞ B₈({x})·x^{−s−8} dx,
+
+with S₂ = s(s+1)(s+2), S₄ = S₂(s+3)(s+4), S₆ = S₄(s+5)(s+6).  Boundary
+coefficients: B₄-level −1/120, B₆-level +1/5040, B₈-level −1/201600 (telescopes
+to −n^{−s−3}, −n^{−s−5}, +n^{−s−7} after the Σ over k ≥ n).  A first draft
+with Term_c = −S₆n^{−s−7}/6096384000 was REFUTED by the numeric check
+(8.1e-6 vs 8.03e-6 at t=1e3, a 0.9% miss); the trace-through of all six IBP
+steps gives 1209600, which passes every check below.  |B₈(x)| ≤ 1/30 on [0,1]
+(Bernstein coefficients b_j = B₈(j/8): −1/30, −3157/134510, 127/983040,
+5401/230110, 127/3840, mirror; all |b_j| ≤ 1/30 — convex-hull argument, ready
+for Lean as exact norm_num data).
+
+    ⇒ |T3| ≤ |S₂|n^{−7/2}/720 + |S₄|n^{−9/2}/30240 + |S₆|n^{−15/2}/1209600
+             + |S₆||s+7|·(1/30)·(2n^{−15/2}/15)/(40320)
+           = ... + |S₆||s+7|·n^{−31/2}/9072000.
+
+**F2 — IDENTITY VERIFIED TO THE FP FLOOR.** Complex residual of the dps-50
+closed form vs the 25ad-validated zeta-route T3 (float64): 6.949e-12 @1e3,
+5.117e-12 @3e3, 1.895e-11 @1e4, 2.744e-11 @3e4, 7.741e-11 @1.371148e5
+(P0-certified), 8.519e-10 @1e6 (P4-certified) — i.e. ≤ 3.3e-3 relative,
+monotone in t, exactly the per-term ln k ulp budget. The identity holds to
+every digit the zeta route can resolve.
+
+**F3 — TRUE ASYMPTOTIC AT LIST SCALE (n = ⌊13t/8⌋): T-CONSTANT.** The
+dps-50 closed form gives |T3| = 1.40153054e-3·|S₂|·n^{−7/2} to 8 digits at
+t = 1e3, 1e4, 1.371148e5, 1e6, 1.000002e7, 2.5e7, 5e7, 1e8 (all certified/
+pinned zero heights).  In particular the |T3|/|T1| ratio is the constant
+2·(8/13)³·1.40153054e-3 = 6.5324e-4 for ALL t in [1e3, 1e8].
+
+**F3b — FP TRAP RECORD (honest-wall note).** The v2/v3 zeta-route
+measurements at 5e7/1e8 (|T3| = 2.2573e-07 / 1.4225e-07 / 7.1354e-08 /
+7.0010e-08 depending on float64 vs "longdouble" path — a 37% path
+disagreement, 2.8×–6.2× inflation vs the closed form) are per-term phase
+errors of fl(k^{−it}): ulp(ln k) ≈ 2e-15, ×t gives 1e-7 rad at 5e7, LOCALLY
+COHERENT across long stretches of k.  Two mesh-order comparisons (v3,
+|Pn_orderA − Pn_orderB| = 2.8e-15 / 3.8e-14) DO NOT detect a common-mode
+per-term bias — the test is necessary but not sufficient.  Zeta-route P_n
+reliability range: t ≤ ~2e6 (residual ≤ 0.33% of |T3|).  Beyond that, the
+closed form (no ζ, no P_n) is the measurement.
+
+**F4 — WALL RE-ANCHORED (list scale; Eenv = 1e-4·(16001/15984)·t^{−2};
+|T1| = ½n^{−1/2}; |T2|/|T1| = (1/6)(8/13) = 0.102564).**
+  (a) OLD (L5.e + triangle): T3UB/|T1| = (√3/270)·(8/13)²·t = 2.4355e-3·t —
+      crosses 0.897436 at **t = 368.5 ≈ 3.7e2** (the 25ad "valid to ~3.7e5"
+      figure was a 1000× decimal slip — corrected here; the old list-scale
+      provable wall was already dead below t = 1e3).
+  (b) NEW (F1 4-term triangle): T3UB/|T1| = 5.519e-4 + t/105576 + o(t) —
+      crosses at **t = 94,550**: the PROVEN list-scale wall extends
+      368.5 → 94,550 (257×), covering all certified zero heights ≤ 9.45e4.
+  (c) TRUE (F3 closed form, dps-50 certificate): |T3|/|T1| = 6.5324e-4
+      constant ⇒ wall = 1 − 0.102564 − 6.5324e-4 = **0.896783 for all
+      t ≤ 1e8** (PINNED per store discipline; the gap to (b) is the
+      rotating |S₄|-term (|Term_b|/|T3| grows ~t), which needs a
+      coherent/oscillatory bound to make provable — a named future
+      sharpening, not decision-shaped).
+  Squeeze-side corollary (to port with the identity): |p4_em_expr| ≥
+  (1 − 0.102564 − [5.519e-4 + t/105576 + |S₆|-and-|s+7| terms])·|T1|,
+  positive for t ≤ 94,550 at list scale.
+
+**DISCIPLINE NOTES.** (i) The first Term_c coefficient (6096384000) came from
+a mis-traced (s+6)/(4320)·(1/7)/(... ) chain; the corrected trace gives
+(½)(1/3)(1/201600) = 1/1209600 — always re-derive the assembly coefficient
+from the per-period steps in one pass and check it against |T3| at t = 1e3
+before any Lean build. (ii) mpmath `mp.dps` access: `mp.mp.dps` in this
+checkout. (iii) numpy "clongdouble" complex power is NOT 80-bit complex
+arithmetic — do not cite a clongdouble run as higher-precision evidence
+without a cross-check against an independent route. (iv) B₈(x) = x⁸ − 4x⁷
++ (14/3)x⁶ − (7/3)x⁴ + (2/3)x² − 1/30 (the ΣC(n,k)B_{n−k}x^k ordering is
+WRONG; correct: ΣC(n,k)B_k x^{n−k}); B₈(1/2) = 127/3840 < 1/30.
+
+**NEXT (same session, in progress):** Lean port — P4Limit atoms B4–B8
+(defs + endpoints + derivative chain, ring/norm_num), sup|B₈| ≤ 1/30
+(Bernstein coefficient convex hull, exact rationals above), per-period IBP
+atoms on [0,1] (interval-integral route, the file already imports
+IntervalIntegral machinery), M→∞ passage (telescopes + absolute-convergence
+tail — easier than L4's L3 pattern), `p4_T3_expansion` (F1), `p4_T3_bound`,
+list-scale wall corollary (F4b). Then: commit + push, kainos mirror, wiki.
+
+### 25ae addendum — full-4-term identity check (same session)
+
+The 3-term residual check (F2) is insensitive to the I₈ term (which is ~1.2e-11 at
+t = 1e3, ≪ the 8.5e-10 check level). Direct verification of the FULL 4-term
+identity (I₈ by float64 trapezoid, 160 substeps/period, L = 400 periods):
+
+    t=50    resid = 1.423e-14   |I8-term| = 3.197e-11
+    t=100   resid = 3.542e-14   |I8-term| = 2.181e-11
+    t=200   resid = 9.732e-14   |I8-term| = 1.485e-11
+    t=300   resid = 2.139e-13   |I8-term| = 1.223e-11
+
+⇒ the I₈ coefficient ((s+7)/40320) is verified to ~3e-4 relative.  Two traps
+recorded: (i) an IBP chain that starts the T3 integral (B₂·x^{−s−2}) with factor
+(s+3) instead of (s+2) produces a leading n^{−s−4} term ~1625× too small — a
+clean diagnostic for off-by-one chains; the correct first step is
+I = (s+2)/3·∫B₃({x})x^{−s−3} (boundary B₃(0) = 0, value at n has NO
+contribution because the exponent there is −s−2 and B₃(0) = 0, the FIRST
+non-zero boundary is B₄(0) at exponent −s−3: +n^{−s−3}/120).  (ii) mpmath
+`quad` of the oscillatory ∫B₈({x})x^{−s−8} over wide ranges at t = 1e3
+returns values up to 1e10× above the (1/30)∫x^{−8.5} bound — I₈ must be
+measured by period-resolved trapezoid rotation-counted (t/(2π) rotations per
+unit; ≥ ~100 substeps per rotation), or used under bounds only.
+
+F1 (as written above) is thereby EXACT and fully anchored; DISCOVERY_LOG
+entries stand.  Lean port follows next.

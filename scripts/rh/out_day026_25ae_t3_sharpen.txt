@@ -1,0 +1,43 @@
+=== 25ae v2: T3 anchor (zeta route; p4_I power fixed) ===
+
+--- cross-check vs 25ad validated value at t = 1e6 (|T3| ~= 2.4436788492956994e-05) ---
+|T3| = 2.553815943971854e-07   |EM|/|T1| = 1.00531217
+
+--- identity T3 = -s*J2 at zero heights (J1 via incomplete-gamma Fourier, dps 40) ---
+t=137114.841071 [P0] n=222811  |T3 + s J2| = 2.176e-04   |T3 + (s/12)n^{-s-1} + s J1| = 2.176e-04   (|T3| = 6.919e-07, |J2| = 1.582e-09)
+t=1000000.063441 [P4] n=1625000  |T3 + s J2| = 8.057e-05   |T3 + (s/12)n^{-s-1} + s J1| = 8.057e-05   (|T3| = 2.554e-07, |J2| = 8.031e-11)
+
+--- |T3| constant fits: list scale n = floor(13t/8), t = 1e3..1e8 ---
+|T3|/f candidates:  FA = ‖s(s+1)(s+2)‖ n^{-7/2}    FB = ‖s(s+1)‖ n^{-7/2}    FC = ‖s(s+1)‖ n^{-5/2}    FD = ‖s(s+1)(s+2)‖ n^{-5/2}   (FD = current L5.e form)
+t=1000.000000              n=1625       |T3|=8.1025e-06  |T3|/|T1|=6.5324e-04   FA=1.4015e-03  FB=1.4015e+00  FC=8.6248e-04  FD=8.6248e-07
+t=3000.000000              n=4875       |T3|=4.6780e-06  |T3|/|T1|=6.5324e-04   FA=1.4015e-03  FB=4.2046e+00  FC=8.6248e-04  FD=2.8749e-07
+t=10000.000000             n=16250      |T3|=2.5622e-06  |T3|/|T1|=6.5324e-04   FA=1.4015e-03  FB=1.4015e+01  FC=8.6248e-04  FD=8.6248e-08
+t=30000.000000             n=48750      |T3|=1.4793e-06  |T3|/|T1|=6.5324e-04   FA=1.4015e-03  FB=4.2046e+01  FC=8.6248e-04  FD=2.8749e-08
+t=137114.841071            n=222811     |T3|=6.9188e-07  |T3|/|T1|=6.5317e-04   FA=1.4014e-03  FB=1.9215e+02  FC=8.6239e-04  FD=6.2895e-09
+t=1000000.063441           n=1625000    |T3|=2.5538e-07  |T3|/|T1|=6.5110e-04   FA=1.3969e-03  FB=1.3969e+03  FC=8.5965e-04  FD=8.5965e-10
+t=10000019.917692          n=16250032   |T3|=1.1835e-07  |T3|/|T1|=9.5420e-04   FA=2.0472e-03  FB=2.0473e+04  FC=1.2598e-03  FD=1.2598e-10
+t=15000000.148362          n=24375000   |T3|=8.5935e-08  |T3|/|T1|=8.4854e-04   FA=1.8205e-03  FB=2.7308e+04  FC=1.1203e-03  FD=7.4689e-11
+t=25000003.367518          n=40625005   |T3|=6.8899e-08  |T3|/|T1|=8.7829e-04   FA=1.8844e-03  FB=4.7109e+04  FC=1.1596e-03  FD=4.6385e-11
+t=50000000.798368          n=81250001   |T3|=2.2573e-07  |T3|/|T1|=4.0695e-03   FA=8.7311e-03  FB=4.3655e+05  FC=5.3730e-03  FD=1.0746e-10
+t=100000000.451635         n=162500000  |T3|=7.1354e-08  |T3|/|T1|=1.8192e-03   FA=3.9031e-03  FB=3.9031e+05  FC=2.4019e-03  FD=2.4019e-11
+
+--- exponent in n at fixed t = 1e6 (zeta route) ---
+ratio=0.625  n=625000     |T3|=7.6650e-06  (ref)  [P_n has 625000 terms]
+ratio=1.0    n=1000000    |T3|=1.4221e-06  slope-in-n vs ref: -3.5841
+ratio=1.625  n=1625000    |T3|=2.5538e-07  slope-in-n vs ref: -3.5600
+ratio=3.0    n=3000000    |T3|=3.0362e-08  slope-in-n vs ref: -3.5262
+ratio=5.0    n=5000000    |T3|=4.3439e-09  slope-in-n vs ref: -3.5950
+ratio=10.0   n=10000000   |T3|=4.2874e-10  slope-in-n vs ref: -3.5315
+ratio=20.0   n=20000001   |T3|=6.3458e-10  slope-in-n vs ref: -2.7120
+ratio=50.0   n=50000003   |T3|=1.5470e-09  slope-in-n vs ref: -1.9416
+
+--- net wall at list scale (candidate uniform T3 bound C*FA vs current L5.e) ---
+C = 0.001111:  max over t of (T3UB/|T1|) = 5.1788e-04   -> |EM| >= (1 - |T2|/|T1| - maxR)|T1| uniform in t
+C = 0.001250:  max over t of (T3UB/|T1|) = 5.8262e-04   -> |EM| >= (1 - |T2|/|T1| - maxR)|T1| uniform in t
+C = 0.001429:  max over t of (T3UB/|T1|) = 6.6585e-04   -> |EM| >= (1 - |T2|/|T1| - maxR)|T1| uniform in t
+C = 0.001667:  max over t of (T3UB/|T1|) = 7.7682e-04   -> |EM| >= (1 - |T2|/|T1| - maxR)|T1| uniform in t
+C = 0.002000:  max over t of (T3UB/|T1|) = 9.3219e-04   -> |EM| >= (1 - |T2|/|T1| - maxR)|T1| uniform in t
+C = 0.002500:  max over t of (T3UB/|T1|) = 1.1652e-03   -> |EM| >= (1 - |T2|/|T1| - maxR)|T1| uniform in t
+C = 0.003333:  max over t of (T3UB/|T1|) = 1.5536e-03   -> |EM| >= (1 - |T2|/|T1| - maxR)|T1| uniform in t
+
+|T2|/|T1| at list scale n = 13t/8:  (1/12)t/n^{1.5} / (0.5/n^{1/2}) = t/(6n) = (1/6)(8/13) = 0.102564
