@@ -1,0 +1,42 @@
+25ab REV2 — S4Growth constant certification (dps-50), B3Core EXACT chain
+==========================================================================================
+
+[0] exact value check at T0:
+  Bf(T0,T0^2)    = 8.26453794259272e-11
+  SSum(T0)       = 11.5964212915265
+  Cf(T0,T0^2)    = 24200000003.5
+  Kbar(T0^2)     = 2.03395322065812e-20
+  X(T0)          = 1.45060731709157e-9
+  XUBfun(T0)     = 6.97181929842787e-9
+  Mf(T0) = 4.90664044044e-7  vs Mf_ub(T0) = 0.00402116265063
+
+[1] UB-chain verification on [T0, 1e18] (3000-pt log grid + 200 random):
+  violations: 0 / 3200
+  max XUBfun = 6.97182e-09 @ 110000 (at left edge?)
+  max Mf measured = 4.90664e-07 @ 110000
+
+[2] endpoint values (dps-50) + Lean endpoint comparisons:
+  XUBfun(T0) = 6.97181929843e-9  <= CG2=0.00000014 : True
+  (4.98*332+26.55)/T0^2 = 1.3883553719e-7  <= CG2 : True
+  margin: CG2 - endpoint = 1.16e-9
+  Mf endpoint 4.8*(4.98/6000 + 26.55/1980000) = 0.00404836363636 <= CG3=0.0041 : True
+  margin: CG3 - endpoint = 5.16e-5
+
+  Lean power endpoints:
+  T0^{-3/4} <= 1/6000 : T0^{3/4} = 6040.105355 >= 6000 : True
+    [proof: 6000^{1/3} <= 91/5 : (91/5)^3 = 171332.081375 >= 6000 ; 6000^{4/3} <= 6000*91/5 = 109200 <= 110000]
+  T0^{-5/4} <= 1/1980000 : T0^{5/4} = 2003276.316 >= 1980000 : True
+  sqrt(T0) = 331.662479 <= 332 : True
+
+  p8_B(T0, floor(T0^2)) = 4.54546169759e-06 ; CG11+CG12+CG13 = 4.5500703e-06 : True
+  term1 endpoint (1/2)(1/T0)/(1-1/T0^2) = 4.54545454583e-06 <= CG11 : True
+  term2 endpoint = 6.88708364752e-12 <= CG12 : True
+  term3 endpoint = 2.65111986772e-13 <= CG13 : True
+
+[3] TOTAL = 0.0041046900703 < p8_f_near_pin = 0.9975 : True   (margin 0.9933953099297)
+
+[4] admissibility (Backlund RVM lower bound) — unchanged:
+  N_lower(T0^2)/T0^2 = 3.24335400 (need >= 1)
+  min ratio on [1.2e10, 1e40] = 3.24203321 @ 1.2e+10
+
+ALL PASS

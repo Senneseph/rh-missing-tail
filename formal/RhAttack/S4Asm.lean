@@ -18,6 +18,14 @@ import RhAttack.P12Uniform
      numerically GREEN to t* = 690349.0568 (PINNED, 25l[3]);
      fails at the bound level beyond t* (Bwire ~ sqrt(t),
      measured deficit O(1) — 25l[3]/25f[4]).
+     25aa/25ab: the bound-level gap is CLOSED by the growing-wire
+     family (n = floor(t^2), G = t^2, B = 2 t^2; the list-scale
+     family is excluded by S4Sharp) and is now a LEAN theorem:
+     S4G.s4g_growth_squeeze (t >= T0, 0 <= M <= Zbound t) +
+     S4G.s4g_admissible (RVM lower bound, Backlund — CITED source;
+     N_rvm_low(x) >= x for x >= T0^2).  The window regime is closed
+     on [1000, inf) at the bound level; the remaining S4 residue is
+     the own-regime wire (below) + the S1 height wire (25x).
 
    GAP-O (own regime, the strip 0 < d <= 1/2, t >= 1000):
        BwireO(t) + Mr(t) + Mf(t) < mown(t, d)

@@ -65,3 +65,4 @@ import RhAttack.P8Floor
 -- closure under the explicit squeezed-margin hypothesis; the C1b
 -- own-regime detector-floor promotion remains the open analysis atom).
 import RhAttack.Closure
+import RhAttack.S4Growth

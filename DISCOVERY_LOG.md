@@ -3930,3 +3930,96 @@ lemmas, S4a lemma-bank style) + the admissibility ledger line (RVM
 lower bound) in FORMULAS + S4Asm header/doc sync (R2 annotation) +
 p1.2 spec S4 state.  (phase 3): re-read the P12 conjunction with
 gapW a theorem (R4).
+
+## 25ab (09-16) — GAP-W PHASE 2 LANDED: the window regime is a theorem
+(formal/RhAttack/S4Growth.lean, namespace S4G; owner: "start phase 2,
+report when you're done, then move on to the next item")
+
+**Result.**  The 25aa family closure is now a LEAN theorem.
+`formal/RhAttack/S4Growth.lean` compiles clean on Lean v4.33.1 /
+mathlib v4.33.1 — 0 errors, 0 sorry (full package `lake build` green).
+
+**The main theorem — LEAN-PROVEN:**
+
+    s4g_growth_squeeze (t) (ht : T0 ≤ t) (M) (hM : 0 ≤ M)
+        (hMz : M ≤ Zbound t) :
+        p8_B t (nGrow t) + M · e^(Xgrow t) · Xgrow t < p8_f_near_pin
+
+with T0 := 110000, nGrow t := ⌊t²⌋, Xgrow t := Xfam(t, t²) (the
+B3Core window X-wire on the band (t², 2t²]).  Together with S4a GREEN
+on [1000, T0] (s4a_window_squeeze, the 13t/8 list wire), the WINDOW
+REGIME is closed on [1000, ∞) at the bound level: **gapW is a
+theorem.**  What remains of the S4 body is the own-regime wire item
+(i-b of the GAP-W class, 25z/25v) and the S1 height wire — pure
+mathematics, no decision-shaped items.
+
+**Stage structure (all endpoint constants LEAN-proven, not sampled):**
+- Stage A: family constants as exact rationals — CG11 = 91/20000000,
+  CG12 = 7/100000000000, CG13 = 3/10000000000000, CG2 = 14/100000000,
+  CG3 = 41/10000 — plus XUBfun t := (249/50·ln t + 531/20)/t²
+  (= (4.98 ln t + 26.55)/t²) and the shared section facts (T0-val,
+  hLogT1 : 1 ≤ ln t, hLogSqrt : ln t ≤ √t, hT0p34 : 6000 ≤ T0^{3/4},
+  hT0p54 : 1980000 ≤ T0^{5/4}).
+- Stage B (hCG11/12/13): p8_B(t, ⌊t²⌋) ≤ CG11 + CG12 + CG13, termwise
+  from Xf := t² − 1 ≥ T0² − 1 (floor-lowering + Xf-increasing, S4a
+  lemma bank).
+- Stage C (hBfUB, hSSumUB, hCfUB, hKbarUB, hXub, hXubEnd):
+  Xgrow t ≤ (4.98 ln t + 26.55)/t² ≤ CG2 — the Bf/S̄/Cf/Kbar
+  sub-chains exactly as cert-script [1]–[2], endpoint CG2 via
+  ln t ≤ √t at T0.
+- Stage D (hExpX, hMf): the M-term — Zbound·e^{Xgrow}·Xgrow ≤ CG3
+  (Xgrow ≥ 0 branch: e^{Xgrow} ≤ 3 from Xgrow ≤ CG2 < 1 and S4W.hE3;
+  Xgrow < 0 branch: the term is < 0).  Chain: 1.6·t^{1/4}·ln t ·3·
+  XUBfun ≤ 4.8(4.98 t^{−3/4} + 26.55 t^{−5/4}) ≤ 4.8(4.98/6000 +
+  26.55/1980000) < CG3 — the 6000/1980000 end-constants are the
+  hT0p34/hT0p54 pow-inequalities (no float samples).
+- Stage E (hL19, s4g_admissible): the RVM lower-bound admissibility
+  N_rvm_low(x) ≥ x for x ≥ T0², where
+  N_rvm_low(x) := (x/2π)(ln(x/2π) − 1) − (137/1000)ln x
+                          − (443/1000)ln ln x − 44/10.
+  The chain (all LEAN-proven): 2π ≤ 44/7 from π < 3.1416
+  (Real.pi_lt_d4, mathlib); e¹⁹ ≤ 3¹⁹ (S4W.hE3, pow_le_pow_left₀);
+  2π·e¹⁹ ≤ T0² (norm_num); 18/(2π) ≥ 63/22 from π < 22/7
+  (one_div_lt_one_div_of_lt); ln x ≤ x/2 (the √x-bridge:
+  ln x = 2ln√x ≤ 2(√x − 1) ≤ x/2, the last step (√x − 2)² ≥ 0);
+  ln ln x ≤ ln x − 1.  Residual: (63/22 − 29/100)·x − 3957/1000 ≥ x
+  on x ≥ T0² (nlinarith on the exact rationals).
+- Total — norm_num: CG11 + CG12 + CG13 + CG3 = 4.10469e-3 < 0.9975
+  = p8_f_near_pin.
+
+**Honest split per atom.**  LEAN-PROVEN: everything above (the whole
+file).  CITED (unchanged from S4a — no new cited input): (a) the
+M ≤ Zbound hypothesis of s4g_growth_squeeze (Zbound = 1.6·t^{1/4}·ln
+t is the RVM upper bound, |zeta| counting wire); (b) the S̄
+counting-fluctuation ledger (Platt–Trudgian, FORMULAS 1.3) inside
+hSSumUB; (c) the RVM lower-bound SOURCE (Backlund estimate — see
+ledger line below).  PINNED: the cert-script chain
+(scripts/rh/day025_gapw_constants.py REV2, dps-50, ALL PASS;
+out_day025_gapw_constants.txt) — 25aa caveat (a) is thereby resolved:
+every endpoint constant the Lean norm_num closes was re-certified
+directionally at dps-50 before the Lean closure, and the Lean
+endpoints are proved inequalities (6000 ≤ T0^{3/4} etc.), not float
+samples.
+
+**RVM ledger line (FORMULAS.md, added this commit).**
+N_rvm_low (Backlund constant set, conservative; PINNED ratio at
+T0²: 3.24335400 ≥ 1, min 3.24203321 on [1.2e10, 1e40]).
+OWNER ONLINE CROSS-CHECK (2026-09-15): the current best published
+two-sided RVM bound is Bellotti–Fiori, arXiv:2412.15470 v2 (accepted
+Math. Comp.): |N(T) − (T/2π)ln(T/(2πe))| ≤ 0.10076 ln T +
+0.24460 ln ln T + 8.08344 for T ≥ e — strictly sharper; Backlund
+retained as the certified constant set of the admissibility chain
+(the chain closes with ratio ≥ 3.24 under either, so the sharper
+constants are a future tightening, not a requirement).  arXiv:2402.04272
+(checked in the same pass) is a PNT ψ-formula error term, not a
+competing N(T) bound.
+
+**Doc sync (same commit):** S4Asm header (GAP-W → theorem, 25ab
+annotation), RH-PROOF-OUTLINE (both repos: S4 row + remaining price),
+p1.2 spec (S4 state: window regime = theorem; open remainder =
+own-regime wire (i-b) + S1).
+
+**NEXT (phase 3, 25aa R4):** re-read the P12 conjunction with gapW a
+theorem — the zero side (S1) only has to beat the FAMILY bound side
+(≤ 5.4e-6 at window level, 25aa): the S1 demand re-formulates at high
+t; phase 2 deliberately did NOT absorb it.
