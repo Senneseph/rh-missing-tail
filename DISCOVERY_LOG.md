@@ -3752,13 +3752,26 @@ number itself is ever needed for a pin.
   4. Pins (25y, 25h dps-30 protocol, LAUNCHED ~25 min each,
      hi1e9/pins_25y.log): 5.6e7 (g = 56000000.118091769516468, screen
      0.5657) and 1.1e8 (g = 109999999.909622058272362, screen 0.4429,
-     the min) — on landing, the 25b retirement rule is a CERTIFIED
-     fact, not a screen.
+     the min) — the 25b retirement rule becomes a CERTIFIED fact on
+     landing: 25y[1] LANDED (below).
   5. The 5e8-1e9 rows carry the far-quad bias (E -1.45..-3.88; |K|
      4-48x small); their sub-1 verdicts ride the envelope (|zeta|/B =
      0.31/0.25/0.29 < 1) + the monotone floor.  A far-side quad
      refinement (denser nodes below 1e10) is a staged cheap follow-up
      if those exact values are ever pinned.
+
+**25y[1] PIN LANDED (dps-30, 25h protocol + extended-tail kernel):**
+the first robust sub-1 window — g = 56000000.118091769516468,
+t = g - 4: |zeta| = 4.0768015615158219747,
+dev = 0.99999985491071977344 (the S4 blind spot, open to 8 digits),
+B = 7.1306803526628292955, resid = 0.075852361245979202014,
+**MARGIN = 0.565709077008** (dps-30 certified).  The 25x screen value
+(0.5657) is the certified value to all 5 printed digits — the screen
+and the protocol agree, as designed (a pin certifies the protocol, and
+here the instance confirms itself).  E = -0.0184348793301.  The 25b
+P1.1e route-retirement rule ("margin < 1 at >= 1e5") is now a PINNED
+FACT at its first robust sub-1 window (5.6e7).  25y[2] (the 1.1e8
+minimum, screen 0.4429) in flight.
 
 **Honest split (revised):** 25x[1] CITED+VERIFIED-TODAY (RVM gate is the
 arithmetic anchor; min gap is a measurement of the dataset); 25x[2]
