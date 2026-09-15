@@ -63,8 +63,8 @@ convention,
     main(t) = x·ln(x) − x − 1/8,   x = t / (2π),
     S(t)   = N(t) − main(t).
 
-S(t) is the oscillatory part. Numerically it stays O(1): on certified data,
-|S| at t = 10⁵, 10⁶, 10⁷ is 2.558, 2.509, 3.206 respectively.
+S(t) is the oscillatory part. Numerically it stays O(1): on certified
+data, the |S| at t = 10⁵, 10⁶, 10⁷ is 2.558, 2.509, 3.206 respectively.
 
 Write
 
@@ -353,7 +353,7 @@ any T; the smallest non-trivial zero height is a certified classical number,
 
 1. **Bridge and detector.** At t₀ the §7 detector gives, for the actual
    zero set written as kernel,
-   | definition side − zero side | ≥ dev(t₀, δ₀) · (reduction error Mf)
+   ‖definition side − zero side‖ ≥ dev(t₀, δ₀) · (reduction error Mf)
    with the kernel change dev measured by the closed form: **at the
    pair's own height t₀ = g₀ the change is exact and strictly positive
    — the on-line pair's 25.2.12 factor vanishes at its own point so the
@@ -387,60 +387,86 @@ counting enters only in the certified *data* of §2 (which establishes the
 strongest unconditional statement to date) and in the classical zero-free
 computation that places the smallest zero height away from 0.
 
-## 9. Status of each piece (2026-09-14, day-023 25f — updated day-024 25x after the (3.15e7, 1e9] data landed)
+## 9. Status of each piece (2026-09-14, day-024 25x — the (3.15e7, 1e9] data state)
 
 | # | Piece | Role in the argument | Status |
 |---|-------|----------------------|--------|
 | P1 | **Counting lemma** (RH ⇔ D ≡ 0) | Reframes RH as a counting statement the detector acts on. | **Proven in Lean** (`RhAttack/B0.lean`; Lean 4.33.1 + mathlib, stable): `eqNtotMinusNon`, `nondec`, `offSliceEven`, `zeroD_of_RH`, `RH_of_zeroD` ⇒ `RH_iff_Dzero`, over an abstract zero set with the F2 symmetry — no ζ, no approximation. |
 | P2 | **Per-pair closed form** (la_pair, ar_pair) | Makes the zero-side kernel exact and float64-vectorizable. | **Proven in Lean** (`RhAttack/B4.lean`); dLa ≤ 3.5×10⁻¹⁴, dAr ≤ 3.2×10⁻¹⁶ rad vs direct dps; 16/16 float cross-check. |
 | P3 | **Deviation ratio R(s, δ)** (exact) | The ≥ side of the contradiction; δ-robust (no dead window). | **Exact + proven in Lean** (`RhAttack/B5.lean`): `b5Ratio` (closed form), `b5Abs` (magnitude), `b5NoffPos` (numerator > 0), `b5NoffIsPolynomial` (δ-polynomial identity), `b5PrefSign` (branch locus). 12/12 float cross-check vs direct 4-zero definition and the dps-30 record. |
-| P4 | **Missing-tail law strictified** (explicit Φ_n, explicit Euler–Maclaurin remainder for W_n) | The definition-side engine of the floor. | **Measured to 4 digits** (N-independent; onset fingerprint at G = 6×10⁶ reproduced ≤ 6%); **rigorous lift PROVEN in Lean** (`RhAttack/P4Limit.lean`, GREEN: exact finite law for x^{−s} + M→∞ passage + missing-tail law with sharp constant √3/270 = (1/3)(√3/36)(2/5); the P4 identity `W_n = −½n^{−s} + (s/12)n^{−s−1} − ½∫B̂₂f″` is machine-proven at Re s > 1, and the bound ‖W_n‖ ≤ ½n^{−1/2} + (|s|/12)n^{−3/2} + (√3/540)‖s(s+1)(s+2)‖n^{−5/2} is machine-proven at Re s = ½; the W_n-equality at Re s = ½ itself is CITED (DLMF 25.2.8 / Apostol 12.21) — honest split in the file header; T4 ratio corollary incl. |1−s| = |s| on the line). |
+| P4 | **Missing-tail law strictified** (explicit Φ_n, explicit Euler–Maclaurin remainder for W_n) | The definition-side engine of the floor. | **Measured to 4 digits** (N-independent; onset fingerprint at G = 6×10⁶ reproduced ≤ 6%); **rigorous lift PROVEN in Lean** (`RhAttack/P4Limit.lean`, GREEN: exact finite law for x^{−s} + M→∞ passage + missing-tail law with sharp constant √3/270 = (1/3)(√3/36)(2/5); the P4 identity `W_n = −½n^{−s} + (s/12)n^{−s−1} − ½∫B̂₂f″` is machine-proven at Re s > 1, and the bound ‖W_n‖ ≤ ½n^{−1/2} + (\|s\|/12)n^{−3/2} + (√3/540)‖s(s+1)(s+2)‖n^{−5/2} is machine-proven at Re s = ½; the W_n-equality at Re s = ½ itself is CITED (DLMF 25.2.8 / Apostol 12.21) — honest split in the file header; T4 ratio corollary incl. \|1−s\| = \|s\| on the line). |
 | P5 | **On-line tail bound M(G, t)** | Makes a finite zero list stand in for the infinite zero set. | **Proven** (unconditional; Platt–Trudgian S̄; Abel mechanism verified on 7.4M real certified zeros to the quadrature limit). Lean kernel: the P011/Q029/R229 primitives and derivatives and the explicit remainder bound K̄(G) are **proven in Lean** (`RhAttack/B3Sbar.lean`; full build green). |
 | P6 | **Bridge identity** (ζ = kernel, residual = tail error exactly) | Lets the two sides of the contradiction be the same object. | **ζ-free finite core proven in Lean** (`RhAttack/B3.lean` + pieces B3Core/B3Abel/B3Sbar; full build green, A/B gate PASS): `b3ResidualDecomp` (Ψ vs K differ exactly by exp(T − Σ ln F)), the exact finite Abel identity `b3Abel`, and the explicit bound `b3BoundExplicit` (M(G,t) at finite B). |
 | P7 | **Finite exact Abel decomposition** (counting step → integral, smooth comparator N̂, IBP bridge) | Exact calculus relating the discrete zero set to the continuous main term; carries the smooth bounders. | **Proven in Lean** (`RhAttack/B3Abel.lean`: `b3Abel`, the ray plumbing, the smooth comparators n̂/N̂ and the IBP bridge `nHatIBP`; full build green; the float64 mirror verifies the exact identity to ~1e-13 at the quadrature limit). |
 | P8 | **Residual floor, ∀ t** (the §10 gap) | The < side of the contradiction. | **Route A formalized and machine-proven through A4.3** (`RhAttack/P8Floor.lean`, MODULE COMPLETE A0-A4: `p8_same_object`/`p8_triangle` the same-object reduction + split; `p8_B_floor` the three-term floor = `p4_T4_bound` at s = ½+it; `p8_residual_bound`/`p8_residual_wired` the bridge residual = product mass × e^Xval·Xval with Xval ← B3Sbar `b3BoundExplicit` (the M(G,t) wire); `p8_detector_*` the detector on the B5 closed form incl. the exact δ = 0 values; `p8_far_detector_scale_ge_one` ‖R−1‖ ≥ 1 far regime, γ ≥ 1, t ≥ 2γ — LEAN-PROVEN; `p8_zero_decision_far` the §10 decision inequality). Honest split: the W_n = EM-expression equality at Re s = ½ is CITED (DLMF 25.2.8 / Apostol 12.21); the NEAR-regime detector floor (0.9975) is PINNED by the day-017/019 audit — the wall's remaining open item was that pin's promotion + the final closure at the measurement point (P9) — P9 is now COMPLETE (day-021: C1a promoted the own-height question to an exact Lean fact; the t ≠ g window: the CONTINUOUS 0.9975-floor reading is REFUTED (25i) and the DISCRETE straddle-grid floor is LEAN-PROVEN — 25s/25t, `C1b.p9_c1b_disc_floor`: ‖R−1‖ ≥ min(23/1000, 1−25/γ); the pin stays the witness-scale constant, 25k[4]). |
-| P9 | **The §8 closure** (minimal off-line pair height + the squeezed floor/detector) | The final step: D(t₀) = 0 at the minimal pair ⇒ D ≡ 0 ⇒ RH. | **Conditional closure PROVEN in Lean** (`RhAttack/Closure.lean`, MODULE COMPLETE: pins `p9_f_pin = 0.9975` / `p9_d_min = 0.005` / `p9_margin_min = 143.341847457` (day-023 RE-PIN: dps-30 CERTIFIED verified-regime closing @ t = 5004.7343 (g = 5000.234317), corrected discrete tail over the actual zeros (1e7, 3e7] + 1e12 density remainder; 145.563762319 with the 1e15 remainder; DISCOVERY_LOG 25b/25c/25d; 33.9864/34.68 RETIRED — the day-023 tail-integration defect (25b); the earlier pins 112.6 / 1.0529 survive only as old-kernel history); `p9_far_detector_ge_pin` the far-regime detector floor (restated from A4.1b); `p9_point_contradiction` the arithmetic squeeze C5; `p9_min_offline_height` the minimal positive off-line pair height over B0's ZeroSet (structural HNR/HCJ/HFIN, no counting value); `p9_closure_rh_of_margin` the §8 closure under the EXPLICIT squeezed-margin hypothesis — its real witnesses are the pinned/cited constants (Mf ← B3Sbar `b3BoundExplicit` at the Xval pin, flo ← the detector floor, Bfloor+Mr ← the P8Floor A4 composition)). Honest split: C0/C5/C5b/C1-far/C1a LEAN-PROVEN — **C1a (day-021) resolves the branch locus as the POLE at t = g**: the on-line pair product is 0 at its own point and the off-line product mass is a nonzero finite positive constant, so the closure's own-height detector value is exact (`p9_poff_own_height_pos`); the t ≠ g window: REFUTED as a continuous 0.9975 floor (25i pole-ridge) — the DISCRETE straddle-grid floor is LEAN-PROVEN (25s/25t, `C1b.p9_c1b_disc_floor`: ‖R−1‖ ≥ min(23/1000, 1−25/γ)); the pin 0.9975 stays the witness-scale constant per the 25k[4] scope (the closure measures dev per witness point and never evaluates the window floor). **C6 (day-021) is the final composition**: `p9_closure_at_audit_point` — the §8 closure at the audit point as ONE statement: per off-line pair, the three point-measured facts (hZero: zero side, bridge+detector audit; hDef: measured resid ≤ A4.3-wired bound at the Xval pin; hStrict: the audited strict gap) instantiate the hmargin predicate (C6.1, LEAN-PROVEN) and close RH (C5b). The argument's non-machine inputs are exactly those three PINNED per-point facts (script + record); everything else is machine-proven. **Cross-band audit (day-021→023 records; DISCOVERY_LOG 25b superseding the day-020/21 reclassification)**: the package is verified across [~970, 3.15×10⁷] (DT = 0.5 straddle windows on candidate pair heights). DAY-023 FINDING (25b): the old kernel's (B,∞) tail QUADRATURE (infinite-interval mpmath) systematically under-integrated the near mass — the measured 11.3 (10⁴) → 1.053 (5×10⁴) → 2.27 (10⁵) band and the old closings 112.6/34.68 are all artifacts of that one defect (the day-020 "tail-model error" explanation is itself superseded by 25b, which located the real bug); re-issued on the EXACT discrete tail: GENUINE margins 140.2 (10³) → **145.6 (5×10³, CLOSING, dps-30 certified)** → 87.7 (10⁴) → 55.5 (10⁵) → 24.4 (2×10⁵) → **13.86 (10⁶)** — verified region [10³, 10⁶], margin ≥ 13.9 (25d); the band (1e7, 3.15e7] is SOUND on real zeros with margin ≥ 1.4, B(t)-floor-dominated, dev = 1.0 (detector off-line-invisible — the S4 blind spot open as designed; screened level, 25f); the nominal rows > 3.15e7 are now REAL (day-024 25x: the LMFDB/Platt band (3.1946e7, 1.006346e9], 2,792,198,664 zeros, RVM-anchored, 25w/25x[1]): the same 25f protocol with the discrete tail over ACTUAL zeros to 1.0063e9 gives margin ≥ 1.6 in every old real window (1e7: 5.80 ... 2.8e7: 4.85, E ≤ -0.005), the 3.1e7/3.75e7 rows flip nominal→SOUND (1.91/2.37, E ≤ -0.008), and — the finding — the S1 straddle margin drops BELOW 1 at 5e7 (0.941, E -0.015) and 7.5e7 (0.714, E -0.033), recovers at 1e8 (1.447), and stays below 1 at every printed window 1.5e8 (0.779) ... 1e9 (0.020); the sub-1 rows are kernel-robust (best-case E→0 margin still < 1: 0.954/0.731/0.875/0.54/0.30/0.25/0.29) and floor-dominated (B(t): def_c 6.8 → 440); dev = 1.0000 (the blind spot) at every window to 1e9; the pre-registered P1.1e route-retirement rule (25b) therefore FIRES above the (3.75e7, 5e7] boundary — boundary sweep 25x[7] + dps-30 pins 25y pending; the data ask for (3.15e7, 1e9] is SATISFIED and the nominal-row question is CLOSED (25x). resid < dev holds at every scanned point.
+| P9 | **The §8 closure** (minimal off-line pair height + the squeezed floor/detector) | The final step: D(t₀) = 0 at the minimal pair ⇒ D ≡ 0 ⇒ RH. | **Conditional closure PROVEN in Lean** (`RhAttack/Closure.lean`, MODULE COMPLETE: pins `p9_f_pin = 0.9975` / `p9_d_min = 0.005` / `p9_margin_min = 143.341847457` (day-023 RE-PIN: dps-30 CERTIFIED verified-regime closing @ t = 5004.7343 (g = 5000.234317), corrected discrete tail over the actual zeros (1e7, 3e7] + 1e12 density remainder; 145.563762319 with the 1e15 remainder; DISCOVERY_LOG 25b/25c/25d; 33.9864/34.68 RETIRED — the day-023 tail-integration defect (25b); the earlier pins 112.6 / 1.0529 survive only as old-kernel history); `p9_far_detector_ge_pin` the far-regime detector floor (restated from A4.1b); `p9_point_contradiction` the arithmetic squeeze C5; `p9_min_offline_height` the minimal positive off-line pair height over B0's ZeroSet (structural HNR/HCJ/HFIN, no counting value); `p9_closure_rh_of_margin` the §8 closure under the EXPLICIT squeezed-margin hypothesis — its real witnesses are the pinned/cited constants (Mf ← B3Sbar `b3BoundExplicit` at the Xval pin, flo ← the detector floor, Bfloor+Mr ← the P8Floor A4 composition)). Honest split: C0/C5/C5b/C1-far/C1a LEAN-PROVEN — **C1a (day-021) resolves the branch locus as the POLE at t = g**: the on-line pair product is 0 at its own point and the off-line product mass is a nonzero finite positive constant, so the closure's own-height detector value is exact (`p9_poff_own_height_pos`); the t ≠ g window: REFUTED as a continuous 0.9975 floor (25i pole-ridge) — the DISCRETE straddle-grid floor is LEAN-PROVEN (25s/25t, `C1b.p9_c1b_disc_floor`: ‖R−1‖ ≥ min(23/1000, 1−25/γ)); the pin 0.9975 stays the witness-scale constant per the 25k[4] scope (the closure measures dev per witness point and never evaluates the window floor). **C6 (day-021) is the final composition**: `p9_closure_at_audit_point` — the §8 closure at the audit point as ONE statement: per off-line pair, the three point-measured facts (hZero: zero side, bridge+detector audit; hDef: measured resid ≤ A4.3-wired bound at the Xval pin; hStrict: the audited strict gap) instantiate the hmargin predicate (C6.1, LEAN-PROVEN) and close RH (C5b). The argument's non-machine inputs are exactly those three PINNED per-point facts (script + record); everything else is machine-proven.**Cross-band audit state** (full narrative: DISCOVERY_LOG 25b/25d/25f/25x; the §9 "Audit ladder" below): package verified across [~970, 10⁹] on the P1.1e straddle statistic — dps-30 certified to 1e6 (closing 145.56 @ 5×10³), screened on real zeros above; resid < dev at every scanned point, dev = 1.0000 (the S4 blind spot) throughout, through 10⁹. |
 | **P12** | **The uniform statement** (S1–S4: zero side / detector floor / definition side / the uniform squeeze) | The single open mathematical gap, made explicit: RH = (S1∧S2∧S3∧S4) via the (proven) closure. | **FORMALIZED GREEN** (`RhAttack/P12Uniform.lean`, day-023 25e): `offPair`, the four structural hypotheses, `squeeze_gives_margin` (S1–S4 ⇒ C5b's hmargin — LEAN-provable) and `p1_2` (⇒ RH). S1 = CITED wire (Xval-uniformity in the height — MEASURED from 25x onward: the P1.1e straddle margin is ≥ 1 through the 3.75e7 window (screened; certified to 1e6) and < 1 at 5e7/7.5e7/1.5e8...1e9 on actual zeros, kernel-robust, with a local recovery at 1e8 — the S1 height gap is now LOCATED at ~4e7 and above, no longer an unknown; 25x/25x[6]); S2 = far/own-POLE LEAN-PROVEN, t≠g DISCRETE-window floor LEAN-PROVEN (25s/25t, `C1b.p9_c1b_disc_floor`: min(23/1000, 1−25/γ); the continuous-floor reading is refuted, 25i; the pin 0.9975 stays the witness constant, 25k[4]); S3 = PROVEN wire; **S4 (uniform squeeze over the blind spot) = the open mathematics — now EXACTLY QUANTIFIED as two named gaps (25p/25q/25v)**: GAP-W (bound-level window squeeze beyond the pinned t\* = 690349.0568 — the prize-scale obstacle) and GAP-O (own-regime strip squeeze — PROVEN IMPOSSIBLE at the current O(t^{-1/2}) wire, S4c), whose replacement wire must sit below Eenv(t) = (1/10⁴)(16001/15984)·t⁻² with a power-of-t deficit Kgap·t^{3/2} (Kgap = (1/2)(8/13)^{1/2}·10⁴·16001/15984 ≈ 3926.494; the whole p8_B wire family n <= 13t/8 is excluded, `S4Sharp.s4d_list_scale_impossible`) — i.e. a genuinely O(t^{-2})-shaped own-regime wire or GAP-O folds into the gapW-class obstacles (`RhAttack/S4Sharp.lean`, LEAN-PROVEN). |
-   **DAY-023 closeout (DISCOVERY_LOG 25b/25c/25d/25f — supersedes the
-   21/22 trend record):** the P1.1e straddle statistic (max over the
-   straddle window of |ζ|·min_δ‖R−1‖ divided by the definition-side floor
-   B(t)+resid(t)) was re-issued on the corrected kernel (exact discrete
-   tail over actual zeros; 25b): 140.2 (10³), **145.6 (5×10³, CLOSING)**
-   → 87.7 (10⁴) → 55.5 (10⁵) → 24.4 (2×10⁵) → 13.86 (10⁶) — every printed
-   point above the certified threshold, the earlier "sub-1 crossing at
-   T\* ≈ 2.5×10⁴" RETIRED as the old kernel's tail-integration defect;
-   the band (1e7, 3.15e7] extends the SOUND region on real zeros with
-   margin ≥ 1.4 (screened; B(t)-floor-dominated, 25f). The 1×10⁷ repair
-   walk FINISHED (32-way, 100 h, 0 failures, dt/dt2 agree on every
-   segment): independent flip count 8,942,252 in (6e6, 1e7] = the LMFDB
-   slice exactly; N(10⁷) = 21,136,121 = LMFDB 21,136,125 − 4 documented
-   twins; the earlier "named residual" (the un-re-walked middle window of
-   the defective file) is RESOLVED. The PinCensus completeness audit (22)
-   stands (day-022 6.7% probe-gap retracted there as a probe-path
-   artifact). Remaining price: g-space gaps between candidate heights,
-   the uniform statement (P1.2 / the S4 squeeze — §9; the C1b
-   window floor inside it is DONE: discrete grid LEAN-PROVEN 25s/25t,
-   continuous reading refuted 25i; the squeeze's own-regime wire
-   requirement is now an exact certificate 25v — demand envelope
-   Eenv(t) = (1/10⁴)(16001/15984)·t⁻², deficit Kgap·t^{3/2} with
-   Kgap = (1/2)(8/13)^{1/2}·10⁴·16001/15984 ≈ 3926.494, whole p8_B
-   wire family n <= 13t/8 excluded), and — the mathematical gap
-   itself — the
-   residual-floor theorem of §10. **DAY-024 UPDATE (25x):** the (3.15e7, 1e9] data landed (25w band: 2.79e9 zeros, RVM-anchored) and the 25f protocol re-run on ACTUAL zeros (25x) closes the nominal rows: SOUND through 3.75e7, sub-1 (robust) from 5e7 with a recovery at 1e8 — the S1 height-uniformity gap is now a measured region (~4e7 upward), not an open question about where it would be; the P1.1e route-retirement rule fires (25b) pending the 25y dps-30 pins. |
 
-**The certified data record** (all numbers reproducible from committed
-scripts and data; day-023 25b closeout, superseding the day-014 note):
+### Audit ladder and the data state (day-023 25b → day-024 25x)
+
+*The P1.1e straddle statistic* — the max over the 0.5-straddle window of
+the ratio of |ζ(½+it)|·min_δ‖R−1‖ to the definition-side floor B(t) +
+resid(t) — is the operational S1 witness; the ladder below is its
+re-issue history.
+
+- **Day-023 re-issue (25b/25c/25d, corrected kernel).** The old kernel's
+  (B,∞) tail QUADRATURE (infinite-interval mpmath) systematically
+  under-integrated the near mass: the old margins 11.3 (10⁴) → 1.053
+  (5×10⁴) → 2.27 (10⁵) and the old closings 112.6/34.68 were artifacts of
+  that one defect (the day-020 "tail-model error" explanation is itself
+  superseded by 25b, which located the bug). Re-issued on the exact
+  discrete tail over actual zeros: 140.2 (10³), **145.6 (5×10³, CLOSING,
+  dps-30 certified 143.341847457 / 145.563762319)** → 87.7 (10⁴) → 55.5
+  (10⁵) → 24.4 (2×10⁵) → **13.86 (10⁶)**; verified region [10³, 10⁶],
+  margin ≥ 13.9. The earlier "sub-1 crossing at T\* ≈ 2.5×10⁴" is
+  RETIRED as that defect.
+- **Band (1e7, 3.15×10⁷] (25f, screened, real zeros):** every printed
+  window SOUND, margin ≥ 1.4, B(t)-floor-dominated, dev = 1.0 — the S4
+  blind spot open exactly as designed.
+- **Band (3.1946×10⁷, 1.006346×10⁹] (25w data + 25x scan):** the public
+  LMFDB/Platt band (2,792,198,664 zeros, RVM-anchored) re-ran the 25f
+  protocol with the discrete tail over ACTUAL zeros to 1.0063e9 (the 25f
+  "nominal rows" are now REAL): margin ≥ 1.6 in every window 1e7..3.75e7
+  (E ≤ −0.008; the 3.1e7/3.75e7 rows flip nominal→SOUND, 1.91/2.37);
+  the S1 straddle margin then drops **BELOW 1** at 5×10⁷ (0.941,
+  E −0.015) and 7.5×10⁷ (0.714), recovers at 10⁸ (1.447), and stays
+  below 1 at every printed window 1.5×10⁸ (0.779) … 10⁹ (0.020).
+  The sub-1 rows are kernel-robust (best-case E→0 margin |ζ|/B(t) still
+  < 1: 0.954/0.731/0.875/0.54/0.30/0.25/0.29) and floor-dominated (B(t):
+  def_c 6.8 → 440).  Consequence: the pre-registered P1.1e
+  route-retirement rule (25b: "margin < 1 at ≥ 10⁵") FIRES above the
+  (3.75×10⁷, 5×10⁷] boundary — boundary sweep (25x[7]) localizing it,
+  dps-30 pin (25y) staged.  The S1 height-uniformity gap is therefore a
+  MEASURED region (~4×10⁷ upward), not an unknown.
+- **The 1e7 repair walk (closeout):** 32-way, 100 h, 0 failures, dt/dt2
+  agree on every segment; independent flip count 8,942,252 in
+  (6×10⁶, 10⁷] = the LMFDB slice EXACTLY (N(10⁷) = 21,136,121 = LMFDB
+  21,136,125 − the 4 documented twins); the day-014 "named residual"
+  (the un-re-walked middle window of the defective file) is RESOLVED.
+- **PinCensus completeness audit (22):** stands (the day-022 6.7%
+  probe-gap retracted there as a probe-path artifact).
+
+**Remaining price (day-024 state — the three named items, per the p1.2
+spec):** (i) GAP-W — the S4 window-regime squeeze past the pinned
+t\* = 690349.0568 ([10³, 1.1×10⁵] GREEN at bound level; beyond t\* the
+deficit is O(1)); (ii) S1-GAP — the measured sub-1 region above ~4×10⁷
+(boundary (3.75×10⁷, 5×10⁷]; sweep 25x[7] + pin 25y pending); (iii)
+GAP-O — the own-regime wire of genuinely O(t⁻²) shape (25v: whole
+p8_B family n ≤ 13t/8 excluded; demand envelope Eenv(t) =
+(10⁻⁴)(16001/15984)·t⁻², deficit Kgap·t^{3/2}, Kgap ≈ 3926.494) — or its
+fold into the gapW-class (owner decision pending).  Plus, the
+mathematical gap itself — the residual-floor theorem of §10.
+
+**The certified data record** (all numbers reproducible from committed scripts and data; day-023 25b closeout + day-024 25w addition — superseding the day-014 note):
 N(10⁷) = 21,136,121 (independent 100-h two-engine walk: 12,193,869
 seeded (≤ 6×10⁶) + 8,942,252 flips in (6×10⁶, 10⁷] = the LMFDB 31-digit
 slice count EXACTLY; the LMFDB total 21,136,125 differs by the 4
-documented twin pairs below 6×10⁶); DAY-024 ADDITION (25w/25x): the public LMFDB/Platt band (3.1946×10⁷, 1.006346×10⁹] = 2,792,198,664 zeros (31-digit dataset, RVM-anchored: N(10⁹) = 2,846,548,032, |diff| = 1; band min gap 1.08540×10⁻⁴) — the data record now reaches 10⁹ on the CITED dataset; the (6e6,1e7] walk and the merged list stand as the independent cross-check layer;
-|S| envelope 2.558 → 2.509 → 3.206 across 10⁵, 10⁶, 10⁷; 2K(10⁷) even ⇒
-**no off-line zero pair below 10⁷**; dps-30 certified zero list to
-3.15×10⁷ (merged walk list + the 19 public 31-digit shards on disk);
-onset fingerprint reproduction ≤ 6% at G = 6×10⁶; the +246 early coarse
-estimate of the missing-chunk size was **falsified by direct count**
-(measured Δ = 244). The day-014 "named residual" (the un-re-walked
-middle window) is RESOLVED by the 25b walk.
+documented twin pairs below 6×10⁶); DAY-024 ADDITION (25w/25x): the public LMFDB/Platt band (3.1946×10⁷, 1.006346×10⁹] = 2,792,198,664 zeros (31-digit dataset, RVM-anchored: N(10⁹) = 2,846,548,032, |diff| = 1; band min gap 1.08540×10⁻⁴) — the data record now reaches 10⁹ on the CITED dataset; the (6e6,1e7] walk and the merged list stand as the independent cross-check layer.
+The |S| envelope is 2.558 → 2.509 → 3.206 at 10⁵, 10⁶, 10⁷ respectively, and 2K(10⁷) is even (2K(10⁷) = −2) ⇒ **no off-line zero pair below 10⁷**.  Certified zero lists: dps-30 merged list to 10⁷ (day-023 walk + 19 public 31-digit shards) and the 25w band (3.1946×10⁷, 1.006346×10⁹] on the CITED 31-digit dataset; band min gap 1.08540×10⁻⁴.  Onset fingerprint reproduction ≤ 6% at G = 6×10⁶.  The +246 early coarse estimate of the missing-chunk size was **falsified by direct count** (measured Δ = 244).
+
+(day-014 "named residual": RESOLVED by the 25b walk — see the audit
+ladder above.)
+
 
 ## 10. The open piece: the residual floor (and its two routes)
 
@@ -459,8 +485,10 @@ the floor's sensitivity threshold — to be pinned by measurement. This is the
 natural route: it reuses exactly the quantities the argument has already
 defined, and the measured margin — dps-30 certified closing
 143.341847457× @ 5×10³ (145.563762319 with the 1e15 remainder),
-verified region [10³, 10⁶] margin ≥ 13.9, screened to 3.15×10⁷ with
-margin ≥ 1.4 (DISCOVERY_LOG 25c/25d/25f) — says it is within reach.
+verified region [10³, 10⁶] margin ≥ 13.9, screened on ACTUAL zeros
+to 1.0063×10⁹ with margin ≥ 1.6 through 3.75×10⁷ (DISCOVERY_LOG
+25c/25d/25f/25x) — says it is within reach *while it lasts* (see the
+route decision below for where it stops).
 
 **Route B — uniform dynamics (classical home turf).** Prove directly that
 2K(t) is even for all t (equivalently: S(t) stays in the on-line band, D ≡ 0
@@ -468,17 +496,29 @@ as a statement about S's dynamics). δ-robust — no sensitivity threshold.
 At full strength it is essentially RH-equivalent; the lifting path is the
 open engineering question of the classical S(t) literature.
 
-**Route decision.** The measured data choose between the routes: the
-Route-A margin (dps-30 CERTIFIED closing 143.341847457× at t = 5004.7343,
-day-023 re-pin; verified region [10³, 10⁶] margin ≥ 13.9; screened on real
-zeros to 3.15×10⁷ with margin ≥ 1.4 — DISCOVERY_LOG 25c/25d/25f; the old
-34.68×/122→2.3 trend and the "2.5×10⁴ crossing" RETIRED as the day-023
-kernel tail defect, 25b) remains above the local residual envelope in the
-verified regime;
-if it collapses below 1 **in a verified regime**, Route A is retired and
-Route B carries the argument. Either way, P8 is the single remaining gap,
-and it is *stated, bounded below, and has two named routes* — not a missing
-ingredient whose shape is unknown.
+**Route decision.** The measured data choose between the routes, and
+(day-024, 25x — the (3.15e7, 1e9] data landed and the 25f protocol was
+re-run on ACTUAL zeros to 1.0063×10⁹) they have made a first choice.
+Below the boundary, the Route-A margin stays above the local residual
+envelope: dps-30 CERTIFIED closing 143.341847457× at t = 5004.7343,
+verified region [10³, 10⁶] margin ≥ 13.9, screened ≥ 1.6 through
+3.75×10⁷ (the old 34.68×/122→2.3 trend and the "2.5×10⁴ crossing"
+RETIRED as the day-023 kernel tail defect, 25b). Above it, the margin
+drops BELOW 1 — measured on actual zeros at 5×10⁷ (0.941) and 7.5×10⁷
+(0.714), robust to the kernel error (best-case |ζ|/B(t) still < 1),
+recovered locally at 10⁸ (1.447), and below 1 at every printed window
+through 10⁹ (0.020 at 10⁹), floor-dominated (the B(t) ln-t floor:
+def_c 6.8 → 440).  The pre-registered retirement clause (25b) therefore
+fires above the (3.75×10⁷, 5×10⁷] boundary at the screening level; the
+dps-30 pin (25y) makes it a certified fact, and the boundary sweep
+(25x[7]) localizes it.  The decomposition of the remainder follows:
+*(i)* on [10³, ~4×10⁷], Route A stands (above t\* = 690349.0568, the
+S4 squeeze bound itself is still to be proven — GAP-W); *(ii)* on
+(~4×10⁷, ∞), Route A's wire has no margin and the argument needs a
+changed zero-side wire (the S1-GAP) or Route B; *(iii)* the S4
+own-regime wire requirement (GAP-O, 25v) is a named decision item.
+Either way, the open piece is *stated, bounded below, localized, and
+named* — not a missing ingredient whose shape is unknown.
 
 ## 11. Classical sources
 
