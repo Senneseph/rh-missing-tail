@@ -279,3 +279,62 @@ measurement-and-mathematics price, in the outline and in the module
 header. No prize is claimed from these pages, as before; the repository's position is
 unchanged: a reproducible, labeled, self-auditing trail, with the
 open part named rather than papered over.
+
+## Update — 2026-09-14
+
+**The zero record jumped a hundredfold — by download, not by
+computation.** The machine-verified zero record stops where the public
+record on disk stopped (3.15×10⁷). That boundary is now 1.0063×10⁹:
+the public 31-digit zero record for the band above (2.84 billion
+zeros, in the standard Platt format from the LMFDB mirror) was
+pulled, decoded, and re-anchored against the Riemann–von Mangoldt
+counting formula twice (at 10⁹ and at the band's last zero), with
+every shard checksummed — N(10⁹) = 2,846,548,032, matching the
+classical value within 1. This is data with a chain of custody, not
+new computation: the same public record anyone can check.
+
+**The instrument reached the new band — and reported a finding, not
+a confirmation.** The straddle-margin protocol (the number that must
+stay above 1 for the squeeze argument at height t) was re-run on
+*actual* zeros across the new band — 17 windows, then a denser 26-
+window boundary sweep. The margin held sound through 3.75×10⁷ (it had
+only been *predicted* sound there before — the prediction is now
+confirmed, slightly better than predicted). Above 5.2×10⁷ it then
+drops below 1 for the first time, robustly, at 5.6×10⁷ (pinned at
+0.565709077008 to 30 decimal places), oscillates on the way up (dips
+as deep as 0.175041964016 at 1.1×10⁸ — the deepest margin measured
+anywhere in the program — with recoveries up to 3.2), and is below 1
+at every window above 2×10⁸ (0.02 at 10⁹). And the reason is
+structural, not accidental: the theory's own floor term grows like
+the square root of the height (a term whose sharpness is
+machine-proven), while the zero-side quantity only fluctuates — so
+the best possible margin *at that wire* decays to 0. The
+pre-registered rule from day-023 (if the margin collapses below 1 in
+a verified regime, the route retires) therefore fires above
+~5.6×10⁷, as a pinned fact. Two honesty notes: the margin between
+5.6×10⁷ and 10⁹ oscillates (it is not a single clean interval), and
+the dips carry a small, understood quadrature bias at the very top of
+the band — none of this affects the verdicts, which are carried by
+the best-case bounds.
+
+**What changed is the map, not the machine.** Every piece of the
+machine-proven core (P1–P9, the P1.2 skeleton, the S4 window results)
+is untouched and still green on a fresh rebuild. What the new data
+did: (1) confirm the screened-sound region up to 5.2×10⁷ on actual
+zeros; (2) locate — and then *explain* — the failure region above
+5.6×10⁷, so the old open question "is the margin uniform in height?"
+is answered: no, and it cannot be made uniform by tuning this wire,
+because the floor it fights is machine-sharp; (3) shrink the open
+list to a clean shape with two named mathematics items — the window-
+regime squeeze past the pinned height 690,349 (including the
+own-regime wire requirement, reclassified into it), and the high-
+height argument for the uniform witness above 5.6×10⁷ (which needs a
+different inequality, or the structural bypass named Route B) — plus
+the residual-floor theorem itself, which is the mathematical core of
+both. The detector's predicted blind spot (the zero-side deviation
+stuck at its maximum) was open exactly as predicted at every scanned
+height to 10⁹ — the S4 prediction held across a hundredfold of new
+band. No prize is claimed from these pages; the position is
+unchanged: a reproducible, labeled, self-auditing trail, with the
+open part now measured, named, and shaped rather than merely
+expected.
