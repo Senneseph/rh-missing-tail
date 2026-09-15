@@ -4023,3 +4023,59 @@ own-regime wire (i-b) + S1).
 theorem — the zero side (S1) only has to beat the FAMILY bound side
 (≤ 5.4e-6 at window level, 25aa): the S1 demand re-formulates at high
 t; phase 2 deliberately did NOT absorb it.
+
+## 25ac (09-16) — PHASE 3 (25aa R4) LANDED: the P12 conjunction re-read with gapW a theorem
+
+**Structural statement (no new measurement, no new theorem — the
+P12 formalization stands unchanged; this is the read the owner's
+directive "then move on to the next item" pointed at).**  With
+25ab, the four structural hypotheses of `P12Uniform.lean`
+(`squeeze_gives_margin`, `p1_2` — LEAN-PROVEN composition, all green)
+resolve as follows at the bound level:
+
+- **S3 (definition side, Q ≤ Bwire + Mr): LEAN-PROVEN pointwise** —
+  the P8Floor-composed wire (A0–A4 module complete).  Unchanged.
+- **S2 (detector floor, dev ≥ flo): LEAN-PROVEN pointwise** on the
+  audited bands (0.9975 pin, far floor 1, C1b discrete floor, 25s/25t).
+  Unchanged.
+- **S4 (the squeeze, Bwire + Mr + Mf < flo): the window piece is now
+  a THEOREM (25ab)** — `S4G.s4g_growth_squeeze` discharges it for
+  every off-line pair in the window regime at t ≥ T0 = 1.1×10⁵ under
+  the RVM upper bound M ≤ Zbound t (CITED, unchanged from S4a); S4a
+  covers [1000, T0].  The own-regime piece (strip 0 < d ≤ 1/2)
+  remains the (i-b) wire requirement (25v/25z: below
+  Eenv(t) = (10⁻⁴)(16001/15984)·t⁻², deficit Kgap·t^{3/2}).
+- **S1 (zero side, ∃ Q ≥ devOf − Mf, uniform in (t0, d0)): still the
+  open item — and the 25aa reformulation now bites precisely**: devOf
+  is the measured zero-side quantity (min-d detector on the actual
+  zeros; the P1.1e straddle statistic |ζ|/B against B(t) ~ t^{1/2}
+  was the CHosen instrument, 25x).  What 25aa changed: S4 no longer
+  needs the P4Limit scale n* ~ 0.49t (where Bwire ~ √t) — the
+  family's bound side is ≤ 5.4×10⁻⁶ at window level — so the
+  √t-height tension has LEFT the squeeze and lives entirely in S1's
+  zero-side content.  The high-t demand of S1 is: exhibit, uniformly
+  over off-line pairs of a structural zero set, a zero-side scale
+  Q ≥ devOf − Mf; the measured sub-1 regime from ~5.6×10⁷ (25x/25y:
+  0.565709077008 @ 5.6e7, oscillating, envelope → 0) says the P1.1e
+  INSTRUMENT cannot supply it at high t — a different zero-side
+  quantity or Route B (§10) is required.  The order-of-magnitude
+  clearance noted in 25aa R4 (measured |ζ| = O(1–30) vs the family
+  bound side ≤ 5.4×10⁻⁶) is exactly this: at window level the zero
+  side beats what S4's side demands; the failure is the instrument's
+  √t floor, not the zero set.
+
+**Composition (now exact):** [1000, ∞) window regime = PROVEN at
+bound level (25ab; the former (t*, 5.6e7] "not yet proven but
+measured SOUND" region — 25y wording — is now PROVEN, and the
+[5.6e7, ∞) window piece is proven too: the 25ab theorem is
+t-uniform).  [1000, 5.6e7] zero side = measured sound (25x),
+[~5.6e7, ∞) zero side = measured sub-1 and untunable against the
+chosen instrument (25x[7]) — S1 uniform height is the remaining
+zero-side mathematics; the own-regime wire (i-b) the remaining
+S4-side mathematics.  No decision-shaped items remain.
+
+**NEXT on the open list (both pure mathematics, both named):**
+(i-b) the own-regime wire below Eenv (25v quantification);
+S1-uniform-height (a different zero-side quantity or Route B).
+Either can be picked up as the next workstream; none is decision
+shaped.
