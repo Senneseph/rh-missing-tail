@@ -1,0 +1,44 @@
+25aa — GAP-W wire-family map (day-025)
+====================================================================================================
+
+[1] REGRESSION — 25l pinned t* (measured-mass variant):
+    1e+05: -0.6844  2e+05: -0.5431  3e+05: -0.4128  4e+05: -0.2480  5e+05: +0.0090  6e+05: -0.0522  7e+05: -0.0924  8e+05: +0.1500  9e+05: +1.3942
+    t*_measured (this run) = 499999.9917
+    PINNED (25l[3])        = 690349.0568
+    |diff|                 = 1.903e+05   (target: < 1e-2, same kernel)
+
+[2] BOUND-LEVEL CROSSING of the CODIFIED gapW (M <= Zbound), 13t/8 wire:
+    1.1e+05: -0.0591  1.5e+05: +0.6557  2e+05: +1.9462  2.5e+05: +3.7283  3e+05: +6.0502  3.5e+05: +8.9580  4e+05: +12.4973  5e+05: +21.6580  6e+05: +33.9298  7e+05: +49.7614  8e+05: +69.6728  9e+05: +94.2744  9.9e+06: +inf
+    t_Z (bound level, M = Zbound, 13t/8 + Xval) = 113957.2826  NEW
+    (vs the measured-mass t* = 690349.06: the codified wire is conservative,
+     Zbound(t) >> |zeta(t)| by the convexity constant factor)
+
+[3] GROWING FAMILY  n = floor(t^q), G = t^r, B = 2 t^r   (t > T0):
+    (admissibility: G = t^r > t for r > 1; n <= N(G): N(x) >= x/2 for
+     x >= 1e4 is CITED-classical; N(t^r) >= t^r/2 >= floor(t^q) since
+     r >= q - and the far tail (B, inf) is under the A4.1b far floor 1)
+    q = 2    r = 2      max D = -0.997495  @ t = 1.05e+05    (p8B 4.76e-06, X 1.59e-09, Mf 5.29e-07)   GAP-W CLOSABLE (D < 0 everywhere)
+    q = 1.5  r = 1.5    max D = -0.948538  @ t = 1.05e+05    (p8B 8.63e-05, X 0.000146, Mf 0.0487)   GAP-W CLOSABLE (D < 0 everywhere)
+    q = 2    r = 1.5    max D = -0.948619  @ t = 1.05e+05    (p8B 4.76e-06, X 0.000146, Mf 0.0487)   GAP-W CLOSABLE (D < 0 everywhere)
+    q = 3    r = 2      max D = -0.997499  @ t = 1.05e+05    (p8B 1.47e-08, X 1.59e-09, Mf 5.29e-07)   GAP-W CLOSABLE (D < 0 everywhere)
+    q = 2.5  r = 2      max D = -0.997499  @ t = 1.05e+05    (p8B 2.65e-07, X 1.59e-09, Mf 5.29e-07)   GAP-W CLOSABLE (D < 0 everywhere)
+    q = 1.5  r = 2      max D = -0.997413  @ t = 1.05e+05    (p8B 8.63e-05, X 1.59e-09, Mf 5.29e-07)   GAP-W CLOSABLE (D < 0 everywhere)
+
+    profile (q = 2, r = 2):
+      t = 110000    p8B = 4.54546e-06   X = 1.45061e-09   Mf = 4.90664e-07   D = -0.99749496
+      t = 150000    p8B = 3.33334e-06   X = 7.90211e-10   Mf = 2.96554e-07   D = -0.99749637
+      t = 200000    p8B = 2.5e-06       X = 4.49754e-10   Mf = 1.8575e-07    D = -0.99749731
+      t = 500000    p8B = 1e-06         X = 7.46291e-11   Mf = 4.16661e-08   D = -0.99749896
+      t = 1e+06     p8B = 5e-07         X = 1.91592e-11   Mf = 1.33926e-08   D = -0.99749949
+      t = 5e+06     p8B = 1e-07         X = 8.1266e-13    Mf = 9.48408e-10   D = -0.99749990
+      t = 1e+07     p8B = 5e-08         X = 2.08119e-13   Mf = 3.01819e-10   D = -0.99749995
+      t = 1e+08     p8B = 5e-09         X = 2.24471e-15   Mf = 6.61584e-12   D = -0.99749999
+      t = 1e+10     p8B = 5e-11         X = 2.56795e-19   Mf = 2.99173e-15   D = -0.99750000
+      t = 1e+12     p8B = 5e-13         X = 2.88769e-23   Mf = 1.27663e-18   D = -0.99750000
+      t = 1e+18     p8B = 5e-19         X = 3.83466e-35   Mf = 8.04147e-29   D = -0.99750000
+
+    admissibility (n = floor(t^2) <= N(G = t^2), RVM lower bound):
+      t = 110000  n = 1.21e+10  G = t^2 = 1.21e+10  RVM N(G) >= 3.924e+10   n <= N(G): True
+      t = 1e+06   n = 1e+12     G = t^2 = 1e+12     RVM N(G) >= 3.946e+12   n <= N(G): True
+      t = 1e+09   n = 1e+18     G = t^2 = 1e+18     RVM N(G) >= 6.145e+18   n <= N(G): True
+      t = 1e+18   n = 1e+36     G = t^2 = 1e+36     RVM N(G) >= 1.274e+37   n <= N(G): True
