@@ -3575,3 +3575,146 @@ a decision item.
 VERIFIED-TODAY (bit-exact cross-implementation, not a sorry-class
 claim but a data pipeline — verified before trust per 24b);
 25w[4] RUNNING (machine log is the record).
+
+## 25x (09-14) — ITEM #4 DATA HALF CLOSED: BAND-1E9-DONE (+ the 25f protocol re-run on actual zeros, in flight)
+
+**25x[1] THE BAND (25w job) FINISHED: BAND-1E9-DONE, 2026-09-14 19:50 local
+(37 min total, not the ~70 min ETA; the 25w[4] "4 hours stalled" alarm in the
+session was a local-vs-UTC misread of my own log timestamps — the job never
+stalled; recorded so the pattern is visible).**  Final state:
+`scripts/rh/hi1e9/zeros_hi31946e6_to_1e9.f64` = **2,792,198,664 zeros**,
+t range [31946000.066576, 1006345999.847005] (22.34 GB raw LE float64,
+gitignored).  Finish gates (supervisor nolog, all PASS):
+  band min gap = 1.08540e-04
+  N(1e9) = 2,846,548,032   vs RVM 2,846,548,032.83   |diff| = 1 (tol 3)
+  N(band end 1.006346e9) = 2,865,625,422  vs RVM 2,865,625,421.41  |diff| = 1
+  strict monotone: PASS.  Every one of the 464 shards: md5 gate + decode +
+  cross-shard Nt continuity (73426758 -> 2,865,625,422), zero failures.
+  Provenance: CITED (LMFDB/Platt public dataset, 24b chain of trust) +
+  VERIFIED-TODAY (bit-exact decoder cross-check, 25w[3]; RVM gate today).
+
+**25x[2] THE 25f PROTOCOL RE-RUN (the follow-on atom; 25w[5] executed):**
+scripts: `scripts/rh/day024_tail_hi1e9.py` (tail generalization) +
+`scripts/rh/day024_band1e9_screen.py` (the scan; day023_straddle_hi.py
+(25f) protocol VERBATIM: same kernel, same margin formula, same t-grid
+(t = g + k/2, k in -12..12 \ {0}), same dev grid (496), same per-t dps-30
+quadrature to 1e18 (200 pts, reissue 400), same 5e3 real-zero gate).
+ONLY difference (the 25f "EXTENDING THE REAL REGION PAST 3.15e7 REQUIRES
+actual zeros there" ask, now satisfied):
+  - discrete section (1e7, 3e7] (47.5M zeros) -> (1e7, 1.006346e9]
+    (2,844,489,297 actual zeros: the 52.3M shard slice (1e7, 3.1946e7) —
+    which also picks up the (3e7, 3.1946e7] slice the old cache stopped
+    before — concatenated Nt-continuous with the 2,792,198,664-zero band);
+  - density quad (3e7, 1e18] -> (1.0063459998e9, 1e18]; for every scanned
+    t <= 1e9 < G_LAST there is no interior singularity (25f kernel bug #3
+    split not triggered).
+  Near-t structure (zero spacing ~0.3 rad vs the old quad's node spacing
+  ~1e6-1e9 in g — the exact thing that made the 25f nominal rows unsound)
+  is now EXACT for all 17 windows.
+
+**25x[3] REGRESSION at the 25h certified anchor (in-situ validation of the
+extension):** window 1e7, extended kernel vs 25f/25h (old kernel):
+  t_best = 9999999.7400 (identical)   zeta = 17.5382 (identical)
+  E: -0.000588 (ext) vs -0.018979 (old)  --  the quad error of the old
+       (3e7, 1e18] section is exactly what 25f attributed to the nominal
+       rows; at 1e7 it was already small (0.019) and is now ~0.0006
+  resid |zeta - K|: ~0.0096 (ext) vs 0.336 (25h old kernel)
+  margin: 5.8003 (ext) vs 5.2362 (25h certified; conservative pin UNCHANGED —
+       the Lean pin stays 143.341847457 per discipline; 5.2362 was a
+       dps-30 cert of the OLD kernel, and this screen is a different, now
+       finer, kernel)
+  Reading: the extension kernel is valid (identical witness point, ~30x
+  smaller kernel error, all the improvement explained by the section
+  swap).  The certified ladder [1.40e2 @ 1e3 -> 1.43e2 @ 5e3 -> 5.24 @ 1e7]
+  stands; the screen ladder tightens.
+
+**25x[4] PROCESS NOTE (honest):** first full launch (32 workers) was
+OOM-killed (parent 2.85e9-zero cache ~28 GB RSS + 32 mpmath workers each
+churning 1-3 GB > 124 GB): kernel OOM log + BrokenProcessPool.  Fix:
+float64 chunk-sums accumulated in longdouble (pairlog ~29 s -> ~12 s/t)
++ 12 workers (~76 GB ceiling).  Relaunched 19:5x; serial single-window
+cost ~670 s -> wall ETA ~1.7-2 h for 17 windows.
+
+**25x[5] THE TABLE (17 windows, 25f format, ACTUAL zeros to 1.0063e9;
+hi1e9/screen_25x.log, out file pending):**
+
+      g            t_best     margin   def_c     resid     zeta    E
+  10000000.2400  9999999.74     5.8003  3.02369   0.01031  17.538  -0.0006   real
+  11999999.8033 12000004.80     2.0814  3.30679   0.00583   6.883  -0.0008   real
+  14999999.8889 14999995.89     1.6032  3.69841   0.00785   5.930  -0.0013   real
+  18000000.0807 18000003.58     3.1873  4.06750   0.02472  12.964  -0.0019   real
+  19999999.8837 19999999.38     1.6366  4.27795   0.01649   7.002  -0.0024   real
+  23999999.9546 23999995.95     1.9489  4.69925   0.03107   9.159  -0.0034   real
+  28000000.1729 28000005.67     4.8510  5.15781   0.11561  25.020  -0.0046   real
+  31000000.0850 31000001.59     1.9144  5.36361   0.05818  10.268  -0.0057   real (was NOMINAL in 25f)
+  37500000.0419 37500004.04     2.3711  5.95236   0.11718  14.114  -0.0083   real (was 0.66/E+2.18)
+  49999999.8937 50000000.39     0.9411  6.83308   0.09521   6.431  -0.0147   real (was 0.37/E+1.45)
+  75000000.2084 74999999.71     0.7137  8.45500   0.20286   6.034  -0.0331   real (was 0.53/E+2.36)
+  99999999.9302 100000000.43    1.4466 10.44320   0.91446  15.107  -0.0588   real (was 0.54/E+2.66)
+  149999999.955 149999997.46    0.7785 13.11249   1.44223  10.208  -0.1322   real (was 0.43/E+2.48)
+  249999999.774 250000000.27   0.4365 18.67234   3.60612   8.151  -0.3663   real (was 0.28/E+1.98)
+  399999999.907 400000000.91   0.3008 35.52423  16.46682  10.686  -0.9326   real (was 0.42/E+2.38)
+  600000000.072 600000001.07   0.0918 63.77377  40.43331   5.857  -2.0674   real (was 0.13/E-0.16)
+  1000000000.12 999999999.62   0.0197 440.6935 410.56110   8.664  -3.8792   real (was 0.07/E-2.65)
+
+**25x[6] READING (honest split, no spin):**
+
+(a) The 25f nominal rows are replaced: all 17 windows are now REAL (actual
+zeros, exact discrete near-t structure).  The 8 old real rows reproduce
+25f with the expected refinement (margins UP 3-9%, E from ~-0.02..-0.32
+to ~-0.0006..-0.0046: the section swap removed the quad bias).  The
+3.1e7 row flips 0.78(NOMINAL, E +2.25 unreliable) -> 1.91 (real, E -0.006):
+SOUND.  Screened-SOUND region per this table: [1e7 windows all >= 1.6]
+through the 3.75e7 window (2.37) — i.e. the old screened SOUND interval
+(1e6, 3.15e7] EXTENDS to ~4e7.
+
+(b) THE S1-GAP REGION (the program-level finding): margin < 1 at 5e7
+(0.941, E -0.015), 7.5e7 (0.714, E -0.033), 1.5e8 (0.779, E -0.132),
+2.5e8 (0.437), 4e8 (0.301), 6e8 (0.092), 1e9 (0.020) — with a LOCAL
+RECOVERY at 1e8 (1.447, best-case 1.585 > 1: robustly SOUND).  The dips
+are KERNEL-ROBUST, not quad artifacts: the (G_LAST, 1e18] quad's residual
+resolution error shows up in E (<= -0.033 at 5e7/7.5e7, i.e. |K| within
+~3% of |zeta|), and the BEST-CASE margin (E -> 0, resid -> 0,
+margin_best = |zeta|/B(t)) is STILL < 1 at every dipping window: 0.954
+(5e7), 0.731 (7.5e7), 0.875 (1.5e8), 0.54 (2.5e8), 0.30 (4e8), 0.25 (6e8),
+0.29 (1e9).  The binding quantity at the dips is B(t) (the P8 ln-t floor:
+def_c = B + resid grows 6.8 -> 440 across the table while |zeta| stays
+O(5-25)): the S1 straddle-squeeze margin genuinely drops below 1 from
+~4e7 upward (modulo the 1e8 recovery), on ACTUAL zeros, at screen level
+with a small, understood kernel bias.  The pre-registered P1.1e
+route-retirement rule (25b: "margin < 1 at >= 1e5 OR E >> 1 at >= 1e5")
+FIRING: the P1.1e uniform-squeeze route (the B-2/b2 kernel as the closure
+wire) is retired above the boundary; coverage of S1 is now:
+  certified [1e3, 1e6]  +  screened-SOUND [1e6, ~4e7]  +  measured S1
+  gap (margin < 1, robust to kernel error) from ~4-5e7 upward.
+  This LOCALIZES prize-roadmap open item #1 (S1 height-uniformity) with
+  data: it is not a uniformity subtlety somewhere — it is a measured
+  margin-< 1 region starting ~4e7, oscillatory in ln t (1e8 recovery),
+  floor-dominated (B(t)).  Boundary sharpening: the (3.75e7, 5e7] +
+  (1e8, 1.5e8] boundary sweep runs now (day024_band1e9_sweep.py, 26
+  windows) — PENDING in 25x[7].  The margin < 1 windows need a dps-30
+  certificate (25h-protocol pin) before the retirement is stated as a
+  pinned fact: PENDING as 25y.
+
+(c) The 1e9-row E (-3.88, |K| 48x small) is the same quad-resolution
+disease one octave up (the (1.006e9, 1e18] quad's first node sits ~1.05e9
+above the band end, so the (1.006e9, ~2e9] mass — still O(1) in the
+kernel for t ~ 1e9 — is under-resolved): the verdict there is already
+carried by the best-case bound (< 1 regardless), and a far-side quad
+refinement (more nodes below 1e10) is a cheap follow-up if the 1e9-scale
+number itself is ever needed for a pin.
+
+**25x[7] BOUNDARY SWEEP (day024_band1e9_sweep.py, 26 windows in
+(3.9e7, 2e8] + 3e8/5e8, same protocol/tail):**  [PENDING — fill on land;
+hi1e9/sweep_25x.log]
+
+**Honest split (revised):** 25x[1] CITED+VERIFIED-TODAY (RVM gate is the
+arithmetic anchor; min gap is a measurement of the dataset); 25x[2]
+DECISION (protocol extension, the difference from 25f documented);
+25x[3] MEASURED (in-situ validation of the extension kernel at a certified
+point — not a re-certification; existing pins untouched); 25x[4] DECISION
+(resource limit, documented); 25x[5] MEASURED (screen level: float64
+discrete + dps-30 quad, per 25c/25f discipline); 25x[6] MEASURED+DECISION
+(the margin < 1 windows are robust measurements; the route retirement is
+the standing rule FIRING on them — the rule was pre-registered in 25b);
+25x[7] PENDING.
