@@ -53,6 +53,20 @@ import RhAttack.P12Uniform
    (s4d_list_scale_impossible). The deficit is a POWER of t: the
    replacement wire must be of genuinely O(t^{-2}) shape, not a
    constant-factor sharpening of the O(t^{-1/2}) wire family.
+   25ad (day026_ownwire_survey) SETTLED the EM family at the quantity
+   level: |p4_em_expr(1/2+it, n)| is T1-dominant with T1 = -2^-1 n^-s
+   irreducible (|EM|/Eenv = 3918.7 t^{3/2} (1.005), exponent 1.5002 at
+   certified zero heights — no hidden t^{-2} decay) — BUT the quantity
+   crosses Eenv exactly at the 25v scale boundary (|EM|/Eenv = 0.99994,
+   constant in t, at n = 2.495e7 t^4): the replacement wire
+   W(t) = p8_B(t, ceiling(3.1e7 t^4)) exists at the demand shape
+   (term1 = 8.98e-5 t^{-2} = 90% of the true floor mown/Eenv = 0.99894).
+   The open content is (a) the scale of the strip pairs' own-composition
+   residuals (the action-composition item — the window residual
+   CG3 = 4.1e-3 does not scale with mown ~ 1e-4 t^{-2}, so the t^4 EM
+   wire alone does not close the strip), and (b) the 25ae sharpened T3
+   bound (extending the PROVABLE quantity wall from t <= ~3.7e5 to all
+   t >= 1000; the L4 IBP constant is loose by ~t, measured T3/T1 ~ 1e-3).
 
    Honest split: LEAN-PROVEN — the gap definitions, the
    impossibility (S4c), the low-window green (S4a), and the

@@ -1639,7 +1639,11 @@ Math. Comp.: for T ≥ e,
   |N(T) - (T/2π)·log(T/(2πe))| ≤ 0.10076 log T + 0.24460 log log T
   + 8.08344.
 Backlund is retained as the certified constant set of the REV2 script;
-the two-sided form is used here only in its lower-bound direction.)
+the two-sided form is used here only in its lower-bound direction.
+The Bellotti–Fiori variant is formalized below as
+`N_rvm_low_bf` / `s4g_admissible_bf` (25ac+: dps-50 certificate
+scripts/rh/day026_admissibility_bf.py, ALL PASS — same chain shape,
+exact rationals 10076/100000, 24460/100000, 808344/100000.)
 
 PINNED (scripts/rh/day025_gapw_constants.py [4],
 out_day025_gapw_constants.txt):
@@ -1787,6 +1791,139 @@ theorem s4g_admissible (x : ℝ) (hx : T0 * T0 ≤ x) : N_rvm_low x ≥ x := by
         dsimp [N_rvm_low]
         ring
     _ ≥ (63 / 22) * x - (29 / 100 * x + 3957 / 1000) := by
+        nlinarith [hmainl, hsum]
+    _ ≥ x := by
+        nlinarith [hT0val, hx]
+
+/-- RVM lower-bound function (Bellotti–Fiori constants; see Stage E
+    header): N_rvm_low_bf(x) = (x/2π)(log(x/2π) − 1)
+    − (10076/100000)log x − (24460/100000)log log x − 808344/100000. -/
+noncomputable def N_rvm_low_bf (x : ℝ) : ℝ :=
+    x / (2 * Real.pi) * (Real.log (x / (2 * Real.pi)) - 1) -
+      10076 / 100000 * Real.log x - 24460 / 100000 * Real.log (Real.log x) -
+      808344 / 100000
+
+/-- The admissibility theorem (Bellotti–Fiori variant): for x ≥ T0²,
+    N_rvm_low_bf(x) ≥ x.  (25ac+: dps-50 certificate
+    scripts/rh/day026_admissibility_bf.py, ALL PASS: ratio at T0² =
+    3.24335400295, min on [1.2e10, 1e40]; x-floor margin 2.6e9×.) -/
+theorem s4g_admissible_bf (x : ℝ) (hx : T0 * T0 ≤ x) : N_rvm_low_bf x ≥ x := by
+  have hT2pos : 0 < T0 * T0 := by norm_num [hT0val]
+  have hx0 : 0 < x := lt_of_lt_of_le hT2pos hx
+  have hpos : 0 < 2 * Real.pi := mul_pos (by norm_num : (0 : ℝ) < 2) Real.pi_pos
+  have hL19x : 19 ≤ Real.log (x / (2 * Real.pi)) := hL19 x hx
+  -- log terms
+  have hlogz : Real.log x ≤ x / 2 := by
+    have hsrt : 0 < Real.sqrt x := Real.sqrt_pos.mpr hx0
+    have hlog2 : Real.log (Real.sqrt x) ≤ Real.sqrt x - 1 :=
+      Real.log_le_sub_one_of_pos hsrt
+    have h2 : 2 * Real.log (Real.sqrt x) ≤ 2 * (Real.sqrt x - 1) :=
+      mul_le_mul_of_nonneg_left hlog2 (by norm_num : (0 : ℝ) ≤ 2)
+    have h3 : 2 * (Real.sqrt x - 1) ≤ x / 2 := by
+      let u : ℝ := Real.sqrt x
+      have hs : u * u = x := by
+        rw [← pow_two]
+        exact Real.sq_sqrt hx0.le
+      rw [show (x : ℝ) = u * u from hs.symm, _root_.Real.sqrt_mul_self (Real.sqrt_nonneg x)]
+      have hgap : (u * u) / 2 - 2 * (u - 1) = (1 / 2) * ((u - 2) * (u - 2)) := by ring
+      have hgapnn : 0 ≤ (u * u) / 2 - 2 * (u - 1) := by
+        rw [hgap]
+        exact mul_nonneg (by norm_num : (0 : ℝ) ≤ 1 / 2) (mul_self_nonneg (u - 2))
+      exact (sub_nonneg).mp hgapnn
+    have h1c : 2 * Real.log (Real.sqrt x) = Real.log x := by
+      have hs : Real.log (Real.sqrt x) = Real.log x / 2 := Real.log_sqrt hx0.le
+      rw [hs]
+      ring
+    exact le_trans (le_of_eq h1c.symm) (le_trans h2 h3)
+  have hlogx19 : 19 ≤ Real.log x := by
+    have heq : x / (2 * Real.pi) * (2 * Real.pi) = x := by
+      field_simp [hpos.ne']
+    have hlogmul : Real.log (x / (2 * Real.pi) * (2 * Real.pi)) = Real.log x :=
+      congrArg Real.log heq
+    rw [← hlogmul, Real.log_mul (by positivity) (by positivity)]
+    have hl2p : 0 < Real.log (2 * Real.pi) :=
+      Real.log_pos (show (1 : ℝ) < 2 * Real.pi from by linarith [Real.pi_gt_three])
+    nlinarith [hL19x, hl2p]
+  have hlogzpos : 0 < Real.log x := lt_of_lt_of_le (by norm_num : (0 : ℝ) < 19) hlogx19
+  have hlnln : Real.log (Real.log x) ≤ Real.log x - 1 :=
+    Real.log_le_sub_one_of_pos hlogzpos
+  have hsum : 137 / 1000 * Real.log x + 443 / 1000 * Real.log (Real.log x) + 44 / 10 ≤
+      29 / 100 * x + 3957 / 1000 := by
+    have h1 : 137 / 1000 * Real.log x + 443 / 1000 * Real.log (Real.log x) ≤
+        137 / 1000 * Real.log x + 443 / 1000 * (Real.log x - 1) :=
+      add_le_add le_rfl
+        (mul_le_mul_of_nonneg_left hlnln (by norm_num : (0 : ℝ) ≤ 443 / 1000))
+    have h3 : 29 / 50 * Real.log x + 3957 / 1000 ≤ 29 / 50 * (x / 2) + 3957 / 1000 :=
+      add_le_add_left
+        (mul_le_mul_of_nonneg_left hlogz (by norm_num : (0 : ℝ) ≤ 29 / 50)) (3957 / 1000)
+    calc 137 / 1000 * Real.log x + 443 / 1000 * Real.log (Real.log x) + 44 / 10
+        ≤ 137 / 1000 * Real.log x + 443 / 1000 * (Real.log x - 1) + 44 / 10 :=
+            add_le_add_left h1 (44 / 10)
+      _ = 29 / 50 * Real.log x + 3957 / 1000 := by ring
+      _ ≤ 29 / 50 * (x / 2) + 3957 / 1000 := h3
+      _ = 29 / 100 * x + 3957 / 1000 := by ring
+  have hsum : 10076 / 100000 * Real.log x + 24460 / 100000 * Real.log (Real.log x) + 808344 / 100000 ≤
+      34536 / 200000 * x + 783884 / 100000 := by
+    have h1 : 10076 / 100000 * Real.log x + 24460 / 100000 * Real.log (Real.log x) ≤
+        10076 / 100000 * Real.log x + 24460 / 100000 * (Real.log x - 1) :=
+      add_le_add le_rfl
+        (mul_le_mul_of_nonneg_left hlnln (by norm_num : (0 : ℝ) ≤ 24460 / 100000))
+    have h3 : 34536 / 100000 * Real.log x ≤ 34536 / 100000 * (x / 2) :=
+      mul_le_mul_of_nonneg_left hlogz (by norm_num : (0 : ℝ) ≤ 34536 / 100000)
+    calc 10076 / 100000 * Real.log x + 24460 / 100000 * Real.log (Real.log x) + 808344 / 100000
+        ≤ 10076 / 100000 * Real.log x + 24460 / 100000 * (Real.log x - 1) + 808344 / 100000 :=
+            add_le_add_left h1 (808344 / 100000)
+      _ = 34536 / 100000 * Real.log x + 783884 / 100000 := by ring
+      _ ≤ 34536 / 100000 * (x / 2) + 783884 / 100000 :=
+          add_le_add_left h3 (783884 / 100000)
+      _ = 34536 / 200000 * x + 783884 / 100000 := by ring
+  -- main term
+  have hstep1 : Real.log (x / (2 * Real.pi)) - 1 ≥ 18 := by
+    have hG : 0 ≤ (Real.log (x / (2 * Real.pi)) - 1) - 18 := by
+      have heq : (Real.log (x / (2 * Real.pi)) - 1) - 18 =
+          Real.log (x / (2 * Real.pi)) - 19 := by ring
+      rw [heq]
+      exact (sub_nonneg).mpr hL19x
+    exact (sub_nonneg).mp hG
+  have h2pi9 : 18 / (2 * Real.pi) = 9 / Real.pi := by
+    rw [div_eq_mul_inv, show (2 * Real.pi : ℝ)⁻¹ = (2 : ℝ)⁻¹ * Real.pi⁻¹ from by ring,
+        div_eq_mul_inv]
+    ring
+  have hratio : 9 / Real.pi ≥ 63 / 22 := by
+    have hpi : Real.pi < 22 / 7 := by
+      apply lt_of_lt_of_le Real.pi_lt_d4
+      norm_num
+    have hinv : (22 / 7 : ℝ)⁻¹ < Real.pi⁻¹ := by
+      have h1 : 1 / (22 / 7) < 1 / Real.pi :=
+        one_div_lt_one_div_of_lt Real.pi_pos hpi
+      simpa [one_div] using h1
+    have hstep : 9 * (22 / 7 : ℝ)⁻¹ < 9 * Real.pi⁻¹ :=
+      mul_lt_mul_of_pos_left hinv (by norm_num : (0 : ℝ) < 9)
+    have hlt : 63 / 22 < 9 / Real.pi := by
+      calc (63 / 22 : ℝ) = 9 * (7 / 22) := by norm_num
+        _ = 9 * (22 / 7 : ℝ)⁻¹ := by rw [inv_div]
+        _ < 9 * Real.pi⁻¹ := hstep
+        _ = 9 / Real.pi := by rw [div_eq_mul_inv]
+    exact le_of_lt hlt
+  have hmainl : x / (2 * Real.pi) * (Real.log (x / (2 * Real.pi)) - 1) ≥
+      (63 / 22) * x := by
+    have h3 : x / (2 * Real.pi) * 18 ≥ (63 / 22) * x := by
+      calc (x / (2 * Real.pi)) * 18 = x * (18 / (2 * Real.pi)) := by ring
+        _ = x * (9 / Real.pi) := by rw [h2pi9]
+        _ ≥ x * (63 / 22) :=
+            mul_le_mul_of_nonneg_left hratio hx0.le
+        _ = (63 / 22) * x := by ring
+    calc x / (2 * Real.pi) * (Real.log (x / (2 * Real.pi)) - 1)
+        ≥ x / (2 * Real.pi) * 18 :=
+            mul_le_mul_of_nonneg_left hstep1 (div_pos hx0 hpos).le
+      _ ≥ (63 / 22) * x := h3
+  -- total
+  calc (N_rvm_low_bf x : ℝ)
+      = x / (2 * Real.pi) * (Real.log (x / (2 * Real.pi)) - 1) -
+          (10076 / 100000 * Real.log x + 24460 / 100000 * Real.log (Real.log x) + 808344 / 100000) := by
+        dsimp [N_rvm_low_bf]
+        ring
+    _ ≥ (63 / 22) * x - (34536 / 200000 * x + 783884 / 100000) := by
         nlinarith [hmainl, hsum]
     _ ≥ x := by
         nlinarith [hT0val, hx]

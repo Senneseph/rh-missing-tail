@@ -4079,3 +4079,105 @@ S4-side mathematics.  No decision-shaped items remain.
 S1-uniform-height (a different zero-side quantity or Route B).
 Either can be picked up as the next workstream; none is decision
 shaped.
+
+## 25ad (09-16) — OWN-REGIME WIRE SURVEY LANDED: the wall is at the QUANTITY level, and the quantity crosses Eenv exactly at the 25v scale boundary (item 2); + BF admissibility tightened in Lean (item 3)
+
+The pre-registered survey (item 2): does the EM-tail quantity
+`|p4_em_expr(½+it, n)|` (the object p8_B bounds) show t⁻² decay at
+closure scales that the p8_B bound hides?  (25v/25l[5](ii) residue:
+"a strictly sharper P4-floor wire … the d → 0 spiral of the
+definition side must land at the same 4d²/t² scale … not at the
+sqrt(t) wire.")  Script: scripts/rh/day026_ownwire_survey.py,
+out_day026_ownwire_survey.txt (float64 sweep + dps-30 cross-
+validation).
+
+[0] MIRROR VERIFIED.  p4_em_expr(s,n) = T1 + T2 + T3 with
+T1 = −½n^{−s}, T2 = (1/12)·s·n^{−s−1}, T3 = −½∫_n^∞ B̂₂(x)·s(s+1)·
+x^{−s−2}dx (B̂₂ = period-1 Bernoulli, P4Tail.B2), s = ½+it; and
+p4_I(n,s) = n^{−s+1}/(1−s) = **−**∫_n^∞ x^{−s}dx — the P4 "missing
+tail" is the sum-minus-integral tail difference W_n = ∑_{k>n} + I =
+∑tail − ∫tail.  Cross-validated at dps-30 against the zeta-side
+ζ(s) − P_n + I: ratio 1.000000 / 1.000000 / 1.000007 / 0.999705
+(t = 14.13, 100, 1e3, 1e4; float64 T3 quadrature, 32-pt GL/unit
+interval, M = 4096) and 1.0 at ≤1e-15 in the Re s > 1 home territory
+(s = 2, 3, 2.5+i).  DISCIPLINE NOTE: the first run's cross-
+validation appeared to fail (ratios 0.2–0.93) — it did not; the
+validation line used I(t) instead of I(n) (a typo in the check, not
+a convention error).  Fixed and re-run; the float sweep numbers
+stand.
+
+[1] WALL AT THE QUANTITY LEVEL (pre-registered verdict B).  At the
+list scale n = floor(13t/8) (the 25v demand context): |EM|/|T1| =
+1.0048 @ 1e6 … 1.0058 @ 1e8 — the raw EM norm IS the T1 wall (no
+hidden t⁻² decay; T1 = −½n^{−s} is an explicit monomial of the
+closed-form expression with no same-order partner).  Measured
+|EM|/Eenv = 3.9369e12 @ t = 1e6 (Kgap·t^{3/2} = 3.9187e12; the 25v
+bound-level wall p8_B ≥ Kgap t^{3/2} Eenv is thus a property of the
+quantity itself, not of the triangle inequality).  log-log exponent
+1.5003 (t grid 1e6..1e8) and 1.5002 on the CERTIFIED ZERO HEIGHTS
+(actual strip pairs, 40 gamma in [1e5, 1e7]).  T3 is small in
+practice: |T3|/|T1| ~ 1e-3 measured (the L4 IBP bound is loose by a
+factor ~t — see [4]).
+
+[2] n-FAMILY MAP (the crossing is exact).  |EM|/Eenv as a function
+of the scale family (t = 1e5/1e6/1e7):
+      list n ~ 1.625t :  exponent 3/2   (3918.7·t^{3/2}, [1])
+      n = t           :  15992·t^{3/2} scale (larger constant)
+      n = t^2         :  4994.69·t  (exponent 1; |EM| = |T1| to 1e-9)
+      n = 2.495e7·t^4 :  |EM|/Eenv = 0.99994 (CONSTANT in t, < 1)
+    The raw quantity crosses the demand envelope Eenv exactly at the
+    25v s4d_scale_demand boundary n > (5000·15984/16001)²·t⁴ ≈
+    2.495e7·t⁴ — 25v's scale demand is now confirmed at the quantity
+    level.  So an O(t^{-2}) EM wire EXISTS: W(t) = p8_B(t, ⌈c·t⁴⌉)
+    with term1 = ½(⌈ct⁴⌉)^{-1/2} ≤ ½c^{-1/2}·t⁻² (c = 3.1e7 gives
+    8.98e-5·t⁻² = 90% of the true floor; term2 = O(t⁻⁵), term3 ≤
+    6.1e-22·t⁻⁷).  The 25v residue phrase "a different family or a
+    structural identity" does NOT need to be the EM tail — the EM
+    tail at the t⁴ scale is already the demand shape.
+
+[3] TRUE FLOOR at the d-edge: mown(t, 1/200)/Eenv(t) =
+    0.998937566 (flat for t ≥ 1e4; S4Own scale (t²/(t²+1))²·exp
+    correction).  A closing wire must sit below 0.99894·Eenv.
+
+[4] REFINED RESIDUE (the strip squeeze is 3-term: W + Mr + Mf <
+    mown).  The window-regime residual of the 25ab theorem
+    (M·e^X·X ≤ CG3 = 4.1e-3) does NOT scale with mown ~ 1.0000e-4·
+    t⁻² — so the t⁴ EM wire alone does not close the strip.  The
+    genuine open content, now quantified:
+      (a) the SCALE of the strip pairs' own-composition residuals
+          (the d-dependent definition side — the action-composition
+          item; mown's closed form is the DETECTOR side at 4d²/t²,
+          its definition-side counterpart at the same scale is the
+          unknown), and
+      (b) if (a) is ≤ O(t⁻²): W(t) = p8_B(t, ⌈3.1e7·t⁴⌉) closes the
+          strip with 10% margin on term1 (all other terms o(1)).
+    Also named: [25ae] the SHARPENED T3 bound — the L4 IBP constant
+    (√3/540)|s(s+1)(s+2)|n^{-5/2} is loose by ~t (measured
+    |T3|/|T1| ~ 1e-3 vs bound 2.43e-3·t at list scale); a sharp
+    constant (25aa-style IBP tracking at Re s = ½) would extend the
+    PROvable quantity-level wall |EM| ≥ |T1| − |T2| − L4 from
+    t ≤ ~3.7e5 (where the L4 bound keeps the reverse triangle
+    positive) to all t ≥ 1000.  Pure computation, Lean-able.
+
+[5] BF ADMISSIBILITY TIGHTENED IN LEAN (item 3, the
+    "kick off in the background" job — verification came back ALL
+    PASS in minutes, so the Lean edit landed the same session):
+    `S4G.N_rvm_low_bf` + `S4G.s4g_admissible_bf` (formal/RhAttack/
+    S4Growth.lean, Stage E extension) — the same chain with the
+    Bellotti–Fiori constants (10076/100000, 24460/100000, 808344/
+    100000): main ≥ (63/22)x; log terms ≤ (34536/200000)x +
+    783884/100000; total ≥ (63/22 − 34536/200000)x − 783884/100000 ≥
+    x for x ≥ T0² (x-floor margin 2.6e9×, dps-50:
+    scripts/rh/day026_admissibility_bf.py, out Day file, ALL PASS:
+    ratio 3.24335400295 @ T0², min on [1.2e10, 1e40], same scan as
+    REV2 [4]).  Full lake build GREEN (0 errors, 0 sorry).  The
+    Backlund theorem stands as the REV2-certified set; the BF
+    variant is the ledger's verified current best, now a theorem.
+
+Honest split: PINNED — all [1]–[3] numbers (script + outputs
+committed; float64 sweep with dps-30 cross-validation, the [0]
+discipline note above).  LEAN-PROVEN — s4g_admissible_bf (Stage E
+extension).  CITED — the 25v/25l demand statements it measures.
+NEXT: (a) the strip-composition residual scale (the action item),
+or (b) the 25ae sharpened T3 bound (the nearer-term provable
+extension of the wall).  Neither is decision shaped.

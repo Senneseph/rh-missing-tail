@@ -1,0 +1,25 @@
+========================================================================
+25ab+ BF admissibility verification (dps-50)
+T0 = 110000.0, X0 = T0^2 = 12100000000.0
+C1 = 0.10076, C2 = 0.2446, C3 = 8.08344 (exact rationals)
+
+[1] ratio at T0^2 (need >= 1):
+  N_low_bf(T0^2)/T0^2 = 3.24335400295 : True
+
+[2] min ratio on [T0^2, 1e40] (geomspace scan):
+  min ratio = 3.24335400295 @ 1.21e+10 : True
+
+[3] structural chain (the Lean-proof shape, BF constants):
+  (a) main term: 18/(2pi) >= 63/22 (unchanged from the Backlund chain):
+      18/(2pi) = 2.86478897565 >= 63/22 = 2.86363636364 : True
+  (b) log terms: C1 ln x + C2 ln ln x + C3 <= (C1/2) x + (C2/2)(ln x - 1) + C3
+      <= (C1 + C2)/2 * x + (C3 - C2)   [ln x <= x/2, ln ln x <= ln x - 1]
+      coef = (C1+C2)/2 = 0.17268; const = C3 - C2 = 7.83884
+  (c) need (63/22) x - [coef*x + const] >= x  i.e.  (63/22 - coef - 1) x >= const
+      residual coef = 1.69095636364;  x >= 4.635743517 suffices
+      T0^2 / xneed = 2610153033.0  (margin on the x-floor)
+
+[4] exact-rational floor step at T0^2 (norm_num-able):
+  (63/22)T0^2 - ((C1+C2)/2)T0^2 - (C3-C2) = 32560571992.1612 >= T0^2 : True
+
+ALL PASS
