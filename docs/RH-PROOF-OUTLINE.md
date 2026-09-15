@@ -428,16 +428,22 @@ re-issue history.
   protocol with the discrete tail over ACTUAL zeros to 1.0063e9 (the 25f
   "nominal rows" are now REAL): margin ≥ 1.6 in every window 1e7..3.75e7
   (E ≤ −0.008; the 3.1e7/3.75e7 rows flip nominal→SOUND, 1.91/2.37);
-  the S1 straddle margin then drops **BELOW 1** at 5×10⁷ (0.941,
-  E −0.015) and 7.5×10⁷ (0.714), recovers at 10⁸ (1.447), and stays
-  below 1 at every printed window 1.5×10⁸ (0.779) … 10⁹ (0.020).
-  The sub-1 rows are kernel-robust (best-case E→0 margin |ζ|/B(t) still
-  < 1: 0.954/0.731/0.875/0.54/0.30/0.25/0.29) and floor-dominated (B(t):
-  def_c 6.8 → 440).  Consequence: the pre-registered P1.1e
-  route-retirement rule (25b: "margin < 1 at ≥ 10⁵") FIRES above the
-  (3.75×10⁷, 5×10⁷] boundary — boundary sweep (25x[7]) localizing it,
-  dps-30 pin (25y) staged.  The S1 height-uniformity gap is therefore a
-  MEASURED region (~4×10⁷ upward), not an unknown.
+  the boundary sweep (25x[7], 26 denser windows) then finds the SOUND
+  region extends to 5.2×10⁷ (min 1.277 @ 3.9e7) and the margin drops
+  BELOW 1 for the first time, robustly, at 5.6×10⁷ (0.566, E −0.018,
+  best-case |ζ|/B = 0.57 < 1): it then OSCILLATES (dips 0.566/0.758/
+  0.714/0.713/0.443 (MIN @ 1.1e8)/0.835/0.585/0.620 in (5.4e7, 2e8];
+  8 of 21 windows robustly sub-1; recoveries up to 3.229 @ 7.2e7), is
+  monotone-sub-1 above 2×10⁸ (0.623 @ 3e8, 0.155 @ 5e8, 0.092 @ 6e8,
+  0.020 @ 1e9), and floor-dominated throughout (B(t): def_c 6.8 → 440;
+  B(t) ~ t^{1/2}: 3.02/9.53/30.1 at 1e7/1e8/1e9 — the sharp t^3 n^{−5/2}
+  P4 term — so the best-case envelope |ζ|/B decays: sub-1 is the
+  ASYMPTOTIC regime of the P1.1e wire, 25x[7] note 3).  The
+  pre-registered P1.1e route-retirement rule (25b: "margin < 1 at ≥
+  10⁵") FIRES above the ~5.6×10⁷ onset (sweep 25x[7] LANDED; dps-30
+  pins 25y IN FLIGHT on the 5.6e7 and 1.1e8 dips).  The S1
+  height-uniformity gap is a MEASURED regime (~5.6×10⁷ upward,
+  oscillatory), not an unknown.
 - **The 1e7 repair walk (closeout):** 32-way, 100 h, 0 failures, dt/dt2
   agree on every segment; independent flip count 8,942,252 in
   (6×10⁶, 10⁷] = the LMFDB slice EXACTLY (N(10⁷) = 21,136,121 = LMFDB
@@ -449,8 +455,9 @@ re-issue history.
 **Remaining price (day-024 state — the three named items, per the p1.2
 spec):** (i) GAP-W — the S4 window-regime squeeze past the pinned
 t\* = 690349.0568 ([10³, 1.1×10⁵] GREEN at bound level; beyond t\* the
-deficit is O(1)); (ii) S1-GAP — the measured sub-1 region above ~4×10⁷
-(boundary (3.75×10⁷, 5×10⁷]; sweep 25x[7] + pin 25y pending); (iii)
+deficit is O(1)); (ii) S1-GAP — the measured oscillatory sub-1 regime
+entered at ~5.6×10⁷ (min 0.443 @ 1.1×10⁸; asymptotic: B(t) ~ t^{1/2}
+vs |ζ| ⇒ envelope → 0; sweep 25x[7] LANDED, pins 25y in flight); (iii)
 GAP-O — the own-regime wire of genuinely O(t⁻²) shape (25v: whole
 p8_B family n ≤ 13t/8 excluded; demand envelope Eenv(t) =
 (10⁻⁴)(16001/15984)·t⁻², deficit Kgap·t^{3/2}, Kgap ≈ 3926.494) — or its
@@ -486,8 +493,7 @@ natural route: it reuses exactly the quantities the argument has already
 defined, and the measured margin — dps-30 certified closing
 143.341847457× @ 5×10³ (145.563762319 with the 1e15 remainder),
 verified region [10³, 10⁶] margin ≥ 13.9, screened on ACTUAL zeros
-to 1.0063×10⁹ with margin ≥ 1.6 through 3.75×10⁷ (DISCOVERY_LOG
-25c/25d/25f/25x) — says it is within reach *while it lasts* (see the
+to 1.0063×10⁹ with margin ≥ 1.6 through 3.75×10⁷ and ≥ 1.28 through 5.2×10⁷ (sweep 25x[7]; DISCOVERY_LOG 25c/25d/25f/25x) — says it is within reach *while it lasts* (see the
 route decision below for where it stops).
 
 **Route B — uniform dynamics (classical home turf).** Prove directly that
@@ -502,20 +508,24 @@ re-run on ACTUAL zeros to 1.0063×10⁹) they have made a first choice.
 Below the boundary, the Route-A margin stays above the local residual
 envelope: dps-30 CERTIFIED closing 143.341847457× at t = 5004.7343,
 verified region [10³, 10⁶] margin ≥ 13.9, screened ≥ 1.6 through
-3.75×10⁷ (the old 34.68×/122→2.3 trend and the "2.5×10⁴ crossing"
-RETIRED as the day-023 kernel tail defect, 25b). Above it, the margin
-drops BELOW 1 — measured on actual zeros at 5×10⁷ (0.941) and 7.5×10⁷
-(0.714), robust to the kernel error (best-case |ζ|/B(t) still < 1),
-recovered locally at 10⁸ (1.447), and below 1 at every printed window
-through 10⁹ (0.020 at 10⁹), floor-dominated (the B(t) ln-t floor:
-def_c 6.8 → 440).  The pre-registered retirement clause (25b) therefore
-fires above the (3.75×10⁷, 5×10⁷] boundary at the screening level; the
-dps-30 pin (25y) makes it a certified fact, and the boundary sweep
-(25x[7]) localizes it.  The decomposition of the remainder follows:
-*(i)* on [10³, ~4×10⁷], Route A stands (above t\* = 690349.0568, the
-S4 squeeze bound itself is still to be proven — GAP-W); *(ii)* on
-(~4×10⁷, ∞), Route A's wire has no margin and the argument needs a
-changed zero-side wire (the S1-GAP) or Route B; *(iii)* the S4
+3.75×10⁷ and ≥ 1.28 through 5.2×10⁷ (sweep 25x[7]; the old 34.68×/
+122→2.3 trend and the "2.5×10⁴ crossing" RETIRED as the day-023
+kernel tail defect, 25b). Above it, the margin drops BELOW 1 for the
+first time, robustly, at 5.6×10⁷ (0.566; best-case |ζ|/B(t) = 0.57 <
+1), then oscillates (dips to 0.443 @ 1.1×10⁸, recoveries up to 3.23),
+is monotone sub-1 above 2×10⁸ (0.020 at 10⁹), and is floor-dominated
+throughout (the B(t) ln-t floor: def_c 6.8 → 440; B(t) ~ t^{1/2}, so
+the best-case envelope decays: sub-1 is the asymptotic regime).  The
+pre-registered retirement clause (25b) therefore fires above the
+~5.6×10⁷ onset at the screening level (sweep 25x[7] LANDED); the
+dps-30 pins (25y, in flight on the 5.6e7 and 1.1e8 dips) make it a
+certified fact.  The decomposition of the remainder follows:
+*(i)* on [10³, ~5.6×10⁷], Route A stands (above t\* = 690349.0568,
+the S4 squeeze bound itself is still to be proven — GAP-W); *(ii)* on
+(~5.6×10⁷, ∞), Route A's wire has no margin against the sharp P4
+floor (and none can be restored by tuning: B(t) ~ t^{1/2} beats
+fluctuating |ζ|) and the argument needs a different < side or Route B
+(the S1-GAP); *(iii)* the S4
 own-regime wire requirement (GAP-O, 25v) is a named decision item.
 Either way, the open piece is *stated, bounded below, localized, and
 named* — not a missing ingredient whose shape is unknown.

@@ -3679,22 +3679,27 @@ margin_best = |zeta|/B(t)) is STILL < 1 at every dipping window: 0.954
 (5e7), 0.731 (7.5e7), 0.875 (1.5e8), 0.54 (2.5e8), 0.30 (4e8), 0.25 (6e8),
 0.29 (1e9).  The binding quantity at the dips is B(t) (the P8 ln-t floor:
 def_c = B + resid grows 6.8 -> 440 across the table while |zeta| stays
-O(5-25)): the S1 straddle-squeeze margin genuinely drops below 1 from
-~4e7 upward (modulo the 1e8 recovery), on ACTUAL zeros, at screen level
-with a small, understood kernel bias.  The pre-registered P1.1e
+O(5-25)): the S1 straddle-squeeze margin genuinely drops below 1 — entered at ~5.6e7, OSCILLATORY above
+that (25x[7] sweep: dips 0.443-0.758 in (5.4e7, 2e8], recoveries up to
+3.23), on ACTUAL zeros, at screen level with a small, understood kernel
+bias.  The pre-registered P1.1e
 route-retirement rule (25b: "margin < 1 at >= 1e5 OR E >> 1 at >= 1e5")
 FIRING: the P1.1e uniform-squeeze route (the B-2/b2 kernel as the closure
-wire) is retired above the boundary; coverage of S1 is now:
-  certified [1e3, 1e6]  +  screened-SOUND [1e6, ~4e7]  +  measured S1
-  gap (margin < 1, robust to kernel error) from ~4-5e7 upward.
+wire) is retired above the sub-1 onset; coverage of S1 is now (25x[7]):
+  certified [1e3, 1e6]  +  screened-SOUND [1e6, ~5.4e7]  +  oscillatory
+  sub-1 regime (8/21 windows robustly < 1 in (5.4e7, 2e8], min 0.443 @
+  1.1e8) that IS the asymptotic behavior: B(t) ~ t^{1/2} (measured
+  3.02/9.53/30.1 at 1e7/1e8/1e9; the sharp t^3 n^{−5/2} P4 term at the
+  n* optimum) vs fluctuating |zeta| => the best-case envelope |zeta|/B
+  decays to 0 — no finite wire-tuning of the P1.1e statistic restores
+  margin >= 1 at high t (25x[7] notes 3-4).
   This LOCALIZES prize-roadmap open item #1 (S1 height-uniformity) with
   data: it is not a uniformity subtlety somewhere — it is a measured
-  margin-< 1 region starting ~4e7, oscillatory in ln t (1e8 recovery),
-  floor-dominated (B(t)).  Boundary sharpening: the (3.75e7, 5e7] +
-  (1e8, 1.5e8] boundary sweep runs now (day024_band1e9_sweep.py, 26
-  windows) — PENDING in 25x[7].  The margin < 1 windows need a dps-30
-  certificate (25h-protocol pin) before the retirement is stated as a
-  pinned fact: PENDING as 25y.
+  margin-< 1 regime entered at ~5.6e7 (first robust dip 0.5657),
+  oscillatory in ln t (recoveries 1.02-3.23), floor-dominated (B(t)).
+  Boundary sweep LANDED (25x[7]); the dps-30 pins (25y: the 5.6e7 and
+  1.1e8 robust dips, 25h protocol, LAUNCHED — hi1e9/pins_25y.log) make
+  the retirement a CERTIFIED fact on landing.
 
 (c) The 1e9-row E (-3.88, |K| 48x small) is the same quad-resolution
 disease one octave up (the (1.006e9, 1e18] quad's first node sits ~1.05e9
@@ -3705,8 +3710,55 @@ refinement (more nodes below 1e10) is a cheap follow-up if the 1e9-scale
 number itself is ever needed for a pin.
 
 **25x[7] BOUNDARY SWEEP (day024_band1e9_sweep.py, 26 windows in
-(3.9e7, 2e8] + 3e8/5e8, same protocol/tail):**  [PENDING — fill on land;
-hi1e9/sweep_25x.log]
+(3.9e7, 5e8], same protocol/tail — LANDED; hi1e9/sweep_25x.log):**
+
+      g         margin    g         margin    g         margin
+   3.9e7       1.2768  8.4e7       0.7142  1.4e8       0.8349
+   4.0e7       2.3601  9.0e7       2.4676  1.6e8       0.5853
+   4.25e7      2.0401  9.6e7       0.7132  1.8e8       0.6201
+   4.4e7       2.7999  1.05e8      1.6096  2.0e8       1.0199
+   4.6e7       1.8513  1.1e8       0.4429  3.0e8       0.6227
+   4.8e7       4.5463  1.2e8       1.0065  5.0e8       0.1550
+   5.2e7       1.8846  1.3e8       1.1788  (6e8 0.0918, 1e9 0.0197)
+   5.6e7       0.5657  (all dev = 1.0000; E <= -0.19 through 2e8)
+   6.0e7       2.2658
+   6.4e7       0.7580
+   6.8e7       1.5442
+   7.2e7       3.2287
+   7.8e7       1.4736
+
+  Reading (supersedes the 25x[6] window-granularity sketch):
+  1. SOUND (margin >= 1.28) through 5.2e7 (min 1.2768 @ 3.9e7; 4.55 @
+     4.8e7; 1.88 @ 5.2e7).  Screened-SOUND region on actual zeros:
+     [1e6, ~5.4e7] (certified below: [1e3, 1e6]).
+  2. FIRST ROBUST sub-1 window: 5.6e7 (0.5657, E -0.018, best-case
+     |zeta|/B = 0.57).  The sub-1 region is NOT a clean interval: the
+     margin OSCILLATES (|zeta| spikes vs the smooth B(t) floor; scale
+     ~20% in ln t), dipping 0.566 / 0.758 / 0.714 / 0.713 / 0.443 (MIN
+     @ 1.1e8) / 0.835 / 0.585 / 0.620 in (5.4e7, 2e8] (8 of the 21
+     windows there robustly sub-1, E <= -0.19), recovering 2.27 / 3.23
+     / 2.47 / 1.61 / 1.01 / 1.18 / 1.02, and monotone-sub-1 above
+     2e8 (0.623 @ 3e8, 0.155 @ 5e8, 0.092 @ 6e8, 0.020 @ 1e9).
+  3. ASYMPTOTIC (structural, in the machine-proven P4 exponents):
+     B(t) measured 3.02 / 9.53 / 30.1 at 1e7/1e8/1e9 = proportional to
+     t^{1/2} (the sharp t^3 n^{−5/2} term of the P4 bound at the n*
+     optimum), while |zeta| fluctuates O(1-30): the best-case envelope
+     |zeta|/B DECAYS to 0 — margin < 1 is the EVENTUAL behavior of the
+     P1.1e wire, entered (oscillatory) at ~5.6e7.  Consequence for
+     route planning: no finite tuning of the P1.1e statistic restores
+     margin >= 1 as t -> inf against the sharp P4 floor sqrt(3)/270;
+     the high-t argument needs a different < side or Route B
+     (p1.2 spec, AFTER-25X item 2, updated).
+  4. Pins (25y, 25h dps-30 protocol, LAUNCHED ~25 min each,
+     hi1e9/pins_25y.log): 5.6e7 (g = 56000000.118091769516468, screen
+     0.5657) and 1.1e8 (g = 109999999.909622058272362, screen 0.4429,
+     the min) — on landing, the 25b retirement rule is a CERTIFIED
+     fact, not a screen.
+  5. The 5e8-1e9 rows carry the far-quad bias (E -1.45..-3.88; |K|
+     4-48x small); their sub-1 verdicts ride the envelope (|zeta|/B =
+     0.31/0.25/0.29 < 1) + the monotone floor.  A far-side quad
+     refinement (denser nodes below 1e10) is a staged cheap follow-up
+     if those exact values are ever pinned.
 
 **Honest split (revised):** 25x[1] CITED+VERIFIED-TODAY (RVM gate is the
 arithmetic anchor; min gap is a measurement of the dataset); 25x[2]
