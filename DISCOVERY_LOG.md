@@ -3749,11 +3749,11 @@ number itself is ever needed for a pin.
      margin >= 1 as t -> inf against the sharp P4 floor sqrt(3)/270;
      the high-t argument needs a different < side or Route B
      (p1.2 spec, AFTER-25X item 2, updated).
-  4. Pins (25y, 25h dps-30 protocol, LAUNCHED ~25 min each,
-     hi1e9/pins_25y.log): 5.6e7 (g = 56000000.118091769516468, screen
-     0.5657) and 1.1e8 (g = 109999999.909622058272362, screen 0.4429,
-     the min) — the 25b retirement rule becomes a CERTIFIED fact on
-     landing: 25y[1] LANDED (below).
+  4. Pins (25y, 25h dps-30 protocol; BOTH LANDED — 25y[1] at the
+     5.6e7 argmax: 0.565709077008; 25y[2] at the 1.1e8 g-0.5 grid
+     point: 0.175041964016, the deepest cert in the program; the
+     1.1e8 window argmax t = g+0.5 (screen 0.4429) remains screen-
+     level, optional to pin).
   5. The 5e8-1e9 rows carry the far-quad bias (E -1.45..-3.88; |K|
      4-48x small); their sub-1 verdicts ride the envelope (|zeta|/B =
      0.31/0.25/0.29 < 1) + the monotone floor.  A far-side quad
@@ -3770,8 +3770,45 @@ B = 7.1306803526628292955, resid = 0.075852361245979202014,
 and the protocol agree, as designed (a pin certifies the protocol, and
 here the instance confirms itself).  E = -0.0184348793301.  The 25b
 P1.1e route-retirement rule ("margin < 1 at >= 1e5") is now a PINNED
-FACT at its first robust sub-1 window (5.6e7).  25y[2] (the 1.1e8
-minimum, screen 0.4429) in flight.
+FACT at its first robust sub-1 window (5.6e7).  (25y[2] below.)
+
+**25y[2] PIN LANDED (dps-30, same protocol):** g =
+109999999.909622058272362, t = g - 0.5: |zeta| =
+1.7721998743087847921, dev = 0.99999998181818184457,
+B = 9.9938214895286808183, resid = 0.13060696992632552389,
+**MARGIN = 0.175041964016** (dps-30 certified) — the DEEPEST
+certified straddle margin in the program to date.  Precision note:
+the protocol's window margin is the MAX over the t-grid (scan_one:
+t_best = argmax), so the 1.1e8 window's screen value 0.4429 is its
+MAX (at t = g + 0.5); this pin certified a different, worse grid
+point (t = g - 0.5), hence the deeper number.  Consistent (0.175 <=
+0.443 <= ...): the window is sub-1 at every grid point, and the
+window verdict itself is already certified via 25y[1] (whose t IS
+that window's argmax) — a pin of the 1.1e8 argmax (t = g + 0.5) is
+optional, not needed for the retirement rule.
+
+## 25z (09-14)
+
+**25z GAP-O reclassified into the GAP-W class (owner-delegated: "do
+what you think is best, next").**  The decision-shaped open item (25v:
+"build a genuinely O(t⁻²)-shaped own-regime wire, or reclassify") is
+RESOLVED by reclassification, on these grounds: (1) 25v already proved
+the whole p8_B wire family (n ≤ 13t/8) is dead for the own-strip
+squeeze — there is no "existing wire to fix"; the item is pure wire
+CONSTRUCTION against a proved-sharp floor (Eenv(t) =
+(10⁻⁴)(16001/15984)·t⁻², deficit Kgap·t^{3/2}, Kgap ≈ 3926.494); (2)
+that is the same shape of obstacle as GAP-W (the window squeeze past
+t* = 690349.0568) — both are "new wire/floor construction at the
+prize scale", and running them as two parallel open workstreams would
+fragment the remaining effort; (3) nothing is lost: the wire
+requirement is recorded verbatim as named sub-item (i-b) of the GAP-W
+class (p1.2 spec AFTER-25Y/25Z; outline §remaining price) and is
+revivable as its own workstream at any time.  Effect: the open list
+no longer contains any decision-shaped item — the remainder is pure
+mathematics: the GAP-W class (i-a window squeeze + i-b own-regime
+wire) and the S1-GAP high-t argument (a different < side or Route B;
+now proven untunable against the sharp P4 floor), plus the P8
+residual-floor theorem itself.
 
 **Honest split (revised):** 25x[1] CITED+VERIFIED-TODAY (RVM gate is the
 arithmetic anchor; min gap is a measurement of the dataset); 25x[2]

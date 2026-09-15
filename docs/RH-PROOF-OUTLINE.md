@@ -440,8 +440,8 @@ re-issue history.
   P4 term — so the best-case envelope |ζ|/B decays: sub-1 is the
   ASYMPTOTIC regime of the P1.1e wire, 25x[7] note 3).  The
   pre-registered P1.1e route-retirement rule (25b: "margin < 1 at ≥
-  10⁵") FIRES above the ~5.6×10⁷ onset (sweep 25x[7] LANDED; dps-30
-  pins 25y IN FLIGHT on the 5.6e7 and 1.1e8 dips).  The S1
+  10⁵") FIRES above the ~5.6×10⁷ onset (sweep 25x[7] LANDED; pins 25y
+  LANDED — 0.565709077008 @ 5.6e7, 0.175041964016 @ 1.1e8).  The S1
   height-uniformity gap is a MEASURED regime (~5.6×10⁷ upward,
   oscillatory), not an unknown.
 - **The 1e7 repair walk (closeout):** 32-way, 100 h, 0 failures, dt/dt2
@@ -452,17 +452,20 @@ re-issue history.
 - **PinCensus completeness audit (22):** stands (the day-022 6.7%
   probe-gap retracted there as a probe-path artifact).
 
-**Remaining price (day-024 state — the three named items, per the p1.2
-spec):** (i) GAP-W — the S4 window-regime squeeze past the pinned
-t\* = 690349.0568 ([10³, 1.1×10⁵] GREEN at bound level; beyond t\* the
-deficit is O(1)); (ii) S1-GAP — the measured oscillatory sub-1 regime
-entered at ~5.6×10⁷ (min 0.443 @ 1.1×10⁸; asymptotic: B(t) ~ t^{1/2}
-vs |ζ| ⇒ envelope → 0; sweep 25x[7] LANDED, pins 25y in flight); (iii)
-GAP-O — the own-regime wire of genuinely O(t⁻²) shape (25v: whole
-p8_B family n ≤ 13t/8 excluded; demand envelope Eenv(t) =
-(10⁻⁴)(16001/15984)·t⁻², deficit Kgap·t^{3/2}, Kgap ≈ 3926.494) — or its
-fold into the gapW-class (owner decision pending).  Plus, the
-mathematical gap itself — the residual-floor theorem of §10.
+**Remaining price (day-024 state, 25y/25z):** (i) the GAP-W class —
+(i-a) the S4 window-regime squeeze past the pinned t\* = 690349.0568
+([10³, 1.1×10⁵] GREEN at bound level; beyond t\* the deficit is O(1));
+(i-b) GAP-O, RECLASSIFIED INTO THIS CLASS (25z, owner-delegated): the
+own-regime squeeze below Eenv(t) = (10⁻⁴)(16001/15984)·t⁻² needs a
+genuinely O(t⁻²)-shaped wire (25v: whole p8_B family n ≤ 13t/8
+excluded; deficit Kgap·t^{3/2}, Kgap ≈ 3926.494) — the same shape of
+obstacle as (i-a), new wire construction against a proved-sharp floor;
+recorded as a named sub-item, no longer an open decision.  (ii) S1-GAP
+— the measured, asymptotic, oscillatory sub-1 regime entered at
+~5.6×10⁷ (pins 25y LANDED: 0.565709077008 @ 5.6e7, deepest cert
+0.175041964016 @ 1.1e8; B(t) ~ t^{1/2} ⇒ envelope → 0; untunable — a
+different < side or Route B is required).  Plus, the mathematical gap
+itself — the residual-floor theorem of §10.
 
 **The certified data record** (all numbers reproducible from committed scripts and data; day-023 25b closeout + day-024 25w addition — superseding the day-014 note):
 N(10⁷) = 21,136,121 (independent 100-h two-engine walk: 12,193,869
@@ -517,9 +520,11 @@ is monotone sub-1 above 2×10⁸ (0.020 at 10⁹), and is floor-dominated
 throughout (the B(t) ln-t floor: def_c 6.8 → 440; B(t) ~ t^{1/2}, so
 the best-case envelope decays: sub-1 is the asymptotic regime).  The
 pre-registered retirement clause (25b) therefore fires above the
-~5.6×10⁷ onset at the screening level (sweep 25x[7] LANDED); the
-dps-30 pins (25y, in flight on the 5.6e7 and 1.1e8 dips) make it a
-certified fact.  The decomposition of the remainder follows:
+~5.6×10⁷ onset at the screening level (sweep 25x[7] LANDED) and is PINNED
+(25y LANDED: 0.565709077008 @ 5.6e7 on the window argmax — a dps-30
+certification of the window's protocol margin — plus
+0.175041964016 @ 1.1e8, the deepest cert in the program).  The
+decomposition of the remainder follows:
 *(i)* on [10³, ~5.6×10⁷], Route A stands (above t\* = 690349.0568,
 the S4 squeeze bound itself is still to be proven — GAP-W); *(ii)* on
 (~5.6×10⁷, ∞), Route A's wire has no margin against the sharp P4
