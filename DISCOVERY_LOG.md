@@ -3760,6 +3760,16 @@ number itself is ever needed for a pin.
      refinement (denser nodes below 1e10) is a staged cheap follow-up
      if those exact values are ever pinned.
 
+**Honest split (revised):** 25x[1] CITED+VERIFIED-TODAY (RVM gate is the
+arithmetic anchor; min gap is a measurement of the dataset); 25x[2]
+DECISION (protocol extension, the difference from 25f documented);
+25x[3] MEASURED (in-situ validation of the extension kernel at a certified
+point — not a re-certification; existing pins untouched); 25x[4] DECISION
+(resource limit, documented); 25x[5] MEASURED (screen level: float64
+discrete + dps-30 quad, per 25c/25f discipline); 25x[6] MEASURED+DECISION
+(the margin < 1 windows are robust measurements; the route retirement is
+the standing rule FIRING on them — the rule was pre-registered in 25b);
+25x[7] LANDED (sweep; 25y[1]/[2] pins LANDED — see below; 25z reclassification).
 **25y[1] PIN LANDED (dps-30, 25h protocol + extended-tail kernel):**
 the first robust sub-1 window — g = 56000000.118091769516468,
 t = g - 4: |zeta| = 4.0768015615158219747,
@@ -3810,13 +3820,113 @@ wire) and the S1-GAP high-t argument (a different < side or Route B;
 now proven untunable against the sharp P4 floor), plus the P8
 residual-floor theorem itself.
 
-**Honest split (revised):** 25x[1] CITED+VERIFIED-TODAY (RVM gate is the
-arithmetic anchor; min gap is a measurement of the dataset); 25x[2]
-DECISION (protocol extension, the difference from 25f documented);
-25x[3] MEASURED (in-situ validation of the extension kernel at a certified
-point — not a re-certification; existing pins untouched); 25x[4] DECISION
-(resource limit, documented); 25x[5] MEASURED (screen level: float64
-discrete + dps-30 quad, per 25c/25f discipline); 25x[6] MEASURED+DECISION
-(the margin < 1 windows are robust measurements; the route retirement is
-the standing rule FIRING on them — the rule was pre-registered in 25b);
-25x[7] PENDING.
+## 25aa (09-15) — GAP-W investigation, phase 1: the wire-family map
+(day025_gapw_wires.py + out_day025_gapw_wires.txt; owner: "let's
+investigate GAP-W")
+
+Setup: GAP-W (S4Asm `gapW`) = for t > T0 = 1.1e5,
+p8_B(t, floor(13t/8)) + M e^{X(t)} X(t) < 0.9975 for 0 <= M <=
+Zbound(t) = 1.6 t^{1/4} ln t, X = the Xval wire (G, B] = (1e7, 1e8].
+Two structure facts from the Lean files anchor the investigation:
+(i) `p8_B_floor` (P8Floor, LEAN-PROVEN) is UNIVERSAL in n —
+‖p4_em_expr s n‖ <= p8_B t n for EVERY n — and p8_B decreases in n
+(all negative powers): the branch N witness of the closure is free
+("any branch is a valid wire", S4Window header); (ii)
+`b3BoundExplicit` (B3Sbar.lean:433) is generic in (L, t, G, B) with
+side-conditions 0 < t < G, e <= G, G < B and the S̄ counting-fluctuation
+hypothesis (CITED ledger: Platt–Trudgian, the SAME input class as the
+Xval pin) — so the band endpoints are also free witnesses.  13t/8 +
+(1e7, 1e8] is therefore just the LOW-T instantiation of the wire.
+
+**R1 — codified bound-level crossing (NEW number).**  The codified
+gapW (M <= Zbound — the CITED convexity wire, not |zeta|) on the
+13t/8 + Xval wire crosses the floor at **t_Z = 113957.2826** (this
+run, dps-30; the 25m pin t_c = 113957.110061, delta 0.17 = a
+precision/kernel artifact — the 25m pin stays the authoritative
+recorded value).  The codified bound-level wire has essentially NO
+budget beyond T0 (the S4W-header margin 0.0591 at T0 is the whole
+rest; crossing at 1.036*T0; then the Xval pole uw -> 1 at G = 1e7:
+D -> +inf, +94 at 9e5 already).  Never previously isolated: 25l
+reported the |zeta|-mass variant.
+
+**R2 — CORRECTION of 25l[3] (honest record).**  25l[3]'s UNIFORM
+claim ("the window-regime squeeze HOLDS TO t* = 690349.0568", i.e.
+for all t <= t*) is REFUTED by direct dps-30 evaluation of the 25l
+kernel verbatim (B_best + Xval(1+|zeta|) - 0.9975): the measured-mass
+deficit OSCILLATES.  Exact structure (this run):
+  - first violation: **t1 = 495802.9022** (crossing; 50-bisect);
+  - oscillatory deficit region (495802.9, 818712.8): 352 grid sign
+    changes on the 1400-pt scan, 359 of 1400 sampled points violative
+    (the |zeta|*X ripple crosses the 0.9975 budget repeatedly — 176
+    crossings; NOT a measure-zero island);
+  - the pinned t* = 690349.0568 is a RIPPLE ROOT: D(t*) = +2.5e-5
+    (it sits inside a violative island) — the 25l single-pass
+    bisection over [1e3, 9.9e6] landed there by path, and the record
+    mistook the path root for the uniform boundary;
+  - permanent onset: **tau_perm = 818712.834** (60-bisect on the last
+    upward crossing); D > 0 for t > tau_perm through the pole at 1e7.
+  Corrected statement: the measured-mass wire HOLDS on [1e3,
+  495802.9022), oscillates in (495802.9, 818712.8], and fails
+  permanently from 818712.834.  No LEAN fact is affected (25l[3] was
+  a measurement — S4W/S4Asm carry tStar as "PINNED, a measurement not
+  a proof", and S4a's proven interval [1000, 1.1e5] uses the Zbound
+  wire, not |zeta|).  The S4Asm header line and the p1.2 spec's
+  "numerically green to t*" claim will be annotated accordingly
+  (phase 2).
+
+**R3 — GAP-W CLOSES at the bound level by the growing-wire family
+(HEADLINE).**  Map D(t) = p8_B(t, floor(t^q)) + X_{t^r}(t) + Zbound
+e^X X - 0.9975 with X_{t^r} = Bf(t, t^r)(Sbar 2t^r + Sbar t^r) +
+Cf(t, t^r) Kbar t^r, on (1.05e5, 1e18), 4000-pt log grid, for
+(q, r) in {(2,2), (1.5,1.5), (2,1.5), (3,2), (2.5,2), (1.5,2)}:
+EVERY family stays below the floor at EVERY t (max at the left edge,
+D in [-0.997499, -0.9485]); the (q, r) = (2,2) family gives TOTAL
+WIRE <= 5.36e-6 at T0, then decays: p8_B(t, floor(t^2)) ~
+1/2 t^{-1} + t^{-2}/12 + 9.07e-3 t^{-2} (the t^3 n^{-5/2} term at
+n ~ t^2), X ~ (0.66 ln t + 7) t^{-2}, Mf ~ 1.05 t^{-1.75} (ln t)^2:
+  t = 1.1e5: wire 5.36e-6 (D = -0.997495);  1e6: 5.2e-7;
+  1e9: ~4e-10;  1e18: ~1e-19.  Margin >= 0.997 to the floor at every
+t > T0.  Admissibility (all free witnesses): G = t^2 > t (t > 1);
+n = t^2 <= N(t^2) — RVM two-sided LOWER bound, e.g. N(x) >=
+(x/2pi)(ln(x/2pi) - 1) - 0.01 x/ln x (Brent–Saldanha-type explicit
+form, x >= 1e6 — CITED ledger line to be added to FORMULAS; the 0.01x
+/ln x error term is the standard explicit S-bar companion) gives
+N(t^2) >= t^4/4 >= t^2 for t >= 2 (diagnostic at T0: RVM N >= 3.92e10
+vs n = 1.21e10, 3.2x margin); the far tail (2t^2, inf) is under the
+A4.1b far floor 1 (LEAN).  CONCLUSION: with the family wire (n =
+floor(t^2), G = t^2, B = 2 t^2), the window-regime bound-level
+squeeze holds for ALL t > T0; joined with S4a GREEN on [1000, T0]
+(13t/8 wire), the WINDOW REGIME is closed on [1000, inf) at the bound
+level, pending the Lean formalization (phase 2).  The bound-level RH
+residue (S4Asm header) thereby REDUCES at the window level: gapW
+becomes a theorem; what remains of the S4 body is the OWN-regime item
+(the sharper wire / gapO, reclassified in as (i-b) by 25z).
+Honest caveats: (a) the map is float64 p8_B + dps-30 wires — phase 2
+re-certifies every endpoint constant at dps-50 with directional
+rounding (the S4a protocol, day023_s4a_constants.py style) before any
+Lean norm_num closes; (b) the band (t^2, 2t^2] input hS is the SAME
+S̄ CITED ledger as the Xval pin (Platt–Trudgian, FORMULAS 1.3) — no
+zero DATA needed for the growing band, only the cited counting-
+fluctuation bound; (c) |C| >= 1 and the convexity constant 1.6
+(Zbound) remain CITED exactly as in S4a (no new cited input).
+
+**R4 — interaction with S1-GAP (scope note, for phase 3).**  The
+family wire shows the WINDOW-regime bound side at high t is
+negligible (<= 5.4e-6), not O(1): the closure's N witness is free, so
+the bound side does NOT have to sit at the P4Limit n* ~ 0.49t scale
+(where p8_B ~ sqrt(t) — the scale the 25x S1-GAP measurement fights
+against).  The zero-side content remains the S1 hypothesis of the P12
+conjunction (25x measured it failing against the B(t) ~ sqrt(t) floor
+from 5.6e7).  How S1's demand re-formulates at high t once gapW is a
+theorem (the zero side only needs to beat the FAMILY bound side,
+<= 5.4e-6 at window level — a demand the measured zero side |zeta|
+= O(1-30), dev = 1 clears by orders of magnitude) is a P12-level
+question deferred to phase 3 — stated here so the phase-2
+formalization does not accidentally absorb it.
+
+**NEXT (phase 2):** formal/RhAttack/S4Growth.lean — the family
+theorem (endpoint constants + monotonicity + floor/floor-family
+lemmas, S4a lemma-bank style) + the admissibility ledger line (RVM
+lower bound) in FORMULAS + S4Asm header/doc sync (R2 annotation) +
+p1.2 spec S4 state.  (phase 3): re-read the P12 conjunction with
+gapW a theorem (R4).
