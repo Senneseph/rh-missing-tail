@@ -52,6 +52,7 @@ header for the uIcc/Nat.cast_add/ContinuousOn.mono conventions):
 STATUS (2026-09-15, Lean 4.33.1): atoms L1, L2, L3, L4, L5.a-e GREEN.  L4 is the missing-tail law (IBP route: `p4_op2c_bound` + `p4_f2_tail_bound`); L5 is the composition root: `p4_Tn_Tendsto` (L5.a, the M-to-infinity limit of the tail partial sums), `p4_zeta_split` (L5.b), `p4_Tn_eq` (L5.c, the tsum passage to `p4_Tn_lim`), `p4_identity` (L5.d, the P4 line-statement for Re s > 1) and `p4_T4_bound` (L5.e, the bound on `p4_em_expr` at Re s = 1/2; the W_n-equality at Re s = 1/2 is cited, DLMF 25.2.8 / Apostol 12.21 - see section doc) and L5.f (`p4_one_minus_s_conj`, `p4_T4_ratio`) the T4 ratio corollary - the correction scale |1-s| = |s| on the critical line and the three-term ratio bound, pure division algebra from L5.e.  No sorry.
 STATUS (2026-09-16, Lean 4.33.1): 25ae Stage 3A GREEN - periodic `B8` (def + measurability + `B8_of_Icc_int` + `abs_B8_le` via the pure-algebra `B8poly_bound_Icc`), the finite telescoping lemma `p4_25ae_telescope_pow` (own induction; no Ico-telescope in mathlib 4.33.1), and `p4_25ae_J_finite` (the finite-M identity for the EM tail integral: the 7-level per-period IBP ladder over period sums S3-S8, endpoint differences at n and M with the verbatim Stage-2 coefficient atoms, and the B8 period-sum residue S8).  Full package build: 17434 jobs, 0 errors, 0 sorry.
 STATUS (2026-09-16, Lean 4.33.1): 25ae Stage 3B atoms 3B.1-3B.10 GREEN - `p4_25ae_J_iota` (M -> oo passage), `p4_25ae_int_Icc_rpow172`/`_Ioi_rpow172` (FTC-2), `p4_25ae_I8_bound` (|I8| <= n^(-15/2)/225), `p4_25ae_t3kernel_integrableOn_Ioi`, `p4_25ae_J_eq` (the EM tail equals the exact 4-term expression), and `p4_25ae_T3_bound` (the sharpened 4-term triangle bound with the CORRECTED exponents: n^(-7/2), n^(-11/2), n^(-15/2), n^(-15/2) - the anchor F1 script's n^(-9/2) second-term exponent was WRONG: on the critical line Re(-s-5) = -11/2).  The 25ae wall re-anchors to t ~= 1.217e8 at list scale; see DISCOVERY_LOG 25ae Stage 3B.
+STATUS (2026-09-16, Lean 4.33.1): 25ae Stage 3B.11 Part A GREEN - the list-scale wall for 1 <= t <= 13 (four bands `t3w_wall_A1`-`A4`: T3UB < 35/78, 35/234, 35/312, 35/390 via endpoint sqrt-constants `t3w_qB_r` (strict isqrt rational upper bounds of `sqrt(t3w_prod t* r)`) and `n^{-p}`-constants `t3w_rB_r`; term indices {2,4,6,7} match the four `p4_25ae_T3_bound` terms; all comparisons close by norm_num; constants: scripts/rh/day026_25ae_t3wall.py).  Part B (13 <= t <= 1e8, log-derivative method) is the next batch.
 THEOREMS (L1): p4_f_hasDerivAt, p4_f1_hasDerivAt, p4_f2_hasDerivAt,
  p4_f1_at, p4_f2_at, p4_f1_on_Icc, p4_f2_on_Icc.
 THEOREMS (L2): p4_integral_closed, p4_finite_em2.
@@ -3793,7 +3794,642 @@ theorem p4_Tn_Tendsto {s : ℂ} (hsσ : 1 < s.re) (n : ℕ) (hn : 0 < n) :
               (n : ℝ) ^ (-(15 : ℝ) / 2) / 1209600 +
             ‖s * (s + 1) * (s + 2) * (s + 3) * (s + 4) * (s + 5) * (s + 6) * (s + 7)‖ *
               (n : ℝ) ^ (-(15 : ℝ) / 2) / 9072000 := by ring
+
+/- 25ae Stage 3B.11 -- The list-scale wall for the sharpened T3 bound.
+   Part A (1 <= t <= 13), four bands.  Endpoint constants (records in
+   scripts/rh/day026_25ae_t3wall.py, exact Fraction + isqrt):
+   t3w_qB_r = strict rational upper bound of sqrt(t3w_prod t* r) at the band
+   endpoint t*; t3w_rB_r = strict rational upper bound of (n_min)^(-p_r).
+   The product indices i in {2,4,6,7} match the four terms of
+   p4_25ae_T3_bound (3, 5, 7, 8 factors; i = 7 is the |S6|*|s+7| product).
+   Every comparison closes by norm_num.  Part B (13 <= t <= 1e8): batch 2. -/
+set_option maxSynthPendingDepth 8
+
+/-- t3w_prod t i = prod_{k <= i} (t^2 + (k + 1/2)^2). -/
+def t3w_prod (t : ℝ) (i : ℕ) : ℝ :=
+  ∏ k ∈ Finset.range (i + 1), (t ^ 2 + (k + 1 / 2 : ℝ) ^ 2)
+
+/-- Powers p_i of the list scale n in term i (7/2, 11/2, 15/2, 15/2). -/
+def t3w_p (i : ℕ) : ℝ :=
+  if i = 2 then 7 / 2 else if i = 4 then 11 / 2 else if i = 6 then 15 / 2
+  else if i = 7 then 15 / 2 else 0
+
+/-- Denominators d_i (720, 30240, 1209600, 9072000). -/
+def t3w_d (i : ℕ) : ℝ :=
+  if i = 2 then 720 else if i = 4 then 30240 else if i = 6 then 1209600
+  else if i = 7 then 9072000 else 1
+
+/-- Term i of the sharpened T3 bound at list scale: |S_i(t)| * n^{-p_i} / d_i. -/
+def t3w_term (n : ℕ) (t : ℝ) (i : ℕ) : ℝ :=
+  Real.sqrt (t3w_prod t i) * (n : ℝ) ^ (-(t3w_p i)) / (t3w_d i)
+
+/-- The sharpened 4-term bound. -/
+def t3w_T3UB (n : ℕ) (t : ℝ) : ℝ :=
+  t3w_term n t 2 + t3w_term n t 4 + t3w_term n t 6 + t3w_term n t 7
+
+/-- t3w_prod is increasing for 0 <= t <= t′. -/
+theorem t3w_prod_mono {t t' : ℝ} (h0 : 0 <= t) (h : t <= t') (i : ℕ) :
+    t3w_prod t i <= t3w_prod t' i := by
+  dsimp only [t3w_prod]
+  gcongr
+  all_goals nlinarith [sq_le_sq (by linarith [h0]) (by linarith [h0, h])]
+
+/-- n^{-p} <= 1 for n >= 1 and p > 0. -/
+theorem t3w_invpow_le_one (n : ℕ) (hn : 1 <= n) (p : ℝ) (hp : 0 < p) :
+    (n : ℝ) ^ (-p) <= 1 := by
+  have h1p : (1 : ℝ) <= (n : ℝ) ^ p := Real.one_le_rpow (by exact_mod_cast hn) hp.le
+  calc
+    (n : ℝ) ^ (-p) = ((n : ℝ) ^ p)⁻¹ := by rw [rpow_neg (Nat.cast_nonneg n)]
+    _ = 1 / (n : ℝ) ^ p := by rw [inv_eq_one_div]
+    _ <= 1 / 1 := (one_div_le_one_div (by positivity) (by norm_num : 0 < (1 : ℝ))).mpr h1p
+    _ = 1 := by norm_num
+
+def t3w_qA1_2 : ℝ := (2218821909 : ℝ) / 308915776
+def t3w_rA1_2 : ℝ := (1 : ℝ) / 1
+def t3w_qA1_4 : ℝ := (17550033412413605 : ℝ) / 141167095653376
+def t3w_rA1_4 : ℝ := (1 : ℝ) / 1
+def t3w_qA1_6 : ℝ := (149512256733405629341179 : ℝ) / 32254987351648575488
+def t3w_rA1_6 : ℝ := (1 : ℝ) / 1
+def t3w_qA1_7 : ℝ := (1536332078500642084460770895 : ℝ) / 43608742899428874059776
+def t3w_rA1_7 : ℝ := (1 : ℝ) / 1
+
+theorem t3w_qA1 :
+    Real.sqrt (t3w_prod (16 / 13) 2) < t3w_qA1_2 ∧
+    Real.sqrt (t3w_prod (16 / 13) 4) < t3w_qA1_4 ∧
+    Real.sqrt (t3w_prod (16 / 13) 6) < t3w_qA1_6 ∧
+    Real.sqrt (t3w_prod (16 / 13) 7) < t3w_qA1_7 := by
+  refine ⟨?_, ?_, ?_, ?_⟩
+  all_goals exact (Real.sqrt_lt' (by norm_num [t3w_qA1_2, t3w_rA1_2, t3w_qA1_4, t3w_rA1_4, t3w_qA1_6, t3w_rA1_6, t3w_qA1_7, t3w_rA1_7])).mpr (by norm_num [t3w_prod, t3w_qA1_2, t3w_rA1_2, t3w_qA1_4, t3w_rA1_4, t3w_qA1_6, t3w_rA1_6, t3w_qA1_7, t3w_rA1_7])
+
+def t3w_qA2_2 : ℝ := (5199 : ℝ) / 64
+def t3w_rA2_2 : ℝ := (1 : ℝ) / 8
+def t3w_qA2_4 : ℝ := (2661867 : ℝ) / 1024
+def t3w_rA2_4 : ℝ := (1 : ℝ) / 32
+def t3w_qA2_6 : ℝ := (2210599813 : ℝ) / 16384
+def t3w_rA2_6 : ℝ := (1 : ℝ) / 128
+def t3w_qA2_7 : ℝ := (75160393639 : ℝ) / 65536
+def t3w_rA2_7 : ℝ := (1 : ℝ) / 128
+
+theorem t3w_qA2 :
+    Real.sqrt (t3w_prod (4) 2) < t3w_qA2_2 ∧
+    Real.sqrt (t3w_prod (4) 4) < t3w_qA2_4 ∧
+    Real.sqrt (t3w_prod (4) 6) < t3w_qA2_6 ∧
+    Real.sqrt (t3w_prod (4) 7) < t3w_qA2_7 := by
+  refine ⟨?_, ?_, ?_, ?_⟩
+  all_goals exact (Real.sqrt_lt' (by norm_num [t3w_qA2_2, t3w_rA2_2, t3w_qA2_4, t3w_rA2_4, t3w_qA2_6, t3w_rA2_6, t3w_qA2_7, t3w_rA2_7])).mpr (by norm_num [t3w_prod, t3w_qA2_2, t3w_rA2_2, t3w_qA2_4, t3w_rA2_4, t3w_qA2_6, t3w_rA2_6, t3w_qA2_7, t3w_rA2_7])
+
+def t3w_qA3_2 : ℝ := (17499 : ℝ) / 32
+def t3w_rA3_2 : ℝ := (1 : ℝ) / 432
+def t3w_qA3_4 : ℝ := (22440241 : ℝ) / 512
+def t3w_rA3_4 : ℝ := (1 : ℝ) / 15552
+def t3w_qA3_6 : ℝ := (17964810777 : ℝ) / 4096
+def t3w_rA3_6 : ℝ := (1 : ℝ) / 559872
+def t3w_qA3_7 : ℝ := (3151992477389 : ℝ) / 65536
+def t3w_rA3_7 : ℝ := (1 : ℝ) / 559872
+
+theorem t3w_qA3 :
+    Real.sqrt (t3w_prod (8) 2) < t3w_qA3_2 ∧
+    Real.sqrt (t3w_prod (8) 4) < t3w_qA3_4 ∧
+    Real.sqrt (t3w_prod (8) 6) < t3w_qA3_6 ∧
+    Real.sqrt (t3w_prod (8) 7) < t3w_qA3_7 := by
+  refine ⟨?_, ?_, ?_, ?_⟩
+  all_goals exact (Real.sqrt_lt' (by norm_num [t3w_qA3_2, t3w_rA3_2, t3w_qA3_4, t3w_rA3_4, t3w_qA3_6, t3w_rA3_6, t3w_qA3_7, t3w_rA3_7])).mpr (by norm_num [t3w_prod, t3w_qA3_2, t3w_rA3_2, t3w_qA3_4, t3w_rA3_4, t3w_qA3_6, t3w_rA3_6, t3w_qA3_7, t3w_rA3_7])
+
+def t3w_qA4_2 : ℝ := (144241 : ℝ) / 64
+def t3w_rA4_2 : ℝ := (1 : ℝ) / 6591
+def t3w_qA4_4 : ℝ := (213715271 : ℝ) / 512
+def t3w_rA4_4 : ℝ := (1 : ℝ) / 1113879
+def t3w_qA4_6 : ℝ := (701541006115 : ℝ) / 8192
+def t3w_rA4_6 : ℝ := (1 : ℝ) / 188245551
+def t3w_qA4_7 : ℝ := (42115838574947 : ℝ) / 32768
+def t3w_rA4_7 : ℝ := (1 : ℝ) / 188245551
+
+theorem t3w_qA4 :
+    Real.sqrt (t3w_prod (13) 2) < t3w_qA4_2 ∧
+    Real.sqrt (t3w_prod (13) 4) < t3w_qA4_4 ∧
+    Real.sqrt (t3w_prod (13) 6) < t3w_qA4_6 ∧
+    Real.sqrt (t3w_prod (13) 7) < t3w_qA4_7 := by
+  refine ⟨?_, ?_, ?_, ?_⟩
+  all_goals exact (Real.sqrt_lt' (by norm_num [t3w_qA4_2, t3w_rA4_2, t3w_qA4_4, t3w_rA4_4, t3w_qA4_6, t3w_rA4_6, t3w_qA4_7, t3w_rA4_7])).mpr (by norm_num [t3w_prod, t3w_qA4_2, t3w_rA4_2, t3w_qA4_4, t3w_rA4_4, t3w_qA4_6, t3w_rA4_6, t3w_qA4_7, t3w_rA4_7])
+
+/-- A1: 1 <= t < 16 / 13 (n >= 1). -/
+theorem t3w_wall_A1 {t : ℝ} (ht : 1 <= t) (htb : t < 16 / 13) {n : ℕ}
+    (hn : n = ⌊(13 : ℝ) * t / 8⌋₊) :
+    t3w_T3UB n t < 35 / 78 := by
+  have hnmin : 1 <= n := by
+    rw [hn]
+    exact (Nat.le_floor_iff' (show (1 : ℕ) ≠ 0 from by norm_num)).mpr (by linarith [ht])
+  have htstar : t <= 16 / 13 := htb.le
+  have h0t : 0 <= t := by linarith [ht]
+  have hS2 : Real.sqrt (t3w_prod t 2) < t3w_qA1_2 := by
+    exact lt_of_le_of_lt (Real.sqrt_le_sqrt (t3w_prod_mono h0t htstar 2)) t3w_qA1.1
+  have hS4 : Real.sqrt (t3w_prod t 4) < t3w_qA1_4 := by
+    exact lt_of_le_of_lt (Real.sqrt_le_sqrt (t3w_prod_mono h0t htstar 4)) t3w_qA1.2.1
+  have hS6 : Real.sqrt (t3w_prod t 6) < t3w_qA1_6 := by
+    exact lt_of_le_of_lt (Real.sqrt_le_sqrt (t3w_prod_mono h0t htstar 6)) t3w_qA1.2.2.1
+  have hS7 : Real.sqrt (t3w_prod t 7) < t3w_qA1_7 := by
+    exact lt_of_le_of_lt (Real.sqrt_le_sqrt (t3w_prod_mono h0t htstar 7)) t3w_qA1.2.2.2
+  have hR2 : (n : ℝ) ^ (-( 7/2 : ℝ)) <= t3w_rA1_2 := by
+    calc
+      (n : ℝ) ^ (-( 7/2 : ℝ)) <= 1 := t3w_invpow_le_one n (by linarith [hnmin]) (7/2) (by norm_num)
+      _ <= t3w_rA1_2 := by norm_num [t3w_rA1_2]
+  have hR4 : (n : ℝ) ^ (-( 11/2 : ℝ)) <= t3w_rA1_4 := by
+    calc
+      (n : ℝ) ^ (-( 11/2 : ℝ)) <= 1 := t3w_invpow_le_one n (by linarith [hnmin]) (11/2) (by norm_num)
+      _ <= t3w_rA1_4 := by norm_num [t3w_rA1_4]
+  have hR6 : (n : ℝ) ^ (-( 15/2 : ℝ)) <= t3w_rA1_6 := by
+    calc
+      (n : ℝ) ^ (-( 15/2 : ℝ)) <= 1 := t3w_invpow_le_one n (by linarith [hnmin]) (15/2) (by norm_num)
+      _ <= t3w_rA1_6 := by norm_num [t3w_rA1_6]
+  have hR7 : (n : ℝ) ^ (-( 15/2 : ℝ)) <= t3w_rA1_7 := by
+    calc
+      (n : ℝ) ^ (-( 15/2 : ℝ)) <= 1 := t3w_invpow_le_one n (by linarith [hnmin]) (15/2) (by norm_num)
+      _ <= t3w_rA1_7 := by norm_num [t3w_rA1_7]
+  have hT2 : t3w_term n t 2 < t3w_qA1_2 * t3w_rA1_2 / 720 := by
+    calc
+      t3w_term n t 2 = Real.sqrt (t3w_prod t 2) * (n : ℝ) ^ (-( 7/2 : ℝ)) / 720 := by
+        simp [t3w_term, t3w_p, t3w_d]
+      _ <= Real.sqrt (t3w_prod t 2) * (t3w_rA1_2 : ℝ) / 720 := by
+        gcongr
+        all_goals (try exact hR2) <;> (try exact le_of_lt hR2) <;> (try norm_num [t3w_rA1_2]) <;> (try positivity)
+      _ < t3w_qA1_2 * (t3w_rA1_2 : ℝ) / 720 := by
+        gcongr
+        all_goals (try exact hS2) <;> (try norm_num [t3w_qA1_2, t3w_rA1_2]) <;> (try positivity)
+  have hT4 : t3w_term n t 4 < t3w_qA1_4 * t3w_rA1_4 / 30240 := by
+    calc
+      t3w_term n t 4 = Real.sqrt (t3w_prod t 4) * (n : ℝ) ^ (-( 11/2 : ℝ)) / 30240 := by
+        simp [t3w_term, t3w_p, t3w_d]
+      _ <= Real.sqrt (t3w_prod t 4) * (t3w_rA1_4 : ℝ) / 30240 := by
+        gcongr
+        all_goals (try exact hR4) <;> (try exact le_of_lt hR4) <;> (try norm_num [t3w_rA1_4]) <;> (try positivity)
+      _ < t3w_qA1_4 * (t3w_rA1_4 : ℝ) / 30240 := by
+        gcongr
+        all_goals (try exact hS4) <;> (try norm_num [t3w_qA1_4, t3w_rA1_4]) <;> (try positivity)
+  have hT6 : t3w_term n t 6 < t3w_qA1_6 * t3w_rA1_6 / 1209600 := by
+    calc
+      t3w_term n t 6 = Real.sqrt (t3w_prod t 6) * (n : ℝ) ^ (-( 15/2 : ℝ)) / 1209600 := by
+        simp [t3w_term, t3w_p, t3w_d]
+      _ <= Real.sqrt (t3w_prod t 6) * (t3w_rA1_6 : ℝ) / 1209600 := by
+        gcongr
+        all_goals (try exact hR6) <;> (try exact le_of_lt hR6) <;> (try norm_num [t3w_rA1_6]) <;> (try positivity)
+      _ < t3w_qA1_6 * (t3w_rA1_6 : ℝ) / 1209600 := by
+        gcongr
+        all_goals (try exact hS6) <;> (try norm_num [t3w_qA1_6, t3w_rA1_6]) <;> (try positivity)
+  have hT7 : t3w_term n t 7 < t3w_qA1_7 * t3w_rA1_7 / 9072000 := by
+    calc
+      t3w_term n t 7 = Real.sqrt (t3w_prod t 7) * (n : ℝ) ^ (-( 15/2 : ℝ)) / 9072000 := by
+        simp [t3w_term, t3w_p, t3w_d]
+      _ <= Real.sqrt (t3w_prod t 7) * (t3w_rA1_7 : ℝ) / 9072000 := by
+        gcongr
+        all_goals (try exact hR7) <;> (try exact le_of_lt hR7) <;> (try norm_num [t3w_rA1_7]) <;> (try positivity)
+      _ < t3w_qA1_7 * (t3w_rA1_7 : ℝ) / 9072000 := by
+        gcongr
+        all_goals (try exact hS7) <;> (try norm_num [t3w_qA1_7, t3w_rA1_7]) <;> (try positivity)
+  calc
+    t3w_T3UB n t = t3w_term n t 2 + t3w_term n t 4 + t3w_term n t 6 + t3w_term n t 7 := rfl
+    _ < t3w_qA1_2 * (t3w_rA1_2 : ℝ) / 720 + t3w_qA1_4 * (t3w_rA1_4 : ℝ) / 30240 +
+        t3w_qA1_6 * (t3w_rA1_6 : ℝ) / 1209600 + t3w_qA1_7 * (t3w_rA1_7 : ℝ) / 9072000 := by
+      gcongr
+      all_goals (try exact hT2) <;> (try exact hT4) <;> (try exact hT6) <;> (try exact hT7) <;> (try norm_num) <;> (try positivity)
+    _ < 35 / 78 := by norm_num [t3w_qA1_2, t3w_rA1_2, t3w_qA1_4, t3w_rA1_4, t3w_qA1_6, t3w_rA1_6, t3w_qA1_7, t3w_rA1_7]
+
+/-- A2: 16 / 13 <= t < 4 (n >= 2). -/
+theorem t3w_wall_A2 {t : ℝ} (ht : 16 / 13 <= t) (htb : t < 4) {n : ℕ}
+    (hn : n = ⌊(13 : ℝ) * t / 8⌋₊) :
+    t3w_T3UB n t < 35 / 234 := by
+  have hnmin : 2 <= n := by
+    rw [hn]
+    exact (Nat.le_floor_iff' (show (2 : ℕ) ≠ 0 from by norm_num)).mpr (by linarith [ht])
+  have htstar : t <= 4 := htb.le
+  have h0t : 0 <= t := by linarith [ht]
+  have hS2 : Real.sqrt (t3w_prod t 2) < t3w_qA2_2 := by
+    exact lt_of_le_of_lt (Real.sqrt_le_sqrt (t3w_prod_mono h0t htstar 2)) t3w_qA2.1
+  have hS4 : Real.sqrt (t3w_prod t 4) < t3w_qA2_4 := by
+    exact lt_of_le_of_lt (Real.sqrt_le_sqrt (t3w_prod_mono h0t htstar 4)) t3w_qA2.2.1
+  have hS6 : Real.sqrt (t3w_prod t 6) < t3w_qA2_6 := by
+    exact lt_of_le_of_lt (Real.sqrt_le_sqrt (t3w_prod_mono h0t htstar 6)) t3w_qA2.2.2.1
+  have hS7 : Real.sqrt (t3w_prod t 7) < t3w_qA2_7 := by
+    exact lt_of_le_of_lt (Real.sqrt_le_sqrt (t3w_prod_mono h0t htstar 7)) t3w_qA2.2.2.2
+  have hR2 : (n : ℝ) ^ (-( 7/2 : ℝ)) < t3w_rA2_2 := by
+    calc
+      (n : ℝ) ^ (-( 7/2 : ℝ)) = 1 / (n : ℝ) ^ ( 7/2 : ℝ) := by rw [rpow_neg (Nat.cast_nonneg n), inv_eq_one_div]
+      _ <= 1 / (2 : ℝ) ^ ( 7/2 : ℝ) := by
+        have hbase : (2 : ℝ) <= (n : ℝ) := Nat.cast_le.mpr hnmin
+        exact (one_div_le_one_div
+          (rpow_pos_of_pos (Nat.cast_pos.mpr (show (0 : ℕ) < n from by linarith [hnmin])) ( 7/2 : ℝ))
+          (rpow_pos_of_pos (by norm_num : (0 : ℝ) < 2) ( 7/2 : ℝ))).mpr
+          (rpow_le_rpow (by norm_num) hbase (by norm_num))
+      _ < t3w_rA2_2 := by
+        have hrew : (2 : ℝ) ^ ( 7/2 : ℝ) = Real.sqrt ((2 : ℝ) ^ (7 : ℕ)) := by
+          have hp2 : ( 7/2 : ℝ) = (7 : ℝ) / 2 := by norm_num
+          rw [hp2, show (2 : ℝ) ^ ((7 : ℝ) / 2) = (2 : ℝ) ^ ((7 : ℝ) * (1 / 2)) from by norm_num]
+          rw [Real.rpow_mul (by norm_num : 0 ≤ (2 : ℝ)) (7 : ℝ) (1 / 2)]
+          rw [show (7 : ℝ) = (7 : ℕ) from by norm_num]
+          rw [Real.rpow_natCast, ← sqrt_eq_rpow]
+        rw [hrew]
+        rw [one_div_lt (Real.sqrt_pos.mpr (by norm_num : 0 < (2 : ℝ) ^ (7 : ℕ)))
+                      (by norm_num [t3w_rA2_2] : 0 < t3w_rA2_2)]
+        exact (Real.lt_sqrt (by norm_num [t3w_rA2_2] : 0 ≤ 1 / t3w_rA2_2)).mpr (by norm_num [t3w_rA2_2])
+  have hR4 : (n : ℝ) ^ (-( 11/2 : ℝ)) < t3w_rA2_4 := by
+    calc
+      (n : ℝ) ^ (-( 11/2 : ℝ)) = 1 / (n : ℝ) ^ ( 11/2 : ℝ) := by rw [rpow_neg (Nat.cast_nonneg n), inv_eq_one_div]
+      _ <= 1 / (2 : ℝ) ^ ( 11/2 : ℝ) := by
+        have hbase : (2 : ℝ) <= (n : ℝ) := Nat.cast_le.mpr hnmin
+        exact (one_div_le_one_div
+          (rpow_pos_of_pos (Nat.cast_pos.mpr (show (0 : ℕ) < n from by linarith [hnmin])) ( 11/2 : ℝ))
+          (rpow_pos_of_pos (by norm_num : (0 : ℝ) < 2) ( 11/2 : ℝ))).mpr
+          (rpow_le_rpow (by norm_num) hbase (by norm_num))
+      _ < t3w_rA2_4 := by
+        have hrew : (2 : ℝ) ^ ( 11/2 : ℝ) = Real.sqrt ((2 : ℝ) ^ (11 : ℕ)) := by
+          have hp2 : ( 11/2 : ℝ) = (11 : ℝ) / 2 := by norm_num
+          rw [hp2, show (2 : ℝ) ^ ((11 : ℝ) / 2) = (2 : ℝ) ^ ((11 : ℝ) * (1 / 2)) from by norm_num]
+          rw [Real.rpow_mul (by norm_num : 0 ≤ (2 : ℝ)) (11 : ℝ) (1 / 2)]
+          rw [show (11 : ℝ) = (11 : ℕ) from by norm_num]
+          rw [Real.rpow_natCast, ← sqrt_eq_rpow]
+        rw [hrew]
+        rw [one_div_lt (Real.sqrt_pos.mpr (by norm_num : 0 < (2 : ℝ) ^ (11 : ℕ)))
+                      (by norm_num [t3w_rA2_4] : 0 < t3w_rA2_4)]
+        exact (Real.lt_sqrt (by norm_num [t3w_rA2_4] : 0 ≤ 1 / t3w_rA2_4)).mpr (by norm_num [t3w_rA2_4])
+  have hR6 : (n : ℝ) ^ (-( 15/2 : ℝ)) < t3w_rA2_6 := by
+    calc
+      (n : ℝ) ^ (-( 15/2 : ℝ)) = 1 / (n : ℝ) ^ ( 15/2 : ℝ) := by rw [rpow_neg (Nat.cast_nonneg n), inv_eq_one_div]
+      _ <= 1 / (2 : ℝ) ^ ( 15/2 : ℝ) := by
+        have hbase : (2 : ℝ) <= (n : ℝ) := Nat.cast_le.mpr hnmin
+        exact (one_div_le_one_div
+          (rpow_pos_of_pos (Nat.cast_pos.mpr (show (0 : ℕ) < n from by linarith [hnmin])) ( 15/2 : ℝ))
+          (rpow_pos_of_pos (by norm_num : (0 : ℝ) < 2) ( 15/2 : ℝ))).mpr
+          (rpow_le_rpow (by norm_num) hbase (by norm_num))
+      _ < t3w_rA2_6 := by
+        have hrew : (2 : ℝ) ^ ( 15/2 : ℝ) = Real.sqrt ((2 : ℝ) ^ (15 : ℕ)) := by
+          have hp2 : ( 15/2 : ℝ) = (15 : ℝ) / 2 := by norm_num
+          rw [hp2, show (2 : ℝ) ^ ((15 : ℝ) / 2) = (2 : ℝ) ^ ((15 : ℝ) * (1 / 2)) from by norm_num]
+          rw [Real.rpow_mul (by norm_num : 0 ≤ (2 : ℝ)) (15 : ℝ) (1 / 2)]
+          rw [show (15 : ℝ) = (15 : ℕ) from by norm_num]
+          rw [Real.rpow_natCast, ← sqrt_eq_rpow]
+        rw [hrew]
+        rw [one_div_lt (Real.sqrt_pos.mpr (by norm_num : 0 < (2 : ℝ) ^ (15 : ℕ)))
+                      (by norm_num [t3w_rA2_6] : 0 < t3w_rA2_6)]
+        exact (Real.lt_sqrt (by norm_num [t3w_rA2_6] : 0 ≤ 1 / t3w_rA2_6)).mpr (by norm_num [t3w_rA2_6])
+  have hR7 : (n : ℝ) ^ (-( 15/2 : ℝ)) < t3w_rA2_7 := by
+    calc
+      (n : ℝ) ^ (-( 15/2 : ℝ)) = 1 / (n : ℝ) ^ ( 15/2 : ℝ) := by rw [rpow_neg (Nat.cast_nonneg n), inv_eq_one_div]
+      _ <= 1 / (2 : ℝ) ^ ( 15/2 : ℝ) := by
+        have hbase : (2 : ℝ) <= (n : ℝ) := Nat.cast_le.mpr hnmin
+        exact (one_div_le_one_div
+          (rpow_pos_of_pos (Nat.cast_pos.mpr (show (0 : ℕ) < n from by linarith [hnmin])) ( 15/2 : ℝ))
+          (rpow_pos_of_pos (by norm_num : (0 : ℝ) < 2) ( 15/2 : ℝ))).mpr
+          (rpow_le_rpow (by norm_num) hbase (by norm_num))
+      _ < t3w_rA2_7 := by
+        have hrew : (2 : ℝ) ^ ( 15/2 : ℝ) = Real.sqrt ((2 : ℝ) ^ (15 : ℕ)) := by
+          have hp2 : ( 15/2 : ℝ) = (15 : ℝ) / 2 := by norm_num
+          rw [hp2, show (2 : ℝ) ^ ((15 : ℝ) / 2) = (2 : ℝ) ^ ((15 : ℝ) * (1 / 2)) from by norm_num]
+          rw [Real.rpow_mul (by norm_num : 0 ≤ (2 : ℝ)) (15 : ℝ) (1 / 2)]
+          rw [show (15 : ℝ) = (15 : ℕ) from by norm_num]
+          rw [Real.rpow_natCast, ← sqrt_eq_rpow]
+        rw [hrew]
+        rw [one_div_lt (Real.sqrt_pos.mpr (by norm_num : 0 < (2 : ℝ) ^ (15 : ℕ)))
+                      (by norm_num [t3w_rA2_7] : 0 < t3w_rA2_7)]
+        exact (Real.lt_sqrt (by norm_num [t3w_rA2_7] : 0 ≤ 1 / t3w_rA2_7)).mpr (by norm_num [t3w_rA2_7])
+  have hT2 : t3w_term n t 2 < t3w_qA2_2 * t3w_rA2_2 / 720 := by
+    calc
+      t3w_term n t 2 = Real.sqrt (t3w_prod t 2) * (n : ℝ) ^ (-( 7/2 : ℝ)) / 720 := by
+        simp [t3w_term, t3w_p, t3w_d]
+      _ <= Real.sqrt (t3w_prod t 2) * (t3w_rA2_2 : ℝ) / 720 := by
+        gcongr
+        all_goals (try exact hR2) <;> (try exact le_of_lt hR2) <;> (try norm_num [t3w_rA2_2]) <;> (try positivity)
+      _ < t3w_qA2_2 * (t3w_rA2_2 : ℝ) / 720 := by
+        gcongr
+        all_goals (try exact hS2) <;> (try norm_num [t3w_qA2_2, t3w_rA2_2]) <;> (try positivity)
+  have hT4 : t3w_term n t 4 < t3w_qA2_4 * t3w_rA2_4 / 30240 := by
+    calc
+      t3w_term n t 4 = Real.sqrt (t3w_prod t 4) * (n : ℝ) ^ (-( 11/2 : ℝ)) / 30240 := by
+        simp [t3w_term, t3w_p, t3w_d]
+      _ <= Real.sqrt (t3w_prod t 4) * (t3w_rA2_4 : ℝ) / 30240 := by
+        gcongr
+        all_goals (try exact hR4) <;> (try exact le_of_lt hR4) <;> (try norm_num [t3w_rA2_4]) <;> (try positivity)
+      _ < t3w_qA2_4 * (t3w_rA2_4 : ℝ) / 30240 := by
+        gcongr
+        all_goals (try exact hS4) <;> (try norm_num [t3w_qA2_4, t3w_rA2_4]) <;> (try positivity)
+  have hT6 : t3w_term n t 6 < t3w_qA2_6 * t3w_rA2_6 / 1209600 := by
+    calc
+      t3w_term n t 6 = Real.sqrt (t3w_prod t 6) * (n : ℝ) ^ (-( 15/2 : ℝ)) / 1209600 := by
+        simp [t3w_term, t3w_p, t3w_d]
+      _ <= Real.sqrt (t3w_prod t 6) * (t3w_rA2_6 : ℝ) / 1209600 := by
+        gcongr
+        all_goals (try exact hR6) <;> (try exact le_of_lt hR6) <;> (try norm_num [t3w_rA2_6]) <;> (try positivity)
+      _ < t3w_qA2_6 * (t3w_rA2_6 : ℝ) / 1209600 := by
+        gcongr
+        all_goals (try exact hS6) <;> (try norm_num [t3w_qA2_6, t3w_rA2_6]) <;> (try positivity)
+  have hT7 : t3w_term n t 7 < t3w_qA2_7 * t3w_rA2_7 / 9072000 := by
+    calc
+      t3w_term n t 7 = Real.sqrt (t3w_prod t 7) * (n : ℝ) ^ (-( 15/2 : ℝ)) / 9072000 := by
+        simp [t3w_term, t3w_p, t3w_d]
+      _ <= Real.sqrt (t3w_prod t 7) * (t3w_rA2_7 : ℝ) / 9072000 := by
+        gcongr
+        all_goals (try exact hR7) <;> (try exact le_of_lt hR7) <;> (try norm_num [t3w_rA2_7]) <;> (try positivity)
+      _ < t3w_qA2_7 * (t3w_rA2_7 : ℝ) / 9072000 := by
+        gcongr
+        all_goals (try exact hS7) <;> (try norm_num [t3w_qA2_7, t3w_rA2_7]) <;> (try positivity)
+  calc
+    t3w_T3UB n t = t3w_term n t 2 + t3w_term n t 4 + t3w_term n t 6 + t3w_term n t 7 := rfl
+    _ < t3w_qA2_2 * (t3w_rA2_2 : ℝ) / 720 + t3w_qA2_4 * (t3w_rA2_4 : ℝ) / 30240 +
+        t3w_qA2_6 * (t3w_rA2_6 : ℝ) / 1209600 + t3w_qA2_7 * (t3w_rA2_7 : ℝ) / 9072000 := by
+      gcongr
+      all_goals (try exact hT2) <;> (try exact hT4) <;> (try exact hT6) <;> (try exact hT7) <;> (try norm_num) <;> (try positivity)
+    _ < 35 / 234 := by norm_num [t3w_qA2_2, t3w_rA2_2, t3w_qA2_4, t3w_rA2_4, t3w_qA2_6, t3w_rA2_6, t3w_qA2_7, t3w_rA2_7]
+
+/-- A3: 4 <= t < 8 (n >= 6). -/
+theorem t3w_wall_A3 {t : ℝ} (ht : 4 <= t) (htb : t < 8) {n : ℕ}
+    (hn : n = ⌊(13 : ℝ) * t / 8⌋₊) :
+    t3w_T3UB n t < 35 / 312 := by
+  have hnmin : 6 <= n := by
+    rw [hn]
+    exact (Nat.le_floor_iff' (show (6 : ℕ) ≠ 0 from by norm_num)).mpr (by linarith [ht])
+  have htstar : t <= 8 := htb.le
+  have h0t : 0 <= t := by linarith [ht]
+  have hS2 : Real.sqrt (t3w_prod t 2) < t3w_qA3_2 := by
+    exact lt_of_le_of_lt (Real.sqrt_le_sqrt (t3w_prod_mono h0t htstar 2)) t3w_qA3.1
+  have hS4 : Real.sqrt (t3w_prod t 4) < t3w_qA3_4 := by
+    exact lt_of_le_of_lt (Real.sqrt_le_sqrt (t3w_prod_mono h0t htstar 4)) t3w_qA3.2.1
+  have hS6 : Real.sqrt (t3w_prod t 6) < t3w_qA3_6 := by
+    exact lt_of_le_of_lt (Real.sqrt_le_sqrt (t3w_prod_mono h0t htstar 6)) t3w_qA3.2.2.1
+  have hS7 : Real.sqrt (t3w_prod t 7) < t3w_qA3_7 := by
+    exact lt_of_le_of_lt (Real.sqrt_le_sqrt (t3w_prod_mono h0t htstar 7)) t3w_qA3.2.2.2
+  have hR2 : (n : ℝ) ^ (-( 7/2 : ℝ)) < t3w_rA3_2 := by
+    calc
+      (n : ℝ) ^ (-( 7/2 : ℝ)) = 1 / (n : ℝ) ^ ( 7/2 : ℝ) := by rw [rpow_neg (Nat.cast_nonneg n), inv_eq_one_div]
+      _ <= 1 / (6 : ℝ) ^ ( 7/2 : ℝ) := by
+        have hbase : (6 : ℝ) <= (n : ℝ) := Nat.cast_le.mpr hnmin
+        exact (one_div_le_one_div
+          (rpow_pos_of_pos (Nat.cast_pos.mpr (show (0 : ℕ) < n from by linarith [hnmin])) ( 7/2 : ℝ))
+          (rpow_pos_of_pos (by norm_num : (0 : ℝ) < 6) ( 7/2 : ℝ))).mpr
+          (rpow_le_rpow (by norm_num) hbase (by norm_num))
+      _ < t3w_rA3_2 := by
+        have hrew : (6 : ℝ) ^ ( 7/2 : ℝ) = Real.sqrt ((6 : ℝ) ^ (7 : ℕ)) := by
+          have hp2 : ( 7/2 : ℝ) = (7 : ℝ) / 2 := by norm_num
+          rw [hp2, show (6 : ℝ) ^ ((7 : ℝ) / 2) = (6 : ℝ) ^ ((7 : ℝ) * (1 / 2)) from by norm_num]
+          rw [Real.rpow_mul (by norm_num : 0 ≤ (6 : ℝ)) (7 : ℝ) (1 / 2)]
+          rw [show (7 : ℝ) = (7 : ℕ) from by norm_num]
+          rw [Real.rpow_natCast, ← sqrt_eq_rpow]
+        rw [hrew]
+        rw [one_div_lt (Real.sqrt_pos.mpr (by norm_num : 0 < (6 : ℝ) ^ (7 : ℕ)))
+                      (by norm_num [t3w_rA3_2] : 0 < t3w_rA3_2)]
+        exact (Real.lt_sqrt (by norm_num [t3w_rA3_2] : 0 ≤ 1 / t3w_rA3_2)).mpr (by norm_num [t3w_rA3_2])
+  have hR4 : (n : ℝ) ^ (-( 11/2 : ℝ)) < t3w_rA3_4 := by
+    calc
+      (n : ℝ) ^ (-( 11/2 : ℝ)) = 1 / (n : ℝ) ^ ( 11/2 : ℝ) := by rw [rpow_neg (Nat.cast_nonneg n), inv_eq_one_div]
+      _ <= 1 / (6 : ℝ) ^ ( 11/2 : ℝ) := by
+        have hbase : (6 : ℝ) <= (n : ℝ) := Nat.cast_le.mpr hnmin
+        exact (one_div_le_one_div
+          (rpow_pos_of_pos (Nat.cast_pos.mpr (show (0 : ℕ) < n from by linarith [hnmin])) ( 11/2 : ℝ))
+          (rpow_pos_of_pos (by norm_num : (0 : ℝ) < 6) ( 11/2 : ℝ))).mpr
+          (rpow_le_rpow (by norm_num) hbase (by norm_num))
+      _ < t3w_rA3_4 := by
+        have hrew : (6 : ℝ) ^ ( 11/2 : ℝ) = Real.sqrt ((6 : ℝ) ^ (11 : ℕ)) := by
+          have hp2 : ( 11/2 : ℝ) = (11 : ℝ) / 2 := by norm_num
+          rw [hp2, show (6 : ℝ) ^ ((11 : ℝ) / 2) = (6 : ℝ) ^ ((11 : ℝ) * (1 / 2)) from by norm_num]
+          rw [Real.rpow_mul (by norm_num : 0 ≤ (6 : ℝ)) (11 : ℝ) (1 / 2)]
+          rw [show (11 : ℝ) = (11 : ℕ) from by norm_num]
+          rw [Real.rpow_natCast, ← sqrt_eq_rpow]
+        rw [hrew]
+        rw [one_div_lt (Real.sqrt_pos.mpr (by norm_num : 0 < (6 : ℝ) ^ (11 : ℕ)))
+                      (by norm_num [t3w_rA3_4] : 0 < t3w_rA3_4)]
+        exact (Real.lt_sqrt (by norm_num [t3w_rA3_4] : 0 ≤ 1 / t3w_rA3_4)).mpr (by norm_num [t3w_rA3_4])
+  have hR6 : (n : ℝ) ^ (-( 15/2 : ℝ)) < t3w_rA3_6 := by
+    calc
+      (n : ℝ) ^ (-( 15/2 : ℝ)) = 1 / (n : ℝ) ^ ( 15/2 : ℝ) := by rw [rpow_neg (Nat.cast_nonneg n), inv_eq_one_div]
+      _ <= 1 / (6 : ℝ) ^ ( 15/2 : ℝ) := by
+        have hbase : (6 : ℝ) <= (n : ℝ) := Nat.cast_le.mpr hnmin
+        exact (one_div_le_one_div
+          (rpow_pos_of_pos (Nat.cast_pos.mpr (show (0 : ℕ) < n from by linarith [hnmin])) ( 15/2 : ℝ))
+          (rpow_pos_of_pos (by norm_num : (0 : ℝ) < 6) ( 15/2 : ℝ))).mpr
+          (rpow_le_rpow (by norm_num) hbase (by norm_num))
+      _ < t3w_rA3_6 := by
+        have hrew : (6 : ℝ) ^ ( 15/2 : ℝ) = Real.sqrt ((6 : ℝ) ^ (15 : ℕ)) := by
+          have hp2 : ( 15/2 : ℝ) = (15 : ℝ) / 2 := by norm_num
+          rw [hp2, show (6 : ℝ) ^ ((15 : ℝ) / 2) = (6 : ℝ) ^ ((15 : ℝ) * (1 / 2)) from by norm_num]
+          rw [Real.rpow_mul (by norm_num : 0 ≤ (6 : ℝ)) (15 : ℝ) (1 / 2)]
+          rw [show (15 : ℝ) = (15 : ℕ) from by norm_num]
+          rw [Real.rpow_natCast, ← sqrt_eq_rpow]
+        rw [hrew]
+        rw [one_div_lt (Real.sqrt_pos.mpr (by norm_num : 0 < (6 : ℝ) ^ (15 : ℕ)))
+                      (by norm_num [t3w_rA3_6] : 0 < t3w_rA3_6)]
+        exact (Real.lt_sqrt (by norm_num [t3w_rA3_6] : 0 ≤ 1 / t3w_rA3_6)).mpr (by norm_num [t3w_rA3_6])
+  have hR7 : (n : ℝ) ^ (-( 15/2 : ℝ)) < t3w_rA3_7 := by
+    calc
+      (n : ℝ) ^ (-( 15/2 : ℝ)) = 1 / (n : ℝ) ^ ( 15/2 : ℝ) := by rw [rpow_neg (Nat.cast_nonneg n), inv_eq_one_div]
+      _ <= 1 / (6 : ℝ) ^ ( 15/2 : ℝ) := by
+        have hbase : (6 : ℝ) <= (n : ℝ) := Nat.cast_le.mpr hnmin
+        exact (one_div_le_one_div
+          (rpow_pos_of_pos (Nat.cast_pos.mpr (show (0 : ℕ) < n from by linarith [hnmin])) ( 15/2 : ℝ))
+          (rpow_pos_of_pos (by norm_num : (0 : ℝ) < 6) ( 15/2 : ℝ))).mpr
+          (rpow_le_rpow (by norm_num) hbase (by norm_num))
+      _ < t3w_rA3_7 := by
+        have hrew : (6 : ℝ) ^ ( 15/2 : ℝ) = Real.sqrt ((6 : ℝ) ^ (15 : ℕ)) := by
+          have hp2 : ( 15/2 : ℝ) = (15 : ℝ) / 2 := by norm_num
+          rw [hp2, show (6 : ℝ) ^ ((15 : ℝ) / 2) = (6 : ℝ) ^ ((15 : ℝ) * (1 / 2)) from by norm_num]
+          rw [Real.rpow_mul (by norm_num : 0 ≤ (6 : ℝ)) (15 : ℝ) (1 / 2)]
+          rw [show (15 : ℝ) = (15 : ℕ) from by norm_num]
+          rw [Real.rpow_natCast, ← sqrt_eq_rpow]
+        rw [hrew]
+        rw [one_div_lt (Real.sqrt_pos.mpr (by norm_num : 0 < (6 : ℝ) ^ (15 : ℕ)))
+                      (by norm_num [t3w_rA3_7] : 0 < t3w_rA3_7)]
+        exact (Real.lt_sqrt (by norm_num [t3w_rA3_7] : 0 ≤ 1 / t3w_rA3_7)).mpr (by norm_num [t3w_rA3_7])
+  have hT2 : t3w_term n t 2 < t3w_qA3_2 * t3w_rA3_2 / 720 := by
+    calc
+      t3w_term n t 2 = Real.sqrt (t3w_prod t 2) * (n : ℝ) ^ (-( 7/2 : ℝ)) / 720 := by
+        simp [t3w_term, t3w_p, t3w_d]
+      _ <= Real.sqrt (t3w_prod t 2) * (t3w_rA3_2 : ℝ) / 720 := by
+        gcongr
+        all_goals (try exact hR2) <;> (try exact le_of_lt hR2) <;> (try norm_num [t3w_rA3_2]) <;> (try positivity)
+      _ < t3w_qA3_2 * (t3w_rA3_2 : ℝ) / 720 := by
+        gcongr
+        all_goals (try exact hS2) <;> (try norm_num [t3w_qA3_2, t3w_rA3_2]) <;> (try positivity)
+  have hT4 : t3w_term n t 4 < t3w_qA3_4 * t3w_rA3_4 / 30240 := by
+    calc
+      t3w_term n t 4 = Real.sqrt (t3w_prod t 4) * (n : ℝ) ^ (-( 11/2 : ℝ)) / 30240 := by
+        simp [t3w_term, t3w_p, t3w_d]
+      _ <= Real.sqrt (t3w_prod t 4) * (t3w_rA3_4 : ℝ) / 30240 := by
+        gcongr
+        all_goals (try exact hR4) <;> (try exact le_of_lt hR4) <;> (try norm_num [t3w_rA3_4]) <;> (try positivity)
+      _ < t3w_qA3_4 * (t3w_rA3_4 : ℝ) / 30240 := by
+        gcongr
+        all_goals (try exact hS4) <;> (try norm_num [t3w_qA3_4, t3w_rA3_4]) <;> (try positivity)
+  have hT6 : t3w_term n t 6 < t3w_qA3_6 * t3w_rA3_6 / 1209600 := by
+    calc
+      t3w_term n t 6 = Real.sqrt (t3w_prod t 6) * (n : ℝ) ^ (-( 15/2 : ℝ)) / 1209600 := by
+        simp [t3w_term, t3w_p, t3w_d]
+      _ <= Real.sqrt (t3w_prod t 6) * (t3w_rA3_6 : ℝ) / 1209600 := by
+        gcongr
+        all_goals (try exact hR6) <;> (try exact le_of_lt hR6) <;> (try norm_num [t3w_rA3_6]) <;> (try positivity)
+      _ < t3w_qA3_6 * (t3w_rA3_6 : ℝ) / 1209600 := by
+        gcongr
+        all_goals (try exact hS6) <;> (try norm_num [t3w_qA3_6, t3w_rA3_6]) <;> (try positivity)
+  have hT7 : t3w_term n t 7 < t3w_qA3_7 * t3w_rA3_7 / 9072000 := by
+    calc
+      t3w_term n t 7 = Real.sqrt (t3w_prod t 7) * (n : ℝ) ^ (-( 15/2 : ℝ)) / 9072000 := by
+        simp [t3w_term, t3w_p, t3w_d]
+      _ <= Real.sqrt (t3w_prod t 7) * (t3w_rA3_7 : ℝ) / 9072000 := by
+        gcongr
+        all_goals (try exact hR7) <;> (try exact le_of_lt hR7) <;> (try norm_num [t3w_rA3_7]) <;> (try positivity)
+      _ < t3w_qA3_7 * (t3w_rA3_7 : ℝ) / 9072000 := by
+        gcongr
+        all_goals (try exact hS7) <;> (try norm_num [t3w_qA3_7, t3w_rA3_7]) <;> (try positivity)
+  calc
+    t3w_T3UB n t = t3w_term n t 2 + t3w_term n t 4 + t3w_term n t 6 + t3w_term n t 7 := rfl
+    _ < t3w_qA3_2 * (t3w_rA3_2 : ℝ) / 720 + t3w_qA3_4 * (t3w_rA3_4 : ℝ) / 30240 +
+        t3w_qA3_6 * (t3w_rA3_6 : ℝ) / 1209600 + t3w_qA3_7 * (t3w_rA3_7 : ℝ) / 9072000 := by
+      gcongr
+      all_goals (try exact hT2) <;> (try exact hT4) <;> (try exact hT6) <;> (try exact hT7) <;> (try norm_num) <;> (try positivity)
+    _ < 35 / 312 := by norm_num [t3w_qA3_2, t3w_rA3_2, t3w_qA3_4, t3w_rA3_4, t3w_qA3_6, t3w_rA3_6, t3w_qA3_7, t3w_rA3_7]
+
+/-- A4: 8 <= t < 13 (n >= 13). -/
+theorem t3w_wall_A4 {t : ℝ} (ht : 8 <= t) (htb : t < 13) {n : ℕ}
+    (hn : n = ⌊(13 : ℝ) * t / 8⌋₊) :
+    t3w_T3UB n t < 35 / 390 := by
+  have hnmin : 13 <= n := by
+    rw [hn]
+    exact (Nat.le_floor_iff' (show (13 : ℕ) ≠ 0 from by norm_num)).mpr (by linarith [ht])
+  have htstar : t <= 13 := htb.le
+  have h0t : 0 <= t := by linarith [ht]
+  have hS2 : Real.sqrt (t3w_prod t 2) < t3w_qA4_2 := by
+    exact lt_of_le_of_lt (Real.sqrt_le_sqrt (t3w_prod_mono h0t htstar 2)) t3w_qA4.1
+  have hS4 : Real.sqrt (t3w_prod t 4) < t3w_qA4_4 := by
+    exact lt_of_le_of_lt (Real.sqrt_le_sqrt (t3w_prod_mono h0t htstar 4)) t3w_qA4.2.1
+  have hS6 : Real.sqrt (t3w_prod t 6) < t3w_qA4_6 := by
+    exact lt_of_le_of_lt (Real.sqrt_le_sqrt (t3w_prod_mono h0t htstar 6)) t3w_qA4.2.2.1
+  have hS7 : Real.sqrt (t3w_prod t 7) < t3w_qA4_7 := by
+    exact lt_of_le_of_lt (Real.sqrt_le_sqrt (t3w_prod_mono h0t htstar 7)) t3w_qA4.2.2.2
+  have hR2 : (n : ℝ) ^ (-( 7/2 : ℝ)) < t3w_rA4_2 := by
+    calc
+      (n : ℝ) ^ (-( 7/2 : ℝ)) = 1 / (n : ℝ) ^ ( 7/2 : ℝ) := by rw [rpow_neg (Nat.cast_nonneg n), inv_eq_one_div]
+      _ <= 1 / (13 : ℝ) ^ ( 7/2 : ℝ) := by
+        have hbase : (13 : ℝ) <= (n : ℝ) := Nat.cast_le.mpr hnmin
+        exact (one_div_le_one_div
+          (rpow_pos_of_pos (Nat.cast_pos.mpr (show (0 : ℕ) < n from by linarith [hnmin])) ( 7/2 : ℝ))
+          (rpow_pos_of_pos (by norm_num : (0 : ℝ) < 13) ( 7/2 : ℝ))).mpr
+          (rpow_le_rpow (by norm_num) hbase (by norm_num))
+      _ < t3w_rA4_2 := by
+        have hrew : (13 : ℝ) ^ ( 7/2 : ℝ) = Real.sqrt ((13 : ℝ) ^ (7 : ℕ)) := by
+          have hp2 : ( 7/2 : ℝ) = (7 : ℝ) / 2 := by norm_num
+          rw [hp2, show (13 : ℝ) ^ ((7 : ℝ) / 2) = (13 : ℝ) ^ ((7 : ℝ) * (1 / 2)) from by norm_num]
+          rw [Real.rpow_mul (by norm_num : 0 ≤ (13 : ℝ)) (7 : ℝ) (1 / 2)]
+          rw [show (7 : ℝ) = (7 : ℕ) from by norm_num]
+          rw [Real.rpow_natCast, ← sqrt_eq_rpow]
+        rw [hrew]
+        rw [one_div_lt (Real.sqrt_pos.mpr (by norm_num : 0 < (13 : ℝ) ^ (7 : ℕ)))
+                      (by norm_num [t3w_rA4_2] : 0 < t3w_rA4_2)]
+        exact (Real.lt_sqrt (by norm_num [t3w_rA4_2] : 0 ≤ 1 / t3w_rA4_2)).mpr (by norm_num [t3w_rA4_2])
+  have hR4 : (n : ℝ) ^ (-( 11/2 : ℝ)) < t3w_rA4_4 := by
+    calc
+      (n : ℝ) ^ (-( 11/2 : ℝ)) = 1 / (n : ℝ) ^ ( 11/2 : ℝ) := by rw [rpow_neg (Nat.cast_nonneg n), inv_eq_one_div]
+      _ <= 1 / (13 : ℝ) ^ ( 11/2 : ℝ) := by
+        have hbase : (13 : ℝ) <= (n : ℝ) := Nat.cast_le.mpr hnmin
+        exact (one_div_le_one_div
+          (rpow_pos_of_pos (Nat.cast_pos.mpr (show (0 : ℕ) < n from by linarith [hnmin])) ( 11/2 : ℝ))
+          (rpow_pos_of_pos (by norm_num : (0 : ℝ) < 13) ( 11/2 : ℝ))).mpr
+          (rpow_le_rpow (by norm_num) hbase (by norm_num))
+      _ < t3w_rA4_4 := by
+        have hrew : (13 : ℝ) ^ ( 11/2 : ℝ) = Real.sqrt ((13 : ℝ) ^ (11 : ℕ)) := by
+          have hp2 : ( 11/2 : ℝ) = (11 : ℝ) / 2 := by norm_num
+          rw [hp2, show (13 : ℝ) ^ ((11 : ℝ) / 2) = (13 : ℝ) ^ ((11 : ℝ) * (1 / 2)) from by norm_num]
+          rw [Real.rpow_mul (by norm_num : 0 ≤ (13 : ℝ)) (11 : ℝ) (1 / 2)]
+          rw [show (11 : ℝ) = (11 : ℕ) from by norm_num]
+          rw [Real.rpow_natCast, ← sqrt_eq_rpow]
+        rw [hrew]
+        rw [one_div_lt (Real.sqrt_pos.mpr (by norm_num : 0 < (13 : ℝ) ^ (11 : ℕ)))
+                      (by norm_num [t3w_rA4_4] : 0 < t3w_rA4_4)]
+        exact (Real.lt_sqrt (by norm_num [t3w_rA4_4] : 0 ≤ 1 / t3w_rA4_4)).mpr (by norm_num [t3w_rA4_4])
+  have hR6 : (n : ℝ) ^ (-( 15/2 : ℝ)) < t3w_rA4_6 := by
+    calc
+      (n : ℝ) ^ (-( 15/2 : ℝ)) = 1 / (n : ℝ) ^ ( 15/2 : ℝ) := by rw [rpow_neg (Nat.cast_nonneg n), inv_eq_one_div]
+      _ <= 1 / (13 : ℝ) ^ ( 15/2 : ℝ) := by
+        have hbase : (13 : ℝ) <= (n : ℝ) := Nat.cast_le.mpr hnmin
+        exact (one_div_le_one_div
+          (rpow_pos_of_pos (Nat.cast_pos.mpr (show (0 : ℕ) < n from by linarith [hnmin])) ( 15/2 : ℝ))
+          (rpow_pos_of_pos (by norm_num : (0 : ℝ) < 13) ( 15/2 : ℝ))).mpr
+          (rpow_le_rpow (by norm_num) hbase (by norm_num))
+      _ < t3w_rA4_6 := by
+        have hrew : (13 : ℝ) ^ ( 15/2 : ℝ) = Real.sqrt ((13 : ℝ) ^ (15 : ℕ)) := by
+          have hp2 : ( 15/2 : ℝ) = (15 : ℝ) / 2 := by norm_num
+          rw [hp2, show (13 : ℝ) ^ ((15 : ℝ) / 2) = (13 : ℝ) ^ ((15 : ℝ) * (1 / 2)) from by norm_num]
+          rw [Real.rpow_mul (by norm_num : 0 ≤ (13 : ℝ)) (15 : ℝ) (1 / 2)]
+          rw [show (15 : ℝ) = (15 : ℕ) from by norm_num]
+          rw [Real.rpow_natCast, ← sqrt_eq_rpow]
+        rw [hrew]
+        rw [one_div_lt (Real.sqrt_pos.mpr (by norm_num : 0 < (13 : ℝ) ^ (15 : ℕ)))
+                      (by norm_num [t3w_rA4_6] : 0 < t3w_rA4_6)]
+        exact (Real.lt_sqrt (by norm_num [t3w_rA4_6] : 0 ≤ 1 / t3w_rA4_6)).mpr (by norm_num [t3w_rA4_6])
+  have hR7 : (n : ℝ) ^ (-( 15/2 : ℝ)) < t3w_rA4_7 := by
+    calc
+      (n : ℝ) ^ (-( 15/2 : ℝ)) = 1 / (n : ℝ) ^ ( 15/2 : ℝ) := by rw [rpow_neg (Nat.cast_nonneg n), inv_eq_one_div]
+      _ <= 1 / (13 : ℝ) ^ ( 15/2 : ℝ) := by
+        have hbase : (13 : ℝ) <= (n : ℝ) := Nat.cast_le.mpr hnmin
+        exact (one_div_le_one_div
+          (rpow_pos_of_pos (Nat.cast_pos.mpr (show (0 : ℕ) < n from by linarith [hnmin])) ( 15/2 : ℝ))
+          (rpow_pos_of_pos (by norm_num : (0 : ℝ) < 13) ( 15/2 : ℝ))).mpr
+          (rpow_le_rpow (by norm_num) hbase (by norm_num))
+      _ < t3w_rA4_7 := by
+        have hrew : (13 : ℝ) ^ ( 15/2 : ℝ) = Real.sqrt ((13 : ℝ) ^ (15 : ℕ)) := by
+          have hp2 : ( 15/2 : ℝ) = (15 : ℝ) / 2 := by norm_num
+          rw [hp2, show (13 : ℝ) ^ ((15 : ℝ) / 2) = (13 : ℝ) ^ ((15 : ℝ) * (1 / 2)) from by norm_num]
+          rw [Real.rpow_mul (by norm_num : 0 ≤ (13 : ℝ)) (15 : ℝ) (1 / 2)]
+          rw [show (15 : ℝ) = (15 : ℕ) from by norm_num]
+          rw [Real.rpow_natCast, ← sqrt_eq_rpow]
+        rw [hrew]
+        rw [one_div_lt (Real.sqrt_pos.mpr (by norm_num : 0 < (13 : ℝ) ^ (15 : ℕ)))
+                      (by norm_num [t3w_rA4_7] : 0 < t3w_rA4_7)]
+        exact (Real.lt_sqrt (by norm_num [t3w_rA4_7] : 0 ≤ 1 / t3w_rA4_7)).mpr (by norm_num [t3w_rA4_7])
+  have hT2 : t3w_term n t 2 < t3w_qA4_2 * t3w_rA4_2 / 720 := by
+    calc
+      t3w_term n t 2 = Real.sqrt (t3w_prod t 2) * (n : ℝ) ^ (-( 7/2 : ℝ)) / 720 := by
+        simp [t3w_term, t3w_p, t3w_d]
+      _ <= Real.sqrt (t3w_prod t 2) * (t3w_rA4_2 : ℝ) / 720 := by
+        gcongr
+        all_goals (try exact hR2) <;> (try exact le_of_lt hR2) <;> (try norm_num [t3w_rA4_2]) <;> (try positivity)
+      _ < t3w_qA4_2 * (t3w_rA4_2 : ℝ) / 720 := by
+        gcongr
+        all_goals (try exact hS2) <;> (try norm_num [t3w_qA4_2, t3w_rA4_2]) <;> (try positivity)
+  have hT4 : t3w_term n t 4 < t3w_qA4_4 * t3w_rA4_4 / 30240 := by
+    calc
+      t3w_term n t 4 = Real.sqrt (t3w_prod t 4) * (n : ℝ) ^ (-( 11/2 : ℝ)) / 30240 := by
+        simp [t3w_term, t3w_p, t3w_d]
+      _ <= Real.sqrt (t3w_prod t 4) * (t3w_rA4_4 : ℝ) / 30240 := by
+        gcongr
+        all_goals (try exact hR4) <;> (try exact le_of_lt hR4) <;> (try norm_num [t3w_rA4_4]) <;> (try positivity)
+      _ < t3w_qA4_4 * (t3w_rA4_4 : ℝ) / 30240 := by
+        gcongr
+        all_goals (try exact hS4) <;> (try norm_num [t3w_qA4_4, t3w_rA4_4]) <;> (try positivity)
+  have hT6 : t3w_term n t 6 < t3w_qA4_6 * t3w_rA4_6 / 1209600 := by
+    calc
+      t3w_term n t 6 = Real.sqrt (t3w_prod t 6) * (n : ℝ) ^ (-( 15/2 : ℝ)) / 1209600 := by
+        simp [t3w_term, t3w_p, t3w_d]
+      _ <= Real.sqrt (t3w_prod t 6) * (t3w_rA4_6 : ℝ) / 1209600 := by
+        gcongr
+        all_goals (try exact hR6) <;> (try exact le_of_lt hR6) <;> (try norm_num [t3w_rA4_6]) <;> (try positivity)
+      _ < t3w_qA4_6 * (t3w_rA4_6 : ℝ) / 1209600 := by
+        gcongr
+        all_goals (try exact hS6) <;> (try norm_num [t3w_qA4_6, t3w_rA4_6]) <;> (try positivity)
+  have hT7 : t3w_term n t 7 < t3w_qA4_7 * t3w_rA4_7 / 9072000 := by
+    calc
+      t3w_term n t 7 = Real.sqrt (t3w_prod t 7) * (n : ℝ) ^ (-( 15/2 : ℝ)) / 9072000 := by
+        simp [t3w_term, t3w_p, t3w_d]
+      _ <= Real.sqrt (t3w_prod t 7) * (t3w_rA4_7 : ℝ) / 9072000 := by
+        gcongr
+        all_goals (try exact hR7) <;> (try exact le_of_lt hR7) <;> (try norm_num [t3w_rA4_7]) <;> (try positivity)
+      _ < t3w_qA4_7 * (t3w_rA4_7 : ℝ) / 9072000 := by
+        gcongr
+        all_goals (try exact hS7) <;> (try norm_num [t3w_qA4_7, t3w_rA4_7]) <;> (try positivity)
+  calc
+    t3w_T3UB n t = t3w_term n t 2 + t3w_term n t 4 + t3w_term n t 6 + t3w_term n t 7 := rfl
+    _ < t3w_qA4_2 * (t3w_rA4_2 : ℝ) / 720 + t3w_qA4_4 * (t3w_rA4_4 : ℝ) / 30240 +
+        t3w_qA4_6 * (t3w_rA4_6 : ℝ) / 1209600 + t3w_qA4_7 * (t3w_rA4_7 : ℝ) / 9072000 := by
+      gcongr
+      all_goals (try exact hT2) <;> (try exact hT4) <;> (try exact hT6) <;> (try exact hT7) <;> (try norm_num) <;> (try positivity)
+    _ < 35 / 390 := by norm_num [t3w_qA4_2, t3w_rA4_2, t3w_qA4_4, t3w_rA4_4, t3w_qA4_6, t3w_rA4_6, t3w_qA4_7, t3w_rA4_7]
+
 end
+
 
 
 

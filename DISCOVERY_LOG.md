@@ -4672,14 +4672,73 @@ replacement.
   two forms; bridge with `have heq : -(15/2 : ℝ) = (-(15 : ℝ)/2) := by
   norm_num` + `simpa [heq]`.
 
-### NEXT (3B.11)
+### 25ae 3B.11 — Part A LANDED (2026-09-16, list-scale wall on 1 ≤ t ≤ 13)
 
-`p4_25ae_wall_list_scale`: for `0 < t ≤ 1e8`, `n = ⌊13t/8⌋` (with `n ≥ 1`),
-`s = 1/2 + it`:  `T3UB(n,s) < (1/2)·n^{−1/2}·(1 − (1/6)(8/13))`.
-Ingredients: per-term monotonicity of `t ↦ |s+k|·n(t)^{−p}` on `[1, 1e8]`
-(each factor = increasing polynomial in `t` × decreasing `n^{-p}` — the
-product is shown max-at-endpoint by comparing the endpoint values with
-rational sqrt bounds), the floor lower bound `n ≥ 13t/8 − 1 ≥ 13t/16` on the
-working subinterval (exact `Int.floor` handling for small `t`), and
-`|s+k| = √((k+1/2)² + t²)` with `Real.sqrt_le_iff`.  One atom, then the
-Stage-3B closeout (docs, mirror, push).
+The 3B.11 wall corollary landed in two parts; **Part A (this entry)**
+covers `1 ≤ t ≤ 13` (four floor-bands); **Part B (13 ≤ t ≤ 1e8)** follows
+in the next commit.
+
+**Landed in `RhAttack/P4Limit.lean` (all LEAN-PROVEN, full build
+17434 jobs / 0 errors / 0 sorry):**
+
+- `t3w_prod`, `t3w_p`, `t3w_d`, `t3w_term`, `t3w_T3UB` — the sharpened
+  4-term bound at list scale.  Term indices `{2, 4, 6, 7}` match the four
+  products of `p4_25ae_T3_bound` (`∏_{k≤i} (t² + (k+1/2)²)`, i = 2, 4, 6,
+  7; i = 7 is the 8-factor `|S6|·|s+7|` product ending at 15/2).
+- `t3w_qA{1..4}_{r}`, `t3w_rA{1..4}_{r}` — strict rational endpoint
+  constants (records: `scripts/rh/day026_25ae_t3wall.py`, exact
+  `Fraction` + `isqrt`; `q` = `(isqrt(a·b)+1)/b` upper bound of
+  `√(a/b)`; `r` upper bound of `n_min^{−p}` via the integer lower bound of
+  `√n_min`).
+- `t3w_prod_mono` (product ↑ in t), `t3w_invpow_le_one` (n^{−p} ≤ 1).
+- **`t3w_wall_A1..A4`** — with `n = ⌊13t/8⌋₊`:
+  - A1: `1 ≤ t < 16/13` (n ≥ 1) → `T3UB < 35/78`  (bound ≈ 0.0218, margin 0.427)
+  - A2: `16/13 ≤ t < 4` (n ≥ 2) → `T3UB < 35/234`  (bound ≈ 0.0186, margin 0.131)
+  - A3: `4 ≤ t < 8` (n ≥ 6) → `T3UB < 35/312`  (bound ≈ 0.00187, margin 0.110)
+  - A4: `8 ≤ t < 13` (n ≥ 13) → `T3UB < 35/390`  (bound ≈ 0.000488, margin 0.089)
+
+  Each band: per term, `√(t3w_prod t r) < q_{r}(t*)` by monotonicity +
+  `Real.sqrt_lt'`/`norm_num`, and `(n:ℝ)^{−p_r} ≤ r_{r}` (A1: `t3w_invpow_le_one`
+  with `r = 1`; A2–A4: `1/n^p ≤ 1/n_min^p` via `rpow_le_rpow` + strict
+  `1/n_min^p < r_{r}` via the `x^{(2k+1)/2} = √(x^{2k+1})` rewrite and
+  `one_div_lt` + `Real.lt_sqrt`), then sum the four
+  `q·r/d` rational constants `< Hlb` by one `norm_num`.
+
+**In-session incidents (honest record):**
+
+1. **The original q-constants were mathematically WRONG** (the scan script's
+   `qdump` used `m/(b·m₁)`, `ub` used `isqrt(a·b²)` — both wrong formulas).
+   The q-lemma proofs (`√(prod) < q`) were false statements; every build
+   that "passed" was a false pass (see 2).
+2. **Grep bug masked the failures:** `lake env lean` prints errors
+   path-prefixed (`Path/File.lean:N:M: error:`), so `grep ^error` matched
+   nothing and several "green" checks were false.  Rule now: grep `error`
+   without `^`, or check the build exit code properly (`PIPESTATUS`).
+3. **Identifier primes are ASCII in Lean sources** (`t'`, `sqrt_lt'`);
+   the Unicode prime U+2032 in source is a *different token* and breaks
+   parsing (`{t t′ : ℝ}` → `unexpected token '′'`).
+4. **`one_div_le_one_div` argument order** (`1/a ≤ 1/b ↔ b ≤ a`) must be
+   matched to the goal's a/b or it silently re-purposes the positivity
+   proofs and the final `rpow_le_rpow` unifies backwards.
+5. **norm_num does not unfold `def`-constants silently** — the rational
+   endpoint constants must be listed in `norm_num [t3w_qB_r, …]`.
+
+**Next: 3B.11 Part B (13 ≤ t ≤ 1e8).**  Design (validated numerically,
+exact `Fraction`): per-term log-derivative
+`h_i(t) = s_i t/(t² + 169/4) + 1/(2t) − p_i·(13/8)/(13t/8 − 1)`;
+terms 1–3 (s = 2, 4, 6) have `h_i < 0` on `[13, ∞)` (cleared-denominator
+quartics `M₁(t) = 364t⁴ − 260t³ + 15539t² − 2197t + 1352`,
+`M₂(t) = 572t⁴ − 468t³ + 24455t² − 2197t + 1352`,
+`M₃(t) = 780t⁴ − 676t³ + 33371t² − 2197t + 1352`, all with positive
+Taylor-at-13 coefficients); term 4 (s = 8) is handled by splitting at 100: a uniform crude bound on
+`[13, 100]`, and endpoint-max (max at `t = 1e8`) on `[100, 1e8]` — signs:
+h₄(13) < 0, h₄(100) > 0, h₄(1e8) > 0, h₄ strictly convex (so it has at most
+two zeros; after the unique crossing it is increasing).  Endpoint sum
+`K1 + K2 + K3 + K4 < 1` (K₄ ≈ 0.82108; total ≈ 0.82117; margin ≈ 0.1788).
+Final theorem: `1 ≤ t ≤ 1e8 → T3UB(n(t), 1/2 + it) < (1/2)·n(t)^{−1/2}·(35/39)`
+(bridging `t3w_T3UB ≤ p4_25ae_T3_bound`'s sum and `n ≤ 13t/8` for the
+right-hand-side height lower bound).
+
+### NEXT (3B.11 Part B: 13 ≤ t ≤ 1e8)
+
+After Part B lands: the combined wall theorem `p4_25ae_wall_list_scale` (1 ≤ t ≤ 1e8) + Stage-3B closeout (docs, mirror, push, wiki).
