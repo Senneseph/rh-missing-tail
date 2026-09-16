@@ -4439,3 +4439,113 @@ differences telescope: Σ_j (u(j+1)−u(j)) = M^p − n^p), pass M→∞
 (4-term triangle), and the list-scale wall corollary (F4b: provable at
 t ≲ 94 550; the dps-50/PINNED wall 0.896783 up to 1e8 stays recorded, not
 LEAN-claimed).
+
+### 25ae Lean port — Stage 3A LANDED (2026-09-16, B8 periodic + finite telescope + J_finite, full build green)
+
+Stage 3A of the 25ae Lean port is LEAN-PROVEN in `formal/RhAttack/P4Limit.lean`.
+Full `lake build` (leanprover/lean4:v4.33.1 + mathlib v4.33.1): 17434 jobs,
+0 errors, 0 sorry (the four "sorry" grep hits in the package are doc comments
+stating "No sorry").
+
+Components landed (all in `formal/RhAttack/P4Limit.lean`):
+
+- **`def B8 (x : ℝ) := B8poly (x - ⌊x⌋₊)`** — the periodic 8-gonal kernel,
+  following the P4Tail `B2` pattern; plus `aestronglyMeasurable_B8`
+  (`unfold B8 B8poly; fun_prop`), `B8_of_Icc_int` (on [n, n+1], B8 = B8poly(x−n);
+  the top-branch floor equality uses the P4Tail-verbatim pattern
+  `Nat.floor_eq_iff (ha := by positivity)` + `norm_num [B8poly_at_0, B8poly_at_1]`),
+  and `abs_B8_le` (|B8 x| ≤ 1/30, via `simpa [v] using
+  B8poly_bound_Icc v ⟨hv0, hv1⟩` with `v = x − ⌊x⌋₊` closed by
+  `grind [Nat.floor_le hx]` / `grind [Nat.lt_succ_floor x]`).
+
+- **`p4_25ae_telescope_pow`** — the finite geometric telescoping over
+  `Finset.Ico n M` of the endpoint differences `((j+1:ℝ):ℂ)^p − ((j:ℝ):ℂ)^p`
+  (proven equal to `((M:ℝ):ℂ)^p − ((n:ℝ):ℂ)^p`).  There is NO ℕ-indexed Ico
+  telescope lemma in mathlib 4.33.1, so this is an own induction (aux lemma
+  `p4_25ae_telescope_pow_aux` on the endpoint form `n + k`, plus the
+  `M = n + (M − n)` bridge).
+
+- **`p4_25ae_J_finite`** — the finite-M identity: for `n ≥ 1`, `M ≥ n`,
+  `s.re = 1/2`,
+
+  ```
+  ∫_n^M B̂₂(x)·(x:ℂ)^(−s−2) dx
+    = 4-term expression in the endpoint differences
+      ((M:ℝ):ℂ)^(−s−3), ((M:ℝ):ℂ)^(−s−5), ((M:ℝ):ℂ)^(−s−7)
+      with the Stage-2 verbatim coefficient atoms
+      (((B4poly 0)/4):ℂ), (((B6poly 0)/6):ℂ), (((B8poly 0)/8):ℂ)
+      and the B8 period-sum residue
+      S8 = ∑_j ∈ Ico n M ∫_j^{j+1} B8poly(x−j)·(x:ℂ)^(−s−8) dx.
+  ```
+
+  Architecture: `set S3..S8` as period sums; (1) `∫_n^M` → period sum via
+  `sum_integral_adjacent_intervals_Ico` (with the per-period
+  `ContinuousOn (B₂-part).mul (cpow-part)` integrability, L4 pattern, plus
+  `Set.EqOn`/`integral_congr` for the B2 ↔ B2poly per-period kernel swap);
+  (2–7) the 7-level IBP ladder applied to the period sums with the six Stage-2
+  atoms (each per-period `exact (p4_25ae_ibp_bKtoK1 (s := s) hsre j hjpos)`),
+  `Finset.mul_sum` for constant extraction, `p4_25ae_telescope_pow` for the
+  endpoint telescopes; (8) final `calc` assembly by `ring` (coefficient atoms
+  kept verbatim so all ring atoms match) and `dsimp only [S8]`.
+
+**Proof-design lessons (durable, each cost a debug round):**
+
+1. **`sum_integral_adjacent_intervals_Ico (a) (h) (hint)` needs the
+   third argument** (the per-period integrability proof); omitting it leaves
+   the rw applied but with an unsolved integrability side-goal.  Its target
+   uses the upper endpoint `((k+1:ℕ) : ℝ)` (`↑(k+1)`), while hand-written
+   targets usually use `(k+1 : ℝ)` (`↑k + 1`): bridge with a follow-up
+   `rw [Finset.sum_congr rfl (fun k _ => by
+     rw [show ((k+1:ℕ) : ℝ) = (k:ℝ) + 1 from Nat.cast_succ k])]` (L4 pattern).
+2. **`intervalIntegral.integral_congr (h : EqOn f g [[a,b]])` — `[[a,b]]` is
+   `Icc a b` and `f, g` must be PINNED** (a named `have hIC : Set.EqOn f g s`,
+   then `exact (integralIntegral.integral_congr (μ := ...) hIC)`).  Passing an
+   inline `by` block leaves `f`, `g` as metavariables: the by-block's goal is
+   `?f x = ?g x`, `dsimp`/`rw` see nothing, the by fails, and the outer rw
+   never applies.  `EqOn` is `Set.EqOn` (needs `open Set` or the qualified
+   name).
+3. **`B2poly` (and the Stage-1–3 `B{K}poly` defs) unfold across files with
+   `dsimp only [B2poly]`** — the real gotcha is the constant term: a polynomial
+   written with a `: ℂ` ascription over the whole expression stores `1/6` as a
+   COMPLEX division, while the def-body form stores `↑(1/6 : ℝ)`.  The two are
+   equal only via `simp [Complex.ofReal_div]` (not `rfl`, not `ring`).
+4. **Under `induction' k`, any hypothesis containing `k` is REVERTED into the
+   IH as a premise** (`IH : (hsumf at k) → (sum = endpoint)`); apply it as
+   `IH (hsumf recon struct ed at k)`.  The plain `rw [IH]` then fails with
+   "pattern not found" because the goal carries the `set`-defined summand form
+   while the IH carries the raw form.
+5. **`omega` is context-fragile**: `n + (k + 1) = (n + k) + 1` closes in a bare
+   context but fails inside heavy tactic contexts (hypotheses with
+   integrals/coercions).  `by ring` is context-independent — prefer it for
+   `show` witnesses in induction blocks.
+6. **Brace-implicit arguments are not positional**: atoms declared
+   `theorem p4_25ae_ibp_bKtoK1 {s : ℂ} (hsre : s.re = 1/2) (j : ℕ) (hj : 0 < j)`
+   must be applied as `… (s := s) hsre j hjpos`; passing `s` positionally
+   shifts everything (`s` lands in the `hsre` slot).  Same for
+   `p4_25ae_telescope_pow (p := …)` and `p4_25ae_telescope_pow_aux` (no
+   explicit `p` at all).
+7. **`Finset.mem_Ico` is not omega-visible**: derive `0 < j` from
+   `j ∈ Finset.Ico n M` via `rw [Finset.mem_Ico] at hj; omega`.  Note the
+   integrability argument of `sum_integral_adjacent_intervals_Ico` passes a
+   `Set.Ico` hypothesis (`Set.mem_Ico.mp hk |>.1`), while the finset-level
+   goals use `Finset.mem_Ico` — both exist, both are `@[simp]`.
+8. **`ContinuousOn` target-set casts**: `(j + 1 : ℝ)` stores as `↑j + 1`,
+   while lemma targets often carry `((j+1:ℕ) : ℝ)` (`↑(j+1)`); bridge with
+   `.mono (by intro x hx; rw [show (j:ℝ) + 1 = ((j+1:ℕ) : ℝ) from
+   (Nat.cast_succ j).symm]; exact hx)]`.  And `0 < x` on [j, j+1] needs the
+   `n ≤ j` leg (`0 < n` alone does not give `0 < x`).
+9. Telescoping base case: `simp [Finset.Ico_self]` closes
+   `0 = (((n+0:ℕ):ℝ):ℂ)^p − ((n:ℝ):ℂ)^p` (add_zero + sub_self under casts);
+   a trailing `ring` then reports "No goals to be solved".
+10. Calc assembly: when the left side is already in `((s+2)/3) * S3` order,
+    `rw [mul_comm]` (no anchors) normalizes to the `S3 * ((s+2)/3)` order that
+    the ladder hypotheses (`h3`–`h7`) expect; an anchored `rw [mul_comm S3 _]`
+    fails because the pattern is not present.
+
+**NEXT (Stage 3B):** the `M → ∞` passage (`p4_25ae_J_iota`: endpoint terms →
+0 via `tendsto_rpow_neg_atTop`; S8 → the improper integral I₈ via the Cauchy
+criterion on period sums, comparison against `x^(−17/2)`), then
+`p4_25ae_I8_bound` (|I₈| ≤ n^(−15/2)/225), `p4_T3_expansion` (the F1 exact
+4-term identity), `p4_T3_bound` (4-term triangle), and the list-scale wall
+corollary (provable at t ≲ 94 550; the dps-50 PINNED wall `0.896783` up to
+1e8 remains a measurement, not a Lean claim).

@@ -50,6 +50,7 @@ header for the uIcc/Nat.cast_add/ContinuousOn.mono conventions):
   * `DifferentiableOn.continuousOn` (Calculus/FDeriv/Basic.lean:664).
 
 STATUS (2026-09-15, Lean 4.33.1): atoms L1, L2, L3, L4, L5.a-e GREEN.  L4 is the missing-tail law (IBP route: `p4_op2c_bound` + `p4_f2_tail_bound`); L5 is the composition root: `p4_Tn_Tendsto` (L5.a, the M-to-infinity limit of the tail partial sums), `p4_zeta_split` (L5.b), `p4_Tn_eq` (L5.c, the tsum passage to `p4_Tn_lim`), `p4_identity` (L5.d, the P4 line-statement for Re s > 1) and `p4_T4_bound` (L5.e, the bound on `p4_em_expr` at Re s = 1/2; the W_n-equality at Re s = 1/2 is cited, DLMF 25.2.8 / Apostol 12.21 - see section doc) and L5.f (`p4_one_minus_s_conj`, `p4_T4_ratio`) the T4 ratio corollary - the correction scale |1-s| = |s| on the critical line and the three-term ratio bound, pure division algebra from L5.e.  No sorry.
+STATUS (2026-09-16, Lean 4.33.1): 25ae Stage 3A GREEN - periodic `B8` (def + measurability + `B8_of_Icc_int` + `abs_B8_le` via the pure-algebra `B8poly_bound_Icc`), the finite telescoping lemma `p4_25ae_telescope_pow` (own induction; no Ico-telescope in mathlib 4.33.1), and `p4_25ae_J_finite` (the finite-M identity for the EM tail integral: the 7-level per-period IBP ladder over period sums S3-S8, endpoint differences at n and M with the verbatim Stage-2 coefficient atoms, and the B8 period-sum residue S8).  Full package build: 17434 jobs, 0 errors, 0 sorry.
 THEOREMS (L1): p4_f_hasDerivAt, p4_f1_hasDerivAt, p4_f2_hasDerivAt,
  p4_f1_at, p4_f2_at, p4_f1_on_Icc, p4_f2_on_Icc.
 THEOREMS (L2): p4_integral_closed, p4_finite_em2.
@@ -2565,6 +2566,325 @@ theorem p4_Tn_Tendsto {s : ℂ} (hsσ : 1 < s.re) (n : ℕ) (hn : 0 < n) :
               ring
             rw [hC]
             simp
+
+  --/ ===== 25ae Stage 3A — periodic B8, telescope, finite-M identity (J) =====
+
+  -- The periodic 8th Bernoulli function (kernel = B8poly on each [j, j+1]).
+  noncomputable def B8 (x : ℝ) : ℝ := B8poly (x - ⌊x⌋₊)
+
+  @[fun_prop]
+  lemma aestronglyMeasurable_B8 : AEStronglyMeasurable B8 := by
+    unfold B8 B8poly
+    fun_prop
+
+  -- On [n, n+1]: B8 = B8poly(·−n).  (Same shape as P4Tail.B2_of_Icc_int.)
+  lemma B8_of_Icc_int (n : ℕ) {x : ℝ} (hx : x ∈ Set.Icc (n : ℝ) (n + 1 : ℝ)) :
+      B8 x = B8poly (x - n) := by
+    unfold B8
+    by_cases htop : x = (n + 1 : ℝ)
+    · rw [htop]
+      have hfl : (⌊(n + 1 : ℝ)⌋₊ : ℕ) = n + 1 :=
+        (Nat.floor_eq_iff (ha := by positivity)).mpr
+          ⟨by norm_cast, by
+            norm_cast
+            linarith⟩
+      rw [hfl]
+      norm_num [B8poly_at_0, B8poly_at_1]
+    · have hn : (⌊x⌋₊ : ℝ) = (n : ℝ) := by
+        norm_cast
+        rw [Nat.floor_eq_iff (by linarith [show (0 : ℝ) ≤ x from le_trans (Nat.cast_nonneg n) hx.1])]
+        constructor
+        · linarith [hx.1]
+        · exact lt_of_le_of_ne hx.2 htop
+      rw [hn]
+
+  -- |B8 x| <= 1/30 for x >= 0 (kernel in [0,1]; B8poly_bound_Icc on [0,1]).
+  lemma abs_B8_le {x : ℝ} (hx : 0 ≤ x) : |B8 x| ≤ 1 / 30 := by
+    unfold B8
+    set v := (x - ⌊x⌋₊ : ℝ) with hv
+    have hv0 : 0 ≤ v := by grind [Nat.floor_le hx]
+    have hv1 : v ≤ 1 := by grind [Nat.lt_succ_floor x]
+    simpa [v] using B8poly_bound_Icc v ⟨hv0, hv1⟩
+
+  -- Aux telescope with the endpoint written as n + k (avoids ℕ-cast traps).
+  lemma p4_25ae_telescope_pow_aux {p : ℂ} (n k : ℕ) :
+      (∑ j ∈ Finset.Ico n (n + k), (((j + 1 : ℝ) : ℂ) ^ p - ((j : ℝ) : ℂ) ^ p))
+          = (((n + k : ℕ) : ℝ) : ℂ) ^ p - ((n : ℝ) : ℂ) ^ p := by
+    set f : ℕ → ℂ :=
+      fun (x : ℕ) => (((x + 1 : ℕ) : ℝ) : ℂ) ^ p - (((x : ℕ) : ℝ) : ℂ) ^ p with hf
+    have hsumf : (∑ j ∈ Finset.Ico n (n + k), (((j + 1 : ℝ) : ℂ) ^ p - ((j : ℝ) : ℂ) ^ p))
+        = (∑ j ∈ Finset.Ico n (n + k), f j) := by
+      apply Finset.sum_congr rfl
+      intro j _
+      dsimp only [f]
+      simp only [Nat.cast_add, Nat.cast_one]
+    rw [hsumf]
+    induction' k with k IH
+    · simp [Finset.Ico_self]
+    · rw [show n + (k + 1) = (n + k) + 1 from by ring]
+      have IHraw : (∑ j ∈ Finset.Ico n (n + k),
+                  (((j + 1 : ℝ) : ℂ) ^ p - ((j : ℝ) : ℂ) ^ p))
+          = (∑ j ∈ Finset.Ico n (n + k), f j) := by
+        apply Finset.sum_congr rfl
+        intro j _
+        dsimp only [f]
+        simp only [Nat.cast_add, Nat.cast_one]
+      have IHg : (∑ j ∈ Finset.Ico n (n + k), f j) =
+          (((n + k : ℕ) : ℝ) : ℂ) ^ p - ((n : ℝ) : ℂ) ^ p := IH IHraw
+      rw [Finset.sum_Ico_succ_top (Nat.le_add_right n k) f]
+      rw [IHg]
+      dsimp only [f]
+      ring
+
+  -- Finite telescope over Ico (no ℕ-indexed Ico telescope in mathlib 4.33.1).
+  lemma p4_25ae_telescope_pow {p : ℂ} (n M : ℕ) (hnm : n ≤ M) :
+      (∑ j ∈ Finset.Ico n M, (((j + 1 : ℝ) : ℂ) ^ p - ((j : ℝ) : ℂ) ^ p))
+          = ((M : ℝ) : ℂ) ^ p - ((n : ℝ) : ℂ) ^ p := by
+    have hM : M = n + (M - n) := by omega
+    rw [hM]
+    exact p4_25ae_telescope_pow_aux n (M - n)
+
+  -- The finite-M identity.  J(M) := ∫_n^M B̂₂ x^{-s-2} dx, expressed via the
+  -- endpoint differences (B4/B6/B8 boundary values) and the B8 period-sum
+  -- tail.  Coefficient atoms are verbatim those of the Stage-2 atoms
+  -- (so all ring atoms between the assembled term and the target match).
+  theorem p4_25ae_J_finite {s : ℂ} (hsre : s.re = 1 / 2) (n M : ℕ) (hn : 0 < n)
+      (hnm : n ≤ M) :
+      (∫ x in (n : ℝ)..(M : ℝ), (B2 x : ℂ) * (x : ℂ) ^ (-s - 2))
+          = ((s + 2 : ℂ) / 3) * (((B4poly 0) / 4) : ℂ) *
+              (((M : ℝ) : ℂ) ^ (-s - 3) - ((n : ℝ) : ℂ) ^ (-s - 3))
+            + ((s + 2 : ℂ) * (s + 3) * (s + 4) / 60) * (((B6poly 0) / 6) : ℂ) *
+              (((M : ℝ) : ℂ) ^ (-s - 5) - ((n : ℝ) : ℂ) ^ (-s - 5))
+            + ((s + 2 : ℂ) * (s + 3) * (s + 4) * (s + 5) * (s + 6) / 2520) *
+              (((B8poly 0) / 8) : ℂ) *
+              (((M : ℝ) : ℂ) ^ (-s - 7) - ((n : ℝ) : ℂ) ^ (-s - 7))
+            + ((s + 2 : ℂ) * (s + 3) * (s + 4) * (s + 5) * (s + 6) * (s + 7) / 20160) *
+              (∑ j ∈ Finset.Ico n M,
+                (∫ x in (j : ℝ)..(j + 1 : ℝ),
+                  (B8poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 8))) := by
+    -- period sums at each ladder level
+    set S3 := (∑ j ∈ Finset.Ico n M,
+        (∫ x in (j : ℝ)..(j + 1 : ℝ), (B3poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 3))) with hS3
+    set S4 := (∑ j ∈ Finset.Ico n M,
+        (∫ x in (j : ℝ)..(j + 1 : ℝ), (B4poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 4))) with hS4
+    set S5 := (∑ j ∈ Finset.Ico n M,
+        (∫ x in (j : ℝ)..(j + 1 : ℝ), (B5poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 5))) with hS5
+    set S6 := (∑ j ∈ Finset.Ico n M,
+        (∫ x in (j : ℝ)..(j + 1 : ℝ), (B6poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 6))) with hS6
+    set S7 := (∑ j ∈ Finset.Ico n M,
+        (∫ x in (j : ℝ)..(j + 1 : ℝ), (B7poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 7))) with hS7
+    set S8 := (∑ j ∈ Finset.Ico n M,
+        (∫ x in (j : ℝ)..(j + 1 : ℝ), (B8poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 8))) with hS8
+    -- (1) ∫_n^M with the B2 kernel = the period sum (kernel = B2poly per period)
+    have h1 : (∫ x in (n : ℝ)..(M : ℝ), (B2 x : ℂ) * (x : ℂ) ^ (-s - 2))
+        = (∑ j ∈ Finset.Ico n M,
+            (∫ x in (j : ℝ)..(j + 1 : ℝ), (B2poly j x : ℂ) * (x : ℂ) ^ (-s - 2))) := by
+      rw [← sum_integral_adjacent_intervals_Ico (a := fun k : ℕ => (k : ℝ)) hnm
+        (fun (j : ℕ) hjk => by
+          have hco2 : ContinuousOn (fun x : ℝ => (B2 x : ℂ)) (Set.Icc (j : ℝ) (j + 1 : ℝ)) := by
+            have hpoly : ContinuousOn
+                (fun x : ℝ => (((x - (j : ℝ)) ^ 2 - (x - (j : ℝ)) + 1 / 6 : ℝ) : ℂ))
+                (Set.Icc (j : ℝ) (j + 1 : ℝ)) := by fun_prop
+            exact ContinuousOn.congr hpoly (by
+              intro x hx
+              dsimp only
+              rw [B2_of_Icc_int (n := (j : ℕ)) hx])
+          have hcohpoly : ContinuousOn (fun x : ℝ => (x : ℂ) ^ (-s - 2))
+              (Set.Icc (j : ℝ) (j + 1 : ℝ)) := by
+            intro x hx
+            have hpos : 0 < x := by
+              calc 0 < (n : ℝ) := Nat.cast_pos.mpr hn
+                _ ≤ (j : ℝ) := Nat.cast_le (α := ℝ) |>.mpr (Set.mem_Ico.mp hjk |>.1)
+                _ ≤ x := by
+                  simpa [show min (j : ℝ) (j + 1) = (j : ℝ) from min_eq_left (by nlinarith)] using hx.1
+            exact (Complex.continuousAt_ofReal_cpow_const x (-s - 2)
+                (Or.inr (ne_of_gt hpos))).continuousWithinAt
+          have hco : ContinuousOn (fun x : ℝ => (B2 x : ℂ) * (x : ℂ) ^ (-s - 2))
+              (Set.Icc (j : ℝ) ((j + 1 : ℕ) : ℝ)) :=
+            (hco2.mul hcohpoly).mono (by
+              intro x hx
+              rw [show (j : ℝ) + 1 = ((j + 1 : ℕ) : ℝ) from (Nat.cast_succ j).symm]
+              exact hx)
+          exact hco.intervalIntegrable_of_Icc (by norm_num))]
+      rw [Finset.sum_congr rfl (fun j _ => by
+        rw [show ((j + 1 : ℕ) : ℝ) = (j : ℝ) + 1 from Nat.cast_succ j])]
+      apply Finset.sum_congr rfl
+      intro j hj
+      have hIC : Set.EqOn (fun x : ℝ => (B2 x : ℂ) * (x : ℂ) ^ (-s - 2))
+          (fun x : ℝ => (B2poly j x : ℂ) * (x : ℂ) ^ (-s - 2))
+          (Set.uIcc (j : ℝ) (j + 1 : ℝ)) := by
+        intro x hx
+        have hxIcc : x ∈ Set.Icc (j : ℝ) (j + 1 : ℝ) :=
+          ⟨by simpa [show min (j : ℝ) (j + 1 : ℝ) = (j : ℝ) from min_eq_left (by nlinarith)] using hx.1,
+            by simpa using hx.2⟩
+        dsimp only [B2poly]
+        rw [B2_of_Icc_int j hxIcc]
+      exact (intervalIntegral.integral_congr (μ := (MeasureTheory.volume : Measure ℝ)) hIC)
+    -- (2) B2 -> B3 (vanishing B3 boundary): period sum = (s+2)/3 · S3
+    have h2 : (∑ j ∈ Finset.Ico n M,
+            (∫ x in (j : ℝ)..(j + 1 : ℝ), (B2poly j x : ℂ) * (x : ℂ) ^ (-s - 2)))
+        = S3 * ((s + 2 : ℂ) / 3) := by
+      have hper : (∑ j ∈ Finset.Ico n M,
+              (∫ x in (j : ℝ)..(j + 1 : ℝ), (B2poly j x : ℂ) * (x : ℂ) ^ (-s - 2)))
+          = (∑ j ∈ Finset.Ico n M,
+              (s + 2 : ℂ) / 3 *
+                (∫ x in (j : ℝ)..(j + 1 : ℝ),
+                  (B3poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 3))) := by
+        apply Finset.sum_congr rfl
+        intro j hj
+        have hjpos : 0 < j := by
+          rw [Finset.mem_Ico] at hj
+          omega
+        have hraw : (∫ x in (j : ℝ)..(j + 1 : ℝ), (B2poly j x : ℂ) * (x : ℂ) ^ (-s - 2))
+            = (∫ x in (j : ℝ)..(j + 1 : ℝ),
+                (((x - (j : ℝ)) ^ 2 - (x - (j : ℝ)) + 1 / 6 : ℂ) * (x : ℂ) ^ (-s - 2))) := by
+          have hIC : EqOn (fun x : ℝ => (B2poly j x : ℂ) * (x : ℂ) ^ (-s - 2))
+              (fun x : ℝ => (((x - (j : ℝ)) ^ 2 - (x - (j : ℝ)) + 1 / 6 : ℂ) * (x : ℂ) ^ (-s - 2)))
+              (Set.uIcc (j : ℝ) (j + 1 : ℝ)) := by
+            intro x _
+            dsimp only [B2poly]
+            simp [Complex.ofReal_div]
+          exact (intervalIntegral.integral_congr (μ := (MeasureTheory.volume : Measure ℝ)) hIC)
+        rw [hraw]
+        exact (p4_25ae_ibp_b2to3 (s := s) hsre j hjpos)
+      rw [hper, ← Finset.mul_sum]
+      dsimp only [S3]
+      ring
+    -- (3) B3 -> B4: S3 = B4-boundary·Δu3 + (s+3)/4 · S4
+    have h3 : S3 = (((B4poly 0) / 4) : ℂ) *
+            (((M : ℝ) : ℂ) ^ (-s - 3) - ((n : ℝ) : ℂ) ^ (-s - 3))
+          + S4 * ((s + 3 : ℂ) / 4) := by
+      dsimp only [S3, S4]
+      have hper : (∑ j ∈ Finset.Ico n M,
+              (∫ x in (j : ℝ)..(j + 1 : ℝ), (B3poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 3)))
+          = (∑ j ∈ Finset.Ico n M,
+              ((((B4poly 0) / 4) : ℂ) *
+                (((j + 1 : ℝ) : ℂ) ^ (-s - 3) - ((j : ℝ) : ℂ) ^ (-s - 3))
+                + (s + 3 : ℂ) / 4 *
+                    (∫ x in (j : ℝ)..(j + 1 : ℝ),
+                      (B4poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 4)))) := by
+        apply Finset.sum_congr rfl
+        intro j hj
+        have hjpos : 0 < j := by
+          rw [Finset.mem_Ico] at hj
+          omega
+        exact (p4_25ae_ibp_b3to4 (s := s) hsre j hjpos)
+      rw [hper, Finset.sum_add_distrib,
+        ← Finset.mul_sum,
+        p4_25ae_telescope_pow (p := (-s - 3 : ℂ)) n M hnm,
+        ← Finset.mul_sum]
+      ring
+    -- (4) B4 -> B5 (vanishing B5 boundary): S4 = (s+4)/5 · S5
+    have h4 : S4 = S5 * ((s + 4 : ℂ) / 5) := by
+      dsimp only [S4, S5]
+      have hper : (∑ j ∈ Finset.Ico n M,
+              (∫ x in (j : ℝ)..(j + 1 : ℝ), (B4poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 4)))
+          = (∑ j ∈ Finset.Ico n M,
+              (s + 4 : ℂ) / 5 *
+                (∫ x in (j : ℝ)..(j + 1 : ℝ),
+                  (B5poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 5))) := by
+        apply Finset.sum_congr rfl
+        intro j hj
+        have hjpos : 0 < j := by
+          rw [Finset.mem_Ico] at hj
+          omega
+        simpa using (p4_25ae_ibp_b4to5 (s := s) hsre j hjpos)
+      rw [hper, ← Finset.mul_sum]
+      ring
+    -- (5) B5 -> B6: S5 = B6-boundary·Δu5 + (s+5)/6 · S6
+    have h5 : S5 = (((B6poly 0) / 6) : ℂ) *
+            (((M : ℝ) : ℂ) ^ (-s - 5) - ((n : ℝ) : ℂ) ^ (-s - 5))
+          + S6 * ((s + 5 : ℂ) / 6) := by
+      dsimp only [S5, S6]
+      have hper : (∑ j ∈ Finset.Ico n M,
+              (∫ x in (j : ℝ)..(j + 1 : ℝ), (B5poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 5)))
+          = (∑ j ∈ Finset.Ico n M,
+              ((((B6poly 0) / 6) : ℂ) *
+                (((j + 1 : ℝ) : ℂ) ^ (-s - 5) - ((j : ℝ) : ℂ) ^ (-s - 5))
+                + (s + 5 : ℂ) / 6 *
+                    (∫ x in (j : ℝ)..(j + 1 : ℝ),
+                      (B6poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 6)))) := by
+        apply Finset.sum_congr rfl
+        intro j hj
+        have hjpos : 0 < j := by
+          rw [Finset.mem_Ico] at hj
+          omega
+        exact (p4_25ae_ibp_b5to6 (s := s) hsre j hjpos)
+      rw [hper, Finset.sum_add_distrib,
+        ← Finset.mul_sum,
+        p4_25ae_telescope_pow (p := (-s - 5 : ℂ)) n M hnm,
+        ← Finset.mul_sum]
+      ring
+    -- (6) B6 -> B7 (vanishing B7 boundary): S6 = (s+6)/7 · S7
+    have h6 : S6 = S7 * ((s + 6 : ℂ) / 7) := by
+      dsimp only [S6, S7]
+      have hper : (∑ j ∈ Finset.Ico n M,
+              (∫ x in (j : ℝ)..(j + 1 : ℝ), (B6poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 6)))
+          = (∑ j ∈ Finset.Ico n M,
+              (s + 6 : ℂ) / 7 *
+                (∫ x in (j : ℝ)..(j + 1 : ℝ),
+                  (B7poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 7))) := by
+        apply Finset.sum_congr rfl
+        intro j hj
+        have hjpos : 0 < j := by
+          rw [Finset.mem_Ico] at hj
+          omega
+        simpa using (p4_25ae_ibp_b6to7 (s := s) hsre j hjpos)
+      rw [hper, ← Finset.mul_sum]
+      ring
+    -- (7) B7 -> B8: S7 = B8-boundary·Δu7 + (s+7)/8 · S8
+    have h7 : S7 = (((B8poly 0) / 8) : ℂ) *
+            (((M : ℝ) : ℂ) ^ (-s - 7) - ((n : ℝ) : ℂ) ^ (-s - 7))
+          + S8 * ((s + 7 : ℂ) / 8) := by
+      dsimp only [S7, S8]
+      have hper : (∑ j ∈ Finset.Ico n M,
+              (∫ x in (j : ℝ)..(j + 1 : ℝ), (B7poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 7)))
+          = (∑ j ∈ Finset.Ico n M,
+              ((((B8poly 0) / 8) : ℂ) *
+                (((j + 1 : ℝ) : ℂ) ^ (-s - 7) - ((j : ℝ) : ℂ) ^ (-s - 7))
+                + (s + 7 : ℂ) / 8 *
+                    (∫ x in (j : ℝ)..(j + 1 : ℝ),
+                      (B8poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 8)))) := by
+        apply Finset.sum_congr rfl
+        intro j hj
+        have hjpos : 0 < j := by
+          rw [Finset.mem_Ico] at hj
+          omega
+        exact (p4_25ae_ibp_b7to8 (s := s) hsre j hjpos)
+      rw [hper, Finset.sum_add_distrib,
+        ← Finset.mul_sum,
+        p4_25ae_telescope_pow (p := (-s - 7 : ℂ)) n M hnm,
+        ← Finset.mul_sum]
+      ring
+    -- (8) assemble the ladder
+    calc (∫ x in (n : ℝ)..(M : ℝ), (B2 x : ℂ) * (x : ℂ) ^ (-s - 2))
+        _ = (∑ j ∈ Finset.Ico n M,
+              (∫ x in (j : ℝ)..(j + 1 : ℝ), (B2poly j x : ℂ) * (x : ℂ) ^ (-s - 2))) := h1
+        _ = S3 * ((s + 2 : ℂ) / 3) := h2
+        _ = ((s + 2 : ℂ) / 3) * S3 := by ring
+        _ = ((s + 2 : ℂ) / 3) * (((B4poly 0) / 4) : ℂ) *
+                (((M : ℝ) : ℂ) ^ (-s - 3) - ((n : ℝ) : ℂ) ^ (-s - 3))
+            + ((s + 2 : ℂ) * (s + 3) * (s + 4) / 60) * (((B6poly 0) / 6) : ℂ) *
+                (((M : ℝ) : ℂ) ^ (-s - 5) - ((n : ℝ) : ℂ) ^ (-s - 5))
+            + ((s + 2 : ℂ) * (s + 3) * (s + 4) * (s + 5) * (s + 6) / 2520) *
+                (((B8poly 0) / 8) : ℂ) *
+                (((M : ℝ) : ℂ) ^ (-s - 7) - ((n : ℝ) : ℂ) ^ (-s - 7))
+            + ((s + 2 : ℂ) * (s + 3) * (s + 4) * (s + 5) * (s + 6) * (s + 7) / 20160) *
+                S8 := by
+          rw [mul_comm, h3, h4, h5, h6, h7]
+          ring
+        _ = ((s + 2 : ℂ) / 3) * (((B4poly 0) / 4) : ℂ) *
+                (((M : ℝ) : ℂ) ^ (-s - 3) - ((n : ℝ) : ℂ) ^ (-s - 3))
+            + ((s + 2 : ℂ) * (s + 3) * (s + 4) / 60) * (((B6poly 0) / 6) : ℂ) *
+                (((M : ℝ) : ℂ) ^ (-s - 5) - ((n : ℝ) : ℂ) ^ (-s - 5))
+            + ((s + 2 : ℂ) * (s + 3) * (s + 4) * (s + 5) * (s + 6) / 2520) *
+                (((B8poly 0) / 8) : ℂ) *
+                (((M : ℝ) : ℂ) ^ (-s - 7) - ((n : ℝ) : ℂ) ^ (-s - 7))
+            + ((s + 2 : ℂ) * (s + 3) * (s + 4) * (s + 5) * (s + 6) * (s + 7) / 20160) *
+                (∑ j ∈ Finset.Ico n M,
+                  (∫ x in (j : ℝ)..(j + 1 : ℝ),
+                    (B8poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 8))) := by
+            dsimp only [S8]
 
 end
 
