@@ -4549,3 +4549,137 @@ criterion on period sums, comparison against `x^(−17/2)`), then
 4-term identity), `p4_T3_bound` (4-term triangle), and the list-scale wall
 corollary (provable at t ≲ 94 550; the dps-50 PINNED wall `0.896783` up to
 1e8 remains a measurement, not a Lean claim).
+
+## 25ae Stage 3B — the M → ∞ passage, the sharpened T3 bound machine-proven, and the F1/F4 exponent corrections (2026-09-16)
+
+**Status: Stage 3B atoms 3B.1–3B.10 LEAN-GREEN in `formal/RhAttack/P4Limit.lean`;
+full package build 17434 jobs / 0 errors / 0 sorry.  3B.11 (the Lean
+list-scale wall corollary) is the one remaining Stage-3B atom.**
+
+### Landed atoms (all in the P4Limit `noncomputable section`)
+
+| atom | statement |
+|---|---|
+| 3B.1 `p4_B8cpw8_integrableOn_Ioi` | `B8·x^{−s−8}` absolutely integrable on `(c,∞)`, `Re s > −7` (majorant `(1/30)x^{−(Re s+8)}`) |
+| 3B.2 `p4_B8cpw8_tendsto` | `∫_n^M B8 x^{−s−8} → ∫_n^∞ …` as `M → ∞` |
+| 3B.3 `p4_25ae_cpwtendsto0` | `M^{−s−k} → 0` (`Re s = 1/2`, `k ≥ 3`), via `Complex.norm_cpow_eq_rpow_re_of_pos` + `tendsto_rpow_neg_atTop` |
+| 3B.4 `p4_25ae_S8_eq_interval` | the B8 period-sum `S8(n,M)` equals `∫_n^M B8 x^{−s−8}` |
+| 3B.5 `p4_25ae_S8_tendsto` | `S8(n,M) → ∫_n^∞ B8 x^{−s−8} =: I8` (Cauchy on period sums) |
+| 3B.6 `p4_25ae_J_iota` | `∫_n^M B2 x^{−s−2} → 4-term expression` (finite ladder of Stage-2 atoms + 3B.2–3B.5) |
+| 3B.7a `p4_25ae_int_Icc_rpow172` | `∫_n^M x^{−17/2} = (2/15)(n^{−15/2} − M^{−15/2})` — FTC-2 via `integral_eq_of_hasDerivAt_off_countable` + `hasDerivAt_rpow_const` |
+| 3B.7b `p4_25ae_int_Ioi_rpow172` | `∫_n^∞ x^{−17/2} = (2/15)n^{−15/2}` — order-limit from 3B.7a |
+| 3B.7c/3B.8 `p4_25ae_I8_bound` | `‖I8‖ ≤ (n:ℝ)^{−15/2}/225` on the critical line (`|B8| ≤ 1/30` + 3B.7b; `norm_integral_le_integral_norm` + monotone finite-integral majorant + order limit) |
+| 3B.9a `p4_25ae_t3kernel_integrableOn_Ioi` | `B2·x^{−s−2}` integrable on `(c,∞)` for `Re s > −1` (majorant `(1/6)x^{−(Re s+2)}`) |
+| 3B.9b `p4_25ae_J_eq` | `∫_n^∞ B2 x^{−s−2} = ` the exact 4-term expression (improper integral = `J_iota` limit via `intervalIntegral_tendsto_integral_Ioi` + `tendsto_nhds_unique`) |
+| 3B.10 `p4_25ae_T3_bound` | `‖−(1/2)s(s+1)∫_n^∞ B2 x^{−s−2}‖ ≤ T3UB` — the sharpened 4-term triangle bound stated below |
+
+### THE CORRECTIONS (discovered during the Lean port; the anchor script was wrong)
+
+1. **F1 second-term exponent: `n^{−9/2}` → `n^{−11/2}`.**  The anchor
+   `day026_25ae_final.py` (and the F1 docstring) carried the second triangle
+   term as `|S4|·n^{−9/2}/30240`.  On the critical line `Re(−s−5) = −(1/2+5) =
+   −11/2`, so the endpoint term `n^{−s−5}` has norm `n^{−11/2}`.  The Lean
+   theorem carries `n^{−11/2}` (`hN5`).  This is a hard correction: it makes
+   the S4-term decay as `t^{−1/2}` (rather than grow as `t^{+1/2}`) at list
+   scale, so it dominates the wall.
+2. **F1/F4 fourth-term exponent: `n^{−31/2}` was a typo.**  Correct
+   `|I8| ≤ (1/30)·(2/15)·n^{−15/2} = n^{−15/2}/225` (3B.8), hence the
+   fourth triangle term is `|S6|·|s+7|·n^{−15/2}/9072000`.
+3. **The CORRECTED 4-term bound (3B.10, machine-proven):**
+   ```
+   T3UB(n,s) = |s(s+1)(s+2)|·n^{−7/2}/720
+             + |s(s+1)(s+2)(s+3)(s+4)|·n^{−11/2}/30240
+             + |s(s+1)(s+2)(s+3)(s+4)(s+5)(s+6)|·n^{−15/2}/1209600
+             + |s(s+1)·…·(s+7)|·n^{−15/2}/9072000
+   ```
+   (last factor `= |S6(s+7)|/9072000 = |S6|·|s+7|/9072000`; `9072000 =
+   20160·450`).
+4. **Wall re-anchor (list scale `n = ⌊13t/8⌋`, `s = 1/2 + it`):**
+   crossover of `T3UB/|T1|` with `1 − (1/6)(8/13) = 0.8974359…` is now
+   **`t ≈ 1.217e8`** (recomputed, dps-safe scan).  At `t = 1e8`: ratio
+   `0.7374597`, **wall margin `≈ 0.15998` (16 %)**.  The old anchor figure
+   `94 550` is voided (it used the wrong `n^{−9/2}` second term); the old
+   dps-50 pin `0.896783 @1e8` is superseded by the corrected measurement
+   `0.73746 @1e8` (PINNED measurement, not yet a Lean claim).
+5. **Chosen Lean wall for 3B.11: `t ≤ 1e8`** — a clean constant with a 16 %
+   margin under the corrected bound.
+
+### Incident (file corruption during a bulk insertion)
+
+An anchored bulk Python insertion (the first attempt at 3B.10) transiently
+corrupted `P4Limit.lean` — it dropped the top-level L5 block
+(`p4_zeta_split`…`p4_T4_ratio`) and a section boundary, breaking
+`RhAttack.P8Floor`.  Rebuilt from `HEAD` (3A prefix + L5, verbatim) + the
+current 3B content inserted inside the `noncomputable section` before its
+`end`; full package build verified green after each step.  Standing lesson
+(appended to the cumulative list): for bulk edits > 50 lines in this module,
+verify anchor uniqueness AND inspect the resulting `git diff` stat before
+building — prefer extracting from two known-good snapshots over in-place
+replacement.
+
+### Proof-engineering notes (Stage 3B, cumulative)
+
+- **FTC-2 for real powers:** `integral_eq_of_hasDerivAt_off_countable` with
+  `s := ∅`; integrand `x ↦ (−17/2)·x^{−19/2}` via `hasDerivAt_rpow_const
+  (Or.inl (ne_of_gt hx))`; the constant-multiplier derivative bridged with
+  `HasDerivAt.const_mul (c) h` + `.congr_deriv (c) (show by ring)` —
+  `convert (HasDerivAt.const_mul _ h) using 1` can spawn extra typeclass
+  goals (`ring` cannot rewrite rpow exponents, so exponent arithmetic like
+  `−(15/2) − 1 = −(17/2)` is a separate `show … by ring`).
+- **`Complex.continuousAt_ofReal_cpow_const x y (0 < y.re ∨ x ≠ 0)`** is the
+  pointwise cpow-continuity entry point; on `(c,∞)` feed `Or.inr (ne_of_gt
+  (hc.trans hx))`.
+- **`norm_integral_le_integral_norm (f := …) (μ := volume.restrict (Ioi c))`**
+  — pin `f` and `μ` explicitly (curly `B` stays inferred); the LHS indicator
+  cancels by simp; the RHS variation bridge is `ae_restrict_iff'
+  measurableSet_Ioi` + `ae_of_all`.
+- **Order-limit pattern for `∫_n^M ≤ C` with `F(M) → L`:** split
+  `eventually [Ici (max …)]` into `eventually (F → L)` and
+  `eventually (F ≤ C)` via `Metric.ball_mem_nhds` + `mem_of_superset`; then
+  `L ≤ C` by `lt_of_le_of_lt`/`le_of_lt` composition.
+- **`intervalIntegrable_iff` + `uIoc` bridge:** for the closed-interval
+  majorant, `rw [intervalIntegrable_iff]` at both the hypothesis and the
+  goal; `uIoc (n : ℝ) M ⊆ Ioi (n : ℝ)` holds for all `M` (the min/max
+  definition makes the left endpoint inclusive exactly when `n ≤ M`).
+- **Cauchy on period sums (S8 → I8):** `IntegrableOn.cauchy` gives
+  `eventually (fun p q => ‖∫ in a..b‖ < 3ε)` on `Ioi c ×ˢ Ioi c`;
+  `set PQ` + a single `filter_upwards` with `M,N ≥ max(n, (n:M)+ceil c)`
+  closes both coordinate projections (no `Filter.Fsim` needed).
+- **`Tendsto.congr'` for the `=ᶠ` bridge:** direction is
+  `f₁ =ᶠ[l] f₂` with the *known-tendsto* function as `f₁`; the `Ici n`
+  filter carries the `M ≥ n` side condition of `p4_25ae_J_finite`.
+- **`tendsto_nhds_unique`** (T2 + `NeBot`) is the limit-uniqueness closer;
+  `intervalIntegral_tendsto_integral_Ioi a hInt tendsto_id` composes with
+  `tendsto_natCast_atTop_atTop (R := ℝ)` for the ℕ-indexed passage.
+- **`rw` auto-closes** a goal that becomes reflexive — trailing `ring` after
+  a closing `rw` then errors "No goals to be solved"; same for `calc` steps
+  whose target equals the goal's remainder.
+- **`0 < x` chaining:** write `have h0x : 0 < x := hc.trans hcx` explicitly;
+  inline `hc.trans hcx` inside `ne_of_gt (…)` mis-parses (the `.trans`
+  expects a proof argument, not a relation).
+- **`linarith` polymorphic-literal trap:** `zero_lt_one` in a real goal can
+  spawn a stuck `NeZero 1` instance; `show (0 : ℝ) < 1 by norm_num` avoids
+  it.
+- **`calc` in `≤` goals:** `=` steps rewrite the goal's LHS; the final
+  obligation is `TARGET ≤ TARGET` — close it with an explicit `_ ≤ TARGET :=
+  le_rfl` step (or wrap the `=` calc in a `have hcalc : LHS = TARGET` and
+  conclude with `exact le_of_eq hcalc`).
+- **`gcongr` does not use hypotheses for its core atom automatically when
+  the term shapes differ**; the explicit `apply
+  mul_le_mul_of_nonneg_left hBOUND; positivity` is the reliable closer.
+- **Rational-literal rpow exponents:** `-(15/2 : ℝ)` and `-(15 : ℝ)/2` are
+  extensionally equal but NOT definitionally — `simpa` fails across the
+  two forms; bridge with `have heq : -(15/2 : ℝ) = (-(15 : ℝ)/2) := by
+  norm_num` + `simpa [heq]`.
+
+### NEXT (3B.11)
+
+`p4_25ae_wall_list_scale`: for `0 < t ≤ 1e8`, `n = ⌊13t/8⌋` (with `n ≥ 1`),
+`s = 1/2 + it`:  `T3UB(n,s) < (1/2)·n^{−1/2}·(1 − (1/6)(8/13))`.
+Ingredients: per-term monotonicity of `t ↦ |s+k|·n(t)^{−p}` on `[1, 1e8]`
+(each factor = increasing polynomial in `t` × decreasing `n^{-p}` — the
+product is shown max-at-endpoint by comparing the endpoint values with
+rational sqrt bounds), the floor lower bound `n ≥ 13t/8 − 1 ≥ 13t/16` on the
+working subinterval (exact `Int.floor` handling for small `t`), and
+`|s+k| = √((k+1/2)² + t²)` with `Real.sqrt_le_iff`.  One atom, then the
+Stage-3B closeout (docs, mirror, push).

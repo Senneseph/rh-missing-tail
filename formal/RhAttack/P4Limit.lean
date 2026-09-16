@@ -51,6 +51,7 @@ header for the uIcc/Nat.cast_add/ContinuousOn.mono conventions):
 
 STATUS (2026-09-15, Lean 4.33.1): atoms L1, L2, L3, L4, L5.a-e GREEN.  L4 is the missing-tail law (IBP route: `p4_op2c_bound` + `p4_f2_tail_bound`); L5 is the composition root: `p4_Tn_Tendsto` (L5.a, the M-to-infinity limit of the tail partial sums), `p4_zeta_split` (L5.b), `p4_Tn_eq` (L5.c, the tsum passage to `p4_Tn_lim`), `p4_identity` (L5.d, the P4 line-statement for Re s > 1) and `p4_T4_bound` (L5.e, the bound on `p4_em_expr` at Re s = 1/2; the W_n-equality at Re s = 1/2 is cited, DLMF 25.2.8 / Apostol 12.21 - see section doc) and L5.f (`p4_one_minus_s_conj`, `p4_T4_ratio`) the T4 ratio corollary - the correction scale |1-s| = |s| on the critical line and the three-term ratio bound, pure division algebra from L5.e.  No sorry.
 STATUS (2026-09-16, Lean 4.33.1): 25ae Stage 3A GREEN - periodic `B8` (def + measurability + `B8_of_Icc_int` + `abs_B8_le` via the pure-algebra `B8poly_bound_Icc`), the finite telescoping lemma `p4_25ae_telescope_pow` (own induction; no Ico-telescope in mathlib 4.33.1), and `p4_25ae_J_finite` (the finite-M identity for the EM tail integral: the 7-level per-period IBP ladder over period sums S3-S8, endpoint differences at n and M with the verbatim Stage-2 coefficient atoms, and the B8 period-sum residue S8).  Full package build: 17434 jobs, 0 errors, 0 sorry.
+STATUS (2026-09-16, Lean 4.33.1): 25ae Stage 3B atoms 3B.1-3B.10 GREEN - `p4_25ae_J_iota` (M -> oo passage), `p4_25ae_int_Icc_rpow172`/`_Ioi_rpow172` (FTC-2), `p4_25ae_I8_bound` (|I8| <= n^(-15/2)/225), `p4_25ae_t3kernel_integrableOn_Ioi`, `p4_25ae_J_eq` (the EM tail equals the exact 4-term expression), and `p4_25ae_T3_bound` (the sharpened 4-term triangle bound with the CORRECTED exponents: n^(-7/2), n^(-11/2), n^(-15/2), n^(-15/2) - the anchor F1 script's n^(-9/2) second-term exponent was WRONG: on the critical line Re(-s-5) = -11/2).  The 25ae wall re-anchors to t ~= 1.217e8 at list scale; see DISCOVERY_LOG 25ae Stage 3B.
 THEOREMS (L1): p4_f_hasDerivAt, p4_f1_hasDerivAt, p4_f2_hasDerivAt,
  p4_f1_at, p4_f2_at, p4_f1_on_Icc, p4_f2_on_Icc.
 THEOREMS (L2): p4_integral_closed, p4_finite_em2.
@@ -2885,8 +2886,916 @@ theorem p4_Tn_Tendsto {s : ℂ} (hsσ : 1 < s.re) (n : ℕ) (hn : 0 < n) :
                   (∫ x in (j : ℝ)..(j + 1 : ℝ),
                     (B8poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 8))) := by
             dsimp only [S8]
+  --/ ===== 25ae Stage 3B - the M -> oo passage =====
 
+  --/ (3B.1) B8 x^{-s-8} is absolutely integrable on (c, oo), c > 0, Re s > -7:
+  --|  |kernel| <= (1/30) x^{-(Re s+8)} (abs_B8_le +
+  --|  Complex.norm_cpow_eq_rpow_re_of_pos), dominated by
+  --|  (1/30) x^{-(Re s+8)} via integrableOn_Ioi_rpow_of_lt;
+  --|  aes = aes(B8-ofReal) .mul aes(cpow continuous on Ioi c). -/
+  theorem p4_B8cpw8_integrableOn_Ioi {s : ℂ} (hsre : s.re > -7) {c : ℝ} (hc : 0 < c) :
+      IntegrableOn (fun x : ℝ => (B8 x : ℂ) * (x : ℂ) ^ (-s - 8)) (Set.Ioi c) := by
+    have hB8aes : AEStronglyMeasurable (fun x : ℝ => (B8 x : ℂ)) (volume.restrict (Set.Ioi c)) := by
+      exact (AEStronglyMeasurable.mono_measure
+        (Continuous.comp_aestronglyMeasurable (hg := Complex.continuous_ofReal)
+          (aestronglyMeasurable_B8 : AEStronglyMeasurable B8))
+        ((Measure.restrict_mono (Set.Ioi c).subset_univ le_rfl).trans (le_of_eq Measure.restrict_univ)))
+    have hcpwcont : ContinuousOn (fun x : ℝ => (x : ℂ) ^ (-s - 8)) (Set.Ioi c) := by
+      intro x hx
+      have hcxt : c < x := Set.mem_Ioi.mp hx
+      exact (Complex.continuousAt_ofReal_cpow_const x (-s - 8)
+          (Or.inr (ne_of_gt (hc.trans hcxt)))).continuousWithinAt
+    have hcpwae : AEStronglyMeasurable (fun x : ℝ => (x : ℂ) ^ (-s - 8))
+        (volume.restrict (Set.Ioi c)) :=
+      ContinuousOn.aestronglyMeasurable hcpwcont measurableSet_Ioi
+    have hRpow : Integrable (fun x : ℝ => x ^ (-(s.re + 8))) (volume.restrict (Set.Ioi c)) :=
+      (integrableOn_Ioi_rpow_of_lt (by linarith [hsre]) hc).integrable
+    have hMajor : HasFiniteIntegral
+        (fun x : ℝ => (1 / 30 : ℝ) * x ^ (-(s.re + 8))) (volume.restrict (Set.Ioi c)) :=
+      Integrable.hasFiniteIntegral (hRpow.const_mul (1 / 30 : ℝ))
+    constructor
+    · exact hB8aes.mul hcpwae
+    · rw [← hasFiniteIntegral_norm_iff]
+      exact HasFiniteIntegral.mono' hMajor (by
+        rw [ae_restrict_iff' measurableSet_Ioi]
+        exact MeasureTheory.ae_of_all (μ := (volume : Measure ℝ)) (fun x hx => by
+          have hxpos : 0 < x := hc.trans hx
+          have h1 : ‖(‖(B8 x : ℂ) * (x : ℂ) ^ (-s - 8)‖ : ℝ)‖ =
+              ‖(B8 x : ℂ) * (x : ℂ) ^ (-s - 8)‖ := by simp
+          rw [h1]
+          calc ‖(B8 x : ℂ) * (x : ℂ) ^ (-s - 8)‖
+              _ = ‖(B8 x : ℂ)‖ * ‖(x : ℂ) ^ (-s - 8)‖ := by rw [norm_mul]
+              _ ≤ (1 / 30) * x ^ (-(s.re + 8)) := by
+                rw [Complex.norm_cpow_eq_rpow_re_of_pos hxpos (-s - 8),
+                  show (-s - 8 : ℂ).re = -(s.re + 8) from by
+                    rw [show (-(s : ℂ) - 8 : ℂ) = -((s : ℂ) + 8) from by ring,
+                      Complex.neg_re, Complex.add_re,
+                      show (8 : ℂ).re = 8 from by norm_num]]
+                gcongr
+                calc ‖(B8 x : ℂ)‖
+                    _ = Real.sqrt (B8 x ^ 2) := by
+                      rw [Complex.norm_def, Complex.normSq_ofReal, ← pow_two]
+                    _ = |B8 x| := by rw [Real.sqrt_sq_eq_abs]
+                    _ ≤ 1 / 30 := abs_B8_le hxpos.le
+        ))
+
+  --/ (3B.2) the M -> oo passage for the B8 tail kernel (verbatim L3.f idiom):
+  --|  ∫_n^M B8 x^{-s-8} -> the improper integral, M -> oo (n >= 1). -/
+  theorem p4_B8cpw8_tendsto {s : ℂ} (hsre : s.re > -7) (n : ℕ) (hn : 0 < n) :
+      Tendsto (fun M : ℝ => ∫ x in (n : ℝ)..M, (B8 x : ℂ) * (x : ℂ) ^ (-s - 8))
+          atTop (𝓝 (∫ x : ℝ in Set.Ioi (n : ℝ), (B8 x : ℂ) * (x : ℂ) ^ (-s - 8))) :=
+    intervalIntegral_tendsto_integral_Ioi (a := (n : ℝ))
+      (p4_B8cpw8_integrableOn_Ioi hsre (Nat.cast_pos.mpr hn)) tendsto_id
+
+  --/ (3B.3) the M-endpoint powers vanish on the critical line (k >= 3):
+  --|  M^{-s-k} -> 0 as M -> oo.  Norm bridge via
+  --|  Complex.norm_cpow_eq_rpow_re_of_pos + Real.tendsto_rpow_neg_atTop +
+  --|  NormedAddGroup.tendsto_nhds_zero (the @[to_additive] of
+  --|  NormedGroup.tendsto_nhds_one, Analysis/Normed/Group/Basic.lean:331). -/
+  theorem p4_25ae_cpwtendsto0 {s : ℂ} (hsre : s.re = 1 / 2) (k : ℕ) (hk : 3 ≤ k) :
+      Tendsto (fun M : ℝ => ((M : ℝ) : ℂ) ^ (-s - k)) atTop (𝓝 0) := by
+    have hexp : (-s - k : ℂ).re = -(s.re + (k : ℝ)) := by
+      rw [show (-(s : ℂ) - (k : ℂ) : ℂ) = -((s : ℂ) + (k : ℂ)) from by ring,
+        Complex.neg_re, Complex.add_re]
+      simpa using (show (((k : ℕ) : ℂ)).re = (k : ℝ) from by norm_cast)
+    have hposy : 0 < s.re + (k : ℝ) := by
+      have hsk : 3 ≤ (k : ℝ) := Nat.cast_le.mpr hk
+      linarith [hsre, hsk]
+    have hae : ∀ᶠ (M : ℝ) in atTop,
+        ‖((M : ℝ) : ℂ) ^ (-s - k)‖ = M ^ (-(s.re + (k : ℝ))) := by
+      filter_upwards [Filter.eventually_gt_atTop (0 : ℝ)] with M hM
+      rw [Complex.norm_cpow_eq_rpow_re_of_pos hM (-s - k), hexp]
+    have hae2 : (fun x : ℝ => x ^ (-(s.re + (k : ℝ)))) =ᶠ[atTop]
+        (fun M : ℝ => ‖((M : ℝ) : ℂ) ^ (-s - k)‖) := by
+      filter_upwards [Filter.eventually_gt_atTop (0 : ℝ)] with M hM
+      rw [Complex.norm_cpow_eq_rpow_re_of_pos hM (-s - k), hexp]
+    have hnorm : Tendsto (fun M : ℝ => ‖((M : ℝ) : ℂ) ^ (-s - k)‖) atTop (𝓝 (0 : ℝ)) :=
+      Tendsto.congr' hae2 (tendsto_rpow_neg_atTop hposy)
+    exact (NormedAddGroup.tendsto_nhds_zero (α := ℝ) (E := ℂ)).mpr fun ε hε => by
+      have hball : ((fun M : ℝ => ‖((M : ℝ) : ℂ) ^ (-s - k)‖)) ⁻¹'
+          Metric.ball (0 : ℝ) ε ∈ atTop := by
+        exact ((tendsto_def.mp hnorm) (Metric.ball (0 : ℝ) ε) (Metric.ball_mem_nhds (0 : ℝ) hε))
+      change {M : ℝ | ‖((M : ℝ) : ℂ) ^ (-s - k)‖ < ε} ∈ atTop
+      exact mem_of_superset hball (by
+        intro M hM
+        simpa using hM)
+
+  --/ (3B.4) the S8 period sum equals the B8 interval integral (the h1
+  --|  architecture of J_finite, B8/B8poly at exponent -8):
+  --|  sum over periods j in [n, M) of ∫_j^{j+1} B8poly(x-j) x^{-s-8}
+  --|  = ∫_n^M B8(x) x^{-s-8}. -/
+  theorem p4_25ae_S8_eq_interval {s : ℂ} (hsre : s.re = 1 / 2) (n M : ℕ) (hn : 0 < n)
+      (hnm : n ≤ M) :
+      (∑ j ∈ Finset.Ico n M,
+          (∫ x in (j : ℝ)..(j + 1 : ℝ), (B8poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 8)))
+          = ∫ x in (n : ℝ)..(M : ℝ), (B8 x : ℂ) * (x : ℂ) ^ (-s - 8) := by
+    rw [← sum_integral_adjacent_intervals_Ico (a := fun k : ℕ => (k : ℝ)) hnm
+      (fun (j : ℕ) hjk => by
+        have hco8 : ContinuousOn (fun x : ℝ => (B8 x : ℂ)) (Set.Icc (j : ℝ) (j + 1 : ℝ)) := by
+          have hpoly : ContinuousOn
+              (fun x : ℝ => (B8poly (x - (j : ℝ)) : ℂ)) (Set.Icc (j : ℝ) (j + 1 : ℝ)) := by
+            dsimp only [B8poly]
+            fun_prop
+          exact ContinuousOn.congr hpoly (by
+            intro x hx
+            have hxIcc : x ∈ Set.Icc (j : ℝ) (j + 1 : ℝ) :=
+              ⟨by simpa [show min (j : ℝ) (j + 1 : ℝ) = (j : ℝ) from min_eq_left (by nlinarith)] using hx.1,
+                by simpa using hx.2⟩
+            dsimp only
+            rw [B8_of_Icc_int (n := (j : ℕ)) hxIcc])
+        have hcohp8 : ContinuousOn (fun x : ℝ => (x : ℂ) ^ (-s - 8))
+            (Set.Icc (j : ℝ) (j + 1 : ℝ)) := by
+          intro x hx
+          have hpos : 0 < x := by
+            calc 0 < (n : ℝ) := Nat.cast_pos.mpr hn
+              _ ≤ (j : ℝ) := Nat.cast_le (α := ℝ) |>.mpr (Set.mem_Ico.mp hjk |>.1)
+              _ ≤ x := by
+                simpa [show min (j : ℝ) (j + 1) = (j : ℝ) from min_eq_left (by nlinarith)] using hx.1
+          exact (Complex.continuousAt_ofReal_cpow_const x (-s - 8)
+              (Or.inr (ne_of_gt hpos))).continuousWithinAt
+        have hco : ContinuousOn (fun x : ℝ => (B8 x : ℂ) * (x : ℂ) ^ (-s - 8))
+            (Set.Icc (j : ℝ) ((j + 1 : ℕ) : ℝ)) :=
+          (hco8.mul hcohp8).mono (by
+            intro x hx
+            rw [show (j : ℝ) + 1 = ((j + 1 : ℕ) : ℝ) from (Nat.cast_succ j).symm]
+            exact hx)
+        exact hco.intervalIntegrable_of_Icc (by norm_num))]
+    rw [Finset.sum_congr rfl (fun j _ => by
+      rw [(Nat.cast_succ j).symm])]
+    apply Finset.sum_congr rfl
+    intro j hj
+    have hIC : Set.EqOn (fun x : ℝ => (B8poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 8))
+        (fun x : ℝ => (B8 x : ℂ) * (x : ℂ) ^ (-s - 8))
+        (Set.uIcc (j : ℝ) ((j + 1 : ℕ) : ℝ)) := by
+      intro x hx
+      have hxIcc : x ∈ Set.Icc (j : ℝ) (j + 1 : ℝ) :=
+        ⟨by simpa [show min (j : ℝ) (j + 1 : ℝ) = (j : ℝ) from min_eq_left (by nlinarith)] using hx.1,
+          by simpa using hx.2⟩
+      dsimp only
+      rw [B8_of_Icc_int (n := (j : ℕ)) hxIcc]
+    exact (intervalIntegral.integral_congr (μ := (MeasureTheory.volume : Measure ℝ)) hIC)
+
+  --/ (3B.5) the S8 period sum converges to the improper B8 tail integral:
+  --|  sum_{j in Ico n M) integral_j^{j+1} B8poly(x-j) x^{-s-8}
+  --|  -> integral_{Ioi n} B8 x x^{-s-8} as M -> oo.
+  --|  = 3B.4 pointwise (for M >= n) + 3B.2 (real-M passage) + natCast. -/
+  theorem p4_25ae_S8_tendsto {s : ℂ} (hsre : s.re = 1 / 2) (n : ℕ) (hn : 0 < n) :
+      Tendsto (fun M : ℕ => ∑ j ∈ Finset.Ico n M,
+          (∫ x in (j : ℝ)..(j + 1 : ℝ), (B8poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 8)))
+          atTop (𝓝 (∫ x : ℝ in Set.Ioi (n : ℝ), (B8 x : ℂ) * (x : ℂ) ^ (-s - 8))) := by
+    have hsre' : s.re > -7 := by
+      rw [hsre]
+      norm_num
+    have hfin := Tendsto.comp
+      (p4_B8cpw8_tendsto (s := s) hsre' n hn) (tendsto_natCast_atTop_atTop (R := ℝ))
+    have hpoint : (fun M : ℕ => (fun b : ℝ => ∫ x in (n : ℝ)..b,
+        (B8 x : ℂ) * (x : ℂ) ^ (-s - 8)) (M : ℝ)) =ᶠ[atTop]
+        (fun M : ℕ => ∑ j ∈ Finset.Ico n M,
+          (∫ x in (j : ℝ)..(j + 1 : ℝ), (B8poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 8))) := by
+      filter_upwards [Ici_mem_atTop (n : ℕ)] with M hM
+      change ∫ x in (n : ℝ)..(M : ℝ), (B8 x : ℂ) * (x : ℂ) ^ (-s - 8) =
+          ∑ j ∈ Finset.Ico n M,
+            (∫ x in (j : ℝ)..(j + 1 : ℝ), (B8poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 8))
+      rw [p4_25ae_S8_eq_interval (s := s) hsre n M hn hM]
+    exact Tendsto.congr' hpoint hfin
+
+  --/ (3B.6) the 25ae T3 limit law (the heart of the Stage-3B M -> oo passage):
+  --|  as M -> oo on the critical line, the EM tail integral
+  --|  integral_n^M B2 x x^{-s-2} converges to the four-term expression with the
+  --|  three n-endpoint boundary terms (sign-flipped) plus the improper B8 tail
+  --|  (J_finite pointwise + 3B.3 endpoint vanish + 3B.5 S8 passage +
+  --|  Tendsto.add/const_mul/sub). -/
+  theorem p4_25ae_J_iota {s : ℂ} (hsre : s.re = 1 / 2) (n : ℕ) (hn : 0 < n) :
+      Tendsto (fun M : ℕ => ∫ x in (n : ℝ)..(M : ℝ), (B2 x : ℂ) * (x : ℂ) ^ (-s - 2))
+          atTop (𝓝 (
+              ((s + 2 : ℂ) / 3) * (((B4poly 0) / 4) : ℂ) *
+                (0 - ((n : ℝ) : ℂ) ^ (-s - 3))
+            + ((s + 2 : ℂ) * (s + 3) * (s + 4) / 60) * (((B6poly 0) / 6) : ℂ) *
+                (0 - ((n : ℝ) : ℂ) ^ (-s - 5))
+            + ((s + 2 : ℂ) * (s + 3) * (s + 4) * (s + 5) * (s + 6) / 2520) *
+                (((B8poly 0) / 8) : ℂ) * (0 - ((n : ℝ) : ℂ) ^ (-s - 7))
+            + ((s + 2 : ℂ) * (s + 3) * (s + 4) * (s + 5) * (s + 6) * (s + 7) / 20160)
+                * (∫ x : ℝ in Set.Ioi (n : ℝ), (B8 x : ℂ) * (x : ℂ) ^ (-s - 8)))) := by
+    set A := ((s + 2 : ℂ) / 3) * (((B4poly 0) / 4) : ℂ) with hA
+    set B := ((s + 2 : ℂ) * (s + 3) * (s + 4) / 60) * (((B6poly 0) / 6) : ℂ) with hB
+    set C := ((s + 2 : ℂ) * (s + 3) * (s + 4) * (s + 5) * (s + 6) / 2520) *
+        (((B8poly 0) / 8) : ℂ) with hC
+    set D := ((s + 2 : ℂ) * (s + 3) * (s + 4) * (s + 5) * (s + 6) * (s + 7) / 20160)
+        with hD
+    -- the M-endpoint powers vanish (3B.3 + natCast)
+    have hv (k : ℕ) (hk : 3 ≤ k) :
+        Tendsto (fun M : ℕ => ((M : ℝ) : ℂ) ^ (-s - k)) atTop (𝓝 0) := by
+      convert Tendsto.comp (p4_25ae_cpwtendsto0 (s := s) hsre (k := k) hk)
+          (tendsto_natCast_atTop_atTop (R := ℝ)) using 1
+      funext M
+      norm_num [show ↑((k : ℕ) : ℂ) = (k : ℂ) from by norm_cast]
+    -- the four summands of the J_finite RHS with their M -> oo limits
+    have h3 : Tendsto
+        (fun M : ℕ => A * (((M : ℝ) : ℂ) ^ (-s - 3) - ((n : ℝ) : ℂ) ^ (-s - 3)))
+        atTop (𝓝 (A * (0 - ((n : ℝ) : ℂ) ^ (-s - 3)))) :=
+      Tendsto.const_mul (A : ℂ) (Tendsto.sub (hv 3 (by norm_num)) (tendsto_const_nhds))
+    have h5 : Tendsto
+        (fun M : ℕ => B * (((M : ℝ) : ℂ) ^ (-s - 5) - ((n : ℝ) : ℂ) ^ (-s - 5)))
+        atTop (𝓝 (B * (0 - ((n : ℝ) : ℂ) ^ (-s - 5)))) :=
+      Tendsto.const_mul (B : ℂ) (Tendsto.sub (hv 5 (by norm_num)) (tendsto_const_nhds))
+    have h7 : Tendsto
+        (fun M : ℕ => C * (((M : ℝ) : ℂ) ^ (-s - 7) - ((n : ℝ) : ℂ) ^ (-s - 7)))
+        atTop (𝓝 (C * (0 - ((n : ℝ) : ℂ) ^ (-s - 7)))) :=
+      Tendsto.const_mul (C : ℂ) (Tendsto.sub (hv 7 (by norm_num)) (tendsto_const_nhds))
+    have h8 : Tendsto
+        (fun M : ℕ => D * (∑ j ∈ Finset.Ico n M,
+            (∫ x in (j : ℝ)..(j + 1 : ℝ),
+              (B8poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 8))))
+        atTop (𝓝 (D * (∫ x : ℝ in Set.Ioi (n : ℝ), (B8 x : ℂ) * (x : ℂ) ^ (-s - 8)))) :=
+      Tendsto.const_mul (D : ℂ) (p4_25ae_S8_tendsto (s := s) hsre n hn)
+    -- the full J_finite-RHS sum with the combined limit
+    have hsum := Tendsto.add (Tendsto.add (Tendsto.add h3 h5) h7) h8
+    -- pointwise (for M >= n) the LHS equals that sum (J_finite)
+    have hpoint : (fun M : ℕ =>
+        A * (((M : ℝ) : ℂ) ^ (-s - 3) - ((n : ℝ) : ℂ) ^ (-s - 3))
+      + B * (((M : ℝ) : ℂ) ^ (-s - 5) - ((n : ℝ) : ℂ) ^ (-s - 5))
+      + C * (((M : ℝ) : ℂ) ^ (-s - 7) - ((n : ℝ) : ℂ) ^ (-s - 7))
+      + D * (∑ j ∈ Finset.Ico n M,
+          (∫ x in (j : ℝ)..(j + 1 : ℝ),
+            (B8poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 8)))) =ᶠ[atTop]
+        (fun M : ℕ => ∫ x in (n : ℝ)..(M : ℝ), (B2 x : ℂ) * (x : ℂ) ^ (-s - 2)) := by
+      filter_upwards [Ici_mem_atTop (n : ℕ)] with M hM
+      exact (p4_25ae_J_finite (s := s) hsre n M hn hM).symm
+    exact Tendsto.congr' hpoint hsum
+
+  --/ ===== 25ae Stage 3B (cont.) - the I8 bound (comparison against x^{-(17/2)}) =====
+
+  --/ (3B.7a) closed form for the rpow interval integral (FTC-2 via
+  --|  integral_eq_of_hasDerivAt_off_countable; no rpow-integral closed form
+  --|  exists in mathlib 4.33.1):
+  --|  integral_n^M x^{-(17/2)} = (2/15)(n^{-(15/2)} - M^{-(15/2)}), 0 < n <= M.
+  --|  Antiderivative: (-2/15) x^{-(15/2)} (hasDerivAt_rpow_const,
+  --|  Analysis/SpecialFunctions/Pow/Deriv.lean, locally confirmed 4.33.1). -/
+  theorem p4_25ae_int_Icc_rpow172 {n M : ℝ} (hn : 0 < n) (hnm : n ≤ M) :
+      (∫ x in n..M, x ^ (-(17 / 2 : ℝ))) =
+          (2 / 15 : ℝ) * (n ^ (-(15 / 2 : ℝ)) - M ^ (-(15 / 2 : ℝ))) := by
+    set F := fun x : ℝ => (-2 / 15 : ℝ) * x ^ (-(15 / 2 : ℝ)) with hF
+    have hder : ∀ x ∈ Ioo n M, HasDerivAt F ((x : ℝ) ^ (-(17 / 2 : ℝ))) x := by
+      intro x hx
+      have hxpos : 0 < x := by linarith [hx.1]
+      have hrpow := hasDerivAt_rpow_const (Or.inl (ne_of_gt hxpos))
+          (p := (-(15 / 2 : ℝ)))
+      have hc : (-2 / 15 : ℝ) * ((-(15 / 2 : ℝ)) * x ^ (-(15 / 2 : ℝ) - 1)) =
+          (x : ℝ) ^ (-(17 / 2 : ℝ)) := by
+        rw [show (-(15 / 2 : ℝ)) - 1 = (-(17 / 2 : ℝ)) from by ring]
+        ring
+      exact (HasDerivAt.const_mul ((-2 / 15 : ℝ)) hrpow).congr_deriv hc
+    have hFcont : ContinuousOn F (Set.Icc n M) := by
+      intro x hx
+      have hxpos : 0 < x := by linarith [hx.1]
+      dsimp only [F]
+      exact (HasDerivAt.const_mul ((-2 / 15 : ℝ))
+          (hasDerivAt_rpow_const (Or.inl (ne_of_gt hxpos)) (p := (-(15 / 2 : ℝ))))).continuousAt.continuousWithinAt
+    have hfcont : ContinuousOn (fun x : ℝ => x ^ (-(17 / 2 : ℝ))) (Set.Icc n M) := by
+      intro x hx
+      have hxpos : 0 < x := by linarith [hx.1]
+      exact (hasDerivAt_rpow_const (Or.inl (ne_of_gt hxpos))
+          (p := (-(17 / 2 : ℝ)))).continuousAt.continuousWithinAt
+    have hFTC : (∫ x in n..M, (fun x : ℝ => x ^ (-(17 / 2 : ℝ))) x) = F M - F n :=
+      integral_eq_of_hasDerivAt_off_countable (f := F)
+        (f' := fun x : ℝ => x ^ (-(17 / 2 : ℝ))) (a := n) (b := M) (s := (∅ : Set ℝ))
+        Set.countable_empty (hFcont.mono ((Set.uIcc_of_le hnm).le))
+        (by
+          intro x hx
+          have hx' : x ∈ Ioo n M := by
+            simpa [min_eq_left hnm, max_eq_right hnm, Set.diff_empty] using hx
+          exact hder x hx')
+        (hfcont.intervalIntegrable_of_Icc (by linarith))
+    change (∫ x in n..M, (fun x : ℝ => x ^ (-(17 / 2 : ℝ))) x) =
+        (2 / 15 : ℝ) * (n ^ (-(15 / 2 : ℝ)) - M ^ (-(15 / 2 : ℝ)))
+    rw [hFTC]
+    dsimp only [F]
+    ring
+
+  --/ (3B.7b) the improper value (intervalIntegral_tendsto_integral_Ioi +
+  --|  limit-uniqueness, tendsto_nhds_unique; Reals are T2, atTop is NeBot):
+  --|  integral_{Ioi n} x^{-(17/2)} = (2/15) n^{-(15/2)} (n >= 1).
+  --|  integrableOn_Ioi_rpow_of_lt (a < -1, confirmed online mathlib4 + local 4.33.1)
+  --|  + Real.tendsto_rpow_neg_atTop (15/2 > 0). -/
+  theorem p4_25ae_int_Ioi_rpow172 (n : ℕ) (hn : 0 < n) :
+      (∫ x : ℝ in Set.Ioi (n : ℝ), x ^ (-(17 / 2 : ℝ))) =
+          (2 / 15 : ℝ) * (n : ℝ) ^ (-(15 / 2 : ℝ)) := by
+    have hInt : IntegrableOn (fun x : ℝ => x ^ (-(17 / 2 : ℝ))) (Set.Ioi (n : ℝ)) :=
+      integrableOn_Ioi_rpow_of_lt (by norm_num) (Nat.cast_pos.mpr hn)
+    have hIoi : Tendsto (fun M : ℝ => ∫ x in (n : ℝ)..M, x ^ (-(17 / 2 : ℝ)))
+        atTop (𝓝 (∫ x : ℝ in Set.Ioi (n : ℝ), x ^ (-(17 / 2 : ℝ)))) :=
+      intervalIntegral_tendsto_integral_Ioi (a := (n : ℝ)) hInt tendsto_id
+    have hM : Tendsto (fun M : ℝ => M ^ (-(15 / 2 : ℝ))) atTop (𝓝 0) :=
+      tendsto_rpow_neg_atTop (by norm_num)
+    have hconst : Tendsto (fun _ : ℝ => (n : ℝ) ^ (-(15 / 2 : ℝ))) atTop
+        (𝓝 ((n : ℝ) ^ (-(15 / 2 : ℝ)))) := tendsto_const_nhds
+    have hsub0 : Tendsto
+        (fun M : ℝ => (n : ℝ) ^ (-(15 / 2 : ℝ)) - M ^ (-(15 / 2 : ℝ)))
+        atTop (𝓝 ((n : ℝ) ^ (-(15 / 2 : ℝ)) - 0)) := Tendsto.sub hconst hM
+    have hsub : Tendsto
+        (fun M : ℝ => (n : ℝ) ^ (-(15 / 2 : ℝ)) - M ^ (-(15 / 2 : ℝ)))
+        atTop (𝓝 ((n : ℝ) ^ (-(15 / 2 : ℝ)))) :=
+      Tendsto.mono_right hsub0 (by
+        apply le_of_eq
+        exact congrArg (𝓝) (sub_zero _))
+    have hformula : Tendsto
+        (fun M : ℝ => (2 / 15 : ℝ) * ((n : ℝ) ^ (-(15 / 2 : ℝ)) - M ^ (-(15 / 2 : ℝ))))
+        atTop (𝓝 ((2 / 15 : ℝ) * (n : ℝ) ^ (-(15 / 2 : ℝ)))) :=
+      Tendsto.const_mul ((2 / 15 : ℝ)) hsub
+    have hae : (fun M : ℝ => (2 / 15 : ℝ) * ((n : ℝ) ^ (-(15 / 2 : ℝ)) - M ^ (-(15 / 2 : ℝ))))
+        =ᶠ[atTop] (fun M : ℝ => ∫ x in (n : ℝ)..M, x ^ (-(17 / 2 : ℝ))) := by
+      filter_upwards [Filter.eventually_gt_atTop (n : ℝ)] with M hMn
+      exact (p4_25ae_int_Icc_rpow172 (n := (n : ℝ)) (M := M) (Nat.cast_pos.mpr hn)
+          (le_of_lt hMn)).symm
+    exact tendsto_nhds_unique hIoi (Tendsto.congr' hae hformula)
+
+  --/ (3B.7c) the I8 bound: on the critical line,
+  --|  |integral_{Ioi n} B8 x x^{-s-8}| <= n^{-15/2} / 225 (n >= 1).
+  --|  Route: |int| <= int|.| (norm_integral_le_integral_norm, verified by
+  --|  probe), the norm is integrable on Ioi n by the (1/30) x^{-17/2}
+  --|  majorant, every partial integral is <= (1/30)(2/15) n^{-15/2}
+  --|  (interval integral_mono_on_of_le_Ioo + 3B.7a + M^{-15/2} >= 0), and
+  --|  the order limit follows by an eps-contradiction. -/
+  theorem p4_25ae_I8_bound {s : ℂ} (hsre : s.re = 1 / 2) (n : ℕ) (hn : 0 < n) :
+      ‖(∫ x : ℝ in Set.Ioi (n : ℝ), (B8 x : ℂ) * (x : ℂ) ^ (-s - 8))‖
+          ≤ (n : ℝ) ^ (-(15 / 2 : ℝ)) / 225 := by
+    set kern := fun x : ℝ => (B8 x : ℂ) * (x : ℂ) ^ (-s - 8) with hkern
+    have hre8 : s.re + 8 = (17 / 2 : ℝ) := by
+      rw [hsre]
+      norm_num
+    have hpw : (-s - 8 : ℂ).re = -(s.re + 8) := by
+      rw [show (-(s : ℂ) - 8 : ℂ) = -((s : ℂ) + 8) from by ring,
+        Complex.neg_re, Complex.add_re,
+        show (8 : ℂ).re = 8 from by norm_num]
+    -- pointwise majorant for x > 0
+    have hest (x : ℝ) (hx : 0 < x) :
+        ‖(B8 x : ℂ) * (x : ℂ) ^ (-s - 8)‖ ≤ (1 / 30 : ℝ) * x ^ (-(17 / 2 : ℝ)) := by
+      calc ‖(B8 x : ℂ) * (x : ℂ) ^ (-s - 8)‖
+          _ = ‖(B8 x : ℂ)‖ * ‖(x : ℂ) ^ (-s - 8)‖ := by rw [norm_mul]
+          _ ≤ (1 / 30) * x ^ (-(s.re + 8)) := by
+            rw [Complex.norm_cpow_eq_rpow_re_of_pos hx (-s - 8), hpw]
+            gcongr
+            calc ‖(B8 x : ℂ)‖
+                _ = Real.sqrt (B8 x ^ 2) := by
+                  rw [Complex.norm_def, Complex.normSq_ofReal, ← pow_two]
+                _ = |B8 x| := by rw [Real.sqrt_sq_eq_abs]
+                _ ≤ 1 / 30 := abs_B8_le hx.le
+          _ = (1 / 30) * x ^ (-(17 / 2 : ℝ)) := by rw [hre8]
+    -- (1) |integral| <= the integral of the norm (restricted-measure form;
+    --     verified by probe: simpa closes the indicator/variation bridge)
+    have h1 : ‖(∫ x : ℝ in Set.Ioi (n : ℝ), (B8 x : ℂ) * (x : ℂ) ^ (-s - 8))‖
+        ≤ (∫ x : ℝ in Set.Ioi (n : ℝ), ‖(B8 x : ℂ) * (x : ℂ) ^ (-s - 8)‖) := by
+      simpa using MeasureTheory.norm_integral_le_integral_norm
+          (f := fun x : ℝ => (B8 x : ℂ) * (x : ℂ) ^ (-s - 8))
+          (μ := MeasureTheory.volume.restrict (Set.Ioi (n : ℝ)))
+    -- (2) the norm is integrable on Ioi n: aes + (1/30) x^{-17/2} majorant
+    have h2 : IntegrableOn (fun x : ℝ => ‖(B8 x : ℂ) * (x : ℂ) ^ (-s - 8)‖)
+        (Set.Ioi (n : ℝ)) := by
+      constructor
+      · have hB8aes : AEStronglyMeasurable (fun x : ℝ => (B8 x : ℂ))
+            (volume.restrict (Set.Ioi (n : ℝ))) := by
+          exact (AEStronglyMeasurable.mono_measure
+            (Continuous.comp_aestronglyMeasurable (hg := Complex.continuous_ofReal)
+              (aestronglyMeasurable_B8 : AEStronglyMeasurable B8))
+            ((Measure.restrict_mono (Set.Ioi (n : ℝ)).subset_univ le_rfl).trans
+              (le_of_eq Measure.restrict_univ)))
+        have hcpwcont : ContinuousOn (fun x : ℝ => (x : ℂ) ^ (-s - 8))
+            (Set.Ioi (n : ℝ)) := by
+          intro x hx
+          have hcxt : (n : ℝ) < x := Set.mem_Ioi.mp hx
+          have h0x : 0 < x := (Nat.cast_pos (α := ℝ).mpr hn).trans hcxt
+          exact (Complex.continuousAt_ofReal_cpow_const x (-s - 8)
+              (Or.inr (ne_of_gt h0x))).continuousWithinAt
+        have hcpwae : AEStronglyMeasurable (fun x : ℝ => (x : ℂ) ^ (-s - 8))
+            (volume.restrict (Set.Ioi (n : ℝ))) :=
+          ContinuousOn.aestronglyMeasurable hcpwcont measurableSet_Ioi
+        exact
+          (Continuous.comp_aestronglyMeasurable (by continuity) (hB8aes.mul hcpwae))
+      · have hMajor : HasFiniteIntegral
+            (fun x : ℝ => (1 / 30 : ℝ) * x ^ (-(17 / 2 : ℝ)))
+            (volume.restrict (Set.Ioi (n : ℝ))) :=
+          Integrable.hasFiniteIntegral
+            (integrableOn_Ioi_rpow_of_lt (by norm_num) (Nat.cast_pos (α := ℝ).mpr hn)
+              |>.integrable.const_mul (1 / 30 : ℝ))
+        exact HasFiniteIntegral.mono' hMajor (by
+          rw [ae_restrict_iff' measurableSet_Ioi]
+          exact MeasureTheory.ae_of_all (μ := (volume : Measure ℝ))
+            (fun x hx => by
+              have hxpos : 0 < x := (Nat.cast_pos (α := ℝ).mpr hn).trans (Set.mem_Ioi.mp hx)
+              have hestx := hest x hxpos
+              have hnon : 0 ≤ ‖(B8 x : ℂ) * (x : ℂ) ^ (-s - 8)‖ := norm_nonneg _
+              rw [show ‖(‖(B8 x : ℂ) * (x : ℂ) ^ (-s - 8)‖)‖ =
+                      |(‖(B8 x : ℂ) * (x : ℂ) ^ (-s - 8)‖)| from by rfl,
+                abs_of_nonneg hnon]
+              exact hestx))
+    -- (3) the partial integrals of the norm converge to the Ioi integral
+    have h3 : Tendsto
+        (fun M : ℝ => ∫ x in (n : ℝ)..M, ‖(B8 x : ℂ) * (x : ℂ) ^ (-s - 8)‖)
+        atTop (𝓝 (∫ x : ℝ in Set.Ioi (n : ℝ), ‖(B8 x : ℂ) * (x : ℂ) ^ (-s - 8)‖)) :=
+      intervalIntegral_tendsto_integral_Ioi (a := (n : ℝ)) h2 tendsto_id
+    -- (4) every partial integral is <= (1/30)(2/15) n^{-15/2}
+    have hwall (M : ℝ) (hMn : (n : ℝ) < M) :
+        (∫ x in (n : ℝ)..M, ‖(B8 x : ℂ) * (x : ℂ) ^ (-s - 8)‖) ≤
+            (1 / 30 : ℝ) * (2 / 15 : ℝ) * (n : ℝ) ^ (-(15 / 2 : ℝ)) := by
+      have hf : IntervalIntegrable
+          (fun x : ℝ => ‖(B8 x : ℂ) * (x : ℂ) ^ (-s - 8)‖) volume (n : ℝ) M := by
+        rw [intervalIntegrable_iff]
+        refine IntegrableOn.mono_set_ae h2 ?_
+        show Set.uIoc (n : ℝ) M ≤ᵐ[volume] Set.Ioi (n : ℝ)
+        -- Ioc here is open-closed ({n < x <= M}), contained in Ioi n
+        rw [Set.uIoc_of_le (le_of_lt hMn)]
+        exact (MeasureTheory.ae_of_all (μ := (volume : Measure ℝ)) (fun x hx => by
+          have hx1 : (n : ℝ) < x ∧ x ≤ M := by
+            dsimp only [Set.Ioc] at hx
+            exact hx
+          dsimp only [Set.Ioi]
+          exact hx1.1))
+      have hg : IntervalIntegrable
+          (fun x : ℝ => (1 / 30 : ℝ) * x ^ (-(17 / 2 : ℝ))) volume (n : ℝ) M := by
+        have hgc : ContinuousOn (fun x : ℝ => (1 / 30 : ℝ) * x ^ (-(17 / 2 : ℝ)))
+            (Set.Icc (n : ℝ) M) := by
+          have hrpow : ContinuousOn (fun x : ℝ => x ^ (-(17 / 2 : ℝ)))
+              (Set.Icc (n : ℝ) M) := by
+            intro x hx
+            have hxpos : 0 < x := by
+              linarith [hx.1, Nat.cast_pos (α := ℝ).mpr hn]
+            have hder := (hasDerivAt_rpow_const (Or.inl (ne_of_gt hxpos))
+              (p := (-(17 / 2 : ℝ))) :
+                HasDerivAt (fun x : ℝ => x ^ (-(17 / 2 : ℝ))) _ x)
+            exact hder.continuousAt.continuousWithinAt
+          exact continuousOn_const.mul hrpow
+        have hIcc : IntervalIntegrable
+            (fun x : ℝ => (1 / 30 : ℝ) * x ^ (-(17 / 2 : ℝ))) volume (n : ℝ) M :=
+          hgc.intervalIntegrable_of_Icc (by linarith)
+        rw [intervalIntegrable_iff] at hIcc ⊢
+        exact hIcc
+      calc (∫ x in (n : ℝ)..M, ‖(B8 x : ℂ) * (x : ℂ) ^ (-s - 8)‖)
+          _ ≤ (∫ x in (n : ℝ)..M, (1 / 30 : ℝ) * x ^ (-(17 / 2 : ℝ))) := by
+            apply integral_mono_on_of_le_Ioo
+            · exact by linarith [hMn]
+            · exact hf
+            · exact hg
+            · intro x hx
+              have hxpos : 0 < x := by
+                rw [Set.mem_Ioo] at hx
+                linarith [hx.1, Nat.cast_pos (α := ℝ).mpr hn]
+              exact hest x hxpos
+          _ = (1 / 30 : ℝ) * (2 / 15 : ℝ) *
+                ((n : ℝ) ^ (-(15 / 2 : ℝ)) - M ^ (-(15 / 2 : ℝ))) := by
+            rw [intervalIntegral.integral_const_mul,
+              p4_25ae_int_Icc_rpow172 (n := (n : ℝ)) (M := M)
+                (Nat.cast_pos (α := ℝ).mpr hn) (le_of_lt hMn)]
+            ring
+          _ ≤ (1 / 30 : ℝ) * (2 / 15 : ℝ) * (n : ℝ) ^ (-(15 / 2 : ℝ)) := by
+            have h0M : 0 < M := lt_trans (Nat.cast_pos (α := ℝ).mpr hn) hMn
+            have hMpow : 0 ≤ M ^ (-(15 / 2 : ℝ)) :=
+              rpow_nonneg h0M.le (-(15 / 2 : ℝ))
+            ring_nf
+            have hCMpow : 0 ≤ (1 / 30 : ℝ) * (2 / 15 : ℝ) * M ^ (-(15 / 2 : ℝ)) :=
+              mul_nonneg (by norm_num) hMpow
+            nlinarith [hCMpow]
+    -- (5) order limit: the Ioi integral is <= the constant (eps-contradiction)
+    set C := (1 / 30 : ℝ) * (2 / 15 : ℝ) * (n : ℝ) ^ (-(15 / 2 : ℝ)) with hC
+    set L := (∫ x : ℝ in Set.Ioi (n : ℝ), ‖(B8 x : ℂ) * (x : ℂ) ^ (-s - 8)‖) with hL
+    have hLraw : L = (∫ x : ℝ in Set.Ioi (n : ℝ),
+        ‖(B8 x : ℂ) * (x : ℂ) ^ (-s - 8)‖) := by rfl
+    set gpart := fun (M : ℝ) => (∫ x in (n : ℝ)..M, ‖(B8 x : ℂ) * (x : ℂ) ^ (-s - 8)‖) with hgpart
+    have hlim : L ≤ C := by
+      by_contra hgt
+      have hI : C < L := by linarith
+      set hε := (L - C) / 2 with hhε
+      have hεpos : 0 < hε := by linarith
+      have hball : ∀ᶠ (M : ℝ) in atTop, dist (gpart M) L < hε := by
+        simpa [gpart, ← hLraw] using
+          (tendsto_def.mp h3 (Metric.ball L hε) (by
+            rw [hLraw]
+            exact Metric.ball_mem_nhds L hεpos))
+      have hpt : ∀ᶠ (M : ℝ) in atTop, gpart M ≤ C := by
+        filter_upwards [Filter.eventually_gt_atTop (n : ℝ)] with M hMn
+        simpa [gpart] using hwall M hMn
+      set PQ := fun (M : ℝ) => (dist (gpart M) L < hε) ∧ (gpart M ≤ C) with hPQ
+      have hboth : ∀ᶠ (M : ℝ) in atTop, PQ M := hball.and hpt
+      obtain ⟨a0, ha0⟩ := (eventually_atTop (p := PQ)).mp hboth
+      have hmax0 : (n : ℝ) < max a0 ((n : ℝ) + 1) := by
+        linarith [le_max_right a0 ((n : ℝ) + 1), show (0 : ℝ) < 1 by norm_num]
+      have hle0 : a0 ≤ max a0 ((n : ℝ) + 1) := le_max_left a0 ((n : ℝ) + 1)
+      have hM0P : dist (gpart (max a0 ((n : ℝ) + 1))) L < hε :=
+        (ha0 (max a0 ((n : ℝ) + 1)) hle0).1
+      have hM0Q : gpart (max a0 ((n : ℝ) + 1)) ≤ C :=
+        (ha0 (max a0 ((n : ℝ) + 1)) hle0).2
+      have hdle : dist (gpart (max a0 ((n : ℝ) + 1))) L ≤ hε := le_of_lt hM0P
+      rw [dist_eq_norm] at hdle
+      have hl : -(hε) ≤ gpart (max a0 ((n : ℝ) + 1)) - L := (abs_le.mp hdle).1
+      have hlow : L - hε ≤ gpart (max a0 ((n : ℝ) + 1)) := by linarith [hl]
+      nlinarith [hlow, hM0Q, hI, hhε]
+    calc ‖(∫ x : ℝ in Set.Ioi (n : ℝ), (B8 x : ℂ) * (x : ℂ) ^ (-s - 8))‖
+        _ ≤ (∫ x : ℝ in Set.Ioi (n : ℝ),
+            ‖(B8 x : ℂ) * (x : ℂ) ^ (-s - 8)‖) := h1
+        _ ≤ C := by simpa [hLraw] using hlim
+        _ = (n : ℝ) ^ (-(15 / 2 : ℝ)) / 225 := by
+          rw [hC]
+          ring
+
+  --/ (3B.9a) the bare T3 kernel is integrable on Ioi c for s.re > -1
+  --|  (L3.e pattern, without the s(s+1) factor of p4_f2). -/
+  theorem p4_25ae_t3kernel_integrableOn_Ioi {s : ℂ} (hsre : s.re > -1) {c : ℝ}
+      (hc : 0 < c) :
+      IntegrableOn (fun x : ℝ => (B2 x : ℂ) * (x : ℂ) ^ (-s - 2)) (Set.Ioi c) := by
+    have hB2aes : AEStronglyMeasurable (fun x : ℝ => (B2 x : ℂ))
+        (volume.restrict (Set.Ioi c)) := by
+      exact (AEStronglyMeasurable.mono_measure
+        (Continuous.comp_aestronglyMeasurable (hg := Complex.continuous_ofReal)
+          (aestronglyMeasurable_B2 : AEStronglyMeasurable B2))
+        ((Measure.restrict_mono (Set.Ioi c).subset_univ le_rfl).trans
+          (le_of_eq Measure.restrict_univ)))
+    have hcpwcont : ContinuousOn (fun x : ℝ => (x : ℂ) ^ (-s - 2)) (Set.Ioi c) := by
+      intro x hx
+      have hcx : c < x := Set.mem_Ioi.mp hx
+      have h0x : 0 < x := hc.trans hcx
+      exact (Complex.continuousAt_ofReal_cpow_const x (-s - 2)
+          (Or.inr (ne_of_gt h0x))).continuousWithinAt
+    have hcpwae : AEStronglyMeasurable (fun x : ℝ => (x : ℂ) ^ (-s - 2))
+        (volume.restrict (Set.Ioi c)) :=
+      ContinuousOn.aestronglyMeasurable hcpwcont measurableSet_Ioi
+    have hRpow : Integrable (fun x : ℝ => x ^ (-(s.re + 2)))
+        (volume.restrict (Set.Ioi c)) :=
+      (integrableOn_Ioi_rpow_of_lt (by linarith) hc).integrable
+    have hMajor : HasFiniteIntegral (fun x : ℝ => (1 / 6 : ℝ) * x ^ (-(s.re + 2)))
+        (volume.restrict (Set.Ioi c)) :=
+      Integrable.hasFiniteIntegral ((hRpow).const_mul ((1 / 6 : ℝ)))
+    constructor
+    · exact hB2aes.mul hcpwae
+    · rw [← hasFiniteIntegral_norm_iff]
+      exact HasFiniteIntegral.mono' hMajor (by
+        rw [ae_restrict_iff' measurableSet_Ioi]
+        exact MeasureTheory.ae_of_all (μ := (volume : Measure ℝ)) (fun x hx => by
+          have hxpos : 0 < x := hc.trans (Set.mem_Ioi.mp hx)
+          have hpw2 : (-s - 2 : ℂ).re = -(s.re + 2) := by
+            rw [show (-(s : ℂ) - 2 : ℂ) = -((s : ℂ) + 2) from by ring,
+              Complex.neg_re, Complex.add_re,
+              show (2 : ℂ).re = 2 from by norm_num]
+          have h1 : ‖(‖(B2 x : ℂ) * (x : ℂ) ^ (-s - 2)‖ : ℝ)‖ =
+              ‖(B2 x : ℂ) * (x : ℂ) ^ (-s - 2)‖ := by simp
+          rw [h1]
+          calc ‖(B2 x : ℂ) * (x : ℂ) ^ (-s - 2)‖
+              _ = ‖(B2 x : ℂ)‖ * ‖(x : ℂ) ^ (-s - 2)‖ := by rw [norm_mul]
+              _ ≤ (1 / 6) * x ^ (-(s.re + 2)) := by
+                rw [Complex.norm_cpow_eq_rpow_re_of_pos hxpos (-s - 2), hpw2]
+                gcongr
+                calc ‖(B2 x : ℂ)‖
+                    _ = Real.sqrt (B2 x ^ 2) := by
+                      rw [Complex.norm_def, Complex.normSq_ofReal, ← pow_two]
+                    _ = |B2 x| := by rw [Real.sqrt_sq_eq_abs]
+                    _ ≤ 1 / 6 := abs_B2_le hxpos.le))
+
+  --/ (3B.9b) the improper T3 integral: the finite integrals converge to it,
+  --|  so by limit uniqueness the Ioi integral equals the 4-term J_iota
+  --|  expression. -/
+  theorem p4_25ae_J_eq {s : ℂ} (hsre : s.re = 1 / 2) (n : ℕ) (hn : 0 < n) :
+      (∫ x : ℝ in Set.Ioi (n : ℝ), (B2 x : ℂ) * (x : ℂ) ^ (-s - 2)) =
+          ((s + 2 : ℂ) / 3) * (((B4poly 0) / 4) : ℂ) *
+              (0 - ((n : ℝ) : ℂ) ^ (-s - 3))
+        + ((s + 2 : ℂ) * (s + 3) * (s + 4) / 60) * (((B6poly 0) / 6) : ℂ) *
+              (0 - ((n : ℝ) : ℂ) ^ (-s - 5))
+        + ((s + 2 : ℂ) * (s + 3) * (s + 4) * (s + 5) * (s + 6) / 2520) *
+              (((B8poly 0) / 8) : ℂ) * (0 - ((n : ℝ) : ℂ) ^ (-s - 7))
+        + ((s + 2 : ℂ) * (s + 3) * (s + 4) * (s + 5) * (s + 6) * (s + 7) / 20160)
+              * (∫ x : ℝ in Set.Ioi (n : ℝ), (B8 x : ℂ) * (x : ℂ) ^ (-s - 8)) := by
+    set T :=
+        ((s + 2 : ℂ) / 3) * (((B4poly 0) / 4) : ℂ) *
+            (0 - ((n : ℝ) : ℂ) ^ (-s - 3))
+      + ((s + 2 : ℂ) * (s + 3) * (s + 4) / 60) * (((B6poly 0) / 6) : ℂ) *
+            (0 - ((n : ℝ) : ℂ) ^ (-s - 5))
+      + ((s + 2 : ℂ) * (s + 3) * (s + 4) * (s + 5) * (s + 6) / 2520) *
+            (((B8poly 0) / 8) : ℂ) * (0 - ((n : ℝ) : ℂ) ^ (-s - 7))
+      + ((s + 2 : ℂ) * (s + 3) * (s + 4) * (s + 5) * (s + 6) * (s + 7) / 20160)
+            * (∫ x : ℝ in Set.Ioi (n : ℝ), (B8 x : ℂ) * (x : ℂ) ^ (-s - 8)) with hT
+    have hj := p4_25ae_J_iota hsre n hn
+    -- the finite T3 integrals also tend to the improper integral (L3.f route)
+    have hsre1 : s.re > -1 := by
+      rw [hsre]
+      norm_num
+    have hInt := p4_25ae_t3kernel_integrableOn_Ioi hsre1 (Nat.cast_pos.mpr hn)
+    have hlt : Tendsto
+        (fun M : ℝ => ∫ x in (n : ℝ)..M, (B2 x : ℂ) * (x : ℂ) ^ (-s - 2))
+        atTop (𝓝 (∫ x : ℝ in Set.Ioi (n : ℝ), (B2 x : ℂ) * (x : ℂ) ^ (-s - 2))) :=
+      intervalIntegral_tendsto_integral_Ioi (a := (n : ℝ)) hInt tendsto_id
+    have hlnat : Tendsto
+        (fun M : ℕ => ∫ x in (n : ℝ)..(M : ℝ), (B2 x : ℂ) * (x : ℂ) ^ (-s - 2))
+        atTop (𝓝 (∫ x : ℝ in Set.Ioi (n : ℝ), (B2 x : ℂ) * (x : ℂ) ^ (-s - 2))) :=
+      Tendsto.comp hlt (tendsto_natCast_atTop_atTop (R := ℝ))
+    -- same finite function, two limits (T and the Ioi integral)
+    have hcong : Tendsto
+        (fun M : ℕ => ∫ x in (n : ℝ)..(M : ℝ), (B2 x : ℂ) * (x : ℂ) ^ (-s - 2))
+        atTop (𝓝 T) :=
+      Tendsto.congr' (by
+        filter_upwards [Ici_mem_atTop (n : ℕ)] with M hM
+        simp only [hT]) hj
+    exact (tendsto_nhds_unique hcong hlnat).symm
+
+  --/ (3B.10) the sharpened T3 bound on the critical line (25ae F1): with
+  --|  T3(s, n) := -(1/2)·s(s+1)·∫_n^∞ B2(x)·x^{-s-2} dx,
+  --|  |T3| <= |s(s+1)(s+2)| n^{-7/2}/720
+  --|        + |s(s+1)(s+2)(s+3)(s+4)| n^{-11/2}/30240
+  --|        + |s(s+1)(s+2)..(s+6)| n^{-15/2}/1209600
+  --|        + |s(s+1)(s+2)..(s+6)(s+7)| n^{-15/2}/9072000.
+  --|  Uses J_eq (4-term decomposition), I8_bound for the residual integral,
+  --|  and the endpoint values B4(0)=-1/30, B6(0)=1/42, B8(0)=-1/30. -/
+  theorem p4_25ae_T3_bound {s : ℂ} (hsre : s.re = 1 / 2) (n : ℕ) (hn : 0 < n) :
+      ‖(-(1 / 2 : ℂ) * s * (s + 1)) *
+        (∫ x : ℝ in Set.Ioi (n : ℝ), (B2 x : ℂ) * (x : ℂ) ^ (-s - 2))‖ ≤
+          ‖s * (s + 1) * (s + 2)‖ * (n : ℝ) ^ (-(7 : ℝ) / 2) / 720
+        + ‖s * (s + 1) * (s + 2) * (s + 3) * (s + 4)‖ *
+            (n : ℝ) ^ (-(11 : ℝ) / 2) / 30240
+        + ‖s * (s + 1) * (s + 2) * (s + 3) * (s + 4) * (s + 5) * (s + 6)‖ *
+            (n : ℝ) ^ (-(15 : ℝ) / 2) / 1209600
+        + ‖s * (s + 1) * (s + 2) * (s + 3) * (s + 4) * (s + 5) * (s + 6) * (s + 7)‖ *
+            (n : ℝ) ^ (-(15 : ℝ) / 2) / 9072000 := by
+    set F8 := (∫ x : ℝ in Set.Ioi (n : ℝ), (B8 x : ℂ) * (x : ℂ) ^ (-s - 8)) with hF8
+    set A' := ((s + 2 : ℂ) / 3) * (((B4poly 0) / 4) : ℂ) with hA
+    set B' := ((s + 2 : ℂ) * (s + 3) * (s + 4) / 60) * (((B6poly 0) / 6) : ℂ) with hB
+    set C' := ((s + 2 : ℂ) * (((s + 3) * (((s + 4) * (((s + 5) * ((s + 6)))))))) / 2520) *
+        (((B8poly 0) / 8) : ℂ) with hC
+    set D' := (s + 2 : ℂ) * (((s + 3) * (((s + 4) * (((s + 5) * (((s + 6) * ((s + 7)))))))))) / 20160
+        with hD
+    set U3 := A' * (0 - ((n : ℝ) : ℂ) ^ (-s - 3)) with hU3
+    set U5 := B' * (0 - ((n : ℝ) : ℂ) ^ (-s - 5)) with hU5
+    set U7 := C' * (0 - ((n : ℝ) : ℂ) ^ (-s - 7)) with hU7
+    set U8 := D' * F8 with hU8
+    set K4 := U3 + (U5 + (U7 + U8)) with hK4
+    rw [p4_25ae_J_eq hsre n hn]
+    -- bridge the J_eq RHS (left-associated U3+U5+U7+U8) to K4
+    rw [show ((s + 2 : ℂ) / 3) * (((B4poly 0) / 4) : ℂ) *
+            (0 - ((n : ℝ) : ℂ) ^ (-s - 3)) +
+          ((s + 2 : ℂ) * (s + 3) * (s + 4) / 60) * (((B6poly 0) / 6) : ℂ) *
+            (0 - ((n : ℝ) : ℂ) ^ (-s - 5)) +
+          ((s + 2 : ℂ) * (s + 3) * (s + 4) * (s + 5) * (s + 6) / 2520) *
+            (((B8poly 0) / 8) : ℂ) * (0 - ((n : ℝ) : ℂ) ^ (-s - 7)) +
+          ((s + 2 : ℂ) * (s + 3) * (s + 4) * (s + 5) * (s + 6) * (s + 7) / 20160) *
+            (∫ x : ℝ in Set.Ioi (n : ℝ), (B8 x : ℂ) * (x : ℂ) ^ (-s - 8)) = K4 from by
+      dsimp only [K4, U3, U5, U7, U8, A', B', C', D', F8]
+      ring]
+    have hneg : ‖-((1 / 2 : ℂ) * s * (s + 1) * K4)‖ = ‖(1 / 2 : ℂ) * s * (s + 1) * K4‖ :=
+      norm_neg _
+    rw [show -(1 / 2 : ℂ) * s * (s + 1) * K4 =
+        -((1 / 2 : ℂ) * s * (s + 1) * K4) from by ring, hneg]
+    -- (a) norm of the endpoint powers
+    have hN3 : ‖((n : ℝ) : ℂ) ^ (-s - 3)‖ = (n : ℝ) ^ (-(7 : ℝ) / 2) := by
+      rw [Complex.norm_cpow_eq_rpow_re_of_pos (Nat.cast_pos.mpr hn) (-s - 3),
+        show (-s - 3 : ℂ).re = -(7 : ℝ) / 2 from by
+          rw [show (-(s : ℂ) - 3 : ℂ) = -((s : ℂ) + 3) from by ring,
+            Complex.neg_re, Complex.add_re,
+            show (3 : ℂ).re = 3 from by norm_num]
+          rw [hsre]
+          norm_num]
+    have hN5 : ‖((n : ℝ) : ℂ) ^ (-s - 5)‖ = (n : ℝ) ^ (-(11 : ℝ) / 2) := by
+      rw [Complex.norm_cpow_eq_rpow_re_of_pos (Nat.cast_pos.mpr hn) (-s - 5),
+        show (-s - 5 : ℂ).re = -(11 : ℝ) / 2 from by
+          rw [show (-(s : ℂ) - 5 : ℂ) = -((s : ℂ) + 5) from by ring,
+            Complex.neg_re, Complex.add_re,
+            show (5 : ℂ).re = 5 from by norm_num]
+          rw [hsre]
+          norm_num]
+    have hN7 : ‖((n : ℝ) : ℂ) ^ (-s - 7)‖ = (n : ℝ) ^ (-(15 : ℝ) / 2) := by
+      rw [Complex.norm_cpow_eq_rpow_re_of_pos (Nat.cast_pos.mpr hn) (-s - 7),
+        show (-s - 7 : ℂ).re = -(15 : ℝ) / 2 from by
+          rw [show (-(s : ℂ) - 7 : ℂ) = -((s : ℂ) + 7) from by ring,
+            Complex.neg_re, Complex.add_re,
+            show (7 : ℂ).re = 7 from by norm_num]
+          rw [hsre]
+          norm_num]
+    -- (b) coefficient-norm computations
+    have hca : ‖(((B4poly 0) / 4) : ℂ)‖ = (1 : ℝ) / 120 := by
+      rw [show (((B4poly 0) / 4) : ℂ) = (-(1 / 120 : ℝ) : ℂ) from by
+        rw [B4poly_at_0]
+        norm_num]
+      norm_num
+    have hA1 : ‖A'‖ = ‖s + 2‖ / 360 := by
+      rw [hA, norm_mul, hca, norm_div]
+      norm_num
+      ring
+    have hcb : ‖(((B6poly 0) / 6) : ℂ)‖ = (1 : ℝ) / 252 := by
+      rw [show (((B6poly 0) / 6) : ℂ) = ((1 / 252 : ℝ) : ℂ) from by
+        rw [B6poly_at_0]
+        norm_num]
+      norm_num
+    have hB1 : ‖B'‖ = ‖s + 2‖ * ‖s + 3‖ * ‖s + 4‖ / 15120 := by
+      rw [hB, norm_mul, hcb, norm_div]
+      norm_num
+      rw [← norm_mul, ← norm_mul]
+      ring
+    have hcc : ‖(((B8poly 0) / 8) : ℂ)‖ = (1 : ℝ) / 240 := by
+      rw [show (((B8poly 0) / 8) : ℂ) = (-(1 / 240 : ℝ) : ℂ) from by
+        rw [B8poly_at_0]
+        norm_num]
+      norm_num
+    have hC1 : ‖C'‖ = ‖s + 2‖ * ‖s + 3‖ * ‖s + 4‖ * ‖s + 5‖ * ‖s + 6‖ / 604800 := by
+      rw [hC, norm_mul, hcc, norm_div]
+      norm_num
+      repeat' rw [norm_mul]
+      ring
+    have hD1 : ‖D'‖ = ‖s + 2‖ * ‖s + 3‖ * ‖s + 4‖ * ‖s + 5‖ * ‖s + 6‖ * ‖s + 7‖ / 20160 := by
+      rw [hD, norm_div]
+      norm_num
+      repeat' rw [norm_mul]
+      ring
+    -- (c) product-norm forms of the target coefficients
+    have hprod3 : ‖s * (s + 1) * (s + 2)‖ = ‖s‖ * ‖s + 1‖ * ‖s + 2‖ := by
+      rw [norm_mul, norm_mul]
+    have hprod5 : ‖s * (s + 1) * (s + 2) * (s + 3) * (s + 4)‖ =
+        ‖s‖ * ‖s + 1‖ * ‖s + 2‖ * ‖s + 3‖ * ‖s + 4‖ := by
+      rw [show s * (s + 1) * (s + 2) * (s + 3) * (s + 4) =
+          s * (((s + 1) * (((s + 2) * (((s + 3) * ((s + 4)))))))) from by ring]
+      repeat' rw [norm_mul]
+      ring
+    have hprod7 : ‖s * (s + 1) * (s + 2) * (s + 3) * (s + 4) * (s + 5) * (s + 6)‖ =
+        ‖s‖ * ‖s + 1‖ * ‖s + 2‖ * ‖s + 3‖ * ‖s + 4‖ * ‖s + 5‖ * ‖s + 6‖ := by
+      rw [show s * (s + 1) * (s + 2) * (s + 3) * (s + 4) * (s + 5) * (s + 6) =
+          s * (((s + 1) * (((s + 2) * (((s + 3) * (((s + 4) * (((s + 5) * ((s + 6)))))))))))) from by ring]
+      repeat' rw [norm_mul]
+      ring
+    have hprod8 : ‖s * (s + 1) * (s + 2) * (s + 3) * (s + 4) * (s + 5) * (s + 6) * (s + 7)‖ =
+        ‖s‖ * ‖s + 1‖ * ‖s + 2‖ * ‖s + 3‖ * ‖s + 4‖ * ‖s + 5‖ * ‖s + 6‖ * ‖s + 7‖ := by
+      rw [show s * (s + 1) * (s + 2) * (s + 3) * (s + 4) * (s + 5) * (s + 6) * (s + 7) =
+          s * (((s + 1) * (((s + 2) * (((s + 3) * (((s + 4) * (((s + 5) * (((s + 6) * ((s + 7)))))))))))))) from by ring]
+      repeat' rw [norm_mul]
+      ring
+    -- (d) the four termwise bounds
+    have hT1 : (1 / 2 : ℝ) * ‖s‖ * ‖s + 1‖ * ‖U3‖ ≤
+        ‖s * (s + 1) * (s + 2)‖ * (n : ℝ) ^ (-(7 : ℝ) / 2) / 720 := by
+      have hcalc : (1 / 2 : ℝ) * ‖s‖ * ‖s + 1‖ * ‖U3‖ =
+          ‖s * (s + 1) * (s + 2)‖ * (n : ℝ) ^ (-(7 : ℝ) / 2) / 720 := by
+        calc (1 / 2 : ℝ) * ‖s‖ * ‖s + 1‖ * ‖U3‖
+          _ = (1 / 2 : ℝ) * ‖s‖ * ‖s + 1‖ * (‖A'‖ * ‖((n : ℝ) : ℂ) ^ (-s - 3)‖) := by
+            rw [hU3, norm_mul,
+              show ‖0 - ((n : ℝ) : ℂ) ^ (-s - 3)‖ =
+                ‖((n : ℝ) : ℂ) ^ (-s - 3)‖ from by rw [zero_sub, norm_neg]]
+          _ = (1 / 2 : ℝ) * ‖s‖ * ‖s + 1‖ *
+              ((‖s + 2‖ / 360) * (n : ℝ) ^ (-(7 : ℝ) / 2)) := by
+            rw [hA1, hN3]
+          _ = (‖s‖ * ‖s + 1‖ * ‖s + 2‖) / 720 * (n : ℝ) ^ (-(7 : ℝ) / 2) := by ring
+          _ = ‖s * (s + 1) * (s + 2)‖ * (n : ℝ) ^ (-(7 : ℝ) / 2) / 720 := by
+            rw [← hprod3]
+            ring
+      exact le_of_eq hcalc
+    have hT2 : (1 / 2 : ℝ) * ‖s‖ * ‖s + 1‖ * ‖U5‖ ≤
+        ‖s * (s + 1) * (s + 2) * (s + 3) * (s + 4)‖ * (n : ℝ) ^ (-(11 : ℝ) / 2) / 30240 := by
+      have hcalc : (1 / 2 : ℝ) * ‖s‖ * ‖s + 1‖ * ‖U5‖ =
+          ‖s * (s + 1) * (s + 2) * (s + 3) * (s + 4)‖ * (n : ℝ) ^ (-(11 : ℝ) / 2) / 30240 := by
+        calc (1 / 2 : ℝ) * ‖s‖ * ‖s + 1‖ * ‖U5‖
+          _ = (1 / 2 : ℝ) * ‖s‖ * ‖s + 1‖ * (‖B'‖ * ‖((n : ℝ) : ℂ) ^ (-s - 5)‖) := by
+            rw [hU5, norm_mul,
+              show ‖0 - ((n : ℝ) : ℂ) ^ (-s - 5)‖ =
+                ‖((n : ℝ) : ℂ) ^ (-s - 5)‖ from by rw [zero_sub, norm_neg]]
+          _ = (1 / 2 : ℝ) * ‖s‖ * ‖s + 1‖ *
+              ((‖s + 2‖ * ‖s + 3‖ * ‖s + 4‖ / 15120) *
+                (n : ℝ) ^ (-(11 : ℝ) / 2)) := by
+            rw [hB1, hN5]
+          _ = (‖s‖ * ‖s + 1‖ * ‖s + 2‖ * ‖s + 3‖ * ‖s + 4‖) / 30240 *
+              (n : ℝ) ^ (-(11 : ℝ) / 2) := by ring
+          _ = ‖s * (s + 1) * (s + 2) * (s + 3) * (s + 4)‖ *
+              (n : ℝ) ^ (-(11 : ℝ) / 2) / 30240 := by
+            rw [← hprod5]
+            ring
+      exact le_of_eq hcalc
+    have hT3 : (1 / 2 : ℝ) * ‖s‖ * ‖s + 1‖ * ‖U7‖ ≤
+        ‖s * (s + 1) * (s + 2) * (s + 3) * (s + 4) * (s + 5) * (s + 6)‖ *
+          (n : ℝ) ^ (-(15 : ℝ) / 2) / 1209600 := by
+      have hcalc : (1 / 2 : ℝ) * ‖s‖ * ‖s + 1‖ * ‖U7‖ =
+          ‖s * (s + 1) * (s + 2) * (s + 3) * (s + 4) * (s + 5) * (s + 6)‖ *
+          (n : ℝ) ^ (-(15 : ℝ) / 2) / 1209600 := by
+        calc (1 / 2 : ℝ) * ‖s‖ * ‖s + 1‖ * ‖U7‖
+          _ = (1 / 2 : ℝ) * ‖s‖ * ‖s + 1‖ * (‖C'‖ * ‖((n : ℝ) : ℂ) ^ (-s - 7)‖) := by
+            rw [hU7, norm_mul,
+              show ‖0 - ((n : ℝ) : ℂ) ^ (-s - 7)‖ =
+                ‖((n : ℝ) : ℂ) ^ (-s - 7)‖ from by rw [zero_sub, norm_neg]]
+          _ = (1 / 2 : ℝ) * ‖s‖ * ‖s + 1‖ *
+              ((‖s + 2‖ * ‖s + 3‖ * ‖s + 4‖ * ‖s + 5‖ * ‖s + 6‖ / 604800) *
+                (n : ℝ) ^ (-(15 : ℝ) / 2)) := by
+            rw [hC1, hN7]
+          _ = (‖s‖ * ‖s + 1‖ * ‖s + 2‖ * ‖s + 3‖ * ‖s + 4‖ * ‖s + 5‖ *
+              ‖s + 6‖) / 1209600 * (n : ℝ) ^ (-(15 : ℝ) / 2) := by ring
+          _ = ‖s * (s + 1) * (s + 2) * (s + 3) * (s + 4) * (s + 5) * (s + 6)‖ *
+              (n : ℝ) ^ (-(15 : ℝ) / 2) / 1209600 := by
+            rw [← hprod7]
+            ring
+      exact le_of_eq hcalc
+    have hI8 := p4_25ae_I8_bound hsre n hn
+    have hT4a : (1 / 2 : ℝ) * ‖s‖ * ‖s + 1‖ * ‖D'‖ * ‖F8‖ ≤
+        (1 / 2 : ℝ) * ‖s‖ * ‖s + 1‖ * ‖D'‖ * ((n : ℝ) ^ (-(15 : ℝ) / 2) / 225) := by
+      have heq : -(15 / 2 : ℝ) = (-(15 : ℝ) / 2) := by norm_num
+      have hI8b : ‖F8‖ ≤ (n : ℝ) ^ (-(15 : ℝ) / 2) / 225 := by
+        dsimp only [F8]
+        simpa [heq] using hI8
+      apply mul_le_mul_of_nonneg_left hI8b
+      positivity
+    have hT4b : (1 / 2 : ℝ) * ‖s‖ * ‖s + 1‖ * ‖D'‖ *
+        ((n : ℝ) ^ (-(15 : ℝ) / 2) / 225) ≤
+        ‖s * (s + 1) * (s + 2) * (s + 3) * (s + 4) * (s + 5) * (s + 6) * (s + 7)‖ *
+          (n : ℝ) ^ (-(15 : ℝ) / 2) / 9072000 := by
+      calc (1 / 2 : ℝ) * ‖s‖ * ‖s + 1‖ * ‖D'‖ *
+          ((n : ℝ) ^ (-(15 : ℝ) / 2) / 225)
+          _ = (1 / 2 : ℝ) * ‖s‖ * ‖s + 1‖ *
+              ((‖s + 2‖ * ‖s + 3‖ * ‖s + 4‖ * ‖s + 5‖ * ‖s + 6‖ * ‖s + 7‖) / 20160) *
+              ((n : ℝ) ^ (-(15 : ℝ) / 2) / 225) := by
+            rw [hD1]
+          _ = (‖s‖ * ‖s + 1‖ * ‖s + 2‖ * ‖s + 3‖ * ‖s + 4‖ *
+      ‖s + 5‖ * ‖s + 6‖ * ‖s + 7‖) / 9072000 *
+              (n : ℝ) ^ (-(15 : ℝ) / 2) := by ring
+          _ = ‖s * (s + 1) * (s + 2) * (s + 3) * (s + 4) * (s + 5) *
+                (s + 6) * (s + 7)‖ * (n : ℝ) ^ (-(15 : ℝ) / 2) / 9072000 := by
+            rw [← hprod8]
+            ring
+          _ ≤ ‖s * (s + 1) * (s + 2) * (s + 3) * (s + 4) * (s + 5) *
+                (s + 6) * (s + 7)‖ * (n : ℝ) ^ (-(15 : ℝ) / 2) / 9072000 := le_rfl
+    have hT4 : (1 / 2 : ℝ) * ‖s‖ * ‖s + 1‖ * ‖U8‖ ≤
+        ‖s * (s + 1) * (s + 2) * (s + 3) * (s + 4) * (s + 5) * (s + 6) * (s + 7)‖ *
+          (n : ℝ) ^ (-(15 : ℝ) / 2) / 9072000 := by
+      rw [show (1 / 2 : ℝ) * ‖s‖ * ‖s + 1‖ * ‖U8‖ =
+          (1 / 2 : ℝ) * ‖s‖ * ‖s + 1‖ * ‖D'‖ * ‖F8‖ from by
+            rw [hU8, norm_mul]
+            ring]
+      calc _
+          _ ≤ (1 / 2 : ℝ) * ‖s‖ * ‖s + 1‖ * ‖D'‖ *
+              ((n : ℝ) ^ (-(15 : ℝ) / 2) / 225) := hT4a
+          _ ≤ ‖s * (s + 1) * (s + 2) * (s + 3) * (s + 4) * (s + 5) *
+                (s + 6) * (s + 7)‖ * (n : ℝ) ^ (-(15 : ℝ) / 2) / 9072000 := hT4b
+    -- (e) the triangle decomposition of K4
+    have htri : ‖K4‖ ≤ ‖U3‖ + ‖U5‖ + (‖U7‖ + ‖U8‖) := by
+      calc ‖K4‖
+          _ = ‖U3 + (U5 + (U7 + U8))‖ := by rw [hK4]
+          _ ≤ ‖U3‖ + ‖U5 + (U7 + U8)‖ := norm_add_le U3 (U5 + (U7 + U8))
+          _ ≤ ‖U3‖ + (‖U5‖ + ‖U7 + U8‖) := by
+            apply add_le_add (le_rfl : _ ≤ _)
+            exact (norm_add_le U5 (U7 + U8))
+          _ ≤ ‖U3‖ + (‖U5‖ + (‖U7‖ + ‖U8‖)) := by
+            apply add_le_add (le_rfl : _ ≤ _)
+            apply add_le_add (le_rfl : _ ≤ _)
+            exact (norm_add_le U7 U8)
+          _ = ‖U3‖ + ‖U5‖ + (‖U7‖ + ‖U8‖) := by ring
+          _ ≤ ‖U3‖ + ‖U5‖ + (‖U7‖ + ‖U8‖) := le_rfl
+    -- (f) the prefactor norm
+    have hpref : ‖(1 / 2 : ℂ) * s * (s + 1) * K4‖ =
+        (1 / 2 : ℝ) * ‖s‖ * ‖s + 1‖ * ‖K4‖ := by
+      calc ‖(1 / 2 : ℂ) * s * (s + 1) * K4‖
+          _ = ‖(1 / 2 : ℂ) * s * (s + 1)‖ * ‖K4‖ := by rw [norm_mul]
+          _ = (‖(1 / 2 : ℂ) * s‖ * ‖s + 1‖) * ‖K4‖ := by rw [norm_mul]
+          _ = ((‖(1 / 2 : ℂ)‖ * ‖s‖) * ‖s + 1‖) * ‖K4‖ := by rw [norm_mul]
+          _ = ((1 / 2 : ℝ) * ‖s‖) * ‖s + 1‖ * ‖K4‖ := by
+            rw [show ‖(1 / 2 : ℂ)‖ = (1 / 2 : ℝ) from by norm_num]
+          _ = (1 / 2 : ℝ) * ‖s‖ * ‖s + 1‖ * ‖K4‖ := by ring
+    calc ‖(1 / 2 : ℂ) * s * (s + 1) * K4‖
+        _ = (1 / 2 : ℝ) * ‖s‖ * ‖s + 1‖ * ‖K4‖ := hpref
+        _ ≤ (1 / 2 : ℝ) * ‖s‖ * ‖s + 1‖ *
+            (‖U3‖ + ‖U5‖ + (‖U7‖ + ‖U8‖)) := by
+          apply mul_le_mul_of_nonneg_left htri
+          positivity
+        _ = (1 / 2 : ℝ) * ‖s‖ * ‖s + 1‖ * ‖U3‖ +
+            ((1 / 2 : ℝ) * ‖s‖ * ‖s + 1‖ * ‖U5‖ +
+              (1 / 2 : ℝ) * ‖s‖ * ‖s + 1‖ * ‖U7‖) +
+            (1 / 2 : ℝ) * ‖s‖ * ‖s + 1‖ * ‖U8‖ := by ring
+        _ ≤ ‖s * (s + 1) * (s + 2)‖ * (n : ℝ) ^ (-(7 : ℝ) / 2) / 720 +
+            (‖s * (s + 1) * (s + 2) * (s + 3) * (s + 4)‖ *
+              (n : ℝ) ^ (-(11 : ℝ) / 2) / 30240 +
+              (‖s * (s + 1) * (s + 2) * (s + 3) * (s + 4) * (s + 5) * (s + 6)‖ *
+                (n : ℝ) ^ (-(15 : ℝ) / 2) / 1209600 +
+                ‖s * (s + 1) * (s + 2) * (s + 3) * (s + 4) * (s + 5) * (s + 6) * (s + 7)‖ *
+                  (n : ℝ) ^ (-(15 : ℝ) / 2) / 9072000)) := by
+          calc (1 / 2 : ℝ) * ‖s‖ * ‖s + 1‖ * ‖U3‖ +
+                  ((1 / 2 : ℝ) * ‖s‖ * ‖s + 1‖ * ‖U5‖ +
+                    (1 / 2 : ℝ) * ‖s‖ * ‖s + 1‖ * ‖U7‖) +
+                  (1 / 2 : ℝ) * ‖s‖ * ‖s + 1‖ * ‖U8‖
+              _ = ((1 / 2 : ℝ) * ‖s‖ * ‖s + 1‖ * ‖U3‖ +
+                    (1 / 2 : ℝ) * ‖s‖ * ‖s + 1‖ * ‖U5‖) +
+                  ((1 / 2 : ℝ) * ‖s‖ * ‖s + 1‖ * ‖U7‖ +
+                    (1 / 2 : ℝ) * ‖s‖ * ‖s + 1‖ * ‖U8‖) := by ring
+              _ ≤ (‖s * (s + 1) * (s + 2)‖ * (n : ℝ) ^ (-(7 : ℝ) / 2) / 720 +
+                    ‖s * (s + 1) * (s + 2) * (s + 3) * (s + 4)‖ *
+                      (n : ℝ) ^ (-(11 : ℝ) / 2) / 30240) +
+                  (‖s * (s + 1) * (s + 2) * (s + 3) * (s + 4) * (s + 5) * (s + 6)‖ *
+                      (n : ℝ) ^ (-(15 : ℝ) / 2) / 1209600 +
+                      ‖s * (s + 1) * (s + 2) * (s + 3) * (s + 4) * (s + 5) * (s + 6) *
+                        (s + 7)‖ * (n : ℝ) ^ (-(15 : ℝ) / 2) / 9072000) := by
+                apply add_le_add
+                · exact add_le_add hT1 hT2
+                · exact add_le_add hT3 hT4
+              _ = ‖s * (s + 1) * (s + 2)‖ * (n : ℝ) ^ (-(7 : ℝ) / 2) / 720 +
+                  (‖s * (s + 1) * (s + 2) * (s + 3) * (s + 4)‖ *
+                    (n : ℝ) ^ (-(11 : ℝ) / 2) / 30240 +
+                    (‖s * (s + 1) * (s + 2) * (s + 3) * (s + 4) * (s + 5) * (s + 6)‖ *
+                      (n : ℝ) ^ (-(15 : ℝ) / 2) / 1209600 +
+                      ‖s * (s + 1) * (s + 2) * (s + 3) * (s + 4) * (s + 5) * (s + 6) *
+                        (s + 7)‖ * (n : ℝ) ^ (-(15 : ℝ) / 2) / 9072000)) := by ring
+        _ = ‖s * (s + 1) * (s + 2)‖ * (n : ℝ) ^ (-(7 : ℝ) / 2) / 720 +
+            ‖s * (s + 1) * (s + 2) * (s + 3) * (s + 4)‖ *
+              (n : ℝ) ^ (-(11 : ℝ) / 2) / 30240 +
+            ‖s * (s + 1) * (s + 2) * (s + 3) * (s + 4) * (s + 5) * (s + 6)‖ *
+              (n : ℝ) ^ (-(15 : ℝ) / 2) / 1209600 +
+            ‖s * (s + 1) * (s + 2) * (s + 3) * (s + 4) * (s + 5) * (s + 6) * (s + 7)‖ *
+              (n : ℝ) ^ (-(15 : ℝ) / 2) / 9072000 := by ring
 end
+
+
 
 /-! P4Limit · L5.b — zeta split (Re s > 1).
 
