@@ -4302,3 +4302,67 @@ unit; ≥ ~100 substeps per rotation), or used under bounds only.
 
 F1 (as written above) is thereby EXACT and fully anchored; DISCOVERY_LOG
 entries stand.  Lean port follows next.
+
+### 25ae Lean port — Stage 1 LANDED (2026-09-16, commit c07bf8b, pushed)
+
+Stage 1 of the Lean port is green (full `lake build`: 17434 jobs, 0 errors,
+0 sorry).  Atoms now in `formal/RhAttack/P4Limit.lean`:
+
+- **B4poly–B8poly** defs + endpoint equalities (`norm_num`):
+  B4(0) = B4(1) = −1/30, B5(0) = B5(1) = 0, B6(0) = B6(1) = 1/42,
+  B7(0) = B7(1) = 0, B8(0) = B8(1) = −1/30, B8(1/2) = 127/3840.
+- **Derivative chain** `B_kpoly' = k·B_{k−1}poly` for k = 4..8
+  (HasDerivAt proofs + `@[simp]` derivative-value lemmas).
+- **`B8poly_bound_Icc : |B8poly u| ≤ 1/30` on [0,1]** — the 4-term-bound
+  kernel constant, LEAN-PROVEN.
+
+**Method notes (durable):**
+
+1. **The Bernstein on-curve convex-hull draft was REFUTED before it reached
+   Lean** — by exact `Fraction` arithmetic: the identity
+   `P(u) = Σ_j P(j/8)·C(8,j)·u^j(1−u)^{8−j}` is FALSE (verified: LHS ≠ RHS
+   at 12 sample points; the on-curve values are not Bernstein control
+   points).  The true control points are b = (−1/30, −1/30, −1/105, 4/105,
+   8/105, 4/105, −1/105, −1/30, −1/30) and `ring` itself rejected the false
+   identity — a clean diagnostic.  The convex hull of the true control
+   points gives only |B₈| ≤ 8/105 (not ≤ 1/30), so even the correct
+   Bernstein argument would NOT have sufficed.
+2. **The proof that works is pure algebra, no calculus:**
+   `30·B8(u) + 1 = u²(1−u)²·T(u)` with T(u) = 30u⁴−60u³−10u²+40u+20,
+   and `T(u) − 20 = 10u(u−1)(3u²−3u−4) ≥ 0` and
+   `255 − 8·T(u) = (2u−1)²(−60u²+60u+95) ≥ 0` on [0,1] (both `ring`
+   identities + sign decompositions; no derivative machinery needed).
+   With u²(1−u)² ≤ 1/16: −1/30 ≤ B8(u) ≤ 127/3840 < 1/30.
+3. **`ring` in this toolchain DOES normalize rational constants**
+   (probed: `(3/2)·(2·u) = 3u`, `30·(14/3) = 140` — both close by `ring`).
+   The earlier constant-atom worry was misplaced; the Bernstein failure was
+   the FALSE IDENTITY, not the tactic.
+4. **4.33.1 API findings, this round:**
+   - `mul_le_mul (h1 : a ≤ b) (h2 : c ≤ d) (c0 : 0 ≤ c) (b0 : 0 ≤ b) :
+     a·c ≤ b·d` — side-order is (0 ≤ c, 0 ≤ b), from
+     `Mathlib/Tactic/GCongr/Core.lean`; NOT the old-library (0 ≤ c, 0 ≤ a).
+   - `pow_le_pow_left` not found; the 0 ≤ a ≤ 1 ⇒ a² ≤ 1 step closes by
+     plain `nlinarith [h0a, ha1]`.
+   - `hasDerivAt_const x c` takes BOTH arguments positionally (an explicit
+     `x`); `hasDerivAt_const_mul c` still synthesizes `x`.
+   - No `div_le_iff`; use `le_div_iff`/`div_le_iff₀` or avoid.
+   - `set F := fun (x : ℝ) => ...` — tactic-mode `set` takes no binder
+     ascription or body ascription (`fun (x : ℝ) : ℝ =>` parses but the
+     ascription is rejected; `fun (x : ℝ) =>` is the form).
+   - `rw [hT]` (NOT `rw [← hT]`) when the goal contains the LHS of
+     `hT : LHS = CTERM` and the chain term is `CTERM`: the direction is
+     goal-LHS → CTERM.
+   - A `by` block left with an open goal inside a `show … from by …`
+     term-position reports "invalid 'by' tactic, expected type has not been
+     provided" — add the closer (here `ring`).
+
+**NEXT (Stage 2/3, next round):** the per-period IBP ladder
+(B3 → B4 → B5 → B6 → B7 → B8, five atoms on the complex decaying
+exponential, mirroring the L4 `p4_op2c_bound` pattern including the
+measurability/continuity plumbing), the finite-sum + M→∞ assembly
+(boundary terms telescope because B4/B6/B8 have equal endpoint values; the
+first non-zero boundary at n is B4(0)·(−s−3)/4·n^{−s−3} → the −S₂·n^{−s−3}/720
+leading term after the s(s+1) prefactor), then `p4_T3_expansion` (F1 exact
+identity), `p4_T3_bound` (4-term triangle), and the list-scale wall
+corollary (F4b, positive at t ≤ 90 000; PINNED dps-50 wall 0.896783 up to
+1e8 recorded separately, not claimed LEAN-PROVEN).
