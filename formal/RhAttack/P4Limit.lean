@@ -5305,6 +5305,7 @@ theorem t3wB_num7_single_zero :
       apply mul_neg_of_neg_of_pos hwneg hu1pos
     have hun : t3wB_N7shift u1 < 0 := by linarith [hneg, t3wB_N7shift_at0_neg]
     linarith [hun, hz1]
+
 end
 
 
