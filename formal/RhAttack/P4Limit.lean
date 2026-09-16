@@ -1730,6 +1730,842 @@ theorem p4_Tn_Tendsto {s : ℂ} (hsσ : 1 < s.re) (n : ℕ) (hn : 0 < n) :
               · norm_num
           _ = 1 / 30 := by norm_num
 
+  --/ ===== 25ae Stage 2 — the per-period IBP ladder B2 -> B3 -> ... -> B8 =====
+  --|  Per-period atoms (j an integer period, j >= 1), mirroring the L4
+  --|  `p4_op2c_bound` pattern (`intervalIntegral.integral_mul_deriv_eq_deriv_mul`
+  --|  + `hasDerivAt_ofReal_cpow_const`).  Denominators are the SINGLE next
+  --|  index (k+1), NOT cumulative products — the cumulative variant was
+  --|  refuted numerically before port (day-026: per-step mpmath check to
+  --|  1e-43).  With I_k := ∫ B_k({x}) x^{-s-k}:
+  --|    I_k = (B_{k+1}(0)/(k+1))·((j+1)^{-s-k} - j^{-s-k})
+  --|          + (s+k)/(k+1) · ∫ B_{k+1}({x}) x^{-s-(k+1)}   (per period),
+  --|  with B3(0)=B5(0)=B7(0)=0 and B4(1)=B4(0), B6(1)=B6(0), B8(1)=B8(0). -/
+
+  -- (i) step 1: B2 -> B3 (vanishing boundary)
+  theorem p4_25ae_ibp_b2to3 {s : ℂ} (hsre : s.re = 1 / 2) (j : ℕ) (hj : 0 < j) :
+      (∫ x in (j : ℝ)..(j + 1 : ℝ),
+          ((x - (j : ℝ)) ^ 2 - (x - (j : ℝ)) + 1 / 6 : ℂ) * (x : ℂ) ^ (-s - 2))
+          = (s + 2 : ℂ) / 3 *
+              (∫ x in (j : ℝ)..(j + 1 : ℝ),
+                (B3poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 3)) := by
+    set u : ℝ → ℂ := fun (x : ℝ) => (x : ℂ) ^ (-s - 2) with hu
+    set v : ℝ → ℂ := fun (x : ℝ) => ((B3poly (x - (j : ℝ))) / 3 : ℂ) with hv
+    have hU : ∀ x ∈ Set.uIcc (j : ℝ) (j + 1 : ℝ),
+        HasDerivAt u ((-s - 2) * (x : ℂ) ^ (-s - 3)) x := by
+      intro x hx
+      have hx0 : x ≠ 0 := by
+        intro h
+        have hxge : (j : ℝ) ≤ x := by
+          simpa [show min (j : ℝ) (j + 1 : ℝ) = (j : ℝ) from min_eq_left (by nlinarith)]
+            using hx.1
+        linarith [(Nat.cast_pos (α := ℝ)).mpr hj, hxge, h]
+      have hsc : -s - 2 ≠ 0 := by
+        intro h
+        have hre0 : (-(s : ℂ) - 2).re = 0 := by simpa [h]
+        rw [show (-(s : ℂ) - 2 : ℂ) = -((s : ℂ) + 2) from by ring,
+          Complex.neg_re, Complex.add_re,
+          show (2 : ℂ).re = 2 from by norm_num] at hre0
+        linarith [hsre]
+      have hexp : (-s - 2 : ℂ) - 1 = -s - 3 := by ring
+      simpa [hexp] using hasDerivAt_ofReal_cpow_const hx0 hsc
+    have hV : ∀ x ∈ Set.uIcc (j : ℝ) (j + 1 : ℝ),
+        HasDerivAt v (((x - (j : ℝ)) ^ 2 - (x - (j : ℝ)) + 1 / 6 : ℂ)) x := by
+      intro x _
+      have hU1 : HasDerivAt (fun t : ℝ => t - (j : ℝ)) 1 x := by
+        have hsub : HasDerivAt ((id : ℝ → ℝ) - (fun _ : ℝ => (j : ℝ))) (1 - 0) x := by
+          simpa using (hasDerivAt_id x).sub (hasDerivAt_const x (j : ℝ))
+        have hfun : (id : ℝ → ℝ) - (fun _ : ℝ => (j : ℝ)) = (fun t : ℝ => t - (j : ℝ)) := by
+          funext t
+          dsimp
+        simpa [hfun] using hsub
+      have hW0 := HasDerivAt.comp x (B3poly_hasDerivAt (x - (j : ℝ))) hU1
+      have hfun : (B3poly ∘ (fun t : ℝ => t - (j : ℝ))) =
+          (fun t : ℝ => B3poly (t - (j : ℝ))) := by funext t; dsimp
+      have hder : 3 * ((x - (j : ℝ)) ^ 2 - (x - (j : ℝ)) + 1 / 6) * 1 =
+          3 * ((x - (j : ℝ)) ^ 2 - (x - (j : ℝ)) + 1 / 6) := by ring
+      have hW : HasDerivAt (fun t : ℝ => B3poly (t - (j : ℝ)))
+          (3 * ((x - (j : ℝ)) ^ 2 - (x - (j : ℝ)) + 1 / 6)) x := by
+        simpa [hfun, hder] using hW0
+      have hW2 : HasDerivAt (fun t : ℝ => (B3poly (t - (j : ℝ))) / 3)
+          ((x - (j : ℝ)) ^ 2 - (x - (j : ℝ)) + 1 / 6) x := by
+        simpa using hW.div_const 3
+      simpa using HasDerivAt.ofReal_comp hW2
+    have hCpowCO : ContinuousOn (fun x : ℝ => (x : ℂ) ^ (-s - 3))
+        (Set.uIcc (j : ℝ) (j + 1 : ℝ)) := by
+      intro x hx
+      have hxge : (j : ℝ) ≤ x := by
+        simpa [show min (j : ℝ) (j + 1 : ℝ) = (j : ℝ) from min_eq_left (by nlinarith)]
+          using hx.1
+      have hpos : 0 < x := by
+        nlinarith [(Nat.cast_pos (α := ℝ)).mpr hj, hxge]
+      exact (Complex.continuousAt_ofReal_cpow_const x (-s - 3)
+          (Or.inr (ne_of_gt hpos))).continuousWithinAt
+    have hUint : IntervalIntegrable (fun x : ℝ => (-s - 2) * (x : ℂ) ^ (-s - 3))
+        volume (j : ℝ) (j + 1 : ℝ) :=
+      ((continuousOn_const : ContinuousOn (fun x : ℝ => (-s - 2 : ℂ))
+          (Set.uIcc (j : ℝ) (j + 1 : ℝ))).mul hCpowCO).intervalIntegrable
+    have hVint : IntervalIntegrable
+        (fun x : ℝ => ((x - (j : ℝ)) ^ 2 - (x - (j : ℝ)) + 1 / 6 : ℂ))
+        volume (j : ℝ) (j + 1 : ℝ) := by
+      have hm : ContinuousOn
+          (fun x : ℝ => ((x - (j : ℝ)) ^ 2 - (x - (j : ℝ)) + 1 / 6 : ℂ))
+          (Set.uIcc (j : ℝ) (j + 1 : ℝ)) := by fun_prop
+      exact hm.intervalIntegrable
+    have H : (∫ x in (j : ℝ)..(j + 1 : ℝ),
+              u x * (((x - (j : ℝ)) ^ 2 - (x - (j : ℝ)) + 1 / 6 : ℂ))) =
+        u (j + 1 : ℝ) * v (j + 1 : ℝ) - u (j : ℝ) * v (j : ℝ) -
+          (∫ x in (j : ℝ)..(j + 1 : ℝ),
+            ((-s - 2) * (x : ℂ) ^ (-s - 3)) * v x) :=
+      (intervalIntegral.integral_mul_deriv_eq_deriv_mul
+        (fun x hx => hU x hx)
+        (fun x hx => hV x hx)
+        hUint hVint : _ = _)
+    calc (∫ x in (j : ℝ)..(j + 1 : ℝ),
+            ((x - (j : ℝ)) ^ 2 - (x - (j : ℝ)) + 1 / 6 : ℂ) * (x : ℂ) ^ (-s - 2))
+        _ = (∫ x in (j : ℝ)..(j + 1 : ℝ),
+              u x * (((x - (j : ℝ)) ^ 2 - (x - (j : ℝ)) + 1 / 6 : ℂ))) := by
+            have hEqU : EqOn
+                (fun x : ℝ => u x * (((x - (j : ℝ)) ^ 2 - (x - (j : ℝ)) + 1 / 6 : ℂ)))
+                (fun x : ℝ =>
+                  (((x - (j : ℝ)) ^ 2 - (x - (j : ℝ)) + 1 / 6 : ℂ) * (x : ℂ) ^ (-s - 2)))
+                (Set.uIcc (j : ℝ) (j + 1 : ℝ)) := by
+              intro x _
+              dsimp only [u]
+              ring
+            exact (intervalIntegral.integral_congr
+                (μ := (MeasureTheory.volume : Measure ℝ)) hEqU).symm
+        _ = u (j + 1 : ℝ) * v (j + 1 : ℝ) - u (j : ℝ) * v (j : ℝ) -
+            (∫ x in (j : ℝ)..(j + 1 : ℝ), ((-s - 2) * (x : ℂ) ^ (-s - 3)) * v x) := H
+        _ = - (∫ x in (j : ℝ)..(j + 1 : ℝ), ((-s - 2) * (x : ℂ) ^ (-s - 3)) * v x) := by
+            have hvb1 : v (j + 1 : ℝ) = 0 := by
+              dsimp only [v]
+              rw [show (j + 1 : ℝ) - (j : ℝ) = 1 from by ring, B3poly_at_1]
+              norm_num
+            have hvb0 : v (j : ℝ) = 0 := by
+              dsimp only [v]
+              rw [show (j : ℝ) - (j : ℝ) = 0 from by ring, B3poly_at_0]
+              norm_num
+            rw [hvb1, hvb0]
+            ring
+        _ = ((s + 2 : ℂ) / 3) *
+            (∫ x in (j : ℝ)..(j + 1 : ℝ),
+              (B3poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 3)) := by
+            have hX : (∫ x in (j : ℝ)..(j + 1 : ℝ),
+                      ((-s - 2) * (x : ℂ) ^ (-s - 3)) * v x) =
+                ((-(s + 2 : ℂ)) / 3) *
+                  (∫ x in (j : ℝ)..(j + 1 : ℝ),
+                    (B3poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 3)) := by
+              have hEq : EqOn
+                  (fun x : ℝ => ((-s - 2) * (x : ℂ) ^ (-s - 3)) * v x)
+                  (fun x : ℝ => (-(s + 2 : ℂ)) / 3 *
+                    ((B3poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 3)))
+                  (Set.uIcc (j : ℝ) (j + 1 : ℝ)) := by
+                intro x _
+                dsimp only [v]
+                ring
+              exact (intervalIntegral.integral_congr (μ := (MeasureTheory.volume : Measure ℝ)) hEq).trans
+                (by
+                  rw [intervalIntegral.integral_const_mul ((-(s + 2 : ℂ)) / 3)])
+            rw [hX]
+            ring
+
+
+  -- (ii) step 3: B3 -> B4 (boundary from B4(0) = B4(1))
+  theorem p4_25ae_ibp_b3to4 {{s : ℂ}} (hsre : s.re = 1 / 2) (j : ℕ) (hj : 0 < j) :
+      (∫ x in (j : ℝ)..(j + 1 : ℝ),
+          (B3poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 3))
+          = (((B4poly 0) / 4) : ℂ) * (((j + 1 : ℝ) : ℂ) ^ (-s - 3) - ((j : ℝ) : ℂ) ^ (-s - 3))
+              + (s + 3 : ℂ) / 4 *
+                  (∫ x in (j : ℝ)..(j + 1 : ℝ),
+                    (B4poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 4)) := by
+    set u : ℝ → ℂ := fun (x : ℝ) => (x : ℂ) ^ (-s - 3) with hu
+    set v : ℝ → ℂ := fun (x : ℝ) => ((B4poly (x - (j : ℝ))) / 4 : ℂ) with hv
+    have hU : ∀ x ∈ Set.uIcc (j : ℝ) (j + 1 : ℝ),
+        HasDerivAt u ((-s - 3) * (x : ℂ) ^ (-s - 4)) x := by
+      intro x hx
+      have hx0 : x ≠ 0 := by
+        intro h
+        have hxge : (j : ℝ) ≤ x := by
+          simpa [show min (j : ℝ) (j + 1 : ℝ) = (j : ℝ) from min_eq_left (by nlinarith)]
+            using hx.1
+        linarith [(Nat.cast_pos (α := ℝ)).mpr hj, hxge, h]
+      have hsc : -s - 3 ≠ 0 := by
+        intro h
+        have hre0 : (-(s : ℂ) - 3).re = 0 := by simpa [h]
+        rw [show (-(s : ℂ) - 3 : ℂ) = -((s : ℂ) + 3) from by ring,
+          Complex.neg_re, Complex.add_re,
+          show (3 : ℂ).re = 3 from by norm_num] at hre0
+        linarith [hsre]
+      have hexp : (-s - 3 : ℂ) - 1 = -s - 4 := by ring
+      simpa [hexp] using hasDerivAt_ofReal_cpow_const hx0 hsc
+    have hV : ∀ x ∈ Set.uIcc (j : ℝ) (j + 1 : ℝ),
+        HasDerivAt v ((B3poly (x - (j : ℝ))) : ℂ) x := by
+      intro x _
+      have hU1 : HasDerivAt (fun t : ℝ => t - (j : ℝ)) 1 x := by
+        have hsub : HasDerivAt ((id : ℝ → ℝ) - (fun _ : ℝ => (j : ℝ))) (1 - 0) x := by
+          simpa using (hasDerivAt_id x).sub (hasDerivAt_const x (j : ℝ))
+        have hfun : (id : ℝ → ℝ) - (fun _ : ℝ => (j : ℝ)) = (fun t : ℝ => t - (j : ℝ)) := by
+          funext t
+          dsimp
+        simpa [hfun] using hsub
+      have hW0 := HasDerivAt.comp x (B4poly_hasDerivAt (x - (j : ℝ))) hU1
+      have hfun : (B4poly ∘ (fun t : ℝ => t - (j : ℝ))) =
+          (fun t : ℝ => B4poly (t - (j : ℝ))) := by funext t; dsimp
+      have hval : (4 * (x - (j : ℝ)) ^ 3 - 2 * (3 * (x - (j : ℝ)) ^ 2) + 2 * (x - (j : ℝ)) - 0)
+          = 4 * B3poly (x - (j : ℝ)) := by
+        dsimp only [B3poly]
+        ring
+      have hW : HasDerivAt (fun t : ℝ => B4poly (t - (j : ℝ))) (4 * B3poly (x - (j : ℝ))) x := by
+        simpa [hfun, hval] using hW0
+      have hW2 : HasDerivAt (fun t : ℝ => (B4poly (t - (j : ℝ))) / 4)
+          (B3poly (x - (j : ℝ))) x := by
+        simpa [show (4 * B3poly (x - (j : ℝ)) / 4) = B3poly (x - (j : ℝ)) from by ring]
+          using (hW.div_const 4)
+      simpa using HasDerivAt.ofReal_comp hW2
+    have hCpowCO : ContinuousOn (fun x : ℝ => (x : ℂ) ^ (-s - 4))
+        (Set.uIcc (j : ℝ) (j + 1 : ℝ)) := by
+      intro x hx
+      have hxge : (j : ℝ) ≤ x := by
+        simpa [show min (j : ℝ) (j + 1 : ℝ) = (j : ℝ) from min_eq_left (by nlinarith)]
+          using hx.1
+      have hpos : 0 < x := by
+        nlinarith [(Nat.cast_pos (α := ℝ)).mpr hj, hxge]
+      exact (Complex.continuousAt_ofReal_cpow_const x (-s - 4)
+          (Or.inr (ne_of_gt hpos))).continuousWithinAt
+    have hUint : IntervalIntegrable (fun x : ℝ => (-s - 3) * (x : ℂ) ^ (-s - 4))
+        volume (j : ℝ) (j + 1 : ℝ) :=
+      ((continuousOn_const : ContinuousOn (fun x : ℝ => (-s - 3 : ℂ))
+          (Set.uIcc (j : ℝ) (j + 1 : ℝ))).mul hCpowCO).intervalIntegrable
+    have hVint : IntervalIntegrable (fun x : ℝ => (B3poly (x - (j : ℝ)) : ℂ))
+        volume (j : ℝ) (j + 1 : ℝ) := by
+      have hm : ContinuousOn (fun x : ℝ => (B3poly (x - (j : ℝ)) : ℂ))
+          (Set.uIcc (j : ℝ) (j + 1 : ℝ)) := by
+        dsimp only [B3poly]
+        fun_prop
+      exact hm.intervalIntegrable
+    have H : (∫ x in (j : ℝ)..(j + 1 : ℝ),
+              u x * ((B3poly (x - (j : ℝ))) : ℂ)) =
+        u (j + 1 : ℝ) * v (j + 1 : ℝ) - u (j : ℝ) * v (j : ℝ) -
+          (∫ x in (j : ℝ)..(j + 1 : ℝ),
+            ((-s - 3) * (x : ℂ) ^ (-s - 4)) * v x) :=
+      (intervalIntegral.integral_mul_deriv_eq_deriv_mul
+        (fun x hx => hU x hx)
+        (fun x hx => hV x hx)
+        hUint hVint : _ = _)
+    calc (∫ x in (j : ℝ)..(j + 1 : ℝ),
+            (B3poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 3))
+        _ = (∫ x in (j : ℝ)..(j + 1 : ℝ),
+              u x * ((B3poly (x - (j : ℝ))) : ℂ)) := by
+            have hEqU : EqOn
+                (fun x : ℝ => u x * ((B3poly (x - (j : ℝ))) : ℂ))
+                (fun x : ℝ =>
+                  ((B3poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 3)))
+                (Set.uIcc (j : ℝ) (j + 1 : ℝ)) := by
+              intro x _
+              dsimp only [u]
+              ring
+            exact (intervalIntegral.integral_congr
+                (μ := (MeasureTheory.volume : Measure ℝ)) hEqU).symm
+        _ = u (j + 1 : ℝ) * v (j + 1 : ℝ) - u (j : ℝ) * v (j : ℝ) -
+            (∫ x in (j : ℝ)..(j + 1 : ℝ),
+              ((-s - 3) * (x : ℂ) ^ (-s - 4)) * v x) := H
+        _ = ((B4poly 0 / 4 : ℝ) : ℂ) *
+                (u (j + 1 : ℝ) - u (j : ℝ)) -
+                (∫ x in (j : ℝ)..(j + 1 : ℝ),
+                  ((-s - 3 : ℂ) * (x : ℂ) ^ (-s - 4)) * v x) := by
+            have hvb1 : v (j + 1 : ℝ) = (((B4poly 1) / 4) : ℂ) := by
+              dsimp only [v]
+              rw [show (j + 1 : ℝ) - (j : ℝ) = 1 from by ring]
+            have hvb0 : v (j : ℝ) = (((B4poly 0) / 4) : ℂ) := by
+              dsimp only [v]
+              rw [show (j : ℝ) - (j : ℝ) = 0 from by ring]
+            rw [hvb1, hvb0]
+            have hB4 : B4poly 1 = B4poly 0 := by
+              rw [B4poly_at_1, B4poly_at_0]
+            simp [hB4]
+            ring
+        _ = (((B4poly 0) / 4) : ℂ) * (((j + 1 : ℝ) : ℂ) ^ (-s - 3) - ((j : ℝ) : ℂ) ^ (-s - 3))
+            + ((s + 3 : ℂ) / 4) *
+              (∫ x in (j : ℝ)..(j + 1 : ℝ),
+                (B4poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 4)) := by
+            have hu1 : u (j + 1 : ℝ) = (((j + 1 : ℝ) : ℂ) ^ (-s - 3)) := by
+              dsimp only [u]
+            have hu0 : u (j : ℝ) = (((j : ℝ) : ℂ) ^ (-s - 3)) := by
+              dsimp only [u]
+            rw [hu1, hu0]
+            have hX : (∫ x in (j : ℝ)..(j + 1 : ℝ),
+                      ((-s - 3) * (x : ℂ) ^ (-s - 4)) * v x) =
+                (-(s + 3 : ℂ)) / 4 *
+                  (∫ x in (j : ℝ)..(j + 1 : ℝ),
+                    (B4poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 4)) := by
+              have hEq : EqOn
+                  (fun x : ℝ => ((-s - 3) * (x : ℂ) ^ (-s - 4)) * v x)
+                  (fun x : ℝ => (-(s + 3 : ℂ)) / 4 *
+                    ((B4poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 4)))
+                  (Set.uIcc (j : ℝ) (j + 1 : ℝ)) := by
+                intro x _
+                dsimp only [v]
+                ring
+              exact (intervalIntegral.integral_congr
+                  (μ := (MeasureTheory.volume : Measure ℝ)) hEq).trans
+                (by
+                  rw [intervalIntegral.integral_const_mul (-(s + 3 : ℂ) / 4)])
+            rw [hX]
+            have hC : (-(s + 3 : ℂ)) / 4 = -((s + 3 : ℂ) / 4) := by
+              ring
+            rw [hC]
+            simp
+
+  -- (iii) step 4: B4 -> B5 (vanishing boundary)
+  theorem p4_25ae_ibp_b4to5 {{s : ℂ}} (hsre : s.re = 1 / 2) (j : ℕ) (hj : 0 < j) :
+      (∫ x in (j : ℝ)..(j + 1 : ℝ),
+          (B4poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 4))
+          = 0
+              + (s + 4 : ℂ) / 5 *
+                  (∫ x in (j : ℝ)..(j + 1 : ℝ),
+                    (B5poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 5)) := by
+    set u : ℝ → ℂ := fun (x : ℝ) => (x : ℂ) ^ (-s - 4) with hu
+    set v : ℝ → ℂ := fun (x : ℝ) => ((B5poly (x - (j : ℝ))) / 5 : ℂ) with hv
+    have hU : ∀ x ∈ Set.uIcc (j : ℝ) (j + 1 : ℝ),
+        HasDerivAt u ((-s - 4) * (x : ℂ) ^ (-s - 5)) x := by
+      intro x hx
+      have hx0 : x ≠ 0 := by
+        intro h
+        have hxge : (j : ℝ) ≤ x := by
+          simpa [show min (j : ℝ) (j + 1 : ℝ) = (j : ℝ) from min_eq_left (by nlinarith)]
+            using hx.1
+        linarith [(Nat.cast_pos (α := ℝ)).mpr hj, hxge, h]
+      have hsc : -s - 4 ≠ 0 := by
+        intro h
+        have hre0 : (-(s : ℂ) - 4).re = 0 := by simpa [h]
+        rw [show (-(s : ℂ) - 4 : ℂ) = -((s : ℂ) + 4) from by ring,
+          Complex.neg_re, Complex.add_re,
+          show (4 : ℂ).re = 4 from by norm_num] at hre0
+        linarith [hsre]
+      have hexp : (-s - 4 : ℂ) - 1 = -s - 5 := by ring
+      simpa [hexp] using hasDerivAt_ofReal_cpow_const hx0 hsc
+    have hV : ∀ x ∈ Set.uIcc (j : ℝ) (j + 1 : ℝ),
+        HasDerivAt v ((B4poly (x - (j : ℝ))) : ℂ) x := by
+      intro x _
+      have hU1 : HasDerivAt (fun t : ℝ => t - (j : ℝ)) 1 x := by
+        have hsub : HasDerivAt ((id : ℝ → ℝ) - (fun _ : ℝ => (j : ℝ))) (1 - 0) x := by
+          simpa using (hasDerivAt_id x).sub (hasDerivAt_const x (j : ℝ))
+        have hfun : (id : ℝ → ℝ) - (fun _ : ℝ => (j : ℝ)) = (fun t : ℝ => t - (j : ℝ)) := by
+          funext t
+          dsimp
+        simpa [hfun] using hsub
+      have hW0 := HasDerivAt.comp x (B5poly_hasDerivAt (x - (j : ℝ))) hU1
+      have hfun : (B5poly ∘ (fun t : ℝ => t - (j : ℝ))) =
+          (fun t : ℝ => B5poly (t - (j : ℝ))) := by funext t; dsimp
+      have hder : 5 * B4poly (x - (j : ℝ)) * 1 = 5 * B4poly (x - (j : ℝ)) := by ring
+      have hW : HasDerivAt (fun t : ℝ => B5poly (t - (j : ℝ)))
+          (5 * B4poly (x - (j : ℝ))) x := by
+        simpa [hfun, hder] using hW0
+      have hW2 : HasDerivAt (fun t : ℝ => (B5poly (t - (j : ℝ))) / 5)
+          (B4poly (x - (j : ℝ))) x := by
+        simpa using hW.div_const 5
+      simpa using HasDerivAt.ofReal_comp hW2
+    have hCpowCO : ContinuousOn (fun x : ℝ => (x : ℂ) ^ (-s - 5))
+        (Set.uIcc (j : ℝ) (j + 1 : ℝ)) := by
+      intro x hx
+      have hxge : (j : ℝ) ≤ x := by
+        simpa [show min (j : ℝ) (j + 1 : ℝ) = (j : ℝ) from min_eq_left (by nlinarith)]
+          using hx.1
+      have hpos : 0 < x := by
+        nlinarith [(Nat.cast_pos (α := ℝ)).mpr hj, hxge]
+      exact (Complex.continuousAt_ofReal_cpow_const x (-s - 5)
+          (Or.inr (ne_of_gt hpos))).continuousWithinAt
+    have hUint : IntervalIntegrable (fun x : ℝ => (-s - 4) * (x : ℂ) ^ (-s - 5))
+        volume (j : ℝ) (j + 1 : ℝ) :=
+      ((continuousOn_const : ContinuousOn (fun x : ℝ => (-s - 4 : ℂ))
+          (Set.uIcc (j : ℝ) (j + 1 : ℝ))).mul hCpowCO).intervalIntegrable
+    have hVint : IntervalIntegrable (fun x : ℝ => (B4poly (x - (j : ℝ)) : ℂ))
+        volume (j : ℝ) (j + 1 : ℝ) := by
+      have hm : ContinuousOn (fun x : ℝ => (B4poly (x - (j : ℝ)) : ℂ))
+          (Set.uIcc (j : ℝ) (j + 1 : ℝ)) := by
+        dsimp only [B4poly]
+        fun_prop
+      exact hm.intervalIntegrable
+    have H : (∫ x in (j : ℝ)..(j + 1 : ℝ),
+              u x * ((B4poly (x - (j : ℝ))) : ℂ)) =
+        u (j + 1 : ℝ) * v (j + 1 : ℝ) - u (j : ℝ) * v (j : ℝ) -
+          (∫ x in (j : ℝ)..(j + 1 : ℝ),
+            ((-s - 4) * (x : ℂ) ^ (-s - 5)) * v x) :=
+      (intervalIntegral.integral_mul_deriv_eq_deriv_mul
+        (fun x hx => hU x hx)
+        (fun x hx => hV x hx)
+        hUint hVint : _ = _)
+    calc (∫ x in (j : ℝ)..(j + 1 : ℝ),
+            (B4poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 4))
+        _ = (∫ x in (j : ℝ)..(j + 1 : ℝ),
+              u x * ((B4poly (x - (j : ℝ))) : ℂ)) := by
+            have hEqU : EqOn
+                (fun x : ℝ => u x * ((B4poly (x - (j : ℝ))) : ℂ))
+                (fun x : ℝ =>
+                  ((B4poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 4)))
+                (Set.uIcc (j : ℝ) (j + 1 : ℝ)) := by
+              intro x _
+              dsimp only [u]
+              ring
+            exact (intervalIntegral.integral_congr
+                (μ := (MeasureTheory.volume : Measure ℝ)) hEqU).symm
+        _ = u (j + 1 : ℝ) * v (j + 1 : ℝ) - u (j : ℝ) * v (j : ℝ) -
+            (∫ x in (j : ℝ)..(j + 1 : ℝ),
+              ((-s - 4) * (x : ℂ) ^ (-s - 5)) * v x) := H
+        _ = - (∫ x in (j : ℝ)..(j + 1 : ℝ),
+                ((-s - 4 : ℂ) * (x : ℂ) ^ (-s - 5)) * v x) := by
+            have hvb1 : v (j + 1 : ℝ) = 0 := by
+              dsimp only [v]
+              rw [show (j + 1 : ℝ) - (j : ℝ) = 1 from by ring, B5poly_at_1]
+              norm_num
+            have hvb0 : v (j : ℝ) = 0 := by
+              dsimp only [v]
+              rw [show (j : ℝ) - (j : ℝ) = 0 from by ring, B5poly_at_0]
+              norm_num
+            rw [hvb1, hvb0]
+            ring
+        _ = 0
+            + ((s + 4 : ℂ) / 5) *
+              (∫ x in (j : ℝ)..(j + 1 : ℝ),
+                (B5poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 5)) := by
+            have hX : (∫ x in (j : ℝ)..(j + 1 : ℝ),
+                      ((-s - 4) * (x : ℂ) ^ (-s - 5)) * v x) =
+                (-(s + 4 : ℂ)) / 5 *
+                  (∫ x in (j : ℝ)..(j + 1 : ℝ),
+                    (B5poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 5)) := by
+              have hEq : EqOn
+                  (fun x : ℝ => ((-s - 4) * (x : ℂ) ^ (-s - 5)) * v x)
+                  (fun x : ℝ => (-(s + 4 : ℂ)) / 5 *
+                    ((B5poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 5)))
+                  (Set.uIcc (j : ℝ) (j + 1 : ℝ)) := by
+                intro x _
+                dsimp only [v]
+                ring
+              exact (intervalIntegral.integral_congr
+                  (μ := (MeasureTheory.volume : Measure ℝ)) hEq).trans
+                (by
+                  rw [intervalIntegral.integral_const_mul (-(s + 4 : ℂ) / 5)])
+            rw [hX]
+            ring
+
+  -- (iv) step 5: B5 -> B6 (boundary from B6(0) = B6(1))
+  theorem p4_25ae_ibp_b5to6 {{s : ℂ}} (hsre : s.re = 1 / 2) (j : ℕ) (hj : 0 < j) :
+      (∫ x in (j : ℝ)..(j + 1 : ℝ),
+          (B5poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 5))
+          = (((B6poly 0) / 6) : ℂ) * (((j + 1 : ℝ) : ℂ) ^ (-s - 5) - ((j : ℝ) : ℂ) ^ (-s - 5))
+              + (s + 5 : ℂ) / 6 *
+                  (∫ x in (j : ℝ)..(j + 1 : ℝ),
+                    (B6poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 6)) := by
+    set u : ℝ → ℂ := fun (x : ℝ) => (x : ℂ) ^ (-s - 5) with hu
+    set v : ℝ → ℂ := fun (x : ℝ) => ((B6poly (x - (j : ℝ))) / 6 : ℂ) with hv
+    have hU : ∀ x ∈ Set.uIcc (j : ℝ) (j + 1 : ℝ),
+        HasDerivAt u ((-s - 5) * (x : ℂ) ^ (-s - 6)) x := by
+      intro x hx
+      have hx0 : x ≠ 0 := by
+        intro h
+        have hxge : (j : ℝ) ≤ x := by
+          simpa [show min (j : ℝ) (j + 1 : ℝ) = (j : ℝ) from min_eq_left (by nlinarith)]
+            using hx.1
+        linarith [(Nat.cast_pos (α := ℝ)).mpr hj, hxge, h]
+      have hsc : -s - 5 ≠ 0 := by
+        intro h
+        have hre0 : (-(s : ℂ) - 5).re = 0 := by simpa [h]
+        rw [show (-(s : ℂ) - 5 : ℂ) = -((s : ℂ) + 5) from by ring,
+          Complex.neg_re, Complex.add_re,
+          show (5 : ℂ).re = 5 from by norm_num] at hre0
+        linarith [hsre]
+      have hexp : (-s - 5 : ℂ) - 1 = -s - 6 := by ring
+      simpa [hexp] using hasDerivAt_ofReal_cpow_const hx0 hsc
+    have hV : ∀ x ∈ Set.uIcc (j : ℝ) (j + 1 : ℝ),
+        HasDerivAt v ((B5poly (x - (j : ℝ))) : ℂ) x := by
+      intro x _
+      have hU1 : HasDerivAt (fun t : ℝ => t - (j : ℝ)) 1 x := by
+        have hsub : HasDerivAt ((id : ℝ → ℝ) - (fun _ : ℝ => (j : ℝ))) (1 - 0) x := by
+          simpa using (hasDerivAt_id x).sub (hasDerivAt_const x (j : ℝ))
+        have hfun : (id : ℝ → ℝ) - (fun _ : ℝ => (j : ℝ)) = (fun t : ℝ => t - (j : ℝ)) := by
+          funext t
+          dsimp
+        simpa [hfun] using hsub
+      have hW0 := HasDerivAt.comp x (B6poly_hasDerivAt (x - (j : ℝ))) hU1
+      have hfun : (B6poly ∘ (fun t : ℝ => t - (j : ℝ))) =
+          (fun t : ℝ => B6poly (t - (j : ℝ))) := by funext t; dsimp
+      have hder : 6 * B5poly (x - (j : ℝ)) * 1 = 6 * B5poly (x - (j : ℝ)) := by ring
+      have hW : HasDerivAt (fun t : ℝ => B6poly (t - (j : ℝ)))
+          (6 * B5poly (x - (j : ℝ))) x := by
+        simpa [hfun, hder] using hW0
+      have hW2 : HasDerivAt (fun t : ℝ => (B6poly (t - (j : ℝ))) / 6)
+          (B5poly (x - (j : ℝ))) x := by
+        simpa using hW.div_const 6
+      simpa using HasDerivAt.ofReal_comp hW2
+    have hCpowCO : ContinuousOn (fun x : ℝ => (x : ℂ) ^ (-s - 6))
+        (Set.uIcc (j : ℝ) (j + 1 : ℝ)) := by
+      intro x hx
+      have hxge : (j : ℝ) ≤ x := by
+        simpa [show min (j : ℝ) (j + 1 : ℝ) = (j : ℝ) from min_eq_left (by nlinarith)]
+          using hx.1
+      have hpos : 0 < x := by
+        nlinarith [(Nat.cast_pos (α := ℝ)).mpr hj, hxge]
+      exact (Complex.continuousAt_ofReal_cpow_const x (-s - 6)
+          (Or.inr (ne_of_gt hpos))).continuousWithinAt
+    have hUint : IntervalIntegrable (fun x : ℝ => (-s - 5) * (x : ℂ) ^ (-s - 6))
+        volume (j : ℝ) (j + 1 : ℝ) :=
+      ((continuousOn_const : ContinuousOn (fun x : ℝ => (-s - 5 : ℂ))
+          (Set.uIcc (j : ℝ) (j + 1 : ℝ))).mul hCpowCO).intervalIntegrable
+    have hVint : IntervalIntegrable (fun x : ℝ => (B5poly (x - (j : ℝ)) : ℂ))
+        volume (j : ℝ) (j + 1 : ℝ) := by
+      have hm : ContinuousOn (fun x : ℝ => (B5poly (x - (j : ℝ)) : ℂ))
+          (Set.uIcc (j : ℝ) (j + 1 : ℝ)) := by
+        dsimp only [B5poly]
+        fun_prop
+      exact hm.intervalIntegrable
+    have H : (∫ x in (j : ℝ)..(j + 1 : ℝ),
+              u x * ((B5poly (x - (j : ℝ))) : ℂ)) =
+        u (j + 1 : ℝ) * v (j + 1 : ℝ) - u (j : ℝ) * v (j : ℝ) -
+          (∫ x in (j : ℝ)..(j + 1 : ℝ),
+            ((-s - 5) * (x : ℂ) ^ (-s - 6)) * v x) :=
+      (intervalIntegral.integral_mul_deriv_eq_deriv_mul
+        (fun x hx => hU x hx)
+        (fun x hx => hV x hx)
+        hUint hVint : _ = _)
+    calc (∫ x in (j : ℝ)..(j + 1 : ℝ),
+            (B5poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 5))
+        _ = (∫ x in (j : ℝ)..(j + 1 : ℝ),
+              u x * ((B5poly (x - (j : ℝ))) : ℂ)) := by
+            have hEqU : EqOn
+                (fun x : ℝ => u x * ((B5poly (x - (j : ℝ))) : ℂ))
+                (fun x : ℝ =>
+                  ((B5poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 5)))
+                (Set.uIcc (j : ℝ) (j + 1 : ℝ)) := by
+              intro x _
+              dsimp only [u]
+              ring
+            exact (intervalIntegral.integral_congr
+                (μ := (MeasureTheory.volume : Measure ℝ)) hEqU).symm
+        _ = u (j + 1 : ℝ) * v (j + 1 : ℝ) - u (j : ℝ) * v (j : ℝ) -
+            (∫ x in (j : ℝ)..(j + 1 : ℝ),
+              ((-s - 5) * (x : ℂ) ^ (-s - 6)) * v x) := H
+        _ = ((B6poly 0 / 6 : ℝ) : ℂ) *
+                (u (j + 1 : ℝ) - u (j : ℝ)) -
+                (∫ x in (j : ℝ)..(j + 1 : ℝ),
+                  ((-s - 5 : ℂ) * (x : ℂ) ^ (-s - 6)) * v x) := by
+            have hvb1 : v (j + 1 : ℝ) = (((B6poly 1) / 6) : ℂ) := by
+              dsimp only [v]
+              rw [show (j + 1 : ℝ) - (j : ℝ) = 1 from by ring]
+            have hvb0 : v (j : ℝ) = (((B6poly 0) / 6) : ℂ) := by
+              dsimp only [v]
+              rw [show (j : ℝ) - (j : ℝ) = 0 from by ring]
+            rw [hvb1, hvb0]
+            have hB6 : B6poly 1 = B6poly 0 := by
+              rw [B6poly_at_1, B6poly_at_0]
+            simp [hB6]
+            ring
+        _ = (((B6poly 0) / 6) : ℂ) * (((j + 1 : ℝ) : ℂ) ^ (-s - 5) - ((j : ℝ) : ℂ) ^ (-s - 5))
+            + ((s + 5 : ℂ) / 6) *
+              (∫ x in (j : ℝ)..(j + 1 : ℝ),
+                (B6poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 6)) := by
+            have hu1 : u (j + 1 : ℝ) = (((j + 1 : ℝ) : ℂ) ^ (-s - 5)) := by
+              dsimp only [u]
+            have hu0 : u (j : ℝ) = (((j : ℝ) : ℂ) ^ (-s - 5)) := by
+              dsimp only [u]
+            rw [hu1, hu0]
+            have hX : (∫ x in (j : ℝ)..(j + 1 : ℝ),
+                      ((-s - 5) * (x : ℂ) ^ (-s - 6)) * v x) =
+                (-(s + 5 : ℂ)) / 6 *
+                  (∫ x in (j : ℝ)..(j + 1 : ℝ),
+                    (B6poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 6)) := by
+              have hEq : EqOn
+                  (fun x : ℝ => ((-s - 5) * (x : ℂ) ^ (-s - 6)) * v x)
+                  (fun x : ℝ => (-(s + 5 : ℂ)) / 6 *
+                    ((B6poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 6)))
+                  (Set.uIcc (j : ℝ) (j + 1 : ℝ)) := by
+                intro x _
+                dsimp only [v]
+                ring
+              exact (intervalIntegral.integral_congr
+                  (μ := (MeasureTheory.volume : Measure ℝ)) hEq).trans
+                (by
+                  rw [intervalIntegral.integral_const_mul (-(s + 5 : ℂ) / 6)])
+            rw [hX]
+            have hC : (-(s + 5 : ℂ)) / 6 = -((s + 5 : ℂ) / 6) := by
+              ring
+            rw [hC]
+            simp
+
+  -- (v) step 6: B6 -> B7 (vanishing boundary)
+  theorem p4_25ae_ibp_b6to7 {{s : ℂ}} (hsre : s.re = 1 / 2) (j : ℕ) (hj : 0 < j) :
+      (∫ x in (j : ℝ)..(j + 1 : ℝ),
+          (B6poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 6))
+          = 0
+              + (s + 6 : ℂ) / 7 *
+                  (∫ x in (j : ℝ)..(j + 1 : ℝ),
+                    (B7poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 7)) := by
+    set u : ℝ → ℂ := fun (x : ℝ) => (x : ℂ) ^ (-s - 6) with hu
+    set v : ℝ → ℂ := fun (x : ℝ) => ((B7poly (x - (j : ℝ))) / 7 : ℂ) with hv
+    have hU : ∀ x ∈ Set.uIcc (j : ℝ) (j + 1 : ℝ),
+        HasDerivAt u ((-s - 6) * (x : ℂ) ^ (-s - 7)) x := by
+      intro x hx
+      have hx0 : x ≠ 0 := by
+        intro h
+        have hxge : (j : ℝ) ≤ x := by
+          simpa [show min (j : ℝ) (j + 1 : ℝ) = (j : ℝ) from min_eq_left (by nlinarith)]
+            using hx.1
+        linarith [(Nat.cast_pos (α := ℝ)).mpr hj, hxge, h]
+      have hsc : -s - 6 ≠ 0 := by
+        intro h
+        have hre0 : (-(s : ℂ) - 6).re = 0 := by simpa [h]
+        rw [show (-(s : ℂ) - 6 : ℂ) = -((s : ℂ) + 6) from by ring,
+          Complex.neg_re, Complex.add_re,
+          show (6 : ℂ).re = 6 from by norm_num] at hre0
+        linarith [hsre]
+      have hexp : (-s - 6 : ℂ) - 1 = -s - 7 := by ring
+      simpa [hexp] using hasDerivAt_ofReal_cpow_const hx0 hsc
+    have hV : ∀ x ∈ Set.uIcc (j : ℝ) (j + 1 : ℝ),
+        HasDerivAt v ((B6poly (x - (j : ℝ))) : ℂ) x := by
+      intro x _
+      have hU1 : HasDerivAt (fun t : ℝ => t - (j : ℝ)) 1 x := by
+        have hsub : HasDerivAt ((id : ℝ → ℝ) - (fun _ : ℝ => (j : ℝ))) (1 - 0) x := by
+          simpa using (hasDerivAt_id x).sub (hasDerivAt_const x (j : ℝ))
+        have hfun : (id : ℝ → ℝ) - (fun _ : ℝ => (j : ℝ)) = (fun t : ℝ => t - (j : ℝ)) := by
+          funext t
+          dsimp
+        simpa [hfun] using hsub
+      have hW0 := HasDerivAt.comp x (B7poly_hasDerivAt (x - (j : ℝ))) hU1
+      have hfun : (B7poly ∘ (fun t : ℝ => t - (j : ℝ))) =
+          (fun t : ℝ => B7poly (t - (j : ℝ))) := by funext t; dsimp
+      have hder : 7 * B6poly (x - (j : ℝ)) * 1 = 7 * B6poly (x - (j : ℝ)) := by ring
+      have hW : HasDerivAt (fun t : ℝ => B7poly (t - (j : ℝ)))
+          (7 * B6poly (x - (j : ℝ))) x := by
+        simpa [hfun, hder] using hW0
+      have hW2 : HasDerivAt (fun t : ℝ => (B7poly (t - (j : ℝ))) / 7)
+          (B6poly (x - (j : ℝ))) x := by
+        simpa using hW.div_const 7
+      simpa using HasDerivAt.ofReal_comp hW2
+    have hCpowCO : ContinuousOn (fun x : ℝ => (x : ℂ) ^ (-s - 7))
+        (Set.uIcc (j : ℝ) (j + 1 : ℝ)) := by
+      intro x hx
+      have hxge : (j : ℝ) ≤ x := by
+        simpa [show min (j : ℝ) (j + 1 : ℝ) = (j : ℝ) from min_eq_left (by nlinarith)]
+          using hx.1
+      have hpos : 0 < x := by
+        nlinarith [(Nat.cast_pos (α := ℝ)).mpr hj, hxge]
+      exact (Complex.continuousAt_ofReal_cpow_const x (-s - 7)
+          (Or.inr (ne_of_gt hpos))).continuousWithinAt
+    have hUint : IntervalIntegrable (fun x : ℝ => (-s - 6) * (x : ℂ) ^ (-s - 7))
+        volume (j : ℝ) (j + 1 : ℝ) :=
+      ((continuousOn_const : ContinuousOn (fun x : ℝ => (-s - 6 : ℂ))
+          (Set.uIcc (j : ℝ) (j + 1 : ℝ))).mul hCpowCO).intervalIntegrable
+    have hVint : IntervalIntegrable (fun x : ℝ => (B6poly (x - (j : ℝ)) : ℂ))
+        volume (j : ℝ) (j + 1 : ℝ) := by
+      have hm : ContinuousOn (fun x : ℝ => (B6poly (x - (j : ℝ)) : ℂ))
+          (Set.uIcc (j : ℝ) (j + 1 : ℝ)) := by
+        dsimp only [B6poly]
+        fun_prop
+      exact hm.intervalIntegrable
+    have H : (∫ x in (j : ℝ)..(j + 1 : ℝ),
+              u x * ((B6poly (x - (j : ℝ))) : ℂ)) =
+        u (j + 1 : ℝ) * v (j + 1 : ℝ) - u (j : ℝ) * v (j : ℝ) -
+          (∫ x in (j : ℝ)..(j + 1 : ℝ),
+            ((-s - 6) * (x : ℂ) ^ (-s - 7)) * v x) :=
+      (intervalIntegral.integral_mul_deriv_eq_deriv_mul
+        (fun x hx => hU x hx)
+        (fun x hx => hV x hx)
+        hUint hVint : _ = _)
+    calc (∫ x in (j : ℝ)..(j + 1 : ℝ),
+            (B6poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 6))
+        _ = (∫ x in (j : ℝ)..(j + 1 : ℝ),
+              u x * ((B6poly (x - (j : ℝ))) : ℂ)) := by
+            have hEqU : EqOn
+                (fun x : ℝ => u x * ((B6poly (x - (j : ℝ))) : ℂ))
+                (fun x : ℝ =>
+                  ((B6poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 6)))
+                (Set.uIcc (j : ℝ) (j + 1 : ℝ)) := by
+              intro x _
+              dsimp only [u]
+              ring
+            exact (intervalIntegral.integral_congr
+                (μ := (MeasureTheory.volume : Measure ℝ)) hEqU).symm
+        _ = u (j + 1 : ℝ) * v (j + 1 : ℝ) - u (j : ℝ) * v (j : ℝ) -
+            (∫ x in (j : ℝ)..(j + 1 : ℝ),
+              ((-s - 6) * (x : ℂ) ^ (-s - 7)) * v x) := H
+        _ = - (∫ x in (j : ℝ)..(j + 1 : ℝ),
+                ((-s - 6 : ℂ) * (x : ℂ) ^ (-s - 7)) * v x) := by
+            have hvb1 : v (j + 1 : ℝ) = 0 := by
+              dsimp only [v]
+              rw [show (j + 1 : ℝ) - (j : ℝ) = 1 from by ring, B7poly_at_1]
+              norm_num
+            have hvb0 : v (j : ℝ) = 0 := by
+              dsimp only [v]
+              rw [show (j : ℝ) - (j : ℝ) = 0 from by ring, B7poly_at_0]
+              norm_num
+            rw [hvb1, hvb0]
+            ring
+        _ = 0
+            + ((s + 6 : ℂ) / 7) *
+              (∫ x in (j : ℝ)..(j + 1 : ℝ),
+                (B7poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 7)) := by
+            have hX : (∫ x in (j : ℝ)..(j + 1 : ℝ),
+                      ((-s - 6) * (x : ℂ) ^ (-s - 7)) * v x) =
+                (-(s + 6 : ℂ)) / 7 *
+                  (∫ x in (j : ℝ)..(j + 1 : ℝ),
+                    (B7poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 7)) := by
+              have hEq : EqOn
+                  (fun x : ℝ => ((-s - 6) * (x : ℂ) ^ (-s - 7)) * v x)
+                  (fun x : ℝ => (-(s + 6 : ℂ)) / 7 *
+                    ((B7poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 7)))
+                  (Set.uIcc (j : ℝ) (j + 1 : ℝ)) := by
+                intro x _
+                dsimp only [v]
+                ring
+              exact (intervalIntegral.integral_congr
+                  (μ := (MeasureTheory.volume : Measure ℝ)) hEq).trans
+                (by
+                  rw [intervalIntegral.integral_const_mul (-(s + 6 : ℂ) / 7)])
+            rw [hX]
+            ring
+
+  -- (vi) step 7: B7 -> B8 (boundary from B8(0) = B8(1))
+  theorem p4_25ae_ibp_b7to8 {{s : ℂ}} (hsre : s.re = 1 / 2) (j : ℕ) (hj : 0 < j) :
+      (∫ x in (j : ℝ)..(j + 1 : ℝ),
+          (B7poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 7))
+          = (((B8poly 0) / 8) : ℂ) * (((j + 1 : ℝ) : ℂ) ^ (-s - 7) - ((j : ℝ) : ℂ) ^ (-s - 7))
+              + (s + 7 : ℂ) / 8 *
+                  (∫ x in (j : ℝ)..(j + 1 : ℝ),
+                    (B8poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 8)) := by
+    set u : ℝ → ℂ := fun (x : ℝ) => (x : ℂ) ^ (-s - 7) with hu
+    set v : ℝ → ℂ := fun (x : ℝ) => ((B8poly (x - (j : ℝ))) / 8 : ℂ) with hv
+    have hU : ∀ x ∈ Set.uIcc (j : ℝ) (j + 1 : ℝ),
+        HasDerivAt u ((-s - 7) * (x : ℂ) ^ (-s - 8)) x := by
+      intro x hx
+      have hx0 : x ≠ 0 := by
+        intro h
+        have hxge : (j : ℝ) ≤ x := by
+          simpa [show min (j : ℝ) (j + 1 : ℝ) = (j : ℝ) from min_eq_left (by nlinarith)]
+            using hx.1
+        linarith [(Nat.cast_pos (α := ℝ)).mpr hj, hxge, h]
+      have hsc : -s - 7 ≠ 0 := by
+        intro h
+        have hre0 : (-(s : ℂ) - 7).re = 0 := by simpa [h]
+        rw [show (-(s : ℂ) - 7 : ℂ) = -((s : ℂ) + 7) from by ring,
+          Complex.neg_re, Complex.add_re,
+          show (7 : ℂ).re = 7 from by norm_num] at hre0
+        linarith [hsre]
+      have hexp : (-s - 7 : ℂ) - 1 = -s - 8 := by ring
+      simpa [hexp] using hasDerivAt_ofReal_cpow_const hx0 hsc
+    have hV : ∀ x ∈ Set.uIcc (j : ℝ) (j + 1 : ℝ),
+        HasDerivAt v ((B7poly (x - (j : ℝ))) : ℂ) x := by
+      intro x _
+      have hU1 : HasDerivAt (fun t : ℝ => t - (j : ℝ)) 1 x := by
+        have hsub : HasDerivAt ((id : ℝ → ℝ) - (fun _ : ℝ => (j : ℝ))) (1 - 0) x := by
+          simpa using (hasDerivAt_id x).sub (hasDerivAt_const x (j : ℝ))
+        have hfun : (id : ℝ → ℝ) - (fun _ : ℝ => (j : ℝ)) = (fun t : ℝ => t - (j : ℝ)) := by
+          funext t
+          dsimp
+        simpa [hfun] using hsub
+      have hW0 := HasDerivAt.comp x (B8poly_hasDerivAt (x - (j : ℝ))) hU1
+      have hfun : (B8poly ∘ (fun t : ℝ => t - (j : ℝ))) =
+          (fun t : ℝ => B8poly (t - (j : ℝ))) := by funext t; dsimp
+      have hder : 8 * B7poly (x - (j : ℝ)) * 1 = 8 * B7poly (x - (j : ℝ)) := by ring
+      have hW : HasDerivAt (fun t : ℝ => B8poly (t - (j : ℝ)))
+          (8 * B7poly (x - (j : ℝ))) x := by
+        simpa [hfun, hder] using hW0
+      have hW2 : HasDerivAt (fun t : ℝ => (B8poly (t - (j : ℝ))) / 8)
+          (B7poly (x - (j : ℝ))) x := by
+        simpa using hW.div_const 8
+      simpa using HasDerivAt.ofReal_comp hW2
+    have hCpowCO : ContinuousOn (fun x : ℝ => (x : ℂ) ^ (-s - 8))
+        (Set.uIcc (j : ℝ) (j + 1 : ℝ)) := by
+      intro x hx
+      have hxge : (j : ℝ) ≤ x := by
+        simpa [show min (j : ℝ) (j + 1 : ℝ) = (j : ℝ) from min_eq_left (by nlinarith)]
+          using hx.1
+      have hpos : 0 < x := by
+        nlinarith [(Nat.cast_pos (α := ℝ)).mpr hj, hxge]
+      exact (Complex.continuousAt_ofReal_cpow_const x (-s - 8)
+          (Or.inr (ne_of_gt hpos))).continuousWithinAt
+    have hUint : IntervalIntegrable (fun x : ℝ => (-s - 7) * (x : ℂ) ^ (-s - 8))
+        volume (j : ℝ) (j + 1 : ℝ) :=
+      ((continuousOn_const : ContinuousOn (fun x : ℝ => (-s - 7 : ℂ))
+          (Set.uIcc (j : ℝ) (j + 1 : ℝ))).mul hCpowCO).intervalIntegrable
+    have hVint : IntervalIntegrable (fun x : ℝ => (B7poly (x - (j : ℝ)) : ℂ))
+        volume (j : ℝ) (j + 1 : ℝ) := by
+      have hm : ContinuousOn (fun x : ℝ => (B7poly (x - (j : ℝ)) : ℂ))
+          (Set.uIcc (j : ℝ) (j + 1 : ℝ)) := by
+        dsimp only [B7poly]
+        fun_prop
+      exact hm.intervalIntegrable
+    have H : (∫ x in (j : ℝ)..(j + 1 : ℝ),
+              u x * ((B7poly (x - (j : ℝ))) : ℂ)) =
+        u (j + 1 : ℝ) * v (j + 1 : ℝ) - u (j : ℝ) * v (j : ℝ) -
+          (∫ x in (j : ℝ)..(j + 1 : ℝ),
+            ((-s - 7) * (x : ℂ) ^ (-s - 8)) * v x) :=
+      (intervalIntegral.integral_mul_deriv_eq_deriv_mul
+        (fun x hx => hU x hx)
+        (fun x hx => hV x hx)
+        hUint hVint : _ = _)
+    calc (∫ x in (j : ℝ)..(j + 1 : ℝ),
+            (B7poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 7))
+        _ = (∫ x in (j : ℝ)..(j + 1 : ℝ),
+              u x * ((B7poly (x - (j : ℝ))) : ℂ)) := by
+            have hEqU : EqOn
+                (fun x : ℝ => u x * ((B7poly (x - (j : ℝ))) : ℂ))
+                (fun x : ℝ =>
+                  ((B7poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 7)))
+                (Set.uIcc (j : ℝ) (j + 1 : ℝ)) := by
+              intro x _
+              dsimp only [u]
+              ring
+            exact (intervalIntegral.integral_congr
+                (μ := (MeasureTheory.volume : Measure ℝ)) hEqU).symm
+        _ = u (j + 1 : ℝ) * v (j + 1 : ℝ) - u (j : ℝ) * v (j : ℝ) -
+            (∫ x in (j : ℝ)..(j + 1 : ℝ),
+              ((-s - 7) * (x : ℂ) ^ (-s - 8)) * v x) := H
+        _ = ((B8poly 0 / 8 : ℝ) : ℂ) *
+                (u (j + 1 : ℝ) - u (j : ℝ)) -
+                (∫ x in (j : ℝ)..(j + 1 : ℝ),
+                  ((-s - 7 : ℂ) * (x : ℂ) ^ (-s - 8)) * v x) := by
+            have hvb1 : v (j + 1 : ℝ) = (((B8poly 1) / 8) : ℂ) := by
+              dsimp only [v]
+              rw [show (j + 1 : ℝ) - (j : ℝ) = 1 from by ring]
+            have hvb0 : v (j : ℝ) = (((B8poly 0) / 8) : ℂ) := by
+              dsimp only [v]
+              rw [show (j : ℝ) - (j : ℝ) = 0 from by ring]
+            rw [hvb1, hvb0]
+            have hB8 : B8poly 1 = B8poly 0 := by
+              rw [B8poly_at_1, B8poly_at_0]
+            simp [hB8]
+            ring
+        _ = (((B8poly 0) / 8) : ℂ) * (((j + 1 : ℝ) : ℂ) ^ (-s - 7) - ((j : ℝ) : ℂ) ^ (-s - 7))
+            + ((s + 7 : ℂ) / 8) *
+              (∫ x in (j : ℝ)..(j + 1 : ℝ),
+                (B8poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 8)) := by
+            have hu1 : u (j + 1 : ℝ) = (((j + 1 : ℝ) : ℂ) ^ (-s - 7)) := by
+              dsimp only [u]
+            have hu0 : u (j : ℝ) = (((j : ℝ) : ℂ) ^ (-s - 7)) := by
+              dsimp only [u]
+            rw [hu1, hu0]
+            have hX : (∫ x in (j : ℝ)..(j + 1 : ℝ),
+                      ((-s - 7) * (x : ℂ) ^ (-s - 8)) * v x) =
+                (-(s + 7 : ℂ)) / 8 *
+                  (∫ x in (j : ℝ)..(j + 1 : ℝ),
+                    (B8poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 8)) := by
+              have hEq : EqOn
+                  (fun x : ℝ => ((-s - 7) * (x : ℂ) ^ (-s - 8)) * v x)
+                  (fun x : ℝ => (-(s + 7 : ℂ)) / 8 *
+                    ((B8poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 8)))
+                  (Set.uIcc (j : ℝ) (j + 1 : ℝ)) := by
+                intro x _
+                dsimp only [v]
+                ring
+              exact (intervalIntegral.integral_congr
+                  (μ := (MeasureTheory.volume : Measure ℝ)) hEq).trans
+                (by
+                  rw [intervalIntegral.integral_const_mul (-(s + 7 : ℂ) / 8)])
+            rw [hX]
+            have hC : (-(s + 7 : ℂ)) / 8 = -((s + 7 : ℂ) / 8) := by
+              ring
+            rw [hC]
+            simp
+
 end
 
 /-! P4Limit · L5.b — zeta split (Re s > 1).

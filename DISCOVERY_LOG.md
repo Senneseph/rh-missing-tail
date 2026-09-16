@@ -4366,3 +4366,76 @@ leading term after the s(s+1) prefactor), then `p4_T3_expansion` (F1 exact
 identity), `p4_T3_bound` (4-term triangle), and the list-scale wall
 corollary (F4b, positive at t ≤ 90 000; PINNED dps-50 wall 0.896783 up to
 1e8 recorded separately, not claimed LEAN-PROVEN).
+
+### 25ae Lean port — Stage 2 LANDED (2026-09-16, per-period IBP atoms, full build green)
+
+The six per-period integration-by-parts atoms of the 25ae ladder are now
+LEAN-PROVEN in `formal/RhAttack/P4Limit.lean` (all under `noncomputable
+section`, `s.re = 1/2`, `j : ℕ`, `0 < j`).  Full `lake build`: 17434 jobs,
+0 errors, 0 sorry.
+
+- **`p4_25ae_ibp_b2to3`** (i-i): over [j, j+1],
+  `∫ B2(x−j)·(x:ℂ)^(−s−2) dx = (s+2)/3 · ∫ B3(x−j)·(x:ℂ)^(−s−3) dx`
+  (vanishing boundary: B3(0) = B3(1) = 0).
+- **`p4_25ae_ibp_b3to4`** (i-ii):
+  `∫ B3·x^(−s−3) = ((B4(0)/4):ℂ)·(u(j+1) − u(j)) + (s+3)/4·∫ B4·x^(−s−4)`,
+  `u(x) = (x:ℂ)^(−s−3)`.
+- **`p4_25ae_ibp_b4to5`** (i-iii): boundary vanishes (B5(0) = 0),
+  coefficient (s+4)/5.
+- **`p4_25ae_ibp_b5to6`** (i-iv): boundary `((B6(0)/6):ℂ)·(u(j+1)−u(j))`,
+  coefficient (s+5)/6.
+- **`p4_25ae_ibp_b6to7`** (i-v): boundary vanishes (B7(0) = 0),
+  coefficient (s+6)/7.
+- **`p4_25ae_ibp_b7to8`** (i-vi): boundary `((B8(0)/8):ℂ)·(u(j+1)−u(j))`,
+  coefficient (s+7)/8, `u(x) = (x:ℂ)^(−s−7)`.
+
+Each atom = `intervalIntegral.integral_mul_deriv_eq_deriv_mul` with
+`u(x) = (x:ℂ)^(−s−k)` (derivative via `hasDerivAt_ofReal_cpow_const`) and
+`v(x) = (B_{k+1}(x−j) : ℂ)/(k+1)` (derivative via the Stage-1 HasDerivAt
+chain + `HasDerivAt.ofReal_comp`), with uIcc continuity/integrability
+plumbing (the L4 pattern).
+
+**Proof-design lessons (durable, cost a full round of iteration):**
+
+1. **State intermediate calc targets in the SAME term language as the
+   current side.**  The H-step term carries the local `set`-definitions
+   (`u`, `v`) as atoms.  If a calc target writes the *unfolded* term
+   (e.g. `((j+1:ℝ):ℂ)^(−s−k)` instead of `u (j+1:ℝ)`), then
+   `u (j+1:ℝ)` and `((j+1:ℝ):ℂ)^(−s−k)` are DIFFERENT ring atoms
+   (def-let vs cpow application, ofReal-wrapped base vs cast base, and
+   even exponent summand order `−s−k` vs `−k−s` survives to the kernel),
+   and `ring` silently fails with a cryptic normal-form residue.  Fix:
+   intermediate targets use `u`-form; the bridge to the unfolded cpow
+   form is a separate `have hu : u (j+1) = … := by dsimp only [u]` +
+   `rw`, which is literal.
+2. **`set v : ℝ → ℂ := fun x => ((B (x−j)) / K : ℂ)` elaborates as a
+   COMPLEX division**: stored body `(↑(B (x−j))) / K`, not
+   `(↑((B (x−j)) / K))`.  Boundary hypotheses must target the stored
+   form (or `simp`, which knows the `ofReal` division rewrite
+   `(↑a)/b ↔ ↑(a/b)`, will normalize them).  `rfl` between the two forms
+   fails (not definitional).
+3. **`fun_prop` cannot see through a `def`**: `ContinuousOn (fun x =>
+   (B4poly (x−j) : ℂ))` needs `dsimp only [B4poly]` first, then `fun_prop`
+   closes the expanded polynomial.
+4. **`simpa` is NOT a ring closer**: `simpa [h]` fails on goals that need
+   distributivity after the simp step; write `simp [h]; ring` explicitly.
+   Conversely, a `rw` that leaves an rfl goal + an extra `rfl`/`simpa`
+   line reports "No goals to be solved".
+5. **`simp [hB4]` with `hB4 : B4poly 1 = B4poly 0` evaluates the whole
+   coefficient to the numeral** (−1/30 → −1/120) — simp does ground
+   evaluation under `ofReal`, which is what makes the subsequent `ring`
+   trivial.
+6. When a coefficient identity like `(-(s+k)) / K = -((s+k) / K)` is
+   needed, prove it coefficient-only (`ring` closes it) and `rw` it inside
+   the product — do not `ring` a one-atom goal containing an
+   interval-integral atom (observed `ring_nf made no progress` on that
+   shape).
+
+**NEXT (Stage 3):** telescope the six atoms over j = n..M−1 (boundary
+differences telescope: Σ_j (u(j+1)−u(j)) = M^p − n^p), pass M→∞
+(M^{−s−k} → 0 for k = 3,5,7; the B8 tail is absolutely convergent via
+`B8poly_bound_Icc` + ∫ x^{−15/2}), then `p4_T3_expansion` (the F1 exact
+4-term identity, constants 720/30240/1209600/40320) and `p4_T3_bound`
+(4-term triangle), and the list-scale wall corollary (F4b: provable at
+t ≲ 94 550; the dps-50/PINNED wall 0.896783 up to 1e8 stays recorded, not
+LEAN-claimed).
