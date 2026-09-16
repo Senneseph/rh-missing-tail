@@ -1501,6 +1501,235 @@ theorem p4_Tn_Tendsto {s : ℂ} (hsσ : 1 < s.re) (n : ℕ) (hn : 0 < n) :
     exact (hFin m hm).symm
   exact hLim.congr' hEven
 
+  --/ ===== 25ae — the sharpened T3 (exact EM expansion + 4-term bound) =====
+  --| Anchors: scripts/rh/day026_25ae_t3_sharpen.py, day026_25ae_final.py,
+  --| out_day026_25ae_final.txt (F1-F4), DISCOVERY_LOG section 25ae.
+
+  --/ Atom 25ae.0 — the B4..B8 periodic Bernoulli polynomials (the P4 no-zeta
+  --|  convention; B_{k}' = k · B_{k-1}; cross-checked against mathlib's
+  --|  `bernoulliFun 4..8` to 6.4e-17 at 256 points, day-026; B7 corrected
+  --|  from the draft: the u-coefficient is 1/6, not 7/30 — the
+  --|  B8' = 8·B7 consistency check is the detector). -/
+  def B4poly (u : ℝ) : ℝ := u ^ 4 - 2 * u ^ 3 + u ^ 2 - 1 / 30
+
+  def B5poly (u : ℝ) : ℝ := u ^ 5 - (5 / 2) * u ^ 4 + (5 / 3) * u ^ 3 - (1 / 6) * u
+
+  def B6poly (u : ℝ) : ℝ := u ^ 6 - 3 * u ^ 5 + (5 / 2) * u ^ 4 - (1 / 2) * u ^ 2 + 1 / 42
+
+  def B7poly (u : ℝ) : ℝ := u ^ 7 - (7 / 2) * u ^ 6 + (7 / 2) * u ^ 5 - (7 / 6) * u ^ 3 + (1 / 6) * u
+
+  def B8poly (u : ℝ) : ℝ :=
+      u ^ 8 - 4 * u ^ 7 + (14 / 3) * u ^ 6 - (7 / 3) * u ^ 4 + (2 / 3) * u ^ 2 - 1 / 30
+
+  --/ Atom 25ae.0a — endpoints (vanishing + constant values used by the
+  --|  per-period IBP boundary bookkeeping):
+  --|  B4(0) = B4(1) = -1/30, B5(0) = B5(1) = 0, B6(0) = B6(1) = 1/42,
+  --|  B7(0) = B7(1) = 0, B8(0) = B8(1) = -1/30. -/
+  @[simp] lemma B4poly_at_0 : B4poly 0 = -1 / 30 := by dsimp only [B4poly]; norm_num
+  @[simp] lemma B4poly_at_1 : B4poly 1 = -1 / 30 := by dsimp only [B4poly]; norm_num
+  @[simp] lemma B5poly_at_0 : B5poly 0 = 0 := by dsimp only [B5poly]; norm_num
+  @[simp] lemma B5poly_at_1 : B5poly 1 = 0 := by dsimp only [B5poly]; norm_num
+  @[simp] lemma B6poly_at_0 : B6poly 0 = 1 / 42 := by dsimp only [B6poly]; norm_num
+  @[simp] lemma B6poly_at_1 : B6poly 1 = 1 / 42 := by dsimp only [B6poly]; norm_num
+  @[simp] lemma B7poly_at_0 : B7poly 0 = 0 := by dsimp only [B7poly]; norm_num
+  @[simp] lemma B7poly_at_1 : B7poly 1 = 0 := by dsimp only [B7poly]; norm_num
+  @[simp] lemma B8poly_at_0 : B8poly 0 = -1 / 30 := by dsimp only [B8poly]; norm_num
+  @[simp] lemma B8poly_at_1 : B8poly 1 = -1 / 30 := by dsimp only [B8poly]; norm_num
+
+  --/ Atom 25ae.0b — the derivative chain B_kpoly' = k · B_{k-1}poly (k =
+  --|  4..8), the IBP antiderivative facts (primitives B_{k}/k of B_{k-1}). -/
+  theorem B4poly_hasDerivAt (u : ℝ) : HasDerivAt B4poly (4 * u ^ 3 - 2 * (3 * u ^ 2) + 2 * u - 0) u := by
+    have h1 : HasDerivAt (fun t : ℝ => t ^ 4) (4 * u ^ 3) u := hasDerivAt_pow 4 u
+    have h2 : HasDerivAt (fun t : ℝ => 2 * t ^ 3) (2 * (3 * u ^ 2)) u := (hasDerivAt_pow 3 u).const_mul 2
+    have h3 : HasDerivAt (fun t : ℝ => t ^ 2) (2 * u) u := by
+      simpa using hasDerivAt_pow 2 u
+    have h4 : HasDerivAt (fun _ : ℝ => (1 / 30 : ℝ)) 0 u := hasDerivAt_const (x := u) (c := (1 / 30 : ℝ))
+    refine ((h1.sub h2).add h3).sub h4
+
+  @[simp] lemma B4poly_deriv_val (u : ℝ) :
+      4 * u ^ 3 - 2 * (3 * u ^ 2) + 2 * u - 0 = 4 * B3poly u := by
+    dsimp only [B3poly]
+    ring
+
+  theorem B5poly_hasDerivAt (u : ℝ) : HasDerivAt B5poly (5 * B4poly u) u := by
+    have hT : 5 * B4poly u = 5 * u ^ 4 - (5 / 2 : ℝ) * (4 * u ^ 3) + (5 / 3 : ℝ) * (3 * u ^ 2) - 1 / 6 := by
+      dsimp only [B4poly]
+      ring
+    rw [hT]
+    have h1 : HasDerivAt (fun t : ℝ => t ^ 5) (5 * u ^ 4) u := hasDerivAt_pow 5 u
+    have h2 : HasDerivAt (fun t : ℝ => (5 / 2 : ℝ) * t ^ 4) ((5 / 2 : ℝ) * (4 * u ^ 3)) u :=
+      (hasDerivAt_pow 4 u).const_mul (5 / 2)
+    have h3 : HasDerivAt (fun t : ℝ => (5 / 3 : ℝ) * t ^ 3) ((5 / 3 : ℝ) * (3 * u ^ 2)) u :=
+      (hasDerivAt_pow 3 u).const_mul (5 / 3)
+    have h4 : HasDerivAt (fun t : ℝ => (1 / 6 : ℝ) * t) (1 / 6 : ℝ) u :=
+      hasDerivAt_const_mul ((1 / 6 : ℝ)) (x := u)
+    refine ((h1.sub h2).add h3).sub h4
+
+  @[simp] lemma B5poly_deriv_val (u : ℝ) :
+      5 * u ^ 4 - (5 / 2 : ℝ) * (4 * u ^ 3) + (5 / 3 : ℝ) * (3 * u ^ 2) - 1 / 6 = 5 * B4poly u := by
+    dsimp only [B4poly]
+    ring
+
+  theorem B6poly_hasDerivAt (u : ℝ) : HasDerivAt B6poly (6 * B5poly u) u := by
+    have hT : 6 * B5poly u =
+        6 * u ^ 5 - 3 * (5 * u ^ 4) + (5 / 2 : ℝ) * (4 * u ^ 3) - (1 / 2 : ℝ) * (2 * u) + 0 := by
+      dsimp only [B5poly]
+      ring
+    rw [hT]
+    have h1 : HasDerivAt (fun t : ℝ => t ^ 6) (6 * u ^ 5) u := hasDerivAt_pow 6 u
+    have h2 : HasDerivAt (fun t : ℝ => 3 * t ^ 5) (3 * (5 * u ^ 4)) u := (hasDerivAt_pow 5 u).const_mul 3
+    have h3 : HasDerivAt (fun t : ℝ => (5 / 2 : ℝ) * t ^ 4) ((5 / 2 : ℝ) * (4 * u ^ 3)) u :=
+      (hasDerivAt_pow 4 u).const_mul (5 / 2)
+    have hp2 : HasDerivAt (fun t : ℝ => t ^ 2) (2 * u) u := by
+      simpa using hasDerivAt_pow 2 u
+    have h4 : HasDerivAt (fun t : ℝ => (1 / 2 : ℝ) * t ^ 2) ((1 / 2 : ℝ) * (2 * u)) u :=
+      hp2.const_mul (1 / 2)
+    have h5 : HasDerivAt (fun _ : ℝ => (1 / 42 : ℝ)) 0 u := hasDerivAt_const (x := u) (c := (1 / 42 : ℝ))
+    refine (((h1.sub h2).add h3).sub h4).add h5
+
+  @[simp] lemma B6poly_deriv_val (u : ℝ) :
+      6 * u ^ 5 - 3 * (5 * u ^ 4) + (5 / 2 : ℝ) * (4 * u ^ 3) - (1 / 2 : ℝ) * (2 * u) + 0 =
+          6 * B5poly u := by
+    dsimp only [B5poly]
+    ring
+
+  theorem B7poly_hasDerivAt (u : ℝ) : HasDerivAt B7poly (7 * B6poly u) u := by
+    have hT : 7 * B6poly u =
+        7 * u ^ 6 - (7 / 2 : ℝ) * (6 * u ^ 5) + (7 / 2 : ℝ) * (5 * u ^ 4) - (7 / 6 : ℝ) * (3 * u ^ 2)
+            + (1 / 6 : ℝ) := by
+      dsimp only [B6poly]
+      ring
+    rw [hT]
+    have h1 : HasDerivAt (fun t : ℝ => t ^ 7) (7 * u ^ 6) u := hasDerivAt_pow 7 u
+    have h2 : HasDerivAt (fun t : ℝ => (7 / 2 : ℝ) * t ^ 6) ((7 / 2 : ℝ) * (6 * u ^ 5)) u :=
+      (hasDerivAt_pow 6 u).const_mul (7 / 2)
+    have h3 : HasDerivAt (fun t : ℝ => (7 / 2 : ℝ) * t ^ 5) ((7 / 2 : ℝ) * (5 * u ^ 4)) u :=
+      (hasDerivAt_pow 5 u).const_mul (7 / 2)
+    have h4 : HasDerivAt (fun t : ℝ => (7 / 6 : ℝ) * t ^ 3) ((7 / 6 : ℝ) * (3 * u ^ 2)) u :=
+      (hasDerivAt_pow 3 u).const_mul (7 / 6)
+    have h5 : HasDerivAt (fun t : ℝ => (1 / 6 : ℝ) * t) (1 / 6 : ℝ) u :=
+      hasDerivAt_const_mul ((1 / 6 : ℝ)) (x := u)
+    refine ((((h1.sub h2).add h3).sub h4).add h5)
+
+  @[simp] lemma B7poly_deriv_val (u : ℝ) :
+      7 * u ^ 6 - (7 / 2 : ℝ) * (6 * u ^ 5) + (7 / 2 : ℝ) * (5 * u ^ 4) - (7 / 6 : ℝ) * (3 * u ^ 2)
+          + (1 / 6 : ℝ) = 7 * B6poly u := by
+    dsimp only [B6poly]
+    ring
+
+  theorem B8poly_hasDerivAt (u : ℝ) : HasDerivAt B8poly (8 * B7poly u) u := by
+    have hT : 8 * B7poly u =
+        8 * u ^ 7 - 4 * (7 * u ^ 6) + (14 / 3 : ℝ) * (6 * u ^ 5) - (7 / 3 : ℝ) * (4 * u ^ 3)
+            + (2 / 3 : ℝ) * (2 * u) - 0 := by
+      dsimp only [B7poly]
+      ring
+    rw [hT]
+    have h1 : HasDerivAt (fun t : ℝ => t ^ 8) (8 * u ^ 7) u := hasDerivAt_pow 8 u
+    have h2 : HasDerivAt (fun t : ℝ => 4 * t ^ 7) (4 * (7 * u ^ 6)) u := (hasDerivAt_pow 7 u).const_mul 4
+    have h3 : HasDerivAt (fun t : ℝ => (14 / 3 : ℝ) * t ^ 6) ((14 / 3 : ℝ) * (6 * u ^ 5)) u :=
+      (hasDerivAt_pow 6 u).const_mul (14 / 3)
+    have h4 : HasDerivAt (fun t : ℝ => (7 / 3 : ℝ) * t ^ 4) ((7 / 3 : ℝ) * (4 * u ^ 3)) u :=
+      (hasDerivAt_pow 4 u).const_mul (7 / 3)
+    have hp2 : HasDerivAt (fun t : ℝ => t ^ 2) (2 * u) u := by
+      simpa using hasDerivAt_pow 2 u
+    have h5 : HasDerivAt (fun t : ℝ => (2 / 3 : ℝ) * t ^ 2) ((2 / 3 : ℝ) * (2 * u)) u :=
+      hp2.const_mul (2 / 3)
+    have h6 : HasDerivAt (fun _ : ℝ => (1 / 30 : ℝ)) 0 u := hasDerivAt_const (x := u) (c := (1 / 30 : ℝ))
+    refine (((((h1.sub h2).add h3).sub h4).add h5).sub h6)
+
+  @[simp] lemma B8poly_deriv_val (u : ℝ) :
+      8 * u ^ 7 - 4 * (7 * u ^ 6) + (14 / 3 : ℝ) * (6 * u ^ 5) - (7 / 3 : ℝ) * (4 * u ^ 3)
+          + (2 / 3 : ℝ) * (2 * u) - 0 = 8 * B7poly u := by
+    dsimp only [B7poly]
+    ring
+
+  --/ Atom 25ae.0c — **|B8poly| <= 1/30 on [0,1]** (the 4-term-bound kernel
+  --|  constant).  (The first draft used a Bernstein convex-hull argument;
+  --|  it was REFUTED by exact-arithmetic cross-check before the Lean port:
+  --|  the on-curve values B8(j/8) are NOT the Bernstein control points
+  --|  (that identity is simply false — `ring` rejected it correctly), and
+  --|  the true control points include b_4 = 8/105 > 1/30.  The factorization
+  --|  route below is what works; every identity was cross-checked in exact
+  --|  rational arithmetic before formalization.  Second draft tried a
+  --|  second-derivative sign analysis; it was replaced by pure-algebraic
+  --|  decompositions (this draft) which need no calculus at all.)
+  --|  30·B8poly(u) + 1 = u²(1−u)²·T(u),  T(u) = 30u⁴−60u³−10u²+40u+20, and
+  --|    T(u) − 20 = 10u(1−u)(4 − 3u + 3u²·(−1)·(−1))  i.e.  10u(u−1)(3u²−3u−4)
+  --|      ≥ 0 on [0,1]  (u ≥ 0, u−1 ≤ 0, 3u²−3u−4 ≤ −4 ≤ 0),
+  --|    255 − 8·T(u) = (2u−1)²(−60u²+60u+95) ≥ 0 on [0,1]
+  --|      (−60u²+60u+95 = 60u(1−u)+95 ≥ 95 > 0).
+  --|  Hence 20 ≤ T(u) ≤ 255/8, and with u²(1−u)² ≤ 1/16 ((2u−1)² ≥ 0):
+  --|    B8poly(u) = (u²(1−u)²T(u) − 1)/30 ∈ [−1/30, (255/128−1)/30]
+  --|    and (255/128−1)/30 = 127/3840 ≤ 1/30. -/
+  theorem B8poly_bound_Icc (u : ℝ) (hu : u ∈ Set.Icc 0 1) : |B8poly u| ≤ 1 / 30 := by
+    set Tfun := fun (x : ℝ) => 30 * x ^ 4 - 60 * x ^ 3 - 10 * x ^ 2 + 40 * x + 20 with hTfun_def
+    have hu0 : 0 ≤ u := hu.1
+    have hu1 : u ≤ 1 := hu.2
+    have h1mu : 0 ≤ 1 - u := by linarith
+    -- (1) the exact factorization (cross-checked in exact arithmetic)
+    have hId : (30 : ℝ) * B8poly u + 1 = u ^ 2 * (1 - u) ^ 2 * Tfun u := by
+      dsimp only [B8poly, Tfun]
+      ring
+    have hB8 : B8poly u = (u ^ 2 * (1 - u) ^ 2 * Tfun u - 1) / 30 := by
+      linarith [hId]
+    -- (2) 20 ≤ Tfun(u):  Tfun(u) − 20 = 10u(u−1)(3u²−3u−4) = 10u(1−u)(−3u²+3u+4)
+    have hTminus : Tfun u - 20 = 10 * u * (u - 1) * (3 * u ^ 2 - 3 * u - 4) := by
+      dsimp only [Tfun]
+      ring
+    have h3u : 3 * u ^ 2 - 3 * u - 4 ≤ 0 := by
+      have hxs : u ^ 2 ≤ u := by nlinarith [hu0, hu1]
+      nlinarith [hxs]
+    have h10u : 0 ≤ 10 * u := by linarith [hu0]
+    have hP : 0 ≤ 10 * u * (1 - u) * (-(3 * u ^ 2 - 3 * u - 4)) :=
+      mul_nonneg (mul_nonneg h10u h1mu) (by linarith [h3u])
+    have hTminus' : Tfun u - 20 = 10 * u * (1 - u) * (-(3 * u ^ 2 - 3 * u - 4)) := by
+      dsimp only [Tfun]
+      ring
+    have hTlb : 20 ≤ Tfun u := by linarith [hTminus', hP]
+    -- (3) Tfun(u) ≤ 255/8:  255 − 8Tfun(u) = (2u−1)²(−60u²+60u+95)
+    have h8T : (2 * u - 1) ^ 2 * (-60 * u ^ 2 + 60 * u + 95) = 255 - 8 * Tfun u := by
+      dsimp only [Tfun]
+      ring
+    have hInner : 0 ≤ -60 * u ^ 2 + 60 * u + 95 := by
+      have h60u : 0 ≤ 60 * u * (1 - u) := mul_nonneg (by positivity) h1mu
+      have h60u2 : 60 * u * (1 - u) = 60 * u - 60 * u ^ 2 := by ring
+      rw [h60u2] at h60u
+      linarith [h60u]
+    have hSq : 0 ≤ (2 * u - 1) ^ 2 := by positivity
+    have h8Tnn : 0 ≤ (2 * u - 1) ^ 2 * (-60 * u ^ 2 + 60 * u + 95) :=
+      mul_nonneg hSq hInner
+    have hTub : Tfun u ≤ 255 / 8 := by linarith [h8T, h8Tnn]
+    -- (4) u²(1−u)² ≤ 1/16
+    have hw : u ^ 2 * (1 - u) ^ 2 ≤ 1 / 16 := by
+      have hs : 0 ≤ (2 * u - 1) ^ 2 := by positivity
+      have h4w : 4 * (u * (1 - u)) ≤ 1 := by nlinarith [hs]
+      have h04w : 0 ≤ 4 * (u * (1 - u)) :=
+        mul_nonneg (by norm_num) (mul_nonneg hu0 h1mu)
+      have h16 : 16 * (u ^ 2 * (1 - u) ^ 2) ≤ 1 := by
+        calc 16 * (u ^ 2 * (1 - u) ^ 2)
+            _ = (4 * (u * (1 - u))) ^ 2 := by ring
+            _ ≤ 1 := by nlinarith [h04w, h4w]
+      nlinarith [h16]
+    -- (5) assemble
+    rw [hB8, abs_le]
+    constructor
+    · have hTn : 0 ≤ Tfun u := by linarith [hTlb]
+      have hpos : 0 ≤ u ^ 2 * (1 - u) ^ 2 * Tfun u :=
+        mul_nonneg (mul_nonneg (pow_nonneg hu0 2) (pow_nonneg h1mu 2)) hTn
+      linarith [hpos]
+    · have hPosW : 0 ≤ u ^ 2 * (1 - u) ^ 2 :=
+        mul_nonneg (pow_nonneg hu0 2) (pow_nonneg h1mu 2)
+      have hTn : 0 ≤ Tfun u := by linarith [hTlb]
+      have hTop : u ^ 2 * (1 - u) ^ 2 * Tfun u ≤ (1 / 16 : ℝ) * (255 / 8 : ℝ) :=
+        mul_le_mul hw hTub hTn (by norm_num : 0 ≤ (1 : ℝ) / 16)
+      have hC : (1 / 16 : ℝ) * (255 / 8 : ℝ) ≤ 2 := by norm_num
+      calc (u ^ 2 * (1 - u) ^ 2 * Tfun u - 1) / 30
+          _ ≤ (2 - 1) / 30 := by
+              apply div_le_div_of_nonneg_right
+              · linarith [hTop, hC]
+              · norm_num
+          _ = 1 / 30 := by norm_num
+
 end
 
 /-! P4Limit · L5.b — zeta split (Re s > 1).
