@@ -4968,3 +4968,60 @@ Stage 4: the squeeze WUB + MtermUB <= F' t^-2 < F t^-2 <= mown(t, 1/200) <= mown
 (norm_num on the endpoint residual ~ 1.02e-5 t^-2 - O(ln t t^-15/4)) + the S4Asm assembly
 (GAP-O-closure-relevant := theorem; S4 squeeze = window (25ab) + strip (25af) at the bound
 level on the closure-relevant regimes).
+
+### 25af Stages 1–5 (2026-09-17) — LEAN PORT LANDED: `s4_strip_close` LEAN-PROVEN (bound level)
+
+The (i-b) strip-wire prerequisite survey result is now a theorem. New module
+`formal/RhAttack/S4Strip.lean` (imports B3Core, P8Floor, S4Window, S4Growth, S4Own;
+25ab template) — **full `lake build` green (17434 jobs); every public declaration
+`#check`-verified against the compiled olean.**
+
+**THE THEOREM (the 25af closure, bound level):**
+
+    theorem s4_strip_close (t d M : ℝ) (ht : 1000 ≤ t) (hd0 : 0 < d)
+        (hdl : (1/200 : ℝ) ≤ d) (hd : d ≤ 1/2)
+        (hM0 : 0 ≤ M) (hMz : M ≤ S4W.Zbound t) :
+        p8_B t (n4 t) + M * Real.exp (X4fun t) * X4fun t < S4O.mown t d
+
+**Structure (stages → atoms, all LEAN-PROVEN in this module):**
+
+- §0 — certified constants (exact rationals, `day028_25af_constants.py`):
+  A1 = 8981/10⁸, A2 = 5/10¹³, A3 = 1/10²⁰ (W-anchor rationals),
+  X4UBfun(t) = (16/10¹⁵ + 35/10¹⁶·log t)/t⁶, MTUBfun(t) = 25/10¹⁵/t^(19/4),
+  F4 = 10⁸/(10⁶+1)², SsumUB(t) = 20 + 4·log t (corrected form), n4 = ⌈3.1·10⁷·t⁴⌉.
+- §1 — base lemmas (25ab carry): tpos, L := log t chains (L ≥ 160/27, L² ≤ t),
+  X4 nonnegativity/bounds, e^X4 ≤ 2 (via the dps-9 e-anchor).
+- §2/§2b — Bf-basis block through st_hBf4; the X4 upper-bound chain.
+- §3 — W-term bounds: st_ceilLo (31000000·t⁴ ≤ n4 t), st_n4pos, st_sqrt5567
+  (5567 ≤ √31000000), st_W1 (½·n4^(-1/2) ≤ A1·t⁻²), st_W2 (‖½+it‖/12·n4^(-3/2) ≤
+  A2·t⁻⁵), st_W3 (√3/540·‖s(s+1)(s+2)‖·n4^(-5/2) ≤ A3·t⁻⁷), st_hW
+  (p8_B ≤ A1 t⁻² + A2 t⁻⁵ + A3 t⁻⁷). All norm estimates via the pinned
+  ‖…‖ ≤ 31000000^… anchors + 1003/1000 ≥ (t+3)/t bridges.
+- §4 — floor: st_mownfloor (F4·t⁻² ≤ mown(t,d) — hMownScaleLo + d ≥ 1/200
+  (4d² ≥ 1/10⁴) + t ≥ 1000 (t²/(t²+1) ≥ 10⁶/(10⁶+1)); the rational identity
+  F4 = 4(1/200)²·10⁶/(10⁶+1)²·… closed by field_simp+ring).
+- §5 — M chain + squeeze: st_hMterm (M·e^X4·X4 ≤ 32/10·t^(1/4)·L·X4UB →
+  [16/10¹⁵·L ⇝ 27/10¹⁶·L² switch at L ≥ 160/27 → 62/10¹⁶] → 32/10·62/10¹⁶ ≤ 25/10¹⁵
+  → 25/10¹⁵·t^(-19/4) = MTUBfun), st_finalconst (A1 + (A2+A3+25/10¹⁵)/1000 < F4,
+  norm_num, strict, margin from the certified script), st_hSQ (W+M cap
+  [A1+(A2+A3+25/10¹⁵)/1000]·t⁻² via C·t^(-k) ≤ C·10⁻³·t⁻² for k ≥ 3), and
+  s4_strip_close (strict < via t⁻² > 0).
+
+**Honest split (per atom): LEAN-PROVEN** — all of the above (module + olean +
+#check). **PINNED** — the day028 constants script + output (all rational
+anchors, the final strict line, the floor identity), the mpmath survey of
+25af (commit 33341a2). **CITED** — the B3Core/S4Own/S4Window/S4Growth
+interfaces reused (unchanged since 25ab/25ae).
+
+**No prize claim made or implied.** This is the bound-level closure of the
+closure-relevant own-regime strip d ≥ 1/200; it is the (i-b) prerequisite for
+the strip-composition wire, not the closure itself.
+
+**NEXT (25af residual, ordered): (1) the S4Asm-level assembly atom stating
+window (25ab) + strip (25af) = bound-level closure on the closure-relevant
+regimes (a conjunction theorem over the existing modules — small, mechanical);
+(2) the strip COMPOSITION residual (the actual (i-b) wire: own-regime +
+window-regime mass accounting at the list scale) — the survey showed this is
+the next quantity-level question; (3) d < 1/200 extension remains open at the
+floor level (F4·t⁻² uses d ≥ 1/200 only — a sharper d-dependent floor is a
+separate constant study).

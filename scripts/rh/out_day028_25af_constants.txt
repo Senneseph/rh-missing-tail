@@ -1,0 +1,42 @@
+### 25af Lean port Stage 1: dps-50 directional certification ###
+family: n4 = ceil(3.1e7 t^4), G4 = 6.2e7 t^4, B4 = 1.24e8 t^4; Tstrip = 1000 (open above)
+
+[0] A1 strictness (exact integers): 8981^2*4*31000000 = 10001636764000000
+    minus 10^16 = 1636764000000  PASS
+
+[1] component bounds pointwise on t in [1000, 1e12] (log grid, 240 pts):
+    BfUB          : violations = 0/66   max ACT/UB = 0.500250  (tightest margin 1.9990x)   PASS
+    SsumUB        : violations = 0/66   max ACT/UB = 0.354854  (tightest margin 2.8181x)   PASS
+    CfUB          : violations = 0/66   max ACT/UB = 0.500000  (tightest margin 2.0000x)   PASS
+    KbarUB        : violations = 0/66   max ACT/UB = 0.361559  (tightest margin 2.7658x)   PASS
+    XUB (direct)  : violations = 0/66   max ACT/UB = 0.165304  (tightest margin 6.0495x)   PASS
+    XUB (chain)   : violations = 0/66   max ACT/UB = 0.925537  (tightest margin 1.0805x)   PASS
+
+    component margins at t = 1000 and t = 1e12:
+      t = 1e+03  BfUB/act = 1.9990   Ssum/act = 2.8181   CfUB/act = 2.0000   KbarUB/act = 2.7658
+      t = 1e+12  BfUB/act = 2.0000   Ssum/act = 3.6524   CfUB/act = 2.0000   KbarUB/act = 3.6197
+
+[2] XUB decreasing on [1000, 1e12] and exp bound:
+    XUB(1000) = 4.017714e-32  (<= 1/2: True)
+    XUB decreasing on the grid: True   exp(XUB(1000)) = 1.000000000000 (<= 2: True)
+
+[3] wire-term bounds pointwise (n = n4 = ceil(3.1e7 t^4)):
+    A1: violations = 0/66   max ACT/UB = 1.000082  (tightest margin 1.000082x)   PASS
+    A2: violations = 0/66   max ACT/UB = 1.035604  (tightest margin 1.035604x)   PASS
+    A3: violations = 0/66   max ACT/UB = 16.681514  (tightest margin 16.681514x)   PASS
+
+    A2 raw = (3.1e7)^{-3/2}*2001/24000 = 4.830514e-13  (A2 = 5e-13: margin 1.0351)
+    A3 raw = (17321/1e4)/540*(3.1e7)^{-5/2}*1.003^3 = 6.048919e-22  (A3 = 1e-20: margin 16.5319)
+
+[4] M-term MTUB(t) = 1.8e-14 / t^{19/4} vs M e^{X4} X4 (M = Zbound):
+    violations = 0/66   min UB/act = 340.581638   PASS
+    chain constants: 1.6e-14 L <= 2.7e-15 L^2 for L >= 5.926 (ln 1000 = 6.907755); 3.2*6.2e-15 = 1.984e-14 <= 2.5e-14: True
+
+[5] floor F4 = 1e8/(1000001)^2 and the final line:
+    F4 = 9.999980000030e-05
+    true mown(1e4, 1/200)/Eenv ratio (25w pin cross-check): mown/Eenv should be ~0.998937566 > F4/EenvCoef = 0.998935568530
+    sanity: hMownScaleLo RHS at (1e3, 1/200) = 9.9999800000e-11  vs true mown = 1.0000005000e-10  (lo <= mown: True);  F4*1e-6 = 9.9999800000e-11 (<= lo: True)
+    FINAL: A1 + (A2+A3+2.5e-14)/1000 = 8.981000000052e-05  <  F4 = 9.999980000030e-05 : True
+    margin (F4 - lhs) = 1.018980e-05  (10.1898% relative)
+
+### ALL PASS -- 25af Stage-1 constants are certified ###
