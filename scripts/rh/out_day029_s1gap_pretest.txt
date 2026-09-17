@@ -1,0 +1,33 @@
+tail cache: (10000000, 31946000] 52290633 + band 2792198664; G_LAST = 1006345999.847005
+day029 V2: G_LAST = 1006345999.847005; (1e18,1e30] log-quad npts=400
+4e8  npts=200    E= -0.9326  Efull= +0.1015  resid= 1.66553e+01  residf= 1.04347e+00
+4e8               margin_old= 0.30264  margin_old2= 0.53769  margin_new=10.35781  margin_new_m= 0.64893
+4e8  npts=6400   E= -0.9326  Efull= +0.1015  resid= 1.66553e+01  residf= 1.04347e+00
+4e8               margin_old= 0.30264  margin_old2= 0.53769  margin_new=10.35781  margin_new_m= 0.64893
+4e8  | B_best=19.0574  p8_B(t,n4)=5.613e-22  |zeta|=10.8081 dev=1.0000  Re Qext=-1.0341 (|zeta|/B t^2 law check: E_model=-0.9326)
+6e8  npts=200    E= -2.0674  Efull= +0.2593  resid= 3.97891e+01  residf= 1.31653e+00
+6e8               margin_old= 0.09129  margin_old2= 0.23373  margin_new= 4.37758  margin_new_m= 0.14484
+6e8  npts=6400   E= -2.0674  Efull= +0.2593  resid= 3.97891e+01  residf= 1.31653e+00
+6e8               margin_old= 0.09129  margin_old2= 0.23373  margin_new= 4.37758  margin_new_m= 0.14484
+6e8  | B_best=23.3405  p8_B(t,n4)=2.495e-22  |zeta|=5.7632 dev=1.0000  Re Qext=-2.3267 (|zeta|/B t^2 law check: E_model=-2.0674)
+1e9  npts=200    E= -3.8792  Efull= +2.5839  resid= 3.95201e+02  residf= 7.71051e+00
+1e9               margin_old= 0.01961  margin_old2= 0.22039  margin_new= 1.08165  margin_new_m= 0.02110
+1e9  npts=6400   E= -3.8792  Efull= +2.5839  resid= 3.95201e+02  residf= 7.71051e+00
+1e9               margin_old= 0.01961  margin_old2= 0.22039  margin_new= 1.08165  margin_new_m= 0.02110
+1e9  | B_best=30.1324  p8_B(t,n4)=8.980e-23  |zeta|=8.3400 dev=1.0000  Re Qext=-6.4631 (|zeta|/B t^2 law check: E_model=-3.8792)
+
+VERDICT (A) — pre-registered, all three wall heights: the 25x S1-GAP
+(5.6e7 onset, 25x[6]/25x[7]/25y records) is artifact-driven:
+  (a) the B_best list-scale P4 floor (19.06/23.34/30.13 at 4e8/6e8/1e9)
+      is erased by the 25af t^4 wire (p8_B(t, n4) = 5.6e-22/2.5e-22/9.0e-23);
+  (b) the (1e18, inf) HORIZON product section the 25x kernel excludes
+      (bound "reported only") — Re Qext(1e18,1e30] = -1.0341/-2.3267/
+      -6.4631, tracking the t^2/1e18 law; with it folded in (V2):
+  E:    -0.9326/-2.0674/-3.8792  -> Efull: +0.1015/+0.2593/+2.5839
+  resid: 16.66/39.79/395.2       -> residf: 1.043/1.317/7.711 (true)
+  margin (t^4 wire + full horizon): 10.36 / 4.38 / 1.08 — ALL >= 1.
+25x regression columns reproduced (margin_old 0.3026/0.0913/0.0196 vs
+25x[6] 0.3008/0.0918/0.0197). True residf growth (1.04 -> 7.71 over
+4e8 -> 1e9) is the REAL quantity to watch; 1e9 is at 0.4% of G_LAST
+(frontier-adjacent t) — the next unit is the full corrected sweep
+(25x[7]-style windows) + the dps-30 pin at the tightest point.
