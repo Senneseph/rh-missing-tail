@@ -4877,3 +4877,94 @@ olean, full build green (17434 jobs). Statement of the closeout (`p4_25ae_wall_l
 the batch-4 commit). Next open mathematics, unchanged: the full P1.2 uniform squeeze past 1e8
 (local-walk layer, deliberately not started), the S1 uniform-height layer, and the S4 own-regime
 wire (i-b) which was holding for exactly this closeout.
+
+## 25af (2026-09-17) — OWN-COMPOSITION RESIDUAL SURVEY (item (a) LANDED): the (i-b) strip wire CLOSES at the bound level, on the closure-relevant strip d >= 1/200
+
+Owner: "ok, let's do the next thing" (post-25ae closeout -> the pre-registered 25ad NEXT item (a),
+the (i-b) own-regime wire prerequisite). Script: scripts/rh/day027_25af_owncompo_survey.py,
+out_day027_25af_owncompo_survey.txt (float64 sweep on 33-point log t-grid + dps-30 mpmath on the
+B3Core exact mirrors; band constants free witnesses, scaling verified robust).
+
+**The question (25ad [4] "the unknown"):** at the t^4 wire scale (the only demand-shape scale,
+25v/25ad), what is the t-scale of the DEFINITION-SIDE residual -- "mown's closed form is the
+DETECTOR side at 4d^2/t^2, its definition-side counterpart at the same scale is the unknown" --
+and does W(t^4) + residual sit below mown(t, 1/200) = 0.998937566·Eenv (Eenv = 1.001064e-4 t^-2)?
+The residual budget: W's term1 = (1/2)(3.1e7)^(-1/2) t^-2 = 8.9801e-5 t^-2 = 89.8% of the floor
+-> ~1.02e-5 t^-2 left.
+
+[1] X4(t) = the B3Core Xwire on the t^4 band (G4, B4] = (2·3.1e7·t^4, 2·G4] -- verbatim
+Bf/Cf/Kbar/Sbar mirrors (formal/RhAttack/B3Core.lean) -- scales as (ln t)/t^6:
+X4(1e3) = 6.641e-33, X4(1e4) = 7.470e-39 (band-constant robust: c in {1e7, 3.1e7, 1e8} gives
+the same t-scaling to <5% in the prefactor). The CRUDE RVM-bounded residual
+Rcrude = Zbound(t)·e^{X4}·X4 (Zbound(t) = 1.6 t^{1/4} ln t, the 25ab/Backlund form) fits
+t^(-5.619) on [1e4, 1e6] -- 4.0e-20 of the t^-2 budget at t = 1e3, dropping further.
+
+[2] THE MASS (the actual band product mass, p8_residual_wired form):
+log M = ∫_{G4}^{B4} nHat(x) fT(t,x) dx, fT = 1/(2(x^2+1/4)) + log(1 - (t^2+1/4)/(x^2+1/4)),
+nHat = RVM + 7/8. Quad (dps-30, 64 log-spaced splits) vs the analytic leading term
+-(t^2/4π)[(ln(B/2π)-1)^2 - (ln(G/2π)-1)^2]: rel diff 2.5e-7 @1e3 -> 2.5e-11 @1e5 (the analytic
+term omits the 1/(2u) piece, abs ~2.4 @1e3). log M = -4.7528e6 @1e3 -> -6.7849e10 @1e5:
+M = e^{-O(t^2 ln t)} -- the TRUE band mass is super-exponentially small; the true residual
+Rmass = M·e^{X4}·X4 is 10^{~10^10} below the budget. The definition side at the t^4 scale is
+TINY at the quantity level too -- the only t^-2-scale definition-side object is W's term1.
+
+[3] THE DECISION: (W + Rcrude)/mown(t,1/200) = 0.898026 -- CONSTANT in t on [1e3, 1e5]
+(W/Eenv = 0.89707 constant; mown/Eenv = 0.998937566 flat for t >= 1e4). < 1 with the 10.2%
+margin EXACTLY as 25ad [4] (b) predicted. The margin is entirely on W's term1; every other
+term is < 1e-40 relative.
+
+[6] mown is INCREASING in d on [1/200, 1/2] (numerically: min ratio 1.000000 at the d-edge on
+[0.005, 0.5] step 0.005, t = 1e3/1e4/1e6; analytic sign structure: mown = d^2(d^2+4t^2)/(AB)e^c
+with d(AB)/dd = 2d(t^2+d)(...) ... = d(2t^2+2d^2-1/2) > 0 and dc/dd = -4d/t^4 + O(t^-6) < 0 --
+the d^2 factor dominates; to be re-proved in Lean). Hence closing at the d-edge suffices for
+the whole closure-relevant strip.
+
+[7] The squeeze's TRUE d-edge: d* = 0.004738 (t-independent: 4d^2·(16001/15984)·(1+O(t^-2)) =
+(1/2)(3.1e7)^(-1/2) crosses at d*) < 1/200 = 0.005 -- the closure d-grid edge sits 5.5% ABOVE
+the squeeze edge. The squeeze holds on (0.004738, 1/2] in particular on the d-grid (witness
+pairs live on d >= 1/200, 25w/Route-A price). Below d* the d->0-ward region is intrinsically
+below ANY positive d-independent wire (mown ~ 4d^2/t^2 -> 0) and is not closure-relevant
+(the S2 floor side / min-d detector at the witness handles it).
+
+**VERDICT (pre-registered (A)):** the (i-b) own-regime wire is a CLOSED question at the bound
+level: for all t >= 1000 and 0 <= M <= Zbound(t),
+    p8_B(t, ceil(3.1e7 t^4)) + M·e^{X4(t)}·X4(t) < mown(t, 1/200)          (survey-confirmed,
+    margin 10.2%),
+and with [6] the single line W + M·e^{X4}·X4 < mown(t, d) for all d in [1/200, 1/2] -- i.e. the
+GAP-O closure-relevant strip closes in the EXACT 25ab architecture (free witnesses; M a free
+parameter under Zbound; X4 = the b3BoundExplicit RHS on the t^4 band), with the mown d-edge floor
+replacing the 0.9975 pin. The "definition-side counterpart at the 4d^2/t^2 scale" (the 25ad
+unknown) is thereby RESOLVED: there is NO ~t^-2-scale residual on the definition side -- the
+t^4-band Xwire residual is O((ln t) t^-5.6) « t^-2, and the only t^-2-scale definition-side
+term is W's term1 itself (d-CONSTANT, 8.9801e-5 t^-2 = 89.8% of the d-edge floor; the d-dependence
+4d^2 lives on the detector side only, and the d-grid edge clears the squeeze edge d* by 5.5%).
+
+Honest split: PINNED -- all [1]-[7] numbers (script + output committed above). LEAN-PROVEN
+(prerequisites) -- S4Sharp demand (Eenv/Kgap/scale demand), S4O mown closed form + hMownScale,
+S4c impossibility at list scale, 25ab growing-wire architecture (the port template), 25ae wall.
+CITED -- Backlund RVM (Zbound), Platt–Trudgian Sbar ledger (the X4 hypothesis class), exactly
+as in 25ab.
+
+**DISCIPLINE NOTE (new trap, permanent):** at the t^4 band, w/u = (t^2+1/4)/(x^2+1/4) ~ 2.6e-34
+at dps-30: BOTH the naive `mp.log(1 - w/u)` and the "exact" `log(u-w) - log(u)` SILENTLY return
+log(1) = 0 (u-w and u are identical to 30 significant digits). The mass integral then reads a
+fictitious +2.4 (marginal mass ~11) instead of the true -4.75e6 (mass e^{-4.75e6}). The fix:
+the k=1 series term log(1-z) = -z + O(z^2) with max z^2 = 6.8e-68 « 1e-30 -- exact at dps-30 on
+this band. Lesson: on bands where w/u < 10^-30, never evaluate the log at all; use the series
+(and record the truncation bound).
+
+**NEXT (the Lean port, 25af Stages 1-4 -- pure computation, Lean-able, 25ab template):**
+Stage 1: t^4 family + endpoint constants (dps-50 directional certification -> exact rationals):
+  n4(t) = ceil(3.1e7 t^4); G4 = 6.2e7 t^4; B4 = 1.24e8 t^4; WUB: p8_B(t, n4) <=
+  A1 t^-2 + A2 t^-5 + A3 t^-7 (A1 = 8981/1e8 strict rational upper of (1/2)(3.1e7)^(-1/2), etc.);
+  X4UB: X4(t) <= A4 (ln t) t^-6 + A5 t^-6 (exact rationals from the B3Core defs);
+  e^{X4} <= 2 (X4(1e3) = 6.6e-33 < ln 2).
+Stage 2: the M-term chain: Zbound(t)·e^{X4}·X4 <= B·ln t·t^-15/4 (25ab-style
+pow-inequality endpoint chain, norm_num).
+Stage 3: the floor: mown(t, 1/200) >= F·t^-2 (F = 99999/1e9 strict rational LOWER: from
+mown = d^2(d^2+4t^2)/(AB)e^c >= (t^2/1e4)/(t^4(1+5.003e-7)) with A,B = t^2 + (1/2 ± 1/200)^2,
+e^c >= 1) + mown d-MONOTONE on [1/200, 1/2] (the [6] sign structure, closed form).
+Stage 4: the squeeze WUB + MtermUB <= F' t^-2 < F t^-2 <= mown(t, 1/200) <= mown(t, d)
+(norm_num on the endpoint residual ~ 1.02e-5 t^-2 - O(ln t t^-15/4)) + the S4Asm assembly
+(GAP-O-closure-relevant := theorem; S4 squeeze = window (25ab) + strip (25af) at the bound
+level on the closure-relevant regimes).
