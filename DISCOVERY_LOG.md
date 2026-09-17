@@ -4802,7 +4802,78 @@ marker counts / `git diff --stat` / a green default-target build. The batch-3 bl
 - A recursive theorem being defined must be referenced via the induction hypothesis `ih`, not by its own name, inside
   its own induction (self-call inside `rw` fails structural-recursion elimination).
 
-**NEXT (batch 4)**: monotonicity/endpoint/final wall closeout — for i = 2,4,6 use `t3wB_h_neg_246` + `t3wB_RhasDerivAt`
-to get `R_i(t) ≤ R_i(13) < K_i`; for i = 7 use the batch-2 single-zero structure + gates to place the maximum at `t = 1e8`
-(`R_7(13) < R_7(1e8)` via `B7_13 < LB7_1e8`), prove `R_7(1e8) < K7`, combine `K2 + K4 + K6 + K7 < 1` (exact), and land the
-final wall theorem `p4_25ae_wall_list_scale` (1 ≤ t ≤ 1e8) with the Stage-3B closeout.
+**BATCH 4 LANDED (2026-09-16)**: monotonicity / endpoint / final wall closeout. The 22 planned atoms
+came out as 33 theorems (helpers split), all LEAN-PROVEN, `#check`-verified against the compiled
+olean, full build green (17434 jobs). Statement of the closeout (`p4_25ae_wall_list_scale`):
+
+  ∀ t, 1 ≤ t ≤ 1e8, n = ⌊13t/8⌋₊  ⟹  t3w_T3UB n t < (1/2)·n^(−1/2)·(35/39).
+
+  * i = 2,4,6: `t3wB_num2/4/6_neg` (batch 1) + `t3wB_RhasDerivAt` (batch 3) ⇒ `t3wB_R_strict_anti` /
+    `t3wB_R246_anti` (MVT + `exists_deriv_eq_slope`) ⇒ `R_i(t) ≤ R_i(13) < K_i` (endpoint squares are
+    EXACT rationals: e.g. `t3wB_R2_13_sq` gives R_2(13)² = 118844923935296/154571611490816995125;
+    each K_i² comparison closes by `norm_num` on the Python-exact literals).
+  * i = 7: IVT (+ batch-2 gates N7(13)<0<N7(20)) gives the unique zero z* ∈ (13,20) —
+    `t3wB_num7_zero_in_13_20`; sign lemmas `t3wB_num7_sign_left/right` (uniqueness from batch 2 +
+    fresh-zero contradiction, all by_cases/¬-style, no trichotomy) ⇒ `R_7` decreases on [13,z*] and
+    increases on [z*,1e8] ⇒ `t3wB_R7_le_1e8` (endpoint maximum, since `t3wB_R7_13_lt_1e8` from the
+    canonical `B7_13 < LB7_1e8` pin) ⇒ `R_7(t) ≤ R_7(1e8) < K7`.
+  * `t3wB_K_sum_lt_1`: K2+K4+K6+K7 < 1 EXACT (margin ≈ 0.17800797, norm_num on the canonical
+    rationals) ⇒ `t3wB_wall_sum` ⇒ floor-corrected bridge `t3wB_term_le` (valid whenever 13t/8 − 1 ≤ n;
+    holds for n = ⌊13t/8⌋₊) ⇒ `t3wB_wall_band` (13 ≤ t ≤ 1e8: T3UB < t3wB_target t).
+  * Final theorem: Part B by wall band + n ≤ 13t/8 ⇒ target ≤ n-form; Part A by the four
+    `t3w_wall_A*` bands with n-form comparisons (A2–A4 via √m < k; A1 special).  CANONICAL
+    CONSTANTS unchanged: scripts/rh/day026_25ae_t3wallB.py.
+
+**Proof-engineering notes (batch 4, permanent traps)**:
+- `Nat.floor_le (ha : 0 ≤ a) : (⌊a⌋₊ : R) ≤ a`, `Nat.le_floor`, `Nat.le_floor_iff (ha : 0 ≤ a)`,
+  `Nat.floor_lt (ha : 0 ≤ a)` live in `namespace Nat` (Mathlib/Algebra/Order/Floor) — unqualified
+  `floor_le`/`le_floor`/`floor_lt` do NOT resolve. `Real.one_rpow` is namespaced under `Real`.
+- The nat-floor route beats the `Int.floor_toNat`/`toNat_of_nonneg` route: `rw [← Int.floor_toNat …,
+  Int.toNat_of_nonneg …]` on ℝ-cast goals fails to match (the toNat equation elaborates at a cast
+  level that never meets the target subterm). Use `rw [hn]; rw [Nat.floor_le/le_floor_iff …]` after,
+  and close the cast-normalized residues with `linarith` (which does normalize ↑1 vs OfNat-1).
+- `rw` lists ELABORATE their arguments against the PRE-rewrite goal: `rw [hn, Nat.le_floor_iff (by
+  linarith [h])]` can fail where two sequential `rw`s succeed (the by-argument is elaborated before
+  `hn` changes the goal).
+- `1 ≤ 13·t` must be PROVED as `13 * 1 ≤ 13 * t := mul_le_mul_of_nonneg_left (1 ≤ t) (by norm_num)`
+  with that exact target shape; the `(13 : ℝ) ≤ 13 * t` / `(1 : ℝ) * 13 ≤ 1 * t` shapes leave a meta
+  in the multiplier and `norm_num` then fails with an unsolved `0 ≤ ?m` (same trap in both Part A and
+  Part B of the final theorem).
+- Exponent-SYNTAX is identity: the file's target def writes `^ (-(1/2 : ℝ))` while theorem statements
+  use `^ (-1/2 : ℝ)` — these are NOT defeq, so `rw`/`exact` reject the switch; bridge with
+  `rw [show (-(1/2 : ℝ)) = (-1/2 : ℝ) by ring]` exactly once at the use site.
+- `mul_lt_mul_of_nonneg_left` does not exist; the left-multiplication lemma is
+  `mul_lt_mul_of_pos_left (hbc : b < c) (ha : 0 < a) : a * b < a * c` (and `…_of_nonneg_left` is its
+  ≤ sibling with `0 ≤ a`). Lean 4 has no `ring at h ⊢` — use `ring_nf at h ⊢` or a calc with
+  `mul_comm`/`mul_one`.
+- `One ^ x = 1` is `Real.one_rpow` with the exponent implicit-ish: pass nothing (or the goal's exact
+  term) — `Real.one_rpow (-(1/2 : ℝ))` reintroduces the syntax split above.
+- A flat degree-17 polynomial identity (`num_7 (13+u) = N7shift u`) closes with `dsimp only […]; ring`
+  in ~3s at boosted `maxHeartbeats 600000` when ISOLATED; embedded inside a differentiability proof
+  it hits deterministic isDefEq/whnf timeouts — cache it as its OWN theorem first, then compose the
+  smoothness (`Differentiable.comp` with `differentiable_id.sub (differentiable_const (13 : ℝ))`).
+- `gcongr` on a 4-term sum ≤ 4-term sum can under-generate subgoals ("No goals to be solved" on the
+  2nd dot) in this context; the `add_le_add` chain (pairwise partial sums) is deterministic.
+- The A1 band wall constant 35/78 is EXACTLY the n-form target at n = 1 — the strict side is
+  `lt_of_lt_of_eq hA (35/78 = target)`, never a strict comparison (the strict attempt normalizes to
+  `35/78 < 35/78`, displayed as `⊢ False`).
+- `by_cases hz_t : f t = 0` gives the else-branch `hz_t : ¬f t = 0` — `hz_t.symm` does not exist;
+  build the needed orientation as `intro he; exact hz_t he` (or `he.symm`) per use, and
+  `lt_of_le_of_ne (a ≤ b)` wants `a ≠ b` with a on the LEFT.
+- MVT/IVT: `exists_deriv_eq_slope f hab hcont hdiff` (f explicit, no f' argument — batch 3); the
+  subset IVT is `intermediate_value_Ioo (hab : a ≤ b) hcont (hva : c ∈ Set.Ioo (f a) (f b))` — pass
+  `le_of_lt` for strict endpoint orderings; `by_contra` branches have goal `False`, so endpoint
+  rewrites (`rw [ht13]`) fail there — restate the endpoint fact in a `have` first.
+- First-draft batch 4 went through ~8 targeted iterations (53 → 0 errors): line-form `calc` with
+  multi-line `by` bodies mis-parses (block form only), `show E by tactic` entries in `rw` lists
+  parse-fragile (standalone `have`), and Finset membership `i ∈ ({2,4,6,7} : Finset ℕ)` must be
+  `simp only [Finset.mem_insert, Finset.mem_singleton]` + `tauto` into an Or-chain before `rcases`.  The
+  block was regenerated flat (no nested template patching) after a reset-to-baseline; final shape
+  verified by direct `#check` of all 33 names against the olean.
+
+**STAGE 3B CLOSED.** The 25ae list-scale wall now holds for 1 ≤ t ≤ 1e8 in Lean
+(`p4_25ae_wall_list_scale`, `formal/RhAttack/P4Limit.lean`), combining Part A
+(`t3w_wall_A1..A4`, commit dba3fd7) and Part B batches 1–4 (commits 94ffd81, 912ac4b, 16211bd, and
+the batch-4 commit). Next open mathematics, unchanged: the full P1.2 uniform squeeze past 1e8
+(local-walk layer, deliberately not started), the S1 uniform-height layer, and the S4 own-regime
+wire (i-b) which was holding for exactly this closeout.
