@@ -547,3 +547,99 @@ theorem p8_residual_wired (L T : List ℝ) (Tt : ℝ) (F : ℝ → ℝ)
           gcongr
     _ ≤ ((L ++ T).map F).prod * Real.exp Xval * Xval := by
           gcongr
+
+/- P8Floor · A5 — THE TERMINAL: the §10 residual-floor theorem.
+
+    A5 composes A0–A4 into the §10 statement —
+        |W_n(t) − [K_on(t) − (P_n(½+it) − I(n, ½+it))]| < f(t)
+    — with every NON-machine input made an EXPLICIT hypothesis:
+      hW — the A2c cited bridge: ‖W_n(½+it)‖ = ‖p4_em_expr‖ ≤ p8_B t n
+           (DLMF 25.2.8 / Apostol Thm 12.21 — CITED; the bound half
+           `p8_B_floor` is LEAN);
+      hK — the kernel-side residual: ‖K − (P_n − I)‖ ≤ Mval, with Mval
+           the A4.3 value prod·e^{Xval}·Xval under the model-defect
+           bound |x| ≤ Xval (Xval = the B3Sbar `b3BoundExplicit`
+           output at the measurement point — P5/Platt–Trudgian side,
+           CITED source);
+      hpin (near only) — the PINNED near-regime detector floor: the
+           day-017/019 audit measured ‖R(γ,δ,t) − 1‖ =
+           0.997500 … 1.020104 across the grid at the pair's own
+           height (|t − γ| ≤ 10.21, δ ∈ {0.005, 0.5}); the branch
+           locus t = γ is excluded from B5's closed form.
+    FAR uses the LEAN-proven floor 1 (A4.1b: ‖R(γ,0,t) − 1‖ ≥ 1 for
+    γ ≥ 1, t ≥ 2γ — at δ = 0, matching A4.2a's framing; the min_δ
+    reduction over δ > 0 rests on A3.1's numerator minimum + the
+    audit, as documented).  LHS decomposition: A0 (identically
+    ζ(s) − K) + A1 (triangle) + hW + hK.
+-/
+
+/-- Atom A4.2b (LEAN symbolic shell; PINNED input hpin): the
+    near-regime zero decision — for n, Mval and the pinned near-floor
+    hypothesis p8_f_near_pin ≤ ‖R(γ,δ,t) − 1‖ (the day-017/019 audit
+    record), p8_B t n + Mval < p8_f_near_pin implies
+    p8_B t n + Mval < ‖R(γ,δ,t) − 1‖. -/
+theorem p8_zero_decision_near (γ δ t : ℝ) (n : ℕ) (hn : 0 < n) (Mval : ℝ)
+    (hM : 0 ≤ Mval) (hpin : p8_f_near_pin ≤ ‖Rratio γ δ t - 1‖)
+    (hres : p8_B t n + Mval < p8_f_near_pin) :
+    p8_B t n + Mval < ‖Rratio γ δ t - 1‖ :=
+  lt_of_lt_of_le hres hpin
+
+/-- Terminal A5a (LEAN under the explicit non-machine inputs hW, hK —
+    §10, FAR regime): for s = ½ + it, γ ≥ 1, t ≥ 2γ,
+    ‖W_n(s)‖ ≤ p8_B t n and ‖K − (P_n − I)‖ ≤ Mval with
+    p8_B t n + Mval < 1, then
+    |W_n(s) − (K − (P_n − I))| < ‖R(γ,0,t) − 1‖.
+    Proof: A0 (LHS = ‖ζ − K‖) → A1 (triangle) → hW + hK → hres (< 1)
+    → A4.1b (1 ≤ ‖R(γ,0,t) − 1‖). -/
+theorem p8_residual_floor_far (n : ℕ) (t γ : ℝ) (hγ : 1 ≤ γ)
+    (ht2 : 2 * γ ≤ t) (K : ℂ) (Mval : ℝ)
+    (hW : ‖p4_Wn (((1 / 2 : ℝ) : ℂ) + (t : ℂ) * Complex.I) n‖ ≤ p8_B t n)
+    (hK : ‖K - (p4_P n (((1 / 2 : ℝ) : ℂ) + (t : ℂ) * Complex.I) -
+          p4_I n (((1 / 2 : ℝ) : ℂ) + (t : ℂ) * Complex.I))‖ ≤ Mval)
+    (hres : p8_B t n + Mval < 1) :
+    ‖p4_Wn (((1 / 2 : ℝ) : ℂ) + (t : ℂ) * Complex.I) n -
+      (K - (p4_P n (((1 / 2 : ℝ) : ℂ) + (t : ℂ) * Complex.I) -
+            p4_I n (((1 / 2 : ℝ) : ℂ) + (t : ℂ) * Complex.I)))‖ <
+    ‖Rratio γ 0 t - 1‖ := by
+  set s : ℂ := ((1 / 2 : ℝ) : ℂ) + (t : ℂ) * Complex.I with hs
+  show ‖p4_Wn s n - (K - (p4_P n s - p4_I n s))‖ < ‖Rratio γ 0 t - 1‖
+  have hsame : p4_Wn s n - (K - (p4_P n s - p4_I n s)) = riemannZeta s - K :=
+    p8_same_object s n K
+  calc ‖p4_Wn s n - (K - (p4_P n s - p4_I n s))‖
+      = ‖riemannZeta s - K‖ := by rw [hsame]
+    _ ≤ ‖p4_Wn s n‖ + ‖K - (p4_P n s - p4_I n s)‖ := p8_triangle s n K
+    _ ≤ p8_B t n + Mval := add_le_add hW hK
+    _ < 1 := hres
+    _ ≤ ‖Rratio γ 0 t - 1‖ := p8_far_detector_scale_ge_one γ t hγ ht2
+
+/-- Terminal A5b (LEAN under the explicit non-machine inputs hW, hK,
+    hpin — §10, NEAR regime): for s = ½ + it,
+    ‖W_n(s)‖ ≤ p8_B t n and ‖K − (P_n − I)‖ ≤ Mval with
+    p8_B t n + Mval < p8_f_near_pin, and the PINNED near-floor
+    hypothesis p8_f_near_pin ≤ ‖R(γ,δ,t) − 1‖ (day-017/019 audit),
+    then
+    |W_n(s) − (K − (P_n − I))| < ‖R(γ,δ,t) − 1‖.
+    This is the §10 residual-floor theorem on the near regime: the
+    definition side alone (P4 EM floor + the P5/Platt–Trudgian-wired
+    kernel residual) sits below the detector scale. -/
+theorem p8_residual_floor_near (n : ℕ) (t : ℝ) (γ δ : ℝ) (K : ℂ)
+    (Mval : ℝ)
+    (hW : ‖p4_Wn (((1 / 2 : ℝ) : ℂ) + (t : ℂ) * Complex.I) n‖ ≤ p8_B t n)
+    (hK : ‖K - (p4_P n (((1 / 2 : ℝ) : ℂ) + (t : ℂ) * Complex.I) -
+          p4_I n (((1 / 2 : ℝ) : ℂ) + (t : ℂ) * Complex.I))‖ ≤ Mval)
+    (hpin : p8_f_near_pin ≤ ‖Rratio γ δ t - 1‖)
+    (hres : p8_B t n + Mval < p8_f_near_pin) :
+    ‖p4_Wn (((1 / 2 : ℝ) : ℂ) + (t : ℂ) * Complex.I) n -
+      (K - (p4_P n (((1 / 2 : ℝ) : ℂ) + (t : ℂ) * Complex.I) -
+            p4_I n (((1 / 2 : ℝ) : ℂ) + (t : ℂ) * Complex.I)))‖ <
+    ‖Rratio γ δ t - 1‖ := by
+  set s : ℂ := ((1 / 2 : ℝ) : ℂ) + (t : ℂ) * Complex.I with hs
+  show ‖p4_Wn s n - (K - (p4_P n s - p4_I n s))‖ < ‖Rratio γ δ t - 1‖
+  have hsame : p4_Wn s n - (K - (p4_P n s - p4_I n s)) = riemannZeta s - K :=
+    p8_same_object s n K
+  calc ‖p4_Wn s n - (K - (p4_P n s - p4_I n s))‖
+      = ‖riemannZeta s - K‖ := by rw [hsame]
+    _ ≤ ‖p4_Wn s n‖ + ‖K - (p4_P n s - p4_I n s)‖ := p8_triangle s n K
+    _ ≤ p8_B t n + Mval := add_le_add hW hK
+    _ < p8_f_near_pin := hres
+    _ ≤ ‖Rratio γ δ t - 1‖ := hpin
