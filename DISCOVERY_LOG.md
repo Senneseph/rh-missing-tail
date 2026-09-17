@@ -5025,3 +5025,49 @@ window-regime mass accounting at the list scale) — the survey showed this is
 the next quantity-level question; (3) d < 1/200 extension remains open at the
 floor level (F4·t⁻² uses d ≥ 1/200 only — a sharper d-dependent floor is a
 separate constant study).
+
+### 25af S4Asm assembly (2026-09-17, (i-b) PROPER LANDED — commit 3396fc8)
+
+**Problem (pre-registered in the 25af survey verdict):** the regime-composition
+wire — the S4Asm-level assembly of the 25ab window closure and the 25af strip
+closure into the bound-level closure on the union of the closure-relevant
+regimes, i.e. (i-b) proper: "own-regime + window-regime" as ONE S4 squeeze.
+
+**Delivered (`formal/RhAttack/S4Asm.lean`, module build 8727 jobs, full build
+17434 jobs, `#check` on all seven new declarations — LEAN-PROVEN):**
+1. `S4A.s4asm_window_closure` — the WINDOW regime on [1000, ∞) in one
+   statement: t ≤ T0 = 1.1e5 by the pinned window theorem
+   (`S4W.s4a_window_squeeze`, hX : Xwire T0 ≤ RX), t > T0 by the growth
+   squeeze (`S4G.s4g_growth_squeeze`): the if-family squeeze < 0.9975.
+2. `S4A.s4asm_residue` — window ∧ strip CONJUNCTION under hX.
+3. `S4A.s4asm_strip_region_S4` / `S4A.s4asm_window_region_S4` — the two
+   REGION-specific P1.2 S4-shape instantiations at worst-case M = Zbound(t0).
+4. `S4A.s4asm_S4_on_pairs` — THE COVERAGE: every off-pair (t0, d0) with
+   1000 ≤ t0, 0 < d0 ≤ 1/2 is squeezed against its own-height detector floor
+   (d0 ≥ 1/200: < mown(t0, d0); d0 < 1/200: < 0.9975 near pin).
+5. `S4A.BwireR` / `MrR` / `MfR` / `floR` — the residue DEFINITION-side wire
+   family in P1.2's S4 shape (worst-case M := Zbound(t0)); values outside
+   the covered territory are arbitrary (carried by the residual hypotheses).
+6. `S4A.s4asm_residue_S4_covered` — under those functions, the covered
+   territory satisfies P1.2's S4 inequality EXACTLY.
+7. `S4A.rh_from_regime_closures` — THE S4 COMPOSITION: RH ← (S1 ∧ S2 ∧ S3 ∧
+   S4) with S4 SUPPLIED: covered territory = window ∪ strip (both closed),
+   the two residual territories kept EXPLICIT: (i) d0 > 1/2 (Re ρ outside
+   (0,1) — empty for the actual zero set by the classical zero-free regions,
+   CITED standard — the abstract ZeroSet does not encode them); (ii) the
+   t0 < 1000 band (data-verified territory, not bound-level).
+
+**Honest accounting:** (i-a) GAP-W window class: CLOSED (25aa/25ab, prior).
+(i-b) GAP-O strip: CLOSED on the closure-relevant strip (25af, prior) AND the
+regime-composition wire is now CLOSED too (this entry). The named residue of
+S4 on the closure-relevant regimes is now exactly window + strip — both
+LEAN theorems assembled. Remaining S4 item: the d < 1/200 floor (true
+squeeze edge d* = 0.004738 < 1/200 — not closure-relevant at this scale).
+
+**Traps (cumulative):** `simp only [hT]` does NOT reduce if-expressions
+guarded by a local Prop (unlike `simp [hT]`); `rw [if_pos hT, if_pos hT]`
+consumes occurrences LEFT-TO-RIGHT (LHS twice before RHS in a mixed goal —
+count the ifs); a `def` over ℝ with a `decidableLE` if needs
+`noncomputable`; the residue defs take TWO ℝ args (t0 d0), the P1.2
+hypothesis functions take ONE pair ((t0, d0)) — the mixed-arity
+`MfR (t0,d0)` vs `BwireR t0 d0` in one goal is intentional.
