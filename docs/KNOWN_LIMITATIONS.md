@@ -63,9 +63,11 @@ grade. The single most important pre-submission gap; orthogonal to the
 math risk.
 
 ### H2 — The (10¹⁸, ∞) kernel section is numerically bounded, not analytically
-The full-horizon correction that dissolves the 25x sub-1 dips
+**Status (2026-09-17, day029 rescheck):** the (400, 400) sweep configuration is RESOLUTION-STABLE — Efull(1e9/4e8/6e8) stable to < 5×10⁻⁵ across the full npts 200→2000 × npts2 400→2000 ladder (both sections, dps-30, differential from the sweep anchors; `day029_efull_rescheck.py`, `out_day029_efull_rescheck.txt`). The quad-resolution part of H2 is therefore closed at screen level for the verified range; the (10³⁰, ∞) tail remains bounded by the "1 − O(t²/10³⁰) < 10⁻⁹" heuristic, and a PROVABLE comparison bound on it (the t²/g²·log-density decay; the classical S̄(t) technique) is the remaining analytic unit, Lean-portable.
+**Background:** the full-horizon correction that dissolves the 25x sub-1 dips
 (verdict (A), day029) folds the kernel's (10¹⁸, 10³⁰] product section
-in via a **400-node log-quadrature without an error bound**, and
+in via a **400-node log-quadrature without an a-priori error bound** (now
+ladder-verified to < 5×10⁻⁵, above), and
 bounds (10³⁰, ∞) by the heuristic "1 − O(t²/10³⁰) < 10⁻⁹." The
 corrected margins (10.36 / 4.38 / 1.08) and the residf values carry
 that uncertified error. *Fix:* a provable comparison bound on the tail
