@@ -248,6 +248,17 @@ theorem s4asm_window_region_S4 (hX : S4W.Xwire S4W.T0 ≤ S4W.RX)
     envelope, against its own-height detector floor:
       d0 ≥ 1/200 (strip, 25af):   p8_B(t0, n4 t0) + Zbound·e^{X4}·X4 < mown(t0, d0);
       d0 <  1/200 (window, 25m/ab): window wire family < 0.9975 (the near pin).
+    EXHAUSTIVENESS (no d < 1/200 hole, 25x[8]/day029 note): the
+    d < 1/200 branch is the WINDOW wire, which is d-INDEPENDENT — a
+    pair at 0 < d0 < 1/200 is squeezed against the near floor
+    p8_f_near_pin, and the pinned near scale (day-017/019 audit:
+    0.997500 … 1.020104 on the grid δ ∈ {0.005, 0.5} at the pair's
+    own height; the E7b1 δ → 0 limit |R − 1| → 1; A3.1's numerator
+    minimum at δ = 0) applies to every d0 ∈ [0, 1/200] — the
+    1/200 cut in the strip branch is a d-INDEPENDENT-floor
+    convenience of F4·t⁻² ≤ mown(t, d), not a coverage edge (the
+    true squeeze edge d* = 0.004738 < 1/200 is below that: no
+    wire closes d < d*, which is not closure-relevant — 25af[7]).
     Pairs with d0 > 1/2 (Re ρ outside (0, 1)) are empty for the ACTUAL
     zero set by the classical zero-free regions (Re s ≥ 1 and, via the
     functional equation, Re s ≤ 0 — CITED standard facts); the abstract
