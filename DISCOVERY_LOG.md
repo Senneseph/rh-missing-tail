@@ -4742,3 +4742,67 @@ right-hand-side height lower bound).
 ### NEXT (3B.11 Part B: 13 ≤ t ≤ 1e8)
 
 After Part B lands: the combined wall theorem `p4_25ae_wall_list_scale` (1 ≤ t ≤ 1e8) + Stage-3B closeout (docs, mirror, push, wiki).
+
+### 25ae 3B.11 — Part B batches 1–3 LANDED (2026-09-16, commits 94ffd81, 5bf1063, 912ac4b, 16211bd; 38aec05 voided)
+
+**Part B scope**: the list-scale wall on `13 ≤ t ≤ 1e8` via the log-derivative method on the normalized ratio
+`R_i(t) = sqrt(t3w_prod t i) · (13t/8 − 1)^(−p_i) · 2·(13t/8)^(1/2) · (78/70) / d_i` with `i ∈ {2,4,6,7}`,
+so that `Σ_i R_i(t) < 1` and `T3UB < ½·n^(−1/2)·(35/39)`. Constants: `scripts/rh/day026_25ae_t3wallB.py` (+ sidecar).
+
+**Batch 1 (94ffd81, pushed)** — flat exact numerator/denominator forms for `h_i(t) = R_i'(t)/R_i(t)`:
+`t3wB_num2/4/6/7`, `t3wB_den` (shared positive denominator), `t3wB_h*_id` bridges; exact K-constants
+`K2 = 69379921/76684038375`, `K4 = 58741168772/5963180876155125`, `K6 = 134976489576526/1082001280435718965875`,
+`K7 = 27152220160000230793871360000541788613017600365952532275199977013110761687 / 33069018044903324635418068668593060916969864823485826249274579824803840000`.
+`i = 2,4,6`: reduced numerator has all-negative coefficients, denominator positive for `t > 0` ⇒ `h_i < 0` ⇒ `R_i` decreasing, max at `t = 13`.
+`i = 7`: numerator degree 17, one interior zero; endpoint control via `B7_13 < LB7_1e8`.
+**Bug fixed in this batch**: the i=7 numerator had a degree slip (a `-71303168` coefficient wrongly at `t^15` instead of
+`t^16`; corrected sympy numerator has no `t^15` term). Gates: `N7(13) = −55519170304302480236900400 < 0`,
+`N7(20) = 97030023834507112821255360000 > 0`. Sum of K-constants ≈ 0.821992029204 < 1 (margin ≈ 0.178).
+
+**Batch 2 (912ac4b, pushed)** — i = 7 single-zero structure on `[13, ∞)`: shifted Taylor atoms at `t = 13`
+(`t3wB_N7shift/f1/pp`: `b_0 < 0`, `b_1 < 0`, `b_k > 0` for k ≥ 2; second derivative all-positive),
+`exists_deriv_eq_slope` chains, strict increase of the first derivative, and `t3wB_num7_single_zero`.
+
+**Batch 3 (16211bd, pushed)** — derivative identities: `t3wB_logDeriv_quad`, `t3wB_prod_differentiableAt`,
+`t3wB_logDeriv_t3wProd` (induction via `logDeriv_mul` with pointwise nonzero hypotheses — `logDeriv_prod`'s
+product-of-functions form does not match the pointwise `t3w_prod`), `t3wB_prod_deriv`, `t3wB_logDeriv_sqrtProd`,
+`t3wB_logDeriv_rpowLin` (outer-first `logDeriv_comp` + explicit `∘`-bridge where the point does not split
+syntactically), and the headline
+`t3wB_RhasDerivAt : HasDerivAt (fun x => t3wB_R i x) (t3wB_R i t · (t3wB_num i t / t3wB_den i t)) t`
+for `i ∈ {2,4,6,7}`, `t ≥ 13`. All 7 new theorems `#check`-verified against the compiled olean.
+`lake build RhAttack.P4Limit` green (8709 jobs); full `lake build` green (17434 jobs).
+
+**INCIDENT — the blank "atoms green" commit (38aec05), retracted**: an earlier session reported batch-3 atoms as
+green and committed; the commit added a single blank line and the atom text was never in the target file, so later
+"green" build/job counts were for unchanged content. Discipline now recorded as permanent: (1) an "atoms green" claim
+requires `#check` of the new names against the compiled olean *and* inspection of the actual inserted lines, not just
+marker counts / `git diff --stat` / a green default-target build. The batch-3 block was re-derived from
+`/tmp/b3_final.lean`, spliced in, and made genuinely green across ~60 targeted compile iterations.
+
+**Proof-engineering notes (batch 3, permanent traps)**:
+- `DifferentiableAt.comp {f g x} (hg : DifferentiableAt g (f x)) (hf : DifferentiableAt f x) : DifferentiableAt (g ∘ f) x` —
+  the point is an *explicit* parameter and the order is **outer-first**; member syntax `a.comp b` mis-elaborates
+  (x-slot confusion). Call it as `DifferentiableAt.comp t hOuter hInner`.
+- `logDeriv_comp` is also outer-first: `logDeriv_comp (hdf_outer) (hdg_inner)`; when the composition point is a compound
+  expression (e.g. `(13/8)·t + 0`), bridge the function to literal `f ∘ g` form with a `funext`-`rfl` show first.
+- `LT.lt.ne' (h : a < b) : b ≠ a` is the direction `hasDerivAt_sqrt` wants from `0 < P`; `.ne` gives the reverse.
+- `hasDerivAt_rpow_const (h : x ≠ 0 ∨ 1 ≤ p)` — the exponent is implicit (do not pass `y` explicitly).
+- `div_mul_cancel₀ (a) (h : b ≠ 0) : a / b * b = a` is the field version; bare `div_mul_cancel` is the group lemma
+  (the 2-arg form with no hypothesis is not the field one).
+- `((n + 1 : Real) + 1/2)` elaborates to `↑n + 1 + 1/2` while `((n + 1 : ℕ) + 1/2)` elaborates to `↑(n+1) + 1/2`;
+  `ring` cannot bridge `↑(n+1)` and `↑n + 1`. Pick one cast form and use it in every factor of an induction step.
+- `rw [show E from by …]` with a multi-tactic by-block inside a bracketed rw list is a parse trap; pull the show into a
+  standalone `have` (or keep the by to a single tactic on one line).
+- `logDeriv_const (a) : logDeriv (fun _ ↦ a) = 0` is point-free; rewriting under an application leaves `0 t`
+  (function-zero application). Close with `change … + 0 = … ; exact add_zero _`.
+- `field_simp` frequently auto-closes the goal it normalizes (then a trailing `ring` is a "No goals" error); when it
+  leaves a cross-multiplied residue, that residue is ring-closable. `ring` does not bridge distinct ring-atoms under an
+  inverse: `((13/8)·t + 0)⁻¹ ≠ (13t/8)⁻¹` to `ring` — unify the denominator inside the show instead.
+- `rw` auto-closes goals that become reflexive; a `have`/`ring` placed after such an rw is then a "No goals" error.
+- A recursive theorem being defined must be referenced via the induction hypothesis `ih`, not by its own name, inside
+  its own induction (self-call inside `rw` fails structural-recursion elimination).
+
+**NEXT (batch 4)**: monotonicity/endpoint/final wall closeout — for i = 2,4,6 use `t3wB_h_neg_246` + `t3wB_RhasDerivAt`
+to get `R_i(t) ≤ R_i(13) < K_i`; for i = 7 use the batch-2 single-zero structure + gates to place the maximum at `t = 1e8`
+(`R_7(13) < R_7(1e8)` via `B7_13 < LB7_1e8`), prove `R_7(1e8) < K7`, combine `K2 + K4 + K6 + K7 < 1` (exact), and land the
+final wall theorem `p4_25ae_wall_list_scale` (1 ≤ t ≤ 1e8) with the Stage-3B closeout.
