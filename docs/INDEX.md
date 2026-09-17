@@ -10,6 +10,7 @@ there.
 | Document | What it is |
 |---|---|
 | [RH-PROOF-OUTLINE.md](RH-PROOF-OUTLINE.md) | "The Riemann Hypothesis: A Path, and Its Current State" — the reader-facing mathematical exposition of the whole path and its current state, with full provenance for every number. |
+| [STRAIGHTFORWARD-ASSESSMENT-2026-09-17.md](STRAIGHTFORWARD-ASSESSMENT-2026-09-17.md) | A self-contained, field-agnostic status snapshot (2026-09-17, post-25af): the machine-checkable-steps assessment with project details in parentheses — a snapshot layer over RH-PROOF-OUTLINE.md and DISCOVERY_LOG.md; written to be forwarded to a mathematician in any field. |
 | [RH-OUTLINE.md](RH-OUTLINE.md) | The staged proof scaffold: the outline with the per-piece status (mirror of the planning artifact; its source of record lives in the working tree — see the file header). A planning document, not a proof. |
 | [THE-EULER-ACTION.md](THE-EULER-ACTION.md) | The Euler action identity — the flat-action (total-differential) reading of summation-by-parts, its recognition map into the zeta map (D = −P as edge flux; the M₁ width ladder as exact period-cell interior action; the onset as an edge-vs-zero budget crossing), with its measured results (E7a exact at dps-50; E2 exact width tables; E7b zero-side onset test). |
 
