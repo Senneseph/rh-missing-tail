@@ -5113,3 +5113,82 @@ existing convention. (2) after `set s := E with hs`, `rw [← hs]` can
 FAIL to find an occurrence even when the goal's subterm is defeq-equal
 to E (rw's matcher is stricter than `change`/`show`'s defeq check);
 bridge the goal with `show <term built from s>` (or `change`) instead.
+
+### 25x[8] — S1-GAP nature test (day029, 2026-09-17 — VERDICT (A): the
+### 25x S1-GAP sub-1 dips are artifacts; the S1 pointwise squeeze
+### CLOSES through 1e9 at screen level)
+
+**Problem (pre-registered):** the 25x[6]/25x[7]/25y records — the S1
+straddle margin (P1.1e: margin(t) = |ζ(t)|·min_δ|R(δ)| / (B_best(t) +
+|ζ − K|), B_best = the P4 floor argmin over the LIST band n = 0.12t–1.6t,
+the t³n^{−5/2} term ~ (√3/540)·t^{1/2} at the n* optimum: measured
+3.02/9.53/30.1 at 1e7/1e8/1e9) dropping below 1 at ~5.6e7 (0.565709077008
+pin, 25y[1]), oscillatory through 2e8, monotone sub-1 above 2e8 (0.0197 at
+1e9) — was characterized (25x[6]) as "the S1-GAP … no finite wire-tuning
+of the P1.1e statistic restores margin ≥ 1 at high t".  The 25af work
+(t⁴ wire n4 = ⌈3.1e7·t⁴⌉: P4 floor p8_B(t, n4) ≤ A1·t⁻² + A2·t⁻⁵ + A3·t⁻⁷,
+decaying — S4Strip, f3b3b18) predates nothing of the 25x records, so the
+wall's attribution was re-tested at the three wall heights 4e8/6e8/1e9
+(25x[6] t_best/g anchors verbatim): the quad-resolution ladder (npts
+200→6400) + the kernel HORIZON test.
+
+**[1] The quad is NOT the artifact (V1 pre-test, day029_s1gap_pretest.py):**
+at 4e8 the resid = |ζ − K| = 16.6553 and E = log|ζ| − Re log K = −0.9326
+are IDENTICAL (4 dp) across the npts ladder 200/800/1600/6400 — the
+(1.0063e9, 1e18] log-quad is stable; the dip is not quad-resolution.
+25x regression reproduced (margin_old 0.3026 vs 25x 0.3008).
+
+**[2] The kernel HORIZON IS the other artifact (V2, same script):** the
+25x kernel K excludes the (1e18, ∞) product (its bound was "reported
+only", never folded in).  E tracks the missing-section signature
+t²/1e18: E = −0.0006(1e7)/−0.059(1e8)/−0.933(4e8)/−2.067(6e8)/−3.879(1e9)
+vs the t²·ln B/(4π²·1e18) class law (×1.2–1.8 fit).  Folding in the
+(1e18, 1e30] log-quad (400 nodes; (1e30, ∞) remainder 1 − O(t²/1e30) <
+1e-9 for t ≤ 1e9): Re Qext = −1.0341/−2.3267/−6.4631 at 4e8/6e8/1e9;
+Efull = +0.1015/+0.2593/+2.5839; the "resid" 16.66/39.79/395.2 becomes
+residf (true model defect) 1.0435/1.3165/7.7105.
+
+**[3] THE WALL HEIGHTS UNDER THE CORRECTED < SIDE + KERNEL (V2 table,
+all stable 200→6400):**
+        t      margin_old(25x)   margin_new(t⁴ wire + full horizon)
+      4e8           0.3026                10.358
+      6e8           0.0913                 4.378
+      1e9           0.0196                 1.0817
+  margin_new = |ζ|·min_δ dev / (p8_B(t, n4) + residf): p8_B(t, n4) =
+  5.6e-22/2.5e-22/9.0e-23 (the 25af t⁴ floor, decaying); B_best =
+  19.06/23.34/30.13 (the artifact term).  PRE-REGISTERED VERDICT (A)
+  CONFIRMED at all three heights: the 25x S1-GAP dips = (a) the B_best
+  LIST-band P4 floor (25af t⁴ wire erases it) + (b) the (1e18, ∞)
+  kernel-horizon product section (V2 folds it in).  The S1 pointwise
+  squeeze is SOUND at all three wall heights; 1e9 at 1.08 (0.4% of
+  G_LAST — frontier-adjacent t; the tightest point so far).
+  The TRUE residual watch item: residf growth 1.043/1.317/7.711 over
+  4e8→1e9 (the real model-defect content; at 1e9 it is 93% of |ζ|·dev).
+
+**[4] NEXT (in flight):** the full corrected sweep (day029_s1gap_sweep.py,
+31 windows 3.9e7…1e9 = the verbatim 25x[7] grid + 2.5e8/4e8/6e8/8e8/1e9,
+32 workers, pre-registered reading A-1/A-2/B-2); then the dps-30 pin
+(25h protocol) at the tightest window; then the Lean S1 wire
+(b3BoundExplicit/Sbar formalization — the P5/Platt–Trudgian CITED input)
+and the remaining items (t < 1000 band, d < 1/200 floor, PT demotion).
+
+**Honest accounting:** the 25x/25y/25z records stand as the ARTIFACT-
+CORRECTED HISTORY (their B best + 1e18-horizon kernel measured what they
+measured; the 25y pins 0.565709077008 @ 5.6e7 and 0.175041964016 @ 1.1e8
+are certified facts of that statistic).  What changes: the ROUTE STATE —
+the S1-GAP "sub-1 asymptotic regime" is not the asymptotic behavior of
+the corrected statistic; the 5.6e7 "ceiling" evaporates at screen level
+through 1e9 (the data extent); the S1 coverage becomes
+  certified [1e3, 1e6] + screened-SOUND [1e6, 1e9] (t⁴ wire + full
+horizon kernel, margin ≥ 1.08 at the wall heights, pending the full
+sweep + pins).  No prize claim made or implied.
+
+**Traps:** (1) Bf(t, G) at G = t is the branch point (uw/(1−uw) blows
+up) — the P5 wire is only for G > t. (2) the (1e18, ∞) "reported only"
+bound is a HORIZON, not an error budget — any kernel statistic at t
+comparable to sqrt(1e18)·(small) silently absorbs the missing product
+factor exp(−t² ln B/(4π²B) class); the E-drift signature is monotone in
+t²/B. (3) beta.lmfdb.org/riemann-zeta-zeros/data/ shards: curl with
+`-H "Cookie: human=1"` (JS gate); the 11 (1e7, 3.1946e7] shards
+re-pulled 2026-09-17 verified: Nt frontier 73426758 exact, seam gap
+0.4436 = one zero spacing.
