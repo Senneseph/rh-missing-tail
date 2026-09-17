@@ -496,6 +496,25 @@ proved **from the definition side alone** — no zero-count at any height
 enters the proof, and the height bound T never appears. The right-hand side
 is the detector scale of §7 (near: ≥ 0.9975·|K| — the day-010 straddle pin; far: (t/γ)²·|K|).
 
+**STATUS (2026-09-17, P8 A5 LANDED, commit aecd486):** the theorem is
+now formalized in CONDITIONAL form on BOTH regimes
+(`formal/RhAttack/P8Floor.lean` A5): `p8_residual_floor_far` (γ ≥ 1,
+t ≥ 2γ: p8_B t n + Mval < 1 ⇒ the §10 inequality — the 1-floor is
+LEAN-proven, A4.1b) and `p8_residual_floor_near` (p8_B t n + Mval <
+p8_f_near_pin ⇒ the §10 inequality), each proved from the definition
+side alone (A0 same-object + A1 triangle + the P4 EM floor + the
+P5/Platt–Trudgian-wired kernel residual), with every non-machine input
+an explicit hypothesis: hW (the A2c cited W_n = em_expr bridge,
+Apostol/DLMF), hK (kernel residual ≤ Mval = prod·e^{Xval}·Xval under
+the model-defect bound |x| ≤ Xval, A4.3), and — near only — hpin (the
+PINNED audit floor 0.9975, day-017/019 record). Supplying hres ON THE
+WIRE is the S4 squeeze question: closed at the bound level for
+t ≥ 1000, 0 < d ≤ 1/2 (window 25ab + strip 25af + S4Asm assembly
+3396fc8). For an unconditional RH the §10 statement still needs: the
+S1-GAP territory (above ~5.6×10⁷ — a different < side or Route B),
+the t < 1000 band (data territory), and demotion of the CITED/PINNED
+inputs to machine-proven.
+
 **Route A — residual floor (project home turf).** Build the floor from the
 explicit Euler–Maclaurin remainder of P4 (the strictified missing-tail law)
 plus the tail bound M(G, t) of P5. Works for |δ| ≥ δ_min(t), where δ_min is

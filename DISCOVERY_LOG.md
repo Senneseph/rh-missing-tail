@@ -5071,3 +5071,45 @@ count the ifs); a `def` over ℝ with a `decidableLE` if needs
 `noncomputable`; the residue defs take TWO ℝ args (t0 d0), the P1.2
 hypothesis functions take ONE pair ((t0, d0)) — the mixed-arity
 `MfR (t0,d0)` vs `BwireR t0 d0` in one goal is intentional.
+
+### P8 A5 terminal (2026-09-17, §10 residual-floor theorem LANDED in conditional form — commit aecd486)
+
+**Problem:** the §10 statement — the "mathematical gap itself" — as
+formal theorems:
+|W_n(t) − [K_on(t) − (P_n(½+it) − I(n,½+it))]| < min_δ f(δ,t),
+proved from the definition side alone.
+
+**Delivered (`formal/RhAttack/P8Floor.lean` A5; module build 8718 jobs;
+full build 17434 jobs; `#check` on all three — LEAN-PROVEN shells over
+the existing A0–A4 atoms):**
+1. `p8_zero_decision_near` — the near-regime decision shell (mirror of
+   `p8_zero_decision_far`): p8_f_near_pin ≤ ‖R(γ,δ,t) − 1‖ (hpin, the
+   PINNED day-017/019 audit record 0.997500…1.020104) + p8_B t n + Mval <
+   p8_f_near_pin ⇒ p8_B + Mval < ‖R(γ,δ,t) − 1‖.
+2. `p8_residual_floor_far` — THE FAR REGIME TERMINAL: for s = ½ + it,
+   γ ≥ 1, t ≥ 2γ, hW: ‖W_n‖ ≤ p8_B (A2c CITED bridge), hK: ‖K − (P_n − I)‖
+   ≤ Mval (the A4.3-wired kernel residual, Mval = prod·e^Xval·Xval under
+   |x| ≤ Xval, Xval = the b3BoundExplicit output — P5/Platt–Trudgian,
+   CITED), p8_B + Mval < 1 ⇒ |W_n − (K − (P_n − I))| < ‖R(γ,0,t) − 1‖ —
+   calc: A0 (LHS = ‖ζ − K‖) → A1 (triangle) → hW + hK → hres → A4.1b
+   (1 ≤ ‖R(γ,0,t) − 1‖, LEAN).
+3. `p8_residual_floor_near` — THE NEAR REGIME TERMINAL: same calc,
+   p8_B + Mval < p8_f_near_pin → hpin ⇒ < ‖R(γ,δ,t) − 1‖.
+
+**Honest accounting:** the §10 theorem is now formalized in CONDITIONAL
+form on both regimes — every non-machine input is an explicit hypothesis
+(hW, hK, hpin) with its provenance documented (A2c CITED Apostol/DLMF;
+A4.3 CITED P5/Platt–Trudgian; A4.2 PINNED audit). Supplying hres on the
+wire is the S4 squeeze question — DONE at t ≥ 1000, 0 < d ≤ 1/2 (window
+25ab + strip 25af + S4Asm assembly 3396fc8). What the §10 statement
+still needs for an unconditional RH: the S1-GAP territory (above ~5.6e7,
+Route A's wire has no margin — a different < side or Route B), the
+t < 1000 band (data territory), and demotion of the CITED/PINNED inputs.
+
+**Traps:** (1) `|·|` (Abs notation) does NOT resolve on ℂ in this
+toolchain — `|z| < w` for z : ℂ fails with a bogus `Lattice ℂ` instance
+request; use `‖z‖` (norm) — the same real-valued quantity, the module's
+existing convention. (2) after `set s := E with hs`, `rw [← hs]` can
+FAIL to find an occurrence even when the goal's subterm is defeq-equal
+to E (rw's matcher is stricter than `change`/`show`'s defeq check);
+bridge the goal with `show <term built from s>` (or `change`) instead.
