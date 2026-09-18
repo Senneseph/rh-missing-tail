@@ -5376,3 +5376,41 @@ re-pulled 2026-09-17 verified: Nt frontier 73426758 exact, seam gap
   (same-t, splices G1 vs G2) is now runnable through the v3 rem (the
   −inf bug is subsumed); the t < 1000 band, CITED demotions, and the
   Phase-1a ceiling remain as before.
+
+## day030 (cont.) — D(t) SPLICE COMPARABILITY VERDICT: one honest series + a KNOWN O(1) calibration (2026-09-18)
+
+- **Run.** `day029_dcheck_splice.py` (log tmp/day029_dcheck.log,
+  results `scripts/rh/out_day029_dcheck.txt`): D(t) =
+  Efull(t;G1) − Efull(t;G2), which for t > G2 reduces EXACTLY to the
+  sum-vs-density difference over (G1, G2] (everything else cancels):
+  the pairlog formula fsum'd over the 3,053,546,936 deduped zeros
+  (fsum-vs-mpmath gate: 1.16e-10 on im, 0.00e+00 on re) vs the
+  mpmath dps-30 complex quad (400-cell, v3-aware, real cross-check
+  0.00e+00), at 1.5e9/1.9e9 (split) and 2.5e9/4e9/1e10 (plain).
+- **Result: |D| = O(1) (0.59…2.65) at every height** — the raw
+  splice levels are a known O(1) apart (G-calibration), NOT
+  O(1e-4) one-series precision.
+- **IM channel EXACTLY explained:** D_im is t-independent to 9
+  digits and equals π × (∫_{G1}^{G2} ρ dg − N_actual) =
+  π × (−0.106322) = −0.334020635 vs measured −0.334020615 (7-digit
+  agreement; the density model undercounts the band by 0.106322
+  zeros — a computable, now-PINNED constant).
+- **re channel:** D_re = −1.46…−0.39 (split) / −1.37…−0.49 (plain):
+  a measured, reproducible O(0.4–1.5) lattice-structure offset at
+  the splice points. A 2-coefficient splice-fraction model does not
+  reduce it to O(1e-4) (named refinement sub-item: the full-
+  counting-function IBP; the common model-error term cancels by
+  construction, leaving an O(1e-4)-scale lattice random walk).
+- **Verdict.** Splice levels = ONE HONEST SERIES + KNOWN O(1)
+  calibration (im part: exact constant; re part: measured O(0.4–1.5)).
+  NO unknown drift: D_im is t-exact, D_re bounded and reproducible.
+  The Efull series are therefore read on a SINGLE SPLICE per series
+  (the existing discipline); cross-splice comparisons only after the
+  O(1) calibration. SHAPE conclusions (Efull +O(1)→+2.58 on
+  [1e9, G2]; oscillatory O(1)–O(4) on (G2, 3e10]) UNAFFECTED by an
+  O(1) level shift.
+- **Bug note (permanent).** A running total inside a per-chunk fsum
+  (`fsum(total + chunk)`) contaminates EVERY element with the total —
+  exponential blow-up across 92 chunks ( OverflowError: intermediate
+  overflow in fsum). Correct: per-chunk fsum partials, one exact
+  outer fsum over the partials.

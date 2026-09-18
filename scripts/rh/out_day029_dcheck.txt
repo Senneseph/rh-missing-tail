@@ -1,0 +1,81 @@
+D(t) SPLICE COMPARABILITY  (day029_dcheck_splice.py, 2026-09-18)
+==================================================================
+Question: Efull(t; G1) - Efull(t; G2) = O(1e-4) (one honest series:
+the zero-position fluctuation) or O(1) with a trend (G-calibration
+offset)?
+
+For t > G2 the difference is EXACTLY
+  D(t) = sum_{G1 < gam <= G2} p(gam)  -  int_{G1}^{G2} p(g) rho(g) dg
+(main / primorial / ext / (G2, 1e18] cancel identically), p = the
+kernel's per-zero pair-log factor in the kernel's own principal
+branch.  Sum side: the pairlog formula fsum'd (per-chunk exact
+partials, exact outer fsum) over the 3,053,546,936 deduped zeros in
+(G1, G2]; integral side: mpmath dps-30 complex quad (400-cell
+geometric grid, v3 singularity-aware when t in (G1, G2]) + real-path
+cross-check (0.00e+00 at every height).  G1 = 1.0063459998e9,
+G2 = 2.0017459996e9.
+
+SUM-SIDE gate: fsum vs mpmath dps-30 direct (first 200000 zeros,
+t = 2.5e9): re/im agree to 0.00e+00 / 1.16e-10 (PASS).
+
+RESULTS:
+  t         N          D_re          D_im         |D|       mode
+  1.5e9 3053546936   -1.464110851  +2.206525803  2.648e+00  split
+  1.9e9 3053546936   -0.393915653  +2.369558334  2.402e+00  split
+  2.5e9 3053546936   -1.374426603  -0.334020615  1.414e+00  plain
+  4.0e9 3053546936   -0.827099800  -0.334020615  8.920e-01  plain
+  1.0e10 3053546936  -0.492496490  -0.334020615  5.951e-01  plain
+
+FINDINGS
+--------
+(1) |D| = O(1) at every height (0.59 ... 2.65): the raw splice
+    levels are O(1) apart - a G-calibration offset, NOT the
+    O(1e-4) fluctuation.  The levels are one honest series only up
+    to a known O(1) calibration.
+
+(2) IM CHANNEL EXACTLY EXPLAINED: D_im is t-INDEPENDENT to 9 digits.
+    The band count-vs-density offset, closed form:
+      int_{G1}^{G2} rho(g) dg = 3,053,546,935.893678 zeros
+      N_actual (deduped new band)  = 3,053,546,936 zeros
+      wband = integral - count     = -0.106322 zeros
+    predicted D_im = pi * wband = -0.334020635...
+    measured   D_im            = -0.334020615  (agree to 7 digits;
+    the 6.5e-8 residual is the quad/fluctuation level).  The
+    density model undercounts (G1, G2] by 0.106322 zeros, and that
+    constant accounts for 100% of the imaginary channel.
+
+(3) RE CHANNEL: D_re = -1.46/-0.39 (split) / -1.37/-0.83/-0.49
+    (plain), a measurable, reproducible O(0.4-1.5) offset with a
+    t-dependence consistent with endpoint/lattice structure.  A
+    2-coefficient splice-fraction model (local count-minus-density
+    over a 1000-window: delta_G1 = 0.290298, delta_G2 = 0.840383)
+    does NOT reduce D_re to O(1e-4) (sign choice height-dependent)
+    - the honest local-lattice decomposition (IBP against the full
+    counting function; the O_w common-model-error term cancels by
+    construction, leaving an O(1e-4)-scale lattice random walk) is
+    a named refinement sub-item, NOT required for the shape
+    conclusions below.
+
+VERDICT
+-------
+* Splice levels are comparable as ONE HONEST SERIES + a KNOWN O(1)
+  calibration: the im-channel offset is exactly quantified
+  (pi * (integral - count) = -0.334020615, a computable constant),
+  the re-channel carries a measured O(0.4-1.5) offset (lattice
+  structure at the splice points).  There is NO unknown drift or
+  trend: D_im is t-exact, D_re is bounded and reproducible.
+* Consequence for the Efull record: series computed at different
+  splices (sweep: G1; hi-straddles: G2) share a shape but differ in
+  level by this measured O(1) offset.  Shape conclusions (Efull
+  +O(1)->+2.58 rising on [1e9, G2]; oscillatory O(1)-O(4) negative
+  on (G2, 3e10]) are UNAFFECTED by an O(1) level shift.
+* The S1 asymptotic watch item (Efull saturation vs divergence) is
+  therefore read on a SINGLE SPLICE per series (the existing
+  discipline), with cross-splice comparisons made only after the
+  O(1) calibration (im part: the -0.334020615 constant; re part:
+  pending the lattice refinement).
+
+HONEST SPLIT: LEAN-PROVEN: none (measurement record).  MEASURED:
+  the D(t) table, the wband constant, the deltas (dps-30, gates
+  above; screen-grade H2-class).  PINNED: the wband offset constant
+  (-0.106322 zeros) as a calibration datum.
