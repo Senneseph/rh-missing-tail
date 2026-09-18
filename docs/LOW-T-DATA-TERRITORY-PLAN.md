@@ -1,6 +1,15 @@
 # LOW-T DATA TERRITORY PLAN — closing t₀ < 1000 in the RH composition (2026-09-18)
 
-Status: **PLAN — ready to execute.** Companion to:
+Status: **DONE (2026-09-18) — the territory is FILLED at screen level:**
+207-point sweep, margin_new >= 1 at ALL points, global min
+**7.35737123 at t0 = 0.500000** (dual-precision anchor: dps-50
+7.35752136, |d| = 1.5e-4). Data: 813 zero slice of the committed
+LMFDB 1e7 list (md5 2f5e5b17b12906db8bba9bcab105e6ea), all 813 at
+the mpmath noise floor; independent mpmath walk cross-check
+bit-exact on the first 225. Full record: DISCOVERY_LOG day030
+low-t entry; results out_day030_lowt_sweep.txt.
+
+Companion to:
 `formal/RhAttack/S4Asm.lean` (the composition), the 25c/25d certification
 record (`day023_p01_certify.py`, `out_day023_p01_certify_*.txt`),
 `docs/KNOWN_LIMITATIONS.md`, `DISCOVERY_LOG.md` (25x/25d/25e entries).

@@ -5414,3 +5414,85 @@ re-pulled 2026-09-17 verified: Nt frontier 73426758 exact, seam gap
   exponential blow-up across 92 chunks ( OverflowError: intermediate
   overflow in fsum). Correct: per-chunk fsum partials, one exact
   outer fsum over the partials.
+
+
+## day030 (cont.) — LOW-T DATA TERRITORY FILLED: t0 < 1000, d0 <= 1/2 is SOUND at screen level; global min margin 7.35737123 at t0 = 0.5 (2026-09-18)
+
+- **The obligation.** S4A's composition takes S1-S4 over ALL off-pairs
+  (t0, d0); the bound theorems cover t >= 1000; the explicit residual
+  was t0 < 1000 - "data territory" (docs/LOW-T-DATA-TERRITORY-PLAN.md):
+  S1-S4 by DIRECT FINITE COMPUTATION over the actual zeros below 1.2e3.
+  d0 > 1/2 stays CITED (classical zero-free regions) - unchanged.
+- **The data (honest sourcing).** The canonical low-t list is the
+  slice of the COMMITTED LMFDB 1e7 file (zeros_T10000000_lmfdb.txt,
+  md5-locked, already the project oracle): 813 zeros in (0, 1200],
+  saved as scripts/rh/lowt/zeros_0_to_1p2e3.f64
+  (md5 2f5e5b17b12906db8bba9bcab105e6ea) + dec20 text. Verification:
+  monotone, min gap 0.2211, count = N(1200) asymptotic (+0 exact),
+  ALL 813 at the mpmath noise floor (|zeta(1/2+it)| <= 1.96e-12,
+  gate 1e-8, worst at t = 1051.5766 - a flat-zero region, consistent
+  with the 2.3e-11 floor measured at 169.912), first-ten vs the
+  FETCHED published 20-digit table (< 1e-13). Note: the plan
+  estimated "~745 zeros" (that is N(1000) ~ 744); the (0, 1200]
+  slice holds 813.
+- **The walk's value (kept, reframed).** An independent mpmath
+  bisection walk (day030_lowt_zeros.py) was run to t ~ 434 before
+  the data sourcing was fixed; its final checkpoint (225 zeros)
+  matches the committed LMFDB slice BIT-EXACT in float64
+  (max |d| = 0.0) - a genuinely independent computation agreeing
+  with the published data on 225 zeros, recorded as the cross-check
+  artifact. The walker itself became the project's pathology catalog
+  (all verified, all documented in the script): (a) the gap-0.2211
+  blind spot (pair 1054.7810 -> 1055.002146...): a window floor
+  t_cur + 0.3 put one true zero in a blind spot; ONE miss cascaded
+  into 13 downstream lobe-phase suppressions (the per-zero window
+  diagnosis tmp/missdiag.log isolated it); floor -> 0.05. (b) the
+  TWO-CROSSING case at 169.9119764794: an interlaced real-zeta point
+  (4.16e-3 from the flat true zero, |zeta| = 8.2e-3) and the true
+  zero (|zeta| = 0) sit in ONE coarse interval with same-sign ends -
+  a single ternary found only the interlaced |Im| minimum; the gate
+  correctly rejected it and never examined the true zero -> 25-pt
+  fine subdivision + every fine bracket bisected. (c) the polish
+  degradation: the |zeta|-polish ternary's noise floor ~1e-9
+  DESTROYED exact bisection roots (every residual ~1e-10);
+  polish only when the candidate is coarse (|zeta| > 1e-9), and
+  post-dedup keeps the MIN-residual member of a duplicate group.
+  Gates as recorded: final |zeta| < 1e-7 (the 1e-8/1e-11 versions
+  rejected the 169.912 lobe landing at |zeta| 2.86e-7 / 2.315e-11 -
+  noise-floor arithmetic, not data).
+- **Pre-flight.** t0 = 0.5/1/2: margin_new = 7.357 / 50.8 / 506.2,
+  residf ~ 1e-8 (noise), dev ~ 1e-3-2e-2, Efull 0.000. No low-t
+  breakdown (log-log terms, first zero 14.13 "far", wire P1.1e).
+- **The sweep (the deliverable).** 207-point log grid t0 in [0.5,
+  1000) (200 geomspace + 8 pins), p8_B + residf denominator, K the
+  P1.1e wire (main 25.2.12 + line product (0,1200] + density rem
+  (1200, 1e18] + ext (1e18, 1e30]), dev = min over the 500-grid +
+  pins |R_closed - 1|, S2 disc floor finitely. Result
+  (out_day030_lowt_sweep.txt): margin_new >= 1 AT ALL 207 POINTS.
+  GLOBAL MIN = 7.35737123 at t0 = 0.5 (the domain's low edge).
+  Shape: margin huge between the edge zeros (peak 3.0e5 at t0 ~ 9.8,
+  no zero before 14.13), descends through the zero-interaction
+  regime (1.26e4 @ 90.1; 638 @ 384.5; 120.4 @ 794.4; 60.3 @ 999) -
+  never approaches 1. residf max 6.5e-2 (vs margin >= 60 there).
+  S2 floor never binds (min -5289, i.e. inactive; margin carries).
+- **Dual-precision anchor (the low-t PIN).** dps-30 vs dps-50 at the
+  argmin and the far end: t0 = 0.5: 7.35737123 -> 7.35752136
+  (|d| = 1.5e-4); t0 = 794.42: 120.3977 -> 120.3980 (|d| = 3.0e-4);
+  t0 = 999: 60.2515 -> 60.2515 (|d| = 4.1e-5). Stable.
+- **Honest stance.** SCREEN-level: grid certificates + the proven
+  S4Growth cell control + certified tail; NOT a Lean certificate
+  (the Lean composition already treats this region as the explicit
+  third residual). The uniform low-t remainder lower bound has NO
+  closed form - the region is finite data by design; the zero-line
+  product is pinned data (f64 + md5 + verified properties), not a
+  closed form. d0 > 1/2: CITED, unchanged.
+- **Process notes (permanent).** np.save APPENDS .npy and
+  np.savez_compressed APPENDS .npz to any other suffix - check the
+  actual file name. A pgrep pattern inside its own kill command
+  matches the wrapper's command line (self-kill trap - second
+  occurrence; use the character-class trick and verify with
+  /proc/<pid>/comm = python3). After the machine crash-reboot the
+  checkpoint-resume recovered the walk from #175 with zero loss;
+  the resumed-and-pinned discipline (taskset -c 0-29, cores 30-31
+  free per the standing directive) is now standard for every
+  background job.
