@@ -1,0 +1,43 @@
+# day031 — T^4 CEILING: the t^4-wire strip closure margin, extended
+# data-side from the 25af ceiling t = 1e7 up to t = 1e9 (the S1
+# A-1 data ceiling).  Mirrors: verbatim 25af core (k=1 series fT,
+# B3Core Xwire on (6.2e7 t^4, 1.24e8 t^4]); W = p11.p8_B float64
+# (Lean-authoritative); Rcrude = Zbound(t) e^{X4} X4 (RVM-bounded);
+# Rmass log-form (band mass underflows by e^{-O(t^2 log t)}).
+
+[1] CLOSURE RATIO (W + Rcrude)/mown over the ceiling extension dps-30:
+    t          (W+Rcrude)/mown   W/mown      true_floor      z2=(w/u)^2   log(Rmass/Eenv)
+    1e+07        0.8980265    0.8980265    0.998937566  6.77e-116  -8.81701e+14
+    2e+07        0.8980265    0.8980265    0.998937566  1.65e-119  -3.64915e+15
+    5e+07        0.8980265    0.8980265    0.998937566  2.77e-124  -2.38180e+16
+    1e+08        0.8980265    0.8980265    0.998937566  6.77e-128  -9.83307e+16
+    2e+08        0.8980265    0.8980265    0.998937566  1.65e-131  -4.05558e+17
+    5e+08        0.8980265    0.8980265    0.998937566  2.77e-136  -2.63582e+18
+    1e+09        0.8980265    0.8980265    0.998937566  6.77e-140  -1.08491e+19
+    worst (W+Rcrude)/mown on the extension: 0.8980265  (25af constant 0.898026;
+    < 1 = the t^4 strip closure margin HOLDS to the S1 data ceiling)
+
+[2] CEILING POINT DUAL ANCHOR (t = 1e9, dps-30 vs dps-50, mpmath parts):
+    X4          dps30 = 1.1560290092e-68   dps50 = 1.1560290092e-68   |d| = 0.00e+00
+    logM        dps30 = -1.0849138389e+19   dps50 = -1.0849138389e+19   |d| = 0.00e+00
+    log(Rmass/Eenv)  dps30 = -1.0849138389e+19   dps50 = -1.0849138389e+19   |d| = 0.00e+00
+    W = 8.9802651013e-23 (float64 by construction in both — p11.p8_B);
+    true_floor(1e9) = 0.998937566 (25ad [4] constant 0.998937566
+    for t >= 1e4);  n4(1e9) = 31000000000000001546199597931025954714419200 (44 digits; float64 t^4 has
+    ~15.96 significant digits — W's relative precision is float64
+    grade, 1e-16, absorbed far below the 0.102 margin.)
+
+[3] CEILING STATEMENT:
+    - the t^4 wire's DATA-side verification now spans
+      [1e3, 1e9]: 25af (1e3..1e7) + this extension (1e7..1e9);
+      the closure ratio stays its t-constant 0.898.. across the
+      whole span (the margin is entirely on W's term1, t^4/16001-anchored).
+    - THE CEILING: t = 1e9 is the S1 DATA ceiling (the A-1 sweep
+      territory; above 1e9 the S1 side is model-grade only).  The
+      bound-level theorem (s4_strip_close, S4Strip.lean) speaks
+      for ALL t >= 1000 independently of this data side.
+    - no practical data-side ceiling below the S1 ceiling:
+      mpmath-range evaluation of the t^4 scale survives to
+      t >> 1e9 (n4 = 3.1e7 t^4 exact-integer display is the only
+      cosmetic limit; W itself only needs n^{-1/2}, float64-
+      representable to t ~ 1e151).

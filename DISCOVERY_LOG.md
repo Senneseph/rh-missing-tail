@@ -5611,3 +5611,56 @@ re-pulled 2026-09-17 verified: Nt frontier 73426758 exact, seam gap
   noncomputable Real defs; `rfl` closes def-equality goals for
   transparent noncomputable defs (probe-verified); `simp only
   [plainDef]` does not unfold plain defs at all.
+
+
+## day031 — T^4 CEILING LANDED: the t^4-wire strip closure margin verified data-side to t = 1e9 (the S1 data ceiling) (2026-09-18)
+
+- **The item (queue 3).** The 25af strip closure (s4_strip_close,
+  LEAN-PROVEN for ALL t >= 1000, day028 Stages 1-5) was verified
+  data-side only over [1e3, 1e7] (the 25af survey's 33-point log
+  grid).  The S1 A-1 data territory reaches t = 1e9.  The t^4
+  ceiling = extend the data-side verification to that ceiling and
+  state where the data side of the t^4 wire stops.  Script
+  scripts/rh/day031_t4ceiling.py (verbatim 25af pure core — k=1
+  series fT, B3Core Xwire on (6.2e7 t^4, 1.24e8 t^4], W = p11.p8_B
+  float64 Lean-authoritative; the 25af import would execute its
+  whole module-level survey, so the core is copied verbatim —
+  reuse, not reimplementation), out_day031_t4ceiling.txt.
+- **RESULT [1].** The closure ratio (W + Rcrude)/mown is CONSTAN
+  0.8980265 across the ceiling extension t in
+  {1e7, 2e7, 5e7, 1e8, 2e8, 5e8, 1e9} — the 25af t-constant
+  0.898026 to its printed digits (the margin is entirely on W's
+  term1, anchored to the 16001/15984 floor constant).  true_floor
+  = mown(t, 1/200)/Eenv = 0.998937566 flat (25ad [4]).  The series
+  truncation control z^2 = (w/u)^2 = 6.77e-140 at t = 1e9 (exact
+  far below dps-30; the log is never evaluated on the band —
+  discipline note held).  log(Rmass/Eenv) (the TRUE band-product
+  mass residual) descends -8.82e14 (1e7) -> -1.08e19 (1e9): the
+  mass residual is e^{-O(t^2 log t)} below the t^-2 budget at the
+  ceiling.
+- **RESULT [2] (dual anchor at the ceiling, t = 1e9).** dps-30 vs
+  dps-50 on the mpmath parts: X4 = 1.1560290092e-68, logM =
+  -1.0849138389e+19, log(Rmass/Eenv) = -1.0849138389e+19 — |d| =
+  0.00e+00 at both (full displayed-digit agreement).  W =
+  8.9802651013e-23 (float64 by construction in both — p11.p8_B;
+  n4(1e9) is a 44-digit ceil of a float64-grade t^4, ~15.96
+  significant digits — W's relative precision is float64 grade,
+  1e-16, absorbed far below the 0.102 margin — recorded, not
+  hidden).
+- **CEILING STATEMENT [3].** The t^4 wire's DATA-side verification
+  now spans [1e3, 1e9] (25af + this extension).  t = 1e9 is the S1
+  DATA ceiling (A-1 sweep territory; above it the S1 side is
+  model-grade only) — the bound-level theorem (s4_strip_close)
+  speaks for all t >= 1000 independently.  No practical data-side
+  ceiling below the S1 ceiling: mpmath-range evaluation of the t^4
+  scale survives far past 1e9 (the n4 exact-integer display is the
+  only cosmetic limit; W needs n^{-1/2}, float64-representable to
+  t ~ 1e151).
+- **Honest split.** MEASURED — the [1]/[2] extension + dual anchor
+  (script + output committed).  LEAN-PROVEN — s4_strip_close (the
+  bound side, all t >= 1000), S4Sharp demand (the t^4 scale is the
+  ONLY demand-shape scale: n > 2.495e7 t^4), 25af Stages 1-5
+  (certified constants).  PINNED — the 25ad [4] true-floor
+  constant, the C4 = 3.1e7 band witnesses.  CITED — Backlund RVM
+  (Zbound), Platt-Trudgian Sbar ledger (the X4 hypothesis class),
+  as in 25af.
