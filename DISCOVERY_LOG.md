@@ -5206,3 +5206,46 @@ re-pulled 2026-09-17 verified: Nt frontier 73426758 exact, seam gap
 - **LMFDB 1e9 -> 2e9 data extension LANDED (storage-bounded):** the full 3.06e10 extent would need ~2.5 TB (high-altitude shards are 80-150 MB each -- the per-band size grows with the zero density); with ~117-154 GB free the fetch was stopped and bounded to N < 2e9 (476 shards, N = 1002146000 ... 1999646000, each = 1001 blocks x 2100 t-units; record = 13 bytes = one 104-bit LE integer Z_k; values are DELTA-ENCODED per block: v_k = t0_block + (sum_j<=k Z_j) * 2^(-101) -- decoded per the LMFDB/Platt format of `convert_shards.py`; the .dat scale is 1/2^101, the converter's E19 name is misleading). All 476 shards md5-verified against LMFDB md5.txt (21 shards truncated by the first runaway fetch re-fetched; the pre-existing 1.5e9-region files md5-checked individually -- 21 BADs found and replaced). **Converted band:** `scripts/rh/hi1e9/zeros_1002e6_to_2000e6.f64` = 3,066,173,720 zeros in (1.002146e9, 2.001746e9] (`hi1e9/convert_hi3e10.py`, 68 s vectorized). Verification: first-shard decode is an EXACT f64 subset of the old band over the overlap (0 phantom/mismatched zeros in 6.3M points); block-0 Nt0 = 2852998638 matches the old-band Nt bookkeeping EXACTLY (Nt(1.0063459998e9) = 73426758 + 2792198664 = 2865625422 minus the 12,626,784 old-band zeros above 1.002146e9 = 2852998638 -- exact); tail monotone; G_LAST = 2001745999.6272411.
 - **Extended S1 run IN FLIGHT:** `day029_s1gap_hi.py` -- straddle windows 1.2/1.4/1.6/1.8/1.95e9 (full margin; new G_LAST = 2.0017e9; the rescheck-verified (400, 400) kernel configuration) + MODEL-LEVEL Efull points 2.5e9/4e9/6e9/1e10/2e10/3e10 (kernel = discrete to G_LAST + density quads; the zero region (G_LAST, t) is modeled, the margin is NOT evaluable there). This is the direct measurement of the Efull saturation-vs-divergence question (the S1 asymptotic question exactly stated).
 
+
+### day029 >1e9 hi-S1 — straddle A-2 LANDED + model points BROKEN + G-splice calibration in flight (2026-09-17, day029_s1gap_hi run)
+
+- **Straddles 5/5 LANDED (valid; t < G_LAST in all cases — the kernel singular
+  region sits inside the discrete data):** margin_new = 3.7697 / 2.6836 / 1.9726 /
+  1.4630 / 1.1441 at 1.2 / 1.4 / 1.6 / 1.8 / 1.95e9 (best over the 24 half-offsets
+  per window). The A-1 verification extends from [3.9e7, 1e9] to 1.95e9 with a
+  smooth monotone decay from the 1.0816 floor at 1e9 — no new structure, no dip.
+  The 25x artifact reproduces at all five straddles (margin_old 0.020--0.066).
+  residf pointwise-oscillatory 0.2166--2.5818, exactly as the sweep's reframe
+  predicted (residf is a pointwise quantity; Efull is the systematic one).
+  Efull (G2 = 2.0017e9 splice): +0.308 / +0.466 / +0.707 / +1.151 / +2.072 —
+  the within-run growth accelerates (deltas +0.16 / +0.24 / +0.44 / +0.92 per
+  0.2e9).
+- **MODEL points 2.5e9...3e10 BROKEN (flagged in the record, not silently
+  dropped):** the density quad over (G_LAST, 1e18] carries the log-singularity
+  at g = t in the INTERIOR of the 400-point geometric grid when t > G_LAST;
+  quadrature error O(1e6--1e7), observed junk +6.57e6 / +6.16e6 / +1.65e6 /
+  +1.47e7 / -1.7e5 / -6.4e6 (sign flips included — pure artifacts). Straddle
+  rows unaffected. Fix in flight: `day029_efull_model_fixed.py` splits the quad
+  at g = t (tanh-sinh, singularity on interval endpoints); grade stays MODEL/H2
+  with an honest O(1) per-point uncertainty (the true zeros in (G_LAST, t) are
+  unknown — the nearest-zero distance enters the singular-region sum as
+  log|t - gamma_nearest|).
+- **Efull LEVEL comparability under measurement:** the sweep series was computed
+  at splice G1 = 1.0063459998e9, the hi series at G2 = 2.0017459996e9. Efull(t; G)
+  as defined carries the sum-vs-density-quad error of the tail at splice G;
+  whether that error is O(1e-4) (fluctuating zero positions against the mean
+  density — the levels are then one honest series) or O(1) with a trend (the
+  levels are G-calibrated offsets) is measured directly by
+  `day029_efull_calibration.py`: D(t) = Efull(t; G1) - Efull(t; G2) =
+  sum_{(G1,G2]} f_t - integral_{(G1,G2]} f_t rho (the quads telescope), reported
+  raw plus a pole-free variant D' with the singular neighborhood (t-3, t+3)
+  excluded from both sum and integral (sum_excl / int_excl reported separately).
+  Self-check row at t = 1.0e9: Efull(G1) must reproduce the sweep's +2.5839 to
+  < 5e-4.
+- **Import-landmine fixed (systemic):** `day029_s1gap_hi.py` ran its whole job at
+  MODULE LEVEL with no `__main__` guard — importing it (twice, during smoke
+  tests) relaunched the job, leaving two generations of orphaned workers
+  (killed). Now: `def _main():` + guard; import = 4.5 s, no job. Lesson: any
+  data script that will be imported for its helpers gets a main guard before
+  first launch.
+- Runs (background): calibration 12 heights ~40--50 min; model-fix 6 heights ~25 min.
