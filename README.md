@@ -534,8 +534,8 @@ kernel — is specific enough to fail.
 
 - **Jesse S. Miller** — conception, experimental design,
   direction, interpretation. (BS - Mathematics and Computer Science, Emory University; working interest in the histories of the Natural Sciences.)  
-  **L. McGeorge** - Creative Partner
-  **hagr** - Spiritual Support
+  **L. McGeorge** [-](https://suno.com/song/033eff6c-a93d-49f4-b9d7-a4553ac12b6e) Creative Partner
+-  **hagr** - Spiritual Support
 - **Qwen (my quant, my trusty Clanker)** — @ Alibaba Qwen team for co-developing instrument:
   implementation, computation, drafting, and cross-checking, running locally as `pi-qwen-vast` (Pi Agent Harness, Vast.ai rental) on the first author's hardware.
 - **AI disclosure.** A large language model substantially contributed
