@@ -5337,3 +5337,42 @@ re-pulled 2026-09-17 verified: Nt frontier 73426758 exact, seam gap
   section's A/B numeric table stands, now with the corrected interval
   labels (the complex number is the (G_last, 1e18] interval; the real
   numbers are the (G1, 1e18] interval).
+
+## day030 (cont.) — MODEL POINTS REPAIRED: the v3 singularity-avoiding rem (2026-09-18)
+
+- **Fix (v3).** For t > G_LAST the rem quad (G, 1e18] is now
+  [G, t − 1e-8] + [t + 1e-8, 1e18] (each 400-cell geometric grid;
+  the integrands are SMOOTH on closed intervals, so no tanh-sinh node
+  can round onto g = t — the dps-30 endpoint razor is bypassed) + the
+  thin annulus [t−1e-8, t+1e-8] in closed form:
+  e·ρ_t·(log e − 1) + e·ρ_t·σ(t) per half (σ = the smooth complex part
+  of p at g = t; O(ε³) accurate; annulus re = −2.6e-6 at 4e9).
+  Two intermediate attempts documented as false steps: (i) the naive
+  split at g = t — endpoint log-singularity, tanh-sinh nodes round
+  exactly onto t at dps-30 → log(0) = −inf (razor: width-dependent);
+  (ii) analytic log-subtraction with the closed form W(log W − 1) —
+  missed that ρ(g) sits INSIDE the singular term (quantified error:
+  B(4e9) off by 2.08e20, caught by the direct-vs-modified comparison).
+- **Gates (all pass).** S1: no-split path mp-EXACTLY identical to the
+  sweep quad. S2: committed 1.95e9 straddle row replayed to |d| =
+  0.00e+00 (mnew/Efull/zeta/dev). S3: v3 form == direct form at 4e9
+  (A, B matched to 15 digits). Per-part complex-vs-real cross-checks
+  ≤ 7.6e-6 at every height.
+- **Repaired model Efull** (day029_model_split.py, log
+  tmp/day029_model_split4.log; full table + component breakdown in
+  scripts/rh/out_day029_s1gap_hi.txt): 2.5e9 −2.008433 / 4e9 −2.288352 /
+  6e9 −0.631216 / 1e10 −2.995276 / 2e10 −4.132862 / 3e10 −2.130128 —
+  all O(1)–O(4), oscillatory, **no divergence signature at the 3e10
+  edge** (contrast: the broken rows were O(1e6)–O(1e8) with sign
+  flips). Honesty note: each value is the O(1)–O(4) cancellation
+  residual of O(1e10)–O(1e11) components — H2 model-grade (screen).
+- **Shape read (the S1 asymptotic question, updated):** Efull is +O(1)
+  to +2.58 on [1e9, G_LAST] (sweep/straddles, real zeros) and
+  oscillatory O(1)–O(4) NEGATIVE on (G_LAST, 3e10] (model). No
+  divergence, no saturation to a constant — "oscillatory O(1)-scale"
+  is the current honest read up to the 3e10 edge of the density
+  model.
+- **Remaining (unchanged):** the D(t) splice-comparability calibration
+  (same-t, splices G1 vs G2) is now runnable through the v3 rem (the
+  −inf bug is subsumed); the t < 1000 band, CITED demotions, and the
+  Phase-1a ceiling remain as before.

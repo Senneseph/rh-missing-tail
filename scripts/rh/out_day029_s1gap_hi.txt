@@ -35,3 +35,43 @@ day029_efull_model_fixed.py (running).
 Separately: the Efull LEVEL comparability question across splice
 positions (G_LAST = 1.0063e9 vs 2.0017e9) is under measurement:
 day029_efull_calibration.py (running).
+
+============================================================
+RESOLUTION (appended 2026-09-18): MODEL ROWS REPAIRED
+(day029_model_split.py, v3 singularity-avoiding rem; mpmath 1.4.1,
+dps-30).  The rem quad for t > G_LAST is now [G, t - 1e-8] +
+[t + 1e-8, 1e18] (each 400-cell geometric grid, the integrals
+SMOOTH on closed intervals -- no tanh-sinh node can round onto
+the g = t singularity) + the thin annulus [t-1e-8, t+1e-8] in
+closed form (O(eps^3) accurate; annulus re = -2.6e-6 at 4e9).
+Gates: S1 no-split path EXACT-IDENTICAL to the sweep quad
+(mp-level equality); S2 committed 1.95e9 straddle row replayed to
+|d| = 0.00e+00 (mnew/Efull/zeta/dev); S3 v3 form == direct form at
+4e9: A = -3403249363.36782646... / B = -18578873718.20526504...
+(direct values matched to 15 digits); per-part complex-vs-real
+cross-checks <= 7.6e-6 at every height.
+
+MODEL-LEVEL Efull, REPAIRED (t > G_LAST = 2.0017459996e9;
+zero region (G_LAST, t) density-modeled; superseding the broken
+rows above):
+  t =   2.5e+09 : Efull = -2.008433   |zeta| = 0.0893
+  t =     4e+09 : Efull = -2.288352   |zeta| = 0.2179
+  t =     6e+09 : Efull = -0.631216   |zeta| = 2.2629
+  t =     1e+10 : Efull = -2.995276   |zeta| = 0.4576
+  t =     2e+10 : Efull = -4.132862   |zeta| = 0.3938
+  t =     3e+10 : Efull = -2.130128   |zeta| = 5.1502
+  (the 4e9 row independently reproduced by the direct-singular
+  interval quad in the same run: -2.288352, all 10 digits)
+
+COMPONENT BREAKDOWN (re-parts, logK = main + primorial + pairlog +
+A + B + ext; A = (G, t-1e-8], B = (t+1e-8, 1e18]):
+  2.5e9: la 2.7249e+08   pairlog +1.1866e+10   A -2.7494e+09   B -1.1353e+10   ext -4.04e+01
+  4.0e9: la 2.9236e+08   pairlog +1.8548e+10   A -3.4032e+09   B -1.8579e+10   ext -1.034e+02
+  6.0e9: la 3.0950e+08   pairlog +2.3652e+10   A -2.6833e+08   B -2.8405e+10   ext -2.327e+02
+  1.0e10: la 3.3110e+08  pairlog +2.9830e+10   A +1.0454e+10   B -4.8469e+10   ext -6.463e+02
+  2.0e10: la 3.6040e+08  pairlog +3.8069e+10   A +4.5859e+10   B -9.9996e+10   ext -2.585e+03
+  3.0e10: la 3.7754e+08  pairlog +4.2863e+10   A +8.5876e+10   B -1.5268e+11   ext -5.817e+03
+HONESTY NOTE: each Efull is the O(1)-O(4) CANCELLATION RESIDUAL of
+O(1e10)-O(1e11) components -> H2 model-grade (screen), not
+certificate-grade.  SHAPE over (2.5e9, 3e10]: oscillatory O(1)-O(4),
+no monotone trend, no divergence signature at the 3e10 edge.
