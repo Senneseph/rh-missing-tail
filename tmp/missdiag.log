@@ -1,0 +1,216 @@
+LMFDB zeros in (0, 1200]: 813
+  scanned 100/812
+  scanned 200/812
+  scanned 300/812
+  scanned 400/812
+  scanned 500/812
+  scanned 600/812
+  scanned 700/812
+  scanned 800/812
+=== 34 problematic zeros ===
+
+169.911976479412  [SIGN-ONLY-LOBE]  lobe fires but NOT the sign change (suspect)
+    169.6795  Im=+1.1670e-01
+    169.7745  Im=+4.8442e-02
+    169.8695  Im=+5.0039e-03
+    169.9645  Im=+1.0375e-02
+    170.0595  Im=+8.6092e-02
+
+247.136990074898  [SIGN-ONLY-LOBE]  lobe fires but NOT the sign change (suspect)
+    246.9359  Im=-2.9419e-01
+    247.0309  Im=-8.8659e-02
+    247.1259  Im=-3.0363e-03
+    247.2209  Im=-1.6353e-02
+
+260.805084504597  [SIGN-ONLY-LOBE]  lobe fires but NOT the sign change (suspect)
+    260.6494  Im=+7.3013e-02
+    260.7444  Im=+6.2591e-03
+    260.8394  Im=+1.2794e-02
+    260.9344  Im=+1.2126e-01
+
+282.465114765052  [SIGN-ONLY-LOBE]  lobe fires but NOT the sign change (suspect)
+    282.2843  Im=-1.8961e-01
+    282.3793  Im=-3.6161e-02
+    282.4743  Im=-8.7701e-04
+    282.5693  Im=-4.9938e-02
+
+295.573254878958  [SIGN-ONLY-LOBE]  lobe fires but NOT the sign change (suspect)
+    295.3604  Im=+8.6146e-02
+    295.4554  Im=+3.5571e-02
+    295.5504  Im=+2.2072e-03
+    295.6454  Im=+1.4927e-02
+
+310.109463146702  [SIGN-ONLY-LOBE]  lobe fires but NOT the sign change (suspect)
+    309.8945  Im=-4.8466e-01
+    309.9895  Im=-1.7095e-01
+    310.0845  Im=-1.6235e-02
+    310.1795  Im=-1.6979e-03
+
+373.061928372113  [SIGN-ONLY-LOBE]  lobe fires but NOT the sign change (suspect)
+    372.8209  Im=-5.8597e-01
+    372.9159  Im=-2.1861e-01
+    373.0109  Im=-3.2814e-02
+    373.1059  Im=-3.2924e-03
+    373.2009  Im=-8.5879e-02
+
+391.456083563638  [SIGN-ONLY-LOBE]  lobe fires but NOT the sign change (suspect)
+    391.2361  Im=-3.5304e-01
+    391.3311  Im=-1.0251e-01
+    391.4261  Im=-4.1589e-03
+    391.5211  Im=-2.5891e-02
+
+446.860622696430  [SIGN-ONLY-LOBE]  lobe fires but NOT the sign change (suspect)
+    446.7093  Im=-9.1776e-02
+    446.8043  Im=-4.3899e-04
+    446.8993  Im=-1.6640e-02
+    446.9943  Im=-9.1887e-02
+
+460.087944422176  [SIGN-ONLY-LOBE]  lobe fires but NOT the sign change (suspect)
+    459.9084  Im=+6.2512e-02
+    460.0034  Im=+5.9378e-03
+    460.0984  Im=+3.7225e-03
+    460.1934  Im=+9.4845e-02
+
+481.830339376287  [SIGN-ONLY-LOBE]  lobe fires but NOT the sign change (suspect)
+    481.6172  Im=-5.8242e-01
+    481.7122  Im=-1.8344e-01
+    481.8072  Im=-1.0998e-02
+    481.9022  Im=-3.0735e-02
+
+493.314441581785  [SIGN-ONLY-LOBE]  lobe fires but NOT the sign change (suspect)
+    493.1238  Im=-2.8284e-01
+    493.2188  Im=-8.7746e-02
+    493.3138  Im=-2.5023e-04
+    493.4088  Im=-1.2335e-03
+
+541.847437121201  [SIGN-ONLY-LOBE]  lobe fires but NOT the sign change (suspect)
+    541.6914  Im=+1.8369e-01
+    541.7864  Im=+2.8277e-02
+    541.8814  Im=+1.5852e-02
+    541.9764  Im=+2.0096e-01
+
+590.660397516765  [SIGN-ONLY-LOBE]  lobe fires but NOT the sign change (suspect)
+    590.4347  Im=-7.7073e-01
+    590.5297  Im=-2.7304e-01
+    590.6247  Im=-2.9808e-02
+    590.7197  Im=-1.4926e-02
+
+622.375002739779  [SIGN-ONLY-LOBE]  lobe fires but NOT the sign change (suspect)
+    622.1993  Im=+9.2431e-02
+    622.2943  Im=+1.1024e-02
+    622.3893  Im=+6.1359e-03
+    622.4843  Im=+1.2333e-01
+
+630.473887438292  [SIGN-ONLY-LOBE]  lobe fires but NOT the sign change (suspect)
+    630.2409  Im=-2.7499e-01
+    630.3359  Im=-9.2436e-02
+    630.4309  Im=-1.0811e-02
+    630.5259  Im=-1.7213e-03
+    630.6209  Im=-2.3911e-02
+
+672.458183584170  [SIGN-ONLY-LOBE]  lobe fires but NOT the sign change (suspect)
+    672.2386  Im=-4.5204e-01
+    672.3336  Im=-1.4293e-01
+    672.4286  Im=-1.0349e-02
+    672.5236  Im=-1.7175e-02
+
+681.894991533152  [SIGN-ONLY-LOBE]  lobe fires but NOT the sign change (suspect)
+    681.6572  Im=-5.5121e-01
+    681.7522  Im=-1.7545e-01
+    681.8472  Im=-1.2475e-02
+    681.9422  Im=-2.3793e-02
+    682.0372  Im=-1.4458e-01
+
+727.056403230049  [SIGN-ONLY-LOBE]  lobe fires but NOT the sign change (suspect)
+    726.8576  Im=-8.9277e-01
+    726.9526  Im=-3.0425e-01
+    727.0476  Im=-1.2197e-02
+    727.1426  Im=-6.7154e-04
+
+728.405481588934  [SIGN-ONLY-LOBE]  lobe fires but NOT the sign change (suspect)
+    728.2114  Im=-1.9057e-01
+    728.3064  Im=-5.4104e-02
+    728.4014  Im=-7.3233e-04
+    728.4964  Im=-6.2381e-03
+
+748.242754465085  [SIGN-ONLY-LOBE]  lobe fires but NOT the sign change (suspect)
+    748.0696  Im=+1.0272e-01
+    748.1646  Im=+2.6169e-02
+    748.2596  Im=+2.1229e-03
+    748.3546  Im=+8.5377e-02
+
+787.468463815910  [SIGN-ONLY-LOBE]  lobe fires but NOT the sign change (suspect)
+    787.2361  Im=+4.7099e-01
+    787.3311  Im=+1.9416e-01
+    787.4261  Im=+1.8702e-02
+    787.5211  Im=+4.4490e-02
+    787.6161  Im=+3.4779e-01
+
+790.059092364120  [SIGN-ONLY-LOBE]  lobe fires but NOT the sign change (suspect)
+    789.8585  Im=-6.0227e-01
+    789.9535  Im=-1.5732e-01
+    790.0485  Im=-1.7195e-03
+    790.1435  Im=-7.3648e-02
+
+850.645448466004  [SIGN-ONLY-LOBE]  lobe fires but NOT the sign change (suspect)
+    850.4473  Im=+3.7218e-01
+    850.5423  Im=+1.4220e-01
+    850.6373  Im=+4.1077e-03
+    850.7323  Im=+6.1812e-02
+
+931.852740745520  [SIGN-ONLY-LOBE]  lobe fires but NOT the sign change (suspect)
+    931.6892  Im=+2.6100e-01
+    931.7842  Im=+5.0527e-02
+    931.8792  Im=+1.2960e-02
+    931.9742  Im=+2.4259e-01
+
+934.385306837258  [SIGN-ONLY-LOBE]  lobe fires but NOT the sign change (suspect)
+    934.1477  Im=-6.9127e-01
+    934.2427  Im=-2.0838e-01
+    934.3377  Im=-1.0404e-02
+    934.4327  Im=-3.3630e-02
+    934.5277  Im=-1.8011e-01
+
+959.459168807068  [SIGN-ONLY-LOBE]  lobe fires but NOT the sign change (suspect)
+    959.2846  Im=+2.8312e-01
+    959.3796  Im=+3.9169e-02
+    959.4746  Im=+1.5242e-02
+    959.5696  Im=+2.9836e-01
+
+963.182086671311  [SIGN-ONLY-LOBE]  lobe fires but NOT the sign change (suspect)
+    963.0146  Im=-1.4960e-01
+    963.1096  Im=-1.9454e-02
+    963.2046  Im=-4.1500e-03
+    963.2996  Im=-4.9316e-02
+
+976.917202117051  [SIGN-ONLY-LOBE]  lobe fires but NOT the sign change (suspect)
+    976.7635  Im=+1.4458e-01
+    976.8585  Im=+9.9419e-03
+    976.9535  Im=+3.2142e-02
+    977.0485  Im=+2.7933e-01
+
+1025.265724197728  [SIGN-ONLY-LOBE]  lobe fires but NOT the sign change (suspect)
+    1025.0853  Im=-2.5232e-01
+    1025.1803  Im=-1.7512e-02
+    1025.2753  Im=-6.0923e-03
+    1025.3703  Im=-1.1249e-01
+
+1055.002146475686  [WINDOW]  zero outside (lo hi] = (1055.0810 1060.7810]
+
+1057.100043659618  [SIGN-ONLY-LOBE]  lobe fires but NOT the sign change (suspect)
+    1056.9888  Im=+7.4919e-02
+    1057.0838  Im=+7.0740e-03
+    1057.1788  Im=+5.6971e-03
+
+1158.001609027295  [SIGN-ONLY-LOBE]  lobe fires but NOT the sign change (suspect)
+    1157.8273  Im=+1.2451e-01
+    1157.9223  Im=+3.4746e-02
+    1158.0173  Im=+1.1790e-03
+    1158.1123  Im=+8.6881e-02
+
+1165.271227706458  [SIGN-ONLY-LOBE]  lobe fires but NOT the sign change (suspect)
+    1165.0376  Im=+1.3158e-01
+    1165.1326  Im=+5.4826e-02
+    1165.2276  Im=+1.1730e-04
+    1165.3226  Im=+3.0384e-02
+    1165.4176  Im=+1.9380e-01

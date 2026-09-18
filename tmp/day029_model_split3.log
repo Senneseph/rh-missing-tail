@@ -1,0 +1,25 @@
+day029 model-split re-run  (mpmath 1.4.1, dps-30)
+G_LAST = 2001745999.627241   NPTS = 400/400
+
+S1: no-split path identity (t < G_LAST)
+  nosplit flag      : True
+  rem_split total   : -8110700745.797528266906738
+  H.quad_rem total  : -8110700745.797528266906738
+  exact mpf equality: True
+S1 PASS  (23s)
+
+S2: committed-row replay at the 1.95e9 straddle
+  mnew   got=1.144107053719  want=1.144107053719  |d|=0.00e+00
+  Efull  got=2.071823336710  want=2.071823336710  |d|=0.00e+00
+  zeta   got=2.953821554580  want=2.953821554580  |d|=0.00e+00
+  dev    got=1.000000006154  want=1.000000006154  |d|=0.00e+00
+S2 PASS  (95s)
+
+S3: subtracted-singular form == direct form at t = 4e9
+  A (subtracted) : -3403249363.367826461791992
+  B (subtracted) : -18578873718.205265045166016
+Traceback (most recent call last):
+  File "/home/jsmille/Projects/rh-missing-tail/scripts/rh/day029_model_split.py", line 180, in <module>
+    % (r4["cfA"], r4["cfB"]), flush=True)
+       ~~^^^^^^^
+KeyError: 'cfA'

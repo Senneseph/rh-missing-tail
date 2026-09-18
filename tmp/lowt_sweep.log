@@ -1,0 +1,17 @@
+low-t zeros: 813; t0 grid: 207 points
+    0/207  t0=  0.5000  mnew=  7.3574  residf=1.27e-08  s2floor=-99.0000  (23 s)
+   20/207  t0=  1.0330  mnew= 56.1189  residf=1.00e-08  s2floor=-99.0000  (476 s)
+   40/207  t0=  2.1342  mnew=643.3340  residf=2.68e-08  s2floor=-99.0000  (923 s)
+   60/207  t0=  4.5809  mnew=16214.4005  residf=1.43e-07  s2floor=-99.0000  (1368 s)
+   80/207  t0=  9.8327  mnew=300338.0349  residf=1.53e-06  s2floor=-99.0000  (1803 s)
+  100/207  t0= 20.3144  mnew=205129.6191  residf=3.33e-06  s2floor=-99.0000  (2230 s)
+  120/207  t0= 43.6035  mnew=52971.1869  residf=1.03e-05  s2floor=-99.0000  (2655 s)
+  140/207  t0= 90.0852  mnew=12635.7477  residf=3.00e-04  s2floor=-99.0000  (3081 s)
+  160/207  t0=179.1429  mnew=3107.4635  residf=4.59e-04  s2floor=-99.0000  (3512 s)
+  180/207  t0=384.5190  mnew=638.4771  residf=1.62e-03  s2floor=-99.0000  (3949 s)
+  200/207  t0=794.4198  mnew=120.3983  residf=2.25e-03  s2floor=-389.5249  (4391 s)
+
+WROTE /home/jsmille/Projects/rh-missing-tail/scripts/rh/out_day030_lowt_sweep.txt
+GLOBAL MIN margin_new = 7.35737123 at t0 = 0.500000
+
+DONE

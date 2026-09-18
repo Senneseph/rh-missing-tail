@@ -1,0 +1,11 @@
+  checked 100/813
+  checked 200/813
+  checked 300/813
+  checked 400/813
+  checked 500/813
+  checked 600/813
+  checked 700/813
+  checked 800/813
+residual check: 813/813 pass (gate 1e-8)
+worst |zeta| = 1.96e-12 at t = 1051.576572
+RESID GATE PASS (all 813 at the mpmath noise floor)

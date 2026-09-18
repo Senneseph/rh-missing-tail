@@ -1,0 +1,4 @@
+N(1200) asymptotic ~ 812
+RESUME: checkpoint 175 zeros, last t = 357.952685
+  z=200  t=396.381854  res=1.3e-18  (437 s, 2.2 s/zero)
+  z=225  t=433.889218  res=2.2e-20  (900 s, 4.0 s/zero)

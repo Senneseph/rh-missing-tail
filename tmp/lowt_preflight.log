@@ -1,0 +1,11 @@
+low-t zeros loaded: 813 in (0, 1199]
+
+PRE-FLIGHT PROBES  t0 = 0.5, 1, 2:
+  t0      zeta      residf     dev        margin_new  Efull     nearest-g  s2floor
+   0.5  1.065349  1.265914e-08  2.480819e-03  7.357371  +0.000  14.1347  -99.00000
+   1.0  0.736305  9.581786e-09  6.201931e-03  50.845141  -0.000  14.1347  -99.00000
+   2.0  0.539633  2.521053e-08  2.108493e-02  506.237442  +0.000  14.1347  -99.00000
+
+PRE-FLIGHT: PASS (all margins large, proceed to the 200-point sweep)
+
+DONE

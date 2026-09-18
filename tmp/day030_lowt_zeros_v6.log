@@ -1,0 +1,8 @@
+N(1200) asymptotic ~ 812
+Traceback (most recent call last):
+  File "/home/jsmille/Projects/rh-missing-tail/scripts/rh/day030_lowt_zeros.py", line 116, in <module>
+    z, res = newton_zero_from(float(t), float(t1) - float(t))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jsmille/Projects/rh-missing-tail/scripts/rh/day030_lowt_zeros.py", line 88, in newton_zero_from
+    raise RuntimeError("no forward zero in (%.4f, %.4f]" % (lo, hi))
+RuntimeError: no forward zero in (169.3945, 173.0945]
