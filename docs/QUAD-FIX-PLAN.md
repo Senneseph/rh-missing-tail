@@ -109,9 +109,17 @@ NOT a version regression, NOT the sympy-downgrade.
 
 ## Environment state at discovery
 
-- host: mpmath **1.4.1** (user site, `--break-system-packages`),
-  sympy 1.14.0 (metadata pin `mpmath<1.4` now unsatisfied; runtime OK;
-  venv fallback approved), mpmath 1.3.0 the previously-downgraded build.
+- host: mpmath **1.4.1 — FINAL (owner decision 2026-09-17: keep it in
+  place, do not revisit the version question)**; user site,
+  `--break-system-packages`. sympy 1.14.0's metadata pin `mpmath<1.4`
+  is now unsatisfied — runtime verified fine; if a sympy script ever
+  breaks, it moves to its own venv (owner-approved); do not touch
+  sympy until then. mpmath 1.3.0 was the previously-downgraded build.
+- scratch directory: `rh-missing-tail/tmp/` (288 text files migrated in
+  2026-09-17 from system /tmp by the owner; git-ignored; use this for
+  all future scratch/logs, not system /tmp). The only non-project file
+  found in it during the ownership check: `gameoverlay_ui.txt`
+  (Steam log) — flagged for owner deletion.
 - Known-good historical reference: docker mpmath 1.3.0 (onset
   environment, 2026-09-10 record).
 - Runs in flight: step-1 cell diff (background).
