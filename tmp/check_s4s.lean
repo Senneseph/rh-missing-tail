@@ -1,0 +1,24 @@
+import RhAttack.S4Strip
+
+#check S4Strip.X4fun
+#check S4Strip.X4UBfun
+#check S4Strip.MTUBfun
+#check S4Strip.F4
+#check S4Strip.st_logB_anchor
+#check S4Strip.st_logG_anchor
+#check S4Strip.st_logB_pos
+#check S4Strip.st_B4log
+#check S4Strip.st_logG_pos
+#check S4Strip.st_G4log
+#check S4Strip.st_log19L
+#check S4Strip.st_hSsum
+#check S4Strip.st_inv_eps
+#check S4Strip.st_hCf4
+#check S4Strip.st_Kbarpos
+#check S4Strip.st_hKbar4
+#check S4Strip.st_X4nonneg
+#check S4Strip.st_X4bound
+#check S4Strip.st_XUBhalf
+#check S4Strip.st_X4half
+#check S4Strip.st_e12
+#check S4Strip.st_eX4le2

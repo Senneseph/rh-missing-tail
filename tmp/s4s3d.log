@@ -1,0 +1,226 @@
+RhAttack/S4Strip.lean:1152:8: error: No goals to be solved
+Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+RhAttack/S4Strip.lean:1194:90: error: unsolved goals
+t : ℝ
+ht : 1000 ≤ t
+ht0 : 0 < t
+hnpos : 0 < ↑(n4 t)
+hbase : 0 < 31000000 * t ^ 4
+hs : ‖↑(1 / 2) + ↑t * Complex.I‖ = √(1 / 4 + t * t)
+hnorm : √(1 / 4 + t * t) ≤ t + 1 / 2
+hmono : ↑(n4 t) ^ (-3 / 2) ≤ (31000000 * t ^ 4) ^ (-3 / 2)
+hsplit : (31000000 * t ^ 4) ^ (-3 / 2) = 31000000 ^ (-3 / 2) * t ^ (-6)
+hcore : t + 1 / 2 ≤ 2001 / 2000 * t
+⊢ t * t ^ (-6) = t ^ (-6) * t ^ 1
+RhAttack/S4Strip.lean:1211:8: error: No goals to be solved
+RhAttack/S4Strip.lean:1221:38: error: Application type mismatch: The argument
+  h5567
+has type
+  5567 ≤ √31000000
+but is expected to have type
+  31000000 * 5567 ≤ 31000000 * √31000000
+in the application
+  mul_le_mul_of_nonneg_left h5567
+RhAttack/S4Strip.lean:1259:8: error: Type mismatch
+  mul_le_mul_of_nonneg_right hmono hpre
+has type
+  ↑(n4 t) ^ (-3 / 2) * ((t + 1 / 2) / 12) ≤ (31000000 * t ^ 4) ^ (-3 / 2) * ((t + 1 / 2) / 12)
+but is expected to have type
+  (t + 1 / 2) / 12 * ↑(n4 t) ^ (-3 / 2) ≤ (t + 1 / 2) / 12 * (31000000 * t ^ 4) ^ (-3 / 2)
+RhAttack/S4Strip.lean:1333:8: error: No goals to be solved
+RhAttack/S4Strip.lean:1343:30: error: Application type mismatch: The argument
+  hd2
+has type
+  (0 : ℕ) < 31000000 ^ 2 * 5567
+but is expected to have type
+  (0 : ℝ) < 31000000 ^ 2 * 5567
+in the application
+  div_le_div_iff₀ hd1 hd2
+RhAttack/S4Strip.lean:1351:9: error: invalid 'calc' step, left-hand side is
+  17321 / 10 ^ 4 / 540 * 31000000 ^ (-5 / 2) * (1003 / 1000) ^ 3 : ℝ
+but is expected to be
+  17321 / 10 ^ 4 / 540 * (1 / (31000000 ^ 2 * √31000000)) * (1003 / 1000) ^ 3 : ℝ
+Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+RhAttack/S4Strip.lean:1353:51: error: unsolved goals
+t : ℝ
+ht : 1000 ≤ t
+H3 : ℝ := ‖(↑(1 / 2) + ↑t * Complex.I) * (↑(1 / 2) + ↑t * Complex.I + 1) * (↑(1 / 2) + ↑t * Complex.I + 2)‖
+hH3 : H3 = ‖(↑(1 / 2) + ↑t * Complex.I) * (↑(1 / 2) + ↑t * Complex.I + 1) * (↑(1 / 2) + ↑t * Complex.I + 2)‖
+ht0 : 0 < t
+hnpos : 0 < ↑(n4 t)
+hbase : 0 < 31000000 * t ^ 4
+hsqrt3 : √3 ≤ 17321 / 10 ^ 4
+hs3 : ‖(↑(1 / 2) + ↑t * Complex.I) * (↑(1 / 2) + ↑t * Complex.I + 1) * (↑(1 / 2) + ↑t * Complex.I + 2)‖ ≤ (t + 3) ^ 3
+hmono : ↑(n4 t) ^ (-5 / 2) ≤ (31000000 * t ^ 4) ^ (-5 / 2)
+hsplit : (31000000 * t ^ 4) ^ (-5 / 2) = 31000000 ^ (-5 / 2) * t ^ (-10)
+ht3 : (t + 3) ^ 3 ≤ (1003 / 1000) ^ 3 * t ^ 3
+ht7 : t ^ 3 * t ^ (-10) = t ^ (-7)
+hc : 0 < 31000000
+hbridge : 31000000 ^ (-5 / 2) = 1 / (31000000 ^ 2 * √31000000)
+h5567 : 5567 ≤ √31000000
+hrs : 0 < √31000000
+hinv : 1 / (31000000 ^ 2 * √31000000) ≤ 1 / (31000000 ^ 2 * 5567)
+hcoef : 0 ≤ 17321 / 10 ^ 4 / 540 * (1003 / 1000) ^ 3
+⊢ 31000000 ^ (-5 / 2) * (17477357134667 / 5400000000000000) =
+    (√31000000)⁻¹ * (17477357134667 / 5189400000000000000000000000000)
+RhAttack/S4Strip.lean:1362:10: error: No goals to be solved
+RhAttack/S4Strip.lean:1375:37: error: Application type mismatch: The argument
+  hsqrt3
+has type
+  √3 ≤ 17321 / 10 ^ 4
+but is expected to have type
+  √3 / 540 ≤ 17321 / 10 ^ 4 / 540
+in the application
+  mul_le_mul_of_nonneg_right hsqrt3
+RhAttack/S4Strip.lean:1376:47: error: Application type mismatch: The argument
+  mul_nonneg (norm_nonneg ?m.3018) (rpow_nonneg (LT.lt.le (st_n4pos t ht)) (-5 / 2))
+has type
+  0 ≤ ‖?m.3018‖ * ↑(n4 t) ^ (-5 / 2)
+but is expected to have type
+  0 ≤ ↑(n4 t) ^ (-5 / 2)
+in the application
+  mul_le_mul_of_nonneg_right hstep (mul_nonneg (norm_nonneg ?m.3018) (rpow_nonneg (LT.lt.le (st_n4pos t ht)) (-5 / 2)))
+RhAttack/S4Strip.lean:1380:10: error: Tactic `apply` failed: could not unify the conclusion of `@mul_nonneg`
+  0 ≤ ?a * ?b
+with the goal
+  0 ≤ ↑(n4 t) ^ (-5 / 2)
+
+Note: The full type of `@mul_nonneg` is
+  ∀ {α : Type ?u.2290} [inst : MulZeroClass α] {a b : α} [inst_1 : Preorder α] [PosMulMono α], 0 ≤ a → 0 ≤ b → 0 ≤ a * b
+
+t : ℝ
+ht : 1000 ≤ t
+H3 : ℝ := ‖(↑(1 / 2) + ↑t * Complex.I) * (↑(1 / 2) + ↑t * Complex.I + 1) * (↑(1 / 2) + ↑t * Complex.I + 2)‖
+hH3 : H3 = ‖(↑(1 / 2) + ↑t * Complex.I) * (↑(1 / 2) + ↑t * Complex.I + 1) * (↑(1 / 2) + ↑t * Complex.I + 2)‖
+ht0 : 0 < t
+hnpos : 0 < ↑(n4 t)
+hbase : 0 < 31000000 * t ^ 4
+hsqrt3 : √3 ≤ 17321 / 10 ^ 4
+hs3 : ‖(↑(1 / 2) + ↑t * Complex.I) * (↑(1 / 2) + ↑t * Complex.I + 1) * (↑(1 / 2) + ↑t * Complex.I + 2)‖ ≤ (t + 3) ^ 3
+hmono : ↑(n4 t) ^ (-5 / 2) ≤ (31000000 * t ^ 4) ^ (-5 / 2)
+hsplit : (31000000 * t ^ 4) ^ (-5 / 2) = 31000000 ^ (-5 / 2) * t ^ (-10)
+ht3 : (t + 3) ^ 3 ≤ (1003 / 1000) ^ 3 * t ^ 3
+ht7 : t ^ 3 * t ^ (-10) = t ^ (-7)
+hA3raw : 17321 / 10 ^ 4 / 540 * 31000000 ^ (-5 / 2) * (1003 / 1000) ^ 3 ≤ A3
+⊢ 0 ≤ ↑(n4 t) ^ (-5 / 2)
+RhAttack/S4Strip.lean:1386:10: error: unsolved goals
+case ha
+t : ℝ
+ht : 1000 ≤ t
+H3 : ℝ := ⋯
+hH3 : H3 = ‖(↑(1 / 2) + ↑t * Complex.I) * (↑(1 / 2) + ↑t * Complex.I + 1) * (↑(1 / 2) + ↑t * Complex.I + 2)‖
+ht0 : 0 < t
+hnpos : 0 < ↑(n4 t)
+hbase : 0 < 31000000 * t ^ 4
+hsqrt3 : √3 ≤ 17321 / 10 ^ 4
+hs3 : ‖(↑(1 / 2) + ↑t * Complex.I) * (↑(1 / 2) + ↑t * Complex.I + 1) * (↑(1 / 2) + ↑t * Complex.I + 2)‖ ≤ (t + 3) ^ 3
+hmono : ↑(n4 t) ^ (-5 / 2) ≤ (31000000 * t ^ 4) ^ (-5 / 2)
+hsplit : (31000000 * t ^ 4) ^ (-5 / 2) = 31000000 ^ (-5 / 2) * t ^ (-10)
+ht3 : (t + 3) ^ 3 ≤ (1003 / 1000) ^ 3 * t ^ 3
+ht7 : t ^ 3 * t ^ (-10) = t ^ (-7)
+hA3raw : 17321 / 10 ^ 4 / 540 * 31000000 ^ (-5 / 2) * (1003 / 1000) ^ 3 ≤ A3
+⊢ 0 ≤ ?ha.a
+
+case hb
+t : ℝ
+ht : 1000 ≤ t
+H3 : ℝ := ⋯
+hH3 : H3 = ‖(↑(1 / 2) + ↑t * Complex.I) * (↑(1 / 2) + ↑t * Complex.I + 1) * (↑(1 / 2) + ↑t * Complex.I + 2)‖
+ht0 : 0 < t
+hnpos : 0 < ↑(n4 t)
+hbase : 0 < 31000000 * t ^ 4
+hsqrt3 : √3 ≤ 17321 / 10 ^ 4
+hs3 : ‖(↑(1 / 2) + ↑t * Complex.I) * (↑(1 / 2) + ↑t * Complex.I + 1) * (↑(1 / 2) + ↑t * Complex.I + 2)‖ ≤ (t + 3) ^ 3
+hmono : ↑(n4 t) ^ (-5 / 2) ≤ (31000000 * t ^ 4) ^ (-5 / 2)
+hsplit : (31000000 * t ^ 4) ^ (-5 / 2) = 31000000 ^ (-5 / 2) * t ^ (-10)
+ht3 : (t + 3) ^ 3 ≤ (1003 / 1000) ^ 3 * t ^ 3
+ht7 : t ^ 3 * t ^ (-10) = t ^ (-7)
+hA3raw : 17321 / 10 ^ 4 / 540 * 31000000 ^ (-5 / 2) * (1003 / 1000) ^ 3 ≤ A3
+⊢ 0 ≤ ?b
+
+case ha.a
+t : ℝ
+ht : 1000 ≤ t
+H3 : ℝ := ⋯
+hH3 : H3 = ‖(↑(1 / 2) + ↑t * Complex.I) * (↑(1 / 2) + ↑t * Complex.I + 1) * (↑(1 / 2) + ↑t * Complex.I + 2)‖
+ht0 : 0 < t
+hnpos : 0 < ↑(n4 t)
+hbase : 0 < 31000000 * t ^ 4
+hsqrt3 : √3 ≤ 17321 / 10 ^ 4
+hs3 : ‖(↑(1 / 2) + ↑t * Complex.I) * (↑(1 / 2) + ↑t * Complex.I + 1) * (↑(1 / 2) + ↑t * Complex.I + 2)‖ ≤ (t + 3) ^ 3
+hmono : ↑(n4 t) ^ (-5 / 2) ≤ (31000000 * t ^ 4) ^ (-5 / 2)
+hsplit : (31000000 * t ^ 4) ^ (-5 / 2) = 31000000 ^ (-5 / 2) * t ^ (-10)
+ht3 : (t + 3) ^ 3 ≤ (1003 / 1000) ^ 3 * t ^ 3
+ht7 : t ^ 3 * t ^ (-10) = t ^ (-7)
+hA3raw : 17321 / 10 ^ 4 / 540 * 31000000 ^ (-5 / 2) * (1003 / 1000) ^ 3 ≤ A3
+⊢ ℝ
+
+case b
+t : ℝ
+ht : 1000 ≤ t
+H3 : ℝ := ⋯
+hH3 : H3 = ‖(↑(1 / 2) + ↑t * Complex.I) * (↑(1 / 2) + ↑t * Complex.I + 1) * (↑(1 / 2) + ↑t * Complex.I + 2)‖
+ht0 : 0 < t
+hnpos : 0 < ↑(n4 t)
+hbase : 0 < 31000000 * t ^ 4
+hsqrt3 : √3 ≤ 17321 / 10 ^ 4
+hs3 : ‖(↑(1 / 2) + ↑t * Complex.I) * (↑(1 / 2) + ↑t * Complex.I + 1) * (↑(1 / 2) + ↑t * Complex.I + 2)‖ ≤ (t + 3) ^ 3
+hmono : ↑(n4 t) ^ (-5 / 2) ≤ (31000000 * t ^ 4) ^ (-5 / 2)
+hsplit : (31000000 * t ^ 4) ^ (-5 / 2) = 31000000 ^ (-5 / 2) * t ^ (-10)
+ht3 : (t + 3) ^ 3 ≤ (1003 / 1000) ^ 3 * t ^ 3
+ht7 : t ^ 3 * t ^ (-10) = t ^ (-7)
+hA3raw : 17321 / 10 ^ 4 / 540 * 31000000 ^ (-5 / 2) * (1003 / 1000) ^ 3 ≤ A3
+⊢ ℝ
+RhAttack/S4Strip.lean:1387:33: error: linarith failed to find a contradiction
+t : ℝ
+ht : 1000 ≤ t
+H3 : ℝ := ‖(↑(1 / 2) + ↑t * Complex.I) * (↑(1 / 2) + ↑t * Complex.I + 1) * (↑(1 / 2) + ↑t * Complex.I + 2)‖
+hH3 : H3 = ‖(↑(1 / 2) + ↑t * Complex.I) * (↑(1 / 2) + ↑t * Complex.I + 1) * (↑(1 / 2) + ↑t * Complex.I + 2)‖
+ht0 : 0 < t
+hnpos : 0 < ↑(n4 t)
+hbase : 0 < 31000000 * t ^ 4
+hsqrt3 : √3 ≤ 17321 / 10 ^ 4
+hs3 : ‖(↑(1 / 2) + ↑t * Complex.I) * (↑(1 / 2) + ↑t * Complex.I + 1) * (↑(1 / 2) + ↑t * Complex.I + 2)‖ ≤ (t + 3) ^ 3
+hmono : ↑(n4 t) ^ (-5 / 2) ≤ (31000000 * t ^ 4) ^ (-5 / 2)
+hsplit : (31000000 * t ^ 4) ^ (-5 / 2) = 31000000 ^ (-5 / 2) * t ^ (-10)
+ht3 : (t + 3) ^ 3 ≤ (1003 / 1000) ^ 3 * t ^ 3
+ht7 : t ^ 3 * t ^ (-10) = t ^ (-7)
+hA3raw : 17321 / 10 ^ 4 / 540 * 31000000 ^ (-5 / 2) * (1003 / 1000) ^ 3 ≤ A3
+a✝ : ?m.3062 < 0
+⊢ False
+failed
+RhAttack/S4Strip.lean:1402:18: error: Tactic `apply` failed: could not unify the conclusion of `mul_le_mul_of_nonneg_right ht3`
+  (t + 3) ^ 3 * ?m.3613 ≤ (1003 / 1000) ^ 3 * t ^ 3 * ?m.3613
+with the goal
+  17321 / 10 ^ 4 / 540 * (31000000 ^ (-5 / 2) * t ^ (-10)) * (t + 3) ^ 3 ≤
+    17321 / 10 ^ 4 / 540 * (31000000 ^ (-5 / 2) * t ^ (-10)) * ((1003 / 1000) ^ 3 * t ^ 3)
+
+Note: The full type of `mul_le_mul_of_nonneg_right ht3` is
+  0 ≤ ?m.3613 → (t + 3) ^ 3 * ?m.3613 ≤ (1003 / 1000) ^ 3 * t ^ 3 * ?m.3613
+
+t : ℝ
+ht : 1000 ≤ t
+H3 : ℝ := ‖(↑(1 / 2) + ↑t * Complex.I) * (↑(1 / 2) + ↑t * Complex.I + 1) * (↑(1 / 2) + ↑t * Complex.I + 2)‖
+hH3 : H3 = ‖(↑(1 / 2) + ↑t * Complex.I) * (↑(1 / 2) + ↑t * Complex.I + 1) * (↑(1 / 2) + ↑t * Complex.I + 2)‖
+ht0 : 0 < t
+hnpos : 0 < ↑(n4 t)
+hbase : 0 < 31000000 * t ^ 4
+hsqrt3 : √3 ≤ 17321 / 10 ^ 4
+hs3 : ‖(↑(1 / 2) + ↑t * Complex.I) * (↑(1 / 2) + ↑t * Complex.I + 1) * (↑(1 / 2) + ↑t * Complex.I + 2)‖ ≤ (t + 3) ^ 3
+hmono : ↑(n4 t) ^ (-5 / 2) ≤ (31000000 * t ^ 4) ^ (-5 / 2)
+hsplit : (31000000 * t ^ 4) ^ (-5 / 2) = 31000000 ^ (-5 / 2) * t ^ (-10)
+ht3 : (t + 3) ^ 3 ≤ (1003 / 1000) ^ 3 * t ^ 3
+ht7 : t ^ 3 * t ^ (-10) = t ^ (-7)
+hA3raw : 17321 / 10 ^ 4 / 540 * 31000000 ^ (-5 / 2) * (1003 / 1000) ^ 3 ≤ A3
+⊢ 17321 / 10 ^ 4 / 540 * (31000000 ^ (-5 / 2) * t ^ (-10)) * (t + 3) ^ 3 ≤
+    17321 / 10 ^ 4 / 540 * (31000000 ^ (-5 / 2) * t ^ (-10)) * ((1003 / 1000) ^ 3 * t ^ 3)

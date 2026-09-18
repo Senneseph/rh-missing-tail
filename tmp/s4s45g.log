@@ -1,0 +1,29 @@
+RhAttack/S4Strip.lean:1580:4: error: No goals to be solved
+RhAttack/S4Strip.lean:1702:12: error: No goals to be solved
+RhAttack/S4Strip.lean:1711:18: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  t ^ (-2 + -1)
+in the target expression
+  t ^ (-2) * t ^ (-1) = t ^ (-3)
+
+t M : ℝ
+ht : 1000 ≤ t
+hM0 : 0 ≤ M
+hMz : M ≤ S4W.Zbound t
+ht0 : 0 < t
+hW : p8_B t (n4 t) ≤ A1 * t ^ (-2) + A2 * t ^ (-5) + A3 * t ^ (-7)
+hM : M * rexp (X4fun t) * X4fun t ≤ MTUBfun t
+C k : ℝ
+hC : 0 ≤ C
+hk3 : 3 ≤ k
+hpow : t ^ (-k) ≤ t ^ (-3)
+hA : C * t ^ (-k) ≤ C * t ^ (-3)
+hinv1 : t ^ (-1) ≤ 1 / 1000
+⊢ t ^ (-2) * t ^ (-1) = t ^ (-3)
+RhAttack/S4Strip.lean:1714:12: error: No goals to be solved
+RhAttack/S4Strip.lean:1738:4: error: Type mismatch
+  hMc
+has type
+  25 / 10 ^ 15 * t ^ (-(19 / 4)) ≤ 25 / 10 ^ 15 / 1000 * t ^ (-2)
+but is expected to have type
+  25 / 10 ^ 15 * t ^ (-19 / 4) ≤ 25 / 10 ^ 15 / 1000 * t ^ (-2)
+RhAttack/S4Strip.lean:1768:8: error(lean.unknownIdentifier): Unknown identifier `lt_le_trans`

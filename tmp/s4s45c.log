@@ -1,0 +1,334 @@
+RhAttack/S4Strip.lean:1499:4: error: Type mismatch
+  mul_le_mul_of_nonneg_left hd2
+    (mul_nonneg
+      (Mathlib.Meta.NormNum.isNat_le_true (Mathlib.Meta.NormNum.isNat_ofNat ℝ Nat.cast_zero)
+        (Mathlib.Meta.NormNum.isNat_ofNat ℝ (Eq.refl 4)) (Eq.refl true))
+      (pow_nonneg (LT.lt.le ht0) 2))
+has type
+  4 * t ^ 2 * (4 * (1 / 200) ^ 2) ≤ 4 * t ^ 2 * (4 * d ^ 2)
+but is expected to have type
+  4 * (1 / 200) ^ 2 * t ^ 2 ≤ 4 * d ^ 2 * t ^ 2
+RhAttack/S4Strip.lean:1533:24: error: Application type mismatch: The argument
+  ht0
+has type
+  0 < t
+but is expected to have type
+  0 ≤ t
+in the application
+  rpow_neg ht0
+RhAttack/S4Strip.lean:1554:13: error(lean.unknownIdentifier): Unknown identifier `st_hMterm`
+RhAttack/S4Strip.lean:1551:65: error: unsolved goals
+t M : ℝ
+ht : 1000 ≤ t
+hM0 : 0 ≤ M
+hMz : M ≤ S4W.Zbound t
+ht0 : 0 < t
+hW : p8_B t (n4 t) ≤ A1 * t ^ (-2) + A2 * t ^ (-5) + A3 * t ^ (-7)
+⊢ p8_B t (n4 t) + M * rexp (X4fun t) * X4fun t ≤ (A1 + (A2 + A3 + 25 / 10 ^ 15) / 1000) * t ^ (-2)
+RhAttack/S4Strip.lean:1606:61: error: unexpected token '/--'; expected 'lemma'
+RhAttack/S4Strip.lean:1617:6: error: Type mismatch
+  mul_le_mul_of_nonneg_right hexp hM0
+has type
+  rexp (X4fun t) * M ≤ 2 * M
+but is expected to have type
+  M * rexp (X4fun t) ≤ M * 2
+RhAttack/S4Strip.lean:1631:4: error: unsolved goals
+case ha
+t M : ℝ
+ht : 1000 ≤ t
+hM0 : 0 ≤ M
+hMz : M ≤ S4W.Zbound t
+ht0 : 0 < t
+L : ℝ := log t
+hLdef : L = log t
+hx4 : 0 ≤ X4fun t
+hx4ub : X4fun t ≤ X4UBfun t
+hexp : rexp (X4fun t) ≤ 2
+hs1 : M * rexp (X4fun t) * X4fun t ≤ M * 2 * X4fun t
+hs2 : M * 2 * X4fun t ≤ S4W.Zbound t * 2 * X4fun t
+hs3 : S4W.Zbound t * 2 * X4fun t = 32 / 10 * t ^ (1 / 4) * L * X4fun t
+⊢ 0 ≤ t ^ (1 / 4)
+RhAttack/S4Strip.lean:1632:6: error: Tactic `apply` failed: could not unify the conclusion of `@mul_nonneg`
+  0 ≤ ?a * ?b
+with the goal
+  0 ≤ L
+
+Note: The full type of `@mul_nonneg` is
+  ∀ {α : Type ?u.210} [inst : MulZeroClass α] {a b : α} [inst_1 : Preorder α] [PosMulMono α], 0 ≤ a → 0 ≤ b → 0 ≤ a * b
+
+case hb
+t M : ℝ
+ht : 1000 ≤ t
+hM0 : 0 ≤ M
+hMz : M ≤ S4W.Zbound t
+ht0 : 0 < t
+L : ℝ := ⋯
+hLdef : L = log t
+hx4 : 0 ≤ X4fun t
+hx4ub : X4fun t ≤ X4UBfun t
+hexp : rexp (X4fun t) ≤ 2
+hs1 : M * rexp (X4fun t) * X4fun t ≤ M * 2 * X4fun t
+hs2 : M * 2 * X4fun t ≤ S4W.Zbound t * 2 * X4fun t
+hs3 : S4W.Zbound t * 2 * X4fun t = 32 / 10 * t ^ (1 / 4) * L * X4fun t
+⊢ 0 ≤ L
+RhAttack/S4Strip.lean:1637:4: error: Type mismatch
+  mul_le_mul_of_nonneg_right hx4ub hc4
+has type
+  X4fun t * (32 / 10 * t ^ (1 / 4) * L) ≤ X4UBfun t * (32 / 10 * t ^ (1 / 4) * L)
+but is expected to have type
+  32 / 10 * t ^ (1 / 4) * L * X4fun t ≤ 32 / 10 * t ^ (1 / 4) * L * X4UBfun t
+RhAttack/S4Strip.lean:1641:4: error: No goals to be solved
+RhAttack/S4Strip.lean:1645:65: error(lean.invalidField): Invalid field `le`: The environment does not contain `Real.le.le`, so it is not possible to project the field `le` from an expression
+  ?m.629
+of type `Real.le✝ 0 (160 / 27)`
+RhAttack/S4Strip.lean:1657:6: error: Type mismatch
+  hcore
+has type
+  160 * L ≤ 27 * L * L
+but is expected to have type
+  160 * L * 10 ^ 16 ≤ 27 * L * L * 10 ^ 16
+RhAttack/S4Strip.lean:1672:30: error: Application type mismatch: The argument
+  ht0
+has type
+  0 < t
+but is expected to have type
+  0 ≤ t
+in the application
+  rpow_neg ht0
+RhAttack/S4Strip.lean:1675:10: error: No goals to be solved
+RhAttack/S4Strip.lean:1686:12: error: unsolved goals
+case ha
+t M : ℝ
+ht : 1000 ≤ t
+hM0 : 0 ≤ M
+hMz : M ≤ S4W.Zbound t
+ht0 : 0 < t
+L : ℝ := log t
+hLdef : L = log t
+hx4 : 0 ≤ X4fun t
+hx4ub : X4fun t ≤ X4UBfun t
+hexp : rexp (X4fun t) ≤ 2
+hs1 : M * rexp (X4fun t) * X4fun t ≤ M * 2 * X4fun t
+hs2 : M * 2 * X4fun t ≤ S4W.Zbound t * 2 * X4fun t
+hs3 : S4W.Zbound t * 2 * X4fun t = 32 / 10 * t ^ (1 / 4) * L * X4fun t
+hc4 : 0 ≤ 32 / 10 * t ^ (1 / 4) * L
+hs4 : 32 / 10 * t ^ (1 / 4) * L * X4fun t ≤ 32 / 10 * t ^ (1 / 4) * L * X4UBfun t
+hs5 : 32 / 10 * t ^ (1 / 4) * L * X4UBfun t = 32 / 10 * t ^ (1 / 4) * L * ((16 / 10 ^ 15 + 35 / 10 ^ 16 * L) / t ^ 6)
+hsumub : (16 / 10 ^ 15 + 35 / 10 ^ 16 * L) * L ≤ 62 / 10 ^ 16 * L * L
+⊢ 0 ≤ L
+RhAttack/S4Strip.lean:1687:14: error: Tactic `apply` failed: could not unify the conclusion of `@mul_nonneg`
+  0 ≤ ?a * ?b
+with the goal
+  0 ≤ t ^ (-23 / 4)
+
+Note: The full type of `@mul_nonneg` is
+  ∀ {α : Type ?u.1569} [inst : MulZeroClass α] {a b : α} [inst_1 : Preorder α] [PosMulMono α], 0 ≤ a → 0 ≤ b → 0 ≤ a * b
+
+case hb
+t M : ℝ
+ht : 1000 ≤ t
+hM0 : 0 ≤ M
+hMz : M ≤ S4W.Zbound t
+ht0 : 0 < t
+L : ℝ := ⋯
+hLdef : L = log t
+hx4 : 0 ≤ X4fun t
+hx4ub : X4fun t ≤ X4UBfun t
+hexp : rexp (X4fun t) ≤ 2
+hs1 : M * rexp (X4fun t) * X4fun t ≤ M * 2 * X4fun t
+hs2 : M * 2 * X4fun t ≤ S4W.Zbound t * 2 * X4fun t
+hs3 : S4W.Zbound t * 2 * X4fun t = 32 / 10 * t ^ (1 / 4) * L * X4fun t
+hc4 : 0 ≤ 32 / 10 * t ^ (1 / 4) * L
+hs4 : 32 / 10 * t ^ (1 / 4) * L * X4fun t ≤ 32 / 10 * t ^ (1 / 4) * L * X4UBfun t
+hs5 : 32 / 10 * t ^ (1 / 4) * L * X4UBfun t = 32 / 10 * t ^ (1 / 4) * L * ((16 / 10 ^ 15 + 35 / 10 ^ 16 * L) / t ^ 6)
+hsumub : (16 / 10 ^ 15 + 35 / 10 ^ 16 * L) * L ≤ 62 / 10 ^ 16 * L * L
+⊢ 0 ≤ t ^ (-23 / 4)
+Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+RhAttack/S4Strip.lean:1691:99: error: unsolved goals
+t M : ℝ
+ht : 1000 ≤ t
+hM0 : 0 ≤ M
+hMz : M ≤ S4W.Zbound t
+ht0 : 0 < t
+L : ℝ := log t
+hLdef : L = log t
+hx4 : 0 ≤ X4fun t
+hx4ub : X4fun t ≤ X4UBfun t
+hexp : rexp (X4fun t) ≤ 2
+hs1 : M * rexp (X4fun t) * X4fun t ≤ M * 2 * X4fun t
+hs2 : M * 2 * X4fun t ≤ S4W.Zbound t * 2 * X4fun t
+hs3 : S4W.Zbound t * 2 * X4fun t = 32 / 10 * t ^ (1 / 4) * L * X4fun t
+hc4 : 0 ≤ 32 / 10 * t ^ (1 / 4) * L
+hs4 : 32 / 10 * t ^ (1 / 4) * L * X4fun t ≤ 32 / 10 * t ^ (1 / 4) * L * X4UBfun t
+hs5 : 32 / 10 * t ^ (1 / 4) * L * X4UBfun t = 32 / 10 * t ^ (1 / 4) * L * ((16 / 10 ^ 15 + 35 / 10 ^ 16 * L) / t ^ 6)
+hsumub : (16 / 10 ^ 15 + 35 / 10 ^ 16 * L) * L ≤ 62 / 10 ^ 16 * L * L
+hpre : 0 ≤ 32 / 10 * L * t ^ (-23 / 4)
+⊢ L * t ^ (-23 / 4) * (1 / 19531250000000) + L ^ 2 * t ^ (-23 / 4) * (7 / 625000000000000) =
+    L ^ 2 * t ^ (-23 / 4) * (1 / 19531250000000) + L ^ 3 * t ^ (-23 / 4) * (7 / 625000000000000)
+Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+RhAttack/S4Strip.lean:1694:86: error: unsolved goals
+t M : ℝ
+ht : 1000 ≤ t
+hM0 : 0 ≤ M
+hMz : M ≤ S4W.Zbound t
+ht0 : 0 < t
+L : ℝ := log t
+hLdef : L = log t
+hx4 : 0 ≤ X4fun t
+hx4ub : X4fun t ≤ X4UBfun t
+hexp : rexp (X4fun t) ≤ 2
+hs1 : M * rexp (X4fun t) * X4fun t ≤ M * 2 * X4fun t
+hs2 : M * 2 * X4fun t ≤ S4W.Zbound t * 2 * X4fun t
+hs3 : S4W.Zbound t * 2 * X4fun t = 32 / 10 * t ^ (1 / 4) * L * X4fun t
+hc4 : 0 ≤ 32 / 10 * t ^ (1 / 4) * L
+hs4 : 32 / 10 * t ^ (1 / 4) * L * X4fun t ≤ 32 / 10 * t ^ (1 / 4) * L * X4UBfun t
+hs5 : 32 / 10 * t ^ (1 / 4) * L * X4UBfun t = 32 / 10 * t ^ (1 / 4) * L * ((16 / 10 ^ 15 + 35 / 10 ^ 16 * L) / t ^ 6)
+hsumub : (16 / 10 ^ 15 + 35 / 10 ^ 16 * L) * L ≤ 62 / 10 ^ 16 * L * L
+hpre : 0 ≤ 32 / 10 * L * t ^ (-23 / 4)
+⊢ L ^ 3 * t ^ (-23 / 4) * (31 / 1562500000000000) = L ^ 2 * t ^ (-23 / 4) * (31 / 1562500000000000)
+RhAttack/S4Strip.lean:1693:20: error: Type mismatch
+  mul_le_mul_of_nonneg_right hsumub hpre
+has type
+  (16 / 10 ^ 15 + 35 / 10 ^ 16 * L) * L * (32 / 10 * L * t ^ (-23 / 4)) ≤
+    62 / 10 ^ 16 * L * L * (32 / 10 * L * t ^ (-23 / 4))
+but is expected to have type
+  32 / 10 * L * t ^ (-23 / 4) * ((16 / 10 ^ 15 + 35 / 10 ^ 16 * L) * L) ≤
+    32 / 10 * L * t ^ (-23 / 4) * (62 / 10 ^ 16 * L * L)
+RhAttack/S4Strip.lean:1699:19: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  L
+in the target expression
+  log t * log t = log t ^ 2
+
+t M : ℝ
+ht : 1000 ≤ t
+hM0 : 0 ≤ M
+hMz : M ≤ S4W.Zbound t
+ht0 : 0 < t
+L : ℝ := log t
+hLdef : L = log t
+hx4 : 0 ≤ X4fun t
+hx4ub : X4fun t ≤ X4UBfun t
+hexp : rexp (X4fun t) ≤ 2
+hs1 : M * rexp (X4fun t) * X4fun t ≤ M * 2 * X4fun t
+hs2 : M * 2 * X4fun t ≤ S4W.Zbound t * 2 * X4fun t
+hs3 : S4W.Zbound t * 2 * X4fun t = 32 / 10 * t ^ (1 / 4) * L * X4fun t
+hc4 : 0 ≤ 32 / 10 * t ^ (1 / 4) * L
+hs4 : 32 / 10 * t ^ (1 / 4) * L * X4fun t ≤ 32 / 10 * t ^ (1 / 4) * L * X4UBfun t
+hs5 : 32 / 10 * t ^ (1 / 4) * L * X4UBfun t = 32 / 10 * t ^ (1 / 4) * L * ((16 / 10 ^ 15 + 35 / 10 ^ 16 * L) / t ^ 6)
+hsumub : (16 / 10 ^ 15 + 35 / 10 ^ 16 * L) * L ≤ 62 / 10 ^ 16 * L * L
+hs7 :
+  32 / 10 * t ^ (1 / 4) * L * ((16 / 10 ^ 15 + 35 / 10 ^ 16 * L) / t ^ 6) ≤
+    32 / 10 * (62 / 10 ^ 16) * L * L * t ^ (-23 / 4)
+⊢ log t * log t = log t ^ 2
+RhAttack/S4Strip.lean:1705:8: error: Tactic `apply` failed: could not unify the conclusion of `@mul_nonneg`
+  0 ≤ ?a * ?b
+with the goal
+  0 ≤ t ^ (-23 / 4)
+
+Note: The full type of `@mul_nonneg` is
+  ∀ {α : Type ?u.1974} [inst : MulZeroClass α] {a b : α} [inst_1 : Preorder α] [PosMulMono α], 0 ≤ a → 0 ≤ b → 0 ≤ a * b
+
+case hb
+t M : ℝ
+ht : 1000 ≤ t
+hM0 : 0 ≤ M
+hMz : M ≤ S4W.Zbound t
+ht0 : 0 < t
+L : ℝ := ⋯
+hLdef : L = log t
+hx4 : 0 ≤ X4fun t
+hx4ub : X4fun t ≤ X4UBfun t
+hexp : rexp (X4fun t) ≤ 2
+hs1 : M * rexp (X4fun t) * X4fun t ≤ M * 2 * X4fun t
+hs2 : M * 2 * X4fun t ≤ S4W.Zbound t * 2 * X4fun t
+hs3 : S4W.Zbound t * 2 * X4fun t = 32 / 10 * t ^ (1 / 4) * L * X4fun t
+hc4 : 0 ≤ 32 / 10 * t ^ (1 / 4) * L
+hs4 : 32 / 10 * t ^ (1 / 4) * L * X4fun t ≤ 32 / 10 * t ^ (1 / 4) * L * X4UBfun t
+hs5 : 32 / 10 * t ^ (1 / 4) * L * X4UBfun t = 32 / 10 * t ^ (1 / 4) * L * ((16 / 10 ^ 15 + 35 / 10 ^ 16 * L) / t ^ 6)
+hsumub : (16 / 10 ^ 15 + 35 / 10 ^ 16 * L) * L ≤ 62 / 10 ^ 16 * L * L
+hs7 :
+  32 / 10 * t ^ (1 / 4) * L * ((16 / 10 ^ 15 + 35 / 10 ^ 16 * L) / t ^ 6) ≤
+    32 / 10 * (62 / 10 ^ 16) * L * L * t ^ (-23 / 4)
+hL2 : L * L ≤ t
+⊢ 0 ≤ t ^ (-23 / 4)
+RhAttack/S4Strip.lean:1711:10: error: Type mismatch
+  mul_le_mul_of_nonneg_right hL2 hpre
+has type
+  L * L * (32 / 10 * (62 / 10 ^ 16) * t ^ (-23 / 4)) ≤ t * (32 / 10 * (62 / 10 ^ 16) * t ^ (-23 / 4))
+but is expected to have type
+  32 / 10 * (62 / 10 ^ 16) * t ^ (-23 / 4) * (L * L) ≤ 32 / 10 * (62 / 10 ^ 16) * t ^ (-23 / 4) * t
+RhAttack/S4Strip.lean:1726:73: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  t * t ^ (-23 / 4)
+in the target expression
+  32 / 10 * (62 / 10 ^ 16) * t * t ^ (-23 / 4) = 32 / 10 * (62 / 10 ^ 16) * t ^ (-19 / 4)
+
+t M : ℝ
+ht : 1000 ≤ t
+hM0 : 0 ≤ M
+hMz : M ≤ S4W.Zbound t
+ht0 : 0 < t
+L : ℝ := log t
+hLdef : L = log t
+hx4 : 0 ≤ X4fun t
+hx4ub : X4fun t ≤ X4UBfun t
+hexp : rexp (X4fun t) ≤ 2
+hs1 : M * rexp (X4fun t) * X4fun t ≤ M * 2 * X4fun t
+hs2 : M * 2 * X4fun t ≤ S4W.Zbound t * 2 * X4fun t
+hs3 : S4W.Zbound t * 2 * X4fun t = 32 / 10 * t ^ (1 / 4) * L * X4fun t
+hc4 : 0 ≤ 32 / 10 * t ^ (1 / 4) * L
+hs4 : 32 / 10 * t ^ (1 / 4) * L * X4fun t ≤ 32 / 10 * t ^ (1 / 4) * L * X4UBfun t
+hs5 : 32 / 10 * t ^ (1 / 4) * L * X4UBfun t = 32 / 10 * t ^ (1 / 4) * L * ((16 / 10 ^ 15 + 35 / 10 ^ 16 * L) / t ^ 6)
+hsumub : (16 / 10 ^ 15 + 35 / 10 ^ 16 * L) * L ≤ 62 / 10 ^ 16 * L * L
+hs7 :
+  32 / 10 * t ^ (1 / 4) * L * ((16 / 10 ^ 15 + 35 / 10 ^ 16 * L) / t ^ 6) ≤
+    32 / 10 * (62 / 10 ^ 16) * L * L * t ^ (-23 / 4)
+hs8 : 32 / 10 * (62 / 10 ^ 16) * L * L * t ^ (-23 / 4) ≤ 32 / 10 * (62 / 10 ^ 16) * t * t ^ (-23 / 4)
+ht19 : t * t ^ (-23 / 4) = t ^ (-19 / 4)
+⊢ 32 / 10 * (62 / 10 ^ 16) * t * t ^ (-23 / 4) = 32 / 10 * (62 / 10 ^ 16) * t ^ (-19 / 4)
+RhAttack/S4Strip.lean:1733:12: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ?m.3490 ^ (-(19 / 4))
+in the target expression
+  t ^ (-19 / 4) = 1 / t ^ (19 / 4)
+
+t M : ℝ
+ht : 1000 ≤ t
+hM0 : 0 ≤ M
+hMz : M ≤ S4W.Zbound t
+ht0 : 0 < t
+L : ℝ := log t
+hLdef : L = log t
+hx4 : 0 ≤ X4fun t
+hx4ub : X4fun t ≤ X4UBfun t
+hexp : rexp (X4fun t) ≤ 2
+hs1 : M * rexp (X4fun t) * X4fun t ≤ M * 2 * X4fun t
+hs2 : M * 2 * X4fun t ≤ S4W.Zbound t * 2 * X4fun t
+hs3 : S4W.Zbound t * 2 * X4fun t = 32 / 10 * t ^ (1 / 4) * L * X4fun t
+hc4 : 0 ≤ 32 / 10 * t ^ (1 / 4) * L
+hs4 : 32 / 10 * t ^ (1 / 4) * L * X4fun t ≤ 32 / 10 * t ^ (1 / 4) * L * X4UBfun t
+hs5 : 32 / 10 * t ^ (1 / 4) * L * X4UBfun t = 32 / 10 * t ^ (1 / 4) * L * ((16 / 10 ^ 15 + 35 / 10 ^ 16 * L) / t ^ 6)
+hsumub : (16 / 10 ^ 15 + 35 / 10 ^ 16 * L) * L ≤ 62 / 10 ^ 16 * L * L
+hs7 :
+  32 / 10 * t ^ (1 / 4) * L * ((16 / 10 ^ 15 + 35 / 10 ^ 16 * L) / t ^ 6) ≤
+    32 / 10 * (62 / 10 ^ 16) * L * L * t ^ (-23 / 4)
+hs8 : 32 / 10 * (62 / 10 ^ 16) * L * L * t ^ (-23 / 4) ≤ 32 / 10 * (62 / 10 ^ 16) * t * t ^ (-23 / 4)
+ht19 : t * t ^ (-23 / 4) = t ^ (-19 / 4)
+⊢ t ^ (-19 / 4) = 1 / t ^ (19 / 4)
+RhAttack/S4Strip.lean:1733:26: error: Application type mismatch: The argument
+  ht0
+has type
+  0 < t
+but is expected to have type
+  0 ≤ ?m.3490
+in the application
+  rpow_neg ht0
+RhAttack/S4Strip.lean:1755:8: error(lean.unknownIdentifier): Unknown identifier `lt_le_trans`

@@ -1,0 +1,4046 @@
+⚠ [8706/8709] Replayed RhAttack.P4Em
+warning: RhAttack/P4Em.lean:1:0: * '/- P4Em — the 1st-order Euler–Maclaurin formula, verbatim port.':
+Malformed or missing copyright header: `/-` should be alone on its own line.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:36:68: * '':
+Copyright line should start with 'Copyright (c) YYYY'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:36:68: * '':
+Copyright line should end with '. All rights reserved.'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:4:0: * '(spec: plan/40-prize-islands/rh-attack/spec/p4-tail-law-abstract.md §0.6/§T3).
+
+ROLE: the engine of the second-order EM derivation (Atom-2) and of the
+B̂₁-remainder form of the tail of Σ k^{−s} — the definition-side core
+of W_n(t) for the floor (P8).
+
+APPROACH: VERBATIM PORT (published solution, day-017 online search;
+the owner's hunch that a prior formalization exists — it does).
+Source: https://github.com/AlexKontorovich/PrimeNumberTheoremAnd, file
+PrimeNumberTheoremAnd/EulerMaclaurin.lean (a PNT proof in Lean,v4.32.2 / mathlib 905b958; the zeta-23-lean fork carries the same
+verbatim content). Copyright the PrimeNumberTheoremAnd contributors;
+Apache License 2.0. Local modifications: none (verbatim copy); the
+target of our pinned 4.33.1 mathlib. The one dependency,`Mathlib.NumberTheory.AbelSummation.sum_mul_eq_sub_sub_integral_mul`,is verified present in the pinned mathlib (AbelSummation.lean:129).
+`import Mathlib` (vs the upstream single-module import) matches this
+package's convention; the file body is otherwise byte-identical.
+Local deviations EXACTLY ONE: `set_option linter.style.longLine false`
+(upstream lines exceed 100 chars; reflowing would break byte-identity).
+
+STATUS: ported day-017; compiles against Lean 4.33.1 + pinned mathlib
+(build `lake build RhAttack.P4Em`, exit 0, 8706 jobs, no errors).
+
+THEOREMS (global names, per the ProbeN name-global pin):
+  B1 — the 1st periodic Bernoulli function (x − ⌊x⌋₊ − ½)
+  aestronglyMeasurable_B1, abs_B1_le_half
+  integral_deriv_mul_add_const, intervalIntegrable_deriv_mul_B1
+  integral_deriv_mul_floor_add_one
+  sum_eq_integral_add_integral_deriv — the 1st-order EM identity:
+    ∑ k ∈ Ioc ⌊a⌋ ⌊b⌋, f k =
+      f a·B1 a − f b·B1 b + ∫_a^b f + ∫_a^b f′·B1
+    for [RCLike 𝕜] (ℝ or ℂ), a ≤ b, f differentiable, f′ continuous.':
+If an authors line spans multiple lines, each line but the last must end with a trailing comma
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:4:0: * '(spec: pl':
+The authors line should begin with 'Authors: '
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:28:54: * '  ':
+Double spaces are not allowed.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:6:59: * ' and ':
+Please, do not use 'and'; use ',' instead.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:4:64: * '.':
+Please, do not end the authors' line with a period.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:3:0: * 'OUTLINE piece: P4 (the rigorous missing-tail law, §9 row P4), Atom-1':
+Second copyright line should be "Released under Apache 2.0 license as described in the file LICENSE."
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:41:0: The module doc-string for a file should be the first command after the imports.
+Please, add a module doc-string before `set_option linter.style.longLine false`.
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:1:0: * '/- P4Em — the 1st-order Euler–Maclaurin formula, verbatim port.':
+Malformed or missing copyright header: `/-` should be alone on its own line.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:36:68: * '':
+Copyright line should start with 'Copyright (c) YYYY'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:36:68: * '':
+Copyright line should end with '. All rights reserved.'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:4:0: * '(spec: plan/40-prize-islands/rh-attack/spec/p4-tail-law-abstract.md §0.6/§T3).
+
+ROLE: the engine of the second-order EM derivation (Atom-2) and of the
+B̂₁-remainder form of the tail of Σ k^{−s} — the definition-side core
+of W_n(t) for the floor (P8).
+
+APPROACH: VERBATIM PORT (published solution, day-017 online search;
+the owner's hunch that a prior formalization exists — it does).
+Source: https://github.com/AlexKontorovich/PrimeNumberTheoremAnd, file
+PrimeNumberTheoremAnd/EulerMaclaurin.lean (a PNT proof in Lean,v4.32.2 / mathlib 905b958; the zeta-23-lean fork carries the same
+verbatim content). Copyright the PrimeNumberTheoremAnd contributors;
+Apache License 2.0. Local modifications: none (verbatim copy); the
+target of our pinned 4.33.1 mathlib. The one dependency,`Mathlib.NumberTheory.AbelSummation.sum_mul_eq_sub_sub_integral_mul`,is verified present in the pinned mathlib (AbelSummation.lean:129).
+`import Mathlib` (vs the upstream single-module import) matches this
+package's convention; the file body is otherwise byte-identical.
+Local deviations EXACTLY ONE: `set_option linter.style.longLine false`
+(upstream lines exceed 100 chars; reflowing would break byte-identity).
+
+STATUS: ported day-017; compiles against Lean 4.33.1 + pinned mathlib
+(build `lake build RhAttack.P4Em`, exit 0, 8706 jobs, no errors).
+
+THEOREMS (global names, per the ProbeN name-global pin):
+  B1 — the 1st periodic Bernoulli function (x − ⌊x⌋₊ − ½)
+  aestronglyMeasurable_B1, abs_B1_le_half
+  integral_deriv_mul_add_const, intervalIntegrable_deriv_mul_B1
+  integral_deriv_mul_floor_add_one
+  sum_eq_integral_add_integral_deriv — the 1st-order EM identity:
+    ∑ k ∈ Ioc ⌊a⌋ ⌊b⌋, f k =
+      f a·B1 a − f b·B1 b + ∫_a^b f + ∫_a^b f′·B1
+    for [RCLike 𝕜] (ℝ or ℂ), a ≤ b, f differentiable, f′ continuous.':
+If an authors line spans multiple lines, each line but the last must end with a trailing comma
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:4:0: * '(spec: pl':
+The authors line should begin with 'Authors: '
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:28:54: * '  ':
+Double spaces are not allowed.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:6:59: * ' and ':
+Please, do not use 'and'; use ',' instead.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:4:64: * '.':
+Please, do not end the authors' line with a period.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:3:0: * 'OUTLINE piece: P4 (the rigorous missing-tail law, §9 row P4), Atom-1':
+Second copyright line should be "Released under Apache 2.0 license as described in the file LICENSE."
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:41:0: The module doc-string for a file should be the first command after the imports.
+Please, add a module doc-string before `@[expose] public section`.
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:1:0: * '/- P4Em — the 1st-order Euler–Maclaurin formula, verbatim port.':
+Malformed or missing copyright header: `/-` should be alone on its own line.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:36:68: * '':
+Copyright line should start with 'Copyright (c) YYYY'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:36:68: * '':
+Copyright line should end with '. All rights reserved.'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:4:0: * '(spec: plan/40-prize-islands/rh-attack/spec/p4-tail-law-abstract.md §0.6/§T3).
+
+ROLE: the engine of the second-order EM derivation (Atom-2) and of the
+B̂₁-remainder form of the tail of Σ k^{−s} — the definition-side core
+of W_n(t) for the floor (P8).
+
+APPROACH: VERBATIM PORT (published solution, day-017 online search;
+the owner's hunch that a prior formalization exists — it does).
+Source: https://github.com/AlexKontorovich/PrimeNumberTheoremAnd, file
+PrimeNumberTheoremAnd/EulerMaclaurin.lean (a PNT proof in Lean,v4.32.2 / mathlib 905b958; the zeta-23-lean fork carries the same
+verbatim content). Copyright the PrimeNumberTheoremAnd contributors;
+Apache License 2.0. Local modifications: none (verbatim copy); the
+target of our pinned 4.33.1 mathlib. The one dependency,`Mathlib.NumberTheory.AbelSummation.sum_mul_eq_sub_sub_integral_mul`,is verified present in the pinned mathlib (AbelSummation.lean:129).
+`import Mathlib` (vs the upstream single-module import) matches this
+package's convention; the file body is otherwise byte-identical.
+Local deviations EXACTLY ONE: `set_option linter.style.longLine false`
+(upstream lines exceed 100 chars; reflowing would break byte-identity).
+
+STATUS: ported day-017; compiles against Lean 4.33.1 + pinned mathlib
+(build `lake build RhAttack.P4Em`, exit 0, 8706 jobs, no errors).
+
+THEOREMS (global names, per the ProbeN name-global pin):
+  B1 — the 1st periodic Bernoulli function (x − ⌊x⌋₊ − ½)
+  aestronglyMeasurable_B1, abs_B1_le_half
+  integral_deriv_mul_add_const, intervalIntegrable_deriv_mul_B1
+  integral_deriv_mul_floor_add_one
+  sum_eq_integral_add_integral_deriv — the 1st-order EM identity:
+    ∑ k ∈ Ioc ⌊a⌋ ⌊b⌋, f k =
+      f a·B1 a − f b·B1 b + ∫_a^b f + ∫_a^b f′·B1
+    for [RCLike 𝕜] (ℝ or ℂ), a ≤ b, f differentiable, f′ continuous.':
+If an authors line spans multiple lines, each line but the last must end with a trailing comma
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:4:0: * '(spec: pl':
+The authors line should begin with 'Authors: '
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:28:54: * '  ':
+Double spaces are not allowed.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:6:59: * ' and ':
+Please, do not use 'and'; use ',' instead.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:4:64: * '.':
+Please, do not end the authors' line with a period.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:3:0: * 'OUTLINE piece: P4 (the rigorous missing-tail law, §9 row P4), Atom-1':
+Second copyright line should be "Released under Apache 2.0 license as described in the file LICENSE."
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:41:0: The module doc-string for a file should be the first command after the imports.
+Please, add a module doc-string before `open Finset Interval MeasureTheory`.
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:1:0: * '/- P4Em — the 1st-order Euler–Maclaurin formula, verbatim port.':
+Malformed or missing copyright header: `/-` should be alone on its own line.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:36:68: * '':
+Copyright line should start with 'Copyright (c) YYYY'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:36:68: * '':
+Copyright line should end with '. All rights reserved.'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:4:0: * '(spec: plan/40-prize-islands/rh-attack/spec/p4-tail-law-abstract.md §0.6/§T3).
+
+ROLE: the engine of the second-order EM derivation (Atom-2) and of the
+B̂₁-remainder form of the tail of Σ k^{−s} — the definition-side core
+of W_n(t) for the floor (P8).
+
+APPROACH: VERBATIM PORT (published solution, day-017 online search;
+the owner's hunch that a prior formalization exists — it does).
+Source: https://github.com/AlexKontorovich/PrimeNumberTheoremAnd, file
+PrimeNumberTheoremAnd/EulerMaclaurin.lean (a PNT proof in Lean,v4.32.2 / mathlib 905b958; the zeta-23-lean fork carries the same
+verbatim content). Copyright the PrimeNumberTheoremAnd contributors;
+Apache License 2.0. Local modifications: none (verbatim copy); the
+target of our pinned 4.33.1 mathlib. The one dependency,`Mathlib.NumberTheory.AbelSummation.sum_mul_eq_sub_sub_integral_mul`,is verified present in the pinned mathlib (AbelSummation.lean:129).
+`import Mathlib` (vs the upstream single-module import) matches this
+package's convention; the file body is otherwise byte-identical.
+Local deviations EXACTLY ONE: `set_option linter.style.longLine false`
+(upstream lines exceed 100 chars; reflowing would break byte-identity).
+
+STATUS: ported day-017; compiles against Lean 4.33.1 + pinned mathlib
+(build `lake build RhAttack.P4Em`, exit 0, 8706 jobs, no errors).
+
+THEOREMS (global names, per the ProbeN name-global pin):
+  B1 — the 1st periodic Bernoulli function (x − ⌊x⌋₊ − ½)
+  aestronglyMeasurable_B1, abs_B1_le_half
+  integral_deriv_mul_add_const, intervalIntegrable_deriv_mul_B1
+  integral_deriv_mul_floor_add_one
+  sum_eq_integral_add_integral_deriv — the 1st-order EM identity:
+    ∑ k ∈ Ioc ⌊a⌋ ⌊b⌋, f k =
+      f a·B1 a − f b·B1 b + ∫_a^b f + ∫_a^b f′·B1
+    for [RCLike 𝕜] (ℝ or ℂ), a ≤ b, f differentiable, f′ continuous.':
+If an authors line spans multiple lines, each line but the last must end with a trailing comma
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:4:0: * '(spec: pl':
+The authors line should begin with 'Authors: '
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:28:54: * '  ':
+Double spaces are not allowed.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:6:59: * ' and ':
+Please, do not use 'and'; use ',' instead.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:4:64: * '.':
+Please, do not end the authors' line with a period.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:3:0: * 'OUTLINE piece: P4 (the rigorous missing-tail law, §9 row P4), Atom-1':
+Second copyright line should be "Released under Apache 2.0 license as described in the file LICENSE."
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:41:0: The module doc-string for a file should be the first command after the imports.
+Please, add a module doc-string before `variable {𝕜 : Type*} [RCLike 𝕜] {f : ℝ → 𝕜} {a b : ℝ}`.
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:1:0: * '/- P4Em — the 1st-order Euler–Maclaurin formula, verbatim port.':
+Malformed or missing copyright header: `/-` should be alone on its own line.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:36:68: * '':
+Copyright line should start with 'Copyright (c) YYYY'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:36:68: * '':
+Copyright line should end with '. All rights reserved.'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:4:0: * '(spec: plan/40-prize-islands/rh-attack/spec/p4-tail-law-abstract.md §0.6/§T3).
+
+ROLE: the engine of the second-order EM derivation (Atom-2) and of the
+B̂₁-remainder form of the tail of Σ k^{−s} — the definition-side core
+of W_n(t) for the floor (P8).
+
+APPROACH: VERBATIM PORT (published solution, day-017 online search;
+the owner's hunch that a prior formalization exists — it does).
+Source: https://github.com/AlexKontorovich/PrimeNumberTheoremAnd, file
+PrimeNumberTheoremAnd/EulerMaclaurin.lean (a PNT proof in Lean,v4.32.2 / mathlib 905b958; the zeta-23-lean fork carries the same
+verbatim content). Copyright the PrimeNumberTheoremAnd contributors;
+Apache License 2.0. Local modifications: none (verbatim copy); the
+target of our pinned 4.33.1 mathlib. The one dependency,`Mathlib.NumberTheory.AbelSummation.sum_mul_eq_sub_sub_integral_mul`,is verified present in the pinned mathlib (AbelSummation.lean:129).
+`import Mathlib` (vs the upstream single-module import) matches this
+package's convention; the file body is otherwise byte-identical.
+Local deviations EXACTLY ONE: `set_option linter.style.longLine false`
+(upstream lines exceed 100 chars; reflowing would break byte-identity).
+
+STATUS: ported day-017; compiles against Lean 4.33.1 + pinned mathlib
+(build `lake build RhAttack.P4Em`, exit 0, 8706 jobs, no errors).
+
+THEOREMS (global names, per the ProbeN name-global pin):
+  B1 — the 1st periodic Bernoulli function (x − ⌊x⌋₊ − ½)
+  aestronglyMeasurable_B1, abs_B1_le_half
+  integral_deriv_mul_add_const, intervalIntegrable_deriv_mul_B1
+  integral_deriv_mul_floor_add_one
+  sum_eq_integral_add_integral_deriv — the 1st-order EM identity:
+    ∑ k ∈ Ioc ⌊a⌋ ⌊b⌋, f k =
+      f a·B1 a − f b·B1 b + ∫_a^b f + ∫_a^b f′·B1
+    for [RCLike 𝕜] (ℝ or ℂ), a ≤ b, f differentiable, f′ continuous.':
+If an authors line spans multiple lines, each line but the last must end with a trailing comma
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:4:0: * '(spec: pl':
+The authors line should begin with 'Authors: '
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:28:54: * '  ':
+Double spaces are not allowed.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:6:59: * ' and ':
+Please, do not use 'and'; use ',' instead.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:4:64: * '.':
+Please, do not end the authors' line with a period.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:3:0: * 'OUTLINE piece: P4 (the rigorous missing-tail law, §9 row P4), Atom-1':
+Second copyright line should be "Released under Apache 2.0 license as described in the file LICENSE."
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:41:0: The module doc-string for a file should be the first command after the imports.
+Please, add a module doc-string before `/-- The 1st Bernoulli function. -/
+noncomputable def B1 (x : ℝ) : ℝ :=
+  x - ⌊x⌋₊ - 1 / 2`.
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:1:0: * '/- P4Em — the 1st-order Euler–Maclaurin formula, verbatim port.':
+Malformed or missing copyright header: `/-` should be alone on its own line.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:36:68: * '':
+Copyright line should start with 'Copyright (c) YYYY'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:36:68: * '':
+Copyright line should end with '. All rights reserved.'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:4:0: * '(spec: plan/40-prize-islands/rh-attack/spec/p4-tail-law-abstract.md §0.6/§T3).
+
+ROLE: the engine of the second-order EM derivation (Atom-2) and of the
+B̂₁-remainder form of the tail of Σ k^{−s} — the definition-side core
+of W_n(t) for the floor (P8).
+
+APPROACH: VERBATIM PORT (published solution, day-017 online search;
+the owner's hunch that a prior formalization exists — it does).
+Source: https://github.com/AlexKontorovich/PrimeNumberTheoremAnd, file
+PrimeNumberTheoremAnd/EulerMaclaurin.lean (a PNT proof in Lean,v4.32.2 / mathlib 905b958; the zeta-23-lean fork carries the same
+verbatim content). Copyright the PrimeNumberTheoremAnd contributors;
+Apache License 2.0. Local modifications: none (verbatim copy); the
+target of our pinned 4.33.1 mathlib. The one dependency,`Mathlib.NumberTheory.AbelSummation.sum_mul_eq_sub_sub_integral_mul`,is verified present in the pinned mathlib (AbelSummation.lean:129).
+`import Mathlib` (vs the upstream single-module import) matches this
+package's convention; the file body is otherwise byte-identical.
+Local deviations EXACTLY ONE: `set_option linter.style.longLine false`
+(upstream lines exceed 100 chars; reflowing would break byte-identity).
+
+STATUS: ported day-017; compiles against Lean 4.33.1 + pinned mathlib
+(build `lake build RhAttack.P4Em`, exit 0, 8706 jobs, no errors).
+
+THEOREMS (global names, per the ProbeN name-global pin):
+  B1 — the 1st periodic Bernoulli function (x − ⌊x⌋₊ − ½)
+  aestronglyMeasurable_B1, abs_B1_le_half
+  integral_deriv_mul_add_const, intervalIntegrable_deriv_mul_B1
+  integral_deriv_mul_floor_add_one
+  sum_eq_integral_add_integral_deriv — the 1st-order EM identity:
+    ∑ k ∈ Ioc ⌊a⌋ ⌊b⌋, f k =
+      f a·B1 a − f b·B1 b + ∫_a^b f + ∫_a^b f′·B1
+    for [RCLike 𝕜] (ℝ or ℂ), a ≤ b, f differentiable, f′ continuous.':
+If an authors line spans multiple lines, each line but the last must end with a trailing comma
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:4:0: * '(spec: pl':
+The authors line should begin with 'Authors: '
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:28:54: * '  ':
+Double spaces are not allowed.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:6:59: * ' and ':
+Please, do not use 'and'; use ',' instead.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:4:64: * '.':
+Please, do not end the authors' line with a period.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:3:0: * 'OUTLINE piece: P4 (the rigorous missing-tail law, §9 row P4), Atom-1':
+Second copyright line should be "Released under Apache 2.0 license as described in the file LICENSE."
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:41:0: The module doc-string for a file should be the first command after the imports.
+Please, add a module doc-string before `@[fun_prop]
+lemma aestronglyMeasurable_B1 : AEStronglyMeasurable B1 :=
+  by
+  unfold B1
+  fun_prop`.
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:1:0: * '/- P4Em — the 1st-order Euler–Maclaurin formula, verbatim port.':
+Malformed or missing copyright header: `/-` should be alone on its own line.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:36:68: * '':
+Copyright line should start with 'Copyright (c) YYYY'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:36:68: * '':
+Copyright line should end with '. All rights reserved.'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:4:0: * '(spec: plan/40-prize-islands/rh-attack/spec/p4-tail-law-abstract.md §0.6/§T3).
+
+ROLE: the engine of the second-order EM derivation (Atom-2) and of the
+B̂₁-remainder form of the tail of Σ k^{−s} — the definition-side core
+of W_n(t) for the floor (P8).
+
+APPROACH: VERBATIM PORT (published solution, day-017 online search;
+the owner's hunch that a prior formalization exists — it does).
+Source: https://github.com/AlexKontorovich/PrimeNumberTheoremAnd, file
+PrimeNumberTheoremAnd/EulerMaclaurin.lean (a PNT proof in Lean,v4.32.2 / mathlib 905b958; the zeta-23-lean fork carries the same
+verbatim content). Copyright the PrimeNumberTheoremAnd contributors;
+Apache License 2.0. Local modifications: none (verbatim copy); the
+target of our pinned 4.33.1 mathlib. The one dependency,`Mathlib.NumberTheory.AbelSummation.sum_mul_eq_sub_sub_integral_mul`,is verified present in the pinned mathlib (AbelSummation.lean:129).
+`import Mathlib` (vs the upstream single-module import) matches this
+package's convention; the file body is otherwise byte-identical.
+Local deviations EXACTLY ONE: `set_option linter.style.longLine false`
+(upstream lines exceed 100 chars; reflowing would break byte-identity).
+
+STATUS: ported day-017; compiles against Lean 4.33.1 + pinned mathlib
+(build `lake build RhAttack.P4Em`, exit 0, 8706 jobs, no errors).
+
+THEOREMS (global names, per the ProbeN name-global pin):
+  B1 — the 1st periodic Bernoulli function (x − ⌊x⌋₊ − ½)
+  aestronglyMeasurable_B1, abs_B1_le_half
+  integral_deriv_mul_add_const, intervalIntegrable_deriv_mul_B1
+  integral_deriv_mul_floor_add_one
+  sum_eq_integral_add_integral_deriv — the 1st-order EM identity:
+    ∑ k ∈ Ioc ⌊a⌋ ⌊b⌋, f k =
+      f a·B1 a − f b·B1 b + ∫_a^b f + ∫_a^b f′·B1
+    for [RCLike 𝕜] (ℝ or ℂ), a ≤ b, f differentiable, f′ continuous.':
+If an authors line spans multiple lines, each line but the last must end with a trailing comma
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:4:0: * '(spec: pl':
+The authors line should begin with 'Authors: '
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:28:54: * '  ':
+Double spaces are not allowed.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:6:59: * ' and ':
+Please, do not use 'and'; use ',' instead.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:4:64: * '.':
+Please, do not end the authors' line with a period.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:3:0: * 'OUTLINE piece: P4 (the rigorous missing-tail law, §9 row P4), Atom-1':
+Second copyright line should be "Released under Apache 2.0 license as described in the file LICENSE."
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:41:0: The module doc-string for a file should be the first command after the imports.
+Please, add a module doc-string before `lemma abs_B1_le_half {x : ℝ} (hx : 0 ≤ x) : |B1 x| ≤ 1 / 2 :=
+  by
+  unfold B1
+  refine abs_le.mpr ⟨?_, ?_⟩
+  · grind [Nat.floor_le hx]
+  · grind [Nat.lt_succ_floor x]`.
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:1:0: * '/- P4Em — the 1st-order Euler–Maclaurin formula, verbatim port.':
+Malformed or missing copyright header: `/-` should be alone on its own line.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:36:68: * '':
+Copyright line should start with 'Copyright (c) YYYY'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:36:68: * '':
+Copyright line should end with '. All rights reserved.'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:4:0: * '(spec: plan/40-prize-islands/rh-attack/spec/p4-tail-law-abstract.md §0.6/§T3).
+
+ROLE: the engine of the second-order EM derivation (Atom-2) and of the
+B̂₁-remainder form of the tail of Σ k^{−s} — the definition-side core
+of W_n(t) for the floor (P8).
+
+APPROACH: VERBATIM PORT (published solution, day-017 online search;
+the owner's hunch that a prior formalization exists — it does).
+Source: https://github.com/AlexKontorovich/PrimeNumberTheoremAnd, file
+PrimeNumberTheoremAnd/EulerMaclaurin.lean (a PNT proof in Lean,v4.32.2 / mathlib 905b958; the zeta-23-lean fork carries the same
+verbatim content). Copyright the PrimeNumberTheoremAnd contributors;
+Apache License 2.0. Local modifications: none (verbatim copy); the
+target of our pinned 4.33.1 mathlib. The one dependency,`Mathlib.NumberTheory.AbelSummation.sum_mul_eq_sub_sub_integral_mul`,is verified present in the pinned mathlib (AbelSummation.lean:129).
+`import Mathlib` (vs the upstream single-module import) matches this
+package's convention; the file body is otherwise byte-identical.
+Local deviations EXACTLY ONE: `set_option linter.style.longLine false`
+(upstream lines exceed 100 chars; reflowing would break byte-identity).
+
+STATUS: ported day-017; compiles against Lean 4.33.1 + pinned mathlib
+(build `lake build RhAttack.P4Em`, exit 0, 8706 jobs, no errors).
+
+THEOREMS (global names, per the ProbeN name-global pin):
+  B1 — the 1st periodic Bernoulli function (x − ⌊x⌋₊ − ½)
+  aestronglyMeasurable_B1, abs_B1_le_half
+  integral_deriv_mul_add_const, intervalIntegrable_deriv_mul_B1
+  integral_deriv_mul_floor_add_one
+  sum_eq_integral_add_integral_deriv — the 1st-order EM identity:
+    ∑ k ∈ Ioc ⌊a⌋ ⌊b⌋, f k =
+      f a·B1 a − f b·B1 b + ∫_a^b f + ∫_a^b f′·B1
+    for [RCLike 𝕜] (ℝ or ℂ), a ≤ b, f differentiable, f′ continuous.':
+If an authors line spans multiple lines, each line but the last must end with a trailing comma
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:4:0: * '(spec: pl':
+The authors line should begin with 'Authors: '
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:28:54: * '  ':
+Double spaces are not allowed.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:6:59: * ' and ':
+Please, do not use 'and'; use ',' instead.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:4:64: * '.':
+Please, do not end the authors' line with a period.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:3:0: * 'OUTLINE piece: P4 (the rigorous missing-tail law, §9 row P4), Atom-1':
+Second copyright line should be "Released under Apache 2.0 license as described in the file LICENSE."
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:41:0: The module doc-string for a file should be the first command after the imports.
+Please, add a module doc-string before `lemma integral_deriv_mul_add_const (c : 𝕜) (hab : a ≤ b)
+    (h_int : IntervalIntegrable (deriv f) volume a b) (hf_diff : ∀ t ∈ Set.Icc a b, DifferentiableAt ℝ f t) :
+    ∫ t in a..b, (t + c) * deriv f t = (b + c) * f b - (a + c) * f a - ∫ t in a..b, f t :=
+  by
+  rw [← Set.uIcc_of_le hab] at hf_diff
+  have : ∀ t ∈ [[a, b]], HasDerivAt (fun (t : ℝ) ↦ t + c) 1 t :=
+    by
+    intro t ht
+    simp only [hasDerivAt_add_const_iff]
+    convert! ContinuousLinearMap.hasDerivAt (RCLike.ofRealCLM (K := 𝕜)) using 1
+    simp
+  replace hf_diff := fun t ht ↦ (hf_diff t ht).hasDerivAt
+  rw [intervalIntegral.integral_mul_deriv_eq_deriv_mul this hf_diff (by simp) h_int]
+  simp`.
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:1:0: * '/- P4Em — the 1st-order Euler–Maclaurin formula, verbatim port.':
+Malformed or missing copyright header: `/-` should be alone on its own line.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:36:68: * '':
+Copyright line should start with 'Copyright (c) YYYY'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:36:68: * '':
+Copyright line should end with '. All rights reserved.'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:4:0: * '(spec: plan/40-prize-islands/rh-attack/spec/p4-tail-law-abstract.md §0.6/§T3).
+
+ROLE: the engine of the second-order EM derivation (Atom-2) and of the
+B̂₁-remainder form of the tail of Σ k^{−s} — the definition-side core
+of W_n(t) for the floor (P8).
+
+APPROACH: VERBATIM PORT (published solution, day-017 online search;
+the owner's hunch that a prior formalization exists — it does).
+Source: https://github.com/AlexKontorovich/PrimeNumberTheoremAnd, file
+PrimeNumberTheoremAnd/EulerMaclaurin.lean (a PNT proof in Lean,v4.32.2 / mathlib 905b958; the zeta-23-lean fork carries the same
+verbatim content). Copyright the PrimeNumberTheoremAnd contributors;
+Apache License 2.0. Local modifications: none (verbatim copy); the
+target of our pinned 4.33.1 mathlib. The one dependency,`Mathlib.NumberTheory.AbelSummation.sum_mul_eq_sub_sub_integral_mul`,is verified present in the pinned mathlib (AbelSummation.lean:129).
+`import Mathlib` (vs the upstream single-module import) matches this
+package's convention; the file body is otherwise byte-identical.
+Local deviations EXACTLY ONE: `set_option linter.style.longLine false`
+(upstream lines exceed 100 chars; reflowing would break byte-identity).
+
+STATUS: ported day-017; compiles against Lean 4.33.1 + pinned mathlib
+(build `lake build RhAttack.P4Em`, exit 0, 8706 jobs, no errors).
+
+THEOREMS (global names, per the ProbeN name-global pin):
+  B1 — the 1st periodic Bernoulli function (x − ⌊x⌋₊ − ½)
+  aestronglyMeasurable_B1, abs_B1_le_half
+  integral_deriv_mul_add_const, intervalIntegrable_deriv_mul_B1
+  integral_deriv_mul_floor_add_one
+  sum_eq_integral_add_integral_deriv — the 1st-order EM identity:
+    ∑ k ∈ Ioc ⌊a⌋ ⌊b⌋, f k =
+      f a·B1 a − f b·B1 b + ∫_a^b f + ∫_a^b f′·B1
+    for [RCLike 𝕜] (ℝ or ℂ), a ≤ b, f differentiable, f′ continuous.':
+If an authors line spans multiple lines, each line but the last must end with a trailing comma
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:4:0: * '(spec: pl':
+The authors line should begin with 'Authors: '
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:28:54: * '  ':
+Double spaces are not allowed.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:6:59: * ' and ':
+Please, do not use 'and'; use ',' instead.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:4:64: * '.':
+Please, do not end the authors' line with a period.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:3:0: * 'OUTLINE piece: P4 (the rigorous missing-tail law, §9 row P4), Atom-1':
+Second copyright line should be "Released under Apache 2.0 license as described in the file LICENSE."
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:41:0: The module doc-string for a file should be the first command after the imports.
+Please, add a module doc-string before `lemma intervalIntegrable_deriv_mul_B1 (ha : 0 ≤ a) (hab : a ≤ b)
+    (h_cont : ContinuousOn (deriv f) [[a, b]]) : IntervalIntegrable (fun t ↦ deriv f t * B1 t) volume a b :=
+  by
+  refine IntervalIntegrable.continuousOn_mul ?_ h_cont
+  rw [intervalIntegrable_iff']
+  apply MeasureTheory.Measure.integrableOn_of_bounded (by simp) (by fun_prop) (M := 1 / 2)
+  filter_upwards [self_mem_ae_restrict (by measurability)] with x hx
+  rw [Set.uIcc_of_le hab, Set.mem_Icc] at hx
+  norm_cast
+  exact abs_B1_le_half (by linarith)`.
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:1:0: * '/- P4Em — the 1st-order Euler–Maclaurin formula, verbatim port.':
+Malformed or missing copyright header: `/-` should be alone on its own line.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:36:68: * '':
+Copyright line should start with 'Copyright (c) YYYY'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:36:68: * '':
+Copyright line should end with '. All rights reserved.'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:4:0: * '(spec: plan/40-prize-islands/rh-attack/spec/p4-tail-law-abstract.md §0.6/§T3).
+
+ROLE: the engine of the second-order EM derivation (Atom-2) and of the
+B̂₁-remainder form of the tail of Σ k^{−s} — the definition-side core
+of W_n(t) for the floor (P8).
+
+APPROACH: VERBATIM PORT (published solution, day-017 online search;
+the owner's hunch that a prior formalization exists — it does).
+Source: https://github.com/AlexKontorovich/PrimeNumberTheoremAnd, file
+PrimeNumberTheoremAnd/EulerMaclaurin.lean (a PNT proof in Lean,v4.32.2 / mathlib 905b958; the zeta-23-lean fork carries the same
+verbatim content). Copyright the PrimeNumberTheoremAnd contributors;
+Apache License 2.0. Local modifications: none (verbatim copy); the
+target of our pinned 4.33.1 mathlib. The one dependency,`Mathlib.NumberTheory.AbelSummation.sum_mul_eq_sub_sub_integral_mul`,is verified present in the pinned mathlib (AbelSummation.lean:129).
+`import Mathlib` (vs the upstream single-module import) matches this
+package's convention; the file body is otherwise byte-identical.
+Local deviations EXACTLY ONE: `set_option linter.style.longLine false`
+(upstream lines exceed 100 chars; reflowing would break byte-identity).
+
+STATUS: ported day-017; compiles against Lean 4.33.1 + pinned mathlib
+(build `lake build RhAttack.P4Em`, exit 0, 8706 jobs, no errors).
+
+THEOREMS (global names, per the ProbeN name-global pin):
+  B1 — the 1st periodic Bernoulli function (x − ⌊x⌋₊ − ½)
+  aestronglyMeasurable_B1, abs_B1_le_half
+  integral_deriv_mul_add_const, intervalIntegrable_deriv_mul_B1
+  integral_deriv_mul_floor_add_one
+  sum_eq_integral_add_integral_deriv — the 1st-order EM identity:
+    ∑ k ∈ Ioc ⌊a⌋ ⌊b⌋, f k =
+      f a·B1 a − f b·B1 b + ∫_a^b f + ∫_a^b f′·B1
+    for [RCLike 𝕜] (ℝ or ℂ), a ≤ b, f differentiable, f′ continuous.':
+If an authors line spans multiple lines, each line but the last must end with a trailing comma
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:4:0: * '(spec: pl':
+The authors line should begin with 'Authors: '
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:28:54: * '  ':
+Double spaces are not allowed.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:6:59: * ' and ':
+Please, do not use 'and'; use ',' instead.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:4:64: * '.':
+Please, do not end the authors' line with a period.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:3:0: * 'OUTLINE piece: P4 (the rigorous missing-tail law, §9 row P4), Atom-1':
+Second copyright line should be "Released under Apache 2.0 license as described in the file LICENSE."
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:41:0: The module doc-string for a file should be the first command after the imports.
+Please, add a module doc-string before `lemma integral_deriv_mul_floor_add_one (ha : 0 ≤ a) (hab : a ≤ b)
+    (hf_diff : ∀ t ∈ Set.Icc a b, DifferentiableAt ℝ f t) (h_cont : ContinuousOn (deriv f) [[a, b]]) :
+    ∫ t in a..b, deriv f t * (⌊t⌋₊ + 1) =
+      (b + 1 / 2) * f b - (a + 1 / 2) * f a - (∫ t in a..b, f t) - ∫ t in a..b, deriv f t * B1 t :=
+  by
+  calc
+    _ = ∫ t in a..b, (deriv f t * (t + 1 / 2) - deriv f t * B1 t) :=
+      by
+      congr
+      ext
+      simp only [B1]
+      push_cast
+      ring
+    _ = (∫ t in a..b, deriv f t * (t + 1 / 2)) - ∫ t in a..b, deriv f t * B1 t := by
+      exact
+        intervalIntegral.integral_sub (ContinuousOn.intervalIntegrable (by fun_prop))
+          (intervalIntegrable_deriv_mul_B1 ha hab h_cont)
+    _ = _ := by
+      conv => lhs; arg 1; arg 1; ext; rw [mul_comm]
+      rw [integral_deriv_mul_add_const _ hab h_cont.intervalIntegrable hf_diff]`.
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:1:0: * '/- P4Em — the 1st-order Euler–Maclaurin formula, verbatim port.':
+Malformed or missing copyright header: `/-` should be alone on its own line.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:36:68: * '':
+Copyright line should start with 'Copyright (c) YYYY'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:36:68: * '':
+Copyright line should end with '. All rights reserved.'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:4:0: * '(spec: plan/40-prize-islands/rh-attack/spec/p4-tail-law-abstract.md §0.6/§T3).
+
+ROLE: the engine of the second-order EM derivation (Atom-2) and of the
+B̂₁-remainder form of the tail of Σ k^{−s} — the definition-side core
+of W_n(t) for the floor (P8).
+
+APPROACH: VERBATIM PORT (published solution, day-017 online search;
+the owner's hunch that a prior formalization exists — it does).
+Source: https://github.com/AlexKontorovich/PrimeNumberTheoremAnd, file
+PrimeNumberTheoremAnd/EulerMaclaurin.lean (a PNT proof in Lean,v4.32.2 / mathlib 905b958; the zeta-23-lean fork carries the same
+verbatim content). Copyright the PrimeNumberTheoremAnd contributors;
+Apache License 2.0. Local modifications: none (verbatim copy); the
+target of our pinned 4.33.1 mathlib. The one dependency,`Mathlib.NumberTheory.AbelSummation.sum_mul_eq_sub_sub_integral_mul`,is verified present in the pinned mathlib (AbelSummation.lean:129).
+`import Mathlib` (vs the upstream single-module import) matches this
+package's convention; the file body is otherwise byte-identical.
+Local deviations EXACTLY ONE: `set_option linter.style.longLine false`
+(upstream lines exceed 100 chars; reflowing would break byte-identity).
+
+STATUS: ported day-017; compiles against Lean 4.33.1 + pinned mathlib
+(build `lake build RhAttack.P4Em`, exit 0, 8706 jobs, no errors).
+
+THEOREMS (global names, per the ProbeN name-global pin):
+  B1 — the 1st periodic Bernoulli function (x − ⌊x⌋₊ − ½)
+  aestronglyMeasurable_B1, abs_B1_le_half
+  integral_deriv_mul_add_const, intervalIntegrable_deriv_mul_B1
+  integral_deriv_mul_floor_add_one
+  sum_eq_integral_add_integral_deriv — the 1st-order EM identity:
+    ∑ k ∈ Ioc ⌊a⌋ ⌊b⌋, f k =
+      f a·B1 a − f b·B1 b + ∫_a^b f + ∫_a^b f′·B1
+    for [RCLike 𝕜] (ℝ or ℂ), a ≤ b, f differentiable, f′ continuous.':
+If an authors line spans multiple lines, each line but the last must end with a trailing comma
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:4:0: * '(spec: pl':
+The authors line should begin with 'Authors: '
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:28:54: * '  ':
+Double spaces are not allowed.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:6:59: * ' and ':
+Please, do not use 'and'; use ',' instead.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:4:64: * '.':
+Please, do not end the authors' line with a period.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:3:0: * 'OUTLINE piece: P4 (the rigorous missing-tail law, §9 row P4), Atom-1':
+Second copyright line should be "Released under Apache 2.0 license as described in the file LICENSE."
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:41:0: The module doc-string for a file should be the first command after the imports.
+Please, add a module doc-string before `theorem sum_eq_integral_add_integral_deriv (ha : 0 ≤ a) (hab : a ≤ b)
+    (hf_diff : ∀ t ∈ Set.Icc a b, DifferentiableAt ℝ f t) (h_cont : ContinuousOn (deriv f) [[a, b]]) :
+    ∑ k ∈ Ioc ⌊a⌋₊ ⌊b⌋₊, f k = f a * B1 a - f b * B1 b + (∫ t in a..b, f t) + ∫ t in a..b, deriv f t * B1 t :=
+  by
+  have := sum_mul_eq_sub_sub_integral_mul (fun _ ↦ 1) ha hab hf_diff (Set.uIcc_of_le hab ▸ h_cont).integrableOn_Icc
+  simp only [mul_one, sum_const, Nat.card_Icc, tsub_zero, nsmul_eq_mul, Nat.cast_add, Nat.cast_one] at this
+  rw [this, ← intervalIntegral.integral_of_le hab]
+  rw [integral_deriv_mul_floor_add_one ha hab hf_diff h_cont]
+  unfold B1
+  push_cast
+  ring`.
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:1:0: * '/- P4Em — the 1st-order Euler–Maclaurin formula, verbatim port.':
+Malformed or missing copyright header: `/-` should be alone on its own line.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:36:68: * '':
+Copyright line should start with 'Copyright (c) YYYY'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:36:68: * '':
+Copyright line should end with '. All rights reserved.'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:4:0: * '(spec: plan/40-prize-islands/rh-attack/spec/p4-tail-law-abstract.md §0.6/§T3).
+
+ROLE: the engine of the second-order EM derivation (Atom-2) and of the
+B̂₁-remainder form of the tail of Σ k^{−s} — the definition-side core
+of W_n(t) for the floor (P8).
+
+APPROACH: VERBATIM PORT (published solution, day-017 online search;
+the owner's hunch that a prior formalization exists — it does).
+Source: https://github.com/AlexKontorovich/PrimeNumberTheoremAnd, file
+PrimeNumberTheoremAnd/EulerMaclaurin.lean (a PNT proof in Lean,v4.32.2 / mathlib 905b958; the zeta-23-lean fork carries the same
+verbatim content). Copyright the PrimeNumberTheoremAnd contributors;
+Apache License 2.0. Local modifications: none (verbatim copy); the
+target of our pinned 4.33.1 mathlib. The one dependency,`Mathlib.NumberTheory.AbelSummation.sum_mul_eq_sub_sub_integral_mul`,is verified present in the pinned mathlib (AbelSummation.lean:129).
+`import Mathlib` (vs the upstream single-module import) matches this
+package's convention; the file body is otherwise byte-identical.
+Local deviations EXACTLY ONE: `set_option linter.style.longLine false`
+(upstream lines exceed 100 chars; reflowing would break byte-identity).
+
+STATUS: ported day-017; compiles against Lean 4.33.1 + pinned mathlib
+(build `lake build RhAttack.P4Em`, exit 0, 8706 jobs, no errors).
+
+THEOREMS (global names, per the ProbeN name-global pin):
+  B1 — the 1st periodic Bernoulli function (x − ⌊x⌋₊ − ½)
+  aestronglyMeasurable_B1, abs_B1_le_half
+  integral_deriv_mul_add_const, intervalIntegrable_deriv_mul_B1
+  integral_deriv_mul_floor_add_one
+  sum_eq_integral_add_integral_deriv — the 1st-order EM identity:
+    ∑ k ∈ Ioc ⌊a⌋ ⌊b⌋, f k =
+      f a·B1 a − f b·B1 b + ∫_a^b f + ∫_a^b f′·B1
+    for [RCLike 𝕜] (ℝ or ℂ), a ≤ b, f differentiable, f′ continuous.':
+If an authors line spans multiple lines, each line but the last must end with a trailing comma
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:4:0: * '(spec: pl':
+The authors line should begin with 'Authors: '
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:28:54: * '  ':
+Double spaces are not allowed.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:6:59: * ' and ':
+Please, do not use 'and'; use ',' instead.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:4:64: * '.':
+Please, do not end the authors' line with a period.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:3:0: * 'OUTLINE piece: P4 (the rigorous missing-tail law, §9 row P4), Atom-1':
+Second copyright line should be "Released under Apache 2.0 license as described in the file LICENSE."
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em.lean:41:0: The module doc-string for a file should be the first command after the imports.
+Please, add a module doc-string before ``.
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+⚠ [8707/8709] Replayed RhAttack.P4Tail
+warning: RhAttack/P4Tail.lean:1:0: * '/- P4Tail — local P4 atom-2: the 2nd-order finite Euler–Maclaurin identity.':
+Malformed or missing copyright header: `/-` should be alone on its own line.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:39:12: * '':
+Copyright line should start with 'Copyright (c) YYYY'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:39:12: * '':
+Copyright line should end with '. All rights reserved.'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:0: * '(spec: kainos plan/40-prize-islands/rh-attack/spec/p4-tail-law-abstract.md
+§0.6/§T2/§T3).
+
+ROLE: the second-order EM identity — the `−½f(n) + (1/12)(f′ m − f′ n) +
+B̂₂·f″` kernel — from which the W_n(t) form follows. Built exclusively
+from:
+  (1) the ported 1st-order identity (RhAttack.P4Em, published), (2) one polynomial IBP per unit period (u = the frozen per-period
+      polynomial (x−j)²−(x−j)+1/6, via
+      `intervalIntegral.integral_mul_deriv_eq_deriv_mul`), plus the a.e.
+      endpoint conversion `intervalIntegral.integral_congr_ae` for the
+      single kink point x = j+1, (3) the pinned additivity lemma
+      `intervalIntegral.sum_integral_adjacent_intervals_Ico`.
+This is the ONLY local invention of the P4 line (§0.6: no published
+Lean 2nd-order EM exists; the Isabelle AFP entry is the cross-check).
+
+APPROACH: integers n ≤ m; f : ℝ → 𝕜, [RCLike 𝕜] (ℝ or ℂ). Per-period
+identity (proven here: int_B1f'_period):
+
+    ∫_j^{j+1} B̂₁·f′ = (1/12)(f′(j+1) − f′(j)) − (1/2)·∫_j^{j+1} B̂₂·f″,
+from which the finite target follows by summation (atom-2b, next):
+
+    ∑ k ∈ Ioc n m, f k = ∫_n^m f + ½(f m − f n)
+                    + (1/12)(f′ m − f′ n) − ½·∫_n^m B̂₂·f″ dx.
+
+Signs verified numerically day-017 at σ=1.5 [3.2e-7] and σ=½ [3.7e-5]
+(mpmath dps-40 — computed, not recalled).
+
+STATUS: atom-2, day-017. Build: `lake build RhAttack.P4Tail`.
+
+THEOREMS (global names):
+  B2, B2_at_int, B2_of_Icc_int, B2poly, B2_of_B2poly, abs_B2_le, aestronglyMeasurable_B2, intervalIntegrable_B2_mul_deriv2, int_B1f'_period.':
+If an authors line spans multiple lines, each line but the last must end with a trailing comma
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:0: * '(spec: ka':
+The authors line should begin with 'Authors: '
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:10:0: * '  ':
+Double spaces are not allowed.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:31:47: * ' and ':
+Please, do not use 'and'; use ',' instead.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:71: * '.':
+Please, do not end the authors' line with a period.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:3:0: * 'OUTLINE piece: P4 (the rigorous missing-tail law, §9 row P4), atom-2':
+Second copyright line should be "Released under Apache 2.0 license as described in the file LICENSE."
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:44:0: The module doc-string for a file should be the first command after the imports.
+Please, add a module doc-string before `open Real Set MeasureTheory intervalIntegral Finset`.
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:1:0: * '/- P4Tail — local P4 atom-2: the 2nd-order finite Euler–Maclaurin identity.':
+Malformed or missing copyright header: `/-` should be alone on its own line.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:39:12: * '':
+Copyright line should start with 'Copyright (c) YYYY'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:39:12: * '':
+Copyright line should end with '. All rights reserved.'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:0: * '(spec: kainos plan/40-prize-islands/rh-attack/spec/p4-tail-law-abstract.md
+§0.6/§T2/§T3).
+
+ROLE: the second-order EM identity — the `−½f(n) + (1/12)(f′ m − f′ n) +
+B̂₂·f″` kernel — from which the W_n(t) form follows. Built exclusively
+from:
+  (1) the ported 1st-order identity (RhAttack.P4Em, published), (2) one polynomial IBP per unit period (u = the frozen per-period
+      polynomial (x−j)²−(x−j)+1/6, via
+      `intervalIntegral.integral_mul_deriv_eq_deriv_mul`), plus the a.e.
+      endpoint conversion `intervalIntegral.integral_congr_ae` for the
+      single kink point x = j+1, (3) the pinned additivity lemma
+      `intervalIntegral.sum_integral_adjacent_intervals_Ico`.
+This is the ONLY local invention of the P4 line (§0.6: no published
+Lean 2nd-order EM exists; the Isabelle AFP entry is the cross-check).
+
+APPROACH: integers n ≤ m; f : ℝ → 𝕜, [RCLike 𝕜] (ℝ or ℂ). Per-period
+identity (proven here: int_B1f'_period):
+
+    ∫_j^{j+1} B̂₁·f′ = (1/12)(f′(j+1) − f′(j)) − (1/2)·∫_j^{j+1} B̂₂·f″,
+from which the finite target follows by summation (atom-2b, next):
+
+    ∑ k ∈ Ioc n m, f k = ∫_n^m f + ½(f m − f n)
+                    + (1/12)(f′ m − f′ n) − ½·∫_n^m B̂₂·f″ dx.
+
+Signs verified numerically day-017 at σ=1.5 [3.2e-7] and σ=½ [3.7e-5]
+(mpmath dps-40 — computed, not recalled).
+
+STATUS: atom-2, day-017. Build: `lake build RhAttack.P4Tail`.
+
+THEOREMS (global names):
+  B2, B2_at_int, B2_of_Icc_int, B2poly, B2_of_B2poly, abs_B2_le, aestronglyMeasurable_B2, intervalIntegrable_B2_mul_deriv2, int_B1f'_period.':
+If an authors line spans multiple lines, each line but the last must end with a trailing comma
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:0: * '(spec: ka':
+The authors line should begin with 'Authors: '
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:10:0: * '  ':
+Double spaces are not allowed.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:31:47: * ' and ':
+Please, do not use 'and'; use ',' instead.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:71: * '.':
+Please, do not end the authors' line with a period.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:3:0: * 'OUTLINE piece: P4 (the rigorous missing-tail law, §9 row P4), atom-2':
+Second copyright line should be "Released under Apache 2.0 license as described in the file LICENSE."
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:44:0: The module doc-string for a file should be the first command after the imports.
+Please, add a module doc-string before `variable {𝕜 : Type*} [RCLike 𝕜]`.
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:1:0: * '/- P4Tail — local P4 atom-2: the 2nd-order finite Euler–Maclaurin identity.':
+Malformed or missing copyright header: `/-` should be alone on its own line.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:39:12: * '':
+Copyright line should start with 'Copyright (c) YYYY'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:39:12: * '':
+Copyright line should end with '. All rights reserved.'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:0: * '(spec: kainos plan/40-prize-islands/rh-attack/spec/p4-tail-law-abstract.md
+§0.6/§T2/§T3).
+
+ROLE: the second-order EM identity — the `−½f(n) + (1/12)(f′ m − f′ n) +
+B̂₂·f″` kernel — from which the W_n(t) form follows. Built exclusively
+from:
+  (1) the ported 1st-order identity (RhAttack.P4Em, published), (2) one polynomial IBP per unit period (u = the frozen per-period
+      polynomial (x−j)²−(x−j)+1/6, via
+      `intervalIntegral.integral_mul_deriv_eq_deriv_mul`), plus the a.e.
+      endpoint conversion `intervalIntegral.integral_congr_ae` for the
+      single kink point x = j+1, (3) the pinned additivity lemma
+      `intervalIntegral.sum_integral_adjacent_intervals_Ico`.
+This is the ONLY local invention of the P4 line (§0.6: no published
+Lean 2nd-order EM exists; the Isabelle AFP entry is the cross-check).
+
+APPROACH: integers n ≤ m; f : ℝ → 𝕜, [RCLike 𝕜] (ℝ or ℂ). Per-period
+identity (proven here: int_B1f'_period):
+
+    ∫_j^{j+1} B̂₁·f′ = (1/12)(f′(j+1) − f′(j)) − (1/2)·∫_j^{j+1} B̂₂·f″,
+from which the finite target follows by summation (atom-2b, next):
+
+    ∑ k ∈ Ioc n m, f k = ∫_n^m f + ½(f m − f n)
+                    + (1/12)(f′ m − f′ n) − ½·∫_n^m B̂₂·f″ dx.
+
+Signs verified numerically day-017 at σ=1.5 [3.2e-7] and σ=½ [3.7e-5]
+(mpmath dps-40 — computed, not recalled).
+
+STATUS: atom-2, day-017. Build: `lake build RhAttack.P4Tail`.
+
+THEOREMS (global names):
+  B2, B2_at_int, B2_of_Icc_int, B2poly, B2_of_B2poly, abs_B2_le, aestronglyMeasurable_B2, intervalIntegrable_B2_mul_deriv2, int_B1f'_period.':
+If an authors line spans multiple lines, each line but the last must end with a trailing comma
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:0: * '(spec: ka':
+The authors line should begin with 'Authors: '
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:10:0: * '  ':
+Double spaces are not allowed.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:31:47: * ' and ':
+Please, do not use 'and'; use ',' instead.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:71: * '.':
+Please, do not end the authors' line with a period.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:3:0: * 'OUTLINE piece: P4 (the rigorous missing-tail law, §9 row P4), atom-2':
+Second copyright line should be "Released under Apache 2.0 license as described in the file LICENSE."
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:44:0: The module doc-string for a file should be the first command after the imports.
+Please, add a module doc-string before `noncomputable section`.
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:1:0: * '/- P4Tail — local P4 atom-2: the 2nd-order finite Euler–Maclaurin identity.':
+Malformed or missing copyright header: `/-` should be alone on its own line.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:39:12: * '':
+Copyright line should start with 'Copyright (c) YYYY'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:39:12: * '':
+Copyright line should end with '. All rights reserved.'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:0: * '(spec: kainos plan/40-prize-islands/rh-attack/spec/p4-tail-law-abstract.md
+§0.6/§T2/§T3).
+
+ROLE: the second-order EM identity — the `−½f(n) + (1/12)(f′ m − f′ n) +
+B̂₂·f″` kernel — from which the W_n(t) form follows. Built exclusively
+from:
+  (1) the ported 1st-order identity (RhAttack.P4Em, published), (2) one polynomial IBP per unit period (u = the frozen per-period
+      polynomial (x−j)²−(x−j)+1/6, via
+      `intervalIntegral.integral_mul_deriv_eq_deriv_mul`), plus the a.e.
+      endpoint conversion `intervalIntegral.integral_congr_ae` for the
+      single kink point x = j+1, (3) the pinned additivity lemma
+      `intervalIntegral.sum_integral_adjacent_intervals_Ico`.
+This is the ONLY local invention of the P4 line (§0.6: no published
+Lean 2nd-order EM exists; the Isabelle AFP entry is the cross-check).
+
+APPROACH: integers n ≤ m; f : ℝ → 𝕜, [RCLike 𝕜] (ℝ or ℂ). Per-period
+identity (proven here: int_B1f'_period):
+
+    ∫_j^{j+1} B̂₁·f′ = (1/12)(f′(j+1) − f′(j)) − (1/2)·∫_j^{j+1} B̂₂·f″,
+from which the finite target follows by summation (atom-2b, next):
+
+    ∑ k ∈ Ioc n m, f k = ∫_n^m f + ½(f m − f n)
+                    + (1/12)(f′ m − f′ n) − ½·∫_n^m B̂₂·f″ dx.
+
+Signs verified numerically day-017 at σ=1.5 [3.2e-7] and σ=½ [3.7e-5]
+(mpmath dps-40 — computed, not recalled).
+
+STATUS: atom-2, day-017. Build: `lake build RhAttack.P4Tail`.
+
+THEOREMS (global names):
+  B2, B2_at_int, B2_of_Icc_int, B2poly, B2_of_B2poly, abs_B2_le, aestronglyMeasurable_B2, intervalIntegrable_B2_mul_deriv2, int_B1f'_period.':
+If an authors line spans multiple lines, each line but the last must end with a trailing comma
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:0: * '(spec: ka':
+The authors line should begin with 'Authors: '
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:10:0: * '  ':
+Double spaces are not allowed.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:31:47: * ' and ':
+Please, do not use 'and'; use ',' instead.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:71: * '.':
+Please, do not end the authors' line with a period.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:3:0: * 'OUTLINE piece: P4 (the rigorous missing-tail law, §9 row P4), atom-2':
+Second copyright line should be "Released under Apache 2.0 license as described in the file LICENSE."
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:44:0: The module doc-string for a file should be the first command after the imports.
+Please, add a module doc-string before `/-- The 2nd periodic Bernoulli function: B̂₂(x) = (x−⌊x⌋₊)² − (x−⌊x⌋₊) + 1/6. -/
+def B2 (x : ℝ) : ℝ :=
+  (x - ⌊x⌋₊) ^ 2 - (x - ⌊x⌋₊) + 1 / 6`.
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:1:0: * '/- P4Tail — local P4 atom-2: the 2nd-order finite Euler–Maclaurin identity.':
+Malformed or missing copyright header: `/-` should be alone on its own line.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:39:12: * '':
+Copyright line should start with 'Copyright (c) YYYY'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:39:12: * '':
+Copyright line should end with '. All rights reserved.'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:0: * '(spec: kainos plan/40-prize-islands/rh-attack/spec/p4-tail-law-abstract.md
+§0.6/§T2/§T3).
+
+ROLE: the second-order EM identity — the `−½f(n) + (1/12)(f′ m − f′ n) +
+B̂₂·f″` kernel — from which the W_n(t) form follows. Built exclusively
+from:
+  (1) the ported 1st-order identity (RhAttack.P4Em, published), (2) one polynomial IBP per unit period (u = the frozen per-period
+      polynomial (x−j)²−(x−j)+1/6, via
+      `intervalIntegral.integral_mul_deriv_eq_deriv_mul`), plus the a.e.
+      endpoint conversion `intervalIntegral.integral_congr_ae` for the
+      single kink point x = j+1, (3) the pinned additivity lemma
+      `intervalIntegral.sum_integral_adjacent_intervals_Ico`.
+This is the ONLY local invention of the P4 line (§0.6: no published
+Lean 2nd-order EM exists; the Isabelle AFP entry is the cross-check).
+
+APPROACH: integers n ≤ m; f : ℝ → 𝕜, [RCLike 𝕜] (ℝ or ℂ). Per-period
+identity (proven here: int_B1f'_period):
+
+    ∫_j^{j+1} B̂₁·f′ = (1/12)(f′(j+1) − f′(j)) − (1/2)·∫_j^{j+1} B̂₂·f″,
+from which the finite target follows by summation (atom-2b, next):
+
+    ∑ k ∈ Ioc n m, f k = ∫_n^m f + ½(f m − f n)
+                    + (1/12)(f′ m − f′ n) − ½·∫_n^m B̂₂·f″ dx.
+
+Signs verified numerically day-017 at σ=1.5 [3.2e-7] and σ=½ [3.7e-5]
+(mpmath dps-40 — computed, not recalled).
+
+STATUS: atom-2, day-017. Build: `lake build RhAttack.P4Tail`.
+
+THEOREMS (global names):
+  B2, B2_at_int, B2_of_Icc_int, B2poly, B2_of_B2poly, abs_B2_le, aestronglyMeasurable_B2, intervalIntegrable_B2_mul_deriv2, int_B1f'_period.':
+If an authors line spans multiple lines, each line but the last must end with a trailing comma
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:0: * '(spec: ka':
+The authors line should begin with 'Authors: '
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:10:0: * '  ':
+Double spaces are not allowed.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:31:47: * ' and ':
+Please, do not use 'and'; use ',' instead.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:71: * '.':
+Please, do not end the authors' line with a period.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:3:0: * 'OUTLINE piece: P4 (the rigorous missing-tail law, §9 row P4), atom-2':
+Second copyright line should be "Released under Apache 2.0 license as described in the file LICENSE."
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:44:0: The module doc-string for a file should be the first command after the imports.
+Please, add a module doc-string before `@[fun_prop]
+lemma aestronglyMeasurable_B2 : AEStronglyMeasurable B2 :=
+  by
+  unfold B2
+  fun_prop`.
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:1:0: * '/- P4Tail — local P4 atom-2: the 2nd-order finite Euler–Maclaurin identity.':
+Malformed or missing copyright header: `/-` should be alone on its own line.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:39:12: * '':
+Copyright line should start with 'Copyright (c) YYYY'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:39:12: * '':
+Copyright line should end with '. All rights reserved.'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:0: * '(spec: kainos plan/40-prize-islands/rh-attack/spec/p4-tail-law-abstract.md
+§0.6/§T2/§T3).
+
+ROLE: the second-order EM identity — the `−½f(n) + (1/12)(f′ m − f′ n) +
+B̂₂·f″` kernel — from which the W_n(t) form follows. Built exclusively
+from:
+  (1) the ported 1st-order identity (RhAttack.P4Em, published), (2) one polynomial IBP per unit period (u = the frozen per-period
+      polynomial (x−j)²−(x−j)+1/6, via
+      `intervalIntegral.integral_mul_deriv_eq_deriv_mul`), plus the a.e.
+      endpoint conversion `intervalIntegral.integral_congr_ae` for the
+      single kink point x = j+1, (3) the pinned additivity lemma
+      `intervalIntegral.sum_integral_adjacent_intervals_Ico`.
+This is the ONLY local invention of the P4 line (§0.6: no published
+Lean 2nd-order EM exists; the Isabelle AFP entry is the cross-check).
+
+APPROACH: integers n ≤ m; f : ℝ → 𝕜, [RCLike 𝕜] (ℝ or ℂ). Per-period
+identity (proven here: int_B1f'_period):
+
+    ∫_j^{j+1} B̂₁·f′ = (1/12)(f′(j+1) − f′(j)) − (1/2)·∫_j^{j+1} B̂₂·f″,
+from which the finite target follows by summation (atom-2b, next):
+
+    ∑ k ∈ Ioc n m, f k = ∫_n^m f + ½(f m − f n)
+                    + (1/12)(f′ m − f′ n) − ½·∫_n^m B̂₂·f″ dx.
+
+Signs verified numerically day-017 at σ=1.5 [3.2e-7] and σ=½ [3.7e-5]
+(mpmath dps-40 — computed, not recalled).
+
+STATUS: atom-2, day-017. Build: `lake build RhAttack.P4Tail`.
+
+THEOREMS (global names):
+  B2, B2_at_int, B2_of_Icc_int, B2poly, B2_of_B2poly, abs_B2_le, aestronglyMeasurable_B2, intervalIntegrable_B2_mul_deriv2, int_B1f'_period.':
+If an authors line spans multiple lines, each line but the last must end with a trailing comma
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:0: * '(spec: ka':
+The authors line should begin with 'Authors: '
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:10:0: * '  ':
+Double spaces are not allowed.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:31:47: * ' and ':
+Please, do not use 'and'; use ',' instead.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:71: * '.':
+Please, do not end the authors' line with a period.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:3:0: * 'OUTLINE piece: P4 (the rigorous missing-tail law, §9 row P4), atom-2':
+Second copyright line should be "Released under Apache 2.0 license as described in the file LICENSE."
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:44:0: The module doc-string for a file should be the first command after the imports.
+Please, add a module doc-string before `/-- |B̂₂(x)| ≤ 1/6. -/
+lemma abs_B2_le {x : ℝ} (hx : 0 ≤ x) : |B2 x| ≤ 1 / 6 :=
+  by
+  unfold B2
+  set v := (x - ⌊x⌋₊ : ℝ) with hv
+  have hv0 : 0 ≤ v := by grind [Nat.floor_le hx]
+  have hv1 : v ≤ 1 := by grind [Nat.lt_succ_floor x]
+  have hrew : (x - ⌊x⌋₊ : ℝ) ^ 2 - (x - ⌊x⌋₊) + 1 / 6 = v ^ 2 - v + 1 / 6 := by rfl
+  have htop : v ^ 2 - v + 1 / 6 ≤ 1 / 6 := by nlinarith [hv0, hv1]
+  have hbot : -(1 / 6 : ℝ) ≤ v ^ 2 - v + 1 / 6 :=
+    by
+    have hsq : v ^ 2 - v + 1 / 6 = (v - 1 / 2) ^ 2 - 1 / 12 := by ring
+    nlinarith [hsq, sq_nonneg (v - 1 / 2)]
+  simpa only [← hrew] using abs_le.mpr ⟨hbot, htop⟩`.
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:1:0: * '/- P4Tail — local P4 atom-2: the 2nd-order finite Euler–Maclaurin identity.':
+Malformed or missing copyright header: `/-` should be alone on its own line.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:39:12: * '':
+Copyright line should start with 'Copyright (c) YYYY'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:39:12: * '':
+Copyright line should end with '. All rights reserved.'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:0: * '(spec: kainos plan/40-prize-islands/rh-attack/spec/p4-tail-law-abstract.md
+§0.6/§T2/§T3).
+
+ROLE: the second-order EM identity — the `−½f(n) + (1/12)(f′ m − f′ n) +
+B̂₂·f″` kernel — from which the W_n(t) form follows. Built exclusively
+from:
+  (1) the ported 1st-order identity (RhAttack.P4Em, published), (2) one polynomial IBP per unit period (u = the frozen per-period
+      polynomial (x−j)²−(x−j)+1/6, via
+      `intervalIntegral.integral_mul_deriv_eq_deriv_mul`), plus the a.e.
+      endpoint conversion `intervalIntegral.integral_congr_ae` for the
+      single kink point x = j+1, (3) the pinned additivity lemma
+      `intervalIntegral.sum_integral_adjacent_intervals_Ico`.
+This is the ONLY local invention of the P4 line (§0.6: no published
+Lean 2nd-order EM exists; the Isabelle AFP entry is the cross-check).
+
+APPROACH: integers n ≤ m; f : ℝ → 𝕜, [RCLike 𝕜] (ℝ or ℂ). Per-period
+identity (proven here: int_B1f'_period):
+
+    ∫_j^{j+1} B̂₁·f′ = (1/12)(f′(j+1) − f′(j)) − (1/2)·∫_j^{j+1} B̂₂·f″,
+from which the finite target follows by summation (atom-2b, next):
+
+    ∑ k ∈ Ioc n m, f k = ∫_n^m f + ½(f m − f n)
+                    + (1/12)(f′ m − f′ n) − ½·∫_n^m B̂₂·f″ dx.
+
+Signs verified numerically day-017 at σ=1.5 [3.2e-7] and σ=½ [3.7e-5]
+(mpmath dps-40 — computed, not recalled).
+
+STATUS: atom-2, day-017. Build: `lake build RhAttack.P4Tail`.
+
+THEOREMS (global names):
+  B2, B2_at_int, B2_of_Icc_int, B2poly, B2_of_B2poly, abs_B2_le, aestronglyMeasurable_B2, intervalIntegrable_B2_mul_deriv2, int_B1f'_period.':
+If an authors line spans multiple lines, each line but the last must end with a trailing comma
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:0: * '(spec: ka':
+The authors line should begin with 'Authors: '
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:10:0: * '  ':
+Double spaces are not allowed.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:31:47: * ' and ':
+Please, do not use 'and'; use ',' instead.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:71: * '.':
+Please, do not end the authors' line with a period.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:3:0: * 'OUTLINE piece: P4 (the rigorous missing-tail law, §9 row P4), atom-2':
+Second copyright line should be "Released under Apache 2.0 license as described in the file LICENSE."
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:44:0: The module doc-string for a file should be the first command after the imports.
+Please, add a module doc-string before `/-- B̂₂(n) = 1/6 at integers (the kernel is continuous at its kinks). -/
+lemma B2_at_int (n : ℕ) : B2 (n : ℝ) = 1 / 6 := by
+  unfold B2
+  have hn : (⌊(n : ℝ)⌋₊ : ℝ) = (n : ℝ) := by
+    norm_cast
+    rw [Nat.floor_eq_iff (Nat.cast_nonneg n)]
+    constructor
+    · norm_num
+    · norm_num
+  rw [hn]
+  ring`.
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:1:0: * '/- P4Tail — local P4 atom-2: the 2nd-order finite Euler–Maclaurin identity.':
+Malformed or missing copyright header: `/-` should be alone on its own line.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:39:12: * '':
+Copyright line should start with 'Copyright (c) YYYY'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:39:12: * '':
+Copyright line should end with '. All rights reserved.'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:0: * '(spec: kainos plan/40-prize-islands/rh-attack/spec/p4-tail-law-abstract.md
+§0.6/§T2/§T3).
+
+ROLE: the second-order EM identity — the `−½f(n) + (1/12)(f′ m − f′ n) +
+B̂₂·f″` kernel — from which the W_n(t) form follows. Built exclusively
+from:
+  (1) the ported 1st-order identity (RhAttack.P4Em, published), (2) one polynomial IBP per unit period (u = the frozen per-period
+      polynomial (x−j)²−(x−j)+1/6, via
+      `intervalIntegral.integral_mul_deriv_eq_deriv_mul`), plus the a.e.
+      endpoint conversion `intervalIntegral.integral_congr_ae` for the
+      single kink point x = j+1, (3) the pinned additivity lemma
+      `intervalIntegral.sum_integral_adjacent_intervals_Ico`.
+This is the ONLY local invention of the P4 line (§0.6: no published
+Lean 2nd-order EM exists; the Isabelle AFP entry is the cross-check).
+
+APPROACH: integers n ≤ m; f : ℝ → 𝕜, [RCLike 𝕜] (ℝ or ℂ). Per-period
+identity (proven here: int_B1f'_period):
+
+    ∫_j^{j+1} B̂₁·f′ = (1/12)(f′(j+1) − f′(j)) − (1/2)·∫_j^{j+1} B̂₂·f″,
+from which the finite target follows by summation (atom-2b, next):
+
+    ∑ k ∈ Ioc n m, f k = ∫_n^m f + ½(f m − f n)
+                    + (1/12)(f′ m − f′ n) − ½·∫_n^m B̂₂·f″ dx.
+
+Signs verified numerically day-017 at σ=1.5 [3.2e-7] and σ=½ [3.7e-5]
+(mpmath dps-40 — computed, not recalled).
+
+STATUS: atom-2, day-017. Build: `lake build RhAttack.P4Tail`.
+
+THEOREMS (global names):
+  B2, B2_at_int, B2_of_Icc_int, B2poly, B2_of_B2poly, abs_B2_le, aestronglyMeasurable_B2, intervalIntegrable_B2_mul_deriv2, int_B1f'_period.':
+If an authors line spans multiple lines, each line but the last must end with a trailing comma
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:0: * '(spec: ka':
+The authors line should begin with 'Authors: '
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:10:0: * '  ':
+Double spaces are not allowed.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:31:47: * ' and ':
+Please, do not use 'and'; use ',' instead.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:71: * '.':
+Please, do not end the authors' line with a period.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:3:0: * 'OUTLINE piece: P4 (the rigorous missing-tail law, §9 row P4), atom-2':
+Second copyright line should be "Released under Apache 2.0 license as described in the file LICENSE."
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:44:0: The module doc-string for a file should be the first command after the imports.
+Please, add a module doc-string before `/-- The per-period polynomial (the kernel with the floor frozen). -/
+def B2poly (n : ℕ) (x : ℝ) : ℝ :=
+  (x - n) ^ 2 - (x - n) + 1 / 6`.
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:1:0: * '/- P4Tail — local P4 atom-2: the 2nd-order finite Euler–Maclaurin identity.':
+Malformed or missing copyright header: `/-` should be alone on its own line.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:39:12: * '':
+Copyright line should start with 'Copyright (c) YYYY'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:39:12: * '':
+Copyright line should end with '. All rights reserved.'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:0: * '(spec: kainos plan/40-prize-islands/rh-attack/spec/p4-tail-law-abstract.md
+§0.6/§T2/§T3).
+
+ROLE: the second-order EM identity — the `−½f(n) + (1/12)(f′ m − f′ n) +
+B̂₂·f″` kernel — from which the W_n(t) form follows. Built exclusively
+from:
+  (1) the ported 1st-order identity (RhAttack.P4Em, published), (2) one polynomial IBP per unit period (u = the frozen per-period
+      polynomial (x−j)²−(x−j)+1/6, via
+      `intervalIntegral.integral_mul_deriv_eq_deriv_mul`), plus the a.e.
+      endpoint conversion `intervalIntegral.integral_congr_ae` for the
+      single kink point x = j+1, (3) the pinned additivity lemma
+      `intervalIntegral.sum_integral_adjacent_intervals_Ico`.
+This is the ONLY local invention of the P4 line (§0.6: no published
+Lean 2nd-order EM exists; the Isabelle AFP entry is the cross-check).
+
+APPROACH: integers n ≤ m; f : ℝ → 𝕜, [RCLike 𝕜] (ℝ or ℂ). Per-period
+identity (proven here: int_B1f'_period):
+
+    ∫_j^{j+1} B̂₁·f′ = (1/12)(f′(j+1) − f′(j)) − (1/2)·∫_j^{j+1} B̂₂·f″,
+from which the finite target follows by summation (atom-2b, next):
+
+    ∑ k ∈ Ioc n m, f k = ∫_n^m f + ½(f m − f n)
+                    + (1/12)(f′ m − f′ n) − ½·∫_n^m B̂₂·f″ dx.
+
+Signs verified numerically day-017 at σ=1.5 [3.2e-7] and σ=½ [3.7e-5]
+(mpmath dps-40 — computed, not recalled).
+
+STATUS: atom-2, day-017. Build: `lake build RhAttack.P4Tail`.
+
+THEOREMS (global names):
+  B2, B2_at_int, B2_of_Icc_int, B2poly, B2_of_B2poly, abs_B2_le, aestronglyMeasurable_B2, intervalIntegrable_B2_mul_deriv2, int_B1f'_period.':
+If an authors line spans multiple lines, each line but the last must end with a trailing comma
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:0: * '(spec: ka':
+The authors line should begin with 'Authors: '
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:10:0: * '  ':
+Double spaces are not allowed.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:31:47: * ' and ':
+Please, do not use 'and'; use ',' instead.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:71: * '.':
+Please, do not end the authors' line with a period.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:3:0: * 'OUTLINE piece: P4 (the rigorous missing-tail law, §9 row P4), atom-2':
+Second copyright line should be "Released under Apache 2.0 license as described in the file LICENSE."
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:44:0: The module doc-string for a file should be the first command after the imports.
+Please, add a module doc-string before `/-- On [n, n+1]: B̂₂ = the frozen polynomial. -/
+lemma B2_of_Icc_int (n : ℕ) {x : ℝ} (hx : x ∈ Set.Icc (n : ℝ) (n + 1 : ℝ)) : B2 x = (x - n) ^ 2 - (x - n) + 1 / 6 :=
+  by
+  unfold B2
+  by_cases htop : x = (n + 1 : ℝ)
+  · rw [htop]
+    have hfl : (⌊(n + 1 : ℝ)⌋₊ : ℕ) = n + 1 :=
+      (Nat.floor_eq_iff (ha := by positivity)).mpr
+        ⟨by norm_cast, by
+          norm_cast
+          linarith⟩
+    rw [hfl]
+    norm_num
+  · have hn : (⌊x⌋₊ : ℝ) = (n : ℝ) := by
+      norm_cast
+      rw [Nat.floor_eq_iff (by linarith [show (0 : ℝ) ≤ x from le_trans (Nat.cast_nonneg n) hx.1])]
+      constructor
+      · linarith [hx.1]
+      · exact lt_of_le_of_ne hx.2 htop
+    rw [hn]`.
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:1:0: * '/- P4Tail — local P4 atom-2: the 2nd-order finite Euler–Maclaurin identity.':
+Malformed or missing copyright header: `/-` should be alone on its own line.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:39:12: * '':
+Copyright line should start with 'Copyright (c) YYYY'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:39:12: * '':
+Copyright line should end with '. All rights reserved.'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:0: * '(spec: kainos plan/40-prize-islands/rh-attack/spec/p4-tail-law-abstract.md
+§0.6/§T2/§T3).
+
+ROLE: the second-order EM identity — the `−½f(n) + (1/12)(f′ m − f′ n) +
+B̂₂·f″` kernel — from which the W_n(t) form follows. Built exclusively
+from:
+  (1) the ported 1st-order identity (RhAttack.P4Em, published), (2) one polynomial IBP per unit period (u = the frozen per-period
+      polynomial (x−j)²−(x−j)+1/6, via
+      `intervalIntegral.integral_mul_deriv_eq_deriv_mul`), plus the a.e.
+      endpoint conversion `intervalIntegral.integral_congr_ae` for the
+      single kink point x = j+1, (3) the pinned additivity lemma
+      `intervalIntegral.sum_integral_adjacent_intervals_Ico`.
+This is the ONLY local invention of the P4 line (§0.6: no published
+Lean 2nd-order EM exists; the Isabelle AFP entry is the cross-check).
+
+APPROACH: integers n ≤ m; f : ℝ → 𝕜, [RCLike 𝕜] (ℝ or ℂ). Per-period
+identity (proven here: int_B1f'_period):
+
+    ∫_j^{j+1} B̂₁·f′ = (1/12)(f′(j+1) − f′(j)) − (1/2)·∫_j^{j+1} B̂₂·f″,
+from which the finite target follows by summation (atom-2b, next):
+
+    ∑ k ∈ Ioc n m, f k = ∫_n^m f + ½(f m − f n)
+                    + (1/12)(f′ m − f′ n) − ½·∫_n^m B̂₂·f″ dx.
+
+Signs verified numerically day-017 at σ=1.5 [3.2e-7] and σ=½ [3.7e-5]
+(mpmath dps-40 — computed, not recalled).
+
+STATUS: atom-2, day-017. Build: `lake build RhAttack.P4Tail`.
+
+THEOREMS (global names):
+  B2, B2_at_int, B2_of_Icc_int, B2poly, B2_of_B2poly, abs_B2_le, aestronglyMeasurable_B2, intervalIntegrable_B2_mul_deriv2, int_B1f'_period.':
+If an authors line spans multiple lines, each line but the last must end with a trailing comma
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:0: * '(spec: ka':
+The authors line should begin with 'Authors: '
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:10:0: * '  ':
+Double spaces are not allowed.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:31:47: * ' and ':
+Please, do not use 'and'; use ',' instead.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:71: * '.':
+Please, do not end the authors' line with a period.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:3:0: * 'OUTLINE piece: P4 (the rigorous missing-tail law, §9 row P4), atom-2':
+Second copyright line should be "Released under Apache 2.0 license as described in the file LICENSE."
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:44:0: The module doc-string for a file should be the first command after the imports.
+Please, add a module doc-string before `lemma B2_of_B2poly (n : ℕ) {x : ℝ} (hx : x ∈ Set.Icc (n : ℝ) (n + 1 : ℝ)) :
+    B2 x = B2poly n x := by
+  rw [B2_of_Icc_int n hx]
+  dsimp only [B2poly]`.
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:1:0: * '/- P4Tail — local P4 atom-2: the 2nd-order finite Euler–Maclaurin identity.':
+Malformed or missing copyright header: `/-` should be alone on its own line.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:39:12: * '':
+Copyright line should start with 'Copyright (c) YYYY'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:39:12: * '':
+Copyright line should end with '. All rights reserved.'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:0: * '(spec: kainos plan/40-prize-islands/rh-attack/spec/p4-tail-law-abstract.md
+§0.6/§T2/§T3).
+
+ROLE: the second-order EM identity — the `−½f(n) + (1/12)(f′ m − f′ n) +
+B̂₂·f″` kernel — from which the W_n(t) form follows. Built exclusively
+from:
+  (1) the ported 1st-order identity (RhAttack.P4Em, published), (2) one polynomial IBP per unit period (u = the frozen per-period
+      polynomial (x−j)²−(x−j)+1/6, via
+      `intervalIntegral.integral_mul_deriv_eq_deriv_mul`), plus the a.e.
+      endpoint conversion `intervalIntegral.integral_congr_ae` for the
+      single kink point x = j+1, (3) the pinned additivity lemma
+      `intervalIntegral.sum_integral_adjacent_intervals_Ico`.
+This is the ONLY local invention of the P4 line (§0.6: no published
+Lean 2nd-order EM exists; the Isabelle AFP entry is the cross-check).
+
+APPROACH: integers n ≤ m; f : ℝ → 𝕜, [RCLike 𝕜] (ℝ or ℂ). Per-period
+identity (proven here: int_B1f'_period):
+
+    ∫_j^{j+1} B̂₁·f′ = (1/12)(f′(j+1) − f′(j)) − (1/2)·∫_j^{j+1} B̂₂·f″,
+from which the finite target follows by summation (atom-2b, next):
+
+    ∑ k ∈ Ioc n m, f k = ∫_n^m f + ½(f m − f n)
+                    + (1/12)(f′ m − f′ n) − ½·∫_n^m B̂₂·f″ dx.
+
+Signs verified numerically day-017 at σ=1.5 [3.2e-7] and σ=½ [3.7e-5]
+(mpmath dps-40 — computed, not recalled).
+
+STATUS: atom-2, day-017. Build: `lake build RhAttack.P4Tail`.
+
+THEOREMS (global names):
+  B2, B2_at_int, B2_of_Icc_int, B2poly, B2_of_B2poly, abs_B2_le, aestronglyMeasurable_B2, intervalIntegrable_B2_mul_deriv2, int_B1f'_period.':
+If an authors line spans multiple lines, each line but the last must end with a trailing comma
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:0: * '(spec: ka':
+The authors line should begin with 'Authors: '
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:10:0: * '  ':
+Double spaces are not allowed.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:31:47: * ' and ':
+Please, do not use 'and'; use ',' instead.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:71: * '.':
+Please, do not end the authors' line with a period.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:3:0: * 'OUTLINE piece: P4 (the rigorous missing-tail law, §9 row P4), atom-2':
+Second copyright line should be "Released under Apache 2.0 license as described in the file LICENSE."
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:44:0: The module doc-string for a file should be the first command after the imports.
+Please, add a module doc-string before `section`.
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:1:0: * '/- P4Tail — local P4 atom-2: the 2nd-order finite Euler–Maclaurin identity.':
+Malformed or missing copyright header: `/-` should be alone on its own line.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:39:12: * '':
+Copyright line should start with 'Copyright (c) YYYY'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:39:12: * '':
+Copyright line should end with '. All rights reserved.'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:0: * '(spec: kainos plan/40-prize-islands/rh-attack/spec/p4-tail-law-abstract.md
+§0.6/§T2/§T3).
+
+ROLE: the second-order EM identity — the `−½f(n) + (1/12)(f′ m − f′ n) +
+B̂₂·f″` kernel — from which the W_n(t) form follows. Built exclusively
+from:
+  (1) the ported 1st-order identity (RhAttack.P4Em, published), (2) one polynomial IBP per unit period (u = the frozen per-period
+      polynomial (x−j)²−(x−j)+1/6, via
+      `intervalIntegral.integral_mul_deriv_eq_deriv_mul`), plus the a.e.
+      endpoint conversion `intervalIntegral.integral_congr_ae` for the
+      single kink point x = j+1, (3) the pinned additivity lemma
+      `intervalIntegral.sum_integral_adjacent_intervals_Ico`.
+This is the ONLY local invention of the P4 line (§0.6: no published
+Lean 2nd-order EM exists; the Isabelle AFP entry is the cross-check).
+
+APPROACH: integers n ≤ m; f : ℝ → 𝕜, [RCLike 𝕜] (ℝ or ℂ). Per-period
+identity (proven here: int_B1f'_period):
+
+    ∫_j^{j+1} B̂₁·f′ = (1/12)(f′(j+1) − f′(j)) − (1/2)·∫_j^{j+1} B̂₂·f″,
+from which the finite target follows by summation (atom-2b, next):
+
+    ∑ k ∈ Ioc n m, f k = ∫_n^m f + ½(f m − f n)
+                    + (1/12)(f′ m − f′ n) − ½·∫_n^m B̂₂·f″ dx.
+
+Signs verified numerically day-017 at σ=1.5 [3.2e-7] and σ=½ [3.7e-5]
+(mpmath dps-40 — computed, not recalled).
+
+STATUS: atom-2, day-017. Build: `lake build RhAttack.P4Tail`.
+
+THEOREMS (global names):
+  B2, B2_at_int, B2_of_Icc_int, B2poly, B2_of_B2poly, abs_B2_le, aestronglyMeasurable_B2, intervalIntegrable_B2_mul_deriv2, int_B1f'_period.':
+If an authors line spans multiple lines, each line but the last must end with a trailing comma
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:0: * '(spec: ka':
+The authors line should begin with 'Authors: '
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:10:0: * '  ':
+Double spaces are not allowed.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:31:47: * ' and ':
+Please, do not use 'and'; use ',' instead.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:71: * '.':
+Please, do not end the authors' line with a period.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:3:0: * 'OUTLINE piece: P4 (the rigorous missing-tail law, §9 row P4), atom-2':
+Second copyright line should be "Released under Apache 2.0 license as described in the file LICENSE."
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:44:0: The module doc-string for a file should be the first command after the imports.
+Please, add a module doc-string before `variable (f : ℝ → 𝕜)`.
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:1:0: * '/- P4Tail — local P4 atom-2: the 2nd-order finite Euler–Maclaurin identity.':
+Malformed or missing copyright header: `/-` should be alone on its own line.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:39:12: * '':
+Copyright line should start with 'Copyright (c) YYYY'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:39:12: * '':
+Copyright line should end with '. All rights reserved.'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:0: * '(spec: kainos plan/40-prize-islands/rh-attack/spec/p4-tail-law-abstract.md
+§0.6/§T2/§T3).
+
+ROLE: the second-order EM identity — the `−½f(n) + (1/12)(f′ m − f′ n) +
+B̂₂·f″` kernel — from which the W_n(t) form follows. Built exclusively
+from:
+  (1) the ported 1st-order identity (RhAttack.P4Em, published), (2) one polynomial IBP per unit period (u = the frozen per-period
+      polynomial (x−j)²−(x−j)+1/6, via
+      `intervalIntegral.integral_mul_deriv_eq_deriv_mul`), plus the a.e.
+      endpoint conversion `intervalIntegral.integral_congr_ae` for the
+      single kink point x = j+1, (3) the pinned additivity lemma
+      `intervalIntegral.sum_integral_adjacent_intervals_Ico`.
+This is the ONLY local invention of the P4 line (§0.6: no published
+Lean 2nd-order EM exists; the Isabelle AFP entry is the cross-check).
+
+APPROACH: integers n ≤ m; f : ℝ → 𝕜, [RCLike 𝕜] (ℝ or ℂ). Per-period
+identity (proven here: int_B1f'_period):
+
+    ∫_j^{j+1} B̂₁·f′ = (1/12)(f′(j+1) − f′(j)) − (1/2)·∫_j^{j+1} B̂₂·f″,
+from which the finite target follows by summation (atom-2b, next):
+
+    ∑ k ∈ Ioc n m, f k = ∫_n^m f + ½(f m − f n)
+                    + (1/12)(f′ m − f′ n) − ½·∫_n^m B̂₂·f″ dx.
+
+Signs verified numerically day-017 at σ=1.5 [3.2e-7] and σ=½ [3.7e-5]
+(mpmath dps-40 — computed, not recalled).
+
+STATUS: atom-2, day-017. Build: `lake build RhAttack.P4Tail`.
+
+THEOREMS (global names):
+  B2, B2_at_int, B2_of_Icc_int, B2poly, B2_of_B2poly, abs_B2_le, aestronglyMeasurable_B2, intervalIntegrable_B2_mul_deriv2, int_B1f'_period.':
+If an authors line spans multiple lines, each line but the last must end with a trailing comma
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:0: * '(spec: ka':
+The authors line should begin with 'Authors: '
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:10:0: * '  ':
+Double spaces are not allowed.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:31:47: * ' and ':
+Please, do not use 'and'; use ',' instead.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:71: * '.':
+Please, do not end the authors' line with a period.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:3:0: * 'OUTLINE piece: P4 (the rigorous missing-tail law, §9 row P4), atom-2':
+Second copyright line should be "Released under Apache 2.0 license as described in the file LICENSE."
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:44:0: The module doc-string for a file should be the first command after the imports.
+Please, add a module doc-string before `/-- The B̂₂·f″ integrand is interval-integrable (bounded measurable ×
+    continuous). -/
+lemma intervalIntegrable_B2_mul_deriv2 (a b : ℝ) (ha0 : 0 ≤ a) (hab : a ≤ b)
+    (hcont_f'' : ContinuousOn (deriv (deriv f)) (Set.uIcc a b)) :
+    IntervalIntegrable (fun t => B2 t * deriv (deriv f) t) volume a b :=
+  by
+  refine IntervalIntegrable.mul_continuousOn ?_ hcont_f''
+  rw [intervalIntegrable_iff']
+  apply MeasureTheory.Measure.integrableOn_of_bounded (by simp) (by fun_prop) (M := 1 / 6)
+  filter_upwards [self_mem_ae_restrict (by measurability)] with x hx
+  rw [Set.uIcc_of_le hab, Set.mem_Icc] at hx
+  norm_cast
+  exact abs_B2_le (le_trans ha0 hx.1)`.
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:1:0: * '/- P4Tail — local P4 atom-2: the 2nd-order finite Euler–Maclaurin identity.':
+Malformed or missing copyright header: `/-` should be alone on its own line.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:39:12: * '':
+Copyright line should start with 'Copyright (c) YYYY'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:39:12: * '':
+Copyright line should end with '. All rights reserved.'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:0: * '(spec: kainos plan/40-prize-islands/rh-attack/spec/p4-tail-law-abstract.md
+§0.6/§T2/§T3).
+
+ROLE: the second-order EM identity — the `−½f(n) + (1/12)(f′ m − f′ n) +
+B̂₂·f″` kernel — from which the W_n(t) form follows. Built exclusively
+from:
+  (1) the ported 1st-order identity (RhAttack.P4Em, published), (2) one polynomial IBP per unit period (u = the frozen per-period
+      polynomial (x−j)²−(x−j)+1/6, via
+      `intervalIntegral.integral_mul_deriv_eq_deriv_mul`), plus the a.e.
+      endpoint conversion `intervalIntegral.integral_congr_ae` for the
+      single kink point x = j+1, (3) the pinned additivity lemma
+      `intervalIntegral.sum_integral_adjacent_intervals_Ico`.
+This is the ONLY local invention of the P4 line (§0.6: no published
+Lean 2nd-order EM exists; the Isabelle AFP entry is the cross-check).
+
+APPROACH: integers n ≤ m; f : ℝ → 𝕜, [RCLike 𝕜] (ℝ or ℂ). Per-period
+identity (proven here: int_B1f'_period):
+
+    ∫_j^{j+1} B̂₁·f′ = (1/12)(f′(j+1) − f′(j)) − (1/2)·∫_j^{j+1} B̂₂·f″,
+from which the finite target follows by summation (atom-2b, next):
+
+    ∑ k ∈ Ioc n m, f k = ∫_n^m f + ½(f m − f n)
+                    + (1/12)(f′ m − f′ n) − ½·∫_n^m B̂₂·f″ dx.
+
+Signs verified numerically day-017 at σ=1.5 [3.2e-7] and σ=½ [3.7e-5]
+(mpmath dps-40 — computed, not recalled).
+
+STATUS: atom-2, day-017. Build: `lake build RhAttack.P4Tail`.
+
+THEOREMS (global names):
+  B2, B2_at_int, B2_of_Icc_int, B2poly, B2_of_B2poly, abs_B2_le, aestronglyMeasurable_B2, intervalIntegrable_B2_mul_deriv2, int_B1f'_period.':
+If an authors line spans multiple lines, each line but the last must end with a trailing comma
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:0: * '(spec: ka':
+The authors line should begin with 'Authors: '
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:10:0: * '  ':
+Double spaces are not allowed.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:31:47: * ' and ':
+Please, do not use 'and'; use ',' instead.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:71: * '.':
+Please, do not end the authors' line with a period.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:3:0: * 'OUTLINE piece: P4 (the rigorous missing-tail law, §9 row P4), atom-2':
+Second copyright line should be "Released under Apache 2.0 license as described in the file LICENSE."
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:44:0: The module doc-string for a file should be the first command after the imports.
+Please, add a module doc-string before `section`.
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:1:0: * '/- P4Tail — local P4 atom-2: the 2nd-order finite Euler–Maclaurin identity.':
+Malformed or missing copyright header: `/-` should be alone on its own line.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:39:12: * '':
+Copyright line should start with 'Copyright (c) YYYY'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:39:12: * '':
+Copyright line should end with '. All rights reserved.'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:0: * '(spec: kainos plan/40-prize-islands/rh-attack/spec/p4-tail-law-abstract.md
+§0.6/§T2/§T3).
+
+ROLE: the second-order EM identity — the `−½f(n) + (1/12)(f′ m − f′ n) +
+B̂₂·f″` kernel — from which the W_n(t) form follows. Built exclusively
+from:
+  (1) the ported 1st-order identity (RhAttack.P4Em, published), (2) one polynomial IBP per unit period (u = the frozen per-period
+      polynomial (x−j)²−(x−j)+1/6, via
+      `intervalIntegral.integral_mul_deriv_eq_deriv_mul`), plus the a.e.
+      endpoint conversion `intervalIntegral.integral_congr_ae` for the
+      single kink point x = j+1, (3) the pinned additivity lemma
+      `intervalIntegral.sum_integral_adjacent_intervals_Ico`.
+This is the ONLY local invention of the P4 line (§0.6: no published
+Lean 2nd-order EM exists; the Isabelle AFP entry is the cross-check).
+
+APPROACH: integers n ≤ m; f : ℝ → 𝕜, [RCLike 𝕜] (ℝ or ℂ). Per-period
+identity (proven here: int_B1f'_period):
+
+    ∫_j^{j+1} B̂₁·f′ = (1/12)(f′(j+1) − f′(j)) − (1/2)·∫_j^{j+1} B̂₂·f″,
+from which the finite target follows by summation (atom-2b, next):
+
+    ∑ k ∈ Ioc n m, f k = ∫_n^m f + ½(f m − f n)
+                    + (1/12)(f′ m − f′ n) − ½·∫_n^m B̂₂·f″ dx.
+
+Signs verified numerically day-017 at σ=1.5 [3.2e-7] and σ=½ [3.7e-5]
+(mpmath dps-40 — computed, not recalled).
+
+STATUS: atom-2, day-017. Build: `lake build RhAttack.P4Tail`.
+
+THEOREMS (global names):
+  B2, B2_at_int, B2_of_Icc_int, B2poly, B2_of_B2poly, abs_B2_le, aestronglyMeasurable_B2, intervalIntegrable_B2_mul_deriv2, int_B1f'_period.':
+If an authors line spans multiple lines, each line but the last must end with a trailing comma
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:0: * '(spec: ka':
+The authors line should begin with 'Authors: '
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:10:0: * '  ':
+Double spaces are not allowed.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:31:47: * ' and ':
+Please, do not use 'and'; use ',' instead.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:71: * '.':
+Please, do not end the authors' line with a period.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:3:0: * 'OUTLINE piece: P4 (the rigorous missing-tail law, §9 row P4), atom-2':
+Second copyright line should be "Released under Apache 2.0 license as described in the file LICENSE."
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:44:0: The module doc-string for a file should be the first command after the imports.
+Please, add a module doc-string before `variable (j : ℕ)`.
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:291:8: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: RhAttack/P4Tail.lean:294:8: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: RhAttack/P4Tail.lean:1:0: * '/- P4Tail — local P4 atom-2: the 2nd-order finite Euler–Maclaurin identity.':
+Malformed or missing copyright header: `/-` should be alone on its own line.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:39:12: * '':
+Copyright line should start with 'Copyright (c) YYYY'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:39:12: * '':
+Copyright line should end with '. All rights reserved.'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:0: * '(spec: kainos plan/40-prize-islands/rh-attack/spec/p4-tail-law-abstract.md
+§0.6/§T2/§T3).
+
+ROLE: the second-order EM identity — the `−½f(n) + (1/12)(f′ m − f′ n) +
+B̂₂·f″` kernel — from which the W_n(t) form follows. Built exclusively
+from:
+  (1) the ported 1st-order identity (RhAttack.P4Em, published), (2) one polynomial IBP per unit period (u = the frozen per-period
+      polynomial (x−j)²−(x−j)+1/6, via
+      `intervalIntegral.integral_mul_deriv_eq_deriv_mul`), plus the a.e.
+      endpoint conversion `intervalIntegral.integral_congr_ae` for the
+      single kink point x = j+1, (3) the pinned additivity lemma
+      `intervalIntegral.sum_integral_adjacent_intervals_Ico`.
+This is the ONLY local invention of the P4 line (§0.6: no published
+Lean 2nd-order EM exists; the Isabelle AFP entry is the cross-check).
+
+APPROACH: integers n ≤ m; f : ℝ → 𝕜, [RCLike 𝕜] (ℝ or ℂ). Per-period
+identity (proven here: int_B1f'_period):
+
+    ∫_j^{j+1} B̂₁·f′ = (1/12)(f′(j+1) − f′(j)) − (1/2)·∫_j^{j+1} B̂₂·f″,
+from which the finite target follows by summation (atom-2b, next):
+
+    ∑ k ∈ Ioc n m, f k = ∫_n^m f + ½(f m − f n)
+                    + (1/12)(f′ m − f′ n) − ½·∫_n^m B̂₂·f″ dx.
+
+Signs verified numerically day-017 at σ=1.5 [3.2e-7] and σ=½ [3.7e-5]
+(mpmath dps-40 — computed, not recalled).
+
+STATUS: atom-2, day-017. Build: `lake build RhAttack.P4Tail`.
+
+THEOREMS (global names):
+  B2, B2_at_int, B2_of_Icc_int, B2poly, B2_of_B2poly, abs_B2_le, aestronglyMeasurable_B2, intervalIntegrable_B2_mul_deriv2, int_B1f'_period.':
+If an authors line spans multiple lines, each line but the last must end with a trailing comma
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:0: * '(spec: ka':
+The authors line should begin with 'Authors: '
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:10:0: * '  ':
+Double spaces are not allowed.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:31:47: * ' and ':
+Please, do not use 'and'; use ',' instead.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:71: * '.':
+Please, do not end the authors' line with a period.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:3:0: * 'OUTLINE piece: P4 (the rigorous missing-tail law, §9 row P4), atom-2':
+Second copyright line should be "Released under Apache 2.0 license as described in the file LICENSE."
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:44:0: The module doc-string for a file should be the first command after the imports.
+Please, add a module doc-string before `/-- Per-period IBP over [j, j+1]:
+      ∫_j^{j+1} B̂₁·f′ = (1/12)(f′(j+1) − f′(j)) − (1/2)·∫_j^{j+1} B̂₂·f″. -/
+lemma int_B1f'_period (hf2 : ∀ t ∈ Set.uIcc (j : ℝ) (j + 1 : ℝ), DifferentiableAt ℝ (deriv f) t)
+    (hcont_f' : ContinuousOn (deriv f) (Set.uIcc (j : ℝ) (j + 1 : ℝ)))
+    (hcont_f'' : ContinuousOn (deriv (deriv f)) (Set.uIcc (j : ℝ) (j + 1 : ℝ))) :
+    (∫ x in (j : ℝ)..(j + 1 : ℝ), B1 x * deriv f x) =
+      (1 / 12 : 𝕜) * (deriv f (j + 1 : ℝ) - deriv f (j : ℝ)) -
+        (1 / 2 : 𝕜) * (∫ x in (j : ℝ)..(j + 1 : ℝ), B2 x * deriv (deriv f) x) :=
+  by
+  -- the frozen per-period polynomial kernel, built directly in 𝕜 as a pointwise
+    -- Pi-combination, so the HasDerivAt chain below has a function field that is
+    -- definitionally `u` (no function congruence needed)
+  
+  set cE : ℝ → 𝕜 := (RCLike.ofRealCLM (K := 𝕜) : ℝ → 𝕜) with hcE
+  set cJ : ℝ → 𝕜 := (fun _ : ℝ => (j : 𝕜)) with hcJ
+  set u : ℝ → 𝕜 := (cE - cJ) * (cE - cJ) - (cE - cJ) + (fun _ : ℝ => (1 / 6 : 𝕜)) with hu
+  set u' : ℝ → 𝕜 := fun x => (2 : 𝕜) * (cE x - cJ x) - (1 : 𝕜) with hup
+  have hu' : ∀ x ∈ Set.uIcc (j : ℝ) (j + 1 : ℝ), HasDerivAt u (u' x) x :=
+    by
+    intro x _
+    have hS :=
+      (ContinuousLinearMap.hasDerivAt (RCLike.ofRealCLM (K := 𝕜)) (x := x)).sub
+        (hasDerivAt_const (c := (j : 𝕜)) (x := x))
+    have hU :
+      HasDerivAt u
+        ((RCLike.ofRealCLM (K := 𝕜) 1 - 0) * ((x : 𝕜) - (j : 𝕜)) +
+              ((x : 𝕜) - (j : 𝕜)) * (RCLike.ofRealCLM (K := 𝕜) 1 - 0) -
+            (RCLike.ofRealCLM (K := 𝕜) 1 - 0) +
+          0)
+        x :=
+      hS.mul hS |>.sub hS |>.add (hasDerivAt_const (c := (1 / 6 : 𝕜)) (x := x))
+    have hD :
+      (RCLike.ofRealCLM (K := 𝕜) 1 - 0) * ((x : 𝕜) - (j : 𝕜)) +
+              ((x : 𝕜) - (j : 𝕜)) * (RCLike.ofRealCLM (K := 𝕜) 1 - 0) -
+            (RCLike.ofRealCLM (K := 𝕜) 1 - 0) +
+          0 =
+        u' x :=
+      by
+      dsimp only [u', cE, cJ]
+      simp
+      ring
+        -- `convert` leaves an IFF obligation between the two forms; rewriting the
+            -- deriv value makes it (P ↔ P)
+        
+    convert hU using 1
+    rw [hD]
+      -- v := f′ (so v′ := f″)
+      
+  have hv' : ∀ x ∈ Set.uIcc (j : ℝ) (j + 1 : ℝ), HasDerivAt (deriv f) (deriv (deriv f) x) x := fun x hx =>
+    (hf2 x hx).hasDerivAt
+  have hup_int : IntervalIntegrable (fun x : ℝ => u' x) volume (j : ℝ) (j + 1) :=
+    by
+    dsimp only [u', cE, cJ]
+    simp
+    have hcont : Continuous (fun (q : ℝ) => (2 : 𝕜) * ((q : 𝕜) - (j : 𝕜)) - (1 : 𝕜)) := by continuity
+    exact hcont.continuousOn.intervalIntegrable
+  have hvf_int : IntervalIntegrable (deriv f) volume (j : ℝ) (j + 1) := hcont_f'.intervalIntegrable
+  have hIBP :
+    (∫ x in (j : ℝ)..(j + 1 : ℝ), u x * deriv (deriv f) x) =
+      u (j + 1 : ℝ) * deriv f (j + 1 : ℝ) - u (j : ℝ) * deriv f (j : ℝ) -
+        (∫ x in (j : ℝ)..(j + 1 : ℝ), u' x * deriv f x) :=
+    integral_mul_deriv_eq_deriv_mul hu' hv' hup_int (hcont_f''.intervalIntegrable)
+  have hu_j : u (j : ℝ) = 1 / 6 := by
+    dsimp only [u, cE, cJ]
+    simp
+  have hu_j1 : u (j + 1 : ℝ) = 1 / 6 := by
+    dsimp only [u, cE, cJ]
+    simp
+  rw [hu_j, hu_j1] at hIBP
+  have hB2 :
+    (∫ x in (j : ℝ)..(j + 1 : ℝ), u x * deriv (deriv f) x) = (∫ x in (j : ℝ)..(j + 1 : ℝ), B2 x * deriv (deriv f) x) :=
+    by
+    apply intervalIntegral.integral_congr
+    intro x hx
+    change u x * deriv (deriv f) x = (B2 x : 𝕜) * deriv (deriv f) x
+    have hI : x ∈ Set.Icc (j : ℝ) (j + 1 : ℝ) :=
+      by
+      have hmin : min (j : ℝ) (j + 1 : ℝ) = (j : ℝ) := min_eq_left (by linarith)
+      have hmax : max (j : ℝ) (j + 1 : ℝ) = (j + 1 : ℝ) := max_eq_right (by linarith)
+      simpa [hmin, hmax] using hx
+    have hb : B2 x = (x - (j : ℝ)) ^ 2 - (x - (j : ℝ)) + 1 / 6 := B2_of_Icc_int j hI
+    have hreal : (1 / 6 : ℝ) = ((1 / 6 : ℚ) : ℝ) := by norm_num
+    have hconst : ((1 / 6 : ℝ) : 𝕜) = (1 / 6 : 𝕜) :=
+      by
+      rw [hreal, RCLike.ofReal_ratCast (1 / 6 : ℚ)]
+      norm_num
+    have hkr : u x = (((x - (j : ℝ)) ^ 2 - (x - (j : ℝ)) + 1 / 6 : ℝ) : 𝕜) :=
+      by
+      dsimp only [u, cE, cJ]
+      simp
+        -- both sides expand to the same real polynomial in (x-j); the only mismatch is
+              -- the constant (1/6 : 𝕜) vs ((algebraMap ℝ 𝕜) 6)⁻¹. ofReal_natCast bridges it:
+              -- (algebraMap ℝ 𝕜) 6 = (6 : 𝕜) is definitional (rfl), so `have`-ing it in
+              -- algebraMap form lets `rw` match (direct rw of the ↑-form does not).
+        
+      have h6 : ((algebraMap ℝ 𝕜) 6) = (6 : 𝕜) := RCLike.ofReal_natCast 6
+      rw [h6]
+      ring
+    rw [hkr, hb]
+  rw [hB2] at hIBP
+  have h1 :
+    (∫ x in (j : ℝ)..(j + 1 : ℝ), u' x * deriv f x) =
+      (1 / 6 : 𝕜) * (deriv f (j + 1 : ℝ) - deriv f (j : ℝ)) - (∫ x in (j : ℝ)..(j + 1 : ℝ), B2 x * deriv (deriv f) x) :=
+    by linear_combination hIBP
+  let S : Set ℝ := {x : ℝ | x ∈ Set.uIoc (j : ℝ) (j + 1 : ℝ) ∧ u' x * deriv f x ≠ (2 : 𝕜) * (B1 x : 𝕜) * deriv f x}
+  have hS : S ⊆ ({(j + 1 : ℝ)} : Set ℝ) := by
+    intro x hx
+    have hmin : min (j : ℝ) (j + 1 : ℝ) = (j : ℝ) := min_eq_left (by linarith)
+    have hmax : max (j : ℝ) (j + 1 : ℝ) = (j + 1 : ℝ) := max_eq_right (by linarith)
+    have hxlo : (j : ℝ) < x := by simpa [hmin] using hx.1.1
+    have hxhi : x ≤ (j + 1 : ℝ) := by simpa [hmax] using hx.1.2
+    by_contra! htop
+    have hxhi' : x < (j + 1 : ℝ) := lt_of_le_of_ne hxhi htop
+    have hfloor : (⌊x⌋₊ : ℝ) = (j : ℝ) := by
+      norm_cast
+      rw [Nat.floor_eq_iff (by linarith [show (0 : ℝ) ≤ x from le_trans (Nat.cast_nonneg j) (le_of_lt hxlo)])]
+      constructor
+      · norm_cast
+        linarith [hxlo]
+      · linarith [hxhi']
+    have hB1r : (2 : ℝ) * (x - (j : ℝ)) - 1 = 2 * B1 x :=
+      by
+      dsimp only [B1]
+      rw [hfloor]
+      ring
+        -- split into a scalar identity (no deriv f factor, so `ring` can normalize the
+            -- rational constants) and a trivial factor-preserving step
+        
+    have hb1 : B1 x = x - (j : ℝ) - 1 / 2 := by
+      dsimp only [B1]
+      rw [hfloor]
+    have hupB1 : u' x = (2 : 𝕜) * (B1 x : 𝕜) := by
+      rw [hb1]
+      dsimp only [u', cE, cJ]
+        -- push the algebraMap into the real RHS constant
+        
+      have h1b : ((x - (j : ℝ) - 1 / 2 : ℝ) : 𝕜) = ((x : 𝕜) - (j : 𝕜)) - (1 / 2 : 𝕜) :=
+        by
+        have hsub : ((x - (j : ℝ) - 1 / 2 : ℝ) : 𝕜) = ((x - (j : ℝ) : ℝ) : 𝕜) - ((1 / 2 : ℝ) : 𝕜) := by norm_cast
+        have hc1 : ((1 / 2 : ℝ) : 𝕜) = (1 / 2 : 𝕜) :=
+          by
+          have hcast : ((1 / 2 : ℝ) : 𝕜) = (((1 / 2 : ℚ) : ℝ) : 𝕜) :=
+            by
+            have : (1 / 2 : ℝ) = ((1 / 2 : ℚ) : ℝ) := by norm_num
+            rw [this]
+          rw [hcast, RCLike.ofReal_ratCast (1 / 2 : ℚ)]
+          norm_num
+        have hc2 : ((x - (j : ℝ) : ℝ) : 𝕜) = (x : 𝕜) - (j : 𝕜) := by norm_cast
+        rw [hsub, hc1, hc2]
+      rw [h1b]
+        -- unify the two notations for the real embedding (ofRealCLM vs ↑) so ring sees one atom
+        
+      have hE : (RCLike.ofRealCLM (K := 𝕜) x) = (x : 𝕜) := by rfl
+      rw [← hE]
+      ring
+    have heq : u' x * deriv f x = (2 : 𝕜) * (B1 x : 𝕜) * deriv f x := by rw [hupB1]
+    exact hx.2 heq
+  have hae : ∀ᵐ x ∂volume, x ∈ Set.uIoc (j : ℝ) (j + 1 : ℝ) → u' x * deriv f x = (2 : 𝕜) * (B1 x : 𝕜) * deriv f x :=
+    by
+    refine
+      (MeasureTheory.ae_iff (p := fun x =>
+            x ∈ Set.uIoc (j : ℝ) (j + 1 : ℝ) → u' x * deriv f x = (2 : 𝕜) * (B1 x : 𝕜) * deriv f x)).mpr
+        ?_
+          -- {x | ¬p x} = S up to the definitional form of ¬(P → Q)
+          
+    have hneg :
+      {x : ℝ | ¬(x ∈ Set.uIoc (j : ℝ) (j + 1 : ℝ) → u' x * deriv f x = (2 : 𝕜) * (B1 x : 𝕜) * deriv f x)} = S :=
+      by
+      ext x
+      constructor
+      · intro hx
+        push_neg at hx
+        exact ⟨hx.1, hx.2⟩
+      · intro hx
+        push_neg
+        exact ⟨hx.1, hx.2⟩
+    rw [hneg]
+      -- S ⊆ {j+1} and volume {j+1} = 0, so volume S = 0
+      
+    have htop1 : volume S ≤ volume ({(j + 1 : ℝ)} : Set ℝ) := MeasureTheory.measure_mono hS
+    have htop0 : volume ({(j + 1 : ℝ)} : Set ℝ) = 0 := by simp
+    have htop2 : 0 ≤ volume S := by positivity
+    exact le_antisymm (le_trans htop1 (le_of_eq htop0)) htop2
+  have h2 :
+    (∫ x in (j : ℝ)..(j + 1 : ℝ), (2 : 𝕜) * (B1 x : 𝕜) * deriv f x) =
+      (1 / 6 : 𝕜) * (deriv f (j + 1 : ℝ) - deriv f (j : ℝ)) - (∫ x in (j : ℝ)..(j + 1 : ℝ), B2 x * deriv (deriv f) x) :=
+    by
+    rw [← intervalIntegral.integral_congr_ae hae, h1]
+      -- factor ½.
+        -- the (1/2 : 𝕜)↔((algebraMap ℝ 𝕜) 2)⁻¹ scalar bridge (generic RCLike):
+        -- `RCLike.real_smul_eq_coe_mul (1/2 : ℝ) _` normalizes its coe to
+        -- ((algebraMap ℝ 𝕜) 2)⁻¹, so hhalf is stated in that form (ofReal_natCast 2
+        -- then norm_num). `simpa [hhalf]` closes the two smul↔mul steps.
+      
+  have hhalf : (1 / 2 : 𝕜) = ((algebraMap ℝ 𝕜) 2)⁻¹ :=
+    by
+    have h2c : ((algebraMap ℝ 𝕜) 2) = (2 : 𝕜) := RCLike.ofReal_natCast 2
+    rw [h2c]
+    norm_num
+  calc
+    (∫ x in (j : ℝ)..(j + 1 : ℝ), B1 x * deriv f x) =
+        (1 / 2 : ℝ) • (∫ x in (j : ℝ)..(j + 1 : ℝ), (2 : 𝕜) * (B1 x : 𝕜) * deriv f x) :=
+      by
+      rw [show
+          (∫ x in (j : ℝ)..(j + 1 : ℝ), B1 x * deriv f x) =
+            (∫ x in (j : ℝ)..(j + 1 : ℝ), ((2 : 𝕜) * (B1 x : 𝕜) * deriv f x) * (1 / 2 : 𝕜))
+          from by
+          apply intervalIntegral.integral_congr
+          intro x _
+          norm_num
+          ring,
+        intervalIntegral.integral_mul_const (1 / 2 : 𝕜) (fun x => (2 : 𝕜) * (B1 x : 𝕜) * deriv f x), mul_comm]
+      simpa [hhalf] using
+        (RCLike.real_smul_eq_coe_mul (1 / 2 : ℝ) (∫ x in (j : ℝ)..(j + 1 : ℝ), (2 : 𝕜) * (B1 x : 𝕜) * deriv f x)).symm
+    _ =
+        (1 / 2 : 𝕜) *
+          ((1 / 6 : 𝕜) * (deriv f (j + 1 : ℝ) - deriv f (j : ℝ)) -
+            (∫ x in (j : ℝ)..(j + 1 : ℝ), B2 x * deriv (deriv f) x)) :=
+      by
+      rw [h2]
+      simpa [hhalf] using
+        RCLike.real_smul_eq_coe_mul (1 / 2 : ℝ)
+          ((1 / 6 : 𝕜) * (deriv f (j + 1 : ℝ) - deriv f (j : ℝ)) -
+            (∫ x in (j : ℝ)..(j + 1 : ℝ), B2 x * deriv (deriv f) x))
+    _ =
+        (1 / 12 : 𝕜) * (deriv f (j + 1 : ℝ) - deriv f (j : ℝ)) -
+          (1 / 2 : 𝕜) * (∫ x in (j : ℝ)..(j + 1 : ℝ), B2 x * deriv (deriv f) x) :=
+      by ring`.
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:175:4: `simp` is a flexible tactic modifying `⊢`. Try `simp?` and use the suggested `simp only [...]`. Alternatively, use `suffices` to explicitly state the simplified form.
+
+Note: This linter can be disabled with `set_option linter.flexible false`
+info: RhAttack/P4Tail.lean:175:4: Try this:
+  [apply] simp only [RCLike.ofRealCLM_apply]
+info: RhAttack/P4Tail.lean:176:4: `have hcont : Continuous (fun (q : ℝ) => (2 : 𝕜) * ((q : 𝕜) - (j : 𝕜)) - (1 : 𝕜)) := by continuity`
+modifies the current goal, which was modified by the flexible tactic `simp` on line 175!
+warning: RhAttack/P4Tail.lean:175:4: `simp` is a flexible tactic modifying `⊢`. Try `simp?` and use the suggested `simp only [...]`. Alternatively, use `suffices` to explicitly state the simplified form.
+
+Note: This linter can be disabled with `set_option linter.flexible false`
+info: RhAttack/P4Tail.lean:175:4: Try this:
+  [apply] simp only [RCLike.ofRealCLM_apply]
+info: RhAttack/P4Tail.lean:177:4: `exact hcont.continuousOn.intervalIntegrable`
+modifies the current goal, which was modified by the flexible tactic `simp` on line 175!
+warning: RhAttack/P4Tail.lean:213:6: `simp
+      -- both sides expand to the same real polynomial in (x-j); the only mismatch is
+      -- the constant (1/6 : 𝕜) vs ((algebraMap ℝ 𝕜) 6)⁻¹. ofReal_natCast bridges it:
+      -- (algebraMap ℝ 𝕜) 6 = (6 : 𝕜) is definitional (rfl), so `have`-ing it in
+      -- algebraMap form lets `rw` match (direct rw of the ↑-form does not).` is a flexible tactic modifying `⊢`. Try `simp?` and use the suggested `simp only [...]`. Alternatively, use `suffices` to explicitly state the simplified form.
+
+Note: This linter can be disabled with `set_option linter.flexible false`
+info: RhAttack/P4Tail.lean:213:6: Try this:
+  [apply] simp only [RCLike.ofRealCLM_apply, one_div, Pi.add_apply, Pi.sub_apply, Pi.mul_apply, map_add, map_sub,
+    map_pow, map_natCast, map_inv₀]
+info: RhAttack/P4Tail.lean:219:6: `rw [h6]`
+modifies the current goal, which was modified by the flexible tactic `simp` on line 213!
+warning: RhAttack/P4Tail.lean:244:8: Unused tactic linter: `norm_cast` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: RhAttack/P4Tail.lean:161:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: RhAttack/P4Tail.lean:176:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: RhAttack/P4Tail.lean:242:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: RhAttack/P4Tail.lean:1:0: * '/- P4Tail — local P4 atom-2: the 2nd-order finite Euler–Maclaurin identity.':
+Malformed or missing copyright header: `/-` should be alone on its own line.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:39:12: * '':
+Copyright line should start with 'Copyright (c) YYYY'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:39:12: * '':
+Copyright line should end with '. All rights reserved.'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:0: * '(spec: kainos plan/40-prize-islands/rh-attack/spec/p4-tail-law-abstract.md
+§0.6/§T2/§T3).
+
+ROLE: the second-order EM identity — the `−½f(n) + (1/12)(f′ m − f′ n) +
+B̂₂·f″` kernel — from which the W_n(t) form follows. Built exclusively
+from:
+  (1) the ported 1st-order identity (RhAttack.P4Em, published), (2) one polynomial IBP per unit period (u = the frozen per-period
+      polynomial (x−j)²−(x−j)+1/6, via
+      `intervalIntegral.integral_mul_deriv_eq_deriv_mul`), plus the a.e.
+      endpoint conversion `intervalIntegral.integral_congr_ae` for the
+      single kink point x = j+1, (3) the pinned additivity lemma
+      `intervalIntegral.sum_integral_adjacent_intervals_Ico`.
+This is the ONLY local invention of the P4 line (§0.6: no published
+Lean 2nd-order EM exists; the Isabelle AFP entry is the cross-check).
+
+APPROACH: integers n ≤ m; f : ℝ → 𝕜, [RCLike 𝕜] (ℝ or ℂ). Per-period
+identity (proven here: int_B1f'_period):
+
+    ∫_j^{j+1} B̂₁·f′ = (1/12)(f′(j+1) − f′(j)) − (1/2)·∫_j^{j+1} B̂₂·f″,
+from which the finite target follows by summation (atom-2b, next):
+
+    ∑ k ∈ Ioc n m, f k = ∫_n^m f + ½(f m − f n)
+                    + (1/12)(f′ m − f′ n) − ½·∫_n^m B̂₂·f″ dx.
+
+Signs verified numerically day-017 at σ=1.5 [3.2e-7] and σ=½ [3.7e-5]
+(mpmath dps-40 — computed, not recalled).
+
+STATUS: atom-2, day-017. Build: `lake build RhAttack.P4Tail`.
+
+THEOREMS (global names):
+  B2, B2_at_int, B2_of_Icc_int, B2poly, B2_of_B2poly, abs_B2_le, aestronglyMeasurable_B2, intervalIntegrable_B2_mul_deriv2, int_B1f'_period.':
+If an authors line spans multiple lines, each line but the last must end with a trailing comma
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:0: * '(spec: ka':
+The authors line should begin with 'Authors: '
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:10:0: * '  ':
+Double spaces are not allowed.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:31:47: * ' and ':
+Please, do not use 'and'; use ',' instead.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:71: * '.':
+Please, do not end the authors' line with a period.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:3:0: * 'OUTLINE piece: P4 (the rigorous missing-tail law, §9 row P4), atom-2':
+Second copyright line should be "Released under Apache 2.0 license as described in the file LICENSE."
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:44:0: The module doc-string for a file should be the first command after the imports.
+Please, add a module doc-string before `end`.
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:1:0: * '/- P4Tail — local P4 atom-2: the 2nd-order finite Euler–Maclaurin identity.':
+Malformed or missing copyright header: `/-` should be alone on its own line.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:39:12: * '':
+Copyright line should start with 'Copyright (c) YYYY'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:39:12: * '':
+Copyright line should end with '. All rights reserved.'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:0: * '(spec: kainos plan/40-prize-islands/rh-attack/spec/p4-tail-law-abstract.md
+§0.6/§T2/§T3).
+
+ROLE: the second-order EM identity — the `−½f(n) + (1/12)(f′ m − f′ n) +
+B̂₂·f″` kernel — from which the W_n(t) form follows. Built exclusively
+from:
+  (1) the ported 1st-order identity (RhAttack.P4Em, published), (2) one polynomial IBP per unit period (u = the frozen per-period
+      polynomial (x−j)²−(x−j)+1/6, via
+      `intervalIntegral.integral_mul_deriv_eq_deriv_mul`), plus the a.e.
+      endpoint conversion `intervalIntegral.integral_congr_ae` for the
+      single kink point x = j+1, (3) the pinned additivity lemma
+      `intervalIntegral.sum_integral_adjacent_intervals_Ico`.
+This is the ONLY local invention of the P4 line (§0.6: no published
+Lean 2nd-order EM exists; the Isabelle AFP entry is the cross-check).
+
+APPROACH: integers n ≤ m; f : ℝ → 𝕜, [RCLike 𝕜] (ℝ or ℂ). Per-period
+identity (proven here: int_B1f'_period):
+
+    ∫_j^{j+1} B̂₁·f′ = (1/12)(f′(j+1) − f′(j)) − (1/2)·∫_j^{j+1} B̂₂·f″,
+from which the finite target follows by summation (atom-2b, next):
+
+    ∑ k ∈ Ioc n m, f k = ∫_n^m f + ½(f m − f n)
+                    + (1/12)(f′ m − f′ n) − ½·∫_n^m B̂₂·f″ dx.
+
+Signs verified numerically day-017 at σ=1.5 [3.2e-7] and σ=½ [3.7e-5]
+(mpmath dps-40 — computed, not recalled).
+
+STATUS: atom-2, day-017. Build: `lake build RhAttack.P4Tail`.
+
+THEOREMS (global names):
+  B2, B2_at_int, B2_of_Icc_int, B2poly, B2_of_B2poly, abs_B2_le, aestronglyMeasurable_B2, intervalIntegrable_B2_mul_deriv2, int_B1f'_period.':
+If an authors line spans multiple lines, each line but the last must end with a trailing comma
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:0: * '(spec: ka':
+The authors line should begin with 'Authors: '
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:10:0: * '  ':
+Double spaces are not allowed.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:31:47: * ' and ':
+Please, do not use 'and'; use ',' instead.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:71: * '.':
+Please, do not end the authors' line with a period.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:3:0: * 'OUTLINE piece: P4 (the rigorous missing-tail law, §9 row P4), atom-2':
+Second copyright line should be "Released under Apache 2.0 license as described in the file LICENSE."
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:44:0: The module doc-string for a file should be the first command after the imports.
+Please, add a module doc-string before `end`.
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:1:0: * '/- P4Tail — local P4 atom-2: the 2nd-order finite Euler–Maclaurin identity.':
+Malformed or missing copyright header: `/-` should be alone on its own line.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:39:12: * '':
+Copyright line should start with 'Copyright (c) YYYY'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:39:12: * '':
+Copyright line should end with '. All rights reserved.'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:0: * '(spec: kainos plan/40-prize-islands/rh-attack/spec/p4-tail-law-abstract.md
+§0.6/§T2/§T3).
+
+ROLE: the second-order EM identity — the `−½f(n) + (1/12)(f′ m − f′ n) +
+B̂₂·f″` kernel — from which the W_n(t) form follows. Built exclusively
+from:
+  (1) the ported 1st-order identity (RhAttack.P4Em, published), (2) one polynomial IBP per unit period (u = the frozen per-period
+      polynomial (x−j)²−(x−j)+1/6, via
+      `intervalIntegral.integral_mul_deriv_eq_deriv_mul`), plus the a.e.
+      endpoint conversion `intervalIntegral.integral_congr_ae` for the
+      single kink point x = j+1, (3) the pinned additivity lemma
+      `intervalIntegral.sum_integral_adjacent_intervals_Ico`.
+This is the ONLY local invention of the P4 line (§0.6: no published
+Lean 2nd-order EM exists; the Isabelle AFP entry is the cross-check).
+
+APPROACH: integers n ≤ m; f : ℝ → 𝕜, [RCLike 𝕜] (ℝ or ℂ). Per-period
+identity (proven here: int_B1f'_period):
+
+    ∫_j^{j+1} B̂₁·f′ = (1/12)(f′(j+1) − f′(j)) − (1/2)·∫_j^{j+1} B̂₂·f″,
+from which the finite target follows by summation (atom-2b, next):
+
+    ∑ k ∈ Ioc n m, f k = ∫_n^m f + ½(f m − f n)
+                    + (1/12)(f′ m − f′ n) − ½·∫_n^m B̂₂·f″ dx.
+
+Signs verified numerically day-017 at σ=1.5 [3.2e-7] and σ=½ [3.7e-5]
+(mpmath dps-40 — computed, not recalled).
+
+STATUS: atom-2, day-017. Build: `lake build RhAttack.P4Tail`.
+
+THEOREMS (global names):
+  B2, B2_at_int, B2_of_Icc_int, B2poly, B2_of_B2poly, abs_B2_le, aestronglyMeasurable_B2, intervalIntegrable_B2_mul_deriv2, int_B1f'_period.':
+If an authors line spans multiple lines, each line but the last must end with a trailing comma
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:0: * '(spec: ka':
+The authors line should begin with 'Authors: '
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:10:0: * '  ':
+Double spaces are not allowed.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:31:47: * ' and ':
+Please, do not use 'and'; use ',' instead.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:71: * '.':
+Please, do not end the authors' line with a period.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:3:0: * 'OUTLINE piece: P4 (the rigorous missing-tail law, §9 row P4), atom-2':
+Second copyright line should be "Released under Apache 2.0 license as described in the file LICENSE."
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:44:0: The module doc-string for a file should be the first command after the imports.
+Please, add a module doc-string before `end`.
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:1:0: * '/- P4Tail — local P4 atom-2: the 2nd-order finite Euler–Maclaurin identity.':
+Malformed or missing copyright header: `/-` should be alone on its own line.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:39:12: * '':
+Copyright line should start with 'Copyright (c) YYYY'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:39:12: * '':
+Copyright line should end with '. All rights reserved.'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:0: * '(spec: kainos plan/40-prize-islands/rh-attack/spec/p4-tail-law-abstract.md
+§0.6/§T2/§T3).
+
+ROLE: the second-order EM identity — the `−½f(n) + (1/12)(f′ m − f′ n) +
+B̂₂·f″` kernel — from which the W_n(t) form follows. Built exclusively
+from:
+  (1) the ported 1st-order identity (RhAttack.P4Em, published), (2) one polynomial IBP per unit period (u = the frozen per-period
+      polynomial (x−j)²−(x−j)+1/6, via
+      `intervalIntegral.integral_mul_deriv_eq_deriv_mul`), plus the a.e.
+      endpoint conversion `intervalIntegral.integral_congr_ae` for the
+      single kink point x = j+1, (3) the pinned additivity lemma
+      `intervalIntegral.sum_integral_adjacent_intervals_Ico`.
+This is the ONLY local invention of the P4 line (§0.6: no published
+Lean 2nd-order EM exists; the Isabelle AFP entry is the cross-check).
+
+APPROACH: integers n ≤ m; f : ℝ → 𝕜, [RCLike 𝕜] (ℝ or ℂ). Per-period
+identity (proven here: int_B1f'_period):
+
+    ∫_j^{j+1} B̂₁·f′ = (1/12)(f′(j+1) − f′(j)) − (1/2)·∫_j^{j+1} B̂₂·f″,
+from which the finite target follows by summation (atom-2b, next):
+
+    ∑ k ∈ Ioc n m, f k = ∫_n^m f + ½(f m − f n)
+                    + (1/12)(f′ m − f′ n) − ½·∫_n^m B̂₂·f″ dx.
+
+Signs verified numerically day-017 at σ=1.5 [3.2e-7] and σ=½ [3.7e-5]
+(mpmath dps-40 — computed, not recalled).
+
+STATUS: atom-2, day-017. Build: `lake build RhAttack.P4Tail`.
+
+THEOREMS (global names):
+  B2, B2_at_int, B2_of_Icc_int, B2poly, B2_of_B2poly, abs_B2_le, aestronglyMeasurable_B2, intervalIntegrable_B2_mul_deriv2, int_B1f'_period.':
+If an authors line spans multiple lines, each line but the last must end with a trailing comma
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:0: * '(spec: ka':
+The authors line should begin with 'Authors: '
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:10:0: * '  ':
+Double spaces are not allowed.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:31:47: * ' and ':
+Please, do not use 'and'; use ',' instead.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:4:71: * '.':
+Please, do not end the authors' line with a period.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:3:0: * 'OUTLINE piece: P4 (the rigorous missing-tail law, §9 row P4), atom-2':
+Second copyright line should be "Released under Apache 2.0 license as described in the file LICENSE."
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Tail.lean:44:0: The module doc-string for a file should be the first command after the imports.
+Please, add a module doc-string before ``.
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+⚠ [8708/8709] Replayed RhAttack.P4Em2
+warning: RhAttack/P4Em2.lean:1:0: * '/- P4Em2 — P4 atom-2b: the GLOBAL finite second-order Euler–Maclaurin law.':
+Malformed or missing copyright header: `/-` should be alone on its own line.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:56:38: * '':
+Copyright line should start with 'Copyright (c) YYYY'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:56:38: * '':
+Copyright line should end with '. All rights reserved.'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:4:0: * '(spec: kainos plan/40-prize-islands/rh-attack/spec/p4-tail-law-abstract.md
+§T3; the §4 finite target).
+
+ROLE: stitches the per-period second-order identity
+(RhAttack.P4Tail.int_B1f'_period, atom-2) over every unit period of
+[n, m] into the global finite law
+
+  ∑ k ∈ Finset.Ioc n m, f k
+    = ∫_n^m f + ½(f m − f n) + (1/12)(f′ m − f′ n) − ½·∫_n^m B̂₂·f″ dx
+
+the finite core of the Riemann 1859 identity, from which the
+missing-tail W_n(t) form follows at σ = ½ (P4 no-ζ core convention:
+the finite/derivative EM machinery is machine-checked here; the 1859
+continuation identification is cited under the same convention as
+B-3's DLMF 25.2.12 citation).
+
+Built exclusively from:
+  (1) the 1st-order sum identity at integer endpoints
+      (RhAttack.P4Em.sum_eq_integral_add_integral_deriv, published), (2) the per-period 2nd-order identity
+      (RhAttack.P4Tail.int_B1f'_period, atom-2), (3) additivity of adjacent interval integrals
+      (intervalIntegral.sum_integral_adjacent_intervals_Ico —
+      Mathlib/MeasureTheory/Integral/IntervalIntegral/Basic.lean, used
+      here exactly as in Mathlib's Analysis/SumIntegralComparisons.lean
+      with `a := (↑·)` and `Nat.cast_add`/`Nat.cast_one` endpoint
+      normalization, as in Mathlib's NumberTheory/AbelSummation.lean), (4) one local finite additive telescope (ico_sum_telescope, this file).
+
+APPROACH / pinned APIs (Lean 4.33.1, mathlib f001ca3a4):
+  * `Set.uIcc a b` is the UNORDERED CLOSED interval `Icc (min a b)
+    (max a b)` (Order/Interval/Set/UnorderedInterval.lean:59); with
+    ordered endpoints, `Set.uIcc_of_le (h : a ≤ b) : uIcc a b = Icc a b`
+    and `Set.mem_uIcc_of_le`.
+  * The additivity lemma's period endpoints are nat-cast form
+    `a (k + 1) = ((k + 1 : ℕ) : ℝ)`; the source notation
+    `(j + 1 : ℝ)` elaborates to real-add form `((j : ℝ) + 1)`. Bridge:
+    `simp only [Nat.cast_add, Nat.cast_one]` (both directions), or for
+    `rw` first `rw [← Nat.cast_one]` (the real literal `1` is OfNat,   not defeq to `↑(1 : ℕ)`).
+  * `ContinuousOn` restriction is `ContinuousOn.mono`
+    (Topology/ContinuousOn.lean:320); there is NO `restrict_set` in
+    this checkout.
+  * `Finset.sum_insert (by simp [Finset.mem_Ico])` + `abel` for the
+    telescope step; `rw` auto-closes rfl goals in this toolchain.
+  * `push_cast; ring` closes the mixed ℝ-scalar/𝕜 endpoint forms
+    (probed).
+
+STATUS: GREEN (day-019, 2026-09-12, Lean 4.33.1): both theorems compile;
+full build 17424 jobs, 0 errors; all four `rhattack` gates PASS.
+(First red pass landed day-017/018 — the fixed errors are captured in
+the day-019 journal and the wiki.)
+THEOREMS: ico_sum_telescope, em2_finite -/
+':
+If an authors line spans multiple lines, each line but the last must end with a trailing comma
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:4:0: * '(spec: ka':
+The authors line should begin with 'Authors: '
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:11:0: * '  ':
+Double spaces are not allowed.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:29:19: * ' and ':
+Please, do not use 'and'; use ',' instead.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:3:0: * 'OUTLINE piece: P4 (the rigorous missing-tail law, §9 row P4), atom-2b':
+Second copyright line should be "Released under Apache 2.0 license as described in the file LICENSE."
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:61:0: The module doc-string for a file should be the first command after the imports.
+Please, add a module doc-string before `open Real Set MeasureTheory intervalIntegral Finset`.
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:1:0: * '/- P4Em2 — P4 atom-2b: the GLOBAL finite second-order Euler–Maclaurin law.':
+Malformed or missing copyright header: `/-` should be alone on its own line.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:56:38: * '':
+Copyright line should start with 'Copyright (c) YYYY'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:56:38: * '':
+Copyright line should end with '. All rights reserved.'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:4:0: * '(spec: kainos plan/40-prize-islands/rh-attack/spec/p4-tail-law-abstract.md
+§T3; the §4 finite target).
+
+ROLE: stitches the per-period second-order identity
+(RhAttack.P4Tail.int_B1f'_period, atom-2) over every unit period of
+[n, m] into the global finite law
+
+  ∑ k ∈ Finset.Ioc n m, f k
+    = ∫_n^m f + ½(f m − f n) + (1/12)(f′ m − f′ n) − ½·∫_n^m B̂₂·f″ dx
+
+the finite core of the Riemann 1859 identity, from which the
+missing-tail W_n(t) form follows at σ = ½ (P4 no-ζ core convention:
+the finite/derivative EM machinery is machine-checked here; the 1859
+continuation identification is cited under the same convention as
+B-3's DLMF 25.2.12 citation).
+
+Built exclusively from:
+  (1) the 1st-order sum identity at integer endpoints
+      (RhAttack.P4Em.sum_eq_integral_add_integral_deriv, published), (2) the per-period 2nd-order identity
+      (RhAttack.P4Tail.int_B1f'_period, atom-2), (3) additivity of adjacent interval integrals
+      (intervalIntegral.sum_integral_adjacent_intervals_Ico —
+      Mathlib/MeasureTheory/Integral/IntervalIntegral/Basic.lean, used
+      here exactly as in Mathlib's Analysis/SumIntegralComparisons.lean
+      with `a := (↑·)` and `Nat.cast_add`/`Nat.cast_one` endpoint
+      normalization, as in Mathlib's NumberTheory/AbelSummation.lean), (4) one local finite additive telescope (ico_sum_telescope, this file).
+
+APPROACH / pinned APIs (Lean 4.33.1, mathlib f001ca3a4):
+  * `Set.uIcc a b` is the UNORDERED CLOSED interval `Icc (min a b)
+    (max a b)` (Order/Interval/Set/UnorderedInterval.lean:59); with
+    ordered endpoints, `Set.uIcc_of_le (h : a ≤ b) : uIcc a b = Icc a b`
+    and `Set.mem_uIcc_of_le`.
+  * The additivity lemma's period endpoints are nat-cast form
+    `a (k + 1) = ((k + 1 : ℕ) : ℝ)`; the source notation
+    `(j + 1 : ℝ)` elaborates to real-add form `((j : ℝ) + 1)`. Bridge:
+    `simp only [Nat.cast_add, Nat.cast_one]` (both directions), or for
+    `rw` first `rw [← Nat.cast_one]` (the real literal `1` is OfNat,   not defeq to `↑(1 : ℕ)`).
+  * `ContinuousOn` restriction is `ContinuousOn.mono`
+    (Topology/ContinuousOn.lean:320); there is NO `restrict_set` in
+    this checkout.
+  * `Finset.sum_insert (by simp [Finset.mem_Ico])` + `abel` for the
+    telescope step; `rw` auto-closes rfl goals in this toolchain.
+  * `push_cast; ring` closes the mixed ℝ-scalar/𝕜 endpoint forms
+    (probed).
+
+STATUS: GREEN (day-019, 2026-09-12, Lean 4.33.1): both theorems compile;
+full build 17424 jobs, 0 errors; all four `rhattack` gates PASS.
+(First red pass landed day-017/018 — the fixed errors are captured in
+the day-019 journal and the wiki.)
+THEOREMS: ico_sum_telescope, em2_finite -/
+':
+If an authors line spans multiple lines, each line but the last must end with a trailing comma
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:4:0: * '(spec: ka':
+The authors line should begin with 'Authors: '
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:11:0: * '  ':
+Double spaces are not allowed.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:29:19: * ' and ':
+Please, do not use 'and'; use ',' instead.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:3:0: * 'OUTLINE piece: P4 (the rigorous missing-tail law, §9 row P4), atom-2b':
+Second copyright line should be "Released under Apache 2.0 license as described in the file LICENSE."
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:61:0: The module doc-string for a file should be the first command after the imports.
+Please, add a module doc-string before `variable {𝕜 : Type*} [RCLike 𝕜]`.
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:1:0: * '/- P4Em2 — P4 atom-2b: the GLOBAL finite second-order Euler–Maclaurin law.':
+Malformed or missing copyright header: `/-` should be alone on its own line.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:56:38: * '':
+Copyright line should start with 'Copyright (c) YYYY'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:56:38: * '':
+Copyright line should end with '. All rights reserved.'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:4:0: * '(spec: kainos plan/40-prize-islands/rh-attack/spec/p4-tail-law-abstract.md
+§T3; the §4 finite target).
+
+ROLE: stitches the per-period second-order identity
+(RhAttack.P4Tail.int_B1f'_period, atom-2) over every unit period of
+[n, m] into the global finite law
+
+  ∑ k ∈ Finset.Ioc n m, f k
+    = ∫_n^m f + ½(f m − f n) + (1/12)(f′ m − f′ n) − ½·∫_n^m B̂₂·f″ dx
+
+the finite core of the Riemann 1859 identity, from which the
+missing-tail W_n(t) form follows at σ = ½ (P4 no-ζ core convention:
+the finite/derivative EM machinery is machine-checked here; the 1859
+continuation identification is cited under the same convention as
+B-3's DLMF 25.2.12 citation).
+
+Built exclusively from:
+  (1) the 1st-order sum identity at integer endpoints
+      (RhAttack.P4Em.sum_eq_integral_add_integral_deriv, published), (2) the per-period 2nd-order identity
+      (RhAttack.P4Tail.int_B1f'_period, atom-2), (3) additivity of adjacent interval integrals
+      (intervalIntegral.sum_integral_adjacent_intervals_Ico —
+      Mathlib/MeasureTheory/Integral/IntervalIntegral/Basic.lean, used
+      here exactly as in Mathlib's Analysis/SumIntegralComparisons.lean
+      with `a := (↑·)` and `Nat.cast_add`/`Nat.cast_one` endpoint
+      normalization, as in Mathlib's NumberTheory/AbelSummation.lean), (4) one local finite additive telescope (ico_sum_telescope, this file).
+
+APPROACH / pinned APIs (Lean 4.33.1, mathlib f001ca3a4):
+  * `Set.uIcc a b` is the UNORDERED CLOSED interval `Icc (min a b)
+    (max a b)` (Order/Interval/Set/UnorderedInterval.lean:59); with
+    ordered endpoints, `Set.uIcc_of_le (h : a ≤ b) : uIcc a b = Icc a b`
+    and `Set.mem_uIcc_of_le`.
+  * The additivity lemma's period endpoints are nat-cast form
+    `a (k + 1) = ((k + 1 : ℕ) : ℝ)`; the source notation
+    `(j + 1 : ℝ)` elaborates to real-add form `((j : ℝ) + 1)`. Bridge:
+    `simp only [Nat.cast_add, Nat.cast_one]` (both directions), or for
+    `rw` first `rw [← Nat.cast_one]` (the real literal `1` is OfNat,   not defeq to `↑(1 : ℕ)`).
+  * `ContinuousOn` restriction is `ContinuousOn.mono`
+    (Topology/ContinuousOn.lean:320); there is NO `restrict_set` in
+    this checkout.
+  * `Finset.sum_insert (by simp [Finset.mem_Ico])` + `abel` for the
+    telescope step; `rw` auto-closes rfl goals in this toolchain.
+  * `push_cast; ring` closes the mixed ℝ-scalar/𝕜 endpoint forms
+    (probed).
+
+STATUS: GREEN (day-019, 2026-09-12, Lean 4.33.1): both theorems compile;
+full build 17424 jobs, 0 errors; all four `rhattack` gates PASS.
+(First red pass landed day-017/018 — the fixed errors are captured in
+the day-019 journal and the wiki.)
+THEOREMS: ico_sum_telescope, em2_finite -/
+':
+If an authors line spans multiple lines, each line but the last must end with a trailing comma
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:4:0: * '(spec: ka':
+The authors line should begin with 'Authors: '
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:11:0: * '  ':
+Double spaces are not allowed.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:29:19: * ' and ':
+Please, do not use 'and'; use ',' instead.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:3:0: * 'OUTLINE piece: P4 (the rigorous missing-tail law, §9 row P4), atom-2b':
+Second copyright line should be "Released under Apache 2.0 license as described in the file LICENSE."
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:61:0: The module doc-string for a file should be the first command after the imports.
+Please, add a module doc-string before `noncomputable section`.
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:1:0: * '/- P4Em2 — P4 atom-2b: the GLOBAL finite second-order Euler–Maclaurin law.':
+Malformed or missing copyright header: `/-` should be alone on its own line.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:56:38: * '':
+Copyright line should start with 'Copyright (c) YYYY'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:56:38: * '':
+Copyright line should end with '. All rights reserved.'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:4:0: * '(spec: kainos plan/40-prize-islands/rh-attack/spec/p4-tail-law-abstract.md
+§T3; the §4 finite target).
+
+ROLE: stitches the per-period second-order identity
+(RhAttack.P4Tail.int_B1f'_period, atom-2) over every unit period of
+[n, m] into the global finite law
+
+  ∑ k ∈ Finset.Ioc n m, f k
+    = ∫_n^m f + ½(f m − f n) + (1/12)(f′ m − f′ n) − ½·∫_n^m B̂₂·f″ dx
+
+the finite core of the Riemann 1859 identity, from which the
+missing-tail W_n(t) form follows at σ = ½ (P4 no-ζ core convention:
+the finite/derivative EM machinery is machine-checked here; the 1859
+continuation identification is cited under the same convention as
+B-3's DLMF 25.2.12 citation).
+
+Built exclusively from:
+  (1) the 1st-order sum identity at integer endpoints
+      (RhAttack.P4Em.sum_eq_integral_add_integral_deriv, published), (2) the per-period 2nd-order identity
+      (RhAttack.P4Tail.int_B1f'_period, atom-2), (3) additivity of adjacent interval integrals
+      (intervalIntegral.sum_integral_adjacent_intervals_Ico —
+      Mathlib/MeasureTheory/Integral/IntervalIntegral/Basic.lean, used
+      here exactly as in Mathlib's Analysis/SumIntegralComparisons.lean
+      with `a := (↑·)` and `Nat.cast_add`/`Nat.cast_one` endpoint
+      normalization, as in Mathlib's NumberTheory/AbelSummation.lean), (4) one local finite additive telescope (ico_sum_telescope, this file).
+
+APPROACH / pinned APIs (Lean 4.33.1, mathlib f001ca3a4):
+  * `Set.uIcc a b` is the UNORDERED CLOSED interval `Icc (min a b)
+    (max a b)` (Order/Interval/Set/UnorderedInterval.lean:59); with
+    ordered endpoints, `Set.uIcc_of_le (h : a ≤ b) : uIcc a b = Icc a b`
+    and `Set.mem_uIcc_of_le`.
+  * The additivity lemma's period endpoints are nat-cast form
+    `a (k + 1) = ((k + 1 : ℕ) : ℝ)`; the source notation
+    `(j + 1 : ℝ)` elaborates to real-add form `((j : ℝ) + 1)`. Bridge:
+    `simp only [Nat.cast_add, Nat.cast_one]` (both directions), or for
+    `rw` first `rw [← Nat.cast_one]` (the real literal `1` is OfNat,   not defeq to `↑(1 : ℕ)`).
+  * `ContinuousOn` restriction is `ContinuousOn.mono`
+    (Topology/ContinuousOn.lean:320); there is NO `restrict_set` in
+    this checkout.
+  * `Finset.sum_insert (by simp [Finset.mem_Ico])` + `abel` for the
+    telescope step; `rw` auto-closes rfl goals in this toolchain.
+  * `push_cast; ring` closes the mixed ℝ-scalar/𝕜 endpoint forms
+    (probed).
+
+STATUS: GREEN (day-019, 2026-09-12, Lean 4.33.1): both theorems compile;
+full build 17424 jobs, 0 errors; all four `rhattack` gates PASS.
+(First red pass landed day-017/018 — the fixed errors are captured in
+the day-019 journal and the wiki.)
+THEOREMS: ico_sum_telescope, em2_finite -/
+':
+If an authors line spans multiple lines, each line but the last must end with a trailing comma
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:4:0: * '(spec: ka':
+The authors line should begin with 'Authors: '
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:11:0: * '  ':
+Double spaces are not allowed.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:29:19: * ' and ':
+Please, do not use 'and'; use ',' instead.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:3:0: * 'OUTLINE piece: P4 (the rigorous missing-tail law, §9 row P4), atom-2b':
+Second copyright line should be "Released under Apache 2.0 license as described in the file LICENSE."
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:61:0: The module doc-string for a file should be the first command after the imports.
+Please, add a module doc-string before `/-- Finite additive telescope over `Ico n m` in any additive commutative
+    group: `∑ i ∈ Ico n m, (g (i + 1) - g i) = g m - g n`.
+
+Used by `em2_finite` to collapse the sum of the per-period endpoint
+differences `f′(j+1) − f′(j)` into `f′(m) − f′(n)`. `n = m` is the
+reflexive base case. -/
+theorem ico_sum_telescope (g : ℕ → 𝕜) (n m : ℕ) (hnm : n ≤ m) : ∑ i ∈ Finset.Ico n m, (g (i + 1) - g i) = g m - g n :=
+  by
+  refine Nat.le_induction ?_ ?_ m hnm
+  · simp
+  · intro p _ IH
+    have hsplit : Finset.Ico n (p + 1) = insert p (Finset.Ico n p) :=
+      by
+      ext i
+      simp [Finset.mem_Ico]
+      omega
+    rw [hsplit, Finset.sum_insert (by simp [Finset.mem_Ico]), IH]
+    abel`.
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:1:0: * '/- P4Em2 — P4 atom-2b: the GLOBAL finite second-order Euler–Maclaurin law.':
+Malformed or missing copyright header: `/-` should be alone on its own line.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:56:38: * '':
+Copyright line should start with 'Copyright (c) YYYY'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:56:38: * '':
+Copyright line should end with '. All rights reserved.'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:4:0: * '(spec: kainos plan/40-prize-islands/rh-attack/spec/p4-tail-law-abstract.md
+§T3; the §4 finite target).
+
+ROLE: stitches the per-period second-order identity
+(RhAttack.P4Tail.int_B1f'_period, atom-2) over every unit period of
+[n, m] into the global finite law
+
+  ∑ k ∈ Finset.Ioc n m, f k
+    = ∫_n^m f + ½(f m − f n) + (1/12)(f′ m − f′ n) − ½·∫_n^m B̂₂·f″ dx
+
+the finite core of the Riemann 1859 identity, from which the
+missing-tail W_n(t) form follows at σ = ½ (P4 no-ζ core convention:
+the finite/derivative EM machinery is machine-checked here; the 1859
+continuation identification is cited under the same convention as
+B-3's DLMF 25.2.12 citation).
+
+Built exclusively from:
+  (1) the 1st-order sum identity at integer endpoints
+      (RhAttack.P4Em.sum_eq_integral_add_integral_deriv, published), (2) the per-period 2nd-order identity
+      (RhAttack.P4Tail.int_B1f'_period, atom-2), (3) additivity of adjacent interval integrals
+      (intervalIntegral.sum_integral_adjacent_intervals_Ico —
+      Mathlib/MeasureTheory/Integral/IntervalIntegral/Basic.lean, used
+      here exactly as in Mathlib's Analysis/SumIntegralComparisons.lean
+      with `a := (↑·)` and `Nat.cast_add`/`Nat.cast_one` endpoint
+      normalization, as in Mathlib's NumberTheory/AbelSummation.lean), (4) one local finite additive telescope (ico_sum_telescope, this file).
+
+APPROACH / pinned APIs (Lean 4.33.1, mathlib f001ca3a4):
+  * `Set.uIcc a b` is the UNORDERED CLOSED interval `Icc (min a b)
+    (max a b)` (Order/Interval/Set/UnorderedInterval.lean:59); with
+    ordered endpoints, `Set.uIcc_of_le (h : a ≤ b) : uIcc a b = Icc a b`
+    and `Set.mem_uIcc_of_le`.
+  * The additivity lemma's period endpoints are nat-cast form
+    `a (k + 1) = ((k + 1 : ℕ) : ℝ)`; the source notation
+    `(j + 1 : ℝ)` elaborates to real-add form `((j : ℝ) + 1)`. Bridge:
+    `simp only [Nat.cast_add, Nat.cast_one]` (both directions), or for
+    `rw` first `rw [← Nat.cast_one]` (the real literal `1` is OfNat,   not defeq to `↑(1 : ℕ)`).
+  * `ContinuousOn` restriction is `ContinuousOn.mono`
+    (Topology/ContinuousOn.lean:320); there is NO `restrict_set` in
+    this checkout.
+  * `Finset.sum_insert (by simp [Finset.mem_Ico])` + `abel` for the
+    telescope step; `rw` auto-closes rfl goals in this toolchain.
+  * `push_cast; ring` closes the mixed ℝ-scalar/𝕜 endpoint forms
+    (probed).
+
+STATUS: GREEN (day-019, 2026-09-12, Lean 4.33.1): both theorems compile;
+full build 17424 jobs, 0 errors; all four `rhattack` gates PASS.
+(First red pass landed day-017/018 — the fixed errors are captured in
+the day-019 journal and the wiki.)
+THEOREMS: ico_sum_telescope, em2_finite -/
+':
+If an authors line spans multiple lines, each line but the last must end with a trailing comma
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:4:0: * '(spec: ka':
+The authors line should begin with 'Authors: '
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:11:0: * '  ':
+Double spaces are not allowed.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:29:19: * ' and ':
+Please, do not use 'and'; use ',' instead.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:3:0: * 'OUTLINE piece: P4 (the rigorous missing-tail law, §9 row P4), atom-2b':
+Second copyright line should be "Released under Apache 2.0 license as described in the file LICENSE."
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:61:0: The module doc-string for a file should be the first command after the imports.
+Please, add a module doc-string before `section`.
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:1:0: * '/- P4Em2 — P4 atom-2b: the GLOBAL finite second-order Euler–Maclaurin law.':
+Malformed or missing copyright header: `/-` should be alone on its own line.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:56:38: * '':
+Copyright line should start with 'Copyright (c) YYYY'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:56:38: * '':
+Copyright line should end with '. All rights reserved.'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:4:0: * '(spec: kainos plan/40-prize-islands/rh-attack/spec/p4-tail-law-abstract.md
+§T3; the §4 finite target).
+
+ROLE: stitches the per-period second-order identity
+(RhAttack.P4Tail.int_B1f'_period, atom-2) over every unit period of
+[n, m] into the global finite law
+
+  ∑ k ∈ Finset.Ioc n m, f k
+    = ∫_n^m f + ½(f m − f n) + (1/12)(f′ m − f′ n) − ½·∫_n^m B̂₂·f″ dx
+
+the finite core of the Riemann 1859 identity, from which the
+missing-tail W_n(t) form follows at σ = ½ (P4 no-ζ core convention:
+the finite/derivative EM machinery is machine-checked here; the 1859
+continuation identification is cited under the same convention as
+B-3's DLMF 25.2.12 citation).
+
+Built exclusively from:
+  (1) the 1st-order sum identity at integer endpoints
+      (RhAttack.P4Em.sum_eq_integral_add_integral_deriv, published), (2) the per-period 2nd-order identity
+      (RhAttack.P4Tail.int_B1f'_period, atom-2), (3) additivity of adjacent interval integrals
+      (intervalIntegral.sum_integral_adjacent_intervals_Ico —
+      Mathlib/MeasureTheory/Integral/IntervalIntegral/Basic.lean, used
+      here exactly as in Mathlib's Analysis/SumIntegralComparisons.lean
+      with `a := (↑·)` and `Nat.cast_add`/`Nat.cast_one` endpoint
+      normalization, as in Mathlib's NumberTheory/AbelSummation.lean), (4) one local finite additive telescope (ico_sum_telescope, this file).
+
+APPROACH / pinned APIs (Lean 4.33.1, mathlib f001ca3a4):
+  * `Set.uIcc a b` is the UNORDERED CLOSED interval `Icc (min a b)
+    (max a b)` (Order/Interval/Set/UnorderedInterval.lean:59); with
+    ordered endpoints, `Set.uIcc_of_le (h : a ≤ b) : uIcc a b = Icc a b`
+    and `Set.mem_uIcc_of_le`.
+  * The additivity lemma's period endpoints are nat-cast form
+    `a (k + 1) = ((k + 1 : ℕ) : ℝ)`; the source notation
+    `(j + 1 : ℝ)` elaborates to real-add form `((j : ℝ) + 1)`. Bridge:
+    `simp only [Nat.cast_add, Nat.cast_one]` (both directions), or for
+    `rw` first `rw [← Nat.cast_one]` (the real literal `1` is OfNat,   not defeq to `↑(1 : ℕ)`).
+  * `ContinuousOn` restriction is `ContinuousOn.mono`
+    (Topology/ContinuousOn.lean:320); there is NO `restrict_set` in
+    this checkout.
+  * `Finset.sum_insert (by simp [Finset.mem_Ico])` + `abel` for the
+    telescope step; `rw` auto-closes rfl goals in this toolchain.
+  * `push_cast; ring` closes the mixed ℝ-scalar/𝕜 endpoint forms
+    (probed).
+
+STATUS: GREEN (day-019, 2026-09-12, Lean 4.33.1): both theorems compile;
+full build 17424 jobs, 0 errors; all four `rhattack` gates PASS.
+(First red pass landed day-017/018 — the fixed errors are captured in
+the day-019 journal and the wiki.)
+THEOREMS: ico_sum_telescope, em2_finite -/
+':
+If an authors line spans multiple lines, each line but the last must end with a trailing comma
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:4:0: * '(spec: ka':
+The authors line should begin with 'Authors: '
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:11:0: * '  ':
+Double spaces are not allowed.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:29:19: * ' and ':
+Please, do not use 'and'; use ',' instead.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:3:0: * 'OUTLINE piece: P4 (the rigorous missing-tail law, §9 row P4), atom-2b':
+Second copyright line should be "Released under Apache 2.0 license as described in the file LICENSE."
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:61:0: The module doc-string for a file should be the first command after the imports.
+Please, add a module doc-string before `variable (f : ℝ → 𝕜)`.
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:1:0: * '/- P4Em2 — P4 atom-2b: the GLOBAL finite second-order Euler–Maclaurin law.':
+Malformed or missing copyright header: `/-` should be alone on its own line.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:56:38: * '':
+Copyright line should start with 'Copyright (c) YYYY'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:56:38: * '':
+Copyright line should end with '. All rights reserved.'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:4:0: * '(spec: kainos plan/40-prize-islands/rh-attack/spec/p4-tail-law-abstract.md
+§T3; the §4 finite target).
+
+ROLE: stitches the per-period second-order identity
+(RhAttack.P4Tail.int_B1f'_period, atom-2) over every unit period of
+[n, m] into the global finite law
+
+  ∑ k ∈ Finset.Ioc n m, f k
+    = ∫_n^m f + ½(f m − f n) + (1/12)(f′ m − f′ n) − ½·∫_n^m B̂₂·f″ dx
+
+the finite core of the Riemann 1859 identity, from which the
+missing-tail W_n(t) form follows at σ = ½ (P4 no-ζ core convention:
+the finite/derivative EM machinery is machine-checked here; the 1859
+continuation identification is cited under the same convention as
+B-3's DLMF 25.2.12 citation).
+
+Built exclusively from:
+  (1) the 1st-order sum identity at integer endpoints
+      (RhAttack.P4Em.sum_eq_integral_add_integral_deriv, published), (2) the per-period 2nd-order identity
+      (RhAttack.P4Tail.int_B1f'_period, atom-2), (3) additivity of adjacent interval integrals
+      (intervalIntegral.sum_integral_adjacent_intervals_Ico —
+      Mathlib/MeasureTheory/Integral/IntervalIntegral/Basic.lean, used
+      here exactly as in Mathlib's Analysis/SumIntegralComparisons.lean
+      with `a := (↑·)` and `Nat.cast_add`/`Nat.cast_one` endpoint
+      normalization, as in Mathlib's NumberTheory/AbelSummation.lean), (4) one local finite additive telescope (ico_sum_telescope, this file).
+
+APPROACH / pinned APIs (Lean 4.33.1, mathlib f001ca3a4):
+  * `Set.uIcc a b` is the UNORDERED CLOSED interval `Icc (min a b)
+    (max a b)` (Order/Interval/Set/UnorderedInterval.lean:59); with
+    ordered endpoints, `Set.uIcc_of_le (h : a ≤ b) : uIcc a b = Icc a b`
+    and `Set.mem_uIcc_of_le`.
+  * The additivity lemma's period endpoints are nat-cast form
+    `a (k + 1) = ((k + 1 : ℕ) : ℝ)`; the source notation
+    `(j + 1 : ℝ)` elaborates to real-add form `((j : ℝ) + 1)`. Bridge:
+    `simp only [Nat.cast_add, Nat.cast_one]` (both directions), or for
+    `rw` first `rw [← Nat.cast_one]` (the real literal `1` is OfNat,   not defeq to `↑(1 : ℕ)`).
+  * `ContinuousOn` restriction is `ContinuousOn.mono`
+    (Topology/ContinuousOn.lean:320); there is NO `restrict_set` in
+    this checkout.
+  * `Finset.sum_insert (by simp [Finset.mem_Ico])` + `abel` for the
+    telescope step; `rw` auto-closes rfl goals in this toolchain.
+  * `push_cast; ring` closes the mixed ℝ-scalar/𝕜 endpoint forms
+    (probed).
+
+STATUS: GREEN (day-019, 2026-09-12, Lean 4.33.1): both theorems compile;
+full build 17424 jobs, 0 errors; all four `rhattack` gates PASS.
+(First red pass landed day-017/018 — the fixed errors are captured in
+the day-019 journal and the wiki.)
+THEOREMS: ico_sum_telescope, em2_finite -/
+':
+If an authors line spans multiple lines, each line but the last must end with a trailing comma
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:4:0: * '(spec: ka':
+The authors line should begin with 'Authors: '
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:11:0: * '  ':
+Double spaces are not allowed.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:29:19: * ' and ':
+Please, do not use 'and'; use ',' instead.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:3:0: * 'OUTLINE piece: P4 (the rigorous missing-tail law, §9 row P4), atom-2b':
+Second copyright line should be "Released under Apache 2.0 license as described in the file LICENSE."
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:61:0: The module doc-string for a file should be the first command after the imports.
+Please, add a module doc-string before `/-- The P4 finite second-order Euler--Maclaurin identity, global form at
+    integer endpoints `n ≤ m` (outline §4/§9 -- the rigorous finite law
+    behind the missing tail; the finite core of the Riemann 1859 identity).
+
+    ```
+    ∑ k ∈ Finset.Ioc n m, f k
+      = ∫_n^m f + ½(f m − f n) + (1/12)(f′ m − f′ n) − ½·∫_n^m B̂₂·f″ dx
+    ```
+
+    `Set.uIcc (n : ℝ) (m : ℝ)` with `n ≤ m` is just `Set.Icc (n : ℝ)
+    (m : ℝ)` (unordered closed interval), so the hypotheses are: `f`
+    differentiable on `[n, m]`; `f′` continuous on `[n, m]`; `f′`
+    differentiable (i.e. `f` twice differentiable) on
+    `uIcc (n : ℝ) (m : ℝ)`; `f″` continuous on `[n, m]`. The edge
+    terms use the ordinary `deriv` at the (hence differentiable)
+    endpoints. `n = m` holds as the empty/reflexive case. -/
+theorem em2_finite (n m : ℕ) (hnm : n ≤ m) (hf_diff : ∀ t ∈ Set.Icc (n : ℝ) (m : ℝ), DifferentiableAt ℝ f t)
+    (hcont_f' : ContinuousOn (deriv f) (Set.Icc (n : ℝ) (m : ℝ)))
+    (hd2 : ∀ t ∈ Set.uIcc (n : ℝ) (m : ℝ), DifferentiableAt ℝ (deriv f) t)
+    (hcont_f'' : ContinuousOn (deriv (deriv f)) (Set.Icc (n : ℝ) (m : ℝ))) :
+    ∑ k ∈ Finset.Ioc n m, f k =
+      (∫ x in (n : ℝ)..(m : ℝ), f x) + (1 / 2 : 𝕜) * (f (m : ℝ) - f (n : ℝ)) +
+          (1 / 12 : 𝕜) * (deriv f (m : ℝ) - deriv f (n : ℝ)) -
+        (1 / 2 : 𝕜) * (∫ x in (n : ℝ)..(m : ℝ), B2 x * deriv (deriv f) x) :=
+  by
+  -- n, m are naturals: floors are themselves, and B1 = -1/2 there.
+  
+  have hnfl : ⌊(n : ℝ)⌋₊ = n := by
+    norm_cast
+    rw [Nat.floor_eq_iff (Nat.cast_nonneg n)]
+    constructor <;> norm_num
+  have hmfl : ⌊(m : ℝ)⌋₊ = m := by
+    norm_cast
+    rw [Nat.floor_eq_iff (Nat.cast_nonneg m)]
+    constructor <;> norm_num
+  have hB1n : B1 (n : ℝ) = -1 / 2 := by
+    dsimp only [B1]
+    rw [hnfl]
+    ring
+  have hB1m : B1 (m : ℝ) = -1 / 2 := by
+    dsimp only [B1]
+    rw [hmfl]
+    ring
+      -- Each unit period [j, j+1] (j ∈ Ico n m) sits inside [n, m].
+      
+  have hp_Icc (j : ℕ) (hj : j ∈ Finset.Ico n m) : Set.Icc (j : ℝ) (j + 1 : ℝ) ⊆ Set.Icc (n : ℝ) (m : ℝ) :=
+    by
+    intro t ⟨hlo, hhi⟩
+    have h1 : (n : ℝ) ≤ (j : ℝ) := Nat.cast_le.mpr (Finset.mem_Ico.mp hj).1
+    have h2 : (j + 1 : ℝ) ≤ (m : ℝ) :=
+      by
+      rw [show (j + 1 : ℝ) = ((j + 1 : ℕ) : ℝ) from by simp [Nat.cast_add, Nat.cast_one]]
+      exact Nat.cast_le.mpr (Nat.succ_le_of_lt (Finset.mem_Ico.mp hj).2)
+    exact
+      ⟨by linarith [h1, hlo], by linarith [h2, hhi]⟩
+        -- `Set.uIcc a b` is the unordered closed interval; for ordered
+          -- endpoints it is just `Icc` (this is all the per-period atoms need).
+        
+  have hp_uIcc (j : ℕ) (hj : j ∈ Finset.Ico n m) : Set.uIcc (j : ℝ) (j + 1 : ℝ) ⊆ Set.Icc (n : ℝ) (m : ℝ) :=
+    by
+    intro t ht
+    rw [Set.uIcc_of_le (by linarith)] at ht
+    exact hp_Icc j hj ht
+  have hp_uIcc_to (j : ℕ) (hj : j ∈ Finset.Ico n m) : Set.uIcc (j : ℝ) (j + 1 : ℝ) ⊆ Set.uIcc (n : ℝ) (m : ℝ) :=
+    by
+    intro t ht
+    rw [Set.uIcc_of_le (by linarith)] at ht
+    exact
+      Set.mem_uIcc_of_le (hp_Icc j hj ht).1
+        (hp_Icc j hj ht).2
+          -- Per-period integrability of the two stitched integrands. The period
+            -- endpoint is written in nat-cast form `((j + 1 : ℕ) : ℝ)` so that it
+            -- matches `a (k + 1)` in `sum_integral_adjacent_intervals_Ico` (the
+            -- SumIntegralComparisons pattern); the real-add form is bridged by
+            -- `Nat.cast_add` / `Nat.cast_one`.
+          
+  have hIB1 (j : ℕ) (hj : j ∈ Finset.Ico n m) :
+    IntervalIntegrable (fun t => deriv f t * B1 t) volume (j : ℝ) ((j + 1 : ℕ) : ℝ) := by
+    simpa [Nat.cast_add, Nat.cast_one] using
+      intervalIntegrable_deriv_mul_B1 (f := f) (a := (j : ℝ)) (b := (j + 1 : ℝ)) (by norm_num) (by norm_num)
+        (hcont_f'.mono (hp_uIcc j hj))
+  have hIB2 (j : ℕ) (hj : j ∈ Finset.Ico n m) :
+    IntervalIntegrable (fun t => B2 t * deriv (deriv f) t) volume (j : ℝ) ((j + 1 : ℕ) : ℝ) := by
+    simpa [Nat.cast_add, Nat.cast_one] using
+      intervalIntegrable_B2_mul_deriv2 f (j : ℝ) (j + 1 : ℝ) (by norm_num) (by norm_num)
+        (hcont_f''.mono (hp_uIcc j hj))
+          -- The per-period second-order identity (atom-2, the RCLike core) on each j.
+          
+  have hper (j : ℕ) (hj : j ∈ Finset.Ico n m) :
+    (∫ x in (j : ℝ)..(j + 1 : ℝ), B1 x * deriv f x) =
+      (1 / 12 : 𝕜) * (deriv f (j + 1 : ℝ) - deriv f (j : ℝ)) -
+        (1 / 2 : 𝕜) * (∫ x in (j : ℝ)..(j + 1 : ℝ), B2 x * deriv (deriv f) x) :=
+    int_B1f'_period (f := f) (j := j) (fun t ht => hd2 _ (hp_uIcc_to j hj ht)) (hcont_f'.mono (hp_uIcc j hj))
+      (hcont_f''.mono (hp_uIcc j hj))
+        -- Stitch the per-period identity over [n, m]: additivity, endpoint-form
+          -- bridges (Nat.cast_add / Nat.cast_one), per-period application, scalar
+          -- extraction, additivity again, telescope.
+        
+  have hstitch :
+    (∫ x in (n : ℝ)..(m : ℝ), deriv f x * B1 x) =
+      (1 / 12 : 𝕜) * (deriv f (m : ℝ) - deriv f (n : ℝ)) -
+        (1 / 2 : 𝕜) * (∫ x in (n : ℝ)..(m : ℝ), B2 x * deriv (deriv f) x) :=
+    by
+    calc
+      (∫ x in (n : ℝ)..(m : ℝ), deriv f x * B1 x) =
+          ∑ j ∈ Finset.Ico n m, (∫ x in (j : ℝ)..((j + 1 : ℕ) : ℝ), deriv f x * B1 x) :=
+        by
+        rw [←
+          sum_integral_adjacent_intervals_Ico (a := fun k => (k : ℝ)) (hmn := hnm) (hint := fun j hj =>
+            hIB1 j (by simpa using hj))]
+      _ = ∑ j ∈ Finset.Ico n m, (∫ x in (j : ℝ)..(j + 1 : ℝ), deriv f x * B1 x) := by
+        simp only [Nat.cast_add, Nat.cast_one]
+      _ = ∑ j ∈ Finset.Ico n m, (∫ x in (j : ℝ)..(j + 1 : ℝ), B1 x * deriv f x) :=
+        by
+        apply Finset.sum_congr rfl
+        intro j _
+        apply intervalIntegral.integral_congr
+        intro x _
+        ring
+      _ =
+          ∑ j ∈ Finset.Ico n m,
+            ((1 / 12 : 𝕜) * (deriv f (j + 1 : ℝ) - deriv f (j : ℝ)) -
+              (1 / 2 : 𝕜) * (∫ x in (j : ℝ)..(j + 1 : ℝ), B2 x * deriv (deriv f) x)) :=
+        by refine Finset.sum_congr rfl (fun j hj => hper j hj)
+      _ =
+          (1 / 12 : 𝕜) * (∑ j ∈ Finset.Ico n m, (deriv f (j + 1 : ℝ) - deriv f (j : ℝ))) -
+            (1 / 2 : 𝕜) * (∑ j ∈ Finset.Ico n m, (∫ x in (j : ℝ)..(j + 1 : ℝ), B2 x * deriv (deriv f) x)) :=
+        by rw [Finset.sum_sub_distrib, ← Finset.mul_sum, ← Finset.mul_sum]
+      _ =
+          (1 / 12 : 𝕜) * (∑ j ∈ Finset.Ico n m, (deriv f ((j + 1 : ℕ) : ℝ) - deriv f (j : ℝ))) -
+            (1 / 2 : 𝕜) * (∑ j ∈ Finset.Ico n m, (∫ x in (j : ℝ)..((j + 1 : ℕ) : ℝ), B2 x * deriv (deriv f) x)) :=
+        by simp only [Nat.cast_add, Nat.cast_one]
+      _ =
+          (1 / 12 : 𝕜) * (deriv f (m : ℝ) - deriv f (n : ℝ)) -
+            (1 / 2 : 𝕜) * (∫ x in (n : ℝ)..(m : ℝ), B2 x * deriv (deriv f) x) :=
+        by
+        rw [ico_sum_telescope (fun j => deriv f (j : ℝ)) n m hnm,
+          sum_integral_adjacent_intervals_Ico (a := fun k => (k : ℝ)) (hmn := hnm) (hint := fun j hj =>
+            hIB2 j (by simpa using hj))]
+  calc
+    ∑ k ∈ Finset.Ioc n m, f k = ∑ k ∈ Finset.Ioc ⌊(n : ℝ)⌋₊ ⌊(m : ℝ)⌋₊, f k := by rw [hnfl, hmfl]
+    _ =
+        f (n : ℝ) * B1 (n : ℝ) - f (m : ℝ) * B1 (m : ℝ) + (∫ x in (n : ℝ)..(m : ℝ), f x) +
+          (∫ x in (n : ℝ)..(m : ℝ), deriv f x * B1 x) :=
+      by
+      exact
+        sum_eq_integral_add_integral_deriv (f := f) (a := (n : ℝ)) (b := (m : ℝ)) (Nat.cast_nonneg n)
+          (Nat.cast_le.mpr hnm) hf_diff
+          (hcont_f'.mono (Set.uIcc_subset_Icc ⟨le_rfl, Nat.cast_le.mpr hnm⟩ ⟨Nat.cast_le.mpr hnm, le_rfl⟩))
+    _ =
+        (1 / 2 : 𝕜) * (f (m : ℝ) - f (n : ℝ)) + (∫ x in (n : ℝ)..(m : ℝ), f x) +
+          (∫ x in (n : ℝ)..(m : ℝ), deriv f x * B1 x) :=
+      by
+      rw [hB1n, hB1m]
+      push_cast
+      ring
+    _ =
+        (1 / 2 : 𝕜) * (f (m : ℝ) - f (n : ℝ)) + (∫ x in (n : ℝ)..(m : ℝ), f x) +
+          (((1 / 12 : 𝕜) * (deriv f (m : ℝ) - deriv f (n : ℝ))) -
+            (1 / 2 : 𝕜) * (∫ x in (n : ℝ)..(m : ℝ), B2 x * deriv (deriv f) x)) :=
+      by rw [hstitch]
+    _ =
+        (∫ x in (n : ℝ)..(m : ℝ), f x) + (1 / 2 : 𝕜) * (f (m : ℝ) - f (n : ℝ)) +
+            (1 / 12 : 𝕜) * (deriv f (m : ℝ) - deriv f (n : ℝ)) -
+          (1 / 2 : 𝕜) * (∫ x in (n : ℝ)..(m : ℝ), B2 x * deriv (deriv f) x) :=
+      by ring`.
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:116:4: Unused tactic linter: `norm_cast` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: RhAttack/P4Em2.lean:120:4: Unused tactic linter: `norm_cast` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: RhAttack/P4Em2.lean:222:100: This line exceeds the 100 character limit, please shorten it!
+
+Note: This linter can be disabled with `set_option linter.style.longLine false`
+warning: RhAttack/P4Em2.lean:1:0: * '/- P4Em2 — P4 atom-2b: the GLOBAL finite second-order Euler–Maclaurin law.':
+Malformed or missing copyright header: `/-` should be alone on its own line.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:56:38: * '':
+Copyright line should start with 'Copyright (c) YYYY'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:56:38: * '':
+Copyright line should end with '. All rights reserved.'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:4:0: * '(spec: kainos plan/40-prize-islands/rh-attack/spec/p4-tail-law-abstract.md
+§T3; the §4 finite target).
+
+ROLE: stitches the per-period second-order identity
+(RhAttack.P4Tail.int_B1f'_period, atom-2) over every unit period of
+[n, m] into the global finite law
+
+  ∑ k ∈ Finset.Ioc n m, f k
+    = ∫_n^m f + ½(f m − f n) + (1/12)(f′ m − f′ n) − ½·∫_n^m B̂₂·f″ dx
+
+the finite core of the Riemann 1859 identity, from which the
+missing-tail W_n(t) form follows at σ = ½ (P4 no-ζ core convention:
+the finite/derivative EM machinery is machine-checked here; the 1859
+continuation identification is cited under the same convention as
+B-3's DLMF 25.2.12 citation).
+
+Built exclusively from:
+  (1) the 1st-order sum identity at integer endpoints
+      (RhAttack.P4Em.sum_eq_integral_add_integral_deriv, published), (2) the per-period 2nd-order identity
+      (RhAttack.P4Tail.int_B1f'_period, atom-2), (3) additivity of adjacent interval integrals
+      (intervalIntegral.sum_integral_adjacent_intervals_Ico —
+      Mathlib/MeasureTheory/Integral/IntervalIntegral/Basic.lean, used
+      here exactly as in Mathlib's Analysis/SumIntegralComparisons.lean
+      with `a := (↑·)` and `Nat.cast_add`/`Nat.cast_one` endpoint
+      normalization, as in Mathlib's NumberTheory/AbelSummation.lean), (4) one local finite additive telescope (ico_sum_telescope, this file).
+
+APPROACH / pinned APIs (Lean 4.33.1, mathlib f001ca3a4):
+  * `Set.uIcc a b` is the UNORDERED CLOSED interval `Icc (min a b)
+    (max a b)` (Order/Interval/Set/UnorderedInterval.lean:59); with
+    ordered endpoints, `Set.uIcc_of_le (h : a ≤ b) : uIcc a b = Icc a b`
+    and `Set.mem_uIcc_of_le`.
+  * The additivity lemma's period endpoints are nat-cast form
+    `a (k + 1) = ((k + 1 : ℕ) : ℝ)`; the source notation
+    `(j + 1 : ℝ)` elaborates to real-add form `((j : ℝ) + 1)`. Bridge:
+    `simp only [Nat.cast_add, Nat.cast_one]` (both directions), or for
+    `rw` first `rw [← Nat.cast_one]` (the real literal `1` is OfNat,   not defeq to `↑(1 : ℕ)`).
+  * `ContinuousOn` restriction is `ContinuousOn.mono`
+    (Topology/ContinuousOn.lean:320); there is NO `restrict_set` in
+    this checkout.
+  * `Finset.sum_insert (by simp [Finset.mem_Ico])` + `abel` for the
+    telescope step; `rw` auto-closes rfl goals in this toolchain.
+  * `push_cast; ring` closes the mixed ℝ-scalar/𝕜 endpoint forms
+    (probed).
+
+STATUS: GREEN (day-019, 2026-09-12, Lean 4.33.1): both theorems compile;
+full build 17424 jobs, 0 errors; all four `rhattack` gates PASS.
+(First red pass landed day-017/018 — the fixed errors are captured in
+the day-019 journal and the wiki.)
+THEOREMS: ico_sum_telescope, em2_finite -/
+':
+If an authors line spans multiple lines, each line but the last must end with a trailing comma
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:4:0: * '(spec: ka':
+The authors line should begin with 'Authors: '
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:11:0: * '  ':
+Double spaces are not allowed.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:29:19: * ' and ':
+Please, do not use 'and'; use ',' instead.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:3:0: * 'OUTLINE piece: P4 (the rigorous missing-tail law, §9 row P4), atom-2b':
+Second copyright line should be "Released under Apache 2.0 license as described in the file LICENSE."
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:61:0: The module doc-string for a file should be the first command after the imports.
+Please, add a module doc-string before `end`.
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:1:0: * '/- P4Em2 — P4 atom-2b: the GLOBAL finite second-order Euler–Maclaurin law.':
+Malformed or missing copyright header: `/-` should be alone on its own line.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:56:38: * '':
+Copyright line should start with 'Copyright (c) YYYY'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:56:38: * '':
+Copyright line should end with '. All rights reserved.'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:4:0: * '(spec: kainos plan/40-prize-islands/rh-attack/spec/p4-tail-law-abstract.md
+§T3; the §4 finite target).
+
+ROLE: stitches the per-period second-order identity
+(RhAttack.P4Tail.int_B1f'_period, atom-2) over every unit period of
+[n, m] into the global finite law
+
+  ∑ k ∈ Finset.Ioc n m, f k
+    = ∫_n^m f + ½(f m − f n) + (1/12)(f′ m − f′ n) − ½·∫_n^m B̂₂·f″ dx
+
+the finite core of the Riemann 1859 identity, from which the
+missing-tail W_n(t) form follows at σ = ½ (P4 no-ζ core convention:
+the finite/derivative EM machinery is machine-checked here; the 1859
+continuation identification is cited under the same convention as
+B-3's DLMF 25.2.12 citation).
+
+Built exclusively from:
+  (1) the 1st-order sum identity at integer endpoints
+      (RhAttack.P4Em.sum_eq_integral_add_integral_deriv, published), (2) the per-period 2nd-order identity
+      (RhAttack.P4Tail.int_B1f'_period, atom-2), (3) additivity of adjacent interval integrals
+      (intervalIntegral.sum_integral_adjacent_intervals_Ico —
+      Mathlib/MeasureTheory/Integral/IntervalIntegral/Basic.lean, used
+      here exactly as in Mathlib's Analysis/SumIntegralComparisons.lean
+      with `a := (↑·)` and `Nat.cast_add`/`Nat.cast_one` endpoint
+      normalization, as in Mathlib's NumberTheory/AbelSummation.lean), (4) one local finite additive telescope (ico_sum_telescope, this file).
+
+APPROACH / pinned APIs (Lean 4.33.1, mathlib f001ca3a4):
+  * `Set.uIcc a b` is the UNORDERED CLOSED interval `Icc (min a b)
+    (max a b)` (Order/Interval/Set/UnorderedInterval.lean:59); with
+    ordered endpoints, `Set.uIcc_of_le (h : a ≤ b) : uIcc a b = Icc a b`
+    and `Set.mem_uIcc_of_le`.
+  * The additivity lemma's period endpoints are nat-cast form
+    `a (k + 1) = ((k + 1 : ℕ) : ℝ)`; the source notation
+    `(j + 1 : ℝ)` elaborates to real-add form `((j : ℝ) + 1)`. Bridge:
+    `simp only [Nat.cast_add, Nat.cast_one]` (both directions), or for
+    `rw` first `rw [← Nat.cast_one]` (the real literal `1` is OfNat,   not defeq to `↑(1 : ℕ)`).
+  * `ContinuousOn` restriction is `ContinuousOn.mono`
+    (Topology/ContinuousOn.lean:320); there is NO `restrict_set` in
+    this checkout.
+  * `Finset.sum_insert (by simp [Finset.mem_Ico])` + `abel` for the
+    telescope step; `rw` auto-closes rfl goals in this toolchain.
+  * `push_cast; ring` closes the mixed ℝ-scalar/𝕜 endpoint forms
+    (probed).
+
+STATUS: GREEN (day-019, 2026-09-12, Lean 4.33.1): both theorems compile;
+full build 17424 jobs, 0 errors; all four `rhattack` gates PASS.
+(First red pass landed day-017/018 — the fixed errors are captured in
+the day-019 journal and the wiki.)
+THEOREMS: ico_sum_telescope, em2_finite -/
+':
+If an authors line spans multiple lines, each line but the last must end with a trailing comma
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:4:0: * '(spec: ka':
+The authors line should begin with 'Authors: '
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:11:0: * '  ':
+Double spaces are not allowed.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:29:19: * ' and ':
+Please, do not use 'and'; use ',' instead.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:3:0: * 'OUTLINE piece: P4 (the rigorous missing-tail law, §9 row P4), atom-2b':
+Second copyright line should be "Released under Apache 2.0 license as described in the file LICENSE."
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:61:0: The module doc-string for a file should be the first command after the imports.
+Please, add a module doc-string before `end`.
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:1:0: * '/- P4Em2 — P4 atom-2b: the GLOBAL finite second-order Euler–Maclaurin law.':
+Malformed or missing copyright header: `/-` should be alone on its own line.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:56:38: * '':
+Copyright line should start with 'Copyright (c) YYYY'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:56:38: * '':
+Copyright line should end with '. All rights reserved.'
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:4:0: * '(spec: kainos plan/40-prize-islands/rh-attack/spec/p4-tail-law-abstract.md
+§T3; the §4 finite target).
+
+ROLE: stitches the per-period second-order identity
+(RhAttack.P4Tail.int_B1f'_period, atom-2) over every unit period of
+[n, m] into the global finite law
+
+  ∑ k ∈ Finset.Ioc n m, f k
+    = ∫_n^m f + ½(f m − f n) + (1/12)(f′ m − f′ n) − ½·∫_n^m B̂₂·f″ dx
+
+the finite core of the Riemann 1859 identity, from which the
+missing-tail W_n(t) form follows at σ = ½ (P4 no-ζ core convention:
+the finite/derivative EM machinery is machine-checked here; the 1859
+continuation identification is cited under the same convention as
+B-3's DLMF 25.2.12 citation).
+
+Built exclusively from:
+  (1) the 1st-order sum identity at integer endpoints
+      (RhAttack.P4Em.sum_eq_integral_add_integral_deriv, published), (2) the per-period 2nd-order identity
+      (RhAttack.P4Tail.int_B1f'_period, atom-2), (3) additivity of adjacent interval integrals
+      (intervalIntegral.sum_integral_adjacent_intervals_Ico —
+      Mathlib/MeasureTheory/Integral/IntervalIntegral/Basic.lean, used
+      here exactly as in Mathlib's Analysis/SumIntegralComparisons.lean
+      with `a := (↑·)` and `Nat.cast_add`/`Nat.cast_one` endpoint
+      normalization, as in Mathlib's NumberTheory/AbelSummation.lean), (4) one local finite additive telescope (ico_sum_telescope, this file).
+
+APPROACH / pinned APIs (Lean 4.33.1, mathlib f001ca3a4):
+  * `Set.uIcc a b` is the UNORDERED CLOSED interval `Icc (min a b)
+    (max a b)` (Order/Interval/Set/UnorderedInterval.lean:59); with
+    ordered endpoints, `Set.uIcc_of_le (h : a ≤ b) : uIcc a b = Icc a b`
+    and `Set.mem_uIcc_of_le`.
+  * The additivity lemma's period endpoints are nat-cast form
+    `a (k + 1) = ((k + 1 : ℕ) : ℝ)`; the source notation
+    `(j + 1 : ℝ)` elaborates to real-add form `((j : ℝ) + 1)`. Bridge:
+    `simp only [Nat.cast_add, Nat.cast_one]` (both directions), or for
+    `rw` first `rw [← Nat.cast_one]` (the real literal `1` is OfNat,   not defeq to `↑(1 : ℕ)`).
+  * `ContinuousOn` restriction is `ContinuousOn.mono`
+    (Topology/ContinuousOn.lean:320); there is NO `restrict_set` in
+    this checkout.
+  * `Finset.sum_insert (by simp [Finset.mem_Ico])` + `abel` for the
+    telescope step; `rw` auto-closes rfl goals in this toolchain.
+  * `push_cast; ring` closes the mixed ℝ-scalar/𝕜 endpoint forms
+    (probed).
+
+STATUS: GREEN (day-019, 2026-09-12, Lean 4.33.1): both theorems compile;
+full build 17424 jobs, 0 errors; all four `rhattack` gates PASS.
+(First red pass landed day-017/018 — the fixed errors are captured in
+the day-019 journal and the wiki.)
+THEOREMS: ico_sum_telescope, em2_finite -/
+':
+If an authors line spans multiple lines, each line but the last must end with a trailing comma
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:4:0: * '(spec: ka':
+The authors line should begin with 'Authors: '
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:11:0: * '  ':
+Double spaces are not allowed.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:29:19: * ' and ':
+Please, do not use 'and'; use ',' instead.
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:3:0: * 'OUTLINE piece: P4 (the rigorous missing-tail law, §9 row P4), atom-2b':
+Second copyright line should be "Released under Apache 2.0 license as described in the file LICENSE."
+
+
+Note: This linter can be disabled with `set_option linter.style.header false`
+warning: RhAttack/P4Em2.lean:61:0: The module doc-string for a file should be the first command after the imports.
+Please, add a module doc-string before ``.
+
+Note: This linter can be disabled with `set_option linter.style.header false`

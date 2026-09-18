@@ -8,4 +8,3 @@ scripts/rh/zeros_hi1e7_band.txt
 scripts/rh/zeros_T10000000_ext_full.txt
 # full (3.1946e7, ~1.0084e9] zero band (regenerable: day024_band_1e9.sh over LMFDB/Platt shards; DISCOVERY_LOG 25w)
 scripts/rh/hi1e9/
-tmp/

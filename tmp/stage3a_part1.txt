@@ -1,0 +1,215 @@
+
+  --/ ===== 25ae Stage 3A — periodic B8, telescope, finite-M identity (J) =====
+
+  -- The periodic 8th Bernoulli function (kernel = B8poly on each [j, j+1]).
+  noncomputable def B8 (x : ℝ) : ℝ := B8poly (x - ⌊x⌋₊)
+
+  @[fun_prop]
+  lemma aestronglyMeasurable_B8 : AEStronglyMeasurable B8 := by
+    unfold B8
+    fun_prop
+
+  -- On [n, n+1]: B8 = B8poly(·−n).  (Same shape as P4Tail.B2_of_Icc_int.)
+  lemma B8_of_Icc_int (n : ℕ) {x : ℝ} (hx : x ∈ Set.Icc (n : ℝ) (n + 1 : ℝ)) :
+      B8 x = B8poly (x - n) := by
+    unfold B8
+    by_cases htop : x = (n + 1 : ℝ)
+    · rw [htop]
+      have hfl : (⌊(n + 1 : ℝ)⌋₊ : ℕ) = n + 1 :=
+        (Nat.floor_eq_iff (ha := by positivity)).mpr
+          ⟨by norm_cast, by
+            norm_cast
+            linarith⟩
+      rw [hfl]
+      have h01 : (n + 1 : ℝ) - (n + 1 : ℝ) = 0 := by ring
+      rw [h01]
+      simp only [sub_zero, B8poly_at_0, B8poly_at_1]
+    · have hn : (⌊x⌋₊ : ℝ) = (n : ℝ) := by
+        norm_cast
+        rw [Nat.floor_eq_iff (by linarith [show (0 : ℝ) ≤ x from le_trans (Nat.cast_nonneg n) hx.1])]
+        constructor
+        · linarith [hx.1]
+        · exact lt_of_le_of_ne hx.2 htop
+      rw [hn]
+
+  -- |B8 x| <= 1/30 for x >= 0 (kernel in [0,1], B8poly_bound_Icc on [0,1]).
+  lemma abs_B8_le {x : ℝ} (hx : 0 ≤ x) : |B8 x| ≤ 1 / 30 := by
+    unfold B8
+    set v := (x - ⌊x⌋₊ : ℝ) with hv
+    have hv0 : 0 ≤ v := by grind [Nat.floor_le hx]
+    have hv1 : v ≤ 1 := by grind [Nat.lt_succ_floor x]
+    have hrew : (x - ⌊x⌋₊) = v := by
+      have : (v : ℝ) = x - ⌊x⌋₊ := by ring
+      tauto
+    dsimp only [v] at hv0 hv1
+    have hb : B8poly (x - ⌊x⌋₊) = B8poly v := by
+      rw [hrew]
+    rw [hb]
+    have hvIcc : v ∈ Set.Icc (0 : ℝ) 1 := ⟨hv0, hv1⟩
+    have hb1 : B8poly v ≤ 1 / 30 := (B8poly_bound_Icc hvIcc).2
+    have hb0 : - (1 / 30 : ℝ) ≤ B8poly v := (B8poly_bound_Icc hvIcc).1
+    simpa using abs_le.mpr ⟨hb0, hb1⟩
+
+  -- Finite telescope over Ico (mathlib has no ℕ-indexed Ico telescope;
+  -- induction on the length M − n).
+  lemma p4_25ae_telescope_pow {p : ℂ} (n M : ℕ) (hnm : n ≤ M) :
+      (∑ j ∈ Finset.Ico n M, (((j + 1 : ℝ) : ℂ) ^ p - ((j : ℝ) : ℂ) ^ p))
+          = ((M : ℝ) : ℂ) ^ p - ((n : ℝ) : ℂ) ^ p := by
+    set g : ℕ → ℂ := fun (j : ℕ) => ((j : ℝ) : ℂ) ^ p with hg
+    have hgA : (∑ j ∈ Finset.Ico n M, (((j + 1 : ℝ) : ℂ) ^ p - ((j : ℝ) : ℂ) ^ p))
+        = (∑ j ∈ Finset.Ico n M, (g (j + 1) - g j)) := by
+      apply Finset.sum_congr rfl
+      intro j _
+      dsimp only [g]
+    rw [hgA]
+    have hk : ∃ k : ℕ, M = n + k := ⟨M - n, by rw [Nat.add_sub_cancel' hnm]⟩
+    obtain ⟨k, rfl⟩ := hk
+    induction' k with k IH
+    · have hbase : (n : ℕ) ≤ n := le_rfl
+      have hc : Finset.Ico n n = ∅ := by
+        ext x
+        simp [Finset.mem_Ico]
+        <;> omega
+      rw [hc]
+      simp
+      ring
+    · have hIco : Finset.Ico n ((n + k) + 1) = (Finset.Ico n (n + k)) ∪ {n + k} := by
+        ext x
+        simp only [Finset.mem_Ico, Finset.mem_union, Finset.mem_singleton]
+        constructor
+        · intro hx
+          by_cases htop : x ≤ n + k
+          · exact Or.inl ⟨hx.1, htop⟩
+          · exact Or.inr (by
+              simp_all
+              omega)
+        · intro hx
+          cases hx with
+          | inl hx => exact ⟨hx.1, by omega⟩
+          | inr hx =>
+            have htop : x = n + k := by simp_all
+            subst x
+            exact ⟨by omega, by omega⟩
+      have hdisj : Disjoint (Finset.Ico n (n + k)) {n + k} := by
+        rw [Finset.disjoint_left.mpr]
+        intro x hx hmem
+        rw [Finset.mem_singleton] at hmem
+        subst x
+        simp_all
+      rw [hIco]
+      calc (∑ j ∈ (Finset.Ico n (n + k)) ∪ {n + k}, (g (j + 1) - g j))
+          _ = (∑ j ∈ Finset.Ico n (n + k), (g (j + 1) - g j))
+              + (g ((n + k) + 1) - g (n + k)) := by
+            rw [Finset.sum_union hdisj]
+            simp
+          _ = (g (n + k) - g n) + (g (n + k + 1) - g (n + k)) := by
+            rw [IH]
+          _ = g (n + k + 1) - g n := by ring
+
+  -- The finite-M identity: J(M) := ∫_n^M B̂₂ x^{-s-2} in terms of the
+  -- endpoint differences (B4/B6/B8) and the B8 period-sum tail.
+  theorem p4_25ae_J_finite {s : ℂ} (hsre : s.re = 1 / 2) (n M : ℕ) (hn : 0 < n)
+      (hnm : n ≤ M) :
+      (∫ x in (n : ℝ)..(M : ℝ), (B2 x : ℂ) * (x : ℂ) ^ (-s - 2))
+          = ((s + 2 : ℂ) / 3) * (((B4poly 0) / 4) : ℂ) *
+              (((M : ℝ) : ℂ) ^ (-s - 3) - ((n : ℝ) : ℂ) ^ (-s - 3))
+            + ((s + 2 : ℂ) * (s + 3) * (s + 4) / 60) * (((B6poly 0) / 6) : ℂ) *
+              (((M : ℝ) : ℂ) ^ (-s - 5) - ((n : ℝ) : ℂ) ^ (-s - 5))
+            + ((s + 2 : ℂ) * (s + 3) * (s + 4) * (s + 5) * (s + 6) / 2520) *
+              (((B8poly 0) / 8) : ℂ) *
+              (((M : ℝ) : ℂ) ^ (-s - 7) - ((n : ℝ) : ℂ) ^ (-s - 7))
+            + ((s + 2 : ℂ) * (s + 3) * (s + 4) * (s + 5) * (s + 6) * (s + 7) / 20160) *
+              (∑ j ∈ Finset.Ico n M,
+                (∫ x in (j : ℝ)..(j + 1 : ℝ),
+                  (B8poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 8))) := by
+    set u3 : ℕ → ℝ → ℂ := fun (j : ℕ) (x : ℝ) => (x : ℂ) ^ (-s - 3) with hu3
+    calc (∫ x in (n : ℝ)..(M : ℝ), (B2 x : ℂ) * (x : ℂ) ^ (-s - 2))
+        _ = ∑ j ∈ Finset.Ico n M,
+            (∫ x in (j : ℝ)..(j + 1 : ℝ), (B2 x : ℂ) * (x : ℂ) ^ (-s - 2)) := by
+            rw [← sum_integral_adjacent_intervals_Ico (a := fun k : ℕ => (k : ℝ)) hnm]
+        _ = ∑ j ∈ Finset.Ico n M,
+            (∫ x in (j : ℝ)..(j + 1 : ℝ),
+              (B2poly j x : ℂ) * (x : ℂ) ^ (-s - 2)) := by
+            apply Finset.sum_congr rfl
+            intro j hj
+            have hjIcc : j ∈ Finset.Ico n M := hj
+            rw [show (∫ x in (j : ℝ)..(j + 1 : ℝ), (B2 x : ℂ) * (x : ℂ) ^ (-s - 2)) =
+                  (∫ x in (j : ℝ)..(j + 1 : ℝ), (B2poly j x : ℂ) * (x : ℂ) ^ (-s - 2)) from by
+              rw [intervalIntegral.integral_congr (μ := (MeasureTheory.volume : Measure ℝ)) (by
+                intro x hx
+                have hxIcc : x ∈ Set.Icc (j : ℝ) (j + 1 : ℝ) := by
+                  exact ⟨by simpa [show min (j : ℝ) (j + 1 : ℝ) = (j : ℝ) from
+                      min_eq_left (by nlinarith)] using hx.1,
+                    by simpa using hx.2⟩
+                rw [B2_of_Icc_int j hxIcc]
+                dsimp only [B2poly])]
+              rw [intervalIntegral.integral_sub] <;>
+              intervalIntegral.integral_sub]
+        _ = ∑ j ∈ Finset.Ico n M,
+            (∫ x in (j : ℝ)..(j + 1 : ℝ), (B3poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 3))
+              * ((s + 2 : ℂ) / 3) := by
+            apply Finset.sum_congr rfl
+            intro j hj
+            have hjpos : 0 < (j : ℕ) := by
+              have hjIco : j ∈ Finset.Ico n M := hj
+              omega
+            simpa using (p4_25ae_ibp_b2to3 s hsre j hjpos).symm
+        _ = (∑ j ∈ Finset.Ico n M,
+            (∫ x in (j : ℝ)..(j + 1 : ℝ),
+              (B3poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 3))) * ((s + 2 : ℂ) / 3) := by
+            rw [Finset.sum_mul]
+        _ = ((s + 2 : ℂ) / 3) *
+            (∑ j ∈ Finset.Ico n M,
+              (∫ x in (j : ℝ)..(j + 1 : ℝ),
+                (B3poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 3))) := by ring
+        _ = ((s + 2 : ℂ) / 3) *
+            (∑ j ∈ Finset.Ico n M,
+              (((B4poly 0) / 4 : ℝ) : ℂ) *
+                (((j + 1 : ℝ) : ℂ) ^ (-s - 3) - ((j : ℝ) : ℂ) ^ (-s - 3)) +
+              (∫ x in (j : ℝ)..(j + 1 : ℝ),
+                (B4poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 4)) * ((s + 3 : ℂ) / 4)) := by
+            have hsum : (∑ j ∈ Finset.Ico n M,
+                    (∫ x in (j : ℝ)..(j + 1 : ℝ),
+                      (B3poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 3)))
+                = (∑ j ∈ Finset.Ico n M,
+                    (((B4poly 0) / 4 : ℝ) : ℂ) *
+                      (((j + 1 : ℝ) : ℂ) ^ (-s - 3) - ((j : ℝ) : ℂ) ^ (-s - 3)) +
+                    (∫ x in (j : ℝ)..(j + 1 : ℝ),
+                      (B4poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 4)) * ((s + 3 : ℂ) / 4)) := by
+              apply Finset.sum_congr rfl
+              intro j hj
+              have hjpos : 0 < (j : ℕ) := by
+                have hjIco : j ∈ Finset.Ico n M := hj
+                omega
+              simpa using (p4_25ae_ibp_b3to4 s hsre j hjpos).symm
+            rw [hsum]
+        _ = ((s + 2 : ℂ) / 3) *
+            (((((B4poly 0) / 4 : ℝ) : ℂ) *
+                (((M : ℝ) : ℂ) ^ (-s - 3) - ((n : ℝ) : ℂ) ^ (-s - 3))) +
+              (∑ j ∈ Finset.Ico n M,
+                (∫ x in (j : ℝ)..(j + 1 : ℝ),
+                  (B4poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 4))) * ((s + 3 : ℂ) / 4)) := by
+            have hT : (∑ j ∈ Finset.Ico n M,
+                    (((B4poly 0) / 4 : ℝ) : ℂ) *
+                      (((j + 1 : ℝ) : ℂ) ^ (-s - 3) - ((j : ℝ) : ℂ) ^ (-s - 3)) +
+                    (∫ x in (j : ℝ)..(j + 1 : ℝ),
+                      (B4poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 4)) * ((s + 3 : ℂ) / 4))
+                = (((B4poly 0) / 4 : ℝ) : ℂ) *
+                    (((M : ℝ) : ℂ) ^ (-s - 3) - ((n : ℝ) : ℂ) ^ (-s - 3)) +
+                    (∑ j ∈ Finset.Ico n M,
+                      (∫ x in (j : ℝ)..(j + 1 : ℝ),
+                        (B4poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 4))) * ((s + 3 : ℂ) / 4) := by
+              rw [Finset.sum_add_distrib,
+                Finset.const_mul_sum (( ( (B4poly 0) / 4 : ℝ) : ℂ))]
+              -- hmm: const outside — the summand is c·A_j:
+              have hc : (∑ j ∈ Finset.Ico n M,
+                      (((B4poly 0) / 4 : ℝ) : ℂ) *
+                        (((j + 1 : ℝ) : ℂ) ^ (-s - 3) - ((j : ℝ) : ℂ) ^ (-s - 3)))
+                  = (((B4poly 0) / 4 : ℝ) : ℂ) *
+                      (∑ j ∈ Finset.Ico n M,
+                        (((j + 1 : ℝ) : ℂ) ^ (-s - 3) - ((j : ℝ) : ℂ) ^ (-s - 3))) := by
+                rw [Finset.const_mul_sum (( ( (B4poly 0) / 4 : ℝ) : ℂ))]
+              rw [hc]
+              rw [p4_25ae_telescope_pow (-s - 3 : ℂ) n M hnm]
+            rw [hT]
+            ring

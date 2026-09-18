@@ -1,0 +1,85 @@
+RhAttack/S4Strip.lean:573:58: error: unsolved goals
+t : ℝ
+ht : 1000 ≤ t
+ht0 : 0 < t
+hG4sq : G4 t * G4 t = c4sq * t ^ 8
+hgp : 0 < G4 t * G4 t - t * t
+hG2pos : 0 < G4 t * G4 t
+heps : t * t / (G4 t * G4 t) ≤ 1 / 2
+hG2ne : G4 t * G4 t ≠ 0
+⊢ G4 t / G4 t = 1
+RhAttack/S4Strip.lean:576:4: error: linarith failed to find a contradiction
+case h1
+t : ℝ
+ht : 1000 ≤ t
+ht0 : 0 < t
+hG4sq : G4 t * G4 t = c4sq * t ^ 8
+hgp : 0 < G4 t * G4 t - t * t
+hG2pos : 0 < G4 t * G4 t
+heps : t * t / (G4 t * G4 t) ≤ 1 / 2
+hG2ne : G4 t * G4 t ≠ 0
+hrel : G4 t * G4 t * (G4 t * G4 t)⁻¹ = 1
+a✝ : 1 - t ^ 2 * (G4 t)⁻¹ ^ 2 < -(t ^ 2 * (G4 t)⁻¹ ^ 2) + G4 t ^ 2 * (G4 t)⁻¹ ^ 2
+⊢ False
+failed
+RhAttack/S4Strip.lean:850:29: error: Type mismatch
+  inv_nonneg.mpr (LT.lt.le ht0)
+has type
+  0 ≤ t⁻¹
+but is expected to have type
+  0 ≤ 1 / t
+RhAttack/S4Strip.lean:851:36: error: Type mismatch
+  inv_nonneg.mpr (mul_nonneg (LT.lt.le ht0) (LT.lt.le ht0))
+has type
+  0 ≤ (t * t)⁻¹
+but is expected to have type
+  0 ≤ 1 / (t * t)
+RhAttack/S4Strip.lean:891:91: error: unsolved goals
+t : ℝ
+ht : 1000 ≤ t
+ht0 : 0 < t
+hBf : Bf t (G4 t) ≤ Bf4UB t
+hSsum : Sbar (B4 t) + Sbar (G4 t) ≤ SsumUB t
+hSs0 : 0 ≤ Sbar (B4 t) + Sbar (G4 t)
+hCf : Cf t (G4 t) ≤ Cf4UB t
+hCf0 : 0 ≤ Cf t (G4 t)
+hK : Kbar (G4 t) ≤ Kbar4UB t
+hK0 : 0 ≤ Kbar (G4 t)
+hBf0 : 0 ≤ Bf4UB t
+hCf4UB0 : 0 ≤ Cf4UB t
+hBfS : Bf t (G4 t) * (Sbar (B4 t) + Sbar (G4 t)) ≤ Bf4UB t * (Sbar (B4 t) + Sbar (G4 t))
+hBs : Bf4UB t * (Sbar (B4 t) + Sbar (G4 t)) ≤ Bf4UB t * SsumUB t
+hCfK : Cf t (G4 t) * Kbar (G4 t) ≤ Cf4UB t * Kbar (G4 t)
+hKs : Cf4UB t * Kbar (G4 t) ≤ Cf4UB t * Kbar4UB t
+hfinal :
+  Bf t (G4 t) * (Sbar (B4 t) + Sbar (G4 t)) + Cf t (G4 t) * Kbar (G4 t) ≤ Bf4UB t * SsumUB t + Cf4UB t * Kbar4UB t
+L : ℝ := log t
+hL0 hL0' : 0 ≤ L
+hTden : 0 < t ^ 6 * c4sq
+⊢ (2 + 1 / t + 1 / (t * t)) * (1 / t ^ 6) / (62000000 * 62000000) * SsumUB t ≤
+    2001001 * (20 + 4 * L) / (10 ^ 6 * c4sq * t ^ 6)
+RhAttack/S4Strip.lean:820:66: error: unsolved goals
+t : ℝ
+ht : 1000 ≤ t
+ht0 : 0 < t
+hBf : Bf t (G4 t) ≤ Bf4UB t
+hSsum : Sbar (B4 t) + Sbar (G4 t) ≤ SsumUB t
+hSs0 : 0 ≤ Sbar (B4 t) + Sbar (G4 t)
+hCf : Cf t (G4 t) ≤ Cf4UB t
+hCf0 : 0 ≤ Cf t (G4 t)
+hK : Kbar (G4 t) ≤ Kbar4UB t
+hK0 : 0 ≤ Kbar (G4 t)
+hBf0 : 0 ≤ Bf4UB t
+hCf4UB0 : 0 ≤ Cf4UB t
+hBfS : Bf t (G4 t) * (Sbar (B4 t) + Sbar (G4 t)) ≤ Bf4UB t * (Sbar (B4 t) + Sbar (G4 t))
+hBs : Bf4UB t * (Sbar (B4 t) + Sbar (G4 t)) ≤ Bf4UB t * SsumUB t
+hCfK : Cf t (G4 t) * Kbar (G4 t) ≤ Cf4UB t * Kbar (G4 t)
+hKs : Cf4UB t * Kbar (G4 t) ≤ Cf4UB t * Kbar4UB t
+hfinal :
+  Bf t (G4 t) * (Sbar (B4 t) + Sbar (G4 t)) + Cf t (G4 t) * Kbar (G4 t) ≤ Bf4UB t * SsumUB t + Cf4UB t * Kbar4UB t
+L : ℝ := log t
+hL0 hL0' : 0 ≤ L
+hTden : 0 < t ^ 6 * c4sq
+hb : Bf4UB t * SsumUB t ≤ 2001001 * (20 + 4 * L) / (10 ^ 6 * c4sq * t ^ 6)
+⊢ Bf t (G4 t) * (Sbar (B4 t) + Sbar (G4 t)) + Cf t (G4 t) * Kbar (G4 t) ≤ X4UBfun t
+RhAttack/S4Strip.lean:892:16: error: unexpected token ','; expected command

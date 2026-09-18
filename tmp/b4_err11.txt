@@ -1,0 +1,828 @@
+RhAttack/P4Limit.lean:181:34: warning: Variable name `hs1` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hs1
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+RhAttack/P4Limit.lean:198:34: warning: Variable name `hs1` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hs1
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+RhAttack/P4Limit.lean:198:48: warning: Variable name `hs2` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hs2
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+RhAttack/P4Limit.lean:243:66: warning: Variable name `hnm` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hnm
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+RhAttack/P4Limit.lean:253:5: warning: Variable name `hnm` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hnm
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+RhAttack/P4Limit.lean:746:6: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+RhAttack/P4Limit.lean:765:8: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+RhAttack/P4Limit.lean:879:48: warning: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+RhAttack/P4Limit.lean:1329:36: warning: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+RhAttack/P4Limit.lean:1333:36: warning: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+RhAttack/P4Limit.lean:1337:37: warning: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+RhAttack/P4Limit.lean:1341:37: warning: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+RhAttack/P4Limit.lean:1768:48: warning: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+RhAttack/P4Limit.lean:1898:48: warning: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+RhAttack/P4Limit.lean:2044:48: warning: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+RhAttack/P4Limit.lean:2176:48: warning: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+RhAttack/P4Limit.lean:2319:48: warning: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+RhAttack/P4Limit.lean:2451:48: warning: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+RhAttack/P4Limit.lean:2626:12: warning: This simp argument is unused:
+  Finset.Ico_self
+
+Hint: Omit it from the simp argument list.
+  [apply] simp
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+RhAttack/P4Limit.lean:2749:18: warning: This simp argument is unused:
+  Complex.ofReal_div
+
+Hint: Omit it from the simp argument list.
+  [apply] simp
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+RhAttack/P4Limit.lean:2962:6: warning: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+RhAttack/P4Limit.lean:2962:61: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+RhAttack/P4Limit.lean:2962:61: warning: Unused tactic linter: `norm_cast` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+RhAttack/P4Limit.lean:2989:42: warning: Variable name `hsre` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hsre
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+RhAttack/P4Limit.lean:3058:6: warning: Unused tactic linter: `change
+  ∫ x in (n : ℝ)..(M : ℝ), (B8 x : ℂ) * (x : ℂ) ^ (-s - 8) =
+    ∑ j ∈ Finset.Ico n M, (∫ x in (j : ℝ)..(j + 1 : ℝ), (B8poly (x - (j : ℝ)) : ℂ) * (x : ℂ) ^ (-s - 8))` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+RhAttack/P4Limit.lean:3168:54: warning: `Set.diff_empty` has been deprecated: Use `Set.sdiff_empty` instead
+RhAttack/P4Limit.lean:3495:19: warning: This simp argument is unused:
+  hT
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+RhAttack/P4Limit.lean:3597:6: warning: Unused tactic linter: `repeat' rw [norm_mul]` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+RhAttack/P4Limit.lean:3602:6: warning: Unused tactic linter: `repeat' rw [norm_mul]` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+RhAttack/P4Limit.lean:3836:12: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+RhAttack/P4Limit.lean:3836:2: warning: Unused tactic linter: `all_goals nlinarith [sq_le_sq (by linarith [h0]) (by linarith [h0, h])]` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+RhAttack/P4Limit.lean:3955:18: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+RhAttack/P4Limit.lean:3958:80: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+RhAttack/P4Limit.lean:3965:18: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+RhAttack/P4Limit.lean:3968:80: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+RhAttack/P4Limit.lean:3975:18: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+RhAttack/P4Limit.lean:3978:80: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+RhAttack/P4Limit.lean:3985:18: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+RhAttack/P4Limit.lean:3988:80: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+RhAttack/P4Limit.lean:3994:16: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+RhAttack/P4Limit.lean:3958:34: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+RhAttack/P4Limit.lean:3968:34: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+RhAttack/P4Limit.lean:3978:34: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+RhAttack/P4Limit.lean:3988:34: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+RhAttack/P4Limit.lean:3955:8: warning: Unused tactic linter: `all_goals
+  (try exact hR2) <;> (try exact le_of_lt hR2) <;> (try norm_num [t3w_rA1_2]) <;> (try positivity)` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+RhAttack/P4Limit.lean:3958:18: warning: Unused tactic linter: `(try exact hS2)` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+RhAttack/P4Limit.lean:3958:80: warning: Unused tactic linter: `(try positivity)` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+RhAttack/P4Limit.lean:3965:8: warning: Unused tactic linter: `all_goals
+  (try exact hR4) <;> (try exact le_of_lt hR4) <;> (try norm_num [t3w_rA1_4]) <;> (try positivity)` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+RhAttack/P4Limit.lean:3968:18: warning: Unused tactic linter: `(try exact hS4)` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+RhAttack/P4Limit.lean:3968:80: warning: Unused tactic linter: `(try positivity)` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+RhAttack/P4Limit.lean:3975:8: warning: Unused tactic linter: `all_goals
+  (try exact hR6) <;> (try exact le_of_lt hR6) <;> (try norm_num [t3w_rA1_6]) <;> (try positivity)` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+RhAttack/P4Limit.lean:3978:18: warning: Unused tactic linter: `(try exact hS6)` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+RhAttack/P4Limit.lean:3978:80: warning: Unused tactic linter: `(try positivity)` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+RhAttack/P4Limit.lean:3985:8: warning: Unused tactic linter: `all_goals
+  (try exact hR7) <;> (try exact le_of_lt hR7) <;> (try norm_num [t3w_rA1_7]) <;> (try positivity)` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+RhAttack/P4Limit.lean:3988:18: warning: Unused tactic linter: `(try exact hS7)` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+RhAttack/P4Limit.lean:3988:80: warning: Unused tactic linter: `(try positivity)` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+RhAttack/P4Limit.lean:3994:6: warning: Unused tactic linter: `all_goals
+  (try exact hT2) <;> (try exact hT4) <;> (try exact hT6) <;> (try exact hT7) <;> (try norm_num) <;>
+    (try positivity)` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+RhAttack/P4Limit.lean:4100:18: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+RhAttack/P4Limit.lean:4103:80: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+RhAttack/P4Limit.lean:4110:18: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+RhAttack/P4Limit.lean:4113:80: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+RhAttack/P4Limit.lean:4120:18: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+RhAttack/P4Limit.lean:4123:80: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+RhAttack/P4Limit.lean:4130:18: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+RhAttack/P4Limit.lean:4133:80: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+RhAttack/P4Limit.lean:4139:16: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+RhAttack/P4Limit.lean:4103:34: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+RhAttack/P4Limit.lean:4113:34: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+RhAttack/P4Limit.lean:4123:34: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+RhAttack/P4Limit.lean:4133:34: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+RhAttack/P4Limit.lean:4100:8: warning: Unused tactic linter: `all_goals
+  (try exact hR2) <;> (try exact le_of_lt hR2) <;> (try norm_num [t3w_rA2_2]) <;> (try positivity)` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+RhAttack/P4Limit.lean:4103:18: warning: Unused tactic linter: `(try exact hS2)` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+RhAttack/P4Limit.lean:4103:80: warning: Unused tactic linter: `(try positivity)` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+RhAttack/P4Limit.lean:4110:8: warning: Unused tactic linter: `all_goals
+  (try exact hR4) <;> (try exact le_of_lt hR4) <;> (try norm_num [t3w_rA2_4]) <;> (try positivity)` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+RhAttack/P4Limit.lean:4113:18: warning: Unused tactic linter: `(try exact hS4)` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+RhAttack/P4Limit.lean:4113:80: warning: Unused tactic linter: `(try positivity)` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+RhAttack/P4Limit.lean:4120:8: warning: Unused tactic linter: `all_goals
+  (try exact hR6) <;> (try exact le_of_lt hR6) <;> (try norm_num [t3w_rA2_6]) <;> (try positivity)` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+RhAttack/P4Limit.lean:4123:18: warning: Unused tactic linter: `(try exact hS6)` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+RhAttack/P4Limit.lean:4123:80: warning: Unused tactic linter: `(try positivity)` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+RhAttack/P4Limit.lean:4130:8: warning: Unused tactic linter: `all_goals
+  (try exact hR7) <;> (try exact le_of_lt hR7) <;> (try norm_num [t3w_rA2_7]) <;> (try positivity)` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+RhAttack/P4Limit.lean:4133:18: warning: Unused tactic linter: `(try exact hS7)` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+RhAttack/P4Limit.lean:4133:80: warning: Unused tactic linter: `(try positivity)` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+RhAttack/P4Limit.lean:4139:6: warning: Unused tactic linter: `all_goals
+  (try exact hT2) <;> (try exact hT4) <;> (try exact hT6) <;> (try exact hT7) <;> (try norm_num) <;>
+    (try positivity)` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+RhAttack/P4Limit.lean:4245:18: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+RhAttack/P4Limit.lean:4248:80: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+RhAttack/P4Limit.lean:4255:18: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+RhAttack/P4Limit.lean:4258:80: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+RhAttack/P4Limit.lean:4265:18: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+RhAttack/P4Limit.lean:4268:80: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+RhAttack/P4Limit.lean:4275:18: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+RhAttack/P4Limit.lean:4278:80: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+RhAttack/P4Limit.lean:4284:16: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+RhAttack/P4Limit.lean:4248:34: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+RhAttack/P4Limit.lean:4258:34: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+RhAttack/P4Limit.lean:4268:34: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+RhAttack/P4Limit.lean:4278:34: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+RhAttack/P4Limit.lean:4245:8: warning: Unused tactic linter: `all_goals
+  (try exact hR2) <;> (try exact le_of_lt hR2) <;> (try norm_num [t3w_rA3_2]) <;> (try positivity)` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+RhAttack/P4Limit.lean:4248:18: warning: Unused tactic linter: `(try exact hS2)` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+RhAttack/P4Limit.lean:4248:80: warning: Unused tactic linter: `(try positivity)` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+RhAttack/P4Limit.lean:4255:8: warning: Unused tactic linter: `all_goals
+  (try exact hR4) <;> (try exact le_of_lt hR4) <;> (try norm_num [t3w_rA3_4]) <;> (try positivity)` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+RhAttack/P4Limit.lean:4258:18: warning: Unused tactic linter: `(try exact hS4)` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+RhAttack/P4Limit.lean:4258:80: warning: Unused tactic linter: `(try positivity)` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+RhAttack/P4Limit.lean:4265:8: warning: Unused tactic linter: `all_goals
+  (try exact hR6) <;> (try exact le_of_lt hR6) <;> (try norm_num [t3w_rA3_6]) <;> (try positivity)` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+RhAttack/P4Limit.lean:4268:18: warning: Unused tactic linter: `(try exact hS6)` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+RhAttack/P4Limit.lean:4268:80: warning: Unused tactic linter: `(try positivity)` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+RhAttack/P4Limit.lean:4275:8: warning: Unused tactic linter: `all_goals
+  (try exact hR7) <;> (try exact le_of_lt hR7) <;> (try norm_num [t3w_rA3_7]) <;> (try positivity)` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+RhAttack/P4Limit.lean:4278:18: warning: Unused tactic linter: `(try exact hS7)` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+RhAttack/P4Limit.lean:4278:80: warning: Unused tactic linter: `(try positivity)` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+RhAttack/P4Limit.lean:4284:6: warning: Unused tactic linter: `all_goals
+  (try exact hT2) <;> (try exact hT4) <;> (try exact hT6) <;> (try exact hT7) <;> (try norm_num) <;>
+    (try positivity)` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+RhAttack/P4Limit.lean:4390:18: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+RhAttack/P4Limit.lean:4393:80: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+RhAttack/P4Limit.lean:4400:18: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+RhAttack/P4Limit.lean:4403:80: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+RhAttack/P4Limit.lean:4410:18: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+RhAttack/P4Limit.lean:4413:80: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+RhAttack/P4Limit.lean:4420:18: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+RhAttack/P4Limit.lean:4423:80: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+RhAttack/P4Limit.lean:4429:16: warning: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+RhAttack/P4Limit.lean:4393:34: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+RhAttack/P4Limit.lean:4403:34: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+RhAttack/P4Limit.lean:4413:34: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+RhAttack/P4Limit.lean:4423:34: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+RhAttack/P4Limit.lean:4390:8: warning: Unused tactic linter: `all_goals
+  (try exact hR2) <;> (try exact le_of_lt hR2) <;> (try norm_num [t3w_rA4_2]) <;> (try positivity)` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+RhAttack/P4Limit.lean:4393:18: warning: Unused tactic linter: `(try exact hS2)` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+RhAttack/P4Limit.lean:4393:80: warning: Unused tactic linter: `(try positivity)` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+RhAttack/P4Limit.lean:4400:8: warning: Unused tactic linter: `all_goals
+  (try exact hR4) <;> (try exact le_of_lt hR4) <;> (try norm_num [t3w_rA4_4]) <;> (try positivity)` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+RhAttack/P4Limit.lean:4403:18: warning: Unused tactic linter: `(try exact hS4)` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+RhAttack/P4Limit.lean:4403:80: warning: Unused tactic linter: `(try positivity)` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+RhAttack/P4Limit.lean:4410:8: warning: Unused tactic linter: `all_goals
+  (try exact hR6) <;> (try exact le_of_lt hR6) <;> (try norm_num [t3w_rA4_6]) <;> (try positivity)` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+RhAttack/P4Limit.lean:4413:18: warning: Unused tactic linter: `(try exact hS6)` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+RhAttack/P4Limit.lean:4413:80: warning: Unused tactic linter: `(try positivity)` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+RhAttack/P4Limit.lean:4420:8: warning: Unused tactic linter: `all_goals
+  (try exact hR7) <;> (try exact le_of_lt hR7) <;> (try norm_num [t3w_rA4_7]) <;> (try positivity)` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+RhAttack/P4Limit.lean:4423:18: warning: Unused tactic linter: `(try exact hS7)` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+RhAttack/P4Limit.lean:4423:80: warning: Unused tactic linter: `(try positivity)` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+RhAttack/P4Limit.lean:4429:6: warning: Unused tactic linter: `all_goals
+  (try exact hT2) <;> (try exact hT4) <;> (try exact hT6) <;> (try exact hT7) <;> (try norm_num) <;>
+    (try positivity)` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+RhAttack/P4Limit.lean:5329:4: warning: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+RhAttack/P4Limit.lean:5325:39: warning: Variable name `hc` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hc
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+RhAttack/P4Limit.lean:5348:8: warning: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+RhAttack/P4Limit.lean:5370:8: warning: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+RhAttack/P4Limit.lean:5359:54: warning: This simp argument is unused:
+  add_zero
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Finset.prod_range_succ, Finset.prod_range_zero, one_mul, Nat.cast_zero, zero_add,
+    Finset.sum_range_succ, Finset.sum_range_zero]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+RhAttack/P4Limit.lean:5473:4: warning: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+RhAttack/P4Limit.lean:5534:6: warning: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+RhAttack/P4Limit.lean:5548:6: warning: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+RhAttack/P4Limit.lean:5745:4: error: (deterministic) timeout at `isDefEq`, maximum number of heartbeats (200000) has been reached
+
+Note: Use `set_option maxHeartbeats <num>` to set the limit.
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+RhAttack/P4Limit.lean:5748:2: error: (deterministic) timeout at `«tactic execution»`, maximum number of heartbeats (200000) has been reached
+
+Note: Use `set_option maxHeartbeats <num>` to set the limit.
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+RhAttack/P4Limit.lean:5791:43: warning: Variable name `hb` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hb
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+RhAttack/P4Limit.lean:5818:43: warning: Variable name `hb` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hb
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+RhAttack/P4Limit.lean:5886:4: warning: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+RhAttack/P4Limit.lean:5904:39: warning: Variable name `h13z` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _h13z
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+RhAttack/P4Limit.lean:5938:54: error: Application type mismatch: The argument
+  hne0
+has type
+  0 ≠ t3wB_num7 t
+but is expected to have type
+  t3wB_num7 t ≠ 0
+in the application
+  lt_of_le_of_ne hle hne0
+RhAttack/P4Limit.lean:6393:46: error: linarith failed to find a contradiction
+t : ℝ
+ht : 13 ≤ t
+ht8 : t ≤ 10 ^ 8
+n : ℕ
+hn : n = ⌊13 * t / 8⌋₊
+hfl : 13 * t / 8 < ↑n.succ
+a✝ : ↑n ≤ 13 * t / 8 - 1
+⊢ False
+failed
+RhAttack/P4Limit.lean:6408:6: error: No goals to be solved
+Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+RhAttack/P4Limit.lean:6413:25: error: unsolved goals
+t : ℝ
+ht : 13 ≤ t
+ht8 : t ≤ 10 ^ 8
+n : ℕ
+hn : n = ⌊13 * t / 8⌋₊
+hfl : 13 * t / 8 < ↑n.succ
+hngt : 13 * t / 8 - 1 ≤ ↑n
+hT2 : t3w_term n t 2 ≤ t3wB_R 2 t * t3wB_target t
+hT4 : t3w_term n t 4 ≤ t3wB_R 4 t * t3wB_target t
+hT6 : t3w_term n t 6 ≤ t3wB_R 6 t * t3wB_target t
+hT7 : t3w_term n t 7 ≤ t3wB_R 7 t * t3wB_target t
+hS : t3wB_R 2 t + t3wB_R 4 t + t3wB_R 6 t + t3wB_R 7 t < 1
+htgt0 : 0 < t3wB_target t
+hsm : t3wB_target t * (t3wB_R 2 t + t3wB_R 4 t + t3wB_R 6 t + t3wB_R 7 t) < t3wB_target t * 1
+⊢ t3wB_R 2 t * t3wB_target t + t3wB_R 4 t * t3wB_target t + t3wB_R 6 t * t3wB_target t + t3wB_R 7 t * t3wB_target t <
+    t3wB_target t
+RhAttack/P4Limit.lean:6425:11: error: unexpected token 'at'; expected command
+RhAttack/P4Limit.lean:6445:46: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ↑⌊13 * t / 8⌋.toNat
+in the target expression
+  ↑⌊13 * t / 8⌋.toNat ≤ 13 * t / 8
+
+t : ℝ
+ht : 1 ≤ t
+htmax : t ≤ 10 ^ 8
+n : ℕ
+hn : n = ⌊13 * t / 8⌋₊
+h13 : 13 ≤ t
+hB : t3w_T3UB n t < t3wB_target t
+h0 : 0 ≤ 13 * t / 8
+hfz : 0 ≤ ⌊13 * t / 8⌋
+⊢ ↑⌊13 * t / 8⌋.toNat ≤ 13 * t / 8
+RhAttack/P4Limit.lean:6450:46: error: unsolved goals
+t : ℝ
+ht : 1 ≤ t
+htmax : t ≤ 10 ^ 8
+n : ℕ
+hn : n = ⌊13 * t / 8⌋₊
+h13 : 13 ≤ t
+hB : t3w_T3UB n t < t3wB_target t
+hfloor : ↑n ≤ 13 * t / 8
+⊢ 0 ≤ ?m.249
+RhAttack/P4Limit.lean:6455:46: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ↑(Int.toNat ?m.330)
+in the target expression
+  1 ≤ ⌊13 * t / 8⌋.toNat
+
+t : ℝ
+ht : 1 ≤ t
+htmax : t ≤ 10 ^ 8
+n : ℕ
+hn : n = ⌊13 * t / 8⌋₊
+h13 : 13 ≤ t
+hB : t3w_T3UB n t < t3wB_target t
+hfloor : ↑n ≤ 13 * t / 8
+h1x : 1 ≤ 13 * t / 8
+hfz1 : 1 ≤ ⌊13 * t / 8⌋
+⊢ 1 ≤ ⌊13 * t / 8⌋.toNat
+RhAttack/P4Limit.lean:6457:35: error: linarith failed to find a contradiction
+t : ℝ
+ht : 1 ≤ t
+htmax : t ≤ 10 ^ 8
+n : ℕ
+hn : n = ⌊13 * t / 8⌋₊
+h13 : 13 ≤ t
+hB : t3w_T3UB n t < t3wB_target t
+hfloor : ↑n ≤ 13 * t / 8
+hn1 : 1 ≤ n
+a✝ : ↑n ≤ 0
+⊢ False
+failed
+RhAttack/P4Limit.lean:6463:43: error: unsolved goals
+t : ℝ
+ht : 1 ≤ t
+htmax : t ≤ 10 ^ 8
+n : ℕ
+hn : n = ⌊13 * t / 8⌋₊
+h13 : 13 ≤ t
+hB : t3w_T3UB n t < t3wB_target t
+hfloor : ↑n ≤ 13 * t / 8
+hn1 : 1 ≤ n
+hnpos : 0 < ↑n
+hinv : (13 * t / 8) ^ (-1 / 2) ≤ ↑n ^ (-1 / 2)
+⊢ 0 ≤ ?m.462
+RhAttack/P4Limit.lean:6463:58: error: unsolved goals
+t : ℝ
+ht : 1 ≤ t
+htmax : t ≤ 10 ^ 8
+n : ℕ
+hn : n = ⌊13 * t / 8⌋₊
+h13 : 13 ≤ t
+hB : t3w_T3UB n t < t3wB_target t
+hfloor : ↑n ≤ 13 * t / 8
+hn1 : 1 ≤ n
+hnpos : 0 < ↑n
+hinv : (13 * t / 8) ^ (-1 / 2) ≤ ↑n ^ (-1 / 2)
+⊢ 0 ≤ ?m.454
+RhAttack/P4Limit.lean:6472:46: error: unsolved goals
+t : ℝ
+ht : 1 ≤ t
+htmax : t ≤ 10 ^ 8
+n : ℕ
+hn : n = ⌊13 * t / 8⌋₊
+h13 : ¬13 ≤ t
+hlt13 : t < 13
+hA1 : t < 16 / 13
+hA : t3w_T3UB n t < 35 / 78
+⊢ 0 ≤ ?m.557
+RhAttack/P4Limit.lean:6486:44: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ↑(Int.toNat ?m.784)
+in the target expression
+  ⌊13 * t / 8⌋.toNat = 1
+
+t : ℝ
+ht : 1 ≤ t
+htmax : t ≤ 10 ^ 8
+n : ℕ
+hn : n = ⌊13 * t / 8⌋₊
+h13 : ¬13 ≤ t
+hlt13 : t < 13
+hA1 : t < 16 / 13
+hA : t3w_T3UB n t < 35 / 78
+hlo : 1 ≤ 13 * t / 8
+hhi : 13 * t / 8 < 2
+hfzeq : ⌊13 * t / 8⌋ = 1
+⊢ ⌊13 * t / 8⌋.toNat = 1
+RhAttack/P4Limit.lean:6487:14: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ⌊13 * t / 8⌋
+in the target expression
+  0 ≤ ?m.784
+
+t : ℝ
+ht : 1 ≤ t
+htmax : t ≤ 10 ^ 8
+n : ℕ
+hn : n = ⌊13 * t / 8⌋₊
+h13 : ¬13 ≤ t
+hlt13 : t < 13
+hA1 : t < 16 / 13
+hA : t3w_T3UB n t < 35 / 78
+hlo : 1 ≤ 13 * t / 8
+hhi : 13 * t / 8 < 2
+hfzeq : ⌊13 * t / 8⌋ = 1
+⊢ 0 ≤ ?m.784
+RhAttack/P4Limit.lean:6492:8: error: 'change' tactic failed, pattern
+  35 / 78 < 1 / 2 * 1 ^ (-1 / 2) * (35 / 39)
+is not definitionally equal to target
+  35 / 78 < 1 / 2 * ↑1 ^ (-1 / 2) * (35 / 39)
+RhAttack/P4Limit.lean:6509:50: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ↑(Int.toNat ?m.1107)
+in the target expression
+  2 ≤ ⌊13 * t / 8⌋.toNat
+
+t : ℝ
+ht : 1 ≤ t
+htmax : t ≤ 10 ^ 8
+n : ℕ
+hn : n = ⌊13 * t / 8⌋₊
+h13 : ¬13 ≤ t
+hlt13 : t < 13
+hA1 : ¬t < 16 / 13
+hA2 : t < 4
+htA2 : 16 / 13 ≤ t
+hA : t3w_T3UB n t < 35 / 234
+hlo2 : 2 ≤ 13 * t / 8
+hfz2 : 2 ≤ ⌊13 * t / 8⌋
+⊢ 2 ≤ ⌊13 * t / 8⌋.toNat
+RhAttack/P4Limit.lean:6511:39: error: linarith failed to find a contradiction
+t : ℝ
+ht : 1 ≤ t
+htmax : t ≤ 10 ^ 8
+n : ℕ
+hn : n = ⌊13 * t / 8⌋₊
+h13 : ¬13 ≤ t
+hlt13 : t < 13
+hA1 : ¬t < 16 / 13
+hA2 : t < 4
+htA2 : 16 / 13 ≤ t
+hA : t3w_T3UB n t < 35 / 234
+hlo2 : 2 ≤ 13 * t / 8
+hn2 : 2 ≤ n
+a✝ : ↑n ≤ 0
+⊢ False
+failed
+RhAttack/P4Limit.lean:6549:52: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ↑(Int.toNat ?m.1790)
+in the target expression
+  2 ≤ ⌊13 * t / 8⌋.toNat
+
+t : ℝ
+ht : 1 ≤ t
+htmax : t ≤ 10 ^ 8
+n : ℕ
+hn : n = ⌊13 * t / 8⌋₊
+h13 : ¬13 ≤ t
+hlt13 : t < 13
+hA1 : ¬t < 16 / 13
+hA2 : ¬t < 4
+hA3 : t < 8
+htA3 : 4 ≤ t
+hA : t3w_T3UB n t < 35 / 312
+hlo2 : 2 ≤ 13 * t / 8
+hfz2 : 2 ≤ ⌊13 * t / 8⌋
+⊢ 2 ≤ ⌊13 * t / 8⌋.toNat
+RhAttack/P4Limit.lean:6551:41: error: linarith failed to find a contradiction
+t : ℝ
+ht : 1 ≤ t
+htmax : t ≤ 10 ^ 8
+n : ℕ
+hn : n = ⌊13 * t / 8⌋₊
+h13 : ¬13 ≤ t
+hlt13 : t < 13
+hA1 : ¬t < 16 / 13
+hA2 : ¬t < 4
+hA3 : t < 8
+htA3 : 4 ≤ t
+hA : t3w_T3UB n t < 35 / 312
+hlo2 : 2 ≤ 13 * t / 8
+hn2 : 2 ≤ n
+a✝ : ↑n ≤ 0
+⊢ False
+failed
+RhAttack/P4Limit.lean:6589:52: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ↑(Int.toNat ?m.2459)
+in the target expression
+  2 ≤ ⌊13 * t / 8⌋.toNat
+
+t : ℝ
+ht : 1 ≤ t
+htmax : t ≤ 10 ^ 8
+n : ℕ
+hn : n = ⌊13 * t / 8⌋₊
+h13 : ¬13 ≤ t
+hlt13 : t < 13
+hA1 : ¬t < 16 / 13
+hA2 : ¬t < 4
+hA3 : ¬t < 8
+htA4 : 8 ≤ t
+hA : t3w_T3UB n t < 35 / 390
+hlo2 : 2 ≤ 13 * t / 8
+hfz2 : 2 ≤ ⌊13 * t / 8⌋
+⊢ 2 ≤ ⌊13 * t / 8⌋.toNat
+RhAttack/P4Limit.lean:6591:41: error: linarith failed to find a contradiction
+t : ℝ
+ht : 1 ≤ t
+htmax : t ≤ 10 ^ 8
+n : ℕ
+hn : n = ⌊13 * t / 8⌋₊
+h13 : ¬13 ≤ t
+hlt13 : t < 13
+hA1 : ¬t < 16 / 13
+hA2 : ¬t < 4
+hA3 : ¬t < 8
+htA4 : 8 ≤ t
+hA : t3w_T3UB n t < 35 / 390
+hlo2 : 2 ≤ 13 * t / 8
+hn2 : 2 ≤ n
+a✝ : ↑n ≤ 0
+⊢ False
+failed

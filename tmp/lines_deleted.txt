@@ -1,0 +1,313 @@
+-end
+-
+-/-! P4Limit · L5.b — zeta split (Re s > 1).
+-
+-    ζ(s) = P_n s + ∑' i, 1/((i+n+1):ℂ)^s, separating the first n terms of the
+-    1-indexed tsum.  Pinned mathlib: `zeta_eq_tsum_one_div_nat_add_one_cpow`
+-    (NumberTheory/LSeries/RiemannZeta.lean:214 — the 1-indexed tsum, stated
+-    "to avoid relying on mathlib's conventions for 0 ^ s"),
+-    `Summable.sum_add_tsum_nat_add'` (Topology/Algebra/InfiniteSum/NatInt.lean,
+-    `to_additive` of `Multipliable.prod_mul_tprod_nat_mul'`:
+-    ∑ range k, f + ∑' f (i+k) = ∑' f), `summable_nat_add_iff` (shift-
+-    invariance of summability, found by #print after greps failed — the generic
+-    version is not source-greppable), `Complex.summable_one_div_nat_cpow`.
+--/
+-/-/ Atom L5.b — for Re s > 1: ζ(s) = P_n s + ∑' i, 1/((i+n+1):ℂ)^s. -/
+-theorem p4_zeta_split {s : ℂ} (hs : 1 < s.re) (n : ℕ) :
+-    riemannZeta s = p4_P n s + ∑' i : ℕ, (1 : ℂ) / (((i + n) + 1) : ℂ) ^ s := by
+-  set g : ℕ → ℂ := fun i : ℕ => (1 : ℂ) / (((i + 1) : ℕ) : ℂ) ^ s with hg
+-  have hS0 : Summable (fun i : ℕ => (1 : ℂ) / (i : ℂ) ^ s) := by
+-    simpa using (Complex.summable_one_div_nat_cpow (p := s)).2 hs
+-  have hSg : Summable g := by
+-    simpa [g] using (summable_nat_add_iff (k := 1) (G := ℂ)
+-        (f := fun i : ℕ => (1 : ℂ) / (i : ℂ) ^ s)).2 hS0
+-  have hSn : Summable (fun i : ℕ => g (i + n)) := by
+-    simpa [g] using (summable_nat_add_iff (k := n) (G := ℂ) (f := g)).2 hSg
+-  rw [zeta_eq_tsum_one_div_nat_add_one_cpow hs]
+-  simpa [p4_P, g] using (Summable.sum_add_tsum_nat_add' hSn).symm
+-
+-/-! P4Limit · L5.c — the tail tsum equals the closed-form limit (Re s > 1).
+-
+-    ∑' i, 1/((i+n+1):ℂ)^s = p4_Tn_lim s n.  Route: the tail partial sums
+-    are the L5.a functions at M = n+m; the shifted tsum partial sums reach
+-    the same Ioc partial sums (Ioc↔range bridge: `Finset.sum_range_add` +
+-    `Finset.sum_union` over the disjoint split range (n+m+1) = range (n+1) ∪
+-    Ioc n (n+m), verified standalone); `tendsto_unique` then identifies the
+-    tsum limit with the L5.a limit.  Pinned: `Summable.tendsto_sum_tsum_nat`,
+-    `tendsto_add_atTop_nat`, `tendsto_unique`, `Complex.cpow_neg`.
+--/
+-/-/ Atom L5.c — for Re s > 1, n ≥ 1: the shifted tail tsum is exactly the
+-    closed-form limit p4_Tn_lim s n. -/
+-theorem p4_Tn_eq {s : ℂ} (hs : 1 < s.re) {n : ℕ} (hn : 0 < n) :
+-    (∑' i : ℕ, (1 : ℂ) / (((i + n) + 1) : ℂ) ^ s) = p4_Tn_lim s n := by
+-  set g : ℕ → ℂ := fun i : ℕ => (1 : ℂ) / (((i + 1) : ℕ) : ℂ) ^ s with hg
+-  have hS0 : Summable (fun i : ℕ => (1 : ℂ) / (i : ℂ) ^ s) := by
+-    simpa using (Complex.summable_one_div_nat_cpow (p := s)).2 hs
+-  have hSg : Summable g := by
+-    simpa [g] using (summable_nat_add_iff (k := 1) (G := ℂ)
+-        (f := fun i : ℕ => (1 : ℂ) / (i : ℂ) ^ s)).2 hS0
+-  have hSn : Summable (fun i : ℕ => g (i + n)) := by
+-    simpa [g] using (summable_nat_add_iff (k := n) (G := ℂ) (f := g)).2 hSg
+-  -- summand bridge: g (i + n) = ((i + n + 1):ℕ:ℂ)^{-s}
+-  have hTerm0 (i : ℕ) : g (i + n) = (1 : ℂ) / (((i + n) + 1 : ℕ) : ℂ) ^ s := by
+-    dsimp only [g]
+-  have hTerm (i : ℕ) : g (i + n) = (((i + n) + 1 : ℕ) : ℂ) ^ (-s) := by
+-    rw [hTerm0 i, one_div, ← Complex.cpow_neg]
+-  -- the tsum partial sums
+-  have hT : Tendsto (fun m : ℕ => ∑ i ∈ Finset.range m, g (i + n)) atTop
+-      (nhds (∑' i : ℕ, g (i + n))) :=
+-    Summable.tendsto_sum_tsum_nat hSn
+-  have hT2 : Tendsto (fun m : ℕ => ∑ i ∈ Finset.range m, (((i + n) + 1 : ℕ) : ℂ) ^ (-s))
+-      atTop (nhds (∑' i : ℕ, g (i + n))) := by
+-    convert hT using 1
+-    funext m
+-    exact Finset.sum_congr rfl (fun i _ => (hTerm i).symm)
+-  -- Ioc↔range bridge (verified standalone in ProbeTmp before splicing)
+-  have hIoc (m : ℕ) : (∑ i ∈ Finset.range m, (((i + n) + 1 : ℕ) : ℂ) ^ (-s)) =
+-      (∑ k ∈ Finset.Ioc n (n + m), (k : ℂ) ^ (-s)) := by
+-    set a := n + 1 with ha
+-    set t : ℕ → ℂ := fun k : ℕ => (k : ℂ) ^ (-s) with ht
+-    have hUniv : (Finset.range (n + m + 1) : Finset ℕ) =
+-        Finset.range a ∪ Finset.Ioc n (n + m) := by
+-      dsimp only [a]
+-      ext k
+-      simp only [Finset.mem_union, Finset.mem_range, Finset.mem_Ioc]
+-      omega
+-    have hDisj : Disjoint (Finset.range a) (Finset.Ioc n (n + m)) := by
+-      dsimp only [a]
+-      intro x hx1 hx2 k hk
+-      have hd1 : k < n + 1 := Finset.mem_range.mp (hx1 hk)
+-      have hd2 : n < k := (Finset.mem_Ioc.mp (hx2 hk)).1
+-      omega
+-    have hSplit : (∑ k ∈ Finset.range (a + m), t k) =
+-        (∑ k ∈ Finset.range a, t k) + (∑ i ∈ Finset.range m, t (a + i)) := by
+-      simpa using Finset.sum_range_add t a m
+-    have h1 : (∑ i ∈ Finset.range m, t (a + i)) =
+-        (∑ k ∈ Finset.range (a + m), t k) - (∑ k ∈ Finset.range a, t k) := by
+-      rw [hSplit]
+-    have hNat : (a + m : ℕ) = n + m + 1 := by
+-      dsimp only [a]
+-    have hNat2 (i : ℕ) : (i + n + 1 : ℕ) = a + i := by
+-      dsimp only [a]
+-    have hHead : (∑ i ∈ Finset.range m, (((i + n) + 1 : ℕ) : ℂ) ^ (-s)) =
+-        (∑ i ∈ Finset.range m, t (a + i)) :=
+-      Finset.sum_congr rfl (fun i _h => by
+-        rw [hNat2 i])
+-    have h2 : (∑ i ∈ Finset.range m, t (a + i)) =
+-        (∑ k ∈ Finset.range (n + m + 1), t k) - (∑ k ∈ Finset.range a, t k) := by
+-      rw [h1]
+-      rw [hNat]
+-    have h3 : (∑ i ∈ Finset.range m, t (a + i)) =
+-        ((Finset.range a ∪ Finset.Ioc n (n + m)).sum t) - (∑ k ∈ Finset.range a, t k) := by
+-      rw [h2]
+-      rw [hUniv]
+-    have h4 : (∑ i ∈ Finset.range m, t (a + i)) =
+-        ((∑ k ∈ Finset.range a, t k) + (∑ k ∈ Finset.Ioc n (n + m), t k)) -
+-        (∑ k ∈ Finset.range a, t k) := by
+-      rw [h3]
+-      simp only [Finset.sum_union hDisj]
+-    have h5 : (∑ i ∈ Finset.range m, t (a + i)) = (∑ k ∈ Finset.Ioc n (n + m), t k) := by
+-      rw [h4]
+-      abel
+-    rw [hHead, h5]
+-  -- the Ioc partial sums reach the tsum limit
+-  have hT3 : Tendsto (fun m : ℕ => ∑ k ∈ Finset.Ioc n (n + m), (k : ℂ) ^ (-s))
+-      atTop (nhds (∑' i : ℕ, g (i + n))) := by
+-    convert hT2 using 1
+-    funext m
+-    exact (hIoc m).symm
+-  -- the Ioc partial sums reach the L5.a limit (L5.a at M = n+m)
+-  have hShift : Tendsto (fun m : ℕ => n + m) atTop atTop := by
+-    convert tendsto_add_atTop_nat n using 1
+-    funext m
+-    rw [add_comm]
+-  have hL : Tendsto (fun m : ℕ => ∑ k ∈ Finset.Ioc n (n + m), (k : ℂ) ^ (-s))
+-      atTop (nhds (p4_Tn_lim s n)) := by
+-    convert (p4_Tn_Tendsto hs n hn).comp hShift using 1
+-    funext m
+-    rfl
+-  -- one function, two limits, Hausdorff: equal
+-  simpa [g] using tendsto_nhds_unique hT3 hL
+-
+-/-! P4Limit · L5.d — the P4 identity at Re s > 1 (Lean-proven).
+-
+-    W_n(s) := ζ(s) − P_n s + I(n,s) = p4_em_expr s n, for n ≥ 1, Re s > 1.
+-    Assembly: L5.b (zeta split) cancels the head P_n; L5.c identifies the
+-    shifted tail tsum with p4_Tn_lim; +I cancels the first-order term
+-    −p4_Tn_lim's leading −n^{1−s}/(1−s) (the §0.5 sign correction, now
+-    machine-checked); the kernel s(s+1)·∫ B̂2·x^{−s−2} is pulled together
+-    into ∫ B̂2·p4_f2 (`integral_const_mul` + `integral_congr`).  The
+-    extension to Re s = ½ is CITED (DLMF 25.2.8 / Apostol Thm 12.21).
+--/
+-
+-/-/ Atom L5.d — the P4 identity at Re s > 1, n ≥ 1. -/
+-theorem p4_identity {s : ℂ} (hs : 1 < s.re) {n : ℕ} (hn : 0 < n) :
+-    riemannZeta s - p4_P n s + p4_I n s = p4_em_expr s n := by
+-  rw [p4_zeta_split hs n]
+-  rw [p4_Tn_eq hs hn]
+-  dsimp only [p4_Tn_lim, p4_I, p4_em_expr]
+-  norm_cast
+-  ring
+-
+-
+-/-! P4Limit · L5.e — the P4 statement: the bound on the EM expression at
+-    Re s = ½ (fully Lean-proven).
+-
+-    ‖p4_em_expr s n‖ ≤ B_n(s) := ½·n^(-1/2) + (‖s‖/12)·n^(-3/2)
+-       + (√3/540)·‖s(s+1)(s+2)‖·n^(-5/2),  for s.re = ½, n ≥ 1.
+-
+-    The equality `W_n(s) = p4_em_expr s n` (W_n := ζ − P_n + I) at
+-    Re s = ½ is CITED — [DLMF 25.2.8 / Apostol Thm 12.21: the EM tail
+-    identity holds by analytic continuation on 0 < Re s ≤ 1/2; the
+-    two sides agree on Re s > 1 (p4_identity) and both are analytic on
+-    {Re s > -1}\{-1,-2}]; numerically verified at the 1/sqrt(M) rate
+-    (day-017, day-019 §10).  The bound on the EM expression itself is
+-    triangle-inequality + `p4_f2_tail_bound` (L4, sharp constant
+-    √3/270; the leading ½ turns it into √3/540).
+--/
+-
+-/-/ Atom L5.e — the P4 bound at Re s = ½ (the machine-proven half of the
+-    T4 law; the W_n-equality at Re s = ½ is cited — see the section doc). -/
+-theorem p4_T4_bound {s : ℂ} (hsre : s.re = 1 / 2) {n : ℕ} (hn : 0 < n) :
+-    ‖p4_em_expr s n‖ ≤
+-        (1 / 2) * (n : ℝ) ^ (-1 / 2 : ℝ) +
+-        (‖s‖ / 12) * (n : ℝ) ^ (-3 / 2 : ℝ) +
+-        (Real.sqrt 3 / 540) * ‖s * (s + 1) * (s + 2)‖ * (n : ℝ) ^ (-5 / 2 : ℝ) := by
+-  set t1 := -((1 / 2) : ℂ) * (n : ℂ) ^ (-s) with ht1
+-  set t2 := ((1 / 12) : ℂ) * (s * (n : ℂ) ^ (-s - 1)) with ht2
+-  set tk := ((1 / 2) : ℂ) * (∫ x : ℝ in Set.Ioi (n : ℝ), (B2 x : ℂ) * p4_f2 s x) with htk
+-  have hnR : 0 < (n : ℝ) := Nat.cast_pos.mpr hn
+-  have hEm : p4_em_expr s n = t1 + t2 - tk := by
+-    dsimp only [t1, t2, tk, p4_em_expr]
+-  rw [hEm]
+-  have hre1 : (-s : ℂ).re = (-1 / 2 : ℝ) := by
+-    rw [Complex.neg_re, hsre]
+-    ring
+-  have hbase : (n : ℂ) = ((n : ℝ) : ℂ) := by
+-    norm_cast
+-  have hre2 : (-s - 1 : ℂ).re = (-3 / 2 : ℝ) := by
+-    rw [Complex.sub_re, Complex.neg_re, hsre, Complex.one_re]
+-    ring
+-  have hnorm2 : ‖(n : ℂ) ^ (-s - 1)‖ = (n : ℝ) ^ (-3 / 2 : ℝ) := by
+-    rw [hbase, Complex.norm_cpow_eq_rpow_re_of_pos hnR (-s - 1), hre2]
+-  have hnorm1 : ‖(n : ℂ) ^ (-s)‖ = (n : ℝ) ^ (-1 / 2 : ℝ) := by
+-    rw [hbase, Complex.norm_cpow_eq_rpow_re_of_pos hnR (-s), hre1]
+-  have hnorm12 : ‖-((1 / 2) : ℂ)‖ = (1 / 2 : ℝ) := by norm_num
+-  have hnorm112 : ‖((1 / 12) : ℂ)‖ = (1 / 12 : ℝ) := by norm_num
+-  -- (1) kernel: L4.4 with the leading ½
+-  have hK : ‖tk‖ ≤ (Real.sqrt 3 / 540) * ‖s * (s + 1) * (s + 2)‖ *
+-      (n : ℝ) ^ (-5 / 2 : ℝ) := by
+-    dsimp only [tk]
+-    calc ‖(1 / 2 : ℂ) * (∫ x : ℝ in Set.Ioi (n : ℝ), (B2 x : ℂ) * p4_f2 s x)‖
+-        = (1 / 2 : ℝ) * ‖∫ x : ℝ in Set.Ioi (n : ℝ), (B2 x : ℂ) * p4_f2 s x‖ := by
+-          rw [norm_mul]
+-          norm_num
+-      _ ≤ (1 / 2) * (Real.sqrt 3 / 270 * ‖s * (s + 1)‖ * ‖s + 2‖ *
+-            (n : ℝ) ^ (-5 / 2 : ℝ)) :=
+-          mul_le_mul_of_nonneg_left (p4_f2_tail_bound hsre n hn) (by norm_num)
+-      _ = (Real.sqrt 3 / 540) * (‖s‖ * ‖s + 1‖ * ‖s + 2‖) *
+-            (n : ℝ) ^ (-5 / 2 : ℝ) := by
+-          rw [norm_mul]
+-          ring
+-      _ = (Real.sqrt 3 / 540) * ‖s * (s + 1) * (s + 2)‖ *
+-            (n : ℝ) ^ (-5 / 2 : ℝ) := by
+-          rw [← norm_mul, ← norm_mul]
+-  -- (2) first endpoint term
+-  have h1 : ‖t1‖ ≤ (1 / 2) * (n : ℝ) ^ (-1 / 2 : ℝ) := by
+-    dsimp only [t1]
+-    rw [norm_mul, hnorm12]
+-    apply mul_le_mul_of_nonneg_left _ (by norm_num)
+-    rw [hnorm1]
+-  -- (3) second endpoint term
+-  have h2 : ‖t2‖ ≤ (‖s‖ / 12) * (n : ℝ) ^ (-3 / 2 : ℝ) := by
+-    dsimp only [t2]
+-    calc ‖((1 / 12) : ℂ) * (s * (n : ℂ) ^ (-s - 1))‖
+-        = (1 / 12 : ℝ) * ‖s * (n : ℂ) ^ (-s - 1)‖ := by
+-          rw [norm_mul, hnorm112]
+-      _ ≤ (1 / 12 : ℝ) * (‖s‖ * (n : ℝ) ^ (-3 / 2 : ℝ)) :=
+-          mul_le_mul_of_nonneg_left (by rw [norm_mul, hnorm2]) (by norm_num)
+-      _ = (‖s‖ / 12) * (n : ℝ) ^ (-3 / 2 : ℝ) := by ring
+-  -- triangle
+-  have hTri : ‖t1 + t2 - tk‖ ≤ ‖t1‖ + ‖t2‖ + ‖tk‖ := by
+-    have hsub := norm_sub_le (t1 + t2) tk
+-    have hadd := norm_add_le t1 t2
+-    linarith [hsub, hadd]
+-  linarith [hTri, h1, h2, hK]
+-
+-/-! P4Limit · L5.f — the T4 corollary (the strictified measured law),
+-    pure division algebra from the P4 statement.
+-
+-    At Re s = ½ the correction scale is |I(n,s)| = n^{1/2}/|1−s| and
+-    `p4_one_minus_s_conj` gives |1−s| = |s| (1 − s = conj s on the
+-    critical line), so the ratio |W_n(s)|/|I(n,s)| is bounded by
+-    (using p4_identity + p4_T4_bound for W_n at Re s = ½, as cited):
+-
+-      ‖p4_em_expr s n‖ · |1−s| · n^{−1/2}
+-          ≤ (‖s‖/2)·n^{−1} + (‖s‖²/12)·n^{−2}
+-            + (√3/540)·‖s‖·‖s(s+1)(s+2)‖·n^{−3}.
+-
+-    (The module sketch's draft line in (t²+¼)(|s|+1) form was wrong for
+-    large t and is replaced by this exact product form, which holds for
+-    every t ≥ 0.)
+--/
+-/-/ Atom L5.f.1 — on the critical line Re s = ½: 1 − s = conj s, hence
+-    |1 − s| = |s| (the correction scale simplifies). -/
+-theorem p4_one_minus_s_conj {s : ℂ} (hsre : s.re = 1 / 2) : (1 : ℂ) - s = star s := by
+-  apply Complex.ext
+-  · simp [Complex.conj_re, hsre]
+-    norm_num
+-  · simp [Complex.conj_im]
+-
+-/-/ Atom L5.f.2 — the T4 ratio corollary: the corrected-tail ratio
+-    |W_n(s)|/|I(n,s)| (W_n at Re s = ½ is the EM expression by the cited
+-    identity) is bounded by the sharp three-term expression.  Stated as a
+-    product (no quotients) for ℝ-algebra hygiene. -/
+-theorem p4_T4_ratio {s : ℂ} (hsre : s.re = 1 / 2) {n : ℕ} (hn : 0 < n) :
+-    ‖p4_em_expr s n‖ * ‖1 - s‖ * (n : ℝ) ^ (-1 / 2 : ℝ) ≤
+-        (‖s‖ / 2) * (n : ℝ) ^ (-1 : ℝ) +
+-        (‖s‖ ^ 2 / 12) * (n : ℝ) ^ (-2 : ℝ) +
+-        (Real.sqrt 3 / 540) * ‖s‖ * ‖s * (s + 1) * (s + 2)‖ * (n : ℝ) ^ (-3 : ℝ) := by
+-  have hnR : 0 < (n : ℝ) := Nat.cast_pos.mpr hn
+-  have hbB : ‖p4_em_expr s n‖ ≤
+-      (1 / 2) * (n : ℝ) ^ (-1 / 2 : ℝ) +
+-      (‖s‖ / 12) * (n : ℝ) ^ (-3 / 2 : ℝ) +
+-      (Real.sqrt 3 / 540) * ‖s * (s + 1) * (s + 2)‖ * (n : ℝ) ^ (-5 / 2 : ℝ) :=
+-    p4_T4_bound hsre hn
+-  have hconj : (1 : ℂ) - s = star s := p4_one_minus_s_conj hsre
+-  have hnorm : ‖(1 : ℂ) - s‖ = ‖s‖ := by
+-    rw [hconj, norm_star]
+-  have hrpow1 : (n : ℝ) ^ (-1 / 2 : ℝ) * (n : ℝ) ^ (-1 / 2 : ℝ) =
+-      (n : ℝ) ^ (-1 : ℝ) := by
+-    rw [← Real.rpow_add hnR (-1 / 2 : ℝ) (-1 / 2 : ℝ)]
+-    ring_nf
+-  have hrpow2 : (n : ℝ) ^ (-1 / 2 : ℝ) * (n : ℝ) ^ (-3 / 2 : ℝ) =
+-      (n : ℝ) ^ (-2 : ℝ) := by
+-    rw [← Real.rpow_add hnR (-1 / 2 : ℝ) (-3 / 2 : ℝ)]
+-    ring_nf
+-  have hrpow3 : (n : ℝ) ^ (-1 / 2 : ℝ) * (n : ℝ) ^ (-5 / 2 : ℝ) =
+-      (n : ℝ) ^ (-3 : ℝ) := by
+-    rw [← Real.rpow_add hnR (-1 / 2 : ℝ) (-5 / 2 : ℝ)]
+-    ring_nf
+-  calc ‖p4_em_expr s n‖ * ‖(1 : ℂ) - s‖ * (n : ℝ) ^ (-1 / 2 : ℝ)
+-      ≤ ((1 / 2) * (n : ℝ) ^ (-1 / 2 : ℝ) +
+-          (‖s‖ / 12) * (n : ℝ) ^ (-3 / 2 : ℝ) +
+-          (Real.sqrt 3 / 540) * ‖s * (s + 1) * (s + 2)‖ * (n : ℝ) ^ (-5 / 2 : ℝ)) *
+-          ((‖s‖ * (n : ℝ) ^ (-1 / 2 : ℝ))) := by
+-        rw [hnorm, mul_assoc]
+-        exact mul_le_mul_of_nonneg_right hbB (by positivity)
+-      _ = (‖s‖ / 2) * (n : ℝ) ^ (-1 : ℝ) +
+-          (‖s‖ ^ 2 / 12) * (n : ℝ) ^ (-2 : ℝ) +
+-          (Real.sqrt 3 / 540) * ‖s‖ * ‖s * (s + 1) * (s + 2)‖ * (n : ℝ) ^ (-3 : ℝ) := by
+-        ring_nf
+-        have hK : (n : ℝ) ^ (-1 / 2 : ℝ) * ‖s‖ * Real.sqrt 3 *
+-            ‖s * 2 + s ^ 2 * 3 + s ^ 3‖ * (n : ℝ) ^ (-5 / 2 : ℝ) * (1 / 540) =
+-            (n : ℝ) ^ (-1 / 2 : ℝ) * (n : ℝ) ^ (-5 / 2 : ℝ) * ‖s‖ * Real.sqrt 3 *
+-            ‖s * 2 + s ^ 2 * 3 + s ^ 3‖ * (1 / 540) := by ring
+-        have hT : (n : ℝ) ^ (-1 / 2 : ℝ) * ‖s‖ ^ 2 *
+-            (n : ℝ) ^ (-3 / 2 : ℝ) * (1 / 12) =
+-            (n : ℝ) ^ (-1 / 2 : ℝ) * (n : ℝ) ^ (-3 / 2 : ℝ) * ‖s‖ ^ 2 * (1 / 12) := by ring
+-        have hSq : ((n : ℝ) ^ (-1 / 2 : ℝ)) ^ 2 = (n : ℝ) ^ (-1 : ℝ) := by
+-          simp only [pow_two]
+-          rw [hrpow1]
+-        rw [hK, hrpow3, hT, hrpow2, hSq]
+-        ring

@@ -1,0 +1,80 @@
+RhAttack/S4Strip.lean:1118:83: error: Application type mismatch: The argument
+  hsq
+has type
+  5567 ^ 2 ≤ √31000000 ^ 2
+but is expected to have type
+  5567 ≤ √31000000
+in the application
+  (sq_le_sq₀ ?m.61 (sqrt_nonneg 31000000)).mpr hsq
+RhAttack/S4Strip.lean:1132:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  (?m.257 ^ 4) ^ (-1 / 2)
+in the target expression
+  31000000 ^ (-1 / 2) * (t ^ 4) ^ (-1 / 2) = 31000000 ^ (-1 / 2) * t ^ (-2)
+
+t : ℝ
+ht : 1000 ≤ t
+ht0 : 0 < t
+hnpos : 0 < ↑(n4 t)
+hbase : 0 < 31000000 * t ^ 4
+hmono : ↑(n4 t) ^ (-1 / 2) ≤ (31000000 * t ^ 4) ^ (-1 / 2)
+⊢ 31000000 ^ (-1 / 2) * (t ^ 4) ^ (-1 / 2) = 31000000 ^ (-1 / 2) * t ^ (-2)
+RhAttack/S4Strip.lean:1132:24: error: Application type mismatch: The argument
+  ht0
+has type
+  0 < t
+but is expected to have type
+  0 ≤ ?m.257
+in the application
+  rpow_mul ht0
+RhAttack/S4Strip.lean:1179:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  (?m.347 ^ 4) ^ (-3 / 2)
+in the target expression
+  31000000 ^ (-3 / 2) * (t ^ 4) ^ (-3 / 2) = 31000000 ^ (-3 / 2) * t ^ (-6)
+
+t : ℝ
+ht : 1000 ≤ t
+ht0 : 0 < t
+hnpos : 0 < ↑(n4 t)
+hbase : 0 < 31000000 * t ^ 4
+hs : ‖↑(1 / 2) + ↑t * Complex.I‖ = √(1 / 4 + t * t)
+hnorm : √(1 / 4 + t * t) ≤ t + 1 / 2
+hmono : ↑(n4 t) ^ (-3 / 2) ≤ (31000000 * t ^ 4) ^ (-3 / 2)
+⊢ 31000000 ^ (-3 / 2) * (t ^ 4) ^ (-3 / 2) = 31000000 ^ (-3 / 2) * t ^ (-6)
+RhAttack/S4Strip.lean:1179:24: error: Application type mismatch: The argument
+  ht0
+has type
+  0 < t
+but is expected to have type
+  0 ≤ ?m.347
+in the application
+  rpow_mul ht0
+RhAttack/S4Strip.lean:1258:54: error: Type mismatch
+  S4G.hSqrt3
+has type
+  √3 ≤ 17321 / 10000
+but is expected to have type
+  √3 ≤ 17321 / 10 ^ 4
+RhAttack/S4Strip.lean:1267:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  (?m.537 ^ 4) ^ (-5 / 2)
+in the target expression
+  31000000 ^ (-5 / 2) * (t ^ 4) ^ (-5 / 2) = 31000000 ^ (-5 / 2) * t ^ (-10)
+
+t : ℝ
+ht : 1000 ≤ t
+H3 : ℝ := ‖(↑(1 / 2) + ↑t * Complex.I) * (↑(1 / 2) + ↑t * Complex.I + 1) * (↑(1 / 2) + ↑t * Complex.I + 2)‖
+hH3 : H3 = ‖(↑(1 / 2) + ↑t * Complex.I) * (↑(1 / 2) + ↑t * Complex.I + 1) * (↑(1 / 2) + ↑t * Complex.I + 2)‖
+ht0 : 0 < t
+hnpos : 0 < ↑(n4 t)
+hbase : 0 < 31000000 * t ^ 4
+hsqrt3 : √3 ≤ 17321 / 10 ^ 4
+hs3 : ‖(↑(1 / 2) + ↑t * Complex.I) * (↑(1 / 2) + ↑t * Complex.I + 1) * (↑(1 / 2) + ↑t * Complex.I + 2)‖ ≤ (t + 3) ^ 3
+hmono : ↑(n4 t) ^ (-5 / 2) ≤ (31000000 * t ^ 4) ^ (-5 / 2)
+⊢ 31000000 ^ (-5 / 2) * (t ^ 4) ^ (-5 / 2) = 31000000 ^ (-5 / 2) * t ^ (-10)
+RhAttack/S4Strip.lean:1267:24: error: Application type mismatch: The argument
+  ht0
+has type
+  0 < t
+but is expected to have type
+  0 ≤ ?m.537
+in the application
+  rpow_mul ht0

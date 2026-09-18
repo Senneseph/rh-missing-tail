@@ -1,0 +1,66 @@
+RhAttack/P8Floor.lean:344:57: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+RhAttack/P8Floor.lean:498:46: warning: Variable name `hn` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hn
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+RhAttack/P8Floor.lean:499:33: warning: Variable name `hM` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hM
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+RhAttack/P8Floor.lean:529:47: warning: Variable name `hX` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hX
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+RhAttack/P8Floor.lean:581:51: warning: Variable name `hn` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hn
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+RhAttack/P8Floor.lean:582:5: warning: Variable name `hM` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hM
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+RhAttack/P8Floor.lean:605:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ↑(1 / 2) + ↑t * Complex.I
+in the target expression
+  ‖p4_Wn s n - (K - (p4_P n s - p4_I n s))‖ < ‖Rratio γ 0 t - 1‖
+
+n : ℕ
+t γ : ℝ
+hγ : 1 ≤ γ
+ht2 : 2 * γ ≤ t
+K : ℂ
+Mval : ℝ
+hres : p8_B t n + Mval < 1
+s : ℂ := ↑(1 / 2) + ↑t * Complex.I
+hW : ‖p4_Wn s n‖ ≤ p8_B t n
+hK : ‖K - (p4_P n s - p4_I n s)‖ ≤ Mval
+hs : s = ↑(1 / 2) + ↑t * Complex.I
+⊢ ‖p4_Wn s n - (K - (p4_P n s - p4_I n s))‖ < ‖Rratio γ 0 t - 1‖
+RhAttack/P8Floor.lean:637:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ↑(1 / 2) + ↑t * Complex.I
+in the target expression
+  ‖p4_Wn s n - (K - (p4_P n s - p4_I n s))‖ < ‖Rratio γ δ t - 1‖
+
+n : ℕ
+t γ δ : ℝ
+K : ℂ
+Mval : ℝ
+hpin : p8_f_near_pin ≤ ‖Rratio γ δ t - 1‖
+hres : p8_B t n + Mval < p8_f_near_pin
+s : ℂ := ↑(1 / 2) + ↑t * Complex.I
+hW : ‖p4_Wn s n‖ ≤ p8_B t n
+hK : ‖K - (p4_P n s - p4_I n s)‖ ≤ Mval
+hs : s = ↑(1 / 2) + ↑t * Complex.I
+⊢ ‖p4_Wn s n - (K - (p4_P n s - p4_I n s))‖ < ‖Rratio γ δ t - 1‖

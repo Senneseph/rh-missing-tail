@@ -1,0 +1,270 @@
+RhAttack/S4Strip.lean:424:4: error: Tactic `simp` failed with a nested error:
+maximum recursion depth has been reached
+use `set_option maxRecDepth <num>` to increase limit
+use `set_option diagnostics true` to get diagnostic information
+RhAttack/S4Strip.lean:509:144: error: Type mismatch
+  ?m.277 ≤ 0.110 * (38 + 8 * L) + 0.290 * (2 * log (19 + 4 * L)) + 4.58
+has type
+  Prop
+of sort `Type` but is expected to have type
+  0.110 * log (B4 t) + 0.290 * log (log (B4 t)) + 2.290 + (0.110 * log (G4 t) + 0.290 * log (log (G4 t)) + 2.290) =
+    0.110 * (log (B4 t) + log (G4 t)) + 0.290 * (log (log (B4 t)) + log (log (G4 t))) + 4.58
+of sort `Prop`
+RhAttack/S4Strip.lean:510:8: error: `ring_nf` made no progress on the goal
+RhAttack/S4Strip.lean:494:81: error: unsolved goals
+case calc.step
+t : ℝ
+ht : 1000 ≤ t
+L : ℝ := log t
+hL : L = log t
+hL0 : 0 ≤ L
+hlb1 : log (B4 t) < 19 + 4 * L
+hlg1 : log (G4 t) < 19 + 4 * L
+hlbpos : 0 < log (B4 t)
+hlgpos : 0 < log (G4 t)
+hllB : log (log (B4 t)) ≤ log (19 + 4 * L)
+hllG : log (log (G4 t)) ≤ log (19 + 4 * L)
+hllub : log (19 + 4 * L) ≤ 18 + 4 * L
+⊢ 0.110 * (log (B4 t) + log (G4 t)) + 0.290 * (log (log (B4 t)) + log (log (G4 t))) + 4.58 ≤ SsumUB t
+RhAttack/S4Strip.lean:511:86: error: unexpected token ':='; expected command
+Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+RhAttack/S4Strip.lean:570:88: error: unsolved goals
+t : ℝ
+ht : 1000 ≤ t
+ht0 : 0 < t
+hG4sq : G4 t * G4 t = c4sq * t ^ 8
+hgp : 0 < G4 t * G4 t - t * t
+hG2pos : 0 < G4 t * G4 t
+heps : t * t / (G4 t * G4 t) ≤ 1 / 2
+⊢ G4 t ^ 2 * (G4 t ^ 2 - t ^ 2)⁻¹ = (1 - t ^ 2 * (G4 t)⁻¹ ^ 2)⁻¹
+RhAttack/S4Strip.lean:587:6: error: Type mismatch
+  (div_le_one₀ (pow_pos ht0 2)).mpr ?m.1274
+has type
+  ?m.1262 / t ^ 2 ≤ 1
+but is expected to have type
+  1 / (t * t) ≤ 1
+RhAttack/S4Strip.lean:680:8: error: unsolved goals
+t : ℝ
+ht : 1000 ≤ t
+L : ℝ := log t
+hL : L = log t
+hL6 : 6 < L
+ht0 : 0 < t
+hlg : log (G4 t) < 19 + 4 * L
+hlg0 : 0 < log (G4 t)
+hllg : log (log (G4 t)) ≤ 18 + 4 * L
+hden2 : 2 * G4 t * G4 t = 2 * c4sq * t ^ 8
+hnum : 0.110 * (log (G4 t) + 1 / 2) + 0.290 * (log (log (G4 t)) + 1 / 2) + 2.290 ≤ 10 + 2 * L
+hdenpos : 0 < 2 * c4sq * t ^ 8
+⊢ (0.110 * (log (G4 t) + 1 / 2) + 0.290 * (log (log (G4 t)) + 1 / 2) + 2.290) / (2 * G4 t * G4 t) =
+    (0.110 * (log (G4 t) + 1 / 2) + 0.290 * (log (log (G4 t)) + 1 / 2) + 2.290) / (2 * G4 t * G4 t)
+RhAttack/S4Strip.lean:687:8: error: linarith failed to find a contradiction
+t : ℝ
+ht : 1000 ≤ t
+L : ℝ := log t
+hL : L = log t
+hL6 : 6 < L
+ht0 : 0 < t
+hlg : log (G4 t) < 19 + 4 * L
+hlg0 : 0 < log (G4 t)
+hllg : log (log (G4 t)) ≤ 18 + 4 * L
+hden2 : 2 * G4 t * G4 t = 2 * c4sq * t ^ 8
+hnum : 0.110 * (log (G4 t) + 1 / 2) + 0.290 * (log (log (G4 t)) + 1 / 2) + 2.290 ≤ 10 + 2 * L
+hdenpos : 0 < 2 * c4sq * t ^ 8
+a✝ : 2 * (10 + 2 * L) * c4sq / c4sq < 0.110 * (log (G4 t) * 2 + 1) + 0.290 * (2 * log (log (G4 t)) + 1) + 2 * 2.290
+⊢ False
+failed
+Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+RhAttack/S4Strip.lean:688:23: error: unsolved goals
+t : ℝ
+ht : 1000 ≤ t
+L : ℝ := log t
+hL : L = log t
+hL6 : 6 < L
+ht0 : 0 < t
+hlg : log (G4 t) < 19 + 4 * L
+hlg0 : 0 < log (G4 t)
+hllg : log (log (G4 t)) ≤ 18 + 4 * L
+hden2 : 2 * G4 t * G4 t = 2 * c4sq * t ^ 8
+hnum : 0.110 * (log (G4 t) + 1 / 2) + 0.290 * (log (log (G4 t)) + 1 / 2) + 2.290 ≤ 10 + 2 * L
+hdenpos : 0 < 2 * c4sq * t ^ 8
+⊢ 38440000000000000 + log t * 7688000000000000 = log t * c4sq * 2 + c4sq * 10
+RhAttack/S4Strip.lean:710:8: error: No goals to be solved
+RhAttack/S4Strip.lean:784:6: error: linarith failed to find a contradiction
+case hb.ha
+t : ℝ
+ht : 1000 ≤ t
+ht0 : 0 < t
+hG4sq : G4 t * G4 t = c4sq * t ^ 8
+hgp : 0 < G4 t * G4 t - t * t
+htpos : 0 < 2 * w t * (G4 t * G4 t)
+a✝ : 1 + 2 * (t * t + 1 / 4) * (G4 t * G4 t) / (G4 t * G4 t - t * t) < 0
+⊢ False
+failed
+RhAttack/S4Strip.lean:796:4: error: linarith failed to find a contradiction
+t : ℝ
+ht : 1000 ≤ t
+hL0 : 0 ≤ log t
+ht0 : 0 < t
+hBf : Bf t (G4 t) ≤ Bf4UB t
+hSsum : Sbar (B4 t) + Sbar (G4 t) ≤ SsumUB t
+a✝ : 0.110 * log (B4 t) + 0.290 * log (log (B4 t)) + 2.290 + (0.110 * log (G4 t) + 0.290 * log (log (G4 t)) + 2.290) < 0
+⊢ False
+failed
+RhAttack/S4Strip.lean:805:4: error: linarith failed to find a contradiction
+t : ℝ
+ht : 1000 ≤ t
+hL0 : 0 ≤ log t
+ht0 : 0 < t
+hBf : Bf t (G4 t) ≤ Bf4UB t
+hSsum : Sbar (B4 t) + Sbar (G4 t) ≤ SsumUB t
+hSs0 : 0 ≤ Sbar (B4 t) + Sbar (G4 t)
+hCf : Cf t (G4 t) ≤ Cf4UB t
+ht6 : 1000 ^ 6 ≤ t ^ 6
+hc4 : 2 ≤ c4sq * 1000 ^ 6
+hc4t : 2 ≤ c4sq * t ^ 6
+a✝ : 1 + 2 * (t * t + 1 / 4) * (G4 t * G4 t) / (G4 t * G4 t - t * t) < 0
+⊢ False
+failed
+RhAttack/S4Strip.lean:811:28: error: Application type mismatch: The argument
+  Mathlib.Meta.NormNum.isNat_le_true (Mathlib.Meta.NormNum.isNat_ofNat ℕ (Eq.refl 0))
+    (Mathlib.Meta.NormNum.isNat_ofNat ℕ (Eq.refl 1)) (Eq.refl true)
+has type
+  (0 : ℕ) ≤ 1
+but is expected to have type
+  (0 : ℝ) ≤ ?m.247
+in the application
+  div_nonneg
+    (Mathlib.Meta.NormNum.isNat_le_true (Mathlib.Meta.NormNum.isNat_ofNat ℕ (Eq.refl 0))
+      (Mathlib.Meta.NormNum.isNat_ofNat ℕ (Eq.refl 1)) (Eq.refl true))
+RhAttack/S4Strip.lean:812:30: error: Application type mismatch: The argument
+  pow_pos ht0 6
+has type
+  0 < t ^ 6
+but is expected to have type
+  0 < 62000000
+in the application
+  mul_pos (pow_pos ht0 6)
+RhAttack/S4Strip.lean:832:91: error: unsolved goals
+t : ℝ
+ht : 1000 ≤ t
+ht0 : 0 < t
+hBf : Bf t (G4 t) ≤ Bf4UB t
+hSsum : Sbar (B4 t) + Sbar (G4 t) ≤ SsumUB t
+hSs0 : 0 ≤ Sbar (B4 t) + Sbar (G4 t)
+hCf : Cf t (G4 t) ≤ Cf4UB t
+hCf0 : 0 ≤ Cf t (G4 t)
+hK : Kbar (G4 t) ≤ Kbar4UB t
+hK0 : 0 ≤ Kbar (G4 t)
+hBf0 : 0 ≤ Bf4UB t
+L : ℝ := log t
+hL0 hL0' : 0 ≤ L
+hTden : 0 < t ^ 6 * c4sq
+⊢ (2 + 1 / t + 1 / (t * t)) * (1 / t ^ 6) / (62000000 * 62000000) * SsumUB t ≤
+    2001001 * (20 + 4 * L) / (10 ^ 6 * c4sq * t ^ 6)
+RhAttack/S4Strip.lean:788:66: error: unsolved goals
+case calc.step
+t : ℝ
+ht : 1000 ≤ t
+ht0 : 0 < t
+hBf : Bf t (G4 t) ≤ Bf4UB t
+hSsum : Sbar (B4 t) + Sbar (G4 t) ≤ SsumUB t
+hSs0 : 0 ≤ Sbar (B4 t) + Sbar (G4 t)
+hCf : Cf t (G4 t) ≤ Cf4UB t
+hCf0 : 0 ≤ Cf t (G4 t)
+hK : Kbar (G4 t) ≤ Kbar4UB t
+hK0 : 0 ≤ Kbar (G4 t)
+hBf0 : 0 ≤ Bf4UB t
+L : ℝ := log t
+hL0 hL0' : 0 ≤ L
+hTden : 0 < t ^ 6 * c4sq
+hb : Bf4UB t * SsumUB t ≤ 2001001 * (20 + 4 * L) / (10 ^ 6 * c4sq * t ^ 6)
+⊢ Bf4UB t * SsumUB t + Cf4UB t * Kbar4UB t ≤ X4UBfun t
+RhAttack/S4Strip.lean:833:16: error: unexpected token ','; expected command
+RhAttack/S4Strip.lean:940:48: error: Application type mismatch: The argument
+  hL2t
+has type
+  log t ^ 2 ≤ t * t
+but is expected to have type
+  log t ≤ t ^ 2
+in the application
+  (sq_le_sq₀ hL0 (sq_nonneg t)).mpr hL2t
+RhAttack/S4Strip.lean:944:12: error: No goals to be solved
+Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+RhAttack/S4Strip.lean:946:30: error: unsolved goals
+t : ℝ
+ht : 1000 ≤ t
+ht0 : 0 < t
+ht5 : 1000 ^ 5 ≤ t ^ 5
+hL0 : 0 ≤ log t
+hL2 : log t ^ 2 ≤ t
+hLtle : log t ≤ t
+⊢ t⁻¹ ^ 6 * (1 / 62500000000000) ≤ t⁻¹ ^ 6 * (1 / 62500000000000)
+RhAttack/S4Strip.lean:953:12: error: linarith failed to find a contradiction
+t : ℝ
+ht : 1000 ≤ t
+ht0 : 0 < t
+ht5 : 1000 ^ 5 ≤ t ^ 5
+hL0 : 0 ≤ log t
+hL2 : log t ^ 2 ≤ t
+hLtle : log t ≤ t
+hD : 0 < 10 ^ 16 * t ^ 6
+hlt : log t / (10 ^ 16 * t ^ 6) ≤ t / (10 ^ 16 * t ^ 6)
+a✝ : 35 * t / (10 ^ 16 * t ^ 6) < 35 * log t / (10 ^ 16 * t ^ 6)
+⊢ False
+failed
+RhAttack/S4Strip.lean:957:14: error: No goals to be solved
+RhAttack/S4Strip.lean:971:40: error: Application type mismatch: The argument
+  ha1
+has type
+  10 ^ 15 * 10 ^ 18 ≤ 10 ^ 15 * t ^ 6
+but is expected to have type
+  10 ^ 15 * t ^ 6 ≤ 10 ^ 15 * 10 ^ 18
+in the application
+  (inv_le_inv₀ hb ha).mpr ha1
+RhAttack/S4Strip.lean:981:42: error: Application type mismatch: The argument
+  ht5
+has type
+  1000 ^ 5 ≤ t ^ 5
+but is expected to have type
+  10 ^ 15 ≤ t ^ 5
+in the application
+  mul_le_mul_of_nonneg_left ht5
+RhAttack/S4Strip.lean:983:40: error: Application type mismatch: The argument
+  ha1
+has type
+  10 ^ 16 * 10 ^ 15 ≤ 10 ^ 16 * t ^ 5
+but is expected to have type
+  10 ^ 16 * t ^ 5 ≤ 10 ^ 16 * 10 ^ 15
+in the application
+  (inv_le_inv₀ hb ha).mpr ha1
+RhAttack/S4Strip.lean:1001:65: error: Application type mismatch: The argument
+  hsq
+has type
+  rexp (1 / 2) ^ 2 < 4
+but is expected to have type
+  rexp (1 / 2) < 2
+in the application
+  le_of_lt hsq
+RhAttack/S4Strip.lean:1006:8: error: Function expected at
+  exp_le_exp
+but this term has type
+  rexp ?m.20 ≤ rexp ?m.21 ↔ ?m.20 ≤ ?m.21
+
+Note: Expected a function because this term is being applied to the argument
+  (st_X4half t ht)

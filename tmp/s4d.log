@@ -1,0 +1,162 @@
+RhAttack/S4Strip.lean:411:79: error: No goals to be solved
+RhAttack/S4Strip.lean:423:4: error: Tactic `simp` failed with a nested error:
+maximum recursion depth has been reached
+use `set_option maxRecDepth <num>` to increase limit
+use `set_option diagnostics true` to get diagnostic information
+RhAttack/S4Strip.lean:572:40: error: Application type mismatch: The argument
+  G4 t
+has type
+  ℝ
+of sort `Type` but is expected to have type
+  ?m.842 ≠ 0
+of sort `Prop` in the application
+  mul_ne_zero (G4 t)
+RhAttack/S4Strip.lean:574:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  G4 t ^ 2 * (G4 t)⁻¹ ^ 2
+in the target expression
+  1 - t ^ 2 / G4 t ^ 2 = (G4 t ^ 2 - t ^ 2) / G4 t ^ 2
+
+t : ℝ
+ht : 1000 ≤ t
+ht0 : 0 < t
+hG4sq : G4 t * G4 t = c4sq * t ^ 8
+hgp : 0 < G4 t * G4 t - t * t
+hG2pos : 0 < G4 t * G4 t
+heps : t * t / (G4 t * G4 t) ≤ 1 / 2
+hG1 : G4 t ≠ 0
+hA1 : G4 t ^ 2 * (G4 t)⁻¹ ^ 2 = 1
+⊢ 1 - t ^ 2 / G4 t ^ 2 = (G4 t ^ 2 - t ^ 2) / G4 t ^ 2
+RhAttack/S4Strip.lean:794:4: error: linarith failed to find a contradiction
+t : ℝ
+ht : 1000 ≤ t
+ht0 : 0 < t
+hL0 : 0 ≤ log t
+hBf : Bf t (G4 t) ≤ Bf4UB t
+hSsum : Sbar (B4 t) + Sbar (G4 t) ≤ SsumUB t
+a✝ : 0.110 * log (B4 t) + 0.290 * log (log (B4 t)) + 2.290 + (0.110 * log (G4 t) + 0.290 * log (log (G4 t)) + 2.290) < 0
+⊢ False
+failed
+RhAttack/S4Strip.lean:817:17: error: Function expected at
+  inv_nonneg
+but this term has type
+  0 ≤ ?m.447⁻¹ ↔ 0 ≤ ?m.447
+
+Note: Expected a function because this term is being applied to the argument
+  ht0.le
+RhAttack/S4Strip.lean:820:6: error: Tactic `apply` failed: could not unify the conclusion of `@div_nonneg`
+  0 ≤ ?a / ?b
+with the goal
+  0 ≤ (2 + 1 / t + 1 / (t * t)) * (1 / t ^ 6)
+
+Note: The full type of `@div_nonneg` is
+  ∀ {G₀ : Type ?u.271} [inst : GroupWithZero G₀] [inst_1 : PartialOrder G₀] [PosMulReflectLT G₀] {a b : G₀},
+    0 ≤ a → 0 ≤ b → 0 ≤ a / b
+
+case ha
+t : ℝ
+ht : 1000 ≤ t
+ht0 : 0 < t
+hL0 : 0 ≤ log t
+hBf : Bf t (G4 t) ≤ Bf4UB t
+hSsum : Sbar (B4 t) + Sbar (G4 t) ≤ SsumUB t
+hSs0 : 0 ≤ Sbar (B4 t) + Sbar (G4 t)
+hCf : Cf t (G4 t) ≤ Cf4UB t
+hCf0 : 0 ≤ Cf t (G4 t)
+hK : Kbar (G4 t) ≤ Kbar4UB t
+hK0 : 0 ≤ Kbar (G4 t)
+hnumB : 0 ≤ 2 + 1 / t + 1 / (t * t)
+ht6p : 0 ≤ t ^ 6
+⊢ 0 ≤ (2 + 1 / t + 1 / (t * t)) * (1 / t ^ 6)
+RhAttack/S4Strip.lean:838:31: error: Application type mismatch: The last
+  hSs0
+argument has type
+  0 ≤ Sbar (B4 t) + Sbar (G4 t)
+but is expected to have type
+  0 ≤ Bf4UB t
+in the application
+  mul_le_mul hBf le_rfl hSs0 hSs0
+RhAttack/S4Strip.lean:840:33: error: Application type mismatch: The argument
+  hSsum0
+has type
+  0 ≤ SsumUB t
+but is expected to have type
+  0 ≤ Bf4UB t
+in the application
+  mul_le_mul le_rfl hSsum hSs0 hSsum0
+RhAttack/S4Strip.lean:842:30: error: Application type mismatch: The last
+  hK0
+argument has type
+  0 ≤ Kbar (G4 t)
+but is expected to have type
+  0 ≤ Cf4UB t
+in the application
+  mul_le_mul hCf le_rfl hK0 hK0
+RhAttack/S4Strip.lean:844:29: error: Application type mismatch: The argument
+  hK4UB0
+has type
+  0 ≤ Kbar4UB t
+but is expected to have type
+  0 ≤ Cf4UB t
+in the application
+  mul_le_mul le_rfl hK hK0 hK4UB0
+RhAttack/S4Strip.lean:864:91: error: unsolved goals
+t : ℝ
+ht : 1000 ≤ t
+ht0 : 0 < t
+hBf : Bf t (G4 t) ≤ Bf4UB t
+hSsum : Sbar (B4 t) + Sbar (G4 t) ≤ SsumUB t
+hSs0 : 0 ≤ Sbar (B4 t) + Sbar (G4 t)
+hCf : Cf t (G4 t) ≤ Cf4UB t
+hCf0 : 0 ≤ Cf t (G4 t)
+hK : Kbar (G4 t) ≤ Kbar4UB t
+hK0 : 0 ≤ Kbar (G4 t)
+hBf0 : 0 ≤ Bf4UB t
+hCf4UB0 : 0 ≤ Cf4UB t
+hSsum0 : 0 ≤ SsumUB t
+hK4UB0 : 0 ≤ Kbar4UB t
+hBfS : Bf t (G4 t) * (Sbar (B4 t) + Sbar (G4 t)) ≤ Bf4UB t * (Sbar (B4 t) + Sbar (G4 t))
+hBs : Bf4UB t * (Sbar (B4 t) + Sbar (G4 t)) ≤ Bf4UB t * SsumUB t
+hCfK : Cf t (G4 t) * Kbar (G4 t) ≤ Cf4UB t * Kbar (G4 t)
+hKs : Cf4UB t * Kbar (G4 t) ≤ Cf4UB t * Kbar4UB t
+hfinal :
+  Bf t (G4 t) * (Sbar (B4 t) + Sbar (G4 t)) + Cf t (G4 t) * Kbar (G4 t) ≤ Bf4UB t * SsumUB t + Cf4UB t * Kbar4UB t
+L : ℝ := log t
+hL0 hL0' : 0 ≤ L
+hTden : 0 < t ^ 6 * c4sq
+⊢ (2 + 1 / t + 1 / (t * t)) * (1 / t ^ 6) / (62000000 * 62000000) * SsumUB t ≤
+    2001001 * (20 + 4 * L) / (10 ^ 6 * c4sq * t ^ 6)
+RhAttack/S4Strip.lean:786:66: error: unsolved goals
+t : ℝ
+ht : 1000 ≤ t
+ht0 : 0 < t
+hBf : Bf t (G4 t) ≤ Bf4UB t
+hSsum : Sbar (B4 t) + Sbar (G4 t) ≤ SsumUB t
+hSs0 : 0 ≤ Sbar (B4 t) + Sbar (G4 t)
+hCf : Cf t (G4 t) ≤ Cf4UB t
+hCf0 : 0 ≤ Cf t (G4 t)
+hK : Kbar (G4 t) ≤ Kbar4UB t
+hK0 : 0 ≤ Kbar (G4 t)
+hBf0 : 0 ≤ Bf4UB t
+hCf4UB0 : 0 ≤ Cf4UB t
+hSsum0 : 0 ≤ SsumUB t
+hK4UB0 : 0 ≤ Kbar4UB t
+hBfS : Bf t (G4 t) * (Sbar (B4 t) + Sbar (G4 t)) ≤ Bf4UB t * (Sbar (B4 t) + Sbar (G4 t))
+hBs : Bf4UB t * (Sbar (B4 t) + Sbar (G4 t)) ≤ Bf4UB t * SsumUB t
+hCfK : Cf t (G4 t) * Kbar (G4 t) ≤ Cf4UB t * Kbar (G4 t)
+hKs : Cf4UB t * Kbar (G4 t) ≤ Cf4UB t * Kbar4UB t
+hfinal :
+  Bf t (G4 t) * (Sbar (B4 t) + Sbar (G4 t)) + Cf t (G4 t) * Kbar (G4 t) ≤ Bf4UB t * SsumUB t + Cf4UB t * Kbar4UB t
+L : ℝ := log t
+hL0 hL0' : 0 ≤ L
+hTden : 0 < t ^ 6 * c4sq
+hb : Bf4UB t * SsumUB t ≤ 2001001 * (20 + 4 * L) / (10 ^ 6 * c4sq * t ^ 6)
+⊢ Bf t (G4 t) * (Sbar (B4 t) + Sbar (G4 t)) + Cf t (G4 t) * Kbar (G4 t) ≤ X4UBfun t
+RhAttack/S4Strip.lean:865:16: error: unexpected token ','; expected command
+RhAttack/S4Strip.lean:1019:48: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  4
+in the target expression
+  rexp 1 < 2 ^ 2
+
+h34a : rexp 1 < 4
+h4 : 2 ^ 2 = 4
+⊢ rexp 1 < 2 ^ 2

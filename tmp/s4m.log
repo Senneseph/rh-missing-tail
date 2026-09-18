@@ -1,0 +1,106 @@
+RhAttack/S4Strip.lean:920:4: error: linarith failed to find a contradiction
+t : ℝ
+ht : 1000 ≤ t
+ht0 : 0 < t
+hBf : Bf t (G4 t) ≤ Bf4UB t
+hSsum : Sbar (B4 t) + Sbar (G4 t) ≤ SsumUB t
+hSs0 : 0 ≤ Sbar (B4 t) + Sbar (G4 t)
+hCf : Cf t (G4 t) ≤ Cf4UB t
+hCf0 : 0 ≤ Cf t (G4 t)
+hK : Kbar (G4 t) ≤ Kbar4UB t
+hK0 : 0 ≤ Kbar (G4 t)
+hBf0 : 0 ≤ Bf4UB t
+hCf4UB0 : 0 ≤ Cf4UB t
+hBfS : Bf t (G4 t) * (Sbar (B4 t) + Sbar (G4 t)) ≤ Bf4UB t * (Sbar (B4 t) + Sbar (G4 t))
+hBs : Bf4UB t * (Sbar (B4 t) + Sbar (G4 t)) ≤ Bf4UB t * SsumUB t
+hCfK : Cf t (G4 t) * Kbar (G4 t) ≤ Cf4UB t * Kbar (G4 t)
+hKs : Cf4UB t * Kbar (G4 t) ≤ Cf4UB t * Kbar4UB t
+hfinal :
+  Bf t (G4 t) * (Sbar (B4 t) + Sbar (G4 t)) + Cf t (G4 t) * Kbar (G4 t) ≤ Bf4UB t * SsumUB t + Cf4UB t * Kbar4UB t
+L : ℝ := log t
+hL0 hL0' : 0 ≤ L
+hTden : 0 < t ^ 6 * c4sq
+hc4 : c4sq = 62000000 * 62000000
+hinv : 2 + 1 / t + 1 / (t * t) ≤ 2001001 / 10 ^ 6
+hS0 : 0 ≤ 20 + 4 * log t
+h1 : (2 + 1 / t + 1 / (t * t)) * (20 + 4 * log t) ≤ 2001001 / 10 ^ 6 * (20 + 4 * log t)
+hD : 0 < 10 ^ 6 * (62000000 * 62000000) * t ^ 6
+a✝ : t ^ 2 * (20 + 4 * log t) * 2001001 < (t * (2 * t + 1) + 1) * (20 + 4 * log t) * 10 ^ 6
+⊢ False
+failed
+RhAttack/S4Strip.lean:943:6: error: Tactic `rfl` failed: The left-hand side
+  (4 * t * t + 2) * ((10 + 2 * log t) / (2 * 62000000 * 62000000 * t ^ 8))
+is not definitionally equal to the right-hand side
+  (4 * t * t + 2) * ((10 + 2 * log t) / (2 * c4sq * t ^ 8))
+
+t : ℝ
+ht : 1000 ≤ t
+ht0 : 0 < t
+hBf : Bf t (G4 t) ≤ Bf4UB t
+hSsum : Sbar (B4 t) + Sbar (G4 t) ≤ SsumUB t
+hSs0 : 0 ≤ Sbar (B4 t) + Sbar (G4 t)
+hCf : Cf t (G4 t) ≤ Cf4UB t
+hCf0 : 0 ≤ Cf t (G4 t)
+hK : Kbar (G4 t) ≤ Kbar4UB t
+hK0 : 0 ≤ Kbar (G4 t)
+hBf0 : 0 ≤ Bf4UB t
+hCf4UB0 : 0 ≤ Cf4UB t
+hBfS : Bf t (G4 t) * (Sbar (B4 t) + Sbar (G4 t)) ≤ Bf4UB t * (Sbar (B4 t) + Sbar (G4 t))
+hBs : Bf4UB t * (Sbar (B4 t) + Sbar (G4 t)) ≤ Bf4UB t * SsumUB t
+hCfK : Cf t (G4 t) * Kbar (G4 t) ≤ Cf4UB t * Kbar (G4 t)
+hKs : Cf4UB t * Kbar (G4 t) ≤ Cf4UB t * Kbar4UB t
+hfinal :
+  Bf t (G4 t) * (Sbar (B4 t) + Sbar (G4 t)) + Cf t (G4 t) * Kbar (G4 t) ≤ Bf4UB t * SsumUB t + Cf4UB t * Kbar4UB t
+L : ℝ := log t
+hL0 hL0' : 0 ≤ L
+hTden : 0 < t ^ 6 * c4sq
+hb : Bf4UB t * SsumUB t ≤ 2001001 * (20 + 4 * L) / (10 ^ 6 * c4sq * t ^ 6)
+hc4 : 4 * t * t + 2 ≤ 4000002 / 10 ^ 6 * (t * t)
+hK0' : 0 ≤ (10 + 2 * log t) / (2 * c4sq * t ^ 8)
+⊢ (4 * t * t + 2) * ((10 + 2 * log t) / (2 * 62000000 * 62000000 * t ^ 8)) =
+    (4 * t * t + 2) * ((10 + 2 * log t) / (2 * c4sq * t ^ 8))
+RhAttack/S4Strip.lean:944:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  Cf4UB t * Kbar4UB t
+in the target expression
+  (4 * t * t + 2) * ((10 + 2 * log t) / (2 * 62000000 * 62000000 * t ^ 8)) ≤
+    2000001 * (10 + 2 * log t) / (10 ^ 6 * c4sq * t ^ 6)
+
+t : ℝ
+ht : 1000 ≤ t
+ht0 : 0 < t
+hBf : Bf t (G4 t) ≤ Bf4UB t
+hSsum : Sbar (B4 t) + Sbar (G4 t) ≤ SsumUB t
+hSs0 : 0 ≤ Sbar (B4 t) + Sbar (G4 t)
+hCf : Cf t (G4 t) ≤ Cf4UB t
+hCf0 : 0 ≤ Cf t (G4 t)
+hK : Kbar (G4 t) ≤ Kbar4UB t
+hK0 : 0 ≤ Kbar (G4 t)
+hBf0 : 0 ≤ Bf4UB t
+hCf4UB0 : 0 ≤ Cf4UB t
+hBfS : Bf t (G4 t) * (Sbar (B4 t) + Sbar (G4 t)) ≤ Bf4UB t * (Sbar (B4 t) + Sbar (G4 t))
+hBs : Bf4UB t * (Sbar (B4 t) + Sbar (G4 t)) ≤ Bf4UB t * SsumUB t
+hCfK : Cf t (G4 t) * Kbar (G4 t) ≤ Cf4UB t * Kbar (G4 t)
+hKs : Cf4UB t * Kbar (G4 t) ≤ Cf4UB t * Kbar4UB t
+hfinal :
+  Bf t (G4 t) * (Sbar (B4 t) + Sbar (G4 t)) + Cf t (G4 t) * Kbar (G4 t) ≤ Bf4UB t * SsumUB t + Cf4UB t * Kbar4UB t
+L : ℝ := log t
+hL0 hL0' : 0 ≤ L
+hTden : 0 < t ^ 6 * c4sq
+hb : Bf4UB t * SsumUB t ≤ 2001001 * (20 + 4 * L) / (10 ^ 6 * c4sq * t ^ 6)
+hc4 : 4 * t * t + 2 ≤ 4000002 / 10 ^ 6 * (t * t)
+hK0' : 0 ≤ (10 + 2 * log t) / (2 * c4sq * t ^ 8)
+hC0 : Cf4UB t * Kbar4UB t = (4 * t * t + 2) * ((10 + 2 * log t) / (2 * c4sq * t ^ 8))
+⊢ (4 * t * t + 2) * ((10 + 2 * log t) / (2 * 62000000 * 62000000 * t ^ 8)) ≤
+    2000001 * (10 + 2 * log t) / (10 ^ 6 * c4sq * t ^ 6)
+RhAttack/S4Strip.lean:985:4: error: Type mismatch: After simplification, term
+  hsumt
+ has type
+  (60020030 + 12004006 * L) * 10 ^ 16 * t ^ 6 ≤ 10 ^ 6 * c4sq * (160 + 35 * L) * t ^ 6
+but is expected to have type
+  (60020030 + 12004006 * L) * (10 ^ 16 * t ^ 6) ≤ (160 + 35 * L) * (10 ^ 6 * c4sq * t ^ 6)
+RhAttack/S4Strip.lean:819:0: error: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached
+
+Note: Use `set_option maxHeartbeats <num>` to set the limit.
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+RhAttack/S4Strip.lean:1049:6: error: (kernel) unknown constant 'S4Strip.st_X4bound'

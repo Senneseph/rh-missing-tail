@@ -1,0 +1,35 @@
+RhAttack/S4Asm.lean:257:35: warning: Variable name `hd0` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hd0
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+RhAttack/S4Asm.lean:301:38: error: unexpected token 'if'; expected ':=', 'where' or '|'
+RhAttack/S4Asm.lean:310:11: error: Application type mismatch: The argument
+  (t0, d0)
+has type
+  ℝ × ℝ
+but is expected to have type
+  ℝ
+in the application
+  BwireR (t0, d0)
+RhAttack/S4Asm.lean:310:26: error: Application type mismatch: The argument
+  (t0, d0)
+has type
+  ℝ × ℝ
+but is expected to have type
+  ℝ
+in the application
+  MrR (t0, d0)
+RhAttack/S4Asm.lean:310:57: error: Application type mismatch: The argument
+  (t0, d0)
+has type
+  ℝ × ℝ
+but is expected to have type
+  ℝ
+in the application
+  floR (t0, d0)
+RhAttack/S4Asm.lean:310:4: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  HAdd (ℝ → ℝ) ℝ ?m.35
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.

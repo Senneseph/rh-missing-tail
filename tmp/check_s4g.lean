@@ -1,0 +1,9 @@
+import RhAttack.S4Growth
+#check S4G.hSqrt3
+#check S4G.hNorm
+#check S4G.hNorm3
+#check S4G.hNorm5
+#check S4G.hSbnd
+#check S4G.hS3norm
+#check S4G.hFloorLo
+#check S4G.hCG11

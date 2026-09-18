@@ -1,0 +1,11 @@
+import RhAttack.P4Limit
+#check t3w_wall_A1
+#check t3w_wall_A2
+#check t3w_wall_A3
+#check t3w_wall_A4
+#check t3w_prod_mono
+#check t3w_invpow_le_one
+#check t3w_qA1
+#check t3w_qA2
+#check t3w_qA3
+#check t3w_qA4

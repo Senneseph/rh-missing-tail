@@ -1,0 +1,49 @@
+RhAttack/S4Asm.lean:271:4: error: Type mismatch
+  s4asm_window_region_S4 hX t0 ht0
+has type
+  (if t0 ≤ S4W.T0 then p8_B t0 ⌊13 * t0 / 8⌋₊ + S4W.Zbound t0 * rexp (S4W.Xwire t0) * S4W.Xwire t0
+    else p8_B t0 (S4G.nGrow t0) + S4W.Zbound t0 * rexp (S4G.Xgrow t0) * S4G.Xgrow t0) <
+    p8_f_near_pin
+but is expected to have type
+  p8_B t0 ⌊13 * t0 / 8⌋₊ + S4W.Zbound t0 * rexp (S4W.Xwire t0) * S4W.Xwire t0 < p8_f_near_pin
+RhAttack/S4Asm.lean:268:70: error: unsolved goals
+case neg
+hX : S4W.Xwire S4W.T0 ≤ S4W.RX
+t0 d0 : ℝ
+ht0 : 1000 ≤ t0
+hd0 : 0 < d0
+hdmax : d0 ≤ 1 / 2
+hdge : ¬1 / 200 ≤ d0
+h✝ : ¬t0 ≤ S4W.T0
+⊢ p8_B t0 (S4G.nGrow t0) + S4W.Zbound t0 * rexp (S4G.Xgrow t0) * S4G.Xgrow t0 < p8_f_near_pin
+RhAttack/S4Asm.lean:278:4: error(lean.dependsOnNoncomputable): failed to compile definition, consider marking it as 'noncomputable' because it depends on 'decidableLE', which is 'noncomputable'
+RhAttack/S4Asm.lean:286:4: error(lean.dependsOnNoncomputable): failed to compile definition, consider marking it as 'noncomputable' because it depends on 'decidableLE', which is 'noncomputable'
+RhAttack/S4Asm.lean:299:4: error(lean.dependsOnNoncomputable): failed to compile definition, consider marking it as 'noncomputable' because it depends on 'decidableLE', which is 'noncomputable'
+RhAttack/S4Asm.lean:308:11: error: Application type mismatch: The argument
+  (t0, d0)
+has type
+  ℝ × ℝ
+but is expected to have type
+  ℝ
+in the application
+  BwireR (t0, d0)
+RhAttack/S4Asm.lean:308:26: error: Application type mismatch: The argument
+  (t0, d0)
+has type
+  ℝ × ℝ
+but is expected to have type
+  ℝ
+in the application
+  MrR (t0, d0)
+RhAttack/S4Asm.lean:308:57: error: Application type mismatch: The argument
+  (t0, d0)
+has type
+  ℝ × ℝ
+but is expected to have type
+  ℝ
+in the application
+  floR (t0, d0)
+RhAttack/S4Asm.lean:308:4: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  HAdd (ℝ → ℝ) ℝ ?m.35
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.

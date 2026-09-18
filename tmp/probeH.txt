@@ -1,0 +1,13 @@
+  have hT1 : 1 / (2 * (G4 t * G4 t + 1 / 4)) ≤ 1 / (t * t) / (c4sq * t ^ 6) := by
+    have hu : 0 < G4 t * G4 t + 1 / 4 := by nlinarith [st_G4pos t ht]
+    calc 1 / (2 * (G4 t * G4 t + 1 / 4)) ≤ 1 / (G4 t * G4 t + 1 / 4) := by
+      rw [div_le_iff₀ (st_hpos1 t ht)]
+      field_simp
+      norm_num
+    _ ≤ 1 / (c4sq * t ^ 8) := by
+      rw [div_le_iff₀ hu]
+      field_simp [st_c4sq_pos.ne', show (0 : ℝ) < t from by linarith]
+      nlinarith [show G4 t * G4 t = c4sq * t ^ 8 from st_G4sq t]
+    _ = 1 / (t * t) / (c4sq * t ^ 6) := by
+      field_simp [st_c4sq_pos.ne', show (0 : ℝ) < t from by linarith]
+      ring

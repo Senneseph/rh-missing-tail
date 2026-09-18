@@ -1,0 +1,804 @@
+RhAttack/S4Strip.lean:1133:24: error: Application type mismatch: The argument
+  ht0
+has type
+  0 < t
+but is expected to have type
+  0 ≤ t
+in the application
+  rpow_mul ht0
+RhAttack/S4Strip.lean:1138:10: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  31000000 ^ (-(1 / 2))
+in the target expression
+  31000000 ^ (-1 / 2) = 1 / √31000000
+
+t : ℝ
+ht : 1000 ≤ t
+ht0 : 0 < t
+hnpos : 0 < ↑(n4 t)
+hbase : 0 < 31000000 * t ^ 4
+hmono : ↑(n4 t) ^ (-1 / 2) ≤ (31000000 * t ^ 4) ^ (-1 / 2)
+hsplit : (31000000 * t ^ 4) ^ (-1 / 2) = 31000000 ^ (-1 / 2) * t ^ (-2)
+hc : 0 < 31000000
+hrs : 0 < √31000000
+⊢ 31000000 ^ (-1 / 2) = 1 / √31000000
+RhAttack/S4Strip.lean:1148:32: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  √31000000 * A1
+in the target expression
+  A1 * (√31000000 * (A1 * √31000000)) = A1 ^ 2 * 31000000
+
+t : ℝ
+ht : 1000 ≤ t
+ht0 : 0 < t
+hnpos : 0 < ↑(n4 t)
+hbase : 0 < 31000000 * t ^ 4
+hmono : ↑(n4 t) ^ (-1 / 2) ≤ (31000000 * t ^ 4) ^ (-1 / 2)
+hsplit : (31000000 * t ^ 4) ^ (-1 / 2) = 31000000 ^ (-1 / 2) * t ^ (-2)
+hc : 0 < 31000000
+hrs : 0 < √31000000
+hinv : 31000000 ^ (-1 / 2) = 1 / √31000000
+ha : 0 ≤ 1 / 2
+hb : 0 ≤ A1 * √31000000
+⊢ A1 * (√31000000 * (A1 * √31000000)) = A1 ^ 2 * 31000000
+RhAttack/S4Strip.lean:1154:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ?m.552 / √31000000 ≤ ?m.551
+in the target expression
+  1 / 2 * (1 / √31000000) ≤ A1
+
+t : ℝ
+ht : 1000 ≤ t
+ht0 : 0 < t
+hnpos : 0 < ↑(n4 t)
+hbase : 0 < 31000000 * t ^ 4
+hmono : ↑(n4 t) ^ (-1 / 2) ≤ (31000000 * t ^ 4) ^ (-1 / 2)
+hsplit : (31000000 * t ^ 4) ^ (-1 / 2) = 31000000 ^ (-1 / 2) * t ^ (-2)
+hc : 0 < 31000000
+hrs : 0 < √31000000
+hinv : 31000000 ^ (-1 / 2) = 1 / √31000000
+ha : 0 ≤ 1 / 2
+hb : 0 ≤ A1 * √31000000
+hsq : (1 / 2) ^ 2 ≤ (A1 * √31000000) ^ 2
+hle : 1 / 2 ≤ A1 * √31000000
+⊢ 1 / 2 * (1 / √31000000) ≤ A1
+RhAttack/S4Strip.lean:1181:24: error: Application type mismatch: The argument
+  ht0
+has type
+  0 < t
+but is expected to have type
+  0 ≤ t
+in the application
+  rpow_mul ht0
+RhAttack/S4Strip.lean:1191:20: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  t ^ (-6 + 1)
+in the target expression
+  t ^ (-6) * t = t ^ (-5)
+
+t : ℝ
+ht : 1000 ≤ t
+ht0 : 0 < t
+hnpos : 0 < ↑(n4 t)
+hbase : 0 < 31000000 * t ^ 4
+hs : ‖↑(1 / 2) + ↑t * Complex.I‖ = √(1 / 4 + t * t)
+hnorm : √(1 / 4 + t * t) ≤ t + 1 / 2
+hmono : ↑(n4 t) ^ (-3 / 2) ≤ (31000000 * t ^ 4) ^ (-3 / 2)
+hsplit : (31000000 * t ^ 4) ^ (-3 / 2) = 31000000 ^ (-3 / 2) * t ^ (-6)
+hcore : t + 1 / 2 ≤ 2001 / 2000 * t
+⊢ t ^ (-6) * t = t ^ (-5)
+RhAttack/S4Strip.lean:1200:10: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  31000000 ^ (-(3 / 2))
+in the target expression
+  31000000 ^ (-3 / 2) = 1 / (31000000 * √31000000)
+
+t : ℝ
+ht : 1000 ≤ t
+ht0 : 0 < t
+hnpos : 0 < ↑(n4 t)
+hbase : 0 < 31000000 * t ^ 4
+hs : ‖↑(1 / 2) + ↑t * Complex.I‖ = √(1 / 4 + t * t)
+hnorm : √(1 / 4 + t * t) ≤ t + 1 / 2
+hmono : ↑(n4 t) ^ (-3 / 2) ≤ (31000000 * t ^ 4) ^ (-3 / 2)
+hsplit : (31000000 * t ^ 4) ^ (-3 / 2) = 31000000 ^ (-3 / 2) * t ^ (-6)
+htf : (t + 1 / 2) * t ^ (-6) ≤ 2001 / 2000 * t ^ (-5)
+hc : 0 < 31000000
+⊢ 31000000 ^ (-3 / 2) = 1 / (31000000 * √31000000)
+RhAttack/S4Strip.lean:1215:30: error: Application type mismatch: The argument
+  hd2
+has type
+  (0 : ℕ) < 31000000 * 5567
+but is expected to have type
+  (0 : ℝ) < 31000000 * 5567
+in the application
+  div_le_div_iff₀ hd1 hd2
+RhAttack/S4Strip.lean:1220:36: error: Application type mismatch: The argument
+  hinv
+has type
+  1 / (31000000 * √31000000) ≤ 1 / (31000000 * 5567)
+but is expected to have type
+  (31000000 * √31000000)⁻¹ ≤ (31000000 * 5567)⁻¹
+in the application
+  mul_le_mul_of_nonneg_left hinv
+RhAttack/S4Strip.lean:1217:9: error: invalid 'calc' step, left-hand side is
+  31000000 ^ (-3 / 2) * (2001 / 24000) : ℝ
+but is expected to be
+  1 / (31000000 * √31000000) * (2001 / 24000) : ℝ
+Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+RhAttack/S4Strip.lean:1218:72: error: unsolved goals
+t : ℝ
+ht : 1000 ≤ t
+ht0 : 0 < t
+hnpos : 0 < ↑(n4 t)
+hbase : 0 < 31000000 * t ^ 4
+hs : ‖↑(1 / 2) + ↑t * Complex.I‖ = √(1 / 4 + t * t)
+hnorm : √(1 / 4 + t * t) ≤ t + 1 / 2
+hmono : ↑(n4 t) ^ (-3 / 2) ≤ (31000000 * t ^ 4) ^ (-3 / 2)
+hsplit : (31000000 * t ^ 4) ^ (-3 / 2) = 31000000 ^ (-3 / 2) * t ^ (-6)
+htf : (t + 1 / 2) * t ^ (-6) ≤ 2001 / 2000 * t ^ (-5)
+hc : 0 < 31000000
+hbridge : 31000000 ^ (-3 / 2) = 1 / (31000000 * √31000000)
+h5567 : 5567 ≤ √31000000
+hrs : 0 < √31000000
+hinv : 1 / (31000000 * √31000000) ≤ 1 / (31000000 * 5567)
+⊢ 31000000 ^ (-3 / 2) * (667 / 8000) = (√31000000)⁻¹ * (667 / 248000000000)
+RhAttack/S4Strip.lean:1241:8: error: Type mismatch
+  mul_le_mul_of_nonneg_right htf hposc
+has type
+  (t + 1 / 2) * t ^ (-6) * (31000000 ^ (-3 / 2) / 12) ≤ 2001 / 2000 * t ^ (-5) * (31000000 ^ (-3 / 2) / 12)
+but is expected to have type
+  31000000 ^ (-3 / 2) / 12 * ((t + 1 / 2) * t ^ (-6)) ≤ 31000000 ^ (-3 / 2) / 12 * (2001 / 2000 * t ^ (-5))
+RhAttack/S4Strip.lean:1237:8: error: Type mismatch
+  mul_le_mul_of_nonneg_right hmono
+    (le_of_not_gt fun a =>
+      Mathlib.Tactic.Linarith.lt_irrefl
+        (Eq.mp
+          (congrArg (fun _a => _a < 0)
+            (Mathlib.Tactic.Ring.of_eq
+              (Mathlib.Tactic.Ring.Common.add_congr
+                (Mathlib.Tactic.Ring.Common.add_congr
+                  (Mathlib.Tactic.Ring.Common.sub_congr
+                    (Mathlib.Tactic.Ring.Common.mul_congr
+                      (Mathlib.Tactic.Ring.Common.mul_congr
+                        (Mathlib.Tactic.Ring.cast_pos (Mathlib.Meta.NormNum.isNat_ofNat ℝ Nat.cast_one))
+                        (Mathlib.Tactic.Ring.Common.atom_pf (31000000 ^ (-(3 / 2))) rfl
+                          (Eq.mpr
+                            (id
+                              (congrArg
+                                (fun _a =>
+                                  (31000000 ^ (-(3 / 2))) ^ Nat.rawCast 1 * Nat.rawCast 1 =
+                                    (31000000 ^ (-(3 / 2))) ^ Nat.rawCast 1 * _a)
+                                (Eq.symm rfl)))
+                            (Eq.refl ((31000000 ^ (-(3 / 2))) ^ Nat.rawCast 1 * Nat.rawCast 1))))
+                        (Mathlib.Tactic.Ring.Common.add_mul
+                          (Mathlib.Tactic.Ring.Common.mul_add
+                            (Mathlib.Tactic.Ring.Common.mul_pf_right (31000000 ^ (-(3 / 2))) (Nat.rawCast 1)
+                              (Mathlib.Meta.NormNum.IsNat.to_raw_eq
+                                (Mathlib.Meta.NormNum.isNat_mul (Eq.refl HMul.hMul)
+                                  (Mathlib.Meta.NormNum.IsNat.of_raw ℝ 1) (Mathlib.Meta.NormNum.IsNat.of_raw ℝ 1)
+                                  (Eq.refl 1))))
+                            (Mathlib.Tactic.Ring.Common.mul_zero (Nat.rawCast 1))
+                            (Mathlib.Tactic.Ring.Common.add_pf_add_zero
+                              ((31000000 ^ (-(3 / 2))) ^ Nat.rawCast 1 * Nat.rawCast 1 + 0)))
+                          (Mathlib.Tactic.Ring.Common.zero_mul
+                            ((31000000 ^ (-(3 / 2))) ^ Nat.rawCast 1 * Nat.rawCast 1 + 0))
+                          (Mathlib.Tactic.Ring.Common.add_pf_add_zero
+                            ((31000000 ^ (-(3 / 2))) ^ Nat.rawCast 1 * Nat.rawCast 1 + 0))))
+                      (Mathlib.Tactic.Ring.Common.mul_congr
+                        (Mathlib.Tactic.Ring.cast_pos (Mathlib.Meta.NormNum.isNat_ofNat ℝ Nat.cast_one))
+                        (Mathlib.Tactic.Ring.cast_pos (Mathlib.Meta.NormNum.isNat_ofNat ℝ (Eq.refl 667)))
+                        (Mathlib.Tactic.Ring.Common.add_mul
+                          (Mathlib.Tactic.Ring.Common.mul_add
+                            (Mathlib.Meta.NormNum.IsNat.to_raw_eq
+                              (Mathlib.Meta.NormNum.isNat_mul (Eq.refl HMul.hMul)
+                                (Mathlib.Meta.NormNum.IsNat.of_raw ℝ 1) (Mathlib.Meta.NormNum.IsNat.of_raw ℝ 667)
+                                (Eq.refl 667)))
+                            (Mathlib.Tactic.Ring.Common.mul_zero (Nat.rawCast 1))
+                            (Mathlib.Tactic.Ring.Common.add_pf_add_zero (Nat.rawCast 667 + 0)))
+                          (Mathlib.Tactic.Ring.Common.zero_mul (Nat.rawCast 667 + 0))
+                          (Mathlib.Tactic.Ring.Common.add_pf_add_zero (Nat.rawCast 667 + 0))))
+                      (Mathlib.Tactic.Ring.Common.add_mul
+                        (Mathlib.Tactic.Ring.Common.mul_add
+                          (Mathlib.Tactic.Ring.Common.mul_pf_left (31000000 ^ (-(3 / 2))) (Nat.rawCast 1)
+                            (Mathlib.Meta.NormNum.IsNat.to_raw_eq
+                              (Mathlib.Meta.NormNum.isNat_mul (Eq.refl HMul.hMul)
+                                (Mathlib.Meta.NormNum.IsNat.of_raw ℝ 1) (Mathlib.Meta.NormNum.IsNat.of_raw ℝ 667)
+                                (Eq.refl 667))))
+                          (Mathlib.Tactic.Ring.Common.mul_zero
+                            ((31000000 ^ (-(3 / 2))) ^ Nat.rawCast 1 * Nat.rawCast 1))
+                          (Mathlib.Tactic.Ring.Common.add_pf_add_zero
+                            ((31000000 ^ (-(3 / 2))) ^ Nat.rawCast 1 * Nat.rawCast 667 + 0)))
+                        (Mathlib.Tactic.Ring.Common.zero_mul (Nat.rawCast 667 + 0))
+                        (Mathlib.Tactic.Ring.Common.add_pf_add_zero
+                          ((31000000 ^ (-(3 / 2))) ^ Nat.rawCast 1 * Nat.rawCast 667 + 0))))
+                    (Mathlib.Tactic.Ring.Common.mul_congr
+                      (Mathlib.Tactic.Ring.cast_pos (Mathlib.Meta.NormNum.isNat_ofNat ℝ (Eq.refl 8000)))
+                      (Mathlib.Tactic.Ring.Common.atom_pf A2 rfl
+                        (Eq.mpr
+                          (id
+                            (congrArg (fun _a => A2 ^ Nat.rawCast 1 * Nat.rawCast 1 = A2 ^ Nat.rawCast 1 * _a)
+                              (Eq.symm rfl)))
+                          (Eq.refl (A2 ^ Nat.rawCast 1 * Nat.rawCast 1))))
+                      (Mathlib.Tactic.Ring.Common.add_mul
+                        (Mathlib.Tactic.Ring.Common.mul_add
+                          (Mathlib.Tactic.Ring.Common.mul_pf_right A2 (Nat.rawCast 1)
+                            (Mathlib.Meta.NormNum.IsNat.to_raw_eq
+                              (Mathlib.Meta.NormNum.isNat_mul (Eq.refl HMul.hMul)
+                                (Mathlib.Meta.NormNum.IsNat.of_raw ℝ 8000) (Mathlib.Meta.NormNum.IsNat.of_raw ℝ 1)
+                                (Eq.refl 8000))))
+                          (Mathlib.Tactic.Ring.Common.mul_zero (Nat.rawCast 8000))
+                          (Mathlib.Tactic.Ring.Common.add_pf_add_zero (A2 ^ Nat.rawCast 1 * Nat.rawCast 8000 + 0)))
+                        (Mathlib.Tactic.Ring.Common.zero_mul (A2 ^ Nat.rawCast 1 * Nat.rawCast 1 + 0))
+                        (Mathlib.Tactic.Ring.Common.add_pf_add_zero (A2 ^ Nat.rawCast 1 * Nat.rawCast 8000 + 0))))
+                    (Mathlib.Tactic.Ring.Common.sub_pf
+                      (Mathlib.Tactic.Ring.Common.neg_add
+                        (Mathlib.Tactic.Ring.Common.neg_mul A2 (Nat.rawCast 1)
+                          (Mathlib.Meta.NormNum.IsInt.to_raw_eq
+                            (Mathlib.Meta.NormNum.isInt_neg (Eq.refl Neg.neg)
+                              (Mathlib.Meta.NormNum.IsNat.to_isInt (Mathlib.Meta.NormNum.IsNat.of_raw ℝ 8000))
+                              (Eq.refl (Int.negOfNat 8000)))))
+                        Mathlib.Tactic.Ring.Common.neg_zero)
+                      (Mathlib.Tactic.Ring.Common.add_pf_add_lt
+                        ((31000000 ^ (-(3 / 2))) ^ Nat.rawCast 1 * Nat.rawCast 667)
+                        (Mathlib.Tactic.Ring.Common.add_pf_zero_add
+                          (A2 ^ Nat.rawCast 1 * (Int.negOfNat 8000).rawCast + 0)))))
+                  (Mathlib.Tactic.Ring.Common.mul_congr
+                    (Mathlib.Tactic.Ring.cast_pos (Mathlib.Meta.NormNum.isNat_ofNat ℝ (Eq.refl 667)))
+                    (Mathlib.Tactic.Ring.Common.sub_congr
+                      (Mathlib.Tactic.Ring.Common.mul_congr
+                        (Mathlib.Tactic.Ring.cast_pos (Mathlib.Meta.NormNum.isNat_ofNat ℝ (Eq.refl 12)))
+                        (Mathlib.Tactic.Ring.cast_zero (Mathlib.Meta.NormNum.isNat_ofNat ℝ Nat.cast_zero))
+                        (Mathlib.Tactic.Ring.Common.add_mul (Mathlib.Tactic.Ring.Common.mul_zero (Nat.rawCast 12))
+                          (Mathlib.Tactic.Ring.Common.zero_mul 0) (Mathlib.Tactic.Ring.Common.add_pf_zero_add 0)))
+                      (Mathlib.Tactic.Ring.Common.mul_congr
+                        (Mathlib.Tactic.Ring.cast_pos (Mathlib.Meta.NormNum.isNat_ofNat ℝ Nat.cast_one))
+                        (Mathlib.Tactic.Ring.Common.atom_pf (31000000 ^ (-(3 / 2))) rfl
+                          (Eq.mpr
+                            (id
+                              (congrArg
+                                (fun _a =>
+                                  (31000000 ^ (-(3 / 2))) ^ Nat.rawCast 1 * Nat.rawCast 1 =
+                                    (31000000 ^ (-(3 / 2))) ^ Nat.rawCast 1 * _a)
+                                (Eq.symm rfl)))
+                            (Eq.refl ((31000000 ^ (-(3 / 2))) ^ Nat.rawCast 1 * Nat.rawCast 1))))
+                        (Mathlib.Tactic.Ring.Common.add_mul
+                          (Mathlib.Tactic.Ring.Common.mul_add
+                            (Mathlib.Tactic.Ring.Common.mul_pf_right (31000000 ^ (-(3 / 2))) (Nat.rawCast 1)
+                              (Mathlib.Meta.NormNum.IsNat.to_raw_eq
+                                (Mathlib.Meta.NormNum.isNat_mul (Eq.refl HMul.hMul)
+                                  (Mathlib.Meta.NormNum.IsNat.of_raw ℝ 1) (Mathlib.Meta.NormNum.IsNat.of_raw ℝ 1)
+                                  (Eq.refl 1))))
+                            (Mathlib.Tactic.Ring.Common.mul_zero (Nat.rawCast 1))
+                            (Mathlib.Tactic.Ring.Common.add_pf_add_zero
+                              ((31000000 ^ (-(3 / 2))) ^ Nat.rawCast 1 * Nat.rawCast 1 + 0)))
+                          (Mathlib.Tactic.Ring.Common.zero_mul
+                            ((31000000 ^ (-(3 / 2))) ^ Nat.rawCast 1 * Nat.rawCast 1 + 0))
+                          (Mathlib.Tactic.Ring.Common.add_pf_add_zero
+                            ((31000000 ^ (-(3 / 2))) ^ Nat.rawCast 1 * Nat.rawCast 1 + 0))))
+                      (Mathlib.Tactic.Ring.Common.sub_pf
+                        (Mathlib.Tactic.Ring.Common.neg_add
+                          (Mathlib.Tactic.Ring.Common.neg_mul (31000000 ^ (-(3 / 2))) (Nat.rawCast 1)
+                            (Mathlib.Meta.NormNum.IsInt.to_raw_eq
+                              (Mathlib.Meta.NormNum.isInt_neg (Eq.refl Neg.neg)
+                                (Mathlib.Meta.NormNum.IsNat.to_isInt (Mathlib.Meta.NormNum.IsNat.of_raw ℝ 1))
+                                (Eq.refl (Int.negOfNat 1)))))
+                          Mathlib.Tactic.Ring.Common.neg_zero)
+                        (Mathlib.Tactic.Ring.Common.add_pf_zero_add
+                          ((31000000 ^ (-(3 / 2))) ^ Nat.rawCast 1 * (Int.negOfNat 1).rawCast + 0))))
+                    (Mathlib.Tactic.Ring.Common.add_mul
+                      (Mathlib.Tactic.Ring.Common.mul_add
+                        (Mathlib.Tactic.Ring.Common.mul_pf_right (31000000 ^ (-(3 / 2))) (Nat.rawCast 1)
+                          (Mathlib.Meta.NormNum.IsInt.to_raw_eq
+                            (Mathlib.Meta.NormNum.isInt_mul (Eq.refl HMul.hMul)
+                              (Mathlib.Meta.NormNum.IsNat.to_isInt (Mathlib.Meta.NormNum.IsNat.of_raw ℝ 667))
+                              (Mathlib.Meta.NormNum.IsInt.of_raw ℝ (Int.negOfNat 1)) (Eq.refl (Int.negOfNat 667)))))
+                        (Mathlib.Tactic.Ring.Common.mul_zero (Nat.rawCast 667))
+                        (Mathlib.Tactic.Ring.Common.add_pf_add_zero
+                          ((31000000 ^ (-(3 / 2))) ^ Nat.rawCast 1 * (Int.negOfNat 667).rawCast + 0)))
+                      (Mathlib.Tactic.Ring.Common.zero_mul
+                        ((31000000 ^ (-(3 / 2))) ^ Nat.rawCast 1 * (Int.negOfNat 1).rawCast + 0))
+                      (Mathlib.Tactic.Ring.Common.add_pf_add_zero
+                        ((31000000 ^ (-(3 / 2))) ^ Nat.rawCast 1 * (Int.negOfNat 667).rawCast + 0))))
+                  (Mathlib.Tactic.Ring.Common.add_pf_add_overlap_zero
+                    (Mathlib.Tactic.Ring.Common.add_overlap_pf_zero (31000000 ^ (-(3 / 2))) (Nat.rawCast 1)
+                      (Mathlib.Meta.NormNum.IsInt.to_isNat
+                        (Mathlib.Meta.NormNum.isInt_add (Eq.refl HAdd.hAdd)
+                          (Mathlib.Meta.NormNum.IsNat.to_isInt (Mathlib.Meta.NormNum.IsNat.of_raw ℝ 667))
+                          (Mathlib.Meta.NormNum.IsInt.of_raw ℝ (Int.negOfNat 667)) (Eq.refl (Int.ofNat 0)))))
+                    (Mathlib.Tactic.Ring.Common.add_pf_add_zero
+                      (A2 ^ Nat.rawCast 1 * (Int.negOfNat 8000).rawCast + 0))))
+                (Mathlib.Tactic.Ring.Common.mul_congr
+                  (Mathlib.Tactic.Ring.cast_pos (Mathlib.Meta.NormNum.isNat_ofNat ℝ (Eq.refl 8000)))
+                  (Mathlib.Tactic.Ring.Common.sub_congr
+                    (Mathlib.Tactic.Ring.Common.atom_pf A2 rfl
+                      (Eq.mpr
+                        (id
+                          (congrArg (fun _a => A2 ^ Nat.rawCast 1 * Nat.rawCast 1 = A2 ^ Nat.rawCast 1 * _a)
+                            (Eq.symm rfl)))
+                        (Eq.refl (A2 ^ Nat.rawCast 1 * Nat.rawCast 1))))
+                    (Mathlib.Tactic.Ring.cast_zero (Mathlib.Meta.NormNum.isNat_ofNat ℝ Nat.cast_zero))
+                    (Mathlib.Tactic.Ring.Common.sub_pf Mathlib.Tactic.Ring.Common.neg_zero
+                      (Mathlib.Tactic.Ring.Common.add_pf_add_zero (A2 ^ Nat.rawCast 1 * Nat.rawCast 1 + 0))))
+                  (Mathlib.Tactic.Ring.Common.add_mul
+                    (Mathlib.Tactic.Ring.Common.mul_add
+                      (Mathlib.Tactic.Ring.Common.mul_pf_right A2 (Nat.rawCast 1)
+                        (Mathlib.Meta.NormNum.IsNat.to_raw_eq
+                          (Mathlib.Meta.NormNum.isNat_mul (Eq.refl HMul.hMul) (Mathlib.Meta.NormNum.IsNat.of_raw ℝ 8000)
+                            (Mathlib.Meta.NormNum.IsNat.of_raw ℝ 1) (Eq.refl 8000))))
+                      (Mathlib.Tactic.Ring.Common.mul_zero (Nat.rawCast 8000))
+                      (Mathlib.Tactic.Ring.Common.add_pf_add_zero (A2 ^ Nat.rawCast 1 * Nat.rawCast 8000 + 0)))
+                    (Mathlib.Tactic.Ring.Common.zero_mul (A2 ^ Nat.rawCast 1 * Nat.rawCast 1 + 0))
+                    (Mathlib.Tactic.Ring.Common.add_pf_add_zero (A2 ^ Nat.rawCast 1 * Nat.rawCast 8000 + 0))))
+                (Mathlib.Tactic.Ring.Common.add_pf_add_overlap_zero
+                  (Mathlib.Tactic.Ring.Common.add_overlap_pf_zero A2 (Nat.rawCast 1)
+                    (Mathlib.Meta.NormNum.IsInt.to_isNat
+                      (Mathlib.Meta.NormNum.isInt_add (Eq.refl HAdd.hAdd)
+                        (Mathlib.Meta.NormNum.IsInt.of_raw ℝ (Int.negOfNat 8000))
+                        (Mathlib.Meta.NormNum.IsNat.to_isInt (Mathlib.Meta.NormNum.IsNat.of_raw ℝ 8000))
+                        (Eq.refl (Int.ofNat 0)))))
+                  (Mathlib.Tactic.Ring.Common.add_pf_zero_add 0)))
+              (Mathlib.Tactic.Ring.cast_zero (Mathlib.Meta.NormNum.isNat_ofNat ℝ Nat.cast_zero))))
+          (Mathlib.Tactic.Linarith.add_lt_of_le_of_neg
+            (Mathlib.Tactic.Linarith.add_nonpos
+              (Eq.mp
+                (congrArg (fun _a => _a ≤ 0)
+                  (Mathlib.Tactic.CancelDenoms.derive_trans
+                    (Eq.trans
+                      (congrFun'
+                        (congrArg HSub.hSub
+                          (Eq.trans
+                            (congr
+                              (congrArg HMul.hMul
+                                (Eq.trans
+                                  (congrArg (HPow.hPow 31000000)
+                                    (Mathlib.Meta.NormNum.IsRat.neg_to_eq
+                                      (Mathlib.Meta.NormNum.isRat_div
+                                        (Mathlib.Meta.NormNum.isRat_mul (Eq.refl HMul.hMul)
+                                          (Mathlib.Meta.NormNum.IsInt.to_isRat
+                                            (Mathlib.Meta.NormNum.isInt_neg (Eq.refl Neg.neg)
+                                              (Mathlib.Meta.NormNum.IsNat.to_isInt
+                                                (Mathlib.Meta.NormNum.isNat_ofNat ℝ (Eq.refl 3)))
+                                              (Eq.refl (Int.negOfNat 3))))
+                                          (Mathlib.Meta.NormNum.IsNNRat.to_isRat
+                                            (Mathlib.Meta.NormNum.isNNRat_inv_pos
+                                              (Mathlib.Meta.NormNum.IsNat.to_isNNRat
+                                                (Mathlib.Meta.NormNum.isNat_ofNat ℝ (Eq.refl 2)))))
+                                          (Eq.refl ((Int.negOfNat 3).mul (Int.ofNat 1))) (Eq.refl 2)))
+                                      (Eq.refl 3) (Eq.refl 2)))
+                                  (congrArg (HPow.hPow 31000000)
+                                    (Mathlib.Meta.NormNum.IsRat.neg_to_eq
+                                      (Mathlib.Meta.NormNum.isRat_neg (Eq.refl Neg.neg)
+                                        (Mathlib.Meta.NormNum.IsNNRat.to_isRat
+                                          (Mathlib.Meta.NormNum.isNNRat_div
+                                            (Mathlib.Meta.NormNum.isNNRat_mul (Eq.refl HMul.hMul)
+                                              (Mathlib.Meta.NormNum.IsNat.to_isNNRat
+                                                (Mathlib.Meta.NormNum.isNat_ofNat ℝ (Eq.refl 3)))
+                                              (Mathlib.Meta.NormNum.isNNRat_inv_pos
+                                                (Mathlib.Meta.NormNum.IsNat.to_isNNRat
+                                                  (Mathlib.Meta.NormNum.isNat_ofNat ℝ (Eq.refl 2))))
+                                              (Eq.refl (Nat.mul 3 1)) (Eq.refl 2))))
+                                        (Eq.refl (Int.negOfNat 3)))
+                                      (Eq.refl 3) (Eq.refl 2)))))
+                              (Mathlib.Meta.NormNum.IsNNRat.to_eq
+                                (Mathlib.Meta.NormNum.isNNRat_div
+                                  (Mathlib.Meta.NormNum.isNNRat_mul (Eq.refl HMul.hMul)
+                                    (Mathlib.Meta.NormNum.IsNat.to_isNNRat
+                                      (Mathlib.Meta.NormNum.isNat_ofNat ℝ (Eq.refl 2001)))
+                                    (Mathlib.Meta.NormNum.isNNRat_inv_pos
+                                      (Mathlib.Meta.NormNum.IsNat.to_isNNRat
+                                        (Mathlib.Meta.NormNum.isNat_ofNat ℝ (Eq.refl 24000))))
+                                    (Eq.refl (Nat.mul 2001 1)) (Eq.refl 24000)))
+                                (Eq.refl 667) (Eq.refl 8000)))
+                            (congr
+                              (congrArg HMul.hMul
+                                (congrArg (HPow.hPow 31000000)
+                                  (Mathlib.Meta.NormNum.IsRat.neg_to_eq
+                                    (Mathlib.Meta.NormNum.isRat_neg (Eq.refl Neg.neg)
+                                      (Mathlib.Meta.NormNum.IsNNRat.to_isRat
+                                        (Mathlib.Meta.NormNum.isNNRat_div
+                                          (Mathlib.Meta.NormNum.isNNRat_mul (Eq.refl HMul.hMul)
+                                            (Mathlib.Meta.NormNum.IsNat.to_isNNRat
+                                              (Mathlib.Meta.NormNum.isNat_ofNat ℝ (Eq.refl 3)))
+                                            (Mathlib.Meta.NormNum.isNNRat_inv_pos
+                                              (Mathlib.Meta.NormNum.IsNat.to_isNNRat
+                                                (Mathlib.Meta.NormNum.isNat_ofNat ℝ (Eq.refl 2))))
+                                            (Eq.refl (Nat.mul 3 1)) (Eq.refl 2))))
+                                      (Eq.refl (Int.negOfNat 3)))
+                                    (Eq.refl 3) (Eq.refl 2))))
+                              (Mathlib.Meta.NormNum.IsNNRat.to_eq
+                                (Mathlib.Meta.NormNum.isNNRat_div
+                                  (Mathlib.Meta.NormNum.isNNRat_mul (Eq.refl HMul.hMul)
+                                    (Mathlib.Meta.NormNum.IsNat.to_isNNRat
+                                      (Mathlib.Meta.NormNum.isNat_ofNat ℝ (Eq.refl 667)))
+                                    (Mathlib.Meta.NormNum.isNNRat_inv_pos
+                                      (Mathlib.Meta.NormNum.IsNat.to_isNNRat
+                                        (Mathlib.Meta.NormNum.isNat_ofNat ℝ (Eq.refl 8000))))
+                                    (Eq.refl (Nat.mul 667 1)) (Eq.refl 8000)))
+                                (Eq.refl 667) (Eq.refl 8000)))))
+                        A2)
+                      (congrFun'
+                        (congrArg HSub.hSub
+                          (congr
+                            (congrArg HMul.hMul
+                              (congrArg (HPow.hPow 31000000)
+                                (Mathlib.Meta.NormNum.IsRat.neg_to_eq
+                                  (Mathlib.Meta.NormNum.isRat_neg (Eq.refl Neg.neg)
+                                    (Mathlib.Meta.NormNum.IsNNRat.to_isRat
+                                      (Mathlib.Meta.NormNum.isNNRat_div
+                                        (Mathlib.Meta.NormNum.isNNRat_mul (Eq.refl HMul.hMul)
+                                          (Mathlib.Meta.NormNum.IsNat.to_isNNRat
+                                            (Mathlib.Meta.NormNum.isNat_ofNat ℝ (Eq.refl 3)))
+                                          (Mathlib.Meta.NormNum.isNNRat_inv_pos
+                                            (Mathlib.Meta.NormNum.IsNat.to_isNNRat
+                                              (Mathlib.Meta.NormNum.isNat_ofNat ℝ (Eq.refl 2))))
+                                          (Eq.refl (Nat.mul 3 1)) (Eq.refl 2))))
+                                    (Eq.refl (Int.negOfNat 3)))
+                                  (Eq.refl 3) (Eq.refl 2))))
+                            (Mathlib.Meta.NormNum.IsNNRat.to_eq
+                              (Mathlib.Meta.NormNum.isNNRat_div
+                                (Mathlib.Meta.NormNum.isNNRat_mul (Eq.refl HMul.hMul)
+                                  (Mathlib.Meta.NormNum.IsNat.to_isNNRat
+                                    (Mathlib.Meta.NormNum.isNat_ofNat ℝ (Eq.refl 667)))
+                                  (Mathlib.Meta.NormNum.isNNRat_inv_pos
+                                    (Mathlib.Meta.NormNum.IsNat.to_isNNRat
+                                      (Mathlib.Meta.NormNum.isNat_ofNat ℝ (Eq.refl 8000))))
+                                  (Eq.refl (Nat.mul 667 1)) (Eq.refl 8000)))
+                              (Eq.refl 667) (Eq.refl 8000))))
+                        A2))
+                    (Mathlib.Tactic.CancelDenoms.sub_subst
+                      (Mathlib.Tactic.CancelDenoms.mul_subst rfl
+                        (Mathlib.Tactic.CancelDenoms.div_subst rfl
+                          (Mathlib.Meta.NormNum.isNat_eq_true
+                            (Mathlib.Meta.NormNum.IsNNRat.to_isNat
+                              (Mathlib.Meta.NormNum.isNNRat_div
+                                (Mathlib.Meta.NormNum.IsNat.to_isNNRat
+                                  (Mathlib.Meta.NormNum.IsNNRat.to_isNat
+                                    (Mathlib.Meta.NormNum.isNNRat_mul (Eq.refl HMul.hMul)
+                                      (Mathlib.Meta.NormNum.IsNat.to_isNNRat
+                                        (Mathlib.Meta.NormNum.isNat_ofNat ℝ (Eq.refl 8000)))
+                                      (Mathlib.Meta.NormNum.isNNRat_inv_pos
+                                        (Mathlib.Meta.NormNum.IsNat.to_isNNRat
+                                          (Mathlib.Meta.NormNum.isNat_ofNat ℝ (Eq.refl 8000))))
+                                      (Eq.refl (Nat.mul 8000 1)) (Eq.refl 8000))))))
+                            (Mathlib.Meta.NormNum.isNat_ofNat ℝ Nat.cast_one))
+                          (Mathlib.Meta.NormNum.isNat_eq_true
+                            (Mathlib.Meta.NormNum.isNat_mul (Eq.refl HMul.hMul)
+                              (Mathlib.Meta.NormNum.isNat_ofNat ℝ Nat.cast_one)
+                              (Mathlib.Meta.NormNum.isNat_ofNat ℝ (Eq.refl 8000)) (Eq.refl 8000))
+                            (Mathlib.Meta.NormNum.isNat_ofNat ℝ (Eq.refl 8000))))
+                        (Mathlib.Meta.NormNum.isNat_eq_true
+                          (Mathlib.Meta.NormNum.isNat_mul (Eq.refl HMul.hMul)
+                            (Mathlib.Meta.NormNum.isNat_ofNat ℝ Nat.cast_one)
+                            (Mathlib.Meta.NormNum.isNat_ofNat ℝ (Eq.refl 8000)) (Eq.refl 8000))
+                          (Mathlib.Meta.NormNum.isNat_ofNat ℝ (Eq.refl 8000))))
+                      rfl)))
+                (Mathlib.Tactic.Linarith.mul_nonpos (Mathlib.Tactic.Linarith.sub_nonpos_of_le hA2raw)
+                  (Mathlib.Meta.NormNum.isNat_lt_true (Mathlib.Meta.NormNum.isNat_ofNat ℝ Nat.cast_zero)
+                    (Mathlib.Meta.NormNum.isNat_ofNat ℝ (Eq.refl 8000)) (Eq.refl false))))
+              (Mathlib.Tactic.Linarith.mul_nonpos
+                (Eq.mp
+                  (congrArg (fun _a => _a ≤ 0)
+                    (Mathlib.Tactic.CancelDenoms.derive_trans
+                      (Eq.trans
+                        (congrArg (HSub.hSub 0)
+                          (Eq.trans
+                            (congrFun'
+                              (congrArg HDiv.hDiv
+                                (Eq.trans
+                                  (congrArg (HPow.hPow 31000000)
+                                    (Mathlib.Meta.NormNum.IsRat.neg_to_eq
+                                      (Mathlib.Meta.NormNum.isRat_div
+                                        (Mathlib.Meta.NormNum.isRat_mul (Eq.refl HMul.hMul)
+                                          (Mathlib.Meta.NormNum.IsInt.to_isRat
+                                            (Mathlib.Meta.NormNum.isInt_neg (Eq.refl Neg.neg)
+                                              (Mathlib.Meta.NormNum.IsNat.to_isInt
+                                                (Mathlib.Meta.NormNum.isNat_ofNat ℝ (Eq.refl 3)))
+                                              (Eq.refl (Int.negOfNat 3))))
+                                          (Mathlib.Meta.NormNum.IsNNRat.to_isRat
+                                            (Mathlib.Meta.NormNum.isNNRat_inv_pos
+                                              (Mathlib.Meta.NormNum.IsNat.to_isNNRat
+                                                (Mathlib.Meta.NormNum.isNat_ofNat ℝ (Eq.refl 2)))))
+                                          (Eq.refl ((Int.negOfNat 3).mul (Int.ofNat 1))) (Eq.refl 2)))
+                                      (Eq.refl 3) (Eq.refl 2)))
+                                  (congrArg (HPow.hPow 31000000)
+                                    (Mathlib.Meta.NormNum.IsRat.neg_to_eq
+                                      (Mathlib.Meta.NormNum.isRat_neg (Eq.refl Neg.neg)
+                                        (Mathlib.Meta.NormNum.IsNNRat.to_isRat
+                                          (Mathlib.Meta.NormNum.isNNRat_div
+                                            (Mathlib.Meta.NormNum.isNNRat_mul (Eq.refl HMul.hMul)
+                                              (Mathlib.Meta.NormNum.IsNat.to_isNNRat
+                                                (Mathlib.Meta.NormNum.isNat_ofNat ℝ (Eq.refl 3)))
+                                              (Mathlib.Meta.NormNum.isNNRat_inv_pos
+                                                (Mathlib.Meta.NormNum.IsNat.to_isNNRat
+                                                  (Mathlib.Meta.NormNum.isNat_ofNat ℝ (Eq.refl 2))))
+                                              (Eq.refl (Nat.mul 3 1)) (Eq.refl 2))))
+                                        (Eq.refl (Int.negOfNat 3)))
+                                      (Eq.refl 3) (Eq.refl 2)))))
+                              12)
+                            (congrFun'
+                              (congrArg HDiv.hDiv
+                                (congrArg (HPow.hPow 31000000)
+                                  (Mathlib.Meta.NormNum.IsRat.neg_to_eq
+                                    (Mathlib.Meta.NormNum.isRat_neg (Eq.refl Neg.neg)
+                                      (Mathlib.Meta.NormNum.IsNNRat.to_isRat
+                                        (Mathlib.Meta.NormNum.isNNRat_div
+                                          (Mathlib.Meta.NormNum.isNNRat_mul (Eq.refl HMul.hMul)
+                                            (Mathlib.Meta.NormNum.IsNat.to_isNNRat
+                                              (Mathlib.Meta.NormNum.isNat_ofNat ℝ (Eq.refl 3)))
+                                            (Mathlib.Meta.NormNum.isNNRat_inv_pos
+                                              (Mathlib.Meta.NormNum.IsNat.to_isNNRat
+                                                (Mathlib.Meta.NormNum.isNat_ofNat ℝ (Eq.refl 2))))
+                                            (Eq.refl (Nat.mul 3 1)) (Eq.refl 2))))
+                                      (Eq.refl (Int.negOfNat 3)))
+                                    (Eq.refl 3) (Eq.refl 2))))
+                              12)))
+                        (congrArg (HSub.hSub 0)
+                          (congrFun'
+                            (congrArg HDiv.hDiv
+                              (congrArg (HPow.hPow 31000000)
+                                (Mathlib.Meta.NormNum.IsRat.neg_to_eq
+                                  (Mathlib.Meta.NormNum.isRat_neg (Eq.refl Neg.neg)
+                                    (Mathlib.Meta.NormNum.IsNNRat.to_isRat
+                                      (Mathlib.Meta.NormNum.isNNRat_div
+                                        (Mathlib.Meta.NormNum.isNNRat_mul (Eq.refl HMul.hMul)
+                                          (Mathlib.Meta.NormNum.IsNat.to_isNNRat
+                                            (Mathlib.Meta.NormNum.isNat_ofNat ℝ (Eq.refl 3)))
+                                          (Mathlib.Meta.NormNum.isNNRat_inv_pos
+                                            (Mathlib.Meta.NormNum.IsNat.to_isNNRat
+                                              (Mathlib.Meta.NormNum.isNat_ofNat ℝ (Eq.refl 2))))
+                                          (Eq.refl (Nat.mul 3 1)) (Eq.refl 2))))
+                                    (Eq.refl (Int.negOfNat 3)))
+                                  (Eq.refl 3) (Eq.refl 2))))
+                            12)))
+                      (Mathlib.Tactic.CancelDenoms.sub_subst rfl
+                        (Mathlib.Tactic.CancelDenoms.div_subst rfl
+                          (Mathlib.Meta.NormNum.isNat_eq_true
+                            (Mathlib.Meta.NormNum.IsNNRat.to_isNat
+                              (Mathlib.Meta.NormNum.isNNRat_div
+                                (Mathlib.Meta.NormNum.IsNat.to_isNNRat
+                                  (Mathlib.Meta.NormNum.IsNNRat.to_isNat
+                                    (Mathlib.Meta.NormNum.isNNRat_mul (Eq.refl HMul.hMul)
+                                      (Mathlib.Meta.NormNum.IsNat.to_isNNRat
+                                        (Mathlib.Meta.NormNum.isNat_ofNat ℝ (Eq.refl 12)))
+                                      (Mathlib.Meta.NormNum.isNNRat_inv_pos
+                                        (Mathlib.Meta.NormNum.IsNat.to_isNNRat
+                                          (Mathlib.Meta.NormNum.isNat_ofNat ℝ (Eq.refl 12))))
+                                      (Eq.refl (Nat.mul 12 1)) (Eq.refl 12))))))
+                            (Mathlib.Meta.NormNum.isNat_ofNat ℝ Nat.cast_one))
+                          (Mathlib.Meta.NormNum.isNat_eq_true
+                            (Mathlib.Meta.NormNum.isNat_mul (Eq.refl HMul.hMul)
+                              (Mathlib.Meta.NormNum.isNat_ofNat ℝ Nat.cast_one)
+                              (Mathlib.Meta.NormNum.isNat_ofNat ℝ (Eq.refl 12)) (Eq.refl 12))
+                            (Mathlib.Meta.NormNum.isNat_ofNat ℝ (Eq.refl 12)))))))
+                  (Mathlib.Tactic.Linarith.mul_nonpos (Mathlib.Tactic.Linarith.sub_nonpos_of_le hposc)
+                    (Mathlib.Meta.NormNum.isNat_lt_true (Mathlib.Meta.NormNum.isNat_ofNat ℝ Nat.cast_zero)
+                      (Mathlib.Meta.NormNum.isNat_ofNat ℝ (Eq.refl 12)) (Eq.refl false))))
+                (Mathlib.Meta.NormNum.isNat_lt_true (Mathlib.Meta.NormNum.isNat_ofNat ℝ Nat.cast_zero)
+                  (Mathlib.Meta.NormNum.isNat_ofNat ℝ (Eq.refl 667)) (Eq.refl false))))
+            (Mathlib.Tactic.Linarith.mul_neg (Mathlib.Tactic.Linarith.sub_neg_of_lt a)
+              (Mathlib.Meta.NormNum.isNat_lt_true (Mathlib.Meta.NormNum.isNat_ofNat ℝ Nat.cast_zero)
+                (Mathlib.Meta.NormNum.isNat_ofNat ℝ (Eq.refl 8000)) (Eq.refl false))))))
+has type
+  ↑(n4 t) ^ (-3 / 2) * A2 ≤ (31000000 * t ^ 4) ^ (-3 / 2) * A2
+but is expected to have type
+  (t + 1 / 2) / 12 * ↑(n4 t) ^ (-3 / 2) ≤ (t + 1 / 2) / 12 * (31000000 * t ^ 4) ^ (-3 / 2)
+RhAttack/S4Strip.lean:1272:24: error: Application type mismatch: The argument
+  ht0
+has type
+  0 < t
+but is expected to have type
+  0 ≤ t
+in the application
+  rpow_mul ht0
+RhAttack/S4Strip.lean:1296:10: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  31000000 ^ (-(5 / 2))
+in the target expression
+  31000000 ^ (-5 / 2) = 1 / (31000000 ^ 2 * √31000000)
+
+t : ℝ
+ht : 1000 ≤ t
+H3 : ℝ := ‖(↑(1 / 2) + ↑t * Complex.I) * (↑(1 / 2) + ↑t * Complex.I + 1) * (↑(1 / 2) + ↑t * Complex.I + 2)‖
+hH3 : H3 = ‖(↑(1 / 2) + ↑t * Complex.I) * (↑(1 / 2) + ↑t * Complex.I + 1) * (↑(1 / 2) + ↑t * Complex.I + 2)‖
+ht0 : 0 < t
+hnpos : 0 < ↑(n4 t)
+hbase : 0 < 31000000 * t ^ 4
+hsqrt3 : √3 ≤ 17321 / 10 ^ 4
+hs3 : ‖(↑(1 / 2) + ↑t * Complex.I) * (↑(1 / 2) + ↑t * Complex.I + 1) * (↑(1 / 2) + ↑t * Complex.I + 2)‖ ≤ (t + 3) ^ 3
+hmono : ↑(n4 t) ^ (-5 / 2) ≤ (31000000 * t ^ 4) ^ (-5 / 2)
+hsplit : (31000000 * t ^ 4) ^ (-5 / 2) = 31000000 ^ (-5 / 2) * t ^ (-10)
+ht3 : (t + 3) ^ 3 ≤ (1003 / 1000) ^ 3 * t ^ 3
+ht7 : t ^ 3 * t ^ (-10) = t ^ (-7)
+hc : 0 < 31000000
+⊢ 31000000 ^ (-5 / 2) = 1 / (31000000 ^ 2 * √31000000)
+RhAttack/S4Strip.lean:1312:30: error: Application type mismatch: The argument
+  hd2
+has type
+  (0 : ℕ) < 31000000 ^ 2 * 5567
+but is expected to have type
+  (0 : ℝ) < 31000000 ^ 2 * 5567
+in the application
+  div_le_div_iff₀ hd1 hd2
+RhAttack/S4Strip.lean:1320:9: error: invalid 'calc' step, left-hand side is
+  17321 / 10 ^ 4 / 540 * 31000000 ^ (-5 / 2) * (1003 / 1000) ^ 3 : ℝ
+but is expected to be
+  17321 / 10 ^ 4 / 540 * (1 / (31000000 ^ 2 * √31000000)) * (1003 / 1000) ^ 3 : ℝ
+Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+RhAttack/S4Strip.lean:1322:51: error: unsolved goals
+t : ℝ
+ht : 1000 ≤ t
+H3 : ℝ := ‖(↑(1 / 2) + ↑t * Complex.I) * (↑(1 / 2) + ↑t * Complex.I + 1) * (↑(1 / 2) + ↑t * Complex.I + 2)‖
+hH3 : H3 = ‖(↑(1 / 2) + ↑t * Complex.I) * (↑(1 / 2) + ↑t * Complex.I + 1) * (↑(1 / 2) + ↑t * Complex.I + 2)‖
+ht0 : 0 < t
+hnpos : 0 < ↑(n4 t)
+hbase : 0 < 31000000 * t ^ 4
+hsqrt3 : √3 ≤ 17321 / 10 ^ 4
+hs3 : ‖(↑(1 / 2) + ↑t * Complex.I) * (↑(1 / 2) + ↑t * Complex.I + 1) * (↑(1 / 2) + ↑t * Complex.I + 2)‖ ≤ (t + 3) ^ 3
+hmono : ↑(n4 t) ^ (-5 / 2) ≤ (31000000 * t ^ 4) ^ (-5 / 2)
+hsplit : (31000000 * t ^ 4) ^ (-5 / 2) = 31000000 ^ (-5 / 2) * t ^ (-10)
+ht3 : (t + 3) ^ 3 ≤ (1003 / 1000) ^ 3 * t ^ 3
+ht7 : t ^ 3 * t ^ (-10) = t ^ (-7)
+hc : 0 < 31000000
+hbridge : 31000000 ^ (-5 / 2) = 1 / (31000000 ^ 2 * √31000000)
+h5567 : 5567 ≤ √31000000
+hrs : 0 < √31000000
+hinv : 1 / (31000000 ^ 2 * √31000000) ≤ 1 / (31000000 ^ 2 * 5567)
+hcoef : 0 ≤ 17321 / 10 ^ 4 / 540 * (1003 / 1000) ^ 3
+⊢ 31000000 ^ (-5 / 2) * (17477357134667 / 5400000000000000) =
+    (√31000000)⁻¹ * (17477357134667 / 5189400000000000000000000000000)
+RhAttack/S4Strip.lean:1331:10: error: No goals to be solved
+RhAttack/S4Strip.lean:1344:37: error: Application type mismatch: The argument
+  hsqrt3
+has type
+  √3 ≤ 17321 / 10 ^ 4
+but is expected to have type
+  √3 / 540 ≤ 17321 / 10 ^ 4 / 540
+in the application
+  mul_le_mul_of_nonneg_right hsqrt3
+RhAttack/S4Strip.lean:1345:47: error: Application type mismatch: The argument
+  mul_nonneg (norm_nonneg ?m.2821) (rpow_nonneg (LT.lt.le (st_n4pos t ht)) (-5 / 2))
+has type
+  0 ≤ ‖?m.2821‖ * ↑(n4 t) ^ (-5 / 2)
+but is expected to have type
+  0 ≤ ↑(n4 t) ^ (-5 / 2)
+in the application
+  mul_le_mul_of_nonneg_right hstep (mul_nonneg (norm_nonneg ?m.2821) (rpow_nonneg (LT.lt.le (st_n4pos t ht)) (-5 / 2)))
+RhAttack/S4Strip.lean:1349:10: error: Tactic `apply` failed: could not unify the conclusion of `@mul_nonneg`
+  0 ≤ ?a * ?b
+with the goal
+  0 ≤ ↑(n4 t) ^ (-5 / 2)
+
+Note: The full type of `@mul_nonneg` is
+  ∀ {α : Type ?u.2132} [inst : MulZeroClass α] {a b : α} [inst_1 : Preorder α] [PosMulMono α], 0 ≤ a → 0 ≤ b → 0 ≤ a * b
+
+t : ℝ
+ht : 1000 ≤ t
+H3 : ℝ := ‖(↑(1 / 2) + ↑t * Complex.I) * (↑(1 / 2) + ↑t * Complex.I + 1) * (↑(1 / 2) + ↑t * Complex.I + 2)‖
+hH3 : H3 = ‖(↑(1 / 2) + ↑t * Complex.I) * (↑(1 / 2) + ↑t * Complex.I + 1) * (↑(1 / 2) + ↑t * Complex.I + 2)‖
+ht0 : 0 < t
+hnpos : 0 < ↑(n4 t)
+hbase : 0 < 31000000 * t ^ 4
+hsqrt3 : √3 ≤ 17321 / 10 ^ 4
+hs3 : ‖(↑(1 / 2) + ↑t * Complex.I) * (↑(1 / 2) + ↑t * Complex.I + 1) * (↑(1 / 2) + ↑t * Complex.I + 2)‖ ≤ (t + 3) ^ 3
+hmono : ↑(n4 t) ^ (-5 / 2) ≤ (31000000 * t ^ 4) ^ (-5 / 2)
+hsplit : (31000000 * t ^ 4) ^ (-5 / 2) = 31000000 ^ (-5 / 2) * t ^ (-10)
+ht3 : (t + 3) ^ 3 ≤ (1003 / 1000) ^ 3 * t ^ 3
+ht7 : t ^ 3 * t ^ (-10) = t ^ (-7)
+hA3raw : 17321 / 10 ^ 4 / 540 * 31000000 ^ (-5 / 2) * (1003 / 1000) ^ 3 ≤ A3
+⊢ 0 ≤ ↑(n4 t) ^ (-5 / 2)
+RhAttack/S4Strip.lean:1355:10: error: unsolved goals
+case ha
+t : ℝ
+ht : 1000 ≤ t
+H3 : ℝ := ⋯
+hH3 : H3 = ‖(↑(1 / 2) + ↑t * Complex.I) * (↑(1 / 2) + ↑t * Complex.I + 1) * (↑(1 / 2) + ↑t * Complex.I + 2)‖
+ht0 : 0 < t
+hnpos : 0 < ↑(n4 t)
+hbase : 0 < 31000000 * t ^ 4
+hsqrt3 : √3 ≤ 17321 / 10 ^ 4
+hs3 : ‖(↑(1 / 2) + ↑t * Complex.I) * (↑(1 / 2) + ↑t * Complex.I + 1) * (↑(1 / 2) + ↑t * Complex.I + 2)‖ ≤ (t + 3) ^ 3
+hmono : ↑(n4 t) ^ (-5 / 2) ≤ (31000000 * t ^ 4) ^ (-5 / 2)
+hsplit : (31000000 * t ^ 4) ^ (-5 / 2) = 31000000 ^ (-5 / 2) * t ^ (-10)
+ht3 : (t + 3) ^ 3 ≤ (1003 / 1000) ^ 3 * t ^ 3
+ht7 : t ^ 3 * t ^ (-10) = t ^ (-7)
+hA3raw : 17321 / 10 ^ 4 / 540 * 31000000 ^ (-5 / 2) * (1003 / 1000) ^ 3 ≤ A3
+⊢ 0 ≤ ?ha.a
+
+case hb
+t : ℝ
+ht : 1000 ≤ t
+H3 : ℝ := ⋯
+hH3 : H3 = ‖(↑(1 / 2) + ↑t * Complex.I) * (↑(1 / 2) + ↑t * Complex.I + 1) * (↑(1 / 2) + ↑t * Complex.I + 2)‖
+ht0 : 0 < t
+hnpos : 0 < ↑(n4 t)
+hbase : 0 < 31000000 * t ^ 4
+hsqrt3 : √3 ≤ 17321 / 10 ^ 4
+hs3 : ‖(↑(1 / 2) + ↑t * Complex.I) * (↑(1 / 2) + ↑t * Complex.I + 1) * (↑(1 / 2) + ↑t * Complex.I + 2)‖ ≤ (t + 3) ^ 3
+hmono : ↑(n4 t) ^ (-5 / 2) ≤ (31000000 * t ^ 4) ^ (-5 / 2)
+hsplit : (31000000 * t ^ 4) ^ (-5 / 2) = 31000000 ^ (-5 / 2) * t ^ (-10)
+ht3 : (t + 3) ^ 3 ≤ (1003 / 1000) ^ 3 * t ^ 3
+ht7 : t ^ 3 * t ^ (-10) = t ^ (-7)
+hA3raw : 17321 / 10 ^ 4 / 540 * 31000000 ^ (-5 / 2) * (1003 / 1000) ^ 3 ≤ A3
+⊢ 0 ≤ ?b
+
+case ha.a
+t : ℝ
+ht : 1000 ≤ t
+H3 : ℝ := ⋯
+hH3 : H3 = ‖(↑(1 / 2) + ↑t * Complex.I) * (↑(1 / 2) + ↑t * Complex.I + 1) * (↑(1 / 2) + ↑t * Complex.I + 2)‖
+ht0 : 0 < t
+hnpos : 0 < ↑(n4 t)
+hbase : 0 < 31000000 * t ^ 4
+hsqrt3 : √3 ≤ 17321 / 10 ^ 4
+hs3 : ‖(↑(1 / 2) + ↑t * Complex.I) * (↑(1 / 2) + ↑t * Complex.I + 1) * (↑(1 / 2) + ↑t * Complex.I + 2)‖ ≤ (t + 3) ^ 3
+hmono : ↑(n4 t) ^ (-5 / 2) ≤ (31000000 * t ^ 4) ^ (-5 / 2)
+hsplit : (31000000 * t ^ 4) ^ (-5 / 2) = 31000000 ^ (-5 / 2) * t ^ (-10)
+ht3 : (t + 3) ^ 3 ≤ (1003 / 1000) ^ 3 * t ^ 3
+ht7 : t ^ 3 * t ^ (-10) = t ^ (-7)
+hA3raw : 17321 / 10 ^ 4 / 540 * 31000000 ^ (-5 / 2) * (1003 / 1000) ^ 3 ≤ A3
+⊢ ℝ
+
+case b
+t : ℝ
+ht : 1000 ≤ t
+H3 : ℝ := ⋯
+hH3 : H3 = ‖(↑(1 / 2) + ↑t * Complex.I) * (↑(1 / 2) + ↑t * Complex.I + 1) * (↑(1 / 2) + ↑t * Complex.I + 2)‖
+ht0 : 0 < t
+hnpos : 0 < ↑(n4 t)
+hbase : 0 < 31000000 * t ^ 4
+hsqrt3 : √3 ≤ 17321 / 10 ^ 4
+hs3 : ‖(↑(1 / 2) + ↑t * Complex.I) * (↑(1 / 2) + ↑t * Complex.I + 1) * (↑(1 / 2) + ↑t * Complex.I + 2)‖ ≤ (t + 3) ^ 3
+hmono : ↑(n4 t) ^ (-5 / 2) ≤ (31000000 * t ^ 4) ^ (-5 / 2)
+hsplit : (31000000 * t ^ 4) ^ (-5 / 2) = 31000000 ^ (-5 / 2) * t ^ (-10)
+ht3 : (t + 3) ^ 3 ≤ (1003 / 1000) ^ 3 * t ^ 3
+ht7 : t ^ 3 * t ^ (-10) = t ^ (-7)
+hA3raw : 17321 / 10 ^ 4 / 540 * 31000000 ^ (-5 / 2) * (1003 / 1000) ^ 3 ≤ A3
+⊢ ℝ
+RhAttack/S4Strip.lean:1356:33: error: linarith failed to find a contradiction
+t : ℝ
+ht : 1000 ≤ t
+H3 : ℝ := ‖(↑(1 / 2) + ↑t * Complex.I) * (↑(1 / 2) + ↑t * Complex.I + 1) * (↑(1 / 2) + ↑t * Complex.I + 2)‖
+hH3 : H3 = ‖(↑(1 / 2) + ↑t * Complex.I) * (↑(1 / 2) + ↑t * Complex.I + 1) * (↑(1 / 2) + ↑t * Complex.I + 2)‖
+ht0 : 0 < t
+hnpos : 0 < ↑(n4 t)
+hbase : 0 < 31000000 * t ^ 4
+hsqrt3 : √3 ≤ 17321 / 10 ^ 4
+hs3 : ‖(↑(1 / 2) + ↑t * Complex.I) * (↑(1 / 2) + ↑t * Complex.I + 1) * (↑(1 / 2) + ↑t * Complex.I + 2)‖ ≤ (t + 3) ^ 3
+hmono : ↑(n4 t) ^ (-5 / 2) ≤ (31000000 * t ^ 4) ^ (-5 / 2)
+hsplit : (31000000 * t ^ 4) ^ (-5 / 2) = 31000000 ^ (-5 / 2) * t ^ (-10)
+ht3 : (t + 3) ^ 3 ≤ (1003 / 1000) ^ 3 * t ^ 3
+ht7 : t ^ 3 * t ^ (-10) = t ^ (-7)
+hA3raw : 17321 / 10 ^ 4 / 540 * 31000000 ^ (-5 / 2) * (1003 / 1000) ^ 3 ≤ A3
+a✝ : ?m.2865 < 0
+⊢ False
+failed
+RhAttack/S4Strip.lean:1371:18: error: Tactic `apply` failed: could not unify the conclusion of `mul_le_mul_of_nonneg_right ht3`
+  (t + 3) ^ 3 * ?m.3416 ≤ (1003 / 1000) ^ 3 * t ^ 3 * ?m.3416
+with the goal
+  17321 / 10 ^ 4 / 540 * (31000000 ^ (-5 / 2) * t ^ (-10)) * (t + 3) ^ 3 ≤
+    17321 / 10 ^ 4 / 540 * (31000000 ^ (-5 / 2) * t ^ (-10)) * ((1003 / 1000) ^ 3 * t ^ 3)
+
+Note: The full type of `mul_le_mul_of_nonneg_right ht3` is
+  0 ≤ ?m.3416 → (t + 3) ^ 3 * ?m.3416 ≤ (1003 / 1000) ^ 3 * t ^ 3 * ?m.3416
+
+t : ℝ
+ht : 1000 ≤ t
+H3 : ℝ := ‖(↑(1 / 2) + ↑t * Complex.I) * (↑(1 / 2) + ↑t * Complex.I + 1) * (↑(1 / 2) + ↑t * Complex.I + 2)‖
+hH3 : H3 = ‖(↑(1 / 2) + ↑t * Complex.I) * (↑(1 / 2) + ↑t * Complex.I + 1) * (↑(1 / 2) + ↑t * Complex.I + 2)‖
+ht0 : 0 < t
+hnpos : 0 < ↑(n4 t)
+hbase : 0 < 31000000 * t ^ 4
+hsqrt3 : √3 ≤ 17321 / 10 ^ 4
+hs3 : ‖(↑(1 / 2) + ↑t * Complex.I) * (↑(1 / 2) + ↑t * Complex.I + 1) * (↑(1 / 2) + ↑t * Complex.I + 2)‖ ≤ (t + 3) ^ 3
+hmono : ↑(n4 t) ^ (-5 / 2) ≤ (31000000 * t ^ 4) ^ (-5 / 2)
+hsplit : (31000000 * t ^ 4) ^ (-5 / 2) = 31000000 ^ (-5 / 2) * t ^ (-10)
+ht3 : (t + 3) ^ 3 ≤ (1003 / 1000) ^ 3 * t ^ 3
+ht7 : t ^ 3 * t ^ (-10) = t ^ (-7)
+hA3raw : 17321 / 10 ^ 4 / 540 * 31000000 ^ (-5 / 2) * (1003 / 1000) ^ 3 ≤ A3
+⊢ 17321 / 10 ^ 4 / 540 * (31000000 ^ (-5 / 2) * t ^ (-10)) * (t + 3) ^ 3 ≤
+    17321 / 10 ^ 4 / 540 * (31000000 ^ (-5 / 2) * t ^ (-10)) * ((1003 / 1000) ^ 3 * t ^ 3)

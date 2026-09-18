@@ -1,0 +1,48 @@
+import Mathlib
+
+noncomputable def SsumUB (t : ℝ) : ℝ := 20 + 4 * Real.log t
+noncomputable def Bf4UB (t : ℝ) : ℝ :=
+    (2 + 1 / t + 1 / (t * t)) * (1 / (t ^ 6)) / (62000000 * 62000000)
+def c4sq : ℝ := 62000000 * 62000000
+
+example (t : ℝ) (ht : 1000 ≤ t) : Bf4UB t * SsumUB t ≤ (2001001 : ℝ) * (20 + 4 * Real.log t) / (10 ^ 6 * c4sq * t ^ 6) := by
+  have ht0 : 0 < t := by linarith
+  have hL0 : 0 ≤ Real.log t := Real.log_nonneg (by linarith : 1 ≤ t)
+  unfold Bf4UB, SsumUB
+  dsimp only [L]
+  have hc4 : c4sq = (62000000 * 62000000 : ℝ) := by dsimp only [c4sq]; ring
+  have hinv : (2 : ℝ) + 1 / t + 1 / (t * t) ≤ 2001001 / 10 ^ 6 := by
+    have h1t : 1 / t ≤ 1 / 1000 := by
+      rw [inv_le_inv₀ ht0 (by norm_num : (0 : ℝ) < 1000)]
+      exact ht
+    have h1t2a : 1 / (t * t) = (1 / t) ^ 2 := by ring
+    have h1t2b : (1 / t) ^ 2 ≤ (1 / 1000) ^ 2 :=
+      pow_le_pow_left₀ (by rw [one_div] at *; exact inv_nonneg.mpr ht0.le) h1t 2
+    have h1t2c : (1 / 1000 : ℝ) ^ 2 = 1 / 10 ^ 6 := by norm_num
+    have h1t2 : 1 / (t * t) ≤ 1 / 10 ^ 6 := by
+      rw [h1t2a]
+      linarith [h1t2b, h1t2c]
+    nlinarith [h1t, h1t2, show (2 : ℝ) ≤ 2001001 / 10 ^ 6 from by norm_num]
+  have hS0 : 0 ≤ 20 + 4 * Real.log t := by nlinarith [hL0]
+  have h1 : (2 + 1 / t + 1 / (t * t)) * (20 + 4 * Real.log t) ≤
+      (2001001 / 10 ^ 6) * (20 + 4 * Real.log t) :=
+    mul_le_mul_of_nonneg_right hinv hS0
+  have hD : 0 < (10 : ℝ) ^ 6 * (62000000 * 62000000) * t ^ 6 := by
+    apply mul_pos
+    · norm_num
+    · exact mul_pos (by norm_num : (0 : ℝ) < 62000000 * 62000000) (pow_pos ht0 6)
+  rw [hc4]
+  field_simp [(pow_pos ht0 6).ne', (pow_pos (by norm_num : (0 : ℝ) < 10) 6).ne',
+      (by norm_num : (0 : ℝ) ≠ 62000000 * 62000000)]
+  rw [div_le_div_iff₀ hD hD]
+  field_simp [hD.ne']
+  nlinarith [h1]
+  ve hc : Cf4UB t * Kbar4UB t ≤ (2000001 : ℝ) * (10 + 2 * L) / (10 ^ 6 * c4sq * t ^ 6) := by
+  unfold Cf4UB, Kbar4UB, L
+  have hc4 : (4 : ℝ) * t * t + 2 ≤ (4000002 : ℝ) / 10 ^ 6 * (t * t) := by
+    have ht2 : (1000 : ℝ) ^ 2 ≤ t ^ 2 := pow_le_pow_left₀ (by norm_num : (0 : ℝ) ≤ 1000) ht 2
+    have hinv : 2 ≤ (2 : ℝ) / 10 ^ 6 * (t * t) := by
+      have hinv1 : (2 : ℝ) = (2 : ℝ) / 10 ^ 6 * (1000 * 1000 : ℝ) := by norm_num
+      have ht2' : 1000 * 1000 ≤ t * t := by simpa [show (1000 : ℝ) ^ 2 = 1000 * 1000 from by ring, pow_two] using ht2
+      have hstep : (2 : ℝ) / 10 ^ 6 * (1000 * 1000 : ℝ) ≤ (2 : ℝ) / 10 ^ 6 * (t * t) := by
+        apply mul_le_mul_of_nonneg_left ht2'

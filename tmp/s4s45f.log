@@ -1,0 +1,192 @@
+RhAttack/S4Strip.lean:1580:4: error: No goals to be solved
+RhAttack/S4Strip.lean:1612:12: error: Type mismatch
+  Eq.symm (one_div (t ^ 6))
+has type
+  (t ^ 6)⁻¹ = 1 / t ^ 6
+but is expected to have type
+  1 / t ^ 6 = (t ^ 6)⁻¹
+Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+RhAttack/S4Strip.lean:1628:99: error: unsolved goals
+t M : ℝ
+ht : 1000 ≤ t
+hM0 : 0 ≤ M
+hMz : M ≤ S4W.Zbound t
+ht0 : 0 < t
+L : ℝ := log t
+hLdef : L = log t
+hx4 : 0 ≤ X4fun t
+hx4ub : X4fun t ≤ X4UBfun t
+hexp : rexp (X4fun t) ≤ 2
+hs1 : M * rexp (X4fun t) * X4fun t ≤ M * 2 * X4fun t
+hs2 : M * 2 * X4fun t ≤ S4W.Zbound t * 2 * X4fun t
+hs3 : S4W.Zbound t * 2 * X4fun t = 32 / 10 * t ^ (1 / 4) * L * X4fun t
+hc4 : 0 ≤ 32 / 10 * t ^ (1 / 4) * L
+hs4 : 32 / 10 * t ^ (1 / 4) * L * X4fun t ≤ 32 / 10 * t ^ (1 / 4) * L * X4UBfun t
+hs5 : 32 / 10 * t ^ (1 / 4) * L * X4UBfun t = 32 / 10 * t ^ (1 / 4) * L * ((16 / 10 ^ 15 + 35 / 10 ^ 16 * L) / t ^ 6)
+hsumub : (16 / 10 ^ 15 + 35 / 10 ^ 16 * L) * L ≤ 62 / 10 ^ 16 * L * L
+hpre : 0 ≤ 32 / 10 * L * t ^ (-23 / 4)
+⊢ L * t ^ (-23 / 4) * (1 / 19531250000000) + L ^ 2 * t ^ (-23 / 4) * (7 / 625000000000000) =
+    L ^ 2 * t ^ (-23 / 4) * (1 / 19531250000000) + L ^ 3 * t ^ (-23 / 4) * (7 / 625000000000000)
+Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+RhAttack/S4Strip.lean:1631:86: error: unsolved goals
+t M : ℝ
+ht : 1000 ≤ t
+hM0 : 0 ≤ M
+hMz : M ≤ S4W.Zbound t
+ht0 : 0 < t
+L : ℝ := log t
+hLdef : L = log t
+hx4 : 0 ≤ X4fun t
+hx4ub : X4fun t ≤ X4UBfun t
+hexp : rexp (X4fun t) ≤ 2
+hs1 : M * rexp (X4fun t) * X4fun t ≤ M * 2 * X4fun t
+hs2 : M * 2 * X4fun t ≤ S4W.Zbound t * 2 * X4fun t
+hs3 : S4W.Zbound t * 2 * X4fun t = 32 / 10 * t ^ (1 / 4) * L * X4fun t
+hc4 : 0 ≤ 32 / 10 * t ^ (1 / 4) * L
+hs4 : 32 / 10 * t ^ (1 / 4) * L * X4fun t ≤ 32 / 10 * t ^ (1 / 4) * L * X4UBfun t
+hs5 : 32 / 10 * t ^ (1 / 4) * L * X4UBfun t = 32 / 10 * t ^ (1 / 4) * L * ((16 / 10 ^ 15 + 35 / 10 ^ 16 * L) / t ^ 6)
+hsumub : (16 / 10 ^ 15 + 35 / 10 ^ 16 * L) * L ≤ 62 / 10 ^ 16 * L * L
+hpre : 0 ≤ 32 / 10 * L * t ^ (-23 / 4)
+⊢ L ^ 3 * t ^ (-23 / 4) * (31 / 1562500000000000) = L ^ 2 * t ^ (-23 / 4) * (31 / 1562500000000000)
+RhAttack/S4Strip.lean:1636:19: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  L
+in the target expression
+  log t * log t = log t ^ 2
+
+t M : ℝ
+ht : 1000 ≤ t
+hM0 : 0 ≤ M
+hMz : M ≤ S4W.Zbound t
+ht0 : 0 < t
+L : ℝ := log t
+hLdef : L = log t
+hx4 : 0 ≤ X4fun t
+hx4ub : X4fun t ≤ X4UBfun t
+hexp : rexp (X4fun t) ≤ 2
+hs1 : M * rexp (X4fun t) * X4fun t ≤ M * 2 * X4fun t
+hs2 : M * 2 * X4fun t ≤ S4W.Zbound t * 2 * X4fun t
+hs3 : S4W.Zbound t * 2 * X4fun t = 32 / 10 * t ^ (1 / 4) * L * X4fun t
+hc4 : 0 ≤ 32 / 10 * t ^ (1 / 4) * L
+hs4 : 32 / 10 * t ^ (1 / 4) * L * X4fun t ≤ 32 / 10 * t ^ (1 / 4) * L * X4UBfun t
+hs5 : 32 / 10 * t ^ (1 / 4) * L * X4UBfun t = 32 / 10 * t ^ (1 / 4) * L * ((16 / 10 ^ 15 + 35 / 10 ^ 16 * L) / t ^ 6)
+hsumub : (16 / 10 ^ 15 + 35 / 10 ^ 16 * L) * L ≤ 62 / 10 ^ 16 * L * L
+hs7 :
+  32 / 10 * t ^ (1 / 4) * L * ((16 / 10 ^ 15 + 35 / 10 ^ 16 * L) / t ^ 6) ≤
+    32 / 10 * (62 / 10 ^ 16) * L * L * t ^ (-23 / 4)
+⊢ log t * log t = log t ^ 2
+RhAttack/S4Strip.lean:1662:73: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  t * t ^ (-23 / 4)
+in the target expression
+  32 / 10 * (62 / 10 ^ 16) * t * t ^ (-23 / 4) = 32 / 10 * (62 / 10 ^ 16) * t ^ (-19 / 4)
+
+t M : ℝ
+ht : 1000 ≤ t
+hM0 : 0 ≤ M
+hMz : M ≤ S4W.Zbound t
+ht0 : 0 < t
+L : ℝ := log t
+hLdef : L = log t
+hx4 : 0 ≤ X4fun t
+hx4ub : X4fun t ≤ X4UBfun t
+hexp : rexp (X4fun t) ≤ 2
+hs1 : M * rexp (X4fun t) * X4fun t ≤ M * 2 * X4fun t
+hs2 : M * 2 * X4fun t ≤ S4W.Zbound t * 2 * X4fun t
+hs3 : S4W.Zbound t * 2 * X4fun t = 32 / 10 * t ^ (1 / 4) * L * X4fun t
+hc4 : 0 ≤ 32 / 10 * t ^ (1 / 4) * L
+hs4 : 32 / 10 * t ^ (1 / 4) * L * X4fun t ≤ 32 / 10 * t ^ (1 / 4) * L * X4UBfun t
+hs5 : 32 / 10 * t ^ (1 / 4) * L * X4UBfun t = 32 / 10 * t ^ (1 / 4) * L * ((16 / 10 ^ 15 + 35 / 10 ^ 16 * L) / t ^ 6)
+hsumub : (16 / 10 ^ 15 + 35 / 10 ^ 16 * L) * L ≤ 62 / 10 ^ 16 * L * L
+hs7 :
+  32 / 10 * t ^ (1 / 4) * L * ((16 / 10 ^ 15 + 35 / 10 ^ 16 * L) / t ^ 6) ≤
+    32 / 10 * (62 / 10 ^ 16) * L * L * t ^ (-23 / 4)
+hs8 : 32 / 10 * (62 / 10 ^ 16) * L * L * t ^ (-23 / 4) ≤ 32 / 10 * (62 / 10 ^ 16) * t * t ^ (-23 / 4)
+ht19 : t * t ^ (-23 / 4) = t ^ (-19 / 4)
+⊢ 32 / 10 * (62 / 10 ^ 16) * t * t ^ (-23 / 4) = 32 / 10 * (62 / 10 ^ 16) * t ^ (-19 / 4)
+RhAttack/S4Strip.lean:1669:12: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  t ^ (-(19 / 4))
+in the target expression
+  t ^ (-19 / 4) = 1 / t ^ (19 / 4)
+
+t M : ℝ
+ht : 1000 ≤ t
+hM0 : 0 ≤ M
+hMz : M ≤ S4W.Zbound t
+ht0 : 0 < t
+L : ℝ := log t
+hLdef : L = log t
+hx4 : 0 ≤ X4fun t
+hx4ub : X4fun t ≤ X4UBfun t
+hexp : rexp (X4fun t) ≤ 2
+hs1 : M * rexp (X4fun t) * X4fun t ≤ M * 2 * X4fun t
+hs2 : M * 2 * X4fun t ≤ S4W.Zbound t * 2 * X4fun t
+hs3 : S4W.Zbound t * 2 * X4fun t = 32 / 10 * t ^ (1 / 4) * L * X4fun t
+hc4 : 0 ≤ 32 / 10 * t ^ (1 / 4) * L
+hs4 : 32 / 10 * t ^ (1 / 4) * L * X4fun t ≤ 32 / 10 * t ^ (1 / 4) * L * X4UBfun t
+hs5 : 32 / 10 * t ^ (1 / 4) * L * X4UBfun t = 32 / 10 * t ^ (1 / 4) * L * ((16 / 10 ^ 15 + 35 / 10 ^ 16 * L) / t ^ 6)
+hsumub : (16 / 10 ^ 15 + 35 / 10 ^ 16 * L) * L ≤ 62 / 10 ^ 16 * L * L
+hs7 :
+  32 / 10 * t ^ (1 / 4) * L * ((16 / 10 ^ 15 + 35 / 10 ^ 16 * L) / t ^ 6) ≤
+    32 / 10 * (62 / 10 ^ 16) * L * L * t ^ (-23 / 4)
+hs8 : 32 / 10 * (62 / 10 ^ 16) * L * L * t ^ (-23 / 4) ≤ 32 / 10 * (62 / 10 ^ 16) * t * t ^ (-23 / 4)
+ht19 : t * t ^ (-23 / 4) = t ^ (-19 / 4)
+⊢ t ^ (-19 / 4) = 1 / t ^ (19 / 4)
+RhAttack/S4Strip.lean:1695:18: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  t ^ (-2 + -1)
+in the target expression
+  t ^ (-2) * t ^ (-1) = t ^ (-3)
+
+t M : ℝ
+ht : 1000 ≤ t
+hM0 : 0 ≤ M
+hMz : M ≤ S4W.Zbound t
+ht0 : 0 < t
+hW : p8_B t (n4 t) ≤ A1 * t ^ (-2) + A2 * t ^ (-5) + A3 * t ^ (-7)
+hM : M * rexp (X4fun t) * X4fun t ≤ MTUBfun t
+C k : ℝ
+hC : 0 ≤ C
+hk3 : 3 ≤ k
+hpow : t ^ (-k) ≤ t ^ (-3)
+hA : C * t ^ (-k) ≤ C * t ^ (-3)
+hinv1 : t ^ (-1) ≤ 1 / 1000
+⊢ t ^ (-2) * t ^ (-1) = t ^ (-3)
+RhAttack/S4Strip.lean:1698:12: error: No goals to be solved
+RhAttack/S4Strip.lean:1701:14: error: Type mismatch
+  mul_le_mul_of_nonneg_right hinv1 (rpow_nonneg (LT.lt.le ht0) (-2))
+has type
+  t ^ (-1) * t ^ (-2) ≤ 1 / 1000 * t ^ (-2)
+but is expected to have type
+  t ^ (-2) * t ^ (-1) ≤ t ^ (-2) * (1 / 1000)
+RhAttack/S4Strip.lean:1713:10: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  t ^ (-(19 / 4))
+in the target expression
+  t ^ (-19 / 4) = 1 / t ^ (19 / 4)
+
+t M : ℝ
+ht : 1000 ≤ t
+hM0 : 0 ≤ M
+hMz : M ≤ S4W.Zbound t
+ht0 : 0 < t
+hW : p8_B t (n4 t) ≤ A1 * t ^ (-2) + A2 * t ^ (-5) + A3 * t ^ (-7)
+hM : M * rexp (X4fun t) * X4fun t ≤ MTUBfun t
+hterm : ∀ (C k : ℝ), 0 ≤ C → 3 ≤ k → C * t ^ (-k) ≤ C / 1000 * t ^ (-2)
+hA2c : A2 * t ^ (-5) ≤ A2 / 1000 * t ^ (-2)
+hA3c : A3 * t ^ (-7) ≤ A3 / 1000 * t ^ (-2)
+hMc : 25 / 10 ^ 15 * t ^ (-(19 / 4)) ≤ 25 / 10 ^ 15 / 1000 * t ^ (-2)
+⊢ t ^ (-19 / 4) = 1 / t ^ (19 / 4)
+RhAttack/S4Strip.lean:1719:4: error: Type mismatch
+  hMc
+has type
+  25 / 10 ^ 15 * t ^ (-(19 / 4)) ≤ 25 / 10 ^ 15 / 1000 * t ^ (-2)
+but is expected to have type
+  25 / 10 ^ 15 * t ^ (-19 / 4) ≤ 25 / 10 ^ 15 / 1000 * t ^ (-2)
+RhAttack/S4Strip.lean:1749:8: error(lean.unknownIdentifier): Unknown identifier `lt_le_trans`

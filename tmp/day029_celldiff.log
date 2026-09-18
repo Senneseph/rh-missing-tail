@@ -1,0 +1,24 @@
+top-10 cells by |complex - real|:
+  cell 399  |d|=0.000000  cmplx=-0.334876  real=-0.334876  g~9.5e+17
+  cell 398  |d|=0.000000  cmplx=-0.352216  real=-0.352216  g~9.02e+17
+  cell 397  |d|=0.000000  cmplx=-0.370453  real=-0.370453  g~8.56e+17
+  cell 396  |d|=0.000000  cmplx=-0.389633  real=-0.389633  g~8.13e+17
+  cell 395  |d|=0.000000  cmplx=-0.409806  real=-0.409806  g~7.72e+17
+  cell 394  |d|=0.000000  cmplx=-0.431022  real=-0.431022  g~7.33e+17
+  cell 393  |d|=0.000000  cmplx=-0.453336  real=-0.453336  g~6.96e+17
+  cell 392  |d|=0.000000  cmplx=-0.476804  real=-0.476804  g~6.61e+17
+  cell 391  |d|=0.000000  cmplx=-0.501487  real=-0.501487  g~6.27e+17
+  cell 390  |d|=0.000000  cmplx=-0.527446  real=-0.527446  g~5.96e+17
+totals: cmplx=-4236379269.697752  real=-4236379269.697752  diff=0.000000
+=== verbose complex trace, cell 399 ===
+Integrating from 9.49526e+17 to 1.0e+18 (degree 1 of 7)
+Integrating from 9.49526e+17 to 1.0e+18 (degree 2 of 7)
+Estimated error: 8.69384e-7  epsilon: 3.23117e-27  result:  (-0.334876 + 3.34876e-10j)
+Integrating from 9.49526e+17 to 1.0e+18 (degree 3 of 7)
+Estimated error: 1.0e-27  epsilon: 3.23117e-27  result:  (-0.334876 + 3.34876e-10j)
+=== verbose complex trace, cell 398 ===
+Integrating from 9.016e+17 to 9.49526e+17 (degree 1 of 7)
+Integrating from 9.016e+17 to 9.49526e+17 (degree 2 of 7)
+Estimated error: 9.14407e-7  epsilon: 3.23117e-27  result:  (-0.352216 + 3.52216e-10j)
+Integrating from 9.016e+17 to 9.49526e+17 (degree 3 of 7)
+Estimated error: 1.0e-27  epsilon: 3.23117e-27  result:  (-0.352216 + 3.52216e-10j)

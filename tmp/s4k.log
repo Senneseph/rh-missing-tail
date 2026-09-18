@@ -1,0 +1,120 @@
+RhAttack/S4Strip.lean:894:73: error: No goals to be solved
+RhAttack/S4Strip.lean:897:12: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  t⁻¹ ≤ 1000⁻¹
+in the target expression
+  1 / t ≤ 1 / 1000
+
+t : ℝ
+ht : 1000 ≤ t
+ht0 : 0 < t
+hBf : Bf t (G4 t) ≤ Bf4UB t
+hSsum : Sbar (B4 t) + Sbar (G4 t) ≤ SsumUB t
+hSs0 : 0 ≤ Sbar (B4 t) + Sbar (G4 t)
+hCf : Cf t (G4 t) ≤ Cf4UB t
+hCf0 : 0 ≤ Cf t (G4 t)
+hK : Kbar (G4 t) ≤ Kbar4UB t
+hK0 : 0 ≤ Kbar (G4 t)
+hBf0 : 0 ≤ Bf4UB t
+hCf4UB0 : 0 ≤ Cf4UB t
+hBfS : Bf t (G4 t) * (Sbar (B4 t) + Sbar (G4 t)) ≤ Bf4UB t * (Sbar (B4 t) + Sbar (G4 t))
+hBs : Bf4UB t * (Sbar (B4 t) + Sbar (G4 t)) ≤ Bf4UB t * SsumUB t
+hCfK : Cf t (G4 t) * Kbar (G4 t) ≤ Cf4UB t * Kbar (G4 t)
+hKs : Cf4UB t * Kbar (G4 t) ≤ Cf4UB t * Kbar4UB t
+hfinal :
+  Bf t (G4 t) * (Sbar (B4 t) + Sbar (G4 t)) + Cf t (G4 t) * Kbar (G4 t) ≤ Bf4UB t * SsumUB t + Cf4UB t * Kbar4UB t
+L : ℝ := log t
+hL0 hL0' : 0 ≤ L
+hTden : 0 < t ^ 6 * c4sq
+hc4 : c4sq = 62000000 * 62000000
+⊢ 1 / t ≤ 1 / 1000
+RhAttack/S4Strip.lean:914:22: error: Application type mismatch: The argument
+  ?m.1689
+has type
+  0 < 62000000 * 62000000
+but is expected to have type
+  0 < npowRec 5 t
+in the application
+  mul_pos ?m.1689
+RhAttack/S4Strip.lean:918:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  ?m.1704 / (10 ^ 6 * (62000000 * 62000000) * t ^ 6) ≤ ?m.1706 / (10 ^ 6 * (62000000 * 62000000) * t ^ 6)
+in the target expression
+  (t * (2 * t + 1) + 1) * (20 + 4 * log t) * 10 ^ 6 ≤ t ^ 2 * (20 + 4 * log t) * 2001001
+
+t : ℝ
+ht : 1000 ≤ t
+ht0 : 0 < t
+hBf : Bf t (G4 t) ≤ Bf4UB t
+hSsum : Sbar (B4 t) + Sbar (G4 t) ≤ SsumUB t
+hSs0 : 0 ≤ Sbar (B4 t) + Sbar (G4 t)
+hCf : Cf t (G4 t) ≤ Cf4UB t
+hCf0 : 0 ≤ Cf t (G4 t)
+hK : Kbar (G4 t) ≤ Kbar4UB t
+hK0 : 0 ≤ Kbar (G4 t)
+hBf0 : 0 ≤ Bf4UB t
+hCf4UB0 : 0 ≤ Cf4UB t
+hBfS : Bf t (G4 t) * (Sbar (B4 t) + Sbar (G4 t)) ≤ Bf4UB t * (Sbar (B4 t) + Sbar (G4 t))
+hBs : Bf4UB t * (Sbar (B4 t) + Sbar (G4 t)) ≤ Bf4UB t * SsumUB t
+hCfK : Cf t (G4 t) * Kbar (G4 t) ≤ Cf4UB t * Kbar (G4 t)
+hKs : Cf4UB t * Kbar (G4 t) ≤ Cf4UB t * Kbar4UB t
+hfinal :
+  Bf t (G4 t) * (Sbar (B4 t) + Sbar (G4 t)) + Cf t (G4 t) * Kbar (G4 t) ≤ Bf4UB t * SsumUB t + Cf4UB t * Kbar4UB t
+L : ℝ := log t
+hL0 hL0' : 0 ≤ L
+hTden : 0 < t ^ 6 * c4sq
+hc4 : c4sq = 62000000 * 62000000
+hinv : 2 + 1 / t + 1 / (t * t) ≤ 2001001 / 10 ^ 6
+hS0 : 0 ≤ 20 + 4 * log t
+h1 : (2 + 1 / t + 1 / (t * t)) * (20 + 4 * log t) ≤ 2001001 / 10 ^ 6 * (20 + 4 * log t)
+hD : 0 < 10 ^ 6 * (62000000 * 62000000) * t ^ 6
+⊢ (t * (2 * t + 1) + 1) * (20 + 4 * log t) * 10 ^ 6 ≤ t ^ 2 * (20 + 4 * log t) * 2001001
+RhAttack/S4Strip.lean:921:92: error: unsolved goals
+t : ℝ
+ht : 1000 ≤ t
+ht0 : 0 < t
+hBf : Bf t (G4 t) ≤ Bf4UB t
+hSsum : Sbar (B4 t) + Sbar (G4 t) ≤ SsumUB t
+hSs0 : 0 ≤ Sbar (B4 t) + Sbar (G4 t)
+hCf : Cf t (G4 t) ≤ Cf4UB t
+hCf0 : 0 ≤ Cf t (G4 t)
+hK : Kbar (G4 t) ≤ Kbar4UB t
+hK0 : 0 ≤ Kbar (G4 t)
+hBf0 : 0 ≤ Bf4UB t
+hCf4UB0 : 0 ≤ Cf4UB t
+hBfS : Bf t (G4 t) * (Sbar (B4 t) + Sbar (G4 t)) ≤ Bf4UB t * (Sbar (B4 t) + Sbar (G4 t))
+hBs : Bf4UB t * (Sbar (B4 t) + Sbar (G4 t)) ≤ Bf4UB t * SsumUB t
+hCfK : Cf t (G4 t) * Kbar (G4 t) ≤ Cf4UB t * Kbar (G4 t)
+hKs : Cf4UB t * Kbar (G4 t) ≤ Cf4UB t * Kbar4UB t
+hfinal :
+  Bf t (G4 t) * (Sbar (B4 t) + Sbar (G4 t)) + Cf t (G4 t) * Kbar (G4 t) ≤ Bf4UB t * SsumUB t + Cf4UB t * Kbar4UB t
+L : ℝ := log t
+hL0 hL0' : 0 ≤ L
+hTden : 0 < t ^ 6 * c4sq
+hb : Bf4UB t * SsumUB t ≤ 2001001 * (20 + 4 * L) / (10 ^ 6 * c4sq * t ^ 6)
+⊢ (4 * t * t + 2) * ((10 + 2 * log t) / (2 * 62000000 * 62000000 * t ^ 8)) ≤
+    2000001 * (10 + 2 * L) / (10 ^ 6 * c4sq * t ^ 6)
+RhAttack/S4Strip.lean:820:66: error: unsolved goals
+t : ℝ
+ht : 1000 ≤ t
+ht0 : 0 < t
+hBf : Bf t (G4 t) ≤ Bf4UB t
+hSsum : Sbar (B4 t) + Sbar (G4 t) ≤ SsumUB t
+hSs0 : 0 ≤ Sbar (B4 t) + Sbar (G4 t)
+hCf : Cf t (G4 t) ≤ Cf4UB t
+hCf0 : 0 ≤ Cf t (G4 t)
+hK : Kbar (G4 t) ≤ Kbar4UB t
+hK0 : 0 ≤ Kbar (G4 t)
+hBf0 : 0 ≤ Bf4UB t
+hCf4UB0 : 0 ≤ Cf4UB t
+hBfS : Bf t (G4 t) * (Sbar (B4 t) + Sbar (G4 t)) ≤ Bf4UB t * (Sbar (B4 t) + Sbar (G4 t))
+hBs : Bf4UB t * (Sbar (B4 t) + Sbar (G4 t)) ≤ Bf4UB t * SsumUB t
+hCfK : Cf t (G4 t) * Kbar (G4 t) ≤ Cf4UB t * Kbar (G4 t)
+hKs : Cf4UB t * Kbar (G4 t) ≤ Cf4UB t * Kbar4UB t
+hfinal :
+  Bf t (G4 t) * (Sbar (B4 t) + Sbar (G4 t)) + Cf t (G4 t) * Kbar (G4 t) ≤ Bf4UB t * SsumUB t + Cf4UB t * Kbar4UB t
+L : ℝ := log t
+hL0 hL0' : 0 ≤ L
+hTden : 0 < t ^ 6 * c4sq
+hb : Bf4UB t * SsumUB t ≤ 2001001 * (20 + 4 * L) / (10 ^ 6 * c4sq * t ^ 6)
+hc : Cf4UB t * Kbar4UB t ≤ 2000001 * (10 + 2 * L) / (10 ^ 6 * c4sq * t ^ 6)
+⊢ Bf t (G4 t) * (Sbar (B4 t) + Sbar (G4 t)) + Cf t (G4 t) * Kbar (G4 t) ≤ X4UBfun t
+RhAttack/S4Strip.lean:922:32: error: unexpected token ','; expected command

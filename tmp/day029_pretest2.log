@@ -1,0 +1,17 @@
+tail cache: (10000000, 31946000] 52290633 + band 2792198664; G_LAST = 1006345999.847005
+day029 V2: G_LAST = 1006345999.847005; (1e18,1e30] log-quad npts=400
+4e8  npts=200    E= -0.9326  Efull= +0.1015  resid= 1.66553e+01  residf= 1.04347e+00
+4e8               margin_old= 0.30264  margin_old2= 0.53769  margin_new=10.35781  margin_new_m= 0.64893
+4e8  npts=6400   E= -0.9326  Efull= +0.1015  resid= 1.66553e+01  residf= 1.04347e+00
+4e8               margin_old= 0.30264  margin_old2= 0.53769  margin_new=10.35781  margin_new_m= 0.64893
+4e8  | B_best=19.0574  p8_B(t,n4)=5.613e-22  |zeta|=10.8081 dev=1.0000  Re Qext=-1.0341 (|zeta|/B t^2 law check: E_model=-0.9326)
+6e8  npts=200    E= -2.0674  Efull= +0.2593  resid= 3.97891e+01  residf= 1.31653e+00
+6e8               margin_old= 0.09129  margin_old2= 0.23373  margin_new= 4.37758  margin_new_m= 0.14484
+6e8  npts=6400   E= -2.0674  Efull= +0.2593  resid= 3.97891e+01  residf= 1.31653e+00
+6e8               margin_old= 0.09129  margin_old2= 0.23373  margin_new= 4.37758  margin_new_m= 0.14484
+6e8  | B_best=23.3405  p8_B(t,n4)=2.495e-22  |zeta|=5.7632 dev=1.0000  Re Qext=-2.3267 (|zeta|/B t^2 law check: E_model=-2.0674)
+1e9  npts=200    E= -3.8792  Efull= +2.5839  resid= 3.95201e+02  residf= 7.71051e+00
+1e9               margin_old= 0.01961  margin_old2= 0.22039  margin_new= 1.08165  margin_new_m= 0.02110
+1e9  npts=6400   E= -3.8792  Efull= +2.5839  resid= 3.95201e+02  residf= 7.71051e+00
+1e9               margin_old= 0.01961  margin_old2= 0.22039  margin_new= 1.08165  margin_new_m= 0.02110
+1e9  | B_best=30.1324  p8_B(t,n4)=8.980e-23  |zeta|=8.3400 dev=1.0000  Re Qext=-6.4631 (|zeta|/B t^2 law check: E_model=-3.8792)

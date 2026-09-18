@@ -1,0 +1,18 @@
+RhAttack/S4Asm.lean:257:35: warning: Variable name `hd0` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hd0
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+RhAttack/S4Asm.lean:314:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  if 1000 ≤ t0 ∧ d0 ≤ 1 / 2 then ?m.60 else ?m.61
+in the target expression
+  BwireR t0 d0 + MrR t0 d0 < floR t0 d0
+
+hX : S4W.Xwire S4W.T0 ≤ S4W.RX
+t0 d0 : ℝ
+ht0 : 1000 ≤ t0
+hd0 : 0 < d0
+hdmax : d0 ≤ 1 / 2
+hown : 1000 ≤ t0 ∧ d0 ≤ 1 / 2
+⊢ BwireR t0 d0 + MrR t0 d0 < floR t0 d0

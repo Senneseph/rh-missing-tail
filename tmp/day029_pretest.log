@@ -1,0 +1,22 @@
+tail cache: (10000000, 31946000] 52290633 + band 2792198664; G_LAST = 1006345999.847005
+day029 pre-test: G_LAST = 1006345999.847005; npts ladder [200, 800, 1600, 6400]
+4e8  npts=200    E= -0.9326  resid= 1.66553e+01  margin_old=   0.3026  margin_new=   0.6489  margin_res=   0.6489
+4e8  npts=800    E= -0.9326  resid= 1.66553e+01  margin_old=   0.3026  margin_new=   0.6489  margin_res=   0.6489
+4e8  npts=1600   E= -0.9326  resid= 1.66553e+01  margin_old=   0.3026  margin_new=   0.6489  margin_res=   0.6489
+4e8  npts=6400   E= -0.9326  resid= 1.66553e+01  margin_old=   0.3026  margin_new=   0.6489  margin_res=   0.6489
+Traceback (most recent call last):
+  File "/home/jsmille/Projects/rh-missing-tail/scripts/rh/day029_s1gap_pretest.py", line 129, in <module>
+    run()
+  File "/home/jsmille/Projects/rh-missing-tail/scripts/rh/day029_s1gap_pretest.py", line 113, in run
+    mw_t = mwire(t, t)
+           ^^^^^^^^^^^
+  File "/home/jsmille/Projects/rh-missing-tail/scripts/rh/day029_s1gap_pretest.py", line 95, in mwire
+    return (M.Bf(t, G)*(M.Sbar(2*G) + M.Sbar(G))
+            ^^^^^^^^^^
+  File "/home/jsmille/Projects/rh-missing-tail/scripts/rh/day023_p11c_1e7.py", line 126, in Bf
+    + uw / (1 - uw) + t / (G * G + mp.mpf(1) / 4))
+      ~~~^~~~~~~~~~
+  File "<string>", line 7, in __div__
+  File "/home/jsmille/.local/lib/python3.12/site-packages/mpmath/libmp/libmpf.py", line 960, in mpf_div
+    raise ZeroDivisionError
+ZeroDivisionError

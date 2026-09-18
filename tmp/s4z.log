@@ -1,0 +1,10 @@
+RhAttack/S4Strip.lean:968:9: error: invalid 'calc' step, left-hand side is
+  (4 * t * t + 2) * ((10 + 2 * log t) / (2 * c4sq * t ^ 8)) : ℝ
+but is expected to be
+  (4 * t * t + 2) * ((10 + 2 * log t) / (2 * 62000000 * 62000000 * t ^ 8)) : ℝ
+RhAttack/S4Strip.lean:819:0: error: (deterministic) timeout at `whnf`, maximum number of heartbeats (200000) has been reached
+
+Note: Use `set_option maxHeartbeats <num>` to set the limit.
+
+Hint: Additional diagnostic information may be available using the `set_option diagnostics true` command.
+RhAttack/S4Strip.lean:1067:6: error: (kernel) unknown constant 'S4Strip.st_X4bound'
