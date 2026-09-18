@@ -198,35 +198,40 @@ def model_E(t):
             "zeta": float(abs(z)), "t": float(t)}
 
 
-T = TailHi2()
-print("G_LAST_new = %.6f  (new-band zeros %d)"
-      % (T.G_LAST, T.new.size - T.new0), flush=True)
+def _main():
+    T = TailHi2()
+    print("G_LAST_new = %.6f  (new-band zeros %d)"
+          % (T.G_LAST, T.new.size - T.new0), flush=True)
 
-STRADDLE = [(1.2e9, "1.2e9"), (1.4e9, "1.4e9"), (1.6e9, "1.6e9"),
-            (1.8e9, "1.8e9"), (1.95e9, "1.95e9")]
-MODEL = [mpm.mpf("2.5e9"), mpm.mpf("4e9"), mpm.mpf("6e9"),
-         mpm.mpf("1e10"), mpm.mpf("2e10"), mpm.mpf("3e10")]
+    STRADDLE = [(1.2e9, "1.2e9"), (1.4e9, "1.4e9"), (1.6e9, "1.6e9"),
+                (1.8e9, "1.8e9"), (1.95e9, "1.95e9")]
+    MODEL = [mpm.mpf("2.5e9"), mpm.mpf("4e9"), mpm.mpf("6e9"),
+             mpm.mpf("1e10"), mpm.mpf("2e10"), mpm.mpf("3e10")]
 
-straddle_rows = []
-with cf.ProcessPoolExecutor(max_workers=int(os.environ.get("WORKERS", "6"))) \
-        as ex:
-    futs = {ex.submit(scan_one, x, lab): lab
-            for (x, lab) in STRADDLE}
-    for f in cf.as_completed(futs):
-        r = f.result()
-        if r:
-            straddle_rows.append(r)
-            print("sweep %s" % r["label"], r, flush=True)
+    straddle_rows = []
+    with cf.ProcessPoolExecutor(max_workers=int(os.environ.get("WORKERS", "6"))) \
+            as ex:
+        futs = {ex.submit(scan_one, x, lab): lab
+                for (x, lab) in STRADDLE}
+        for f in cf.as_completed(futs):
+            r = f.result()
+            if r:
+                straddle_rows.append(r)
+                print("sweep %s" % r["label"], r, flush=True)
 
-print("g   t_best  margin_old margin_new residf    Efull   zeta  dev")
-for r in sorted(straddle_rows, key=lambda r: r["label"]):
-    print("%8.3g %16.4f  %10.4f %11.4f  %8.4f  %+.4f  %6.3f %7.4f %s"
-          % (r["g"], r["t"], r["mold"], r["mnew"], r["residf"],
-             r["Efull"], r["zeta"], r["dev"], r["label"]))
+    print("g   t_best  margin_old margin_new residf    Efull   zeta  dev")
+    for r in sorted(straddle_rows, key=lambda r: r["label"]):
+        print("%8.3g %16.4f  %10.4f %11.4f  %8.4f  %+.4f  %6.3f %7.4f %s"
+              % (r["g"], r["t"], r["mold"], r["mnew"], r["residf"],
+                 r["Efull"], r["zeta"], r["dev"], r["label"]))
 
-print("\nMODEL-LEVEL Efull (t > G_LAST; the zero region (G_LAST, t) is")
-print("density-modeled; margin not evaluable there):")
-for tm in MODEL:
-    r = model_E(tm)
-    print("  t = %9.3g : Efull = %+.4f   |zeta| = %.4f"
-          % (r["t"], r["Efull"], r["zeta"]), flush=True)
+    print("\nMODEL-LEVEL Efull (t > G_LAST; the zero region (G_LAST, t) is")
+    print("density-modeled; margin not evaluable there):")
+    for tm in MODEL:
+        r = model_E(tm)
+        print("  t = %9.3g : Efull = %+.4f   |zeta| = %.4f"
+              % (r["t"], r["Efull"], r["zeta"]), flush=True)
+
+
+if __name__ == "__main__":
+    _main()

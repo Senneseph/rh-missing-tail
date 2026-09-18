@@ -1,0 +1,37 @@
+G_LAST_new = 2001745999.627241  (new-band zeros 3053546936)
+sweep 1.4e9 {'g': 1400000000.00454, 'label': '1.4e9', 'mold': 0.02010724838628958, 'mnew': 2.6836354158433164, 'residf': 0.26914911877606396, 'Efull': 0.4662169819804234, 't': 1400000002.00454, 'zeta': 0.7222981052267428, 'dev': 1.0000000028571607}
+sweep 1.2e9 {'g': 1199999999.9726377, 'label': '1.2e9', 'mold': 0.024578006247244107, 'mnew': 3.7696785255465524, 'residf': 0.21662442030841578, 'Efull': 0.3082584692832964, 't': 1200000001.4726377, 'zeta': 0.8166044233040717, 'dev': 1.0000000025000277}
+sweep 1.6e9 {'g': 1600000000.1039336, 'label': '1.6e9', 'mold': 0.04804271092917706, 'mnew': 1.9726266987058985, 'residf': 0.9514461340787851, 'Efull': 0.7071209320220178, 't': 1599999998.1039336, 'zeta': 1.876848051449701, 'dev': 0.99999999734375}
+sweep 1.8e9 {'g': 1799999999.9419572, 'label': '1.8e9', 'mold': 0.061529171516341435, 'mnew': 1.462992986506134, 'residf': 1.7748799959379105, 'Efull': 1.150527702259309, 't': 1800000000.4419572, 'zeta': 2.596636984504478, 'dev': 1.0000000005556111}
+sweep 1.95e9 {'g': 1950000000.1486907, 'label': '1.95e9', 'mold': 0.06614115224192779, 'mnew': 1.1441070537194258, 'residf': 2.58177026630061, 'Efull': 2.0718233367102994, 't': 1950000006.1486907, 'zeta': 2.953821554580232, 'dev': 1.0000000061538505}
+g   t_best  margin_old margin_new residf    Efull   zeta  dev
+ 1.2e+09  1200000001.4726      0.0246      3.7697    0.2166  +0.3083   0.817  1.0000 1.2e9
+ 1.4e+09  1400000002.0045      0.0201      2.6836    0.2691  +0.4662   0.722  1.0000 1.4e9
+ 1.6e+09  1599999998.1039      0.0480      1.9726    0.9514  +0.7071   1.877  1.0000 1.6e9
+ 1.8e+09  1800000000.4420      0.0615      1.4630    1.7749  +1.1505   2.597  1.0000 1.8e9
+1.95e+09  1950000006.1487      0.0661      1.1441    2.5818  +2.0718   2.954  1.0000 1.95e9
+
+MODEL-LEVEL Efull (t > G_LAST; the zero region (G_LAST, t) is
+density-modeled; margin not evaluable there):
+  t =   2.5e+09 : Efull = +6571658.3219   |zeta| = 0.0893
+  t =     4e+09 : Efull = +6163394.2426   |zeta| = 0.2179
+  t =     6e+09 : Efull = +1647741.8488   |zeta| = 2.2629
+  t =     1e+10 : Efull = +14706190.1822   |zeta| = 0.4576
+  t =     2e+10 : Efull = -171686.0150   |zeta| = 0.3938
+  t =     3e+10 : Efull = -6393117.7723   |zeta| = 5.1502
+
+============================================================
+CORRECTION (appended 2026-09-17, after the fact):
+Straddle rows (1.2e9 ... 1.95e9): VALID (t < G_LAST in every case;
+the singular region of the kernel sits inside the discrete data;
+the (G_LAST, 1e18] quad is smooth there).
+MODEL-LEVEL rows (2.5e9 ... 3e10): BROKEN -- the density quad over
+(G_LAST, 1e18] carries the log-singularity at g = t in the INTERIOR
+of its 400-point geometric grid; the quadrature error is O(1e6-1e7)
+(the values above, including the sign flips, are artifacts, not
+measurements).  Re-run with the singular region split at g = t
+(tanh-sinh, singularity on interval endpoints): see
+day029_efull_model_fixed.py (running).
+Separately: the Efull LEVEL comparability question across splice
+positions (G_LAST = 1.0063e9 vs 2.0017e9) is under measurement:
+day029_efull_calibration.py (running).
