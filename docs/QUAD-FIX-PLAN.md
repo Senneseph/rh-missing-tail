@@ -1,7 +1,22 @@
-# QUAD-FIX PLAN — mpmath complex-tail-quad defect in the S1 kernel (2026-09-17, IN PROGRESS)
+# QUAD-FIX PLAN — the mpmath complex-tail-quad "defect" (2026-09-17/18, RESOLVED — NO DEFECT)
 
-Status: **OPEN — in flight.** This file is the reference document for the
-fix until it lands; every step has an acceptance criterion and a status.
+Status: **RESOLVED 2026-09-18 — the defect was a ghost.** The headline
+"complex vs real" discrepancy was an **A/B interval confound**: the complex
+number (−1.7096e9) was the quad over (G_last = 2.0017e9, 1e18] (hi-run
+construction) and the real numbers (−4.2364e9) were over (G1 = 1.0063e9,
+1e18] (sweep construction); their difference IS the genuine boundary-layer
+integral over (G1, G_last] (−2.5267e9), misread as a library error. The
+SAME-INTERVAL per-cell A/B (`day029_cell_diff.py`) then agreed **400/400
+cells to all displayed digits** (complex == real; boundary layer cell
+included; est. error 1e-41). All recorded Efull/margin/residf values stand.
+Genuine residuals left: (i) the hi-run MODEL points (t > G_last) straddle
+the log-singularity at g = t INSIDE the density-quad interval — documented
+mpmath limitation (no mid-interval singularities; split the interval) —
+split re-run pending under a single self-consistent construction; (ii) the
+splice-comparability calibration D(t) (script −inf bug) — re-run pending;
+(iii) floor note: measured dev = min_δ|R−1| dips to 0.9999999973 at the
+1.6e9 straddle (in the P8 floor family; pin unchanged). Below: the
+investigation record, corrected.
 Companion to: `docs/KNOWN_LIMITATIONS.md`, `DISCOVERY_LOG.md`.
 
 ## The symptom (exact, reproduced)
@@ -81,9 +96,10 @@ NOT a version regression, NOT the sympy-downgrade.
 ## The fix (steps, acceptance, status)
 
 1. **Locate the defect** — per-cell complex vs real quad over the 400
-   cells; tabulate |Δ| per cell + the stopping degree (verbose) of the
-   bad cells. *Acceptance: the bad cell(s) identified and the
-   early-stop mechanism visible in the degree trace.* — **IN FLIGHT**
+   cells; |Δ| per cell + stopping-degree traces. *Acceptance: the bad
+   cell(s) identified.* — **DONE: NO bad cells.** 400/400 exact agreement;
+   the "defect" was the interval confound above. (Step 2 as written is
+   moot — no fix needed; retained for the record.)
 2. **Fix the quad layer** — the kernel tail (`quad_rem`/`quad_ext`
    usage in the sweep/hi/calibration/model scripts) integrates **re and
    im as separate REAL quads** (validated construction); the complex
