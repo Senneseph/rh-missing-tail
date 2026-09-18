@@ -5289,3 +5289,51 @@ re-pulled 2026-09-17 verified: Nt frontier 73426758 exact, seam gap
   level, runtime OK, venv fallback if ever needed). `rh-missing-tail/tmp/`
   adopted as the scratch directory (owner-migrated; now tracked). Long
   jobs: leave 2 logical cores free (32-core box).
+
+## day030 (cont.) — CORRECTION (appended): the "discovery" above is RETRACTED — A/B interval confound; complex tail-quad VERIFIED CORRECT; all recorded values STAND
+
+- **The confound.** The A/B in the section above compared (a) the quad of
+  the HI-RUN construction over (G_last = 2.0017459996e9, 1e18] — where the
+  boundary layer (t, 3t) is LIST-SUMMED over the measured zeros — against
+  (c/d/e) the SWEEP-construction interval (G1 = 1.0063459998e9, 1e18] —
+  where the boundary layer is DENSITY-QUAD'd. The "+2.5267e9 discrepancy"
+  equals exactly the genuine boundary-layer integral over the interval
+  DIFFERENCE (G1, G_last]: −4.2363792697e9 − (−1.7096447196e9) =
+  −2.5267345501e9. An interval difference, misread as a library error.
+- **Same-interval verification.** `day029_cell_diff.py` over the sweep's
+  full 400-cell geometric grid of (G1, 1e18], per-cell complex quad vs
+  per-cell real quad: **400/400 cells agree to all displayed digits**
+  (max |Δ| = 0.000000; cell sums identical at −4236379269.697752 both
+  paths; the boundary-layer cell 0 converges to est. error 1e-41 on both).
+  Identical on mpmath 1.3.0 and 1.4.1.
+- **Retractions (in the section above):** (i) "every recorded
+  Efull/margin/residf is a COMPLEX-PATH value [artifact]" — RETRACTED; all
+  recorded values stand as recorded; (ii) the "margin relaxes to dev"
+  verdict-level claim and the "dev-floor reframe" — withDRAWN (dev is just
+  the recorded measured floor statistic, which independently dips to
+  0.9999999973 at the 1.6e9 straddle — in the P8-floor family; the pin is
+  unchanged); (iii) the "corrected table pending" status — moot.
+- **Genuine residuals (carried forward — these are real, not ghost):**
+  (i) hi-run MODEL points (t ≥ 2.5e9, the broken O(1e6–1e7) values): for
+  t > G_last the density quad (G_last, 1e18] carries the log-singularity
+  at g = t IN THE INTERIOR of its interval — the documented mpmath
+  limitation (quad does not cope with mid-interval singularities; split
+  the interval at g = t) — `day029_efull_model_fixed.py` (the split) must
+  be re-run under ONE self-consistent construction (its earlier "+2.2e9
+  residual" compare itself sat in the confound cascade); (ii) the
+  splice-comparability calibration D(t) = Efull(t;G1) − Efull(t;G2) is
+  pending a script fix (the −inf exclusion bug); sum-vs-density over
+  (G1, G2] is predicted O(1e-4) (smooth integrand, t < G1) — a clean
+  one-run test; (iii) nothing else.
+- **Lesson (permanent).** A/B discipline: before declaring a library
+  defect, pin ALL free parameters of the comparison (here: the splice G).
+  A "discrepancy" whose magnitude exactly equals the integral over the
+  interval DIFFERENCE is an interval difference.
+- **Living docs updated accordingly:** KNOWN_LIMITATIONS H5 →
+  RESOLVED/retracted (+ H2 note corrected); RH-PROOF-OUTLINE brackets
+  reverted to the verified stance; docs/QUAD-FIX-PLAN.md flipped to
+  RESOLVED (investigation record retained); INDEX row corrected. This
+  section supersedes the interpretive content of the section above; that
+  section's A/B numeric table stands, now with the corrected interval
+  labels (the complex number is the (G_last, 1e18] interval; the real
+  numbers are the (G1, 1e18] interval).
