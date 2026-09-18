@@ -64,6 +64,7 @@ math risk.
 
 ### H2 — The (10¹⁸, ∞) kernel section is numerically bounded, not analytically
 **Status (2026-09-17, day029 rescheck):** the (400, 400) sweep configuration is RESOLUTION-STABLE — Efull(1e9/4e8/6e8) stable to < 5×10⁻⁵ across the full npts 200→2000 × npts2 400→2000 ladder (both sections, dps-30, differential from the sweep anchors; `day029_efull_rescheck.py`, `out_day029_efull_rescheck.txt`). The quad-resolution part of H2 is therefore closed at screen level for the verified range; the (10³⁰, ∞) tail remains bounded by the "1 − O(t²/10³⁰) < 10⁻⁹" heuristic, and a PROVABLE comparison bound on it (the t²/g²·log-density decay; the classical S̄(t) technique) is the remaining analytic unit, Lean-portable.
+**Note (2026-09-18):** the rescheck's "resolution-stable" is stability **within the complex path** over npts; the complex path itself is known wrong against the validated real path (H5) — the closure claim above applies to the recorded (complex-path) numbers; the corrected tail quad is in flight (docs/QUAD-FIX-PLAN.md).
 **Background:** the full-horizon correction that dissolves the 25x sub-1 dips
 (verdict (A), day029) folds the kernel's (10¹⁸, 10³⁰] product section
 in via a **400-node log-quadrature without an a-priori error bound** (now
@@ -87,6 +88,9 @@ two otherwise-LEAN theorems (the S4 window branch; the P8 A5 near
 terminal). *Fix:* a LEAN universal lower bound on the near scale
 (LEAN atoms are ~90% present; the constant is the gap), or a
 P–T-grade height-scaled re-audit covering the claimed range.
+
+### H5 — The kernel tail quads (G,10¹⁸] and (10¹⁸,10³⁰] ran on mpmath's complex path, which is known wrong here
+**Status (2026-09-18, day029/030 discovery):** at the 1e9 anchor the complex-integrand tail quad (G1, 1018] — the construction of **every** recorded run, onset through day029 — is **+2.5267e9 (in log)** off from the real-path integral of Re(integrand), which triple-agrees to 13 digits (401-list / single interval / per-cell sum at −4236379269.6977525 vs complex −1709644719.5582716). Identical on mpmath 1.3.0 **and** 1.4.1: documented library clause ("quad() may fail to provide full accuracy" for functions with many bumps), not a version regression. The true tail sum (γ > G) IS the correctly-converged density integral (Σ−∫ fluctuation O(1e-5); N ~ 6×10¹⁴; smooth integrand on g > t) — this is a MEASUREMENT-layer defect, not a mathematics defect. **Consequences (quantified):** (i) every recorded Efull/residf/margin since onset is a complex-path value; (ii) margin ≥ 1 holds in **both** constructions at all 36 windows/straddles — the corrected margin relaxes to dev = min_δ|R(s,δ)−1| (measured 1.0000000028 / 1.0000000025 / 0.9999999973 / 1.0000000006 / 1.0000000062 at 1.2/1.4/1.6/1.8/1.95e9) — the realized scale is inside the pinned near-floor band [0.9975, 1.0201] (H3) with one sub-1 dip (−2.7e-9 at the 1.6e9 straddle); (iii) the S1 asymptotic question is re-expressed as the dev-floor question (does realized min_δ|R−1| stay ≥ 1 / in-band above 1e9?), replacing the Efull saturation-vs-divergence framing. **Open:** cell-level mechanism (QUAD-FIX step 1 in flight) + corrected anchor/straddle table (step 3); until then the complex-path numbers stand as recorded, tagged.
 
 ### H4 — The "min over d" in the straddle statistic is a grid minimum
 The dev-minimum over the off-pair distance is taken on a finite grid

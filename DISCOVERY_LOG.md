@@ -5249,3 +5249,43 @@ re-pulled 2026-09-17 verified: Nt frontier 73426758 exact, seam gap
   data script that will be imported for its helpers gets a main guard before
   first launch.
 - Runs (background): calibration 12 heights ~40--50 min; model-fix 6 heights ~25 min.
+
+## day030 — mpmath complex-tail quad construction DISCOVERED; recorded Efull/margins are COMPLEX-PATH values (2026-09-18)
+
+- **Discovery.** At the 1e9 anchor (t = 999999994.6157, splice G1 = 1.0063e9),
+  the kernel tail quad (G1, 1018] computed with the **complex integrand**
+  (401-pt breakpoint grid, dps-30) — the construction **every** run from onset
+  through day029 used (sweep, hi-run, rescheck, 25x/25y pins) — is
+  **+2.5267e9 (in log)** off from the **real-path** integral of Re(integrand):
+  the real path triple-agrees to 13 digits (401-list = single interval =
+  per-cell sum: −4236379269.6977525) while the complex path gives
+  −1709644719.5582716. **Identical on mpmath 1.3.0 and 1.4.1**: systematic
+  library weakness (the documented "quad() may fail to provide full accuracy"
+  clause for functions with many bumps), NOT the sympy-downgrade. Boundary-
+  layer cell 0 converges fully on BOTH paths (est. error 1e-41); the defect
+  sits in one or more of the other 399 cells (identification in flight:
+  day029_cell_diff.py).
+- **Tag.** Every Efull and every margin/residf recorded since onset is a
+  **COMPLEX-PATH value**: the A-1 31-window series (Efull 0.0009 → 2.5839),
+  the A-2 straddles (Efull 0.3083 → 2.0718; margin_new 1.14–3.77), and the
+  hi model points (already flagged broken separately).
+- **Robust (construction-independent).** margin ≥ 1 holds in **both**
+  constructions at all 36 windows/straddles [3.9e7, 1.95e9]: with the
+  corrected (true) tail the margin relaxes to dev = min_δ|R(s,δ) − 1|, and
+  measured dev at the six anchor heights is 1.0000000028 / 1.0000000025 /
+  **0.9999999973 (1.6e9 straddle — below 1)** / 1.0000000006 /
+  1.0000000062 (1.2/1.4/—/1.8/1.95e9): the realized scale sits in the pinned
+  near-floor band [0.9975, 1.0201] (H3) with one measured sub-1 dip (−2.7e-9)
+  at 1.6e9. S1 directional verdict: UNCHANGED.
+- **Reframe.** The "Efull saturation vs divergence" question is REPLACED by
+  the **dev-floor question**: as the splice moves above 1e9, does the
+  realized min_δ|R−1| stay ≥ 1 / within the pinned band? The complex-path
+  Efull series was tracing quad error, not kernel mass.
+- **Status.** docs/QUAD-FIX-PLAN.md steps 1–3 in flight: cell location →
+  re/im separate real-quads in the tail → corrected anchor + straddle table.
+  Until that lands, all recorded Efull/margin numbers are complex-path.
+- **Environment decisions (owner).** mpmath 1.4.1 FINAL (do not revisit the
+  version question; sympy 1.14.0's mpmath<1.4 pin unsatisfied at metadata
+  level, runtime OK, venv fallback if ever needed). `rh-missing-tail/tmp/`
+  adopted as the scratch directory (owner-migrated; now tracked). Long
+  jobs: leave 2 logical cores free (32-core box).
