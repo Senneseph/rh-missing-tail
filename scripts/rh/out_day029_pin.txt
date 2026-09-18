@@ -1,0 +1,50 @@
+day029 dps-30/50 CERTIFIED PIN - the tightest high-t window (25x[7] best
+straddle at the 1e9 A-1 endpoint), per the 25y protocol on the verified
+TH kernel (P1.1e wire form, low split G_LAST = 1.0063459998470055e9,
+(1e18, 1e30] 400-quad extension, (1e30, inf) factor 1 - O(t^2/1e30)
+< 1e-9 at this t).
+
+pair:  (g, t) = (1000000000.1156509, 999999994.6156509)
+       (the A-1 1e9 window best straddle, k = -11: t = g - 5.5, k on
+       the sweep's 25-point lattice; t_best as printed by the sweep:
+       999999994.6157 to 4 digits - exact pair recovered exactly as
+       g + k/2)
+
+dps-30 (tracked):
+  dev = 0.9999999889   |zeta| = 0.7102743991
+  E_model = -3.8792143344   Efull = +2.5838537010   Re Qext = -6.4630680354
+  resid = 33.6571939166    residf = 0.6566610723
+  B_best = 30.132395       p8_B(t, n4) = 8.980265e-23
+  margin  (25x form, resid)    = 0.0111346445
+  margin2 (25x form, residf)   = 0.0230690539
+  margin3 (t^4 wire, residf)   = 1.0816453437
+
+dps-50 (tracked):
+  Efull = +2.5838537091     residf = 0.6566610727
+  margin  = 0.0111346445    margin2 = 0.0230690539
+  margin3 (t^4 wire, residf)   = 1.0816453430
+
+DUAL-PRECISION AGREEMENT:
+  margin3: 1.0816453437 (30) vs 1.0816453430 (50)  ->  |d| = 7e-10
+  Efull:   +2.5838537010 vs +2.5838537091          ->  |d| = 8.1e-8
+  residf:  0.6566610723 vs 0.6566610727            ->  |d| = 4e-9
+
+PINNED CONSTANT (the high-t tightest point, S1 squeeze, t^4 wire):
+  margin3 = 1.08164534 +/- 0.00000001   [>= 1, margin 0.0816 above
+  the squeeze line]
+
+Notes:
+- Reproduces the A-1 sweep's recorded 1.0816/0.6567/+2.5839/0.710 to
+  their printed digits (sweep = screen level on the same kernel).
+- The 25x OLD form (margin2 = 0.02307) stays sub-1 by construction
+  (B_best = 30.13 envelope loose at this t) - regression value
+  only; the t^4 wire (p8_B = 9e-23) is the closure statistic.
+- Kernel bug found while pinning: the 25x-verbatim hand tail in
+  day029_pin covered only (3.1946e7, 1.006346e9] (float64) and
+  lacked the nlt*pi principal-branch correction - missing the
+  (1e7, 3.1946e7] section (52290633 zeros) gives Efull +4.086e8
+  instead of +2.584 at t ~ 1e9 (residf degenerating to |zeta|,
+  margin3 degenerating to dev). Fixed: the pin now uses the
+  verified TH.pairlog_sum (cache_lo + band + nlt*pi) with the
+  dps-30 main product as the pin's refinement over the sweep's
+  float64 one.  See DISCOVERY_LOG.

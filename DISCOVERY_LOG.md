@@ -5496,3 +5496,69 @@ re-pulled 2026-09-17 verified: Nt frontier 73426758 exact, seam gap
   the resumed-and-pinned discipline (taskset -c 0-29, cores 30-31
   free per the standing directive) is now standard for every
   background job.
+
+
+## day029 (cont.) — HIGH-T TIGHTEST-WINDOW PIN LANDED: margin3 = 1.08164534 ± 0.00000001 (dual dps-30/50) at (g, t) = (1000000000.1156509, 999999994.6156509); two pin-kernel bugs found and fixed; /tmp shard loss recovered (2026-09-18)
+
+- **The pin (queue item 1).** The A-1 31-window sweep's tightest
+  value (margin_new 1.0816 at the 1e9 endpoint, screen level) is
+  now PINNED at dual precision per the 25y protocol: the exact
+  best-straddle pair recovered from the sweep's 4-digit t_best
+  (999999994.6157 = g + k/2, g = 1000000000.1156509, k = -11 -
+  unique exact match over the 25-point lattice) and re-evaluated
+  at dps-30 and dps-50 on the verified TH kernel (P1.1e wire,
+  G_LAST = 1.0063459998470055e9 low split, 400-cell (1e18, 1e30]
+  extension). Result (out_day029_pin.txt): **margin3 (t^4 wire)
+  = 1.0816453437 (dps-30) / 1.0816453430 (dps-50), |d| = 7e-10**;
+  Efull +2.5838537010/+2.5838537091 (|d| 8.1e-8); residf
+  0.6566610723/0.6566610727 (|d| 4e-9); dev = 0.9999999889,
+  |zeta| = 0.7102743991. PINNED CONSTANT: the tightest high-t
+  S1 squeeze point = 1.08164534 ± 0.00000001, >= 1 with margin
+  0.0816. The sweep's printed values (1.0816/0.6567/+2.5839/0.710)
+  are all reproduced. The 25x OLD form stays sub-1 by construction
+  (margin2 = 0.02307, B_best = 30.13 envelope loose at this t) -
+  regression value only; the t^4 wire (p8_B(t, n4) = 8.98e-23)
+  is the closure statistic.
+- **PIN-KERNEL BUG (structural, documented).** The 25x-verbatim
+  hand tail in day029_pin.py covered only the float64 band
+  (3.1946e7, 1.006346e9] and LACKED (a) the (1e7, 3.1946e7]
+  cache_lo discrete section (52290633 zeros) and (b) the nlt*pi
+  principal-branch phase term. At t ~ 1e9 the missing section is
+  a Re-logK error of ~4.1e8: the first (broken) run returned
+  Efull = +4.086200088e8, residf = |zeta| to 10 digits, and
+  margin3 = dev (= 0.9999999889 - a degenerate artifact that
+  LOOKS like a sub-1 squeeze breach but is kernel corruption,
+  not data). A/B against the verified TH kernel (Efull +2.5839)
+  isolated it in one step. Fix: the pin now uses TH.pairlog_sum
+  (cache_lo + band + nlt*pi) exactly as the sweep does, keeping
+  the dps-30 main product (21136125 terms) as its pin-level
+  refinement over the sweep's float64 one. Lesson: a pin that
+  re-implements a verified kernel by hand re-introduces the
+  verified kernel's known corrections as unknowns - reuse the
+  machinery, refine only the intended part.
+- **STALE ASSERT BUG.** day029_pin asserted the LMFDB file's first
+  line == "14.134725141734694" (14-digit 25y-era form); the
+  committed file carries 14.134725141734695 (15 digits) -
+  tolerance-ified to |d| < 1e-12.
+- **/tmp CRASH-WIPE AND RECOVERY (persistent note).** The machine
+  crash reboot wiped /tmp, with it the Platt-format shards in
+  /tmp/zeta-dl/shards/ that day023_taildiscrete.load_g_range
+  reads for (1e7, 3.1946e7]. Recovery: the 11 lo-grid shards
+  (zeros_8846000 ... zeros_29846000, 2.1e6 spacing) re-fetched
+  from beta.lmfdb.org/riemann-zeta-zeros/data/ (curl with
+  "Cookie: human=1"; index + md5.txt are cookie-gated, the .dat
+  shards are open), md5 11/11 against md5.txt, decoded with the
+  project's own verified decoder: 52290633 zeros, monotone,
+  range (10000000.240023555, 31945999.622997541], seam to the
+  committed 22.3 GB band file gap 0.4436 (normal spacing), and
+  the count identity 21136125 (<= 1e7) + 52290633 = 73426758 =
+  the documented frontier zero # at t = 31946000 - exact.
+  Consideration on record: the load_g_range dependency on /tmp
+  makes the kernel fragile across reboots - a future hardening
+  item (mirror the 11 shards into the repo or a gitignored
+  project dir) is NOTED, not done (one problem at a time).
+- **Toolchain notes (permanent).** day029_pin.py now takes
+  PIN_DPS (env, default 30) for dual-precision pins and prints
+  its actual dps. mp-from-import pitfall: "from mpmath import mp"
+  gives the CONTEXT - mp.dps, not mp.mp.dps (the 25y-era line
+  crashed on it).

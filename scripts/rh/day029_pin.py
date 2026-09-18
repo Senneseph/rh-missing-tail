@@ -21,7 +21,7 @@ import sys
 import numpy as np
 from mpmath import mp
 
-mp.mp.dps = 30
+mp.dps = int(__import__("os").environ.get("PIN_DPS", "30"))
 LIST = "/home/jsmille/Projects/rh-missing-tail/scripts/rh/" \
        "zeros_T10000000_lmfdb.txt"
 GMAX = mp.mpf("10000000")
@@ -99,7 +99,10 @@ def main():
     npts = int(sys.argv[3]) if len(sys.argv) > 3 else 400
 
     zs = [mp.mpf(line) for line in open(LIST)]
-    assert zs[0] == mp.mpf("14.134725141734694")
+    # tolerance: the LMFDB 1e7 file carries 15-16 digits
+    # (14.1347251417346946); the 25y-era assert on the
+    # 14-digit form is stale.
+    assert abs(zs[0] - mp.mpf("14.134725141734694")) < mp.mpf("1e-12")
     s = mp.mpc(0.5, t)
 
     dev = None
@@ -117,18 +120,17 @@ def main():
         logprod += pairlog(gv, s)
         if i % 2000000 == 0 and i:
             print("main %d/%d" % (i, len(zs)), file=sys.stderr, flush=True)
-    # tail discrete float64 (1e7, 1.006346e9] (25x verbatim) + quad
-    b = np.fromfile(BAND_F64, dtype="<f8")
-    t2 = float(t)*float(t)
-    re = np.longdouble(0); im = np.longdouble(0)
-    CH = 20000000
-    for i in range(0, b.size, CH):
-        c = b[i:i+CH]
-        g2 = c*c
-        A = g2 + 0.25
-        re += np.sum(np.log(np.abs(g2 - t2)) - np.log(A) + 0.5/A)
-        im += np.sum(float(t)/A)
-    hi0 = mp.mpf(repr(float(b[-1])))
+    # tail discrete float64 (1e7, G_LAST] (verified TH machinery):
+    # pairlog_sum covers BOTH the (1e7, 3.1946e7] cache_lo section
+    # AND the 22.3 GB band, PLUS the nlt*pi principal-branch phase
+    # correction.  The 25x-verbatim hand block below the band only
+    # covered (3.1946e7, 1.006346e9] - missing 7.3e7 zeros: at
+    # t ~ 1e9 that is a Re-logK error of ~4.1e8 (Efull +4.086e8
+    # instead of +2.58, residf degenerating to |zeta|).  Documented.
+    import day024_tail_hi1e9 as TH
+    _T = TH.tail()
+    re, im = _T.pairlog_sum(float(t))
+    hi0 = mp.mpf(repr(_T.G_LAST))
     hi1 = mp.mpf("1e18")
 
     def f(gg):
@@ -148,8 +150,9 @@ def main():
     residf = abs(z - Kfull)
     zabs = abs(z)
     B = B_best(t)
-    print("g = %s   t = %s   npts = %d   (dps-30)" % (sys.argv[1],
-          sys.argv[2], npts))
+    print("g = %s   t = %s   npts = %d   (dps-%s)" % (sys.argv[1],
+          sys.argv[2], npts,
+          __import__("os").environ.get("PIN_DPS", "30")))
     print("dev = %.10f  |zeta| = %.10f" % (float(dev), float(zabs)))
     print("E_model = %+.10f   Efull = %+.10f   Re Qext = %+.10f"
           % (float(mp.log(zabs) - mp.re(mp.log(K))),
