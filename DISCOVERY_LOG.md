@@ -5562,3 +5562,52 @@ re-pulled 2026-09-17 verified: Nt frontier 73426758 exact, seam gap
   its actual dps. mp-from-import pitfall: "from mpmath import mp"
   gives the CONTEXT - mp.dps, not mp.mp.dps (the 25y-era line
   crashed on it).
+
+
+## day030 (cont.) — S1 LOW-T WIRE v1 LANDED: `formal/RhAttack/S1LowT.lean` GREEN, full build 17434 jobs 0 errors (2026-09-18)
+
+- **The wire (queue item 2, started; v1 complete).** The low-t
+  data territory (commit 27cd944) is now stated at the bound
+  level in Lean, as the DUAL of S4Asm: `S1LowT.lean` composes the
+  strip (0 < t0 < 1000, 0 < d0 <= 1/2) exactly in the P1.2 four-
+  conjunct shape (`P12.offPair`, `P12.squeeze_gives_margin`):
+  - `TLow = 1000`, `DLow = 1/2`, `sliceHi = 1200`, `nSlice = 813`,
+    `gapLo = 221/1000` — the pinned low-t constants (noncomputable
+    def discipline for the Real-division defs — permanent trap);
+  - `SliceFacts` (noncomputable) — the 813-zero (0, 1200] slice
+    record (count, gap, oracle md5, noise floor) as PINNED data
+    hypothesis, the S4Asm pattern (the abstract ZeroSet carries
+    no arithmetic structure to count against — B0 is pure Finset
+    cardinal arithmetic — so the slice record enters as data, not
+    as a quantified statement over q);
+  - `GridAdequate` — the EXPLICIT named screen-bridging hypothesis
+    (S4Asm `gapW`/`gapO` pattern): the day030 measured sweep
+    bridges its own cells with floor 7357/1000 (= 7.357, the safe
+    rational below the measured global min 7.35737123, dual-
+    precision anchored 7.35752136 at dps-50);
+  - `strip_squeeze` — the composition: inputs (q, marginLowT,
+    hgrid, hslice, Mf/devOf/Bwire/Mr/flo, hs1..hs4 instantiated
+    on the strip) → outputs the P1.2 squeezed-margin form
+    pointwise on the strip AND the pinned floor on marginLowT.
+    Sources of the inputs labeled in-file (MEASURED / PROMISED /
+    PROVEN-imported per the honesty split);
+  - `slice_consts` — the pinned-arithmetic block (norm_num/rfl).
+  VERIFICATION: `lake env lean RhAttack/S1LowT.lean` exit 0 zero
+  diagnostics + full `lake build` GREEN (17434 jobs, 0 failures;
+  the 43 "error" string hits in the log are quoted doc text,
+  verified). README module table row added.
+- **Next iteration (v2, not done):** feed the PROVEN regime atoms
+  into hs1..hs4 (C1b discrete floor where its gamma >= 707/50
+  regime applies on the strip, P8 far/own atoms, P8Floor A4
+  definition side under the pinned mass input) so the composition
+  spends less data and more proof than v1's explicit inputs.
+- **Toolchain notes (permanent):** (a) a conjunction theorem
+  proved with `constructor` + bullets went through 5 red rounds
+  of unsolved-goal/No-goals confusion; the term-mode
+  `⟨by norm_num, by norm_num [gapLo], by rfl, ...⟩` closed it in
+  one shot — per-component term proofs make the And-pairing
+  explicit and dodged the tactic-state ambiguity entirely.
+  (b) `norm_num [decl]` unfolds COMPUTABLE defs only — it refuses
+  noncomputable Real defs; `rfl` closes def-equality goals for
+  transparent noncomputable defs (probe-verified); `simp only
+  [plainDef]` does not unfold plain defs at all.
