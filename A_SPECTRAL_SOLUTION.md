@@ -5,6 +5,8 @@ https://suno.com/song/12a5bdf7-a4aa-42ae-9a01-c0fd9e2025d9
 ## "A Spectral Solution"
 by Jesse S. Miller and ChatGPT
 
+> _Technical interpretation of the lyric in the context of the project it grew beside — a loose, by-the-way gloss, not part of the art: [docs/SPECTRAL-SOLUTION-LYRICS-ASIDE.md](docs/SPECTRAL-SOLUTION-LYRICS-ASIDE.md)_
+
 [Verse 1]
 
 We started with a spiral,  

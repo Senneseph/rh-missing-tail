@@ -43,22 +43,27 @@ def n4(t):
 
 class TailHi2:
     def __init__(self):
+        # NO big private arrays (a mask-copy is 24.4 GB and COW-bombs
+        # under fork): two memmaps (file-backed, shared page cache) +
+        # the small cache_lo + a dedup cut index into the new band.
         self.cache_lo = td.load_g_range(1.0e7, HI_DISC)
-        old = np.memmap(OLD_BAND, dtype="<f8", mode="r")
-        new = np.memmap(NEW_BAND, dtype="<f8", mode="r")
-        m = np.asarray(new[new > old[-1]], dtype=np.float64)
-        del new
-        self.old = np.asarray(old)
-        del old
-        self.new = m
-        self.G_LAST = float(m[-1])
+        self.old = np.memmap(OLD_BAND, dtype="<f8", mode="r")
+        self.new = np.memmap(NEW_BAND, dtype="<f8", mode="r")
+        self.new0 = int(np.searchsorted(self.new, float(self.old[-1]),
+                                        side="right"))
+        self.G_LAST = float(self.new[-1])
+
+    def iter_arrays(self):
+        yield self.cache_lo
+        yield self.old
+        yield self.new[self.new0:]   # memmap slice = view, no copy
 
     def pairlog_sum(self, t):
         t2 = t * t
         re = np.longdouble(0)
         im = np.longdouble(0)
         CH = 2_00_000_000
-        for arr in (self.cache_lo, self.old, self.new):
+        for arr in self.iter_arrays():
             for i in range(0, arr.size, CH):
                 c = arr[i:i+CH]
                 g2 = c * c
@@ -66,13 +71,13 @@ class TailHi2:
                 re += np.sum(np.log(np.abs(g2 - t2)) - np.log(A)
                              + 0.5 / A)
                 im += np.sum(t / A)
-        nlt = (int(np.searchsorted(self.cache_lo, t, side="left"))
-               + int(np.searchsorted(self.old, t, side="left"))
-               + int(np.searchsorted(self.new, t, side="left")))
-        return float(re), float(im) + nlt*np.pi
+        n = int(np.searchsorted(self.cache_lo, t, side="left"))
+        n += int(np.searchsorted(self.old, t, side="left"))
+        n += int(np.searchsorted(self.new[self.new0:], t, side="left"))
+        return float(re), float(im) + n*np.pi
 
     def real_zero_at(self, x):
-        for arr in (self.cache_lo, self.old, self.new):
+        for arr in self.iter_arrays():
             i = int(np.searchsorted(arr, x))
             cands = [float(arr[j])
                      for j in range(max(0, i-2), min(arr.size, i+3))]
@@ -127,6 +132,21 @@ def kernel(T, t):
         + 1j*mpm.mpf(repr(float(ar))) + tail
 
 
+_T = None
+
+
+def get_T():
+    """Worker-lazy tail (the sweep's pattern). Passing T as a task
+    ARGUMENT pickles all ~47 GB of band arrays per submit (the fork
+    start-method still pickles args) -- 5 submits x 47 GB = the OOM.
+    In-worker creation keeps the bands in the shared file-backed page
+    cache."""
+    global _T
+    if _T is None:
+        _T = TailHi2()
+    return _T
+
+
 def margin_at(T, t, g):
     s = mpm.mpc(0.5, t)
     gmp = mpm.mpf(repr(float(g)))
@@ -148,7 +168,8 @@ def margin_at(T, t, g):
             "t": float(t), "zeta": float(zabs), "dev": float(dev)}
 
 
-def scan_one(T, x, label):
+def scan_one(x, label):
+    T = get_T()
     gz = T.real_zero_at(x)
     if gz is None:
         return None
@@ -164,10 +185,11 @@ def scan_one(T, x, label):
     return {"g": float(g), "label": label, **best}
 
 
-def model_E(T, t):
+def model_E(t):
     """Efull(t) at a model-level t (> G_LAST): kernel = discrete to
     G_LAST + density quads; the margin is NOT evaluable (no real
     zeros g ~ t)."""
+    T = get_T()
     s = mpm.mpc(0.5, t)
     z = mpm.zeta(s)
     logK = kernel(T, t)
@@ -178,7 +200,7 @@ def model_E(T, t):
 
 T = TailHi2()
 print("G_LAST_new = %.6f  (new-band zeros %d)"
-      % (T.G_LAST, T.new.size), flush=True)
+      % (T.G_LAST, T.new.size - T.new0), flush=True)
 
 STRADDLE = [(1.2e9, "1.2e9"), (1.4e9, "1.4e9"), (1.6e9, "1.6e9"),
             (1.8e9, "1.8e9"), (1.95e9, "1.95e9")]
@@ -188,7 +210,7 @@ MODEL = [mpm.mpf("2.5e9"), mpm.mpf("4e9"), mpm.mpf("6e9"),
 straddle_rows = []
 with cf.ProcessPoolExecutor(max_workers=int(os.environ.get("WORKERS", "6"))) \
         as ex:
-    futs = {ex.submit(scan_one, T, x, lab): lab
+    futs = {ex.submit(scan_one, x, lab): lab
             for (x, lab) in STRADDLE}
     for f in cf.as_completed(futs):
         r = f.result()
@@ -205,6 +227,6 @@ for r in sorted(straddle_rows, key=lambda r: r["label"]):
 print("\nMODEL-LEVEL Efull (t > G_LAST; the zero region (G_LAST, t) is")
 print("density-modeled; margin not evaluable there):")
 for tm in MODEL:
-    r = model_E(T, tm)
+    r = model_E(tm)
     print("  t = %9.3g : Efull = %+.4f   |zeta| = %.4f"
           % (r["t"], r["Efull"], r["zeta"]), flush=True)
