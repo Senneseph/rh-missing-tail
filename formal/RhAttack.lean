@@ -66,3 +66,4 @@ import RhAttack.P8Floor
 -- own-regime detector-floor promotion remains the open analysis atom).
 import RhAttack.Closure
 import RhAttack.S4Growth
+import RhAttack.W2Kernel

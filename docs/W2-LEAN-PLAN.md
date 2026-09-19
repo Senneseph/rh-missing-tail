@@ -65,9 +65,12 @@ with citation per owner policy; logs make attribution auditable):
           iff  2(t^2 + 1/4)(g^2 + 1/4) > g^2 - t^2   [crossed]
           iff  2 t^2 g^2 + (3/2) t^2 + 1/2 > 0       TRUE;
           for g < t:  p'(g) < 0  (same algebra, g^2 - t^2 < 0).
-  (K3)  N_asym is C^1 on (0, infty), N_asym' = rho + 1/(2pi);
-        for x in [G1, G2] (G1 >= 1e7):  0 < N_asym'(x) <= L,
-        L := ((log(G2/(2pi)) + 1)/(2pi))  (explicit).
+  (K3)  N_asym is C^1 on (0, infty) and  Nas'(x) = Rho(x) EXACTLY:
+        d/dx [(x/2pi)log(x/2pi) - x/2pi] = log(x/2pi)/(2pi)
+        (the +1 from the product rule and the -1 from the -x/2pi
+        slope cancel — the classical zero-density fact).  Hence on
+        [G1, G2] (G1 >= 1e7):  0 < Nas'(x) <= L,  L := Rho(G2) =
+        log(G2/(2pi))/(2pi)  (Rho is increasing: Rho' = 1/(2pi x) > 0).
   (K4)  the log-telescoping: for the partition,
         sum_j (log|x_{j+1} - t| - log|x_j - t|)
           = log|G2 - t| - log|G1 - t|.

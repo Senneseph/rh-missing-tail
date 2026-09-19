@@ -6593,3 +6593,37 @@ bound theorem E1-E4 with explicit inputs K, L, GMAX; build
 order M1-M6).  Honest split preserved: the kernel/telescope
 algebra and the bound are to be LEAN-PROVEN; K/L/GMAX are
 PINNED (data) or CITED (Zeta23-RvM/Backlund class beyond).
+
+DAY035 — W2Kernel M1 GREEN (kernel algebra LEAN-PROVEN).
+  formal/RhAttack/W2Kernel.lean builds under Lean 4.33.1 +
+  mathlib 4.33.1 (module check + full lake build, rc=0):
+    W2K.kerHasDerivAt (K1):  Ker'_g = 1/(g-t) + Sm(g,t)
+        for g != t, g + t > 0 (both sides of t, via the
+        neighborhood-equality transfer).
+    W2K.nasHasDerivAt (K3):  Nas'_x = Rho(x) EXACTLY, x > 0
+        (the +1/(2pi) from the product rule and the -1/(2pi)
+        slope of -x/(2pi) cancel).
+    W2K.rhoHasDerivAt:       Rho'_x = 1/((2pi)*x), x > 0.
+  Toolchain lessons (pinned 4.33.1; verified by grep + probe,
+  cross-checked against the current online mathlib4 tree):
+  - a `variable` inside a top-level namespace made the
+    defs' leading parameter IMPLICIT; explicit parameters only.
+  - hasDerivAt_id / hasDerivAt_const take EXPLICIT
+    (point, constant) arguments in this pin.
+  - pinned combinator conclusions use POINTWISE notation
+    (f + g) / (c * d); a lambda goal form is NOT judgmentally
+    equal to it.  Proofs carry the exact conclusion types and
+    bridge to the named-def goal form at ONE place per
+    theorem: HasDerivAt.congr_of_eventuallyEq against an
+    EventuallyEq proved by ext; dsimp; simp [div_eq_mul_inv].
+    Plain simp DOES reduce pointwise (f+g) x, (f*g) x and
+    (f^-1) x applications in this pin (probed directly).
+  - sq_pos_of_pos is in current online mathlib4
+    (Algebra/Order/GroupWithZero/Basic.lean) but NOT in the
+    pin; mul_pos + pow_two used instead.
+  - the neighborhood notation needs `open scoped Topology`.
+  Spec docs/W2-LEAN-PLAN.md: K3 corrected (Nas' = Rho exactly,
+  not Rho + 1/(2pi)).  Plan build order: M1 DONE (K1+K3);
+  M2 = finite-sum telescope T1-T4; M3 = per-gap singular-free
+  integral side (1.3); M4 = bound theorem E1-E4; M5 = numeric
+  instantiation; M6 = composition through the S1 wire.
