@@ -14263,8 +14263,6 @@ Copyright line should end with '. All rights reserved.'
 
 
 Note: This linter can be disabled with `set_option linter.style.header false`
-warning: RhAttack/B3.lean:4:0: * 'AI co-developed instrument; no prize claim — see
-plan/40-prize-islands/rh-attack/README.md).':
 If an authors line spans multiple lines, each line but the last must end with a trailing comma
 
 

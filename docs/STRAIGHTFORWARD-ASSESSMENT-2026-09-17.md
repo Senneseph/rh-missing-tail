@@ -5,7 +5,7 @@ written to be forwarded to a mathematician in *any* field: every concept is
 introduced before it is used, and project-specific names (codes, files,
 commit ids) sit in parentheses so they can be skimmed or dropped. It is the
 same honest split the proof outline keeps: machine-proven, pinned
-(certified), cited — and no prize claim is made or implied.
+(certified), and cited.
 
 ---
 
@@ -132,5 +132,4 @@ artifact is commit f3b3b18 of this repository ("25af Stages 1–5 (Lean port
 LANDED): S4Strip module green — s4_strip_close LEAN-PROVEN"). All quoted
 numbers (1/200, 10⁸, d\* ≈ 0.00474, ~10% margin) come from the pinned
 constants scripts committed alongside the modules they certify. Framing:
-owner-conceived project with AI co-developed instruments, fully disclosed;
-no prize claim is made or implied.
+owner-conceived project with AI co-developed instruments, fully disclosed.

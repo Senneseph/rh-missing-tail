@@ -153,7 +153,7 @@ a spike, everything stops and the spike is the new object.
 
 ## 5. Standing non-claims
 
-- No `theorem: riemann`; no prize claim; credit framing as per README (owner conception +
+- No `theorem: riemann`; credit framing as per README (owner conception +
   instrument co-development; AI disclosed).
 - Certified numbers carry script + data provenance (P-0.9); no stale results cited.
 - This file is a working plan-hypothesis, not a result. §3 is a scaffold to be falsified

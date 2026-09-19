@@ -12,7 +12,6 @@
 > sweep in flight). Source documents: `RH-PROOF-OUTLINE.md`,
 > `DISCOVERY_LOG.md`, `ROUTE-ANCESTRY-AND-NOVELTY-2026-09-17.md`,
 > the honest split per atom (LEAN-PROVEN / CITED / PINNED / MEASURED)
-> throughout. No prize claim is made or implied.
 
 ## 0. Where all finiteness is contained
 

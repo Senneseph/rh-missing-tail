@@ -13,7 +13,7 @@ floor of §10 — is **open**, and the full theorem is conditional on it.
 Nothing in this document claims that the Riemann Hypothesis has been proved.
 Every computed number cited here carries provenance to a script and data file
 committed alongside it. The project discloses AI co-development of its
-instruments; no prize claim is made.
+instruments.
 
 *How to read it.* §1–2 state the hypothesis and the counting language we use.
 §3 is the broad strategy in one page. §4–7 walk through each ingredient, in
@@ -591,9 +591,3 @@ dt/dt2-stability verdict). The Lean artifacts are machine-checked against
 mathlib on a pinned stable toolchain (Lean 4.33.1); nothing is "known by
 memory," and no measured value stands in for a theorem except where this
 document says so explicitly.
-
-—
-
-*Framing: owner-conceived project with AI co-developed instruments, fully
-disclosed; working plan, data, and Lean artifacts live in the project's
-public repository; no prize claim is made or implied.*

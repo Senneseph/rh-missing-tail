@@ -5,7 +5,6 @@
 > 25x[8]/day029 state (post-25af; the S4Asm assembly and the S1-GAP
 > verdict-(A) pre-test are landed). Source of record: `docs/RH-PROOF-OUTLINE.md`
 > for the current mathematics, `DISCOVERY_LOG.md` for the day-by-day.
-> No prize claim is made or implied.
 
 ## 1. The route, in one paragraph
 

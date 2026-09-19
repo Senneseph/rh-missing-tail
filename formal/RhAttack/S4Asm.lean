@@ -383,4 +383,51 @@ theorem rh_from_regime_closures (q : ZeroSet)
     · exact hs4low t0 d0 ht0 (by linarith) hd0 hdm hpair
   · exact hs4far t0 d0 ht0 hd0 (not_le.mp hdm) hpair
 
+/- =================================================================
+   §7  day033 — sharp-edge coverage in S4Asm (item 6 port)
+   =================================================================
+
+The d-edge of the strip branch moves from 1/200 to the certified
+exact rational S4Strip.r2prime = 47384091/10^10 = 0.0047384091
+(day033[8]): the band (r2prime, 1/200] is now covered by
+mown(t0, d0) via the FshU sharp floor (s4_strip_close_sharp), and
+the window branch's near-pin bound p8_f_near_pin is d-INDEPENDENT,
+so its edge moves along.  s4asm_S4_on_pairs above is UNCHANGED
+(1/200 edge): both statements hold simultaneously; the new one is
+strictly stronger.  All data-side constants are unchanged. -/
+
+theorem s4asm_strip_region_S4_sharp (t0 d0 : ℝ) (ht0 : 1000 ≤ t0)
+    (hdlo : S4Strip.r2prime ≤ d0) (hd : d0 ≤ 1 / 2) :
+    p8_B t0 (S4Strip.n4 t0) + S4W.Zbound t0 * Real.exp (S4Strip.X4fun t0) *
+        S4Strip.X4fun t0 < S4O.mown t0 d0 := by
+  have hd0 : 0 < d0 := by linarith
+  have hM0 : 0 ≤ S4W.Zbound t0 := by
+    dsimp only [S4W.Zbound]
+    exact mul_nonneg
+      (mul_nonneg (by norm_num : (0 : ℝ) ≤ 1.6)
+        (Real.rpow_nonneg (by linarith) (1 / 4)))
+      (Real.log_nonneg (by linarith : (1 : ℝ) ≤ t0))
+  exact S4Strip.s4_strip_close_sharp t0 d0 (S4W.Zbound t0) ht0 hd0 hdlo hd
+    hM0 le_rfl
+
+theorem s4asm_S4_on_pairs_sharp (hX : S4W.Xwire S4W.T0 ≤ S4W.RX)
+    (t0 d0 : ℝ) (ht0 : 1000 ≤ t0) (hd0 : 0 < d0)
+    (hdmax : d0 ≤ 1 / 2) :
+    (if S4Strip.r2prime ≤ d0 then
+        p8_B t0 (S4Strip.n4 t0) + S4W.Zbound t0 *
+            Real.exp (S4Strip.X4fun t0) * S4Strip.X4fun t0
+     else
+        (if t0 ≤ S4W.T0 then
+            p8_B t0 (Nat.floor (13 * t0 / 8)) + S4W.Zbound t0 *
+                Real.exp (S4W.Xwire t0) * S4W.Xwire t0
+         else
+            p8_B t0 (S4G.nGrow t0) + S4W.Zbound t0 *
+                Real.exp (S4G.Xgrow t0) * S4G.Xgrow t0)) <
+    (if S4Strip.r2prime ≤ d0 then S4O.mown t0 d0 else p8_f_near_pin) := by
+  by_cases hdge : S4Strip.r2prime ≤ d0
+  · rw [if_pos hdge, if_pos hdge]
+    exact s4asm_strip_region_S4_sharp t0 d0 ht0 hdge hdmax
+  · rw [if_neg hdge, if_neg hdge]
+    exact s4asm_window_region_S4 hX t0 ht0
+
 end S4A

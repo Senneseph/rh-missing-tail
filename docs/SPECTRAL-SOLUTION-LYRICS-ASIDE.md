@@ -15,8 +15,7 @@ project**: this is a curious-reader's map, nothing more. Companion: the day-023 
 (kainos working tree, `plan/40-prize-islands/rh-attack/spec/`):
 our pieces ↔ spectral referents, without the lyric layer. All
 `formal/`, `scripts/`, `docs/`, `results/` paths in this file are relative
-to the repo root. No prize claim is made or implied, anywhere in this
-file.
+to the repo root.
 
 The owner's own words for why this file may exist (2026-09-17): the
 route "literally took the operator apart and used something else" —
@@ -293,8 +292,7 @@ critical line isn't where the zeros happen to gather — it's where the
 system asked them to live.** The squeeze as habitat: the off-line
 region is squeezed out of existence *as a place to live*; the line is
 home by construction. (That is the project's claim, phrased by the
-song, in the owner's accepted language — no prize claim made or
-implied.)
+song, in the owner's accepted language.)
 
 **[Final Chorus]**
 > "Every wandering path returns, / Every hidden symmetry turns, /

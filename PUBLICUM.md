@@ -21,8 +21,7 @@ complex plane — the line whose midpoint, 1/2, gives the Hypothesis
 its famous shape. If all of them do, the primes obey precise
 predictable statistics; if one sits off that line, the statistics
 have a built-in wiggle no one has ever seen in more than 40 million
-tested cases. (A prize of one million dollars has been waiting since
-2000; no prize claim is made or implied here.)
+tested cases.
 
 ## What we did differently
 

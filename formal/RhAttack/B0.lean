@@ -1,7 +1,6 @@
 /-
 Copyright (c) 2026 kainos-logos rh-attack (owner-directed research;
-AI co-developed instrument; no prize claim — see
-plan/40-prize-islands/rh-attack/README.md).
+AI co-developed instrument).
 -/
 
 /-

@@ -5013,7 +5013,7 @@ anchors, the final strict line, the floor identity), the mpmath survey of
 25af (commit 33341a2). **CITED** — the B3Core/S4Own/S4Window/S4Growth
 interfaces reused (unchanged since 25ab/25ae).
 
-**No prize claim made or implied.** This is the bound-level closure of the
+This is the bound-level closure of the
 closure-relevant own-regime strip d ≥ 1/200; it is the (i-b) prerequisite for
 the strip-composition wire, not the closure itself.
 
@@ -5181,7 +5181,7 @@ the corrected statistic; the 5.6e7 "ceiling" evaporates at screen level
 through 1e9 (the data extent); the S1 coverage becomes
   certified [1e3, 1e6] + screened-SOUND [1e6, 1e9] (t⁴ wire + full
 horizon kernel, margin ≥ 1.08 at the wall heights, pending the full
-sweep + pins).  No prize claim made or implied.
+sweep + pins).
 
 **Traps:** (1) Bf(t, G) at G = t is the branch point (uw/(1−uw) blows
 up) — the P5 wire is only for G > t. (2) the (1e18, ∞) "reported only"
@@ -5199,7 +5199,7 @@ re-pulled 2026-09-17 verified: Nt frontier 73426758 exact, seam gap
 - **margin_new (corrected statistic) = 1128.9 @ 3.9e7, 1073.5 @ 4e7, 951.1 @ 4.25e7, ..., 547.0 @ 5.6e7, ..., 10.36 @ 4e8, 6.49 @ 5e8, 4.38 @ 6e8, 2.24 @ 8e8, 1.0816 @ 1e9 (the minimum, at the last window, t = 999999994.6157). No window below 1.** margin_old (25x statistic) < 1 at 16 of 31 windows (0.73-0.92 at 3.9e7…1e9, dip windows 0.46-0.77) -- the 25x artifact record reproduces exactly.
 - **The systematic component is Efull = log|zeta| - Re log K_full (the kernel mass mismatch), NOT residf.** Efull grows smooth and super-polynomial in t: +0.0009 @ 3.9e7, +0.0018 @ 5.6e7, +0.1015 @ 4e8, +0.2593 @ 6e8, +0.5901 @ 8e8, +2.5839 @ 1e9 (local slope ~ t^3.3 over the last octave). residf = |zeta - K_full| is pointwise OSCILLATORY (0.0000-0.66 across the sweep; the pre-test's 7.71 @ 1e9 was a pointwise anti-aligned |zeta|+|K| fluctuation at |zeta| = 8.3, 5 t-units from the sweep's sample |zeta| = 0.71 -- the systematic quantity tracking the kernel is Efull, not residf).
 - **The asymptotic structure this reveals (the precise S1 residue question).** As Efull(g) grows, |K_full|/|zeta| = e^{-Efull} shrinks and the squeeze margin = |zeta|*dev/(p8_B(t4) + |zeta - K|) tends to dev = min_d |R(g,d,t) - 1| (the near-floor scale, pinned range [0.9975, 1.0201], p8_f_near_pin = 0.9975 < 1). So the S1 asymptotic question reduces to: (i) does Efull(g) SATURATE at large g (the model re-fits; the margin stays dev/(1 - e^{-Efull} e^{i phi}-class) > 1), or (ii) does Efull -> infinity, in which case the squeeze survives only if the REALIZED near scale stays > 1 at large g (the audit dip 0.997500 is the danger zone). The 5-point Efull series (0.0009/0.0018/0.10/0.59/2.58 over three decades) shows growing slope -- the shape question needs more E points (3e9-3e10, the full LMFDB data extent, 464 shards ~ 30 GB) and the quad-RESOLUTION check at 1e9 (npts 400 -> 2000 ladder on both horizon sections -- the H2 item in KNOWN_LIMITATIONS) before the Efull(1e9) = 2.58 is trusted.
-- **Honest status:** the A-1 reading is a SCREEN result (H1-grade: float64 + uncertified quads, per KNOWN_LIMITATIONS.md); the certificate-grade re-issuance (interval arithmetic or machine-checked error budgets) and the beyond-1e9 Efull shape are the next units. The S1 pointwise squeeze is now screen-sound [1e6, 1e9] with the systematic watch item cleanly identified (Efull), replacing the earlier (misleading) residf-growth framing. No prize claim made or implied.
+- **Honest status:** the A-1 reading is a SCREEN result (H1-grade: float64 + uncertified quads, per KNOWN_LIMITATIONS.md); the certificate-grade re-issuance (interval arithmetic or machine-checked error budgets) and the beyond-1e9 Efull shape are the next units. The S1 pointwise squeeze is now screen-sound [1e6, 1e9] with the systematic watch item cleanly identified (Efull), replacing the earlier (misleading) residf-growth framing.
 ### day029 Efull resolution check + LMFDB 2e9 extension (2026-09-17)
 
 - **H2 (quad resolution) RESOLVED AT SCREEN LEVEL for the 1e9 anchor:** `day029_efull_rescheck.py` re-runs the two horizon quadrature sections on the ladder npts in {200, 400, 800, 2000} ((G_LAST, 1e18]) x npts2 in {400, 1200, 2000} ((1e18, 1e30]), dps-30, differentially anchored to the sweep's (400, 400) configuration. Efull is stable to < 5e-5 in EVERY configuration at all three check heights (1e9: +2.5839; 4e8: +0.1015; 6e8: +0.2593) -- the sweep's (400, 400) setup is resolution-stable at the 4th decimal. (First run's "DRIFTS" flag was a diagnostic bug -- |E| instead of |E - E0| -- fixed in the committed script; the cell values, all equal to the anchor, were the real result.) Result: `scripts/rh/out_day029_efull_rescheck.txt`.
@@ -5664,3 +5664,223 @@ re-pulled 2026-09-17 verified: Nt frontier 73426758 exact, seam gap
   constant, the C4 = 3.1e7 band witnesses.  CITED — Backlund RVM
   (Zbound), Platt-Trudgian Sbar ledger (the X4 hypothesis class),
   as in 25af.
+
+### day031 S1-wire v2 — S2 covered-region proof-in on the low-t strip (2026-09-18)
+
+- **What landed** (formal/RhAttack/S1LowT.lean, +301 lines; `lake env lean`
+  zero diagnostics; full `lake build` 17,434 jobs GREEN): the v1
+  explicit `hs1..hs4` shape (day030) is refined so the composition spends
+  PROOF, not data, on the S2 (detector-floor) side wherever a proven
+  regime atom reaches.
+- **The concrete witness-lattice strip detector** `devStripMin (γ, d)`:
+  min of the own-height value ‖poff γ d γ‖ and the 48 discrete straddles
+  u = 0.5·k, k = ±1…±24 (the closure protocol's discrete witness lattice,
+  25k[4] scope) — as a `List.range 48` foldl of `min` (mathlib
+  Finset.min needs `OrderTop ℝ`, which does not exist; the foldl is the
+  total-order-native finite min).
+- **THE COVERED-REGION S2 (LEAN-PROVEN)**: `devStripMin_lower` — on
+  707/50 ≤ γ and 0 ≤ d ≤ 1/2, the min over the WHOLE lattice sits above
+  the concrete strip floor `floStripMin` = min(own mass, max(floWin, 0)):
+  each of the 48 straddles via `s2_strip_window` — the C1b discrete
+  straddle regime atom (`c1b_disc_floor`, γ ≥ 707/50, 0 ≤ d ≤ 1/2,
+  1/2 ≤ |u| ≤ 12) for the window part, and the own-height start by
+  min-le-left — and the induction over the foldl carries the pointwise
+  bounds to the min. `s2_strip_min` is the pointwise form.
+- **`strip_squeeze_v2`**: the P1.2 squeezed-margin pointwise form with
+  dev := devStripMin, f := floStripMin — S2 **DISCHARGED by
+  `s2_strip_min`** on the covered region t0 ≥ 707/50 (the whole strip
+  above the first zero 14.1347…); the only S2 residual is ONE small
+  pinned hypothesis `hs2sliver` on 0 ≤ t0 ≤ 707/50 (the C1b regime gap,
+  where the window floors are floWin = min(23/1000, 1 - 25/γ) ≤ 0 and
+  the floor content is the PINNED measurement of record, not a regime).
+  hs1 (the CITED 25.2.12 zero side in Mf form), hs3 (the P8 A5
+  definition-side terminal under explicit machine inputs), hs4 (the
+  day030 measured squeeze) and the grid-adequacy `hgrid` stay PROMISED
+  per H6 (finite data by design; no closed-form uniform low-t lower
+  bound). NO RH claim in-file (v1 header stands).
+- **Toolchain lessons (pinned Lean 4.33.1 + mathlib v4.33.1, local-grepped
+  after online search per the owner's directive)**: (1) TOP-LEVEL
+  FORWARD REFERENCES DO NOT RESOLVE — a `def` cannot reference a
+  top-level constant defined LATER in the file (`Unknown identifier`);
+  order declarations dependency-first. (2) ℝ numerals (`1 : ℝ`, `23`)
+  are NOT judgmentally equal to `Nat.cast (1 : ℕ)` / the cast of a nat
+  expression — bridge single casts with `norm_num`, cast-OF-SUM/SUB with
+  `Nat.cast_add`/`Nat.cast_sub`, and route through `nlinarith`/`linarith`
+  which normalize cast numinals. (3) `if h : c then …` (named-binder ite)
+  is not rewritable by `if_pos`/`if_neg` — drop the unused named binder
+  from the def or use `split_ifs`. (4) `Finset.univ.inf` / `⨅ x ∈ s, …`
+  over ℝ require `OrderTop ℝ` (absent); finite minima need the foldl
+  (with `List.foldl_append` + `List.range_succ` induction) or explicit
+  nested `min`. (5) `List.minimumOf` does not exist in 4.33.1 (newer
+  mathlib only). (6) `by norm_num` inside a top-level `def` proof term
+  can silently `sorry` — prefer proof-term constants (`Nat.zero_lt_succ`).
+- **Honest split (delta vs day030 v1).** LEAN-PROVEN — everything v1
+  plus: `s2_strip_window`, `strideU_floor`, `devStripMin_lower`,
+  `s2_strip_min`, `strip_squeeze_v2` (the S2 covered-region discharge).
+  PROMISED (residual hypotheses, explicitly named) — `hs2sliver` (the
+  0 ≤ t0 ≤ 707/50 sliver), hs1/hs3/hs4, `hgrid` (all as in v1, now with
+  the concrete dev/flo forms). PINNED — `SliceFacts` 813-zero/0.221
+  record, 7357/1000 floor, `floWin` constants (23/1000, 25), 707/50
+  (the C1b regime bottom, 14.14 — just above the first zero). CITED —
+  25.2.12 (zero side), P8 A5 machinery (via P8Floor import), C1b
+  atom (its CITED status flows in).
+
+### day032 D(t) re-channel: the IBP refinement lands, with a corrected walk-level (2026-09-18)
+
+- **What landed** (scripts/rh/day032_dt_ichannel.py +
+  out_day032_dt_ichannel.txt, 564s, mpmath 1.4.1 dps-30): the named
+  day029 re-channel refinement -- D_re redone as an IBP against the full
+  counting function so the O_w common model error cancels by
+  construction.
+- **The exact identity** (Stieltjes IBP + weighted telescoping; holds at
+  every height incl. split mode, where the R(t)*f(t) = 0*(-inf) boundary
+  terms cancel by continuity of R):
+    D_re(t) = Wb*f(G2) - Int W(g) f'(g; t) dg,
+  W(g) = N((G1,g]) - R(g) the lattice walk (true zero count minus the
+  smooth model count R = int rho), Wb = N_band - R(G2) = +0.106322129
+  (the day029 wband constant, now a closed-form endpoint term at every
+  height; b = G2 because the last zero IS G2 -- no half-mass
+  convention).  Measured split: D_re = B_end - Iwalk with
+  Iwalk = L - Q, L = N*f(G2) - S_re (pure per-zero fsum, exact to
+  rounding), Q = R(G2)*f(G2) - int f*rho (the single dps-30 quad; the
+  O_w model error cancels in the L - Q combination by construction).
+- **RESULTS** (D_re column reproduces day029 to its own noise;
+  |check| = algebra/fsum consistency of the closed-form side, note the
+  quad appears with OPPOSITE sign in D_re and Iwalk and CANCELS from
+  the check):
+    t        D_re         B_end      -Iwalk     Fsum       Rmndr   |check|  mode
+    1.5e9   -1.464113235 -0.0876561 -1.3764567 -9.32e-01  -4.44e-01 3.7e-07  split
+    2.5e9   -1.374426603 -0.0616902 -1.3127365 -1.93e-01  -1.12e+00 8.8e-08  plain
+    4.0e9   -0.827099800 +0.1165593 -0.9436593 -1.39e-01  -8.05e-01 1.9e-07  plain
+    1.0e10  -0.492496490 +0.3377042 -0.8302002 -1.22e-01  -7.08e-01 4.5e-07  plain
+  (Fsum = the Wbar-centered walk sum, Wbar = -0.090427 t-EXACT to 6
+  digits as it must be; Rmndr = -Iwalk - Fsum.)
+- **FINDINGS**
+  (1) THE IDENTITY HOLDS AND THE O_W CANCELS: the decomposition
+      reproduces D_re down to the quad noise floor (day029 ladder:
+      < 5e-5 stable at the 4th decimal across the 200->2000-point
+      grid ladder); the closed-form check is at fsum rounding
+      (<= 4.5e-07).  No unknown drift or trend remains anywhere:
+      every piece is closed-form, per-zero exact, or one smooth quad.
+  (2) THE WALK IS NOT O(1e-4) -- CORRECTION TO THE day029
+      PREDICTION: Fsum (the centered walk coupling) is O(0.12-0.19)
+      and smooth in t for the plain heights, not the sqrt(N)*|f'|*gap
+      ~ 1e-4 random-walk estimate.  The estimate assumed independent
+      walk increments; the zero count walk W(g) = N(g) - R(g) is the
+      RH counting remainder -- a BOUNDED O(1)-amplitude mean-excess
+      process (measured Wbar = -0.090427, narrow range), anti-
+      correlated across scales, not a free random walk.  Its coupling
+      with the smooth f' (total variation O(0.5-1) over the band)
+      is O(0.1-0.2) -- exactly as observed.
+  (3) T-STRUCTURE: as t moves away from the band, B_end rises
+      smoothly (-0.06 -> +0.12 -> +0.34, the closed-form endpoint
+      term Wb*f(G2)) while -Iwalk flattens (-1.31 -> -0.94 -> -0.83)
+      -- the day029 t-trend in D_re is a smooth redistribution
+      between two measured pieces, not a residual.
+  (4) SPLIT MODE (t in (G1, G2]): Fsum carries the log|t^2 - g^2|
+      splice structure at O(0.9) -- the same endpoint/lattice
+      structure day029 flagged; no O(1e-4) claim in split mode.
+- **CONSEQUENCE**: the re-channel calibration is now level-exact per
+  height to the quad floor (~5e-5): cross-splice Efull comparisons in
+  the re channel can be made level-accurate at ~1e-4 (fsum+quad),
+  matching the im channel (pi*wband, 6.5e-8).  Both splice channels
+  are accounted down to their numeric floors.
+- **HONEST SPLIT**: MEASURED -- the full day032 table (dps-30 quads,
+  float64 fsum per-zero; screen-grade as per day029's class).
+  PINNED -- Wb = +0.106322129 (closed form from G1, G2, N_band; the
+  day029 wband datum), Wbar = -0.090427 (data mean of W at the
+  zeros).  LEAN-PROVEN: none (measurement record; the IBP identity is
+  classical Stieltjes calculus, not a new theorem here).  CITED: the
+  classical zero-counting remainder being an O(1)-bounded process
+  (the boundedness of N(x) - N_model(x) in the RH strip, the same
+  content as the Riemann-von Mangoldt remainder scale).
+
+### day033 -- item 6, the d < 1/200 sharper d-dependent floor (25af residual (3)) (2026-09-19)
+
+- **What landed** (scripts/rh/day033_dfloor.py + out_day033_dfloor.txt,
+  exact Fraction algebra + mpmath dps-30 cross-check, a few seconds):
+  the 25af residual ordered item (3) -- "-- a sharper d-dependent floor
+  is a separate constant study".
+- **THE FLOOR** (exact, from the S4Own closed forms, mirrored):
+    mown(t, d) = d^2 (d^2 + 4 t^2) / (A B) * e^c,
+    A = t^2 + (1/2 + d)^2,  B = t^2 + (1/2 - d)^2,
+    c = (1/2 + d)/A + (1/2 - d)/B  > 0   (so e^c > 1: dropped in the floor),
+  = 4 d^2 * g(t^2) * e^{c(t)} with
+    g(u) = u(u + a)/(u^2 + c0 u + d0),  u = t^2,
+    a = d^2/4,  c0 = 2 d^2 + 1/2,  d0 = (1/4 - d^2)^2.
+  g is STRICTLY increasing in u for all 0 < d < 1/2:
+    g'(u)*denom^2 = (c0 - a) u^2 + 2 d0 u + a d0 > 0
+  (c0 - a = (7/4)d^2 + 1/2 > 0, d0 > 0, a >= 0).  With u0 = 10^6
+  (t = 1000), the t-uniform d-DEPENDENT floor:
+    mown(t, d) >= F_sharp(d) * t^-2,  all t >= 1000, 0 < d < 1/2,
+    F_sharp(d) = 4u (10^6 + u/4) 10^6 / (10^12 + 10^6 (2u + 1/2)
+                                              + (1/4 - u)^2),  u = d^2
+  -- an EXACT rational function of u = d^2.
+- **SHARPENINGS MEASURED** (exact rationals):
+  [1] at d = 1/200: F_sharp - F4 = +1.5e-10 (relative +1.5e-6 over the
+      old floor F4 = 10^8/(10^6+1)^2) -- a strict improvement, same
+      atom family (hMownScaleLo) with the exact (2d^2 + 1/2) and
+      (1/4 - d^2)^2 structure instead of the 1/16/1 lump.
+  [2] the FLOOR-LEVEL squeeze edge: with Cw = A1 + (A2 + A3 +
+      25/10^15)/1000 (the day028 W-side cap, exact rationals;
+      Cw = 8.981000000052499e-5), the squeeze WUB + Mterm < floor
+      closes for F_sharp(d) > Cw, i.e. P(u) = 0 with
+        P(u) = (Cw - 10^6) u^2 + ((2*10^6 - 1/2) Cw - 4*10^12) u
+               + Cw (10^12 + 5*10^5 + 1/16)   (exact rational coeffs)
+      one positive root (exact bisection, 120 iters):
+        u_F in [2.245251122726485e-05, 2.245251122726485e-05] (15-digit
+        printed bracket; exact Fractions in the script)
+        d_F in [0.0047384080, 0.0047384081]  (10-decimal brackets)
+      Honest sign note: the FLOOR bracket r1 (below d_F) has a
+      NEGATIVE margin (-3.411e-12) by construction; the SAFE certified
+      edge is the upper bracket rounded up:
+        r2' = 47384091/10^10 = 0.0047384091,
+        F_sharp(r2'^2) - Cw = +3.8287e-11  (exact positive rational).
+  [3] RESTATEMENT: the bound-level strip squeeze
+      (p8_B(t, n4) + M e^{X4} X4 <= Cw t^-2, st_hSQ) therefore extends
+      from the d >= 1/200 edge to d >= r2' = 0.0047384091 -- a 5.23%
+      extension of the closure-relevant own-regime strip; on
+      (r2', 1/200) the mown(t, d) floor is F_sharp(d) (the old F4
+      atom is 0/inapplicable there).
+  [4] AGREEMENT WITH 25af [7]: the data-level edge d* = 0.004738
+      (printed from the measured squeeze) vs the bound-level d_F =
+      0.004738408 (this study): both in (0.00473840, 0.00473842);
+      F_sharp(0.0047385^2) - Cw = +3.484e-09 > 0, i.e. the bound
+      level covers the whole printed d* interval.  The ~2e-9 bound-
+      level offset above the true squeeze crossing is exactly the
+      anchor (A1 above the true (1/2)(3.1e7)^(-1/2) = 8.9802651e-5 by
+      7.35e-9) + floor (g below the true ratio by ~5e-7 relative)
+      margin structure.  The old d-grid edge 1/200 sits 5.5% above the
+      squeeze edge (25af [7]); it now sits 5.5% above a CLOSED edge.
+  [5] t-structure (measured, dps-30): the TRUE mown*t^2 is DECREASING
+      in t and down-converges to 4 d^2 -- the e^c factor (c ~ 1/t^2,
+      e^c > 1) dominates the slowly-increasing g(t^2) part.  The floor
+      is UNAFFECTED: mown*t^2 = 4 d^2 g(t^2) e^{c(t)} >= 4 d^2 g(t^2)
+      >= 4 d^2 g(10^6) = F_sharp.  (First run of this study mislabeled
+      the [3]/[4] columns and the monotone direction; corrected in the
+      committed output -- the exact algebra was correct from the start.)
+  [6] BELOW d_F: intrinsically open at the t^-2 wire level
+      (F_sharp -> 4u < Cw as u -> 0) -- as 25af [7] stated for the
+      data edge: not closure-relevant; the S2 floor side / the near
+      pin 0.9975 at the witness handles that region (unchanged).
+- **HONEST SPLIT**: MEASURED -- [3]/[4]-style mpmath dps-30 cross-
+  check tables (true mown closed form vs F_sharp vs Cw; the true
+  squeeze-crossing location).  PINNED -- day033 script + output
+  (exact F_sharp, P coefficients, u_F bracket, r2' = 47384091/10^10,
+  margin 3.8287e-11; day028 Cw/F4 constants).  LEAN-PROVEN -- none
+  new yet (this is the constant study; all inputs are existing atoms:
+  S4O.mown closed form, S4Own c > 0 one-line, S4Strip day028 constants
+  A1..A3/MT/F4, st_hSQ).  CITED -- the S4Own.hMownScaleLo/Hi atoms
+  (status flows from S4Own).
+- **LEAN FOLLOW-UP (named, per the 25af pattern: constants first, port
+  second)**: (i) st_mownfloor_sharp: F_sharp(d) * t^-2 <= mown(t, d)
+  for all t >= 1000, 0 < d < 1/2 (c > 0 one-line positivity; the g'
+  positivity line (c0-a)u^2 + 2 d0 u + a d0 > 0; the g(u0) ratio
+  comparison -- exact rationals, norm_num-able); (ii) the d-edge
+  parameter 1/200 -> r2' in s4_strip_close (margin 3.8287e-11 via
+  st_finalconst's norm_num); (iii) S4A.s4asm_S4_on_pairs: the
+  d0 < 1/200 near-pin case split edge moves 1/200 -> r2' (the band
+  (r2', 1/200) becomes covered by mown(t, d0)).  Per the owner's
+  standing rule (2026-09-19): the port searches ONLINE FIRST for any
+  latest-mathlib lemma or reorganization (monotone ratio/pow/div
+  chains, positivity) before deriving atoms by hand.
