@@ -67,3 +67,4 @@ import RhAttack.P8Floor
 import RhAttack.Closure
 import RhAttack.S4Growth
 import RhAttack.W2Kernel
+import RhAttack.W2Telescope
