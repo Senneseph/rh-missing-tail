@@ -1,5 +1,10 @@
 # The Riemann Hypothesis from the Series Side
 
+> Art Attack: Attack on the Heart, p18. Miller, 2026  
+> "...like puzzle pieces from the clay."
+
+***
+
 **Exact action identities for Dirichlet tails, the measured width ladders
 they generate, the onset at which zero content first enters the budget —
 and a separation program with explicit falsifiers.**
