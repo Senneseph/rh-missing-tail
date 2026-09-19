@@ -18,7 +18,7 @@ rc1=$?
 if [ $rc1 -ne 0 ]; then echo "phase1 rc=$rc1 -> ABORT $(date)" >> $LOG; exit $rc1; fi
 nfiles=$(ls tmp/h1cert_p1/win_*.npz 2>/dev/null | wc -l)
 echo "phase1 done: $nfiles window files -> phase2 $(date)" >> $LOG
-[ "$nfiles" -eq 62 ] || { echo "expected 62 window files, got $nfiles -> ABORT" >> $LOG; exit 1; }
+[ "$nfiles" -eq 39 ] || { echo "expected 39 window files, got $nfiles -> ABORT" >> $LOG; exit 1; }
 taskset -c 0-26 env P2WORKERS=27 python3 scripts/rh/day034b_h1cert.py phase2 >> $LOG 2>&1
 rc2=$?
 echo "phase2 rc=$rc2 $(date)" >> $LOG

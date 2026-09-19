@@ -156,7 +156,9 @@ to the open step.
 Three things moved since this digest.
 
 **The certified height went tenfold — and the prediction was caught
-making a mistake.** The independent re-walk of the 10⁷ walk finished: it
+making a mistake.**
+
+The independent re-walk of the 10⁷ walk finished: it
 measured **244** missing zeros in a dead chunk at the very start of the
 window, not the 246 the coarse early estimate had locked in. Both numbers
 are even, which means the parity test *cannot* tell them apart — by
@@ -169,7 +171,9 @@ strongest unconditional statement of the project. The pre-registered
 and the capture is logged with the buggy first run kept on file. That is
 the operating procedure this repository is built around.
 
-**The path is now written as a path.** The proof document
+**The path is now written as a path.**
+
+The proof document
 (`docs/RH-PROOF-OUTLINE.md`) has been rewritten to be read linearly: the
 hypothesis, the counting language, the two independently defined objects,
 the bridge that makes them one, the detector that measures what a
@@ -180,7 +184,9 @@ floor — is the single open gap, stated with its two named routes. This is
 a complete argument skeleton, not a completed proof, and the document
 says so on its first page.
 
-**The machine-checked core moved home.** The Lean package now lives in
+**The machine-checked core moved home.**
+
+The Lean package now lives in
 this repository (`formal/`), every file in it describes itself up
 top (what it is, what role it plays, what state it is in), and a fresh
 machine can rebuild and re-run the cross-check gate in minutes (`lake
@@ -188,12 +194,16 @@ build && lake exe rhattack`).
 
 ## Update — 2026-09-13
 
-**The last two named gaps closed — as machine, and as price.** The
+**The last two named gaps closed — as machine, and as price.**
+
+The
 2026-09-11 update left two open rows: the residual floor (P8) and the
 closure (P9). Both are now complete in the machine, each with its
 honest split written in the file's own header.
 
-**P8 — the "less than" side — is machine-proven** (the `P8Floor`
+**P8 — the "less than" side — is machine-proven**
+
+(the `P8Floor`
 module, A0–A4): the same-object reduction, the three-term floor from
 the missing-tail law, the bridge residual wired to the certified
 on-line tail bound, and the decision inequality. Two things are
@@ -202,7 +212,9 @@ measured pin, and one equality (the tail's value on the line) is
 cited from the standard references rather than re-proven.
 
 **P9 — the closure — is machine-proven as a conditional argument,
-and the condition is now one named statement** (the `Closure`
+and the condition is now one named statement**
+
+(the `Closure`
 module, C0–C7). What the machine proves: if a zero pair sat off the
 line, there would be a *lowest* such pair (over the certified zero
 set, structural only); at that pair the zero-side and definition-side
@@ -214,8 +226,8 @@ named script and a named output. The composition of those three
 numbers into the contradiction is itself machine-checked; that is
 the statement `p9_closure_at_audit_point`.
 
-**A surprise on the detector side, now in the machine (C1a).** The
-original plan carried a pinned lower bound ("at least 99.8% of the
+**A surprise on the detector side, now in the machine (C1a).**
+The original plan carried a pinned lower bound ("at least 99.8% of the
 kernel's magnitude, near the pair") as the near-field detector
 floor. The machine work found the floor question was slightly the
 wrong question: exactly at the pair's own height the ratio has a
@@ -229,8 +241,9 @@ measured straddle heights, as in the original probe protocol — so the
 window floor is a genuine input to the closure's picture, not a
 demotable footnote.
 
-**And trapdoors are traps, so we tested them across the band.** The
-closure's per-point facts had been verified around height 10³; the
+**And trapdoors are traps, so we tested them across the band.**
+
+The closure's per-point facts had been verified around height 10³; the
 scan was extended across candidate pair heights all the way to
 3.15×10⁷ — and the instrument caught itself, in two layers. The first
 (day-020/022) looked like the margins "eroding" up the band (the
@@ -256,9 +269,9 @@ not down — and the pre-registered rule stands: if the squeezed margin
 ever collapses below 1 **in a verified regime**, the route retires
 rather than the claim being papered over.
 
-**Where this leaves the claim — stated plainly.** The machine-
-proven core (counting lemma through closure, every piece named P1–P9,
-plus the P1.2 uniform-statement skeleton — the formal name of the one
+**Where this leaves the claim — stated plainly.**
+
+The machine-proven core (counting lemma through closure, every piece named P1–P9, plus the P1.2 uniform-statement skeleton — the formal name of the one
 remaining mathematical gap) is complete: it is a reproducible
 package, rebuilt and re-gated in minutes on a fresh machine. What is
 *measured, not proven in the machine*: the per-point trapdoor facts
@@ -282,7 +295,9 @@ open part named rather than papered over.
 ## Update — 2026-09-14
 
 **The zero record jumped a hundredfold — by download, not by
-computation.** The machine-verified zero record stops where the public
+computation.**
+
+The machine-verified zero record stops where the public
 record on disk stopped (3.15×10⁷). That boundary is now 1.0063×10⁹:
 the public 31-digit zero record for the band above (2.84 billion
 zeros, in the standard Platt format from the LMFDB mirror) was
@@ -293,7 +308,9 @@ classical value within 1. This is data with a chain of custody, not
 new computation: the same public record anyone can check.
 
 **The instrument reached the new band — and reported a finding, not
-a confirmation.** The straddle-margin protocol (the number that must
+a confirmation.**
+
+The straddle-margin protocol (the number that must
 stay above 1 for the squeeze argument at height t) was re-run on
 *actual* zeros across the new band — 17 windows, then a denser 26-
 window boundary sweep. The margin held sound through 3.75×10⁷ (it had
@@ -316,7 +333,9 @@ the dips carry a small, understood quadrature bias at the very top of
 the band — none of this affects the verdicts, which are carried by
 the best-case bounds.
 
-**What changed is the map, not the machine.** Every piece of the
+**What changed is the map, not the machine.**
+
+Every piece of the
 machine-proven core (P1–P9, the P1.2 skeleton, the S4 window results)
 is untouched and still green on a fresh rebuild. What the new data
 did: (1) confirm the screened-sound region up to 5.2×10⁷ on actual
@@ -337,3 +356,25 @@ band. No prize is claimed from these pages; the position is
 unchanged: a reproducible, labeled, self-auditing trail, with the
 open part now measured, named, and shaped rather than merely
 expected.
+
+### Fun Facts
+- Yes, I have reason to believe this is real.
+- No, I don't understand everything in this project either.
+- 
+- This project was begun Sept 10th.
+- This project was completely entirely on rented hardare.
+- A single LLM was used, in only a single-threaded fashion, and all in a single session.
+- Specs: Qwen 3.8 27B FP8 precision, 262k context window
+- Rented: ~$0.50 per hour via vast.ai, total cost ~$100
+- Hardware: Nvidia CMP 170HX in Ontario, CA. Thank You, Nvidia! Firmware pirates unite!
+- Harness: pi
+- Harness plugins - a wiki one, some basic web search ones, and a goal one
+- OS - Linux Mint
+- Verdict: 
+- Yes, this is partially a work of art as well as a real-time, near stream of cosnsciousness play-by-play of the non-fiction effort
+- There are plenty of details in logs/, make sure you check there first for something you're interested in
+- tmp/ is a mess but it contains **some** temporary scripts that can be used. It's there for completeness sake.
+- My own words, I claim, are true. There is a lot from the LLM here and so I can't claim I read every single word.
+- The author remained on an impressive amount of harmless psychoactive substances throughout the effort, in order to handicap himself and keep nosey interlopers confused as to what was actually happening. It'll make sense later, I promise.
+- The author believes this is a sort of last stand for humanity against the inevitable progress of machine intelligence, solving one of the hardest known problems before a swarm of [100k ultra-fast AAA units](https://www.youtube.com/watch?v=__m8Q-zRdEA) find it like so many monkeys in a room banging on keyboards, nothing but bananas on their mind.
+- Mmmm... bananas are a good source of potassium, [I remember now Space Ghost once told me](https://www.youtube.com/watch?v=9ioG-cWG8AE).
