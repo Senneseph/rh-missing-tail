@@ -88,8 +88,8 @@ theorem gapIdentity (t a b : ℝ) (hab : a < b) (ha : 0 < a) (ht : 0 < t)
     (ht_out : t < a ∨ b < t) :
     ∫ x in a..b, W2K.Nas x * (1 / (x - t) + W2K.Sm x t) =
     W2K.Nas t * (log (b - t) - log (a - t)) +
-    ∫ x in a..b, (W2K.Nas x - W2K.Nas t) * (x - t)⁻¹ +
-    ∫ x in a..b, W2K.Nas x * W2K.Sm x t := by
+    (∫ x in a..b, (W2K.Nas x - W2K.Nas t) * (x - t)⁻¹) +
+    (∫ x in a..b, W2K.Nas x * W2K.Sm x t) := by
   -- (x - t) does not vanish on [a, b]
   have hden : ∀ x ∈ Set.uIcc a b, x - t ≠ 0 := by
     intro x hx
@@ -205,16 +205,16 @@ theorem gapIdentity (t a b : ℝ) (hab : a < b) (ha : 0 < a) (ht : 0 < t)
     ∫ x in a..b, W2K.Nas x * (1 / (x - t) + W2K.Sm x t)
       = ∫ x in a..b, (W2K.Nas x * (x - t)⁻¹ + W2K.Nas x * W2K.Sm x t) := by
         rw [hin]
-      _ = ∫ x in a..b, W2K.Nas x * (x - t)⁻¹ +
-          ∫ x in a..b, W2K.Nas x * W2K.Sm x t := by
+      _ = (∫ x in a..b, W2K.Nas x * (x - t)⁻¹) +
+          (∫ x in a..b, W2K.Nas x * W2K.Sm x t) := by
         rw [intervalIntegral.integral_add hIntNA hIntNS]
-      _ = (W2K.Nas t * ∫ x in a..b, (x - t)⁻¹ +
-            ∫ x in a..b, (W2K.Nas x - W2K.Nas t) * (x - t)⁻¹) +
-          ∫ x in a..b, W2K.Nas x * W2K.Sm x t := by
+      _ = (W2K.Nas t * (∫ x in a..b, (x - t)⁻¹) +
+            (∫ x in a..b, (W2K.Nas x - W2K.Nas t) * (x - t)⁻¹)) +
+          (∫ x in a..b, W2K.Nas x * W2K.Sm x t) := by
         congr
         · have h1 : ∫ x in a..b, W2K.Nas x * (x - t)⁻¹ =
-              W2K.Nas t * ∫ x in a..b, (x - t)⁻¹ +
-              ∫ x in a..b, (W2K.Nas x - W2K.Nas t) * (x - t)⁻¹ := by
+              (W2K.Nas t * (∫ x in a..b, (x - t)⁻¹)) +
+              (∫ x in a..b, (W2K.Nas x - W2K.Nas t) * (x - t)⁻¹) := by
             have hg : Set.EqOn (fun x : ℝ => W2K.Nas x * (x - t)⁻¹)
                 (fun x : ℝ => W2K.Nas t * (x - t)⁻¹ +
                   (W2K.Nas x - W2K.Nas t) * (x - t)⁻¹) (Set.uIcc a b) := by
@@ -226,21 +226,10 @@ theorem gapIdentity (t a b : ℝ) (hab : a < b) (ha : 0 < a) (ht : 0 < t)
             rw [intervalIntegral.integral_congr hg,
               intervalIntegral.integral_add hA hIntM,
               intervalIntegral.integral_const_mul (W2K.Nas t)]
-            apply add_congr
-            · apply congrArg (fun u : ℝ => W2K.Nas t * u)
-              apply intervalIntegral.integral_congr
-              intro _ _
-              ring
-            · apply intervalIntegral.integral_congr
-              intro _ _
-              ring
           rw [h1]
-          rfl
-        · rfl
       _ = W2K.Nas t * (log (b - t) - log (a - t)) +
-          ∫ x in a..b, (W2K.Nas x - W2K.Nas t) * (x - t)⁻¹ +
-          ∫ x in a..b, W2K.Nas x * W2K.Sm x t := by
+          (∫ x in a..b, (W2K.Nas x - W2K.Nas t) * (x - t)⁻¹) +
+          (∫ x in a..b, W2K.Nas x * W2K.Sm x t) := by
         rw [hFTC]
-        ring
 
 end W2I

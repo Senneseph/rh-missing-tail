@@ -68,3 +68,10 @@ import RhAttack.Closure
 import RhAttack.S4Growth
 import RhAttack.W2Kernel
 import RhAttack.W2Telescope
+
+-- Day-036 (goal turn): W2Integral (M3) — the per-gap singular-free
+-- integral side (plan section 1.3) for NON-STRADDLE gaps: the
+-- divided-difference/log/Sm decomposition gapIdentity, plus the
+-- continuous-extension-at-t helper midExt (consumed by M4's straddle
+-- integrability). GREEN, no sorry.
+import RhAttack.W2Integral
