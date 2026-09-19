@@ -538,11 +538,11 @@ kernel — is specific enough to fail.
 ## Authors and disclosure
 
 - **Jesse S. Miller** — [conception](https://www.youtube.com/watch?v=3wxyN3z9PL4), [experimental](https://www.youtube.com/watch?v=Bhkd0877xFo) [design](https://www.youtube.com/watch?v=DzMtPO-9cMU),
-  [direction](https://www.youtube.com/watch?v=ZZ5LpwO-An4), [interpretation](https://www.youtube.com/watch?v=E8Y_Sp7bhtk). (BS - Mathematics and Computer Science, Emory University; working interest in the histories of the Natural Sciences.)  
+  [direction](https://www.youtube.com/watch?v=ZZ5LpwO-An4), [interpretation](https://www.youtube.com/watch?v=E8Y_Sp7bhtk). (BS - Mathematics and Computer Science, Emory University; working interest in the [histories of the Natural Sciences](https://physicsdetective.com/a-partial-history-of-particle-physics-i/).)  
   **L. McGeorge** [-](https://suno.com/song/033eff6c-a93d-49f4-b9d7-a4553ac12b6e) [Creative Partner](https://www.youtube.com/watch?v=RLWZw6w-zLE)
 -  **hagr** - Spiritual Support
 - **Qwen (my quant, my trusty Clanker)** — @ Alibaba Qwen team for co-developing instrument:
-  implementation, computation, drafting, and cross-checking, running locally as `pi-qwen-vast` (Pi Agent Harness, Vast.ai rental) on the first author's hardware.
+  implementation, computation, drafting, and cross-checking, [running locally](https://www.youtube.com/watch?v=25V3hubVk0k) as `pi-qwen-vast` (Pi Agent Harness, Vast.ai rental) on the first author's hardware.
 - **AI disclosure.** A large language model substantially contributed
   to the investigation, implementation, and text. All numerical
   claims in this repository are reproducible from the working tree

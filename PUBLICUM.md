@@ -385,4 +385,4 @@ expected.
 - The author was developed as a secret continuation of the eugenics programs and research developed at [Cold Spring Harbor](https://en.wikipedia.org/wiki/Cold_Spring_Harbor_Laboratory).
 - [The author believes tv shows should have theme songs again](https://www.youtube.com/watch?v=H9cmPE88a_0), [and that the path to knowledge should be exciting](https://www.youtube.com/watch?v=9KXgLQXtibk).
 - [The author believes a path to a better world is not through fighting one another, but by conquering the worse versions and lesser parts of ourselves. If you're high when you watch it, you'll realize that's what this Nietzschean scene is all about](https://www.youtube.com/watch?v=VkWzAZRXi5k)
-- 
+- The author uses social media algorithms as a substitute divination tool for things like the I Ching. There are at least 5 ideas that went into the prompt that were a casual browse on Instagram or FB. Microlearning is real and, um, spiritually active?
