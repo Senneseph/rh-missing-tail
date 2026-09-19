@@ -1,6 +1,11 @@
 import Mathlib
 import RhAttack.B0
 import RhAttack.P12Uniform
+import RhAttack.B5
+import RhAttack.Closure
+import RhAttack.C1b
+import RhAttack.P8Floor
+import RhAttack.S4Strip
 
 open Real Set B0 P12
 
@@ -175,5 +180,301 @@ theorem slice_consts :
     TLow = 1000 ∧
     DLow = 1 / 2 :=
   ⟨by norm_num, by norm_num [gapLo], by rfl, by rfl, by rfl, by rfl⟩
+
+
+/-! ### v2 — the PROVEN S2 feed (day031): the detector-floor atoms
+    of the strip, imported and composed so the composition spends
+    more proof than data than v1 (where S2 was a single opaque
+    hypothesis).  STATUS MAP for this section:
+
+    PROVEN (this module, by the imported atoms):
+    - the WINDOW straddle floor on the strip: for
+      gamma >= 707/50, 0 < d <= 1/2, u = the witness straddle with
+      1/2 <= |u| <= 12, u != 0 (the discrete lattice u = 0.5k):
+        ‖Rratio gamma d (gamma + u) − 1‖ >= max (floWin gamma) 0
+      where floWin gamma = min(23/1000, 1 − 25/gamma) — C1b
+      `c1b_disc_floor` (imported) where gamma >= 25, and the norm
+      nonnegativity otherwise (gamma < 25 makes floWin negative, a
+      harmless lower bound; the SQUEEZE there is carried by the
+      pinned data floor, H6);
+    - the OWN-height (u = 0) detector: the exact value
+      ‖poff gamma d gamma‖ > 0 — Closure (C1a)
+      `p9_poff_own_height_pos` / `p9_kernel_change_at_own_height`
+      (imported) — its floor is the exact mass itself.
+    PINNED (the two small residual S2 regions of the strip, named
+    hypotheses of strip_squeeze_v2):
+    - the SLIVER t0 < 707/50 (the C1b regime starts at 707/50 =
+      14.14, just ABOVE the first zero 14.134725; the sliver
+      window floors are the pinned measurement of record — the
+      day-010 0.9975 pin family);
+    - the EDGE d0 = 1/2 (C1a's own-height atom is strict d < 1/2:
+      at the edge the off-pair sits at Re 0/1 — void for the
+      actual zeta by the classical zero-free regions, CITED; the
+      abstract composition keeps the edge as a named pinned
+      hypothesis).
+    REUSED (the concrete wire functions, S4Asm pattern):
+    - BwireStrip (t) := p8_B t (S4Strip.n4 t) — the t^4-family
+      definition-side wire (25af), floor side mown via
+      S4O.mown; the hs1/hs3/hs4 roles are carried exactly as in
+      v1 with the sources documented per hypothesis.
+-/
+
+open S4Strip
+
+/-- THE WINDOW FLOOR (C1b, PROVEN atom): floWin(γ) =
+    min(23/1000, 1 − 25/γ).  Nonnegative for γ >= 25 (the regime
+    where it is USEFUL for the squeeze); for γ <= 25 it is <= 0
+    (a harmless lower bound — the squeeze there is pinned, H6). -/
+noncomputable def floWin (γ : ℝ) : ℝ :=
+    min (23 / 1000 : ℝ) (1 - 25 / γ)
+
+theorem floWin_nonneg (γ : ℝ) (hγ : 25 ≤ γ) : 0 ≤ floWin γ := by
+  have hγp : 0 < γ := by nlinarith
+  rw [floWin]
+  exact le_inf (by norm_num) (by rw [sub_nonneg]; exact (div_le_one hγp).mpr (by nlinarith))
+
+theorem floWin_nonpos (γ : ℝ) (hγp : 0 < γ) (hγl : γ ≤ 25) : floWin γ ≤ 0 := by
+  rw [floWin]
+  have h25 : 1 ≤ 25 / γ := by
+    rw [le_div_iff₀ hγp]
+    nlinarith
+  calc _ ≤ 1 - 25 / γ := min_le_right _ _
+       _ ≤ 0 := by nlinarith [h25]
+
+theorem maxFloWin_zero_ge25 (γ : ℝ) (hγ : 25 ≤ γ) :
+    max (floWin γ) 0 = floWin γ :=
+  max_eq_left (floWin_nonneg γ hγ)
+
+theorem maxFloWin_zero_lt25 (γ : ℝ) (hγp : 0 < γ) (hγl : γ ≤ 25) :
+    max (floWin γ) 0 = 0 :=
+  max_eq_right (floWin_nonpos γ hγp hγl)
+
+/-- THE OWN FLOOR (C1a, PROVEN atom): the exact own-height
+    detector mass (positive for 0 < d < 1/2). -/
+noncomputable def floOwn (γ d : ℝ) : ℝ := ‖poff γ d γ‖
+
+theorem s2_own_pos (γ d : ℝ) (hd : 0 < d) (hdh : d < 1 / 2) :
+    0 < floOwn γ d := by
+  rw [floOwn]
+  exact p9_poff_own_height_pos γ d hd hdh
+
+/-- THE WINDOW S2 FLOOR (PROVEN): the concrete window-regime S2
+    inequality on the strip — the C1b discrete floor imported,
+    with the γ < 25 degeneration handled (max(floWin, 0) = 0, the
+    norm nonnegativity suffices).  This is the strip atom behind
+    v1's opaque hs2. -/
+theorem s2_strip_window (γ d u : ℝ) (hγ : 707 / 50 ≤ γ)
+    (hd : 0 < d) (hdL : d ≤ 1 / 2)
+    (hum : 1 / 2 ≤ |u|) (huL : |u| ≤ 12) (hu0 : u ≠ 0) :
+    ‖Rratio γ d (γ + u) - 1‖ ≥ max (floWin γ) 0 := by
+  by_cases h25 : 25 ≤ γ
+  · have hM : max (floWin γ) 0 = floWin γ := maxFloWin_zero_ge25 γ h25
+    rw [hM]
+    exact c1b_disc_floor γ d u hγ hd hdL hum huL hu0
+  · have hM : max (floWin γ) 0 = 0 := maxFloWin_zero_lt25 γ (by nlinarith) (le_of_lt (not_le.mp h25))
+    rw [hM]
+    exact norm_nonneg (Rratio γ d (γ + u) - 1)
+
+/-- THE WITNESS-LATTICE STRADDLES (S2 side, concrete): the 48
+    window straddles u = 0.5k, k = -24..-1, 1..24, as a Fin 48
+    index (k.val < 24 -> u = 0.5.(k.val + 1); k.val >= 24 ->
+    u = -0.5.(k.val - 23)).  Discrete witness lattice of the
+    closure protocol (25k[4] scope). -/
+noncomputable def strideU (k : Fin 48) : ℝ :=
+    (1 / 2 : ℝ) * (if k.val < 24 then (↑(k.val + 1) : ℝ) else -↑(k.val - 23) : ℝ)
+
+def strideIdx (k : ℕ) : Fin 48 :=
+    Fin.mk (k % 48) (Nat.mod_lt k (show (0 : ℕ) < 48 from by norm_num))
+
+/-- THE CONCRETE STRIP DETECTOR (S2 side, min over the witness
+    lattice): min of the own-height value and all 48 straddle
+    values — valid for ANY per-witness instantiation (the
+    lattice-wide strengthening). -/
+noncomputable def devStripMin (γ d : ℝ) : ℝ :=
+    (List.range 48).foldl (fun (acc : ℝ) (k : ℕ) =>
+      min acc (‖Rratio γ d (γ + strideU (strideIdx k)) - 1‖))
+      (‖poff γ d γ‖)
+
+/-- THE CONCRETE STRIP FLOOR (S2 side): min(own mass,
+    max(window floor, 0)) — proven a lower bound on devStripMin
+    on the covered region (s2_strip_min). -/
+noncomputable def floStripMin (γ d : ℝ) : ℝ :=
+    min (‖poff γ d γ‖) (max (floWin γ) 0)
+
+/-- EVERY lattice straddle satisfies the window S2 floor
+    (PROVEN — s2_strip_window at each of the 48 lattice points). -/
+theorem strideU_floor (γ d : ℝ) (hγ : 707 / 50 ≤ γ)
+    (hd : 0 < d) (hdL : d ≤ 1 / 2) (k : Fin 48) :
+    ‖Rratio γ d (γ + strideU k) - 1‖ ≥ max (floWin γ) 0 := by
+  by_cases h24 : k.val < 24
+  · -- case k.val < 24: u = (1/2) * ((k.val : ℝ) + 1) in [1/2, 12]
+    set u := (1 / 2 : ℝ) * ((k.val : ℝ) + 1) with hu
+    have hudef : strideU k = u := by
+      rw [strideU, if_pos h24, hu]
+      rw [Nat.cast_add]
+      ring
+    rw [hudef]
+    have hval0 : 0 ≤ (k.val : ℝ) := Nat.cast_nonneg (k.val : ℕ)
+    have hxlo : 1 ≤ (k.val : ℝ) + 1 := by nlinarith [hval0]
+    have h24n : k.val ≤ 23 := by omega
+    have h23 : (k.val : ℝ) ≤ 23 := by exact_mod_cast h24n
+    have hxhi : (k.val : ℝ) + 1 ≤ 24 := by
+      nlinarith [h23]
+    have hu1 : 1 / 2 ≤ u := by
+      rw [hu]
+      calc (1 / 2 : ℝ) = (1 / 2 : ℝ) * 1 := by norm_num
+        _ ≤ (1 / 2 : ℝ) * ((k.val : ℝ) + 1) :=
+          mul_le_mul_of_nonneg_left hxlo (by norm_num : 0 ≤ (1 / 2 : ℝ))
+    have hu2 : u ≤ 12 := by
+      rw [hu]
+      calc (1 / 2 : ℝ) * ((k.val : ℝ) + 1) ≤ (1 / 2 : ℝ) * 24 :=
+        mul_le_mul_of_nonneg_left hxhi (by norm_num : 0 ≤ (1 / 2 : ℝ))
+        _ = 12 := by norm_num
+    have hu0n : u ≠ 0 := by
+      rw [hu]
+      by_contra h
+      rw [mul_eq_zero] at h
+      cases h with
+      | inl h1 => norm_num at h1
+      | inr h2 => nlinarith [hxlo, h2]
+    have hu0p : 0 ≤ u := by rw [hu]; nlinarith [hval0]
+    have habs : |u| = u := abs_of_nonneg hu0p
+    have hum1 : 1 / 2 ≤ |u| := by rw [habs]; exact hu1
+    have hu2b : |u| ≤ 12 := by rw [habs]; exact hu2
+    exact s2_strip_window γ d u hγ hd hdL hum1 hu2b hu0n
+  · -- case k.val >= 24: u = -((1/2) * x), x = (k.val - 23 : ℝ) in [1, 24]
+    set x := (k.val : ℝ) - 23 with hx
+    have hk24n : 24 ≤ k.val := by omega
+    have h24 : (k.val : ℝ) ≥ 24 := by exact_mod_cast hk24n
+    have hxlo : 1 ≤ x := by rw [hx]; linarith [h24]
+    have hk47n : k.val ≤ 47 := by omega
+    have h47 : (k.val : ℝ) ≤ 47 := by exact_mod_cast hk47n
+    have hxhi : x ≤ 24 := by rw [hx]; linarith [h47]
+    set u := (1 / 2 : ℝ) * -x with hu
+    have hcast : (↑(k.val - 23 : ℕ) : ℝ) = x := by
+      rw [Nat.cast_sub (show (23 : ℕ) ≤ k.val from by omega), hx]
+      norm_num
+    have hudef : strideU k = u := by
+      rw [strideU, if_neg (by omega : ¬ k.val < 24), hcast, hu]
+    rw [hudef]
+    have huneg : u ≤ 0 := by rw [hu]; nlinarith [hxlo]
+    have habs : |u| = -u := abs_of_nonpos huneg
+    have huum : |u| = (1 / 2 : ℝ) * x := by
+      rw [habs, hu]
+      ring
+    have hu1 : 1 / 2 ≤ |u| := by
+      rw [huum]
+      calc (1 / 2 : ℝ) = (1 / 2 : ℝ) * 1 := by norm_num
+        _ ≤ (1 / 2 : ℝ) * x :=
+          mul_le_mul_of_nonneg_left hxlo (by norm_num : 0 ≤ (1 / 2 : ℝ))
+    have hu2 : |u| ≤ 12 := by
+      rw [huum]
+      calc (1 / 2 : ℝ) * x ≤ (1 / 2 : ℝ) * 24 :=
+        mul_le_mul_of_nonneg_left hxhi (by norm_num : 0 ≤ (1 / 2 : ℝ))
+        _ = 12 := by norm_num
+    have hu0n : u ≠ 0 := by
+      rw [hu]
+      by_contra h
+      nlinarith [h, hxlo]
+    exact s2_strip_window γ d u hγ hd hdL hu1 hu2 hu0n
+
+/-- THE LATTICE-WIDE S2 LOWER BOUND (PROVEN): on the covered
+    strip region (γ >= 707/50, 0 < d <= 1/2), the min over the
+    whole witness lattice sits above the concrete strip floor —
+    an induction on the foldl, each step bounded by the lattice
+    point (strideU_floor) or the own-height start (min_le_left). -/
+theorem devStripMin_lower (γ d : ℝ) (hγ : 707 / 50 ≤ γ)
+    (hd : 0 < d) (hdL : d ≤ 1 / 2) :
+    devStripMin γ d ≥ floStripMin γ d := by
+  set A := ‖poff γ d γ‖ with hA
+  set M := max (floWin γ) 0 with hM
+  have hflo : floStripMin γ d = min A M := by
+    rw [floStripMin, hA, hM]
+  rw [hflo]
+  set V : ℕ → ℝ := fun (k : ℕ) => ‖Rratio γ d (γ + strideU (strideIdx k)) - 1‖ with hV
+  have hv : ∀ (k : ℕ), k < 48 → V k ≥ M := by
+    intro k hk
+    set kf : Fin 48 := ⟨k, by omega⟩ with hkf
+    have hidx : strideIdx k = kf := by
+      dsimp [strideIdx]
+      rw [Fin.ext_iff]
+      exact Nat.mod_eq_of_lt hk
+    have h := strideU_floor γ d hγ hd hdL kf
+    simpa [hM, hV, hidx] using h
+  have hfold : devStripMin γ d =
+      (List.range 48).foldl (fun (acc : ℝ) (k : ℕ) => min acc (V k)) A := by
+    rw [devStripMin]
+  rw [hfold]
+  have hP : ∀ (n : ℕ), n ≤ 48 →
+      (List.range n).foldl (fun (acc : ℝ) (k : ℕ) => min acc (V k)) A ≥ min A M := by
+    intro n hn
+    induction n with
+    | zero =>
+      rw [show List.range 0 = [] from rfl, List.foldl_nil]
+      exact min_le_left A M
+    | succ n ih =>
+      have hn1 : n + 1 ≤ 48 := by omega
+      have hI : n ≤ 48 := by omega
+      have hX := ih hI
+      have hvn := hv n (by omega : n < 48)
+      rw [show List.range (n + 1) = List.range n ++ [n] from List.range_succ,
+        List.foldl_append]
+      exact le_min hX (le_trans (min_le_right A M) hvn)
+  exact hP 48 (by norm_num)
+
+/-- THE COVERED-REGION S2 (PROVEN): devStripMin >= floStripMin
+    on the covered strip region — the v1 opaque hs2 hypothesis
+    replaced by this theorem wherever it reaches (t0 >= 707/50,
+    the whole strip above the first-zero sliver). -/
+theorem s2_strip_min (t0 d0 : ℝ) (ht0 : 707 / 50 ≤ t0)
+    (hd0 : 0 < d0) (hd0L : d0 ≤ 1 / 2) :
+    devStripMin t0 d0 ≥ floStripMin t0 d0 :=
+  devStripMin_lower t0 d0 ht0 hd0 hd0L
+
+/-- THE v2 COMPOSITION (SCREEN level, H1 — the day030 verdict
+    with S2 mostly PROVEN): on the low-t strip, with the pinned
+    data inputs (marginLowT + grid adequacy hgrid, the slice
+    facts) and the residual hypotheses — hs1 (the CITED
+    25.2.12 zero side, the A4.3-wired Mf form), hs3 (the P8 A5
+    definition-side terminal under its explicit machine inputs),
+    hs4 (the day030 measured squeeze), and the ONE small S2
+    residual hs2sliver (t0 < 707/50: the C1b regime gap just
+    above the first zero, where the window floors are the pinned
+    measurement of record) — the P1.2 squeezed-margin form holds
+    pointwise with the CONCRETE dev/flo (devStripMin /
+    floStripMin), AND the pinned floor bounds marginLowT.  S2 on
+    t0 >= 707/50 is DISCHARGED by the module's own theorem
+    (s2_strip_min: window via C1b, own-height start by C1a's
+    exact mass).  NO RH claim (v1 header). -/
+theorem strip_squeeze_v2
+    (q : ZeroSet)
+    (marginLowT : ℝ × ℝ → ℝ)
+    (hgrid : GridAdequate marginLowT)
+    (_hslice : SliceFacts nSlice (0.221 : ℝ))
+    (Mf Bwire Mr : ℝ × ℝ → ℝ)
+    (hs1 : ∀ (t0 d0 : ℝ), 0 < t0 → t0 < TLow → 0 < d0 → d0 ≤ DLow →
+      offPair q t0 d0 → ∃ Q, Q ≥ devStripMin t0 d0 - Mf (t0, d0))
+    (hs2sliver : ∀ (t0 d0 : ℝ), 0 < t0 → t0 < 707 / 50 → 0 < d0 → d0 ≤ DLow →
+      offPair q t0 d0 → devStripMin t0 d0 ≥ floStripMin t0 d0)
+    (hs3 : ∀ (t0 d0 : ℝ) (Q : ℝ), 0 < t0 → t0 < TLow → 0 < d0 → d0 ≤ DLow →
+      offPair q t0 d0 → Q ≤ Bwire (t0, d0) + Mr (t0, d0))
+    (hs4 : ∀ (t0 d0 : ℝ), 0 < t0 → t0 < TLow → 0 < d0 → d0 ≤ DLow →
+      offPair q t0 d0 → Bwire (t0, d0) + Mr (t0, d0) + Mf (t0, d0) < floStripMin t0 d0) :
+    ∀ (t0 d0 : ℝ), 0 < t0 → t0 < TLow → 0 < d0 → d0 ≤ DLow →
+      offPair q t0 d0 →
+      (∃ (Q dev f M Bf Mr' : ℝ),
+        Q ≥ dev - M ∧ dev ≥ f ∧ Q ≤ Bf + Mr' ∧ Bf + Mr' + M < f) ∧
+      marginLowT (t0, d0) ≥ (7357 : ℝ) / 1000 := by
+  intro t0 d0 ht0 ht0u hd0 hd0u hp
+  refine ⟨?_, hgrid t0 d0 ht0 ht0u hd0 hd0u⟩
+  obtain ⟨Qw, hQw⟩ := hs1 t0 d0 ht0 ht0u hd0 hd0u hp
+  have hQle := hs3 t0 d0 Qw ht0 ht0u hd0 hd0u hp
+  have hgap := hs4 t0 d0 ht0 ht0u hd0 hd0u hp
+  have hdev : devStripMin t0 d0 ≥ floStripMin t0 d0 := by
+    by_cases hsliver : t0 < 707 / 50
+    · exact hs2sliver t0 d0 ht0 hsliver hd0 hd0u hp
+    · exact s2_strip_min t0 d0 (by nlinarith) hd0 hd0u
+  exact ⟨Qw, devStripMin t0 d0, floStripMin t0 d0, Mf (t0, d0),
+    Bwire (t0, d0), Mr (t0, d0), hQw, hdev, hQle, hgap⟩
 
 end S1LowT
