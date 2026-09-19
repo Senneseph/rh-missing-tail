@@ -18,7 +18,7 @@ O is for Origin One Only Once
 P is for Projection Point Portal Path Puff  
 Q is for Quotient Quoin Quill Quality Question  
 R is for Ray Respond Refer Rejoin Return Rest Reflect  
-S is for Sly Sinuous Serpentine Segment Sect  
+S is for Sly Sinuous Smoothe Serpentine Segment Sect  
 T is for Tried True Tangent Touch Trace  
 U is for Us Under Unite Up  
 V is for Very Victory Verge Vow  
