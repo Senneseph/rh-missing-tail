@@ -185,6 +185,8 @@ theorem gapIdentity (t a b : ℝ) (hab : a < b) (ha : 0 < a) (ht : 0 < t)
     hNasSubInvC.intervalIntegrable
   have hIntI : IntervalIntegrable (fun x : ℝ => (x - t)⁻¹) volume a b :=
     hInvC.intervalIntegrable
+  have hContNA : ContinuousOn (fun x : ℝ => W2K.Nas t * (x - t)⁻¹) (Set.uIcc a b) :=
+    continuousOn_const.mul hInvC
   -- the left integrand rewrites pointwise (the division
   -- convention keeps it true even at x = t)
   have hin : (fun x : ℝ => W2K.Nas x * (1 / (x - t) + W2K.Sm x t)) =
@@ -210,12 +212,30 @@ theorem gapIdentity (t a b : ℝ) (hab : a < b) (ha : 0 < a) (ht : 0 < t)
             ∫ x in a..b, (W2K.Nas x - W2K.Nas t) * (x - t)⁻¹) +
           ∫ x in a..b, W2K.Nas x * W2K.Sm x t := by
         congr
-        · -- ∫ Nas x·(x−t)⁻¹ = ∫ (Nas t + (Nas x − Nas t))·(x−t)⁻¹
-          rw [intervalIntegral.integral_congr (by intro _ _; ring)]
-          rw [intervalIntegral.integral_add]
-          · exact ((continuousOn_const.mul hInvC).intervalIntegrable)
-          · exact hIntM
-          rw [intervalIntegral.integral_const_mul (W2K.Nas t)]
+        · have h1 : ∫ x in a..b, W2K.Nas x * (x - t)⁻¹ =
+              W2K.Nas t * ∫ x in a..b, (x - t)⁻¹ +
+              ∫ x in a..b, (W2K.Nas x - W2K.Nas t) * (x - t)⁻¹ := by
+            have hg : Set.EqOn (fun x : ℝ => W2K.Nas x * (x - t)⁻¹)
+                (fun x : ℝ => W2K.Nas t * (x - t)⁻¹ +
+                  (W2K.Nas x - W2K.Nas t) * (x - t)⁻¹) (Set.uIcc a b) := by
+              intro _ _
+              ring
+            have hA : IntervalIntegrable (fun x : ℝ =>
+                W2K.Nas t * (x - t)⁻¹) volume a b :=
+              hContNA.intervalIntegrable
+            rw [intervalIntegral.integral_congr hg,
+              intervalIntegral.integral_add hA hIntM,
+              intervalIntegral.integral_const_mul (W2K.Nas t)]
+            apply add_congr
+            · apply congrArg (fun u : ℝ => W2K.Nas t * u)
+              apply intervalIntegral.integral_congr
+              intro _ _
+              ring
+            · apply intervalIntegral.integral_congr
+              intro _ _
+              ring
+          rw [h1]
+          rfl
         · rfl
       _ = W2K.Nas t * (log (b - t) - log (a - t)) +
           ∫ x in a..b, (W2K.Nas x - W2K.Nas t) * (x - t)⁻¹ +
