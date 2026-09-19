@@ -400,7 +400,7 @@ theorem s4asm_strip_region_S4_sharp (t0 d0 : ℝ) (ht0 : 1000 ≤ t0)
     (hdlo : S4Strip.r2prime ≤ d0) (hd : d0 ≤ 1 / 2) :
     p8_B t0 (S4Strip.n4 t0) + S4W.Zbound t0 * Real.exp (S4Strip.X4fun t0) *
         S4Strip.X4fun t0 < S4O.mown t0 d0 := by
-  have hd0 : 0 < d0 := by linarith
+  have hd0 : 0 < d0 := by linarith [S4Strip.hr2prime_pos]
   have hM0 : 0 ≤ S4W.Zbound t0 := by
     dsimp only [S4W.Zbound]
     exact mul_nonneg

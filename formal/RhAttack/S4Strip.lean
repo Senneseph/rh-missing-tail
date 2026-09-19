@@ -1783,22 +1783,24 @@ Structure (no derivatives; pure positive-term decompositions only):
 /-- day033 sharp floor edge: r2' = 47384091/10^10 = 0.0047384091, a
     strict 10-decimal rational just ABOVE the exact squeeze edge d_F
     (certified d_F in [0.0047384080, 0.0047384081]). -/
-noncomputable def r2prime : ℝ := (47384091 : ℝ) / (10 : ℝ) ^ 10
+noncomputable def r2prime : ℝ := (47384091 : ℝ) / 10000000000
 
 /-- day033 sharp floor in u = d^2: the value of t^2·mown(t, d) with the
     e^c factor dropped, at t = 1000; a valid floor for all t >= 1000
     (st_mownfloor_sharp). -/
 noncomputable def FshU (u : ℝ) : ℝ :=
-    (10 : ℝ) ^ 6 * u * (u + 4 * (10 : ℝ) ^ 6) /
-      ((10 : ℝ) ^ 12 + 10 ^ 6 * (2 * u + 1 / 2) + ((1 / 4 : ℝ) - u) ^ 2)
+    1000000 * u * (u + 4000000) /
+      (1000000000000 + 2000000 * u + 500000 + ((1 / 4 : ℝ) - u) ^ 2)
 
 /-- day033 sharp floor in d: Fsh d = FshU (d^2). -/
 noncomputable def Fsh (d : ℝ) : ℝ := FshU (d ^ 2)
 
-/-- day033 SHARP FLOOR: for all 1000 ≤ t, 0 < d ≤ 1/2,
-    Fsh d * t^-2 ≤ mown(t, d).
-    (Replaces the d >= 1/200 use of F4 on the whole strip 0 < d ≤ 1/2;
-    the old F4 line st_mownfloor is unchanged and still available.) -/
+/-- day033: r2prime is a positive rational. -/
+theorem hr2prime_pos : 0 < r2prime := by
+  dsimp only [r2prime]
+  exact div_pos (by norm_num : (0 : ℝ) < 47384091)
+      (by norm_num : (0 : ℝ) < 10000000000)
+
 /-! day033 SHARP FLOOR: for all 1000 ≤ t, 0 < d ≤ 1/2,
     FshU (d^2) * t^-2 ≤ mown(t, d).
     mown(t, d) = u(u+4v)/AB(v)·e^c (u = d^2, v = t^2, e^c = e^{Cown} ≥ 1);
@@ -1809,6 +1811,7 @@ noncomputable def Fsh (d : ℝ) : ℝ := FshU (d ^ 2)
     Aco = 4(1/4-u)^2 + 7·10^6·u + 2·10^6 > 0 and Bsh > 0 on 0 < u ≤ 1/4
     (all exact, day033).  Replaces the d ≥ 1/200 use of F4 on the whole
     strip 0 < d ≤ 1/2; the old F4 line st_mownfloor is unchanged. -/
+set_option maxHeartbeats 1600000
 theorem st_mownfloor_sharp (t d : ℝ) (ht : 1000 ≤ t) (hd0 : 0 < d)
     (hd : d ≤ 1 / 2) : Fsh (d) * t ^ (-2 : ℝ) ≤ S4O.mown t d := by
   have htpos : 0 < t := st_tpos t ht
@@ -1845,23 +1848,23 @@ theorem st_mownfloor_sharp (t d : ℝ) (ht : 1000 ≤ t) (hd0 : 0 < d)
       u * (u + 4 * v) / (S4O.Aown t d * S4O.Bown t d) *
         Real.exp (S4O.Cown t d) := by
     dsimp only [S4O.mown, S4O.Aown, S4O.Bown, S4O.Cown, u, v]
-  set Dstar := (10 : ℝ) ^ 12 + 10 ^ 6 * (2 * u + 1 / 2) +
+  set Dstar := 1000000000000 + 2000000 * u + 500000 +
       ((1 / 4 : ℝ) - u) ^ 2 with hDs
   have hDpos : 0 < Dstar := by
     dsimp only [Dstar]
-    have h1 : 0 ≤ (10 : ℝ) ^ 12 := by norm_num
-    have h2 : 0 ≤ 10 ^ 6 * (2 * u + 1 / 2) :=
-      mul_nonneg (by norm_num : (0 : ℝ) ≤ 10 ^ 6) (by nlinarith [huvN])
-    have h3 : 0 ≤ ((1 / 4 : ℝ) - u) ^ 2 := sq_nonneg ((1 / 4 : ℝ) - u)
-    linarith [h1, h2, h3]
+    have h1 : 0 ≤ 1000000000000 := by norm_num
+    have h2 : 0 ≤ 2000000 * u :=
+      mul_nonneg (by norm_num : (0 : ℝ) ≤ 2000000) huvN
+    have h3 : 0 ≤ 500000 := by norm_num
+    have h4 : 0 ≤ ((1 / 4 : ℝ) - u) ^ 2 := sq_nonneg ((1 / 4 : ℝ) - u)
+    linarith [h1, h2, h3, h4]
   have hABpos : 0 < S4O.Aown t d * S4O.Bown t d := mul_pos hApos hBpos
-  set Xf := 10 ^ 6 * (u + 4 * (10 : ℝ) ^ 6) with hXd
+  set Xf := 1000000 * u + 4000000000000 with hXd
   have hFshU : FshU u = u * Xf / Dstar := by
     dsimp only [FshU, Xf, Dstar]
     ring
   have hFsh_eq : Fsh (d) = FshU u := by
     dsimp only [Fsh, u]
-    rw [← hu]
   have hvlo : (10 : ℝ) ^ 6 ≤ v := by
     rw [hv]
     have h1 : 1000 ^ 2 ≤ t ^ 2 :=
@@ -1869,62 +1872,60 @@ theorem st_mownfloor_sharp (t d : ℝ) (ht : 1000 ≤ t) (hd0 : 0 < d)
     rw [show (10 : ℝ) ^ 6 = 1000 ^ 2 from by norm_num]
     exact h1
   have hs : 0 ≤ v - (10 : ℝ) ^ 6 := sub_nonneg.mpr hvlo
-  set Aco := 4 * ((1 / 4 : ℝ) - u) ^ 2 + 7 * 10 ^ 6 * u + 2 * 10 ^ 6 with hAcod
+  set Aco := 4 * ((1 / 4 : ℝ) - u) ^ 2 + 7000000 * u + 2000000 with hAcod
   have hAco_pos : 0 < Aco := by
     dsimp only [Aco]
     have h1 : 0 ≤ 4 * ((1 / 4 : ℝ) - u) ^ 2 := by
       linarith [sq_nonneg ((1 / 4 : ℝ) - u)]
-    have h2 : 0 ≤ 7 * 10 ^ 6 * u :=
-      mul_nonneg (by norm_num : (0 : ℝ) ≤ 7 * 10 ^ 6) huvN
-    have h3 : (0 : ℝ) < 2 * 10 ^ 6 := by norm_num
+    have h2 : 0 ≤ 7000000 * u :=
+      mul_nonneg (by norm_num : (0 : ℝ) ≤ 7000000) huvN
+    have h3 : (0 : ℝ) < 2000000 := by norm_num
     linarith [h1, h2, h3]
-  set Bsh := u * Dstar - Xf * (2 * u + 1 / 2) + 2 * 10 ^ 6 * Aco with hBshd
-  have hBsh_exp : Bsh = 2 * 10 ^ 12 + u * (6 * 10 ^ 12 - 5 * 10 ^ 5 - 2 * 10 ^ 6 * u) +
-      8 * 10 ^ 6 * ((1 / 4 : ℝ) - u) ^ 2 + u * Dstar := by
+  set Bsh := u * Dstar - Xf * (2 * u + 1 / 2) + 2000000 * Aco with hBshd
+  have hBsh_exp : Bsh = 2000000000000 + u * (6000000000000 - 500000 - 2000000 * u) +
+      8000000 * ((1 / 4 : ℝ) - u) ^ 2 + u * Dstar := by
     dsimp only [Bsh, Aco, Xf]
     ring
   have hBsh_pos : 0 < Bsh := by
-    dsimp only [Bsh, Aco, Xf]
-    have hb : 2 * 10 ^ 6 * u ≤ 2 * 10 ^ 6 * (1 / 4) :=
-      mul_le_mul_of_nonneg_left hud (by norm_num : (0 : ℝ) ≤ 2 * 10 ^ 6)
-    have h1 : 0 < 6 * 10 ^ 12 - 5 * 10 ^ 5 - 2 * 10 ^ 6 * u := by
-      nlinarith [hb, show (2 : ℝ) * 10 ^ 6 * (1 / 4) = 5 * 10 ^ 5 from by norm_num,
-        show (0 : ℝ) < 6 * 10 ^ 12 - 5 * 10 ^ 5 - 5 * 10 ^ 5 from by norm_num]
-    have h2 : 0 < u * (6 * 10 ^ 12 - 5 * 10 ^ 5 - 2 * 10 ^ 6 * u) :=
+    have hb : 2000000 * u ≤ 2000000 * (1 / 4) :=
+      mul_le_mul_of_nonneg_left hud (by norm_num : (0 : ℝ) ≤ 2000000)
+    have h1 : 0 < 6000000000000 - 500000 - 2000000 * u := by
+      nlinarith [hb, show (2000000 : ℝ) * (1 / 4) = 500000 from by norm_num,
+        show (0 : ℝ) < 6000000000000 - 500000 - 500000 from by norm_num]
+    have h2 : 0 < u * (6000000000000 - 500000 - 2000000 * u) :=
       mul_pos huv h1
-    have h3 : 0 ≤ 8 * 10 ^ 6 * ((1 / 4 : ℝ) - u) ^ 2 := by
+    have h3 : 0 ≤ 8000000 * ((1 / 4 : ℝ) - u) ^ 2 := by
       linarith [sq_nonneg ((1 / 4 : ℝ) - u)]
     have h4 : 0 < u * Dstar := mul_pos huv hDpos
-    have h5 : (0 : ℝ) < 2 * 10 ^ 12 := by norm_num
+    have h5 : (0 : ℝ) < 2000000000000 := by norm_num
     rw [hBsh_exp]
     nlinarith [h5, h2, h3, h4]
   have hNshift : v * (u + 4 * v) * Dstar -
       Xf * (v ^ 2 + (2 * u + 1 / 2) * v + ((1 / 4 : ℝ) - u) ^ 2) =
-      Aco * (v - (10 : ℝ) ^ 6) ^ 2 + Bsh * (v - (10 : ℝ) ^ 6) := by
+      Aco * (v - 1000000) ^ 2 + Bsh * (v - 1000000) := by
     dsimp only [Aco, Bsh, Dstar, Xf]
     ring
   have hNn : 0 ≤ u * (v * (u + 4 * v) * Dstar -
       Xf * (v ^ 2 + (2 * u + 1 / 2) * v + ((1 / 4 : ℝ) - u) ^ 2)) := by
     rw [hNshift]
-    have h1 : 0 ≤ u * Aco * (v - (10 : ℝ) ^ 6) ^ 2 := by
+    have h1 : 0 ≤ u * Aco * (v - 1000000) ^ 2 := by
       have h12 : 0 ≤ u * Aco := mul_nonneg huvN hAco_pos.le
-      exact mul_nonneg h12 (sq_nonneg (v - (10 : ℝ) ^ 6))
-    have h2 : 0 ≤ u * Bsh * (v - (10 : ℝ) ^ 6) := by
+      exact mul_nonneg h12 (sq_nonneg (v - 1000000))
+    have h2 : 0 ≤ u * Bsh * (v - 1000000) := by
       have h21 : 0 ≤ u * Bsh := mul_nonneg huvN (le_of_lt hBsh_pos)
-      exact mul_nonneg h21 hs
+      exact mul_nonneg h21 (by
+        have hs0 : 0 ≤ v - 1000000 := by
+          have hv0 : (10 : ℝ) ^ 6 = 1000000 := by norm_num
+          rw [hv0] at hs
+          exact hs
+        exact hs0)
     ring_nf at h1 h2 ⊢
     linarith [h1, h2]
+  have h2 : t ^ (2 : ℝ) = t ^ 2 := by norm_num
+  have ht1 : (t : ℝ) ^ (-2 : ℝ) = 1 / t ^ 2 := by
+    rw [Real.rpow_neg htpos.le (2 : ℝ), inv_eq_one_div, h2]
   have htinv : (t : ℝ) ^ (-2 : ℝ) = 1 / v := by
-    have hA : (t : ℝ) ^ (-2 : ℝ) = (t ^ (2 : ℝ)) ^ (-1 : ℝ) := by
-      rw [Real.rpow_neg htpos.le (2 : ℝ)]
-    have hB : t ^ (2 : ℝ) = t ^ 2 := by
-      rw [Real.rpow_natCast]
-    have hC : t ^ 2 = v := hv.symm
-    calc (t : ℝ) ^ (-2 : ℝ)
-        = (t ^ (2 : ℝ)) ^ (-1 : ℝ) := hA
-      _ = (t ^ 2) ^ (-1 : ℝ) := by rw [hB]
-      _ = v ^ (-1 : ℝ) := by rw [hC]
-      _ = 1 / v := by ring
+    rw [ht1, hv]
   have hnum : 0 ≤ u * (u + 4 * v) :=
     mul_nonneg huv.le (by nlinarith [huvN, hvpos.le])
   calc Fsh (d) * t ^ (-2 : ℝ)
@@ -1938,14 +1939,20 @@ theorem st_mownfloor_sharp (t d : ℝ) (ht : 1000 ≤ t) (hd0 : 0 < d)
         rw [hAb]
         ring_nf at hNn ⊢
         linarith [hNn])
-    _ ≤ u * (u + 4 * v) / (S4O.Aown t d * S4O.Bown t d) *
-        Real.exp (S4O.Cown t d) := by
-      apply mul_le_mul_of_nonneg_left hexp
-      exact div_nonneg hnum hABpos.le
+    _ = 1 * (u * (u + 4 * v) / (S4O.Aown t d * S4O.Bown t d)) := by ring
+    _ ≤ Real.exp (S4O.Cown t d) *
+        (u * (u + 4 * v) / (S4O.Aown t d * S4O.Bown t d)) := by
+      have hW0b : 0 ≤ u * (u + 4 * v) / (S4O.Aown t d * S4O.Bown t d) :=
+        div_nonneg hnum hABpos.le
+      exact mul_le_mul_of_nonneg_right hexp hW0b
+    _ = (u * (u + 4 * v) / (S4O.Aown t d * S4O.Bown t d)) *
+        Real.exp (S4O.Cown t d) := by ring
     _ = S4O.mown t d := by
-      rw [hmown.symm]
+      dsimp only [S4O.mown]
 
 
+set_option maxHeartbeats 200000
+set_option maxHeartbeats 1600000
 /-- day033: FshU INCREASING in u on 0 < u ≤ 1/4.
     Nsh(u) := 10^6 u^2 + 4·10^12 u (the FshU numerator), Dstar(u) as
     above:  Nsh(u2)·Dstar(u1) - Nsh(u1)·Dstar(u2) = (u2 - u1)·Q with Q
@@ -1953,14 +1960,14 @@ theorem st_mownfloor_sharp (t d : ℝ) (ht : 1000 ≤ t) (hd0 : 0 < d)
     day033-verified exactly). -/
 theorem st_Fsh_mono (u1 u2 : ℝ) (hu1 : 0 < u1) (h : u1 ≤ u2)
     (hu2 : u2 ≤ 1 / 4) : FshU u1 ≤ FshU u2 := by
-  set K := (10 : ℝ) ^ 12 + 5 * 10 ^ 5 + 1 / 16 with hKd
+  set K := (1000000000000 : ℝ) + 500000 + 1 / 16 with hKd
   have hKpos : 0 < K := by
     dsimp only [K]
     norm_num
-  set Nsh1 := (10 : ℝ) ^ 6 * u1 ^ 2 + 4 * 10 ^ 12 * u1 with hN1d
-  set Nsh2 := (10 : ℝ) ^ 6 * u2 ^ 2 + 4 * 10 ^ 12 * u2 with hN2d
-  set D1 := u1 ^ 2 + (2 * (10 : ℝ) ^ 6 - 1 / 2) * u1 + K with hD1d
-  set D2 := u2 ^ 2 + (2 * (10 : ℝ) ^ 6 - 1 / 2) * u2 + K with hD2d
+  set Nsh1 := 1000000 * u1 ^ 2 + 4000000000000 * u1 with hN1d
+  set Nsh2 := 1000000 * u2 ^ 2 + 4000000000000 * u2 with hN2d
+  set D1 := u1 ^ 2 + ((3999999 : ℝ) / 2) * u1 + K with hD1d
+  set D2 := u2 ^ 2 + ((3999999 : ℝ) / 2) * u2 + K with hD2d
   have hD1pos : 0 < D1 := by
     dsimp only [D1]
     nlinarith [hu1.le, hKpos.le, show (0 : ℝ) ≤ u1 ^ 2 from by
@@ -1970,31 +1977,31 @@ theorem st_Fsh_mono (u1 u2 : ℝ) (hu1 : 0 < u1) (h : u1 ≤ u2)
     dsimp only [D2]
     nlinarith [huu2, hKpos.le, show (0 : ℝ) ≤ u2 ^ 2 from by
       nlinarith [sq_nonneg u2]]
-  have hden1 : (10 : ℝ) ^ 12 + 10 ^ 6 * (2 * u1 + 1 / 2) + ((1 / 4 : ℝ) - u1) ^ 2 =
+  have hden1 : 1000000000000 + 2000000 * u1 + 500000 + ((1 / 4 : ℝ) - u1) ^ 2 =
       D1 := by
     dsimp only [D1, K]
     ring
-  have hnum1 : (10 : ℝ) ^ 6 * u1 * (u1 + 4 * (10 : ℝ) ^ 6) = Nsh1 := by
+  have hnum1 : 1000000 * u1 * (u1 + 4000000) = Nsh1 := by
     ring
   have hN1eq : FshU u1 = Nsh1 / D1 := by
     dsimp only [FshU]
     rw [hden1, hnum1]
-    ring
-  have hden2 : (10 : ℝ) ^ 12 + 10 ^ 6 * (2 * u2 + 1 / 2) + ((1 / 4 : ℝ) - u2) ^ 2 =
+  have hden2 : 1000000000000 + 2000000 * u2 + 500000 + ((1 / 4 : ℝ) - u2) ^ 2 =
       D2 := by
     dsimp only [D2, K]
-  have hnum2 : (10 : ℝ) ^ 6 * u2 * (u2 + 4 * (10 : ℝ) ^ 6) = Nsh2 := by
+    ring
+  have hnum2 : 1000000 * u2 * (u2 + 4000000) = Nsh2 := by
     ring
   have hN2eq : FshU u2 = Nsh2 / D2 := by
     dsimp only [FshU]
     rw [hden2, hnum2]
   have hQ : Nsh2 * D1 - Nsh1 * D2 =
-      (u2 - u1) * (10 ^ 6 * K * (u1 + u2) + 4 * 10 ^ 12 * K +
-        u1 * u2 * (10 ^ 6 * (2 * (10 : ℝ) ^ 6 - 1 / 2) - 4 * 10 ^ 12)) := by
+      (u2 - u1) * (1000000 * K * (u1 + u2) + 4000000000000 * K +
+        u1 * u2 * (-(2000000000000 + 500000))) := by
     dsimp only [Nsh1, Nsh2, D1, D2, K]
     ring
-  set Dneg := 2 * 10 ^ 12 + (1 / 2 : ℝ) * 10 ^ 6 with hDneld
-  have hcoeq : (10 : ℝ) ^ 6 * (2 * (10 : ℝ) ^ 6 - 1 / 2) - 4 * 10 ^ 12 = -Dneg := by
+  set Dneg := (2000000000000 : ℝ) + 500000 with hDneld
+  have hcoeq : 1000000 * ((3999999 : ℝ) / 2) - 4000000000000 = -Dneg := by
     dsimp only [Dneg]
     ring
   have huu2 : 0 ≤ u2 := by linarith
@@ -2012,28 +2019,39 @@ theorem st_Fsh_mono (u1 u2 : ℝ) (hu1 : 0 < u1) (h : u1 ≤ u2)
         rw [sub_nonneg]
         exact huu
       exact mul_nonneg huu0 (by norm_num :
-        (0 : ℝ) ≤ 2 * 10 ^ 12 + (1 / 2 : ℝ) * 10 ^ 6)
+        (0 : ℝ) ≤ 2000000000000 + 500000)
     have hb : u1 * u2 * Dneg ≤ (1 / 16 : ℝ) * Dneg := by
       rw [← sub_nonneg]
       ring_nf at hprod ⊢
       linarith [hprod]
-    have hgoal_l : u1 * u2 * (-(2 * 10 ^ 12 + (1 / 2 : ℝ) * 10 ^ 6)) =
-        -(u1 * u2 * (2 * 10 ^ 12 + (1 / 2 : ℝ) * 10 ^ 6)) := by ring
-    have hgoal_r : (1 / 16 : ℝ) * (-(2 * 10 ^ 12 + (1 / 2 : ℝ) * 10 ^ 6)) =
-        -((1 / 16 : ℝ) * (2 * 10 ^ 12 + (1 / 2 : ℝ) * 10 ^ 6)) := by ring
+    have hgoal_l : u1 * u2 * (-(2000000000000 + 500000)) =
+        -(u1 * u2 * (2000000000000 + 500000)) := by ring
+    have hgoal_r : (1 / 16 : ℝ) * (-(2000000000000 + 500000)) =
+        -((1 / 16 : ℝ) * (2000000000000 + 500000)) := by ring
     rw [hgoal_l, hgoal_r]
     exact neg_le_neg hb
-  have hQpos : 0 < 10 ^ 6 * K * (u1 + u2) + 4 * 10 ^ 12 * K +
-      u1 * u2 * (10 ^ 6 * (2 * (10 : ℝ) ^ 6 - 1 / 2) - 4 * 10 ^ 12) := by
-    rw [hcoeq]
-    have hT1 : 0 ≤ 10 ^ 6 * K * (u1 + u2) := by
-      have h1 : 0 ≤ 10 ^ 6 * K := mul_nonneg (by norm_num : (0 : ℝ) ≤ 10 ^ 6) hKpos.le
+  have hQpos : 0 < 1000000 * K * (u1 + u2) + 4000000000000 * K +
+      u1 * u2 * (-(2000000000000 + 500000)) := by
+    have hT1 : 0 ≤ 1000000 * K * (u1 + u2) := by
+      have h1 : 0 ≤ 1000000 * K := mul_nonneg (by norm_num : (0 : ℝ) ≤ 1000000) hKpos.le
       have h2 : 0 ≤ u1 + u2 := add_nonneg hu1.le huu2
       exact mul_nonneg h1 h2
-    have hmid : (4 : ℝ) * 10 ^ 12 * K - (1 / 16 : ℝ) * Dneg > 0 := by
+    have hmid : (4000000000000 : ℝ) * K - (1 / 16 : ℝ) * Dneg > 0 := by
       dsimp only [K, Dneg]
       norm_num
-    nlinarith [hT1, hneg, hmid]
+    dsimp only [Dneg] at hneg
+    calc 1000000 * K * (u1 + u2) + 4000000000000 * K +
+        u1 * u2 * (-(2000000000000 + 500000))
+      ≥ 0 + 4000000000000 * K + (1 / 16 : ℝ) * (-(2000000000000 + 500000)) :=
+        by ring_nf at hT1 hneg ⊢; linarith [hT1, hneg]
+      _ = 4000000000000 * K - (1 / 16 : ℝ) * Dneg := by
+        dsimp only [Dneg]
+        ring
+      _ = 4000000000000 * K - (1 / 16 : ℝ) * (2000000000000 + 500000) := by
+        dsimp only [Dneg]
+      _ > 0 := by
+        dsimp only [Dneg] at hmid
+        exact hmid
   have hnumnn : 0 ≤ Nsh2 * D1 - Nsh1 * D2 := by
     rw [hQ]
     have h21 : 0 ≤ u2 - u1 := by linarith
@@ -2047,6 +2065,7 @@ theorem st_Fsh_mono (u1 u2 : ℝ) (hu1 : 0 < u1) (h : u1 ≤ u2)
     _ ≤ Nsh2 / D2 := by linarith [hsubnn]
     _ = FshU u2 := by rw [hN2eq]
 
+set_option maxHeartbeats 200000
 /-- day033 EXACT MARGIN (norm_num on exact rationals):
     A1 + (A2 + A3 + 25/10^15)/1000 < FshU (r2prime^2).
     The strict line of the sharp squeeze; the exact Fraction margin
@@ -2079,7 +2098,7 @@ theorem s4_strip_close_sharp (t d M : ℝ) (ht : 1000 ≤ t) (hd0 : 0 < d)
   have hrp_pos : 0 < r2prime := by
     dsimp only [r2prime]
     exact div_pos (by norm_num : (0 : ℝ) < 47384091)
-      (by norm_num : (0 : ℝ) < (10 : ℝ) ^ 10)
+      (by norm_num : (0 : ℝ) < 10000000000)
   have hd2 : r2prime ^ 2 ≤ d ^ 2 :=
     (sq_le_sq₀ hrp_pos.le hd0.le).mpr hdl
   have hd2q : d ^ 2 ≤ 1 / 4 := by
