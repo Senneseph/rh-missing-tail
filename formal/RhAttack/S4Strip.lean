@@ -1799,13 +1799,29 @@ noncomputable def Fsh (d : ℝ) : ℝ := FshU (d ^ 2)
     Fsh d * t^-2 ≤ mown(t, d).
     (Replaces the d >= 1/200 use of F4 on the whole strip 0 < d ≤ 1/2;
     the old F4 line st_mownfloor is unchanged and still available.) -/
+/-! day033 SHARP FLOOR: for all 1000 ≤ t, 0 < d ≤ 1/2,
+    FshU (d^2) * t^-2 ≤ mown(t, d).
+    mown(t, d) = u(u+4v)/AB(v)·e^c (u = d^2, v = t^2, e^c = e^{Cown} ≥ 1);
+    after cancelling the common factor u > 0 the floor cross-multiplies to
+    N4(v) := v(u+4v)·Dstar - Xf·(v^2 + (2u+1/2)·v + (1/4-u)^2) ≥ 0,
+    Xf := 10^6·(u + 4·10^6), which factors as
+    N4(v) = Aco·(v-10^6)^2 + Bsh·(v-10^6) with
+    Aco = 4(1/4-u)^2 + 7·10^6·u + 2·10^6 > 0 and Bsh > 0 on 0 < u ≤ 1/4
+    (all exact, day033).  Replaces the d ≥ 1/200 use of F4 on the whole
+    strip 0 < d ≤ 1/2; the old F4 line st_mownfloor is unchanged. -/
 theorem st_mownfloor_sharp (t d : ℝ) (ht : 1000 ≤ t) (hd0 : 0 < d)
-    (hd : d ≤ 1 / 2) : Fsh d * t ^ (-2 : ℝ) ≤ S4O.mown t d := by
+    (hd : d ≤ 1 / 2) : Fsh (d) * t ^ (-2 : ℝ) ≤ S4O.mown t d := by
   have htpos : 0 < t := st_tpos t ht
   set u := d ^ 2 with hu
   set v := t ^ 2 with hv
   have huv : 0 < u := sq_pos_of_pos hd0
   have huvN : 0 ≤ u := huv.le
+  have hud : u ≤ 1 / 4 := by
+    rw [hu]
+    have hq : d ^ 2 ≤ (1 / 2) ^ 2 :=
+      (sq_le_sq₀ hd0.le (by norm_num : (0 : ℝ) ≤ 1 / 2)).mpr hd
+    rw [show (1 / 2 : ℝ) ^ 2 = 1 / 4 from by norm_num] at hq
+    exact hq
   have hvpos : 0 < v := by rw [hv]; exact pow_pos htpos 2
   have hAb : S4O.Aown t d * S4O.Bown t d =
       v ^ 2 + (2 * u + 1 / 2) * v + ((1 / 4 : ℝ) - u) ^ 2 := by
@@ -1839,54 +1855,79 @@ theorem st_mownfloor_sharp (t d : ℝ) (ht : 1000 ≤ t) (hd0 : 0 < d)
     have h3 : 0 ≤ ((1 / 4 : ℝ) - u) ^ 2 := sq_nonneg ((1 / 4 : ℝ) - u)
     linarith [h1, h2, h3]
   have hABpos : 0 < S4O.Aown t d * S4O.Bown t d := mul_pos hApos hBpos
-  set X := (10 : ℝ) ^ 6 * u * (u + 4 * (10 : ℝ) ^ 6) with hXd
-  have hFshU : FshU u = X / Dstar := by
-    dsimp only [FshU, X, Dstar]
-  have hFsh_eq : Fsh d = FshU u := by
+  set Xf := 10 ^ 6 * (u + 4 * (10 : ℝ) ^ 6) with hXd
+  have hFshU : FshU u = u * Xf / Dstar := by
+    dsimp only [FshU, Xf, Dstar]
+    ring
+  have hFsh_eq : Fsh (d) = FshU u := by
     dsimp only [Fsh, u]
     rw [← hu]
   have hvlo : (10 : ℝ) ^ 6 ≤ v := by
     rw [hv]
-    exact pow_le_pow_left₀ (by norm_num : (0 : ℝ) ≤ 1000) ht 2
+    have h1 : 1000 ^ 2 ≤ t ^ 2 :=
+      pow_le_pow_left₀ (by norm_num : (0 : ℝ) ≤ 1000) ht 2
+    rw [show (10 : ℝ) ^ 6 = 1000 ^ 2 from by norm_num]
+    exact h1
   have hs : 0 ≤ v - (10 : ℝ) ^ 6 := sub_nonneg.mpr hvlo
-  set Aco := (10 : ℝ) ^ 6 * (7 * u + 2) + 4 * ((1 / 4 : ℝ) - u) ^ 2 with hAcod
+  set Aco := 4 * ((1 / 4 : ℝ) - u) ^ 2 + 7 * 10 ^ 6 * u + 2 * 10 ^ 6 with hAcod
   have hAco_pos : 0 < Aco := by
     dsimp only [Aco]
-    have h1 : 0 < (10 : ℝ) ^ 6 * (7 * u + 2) :=
-      mul_pos (by norm_num : (0 : ℝ) < 10 ^ 6) (by nlinarith [huvN])
-    have h4 : 0 ≤ 4 * ((1 / 4 : ℝ) - u) ^ 2 := by
+    have h1 : 0 ≤ 4 * ((1 / 4 : ℝ) - u) ^ 2 := by
       linarith [sq_nonneg ((1 / 4 : ℝ) - u)]
-    linarith [h1.le, h4]
-  set Bsh := (2 : ℝ) * 10 ^ 12 + 7 * 10 ^ 12 * u +
-      8 * 10 ^ 6 * ((1 / 4 : ℝ) - u) ^ 2 + u * ((1 / 4 : ℝ) - u) ^ 2
-    with hBshd
-  have hBsh_pos : 0 < Bsh := by
-    dsimp only [Bsh]
-    have h2 : 0 ≤ 7 * 10 ^ 12 * u :=
-      mul_nonneg (by norm_num : (0 : ℝ) ≤ 7 * 10 ^ 12) huvN
-    have h3 : 0 ≤ 8 * 10 ^ 6 * ((1 / 4 : ℝ) - u) ^ 2 :=
-      mul_nonneg (by norm_num : (0 : ℝ) ≤ 8 * 10 ^ 6) (sq_nonneg ((1 / 4 : ℝ) - u))
-    have h4 : 0 ≤ u * ((1 / 4 : ℝ) - u) ^ 2 :=
-      mul_nonneg huvN (sq_nonneg ((1 / 4 : ℝ) - u))
-    nlinarith [show (0 : ℝ) < (2 : ℝ) * 10 ^ 12 from by norm_num, h2, h3, h4]
-  have hNshift : v * (u + 4 * v) * Dstar -
-      X * (v ^ 2 + (2 * u + 1 / 2) * v + ((1 / 4 : ℝ) - u) ^ 2) =
-      Aco * (v - (10 : ℝ) ^ 6) ^ 2 + Bsh * (v - (10 : ℝ) ^ 6) := by
-    dsimp only [Aco, Bsh, Dstar, X]
+    have h2 : 0 ≤ 7 * 10 ^ 6 * u :=
+      mul_nonneg (by norm_num : (0 : ℝ) ≤ 7 * 10 ^ 6) huvN
+    have h3 : (0 : ℝ) < 2 * 10 ^ 6 := by norm_num
+    linarith [h1, h2, h3]
+  set Bsh := u * Dstar - Xf * (2 * u + 1 / 2) + 2 * 10 ^ 6 * Aco with hBshd
+  have hBsh_exp : Bsh = 2 * 10 ^ 12 + u * (6 * 10 ^ 12 - 5 * 10 ^ 5 - 2 * 10 ^ 6 * u) +
+      8 * 10 ^ 6 * ((1 / 4 : ℝ) - u) ^ 2 + u * Dstar := by
+    dsimp only [Bsh, Aco, Xf]
     ring
-  have hNn : 0 ≤ v * (u + 4 * v) * Dstar -
-      X * (v ^ 2 + (2 * u + 1 / 2) * v + ((1 / 4 : ℝ) - u) ^ 2) := by
+  have hBsh_pos : 0 < Bsh := by
+    dsimp only [Bsh, Aco, Xf]
+    have hb : 2 * 10 ^ 6 * u ≤ 2 * 10 ^ 6 * (1 / 4) :=
+      mul_le_mul_of_nonneg_left hud (by norm_num : (0 : ℝ) ≤ 2 * 10 ^ 6)
+    have h1 : 0 < 6 * 10 ^ 12 - 5 * 10 ^ 5 - 2 * 10 ^ 6 * u := by
+      nlinarith [hb, show (2 : ℝ) * 10 ^ 6 * (1 / 4) = 5 * 10 ^ 5 from by norm_num,
+        show (0 : ℝ) < 6 * 10 ^ 12 - 5 * 10 ^ 5 - 5 * 10 ^ 5 from by norm_num]
+    have h2 : 0 < u * (6 * 10 ^ 12 - 5 * 10 ^ 5 - 2 * 10 ^ 6 * u) :=
+      mul_pos huv h1
+    have h3 : 0 ≤ 8 * 10 ^ 6 * ((1 / 4 : ℝ) - u) ^ 2 := by
+      linarith [sq_nonneg ((1 / 4 : ℝ) - u)]
+    have h4 : 0 < u * Dstar := mul_pos huv hDpos
+    have h5 : (0 : ℝ) < 2 * 10 ^ 12 := by norm_num
+    rw [hBsh_exp]
+    nlinarith [h5, h2, h3, h4]
+  have hNshift : v * (u + 4 * v) * Dstar -
+      Xf * (v ^ 2 + (2 * u + 1 / 2) * v + ((1 / 4 : ℝ) - u) ^ 2) =
+      Aco * (v - (10 : ℝ) ^ 6) ^ 2 + Bsh * (v - (10 : ℝ) ^ 6) := by
+    dsimp only [Aco, Bsh, Dstar, Xf]
+    ring
+  have hNn : 0 ≤ u * (v * (u + 4 * v) * Dstar -
+      Xf * (v ^ 2 + (2 * u + 1 / 2) * v + ((1 / 4 : ℝ) - u) ^ 2)) := by
     rw [hNshift]
-    have h1 : 0 ≤ Aco * (v - (10 : ℝ) ^ 6) ^ 2 :=
-      mul_nonneg hAco_pos.le (sq_nonneg (v - (10 : ℝ) ^ 6))
-    have h2 : 0 ≤ Bsh * (v - (10 : ℝ) ^ 6) :=
-      mul_nonneg hBsh_pos.le hs
-    exact add_nonneg h1 h2
+    have h1 : 0 ≤ u * Aco * (v - (10 : ℝ) ^ 6) ^ 2 := by
+      have h12 : 0 ≤ u * Aco := mul_nonneg huvN hAco_pos.le
+      exact mul_nonneg h12 (sq_nonneg (v - (10 : ℝ) ^ 6))
+    have h2 : 0 ≤ u * Bsh * (v - (10 : ℝ) ^ 6) := by
+      have h21 : 0 ≤ u * Bsh := mul_nonneg huvN (le_of_lt hBsh_pos)
+      exact mul_nonneg h21 hs
+    ring_nf at h1 h2 ⊢
+    linarith [h1, h2]
   have htinv : (t : ℝ) ^ (-2 : ℝ) = 1 / v := by
-    rw [Real.rpow_neg htpos.le (2 : ℝ), Real.rpow_natCast, ← hv]
+    have hA : (t : ℝ) ^ (-2 : ℝ) = (t ^ (2 : ℝ)) ^ (-1 : ℝ) := by
+      rw [Real.rpow_neg htpos.le (2 : ℝ)]
+    have hB : t ^ (2 : ℝ) = t ^ 2 := by
+      rw [Real.rpow_natCast]
+    have hC : t ^ 2 = v := hv.symm
+    calc (t : ℝ) ^ (-2 : ℝ)
+        = (t ^ (2 : ℝ)) ^ (-1 : ℝ) := hA
+      _ = (t ^ 2) ^ (-1 : ℝ) := by rw [hB]
+      _ = v ^ (-1 : ℝ) := by rw [hC]
+      _ = 1 / v := by ring
   have hnum : 0 ≤ u * (u + 4 * v) :=
     mul_nonneg huv.le (by nlinarith [huvN, hvpos.le])
-  calc Fsh d * t ^ (-2 : ℝ)
+  calc Fsh (d) * t ^ (-2 : ℝ)
       = FshU u * (t ^ (-2 : ℝ)) := by rw [hFsh_eq]
     _ = FshU u / v := by
       rw [htinv, hFshU]
@@ -1903,6 +1944,7 @@ theorem st_mownfloor_sharp (t d : ℝ) (ht : 1000 ≤ t) (hd0 : 0 < d)
       exact div_nonneg hnum hABpos.le
     _ = S4O.mown t d := by
       rw [hmown.symm]
+
 
 /-- day033: FshU INCREASING in u on 0 < u ≤ 1/4.
     Nsh(u) := 10^6 u^2 + 4·10^12 u (the FshU numerator), Dstar(u) as
