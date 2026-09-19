@@ -222,6 +222,55 @@ Revised order of attack (supersedes 3.3's list where it differs):
       priority than 1-3 now that the detector side is
       measured-certain on the cert grid.
 
+## 3.6 THE TELESCOPE (S3c, 2026-09-19 ~14:30 EDT)
+
+Queue item 1 (pin the cancellation numerically) is DONE — and it
+found more than a pin.  The direct quads (dps-30/60, spreads
+1e-21) plus the exact data sums give, at t = 3.9e7 / 1e8 / 3e8
+(+1/2): the lattice Riemann sum and the integral for
+int N_asym p' agree to 0.73 / 2.42 / 2.22 (against O(1e7)..
+O(2.8e8) — relative ~1e-8), and — the main event — the two IBP
+identities telescope:
+
+    W = p(G2)DN(G2) - p(G1)DN(G1) - int DN(x) p'(t;x) dx,
+    W := sum_{(G1,G2]} p(gamma;t) - int p(g;t) rho(g) dg,
+    DN(x) := N(x) - N_asym(x)   (the count walk; pinned
+    sup|DN| = 2.439 on the whole band).
+
+Every O(1e7)-O(1e8) quantity in the un-telescoped picture is an
+artifact; the band-local defect is ENTIRELY the bounded walk
+against the log kernel (principal value at g = t) plus
+boundary terms.  Consequences:
+
+1. Band-bound: |W| <= sup|DN| * (|p(G2)| + |p(G1)| +
+   PV-TV(p)), an ABSOLUTE band constant (log(G2/G1) = 4.6 is
+   fixed): ~2.4 * (4.6 + O(1)) ~ O(20-40); the data say
+   W = +0.85 / +3.30 / +4.61.  No t-growth inside the band.
+2. Beyond the band: sup|DN| = O(log t) at RH level gives the
+   classical ceiling; the refinement to prove is the DATA
+   shape (walk ~ O(1-3) at 2.8e9 zeros) — a COUNTING statement.
+3. Composition: the certificate needs the LOWER bound
+   W >= -C (C small) plus the phase (already carried by the
+   per-point cert) plus the pinned (14.13, 1e7] and quad
+   sections plus the S3a dev bound plus the wire algebra.
+
+Order of attack (revised again):
+   1. DONE — cancellation pinned, telescope found (this entry).
+   2. W3 decision-maker: the 3e10 zero chain (verify shard
+      completeness, then launch) — the walk sup|DN| beyond the
+      band is the datum the next certificate tier needs, and
+      the no-divergence read is currently density-model only
+      past G_LAST.
+   3. The one-sided form: W >= -C with explicit C, as a named
+      Lean theorem on the band (sup|DN| as a PINNED constant
+      2.439 for the data band; the counting-theorem generalization
+      is the separate W2-beyond project).  ONLINE-FIRST on the
+      Lean side (standing directive): search for prior
+      RVM-error / counting-function formalizations before
+      writing.
+   4. Lean port of S3a (dev >= 1 - 12/g family of bounds).
+   5. Compose through the S1 wire; re-issue the ceiling report.
+
 ## 4. Outcome ledger (pre-registered, no outcome is a loss)
 
 - W1 proven (via 2a or 2b) + W2 closed -> the squeeze is a
