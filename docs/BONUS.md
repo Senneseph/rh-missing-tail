@@ -30,7 +30,7 @@ Z is for Zigzag Ziggurat Zydeco Zone
 then you can run a decode on the alphabet's meta
 
 ```
-Absolute Beautiful Creation Does Everything For Good Heping Individuals Journey Knowing Love Makes Negative Outcomes Possible Quite Rightfully So Though Unification Varies With Xenially Yoked Zodiacs.
+Absolute Beautiful Creation Does Everything For Good Helping Individuals Journey Knowing Love Makes Negative Outcomes Possible Quite Rightfully So Though Unification Varies With Xenially Yoked Zodiacs.
 ```
 
 and
