@@ -488,46 +488,45 @@ SMOKE = [1.0e6, 2.0e6, 4.0e7, 1.0e8, 5.0e8, 1.0e9]
 OUT = os.path.join(R_H, "scripts", "rh", "out_day034_h1cert.txt")
 
 
-def run():
-    smoke = os.environ.get("H1CERT_SMOKE") == "1"
-    T = TH.tail()
-    xs = SMOKE if smoke else grid()
-    work = int(os.environ.get("WORKERS", "29"))
-    print("day034 H1-cert: %s grid, %d windows, workers=%d"
-          % ("SMOKE" if smoke else "FULL", len(xs), work), flush=True)
-    t0 = time.time()
-    if work == 1:
-        res = [scan_window(T, x) for x in xs]
-    else:
-        with cf.ProcessPoolExecutor(max_workers=work) as ex:
-            res = list(ex.map(scan_window, xs))
-    res.sort(key=lambda r: r["x"])
-    dt = time.time() - t0
-    with open(OUT, "w") as fo:
-        fo.write("# day034 H1 cert %s grid wall=%.0fs workers=%d\n"
-                 % ("SMOKE" if smoke else "FULL", dt, work))
-        fo.write("# point detail:\n")
-        for w in res:
-            for p in w["pts"]:
-                fo.write("%s,%.10f,%.10f,%.10f,%.10f,%.10f,%.10f,%.6f,"
-                         "%.3e,%.3e,%.3e,%.3e,%.3e,%.3e,%.3e,%.3e,%.3e,"
-                         "%.3e,%.3e,%d,%d\n" % (
-                             ("FLAG" if p["flag"] else "ok"),
-                             w["x"], p["t"], p["g"], p["mnew"], p["mcert"],
-                             p["residf"], p["zeta"], p["dev"], p["Bexp"],
-                             p["Bph"], p["Bz"], p["Bdev"], p["Btail_re"],
-                             p["Btail_im"], p["Bprod_re"], p["Bprod_im"],
-                             p["Bqrem"], p["Bqext"], p["nlt"],
-                             1 if p["flag"] else 0))
-                if p["audit"] is not None:
-                    fo.write("audit,x=%.10f,t=%.10f," % (w["x"], p["t"]))
-                    for tag, coll in (("rem", p["audit"]["rem"]),
-                                      ("ext", p["audit"]["ext"])):
-                        fo.write("%s_spread_max=%.3e " %
-                                 (tag, max(coll)))
-                    fo.write("\n")
-    print("%12s %12s %9s %10s %9s %9s" %
-          ("x", "g", "best_mnew", "worst_mcert", "btot", "flag"))
+def _point_row(x, p):
+    row = ("%s,%.10f,%.10f,%.10f,%.10f,%.10f,%.10f,%.6f,"
+           "%.3e,%.3e,%.3e,%.3e,%.3e,%.3e,%.3e,%.3e,%.3e,"
+           "%.3e,%.3e,%d,%d\n" % (
+               ("FLAG" if p["flag"] else "ok"),
+               x, p["t"], p["g"], p["mnew"], p["mcert"],
+               p["residf"], p["zeta"], p["dev"], p["Bexp"],
+               p["Bph"], p["Bz"], p["Bdev"], p["Btail_re"],
+               p["Btail_im"], p["Bprod_re"], p["Bprod_im"],
+               p["Bqrem"], p["Bqext"], p["nlt"],
+               1 if p["flag"] else 0))
+    if p["audit"] is not None:
+        row += "audit,x=%.10f,t=%.10f," % (x, p["t"])
+        for tag, coll in (("rem", p["audit"]["rem"]),
+                          ("ext", p["audit"]["ext"])):
+            row += "%s_spread_max=%.3e " % (tag, max(coll))
+        row += "\n"
+    return row
+
+
+def _emit(fo, w, t0):
+    wt = max(w["pts"], key=lambda p: p["mnew"])
+    wwc = min(w["pts"], key=lambda p: p["mcert"])
+    fl = any(p["flag"] for p in w["pts"])
+    for p in w["pts"]:
+        fo.write(_point_row(w["x"], p))
+    fo.flush()
+    line = ("[%s] x=%.6g g=%.4f best_mnew=%.6f worst_mcert=%.6f"
+            % (time.strftime("%H:%M:%S"), w["x"], w["g"], wt["mnew"],
+               wwc["mcert"]))
+    if fl:
+        line += " FLAG"
+    line += " (elapsed %.1f min)" % ((time.time() - t0) / 60)
+    print(line, flush=True)
+
+
+def _summary(res, dt, mode):
+    print("%12s %12s %9s %10s %9s %9s"
+          % ("x", "g", "best_mnew", "worst_mcert", "btot", "flag"))
     for w in res:
         wpts = w["pts"]
         best = max(wpts, key=lambda p: p["mnew"])
@@ -549,6 +548,38 @@ def run():
     print("STATUS: %s" % ("C-1 candidate (all points certified >= 1)"
                           if not cf1 and not cn1
                           else "see the pre-registered reading C-2/C-3"))
+
+
+def run():
+    smoke = os.environ.get("H1CERT_SMOKE") == "1"
+    T = TH.tail()
+    xs = SMOKE if smoke else grid()
+    work = int(os.environ.get("WORKERS", "29"))
+    mode = "SMOKE" if smoke else "FULL"
+    print("day034 H1-cert: %s grid, %d windows, workers=%d"
+          % (mode, len(xs), work), flush=True)
+    t0 = time.time()
+    res = []
+    with open(OUT, "w") as fo:
+        fo.write("# day034 H1 cert %s grid workers=%d %s\n"
+                 % (mode, work, time.strftime("%Y-%m-%d %H:%M:%S")))
+        fo.write("# point detail (incremental; one row per straddle):\n")
+        fo.flush()
+        if work == 1:
+            for x in xs:
+                w = scan_window(x)
+                res.append(w)
+                _emit(fo, w, t0)
+        else:
+            with cf.ProcessPoolExecutor(max_workers=work) as ex:
+                futs = [ex.submit(scan_window, x) for x in xs]
+                for fu in cf.as_completed(futs):
+                    w = fu.result()
+                    res.append(w)
+                    _emit(fo, w, t0)
+    res.sort(key=lambda r: r["x"])
+    dt = time.time() - t0
+    _summary(res, dt, mode)
 
 
 if __name__ == "__main__":

@@ -6156,3 +6156,46 @@ C-1 all points margin_cert ≥ 1 → H1 band re-issued at certificate
 grade; C-2 isolated cert-fails inside computed ≥ 1 → per-point
 dps-90/120 + 1600-node reissue; C-3 any computed < 1 → A-2/B-2 onset
 reading and the Phase-1a ceiling report as deliverable.
+
+## 2026-09-19 (day034) — H1-cert: per-point run rate rejected, two-phase window-batched build
+
+The day034 SMOKE (6 windows x 25 straddles, 9 workers, cores 0-9,
+sub-chunked tail, quad dps-30/60 pairs) validated the pipeline
+(crash-free ~105+ min, memory stable at 47-52GB of 124, the 1e9-
+window values reproduce the committed A-1 sweep to 1.3e-6, selftest
+PASS), but the measured rate was ~350-400 s/POINT under six
+concurrent 22GB-stream workers.  Extrapolated, the full
+per-point grid (2250 points at 8% spacing) would be 30-41 h wall —
+rejected; the run was killed at ~3 h with no completed window
+results (the old build wrote its detail file at the end).
+
+Restructure (day034b_h1cert.py, committed with this note):
+  PHASE 1 (bandwidth-bound, 10 workers, cores 0-9): ONE band pass
+  per window computes, for all 25 straddles of the window in the
+  same pass (t-batched, 5 deep): the tail sums + budgets, nlt,
+  dmin guards, GN product + budget.  Stored per-window to
+  tmp/h1cert_p1/win_<i>.npz.  The band traffic thus scales with
+  71 WINDOWS, not 1775 points.
+  PHASE 2 (compute-bound, 27 workers, cores 0-26): per straddle,
+  the quad dps-30/60 pair budgets (400 nodes, both sections), the
+  dps-30/60 zeta + 25.2.12 main term, the 500-delta dev at 30/60,
+  the propagation, the cert row; plus the 4-corner audit ladder
+  once per window (the convergence evidence).  Rows merged to
+  out_day034_h1cert_b.txt; per-window incremental progress lines.
+  Grid: 12% window spacing (71 windows, x = 1e6*1.12^k <= 1e9),
+  25 straddles per window (1775 points total) -- still ~2.7x
+  denser than the sparse screen grid.
+The certified pipeline is the SAME per-term model as day034_h1cert
+(same SUB = 2^25, same GAM10/GAM1 unit-roundoff bounds, same dg
+representation bounds, same quad pair budget, same nlt guard,
+same propagation).  The only value-level difference is the
+0.5/A -> 0.5*invA precompute roundings (last-ulp per term),
+covered by the tracked budget and bounded by the crosscheck gate.
+
+EQUIVALENCE GATE before any full run (H1CERTB crosscheck,
+running): one window (x = 1e9) through BOTH the batched window
+pass and the verified per-point day034 path; requires
+|re/im batch - point| <= 1e-9 on three straddles and full-row
+mnew/mcert agreement <= 1e-6 (plus the already-green budget
+selftest).  If the gate fails, fix the batched pass; do not
+weaken the gate.
