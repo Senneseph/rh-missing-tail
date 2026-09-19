@@ -1,4 +1,6 @@
-# Phase-1a ceiling report (DRAFT — final numbers pending the day034
+# Phase-1a ceiling report
+
+Status date: 2026-09-19 (FINAL — day034 H1-cert landed, C-1 read applied).
 # full-grid run; queue item 7, part c)
 
 Status of the universality question (prize-plan P1.1/P1.2) at
@@ -83,13 +85,47 @@ candidate, the classical zero-free stays load-bearing.
   budget covers the quad VALUES via the dps-30/60 × node ladder,
   not a theorem about the remainder's amplitude.
 
-## 4. The day034 certificate (part a of this item)
+## 4. The day034 certificate (part a of this item) — FINAL
 
-[FINAL NUMBERS HERE after the full run: worst margin_cert, its
-location, the total budget at that point, the per-window table
-summary, the audit-ladder convergence spreads, the flags
-(expected: none), the reading C-1/C-2/C-3 per the pre-
-registered rules.]
+The re-issuance grid is the screen grid itself (honest coverage):
+39 windows x 25 straddles = 975 points — P1.1 LOW4
+(1e6, 2e6, 4e6, 6e6), 4 flagged connectors (1.0e7, 1.6e7, 2.4e7,
+3.3e7 — the 6e6 to 3.9e7 bridge, labeled as connectors in all
+readings) and the day029 A-1 31 windows verbatim
+(3.9e7..1e9).  Build: two-phase (window-batched band pass +
+per-point dps-30/60 quad pairs at 400 nodes per section, dps-30/60
+zeta/lm/dev agreement, exact-integer nlt with a 1e-4 guard,
+worst-case exponential propagation), budget model self-tested
+against dps-60 exact per-zero arithmetic (20-50x containment,
+all four channels), batched pipeline cross-checked BIT-EXACT
+against the per-point reference implementation
+(CROSSCHECK: PASS, |re/im difference| = 0 on the 1e9 window).
+
+RESULT (scripts/rh/out_day034_h1cert_b.txt; log
+tmp/day034b_chain.log; wall 101.5 min, 27 workers, chain gates
+clean):
+
+- all 975 points OK (no gate rejections);
+- **worst margin_cert = 1.081637 at t = 1000000001.61565** (the
+  1e9 window; computed 1.081644; point budget 9.16e-5);
+- **margin_cert < 1: NONE;  margin_computed < 1: NONE**;
+- one wide-budget FLAG: the 1.3e8 window (budget 1.76e-4, margin
+  ~101 — a budget-width flag, not a violation);
+- window-best margins decay monotonically 17200 (1.05e7) ->
+  1.0816 (1e9) — the decay is the Efull/noise side (see
+  END_GAME_PLAN 3.5), the detector side is 1 - O(1/g) (S3a);
+- audit ladder (8 corners, first straddle per window): quad
+  spreads resolution-stable (e.g. rem 6.6e-21 / ext 1.3e-8 at
+  the 1e6 window).
+
+READING APPLIED: **C-1** (pre-registered): margin_cert >= 1 at
+ALL 975 grid points -> the H1 band [10^6, 10^9] is RE-ISSUED at
+certificate grade in the machine-verified error-budget sense
+(the H1 Fix's second variant): every grid point carries an
+explicit tracked budget; the claim is true margin >=
+margin_cert.  The between-grid caveat (H4) is explicitly
+UNCHANDED by this: the certificate is at the grid, as the
+screen was.
 
 ## 5. Where the route stands after this item
 

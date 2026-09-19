@@ -61,6 +61,28 @@ the straddle statistic on a dense grid — Platt–Trudgian certification
 grade. The single most important pre-submission gap; orthogonal to the
 math risk.
 
+**Status (2026-09-19, day034b): RE-ISSUED at certificate grade.**
+The straddle grid over [10⁶, 10⁹] (39 windows x 25 straddles = 975
+points: P1.1 LOW4 + 4 flagged connectors + day029 A-1 verbatim) was
+re-run with fully tracked worst-case error budgets (per-term unit
+roundoff, pairwise/longdouble accumulation bounds, dps-30/60 quad
+pairs at 400 nodes per section, dps-30/60 zeta/lm/dev agreement,
+exact-integer nlt with guard).  Budget model self-tested against
+dps-60 exact per-zero arithmetic (20-50x containment, 4 channels);
+batched pipeline cross-checked bit-exact against the per-point
+reference (CROSSCHECK: PASS).  Result (out_day034_h1cert_b.txt):
+**all 975 points certified; worst margin_cert = 1.081637 at t =
+1000000001.61565 (10⁹ window; computed 1.081644, budget
+9.16e-5); margin_cert < 1: NONE; margin_computed < 1: NONE**; one
+wide-budget flag (1.3e8 window, budget 1.76e-4, margin ~101 —
+flag, not a violation).  Pre-registered reading C-1 applies:
+each grid point now carries an explicit budget; the claim is true
+margin >= margin_cert (machine-verified error-budget variant — the
+Fix's second variant — not full interval arithmetic).  The
+between-grid caveat (H4) is unchanged; the claim is at the grid,
+as the screen was.  Full numbers: PHASE1A-CEILING.md section 4;
+machinery: scripts/rh/day034b_h1cert.py.
+
 ### H2 — The (10¹⁸, ∞) kernel section is numerically bounded, not analytically
 **Status (2026-09-17, day029 rescheck):** the (400, 400) sweep configuration is RESOLUTION-STABLE — Efull(1e9/4e8/6e8) stable to < 5×10⁻⁵ across the full npts 200→2000 × npts2 400→2000 ladder (both sections, dps-30, differential from the sweep anchors; `day029_efull_rescheck.py`, `out_day029_efull_rescheck.txt`). The quad-resolution part of H2 is therefore closed at screen level for the verified range; the (10³⁰, ∞) tail remains bounded by the "1 − O(t²/10³⁰) < 10⁻⁹" heuristic, and a PROVABLE comparison bound on it (the t²/g²·log-density decay; the classical S̄(t) technique) is the remaining analytic unit, Lean-portable.
 **Note (2026-09-18, CORRECTED):** an earlier same-day draft claimed the complex path is known wrong (see H5); the same-interval per-cell A/B (400/400 cells exact) RETRACTS that — the complex tail-quad was verified correct, and the closure claim above stands as recorded.

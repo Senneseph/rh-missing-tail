@@ -1,6 +1,6 @@
 # END-GAME PLAN — what it takes from here to the final goal
 
-Status date: 2026-09-19 (night of the day034 H1-cert landing).
+Status date: 2026-09-19 (evening). H1 band RE-ISSUED at certificate grade (day034b, reading C-1: all 975 points certified >= 1, worst cert margin 1.081637 at the 1e9 window). The S3b anatomy map has landed (section 3.5): the wall is W2, now shaped as a CANCELLATION theorem with a pinned walk bound (max|DN| = 2.439 on the band).
 No prize claim made or implied; this is a working plan, honest by design.
 
 ## 0. The one-sentence state
@@ -173,6 +173,54 @@ IS the structure to study next (and the falsifier).
      a background data run (independent of the theorem work).
   5. Only then: W2's oscillatory-integral estimate (closes the
      noise side), and W4's dev-smoothness (closes H4).
+
+## 3.5 W2 MAP (day035, 11:25 EDT) — the S3b anatomy
+
+The day034b C-1 reading landed first (section 4 of
+PHASE1A-CEILING.md): the band is now certificate-grade, so the
+wall is exactly W2 — the uniform bound on the noise side — and
+the S3b probe (scripts/rh/day035_s3b_ibp_anatomy.py, exact
+pinned data, gates 0.000e+00 / 5.96e-08) has drawn its map:
+
+1. THE COUNT WALK IS TAMED: max|DN| = 2.439 across the entire
+   (1e7, G_LAST] band — the Riemann-von Mangoldt count defect
+   N(x) - N_asym(x) never exceeds 2.44 zeros over 2.8e9 zeros
+   (vs the RH-level O(log t) ~ 21 at 1e9). PINNED datum on the
+   band; a counting theorem beyond it.
+2. THE O(1) DEFECT SPLIT: W = (B - Dc) + (int N_asym p' -
+   NasSum). At t = 3.9e7 / 1e8 / 3e8 (+1/2): B - Dc = +1.58 /
+   +5.72 / +6.83 (the walk-weighted piece: boundary count-defect
+   terms plus the accumulated walk times the kernel increments;
+   Dc_far dominates Dc_near — ACCUMULATED, not local) and the
+   smooth lattice-sum defect (second bracket) is opposite-signed
+   and comparable, the two cancelling to leave W = the measured
+   O(1)-O(4) Efull band.
+3. THEOREM SHAPE: W2 is a CANCELLATION theorem, three parts:
+   (a) uniform bound on the count walk (pinned on the band;
+   counting theorem beyond), (b) the explicit kernel weights
+   (known), (c) the structural tracking of the smooth
+   lattice-sum defect against the walk piece. The object in (c)
+   is a lattice-averaged potential that both sums telescope
+   against — the owner's "disguised identity" candidate, now
+   with a precise address.
+
+Revised order of attack (supersedes 3.3's list where it differs):
+   1. Pin the cancellation numerically: direct quad of
+      int N_asym p' (v3 singularity split at t) at the three
+      S3b heights — the bracket must agree to O(0.1) (minutes,
+      no big arrays).
+   2. W3 decision-maker: the 3e10 zero chain (staged; verify
+      shard completeness first) — extends the evidence edge into
+      real-zero territory; the O(1)-O(4) no-divergence read is
+      currently a density-MODEL statement beyond G_LAST.
+   3. The telescoping-form search: is p(g; t) a discrete
+      derivative of a simple lattice potential plus a small
+      remainder? Exact algebra first (the cube-identity lesson,
+      BACK-POCKET-NOTES section 1).
+   4. Lean port of S3a (the detector bound dev >= 1 - 12/g:
+      exact g0 crossing, d- and k-monotonicity lemmas) — lower
+      priority than 1-3 now that the detector side is
+      measured-certain on the cert grid.
 
 ## 4. Outcome ledger (pre-registered, no outcome is a loss)
 

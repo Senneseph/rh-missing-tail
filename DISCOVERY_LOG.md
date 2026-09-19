@@ -6374,3 +6374,61 @@ for "phase2 rc=" and then runs S3b solo on taskset 27 with an
 8h safety cap. Phase-2 status at this entry: 27/39 windows,
 in a slow (heavy-quad) stretch, advancing on CPU; full verdict
 expected by ~11:45 EDT.
+
+## 2026-09-19 (day034/035, ~11:25 EDT) — H1 CERT
+RE-ISSUED (reading C-1) + S3b anatomy map landed
+
+- **PHASE 2 landed 11:07 EDT** (wall 101.5 min, 27 workers,
+  chain gates clean): STATUS: C-1 — all 975 points (39 windows x
+  25 straddles: LOW4 + CONN4 + A-1 verbatim) certified;
+  **margin_cert < 1: NONE; margin_computed < 1: NONE**; worst
+  margin_cert = **1.081637 at t = 1000000001.61565** (the 1e9
+  window; computed 1.081644; point budget 9.16e-5). Window-best
+  margins decay monotonically 17200 (1.05e7) -> 1.0816 (1e9).
+  One wide-budget FLAG (1.3e8 window, budget 1.76e-4, margin
+  ~101 — flag, not a violation). Pre-registered reading
+  APPLIED: C-1 — the H1 band [10^6, 10^9] is RE-ISSUED at
+  certificate grade (machine-verified error-budget variant of
+  the H1 Fix): every grid point carries an explicit tracked
+  budget; the claim is true margin >= margin_cert. Docs updated:
+  KNOWN_LIMITATIONS H1 status block; PHASE1A-CEILING.md section
+  4 FINAL. Artifacts: scripts/rh/out_day034_h1cert_b.txt (975
+  point rows + per-window audit lines), tmp/day034b_chain.log.
+- **S3b anatomy landed 11:15 EDT** (solo run after phase 2;
+  taskset 27; rc=0). Full-band IBP decomposition S1 = B - Dc + R
+  with the pinned zero data; gates: 0.000e+00 (t = 3.9e7, 1e8),
+  5.96e-08 (t = 3e8); check lines 0 / 3e-8:
+  - t = 3.9e7+1/2: B = +0.213, Dc = -1.366 (near +0.520 /
+    far -1.886); S1 = -1.219687e+08
+  - t = 1e8+1/2:  B = +0.364, Dc = -5.353 (near -2.077 /
+    far -3.276); S1 = -1.833810e+08
+  - t = 3e8+1/2:  B = +0.482, Dc = -6.351 (near -1.440 /
+    far -4.911); S1 = -1.311423e+08
+  - walk stats (t-independent, full band (1e7, G_LAST]):
+    DN(G1) = -0.0807, DN(G2) = +0.7154, **max|DN| = 2.439** —
+    the raw Riemann-von Mangoldt count defect never exceeds
+    2.44 zeros across the entire 2.8e9-zero band (vs the
+    RH-level O(log t) ~ 21 at 1e9) — a PINNED datum.
+- **W2 MAP (pre-registered read applied).** The O(1) defect
+  W = (B - Dc) + (int N_asym p' - NasSum): the walk-weighted
+  piece (B - Dc = +1.58 / +5.72 / +6.83, growing gently with t)
+  and the smooth lattice-sum defect (the second bracket,
+  opposite sign, comparable magnitude) CANCEL to leave W = the
+  measured O(1)-O(4) Efull band. Dc_far dominates Dc_near: the
+  walk is ACCUMULATED, not local. So the W2 theorem is NOT a
+  local-spacing theorem; it is a CANCELLATION theorem with three
+  parts: (a) a uniform bound on the count walk (max|DN| ~ 2-3:
+  PINNED on the band, a counting theorem beyond it); (b) the
+  explicit p' kernel weights (known, elementary); (c) the
+  structural fact that the smooth lattice-sum defect tracks the
+  walk piece to O(1) — i.e. the lattice-averaged potential that
+  both sides telescope against is the "disguised identity" named
+  in END_GAME_PLAN section 3.5.
+- **Next probes (in order):** (1) evaluate the second bracket
+  DIRECTLY (quad of int N_asym p' with the v3 singularity split
+  at t) to pin the cancellation numerically at the three heights
+  (no big arrays; minutes); (2) the W3 decision-maker — the
+  3e10 zero chain (staged; verify shard completeness before
+  launch) extends the evidence edge into real-zero territory;
+  (3) the telescoping-form search for the lattice-averaged
+  potential (the W2 theorem body).
