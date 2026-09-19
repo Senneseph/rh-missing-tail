@@ -6232,3 +6232,42 @@ task's own `TH.tail()` call returns the inherited instance).
 P1 workers reduced 10 -> 8 (bandwidth-bound anyway; memory
 margin: 25GB parent + 8 x ~5GB private). Chain v2 restarted:
 crosscheck verdict already on file -> straight to phase 1.
+
+## 2026-09-19 (day034) — throughput model pinned; fused tail pass;
+verbatim reissue grid (39 windows / 975 points)
+
+Measured (not estimated) machine facts from the two failed
+attempts, which pin the cost model:
+- single-stream band-derivation rate (crosscheck, one worker, hot
+  cache): ~3.6-4 GB/s effective per derived array;
+- 6-8 concurrent streams saturate the machine at ~4-5 GB/s TOTAL
+  (per-stream rate collapses ~8x; more workers do not add
+  throughput);
+- the irreducible volume is the per-STRADDLE derived arrays over
+  the 2.8e9 band: ~10 array-derivations x 268MB x 83 sub-chunks ~
+  223GB per straddle for the fresh-array reference path.  2250
+  straddles would be ~550TB (~140 h); window-batching the shared
+  part saved only ~6% (the per-t part dominates -- the batching's
+  real value was the crosscheck equivalence, not throughput).
+
+The fix is a memory-fused tail pass (day034b, committed with the
+chain restart): exactly THREE 268MB working buffers per straddle
+(D = |g2-t2| -> log|d| -> re_t, in place; E = 2cc/|d| + base_dre =
+dredg, then reused as |re_t|; tmp = dg*dredg for the pairwise dot);
+the im value folds to the exact scalar t * (f64-pairwise sub-chunk
+sum of invA) with zero per-t arrays; the dg-dimdg bound factors as
+t * (per-sub-chunk dg.tcoef sum, t-independent); the scale bound
+uses the explicit per-sub-chunk max of 0.5/A (A monotone in g, max
+at the first element).  ~3.3x traffic cut: ~67GB per straddle.
+
+Grid: the reissue is now the SCREEN grid verbatim (honest
+coverage, no coarsening anywhere): the day029 A-1 31 windows
+(3.9e7-1e9, spacing as swept) + the 4 P1.1 trend points
+(1e6, 2e6, 4e6, 6e6) + 4 flagged connector windows
+(1.0e7, 1.6e7, 2.4e7, 3.3e7) bridging 6e6 -> 3.9e7, where the
+screen had no straddle coverage (report says so).  39 windows x
+25 straddles = 975 points.  Est. total: gate ~1 h, phase 1
+(8 workers, cores 0-7) ~4.5 h (~72TB at ~4.5GB/s), phase 2
+(27 workers, cores 0-26) ~1.1 h.  Crosscheck v2 (fused path vs
+the verified per-point reference, same 1e-9/1e-6 gate) running;
+chain v3 armed behind it.

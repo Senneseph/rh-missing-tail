@@ -49,18 +49,22 @@ SUB = 33554432                 # 2^25 sub-chunk (as day034)
 TB = 5                         # straddles per inner batch
 OUTDIR = os.path.join(R_H, "tmp", "h1cert_p1")
 OUTB = os.path.join(R_H, "scripts", "rh", "out_day034_h1cert_b.txt")
-GAP = 1.12                     # 12% window spacing (71 windows)
+# the H1 reissue grid = the SCREEN grid, verbatim, plus the P1.1
+# trend points and 4 connector windows bridging 6e6 -> 3.9e7 at
+# ~45-60% spacing (flagged as connectors in the report; the screen
+# itself had no straddle coverage there):
+LOW4 = [1.0e6, 2.0e6, 4.0e6, 6.0e6]          # P1.1 trend points
+CONN4 = [1.0e7, 1.6e7, 2.4e7, 3.3e7]         # connector windows
+A1 = [3.9e7, 4.0e7, 4.25e7, 4.4e7, 4.6e7, 4.8e7,
+      5.2e7, 5.6e7, 6.0e7, 6.4e7, 6.8e7, 7.2e7,
+      7.8e7, 8.4e7, 9.0e7, 9.6e7,
+      1.05e8, 1.1e8, 1.2e8, 1.3e8, 1.4e8, 1.6e8,
+      1.8e8, 2.0e8, 2.5e8, 3.0e8, 4.0e8, 5.0e8,
+      6.0e8, 8.0e8, 1.0e9]                    # day029 A-1 verbatim
 
 
 def grid():
-    xs = []
-    x = 1.0e6
-    while x <= 1.0e9 + 1.0:
-        xs.append(x)
-        x *= GAP
-    if xs[-1] < 1.0e9:
-        xs.append(1.0e9)        # anchor the band's top edge exactly
-    return xs
+    return LOW4 + CONN4 + A1
 
 
 def straddles(g):
@@ -71,10 +75,20 @@ def straddles(g):
 # PHASE 1: one band pass per window, all 25 straddles
 # ----------------------------------------------------------------------
 def window_tail_pass(c, ts):
-    """One pass over array c (float64 zeros), computing for each t in
+    """One pass over array c (float64 zeros) computing, for every t in
     ts: the f64-pairwise-per-SUB / longdouble-across-subs sums of the
-    re/im terms + the tracked budget.  Returns lists over ts of
-    (re_ld, im_ld, B_re, B_im, sub_abs_total)."""
+    re/im terms + the tracked budget.  Memory-fused: exactly TWO
+    shared working buffers plus ONE per-straddle working buffer
+    (D, plus E and a dg*E temp) at 268MB each over the 2^25
+    sub-chunk; the im value is the exact scalar t * (f64-pairwise
+    sub-chunk sum of invA -- its own rounding, ~1e-19 relative here,
+    is inside the per-term model's GAM1*|im_t| envelope); the
+    scale bound uses the explicit per-sub-chunk max of 0.5/A (A is
+    increasing in g, so it sits at the first element); s_dgdim =
+    t * (per-sub-chunk dg.tcoef sum, t-independent).  The per-op
+    rounding matches the fresh-array reference path up to the last
+    ulp (in-place add/sub are the same correctly-rounded elementwise
+    ops); the crosscheck gate bounds the accumulated difference."""
     n = len(ts)
     re_ld = [np.longdouble(0) for _ in range(n)]
     im_ld = [np.longdouble(0) for _ in range(n)]
@@ -84,44 +98,44 @@ def window_tail_pass(c, ts):
     LOG2SUB = float(math.ceil(math.log2(SUB)))
     for i in range(0, c.size, SUB):
         cc = c[i:i + SUB]
+        m = cc.size
         g2 = cc * cc
         A = g2 + 0.25
         logA = np.log(A)
         invA = 1.0 / A
+        hinvA = 0.5 * invA
         invA2 = invA * invA
-        base_dre = 2.0 * cc * invA + cc * invA2     # t-invariant part
-        tcoef_im = 2.0 * cc * invA2                 # im dg-derivative base
-        gabs = np.abs(cc)
-        dg = C.U64 * gabs
-        for k in range(0, n, TB):
-            block = ts[k:k + TB]
-            for j, t in enumerate(block):
-                idx = k + j
-                t2 = t * t
-                absd = np.abs(g2 - t2)
-                logd = np.log(absd)
-                re_t = logd - logA + 0.5 * invA
-                im_t = t * invA
-                sub_re = float(np.sum(re_t))
-                sub_im = float(np.sum(im_t))
-                re_ld[idx] += np.longdouble(sub_re)
-                im_ld[idx] += np.longdouble(sub_im)
-                abs_re = np.abs(re_t)
-                s_abs_re = float(abs_re.astype(np.longdouble).sum())
-                s_scale = float(np.maximum(abs_re, 0.5 * invA).astype(
-                    np.longdouble).sum())
-                s_abs_im = float(im_t.astype(np.longdouble).sum())
-                dredg = base_dre + 2.0 * cc / np.maximum(absd, 1e-30)
-                dimdg = t * tcoef_im
-                B_re[idx] += (C.GAM10_64 * s_scale
-                              + LOG2SUB * 2.0 * C.U64 * s_abs_re
-                              + float((dg * dredg).astype(np.longdouble).sum()))
-                B_im[idx] += (C.GAM1_64 * s_abs_im
-                              + LOG2SUB * 2.0 * C.U64 * s_abs_im
-                              + float((dg * dimdg).astype(np.longdouble).sum()))
-                satot[idx] += np.longdouble(s_abs_re)
-                del absd, logd, re_t, im_t, abs_re, dredg, dimdg
-        del cc, g2, A, logA, invA, invA2, base_dre, tcoef_im, gabs, dg
+        base_dre = 2.0 * cc * invA + cc * invA2
+        tcoef = 2.0 * cc * invA2
+        dg = C.U64 * np.abs(cc)
+        s_invA = float(np.sum(invA))             # f64 pairwise
+        s_dgdim_base = float(np.sum(dg * tcoef))  # one temp, ammortized
+        c05 = 0.5 * float(invA[0])               # per-sub max of 0.5/A
+        for idx, t in enumerate(ts):
+            t2 = t * t
+            D = np.abs(g2 - t2)                   # |g2 - t2|
+            E = 2.0 * cc / np.maximum(D, 1e-30)   # 2cc/|d|
+            E += base_dre                         # E = dredg
+            tmp = dg * E
+            s_dgdre = float(np.sum(tmp))
+            np.log(D, out=D)                      # log|d|
+            D -= logA
+            D += hinvA                            # D = re_t
+            sub_re = float(np.sum(D))
+            sub_im = t * s_invA
+            re_ld[idx] += np.longdouble(sub_re)
+            im_ld[idx] += np.longdouble(sub_im)
+            np.abs(D, out=E)                      # E = |re_t|
+            s_abs_re = float(np.sum(E))
+            B_re[idx] += (C.GAM10_64 * (s_abs_re + m * c05)
+                          + LOG2SUB * 2.0 * C.U64 * s_abs_re
+                          + s_dgdre)
+            B_im[idx] += (C.GAM1_64 * sub_im
+                          + LOG2SUB * 2.0 * C.U64 * sub_im
+                          + t * s_dgdim_base)
+            satot[idx] += np.longdouble(s_abs_re)
+            del E, tmp
+        del g2, A, logA, invA, hinvA, invA2, base_dre, tcoef, dg
     return re_ld, im_ld, B_re, B_im, satot
 
 
