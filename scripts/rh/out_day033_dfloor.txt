@@ -1,0 +1,97 @@
+========================================================================
+day033 -- the d < 1/200 sharper d-dependent floor (item 6)
+exact rational algebra (Fraction) + mpmath dps-30 cross-check
+========================================================================
+
+[0] W-side cap (day028 exact rationals):
+  A1 = 8981/100000000 = 8.981000000000000e-05  (strict upper of (1/2)(3.1e7)^(-1/2) = 8.980265101338745e-05)
+  Cw = A1 + (A2+A3+MT)/1000 = 8981000000052500001/100000000000000000000000 = 8.98100000005249934e-05
+  F4 (old floor, d >= 1/200)                = 9.999980000030000e-05
+  Cw < F4 ?  True   (the 25af strict line, restated)
+
+[1] F_sharp sharpens F4 at d = 1/200:
+  F_sharp(1/40000)              = 9.999994999564376e-05
+  4u*(10^6/10^6+1)^2 (same way) = 9.999980000030000e-05  (= F4)
+  F_sharp - F4  = +1.500e-10  (relative +1.499956e-06)
+  F_sharp(1/40000) > 4u*(10^6/(10^6+1))^2 :  True
+
+[2] floor-level squeeze edge: P(u) = 0, u = d^2 (exact):
+  P(u) = -9.999999999102e+05 u^2 + -3.999999999820e+12 u + 8.981004490553e+07
+  u_F = d_F^2 in [ 2.245251122726485e-05, 2.245251122726485e-05 ]  (exact Fraction bracket)
+  d_F in [ 592301, 125000000 ] = [ 0.0047384080, 0.0047384081 ]
+  certified: d_F >= r1 = 592301/125000000  (0.0047384080)
+  F_sharp(r1^2) - Cw = -3.411e-12   (r1 below edge: negative, as designed by the floor)
+  F_sharp(r2^2) - Cw = +3.795e-13   (r2 above edge: the SAFE certified edge)
+  working edge r2' = 47384091/10^10 = 0.0047384091:
+    F_sharp(r2'^2) - Cw = +3.8287e-11  (exact positive rational margin)
+  relation to data-level d* = 0.004738 (25af [7], printed):
+    d* interval (0.0047375, 0.0047385) vs certified d_F bracket: compare below
+    F_sharp(0.0047385^2) - Cw = +3.484e-09  (sign = does the bound level cover the data edge?)
+    gap 1/200 - d_F:  0.0050 - 0.0047 = 0.0003  (5.23% of 1/200)
+
+[3] mpmath dps-30 cross-check (true mown closed form vs the
+    floors).  t = 1000 (floor worst case) and t = 1e5:
+  t=1000:  d          mown*t^2     F_sharp    mown-F_sh   mown*t^2 - Cw
+        0.001000  4.000002000e-06  3.999998000e-06  +4.000e-12   -8.581e-05
+        0.004000  6.400003200e-05  6.399996800e-05  +6.400e-11   -2.581e-05
+        0.004500  8.100004050e-05  8.099995950e-05  +8.100e-11   -8.810e-06
+        0.004700  8.836004418e-05  8.835995582e-05  +8.836e-11   -1.450e-06
+        0.004730  8.949164474e-05  8.949155525e-05  +8.949e-11   -3.184e-07
+        0.004738  8.979462089e-05  8.979453110e-05  +8.979e-11   -1.538e-08
+        0.004740  8.987044493e-05  8.987035506e-05  +8.987e-11   +6.044e-08
+        0.004800  9.216004608e-05  9.215995392e-05  +9.216e-11   +2.350e-06
+        0.005000  1.000000500e-04  9.999995000e-05  +1.000e-10   +1.019e-05
+  t=1e5:   d          mown*t^2     F_sharp    mown-F_sh   mown*t^2 - Cw
+        0.004730  8.949160000e-05  8.949155525e-05  +4.475e-11   -3.184e-07
+        0.004738  8.979457600e-05  8.979453110e-05  +4.491e-11   -1.542e-08
+        0.004740  8.987040000e-05  8.987035506e-05  +4.494e-11   +6.040e-08
+        0.005000  1.000000000e-04  9.999995000e-05  +5.001e-11   +1.019e-05
+
+[4] t-structure: the TRUE mown*t^2 is DECREASING in t and
+    down-converges to 4 d^2: the e^c factor (c = Cown ~ 1/t^2
+    > 0, so e^c > 1) dominates the slowly-increasing ratio
+    part g(t^2).  The floor argument is UNAFFECTED:
+      mown*t^2 = 4 d^2 g(t^2) e^{c(t)} >= 4 d^2 g(t^2)
+                >= 4 d^2 g(10^6) = F_sharp
+    (e^c >= 1 dropped; g strictly increasing in t^2, exact).
+  d = 0.001000:  t: 1e3 ... 1e6   mown*t^2 = 4.000002000e-06  4.000000500e-06  4.000000020e-06  4.000000000e-06  4.000000000e-06
+              limit 4 d^2 = 4.000000000e-06   descending: True
+  d = 0.004000:  t: 1e3 ... 1e6   mown*t^2 = 6.400003200e-05  6.400000800e-05  6.400000032e-05  6.400000000e-05  6.400000000e-05
+              limit 4 d^2 = 6.400000000e-05   descending: True
+  d = 0.004738:  t: 1e3 ... 1e6   mown*t^2 = 8.979462089e-05  8.979458722e-05  8.979457645e-05  8.979457600e-05  8.979457600e-05
+              limit 4 d^2 = 8.979457600e-05   descending: True
+  d = 0.005000:  t: 1e3 ... 1e6   mown*t^2 = 1.000000500e-04  1.000000125e-04  1.000000005e-04  1.000000000e-04  1.000000000e-04
+              limit 4 d^2 = 1.000000000e-04   descending: True
+
+[5] VERDICT (item 6 / 25af residual (3)):
+  * F_sharp(d) above is the sharper d-dependent floor, exact
+    rational in d^2, valid for ALL t >= 1000 and all 0 < d < 1/2
+    (e^c dropped: c = Cown = (1/2+d)/A + (1/2-d)/B > 0).
+  * It sharpens F4 at d = 1/200 (the [1] relative gain) and, more
+    importantly, DEFINES a floor on the whole gap (d_F, 1/200)
+    where the old F4 is 0 (inapplicable).
+  * The bound-level strip squeeze (WUB + Mterm < floor) therefore
+    extends from the d >= 1/200 edge to the certified working
+    edge d >= 47384091/10^10 = 0.0047384091 (strict 10-decimal
+    rational above d_F, exact positive margin in [2]) -- a
+    5.23 percent extension of the closure-relevant own-regime
+    strip.  Honest sign note: the floor bracket r1 below d_F
+    is NEGATIVE-margin by construction; the certified COVER
+    edge is the upper bracket rounded up, r2'.
+    of the closure-relevant own-regime strip; below d_F the t^-2
+    wire is intrinsically open (floor 4 d^2*(...)->0 < Cw), as 25af
+    [7] stated for the data edge: not closure-relevant (the S2
+    floor side / the near pin 0.9975 at the witness handles it).
+  * Lean follow-up (named, NOT part of this constants study): port
+    F_sharp as st_mownfloor_sharp (the g'(u) > 0 line + the exact
+    ratio comparison at u = 10^6, norm_num-able), then the d-edge
+    parameter 1/200 -> r2' in s4_strip_close, and the d0 < 1/200
+    case split in S4A.s4asm_S4_on_pairs (the 0.9975 near-pin
+    edge moves from 1/200 to r2'; the band (r2', 1/200) becomes
+    covered by mown(t, d0) with the F_sharp floor).
+    Per the owner's standing rule, the Lean port will search
+    online FIRST for any latest-mathlib lemma or reorganization
+    (monotone ratio/pow/div chains) before deriving atoms by
+    hand.
+
+DONE
