@@ -5884,3 +5884,162 @@ re-pulled 2026-09-17 verified: Nt frontier 73426758 exact, seam gap
   standing rule (2026-09-19): the port searches ONLINE FIRST for any
   latest-mathlib lemma or reorganization (monotone ratio/pow/div
   chains, positivity) before deriving atoms by hand.
+
+================================================================
+2026-09-19  day033 LEAN PORT — LANDED (item 6, the d-dependent floor)
+================================================================
+
+Scope: the day033 sharper d-dependent floor F_sharp (queue item 6) is now
+LEAN-PROVEN, additive to the green 1/200 line (nothing on the old line
+touched).  New declarations, all building on the pinned
+leanprover/lean4:v4.33.1 + mathlib v4.33.1:
+
+RhAttack/S4Strip.lean:
+  r2prime : R = 47384091 / 10^10 (= 0.0047384091; flat exact integer
+    form, NOT a 10^10 power term -- see the whnf note below).
+    hr2prime_pos : 0 < r2prime.
+  FshU (u : R) := 1000000 * u * (u + 4000000) /
+      (1000000000000 + 2000000 * u + 500000 + ((1/4 : R) - u)^2)
+    (the sharp floor in u = d^2, i.e. F_sharp(u) of the day033 note;
+    the numerator is the day033 Xf AFTER cancelling the common u;
+    flat exact-integer constants by design).
+  Fsh (d : R) := FshU (d^2).
+  st_mownfloor_sharp : (1000 <= t, 0 < d <= 1/2)
+      -> Fsh d * t^(-2 : R) <= S4O.mown t d.
+    (the day033 floor, the whole strip 0 < d <= 1/2 at every t >= 1000;
+    exact algebra: after cancelling u the cross-multiplied deficit is
+    N4(v) = Aco*(v-10^6)^2 + Bsh*(v-10^6) with
+    Aco = 4(1/4-u)^2 + 7000000*u + 2000000 > 0 and Bsh > 0,
+    verified EXACTLY in tmp/der_n4.py (fractions.Fraction grid) BEFORE
+    writing Lean; the first Xf draft (leading u) was wrong and was
+    caught by the exact grid.)
+  st_Fsh_mono : 0 < u1 <= u2 <= 1/4 -> FshU u1 <= FshU u2
+    (via the exact cross factor Nsh(u2)*D2star(u1) - Nsh(u1)*D2star(u2)
+    = (u2 - u1) * Q with Q > 0, Q flat-exact-integer form).
+  st_hfinal_sharp : A1 + (A2 + A3 + 25/10^15)/1000 < FshU (r2prime^2)
+    (the margin Cw = 8981000000052500001/10^20 vs F_sharp(r2'^2),
+    +3.8287e-11, as an exact-norm_num rational inequality).
+  s4_strip_close_sharp : (1000 <= t, r2prime <= d <= 1/2,
+      0 <= M <= Zbound t) ->
+      p8_B t (n4 t) + M * e^(X4fun t) * X4fun t < S4O.mown t d.
+    (day031's s4_strip_close with the d-edge MOVED from 1/200 to r2prime.)
+
+RhAttack/S4Asm.lean (section 7, additive):
+  s4asm_strip_region_S4_sharp (edge S4Strip.r2prime <= d0, calls
+    s4_strip_close_sharp with Zbound as M).
+  s4asm_S4_on_pairs_sharp : the pair coverage with the if-split at
+    r2prime -- strip branch via the sharp lemma, window branch via the
+    EXISTING d-independent s4asm_window_region_S4 (its near-pin bound
+    p8_f_near_pin has no d, so the edge moves for free).
+  The old s4asm_window_region_S4 / s4asm_S4_on_pairs (1/200 edge) are
+  UNCHANGED; both assemblies hold simultaneously, the sharp one
+  strictly stronger (the band (r2', 1/200] added at 5.23% of the old
+  strip width).
+
+Verification (per the standing verification discipline, not the default
+target alone):
+  lake build (whole project)                          0 errors
+  lake env lean RhAttack/S4Strip.lean                 0 errors
+  lake env lean RhAttack/S4Asm.lean                   0 errors
+  #check of all 10 new constants (st_mownfloor_sharp,
+    st_Fsh_mono, st_hfinal_sharp, s4_strip_close_sharp,
+    s4asm_strip_region_S4_sharp, s4asm_S4_on_pairs_sharp, r2prime,
+    FshU, Fsh, hr2prime_pos): exact types as intended.
+
+Per the owner's rule (SEARCH ONLINE FIRST, reinforced 2026-09-19), the
+port went: online search for current mathlib lemmas -> local pinned-
+mathlib grep -> probe -> patch.  The big ring/norm_num atoms used are
+old territory (ring, ring_nf, norm_num, linarith, field_simp,
+div_le_div_iff0, Real.one_le_exp, Real.rpow_neg, sq_pos_of_pos,
+pow_le_pow_left0, mul_le_mul* family); nothing new was needed beyond
+that.
+
+TOOLCHAIN HITS (pinned 4.33.1 + mathlib 4.33.1, all reproducible):
+
+1. KERNEL WHNF TIMEOUT ON POW-LITERAL CONSTANTS.  A top-level def whose
+   body contains (10 : R)^12 / (10 : R)^6 power terms (the original
+   FshU writing) made every ring-touching rewrite of that body time
+   out deterministically at whnf (200000 heartbeats): the pow term
+   expands to an 11- or 6-fold nested mul tree in the kernel.  Fix:
+   write 10^12-scale constants as FLAT NUMERALS (1000000000000,
+   2000000, 500000, 4000000000000, 10000000000) in the def bodies and
+   in every ring/linarith context.  r2prime = 47384091/10^10 was
+   likewise flattened to /10000000000.  After flattening the whole
+   port compiles under the repo's existing heartbeat convention
+   (set_option maxHeartbeats 1600000 scoped around the two heavy
+   theorems, as already used at line 819 of S4Strip for the old big
+   proof; restored afterwards).
+
+2. LOCAL SETS DEFAULT TO NAT FOR BARE NUMERAL BODIES.  `set K :=
+   1000000000000 + 500000 + 1/16` (no type ascription) types K as NAT:
+   1/16 in N is 0, silently dropping the fractional part and breaking
+   every downstream ring equality (linarith/ring then honestly refuse
+   an inequality that is no longer true).  Same trap for
+   `set Dneg := 2000000000000 + 500000`.  Fix: ascribe the first
+   literal ((... : R)); a body that already contains a (1/4 : R)
+   subterm is safe.  Lesson: every flat-integer local set in a
+   mixed-fraction context gets an explicit R ascription.
+
+3. CALC PARSER: MULTI-LINE LHS + NEXT-LINE BY-BLOCK.  In this pin, a
+   calc whose FIRST expression spans more than one line followed by a
+   step justified `:= by` with the tactic block on the NEXT LINE fails
+   to parse ("unexpected token ... expected ':='", the by-block is
+   seen as empty and the next line re-parsed as a calc step).  With a
+   single-line first expression the same form parses.  Fix: put the
+   first tactic on the `:= by` line itself (`:= by ring_nf at h ⊢;
+   linarith [...]`).  (Generalizes the earlier ProbeN6 pin:
+   calc-step justifications are same-line by or by { } blocks only.)
+
+4. LINARITH ARITH ATOM MISMATCH UNDER UNFOLDED LOCAL SETS.
+   linarith/nlinarith "failed to find a contradiction" on a goal that
+   is one weighted sum away, when the goal and the hypotheses contain
+   the same local-set constant in different unfolded forms (Dneg as a
+   folded local def in the hypothesis, flat in the goal).  Fixes that
+   worked: (a) `dsimp only [Dneg] at hn` BEFORE the linarith call;
+   (b) `ring_nf at hT1 hneg ⊢` before linarith (normalizes both sides
+   to identical atoms, including the K-folded terms).  The
+   nlinarith variant of the same step also failed; the explicit calc
+   chain with ring_nf-at preconditions closed it.
+
+5. RPOW NUMERAL BRIDGES IN THIS PIN.  `Real.rpow_natCast` exists but
+   is NOT a simp lemma in mathlib v4.33.1 (bare `simp` /
+   `simp only [rpow_natCast]` report "made no progress" on
+   t^(2 : R) = t^2 goals).  `norm_num` closes t^(2 : R) = t^2
+   directly (it evaluates numeric rpow); the t^(-2 : R) = 1/v bridge
+   is then `rw [Real.rpow_neg htpos.le (2 : R), inv_eq_one_div,
+   <norm_num bridge>]`.  ring does NOT close t^(2:R) = t^2 on its
+   own (the rpow atom is not a monomial for ring).
+
+6. LE_OF_EQ / MUL_LE_MUL_COMMUTATIVITY.  In calc tail steps proving
+   A <= A*e^c: mul_le_mul_of_nonneg_right produces c1 <= c2 in the
+   form m*a <= m*b (multiplier on the LEFT), so the calc chain must
+   pass through `A = 1*A := by ring`, then
+   `1*A <= e^c*A := mul_le_mul_of_nonneg_right ...`, then
+   `e^c*A = A*e^c := by ring`; writing the middle goal as
+   `A*1 <= A*e^c` type-mismatches (commutativity is not definitional).
+   And the final mown-identification step closed by `dsimp only
+   [S4O.mown]` ALONE (the local u/v sets are transparent, so the goal
+   is judgmentally reflexive; a following rewrite is a "No goals to be
+   solved" error -- the standing "dsimp may close" pin, recurring).
+
+7. EXACT-GRID-FIRST FOR POLY IDentities.  The first N4 draft (Xf WITH
+   a leading u factor) produced a nonzero ring residual and a false
+   "identity is wrong" signal; the exact fractions.Fraction grid
+   (tmp/der_n4.py, clean add/sub/mul helpers) caught it before Lean
+   was touched, and the corrected Xf = 10^6*(u + 4*10^6) (no leading
+   u) passed the grid first.  The helper-script Dstar was ALSO buggy
+   in one intermediate draft (a -u/2 term lost when expanding
+   (1/4-u)^2) -- the grid caught it too.  Rule reaffirmed: every big
+   polynomial identity is grid-verified EXACTLY in Python before it is
+   written into Lean, using a clean monomial-dict helper (wrong
+   monomial keys in hand-written dicts produce SILENT identity
+   failures that mimic "the math is wrong").
+
+Honest split update (day033 port): the day033 sharp floor is now
+LEAN-PROVEN (st_mownfloor_sharp, st_Fsh_mono, st_hfinal_sharp,
+s4_strip_close_sharp, the two S4Asm sharp assemblies) on the pinned
+4.33.1 stack; the data-side constants (r2' = 47384091/10^10, the d_F
+bracket [0.0047384080, 0.0047384081], the +3.8287e-11 margin, the
+5.23% band-width figure) remain MEASURED/PINNED exactly as recorded in
+the day033 note.  No old statement changed; the 1/200 line stays
+green and untouched.
