@@ -13,7 +13,7 @@ while true; do
   sleep 60
 done
 rm -rf tmp/h1cert_p1
-taskset -c 0-9 env P1WORKERS=10 python3 scripts/rh/day034b_h1cert.py phase1 >> $LOG 2>&1
+taskset -c 0-7 env P1WORKERS=8 python3 scripts/rh/day034b_h1cert.py phase1 >> $LOG 2>&1
 rc1=$?
 if [ $rc1 -ne 0 ]; then echo "phase1 rc=$rc1 -> ABORT $(date)" >> $LOG; exit $rc1; fi
 nfiles=$(ls tmp/h1cert_p1/win_*.npz 2>/dev/null | wc -l)

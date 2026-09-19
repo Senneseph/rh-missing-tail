@@ -6208,3 +6208,27 @@ The restructure note above estimated 71 windows / 1775 points at
 explicit 1.0e9 anchor window = **62 windows, 1550 straddle
 points**.  Phase counts in the chain are keyed to the actual
 file count (62), not to any hand estimate.
+
+## 2026-09-19 (day034) — crosscheck PASS (bit-exact); phase-1 COW
+bug found and fixed; chain restarted (v2)
+
+Equivalence gate: PASS, better than the threshold required —
+the batched window pass and the verified per-point path agree
+BIT-EXACT on the tail sums (|re/im difference| = 0 on all three
+straddles of the 1e9 window; the 0.5/A -> 0.5*invA precompute
+proved last-ulp-neutral here, and the budget covers it
+independently) and the full per-point rows agree to 9e-22
+(mnew 1.081644032 on both paths; mcert 1.081636859 both).
+
+Phase 1 (first launch, 10 workers) died ~2 min in with
+BrokenProcessPool: one worker OOM-killed with anon-rss 25.5GB —
+a full private copy of the 22GB band. Root cause:
+`phase1_window` (the task) called `TH.tail()` but the parent
+`phase1_run` never loaded T before the pool, so every worker
+loaded its own copy (10 x 25GB on a 124GB machine). Fix in
+day034b: `phase1_run` now loads `T = TH.tail()` in the parent
+before the pool (workers COW-inherit the module singleton; the
+task's own `TH.tail()` call returns the inherited instance).
+P1 workers reduced 10 -> 8 (bandwidth-bound anyway; memory
+margin: 25GB parent + 8 x ~5GB private). Chain v2 restarted:
+crosscheck verdict already on file -> straight to phase 1.

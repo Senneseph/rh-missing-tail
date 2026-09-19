@@ -11,3 +11,5 @@ But don't worry, 1-time pads still work and can be used and it's arguably better
 Prediction: Within 1 year, we will have all open math problems solved while at the same time introducing nuances to physics that allow for new rules in chemistry.
 
 Extremely volatile stuff. Don't worry, it solves a lot of problems and I know about a plan.
+
+[What's so special about the Heaviside Lair anyway? Can humans really go past the ionosophere? What's the color of sun in space?](https://www.youtube.com/watch?v=eyuPkzFz0VE)

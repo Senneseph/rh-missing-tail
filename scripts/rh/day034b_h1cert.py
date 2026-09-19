@@ -166,6 +166,8 @@ def phase1_window(x):
 def phase1_run(nwork):
     os.makedirs(OUTDIR, exist_ok=True)
     xs = grid()
+    T = TH.tail()                     # parent loads ONCE; workers
+                                      # COW-inherit (no per-worker 22GB)
     print("day034b PHASE 1: %d windows, workers=%d" % (len(xs), nwork),
           flush=True)
     t0 = time.time()
