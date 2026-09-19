@@ -6432,3 +6432,70 @@ RE-ISSUED (reading C-1) + S3b anatomy map landed
   launch) extends the evidence edge into real-zero territory;
   (3) the telescoping-form search for the lattice-averaged
   potential (the W2 theorem body).
+
+## 2026-09-19 (day035, ~14:30 EDT) — S3c: the W2
+telescoping FOUND (queue item 1, verdict: P-1 + P-2 both YES)
+
+scripts/rh/day035_s3c_cancellation.py (solo run, taskset 27,
+gates: quad dps-30/60 spreads 1e-21 scale; W_direct vs W_byparts
+agreement 1.5e-6..2.4e-5 = the float64-input floor of the
+2.8e9-term data sums).  At t = 3.9e7/1e8/3e8 (+1/2):
+
+              NasSum          I_np            bracket     B - Dc    W
+  3.9e7+1/2   +61,567,494.40  +61,567,493.67  -0.731      +1.579    +0.8481
+  1e8+1/2     +57,821,321.53  +57,821,319.11  -2.416      +5.716    +3.3007
+  3e8+1/2     -279,308,661.71 -279,308,663.93 -2.223      +6.834    +4.6110
+
+- P-1 (the lattice Riemann sum for int N_asym p' is O(1)-
+  accurate, not generic O(1e4+)): CONFIRMED — |I_np - NasSum|
+  = 0.73 / 2.42 / 2.22 against magnitudes O(1e7)..O(2.8e8):
+  relative agreement ~1e-8 to 8e-9.
+- P-2 (|W| = O(1)-O(10) band-local): CONFIRMED — W = +0.85 /
+  +3.30 / +4.61.
+- THE TELESCOPIING (the actual result).  From the two IBP
+  identities (both gate-verified):
+    (i)  S1 = p(G2)N(G2) - p(G1)N(G1) - sum N(x_k) dp_k
+    (ii) I_pr = p(G2)Nas(G2) - p(G1)Nas(G1) - int Nas p'
+  and the data split sum N dp = Dc + NasSum,
+    (iii) int DN p' = int N p' - I_np = sum N dp - I_np,
+  so with W := S1 - I_pr:
+      W = B - Dc + (I_np - NasSum)
+        = B - Dc + (Dc - int DN p')
+      **W = p(G2)DN(G2) - p(G1)DN(G1) - int DN(x) p'(x) dx**,
+  where DN(x) = N(x) - N_asym(x) is the BOUNDED count walk
+  (pinned sup|DN| = 2.439 on the band).  All O(1e7)-O(1e8)
+  pieces are artifacts of the un-telescoped
+  representation; the band-local defect is ENTIRELY the
+  bounded walk against the log kernel plus boundary terms.
+  Numerical check: B - (Dc - bracket) vs W: 0.8482/3.3009/
+  4.6110 vs 0.8481/3.3007/4.6110 (3-decimal agreement at all
+  three heights).
+- CONSEQUENCES (the W2 theorem is now bounded work):
+  1. Bound on the band: |W| <= sup|DN| * (|p(G2)| + |p(G1)| +
+     PV-TV(p)), where the log-singular part of int DN p' is
+     taken in principal value (the 1/(g-t) piece: DN(t)*
+     log((G2-t)/(t-G1)) by the same subtraction trick) and
+     log(G2/G1) = 4.6 is FIXED across the band — so the bound
+     is an ABSOLUTE band constant (~O(20-40), no t-growth
+     inside the band):  2.439 * (4.6 + O(1)) ~ 20-40; the
+     pinned data says W = 0.85..4.61.
+  2. Beyond the band, sup|DN| = O(log t) at RH level gives
+     the classical O(log t * log-scale) ceiling; the DATA
+     shape (walk ~ O(1-2.5) at 2.8e9 zeros) is the refinement
+     to prove — a counting statement, not spacing.
+  3. Composition for margin >= 1: the band-local W feeds the
+     S1 wire via K_full = K_band * (pinned (14.13,1e7] section)
+     * (quad sections); the one-sided ingredient the
+     certificate needs is a LOWER bound W >= -C with C small
+     (plus the phase, which the per-point certificate already
+     carries).  The pieces of the full uniform statement are
+     now: this W bound (walk theorem), S3a (dev lower bound),
+     the pinned sections, and the wire algebra — all located,
+     all bounded work or pinned.
+- The owner's cube-identity instinct was the method: the wild
+  sums (S1, I_pr, O(1e8)) are controllable because the summand
+  structure is a discrete derivative of the counting function;
+  the telescoping to boundary + walk terms is the "sum of
+  consecutive differences" in the zeta-zero setting.  The
+  "disguised identity" is NAMED: IBP against the counting
+  function on both the N and N_asym decompositions.
