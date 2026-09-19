@@ -6309,3 +6309,40 @@ Status of the H1-cert run at this entry: phase 1 at 24/39
 windows, pace ~24 windows/104 min; phase 2 (~975 points / 27
 workers, ~1 h) follows automatically; verdict expected around
 10:30 EDT.
+
+## 2026-09-19 (day035, night, post-compaction) — back-pocket
+notes saved; Fibonacci mirror corrected to its exact fact
+
+The owner's end-of-day "back pocket" facts were each checked
+against exact arithmetic and saved to
+docs/BACK-POCKET-NOTES-2026-09-19.md (flavor file: verified facts
++ explicit closed dead ends, per owner direction):
+- Cubes: the identity telescopes (T(k)^2 - T(k-1)^2 = k^3);
+  p = 3 is the unique exponent with a perfect-power power sum
+  (sympy-verified p = 1..12 plus obstruction: even p have a
+  simple (2n+1) factor; odd p have R(0) negative/square-free at
+  p = 5,7,9,11); the golden quadratic n^2+n-1 first appears in
+  the core factorizations at p = 9, 10 (verified range).
+- Fibonacci mirror, EXACT form (verified): with 1-based position
+  P(n) = n+1, P(n) - F(n) = 1 if and only if F(n) = n; the
+  fixed points are EXACTLY {0, 1, 5} (monotonicity beyond 5:
+  F(n) - n grows strictly, step F(n) - 1 >= 4); the full
+  difference census d(n) = +1,+1,+2,+2,+2,+1,-1,-5,-12,-24,-44,
+  ... is strictly decreasing from n = 6, so the small-n shape is
+  complete: the "unit" recurrence lives exactly at the three
+  fixed points, the +2 window is exactly {2,3,4} (the
+  F(n) = n-1 fact, also terminal), and n = 6 is the first
+  overtake (the anti-mirror) with no return.
+- Prime-fractal recurrence question: CLOSED DEAD END as far as
+  known (Binet crossing is generic; no mechanism found). The
+  charted neighborhood (rank of apparition / mod-5 category,
+  F(n)-prime implies n-prime-or-4, infinitely-many-Fibonacci-
+  primes OPEN) is recorded for reference, not as our thread.
+- Active probes saved from the night: the telescoping test for
+  the Efull lattice walk (the day030 "full counting-function
+  IBP" sub-item — the direct application of the cube lesson),
+  the residual-walk vs zero-gap correlation, and the W3 3e10
+  falsification chain.
+Status: day034b phase 1 DONE (39 windows, 168.3 min, gates
+clean); PHASE 2 (975-point cert) running since 09:24 EDT,
+verdict expected ~10:30 EDT.
