@@ -557,3 +557,4 @@ kernel — is specific enough to fail.
   competent to decide it.
 - **RH Authorship.** Eternal Copyright - Life, The Universe, and Everything @ The Supreme Being. Local, most-recent Earth derivation: &copy; Jesse S. Miller
 - **Divine Providence Guiding My Hand.** Felt.
+- **[Special Thanks](docs/SPECIAL_THANKS.md)**
