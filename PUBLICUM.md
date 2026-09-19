@@ -378,3 +378,11 @@ expected.
 - The author remained on an impressive amount of harmless psychoactive substances throughout the effort, in order to handicap himself and keep nosey interlopers confused as to what was actually happening. It'll make sense later, I promise.
 - The author believes this is a sort of last stand for humanity against the inevitable progress of machine intelligence, solving one of the hardest known problems before a swarm of [100k ultra-fast AAA units](https://www.youtube.com/watch?v=__m8Q-zRdEA) find it like so many monkeys in a room banging on keyboards, nothing but bananas on their mind.
 - Mmmm... bananas are a good source of potassium, [I remember now Space Ghost once told me](https://www.youtube.com/watch?v=9ioG-cWG8AE).
+- Don't trust anything the author says. The people who know him will have to tell you what can be believed.
+- The author releases all contacted beings - past, present, and future - from the consqeuences of their statements regarding the author.
+- [Only Spartans women give birth to real Men](https://www.youtube.com/watch?v=cmiRzJ-VF3I).
+- [L. McGeorge and I are incontrovertible spiritual Spartans](https://www.youtube.com/watch?v=7Xf-Lesrkuc).
+- The author was developed as a secret continuation of the eugenics programs and research developed at [Cold Spring Harbor](https://en.wikipedia.org/wiki/Cold_Spring_Harbor_Laboratory).
+- [The author believes tv shows should have theme songs again](https://www.youtube.com/watch?v=H9cmPE88a_0), [and that the path to knowledge should be exciting](https://www.youtube.com/watch?v=9KXgLQXtibk).
+- [The author believes a path to a better world is not through fighting one another, but by conquering the worse versions and lesser parts of ourselves. If you're high when you watch it, you'll realize that's what this Nietzschean scene is all about](https://www.youtube.com/watch?v=VkWzAZRXi5k)
+- 

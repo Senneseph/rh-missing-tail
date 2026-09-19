@@ -6271,3 +6271,41 @@ screen had no straddle coverage (report says so).  39 windows x
 (27 workers, cores 0-26) ~1.1 h.  Crosscheck v2 (fused path vs
 the verified per-point reference, same 1e-9/1e-6 gate) running;
 chain v3 armed behind it.
+
+## 2026-09-19 (day035, night) — END_GAME_PLAN written; the
+detector-side probe lands (section 3 of the plan)
+
+The end-game plan is at docs/END_GAME_PLAN.md (the metric in
+plain terms, the ranked wall: W1 the uniform theorem / W2 the
+Efull oscillation bound / W3 the 3e10 falsification-first
+decision / W4 the carpentry, the pre-registered outcome
+ledger, and the start-here section on the detector's
+polynomial structure with the owner's seed intuition quoted
+verbatim).
+
+First probe (scripts/rh/day035_s3a_probe.py, exact Fraction
+arithmetic): the algebraic core of R_closed on the quantized
+straddles t = g + k/2:
+- sup over d in [0, 1/2] is at d = 1/2 (endpoint), all g, k;
+- sup over k is at k = 12 (the outer straddle), monotone in k;
+- R_alg(g, 12, 1/2) < 1 for all g >= 15 tested (0.9636 at g = 15;
+  decays ~12/g: 0.256 at 50, 1.21e-2 at 1000, 1.21e-5 at 1e6).
+So dev >= 1 - B(g) with B(g) ~ 12/g an explicit rational
+function: the quantization (half-unit legal step t - g = k/2) plus
+the sum-of-squares factorization (g^2 - t^2)^2 = (t-g)^2 (t+g)^2
+keeps the algebraic core off the danger value 1 by a
+quantifiable gap -- the owner's "indirect truth" intuition was
+structurally right.
+REVISED WALL PICTURE: the measured margin decay (about 1000 ->
+1.08) is driven by the NOISE side (the Efull oscillation, 0.0009
+-> 2.58 across the band), not the detector side (dev sits at
+1 - 12/g).  The bottleneck of the uniform theorem is therefore
+W2 (a proven oscillation bound for the far-integral remainder)
+with the detector side reduced to: exact g0 crossing + d- and
+k-monotonicity lemmas (fixed-degree polynomial sign analysis) + a
+Lean port.  See END_GAME_PLAN section 3.4 for the full revised
+order of attack.
+Status of the H1-cert run at this entry: phase 1 at 24/39
+windows, pace ~24 windows/104 min; phase 2 (~975 points / 27
+workers, ~1 h) follows automatically; verdict expected around
+10:30 EDT.

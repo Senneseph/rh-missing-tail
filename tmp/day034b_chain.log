@@ -22,3 +22,19 @@ chain start Sat Sep 19 06:14:00 AM EDT 2026
 crosscheck PASS -> phase1 Sat Sep 19 06:34:00 AM EDT 2026
 tail cache: (10000000, 31946000] 52290633 + band 2792198664; G_LAST = 1006345999.847005
 day034b PHASE 1: 39 windows, workers=8
+[07:10:06] window 5 done (x=1.6e+07, elapsed 34.3 min)
+[07:10:06] window 0 done (x=1e+06, elapsed 34.3 min)
+[07:10:07] window 7 done (x=3.3e+07, elapsed 34.3 min)
+[07:10:08] window 6 done (x=2.4e+07, elapsed 34.3 min)
+[07:10:11] window 2 done (x=4e+06, elapsed 34.4 min)
+[07:10:14] window 3 done (x=6e+06, elapsed 34.4 min)
+[07:10:21] window 1 done (x=2e+06, elapsed 34.5 min)
+[07:10:24] window 4 done (x=1e+07, elapsed 34.6 min)
+[07:44:17] window 10 done (x=4.25e+07, elapsed 68.4 min)
+[07:44:18] window 9 done (x=4e+07, elapsed 68.5 min)
+[07:44:18] window 8 done (x=3.9e+07, elapsed 68.5 min)
+[07:44:19] window 11 done (x=4.4e+07, elapsed 68.5 min)
+[07:44:28] window 12 done (x=4.6e+07, elapsed 68.6 min)
+[07:44:32] window 13 done (x=4.8e+07, elapsed 68.7 min)
+[07:44:46] window 14 done (x=5.2e+07, elapsed 68.9 min)
+[07:44:52] window 15 done (x=5.6e+07, elapsed 69.0 min)
