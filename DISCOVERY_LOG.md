@@ -6627,3 +6627,34 @@ DAY035 — W2Kernel M1 GREEN (kernel algebra LEAN-PROVEN).
   M2 = finite-sum telescope T1-T4; M3 = per-gap singular-free
   integral side (1.3); M4 = bound theorem E1-E4; M5 = numeric
   instantiation; M6 = composition through the S1 wire.
+
+DAY035 — 3e9 band stream COMPLETE at 14:47 EDT (item 2 done);
+N(3e9) pinned EXACT; S3e walk pin extends to N = 9.06e9.
+  The 476-shard stream finished; hi3e9/zeros_2002e6_to_3000e6.f64
+  (25.1GB, 3,142,622,346 zeros, span (2001746000.236353,
+  2999245999.862950)).  All real finish gates PASS: monotone,
+  min gap 2.47e-4 > 0, seam gap 0.609 in (0,1), N at band end =
+  9,061,794,704 vs RVM diff +0.40 <= 3.  The one failed gate
+  (N at EXACTLY 3e9) was my bookkeeping over-strictness: the
+  file ends before 3e9, so searchsorted(size) made the check
+  uncomputable.  CORRECTION: the ~9.83e9 RVM estimate in the
+  stream header was wrong; the true N(3e9) ~= 9.06e9 (the band
+  END count 9,061,794,704 already sat 0.40 below true RVM at
+  the band end, proving it).
+  Exact N(3e9) pinned from one extra md5-gated shard
+  (zeros_2999246000, chain-exact Nt0):  N(3e9) = 9,064,192,826
+  (RVM(3e9) = 9,064,192,825.58, |diff| = 0.42 <= 3).
+  S3e (scripts/rh/day035_s3e_3e9band.py, the S3b machine on band
+  3 (B1, B2] = (2e9 band end, 2999245999.86)):  seam/monotonicity
+  GATE-1 PASS; anatomy at t = 2.5e9 + 1/2 (min |g-t| = 0.0869):
+  GATE0 |S1 - L-form| = 9.5e-7; GATE1 |S1 - (B - Dc + R)| = EXACTLY
+  0 to the bit; S1 = -5.998e9 with R = -5.998e9 (the big-term
+  cancellation) and B = -0.1464, Dc = -0.8984 (near -0.4645 /
+  far -0.4339) — the O(1) gap mechanism is the same at N = 9e9
+  as at 2.9e9.  WALK PIN (the quantity the W2 certificate
+  consumes):  sup|DN| = 2.4772 on (1e7, 2.9992e9]
+  (bands 1-2 were 2.503 up to B1) — both census conventions.
+  Honest split: PINNED (data; N(3e9) exact, N(B2) = 9,061,794,704,
+  sup|DN| = 2.4772 to 3e9).  The full 3e10 extension remains
+  disk-blocked (765GB needed, 132GB free on the single 1.9T
+  volume).
