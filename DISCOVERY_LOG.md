@@ -6499,3 +6499,97 @@ agreement 1.5e-6..2.4e-5 = the float64-input floor of the
   consecutive differences" in the zeta-zero setting.  The
   "disguised identity" is NAMED: IBP against the counting
   function on both the N and N_asym decompositions.
+
+## 2026-09-19 (day035, ~14:45-15:10 EDT) — S3d: the walk pin
+EXTENDS to 5.9e9 zeros (sup|DN| = 2.503), 3e9 stream launched,
+W3 wall quantified, W2 Lean spec written, online-first survey
+done (Zeta23)
+
+S3d (scripts/rh/day035_s3d_2e9band.py, solo taskset 27):
+- SEAM AUDIT: G_LAST = hi[-1] exact f64 = 1006345999.8470054865
+  present in the 2e9 extension file bit-exactly; alignment
+  j0 + k0 = hi.size - 1 (exact integers); N(a[0]) = 2,852,998,639
+  via the seam (73,426,758 + 2,779,571,880 + 1).  300,000-sample
+  overlap values: max difference 1.00 ulp, only 2/300000 differ
+  (the two independent converters, convert_shards.py vs
+  convert_hi3e10.py, round a tiny fraction of the 104-bit zeros
+  to ADJACENT f64 values; impact on tracked quantities <= ~2e-7
+  in the log kernel, far below budgets — documented, no action).
+  NOTE for the log: G_LAST used in scripts as the decimal
+  literal 1006345999.847005 is 4 ulps off the exact f64; the
+  audit uses hi[-1] bit-exactly.
+- WALK PIN BAND 2: extension (G_LAST, 2001746000] has
+  3,053,546,936 new zeros, N(G2) = 5,919,172,358.
+  sup|DN| over the extension = **2.5030** (full zero census; the
+  new maximum sits in the extension).  Combined: sup|DN| <= 2.503
+  on (1e7, 2.0e9] (5.92e9 zeros).  Classical RH-scale walk
+  (|N - N_asym| ~ O((log t)^2) ~ 27 at 2e9); the pinned data is
+  a factor ~10 below it.  DN is continuous across the seam:
+  DN(G_LAST) = +0.715427 on both sides (bit-consistent with
+  S3b's band-1 value).
+- ANATOMY (G_LAST, G2] at t = 1.6e9+1/2 (min|g-t| = 0.0945):
+  GATE0 S1 vs L-form = 4.8e-7 (fsum floor for O(4e9) sums),
+  GATE1 S1 - (B - Dc + R) = -4.8e-7.  S1 = -4.080043e9,
+  B = -1.140225, Dc = -0.491170 (near +0.5348 / far -1.0260),
+  R = -4.080043e9.  The IBP identity holds on band 2 to data
+  precision — the telescope is band-independent.
+
+W3 WALL (the 3e10 chain as pre-registered is disk-blocked):
+(2e9, 3e10] = 95.7e9 zeros = 766GB f64 (1.24TB .dat); disk:
+single 1.9T NVMe, 132GB free.  TIME (revised from measurement,
+NOT the earlier day-scale guess): the hi1e9 stream ran 464
+shards in 33 min (~12s/shard); the 3e9 scope (476 shards) is a
+~1-hour job.  Even full 3e10 (~15,900 shards) would be ~2 days
+of LMFDB transfer — the wall is DISK, not time.  Live LMFDB
+index crawl (2026-09-19): 29,160 shards public, i.e. zeta-zero
+data out to ~6.1e10 — the full option is feasible only with an
+owner disk decision (~0.7TB free for 3e10; ~1.5TB for 6e10).
+DECISION (autonomous, within W3 scope): run the (2e9, 3e9]
+extension (476 shards, ~31.4GB f64, fits with 90GB margin) —
+it extends the zero-verified territory to 3e9 and the walk pin
+to N(3e9) = 9.83e9.
+
+3e9 STREAM (launched 15:02 EDT, taskset -c 28):
+scripts/rh/day035_3e9_stream.sh — the day024 mechanism
+(resumable curl + md5 gate vs the full 14,580-entry LMFDB list
+/tmp/zeta-dl/md5.txt + day024_platt_fast decode-append +
+COUNT cross-shard Nt0 assert).  Preflight: live index serves
+shards 2001746000..2999246000; first shard md5 exact; and the
+SEAM META CHECK: zeros_2001746000.dat has Nt0 = 5,919,172,358
+= the S3d count at the hi3e10 band end, against LMFDB's own
+block bookkeeping (double-verified).  OUT =
+scripts/rh/hi3e9/zeros_2002e6_to_3000e6.f64 (grows to ~31.4GB).
+ETA ~1h.  When done: S3e walk statistics on (2e9, 3e9]
+(extends the pin to 9.83e9 zeros).
+
+ONLINE-FIRST SURVEY (owner directive, third reinforcement):
+for the one-sided W-bound Lean work, searched prior
+formalizations first.  FOUND: anthropics/zeta-23-lean —
+* Zeta23/RvM/Statement.lean: RiemannVonMangoldt record on an
+  abstract ZeroConfig; riemannVonMangoldt (hΓ : GammaFacts)
+  assembles rvM_main + local count for Mathlib's zeta.
+* Zeta23/RvM/LocalCount.lean: N(t, t+1] <= A_0 log(|t|+3) for
+  all real t (Titchmarsh Thm 9.2; Jensen-disc route via
+  ZeroConfig.N_le_two_mul_half / Halving.lean / ZerosBound).
+* Zeta23/ExplicitFormula.lean + Hypotheses.lean: Weil EF
+  (paper form, H-EF), the hypothesis records.
+  Zeta23 is a static research artifact ("not maintained, not
+  accepting contributions").  CITATION DECISION: CITE Zeta23 as
+  the source of the CITED counting class (|DN| = O(log t)
+  beyond the data band); take K := sup|DN| as an explicit
+  numeric input to our theorem (PINNED 2.503 on
+  (1e7, 2e9]; CITED class beyond).  No vendoring in this step
+  (static artifact, own toolchain pin; adoption is a separate
+  owner decision).  Other RH repos noted in the spec for the
+  provenance log (RDCbum/RH_demo, jrgochan/prime,
+  motanova84/Riemann-adelic, beanapologist/RH, alejandrozu/
+  RiemannHypothesis-Formalization, zach7036/
+  riemann-hypothesis-research, Alektronnik/M4TH).
+
+W2 LEAN SPEC: docs/W2-LEAN-PLAN.md written (the exact
+statements: kernel algebra K1-K4, the finite-sum telescope
+T1-T4, the per-gap singular-free integral side (1.3), the
+bound theorem E1-E4 with explicit inputs K, L, GMAX; build
+order M1-M6).  Honest split preserved: the kernel/telescope
+algebra and the bound are to be LEAN-PROVEN; K/L/GMAX are
+PINNED (data) or CITED (Zeta23-RvM/Backlund class beyond).
