@@ -6346,3 +6346,31 @@ docs/BACK-POCKET-NOTES-2026-09-19.md (flavor file: verified facts
 Status: day034b phase 1 DONE (39 windows, 168.3 min, gates
 clean); PHASE 2 (975-point cert) running since 09:24 EDT,
 verdict expected ~10:30 EDT.
+
+## 2026-09-19 (day035, ~11:00 EDT) — S3b anatomy probe built;
+first run OOM-killed; re-armed to run solo after phase 2
+
+The S3b probe (scripts/rh/day035_s3b_ibp_anatomy.py) was built to
+map the anatomy of the Efull lattice walk: the exact identity
+S1 = B - Dc + R over (1e7, G_LAST] with the pinned zero data
+(S1 = sum p(gamma); B = boundary count-defect terms; Dc = the
+walk-weighted gap sum sum DN(x_k) dp_k, split near/far around t;
+R = the smooth N_asym part ~= -int N_asym p').  Smoke test on the
+(1e7, 5e7] slice at t = 3.2e7 + 1/2: the gate (S1 vs the
+N-weighted L-form) closed at 0.000e+00 (longdouble fsum
+precision); smoke anatomy: S1 = -5.322382e7, B = -0.293, Dc =
+-2.105 (near -0.149 / far -1.956), R = -5.322383e7: the walk
+piece (B - Dc = +1.81) is O(1)-O(2), commensurate with the O(1)-
+O(4) defect -- the pre-registered "walk carries the O(1) scale"
+reading is in the right ball park; full-band numbers (t =
+3.9e7/1e8/3e8 + 1/2) are the actual map read, pending.
+OPS NOTE: the first full run was OOM-killed (dmesg
+anon-rss 56.8GB killed while phase-2 quad held its own 23GB
+COW-shared copy): this box hosts ONE 23GB-anon consumer plus
+temps at a time (true headroom while phase-2 runs: ~45GB,
+which does not fit a second 23GB load + 30GB temps). The
+after-runner (tmp/day035_s3b_after_p2.sh) polls the chain log
+for "phase2 rc=" and then runs S3b solo on taskset 27 with an
+8h safety cap. Phase-2 status at this entry: 27/39 windows,
+in a slow (heavy-quad) stretch, advancing on CPU; full verdict
+expected by ~11:45 EDT.
