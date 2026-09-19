@@ -58,6 +58,8 @@ def grid():
     while x <= 1.0e9 + 1.0:
         xs.append(x)
         x *= GAP
+    if xs[-1] < 1.0e9:
+        xs.append(1.0e9)        # anchor the band's top edge exactly
     return xs
 
 

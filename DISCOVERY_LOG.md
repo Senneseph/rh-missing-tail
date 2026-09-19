@@ -6199,3 +6199,12 @@ pass and the verified per-point day034 path; requires
 mnew/mcert agreement <= 1e-6 (plus the already-green budget
 selftest).  If the gate fails, fix the batched pass; do not
 weaken the gate.
+
+## 2026-09-19 (day034) — correction: exact day034b grid count
+
+The restructure note above estimated 71 windows / 1775 points at
+12% spacing; the exact count (computed, not estimated) is
+61 geometric windows (x = 1e6*1.12^k, last = 8.976e8) + the
+explicit 1.0e9 anchor window = **62 windows, 1550 straddle
+points**.  Phase counts in the chain are keyed to the actual
+file count (62), not to any hand estimate.
