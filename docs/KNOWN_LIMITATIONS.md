@@ -132,6 +132,37 @@ keeps them CITED with source of record:
    backbone of everything "verified ≤ 10⁹" (seam/Nt continuity
    re-checked exactly by us: Nt = 73426758, gap = one zero spacing).
 
+**Demotion audit against the pinned toolchain (2026-09-19, item 7):**
+each CITED was checked against mathlib v4.33.1 (local grep + source
+of the pinned checkout) with the current upstream state corroborated
+online before the check.
+
+- Items 1 (Backlund RVM) and 2 (P-T Sbar Cor 1): **NOT in mathlib
+  4.33.1** (no zero-free-region or zeta-zero-counting content beyond
+  the topological set of zeros: closed/discrete/finite-on-compact in
+  `NumberTheory/LSeries/ZetaZeros.lean`). A community formalization
+  **Zeta23** (Anthropic 2026, "more than two thirds" paper; Lean
+  4/mathlib, `anthropics/zeta-23-lean`) proves Weil's explicit formula
+  and an RVM local-count bound (Titchmarsh Thm 9.2: the zero count in
+  (t, t+1] is O(log(...))) -- the formal machinery a CITED->PROVEN
+  demotion of items 1/2 would build on (adoption or re-derivation;
+  scheduled, not this item). **On the band [1e3, 1e9] the load shifts
+  to the data:** the counted quantities are pinned by our exact
+  seam/Nt re-verification (item 5), and the empirical counting
+  defect is pinned at 0 (the 25af Sbar datum) -- so items 1/2 bear
+  only above 1e9 and for the production methodology.
+- Item 3 (A2c bridge): a finite formal-algebra identity on Re s = 1/2
+  (gamma/reflection/functional equation); mathlib carries the zeta
+  and gamma infrastructure (`RiemannZeta.lean`, completed zeta and
+  pole structure). **Next small formalization candidate.**
+- Item 4 (classical zero-free, d0 > 1/2): NOT in mathlib 4.33.1;
+  Zeta23's abstract zero-config assumes the strip locus, it does not
+  prove the classical zero-free region. **Stays CITED and
+  load-bearing; a dedicated classical port is a separate project.**
+- Item 5 (P-T data backbone): **already half-demoted in fact** -- on
+  [0, 1e9] the backbone is our own exact re-verification (PINNED);
+  their certificate bears the methodology beyond it.
+
 ## 4. What looks like a hole but is sound (do not over-hedge)
 
 - **The hX wire pin at T₀ = 1.1×10⁵** is the *correct* use of a finite

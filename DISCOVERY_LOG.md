@@ -6043,3 +6043,116 @@ bracket [0.0047384080, 0.0047384081], the +3.8287e-11 margin, the
 5.23% band-width figure) remain MEASURED/PINNED exactly as recorded in
 the day033 note.  No old statement changed; the 1/200 line stays
 green and untouched.
+
+## 2026-09-19 (day034) — item 7: CITED demotion audit (queue 7, part b)
+
+For item 7, each of the five CITED universals (KNOWN_LIMITATIONS §3)
+was checked against the pinned toolchain (mathlib v4.33.1, local
+grep + source read of the pinned checkout) with the current upstream
+state corroborated online first, per the search-first discipline.
+Findings:
+
+1. **Backlund RVM envelope (Zbound = 1.6·t^{1/4}·log t)** — NOT in
+   mathlib 4.33.1. No zero-free-region or zeta zero-counting content
+   anywhere in the pinned checkout; `NumberTheory/LSeries/ZetaZeros.lean`
+   (76 lines) carries only the topological facts about the zero set
+   (closed, discrete, finite on compacta, cofinite cocompact). ONLINE:
+   a community formalization **Zeta23** (anthropics/zeta-23-lean,
+   2026, the "more than two thirds of the zeros lie on the critical
+   line" paper) proves Weil's explicit formula for ζ and an RVM
+   local-count bound (Titchmarsh Thm 9.2 shape: the zero count in
+   (t, t+1] is O(log(...))), with an abstract ZeroConfig layer over
+   the strip multiset. Status: **stays CITED and load-bearing above
+   the data band; on [1e3, 1e9] the counting load is carried by the
+   pinned data** (the exact seam/Nt re-verification). Demotion path:
+   Zeta23-style adoption or re-derivation of an explicit RVM count —
+   scheduled as its own project.
+2. **P-T Sbar Cor 1 (log-scale on-line counting defect)** — NOT in
+   mathlib 4.33.1 (same check). **On the band the empirical defect is
+   PINNED at 0** (the 25af Sbar datum, the 813-zero structure), so the
+   CITED theorem bears only above 1e9 and for the production
+   methodology. Same demotion path as 1 (the Sbar statement is
+   RVM-counting machinery).
+3. **A2c bridge (W_n = em_expr on Re s = ½)** — classified
+   differently from 1/2/4/5: it is a FORMAL ALGEBRAIC identity
+   (gamma/reflection/functional equation on the critical line), not a
+   counting or zero-free universal. mathlib 4.33.1 carries the zeta
+   and gamma infrastructure (`NumberTheory/LSeries/RiemannZeta.lean`
+   with the completed zeta and pole structure). **Next small
+   formalization candidate** — a demotion to LEAN-PROVEN is a
+   finite-task port once the A2c module defines both sides.
+4. **Classical zero-free regions (d0 > 1/2)** — NOT in mathlib
+   4.33.1; Zeta23's abstract zero-config ASSUMES the strip locus
+   (0<β<1) rather than proving the classical zero-free region, so it
+   does not demote this item. **Stays CITED and load-bearing; a
+   dedicated classical port (Hadamard–de la Vallée Poussin at
+   σ = 1 + reflection at σ ≤ 0) is a separate project.**
+5. **P-T 3×10¹² on-line data backbone** — already half-demoted in
+   fact: on [0, 1e9] the backbone IS our own exact re-verification
+   (PINNED: seam Nt = 73,426,758 at G = 3.1946e7, verified
+   LMFDB(0,1e7] 21,136,125 + cache(1e7, G] 52,290,633; band
+   2,792,198,664 to G_LAST = 1.006345999847005e9), with their
+   certificate bearing the methodology beyond the band.
+
+Arithmetic sanity (computed, not recalled): N(3.1946e7) ≈
+(3.1946e7/2π)(log(3.1946e7/2π) − 1) ≈ 7.33e7 — the seam constant is
+consistent with RVM; and the tail nlt at t ≈ 1e9 read 2,825,411,910
+in the day034 single-point calibration, consistent with the RVM
+asymptotic N(1e9) ≈ 2.83e9 — the band's 2.79e9 entries close
+G_LAST − the cache end as expected.
+
+KNOWN_LIMITATIONS §3 carries the one-paragraph version of this
+audit (appended under item 5, 2026-09-19).
+
+## 2026-09-19 (day034) — item 7, part a in flight: H1-cert design + budget selftest LANDED
+
+The H1 reissuance (certificate-grade, per KNOWN_LIMITATIONS H1 *Fix*,
+second variant: machine-verified error budget, Platt–Trudgian style,
+not interval arithmetic) is implemented in
+`scripts/rh/day034_h1cert.py` (uncommitted until the full run lands):
+
+- **Grid**: windows x = 1e6·1.08^k (k = 0..89, x ≤ ~1e9), each with
+  the verbatim day029 25-straddle set t = g_x + k/2 (k = −12..12,
+  k≠0), g_x = the real zero nearest x; the 400-node dps-30 quad at
+  every straddle (a superset of the sweep's value configuration).
+- **Budgets tracked per point**: tail (per-term unit-roundoff +
+  zero-representation dg terms + pairwise chunk bound + longdouble
+  cross-chunk + nlt-merge guard); GN product (same model); quad
+  precision/node ladder (dps 30/60 × 400/800 per section, B = max
+  corner-pair spread); dps-30/60 agreement for zeta, the 25.2.12 main
+  term, and the 500-delta dev; exact-integer nlt with a
+  NLT_GUARD = 1e-4 boundary-zero flag.
+- **Propagation**: residf_cert = residf30 + L·(e^Bexp − 1 + e^Bexp·Bph)
+  + Bz; dev_cert = dev30 − Bdev; z_cert = |z30| − Bz; margin_cert is
+  the claim `true margin ≥ margin_cert`.
+- **SELFTEST (the budget is verified before it is trusted)**: budget
+  containment against dps-60 exact per-zero arithmetic on 2000-point
+  pseudo arrays in two settings (stored == true; true = stored +
+  0.5-ulp random offsets to exercise the representation bound), for
+  the tail (re, im) and product (la, ar) channels. First run FAILED
+  on the im channel by exactly 2π·(count) — a selftest design
+  artifact (the nlt·π convention term was put in only one side) —
+  fixed the test; second run exposed one genuine model gap (the
+  nlt·π + longdouble→float merge rounding, now in B_im). Final
+  result: PASS with 20-50x containment margin on all four channels
+  (tail re: 1.1e-12 ≤ 3.8e-11; tail im: 2.1e-15 ≤ 2.2e-13; prod la:
+  1.2e-12 ≤ 2.2e-11; prod ar: 6.2e-13 ≤ 4.0e-12).
+- **Single-point calibration** (window nearest zero of 1e9 =
+  1000000000.1157, t = g + 0.5): mnew = 1.081644 (reproducing the
+  committed A-1 sweep value to 1.3e-6 on the neighboring straddle),
+  mcert = 1.0816365, Bexp + Bph = 8.6e-5 (Btail_re 6.3e-5 dominant —
+  the 2.8e9-zero representation bound, By design), quad ladders at
+  2.5e-21/7.9e-9, dps-30/60 zeta agreement 4e-22, dev agreement
+  7.7e-32, nlt = 2,825,411,910 (consistent with RVM, see above),
+  dmin = 0.085 ≫ NLT_GUARD, per-point cost ≈ 250 s CPU (quads
+  dominant: 8 sections × dps-30/60/400/800).
+- Smoke run (6 windows × 25 straddles, 9 workers, cores 0-9)
+  launched; full grid (90 windows × 25, 29 workers, cores 0-29)
+  estimated ≈ 4.7 h wall after the smoke validates the multi-point
+  path.
+
+PRE-REGISTERED readings (from the script header, before any result):
+C-1 all points margin_cert ≥ 1 → H1 band re-issued at certificate
+grade; C-2 isolated cert-fails inside computed ≥ 1 → per-point
+dps-90/120 + 1600-node reissue; C-3 any computed < 1 → A-2/B-2 onset
+reading and the Phase-1a ceiling report as deliverable.
