@@ -1321,4 +1321,99 @@ theorem e4_assembly (M k : ℕ) (hM : k < M)
           L * (x (k + 1) - x k) + 2 * L * (x (k + 1) - x k) ^ 2 * (1 / x k + 6) := by
         ring
 
+/-! ## M4 increment 5 — the final E4 layer:  the I_DN-side bound,
+the discrete witness bound, and the one-sided corollary.
+
+  (E4-int)   |I_DN| <= K * sum|Dp| + L * sum gap*|Dp| + L*gap_k + 2*L*gap_k^2*(1/x_k+6)
+             where I_DN := the continuous per-gap DN integrals
+             (the sum of gapContNS/gapContS).
+  (E4-fin)   |S1 - R| <= K * (|p 0| + |p M|) + K * sum|Dp|
+             (by (T3f)/t3, S1 - R = B - Dc exactly; E1 + E2).
+  (E4-floor) the one-sided certificate form:  S1 - R >= -C explicit.
+-/
+
+theorem e4_idnBound (M k : ℕ) (hM : k < M) (x p : ℕ → ℝ) (N0 : ℕ) (Nas : ℕ → ℝ)
+    (t L K : ℝ) (ht : 0 < t) (ht2 : 1 / 2 ≤ t ^ 2) (hL0 : 0 ≤ L)
+    (hRhoLeL : abs (W2K.Rho t) ≤ L)
+    (hxPos : ∀ j ∈ Finset.range (M + 1), 0 < x j)
+    (hxA : ∀ j ∈ Finset.range M, x j < x (j + 1))
+    (hLips : ∀ j ∈ Finset.range M,
+        ∀ z ∈ Set.Ioo (x j) (x (j + 1)), abs (deriv W2K.Nas z) ≤ L)
+    (hxk : x k < t) (hxt : t < x (k + 1))
+    (hp : ∀ j ∈ Finset.range (M + 1), p j = W2K.Ker (x j) t)
+    (hpNas : ∀ j ∈ Finset.range (M + 1), Nas j = W2K.Nas (x j))
+    (hD : ∀ j ∈ Finset.range M, abs (W2T.DN N0 Nas j) ≤ K) :
+    abs ((∑ j ∈ Finset.range M,
+        (if j = k then gapContS t (x j) (x (j + 1)) ((N0 : ℝ) + (j : ℝ))
+         else gapContNS t (x j) (x (j + 1)) ((N0 : ℝ) + (j : ℝ))))) ≤
+      K * (∑ j ∈ Finset.range M, abs (W2T.DP p j)) +
+      L * (∑ j ∈ Finset.range M, (x (j + 1) - x j) * abs (W2T.DP p j)) +
+      L * (x (k + 1) - x k) + 2 * L * (x (k + 1) - x k) ^ 2 * (1 / x k + 6) := by
+  set T := (∑ j ∈ Finset.range M,
+      (if j = k then gapContS t (x j) (x (j + 1)) ((N0 : ℝ) + (j : ℝ))
+       else gapContNS t (x j) (x (j + 1)) ((N0 : ℝ) + (j : ℝ)))) with hT_def
+  have hE4 : abs (T - W2T.DcSum M p N0 Nas) ≤
+      L * (∑ j ∈ Finset.range M, (x (j + 1) - x j) * abs (W2T.DP p j)) +
+      L * (x (k + 1) - x k) + 2 * L * (x (k + 1) - x k) ^ 2 * (1 / x k + 6) :=
+    e4_assembly M k hM x p N0 Nas t L ht ht2 hL0 hRhoLeL hxPos hxA hLips hxk hxt hp hpNas
+  have hDc : abs (W2T.DcSum M p N0 Nas) ≤ K * (∑ j ∈ Finset.range M, abs (W2T.DP p j)) :=
+    e1_bound M p N0 Nas K hD
+  have hA : abs T ≤ abs (T - W2T.DcSum M p N0 Nas) + abs (W2T.DcSum M p N0 Nas) := by
+    have hT1 : T = (T - W2T.DcSum M p N0 Nas) + W2T.DcSum M p N0 Nas := by ring
+    rw [hT1, show (T - W2T.DcSum M p N0 Nas) + W2T.DcSum M p N0 Nas =
+        (T - W2T.DcSum M p N0 Nas) - (-(W2T.DcSum M p N0 Nas)) from by ring]
+    simpa [abs_neg] using abs_sub (T - W2T.DcSum M p N0 Nas) (-(W2T.DcSum M p N0 Nas))
+  have hB : abs (T - W2T.DcSum M p N0 Nas) + abs (W2T.DcSum M p N0 Nas) ≤
+      (L * (∑ j ∈ Finset.range M, (x (j + 1) - x j) * abs (W2T.DP p j)) +
+          L * (x (k + 1) - x k) + 2 * L * (x (k + 1) - x k) ^ 2 * (1 / x k + 6)) +
+          abs (W2T.DcSum M p N0 Nas) :=
+    add_le_add hE4 le_rfl
+  have hC : (L * (∑ j ∈ Finset.range M, (x (j + 1) - x j) * abs (W2T.DP p j)) +
+          L * (x (k + 1) - x k) + 2 * L * (x (k + 1) - x k) ^ 2 * (1 / x k + 6)) +
+          abs (W2T.DcSum M p N0 Nas) ≤
+      (L * (∑ j ∈ Finset.range M, (x (j + 1) - x j) * abs (W2T.DP p j)) +
+          L * (x (k + 1) - x k) + 2 * L * (x (k + 1) - x k) ^ 2 * (1 / x k + 6)) +
+          K * (∑ j ∈ Finset.range M, abs (W2T.DP p j)) := by
+    simpa [add_comm, add_assoc, add_left_comm] using
+      add_le_add_left hDc (L * (∑ j ∈ Finset.range M, (x (j + 1) - x j) * abs (W2T.DP p j)) +
+        L * (x (k + 1) - x k) + 2 * L * (x (k + 1) - x k) ^ 2 * (1 / x k + 6))
+  have hD2 : (L * (∑ j ∈ Finset.range M, (x (j + 1) - x j) * abs (W2T.DP p j)) +
+          L * (x (k + 1) - x k) + 2 * L * (x (k + 1) - x k) ^ 2 * (1 / x k + 6)) +
+          K * (∑ j ∈ Finset.range M, abs (W2T.DP p j)) =
+      K * (∑ j ∈ Finset.range M, abs (W2T.DP p j)) +
+          L * (∑ j ∈ Finset.range M, (x (j + 1) - x j) * abs (W2T.DP p j)) +
+          L * (x (k + 1) - x k) + 2 * L * (x (k + 1) - x k) ^ 2 * (1 / x k + 6) := by
+    ring
+  exact le_trans (le_trans hA hB) (le_trans hC (le_of_eq hD2))
+
+theorem e4_wBound (M : ℕ) (p : ℕ → ℝ) (N0 : ℕ) (Nas : ℕ → ℝ) (K : ℝ)
+    (hD0 : abs (W2T.DN N0 Nas 0) ≤ K) (hDM : abs (W2T.DN N0 Nas M) ≤ K)
+    (hD : ∀ j ∈ Finset.range M, abs (W2T.DN N0 Nas j) ≤ K) :
+    abs (W2T.S1Sum M p - W2T.RSum M p Nas) ≤
+      K * (abs (p 0) + abs (p M)) + K * (∑ j ∈ Finset.range M, abs (W2T.DP p j)) := by
+  calc
+    abs (W2T.S1Sum M p - W2T.RSum M p Nas)
+      = abs (W2T.BTerm M p N0 Nas - W2T.DcSum M p N0 Nas) := by
+        rw [W2T.t3]
+    _ ≤ abs (W2T.BTerm M p N0 Nas) + abs (W2T.DcSum M p N0 Nas) := abs_sub _ _
+    _ ≤ K * (abs (p 0) + abs (p M)) + K * (∑ j ∈ Finset.range M, abs (W2T.DP p j)) := by
+      apply add_le_add
+      · exact e2_bound M p N0 Nas K hD0 hDM
+      · exact e1_bound M p N0 Nas K hD
+
+theorem e4_tailFloor (M : ℕ) (p : ℕ → ℝ) (N0 : ℕ) (Nas : ℕ → ℝ) (K : ℝ)
+    (hD0 : abs (W2T.DN N0 Nas 0) ≤ K) (hDM : abs (W2T.DN N0 Nas M) ≤ K)
+    (hD : ∀ j ∈ Finset.range M, abs (W2T.DN N0 Nas j) ≤ K) :
+    W2T.S1Sum M p - W2T.RSum M p Nas ≥
+      -(K * (abs (p 0) + abs (p M)) + K * (∑ j ∈ Finset.range M, abs (W2T.DP p j))) := by
+  have hW : abs (W2T.S1Sum M p - W2T.RSum M p Nas) ≤
+      K * (abs (p 0) + abs (p M)) + K * (∑ j ∈ Finset.range M, abs (W2T.DP p j)) :=
+    e4_wBound M p N0 Nas K hD0 hDM hD
+  have h12 : -(W2T.S1Sum M p - W2T.RSum M p Nas) ≤
+      (K * (abs (p 0) + abs (p M)) + K * (∑ j ∈ Finset.range M, abs (W2T.DP p j))) := by
+    trans (abs (W2T.S1Sum M p - W2T.RSum M p Nas))
+    · exact neg_le_abs _
+    · exact hW
+  exact (neg_le (a := K * (abs (p 0) + abs (p M)) + K * (∑ j ∈ Finset.range M, abs (W2T.DP p j)))
+    (b := W2T.S1Sum M p - W2T.RSum M p Nas)).mpr h12
 end W2B
