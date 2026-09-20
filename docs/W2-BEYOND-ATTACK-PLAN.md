@@ -130,7 +130,21 @@ drift identity (`driftStep`),  the Rho monotonicity
 HasDerivAt form of Lagrange MVT,  `exists_hasDerivAt_eq_slope`
 in the pinned mathlib),  and the per-step band (`driftBand`:
 the step sits in [1 - S, 1] once the gap increment is
-bounded).  The open content starts at the summation.
+bounded).  **Step 2 is in Lean too (W2Beyond1.lean,  GREEN,
+day035)**:  the per-gap two-sided increment band
+(`nas_inc_band`:  Rho(x)·gap ≤ Δ ≤ Rho(y)·gap),  the drift
+telescoping (`driftTelescopes`:  the walk displacement from
+the band start is exactly the per-step drift sum),  the
+one-sided regime exact forms (`driftRegimeLe` / `driftRegimeGe`),
+and the R2 REDUCTION (`driftTwoSided`:  if every per-gap
+increment satisfies |Δ_i - 1| ≤ ε_i with explicit summable
+ε_i,  then |DN(j) - DN(0)| ≤ ∑ ε_i) —  the uniform sup-|DN|
+bound on a band is now a NAMED THEOREM conditional only on the
+per-gap ε statistics + a pinned DN(0) start value.  The open
+content now starts at producing those ε_i:  the per-gap
+Rho-scale errors over the zero census (the data layer +
+gap-statistics unit —  where the measured min/max gaps feed
+nas_inc_band).
 
 **R3 — kernel-decay (S1 channel direct).**  W2Telescope already
 writes S1Sum - RSum as a kernel sum over the zeros (the t1 /

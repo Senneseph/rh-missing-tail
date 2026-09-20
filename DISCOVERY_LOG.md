@@ -6785,3 +6785,43 @@ throughout; renaming later is a find-replace across 6 docs.
   day-023/29 snapshot; the note points at the front page, the
   two remaining legs, and the ceiling report).
 - Full lake build rc=0, 0 errors; W2Beyond0 0 warnings.
+
+## 2026-09-20 — W2-beyond R2 step 2 in Lean (W2Beyond1 GREEN): the drift reduction
+
+- **W2Beyond1.lean (new, GREEN, 0 sorry, 0 warnings)** — the
+  data-free R2 reduction, built on W2Beyond0 + W2K/W2I:
+  - `nas_inc_band`: per-gap two-sided model increment — Rho(x) ·
+    gap ≤ Nas(y) - Nas(x) ≤ Rho(y) · gap (the MVT point c in
+    (x, y) + Rho monotone + positive multiply; note the rw
+    DIRECTION trap: `rw [hstep]` forward to replace Nas y - Nas x
+    in the goal, not `rw [← hstep]`).
+  - `driftTelescopes`: DN(j) - DN(0) = ∑ᵢ<ⱼ (1 - Δ_i) — by
+    induction on j using `Finset.sum_range_succ` (this pin's
+    mathlib lacks `Finset.sum_range_const`; the induction route
+    avoids the count-summation entirely).
+  - `driftRegimeLe` (Δ_i ≤ 1: |DNj - DN0| = ∑(1 - Δ_i), via
+    `Finset.abs_sum_of_nonneg`) and `driftRegimeGe` (the mirror,
+    via the integrand rewrite (1 - Δ) = -(Δ - 1) +
+    `Finset.sum_neg_distrib` + `abs_neg` + `abs_sum_of_nonneg`).
+  - `driftTwoSided` — THE R2 REDUCTION: |Δ_i - 1| ≤ ε_i ∀ i ⇒
+    |DN(j) - DN(0)| ≤ ∑ ε_i (the finite triangle
+    `Finset.abs_sum_le_sum_abs` + pointwise abs_neg/ring).
+    Composed with a pinned DN(0) (W2M5 pattern), this is a
+    sup-|DN| BOUND on the band — the [S1] uniform walk bound as a
+    named theorem conditional on the per-gap ε statistics.
+- **Pinned-mathlib v4.33.1 reference findings** (this checkout is
+  reorganized/trimmed vs. upstream; #check-probed before use):
+  the finite triangle `Finset.abs_sum_le_sum_abs` +
+  `Finset.abs_sum_of_nonneg` live in
+  Algebra/Order/BigOperators/Group/Finset.lean; `abs_add`,
+  `abs_finset_sum_le`, `Finset.abs_sum_le`, `neg_abs`, and
+  `Finset.sum_range_const` are ABSENT from this pin (use
+  `abs_neg`, `Finset.sum_range_succ` induction, or the
+  Group/Finset forms); `sub_nonneg` is an IFF; `mul_le_mul_of_
+  nonneg_left/right` take (hbc : b ≤ c) (ha : 0 ≤ a) —
+  argument order confirmed by #check.
+- W2-BEYOND-ATTACK-PLAN R2: step-2-in-Lean note (the open content
+  now starts at the per-gap ε statistics: the data layer where
+  the measured min/max gaps feed nas_inc_band over the census).
+- formal/README: W2Beyond1 file-map row.
+- Full lake build rc=0, 0 errors.
