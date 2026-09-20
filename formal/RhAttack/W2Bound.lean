@@ -243,17 +243,351 @@ theorem nasAbsSubLe (a b : ℝ) (hab : a < b) (ha : 0 < a) (L : ℝ) (hL0 : 0 �
     fun z hz => Set.mem_Ioi.2 (lt_of_lt_of_le ha (Set.mem_Icc.mp hz).1)
   have hNasC : ContinuousOn W2K.Nas (Set.Icc a b) := W2I.hNasCont.mono hUpos
   have hDiffOn : DifferentiableOn ℝ W2K.Nas (interior (Set.Icc a b)) :=
-    fun z hz => ((W2K.nasHasDerivAt z (lt_of_lt_of_le ha (interior_Icc.mp hz).1))).differentiableAt
+    fun z hz =>
+      (W2K.nasHasDerivAt z (lt_of_lt_of_le ha (interior_subset hz).1)).differentiableAt.differentiableWithinAt
   have hax : a ∈ Set.Icc a b := ⟨le_rfl, le_of_lt hab⟩
   have hUpr : W2K.Nas x - W2K.Nas a ≤ L * (x - a) :=
     (convex_Icc a b).image_sub_le_mul_sub_of_deriv_le hNasC hDiffOn
-      (fun z hz => (abs_le.mp (hL z (interior_Icc.mp hz))).2) a hax x hx hx.1
-  have hLwr : -(L * (x - a)) ≤ W2K.Nas x - W2K.Nas a :=
-    (convex_Icc a b).mul_sub_le_image_sub_of_le_deriv hNasC hDiffOn
-      (fun z hz => (abs_le.mp (hL z (interior_Icc.mp hz))).1) a hax x hx hx.1
+      (fun z hz => by
+        have hzoo : z ∈ Set.Ioo a b := by simpa using hz
+        exact (abs_le.mp (hL z hzoo)).2) a hax x hx hx.1
+  have hLwr : -(L * (x - a)) ≤ W2K.Nas x - W2K.Nas a := by
+    have hlw := (convex_Icc a b).mul_sub_le_image_sub_of_le_deriv hNasC hDiffOn
+      (fun z hz => by
+        have hzoo : z ∈ Set.Ioo a b := by simpa using hz
+        exact (abs_le.mp (hL z hzoo)).1) a hax x hx hx.1
+    rw [neg_mul] at hlw
+    exact hlw
   have haxa : abs (W2K.Nas x - W2K.Nas a) ≤ L * (x - a) :=
     (abs_le (a := W2K.Nas x - W2K.Nas a)).mpr ⟨hLwr, hUpr⟩
   calc
     abs (W2K.Nas x - W2K.Nas a) ≤ L * (x - a) := haxa
-    _ ≤ L * (b - a) := mul_le_mul_of_nonneg_left hx.2 hL0
+    _ ≤ L * (b - a) := mul_le_mul_of_nonneg_left (by linarith [hx.2]) hL0
+
+/- (E3-2)  The kernel gap integral in t-anchor form, for a non-straddle
+gap.  The (x - t) primitive is log (pinned extension = log|. |);  the
+sm part is left as an ordinary integral.  (M4 increment 3.) -/
+theorem e3_kernelGapInt (t a b : ℝ) (hab : a < b) (ha : 0 < a) (ht : 0 < t)
+    (ht_out : t < a ∨ b < t) :
+    ∫ x in a..b, (1 / (x - t) + W2K.Sm x t) =
+      (Real.log (b - t) - Real.log (a - t)) + (∫ x in a..b, W2K.Sm x t) := by
+  -- (x - t) does not vanish on [a, b]
+  have hden : ∀ x ∈ Set.uIcc a b, x - t ≠ 0 := by
+    intro x hx
+    by_contra hz
+    have hx0 : x = t := sub_eq_zero.mp hz
+    have hxI : x ∈ Set.Icc a b := by
+      simpa [Set.uIcc, inf_eq_minDefault, sup_eq_maxDefault,
+        min_eq_left_iff.2 (le_of_lt hab), max_eq_right_iff.2 (le_of_lt hab)] using hx
+    obtain ⟨hx1, hx2⟩ := Set.mem_Icc.mp hxI
+    rcases ht_out with (hlt | hgt)
+    · linarith [hlt, hx1, hx0]
+    · linarith [hx2, hgt, hx0]
+  have hInvC : ContinuousOn (fun x : ℝ => (x - t)⁻¹) (Set.uIcc a b) :=
+    continuousOn_of_forall_continuousAt (fun x hx => (W2I.hSubCA t x).inv (hden x hx) |>.continuousAt)
+  have hIntI : IntervalIntegrable (fun x : ℝ => (x - t)⁻¹) volume a b :=
+    hInvC.intervalIntegrable
+  -- sm is continuous on uIcc (denominator x + t stays off 0 near x ≥ a > 0)
+  have hSmCA (x : ℝ) (hx : x ∈ Set.uIcc a b) : ContinuousAt (fun y => W2K.Sm y t) x := by
+    have hxI : x ∈ Set.Icc a b := by
+      simpa [Set.uIcc, inf_eq_minDefault, sup_eq_maxDefault,
+        min_eq_left_iff.2 (le_of_lt hab), max_eq_right_iff.2 (le_of_lt hab)] using hx
+    have hpos : 0 < x + t := by linarith [ha, ht, (Set.mem_Icc.mp hxI).1]
+    have hsq : 0 < x * x + 1 / 4 := by
+      nlinarith [show 0 ≤ x * x from mul_self_nonneg x]
+    have hsqop :
+        (((id : ℝ → ℝ) * (id : ℝ → ℝ)) + (fun _ : ℝ => (1 : ℝ) / 4)) x ≠ 0 := by
+      dsimp
+      exact ne_of_gt hsq
+    have hb :=
+      ((hasDerivAt_id x).mul (hasDerivAt_id x)).add (hasDerivAt_const x (1 / 4))
+        |>.inv (hsqop)
+    have hbig :=
+      (hasDerivAt_id x).add (hasDerivAt_const x t)
+      |>.inv (ne_of_gt hpos)
+      |>.sub (HasDerivAt.const_mul 2 (hasDerivAt_id x) |>.mul hb)
+      |>.sub ((hasDerivAt_id x).mul (hb |>.pow 2))
+    have hsm : (fun y : ℝ => W2K.Sm y t) =
+        (((id : ℝ → ℝ) + (fun _ : ℝ => t))⁻¹) -
+        ((fun y : ℝ => 2 * (id : ℝ → ℝ) y) *
+          (((id : ℝ → ℝ) * (id : ℝ → ℝ) + (fun _ : ℝ => (1 : ℝ) / 4))⁻¹)) -
+        ((id : ℝ → ℝ) *
+          (((id : ℝ → ℝ) * (id : ℝ → ℝ) + (fun _ : ℝ => (1 : ℝ) / 4))⁻¹) ^ 2) := by
+      ext y
+      dsimp [W2K.Sm]
+      by_cases hy : y + t = 0
+      · field_simp [hy]
+      · field_simp [hy]
+    exact hbig.continuousAt.congr_of_eventuallyEq (Filter.EventuallyEq.of_eq hsm)
+  have hSmC : ContinuousOn (fun x : ℝ => W2K.Sm x t) (Set.uIcc a b) :=
+    continuousOn_of_forall_continuousAt hSmCA
+  have hIntS : IntervalIntegrable (fun x : ℝ => W2K.Sm x t) volume a b :=
+    hSmC.intervalIntegrable
+  -- pointwise rewrite of the integrand (holds at x = t by the division
+  -- convention as well)
+  have hin : (fun x : ℝ => 1 / (x - t) + W2K.Sm x t) =
+      (fun x : ℝ => (x - t)⁻¹ + W2K.Sm x t) := by
+    ext x
+    by_cases h : x - t = 0
+    · field_simp [h]
+    · field_simp [h]
+  -- the primitive integral  int_a^b (x - t)⁻¹ dx = Real.log (b - t) - Real.log (a - t)
+  have hLogD (x : ℝ) (hx : x ∈ Set.uIcc a b) :
+      HasDerivAt (fun y : ℝ => Real.log (y - t)) ((x - t)⁻¹) x :=
+    (W2I.hSubCA t x).log (hden x hx) |>.congr_deriv (by rw [← inv_eq_one_div])
+  have hFTC : ∫ x in a..b, (x - t)⁻¹ = Real.log (b - t) - Real.log (a - t) :=
+    intervalIntegral.integral_eq_sub_of_hasDerivAt hLogD hIntI
+  calc
+    ∫ x in a..b, (1 / (x - t) + W2K.Sm x t)
+      = ∫ x in a..b, ((x - t)⁻¹ + W2K.Sm x t) := by
+        rw [hin]
+      _ = (∫ x in a..b, (x - t)⁻¹) + (∫ x in a..b, W2K.Sm x t) := by
+        rw [intervalIntegral.integral_add hIntI hIntS]
+      _ = (Real.log (b - t) - Real.log (a - t)) + (∫ x in a..b, W2K.Sm x t) := by
+        rw [hFTC]
+
+/- Sm (. , t) is continuous on uIcc a b for a > 0, t > 0
+(the only denominator that can vanish is x + t, which stays off 0). -/
+private theorem smContOn (t a b : ℝ) (hab : a < b) (ha : 0 < a) (ht : 0 < t) :
+    ContinuousOn (fun x : ℝ => W2K.Sm x t) (Set.uIcc a b) := by
+  have hSmCA (x : ℝ) (hx : x ∈ Set.uIcc a b) : ContinuousAt (fun y => W2K.Sm y t) x := by
+    have hxI : x ∈ Set.Icc a b := by
+      simpa [Set.uIcc, inf_eq_minDefault, sup_eq_maxDefault,
+        min_eq_left_iff.2 (le_of_lt hab), max_eq_right_iff.2 (le_of_lt hab)] using hx
+    have hpos : 0 < x + t := by linarith [ha, ht, (Set.mem_Icc.mp hxI).1]
+    have hsq : 0 < x * x + 1 / 4 := by
+      nlinarith [show 0 ≤ x * x from mul_self_nonneg x]
+    have hsqop :
+        (((id : ℝ → ℝ) * (id : ℝ → ℝ)) + (fun _ : ℝ => (1 : ℝ) / 4)) x ≠ 0 := by
+      dsimp
+      exact ne_of_gt hsq
+    have hb :=
+      ((hasDerivAt_id x).mul (hasDerivAt_id x)).add (hasDerivAt_const x (1 / 4))
+        |>.inv (hsqop)
+    have hbig :=
+      (hasDerivAt_id x).add (hasDerivAt_const x t)
+      |>.inv (ne_of_gt hpos)
+      |>.sub (HasDerivAt.const_mul 2 (hasDerivAt_id x) |>.mul hb)
+      |>.sub ((hasDerivAt_id x).mul (hb |>.pow 2))
+    have hsm : (fun y : ℝ => W2K.Sm y t) =
+        (((id : ℝ → ℝ) + (fun _ : ℝ => t))⁻¹) -
+        ((fun y : ℝ => 2 * (id : ℝ → ℝ) y) *
+          (((id : ℝ → ℝ) * (id : ℝ → ℝ) + (fun _ : ℝ => (1 : ℝ) / 4))⁻¹)) -
+        ((id : ℝ → ℝ) *
+          (((id : ℝ → ℝ) * (id : ℝ → ℝ) + (fun _ : ℝ => (1 : ℝ) / 4))⁻¹) ^ 2) := by
+      ext y
+      dsimp [W2K.Sm]
+      by_cases hy : y + t = 0
+      · field_simp [hy]
+      · field_simp [hy]
+    exact hbig.continuousAt.congr_of_eventuallyEq (Filter.EventuallyEq.of_eq hsm)
+  exact continuousOn_of_forall_continuousAt hSmCA
+
+/- (E3-4)  The per-gap Riemann error for a NON-STRADDLE gap:
+the difference between the true integral of DN p' and the left-
+endpoint Riemann sum on the gap reduces to Nas a - Nas (.) times
+the kernel derivative, bounded by
+    L * (b - a) * ∫_a^b |kernel derivative|.
+(M4 increment 3.) -/
+theorem e3_gapErr (t a b : ℝ) (hab : a < b) (ha : 0 < a) (ht : 0 < t)
+    (ht_out : t < a ∨ b < t) (L : ℝ) (hL0 : 0 ≤ L)
+    (hL : ∀ x ∈ Set.Ioo a b, abs (deriv W2K.Nas x) ≤ L) :
+    abs (∫ x in a..b, (W2K.Nas a - W2K.Nas x) * (1 / (x - t) + W2K.Sm x t)) ≤
+      L * (b - a) * (∫ x in a..b, abs (1 / (x - t) + W2K.Sm x t)) := by
+  -- (x - t) does not vanish on [a, b] (non-straddle)
+  have hden : ∀ x ∈ Set.uIcc a b, x - t ≠ 0 := by
+    intro x hx
+    by_contra hz
+    have hx0 : x = t := sub_eq_zero.mp hz
+    have hxI : x ∈ Set.Icc a b := by
+      simpa [Set.uIcc, inf_eq_minDefault, sup_eq_maxDefault,
+        min_eq_left_iff.2 (le_of_lt hab), max_eq_right_iff.2 (le_of_lt hab)] using hx
+    obtain ⟨hx1, hx2⟩ := Set.mem_Icc.mp hxI
+    rcases ht_out with (hlt | hgt)
+    · linarith [hlt, hx1, hx0]
+    · linarith [hx2, hgt, hx0]
+  have hUpos : Set.uIcc a b ⊆ Set.Ioi (0 : ℝ) := by
+    intro x hx
+    have hxI : x ∈ Set.Icc a b := by
+      simpa [Set.uIcc, inf_eq_minDefault, sup_eq_maxDefault,
+        min_eq_left_iff.2 (le_of_lt hab), max_eq_right_iff.2 (le_of_lt hab)] using hx
+    exact Set.mem_Ioi.2 (lt_of_lt_of_le ha (Set.mem_Icc.mp hxI).1)
+  have hNasC : ContinuousOn W2K.Nas (Set.uIcc a b) := W2I.hNasCont.mono hUpos
+  have hInvC : ContinuousOn (fun x : ℝ => (x - t)⁻¹) (Set.uIcc a b) :=
+    continuousOn_of_forall_continuousAt (fun x hx => (W2I.hSubCA t x).inv (hden x hx) |>.continuousAt)
+  have hSmC : ContinuousOn (fun x : ℝ => W2K.Sm x t) (Set.uIcc a b) :=
+    smContOn t a b hab ha ht
+  have hKC : ContinuousOn (fun x : ℝ => (x - t)⁻¹ + W2K.Sm x t) (Set.uIcc a b) :=
+    hInvC.add hSmC
+  have hFC : ContinuousOn (fun x : ℝ => W2K.Nas a - W2K.Nas x) (Set.uIcc a b) :=
+    (continuousOn_const (s := Set.uIcc a b)).sub hNasC
+  have hFKC : ContinuousOn
+      (fun x : ℝ => (W2K.Nas a - W2K.Nas x) * ((x - t)⁻¹ + W2K.Sm x t)) (Set.uIcc a b) :=
+    hFC.mul hKC
+  have hIntFK : IntervalIntegrable
+      (fun x : ℝ => (W2K.Nas a - W2K.Nas x) * ((x - t)⁻¹ + W2K.Sm x t)) volume a b :=
+    hFKC.intervalIntegrable
+  have hKabsC : ContinuousOn
+      (fun x : ℝ => abs ((x - t)⁻¹ + W2K.Sm x t)) (Set.uIcc a b) :=
+    (continuous_abs.continuousOn (s := Set.univ)).comp hKC (fun _ _ => trivial)
+  have hIntKabs : IntervalIntegrable
+      (fun x : ℝ => abs ((x - t)⁻¹ + W2K.Sm x t)) volume a b :=
+    hKabsC.intervalIntegrable
+  -- pointwise rewrite 1/(x - t) = (x - t)⁻¹ (division convention)
+  have hFK : (fun x : ℝ => (W2K.Nas a - W2K.Nas x) * (1 / (x - t) + W2K.Sm x t)) =
+      (fun x : ℝ => (W2K.Nas a - W2K.Nas x) * ((x - t)⁻¹ + W2K.Sm x t)) := by
+    ext x
+    by_cases h : x - t = 0
+    · field_simp [h]
+    · field_simp [h]
+  have hFbound (x : ℝ) (hx : x ∈ Set.Icc a b) :
+      abs (W2K.Nas a - W2K.Nas x) ≤ L * (b - a) := by
+    rw [← neg_sub, abs_neg]
+    exact nasAbsSubLe a b hab ha L hL0 hL x hx
+  have hFabsC : ContinuousOn
+      (fun x : ℝ => abs (W2K.Nas a - W2K.Nas x)) (Set.uIcc a b) :=
+    (continuous_abs.continuousOn (s := Set.univ)).comp hFC (fun _ _ => trivial)
+  have hIntF : IntervalIntegrable
+      (fun x : ℝ => abs (W2K.Nas a - W2K.Nas x) *
+        abs ((x - t)⁻¹ + W2K.Sm x t)) volume a b :=
+    (hFabsC.mul hKabsC).intervalIntegrable
+  have hIntG : IntervalIntegrable
+      (fun x : ℝ => L * (b - a) * abs ((x - t)⁻¹ + W2K.Sm x t)) volume a b :=
+    ((continuousOn_const (s := Set.uIcc a b)).mul hKabsC).intervalIntegrable
+  have hmono (x : ℝ) (hx : x ∈ Set.Icc a b) :
+      abs (W2K.Nas a - W2K.Nas x) * abs ((x - t)⁻¹ + W2K.Sm x t) ≤
+        L * (b - a) * abs ((x - t)⁻¹ + W2K.Sm x t) := by
+    calc
+      abs (W2K.Nas a - W2K.Nas x) * abs ((x - t)⁻¹ + W2K.Sm x t) =
+          abs ((x - t)⁻¹ + W2K.Sm x t) * abs (W2K.Nas a - W2K.Nas x) := by ring
+      _ ≤ abs ((x - t)⁻¹ + W2K.Sm x t) * (L * (b - a)) :=
+        mul_le_mul_of_nonneg_left (hFbound x hx) (abs_nonneg ((x - t)⁻¹ + W2K.Sm x t))
+      _ = L * (b - a) * abs ((x - t)⁻¹ + W2K.Sm x t) := by ring
+  calc
+    abs (∫ x in a..b, (W2K.Nas a - W2K.Nas x) * (1 / (x - t) + W2K.Sm x t))
+      = abs (∫ x in a..b, (W2K.Nas a - W2K.Nas x) * ((x - t)⁻¹ + W2K.Sm x t)) := by
+        rw [hFK]
+      _ ≤ ∫ x in a..b,
+          abs ((W2K.Nas a - W2K.Nas x) * ((x - t)⁻¹ + W2K.Sm x t)) := by
+        exact intervalIntegral.abs_integral_le_integral_abs (le_of_lt hab)
+      _ = ∫ x in a..b,
+          abs (W2K.Nas a - W2K.Nas x) * abs ((x - t)⁻¹ + W2K.Sm x t) := by
+        rw [intervalIntegral.integral_congr (fun x _ => by rw [abs_mul])]
+      _ ≤ ∫ x in a..b,
+          L * (b - a) * abs ((x - t)⁻¹ + W2K.Sm x t) := by
+        exact intervalIntegral.integral_mono_on
+          (a := a) (b := b) (μ := volume)
+          (le_of_lt hab) hIntF hIntG hmono
+      _ = L * (b - a) * (∫ x in a..b, abs ((x - t)⁻¹ + W2K.Sm x t)) := by
+        rw [intervalIntegral.integral_const_mul (L * (b - a))]
+      _ = L * (b - a) * (∫ x in a..b, abs (1 / (x - t) + W2K.Sm x t)) := by
+        rw [intervalIntegral.integral_congr (fun x _ => by rw [inv_eq_one_div])]
+
+/- (E3-3)  With t^2 >= 1/2 the kernel derivative does not change sign
+on a one-sided gap (K2), so the absolute kernel integral equals the
+absolute value of the anchored gap integral:
+    ∫_a^b |p'|  =  |log (b - t) - log (a - t) + ∫_a^b Sm|.
+(M4 increment 3.) -/
+theorem e3_kernelGapAbs (t a b : ℝ) (hab : a < b) (ha : 0 < a) (ht : 0 < t)
+    (ht2 : 1/2 ≤ t^2) (ht_out : t < a ∨ b < t) :
+    ∫ x in a..b, abs (1 / (x - t) + W2K.Sm x t) =
+      abs ((Real.log (b - t) - Real.log (a - t)) + (∫ x in a..b, W2K.Sm x t)) := by
+  rcases ht_out with (hlt | hgt)
+  · -- t < a:  p' > 0 on [a, b]
+    have hposI (x : ℝ) (hx : x ∈ Set.Icc a b) : 0 < 1 / (x - t) + W2K.Sm x t :=
+      W2K.kerDerivPosAbove x t ht (lt_of_lt_of_le hlt (Set.mem_Icc.mp hx).1) ht2
+    have hpos (x : ℝ) (hx : x ∈ Set.uIcc a b) : 0 < 1 / (x - t) + W2K.Sm x t := by
+      have hxI : x ∈ Set.Icc a b := by
+        simpa [Set.uIcc, inf_eq_minDefault, sup_eq_maxDefault,
+          min_eq_left_iff.2 (le_of_lt hab), max_eq_right_iff.2 (le_of_lt hab)] using hx
+      exact hposI x hxI
+    have he := e3_kernelGapInt t a b hab ha ht (Or.inl hlt)
+    have hf : 0 ≤ (Real.log (b - t) - Real.log (a - t)) + (∫ x in a..b, W2K.Sm x t) := by
+      rw [← he]
+      exact intervalIntegral.integral_nonneg (le_of_lt hab) (fun x hx => le_of_lt (hposI x hx))
+    rw [intervalIntegral.integral_congr (fun x hx => by rw [abs_of_nonneg (le_of_lt (hpos x hx))]),
+        he,
+        abs_of_nonneg hf]
+  · -- b < t:  p' < 0 on [a, b]
+    have hnegI (x : ℝ) (hx : x ∈ Set.Icc a b) : 1 / (x - t) + W2K.Sm x t < 0 := by
+      have hx0 : 0 < x := lt_of_lt_of_le ha (Set.mem_Icc.mp hx).1
+      have hxt : x < t := lt_of_le_of_lt (Set.mem_Icc.mp hx).2 hgt
+      exact W2K.kerDerivNegBelow x t ht hx0 hxt
+    have hneg (x : ℝ) (hx : x ∈ Set.uIcc a b) : 1 / (x - t) + W2K.Sm x t < 0 := by
+      have hxI : x ∈ Set.Icc a b := by
+        simpa [Set.uIcc, inf_eq_minDefault, sup_eq_maxDefault,
+          min_eq_left_iff.2 (le_of_lt hab), max_eq_right_iff.2 (le_of_lt hab)] using hx
+      exact hnegI x hxI
+    have he := e3_kernelGapInt t a b hab ha ht (Or.inr hgt)
+    have hf : 0 ≤ ∫ x in a..b, -(1 / (x - t) + W2K.Sm x t) :=
+      intervalIntegral.integral_nonneg (le_of_lt hab)
+        (fun x hx => le_of_lt (neg_pos_of_neg (hnegI x hx)))
+    have hnegInt : (∫ x in a..b, (1 / (x - t) + W2K.Sm x t)) =
+        -(∫ x in a..b, -(1 / (x - t) + W2K.Sm x t)) := by
+      rw [intervalIntegral.integral_neg, neg_neg]
+    have hfE : (Real.log (b - t) - Real.log (a - t)) + (∫ x in a..b, W2K.Sm x t) ≤ 0 := by
+      rw [← he, hnegInt]
+      linarith [hf]
+    rw [intervalIntegral.integral_congr (fun x hx => by rw [abs_of_nonpos (hneg x hx).le]),
+        intervalIntegral.integral_neg,
+        he,
+        abs_of_nonpos hfE]
+
+/- (E3-5)  The STRADDLE gap in t-anchor form.  With c the left count
+(N(x) = c on (a, b)) and the left-endpoint Riemann value DN(a) = c -
+Nas(a), the exact difference between the anchored integral of DN p'
+over (a, b) and the Riemann sum is
+    Nas(a) - Nas(t) times the log part, minus the midExt integral,
+    minus the smoothed Nas-deviation integral.
+Pure algebra + integral linearity.  (M4 increment 3.) -/
+theorem e3_straddleDecomp (c t a b : ℝ) (hab : a < b) (ha : 0 < a) (ht : 0 < t)
+    (hta : a < t) (htb : t < b) :
+    c * ((Real.log (b - t) - Real.log (a - t)) + (∫ x in a..b, W2K.Sm x t ∂volume)) -
+    (W2K.Nas t * (Real.log (b - t) - Real.log (a - t)) +
+      (∫ x in a..b, W2I.midExt x t ∂volume) +
+      (∫ x in a..b, W2K.Nas x * W2K.Sm x t ∂volume)) -
+    (c - W2K.Nas a) * ((Real.log (b - t) - Real.log (a - t)) + (∫ x in a..b, W2K.Sm x t ∂volume)) =
+    (W2K.Nas a - W2K.Nas t) * (Real.log (b - t) - Real.log (a - t)) -
+    (∫ x in a..b, W2I.midExt x t ∂volume) -
+    (∫ x in a..b, (W2K.Nas x - W2K.Nas a) * W2K.Sm x t ∂volume) := by
+  have hUpos : Set.uIcc a b ⊆ Set.Ioi (0 : ℝ) := by
+    intro x hx
+    have hxI : x ∈ Set.Icc a b := by
+      simpa [Set.uIcc, inf_eq_minDefault, sup_eq_maxDefault,
+        min_eq_left_iff.2 (le_of_lt hab), max_eq_right_iff.2 (le_of_lt hab)] using hx
+    exact Set.mem_Ioi.2 (lt_of_lt_of_le ha (Set.mem_Icc.mp hxI).1)
+  have hSmC : ContinuousOn (fun x : ℝ => W2K.Sm x t) (Set.uIcc a b) :=
+    smContOn t a b hab ha ht
+  have hNasC : ContinuousOn W2K.Nas (Set.uIcc a b) := W2I.hNasCont.mono hUpos
+  have hIntS1 : IntervalIntegrable (fun x : ℝ => W2K.Nas a * W2K.Sm x t) volume a b :=
+    ((continuousOn_const (s := Set.uIcc a b)).mul hSmC).intervalIntegrable
+  have hIntS2 : IntervalIntegrable (fun x : ℝ => (W2K.Nas x - W2K.Nas a) * W2K.Sm x t) volume a b :=
+    ((hNasC.sub (continuousOn_const (s := Set.uIcc a b))).mul hSmC).intervalIntegrable
+  have hg1 : Set.EqOn (fun x : ℝ => W2K.Nas x * W2K.Sm x t)
+      (fun x : ℝ => (W2K.Nas a + (W2K.Nas x - W2K.Nas a)) * W2K.Sm x t) (Set.uIcc a b) := by
+    intro _ _
+    ring
+  have hg2 : Set.EqOn (fun x : ℝ => (W2K.Nas a + (W2K.Nas x - W2K.Nas a)) * W2K.Sm x t)
+      (fun x : ℝ => W2K.Nas a * W2K.Sm x t +
+        (W2K.Nas x - W2K.Nas a) * W2K.Sm x t) (Set.uIcc a b) := by
+    intro _ _
+    ring
+  have hNS : (∫ x in a..b, W2K.Nas x * W2K.Sm x t ∂volume) =
+      W2K.Nas a * (∫ x in a..b, W2K.Sm x t ∂volume) +
+        (∫ x in a..b, (W2K.Nas x - W2K.Nas a) * W2K.Sm x t ∂volume) := by
+    calc
+      (∫ x in a..b, W2K.Nas x * W2K.Sm x t ∂volume)
+        = ∫ x in a..b, (W2K.Nas a + (W2K.Nas x - W2K.Nas a)) * W2K.Sm x t ∂volume := by
+          rw [intervalIntegral.integral_congr hg1]
+        _ = ∫ x in a..b, (W2K.Nas a * W2K.Sm x t +
+              (W2K.Nas x - W2K.Nas a) * W2K.Sm x t) ∂volume := by
+          rw [intervalIntegral.integral_congr hg2]
+        _ = (∫ x in a..b, W2K.Nas a * W2K.Sm x t ∂volume) +
+            (∫ x in a..b, (W2K.Nas x - W2K.Nas a) * W2K.Sm x t ∂volume) := by
+          rw [intervalIntegral.integral_add hIntS1 hIntS2]
+        _ = W2K.Nas a * (∫ x in a..b, W2K.Sm x t ∂volume) +
+            (∫ x in a..b, (W2K.Nas x - W2K.Nas a) * W2K.Sm x t ∂volume) := by
+          rw [intervalIntegral.integral_const_mul (W2K.Nas a)]
+  rw [hNS]
+  ring
 end W2B
