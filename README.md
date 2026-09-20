@@ -9,29 +9,46 @@
 they generate, the onset at which zero content first enters the budget —
 and a separation program with explicit falsifiers.**
 
-**The approach in a name** *(tpf — to be finalized;  the name describes the
-approach, not any particular theorem)*:  the **Riemann–von Mangoldt
-Gambit**.  For 120 years the zero-counting tail S(t) has stood on a door
-marked "a small-error theorem for this is equivalent to RH" —  so every
-attack has gone around the door.  The gambit is to stop pushing it:  the
-tail is kept exactly as it is —  measured,  telescoped,  certified —  and
-the detector-plus-squeeze that its *smallness* unlocks does the closing.
-(Driver and door:  Appendix A below.  Where the path stands today:  the
-status section of this README and
-docs/CEILING-REPORT-DAY035.md.)
+**Our approach: the Riemann–von Mangoldt
+Gambit:**
+
+*(tpf — to be finalized;  the name describes the
+approach, not any particular theorem)*
+
+> ***For 120 years*** the **zero-counting tail**,  S(t), has stood on a door marked:  
+> ```
+> a small-error theorem for this is equivalent to RH
+> ```
+>
+> So every attack has gone around the door.
+> The gambit is to **stop** pushing it:
+>
+> ```
+> The tail is kept exactly as it is — measured, telescoped, certified — and  
+> the detector-plus-squeeze *that its smallness unlocks* does the closing.
+> ```
+> 
+
+(Driver and door: Appendix A below.  Where the path stands today: the status section of this README and docs/CEILING-REPORT-DAY035.md.)
 
 ## The argument as constructed
 
 The argument below is a **complete
-proof skeleton of the Riemann Hypothesis**. Its pieces are either
-**(i) proven** (the marked pieces are machine-checked in Lean 4.33.1 +
-Mathlib, a pinned stable toolchain), **(ii) classical** (taken from the
-literature), or **(iii) measured** (to the stated precision; every number
-here has a committed script, a precision label, and a named raw output —
-§Materials). Exactly **one** piece, the *residual floor* of Part 7, is
-**open**; the argument of Part 8 is stated as a proof **conditional on
-that one piece**. Nothing in this repository claims that the Riemann
-Hypothesis has been proved.
+proof *skeleton* of the Riemann Hypothesis**. Its pieces are one of:
+- **(i) proven:**
+  - The marked pieces are machine-checked in Lean 4.33.1 +
+Mathlib, a pinned stable toolchain)
+- **(ii) classical:**  
+  - Taken from the literature
+- **(iii) measured:**  
+  - To the stated precision; every number here has a committed script, a precision label, and a named raw output —
+§Materials.
+
+Exactly **one** piece, the *residual floor* of Part 7, is
+**open**.  
+The argument of Part 8 is stated as a proof **conditional on that one piece**.
+Nothing in this repository yet claims that the Riemann Hypothesis has been proved, only that some progress has been made where previously it was thought unproductive.  
+So even if this "doesn't pan out", it becomes a further historical footnote as we have explored "beyond the door" and shown, "it doth not yet appear".
 
 ### 1. The hypothesis, and the counting reframe
 
