@@ -7036,3 +7036,110 @@ throughout; renaming later is a find-replace across 6 docs.
 - Synced:  preprint "Name of the telescope (tpf)" (three
   candidates + handle),  README Appendix A line,  this
   log.  Run check this turn:  see supervisor.log tail.
+
+## 2026-09-20 — RUN INCIDENT + FIX: decoder boundary-rounding invariant (3e10 run at shard 944)
+
+- **Incident:**  at 15:39:08 the 3e10 run's supervisor wrote
+  FATAL "decode/append failed for zeros_4964846000.dat" and
+  exited.  State at the moment of failure:  943/12,857
+  shards,  band file 50,696,383,912 bytes.
+- **Damage assessment (clean):**  the band file is EXACTLY at
+  a shard boundary —  50,696,383,912 / 8 = 6,337,047,989
+  zeros = N(4962746000_t1) − FRONTIER_N to the last zero
+  (15,398,842,693 − 9,061,794,704).  No partial append;
+  state.txt, lastN.txt, and the band all agree;  943 complete
+  shards, chain-exact.
+- **Root cause (OUR decoder invariant, not the data):**
+  the failing shard was md5-VERIFIED against the LMFDB
+  manifest (download + hash both passed).  Reproduction gave
+  the real error (which the original launch had lost to
+  terminal stderr):
+
+      AssertionError: block interval violated at block 146:
+      4965154700.000000000 not in (4965152600.000000000,
+      4965154700.000000000)
+
+  Block 146 of that shard:  6,848 zeros,  first =
+  t0 + 0.205306 (normal),  LAST zero = 4965154700.0 — EXACTLY
+  the block's t1 as an f64.  A true zero in (t1 − ulp(t1)/2,
+  t1)  (half-ulp ≈ 4.5e-7 at t ≈ 5e9) encodes to f64 EXACTLY
+  ON the 2100-wide grid point.  Our invariant asserted the
+  last zero lie STRICTLY inside (t0, t1) —  too strict for
+  f64 rounding.  Cross-checks prove data sanity:  the next
+  block's first zero is 4965154700.394309 > t1 (NO seam
+  duplicate),  the in-shard/cross-shard Nt chain is exact
+  (15,399,842,434 → 15,399,849,282),  and this was the ONLY
+  boundary event in the 1,001-block shard.  The N-chain
+  asserts (count-exact partition) are the authoritative
+  guard;  the interval assert only guards f64 drift.
+- **Fix (day024_platt_fast.py, the shared decoder):**
+  relaxed the upper bound to t0 < last_zero <= t1 (lower
+  bound stays strict — a zero at exactly t0 would be the
+  previous block's boundary event under the same
+  convention);  the misnamed first_v (it actually tracked the
+  previous/last zero) renamed prev_z;  the event documented
+  in a comment with shard, block, and cross-check numbers.
+  No other file carries the invariant (grep-verified).  The
+  3e9 band is complete and untouched —  a completed dataset
+  is never rerun.
+- **Re-validation:**  the fixed decoder decoded the
+  md5-verified shard to scratch:  rc=0,  Nt0 = 15,398,842,693
+  (== previous lastN,  chain-exact),  Nt1 = 15,405,690,297,
+  count = 6,847,604 (== independent byte walk),  last zero of
+  the shard 4,966,945,999.85 < shard end,  2.5 sec.
+- **Relaunched** (same script/state/resume semantics;  this
+  time stderr is additionally captured to
+  hi3e10/stderr.log so a future failure cannot be lost).
+  Verified post-relaunch:  resume picked up exactly at
+  zeros_4964846000;  N-chain continued 15,398,842,693 →
+  15,405,690,297 → ... → 15,693,416,525 and beyond,  and
+  band_bytes/8 == lastN − FRONTIER_N with DIFF = 0.0 (bit-
+  exact, no torn write anywhere).
+- **Lesson logged:**  the interval invariant was a SANITY
+  check written against 3e9 experience;  the N-chain is the
+  certificate.  Sanity checks on f64-encoded data must
+  survive half-ulp boundary rounding.
+- Also this turn (before the incident):  naming round two —
+  width-ladder handle "Euler Action's Width Ladder" (informal,
+  owner's),  the Sumerian measuring family verified against
+  the primary texts (Eridu Genesis / Atrahasis flood-night
+  dimension spec;  Nisaba's measuring-reed + lapis-lazuli
+  tape in ETCSL t.1.1.3 lines 412–417;  Nanshe as the
+  "measures the depths" figure;  ETCSL t.1.1.3 read confirms
+  the measuring instruments in the world-order poem belong
+  to Nisaba,  not Enki),  and candidate three "Euler's Reed"
+  (instrument AND unit at once) —  all in
+  docs/THE-EULER-ACTION.md,  preprint,  README,  INDEX.
+
+## 2026-09-20 — Enki question resolved (the memory was real; characters interleaved)
+
+Owner recalled a god who "came to Earth" and started
+"measuring the depths",  possibly named.  Checked against
+primary sources,  NOT recalled:
+- The "came to Earth and measured" scene is REAL:  the flood
+  warning in the Eridu Genesis / Sumerian flood (and
+  Atrahasis) —  Enki comes at NIGHT to the reed-house:
+  "Reed-hut,  reed-hut!  Wall!  Wall!  ...  Man of
+  Shuruppak,  ...  Tear down (this) house,  build a ship!
+  ...  Her dimensions shall be to measure.  Equal shall be
+  her width and her length.  Like the Aps[u] thou shalt ceil
+  her."  —  a god on the ground,  giving a dimension spec
+  whose roof is like the DEEP.
+- The "measures the depths" TITLE most likely belongs to
+  NANŠE (Enki's circle/goddess of sea,  marsh,  streams;
+  hymn to Nanše,  ETCSL c.4.14.1,  carries measuring lines
+  —  exact epithet line [pin] before quoting).  If the
+  memory has a NAME after it,  that is the one —  the owner
+  was probably thinking of Nanshe,  with the flood-night
+  scene (Enki) fused in.
+- "Enki measures the sea with a reed" (the common retelling)
+  was NOT found in ETCSL t.1.1.3 ("Enki and the World
+  Order"):  a full read of the translation shows the
+  measuring instruments there are allotted to NISABA (lines
+  412–417:  measuring-reed,  lapis-lazuli measuring tape,
+  "scribe of the Land",  "demarcate boundaries") —  in the
+  oldest allotment poem the measuring stick sits with the
+  record-keeper.  (Thematically exact for this
+  data-witness project;  logged in the naming section.)
+- The instrument has no surviving proper name —  it is the
+  reed,  which was also the standard unit of length.

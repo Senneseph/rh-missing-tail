@@ -87,31 +87,42 @@ def decode(shard, outpath, n_expected_start=None):
                 "block seam violated at block %d: %.9f vs %.9f" % (
                     b, t0, prev_block_end)
         Z = 0
-        first_v = None
+        prev_z = None
         for k in range(cnt):
             p = 13 * k
             Z += (buf[p + 12] << 96) | (
                 int.from_bytes(buf[p + 8:p + 12], "little") << 64) | \
                 int.from_bytes(buf[p:p + 8], "little")
             v = t0 + Z * E101
-            if first_v is None:
-                first_v = v
+            if prev_z is None:
+                prev_z = v
             else:
-                g = v - first_v
+                g = v - prev_z
                 if g <= 0.0:
                     raise AssertionError(
                         "monotonicity violated at block %d zero %d"
                         % (b, k))
                 if g < mingap:
                     mingap = g
-                first_v = v
+                prev_z = v
             out += PACK(v)
-        assert first_v is not None
-        # t1 is the interval END (exclusive: the next block's t0), not a
-        # zero — the last zero lies strictly inside (t0, t1)
-        assert t0 < first_v < t1, \
-            "block interval violated at block %d: %.9f not in (%.9f, %.9f)" % (
-                b, first_v, t0, t1)
+        assert prev_z is not None
+        # t1 is the interval END (the next block's t0).  A ZERO may
+        # still ENCODE to exactly t1 in f64 when its true value lies
+        # in (t1 - ulp(t1)/2, t1):  the f64 rounding lands ON the grid
+        # point although the true zero is below it.  First observed on
+        # shard zeros_4964846000,  block 146 (last zero
+        # 4965154700.0 == t1;  the next block's first zero is
+        # 4965154700.394309 > t1,  so no seam duplicate;  Nt chain
+        # 15399842434 -> 15399849282 consistent).  The N-chain asserts
+        # above are the authoritative partition (each true zero counted
+        # exactly once);  this invariant guards f64-rounding drift,  so
+        # equality at the upper end is allowed.  The lower bound stays
+        # strict:  a zero at exactly t0 would be the PREVIOUS block's
+        # boundary event under the same convention.
+        assert t0 < prev_z <= t1, \
+            "block interval violated at block %d: %.9f not in (%.9f, %.9f]" % (
+                b, prev_z, t0, t1)
         prev_block_end = t1
         t1_last = t1
         n_tot += cnt
