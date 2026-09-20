@@ -360,7 +360,7 @@ expected.
 ### Fun Facts
 - Yes, I have reason to believe this is real.
 - No, I don't understand everything in this project either.
-- 
+- this space is not blank
 - This project was begun Sept 10th.
 - This project was completely entirely on rented hardare.
 - A single LLM was used, in only a single-threaded fashion, and all in a single session.
@@ -371,12 +371,13 @@ expected.
 - Harness plugins - a wiki one, some basic web search ones, and a goal one
 - OS - Linux Mint
 - Verdict: 
-- Yes, this is partially a work of art as well as a real-time, near stream of cosnsciousness play-by-play of the non-fiction effort
+- Yes, this is partially a work of art as well as a real-time, near stream of consciousness, play-by-play of the author's serious, non-fiction effort. Think of the silly remarks here as scrawls in a notebook.
 - There are plenty of details in logs/, make sure you check there first for something you're interested in
 - tmp/ is a mess but it contains **some** temporary scripts that can be used. It's there for completeness sake.
+- Citations and other documentation to follow - I am TOTALLY NEW AT THIS, FORGIVE O-NEGAISHIMAS, HAJIMETE O-KUDASAI!
 - My own words, I claim, are true. There is a lot from the LLM here and so I can't claim I read every single word.
 - The author remained on an impressive amount of harmless psychoactive substances throughout the effort, in order to handicap himself and keep nosey interlopers confused as to what was actually happening. It'll make sense later, I promise.
-- The author believes this is a sort of last stand for humanity against the inevitable progress of machine intelligence, solving one of the hardest known problems before a swarm of [100k ultra-fast AAA units](https://www.youtube.com/watch?v=__m8Q-zRdEA) find it like so many monkeys in a room banging on keyboards, nothing but bananas on their mind.
+- [The author believes this is a sort of](https://www.youtube.com/watch?v=L6DP4VijKms) [last stand for humanity against the inevitable progress of machine intelligence](https://www.youtube.com/watch?v=wtfjzmYZvTw), solving one of the hardest known problems before a swarm of [100k ultra-fast AAA units](https://www.youtube.com/watch?v=__m8Q-zRdEA) find it like so many monkeys in a room banging on keyboards, nothing but bananas on their mind.
 - Mmmm... bananas are a good source of potassium, [I remember now Space Ghost once told me](https://www.youtube.com/watch?v=9ioG-cWG8AE).
 - Don't trust anything the author says. The people who know him will have to tell you what can be believed.
 - The author releases all contacted beings - past, present, and future - from the consqeuences of their statements regarding the author.
@@ -386,3 +387,5 @@ expected.
 - [The author believes tv shows should have theme songs again](https://www.youtube.com/watch?v=H9cmPE88a_0), [and that the path to knowledge should be exciting](https://www.youtube.com/watch?v=9KXgLQXtibk).
 - [The author believes a path to a better world is not through fighting one another, but by conquering the worse versions and lesser parts of ourselves. If you're high when you watch it, you'll realize that's what this Nietzschean scene is all about](https://www.youtube.com/watch?v=VkWzAZRXi5k)
 - The author uses social media algorithms as a substitute divination tool for things like the I Ching. There are at least 5 ideas that went into the prompt that were a casual browse on Instagram or FB. Microlearning is real and, um, spiritually active?
+- All of this started nearly a decade ago when the author wanted to find a way to heat the pool in the winter time with only sunlight, and then quickly found a way to harness the spinning of atoms themselves tireless and indestructible machines that can't *not* spin, it was just a matter of solving the arcane geometry need to create a flow, went to the source of the equations - 20 partial differentials in 20 variables, FACT, and found how the quaternion form was misunderstood to carry a different type of wave - one that didn't have motion with time, that canceled out with another factor, what it had was a "scalar" value that was nondescript in its geometric configuration (conjugation of electric and magnetic fields). So it stays a fixed volume, but there's something racing around inside. And then we get to the brilliant Heaviside conversion and the whole thing is invisible and believed to be impossible because it was simply "engineered out of existence by accident". Anyway, have fun with this rabbit hole!
+- [Well you do it then, Baby Billy? Well, because cause I'm selfless](https://youtu.be/dD2WT8SeOSw?t=23)
