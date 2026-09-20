@@ -6825,3 +6825,56 @@ throughout; renaming later is a find-replace across 6 docs.
   the measured min/max gaps feed nas_inc_band over the census).
 - formal/README: W2Beyond1 file-map row.
 - Full lake build rc=0, 0 errors.
+
+## 2026-09-20 — Big-data crunch + deploy plan written (and 3 launch blockers found in the 3e10 script)
+
+- **docs/COMPUTE-DEPLOY-PLAN.md (new)** — the cross-session
+  single source of truth for the cloud run:  ironclad-script
+  contract table,  live preflight numbers,  Docker-in-repo
+  container design (kainos ADR-0010 pinned pattern;  mpmath
+  1.4.1 + numpy 1.26.4 — the exact host versions;  Lean 4.33.1
+  via elan;  explicit rh-reproduce runner;  NO auto-run at
+  boot),  cloud options with real pricing (DO 8GB/4vCPU +
+  1TB volume ≈ $10-15 all-in incl. egress,  per-second
+  billing;  Hetzner EX101 ≈ EUR 4 + setup,  local NVMe,
+  free egress),  8-step launch protocol,  pre-registered
+  outcomes,  work units T1-T5 under the stop rule.
+- **3 REAL LAUNCH BLOCKERS FOUND + FIXED in
+  scripts/rh/day035_3e10_stream.sh** (the script had never
+  been executed;  found by audit + live dry preflight):
+  1.  preflight shard-count assert 150..4000 → the run needs
+      12,858 shards (live crawl) → FATAL at launch;  fixed to
+      a principled 8000..25000 with the live count logged.
+  2.  finish-gate heredoc had a SyntaxError (stray closing
+      paren) → gate would crash on EVERY run;  fixed,  both
+      heredocs now py_compile clean.
+  3.  finish gate did np.fromfile + np.diff on the ~700-750GB
+      file (~750GB RAM) → OOM on any cloud box;  rewritten
+      RAM-SAFE (np.memmap + 512MB chunked streaming,  peak
+      ~1GB),  gates semantics unchanged (monotone,  min gap,
+      seam in (0,1),  RVM tol 3 at band end and 3e10,
+      PARTIAL path).
+  Verification:  bash -n clean,  both embedded python blocks
+  compile,  fixed assert passes on live count.
+- **Live preflights (read-only LMFDB,  2026-09-20):**
+  14,580 public shards,  last = 30,607,946,000 → 3e10 IS
+  public (margin ~0.6e9 t);  12,858 shards needed for
+  [2999246000 → 3e10];  md5 manifest complete (0 missing);
+  band ≈ 8.76e10 zeros ≈ 700-750GB.  The LMFDB shard grid is
+  ADAPTIVE (~2.1e6-spaced low t,  ~58.6e3 high t) —  the
+  needed-count is data-dependent,  so the assert bound is a
+  plausibility window,  not a formula.
+- **Seam audit cross-check:**  the 0.137-t slice between the
+  3e9 band end (2999245999.862950) and the first 3e10 shard
+  (2999246000.0) is empirically zero-free (day035 fetched and
+  md5-gated exactly that shard when pinning N(3e9),  Nt0 =
+  frontier chain-exact) —  the 3e10 seam assert is sound.
+- **Runbook updated:**  throughput measured (475 shards /
+  44 min on the 3e9 run → ~20h local-equiv,  est 3-5h on
+  1Gbps cloud);  "index reaches 3e10" risk item annotated
+  with the live crawl.
+- Docker note:  kainos-logos' pinned image locks mpmath 1.3.0
+  —  NOT the rh compute environment (1.4.1);  the rh
+  container must carry its own lock (the plan says so
+  explicitly).  rh-missing-tail previously had NO Dockerfile
+  (checked 2026-09-20);  T2 creates it.

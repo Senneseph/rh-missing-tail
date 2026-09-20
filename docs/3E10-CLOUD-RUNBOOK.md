@@ -1,9 +1,15 @@
 # 3e10 cloud handoff — runbook
 
 Handed off 2026-09-20 per owner direction (the extension is a
-"many days, ~750GB" job;  the local disk is blocked at 132GB free
-of ~765GB needed).  Resume base:  the day035 3e9 band, already
-audited.  The companion script is `scripts/rh/day035_3e10_stream.sh`
+"~700-750GB" job:  the local disk is blocked at 132GB free of
+~765GB needed).  Throughput measured 2026-09-20 from the 3e9
+run (475 shards / 44 min,  ~9.5MB/s):  ~20h local-equivalent,
+**estimate 3-5h on a 1Gbps cloud box**.  See
+COMPUTE-DEPLOY-PLAN.md for the full plan (container design,
+cloud options with pricing, launch protocol, and the 2026-09-20
+script audit that fixed 3 real launch blockers in the companion
+script).  Resume base:  the day035 3e9 band, already audited.
+The companion script is `scripts/rh/day035_3e10_stream.sh`
 (same mechanism as the proven `day035_3e9_stream.sh`).
 
 ## 1.  What the run produces
@@ -110,7 +116,9 @@ audited.  The companion script is `scripts/rh/day035_3e10_stream.sh`
     fix the header (or the owner's LMFDB access) and relaunch.
 -  Index does not reach 3e10 yet  → the run is still worth
     launching (maximal public extension + the gates);  revisit
-    when the index grows.
+    when the index grows.  (2026-09-20 live crawl: the index
+    DOES reach 3e10 — to 3.0608e10 — so this risk is currently
+    dormant;  re-run the preflight at actual launch.)
 -  Disk fills mid-run  → the script FATALs on the next append;
     the band up to the last state.txt entry is a valid
     shorter-extension band (the gates can be run on it manually

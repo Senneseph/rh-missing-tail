@@ -66,7 +66,10 @@ need = [n for n in names if f <= n <= target]
 assert need, "no public shards in [FIRST, TARGET] — index gate page or range not public (cookie?)"
 open(out, "w").write("\n".join(str(n) for n in need))
 print("NEEDED_SHARDS=%d (LAST=%d)" % (len(need), need[-1]), flush=True)
-assert 150 <= len(need) <= 4000, "shard count implausible: %d" % len(need)
+assert 8000 <= len(need) <= 25000, "shard count implausible: %d" % len(need)
+print("NOTE: LMFDB grid is adaptive (sparse at low t, fine at high t) —"
+      "2026-09-20 live crawl: 12,858 needed for [2999246000, 30000000000],"
+      "index reaches 3.06e10", flush=True)
 print("NOTE: last public shard name = %d; band end reach checked in finish gate" % need[-1], flush=True)
 PYEOF
 N_NEED=$(wc -l < "$WORK/needed_shards.txt")
@@ -127,19 +130,35 @@ done < "$WORK/needed_shards.txt"
 # --- finish gates ---
 python3 - "$OUT" "$OLD_END" "$FRONTIER_N" <<'PYEOF'
 import numpy as np, sys, math
-out, old_end, frontier_n = sys.argv[1], float(sys.argv[2]), int(sys.argv[3))
-a = np.fromfile(out, dtype=np.float64)
-assert 5e9 < a.size < 1.5e11, "band size implausible: %d" % a.size
-d = np.diff(a)
-assert d.min() > 0, "band NOT strictly monotone"
+out, old_end, frontier_n = sys.argv[1], float(sys.argv[2]), int(sys.argv[3])
+# RAM-SAFE: the band file is ~700-750GB (8.8e10 float64);  np.fromfile
+# would need ~750GB RAM and np.diff another copy.  memmap + chunked
+# streaming keeps peak at ~1GB regardless of band size.
+a = np.memmap(out, dtype=np.float64, mode="r")
+total = int(a.size)
+assert 5e9 < total < 1.5e11, "band size implausible: %d" % total
+block = 1 << 26          # 64M floats = 512MB per block
+prev, mingap = None, None
+for i0 in range(0, total, block):
+    b = np.asarray(a[i0:min(i0 + block, total)])
+    if i0 > 0:
+        g = float(b[0]) - prev
+        assert g > 0, "band NOT strictly monotone at block seam %d" % i0
+        mingap = g if mingap is None else min(mingap, g)
+    if b.size > 1:
+        d = np.diff(b)
+        assert d.min() > 0, "band NOT strictly monotone in block %d" % i0
+        mingap = float(d.min()) if mingap is None else min(mingap, float(d.min()))
+    prev = float(b[-1])
+assert mingap is not None, "band empty"
 def rvm(t):
     x = t / (2 * math.pi)
     return x * (math.log(x) - 1.0) + 7 / 8
 t_end = float(a[-1])
-N_end = frontier_n + a.size
+N_end = frontier_n + total
 g0 = float(a[0]) - old_end
-print("BAND-FINISH total=%d zeros, t range [%.6f, %.6f]" % (a.size, a[0], t_end))
-print("band min gap = %.9f" % d.min())
+print("BAND-FINISH total=%d zeros, t range [%.6f, %.6f]" % (total, float(a[0]), t_end))
+print("band min gap = %.9f" % mingap)
 print("seam: first new zero - old band end = %.6f (must be in (0, 1))" % g0)
 assert 0.0 < g0 < 1.0, "seam gap FAILED"
 g2 = N_end - rvm(t_end)
@@ -154,9 +173,10 @@ if t_end >= TARGET:
     assert abs(g1) <= 3, "RVM gate at 3e10 FAILED"
     print("FINISH-GATES-PASS (3e10 REACHED, N(3e10) pinned)")
 else:
-    print("NOTE: band ends at %.1f < 3e10 — the public index does not reach 3e10 yet." % t_end)
-    print("This run is the maximal extension available; the N(3e10) pin is deferred")
-    print("to the index growth (band-end RVM gate above still applies).")
+    print("NOTE: band ends at %.1f < 3e10 -- the public index does not" % t_end)
+    print("reach 3e10 yet (2026-09-20 live crawl: it DOES, to 3.06e10);")
+    print("the N(3e10) pin is then deferred to the index growth")
+    print("(band-end RVM gate above still applies).")
     print("FINISH-GATES-PARTIAL (maximal public extension)")
 PYEOF
 rc=$?
