@@ -231,4 +231,29 @@ theorem e1_sharpBound (M k : ℕ) (p : ℕ → ℝ) (N0 : ℕ) (Nas : ℕ → �
     _ = K * (|W2T.DP p k| + (p M - p (k + 1)) + (p 0 - p k)) := by
       rw [e1_sharp M k p hM hup hlow]
 
+
+/- E3-1:  Nas is L-Lipschitz against the LEFT endpoint of [a, b] from
+|Nas'| <= L on (a, b).  Both one-sided mean-value bounds come from the
+same abs hypothesis via abs_le.  (M4 increment 3, E3 setup.) -/
+theorem nasAbsSubLe (a b : ℝ) (hab : a < b) (ha : 0 < a) (L : ℝ) (hL0 : 0 ≤ L)
+    (hL : ∀ x ∈ Set.Ioo a b, abs (deriv W2K.Nas x) ≤ L)
+    (x : ℝ) (hx : x ∈ Set.Icc a b) :
+    abs (W2K.Nas x - W2K.Nas a) ≤ L * (b - a) := by
+  have hUpos : Set.Icc a b ⊆ Set.Ioi (0 : ℝ) :=
+    fun z hz => Set.mem_Ioi.2 (lt_of_lt_of_le ha (Set.mem_Icc.mp hz).1)
+  have hNasC : ContinuousOn W2K.Nas (Set.Icc a b) := W2I.hNasCont.mono hUpos
+  have hDiffOn : DifferentiableOn ℝ W2K.Nas (interior (Set.Icc a b)) :=
+    fun z hz => ((W2K.nasHasDerivAt z (lt_of_lt_of_le ha (interior_Icc.mp hz).1))).differentiableAt
+  have hax : a ∈ Set.Icc a b := ⟨le_rfl, le_of_lt hab⟩
+  have hUpr : W2K.Nas x - W2K.Nas a ≤ L * (x - a) :=
+    (convex_Icc a b).image_sub_le_mul_sub_of_deriv_le hNasC hDiffOn
+      (fun z hz => (abs_le.mp (hL z (interior_Icc.mp hz))).2) a hax x hx hx.1
+  have hLwr : -(L * (x - a)) ≤ W2K.Nas x - W2K.Nas a :=
+    (convex_Icc a b).mul_sub_le_image_sub_of_le_deriv hNasC hDiffOn
+      (fun z hz => (abs_le.mp (hL z (interior_Icc.mp hz))).1) a hax x hx hx.1
+  have haxa : abs (W2K.Nas x - W2K.Nas a) ≤ L * (x - a) :=
+    (abs_le (a := W2K.Nas x - W2K.Nas a)).mpr ⟨hLwr, hUpr⟩
+  calc
+    abs (W2K.Nas x - W2K.Nas a) ≤ L * (x - a) := haxa
+    _ ≤ L * (b - a) := mul_le_mul_of_nonneg_left hx.2 hL0
 end W2B
