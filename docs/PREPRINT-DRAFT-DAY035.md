@@ -201,6 +201,62 @@ the closing.  Provenance (Riemann 1859;  von Mangoldt,  Math.
 Ann. 60 (1905) 1-19;  the S(t) = O(log log t) <=> RH mark):
 Appendix A of the README.
 
+### Final gate and pre-registered outcomes (tpf)
+
+The last open mathematical content is one named unit, the [S1]
+unified walk bound (W2-beyond R2), now reduced to a named
+theorem `W2Beyond1.driftTwoSided`:  given a pinned start value
+and per-gap errors eps_i (each zero-gap's model increment vs 1),
+the walk displacement on a band is at most the sum of the eps_i
+—  with the two-sided pinching of each per-gap increment as
+`W2Beyond1.nas_inc_band`.  What remains:  (a) the data layer
+that turns the certified zero-gap census into explicit eps
+statistics,  (b) the decision of whether that eps sum closes
+with margin over the band,  and (c) the final reassembly / pin
+unit (the W2M5/W2M6 pattern).  The 3e10 cloud run is the
+referee for (b) on the next order of magnitude.  Pre-registered
+outcomes —  written before the data returns,  per the project's
+stop rule:
+
+- **Outcome A — the walk keeps its shape** (sup |DN| stays at
+  the 2.5-level over (3e9,  3e10];  the 3e9 baseline is
+  2.503).  Two sub-cases,  each pre-registered:
+  - **A1 (the universal route):**  the per-gap eps admit an
+    ANALYTIC bound (classical unconditional lower zero-gap
+    bounds at the Rho scale) without data.  Then the eps sum
+    has a data-free form,  [S1] closes as a universal
+    theorem,  and this document's claim level becomes:  a
+    proof of RH by the Riemann-von Mangoldt Gambit —
+    detector plus squeeze on the von Mangoldt zero-count,  the
+    tail kept,  telescoped,  and certified small.  This is the
+    "final resolution" framing,  pre-registered HERE so no
+    post-data selection is possible.
+  - **A2 (the domain-verified route):**  the eps sum closes
+    only with measured inputs.  Then [S1] closes as a
+    domain-verified bound (pinned + certified over the census,
+    extended to 3e10 by A),  and the claim level stays:  a
+    historic verification result of the RH-verification chain
+    over 3e10 zeros —  uniform leg stated domain-by-domain,
+    plus the density-model beyond the census.  Still a large
+    result;  not a universal proof.
+- **Outcome B — the walk breaks** inside (3e9,  3e10].  The
+  break point is pre-registered as a theorem:  it localizes
+  the failure of the bounded-walk hypothesis,  the ceiling
+  report moves there,  and the claim level is the exploration
+  framing WITH a pre-registered counterexample to the bounded
+  walk that the R2 route required.
+- **Outcome C — partial run.**  The stream is resumable and
+  md5-gated;  re-point at the reached frontier;  outcome
+  classification uses the reached band.
+
+Honesty note (binding):  at the moment of writing,  neither
+A1,  A2,  nor B is expected or asserted —  A2 and B are each
+perfectly fine outcomes and both land the preprint;  A1 is the
+ONLY path to the "final resolution" framing,  and it
+additionally requires [S3/S4] to reach certificate-grade fills
+on the extended band (they stand today at the verified levels
+named in Section 6).
+
 
 ## 7.  Machine-checking statement
 
