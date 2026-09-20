@@ -6949,3 +6949,40 @@ throughout; renaming later is a find-replace across 6 docs.
   carry explicit [pin] markers rather than recalled detail.
 - Run check this turn:  775/12,857 shards,  ETA ~805min,
   seam still chain-exact,  LMFDB steady.
+
+## 2026-09-20 — Telescope naming: two candidates of record + the phi verdict (owner's "Golden" + Monkey King questions)
+
+- **File of record:**  docs/THE-EULER-ACTION.md,  new
+  section "Naming the telescope (tpf)".  (Filename kept as
+  is —  it is already referenced from INDEX,  README,  and
+  the lyrics-aside doc,  and carries git provenance;  the
+  owner's "rename?" stood as a suggestion,  not a mandate.)
+- **Two candidates of record (tpf):**  (1) "Euler's Action
+  Periscope" (primary —  the telescope for when you are
+  INSIDE,  and we were inside the tail);  (2) "Euler's
+  Monkey King Action Bar" (the owner's silly candidate,
+  kept as proposed) —  the ruyi bar measures what has no
+  bottom,  the telescope measures what has no end (the
+  tail runs to infinity),  and the magic bar is a LITERALLY
+  telescoping object (grows/shrinks by a word) exactly as
+  the technique does to the error term,  zero by zero.
+  Cultural wink for the Qwen team noted in the file.
+- **Phi verdict (checked against the record,  not
+  memory):**  NO phi in the telescope itself (the counted
+  identity is the RVM zero count —  no golden-ratio
+  content).  YES, genuinely, in this action's width
+  ladder:  the E2-exact integer width law (chi-5
+  two-valued {2/5, -3/5},  chi-13 all-integer 13-phase
+  table,  D = -P,  sum-of-M1 = 0) sits on moduli 5 and 13
+  —  CONSECUTIVE FIBONACCI PRIMES (F5 = 5,  F7 = 13;  F6
+  = 8 not prime) —  and 13/5 = 2.6 shadows phi^2 ≈ 2.618.
+  So "Golden" belongs to the width-ladder / onset side
+  (future candidate,  tpf:  "The Golden Width Ladder"),
+  not to the telescope.  Rule recorded:  don't put phi in
+  a name that does not contain phi.
+- Synced:  preprint "Name of the telescope (tpf)" now
+  carries both candidates + the phi verdict;  README
+  Appendix A pointer updated;  INDEX row for
+  THE-EULER-ACTION.md updated.
+- Run check this turn:  925/12,857 shards at ~74min wall,
+  ETA ~795min,  seam chain-exact,  LMFDB steady.

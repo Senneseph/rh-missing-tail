@@ -715,11 +715,17 @@ the obstacle,  the *bookkeeping around the door* was,  and the
 bookkeeping is now a machine-checked chain with two named,  planned
 legs.  Alternates for the name (tpf):  "von Mangoldt Gambit" (short),
 "the missing-tail gambit" (tail = this project's own W_n object,  Part
-3).  The telescope itself has a name candidate too (tpf):
-"Euler's Action Periscope" —  the preprint's "Name of the
-telescope (tpf)" subsection carries the candidates and the
-committee note.  The full debt to the giants whose footsteps
-this work treads stands logged in references.md.
+3).  The telescope itself has two name candidates (tpf):
+"Euler's Action Periscope" (primary) and "Euler's Monkey
+King Action Bar" (the silly one —  the ruyi bar literally
+telescopes) —  filed in the preprint's "Name of the
+telescope (tpf)" and of record in docs/THE-EULER-ACTION.md
+("Naming the telescope (tpf)"),  which also carries the phi
+verdict (the golden flavor belongs to the width ladder,
+whose measured moduli 5 and 13 are consecutive Fibonacci
+primes —  not to the telescope).  The full debt to the
+giants whose footsteps this work treads stands logged in
+references.md.
 
 ## Authors and disclosure
 

@@ -203,26 +203,39 @@ Appendix A of the README.
 
 ### Name of the telescope (tpf)
 
-Name candidate for the zero-level telescoping itself (the
-walk that turns the count discrepancy into the per-zero
-drift sum —  the W2Telescope / W2Beyond line,  built on
-this project's flat reading of Euler's action identity):
+Name candidates for the zero-level telescoping (the walk
+that turns the count discrepancy into the per-zero drift
+sum),  filed of record in docs/THE-EULER-ACTION.md,  the
+"Naming the telescope (tpf)" section:
 
-- **Euler's Action Periscope** (primary candidate,  tpf):  a
+- **Euler's Action Periscope** (primary candidate):  a
   periscope is the telescope for when you are INSIDE —  and
-  we were inside the tail,  not outside it,  looking out for
-  the imposter zeros.  Keeps "Euler's action" (the identity
-  that does the counting) inside the name.
-- Alternates (tpf):  *The Missing-Tail Periscope* (the
-  project-voice sister name);  *Euler's After-Glow Walk* (the
-  giants' glow on the last mile —  the wistful one);  *The
-  Telescope Euler Waved At* (from the afterlife;  obvious in
-  hindsight —  the joke one).
+  we were inside the tail,  looking out for the imposter
+  zeros;  keeps "Euler's action" (the identity that does
+  the counting) inside the name.
+- **Euler's Monkey King Action Bar** (the silly candidate,
+  the owner's own pitch):  Sun Wukong's ruyi bar measures
+  what has no bottom;  the telescope measures what has no
+  end (the tail runs to infinity).  And the bar is a
+  LITERALLY telescoping object —  it grows and shrinks by a
+  word,  exactly as the technique does to the error term,
+  zero by zero.  The cultural wink for the Qwen team.
+
+Phi verdict,  from the record,  not memory:  the telescope
+itself contains no phi (the counted identity is the RVM
+zero count,  no golden-ratio content).  But the action's
+measured width laws sit on the moduli 5 and 13 —
+consecutive FIBONACCI PRIMES (F5,  F7;  their ratio
+13/5 = 2.6 shadows φ² ≈ 2.618) —  so if the committee
+wants "Golden" anywhere,  it belongs to the width ladder
+(future candidate,  tpf:  "The Golden Width Ladder"),  not
+to the telescope.
 
 Committee note:  textual designation only;  the formal
-reference is the committee's to make.  None of these names
-claims authorship of any classical result —  the giants' log
-in references.md carries the actual debts.
+reference —  and the choice between periscope and bar —  is
+the committee's to make.  Neither name claims authorship of
+any classical result;  the actual debts stand logged in
+references.md.
 
 ### Final gate and pre-registered outcomes (tpf)
 

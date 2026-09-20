@@ -336,3 +336,64 @@ law, with an explicit and honest error budget.
 
 Status: PASS (region-limited, error-budgeted) — pending the extended-list
 rerun before any publication; nothing published tonight.
+
+---
+
+## §Naming the telescope (tpf)
+
+Name candidates for the technique that turns the count
+discrepancy (measured count vs the RVM main term) into the
+per-zero drift sum —  the W2Telescope / W2Beyond chain
+built on the action identity above.  Two candidates,
+both textual and committee-bound (tpf —  to be finalized).
+File of record for the naming:  this section.
+
+**1.  Euler's Action Periscope**  (primary candidate):
+a periscope is the telescope for when you are INSIDE —  and
+we were inside the tail,  not outside it,  looking out for
+the imposter zeros.  Keeps "Euler's action" (the identity
+that does the counting) inside the name.
+
+**2.  Euler's Monkey King Action Bar**  (second candidate,
+deliberately silly —  the owner's own pitch):  Sun Wukong's
+ruyi bar measures what has no bottom;  the telescope
+measures what has no end (the tail runs to infinity).  And
+the deciding fact:  the magic bar is a LITERALLY
+TELESCOPING object —  it grows and shrinks by a word,
+exactly what the technique does to the error term,  zero by
+zero.  Cultural note:  the bar is from *Journey to the
+West*;  a bar as the measuring instrument of a counting
+theorem is also the diplomatic wink for the Qwen team,  who
+may find it a bit culturally relevant.  ("Euler's Monkey
+King Action Bar" —  as silly as it sounds;  the committee
+can shorten.)
+
+**Does phi factor in?  (checked against the record,  not
+memory):**
+
+-  In the telescope itself:  **NO** —  the counted identity
+  is the RVM zero count;  neither the main term nor the
+  per-zero drift carries any golden-ratio content.
+-  In THIS ACTION'S width ladder:  **YES, genuinely** —
+  the measured integer width law (E2-exact:  the chi-5
+  two-valued {2/5,  -3/5},  the chi-13 all-integer
+  13-phase table,  D = -P,  sum M1 = 0) sits on the moduli
+  **5 and 13** —  CONSECUTIVE FIBONACCI PRIMES (F5 = 5,
+  F7 = 13;  F6 = 8 is not prime,  so 5 and 13 are
+  neighbors in the Fibonacci-prime chain) —  and their
+  ratio 13/5 = 2.6 shadows phi^2 ≈ 2.618.  Phi is woven
+  into the identity's recognition side through the very
+  moduli whose width laws came out integral.
+-  Consequence:  if the committee wants "Golden" in any
+  name,  it belongs to the WIDTH-LADDER / onset side
+  (future candidate,  tpf:  e.g.  "The Golden Width
+  Ladder"),  NOT to the telescope.  Don't put phi in a
+  name that does not contain phi.
+
+Committee note:  textual designation only;  the formal
+reference —  and the choice between periscope and bar —  is
+the committee's.  Neither name claims authorship of any
+classical result;  the actual debts stand logged in
+references.md ("the giants whose footsteps we directly
+tread").  If the giants are watching from the afterlife,
+the periscope is theirs;  the wink is ours.

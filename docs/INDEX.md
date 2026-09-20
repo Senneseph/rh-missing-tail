@@ -26,7 +26,10 @@ there.
 | [END_GAME_PLAN.md](END_GAME_PLAN.md) | The end-game plan: the 3.6 attack queue (items 1-5, closed day035), the 3.7 close-out, and the remaining honest items (now pointing at ZetaZeroSet + W2-BEYOND-ATTACK-PLAN). |
 | [SPECTRAL-SOLUTION-LYRICS-ASIDE.md](SPECTRAL-SOLUTION-LYRICS-ASIDE.md) | The “A Spectral Solution” lyric read in project context: a by-the-way annotation linking each stanza to its real referent (the P8 floor 0.9975, the t²/t⁴ wires, the A5 terminals, the P12 closure, the discipline record — “we took the operator apart”), with no-mirror lines left as music. Linked from the song's credit block. Companion to the day-023 structural map `spectral-reframe` (working tree). Art first: the song is pre-project and owns its meaning; this file only points. |
 | [RH-OUTLINE.md](RH-OUTLINE.md) | The staged proof scaffold: the outline with the per-piece status (mirror of the planning artifact; its source of record lives in the working tree — see the file header). A planning document, not a proof. |
-| [THE-EULER-ACTION.md](THE-EULER-ACTION.md) | The Euler action identity — the flat-action (total-differential) reading of summation-by-parts, its recognition map into the zeta map (D = −P as edge flux; the M₁ width ladder as exact period-cell interior action; the onset as an edge-vs-zero budget crossing), with its measured results (E7a exact at dps-50; E2 exact width tables; E7b zero-side onset test). |
+| [THE-EULER-ACTION.md](THE-EULER-ACTION.md) | The Euler action identity — the flat-action (total-differential) reading of summation-by-parts, its recognition map into the zeta map (D = −P as edge flux; the M₁ width ladder as exact period-cell interior action; the onset as an edge-vs-zero budget crossing), with its measured results (E7a exact at dps-50; E2 exact width tables; E7b zero-side onset test),
+and the naming section (tpf) carrying the two telescope name candidates (periscope primary;
+Monkey King bar the silly one) plus the phi verdict (golden flavor belongs to the width
+ladder — 5 and 13 are consecutive Fibonacci primes). |
 
 ## Measured records
 
