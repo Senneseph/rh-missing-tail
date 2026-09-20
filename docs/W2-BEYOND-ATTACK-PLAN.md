@@ -110,17 +110,27 @@ queued.
 **R2 — per-step drift summation (the main candidate).**  The
 walk changes by `1 - (local model increment)` at each zero:
 DN_{j+1} - DN_j = 1 - (x_{j+1} - x_j) * Nas'(x_j) + (Nas
-sampling error).  With Nas' = Rho(x) = log(x/2pi)/(2pi x)
-(explicit,  decreasing,  L_pin-bounded —  W2M5) and the zero
-gaps measured (the e2_bound / e4 family already bounds
-gap * Rho-type sums):  |DN_j - DN_{j-1}| is an explicit small
-quantity with a summable tail —  so |DN_j - DN_j0| ≤ sum of
-drifts,  and a uniform bound reduces to an explicit series +
-a pinned start value.  This is the route most likely to yield
-a Lean-checkable universal bound IF the drift series converges
-fast enough at the measured gap statistics;  the S3a / S4
-certificate machinery (polynomial certificates over the gap
-variables) is exactly the tool the drift bounds need.
+sampling error).  With Nas' = Rho(x) = log(x/2pi)/(2pi)
+(explicit,  increasing on (0, ∞),  L_pin-bounded on
+(0, G2] —  W2M5) and the zero gaps measured (the e2_bound / e4
+family already bounds gap * Rho-type sums):  |DN_j - DN_{j-1}|
+is an explicit small quantity with a summable tail —  so
+|DN_j - DN_j0| ≤ sum of drifts,  and a uniform bound reduces
+to an explicit series + a pinned start value.  This is the
+route most likely to yield a Lean-checkable universal bound IF
+the drift series converges fast enough at the measured gap
+statistics;  the S3a / S4 certificate machinery (polynomial
+certificates over the gap variables) is exactly the tool the
+drift bounds need.
+**Step 1 is now in Lean (W2Beyond0.lean,  GREEN):**  the
+drift identity (`driftStep`),  the Rho monotonicity
+(`rho_increasing`),  the MVT model-increment bound
+(`nas_incr_bound`:  Nas b - Nas a ≤ Rho b · (b - a) on
+[0, ∞) —  built on the W2K K3 derivative +  the pointwise
+HasDerivAt form of Lagrange MVT,  `exists_hasDerivAt_eq_slope`
+in the pinned mathlib),  and the per-step band (`driftBand`:
+the step sits in [1 - S, 1] once the gap increment is
+bounded).  The open content starts at the summation.
 
 **R3 — kernel-decay (S1 channel direct).**  W2Telescope already
 writes S1Sum - RSum as a kernel sum over the zeros (the t1 /

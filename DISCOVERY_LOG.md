@@ -6745,3 +6745,43 @@ name the approach.
 No Lean changes in this pass (build untouched — last state: full
 lake build rc=0, 0 errors, new modules 0 warnings).  Name is tpf
 throughout; renaming later is a find-replace across 6 docs.
+
+## 2026-09-20 — W2-beyond R2 step 1 in Lean (W2Beyond0 GREEN) + RH-PROOF-OUTLINE current-state note
+
+- **W2Beyond0.lean (new, GREEN, 0 sorry, 0 warnings)** — the
+  first Lean core of the W2-beyond R2 route (per-step drift
+  summation, docs/W2-BEYOND-ATTACK-PLAN.md), scoped small on
+  purpose (the summation is the still-open content):
+  - `driftStep`: DN(j+1) - DN(j) = 1 - (Nas(j+1) - Nas(j))
+    (definitional over W2T.DN; the ring close needed
+    Nat.cast_add/cast_one normalization — bare ring left the
+    cast-of-sum form).
+  - `rho_increasing`: Rho = d/dx Nas is increasing on (0, ∞) —
+    the monotone-log chain (Rho x = log(x/2π)/2π).  Reference
+    find (pinned mathlib v4.33.1): the field same-denominator
+    division lemmas (div_le_div_right' / div_le_div_iff) live
+    in the GROUP context (Algebra/Order/Group/Unbundled) and do
+    NOT synthesize on ℝ — written instead as div_eq_mul_inv +
+    mul_le_mul_of_nonneg_right with (2π)⁻¹ ≥ 0; inv_pos here is
+    an IFF (0 < a⁻¹ ↔ 0 < a), not a function.
+  - `nas_incr_bound`: Nas b - Nas a ≤ Rho b · (b - a) on
+    [a, b] ⊂ (0, ∞) — Lagrange MVT in its POINTWISE-HASDERIVAT
+    form `exists_hasDerivAt_eq_slope f f' hab hfc hff'`
+    (Analysis/Calculus/Deriv/MeanValue.lean:122; the
+    deriv-version `exists_deriv_eq_slope` demands
+    DifferentiableOn, which in this pin unfolds to
+    DifferentiableWithinAt — the pointwise form takes
+    `fun x hx => nasHasDerivAt x ...` directly, no bridge).
+    Built on W2K.nasHasDerivAt (K3) + W2I.hNasCont.
+  - `driftBand`: the walk step sits in [1 - S, 1] once the gap
+    increment is bounded 0 ≤ Δ ≤ S (data-adjacent; the measured
+    gap + nas_incr_bound supply S at the gap's right end).
+- W2-BEYOND-ATTACK-PLAN R2: "Step 1 is now in Lean" note added;
+  Rho formula corrected in the plan (Rho(x) = log(x/2π)/(2π),
+  INCREASING — an earlier draft line had the wrong denominator
+  and wrong monotonicity; caught on re-read).
+- RH-PROOF-OUTLINE.md: a clearly marked day035 current-state
+  note added after the reading guide (the §9/§10 tables stay the
+  day-023/29 snapshot; the note points at the front page, the
+  two remaining legs, and the ceiling report).
+- Full lake build rc=0, 0 errors; W2Beyond0 0 warnings.
