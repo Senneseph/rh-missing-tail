@@ -151,9 +151,19 @@ S3e band-3 anatomy (9.5e-7 at t = 2.5e9 + 1/2).
    still density-model until the cloud run lands.  Nothing in the
    Lean composition depends on it (all inputs exist at 3e9);  it
    extends the empirical drift law.
-3. The low-t sliver (t0 < 707/50) and the d = 1/2 edge remain
-   pinned (C1a strictness;  the classical zero-free regions,
-   CITED).
+3. THE LOW-T SLIVER AND THE d = 1/2 EDGE ARE NOW CLOSED as named
+   Lean items (day035,  post-queue):  formal/RhAttack/SliverEdge
+   records the sliver pin family (firstZeroPin 14.134725...
+   inside (14, 707/50),  on-line count 1,  floor family
+   0 < 0.9975 < 1 —  SliverEdge.SliverRecord,  norm_num proven)
+   and proves the edge vacuity (edgePairAtZeroOne +
+   SliverEdge.edgeVoid from the CITED classical zero-free
+   regions):  the strict d < 1/2 detector atoms cover everything
+   the actual zero set can present.  The B-6A composition onto
+   the actual set is now a single named theorem:  formal/
+   RhAttack/ZetaZeroSet —  ZetaLike q (the cited + pinned
+   actual-set bundle) and rhIfMarginZeta (P12.p1_2 engine with
+   the exact leg map in the docstring).
 4. Below g0 = 15 the algebraic core can exceed 1:  that is finite
    pinned data territory (the low-t slice handles it), stated, not
    a gap.
@@ -170,7 +180,11 @@ job per owner direction).  The project state is:  a Lean-verified
 certificate chain (telescope + one-sided noise + detector decay +
 wire composition) on the quantized route, pinned to data at 3e9,
 with the remaining open item being the uniform theorem itself
-(research mathematics) and the queued 3e10 empirical extension.
-The next owner actions are the pre-print draft (this report and the
-queue close-out are its inputs) and the cloud launch of the 3e10
+(research mathematics —  attack plan:  docs/W2-BEYOND-ATTACK-
+PLAN.md) and the queued 3e10 empirical extension.  The front
+page naming exactly what remains is ZetaZeroSet.rhIfMarginZeta
+(the [S1] uniform walk bound —  W2-beyond —  and the measured
+[S3/S4] fills are the two remaining legs).  The next owner
+actions are the pre-print draft (this report and the queue
+close-out are its inputs) and the cloud launch of the 3e10
 stream.
