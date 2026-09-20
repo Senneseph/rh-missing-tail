@@ -1,0 +1,205 @@
+# Pre-print draft — day035 (DRAFT for owner revision)
+
+Working title:  "A Lean-verified certificate chain for the
+quantized-straddle detector at 9.06 x 10^9 zeros"
+
+Status:  draft assembled 2026-09-20 from docs/CEILING-REPORT-DAY035.md,
+docs/END_GAME_PLAN.md (sections 3.2-3.7), and the Lean modules
+W2Telescope / W2Bound / W2M5 / S3a / M6 (all GREEN, zero `sorry`,
+Lean 4.33.1 + mathlib v4.33.1).  Scope statement (keep in any
+version):  a bound-level margin statement on the quantized route,
+pinned to audited data at 3 x 10^9;  no RH claim is made or implied.
+
+---
+
+## Abstract
+
+We present a partially machine-checked certificate chain for the
+"squeeze margin" statistic of the quantized-straddle zero detector
+for the zeta function, at t up to 3 x 10^9 (9,064,192,826 zeros,
+counted exactly).  Three components are now fully formalized in Lean
+4 (mathlib), with zero axioms and zero `sorry` beyond Lean's core:
+
+1.  The TELESCOPE (Section 3):  the far-integral remainder reduces,
+    exactly, to a bounded count-walk against a log kernel plus
+    boundary terms;  the one-sided form W >= -C with explicit C is a
+    named theorem with pinned constants (K = 2.503 for the walk, and
+    L = log(T/(2 pi))/(2 pi) for the slope).
+
+2.  The ALGEBRAIC DETECTOR (Section 4):  the rational core of the
+    closed-form detector on the quantized straddles t = g + k/2
+    (k = 1..12, d in [0, 1/2]) satisfies R <= 13/t from t >= 40 on —
+    the crossing at t0 = 15 is located exactly, and the two
+    monotonicity lemmas (d-corner, k-outer) are proved by certified
+    polynomial-sign analysis, so the worst case on the cell is a
+    corner that the decay bound covers.
+
+3.  The WIRE COMPOSITION (Section 5):  on the low-t wire (the
+    strip t < 1000 architecture that composes zero-side /
+    detector-side / definition-side), the detector side is fed by
+    the PROVEN bound 1 - 13/t, which strictly dominates the wire's
+    own proven floor family, and the noise side is the pinned
+    W-bound;  the composition returns the wire's squeezed-margin
+    form with a strictly positive dev-vs-noise margin as a named
+    Lean theorem.
+
+The remaining gap to a uniform theorem (in t and in the detector
+offset d) is stated honestly as such (Section 6), together with the
+queued empirical extension to 3 x 10^10 zeros.
+
+## 1.  The argument and its statistic
+
+At each zero height g and straddle height t = g + k/2 (k a nonzero
+integer in the audited window) the statistic
+
+    margin(t, d) = |zeta(1/2 + i t)| * dev(t, d) /
+                   (floor(t) + resid(t))
+
+is required to dominate 1:  the detector deviation dev(t, d) =
+|1 - R_closed(t, d)| (minimum over the audited d-grid) must exceed
+the kernel floor plus the on-line residual.  Pointwise dominance
+over the data extent is a MEASUREMENT (207-point low-t record to
+1000;  2250-point sweep to 10^9;  the day035 anatomy at 2.5 x 10^9).
+The research question is UNIFORM dominance (the P1.2 form).
+
+This pre-print reports the progress of day035:  converting two of
+the uniform theorem's three ingredients from measurement to
+named theorems (the algebraic detector side, the noise side), and
+composing them through the wire in Lean.
+
+## 2.  Data to 3 x 10^9 (PINNED, audited)
+
+-  N(3 x 10^9) = 9,064,192,826 exactly (md5-gated shard chain;
+    Riemann-von Mangoldt at 3 x 10^9 is 9,064,192,825.58,
+    discrepancy 0.42, within the tolerance).
+-  The band file (2.0017 x 10^9, 2.9992 x 10^9] carries
+    3,142,622,346 zeros (476 shards, all real finish gates passing:
+    monotone, min gap 2.47 x 10^-4, seam gap inside (0, 1), band-end
+    count vs RVM +0.40).
+-  The count walk DN(x) = N(x) - N_asym(x) is bounded:
+    sup|DN| = 2.503 on (10^7, 2 x 10^9] (full-zero census) and,
+    after the day035 S3e walk on (2 x 10^9, 2.9992 x 10^9],
+    sup|DN| = 2.4772 on (10^7, 2.9992 x 10^9] (both census
+    conventions).
+-  The cancellation anatomy at t = 2.5 x 10^9 + 1/2:  |S1 - (the
+    L-form)| = 9.5 x 10^-7 and the identity S1 = B - Dc + R holds
+    exactly at S1 = -5.998 x 10^9 (the big-term cancellation), with
+    B = -0.1464, Dc = -0.8984:  the O(1) defect mechanism is stable
+    at N = 9 x 10^9.
+
+## 3.  The telescope and the one-sided noise bound (LEAN)
+
+The exact identity (W2Telescope, formalized):
+
+    W = p(G2) DN(G2) - p(G1) DN(G1) - int_{G1}^{G2} DN(x) p'(t; x) dx
+
+with W the far-integral defect on a band (G1, G2], p the log
+kernel, DN the count walk.  Consequences, all named theorems
+(W2Bound, W2M5):
+
+-  One-sided form:  S1 - R >= -(K (|p 0| + |p M|) + K sum |Dp|)
+    with the explicit constant;
+-  I_DN side:  |I_DN| <= K sum|Dp| + L (sum gap |Dp| + gap_k +
+    2 gap_k^2 (1/x_k + 6));
+-  Pinned instantiation:  K = 2.503 (the measured sup|DN|),
+    L = Rho(2 x 10^9) = log(2 x 10^9 / (2 pi)) / (2 pi), with the
+    slope bound Rho' = 1/(2 pi x) > 0;  partition data enter as
+    named hypotheses (the plan's "data-adjacent" form).
+
+## 4.  The algebraic detector (LEAN, S3a)
+
+R_closed = A(g, k, d) * exp(s w), where A is rational in (g, k, d)
+and w is a real O(1/g^2) combination (the exponential factor is
+carried separately by the proven C1b discrete floor, 1 - 25/g with
+a 0.023 witness-scale margin).  For the algebraic core
+A(g, k, d):
+
+-  Crossing (exact):  A(14, 12, 1/2) > 1 and A(15, 12, 1/2) < 1 —
+    the crossing g0 = 15;  below it, finite pinned data territory.
+-  d-corner:  A(g, k, d) <= A(g, k, 1/2) for g >= 15, 1 <= k <= 12,
+    0 <= d <= 1/2.  Proof:  writing x = d^2 and the d-dependence in
+    chord form D = (1 - 4x) D0 + PP x (x - 1/4),  the certificate
+    reduces to D0 >= 0 (two cases:  k = 1, all nonnegative
+    coefficients;  k >= 2, a chain using g^2 >= 225) and PP <= 0
+    (a quartic C1 all-positive in v = g - 15).  No case-splitting
+    on the continuum (no interval_cases) in the d-core.
+-  k-monotonicity:  A(g, k, 1/2) <= A(g, k+1, 1/2) for 1 <= k < 12
+    (eleven certified cubics in v = g - 15, each closed by an
+    exact cross-multiplication via a positive-denominator lemma).
+-  Decay:  A(g, 12, 1/2) <= 13 / g for g >= 40 (exact quartic
+    certificate at v = g - 40).
+-  Composed (s3a_dev):  A(g, k, d) <= 13 / g on the quantized
+    straddle grid (1 <= k <= 12, 0 <= d <= 1/2, g >= 40).
+
+## 5.  The wire composition (LEAN, M6)
+
+On the wire (the strip t < 1000 architecture of S1LowT, which
+carries the wire form  Q >= dev - M,  dev >= f,  Q <= B + Mr,
+B + Mr + M < f):
+
+-  Feed:  1 - A(g, k, d) >= 1 - 13/g on the grid (m6_feed), with
+    1 - 13/g positive for g >= 40.
+-  Dominance:  1 - 13/g >= 27/40 (at g = 40) and the wire's PROVEN
+    floor family satisfies flo <= 0.023 there, so the feed strictly
+    dominates the wire floor on the grid (m6_feed_dom).
+-  Noise:  the W2 pinned bounds of Section 3 as the named noise
+    functional (w2noise) with its two named theorems.
+-  Composition (m6_compose):  the wire form at the feed level
+    (dev = f = 1 - 13/g) with the zero-side witness Q and the noise
+    total as named hypotheses (their fills:  the pinned data plus
+    the W2-proven bounds) — outputting the wire form + feed
+    dominance + the STRICTLY POSITIVE margin 1 - 13/g -
+    (B + Mr + Mf).
+
+The |zeta(1/2 + it)| factor is carried by the named noise-side
+hypotheses (it multiplies the zero side through the kernel);  the
+feed is |zeta|-free.  The raw margin statistic remains the
+measurement proxy;  the Lean statement is the bound-level form.
+
+## 6.  The ceiling (honest statement)
+
+1.  The UNIFORM theorem (in t and in the offset d) is not claimed.
+    It remains the open research theorem;  day035 converts two of
+    its three ingredients to named theorems and composes them.
+2.  The wire's zero-side / definition-side / squeeze roles are
+    named hypotheses (fills:  pinned data, W2-proven bounds), in
+    the explicit-hypothesis pattern used throughout — no hidden
+    measurement.
+3.  The extension to 3 x 10^10 zeros is queued (a cloud run,
+    resumable from the 3 x 10^9 shards).  The no-divergence read
+    past 9.06 x 10^9 zeros is density-model until it lands;  the
+    Lean composition does not depend on it.
+4.  The low-t sliver (t < 14.14) and the d = 1/2 edge are pinned
+    (classical zero-free regions cited at the edge).
+5.  No RH claim is made or implied.  The claim level is:  a
+    bound-level composition of the squeezed margin on the
+    quantized route, every atom labeled LEAN-PROVEN / CITED /
+    PINNED / MEASURED.
+
+## 7.  Machine-checking statement
+
+All theorems of Sections 3-5 are in the repository
+(rh-missing-tail, formal/RhAttack/), Lean 4.33.1 with mathlib
+pinned at v4.33.1:  W2Telescope.lean, W2Bound.lean, W2M5.lean,
+S3a.lean, M6.lean (plus the supporting S1LowT / C1b / P8 / S4
+families).  The full project builds with `lake build` (17,442
+jobs) at zero errors and zero `sorry`.  The data claims of
+Section 2 rest on md5-audited shard files with the audit scripts
+in scripts/rh/.
+
+---
+
+Open items for the owner before release (draft notes, not part of
+the text):
+-  Naming:  "quantized-straddle detector", "count walk DN",
+    "telescope identity" — check against the external-facing
+    glossary (README / references) and the 2026-09-17 novelty
+    assessment (docs/ROUTE-ANCESTRY-AND-NOVELTY-2026-09-17.md).
+-  The 13 in 1 - 13/g:  the asymptote is ~12.8/g (probe at
+    g = 10^5);  13 is the uniform certificate constant from
+    g >= 40 — state as done in Section 4, consider the sharper
+    two-constant version as a remark.
+-  Whether to include the crossing numbers (Ralg 14 12 1/2 vs Ralg
+    15 12 1/2) as an explicit displayed value-table (appendix).
+-  The 3e10 status line:  "queued" vs "in flight" depending on the
+    cloud launch date.
