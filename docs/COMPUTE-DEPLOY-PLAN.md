@@ -103,19 +103,49 @@ So for the 12,858-shard 3e10 extension:
     T2.5 (a few hours of scripting,  zero change to any
     verification semantic:  same decoder,  same md5 gates,
     same count chain,  same finish gates).
--  **GPU:  no speedup.**  There is no math kernel here —  the
-    zeros are public precomputed data (the LMFDB census) that
-    the box DOWNLOADS;  the per-zero work is a scalar 104-bit
-    integer add + float rebuild,  which a GPU does no better
-    than a CPU core.  The levers are bandwidth (1Gbps standard)
-    and decode parallelism (4-8 vCPU).  (A GPU would only
-    enter if we ever COMPUTED zeros beyond the public index —
-    a separate,  much larger,  hypothetical job.)
+-  **GPU / "GPU mpmath?" check (owner question):**  there is
+    no GPU version of mpmath (it is a pure-python package;  no
+    maintained port exists).  The "something we used earlier"
+    in the project was the CUPY-based GPU walks (the
+    day004/day009 `*_gpu` S(t)/zero-walk scripts + bench_cupy_
+    numpy —  now archived in the pre-split kainos-logos
+    repo):  GPU-numpy for the vectorizable argument-main
+    part,  screen-level accuracy,  deliberately NOT
+    bit-identical to the mpmath/CPU evaluations,  and exactly
+    for that reason it never feeds a pin.  Irrelevant to this
+    run anyway:  the 3e10 ingest path uses no mpmath at all
+    (pure-stdlib 104-bit decode + numpy gates).  If a future
+    job COMPUTES zeros beyond the public index,  the cupy
+    approach applies again —  same screen-level role,  CPU
+    checkpoints,  no pin authority.
 
 CPU/RAM reality:  4-8 vCPU,  8GB RAM is plenty (each decode
 worker ~200MB;  the finish gates stream at ~1GB peak).  The
 earlier "3-5h / download-bound" line is superseded by the
 decomposition above.
+
+**STANDING CONSTRAINT (owner):  never occupy all cores —
+leave 2 physical cores (4 threads) free for system/resource
+management at all times,  so the machine stays responsive
+and a hung worker cannot stall the box.**  The orchestrator
+is therefore capped at 14 physical cores (12-14 workers
+default) on this 16c/32t machine,  and the cap is a
+hard-wired default,  not an operator judgment call.
+
+**Local machine now PRIMARY (measured):**  the 10TB USB
+(exFAT,  8.1T free) landed;  the LMFDB rate from here is
+capped at **~40MB/s aggregate** (measured:  38.8MB/s
+single-connection,  41.9MB/s 4-way concurrent —  no gain,
+so the cap is aggregate,  md5-verified on all fetch
+tests).  Local 3e10 run:  ~750GB / 40MB/s ≈ **~5h
+wall,  download-bound** —  the 12-14 worker decode
+(~48min of work) fully hides inside it.  Resumable,
+kill-safe,  free,  and the finished band STAYS on the
+owner's drive (no 750GB egress,  no retrieval).  Run dir:
+`/media/jsmille/My Book/rh-missing-tail/` (isolated lane,
+owner's existing data untouched).  Cloud drops to the
+fallback / public-reproducibility venue (and the Docker
+turnkey image is what makes it a no-brainer there).
 
 ────────────────────────────────────────────────────────────
 ## 2.  Ironclad-script contract (what guarantees,  checked)
@@ -229,14 +259,9 @@ dense numeric kernel for a GPU to eat (see 1d).**
 | **DigitalOcean (owner's pick)** | 8GB/**4-8 vCPU** droplet (per-second billing → ~$0.03/h) | ~$0.30-0.60 for the 3-11h run | 1TB block volume @ $0.10/GiB/mo,  per-second → ~$1.40 for a day | $0.01/GB → **~$7.50** | Easiest ops;  total ≈ **$10-15** |
 | Hetzner dedicated EX101 | i9-13900,  64GB, **2x1.92TB local NVMe** (RAID1),  1Gbit guaranteed,  traffic unlimited | ~EUR 0.15/h → **~EUR 4 for 24h**;  setup EUR 39-44 one-off | included (local NVMe,  no volume attach) | **unlimited → free** | Best perf/price;  ops = root VM (SSH-only,  no fancy console);  one-off setup fee |
 | Hetzner cloud (CX/CX32) | 2-16 vCPU,  8-64GB,  NVMe | ~EUR 2-6 for the run | volume ~EUR 0.04/GiB/day-ish | 20TB free tier | Between the two |
-| This machine | 2 cores,  31GB,  132GB free | free | **infeasible — 132GB free < 700GB needed** | - | ruled out |
+| This machine | 16 cores / 32 threads (Ryzen AI MAX+ 395),  124GiB,  10TB USB (8.1T free),  LMFDB capped ~40MB/s | free | ~5h download-bound | n/a —  data stays on the owner's drive | **PRIMARY** |
 
-**Recommendation:**  DigitalOcean droplet + 1TB volume for
-the first run (owner's instinct;  simplest;  per-second
-billing makes the ~1-day footprint ~$10-15 all-in including
-egress).  Hetzner EX101 is the value alternative if the run
-is repeated or extended (free egress + local NVMe).  Both fit
-"normal docker constraints" (x86_64,  docker on the VM).
+**Recommendation:**  LOCAL FIRST (owner's 10TB drive + the 32-thread box;  ~5h download-bound,  free,  the data stays home —  see 1d).  The Docker turnkey image makes every other venue a one-command fallback:  DigitalOcean droplet + 1TB volume (per-second billing,  ~$10-15 all-in including egress) for a public/vendor reproduction or a repeat run,  Hetzner EX101 (local NVMe,  free egress) for heavy repeats.  All fit "normal docker constraints" (x86_64,  docker on the host).
 
 ────────────────────────────────────────────────────────────
 ## 5.  Launch protocol (explicit,  manual,  step by step)
@@ -311,7 +336,7 @@ The walk-pin (step 8) is the referee that picks among them.
 | Unit | Content | Size | Status |
 | --- | --- | --- | --- |
 | T1 | Script audit + 3 fixes (assert bound,  gate syntax,  RAM-safe gate) + live preflights | small | **DONE** (this session) |
-| T2.5 | Parallel orchestration of the 3e10 run:  pipelined fetch + 4-8 workers running the UNCHANGED verified decoder,  ordered append,  identical md5/chain/gate asserts (1d:  ~11h sequential → ~3h parallel) | ~1-2h scripting + a 1-shard parallel-vs-sequential bit-exact cross-check | after T2,  before launch |
+| T2.5 | Parallel orchestration of the 3e10 run:  pipelined fetch (2-4 concurrent) + 12-14 workers (HARD CAP 14 physical cores — 2 cores always reserved,  owner rule) running the UNCHANGED verified decoder,  ordered append,  identical md5/chain/gate asserts | ~1-2h scripting + a 1-shard parallel-vs-sequential bit-exact cross-check | after T2,  before launch |
 | T2 | Dockerfile + rh-reproduce runner + .dockerignore + lockfile + local image build + in-container smoke tests (one module lean-build,  one shard md5 fetch) | the one medium unit,  est 2-4h | OWNER GO-AHEAD |
 | T3 | Provision DO (or Hetzner) + push image + attach volume + launch | owner action w/ my protocol,  ~1h hands-on | after T2 |
 | T4 | Watch run (3-11h cloud,  mostly external) + retrieve + local gate/walk-pin + outcome classification | ~1-2h agent work after data | after T3 |
