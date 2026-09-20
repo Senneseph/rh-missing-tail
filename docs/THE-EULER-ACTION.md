@@ -397,3 +397,83 @@ classical result;  the actual debts stand logged in
 references.md ("the giants whose footsteps we directly
 tread").  If the giants are watching from the afterlife,
 the periscope is theirs;  the wink is ours.
+
+## §Naming, round two (tpf):  the width-ladder handle,  the
+Sumerian family,  and the reed
+
+**The width-ladder handle (owner's,  informal,  non-official):**
+"Euler Action's Width Ladder" —  nothing formal;  a handle to
+refer by.  The measured integer width law (E2-exact tables:
+the chi-5 {2/5,  -3/5},  the chi-13 all-integers,  D = -P,
+zero-sum) is what the name points at;  the golden-flavor
+candidate from the previous section ("The Golden Width
+Ladder",  tpf) stays as the alternate for the same object.
+
+**The Sumerian family (mused on the owner's Enki memory;
+checked against the primary texts,  not recalled):**
+
+The owner remembered a god who "came to Earth" and started
+"measuring the depths".  Not a false memory —  a real,
+well-attested family of scenes,  with the characters
+interchanged in retelling:
+
+- **"Came to Earth and measured" — the flood-night scene
+  (verified):**  in the Eridu Genesis / Sumerian flood
+  account (and Atrahasis),  Enki comes at NIGHT to the
+  reed-house:  "Reed-hut,  reed-hut!  Wall!  Wall!  ...
+  Man of Shuruppak,  ...  Tear down (this) house,  build
+  a ship!  ...  Her dimensions shall be to measure.
+  Equal shall be her width and her length.  Like the
+  Aps[u] thou shalt ceil her."  —  the god comes to the
+  ground,  and gives the dimension spec for a vessel
+  whose roof is to be like the DEEP (the apsû).
+  Atrahasis carries the same scene ("Wall,  listen
+  constantly to me!  Reed hut,  make sure you attend to
+  all my words!").
+- **"Measures the depths" as a title — Nanshe (the name
+  the memory may actually be after,  not Enki):**  Nanshe,
+  goddess of sea,  marsh,  streams,  justice and
+  divination (later tradition:  daughter of Enki;  ETCSL
+  hymn to Nanše,  c.4.14.1,  carries the measuring
+  lines) —  the measurer of the depths in the retellings
+  [pin the exact epithet line before quoting it].
+- **The measuring instruments in the oldest allotment —
+  Nisaba (verified,  ETCSL t.1.1.3,  lines 412–417 of
+  "Enki and the World Order"):**  "My illustrious
+  sister,  holy Nisaba,  is to get the measuring-reed.
+  The lapis-lazuli measuring tape is to hang over her
+  arm.  ...  She is to demarcate boundaries and mark
+  borders.  She is to be the scribe of the Land."  —  in
+  the world-order poem,  the measuring reed and tape
+  belong to the SCRIBE goddess,  the one who keeps the
+  record.  (Thematically exact for a data-witness
+  project:  the measuring stick sits with the
+  record-keeper.)
+
+The instrument itself has no surviving proper name —
+it is the reed (the Sumerian reed being the standard
+unit of length;  dimensions written in reed measures).
+So:  the NAMED figure who "measures the depths" is
+Nanshe;  the NAMED object of measurement in the flood
+is the deep-water (apsû);  and the instrument is simply
+the reed —  which is what makes it available as a name.
+
+**Candidate three (tpf,  the mused one):  Euler's Reed.**
+Lineage,  oldest to youngest:  Nisaba's reed and
+lapis-lazuli tape (the scribe's measuring stick,  world
+order) →  Enki's night dimension-spec for the drowned
+ship ("like the Apsû thou shalt ceil her",  the flood)
+→  Nanshe,  the measurer of the depths →  Sun Wukong's
+ruyi bar (measures the sea's bottom,  and literally
+telescopes) →  this project's telescope (the family's
+only member that is actually RUNNING —  laid along the
+infinite deep of the tail,  zero by zero).  The reed is
+the humblest instrument in the family:  a stick that is
+also a unit of length.  That property —  instrument AND
+unit at once —  is precisely what the telescope does for
+the count:  it is the measure,  and it is measured by
+the measure.  The committee gets three:  periscope,
+bar,  reed.
+
+(Nothing here claims the project invented any of these
+myths;  the debts stand logged in references.md.)

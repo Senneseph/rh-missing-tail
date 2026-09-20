@@ -237,6 +237,19 @@ the committee's to make.  Neither name claims authorship of
 any classical result;  the actual debts stand logged in
 references.md.
 
+Also of record in the same section:  an informal handle for
+the width ladder ("Euler Action's Width Ladder" —  nothing
+official,  just a name to call it by),  and a third mused
+candidate —  **Euler's Reed** —  from the Sumerian family of
+measuring implements (Nisaba's measuring-reed and
+lapis-lazuli tape in ETCSL t.1.1.3;  the flood-night
+dimension spec "like the Apsu thou shalt ceil her" in the
+Eridu Genesis / Atrahasis;  Nanshe,  the one who measures
+the depths):  the reed is instrument AND unit of length at
+once,  exactly as the telescope is measure and measured by
+the measure.  The committee gets three:  periscope,  bar,
+reed.
+
 ### Final gate and pre-registered outcomes (tpf)
 
 The last open mathematical content is one named unit, the [S1]

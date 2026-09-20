@@ -6986,3 +6986,53 @@ throughout; renaming later is a find-replace across 6 docs.
   THE-EULER-ACTION.md updated.
 - Run check this turn:  925/12,857 shards at ~74min wall,
   ETA ~795min,  seam chain-exact,  LMFDB steady.
+
+## 2026-09-20 — Naming round two: width-ladder handle + the Sumerian measuring family (owner's Enki memory, checked primary)
+
+- **Informal handle (owner's, non-official):**  "Euler
+  Action's Width Ladder" —  nothing formal;  just a name
+  to call the E2-exact width law by.  Logged in
+  docs/THE-EULER-ACTION.md ("Naming, round two (tpf)");
+  "The Golden Width Ladder" (tpf) stays as the alternate
+  for the same object.
+- **The Enki memory — checked against the primary texts
+  (not recalled) and found REAL, with the characters
+  interchanged in retelling:**
+  1.  "Came to Earth and measured" = the flood-night
+      scene (Eridu Genesis / Sumerian flood,  and Atrahasis):
+      Enki comes at NIGHT to the reed-house —  "Reed-hut,
+      reed-hut!  Wall!  Wall!  ...  Tear down (this) house,
+      build a ship!  ...  Her dimensions shall be to
+      measure.  Equal shall be her width and her length.
+      Like the Aps[u] thou shalt ceil her."  —  the god
+      hands the dimension spec for a vessel whose roof is
+      like the DEEP.
+  2.  "Measures the depths" as a title = most likely
+      **Nanshe** (goddess of sea/marsh/streams/justice;
+      hymn to Nanše,  ETCSL c.4.14.1,  carries the
+      measuring lines;  later tradition makes her Enki's
+      daughter) —  the name the memory may actually be
+      after;  exact epithet line [pin] before quoting.
+  3.  The instruments in the oldest allotment = **Nisaba**
+      (verified,  ETCSL t.1.1.3 lines 412–417):  "My
+      illustrious sister,  holy Nisaba,  is to get the
+      measuring-reed.  The lapis-lazuli measuring tape is
+      to hang over her arm.  ...  She is to demarcate
+      boundaries and mark borders.  She is to be the
+      scribe of the Land."  —  the measuring stick sits
+      with the record-keeper.  (Thematically exact for a
+      data-witness project.)
+  The instrument has no surviving proper name —  it is
+  the reed,  which was ALSO the standard unit of length.
+- **Candidate three (tpf,  the mused one):  "Euler's
+  Reed"** —  instrument AND unit at once,  exactly as the
+  telescope is the measure and is measured by the
+  measure.  Lineage logged oldest to youngest:  Nisaba's
+  reed + tape →  Enki's flood night dimension-spec →
+  Nanshe (measurer of the depths) →  Sun Wukong's ruyi
+  bar →  this telescope (the family's only member that is
+  actually running,  laid along the infinite deep of the
+  tail,  zero by zero).
+- Synced:  preprint "Name of the telescope (tpf)" (three
+  candidates + handle),  README Appendix A line,  this
+  log.  Run check this turn:  see supervisor.log tail.
