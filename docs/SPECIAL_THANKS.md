@@ -2,7 +2,7 @@
 
 - My mom and dad
 - All my teachers, who I'll name individually later
-- My friends who always kept my imagination fed
+- My friends who always kept my imagination fed, and if you have to ask, the answer is already "yes"
 
 # Notable Mentions
 - Wayne Mullins, my high school physics teacher
