@@ -1,4 +1,4 @@
-# The Riemann Hypothesis from the Series Side
+# Zeta's Tale Tamed: The Riemann Hypothesis from the Series Side
 
 > Art Attack: Attack on the Heart, p18. Miller, 2026  
 > "[like puzzle pieces from the Clay...](https://www.youtube.com/watch?v=HPdCBHM7JUE)"
