@@ -1,7 +1,7 @@
 # The Riemann Hypothesis from the Series Side
 
 > Art Attack: Attack on the Heart, p18. Miller, 2026  
-> "...like puzzle pieces from the clay."
+> ["...like puzzle pieces from the clay."](https://www.youtube.com/watch?v=HPdCBHM7JUE)
 
 ***
 
@@ -9,7 +9,7 @@
 they generate, the onset at which zero content first enters the budget —
 and a separation program with explicit falsifiers.**
 
-## The argument as constructed *<sub>state: 2026-09-13</sub>*
+## The argument as constructed
 
 The argument below is a **complete
 proof skeleton of the Riemann Hypothesis**. Its pieces are either

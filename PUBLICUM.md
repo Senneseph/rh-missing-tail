@@ -362,6 +362,7 @@ expected.
 - No, I don't understand everything in this project either.
 - this space is not blank
 - And yes, it's probably a mess now because I haven't cleaned it up, but that is fully planned.
+- If it's real, I'll need Qwen team's help to publish a proper paper - this is more like sneak-peak with full disclosure
 - This project was begun Sept 10th.
 - This project was completely entirely on rented hardare.
 - A single LLM was used, in only a single-threaded fashion, and all in a single session.
@@ -372,21 +373,21 @@ expected.
 - Harness plugins - a wiki one, some basic web search ones, and a goal one
 - OS - Linux Mint
 - Verdict: 
-- Yes, this is partially a work of art as well as a real-time, near stream of consciousness, play-by-play of the author's serious, non-fiction effort. Think of the silly remarks here as scrawls in a notebook.
+- Yes, this repo is partially a work of absurdist art as well as a real-time, near stream of consciousness, play-by-play of the author's serious, non-fiction effort. Think of the silly remarks here as scrawls in a notebook. The sections are kept separate.
 - There are plenty of details in logs/, make sure you check there first for something you're interested in
 - tmp/ is a mess but it contains **some** temporary scripts that can be used. It's there for completeness sake.
 - Citations and other documentation to follow - I am TOTALLY NEW AT THIS, FORGIVE O-NEGAISHIMAS, HAJIMETE O-KUDASAI!
 - [My own words, I claim, are true](https://www.youtube.com/watch?v=WmOdKVwJ-J8). There is a lot from the LLM here and so I can't claim I read every single word.
-- The author remained on an impressive amount of harmless psychoactive substances throughout the effort, in order to handicap himself and keep nosey interlopers confused as to what was actually happening. It'll make sense later, I promise.
+- [The author remained on an impressive amount of harmless psychoactive substances throughout the effort, in order to handicap himself and keep nosey interlopers confused as to what was actually happening. It'll make sense later, I promise.](https://www.youtube.com/watch?v=ZvSgLHWR16o)
 - [The author believes this is a sort of](https://www.youtube.com/watch?v=L6DP4VijKms) [last stand for humanity against the inevitable progress of machine intelligence](https://www.youtube.com/watch?v=wtfjzmYZvTw), [solving one of the hardest known problems before a swarm of](https://www.youtube.com/watch?v=wtfjzmYZvTw) [100k ultra-fast AAA units](https://www.youtube.com/watch?v=__m8Q-zRdEA) find it like so many monkeys in a room banging on keyboards, nothing but bananas on their mind.
 - Mmmm... bananas are a [good source of potassium](https://www.youtube.com/watch?v=4MSQnFf0EtY), [I remember now Space Ghost once told me](https://www.youtube.com/watch?v=9ioG-cWG8AE).
 - Don't trust anything the author says. [The people who know him will have to tell you what can be believed](https://www.youtube.com/watch?v=ZXBiPY8wDT0).
 - The author releases all contacted beings - past, present, and future - from the consqeuences of their statements regarding the author.
 - [Only Spartans women give birth to real Men](https://www.youtube.com/watch?v=cmiRzJ-VF3I).
 - [L. McGeorge and I are incontravertible spiritual Spartans](https://www.youtube.com/watch?v=7Xf-Lesrkuc).
-- The author was developed as a secret continuation of the eugenics programs and research developed at [Cold Spring Harbor](https://en.wikipedia.org/wiki/Cold_Spring_Harbor_Laboratory).
+- [The author was developed as a secret continuation of the eugenics programs and research developed at](https://www.youtube.com/watch?v=r3Zc75rKN94) [Cold Spring Harbor](https://en.wikipedia.org/wiki/Cold_Spring_Harbor_Laboratory).
 - [The author believes tv shows should have theme songs again](https://www.youtube.com/watch?v=H9cmPE88a_0), [and that the path to knowledge should be exciting](https://www.youtube.com/watch?v=9KXgLQXtibk).
-- [The author believes a path to a better world is not through fighting one another, but by conquering the worse versions and lesser parts of ourselves. If you're high when you watch it, you'll realize that's what this Nietzschean scene is all about](https://www.youtube.com/watch?v=VkWzAZRXi5k)
+- [The author believes a path to a better world is not through fighting one another, but by conquering the worse versions and lesser parts of ourselves. If you're high when you watch it, you'll realize that's what this Nietzschean scene is all about](https://www.youtube.com/watch?v=VkWzAZRXi5k).
 - [The author uses social media algorithms as a substitute divination tool for things like the I Ching. There are at least 5 ideas that went into the prompt that were a casual browse on Instagram or FB. Microlearning is real and, um, spiritually active?](https://www.youtube.com/watch?v=jliEu8txjJ4)
 - [All of this started nearly a decade ago](https://www.youtube.com/watch?v=tCcamt8KZNQ) [when the author wanted to find a way to heat the pool in the winter time with only sunlight](https://www.youtube.com/watch?v=2QWbkYpH3Xs), [and then quickly found a way to harness the spinning of atoms themselves tireless and indestructible machines that can't *not* spin, it was just a matter of solving the arcane geometry needed to create a flow, went to the source of the equations](https://www.youtube.com/watch?v=s_OofPp9lEM) - [20 partial differentials in 20 variables, FACT, and found how the quaternion form was misunderstood to carry a different type of wave - one that didn't have motion with time, that canceled out with another factor, what it had was a "scalar" value that was nondescript in its geometric configuration (conjugation of electric and magnetic fields). So it stays a fixed volume, but there's something racing around inside. And then we get to the brilliant Heaviside conversion and the whole thing is invisible and believed to be impossible because it was simply "engineered out of existence by accident". Anyway, have fun with this rabbit hole!](https://www.youtube.com/watch?v=Ki-fATpXa00)
 - [Well you do it then, Baby Billy? Well, because cause I'm selfless](https://youtu.be/dD2WT8SeOSw?t=23)
