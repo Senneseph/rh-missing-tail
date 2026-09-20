@@ -6658,3 +6658,43 @@ N(3e9) pinned EXACT; S3e walk pin extends to N = 9.06e9.
   sup|DN| = 2.4772 to 3e9).  The full 3e10 extension remains
   disk-blocked (765GB needed, 132GB free on the single 1.9T
   volume).
+
+DAY035 — W2-attack queue items 2-5 CLOSED;  S3a + M6 Lean ports GREEN;
+ceiling report re-issued.
+  Item 2 (data):  3e9 done (N(3e9) = 9,064,192,826 exact, sup|DN| =
+  2.4772 to 3e9 by the S3e walk);  the 3e10 extension
+  disk-blocked (~765GB vs 132GB) and handed off to a cloud machine
+  per owner direction (stream script + shard conversion + runbook;
+  resumable from the 3e9 shards).  Decision on record:  3e10 is a
+  thoroughness upgrade, not a prerequisite for items 3-5.
+  Item 3 (W2 Lean M1-M5):  GREEN, zero sorry — W2Telescope (the exact
+  telescope identity), W2Bound (one-sided W >= -C with explicit C;
+  e4 assembly, e4_idnBound, e4_tailFloor), W2M5 (pinned K_pin = 2.503,
+  L_pin = Rho(2e9);  m5_floor, m5_idn).
+  Item 4 (S3a Lean):  GREEN, zero sorry (commit e8d4bfc) — exact
+  crossing g0 = 15 (norm_num-exact);  d-corner via the chord structure
+  D = (1-4x)D0 + PP x (x-1/4) (D0 >= 0 two-case, PP <= 0 quartic
+  certificate in v = g-15, no interval_cases in the d-core);
+  k-monotonicity (11 certified cubics in v = g-15, 1 <= k < 12);
+  decay Rcorner(g,12) <= 13/g for g >= 40 (quartic at 40+v);
+  composed s3a_dev:  Ralg g k d <= 13/g on the quantized straddle
+  grid (1 <= k <= 12, 0 <= d <= 1/2, g >= 40).
+  Item 5 (M6 composition, commit eed09b7):  GREEN, zero sorry —
+  m6_feed (1 - Ralg >= 1 - 13/g), m6_feed_dom (feed dominates the
+  wire's PROVEN floor family floStripMin <= 23/1000 <= 27/40 <=
+  1 - 13/g for g >= 40), w2noise + w2noise_bound/w2noise_tail
+  (restated m5_idn/m5_floor), m6_compose (the wire's squeezed-margin
+  form at dev := f := 1 - 13/g with the zero-side witness and the
+  noise total as named hypotheses;  output:  wire form + feed
+  dominance + STRICTLY POSITIVE dev-vs-noise margin).  The |zeta|
+  factor is carried by the named noise-side hypotheses only.  NO RH
+  claim.
+  Re-issued ceiling:  docs/CEILING-REPORT-DAY035.md;  plan update:
+  END_GAME_PLAN section 3.7.  Full project build green (17442 jobs).
+  Honest split:  LEAN-PROVEN (W2 one-sided + S3a + M6 composition;
+  infinite content on the grid/band), PINNED (3e9 data, K_pin,
+  L_pin), CITED (zero-free regions at the d = 1/2 edge), MEASURED
+  (the wire's zero-side/definition-side fills behind named
+  hypotheses).  Not established:  the S1 uniform theorem (P1.2)
+  remains the open research theorem;  the 3e10 read past 9.06e9 is
+  density-model until the cloud run lands.

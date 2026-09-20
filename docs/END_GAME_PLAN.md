@@ -349,3 +349,72 @@ dev lower bound as a named theorem; (3) W2 Efull oscillation
 bound (the remaining real mathematics); (4) W3 falsification
 extension (background, in parallel); (5) composition through the
 S1 wire.
+
+## 3.7 CLOSE-OUT (2026-09-20, day035):  queue items 2-5 DONE
+
+Item 2 (W3 data) — DONE at 3e9, 3e10 handed off:  the 3e9 stream
+landed with N(3e9) pinned EXACT = 9,064,192,826 (RVM(3e9) =
+9,064,192,825.58, |diff| = 0.42 <= 3) and the S3e walk extended the
+sup|DN| pin to 2.4772 on (1e7, 2.9992e9] (to N = 9.06e9, both
+census conventions; the 2.503 pin stands to 2e9 as before).  The
+full 3e10 chain is disk-blocked on this machine (~765GB needed,
+132GB free on the single 1.9T volume) and was HANDLED AS THE OWNER
+DIRECTED:  handed off to a cloud machine (stream script
+scripts/rh/day035_3e9_stream.sh layout + scripts/rh/convert_shards.py
++ output-disk/core/shard-layout runbook; can resume from the 3e9
+shards).  Decision on record:  3e10 is a thoroughness upgrade of the
+empirical drift law, NOT a prerequisite for items 3-5 — every input
+to the S3a certificate and the composition already exists at the 3e9
+pins.
+
+Item 3 (the one-sided form, W2 Lean M1-M5) — DONE, GREEN, zero
+sorry:  W2Telescope (the exact telescope identity
+W = p(G2)DN(G2) - p(G1)DN(G1) - int DN(x) p'(t;x) dx),  W2Bound (e1/e2
+bounds, the e4 assembly, e4_idnBound, e4_tailFloor — the one-sided
+W >= -C form with explicit C),  W2M5 (the pinned constants K_pin =
+2.503, L_pin = Rho(2e9) = log(2e9/(2 pi))/(2 pi);  m5_floor:
+S1Sum - RSum >= -(K_pin (|p 0| + |p M|) + K_pin sum |Dp|);  m5_idn:
+|I_DN| <= K_pin sum|Dp| + L_pin (gap form) + L_pin gap_k +
+2 L_pin gap_k^2 (1/x_k + 6)).  Partition data as named hypotheses
+(the plan's "data-adjacent" form).
+
+Item 4 (S3a Lean) — DONE, GREEN, zero sorry (S3a.lean):  the exact
+crossing g0 = 15 (Ralg 14 12 (1/2) > 1 and Ralg 15 12 (1/2) < 1,
+norm_num-exact);  the d-corner (chord structure
+D = (1 - 4x) D0 + PP x (x - 1/4),  D0 >= 0 two-case (k = 1 /
+k >= 2 with g^2 >= 225),  PP <= 0 by the all-positive quartic
+certificate C1 in v = g - 15;  no interval_cases anywhere in the
+d-core);  k-monotonicity Rcorner(g, k) <= Rcorner(g, k+1) for
+1 <= k < 12 (11 certified cubics in v = g - 15);  the decay
+Rcorner(g, 12) <= 13 / g for g >= 40 (quartic certificate at 40 + v);
+and the composed s3a_dev:  Ralg g k d <= 13 / g on the quantized
+straddle grid (1 <= k <= 12, 0 <= d <= 1/2, g >= 40).
+
+Item 5 (compose through the S1 wire; re-issue the ceiling) — DONE,
+GREEN, zero sorry (M6.lean):  m6_feed (1 - Ralg g k d >=
+1 - 13 / g on the grid, from s3a_dev);  m6_feed_dom (the feed
+DOMINATES the wire's PROVEN window/strip floor family:
+floStripMin g d <= max (floWin g) 0 = 23/1000 <= 27/40 <=
+1 - 13 / g for g >= 40);  w2noise (the named W2 noise functional,
+exactly the m5_idn RHS) with w2noise_bound / w2noise_tail
+(restated m5_idn / m5_floor);  m6_compose (the wire's
+squeezed-margin form instantiated at (g, d) on the S3a grid with
+dev := f := 1 - 13 / g, the zero-side witness Q and the noise total
+Bwire + Mr + Mf as NAMED hypotheses — H6 pattern, W2-proven fills
+documented per hypothesis — outputting the wire form + feed
+dominance + the STRICTLY POSITIVE dev-vs-noise margin
+1 - 13 / g - (Bwire + Mr + Mf)).  The |zeta| factor is carried by
+the named noise-side hypotheses only (the feed is |zeta|-free pure
+algebra);  the raw margin statistic remains the measurement proxy.
+NO RH claim (S1LowT pattern preserved).  Re-issued ceiling report:
+docs/CEILING-REPORT-DAY035.md.
+
+Remaining after this queue (not part of the closed items):
+  (a) the 3e10 cloud extension (handoff package, owner's call);
+  (b) the honest ceiling items of the re-issued report:  the wire's
+      zero-side / definition-side / squeeze roles are named
+      hypotheses (their fills are the pinned data + the W2-proven
+      bounds), the S1 uniform theorem (P1.2, uniform in t and d)
+      remains the open research theorem, and the d = 1/2 edge and
+      t0 < 707/50 sliver remain pinned (C1a strictness / the
+      classical zero-free regions, CITED).
