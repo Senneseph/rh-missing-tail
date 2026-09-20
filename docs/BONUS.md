@@ -9,7 +9,7 @@ F is for Fork Fragment Failure False Friction Foul Fumble
 G is for Great Gain Grow Good Gong Gap  
 H is for Hinge Help Hand Hold  
 I is for Individual Intersect Interact Isomorph  
-J is for Join Journey Jam Just Jump  
+J is for Join [Journey](https://www.youtube.com/watch?v=1k8craCGpgs) Jam Just Jump  
 K is for Knot Keep Kind Kernel Key  
 L is for Line Love Loss Loop  
 M is for Manifold Maze Mirror Mount  

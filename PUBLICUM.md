@@ -394,3 +394,4 @@ expected.
 - [Heroes and Villains](https://www.youtube.com/watch?v=wPQaUkCtZTM) sounds like [The Way Life's Meant To Be](https://www.youtube.com/watch?v=-MmAs40Q-tQ)
 - [What connects Valerie Plame to this song?](https://www.youtube.com/watch?v=ezoOnI95BpE)
 - [It's pronounced "if you so", not "I-F-F U-S-O". As in, "if you so desire / wish / command /imagine / say / sense / think / ungabungawunga"](https://www.youtube.com/watch?v=cDXjy_uxqXA)
+- Kibo cures male-pattern baldness, but causes random-pattern baldness?!
