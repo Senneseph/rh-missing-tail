@@ -150,6 +150,11 @@ keeps them CITED with source of record:
 3. **The A2c bridge** — W_n = em_expr on Re s = ½ (Apostol / DLMF).
 4. **The classical zero-free regions** — exclude d₀ > ½ (Re ρ outside
    (0,1)) for the actual zero set; not encoded in the abstract ZeroSet.
+   *day035:* the geometric half is now PROVEN (SliverEdge.
+   edgePairAtZeroOne: the d = 1/2 off-pair sits exactly on Re = 1 /
+   Re = 0) and the sliver t0 < 707/50 is the named pin record
+   (SliverEdge.SliverRecord); CITED bears only the zero-free
+   assertion itself (SliverEdge.edgeVoid composes the two).
 5. **The Platt–Trudgian 3×10¹² on-line certificate** — the data
    backbone of everything "verified ≤ 10⁹" (seam/Nt continuity
    re-checked exactly by us: Nt = 73426758, gap = one zero spacing).
@@ -181,6 +186,11 @@ online before the check.
   Zeta23's abstract zero-config assumes the strip locus, it does not
   prove the classical zero-free region. **Stays CITED and
   load-bearing; a dedicated classical port is a separate project.**
+  day035 update: the day030 sweep's d ≤ 1/2 convention means the CITED
+  region is load-bearing only beyond the wire's d domain; the edge it
+  guards (d = 1/2) is now PROVEN vacuous for the actual set
+  (SliverEdge.edgeVoid), so the item's scope has narrowed to the
+  stated classical assertion.
 - Item 5 (P-T data backbone): **already half-demoted in fact** -- on
   [0, 1e9] the backbone is our own exact re-verification (PINNED);
   their certificate bears the methodology beyond it.

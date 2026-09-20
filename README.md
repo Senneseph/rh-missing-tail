@@ -1,13 +1,24 @@
 # The Riemann Hypothesis from the Series Side
 
 > Art Attack: Attack on the Heart, p18. Miller, 2026  
-> ["...like puzzle pieces from the clay."](https://www.youtube.com/watch?v=HPdCBHM7JUE)
+> "[like puzzle pieces from the Clay...](https://www.youtube.com/watch?v=HPdCBHM7JUE)"
 
 ***
 
 **Exact action identities for Dirichlet tails, the measured width ladders
 they generate, the onset at which zero content first enters the budget —
 and a separation program with explicit falsifiers.**
+
+**The approach in a name** *(tpf — to be finalized;  the name describes the
+approach, not any particular theorem)*:  the **Riemann–von Mangoldt
+Gambit**.  For 120 years the zero-counting tail S(t) has stood on a door
+marked "a small-error theorem for this is equivalent to RH" —  so every
+attack has gone around the door.  The gambit is to stop pushing it:  the
+tail is kept exactly as it is —  measured,  telescoped,  certified —  and
+the detector-plus-squeeze that its *smallness* unlocks does the closing.
+(Driver and door:  Appendix A below.  Where the path stands today:  the
+status section of this README and
+docs/CEILING-REPORT-DAY035.md.)
 
 ## The argument as constructed
 
@@ -79,6 +90,28 @@ height, changes the kernel by at least f(δ, t₀)·|K|, with f explicit and
 **bounded below independently of the off-line distance δ**; and a **floor**
 (Part 7, the open piece) bounding the definition side *below* the detector
 scale, with no zero-count input. Part 8 combines them.
+
+### The final state (day035,  2026-09-20)
+
+The argument above has since been carried to its end-game form:  a
+**machine-verified verification chain** —  the W2 telescope (the
+zero-counting tail is a sum over the zeros plus a proven floor),  the one-
+sided noise bound,  the algebraic detector (S3a:  any off-line pair is
+detected at a strictly positive,  machine-certified scale),  the wire
+squeezes (S1LowT low-t,  S4Asm / S4-assembly high-t),  and the M6
+composition —  closed onto the **actual** zero set as one named theorem,
+`ZetaZeroSet.rhIfMarginZeta` (`formal/RhAttack/`),  whose docstring maps
+each leg to its supplier.  The data side reached 3×10⁹ zeros:  N(3×10⁹) =
+9,064,192,826 counted exactly and audited,  the tail walk bounded by
+2.503 on (10⁷, 2×10⁹] and 2.4772 on (10⁷, 2.9992×10⁹].  The legs still
+open are exactly two and are named on one page:  the **[S1] uniform walk
+bound** (the W2-beyond research item —  attack plan in
+docs/W2-BEYOND-ATTACK-PLAN.md) and the **[S3/S4] measured fills** (the |ζ|
+fill and the zero-side witness on the actual set),  plus the 3×10¹⁰ data
+extension that is the decision-maker for the walk's shape (cloud
+handoff:  docs/3E10-CLOUD-RUNBOOK.md).  Nothing in this repository claims
+that the Riemann Hypothesis has been proved;  the front page says
+precisely what remains.
 
 ### 3. The definition side: the missing tail
 
@@ -274,7 +307,7 @@ from the definition side alone. (3) Contradiction. Hence D(t₀) = 0; by
 minimality, D ≡ 0; by the counting lemma, **RH**. ∎ — *conditional on
 Part 7.*
 
-### Status of each piece (2026-09-14, day-023 25f)
+### Status of each piece (2026-09-20, day035 close-out;  the day-023 line below is the last pre-end-game snapshot)
 
 - **Proven, machine-checked (Lean 4.33.1 + Mathlib, pinned stable):** the
   counting lemma (Part 1); the per-pair closed forms (Part 4); the detector
@@ -311,7 +344,43 @@ Part 7.*
   zero list is DONE (day-023 25b: independent 100-h walk, N(10⁷) =
   21,136,121 = LMFDB − 4 documented twins) and the verified regime is
   [10³, 10⁶] certified + [10⁶, 3.15×10⁷] screened (25f).
-- **Open:** the residual floor (Part 7) — the single remaining gap.
+- **Day035 additions (end game,  all machine-checked,  full build
+  GREEN 0 errors):** the W2 line (M1–M5,  `W2Kernel` / `W2Integral` /
+  `W2Telescope` / `W2Bound` / `W2M5` —  the band-local tail as an exact
+  telescope over the zeros,  the one-sided noise floor,  and the pinned
+  instantiation K_pin = 2.503 on (10⁷, 10⁹·2] with the gap and tail
+  floors);  the S3a algebraic detector (`S3a.lean` —  the composed
+  Ralg ≤ 13/g bound on the quantized straddle grid,  g ≥ 40);  the M6
+  wire composition (`M6.lean` —  the squeezed-margin form on the S3a
+  grid with the W2 noise named,  strictly positive margin);
+  `S1LowT` v2 (the low-t strip wire,  S2 detector leg PROVEN on
+  t0 ≥ 707/50);  `SliverEdge` (the low-t sliver pin record + the
+  d = ½ edge vacuity —  the edge S2 window is vacuous for the actual
+  zero set,  proven from the CITED classical zero-free regions);
+  and `ZetaZeroSet` —  **the front page**:  the ZetaLike actual-set
+  bundle (CITED classical legs + pinned data records) and
+  `rhIfMarginZeta`,  the single named theorem composing the closure
+  onto the actual zero set,  with the leg map in the docstring.
+  Full `lake build` (formal/) rc = 0,  0 errors,  zero sorry in the
+  chain modules;  the 3e9 zero band is streamed,  md5-gated,  seam-
+  asserted,  with N(3×10⁹) = 9,064,192,826 exact and RVM(3×10⁹) =
+  9,064,192,825.58 (abs diff 0.42).
+- **Open (the two remaining legs,  named on the front page):** the
+  **[S1] uniform walk bound** —  the W2-beyond research item;  the
+  uniform O(1)-class bound on the zero-counting tail walk beyond the
+  verified 2.9992×10⁹ domain,  stated precisely with its classical
+  constraint and four named attack routes in
+  docs/W2-BEYOND-ATTACK-PLAN.md (PLANNED,  not started —  the
+  multi-day research job);  and the **[S3/S4] measured fills** (the |ζ|
+  fill and the zero-side witness on the actual set,  named wire
+  hypotheses with the pinned data as their fills today).  The 3×10¹⁰
+  data extension (cloud,  handoff packaged) is the decision-maker for
+  the walk's shape.  The low-t sliver (t0 < 707/50) and the d = ½ edge
+  are no longer open items:  they are the SliverEdge pin record and
+  edge-vacuity theorem.  Part 7 (the original residual floor) and its
+  Route A/B framing survive as the day-023 state of this line —
+  superseded as the single-remaining-gap by the S1/S3/S4 leg map.
+- **Open (day-023 snapshot,  superseded):** the residual floor (Part 7) — the single remaining gap.
 
 *The complete reader-facing exposition of this argument — with full
 provenance for every number — is maintained as
@@ -515,6 +584,61 @@ kernel — is specific enough to fail.
     *uniform statement*: the S1–S4 decomposition (zero side / detector
     floor / definition side / the uniform squeeze) + `squeeze_gives_margin`
     + `p1_2` — the formal name of the single open gap (day-023 25e)
+- [RhAttack/P12Uniform.lean](formal/RhAttack/P12Uniform.lean) — the P1.2
+  *uniform statement*: the S1–S4 decomposition (zero side / detector
+  floor / definition side / the uniform squeeze) + `squeeze_gives_margin`
+  + `p1_2` — the composition is LEAN-PROVEN; the open content lives in
+  S1 (height-uniformity)
+- **The W2 line and the end-game modules (day024–day035,  direct
+  links):**
+  - [RhAttack/W2Kernel.lean](formal/RhAttack/W2Kernel.lean) — M1: the
+    band-local tail kernel algebra, exact
+  - [RhAttack/W2Integral.lean](formal/RhAttack/W2Integral.lean) — M3:
+    the per-gap integral side (singular-free,  non-straddle gaps)
+  - [RhAttack/W2Telescope.lean](formal/RhAttack/W2Telescope.lean) — M2:
+    the DN/DP/DcSum/S1Sum/RSum telescope (the tail as a sum over the
+    zeros)
+  - [RhAttack/W2Bound.lean](formal/RhAttack/W2Bound.lean) — M4: the
+    E1 / E2 / E4 one-sided noise floors
+  - [RhAttack/W2M5.lean](formal/RhAttack/W2M5.lean) — M5: the pinned
+    instantiation (G1_pin,  G2_pin,  K_pin = 2.503,  L_pin,  m5_floor,
+    m5_idn)
+  - [RhAttack/S3a.lean](formal/RhAttack/S3a.lean) — the algebraic
+    detector (Ralg ≤ 13/g on the quantized straddle grid,  g ≥ 40,  1–12
+    straddles,  0 ≤ d ≤ ½)
+  - [RhAttack/M6.lean](formal/RhAttack/M6.lean) — the wire composition
+    on the S3a grid (feed,  feed dominance,  w2noise named,  strictly
+    positive margin)
+  - [RhAttack/S1LowT.lean](formal/RhAttack/S1LowT.lean) — the low-t
+    strip wire v2 (slice record,  grid adequacy,  S2 PROVEN on
+    t0 ≥ 707/50,  the sliver pin record)
+  - [RhAttack/SliverEdge.lean](formal/RhAttack/SliverEdge.lean) — the
+    low-t sliver pin record (firstZeroPin,  SliverRecord) + the d = ½
+    edge (edgePairAtZeroOne PROVEN,  EdgeZeroFree CITED,  edgeVoid
+    PROVEN)
+  - [RhAttack/ZetaZeroSet.lean](formal/RhAttack/ZetaZeroSet.lean) —
+    **the front page**:  the ZetaLike actual-set bundle and
+    `rhIfMarginZeta` (the composition of the closure onto the actual
+    zero set,  with the leg map)
+- **End-game documents (day035):**
+  - [docs/CEILING-REPORT-DAY035.md](docs/CEILING-REPORT-DAY035.md) —
+    the re-issued honest ceiling:  what is NOT established (the S1
+    uniform walk bound,  the measured fills,  the 3e10 extension),  and
+    the day035 close-out of the attack queue (items 1–5 done;  the
+    sliver / edge / front page closed post-queue)
+  - [docs/W2-BEYOND-ATTACK-PLAN.md](docs/W2-BEYOND-ATTACK-PLAN.md) — the
+    [S1] attack plan:  the exact target (the W2 walk bound,  uniform
+    form),  the classical constraint (Littlewood Ω±:  the continuous
+    S(t) is unbounded —  the graded walk is the object),  routes R1–R4
+    in expected-effort order,  the verification protocol.  PLANNED,  not
+    started
+  - [docs/END_GAME_PLAN.md](docs/END_GAME_PLAN.md) — the end-game plan
+    (the 3.6 attack queue 1–5,  close-out 3.7,  and what remains)
+  - [docs/PREPRINT-DRAFT-DAY035.md](docs/PREPRINT-DRAFT-DAY035.md) — the
+    pre-print draft (tpf) for owner revision / hosting
+  - [docs/3E10-CLOUD-RUNBOOK.md](docs/3E10-CLOUD-RUNBOOK.md) — the 3e10
+    zero-band cloud extension:  machine requirements,  the resumable
+    md5-gated stream script,  the finish gates,  the post-run re-point
 - **Master formula ledger (working tree):** `plan/40-prize-islands/
   rh-attack/FORMULAS.md` — every formula this work uses, labeled
   (verbatim-read / measured + file + precision / derived + file /
@@ -534,6 +658,47 @@ kernel — is specific enough to fail.
   a named raw output file. The census file `rh/zeros_T100000.txt` (138,065 dps-
   certified zeros to t = 10⁵) lives there too. All paths cited in
   `docs/` resolve from the working-tree root.
+
+## Appendix A.  The door and its mark (provenance of the name) *(tpf)*
+
+The name ("Riemann–von Mangoldt Gambit") refers to one old theorem and
+the mark on its door.  Brief provenance:  Riemann's 1859 note gave the
+zero count as an asymptotic (the main term) with a remainder it did not
+rigorize;  H. von Mangoldt, *Zur Verteilung der Nullstellen der
+Riemannschen Funktion*, Math. Ann. **60** (1905) 1–19,  made it the
+rigorous formula  N(t) = main(t) + S(t)  with an explicit error class
+for S(t) —  the formula carries both names.  The **mark on the door**: 
+classically,  a *small*-error theorem for the tail —  specifically
+S(t) = O(log log t) —  is **equivalent** to the Riemann Hypothesis
+(standard reference:  Titchmarsh, *The Theory of the Riemann Zeta-
+Function*,  the S(t)-order results;  the explicit modern bound is
+Platt–Trudgian, J. Number Theory 147 (2015) 842–851,  Cor. 1 —  which is
+exactly the bound this project cites on the zero-side tail).  Hence any
+direct attack on "kill the tail" carries the mark:  it is RH itself,  
+and the field has gone around the door instead (zero-free regions,  
+explicit formulas,  S(t) bounds,  Lindelöf).
+
+**The gambit** (this project's general approach,  nothing more):  do not
+bound the tail —  keep it.  (1) Reframe RH as a counting statement:
+RH ⇔ no off-line zero pair (the counting lemma,  machine-checked —
+Part 1 / `B0`).  (2) Measure the tail exactly where the data goes
+(the zero walk to 3×10⁹,  sup bounded by ~2.5;  N(3×10⁹) exact and
+audited).  (3) Telescope the tail into a sum over the zeros plus a
+proven floor (W2 —  the tail is the sum,  not a residue to be
+estimated).  (4) Certify the detector:  an off-line pair forces a
+kernel change of at least ~99.75% of the kernel's own size at its own
+height —  an exact algebraic inequality with no δ-window that kills it
+(Parts 5–6;  S3a).  (5) Squeeze:  zero-side lower bound > detector
+floor > definition-side upper bound ⇒  no off-line pair ⇒  RH (the wire
++ `ZetaZeroSet.rhIfMarginZeta` front page).  The two legs the chain
+still owes are named on that front page (the [S1] uniform walk bound —
+the W2-beyond item —  and the measured [S3/S4] fills);  this is the
+sense in which "we can explain why it will work":  the door was never
+the obstacle,  the *bookkeeping around the door* was,  and the
+bookkeeping is now a machine-checked chain with two named,  planned
+legs.  Alternates for the name (tpf):  "von Mangoldt Gambit" (short),
+"the missing-tail gambit" (tail = this project's own W_n object,  Part
+3).
 
 ## Authors and disclosure
 

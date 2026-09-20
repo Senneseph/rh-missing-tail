@@ -409,12 +409,22 @@ algebra);  the raw margin statistic remains the measurement proxy.
 NO RH claim (S1LowT pattern preserved).  Re-issued ceiling report:
 docs/CEILING-REPORT-DAY035.md.
 
-Remaining after this queue (not part of the closed items):
-  (a) the 3e10 cloud extension (handoff package, owner's call);
+Remaining after this queue (not part of the closed items), as of
+the post-queue close-out (2026-09-20):
+  (a) the 3e10 cloud extension (handoff package, owner's call —
+      docs/3E10-CLOUD-RUNBOOK.md);
   (b) the honest ceiling items of the re-issued report:  the wire's
       zero-side / definition-side / squeeze roles are named
       hypotheses (their fills are the pinned data + the W2-proven
-      bounds), the S1 uniform theorem (P1.2, uniform in t and d)
-      remains the open research theorem, and the d = 1/2 edge and
-      t0 < 707/50 sliver remain pinned (C1a strictness / the
-      classical zero-free regions, CITED).
+      bounds), and the S1 uniform theorem (W2-beyond:  the uniform
+      walk bound) remains THE open research theorem —  attack plan
+      docs/W2-BEYOND-ATTACK-PLAN.md (PLANNED, not started);
+  (c) CLOSED post-queue (day035):  the d = 1/2 edge and the
+      t0 < 707/50 sliver are now named Lean items (SliverEdge.lean:
+      the SliverRecord pin record, edgePairAtZeroOne proven,
+      edgeVoid from the CITED zero-free regions), and the B-6A
+      composition onto the actual zero set is a single named
+      theorem (ZetaZeroSet.rhIfMarginZeta) with the leg map in the
+      docstring.  The remaining open legs are exactly [S1] and the
+      measured [S3/S4] fills —  see docs/CEILING-REPORT-DAY035.md
+      item 3 and the README final-state section.

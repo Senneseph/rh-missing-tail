@@ -161,6 +161,11 @@ measurement proxy;  the Lean statement is the bound-level form.
 1.  The UNIFORM theorem (in t and in the offset d) is not claimed.
     It remains the open research theorem;  day035 converts two of
     its three ingredients to named theorems and composes them.
+    Its attack plan is docs/W2-BEYOND-ATTACK-PLAN.md (PLANNED,
+    not started:  the target stated in the W2 walk form,  the
+    classical constraint —  Littlewood Omega± makes the
+    CONTINUOUS S(t) unbounded,  so the target is the graded walk
+    bound —  and routes R1-R4 in expected-effort order).
 2.  The wire's zero-side / definition-side / squeeze roles are
     named hypotheses (fills:  pinned data, W2-proven bounds), in
     the explicit-hypothesis pattern used throughout — no hidden
@@ -169,12 +174,33 @@ measurement proxy;  the Lean statement is the bound-level form.
     resumable from the 3 x 10^9 shards).  The no-divergence read
     past 9.06 x 10^9 zeros is density-model until it lands;  the
     Lean composition does not depend on it.
-4.  The low-t sliver (t < 14.14) and the d = 1/2 edge are pinned
-    (classical zero-free regions cited at the edge).
+4.  The low-t sliver (t < 14.14) and the d = 1/2 edge are now
+    CLOSED as named Lean items (day035,  post-queue):  SliverEdge
+    carries the sliver pin record (first-zero pin
+    14.134725141734693790457,  on-line count 1,  floor family
+    0 < 0.9975 < 1) and proves the edge vacuity (the d = 1/2
+    off-pair sits exactly on the CITED-classical zero-free lines
+    Re = 0 / Re = 1,  so the edge S2 window never sees an actual
+    zero).  The B-6A composition onto the actual zero set is now
+    a single named theorem,  ZetaZeroSet.rhIfMarginZeta,  whose
+    docstring maps every leg to its supplier;  the two legs still
+    open are [S1] (W2-beyond) and the measured [S3/S4] fills.
 5.  No RH claim is made or implied.  The claim level is:  a
     bound-level composition of the squeezed margin on the
-    quantized route, every atom labeled LEAN-PROVEN / CITED /
+    quantized route,  every atom labeled LEAN-PROVEN / CITED /
     PINNED / MEASURED.
+
+### Name (tpf)
+
+The approach is drafted as the **Riemann-von Mangoldt Gambit**
+(tpf - to be finalized;  the name describes the approach,  not
+any particular theorem):  the 120-year-old door on the
+zero-counting tail is marked "equivalent to RH";  the gambit
+keeps the tail and lets the detector-plus-squeeze around it do
+the closing.  Provenance (Riemann 1859;  von Mangoldt,  Math.
+Ann. 60 (1905) 1-19;  the S(t) = O(log log t) <=> RH mark):
+Appendix A of the README.
+
 
 ## 7.  Machine-checking statement
 

@@ -6698,3 +6698,50 @@ ceiling report re-issued.
   hypotheses).  Not established:  the S1 uniform theorem (P1.2)
   remains the open research theorem;  the 3e10 read past 9.06e9 is
   density-model until the cloud run lands.
+
+## 2026-09-20 — doc alignment day035 end game + the name (tpf)
+
+Owner pass: reflect the final End Game plan across the repo docs +
+name the approach.
+
+- **The name (tpf — to be finalized):** the **Riemann–von Mangoldt
+  Gambit** — the approach, not any particular theorem.  The door:
+  the zero-counting formula N(t) = main(t) + S(t) (Riemann 1859,
+  von Mangoldt, Math. Ann. 60 (1905) 1–19) whose tail carries the
+  classical mark "a small-error theorem for S — S(t) = O(log log t) —
+  is equivalent to RH" (Titchmarsh reference line; Platt–Trudgian
+  2015 Cor 1 is the explicit bound we cite).  The gambit: do not
+  bound the tail — keep it (measured, telescoped, certified) and let
+  the detector-plus-squeeze the smallness unlocks do the closing.
+  Alternates recorded: "von Mangoldt Gambit", "the missing-tail
+  gambit".  Introduced with provenance at: README name block +
+  Appendix A (provenance), PREPRINT §6 "Name (tpf)".  Search
+  (day035) confirmed the 1905 attribution before use.
+- README.md: name block (top), "The final state (day035)" section
+  after §2 (verification chain, 3e9 data, the two open legs, the
+  front page), status section updated to 2026-09-20 with the day035
+  additions bullet (W2 line, S3a, M6, S1LowT v2, SliverEdge,
+  ZetaZeroSet; full build rc=0 0 errors) + the open-legs bullet,
+  Materials: end-game modules + end-game documents links,
+  Appendix A (the door and its mark).
+- docs/INDEX.md: rows added for CEILING-REPORT-DAY035,
+  W2-BEYOND-ATTACK-PLAN, PREPRINT-DRAFT, 3E10-CLOUD-RUNBOOK,
+  END_GAME_PLAN.
+- formal/README.md: file map rows added for the W2 line
+  (W2Kernel/W2Integral/W2Telescope/W2Bound/W2M5), S3a, M6, S4Growth,
+  SliverEdge, ZetaZeroSet; the RhAttack.lean root row now lists the
+  S4/W2/end-game imports.
+- docs/PREPRINT-DRAFT-DAY035.md §6: item 4 rewritten (sliver/edge
+  CLOSED post-queue; front page ZetaZeroSet.rhIfMarginZeta), item 1
+  now points at the W2-beyond plan, "Name (tpf)" subsection added.
+- docs/END_GAME_PLAN.md: the "Remaining after this queue" block now
+  lists (a) 3e10 (owner), (b) [S1] + [S3/S4], (c) the post-queue
+  closures (SliverEdge, ZetaZeroSet).
+- docs/KNOWN_LIMITATIONS.md: CITED item 4 (the classical zero-free
+  regions) annotated with the day035 narrowing (the geometry is
+  PROVEN — edgePairAtZeroOne; edgeVacuous composes; CITED bears only
+  the zero-free assertion).
+
+No Lean changes in this pass (build untouched — last state: full
+lake build rc=0, 0 errors, new modules 0 warnings).  Name is tpf
+throughout; renaming later is a find-replace across 6 docs.
