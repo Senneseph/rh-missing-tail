@@ -75,3 +75,14 @@ import RhAttack.W2Telescope
 -- continuous-extension-at-t helper midExt (consumed by M4's straddle
 -- integrability). GREEN, no sorry.
 import RhAttack.W2Integral
+
+-- M4 (W2-LEAN-PLAN 3.6): W2Bound.lean — increment 1 of the section-1.4
+-- bounds:  (E1)  |DcSum| <= K * sum_j |DP j|  (the triangle form of the
+-- total-variation bound; the sharp endpoint form is the K2 instantiation,
+-- next increment),  (E2)  |BTerm| <= K * (|p 0| + |p M|),  plus the
+-- deferred M3a straddle lemma:  midExt is continuous — hence
+-- interval-integrable — on the straddle gap 0 < a < t < b,  glued from
+-- hasDerivAt_iff_tendsto_slope (K3: the slope tends to the derivative
+-- along the punctured neighbourhood) + continuousAt_update_same/_of_ne.
+-- GREEN, no sorry.
+import RhAttack.W2Bound
