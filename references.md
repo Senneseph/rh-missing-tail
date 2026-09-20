@@ -75,3 +75,82 @@ decomposition; (5) the instrument and its measured reliability
 If a seasoned reader recognizes (2)–(4) as known under other names,
 we want that reference: it is the single most valuable input this
 repository can receive.
+
+## The giants whose footsteps we directly tread
+
+Logged so the record does not seem ungrateful.  Entries carry
+the classical result we stand on,  where it lives (web-checked
+against the primary source where noted,  [pin] otherwise),  and
+exactly what this project uses from it.  Nothing here is claimed
+as new.
+
+- **Euler** — the product identity behind the zero-count (the
+  prime harmonic series / ζ-product line,  from the *De
+  seriebus infinitis* papers,  1748) [pin the exact
+  volume/pages at submission].  The "Euler action" identity of
+  this project is our flat 1-D reading of that classical
+  identity — classical fact,  project-unique framing —  and it
+  is the count the telescope telescopes.
+- **Riemann (1859)** — the explicit formula,  the f(x)/F(x)
+  machinery,  N(t),  and the hypothesis itself.  Held verbatim
+  in this repository (see Primary section above);  Wilkins's
+  English translation is the working copy.
+- **von Mangoldt (1905)** — "Zur Verteilung der Nullstellen
+der Riemannschen Funktion,"  *Mathematische Annalen* 60,
+  1–19 (provenance-verified during the naming pass).  The
+  rigorous N(t) = main(t) + S(t) separation —  the exact
+  identity the telescope walks.  The approach-name (tpf) carries
+  his name.
+- **Hadamard (1896)** — "Sur la distribution des zéros de la
+  fonction ζ(s) et ses conséquences arithmétiques,"  *Bulletin
+de la Société Mathématique de France* 24,  199–220 (numdam
+  copy);  **de la Vallée Poussin (1899)** — "Sur la fonction
+  ζ(s) de Riemann et le nombre des nombres premiers inférieurs
+  à une limite donnée,"  *Mémoires de l'Académie royale de
+  Belgique* 59,  1–74 (Persée).  The zero-free region:  our
+  CITED edge line (Re = 1,  and the functional-equation mirror
+  Re = 0) stands on their work (SliverEdge `EdgeZeroFree` is
+  the CITES-only leg).
+- **Hardy & Littlewood (1921)** — "The zeros of Riemann's
+  Zeta-Function on the critical line,"  *Mathematische
+  Zeitschrift* 10,  283–317;  and **Littlewood (1924)** —
+  "On the Zeros of the Riemann Zeta-Function,"  *Proc. London
+  Math. Soc.* (2) 24,  295–318 (both web-checked).  The Ω±
+  results on S(t):  the HONESTY CORE of the W2-beyond plan —
+  the continuous S(t) is unbounded,  which is why the object of
+  the uniform bound is the graded zero-grid walk,  not S(t)
+  itself.  This project would have been quietly wrong without
+  their work;  it is not,  because of it.
+- **Siegel (1905)** — the Riemann–Siegel formula in its
+  refined computational form (Göttingen Nachrichten;  refining
+  Riemann's 1859 formula) [pin the exact issue/page].  The
+  engine under every arg ζ(1/2+it) evaluation the walks
+  consume.
+- **Titchmarsh** — *The Theory of the Riemann Zeta-Function*,
+  2nd ed.,  Oxford (1986),  §9.7 — the door's mark in modern
+  dress:  the S(t) = O(log log t)-type bound ⟹ RH equivalence;
+  the standard reference line used in the attack plan and the
+  named provenance appendix.
+- **Platt (2015)** — "Isolating some non-trivial zeros of
+  zeta,"  *Math. Comp.* 84 (doi 10.1090/S0025-5718-2014-
+  02884-6) — the algorithm behind the LMFDB census;  and
+  **Platt & Trudgian (2015)** — *J. Number Theory* 147,
+  842–851 (Corollary 1:  the computational door-mark) —
+  provenance-verified during the naming pass.  Their precision
+  discipline (zeros to ±2.5×10⁻³¹,  completeness by rigorous
+  Turing's method) is what makes our md5-gated ingest a
+  certificate rather than a hope.
+- **The LMFDB collective** — beta.lmfdb.org/riemann-zeta-
+  zeros:  the public census our run ingests (12,857 shards
+  from the 3×10⁹ frontier toward 3×10¹⁰ in the current run),
+  with the raw-data reader convention from the LMFDB
+  repository's *platt_zeros.py* (Jonathan Bober) —  the 104-bit
+  record format our decoder (day024_platt_fast.py) was
+  verified against BEFORE trust,  and still md5-matches on
+  every shard of every run.  A database as a witness:  the
+  newest kind of giant —  the one that keeps the receipts.
+
+A note on windmills:  we tilt at these knowing,  per the
+owner's ruling,  that they might be giants —  and the
+footprints in this file suggest they were.
+

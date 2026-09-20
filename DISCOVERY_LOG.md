@@ -6910,3 +6910,42 @@ throughout; renaming later is a find-replace across 6 docs.
   owner's standing rule):  COMPUTE-DEPLOY-PLAN (section 1d
   rewrite,  section 4 requirements + pricing rows,  T2.5 row,
   T4 row),  3E10-CLOUD-RUNBOOK header,  INDEX row.
+
+## 2026-09-20 — Naming the telescope + the giants' debt logged (owner's honorific-and-funny request)
+
+- **Name candidate for the telescope (tpf):**  "Euler's
+  Action Periscope" (primary) —  a periscope is the
+  telescope for when you are INSIDE,  and we were inside
+  the tail looking out for the imposter zeros;  keeps
+  "Euler's action" (the identity that does the counting)
+  inside the name.  Alternates:  "The Missing-Tail
+  Periscope",  "Euler's After-Glow Walk",  "The Telescope
+  Euler Waved At".  Textual-only designation;  the committee
+  makes the formal reference.  Logged in the preprint ("Name
+  of the telescope (tpf)" subsection) + README Appendix A
+  pointer.
+- **references.md:  "The giants whose footsteps we directly
+  tread" section** (owner:  "so we don't seem ungrateful to
+  the Giants before us...  they might be giants").  Each
+  entry = the classical result + the verified source +
+  exactly what this project uses from it:  Euler (1748,
+  [pin]);  Riemann (1859,  verbatim-held);  von Mangoldt
+  (1905,  Math. Ann. 60:1–19);  Hadamard (1896,  BSMF 24:
+  199–220 —  numdam) + de la Vallée Poussin (1899,  Mem.
+  Acad. royale Belg. 59:1–74 —  Persée);  Hardy–Littlewood
+  (1921,  Math. Z. 10:283–317) + Littlewood (1924,  PLMS
+  (2) 24:295–318 —  the Ω± honesty core of W2-beyond);
+  Siegel (1905 R-S refinement,  [pin]);  Titchmarsh (1986
+  2nd ed. §9.7,  the door's mark);  Platt (2015,  Math.
+  Comp. 84,  doi 10.1090/S0025-5718-2014-02884-6 —  the
+  LMFDB census algorithm) + Platt–Trudgian (2015,  JNT
+  147:842–851 Cor 1);  the LMFDB collective (+ Bober's
+  platt_zeros.py reader convention —  the 104-bit record
+  the decoder md5-matches every shard of every run).
+- Web-check pass done per the project's reference doctrine
+  (Hadamard/PLVP via numdam+Persée,  Littlewood via
+  Cambridge Core/mathdoc,  Platt via the LMFDB source page +
+  Math Comp doi);  Euler 1748 and Siegel 1005 issue/pages
+  carry explicit [pin] markers rather than recalled detail.
+- Run check this turn:  775/12,857 shards,  ETA ~805min,
+  seam still chain-exact,  LMFDB steady.

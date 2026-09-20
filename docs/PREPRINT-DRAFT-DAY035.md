@@ -201,6 +201,29 @@ the closing.  Provenance (Riemann 1859;  von Mangoldt,  Math.
 Ann. 60 (1905) 1-19;  the S(t) = O(log log t) <=> RH mark):
 Appendix A of the README.
 
+### Name of the telescope (tpf)
+
+Name candidate for the zero-level telescoping itself (the
+walk that turns the count discrepancy into the per-zero
+drift sum —  the W2Telescope / W2Beyond line,  built on
+this project's flat reading of Euler's action identity):
+
+- **Euler's Action Periscope** (primary candidate,  tpf):  a
+  periscope is the telescope for when you are INSIDE —  and
+  we were inside the tail,  not outside it,  looking out for
+  the imposter zeros.  Keeps "Euler's action" (the identity
+  that does the counting) inside the name.
+- Alternates (tpf):  *The Missing-Tail Periscope* (the
+  project-voice sister name);  *Euler's After-Glow Walk* (the
+  giants' glow on the last mile —  the wistful one);  *The
+  Telescope Euler Waved At* (from the afterlife;  obvious in
+  hindsight —  the joke one).
+
+Committee note:  textual designation only;  the formal
+reference is the committee's to make.  None of these names
+claims authorship of any classical result —  the giants' log
+in references.md carries the actual debts.
+
 ### Final gate and pre-registered outcomes (tpf)
 
 The last open mathematical content is one named unit, the [S1]
