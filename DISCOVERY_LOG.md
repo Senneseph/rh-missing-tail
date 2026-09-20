@@ -7143,3 +7143,62 @@ primary sources,  NOT recalled:
   data-witness project;  logged in the naming section.)
 - The instrument has no surviving proper name —  it is the
   reed,  which was also the standard unit of length.
+
+## 2026-09-20 — T2.5 parallel orchestrator: built, selftest-passed, handed over, one race caught and fixed
+
+- **Build (scripts/rh/day035_t25_orchestrator.py, single file,
+  stdlib only):**  8 fetch workers (curl + md5 + meta,  ~0 CPU)
+  + 12 decode workers (the UNCHANGED verified decoder,  one
+  core each) + a single main-thread appender doing byte-exact
+  ordered appends with lastN/manifest/state bookkeeping
+  strictly after each append —  the sequential script and this
+  runner share the same state files,  so either can resume the
+  other.  Core budget (owner rule,  2 cores always reserved on
+  16):  DECODE_WORKERS + OVERHEAD = 12 + 2 = 14 hard-capped by
+  assert;  fetch workers are network-I/O blocked.
+- **Selftest (all gates PASS before handoff):**  (1) one real
+  md5-gated shard (5855246000) decoded through the pipeline
+  path and through a direct sequential-style path —  BANDS
+  BIT-EXACT (md5 match);  (2) SHARD content headers identical
+  (except wall-clock sec);  (3) torn-tail recovery drill on
+  scratch files with a synthetic frontier —  truncated 973
+  -> 800,  manifest/state trimmed,  lastN reset,  exactly as
+  specified.
+- **Handoff (surgical):**  SIGTERM'd the sequential run in a
+  download window (band DIFF = 0.0 afterward —  no torn tail
+  this time).  Final sequential:  1,389 shards (last
+  5914046000).
+- **First orchestration run crashed at its 13th shard — and
+  the safety design held:**  release_for_decode could
+  re-release a shard that was ALREADY popped into the decode
+  pool (window math looked from head+len(window),  so once the
+  head shard was popped-but-not-appended it was eligible
+  again).  Two concurrent decodes of one shard:  the late
+  decode deleted the first decode's temp mid-flight (its
+  output vanished into an unlinked inode),  and the appender
+  hit tsize = 0.  The DECODE-SIZE ASSERT stopped the process
+  BEFORE any bad bytes reached the band (band DIFF stayed
+  0.0;  state/lastN consistent;  the orphan finisher left a
+  full-size temp that the next run's fresh-decode policy
+  ignores).  Lesson:  every queue cursor must be released
+  EXACTLY ONCE.
+- **Fix:**  monotone release cursor (self.rel_idx) —  each
+  shard released at most once,  chain anchor = lastN at head,
+  else the previous released shard's last_Nt1;  plus the
+  stale-.ok shortcut removed from decode_shard (a killed run's
+  sidecars can never skip verification).
+- **Steady state after re-launch (measured):**  2.00s/shard
+  (45 shards / 90s) vs 8.1s/shard sequential = 4.05x.
+  89MB per shard at 2.0s = ~44.5 MB/s aggregate —  the
+  LMFDB box cap (recovered from today's ~19 MB/s throttle),
+  meaning the run is now exactly at the NETWORK FLOOR:
+  decode (2.5s/shard on 12 workers = 0.21s/shard capacity)
+  is fully hidden behind the download,  as designed.  Load
+  ~2 (the machine waits on the pipe;  that is now correct,
+  not a defect).  Band DIFF = 0.0 held through the crash and
+  re-launch.  222/11,457 pending appended in the first
+  ~7.5 min,  zero FATALs after the fix,  /tmp temp usage
+  ~6GB of 78GB.
+- **ETA at 2.0s/shard for the 11,235 remaining pending:
+  ~6.3h** (sequential from the same point would be
+  ~25.6h).
