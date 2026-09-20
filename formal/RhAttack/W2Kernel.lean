@@ -41,7 +41,7 @@ K4 (log-telescope) and the bound lemmas (E1-E4) land later.
 -/
 import Mathlib
 
-open Real Filter
+open Real Filter BigOperators
 open scoped Topology
 
 namespace W2K
@@ -183,3 +183,169 @@ theorem W2K.rhoHasDerivAt (x : ℝ) (hpos : 0 < x) :
     simpa only [hpoint] using (EventuallyEq.refl (𝓝 x) (fun u : ℝ => Rho u))
   exact (hfinal.congr_of_eventuallyEq heq).congr_deriv
     (by simp [fDiv, Rho]; try field_simp [hp.ne', hpos.ne', hxp.ne']; try ring)
+
+/-! ## K2: kernel monotonicity (the sign of Ker') -/
+
+/-- (K2, crossed form, exact) For `0 < t < g`, the kernel derivative at g:
+    `1/(g - t) + Sm (g t) = g * (2*(t^2 + 1/4)*(g^2 + 1/4) - (g^2 - t^2)) / ((g^2 - t^2)*(g^2 + 1/4)^2)`.
+    The crossed difference expands to `2*t^2*g^2 - g^2/2 + (3/2)*t^2 + 1/8`
+    (the plan's K2 note writes `2*t^2*g^2 + (3/2)*t^2 + 1/2`; the true expansion
+    keeps the `-g^2/2` term, which is why the blanket above-claim needs a
+    side condition; see `kerDerivPosAbove`). -/
+theorem W2K.kerCrossed (g t : ℝ) (hne : g ≠ t) (hsum : 0 < g + t) :
+    1 / (g - t) + Sm g t =
+      g * (2 * (t^2 + 1/4) * (g^2 + 1/4) - (g^2 - t^2)) / ((g^2 - t^2) * (g^2 + 1/4) ^ 2) := by
+  have hsub : g - t ≠ 0 := sub_ne_zero.mpr hne
+  have hprod : g^2 - t^2 = (g - t) * (g + t) := by ring
+  rw [Sm, hprod, show g * g + 1/4 = g^2 + 1/4 from by ring]
+  field_simp [hsub, hsum.ne', show (g^2 + 1/4) ≠ 0 by positivity]
+  ring
+
+/-- (K2, sign, exact) For `0 < t < g`: Ker' > 0 iff the crossed inequality holds. -/
+theorem W2K.kerDerivPosAboveCross (g t : ℝ) (ht : 0 < t) (hgt : t < g) :
+    (0 < 1 / (g - t) + Sm g t) ↔ 2 * (t^2 + 1/4) * (g^2 + 1/4) > g^2 - t^2 := by
+  have hpos_g : 0 < g := lt_trans ht hgt
+  have hgq : 0 < g^2 - t^2 := by
+    have hprod : g^2 - t^2 = (g - t) * (g + t) := by ring
+    rw [hprod]
+    exact mul_pos (sub_pos.mpr hgt) (add_pos hpos_g ht)
+  have hD : 0 < (g^2 - t^2) * (g^2 + 1/4) ^ 2 :=
+    mul_pos hgq (pow_pos (by positivity : 0 < g^2 + 1/4) 2)
+  rw [W2K.kerCrossed g t (ne_of_gt hgt) (add_pos (lt_trans ht hgt) ht)]
+  constructor
+  · intro h
+    rw [div_pos_iff] at h
+    rcases h with (⟨hga, _⟩ | hneg)
+    · exact sub_pos.mp (pos_of_mul_pos_right hga (le_of_lt hpos_g))
+    · linarith [hD]
+  · intro hcross
+    exact div_pos (mul_pos hpos_g (sub_pos.mpr hcross)) hD
+
+/-- (K2, above, sufficient condition) If `t^2 >= 1/2` (in particular for every t in
+    the pinned zero bands) and `t < g`, then Ker' > 0. -/
+theorem W2K.kerDerivPosAbove (g t : ℝ) (ht : 0 < t) (hgt : t < g) (ht2 : 1/2 ≤ t^2) :
+    0 < 1 / (g - t) + Sm g t := by
+  have hdiff : 2 * (t^2 + 1/4) * (g^2 + 1/4) - (g^2 - t^2) =
+      g^2 * (2 * t^2 - 1/2) + (3/2) * t^2 + 1/8 := by ring
+  have h2t2 : 0 ≤ 2 * t^2 - 1/2 := by nlinarith [ht2]
+  have hterm : 0 ≤ g^2 * (2 * t^2 - 1/2) := mul_nonneg (sq_nonneg g) h2t2
+  have hrem : 0 < (3/2) * t^2 + 1/8 := by positivity
+  have hcrossed : 0 < 2 * (t^2 + 1/4) * (g^2 + 1/4) - (g^2 - t^2) := by
+    rw [hdiff]
+    linarith [hterm, hrem]
+  exact (W2K.kerDerivPosAboveCross g t ht hgt).mpr (sub_pos.mp hcrossed)
+
+/-- (K2, below) For `0 < g < t`, Ker' < 0 (unconditional). -/
+theorem W2K.kerDerivNegBelow (g t : ℝ) (ht : 0 < t) (hpos_g : 0 < g) (hlt : g < t) :
+    1 / (g - t) + Sm g t < 0 := by
+  have hne : g ≠ t := hlt.ne
+  have hsum : 0 < g + t := add_pos hpos_g ht
+  rw [W2K.kerCrossed g t hne hsum]
+  have hsq_lt : g^2 < t^2 := by nlinarith [ht, hpos_g, hlt]
+  have hcross_pos : 2 * (t^2 + 1/4) * (g^2 + 1/4) - (g^2 - t^2) > 0 := by
+    rw [show 2 * (t^2 + 1/4) * (g^2 + 1/4) - (g^2 - t^2) =
+          2 * (t^2 + 1/4) * (g^2 + 1/4) + (t^2 - g^2) from by ring]
+    exact add_pos (by positivity) (sub_pos.mpr hsq_lt)
+  have hD : (g^2 - t^2) * (g^2 + 1/4)^2 < 0 := by
+    have hneg : g^2 - t^2 < 0 := sub_neg.mpr hsq_lt
+    have hpos4 : 0 < (g^2 + 1/4)^2 := pow_pos (by positivity : 0 < g^2 + 1/4) 2
+    nlinarith [hneg, hpos4]
+  rw [div_neg_iff]
+  left
+  exact ⟨mul_pos hpos_g hcross_pos, hD⟩
+
+/-- Ker is continuous on any set where `u - t` and `u + t` never vanish
+    (the `u*u + 1/4` denominator is always positive). -/
+theorem W2K.kerContinuousOn (t : ℝ) {s : Set ℝ}
+    (hs : ∀ u ∈ s, u - t ≠ 0 ∧ u + t ≠ 0) :
+    ContinuousOn (fun u => Ker u t) s := by
+  have hsub : ContinuousOn (fun u : ℝ => u - t) s :=
+    ContinuousOn.sub continuousOn_id (continuousOn_const)
+  have habs : ContinuousOn (fun u : ℝ => |u - t|) s :=
+    (continuous_abs.continuousOn (s := Set.univ)).comp hsub (fun _ _ => trivial)
+  have habsnz : ∀ u ∈ s, |u - t| ≠ 0 := fun u hu =>
+    (abs_pos.2 ((hs u hu).1)).ne'
+  have hlogA : ContinuousOn (fun u : ℝ => Real.log |u - t|) s :=
+    ContinuousOn.log habs habsnz
+  have hadd : ContinuousOn (fun u : ℝ => u + t) s :=
+    ContinuousOn.add continuousOn_id (continuousOn_const)
+  have haddnz : ∀ u ∈ s, u + t ≠ 0 := fun u hu => (hs u hu).2
+  have hlogB : ContinuousOn (fun u : ℝ => Real.log (u + t)) s :=
+    ContinuousOn.log hadd haddnz
+  have hsq : ContinuousOn (fun u : ℝ => u * u + 1/4) s :=
+    (ContinuousOn.mul continuousOn_id continuousOn_id).add (continuousOn_const)
+  have hsqnz : ∀ u ∈ s, u * u + 1/4 ≠ 0 := fun u _ => by
+    have h : 0 < u * u + 1/4 := by
+      rw [show u * u = u^2 from by ring]
+      positivity
+    exact h.ne'
+  have hlogC : ContinuousOn (fun u : ℝ => Real.log (u * u + 1/4)) s :=
+    ContinuousOn.log hsq hsqnz
+  have hinv : ContinuousOn (fun u : ℝ => (u * u + 1/4)⁻¹) s :=
+    ContinuousOn.inv₀ hsq hsqnz
+  have hfinv : ContinuousOn (fun u : ℝ => (1/2 : ℝ) * (u * u + 1/4)⁻¹) s :=
+    ContinuousOn.const_mul hinv (1/2)
+  have hKer : (fun u => Ker u t) =
+      (fun u => Real.log |u - t| + Real.log (u + t)) -
+        (fun u => Real.log (u * u + 1/4)) + (fun u => (1/2) * (u * u + 1/4)⁻¹) := by
+    funext u
+    simp [Ker, div_eq_mul_inv]
+  rw [hKer]
+  exact (hlogA.add hlogB).sub hlogC |>.add hfinv
+
+/-- (K2, above, continuous) If `t^2 >= 1/2`, the kernel is strictly increasing
+    on (t, infinity) — in particular on (t, G2]. -/
+theorem W2K.kerStrictMonoAbove (t : ℝ) (ht : 0 < t) (ht2 : 1/2 ≤ t^2) :
+    StrictMonoOn (fun u => Ker u t) (Set.Ioi t) := by
+  apply strictMonoOn_of_deriv_pos (convex_Ioi t)
+  · exact W2K.kerContinuousOn t (fun u hu =>
+      ⟨(by nlinarith [Set.mem_Ioi.mp hu] : 0 < u - t).ne',
+       (by nlinarith [Set.mem_Ioi.mp hu, ht] : 0 < u + t).ne'⟩)
+  · intro x hx
+    rw [interior_Ioi] at hx
+    have hlt : t < x := Set.mem_Ioi.mp hx
+    have hder : deriv (fun u => Ker u t) x = 1 / (x - t) + Sm x t :=
+      (W2K.kerHasDerivAt x t (ne_of_gt hlt) (by nlinarith [hlt, ht])).deriv
+    rw [hder]
+    exact W2K.kerDerivPosAbove x t ht hlt ht2
+
+/-- (K2, below, continuous) The kernel is strictly decreasing on (0, t). -/
+theorem W2K.kerStrictAntiBelow (t : ℝ) (ht : 0 < t) :
+    StrictAntiOn (fun u => Ker u t) (Set.Ioo 0 t) := by
+  apply strictAntiOn_of_deriv_neg (convex_Ioo 0 t)
+  · exact W2K.kerContinuousOn t (fun u hu =>
+      ⟨(by nlinarith [hu.1, hu.2] : u - t < 0).ne,
+       (by nlinarith [hu.1, ht] : 0 < u + t).ne'⟩)
+  · intro x hx
+    rw [interior_Ioo] at hx
+    have hder : deriv (fun u => Ker u t) x = 1 / (x - t) + Sm x t :=
+      (W2K.kerHasDerivAt x t (hx.2.ne) (add_pos hx.1 ht)).deriv
+    rw [hder]
+    exact W2K.kerDerivNegBelow x t ht hx.1 hx.2
+
+/-! ## K4: the range and log telescopes -/
+
+/-- Range telescope: sum of forward differences over range n. -/
+theorem W2K.sumRangeTel (q : ℕ → ℝ) (n : ℕ) :
+    (∑ j ∈ Finset.range n, (q (j + 1) - q j)) = q n - q 0 := by
+  induction n with
+  | zero => simp
+  | succ n ih =>
+    rw [Finset.sum_range_succ, ih]
+    ring
+
+/-- Reversed range telescope. -/
+theorem W2K.sumRangeTelRev (q : ℕ → ℝ) (n : ℕ) :
+    (∑ j ∈ Finset.range n, (q j - q (j + 1))) = q 0 - q n := by
+  induction n with
+  | zero => simp
+  | succ n ih =>
+    rw [Finset.sum_range_succ, ih]
+    ring
+
+/-- (K4) Log telescope: for a partition x_0 ... x_M, the log-differences
+    against the pole t telescope to the endpoint difference. -/
+theorem W2K.logTelescope (M : ℕ) (x : ℕ → ℝ) (t : ℝ) :
+    (∑ j ∈ Finset.range M, (Real.log |x (j + 1) - t| - Real.log |x j - t|)) =
+      Real.log |x M - t| - Real.log |x 0 - t| :=
+  W2K.sumRangeTel (fun j : ℕ => Real.log |x j - t|) M
