@@ -1,6 +1,6 @@
 # Big-data crunch and deploy plan (Docker-in-repo + cloud)
 
-Written 2026-09-20 (day035) so the plan survives across sessions.
+So the plan survives across sessions.
 Every number below was measured or live-checked on this date;
 estimates say so when estimate.
 
@@ -80,14 +80,42 @@ audit is sound as written.
 
 ### 1d.  Throughput and runtime (from the 3e9 run,  measured)
 
--  3e9 stream:  **475 shards in 44 min wall** (25.1GB out,
-    ~9.5MB/s sustained,  download-bound).
--  3e10 extension:  12,858 shards,  ~700-750GB total →
-    ~20h at the same sustained rate;  on a 1Gbps cloud box
-    (sustained ~100MB/s if LMFDB does not throttle) →
-    **estimate 3-5h wall**.  LMFDB rate-limiting is the only
-    unknown that could stretch it;  the script's per-shard
-    backoff (5 attempts,  120s) + resumability absorb it.
+The per-shard wall decomposes into two measured pieces:
+
+-  DOWNLOAD:  one shard ~54MB.  On this box ~3s (residential);
+    on a 1Gbps cloud box ~0.5-1s.
+-  DECODE (the hidden half):  the shards are NOT raw floats —
+    each zero is 13 bytes of 104-bit fixed-point STEPS (the
+    Bober/Platt format),  and the verified decoder does a
+    per-zero 104-bit integer walk in pure python:  **~2.5s per
+    shard,  measured on the 3e9 run** (6.5M zeros).  CPU-bound,
+    download-speed-independent.
+
+So for the 12,858-shard 3e10 extension:
+
+-  SEQUENTIAL script on a 1Gbps box:  decode-bound at
+    ~3.1s/shard → **~11h wall** (not the 3-5h a
+    download-only estimate suggests).
+-  PARALLEL orchestration (fetch pipelined,  4-8 worker
+    decodes of the UNCHANGED verified decoder,  ordered
+    byte-append + the same md5/chain/gate asserts):  decode
+    overlaps the download → **~3h wall**.  This is work unit
+    T2.5 (a few hours of scripting,  zero change to any
+    verification semantic:  same decoder,  same md5 gates,
+    same count chain,  same finish gates).
+-  **GPU:  no speedup.**  There is no math kernel here —  the
+    zeros are public precomputed data (the LMFDB census) that
+    the box DOWNLOADS;  the per-zero work is a scalar 104-bit
+    integer add + float rebuild,  which a GPU does no better
+    than a CPU core.  The levers are bandwidth (1Gbps standard)
+    and decode parallelism (4-8 vCPU).  (A GPU would only
+    enter if we ever COMPUTED zeros beyond the public index —
+    a separate,  much larger,  hypothetical job.)
+
+CPU/RAM reality:  4-8 vCPU,  8GB RAM is plenty (each decode
+worker ~200MB;  the finish gates stream at ~1GB peak).  The
+earlier "3-5h / download-bound" line is superseded by the
+decomposition above.
 
 ────────────────────────────────────────────────────────────
 ## 2.  Ironclad-script contract (what guarantees,  checked)
@@ -188,14 +216,17 @@ sufficient —  no prior checkout state needed.
 ## 4.  Cloud choice (real pricing,  checked 2026-09-20)
 
 Requirements (from 1b/1d):  >= 1TB disk (700-750GB output +
-headroom),  1Gbps uplink,  4+ vCPU,  8GB+ RAM (peak ~1-4GB
-for the gate;  the decode loop is tiny),  ~3-24h of runtime
-(billed per-second/per-hour),  then RETRIEVAL of the final
-band file (~700-750GB egress).
+headroom),  1Gbps uplink,  **4-8 vCPU (decode parallelism is
+the dominant wall-time lever —  see 1d)**,  8GB+ RAM (peak
+~1-4GB for the gates),  ~3-11h of runtime (billed
+per-second/per-hour),  then RETRIEVAL of the final band file
+(~700-750GB egress).  **No GPU:  the workload is a ~700GB
+download + a scalar per-zero integer decode —  there is no
+dense numeric kernel for a GPU to eat (see 1d).**
 
 | Option | Spec | Compute cost (run) | Storage | Egress of 750GB | Notes |
 | --- | --- | --- | --- | --- | --- |
-| **DigitalOcean (owner's pick)** | 8GB/4vCPU droplet ($48/mo,  per-second billing since 2026 → ~$0.03/h) | ~$0.20-0.30 for 4-8h | 1TB block volume @ $0.10/GiB/mo,  per-second → ~$1.40 for a day | $0.01/GB → **~$7.50** | Easiest ops;  total run ≈ **$10-15** |
+| **DigitalOcean (owner's pick)** | 8GB/**4-8 vCPU** droplet (per-second billing → ~$0.03/h) | ~$0.30-0.60 for the 3-11h run | 1TB block volume @ $0.10/GiB/mo,  per-second → ~$1.40 for a day | $0.01/GB → **~$7.50** | Easiest ops;  total ≈ **$10-15** |
 | Hetzner dedicated EX101 | i9-13900,  64GB, **2x1.92TB local NVMe** (RAID1),  1Gbit guaranteed,  traffic unlimited | ~EUR 0.15/h → **~EUR 4 for 24h**;  setup EUR 39-44 one-off | included (local NVMe,  no volume attach) | **unlimited → free** | Best perf/price;  ops = root VM (SSH-only,  no fancy console);  one-off setup fee |
 | Hetzner cloud (CX/CX32) | 2-16 vCPU,  8-64GB,  NVMe | ~EUR 2-6 for the run | volume ~EUR 0.04/GiB/day-ish | 20TB free tier | Between the two |
 | This machine | 2 cores,  31GB,  132GB free | free | **infeasible — 132GB free < 700GB needed** | - | ruled out |
@@ -279,10 +310,11 @@ The walk-pin (step 8) is the referee that picks among them.
 
 | Unit | Content | Size | Status |
 | --- | --- | --- | --- |
-| T1 | Script audit + 3 fixes (assert bound,  gate syntax,  RAM-safe gate) + live preflights | small | **DONE 2026-09-20** (this session) |
+| T1 | Script audit + 3 fixes (assert bound,  gate syntax,  RAM-safe gate) + live preflights | small | **DONE** (this session) |
+| T2.5 | Parallel orchestration of the 3e10 run:  pipelined fetch + 4-8 workers running the UNCHANGED verified decoder,  ordered append,  identical md5/chain/gate asserts (1d:  ~11h sequential → ~3h parallel) | ~1-2h scripting + a 1-shard parallel-vs-sequential bit-exact cross-check | after T2,  before launch |
 | T2 | Dockerfile + rh-reproduce runner + .dockerignore + lockfile + local image build + in-container smoke tests (one module lean-build,  one shard md5 fetch) | the one medium unit,  est 2-4h | OWNER GO-AHEAD |
 | T3 | Provision DO (or Hetzner) + push image + attach volume + launch | owner action w/ my protocol,  ~1h hands-on | after T2 |
-| T4 | Watch run (3-5h cloud,  mostly external) + retrieve + local gate/walk-pin + outcome classification | ~1-2h agent work after data | after T3 |
+| T4 | Watch run (3-11h cloud,  mostly external) + retrieve + local gate/walk-pin + outcome classification | ~1-2h agent work after data | after T3 |
 | T5 | Publish polish (README,  compose,  matrix,  tag,  preprint sentence swap) | small,  several passes | after T4 |
 
 Nothing here is a hidden >4h job:  T2 is the largest unit and

@@ -3,8 +3,13 @@
 Handed off 2026-09-20 per owner direction (the extension is a
 "~700-750GB" job:  the local disk is blocked at 132GB free of
 ~765GB needed).  Throughput measured 2026-09-20 from the 3e9
-run (475 shards / 44 min,  ~9.5MB/s):  ~20h local-equivalent,
-**estimate 3-5h on a 1Gbps cloud box**.  See
+run (475 shards / 44 min):  per shard = ~3s download + ~2.5s
+DECODE (the 104-bit fixed-point per-zero walk is CPU-bound,
+not bandwidth-bound) → a 1Gbps cloud box runs it **~11h
+sequential,  ~3h with the T2.5 parallel orchestration (4-8
+vCPU;  unchanged decoder,  identical gates — COMPUTE-DEPLOY-
+PLAN.md section 1d;  no GPU benefit:  the data is downloaded,
+not computed)**.  See
 COMPUTE-DEPLOY-PLAN.md for the full plan (container design,
 cloud options with pricing, launch protocol, and the 2026-09-20
 script audit that fixed 3 real launch blockers in the companion

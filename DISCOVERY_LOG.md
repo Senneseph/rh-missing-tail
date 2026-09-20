@@ -6878,3 +6878,35 @@ throughout; renaming later is a find-replace across 6 docs.
   container must carry its own lock (the plan says so
   explicitly).  rh-missing-tail previously had NO Dockerfile
   (checked 2026-09-20);  T2 creates it.
+
+## 2026-09-20 — 3e10 runtime decomposed: the DECODE is the bottleneck, not the download; GPU ruled out
+
+- **The Platt/Bober shard format made the estimate wrong in a
+  good way:** the .dat shards are NOT raw floats — each zero
+  is 13 bytes of 104-bit fixed-point STEPS (zero k =
+  t0 + cumsum(steps) · 2⁻¹⁰¹),  so the verified decoder
+  (day024_platt_fast.py) does a per-zero 104-bit integer walk
+  in pure python.  Measured on the 3e9 run:  ~2.5s decode per
+  shard (~6.5M zeros) vs ~3s download on this box.
+- **Consequence for the 3e10 run (12,858 shards) on a 1Gbps
+  box:**  sequential = decode-bound ~3.1s/shard → ~11h wall
+  (the earlier "3-5h download-bound" estimate was wrong);
+  parallel orchestration (fetch pipelined + 4-8 workers
+  running the UNCHANGED verified decoder + ordered append +
+  identical md5/chain/gate asserts) → ~3h wall.  New work
+  unit T2.5 (1-2h scripting + 1-shard bit-exact
+  parallel-vs-sequential cross-check;  zero change to
+  verification semantics).
+- **GPU:  no speedup** —  there is no math kernel:  the zeros
+  are public precomputed data (LMFDB census) the box
+  downloads;  the per-zero work is a scalar 104-bit integer
+  add + float rebuild.  Levers = bandwidth (1Gbps standard) +
+  decode parallelism (4-8 vCPU).  A GPU would only enter for
+  a hypothetical future job of COMPUTING zeros beyond the
+  public index.
+- **CPU/RAM spec corrected:**  4-8 vCPU (was "4+"),  8GB RAM
+  (each worker ~200MB;  gates stream ~1GB peak).
+- Docs updated to match (no new dates in the docs,  per the
+  owner's standing rule):  COMPUTE-DEPLOY-PLAN (section 1d
+  rewrite,  section 4 requirements + pricing rows,  T2.5 row,
+  T4 row),  3E10-CLOUD-RUNBOOK header,  INDEX row.
