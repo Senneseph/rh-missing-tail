@@ -108,7 +108,7 @@ height, changes the kernel by at least f(δ, t₀)·|K|, with f explicit and
 (Part 7, the open piece) bounding the definition side *below* the detector
 scale, with no zero-count input. Part 8 combines them.
 
-### The final state (day035,  2026-09-20)
+### The Final State:
 
 The argument above has since been carried to its end-game form:  a
 **machine-verified verification chain** —  the W2 telescope (the
