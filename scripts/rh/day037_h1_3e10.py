@@ -121,7 +121,7 @@ class Tail3E10:
         d_first, D_last = _first_last(D_F)
         assert self.L[-1] < a_first and A_last < B_last
         assert b_first < A_last, "A/B overlap expected"
-        assert A_last < c_first or True
+        assert B_last < c_first, "B'/C seam not ordered"
         assert C_last < d_first, "C/D seam not ordered"
         # --- stitch B at A's last zero --------------------------------
         with open(B_F, 'rb', buffering=0) as f:
@@ -142,10 +142,30 @@ class Tail3E10:
             match = (a_tail == seg[:st])
             self.n_overlap_checked = int(match.sum())
             self.n_overlap_total = st
-            assert self.n_overlap_checked == self.n_overlap_total, \
-                ("A/B overlap cross-check FAILED: %d/%d byte-equal -- "
-                 "files disagree,  investigate before any certified "
-                 "claim" % (self.n_overlap_checked, self.n_overlap_total))
+            nmis = st - self.n_overlap_checked
+            # Rounding-level disagreement (|A-B| <= 1 ulp) is certifiable:
+            # the stream takes the overlap from A;  each zero whose A-value
+            # disagrees with B's by <= 1 ulp is certified with dg x3
+            # (|delta| <= 1.5 ulp of the true zero).  Anything beyond the
+            # rounding level aborts the run.
+            if nmis:
+                jmis = np.nonzero(~match)[0]
+                d = np.abs(a_tail[jmis] - seg[:st][jmis])
+                ulp = np.spacing(a_tail[jmis])
+                assert bool((d <= ulp).all()), \
+                    ("A/B overlap disagreement beyond rounding level: "
+                     "max |A-B| = %.3e ulp -- abort, investigate"
+                     % float((d / ulp).max()))
+                nA_tot = os.path.getsize(A_F) // 8
+                self.extra_idx = np.sort(jmis.astype(np.int64)
+                                         + (self.L.size + nA_tot - st))
+                if verbose:
+                    print("overlap: %d/%d zeros differ by <=%.2f ulp "
+                          "(last byte,  rounding-level) --  those indices "
+                          "certified with dg x3"
+                          % (nmis, st, float((d / ulp).max())), flush=True)
+            else:
+                self.extra_idx = np.zeros(0, dtype=np.int64)
             if verbose:
                 print("stitch: B from element %d (first zero %.6f); overlap "
                       "cross-check %d/%d byte-equal"
@@ -184,17 +204,23 @@ class Tail3E10:
         return 4, i0
 
     def read_slab(self, m):
-        """the m logical elements starting at self._pos (in-place)."""
+        """the m logical elements starting at self._pos (in-place).
+        The cursor advances EXACTLY m per call  (a stale double
+        advance per chunk was found by the streaming selftest:  it
+        dropped the first `take` zeros of the next section at every
+        seam-crossing slab and appended `take` strays from the far
+        end)."""
         out = np.empty(m, dtype='<f8')
+        base = self._pos
         got = 0
         while got < m:
-            sec, off = self._section_of(self._pos + got)
+            sec, off = self._section_of(base + got)
             if sec == 0:
                 take = min(m - got, self.nL - off)
                 out[got:got + take] = self.L[off:off + take]
             else:
                 path = (None, A_F, B_F, C_F, D_F)[sec]
-                base = off if sec != 2 else off + self.B_stitch
+                foff = off if sec != 2 else off + self.B_stitch
                 take = min(m - got,
                            (self.nA, self.nA, self.nB, self.nC,
                             self.nD)[sec] - off)
@@ -203,12 +229,12 @@ class Tail3E10:
                         self._fh.close()
                     self._fh = open(path, 'rb', buffering=0)
                     self._fh_path = path
-                self._fh.seek(base * 8)
+                self._fh.seek(foff * 8)
                 data = self._fh.read(take * 8)
                 assert len(data) == take * 8, "short read in tail stream"
                 out[got:got + take] = np.frombuffer(data, dtype='<f8')
             got += take
-            self._pos += take
+        self._pos = base + m
         return out
 
     def restart(self):
@@ -256,7 +282,7 @@ def _count_below_file(path, t, stitch=0):
 # slab of size m -- the only change is ceil(log2 m) for the Higham
 # pairwise factor)
 # ----------------------------------------------------------------------
-def slab_budget(c, tf, t2, m):
+def slab_budget(c, tf, t2, m, start_idx=0, extra_idx=None):
     g2 = c * c
     A = g2 + 0.25
     re_t = np.log(np.abs(g2 - t2)) - np.log(A) + 0.5 / A
@@ -278,6 +304,17 @@ def slab_budget(c, tf, t2, m):
     B_im = (GAM1_64 * s_abs_im
             + k * 2.0 * U64 * s_abs_im
             + float((dg * dimdg).astype(np.longdouble).sum()))
+    if extra_idx is not None and extra_idx.size:
+        lo_ = int(np.searchsorted(extra_idx, start_idx, side='left'))
+        hi_ = int(np.searchsorted(extra_idx, start_idx + m, side='right'))
+        if hi_ > lo_:
+            loc = extra_idx[lo_:hi_] - start_idx
+            # the A/B overlap-rounding zeros:  dg x3,  i.e.  two extra
+            # standard per-term dg*|d/dg| contributions  (|delta| <= 1.5 ulp)
+            B_re += (2.0 * float((dg[loc] * dredg[loc])
+                                 .astype(np.longdouble).sum()))
+            B_im += (2.0 * float((dg[loc] * dimdg[loc])
+                                 .astype(np.longdouble).sum()))
     dmin = float(np.min(np.abs(c - tf)))
     del g2, A, re_t, im_t, abs_re, dg, dredg, dimdg
     return sub_re, sub_im, B_re, B_im, s_abs_re, dmin
@@ -297,7 +334,8 @@ def tail_with_budget(T, tf):
     while i < n:
         m = min(SUB, n - i)
         c = T.read_slab(m)
-        sr, si, br, bi, s_ar, dm = slab_budget(c, tf, t2, m)
+        sr, si, br, bi, s_ar, dm = slab_budget(
+            c, tf, t2, m, i, getattr(T, 'extra_idx', None))
         re += np.longdouble(sr)
         im += np.longdouble(si)
         B_re += br
@@ -307,6 +345,10 @@ def tail_with_budget(T, tf):
         nsub += 1
         i += m
         del c
+        if nsub % 500 == 0:
+            print("  ...t=%.4g tail sweep %.0f%% (%d pieces)"
+                  % (tf, 100.0 * i / n, nsub),
+                  flush=True)
     nlt = T.count_below(tf)
     re_f = float(re)
     im_f = float(im + nlt * np.pi)
@@ -599,15 +641,17 @@ def selftest_core():
 
 
 def selftest_streaming():
-    """(b) STREAMING containment with slab crossing:  34M synthetic
-    zeros in two files (18M + 16M,  crossing the 2^25 = 33.55M slab
-    boundary);  the slab pipeline + budget must contain the dps-60
-    exact value for both stored==true and 0.5ulp-offset settings."""
-    print("SELFTEST(b): streaming containment (34M, 2 files, slab "
-          "crossing)", flush=True)
+    """(b) STREAMING containment,  scaled down for speed:  4.2M
+    synthetic zeros in two files (2.1M + 2.1M+1)  in nine 2^19
+    pieces,  the file seam landing mid-piece;  the piece pipeline +
+    budget must contain the dps-60 exact value  for both stored=true
+    and 0.5ulp-offset settings.  (Same m=min(piece, n-i) +
+    k=ceil(log2 m) bookkeeping the real run uses at 2^25.)"""
+    print("SELFTEST(b): streaming containment (4.2M, 2 files, 9 pieces, "
+          "file seam mid-piece)", flush=True)
     t0 = time.time()
     rng = np.random.default_rng(42)
-    n1, n2 = 18_000_000, 16_000_000
+    n1, n2 = 2_100_000, 2_100_000
     a0 = 1.0e9 + 0.33
     fn = int(round((a0 / (2 * math.pi)
                     * (math.log(a0 / (2 * math.pi)) - 1.0) + 7 / 8))) - 1
@@ -656,9 +700,10 @@ def selftest_streaming():
 
     def read_slab2(m):
         out = np.empty(m, dtype='<f8')
+        base = T._pos
         got = 0
         while got < m:
-            sec, off = T._section_of(T._pos + got)
+            sec, off = T._section_of(base + got)
             path = T._FILE1 if sec == 1 else T._FILE2
             size = T.nA if sec == 1 else T.nB
             if T._fh is None or T._fh_path != path:
@@ -672,11 +717,17 @@ def selftest_streaming():
             assert len(data) == take * 8
             out[got:got + take] = np.frombuffer(data, dtype='<f8')
             got += take
-            T._pos += take
+        T._pos = base + m
         return out
     T.read_slab = read_slab2
 
-    tf = float(ts[len(ts) // 2])
+    tf = float(ts[len(ts) // 2]) + 0.5    # a straddle:  half-integer
+    # offset from the anchor zero,  exactly as in the real run
+    # (a straddle is always >= 0.5 from every zero  --  log|g^2-t^2|
+    # can never hit 0)
+    mp.dps = 60    # the true values must be built at dps-60,
+    # or mpmath's default 15 keeps only ~50 bits of each 53-bit
+    # f64 and the `exact' side carries its own ~5e-7 errors
     true_list = [mp.mpf(repr(float(v))) for v in np.array(ts, dtype=np.float64)]
     true_list_off = [v
                      + mp.mpf("1.1102230246251565e-16") * v
@@ -698,8 +749,9 @@ def selftest_streaming():
         nsub = 0
         i = 0
         n = T.n_tail
+        PIECE_TEST = 524288
         while i < n:
-            m = min(SUB, n - i)
+            m = min(PIECE_TEST, n - i)
             c = T.read_slab(m)
             sr, si, br, bi, s_ar, dm = slab_budget(c, tf, tf * tf, m)
             re += np.longdouble(sr)
@@ -814,6 +866,11 @@ def _summary(res, dt, mode):
 import concurrent.futures as cf
 
 
+def _worker(x):
+    """module-level worker (picklable for ProcessPoolExecutor)."""
+    return scan_window(x, T=_get_T())
+
+
 def run():
     smoke = os.environ.get("H1CERT_SMOKE") == "1"
     xs = grid()
@@ -831,16 +888,15 @@ def run():
         fo.write("# point detail (incremental; one row per straddle):\n")
         fo.flush()
 
-        def _w(x):
-            return scan_window(x, T=_get_T())
+        # (the worker must be module-level:  closures do not pickle)
         if work == 1:
             for x in xs:
-                w = _w(x)
+                w = _worker(x)
                 res.append(w)
                 _emit(fo, w, t0)
         else:
             with cf.ProcessPoolExecutor(max_workers=work) as ex:
-                futs = [ex.submit(_w, x) for x in xs]
+                futs = [ex.submit(_worker, x) for x in xs]
                 for fu in cf.as_completed(futs):
                     w = fu.result()
                     res.append(w)
