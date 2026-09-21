@@ -356,3 +356,69 @@ at what the data should show,  or be allowed to kill in us:
 
 **E5 status**:  QUEUED.  D1 (A/B/C dry run) needs the owner's go
 as the second job;  D2-D4 run at the gates.
+
+---
+
+## E6.  D1 block-sum cancellation probe —  executed (VERDICT:
+BOUNDED-AT-ALL-SCALES —  confirms the known boundedness by
+construction,  no new mechanism,  E2 barrier re-verified
+band-by-band)
+
+Run as `scripts/rh/day039_d1_blocksum.py` (single-thread streaming,
+taskset -c 28,  ~4 min,  17.6 million blocks) over the already-verified
+A/B/C bands —  9,000,994,730 zeros in (3.1946e7, 3.000e9].
+delta_i = 1 - (nas(t_{i+1}) - nas(t_i))  with the project nas
+(RVM + 3/4),  the exact E2 statistic;  blocks of W t-units closed at
+the first zero beyond block_start + W;  W in {1e2, 1e3, 1e4, 1e5}.
+
+**Per-gap sanity (independent streaming re-derivation,  no stored
+intermediates):**
+  A (3.19e7,  1e9]:    mean|delta| = 0.333431   max|delta| = 2.949
+  B (1.002e9, 2e9]:    mean|delta| = 0.334184   max|delta| = 3.115
+  C (2.002e9, 3e9]:    mean|delta| = 0.334459   max|delta| = 3.034
+Matching the certified E2 scale (the ~0.335 of SUM_EPS_CERT) and FLAT
+across 3.2e7 -> 3e9:  no hint that the per-gap absolute cost gets
+cheaper at larger t.  The E2 absolute-sum barrier holds band-by-band;
+the absolute-sum route stays dead everywhere we can measure.
+
+**The block sums (the test itself):**
+      W t-units    avg gaps    max|S|           mean|S|
+      1e2          ~2.9e2     2.18 / 2.40 / 2.23    0.38 - 0.39
+      1e3          ~3.0e3     2.20 / 2.25 / 2.23    0.41 - 0.42
+      1e4          ~3.0e4     2.31 / 2.34 / 2.22    0.45
+      1e5          ~3.0e5     1.85 / 1.65 / 1.73    0.35
+(max|S| in the order A, B, C over all 17.6M blocks.)
+mean|S| is FLAT across three orders of magnitude in W
+(alpha = -0.008 / -0.009 / -0.008 on A, B, C):  BOUNDED,  not linear.
+The linear baseline 0.334*avg_gaps would read 95 / 955 / 9555 / 95546;
+the ratio collapses 4e-3 -> 4e-7.  The global max |S| = 2.40 sits
+below sup|DN| itself (2.615067),  let alone the trivial
+2*sup|DN| = 5.23 bound.
+
+**Why this was (partly) expected —  the honest reading.**  delta
+TELESCOPES exactly:  SUM_block delta_i = DN(block_end) - DN(block_start),
+so block-sum boundedness follows from the certified sup|DN| by
+construction.  What D1 contributes beyond that:
+  (a)  a streaming re-derivation of the per-gap statistic over 9e9 gaps
+       (0.3334-0.3345 vs the certified ~0.335)  —  band-by-band,
+       with no intermediate artifacts;
+  (b)  the f64 cleanliness of the SIGNED statistic:  the per-gap f64
+       rounding of nas TELESCOPES in a signed block sum to O(ulp) at
+       the two block ends  (whereas the absolute sum needs the 1e-4/
+       gap budget that sits inside the A2 record)  —  the measured
+       block sums are effectively exact numbers;
+  (c)  the window-level shape:  the typical net drift increment over a
+       1e2-1e5 t-unit window is ~0.4 —  the walk keeps its lane at
+       block scale,  and the ±2.6 certified excursions show up as
+       ISOLATED events (input to E5-D2:  an excursion spans O(1-100)
+       gaps/windows,  not one).
+
+**Consequence for the program.**  D1 neither kills nor proves A1.  The
+data says any signed-compensation theorem must deliver O(1) drift
+increments at every scale —  the data shows O(0.4) typical,  O(2.4)
+extreme —  i.e.  the target is precisely the "DN bounded" statement
+(E1),  not something weaker or different;  and the A2 engine's
+constant-cost domain pushing is re-confirmed at block level:  nothing
+in the signed structure scales with the domain.
+Artifacts:  `scripts/rh/day039_d1_blocksum.py`,
+`scripts/rh/out_day039_d1.log` (full run,  all 17.6M blocks).
