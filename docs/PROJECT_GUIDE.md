@@ -167,16 +167,26 @@ The result you expect: **margin >= 1 at all points** (the territory is
 filled). This is the smallest end-to-end run that touches real zero
 data, a real decode, and a real certificate.
 
-### 5.3 The Lean build — 20-60 min the first time
+### 5.3 The Lean build — the machine-checking gate
 
 ```sh
 cd formal && lake build
 ```
 
-Compiles the proof. First run downloads mathlib (a few GB, once). Exit
-0 = every module in the argument compiles. This is the
-machine-checking gate: if your environment cannot build this, it has no
-claim on the rest.
+Compiles the proof. Exit 0 = every module in the argument compiles.
+
+Two timings, honestly:
+
+- **Your own clone with a built `formal/.lake`** (the usual case):
+  incremental build, a handful of minutes.
+- **A pristine clone / fresh container** (no `.lake`): `lake build`
+  downloads the mathlib package (a few GB, once) and compiles it from
+  source — plan on the order of an hour or so of CPU before the
+  RhAttack modules themselves build. The first time you do this on a
+  machine, let it finish unattended.
+
+Inside the Docker image the Lean 4.33.1 toolchain is preinstalled; the
+mathlib download happens on the first `lake build` as above.
 
 ### 5.4 The big run — what the project is actually doing
 

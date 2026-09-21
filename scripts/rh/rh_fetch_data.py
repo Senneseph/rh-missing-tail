@@ -70,6 +70,7 @@ def say(msg):
 
 
 def http_get(url, out):
+    os.makedirs(os.path.dirname(out) or ".", exist_ok=True)  # fresh dirs
     r = subprocess.run(["curl", "-sfL", "-H", COOKIE, "--max-time", "3600",
                         "--continue-at", "-", url, "-o", out])
     return r.returncode == 0
@@ -84,7 +85,15 @@ def md5_of(path):
 
 
 def md5_table(tbl_path):
-    if not os.path.exists(tbl_path) or not http_get(INDEX + "md5.txt", tbl_path):
+    os.makedirs(os.path.dirname(tbl_path), exist_ok=True)  # fresh ZETA_DL
+    ok = False
+    for attempt in range(1, 4):
+        ok = http_get(INDEX + "md5.txt", tbl_path)
+        if ok and os.path.exists(tbl_path):
+            break
+        say("md5 list fetch attempt %d/3 failed (retrying)" % attempt)
+        time.sleep(min(30 * attempt, 90))
+    if not ok or not os.path.exists(tbl_path):
         say("cannot reach the LMFDB index (md5 list) -- check the network")
         sys.exit(1)
     tbl = {}
@@ -92,10 +101,16 @@ def md5_table(tbl_path):
         parts = line.split()
         if len(parts) != 2:
             continue
-        if re.fullmatch(r"[0-9a-f]{32}", parts[0]):
-            tbl[parts[1]] = parts[0]
-        elif re.fullmatch(r"[0-9a-f]{32}", parts[1]):
-            tbl[parts[0]] = parts[1]
+        a, b = parts
+        if re.fullmatch(r"[0-9a-f]{32}", a):
+            md5v, name = a, b
+        elif re.fullmatch(r"[0-9a-f]{32}", b):
+            md5v, name = b, a
+        else:
+            continue
+        if name.startswith("*"):    # md5sum binary-mode marker
+            name = name[1:]
+        tbl[name] = md5v
     return tbl
 
 
@@ -107,7 +122,7 @@ def fetch_shard(fn, tbl, retries=5):
         os.remove(out)
     os.makedirs(os.path.dirname(out), exist_ok=True)
     for attempt in range(1, retries + 1):
-        ok = http_get(INDEX + fn + ".part", out + ".part")
+        ok = http_get(INDEX + fn, out + ".part")
         if ok and os.path.exists(out + ".part"):
             if md5_of(out + ".part") == tbl.get(fn):
                 os.rename(out + ".part", out)
@@ -261,7 +276,7 @@ if __name__ == "__main__":
     if "--check" in args:
         args.remove("--check")
         sys.exit(0 if all_check() else 1)
-    if not args or args[0] not in BANDS | {"all"}:
+    if not args or args[0] not in ("low", "1e9", "3e9", "3e10", "all"):
         print(__doc__)
         sys.exit(2)
     if args[0] == "all":

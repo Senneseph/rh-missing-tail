@@ -1,10 +1,6 @@
 # rh-missing-tail -- the project's reproducibility image
 # (Docker-in-repo, per docs/COMPUTE-DEPLOY-PLAN.md).
 #
-# NOTE (disentangle): this is the image for THIS repo only.  The
-# kainos-logos project keeps its own pinned dev image (ADR-0010);
-# nothing is shared between the two, and this file must not import
-# kainos assumptions.  The two images are separate artifacts.
 #
 # Pinned stack:
 #   base    : python:3.12-slim by DIGEST (no :latest)
@@ -42,12 +38,16 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Lean 4.33.1 via elan (pinned).  `lake build` in formal/ downloads
-# mathlib on first use (a few GB, once).
+# mathlib on first use (a few GB, once) and compiles it from source.
 RUN curl -fsSL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh \
         -o /tmp/elan.sh \
     && sh /tmp/elan.sh -y --default-toolchain leanprover/lean4:v4.33.1 \
     && rm /tmp/elan.sh
 ENV PATH="/root/.elan/bin:${PATH}"
+# elan-init sets the default but does not always install it (it must be
+# explicit:  the image is expected to be self-contained, no first-run
+# toolchain download).
+RUN elan toolchain install leanprover/lean4:v4.33.1
 
 # rh-reproduce: run a repo command from the checkout root (/work).
 # Examples:
