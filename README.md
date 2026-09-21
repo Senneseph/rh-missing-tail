@@ -108,17 +108,23 @@ detected at a strictly positive,  machine-certified scale),  the wire
 squeezes (S1LowT low-t,  S4Asm / S4-assembly high-t),  and the M6
 composition —  closed onto the **actual** zero set as one named theorem,
 `ZetaZeroSet.rhIfMarginZeta` (`formal/RhAttack/`),  whose docstring maps
-each leg to its supplier.  The data side reached 3×10⁹ zeros:  N(3×10⁹) =
-9,064,192,826 counted exactly and audited,  the tail walk bounded by
-2.503 on (10⁷, 2×10⁹] and 2.4772 on (10⁷, 2.9992×10⁹].  The legs still
-open are exactly two and are named on one page:  the **[S1] uniform walk
-bound** (the W2-beyond research item —  attack plan in
-docs/W2-BEYOND-ATTACK-PLAN.md) and the **[S3/S4] measured fills** (the |ζ|
-fill and the zero-side witness on the actual set),  plus the 3×10¹⁰ data
-extension that is the decision-maker for the walk's shape (cloud
-handoff:  docs/3E10-CLOUD-RUNBOOK.md).  Nothing in this repository claims
-that the Riemann Hypothesis has been proved;  the front page says
-precisely what remains.
+each leg to its supplier.  The data side reached **3×10¹⁰ zeros**:  the
+3×10⁹ spine (N(3×10⁹) = 9,064,192,826 exact and audited;  the tail walk
+bounded by 2.503 on (10⁷, 2×10⁹],  2.4772 on (10⁷, 2.9992×10⁹]) plus the
+3×10¹⁰ band (92,577,877,714 zeros,  12,858 md5-gated shards;  N(3×10¹⁰) =
+101,635,962,231 exact;  sup|DN| = 2.615067 on (10⁷, 3×10¹⁰] —  the walk
+keeps its shape through a full decade;  the per-gap ε layer of the [S1]
+walk bound is certified over it,  A2-class,  pre-registered Outcome A).
+The legs still open are exactly two and are named on one page:  the
+**[S1] uniform walk bound** (the R2 drift reduction is in Lean —
+W2Beyond0 / W2Beyond1;  the open content is the A1 analytic ε bound and
+the reassembly pin unit —  research state and ideas in
+docs/S1-A1-EXPLORATION.md) and the **[S3/S4] measured fills** (the |ζ|
+fill and the zero-side witness on the actual set,  grade (i) H1-full on
+the extended band —  the owner-selected route,  engine built and
+self-tested,  profile-gated before the certified full run).  Nothing in
+this repository claims that the Riemann Hypothesis has been proved;  the
+front page says precisely what remains.
 
 ### 3. The definition side: the missing tail
 
@@ -315,7 +321,7 @@ from the definition side alone. (3) Contradiction. Hence D(t₀) = 0; by
 minimality, D ≡ 0; by the counting lemma, **RH**. ∎ — *conditional on
 Part 7.*
 
-### Status of each piece (2026-09-20, day035 close-out;  the day-023 line below is the last pre-end-game snapshot)
+### Status of each piece (current:  post-3e10 data layer;  the day035 close-out entry below is the end-game snapshot,  the day-023 line the last pre-end-game snapshot)
 
 - **Proven, machine-checked (Lean 4.33.1 + Mathlib, pinned stable):** the
   counting lemma (Part 1); the per-pair closed forms (Part 4); the detector
@@ -374,20 +380,27 @@ Part 7.*
   asserted,  with N(3×10⁹) = 9,064,192,826 exact and RVM(3×10⁹) =
   9,064,192,825.58 (abs diff 0.42).
 - **Open (the two remaining legs,  named on the front page):** the
-  **[S1] uniform walk bound** —  the W2-beyond research item;  the
-  uniform O(1)-class bound on the zero-counting tail walk beyond the
-  verified 2.9992×10⁹ domain,  stated precisely with its classical
-  constraint and four named attack routes in
-  docs/W2-BEYOND-ATTACK-PLAN.md (PLANNED,  not started —  the
-  multi-day research job);  and the **[S3/S4] measured fills** (the |ζ|
-  fill and the zero-side witness on the actual set,  named wire
-  hypotheses with the pinned data as their fills today).  The 3×10¹⁰
-  data extension (cloud,  handoff packaged) is the decision-maker for
-  the walk's shape.  The low-t sliver (t0 < 707/50) and the d = ½ edge
-  are no longer open items:  they are the SliverEdge pin record and
-  edge-vacuity theorem.  Part 7 (the original residual floor) and its
-  Route A/B framing survive as the day-023 state of this line —
-  superseded as the single-remaining-gap by the S1/S3/S4 leg map.
+  **[S1] uniform walk bound** —  the W2-beyond research item;  its R2
+  drift reduction is in Lean (`W2Beyond0` / `W2Beyond1`:  the drift
+  identity,  the two-sided MVT gap band,  the regime bounds,  and the
+  reduction to the per-gap ε sum),  and the per-gap ε data layer is
+  COMPLETE and certified on the 3e10 band (A2-class;  the walk's
+  certified total variation,  SUM_EPS_CERT = 31,047,116,350.92 —
+  pre-registered Outcome A).  The open content is the A1 analytic ε
+  bound (restated in docs/S1-A1-EXPLORATION.md E1 as "S bounded at the
+  zeros",  not classically refuted) and the final reassembly / pin
+  unit;  the absolute-sum barrier on the literal A1 clause is recorded
+  there (E2).  And the **[S3/S4] measured fills** (the |ζ| fill and the
+  zero-side witness on the actual set,  named wire hypotheses with the
+  pinned data as their fills today;  the owner-selected route is grade
+  (i) H1-full over the 3e10 census —  engine built and self-tested,  CPU
+  and iGPU variants,  profile-gated before the certified full run).  The
+  3×10¹⁰ data extension that was the decision-maker for the walk's shape
+  has LANDED:  the walk keeps its shape (sup|DN| = 2.615067).  The low-t
+  sliver (t0 < 707/50) and the d = ½ edge are no longer open items:  
+  they are the SliverEdge pin record and edge-vacuity theorem.  Part 7 
+  (the original residual floor) and its Route A/B framing survive as the
+  day-023 state of this line —  superseded as the single-remaining-gap by the S1/S3/S4 leg map.
 - **Open (day-023 snapshot,  superseded):** the residual floor (Part 7) — the single remaining gap.
 
 *The complete reader-facing exposition of this argument — with full
@@ -633,20 +646,45 @@ kernel — is specific enough to fail.
     the re-issued honest ceiling:  what is NOT established (the S1
     uniform walk bound,  the measured fills,  the 3e10 extension),  and
     the day035 close-out of the attack queue (items 1–5 done;  the
-    sliver / edge / front page closed post-queue)
+    sliver / edge / front page closed post-queue).  A post-data addendum
+    is appended at the end of the doc:  the 3e10 band landed,  the
+    pins reproduce,  and the pre-registered classification is Outcome A
+    (A2-class so far).
   - [docs/W2-BEYOND-ATTACK-PLAN.md](docs/W2-BEYOND-ATTACK-PLAN.md) — the
     [S1] attack plan:  the exact target (the W2 walk bound,  uniform
     form),  the classical constraint (Littlewood Ω±:  the continuous
     S(t) is unbounded —  the graded walk is the object),  routes R1–R4
-    in expected-effort order,  the verification protocol.  PLANNED,  not
-    started
+    in expected-effort order,  the verification protocol.  Current
+    state (appended at the end of the doc):  R1 landed,  R2 steps 1–2
+    in Lean (W2Beyond0 / W2Beyond1),  the per-gap ε data layer complete
+    and certified (A2-class);  the research continuation —  the A1
+    analytic bound —  is explored in docs/S1-A1-EXPLORATION.md.
   - [docs/END_GAME_PLAN.md](docs/END_GAME_PLAN.md) — the end-game plan
     (the 3.6 attack queue 1–5,  close-out 3.7,  and what remains)
   - [docs/PREPRINT-DRAFT-DAY035.md](docs/PREPRINT-DRAFT-DAY035.md) — the
-    pre-print draft (tpf) for owner revision / hosting
+    pre-print draft (tpf) for owner revision / hosting;  the data
+    section is the data-to-3e10 revision,  and the pre-registered
+    outcomes carry the post-data classification (Outcome A,  A2-class
+    so far —  the pre-registration block itself is preserved verbatim)
   - [docs/3E10-CLOUD-RUNBOOK.md](docs/3E10-CLOUD-RUNBOOK.md) — the 3e10
     zero-band cloud extension:  machine requirements,  the resumable
     md5-gated stream script,  the finish gates,  the post-run re-point
+    (the run has since landed:  the finish gates reproduced all pinned
+    values)
+  - [docs/S1-A1-EXPLORATION.md](docs/S1-A1-EXPLORATION.md) — the
+    exploration log for the universal walk bound (the [S1]/A1 research
+    theorem):  append-only entries with verdicts —  A1 restated as "S
+    bounded at the zeros" (E1,  ALIVE,  relocated),  the absolute-sum
+    barrier on the R2 route (E2,  DEAD as universal closer,  ALIVE as
+    the A2 engine),  the queued tail-split architecture hypothesis and
+    reference checks (E3)
+  - [docs/PROJECT_GUIDE.md](docs/PROJECT_GUIDE.md) — the user guide for
+    a clean machine:  the Docker container (digest-pinned image in this
+    repo,  hash-pinned math stack,  Lean 4.33.1 via elan,  no auto-run
+    at boot),  plain-Python install,  the repository map,  the single
+    data entry point (scripts/rh/rh_fetch_data.py,  all bands
+    md5-gated and resume-safe),  and the test commands from the
+    no-data engine self-test to the full smoke-test to the Lean build
 - **Master formula ledger (working tree):** `plan/40-prize-islands/
   rh-attack/FORMULAS.md` — every formula this work uses, labeled
   (verbatim-read / measured + file + precision / derived + file /
@@ -690,8 +728,9 @@ explicit formulas,  S(t) bounds,  Lindelöf).
 bound the tail —  keep it.  (1) Reframe RH as a counting statement:
 RH ⇔ no off-line zero pair (the counting lemma,  machine-checked —
 Part 1 / `B0`).  (2) Measure the tail exactly where the data goes
-(the zero walk to 3×10⁹,  sup bounded by ~2.5;  N(3×10⁹) exact and
-audited).  (3) Telescope the tail into a sum over the zeros plus a
+(the zero walk to 3×10¹⁰,  sup|DN| ≤ 2.615067 on (10⁷, 3×10¹⁰] —
+the walk keeps its shape through the decade;  N(3×10¹⁰) =
+101,635,962,231 exact and audited).  (3) Telescope the tail into a sum over the zeros plus a
 proven floor (W2 —  the tail is the sum,  not a residue to be
 estimated).  (4) Certify the detector:  an off-line pair forces a
 kernel change of at least ~99.75% of the kernel's own size at its own
@@ -700,7 +739,9 @@ height —  an exact algebraic inequality with no δ-window that kills it
 floor > definition-side upper bound ⇒  no off-line pair ⇒  RH (the wire
 + `ZetaZeroSet.rhIfMarginZeta` front page).  The two legs the chain
 still owes are named on that front page (the [S1] uniform walk bound —
-the W2-beyond item —  and the measured [S3/S4] fills);  this is the
+its R2 drift reduction in Lean,  its data layer certified on the 3e10
+band,  the open research content the analytic A1 bound;  and the
+measured [S3/S4] fills,  grade (i) profile-gated);  this is the
 sense in which "we can explain why it will work":  the door was never
 the obstacle,  the *bookkeeping around the door* was,  and the
 bookkeeping is now a machine-checked chain with two named,  planned

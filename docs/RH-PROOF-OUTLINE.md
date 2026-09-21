@@ -23,23 +23,34 @@ and the two routes intended to close it. §11 lists the classical sources.
 
 ***
 
-**Current-state note (day035,  2026-09-20 — read before §9–§10).**  The
+**Current-state note (current:  post-3e10 data layer — read before §9–§10).**  The
 status tables of §9 (§10's STATUS line) are the day-023/029 snapshot of the
 original eight-part skeleton.  Since then the argument has been carried to
 its end-game form:  a machine-verified verification chain (the W2 telescope
 and one-sided noise floors;  the S3a algebraic detector;  the S1LowT / S4
 wire squeezes;  the M6 composition) closed onto the **actual** zero set as
 one named theorem — `ZetaZeroSet.rhIfMarginZeta` (`formal/`),  whose
-docstring maps every leg to its supplier — with the data side at 3×10⁹
-zeros (N(3×10⁹) = 9,064,192,826 exact and audited;  the tail walk bounded
-by 2.503 on (10⁷, 2×10⁹],  2.4772 on (10⁷, 2.9992×10⁹]).  The residual
+docstring maps every leg to its supplier — with the data side at
+3×10¹⁰ zeros (the 3×10⁹ spine as of the day035 entry:  N(3×10⁹) =
+9,064,192,826 exact and audited,  the tail walk bounded by 2.503 on
+(10⁷, 2×10⁹],  2.4772 on (10⁷, 2.9992×10⁹] —  plus the 3×10¹⁰ band:
+N(3×10¹⁰) = 101,635,962,231 exact and audited,  sup|DN| = 2.615067 on
+(10⁷, 3×10¹⁰] —  the walk keeps its shape through the decade,  and the
+per-gap ε layer of the [S1] walk bound certified over it,  A2-class).
+  The residual
 floor of §10 as a single open piece has been SUPERSEDED by the two-leg
 map of the front page:  the **[S1] uniform walk bound** (the W2-beyond
-research item —  attack plan in docs/W2-BEYOND-ATTACK-PLAN.md,  PLANNED,
-not started) and the **measured [S3/S4] fills** (named wire hypotheses
-with the pinned data as their fills);  the low-t sliver and the d = 1/2
+research item —  its drift reduction in Lean,  W2Beyond0 / W2Beyond1;
+the open content is the analytic A1 bound,  its restatement and the
+current exploration state in docs/S1-A1-EXPLORATION.md) and the
+**measured [S3/S4] fills** (named wire hypotheses with the pinned data
+as their fills;  the owner-selected route is grade (i) H1-full on the
+3e10 census —  engine built and self-tested,  profile-gated);
+  the low-t sliver and the d = 1/2
 edge are closed as named items (SliverEdge).  Nothing here claims RH;
-the authoritative current state is docs/CEILING-REPORT-DAY035.md.
+the authoritative current state is docs/CEILING-REPORT-DAY035.md
+(with its post-data addendum) and docs/S1-A1-EXPLORATION.md (the
+research log).
 
 ---
 

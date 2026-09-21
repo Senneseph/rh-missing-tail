@@ -194,3 +194,31 @@ Lean-checkable candidate,  builds on proven machinery) → R3
   * The "S(t) is bounded" statement (section 3) is NOT a target
     —  it is classically refuted;  misstating the object is a
     correctness bug,  not an open question.
+
+## 7.  STATUS UPDATE (appended,  per the project's correction
+discipline —  the plan above is the as-planned record)
+
+-  **R1 — LANDED.**  The 3e10 band (2.9992e9, 3.0001e10] is
+    complete and verified:  12,858 md5-gated shards,
+    92,577,877,714 zeros,  N(3.0e10) = 101,635,962,231 (RVM
+    diff 0.09),  all finish gates reproduced.  The no-divergence
+    read past 9.06e9 is DATA, not the density model:
+    sup|DN| = 2.615067 on (1e7, 3.0e10] —  the walk keeps its
+    shape (pre-registered Outcome A;  outcome B excluded on the
+    band).
+-  **R2 — STEPS 1–2 IN LEAN,  DATA LAYER COMPLETE (A2-class).**
+    W2Beyond0 / W2Beyond1 (GREEN):  driftStep,  rho_increasing,
+    nas_incr_bound,  nas_inc_band,  driftTelescopes,
+    driftRegimeLe / driftRegimeGe,  driftTwoSided.  The per-gap ε
+    statistics over the 3e10 band are certified:
+    SUM_EPS_CERT = 31,047,116,350.923088.
+-  **OPEN CONTENT (restated):**  (c) the final reassembly / pin
+    unit (the W2M5/W2M6 pattern);  (d) the A1 data-free analytic ε
+    bound.  Why the literal "data-free eps sum" clause closes at
+    best a GROWING bound (K(T) ~ c·T/log T),  and that the A1
+    target is most exactly "the S-function bounded at the zeros"
+    (not classically refuted —  see the restatement),  is worked
+    in docs/S1-A1-EXPLORATION.md (E1–E3:  the restatement,  the
+    absolute-sum barrier with its certified measurement,  the
+    queued tail-split architecture hypothesis,  and the reference
+    checks).

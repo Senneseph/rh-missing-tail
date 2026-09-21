@@ -1,14 +1,17 @@
 # Pre-print draft — day035 (DRAFT for owner revision)
 
 Working title:  "A Lean-verified certificate chain for the
-quantized-straddle detector at 9.06 x 10^9 zeros"
+quantized-straddle detector on a 1.02 x 10^11 zero census"
 
-Status:  draft assembled 2026-09-20 from docs/CEILING-REPORT-DAY035.md,
+Status:  draft, data layer to 3 x 10^10 (the 3 x 10^9 state is in
+git history), assembled from docs/CEILING-REPORT-DAY035.md,
 docs/END_GAME_PLAN.md (sections 3.2-3.7), and the Lean modules
-W2Telescope / W2Bound / W2M5 / S3a / M6 (all GREEN, zero `sorry`,
-Lean 4.33.1 + mathlib v4.33.1).  Scope statement (keep in any
-version):  a bound-level margin statement on the quantized route,
-pinned to audited data at 3 x 10^9;  no RH claim is made or implied.
+W2Telescope / W2Bound / W2M5 / S3a / M6 / W2Beyond0 / W2Beyond1
+(all GREEN, zero `sorry`, Lean 4.33.1 + mathlib v4.33.1).  Scope
+statement (keep in any version):  a bound-level margin statement on
+the quantized route, pinned to audited data at 3 x 10^10, with the
+Lean spine instantiated at 3 x 10^9;  no RH claim is made or
+implied.
 
 ---
 
@@ -16,9 +19,11 @@ pinned to audited data at 3 x 10^9;  no RH claim is made or implied.
 
 We present a partially machine-checked certificate chain for the
 "squeeze margin" statistic of the quantized-straddle zero detector
-for the zeta function, at t up to 3 x 10^9 (9,064,192,826 zeros,
-counted exactly).  Three components are now fully formalized in Lean
-4 (mathlib), with zero axioms and zero `sorry` beyond Lean's core:
+for the zeta function, on the census to t = 3 x 10^10
+(101,635,962,231 zeros at 3 x 10^10, counted exactly;  the
+argument's Lean spine remains instantiated at 3 x 10^9).  Four
+components are now fully formalized in Lean 4 (mathlib), with zero
+axioms and zero `sorry` beyond Lean's core:
 
 1.  The TELESCOPE (Section 3):  the far-integral remainder reduces,
     exactly, to a bounded count-walk against a log kernel plus
@@ -43,9 +48,21 @@ counted exactly).  Three components are now fully formalized in Lean
     form with a strictly positive dev-vs-noise margin as a named
     Lean theorem.
 
+4.  The WALK-BOUND STEP (Section 6, the [S1] reduction):  each
+    zero-gap's model increment is pinned two-sided against the RVM
+    local law (W2Beyond1.nas_inc_band), the per-step drift is
+    bounded from the pinned gap (W2Beyond0.driftStep), and the band
+    walk displacement is at most the sum of the per-gap epsilons
+    (W2Beyond1.driftTwoSided) —  the reduction under which the
+    uniform walk bound becomes a matter of bounding the epsilons.
+
 The remaining gap to a uniform theorem (in t and in the detector
-offset d) is stated honestly as such (Section 6), together with the
-queued empirical extension to 3 x 10^10 zeros.
+offset d) is stated honestly as such (Section 6).  Its empirical
+extension to 3 x 10^10 zeros has LANDED:  the census is exact to
+1.0164 x 10^11 zeros,  the count walk holds its shape through the
+next order of magnitude (sup|DN| = 2.615067),  and the per-gap
+epsilon layer of the walk bound is certified over the band
+(A2-class;  the A1 data-free analytic bound is the open theorem).
 
 ## 1.  The argument and its statistic
 
@@ -59,15 +76,23 @@ is required to dominate 1:  the detector deviation dev(t, d) =
 |1 - R_closed(t, d)| (minimum over the audited d-grid) must exceed
 the kernel floor plus the on-line residual.  Pointwise dominance
 over the data extent is a MEASUREMENT (207-point low-t record to
-1000;  2250-point sweep to 10^9;  the day035 anatomy at 2.5 x 10^9).
-The research question is UNIFORM dominance (the P1.2 form).
+1000;  2250-point sweep to 10^9;  the day035 anatomy at 2.5 x 10^9)
+—  and the full-band certificate for the extended census stands
+built and self-tested:  the H1 engine (grade (i), the
+owner-selected route for the measured [S3/S4] fills over the
+3 x 10^10 band), profile-gated before the certified run.  The
+research question is UNIFORM dominance (the P1.2 form).
 
-This pre-print reports the progress of day035:  converting two of
-the uniform theorem's three ingredients from measurement to
-named theorems (the algebraic detector side, the noise side), and
-composing them through the wire in Lean.
+This pre-print reports that progress and its data extension:
+converting two of the uniform theorem's three ingredients to named
+theorems (the algebraic detector side, the noise side), reducing the
+third (the [S1] walk bound) to the per-gap epsilon layer in Lean,
+composing them through the wire, and extending the audited census to
+3 x 10^10 with the epsilon layer certified over it (Section 2).
 
-## 2.  Data to 3 x 10^9 (PINNED, audited)
+## 2.  Data to 3 x 10^10 (PINNED, audited)
+
+**The 3 x 10^9 layer (the argument's spine;  pins unchanged).**
 
 -  N(3 x 10^9) = 9,064,192,826 exactly (md5-gated shard chain;
     Riemann-von Mangoldt at 3 x 10^9 is 9,064,192,825.58,
@@ -87,6 +112,29 @@ composing them through the wire in Lean.
     B = -0.1464, Dc = -0.8984:  the O(1) defect mechanism is stable
     at N = 9 x 10^9.
 
+**The 3 x 10^10 layer (the extension;  complete at data level).**
+
+-  The band (2.9992 x 10^9, 3.0001 x 10^10] carries
+    92,577,877,714 zeros (12,858 md5-gated shards;
+    740,623,021,712 bytes;  all real finish gates passing:
+    monotone, min gap 2.2888 x 10^-5 — tighter than the 3 x 10^9
+    layer's 2.47 x 10^-4 — seam gap 0.319307 inside (0, 1), band-end
+    count vs RVM +0.78).
+-  N(3 x 10^10) = 101,635,962,231 exactly (RVM
+    101,635,962,230.91, discrepancy 0.09);  N(band end) =
+    101,639,672,418;  G_LAST = 30,001,045,999.981976;  the count
+    walk at band end is DN = +0.904983521.
+-  The count walk HOLDS through the next order of magnitude:
+    sup|DN| = 2.615067 on (10^7, 3 x 10^10] (full census, both
+    conventions).  Under the pre-registered outcomes of Section 6,
+    this band classifies as OUTCOME A (the walk keeps its shape).
+-  The [S1] per-gap epsilon data layer is CERTIFIED over the band
+    (A2-class):  the certified envelope sum
+    SUM_EPS_CERT = 31,047,116,350.923088 —  the measured-input
+    closure of the pre-registered item (b) on the extended band;
+    whether the epsilons admit a data-free analytic bound (A1) is
+    the open research theorem (Section 6).
+
 ## 3.  The telescope and the one-sided noise bound (LEAN)
 
 The exact identity (W2Telescope, formalized):
@@ -105,6 +153,10 @@ kernel, DN the count walk.  Consequences, all named theorems
     L = Rho(2 x 10^9) = log(2 x 10^9 / (2 pi)) / (2 pi), with the
     slope bound Rho' = 1/(2 pi x) > 0;  partition data enter as
     named hypotheses (the plan's "data-adjacent" form).
+-  Pinned at the full census:  the same theorems instantiate at
+    K = 2.615067 = sup|DN| on (10^7, 3 x 10^10] (Section 2) with
+    the extended band's partition data —  the data-adjacent form,
+    unchanged.
 
 ## 4.  The algebraic detector (LEAN, S3a)
 
@@ -159,21 +211,30 @@ measurement proxy;  the Lean statement is the bound-level form.
 ## 6.  The ceiling (honest statement)
 
 1.  The UNIFORM theorem (in t and in the offset d) is not claimed.
-    It remains the open research theorem;  day035 converts two of
-    its three ingredients to named theorems and composes them.
-    Its attack plan is docs/W2-BEYOND-ATTACK-PLAN.md (PLANNED,
-    not started:  the target stated in the W2 walk form,  the
-    classical constraint —  Littlewood Omega± makes the
-    CONTINUOUS S(t) unbounded,  so the target is the graded walk
-    bound —  and routes R1-R4 in expected-effort order).
+    It remains the open research theorem;  day035 converted two of
+    its three ingredients to named theorems and composes them, and
+    the third —  the [S1] walk bound —  is now REDUCED in Lean to
+    the per-gap epsilon layer (W2Beyond0 / W2Beyond1,  GREEN:
+    nas_inc_band pins each zero-gap's model increment two-sided
+    against the RVM local law,  driftStep bounds the per-step
+    drift,  driftTwoSided bounds the band walk displacement by the
+    eps sum).  Its attack plan is docs/W2-BEYOND-ATTACK-PLAN.md
+    (the classical constraint preserved:  Littlewood Omega± makes
+    the CONTINUOUS S(t) unbounded,  so the target is the graded
+    walk bound;  routes R1-R4 in expected-effort order,  R2
+    in flight).  The open content is now:  the A1 data-free
+    (analytic) epsilon bound,  and the final reassembly / pin unit
+    (the W2M5/W2M6 pattern).
 2.  The wire's zero-side / definition-side / squeeze roles are
     named hypotheses (fills:  pinned data, W2-proven bounds), in
     the explicit-hypothesis pattern used throughout — no hidden
     measurement.
-3.  The extension to 3 x 10^10 zeros is queued (a cloud run,
-    resumable from the 3 x 10^9 shards).  The no-divergence read
-    past 9.06 x 10^9 zeros is density-model until it lands;  the
-    Lean composition does not depend on it.
+3.  The extension to 3 x 10^10 zeros is COMPLETE at data level
+    (Section 2):  the census is exact to 1.0164 x 10^11 zeros,
+    the no-divergence read past 9.06 x 10^9 is DATA, not the
+    density model (sup|DN| = 2.615067),  and the [S1] epsilon
+    layer is certified over the band (A2-class).  The Lean
+    composition did not depend on it;  it now stands on it.
 4.  The low-t sliver (t < 14.14) and the d = 1/2 edge are now
     CLOSED as named Lean items (day035,  post-queue):  SliverEdge
     carries the sliver pin record (first-zero pin
@@ -184,7 +245,12 @@ measurement proxy;  the Lean statement is the bound-level form.
     zero).  The B-6A composition onto the actual zero set is now
     a single named theorem,  ZetaZeroSet.rhIfMarginZeta,  whose
     docstring maps every leg to its supplier;  the two legs still
-    open are [S1] (W2-beyond) and the measured [S3/S4] fills.
+    open are [S1] (W2-beyond:  the A1 analytic epsilon bound plus
+    the reassembly / pin unit) and the measured [S3/S4] fills
+    (grade (i) —  the full H1 certificate over the 3 x 10^10
+    census,  the owner-selected route;  the engine stands built
+    and self-tested,  CPU and iGPU variants,  profile-gated
+    before the certified full run).
 5.  No RH claim is made or implied.  The claim level is:  a
     bound-level composition of the squeezed margin on the
     quantized route,  every atom labeled LEAN-PROVEN / CITED /
@@ -258,13 +324,19 @@ theorem `W2Beyond1.driftTwoSided`:  given a pinned start value
 and per-gap errors eps_i (each zero-gap's model increment vs 1),
 the walk displacement on a band is at most the sum of the eps_i
 —  with the two-sided pinching of each per-gap increment as
-`W2Beyond1.nas_inc_band`.  What remains:  (a) the data layer
-that turns the certified zero-gap census into explicit eps
-statistics,  (b) the decision of whether that eps sum closes
-with margin over the band,  and (c) the final reassembly / pin
-unit (the W2M5/W2M6 pattern).  The 3e10 cloud run is the
-referee for (b) on the next order of magnitude.  Pre-registered
-outcomes —  written before the data returns,  per the project's
+`W2Beyond1.nas_inc_band`.  What remains,  after the 3e10 data
+returned:  (a) the data layer that turns the certified zero-gap
+census into explicit eps statistics  —  COMPLETE,  certified
+(Section 2:  per-gap eps over the 12,858-shard band,  the
+certified envelope sum SUM_EPS_CERT = 31,047,116,350.923088);
+(b) the decision of whether that eps sum closes with margin over
+the band  —  DECIDED on the extended band,  A2-class (closure
+with measured inputs);  (c) the final reassembly / pin unit (the
+W2M5/W2M6 pattern)  —  OPEN;  (d) the A1 data-free analytic
+epsilon bound  —  OPEN (the research theorem,  the only route to
+the final-resolution framing).  The 3e10 run that was pre-
+registered as the referee for (b) has returned:  its verdict is
+OUTCOME A (A2-class),  Section 2.  Pre-registered outcomes —  written before the data returns,  per the project's
 stop rule:
 
 - **Outcome A — the walk keeps its shape** (sup |DN| stays at
@@ -306,17 +378,34 @@ additionally requires [S3/S4] to reach certificate-grade fills
 on the extended band (they stand today at the verified levels
 named in Section 6).
 
+POST-DATA CLASSIFICATION (applied after the pre-registration;
+of record,  not part of it):  the 3 x 10^10 band has returned.
+Under the pre-registered criterion (sup|DN| at the 2.5-level
+over (3e9,  3e10]),  it classifies as **OUTCOME A — the walk
+keeps its shape** (sup|DN| = 2.615067 on (10^7,  3 x 10^10];
+Outcome B is excluded on the band).  Within A,  the closure
+stands at **A2-class** —  the eps sum closes with measured
+inputs (the certified SUM_EPS_CERT of Section 2).  A1 —  the
+data-free analytic bound —  is NOT claimed and remains the open
+theorem;  and the final-resolution framing additionally
+requires the [S3/S4] certificate-grade fills (grade (i),
+in flight behind the profile gate).  No RH claim is made or
+implied;  the claim-level statement of Section 6.5 is unchanged.
+
 
 ## 7.  Machine-checking statement
 
 All theorems of Sections 3-5 are in the repository
 (rh-missing-tail, formal/RhAttack/), Lean 4.33.1 with mathlib
 pinned at v4.33.1:  W2Telescope.lean, W2Bound.lean, W2M5.lean,
-S3a.lean, M6.lean (plus the supporting S1LowT / C1b / P8 / S4
-families).  The full project builds with `lake build` (17,442
-jobs) at zero errors and zero `sorry`.  The data claims of
-Section 2 rest on md5-audited shard files with the audit scripts
-in scripts/rh/.
+S3a.lean, M6.lean, W2Beyond0.lean, W2Beyond1.lean (the R2 walk-
+bound steps:  driftStep / driftBand / driftTwoSided /
+nas_inc_band), plus the supporting S1LowT / C1b / P8 / S4
+families.  The full project builds with `lake build` at zero
+errors and zero `sorry`.  The data claims of Section 2 (both
+layers) rest on md5-audited shard files with the audit scripts in
+scripts/rh/;  the H1 certificate engine (CPU and iGPU variants,
+with their self-tests) is there as well.
 
 ---
 
@@ -332,5 +421,7 @@ the text):
     two-constant version as a remark.
 -  Whether to include the crossing numbers (Ralg 14 12 1/2 vs Ralg
     15 12 1/2) as an explicit displayed value-table (appendix).
--  The 3e10 status line:  "queued" vs "in flight" depending on the
-    cloud launch date.
+-  The 3e10 status line:  RESOLVED —  landed,  Outcome A /
+    A2-class (Section 2).  The pre-registered block of Section 6
+    is preserved verbatim;  the post-data classification is the
+    labeled addendum.

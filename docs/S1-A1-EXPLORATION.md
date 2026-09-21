@@ -1,0 +1,358 @@
+# S1 / A1 — an exploration log (the universal walk bound)
+
+A working log for the open [S1] research item:  the universal
+(analytic) version of the graded walk bound.  Written to be read:
+each entry states what was tried,  what fell out,  and the verdict.
+The full derivation always lives in the working session's log;  this
+file carries the ideas and their status.
+
+Log conventions:
+
+-  APPEND-ONLY.  Entries are numbered E1,  E2,  ...  and never
+  rewritten (corrections append,  per the project discipline).
+-  Each entry ends with a verdict tag:  **DEAD** (the route is
+  refuted —  the refutation is recorded),  **ALIVE** (it holds,
+  and is load-bearing),  **QUEUED** (not yet attempted),  **OPEN**
+  (attempted,  unresolved).
+-  No dates in this file (house rule;  git history and
+  DISCOVERY_LOG.md are the timestamp authority).
+
+## 0.  The objects,  exactly (reference,  no verdict)
+
+-  The walk:  `W2T.DN N0 NasGrid j = N0 + j - NasGrid j` (the zero
+  count against the RVM asymptote,  on the zero grid,  left-endpoint
+  convention,  `W2Telescope`).
+-  `W2Beyond0.driftStep`:  the walk step is exactly
+  `1 - (Nas(i+1) - Nas(i))` (definitional).
+-  `W2Beyond0.nas_incr_bound` / `W2Beyond1.nas_inc_band`:  the RVM
+  increment over a gap [x, y] sits in `[Rho x (y-x),  Rho y (y-x)]`
+  (MVT + Rho monotone) —  the per-gap model increment against the
+  measured gap.
+-  `W2Beyond1.driftTelescopes`:  the walk displacement over a band
+  is exactly the signed sum of the per-step drifts.
+-  `W2Beyond1.driftRegimeLe / driftRegimeGe`:  one-sided regimes
+  (every increment <= 1,  or >= 1),  the displacement is exactly
+  the (mirrored) drift sum.
+-  `W2Beyond1.driftTwoSided`:  if every per-gap increment
+  satisfies  `|Δ_i - 1| ≤ ε_i`,  then  `|DN(j) - DN(0)| ≤ Σ ε_i`
+  —  the R2 reduction.  (Triangle inequality:  this is the ABSOLUTE
+  sum majorant;  the signed sum is the walk itself by
+  `driftTelescopes`.)
+-  The wire's consumption of the walk bound (`W2M5.m5_floor`,
+  `m5_idn`;  END-GAME 3.6):  the noise budget carries
+  `K (|p G1| + |p G2| + TV(p))` —  K = sup|DN| as a POINTWISE band
+  constant multiplied by the log-kernel's total variation over the
+  band (TV ~ log(G2/G1),  O(1) per log-decade).  The wire wants K
+  at the data shape (K ~ 2.5),  not a K growing in the band.
+-  The A2 record on the 3 x 10^10 band (the certified data layer):
+  per-gap  `eps_i = |n_asym(t_{i+1}) - n_asym(t_i) - 1|`,
+  `SUM_EPS_CERT = Σ eps_i + (1e-4 per gap f64 budget)`
+  = 31,047,116,350.923088,  so  sup_k |DN(k) - DN(0)| ≤
+  SUM_EPS_CERT  on the band from the pinned DN(0).  Against the
+  MEASURED walk:  sup|DN| = 2.615067 on (10^7, 3 x 10^10].  The
+  certified majorant is the walk's TOTAL VARIATION —  about
+  10^10 times looser than the amplitude.  Eps per zero ~ 0.335.
+
+## E1.  A1 restated —  the target is "S is bounded AT THE ZEROS"
+
+Verdict:  **ALIVE (relocated)** —  A1 is not "sum the epsilons
+better";  it is a theorem about the S-function sampled on the zero
+grid,  and it is not known to be false.
+
+What was tried:  a plain-language restatement of the preprint's A1
+clause ("the per-gap eps admit an ANALYTIC bound without data").
+
+What fell out:
+
+1.  The equivalence.  At a zero γ_n of zeta on the critical line,
+    `DN(γ_n) = N(γ_n) - N_as(γ_n) = n - N_as(γ_n)` (integer minus
+    asymptote).  The classical argument function at zeros is the
+    SAME object up to fixed convention constants (the 7/8-vs-3/4
+    shift,  of size 1/8,  and the ±1/2 grid rounding between the
+    step count N and the continuous arg —  the W2-BEYOND-ATTACK-
+    PLAN section 3 says exactly this:  "the same object  (up to
+    the constant 7/8  and grid rounding)").  So a data-free uniform
+    bound `sup|DN| ≤ K  (K ~ O(1))` on the zero grid IS,  up to
+    O(1) convention,  the statement  **S(γ) = O(1) for every zero
+    γ**  —  the S-function bounded AT THE ZEROS,  unconditionally.
+
+2.  Why Littlewood does not kill it.  Littlewood's unconditional
+    Ω± theorem refutes the boundedness of the CONTINUOUS S(t)
+    (|S(t)| reaches the classical Ω-flavor lower bound along
+    unbounded sequences).  But the zeros are a DISCRETE sample of
+    the t-line:  the Ω-value sequences need not hit zero heights,
+    and no known theorem samples the Ω at the zeros.  The plan's
+    "coarser object" note is exactly this:  the data (1.0164 x 10^11
+    graded samples,  all ≤ 2.615067,  while the continuous S reaches
+    log-scale amplitudes) is consistent with  S tame at zeros /
+    wild between zeros —  which the function shape allows (S has
+    steep gradients across gaps near the fast-arg regions).
+
+3.  The honest status.  No unconditional "S at zeros is O(1)"
+    statement is known to the author of this log (literature check
+    is E3.2 —  do not treat this restatement as the literature's
+    verdict before it runs).  The statement is not the target any
+    more than the continuous form is:  it is one of the S-t
+    territory the classical constraint marks.  It is,  however,
+    the exact shape [S1]-universal asks for,  and it is at least
+    not classically refuted (to be confirmed against the RH-
+    conditional Ω —  E3.2 item:  do the RH-conditional Ω sequences
+    land at zeros?).
+
+Bottom line:  A1,  pursued as "an analytic per-gap envelope whose
+sum closes",  is the wrong object —  read E2.  A1,  pursued as
+"a theorem bounding the graded walk pointwise (equivalently:  S at
+the zeros)",  is the real research problem,  and every route below
+must be checked against it.
+
+## E2.  The absolute-sum barrier on the R2 route
+
+Verdict:  **DEAD as a universal closer;  ALIVE as the domain-
+verified (A2) engine** —  which is what it has been all along.
+
+What was tried:  checking whether the preprint's A1 clause (analytic
+per-gap eps,  data-free eps sum) can deliver the K ~ O(1) pointwise
+bound the wire needs,  using the R2 machinery (`driftTwoSided`).
+
+What fell out —  four facts:
+
+1.  **Signed sum = tautology.**  By `driftTelescopes`,  the signed
+    sum of the drifts over any band IS the walk displacement
+    (count minus asymptote increment).  No cancellation is available
+    in the signed sum beyond what the walk already is.  Any
+    "summation" argument for A1 must therefore work through
+    absolute values,  or through structure the tautology does not
+    see (E3.4).
+
+2.  **Envelopes must dominate the truth pointwise.**  The
+    `driftTwoSided` hypothesis is  `|Δ_i - 1| ≤ ε_i`  for EVERY
+    zero i.  Any data-free envelope  f(t_i)  valid at all heights
+    must satisfy  f(t_i) ≥ |Δ_i - 1|  at every zero —  and over any
+    band  Σ f ≥ Σ|Δ_i - 1|  (the walk's total variation).
+
+3.  **The total variation is LINEAR in the zero count (measured,
+    our own record).**  On the 3 x 10^10 band the certified
+    per-gap sum is SUM_EPS_CERT ≈ 3.1047 x 10^10 over
+    92,577,877,714 zeros —  eps per zero ≈ 0.335 —  while the walk
+    amplitude is 2.615067.  The per-gap |drift| does NOT tend to 0:
+    a typical zero gap is the local RVM-mean gap plus an O(1)
+    RELATIVE fluctuation (gap ≈ Rho^-1 (1 + ξ),  ξ = O(1)),  so
+    the typical |1 - model increment| ≈ |ξ| = O(1) —  the Poisson/
+    GUE gap-fluctuation scale.  The certified A2 sum IS this total
+    variation,  to the certified digit.
+
+4.  **The formal-unconditional version needs one modest open
+    fact.**  Turning fact 3 from measurement into theorem needs
+    "a positive density of non-typical gaps" (gaps not
+    concentrated at the RVM mean).  Classical results give
+    liminf-flavor small-gap statements (infinitely often,  density
+    unknown) —  the density fact is open (it predicts fully under
+    the GUE gap model).  So the barrier is:  **measured-certain
+    on the verified band (fact 3,  certified),  formal-pending-
+    the oscillation fact (fact 4).**
+
+Consequence (the barrier,  stated):  the R2/driftTwoSided
+mechanism,  on ANY band with N → ∞ zeros,  gives at best
+`|DN(j) - DN(0)| ≤ K₀ + Σ f  ~  c · N`  for any valid pointwise
+envelope f —  and with only CLASSICAL worst-case gap bounds (no
+data at all) the envelope is far worse still (gap ∈
+[c (log t)^-a,  C log t] classically  →  per-gap envelope
+O((log t)^2)-ish via `nas_inc_band`).  A K ~ 2.5-pointwise bound
+is not obtainable from this mechanism,  at any height,  by any
+data-free f.  The preprint's A1 clause,  read literally
+("the eps sum has a data-free form"),  yields a GROWING bound
+K(T) ~ c T / log T —  which the wire absorbs only in the R4 sense
+(margin bookkeeping with a height-dependent K,  not a closer).
+
+What survives:  `driftTwoSided` is exactly right as the
+DOMAIN-VERIFIED engine —  pin the start,  certify the per-gap sum
+over a finite band,  done (that is A2,  and it is what the 3e10
+data layer delivered).  Its universal form degenerates to a
+linear majorant.  The universal closer,  if one exists,  cannot be
+an absolute-sum theorem.
+
+## E3.  Queued (not yet attempted)
+
+**E3.1 — H1,  the tail-split architecture hypothesis.**  The wire
+does not need ONE mechanism over (1e7, ∞):  it needs a POINTWISE
+`sup|DN| ≤ K` on the band it integrates.  Split the band at a
+FRONTIER F:  the base (1e7 → F) is the A2 domain-verified pin
+(pinned ONCE,  F arbitrary);  the tail (F → ∞) is where the
+telescope's kernel p does the work —  the boundary term
+p(x) DN(x) and the integral of DN p' beyond F,  against the
+CLASSICAL (unconditional) S-bound  DN = O(log t) (the END-GAME
+3.5 item 2 line:  "sup|DN| = O(log t) ... gives the classical
+ceiling").  If p decays fast enough that  p(x) log x → 0  and
+∫_F^∞ |p'(x)| log x dx  converges,  then the tail is a classically
+computable constant C_tail(F → ∞),  and the universal walk bound
+becomes  `sup|DN| ≤ max(K_F (pinned data),  C_tail (classical))`
+—  an explicit FRONTIER-INDEPENDENT constant needing one data pin.
+That is A1 in spirit (data-free beyond the pin) and honest in
+form (the pin is a named hypothesis,  the W2M5 pattern).  Test:
+the exact S3c log-kernel form of p(g;t) as g → ∞ (its decay rate
+and that of p') versus O(log t) —  if the naive bound diverges
+(e.g. a loglog tail),  the missing side may already be one of the
+e1/e4 one-sided floors (plan R3:  "the missing side is the
+positive tail").  ALIVE candidate for the actual [S1] landing
+shape —  pending the kernel check.
+
+**E3.2 — Literature pass (references-first,  per standing
+directive).**  (a) The exact Littlewood forms:  the unconditional
+Ω± (which of the classical shapes —  the plan's section 3 cites
+one;  pin it down against Titchmarsh / Conrey-Ghosh);  the RH-
+CONDITIONAL Ω and,  critically,  whether the Ω-value sequences are
+shown to land AT ZEROS (if some theorem gives unbounded S at
+zeros,  A1 is DEAD and this log must say so in E4);  (b) any
+known unconditional statement about S sampled at zeros (including
+in the zero-spacing literature —  the gap formula expresses
+γ_{n+1} - γ_n through the FINITE DIFFERENCE of S at adjacent
+zeros,  so S-at-zeros bounds and gap bounds are two views of one
+object);  (c) the classical small-gap / gap-density results
+(exact forms;  status of the density fact behind E2 fact 4).
+
+**E3.3 — Formalize the barrier as a record.**  A small Lean/
+Python unit in the W2Beyond style:  the one-line corollary that
+ANY envelope majorant of the walk is at least the certified
+total variation (from the `driftTwoSided` hypothesis itself +
+the measured Σ|drift|),  with the constants pin-style (the
+0.335-per-zero ratio on the 3e10 band).  No data loading,  no
+claim —  a recorded refutation of "R2 closes the universal form
+by better epsilons".
+
+**E3.4 — The compensation idea (signed structure beyond the
+tautology).**  The signed block sum is the tautology (E2.1) —  but
+the kernel WEIGHTS the sum (the wire consumes p-weighted pieces
+through `m5_floor` / `m5_idn`).  Question:  is there a block-scale
+cancellation for the p-weighted drift sum  Σ p(γ_i) δ_i  that the
+unweighted tautology does not see —  e.g. via gap conservation
+(Σ gaps = band width,  analytic) pairing deficits with excesses
+under the p-weights?  First read:  the p-weights turn it into a
+summation-by-parts against p · (partial signed sums) = p · (DN
+differences) —  circular again UNLESS the p-structure plus the
+MVT band (`nas_inc_band`) breaks the loop.  Unlikely to be free
+(the tautology is strong);  the check belongs with E3.1 (same
+kernel).  Marked OPEN,  low prior.
+
+## E4.  The kernel-decay check (E3.1,  resolved) —  VERDICT:  the
+kernel half is GREEN (W2Beyond2);  the walk half is exactly E1
+
+**Question** (E3.1):  does the S3c log kernel p(g;t) decay fast
+enough for a tail-split,  so that the universal [S1] bound reduces
+"base band + classical tail" —  i.e.  is the kernel cost in the W2
+wire **independent of the data frontier G2** as G2 -> oo?
+
+**The kernel** (docs/W2-LEAN-PLAN.md,  day023/day029 verbatim;
+principal value at g = t,  which the straddle grid avoids —
+|gamma - t| >= 1/2 on the quantized straddle grid):
+
+    p(g;t) = log|g^2 - t^2| - log(g^2 + 1/4) + (1/2)/(g^2 + 1/4)
+
+**The check** (paper-and-pencil;  formalized as the new Lean module
+`W2Beyond2`):  for t >= 1 and the far side g >= 2t,
+
+    p(g;t) = log(1 - x) + (1/2)/(g^2 + 1/4),
+    x := (t^2 + 1/4)/(g^2 + 1/4)  <=  5/16 < 1/2,
+
+so with |log(1 - x)| <= 2x (x in (0, 1/2]):
+
+    |p(g;t)|  <=  2x + (1/2)/g^2  <=  (2 t^2 + 1)/g^2  <=  3 t^2/g^2,
+        in particular  p(g;t) -> 0 as g -> oo,
+
+and the far-side derivative
+
+    p'(g;t) = 2g/(g^2 - t^2) - 2g/(g^2 + 1/4) - g/(g^2 + 1/4)^2,
+    |p'(g;t)|  <=  (13/3) t^2 / g^3  <  5 t^2 / g^3   (g >= 2t),
+
+gives a far-tail total variation over [g1, oo) of at most
+(5/2) t^2 / g1^2.  The near-side pieces do not grow in G2 either:
+the straddle window [t - 1/2, t + 1/2] carries an O(1) log-scale
+mass (the nearest data point is >= 1/2 from the pole),  and the
+intermediate band [G1, t - 1/2] carries O(log(t/G1)) —  a
+classical log in t,  zero in G2.
+
+**Consequence (the architecture):**  in the W2 bound
+|W| <= K.(|p(G1)| + |p(G2)| + TV(p; (G1, G2])),  as the data
+frontier G2 -> oo:  |p(G2)| -> 0 (even against a classical
+DN = O(log G2) at the edge),  and the whole kernel TV is bounded
+by a function of (G1, t) alone (O(log t + 1),  never in G2).  The
+**kernel contributes a constant cost to any frontier —  the
+universal [S1] target via the W2 wire reduces,  on the walk side,
+to the pointwise |DN(j)| <= K on (G1, oo) —  exactly the E1
+restatement (S bounded at the zeros)**;  the domain-verified A2
+engine is precisely the mechanism that pushes the certified K
+forward as far as data extends,  at constant kernel price.  There
+is no hidden G2-growth on the kernel side —  the R3 "kernel decay
++ zero counting" route is resolved on the kernel half;  its
+missing side is the walk (E1),  not the kernel.
+
+**Formal status**:  `formal/RhAttack/W2Beyond2.lean` (new) —  the
+far-side rewrite,  the |p| <= 3t^2/g^2 tail bound,  the far-side
+derivative and its <= 5t^2/g^3 bound,  all from the pinned
+mathlib atoms (per the W2Integral precedent)  —  BUILD GREEN
+(`lake build`:  all 17,442 jobs pass on Lean 4.33.1 + mathlib
+v4.33.1;  named theorems  `eullK_far_rewrite`,  `eullK_tail_bound`,
+`eullK_far_deriv`,  `eullK_tail_deriv_bound`).  One atom still
+queued in the module:  the finite-interval variation statement
+|p(g2) - p(g1)| <= (5/2) t^2/g1^2 for g1 >= 2t (the FTC chain).
+
+**Precision note (the owner's question).**  No new numeric
+precision is needed for the next steps:  the A2 record is
+CERTIFIED (the per-gap 1e-4 f64 budget sits inside the certified
+sum;  the finish gates reproduce the pinned values);  the (i) fill
+has its own dps-30/60 pipelines (day037/038,  self-tested).  The
+bottleneck at data arrival is the THEOREM (E1,  with E4 having
+just removed the kernel as an obstacle),  not the digits.
+
+---
+
+## E5.  The data-arrival checklist (QUEUED —  executes when the
+re-fetched band passes its gates;  D1 is dry-runnable on A/B/C
+now)
+
+Prepared answers for when the band lands —  each item points a way
+at what the data should show,  or be allowed to kill in us:
+
+-  **D1 —  the block-sum cancellation probe (the E3.4 test).**
+    Over the ALREADY-verified A/B/C bands (no D-band needed —
+    the ~9.25e9 zero span on disk),  for block widths
+    {1e2, 1e3, 1e4, 1e5} in t-units:  the max over all blocks of
+    |sum_block delta_i|,  against the linear prediction
+    0.335 x |block|.  **Reading:**  if the block sums grow
+    LINEARLY,  the E2 barrier holds at every scale  (the
+    absolute-sum route stays dead,  and the A2 record is the end
+    of the line for that mechanism);  if they collapse
+    sub-linearly (square-root-like,  or bounded),  that is a
+    signal a signed-compensation theorem (E3.4) is worth
+    pursuing —  the data is telling us the mechanism to look for.
+    Dry-runnable now,  with the owner's green light as the
+    second job (bounded scan).
+-  **D2 —  excursion geometry.**  Top-100 |DN| excursions on the
+    completed D band:  locations,  magnitudes against the
+    2.615067 cap,  and the local gap signature (deficit-run vs
+    surplus-run,  and its length in zeros).  **Expectation from
+    E1:**  the excursions are cumulative deficit/surplus runs of
+    length O(10 .. 100) zeros,  not single-gap events  (the typical
+    per-gap drift is O(1),  so a 2.6 excursion needs many
+    same-signed steps).
+-  **D3 —  the S-at-zeros signature (the E1 fingerprint,  and a
+    cheap kill-shot in both directions).**  At the straddle
+    heights of the top-5 excursions:  dps-30 mpmath evaluations
+    of the continuous S (arg zeta) AT the excursion zeros and at
+    the midpoints of the next ~20 gaps.  **Reading:**  the E1
+    picture predicts |S(gamma)| <= ~2.6-3 at the excursion zeros
+    while |S| at nearby gap midpoints reaches the log-scale —
+    "tame at the zeros,  wild between"  confirmed empirically.
+    If instead |S(gamma)| were LARGE (log-scale) at an excursion
+    zero,  the graded-walk O(1) picture —  and with it the A1
+    target —  is dead on the data:  a few minutes of computation
+    at band landing decides it.
+-  **D4 —  decade-to-decade epsilon stability.**  The eps/zero
+    ratio on (3e9, 3e10] vs on (1e9, 3e9] (one line of diffs from
+    the certified sweeps).  **Reading:**  a stable ratio (the
+    0.335 scale) keeps the "the walk keeps its shape through the
+    decade" claim quantitative;  a rising ratio would not break
+    the per-domain A2 certificate (it stays valid on each band)
+    but would weaken any universal-shape reading.
+
+**E5 status**:  QUEUED.  D1 (A/B/C dry run) needs the owner's go
+as the second job;  D2-D4 run at the gates.

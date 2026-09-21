@@ -12,6 +12,14 @@
 > sweep in flight). Source documents: `RH-PROOF-OUTLINE.md`,
 > `DISCOVERY_LOG.md`, `ROUTE-ANCESTRY-AND-NOVELTY-2026-09-17.md`,
 > the honest split per atom (LEAN-PROVEN / CITED / PINNED / MEASURED)
+>
+> Post-record state (appended):  the 3×10¹⁰ census is landed and
+> certified (N(3×10¹⁰) = 101,635,962,231 exact;  sup|DN| = 2.615067 on
+> (10⁷, 3×10¹⁰];  pre-registered Outcome A,  A2-class so far),  and the
+> [S1] per-gap ε data layer is complete (SUM_EPS_CERT certified over the
+> band).  The open-surface items below are unchanged in substance;  the
+> current-state pointers are docs/CEILING-REPORT-DAY035.md (post-data
+> addendum) and docs/S1-A1-EXPLORATION.md (the [S1]/A1 research log).
 
 ## 0. Where all finiteness is contained
 

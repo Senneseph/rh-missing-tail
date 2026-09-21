@@ -492,3 +492,33 @@ runner + Python lock + Lean via elan + smoke test,  est
 2-4h);  and the preprint sentence swap (the data section
 becomes data-to-3e10 with the verified pins) once the
 outcome classification lands.
+
+## 3.10  POST-LANDING APPEND (appended —  3.9's "what lands"
+has landed)
+
+-  **(a) The [S1] data layer — DONE.**  The band verified
+    (N(3.0e10) = 101,635,962,231;  the finish-gate pins
+    reproduce);  sup|DN| = 2.615067 on (1e7, 3.0e10];  the
+    per-gap eps layer certified over the band:
+    SUM_EPS_CERT = 31,047,116,350.923088 (A2-class).
+    Pre-registered classification:  OUTCOME A (A2-class so
+    far;  A1 —  the analytic bound —  remains the open
+    theorem,  docs/S1-A1-EXPLORATION.md).
+-  **(b) The fill grade — DECIDED:  H1-FULL.**  The engine
+    stands built and self-tested:  day037_h1_3e10.py (CPU)
+    and day038_h1_3e10_gpu.py (iGPU slab path,  budgets
+    relaxed-never-tightened against the CPU reference,  all
+    four selftests green);  profile-gated before the certified
+    full run (29 windows / 725 straddles).
+-  **(c) The queued items — DONE.**  The T2 Docker
+    reproducibility package (Dockerfile + .dockerignore +
+    requirements.lock + scripts/rh/rh_fetch_data.py +
+    docs/PROJECT_GUIDE.md;  the Docker smoke test ran green —
+    it caught and fixed four fetch-script bugs and the elan
+    lazy-toolchain build hole);  the preprint sentence swap
+    (the data-to-3e10 revision,  the post-data classification
+    as a labeled addendum —  the pre-registered block
+    verbatim).
+-  The W2-beyond open content is restated in
+    docs/S1-A1-EXPLORATION.md (the A1 restatement;  the
+    absolute-sum barrier).

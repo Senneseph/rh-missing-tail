@@ -188,3 +188,30 @@ page naming exactly what remains is ZetaZeroSet.rhIfMarginZeta
 actions are the pre-print draft (this report and the queue
 close-out are its inputs) and the cloud launch of the 3e10
 stream.
+
+## POST-DATA ADDENDUM (appended —  the report above is the
+as-issued day035 record)
+
+-  The 3e10 extension has LANDED (the T2.5 parallel
+    orchestrator):  12,858 md5-gated shards,
+    92,577,877,714 zeros in (2.9992e9, 3.0001e10];
+    N(3.0e10) = 101,635,962,231 (RVM diff 0.09),  N(band end)
+    = 101,639,672,418 (diff 0.78),  min gap 2.2888e-05,  seam
+    0.319307,  G_LAST = 30001045999.981976.  The "queued,  not
+    started" lines above are the as-issued state.
+-  The no-divergence read past 9.06e9 zeros is no longer
+    density-model:  sup|DN| = 2.615067 on (1e7, 3.0e10] (full
+    census,  both conventions) —  under the pre-registered rule
+    the band classifies as **OUTCOME A** (the walk keeps its
+    shape);  outcome B (a break) is excluded on the band.
+-  The [S1] data layer is COMPLETE and certified (A2-class):
+    per-gap eps over the band,
+    SUM_EPS_CERT = 31,047,116,350.923088 (the certified total
+    variation —  the domain-verified engine;  why the absolute-
+    sum mechanism is not the universal closer:
+    docs/S1-A1-EXPLORATION.md E2).
+-  The measured [S3/S4] fill decision:  grade (i) H1-full on the
+    extended band (owner-selected);  the engine stands built and
+    self-tested (CPU and iGPU variants),  profile-gated before
+    the certified full run.
+-  No RH claim in the addendum,  as in the report.
