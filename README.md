@@ -15,19 +15,13 @@ Gambit:**
 *(tpf — to be finalized;  the name describes the
 approach, not any particular theorem)*
 
-> ***For 120 years*** the **zero-counting tail**,  S(t), has stood on a door marked:  
-> ```
-> a small-error theorem for this is equivalent to RH
-> ```
->
-> So every attack has gone around the door.
-> The gambit is to **stop** pushing it:
->
-> ```
-> The tail is kept exactly as it is — measured, telescoped, certified — and  
-> the detector-plus-squeeze *that its smallness unlocks* does the closing.
-> ```
-> 
+***For 120 years*** the **zero-counting tail**,  S(t), has stood on a door marked:
+
+    "a small-error theorem for this is equivalent to RH"
+
+So every attack has gone around the door. The gambit is to **stop** pushing it:
+
+    The tail is kept exactly as it is — measured, telescoped, certified — and the detector-plus-squeeze, that its smallness unlocks, does the closing.
 
 (Driver and door: Appendix A below.  Where the path stands today: the status section of this README and docs/CEILING-REPORT-DAY035.md.)
 
@@ -46,38 +40,34 @@ Mathlib, a pinned stable toolchain
 
 Exactly **one** piece, the *residual floor* of Part 7, is
 **open**.  
-The argument of Part 8 is stated as a proof **conditional on that one piece**.
+The argument of Part 8 is stated as a proof **conditional on that one piece**.  
+
 Nothing in this repository yet claims that the Riemann Hypothesis has been proved, only that some progress has been made where previously it was thought unproductive.  
-So even if this fails to resolve the problem, it becomes a further historical footnote as we have explored "beyond the door" and shown still, "it doth not yet appear".
+So even if this effort fails to resolve the primary question, it becomes a further historical footnote as we have explored "beyond the door" and shown still, "it doth not yet appear".
 
 ### 1. The hypothesis, and the counting reframe
 
-The Riemann zet function ζ(s), for Re(s) > 1:
+The Riemann zeta function $ζ(s)$, for $Re(s) > 1$:
 
-> ζ(s) = ∏<sub>p</sub> (1 − p^−s)^−1
+> $ζ(s) = ∏_p (1 − p^−s)^−1$,
 
-continues meromorphically to ℂ (single simple pole at s = 1) and satisfies
-the functional equation relating s to 1 − s. Its non-trivial zeros are
-those in the strip 0 < Re(s) < 1. **RH** asserts: every non-trivial zero
-ρ has Re(ρ) = ½.
+continues meromorphically to $ℂ$ (single simple pole at $s = 1$) and satisfies the functional equation relating $s$ to $1 − s$. Its non-trivial zeros are those in the strip $0 < Re(s) < 1$.  
 
-Two classical facts frame everything: (F1) ζ(x) > 0 for real x ∈ (0,1), so
-any off-line zero is non-real; (F2) by ζ̄(s) = ζ(̄s) and the functional
-equation, non-real zeros come in four-tuples {ρ, ρ̄, 1 − ρ, 1 − ρ̄} — so
-every off-line zero generates **two** zeros at the same positive height.
+**RH** asserts: every non-trivial zero $ρ$ has $Re(ρ) = ½$.
+
+Two classical facts frame everything: (F1) $ζ(x) > 0$ for real $x ∈ (0,1)$, so any off-line zero is non-real; (F2) by $ζ̄(s) = ζ(̄s)$ and the functional equation, non-real zeros come in four-tuples {ρ, ρ̄, 1 − ρ, 1 − ρ̄} — so every off-line zero generates **two** zeros at the same positive height.
 
 The Riemann–von Mangoldt formula counts zeros by height. With
 
-    N(t) = #{ non-trivial zeros ρ : 0 < Im(ρ) ≤ t },
-    main(t) = x·ln x − x − 1/8,  x = t/(2π),
-    S(t) = N(t) − main(t),
+> $N(t) =$ #{ non-trivial zeros $ρ : 0 < Im(ρ) ≤ t$ },  
+> $main(t) = x·ln x − x − 1/8,  x = t/(2π)$,  
+> $S(t) = N(t) − main(t)$,
 
-and N_on(t) counting only the on-line zeros and D(t) = N(t) − N_on(t)
-counting the **off-line** zeros at positive height ≤ t:
+and $N_on(t)$ counting only the on-line zeros and $D(t) = N(t) − N_on(t)$ counting the **off-line** zeros at positive height $≤ t$:
 
 > **Counting lemma (proven; machine-checked).** Under F1–F2, D is a
 > non-decreasing, even-valued step function, and **RH holds if and only if
-> D(t) = 0 for all t > 0.**
+> $D(t) = 0$ for all $t > 0$.**
 
 A failure of RH is thus a *counting event*: some positive height carries
 more zeros than the critical line alone would. The remainder of this
@@ -95,7 +85,7 @@ statement of this repository to date (|S| stays 2.558, 2.509, 3.206 at
 
 At every height t, compare **two independently defined objects**. The
 **definition side** (Part 3): ζ(½ + it) computed from the Euler sum and
-its integral tail — no zero input at all — reduced to a function W<sub>n</sub> whose
+its integral tail — no zero input at all — reduced to a function W_n whose
 size is an explicit, zero-count-free quantity. The **zero side** (Part
 4): the Riemann-1859 canonical product over the **on-line** zeros,
 truncated at a finite height G, plus a **rigorously bounded** error M(G, t)
@@ -135,29 +125,30 @@ precisely what remains.
 For n ∈ ℕ and s = ½ + it, write the Euler sum to n, the first-term integral
 approximation of the rest, and their residual
 
-    P_n(s) = Σ_{k=1}^n k^−s,      I(n, s) = n^{1−s}/(1 − s),
-    W_n(t) = ζ(½ + it) − P_n(½ + it) − I(n, ½ + it).
+> $P_n(s) = Σ_{k=1}^n k^−s$,  
+> $I(n, s) = n^{1−s}/(1 − s)$,  
+> $W_n(t) = ζ(½ + it) − P_n(½ + it) − I(n, ½ + it)$.
 
-W_n is the "missing tail": what remains of ζ after stripping the first n
-terms and their first-term integral. All of this is computable from the
-definition alone (Riemann–Siegel at height t; no zero list, no RH).
+$W_n$ is the "missing tail": what remains of ζ after stripping the first n terms and their first-term integral. All of this is computable from the definition alone (Riemann–Siegel at height t; no zero list, no RH).
 
-> **The missing-tail law.** The zeros enter at *second* order in
-> ζ − P_n. In the onset window t/n ≈ 2 the measured law is
+> **The missing-tail law.**  
+> The zeros enter at *second* order in $ζ − P_n$. In the onset window t/n ≈ 2 the measured law is
 >
->     |W_n(t)| / |I(n, ½ + it)| = ½·(t/n) + O(corrections),
+>> $W_n(t)| / |I(n, ½ + it)| = ½·(t/n) + O$ (corrections),
 >
 > to **four digits, independent of n** across n ∈ {10³, 10⁴, 10⁵}; the
 > explicit error disks of the Euler–Maclaurin remainder contain all 15
 > measured points on both of two independent computation stacks. The
-> corrections are the Euler–Maclaurin remainder of Σ_{k>n} k^−s − I(n, s).
+> corrections are the Euler–Maclaurin remainder of $Σ_{k>n} k^−s − I(n, s)$.  
+>
 > **Strictification (in progress).** The Euler–Maclaurin machinery
 > underneath is machine-checked: the first-order identity at integer
 > endpoints, and the finite second-order law (the finite core of the
 > Riemann 1859 identity), for every C² real-valued f on [n, m],
 >
->     Σ_{k=n}^{m−1} f(k) = ∫_n^m f + ½(f(m) − f(n))
->                        + (1/12)(f′(m) − f′(n)) − ½∫_n^m B̂₂(x) f″(x) dx,
+>> $Σ_{k=n}^{m−1} f(k)$  
+>> $= ∫_n^m f + ½(f(m) − f(n))$  
+>> $\+ (1/12)(f′(m) − f′(n)) − ½∫_n^m B̂₂(x) f″(x) dx,
 >
 > with B̂₂ the periodized second Bernoulli polynomial — stated and
 > verified in an abstract real-closed normed field (in particular ℝ).
