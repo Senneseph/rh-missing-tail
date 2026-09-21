@@ -7202,3 +7202,48 @@ primary sources,  NOT recalled:
 - **ETA at 2.0s/shard for the 11,235 remaining pending:
   ~6.3h** (sequential from the same point would be
   ~25.6h).
+
+## 2026-09-21 00:07-03:00 — 3e10 band COMPLETE; finish gates PASS (after one OOM kill of the in-process gate)
+
+- **PIPELINE-DONE 00:07:52**:  all 12,858 shards in
+  (1,389 sequential + 12 from the crashed first orchestration
+  + 11,457 under the fixed orchestrator).  Final state line
+  29998946000;  last shard N chain 101,632,223,674 ->
+  101,639,672,418.
+- **The in-process finish gate died ~01:2x WITHOUT a
+  traceback**:  cgroup oom_kill counter 5 (four older kills
+  visible in the wrapped 2,396-line dmesg ring,  the 5th =
+  this victim).  Cause:  the memmap-gate pattern (740GB
+  mapping + per-block asarray copies) pushed global
+  page-cache pressure past reclaimable on this 124GiB box
+  (the "peak ~1GB" claim in the orchestrator header
+  described only the gate's OWN allocations —  a false
+  comfort).  The band file is read-only for the gate:
+  NOTHING about the dataset changed (band size,  lastN,
+  state all re-verified after the kill).
+- **Bounded-memory gate re-run**
+  (scripts/rh/day036_finish_gates.py,  selftest PASS first:
+  RVM-consistent synthetic band accepted  —  N-pin |diff|
+  0.77 —  and an inverted-pair band CAUGHT at monotonicity;
+  3.6s):  plain-fd 256MB reads,  one reused buffer
+  (anon <= ~64MB),  progress heartbeat every 2GB,  same
+  gate semantics.  62.7 min wall.  RESULT:
+    total  = 92,577,877,714 zeros
+    span   = [2,999,246,000.182257,  30,001,045,999.981976]
+    min gap = 2.2888e-05  (a 23-microsecond zero pair,  Rho-
+             scale ~7e-5 —  the tightest pair in the whole
+             (2.999e9, 3.0e10] band)
+    seam   = 0.319307  in (0,1)
+    N(band end 3.0001e10) = 101,639,672,418  vs RVM
+    101,639,672,417.22   |diff| = 0.78  (tol 3)
+    N(3.0e10) = 101,635,962,231  (last zero under =
+    29,999,999,999.762012,  23.8 microseconds short)
+             vs RVM(3.0e10) 101,635,962,231.09  |diff| = 0.09
+    band/8 == lastN - FRONTIER_N  =>  CHAIN-EXACT
+  FINISH-GATES-PASS.
+- The 3e10 zeta-zero band is now a VERIFIED DATASET:
+  md5-gated per shard (12,858),  Nt chain proven at decode
+  time,  ordered byte-exact appends,  full-band strict
+  monotonicity,  both RVM gates inside tolerance by a wide
+  margin,  chain-exact size.  The N(3e10) pin enters the
+  project's data pins.
