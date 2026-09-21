@@ -428,3 +428,67 @@ the post-queue close-out (2026-09-20):
       docstring.  The remaining open legs are exactly [S1] and the
       measured [S3/S4] fills —  see docs/CEILING-REPORT-DAY035.md
       item 3 and the README final-state section.
+
+## 3.9 The 3e10 landing — what lands when the run lands
+
+The 3e10 band is complete and verified (results/3E10-BAND.md;
+N(3.0e10) = 101,635,962,231 pinned;  both RVM gates inside
+tolerance;  CHAIN-EXACT size).  Post-landing work splits into
+a data layer ([S1]) and a fill decision ([S3/S4]).
+
+**(a) The [S1] data layer — in flight, mechanical.**
+`scripts/rh/day036_epsilon_sweep.py` streams the verified
+band once and produces the W2Beyond1.driftTwoSided data
+contract:  per-gap  eps_i = |n_asym(t_{i+1}) - n_asym(t_i) -
+1|,  the certificate  SUM_EPS_CERT = sum eps_i + (certified
+f64 error budget,  1e-4 per gap),  so that
+sup_k |DN(k) - DN(0)| <= SUM_EPS_CERT  on the band from the
+pinned DN(0);  plus the S3e-convention sup|DN| walk pin (the
+end value is the next band's pinned start) and the census.
+Outcome classification per the pre-registered rule in the
+preprint gate section (A1 / A2 / B / C)  —  by rule,  not by
+hope.  No RH claim at any outcome short of the rule.
+
+**(b) The [S3/S4] measured fills — an owner decision on
+grade.**  The leg (ZetaZeroSet.rhIfMarginZeta docstring):
+"the |zeta| fill and zero-side witness on the actual zero
+set",  standing at the verified levels named in the preprint
+Section 6 (the 3e9-scale H1 certificate-grade machine of
+day034_h1cert.py:  margin_new > 1 + eps_explicit at every
+grid straddle,  dps-30 400-node quad,  machine-verified
+error budget;  the squeeze wires of the S4 family consume
+the measured |zeta| and the zero-side data).  Three grades
+are on the table for the extended band (2.9992e9, 3.0e10]:
+
+- **Grade H1-full**:  the day034 protocol re-issued over the
+  extended band (window grid continued in the same geometric
+  sequence past 3e9,  25 straddles per window,  dps-30 quad
+  at every straddle,  explicit budgets).  The tail sums now
+  run over 9.26e10 actual zeros per straddle  —  the
+  dominant cost.  Order-of-magnitude (a profile,  not yet a
+  measurement):  days of compute single-stream per straddle,
+  roughly a day or two if vectorized across the 25-straddle
+  fan with chunked streaming at 512MB.  This is the grade
+  that makes A1's "certificate-grade on the extended band"
+  literally true.
+- **Grade measured-subset**:  the S3e/S3d-style band-level
+  measured levels (worst-case margin statistics on a coarser
+  grid,  the class of level the 3e9 band already reports)
+  over the extended band.  Hours to a day or two.  The
+  preprint honesty note would then state the fill level per
+  band,  explicitly.
+- **Grade deferral**:  the fills stand at the 3e9 verified
+  levels;  the preprint states that expressly;  the claim
+  level stays exactly as in preprint Section 6 (A2 is a
+  perfectly fine landing per the pre-registered rule).
+
+The decision is on GRADE (and the compute window it takes),
+not on direction:  all three are honest landings,  and the
+Lean composition is identical across all three.
+
+**(c) Also queued,  independent of (a) and (b):**  the T2
+Docker reproducibility materials (Dockerfile + rh-reproduce
+runner + Python lock + Lean via elan + smoke test,  est
+2-4h);  and the preprint sentence swap (the data section
+becomes data-to-3e10 with the verified pins) once the
+outcome classification lands.
