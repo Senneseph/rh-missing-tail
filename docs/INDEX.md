@@ -5,6 +5,12 @@ outputs behind every figure live in the working tree
 (`kainos-logos/scripts/`); the paths cited throughout resolve from
 there.
 
+## Start here
+
+| Document | What it is |
+|---|---|
+| [PROJECT_GUIDE.md](PROJECT_GUIDE.md) | The user guide for a clean machine: the Docker container (digest-pinned, no auto-run at boot), plain-Python install, the repository map, the single data entry point (`scripts/rh/rh_fetch_data.py`), and the test commands from the no-data engine self-test to the full smoke-test to the Lean build. |
+
 ## Proof and argumentation
 
 | Document | What it is |

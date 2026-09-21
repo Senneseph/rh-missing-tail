@@ -46,7 +46,8 @@ EULER_G = mp.euler
 E = mp.euler
 G_MAX = mp.mpf("10000000")
 
-LIST = "/home/jsmille/Projects/rh-missing-tail/scripts/rh/zeros_T10000000_lmfdb.txt"
+LIST = os.path.dirname(os.path.abspath(__file__)) \
+    + "/zeros_T10000000_lmfdb.txt"   # portability: repo-relative (was an absolute path)
 
 def setup():
     gammas = np.loadtxt(LIST, dtype=np.float64)

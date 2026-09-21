@@ -1,0 +1,17 @@
+# rh-missing-tail: keep the image build lean.  Zero DATA never ships
+# in the repo (gitignored, regenerable via scripts/rh/rh_fetch_data.py).
+.git
+formal/.lake
+tmp/
+__pycache__/
+*.pyc
+# the measured zero bands (the big ones) and job logs
+*.f64
+*.dat
+scripts/rh/hi1e9/
+scripts/rh/hi3e9/
+scripts/rh/hi3e10/
+scripts/rh/out_*.txt
+scripts/rh/out_*.log
+scripts/rh/*.err
+selftest_stream*.f64

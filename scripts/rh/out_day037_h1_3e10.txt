@@ -1,0 +1,2 @@
+# day037 H1 cert 3e10 PROFILE workers=14 2026-09-21 08:58:23
+# point detail (incremental; one row per straddle):

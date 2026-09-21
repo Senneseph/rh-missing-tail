@@ -1,0 +1,7 @@
+# Math stack for this repo's Docker image (see Dockerfile).
+# Hash-pinned (pip --require-hashes).  numpy hash = the cp312
+# manylinux_2_17 x86_64 wheel (the container platform).
+mpmath==1.4.1 \
+    --hash=sha256:dc4f0ea2304480d4a9a48a94c1020571558ade522b44a6912efac63a586e140f
+numpy==1.26.4 \
+    --hash=sha256:675d61ffbfa78604709862923189bad94014bef562cc35cf61d3a07bba02a7ed
