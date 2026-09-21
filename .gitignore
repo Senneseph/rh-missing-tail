@@ -13,3 +13,10 @@ scripts/rh/hi1e9/
 *.npz
 scripts/rh/hi3e9/
 tmp/*.log
+
+# downloaded / generated zero data (regenerable; see docs/3E10-CLOUD-RUNBOOK.md)
+*.f64
+*.dat
+# live job logs
+out_*.log
+*.err
