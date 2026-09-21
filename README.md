@@ -9,7 +9,7 @@
 they generate, the onset at which zero content first enters the budget —
 and a separation program with explicit falsifiers.**
 
-**Our approach: the Riemann–von Mangoldt
+**Our approach, the Riemann–von Mangoldt
 Gambit:**
 
 *(tpf — to be finalized;  the name describes the
@@ -37,7 +37,7 @@ The argument below is a **complete
 proof *skeleton* of the Riemann Hypothesis**. Its pieces are one of:
 - **(i) proven:**
   - The marked pieces are machine-checked in Lean 4.33.1 +
-Mathlib, a pinned stable toolchain)
+Mathlib, a pinned stable toolchain
 - **(ii) classical:**  
   - Taken from the literature
 - **(iii) measured:**  
@@ -48,13 +48,13 @@ Exactly **one** piece, the *residual floor* of Part 7, is
 **open**.  
 The argument of Part 8 is stated as a proof **conditional on that one piece**.
 Nothing in this repository yet claims that the Riemann Hypothesis has been proved, only that some progress has been made where previously it was thought unproductive.  
-So even if this "doesn't pan out", it becomes a further historical footnote as we have explored "beyond the door" and shown, "it doth not yet appear".
+So even if this fails to resolve the problem, it becomes a further historical footnote as we have explored "beyond the door" and shown still, "it doth not yet appear".
 
 ### 1. The hypothesis, and the counting reframe
 
-The Riemann zeta function ζ(s), for Re(s) > 1,
+The Riemann zet function ζ(s), for Re(s) > 1:
 
-    ζ(s) = ∏_p (1 − p^−s)^−1,
+> ζ(s) = ∏<sub>p</sub> (1 − p^−s)^−1
 
 continues meromorphically to ℂ (single simple pole at s = 1) and satisfies
 the functional equation relating s to 1 − s. Its non-trivial zeros are
@@ -95,7 +95,7 @@ statement of this repository to date (|S| stays 2.558, 2.509, 3.206 at
 
 At every height t, compare **two independently defined objects**. The
 **definition side** (Part 3): ζ(½ + it) computed from the Euler sum and
-its integral tail — no zero input at all — reduced to a function W_n whose
+its integral tail — no zero input at all — reduced to a function W<sub>n</sub> whose
 size is an explicit, zero-count-free quantity. The **zero side** (Part
 4): the Riemann-1859 canonical product over the **on-line** zeros,
 truncated at a finite height G, plus a **rigorously bounded** error M(G, t)
