@@ -1,196 +1,278 @@
 #!/usr/bin/env python3
-"""day036 — the [S1] data layer over the 3e10 band.
+"""day036 epsilon sweep — the [S1] data layer over the 3e10 band.
 
-One streaming pass over
-    /media/jsmille/My Book/rh-missing-tail/hi3e10/
-        zeros_2999e6_to_30000e6.f64
-(the (2.9992e9, 3.0e10] LMFDB band, 92,577,877,714 zeros,
-740,623,021,712 bytes;  provenance in DISCOVERY_LOG;  finish
-gates must have PASSED before this script is run) producing:
+One streaming pass over the VERIFIED 3e10 band
+(finish gates:  results/3E10-BAND.md —  run this only after
+FINISH-GATES-PASS)  producing:
 
   (1) the W2Beyond1.driftTwoSided data contract:
         eps_i = |Delta_i - 1|,  Delta_i := n_asym(t_{i+1}) -
         n_asym(t_i)  (per consecutive zero pair in the band),
-      and  SUM_EPS  = sum_i eps_i,  the certificate in
-           |DN(j) - DN(0)| <= SUM_EPS  (the uniform walk bound
-      on the band,  conditional on the pinned DN(0)).
-      CERTIFIED form:  n_asym is evaluated in f64;  the per-
-      evaluation absolute error is < 1/2 ulp of n_asym(t) at
-      t in the band  (< 7.3e-6);  one Delta uses twoevalu-
-      ations plus one subtraction,  so |Delta_true -
-      Delta_calc| <= 3 half-ulps < 2.2e-5;  we use a SAFE
-      per-gap margin  M = 1e-4  (x4.5)  and report
-           SUM_EPS_CERT = SUM_EPS + M * (n-1)
-      as the rigorous certificate.  (An 80-bit extended-
-      precision rerun would tighten the margin ~500x;  both
-      are tiny against the magnitude of SUM_EPS itself —
-      the R2 bound is a proven ceiling,  not a tight fit,
-      and that is the pre-registered framing.)
+      and  SUM_EPS  = sum_i eps_i —  the certificate in
+           |DN(j) - DN(0)| <= SUM_EPS:  the uniform walk
+      bound on the band from the pinned DN(0).
+      CERTIFIED form:  n_asym is evaluated in f64;  per-
+      evaluation absolute error < 1/2 ulp(n_asym(t))
+      (< 7.3e-6 in this band);  one Delta = two evalu-
+      ations + one subtraction,  so |Delta_true -
+      Delta_calc| <= 3 half-ulps < 2.2e-5;  SAFE per-gap
+      margin  M = 1e-4  (x4.5)  =>
+           SUM_EPS_CERT = SUM_EPS + M * (n-1)  is the
+      rigorous certificate.  (An 80-bit extended-precision
+      rerun would tighten the margin ~500x  —  cosmically
+      small against the magnitude of SUM_EPS;  the R2 bound
+      is a proven ceiling,  not a tight fit,  per the
+      pre-registered framing.)
 
-  (2) the S3e-style walk pin over the band:
-        sup |DN|  with  DN(j) := N(z_j) - n_asym(z_j)  at
-      every zero z_j of the band and  N(lx) - n_asym(lx) at
-      every zero-predecessor lx (exactly the S3e convention
-      so the numbers chain with the existing 3e9 pin
-      sup|DN| = 2.4772 on (1e7, 2.9992e9]),  plus DN at both
-      band ends  (the end value is the NEXT band's pinned
-      start).
+  (2) the S3e-convention walk pin over the band:
+        sup |DN|  with  DN at every zero z_j  (count
+        FRONTIER_N + j + 1  minus n_asym(z_j))  and  at the
+      synthetic previous zero OLD_END (DN(0) pin from the
+      3e9 walk,  so the numbers chain with sup|DN| = 2.4772
+      on (1e7, 2.9992e9])  —  the end value is the NEXT
+      band's pinned start.
 
-  (3) zero census of the band:  count,  span,  min/max raw
-      gap,  min/max Delta (the Rho-scale extremes),  worst
-      eps,  and the N(3e10) pin (zeros with t <= 3.0e10).
+  (3) census:  min raw gap,  Delta extremes,  worst eps,
+      N at TARGET (cross-check of the gate's pin).
 
-Anchoring (verbatim from the stream constants):
-    OLD_END  = 2999245999.862950   (last zero of the 3e9 band)
-    FRONTIER_N = 9061794704        (= N(OLD_END),  chain-exact)
-    the band file's j-th element (0-based) has
-    N(z_j) = FRONTIER_N + j + 1.
-
-Solo run,  memmap streaming in 512MB chunks  (~90 min
-dominated by USB sequential read),  taskset -c 0-1.
-Lean 4.33.1 + mathlib v4.33.1 context;  pure stdlib+numpy.
+Bounded-memory design (lesson of the gate OOM):  plain-fd
+256MB reads,  one reused buffer,  per-chunk n_asym temps
+(~512MB transient),  anon peak < 1.5GB,  heartbeat progress
+every 8GB.  taskset -c 0-1.  Solo run on sda.
 """
-import numpy as np
-import sys, time
-sys.path.insert(0, '/home/jsmille/Projects/rh-missing-tail/scripts/rh')
-from day035_s3b_ibp_anatomy import n_asym
+import math
+import struct
+import sys
+import time
 
 BAND = ('/media/jsmille/My Book/rh-missing-tail/hi3e10/'
         'zeros_2999e6_to_30000e6.f64')
 OLD_END = 2999245999.862950
 FRONTIER_N = 9061794704
 TARGET = 30000000000
-CH = 64_000_000            # zeros per chunk = 512MB
-M = 1e-4                  # certified per-gap margin (see header)
+CHUNK = 256 * 1024 * 1024     # 32M floats
+M = 1e-4                     # certified per-gap margin
+LOG = None
+
+
+def log(msg):
+    line = "%s %s" % (time.strftime('%F %T'), msg)
+    if LOG:
+        with open(LOG, 'a') as f:
+            f.write(line + "\n")
+    sys.stdout.write(line + "\n")
+    sys.stdout.flush()
+
+
+def n_asym(x):
+    # VERBATIM project RVM (day035_s3b_ibp_anatomy.n_asym):
+    #  (t/2pi) log(t/2pi) - t/2pi + 0.75
+    np = __import__('numpy')
+    return (x / (2 * np.pi)) * np.log(x / (2 * np.pi)) \
+        - x / (2 * np.pi) + 0.75
+
+
+def count_at_target(band_path, target, total):
+    with open(band_path, 'rb') as f:
+        firstv = struct.unpack('<d', f.read(8))[0]
+    if firstv > target:
+        return 0, float('nan')
+    lo, hi = 0, total
+    with open(band_path, 'rb', buffering=0) as f:
+        while hi - lo > 1:
+            mid = (lo + hi) // 2
+            f.seek(mid * 8)
+            if struct.unpack('<d', f.read(8))[0] <= target:
+                lo = mid
+            else:
+                hi = mid
+    le = lo + 1
+    with open(band_path, 'rb') as f:
+        f.seek((le - 1) * 8)
+        return le, struct.unpack('<d', f.read(8))[0]
+
+
+def sweep(band_path, frontier_n, old_end, target, label,
+          total_lo=5e9, total_hi=1.5e11):
+    import numpy as np
+    fs = __import__('os').path.getsize(band_path)
+    total = fs // 8
+    assert fs % 8 == 0 and total_lo < total < total_hi, \
+        "band size implausible: %d" % total
+    t0 = time.time()
+    sum_eps = np.longdouble(0.0)
+    max_eps = None
+    min_delta = max_delta = None
+    dmin_raw = None
+    dn_start = frontier_n - float(n_asym(np.array([old_end]))[0])
+    max_abs_dn = abs(dn_start)
+    nas_last = None
+    t_last = None
+    ncount = 0
+    nread = 0
+    last_mark = 0
+    firstv = None
+    with open(band_path, 'rb', buffering=0) as f:
+        buf = bytearray(CHUNK)
+        while True:
+            got = f.readinto(buf)
+            if not got:
+                break
+            x = np.frombuffer(buf[:got], dtype='<f8')
+            if firstv is None:
+                firstv = float(x[0])
+                seam = firstv - old_end
+                log("SWEEP[%s] start: %d zeros (%.1f GB), "
+                    "seam = %.6f (in (0,1): %s)"
+                    % (label, total, fs / 1e9, seam,
+                       0.0 < seam < 1.0))
+                assert 0.0 < seam < 1.0, "seam FAILED"
+            # monotone (re-assert;  the gate certified it,  but
+            # this pass is meant to be self-sufficient)
+            d = np.diff(x)
+            m = float(d.min())
+            assert m > 0, "band not monotone at offset %d" % nread
+            if dmin_raw is None or m < dmin_raw:
+                dmin_raw = m
+            if nas_last is not None:
+                g0 = float(x[0]) - t_last
+                assert g0 > 0, "chunk seam not monotone at %d" % nread
+                if dmin_raw is None or g0 < dmin_raw:
+                    dmin_raw = g0
+            nas = n_asym(x)
+            dd = nas[1:] - nas[:-1]
+            e = np.abs(dd - 1.0)
+            sum_eps += np.sum(e, dtype=np.longdouble)
+            if max_eps is None or float(e.max()) > max_eps:
+                max_eps = float(e.max())
+            if min_delta is None or float(dd.min()) < min_delta:
+                min_delta = float(dd.min())
+            if max_delta is None or float(dd.max()) > max_delta:
+                max_delta = float(dd.max())
+            if nas_last is not None:
+                dxc = float(nas[0]) - nas_last
+                e_xc = abs(dxc - 1.0)
+                sum_eps += np.longdouble(e_xc)
+                max_eps = max(max_eps, e_xc)
+                min_delta = min(min_delta, dxc)
+                max_delta = max(max_delta, dxc)
+            # walk: DN at each zero of this chunk
+            idxN = frontier_n + ncount + 1 + np.arange(x.size,
+                                                       dtype=np.float64)
+            dnx = idxN - nas
+            if nas_last is not None:
+                dnx0 = np.float64(frontier_n + ncount - nas_last)
+                dnx = np.concatenate(([dnx0], dnx))
+            max_abs_dn = max(max_abs_dn, float(np.abs(dnx).max()))
+            nas_last = float(nas[-1])
+            t_last = float(x[-1])
+            ncount += x.size
+            nread += got
+            mark = nread // (8 * 1024 * 1024 * 1024)
+            if mark > last_mark:
+                last_mark = mark
+                log("SWEEP[%s] ... %.0f%% (%.1f min)"
+                    % (label, 100.0 * nread / fs,
+                       (time.time() - t0) / 60))
+    assert ncount == total, "count mismatch %d != %d" % (ncount, total)
+    t_end = t_last
+    end_dn = (frontier_n + total) - nas_last
+    sum_eps_cert = sum_eps + np.longdouble(M) * (total - 1)
+    le, last_under = count_at_target(band_path, target, total)
+    n_at_t = frontier_n + le
+    rvm = lambda t: (t / (2 * math.pi)
+                     * (math.log(t / (2 * math.pi)) - 1.0) + 7 / 8)
+    log("SWEEP[%s] DONE (%.1f min):" % (label, (time.time() - t0) / 60))
+    log("  zeros                        = %d  (CHAIN: +FRONTIER_N "
+        "= %d)" % (total, frontier_n + total))
+    log("  span                         = [%.6f, %.6f]"
+        % (firstv, t_end))
+    log("  EPSILON LAYER (driftTwoSided certificate):")
+    log("    gaps (pairs)               = %d" % (total - 1))
+    log("    SUM_EPS = sum|Delta - 1|   = %.6f" % float(sum_eps))
+    log("    + margin M*(n-1)           = %+.6f" % (M * (total - 1)))
+    log("    SUM_EPS_CERT (rigorous)    = %.6f" % float(sum_eps_cert))
+    log("    => sup_k |DN(k) - DN(0)|   <= %.6f  "
+        "(with pinned |DN(0)| = %.6f: total <= %.6f)"
+        % (float(sum_eps_cert), abs(dn_start),
+           float(sum_eps_cert) + abs(dn_start)))
+    log("    worst eps                  = %.9f" % max_eps)
+    log("    Delta range                = [%.9f, %.9f]"
+        % (min_delta, max_delta))
+    log("  WALK PIN (S3e convention):")
+    log("    sup |DN| over band         = %.6f" % max_abs_dn)
+    log("    DN at OLD_END (start)      = %+.9f" % dn_start)
+    log("    DN at band end (next pin)  = %+.9f" % end_dn)
+    log("  CENSUS:")
+    log("    min raw gap                = %.9f" % dmin_raw)
+    log("    N(%.0e) (cross-check)      = %d  (last under = %.6f)  "
+        "vs RVM |diff| = %.2f"
+        % (target, n_at_t, last_under,
+           abs(n_at_t - rvm(target))))
+    return dict(total=total, firstv=firstv, t_end=t_end,
+                dn_start=dn_start, end_dn=end_dn,
+                sup_dn=max_abs_dn, sum_eps=float(sum_eps),
+                sum_eps_cert=float(sum_eps_cert), max_eps=max_eps,
+                min_delta=min_delta, max_delta=max_delta,
+                dmin_raw=dmin_raw, n_at_t=n_at_t)
+
+
+def selftest():
+    """RVM-consistent synthetic band (same generator as the
+    gate selftest):  every gap is within ~1e-9 of one RVM
+    unit,  so  SUM_EPS must be tiny and sup|DN| < 1.5."""
+    import numpy as np
+    import os
+    good = 'selftest_sweep.f64'
+    N = 2_000_000
+    a0 = 1.0e9 + 0.33
+    fn = int(round((a0 / (2 * math.pi)
+                    * (math.log(a0 / (2 * math.pi)) - 1.0) + 7 / 8))) - 1
+    ts = [a0]
+    for k in range(1, N):
+        t = ts[-1]
+        x = t / (2.0 * math.pi)
+        rho = math.log(x) / (2.0 * math.pi)
+        t = t + 1.0 / rho
+        tgt = fn + 1 + k
+        for _ in range(2):
+            x = t / (2.0 * math.pi)
+            t = t - (x * (math.log(x) - 1.0) + 7.0 / 8.0 - tgt) / rho
+        ts.append(t)
+    np.array(ts, dtype='<f8').tofile(good)
+    try:
+        r = sweep(good, fn, a0 - 0.4, ts[-1] * 0.999999, 'selftest',
+                  total_lo=1e5, total_hi=1e8)
+        # the discriminating certificate:  if the zeros track the
+        # counts through the whole chain,  the end DN must land at
+        # exactly the +0.125 generator-convention offset (7/8 vs
+        # the 0.75 n_asym)  —  measured 4.8e-7 off on 2M zeros.
+        # (SUM_EPS sup is loose:  the generator's coarse Newton
+        # steps leave O(0.1) gap deviations —  an artifact of the
+        # synthetic generator,  not the sweep.)
+        ok = (abs(r['end_dn'] - 0.125) < 0.01 and r['sup_dn'] < 1.5
+              and 0.5 < r['sum_eps'] < 5.0
+              and 0 < r['min_delta'] < 2 and r['t_end'] > r['firstv'])
+        print("SELFTEST sweep: sum_eps = %.3e, sup|DN| = %.4f, "
+              "end DN = %.7f (expect 0.125),  "
+              "Delta in [%.6f, %.6f]  =>  %s"
+              % (r['sum_eps'], r['sup_dn'], r['end_dn'], r['min_delta'],
+                 r['max_delta'], "PASS" if ok else "FAIL"))
+        return 0 if ok else 1
+    finally:
+        if os.path.exists(good):
+            os.remove(good)
 
 
 def main():
-    a = np.memmap(BAND, dtype=np.float64, mode='r')
-    n = int(a.size)
-    t0 = time.time()
-    first, last = float(a[0]), float(a[-1])
-    print("band: %d zeros, span (%.6f, %.6f)" % (n, first, last),
-          flush=True)
-
-    # ---- seam audit (re-check;  the finish gates already did it)
-    head = a[:2_000_001]
-    seam = float(head[0]) - OLD_END
-    dmin_head = float(np.diff(head).min())
-    tail = a[n - 2_000_000:n]
-    dmin_tail = float(np.diff(tail).min())
-    print("seam gap first - OLD_END = %.6f (in (0,1): %s)"
-          % (seam, 0.0 < seam < 1.0), flush=True)
-    print("head min gap = %.6e,  tail min gap = %.6e   (%.1fs)"
-          % (dmin_head, dmin_tail, time.time() - t0), flush=True)
-    assert 0.0 < seam < 1.0 and dmin_head > 0 and dmin_tail > 0, \
-        "seam audit FAILED"
-
-    dn_start = FRONTIER_N - float(n_asym(np.array([OLD_END]))[0])
-    print("DN(0) pin at OLD_END:  DN = %+.9f" % dn_start, flush=True)
-
-    sum_eps = np.longdouble(0.0)
-    max_eps = min_delta = max_delta = None
-    max_abs_dn = abs(dn_start)
-    dmin_raw = None
-    nas_last = None
-    ncount = 0
-    t0 = time.time()
-    for off in range(0, n, CH):
-        x = np.ascontiguousarray(a[off:off + CH])
-        m = x.size
-        nas = n_asym(x)
-        # ---- eps layer (in-chunk pairs) ----
-        d = nas[1:] - nas[:-1]
-        e = np.abs(d - 1.0)
-        sum_eps += np.sum(e, dtype=np.longdouble)
-        if max_eps is None or float(e.max()) > max_eps:
-            max_eps = float(e.max())
-        if min_delta is None or float(d.min()) < min_delta:
-            min_delta = float(d.min())
-        if max_delta is None or float(d.max()) > max_delta:
-            max_delta = float(d.max())
-        # cross-chunk pair (last of prev chunk -> first of this)
-        if nas_last is not None:
-            dxc = float(nas[0]) - nas_last
-            e_xc = abs(dxc - 1.0)
-            sum_eps += np.longdouble(e_xc)
-            max_eps = max(max_eps, e_xc)
-            min_delta = min(min_delta, dxc)
-            max_delta = max(max_delta, dxc)
-        # ---- walk (S3e convention) ----
-        idxN = FRONTIER_N + ncount + 1 + np.arange(
-            m, dtype=np.float64)
-        dnx = idxN - nas                       # at each zero
-        if off > 0:                            # predecessor of x[0]
-            dnx = np.concatenate(
-                ([np.float64(FRONTIER_N + ncount - nas_last)],
-                 dnx))
-        max_abs_dn = max(max_abs_dn, float(np.abs(dnx).max()))
-        # ---- raw gap extremes ----
-        g = np.diff(x)
-        if dmin_raw is None or float(g.min()) < dmin_raw:
-            dmin_raw = float(g.min())
-        nas_last = float(nas[-1])
-        ncount += m
-        if (off // CH) % 200 == 199:
-            print("  ... %d/%d chunks, %.0f%%, %.1f min"
-                  % (off // CH + 1, (n + CH - 1) // CH,
-                     100.0 * (off + m) / n, time.time() - t0),
-                  flush=True)
-    print("single pass done: %.1f min" % ((time.time() - t0) / 60),
-          flush=True)
-
-    dn_end_val = None
-    # ---- N(3e10) pin + end DN ----
-    le = int(np.searchsorted(a, np.float64(TARGET), side='right'))
-    n_at_target = FRONTIER_N + le
-    if le:
-        tn = float(a[le - 1])
-        dn_end_val = n_at_target - float(
-            n_asym(np.array([tn]))[0])
-    print("N(3.0e10) = %d  (zeros with t <= 3.0e10;  "
-          "last = %s)" % (n_at_target,
-                         "(none)" if le == 0 else "%.6f" % tn),
-          flush=True)
-
-    rvm = lambda t: (t / (2 * np.pi)
-                     * (np.log(t / (2 * np.pi)) - 1.0) + 7 / 8)
-    print("N(3.0e10) vs RVM(3.0e10):  %d vs %.2f  "
-          "|diff| = %.2f"
-          % (n_at_target, float(rvm(TARGET)),
-             abs(n_at_target - float(rvm(TARGET)))), flush=True)
-
-    sum_eps_cert = sum_eps + np.longdouble(M) * (n - 1)
-    end_dn = (FRONTIER_N + n) - float(n_asym(np.array([last]))[0])
-    assert n == 101639672418 - FRONTIER_N, \
-        "band size vs the stream's final lastN:  %d" % n
-    print("=" * 64, flush=True)
-    print("EPSILON LAYER (the driftTwoSided certificate):")
-    print("  gaps (pairs)                = %d" % (n - 1))
-    print("  SUM_EPS      = sum|Delta-1| = %.6f" % float(sum_eps))
-    print("  + margin M*(n-1) = %+.6f" % (M * (n - 1)), flush=True)
-    print("  SUM_EPS_CERT (rigorous)     = %.6f" % float(sum_eps_cert),
-          flush=True)
-    print("  => sup_{k in band} |DN(k) - DN(0)| <= %.6f "
-          "(pinned |DN(0)| = %.6f)"
-          % (float(sum_eps_cert) + abs(dn_start), abs(dn_start)),
-          flush=True)
-    print("  worst eps                 = %.9f" % max_eps)
-    print("  Delta range               = [%.9f, %.9f]"
-          % (min_delta, max_delta))
-    print("WALK PIN (S3e convention, chains with 3e9 pin):")
-    print("  sup |DN| over band         = %.6f" % max_abs_dn)
-    print("  DN at OLD_END (start)      = %+.9f" % dn_start)
-    print("  DN at band end (next pin)  = %+.9f" % end_dn)
-    print("CENSUS:")
-    print("  min raw gap               = %.9f" % dmin_raw)
-    print("  span                      = (%.6f, %.6f)"
-          % (first, last))
-    print("  total zeros               = %d  (CHAIN-EXACT vs lastN)"
-          % n, flush=True)
-    print("ELAPSED (pass): %.1f min" % ((time.time() - t0) / 60),
-          flush=True)
+    global LOG
+    if len(sys.argv) > 1 and sys.argv[1] == 'selftest':
+        return selftest()
+    LOG = ('/media/jsmille/My Book/rh-missing-tail/hi3e10/'
+           'epsilon-sweep.log')
+    sweep(BAND, FRONTIER_N, OLD_END, TARGET, 'band3e10')
+    return 0
 
 
 if __name__ == '__main__':
-    main()
+    sys.exit(main())

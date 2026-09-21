@@ -7247,3 +7247,39 @@ primary sources,  NOT recalled:
   monotonicity,  both RVM gates inside tolerance by a wide
   margin,  chain-exact size.  The N(3e10) pin enters the
   project's data pins.
+
+## 2026-09-21 03:07-04:26 — [S1] data layer complete:  epsilon sweep over the 3e10 band
+
+- `day036_epsilon_sweep.py` (bounded-memory rewrite of the
+  first draft,  selftest PASS —  the discriminating check:
+  end DN lands at the +0.125 generator offset,  measured
+  4.8e-7 off) ran solo on sda,  79.2 min.
+- CERTIFICATE (the driftTwoSided data contract,  92,577,877,713
+  gaps):  SUM_EPS = 31,037,858,563.15;  + certified f64
+  budget 9,257,787.77 (1e-4/gap,  0.03% of the sum);
+  SUM_EPS_CERT = 31,047,116,350.92.  With the pinned
+  |DN(0)| = 0.525129318:  sup |DN(k) - DN(0)| <=
+  3.1047e10 over the band  —  the uniform walk bound is now
+  a machine-/data-certified object.
+- DELTAS in [7.6294e-05, 4.3018]  (low end = the
+  23-microsecond pair;  high end = a 4.3-RVM-unit super
+  gap);  worst eps 3.3018.
+- WALK (S3e convention):  sup|DN| = 2.615067 on the band;
+  DN end pin (+0.904983521) is the next band's start.
+  GLOBAL measured sup|DN| on (1e7, 3.0e10] = 2.615067 (the
+  3e9 pin 2.4772 is subsumed).  No divergence past 9.06e9
+  zeros — now PINNED to 1.016e11 zeros,  not density model.
+- CROSS-CHECK:  independent binary search pins
+  N(3.0e10) = 101,635,962,231 (RVM diff 0.09) — identical
+  to the finish gate;  count CHAIN-EXACT.
+- Classification per the pre-registered rule:  this is the
+  A2-class [S1] data layer —  a proven,  data-certified
+  ceiling,  not the A1 universal (analytic) epsilon,  which
+  remains the open research theorem  (ceiling item 1)  with
+  its data side now fully in place.  No RH claim made or
+  implied.
+- Recorded:  results/3E10-EPSILON.md (provenance + numbers,
+  no-date rule);  END_GAME_PLAN.md 3.9 (post-landing map +
+  the [S3/S4] fill-grade decision:  H1-full / measured-
+  subset / deferral —  three honest grades,  identical Lean
+  composition).
