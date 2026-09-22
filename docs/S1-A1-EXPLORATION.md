@@ -627,3 +627,56 @@ attached there).  Side note:
 the 3e10 band re-fetch COMPLETED byte-exact (740,623,021,712
 B = 92,577,877,714 zeros);  finish gates running (see
 `scripts/rh/out_day036_gates_refetch.log`).
+
+## E8.  W2Beyond2 finite-interval-variation atom —  BUILT GREEN
+
+The queued next-Lean-step (named in E3,  sharpened in E7 item 3)
+is DONE.  `formal/RhAttack/W2Beyond2.lean` now proves,  in
+Lean 4.33.1 / mathlib v4.33.1,  full `lake build` green
+(17,442 jobs,  no errors):
+
+*  `eullAntideriv_deriv`  —  the antiderivative helper
+    `EullAntideriv t x = (-(5/2) t^2) / x^2`  has derivative
+    `5 t^2 / x^3`  for x > 0  (from  hasDerivAt_pow  +
+    HasDerivAt.inv  +  const_mul,  normalised).
+*  `eullK_finite_var_far`  —  the atom  (E4,  walk half,
+    kernel side):  t >= 1,  2t <= g1 <= g2  =>
+    |FarKernel t g2 - FarKernel t g1| <= (5/2) t^2 / g1^2.
+    Proof shape:  FTC
+    (intervalIntegral.integral_eq_sub_of_hasDerivAt_of_le)
+    +  |int f| <= int |f|
+    (intervalIntegral.abs_integral_le_integral_abs)
+    +  the comparison
+    (intervalIntegral.integral_le_sub_of_hasDeriv_right_of_le)
+    against  5 t^2 / x^3  (the existing
+    `eullK_tail_deriv_bound`),  +  the closed-form
+    antiderivative difference.
+
+Meaning for the attack:  on the far side of the straddle
+(g1 >= 2t)  the Efull log kernel does not merely decay
+(eullK_tail_bound,  |p| <= 3 t^2/g^2);  it cannot VARY by
+more than (5/2) t^2/g1^2 over ANY finite interval,  uniformly
+in where the walk stops.  For the E4 walk:  the cumulative
+far-side kernel cost,  started at g1 >= 2t,  is trapped in a
+one-sided window of width (5/2) t^2/g1^2.  The gap-side (E1)
+remains the separate object.
+
+Build notes (mathlib v4.33.1 pins verified this session):
+the interval-integral FTC lives in
+`MeasureTheory/Integral/IntervalIntegral/FundThmCalculus.lean`
+(FTC-2:  `integral_eq_sub_of_hasDerivAt_of_le`);  the
+pointwise-bounded comparison is
+`integral_le_sub_of_hasDeriv_right_of_le`;  continuous
+functions on Icc are integrable via
+`ContinuousOn.integrableOn_Icc` /
+`ContinuousOn.intervalIntegrable_of_Icc`;  and —  notable —
+in this build the `continuity` tactic does NOT close
+`ContinuousAt`/`ContinuousOn` goals (even `(fun v => v^2)`
+fails),  so the FarDeriv continuity was built from the
+elementary atoms  (continuousAt_id',  .add,  .sub,  .mul,
+.pow,  .const_mul,  .div,  .inv0  with explicit nonzero
+denominators).  Saved to the wiki for the E3.3 step.
+
+Artifacts:  `formal/RhAttack/W2Beyond2.lean`
+(EullAntideriv,  eullAntideriv_deriv,  eullK_finite_var_far);
+no data touched;  no new pins.

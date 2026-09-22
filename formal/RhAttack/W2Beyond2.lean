@@ -382,3 +382,153 @@ theorem eullK_tail_deriv_bound (t : ℝ) (h1 : 1 ≤ t) (x : ℝ) (hx : x ≥ 2 
           have ht2 : 1 ≤ t^2 := le_trans h1 htsq0
           nlinarith [ht2]
 
+
+/-
+FINITE INTERVAL VARIATION  (W2-beyond plan atom;  S1 exploration
+E4,  the "walk half" bound for the kernel  —  completed this
+session).
+
+The kernel does not just decay at infinity  (eullK_tail_bound);
+it cannot VARY by more than  (5/2) t^2/g1^2  over ANY finite
+interval  [g1, g2]  lying on the far side  (g1 >= 2t).  Proof:
+FTC  (intervalIntegral.integral_eq_sub_of_hasDerivAt_of_le)
++  the derivative bound  (eullK_tail_deriv_bound)  +  the
+comparison  (intervalIntegral.integral_le_sub_of_hasDeriv_right_of_le).
+
+Consequence for the straddle walk:  starting the far-side walk
+at g1  >= 2t,  the cumulative kernel cost is trapped in a
+one-sided window of width  (5/2) t^2/g1^2,  uniformly in where
+the walk stops.  The gap-side (E1)  remains a separate object.
+-/
+
+/-- Antiderivative helper  (x > 0):
+    derivative of  (-(5/2) t^2) / x^2  with respect to x  is
+    5 t^2 / x^3. -/
+noncomputable def EullAntideriv (t : ℝ) (x : ℝ) : ℝ :=
+  (-(5/2) * t^2) * (x^2)⁻¹
+
+theorem eullAntideriv_deriv (t : ℝ) (x : ℝ) (hx : 0 < x) :
+    HasDerivAt (fun z : ℝ => EullAntideriv t z) (5 * t^2 / x^3) x := by
+  -- (z^2)⁻¹  has derivative  -(2z)/(z^2)^2  at  z = x,  scaled by
+  --  c = -(5/2) t^2.  The term is built from the canonically
+  -- elaborated proof,  then normalised  (function  +  value).
+  have hsq := (hasDerivAt_pow 2 x).inv (pow_pos hx 2).ne'
+  have hmul := hsq.const_mul (-(5/2) * t^2)
+  convert hmul using 1
+  all_goals
+    (try rfl)
+  all_goals
+    (try exact proof_irrel)
+  all_goals
+    (try (funext z; dsimp [EullAntideriv]))
+  all_goals
+    (try (field_simp <;> ring))
+
+/-- FINITE INTERVAL VARIATION,  far side:
+    t >= 1,  2t <= g1 <= g2  =>
+    |FarKernel t g2 - FarKernel t g1| <= (5/2) t^2/g1^2. -/
+theorem eullK_finite_var_far (t : ℝ) (h1 : 1 ≤ t) (g1 g2 : ℝ)
+    (hge : 2 * t ≤ g1) (hg : g1 ≤ g2) :
+    |FarKernel t g2 - FarKernel t g1| ≤ (5/2) * t^2 / g1^2 := by
+  have h0t : 0 ≤ t := by linarith
+  have h2t : 2 * t > t := by linarith
+  -- 1)  the kernel is differentiable on the whole closed interval,
+  --     with derivative  FarDeriv t.
+  have hdiff : ∀ x ∈ Set.Icc g1 g2,
+      HasDerivAt (fun y : ℝ => FarKernel t y) (FarDeriv t x) x := by
+    rintro x hx
+    have hxt : x > t := by linarith [hge, hx.1, h2t]
+    exact eullK_far_deriv t h0t x hxt
+  have hcont : ContinuousOn (fun y : ℝ => FarKernel t y) (Set.Icc g1 g2) :=
+    fun x hx => (hdiff x hx).continuousAt.continuousWithinAt
+  have hfderc : ContinuousOn (fun x : ℝ => FarDeriv t x) (Set.Icc g1 g2) := by
+    intro x hx
+    have hxt : x > t := by linarith [hge, hx.1, h2t]
+    have hden1 : x^2 - t^2 ≠ 0 := by
+      have hpos : 0 < x^2 - t^2 := by
+        have hlt : 0 < x - t := sub_pos.mpr hxt
+        have hgt : 0 < x + t := by linarith
+        nlinarith
+      exact ne_of_gt hpos
+    have hden2 : x^2 + 1/4 ≠ 0 :=
+      ne_of_gt (by positivity : 0 < x^2 + 1/4)
+    have hden3 : (x^2 + 1/4)^2 ≠ 0 :=
+      ne_of_gt (by positivity : 0 < (x^2 + 1/4) ^ 2)
+    -- FarDeriv t x  =  A - B - C,  each piece  continuous  here
+    --  (built from the elementary atoms).
+    have hid : ContinuousAt (fun v : ℝ => v) x := continuousAt_id' x
+    have cnum2 : ContinuousAt (fun v : ℝ => v^2) x := hid.pow 2
+    have hnum2 : ContinuousAt (fun v : ℝ => v^2 - t^2) x :=
+      cnum2.sub continuous_const.continuousAt
+    have cden2 : ContinuousAt (fun v : ℝ => v^2 + 1/4) x :=
+      cnum2.add continuous_const.continuousAt
+    have cdensq : ContinuousAt (fun v : ℝ => (v^2 + 1/4)^2) x :=
+      cden2.pow 2
+    have hA : ContinuousAt (fun v : ℝ => 2 * v / (v^2 - t^2)) x :=
+      (hid.const_mul 2).div hnum2 hden1
+    have hB : ContinuousAt (fun v : ℝ => 2 * v / (v^2 + 1/4)) x :=
+      (hid.const_mul 2).div cden2 hden2
+    have hC : ContinuousAt (fun v : ℝ => v / (v^2 + 1/4)^2) x :=
+      hid.div cdensq hden3
+    dsimp only [FarDeriv]
+    exact ((hA.sub hB).sub hC).continuousWithinAt
+  -- 2)  FTC:  ∫ FarDeriv = FarKernel g2 - FarKernel g1.
+  have hftc : ∫ y in g1..g2, FarDeriv t y = FarKernel t g2 - FarKernel t g1 :=
+    intervalIntegral.integral_eq_sub_of_hasDerivAt_of_le hg hcont
+      (fun x hx => hdiff x ⟨hx.1.le, hx.2.le⟩)
+      (hfderc.intervalIntegrable_of_Icc hg)
+  -- 3)  |∫ f| <= ∫ |f|.
+  have habs : |FarKernel t g2 - FarKernel t g1| ≤
+      ∫ x in g1..g2, |FarDeriv t x| := by
+    rw [← hftc]
+    exact intervalIntegral.abs_integral_le_integral_abs hg
+  -- 4)  comparison:  ∫ |FarDeriv|  on  (g1, g2)  is bounded by
+  --     the antiderivative of  5 t^2 / x^3,  evaluated.
+  have hmaps : Set.MapsTo (fun x : ℝ => FarDeriv t x) (Set.Icc g1 g2) Set.univ :=
+    fun _ _ => by trivial
+  have hfdabs : ContinuousOn (fun x : ℝ => |FarDeriv t x|) (Set.Icc g1 g2) :=
+    continuous_abs.continuousOn.comp hfderc hmaps
+  have φint : MeasureTheory.IntegrableOn (fun x : ℝ => |FarDeriv t x|)
+      (Set.Icc g1 g2) :=
+    hfdabs.integrableOn_Icc
+  have hcmp : ∫ x in g1..g2, |FarDeriv t x| ≤
+      EullAntideriv t g2 - EullAntideriv t g1 := by
+    refine intervalIntegral.integral_le_sub_of_hasDeriv_right_of_le
+      (g' := fun x : ℝ => 5 * t^2 / x^3) hg ?_ ?_ φint ?_
+    · intro z hz
+      have hzp : 0 < z := by linarith [hge, hz.1]
+      exact (eullAntideriv_deriv t z hzp).continuousAt.continuousWithinAt
+    · intro x hx
+      have hxp : 0 < x := by linarith [hge, hx.1]
+      exact (eullAntideriv_deriv t x hxp).hasDerivWithinAt
+    · intro x hx
+      exact eullK_tail_deriv_bound t h1 x (le_trans hge hx.1.le)
+  -- 5)  algebra:  the antiderivative difference  =
+  --     (5/2) t^2 (1/g1^2 - 1/g2^2)  <=  (5/2) t^2 / g1^2.
+  have hdiff2 : EullAntideriv t g2 - EullAntideriv t g1 =
+      (5/2) * t^2 * (1 / g1^2 - 1 / g2^2) := by
+    dsimp only [EullAntideriv]
+    have h1p : 0 < g1 := by linarith
+    have h2p : 0 < g2 := by linarith
+    field_simp [pow_two]
+    ring
+  have hle2 : (5/2) * t^2 * (1 / g1^2 - 1 / g2^2) ≤ (5/2) * t^2 / g1^2 := by
+    have hco : 0 ≤ (5/2) * t^2 := mul_nonneg (by norm_num : 0 ≤ (5/2 : ℝ)) (pow_two_nonneg t)
+    have hpt : 1 / g1^2 - 1 / g2^2 ≤ 1 / g1^2 := by
+      have hp : 0 < g2 := by linarith
+      have hnn : 0 ≤ 1 / g2^2 :=
+        div_nonneg (by norm_num : 0 ≤ (1 : ℝ)) (by positivity : 0 ≤ g2^2)
+      linarith
+    have hmul : (5/2) * t^2 * (1 / g1^2 - 1 / g2^2) ≤
+        (5/2) * t^2 * (1 / g1^2) :=
+      mul_le_mul_of_nonneg_left hpt hco
+    calc (5/2) * t^2 * (1 / g1^2 - 1 / g2^2)
+        ≤ (5/2) * t^2 * (1 / g1^2) := hmul
+      _ = (5/2) * t^2 / g1^2 := by
+            have hg1p : g1 ≠ 0 := by linarith
+            field_simp [pow_two, hg1p]
+  calc |FarKernel t g2 - FarKernel t g1|
+      ≤ ∫ x in g1..g2, |FarDeriv t x| := habs
+    _ ≤ EullAntideriv t g2 - EullAntideriv t g1 := hcmp
+    _ = (5/2) * t^2 * (1 / g1^2 - 1 / g2^2) := hdiff2
+    _ ≤ (5/2) * t^2 / g1^2 := hle2
