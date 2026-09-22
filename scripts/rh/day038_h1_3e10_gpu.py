@@ -83,13 +83,16 @@ SELFTESTS (must pass before any certified claim):
       consistent zero positions;  the pipeline value + computed
       budget must contain the dps-60 exact value,  for both
       stored==true and stored+0.5ulp-offset settings.
-COMPUTE, NEVER RECALL.  WORKERS hard-capped at 12 (owner core
-rule:  2 physical cores always reserved on this 16c box).
+COMPUTE, NEVER RECALL.  WORKERS hard-capped at 14 (owner core
+rule:  2 physical cores always reserved on this 16c box),
+then clamped DOWN by the memguard to min(RAM-derived count,
+GPU queue client budget minus Xorg = 10 workers by default)
 """
 import math
 import os
 import struct
 import sys
+import threading
 import time
 import numpy as np
 from mpmath import mp
@@ -104,12 +107,33 @@ import cupy as cp
 
 U64 = 1.1102230246251565e-16
 U128 = float(np.finfo(np.longdouble).eps) / 2.0
+THREADS = max(int(os.environ.get("H1_THREADS", "8")), 1)
+
+
+def _slab_bounds(nslabs, nt):
+    """tile  [0,  nslabs)  into  nt  disjoint  contiguous  chunks
+    (the  first  `rem`  chunks  carry  one  extra  slab)."""
+    base, rem = divmod(nslabs, nt)
+    out, start = [], 0
+    for t in range(nt):
+        end = start + base + (1 if t < rem else 0)
+        out.append((start, end))
+        start = end
+    return out
+
+
 SUB = 33554432              # 2^25 logical-element slab = 256MB
 REMHI = "1e18"
 REMHI2 = "1e30"
 DG = [mp.mpf(k) / 1000 for k in range(5, 501)]
 NLT_GUARD = 1e-4
 USE_GPU = os.environ.get("H1GPU", "1") == "1"
+# THREADS = the owner's Strix-Halo model:  40 CUs,  6  reserved
+# ->  34  usable;  the parallel  unit  is  the  THREAD  (a  process
+# is  just  a  HIP  context,  and  contexts  are  capped  by  the
+# 8  SDMA  queues,  NOT  by  CUs).  Production:  4  contexts  x
+# 8  threads  =  32  slab  threads,  ~2.9GiB/thread  inside  the
+# 100Gi  program  budget.
 GAM10_64 = 10.0 * 2.0 * U64 / (1.0 - 10.0 * 2.0 * U64)
 GAM1_64 = 2.0 * U64 / (1.0 - 2.0 * U64)
 
@@ -266,6 +290,44 @@ class Tail3E10:
                 out[got:got + take] = np.frombuffer(data, dtype='<f8')
             got += take
         self._pos = base + m
+        return out
+
+    def read_slab_at(self, i0, m):
+        """THREAD-SAFE  read:  the  m  logical  elements  starting
+        at  i0,  touching  NEITHER  self._pos  NOR  self._fh  (the
+        threaded  sweep  paths  each  carry  a  private  handle);
+        same  section  tiling  and  seam  semantics  as
+        read_slab  (which  the  selftests  cover  for  the  cursor
+        case)."""
+        out = np.empty(m, dtype='<f8')
+        got = 0
+        fh = None
+        fh_path = None
+        try:
+            while got < m:
+                sec, off = self._section_of(i0 + got)
+                if sec == 0:
+                    take = min(m - got, self.nL - off)
+                    out[got:got + take] = self.L[off:off + take]
+                else:
+                    path = (None, A_F, B_F, C_F, D_F)[sec]
+                    foff = off if sec != 2 else off + self.B_stitch
+                    take = min(m - got,
+                               (self.nA, self.nA, self.nB, self.nC,
+                                self.nD)[sec] - off)
+                    if fh is None or fh_path != path:
+                        if fh is not None:
+                            fh.close()
+                        fh = open(path, 'rb', buffering=0)
+                        fh_path = path
+                    fh.seek(foff * 8)
+                    data = fh.read(take * 8)
+                    assert len(data) == take * 8, "short read (threaded)"
+                    out[got:got + take] = np.frombuffer(data, dtype='<f8')
+                got += take
+        finally:
+            if fh is not None:
+                fh.close()
         return out
 
     def restart(self):
@@ -1401,18 +1463,31 @@ def _run_full():
     # programs,  28Gi  untouchable  (25  OS  +  3  display)  --
     # RESERVE  =  that  floor.  The  iGPU  queue  hardware  adds
     # a  second  ceiling:  ~8  SDMA  queues  total  system-wide
-    # (dmesg:  "No  more  SDMA  queue  to  allocate"),  so  no
-    # more  than  ~11  concurrent  GPU  clients  including  Xorg.
+    # (dmesg:  "No  more  SDMA  queue  to  allocate").  The  budget
+    # is  counted  in  GPU  CLIENTS  INCLUDING  Xorg  (which  always
+    # holds  one):  the  observed  zero-error  operating  point  is
+    # 11  clients  =  10  workers  +  Xorg.  11  workers  +  Xorg
+    # (12  clients)  froze  two  workers  mid-sweep  on  2026-09-22
+    # (09:27  incident):  the  SDMA  allocation  failure  leaves
+    # the  victim  spinning  in  R  with  zero  read  progress,  and
+    # its  job  never  completes  (the  parent  then  hangs  on  the
+    # lost  future).  So  the  WORKER  allowance  =  client  budget
+    # -  Xorg  clients,  never  the  raw  budget.
     RESERVE_GIB = int(os.environ.get("H1_RESERVE_GIB", "28"))
     PER_WORKER_GIB = float(os.environ.get("H1_PER_WORKER_GIB", "6"))
-    GPU_CLIENT_CAP = int(os.environ.get("H1_GPU_CLIENT_CAP", "11"))
+    GPU_CLIENT_BUDGET = int(os.environ.get("H1_GPU_CLIENT_BUDGET", "11"))
+    XORG_CLIENTS = int(os.environ.get("H1_XORG_CLIENTS", "1"))
+    # H1_GPU_CLIENT_CAP  is  kept  as  a  direct  WORKER-cap
+    # override  (ops  escape  hatch);  default  =  budget  minus  Xorg.
+    worker_gpu_cap = int(os.environ.get(
+        "H1_GPU_CLIENT_CAP", max(GPU_CLIENT_BUDGET - XORG_CLIENTS, 1)))
     avail = _mem_available_gib()
     if avail is not None:
-        allow = min(int((avail - RESERVE_GIB) // PER_WORKER_GIB), GPU_CLIENT_CAP)
+        allow = min(int((avail - RESERVE_GIB) // PER_WORKER_GIB), worker_gpu_cap)
         if allow < 1:
             print("memguard:  MemAvailable  %.1f  GiB  <  reserve  %d  +  one  worker  --  HOLD  (exit  6);  supervisor  retries  later" % (avail, RESERVE_GIB), flush=True)
             sys.exit(6)
-        print("memguard:  MemAvailable  %.1f  GiB,  reserve  %d  GiB,  ~%.0f  GiB/worker  ->  allow  <=  %d  workers" % (avail, RESERVE_GIB, PER_WORKER_GIB, allow), flush=True)
+        print("memguard:  MemAvailable  %.1f  GiB,  reserve  %d  GiB,  ~%.0f  GiB/worker  ->  allow  <=  %d  workers  (%d  GPU  clients  incl.  Xorg  vs  budget  %d)" % (avail, RESERVE_GIB, PER_WORKER_GIB, allow, allow + XORG_CLIENTS, GPU_CLIENT_BUDGET), flush=True)
         work = min(work, max(allow, 1))
     else:
         print("memguard:  MemAvailable  unreadable  --  proceeding  with  env  WORKERS=%d" % work, flush=True)

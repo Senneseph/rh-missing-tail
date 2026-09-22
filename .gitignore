@@ -22,4 +22,5 @@ out_*.log
 *.err
 *.pid
 *.pids
+*.pts
 md5.txt

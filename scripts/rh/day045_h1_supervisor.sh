@@ -20,9 +20,17 @@
 #     cd  /home/jsmille/Projects/rh-missing-tail/scripts/rh
 #     nohup  bash  day045_h1_supervisor.sh  >>  out_day045.log  2>&1  &
 #
-#  WORKERS  =  13  here  (14-worker  cap  =  13  full-run
-#  +  the  one  profile  worker  that  is  also  running;  2
-#  physical  cores  stay  reserved).
+#  WORKERS  =  10  here.  The  binding  cap  is  the  iGPU  SDMA
+#  queue  hardware,  not  cores:  8  SDMA  queues  system-wide,
+#  Xorg  always  holds  one,  and  the  observed  zero-error
+#  operating  point  is  11  GPU  CLIENTS  total  (10  workers
+#  +  Xorg).  11  workers  +  Xorg  =  12  clients  ->  "No  more
+#  SDMA  queue  to  allocate"  +  workers  frozen  mid-sweep
+#  (the  09:27  incident  of  2026-09-22).  H1_GPU_CLIENT_
+#  BUDGET=11  (clients  incl.  Xorg)  is  passed  explicitly  so
+#  the  instance  memguard  derives  the  10-worker  cap  from
+#  it  instead  of  from  a  flat  default.  (2  physical  cores
+#  stay  reserved;  cores  are  not  the  bottleneck.)
 #
 #  The  supervisor  exits  only  on:  "H1  FULL-DONE"  (all
 #  696),  a  band  integrity  failure  (rc  5),  a  corrupt
@@ -60,9 +68,16 @@ fi
 # Verify  size  +  md5  of  the  11  needed  shards,  and  fall
 # back  to  /tmp  for  old  code  paths.
 SHARDS=lshards
-NEED=8846000 10946000 13046000 15146000 17246000 19346000 21446000 23546000 25646000 27746000 29846000
+# QUOTES  REQUIRED:  unquoted,  the  first  number  becomes  an
+# env  prefix  and  10946000  the  command  slot  ("command  not
+# found"),  $NEED  never  persists,  and  the  per-shard  loop
+# below  silently  does  nothing  (catch  this  class:  the  guard
+# was  no-op  for  every  launch  until  it  was  read  line-by-line).
+NEED="8846000 10946000 13046000 15146000 17246000 19346000 21446000 23546000 25646000 27746000 29846000"
 mkdir -p /tmp/zeta-dl/shards
+cnt=0
 for n in $NEED; do
+    cnt=$((cnt + 1))
     f="$SHARDS/zeros_${n}.dat"
     if [ ! -s "$f" ]; then
         stamp "L-SHARD  MISSING:  $f  --  HOLD,  owner  decides"
@@ -73,6 +88,10 @@ for n in $NEED; do
         stamp "L-shard  restored  to  /tmp:  zeros_${n}.dat"
     fi
 done
+if [ "$cnt" != "11" ]; then
+    stamp "L-SHARD  COUNT  EXPECTED  11,  GOT  $cnt  --  HOLD,  owner  decides"
+    exit 7
+fi
 (cd "$SHARDS" && grep -hE "\\*zeros_(8846000|10946000|13046000|15146000|17246000|19346000|21446000|23546000|25646000|27746000|29846000)\\.dat" md5.txt | sed 's/ \*/ /' > "/tmp/shardcheck.$$.txt") && if ! (cd "$SHARDS" && md5sum --quiet -c "/tmp/shardcheck.$$.txt" >/dev/null 2>&1); then stamp "L-SHARD  MD5  MISMATCH  --  HOLD,  owner  decides"; exit 7; fi
 rm -f "/tmp/shardcheck.$$.txt"
 stamp "L-shards  verified  (11  x  md5  against  official  lmfdb  pins)"
@@ -114,8 +133,9 @@ while :; do
         continue
     fi
     MEM_HOLDS=0
-    stamp "instance  $i  launching  (env  WORKERS=13  cap;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)"
-    taskset -c 0-27 env WORKERS=13 ZETA_SHARDS_DIR="$PWD/$SHARDS" \
+    stamp "instance  $i  launching  (env  WORKERS=10,  H1_GPU_CLIENT_BUDGET=11  =  10  workers  +  Xorg;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)"
+    taskset -c 0-27 env WORKERS=10 H1_GPU_CLIENT_BUDGET=11 H1_XORG_CLIENTS=1 \
+        ZETA_SHARDS_DIR="$PWD/$SHARDS" \
         /home/jsmille/venvs/cupy/bin/cupy_py -u day038_h1_3e10_gpu.py \
         >> out_day038_full.log 2>&1
     rc=$?
