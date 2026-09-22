@@ -841,3 +841,94 @@ day041  for  this  purpose;  day041  kept  as  the  record
 of  the  bug),  `scripts/rh/out_day041b_d3_fixed.txt`,
 diagnostics  in  /tmp  (d3_diag3,  d3_deriv,  d3_fresh,
 d3_final).  No  pins  changed;  the  band  is  untouched.
+
+## E10.  D2  +  D4  —  executed  (band  3e9  to  3e10,  92.6  billion
+##        gaps;  log  scripts/rh/out_day040_dband.txt)
+
+E5  checklist  items  D2  (the  geometry  of  the  top  excursions)
+and  D4  (decade  stability  of  the  per-gap  mean)  on  the
+3e10  band,  single  streaming  pass  (106.5  min  wall,  the
+refetched  canonical  band).
+
+**D4  (decade  stability)  —  mean  |delta|  per  zero:**
+
+```
+(3e9,   1e10]   n = 23,068,363,611    mean|delta| = 0.334898
+(1e10,  3e10]   n = 69,509,514,102    mean|delta| = 0.335383
+(3e9,   3e10]   n = 92,577,877,713    mean|delta| = 0.335262
+[reference,  D1/day039  on  the  lower  bands:  B ~ 0.334184
+ (1e9  to  3.19e9  side),  C ~ 0.334459]
+```
+
+FLAT  over  three  decades  (0.334184  ->  0.334459  ->
+0.334898  ->  0.335383):  a  ~0.14%/decade  upward  drift,
+no  regime  change,  no  divergence.  The  absolute-sum
+barrier  picture  (E2/E9:  certified  sum  ~ 3.1 x 10^10,
+mean  >=  1/3  per  gap)  repeats  at  the  same  amplitude
+out  to  3e10.  The  E2  fact-4  question  (is  there  a
+delta-floor  that  could  feed  a  universal  epsilon?)  is
+NOT  answered  by  this:  the  per-gap  mean  is  the  wrong
+statistic  for  it  —  it  would  need  the  INFIMUM  of  the
+nonzero  |delta|  at  each  scale,  not  the  mean.
+
+**D2  (excursion  geometry,  top-100  by  |DN|):**
+
+-  ALL  100  are  POSITIVE  (DN  >  0):  the  global
+    excursions  live  on  the  SURPLUS  side  of  the  walk
+    (the  deficit  side  has  no  comparable  global  maxima).
+-  ALL  have  Rrun  =  0  (no  immediate  right  run)  and
+    Lrun  =  2  ..  6  (a  SHORT  left  run,  Lsum  =
+    1.7  ..  2.4):  the  excursions  are  not  the  end  of
+    long  trends;  they  are  the  local  maxima  right
+    after  a  short  burst  of  accumulation.
+-  Gap  signature  (the  new  fact,  top-20  shown;  the
+    top-100  TSV  has  all  of  them):  the  LEFT  gap  gl
+    is  NARROW  (0.011  ..  0.069,  i.e.  3  ..  8x  below
+    the  local  mean  gap  ~  0.283)  and  the  RIGHT  gap
+    gr  is  WIDE  (0.73  ..  1.21,  i.e.  2.6  ..  4.3x  above
+    it).  Every  one  of  the  top-20  (and  all  100  in  the
+    TSV)  has  gl  <  0.07  and  gr  >  0.7.
+
+```
+#   |DN|        Lrun  Lsum     gl       gr       local mean gap
+1   2.615067    4     2.412    0.0109   0.7619   0.282
+2   2.587234    4     2.360    0.0266   0.9082   0.286
+3   2.585243    3     1.923    0.0350   1.0237   0.2925
+..  (top-100:  scripts/rh/out_day040_top100.tsv)
+```
+
+**Consistency  (re-deriving  the  A2  pins  from  the
+REFETCHED  canonical  band)  —  ALL  OK:**  total  zeros
+92,577,877,714  (exact);  SUM_EPS  raw  =  31,037,858,563.2
+(=  the  raw  f64  gap-sum  pin  from  the  epsilon  sweep);
+worst  eps  =  3.30182266235;  sup  |DN|  =  2.61506652832;
+N(3e10)  =  101,635,962,231  (exact);  DN  at  the  band
+edges  exact.  This  also  closes  the  open  SUM_EPS
+question  from  the  queue:  the  raw  f64  sum
+(31,037,858,563.2)  and  the  CERTIFIED  per-gap  upper
+bound  (SUM_EPS_CERT  =  31,047,116,350.923088,  the
+number  in  the  E2Barrier  Lean  record)  are  two
+different  quantities  by  construction  —  the  gap
+between  them  (9,257,787.8)  is  the  certification
+margin  —  both  are  correct  as  stated.
+
+**sup  |DN|  per  decade**  (D4  side):  (3e9,1e10]  =
+2.553901672  (t  =  9.839e9);  (1e10,3e10]  =  2.615066528
+(t  =  2.9565e10,  top-1);  global  =  2.615066528  —  the
+global  maximum  is  at  the  HIGH  end  of  the  band,  and
+the  sup  creeps  up  with  t  (2.554  ->  2.615),  again
+consistent  with  no  damping  of  the  walk  amplitude.
+
+**Reading  for  A1:**  the  data  facts  now  in  hand  are
+(a)  the  walk  amplitude  (mean  ~  1/3  per  gap,  sup
+growing  slowly)  is  stable  and  not  damping  out  to
+3e10;  (b)  the  global  excursions  are  a  specific
+geometric  event  (short  left  run  after  a  narrow  gap,
+before  a  wide  gap,  surplus  side)  —  a  LOCAL
+structure  in  the  gap  sequence,  not  a  long-range
+trend;  (c)  E11  showed  the  S  values  at  those  events
+are  tame  O(1)  (2.4  ..  2.5)  and  decay  to  <=  0.74
+within  a  handful  of  gaps.  None  of  this  reaches  a
+UNIVERSAL  epsilon  (the  open  A1  theorem);  it  is  the
+data  side  of  the  question,  and  it  is  now  complete
+and  stable  at  3e10.
