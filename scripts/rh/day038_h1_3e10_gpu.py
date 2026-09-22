@@ -395,8 +395,14 @@ def slab_budget_gpu(c, tf, t2, m, start_idx=0, extra_idx=None):
             dredg_l = (2.0 * cl / np.maximum(agt, 1e-30) + 2.0 * cl / Al
                        + cl / (Al * Al))
             dimdg_l = tf * 2.0 * cl / (Al * Al)
-            B_re += 2.0 * float(dg_l * dredg_l)
-            B_im += 2.0 * float(dg_l * dimdg_l)
+            # SUM over the loc elements  (day037 reference form:  the
+            # patch carries  >= 1  element  in  production  and
+            #  float()  of  a  multi-element  array  is  a  runtime
+            #  error  —  this  is  now  covered  by  selftest_patch).
+            #  Longdouble  host  sum:  exact  enough,  no  gamma
+            #  certificate  needed  on  this  tiny  patch.
+            B_re += 2.0 * float((dg_l * dredg_l).astype(np.longdouble).sum())
+            B_im += 2.0 * float((dg_l * dimdg_l).astype(np.longdouble).sum())
     for x in (cc, g2, A, abs_g2t2, re_t, im_t, dg, dredg, dimdg):
         del x
     cp.get_default_memory_pool().free_all_blocks()
@@ -918,6 +924,65 @@ def selftest_streaming_gpu():
     return selftest_streaming(slab_budget_gpu)
 
 
+def selftest_patch():
+    """(c) OVERLAP-PATCH:  drive the host patch branch  (extra_idx
+    with  >= 2  elements  in  one  slab,  the  production  A/B
+    overlap  case)  in  both  slab  budgets,  and  cross-check
+    GPU  vs  CPU  on  identical  inputs.  (The  original
+    float(array)  bug  lived  here;  this  test  is  the  guard.)"""
+    print("SELFTEST(c): overlap host-patch (multi-element) + GPU==CPU",
+          flush=True)
+
+    def close(a, b, rel=1e-9):
+        return abs(a - b) <= rel * max(1.0, abs(a), abs(b))
+
+    rng = np.random.default_rng(7)
+    m = 1024
+    c = np.sort(50.0 + np.cumsum(rng.uniform(0.25, 0.4, m))).astype(np.float64)
+    tf = 250.7
+    t2 = tf * tf
+    ex = np.array([7, 40, 500, 900], dtype=np.int64)
+    r_cpu = slab_budget(c, tf, t2, m, 0, ex)
+    r_gpu = slab_budget_gpu(c, tf, t2, m, 0, ex)
+    r_cpu0 = slab_budget(c, tf, t2, m, 0, None)
+    r_gpu0 = slab_budget_gpu(c, tf, t2, m, 0, None)
+    cl = c[ex]
+    g2l = cl * cl
+    Al = g2l + 0.25
+    agt = np.abs(g2l - t2)
+    dgl = U64 * np.abs(cl)
+    dredgl = (2.0 * cl / np.maximum(agt, 1e-30) + 2.0 * cl / Al
+              + cl / (Al * Al))
+    dimdl = tf * 2.0 * cl / (Al * Al)
+    dref_re = 2.0 * float((dgl * dredgl).astype(np.longdouble).sum())
+    dref_im = 2.0 * float((dgl * dimdl).astype(np.longdouble).sum())
+    ok = (close(r_cpu[2] - r_cpu0[2], dref_re)
+          and close(r_gpu[2] - r_gpu0[2], dref_re)
+          and close(r_cpu[3] - r_cpu0[3], dref_im)
+          and close(r_gpu[3] - r_gpu0[3], dref_im))
+    for a_, b_ in ((r_cpu[0], r_gpu[0]), (r_cpu[1], r_gpu[1]),
+                   (r_cpu[2], r_gpu[2]), (r_cpu[3], r_gpu[3]),
+                   (r_cpu[4], r_gpu[4]), (r_cpu[5], r_gpu[5])):
+        ok = ok and close(a_, b_)
+    print("  patch deltas:  cpu re=%.3e im=%.3e | gpu re=%.3e im=%.3e "
+          "(ref re=%.3e im=%.3e)" % (r_cpu[2] - r_cpu0[2],
+                                     r_cpu[3] - r_cpu0[3],
+                                     r_gpu[2] - r_gpu0[2],
+                                     r_gpu[3] - r_gpu0[3],
+                                     dref_re, dref_im), flush=True)
+    for name, a_, b_ in (("sub_re", r_cpu[0], r_gpu[0]),
+                         ("sub_im", r_cpu[1], r_gpu[1]),
+                         ("B_re", r_cpu[2], r_gpu[2]),
+                         ("B_im", r_cpu[3], r_gpu[3]),
+                         ("S1c", r_cpu[4], r_gpu[4]),
+                         ("dmin", r_cpu[5], r_gpu[5])):
+        print("  %s:  cpu=%.12g  gpu=%.12g  %s"
+              % (name, a_, b_, "OK" if close(a_, b_) else "MISMATCH"),
+              flush=True)
+    print("SELFTEST(c): %s" % ("PASS" if ok else "FAIL"), flush=True)
+    return ok
+
+
 def grid():
     """geometric continuation of the day034 sequence
     x = 1e6 * 1.08^k,  restricted to (BAND_LO, G_LAST].
@@ -1042,9 +1107,10 @@ if __name__ == '__main__':
     if os.environ.get("H1CERT_SELFTEST") == "1":
         a = selftest_core()
         ag = selftest_core_gpu()
+        ap = selftest_patch()
         if os.environ.get("H1CERT_SELFTEST_STREAM") == "1":
             b = selftest_streaming()
             bg = selftest_streaming_gpu()
-            sys.exit(0 if (a and ag and b and bg) else 1)
-        sys.exit(0 if (a and ag) else 1)
+            sys.exit(0 if (a and ag and ap and b and bg) else 1)
+        sys.exit(0 if (a and ag and ap) else 1)
     run()

@@ -734,3 +734,110 @@ closes the final contradiction).
 Artifacts:  `formal/RhAttack/E2Barrier.lean`
 (6  lemmas  +  structure  +  def  +  3  norm_num  theorems);
 no data touched;  no new pins.
+
+## E11.  D3  —  the  S-at-zeros  kill-shot,  resolved  (VERDICT:
+##        the old S-pipeline  was  wrong;  RVM  verified  at  3e10;
+##        S  at  the  excursions  is  tame  O(1);  it  stays
+##        tame  over  the  following  20  gaps)
+
+E5/D3  (raised  to  top  priority  by  E7's  zero/drift
+dichotomy)  asked:  evaluate  the  continuous  S  at  dps-30
+at  the  top-5  |DN|  excursion  zeros  of  the  3e10  band,
+independently  of  the  census,  and  ask  whether  S  is
+tame  at  the  zeros  and  wilder  between  them.
+
+**day041  (the  first  attempt)  FAILED  its  own  consistency
+check  (worst  |S_meas  -  S_data|  =  0.997  over  110
+points)  —  and  the  failure  was  real  but  was  NOT  about
+S.**  Diagnosis  (this  session,  against  references  first
+—  Titchmarsh,  The  Theory  of  the  Riemann  Zeta-Function,
+Thm  10  fetched  from  the  Oxford  page,  plus  the  verified
+pipeline  below):
+
+1.  The  RVM  form  is   N(T)  =  (T/2pi) log(T/2pi)  -  T/2pi
+    +  7/8  +  S(T)  +  O(1/T),   S(T)  =  (1/pi) arg zeta(1/2+iT)
+    (continuous  argument),  valid  when  T  is  not  a  zero
+    ordinate.  **At  t  =  3e10  this  is  verified  numerically
+    to  ~5e-13**  (dps-30/35,  113  points,  below):
+    the  DATA  side   s_data(t)  =  N_excl(t)  -  main_7/8(t)
+    (exact  integers  from  the  certified  band)  IS  the
+    true  S  to  ~1e-5  —  the  "independent"  pass  is  a
+    cross-check,  not  a  measurement.
+2.  day041's  pipeline   S_p  =  (arg_p zeta  -  th1)/pi,
+    snapped  mod-2  to  s_data's  family,  computes
+    s_data  +  f(t)  with   f(t)  =  [-th1(t)/pi]  centered
+    mod-2:  a  sawtooth  in  (-1,1)  drifting  at  -main'(t).
+    The  drift  is  EXACT:  th1'(t)/pi  =  main'(t)
+    (measured  to  1e-9  at  3e10:  both  =  +3.544696319).
+    All  110  "deviations"  in  the  day041  log  are  f(t)
+    values,  not  S  errors.  The  old  JUMP  formula
+    "1  -  2*dmain"  had  the  sawtooth  drift  baked  in,
+    which  is  why  day041's  JUMP  check  still  passed.
+3.  The  correct  independent  S  (verified  at  3e10):
+        S(t)  =  (phi_u(t)  +  step(t))/pi  +  m0,
+    phi_u  =  the  incrementally  unwrapped  phase
+    (1/2) arg chi(s),  chi  =  2^s pi^{s-1} sin(pi s/2)
+    Gamma(1-s),  with  dphi  =  arg(chi(t) conj(chi(prev)))/2
+    on  a  grid  of  step  <=  0.25;  step  =  pi  when
+    Z(t)  =  exp(-i phi_u) zeta(1/2+it)  <  0  (Z  is  REAL,
+    |Im Z|/|Z|  =  2.6e-27  at  dps-35);  m0  =  nint
+    (s_data  -  S_unpinned),  pinned  per  point  (the  O(1/T)
+    RVM  gap  makes  the  pin  unique).
+
+**day041b  (the  corrected  probe,  `scripts/rh/day041b_d3_fixed.py`;
+log  `scripts/rh/out_day041b_d3_fixed.txt`;  selftest  =  the
+mid-band  RVM  identity  checked  against  exact  pins,
+diff  3.95e-13)  —  top-5  excursions,  dps-30:**
+
+```
+rank   |DN|        S(just  right  of  zero)   max |S|  (next 20 mids)   JUMP residual
+ 1     2.615066528  +2.480384                 0.669357  (mid04)        2.4e-20
+ 2     2.587234497  +2.439024                 0.500426  (mid07)        2.7e-21
+ 3     2.585243225  +2.430373                 0.554258  (mid07)        5.8e-21
+ 4     2.585144043  +2.441162                 0.650963  (mid04)        1.9e-20
+ 5     2.576889038  +2.398574                 0.737676  (mid01)        5.5e-21
+110  points:  worst  |S_ver  -  s_data|  =  4.95e-13;
+fixed  JUMP  formula  S(t_R)  -  S(t_L)  =  1  -  (main(t_R)
+-  main(t_L))  holds  to  <=  2.4e-20  at  all  5  excursions
+(genuine  simple  real  zero;  a  census  glitch  would  show
+~0  or  a  wrong  drift).
+```
+
+**Reading:**
+
+-  S  at  the  five  worst  global  walk  excursions  is
+    TAME:  +2.40  ..  +2.48  (all  positive  —  the
+    excursions  are  on  the  surplus  side  of  the  walk).
+    Nothing  near  any  claimed  scale  fails.
+-  Over  the  20  gaps  FOLLOWING  each  excursion  the  walk
+    decays  to  |S|  <=  0.74;  no  between-zero  point  in
+    these  100  windows  exceeds  the  at-zero  values.
+    E7's  "tame  at  the  zeros,  possibly  wilder  between"
+    is  NOT  seen  here  —  but  note  what  these  100
+    points  are:  the  immediate  neighborhoods  of  the  five
+    GLOBAL  maxima.  The  question  E7/D3  actually  targets
+    (can  |S|  exceed  its  at-zero  envelope  BETWEEN  two
+    maxima  of  the  zero-resolvent  walk?)  needs  a
+    mid-gap  sup  over  the  whole  band,  which  is  a
+    D2-bis  sweep  —  recorded  as  the  next  queued  probe
+    (pure  data-side:  S(mid_k)  =  FRONTIER  +  k  +  1  -
+    main(mid_k),  no  zeta  needed).
+-  The  old  day041  "S_right  =  DN  +  1/8"  header
+    identity  is  superseded:  the  authoritative  values
+    are  the  N-exact  s_data  (above);  the  DN  <->  S
+    offset  is  a  matter  of  O(1/8)  +  delta*main'
+    bookkeeping  and  is  not  needed  for  any  conclusion.
+-  For  the  A1  question  (the  UNIVERSAL  epsilon):  this
+    probe  adds  a  clean  3e10  data  fact  (the  S  values
+    at  the  top  five  global  excursions  are  O(1),
+    and  the  walk  back  to  O(0.5)  happens  within
+    a  handful  of  gaps)  and  one  formal  tool  (the
+    verified  S  pipeline  +  RVM  identity  at  3e10).
+    It  does  not  establish  or  refute  A1;  the  delta-
+    floor  (E2  fact  4)  remains  open.
+
+Artifacts:  `scripts/rh/day041b_d3_fixed.py`  (replaces
+day041  for  this  purpose;  day041  kept  as  the  record
+of  the  bug),  `scripts/rh/out_day041b_d3_fixed.txt`,
+diagnostics  in  /tmp  (d3_diag3,  d3_deriv,  d3_fresh,
+d3_final).  No  pins  changed;  the  band  is  untouched.
