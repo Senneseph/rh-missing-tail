@@ -7283,3 +7283,32 @@ primary sources,  NOT recalled:
   the [S3/S4] fill-grade decision:  H1-full / measured-
   subset / deferral —  three honest grades,  identical Lean
   composition).
+
+## 2026-09-21 20:12-23:44 — the 3e10 band RE-FETCHED (post-incident) and re-verified:  finish gates PASS,  band canonicalized
+
+The original 3e10 band file was destroyed by the operator `dd`
+incident (documented in KNOWN_LIMITATIONS).  Recovery path:
+
+- Byte-exact re-fetch of `zeros_2999e6_to_30000e6.f64`
+  (740,623,021,712 B = 92,577,877,714 zeros) via
+  `scripts/rh/rh_fetch_data.py` (the one data entrypoint).
+- Finish gates (`scripts/rh/day036_finish_gates.py run`,
+  wall 212.5 min, single core) reproduce every pin:
+  N(3 x 10^10) = 101,635,962,231;  band-end count chain-exact
+  (band/8 vs lastN - FRONTIER_N);  FINISH-GATES-PASS at
+  23:44:37 (scripts/rh/out_day036_gates_refetch.log).
+- Band `chmod a-w` (persisted-data rule) at the moment of
+  PASS,  by the post-gate supervisor
+  (`scripts/rh/day042_postgate_queue.sh`).
+- Side effect of the gates:  none of the A2-class pins is
+  recomputed from memory —  the data layer's certificate
+  chain (SUM_EPS_CERT = 31,047,116,350.923088,
+  sup|DN| = 2.615067 on (1e7, 3e10]) now rests on the
+  re-fetched bytes,  not the original incident-prone file.
+
+Post-gate queue running:  D2 + D4 excursions
+(`out_day040_*`),  then D3 dps-30 S-at-zeros
+(`out_day041_*`),  then the bounded day038 one-window
+profile  (`out_day038_profile_aftergates.log`).  The full
+(i) H1-launch remains the owner's call,  gated on the
+profile's measured ETA.
