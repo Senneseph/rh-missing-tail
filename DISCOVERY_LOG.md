@@ -7312,3 +7312,59 @@ Post-gate queue running:  D2 + D4 excursions
 profile  (`out_day038_profile_aftergates.log`).  The full
 (i) H1-launch remains the owner's call,  gated on the
 profile's measured ETA.
+
+2026-09-22 01:32-04:00 (night, owner asleep) — the
+post-gate queue closed and the H1 (i) profile is
+running;  D3 was found to have a real pipeline bug
+and was re-done  correctly:
+
+-  QUEUE DONE 01:32:  D40 (D2+D4,  106.5 min  wall,
+  all  740GB  of  the  re-fetched  band)  and  D41
+  (D3  dps-30)  finished;  consistency  vs
+  epsilon-sweep  pins  ALL  OK.
+-  D41  FAIL  DIAGNOSIS:  the  S-pipeline
+  ((arg_p zeta - th1)/pi  snapped  mod-2  to  s_data)
+  was  computing  s_data  +  a  sawtooth  of
+  (-th1/pi)  drifting  at  -main'  (exactly:
+  th1'/pi  =  main',  measured  at  3e10).  NOT  an
+  RVM  failure.  Correct  pipeline:  S  =  (phi_u  +
+  step)/pi  +  integer  pin,  phi_u  =  incrementally
+  unwrapped  (1/2) arg chi;  RVM  (Titchmarsh  Thm  10
+  form)  verified  numerically  at  3e10  to  ~5e-13
+  ->  the  N-exact  data  column  IS  S  to  ~1e-5.
+  Re-run  as  day041b  (selftest  3.95e-13):  S  at
+  the  5  global  excursions  is  tame  (2.40  ..  2.48,
+  all  positive/surplus  side),  <=  0.74  over  the
+  following  20  gaps  each;  fixed  JUMP  =
+  1  -  dmain  holds  to  2e-20.  See  E11.
+-  D40  RESULTS  (see  E10):  mean  |delta|  per  gap
+  flat  over  three  decades  (0.3349  ->  0.3354);
+  all  top-100  excursions  positive,  short  left  runs
+  (2  ..  6),  narrow-left  /  wide-right  gap
+  signature  (gl  <  0.07  vs  local  mean  ~  0.28;
+  gr  >  0.7).  A2  pins  re-derived  from  the
+  re-fetched  band:  ALL  OK  (also  closes  the
+  raw-vs-certified  SUM_EPS  question:  they  are
+  two  different  quantities  by  construction;
+  the  9.26e6  gap  is  the  certification  margin).
+-  DAY038  BUG  (caught  by  the  profile  itself,
+  first  full-stream  pass  in  production):
+  float(array)  on  the  multi-element  overlap
+  host-patch  —  fixed  to  the  day037  reference
+  SUM  form  +  new  SELFTEST(c)  guard  (GPU==CPU
+  on  a  multi-element  patch;  the  original
+  selftest  never  exercised  that  branch).
+  Profile  relaunched  03:02  (one  window,
+  worst  straddle  t  =  2.788e10,  single  worker
+  by  construction,  ~151  MB/s).
+-  H1  FULL  LAUNCH:  owner  pre-authorized  ("you
+  have  my  permission  to  kick  off  H1  when  the
+  time  is  right").  day044  waiter  applies  the
+  PRE-REGISTERED  reading  to  the  profile  output:
+  C-1  (all  certified  margins  >=  1)  ->  auto-
+  launch  (14  workers,  cores  0-27,  ~29  straddles,
+  first  pass  over  812.9GB  each);  anything  else
+  ->  HOLD,  owner  decides.  Measured  ETA  expected
+  ~4  ..  6  h  wall  from  the  151  MB/s  single-worker
+  rate.  This  is  the  [S3/S4]  (i)  H1-full
+  milestone  on  the  3e10  band.
