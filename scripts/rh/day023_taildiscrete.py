@@ -9,8 +9,14 @@
 # Validation: s0 = -2 (real, trivial pin): per-pair = log1p(6/A) - 2/A and the
 # (1e7, 3e7] sum must reproduce 6.251993491674e-07 (day023_tail_arbiter.py).
 import struct
+import os
 import numpy as np
 from mpmath import mp
+
+# shard directory: /tmp is wiped on reboot (the day-045 incident);
+# the repo copy lives in scripts/rh/lshards/ (md5-verified pins in
+# lshards/md5.txt from beta.lmfdb.org/data/riemann-zeta-zeros/).
+SHARDS_DIR = os.environ.get("ZETA_SHARDS_DIR", "/tmp/zeta-dl/shards")
 
 LO, HI, REM_HI = 1.0e7, 3.0e7, 1.0e12
 PI = mp.pi
@@ -24,7 +30,7 @@ def load_g_range(lo, hi):
     E19 = mp.mpf(1)/(2**101)
     out = []
     for fn in files:
-        d = open(f"/tmp/zeta-dl/shards/{fn}", "rb").read()
+        d = open(f"{SHARDS_DIR}/{fn}", "rb").read()
         (nblk,) = struct.unpack_from("Q", d, 0)
         off = 8
         for _ in range(nblk):

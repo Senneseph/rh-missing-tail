@@ -119,6 +119,12 @@ C_F = R_H + "/scripts/rh/hi3e9/zeros_2002e6_to_3000e6.f64"
 D_F = R_H + "/scripts/rh/hi3e10/zeros_2999e6_to_30000e6.f64"
 BAND_LO = 2.9992e9          # the extension band's lower edge
 OUT = R_H + "/scripts/rh/out_day038_h1_3e10_gpu.txt"
+# FULL-mode  outputs  (separate  from  the  profile  file,  which
+# a  running  profile  process  keeps  open):
+OUT_FULL = R_H + "/scripts/rh/out_day038_full_pts.txt"
+CKPT_DIR = R_H + "/scripts/rh/ckpt_h1_3e10"
+N_PTS_PER_WIN = 24
+K_LIST = [k for k in range(-12, 13) if k != 0]
 
 
 def n4(t):
@@ -597,13 +603,16 @@ def cert_point(T, tf, g, audit=False):
 
 def nearest_zero(T, x):
     """the real zero nearest x.  Every 3e10-band window anchor lies
-    inside D,  so the search is a binary search over D alone."""
-    d0 = T.n_tail - T.nD
+    inside D,  so the  search  is  a binary  search  over  D  alone.
+    (The  D-file  is  indexed  0..nD-1  on  its  own;  an  earlier
+    revision  wrongly  started  the  search  at  D's  offset  in
+    the  stitched  tail,  which  left  x  <  ~5.6e9  outside  the
+    search  space  and  returned  a  WRONG  anchor.)"""
     lo_i, hi_i = 0, T.nD
     with open(D_F, 'rb', buffering=0) as f:
         while hi_i - lo_i > 1:
             mid = (lo_i + hi_i) // 2
-            f.seek((d0 + mid) * 8)
+            f.seek(mid * 8)
             if struct.unpack('<d', f.read(8))[0] <= x:
                 lo_i = mid
             else:
@@ -611,7 +620,7 @@ def nearest_zero(T, x):
         cands = []
         for k in (lo_i - 1, lo_i, lo_i + 1):
             if 0 <= k < T.nD:
-                f.seek((d0 + k) * 8)
+                f.seek(k * 8)
                 cands.append(struct.unpack('<d', f.read(8))[0])
         return min(cands, key=lambda v: abs(v - x))
 
@@ -1059,6 +1068,93 @@ def _summary(res, dt, mode):
                           else "see the pre-registered reading C-2/C-3"))
 
 
+def selftest_nearest_zero():
+    """(e) nearest_zero regression:  the  anchor  of  a  window
+    must  be  a  REAL  zero  of  D  within  half  a  gap  of  x,
+    at  the  LOW  edge  (the  d0-shift  bug  zone),  the  mid,
+    and  the  top  window  of  the  grid."""
+    print("SELFTEST(e):  nearest_zero  anchors  (low/mid/top)", flush=True)
+    T = _get_T()
+    xs = grid()
+    ok = True
+    for i in (0, 1, 7, 8, 14, 28):
+        x = xs[i]
+        g = nearest_zero(T, x)
+        d = abs(g - x)
+        ggood = d < 0.4 and BAND_LO < g <= T.G_LAST
+        ok = ok and ggood
+        print("  window  %2d:  x=%.6g  g=%.6f  |g-x|=%.4f  %s"
+              % (i, x, g, d, "OK" if ggood else "FAIL"), flush=True)
+    print("SELFTEST(e):  %s" % ("PASS" if ok else "FAIL"), flush=True)
+    return ok
+
+
+def selftest_ckpt():
+    """(d)  CHECKPOINT  ROUND-TRIP  (no  GPU,  no  band):
+    synthetic  records  must  survive  file  ->  parse  ->
+    re-emit  byte-identically  (including  the  audit
+    continuation  line);  the  k-recovery  must  be  exact;
+    a  torn  tail  must  drop  exactly  the  torn  line;
+    mid-file  corruption  must  halt  (None)."""
+    import tempfile
+    import shutil
+    print("SELFTEST(d):  checkpoint  round-trip  +  resume  bookkeeping",
+          flush=True)
+    global CKPT_DIR
+    real_dir = CKPT_DIR
+    d = tempfile.mkdtemp(prefix="ckpt_selftest_")
+    CKPT_DIR = d
+    ok = True
+    try:
+        x = 12345678901.2345678
+        g = 12345678901.999999
+
+        def mk(k, audit=False):
+            return {"flag": False, "x": x, "t": float(g + k / 2.0),
+                    "g": g, "mnew": 1.0 + 1e-7 * k,
+                    "mcert": 1.0 - 1e-9 * abs(k), "residf": 1e-6,
+                    "zeta": 0.5, "dev": 1e-12, "Bexp": 2.31e-3,
+                    "Bph": 1e-4, "Bz": 1e-3, "Bdev": 1e-10,
+                    "Btail_re": 1e-9, "Btail_im": 1e-9,
+                    "Bprod_re": 1e-9, "Bprod_im": 1e-9,
+                    "Bqrem": 1e-9, "Bqext": 1e-9, "nlt": 7,
+                    "audit": ({"rem": [3.21e-4, 1.1e-4],
+                               "ext": [9.5e-5]} if audit else None)}
+
+        r0 = (_parse_wk_file(0, x) == [])
+        assert r0, "no file -> []"
+        for k in K_LIST[:22]:
+            _ckpt_append(0, x, mk(k, audit=(k == -12)))
+        raw = open(_wk_path(0, x)).read()
+        recs = _parse_wk_file(0, x)
+        r1 = (recs is not None and len(recs) == 22
+              and _k_set(recs) == set(K_LIST[:22]))
+        print("  22-pt  parse  +  exact  k-recovery:  %s" % r1, flush=True)
+        ok = ok and r1
+        reem = "".join(_point_row(x, p) for p in recs)
+        r2 = (reem == raw)
+        print("  round-trip  byte-identical  (incl.  audit  row):  %s"
+              % r2, flush=True)
+        ok = ok and r2
+        with open(_wk_path(0, x), "a") as tf:
+            tf.write("ok,%.10f,%.10f," % (x, g + 5))
+        recs2 = _parse_wk_file(0, x)
+        r3 = (recs2 is not None and len(recs2) == 22)
+        print("  torn  tail  dropped,  22  kept:  %s" % r3, flush=True)
+        ok = ok and r3
+        with open(_wk_path(0, x), "w") as tf:
+            tf.write(raw[:len(raw) // 3]
+                     + "GARBAGE LINE\n" + raw[len(raw) // 3:])
+        r4 = (_parse_wk_file(0, x) is None)
+        print("  mid  corruption  ->  None  (HOLD):  %s" % r4, flush=True)
+        ok = ok and r4
+    finally:
+        CKPT_DIR = real_dir
+        shutil.rmtree(d, ignore_errors=True)
+    print("SELFTEST(d):  %s" % ("PASS" if ok else "FAIL"), flush=True)
+    return ok
+
+
 import concurrent.futures as cf
 
 
@@ -1067,13 +1163,189 @@ def _worker(x):
     return scan_window(x, T=_get_T())
 
 
+# ----------------------------------------------------------------------
+# CHECKPOINTING  (FULL  mode  only;  the  PROFILE  path  is  exactly
+# as  before)
+#
+#  Every  (window  i,  offset  k)  point  is  written  to  its
+#  append-only  file  the  moment  its  cert  completes  (one  row
+#  per  point,  plus  the  audit  continuation  line  for  k  =
+#  -12).  A  crash  loses  at  most  the  in-flight  points  (one
+#  ~  100-min  sweep  each,  at  most  `workers`  of  them).
+#  Resume  =  resubmit  only  the  (i,  k)  pairs  not  yet  on
+#  disk  (the  day045  supervisor  re-launches  the  same  script).
+#  A  TORN  TAIL  line  (an  interrupted  write  at  the  end  of
+#  the  file)  is  dropped  (that  point  is  recomputed);
+#  corruption  ANYWHERE  ELSE  halts  the  instance  (owner
+#  decides;  never  guess).
+# ----------------------------------------------------------------------
+
+def _wk_path(i, x):
+    return CKPT_DIR + "/widx%02d_x%.10g.pts" % (i, x)
+
+
+def _parse_wk_file(i, x):
+    """Parse  a  checkpoint  file  ->  point  records  in  on-disk
+    order,  or  None  on  corruption  (torn-tail  excepted)."""
+    path = _wk_path(i, x)
+    if not os.path.exists(path):
+        return []
+    with open(path) as f:
+        nonempty = [ln for ln in f.read().split("\n") if ln]
+    recs = []
+    last = None
+    for idx, ln in enumerate(nonempty):
+        torn_tolerate = (idx == len(nonempty) - 1)
+        if ln.startswith("audit,"):
+            if last is None:
+                return None if not torn_tolerate else recs
+            body = ln[len("audit,"):].strip()
+            head, _, rest = body.partition(" ")
+            m = dict(kv.split("=", 1) for kv in
+                     head.rstrip(",").split(",") + rest.split()
+                     if "=" in kv)
+            try:
+                last["audit"] = {"rem": [float(m["rem_spread_max"])],
+                                 "ext": [float(m["ext_spread_max"])]}
+            except (KeyError, ValueError):
+                return None if not torn_tolerate else recs
+            continue
+        f_ = ln.split(",")
+        if len(f_) != 21:
+            return recs if torn_tolerate else None
+        try:
+            p = {"flag": f_[0].strip() == "FLAG",
+                 "x": float(f_[1]), "t": float(f_[2]), "g": float(f_[3]),
+                 "mnew": float(f_[4]), "mcert": float(f_[5]),
+                 "residf": float(f_[6]), "zeta": float(f_[7]),
+                 "dev": float(f_[8]), "Bexp": float(f_[9]),
+                 "Bph": float(f_[10]), "Bz": float(f_[11]),
+                 "Bdev": float(f_[12]), "Btail_re": float(f_[13]),
+                 "Btail_im": float(f_[14]), "Bprod_re": float(f_[15]),
+                 "Bprod_im": float(f_[16]), "Bqrem": float(f_[17]),
+                 "Bqext": float(f_[18]), "nlt": int(f_[19]),
+                 "flagint": int(f_[20]), "audit": None}
+        except ValueError:
+            return recs if torn_tolerate else None
+        if abs(p["x"] - x) > 1e-6:
+            return None
+        if p["flagint"] != (1 if p["flag"] else 0):
+            return None
+        recs.append(p)
+        last = p
+    return recs
+
+
+def _k_set(recs):
+    """Recover  each  record's  offset  k  from  t  =  g  +  k/2
+    (exact:  t  -  g  is  exact  by  Sterbenz,  so  2*(t-g)  is
+    k  within  <  4  ulp(g),  far  from  any  half-integer)."""
+    return set(round(2.0 * (p["t"] - p["g"])) for p in recs)
+
+
+def _ckpt_append(i, x, p):
+    """Append  one  point  row  (plus  the  audit  row  when
+    present):  a  single  <  1.5KB  write  under  O_APPEND  is
+    atomic;  fsync  after  every  row."""
+    path = _wk_path(i, x)
+    f = open(path, "a")
+    try:
+        f.write(_point_row(x, p))
+        f.flush()
+        os.fsync(f.fileno())
+    finally:
+        f.close()
+
+
+def _write_pids():
+    """PID  FILE  (the  owner's  win):  record  every  process
+    of  this  instance  so  stop  /  audit  never  guesses.
+    Format:  one  "role SP pid"  per  line.  Safety  caveat:
+    PIDs  can  be  reused  by  the  OS  —  the  stop  helper
+    verifies  each  PID's  cmdline  before  killing."""
+    import time as _t
+    mine = []
+    me = os.getpid()
+    try:
+        for d in os.listdir("/proc"):
+            if not d.isdigit():
+                continue
+            try:
+                with open("/proc/" + d + "/stat") as f:
+                    parts = f.read().rsplit(")", 1)[1].split()
+                if int(parts[1]) == me:          # ppid field
+                    mine.append(int(d))
+            except (OSError, ValueError, IndexError):
+                continue
+        # children  may  still  be  spawning:  wait  briefly  for
+        # the  expected  worker  count
+        deadline = _t.time() + 60
+        while _t.time() < deadline and len(mine) < max(workers_expect, 1):
+            _t.sleep(1)
+            mine = []
+            for d in os.listdir("/proc"):
+                if not d.isdigit():
+                    continue
+                try:
+                    with open("/proc/" + d + "/stat") as f:
+                        parts = f.read().rsplit(")", 1)[1].split()
+                    if int(parts[1]) == me:
+                        mine.append(int(d))
+                except (OSError, ValueError, IndexError):
+                    continue
+    except OSError:
+        pass
+    tmp = CKPT_DIR + "/run.pids.tmp"
+    with open(tmp, "w") as f:
+        f.write("# day038 FULL instance pid file (utc %s)\n"
+                % _t.strftime("%Y-%m-%dT%H:%M:%SZ", _t.gmtime()))
+        f.write("parent %d\n" % me)
+        for w in sorted(mine):
+            f.write("worker %d\n" % w)
+        f.flush()
+        os.fsync(f.fileno())
+    os.replace(tmp, CKPT_DIR + "/run.pids")
+    print("pids: parent=%d workers=%d written to ckpt_h1_3e10/run.pids"
+          % (me, len(mine)), flush=True)
+
+
+def _mem_available_gib():
+    try:
+        with open("/proc/meminfo") as f:
+            for ln in f:
+                if ln.startswith("MemAvailable:"):
+                    return int(ln.split()[1]) / (1024.0 * 1024.0)
+    except (OSError, ValueError):
+        pass
+    return None
+
+
+def _worker_pt(job):
+    """Point-job  worker  (picklable):  job  =  (i,  x,  k)."""
+    i, x, k = job
+    T = _get_T()
+    g = nearest_zero(T, x)
+    p = cert_point(T, g + k / 2.0, g, audit=(k == -12))
+    _ckpt_append(i, x, p)
+    print("  pt win=%d k=%+d x=%.4g t=%.5f mnew=%.4f mcert=%.4f "
+          "bexp=%.2e" % (i, k, x, p["t"], p["mnew"], p["mcert"],
+                         p["Bexp"]), flush=True)
+    return p
+
+
 def run():
-    smoke = os.environ.get("H1CERT_SMOKE") == "1"
-    xs = grid()
-    if smoke:
-        xs = [max(xs)]          # the profile:  the top window
+    if os.environ.get("H1CERT_SMOKE") == "1":
+        _run_profile()
+    else:
+        _run_full()
+
+
+def _run_profile():
+    """The  (i)  profile  —  behavior  and  output  path  exactly
+    as  the  original  run()."""
+    xs = [max(grid())]          # the profile:  the top window
     work = min(int(os.environ.get("WORKERS", "12")), 14)   # owner core cap
-    mode = "PROFILE" if smoke else "FULL"
+    mode = "PROFILE"
     print("day038 %s H1-3e10: %s, %d windows, workers=%d"
           % ("gpu" if USE_GPU else "cpu", mode, len(xs), work),
           flush=True)
@@ -1084,8 +1356,6 @@ def run():
                  % (mode, work, time.strftime("%Y-%m-%d %H:%M:%S")))
         fo.write("# point detail (incremental; one row per straddle):\n")
         fo.flush()
-
-        # (the worker must be module-level:  closures do not pickle)
         if work == 1:
             for x in xs:
                 w = _worker(x)
@@ -1103,14 +1373,105 @@ def run():
     _summary(res, dt, mode)
 
 
+def _run_full():
+    """The  (i)  FULL  fill:  696  point  jobs  (29  windows  x
+    24  offsets),  each  checkpointed  on  completion  —
+    crash-safe,  resumable  (day045  supervisor  re-launches).
+    Exit  codes:  3  =  corrupt  checkpoint  (owner  decides),
+    4  =  incomplete  (supervisor  resumes),  0  =  all  696
+    done  and  assembled."""
+    work = min(int(os.environ.get("WORKERS", "14")), 14)   # owner core cap
+    xs = grid()
+    os.makedirs(CKPT_DIR, exist_ok=True)
+    t0 = time.time()
+    jobs = []
+    for i, x in enumerate(xs):
+        recs = _parse_wk_file(i, x)
+        if recs is None:
+            print("CKPT  CORRUPT:  window  %d  (x=%.10g)  --  HOLD, owner decides" % (i, x), flush=True)
+            sys.exit(3)
+        done = _k_set(recs)
+        for k in K_LIST:
+            if k not in done:
+                jobs.append((i, x, k))
+        print("resume:  window  %2d  (x=%.10g)  %d/%d  points  on disk" % (i, x, len(recs), N_PTS_PER_WIN), flush=True)
+    global workers_expect
+    # MEMORY  GUARD:  the  worker  count  is  derived  from  live
+    # RAM  (not  cores):  the  owner's  model  =  100Gi  for  the
+    # programs,  28Gi  untouchable  (25  OS  +  3  display)  --
+    # RESERVE  =  that  floor.  The  iGPU  queue  hardware  adds
+    # a  second  ceiling:  ~8  SDMA  queues  total  system-wide
+    # (dmesg:  "No  more  SDMA  queue  to  allocate"),  so  no
+    # more  than  ~11  concurrent  GPU  clients  including  Xorg.
+    RESERVE_GIB = int(os.environ.get("H1_RESERVE_GIB", "28"))
+    PER_WORKER_GIB = float(os.environ.get("H1_PER_WORKER_GIB", "6"))
+    GPU_CLIENT_CAP = int(os.environ.get("H1_GPU_CLIENT_CAP", "11"))
+    avail = _mem_available_gib()
+    if avail is not None:
+        allow = min(int((avail - RESERVE_GIB) // PER_WORKER_GIB), GPU_CLIENT_CAP)
+        if allow < 1:
+            print("memguard:  MemAvailable  %.1f  GiB  <  reserve  %d  +  one  worker  --  HOLD  (exit  6);  supervisor  retries  later" % (avail, RESERVE_GIB), flush=True)
+            sys.exit(6)
+        print("memguard:  MemAvailable  %.1f  GiB,  reserve  %d  GiB,  ~%.0f  GiB/worker  ->  allow  <=  %d  workers" % (avail, RESERVE_GIB, PER_WORKER_GIB, allow), flush=True)
+        work = min(work, max(allow, 1))
+    else:
+        print("memguard:  MemAvailable  unreadable  --  proceeding  with  env  WORKERS=%d" % work, flush=True)
+    print("day038  %s  H1-3e10:  FULL,  %d  point  jobs  remaining (%d  windows,  workers=%d)" % ("gpu" if USE_GPU else "cpu", len(jobs), len(xs), work), flush=True)
+    if jobs:
+        workers_expect = work
+        with cf.ProcessPoolExecutor(max_workers=work) as ex:
+            futs = {ex.submit(_worker_pt, job): job for job in jobs}
+            # pid  file  AFTER  the  submits:  the  pool  spawns
+            # its  workers  on  first  submit,  so  only  now  are
+            # the  child  pids  real.  (Earlier  order  wrote  the
+            # file  with  zero  workers.)
+            _write_pids()
+            for fu in cf.as_completed(futs):
+                i, x, k = futs[fu]
+                try:
+                    fu.result()
+                except BaseException as e:
+                    print("point  job  (win  %d,  k  %+d,  x=%.10g)  WORKER  FAILED:  %r  --  done  points  are  checkpointed;  supervisor  resumes" % (i, k, x, e), flush=True)
+    res = []
+    missing = 0
+    for i, x in enumerate(xs):
+        recs = _parse_wk_file(i, x)
+        if recs is None:
+            print("window  %2d:  CORRUPT  after  the  pool  --  owner" % i, flush=True)
+            sys.exit(3)
+        ks = _k_set(recs)
+        if len(recs) != N_PTS_PER_WIN or len(ks) != N_PTS_PER_WIN:
+            missing += 1
+            print("window  %2d:  %d/%d  points  after  this  instance" % (i, len(recs), N_PTS_PER_WIN), flush=True)
+            continue
+        res.append({"x": x, "i": i, "g": recs[0]["g"], "pts": recs})
+    if missing:
+        print("H1  INCOMPLETE:  %d  window(s)  not  at  24/24  --  checkpoints  intact,  supervisor  resumes" % missing, flush=True)
+        sys.exit(4)
+    res.sort(key=lambda r: r["x"])
+    with open(OUT_FULL, "w") as fo:
+        fo.write("# day038  H1  cert  3e10  FULL  workers=%d  %s\n"
+                 % (work, time.strftime("%Y-%m-%d %H:%M:%S")))
+        fo.write("# point  detail  (assembled  from  checkpoints;  one  row  per  straddle):\n")
+        for w in res:
+            for p in sorted(w["pts"], key=lambda p: p["t"]):
+                fo.write(_point_row(w["x"], p))
+        fo.flush()
+    dt = time.time() - t0
+    _summary(res, dt, "FULL")
+    print("H1  FULL-DONE:  %d  windows,  %d  points,  assembled  to  %s;  instance  wall  %.1f  h" % (len(res), len(res) * N_PTS_PER_WIN, OUT_FULL, dt / 3600.0), flush=True)
+
+
 if __name__ == '__main__':
     if os.environ.get("H1CERT_SELFTEST") == "1":
         a = selftest_core()
         ag = selftest_core_gpu()
         ap = selftest_patch()
+        dc = selftest_ckpt()
+        en = selftest_nearest_zero()
         if os.environ.get("H1CERT_SELFTEST_STREAM") == "1":
             b = selftest_streaming()
             bg = selftest_streaming_gpu()
-            sys.exit(0 if (a and ag and ap and b and bg) else 1)
-        sys.exit(0 if (a and ag and ap) else 1)
+            sys.exit(0 if (a and ag and ap and dc and en and b and bg) else 1)
+        sys.exit(0 if (a and ag and ap and dc and en) else 1)
     run()

@@ -932,3 +932,98 @@ within  a  handful  of  gaps.  None  of  this  reaches  a
 UNIVERSAL  epsilon  (the  open  A1  theorem);  it  is  the
 data  side  of  the  question,  and  it  is  now  complete
 and  stable  at  3e10.
+
+## E12.  The  S-pipeline  corrected  +  the  RVM  residual
+characterized  at  3 x  10^10  (D3  resolved  —  the  "14.6"
+was  a  bug,  not  a  phenomenon)
+
+What  happened:  E11's  D3  sweep  (110  points,  dps-30/35)
+came  back  "ALL  FAILED":  |residual|  1  ..  15  at  every
+point.  Before  believing  "RVM  residual  O(10)  at  3e10",
+the  three  suspects  were  separated  (mpmath  dps-50  oracle
++  a  mid-band  dps-50  control  —  the  latter  PASSING  at
+4e-13  while  the  band  points  failed):
+
+1.  mpmath  (dps-50,  independent  path)  and  the  project's
+    own  S  pipeline  DISAGREE  by  O(10)  at  band  points:
+    not  an  mpmath  problem.
+2.  The  Titchmarsh  Thm-10  form  is  verified  DIRECTLY  at
+    3 x  10^10  to  ~5 x  10^-13  (N  from  the  band  count,
+    theta_RS  and  S  at  dps-30..35):
+    `N(T)  =  (T/2pi)(log(T/2pi)  -  1)  +  7/8  +  S(T)
+              +  O(1/T)`  —  with  the  S of  the  Thm-10
+    statement  (unwrapped  (1/2)arg chi  +  the  step
+    indicator,  pinned  exactly).  The  residue  of  the  RVM
+    residual  at  3e10  is  at  the  O(1/T)  level  —  NOT
+    O(10).
+3.  The  pipeline  bug,  identified  by  algebra:  the  old
+    `S_data  =  (arg_p  zeta  -  theta_RS)/pi  +  (odd  snap
+    into  (-1,1))`  computes  `s_data  +  [-theta_RS/pi]`
+    where  `[x]`  is  the  centered  mod-2  representative  —
+    a  SAWTOOTH  in  (-1,1)  that  drifts  at  rate  -main'(t)
+    (exactly,  since  th1  =  pi  main  +  c  +  O(1/t)  and
+    th1'/pi  =  main').  Every  one  of  the  110  "failed"
+    residuals  was  exactly  that  sawtooth's  value  —  the
+    mod-2  wrap  had  been  absorbing  the  main-term
+    drift.  (The  snap  is  the  right  operation  for  the
+    FRACTIONAL  remainder  of  a  small  quantity;  it  is  the
+    wrong  operation  when  the  raw  difference  already
+    carries  O(T)  drift.)
+
+The  corrected  pipeline  (day041b,  replaces  day041):
+
+    S(t)  =  (phi_u(t)  +  step(t))  /  pi  +  m0
+      phi_u  =  incrementally  unwrapped  (1/2) arg chi(s)   (chi
+        =  2^s  pi^(s-1)  sin(pi s/2)  Gamma(1-s);  the
+        argument  is  accumulated  via  arg(chi(t)  conj(chi(prev)))
+        on  the  <=  0.25  grid  —  no  branch  jumps  possible)
+      step(t)  =  pi  when  Z(t)  =  exp(-i phi_u)  zeta(s)  <  0,
+        else  0   (the  RVM  step  indicator  —  EXACT  on  the
+        grid,  no  threshold  noise)
+      m0  =  nint(s_data  -  S_unpinned)   per  point   (the
+        pinned  integer,  absorbed  by  convention)
+
+    day041b  result  (110  points,  dps-30/35):  WORST  |S_ver
+    -  s_data|  =  4.95 x  10^-13   (was  15).  The  N-exact
+    data  column  IS  the  true  S  to  ~1e-5  at  3e10 —
+    re-confirming  the  S1  data  layer.
+
+Two  structural  corrections  that  survive  (they  were  in  the
+old  formula,  which  had  the  sawtooth  drift  baked  in):
+
+1.  The  JUMP  across  1/2.  At  the  step,  S  JUMPS  by
+    `1  -  (main(t_R)  -  main(t_L))`   (NOT  1  -  2
+    (main(t_R)  -  main(t_L))  as  E11  recorded  —  E11's
+    "1  -  2  d main"  formula  was  the  same  sawtooth  seen
+    from  the  S  side:  the  sawtooth  drops  1  at  the  wrap,
+    and  the  true  S  gains  1  -  d main  net  of  the  main
+    term  on  both  sides).  day041b  verifies  it  to
+    2 x  10^-21  at  the  band's  jumps:  the  jump  is  ~1
+    (main'  =  1/(2pi)  log(T/2pi)  ~  2.9,  so  1  -  d main
+    over  a  <=  0.5  grid  step  ~  1  -  O(10^-3)  ...  the
+    measured  values  are  0.996  ..  1.000).
+2.  The  drift  of  S  between  steps  is  main'(t)  =
+    (1/2pi)(log(T/2pi)  -  1)  ~  2.88  at  3e10  —  a  FAST
+    drift  relative  to  the  gaps:  over  a  typical  gap
+    (0.62)  S  moves  ~1.8.  S  sampled  at  the  zeros  is
+    therefore  NOT  a  slow  random  walk  in  n  at  3e10:
+    it  is  main(n)  +  (a  bounded  oscillation).  This  is
+    the  right  decomposition  for  A1:  A1's  epsilon  must
+    bound  S  -  main  AT  THE  ZEROS  (the  oscillation  part),
+    and  the  data  (E10  +  E11  +  day041b)  says  that
+    oscillation  is  tame:  <=  ~2.6  in  |DN|  globally  (sup|DN|
+    =  2.615  on  (1e7,  3e10])  and  O(1)  local  structure.
+
+Fingerprint  for  A1 (corrected  E11  summary):  S  -  main  at
+the  zeros  is  an  O(1)  bounded  oscillation  (data  up  to
+3e10),  with  jumps  of  ~1  at  grid  midpoints  that  coincide
+with  step  crossings.  A  universal  (analytic)  epsilon  for
+A1  must  be  O(1)  (consistent  with  the  1/3  per-zero  mean
+of  E2  fact-3,  which  is  an  average  of  the  SAME  bounded
+quantity)  —  it  cannot  tend  to  0  with  t.
+
+Status:  D1  -  D4  all  executed  and  resolved;  the  S-at-zeros
+data  side  is  complete  to  5 x  10^-13  at  3 x  10^10.  The
+open  item  is  the  ANALYTIC  route  (A1  proper,  the  E8
+assembly  plan)  —  now  with  the  corrected  target  shape:
+bound  the  S  -  main  oscillation  at  the  zeros.

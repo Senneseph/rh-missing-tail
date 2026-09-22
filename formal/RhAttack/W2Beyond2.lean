@@ -532,3 +532,103 @@ theorem eullK_finite_var_far (t : ℝ) (h1 : 1 ≤ t) (g1 g2 : ℝ)
     _ ≤ EullAntideriv t g2 - EullAntideriv t g1 := hcmp
     _ = (5/2) * t^2 * (1 / g1^2 - 1 / g2^2) := hdiff2
     _ ≤ (5/2) * t^2 / g1^2 := hle2
+
+
+/-
+THE SEGMENT FORM  (A1 assembly,  S1 exploration E13):  the finite
+interval  variation  above  is  stated  for  one  interval  [g1, g2].
+Its  TELESCOPING  companion  —  the  per-segment  bound  in  the
+closed  (1/x^2  -  1/y^2)  —  is  what  a  DISCRETE  walk  (a
+partition  of  the  far  side)  needs:  the  per-segment  majorants
+are  differences  of  one  monotone  potential  and  therefore
+telescope  over  the  partition  (the  signed  sum  of  differences
+collapses  to  the  first  and  last;  no  M  factor,  no  measure
+theory).  This  theorem  is  the  third  line  of  the  eullK_
+finite_var_far  computation,  made  public  —  same  proof  shape,
+same  mathlib  pins.
+-/
+
+/-- SEGMENT FORM (far side):
+    t >= 1,  2t <= x <= y  =>
+    |FarKernel t y - FarKernel t x| <= (5/2) t^2 (1/x^2 - 1/y^2).
+    (The  right-hand  side  is  a  difference  of  the  potential
+    (5/2) t^2 / u^2  —  hence  it  TELESCOPES  over  partitions.) -/
+theorem eullK_far_segment (t x y : ℝ) (h1 : 1 ≤ t) (hfar : 2 * t ≤ x)
+    (hxy : x ≤ y) :
+    |FarKernel t y - FarKernel t x| ≤
+      (5/2) * t^2 * (1 / x^2 - 1 / y^2) := by
+  have h0t : 0 ≤ t := by linarith
+  have h2t : 2 * t > t := by linarith
+  have hdiff : ∀ v ∈ Set.Icc x y,
+      HasDerivAt (fun z : ℝ => FarKernel t z) (FarDeriv t v) v := by
+    rintro v hv
+    have hvt : v > t := by linarith [hfar, hv.1, h2t]
+    exact eullK_far_deriv t h0t v hvt
+  have hcont : ContinuousOn (fun z : ℝ => FarKernel t z) (Set.Icc x y) :=
+    fun v hv => (hdiff v hv).continuousAt.continuousWithinAt
+  have hfderc : ContinuousOn (fun v : ℝ => FarDeriv t v) (Set.Icc x y) := by
+    intro v hv
+    have hvt : v > t := by linarith [hfar, hv.1, h2t]
+    have hden1 : v^2 - t^2 ≠ 0 := by
+      have hpos : 0 < v^2 - t^2 := by
+        have hlt : 0 < v - t := sub_pos.mpr hvt
+        have hgt : 0 < v + t := by linarith
+        nlinarith
+      exact ne_of_gt hpos
+    have hden2 : v^2 + 1/4 ≠ 0 := ne_of_gt (by positivity : 0 < v^2 + 1/4)
+    have hden3 : (v^2 + 1/4)^2 ≠ 0 := ne_of_gt (by positivity : 0 < (v^2 + 1/4) ^ 2)
+    have hid : ContinuousAt (fun w : ℝ => w) v := continuousAt_id' v
+    have cnum2 : ContinuousAt (fun w : ℝ => w^2) v := hid.pow 2
+    have hnum2 : ContinuousAt (fun w : ℝ => w^2 - t^2) v :=
+      cnum2.sub continuous_const.continuousAt
+    have cden2 : ContinuousAt (fun w : ℝ => w^2 + 1/4) v :=
+      cnum2.add continuous_const.continuousAt
+    have cdensq : ContinuousAt (fun w : ℝ => (w^2 + 1/4)^2) v :=
+      cden2.pow 2
+    have hA : ContinuousAt (fun w : ℝ => 2 * w / (w^2 - t^2)) v :=
+      (hid.const_mul 2).div hnum2 hden1
+    have hB : ContinuousAt (fun w : ℝ => 2 * w / (w^2 + 1/4)) v :=
+      (hid.const_mul 2).div cden2 hden2
+    have hC : ContinuousAt (fun w : ℝ => w / (w^2 + 1/4)^2) v :=
+      hid.div cdensq hden3
+    dsimp only [FarDeriv]
+    exact ((hA.sub hB).sub hC).continuousWithinAt
+  -- FTC  (same  pins  as  eullK_finite_var_far).
+  have hftc : ∫ w in x..y, FarDeriv t w = FarKernel t y - FarKernel t x :=
+    intervalIntegral.integral_eq_sub_of_hasDerivAt_of_le hxy hcont
+      (fun v hv => hdiff v ⟨hv.1.le, hv.2.le⟩)
+      (hfderc.intervalIntegrable_of_Icc hxy)
+  have habs : |FarKernel t y - FarKernel t x| ≤
+      ∫ w in x..y, |FarDeriv t w| := by
+    rw [← hftc]
+    exact intervalIntegral.abs_integral_le_integral_abs hxy
+  have hmaps : Set.MapsTo (fun v : ℝ => FarDeriv t v) (Set.Icc x y) Set.univ :=
+    fun _ _ => by trivial
+  have hfdabs : ContinuousOn (fun v : ℝ => |FarDeriv t v|) (Set.Icc x y) :=
+    continuous_abs.continuousOn.comp hfderc hmaps
+  have φint : MeasureTheory.IntegrableOn (fun v : ℝ => |FarDeriv t v|)
+      (Set.Icc x y) :=
+    hfdabs.integrableOn_Icc
+  have hcmp : ∫ w in x..y, |FarDeriv t w| ≤
+      EullAntideriv t y - EullAntideriv t x := by
+    refine intervalIntegral.integral_le_sub_of_hasDeriv_right_of_le
+      (g' := fun v : ℝ => 5 * t^2 / v^3) hxy ?_ ?_ φint ?_
+    · intro z hz
+      have hzp : 0 < z := by linarith [hfar, hz.1]
+      exact (eullAntideriv_deriv t z hzp).continuousAt.continuousWithinAt
+    · intro v hv
+      have hvp : 0 < v := by linarith [hfar, hv.1]
+      exact (eullAntideriv_deriv t v hvp).hasDerivWithinAt
+    · intro v hv
+      exact eullK_tail_deriv_bound t h1 v (le_trans hfar hv.1.le)
+  have hdiff2 : EullAntideriv t y - EullAntideriv t x =
+      (5/2) * t^2 * (1 / x^2 - 1 / y^2) := by
+    dsimp only [EullAntideriv]
+    have h1p : 0 < x := by linarith
+    have h2p : 0 < y := by linarith
+    field_simp [pow_two]
+    ring
+  calc |FarKernel t y - FarKernel t x|
+      ≤ ∫ w in x..y, |FarDeriv t w| := habs
+    _ ≤ EullAntideriv t y - EullAntideriv t x := hcmp
+    _ = (5/2) * t^2 * (1 / x^2 - 1 / y^2) := hdiff2
