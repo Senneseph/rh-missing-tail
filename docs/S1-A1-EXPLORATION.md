@@ -680,3 +680,57 @@ denominators).  Saved to the wiki for the E3.3 step.
 Artifacts:  `formal/RhAttack/W2Beyond2.lean`
 (EullAntideriv,  eullAntideriv_deriv,  eullK_finite_var_far);
 no data touched;  no new pins.
+
+## E9.  E3.3  —  the E2 barrier,  as a Lean record  —  BUILT GREEN
+
+The last queued Lean item from E3  (named in E7 item 3)  is
+DONE.  `formal/RhAttack/E2Barrier.lean`  (full `lake build`
+green,  17,442 jobs)  packages the E2 negative result in
+three parts,  each labelled for what it IS and is not:
+
+1.  `E2Barrier.envelope_dominates_total_variation`  (FACT 2,
+    exact):  any pointwise envelope  f  of the per-gap
+    absolute deviations  eps  satisfies
+    K0 + Σ eps  <=  K0 + Σ f  —  the driftTwoSided bound
+    form dominates the walk's total variation.
+2.  `E2Barrier.no_constant_closer`  (the barrier,  exact
+    theorem,  HYPOTHETICAL input):  if the per-gap
+    deviations carry a δ-floor  (eps i >= δ > 0  at every
+    zero),  then NO finite K  bounds  K0 + Σ_{i<N} eps_i
+    over all band sizes  N.  Proof:  pick
+    M = ceil(max(1, K-K0)/δ);  the (M+1)-term sum already
+    exceeds K.  The δ-floor is stated as a HYPOTHESIS  —
+    that is exactly E2 FACT 4  (the open positive-density
+    oscillation fact;  STTB  (arXiv:2010.10675,  from E7)
+    gives the qualitative density theorem with vacuous
+    constants,  so the floor is measured,  not yet a
+    theorem).
+3.  The MEASURED record  (`E2Barrier.band3e10`):  the
+    certified pins  (nZeros  =  92,577,877,714;
+    sumEpsCert  =  31,047,116,350.923088;
+    supDn  =  2.615067),  plus the derived scale facts,
+    norm_num  on the certified digits:
+    `barrier_band3e10`  (the certified sum  >=  10^9  times
+    the walk amplitude  —  the A1 target is K ~ 2.6;  this
+    mechanism's bound is of order  3.1 x 10^10),
+    `mean_ge_third`  (fact 3:  certified per-zero mean
+    >=  1/3  ≈ 0.33535  —  the per-gap  |drift|  does NOT
+    tend to 0),  `pins_separate_scales`.
+
+Structure note:  the record keeps the data as literal pins
+of the verified band  (no new arithmetic invented),  and
+keeps the pure-math part (facts 2  +  the barrier under a
+δ-floor)  fully formal and data-free.  The file header
+states explicitly what it does NOT claim  (nothing about
+zeta beyond the pins).
+
+Build notes:  see the wiki observations recorded this
+session  (∑-notation  with  ∈  in this build;  the
+add_le_add_left/right  and  mul_le_mul_of_nonneg_left/right
+argument-order conventions  verified against the official
+mathlib4 source;  no  Real.le.contradiction  —  linarith
+closes the final contradiction).
+
+Artifacts:  `formal/RhAttack/E2Barrier.lean`
+(6  lemmas  +  structure  +  def  +  3  norm_num  theorems);
+no data touched;  no new pins.
