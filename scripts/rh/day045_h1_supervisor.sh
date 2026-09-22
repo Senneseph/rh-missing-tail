@@ -92,6 +92,14 @@ if [ "$cnt" != "11" ]; then
     stamp "L-SHARD  COUNT  EXPECTED  11,  GOT  $cnt  --  HOLD,  owner  decides"
     exit 7
 fi
+# the  pins  are  extracted  from  the  official  lmfdb  list
+# (lshards/md5.txt).  A  missing  list  used  to  make  the  grep
+# below  a  silent  no-op  (gate  passed  with  zero  pins)
+# --  that  is  now  a  hard  fail.
+if [ ! -s "$SHARDS/md5.txt" ]; then
+    stamp "L-SHARD  PIN  FILE  MISSING  (lshards/md5.txt,  the  official  lmfdb  md5  list)  --  HOLD,  owner  decides"
+    exit 7
+fi
 (cd "$SHARDS" && grep -hE "\\*zeros_(8846000|10946000|13046000|15146000|17246000|19346000|21446000|23546000|25646000|27746000|29846000)\\.dat" md5.txt | sed 's/ \*/ /' > "/tmp/shardcheck.$$.txt") && if ! (cd "$SHARDS" && md5sum --quiet -c "/tmp/shardcheck.$$.txt" >/dev/null 2>&1); then stamp "L-SHARD  MD5  MISMATCH  --  HOLD,  owner  decides"; exit 7; fi
 rm -f "/tmp/shardcheck.$$.txt"
 stamp "L-shards  verified  (11  x  md5  against  official  lmfdb  pins)"
