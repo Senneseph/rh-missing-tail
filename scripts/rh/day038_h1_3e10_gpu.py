@@ -375,7 +375,7 @@ def _count_below_file(path, t, stitch=0):
 # slab of size m -- the only change is ceil(log2 m) for the Higham
 # pairwise factor)
 # ----------------------------------------------------------------------
-def slab_budget(c, tf, t2, m, start_idx=0, extra_idx=None):
+def slab_budget(c, tf, t2, m, start_idx=0, extra_idx=None, free_pool=True, st=None):
     g2 = c * c
     A = g2 + 0.25
     re_t = np.log(np.abs(g2 - t2)) - np.log(A) + 0.5 / A
@@ -422,34 +422,50 @@ def _pos_cert(S_f64, m):
     return S_f64 * (1.0 + 2.0 * max(0, m - 1) * U64)
 
 
-def slab_budget_gpu(c, tf, t2, m, start_idx=0, extra_idx=None):
+class _noStream:
+    """no-op stream context (the sequential  path  runs  exactly
+    as  before  cupy  stream  contexts)."""
+    def __enter__(self):
+        return None
+
+    def __exit__(self, *a):
+        return False
+
+
+def slab_budget_gpu(c, tf, t2, m, start_idx=0, extra_idx=None, free_pool=True, st=None):
     """the per-slab core on the iGPU  (identical f64 arithmetic,
-    certified positive-term bounds instead of longdouble refs)."""
-    cc = cp.asarray(c)
-    g2 = cc * cc
-    A = g2 + 0.25
-    abs_g2t2 = cp.abs(g2 - t2)
-    re_t = cp.log(abs_g2t2) - cp.log(A) + 0.5 / A
-    im_t = tf / A                                 # > 0   (t > 0,  A > 0)
-    sub_re = float(re_t.sum())
-    sub_im = float(im_t.sum())
-    S1 = float(cp.abs(re_t).sum())
-    S2 = float(cp.maximum(cp.abs(re_t), 0.5 / A).sum())
-    S3 = sub_im                                   # im_t > 0
-    dg = U64 * cp.abs(cc)
-    dredg = (2.0 * cc / cp.maximum(abs_g2t2, 1e-30)
-             + 2.0 * cc / A + cc / (A * A))        # > 0   (c > 0)
-    dimdg = tf * 2.0 * cc / (A * A)                # > 0
-    S4 = float((dg * dredg).sum())
-    S5 = float((dg * dimdg).sum())
-    dmin = float(np.min(np.abs(c - tf)))          # host:  one pass
-    k = int(math.ceil(math.log2(m))) if m > 1 else 0
-    S1c, S2c, S3c = _pos_cert(S1, m), _pos_cert(S2, m), _pos_cert(S3, m)
-    S4c, S5c = _pos_cert(S4, m), _pos_cert(S5, m)
-    B_re = GAM10_64 * S2c + k * 2.0 * U64 * S1c + S4c
-    B_im = GAM1_64 * S3c + k * 2.0 * U64 * S3c + S5c
-    # the host patch:  the A/B overlap rounding-level zeros (dg x3),
+    certified positive-term bounds instead of longdouble refs).
+    st:  optional  per-thread  cupy  Stream  (the  threaded  sweep
+    runs  each  slab  on  its  own  stream  so  the  8  threads  of
+    one  context  execute  CONCURRENTLY  on  the  CUs  --  one  queue,
+    many  CUs,  exactly  the  owner's  Strix-Halo  model)."""
+    with (st if st is not None else _noStream()):
+        cc = cp.asarray(c)
+        g2 = cc * cc
+        A = g2 + 0.25
+        abs_g2t2 = cp.abs(g2 - t2)
+        re_t = cp.log(abs_g2t2) - cp.log(A) + 0.5 / A
+        im_t = tf / A                                 # > 0   (t > 0,  A > 0)
+        sub_re = float(re_t.sum())
+        sub_im = float(im_t.sum())
+        S1 = float(cp.abs(re_t).sum())
+        S2 = float(cp.maximum(cp.abs(re_t), 0.5 / A).sum())
+        S3 = sub_im                                  # im_t > 0
+        dg = U64 * cp.abs(cc)
+        dredg = (2.0 * cc / cp.maximum(abs_g2t2, 1e-30)
+                 + 2.0 * cc / A + cc / (A * A))        # > 0   (c > 0)
+        dimdg = tf * 2.0 * cc / (A * A)                # > 0
+        S4 = float((dg * dredg).sum())
+        S5 = float((dg * dimdg).sum())
+        dmin = float(np.min(np.abs(c - tf)))          # host:  one pass
+        k = int(math.ceil(math.log2(m))) if m > 1 else 0
+        S1c, S2c, S3c = _pos_cert(S1, m), _pos_cert(S2, m), _pos_cert(S3, m)
+        S4c, S5c = _pos_cert(S4, m), _pos_cert(S5, m)
+        B_re = GAM10_64 * S2c + k * 2.0 * U64 * S1c + S4c
+        B_im = GAM1_64 * S3c + k * 2.0 * U64 * S3c + S5c
+            # the host patch:  the A/B overlap rounding-level zeros (dg x3),
     # identical formulas to day037,  exact f64 at only `loc` elements
+    # (host-only  numpy;  outside  the  stream  context  on  purpose).
     if extra_idx is not None and extra_idx.size:
         lo_ = int(np.searchsorted(extra_idx, start_idx, side='left'))
         hi_ = int(np.searchsorted(extra_idx, start_idx + m, side='right'))
@@ -473,40 +489,127 @@ def slab_budget_gpu(c, tf, t2, m, start_idx=0, extra_idx=None):
             B_im += 2.0 * float((dg_l * dimdg_l).astype(np.longdouble).sum())
     for x in (cc, g2, A, abs_g2t2, re_t, im_t, dg, dredg, dimdg):
         del x
-    cp.get_default_memory_pool().free_all_blocks()
+    if free_pool:
+        cp.get_default_memory_pool().free_all_blocks()
     return sub_re, sub_im, B_re, B_im, S1c, dmin
 
 
-def tail_with_budget(T, tf):
+def tail_with_budget(T, tf, nthreads=1, sub=None, nslabs=None):
+    """The  slab  loop.  nthreads=1  is  the  original  sequential
+    loop  (bit-identical).  nthreads>1  is  the  owner's  Strix-
+    Halo  model  made  real:  the  parallel  unit  is  the  THREAD
+    (threads  of  one  HIP  context  share  one  SDMA  queue  and
+    spread  over  the  CUs);  each  thread  owns  a  disjoint
+    contiguous  slab  range,  reads  it  with  the  cursor-free
+    read_slab_at,  accumulates  its  own  partials,  and  the
+    parent  reduces  after  the  barrier.  v1  keeps  one  stream
+    per  context  (GPU  ops  still  serialize  within  it;  what
+    the  threads  buy  is  the  overlap  of  file  I/O  +  host
+    numpy  with  GPU  time).  free_all_blocks  is  OFF  in  threaded
+    mode:  a  cross-thread  pool  eviction  could  recycle  another
+    thread's  live  slab  buffer.  sub:  slab  size  (production
+    threaded  runs  use  2^24  =  128MiB  slabs  so  that  32
+    concurrent  working  sets  fit  the  100Gi  program  budget).
+    nslabs:  prefix  limit  (selftest)."""
     t2 = tf * tf
-    re = np.longdouble(0)
-    im = np.longdouble(0)
-    B_re = 0.0
-    B_im = 0.0
-    sa = np.longdouble(0)
-    dmin = float('inf')
-    nsub = 0
     slabfn = slab_budget_gpu if USE_GPU else slab_budget
+    if sub is None:
+        sub = SUB // 2 if (nthreads > 1 and USE_GPU) else SUB
     n = T.n_tail
-    i = 0
-    while i < n:
-        m = min(SUB, n - i)
-        c = T.read_slab(m)
-        sr, si, br, bi, s_ar, dm = slabfn(
-            c, tf, t2, m, i, getattr(T, 'extra_idx', None))
-        re += np.longdouble(sr)
-        im += np.longdouble(si)
-        B_re += br
-        B_im += bi
-        sa += np.longdouble(s_ar)
-        dmin = min(dmin, dm)
-        nsub += 1
-        i += m
-        del c
-        if nsub % 500 == 0:
-            print("  ...t=%.4g tail sweep %.0f%% (%d pieces)"
-                  % (tf, 100.0 * i / n, nsub),
-                  flush=True)
+    nsl = (nslabs if nslabs is not None else (n + sub - 1) // sub)
+    n = min(n, nsl * sub)                    # selftest  prefix
+    extra = getattr(T, 'extra_idx', None)
+    if nthreads <= 1:
+        re = np.longdouble(0)
+        im = np.longdouble(0)
+        B_re = 0.0
+        B_im = 0.0
+        sa = np.longdouble(0)
+        dmin = float('inf')
+        nsub = 0
+        i = 0
+        while i < n:
+            m = min(sub, n - i)
+            c = T.read_slab(m)
+            sr, si, br, bi, s_ar, dm = slabfn(
+                c, tf, t2, m, i, extra)
+            re += np.longdouble(sr)
+            im += np.longdouble(si)
+            B_re += br
+            B_im += bi
+            sa += np.longdouble(s_ar)
+            dmin = min(dmin, dm)
+            nsub += 1
+            i += m
+            del c
+            if nsub % 500 == 0:
+                print("  ...t=%.4g tail sweep %.0f%% (%d pieces)"
+                      % (tf, 100.0 * i / n, nsub),
+                      flush=True)
+    else:
+        bounds = _slab_bounds(nsl, nthreads)
+        parts = [None] * nthreads
+        prog = [0, nsl]
+        plck = threading.Lock()
+
+        def _chunk(t, j0, j1):
+            st = (cp.cuda.stream.Stream(non_blocking=True)
+                  if USE_GPU else None)
+            re_l = np.longdouble(0)
+            im_l = np.longdouble(0)
+            B_re_l = 0.0
+            B_im_l = 0.0
+            sa_l = np.longdouble(0)
+            dmin_l = float('inf')
+            n_l = 0
+            for j in range(j0, j1):
+                i = j * sub
+                m = min(sub, n - i)
+                c = T.read_slab_at(i, m)
+                sr, si, br, bi, s_ar, dm = slabfn(
+                    c, tf, t2, m, i, extra, free_pool=False, st=st)
+                re_l += np.longdouble(sr)
+                im_l += np.longdouble(si)
+                B_re_l += br
+                B_im_l += bi
+                sa_l += np.longdouble(s_ar)
+                dmin_l = min(dmin_l, dm)
+                n_l += 1
+                del c
+                with plck:
+                    prog[0] += 1
+                    if prog[0] % 500 == 0:
+                        print("  ...t=%.4g tail sweep %.0f%% (%d pieces, %d threads)"
+                              % (tf, 100.0 * prog[0] / prog[1], prog[0], nthreads),
+                              flush=True)
+            parts[t] = (re_l, im_l, B_re_l, B_im_l, sa_l, dmin_l, n_l)
+
+        ths = [threading.Thread(target=_chunk, args=(t, b0, b1))
+               for t, (b0, b1) in enumerate(bounds)]
+        for th in ths:
+            th.start()
+        for th in ths:
+            th.join()
+        re = np.longdouble(0)
+        im = np.longdouble(0)
+        B_re = 0.0
+        B_im = 0.0
+        sa = np.longdouble(0)
+        dmin = float('inf')
+        nsub = 0
+        # deterministic  merge  order  (thread  0  first):  longdouble
+        # partials  merge  to  ~1e-15  relative  reordering  noise,
+        # the  f64  B  margins  to  ~1e-10  --  both  far  inside
+        # the  certified  budgets  (checked  by  SELFTEST(f)  against
+        # the  sequential  loop  on  the  real  band).
+        for (re_l, im_l, B_re_l, B_im_l, sa_l, dmin_l, n_l) in parts:
+            re += re_l
+            im += im_l
+            B_re += B_re_l
+            B_im += B_im_l
+            sa += sa_l
+            dmin = min(dmin, dmin_l)
+            nsub += n_l
     nlt = T.count_below(tf)
     re_f = float(re)
     im_f = float(im + nlt * np.pi)
@@ -622,10 +725,11 @@ def ev_point(tf, g, dps, qrem, qext, re, im, la, ar):
             "residf": abs(z - Kfull), "zabs": abs(z)}
 
 
-def cert_point(T, tf, g, audit=False):
+def cert_point(T, tf, g, audit=False, nthreads=1, sub=None, nslabs=None):
     tfs = float(tf)
     T.restart()
-    (re, im, nlt, B_re, B_im, dmin_t) = tail_with_budget(T, tfs)
+    (re, im, nlt, B_re, B_im, dmin_t) = tail_with_budget(
+        T, tfs, nthreads=nthreads, sub=sub, nslabs=nslabs)
     (la, ar, B_la, B_ar, dmin_g) = prod_with_budget(tfs)
     (qrem30, qext30, qrem60, qext60, B_qrem, B_qext, aud) = \
         quad_pair(T, tfs, audit)
@@ -1387,7 +1491,7 @@ def _worker_pt(job):
     i, x, k = job
     T = _get_T()
     g = nearest_zero(T, x)
-    p = cert_point(T, g + k / 2.0, g, audit=(k == -12))
+    p = cert_point(T, g + k / 2.0, g, audit=(k == -12), nthreads=THREADS)
     _ckpt_append(i, x, p)
     print("  pt win=%d k=%+d x=%.4g t=%.5f mnew=%.4f mcert=%.4f "
           "bexp=%.2e" % (i, k, x, p["t"], p["mnew"], p["mcert"],
@@ -1435,6 +1539,39 @@ def _run_profile():
     _summary(res, dt, mode)
 
 
+def selftest_threads(nslabs=64, sub=1 << 19, tthreads=8):
+    """(f)  The  threaded  slab  loop  vs  the  sequential  one,  on
+    the  REAL  band:  same  T,  same  sub,  same  nslabs  prefix,
+    1  thread  vs  tthreads --  counts  (nlt,  total  slab  count)
+    exact,  sums  within  re-ordering  noise  (longdouble  ~1e-15
+    relative;  f64  B  margins  ~1e-10).  Exercises  read_slab_at
+    across  the  real  section  seams  and  the  disjoint  tiling."""
+    print("SELFTEST(f): threaded sweep (real band,  %d  x  2^19  slabs,  1 vs %d threads)" % (nslabs, tthreads), flush=True)
+    t0 = time.time()
+    for nt in (1, 2, 3, 5, 8, 11):
+        for nsl in (1, 7, 64, 3029):
+            bs = _slab_bounds(nsl, nt)
+            assert sum(e - s for s, e in bs) == nsl, "tiling  gap  /  overlap"
+            assert all(bs[t + 1][0] == bs[t][1] for t in range(nt - 1)), "tiling  not  contiguous"
+    T = _get_T()
+    tf = 3490744654.0                    # window  1  height  (any  t  works)
+    a = tail_with_budget(T, tf, nthreads=1, sub=sub, nslabs=nslabs)
+    T.restart()
+    b = tail_with_budget(T, tf, nthreads=tthreads, sub=sub, nslabs=nslabs)
+    ok = True
+    for name, xv, yv, tol in (("re", a[0], b[0], 1e-9),
+                              ("im", a[1], b[1], 1e-9),
+                              ("B_re", a[3], b[3], 1e-9),
+                              ("B_im", a[4], b[4], 1e-9)):
+        d = abs(xv - yv) / max(1.0, abs(xv))
+        ok = ok and d < tol
+        print("  %s:  seq=%.12g  thr=%.12g  rel=%.1e  %s"
+              % (name, xv, yv, d, "OK" if d < tol else "MISMATCH"), flush=True)
+    ok = ok and (a[2] == b[2]) and (a[5] == b[5])
+    print("SELFTEST(f):  %s  (wall  %.1f  s)" % ("PASS" if ok else "FAIL", time.time() - t0), flush=True)
+    return ok
+
+
 def _run_full():
     """The  (i)  FULL  fill:  696  point  jobs  (29  windows  x
     24  offsets),  each  checkpointed  on  completion  —
@@ -1444,6 +1581,28 @@ def _run_full():
     done  and  assembled."""
     work = min(int(os.environ.get("WORKERS", "14")), 14)   # owner core cap
     xs = grid()
+    # H1_WINDOWS:  disjoint  window  assignment  for  fleet  runs
+    # (several  machines  take  different  window  ranges  against
+    # the  same  canonical  data;  checkpoints  are  per-window
+    # files,  so  assignments  never  interleave  and  the  merged
+    # ledger  just  unions  the  rows).  Formats:  "0-14",
+    # "15-28",  "0-9,15-17,27,28".
+    _wksel = os.environ.get("H1_WINDOWS", "").strip()
+    if _wksel:
+        sel = set()
+        for part in _wksel.split(","):
+            part = part.strip()
+            if not part:
+                continue
+            if "-" in part:
+                a, b = part.split("-")
+                sel.update(range(int(a), int(b) + 1))
+            else:
+                sel.add(int(part))
+        nwin = len(xs)
+        xs = [x for i, x in enumerate(xs) if i in sel]
+        print("H1_WINDOWS:  running  windows  %s  (%d  of  %d)"
+              % (_wksel, len(xs), nwin), flush=True)
     os.makedirs(CKPT_DIR, exist_ok=True)
     t0 = time.time()
     jobs = []
@@ -1474,24 +1633,24 @@ def _run_full():
     # lost  future).  So  the  WORKER  allowance  =  client  budget
     # -  Xorg  clients,  never  the  raw  budget.
     RESERVE_GIB = int(os.environ.get("H1_RESERVE_GIB", "28"))
-    PER_WORKER_GIB = float(os.environ.get("H1_PER_WORKER_GIB", "6"))
+    PER_THREAD_GIB = float(os.environ.get("H1_PER_THREAD_GIB", "2.5"))
     GPU_CLIENT_BUDGET = int(os.environ.get("H1_GPU_CLIENT_BUDGET", "11"))
     XORG_CLIENTS = int(os.environ.get("H1_XORG_CLIENTS", "1"))
-    # H1_GPU_CLIENT_CAP  is  kept  as  a  direct  WORKER-cap
-    # override  (ops  escape  hatch);  default  =  budget  minus  Xorg.
-    worker_gpu_cap = int(os.environ.get(
+    # H1_GPU_CLIENT_CAP  stays  as  a  direct  CONTEXT-cap  override
+    # (ops  escape  hatch);  default  =  client  budget  minus  Xorg.
+    ctx_cap = int(os.environ.get(
         "H1_GPU_CLIENT_CAP", max(GPU_CLIENT_BUDGET - XORG_CLIENTS, 1)))
     avail = _mem_available_gib()
     if avail is not None:
-        allow = min(int((avail - RESERVE_GIB) // PER_WORKER_GIB), worker_gpu_cap)
+        allow = min(int((avail - RESERVE_GIB) // (THREADS * PER_THREAD_GIB)), ctx_cap)
         if allow < 1:
-            print("memguard:  MemAvailable  %.1f  GiB  <  reserve  %d  +  one  worker  --  HOLD  (exit  6);  supervisor  retries  later" % (avail, RESERVE_GIB), flush=True)
+            print("memguard:  MemAvailable  %.1f  GiB  <  reserve  %d  +  one  context  x  %d  threads  --  HOLD  (exit  6);  supervisor  retries  later" % (avail, RESERVE_GIB, THREADS), flush=True)
             sys.exit(6)
-        print("memguard:  MemAvailable  %.1f  GiB,  reserve  %d  GiB,  ~%.0f  GiB/worker  ->  allow  <=  %d  workers  (%d  GPU  clients  incl.  Xorg  vs  budget  %d)" % (avail, RESERVE_GIB, PER_WORKER_GIB, allow, allow + XORG_CLIENTS, GPU_CLIENT_BUDGET), flush=True)
+        print("memguard:  MemAvailable  %.1f  GiB,  reserve  %d  GiB,  ~%.1f  GiB/thread  x  %d  threads  ->  allow  <=  %d  contexts  (=  %d  slab  threads;  %d  GPU  clients  incl.  Xorg  vs  budget  %d)" % (avail, RESERVE_GIB, PER_THREAD_GIB, THREADS, allow, allow * THREADS, allow + XORG_CLIENTS, GPU_CLIENT_BUDGET), flush=True)
         work = min(work, max(allow, 1))
     else:
-        print("memguard:  MemAvailable  unreadable  --  proceeding  with  env  WORKERS=%d" % work, flush=True)
-    print("day038  %s  H1-3e10:  FULL,  %d  point  jobs  remaining (%d  windows,  workers=%d)" % ("gpu" if USE_GPU else "cpu", len(jobs), len(xs), work), flush=True)
+        print("memguard:  MemAvailable  unreadable  --  proceeding  with  env  WORKERS=%d  contexts" % work, flush=True)
+    print("day038  %s  H1-3e10:  FULL,  %d  point  jobs  remaining (%d  windows,  %d  contexts  x  %d  threads)" % ("gpu" if USE_GPU else "cpu", len(jobs), len(xs), work, THREADS), flush=True)
     if jobs:
         workers_expect = work
         with cf.ProcessPoolExecutor(max_workers=work) as ex:
@@ -1544,9 +1703,10 @@ if __name__ == '__main__':
         ap = selftest_patch()
         dc = selftest_ckpt()
         en = selftest_nearest_zero()
+        ft = selftest_threads()
         if os.environ.get("H1CERT_SELFTEST_STREAM") == "1":
             b = selftest_streaming()
             bg = selftest_streaming_gpu()
-            sys.exit(0 if (a and ag and ap and dc and en and b and bg) else 1)
-        sys.exit(0 if (a and ag and ap and dc and en) else 1)
+            sys.exit(0 if (a and ag and ap and dc and en and ft and b and bg) else 1)
+        sys.exit(0 if (a and ag and ap and dc and en and ft) else 1)
     run()

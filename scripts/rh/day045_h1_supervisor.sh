@@ -20,17 +20,17 @@
 #     cd  /home/jsmille/Projects/rh-missing-tail/scripts/rh
 #     nohup  bash  day045_h1_supervisor.sh  >>  out_day045.log  2>&1  &
 #
-#  WORKERS  =  10  here.  The  binding  cap  is  the  iGPU  SDMA
-#  queue  hardware,  not  cores:  8  SDMA  queues  system-wide,
-#  Xorg  always  holds  one,  and  the  observed  zero-error
-#  operating  point  is  11  GPU  CLIENTS  total  (10  workers
-#  +  Xorg).  11  workers  +  Xorg  =  12  clients  ->  "No  more
-#  SDMA  queue  to  allocate"  +  workers  frozen  mid-sweep
-#  (the  09:27  incident  of  2026-09-22).  H1_GPU_CLIENT_
-#  BUDGET=11  (clients  incl.  Xorg)  is  passed  explicitly  so
-#  the  instance  memguard  derives  the  10-worker  cap  from
-#  it  instead  of  from  a  flat  default.  (2  physical  cores
-#  stay  reserved;  cores  are  not  the  bottleneck.)
+#  LAUNCH  =  env  WORKERS=4  H1_THREADS=8  :  4  GPU  CONTEXTS
+#  (x 8 slab  threads  each  =  32  slab  threads  inside  the
+#  100Gi  program  budget,  the  owner's  Strix-Halo  model:
+#  40  CUs  -  6  reserved  =  34,  ~2.9GiB/thread).  Contexts
+#  are  capped  by  the  8  SDMA  queues  (including  Xorg);
+#  threads  are  not  --  threads  of  one  context  share  one
+#  SDMA  queue  and  spread  over  the  CUs.  4  +  Xorg  =  5
+#  clients  leaves  the  queue  budget  far  from  the  wall
+#  (the  09:27/16:13  "No  more  SDMA  queue"  incidents  were
+#  11-12  CLIENTS  =  10-11  processes  +  Xorg).
+#
 #
 #  The  supervisor  exits  only  on:  "H1  FULL-DONE"  (all
 #  696),  a  band  integrity  failure  (rc  5),  a  corrupt
@@ -106,7 +106,7 @@ trap 'rm -f ckpt_h1_3e10/supervisor.pid' EXIT
 # --- memory  pre-guard:  never  launch  while  the  box  is  tight
 # (llama  et  al  can  hold  +40Gi  at  any  time) ---------------------
 mem_gib() { awk '/MemAvailable:/{printf "%d", $2/1048576}' /proc/meminfo; }
-MEM_HOLD_GIB=100
+MEM_HOLD_GIB=108   # 28 reserve + (4 contexts x 8 threads x 2.5 GiB)
 MEM_HOLDS=0
 MEM_HOLD_MAX=288          # 24  h  of  5-min  holds,  then  give  up
 
@@ -133,8 +133,12 @@ while :; do
         continue
     fi
     MEM_HOLDS=0
-    stamp "instance  $i  launching  (env  WORKERS=10,  H1_GPU_CLIENT_BUDGET=11  =  10  workers  +  Xorg;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)"
-    taskset -c 0-27 env WORKERS=10 H1_GPU_CLIENT_BUDGET=11 H1_XORG_CLIENTS=1 \
+    WSEL=${H1_WINDOWS:-}
+    WENV=; [ -n "$WSEL" ] && WENV="H1_WINDOWS=\"$WSEL\""
+    stamp "instance  $i  launching  (env  WORKERS=4  contexts  x  H1_THREADS=8  threads  =  32  slab  threads;  windows=${WSEL:-all};  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)"
+    # shellcheck disable=SC2086
+    taskset -c 0-27 env WORKERS=4 H1_THREADS=8 H1_PER_THREAD_GIB=2.5 \
+        H1_GPU_CLIENT_BUDGET=11 H1_XORG_CLIENTS=1 $WENV \
         ZETA_SHARDS_DIR="$PWD/$SHARDS" \
         /home/jsmille/venvs/cupy/bin/cupy_py -u day038_h1_3e10_gpu.py \
         >> out_day038_full.log 2>&1
