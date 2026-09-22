@@ -21,6 +21,16 @@ stamp() { echo "$(date '+%F %T') $*"; } >> "$LOG" 2>&1
 stamp "day044 waiter start (waiting for the (i) profile to complete)"
 i=0
 while ! grep -q "wall = " out_day038_profile_aftergates.log 2>/dev/null; do
+    if grep -q "Traceback" out_day038_profile_aftergates.log 2>/dev/null; then
+        stamp "profile CRASHED (Traceback in log) -> HOLD, no launch, owner decides"
+        tail -15 out_day038_profile_aftergates.log >> "$LOG" 2>&1
+        exit 2
+    fi
+    if ! pgrep -f "day038_h1_3e10_gpu.py" > /dev/null 2>&1; then
+        stamp "profile PROCESS GONE without completion -> HOLD, no launch"
+        tail -15 out_day038_profile_aftergates.log >> "$LOG" 2>&1
+        exit 3
+    fi
     sleep 120
     i=$((i + 1))
     if [ "$i" -gt 360 ]; then
