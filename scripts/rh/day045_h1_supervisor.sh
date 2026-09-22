@@ -106,7 +106,10 @@ trap 'rm -f ckpt_h1_3e10/supervisor.pid' EXIT
 # --- memory  pre-guard:  never  launch  while  the  box  is  tight
 # (llama  et  al  can  hold  +40Gi  at  any  time) ---------------------
 mem_gib() { awk '/MemAvailable:/{printf "%d", $2/1048576}' /proc/meminfo; }
-MEM_HOLD_GIB=108   # 28 reserve + (4 contexts x 8 threads x 2.5 GiB)
+MEM_HOLD_GIB=${MEM_HOLD_GIB:-108}   # Strix: 28 reserve + (4x8x 2.5 GiB);  small-RAM boxes override (5900X: 18)
+W_ENV_WORKERS=${WORKERS:-4}         # GPU contexts  (supervisor env = per-machine config)
+W_ENV_THREADS=${H1_THREADS:-8}     # slab threads per context
+W_CPUREANGE=${CPURANGE:-0-27}      # taskset range  (5900X: 0-23)
 MEM_HOLDS=0
 MEM_HOLD_MAX=288          # 24  h  of  5-min  holds,  then  give  up
 
@@ -134,10 +137,10 @@ while :; do
     fi
     MEM_HOLDS=0
     WSEL=${H1_WINDOWS:-}
-    WENV=; [ -n "$WSEL" ] && WENV="H1_WINDOWS=\"$WSEL\""
-    stamp "instance  $i  launching  (env  WORKERS=4  contexts  x  H1_THREADS=8  threads  =  32  slab  threads;  windows=${WSEL:-all};  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)"
+    WENV=; [ -n "$WSEL" ] && WENV="H1_WINDOWS=$WSEL"   # no inner quotes:  env gets the raw token
+    stamp "instance  $i  launching  (env  WORKERS=$W_ENV_WORKERS  contexts  x  H1_THREADS=$W_ENV_THREADS  threads;  windows=${WSEL:-all};  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)"
     # shellcheck disable=SC2086
-    taskset -c 0-27 env WORKERS=4 H1_THREADS=8 H1_PER_THREAD_GIB=2.5 \
+    taskset -c "$W_CPUREANGE" env WORKERS="$W_ENV_WORKERS" H1_THREADS="$W_ENV_THREADS" H1_PER_THREAD_GIB=2.5 \
         H1_GPU_CLIENT_BUDGET=11 H1_XORG_CLIENTS=1 $WENV \
         ZETA_SHARDS_DIR="$PWD/$SHARDS" \
         /home/jsmille/venvs/cupy/bin/cupy_py -u day038_h1_3e10_gpu.py \
