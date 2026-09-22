@@ -20,3 +20,6 @@ tmp/*.log
 # live job logs
 out_*.log
 *.err
+*.pid
+*.pids
+md5.txt
