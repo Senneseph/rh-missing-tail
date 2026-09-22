@@ -7368,3 +7368,40 @@ and was re-done  correctly:
   ~4  ..  6  h  wall  from  the  151  MB/s  single-worker
   rate.  This  is  the  [S3/S4]  (i)  H1-full
   milestone  on  the  3e10  band.
+
+2026-09-22 05:50 (owner check-in:  "are we ready for your (1)?")
+— the (i) profile delivered its first measured numbers, and
+my overnight ETA was wrong.  Own record:
+
+-  MEASURED  (i)  sweep  rate:  one  cert  point  =  one
+  full  pass  over  the  812.9GB  tail  (101.6  billion
+  zeros);  sustained  112  ..  151  MB/s  (single
+  worker);  sweep  #1 wall  ~ 92  ..  105  min.
+-  DESIGN  (carried  from  day034/037  through  day038):
+  EACH  window  certifies  24  points  (k  =  -12  ..  12,
+  k  !=  0,  t  =  g  +  k/2  around  the  nearest  stored
+  zero  g),  EACH  with  a  full  sweep.  Grid  =  29
+  windows  (1e6 . 1.08^k  over  (3e9,  3.0001e10]).
+  Full  H1  as  designed  =  696  sweeps  =  566  TB
+  NVMe  =  ~ 3.3  ..  4.5  days  wall  at  14  workers
+  (NOT  the  "4  ..  6  h"  I  reported  overnight —  I
+  had  priced  1  sweep  per  window;  the  24-point
+  dense  grid  cost  did  not  exist  at  the  1e9  scale
+  where  each  sweep  was  224  MB,  not  812.9  GB).
+-  First  certified  point  (audit  k  =  -12,  worst
+  window  x  =  2.788e10):  mnew  =  mcert  =  1.0000
+  (4  digits  on  stdout;  full-precision  row  lands  at
+  window  completion),  bexp  =  2.31e-03  —  C-1
+  compatible  so  far.
+-  ACTION:  the  day044  auto-launch  waiter  was
+  STOPPED  (kill  by  verified  name;  the  machine  will
+  not  take  off  on  a  3-4  day  run  without  the
+  owner  seeing  the  measured  number).  The  profile
+  itself  keeps  running  (1  worker,  ~  130  MB/s,
+  currently  sweep  #2  of  24):  it  completes  the
+  full  24-point  pre-registered  margin  ledger  at  the
+  worst  window  ~  09:00  ..  12:00  tomorrow,  at  zero
+  contention  cost.  Full-run  decision  (full  density
+  ~  3.3  ..  4.5  d  vs  re-scoped  4-8  points/window
+  ~  0.55  ..  1.1  d  vs  wait-then-choose)  is  the
+  owner's,  presented  with  the  measured  numbers.
