@@ -83,16 +83,14 @@ strict  consecutive  increase,  x j  >=  x 0  for  every  j  <=  M. -/
 private lemma partLeHead (M : ℕ) (x : ℕ → ℝ)
     (hxinc : ∀ j ∈ Finset.range M, x j < x (j + 1))
     (j : ℕ) (hj : j ≤ M) : x 0 ≤ x j := by
-  revert x hxinc M
   induction j with
   | zero =>
-      intro x hx M hM
       exact le_rfl
   | succ u ih =>
-      intro x hx M hM
-      have hstep : x u ≤ x (u + 1) :=
-        le_of_lt (hx u (Finset.mem_range.mpr (Nat.lt_of_lt_of_le (Nat.lt_succ_self u) hM)))
-      exact le_trans (ih x hx M (Nat.le_of_succ_le hM)) hstep
+      have hu : u ∈ Finset.range M :=
+        Finset.mem_range.mpr (Nat.lt_of_lt_of_le (Nat.lt_succ_self u) hj)
+      have hstep : x u ≤ x (u + 1) := le_of_lt (hxinc u hu)
+      exact le_trans (ih (Finset.mem_range.mp hu).le) hstep
 
 /-! ### 1.  The  discrete  total  variation  of  the  far-side
 kernel  (any  partition,  uniform  in  the  frontier). -/
@@ -108,29 +106,20 @@ lemma segSumTelescopes (t : ℝ) (M : ℕ) (x : ℕ → ℝ)
     (Finset.range M).sum (fun j =>
         (5/2) * t^2 * (1 / (x j)^2 - 1 / (x (j + 1))^2)) =
       (5/2) * t^2 * (1 / (x 0)^2 - 1 / (x M)^2) := by
-  revert x hpos
   induction M with
   | zero =>
-      intro x hpos
       simp only [Finset.sum_range_zero]
-      have hx0 : (x 0)^2 ≠ 0 := (pow_ne_zero 2 (Nat.cast_ne_zero.mp (Ne.symm <|
-        (hpos 0 ⟨Nat.le_zero 0, Nat.le_of_eq rfl⟩ |>.ne' : 0 < x 0).ne')).symm)
-      field_simp [hx0]
       ring
   | succ i ih =>
-      intro x hpos
-      have hx0 : (x 0)^2 ≠ 0 := (pow_ne_zero 2 (Ne.symm <|
-          (hpos 0 ⟨Nat.le_zero 0, Nat.le_succ (Nat.le_refl i)⟩.ne' : 0 < x 0).ne').symm)
-      have hxi : (x i)^2 ≠ 0 := (pow_ne_zero 2 (Ne.symm <|
-          (hpos i ⟨Nat.le_zero i, Nat.le_succ (Nat.le_refl i)⟩.ne' : 0 < x i).ne').symm)
-      have hxi1 : (x (i + 1))^2 ≠ 0 := (pow_ne_zero 2 (Ne.symm <|
-          (hpos (i + 1) ⟨Nat.le_zero (i + 1), Nat.le_of_eq rfl⟩.ne' : 0 < x (i + 1)).ne').symm)
-      rw [Finset.sum_range_succ]
-      have hh := ih x (fun j hj => hpos j (Finset.mem_Icc.mpr ⟨(Finset.mem_Icc.mp hj).1,
-          Nat.le_of_succ_le_of_le (Finset.mem_Icc.mp hj).2 (Nat.le_succ (i - 1))⟩))
-      simp at hh
-      rw [hh]
-      field_simp [hx0, hxi, hxi1, pow_two]
+      have hposi (j : ℕ) (hj : j ∈ Finset.Icc 0 i) : j ∈ Finset.Icc 0 (i + 1) :=
+        Finset.mem_Icc.mpr ⟨(Finset.mem_Icc.mp hj).1,
+          le_trans (Finset.mem_Icc.mp hj).2 (Nat.le_succ i)⟩
+      have hh := ih (fun j hj => hpos j (hposi j hj))
+      have hx0 : 0 < x 0 := hpos 0 (Finset.mem_Icc.mpr ⟨by omega, by omega⟩)
+      have hxi : 0 < x i := hpos i (Finset.mem_Icc.mpr ⟨by omega, Nat.le_succ i⟩)
+      have hxi1 : 0 < x (i + 1) := hpos (i + 1) (Finset.mem_Icc.mpr ⟨by omega, le_rfl⟩)
+      rw [Finset.sum_range_succ, hh]
+      field_simp [pow_two, pow_pos hx0 2, pow_pos hxi 2, pow_pos hxi1 2]
       ring
 
 /-- DISCRETE  TOTAL  VARIATION,  far  side  (the  E4  "walk  half"
@@ -154,13 +143,13 @@ theorem farKernelTV (t g1 : ℝ) (h1 : 1 ≤ t) (hfar : 2 * t ≤ g1)
   have hg1p : 0 < g1 := by linarith
   have hpos (j : ℕ) (hj : j ≤ M) : 0 < x j := by
     have h0 : g1 ≤ x j := le_trans hx0 (partLeHead M x hxinc j hj)
-    exact lt_of_le_of_lt h0 hg1p
+    exact lt_of_lt_of_le hg1p h0
   --  per-segment  majorant  (the  E8  segment  atom):
   have hseg (j : ℕ) (hj : j ∈ Finset.range M) :
       |FarKernel t (x (j + 1)) - FarKernel t (x j)| ≤
         (5/2) * t^2 * (1 / (x j)^2 - 1 / (x (j + 1))^2) := by
     have hfarj : 2 * t ≤ x j :=
-      le_trans hfar (partLeHead M x hxinc j (Finset.mem_range.mp hj).le)
+      le_trans (le_trans hfar hx0) (partLeHead M x hxinc j (Finset.mem_range.mp hj).le)
     exact eullK_far_segment t (x j) (x (j + 1)) h1 hfarj
       (le_of_lt (hxinc j hj))
   have hsum : (Finset.range M).sum (fun j =>
@@ -179,15 +168,17 @@ theorem farKernelTV (t g1 : ℝ) (h1 : 1 ≤ t) (hfar : 2 * t ≤ g1)
     have hco : 0 ≤ (5/2) * t^2 :=
       mul_nonneg (by norm_num : 0 ≤ (5/2 : ℝ)) (pow_two_nonneg t)
     have hnonneg : 0 ≤ 1 / (x M)^2 :=
-      div_nonneg (Nat.cast_nonneg' 1 _) (pow_two_nonneg (x M))
+      div_nonneg (by norm_num : 0 ≤ (1 : ℝ)) (pow_two_nonneg (x M))
     have hsub : 1 / (x 0)^2 - 1 / (x M)^2 ≤ 1 / (x 0)^2 := by
       linarith [hnonneg]
     exact mul_le_mul_of_nonneg_left hsub hco
   have hmon : (5/2) * t^2 / (x 0)^2 ≤ (5/2) * t^2 / g1^2 := by
-    have hx0p : 0 < x 0 := lt_of_le_of_lt hx0 hg1p
-    have h0 : g1 ^ 2 ≤ (x 0) ^ 2 := pow_le_pow_left (by linarith) hx0 2
-    rw [div_le_div_iff₀ (pow_pos hg1p 2) (pow_pos hx0p 2)]
-    nlinarith [h0]
+    have hx0p : 0 < x 0 := lt_of_lt_of_le hg1p hx0
+    have h0 : g1 ^ 2 ≤ (x 0) ^ 2 := pow_le_pow_left₀ hg1p.le hx0 2
+    have hco : 0 ≤ (5/2) * t^2 :=
+      mul_nonneg (by norm_num : 0 ≤ (5/2 : ℝ)) (pow_two_nonneg t)
+    rw [div_le_div_iff₀ (pow_pos hx0p 2) (pow_pos hg1p 2)]
+    exact mul_le_mul_of_nonneg_left h0 hco
   calc
     (Finset.range M).sum (fun j => |FarKernel t (x (j + 1)) - FarKernel t (x j)|)
         ≤ (Finset.range M).sum (fun j => (5/2) * t^2 * (1 / (x j)^2 - 1 / (x (j + 1))^2)) :=
@@ -195,9 +186,7 @@ theorem farKernelTV (t g1 : ℝ) (h1 : 1 ≤ t) (hfar : 2 * t ≤ g1)
     _ = (5/2) * t^2 * (1 / (x 0)^2 - 1 / (x M)^2) := htel
     _ ≤ (5/2) * t^2 * (1 / (x 0)^2) := hdrop
     _ = (5/2) * t^2 / (x 0)^2 := by
-          have hx0p : (x 0)^2 ≠ 0 := (pow_ne_zero 2 (Ne.symm (lt_iff_ne.mpr <|
-            lt_of_le_of_lt hx0 hg1p |>.ne'))).symm
-          field_simp [hx0p, pow_two]
+          field_simp [pow_two]
     _ ≤ (5/2) * t^2 / g1^2 := hmon
 
 /-! ### 2.  The  wire  factors,  assembled. -/
@@ -215,39 +204,46 @@ theorem farKernelTV (t g1 : ℝ) (h1 : 1 ≤ t) (hfar : 2 * t ≤ g1)
     atom).  UNIFORM  IN  THE  FRONTIER  x M. -/
 theorem a1_far_side_cost (t g1 : ℝ) (h1 : 1 ≤ t) (hfar : 2 * t ≤ g1)
     (M : ℕ) (hM : 0 < M) (x : ℕ → ℝ) (hx0 : x 0 = g1)
-    (hxinc : ∀ j ∈ Finset.range M, x j < x (j + 1)) :
-    |FarKernel t (x 0)| + |FarKernel t (x M)| +
-      (Finset.range M).sum (fun j =>
-        |FarKernel t (x (j + 1)) - FarKernel t (x j)|) ≤
+    (hxinc : ∀ j ∈ Finset.range M, x j < x (j + 1))
+    (p : ℕ → ℝ) (hp : ∀ j, p j = FarKernel t (x j)) :
+    |p 0| + |p M| + (Finset.range M).sum (fun j => abs (DP p j)) ≤
       (17/2) * t^2 / g1^2 := by
   have hg1p : 0 < g1 := by linarith
   have hx0p : 0 < x 0 := by rw [hx0]; exact hg1p
-  have hxMge : g1 ≤ x M := partLeHead M x hxinc M le_rfl
-  have hxMp : 0 < x M := lt_of_le_of_lt hxMge hg1p
+  have hxMge : g1 ≤ x M := by rw [← hx0]; exact partLeHead M x hxinc M le_rfl
+  have hxMp : 0 < x M := lt_of_lt_of_le hg1p hxMge
   have hfar0 : 2 * t ≤ x 0 := by rw [hx0]; exact hfar
-  have hfarM : 2 * t ≤ x M := le_trans hfar0 hxMge
-  set p := fun j => FarKernel t (x j) with hp
-  have hleft : |p 0| ≤ 3 * t^2 / (x 0)^2 := eullK_tail_bound t h1 (x 0) hfar0
-  have hright : |p M| ≤ 3 * t^2 / (x M)^2 := eullK_tail_bound t h1 (x M) hfarM
+  have hfarM : 2 * t ≤ x M := le_trans hfar hxMge
+  have hleft : |p 0| ≤ 3 * t^2 / (x 0)^2 := by
+    rw [hp 0]
+    have hrew : EfullKernel t (x 0) = FarKernel t (x 0) := eullK_far_rewrite t h1 (x 0) hfar0
+    rw [← hrew]
+    exact eullK_tail_bound t h1 (x 0) hfar0
+  have hright : |p M| ≤ 3 * t^2 / (x M)^2 := by
+    rw [hp M]
+    have hrew : EfullKernel t (x M) = FarKernel t (x M) := eullK_far_rewrite t h1 (x M) hfarM
+    rw [← hrew]
+    exact eullK_tail_bound t h1 (x M) hfarM
   have hright' : 3 * t^2 / (x M)^2 ≤ 3 * t^2 / g1^2 := by
-    have hsq : g1^2 ≤ (x M)^2 := pow_le_pow_left (by linarith) hxMge 2
+    have hsq : g1^2 ≤ (x M)^2 := pow_le_pow_left₀ hg1p.le hxMge 2
     rw [div_le_div_iff₀ (pow_pos hxMp 2) (pow_pos hg1p 2)]
     nlinarith [hsq]
-  have htv : (Finset.range M).sum (fun j => |p (j + 1) - p j|) ≤
+  have htv : (Finset.range M).sum (fun j => abs (DP p j)) ≤
       (5/2) * t^2 / g1^2 := by
-    have hsame : (Finset.range M).sum (fun j => |p (j + 1) - p j|) =
+    have hsame : (Finset.range M).sum (fun j => abs (DP p j)) =
         (Finset.range M).sum (fun j => |FarKernel t (x (j + 1)) - FarKernel t (x j)|) := by
       apply Finset.sum_congr rfl
       intro j _
-      dsimp only [p]
+      dsimp only [DP]
+      rw [hp (j + 1), hp j]
     rw [hsame]
     exact farKernelTV t g1 h1 hfar M x (le_of_eq hx0.symm) hxinc
-  have hsum : |p 0| + |p M| + (Finset.range M).sum (fun j => |p (j + 1) - p j|) ≤
+  have hsum : |p 0| + |p M| + (Finset.range M).sum (fun j => abs (DP p j)) ≤
       3 * t^2 / (x 0)^2 + 3 * t^2 / g1^2 + (5/2) * t^2 / g1^2 := by
     have hstep : |p 0| + |p M| ≤ 3 * t^2 / (x 0)^2 + 3 * t^2 / g1^2 :=
-      add_le_add hleft hright'
+      add_le_add hleft (le_trans hright hright')
     calc
-      |p 0| + |p M| + (Finset.range M).sum (fun j => |p (j + 1) - p j|)
+      |p 0| + |p M| + (Finset.range M).sum (fun j => abs (DP p j))
           ≤ (3 * t^2 / (x 0)^2 + 3 * t^2 / g1^2) + (5/2) * t^2 / g1^2 :=
             add_le_add hstep htv
       _ = 3 * t^2 / (x 0)^2 + 3 * t^2 / g1^2 + (5/2) * t^2 / g1^2 := by ring
@@ -255,9 +251,9 @@ theorem a1_far_side_cost (t g1 : ℝ) (h1 : 1 ≤ t) (hfar : 2 * t ≤ g1)
       (17/2) * t^2 / g1^2 := by
     have hx0sq : (x 0)^2 = g1^2 := by rw [hx0]
     rw [hx0sq]
-    field_simp [pow_two, show g1 ≠ 0 from Ne.symm hg1p.ne']
+    field_simp [pow_two, show g1 ≠ 0 from hg1p.ne']
     ring
-  simpa [hp] using le_trans hsum hall.le
+  exact le_trans hsum hall.le
 
 /-- THE  O(1)  SPECIALIZATION:  g1  >=  2t  (t  >=  1)  =>
     (17/2)  t^2/g1^2  <=  17/8.  The  kernel  cost  of  the  far
@@ -267,16 +263,13 @@ theorem a1_far_side_o1 (t g1 : ℝ) (h1 : 1 ≤ t) (hfar : 2 * t ≤ g1) :
     (17/2) * t^2 / g1^2 ≤ 17/8 := by
   have hg1p : 0 < g1 := by linarith
   have h4 : 4 * t^2 ≤ g1^2 := by
+    rw [← sub_nonneg]
     have hfac : g1^2 - 4 * t^2 = (g1 - 2*t) * (g1 + 2*t) := by ring
-    have hnn : 0 ≤ (g1 - 2*t) * (g1 + 2*t) := by
-      rw [hfac]
-      apply mul_nonneg
-      · linarith
-      · linarith
-    nlinarith [hnn]
+    rw [hfac]
+    apply mul_nonneg
+    · linarith
+    · linarith
   rw [div_le_div_iff₀ (pow_pos hg1p 2) (by norm_num : (0 : ℝ) < 8)]
-  have hlhs : 8 * ((17/2) * t^2) = 68 * t^2 := by ring
-  rw [hlhs]
   have hm : 17 * (4 * t^2) ≤ 17 * g1^2 :=
     mul_le_mul_of_nonneg_left h4 (by norm_num : 0 ≤ (17 : ℝ))
   nlinarith [hm]
@@ -310,15 +303,9 @@ theorem a1_universal_wire (M : ℕ) (N0 : ℕ) (Nas : ℕ → ℝ) (x : ℕ → 
   have hwire : abs (S1Sum M p - RSum M p Nas) ≤
       K * (abs (p 0) + abs (p M)) + K * (Finset.range M).sum (fun j => abs (DP p j)) :=
     W2B.e4_wBound M p N0 Nas K hA1_0 hA1M hA1
-  have hdp : (Finset.range M).sum (fun j => abs (DP p j)) =
-      (Finset.range M).sum (fun j => abs (p (j + 1) - p j)) := by
-    apply Finset.sum_congr rfl
-    intro j _
-    dsimp only [p, DP]
-  have hfactors := a1_far_side_cost t g1 h1 hfar M hM x hx0 hxinc
-  have hcost : abs (p 0) + abs (p M) + (Finset.range M).sum (fun j => abs (DP p j)) ≤
-      (17/2) * t^2 / g1^2 := by
-    simpa [hp, hdp] using hfactors
+  have hcost := a1_far_side_cost t g1 h1 hfar M hM x hx0 hxinc p (by
+    intro j
+    dsimp only [p])
   have hfact : K * (abs (p 0) + abs (p M)) + K * (Finset.range M).sum (fun j => abs (DP p j)) =
       K * (abs (p 0) + abs (p M) + (Finset.range M).sum (fun j => abs (DP p j))) := by
     ring

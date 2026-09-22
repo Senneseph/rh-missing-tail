@@ -7405,3 +7405,139 @@ my overnight ETA was wrong.  Own record:
   ~  3.3  ..  4.5  d  vs  re-scoped  4-8  points/window
   ~  0.55  ..  1.1  d  vs  wait-then-choose)  is  the
   owner's,  presented  with  the  measured  numbers.
+
+## 2026-09-22 07:55-10:45 — H1 full run: incident, root-cause, two latent bugs caught in verification, run relaunched; A1 assembly (W2Beyond3) built green
+
+The day's events, in order:
+
+1. INCIDENT (morning):  the first full-run trial (13 workers +
+   the profile, ~6Gi  steady each)  pushed  the  124Gi  box  into
+   GLOBAL  OOM  plus  a  ~5-minute  lockup.  dmesg  smoking  gun:
+   "No more SDMA queue to allocate (8 total queues)" / "DQM
+   create queue failed. ret -12" —  the APU's  8  SDMA  queues
+   are  shared  system-wide  across  GPU  clients,  and
+   13  +  Xorg  exhausted  them;  amdgpu  svm  restore  then  hogged
+   CPU.  All  my  processes  were  killed  by  the  OOM  reaper;
+   the  owner  restarted  the  box.  Zero  checkpoints  existed
+   at  the  kill  (nothing  computed,  nothing  lost  —  the
+   checkpoint  layer  did  exactly  what  it  was  built  for).
+   Owner  audit  found  the  residual  ~70Gi  was  a  llama.cpp
+   Docker  service  (restart-at-boot),  not  orphans  of  mine.
+   Lesson  (recorded  in  the  wiki):  derive  worker  count  from
+   live  RAM  plus  the  SDMA  ceiling,  never  from  core
+   count  alone.
+
+2. REMEDIATION  (this  session,  all  committed  below):
+   -  PID  FILES:  the  instance  writes
+      ckpt_h1_3e10/run.pids  (parent  +  verified  worker
+      pids)  AFTER  the  pool  submits  (pool  workers  exist
+      only  after  first  submit  —  the  first  version  wrote
+      an  empty  file,  caught  and  fixed);  the  supervisor
+      writes  supervisor.pid.  day045b_h1_stop.sh  stops  by
+      pid-file  with  per-pid  cmdline  verification  (no
+      pattern  kills)  plus  a  live  descendant  scan  (a
+      stale  file  can  no  longer  leave  orphaned  workers;
+      an  early  version  of  the  scan  had  a  shell
+      quoting  bug  that  orphaned  10  workers  during  one
+      restart  —  they  were  killed  by  verified  explicit
+      PID,  no  data  at  risk,  0  checkpoints  then
+      existed).
+   -  MEMORY  GUARD,  two  layers,  RAM-derived:  the
+      supervisor  refuses  to  launch  an  instance  while
+      MemAvailable  <  100Gi  (the  owner's  program  budget;
+      28Gi  stays  clear  for  OS  +  display);  the  instance
+      sizes  itself  to  min(11,  (avail  -  28)  /  6)
+      workers  —  11  =  the  SDMA-queue  ceiling  for
+      concurrent  GPU  clients  (measured  evidence  above),
+      not  a  RAM  number.
+   -  OWNER  BUDGET  (directive):  programs  get  100Gi,
+      28Gi  (25  OS  +  3  display)  is  untouchable.
+      Applied  to  both  layers.
+
+3. BUG  1  (caught  by  the  verification  the  owner  demanded):
+   the  REBOOT  WIPED  /tmp/zeta-dl/shards/  —  the  11  L-band
+   LMFDB  shards  (t  in  (1e7,  31946000])  were  /tmp-only.
+   Every  pool  worker  died  at  init  (FileNotFoundError);
+   the  supervisor  correctly  loop-logged  rc=4  and  never
+   produced  junk.  Fix,  durable:  all  11  shards  re-fetched
+   from  the  official  static  source  beta.lmfdb.org/data/
+   riemann-zeta-zeros/  (human  cookie  gate),  md5-verified
+   each  against  lshards/md5.txt  (the  14,580-line  official
+   pin  list,  committed  as  provenance),  stored  in-repo  at
+   scripts/rh/lshards/;  day023_taildiscrete  now  honors
+   ZETA_SHARDS_DIR  (default  /tmp  for  old  callers);
+   the  supervisor  md5-checks  the  11  shards  at  every
+   launch  and  restores  /tmp  copies  for  legacy  paths.
+   Certification  after  the  swap:  the  day023_tail_arbiter
+   reproduced  the  pre-registered  pin  EXACTLY  (exact
+   discrete  sum  over  (1e7,  3e7]  =  6.251993491674e-07),
+   and  the  full  Tail3E10  init  re-derived  all  band
+   counts  (L  52,290,633  +  A  2,792,198,664  +  B'
+   3,053,546,936  +  C  3,142,622,346  +  D  92,577,877,714
+   =  101,618,536,293  zeros,  G_LAST  =
+   30,001,045,999.981976).
+
+4. BUG  2  (caught  by  the  same  verification,  would  have
+   been  silent  in  production):  nearest_zero  searched  a
+   SHIFTED  subarray  of  the  D  file  (it  added  D's  offset
+   d0  ~  9.04e9  within  the  stitched  tail  to  file-relative
+   indices),  so  window  anchors  x  <  ~5.6e9  (windows
+   0  ..  7  of  the  29-window  grid,  192  of  696  points)
+   fell  outside  the  search  space  and  came  back  anchored
+   at  the  WRONG  zero  (2.56e9  off  for  window  0).  The
+   profile  never  touched  it  (top  window  only).  Fixed  to
+   search  D  directly;  SELFTEST(e)  added  (anchors  at
+   windows  0/1/7/8/14/28  all  within  0.16  of  the  true
+   nearest  zero).  Full  selftest  suite  (a,  a-gpu,  c,
+   d,  e,  streaming)  green  after  the  fix.
+
+5. VERIFICATION  STATUS  (the  owner's  a/b/c  gate):
+   (a)  works  —  six  selftests  green  +  arbiter  pin
+   exact  +  stitch  cross-check  12.6M/12.6M  byte-equal;
+   first  real  point  in-flight.  (b)  fails  gracefully
+   —  live-demonstrated  (corrupt  checkpoint  ->  HOLD  rc=3,
+   supervisor  stops  and  reports,  twice;  killed  instance
+   ->  supervisor  relaunches  with  resume  scan).
+   (c)  resumes  gracefully  —  resume  scan  proven  (29
+   windows  ->  696  jobs  recomputed,  on-disk  points
+   skipped);  the  live  crash  +  auto-resume  demo  is  run
+   after  the  first  checkpoint  lands  (~2h  into  the  run),
+   so  the  skip  is  on  real  data.
+
+6. RUN  RELANCHED  09:24:  supervisor  +  11  workers
+   (memguard  math  at  launch:  MemAvailable  118.1Gi,
+   reserve  28Gi,  ~6Gi/worker  ->  11  at  the  queue
+   cap);  run.pids  lists  parent  +  11  workers  correctly;
+   zero  new  SDMA  queue  errors  at  11  clients.  Pace
+   check  (~70  min  in):  first  window  (t  =  3.23e9,
+   lowest  anchor  =  worst-case  read  pattern  and  cold
+   cache  for  all  11  streams  at  once)  at  ~90MB/s per
+   stream  on  the  812.9GB  full-set  sweep  —  consistent
+   with  the  pre-approved  3.3  ..  4.5  day  estimate
+   for  the  696-point  fill  (566TB  total  read);  each
+   point  re-streams  the  full  zero  set  by  construction
+   (the  tail  defect  sums  over  all  zeros).
+
+7. A1  ASSEMBLY  BUILT  GREEN  (the  other  half  of  the
+   owner's  go-ahead):  formal/RhAttack/W2Beyond3.lean
+   (new)  +  eullK_far_segment  (W2Beyond2,  new  public
+   atom):  the  kernel  half  of  the  universal  [S1]  is  now
+   a  lemma  —  farKernelTV  (discrete  TV  of  the  kernel
+   over  ANY  far-side  partition  <=  (5/2)  t^2/g1^2,
+   uniform  in  the  frontier),  a1_far_side_cost  (the  three
+   wire  factors  <=  (17/2)  t^2/g1^2),  a1_far_side_o1
+   (g1  >=  2t  =>  <=  17/8:  constant  kernel  cost  to  any
+   frontier),  a1_universal_wire  +  a1_universal_o1
+   (the  conditional  universal  statement,  wired  to
+   W2B.e4_wBound:  |S1  -  R|  <=  K  *  17/8  under  the  hA1
+   hypotheses  |DN  j|  <=  K  at  every  grid  point)  +
+   the  band  record  (K_measured_3e10  =  2.615067,
+   K_certified_3e10  =  31,047,116,350.923088,  norm_num
+   pinned).  Full  lake  build  green  (17,442  jobs).
+   The  hA1  clause  —  "S  -  main  bounded  at  the
+   zeros"  with  a  data-free  O(1)  K  —  remains  THE  open
+   theorem  (E13  records  the  assembly;  E12  corrections
+   appended:  main'(3e10)  =  3.5470  not  2.88;  the
+   day041b  JUMPs  are  0.893  ..  0.981;  typical  gap
+   ~0.29  not  0.62  —  drift  per  gap  ~1.0  with  the
+   jumps,  sharpening  the  E12  reading).

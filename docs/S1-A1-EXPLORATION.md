@@ -1027,3 +1027,177 @@ data  side  is  complete  to  5 x  10^-13  at  3 x  10^10.  The
 open  item  is  the  ANALYTIC  route  (A1  proper,  the  E8
 assembly  plan)  —  now  with  the  corrected  target  shape:
 bound  the  S  -  main  oscillation  at  the  zeros.
+
+## E13.  A1  assembly  —  the  kernel  half  of  the  universal  [S1],
+##       uniform  in  the  frontier  —  BUILT  GREEN
+
+E7  item  3  queued  this  ("the  E4  walk  half  via  the
+finite-interval-variation  atom");  E8  built  the  atom
+(eullK_finite_var_far);  this  entry  is  the  assembly  it
+was  queued  for:  the  kernel  half  of  the  universal  [S1]
+statement,  in  the  wire  shape  the  W2  defect  consumes,
+proven  in  Lean  (Lean  4.33.1,  mathlib  v4.33.1,
+`lake  build`  green,  full  project).
+
+Artifacts:  `formal/RhAttack/W2Beyond3.lean`  (new  module,
+namespace  W2B3)  +  one  public  addition  to
+`formal/RhAttack/W2Beyond2.lean`  (eullK_far_segment).
+No  data  touched;  no  new  pins  invented  (the  two
+band  pins  of  section  4  below  are  the  existing
+verified  record,  in  the  E2Barrier  literal-constant
+pattern).
+
+What  the  assembly  contains,  theorem  by  theorem:
+
+1.  `eullK_far_segment`  (W2Beyond2,  new):  the  per-segment
+    form  of  the  E8  atom:  for  t  >=  1,  2t  <=  x  <=  y,
+    |p(y)  -  p(x)|  <=  (5/2)  t^2  (1/x^2  -  1/y^2).
+    Same  proof  shape  as  eullK_finite_var_far  (FTC  +
+    |int|  <=  int  |.|  +  comparison  against  the
+    antiderivative  5t^2/x^3),  stopping  one  step  earlier:
+    the  right-hand  side  is  a  DIFFERENCE  OF  THE
+    POTENTIAL  (5/2)  t^2/u^2  —  the  property  the  discrete
+    side  needs  (telescoping).  The  old  eullK_finite_var_far
+    is  untouched  (it  is  the  one-interval  corollary).
+
+2.  `farKernelTV`  (W2B3):  the  DISCRETE  total  variation
+    statement  —  the  E4  "walk  half"  for  the  kernel.  For
+    t  >=  1,  g1  >=  2t,  and  ANY  strictly  increasing
+    partition  x  0  <  x  1  <  ...  <  x M  with  x  0  >=
+    g1  (arbitrarily  long  —  the  whole  far  side  of  the
+    band):
+            sum  |p(x (j+1))  -  p(x j)|  <=  (5/2)  t^2 / g1^2.
+    Mechanism  (the  point  of  the  new  segment  atom):
+    per-segment  majorant  by  eullK_far_segment,  then
+    TELESCOPING  of  the  majorants  (segSumTelescopes,  pure
+    algebra:  the  sum  of  (5/2)  t^2 (1/x_j^2  -  1/x_{j+1}^2)
+    collapses  to  first  and  last),  then  drop  the  1/xM^2
+    and  monotone  in  g1.  No  M  factor,  no  measure
+    additivity  —  the  discrete  walk  inherits  the
+    continuous  bound  exactly  because  the  majorants  are
+    potential  differences.  The  bound  is  UNIFORM  IN  THE
+    FRONTIER:  x M  (how  far  the  data  run  reaches)  does
+    not  appear  in  it.
+
+3.  `a1_far_side_cost`  (W2B3):  the  THREE  WIRE  FACTORS
+    assembled:  for  the  far  partition  x  0  =  g1  >=  2t
+    of  fronted  by  any  p  with  p j  =  p(x j)  (kernel
+    values),
+        |p 0|  +  |p M|  +  sum  |dp j|  <=  (17/2)  t^2/g1^2
+    =  3  (left  endpoint,  eullK_tail_bound)  +  3  (right
+    endpoint  at  the  frontier,  eullK_tail_bound,  dominated
+    by  the  left)  +  5/2  (the  discrete  TV,  farKernelTV).
+    Stated  for  an  arbitrary  p  with  the  kernel  witness
+    hp  (so  a1_universal_wire  consumes  it  without
+    re-derivation).
+
+4.  `a1_far_side_o1`  (W2B3):  g1  >=  2t  (t  >=  1)  =>
+    (17/2)  t^2/g1^2  <=  17/8  =  2.125:  the  kernel
+    contributes  a  CONSTANT  cost  to  ANY  frontier.  This
+    is  the  "the  kernel  contributes  a  constant  cost"
+    line  of  E4,  now  as  a  lemma  with  a  numeric
+    constant.
+
+5.  `a1_universal_wire`  +  `a1_universal_o1`  (W2B3):  the
+    conditional  universal  statement,  wired  to  the  actual
+    W2  defect  (W2B.e4_wBound,  the  W2M5.m5_floor  pattern):
+    for  the  far-side  partition  x  0  =  g1  >=  2t,  p  j
+    =  p(x j),  and  ANY  walk  data  (N0,  Nas),  IF  the
+    walk  side  holds  pointwise  with  a  data-free  K  —
+    the  hA1  hypotheses:  |DN j|  <=  K  at  every  grid
+    point  (0  ..  M)  —  then
+        |S1Sum  p  -  RSum  p  Nas|  <=  K  *  (17/2)  t^2/g1^2
+        <=  K  *  (17/8)  (the  o1  specialization:  the
+        frontier  G2  drops  out  completely).
+    The  kernel  half  is  CLOSED  by  the  E8  atoms.  The
+    hA1  hypotheses  are  the  single  remaining  open
+    input  of  the  universal  [S1]:  the  "S  bounded  at
+    the  zeros"  theorem  (E1,  with  the  E12  sharpening:
+    the  bounded  object  is  S  -  main  at  the  zeros,  an
+    O(1)  oscillation  with  ~1  jumps  at  the  grid).
+
+6.  Section  4  (data-adjacent  record,  the  E2Barrier
+    pattern):  K_measured_3e10  =  2.615067  (MEASURED
+    sup|DN|  on  (10^7,  3 x  10^10],  the  A2  data  layer
+    —  the  O(1)  instance  the  data  say  the  hA1  clause
+    has)  and  K_certified_3e10  =  31047116350.923088
+    (SUM_EPS_CERT,  the  certified  A2  majorant  —  a  valid
+    K  for  hA1  at  a  cost  10^10  times  the  measured
+    amplitude,  the  E2/E9  barrier  scale).  The  norm_num
+    pins  plus  K_instances_shape  (measured  <  certified,
+    certified  >  10^9  times  measured)  record  the  two
+    instances  exactly.  The  UNIVERSAL  data-free  K  is  the
+    open  item  —  as  before,  neither  refuted  (E3.2)  nor
+    established  by  known  theory.
+
+Status  against  the  E12  fingerprint:  the  assembly  is  the
+formal  counterpart  of  the  decomposition  it  records  —
+|S1  -  R|  <=  K_walk  *  (kernel  constant  17/8),  K_walk
+the  open  "S  -  main  bounded  at  the  zeros"  constant,
+kernel  constant  CLOSED.  Everything  the  universal  [S1]
+needs  on  the  kernel  side  is  now  a  lemma;  the  one
+theorem  that  decides  RH  success  vs  footnote  (per  the
+preprint  discipline)  remains  the  hA1  clause  itself.
+
+Build  notes  (mathlib  v4.33.1  pins  verified  this
+session):  the  telescope  core  is  pure  ring  over  the
+(1/x^2)  potential;  the  per-segment  atom  reuses  the  E8
+FTC  chain  (integral_eq_sub_of_hasDerivAt_of_le  +
+abs_integral_le_integral_abs  +
+integral_le_sub_of_hasDeriv_right_of_le);  the  Efull  ->
+Far  rewrite  (eullK_far_rewrite)  is  needed  at  the
+endpoints  because  eullK_tail_bound  states  about
+EfullKernel;  `pow_le_pow_left₀`  (ha  :  0  <=  a)  (hab  :
+a  <=  b)  n  —  verified  against  the  pinned  tree
+(Algebra/Order/GroupWithZero/Basic.lean)  AND  against  the
+online  rename  record  (mathlib4  PR  #9095:
+pow_le_pow_of_le_left  ->  pow_le_pow_left  family;  the
+ordered-ring  form  carries  the  0  subscript  in  this
+build);  on  this  toolchain  Finset.Icc  membership  over
+NAT  is  List.Mem-based (build  only  through
+Finset.mem_Icc.mpr  applied  to  an  And  of  LE
+inequalities  —  anonymous  constructor  notation  on  the
+membership  itself  is  rejected),  and  partLeHead  style
+chain  lemmas  must  avoid  `revert`  of  dependent  triples
+(the  binder  order  does  not  follow  the  source  order).
+
+Correction  to  E12  (append-only,  per  the  log
+discipline;  E12  stands  as  written):
+
+1.  The  drift  main'  (t)  =  log(t / 2pi) / (2 pi)
+    (derivative  of  (t/2pi) log(t/2pi)  -  t/2pi  +  7/8:
+    the  -1  in  the  log  form  is  CANCELLED  by  the
+    derivative  of  +t/2pi  in  the  first  term  —  a  common
+    slip).  E12  quoted  main'(3 x  10^10)  "~  2.88";  the
+    correct  value  is  main'(3 x  10^10)  =  3.5470,  and
+    the  day041b  measurement  (th1'/pi  =  main'  =
+    3.544696319  at  the  excursion  height  2.9565 x  10^10)
+    confirms  the  correct  formula  (at  that  height
+    3.5447).  Consequence  inside  E12:  "over  a  typical
+    gap  S  moves  ~1.8"  should  read  ~3.5  per  unit  of
+    t  (the  per-gap  number  is  item  3  below).
+2.  The  JUMP  values  E12  quoted  ("0.996  ..  1.000")
+    do  not  match  the  day041b  log
+    (scripts/rh/out_day041b_d3_fixed.txt):  the  five
+    measured  JUMPs  at  the  top-5  excursions  are
+    0.893384778,  0.980635324,  0.953587711,  0.940244283,
+    0.962034227  (expect  1  -  dmain  per  the  corrected
+    formula,  residuals  2 x  10^-21  ..  6 x  10^-21).
+    The  spread  (0.89  ..  0.98)  is  the  audit  brackets'
+    widths:  the  dmain  subtracted  is  main' . (t_R  -
+    t_L)  with  t_R  -  t_L  =  0.005  ..  0.030  across  the
+    five  brackets.
+3.  The  "typical  gap  (0.62)"  should  read  ~0.29:  the
+    local  density  of  the  3 x  10^10  band  end  is
+    ~3.43  zeros  per  unit  t  (N(3 x  10^10)  =
+    101,635,962,231  minus  N(3 x  10^9)  ~  9.06 x  10^9,
+    over  2.7 x  10^10  units),  so  the  mean  gap  is
+    ~0.29  —  matching  E10's  D2  local  mean  gap  0.282
+    ..  0.292  at  the  top  of  the  band.  Hence  per
+    typical  gap:  S  -  main  moves  ~3.55  *  0.29  ~  1.0,
+    i.e.  the  drift  between  grid  points  is  O(1)  with
+    the  same  order  as  the  jumps  —  the  E12  qualitative
+    reading  (bounded  oscillation  +  ~1  jumps,  not  a
+    slow  random  walk)  is  UNAFFECTED  and  is  in  fact
+    SHARPENED:  the  drift  per  gap  is  not  just  O(1),
+    it  is  ~1  with  the  jumps.
