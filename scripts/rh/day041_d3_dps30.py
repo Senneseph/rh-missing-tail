@@ -334,8 +334,11 @@ def main():
         jump = smR - smL
         # Expected:  the +1 step at the zero  MINUS  the in-gap S
         # drift (-main') accumulated on each side of the window:
-        #   1 - 2*(main(t_R) - main(t_L))   (verified form,  +O(1/t))
-        exp_jump = 1 - 2 * (main_mp(tR) - main_mp(tL))
+        #   1 - 2*(main(t_R) - main(t_L))   (verified form,  +O(1/t)).
+        # tL/tR  are recomputed here  (probe_abs  keeps  them  local):
+        tLm = mp.mpf(repr(t0)) - mp.mpf(repr(delta))
+        tRm = mp.mpf(repr(t0)) + mp.mpf(repr(delta))
+        exp_jump = 1 - 2 * (main_mp(tRm) - main_mp(tLm))
         good = abs(jump - exp_jump) < mp.mpf(repr(TOL))
         all_ok = all_ok and good
         log("   JUMP  S_meas(t_R) - S_meas(t_L) = %+.9f  expect"
