@@ -32,8 +32,8 @@ import struct
 import sys
 import time
 
-BAND = ('/media/jsmille/My Book/rh-missing-tail/hi3e10/'
-        'zeros_2999e6_to_30000e6.f64')
+BAND = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                    'hi3e10', 'zeros_2999e6_to_30000e6.f64')
 OLD_END = 2999245999.862950
 FRONTIER_N = 9061794704
 TARGET = 30000000000

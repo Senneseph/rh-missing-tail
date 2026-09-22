@@ -422,3 +422,208 @@ constant-cost domain pushing is re-confirmed at block level:  nothing
 in the signed structure scales with the domain.
 Artifacts:  `scripts/rh/day039_d1_blocksum.py`,
 `scripts/rh/out_day039_d1.log` (full run,  all 17.6M blocks).
+
+## E7.  Literature pass (E3.2,  references-first) —  VERDICT:  A1 NOT
+REFUTED —  no known S-Omega lands AT THE ZEROS;  the zero/drift
+dichotomy is the structural fact;  the E2 fact-4 density fact is now
+a THEOREM (unconditional,  with numerically vacuous constants)
+
+**Question** (E3.2):  (a) the exact Littlewood forms —  the
+unconditional Omega-plus-minus  and the RH-CONDITIONAL Omega  —
+and,  critically,  whether any theorem shows S unbounded AT THE
+ZEROS (which would kill A1);  (b) known unconditional statements
+about S sampled AT ZEROS (the gap literature:  the gap is the
+finite difference of S at adjacent zeros  —  two views of one
+object);  (c) the classical small-gap  / gap-density results
+(exact forms;  status of the density fact behind E2 fact 4).
+
+**Method.**  References-first per standing directive;  nothing
+cited from memory.  Fetched and verified against primary text:
+Milino (arXiv:1208.5846,  main theorem,  unconditional);
+Carneiro-Chandee-Milinovich (arXiv:1309.1526,  RH-conditional
+explicit);  Simonic (arXiv:2010.13307,  RH-conditional explicit S
+and gaps;  quotes the Littlewood / Hall-Hayman  / Goldston-
+Gonek gap bounds);  Simonic-Trudgian-Turnage-Butterbaugh
+(arXiv:2010.10675,  explicit UNCONDITIONAL gap-density);
+Wikipedia's Riemann hypothesis article for the Selberg (1946)  /
+Montgomery  / Ghosh (1983)  / Odlyzko (2002) statements,  with
+primary references attached.  (As usual in this log,  DN = S +
+O(1) constant convention shift —  E3's calibration.)
+
+**Verified statements,  source-tagged.**
+
+Upper bounds on S(T),  unconditional:
+-  Riemann (1859):  S(T) = O(log T).  No unconditional
+   improvement of the ORDER since (Wikipedia RH article,  citing
+   Titchmarsh,  The Theory of the Riemann zeta-function,  3rd
+   ed.,  1986).
+-  Milino (arXiv:1208.5846,  Theorem 1):  |S(T)| <= 0.111 log T
+   + 0.275 log log T + 2.450,  for ALL T >= e.  (Proof direct
+   for T >= 6.8e6;  below that via |S| <= 1 for T <= 280 and
+   |S| <= 2 for T <= 6.8e6.  Improves Rosser.)
+-  Earlier explicit form:  |S(t)| <= 0.11 log t + 0.29 log log
+   t + 2.29,  t >= e  (as cited in Simonic arXiv:2010.13307,
+   eq. (3)).
+
+RH-conditional:
+-  RH => S(T) = O(log T / log log T)  (classical,  via Titch-
+   marsh 1986;  the exact Littlewood/Ingham attribution is not
+   pinned in this pass  —  flagged).
+-  Carneiro-Chandee-Milinovich (arXiv:1309.1526,  Theorem 2):
+   under RH,  |S(t)| <= (1/4)(log t / log log t) + O(log t log
+   log log t / (log log t)^2)  —  the explicit constant 1/4.
+   Their Theorem 1:  under RH,  S_1(t) between
+   -(pi/24 + o(1)) log t/(log log t)^2 and
+   (pi/48 + o(1)) log t/(log log t)^2.
+-  Simonic (arXiv:2010.13307):  fully explicit RH bounds for S,
+   S_1,  |zeta(1/2+it)|;  corollary:  RH,  gamma' >= gamma >=
+   10^2465:  gamma' - gamma <= 12.05 / log log gamma.
+
+Lower bounds (Omega)  —  the E3.2(a) forms:
+-  Unconditional:  S(T) is not o((log T)^(1/3) / (log log T)^(7/3))
+   —  Selberg (1946)  [via the Wikipedia RH article,  primary ref
+   attached there].
+-  RH:  S(T) is not o((log T)^(1/2) / (log log T)^(1/2))  —
+   Montgomery  [same article].  Both are RATE (limsup) state-
+   ments:  implied constant unknown,  LOCATION of the large
+   values unknown.
+-  Attribution correction:  plan section 3's "Littlewood Omega"
+   is imprecise.  The verified classical Omegas for S are the
+   Selberg/Montgomery pair above.  The Littlewood lineage
+   actually shows up as:  (i) the pi(x) - li(x) Omega (1914,
+   plus-or-minus (1/3) sqrt(x)/log x * log log log x,  verified);
+   (ii) the max-gap bound 32/log log log gamma (1924/27,  below);
+   (iii) the RH O(log T / log log T) upper bound (Titchmarsh
+   tradition).  No separate "Littlewood Omega for S" form found
+   in this pass.
+-  Mean / Gaussian (where the TYPICAL scale lives):  the even
+   moments int_0^T |S(t)|^{2k} dt = (2k)!/(k! (2pi)^{2k})
+   T (log log T)^k + O(T (log log T)^{k-1/2})  (Selberg 1946);
+   S(T)/(log log T)^{1/2} Gaussian in the limit (Ghosh 1983,
+   J. Number Theory 17:93-102).  Typical |S(T)| of order
+   (log log T)^{1/2}  —  at t = 3e10 that is ~1.8  (our data:
+   sup|DN| = 2.615067,  mean|delta| ~ 0.33  —  consistent).
+-  Computed anchors:  |S(T)| < 1 for T < 280;  < 2 for T <
+   6.8e6;  largest |S| yet found "not much larger than 3"
+   (Odlyzko 2002,  via the same article,  1e13-height computa-
+   tions).
+
+Gaps  —  the (b)/(c) object:
+-  Max gap,  unconditional:  gamma' - gamma <= 32 / log log log
+   gamma  (Littlewood 1924/27,  as quoted in Simonic
+   arXiv:2010.13307 eq. (12));  the constant 32 improved to
+   pi/2 + o(1)  (Hall-Hayman 2000,  Theorem 1,  quoted there).
+-  Max gap,  RH:  gamma' - gamma is O(1/log log gamma);  sharp
+   RH shape (pi + o(1)) / log log gamma  (Goldston-Gonek 2007,
+   Corollary 1).
+-  Small / large gaps,  DENSITY  (the (c) answer,  E2 fact 4):
+   Simonic-Trudgian-Turnage-Butterbaugh (arXiv:2010.10675),
+   Theorem 1  —  the FIRST unconditional positive-proportion
+   gap result:  for any lambda < 1 + c0  at least c1 > 0 of the
+   gaps in [T,2T] are >= 2 pi lambda / log t (large),  and for
+   any mu > 1 - (2 c0 c1)/(1 - 2 c1)  at least c2 > 0 are
+   <= 2 pi mu / log(2t) (small),  where
+   c0 = pi e^{4.3} / exp(exp(30.76))  (one may take
+   lambda = 1 + 397 * 10^(-9.93 * 10^12)).  That is:  "a
+   positive density of non-typical gaps" is now an UNCONDITIONAL
+   THEOREM  —  but with constants astronomically close to the
+   trivial (proportions of order e^(-99.8) * (10^(-10^12))^2):
+   numerically vacuous for any constant computation.
+-  RH,  density (quoted there):  Wu (2014) —  a positive
+   proportion of RH-gaps are > 2 pi * 1.6989 / log t or
+   < 2 pi * 0.6553 / log t  —  meaningful numbers,  consistent
+   with our Gumbel-shape data.
+
+**The structural derivation** (two lines,  no citation needed —
+RVM:  N(t) = (t/2pi) log(t/2pi e) + 7/8 + S(t) + O(1/t);  S
+jumps by 1 at each simple zero):  between adjacent zeros
+ gamma_n < gamma_{n+1}  the count N is CONSTANT,  so
+ S(t) = S(gamma_n) - [m(t) - m(gamma_n)]  with
+ m'(t) = (1/2pi) log(t/2pi)  —  the drift falls at the local RVM
+rate.  Hence:
+-  gap formula:  gamma_{n+1} - gamma_n =
+   (1 - [S(gamma_{n+1}) - S(gamma_n)]) / m'(xi)  —  the gap is
+   EXACTLY the finite difference of S at adjacent zeros (modulo
+   the local rate):  S-at-zeros bounds and gap bounds are two
+   views of one object  —  the E3.2(b) guess is confirmed
+   literally.
+-  drift-zone range:  inside one gap,  |S(t) - S(gamma_n)| <=
+   m'(t) * (gap width)  —  so S BETWEEN zeros can exceed S AT
+   zeros by up to the max-gap-weighted density:  
+   O((16/pi) log t / log log log t) unconditionally (via
+   32/log log log)  and  O((1/2) log t / log log t) under RH
+   (via (pi+o(1))/log log).  The drift zone is an ABSORPTION
+   ZONE of provably growing range.
+
+**Answer (a)  —  the kill-shot question:  NO.**  No known
+theorem lands a large-S value at the zeros.  Every verified
+Omega for S (Selberg unconditional;  Montgomery RH) is a
+statement at GENERIC t with unknown constant and unknown
+location.  The between-zero drift zone absorbs S-values of
+order O(log t / log log log t) unconditionally  —  strictly
+MORE than every known Omega scale  —  at zero cost at the zeros
+(a large between-zero S is literally the S at the left zero
+minus accumulated m-drift over a wide gap;  the derivation,
+above).  Conversely,  no theorem bounds S at zeros by O(1):
+upper bounds at zeros reduce to the generic upper bounds
+(Riemann O(log t)  /  Milino explicit  /  RH
+O(log t / log log t)).  So A1 ("S bounded at the zeros")  is
+neither refuted nor established by known theory:  **ALIVE,
+open,  exactly as E1 restated.**  Numerical calibration:  the
+Selberg Omega scale (log T)^(1/3) (log log T)^(-7/3) first
+reaches our certified envelope 2.615067 at T ~ exp(10^11)
+(solve e^L = 17.9 L^7,  L = log log T,  L* ~ 25.6)  —  astro-
+nomically beyond any computable range;  at T = 3e10 that scale
+is ~0.19,  two orders below the data.  Data and theory do not
+disagree at any tested scale.
+
+**Answer (b).**  The gap formula above is classical and IS the
+engine of the zero-spacing literature.  Every verified gap
+result listed is a statement about the ADJACENT DIFFERENCE
+ 1 - m' * G  (equivalently S(gamma_{n+1}) - S(gamma_n))  —
+LEVEL-AGNOSTIC.  Not one bounds the LEVEL |S(gamma_n)|
+itself.  **No S-at-zeros level statement was found in this
+pass —  the S-at-zeros level is,  literature-wise,  an unclaimed
+object.**  Related:  Trudgian (2011,  via the same article):
+Gram's rule and Rosser's rule fail in a POSITIVE PROPORTION of
+zeros (heuristic:  ~66% one zero per Gram period,  ~17% none)
+—  S at zeros has positive-proportion O(1) excursions;
+consistent with sup|DN| = 2.615 (a few O(1) outliers in 3e10
+zeros)  and no threat to A1.
+
+**Answer (c).**  Exact forms recorded above.  STATUS UPDATE on
+E2 fact 4 (addendum only  —  E2 text is frozen):  "a positive
+density of non-typical gaps" is now an unconditional theorem
+(STTB,  arXiv:2010.10675,  first positive-proportion gap
+result,  constants within ~10^(-10^12) of trivial).  The
+QUALITATIVE open fact behind fact 4 is CLOSED;  the QUANTI-
+TATIVE use (a data-free envelope with useful constants)
+remains impossible  —  the E2 barrier as a universal closer is
+unaffected (the barrier is the total-variation argument,
+certified c*N,  and vacuous density constants do not lower it).
+The engine of record remains A2.
+
+**Consequences for the program.**
+1.  A1 is ALIVE,  and its target shape is now SHARPER than
+    before:  no Omega refutes an S level at zeros;  the slow
+    divergence of S is provably absorbable by the between-zero
+    drift zone;  the S-at-zeros level is an unclaimed object.
+    The D3 probe (E5:  dps-30 arg zeta at zeros vs at wide-gap
+    midpoints) is the data-side test of exactly this
+    dichotomy  —  priority RAISED:  it measures the drift-zone
+    range at our scale directly.
+2.  Preprint wording ("S = O(1) at the zeros",  if used):
+    defensible;  the citation set for the "no known S-at-zeros
+    theorem" claim is the source list above.
+3.  E3.3 (Lean barrier record) and the queued W2Beyond2
+    finite-interval-variation atom are unaffected  —  the
+    W2Beyond2 atom is still the next Lean step.
+
+Artifacts:  this entry;  source list:  arXiv:1208.5846,
+arXiv:1309.1526,  arXiv:2010.13307,  arXiv:2010.10675,  and
+the Wikipedia RH article (Selberg 1946  / Montgomery  /
+Ghosh 1983  / Odlyzko 2002,  with the primary references
+attached there).  Side note:
+the 3e10 band re-fetch COMPLETED byte-exact (740,623,021,712
+B = 92,577,877,714 zeros);  finish gates running (see
+`scripts/rh/out_day036_gates_refetch.log`).
