@@ -23,4 +23,3 @@ out_*.log
 *.pid
 *.pids
 *.pts
-md5.txt
