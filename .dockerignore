@@ -11,6 +11,7 @@ __pycache__/
 scripts/rh/hi1e9/
 scripts/rh/hi3e9/
 scripts/rh/hi3e10/
+scripts/rh/ckpt_h1_3e10/
 scripts/rh/out_*.txt
 scripts/rh/out_*.log
 scripts/rh/*.err

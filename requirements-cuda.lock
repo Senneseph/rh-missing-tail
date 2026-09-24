@@ -1,0 +1,16 @@
+# HPC GPU stack for the rh-missing-tail image (NVIDIA hosts, e.g. vast.ai).
+# Hash-pinned (pip --require-hashes).
+#
+# cupy-cuda12x 13.6.0 = the latest cupy compatible with the production
+# venv's numpy 1.26.4 (cupy 14 requires numpy 2.x).  fastrlock is
+# cupy's only other runtime dependency;  numpy is repeated here so this
+# lock is self-contained under  --require-hashes.
+#
+# Wheel hashes = the cp312 / manylinux x86_64 wheels (the container
+# platform,  python:3.12-slim).
+cupy-cuda12x==13.6.0 \
+    --hash=sha256:79b0cacb5e8b190ef409f9e03f06ac8de1b021b0c0dda47674d446f5557e0eb1
+fastrlock==0.8.3 \
+    --hash=sha256:5f13ec08f1adb1aa916c384b05ecb7dbebb8df9ea81abd045f60941c6283a670
+numpy==1.26.4 \
+    --hash=sha256:675d61ffbfa78604709862923189bad94014bef562cc35cf61d3a07bba02a7ed
