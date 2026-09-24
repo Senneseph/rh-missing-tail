@@ -61,6 +61,17 @@ alive=""
 for p in $PIDS; do
     [ -d "/proc/$p" ] && alive="$alive $p"
 done
+# a bash supervisor in  its  watchdog  sleep  defers  TERM  until
+# the  sleep  child  exits  --  give  it  more  grace  before
+# declaring  failure.
+for t in 1 2 3; do
+    [ -n "$alive" ] || break
+    sleep 5
+    alive=""
+    for p in $PIDS; do
+        [ -d "/proc/$p" ] && alive="$alive $p"
+    done
+done
 if [ -n "$alive" ]; then
     echo "STILL ALIVE after TERM:$alive  (manual:  kill -KILL ...  only after re-verifying cmdline)"
     exit 1
