@@ -32,10 +32,25 @@
 #  11-12  CLIENTS  =  10-11  processes  +  Xorg).
 #
 #
-#  The  supervisor  exits  only  on:  "H1  FULL-DONE"  (all
-#  696),  a  band  integrity  failure  (rc  5),  a  corrupt
-#  checkpoint  (instance  rc  3),  MAX_ATTEMPTS  (30),  or  a
-#  lock  held  by  another  supervisor.
+#  The  supervisor  exits  only  on:  an  instance  rc=0  with
+#  "H1  FULL-DONE"  inside  THAT  INSTANCE'S  OWN  log  span
+#  (slice  complete),  a  band  integrity  failure  (rc  5),  a
+#  corrupt  checkpoint  (instance  rc  3),  MAX_ATTEMPTS  (30),
+#  a  held  lock,  the  24  h  memory  hold,  or  the
+#  AUTO-RESUME  budget  (see  the  stall  watchdog  below).
+#
+#  STALL  WATCHDOG  (best  effort,  owner-approved):  the  engine
+#  can  die  SILENTLY  (a  worker  future  dies;  the  parent  wait
+#  blocks  forever  --  no  rc,  no  crash,  no  log  lines;  seen
+#  3  x  on  Strix).  While  an  instance  runs,  the  supervisor
+#  samples  progress  (main-log  size  +  total  checkpointed
+#  points)  every  60  s.  No  change  for  STALL_MIN  minutes
+#  (default  30,  only  after  the  run  is  >=  STALL_MIN_RUN
+#  minutes  old)  =>  best-effort  kill  +  relaunch;  the
+#  deterministic  resume  re-scans  checkpoints  and  resubmits
+#  only  the  missing  point(s).  If  that  does  not  work  --
+#  after  AUTORESUME_MAX  (default  5)  auto-resumes  --  the
+#  supervisor  gives  up  and  stops  (owner  decides).
 cd /home/jsmille/Projects/rh-missing-tail/scripts/rh || exit 1
 exec 200>supervisor_day045.lock
 if ! flock -n 200; then
@@ -123,13 +138,33 @@ MEM_HOLD_MAX=288          # 24  h  of  5-min  holds,  then  give  up
 
 MAX=30
 i=0
+autores=0
+giveup=0
+
+# --- stall  watchdog  config  (best  effort  auto-resume) ----------
+STALL_MIN=${STALL_MIN:-30}           # no  log/ckpt  change  this  long  =>  stall
+STALL_MIN_RUN=${STALL_MIN_RUN:-45}   # instance  must  have  been  up  this  long  first
+AUTORESUME_MAX=${AUTORESUME_MAX:-5}  # then  give  up:  owner  decides
+pts_total(){ cat ckpt_h1_3e10/*.pts 2>/dev/null | grep -c '^ok,'; }
+kill_instance_tree(){
+    # unambiguous  on  this  machine:  the  only  processes  whose
+    # cmdline  is  the  engine  are  THIS  instance  (+  its  mp
+    # spawn  children);  the  supervisor's  own  cmdline  never  matches.
+    pkill -TERM -f day038_h1_3e10_gpu.py 2>/dev/null
+    local t=0
+    while [ "$t" -lt 20 ] && pgrep -f day038_h1_3e10_gpu.py >/dev/null 2>&1; do
+        t=$((t + 1)); sleep 1
+    done
+    if pgrep -f day038_h1_3e10_gpu.py >/dev/null 2>&1; then
+        pkill -KILL -f day038_h1_3e10_gpu.py 2>/dev/null
+        sleep 2
+    fi
+}
+
 while :; do
     i=$((i + 1))
     if [ "$i" -gt "$MAX" ]; then
         stamp "MAX_ATTEMPTS=$MAX  reached  --  stopping,  owner decides"
-        break
-    fi
-    if grep -q "H1 FULL-DONE" out_day038_full.log 2>/dev/null; then
         break
     fi
     AVAIL=$(mem_gib)
@@ -141,23 +176,71 @@ while :; do
         fi
         stamp "MEM  HOLD  $MEM_HOLDS:  MemAvailable  $AVAIL  GiB  <  $MEM_HOLD_GIB  GiB  --  sleeping  300  s"
         sleep 300
+        i=$((i - 1))   # memory  holds  do  not  consume  an  attempt
         continue
     fi
     MEM_HOLDS=0
     WSEL=${H1_WINDOWS:-}
     WENV=; [ -n "$WSEL" ] && WENV="H1_WINDOWS=$WSEL"   # no inner quotes:  env gets the raw token
     stamp "instance  $i  launching  (env  WORKERS=$W_ENV_WORKERS  contexts  x  H1_THREADS=$W_ENV_THREADS  threads;  windows=${WSEL:-all};  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)"
+    LOGPOS=$(stat -c %s out_day038_full.log 2>/dev/null || echo 0)
     # shellcheck disable=SC2086
     taskset -c "$W_CPUREANGE" env WORKERS="$W_ENV_WORKERS" H1_THREADS="$W_ENV_THREADS" H1_PER_THREAD_GIB=2.5 \
         H1_GPU_CLIENT_BUDGET=11 H1_XORG_CLIENTS=1 $WENV \
         ZETA_SHARDS_DIR="$PWD/$SHARDS" \
         /home/jsmille/venvs/cupy/bin/cupy_py -u day038_h1_3e10_gpu.py \
-        >> out_day038_full.log 2>&1
+        >> out_day038_full.log 2>&1 &
+    IPID=$!
+    # --- watchdog  sampling  (progress  =  log  size  OR  pts) ----
+    last_sz=$LOGPOS
+    last_pt=$(pts_total)
+    last_change=$(date +%s)
+    t0=$last_change
+    while kill -0 "$IPID" 2>/dev/null; do
+        sleep 60
+        now=$(date +%s)
+        sz=$(stat -c %s out_day038_full.log 2>/dev/null || echo "$last_sz")
+        pt=$(pts_total)
+        if [ "$sz" != "$last_sz" ] || [ "$pt" != "$last_pt" ]; then
+            last_sz=$sz; last_pt=$pt; last_change=$now
+        fi
+        idle_min=$(( (now - last_change) / 60 ))
+        run_min=$(( (now - t0) / 60 ))
+        if [ "$idle_min" -ge "$STALL_MIN" ] && [ "$run_min" -ge "$STALL_MIN_RUN" ]; then
+            if [ "$autores" -ge "$AUTORESUME_MAX" ]; then
+                stamp "WATCHDOG:  auto-resume  budget  exhausted  ($AUTORESUME_MAX  used,  still  stalling)  --  stopping,  owner decides"
+                kill_instance_tree
+                giveup=1
+                break
+            fi
+            autores=$((autores + 1))
+            stamp "WATCHDOG  STALL:  no  progress  for  ${idle_min}  min  (pts=$pt)  --  best-effort  auto-resume  $autores/$AUTORESUME_MAX  (kill  +  relaunch;  resume  re-scans  checkpoints)"
+            kill_instance_tree
+            break
+        fi
+    done
+    wait "$IPID" 2>/dev/null
     rc=$?
     stamp "instance  $i  exited  rc=$rc"
+    if [ "$giveup" = "1" ]; then
+        break
+    fi
     if [ "$rc" = "3" ]; then
         stamp "instance  reported  CORRUPT  CHECKPOINT  (rc=3)  --  stopping,  owner decides"
         break
     fi
+    if [ "$rc" = "0" ]; then
+        # FULL-DONE  counts  only  if  it  appeared  in  THIS
+        # instance's  own  log  span  (the  main  log  is
+        # append-only  across  slices;  an  earlier  slice's
+        # marker  must  not  end  this  one).
+        if tail -c +$((LOGPOS + 1)) out_day038_full.log 2>/dev/null | grep -q "H1 *FULL-DONE"; then
+            stamp "instance  $i  rc=0  with  FULL-DONE  in  its  own  span  --  slice  complete"
+            break
+        fi
+    fi
 done
+if [ "$autores" -gt 0 ]; then
+    stamp "watchdog  summary:  $autores  auto-resume(s)  used  over  this  supervisor  lifetime"
+fi
 stamp "day045 supervisor exit  (total  instances:  $i)"
