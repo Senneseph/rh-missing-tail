@@ -1351,9 +1351,12 @@ def _wk_path(i, x):
 
 
 def _parse_wk_file(i, x):
+    return _parse_wk_file_path(_wk_path(i, x), x)
+
+
+def _parse_wk_file_path(path, x):
     """Parse  a  checkpoint  file  ->  point  records  in  on-disk
     order,  or  None  on  corruption  (torn-tail  excepted)."""
-    path = _wk_path(i, x)
     if not os.path.exists(path):
         return []
     with open(path) as f:
@@ -1407,6 +1410,43 @@ def _k_set(recs):
     (exact:  t  -  g  is  exact  by  Sterbenz,  so  2*(t-g)  is
     k  within  <  4  ulp(g),  far  from  any  half-integer)."""
     return set(round(2.0 * (p["t"] - p["g"])) for p in recs)
+
+
+def _wk_files_x(x):
+    """Every  checkpoint  file  carrying  this  x,  for  ANY
+    slice-local  prefix:  a  window  filled  by  a  DIFFERENT
+    slice  has  a  different  widxNN  prefix  (cross-slice).
+    Same  %.10g  format  as  the  writer,  so  the  glob  matches
+    exactly."""
+    import glob as _glob
+    return sorted(_glob.glob(CKPT_DIR + "/widx*_x%.10g.pts" % x))
+
+
+def _parse_window(i, x):
+    """Resume  read  for  slice-local  window  i  at  x:  the
+    slice-local  file  when  it  exists  (semantics  unchanged);
+    else  the  k-deduped  UNION  of  every  widxNN  file  carrying
+    x  (cross-slice  resume  --  same  window,  written  by  an
+    older  slice).  Corruption  in  ANY  contributing  file
+    HALTS  (never  guess)."""
+    local = _wk_path(i, x)
+    if os.path.exists(local):
+        return _parse_wk_file(i, x)
+    others = [p for p in _wk_files_x(x) if p != local]
+    if not others:
+        return []
+    merged, seen = [], set()
+    for p in others:
+        r = _parse_wk_file_path(p, x)
+        if r is None:
+            return None
+        for rec in r:
+            k = round(2.0 * (rec["t"] - rec["g"]))
+            if k in seen:
+                continue
+            seen.add(k)
+            merged.append(rec)
+    return merged
 
 
 def _ckpt_append(i, x, p):
@@ -1607,7 +1647,7 @@ def _run_full():
     t0 = time.time()
     jobs = []
     for i, x in enumerate(xs):
-        recs = _parse_wk_file(i, x)
+        recs = _parse_window(i, x)
         if recs is None:
             print("CKPT  CORRUPT:  window  %d  (x=%.10g)  --  HOLD, owner decides" % (i, x), flush=True)
             sys.exit(3)
@@ -1669,7 +1709,7 @@ def _run_full():
     res = []
     missing = 0
     for i, x in enumerate(xs):
-        recs = _parse_wk_file(i, x)
+        recs = _parse_window(i, x)
         if recs is None:
             print("window  %2d:  CORRUPT  after  the  pool  --  owner" % i, flush=True)
             sys.exit(3)
