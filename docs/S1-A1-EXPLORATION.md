@@ -1442,8 +1442,8 @@ log(g^2  +  1/4)  +  (1/2)/(g^2  +  1/4);  G2  pinned  2.9999999999762012e10;
         c  :=  DN(gamma)  -  S(gamma_+)
         S(gamma_+)  =  s_data(t_R)  +  main'  *  (t_R  -  gamma),
     with  main'(t)  =  log(t/2pi)/(2pi)  (the  E12-corrected
-    inter-step  drift).  Results:  c  =  0.1249928,  0.1250034,
-    0.1249928-> 0.1249928,  0.1250010,  0.1250079  —  spread
+    inter-step  drift).  Results:  c  =  0.1250006,  0.1250034,
+    0.1249928,  0.1250010,  0.1250079  —  spread
     1.5e-5  (limited  by  the  6-decimal  zero  values  in  the
     log),  i.e.  c  =  1/8  to  better  than  2e-5.
 2.  WHY  IT  IS  EXACT  (not  just  close).  DN  on  the  zero
