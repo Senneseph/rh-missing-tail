@@ -208,3 +208,152 @@ required.
     (they gate the D band file, which this plan never touches;
     they last passed on the unchanged file).
   - No changes to the 5900X or the cloud instance; no pushes.
+
+## INTERIM STATE addendum (appended: analysis in flight, not the final read)
+
+Added as the standing addendum for the in-flight analysis, per the
+corrections-as-appended-sections discipline.  The body above remains
+the as-planned record.
+
+### Checkpoint state
+
+- CHECKPOINT 0/1/2 DONE.  Preconditions verified (selftest PASS,
+  engine >= e180eae).  The fleet delivery arrived from the 10 TB
+  drive (not the LAN rsync of step 1, which is superseded): it lives
+  in-repo at scripts/rh/h1_final_fleet/ (4090-box/ = 8 instance
+  logs + one assembled ledger; 5900x/ = snapshot ckpt files + logs;
+  evidence/).  The 4090 cloud box was then destroyed by the owner
+  AFTER that delivery was pulled (nothing further can come from
+  it); the final 696-point grid remains fully coverable without it
+  (cloud box re-rented on the 9-26 slice; 5900x stands on 1-26).
+- Read-only census over the three in-repo sources (Strix live
+  ckpt_h1_3e10 post NaN-row surgery; the 5900x snapshot; the 4090
+  assembled ledger): 505 distinct (x,k) points in hand =
+  20 windows complete at 24/24 (windows 0-11, 19, 21, 22, 23,
+  25, 26, 27, 28) + window 20 at 21/24 + window 12 at 4/24
+  (the 4 rows are window-12's first four k's, k = -12,-11,-10,-9,
+  written by this box's stopped 12-18,20,24 run before it halted
+  — the cross-slice resume union will recompute exactly the
+  missing 20).  By source: 456 this-box, 1 the 5900x row that
+  heals window 5's removed NaN point (k = +12), 48 the 4090
+  assembled new windows (25, 26).  Zero parse failures, zero
+  corruption, zero torn tails.
+
+### Interim pre-registered reading (PRELIMINARY — not the CP6 verdict)
+
+On the 505 points in hand: C-1 does NOT hold (margin_cert below 1
+at 254 points); C-2 does NOT fit (the shortfall is systematic,
+half the grid, not isolated); C-3 fires verbatim (margin_computed
+below 1 at many points) — whose deliverable, by the pre-registered
+wording, is the re-issued ceiling report carrying the explicit
+epsilon.  The honest interim statement: on (3.2e9, 2.8e10] in
+hand the computed margin sits at 1 to within ~4e-9, with sign
+structure in the straddle offset (see the drift law below); the
+window-20 gap and windows 12-18/24 remain pending the fleet.
+
+The CONSTRUCTIVE finding behind the reading (the confirmed
+structural law, fit over all 505 points):
+
+    margin(x, k) - 1  ~=  A(x) * k,   A(x) ~ (1.005 ... 1.019)/x
+
+- per-k means: delta(k)/k = 1.42e-10 (window 0) falling to
+  1.42e-10... precisely: A(x) rises weakly in x, A*x = 1.0057
+  at x = 3.2e9 to 1.0188 at x = 2.8e10.
+- oddness: mean of [delta(k) + delta(-k)] at the same x =
+  -3.6e-11 +/ 6.2e-11 (n = 249 paired points) — the drift is
+  odd in the straddle offset to within the residual scale.
+- per-window linear fit: residual RMS 4.6e-11 vs raw delta RMS
+  1.25e-9 — one k-linear term explains 96.4% of the variance;
+  the offset term b fits at -1.8e-11 ~ 0.
+- worst in-hand point: x = 3.23e9, k = -12, margin 0.9999999963
+  (all ten worst points are k = -12..-9 in the low windows;
+  the top points are k = +12..+9 at 1.0000000037).
+- cross-machine: the drift appears identically in every source
+  (all 4090-box FULL-DONE instance logs list every straddle of
+  every window under their margin_new < 1 headers; Strix logs
+  match; the 55 known cross-machine differing pairs remain
+  3-sig-fig tail-budget noise with margin fields byte-identical)
+  — it is the object, not an artifact.
+- The certified margin (mcert) prints identical to the computed
+  (mnew) at all ten digits on these points: the certificate
+  budget is below print precision; the explicit epsilon for the
+  re-issued ceiling is the measured drift amplitude (~1.01*12/x
+  at the window edge, decaying in x).
+
+### 3e9 ledger re-audit (done during the docs audit)
+
+- out_day034_h1cert_b.txt = 936 rows = 39 windows x 24 straddles;
+  global min margin_cert = 1.0816362118 at t = 1000000001.61565
+  (the 1e9 window) — matches the recorded worst figure to the
+  printed digit; 0 rows with margin_cert < 1 and 0 with
+  margin_computed < 1; the single FLAG row is the budget-width
+  flag (dmin < NLT_GUARD, the 1.3e8 window, margin ~101), already
+  recorded honestly in PHASE1A-CEILING section 4.  The C-1
+  reading on (1e6, 1e9] stands.
+- Grid-count reconciliation: both 3e9 engines exclude the k = 0
+  straddle (t = g is singular in R_closed's denominator); the
+  executed grid is 24 straddles per window everywhere.
+
+### Stale-number catalog (cosmetic; no conclusion affected)
+
+The planning text "25 straddles per window" survived the
+implementation (24 everywhere).  Stale figures located during the
+audit, all superseded by the executed grids (3e9: 39 x 24 = 936
+points; 3e10: 29 x 24 = 696 points):
+- END_GAME_PLAN.md: header "975 points"; 3.9(b) "25 straddles per
+  window"; 3.10(b) "29 windows / 725 straddles".
+- PHASE1A-CEILING.md: section 2 "2250 grid points (90 windows x
+  25 straddles)"; section 4 "39 windows x 25 straddles = 975",
+  "all 975 points OK".
+- KNOWN_LIMITATIONS.md: H1 entry "39 windows x 25 straddles =
+  975", "all 975 points certified".
+- PREPRINT-DRAFT-DAY035.md: "2250-point sweep to 10^9" (the
+  day029 screen sweep description).
+Proposed fix (owner's call): one short correction addendum in
+each of the four docs, append-only, no body rewrites.  The
+readings, worst margins, and C-branch verdicts in those docs are
+VERIFIED CORRECT against the actual ledgers; only the grid counts
+are stale.
+
+### Open scientific questions for the final session (data in hand)
+
+1. The margin-offset path through (1e9, 3e9): certified 1.0816 at
+   1e9 -> screen-grade "hovering 1-4 above" near 1.95e9 (END_GAME
+   0) -> 1.0000+/4e-9 at 3.2e9 (3e10 band).  Non-monotone: the
+   residf/(zeta*dev) ratio wanders before settling at 1.  Pin it
+   from the screen logs; the 3e10 drift law (A ~ 1/x, odd in k)
+   is the 3e10-band statement of the settled regime.
+2. The weak x-dependence A*x = 1.0057 -> 1.0188 across the band:
+   refine on the full 696 (and decide the exact drift law:
+   A*x = 1 + c*ln(x/x0)? fit once all windows are in hand).
+3. Numerical-vs-structural split of the 4e-9 drift: the C-2
+   prescription (dps-90/120 + 1600 nodes) re-issue of the ten
+   worst negative-k points — queued, owner's GO.
+4. Window 18's two known cert-gate misses (k = -5, -4, from the
+   destroyed box): the re-run will show deterministic vs
+   run-specific — recorded as C-2 reissue candidates if they
+   recur.
+
+### Lean audit (same pass)
+
+- formal/ `lake build` GREEN: 17,442 jobs — matches every doc
+  claim verbatim (Lean 4.33.1 + mathlib v4.33.1).
+- The single open theorem's site (W2Beyond3.lean, a1_universal_
+  wire / a1_universal_o1, the hA1_0/hA1M/hA1 hypotheses) is
+  EXACTLY the E1/E13 description: the pointwise data-free walk
+  bound |DN| <= K on the zero grid, with the kernel constant
+  17/8 closed and G2 dropped out.  No mistranslation found at
+  the open-theorem site; the E2Barrier pins (2.615067 /
+  31,047,116,350.923088) match the certified data layer.
+
+### Next gate (unchanged by the above)
+
+When the cloud (9-26) and the 5900x (1-26) ledgers land: CP3
+dry-run merge in the staging target (never into the live ckpt
+while a run could resume) -> CP4 real merge, with the one
+owner-visible conflict decision for the margin-identical
+3-sig-fig tail-noise class (55 known pairs + any same-box
+duplicates) -> CP5 full-grid engine assembly (29x24 banner) ->
+CP6 the final C-read over 696 -> CP7 document updates (this
+plan's step-7 list, the corrected counts included) -> CP8
+archive, no deletion.
