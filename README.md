@@ -765,6 +765,11 @@ references.md.
 
 ## Authors and disclosure
 
+Dedicated to the memory of Henry Kloss:
+> The author and legend of hi-fi audio. This is a short memoriam and explanation of inspiration. Henry Kloss was a speaker designer, he helped coin the idea of "hi-fi". His vision was that everyone should have affordable access to enjoy the highest fidelity their music could be reproduced in. I think this is a Spirit of Ethos that should be revived and this project emobides it in two ways: first, it distinguishes excellence - this AI model is excellent. Second, this AI model, and again only one local model used, is FREE. I grew up with with his speakers and between the price paid and the fact that they have never needed replacement or something besides their real mahogany veneers to still receive compliments. It is something we should all strive for - long lasting quality. It is a BAD business model as a fact if you must sell every year something new to replace the old. I hope we can see it's return and so I pray out to the Unseen Forces that are the True Governors of this Universe to help inspire in someone this change for the better that the world should prosper. It is a small ask this time, but nonetheless, we are not to expect a grace whose Works we are not ourselves willing to undertake that we would inconvenience others.
+>
+> So should we say us All!
+
 - **Jesse S. Miller** — [conception](https://www.youtube.com/watch?v=3wxyN3z9PL4), [experimental](https://www.youtube.com/watch?v=Bhkd0877xFo) [design](https://www.youtube.com/watch?v=DzMtPO-9cMU),
   [direction](https://www.youtube.com/watch?v=ZZ5LpwO-An4), [interpretation](https://www.youtube.com/watch?v=E8Y_Sp7bhtk). (BS - Mathematics and Computer Science, Emory University; working interest in the [histories of the Natural Sciences](https://physicsdetective.com/a-partial-history-of-particle-physics-i/).)  
   **L. McGeorge** [-](https://suno.com/song/033eff6c-a93d-49f4-b9d7-a4553ac12b6e) [Creative Partner](https://www.youtube.com/watch?v=RLWZw6w-zLE)
