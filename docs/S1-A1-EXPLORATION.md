@@ -1322,3 +1322,111 @@ linear  K-form),  M6.lean  (the  composition,  K-free  feed),
 W2B3  (the  17/8  kernel  closure,  G2-free),  E7  (Milino  +
 CCM  verified  against  primary  text),  W2-BEYOND  section  7
 (open  content  (c)  =  the  W2M6  unit  of  item  4(ii)).
+
+## E15.  The  decision  computation  (bound  side)  —  the
+##       Milino  branch  is  DEAD  BY  ARITHMETIC;  the  A1
+##       target  is  RECALIBRATED  to  the  signed  defect
+##       (VERDICT:  E14  ending  (i)  REFUTED;  ending  (ii)
+##       SHARPENED  and  RECALIBRATED)
+
+Executed  item  (iii)  of  E14  (the  wire  slack  question)  on
+the  bound  side,  with  the  exact  e4_wBound  kernel  cost
+computed  on  all  505  in-hand  straddles  (kernel  values  direct;
+ bracket  zeros  from  the  D  band  by  sparse  lookup;  the  far
+ part  by  the  proven  E8  atom  5/8).
+
+1.  THE  KERNEL  COST  C(t)  (e4_wBound  form  |p G1|  +  |p G2|
+    +  discrete  TV  of  the  log  kernel  over  the  zero
+    partition  on  (1e7,  3e10],  G2  =  the  pinned  last  zero
+    under  3e10):
+        min  68.15    median  76.88    max  91.80    (505 pts)
+    Worst  straddles:  x = 2.79e10  k = +5:  C = 91.80;  the
+    cost  is  dominated  by  the  descent  from  G1  (|p G1|
+    ~ 13.8)  +  the  pole  V  at  the  straddle  (~2x|p(t+-)|,
+    |p|  ~ 20  near  the  pole)  +  the  climb  back  —  all
+    log-scale,  G2-free  (E4  architecture,  as  designed).
+
+2.  THE  K-TERMS  (the  e4_tailFloor  one-sided  cost,
+    S1  -  R  >=  -K * C(t)):
+        data  pin  K = 2.615067:   K*C  =  201 .. 240
+        Milino   K = 6.628:        K*C  =  509 .. 608
+        (Milino  over  data  pin:  the  extra  308 .. 368  of
+        E14  is  the  price  of  dropping  the  data  —  but  as
+        item  3  shows,  BOTH  are  already  far  over  budget.)
+
+3.  WHY  BOTH  DIE  (the  wire  normalization,  read  from
+    S1LowT.strip_squeeze_v2  +  the  M6  composition).  The
+    squeeze  closes  on
+        dev_feed  -  noise_total  >  0,
+    with  dev_feed  =  1  -  13/g  ~  1  —  an  O(1)-normalized
+    budget.  The  walk  channel  enters  that  budget  through
+    the  e4_tailFloor  role  as  the  ABSOLUTE  term  K*C(t).
+    The  measured  W  (the  SIGNED  defect  after  the
+    S3b/3.6  telescope  cancellation)  is  O(1):  0.85 / 3.30
+    /  4.61  at  3.9e7  /  1e8  /  3e8  (S3c),  0.595  at  the
+    1e10  splice  (day029_dcheck).  The  data  certificate
+    passes  at  3e10  (mcert  1  +-  4e-9)  BECAUSE  the
+    channel  is  filled  with  the  measured  post-cancellation
+    residual.  The  bound  K*C  carries  NO  cancellation:
+    even  at  the  DATA  PIN  K  =  2.615  it  is  201..240,
+    i.e.  200x  the  entire  O(1)  budget  —  and  Milino's
+    6.63  is  500..600x.
+
+4.  THE  RECALIBRATED  STATE  (this  is  the  E2  barrier  at
+    the  3e10  wire,  now  with  a  price  tag).  E2  proved
+    the  absolute  sum  has  a  certified  floor  of  total
+    variation  (~0.335  per  zero;  3.1e10  on  this  band);
+    E15  measures  what  that  floor  costs  where  A1  is
+    consumed:  ~2.5x10^2  ..  6x10^2  against  a  ~1  budget.
+    Consequences:
+   -  E14  ending  (i)  ([S1]  closed  by  the  Milino  data-
+     free  K)  is  REFUTED  —  by  a  factor  of  ~10^2  ..
+     10^3,  not  by  a  missing  digit.  No  generic-t  S-
+     bound  (Milino,  RH-conditional  CCM,  or  any  other)
+     can  feed  this  wire:  they  all  price  at  O(10^2  ..
+     10^3)  absolute  against  an  O(1)  budget.
+   -  E14  ending  (ii)  is  SHARPENED:  the  [S1]  closer  is
+     not  "bound  |DN|  by  some  K"  (any  such  K  prices
+     via  K*C  and  dies)  —  it  is  a  theorem  about  the
+     SIGNED  defect  W  =  p(G2)DN(G2)  -  p(G1)DN(G1)  -
+     int  DN  p'  (the  E3.4  object,  the  walk  against  the
+     log  kernel  with  principal  value):  |W|  <=  O(1)
+     (or  O(log  g / log^2  g))  UNCONDITIONALLY,  i.e.  a
+     data-free  CANCELLATION  theorem.  That  is  exactly  the
+     E1  restatement  ("S  bounded  at  the  zeros",  the
+     level  —  not  the  total  variation)  read  through  the
+     telescope,  and  E7  says  the  object  is  unclaimed  in
+     the  literature  (no  Omega  lands  at  zeros;  no  S-at-
+     zeros  level  bound  exists).
+   -  The  data  side  is  now  a  full  band  fact:  the
+     measured  W  is  O(1)  at  every  probe  height  we  have
+     (3.9e7  ..  1e10),  decaying  (4.61  ->  0.595);  if  a
+     signed  A1  theorem  exists,  the  data  want  the
+     constant  to  be  ~1.
+5.  WHAT  THIS  ANSWERS  (the  high-level  question  the
+    program  has  carried  since  day035).  "Why  not  here,
+    and  what  would  it  take":  not  here  because  the
+    absolute-sum  mechanism  (R2/driftTwoSided,  A2-class  —
+    which  is  everything  we  have  PROVEN  about  the  walk)
+    prices  the  walk  channel  ~10^2  ..  10^3  over  the
+    wire  budget  (E2  floor  +  E15  cost);  what  it  takes
+    is  one  theorem  no  one  has  —  a  data-free  O(1)
+     bound  on  the  SIGNED  walk-defect  on  the  log  kernel
+    (equivalently  E1:  an  O(1)  LEVEL  bound  on  S  at  the
+    zeros,  since  the  telescope  converts  level  to  defect
+    at  O(1)  kernel  price)  —  with  the  data  (O(1),
+    decaying,  all  probe  heights)  and  the  literature  (no
+    refutation  of  the  level  statement,  E7)  both  pointing
+    the  same  way.  The  program  stands  as  pre-printed:
+    the  verification  +  falsification  machine  (now  with
+    the  3e10  fill  en  route  to  696/696)  plus  ONE
+    named  theorem  of  known  shape  and  known  data-
+    behavior,  and  the  E2  barrier  records  precisely  why
+    the  proven  mechanisms  cannot  bridge  it.
+
+Artifacts:  the  C(t)  computation  (505  straddles;  kernel
+per  E4's  pinned  form  p(g;t)  =  log|g^2  -  t^2|  -
+log(g^2  +  1/4)  +  (1/2)/(g^2  +  1/4);  G2  pinned  2.9999999999762012e10;
+ far  part  by  eullK_finite_var_far's  5/8);  sources  for
+ the  W  measurements:  S3c  (END_GAME  3.6),  day029_dcheck
+ (1e10  splice,  |D|  =  0.5951).
