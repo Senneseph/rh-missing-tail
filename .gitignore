@@ -29,3 +29,13 @@ out_*.log
 # the data and stays in git (private repo; GitHub keeps it forever).
 # Band/zero data (.f64/.dat) remain untracked, as before.
 !scripts/rh/ckpt_h1_3e10/widx*.pts
+# Fleet final data delivered on the 10TB drive (see
+# scripts/rh/h1_final_fleet/README.txt): full 4090-box logs +
+# assembled ledger slice, 5900x snapshot checkpoints, evidence.
+!scripts/rh/h1_final_fleet/*/out_*.log
+!scripts/rh/h1_final_fleet/5900x/ckpt/widx*.pts
+# box-local ops scratch — never for git
+scripts/rh/ckpt_h1_3e10/slice.queue
+scripts/rh/ckpt_h1_3e10/slice_queue.state
+scripts/rh/h1_backup.sh
+scripts/rh/hi3e10.hdd-symlink

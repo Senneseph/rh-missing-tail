@@ -1,0 +1,10 @@
+DESTROY-SAFE: YES   (final, 2026-09-25 07:50 UTC)
+Node 52294870 (2x RTX PRO 6000) data == 5900X, all bands byte-identical (md5):
+  A  hi1e9/zeros_hi31946e6_to_1e9.f64      7575f1e19fb386887d8d7584d2136b15
+  B  hi1e9/zeros_1002e6_to_2000e6.f64      f54aa4ee66457f805acd504d9fd11a3c
+  C  hi3e9/zeros_2002e6_to_3000e6.f64      eeb9a36169d5b2b40ae20dc384e748eb
+  D  hi3e10/zeros_2999e6_to_30000e6.f64    5baa1b07273b2933089f391f37ec4a58
+  (5900X: /tmp/md5h1_5900x.txt  |  node: /tmp/md5_node_bands.txt;  both marked DONE)
+L-shards: 11/11 md5 == official LMFDB pins (node stage_lshards log; 5900X verified).
+lowt:  zeros_0_to_1p2e3.f64 copied to scripts/rh/lowt/ (md5 d7bdf01d7840641d4cb384f124143cbd).
+Residual on node: transient per-window engine checkpoints + log history (regenerated elsewhere).

@@ -1,0 +1,190 @@
+day045_h1_supervisor.sh: line 39: cd: /home/jsmille/Projects/rh-missing-tail/scripts/rh: No such file or directory
+day045_h1_supervisor.sh: line 39: cd: /home/jsmille/Projects/rh-missing-tail/scripts/rh: No such file or directory
+2026-09-23 13:10:56 day045 supervisor start (lock held)
+2026-09-23 13:10:56 band spot check:  size=79  perm=777  first=2999246000.182257  last=-1.04560944582149e+185
+2026-09-23 13:10:56 BAND SIZE/PERM MISMATCH  (expect  size=740623021712  perm=777)  --  HOLD,  NO LAUNCH,  owner decides
+2026-09-23 13:14:46 day045 supervisor start (lock held)
+2026-09-23 13:14:46 band spot check:  size=740623021712  perm=777  first=2999246000.182257  last=30001045999.981976
+2026-09-23 13:14:47 L-shard  restored  to  /tmp:  zeros_8846000.dat
+2026-09-23 13:14:47 L-shard  restored  to  /tmp:  zeros_10946000.dat
+2026-09-23 13:14:47 L-shard  restored  to  /tmp:  zeros_13046000.dat
+2026-09-23 13:14:47 L-shard  restored  to  /tmp:  zeros_15146000.dat
+2026-09-23 13:14:47 L-shard  restored  to  /tmp:  zeros_17246000.dat
+2026-09-23 13:14:48 L-shard  restored  to  /tmp:  zeros_19346000.dat
+2026-09-23 13:14:48 L-shard  restored  to  /tmp:  zeros_21446000.dat
+2026-09-23 13:14:48 L-shard  restored  to  /tmp:  zeros_23546000.dat
+2026-09-23 13:14:48 L-shard  restored  to  /tmp:  zeros_25646000.dat
+2026-09-23 13:14:49 L-shard  restored  to  /tmp:  zeros_27746000.dat
+2026-09-23 13:14:49 L-shard  restored  to  /tmp:  zeros_29846000.dat
+2026-09-23 13:14:50 L-shards  verified  (11  x  md5  against  official  lmfdb  pins)
+2026-09-23 13:14:50 supervisor pid 395385  written  to  ckpt_h1_3e10/supervisor.pid
+2026-09-23 13:14:50 instance  1  launching  (env  WORKERS=4  contexts  x  H1_THREADS=2  threads;  windows=1-26;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-23 14:36:36 day045 supervisor start (lock held)
+2026-09-23 14:36:36 band spot check:  size=740623021712  perm=777  first=2999246000.182257  last=30001045999.981976
+2026-09-23 14:36:37 L-shards  verified  (11  x  md5  against  official  lmfdb  pins)
+2026-09-23 14:36:37 supervisor pid 432244  written  to  ckpt_h1_3e10/supervisor.pid
+2026-09-23 14:36:37 instance  1  launching  (env  WORKERS=4  contexts  x  H1_THREADS=2  threads;  windows=1-26;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-24 13:10:11 day045 supervisor start (lock held)
+2026-09-24 13:10:11 band spot check:  size=740623021712  perm=777  first=2999246000.182257  last=30001045999.981976
+2026-09-24 13:10:11 BAND SIZE/PERM MISMATCH  (expect  size=740623021712  perm=555)  --  HOLD,  NO LAUNCH,  owner decides
+2026-09-24 13:11:23 day045 supervisor start (lock held)
+2026-09-24 13:11:23 band spot check:  size=740623021712  perm=777  first=2999246000.182257  last=30001045999.981976
+2026-09-24 13:11:24 L-shards  verified  (11  x  md5  against  official  lmfdb  pins)
+2026-09-24 13:11:24 supervisor pid 951701  written  to  ckpt_h1_3e10/supervisor.pid
+2026-09-24 13:11:24 instance  1  launching  (env  WORKERS=4  contexts  x  H1_THREADS=2  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 10:56:59 day045 supervisor start (lock held)
+2026-09-25 10:56:59 band spot check:  size=740623021712  perm=777  first=2999246000.182257  last=30001045999.981976
+2026-09-25 10:56:59 BAND SIZE/PERM MISMATCH  (expect  size=740623021712  perm=555)  --  HOLD,  NO LAUNCH,  owner decides
+2026-09-25 10:57:52 day045 supervisor start (lock held)
+2026-09-25 10:57:52 band spot check:  size=740623021712  perm=777  first=2999246000.182257  last=30001045999.981976
+2026-09-25 10:57:53 L-shards  verified  (11  x  md5  against  official  lmfdb  pins)
+2026-09-25 10:57:53 supervisor pid 1445078  written  to  ckpt_h1_3e10/supervisor.pid
+2026-09-25 10:57:53 instance  1  launching  (env  WORKERS=4  contexts  x  H1_THREADS=8  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 10:58:00 instance  1  exited  rc=6
+2026-09-25 10:58:00 instance  2  launching  (env  WORKERS=4  contexts  x  H1_THREADS=8  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 10:58:06 instance  2  exited  rc=6
+2026-09-25 10:58:06 instance  3  launching  (env  WORKERS=4  contexts  x  H1_THREADS=8  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 10:58:12 instance  3  exited  rc=6
+2026-09-25 10:58:12 instance  4  launching  (env  WORKERS=4  contexts  x  H1_THREADS=8  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 10:58:18 instance  4  exited  rc=6
+2026-09-25 10:58:18 instance  5  launching  (env  WORKERS=4  contexts  x  H1_THREADS=8  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 10:58:24 instance  5  exited  rc=6
+2026-09-25 10:58:24 instance  6  launching  (env  WORKERS=4  contexts  x  H1_THREADS=8  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 10:58:30 instance  6  exited  rc=6
+2026-09-25 10:58:30 instance  7  launching  (env  WORKERS=4  contexts  x  H1_THREADS=8  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 10:58:36 instance  7  exited  rc=6
+2026-09-25 10:58:36 instance  8  launching  (env  WORKERS=4  contexts  x  H1_THREADS=8  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 10:58:42 instance  8  exited  rc=6
+2026-09-25 10:58:42 instance  9  launching  (env  WORKERS=4  contexts  x  H1_THREADS=8  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 10:58:48 instance  9  exited  rc=6
+2026-09-25 10:58:48 instance  10  launching  (env  WORKERS=4  contexts  x  H1_THREADS=8  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 10:58:54 instance  10  exited  rc=6
+2026-09-25 10:58:54 instance  11  launching  (env  WORKERS=4  contexts  x  H1_THREADS=8  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 10:59:00 instance  11  exited  rc=6
+2026-09-25 10:59:00 instance  12  launching  (env  WORKERS=4  contexts  x  H1_THREADS=8  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 10:59:06 instance  12  exited  rc=6
+2026-09-25 10:59:06 instance  13  launching  (env  WORKERS=4  contexts  x  H1_THREADS=8  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 10:59:12 instance  13  exited  rc=6
+2026-09-25 10:59:12 instance  14  launching  (env  WORKERS=4  contexts  x  H1_THREADS=8  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 10:59:18 instance  14  exited  rc=6
+2026-09-25 10:59:18 instance  15  launching  (env  WORKERS=4  contexts  x  H1_THREADS=8  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 10:59:24 instance  15  exited  rc=6
+2026-09-25 10:59:24 instance  16  launching  (env  WORKERS=4  contexts  x  H1_THREADS=8  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 10:59:30 instance  16  exited  rc=6
+2026-09-25 10:59:30 instance  17  launching  (env  WORKERS=4  contexts  x  H1_THREADS=8  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 10:59:36 instance  17  exited  rc=6
+2026-09-25 10:59:36 instance  18  launching  (env  WORKERS=4  contexts  x  H1_THREADS=8  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 10:59:42 instance  18  exited  rc=6
+2026-09-25 10:59:42 instance  19  launching  (env  WORKERS=4  contexts  x  H1_THREADS=8  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 10:59:48 instance  19  exited  rc=6
+2026-09-25 10:59:48 instance  20  launching  (env  WORKERS=4  contexts  x  H1_THREADS=8  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 10:59:54 instance  20  exited  rc=6
+2026-09-25 10:59:54 instance  21  launching  (env  WORKERS=4  contexts  x  H1_THREADS=8  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 11:00:00 instance  21  exited  rc=6
+2026-09-25 11:00:00 instance  22  launching  (env  WORKERS=4  contexts  x  H1_THREADS=8  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 11:00:09 day045 supervisor start (lock held)
+2026-09-25 11:00:09 band spot check:  size=740623021712  perm=777  first=2999246000.182257  last=30001045999.981976
+2026-09-25 11:00:09 L-shards  verified  (11  x  md5  against  official  lmfdb  pins)
+2026-09-25 11:00:09 supervisor pid 1447576  written  to  ckpt_h1_3e10/supervisor.pid
+2026-09-25 11:00:09 instance  1  launching  (env  WORKERS=4  contexts  x  H1_THREADS=3  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 11:00:15 instance  1  exited  rc=6
+2026-09-25 11:00:15 instance  2  launching  (env  WORKERS=4  contexts  x  H1_THREADS=3  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 11:00:21 instance  2  exited  rc=6
+2026-09-25 11:00:21 instance  3  launching  (env  WORKERS=4  contexts  x  H1_THREADS=3  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 11:00:27 instance  3  exited  rc=6
+2026-09-25 11:00:27 instance  4  launching  (env  WORKERS=4  contexts  x  H1_THREADS=3  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 11:00:33 instance  4  exited  rc=6
+2026-09-25 11:00:33 instance  5  launching  (env  WORKERS=4  contexts  x  H1_THREADS=3  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 11:00:39 instance  5  exited  rc=6
+2026-09-25 11:00:39 instance  6  launching  (env  WORKERS=4  contexts  x  H1_THREADS=3  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 11:00:45 instance  6  exited  rc=6
+2026-09-25 11:00:45 instance  7  launching  (env  WORKERS=4  contexts  x  H1_THREADS=3  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 11:00:51 instance  7  exited  rc=6
+2026-09-25 11:00:51 instance  8  launching  (env  WORKERS=4  contexts  x  H1_THREADS=3  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 11:00:57 instance  8  exited  rc=6
+2026-09-25 11:00:57 instance  9  launching  (env  WORKERS=4  contexts  x  H1_THREADS=3  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 11:01:03 instance  9  exited  rc=6
+2026-09-25 11:01:03 instance  10  launching  (env  WORKERS=4  contexts  x  H1_THREADS=3  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 11:01:09 instance  10  exited  rc=6
+2026-09-25 11:01:09 instance  11  launching  (env  WORKERS=4  contexts  x  H1_THREADS=3  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 11:01:15 instance  11  exited  rc=6
+2026-09-25 11:01:15 instance  12  launching  (env  WORKERS=4  contexts  x  H1_THREADS=3  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 11:01:21 instance  12  exited  rc=6
+2026-09-25 11:01:21 instance  13  launching  (env  WORKERS=4  contexts  x  H1_THREADS=3  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 11:01:27 instance  13  exited  rc=6
+2026-09-25 11:01:27 instance  14  launching  (env  WORKERS=4  contexts  x  H1_THREADS=3  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 11:01:33 instance  14  exited  rc=6
+2026-09-25 11:01:33 instance  15  launching  (env  WORKERS=4  contexts  x  H1_THREADS=3  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 11:01:39 instance  15  exited  rc=6
+2026-09-25 11:01:39 instance  16  launching  (env  WORKERS=4  contexts  x  H1_THREADS=3  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 11:03:15 day045 supervisor start (lock held)
+2026-09-25 11:03:15 band spot check:  size=740623021712  perm=777  first=2999246000.182257  last=30001045999.981976
+2026-09-25 11:03:15 L-shards  verified  (11  x  md5  against  official  lmfdb  pins)
+2026-09-25 11:03:15 supervisor pid 1450249  written  to  ckpt_h1_3e10/supervisor.pid
+2026-09-25 11:03:15 instance  1  launching  (env  WORKERS=4  contexts  x  H1_THREADS=2  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 11:03:21 instance  1  exited  rc=6
+2026-09-25 11:03:21 instance  2  launching  (env  WORKERS=4  contexts  x  H1_THREADS=2  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 11:03:27 instance  2  exited  rc=6
+2026-09-25 11:03:27 instance  3  launching  (env  WORKERS=4  contexts  x  H1_THREADS=2  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 11:03:33 instance  3  exited  rc=6
+2026-09-25 11:03:33 instance  4  launching  (env  WORKERS=4  contexts  x  H1_THREADS=2  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 11:03:39 instance  4  exited  rc=6
+2026-09-25 11:03:39 instance  5  launching  (env  WORKERS=4  contexts  x  H1_THREADS=2  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 11:03:45 instance  5  exited  rc=6
+2026-09-25 11:03:45 instance  6  launching  (env  WORKERS=4  contexts  x  H1_THREADS=2  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 11:03:51 instance  6  exited  rc=6
+2026-09-25 11:03:51 instance  7  launching  (env  WORKERS=4  contexts  x  H1_THREADS=2  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 11:03:57 instance  7  exited  rc=6
+2026-09-25 11:03:57 instance  8  launching  (env  WORKERS=4  contexts  x  H1_THREADS=2  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 11:04:02 instance  8  exited  rc=6
+2026-09-25 11:04:02 instance  9  launching  (env  WORKERS=4  contexts  x  H1_THREADS=2  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 11:04:08 instance  9  exited  rc=6
+2026-09-25 11:04:08 instance  10  launching  (env  WORKERS=4  contexts  x  H1_THREADS=2  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 11:04:14 instance  10  exited  rc=6
+2026-09-25 11:04:14 instance  11  launching  (env  WORKERS=4  contexts  x  H1_THREADS=2  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 11:04:20 instance  11  exited  rc=6
+2026-09-25 11:04:20 instance  12  launching  (env  WORKERS=4  contexts  x  H1_THREADS=2  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 11:04:26 instance  12  exited  rc=6
+2026-09-25 11:04:26 instance  13  launching  (env  WORKERS=4  contexts  x  H1_THREADS=2  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 11:04:32 instance  13  exited  rc=6
+2026-09-25 11:04:32 instance  14  launching  (env  WORKERS=4  contexts  x  H1_THREADS=2  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 11:04:38 instance  14  exited  rc=6
+2026-09-25 11:04:38 instance  15  launching  (env  WORKERS=4  contexts  x  H1_THREADS=2  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 11:04:44 instance  15  exited  rc=6
+2026-09-25 11:04:44 instance  16  launching  (env  WORKERS=4  contexts  x  H1_THREADS=2  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 11:04:50 instance  16  exited  rc=6
+2026-09-25 11:04:50 instance  17  launching  (env  WORKERS=4  contexts  x  H1_THREADS=2  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 11:04:55 instance  17  exited  rc=6
+2026-09-25 11:04:55 instance  18  launching  (env  WORKERS=4  contexts  x  H1_THREADS=2  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 11:05:01 instance  18  exited  rc=6
+2026-09-25 11:05:01 instance  19  launching  (env  WORKERS=4  contexts  x  H1_THREADS=2  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 11:05:07 instance  19  exited  rc=6
+2026-09-25 11:05:07 instance  20  launching  (env  WORKERS=4  contexts  x  H1_THREADS=2  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 11:05:13 instance  20  exited  rc=6
+2026-09-25 11:05:13 instance  21  launching  (env  WORKERS=4  contexts  x  H1_THREADS=2  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 11:05:19 instance  21  exited  rc=6
+2026-09-25 11:05:19 instance  22  launching  (env  WORKERS=4  contexts  x  H1_THREADS=2  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 11:05:25 instance  22  exited  rc=6
+2026-09-25 11:05:25 instance  23  launching  (env  WORKERS=4  contexts  x  H1_THREADS=2  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 11:05:31 instance  23  exited  rc=6
+2026-09-25 11:05:31 instance  24  launching  (env  WORKERS=4  contexts  x  H1_THREADS=2  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 11:05:36 instance  24  exited  rc=6
+2026-09-25 11:05:36 instance  25  launching  (env  WORKERS=4  contexts  x  H1_THREADS=2  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 11:05:42 instance  25  exited  rc=6
+2026-09-25 11:05:42 instance  26  launching  (env  WORKERS=4  contexts  x  H1_THREADS=2  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 11:05:48 instance  26  exited  rc=6
+2026-09-25 11:05:48 instance  27  launching  (env  WORKERS=4  contexts  x  H1_THREADS=2  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 11:05:54 instance  27  exited  rc=6
+2026-09-25 11:05:54 instance  28  launching  (env  WORKERS=4  contexts  x  H1_THREADS=2  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 11:06:00 instance  28  exited  rc=6
+2026-09-25 11:06:00 instance  29  launching  (env  WORKERS=4  contexts  x  H1_THREADS=2  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 11:06:06 instance  29  exited  rc=6
+2026-09-25 11:06:06 instance  30  launching  (env  WORKERS=4  contexts  x  H1_THREADS=2  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-25 11:06:12 instance  30  exited  rc=6
+2026-09-25 11:06:12 MAX_ATTEMPTS=30  reached  --  stopping,  owner decides
+2026-09-25 11:06:12 day045 supervisor exit  (total  instances:  31)
+2026-09-25 12:46:21 day045 supervisor start (lock held)
+2026-09-25 12:46:21 band spot check:  size=740623021712  perm=777  first=2999246000.182257  last=30001045999.981976
+2026-09-25 12:46:21 L-shards  verified  (11  x  md5  against  official  lmfdb  pins)
+2026-09-25 12:46:21 supervisor pid 1491145  written  to  ckpt_h1_3e10/supervisor.pid
+2026-09-25 12:46:21 instance  1  launching  (env  WORKERS=4  contexts  x  H1_THREADS=2  threads;  windows=1-11;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
