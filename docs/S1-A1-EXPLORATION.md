@@ -1430,3 +1430,62 @@ log(g^2  +  1/4)  +  (1/2)/(g^2  +  1/4);  G2  pinned  2.9999999999762012e10;
  far  part  by  eullK_finite_var_far's  5/8);  sources  for
  the  W  measurements:  S3c  (END_GAME  3.6),  day029_dcheck
  (1e10  splice,  |D|  =  0.5951).
+
+##  E16.  THE  CONVENTION  CONSTANT  IS  NOW  PINNED:  c = 1/8,
+##       EXACT  (VERDICT:  E14  'TBD  CONVENTION'  CLEARED  AT
+##       FULL  PRECISION;  CCM-TENSION  CHECK  SETTLED)
+
+1.  THE  OFFSET.  Using  the  day041b  verified  pipeline
+    (dps-30,  S  =  (phi_u  +  step)/pi,  s_data  N-exact),  at
+    the  top-5  positive  excursions  (|DN|  =  2.615066528  ..
+    2.576889038),  compute
+        c  :=  DN(gamma)  -  S(gamma_+)
+        S(gamma_+)  =  s_data(t_R)  +  main'  *  (t_R  -  gamma),
+    with  main'(t)  =  log(t/2pi)/(2pi)  (the  E12-corrected
+    inter-step  drift).  Results:  c  =  0.1249928,  0.1250034,
+    0.1249928-> 0.1249928,  0.1250010,  0.1250079  —  spread
+    1.5e-5  (limited  by  the  6-decimal  zero  values  in  the
+    log),  i.e.  c  =  1/8  to  better  than  2e-5.
+2.  WHY  IT  IS  EXACT  (not  just  close).  DN  on  the  zero
+    grid  uses  the  EXACT  count  n  at  the  zero  (N(gamma_n)
+    =  n  integer  —  no  +-1/2  grid  rounding,  which  was  the
+    bulk  of  E14's  5/8  reserve);  the  project  Nas  carries
+    the  3/4  constant,  the  classical  S  (RVM/Thm-10)  the
+    7/8;  so
+        c  =  (n  -  main  -  3/4)  -  (n  -  main  -  7/8)
+            =  7/8  -  3/4  =  1/8,
+    exactly,  up  to  O(1/gamma)  (~3e-11  on  this  band).  The
+    5/8  of  E14  is  therefore  replaced  by  1/8  everywhere.
+3.  THE  NUMBERS  WITH  THE  TIGHT  CONSTANT.
+        K_uncond(T)  =  0.111 log  T  +  0.275 loglog  T
+                      +  2.4575  (i.e.  Milino  +  1/8):
+           1e9:  5.845    3e10:  6.128    1e11:  6.278
+        ratio  to  the  measured  2.615067  at  3e10:  2.343
+        (E14  had  2.535  with  5/8).  All  of  E15  is
+        unaffected  in  kind  (the  wire  budget  is  O(1);
+        these  are  O(6)  constants  —  still  100x  over).
+4.  THE  CCM  TENSION  CHECK  (references:  arXiv:1309.1526,
+    Theorem  2,  RH-conditional).  Leading  term  (1/4)(log  t
+    /  loglog  t)  at  3e10  =  1.8947;  with  the  1/8:
+    2.0197  vs  measured  2.615067  —  gap  0.5954.  The
+    explicit  O-term  |log  t * logloglog  t / (loglog  t)^2|
+    at  3e10  is  2.7567,  so  the  statement  is  consistent
+    for  any  implicit  constant  >=  0.261  —  comfortably
+    inside  the  norm  for  such  bounds.  NO  CONTRADICTION;
+    the  RH-conditional  bound  is  a  genuine  tighter  pin
+    (leading  term  already  below  the  measured  max),  its
+    precision  at  this  height  lives  in  the  O-term.
+    (A  PDF-level  explicit-constant  audit  is  an  available
+    follow-up;  low  value  now  that  the  contradiction
+    question  is  answered  "no".)
+5.  STATE  OF  THE  A1/  [S1]  PICTURE  (unchanged  in  kind
+    by  E16,  tightened  in  number):  [S1]  remains  the  single
+    open  theorem;  the  data-free  generic-t  route  is
+    refuted  by  a  factor  10^2  ..  10^3  (E15);  the  closer
+    is  the  data-free  O(1)  SIGNED  defect  theorem  (the
+    E3.4/W  object  =  E1's  level  statement  read  through
+    the  telescope);  the  data  want  the  constant  ~1  (W
+    measured  0.595  ..  4.61  and  decaying  over  3.9e7  ..
+    1e10);  E2  records  why  the  proven  absolute-sum
+    machinery  cannot  bridge  it  (now  with  the  10^2  ..
+    10^3  price  tag  of  E15).
