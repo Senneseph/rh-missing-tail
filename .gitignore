@@ -23,3 +23,9 @@ out_*.log
 *.pid
 *.pids
 *.pts
+# The H1 fill ledger (certified computed output — a month of fleet
+# compute, ~200 KB) is tracked deliberately: the *.pts rule above
+# protects the regenerable band/checkpoint scratch; the ledger is
+# the data and stays in git (private repo; GitHub keeps it forever).
+# Band/zero data (.f64/.dat) remain untracked, as before.
+!scripts/rh/ckpt_h1_3e10/widx*.pts

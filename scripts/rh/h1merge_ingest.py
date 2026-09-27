@@ -44,6 +44,46 @@ def _k_of_row(f_):
     return round(2.0 * (float(f_[2]) - float(f_[3])))
 
 
+def rdopen(path):
+    """Open READ-ONLY at the OS level (O_RDONLY).  Every source read
+    in this tool goes through here: there is no open mode available
+    in this code path that could write."""
+    return os.fdopen(os.open(path, os.O_RDONLY), "r")
+
+
+def _rd_bytes(path):
+    """Read a file read-only (O_RDONLY) as bytes, for hashing."""
+    with os.fdopen(os.open(path, os.O_RDONLY), "rb") as f:
+        return f.read()
+
+
+def source_snapshot(dirs):
+    """md5 of every source .pts, keyed by absolute path."""
+    import hashlib
+    snap = {}
+    for d in dirs:
+        for p in iter_pts_files(d):
+            snap[os.path.abspath(p)] = hashlib.md5(
+                _rd_bytes(p)).hexdigest()
+    return snap
+
+
+def source_verify(snap):
+    """Re-read every snapshotted source; return [(path, why)] of any
+    that are MISSING or CHANGED (why in {MISSING, CHANGED}).
+    run_ingest HALTs (exit 6) on a non-empty result: that is the
+    proof-of-non-destruction, checked AFTER every run's writes."""
+    import hashlib
+    bad = []
+    for p, h in sorted(snap.items()):
+        if not os.path.exists(p):
+            bad.append((p, "MISSING"))
+            continue
+        if hashlib.md5(_rd_bytes(p)).hexdigest() != h:
+            bad.append((p, "CHANGED"))
+    return bad
+
+
 def parse_pts(path):
     """Parse a .pts checkpoint file.
 
@@ -55,7 +95,9 @@ def parse_pts(path):
     matching the engine's _parse_wk_file_path semantics.  audit,
     rows are skipped (attached metadata, not merged)."""
     rows, dropped, corrupt = [], 0, None
-    nonempty = [ln for ln in open(path).read().split("\n") if ln]
+    with rdopen(path) as f:
+        text = f.read()
+    nonempty = [ln for ln in text.split("\n") if ln]
     for idx, ln in enumerate(nonempty):
         if ln.startswith("audit,"):
             continue
@@ -101,7 +143,9 @@ def load_all(d):
             sys.exit(3)
         if dropped:
             sys.stderr.write(
-                "note: dropped torn-tail line in %s (recomputes)\n" % p)
+                "note: dropped torn-tail line in %s (that k recomputes;"
+                " complete rows above it are kept)\n" % p)
+        if not rows:
             continue
         # x from the filename (same %.10g format as the writer)
         base = os.path.basename(p)
@@ -146,6 +190,8 @@ def run_ingest(srcs, target, dry):
                 "refuse: target %s overlaps source %s\n" % (target, s))
             sys.exit(4)
     xkraw, conflicts, prov = union_dirs(srcs)
+    # source snapshot BEFORE any write (proof-of-non-destruction)
+    snap = source_snapshot(srcs)
     if conflicts:
         sys.stderr.write(
             "\nCONFLICTS: same (x,k) certified differently\n")
@@ -177,7 +223,15 @@ def run_ingest(srcs, target, dry):
                 "overwrite silently.\n" % name)
             sys.exit(5)
         if not dry:
-            with open(path, "w") as f:
+            try:
+                fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL,
+                             0o644)
+            except FileExistsError:
+                sys.stderr.write(
+                    "HALT: %s appeared between check and write;\n"
+                    "never overwrite.\n" % name)
+                sys.exit(5)
+            with os.fdopen(fd, "w") as f:
                 f.write(payload)
                 f.flush()
                 os.fsync(f.fileno())
@@ -190,6 +244,19 @@ def run_ingest(srcs, target, dry):
     if full < len(manifest):
         print("NOTE: some windows are incomplete in the union; the\n"
               "engine's resume banner names them on the final launch.")
+    # proof-of-non-destruction: every source must be byte-identical
+    # to its pre-run snapshot
+    bad = source_verify(snap)
+    if bad:
+        for p, why in bad:
+            sys.stderr.write(
+                "SOURCE INTEGRITY FAILURE: %s  %s\n" % (p, why))
+        sys.stderr.write(
+            "HALT: a source ledger changed during this run.  Stop\n"
+            "and inspect before any retry.\n")
+        sys.exit(6)
+    print("source integrity: %d source files verified UNCHANGED"
+          % len(snap))
 
 
 def run_census(dirs):
@@ -289,6 +356,20 @@ def selftest():
         ok = False
     except SystemExit as e:
         ok &= (e.code == 5)
+    # 10: source snapshot/verify detects a tampered source
+    snap = source_snapshot([C])
+    cp0 = C + "/widx00_x%.10g.pts" % XA
+    open(cp0, "a").write("ok,1,1,1\n")  # garbage append = change
+    bad = source_verify(snap)
+    ok &= (len(bad) == 1 and bad[0][1] == "CHANGED")
+    # 11: a clean full run verifies its sources unchanged (a failure
+    #     would have raised SystemExit and crashed the selftest)
+    T2 = os.path.join(d, "target2")
+    os.makedirs(T2)
+    run_ingest([A, C], T2, dry=False)
+    ok &= (len(os.listdir(T2)) == 3
+           and len(open(T2 + "/widx99_x%.10g.pts" % XA).read()
+                   .splitlines()) == 24)
     print("selftest:", "PASS" if ok else "FAIL")
     sys.exit(0 if ok else 1)
 
