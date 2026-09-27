@@ -1201,3 +1201,124 @@ discipline;  E12  stands  as  written):
     slow  random  walk)  is  UNAFFECTED  and  is  in  fact
     SHARPENED:  the  drift  per  gap  is  not  just  O(1),
     it  is  ~1  with  the  jumps.
+
+## E14.  The  [S1]  gap  as  a  single  number  —  the  wire  is
+##       LINEAR  in  K,  so  the  data-free  Milino  K  is  a  live
+##       closer  (VERDICT:  OPEN  —  two  live  endings,  one
+##       decision  computation  apart)
+
+High-level  statement  (what  would  close  [S1],  what  it
+needs,  and  whether  it  is  feasible  here).
+
+1.  THE  WIRE'S  EXACT  K-FORM  (verified  this  session  against
+    the  Lean  source,  W2M5  +  M6  +  W2B3).  The  walk  bound
+    K  =  sup|DN|  enters  the  certificate  in  exactly  two
+    linear  places  and  nowhere  else:
+      m5_floor:   S1  -  R  >=  -K * (|p 0|  +  |p M|  +
+                   sum  |Dp  j|)      (the  log-kernel  cost)
+      m5_idn:     |I_DN|  <=  K * sum|Dp|  +  L * (gap  form),
+                   L  =  Rho(G2)  (the  RVM  slope  at  the
+                   frontier)
+    The  M6  composition  is  K-free  on  the  dev  side  (the
+    feed  1  -  13/g  is  pure  detector  algebra)  and  carries
+    the  noise  total  Bwire  +  Mr  +  Mf  as  a  NAMED
+    hypothesis.  Consequence:  the  viability  of  [S1]  at  any
+    candidate  K  is  ONE  inequality  —
+        K * (kernel  cost  on  the  band)  +  L-terms  <=
+        measured  wire  slack,
+    and  the  kernel  half  is  CLOSED  (W2B3:  17/8  on  the
+    far  side,  G2-free).  There  is  no  hidden  K-dependence;
+    the  only  question  is  the  size  of  the  measured
+    slack.
+
+2.  THE  DATA-FREE  K  (unconditional,  no  data  beyond  the
+    pin,  from  the  E7-verified  literature).  Milino
+    (arXiv:1208.5846,  Theorem  1):  |S(t)|  <=  0.111  log t
+    +  0.275  loglog  t  +  2.45  for  all  t  >=  e;  plus
+    the  DN  =  S  +  convention  offset  bounded  conservatively
+    by  5/8  (the  7/8-vs-3/4  shift  1/8  +  the  +-1/2  grid
+    rounding  of  E1;  the  EXACT  offset  is  computable  —
+    item  4).  Hence  a  provable  data-free
+        K_uncond(T)  =  0.111  log  T  +  0.275  loglog  T
+                        +  2.45  +  5/8
+    with  K_uncond  =  6.21  (1e9),  6.30  (2e9),  6.35  (3e9),
+    6.63  (3e10),  6.78  (1e11),  7.33  (1e13)  —  a  slow
+    grow.  Against  the  measured  pin  2.615067  on
+    (1e7,  3e10]:  the  ratio  is  2.535  at  3e10  —  the
+    same  order,  not  the  10^10  of  the  certified  A2
+    majorant  (which  is  the  total-variation  bound,  a
+    different,  deliberately  loose,  object).
+
+3.  THE  RH-CONDITIONAL  CROSS-CHECK  (CCM  Theorem  2,
+    arXiv:1309.1526,  E7-verified  leading  term).  Under  RH
+    |S(t)|  <=  (1/4)  log t / loglog t  +  O(log t  logloglog
+    t / (loglog t)^2):  at  3e10  the  leading  term  is  1.895,
+    +5/8  gives  2.520  —  which  sits  0.095  BELOW  our
+    measured  sup|DN|  2.615067.  NOT  a  contradiction:  the
+    O-term  has  magnitude  2.74  at  3e10  with  an  implicit
+    constant,  and  0.095  is  a  3.5%  effect.  But  recorded
+    as  a  FACT:  the  top  of  the  measured  walk  presses
+    flush  against  the  RH-conditional  leading-term  envelope
+    +  convention.  Tension  check  against  the  EXACT  CCM
+    explicit  form  (with  its  O-constant)  is  queued
+    references-first;  no  conclusion  drawn  here.
+
+4.  THE  DECISION  COMPUTATION  (bounded,  executable,  the
+    only  thing  separating  the  two  endings):
+   (i)   the  exact  convention  offset  DN(gamma_n)  -
+         S_cont(gamma_n)  from  the  band  counts  vs  a  dps-40
+         argument  evaluation  at  the  zeros  (minutes;
+         tightens  the  5/8  to  the  actual  c,  probably
+         1/8  +  O(1/tau));
+   (ii)  the  W2M6  pin  unit  (W2-BEYOND  section  7  open
+         content  (c))  re-pinned  at  G2  =  3e10  with  K
+         stated  as  the  Milino  form  (a  CITED  hypothesis
+         in  the  m5  pattern);
+   (iii) the  wire  slack  at  the  3e10  straddles:  the
+         S1LowT  strip_squeeze  total  (Bwire  +  Mr  +  Mf)
+         against  the  dev  feed  1  -  13/g,  with  the
+         K-term  evaluated  at  6.63  vs  2.615  (the  gap  is
+         the  linear  factor  2.535  on  the  K-term  portion
+         of  the  noise  total).
+    Verdict  by  arithmetic,  not  by  theorem:
+      if  the  slack  at  K  =  6.63  stays  positive  ->
+         [S1]  CLOSES  UNCONDITIONALLY  at  an  explicit
+         constant  (Milino  CITED  +  one  data  pin  +
+         measured  fills);  NO  new  theorem;  the  hA1
+         clause  is  discharged  by  a  classical  bound,
+         and  A1-proper  demotes  to  a  sharpness  item;
+      if  the  slack  is  negative  at  6.63  ->  A1
+         becomes  QUANTITATIVE  with  a  named  target:
+         "bound  |DN(gamma)|  (equivalently  S  at  the
+         zeros  +  c)  by  K_max",  where  K_max  =  the
+         wire's  absorption  ceiling  measured  in  (iii)
+         —  strictly  sharper  than  "S  is  O(1)  at  the
+         zeros"  and  directly  attackable  (the  E7
+         structural  fact  —  no  Omega  lands  at  zeros
+         —  plus  E2's  delta-floor  barrier  tell  us
+         WHERE  to  look:  a  signed-cancellation
+         theorem  of  exactly  the  E3.4  shape  at
+         scale  K_max).
+
+5.  THE  HIGH-LEVEL  STATE  (the  picture  to  carry  forward).
+    [S1]  is  no  longer  "an  open  theorem  of  unknown
+    size".  It  is  ONE  number  —  K_max,  the  wire's
+    absorption  ceiling  —  against  two  known
+    competitors:  the  measured  pin  2.615067  (data,
+    in  hand)  and  the  classical  Milino  6.63  (in  hand).
+    The  program  either  closes  [S1]  unconditionally  with
+    zero  new  mathematics  (ending  i)  or  learns  the  exact
+    size  of  the  gap  it  must  fill,  as  a  named  constant
+    (ending  ii).  Under  either  ending  the  RH  chain  is
+    what  the  preprint  says  it  is  —  one  named  clause
+    —  and  that  clause  now  has  a  MEASURABLE  size.
+    Nothing  here  is  an  RH  claim  or  a  sub-claim:  the
+    fills  are  still  the  measured  (C-pending)  leg,  and
+    the  composition  stays  at  the  named-hypothesis  level
+    until  (iii)  lands.
+
+Artifacts/pointers:  W2M5.lean  (m5_floor  /  m5_idn,  the
+linear  K-form),  M6.lean  (the  composition,  K-free  feed),
+W2B3  (the  17/8  kernel  closure,  G2-free),  E7  (Milino  +
+CCM  verified  against  primary  text),  W2-BEYOND  section  7
+(open  content  (c)  =  the  W2M6  unit  of  item  4(ii)).
