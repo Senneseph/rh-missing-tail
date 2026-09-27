@@ -522,3 +522,15 @@ has landed)
 -  The W2-beyond open content is restated in
     docs/S1-A1-EXPLORATION.md (the A1 restatement;  the
     absolute-sum barrier).
+
+## CORRECTION ADDENDUM (grid counts, append-only)
+
+The planning text "25 straddles per window" predates the executed
+engines: the k = 0 straddle (t = g, singular in R_closed's
+denominator) is excluded in BOTH day034 and day034b from day 0, so
+every executed H1 grid is 24 straddles per window. Superseded
+figures in this file: header "975 points" (executed: 39 windows x
+24 = 936, verified: min margin_cert 1.0816362118, 0 rows below
+1); 3.9(b) "25 straddles per window"; 3.10(b) "29 windows / 725
+straddles" (executed: 29 windows x 24 = 696 points).  No
+conclusion, reading, or margin figure in this file is affected.

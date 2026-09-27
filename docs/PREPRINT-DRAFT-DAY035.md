@@ -425,3 +425,13 @@ the text):
     A2-class (Section 2).  The pre-registered block of Section 6
     is preserved verbatim;  the post-data classification is the
     labeled addendum.
+
+## CORRECTION ADDENDUM (grid counts, append-only)
+
+The "2250-point sweep to 10^9" (and any "25 straddles" figure in
+this draft) is superseded by the executed grids: the k = 0 straddle
+(singular in R_closed) is excluded in both H1 engines, so the
+executed cert grids are 24 straddles per window: 39 x 24 = 936
+points on (10^6, 10^9] and 29 x 24 = 696 points on (3 x 10^9,
+3 x 10^10].  All margin figures and readings in this draft stand
+as written.

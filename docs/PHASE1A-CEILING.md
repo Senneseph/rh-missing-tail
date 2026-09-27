@@ -145,3 +145,17 @@ screen was.
 
 *Companion: `KNOWN_LIMITATIONS.md` (H1–H4 + the §3 audit),
 `RH-PROOF-OUTLINE.md` (the path), `DISCOVERY_LOG.md` (day033–034).*
+
+## CORRECTION ADDENDUM (grid counts, append-only)
+
+Section 2's "2250 grid points (90 windows at 8% spacing x 25
+straddles)" and section 4's "39 windows x 25 straddles = 975
+points" / "all 975 points OK" are superseded by the executed
+ledgers: the k = 0 straddle (singular in R_closed) is excluded in
+both engines, so the executed grids are 24 straddles per window.
+Verified from out_day034_h1cert_b.txt: 936 rows (935 ok + 1 budget-
+width FLAG); global min margin_cert = 1.0816362118 at
+t = 1000000001.61565 (section 4's "1.081637" matches to the
+printed digit); margin_cert < 1: NONE; margin_computed < 1: NONE.
+The C-1 reading and every margin figure stand; only the grid
+counts are corrected (3e9: 39 x 24 = 936; 3e10: 29 x 24 = 696).

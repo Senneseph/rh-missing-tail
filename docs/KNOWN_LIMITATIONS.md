@@ -232,3 +232,13 @@ them are now bounded, located, and fixable one at a time.
 *Companion documents: `RH-PROOF-OUTLINE.md` (the path and its state),
 `ROUTE-ANCESTRY-AND-NOVELTY-2026-09-17.md` (the ancestors and the
 novelty claims with their limits), `DISCOVERY_LOG.md` (25x[8]/day029).*
+
+## CORRECTION ADDENDUM (grid counts, append-only)
+
+The H1 entry's "39 windows x 25 straddles = 975" and "all 975
+points certified" are superseded: the k = 0 straddle (singular in
+R_closed) is excluded in both engines, the executed 3e9 grid is
+39 x 24 = 936 points (verified from the ledger: min margin_cert
+1.0816362118, 0 rows below 1, 1 budget-width FLAG), and the 3e10
+grid is 29 x 24 = 696 points.  No limitation statement is
+affected.
