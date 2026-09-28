@@ -7541,3 +7541,33 @@ The day's events, in order:
    day041b  JUMPs  are  0.893  ..  0.981;  typical  gap
    ~0.29  not  0.62  —  drift  per  gap  ~1.0  with  the
    jumps,  sharpening  the  E12  reading).
+
+## 2026-09-28 ~01:15-01:50 EDT — W2M6 GREEN + the day048 margin decider landed (day047 in flight)
+
+1. W2M6 (the [S1] A1 pin-and-refutation unit) BUILT GREEN and pushed:
+   K_mil(3e10) in [612/100, 615/100) with c = 1/8, pG1 t >= 1151/100 on
+   [3.2e9, 3e10], K_mil * |pG1| >= 70, feed 1 - 13/t < channel; m6_floor
+   wire at K := K_mil(3e10). Full lake build green (17444 jobs).
+   Commits 7c01e4f (code) + a1675ca (E17 doc). The linarith atom-shape
+   failure on `2 * log (32 * 10 ^ 8)` and the silent ℕ-typed
+   `have h : 0 <= (1/2)/(...)` are recorded in E17.3.
+
+2. The day048 margin reissue (worst-10 negative-k points, dps-90/120,
+   f64-pairwise vs 80-bit-exact) COMPLETED (179.6 min) and landed:
+   mnew = 0.50227 .. 0.50363 at all 10 points (ALL POSITIVE); dps-90 ==
+   dps-120 bit-identical everywhere; f64-vs-ld agreement <= 1.7e-6; the
+   80-bit stream replica at the two k = -12 straddle points is
+   BIT-EXACT against the engine. KEY FINDING: the margin is a function
+   of x ALONE (at fixed x the four k values agree to < 2e-6) — the
+   f64 ledger's k-structure at these points was rounding noise. MIN
+   WORST-WINDOW MARGIN = 0.50227 at x = 3232170976.199116. Also
+   identified: the V0 ledger "mnew" column is the dev quantity
+   (~0.9999999963, per-point identical in the reissue files), not the
+   margin proper. The summarize() filename- indexing crash was fixed
+   (absolute-path glob; digits at basename[2:4]); SUMMARY.txt written.
+
+3. day047 (the D-band signed-defect measurement, 5 heights,
+   G1 = 2999246000.18 ... G2 = 3e10) is 4 of 5 done: |D| = 1.628 at
+   the worst straddle, 2.691 at 1e10, 1.015 at 1.5e10, 5.171 at 2.5e10;
+   sum-side precision PASS (fsum == mpmath-dps-30 bit-exact). D(2.99e10)
+   (the wire-nearest height) still running (~1.5 h ETA).

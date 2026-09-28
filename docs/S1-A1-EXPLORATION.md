@@ -1703,3 +1703,83 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
         and  linarith  then  ignores  it  as
         not  a  Real  hypothesis)  --  always
         annotate  (0  :  R).
+
+## E18.  The  two  decision  measurements:  the  dps-120  margin
+##       re-issue  (landed)  and  the  3e10  signed-defect  run
+##       (in  flight,  4  of  5  heights)
+
+1.  THE  MARGIN  RE-ISSUE  (complete  --  the  worst-10
+    negative-k  points,  re-measured  at  dps-90  AND
+    dps-120  in  BOTH  arithmetic  modes  (f64-pairwise
+    vs  80-bit-exact),  zeta/quads  at  dps-120).
+      mnew  (high-precision  margin)  at  all  10  points:
+          0.50227  ..  0.50363,  ALL  POSITIVE.
+      *  dps-90  ==  dps-120  BIT-IDENTICAL  everywhere
+         (precision  saturates  at  90  digits;  no
+         further  reissue  is  needed).
+      *  f64  vs  80-bit-exact:  |diff|  ≤  1.7e-6  at
+         every  point;  at  the  two  k = -12  straddle
+         points  the  80-bit  stream  replica  is
+         BIT-EXACT  against  the  engine  (replica
+         verified  before  use,  as  pre-registered).
+      *  THE  MARGIN  IS  X-ONLY,  NOT  K.  At  fixed  x
+         the  four  negative  k  values  present  (k =
+         -12  ..  -9)  agree  to  <  2e-6  with  each
+         other  (e.g.  four  values  at  x =
+         3232170976.199116:
+         0.5022754  /  0.5022759  /  0.5022776  /
+         0.5022761).  The  k-structure  the  f64  ledger
+         showed  at  these  points  was  ROUNDING  NOISE;
+         the  true  margin  depends  on  x  alone
+         (consistent  with  the  drift  law:  the  k
+         structure  lives  in  the  DEFECT,  not  the
+         margin).
+      *  Smooth  monotonic  rise  in  x:  0.50228  at
+         3.23e9  ->  0.50363  at  4.07e9.
+      *  MIN  WORST-WINDOW  MARGIN  =  0.50227  at  x =
+         3232170976.199116  (k  any;  the  x  alone
+         suffices).
+      *  V0-LEDGER  FIELD  IDENTIFIED:  the  ledger's
+         "mnew"  column  equals  the  dev  quantity
+         (≈  0.9999999963,  confirmed  per-point
+         identical  in  the  reissue  files)  --  the
+         ledger  stored  the  DEVIATION,  not  the
+         margin  proper.  The  margin  proper  is  the
+         0.5023-class  number  in
+         out_day048_pts/SUMMARY.txt.
+      CONSEQUENCE  FOR  THE  CLOSER:  the  C-reading
+      stays  in  its  constructive  branch;  the
+      margin  floor  entering  the  A1  wire
+      computation  is  now  0.50227  (measured,
+      dps-120,  dual-mode  cross-checked),  not  the
+      ~ 1  the  ledger  field  suggested.
+
+2.  THE  SIGNED-DEFECT  RUN  (in  flight  --  4  of  5
+    heights  landed).  D(t)  =  sum_{(G1,G2]}  p  -
+    int_{G1}^{G2}  p  rho  over  the  D  band
+    G1  =  2999246000.18,  G2  =  3e10  (92,574,167,527
+    D-band  zeros;  boundary  re-cross-checked  against
+    the  pinned  last  zero  29999999999.762012  read
+    from  the  file  itself).
+      SUM-SIDE  PRECISION:  fsum  vs  mpmath-dps-30
+      direct,  first  200000  slice  zeros:  |d|  =  0
+      (BIT-EXACT,  <  1e-6  required),  PASS.
+      D(3232170970.11)  =  -0.6300  -  1.5008i,
+          |D|  =  1.628   (worst  drift  straddle)
+      D(1e10)       =  0.6536  -  2.6100i,   |D|  =  2.691
+      D(1.5e10)     =  0.7297  +  0.7056i,   |D|  =  1.015
+      D(2.5e10)     =  4.5368  -  2.4811i,   |D|  =  5.171
+      D(2.99e10)    =  ...  (the  final  height,  the
+          one  nearest  the  wire:  still  running;
+          ~  1.5  h).
+      Interim  verdict:  |D|  <=  5.171  at  every
+      measured  height  --  the  O(1)  signed-defect
+      story  HOLDS  to  the  3e10  band  so  far;  the
+      deciding  number  arrives  with  the  5th  height.
+
+3.  STATE.  Lean  side  complete  this  turn  (W2M6
+    GREEN,  imported,  pushed  --  E17).  Data  side:
+    the  margin  floor  is  now  a  MEASURED  number
+    (0.50227);  the  wire  feed  side  is  machine-
+    proven  (>=  70  vs  <=  1,  E17).  One  number
+    outstanding:  D(2.99e10).

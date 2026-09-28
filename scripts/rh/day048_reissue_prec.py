@@ -334,7 +334,7 @@ def summarize():
         except (KeyError, TypeError):
             pass
         lines.append("p%02d %+3d %.9f  %.12f  %.12f  %.12f  %+.3e  %s"
-                     % (int(fn[3:5]), p["k"], p["x"], p["mnew"], v1, v2,
+                     % (int(os.path.basename(fn)[2:4]), p["k"], p["x"], p["mnew"], v1, v2,
                         v2 - 1.0,
                         ("%.2e" % f64_ld) if f64_ld is not None else "  -"))
     txt = "\n".join(lines)
@@ -351,6 +351,6 @@ if __name__ == "__main__":
               % (p["k"], p["x"], p["t"], p["mnew"]), flush=True)
     t0 = time.time()
     with Pool(N_WORKERS) as pool:
-        pool.map(run_point, list(zip(range(len(sel))), sel))
+        pool.starmap(run_point, list(zip(range(len(sel)), sel)))
     print("\ndone in %.1f min" % ((time.time() - t0) / 60.0), flush=True)
     print(summarize(), flush=True)
