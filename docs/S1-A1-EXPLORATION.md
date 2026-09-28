@@ -1769,17 +1769,44 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
       D(1e10)       =  0.6536  -  2.6100i,   |D|  =  2.691
       D(1.5e10)     =  0.7297  +  0.7056i,   |D|  =  1.015
       D(2.5e10)     =  4.5368  -  2.4811i,   |D|  =  5.171
-      D(2.99e10)    =  ...  (the  final  height,  the
-          one  nearest  the  wire:  still  running;
-          ~  1.5  h).
-      Interim  verdict:  |D|  <=  5.171  at  every
-      measured  height  --  the  O(1)  signed-defect
-      story  HOLDS  to  the  3e10  band  so  far;  the
-      deciding  number  arrives  with  the  5th  height.
+      D(2.99e10)    =  4.9789  -  0.7885i,   |D|  =  5.041
+          (the  wire-nearest  height;  92,219,492,047
+          zeros  streamed;  4609  s;  quad  error  0.00)
+      FULL  RUN  DONE  (27111  s  total  for  the
+      five  heights).
+      PRE-REGISTERED  READING  FIRES  (the  O(1)
+      branch  of  the  day047  docstring):  |D|  stays
+      <=  5.171  at  every  height  on  the  band  --
+      the  signed-defect  data  story  (the  constant
+      the  A1  O(1)  theorem  must  have)  COMPLETES
+      TO  3e10.  No  refutation  signal  anywhere
+      (the  other  pre-registered  branch,
+      |D|  >>  O(1):  never  fired).
+      STRUCTURE  NOTE:  |D|  runs  ~  1  ..  2.7  on
+      the  lower  half  (3.2e9  ..  1.5e10)  and
+      ~  5.0  ..  5.2  on  the  upper  half
+      (2.5e10  ..  2.99e10)  --  a  window-effect
+      (the  D-band  window  is  ~  10x  the  day029
+      splice  window),  not  a  blowup:  the
+      wire-nearest  value  5.041  is  BELOW  the
+      2.5e10  value,  i.e.  no  growth  toward  the
+      frontier.
 
-3.  STATE.  Lean  side  complete  this  turn  (W2M6
-    GREEN,  imported,  pushed  --  E17).  Data  side:
-    the  margin  floor  is  now  a  MEASURED  number
-    (0.50227);  the  wire  feed  side  is  machine-
-    proven  (>=  70  vs  <=  1,  E17).  One  number
-    outstanding:  D(2.99e10).
+3.  STATE  (final  for  the  3e10  data  side).
+    Lean:  W2M6  GREEN  --  feed  <=  1  vs  channel
+    >=  70  machine-proven,  K  and  pG1  pinned
+    (E17).  Data:  the  margin  floor  is
+    MEASURED  (0.50227,  x-only,  E18.1);  the
+    signed  defect  is  MEASURED  O(1)  to  the
+    wire  (max  |D|  =  5.171  on  the  band,
+    5.041  at  the  wire-nearest  height,  E18.2).
+    Every  number  the  [S1]  wire  consumes  on  the
+    data  side  is  now  in  hand.  What  remains
+    for  [S1]  is  exactly  what  E15  identified:
+    THE  DATA-FREE  O(1)  SIGNED-DEFECT  THEOREM
+    (equivalently,  E1:  an  O(1)  LEVEL  bound  on
+    S  at  the  zeros  --  unclaimed  in  the
+    literature  per  E7;  the  data  want  the
+    constant  ~  1  ..  5).  That  is  a  theorem
+    to  be  found,  not  a  computation  to  be
+    run.

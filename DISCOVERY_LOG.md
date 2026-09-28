@@ -7571,3 +7571,22 @@ The day's events, in order:
    the worst straddle, 2.691 at 1e10, 1.015 at 1.5e10, 5.171 at 2.5e10;
    sum-side precision PASS (fsum == mpmath-dps-30 bit-exact). D(2.99e10)
    (the wire-nearest height) still running (~1.5 h ETA).
+
+4. (02:43 EDT) day047 COMPLETED (total 7.53 h, 5 of 5
+   heights). D(2.99e10) = 4.9789 - 0.7885i, |D| =
+   5.041 (92,219,492,047 zeros streamed, 4609 s,
+   quad error 0.00). Full table: |D| = 1.628
+   (3.23e9 straddle), 2.691 (1e10), 1.015 (1.5e10),
+   5.171 (2.5e10), 5.041 (2.99e10). PRE-REGISTERED
+   O(1) READING FIRES: the signed-defect data story
+   completes to 3e10; the refutation branch
+   (|D| >> O(1)) never fired. Structure: ~1..2.7 on
+   the lower half of the band, ~5.0..5.2 on the
+   upper half (window effect: the D-band window is
+   ~10x the day029 splice window); no growth toward
+   the frontier (wire-nearest 5.041 is below the
+   2.5e10 value 5.171). E18 closed accordingly:
+   every number the [S1] wire consumes on the data
+   side is now measured; what remains for [S1] is
+   the data-free O(1) signed-defect theorem itself
+   (E15's target; E7: unclaimed in the literature).
