@@ -1489,3 +1489,139 @@ log(g^2  +  1/4)  +  (1/2)/(g^2  +  1/4);  G2  pinned  2.9999999999762012e10;
     1e10);  E2  records  why  the  proven  absolute-sum
     machinery  cannot  bridge  it  (now  with  the  10^2  ..
     10^3  price  tag  of  E15).
+
+##  E17.  ATTACK  ON  THE  SIGNED-DEFECT  THEOREM  (attempt  1):
+##       THREE  ROUTES,  EACH  MAPPED  TO  ITS  BREAK  POINT,  +
+##       THE  ALIASING  HYPOTHESIS  FOR  THE  4e-9  DRIFT
+##       (VERDICT:  THE  ATTACK  SPACE  IS  NOW  MAPPED;  TWO
+##       EXPERIMENTS  IN  FLIGHT  DECIDE  THE  DRIFT;  THE
+##       THEOREM  ITSELF  REMAINS  OPEN  --  BY  DESIGN)
+
+This  entry  is  the  honest  account  of  a  direct  attack  on
+the  E15  object  --  a  data-free  O(1)  bound  on  the  SIGNED
+ defect  W(t)  =  S1Sum  -  RSum  on  the  zero  splice  --
+attempted  and  mapped  route  by  route.  No  route  closes;
+ each  is  recorded  with  the  exact  obstruction  (that  record
+ is  the  deliverable  of  attempt  1  --  the  attack  space
+ before  the  theorem).
+
+0.  THE  OBJECT,  REFORMULATED  (why  it  is  what  it  is).
+    With  p_j  =  p(gamma_j;  t)  (the  kernel's  per-zero  pair-
+    log  factor)  and  DN_j  =  n_j  -  Nas(gamma_j)  (the  FIXED
+    sequence,  independent  of  t):
+        W(t)  =  p_0 DN_0  -  p_M DN_M  -  sum_j  (p_{j+1}  -  p_j)
+                DN_j          (sums  over  the  splice  zeros).
+    W  =  O(1)  uniformly  in  t  <=>  the  FIXED  DN  sequence
+    is  a  discrete  log-potential  against  the  ONE-PARAMETER
+    pole-kernel  family  p(.;  t)  up  to  O(1),  at  EVERY  t.
+    That  is  a  2D  RIGIDITY  statement:  DN  as  a  function
+    of  (j,  t)  --  the  t  enters  only  through  p(.;  t).
+    This  reformulation  (not  S-at-zeros  per  se)  is  the
+    attack  surface  the  rest  of  the  entry  probes.
+
+1.  ROUTE  A  (via  the  S  level,  the  E1  restatement).
+    Substituting  E16's  exact  offset  (DN  =  S(gamma_+)  +
+    1/8  +  O(1/gamma)):
+        W(t)  =  (1/8)(p_0  -  p_M)  +  sum_j  p_j S(gamma_j+)
+                +  boundary  terms.
+    If  |S(gamma)|  <=  L  (the  E1  level  bound):
+        |W|  <=  L * sum_j |p_j|  +  O(1)   ~  100 * L.
+    The  measured  level  is  L  ~  2.5  (|DN|  <=  2.615067,
+    E10)  --  the  bound  gives  ~  250,  i.e.  the  E15  K-
+    bound  in  another  outfit.  To  close  the  wire  (budget
+    O(1))  from  a  bare  level  bound  would  need  L  <=
+    0.01  --  250x  BELOW  the  measured  level.  OBSTRUCTION:
+    a  level  bound  on  S  is  the  WRONG  TOOL  --  the  theorem
+    must  use  the  CANCELLATION  of  the  pairing
+    sum_j  p_j  S(gamma_j),  not  its  absolute  value.
+    (This  is  the  E3.4  circularity  re-quantified:  even
+    the  desired  conclusion  plus  the  desired  hypothesis
+    do  not  close  the  distance;  the  pairing's  sign
+    structure  is  the  content.)
+
+2.  ROUTE  B  (Abel  /  DN-smoothness  pairing).
+    What  we  have  PROVEN  about  DN:  |DN_j  -  DN_{j-1}|
+    <=  delta  per  zero  (the  A2/R2  increment  bound,  from
+    the  gap  structure  --  delta  ~  1  -  0.335  floor)  and
+    a  certified  walk  ceiling  (3.1e10,  A2-class).  With
+    p  MONOTONE  on  each  side  of  the  pole  (checkable:
+    p'(g)  =  2g/(g^2  -  t^2)  -  2g/(g^2  + 1/4)  -
+    g/(g^2  + 1/4)^2  <  0  for  g  <  t  and  >  0  for
+    g  >  t,  t  >=  1)  --  the  Abel  sum  by  parts  gives
+    exactly  the  no-cancellation  bound  K*C(t)  =  201  ..
+    240  (E15).  OBSTRUCTION:  p  is  NON-OSCILLATORY  (a
+    pole-kernel,  monotone  either  side),  so  Abel  summation
+    buys  nothing;  pairing  cancellation  would  require  the
+    DN  sequence  to  be  correlated  with  the  pole-kernel
+    GLOBALLY  --  which  is  the  item  0  rigidity,  i.e.
+    the  original  theorem.  Every  proven  property  of  DN  we
+    have  (increments,  walk  ceiling,  level  at  probes)  is
+    local  or  absolute;  none  carries  the  2D  correlation.
+
+3.  ROUTE  C  (NEW  THIS  SESSION  --  the  ALIASING
+    HYPOTHESIS  for  the  4e-9  DRIFT,  the  "coincidence
+    to  look  for"  the  program  asked  for).  The  505-pt
+    drift  law  (margin  -  1  ~  A(x)*k,  odd,  96.4%
+    linear,  A(x)*x  =  0.9886  +  5.29e-12  x)  sits  3  ..
+    4  orders  BELOW  the  f64  storage  scale  of  the
+    re/im  sums  (measured  preflight:  f64-pairwise  vs
+    80-bit-exact  sum  over  the  first  1.1e9  zeros  of
+    the  1.016e11  tail  differs  by  9.5e-7  ABSOLUTE  IN
+    THE  EXPONENT;  the  full-band  f64  ulp  at  |re|
+    ~  1e11  is  ~  1e-7).  Hypothesis:  the  engine  stores
+    re,  im  in  f64;  re_f64(t)  is  a  SMOOTH  function
+    of  t  rounded  to  the  f64  grid;  the  rounding
+    residual  is  a  sawtooth  in  t  of  period
+    ~  ulp / |dre/dt|  ~  1e-10;  the  straddle  sampling
+    (k  steps  of  0.5  in  t)  ALIASES  that  sawtooth
+    into  a  slow,  quasi-linear-in-k,  window-specific
+    drift  of  ~  1e-9  ..  1e-8  --  matching  the
+    observed  law  in  sign-structure  (odd  in  k,  linear
+    to  96.4%,  window-constant  offset).  If  true:  the
+    drift  is  the  machinery's  own  roundoff  masquerading
+    as  a  law  (a  numerical  artifact,  harmless  --  the
+    margin  is  >=  1  at  80-bit-exact  re/im,  and  the
+    C-reading  upgrades  to  a  clean  data  certificate).
+    If  false  (the  drift  SURVIVES  the  80-bit-exact
+    re/im):  a  genuine  O(1/x)*k  structure  in  the  zeta
+    data  --  a  discovery  of  exactly  the  scale  the
+    wire  needs  to  know  about.  DECIDER  IN  FLIGHT:
+    day048  (dps-90/120  re-issue  of  the  worst-10
+    negative-k  points,  dual-mode  f64  vs  80-bit-exact,
+    replica  verified  BIT-EXACT  against  the  engine
+    before  use).
+
+4.  THE  CONSEQUENCE  CLARIFICATION  (A1  vs  RH,  now
+    explicit).  Under  RH,  the  CCM  bound  allows
+    |S(T)|  <=  (1/4)(log  T / loglog  T)  +  O(...)  --
+    ~  1.9  at  3e10  but  GROWING  (->  infinity).  The
+    wire  needs  the  SIGNED  defect  bounded  by  a
+    UNIFORM  constant  below  the  O(1)  budget  --  not
+    a  log/loglog  function.  So  the  A1  closer  is
+    STRICTLY  BEYOND  what  RH  would  buy  us:  it  is  an
+    additional  theorem  (which  the  data  favor:
+    |S(gamma)|  <=  2.615  AND  DECAYING  through  3e10,
+    0.595  at  the  1e10  splice)  --  the  program  is
+    not  a  RH  lemma  program,  and  RH  alone  would
+    not  close  [S1].  Recorded  here  so  the  preprint
+    carries  the  exact  role  of  the  A1  ingredient.
+
+5.  STATE  OF  THE  FLIGHT.  day047  (measured  W  =  the
+    signed  splice  defect  on  (2.999e9,  3e10]  at
+    five  heights,  including  the  worst  drift
+    straddle  t  =  3232170970.112195,  split  mode;
+    self-test  exact-0  against  dps-30  mpmath  before
+    the  pass;  the  G2  boundary  re-cross-checked  the
+    pinned  last  zero  29999999999.762012  from  the
+    file  itself):  running,  ~6  hours.  day048  (the
+    drift  decider):  running,  4  workers,  ~200
+    single-core-minutes  total.  Neither  touches  the
+    band  data  (stream-only,  files  r-x),  neither
+    touches  Strix,  and  per-point  results  land  on
+    disk  as  they  finish  (interrupt-safe).  The
+    next  Lean  step  (W2-BEYOND  7(c),  the  W2M6
+    pin  unit  --  re-pinning  the  wire  at  G2  =  3e10
+    with  K  in  Milino  form  as  a  CITED
+    hypothesis)  is  queued  for  the  turn  after
+    results  arrive  --  references  fetched  first,  per
+    the  standing  online-first  rule.
