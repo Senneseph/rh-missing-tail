@@ -1625,3 +1625,81 @@ attempted  and  mapped  route  by  route.  No  route  closes;
     hypothesis)  is  queued  for  the  turn  after
     results  arrive  --  references  fetched  first,  per
     the  standing  online-first  rule.
+
+## E17.  The  W2M6  pin-and-refutation  unit:  GREEN  (the
+##       formal  side  of  E14-E16)
+
+What  landed  in  formal/RhAttack/W2M6.lean  (471  lines,  no
+sorry),  imported  at  the  RhAttack  root;  full  lake  build
+green  (17444  jobs),  mathlib  v4.33.1  pinned.
+
+1.  WHAT  IS  NOW  MACHINE-PROVEN.
+      kmil_3e10_bounds:
+          612/100  ≤  K_mil(3e10)  <  615/100
+        (the  Milino-form  K  with  the  E16-pinned
+        convention  c  =  1/8,  at  the  band  frontier).
+      pG1_pin_lower:
+          3.2e9  ≤  t  ≤  3e10  ⇒  pG1  t  ≥  1151/100
+        (the  left-pin  kernel  floor  on  the  band;
+        E14's  single  number,  band  side).
+      milino_channel_ge_70:
+          K_mil(3e10)  *  |pG1  t|  ≥  70
+        for  every  band  height  t  ≥  3.2e9.
+      refutation_3e10:
+          1  -  13/t  <  K_mil(3e10)  *  |pG1  t|
+        the  O(1)-normalized  feed  (≤  1)  against  the
+        cited-bounded  channel  (≥  70):  two-plus
+        orders  of  magnitude  of  separation,
+        data-free.
+      m6_floor:  the  e4_tailFloor  wire  instantiated  at
+        K  :=  K_mil(3e10)  (W2-BEYOND  7(c)).
+    Every  bound  step  rides  on  closed-rational  e-pins
+    (expfrac_1_10_u,  expfrac_1_5_l,  big241u,  big242l,
+    big318u,  big32l,  big57601u,  bigpG1u),  each  a
+    norm_num-exact  comparison  off  a  Real.exp_bound'
+    /  Real.exp_bound  tail  estimate  with  the
+    exp(big)  =  exp(int)  *  exp(frac)  decomposition.
+
+2.  WHAT  IT  CLOSES  AND  WHAT  IT  DOES  NOT.  E14  priced
+    the  [S1]  gap  as  LINEAR  in  K  =  sup|DN|;  the
+    channel  term  K * |pG1|  is  now  proven  >=  70
+    (against  feed  <=  1)  UNDER  THE  CITED  Milino
+    hypothesis.  This  is  exactly  the  E15  data-free
+    branch,  refuted-AT-THE-PIN  as  designed:  the
+    absolute-sum  branch  prices  at
+    K * (|pG1|  +  |pG2|  +  TV),  and  K * |pG1|  ALONE
+    already  exceeds  the  feed  by  >  70.  Still  open
+    (E16):  the  measured  SIGNED-defect  side  --
+    day047  (the  W  measurement)  and  day048  (the
+    drift  decider)  remain  the  two  live  numbers.
+
+3.  FORMAL-TECHNICAL  RECORD  (for  the  next  units).
+    *  Real.exp_bound'  /  Real.exp_bound  (pinned
+       v4.33.1,  Complex/Exponential.lean:517/523):
+       tail  |x|^n  *  (n.succ  /  (n.factorial  *  n)),
+       sum  over  range  n;  the  one-sided  form  comes
+       out  of  the  abs  form  via  abs_sub_le_iff.
+    *  Real.log_mul  /  Real.log_div  take  (≠  0)
+       arguments,  not  (0  <  x).
+    *  In  this  mathlib  add_le_add_right  h  c  yields
+       c  +  a  ≤  c  +  b  (LEFT-first);  for  the
+       right-add  form  use  add_le_add  h
+       (le_refl  c).
+    *  pow_ne_zero  n  h  (n  first);  the  const  form
+       -1  /  k  is  (-1)/k  (neg  OUTSIDE  the
+       division  needs  explicit  parens);
+       le_of_eq_of_le  orients  the  equality
+       new  =  old.
+    *  linarith  failed  on  the  atom  shape
+       2  *  log  (32  *  10  ^  8)  where  an  opaque
+       atom  of  the  same  shape  passed  (verified
+       by  bisection  probe);  the  step  is  closed
+       deterministically  via  add_le_add  term
+       assembly  instead.
+    *  An  UNANNOTATED
+          have  h  :  0  ≤  (1/2)  /  (...)
+        silently  types  as  a  NAT  proposition
+        (positivity  closes  it  trivially  in  N,
+        and  linarith  then  ignores  it  as
+        not  a  Real  hypothesis)  --  always
+        annotate  (0  :  R).
