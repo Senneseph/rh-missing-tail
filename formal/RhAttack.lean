@@ -86,3 +86,13 @@ import RhAttack.W2Integral
 -- along the punctured neighbourhood) + continuousAt_update_same/_of_ne.
 -- GREEN, no sorry.
 import RhAttack.W2Bound
+
+-- W2M6 (the [S1] A1 pin-and-refutation unit): the c = 1/8 Milino-form
+-- K pin at the band frontier t = 3e10 (kmil_3e10_bounds, K in [6.12,
+-- 6.15)), the left-pin kernel floor on the band (pG1 t >= 11.51 for
+-- 3.2e9 <= t <= 3e10, pinned by E14/E15/E16), the Milino channel floor
+-- (K_mil G2_pin * |pG1 G2_pin| >= 70 = milino_channel_ge_70) and the
+-- refutation wire (dev_feed = 1 - 13/t < channel = refutation_3e10),
+-- plus the e-pins (expfrac/big) that make every step closed rational.
+-- GREEN, no sorry.
+import RhAttack.W2M6
