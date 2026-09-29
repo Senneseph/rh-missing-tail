@@ -7717,3 +7717,161 @@ category per rebuild, lateral thinking, be like water).
    binder). The CCM section of the first draft was pulled before build
    (a sorry + ill-typed axioms caught in self-review — the 90%-loop
    hazard class, defused pre-flight).
+
+## 2026-09-29 ~06:10-12:40 EDT — Valiant forensics: the 696-point ledger's worst-straddle margins are an instrument artifact (true margins 0.502); the D1 + V4 discriminators are running
+
+1. The forensics pass (owner: "make a valiant effort — turn over every
+   stone").  Systematic inspection of everything bearing on the 3e10
+   closure:
+   - the S1-walk / A2 data side stands complete and bit-pinned
+     (verified again, not assumed);
+   - the H1-696 ledger's worst-straddle "margin" column
+     (0.9999999965) is NOT faithful:  the day048 re-issue (dps-
+     90/120,  f64-pairwise vs 80-bit-exact tree,  engine
+     replicated) finds the TRUE worst-straddle margins 0.502276-
+     0.503626 (CRT);
+   - the day049a pi-probe (dps 30/45/90/120 at p01):  every
+     component of the K stack (lm, la, ar, qrem, qext) identical
+     to every printed digit at all four precisions;  Kfull =
+     1.2937556 ANTI-PARALLEL to z (phase difference +3.1416 rad),
+     margin 0.502658 at all four.  dps-30 excluded as the cause.
+   - The geometry:  in the anti-parallel configuration the margin
+     reduces exactly to 1/(1 + |K|/|z|);  the measured amplitude
+     ratios (0.990941 at 3.23e9,  0.989404 at 3.49e9) reproduce
+     each margin to 5 digits,  and the margin ramps smoothly in
+     x.  So 0.502 is STRUCTURE (reciprocal-amplitude form),  not
+     FP noise near the 0.5 threshold and not a planted round
+     constant.
+   - The ledger row's OWN stored columns put its K on the circle
+     |z - K| = |z| + 4.6e-9;  the verified K sits at distance
+     2.6013 from z — a UNIT-LEVEL disagreement,  far outside
+     every budget on record (<= 4e-4) and far outside f64-vs-
+     80bit (1.7e-6).  The only un-re-verified instrument in the
+     chain:  the day038 GPU full-tail sum (no selftest compares
+     GPU full-tail totals to the CPU reference on the live band —
+     SELFTEST(c) covers the overlap patch only;  SELFTEST(f) is
+     GPU-threaded vs GPU-sequential).  The missing gate is named.
+   - Mechanism candidates (LEADS):  the pole chunk (the worst
+     straddles are exactly the k < 0 points;  the margin's x-
+     ramp matches a t-dependent pole-chunk effect)  and the A/B
+     seam overlap (152 rounded zeros) — both inside the committed
+     day038 path.
+
+2. The poisoning question (owner:  "could we have been poisoned —
+   planted data or values,  to make it all look clean?").  Five
+   signatures were stated:  the at-pass-line law-shape (the
+   ledger's 1 - 4.6e-9 has it;  the re-issued 0.502 does not),
+   the round-constant decomposition (0.502 decomposes exactly as
+   measured,  1 - eps does not),  the machine-specific
+   fingerprint (DEAD:  3 machines on 2 GPU stacks 466/466 bit-
+   identical),  the mechanism shape (D1 discriminates:  a bug
+   reads as an explainable region,  a plant as a magic
+   constant),  and the provenance gaps (DATA vs COMPUTATION
+   layer).  Live checks EXECUTED:
+   - nlt live re-derivation:  at all 180 heights where the local
+     ledger records nlt,  re-deriving the exact zero count below
+     t from the CURRENT band files gives 180/180 identical,  0
+     mismatches — the files produce exactly what the fleet engine
+     saw at run time;
+   - band md5 live (A+B+C+D = 815 GB):  all four byte-identical
+     to the pre-fleet cross-machine record (D included,  740 GB:
+     5baa1b07...).  SOURCE DRIFT IS DEFINITIVELY CLOSED — the
+     band data is exactly what the fleet consumed,  and it is
+     bit-pinned.
+   - Net:  the data layer is closed;  the remaining suspect
+     surface is the committed day038 GPU full-tail COMPUTATION
+     path;  D1 + V4 discriminate "accidental bug in that path"
+     (fixable:  patch + the missing selftest + re-issue the
+     fill) from "plant in that path" (provenance investigation
+     continues).
+
+3. The runs (owner:  "proceed with the computations";  everything
+   local — the Strix Halo iGPU IS the fleet's 5900x GPU,  no
+   rental):
+   - D1 (day049c):  the day038 slab walk at the fleet's 2^24
+     slab size,  each slab read once from the band and evaluated
+     by BOTH cores (slab_budget numpy f64 + slab_budget_gpu cupy
+     f64),  per-slab CSV + cumulative CPU/GPU drift profiles;
+     plus the fleet path itself (8-thread GPU tail:  DONE,  re =
+     -1.5196009178e9,  im = 3.3332178583e10,  nlt exact) and the
+     day037 CPU engine tail (running).  The margin will be
+     recomputed at dps-60 from each total — if the GPU total
+     reproduces ~1 - 4e-9 and the CPU total reproduces 0.502658,
+     the unit K difference is confirmed inside the tail and the
+     CSV names the slab region.
+   - V4 (day049b):  a FOURTH full margin pipeline at p01,  fresh
+     code:  the near region (8.05e6 zeros in
+     (t(1-3.6e-4), t(1+3.6e-4)),  the log|g^2-t^2| singular
+     zone) by direct dps-60 mpmath over the exact f64 zeros;
+     the far region (~1.01e11 zeros) by vectorized f64 terms
+     with f128 subchunk accumulation and an in-pipeline f128
+     sample cross-check that MEASURES the per-term f64 error
+     (1e6-element slices,  one per worker).
+   - Expected outcomes:  D1 GPU total -> ledger 1 - eps,  CPU
+     total -> 0.502658 (artifact pinned to a named slab
+     region);  V4 lands 0.5026 -> "computation-layer plant" dead
+     (data layer already closed);  V4 lands ~1 -> the verified
+     tail is wrong and the picture inverts.
+
+4. The documents:  docs/VALIANT-EFFORT-FORENSICS.md (the
+   "Holmes file":  the room,  the instruments,  the eight stones
+   in order,  the composition map,  the instrument's blind
+   spot,  the five-signature anti-poisoning scan with the live
+   results,  the did/didn't,  the doors ranked D1-D5);
+   W2M6.lean Trudgian attribution corrected (the 0.111/0.275/
+   2.450 constants are Trudgian's,  arXiv:1208.5846 — the
+   "Milino form" label was a misattribution);  provenance A1G-5,
+   A1G-6,  A1G-7 (the zero-restricted frontier:  PT15
+   0.11/0.29/2.29;  "no unconditional improvement on S = O(log
+   t)";  S(gamma+H)-S(gamma-H) has no satisfactory results;
+   CCC arXiv:1503.00955 RH (1/4)log/loglog at the zeros;  the
+   Zeta23 Backlund port as the D4 borrow candidate).  Build
+   invariants at landing:  lake build green,  rhattack 14/14
+   PASS,  zero sorry.
+
+2026-09-29 ~13:30-15:30 EDT -- Valiant forensics: ROOT CAUSE
+named.  The 3e10 fleet ledger's 1 - eps margins (the "696/696
+certificate" of item 12) are a deterministic assembly artifact,
+now identified to the line:
+
+  - day037 (3e10 CPU) and day038 (3e10 GPU) quad_pair return
+    rem = quad over (G_LAST, 1e18] and ext = quad over
+    (G_LAST, 1e30] -- a NESTED pair (ext contains rem's range)
+    -- and cert_point/ev_point multiply BOTH into Kfull,
+    double-counting (G_LAST, 1e18] whose real part is
+    -1.508628600e9.  Kfull's exponent real part drops from the
+    true +0.2574 to ~ -1.5086e9:  Kfull rounds to 0 at
+    dps-30,  residf = |z| to 10 digits,  and mnew = mcert =
+    dev = 1 - 3.5e-9 = 0.9999999965 -- the ledger values to
+    10 digits,  every row,  every machine.
+  - The 1e7/1e9-generation quad_pair (day034) and this week's
+    re-issue pipelines (day048, day049a) use the ADJACENT form
+    (ext over (1e18, 1e30]) -- they are unaffected,  which is
+    why the re-issued margins (0.502658) were correct.  Blast
+    radius:  the 3e10 generation's certified margins only.
+  - Fingerprint already observed independently:  my V4b
+    margin pipeline (which copied the same nested-pair
+    composition) reproduced the ledger margin to all 10
+    printed digits (0.999999996538) before the cause was
+    named.
+  - Fixed on disk (day037 + day038):  quad_pair's ext now the
+    adjacent (1e18, 1e30] piece (audit corners consistent),
+    plus the missing assembly selftest in cert_point (the
+    |Kfull| ~ O(|z|) guard:  a degenerate or blown Kfull
+    fails the row instead of shipping as "ok").
+  - day049e (running on this box,  fleet 8-thread GPU path,
+    2 pinned cores):  A) cert_point verbatim should reproduce
+    the ledger row exactly (incl. fingerprint Efull ~
+    +1.508628600e9,  cert_point's own diagnostic);  B) the
+    fixed composition should land at the CRT-verified 0.502658
+    (residf 2.601338,  |K| 1.293756).
+  - Also this pass:  the D-band md5 matched the 09-25
+    cross-machine record -- all four bands (815 GB) are
+    source-stable;  the tail totals are now four-way
+    agreeing;  the tail was never in doubt.
+
+  The poison question is closed in the accident direction on
+  every layer reached:  data (bit-pinned,  md5-verified),
+  tail (four-way),  assembly (named slip,  natural fix,  no
+  magic constants,  no environment dependence,  committed
+  before the fleet,  git-confirmed unchanged).

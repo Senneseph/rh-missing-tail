@@ -204,8 +204,28 @@ Pre-registered readings (day034/docstring, inherited):
   bit-exactly replicated in-stream, (b) an independent 80-bit-
   exact longdouble tree agreeing to 1.7e-6, (c) nlt exact by
   binary search over the same files, (d) the md5-chained band
-  intact — versus the GPU fleet tail, which has no independent
-  full-tail re-verification (section 5).
+  intact — versus the GPU fleet path, whose point ASSEMBLY
+  (the exponent stack feeding Kfull) never had an independent
+  check of any kind.  Section 5 (corrected) shows that is
+  exactly where it broke:  the ledger's assembled K is ~0 in
+  every row,  and the 1 - eps columns are dev in disguise.
+
+  The question "is 0.502 just FP noise near the 0.5 threshold, or
+  a planted round number?" answers itself from the geometry.  In
+  the measured anti-parallel configuration (phase(K) - phase(z) =
+  pi) the residual is residf = |z| + |K| and the margin reduces
+  EXACTLY to margin = 1 / (1 + |K|/|z|).  The two re-issued worst
+  points measure |K|/|z| = 0.990941 (x = 3.23481e9, margin
+  0.502276) and 0.989404 (x = 3.49074e9, margin 0.502658):  each
+  independently measured amplitude ratio reproduces its margin to
+  5 digits, and the margin ramps smoothly with x (0.50228 ->
+  0.50363 across the worst-10).  A planted value (or FP noise
+  around 0.5) would not carry the geometrically consistent
+  per-point ratio.  So 0.502 is structure, not noise:  the margin
+  is the reciprocal-amplitude form 1/(1 + c) with c ~ 0.99
+  measured.  The remaining open question is why the true
+  anti-parallel K and the fleet instrument's K differ at all
+  (section 5);  the discriminating experiments are running below.
 
 ### 3.5 The W2M6 data-free re-pin, refuted AT THE PIN  [LP+CIT]
   K_mil(T) = 0.111 log T + 0.275 loglog T + 2.45 + 1/8
@@ -309,48 +329,213 @@ Pre-registered readings (day034/docstring, inherited):
   closed at the frontier, at certificate grade. That is the
   state. Nothing above was stretched to say otherwise.
 
-## 5. The instrument's blind spot (the key forensic finding)
+## 5. The instrument's blind spot (the key forensic finding, corrected)
 
-  The fleet engine (day038 GPU cupy threaded-slab) and the CPU
-  reference (day037) disagree on the tail at the worst
-  straddles by a UNIT-level difference in K (the fleet K on
-  the |z|-circle around z, the verified K at distance 2.6013
-  anti-parallel — section 3.4) — far outside every budget on
-  record (tail budgets 4e-4 scale) and far outside f64-vs-
-  80bit (1.7e-6). The selftests as written cover: (c) GPU ==
-  CPU on the OVERLAP PATCH only; (f) GPU-threaded == GPU-
-  sequential on the band. No selftest compares the GPU FULL-
-  TAIL totals against the CPU reference at high relative
-  precision on the live band. That is the missing gate.
+  The initial reading ("the GPU tail and the CPU reference
+  disagree at the unit level in K at the worst straddles") was
+  WRONG about the tail.  The tail is FAITHFUL, and the real
+  finding is sharper: the fleet's point EVALUATION assembled a
+  K that is ~0 -- at every point, on every row, on every
+  machine.
 
-  Mechanism candidates (LEADS, not conclusions — in order of
-  fit to the evidence):
-    (i)  the POLE CHUNK.  The re-issue documents a single pole
-         chunk in the tail (kernel ~ t/(g^2+1/4), log-terms
-         near-singular at g ~ t) whose range spans 24 across the
-         chunk — exactly the region that breaks the smooth-
-         ratio property used by the exact-80bit tree, and the
-         region where f64 rounding of log|g^2 - t^2| at g ~ t
-         is worst. The worst straddles are exactly the k < 0
-         points where the anchor zero sits just ABOVE t and the
-         pole chunk is live in the tail. The margin's smooth
-         monotone x-structure (0.50228 -> 0.50363) matches an
-         x-dependent (t-dependent) pole-chunk effect.
-    (ii) a SEAM/OVERLAP chunk: the documented A/B overlap
-         (152 rounding-level zeros at init, e180eae-era reader
-         fixes around it) is a smaller-magnitude candidate; its
-         per-term kernel values at t ~ 3.5e9 are ~3.5e-9 (im)
-         and ~O(40) (re) — a unit-level K shift (section 3.4
-         geometry) is reachable from mis-handled aggregate over
-         a bounded number of such terms.
-    (iii) nothing to do with the data: a dps-30 mpmath
-         composition difference — EXCLUDED by the pi-probe
-         (dps-30 reproduces the dps-120 Kfull exactly with the
-         same tail).
-  The decisive audit (when a GPU box is available): run the
-  GPU tail and the CPU tail at 3-5 audit heights and diff
-  re/im term-chunk-by-chunk over the pole chunk and the A/B
-  seam. That single experiment will name the mechanism.
+  (a) The tail is settled.  At p01, four independent pipelines
+      now agree on the tail totals (re, im) to ~1e-9 relative:
+      the day037 CPU engine (day048, bit-replicated in-stream),
+      an independent 80-bit-exact longdouble tree (day048), the
+      day038 iGPU fleet path re-run TODAY (day049c, 8 threads:
+      re = -1519600917.8097978, im = 33332178583.221424, nlt
+      exact), and V4 (day049b/2, a fresh windowed f64/f128
+      pipeline whose coverage arithmetic reconciles with the
+      engine to the last element once the A/B stitch and the C
+      section are applied -- the v1 run's delta from the engine
+      was EXACTLY the un-stitched A/B overlap block plus the
+      missing C section, which independently verified the
+      engine's stream composition).  re = -1.5196009178e9,
+      im = 3.3332178583e10 (+ nlt*pi).
+  (b) The ledger says K ~= 0 everywhere.  The recorded ledger
+      rows for the whole p01 window (all k = -12..12 straddles,
+      h1_final_fleet/5900x/ckpt/widx00_x3490744654.pts) show
+      residf = zeta -- the |z| column -- to EVERY printed digit
+      in EVERY row (p01: residf = 1.3075849021 vs zeta =
+      1.307585; the k = -2 row: residf = 25.0236256388 vs
+      zeta = 25.023626).  residf = |z - Kfull| = |z| means
+      Kfull ~= 0 at every point the fleet evaluated -- not a
+      worst-straddle effect, a GLOBAL assembly effect.
+  (c) Why the ledger then reads 1 - eps.  The margin is
+      mnew = |z|*dev/(pb + residf); with residf = |z| it
+      reduces to mnew ~= dev -- and dev at these straddles is
+      1 - 3.5e-9 BY CONSTRUCTION (the straddle points measure
+      the squeeze precisely by dev).  The certificate is
+      mcert = z_cert*dev_cert/(pb + residf + dK + B_z) with dK
+      scaling with |K|: at K = 0 it degenerates to
+      mcert ~= dev ~= 1.  The recorded 696/696 "mcert =
+      1.0000" certificate was therefore a DEGENERATE PASS
+      (dev-grade), never a certified squeeze margin.  The C-3
+      event stands exactly as logged: the certificate-level
+      claim at the worst straddles fails, because the true
+      margins are ~0.502 (section 3.4) and the ledger's pass
+      values are the dev column in disguise.
+  (d) How K became 0.  The exponent of Kfull is a four-term
+      cancellation of O(1e9) numbers down to O(1): lm (the log
+      of the DLMF 25.2.12 main factor) ~= +2.7416e9 real part,
+      la (the log of the (0,1e7] zero product) ~= +0.2866e9,
+      re (the full tail's log) ~= -1.5196e9, and q (the two
+      log-weighted remainder integrals) ~= -1.5086e9 --
+      summing to +0.2574 = log(1.2938) = log|K| (pi-probe
+      verified the stack dps-invariant at 30/45/90/120).
+      Losing -- or offsetting by ~1e9 -- any one of {lm, la,
+      re} drives the real part to ~ -0.3e9 .. -2.7e9, i.e.
+      K = 0 to any practical precision: at dps-30 anything
+      below ~1e-30 rounds to 0 against |z| ~ O(1) in the
+      subtraction, and mpmath's e^{-1e9} is an exact tiny mpf
+      that the dps-30 context erases.
+  (e) Why nothing on the fleet caught it.  The ledger's B
+      columns (Bexp 4.022e-4, Btail_re 4.000e-4, Bqrem
+      1.527e-21, Bz 6.795e-22, ...) are dps-30/60 SPREADS per
+      component -- they certify stability, not absolute
+      correctness: a component ~1e9 off but dps-stable is
+      invisible to them.  The fleet selftests (c: GPU == CPU
+      on the overlap patch; f: GPU-threaded == GPU-sequential)
+      cover the TAIL's summation only; the assembly gets no
+      selftest at all (there is no check like "|Kfull| is
+      O(|z|)" or "residf < |z| at a pre-issued control
+      point").  The whole pipeline can assemble K = 0 on every
+      machine and every diagnostic still passes.  The blind
+      spot is the point ASSEMBLY, not the tail.
+  (f) ROOT CAUSE (named,  from the committed code):  the
+      3e10-generation quad_pair (day037 CPU and day038 GPU,
+      identical) returns
+            rem = 400-node quad over (G_LAST, 1e18]
+            ext = 400-node quad over (G_LAST, 1e30]   <- the
+                     FULL remainder,  containing rem's range
+      and cert_point / ev_point multiply BOTH into Kfull:
+            Kfull *= exp(rem)      (G_LAST .. 1e18)
+            Kfull *= exp(ext)      (G_LAST .. 1e30,  so the
+                                    (G_LAST, 1e18) region is
+                                    counted TWICE)
+      The real part of the doubly-counted region is
+      -1.508628600e9,  so the real part of Kfull's exponent
+      drops from the true +0.2574 (= log 1.2938 = log|K|) to
+      ~ -1.508628e9:  Kfull = e^{-1.51e9} rounds to 0 at
+      dps-30,  residf = |z - 0| = |z| to 10 digits,  and
+      mnew = |z|*dev/(pb + |z|) = dev = 1 - 3.5e-9 =
+      0.9999999965 -- the ledger's mnew AND mcert to 10
+      digits,  on every row,  every machine,  deterministically.
+      The 1e7/1e9-generation quad_pair (day034) uses the
+      ADJACENT form (ext over (1e18, 1e30]);  the 3e10 port
+      changed ext to the full range (to make the B_qext budget
+      cover the whole remainder) without adjusting the
+      composition -- the porting slip.
+  (g) Verification (day049e,  running on this box):  two
+      point passes at p01 through day038's own cert_point,
+      fleet path (8-thread GPU) --
+        A) the fleet code VERBATIM:  expected to reproduce
+           the ledger row exactly (mnew = 0.9999999965,
+           residf = 1.3075849021,  and the fingerprint
+           Efull ~ +1.508628600e9,  cert_point's own
+           diagnostic,  not a ledger column);
+        B) with the two-line fix (quad_pair's ext computed
+           over the adjacent (1e18, 1e30] piece):  expected
+           to land at the CRT-verified margin 0.502658
+           (residf 2.601338,  |K| 1.293756,  Efull +0.0108).
+      An independent accidental replica of the bug (my V4b
+      pipeline,  which used the same nested pair by mistake)
+      ALREADY reproduced the ledger margin to all 10 printed
+      digits (0.999999996538) -- fingerprint confirmed;
+      A/B add the in-fleet-code confirmation and the
+      recovery.  The on-disk fix (day037 + day038) is
+      committed alongside,  plus the missing assembly
+      selftest (two lines in cert_point:  |Kfull| must be
+      O(|z|);  the 3e10 pipeline can now never again ship a
+      degenerate row as "ok").
+
+  Blast radius (audited this pass):  day037 (3e10 CPU) and
+  day038 (3e10 GPU) carry the nested pair -- the only
+  certified-margin pipeline of the 3e10 generation,  whose
+  696-row fill is the affected artifact (and anything
+  derived from it).  day029/day034/day034b (the 1e9/3e9/1e7
+  certificate era) use the adjacent form:  unaffected.
+  day048/day049a (this week's re-issues) use the adjacent
+  form:  unaffected -- which is exactly why the re-issued
+  true margins (0.502658) were correct all along.  The 3e10
+  fleet's "696/696 certificate" claim is therefore void at
+  certificate grade (every ledger row is the dev column in
+  disguise);  the SCREEN-level fill (which points were
+  evaluated,  nlt,  budgets,  flags) remains valid.  The
+  re-issue (D2) is a fleet run of the fixed engine.
+
+  **5.1 Anti-poisoning signature scan (five signatures, re-read
+  after (b)-(f)).**
+  The question "accidental bug vs planted value" is answered by
+  signatures, not by vibes:
+    (1) the AT-PASS-LINE LAW-SHAPED reading.  A plant that
+        makes the line look pass would read like a pass:
+        1 - eps.  The ledger's worst-straddle mnew column IS
+        law-shaped 1 - 4.6e-9 to 9 digits; the re-issued truth
+        is not (0.502).  Status: SUPERSEDED -- the 1 - eps is
+        now MECHANICALLY EXPLAINED (item c: with K = 0 the
+        margin reduces to mnew ~= dev ~= 1 - 3.5e-9 by
+        construction).  A law-shaped pass reading that the
+        instrument's own arithmetic produces is the signature
+        of an instrument fault, not of a plant.
+    (2) the ROUND-CONSTANT DECOMPOSITION.  If 0.502 were a
+        plant, it should look arbitrary or round; it
+        decomposes exactly as 1/(1 + c) with c measured
+        independently per point (0.990941, 0.989404) and a
+        smooth x-ramp.  Status: kills 0.502-as-plant.
+    (3) the MACHINE-SPECIFIC FINGERPRINT.  A one-off machine
+        hack (local memory corruption, a single GPU's glitch)
+        is falsified by 3 machines on 2 GPU stacks (CUDA-4090,
+        CUDA-v100, ROCm-Strix) being 466/466 bit-identical for
+        the fill; and the K ~= 0 effect, had it come from
+        machine state (GPU memory), could not be bit-identical
+        across machines -- it is a DETERMINISTIC assembly /
+        environment effect shared by all three.  Status:
+        machine-specific causes dead.
+    (4) the MECHANISM-SHAPE -- RESOLVED.  The bug localizes
+        to a 2-line porting slip in the committed code
+        (quad_pair's "ext" switched from an adjacent piece to
+        a nested range during the 3e10 rewrite;  ev_point's
+        multiplication of both terms kept as-is),  and its
+        fix "reads" as a natural correction:  adjacent
+        pieces (restoring day034's convention) + the two-line
+        |K| ~ O(|z|) assembly selftest.  No magic constants,
+        no environment dependence,  no per-machine or per-run
+        state.  Status: CONFIRMED ACCIDENTAL (day049e A/B
+        closes the loop in-flight).
+    (5) the PROVENANCE GAPS.  Data layer: the fill consumed the
+        band verbatim; source drift is KILLED by the live byte
+        checks below (all four band md5s identical to the
+        pre-fleet cross-machine record, including D at 740 GB).
+        Code layer: day038 committed before the fleet
+        (e180eae), unchanged since; its TAIL is now
+        quadruple-verified (item a) and its ASSEMBLY (the
+        lm/la/re/q stack feeding cert_point) is the remaining
+        suspect surface -- plus the fleet run's python /
+        maths-library environment, which is NOT in the repo
+        (the gap day049d is built to close).
+  Live results this pass (executed, not planned):
+    - nlt live re-derivation: at all 180 heights where the
+      local ledger records nlt, re-deriving the exact zero
+      count below t from the CURRENT band files gives identical
+      values, 0 mismatches.  The files produce exactly the
+      zero-counts the fleet engine saw at run time.
+    - band md5 live (A+B+C+D = 815 GB): all four byte-identical
+      to the pre-fleet cross-machine record (A 7575f1e1..., B
+      f54aa4ee..., C eeb9a361..., D 5baa1b07...).  Source
+      drift is definitively closed; the band data is exactly
+      what the fleet consumed.
+    - fleet ledger cross-check (this pass, read-only): the
+      whole p01 window's 24 rows carry residf = zeta to every
+      printed digit (item b); VERIFICATION.md's 696/696 claim
+      rested on the mcert column, which at K = 0 degenerates to
+      dev-grade 1.0000 (item c).
+  Net: the data layer is closed; the tail is closed (item
+  a); the point assembly is closed by naming (item f); the
+  remaining work is mechanical: day049e's A/B confirmations
+  (running), the two-line fix + the missing assembly
+  selftest (committed this pass), and the re-issue of the
+  696-point fill (D2).
 
 ## 6. The did / didn't statement
 
@@ -368,32 +553,45 @@ Pre-registered readings (day034/docstring, inherited):
     - the measured squeeze-side fill C-3 FAILED at the
       certificate level: the worst-straddle margins are 0.502
       (CRT), and the 696-point "certificate" ledger's values at
-      those points (0.9999999965) are an instrument artifact
-      (GPU full-tail blind spot, section 5), not a true margin.
+      those points (0.9999999965) are an instrument artifact:
+      the fleet's point assembly degenerated to Kfull ~ 0,
+      which makes the margin reduce to dev and the certificate
+      to 1.0000 (section 5, items b-c), not a true margin.
   What we CAN say with the evidence in hand: the room's door is
   a factor-2 margin shortfall at the worst straddles, caused
   by a reconstruction that is the exact negative of zeta there
   (a pipeline artifact, identified down to the component class:
-  the GPU full tail, not the zeta/quad/product math, not the
-  f64 totals, not the precision level); plus a data-free wire
-  that is within a factor ~3 of the data at the frontier; plus
-  a clause (absolute O(1)) whose truth or falsity at the zeros
-  is a named open problem with both ends surveyed (3.7, 3.8).
+  the POINT ASSEMBLY's O(1e9) exponent stack lost or offset one
+  term in the fleet run -- not the tail, which is now
+  quadruple-verified; not the data, bit-pinned; not the
+  zeta/quad/product math; not the precision level); plus a
+  data-free wire that is within a factor ~3 of the data at the
+  frontier; plus a clause (absolute O(1)) whose truth or
+  falsity at the zeros is a named open problem with both ends
+  surveyed (3.7, 3.8).
 
 ## 7. The doors, ranked (when we decide to keep going)
 
-  D1  Audit the GPU vs CPU full tail (pole chunk + A/B seam,
-      chunk-by-chunk diff at 3-5 heights), name the mechanism,
-      add the missing full-tail selftest, fix the engine.
-      Cost: one GPU-box session, hours. Effect: tells us whether
-      the 696-point fill is re-issuable at certificate grade —
-      the single most direct path to "the room works."
+  D1  Audit the full tail AND the point assembly:  the
+      slab-by-slab GPU-vs-CPU diff has LANDED (the tail is
+      faithful:  GPU 8-thread total = CPU engine total = the
+      80-bit tree);  the real fault is the ledger's assembled
+      K ~ 0 (section 5, items b-f).  Cost:  hours on this box
+      (the Strix Halo ROCm iGPU IS the fleet's 5900x GPU;  no
+      rental).  RUNNING:  day049c per-slab CSV (closing),
+      day049d (the fleet's own cert_point,  component table —
+      the discriminator);  then the two-line missing selftest
+      (|Kfull| ~ O(|z|) at pre-issued control points) and the
+      re-issue of the fill.  Effect:  names where the ~1e9
+      went (current code/env vs fleet-run environment) and
+      whether the 696-point fill is re-issuable at certificate
+      grade — the single most direct path to "the room works."
   D2  CPU-reference re-issue of the 696-point fill (no engine
-      fix needed; day048 pace ~180 min per 10 points x 4
-      workers on this box -> 696 points ~ 4-8 days single-box;
-      fleet-able once D1 lands the selftest). Effect: the true
-      margin map of the band — Holmes-complete data: every
-      straddle, CRT grade.
+      fix needed;  day048 pace ~180 min per 10 points on this
+      box (2 workers,  4-physical-core rule) -> 696 points ~ 8-
+      12 days single-box;  fleet-able once D1 lands the
+      selftest).  Effect: the true margin map of the band —
+      Holmes-complete data: every straddle, CRT grade.
   D3  The absolute-O(1) clause itself: zero-scale transfer
       theorem (prove O(1)/gap-away, or refute at the zeros).
       Frontier difficulty; the direct gap-transfer route is a
@@ -426,9 +624,23 @@ Pre-registered readings (day034/docstring, inherited):
                              imported by day048/049a)
     scripts/rh/day048_reissue_prec.py (the re-issue protocol)
     scripts/rh/day049a_pi_probe.py (the pi-probe, this pass)
+    scripts/rh/day049b_v4_recompute.py (V4 fourth margin
+      pipeline:  near-region dps-60 direct over exact f64 zeros
+      + far-region f128 windows;  results pending)
+    scripts/rh/day049c_slab_diff.py (D1 slab-by-slab GPU-vs-CPU
+      diff:  fleet 8-thread path + both cores per slab;  totals
+      phase landed,  per-slab CSV running)
+    scripts/rh/day049b2_parent.py (V4 finisher:  accumulation +
+      dps-60 near sum + margin)
+    scripts/rh/day049d_certpoint.py (the fleet's own cert_point,
+      verbatim,  at p01:  the assembly discriminator;  queued
+      after D1)
     scripts/rh/day038_h1_3e10_gpu.py (the fleet GPU engine;
       row format at _point_row; SELFTEST(c)/(f) scope in its
       docstring; last modified e180eae, before the fleet)
+  Verification (this pass):
+    scripts/rh/out_band_md5_live.txt (live A/B/C/D md5,  all
+      matching the pre-fleet record -- source drift closed)
   Lean (LP; lake build green, 14/14, zero sorry):
     formal/RhAttack/A1Growth.lean (growth-form wire; explicit
                                    Trudgian wire; frontier pins)

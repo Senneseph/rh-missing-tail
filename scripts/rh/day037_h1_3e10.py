@@ -416,21 +416,35 @@ def quad_section(f, lo, hi, npts, dps):
 
 
 def quad_pair(T, tf, audit=False):
+    """Two-precision remainder pair for Kfull composition.
+
+    IMPORTANT (day049e root-cause fix):  the two sections are
+    ADJACENT,  not nested --
+        rem = quad over (G_LAST, REMHI]         (= G_LAST .. 1e18)
+        ext = quad over (REMHI,  REMHI2]        (= 1e18  .. 1e30)
+    ev_point multiplies exp(rem) * exp(ext) to form the
+    remainder factor,  so a nested pair (ext over G_LAST..1e30)
+    double-counts (G_LAST, 1e18) and drives Kfull to 0
+    (the 3e10 fleet's ledger artifact;  see docs/
+    VALIANT-EFFORT-FORENSICS.md section 5,  items f-g).  The
+    1e7/1e9-generation quad_pair (day034) always used the
+    adjacent form this one now restores.
+    """
     s = mp.mpc(0.5, mp.mpf(repr(tf)))
     f = _kint(s)
     lo = repr(T.G_LAST)
     rem30 = quad_section(f, lo, REMHI, 400, 30)
-    ext30 = quad_section(f, lo, REMHI2, 400, 30)
+    ext30 = quad_section(f, REMHI, REMHI2, 400, 30)
     rem60 = quad_section(f, lo, REMHI, 400, 60)
-    ext60 = quad_section(f, lo, REMHI2, 400, 60)
+    ext60 = quad_section(f, REMHI, REMHI2, 400, 60)
     B_qrem = abs(rem30 - rem60)
     B_qext = abs(ext30 - ext60)
     aud = None
     if audit:
         rem800 = (quad_section(f, lo, REMHI, 800, 30),
                   quad_section(f, lo, REMHI, 800, 60))
-        ext800 = (quad_section(f, lo, REMHI2, 800, 30),
-                  quad_section(f, lo, REMHI2, 800, 60))
+        ext800 = (quad_section(f, REMHI, REMHI2, 800, 30),
+                  quad_section(f, REMHI, REMHI2, 800, 60))
         corners_r = [rem30, rem60, rem800[0], rem800[1]]
         corners_e = [ext30, ext60, ext800[0], ext800[1]]
         aud = {"rem": [float(abs(corners_r[i] - corners_r[j]))
@@ -479,8 +493,15 @@ def cert_point(T, tf, g, audit=False):
     B_lm = float(abs(p30["lm"] - p60["lm"]))
     B_z = float(abs(p30["z"] - p60["z"]))
     dmin = min(dmin_t, dmin_g)
-    flag = dmin < NLT_GUARD
     L = abs(p30["Kfull"])
+    zabs30 = float(p30["zabs"])
+    # day049e guard:  |Kfull| must be O(|z|)  --  the Kfull
+    # assembly (exponent stack + adjacent remainder pieces)
+    # self-tests here;  a degenerate Kfull ~= 0 or O(1e9)-
+    # blown Kfull FAILS the row (the exact failure mode of the
+    # 3e10 fleet ledger,  see VALIANT-EFFORT-FORENSICS.md 5f).
+    bad_asm = (L < 0.05 * zabs30) or (L > 50.0 * zabs30)
+    flag = (dmin < NLT_GUARD) or bad_asm
     Bexp = (B_re + B_la
             + float(abs(mp.re(B_qrem) + mp.re(B_qext))) + B_lm)
     Bph = (B_im + B_ar + float(abs(mp.im(B_qrem) + mp.im(B_qext))))
@@ -488,7 +509,6 @@ def cert_point(T, tf, g, audit=False):
     dK = L * (env - 1.0 + env * Bph)
     pb = float(M.p8_B(mp.mpf(repr(tfs)), n4(tfs)))
     residf30 = float(p30["residf"])
-    zabs30 = float(p30["zabs"])
     mnew = zabs30 * float(dev30) / (pb + residf30)
     residf_cert = residf30 + dK + B_z
     dev_cert = max(0.0, float(dev30) - B_dev)
