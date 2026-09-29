@@ -445,13 +445,25 @@ supersession is explicit.
 
 1.  THE  H1  DATA  LAYER  IS  CLOSED  (Section  2,  item  4 --  the
     measured [S3/S4] fill).  The full 3 x 10^10 census is complete to
-    the wire with a triple-machine record: 696/696 certified points
-    (29 windows x 24 straddles), all mcert = 1.0000, zero non-finite
+    the wire with a triple-machine record: 696/696 points (29 windows
+    x 24 straddles), zero non-finite
     values anywhere, 466/466 of the double-produced points
     bit-identical across independent machines (8x RTX 4090 volume,
     v100 box, 5900X + 3090Ti), and the three documented single-machine
     exceptions closed exactly by the v100 re-issue runs. Full audit
     trail: scripts/rh/h1_final_fleet/VERIFICATION.md (md5-summed).
+    CORRECTION (forensics pass;  full record in docs/
+    VALIANT-EFFORT-FORENSICS.md, section 5, and the banner in
+    VERIFICATION.md): the per-point mcert = 1.0000 values of the
+    ledger were a deterministic assembly artifact of the 3e10
+    engine (a remainder integral counted twice in the K
+    reconstruction, so K ~ 0 and the margin reduced to dev = 1 -
+    3.5e-9 on every row); the fill's screen-level validity (point
+    set, zero counts, budgets, 3-machine bit-identity) stands and
+    is what item 1 claims; the certificate-grade margins of the
+    worst straddles were re-issued at ~0.502 (CRT) and the
+    engine's re-issue is in flight (worst-24, local; full 696
+    fleet-able).
     The sup|DN| = 2.615067 figure of Section 2 item 3 stands and is
     now the certified band ceiling, not a sweep estimate.
 2.  The A1 pin-and-refutation unit is GREEN (Section 6, item 1 -- the

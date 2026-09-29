@@ -628,12 +628,17 @@ Pre-registered readings (day034/docstring, inherited):
       went (current code/env vs fleet-run environment) and
       whether the 696-point fill is re-issuable at certificate
       grade — the single most direct path to "the room works."
-  D2  CPU-reference re-issue of the 696-point fill (no engine
-      fix needed;  day048 pace ~180 min per 10 points on this
-      box (2 workers,  4-physical-core rule) -> 696 points ~ 8-
-      12 days single-box;  fleet-able once D1 lands the
-      selftest).  Effect: the true margin map of the band —
-      Holmes-complete data: every straddle, CRT grade.
+  D2  Re-issue of the degraded fill with the fixed engine.
+      RUNNING (owner GO):  day049f,  the worst-24 negative-k
+      points (7 anchors x 5 k-layers in 3.2e9..5.1e9,  the
+      region where the squeeze is tightest and day048's
+      true map put the worst),  2 single-core workers on
+      this box (~14 h,  cores 0-1 pinned,  2 reserved).
+      Effect:  the true certificate-grade margin map of the
+      region the claim lives in (shape + extent of the
+      shortfall below 1).  The full 696:  fleet-able now that
+      the fix + selftest are committed (3 boxes,  ~1 day);
+      needs a fleet GO.
   D3  The absolute-O(1) clause itself: zero-scale transfer
       theorem (prove O(1)/gap-away, or refute at the zeros).
       Frontier difficulty; the direct gap-transfer route is a

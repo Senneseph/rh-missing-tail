@@ -60,8 +60,12 @@ The A1 assembly in `formal/RhAttack/W2Beyond3.lean`
 carries a single open clause `hA1`: for every zero rho = 1/2 + i*gamma
 of zeta, |S(gamma)| <= C with an absolute constant C (equivalently, in
 wire form, |W(gamma)| <= C through the machine-proven 17/8 telescope).
-That is the [S1] A1 gap. The data side (696/696 certified, cross-machine
-bit-identical, |D| O(1) to the wire) is complete and is NOT an input to
+That is the [S1] A1 gap. The data side (696/696 points filled,
+cross-machine bit-identical, |D| O(1) to the wire;  the per-point
+certification column of that fill was voided by a named and fixed
+engine artifact during the forensics pass -- docs/
+VALIANT-EFFORT-FORENSICS.md section 5 -- and is being re-issued) is
+complete at screen level and is NOT an input to
 this theorem: the proof is 100 percent symbolic.
 
 Data tells us the constant lives around 1..5 (measured |D| values and
