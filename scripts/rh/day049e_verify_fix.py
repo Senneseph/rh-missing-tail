@@ -61,19 +61,21 @@ CRT = {  # CRT margin protocol (day048 verified pipelines)
 def dump(tag, p):
     out = {
         "tag": tag,
-        "mnew": p["mnew"], "mcert": p["mcert"],
-        "residf": p["residf"], "zeta": p["zeta"], "dev": p["dev"],
-        "Efull": p["Efull"],
-        "Kfull_abs": p.get("Kfull_abs", None),
-        "Bexp": p["Bexp"], "Bqrem": p["Bqrem"], "Bqext": p["Bqext"],
-        "nlt": p["nlt"], "flag": p["flag"],
+        "mnew": float(p["mnew"]), "mcert": float(p["mcert"]),
+        "residf": float(p["residf"]), "zeta": float(p["zeta"]),
+        "dev": float(p["dev"]),
+        "Efull": float(p["Efull"]),
+        "Bexp": float(p["Bexp"]),
+        "Bqrem": float(p["Bqrem"]), "Bqext": float(p["Bqext"]),
+        "nlt": int(p["nlt"]), "flag": bool(p["flag"]),
     }
-    with open(os.path.join(OUT, "%s.json" % tag), "w") as f:
-        json.dump(out, f, indent=1)
     print("== %s ==" % tag, flush=True)
     for k in ("mnew", "mcert", "residf", "zeta", "dev", "Efull",
-              "Kfull_abs", "nlt"):
+              "nlt"):
         print("  %-10s = %s" % (k, out[k]), flush=True)
+    with open(os.path.join(OUT, "%s.json" % tag), "w") as f:
+        json.dump(out, f, indent=1)
+    print("  (saved %s.json)" % tag, flush=True)
     return out
 
 
@@ -165,11 +167,10 @@ qrem60b, qext60b, _r, _e, _b1, _b2, _a = quad_pair_adjacent(T, TF, audit=False)
 mp.dps = 60
 _lm = D38.logmain25212(mp.mpc(0.5, mp.mpf(repr(TF))))
 (la, ar, _b1, _b2, _b3) = D38.prod_with_budget(TF)
-# re/im: use the day048 engine totals (quadruple-verified):
+# re/im: engine totals (quadruple-verified).  The engine's im
+#  total ALREADY includes nlt*pi (f64) -- use it as-is:
 RE_TAIL = -1519600917.8097972869873047
-IM_TAIL = 33332178583.221424 + 10609961701 * 3.141592653589793
-# (day038 convention: im includes nlt*pi in f64; for the K magnitude
-#  the ~1e-7 f64 digits of pi are far below the fingerprint level)
+IM_TAIL = 33332178583.221424
 K_B = mp.e ** (_lm + mp.mpf(repr(la)) + 1j * mp.mpf(repr(ar))
                + mp.mpf(repr(RE_TAIL)) + 1j * mp.mpf(repr(IM_TAIL)))
 K_B = K_B * mp.e ** qrem60b
