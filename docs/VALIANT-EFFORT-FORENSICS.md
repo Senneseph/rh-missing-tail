@@ -444,7 +444,15 @@ Pre-registered readings (day034/docstring, inherited):
       2.60134051277,  Efull = +0.010633,  margin =
       0.5026581069 -- the CRT-verified V2 value
       (0.502658103672) to 1e-8.  A/B remain as the
-      in-fleet-code (GPU path) confirmations.  An
+      in-fleet-code (GPU path) confirmations.  First A)
+      landing (before a json wrap glitch cost the printed
+      row,  re-run in flight):  the fleet code's q-terms
+      printed qrem re = -1.508628600e9 ((G_LAST, 1e18]) and
+      qext re = -1.508628679e9 ((G_LAST, 1e30],  the NESTED
+      full remainder) -- the nested pair confirmed inside
+      the fleet module itself,  and the (1e18, 1e30] piece
+      by difference (-78.7544122433) matches the probe's
+      direct adjacent quadrature to 12 digits.  An
       independent accidental replica of the bug (my V4b
       pipeline,  which used the same nested pair by
       mistake) ALREADY reproduced the ledger margin to all
