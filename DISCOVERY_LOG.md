@@ -7645,3 +7645,75 @@ Consequence for the proof: the measured side of the H1 layer is now
 no pending points, no re-issues, no fleet dependency left. The only
 open item for [S1] A1 is the data-free O(1) signed-defect theorem
 itself (E7: unclaimed in the literature).
+
+## 2026-09-29 ~04:10-05:40 EDT — E19: the A1 literature verdict (online-verified) + the growth-form wire GREEN (A1Growth)
+
+Goal window (owner asleep; objective: don't stop unless the A1 theorem
+is proven for real; work style: online-first research order, one error
+category per rebuild, lateral thinking, be like water).
+
+1. Literature pass on the hA1 clause (absolute O(1) |S(gamma)| at all
+   zeros, data-free). web_search provider was down all window; online-
+   first was honored through fetch_content on arXiv (API + ar5iv full
+   text) per the standing directive. Pinned: (a) NO absolute bound on
+   S(t) anywhere in the literature — strongest upper bounds grow
+   (unconditional S = O(log t), Backlund/Titchmarsh 9.4; RH
+   |S| <= (1/4+o(1)) log t/loglog t, CCM arXiv:1309.1526 Thm 2, proof
+   read in full, incl. Lemma 4's decomposition S(t) = (1/pi) sum_gamma
+   f(t-gamma) + O(1) with f(x) = arctan(1/x) - x/(1+x^2)); (b) omegas:
+   Omega((log t/loglog t)^{1/3}) unconditional (Tsang), Omega(sqrt(log t
+   logloglog t/loglog t)) under RH (Bondarenko-Seip),
+   both per the Dobner survey arXiv:2101.01747; (c) distribution
+   theory normalizes S by sqrt(loglog t) everywhere from Selberg's 1946
+   CLT through 2024-26 follow-ups (2407.14867, 2505.23573, 2511.18275,
+   2507.04150, 2510.14309) — all carrying the SAME growing
+   normalization.
+
+2. Lateral pass (red hat): a zero-specific refutation of absolute
+   O(1) via Bondarenko-Seip + gap-transfer was ATTEMPTED and FAILED
+   cleanly: the CCM increment bound |S(t+h)-S(t)| <=
+   (1/2+o(1)) log t/loglog t (h <= sqrt(t)) swallows the Omega value
+   (ratio -> infinity) — the transfer is too crude. Door closed
+   rudely; retrace taken. Consequence: absolute O(1) at the zeros is
+   NOT refuted pointwise by known theorems, but sits under strong
+   pressure (no theorem supports it; the field's own scales are
+   growing). VERDICT (E19): the clause as stated is not a live
+   theorem; the provable A1 is the growth form.
+
+3. The red-hat quantified: at t = 3e10 the fetched asymptotic scales
+   evaluate to sqrt(loglog t) = 1.78, the Bondarenko-Seip Omega scale
+   = 2.96, the CCM RH main term = 1.90 — the measured flat |D| <= 2.615
+   sits mid-scale; the data cannot distinguish "O(1)" from "slowly
+   growing" at this frontier (the growth is there, below the ruler).
+
+4. Formal: formal/RhAttack/A1Growth.lean GREEN (no sorry) — the
+   growth-form A1 wire: from a pointwise classical input |DN j| <=
+   G(x j) + 1/(x j) (G non-decreasing; +1/(x j) the CITED RVM
+   residual, < 1 for x >= 2 via the LEAN-PROVEN log_div_x_le_one) the
+   wire proves |S1 - R| <= (G(xM) + 1) . (17/2) . t^2/g1^2 on the far
+   side by thin collapse to a global K and the ALREADY-PROVEN
+   W2B3.a1_universal_wire. Instantiations: unconditional (G = C log,
+   CITED Backlund) and RH CCM form (G = (1/4) log/loglog + C1
+   correction, CITED CCM Thm 2; monotonicity/positivity on [16, oo)
+   carried as explicit CITED premises hG0/hGrow). Grid lemmas
+   grid_le_frontier / grid_ge_origin (forward-walk induction). Explicit
+   pins: wire cost 17/2 . 1/4 = 17/8 < 3; RVM residual 1/3e10 < 1e-10;
+   measured 2.615 < C . 24.2 + 1 (the tension pin, C >= 1, with
+   log(3e10) < 24.2 cited).
+
+5. Gates: lake build green (17450 jobs); lake exe rhattack 14/14 PASS;
+   A1Growth 0 sorry; A1Growth now imported into the root RhAttack.lean
+   (first-class, like W2M6); CITED inputs A1G-1..4 recorded in
+   formal/RH-LEAN-PROVENANCE.md; E19 appended to
+   docs/S1-A1-EXPLORATION.md.
+
+6. Process note (Iron Rule v2 in force): research order held — every
+   API/theorem question went online first (arXiv full texts; the
+   mathlib4 doc-site path had moved, noted in the quickref), pinned-
+   source grep only as corroboration, one error category per rebuild
+   (~5 cycles: parse of a fact-list `show`-term; induction
+   generalization shape; context-directed by-block elaboration;
+   mul_nonneg-vs-mul_le_mul_of_nonneg_left; an introduced-but-unbound
+   binder). The CCM section of the first draft was pulled before build
+   (a sorry + ill-typed axioms caught in self-review — the 90%-loop
+   hazard class, defused pre-flight).

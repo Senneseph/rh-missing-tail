@@ -96,3 +96,15 @@ import RhAttack.W2Bound
 -- plus the e-pins (expfrac/big) that make every step closed rational.
 -- GREEN, no sorry.
 import RhAttack.W2M6
+
+-- A1Growth (E19): the data-free A1 wire at the PROVABLE growth form.
+-- Thin wrapper over W2B3.a1_universal_wire: collapses a pointwise
+-- |DN j| <= G(x j) + 1/(x j) (G non-decreasing growth function) to a
+-- global K = G(xM) + 1, then calls the already-proven universal wire.
+-- Instantiations: a1_growth_wire_log (unconditional S = O(log t),
+-- CITED Backlund) and a1_growth_wire_ccm (RH |S| <= (1/4) log/loglog +
+-- O-constant, CITED CCM arXiv:1309.1526). The absolute-O(1) clause as
+-- originally stated is documented open/probably-false in E19 (the
+-- field's omegas + sqrt(loglog) distribution theory contradict it in
+-- the limit). GREEN, no sorry.
+import RhAttack.A1Growth

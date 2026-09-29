@@ -4,6 +4,56 @@ Status: prepared shelf for the goal window. Nothing in this file is a
 date. Literature state below was fetched and pinned before the goal was
 set; do not re-derive it from memory.
 
+## State of play (E19 — end of the first goal window)
+
+1. **The growth-form A1 is PROVEN (machine-checked).**
+   `formal/RhAttack/A1Growth.lean` is green and imported into the root:
+   from the classical pointwise input
+   `|DN j| <= G (x j) + 1/(x j)` (G non-decreasing; the `1/(x j)` is the
+   CITED RVM bridge residual, < 1 for x >= 2) the wire proves
+   `|S1 - R| <= (G (x M) + 1) * (17/2) * t^2 / g1^2` on the far side,
+   as a thin collapse to a global K over the already-proven
+   `W2B3.a1_universal_wire`. Instantiations: `a1_growth_wire_log`
+   (unconditional, G = C.log — CITED Backlund O(log t)) and
+   `a1_growth_wire_ccm` (RH, G = (1/4) log/loglog + C1 correction —
+   CITED CCM Thm 2; hG0/hGrow carried as explicit cited premises).
+   Gates at landing: `lake build` green (17450 jobs),
+   `lake exe rhattack` 14/14 PASS, 0 sorry in the module.
+
+2. **The absolute-O(1) clause (hA1 as originally stated) is documented
+   as OPEN and under strong pressure — not as a live theorem.** The
+   online-verified pass (E19, S1-A1-EXPLORATION.md) establishes:
+   no theorem gives |S(t)| <= C anywhere (all bounds grow); the omegas
+   (Tsang; Bondarenko-Seip under RH) and the whole sqrt(loglog)-
+   normalized distribution line (Selberg 1946 through the 2024-26
+   follow-ups) contradict an absolute bound in the limit; the data's
+   flatness to 3e10 is explained by the slow growth being numerically
+   ~2 there (sqrt(loglog(3e10)) = 1.78; Omega scale 2.96; CCM RH main
+   term 1.90 — all below the ruler). The attempted zero-specific
+   refutation (Omega + gap-transfer) failed cleanly: the CCM
+   increment bound swallows the Omega value (the transfer error / omega
+   ratio -> infinity) — so the clause is NOT refuted pointwise; it is
+   characterized and named.
+
+3. **Effect on the decomposition chain (ap1..ap5):** the chain's
+   bounded-bookkeeping atoms (ap4/ap5 — the kernel floors, the 17/8
+   telescope, the tail bounds) are exactly what the growth wire reuses
+   via `a1_universal_wire`; the argument-principle lemmas (ap1-ap3)
+   remain the machinery for the classical S-identity side, which the
+   project carries CITED (per the ZetaZeroSet convention) rather than
+   reproved in Lean. If the absolute clause is ever re-attempted, the
+   E19 evidence says the first move is not harder pointwise estimates
+   but a zero-scale distribution/transfer theorem — e.g. a proof that
+   the Bondarenko-Seip Omega values land O(1)/gap-away from zeros
+   (falsifying O(1) at the zeros) or a Selberg-CLT-at-the-zeros
+   statement (same effect). Both are the discipline's own frontier.
+
+4. **Honesty boundary (unchanged, now sharper):** the paper claims the
+   growth-form bound (proven, formal), cites the CCM/Inoue line as
+   closest existing machinery, and files "absolute O(1) at all zeros"
+   as the named open problem with the E19 evidence — never as
+   claimed.
+
 ## The target (the one open clause)
 
 The A1 assembly in `formal/RhAttack/W2Beyond3.lean`

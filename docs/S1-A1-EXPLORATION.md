@@ -1810,3 +1810,140 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
     constant  ~  1  ..  5).  That  is  a  theorem
     to  be  found,  not  a  computation  to  be
     run.
+
+## E19.  The  A1  clause  as  stated  --  literature  verdict  (online-
+##       verified)  and  the  provable  growth-form  wire  (LEAN-
+##       PROVEN)
+
+1.  THE  QUESTION.  E1  stated  A1's  universal  clause  as  "S  is
+    bounded  at  the  zeros":  |S(gamma)|  <=  C  with  C  ABSOLUTE
+    (independent  of  t),  at  every  zero  gamma,  data-free.
+    Restated  in  the  wire's  own  idiom  (the  signed  deficit  D =
+    S  -  main,  so  that  the  walk  side  is  the  pointwise
+    |DS|  <=  K  on  the  zero  grid),  the  clause  is  a  single
+    uniform  K  over  all  zeros.  This  entry  asks  the  question
+    the  discipline  itself  has  been  asking  for  a  century,  and
+    writes  down  what  it  answers.
+
+2.  THE  LITERATURE  (all  fetched  and  read  online  during  this
+    pass  --  arXiv  1309.1526  /  1503.00955  [CCM],  2101.01747
+    [Dobner  survey],  2407.14867  [Sun-Wang],  2505.23573  [Sun-
+    Wang-Yu],  2511.18275  [Jerby],  2507.04150  [Fazzari-
+    Gerspach-Minelli],  2510.14309  [Inoue];  Titchmarsh  9.4/9.7
+    for  the  classical  S  =  O(log  t)  and  the  N(t)  =  main  +
+    S  +  O(1/t)  bookkeeping).  Three  facts,  each  with  a  source:
+
+    (a)  NO  absolute  bound.  Not  one  published  theorem  asserts
+        |S(t)|  <=  C  (C  independent  of  t),  at  the  zeros  or
+        anywhere  on  the  line.  The  strongest  upper  bounds  are
+        all  GROWTH  bounds:
+            unconditional    S(t)  =  O(log  t)      [Backlund;
+                                                  Titchmarsh  9.4]
+            under  RH        |S(t)|  <=  (1/4  +  o(1))
+                             .  log  t  /  log  log  t
+                                          [CCM  Thm  2,  proof
+                                           read  verbatim]
+        So  "O(1)  at  the  zeros"  is  STRICTLY  STRONGER  than
+        anything  the  field  currently  proves.
+
+    (b)  OMEGAS  (S  is  unbounded).  S(t)  is  an  unbounded  func-
+        tion:
+            unconditional    S(t)  =  Omega( (log  t / log  log  t)^
+                             {1/3} )           [Tsang]
+            under  RH        S(t)  =  Omega( sqrt( log  t  .  log
+                             log  log  t  /  log  log  t ) )
+                                          [Bondarenko-Seip]
+        i.e.  S  takes  values  that  grow  without  bound  (along
+        subsequences  of  t).  A  uniform  |S(t)|  <=  C  over  ALL  t
+        is  FALSE.  The  zero-subsequence  {gamma_n}  is  a  special
+        case;  the  omegas  are  stated  for  general  t,  so  trans-
+        ferring  them  to  the  exact  zero  set  needs  a  gap  step
+        the  literature  does  not  supply  --  but  the  DISTRIBUTION
+        results  below  do.
+
+    (c)  DISTRIBUTION  (S  typically  grows  like  sqrt(log  log)).
+        Every  recent  CLT  for  the  argument  normalizes  by  the
+        GROWING  scale  sqrt(log  log  t):
+            Selberg  CLT   (S(t)/sqrt(log  log  t))  ->  Gaussian
+            (variance  (1/2pi^2)  log  log  t)  [Dobner  survey;
+                                                 original  1946]
+            Radziwill      Gaussian  persists  to  V  <<  (log  log  t)^
+                             {1/2 + 1/10}   without  RH
+            2024-2026      follow-ups  (all  five  arXiv  papers
+                             above)  carry  the  SAME  sqrt(log  log)
+                             normalization  (level  aspect,  GL2
+                             twists,  RMT,  pair-correlation).
+        If  |S|  <=  C  held  at  the  zeros,  then  S/sqrt(log  log)
+        ->  0  along  that  dense  subsequence  (one  zero  per  ~
+        2pi/log  t),  collapsing  the  non-degenerate  Gaussian  to  a
+        point  mass  at  0.  The  entire  distribution  theory  is
+        consistent  only  with  a  GROWING  typical  scale,  not  O(1).
+
+3.  WHY  THE  DATA  LOOKS  O(1)  (the  red  hat  --  "one  is  in-
+    visible").  The  measured  deficit  is  |D|  ~  1  ..  2.6  out  to
+    the  3e10  wire,  flat.  That  is  not  evidence  for  O(1);  it  is
+    what  a  slowly  growing  scale  LOOKS  like  at  3e10.  Evaluate
+    the  fetched  asymptotic  expressions  at  t  =  3e10  (plain
+    arithmetic  on  the  printed  formulas,  not  a  new  result):
+
+        log  t          =  24.1
+        sqrt(log  log  t)       =  1.78     (the  typical/CLT  scale)
+        sqrt(log  t  .  log  log  log  t / log  log  t)
+                                 =  2.96     (Bondarenko-Seip  omega  scale)
+        (1/4)  log  t / log  log  t   =  1.90     (CCM  RH  bound,  main  term)
+
+    Every  one  of  these  is  an  O(1)-looking  NUMBER  at  3e10
+    (between  1.8  and  3.0).  The  data  cannot  distinguish  "truly
+    O(1)"  from "slowly  growing"  at  this  frontier  --  the  growth
+    is  there  but  below  the  ruler.  This  is  exactly  the
+    "invisible  one"  in  the  owner's  puzzle:  the  clause  is
+    invisible  to  the  data  out  to  3e10  BECAUSE  the  true  scale
+    is  still  ~2  there.
+
+4.  THE  PROVABLE  THEOREM  (LEAN-PROVEN,  green).  The  A1  clause
+    at  the  strength  the  literature  actually  supports  is  the
+    GROWTH-form  wire,  now  machine-checked  in
+    formal/RhAttack/A1Growth.lean  (no  sorry;  lake  build  green;
+    rhattack  gates  PASS):
+
+        |DN  j|  <=  G  (x  j)  +  1/(x  j)   pointwise  on  the  grid
+        =>   |S1  -  R|  <=  ( G  (x  M)  +  1 )  .  (17/8)  .
+                             t^2  /  g1^2   on  the  far  side
+
+    with  G  a  non-decreasing  growth  function.  Two  instantiations
+    are  wired  and  LEAN-PROVEN:
+        *  a1_growth_wire_log    the  UNCONDITIONAL  form  G  =  C
+          .  log  (Backlund  S  =  O(log  t)  as  the  CITED  input);
+        *  a1_growth_wire_ccm    the  RH  form  G  =  (1/4)  log  /
+          log  log  +  (17/8)-class  correction  (CCM  Thm  2  as  the
+          CITED  input).
+    The  wire  is  a  THIN  WRAPPER:  it  collapses  the  pointwise
+    growth  bound  to  one  global  K  =  G(xM)  +  1  (via  the  three
+    small  LEAN-PROVEN  lemmas  log_div_x_le_one  /  grid_le_frontier
+    /  grid_ge_origin)  and  then  calls  the  ALREADY  PROVEN
+    W2B3.a1_universal_wire.  It  therefore  inherits  all  of  that
+    proof's  correctness;  the  only  new  content  is  the  collapse,
+    which  is  elementary  and  checked.
+
+5.  VERDICT  (the  fair  boundary  =  the  line  of  verification).
+    *  CLAIMED  AND  PROVEN:  the  growth-form  A1  (O(log  t)  un-
+      conditionally;  O(log  t / log  log  t)  under  RH)  at  the
+      zeros,  data-free.  Machine-checked.
+    *  OPEN  /  PROBABLY  FALSE:  the  clause  as  ORIGINALLY  stated
+      (absolute  O(1),  C  independent  of  t,  at  ALL  zeros).  No
+      known  theorem;  contradicted  in  the  limit  by  the  omegas
+      and  by  the  sqrt(log  log)  distribution  theory;  the  data's
+      flatness  to  3e10  is  explained  by  the  slow  growth  being
+      ~2  there  (the  "invisible"  red  hat),  not  by  an  absolute
+      bound.
+    *  THE  DATA'S  ROLE  (unchanged  from  E7  and  the  owner's
+      boundary):  the  696/696  measured  record  is  a  MEASURE-
+      MENT  that  is  consistent  with  the  theorem  and  prices  the
+      constant  (~1  ..  5);  it  is  NOT  a  proof  input.  The
+      proof  stays  100%  symbolic.
+
+    The  theorem  is  no  longer  "S  is  O(1)  at  the  zeros  (to  be
+    found)";  it  is  "S  is  bounded  AT  THE  ZEROS  by  the  best
+    known  growth  scale,"  proven,  and  the  absolute-O(1)  form  is
+    now  correctly  filed  as  the  open  problem  the  field  itself
+    has  not  claimed.

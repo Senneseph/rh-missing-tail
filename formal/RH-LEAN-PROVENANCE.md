@@ -56,6 +56,56 @@ scheme is what lost visibility of the B-3 work.)
   pin + the gitignored `.lake/packages` cache; pinned-source greps
   resolve through it.
 
+## Cited classical inputs (A1Growth, E19 — verified online before use)
+
+`formal/RhAttack/A1Growth.lean` (the growth-form A1 wire) consumes
+exactly four classical facts, carried as explicit hypotheses per the
+project CITED convention. Their references, fetched and read online
+during the E19 pass (full text verified, not recalled from memory):
+
+- **[A1G-1] RVM bridge with O(1/t) residual:**
+  `N(t) = (t/2pi) log(t/(2pi e)) + 7/8 + S(t) + O(1/t)` for t >= 2.
+  Chandrasekharan, Chandramouli, Murty (later: CCM),
+  https://arxiv.org/abs/1309.1526, eq. (1) (same form in the
+  journal version https://arxiv.org/abs/1503.00955); the classical
+  statement is Titchmarsh, *The Theory of the Riemann Zeta
+  Function*, Thm 9.7. Consumed by the `1 / x j` term in the wire's
+  pointwise hypothesis (the bridge residual is < 1 for x >= 2:
+  `A1G.log_div_x_le_one`, LEAN-PROVEN).
+
+- **[A1G-2] Unconditional growth of S:** `S(t) = O(log t)` (von
+  Mangoldt–Backlund; Titchmarsh Thm 9.4; surveyed with references in
+  Dobner, https://arxiv.org/abs/2101.01747). Consumed by
+  `A1G.a1_growth_wire_log` as the shape `CS * log` of G.
+
+- **[A1G-3] RH sharp bound for S (the CCM theorem):**
+  `|S(t)| <= (1/4 + o(1)) log t / log log t` under RH, with the
+  explicit error form `O( log t logloglog t / (log log t)^2 )` used
+  as the C1 correction term. CCM, Thm 2 / Thm 1 respectively: the
+  proof (Beurling–Selberg majorants) was read in full from
+  https://arxiv.org/abs/1309.1526 (Lemma 4 gives the identity
+  `S(t) = (1/pi) sum_gamma f(t - gamma) + O(1)` with
+  `f(x) = arctan(1/x) - x/(1+x^2)`, the global bookkeeping that E19
+  quotes). Consumed by `A1G.a1_growth_wire_ccm`.
+
+- **[A1G-4] Monotonicity and non-negativity of the CCM growth shape**
+  `G(u) = (1/4) log u / log log u + C1 log u logloglog u / (log log u)^2`
+  on `u >= 16`: positive (log u > 1 for u >= 16) and non-decreasing
+  (derivative of the main term `(log log u - 1)/(u (log log u)^2) > 0`
+  for u > e^e; the correction term grows likewise on [16, oo)). One-
+  line classical calculus; carried in Lean as the explicit premises
+  `hG0` / `hGrow` of `A1G.a1_growth_wire_ccm` (the composition around
+  them is LEAN-PROVEN).
+
+Supporting literature pinned by the same pass (survey-level, cited in
+E19 rather than consumed by the Lean code): the omegas
+`S(t) = Omega((log t/loglog t)^{1/3})` (Tsang) and under RH
+`Omega( sqrt( log t logloglog t / log log t ) )` (Bondarenko–Seip)
+as tabulated in Dobner 2101.01747; the Selberg CLT / Radziwill
+Gaussian-window results (typical scale sqrt(loglog t)); and the 2024–2026
+follow-ups carrying the same normalization (2407.14867, 2505.23573,
+2511.18275, 2507.04150, 2510.14309).
+
 ## Build
 
     cd formal/                  # or through the working-tree symlink
