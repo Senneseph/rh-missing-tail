@@ -7884,3 +7884,18 @@ now identified to the line:
   0.5026581069 = the CRT-verified V2 value (0.502658103672)
   to 1e-8.  day049e A/B (fleet GPU path) remain in flight as
   the in-code confirmations.
+
+  Addendum (same session,  ~16:20 EDT):  the proof triangle
+  is complete.  (1) Verbatim PRE-PATCH fleet module (git
+  show of the committed file),  dps-30 composition with the
+  engine f64 tail totals:  mnew = 0.9999999965,  residf =
+  1.3075849021 (the ledger's signature columns to ALL 10
+  printed digits),  |K| ~ 0,  Efull = +1508628600.27
+  (the predicted fingerprint).  (2) Same module with the
+  two-line fix,  through the full 8-thread GPU fleet tail
+  at p01:  mnew = 0.50265809882 (= CRT V2 0.502658103672
+  to 5e-9),  residf = 2.60134055470,  mcert = 0.50253253632
+  (non-degenerate),  Efull = +0.0106325,  nlt exact.
+  Pre/post states of the same module differ by exactly the
+  ledger-vs-truth difference.  The 696/696 verdict banner
+  in h1_final_fleet/VERIFICATION.md is corrected in place.
