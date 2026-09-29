@@ -443,21 +443,35 @@ Pre-registered readings (day034/docstring, inherited):
       composition):  |K| = 1.29375561063,  residf =
       2.60134051277,  Efull = +0.010633,  margin =
       0.5026581069 -- the CRT-verified V2 value
-      (0.502658103672) to 1e-8.  A/B remain as the
-      in-fleet-code (GPU path) confirmations.  First A)
-      landing (before a json wrap glitch cost the printed
-      row,  re-run in flight):  the fleet code's q-terms
-      printed qrem re = -1.508628600e9 ((G_LAST, 1e18]) and
-      qext re = -1.508628679e9 ((G_LAST, 1e30],  the NESTED
-      full remainder) -- the nested pair confirmed inside
-      the fleet module itself,  and the (1e18, 1e30] piece
-      by difference (-78.7544122433) matches the probe's
-      direct adjacent quadrature to 12 digits.  An
+      (0.502658103672) to 1e-8.  The LANDED confirmations:
+      the first day049e A) pass (the pre-patch fleet
+      module,  8-thread GPU tail;  a json wrap glitch lost
+      its printed row) printed the nested q-terms inside
+      the fleet module itself (qrem re = -1.508628600e9
+      over (G_LAST, 1e18];  qext re = -1.508628679e9 over
+      (G_LAST, 1e30],  the NESTED full remainder;  the
+      piece by difference,  -78.7544122433,  matches a
+      direct adjacent quadrature to 12 digits).  The
+      verbatim fingerprint was then completed
+      composition-side on the EXACT pre-patch fleet module
+      (git show of the committed file,  dps-30,  engine
+      f64 tail totals):  mnew = 0.9999999965 and residf =
+      1.3075849021 -- the ledger's two signature columns
+      to ALL 10 printed digits -- with |K| ~ 0 and Efull =
+      +1508628600.27 (the predicted +1.508628600e9
+      fingerprint).  And the fixed composition through the
+      full fleet GPU machinery at p01 (8-thread tail
+      sweep,  adjacent pieces):  mnew = 0.50265809882
+      (CRT V2 0.502658103672 to 5e-9),  residf =
+      2.60134055470,  mcert = 0.50253253632 (a real,
+      non-degenerate certificate),  Efull = +0.0106325,
+      nlt exact.  The pre/post states of the same module
+      differ by exactly the ledger-vs-truth difference:
+      the mechanism is proven,  not merely suspected.  An
       independent accidental replica of the bug (my V4b
       pipeline,  which used the same nested pair by
-      mistake) ALREADY reproduced the ledger margin to all
-      10 printed digits (0.999999996538) -- fingerprint
-      confirmed.  The on-disk fix (day037 + day038) is
+      mistake) separately reproduced the ledger margin to
+      all 10 printed digits (0.999999996538).  The on-disk fix (day037 + day038) is
       committed alongside,  plus the missing assembly
       selftest (two lines in cert_point:  |Kfull| must be
       O(|z|);  the 3e10 pipeline can now never again ship a
@@ -515,8 +529,12 @@ Pre-registered readings (day034/docstring, inherited):
         pieces (restoring day034's convention) + the two-line
         |K| ~ O(|z|) assembly selftest.  No magic constants,
         no environment dependence,  no per-machine or per-run
-        state.  Status: CONFIRMED ACCIDENTAL (day049e A/B
-        closes the loop in-flight).
+        state.  Status: CONFIRMED ACCIDENTAL -- the
+        verbatim pre-patch fleet module reproduces the
+        ledger row to all 10 printed digits (mnew,
+        residf,  fingerprint Efull) and the patched module
+        recovers the CRT margin (0.50265809882) through
+        the full GPU fleet path.
     (5) the PROVENANCE GAPS.  Data layer: the fill consumed the
         band verbatim; source drift is KILLED by the live byte
         checks below (all four band md5s identical to the
