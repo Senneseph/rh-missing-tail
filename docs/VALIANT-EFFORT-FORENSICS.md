@@ -438,12 +438,18 @@ Pre-registered readings (day034/docstring, inherited):
            over the adjacent (1e18, 1e30] piece):  expected
            to land at the CRT-verified margin 0.502658
            (residf 2.601338,  |K| 1.293756,  Efull +0.0108).
-      An independent accidental replica of the bug (my V4b
-      pipeline,  which used the same nested pair by mistake)
-      ALREADY reproduced the ledger margin to all 10 printed
-      digits (0.999999996538) -- fingerprint confirmed;
-      A/B add the in-fleet-code confirmation and the
-      recovery.  The on-disk fix (day037 + day038) is
+      The pure-math level of B is ALREADY confirmed (CPU
+      probe,  dps-60,  engine f64 tail totals,  patched
+      composition):  |K| = 1.29375561063,  residf =
+      2.60134051277,  Efull = +0.010633,  margin =
+      0.5026581069 -- the CRT-verified V2 value
+      (0.502658103672) to 1e-8.  A/B remain as the
+      in-fleet-code (GPU path) confirmations.  An
+      independent accidental replica of the bug (my V4b
+      pipeline,  which used the same nested pair by
+      mistake) ALREADY reproduced the ledger margin to all
+      10 printed digits (0.999999996538) -- fingerprint
+      confirmed.  The on-disk fix (day037 + day038) is
       committed alongside,  plus the missing assembly
       selftest (two lines in cert_point:  |Kfull| must be
       O(|z|);  the 3e10 pipeline can now never again ship a

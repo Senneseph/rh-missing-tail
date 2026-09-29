@@ -7875,3 +7875,12 @@ now identified to the line:
   tail (four-way),  assembly (named slip,  natural fix,  no
   magic constants,  no environment dependence,  committed
   before the fleet,  git-confirmed unchanged).
+
+  Addendum (same session,  ~15:10 EDT):  the fixed
+  composition is confirmed at the pure-math level -- CPU
+  probe,  dps-60,  engine f64 tail totals,  patched
+  quad_pair (adjacent pieces):  |K| = 1.29375561063,
+  residf = 2.60134051277,  Efull = +0.010633,  margin =
+  0.5026581069 = the CRT-verified V2 value (0.502658103672)
+  to 1e-8.  day049e A/B (fleet GPU path) remain in flight as
+  the in-code confirmations.
