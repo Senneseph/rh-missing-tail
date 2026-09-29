@@ -448,8 +448,9 @@ supersession is explicit.
     the wire with a triple-machine record: 696/696 points (29 windows
     x 24 straddles), zero non-finite
     values anywhere, 466/466 of the double-produced points
-    bit-identical across independent machines (8x RTX 4090 volume,
-    v100 box, 5900X + 3090Ti), and the three documented single-machine
+    bit-identical across independent machines (an 8x RTX 4090
+    volume, a v100 box, and a third machine with 32 GB of
+    VRAM), and the three documented single-machine
     exceptions closed exactly by the v100 re-issue runs. Full audit
     trail: scripts/rh/h1_final_fleet/VERIFICATION.md (md5-summed).
     CORRECTION (forensics pass;  full record in docs/

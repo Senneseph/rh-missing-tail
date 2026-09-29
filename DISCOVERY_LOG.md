@@ -7786,8 +7786,8 @@ category per rebuild, lateral thinking, be like water).
      continues).
 
 3. The runs (owner:  "proceed with the computations";  everything
-   local — the Strix Halo iGPU IS the fleet's 5900x GPU,  no
-   rental):
+   on this box -- it hosts the verified band and a ROCm
+   GPU;  no rental):
    - D1 (day049c):  the day038 slab walk at the fleet's 2^24
      slab size,  each slab read once from the band and evaluated
      by BOTH cores (slab_budget numpy f64 + slab_budget_gpu cupy
@@ -7964,3 +7964,23 @@ page cache absorbing most reads (device rate alone
 understates throughput).  Revised ETA ~20:00 EDT today
 (2 waves of ~14 points at warm-cache pace),  down from
 the 33 h estimate that assumed 2 cores.
+
+2026-09-29 ~17:00 EDT -- De-identification pass (owner:
+"remove any direct reference to the fleet box's name; make
+it generic like 'on another machine'").  Clarified in the
+records:  the 4-physical-core rule belongs to ANOTHER
+machine in the fleet (an owned non-Strix box, 32 GB VRAM),
+not to this box (Ryzen AI MAX+ 395, 16c/32t);  and this
+box was never that machine -- it is the band's source of
+truth and the fleet's Strix instance.  Edited:  the wiki
+4-core observation (title + body + correction), the wiki
+1-eps / day049f / fleet-shutdown observations, forensics
+sections 1/2/7/8 (fleet machine list, local-ledger
+sentence, D1 cost line, code list), the preprint fleet
+machine list, and this log's runs section.  Kept as stable
+identifiers only where they are literal file paths
+(the fleet delivery's snapshot directory) or historical
+delivery records.  Operational fleet docs (runbook,
+ledger-transfer, fill-analysis plan) still name the fleet
+boxes for launch commands;  say the word and they get the
+same treatment.

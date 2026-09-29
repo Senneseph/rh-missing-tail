@@ -71,7 +71,8 @@ Pre-registered readings (day034/docstring, inherited):
    md5-chained; read-only everywhere; third copy does not fit
    locally and was accepted as two-copy protected).  [MEA]
 2. The H1 fleet engine (day038, GPU cupy threaded-slab engine;
-   three machines: 8x-RTX-4090, v100, 5900X+3090Ti; 696/696
+   three machines: an 8x-RTX-4090 volume, a v100 box, and a
+   third machine (32 GB VRAM); 696/696
    points = 29 windows x 24 k; cross-machine rows 466/466
    bit-identical at overlap; ledger merged by h1merge_ingest with
    conflict-HALT).  [SCR — see section 5 for the blinding]
@@ -110,7 +111,8 @@ Pre-registered readings (day034/docstring, inherited):
   29 windows x 24 k, all mcerT/rows present, zero NaN, 466/466
   cross-machine bit-identical (MERGED ledger is the canonical
   record; scripts/rh/h1_final_fleet/).
-  Local (5900x) 180-row distribution of the mnew column:
+  The third machine's ledger, stored on this disk -- 180-row
+  distribution of the mnew column:
     min 0.9999999965, p5 0.9999999974, median 0.9999999995,
     max 1.0000000034,  96/180 below 1.
   The 505-point interim reading found  margin - 1 ~ A(x) * k,
@@ -619,7 +621,7 @@ Pre-registered readings (day034/docstring, inherited):
       faithful:  GPU 8-thread total = CPU engine total = the
       80-bit tree);  the real fault is the ledger's assembled
       K ~ 0 (section 5, items b-f).  Cost:  hours on this box
-      (the Strix Halo ROCm iGPU IS the fleet's 5900x GPU;  no
+      (it hosts the verified band and a ROCm GPU;  no
       rental).  RUNNING:  day049c per-slab CSV (closing),
       day049d (the fleet's own cert_point,  component table —
       the discriminator);  then the two-line missing selftest
@@ -666,8 +668,9 @@ Pre-registered readings (day034/docstring, inherited):
     scripts/rh/out_day048_pts/   (re-issue .res + SUMMARY.txt)
     scripts/rh/out_pi_probe.txt  (the day049a pi-probe output)
     results/3E10-EPSILON.md      (the A2 walk certificate)
-    scripts/rh/ckpt_h1_3e10/ + the 5900x ckpt rows (fleet
-    source, the pre-merge local rows — the ones containing the
+    scripts/rh/ckpt_h1_3e10/ + the third machine's ckpt rows
+    (stored on this disk under the fleet delivery;  the
+    pre-merge local rows -- the ones containing the
     0.9999999965 artifact values)
   Code:
     scripts/rh/day037_h1_3e10.py (CPU reference engine, VERBATIM
