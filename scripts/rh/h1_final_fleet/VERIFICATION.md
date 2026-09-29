@@ -30,9 +30,16 @@ the v100 box, including the dedicated w18/w19/w20 re-issue instances.
 > set,  nlt,  budgets,  flags,  machine replication);  the
 > CERTIFIED claim is void.  Path:  re-issue on the fixed
 > engine (two-line fix + the new |Kfull| ~ O(|z|) assembly
-> selftest,  both committed);  day049e confirms on the
-> original fleet path that (A) the verbatim code reproduces
-> this ledger exactly and (B) the fix recovers 0.502658.
+> selftest,  both committed);  CONFIRMED:  the verbatim
+> pre-patch fleet module reproduces this ledger row to
+> all 10 printed digits (mnew 0.9999999965,  residf
+> 1.3075849021,  fingerprint Efull +1.508628600e9) and the
+> patched module recovers the CRT-verified margin through
+> the full fleet path (mnew 0.50265809882;  see docs/
+> VALIANT-EFFORT-FORENSICS.md 5f-5g).  The re-issue (D2)
+> is a run of the fixed engine (worst-24 staged as
+> scripts/rh/day049f_worst24_reissue.py;  the full 696
+> needs a fleet GO).
 
 **696 / 696 certified. Complete. No errors, no NaNs, no non-finite values.**
 
