@@ -165,3 +165,40 @@ Consequences for the attack:
   found to be the legible one; expect it to be the legible one here.
 - The constant may come out large the first time. That is fine: walk
   through the side door first, then look for a prettier door.
+
+## Iron rule — Lean research order (v2, no holes, owner-issued)
+
+Diagnosis of the 90-percent syntax-loss: the pin (v4.33.1) PRE-DATES
+training memory, so "first use as expected" is often born wrong, and the
+reflex after a mismatch became local .lake grep + probe loops (the
+norm_pos_iff episode is the recorded instance). Local grep answers "what
+exists", never "how to wield it" — that is the online half of the
+answer. This rule has no "try from memory first" license.
+
+For every Lean work session, serially, per build round:
+
+1. TRIAGE FIRST. Read all errors of one build; group into distinct
+   error categories. Fix exactly ONE category per rebuild cycle.
+   (Cascade triaged before anything is touched; never a shotgun pass.)
+2. For that one error category, RESEARCH IN THIS ORDER:
+   a. web_search ONLINE FIRST — mathlib4 GitHub (source + issues),
+      the mathlib4 docs, leansearch, Zulip, community ports
+      (Zeta23 etc.). "I am fairly confident from training" is NOT a
+      license to skip (a) — the pin is older than the training and
+      memory is the known mismatch source.
+   b. Corroborate the candidate answer in the PINNED local source
+      (.lake/packages/mathlib v4.33.1) for exact name / signature /
+      location. Local grep is CORROBORATION, not research.
+      Hard limit: at most ONE local grep before the online search;
+      a second needed local grep is the stop signal for (a).
+   c. At-most ONE quick probe for behavior not readable from source or
+      docs; then patch; then rebuild; then — and only then — the next
+   error category.
+3. Append each confirmed answer to references/LEAN4-4331-QUICKREF.md
+   exactly once. The quickref is a fast path for ALREADY-CONFIRMED
+   patterns only; it never replaces step 2 for a new pattern.
+4. Borrowed patterns (community ports, Zulip snippets) are cited in
+   formal/RH-LEAN-PROVENANCE.md / DISCOVERY_LOG at use time.
+
+Invariants unchanged: lake build green, `lake exe rhattack` 14/14 PASS
+at every green stage, no sorry.
