@@ -35,9 +35,12 @@
 ##  C.  log(3e10) in (241/10, 121/5);  loglog(3e10) in (318/100, 16/5)
 ##  D.  612/100 <= K_mil(3e10) < 615/100
 ##      where K_mil T = 0.111 log T + 0.275 loglog T + 2.45 + 1/8:
-##      Milino 2012 (arXiv:1208.5846 Th.1) uniform S-bound,
+##      TRUDGUAN 2012 (arXiv:1208.5846 Th.1) uniform S-bound,
+##      (legacy label "Milino" in this file -- see the attribution
+##      note under the K_mil def; verified online: the arithmetic
+##      is Trudgian's).
 ##      zero-height specialization + the exact 1/8 zero-grid
-##      convention (E16).  MILINO'S THEOREM IS CITED, not proven
+##      convention (E16).  TRUDGUAN'S THEOREM IS CITED, not proven
 ##      in this file; its 3e10 value is pinned here.
 ##  E.  pG1 t >= 1151/100 for t >= 3.2e9  (pG1_pin_lower;  the
 ##      quantity is positive there, so |pG1 t| = pG1 t)
@@ -62,14 +65,28 @@ def G2_pin : ℝ := 3 * 10 ^ 10
 -- The band's left pin g = 1e7 (g^2 = 10^14).
 def G1_pin : ℝ := 1 * 10 ^ 7
 
--- MILINO'S UNIFORM S-BOUND, Milino form, plus the project's exact
+-- MILINO'S UNIFORM S-BOUND (legacy name; the theorem is TRUDGUAN'S,
+-- see the attribution note below), Milino form, plus the project's exact
 -- zero-grid convention offset +1/8 (E16:  DN(gamma) - S(gamma+)
 -- equals 1/8 to better than 2e-5 across the top-5 positive
 -- excursions; exactly 1/8 up to O(1/gamma) on the zero grid,
 -- since DN counts the zero exactly and Nas/S carry the 3/4 and 7/8
--- convention split).  Milino 2012, arXiv:1208.5846, Theorem 1:
--- |S(t)| <= 0.111 log t + 0.275 loglog t + 2.45 (t >= t0).
+-- convention split).  TRUDGUAN 2012, arXiv:1208.5846, Theorem 1:
+-- |S(t)| <= 0.111 log t + 0.275 loglog t + 2.45 (t >= e).
 -- CITED (a theorem of the literature), not proven here.
+--
+-- ATTRIBUTION NOTE (valiant-effort pass, verified online):  the
+-- constants 0.111/0.275/2.450 and the arXiv number 1208.5846 are
+-- Timothy Trudgian, "An improved upper bound for the argument of
+-- the Riemann zeta-function on the critical line II", Math. Comp.
+-- 81 (2012) 1053-1061, Theorem 1.  The adjacent B. Milino S(t)
+-- paper (Ole Miss) and Carneiro-Chandee-Milinovich (arXiv:1503.00955,
+-- the RH (1/4) log t / loglog t form) are different results; see
+-- RH-LEAN-PROVENANCE.md [A1G-5].  Identifier K_mil kept (legacy
+-- label; renaming would ripple through the pins).  The adjacent
+-- Platt-Trudgian 2015 form |S(t)| <= 0.11 log t + 0.29 loglog t +
+-- 2.29 (t >= e), as cited in arXiv:2010.13307, is marginally
+-- sharper at the 3e10 frontier (~5.87 vs ~6.00).
 noncomputable def K_mil (T : ℝ) : ℝ :=
   111 / 1000 * Real.log T + 275 / 1000 * Real.log (Real.log T) + (245 / 100 + 1 / 8)
 

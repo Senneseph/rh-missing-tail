@@ -125,6 +125,31 @@ during the E19 pass (full text verified, not recalled from memory):
   into this package; listed as the borrow source if the
   argument-principle line (ap1-ap3) is built in-house.
 
+- **[A1G-7] The frontier of the UNCONDITIONAL S-bound, including at
+  zeros** (valiant-effort verification, all cited online during the
+  pass):
+  (a) The adjacent Platt-Trudgian 2015 form, as cited in
+  arXiv:2010.13307: |S(t)| <= 0.11 log t + 0.29 loglog t + 2.29 for
+  t >= e, marginally sharper at the 3e10 frontier than the Trudgian
+  II form used by K_mil (~5.87 vs ~6.00).
+  (b) "At present, there is NO unconditional improvement on
+  S(t) = O(log t)" (arXiv:2010.13307, section 1, 2021). Read with
+  (c) "bounds for S(gamma+H) - S(gamma-H): no satisfactory results
+  seem to be known for this problem" (arXiv:1706.08268, 2017), the
+  statement is: even RESTRICTED TO ZEROS, no bound better than the
+  all-t O(log t) scale is published. The growth-form wire of
+  A1Growth therefore sits exactly at the known frontier; the data-
+  free clause cannot be sharpened at the zeros from the current
+  literature without a new theorem.
+  (d) Under RH, Carneiro-Chandee-Milinovich (arXiv:1503.00955) give
+  a new simple proof of |S(t)| <= (1/4 + o(1)) log t / loglog t (the
+  CCM/Goldston-Gonek form, independent proof line), with the
+  o(1) = O(logloglog t / loglog t); no zeros-specific refinement is
+  stated there either. The Ole Miss "new_S(t)" paper (B. Milino) is
+  the same CCC result line; it is NOT the source of the 0.111/
+  0.275/2.450 constants (those are Trudgian II, [A1G-5]; the W2M6
+  "Milino form" label was corrected accordingly, identifiers kept).
+
 Supporting literature pinned by the same pass (survey-level, cited in
 E19 rather than consumed by the Lean code): the omegas
 `S(t) = Omega((log t/loglog t)^{1/3})` (Tsang) and under RH
