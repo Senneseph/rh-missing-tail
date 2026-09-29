@@ -11,6 +11,29 @@ the v100 box, including the dedicated w18/w19/w20 re-issue instances.
 
 ## Verdict
 
+> **CORRECTION (2026-09-29 forensics -- read this before the
+> verdict below;  full record in docs/VALIANT-EFFORT-FORENSICS.md,
+> section 5,  items f-g):**  the 696/696 claim,  and the
+> recorded fact that *every* certified line carries mcert =
+> 1.0000,  were the SIGNATURE of a deterministic assembly bug
+> in the 3e10 engine (day037/day038),  not the result:  their
+> quad_pair returns a nested remainder pair (ext over
+> (G_LAST,1e30] containing rem's (G_LAST,1e18] range) and
+> cert_point multiplies both into Kfull,  double-counting a
+> region whose real part is -1.508628600e9 -- so Kfull rounds
+> to 0,  residf = |z|,  and mnew = mcert = dev = 1 - 3.5e-9 on
+> EVERY row,  every machine,  bit-identically.  The ledger
+> rows record dev where a certified squeeze margin would have
+> been;  the true worst-straddle margins are ~0.502 (CRT,
+> via the unaffected day048/day049a adjacent-piece
+> pipelines).  The fill remains valid at SCREEN level (point
+> set,  nlt,  budgets,  flags,  machine replication);  the
+> CERTIFIED claim is void.  Path:  re-issue on the fixed
+> engine (two-line fix + the new |Kfull| ~ O(|z|) assembly
+> selftest,  both committed);  day049e confirms on the
+> original fleet path that (A) the verbatim code reproduces
+> this ledger exactly and (B) the fix recovers 0.502658.
+
 **696 / 696 certified. Complete. No errors, no NaNs, no non-finite values.**
 
 The full H1 universe (29 windows x 24 k-offsets) is machine-certified
