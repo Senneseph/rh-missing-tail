@@ -7913,3 +7913,33 @@ now identified to the line:
   every layer reached.  Remaining mechanical work:  the
   worst-24 local re-issue (day049f,  staged,  ~14 h at 2
   workers) and the full 696 re-issue (requires a fleet GO).
+
+2026-09-29 ~17:05 EDT -- Owner GO ("onward").  D2 re-issue in
+flight and the record docs corrected:
+  - day049f launched on this box (2 single-core workers,
+    cores 0-1 pinned, 2 reserved;  ~14 h):  the worst-24
+    negative-k points (7 anchors,  3.2e9..5.1e9,  k = -12..-8,
+    the region where both the screen and day048's true map
+    put the tightest squeeze) re-issued at certificate grade
+    on the FIXED engine (dps-90/120,  f64-pairwise and
+    ld-exact arms,  plus the engine check row).
+  - day050 (post-processor) staged: per-point table,
+    precision deltas, linear fit over (x, k) with variance
+    shares, below-1 count, cross-check against day048's
+    worst-10 on the shared points.
+  - Doc corrections landed (claim hygiene):  preprint draft
+    item 1 (the "696/696 certified,  all mcert = 1.0000"
+    phrasing now carries the correction note and claims
+    screen-level fill only) and the A1 attack plan's data-
+    side sentence likewise;  VERIFICATION.md banner holds
+    the full correction;  the historical exploration log
+    (S1-A1-EXPLORATION) left as-is (record,  superseded).
+
+  Pace correction (same session):  the honest re-issue pace
+  is day048's own .res records (elapsed ~= 9922 s per point
+  on a dedicated core,  ld-exact stream + engine check +
+  dps-90/120 arms) -> ~2.8 h/point,  24 points / 2 workers
+  ~= 33 h  (ETA ~02:00 EDT the day after launch).  The
+  earlier ~14 h figure was an underestimate;  no code
+  change,  no rule bending -- the box runs exactly 2 cores
+  busy,  2 reserved,  as instructed.

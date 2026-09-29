@@ -633,7 +633,10 @@ Pre-registered readings (day034/docstring, inherited):
       points (7 anchors x 5 k-layers in 3.2e9..5.1e9,  the
       region where the squeeze is tightest and day048's
       true map put the worst),  2 single-core workers on
-      this box (~14 h,  cores 0-1 pinned,  2 reserved).
+      this box (cores 0-1 pinned,  2 reserved;  measured
+      pace ~2.8 h/point from day048's own .res records
+      -> ~33 h,  landing ~02:00 EDT the day after the
+      launch).
       Effect:  the true certificate-grade margin map of the
       region the claim lives in (shape + extent of the
       shortfall below 1).  The full 696:  fleet-able now that
