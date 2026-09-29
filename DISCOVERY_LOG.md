@@ -7899,3 +7899,17 @@ now identified to the line:
   Pre/post states of the same module differ by exactly the
   ledger-vs-truth difference.  The 696/696 verdict banner
   in h1_final_fleet/VERIFICATION.md is corrected in place.
+
+  Addendum (same session,  ~16:55 EDT):  verification
+  cycle complete.  B line (in-memory rebind,  8-thread GPU
+  tail):  mnew = 0.5026580988241343 (identical to A to
+  2e-16),  |K| = 1.29375629943,  K anti-parallel to z
+  (phase -3.1416 rad) -- the 0.502 geometric signature
+  through the fleet machinery.  All cores released;  the
+  box is idle.  State of the forensics question:  data
+  closed (bit-pinned + md5),  tail closed (four-way),
+  assembly closed by naming + fix + end-to-end proof,
+  poisoning question closed in the accident direction on
+  every layer reached.  Remaining mechanical work:  the
+  worst-24 local re-issue (day049f,  staged,  ~14 h at 2
+  workers) and the full 696 re-issue (requires a fleet GO).

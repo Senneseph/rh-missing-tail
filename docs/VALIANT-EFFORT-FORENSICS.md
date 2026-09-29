@@ -471,7 +471,17 @@ Pre-registered readings (day034/docstring, inherited):
       independent accidental replica of the bug (my V4b
       pipeline,  which used the same nested pair by
       mistake) separately reproduced the ledger margin to
-      all 10 printed digits (0.999999996538).  The on-disk fix (day037 + day038) is
+      all 10 printed digits (0.999999996538).  Final B line
+      (in-memory rebind path,  same 8-thread GPU tail):
+      mnew = 0.5026580988241343 -- identical to the A line
+      to 2e-16,  |K| = 1.29375629943,  and K exactly
+      ANTI-PARALLEL to z (phase -3.1416 rad):  the
+      0.502 = 1/(1 + c) geometric signature (section 3.4)
+      reproduced through the fleet machinery itself.
+      (Run 2's A/B lines are the POST-patch module in two
+      independent in-memory forms;  the pre-patch verbatim
+      counterpart is the composition probe above,  and the
+      first A pass is the lost-line GPU run noted in 5g.)  The on-disk fix (day037 + day038) is
       committed alongside,  plus the missing assembly
       selftest (two lines in cert_point:  |Kfull| must be
       O(|z|);  the 3e10 pipeline can now never again ship a
