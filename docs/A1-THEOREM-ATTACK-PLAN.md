@@ -134,3 +134,34 @@ separately as measured context, never as an input.
   relative extrema (critical points).
 - aimath.org/~kaur/publications/13.pdf — Conrey-Ghosh(-Gonek) large
   gaps; S(t+h)-S(t) context.
+
+## The lateral frame (attack heuristic, owner-supplied)
+
+The last hardest question in a discipline is usually blocked by the
+discipline's own standing assumptions, not by a missing calculation.
+Fifteen years-plus of S(t) work pushed the FRONT DOOR (harder and
+harder estimates of the same function at the same points). Lateral
+thinking changes what the question is about, before it pushes harder.
+
+The red-hat puzzle structure (three logicians, red and blue hats,
+silence-based inference: the first man says nothing, the second hears
+that and knows, the third hears both silences and knows) is exactly the
+shape of an argument-principle zero-sum proof: the value you cannot see
+directly — |S| AT the zero, from inside the zero — is determined by the
+global bookkeeping of what the contour CAN see (the winding number is
+fixed by the zeros inside, the zero contributions sum to it). The hat
+on your own head is readable from the consistency of everyone else's.
+
+Consequences for the attack:
+
+- hA1 is a red-hat-shaped theorem. Do not estimate S(gamma) directly at
+  the zero (impossible — it is the discontinuity point). Read it from
+  the zero-sum: ap1..ap3 are the "hearing the silences" chain, ap4/ap5
+  are the bounded bookkeeping, a1-close is the third logician speaking.
+- If a sub-lemma resists by brute force, the first move is to RESTATE
+  it in the other idiom (S-form vs W-form vs signed-defect form) —
+  the three forms are three hats; the one that goes silent often has
+  the answer. The signed-defect form is what the data-side instrument
+  found to be the legible one; expect it to be the legible one here.
+- The constant may come out large the first time. That is fine: walk
+  through the side door first, then look for a prettier door.
