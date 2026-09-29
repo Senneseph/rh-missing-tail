@@ -1,0 +1,373 @@
+2026-09-28 06:50:42 day045 supervisor start (lock held)
+2026-09-28 06:50:43 band spot check:  size=740623021712  perm=555  first=2999246000.182257  last=30001045999.981976
+2026-09-28 06:50:44 L-shards  verified  (11  x  md5  against  official  lmfdb  pins)
+2026-09-28 06:50:44 supervisor pid 1397  written  to  /workspace/h1/RH/scripts/rh/ckpt_h1_3e10_h/supervisor.pid
+2026-09-28 06:50:44 instance  1  launching  (env  WORKERS=4  contexts  x  H1_THREADS=8  threads;  windows=27-28;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-28 08:25:31 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 08:30:31 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 08:34:11 day045 supervisor start (lock held)
+2026-09-28 08:34:11 band spot check:  size=740623021712  perm=555  first=2999246000.182257  last=30001045999.981976
+2026-09-28 08:34:12 L-shards  verified  (11  x  md5  against  official  lmfdb  pins)
+2026-09-28 08:34:12 supervisor pid 4114  written  to  /workspace/h1/RH/scripts/rh/ckpt_h1_3e10_h/supervisor.pid
+2026-09-28 08:34:12 instance  1  launching  (env  WORKERS=4  contexts  x  H1_THREADS=4  threads;  windows=27-28;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-28 08:39:12 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 08:44:12 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 08:49:12 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 08:54:13 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 08:59:13 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 09:04:14 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 09:09:14 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 09:14:15 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 09:19:15 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 09:24:15 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 09:29:16 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 09:34:16 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 09:39:16 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 09:44:17 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 09:49:18 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 09:54:18 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 09:59:19 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 10:04:19 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 10:09:19 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 10:14:20 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 10:19:20 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 10:24:21 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 10:29:24 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 10:34:25 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 10:39:26 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 10:44:26 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 10:49:27 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 10:54:27 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 10:59:28 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 11:04:28 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 11:09:29 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 11:14:30 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 11:19:30 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 11:24:33 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 11:29:33 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 11:34:34 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 11:39:34 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 11:44:35 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 11:49:38 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 11:54:38 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 11:59:38 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 12:04:39 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 12:09:39 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 12:14:40 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 12:19:40 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 12:24:41 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 12:29:41 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 12:34:41 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 12:39:42 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 12:44:42 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 12:49:43 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 12:54:44 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 12:59:45 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 13:04:45 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 13:09:46 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 13:14:46 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 13:19:46 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 13:24:47 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 13:29:47 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 13:34:48 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 13:39:49 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 13:44:49 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 13:49:49 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 13:54:50 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 13:59:50 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 14:04:51 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 14:09:51 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 14:14:52 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 14:19:52 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 14:24:53 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 14:29:54 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 14:34:54 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 14:39:55 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 14:44:56 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 14:49:56 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 14:54:57 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 14:59:57 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 15:04:58 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 15:09:58 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 15:14:59 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 15:19:59 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 15:25:00 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 15:30:00 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 15:35:01 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 15:48:03 day045 supervisor start (lock held)
+2026-09-28 15:48:03 band spot check:  size=740623021712  perm=555  first=2999246000.182257  last=30001045999.981976
+2026-09-28 15:48:04 L-shards  verified  (11  x  md5  against  official  lmfdb  pins)
+2026-09-28 15:48:04 supervisor pid 302  written  to  /workspace/h1/RH/scripts/rh/ckpt_h1_3e10_h/supervisor.pid
+2026-09-28 15:48:04 instance  1  launching  (env  WORKERS=4  contexts  x  H1_THREADS=4  threads;  windows=27-28;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-28 15:53:03 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 15:58:03 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 16:03:04 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 16:08:04 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 16:13:04 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 16:18:10 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 16:23:10 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 16:28:12 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 16:33:13 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 16:38:13 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 16:43:13 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 16:48:14 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 16:53:14 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 16:58:14 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 17:03:14 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 17:08:15 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 17:13:15 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 17:18:15 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 17:23:15 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 17:28:16 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 17:33:16 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 17:38:17 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 17:43:22 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 17:48:22 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 17:53:22 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 17:58:23 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 18:03:23 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 18:08:23 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 18:13:34 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 18:18:38 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 18:23:38 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 18:28:38 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 18:33:40 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 18:38:41 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 18:43:41 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 18:48:41 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 18:53:41 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 18:58:41 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 19:03:41 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 19:08:42 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 19:13:42 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 19:18:42 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 19:23:42 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 19:28:42 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 19:33:42 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 19:38:42 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 19:43:42 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 19:48:43 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 19:53:43 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 19:58:43 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 20:03:43 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 20:08:43 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 20:13:43 ANOTHER SUPERVISOR HOLDS THE LOCK - exiting
+2026-09-28 20:15:14 instance  1  exited  rc=0
+2026-09-28 20:15:14 instance  windows  complete  (marker  in  out_day038_full_h.log)  --  exiting
+2026-09-28 20:15:14 day045 supervisor exit  (total  instances:  2)
+2026-09-28 20:18:43 day045 supervisor start (lock held)
+2026-09-28 20:18:43 band spot check:  size=740623021712  perm=555  first=2999246000.182257  last=30001045999.981976
+2026-09-28 20:18:44 L-shards  verified  (11  x  md5  against  official  lmfdb  pins)
+2026-09-28 20:18:44 supervisor pid 11811  written  to  /workspace/h1/RH/scripts/rh/ckpt_h1_3e10_h/supervisor.pid
+2026-09-28 20:18:44 instance  windows  complete  (marker  in  out_day038_full_h.log)  --  exiting
+2026-09-28 20:18:44 day045 supervisor exit  (total  instances:  1)
+2026-09-28 20:23:43 day045 supervisor start (lock held)
+2026-09-28 20:23:43 band spot check:  size=740623021712  perm=555  first=2999246000.182257  last=30001045999.981976
+2026-09-28 20:23:44 L-shards  verified  (11  x  md5  against  official  lmfdb  pins)
+2026-09-28 20:23:44 supervisor pid 12067  written  to  /workspace/h1/RH/scripts/rh/ckpt_h1_3e10_h/supervisor.pid
+2026-09-28 20:23:44 instance  windows  complete  (marker  in  out_day038_full_h.log)  --  exiting
+2026-09-28 20:23:44 day045 supervisor exit  (total  instances:  1)
+2026-09-28 20:28:43 day045 supervisor start (lock held)
+2026-09-28 20:28:43 band spot check:  size=740623021712  perm=555  first=2999246000.182257  last=30001045999.981976
+2026-09-28 20:28:44 L-shards  verified  (11  x  md5  against  official  lmfdb  pins)
+2026-09-28 20:28:44 supervisor pid 12332  written  to  /workspace/h1/RH/scripts/rh/ckpt_h1_3e10_h/supervisor.pid
+2026-09-28 20:28:44 instance  windows  complete  (marker  in  out_day038_full_h.log)  --  exiting
+2026-09-28 20:28:44 day045 supervisor exit  (total  instances:  1)
+2026-09-28 20:33:43 day045 supervisor start (lock held)
+2026-09-28 20:33:43 band spot check:  size=740623021712  perm=555  first=2999246000.182257  last=30001045999.981976
+2026-09-28 20:33:44 L-shards  verified  (11  x  md5  against  official  lmfdb  pins)
+2026-09-28 20:33:44 supervisor pid 12650  written  to  /workspace/h1/RH/scripts/rh/ckpt_h1_3e10_h/supervisor.pid
+2026-09-28 20:33:44 instance  windows  complete  (marker  in  out_day038_full_h.log)  --  exiting
+2026-09-28 20:33:44 day045 supervisor exit  (total  instances:  1)
+2026-09-28 20:38:43 day045 supervisor start (lock held)
+2026-09-28 20:38:43 band spot check:  size=740623021712  perm=555  first=2999246000.182257  last=30001045999.981976
+2026-09-28 20:38:45 L-shards  verified  (11  x  md5  against  official  lmfdb  pins)
+2026-09-28 20:38:45 supervisor pid 12907  written  to  /workspace/h1/RH/scripts/rh/ckpt_h1_3e10_h/supervisor.pid
+2026-09-28 20:38:45 instance  windows  complete  (marker  in  out_day038_full_h.log)  --  exiting
+2026-09-28 20:38:45 day045 supervisor exit  (total  instances:  1)
+2026-09-28 20:43:44 day045 supervisor start (lock held)
+2026-09-28 20:43:44 band spot check:  size=740623021712  perm=555  first=2999246000.182257  last=30001045999.981976
+2026-09-28 20:43:45 L-shards  verified  (11  x  md5  against  official  lmfdb  pins)
+2026-09-28 20:43:45 supervisor pid 13163  written  to  /workspace/h1/RH/scripts/rh/ckpt_h1_3e10_h/supervisor.pid
+2026-09-28 20:43:45 instance  windows  complete  (marker  in  out_day038_full_h.log)  --  exiting
+2026-09-28 20:43:45 day045 supervisor exit  (total  instances:  1)
+2026-09-28 20:48:44 day045 supervisor start (lock held)
+2026-09-28 20:48:44 band spot check:  size=740623021712  perm=555  first=2999246000.182257  last=30001045999.981976
+2026-09-28 20:48:45 L-shards  verified  (11  x  md5  against  official  lmfdb  pins)
+2026-09-28 20:48:45 supervisor pid 13421  written  to  /workspace/h1/RH/scripts/rh/ckpt_h1_3e10_h/supervisor.pid
+2026-09-28 20:48:45 instance  windows  complete  (marker  in  out_day038_full_h.log)  --  exiting
+2026-09-28 20:48:45 day045 supervisor exit  (total  instances:  1)
+2026-09-28 20:53:44 day045 supervisor start (lock held)
+2026-09-28 20:53:44 band spot check:  size=740623021712  perm=555  first=2999246000.182257  last=30001045999.981976
+2026-09-28 20:53:45 L-shards  verified  (11  x  md5  against  official  lmfdb  pins)
+2026-09-28 20:53:45 supervisor pid 13678  written  to  /workspace/h1/RH/scripts/rh/ckpt_h1_3e10_h/supervisor.pid
+2026-09-28 20:53:45 instance  windows  complete  (marker  in  out_day038_full_h.log)  --  exiting
+2026-09-28 20:53:45 day045 supervisor exit  (total  instances:  1)
+2026-09-28 20:58:44 day045 supervisor start (lock held)
+2026-09-28 20:58:44 band spot check:  size=740623021712  perm=555  first=2999246000.182257  last=30001045999.981976
+2026-09-28 20:58:45 L-shards  verified  (11  x  md5  against  official  lmfdb  pins)
+2026-09-28 20:58:45 supervisor pid 13935  written  to  /workspace/h1/RH/scripts/rh/ckpt_h1_3e10_h/supervisor.pid
+2026-09-28 20:58:45 instance  windows  complete  (marker  in  out_day038_full_h.log)  --  exiting
+2026-09-28 20:58:45 day045 supervisor exit  (total  instances:  1)
+2026-09-28 21:03:44 day045 supervisor start (lock held)
+2026-09-28 21:03:44 band spot check:  size=740623021712  perm=555  first=2999246000.182257  last=30001045999.981976
+2026-09-28 21:03:45 L-shards  verified  (11  x  md5  against  official  lmfdb  pins)
+2026-09-28 21:03:45 supervisor pid 14251  written  to  /workspace/h1/RH/scripts/rh/ckpt_h1_3e10_h/supervisor.pid
+2026-09-28 21:03:45 instance  windows  complete  (marker  in  out_day038_full_h.log)  --  exiting
+2026-09-28 21:03:45 day045 supervisor exit  (total  instances:  1)
+2026-09-28 21:08:44 day045 supervisor start (lock held)
+2026-09-28 21:08:44 band spot check:  size=740623021712  perm=555  first=2999246000.182257  last=30001045999.981976
+2026-09-28 21:08:45 L-shards  verified  (11  x  md5  against  official  lmfdb  pins)
+2026-09-28 21:08:45 supervisor pid 14514  written  to  /workspace/h1/RH/scripts/rh/ckpt_h1_3e10_h/supervisor.pid
+2026-09-28 21:08:45 instance  windows  complete  (marker  in  out_day038_full_h.log)  --  exiting
+2026-09-28 21:08:45 day045 supervisor exit  (total  instances:  1)
+2026-09-28 21:13:44 day045 supervisor start (lock held)
+2026-09-28 21:13:44 band spot check:  size=740623021712  perm=555  first=2999246000.182257  last=30001045999.981976
+2026-09-28 21:13:45 L-shards  verified  (11  x  md5  against  official  lmfdb  pins)
+2026-09-28 21:13:45 supervisor pid 14769  written  to  /workspace/h1/RH/scripts/rh/ckpt_h1_3e10_h/supervisor.pid
+2026-09-28 21:13:45 instance  windows  complete  (marker  in  out_day038_full_h.log)  --  exiting
+2026-09-28 21:13:45 day045 supervisor exit  (total  instances:  1)
+2026-09-28 21:18:44 day045 supervisor start (lock held)
+2026-09-28 21:18:44 band spot check:  size=740623021712  perm=555  first=2999246000.182257  last=30001045999.981976
+2026-09-28 21:18:45 L-shards  verified  (11  x  md5  against  official  lmfdb  pins)
+2026-09-28 21:18:45 supervisor pid 15024  written  to  /workspace/h1/RH/scripts/rh/ckpt_h1_3e10_h/supervisor.pid
+2026-09-28 21:18:45 instance  windows  complete  (marker  in  out_day038_full_h.log)  --  exiting
+2026-09-28 21:18:45 day045 supervisor exit  (total  instances:  1)
+2026-09-28 21:23:44 day045 supervisor start (lock held)
+2026-09-28 21:23:44 band spot check:  size=740623021712  perm=555  first=2999246000.182257  last=30001045999.981976
+2026-09-28 21:23:45 L-shards  verified  (11  x  md5  against  official  lmfdb  pins)
+2026-09-28 21:23:45 supervisor pid 15286  written  to  /workspace/h1/RH/scripts/rh/ckpt_h1_3e10_h/supervisor.pid
+2026-09-28 21:23:45 instance  windows  complete  (marker  in  out_day038_full_h.log)  --  exiting
+2026-09-28 21:23:45 day045 supervisor exit  (total  instances:  1)
+2026-09-28 21:28:44 day045 supervisor start (lock held)
+2026-09-28 21:28:44 band spot check:  size=740623021712  perm=555  first=2999246000.182257  last=30001045999.981976
+2026-09-28 21:28:45 L-shards  verified  (11  x  md5  against  official  lmfdb  pins)
+2026-09-28 21:28:45 supervisor pid 15544  written  to  /workspace/h1/RH/scripts/rh/ckpt_h1_3e10_h/supervisor.pid
+2026-09-28 21:28:45 instance  windows  complete  (marker  in  out_day038_full_h.log)  --  exiting
+2026-09-28 21:28:45 day045 supervisor exit  (total  instances:  1)
+2026-09-28 21:33:44 day045 supervisor start (lock held)
+2026-09-28 21:33:44 band spot check:  size=740623021712  perm=555  first=2999246000.182257  last=30001045999.981976
+2026-09-28 21:33:45 L-shards  verified  (11  x  md5  against  official  lmfdb  pins)
+2026-09-28 21:33:45 supervisor pid 15863  written  to  /workspace/h1/RH/scripts/rh/ckpt_h1_3e10_h/supervisor.pid
+2026-09-28 21:33:45 instance  windows  complete  (marker  in  out_day038_full_h.log)  --  exiting
+2026-09-28 21:33:45 day045 supervisor exit  (total  instances:  1)
+2026-09-28 21:38:44 day045 supervisor start (lock held)
+2026-09-28 21:38:44 band spot check:  size=740623021712  perm=555  first=2999246000.182257  last=30001045999.981976
+2026-09-28 21:38:45 L-shards  verified  (11  x  md5  against  official  lmfdb  pins)
+2026-09-28 21:38:45 supervisor pid 16121  written  to  /workspace/h1/RH/scripts/rh/ckpt_h1_3e10_h/supervisor.pid
+2026-09-28 21:38:45 instance  windows  complete  (marker  in  out_day038_full_h.log)  --  exiting
+2026-09-28 21:38:45 day045 supervisor exit  (total  instances:  1)
+2026-09-28 21:43:44 day045 supervisor start (lock held)
+2026-09-28 21:43:44 band spot check:  size=740623021712  perm=555  first=2999246000.182257  last=30001045999.981976
+2026-09-28 21:43:46 L-shards  verified  (11  x  md5  against  official  lmfdb  pins)
+2026-09-28 21:43:46 supervisor pid 16378  written  to  /workspace/h1/RH/scripts/rh/ckpt_h1_3e10_h/supervisor.pid
+2026-09-28 21:43:46 instance  windows  complete  (marker  in  out_day038_full_h.log)  --  exiting
+2026-09-28 21:43:46 day045 supervisor exit  (total  instances:  1)
+2026-09-28 21:48:44 day045 supervisor start (lock held)
+2026-09-28 21:48:44 band spot check:  size=740623021712  perm=555  first=2999246000.182257  last=30001045999.981976
+2026-09-28 21:48:46 L-shards  verified  (11  x  md5  against  official  lmfdb  pins)
+2026-09-28 21:48:46 supervisor pid 16634  written  to  /workspace/h1/RH/scripts/rh/ckpt_h1_3e10_h/supervisor.pid
+2026-09-28 21:48:46 instance  windows  complete  (marker  in  out_day038_full_h.log)  --  exiting
+2026-09-28 21:48:46 day045 supervisor exit  (total  instances:  1)
+2026-09-28 21:53:45 day045 supervisor start (lock held)
+2026-09-28 21:53:45 band spot check:  size=740623021712  perm=555  first=2999246000.182257  last=30001045999.981976
+2026-09-28 21:53:46 L-shards  verified  (11  x  md5  against  official  lmfdb  pins)
+2026-09-28 21:53:46 supervisor pid 16890  written  to  /workspace/h1/RH/scripts/rh/ckpt_h1_3e10_h/supervisor.pid
+2026-09-28 21:53:46 instance  windows  complete  (marker  in  out_day038_full_h.log)  --  exiting
+2026-09-28 21:53:46 day045 supervisor exit  (total  instances:  1)
+2026-09-28 21:58:45 day045 supervisor start (lock held)
+2026-09-28 21:58:45 band spot check:  size=740623021712  perm=555  first=2999246000.182257  last=30001045999.981976
+2026-09-28 21:58:46 L-shards  verified  (11  x  md5  against  official  lmfdb  pins)
+2026-09-28 21:58:46 supervisor pid 17147  written  to  /workspace/h1/RH/scripts/rh/ckpt_h1_3e10_h/supervisor.pid
+2026-09-28 21:58:46 instance  windows  complete  (marker  in  out_day038_full_h.log)  --  exiting
+2026-09-28 21:58:46 day045 supervisor exit  (total  instances:  1)
+2026-09-28 22:03:45 day045 supervisor start (lock held)
+2026-09-28 22:03:45 band spot check:  size=740623021712  perm=555  first=2999246000.182257  last=30001045999.981976
+2026-09-28 22:03:46 L-shards  verified  (11  x  md5  against  official  lmfdb  pins)
+2026-09-28 22:03:46 supervisor pid 17470  written  to  /workspace/h1/RH/scripts/rh/ckpt_h1_3e10_h/supervisor.pid
+2026-09-28 22:03:46 instance  windows  complete  (marker  in  out_day038_full_h.log)  --  exiting
+2026-09-28 22:03:46 day045 supervisor exit  (total  instances:  1)
+2026-09-28 22:08:45 day045 supervisor start (lock held)
+2026-09-28 22:08:45 band spot check:  size=740623021712  perm=555  first=2999246000.182257  last=30001045999.981976
+2026-09-28 22:08:46 L-shards  verified  (11  x  md5  against  official  lmfdb  pins)
+2026-09-28 22:08:46 supervisor pid 17726  written  to  /workspace/h1/RH/scripts/rh/ckpt_h1_3e10_h/supervisor.pid
+2026-09-28 22:08:46 instance  windows  complete  (marker  in  out_day038_full_h.log)  --  exiting
+2026-09-28 22:08:46 day045 supervisor exit  (total  instances:  1)
+2026-09-28 22:13:45 day045 supervisor start (lock held)
+2026-09-28 22:13:45 band spot check:  size=740623021712  perm=555  first=2999246000.182257  last=30001045999.981976
+2026-09-28 22:13:46 L-shards  verified  (11  x  md5  against  official  lmfdb  pins)
+2026-09-28 22:13:46 supervisor pid 17984  written  to  /workspace/h1/RH/scripts/rh/ckpt_h1_3e10_h/supervisor.pid
+2026-09-28 22:13:46 instance  windows  complete  (marker  in  out_day038_full_h.log)  --  exiting
+2026-09-28 22:13:46 day045 supervisor exit  (total  instances:  1)
+2026-09-28 22:18:45 day045 supervisor start (lock held)
+2026-09-28 22:18:45 band spot check:  size=740623021712  perm=555  first=2999246000.182257  last=30001045999.981976
+2026-09-28 22:18:46 L-shards  verified  (11  x  md5  against  official  lmfdb  pins)
+2026-09-28 22:18:46 supervisor pid 18243  written  to  /workspace/h1/RH/scripts/rh/ckpt_h1_3e10_h/supervisor.pid
+2026-09-28 22:18:46 instance  windows  complete  (marker  in  out_day038_full_h.log)  --  exiting
+2026-09-28 22:18:46 day045 supervisor exit  (total  instances:  1)
+2026-09-28 22:23:45 day045 supervisor start (lock held)
+2026-09-28 22:23:45 band spot check:  size=740623021712  perm=555  first=2999246000.182257  last=30001045999.981976
+2026-09-28 22:23:46 L-shards  verified  (11  x  md5  against  official  lmfdb  pins)
+2026-09-28 22:23:46 supervisor pid 18502  written  to  /workspace/h1/RH/scripts/rh/ckpt_h1_3e10_h/supervisor.pid
+2026-09-28 22:23:46 instance  windows  complete  (marker  in  out_day038_full_h.log)  --  exiting
+2026-09-28 22:23:46 day045 supervisor exit  (total  instances:  1)
+2026-09-28 22:28:45 day045 supervisor start (lock held)
+2026-09-28 22:28:45 band spot check:  size=740623021712  perm=555  first=2999246000.182257  last=30001045999.981976
+2026-09-28 22:28:46 L-shards  verified  (11  x  md5  against  official  lmfdb  pins)
+2026-09-28 22:28:46 supervisor pid 18756  written  to  /workspace/h1/RH/scripts/rh/ckpt_h1_3e10_h/supervisor.pid
+2026-09-28 22:28:46 instance  windows  complete  (marker  in  out_day038_full_h.log)  --  exiting
+2026-09-28 22:28:46 day045 supervisor exit  (total  instances:  1)
+2026-09-28 22:33:45 day045 supervisor start (lock held)
+2026-09-28 22:33:45 band spot check:  size=740623021712  perm=555  first=2999246000.182257  last=30001045999.981976
+2026-09-28 22:33:46 L-shards  verified  (11  x  md5  against  official  lmfdb  pins)
+2026-09-28 22:33:46 supervisor pid 19090  written  to  /workspace/h1/RH/scripts/rh/ckpt_h1_3e10_h/supervisor.pid
+2026-09-28 22:33:46 instance  windows  complete  (marker  in  out_day038_full_h.log)  --  exiting
+2026-09-28 22:33:46 day045 supervisor exit  (total  instances:  1)
+2026-09-28 22:38:45 day045 supervisor start (lock held)
+2026-09-28 22:38:45 band spot check:  size=740623021712  perm=555  first=2999246000.182257  last=30001045999.981976
+2026-09-28 22:38:46 L-shards  verified  (11  x  md5  against  official  lmfdb  pins)
+2026-09-28 22:38:46 supervisor pid 19336  written  to  /workspace/h1/RH/scripts/rh/ckpt_h1_3e10_h/supervisor.pid
+2026-09-28 22:38:46 instance  windows  complete  (marker  in  out_day038_full_h.log)  --  exiting
+2026-09-28 22:38:46 day045 supervisor exit  (total  instances:  1)
+2026-09-28 22:43:45 day045 supervisor start (lock held)
+2026-09-28 22:43:45 band spot check:  size=740623021712  perm=555  first=2999246000.182257  last=30001045999.981976
+2026-09-28 22:43:46 L-shards  verified  (11  x  md5  against  official  lmfdb  pins)
+2026-09-28 22:43:46 supervisor pid 19597  written  to  /workspace/h1/RH/scripts/rh/ckpt_h1_3e10_h/supervisor.pid
+2026-09-28 22:43:46 instance  windows  complete  (marker  in  out_day038_full_h.log)  --  exiting
+2026-09-28 22:43:46 day045 supervisor exit  (total  instances:  1)
+2026-09-28 22:48:45 day045 supervisor start (lock held)
+2026-09-28 22:48:45 band spot check:  size=740623021712  perm=555  first=2999246000.182257  last=30001045999.981976
+2026-09-28 22:48:46 L-shards  verified  (11  x  md5  against  official  lmfdb  pins)
+2026-09-28 22:48:46 supervisor pid 19851  written  to  /workspace/h1/RH/scripts/rh/ckpt_h1_3e10_h/supervisor.pid
+2026-09-28 22:48:47 instance  windows  complete  (marker  in  out_day038_full_h.log)  --  exiting
+2026-09-28 22:48:47 day045 supervisor exit  (total  instances:  1)
+2026-09-28 22:53:45 day045 supervisor start (lock held)
+2026-09-28 22:53:45 band spot check:  size=740623021712  perm=555  first=2999246000.182257  last=30001045999.981976
+2026-09-28 22:53:47 L-shards  verified  (11  x  md5  against  official  lmfdb  pins)
+2026-09-28 22:53:47 supervisor pid 20108  written  to  /workspace/h1/RH/scripts/rh/ckpt_h1_3e10_h/supervisor.pid
+2026-09-28 22:53:47 instance  windows  complete  (marker  in  out_day038_full_h.log)  --  exiting
+2026-09-28 22:53:47 day045 supervisor exit  (total  instances:  1)
+2026-09-28 22:58:46 day045 supervisor start (lock held)
+2026-09-28 22:58:46 band spot check:  size=740623021712  perm=555  first=2999246000.182257  last=30001045999.981976
+2026-09-28 22:58:47 L-shards  verified  (11  x  md5  against  official  lmfdb  pins)
+2026-09-28 22:58:47 supervisor pid 20366  written  to  /workspace/h1/RH/scripts/rh/ckpt_h1_3e10_h/supervisor.pid
+2026-09-28 22:58:47 instance  windows  complete  (marker  in  out_day038_full_h.log)  --  exiting
+2026-09-28 22:58:47 day045 supervisor exit  (total  instances:  1)
+2026-09-28 23:03:46 day045 supervisor start (lock held)
+2026-09-28 23:03:46 band spot check:  size=740623021712  perm=555  first=2999246000.182257  last=30001045999.981976
+2026-09-28 23:03:47 L-shards  verified  (11  x  md5  against  official  lmfdb  pins)
+2026-09-28 23:03:47 supervisor pid 20779  written  to  /workspace/h1/RH/scripts/rh/ckpt_h1_3e10_h/supervisor.pid
+2026-09-28 23:03:47 instance  windows  complete  (marker  in  out_day038_full_h.log)  --  exiting
+2026-09-28 23:03:47 day045 supervisor exit  (total  instances:  1)
+2026-09-29 05:03:49 day045 supervisor start (lock held)
+2026-09-29 05:03:49 band spot check:  size=740623021712  perm=555  first=2999246000.182257  last=30001045999.981976
+2026-09-29 05:03:51 L-shards  verified  (11  x  md5  against  official  lmfdb  pins)
+2026-09-29 05:03:51 supervisor pid 305  written  to  /workspace/h1/RH/scripts/rh/ckpt_h1_3e10_h/supervisor.pid
+2026-09-29 05:03:51 instance  windows  complete  (marker  in  out_day038_full_h.log)  --  exiting
+2026-09-29 05:03:51 day045 supervisor exit  (total  instances:  1)
+2026-09-29 05:08:49 day045 supervisor start (lock held)
+2026-09-29 05:08:49 band spot check:  size=740623021712  perm=555  first=2999246000.182257  last=30001045999.981976
+2026-09-29 05:08:51 L-shards  verified  (11  x  md5  against  official  lmfdb  pins)
+2026-09-29 05:08:51 supervisor pid 1591  written  to  /workspace/h1/RH/scripts/rh/ckpt_h1_3e10_h/supervisor.pid
+2026-09-29 05:08:51 instance  windows  complete  (marker  in  out_day038_full_h.log)  --  exiting
+2026-09-29 05:08:51 day045 supervisor exit  (total  instances:  1)

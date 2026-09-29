@@ -1,0 +1,1944 @@
+H1_WINDOWS:  running  windows  12-13  (2  of  29)
+resume:  window   0  (x=8139156365)  0/24  points  on disk
+resume:  window   1  (x=8790288874)  0/24  points  on disk
+memguard:  MemAvailable  738.6  GiB,  reserve  28  GiB,  ~2.5  GiB/thread  x  8  threads  ->  allow  <=  10  contexts  (=  80  slab  threads;  11  GPU  clients  incl.  Xorg  vs  budget  11)
+day038  gpu  H1-3e10:  FULL,  48  point  jobs  remaining (2  windows,  4  contexts  x  8  threads)
+pids: parent=1649 workers=4 written to ckpt_h1_3e10/run.pids
+overlap: 152/12626784 zeros differ by <=1.00 ulp (last byte,  rounding-level) --  those indices certified with dg x3
+stitch: B from element 12626784 (first zero 1006346000.166784); overlap cross-check 12626632/12626784 byte-equal
+tail3e10: L 52290633 + A 2792198664 + B' 3053546936 + C 3142622346 + D 92577877714 = 101618536293 zeros (812.9 GB); G_LAST = 30001045999.981976
+overlap: 152/12626784 zeros differ by <=1.00 ulp (last byte,  rounding-level) --  those indices certified with dg x3
+stitch: B from element 12626784 (first zero 1006346000.166784); overlap cross-check 12626632/12626784 byte-equal
+tail3e10: L 52290633 + A 2792198664 + B' 3053546936 + C 3142622346 + D 92577877714 = 101618536293 zeros (812.9 GB); G_LAST = 30001045999.981976
+overlap: 152/12626784 zeros differ by <=1.00 ulp (last byte,  rounding-level) --  those indices certified with dg x3
+stitch: B from element 12626784 (first zero 1006346000.166784); overlap cross-check 12626632/12626784 byte-equal
+tail3e10: L 52290633 + A 2792198664 + B' 3053546936 + C 3142622346 + D 92577877714 = 101618536293 zeros (812.9 GB); G_LAST = 30001045999.981976
+overlap: 152/12626784 zeros differ by <=1.00 ulp (last byte,  rounding-level) --  those indices certified with dg x3
+stitch: B from element 12626784 (first zero 1006346000.166784); overlap cross-check 12626632/12626784 byte-equal
+tail3e10: L 52290633 + A 2792198664 + B' 3053546936 + C 3142622346 + D 92577877714 = 101618536293 zeros (812.9 GB); G_LAST = 30001045999.981976
+Exception in thread Thread-2 (_chunk):
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 569, in _chunk
+    sr, si, br, bi, s_ar, dm = slabfn(
+                               ^^^^^^^
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 455, in slab_budget_gpu
+    dredg = (2.0 * cc / cp.maximum(abs_g2t2, 1e-30)
+             ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  File "cupy/_core/core.pyx", line 1606, in cupy._core.core._ndarray_base.__truediv__
+  File "cupy/_core/_kernel.pyx", line 1374, in cupy._core._kernel.ufunc.__call__
+  File "cupy/_core/_kernel.pyx", line 657, in cupy._core._kernel._get_out_args_from_optionals
+  File "cupy/_core/core.pyx", line 3342, in cupy._core.core._ndarray_init
+  File "cupy/_core/core.pyx", line 300, in cupy._core.core._ndarray_base._init_fast
+  File "cupy/cuda/memory.pyx", line 904, in cupy.cuda.memory.alloc
+  File "cupy/cuda/memory.pyx", line 1614, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1635, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1350, in cupy.cuda.memory.SingleDeviceMemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1376, in cupy.cuda.memory.SingleDeviceMemoryPool._malloc
+  File "cupy/cuda/memory.pyx", line 1560, in cupy.cuda.memory.SingleDeviceMemoryPool._try_malloc
+cupy.cuda.memory.OutOfMemoryError: Out of memory allocating 134,217,728 bytes (allocated so far: 8,858,396,672 bytes).
+Exception in thread Thread-7 (_chunk):
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 569, in _chunk
+    sr, si, br, bi, s_ar, dm = slabfn(
+                               ^^^^^^^
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 444, in slab_budget_gpu
+    g2 = cc * cc
+         ~~~^~~~
+  File "cupy/_core/core.pyx", line 1582, in cupy._core.core._ndarray_base.__mul__
+  File "cupy/_core/_kernel.pyx", line 1397, in cupy._core._kernel.ufunc.__call__
+  File "cupy/_core/_kernel.pyx", line 1426, in cupy._core._kernel.ufunc._get_ufunc_kernel
+  File "cupy/_core/_kernel.pyx", line 1098, in cupy._core._kernel._get_ufunc_kernel
+  File "cupy/_core/_kernel.pyx", line 124, in cupy._core._kernel._get_simple_elementwise_kernel
+  File "cupy/_core/_kernel.pyx", line 112, in cupy._core._kernel._get_simple_elementwise_kernel_from_code
+  File "cupy/_core/core.pyx", line 2639, in cupy._core.core.compile_with_cache
+  File "/opt/venvs/cupy/lib/python3.12/site-packages/cupy/cuda/compiler.py", line 649, in _compile_module_with_cache
+Exception in thread Thread-2 (_chunk):
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 569, in _chunk
+    sr, si, br, bi, s_ar, dm = slabfn(
+                               ^^^^^^^
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 444, in slab_budget_gpu
+    g2 = cc * cc
+         ~~~^~~~
+  File "cupy/_core/core.pyx", line 1582, in cupy._core.core._ndarray_base.__mul__
+  File "cupy/_core/_kernel.pyx", line 1397, in cupy._core._kernel.ufunc.__call__
+  File "cupy/_core/_kernel.pyx", line 1426, in cupy._core._kernel.ufunc._get_ufunc_kernel
+  File "cupy/_core/_kernel.pyx", line 1098, in cupy._core._kernel._get_ufunc_kernel
+  File "cupy/_core/_kernel.pyx", line 124, in cupy._core._kernel._get_simple_elementwise_kernel
+  File "cupy/_core/_kernel.pyx", line 112, in cupy._core._kernel._get_simple_elementwise_kernel_from_code
+  File "cupy/_core/core.pyx", line 2639, in cupy._core.core.compile_with_cache
+  File "/opt/venvs/cupy/lib/python3.12/site-packages/cupy/cuda/compiler.py", line 649, in _compile_module_with_cache
+    return _compile_with_cache_cuda(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venvs/cupy/lib/python3.12/site-packages/cupy/cuda/compiler.py", line 739, in _compile_with_cache_cuda
+    mod.load(payload)
+  File "cupy/cuda/function.pyx", line 193, in cupy.cuda.function.Module.load
+  File "cupy/cuda/function.pyx", line 195, in cupy.cuda.function.Module.load
+  File "cupy_backends/cuda/api/driver.pyx", line 239, in cupy_backends.cuda.api.driver.moduleLoadData
+  File "cupy_backends/cuda/api/driver.pyx", line 73, in cupy_backends.cuda.api.driver.check_status
+cupy_backends.cuda.api.driver.CUDADriverError: CUDA_ERROR_OUT_OF_MEMORY: out of memory
+Exception in thread Thread-3 (_chunk):
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 569, in _chunk
+    sr, si, br, bi, s_ar, dm = slabfn(
+                               ^^^^^^^
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 444, in slab_budget_gpu
+    g2 = cc * cc
+         ~~~^~~~
+  File "cupy/_core/core.pyx", line 1582, in cupy._core.core._ndarray_base.__mul__
+  File "cupy/_core/_kernel.pyx", line 1374, in cupy._core._kernel.ufunc.__call__
+  File "cupy/_core/_kernel.pyx", line 657, in cupy._core._kernel._get_out_args_from_optionals
+  File "cupy/_core/core.pyx", line 3342, in cupy._core.core._ndarray_init
+  File "cupy/_core/core.pyx", line 300, in cupy._core.core._ndarray_base._init_fast
+  File "cupy/cuda/memory.pyx", line 904, in cupy.cuda.memory.alloc
+  File "cupy/cuda/memory.pyx", line 1614, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1635, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1350, in cupy.cuda.memory.SingleDeviceMemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1376, in cupy.cuda.memory.SingleDeviceMemoryPool._malloc
+  File "cupy/cuda/memory.pyx", line 1560, in cupy.cuda.memory.SingleDeviceMemoryPool._try_malloc
+cupy.cuda.memory.OutOfMemoryError: Out of memory allocating 134,217,728 bytes (allocated so far: 2,013,265,920 bytes).
+    return _compile_with_cache_cuda(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venvs/cupy/lib/python3.12/site-packages/cupy/cuda/compiler.py", line 739, in _compile_with_cache_cuda
+    mod.load(payload)
+  File "cupy/cuda/function.pyx", line 193, in cupy.cuda.function.Module.load
+  File "cupy/cuda/function.pyx", line 195, in cupy.cuda.function.Module.load
+  File "cupy_backends/cuda/api/driver.pyx", line 239, in cupy_backends.cuda.api.driver.moduleLoadData
+  File "cupy_backends/cuda/api/driver.pyx", line 73, in cupy_backends.cuda.api.driver.check_status
+cupy_backends.cuda.api.driver.CUDADriverError: CUDA_ERROR_OUT_OF_MEMORY: out of memory
+Exception in thread Exception in thread Thread-1 (_chunk):
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+Exception in thread Thread-5 (_chunk):
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+Thread-6 (_chunk):
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+    self.run()
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)    
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 569, in _chunk
+self.run()
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+Exception in thread     self._target(*self._args, **self._kwargs)
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 569, in _chunk
+    sr, si, br, bi, s_ar, dm = slabfn(
+                               ^^^^^^^
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 445, in slab_budget_gpu
+    A = g2 + 0.25
+        ~~~^~~~~~
+  File "cupy/_core/core.pyx", line 1570, in cupy._core.core._ndarray_base.__add__
+  File "cupy/_core/core.pyx", line 2024, in cupy._core.core._ndarray_base.__array_ufunc__
+  File "cupy/_core/_kernel.pyx", line 1374, in cupy._core._kernel.ufunc.__call__
+  File "cupy/_core/_kernel.pyx", line 657, in cupy._core._kernel._get_out_args_from_optionals
+  File "cupy/_core/core.pyx", line 3342, in cupy._core.core._ndarray_init
+  File "cupy/_core/core.pyx", line 300, in cupy._core.core._ndarray_base._init_fast
+  File "cupy/cuda/memory.pyx", line 904, in cupy.cuda.memory.alloc
+  File "cupy/cuda/memory.pyx", line 1614, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1635, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1350, in cupy.cuda.memory.SingleDeviceMemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1376, in cupy.cuda.memory.SingleDeviceMemoryPool._malloc
+  File "cupy/cuda/memory.pyx", line 1560, in cupy.cuda.memory.SingleDeviceMemoryPool._try_malloc
+cupy.cuda.memory.OutOfMemoryError: Out of memory allocating 134,217,728 bytes (allocated so far: 2,013,265,920 bytes).
+    sr, si, br, bi, s_ar, dm = slabfn(
+                               ^^^^^^^
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 447, in slab_budget_gpu
+    re_t = cp.log(abs_g2t2) - cp.log(A) + 0.5 / A
+                              ^^^^^^^^^
+  File "cupy/_core/_kernel.pyx", line 1374, in cupy._core._kernel.ufunc.__call__
+  File "cupy/_core/_kernel.pyx", line 657, in cupy._core._kernel._get_out_args_from_optionals
+  File "cupy/_core/core.pyx", line 3342, in cupy._core.core._ndarray_init
+  File "cupy/_core/core.pyx", line 300, in cupy._core.core._ndarray_base._init_fast
+  File "cupy/cuda/memory.pyx", line 904, in cupy.cuda.memory.alloc
+  File "cupy/cuda/memory.pyx", line 1614, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1635, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1350, in cupy.cuda.memory.SingleDeviceMemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1376, in cupy.cuda.memory.SingleDeviceMemoryPool._malloc
+  File "cupy/cuda/memory.pyx", line 1560, in cupy.cuda.memory.SingleDeviceMemoryPool._try_malloc
+cupy.cuda.memory.OutOfMemoryError: Out of memory allocating 134,217,728 bytes (allocated so far: 2,147,483,648 bytes).
+    self._target(*self._args, **self._kwargs)
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 569, in _chunk
+    sr, si, br, bi, s_ar, dm = slabfn(
+                               ^^^^^^^
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 445, in slab_budget_gpu
+    A = g2 + 0.25
+        ~~~^~~~~~
+  File "cupy/_core/core.pyx", line 1570, in cupy._core.core._ndarray_base.__add__
+  File "cupy/_core/core.pyx", line 2024, in cupy._core.core._ndarray_base.__array_ufunc__
+  File "cupy/_core/_kernel.pyx", line 1374, in cupy._core._kernel.ufunc.__call__
+  File "cupy/_core/_kernel.pyx", line 657, in cupy._core._kernel._get_out_args_from_optionals
+  File "cupy/_core/core.pyx", line 3342, in cupy._core.core._ndarray_init
+  File "cupy/_core/core.pyx", line 300, in cupy._core.core._ndarray_base._init_fast
+  File "cupy/cuda/memory.pyx", line 904, in cupy.cuda.memory.alloc
+  File "cupy/cuda/memory.pyx", line 1614, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1635, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1350, in cupy.cuda.memory.SingleDeviceMemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1376, in cupy.cuda.memory.SingleDeviceMemoryPool._malloc
+  File "cupy/cuda/memory.pyx", line 1560, in cupy.cuda.memory.SingleDeviceMemoryPool._try_malloc
+cupy.cuda.memory.OutOfMemoryError: Out of memory allocating 134,217,728 bytes (allocated so far: 2,281,701,376 bytes).
+Thread-4 (_chunk):
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 569, in _chunk
+    sr, si, br, bi, s_ar, dm = slabfn(
+                               ^^^^^^^
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 445, in slab_budget_gpu
+    A = g2 + 0.25
+        ~~~^~~~~~
+  File "cupy/_core/core.pyx", line 1570, in cupy._core.core._ndarray_base.__add__
+  File "cupy/_core/core.pyx", line 2024, in cupy._core.core._ndarray_base.__array_ufunc__
+  File "cupy/_core/_kernel.pyx", line 1374, in cupy._core._kernel.ufunc.__call__
+  File "cupy/_core/_kernel.pyx", line 657, in cupy._core._kernel._get_out_args_from_optionals
+  File "cupy/_core/core.pyx", line 3342, in cupy._core.core._ndarray_init
+  File "cupy/_core/core.pyx", line 300, in cupy._core.core._ndarray_base._init_fast
+  File "cupy/cuda/memory.pyx", line 904, in cupy.cuda.memory.alloc
+  File "cupy/cuda/memory.pyx", line 1614, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1635, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1350, in cupy.cuda.memory.SingleDeviceMemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1376, in cupy.cuda.memory.SingleDeviceMemoryPool._malloc
+  File "cupy/cuda/memory.pyx", line 1560, in cupy.cuda.memory.SingleDeviceMemoryPool._try_malloc
+cupy.cuda.memory.OutOfMemoryError: Out of memory allocating 134,217,728 bytes (allocated so far: 1,879,048,192 bytes).
+Exception in thread Thread-8 (_chunk):
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 569, in _chunk
+    sr, si, br, bi, s_ar, dm = slabfn(
+                               ^^^^^^^
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 447, in slab_budget_gpu
+    re_t = cp.log(abs_g2t2) - cp.log(A) + 0.5 / A
+           ~~~~~~~~~~~~~~~~~^~~~~~~~~~~
+  File "cupy/_core/core.pyx", line 1574, in cupy._core.core._ndarray_base.__sub__
+  File "cupy/_core/_kernel.pyx", line 1374, in cupy._core._kernel.ufunc.__call__
+  File "cupy/_core/_kernel.pyx", line 657, in cupy._core._kernel._get_out_args_from_optionals
+  File "cupy/_core/core.pyx", line 3342, in cupy._core.core._ndarray_init
+  File "cupy/_core/core.pyx", line 300, in cupy._core.core._ndarray_base._init_fast
+  File "cupy/cuda/memory.pyx", line 904, in cupy.cuda.memory.alloc
+  File "cupy/cuda/memory.pyx", line 1614, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1635, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1350, in cupy.cuda.memory.SingleDeviceMemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1376, in cupy.cuda.memory.SingleDeviceMemoryPool._malloc
+  File "cupy/cuda/memory.pyx", line 1560, in cupy.cuda.memory.SingleDeviceMemoryPool._try_malloc
+cupy.cuda.memory.OutOfMemoryError: Out of memory allocating 134,217,728 bytes (allocated so far: 7,650,410,496 bytes).
+Exception in thread Thread-5 (_chunk):
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 569, in _chunk
+    sr, si, br, bi, s_ar, dm = slabfn(
+                               ^^^^^^^
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 457, in slab_budget_gpu
+    dimdg = tf * 2.0 * cc / (A * A)                # > 0
+            ~~~~~~~~~~~~~~^~~~~~~~~
+  File "cupy/_core/core.pyx", line 1606, in cupy._core.core._ndarray_base.__truediv__
+  File "cupy/_core/_kernel.pyx", line 1374, in cupy._core._kernel.ufunc.__call__
+  File "cupy/_core/_kernel.pyx", line 657, in cupy._core._kernel._get_out_args_from_optionals
+  File "cupy/_core/core.pyx", line 3342, in cupy._core.core._ndarray_init
+  File "cupy/_core/core.pyx", line 300, in cupy._core.core._ndarray_base._init_fast
+  File "cupy/cuda/memory.pyx", line 904, in cupy.cuda.memory.alloc
+  File "cupy/cuda/memory.pyx", line 1614, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1635, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1350, in cupy.cuda.memory.SingleDeviceMemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1376, in cupy.cuda.memory.SingleDeviceMemoryPool._malloc
+  File "cupy/cuda/memory.pyx", line 1560, in cupy.cuda.memory.SingleDeviceMemoryPool._try_malloc
+cupy.cuda.memory.OutOfMemoryError: Out of memory allocating 134,217,728 bytes (allocated so far: 7,784,628,224 bytes).
+Exception in thread Thread-1 (_chunk):
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 569, in _chunk
+    sr, si, br, bi, s_ar, dm = slabfn(
+                               ^^^^^^^
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 457, in slab_budget_gpu
+    dimdg = tf * 2.0 * cc / (A * A)                # > 0
+            ~~~~~~~~~~~~~~^~~~~~~~~
+  File "cupy/_core/core.pyx", line 1606, in cupy._core.core._ndarray_base.__truediv__
+  File "cupy/_core/_kernel.pyx", line 1374, in cupy._core._kernel.ufunc.__call__
+  File "cupy/_core/_kernel.pyx", line 657, in cupy._core._kernel._get_out_args_from_optionals
+  File "cupy/_core/core.pyx", line 3342, in cupy._core.core._ndarray_init
+  File "cupy/_core/core.pyx", line 300, in cupy._core.core._ndarray_base._init_fast
+  File "cupy/cuda/memory.pyx", line 904, in cupy.cuda.memory.alloc
+  File "cupy/cuda/memory.pyx", line 1614, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1635, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1350, in cupy.cuda.memory.SingleDeviceMemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1376, in cupy.cuda.memory.SingleDeviceMemoryPool._malloc
+  File "cupy/cuda/memory.pyx", line 1560, in cupy.cuda.memory.SingleDeviceMemoryPool._try_malloc
+cupy.cuda.memory.OutOfMemoryError: Out of memory allocating 134,217,728 bytes (allocated so far: 7,650,410,496 bytes).
+  ...t=8.139e+09 tail sweep 8% (500 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 8% (500 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 8% (500 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 17% (1000 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 17% (1000 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 17% (1000 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 25% (1500 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 25% (1500 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 33% (2000 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 33% (2000 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 8% (500 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 25% (1500 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 41% (2500 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 41% (2500 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 33% (2000 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 50% (3000 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 50% (3000 pieces, 8 threads)
+point  job  (win  0,  k  -9,  x=8139156365)  WORKER  FAILED:  TypeError('cannot unpack non-iterable NoneType object')  --  done  points  are  checkpointed;  supervisor  resumes
+Exception in thread Thread-11 (_chunk):
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 569, in _chunk
+    sr, si, br, bi, s_ar, dm = slabfn(
+                               ^^^^^^^
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 443, in slab_budget_gpu
+    cc = cp.asarray(c)
+         ^^^^^^^^^^^^^
+  File "/opt/venvs/cupy/lib/python3.12/site-packages/cupy/_creation/from_data.py", line 94, in asarray
+    return _core.array(a, dtype, copy, order, blocking=blocking)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "cupy/_core/core.pyx", line 2821, in cupy._core.core.array
+  File "cupy/_core/core.pyx", line 2841, in cupy._core.core.array
+  File "cupy/_core/core.pyx", line 3067, in cupy._core.core._array_default
+  File "cupy/_core/core.pyx", line 176, in cupy._core.core.ndarray.__new__
+  File "cupy/_core/core.pyx", line 282, in cupy._core.core._ndarray_base._init
+  File "cupy/cuda/memory.pyx", line 904, in cupy.cuda.memory.alloc
+  File "cupy/cuda/memory.pyx", line 1614, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1635, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1350, in cupy.cuda.memory.SingleDeviceMemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1376, in cupy.cuda.memory.SingleDeviceMemoryPool._malloc
+  File "cupy/cuda/memory.pyx", line 1560, in cupy.cuda.memory.SingleDeviceMemoryPool._try_malloc
+cupy.cuda.memory.OutOfMemoryError: Out of memory allocating 134,217,728 bytes (allocated so far: 3,623,905,280 bytes).
+Exception in thread Thread-15 (_chunk):
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 569, in _chunk
+Exception in thread     sr, si, br, bi, s_ar, dm = slabfn(Thread-13 (_chunk):
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 569, in _chunk
+    sr, si, br, bi, s_ar, dm = slabfn(
+                               ^^^^^^^
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 444, in slab_budget_gpu
+    g2 = cc * cc
+         ~~~^~~~
+  File "cupy/_core/core.pyx", line 1582, in cupy._core.core._ndarray_base.__mul__
+  File "cupy/_core/_kernel.pyx", line 1374, in cupy._core._kernel.ufunc.__call__
+  File "cupy/_core/_kernel.pyx", line 657, in cupy._core._kernel._get_out_args_from_optionals
+  File "cupy/_core/core.pyx", line 3342, in cupy._core.core._ndarray_init
+  File "cupy/_core/core.pyx", line 300, in cupy._core.core._ndarray_base._init_fast
+  File "cupy/cuda/memory.pyx", line 904, in cupy.cuda.memory.alloc
+  File "cupy/cuda/memory.pyx", line 1614, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1635, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1350, in cupy.cuda.memory.SingleDeviceMemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1376, in cupy.cuda.memory.SingleDeviceMemoryPool._malloc
+  File "cupy/cuda/memory.pyx", line 1560, in cupy.cuda.memory.SingleDeviceMemoryPool._try_malloc
+cupy.cuda.memory.OutOfMemoryError: Out of memory allocating 134,217,728 bytes (allocated so far: 3,623,878,656 bytes).
+Exception in thread Thread-12 (_chunk):
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 569, in _chunk
+    sr, si, br, bi, s_ar, dm = slabfn(
+                               ^^^^^^^
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 446, in slab_budget_gpu
+    abs_g2t2 = cp.abs(g2 - t2)
+                      ~~~^~~~
+  File "cupy/_core/core.pyx", line 1578, in cupy._core.core._ndarray_base.__sub__
+  File "cupy/_core/core.pyx", line 2024, in cupy._core.core._ndarray_base.__array_ufunc__
+  File "cupy/_core/_kernel.pyx", line 1374, in cupy._core._kernel.ufunc.__call__
+  File "cupy/_core/_kernel.pyx", line 657, in cupy._core._kernel._get_out_args_from_optionals
+  File "cupy/_core/core.pyx", line 3342, in cupy._core.core._ndarray_init
+  File "cupy/_core/core.pyx", line 300, in cupy._core.core._ndarray_base._init_fast
+  File "cupy/cuda/memory.pyx", line 904, in cupy.cuda.memory.alloc
+  File "cupy/cuda/memory.pyx", line 1614, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1635, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1350, in cupy.cuda.memory.SingleDeviceMemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1376, in cupy.cuda.memory.SingleDeviceMemoryPool._malloc
+  File "cupy/cuda/memory.pyx", line 1560, in cupy.cuda.memory.SingleDeviceMemoryPool._try_malloc
+cupy.cuda.memory.OutOfMemoryError: Out of memory allocating 134,217,728 bytes (allocated so far: 3,489,660,928 bytes).
+
+                               ^^^^^^^
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 446, in slab_budget_gpu
+    abs_g2t2 = cp.abs(g2 - t2)
+                      ~~~^~~~
+  File "cupy/_core/core.pyx", line 1578, in cupy._core.core._ndarray_base.__sub__
+  File "cupy/_core/core.pyx", line 2024, in cupy._core.core._ndarray_base.__array_ufunc__
+  File "cupy/_core/_kernel.pyx", line 1374, in cupy._core._kernel.ufunc.__call__
+  File "cupy/_core/_kernel.pyx", line 657, in cupy._core._kernel._get_out_args_from_optionals
+  File "cupy/_core/core.pyx", line 3342, in cupy._core.core._ndarray_init
+  File "cupy/_core/core.pyx", line 300, in cupy._core.core._ndarray_base._init_fast
+  File "cupy/cuda/memory.pyx", line 904, in cupy.cuda.memory.alloc
+  File "cupy/cuda/memory.pyx", line 1614, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1635, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1350, in cupy.cuda.memory.SingleDeviceMemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1376, in cupy.cuda.memory.SingleDeviceMemoryPool._malloc
+  File "cupy/cuda/memory.pyx", line 1560, in cupy.cuda.memory.SingleDeviceMemoryPool._try_malloc
+cupy.cuda.memory.OutOfMemoryError: Out of memory allocating 134,217,728 bytes (allocated so far: 3,758,096,384 bytes).
+Exception in thread Thread-10 (_chunk):
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+Exception in thread     Thread-16 (_chunk)self.run():
+
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    self._target(*self._args, **self._kwargs)
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 569, in _chunk
+    sr, si, br, bi, s_ar, dm = slabfn(
+                               ^^^^^^^
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 447, in slab_budget_gpu
+    re_t = cp.log(abs_g2t2) - cp.log(A) + 0.5 / A
+                              ^^^^^^^^^
+  File "cupy/_core/_kernel.pyx", line 1374, in cupy._core._kernel.ufunc.__call__
+  File "cupy/_core/_kernel.pyx", line 657, in cupy._core._kernel._get_out_args_from_optionals
+  File "cupy/_core/core.pyx", line 3342, in cupy._core.core._ndarray_init
+  File "cupy/_core/core.pyx", line 300, in cupy._core.core._ndarray_base._init_fast
+  File "cupy/cuda/memory.pyx", line 904, in cupy.cuda.memory.alloc
+  File "cupy/cuda/memory.pyx", line 1614, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1635, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1350, in cupy.cuda.memory.SingleDeviceMemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1376, in cupy.cuda.memory.SingleDeviceMemoryPool._malloc
+  File "cupy/cuda/memory.pyx", line 1560, in cupy.cuda.memory.SingleDeviceMemoryPool._try_malloc
+cupy.cuda.memory.OutOfMemoryError: Out of memory allocating 134,217,728 bytes (allocated so far: 3,355,443,200 bytes).
+    self.run()
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 569, in _chunk
+    sr, si, br, bi, s_ar, dm = slabfn(
+                               ^^^^^^^
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 444, in slab_budget_gpu
+    g2 = cc * cc
+         ~~~^~~~
+  File "cupy/_core/core.pyx", line 1582, in cupy._core.core._ndarray_base.__mul__
+  File "cupy/_core/_kernel.pyx", line 1374, in cupy._core._kernel.ufunc.__call__
+  File "cupy/_core/_kernel.pyx", line 657, in cupy._core._kernel._get_out_args_from_optionals
+  File "cupy/_core/core.pyx", line 3342, in cupy._core.core._ndarray_init
+  File "cupy/_core/core.pyx", line 300, in cupy._core.core._ndarray_base._init_fast
+  File "cupy/cuda/memory.pyx", line 904, in cupy.cuda.memory.alloc
+  File "cupy/cuda/memory.pyx", line 1614, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1635, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1350, in cupy.cuda.memory.SingleDeviceMemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1376, in cupy.cuda.memory.SingleDeviceMemoryPool._malloc
+  File "cupy/cuda/memory.pyx", line 1560, in cupy.cuda.memory.SingleDeviceMemoryPool._try_malloc
+cupy.cuda.memory.OutOfMemoryError: Out of memory allocating 134,217,728 bytes (allocated so far: 3,221,225,472 bytes).
+  ...t=8.139e+09 tail sweep 58% (3500 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 58% (3500 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 41% (2500 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 66% (4000 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 66% (4000 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 8% (500 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 50% (3000 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 74% (4500 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 74% (4500 pieces, 8 threads)
+point  job  (win  0,  k  -11,  x=8139156365)  WORKER  FAILED:  TypeError('cannot unpack non-iterable NoneType object')  --  done  points  are  checkpointed;  supervisor  resumes
+Exception in thread Thread-13 (_chunk):
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 569, in _chunk
+    sr, si, br, bi, s_ar, dm = slabfn(
+                               ^^^^^^^
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 445, in slab_budget_gpu
+    A = g2 + 0.25
+        ~~~^~~~~~
+  File "cupy/_core/core.pyx", line 1570, in cupy._core.core._ndarray_base.__add__
+  File "cupy/_core/core.pyx", line 2024, in cupy._core.core._ndarray_base.__array_ufunc__
+  File "cupy/_core/_kernel.pyx", line 1374, in cupy._core._kernel.ufunc.__call__
+  File "cupy/_core/_kernel.pyx", line 657, in cupy._core._kernel._get_out_args_from_optionals
+  File "cupy/_core/core.pyx", line 3342, in cupy._core.core._ndarray_init
+  File "cupy/_core/core.pyx", line 300, in cupy._core.core._ndarray_base._init_fast
+  File "cupy/cuda/memory.pyx", line 904, in cupy.cuda.memory.alloc
+  File "cupy/cuda/memory.pyx", line 1614, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1635, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1350, in cupy.cuda.memory.SingleDeviceMemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1376, in cupy.cuda.memory.SingleDeviceMemoryPool._malloc
+  File "cupy/cuda/memory.pyx", line 1560, in cupy.cuda.memory.SingleDeviceMemoryPool._try_malloc
+cupy.cuda.memory.OutOfMemoryError: Out of memory allocating 134,217,728 bytes (allocated so far: 6,576,668,672 bytes).
+Exception in thread Thread-11 (_chunk):
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+Exception in thread Exception in thread Thread-12 (_chunk):
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+Thread-15 (_chunk)    self.run()
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 569, in _chunk
+    sr, si, br, bi, s_ar, dm = slabfn(
+                               ^^^^^^^
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 447, in slab_budget_gpu
+    re_t = cp.log(abs_g2t2) - cp.log(A) + 0.5 / A
+           ~~~~~~~~~~~~~~~~~^~~~~~~~~~~
+  File "cupy/_core/core.pyx", line 1574, in cupy._core.core._ndarray_base.__sub__
+  File "cupy/_core/_kernel.pyx", line 1374, in cupy._core._kernel.ufunc.__call__
+  File "cupy/_core/_kernel.pyx", line 657, in cupy._core._kernel._get_out_args_from_optionals
+  File "cupy/_core/core.pyx", line 3342, in cupy._core.core._ndarray_init
+  File "cupy/_core/core.pyx", line 300, in cupy._core.core._ndarray_base._init_fast
+  File "cupy/cuda/memory.pyx", line 904, in cupy.cuda.memory.alloc
+  File "cupy/cuda/memory.pyx", line 1614, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1635, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1350, in cupy.cuda.memory.SingleDeviceMemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1376, in cupy.cuda.memory.SingleDeviceMemoryPool._malloc
+  File "cupy/cuda/memory.pyx", line 1560, in cupy.cuda.memory.SingleDeviceMemoryPool._try_malloc
+cupy.cuda.memory.OutOfMemoryError: Out of memory allocating 134,217,728 bytes (allocated so far: 6,308,233,216 bytes).
+:
+    self.run()
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 569, in _chunk
+    sr, si, br, bi, s_ar, dm = slabfn(
+                               ^^^^^^^
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 447, in slab_budget_gpu
+    re_t = cp.log(abs_g2t2) - cp.log(A) + 0.5 / A
+                              ^^^^^^^^^
+  File "cupy/_core/_kernel.pyx", line 1374, in cupy._core._kernel.ufunc.__call__
+  File "cupy/_core/_kernel.pyx", line 657, in cupy._core._kernel._get_out_args_from_optionals
+  File "cupy/_core/core.pyx", line 3342, in cupy._core.core._ndarray_init
+  File "cupy/_core/core.pyx", line 300, in cupy._core.core._ndarray_base._init_fast
+  File "cupy/cuda/memory.pyx", line 904, in cupy.cuda.memory.alloc
+  File "cupy/cuda/memory.pyx", line 1614, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1635, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1350, in cupy.cuda.memory.SingleDeviceMemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1376, in cupy.cuda.memory.SingleDeviceMemoryPool._malloc
+  File "cupy/cuda/memory.pyx", line 1560, in cupy.cuda.memory.SingleDeviceMemoryPool._try_malloc
+cupy.cuda.memory.OutOfMemoryError: Out of memory allocating 134,217,728 bytes (allocated so far: 6,442,450,944 bytes).
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 569, in _chunk
+    sr, si, br, bi, s_ar, dm = slabfn(
+                               ^^^^^^^
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 444, in slab_budget_gpu
+    g2 = cc * cc
+         ~~~^~~~
+  File "cupy/_core/core.pyx", line 1582, in cupy._core.core._ndarray_base.__mul__
+  File "cupy/_core/_kernel.pyx", line 1374, in cupy._core._kernel.ufunc.__call__
+  File "cupy/_core/_kernel.pyx", line 657, in cupy._core._kernel._get_out_args_from_optionals
+  File "cupy/_core/core.pyx", line 3342, in cupy._core.core._ndarray_init
+  File "cupy/_core/core.pyx", line 300, in cupy._core.core._ndarray_base._init_fast
+  File "cupy/cuda/memory.pyx", line 904, in cupy.cuda.memory.alloc
+  File "cupy/cuda/memory.pyx", line 1614, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1635, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1350, in cupy.cuda.memory.SingleDeviceMemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1376, in cupy.cuda.memory.SingleDeviceMemoryPool._malloc
+  File "cupy/cuda/memory.pyx", line 1560, in cupy.cuda.memory.SingleDeviceMemoryPool._try_malloc
+cupy.cuda.memory.OutOfMemoryError: Out of memory allocating 134,217,728 bytes (allocated so far: 6,174,015,488 bytes).
+  ...t=8.139e+09 tail sweep 83% (5000 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 83% (5000 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 8% (500 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 17% (1000 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 91% (5500 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 91% (5500 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 99% (6000 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 17% (1000 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 99% (6000 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 25% (1500 pieces, 8 threads)
+point  job  (win  0,  k  -8,  x=8139156365)  WORKER  FAILED:  TypeError('cannot unpack non-iterable NoneType object')  --  done  points  are  checkpointed;  supervisor  resumes
+Exception in thread Thread-19 (_chunk):
+Exception in thread Traceback (most recent call last):
+Thread-24 (_chunk)  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+Exception in thread     self.run()
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+Thread-22 (_chunk):
+:
+    self._target(*self._args, **self._kwargs)Traceback (most recent call last):
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 569, in _chunk
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    Exception in thread sr, si, br, bi, s_ar, dm = slabfn(Thread-18 (_chunk)
+:
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+                               ^^^^^^^
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 446, in slab_budget_gpu
+    abs_g2t2 = cp.abs(g2 - t2)
+               ^^^^^^^^^^^^^^^
+  File "cupy/_core/_kernel.pyx", line 1374, in cupy._core._kernel.ufunc.__call__
+  File "cupy/_core/_kernel.pyx", line 657, in cupy._core._kernel._get_out_args_from_optionals
+  File "cupy/_core/core.pyx", line 3342, in cupy._core.core._ndarray_init
+  File "cupy/_core/core.pyx", line 300, in cupy._core.core._ndarray_base._init_fast
+  File "cupy/cuda/memory.pyx", line 904, in cupy.cuda.memory.alloc
+  File "cupy/cuda/memory.pyx", line 1614, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1635, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1350, in cupy.cuda.memory.SingleDeviceMemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1376, in cupy.cuda.memory.SingleDeviceMemoryPool._malloc
+  File "cupy/cuda/memory.pyx", line 1560, in cupy.cuda.memory.SingleDeviceMemoryPool._try_malloc
+cupy.cuda.memory.OutOfMemoryError: Out of memory allocating 134,217,728 bytes (allocated so far: 3,623,878,656 bytes).
+Exception in thread     self.run()
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 569, in _chunk
+Thread-23 (_chunk):
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+    self.run()
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+    sr, si, br, bi, s_ar, dm = slabfn(
+       Exception in thread     Thread-20 (_chunk)  self.run()      self._target(*self._args, **self._kwargs)
+
+      File "/usr/lib/python3.12/threading.py", line 1010, in run
+   File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 569, in _chunk
+:
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+                   ^^^^^^^
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 444, in slab_budget_gpu
+    g2 = cc * cc
+         ~~~^~~~
+  File "cupy/_core/core.pyx", line 1582, in cupy._core.core._ndarray_base.__mul__
+    self._target(*self._args, **self._kwargs)
+self._target(*self._args, **self._kwargs)  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 569, in _chunk
+  File "cupy/_core/_kernel.pyx", line 1374, in cupy._core._kernel.ufunc.__call__
+  File "cupy/_core/_kernel.pyx", line 657, in cupy._core._kernel._get_out_args_from_optionals
+    sr, si, br, bi, s_ar, dm = slabfn(
+                               ^^^^^^^
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 447, in slab_budget_gpu
+    re_t = cp.log(abs_g2t2) - cp.log(A) + 0.5 / A
+
+           ~~~~~~~~~~~~~~~~~^~~~~~~~~~~
+  File "cupy/_core/core.pyx", line 1574, in cupy._core.core._ndarray_base.__sub__
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 569, in _chunk
+    sr, si, br, bi, s_ar, dm = slabfn(
+                                 sr, si, br, bi, s_ar, dm = slabfn(
+   File "cupy/_core/core.pyx", line 3342, in cupy._core.core._ndarray_init
+ ^^^^^^    ^self.run()
+    File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 444, in slab_budget_gpu
+   
+  File "cupy/_core/core.pyx", line 300, in cupy._core.core._ndarray_base._init_fast
+                  File "cupy/_core/_kernel.pyx", line 1374, in cupy._core._kernel.ufunc.__call__
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+          File "cupy/_core/_kernel.pyx", line 657, in cupy._core._kernel._get_out_args_from_optionals
+   File "cupy/cuda/memory.pyx", line 904, in cupy.cuda.memory.alloc
+ g2 = cc * cc
+      ^   ^ ^ ^ ^ ^~~    self._target(*self._args, **self._kwargs)
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 569, in _chunk
+~^^
+  File "cupy/cuda/memory.pyx", line 1614, in cupy.cuda.memory.MemoryPool.malloc
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 443, in slab_budget_gpu
+~~~
+  File "cupy/_core/core.pyx", line 1582, in cupy._core.core._ndarray_base.__mul__
+  File "cupy/_core/core.pyx", line 3342, in cupy._core.core._ndarray_init
+      File "cupy/cuda/memory.pyx", line 1635, in cupy.cuda.memory.MemoryPool.malloc
+cc = cp.asarray(c)  File "cupy/_core/_kernel.pyx", line 1374, in cupy._core._kernel.ufunc.__call__
+
+  File "cupy/_core/_kernel.pyx", line 657, in cupy._core._kernel._get_out_args_from_optionals
+  File "cupy/_core/core.pyx", line 3342, in cupy._core.core._ndarray_init
+  File "cupy/_core/core.pyx", line 300, in cupy._core.core._ndarray_base._init_fast
+         ^^^^^^^^  File "cupy/cuda/memory.pyx", line 1350, in cupy.cuda.memory.SingleDeviceMemoryPool.malloc
+^^  File "cupy/cuda/memory.pyx", line 1376, in cupy.cuda.memory.SingleDeviceMemoryPool._malloc
+  File "cupy/cuda/memory.pyx", line 904, in cupy.cuda.memory.alloc
+  File "cupy/cuda/memory.pyx", line 1614, in cupy.cuda.memory.MemoryPool.malloc
+    ^sr, si, br, bi, s_ar, dm = slabfn(  File "cupy/cuda/memory.pyx", line 1560, in cupy.cuda.memory.SingleDeviceMemoryPool._try_malloc
+  File "cupy/_core/core.pyx", line 300, in cupy._core.core._ndarray_base._init_fast
+
+^ ^
+   File "cupy/cuda/memory.pyx", line 1635, in cupy.cuda.memory.MemoryPool.malloc
+cupy.cuda.memory  File "/opt/venvs/cupy/lib/python3.12/site-packages/cupy/_creation/from_data.py", line 94, in asarray
+. OutOfMemoryError   File "cupy/cuda/memory.pyx", line 1350, in cupy.cuda.memory.SingleDeviceMemoryPool.malloc
+   File "cupy/cuda/memory.pyx", line 1376, in cupy.cuda.memory.SingleDeviceMemoryPool._malloc
+  File "cupy/cuda/memory.pyx", line 904, in cupy.cuda.memory.alloc
+    :  Out of memory allocating 134,217,728 bytes (allocated so far: 3,221,225,472 bytes). 
+ return _core.array(a, dtype, copy, order, blocking=blocking)
+   File "cupy/cuda/memory.pyx", line 1614, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1560, in cupy.cuda.memory.SingleDeviceMemoryPool._try_malloc
+  cupy.cuda.memory.OutOfMemoryError: Out of memory allocating 134,217,728 bytes (allocated so far: 3,355,443,200 bytes).
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^  File "cupy/cuda/memory.pyx", line 1635, in cupy.cuda.memory.MemoryPool.malloc
+^ ^^ ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "cupy/_core/core.pyx", line 2821, in cupy._core.core.array
+    File "cupy/_core/core.pyx", line 2841, in cupy._core.core.array
+   File "cupy/_core/core.pyx", line 3067, in cupy._core.core._array_default
+  File "cupy/cuda/memory.pyx", line 1350, in cupy.cuda.memory.SingleDeviceMemoryPool.malloc
+     File "cupy/cuda/memory.pyx", line 1376, in cupy.cuda.memory.SingleDeviceMemoryPool._malloc
+  File "cupy/_core/core.pyx", line 176, in cupy._core.core.ndarray.__new__
+              File "cupy/cuda/memory.pyx", line 1560, in cupy.cuda.memory.SingleDeviceMemoryPool._try_malloc
+  ^^^^^^cupy.cuda.memory^.
+OutOfMemoryError: Out of memory allocating 134,217,728 bytes (allocated so far: 3,489,660,928 bytes).  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 445, in slab_budget_gpu
+
+  File "cupy/_core/core.pyx", line 282, in cupy._core.core._ndarray_base._init
+  File "cupy/cuda/memory.pyx", line 904, in cupy.cuda.memory.alloc
+  File "cupy/cuda/memory.pyx", line 1614, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1635, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1350, in cupy.cuda.memory.SingleDeviceMemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1376, in cupy.cuda.memory.SingleDeviceMemoryPool._malloc
+  File "cupy/cuda/memory.pyx", line 1560, in cupy.cuda.memory.SingleDeviceMemoryPool._try_malloc
+cupy.cuda.memory.OutOfMemoryError: Out of memory allocating 134,217,728 bytes (allocated so far: 3,355,443,200 bytes).
+    A = g2 + 0.25
+        ~~~^~~~~~
+  File "cupy/_core/core.pyx", line 1570, in cupy._core.core._ndarray_base.__add__
+  File "cupy/_core/core.pyx", line 2024, in cupy._core.core._ndarray_base.__array_ufunc__
+  File "cupy/_core/_kernel.pyx", line 1374, in cupy._core._kernel.ufunc.__call__
+  File "cupy/_core/_kernel.pyx", line 657, in cupy._core._kernel._get_out_args_from_optionals
+  File "cupy/_core/core.pyx", line 3342, in cupy._core.core._ndarray_init
+  File "cupy/_core/core.pyx", line 300, in cupy._core.core._ndarray_base._init_fast
+  File "cupy/cuda/memory.pyx", line 904, in cupy.cuda.memory.alloc
+  File "cupy/cuda/memory.pyx", line 1614, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1635, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1350, in cupy.cuda.memory.SingleDeviceMemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1376, in cupy.cuda.memory.SingleDeviceMemoryPool._malloc
+  File "cupy/cuda/memory.pyx", line 1560, in cupy.cuda.memory.SingleDeviceMemoryPool._try_malloc
+cupy.cuda.memory.OutOfMemoryError: Out of memory allocating 134,217,728 bytes (allocated so far: 3,221,225,472 bytes).
+  ...t=8.139e+09 tail sweep 25% (1500 pieces, 8 threads)
+  pt win=0 k=-10 x=8.139e+09 t=8139156359.58026 mnew=1.0000 mcert=1.0000 bexp=8.85e-04
+  ...t=8.139e+09 tail sweep 8% (500 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 33% (2000 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 8% (500 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 17% (1000 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 41% (2500 pieces, 8 threads)
+  pt win=0 k=-12 x=8.139e+09 t=8139156358.58026 mnew=1.0000 mcert=1.0000 bexp=9.02e-04
+  ...t=8.139e+09 tail sweep 25% (1500 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 8% (500 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 17% (1000 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 50% (3000 pieces, 8 threads)
+point  job  (win  0,  k  -7,  x=8139156365)  WORKER  FAILED:  TypeError('cannot unpack non-iterable NoneType object')  --  done  points  are  checkpointed;  supervisor  resumes
+Exception in thread Thread-18 (_chunk):
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 569, in _chunk
+    sr, si, br, bi, s_ar, dm = slabfn(
+                               ^^^^^^^
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 452, in slab_budget_gpu
+    S2 = float(cp.maximum(cp.abs(re_t), 0.5 / A).sum())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "cupy/_core/_kernel.pyx", line 1374, in cupy._core._kernel.ufunc.__call__
+  File "cupy/_core/_kernel.pyx", line 657, in cupy._core._kernel._get_out_args_from_optionals
+  File "cupy/_core/core.pyx", line 3342, in cupy._core.core._ndarray_init
+  File "cupy/_core/core.pyx", line 300, in cupy._core.core._ndarray_base._init_fast
+  File "cupy/cuda/memory.pyx", line 904, in cupy.cuda.memory.alloc
+  File "cupy/cuda/memory.pyx", line 1614, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1635, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1350, in cupy.cuda.memory.SingleDeviceMemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1376, in cupy.cuda.memory.SingleDeviceMemoryPool._malloc
+  File "cupy/cuda/memory.pyx", line 1560, in cupy.cuda.memory.SingleDeviceMemoryPool._try_malloc
+cupy.cuda.memory.OutOfMemoryError: Out of memory allocating 134,217,728 bytes (allocated so far: 6,576,695,296 bytes).
+Exception in thread Thread-24 (_chunk):
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 569, in _chunk
+    sr, si, br, bi, s_ar, dm = slabfn(
+                               ^^^^^^^
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 455, in slab_budget_gpu
+    dredg = (2.0 * cc / cp.maximum(abs_g2t2, 1e-30)
+             ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  File "cupy/_core/core.pyx", line 1606, in cupy._core.core._ndarray_base.__truediv__
+  File "cupy/_core/_kernel.pyx", line 1374, in cupy._core._kernel.ufunc.__call__
+  File "cupy/_core/_kernel.pyx", line 657, in cupy._core._kernel._get_out_args_from_optionals
+  File "cupy/_core/core.pyx", line 3342, in cupy._core.core._ndarray_init
+  File "cupy/_core/core.pyx", line 300, in cupy._core.core._ndarray_base._init_fast
+  File "cupy/cuda/memory.pyx", line 904, in cupy.cuda.memory.alloc
+  File "cupy/cuda/memory.pyx", line 1614, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1635, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1350, in cupy.cuda.memory.SingleDeviceMemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1376, in cupy.cuda.memory.SingleDeviceMemoryPool._malloc
+  File "cupy/cuda/memory.pyx", line 1560, in cupy.cuda.memory.SingleDeviceMemoryPool._try_malloc
+cupy.cuda.memory.OutOfMemoryError: Out of memory allocating 134,217,728 bytes (allocated so far: 6,442,477,568 bytes).
+Exception in thread Thread-21 (_chunk):
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 569, in _chunk
+    sr, si, br, bi, s_ar, dm = slabfn(
+                               ^^^^^^^
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 444, in slab_budget_gpu
+    g2 = cc * cc
+         ~~~^~~~
+  File "cupy/_core/core.pyx", line 1582, in cupy._core.core._ndarray_base.__mul__
+  File "cupy/_core/_kernel.pyx", line 1374, in cupy._core._kernel.ufunc.__call__
+  File "cupy/_core/_kernel.pyx", line 657, in cupy._core._kernel._get_out_args_from_optionals
+  File "cupy/_core/core.pyx", line 3342, in cupy._core.core._ndarray_init
+  File "cupy/_core/core.pyx", line 300, in cupy._core.core._ndarray_base._init_fast
+  File "cupy/cuda/memory.pyx", line 904, in cupy.cuda.memory.alloc
+  File "cupy/cuda/memory.pyx", line 1614, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1635, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1350, in cupy.cuda.memory.SingleDeviceMemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1376, in cupy.cuda.memory.SingleDeviceMemoryPool._malloc
+  File "cupy/cuda/memory.pyx", line 1560, in cupy.cuda.memory.SingleDeviceMemoryPool._try_malloc
+cupy.cuda.memory.OutOfMemoryError: Out of memory allocating 134,217,728 bytes (allocated so far: 6,308,259,840 bytes).
+  ...t=8.139e+09 tail sweep 33% (2000 pieces, 8 threads)
+Exception in thread Thread-23 (_chunk):
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 569, in _chunk
+    sr, si, br, bi, s_ar, dm = slabfn(
+                               ^^^^^^^
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 455, in slab_budget_gpu
+    dredg = (2.0 * cc / cp.maximum(abs_g2t2, 1e-30)
+             ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  File "cupy/_core/core.pyx", line 1606, in cupy._core.core._ndarray_base.__truediv__
+  File "cupy/_core/_kernel.pyx", line 1374, in cupy._core._kernel.ufunc.__call__
+  File "cupy/_core/_kernel.pyx", line 657, in cupy._core._kernel._get_out_args_from_optionals
+  File "cupy/_core/core.pyx", line 3342, in cupy._core.core._ndarray_init
+  File "cupy/_core/core.pyx", line 300, in cupy._core.core._ndarray_base._init_fast
+  File "cupy/cuda/memory.pyx", line 904, in cupy.cuda.memory.alloc
+  File "cupy/cuda/memory.pyx", line 1614, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1635, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1350, in cupy.cuda.memory.SingleDeviceMemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1376, in cupy.cuda.memory.SingleDeviceMemoryPool._malloc
+  File "cupy/cuda/memory.pyx", line 1560, in cupy.cuda.memory.SingleDeviceMemoryPool._try_malloc
+cupy.cuda.memory.OutOfMemoryError: Out of memory allocating 134,217,728 bytes (allocated so far: 6,174,015,488 bytes).
+  ...t=8.139e+09 tail sweep 17% (1000 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 41% (2500 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 8% (500 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 25% (1500 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 25% (1500 pieces, 8 threads)
+point  job  (win  0,  k  -6,  x=8139156365)  WORKER  FAILED:  TypeError('cannot unpack non-iterable NoneType object')  --  done  points  are  checkpointed;  supervisor  resumes
+Exception in thread Thread-25 (_chunk):
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 569, in _chunk
+    sr, si, br, bi, s_ar, dm = slabfn(
+                               ^^^^^^^
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 447, in slab_budget_gpu
+    re_t = cp.log(abs_g2t2) - cp.log(A) + 0.5 / A
+           ~~~~~~~~~~~~~~~~~^~~~~~~~~~~
+  File "cupy/_core/core.pyx", line 1574, in cupy._core.core._ndarray_base.__sub__
+  File "cupy/_core/_kernel.pyx", line 1374, in cupy._core._kernel.ufunc.__call__
+  File "cupy/_core/_kernel.pyx", line 657, in cupy._core._kernel._get_out_args_from_optionals
+  File "cupy/_core/core.pyx", line 3342, in cupy._core.core._ndarray_init
+  File "cupy/_core/core.pyx", line 300, in cupy._core.core._ndarray_base._init_fast
+  File "cupy/cuda/memory.pyx", line 904, in cupy.cuda.memory.alloc
+  File "cupy/cuda/memory.pyx", line 1614, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1635, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1350, in cupy.cuda.memory.SingleDeviceMemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1376, in cupy.cuda.memory.SingleDeviceMemoryPool._malloc
+  File "cupy/cuda/memory.pyx", line 1560, in cupy.cuda.memory.SingleDeviceMemoryPool._try_malloc
+cupy.cuda.memory.OutOfMemoryError: Out of memory allocating 134,217,728 bytes (allocated so far: 3,489,660,928 bytes).
+Exception in thread Thread-32 (_chunk):
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 569, in _chunk
+    sr, si, br, bi, s_ar, dm = slabfn(
+                               ^^^^^^^
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 446, in slab_budget_gpu
+    abs_g2t2 = cp.abs(g2 - t2)
+               ^^^^^^^^^^^^^^^
+  File "cupy/_core/_kernel.pyx", line 1374, in cupy._core._kernel.ufunc.__call__
+  File "cupy/_core/_kernel.pyx", line 657, in cupy._core._kernel._get_out_args_from_optionals
+  File "cupy/_core/core.pyx", line 3342, in cupy._core.core._ndarray_init
+  File "cupy/_core/core.pyx", line 300, in cupy._core.core._ndarray_base._init_fast
+  File "cupy/cuda/memory.pyx", line 904, in cupy.cuda.memory.alloc
+  File "cupy/cuda/memory.pyx", line 1614, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1635, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1350, in cupy.cuda.memory.SingleDeviceMemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1376, in cupy.cuda.memory.SingleDeviceMemoryPool._malloc
+  File "cupy/cuda/memory.pyx", line 1560, in cupy.cuda.memory.SingleDeviceMemoryPool._try_malloc
+cupy.cuda.memory.OutOfMemoryError: Out of memory allocating 134,217,728 bytes (allocated so far: 3,758,096,384 bytes).
+Exception in thread Thread-28 (_chunk):
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 569, in _chunk
+    sr, si, br, bi, s_ar, dm = slabfn(
+                               ^^^^^^^
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 446, in slab_budget_gpu
+    abs_g2t2 = cp.abs(g2 - t2)
+                      ~~~^~~~
+  File "cupy/_core/core.pyx", line 1578, in cupy._core.core._ndarray_base.__sub__
+  File "cupy/_core/core.pyx", line 2024, in cupy._core.core._ndarray_base.__array_ufunc__
+  File "cupy/_core/_kernel.pyx", line 1374, in cupy._core._kernel.ufunc.__call__
+  File "cupy/_core/_kernel.pyx", line 657, in cupy._core._kernel._get_out_args_from_optionals
+  File "cupy/_core/core.pyx", line 3342, in cupy._core.core._ndarray_init
+  File "cupy/_core/core.pyx", line 300, in cupy._core.core._ndarray_base._init_fast
+  File "cupy/cuda/memory.pyx", line 904, in cupy.cuda.memory.alloc
+  File "cupy/cuda/memory.pyx", line 1614, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1635, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1350, in cupy.cuda.memory.SingleDeviceMemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1376, in cupy.cuda.memory.SingleDeviceMemoryPool._malloc
+  File "cupy/cuda/memory.pyx", line 1560, in cupy.cuda.memory.SingleDeviceMemoryPool._try_malloc
+cupy.cuda.memory.OutOfMemoryError: Out of memory allocating 134,217,728 bytes (allocated so far: 3,623,878,656 bytes).
+Exception in thread Thread-31 (_chunk):
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 569, in _chunk
+    sr, si, br, bi, s_ar, dm = slabfn(
+                               ^^^^^^^
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 443, in slab_budget_gpu
+    cc = cp.asarray(c)
+         ^^^^^^^^^^^^^
+  File "/opt/venvs/cupy/lib/python3.12/site-packages/cupy/_creation/from_data.py", line 94, in asarray
+    return _core.array(a, dtype, copy, order, blocking=blocking)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "cupy/_core/core.pyx", line 2821, in cupy._core.core.array
+  File "cupy/_core/core.pyx", line 2841, in cupy._core.core.array
+  File "cupy/_core/core.pyx", line 3067, in cupy._core.core._array_default
+  File "cupy/_core/core.pyx", line 176, in cupy._core.core.ndarray.__new__
+  File "cupy/_core/core.pyx", line 282, in cupy._core.core._ndarray_base._init
+  File "cupy/cuda/memory.pyx", line 904, in cupy.cuda.memory.alloc
+  File "cupy/cuda/memory.pyx", line 1614, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1635, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1350, in cupy.cuda.memory.SingleDeviceMemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1376, in cupy.cuda.memory.SingleDeviceMemoryPool._malloc
+  File "cupy/cuda/memory.pyx", line 1560, in cupy.cuda.memory.SingleDeviceMemoryPool._try_malloc
+cupy.cuda.memory.OutOfMemoryError: Out of memory allocating 134,217,728 bytes (allocated so far: 3,489,660,928 bytes).
+Exception in thread Thread-30 (_chunk):
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+    Exception in thread Thread-27 (_chunk)self._target(*self._args, **self._kwargs):
+
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 569, in _chunk
+    sr, si, br, bi, s_ar, dm = slabfn(
+                               ^^^^^^^
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 444, in slab_budget_gpu
+    g2 = cc * cc
+         ~~~^~~~
+  File "cupy/_core/core.pyx", line 1582, in cupy._core.core._ndarray_base.__mul__
+  File "cupy/_core/_kernel.pyx", line 1374, in cupy._core._kernel.ufunc.__call__
+  File "cupy/_core/_kernel.pyx", line 657, in cupy._core._kernel._get_out_args_from_optionals
+  File "cupy/_core/core.pyx", line 3342, in cupy._core.core._ndarray_init
+  File "cupy/_core/core.pyx", line 300, in cupy._core.core._ndarray_base._init_fast
+  File "cupy/cuda/memory.pyx", line 904, in cupy.cuda.memory.alloc
+  File "cupy/cuda/memory.pyx", line 1614, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1635, in cupy.cuda.memory.MemoryPool.malloc
+Traceback (most recent call last):
+  File "cupy/cuda/memory.pyx", line 1350, in cupy.cuda.memory.SingleDeviceMemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1376, in cupy.cuda.memory.SingleDeviceMemoryPool._malloc
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+  File "cupy/cuda/memory.pyx", line 1560, in cupy.cuda.memory.SingleDeviceMemoryPool._try_malloc
+cupy.cuda.memory.OutOfMemoryError: Out of memory allocating 134,217,728 bytes (allocated so far: 3,355,469,824 bytes).
+    self.run()
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 569, in _chunk
+    sr, si, br, bi, s_ar, dm = slabfn(
+                               ^^^^^^^
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 447, in slab_budget_gpu
+    re_t = cp.log(abs_g2t2) - cp.log(A) + 0.5 / A
+                              ^^^^^^^^^
+  File "cupy/_core/_kernel.pyx", line 1374, in cupy._core._kernel.ufunc.__call__
+  File "cupy/_core/_kernel.pyx", line 657, in cupy._core._kernel._get_out_args_from_optionals
+  File "cupy/_core/core.pyx", line 3342, in cupy._core.core._ndarray_init
+  File "cupy/_core/core.pyx", line 300, in cupy._core.core._ndarray_base._init_fast
+  File "cupy/cuda/memory.pyx", line 904, in cupy.cuda.memory.alloc
+  File "cupy/cuda/memory.pyx", line 1614, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1635, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1350, in cupy.cuda.memory.SingleDeviceMemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1376, in cupy.cuda.memory.SingleDeviceMemoryPool._malloc
+  File "cupy/cuda/memory.pyx", line 1560, in cupy.cuda.memory.SingleDeviceMemoryPool._try_malloc
+cupy.cuda.memory.OutOfMemoryError: Out of memory allocating 134,217,728 bytes (allocated so far: 3,221,252,096 bytes).
+  ...t=8.139e+09 tail sweep 50% (3000 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 33% (2000 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 17% (1000 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 58% (3500 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 41% (2500 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 66% (4000 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 25% (1500 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 8% (500 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 50% (3000 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 74% (4500 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 33% (2000 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 58% (3500 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 83% (5000 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 17% (1000 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 66% (4000 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 41% (2500 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 91% (5500 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 74% (4500 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 99% (6000 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 50% (3000 pieces, 8 threads)
+point  job  (win  0,  k  -3,  x=8139156365)  WORKER  FAILED:  TypeError('cannot unpack non-iterable NoneType object')  --  done  points  are  checkpointed;  supervisor  resumes
+Exception in thread Thread-31 (_chunk):
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+Exception in thread Exception in thread Thread-27 (_chunk):
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 569, in _chunk
+    sr, si, br, bi, s_ar, dm = slabfn(
+                               ^^^^^^^
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 447, in slab_budget_gpu
+    re_t = cp.log(abs_g2t2) - cp.log(A) + 0.5 / A
+           ~~~~~~~~~~~~~~~~~^~~~~~~~~~~
+  File "cupy/_core/core.pyx", line 1574, in cupy._core.core._ndarray_base.__sub__
+  File "cupy/_core/_kernel.pyx", line 1374, in cupy._core._kernel.ufunc.__call__
+  File "cupy/_core/_kernel.pyx", line 657, in cupy._core._kernel._get_out_args_from_optionals
+  File "cupy/_core/core.pyx", line 3342, in cupy._core.core._ndarray_init
+  File "cupy/_core/core.pyx", line 300, in cupy._core.core._ndarray_base._init_fast
+  File "cupy/cuda/memory.pyx", line 904, in cupy.cuda.memory.alloc
+  File "cupy/cuda/memory.pyx", line 1614, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1635, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1350, in cupy.cuda.memory.SingleDeviceMemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1376, in cupy.cuda.memory.SingleDeviceMemoryPool._malloc
+  File "cupy/cuda/memory.pyx", line 1560, in cupy.cuda.memory.SingleDeviceMemoryPool._try_malloc
+cupy.cuda.memory.OutOfMemoryError: Out of memory allocating 134,217,728 bytes (allocated so far: 6,308,233,216 bytes).
+Thread-29 (_chunk):
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 569, in _chunk
+    self.run()
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 569, in _chunk
+    sr, si, br, bi, s_ar, dm = slabfn(
+                               ^^^^^^^
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 444, in slab_budget_gpu
+    g2 = cc * cc
+         ~~~^~~~
+  File "cupy/_core/core.pyx", line 1582, in cupy._core.core._ndarray_base.__mul__
+  File "cupy/_core/_kernel.pyx", line 1374, in cupy._core._kernel.ufunc.__call__
+  File "cupy/_core/_kernel.pyx", line 657, in cupy._core._kernel._get_out_args_from_optionals
+  File "cupy/_core/core.pyx", line 3342, in cupy._core.core._ndarray_init
+  File "cupy/_core/core.pyx", line 300, in cupy._core.core._ndarray_base._init_fast
+  File "cupy/cuda/memory.pyx", line 904, in cupy.cuda.memory.alloc
+  File "cupy/cuda/memory.pyx", line 1614, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1635, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1350, in cupy.cuda.memory.SingleDeviceMemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1376, in cupy.cuda.memory.SingleDeviceMemoryPool._malloc
+  File "cupy/cuda/memory.pyx", line 1560, in cupy.cuda.memory.SingleDeviceMemoryPool._try_malloc
+cupy.cuda.memory.OutOfMemoryError: Out of memory allocating 134,217,728 bytes (allocated so far: 6,442,450,944 bytes).
+    sr, si, br, bi, s_ar, dm = slabfn(
+                               ^^^^^^^
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 446, in slab_budget_gpu
+    abs_g2t2 = cp.abs(g2 - t2)
+                      ~~~^~~~
+  File "cupy/_core/core.pyx", line 1578, in cupy._core.core._ndarray_base.__sub__
+  File "cupy/_core/core.pyx", line 2024, in cupy._core.core._ndarray_base.__array_ufunc__
+  File "cupy/_core/_kernel.pyx", line 1374, in cupy._core._kernel.ufunc.__call__
+  File "cupy/_core/_kernel.pyx", line 657, in cupy._core._kernel._get_out_args_from_optionals
+  File "cupy/_core/core.pyx", line 3342, in cupy._core.core._ndarray_init
+  File "cupy/_core/core.pyx", line 300, in cupy._core.core._ndarray_base._init_fast
+  File "cupy/cuda/memory.pyx", line 904, in cupy.cuda.memory.alloc
+  File "cupy/cuda/memory.pyx", line 1614, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1635, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1350, in cupy.cuda.memory.SingleDeviceMemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1376, in cupy.cuda.memory.SingleDeviceMemoryPool._malloc
+  File "cupy/cuda/memory.pyx", line 1560, in cupy.cuda.memory.SingleDeviceMemoryPool._try_malloc
+cupy.cuda.memory.OutOfMemoryError: Out of memory allocating 134,217,728 bytes (allocated so far: 6,576,668,672 bytes).
+  ...t=8.139e+09 tail sweep 83% (5000 pieces, 8 threads)
+Exception in thread Thread-26 (_chunk):
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 569, in _chunk
+    sr, si, br, bi, s_ar, dm = slabfn(
+                               ^^^^^^^
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 455, in slab_budget_gpu
+    dredg = (2.0 * cc / cp.maximum(abs_g2t2, 1e-30)
+             ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  File "cupy/_core/core.pyx", line 1606, in cupy._core.core._ndarray_base.__truediv__
+  File "cupy/_core/_kernel.pyx", line 1374, in cupy._core._kernel.ufunc.__call__
+  File "cupy/_core/_kernel.pyx", line 657, in cupy._core._kernel._get_out_args_from_optionals
+  File "cupy/_core/core.pyx", line 3342, in cupy._core.core._ndarray_init
+  File "cupy/_core/core.pyx", line 300, in cupy._core.core._ndarray_base._init_fast
+  File "cupy/cuda/memory.pyx", line 904, in cupy.cuda.memory.alloc
+  File "cupy/cuda/memory.pyx", line 1614, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1635, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1350, in cupy.cuda.memory.SingleDeviceMemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1376, in cupy.cuda.memory.SingleDeviceMemoryPool._malloc
+  File "cupy/cuda/memory.pyx", line 1560, in cupy.cuda.memory.SingleDeviceMemoryPool._try_malloc
+cupy.cuda.memory.OutOfMemoryError: Out of memory allocating 134,217,728 bytes (allocated so far: 6,039,797,760 bytes).
+  ...t=8.139e+09 tail sweep 25% (1500 pieces, 8 threads)
+point  job  (win  0,  k  -2,  x=8139156365)  WORKER  FAILED:  TypeError('cannot unpack non-iterable NoneType object')  --  done  points  are  checkpointed;  supervisor  resumes
+Exception in thread Thread-35 (_chunk):
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+Exception in thread Thread-40 (_chunk):
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 569, in _chunk
+    sr, si, br, bi, s_ar, dm = slabfn(
+                               ^^^^^^^
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 444, in slab_budget_gpu
+    g2 = cc * cc
+         ~~~^~~~
+  File "cupy/_core/core.pyx", line 1582, in cupy._core.core._ndarray_base.__mul__
+  File "cupy/_core/_kernel.pyx", line 1374, in cupy._core._kernel.ufunc.__call__
+  File "cupy/_core/_kernel.pyx", line 657, in cupy._core._kernel._get_out_args_from_optionals
+  File "cupy/_core/core.pyx", line 3342, in cupy._core.core._ndarray_init
+  File "cupy/_core/core.pyx", line 300, in cupy._core.core._ndarray_base._init_fast
+  File "cupy/cuda/memory.pyx", line 904, in cupy.cuda.memory.alloc
+  File "cupy/cuda/memory.pyx", line 1614, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1635, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1350, in cupy.cuda.memory.SingleDeviceMemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1376, in cupy.cuda.memory.SingleDeviceMemoryPool._malloc
+  File "cupy/cuda/memory.pyx", line 1560, in cupy.cuda.memory.SingleDeviceMemoryPool._try_malloc
+cupy.cuda.memory.OutOfMemoryError: Out of memory allocating 134,217,728 bytes (allocated so far: 3,355,443,200 bytes).
+    self.run()
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 569, in _chunk
+    sr, si, br, bi, s_ar, dm = slabfn(
+                               ^^^^^^^
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 452, in slab_budget_gpu
+    S2 = float(cp.maximum(cp.abs(re_t), 0.5 / A).sum())
+                                        ~~~~^~~
+  File "cupy/_core/core.pyx", line 1606, in cupy._core.core._ndarray_base.__truediv__
+  File "cupy/_core/_kernel.pyx", line 1374, in cupy._core._kernel.ufunc.__call__
+  File "cupy/_core/_kernel.pyx", line 657, in cupy._core._kernel._get_out_args_from_optionals
+  File "cupy/_core/core.pyx", line 3342, in cupy._core.core._ndarray_init
+  File "cupy/_core/core.pyx", line 300, in cupy._core.core._ndarray_base._init_fast
+  File "cupy/cuda/memory.pyx", line 904, in cupy.cuda.memory.alloc
+  File "cupy/cuda/memory.pyx", line 1614, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1635, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1350, in cupy.cuda.memory.SingleDeviceMemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1376, in cupy.cuda.memory.SingleDeviceMemoryPool._malloc
+  File "cupy/cuda/memory.pyx", line 1560, in cupy.cuda.memory.SingleDeviceMemoryPool._try_malloc
+cupy.cuda.memory.OutOfMemoryError: Out of memory allocating 134,217,728 bytes (allocated so far: 3,489,660,928 bytes).
+Exception in thread Thread-38 (_chunk):
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 569, in _chunk
+    sr, si, br, bi, s_ar, dm = slabfn(
+                               ^^^^^^^
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 446, in slab_budget_gpu
+    abs_g2t2 = cp.abs(g2 - t2)
+                      ~~~^~~~
+  File "cupy/_core/core.pyx", line 1578, in cupy._core.core._ndarray_base.__sub__
+  File "cupy/_core/core.pyx", line 2024, in cupy._core.core._ndarray_base.__array_ufunc__
+  File "cupy/_core/_kernel.pyx", line 1374, in cupy._core._kernel.ufunc.__call__
+  File "cupy/_core/_kernel.pyx", line 657, in cupy._core._kernel._get_out_args_from_optionals
+  File "cupy/_core/core.pyx", line 3342, in cupy._core.core._ndarray_init
+  File "cupy/_core/core.pyx", line 300, in cupy._core.core._ndarray_base._init_fast
+  File "cupy/cuda/memory.pyx", line 904, in cupy.cuda.memory.alloc
+  File "cupy/cuda/memory.pyx", line 1614, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1635, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1350, in cupy.cuda.memory.SingleDeviceMemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1376, in cupy.cuda.memory.SingleDeviceMemoryPool._malloc
+  File "cupy/cuda/memory.pyx", line 1560, in cupy.cuda.memory.SingleDeviceMemoryPool._try_malloc
+cupy.cuda.memory.OutOfMemoryError: Out of memory allocating 134,217,728 bytes (allocated so far: 3,489,660,928 bytes).
+Exception in thread Thread-36 (_chunk):
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 569, in _chunk
+    sr, si, br, bi, s_ar, dm = slabfn(
+                               ^^^^^^^
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 452, in slab_budget_gpu
+    S2 = float(cp.maximum(cp.abs(re_t), 0.5 / A).sum())
+                                        ~~~~^~~
+  File "cupy/_core/core.pyx", line 1606, in cupy._core.core._ndarray_base.__truediv__
+  File "cupy/_core/_kernel.pyx", line 1374, in cupy._core._kernel.ufunc.__call__
+  File "cupy/_core/_kernel.pyx", line 657, in cupy._core._kernel._get_out_args_from_optionals
+  File "cupy/_core/core.pyx", line 3342, in cupy._core.core._ndarray_init
+  File "cupy/_core/core.pyx", line 300, in cupy._core.core._ndarray_base._init_fast
+  File "cupy/cuda/memory.pyx", line 904, in cupy.cuda.memory.alloc
+  File "cupy/cuda/memory.pyx", line 1614, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1635, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1350, in cupy.cuda.memory.SingleDeviceMemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1376, in cupy.cuda.memory.SingleDeviceMemoryPool._malloc
+  File "cupy/cuda/memory.pyx", line 1560, in cupy.cuda.memory.SingleDeviceMemoryPool._try_malloc
+cupy.cuda.memory.OutOfMemoryError: Out of memory allocating 134,217,728 bytes (allocated so far: 3,355,443,200 bytes).
+Exception in thread Thread-34 (_chunk):
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 569, in _chunk
+    sr, si, br, bi, s_ar, dm = slabfn(
+                               ^^^^^^^
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 446, in slab_budget_gpu
+    abs_g2t2 = cp.abs(g2 - t2)
+               ^^^^^^^^^^^^^^^
+  File "cupy/_core/_kernel.pyx", line 1374, in cupy._core._kernel.ufunc.__call__
+  File "cupy/_core/_kernel.pyx", line 657, in cupy._core._kernel._get_out_args_from_optionals
+  File "cupy/_core/core.pyx", line 3342, in cupy._core.core._ndarray_init
+  File "cupy/_core/core.pyx", line 300, in cupy._core.core._ndarray_base._init_fast
+  File "cupy/cuda/memory.pyx", line 904, in cupy.cuda.memory.alloc
+  File "cupy/cuda/memory.pyx", line 1614, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1635, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1350, in cupy.cuda.memory.SingleDeviceMemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1376, in cupy.cuda.memory.SingleDeviceMemoryPool._malloc
+  File "cupy/cuda/memory.pyx", line 1560, in cupy.cuda.memory.SingleDeviceMemoryPool._try_malloc
+cupy.cuda.memory.OutOfMemoryError: Out of memory allocating 134,217,728 bytes (allocated so far: 3,355,443,200 bytes).
+Exception in thread Thread-39 (_chunk):
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 569, in _chunk
+    sr, si, br, bi, s_ar, dm = slabfn(
+                               ^^^^^^^
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 446, in slab_budget_gpu
+    abs_g2t2 = cp.abs(g2 - t2)
+               ^^^^^^^^^^^^^^^
+  File "cupy/_core/_kernel.pyx", line 1374, in cupy._core._kernel.ufunc.__call__
+  File "cupy/_core/_kernel.pyx", line 657, in cupy._core._kernel._get_out_args_from_optionals
+  File "cupy/_core/core.pyx", line 3342, in cupy._core.core._ndarray_init
+  File "cupy/_core/core.pyx", line 300, in cupy._core.core._ndarray_base._init_fast
+  File "cupy/cuda/memory.pyx", line 904, in cupy.cuda.memory.alloc
+  File "cupy/cuda/memory.pyx", line 1614, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1635, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1350, in cupy.cuda.memory.SingleDeviceMemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1376, in cupy.cuda.memory.SingleDeviceMemoryPool._malloc
+  File "cupy/cuda/memory.pyx", line 1560, in cupy.cuda.memory.SingleDeviceMemoryPool._try_malloc
+cupy.cuda.memory.OutOfMemoryError: Out of memory allocating 134,217,728 bytes (allocated so far: 3,221,225,472 bytes).
+Exception in thread Thread-37 (_chunk):
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 569, in _chunk
+    sr, si, br, bi, s_ar, dm = slabfn(
+                               ^^^^^^^
+  File "/workspace/h1/RH/scripts/rh/day038_h1_3e10_gpu.py", line 447, in slab_budget_gpu
+    re_t = cp.log(abs_g2t2) - cp.log(A) + 0.5 / A
+           ~~~~~~~~~~~~~~~~~^~~~~~~~~~~
+  File "cupy/_core/core.pyx", line 1574, in cupy._core.core._ndarray_base.__sub__
+  File "cupy/_core/_kernel.pyx", line 1374, in cupy._core._kernel.ufunc.__call__
+  File "cupy/_core/_kernel.pyx", line 657, in cupy._core._kernel._get_out_args_from_optionals
+  File "cupy/_core/core.pyx", line 3342, in cupy._core.core._ndarray_init
+  File "cupy/_core/core.pyx", line 300, in cupy._core.core._ndarray_base._init_fast
+  File "cupy/cuda/memory.pyx", line 904, in cupy.cuda.memory.alloc
+  File "cupy/cuda/memory.pyx", line 1614, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1635, in cupy.cuda.memory.MemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1350, in cupy.cuda.memory.SingleDeviceMemoryPool.malloc
+  File "cupy/cuda/memory.pyx", line 1376, in cupy.cuda.memory.SingleDeviceMemoryPool._malloc
+  File "cupy/cuda/memory.pyx", line 1560, in cupy.cuda.memory.SingleDeviceMemoryPool._try_malloc
+cupy.cuda.memory.OutOfMemoryError: Out of memory allocating 134,217,728 bytes (allocated so far: 3,087,007,744 bytes).
+  ...t=8.139e+09 tail sweep 91% (5500 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 8% (500 pieces, 8 threads)
+  pt win=0 k=-5 x=8.139e+09 t=8139156362.08026 mnew=1.0000 mcert=1.0000 bexp=8.82e-04
+  ...t=8.139e+09 tail sweep 99% (6000 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 8% (500 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 17% (1000 pieces, 8 threads)
+  ...t=8.139e+09 tail sweep 17% (1000 pieces, 8 threads)
+  pt win=0 k=-4 x=8.139e+09 t=8139156362.58026 mnew=1.0000 mcert=1.0000 bexp=9.05e-04
+  ...t=8.139e+09 tail sweep 25% (1500 pieces, 8 threads)
+H1_WINDOWS:  running  windows  12-13  (2  of  29)
+resume:  window   0  (x=8139156365)  4/24  points  on disk
+resume:  window   1  (x=8790288874)  0/24  points  on disk
+memguard:  MemAvailable  740.9  GiB,  reserve  28  GiB,  ~2.5  GiB/thread  x  4  threads  ->  allow  <=  10  contexts  (=  40  slab  threads;  11  GPU  clients  incl.  Xorg  vs  budget  11)
+day038  gpu  H1-3e10:  FULL,  44  point  jobs  remaining (2  windows,  4  contexts  x  4  threads)
+pids: parent=4220 workers=4 written to ckpt_h1_3e10/run.pids
+overlap: 152/12626784 zeros differ by <=1.00 ulp (last byte,  rounding-level) --  those indices certified with dg x3
+stitch: B from element 12626784 (first zero 1006346000.166784); overlap cross-check 12626632/12626784 byte-equal
+tail3e10: L 52290633 + A 2792198664 + B' 3053546936 + C 3142622346 + D 92577877714 = 101618536293 zeros (812.9 GB); G_LAST = 30001045999.981976
+overlap: 152/12626784 zeros differ by <=1.00 ulp (last byte,  rounding-level) --  those indices certified with dg x3
+stitch: B from element 12626784 (first zero 1006346000.166784); overlap cross-check 12626632/12626784 byte-equal
+tail3e10: L 52290633 + A 2792198664 + B' 3053546936 + C 3142622346 + D 92577877714 = 101618536293 zeros (812.9 GB); G_LAST = 30001045999.981976
+overlap: 152/12626784 zeros differ by <=1.00 ulp (last byte,  rounding-level) --  those indices certified with dg x3
+stitch: B from element 12626784 (first zero 1006346000.166784); overlap cross-check 12626632/12626784 byte-equal
+tail3e10: L 52290633 + A 2792198664 + B' 3053546936 + C 3142622346 + D 92577877714 = 101618536293 zeros (812.9 GB); G_LAST = 30001045999.981976
+overlap: 152/12626784 zeros differ by <=1.00 ulp (last byte,  rounding-level) --  those indices certified with dg x3
+stitch: B from element 12626784 (first zero 1006346000.166784); overlap cross-check 12626632/12626784 byte-equal
+tail3e10: L 52290633 + A 2792198664 + B' 3053546936 + C 3142622346 + D 92577877714 = 101618536293 zeros (812.9 GB); G_LAST = 30001045999.981976
+  ...t=8.139e+09 tail sweep 8% (500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 8% (500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 8% (500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 8% (500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 17% (1000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 17% (1000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 17% (1000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 17% (1000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 25% (1500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 25% (1500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 25% (1500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 25% (1500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 33% (2000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 33% (2000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 33% (2000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 33% (2000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 41% (2500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 41% (2500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 41% (2500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 41% (2500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 50% (3000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 50% (3000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 50% (3000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 50% (3000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 58% (3500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 58% (3500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 58% (3500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 58% (3500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 66% (4000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 66% (4000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 66% (4000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 66% (4000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 74% (4500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 74% (4500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 74% (4500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 74% (4500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 83% (5000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 83% (5000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 83% (5000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 83% (5000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 91% (5500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 91% (5500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 91% (5500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 91% (5500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 99% (6000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 99% (6000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 99% (6000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 99% (6000 pieces, 4 threads)
+  pt win=0 k=-7 x=8.139e+09 t=8139156361.08026 mnew=1.0000 mcert=1.0000 bexp=8.77e-04
+  pt win=0 k=-8 x=8.139e+09 t=8139156360.58026 mnew=1.0000 mcert=1.0000 bexp=8.89e-04
+  pt win=0 k=-9 x=8.139e+09 t=8139156360.08026 mnew=1.0000 mcert=1.0000 bexp=3.55e-03
+  pt win=0 k=-11 x=8.139e+09 t=8139156359.08026 mnew=1.0000 mcert=1.0000 bexp=8.73e-04
+  ...t=8.139e+09 tail sweep 8% (500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 8% (500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 8% (500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 8% (500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 17% (1000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 17% (1000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 17% (1000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 17% (1000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 25% (1500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 25% (1500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 25% (1500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 25% (1500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 33% (2000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 33% (2000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 33% (2000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 33% (2000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 41% (2500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 41% (2500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 41% (2500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 41% (2500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 50% (3000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 50% (3000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 50% (3000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 50% (3000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 58% (3500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 58% (3500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 58% (3500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 58% (3500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 66% (4000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 66% (4000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 66% (4000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 66% (4000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 74% (4500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 74% (4500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 74% (4500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 74% (4500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 83% (5000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 83% (5000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 83% (5000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 83% (5000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 91% (5500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 91% (5500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 91% (5500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 91% (5500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 99% (6000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 99% (6000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 99% (6000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 99% (6000 pieces, 4 threads)
+  pt win=0 k=-6 x=8.139e+09 t=8139156361.58026 mnew=1.0000 mcert=1.0000 bexp=8.79e-04
+  pt win=0 k=-2 x=8.139e+09 t=8139156363.58026 mnew=1.0000 mcert=1.0000 bexp=8.79e-04
+  pt win=0 k=-3 x=8.139e+09 t=8139156363.08026 mnew=1.0000 mcert=1.0000 bexp=8.84e-04
+  pt win=0 k=-1 x=8.139e+09 t=8139156364.08026 mnew=1.0000 mcert=1.0000 bexp=9.02e-04
+  ...t=8.139e+09 tail sweep 8% (500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 8% (500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 8% (500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 8% (500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 17% (1000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 17% (1000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 17% (1000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 17% (1000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 25% (1500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 25% (1500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 25% (1500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 25% (1500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 33% (2000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 33% (2000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 33% (2000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 33% (2000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 41% (2500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 41% (2500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 41% (2500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 41% (2500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 50% (3000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 50% (3000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 50% (3000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 50% (3000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 58% (3500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 58% (3500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 58% (3500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 58% (3500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 66% (4000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 66% (4000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 66% (4000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 66% (4000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 74% (4500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 74% (4500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 74% (4500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 74% (4500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 83% (5000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 83% (5000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 83% (5000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 83% (5000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 91% (5500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 91% (5500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 91% (5500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 91% (5500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 99% (6000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 99% (6000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 99% (6000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 99% (6000 pieces, 4 threads)
+  pt win=0 k=+2 x=8.139e+09 t=8139156365.58026 mnew=1.0000 mcert=1.0000 bexp=8.78e-04
+  pt win=0 k=+1 x=8.139e+09 t=8139156365.08026 mnew=1.0000 mcert=1.0000 bexp=8.80e-04
+  pt win=0 k=+4 x=8.139e+09 t=8139156366.58026 mnew=1.0000 mcert=1.0000 bexp=9.02e-04
+  pt win=0 k=+3 x=8.139e+09 t=8139156366.08026 mnew=1.0000 mcert=1.0000 bexp=8.78e-04
+  ...t=8.139e+09 tail sweep 8% (500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 8% (500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 8% (500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 8% (500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 17% (1000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 17% (1000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 17% (1000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 17% (1000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 25% (1500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 25% (1500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 25% (1500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 25% (1500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 33% (2000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 33% (2000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 33% (2000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 33% (2000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 41% (2500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 41% (2500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 41% (2500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 41% (2500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 50% (3000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 50% (3000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 50% (3000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 50% (3000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 58% (3500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 58% (3500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 58% (3500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 58% (3500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 66% (4000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 66% (4000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 66% (4000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 66% (4000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 74% (4500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 74% (4500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 74% (4500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 74% (4500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 83% (5000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 83% (5000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 83% (5000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 83% (5000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 91% (5500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 91% (5500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 91% (5500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 91% (5500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 99% (6000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 99% (6000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 99% (6000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 99% (6000 pieces, 4 threads)
+  pt win=0 k=+5 x=8.139e+09 t=8139156367.08026 mnew=1.0000 mcert=1.0000 bexp=8.82e-04
+  pt win=0 k=+6 x=8.139e+09 t=8139156367.58026 mnew=1.0000 mcert=1.0000 bexp=8.81e-04
+  pt win=0 k=+8 x=8.139e+09 t=8139156368.58026 mnew=1.0000 mcert=1.0000 bexp=8.86e-04
+  pt win=0 k=+7 x=8.139e+09 t=8139156368.08026 mnew=1.0000 mcert=1.0000 bexp=8.78e-04
+  ...t=8.139e+09 tail sweep 8% (500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 8% (500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 8% (500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 8% (500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 17% (1000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 17% (1000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 17% (1000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 17% (1000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 25% (1500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 25% (1500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 25% (1500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 25% (1500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 33% (2000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 33% (2000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 33% (2000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 33% (2000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 41% (2500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 41% (2500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 41% (2500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 41% (2500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 50% (3000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 50% (3000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 50% (3000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 50% (3000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 58% (3500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 58% (3500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 58% (3500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 58% (3500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 66% (4000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 66% (4000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 66% (4000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 66% (4000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 74% (4500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 74% (4500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 74% (4500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 74% (4500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 83% (5000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 83% (5000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 83% (5000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 83% (5000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 91% (5500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 91% (5500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 91% (5500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 91% (5500 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 99% (6000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 99% (6000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 99% (6000 pieces, 4 threads)
+  ...t=8.139e+09 tail sweep 99% (6000 pieces, 4 threads)
+  pt win=0 k=+10 x=8.139e+09 t=8139156369.58026 mnew=1.0000 mcert=1.0000 bexp=9.81e-04
+  pt win=0 k=+11 x=8.139e+09 t=8139156370.08026 mnew=1.0000 mcert=1.0000 bexp=1.02e-03
+  pt win=0 k=+9 x=8.139e+09 t=8139156369.08026 mnew=1.0000 mcert=1.0000 bexp=8.83e-04
+  pt win=0 k=+12 x=8.139e+09 t=8139156370.58026 mnew=1.0000 mcert=1.0000 bexp=9.08e-04
+  ...t=8.79e+09 tail sweep 8% (500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 8% (500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 8% (500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 8% (500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 17% (1000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 17% (1000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 17% (1000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 17% (1000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 25% (1500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 25% (1500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 25% (1500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 25% (1500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 33% (2000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 33% (2000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 33% (2000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 33% (2000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 41% (2500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 41% (2500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 41% (2500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 41% (2500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 50% (3000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 50% (3000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 50% (3000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 50% (3000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 58% (3500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 58% (3500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 58% (3500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 58% (3500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 66% (4000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 66% (4000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 66% (4000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 66% (4000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 74% (4500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 74% (4500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 74% (4500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 74% (4500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 83% (5000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 83% (5000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 83% (5000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 83% (5000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 91% (5500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 91% (5500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 91% (5500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 91% (5500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 99% (6000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 99% (6000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 99% (6000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 99% (6000 pieces, 4 threads)
+  pt win=1 k=-11 x=8.79e+09 t=8790288868.56915 mnew=1.0000 mcert=1.0000 bexp=9.37e-04
+  pt win=1 k=-9 x=8.79e+09 t=8790288869.56915 mnew=1.0000 mcert=1.0000 bexp=9.49e-04
+  pt win=1 k=-10 x=8.79e+09 t=8790288869.06915 mnew=1.0000 mcert=1.0000 bexp=9.70e-04
+  ...t=8.79e+09 tail sweep 8% (500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 8% (500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 8% (500 pieces, 4 threads)
+  pt win=1 k=-12 x=8.79e+09 t=8790288868.06915 mnew=1.0000 mcert=1.0000 bexp=9.69e-04
+  ...t=8.79e+09 tail sweep 17% (1000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 17% (1000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 17% (1000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 8% (500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 25% (1500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 25% (1500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 25% (1500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 17% (1000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 33% (2000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 33% (2000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 33% (2000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 25% (1500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 41% (2500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 41% (2500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 41% (2500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 33% (2000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 50% (3000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 50% (3000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 50% (3000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 41% (2500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 58% (3500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 58% (3500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 58% (3500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 50% (3000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 66% (4000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 66% (4000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 66% (4000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 58% (3500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 74% (4500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 74% (4500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 74% (4500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 83% (5000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 83% (5000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 83% (5000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 66% (4000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 91% (5500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 91% (5500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 91% (5500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 74% (4500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 99% (6000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 99% (6000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 99% (6000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 83% (5000 pieces, 4 threads)
+  pt win=1 k=-6 x=8.79e+09 t=8790288871.06915 mnew=1.0000 mcert=1.0000 bexp=9.39e-04
+  pt win=1 k=-8 x=8.79e+09 t=8790288870.06915 mnew=1.0000 mcert=1.0000 bexp=1.00e-03
+  pt win=1 k=-7 x=8.79e+09 t=8790288870.56915 mnew=1.0000 mcert=1.0000 bexp=9.89e-04
+  ...t=8.79e+09 tail sweep 91% (5500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 8% (500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 8% (500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 8% (500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 99% (6000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 17% (1000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 17% (1000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 17% (1000 pieces, 4 threads)
+  pt win=1 k=-5 x=8.79e+09 t=8790288871.56915 mnew=1.0000 mcert=1.0000 bexp=1.14e-03
+  ...t=8.79e+09 tail sweep 25% (1500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 25% (1500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 25% (1500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 8% (500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 33% (2000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 33% (2000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 33% (2000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 17% (1000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 41% (2500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 41% (2500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 41% (2500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 25% (1500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 50% (3000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 50% (3000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 50% (3000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 33% (2000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 58% (3500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 58% (3500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 58% (3500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 41% (2500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 66% (4000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 66% (4000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 66% (4000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 50% (3000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 74% (4500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 74% (4500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 74% (4500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 58% (3500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 83% (5000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 83% (5000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 83% (5000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 91% (5500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 91% (5500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 91% (5500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 66% (4000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 99% (6000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 99% (6000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 99% (6000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 74% (4500 pieces, 4 threads)
+H1_WINDOWS:  running  windows  12-13  (2  of  29)
+resume:  window   0  (x=8139156365)  24/24  points  on disk
+resume:  window   1  (x=8790288874)  8/24  points  on disk
+memguard:  MemAvailable  740.8  GiB,  reserve  28  GiB,  ~2.5  GiB/thread  x  4  threads  ->  allow  <=  10  contexts  (=  40  slab  threads;  11  GPU  clients  incl.  Xorg  vs  budget  11)
+day038  gpu  H1-3e10:  FULL,  16  point  jobs  remaining (2  windows,  4  contexts  x  4  threads)
+pids: parent=515 workers=4 written to ckpt_h1_3e10/run.pids
+overlap: 152/12626784 zeros differ by <=1.00 ulp (last byte,  rounding-level) --  those indices certified with dg x3
+stitch: B from element 12626784 (first zero 1006346000.166784); overlap cross-check 12626632/12626784 byte-equal
+tail3e10: L 52290633 + A 2792198664 + B' 3053546936 + C 3142622346 + D 92577877714 = 101618536293 zeros (812.9 GB); G_LAST = 30001045999.981976
+overlap: 152/12626784 zeros differ by <=1.00 ulp (last byte,  rounding-level) --  those indices certified with dg x3
+stitch: B from element 12626784 (first zero 1006346000.166784); overlap cross-check 12626632/12626784 byte-equal
+tail3e10: L 52290633 + A 2792198664 + B' 3053546936 + C 3142622346 + D 92577877714 = 101618536293 zeros (812.9 GB); G_LAST = 30001045999.981976
+overlap: 152/12626784 zeros differ by <=1.00 ulp (last byte,  rounding-level) --  those indices certified with dg x3
+stitch: B from element 12626784 (first zero 1006346000.166784); overlap cross-check 12626632/12626784 byte-equal
+tail3e10: L 52290633 + A 2792198664 + B' 3053546936 + C 3142622346 + D 92577877714 = 101618536293 zeros (812.9 GB); G_LAST = 30001045999.981976
+overlap: 152/12626784 zeros differ by <=1.00 ulp (last byte,  rounding-level) --  those indices certified with dg x3
+stitch: B from element 12626784 (first zero 1006346000.166784); overlap cross-check 12626632/12626784 byte-equal
+tail3e10: L 52290633 + A 2792198664 + B' 3053546936 + C 3142622346 + D 92577877714 = 101618536293 zeros (812.9 GB); G_LAST = 30001045999.981976
+  ...t=8.79e+09 tail sweep 8% (500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 8% (500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 8% (500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 8% (500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 17% (1000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 17% (1000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 17% (1000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 17% (1000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 25% (1500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 25% (1500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 25% (1500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 25% (1500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 33% (2000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 33% (2000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 33% (2000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 33% (2000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 41% (2500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 41% (2500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 41% (2500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 41% (2500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 50% (3000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 50% (3000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 50% (3000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 50% (3000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 58% (3500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 58% (3500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 58% (3500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 58% (3500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 66% (4000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 66% (4000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 66% (4000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 66% (4000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 74% (4500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 74% (4500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 74% (4500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 74% (4500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 83% (5000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 83% (5000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 83% (5000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 83% (5000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 91% (5500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 91% (5500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 91% (5500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 91% (5500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 99% (6000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 99% (6000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 99% (6000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 99% (6000 pieces, 4 threads)
+  pt win=1 k=-2 x=8.79e+09 t=8790288873.06915 mnew=1.0000 mcert=1.0000 bexp=9.77e-04
+  pt win=1 k=-1 x=8.79e+09 t=8790288873.56915 mnew=1.0000 mcert=1.0000 bexp=1.00e-03
+  pt win=1 k=-4 x=8.79e+09 t=8790288872.06915 mnew=1.0000 mcert=1.0000 bexp=9.48e-04
+  pt win=1 k=-3 x=8.79e+09 t=8790288872.56915 mnew=1.0000 mcert=1.0000 bexp=9.46e-04
+  ...t=8.79e+09 tail sweep 8% (500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 8% (500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 8% (500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 8% (500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 17% (1000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 17% (1000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 17% (1000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 17% (1000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 25% (1500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 25% (1500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 25% (1500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 25% (1500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 33% (2000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 33% (2000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 33% (2000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 33% (2000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 41% (2500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 41% (2500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 41% (2500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 41% (2500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 50% (3000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 50% (3000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 50% (3000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 50% (3000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 58% (3500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 58% (3500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 58% (3500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 58% (3500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 66% (4000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 66% (4000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 66% (4000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 66% (4000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 74% (4500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 74% (4500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 74% (4500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 74% (4500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 83% (5000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 83% (5000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 83% (5000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 83% (5000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 91% (5500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 91% (5500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 91% (5500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 91% (5500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 99% (6000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 99% (6000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 99% (6000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 99% (6000 pieces, 4 threads)
+  pt win=1 k=+1 x=8.79e+09 t=8790288874.56915 mnew=1.0000 mcert=1.0000 bexp=9.45e-04
+  pt win=1 k=+2 x=8.79e+09 t=8790288875.06915 mnew=1.0000 mcert=1.0000 bexp=1.01e-03
+  pt win=1 k=+4 x=8.79e+09 t=8790288876.06915 mnew=1.0000 mcert=1.0000 bexp=9.40e-04
+  pt win=1 k=+3 x=8.79e+09 t=8790288875.56915 mnew=1.0000 mcert=1.0000 bexp=9.46e-04
+  ...t=8.79e+09 tail sweep 8% (500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 8% (500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 8% (500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 8% (500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 17% (1000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 17% (1000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 17% (1000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 17% (1000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 25% (1500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 25% (1500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 25% (1500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 25% (1500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 33% (2000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 33% (2000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 33% (2000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 33% (2000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 41% (2500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 41% (2500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 41% (2500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 41% (2500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 50% (3000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 50% (3000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 50% (3000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 50% (3000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 58% (3500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 58% (3500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 58% (3500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 58% (3500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 66% (4000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 66% (4000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 66% (4000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 66% (4000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 74% (4500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 74% (4500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 74% (4500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 74% (4500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 83% (5000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 83% (5000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 83% (5000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 83% (5000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 91% (5500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 91% (5500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 91% (5500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 91% (5500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 99% (6000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 99% (6000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 99% (6000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 99% (6000 pieces, 4 threads)
+  pt win=1 k=+5 x=8.79e+09 t=8790288876.56915 mnew=1.0000 mcert=1.0000 bexp=9.56e-04
+  pt win=1 k=+6 x=8.79e+09 t=8790288877.06915 mnew=1.0000 mcert=1.0000 bexp=9.52e-04
+  pt win=1 k=+8 x=8.79e+09 t=8790288878.06915 mnew=1.0000 mcert=1.0000 bexp=9.46e-04
+  pt win=1 k=+7 x=8.79e+09 t=8790288877.56915 mnew=1.0000 mcert=1.0000 bexp=1.04e-03
+  ...t=8.79e+09 tail sweep 8% (500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 8% (500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 8% (500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 8% (500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 17% (1000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 17% (1000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 17% (1000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 17% (1000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 25% (1500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 25% (1500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 25% (1500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 25% (1500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 33% (2000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 33% (2000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 33% (2000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 33% (2000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 41% (2500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 41% (2500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 41% (2500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 41% (2500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 50% (3000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 50% (3000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 50% (3000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 50% (3000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 58% (3500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 58% (3500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 58% (3500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 58% (3500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 66% (4000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 66% (4000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 66% (4000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 66% (4000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 74% (4500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 74% (4500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 74% (4500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 74% (4500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 83% (5000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 83% (5000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 83% (5000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 83% (5000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 91% (5500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 91% (5500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 91% (5500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 91% (5500 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 99% (6000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 99% (6000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 99% (6000 pieces, 4 threads)
+  ...t=8.79e+09 tail sweep 99% (6000 pieces, 4 threads)
+  pt win=1 k=+12 x=8.79e+09 t=8790288880.06915 mnew=1.0000 mcert=1.0000 bexp=9.43e-04
+  pt win=1 k=+11 x=8.79e+09 t=8790288879.56915 mnew=1.0000 mcert=1.0000 bexp=9.47e-04
+  pt win=1 k=+9 x=8.79e+09 t=8790288878.56915 mnew=1.0000 mcert=1.0000 bexp=9.61e-04
+  pt win=1 k=+10 x=8.79e+09 t=8790288879.06915 mnew=1.0000 mcert=1.0000 bexp=9.46e-04
+           x            g best_mnew worst_mcert      btot      flag
+ 8.13916e+09 8139156364.5803  1.000000   1.000000  1.14e-03 -
+ 8.79029e+09 8790288874.0692  1.000000   1.000000  1.23e-03 -
+worst certified margin = 1.000000 at t = 8139156358.58026 (computed 1.000000)
+margin_cert < 1: [8139156359.58, 8139156358.58, 8139156362.08, 8139156362.58, 8139156361.08, 8139156360.58, 8139156360.08, 8139156359.08, 8139156361.58, 8139156363.58, 8139156363.08, 8139156364.08, 8790288868.569, 8790288869.569, 8790288869.069, 8790288868.069, 8790288871.069, 8790288870.069, 8790288870.569, 8790288871.569, 8790288873.069, 8790288873.569, 8790288872.069, 8790288872.569]
+margin_new  < 1: [8139156359.58, 8139156358.58, 8139156362.08, 8139156362.58, 8139156361.08, 8139156360.58, 8139156360.08, 8139156359.08, 8139156361.58, 8139156363.58, 8139156363.08, 8139156364.08, 8790288868.569, 8790288869.569, 8790288869.069, 8790288868.069, 8790288871.069, 8790288870.069, 8790288870.569, 8790288871.569, 8790288873.069, 8790288873.569, 8790288872.069, 8790288872.569]
+wall = 11325.8 s
+STATUS: see the pre-registered reading C-2/C-3
+H1  FULL-DONE:  2  windows,  48  points,  assembled  to  /workspace/h1/RH/scripts/rh/out_day038_full_pts.txt;  instance  wall  3.1  h

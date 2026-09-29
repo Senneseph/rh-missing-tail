@@ -1,0 +1,20 @@
+2026-09-28 23:04:34 day045 supervisor start (lock held)
+2026-09-28 23:04:34 band spot check:  size=740623021712  perm=555  first=2999246000.182257  last=30001045999.981976
+2026-09-28 23:04:35 L-shards  verified  (11  x  md5  against  official  lmfdb  pins)
+2026-09-28 23:04:35 supervisor pid 20921  written  to  /workspace/h1/RH/scripts/rh/ckpt_h1_3e10_w20/supervisor.pid
+2026-09-28 23:04:35 instance  1  launching  (env  WORKERS=4  contexts  x  H1_THREADS=4  threads;  windows=20;  instance  memguard  derives  actual  count;  resume  from  ckpt_h1_3e10/)
+2026-09-29 01:40:14 instance  1  exited  rc=0
+2026-09-29 01:40:14 instance  windows  complete  (marker  in  out_day038_full_w20.log)  --  exiting
+2026-09-29 01:40:14 day045 supervisor exit  (total  instances:  2)
+2026-09-29 05:03:49 day045 supervisor start (lock held)
+2026-09-29 05:03:49 band spot check:  size=740623021712  perm=555  first=2999246000.182257  last=30001045999.981976
+2026-09-29 05:03:51 L-shards  verified  (11  x  md5  against  official  lmfdb  pins)
+2026-09-29 05:03:51 supervisor pid 387  written  to  /workspace/h1/RH/scripts/rh/ckpt_h1_3e10_w20/supervisor.pid
+2026-09-29 05:03:51 instance  windows  complete  (marker  in  out_day038_full_w20.log)  --  exiting
+2026-09-29 05:03:51 day045 supervisor exit  (total  instances:  1)
+2026-09-29 05:08:49 day045 supervisor start (lock held)
+2026-09-29 05:08:49 band spot check:  size=740623021712  perm=555  first=2999246000.182257  last=30001045999.981976
+2026-09-29 05:08:51 L-shards  verified  (11  x  md5  against  official  lmfdb  pins)
+2026-09-29 05:08:51 supervisor pid 1669  written  to  /workspace/h1/RH/scripts/rh/ckpt_h1_3e10_w20/supervisor.pid
+2026-09-29 05:08:51 instance  windows  complete  (marker  in  out_day038_full_w20.log)  --  exiting
+2026-09-29 05:08:51 day045 supervisor exit  (total  instances:  1)

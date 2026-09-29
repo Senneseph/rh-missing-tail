@@ -7590,3 +7590,58 @@ The day's events, in order:
    side is now measured; what remains for [S1] is
    the data-free O(1) signed-defect theorem itself
    (E15's target; E7: unclaimed in the literature).
+
+## 2026-09-29 ~15:55-16:15 EDT — H1 fleet delivery landed on the 10TB; verified 696/696 COMPLETE; committed to git
+
+The fleet's final results arrived on the 10TB drive as
+`rh-final-data/` (three boxes: the 8x-RTX-4090 box, the v100 box, and
+the local 5900X engine), plus an `evidence/` folder (destroy verdict
+with the band md5 chains, the data-layout doc, the fleet AGENTS rules).
+Consolidated into `scripts/rh/h1_final_fleet/` (the delivery's
+overlapping files were verified byte-identical to the earlier delivery
+already there; the 5900x log and window-7 checkpoint were superseded by
+their newer snapshot versions) and verified end-to-end
+(`scripts/rh/h1_final_fleet/VERIFICATION.md` is the audit trail;
+`MD5SUMS.txt` covers every file):
+
+1. **696 / 696 certified.** Dedup of every certified engine log line
+   (4090: 693 lines, v100: 386, 5900x: 180) by (t, k) gives exactly the
+   full universe: 29 windows x 24 k-offsets. Every line carries
+   mcert=1.0000; zero non-finite or NaN values anywhere, including all
+   full-precision `.pts` checkpoint files.
+
+2. **466 points cross-certified by two or more machines, bit-identical
+   in t, mnew, and bexp for all 466** (independent hardware: 8x RTX
+   4090, v100, 5900X+3090Ti). Zero disagreements. This is the
+   independent-replication layer the 4090 box's destruction had put at
+   risk: the same certified values now stand on at least two machines
+   for most of the band and on the full-precision checkpoint files for
+   the rest.
+
+3. **The three documented 4090 cert-gate exceptions are closed by the
+   v100 box.** 4090 logged exactly 693 of 696 (missing window 1 / k=-11
+   and window 18 / k=-5, k=-4, per its own per-slice headers and the
+   fleet README). v100's dedicated w18/w19/w20 re-issue runs certified
+   exactly those three, mcert=1.0000. The window-1 point's
+   full-precision checkpoint row is present in the 5900x delivery
+   (t = 3490744648.8185544014) and is consistent with the v100
+   certified line.
+
+4. **Supervisor logs clean.** v100: 878/878 flagged lines are benign
+   lock-contention exits, zero data errors. 5900x: three
+   band-size/perm HOLDs, all from the pre-run FUSE permission saga,
+   resolved before any data was produced.
+
+5. **Delivery provenance is md5-chained.** v100-box checked against the
+   box's own `manifest.md5` (28/28 OK); the whole tree against
+   `MD5SUMS.txt` (55 files); drive->repo copy compared bit-identical.
+   Bands (814 GB) are not in the delivery by design; the evidence
+   folder carries the band md5 identity chains (md5-identical across
+   5900X, the destroyed PRO-6000 node, and the 4090 volume; L-shards
+   11/11 vs official LMFDB pins).
+
+Consequence for the proof: the measured side of the H1 layer is now
+**complete to the wire with a double-checked cross-machine record** —
+no pending points, no re-issues, no fleet dependency left. The only
+open item for [S1] A1 is the data-free O(1) signed-defect theorem
+itself (E7: unclaimed in the literature).

@@ -34,6 +34,7 @@ out_*.log
 # assembled ledger slice, 5900x snapshot checkpoints, evidence.
 !scripts/rh/h1_final_fleet/*/out_*.log
 !scripts/rh/h1_final_fleet/5900x/ckpt/widx*.pts
+!scripts/rh/h1_final_fleet/v100-box/ckpt_h1_3e10_*/widx*.pts
 # box-local ops scratch — never for git
 scripts/rh/ckpt_h1_3e10/slice.queue
 scripts/rh/ckpt_h1_3e10/slice_queue.state
