@@ -7984,3 +7984,44 @@ delivery records.  Operational fleet docs (runbook,
 ledger-transfer, fill-analysis plan) still name the fleet
 boxes for launch commands;  say the word and they get the
 same treatment.
+
+2026-09-29 ~20:45 EDT -- BIG: day049f worst-24 re-issue,
+22 of 24 points landed (the 2 pending are pt00 and pt01,
+the verify-engine pair, still running the bit-exact
+engine-replica pass).
+
+THE 0.502 STRUCTURE IS THE SHAPE OF THE WORST REGION, NOT
+A POINT ARTIFACT.  day050_interpret_worst24 over the
+re-issued dps-120 ld-exact margins:
+  * 24-point band: x from 3.23e9 to 5.13e9, k = -12..-8
+    (7 anchors x 5 k-layers; 7 anchors across the band).
+  * Re-issued margins: 0.502276 (at x=3.23e9) rising
+    smoothly to 0.505784 (at x=5.13e9).  Spread
+    0.003508.
+  * ALL 22/22 landed points are below the certificate
+    line m = 1.  The 1-e-9 artifact is absent at
+    certificate grade everywhere in the worst region.
+  * Fit: m = 0.496408 + 0.001795*(x/1e9) + 0.000002*k
+    -- x alone carries 99.49% of the variance; the
+    k-layer is flat to ~2e-6.  The margin is a function
+    of the anchor, not of k.
+  * Precision: dps-90 and dps-120 agree to 0.000e+00 on
+    every arm; f64-pairwise vs ld-exact <= 1.5e-6.
+  * Cross-check vs day048 worst-10: all 8 shared
+    non-verify points agree with day048 to full printed
+    precision (d = 0.00e+00 on each).
+  * |K|/|z| runs 0.9909 -> 0.9771 across the band
+    (residf = |z| + |K|), i.e. the margin is exactly the
+    two-vector geometry: |z|/(|z|+|K|).
+
+So the honest worst-case statement at 3e10 is:  in the
+band 3.2e9..5.1e9 the true certificate-grade margin
+lies in [0.5023, 0.5059], smooth in x, flat in k, all
+below 1 -- and it is not the 0.9999999965 the fleet
+ledger recorded there.  The fleet ledger's worst rows
+were the artifact's worst rows (they recorded 1 minus
+3.5e-9 exactly where the true margin is ~0.502).
+
+Pending: pt00/pt01 (verify-engine pair;  ETA ~1 h) will
+add the bit-exact engine-replica margin check at
+dps-90/120, then the final 24-point table is complete.
