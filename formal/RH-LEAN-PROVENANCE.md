@@ -97,6 +97,34 @@ during the E19 pass (full text verified, not recalled from memory):
   `hG0` / `hGrow` of `A1G.a1_growth_wire_ccm` (the composition around
   them is LEAN-PROVEN).
 
+- **[A1G-5] Sharpest known UNCONDITIONAL explicit all-t bound on S**
+  (the stone-B input; read in full online during the valiant-effort
+  pass): |S(T)| <= 0.111 log T + 0.275 loglog T + 2.450 for all
+  T >= e. T. S. Trudgian, "An improved upper bound for the argument
+  of the Riemann zeta-function on the critical line II",
+  https://arxiv.org/abs/1208.5846, Theorem 1 (companion paper I:
+  Math. Comp. 81:1053-1061 (2012), arXiv:1208.5846 line; the bound
+  holds for all T >= e, proven analytically for T >= 6.8e6 and by
+  verified computation below; NO RH assumed). Consumed by
+  `A1G.a1_explicit_wire` as the hSbound input, through
+  `A1G.G_explicit` (LEAN-PROVEN non-decreasing on [4, oo)); the single
+  auxiliary classical fact is e < 4 (carried as the explicit premise
+  hE: exp 1 = 2.71828 ..., one-line analysis). At the 3e10 frontier
+  the Lean pins give G_explicit < 7 (cited numerics log 3e10 < 25,
+  loglog < 4; the 6.325 < 7 arithmetic is LEAN-PROVEN), hence the
+  data-free wire carries K < 8 and |S1 - R| < 17 on the far side
+  (`A1G.pin_explicit_wire_3e10`) — against the measured wire
+  2.615067 << 17/8 << 5.55 and the certified majorant
+  31047116350.92 << 17/8 << 6.7e10.
+
+- **[A1G-6] Zeta23 community port** (borrowing candidate for the
+  classical side, cited per the iron rule): `Zeta23/RvM/Backlund.lean`
+  (github.com/anthropics/zeta-23-lean) carries the explicit
+  Backlund-line machinery in Lean (the raw integral constant
+  ~ 310 log T form, pre-Rosser-McCurley refinement). Not imported
+  into this package; listed as the borrow source if the
+  argument-principle line (ap1-ap3) is built in-house.
+
 Supporting literature pinned by the same pass (survey-level, cited in
 E19 rather than consumed by the Lean code): the omegas
 `S(t) = Omega((log t/loglog t)^{1/3})` (Tsang) and under RH

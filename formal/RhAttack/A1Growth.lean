@@ -249,4 +249,113 @@ theorem pin_measured_below_growth (C : ℝ) (hC : 1 ≤ C) :
     _ ≤ 1 * 24.2 + 1 := by norm_num
     _ ≤ C * 24.2 + 1 := by nlinarith [hC, (by norm_num : 0 < (24.2 : ℝ))]
 
+/-!  ##  5.  The  explicit  unconditional  instantiation  (E19  addendum,
+the  valiant  effort  --  stone  B)
+
+The  "C  .  log"  input  of  a1_growth_wire_log  is  sharpened  to  the
+sharpest  known  UNCONDITIONAL  explicit  bound  on  S  itself  (Trudgian,
+Math.  Comp.  81:1053-1061  (2012)  /  arXiv:1208.5846  Theorem  1,  read
+in  full  online;  CITED  input  A1G-5  in  RH-LEAN-PROVENANCE.md):
+
+      |S(T)|  <=  G_explicit  T  :=  0.111  .  log  T  +  0.275  .
+              log  (log  T)  +  2.450,        for  all  T  >=  e.
+
+It  is  ALL-t  (hence  holds  at  every  zero),  and  unconditional  (no
+RH).  At  the  3e10  frontier  this  evaluates  to  <  7  (pin  below),
+so  the  wire  carries  a  DATA-FREE  K  =  G_explicit  (x M)  +  1  <  8
+and  |S1  -  R|  <  8  .  (17/8)  =  17  on  the  far  side  —  against
+the  MEASURED  wire  2.615  .  (17/8)  ≈  5.55  (the  gap  to  the
+absolute  clause  is  now  the  constant  factor  ~  3,  not  a  shape)
+and  against  the  certified  majorant  3.1e10  .  (17/8)  ≈  6.7e10  (the
+E2  barrier).  This  is  the  quantitative  heart  of  stone  B.
+
+The  only  e-based  classical  fact  used  is  e  <  4,  carried  as  the
+explicit  CITED  premise  hE  (exp  1  =  2.71828  ...  is  a  one-line
+analysis  fact;  see  the  provenance  entry).  Everything  else  here  is
+LEAN-PROVEN.  -/
+
+noncomputable def G_explicit (T : ℝ) : ℝ :=
+    (111/1000 : ℝ) * log T + (275/1000 : ℝ) * log (log T) + (2450/1000 : ℝ)
+
+/-- G_explicit  is  non-decreasing  on  [ 4,  oo )  (LEAN-PROVEN;  no
+e-fact  needed  —  only  log  u  >  0  for  u  >=  4). -/
+theorem G_explicit_mono (a : ℝ) (ha : 4 ≤ a) : NonDecrOn G_explicit a := by
+  intro u v vu huv
+  have hpos4 : 0 < (4 : ℝ) := by norm_num
+  have hlu : 0 < log u := by
+    calc 0 < log 4 := log_pos (by norm_num : (1 : ℝ) < 4)
+      _ ≤ log u := (log_le_log_iff hpos4 (by linarith [ha, vu])).mpr (by linarith [ha, vu])
+  have hvu : 0 < log v := by
+    calc 0 < log 4 := log_pos (by norm_num : (1 : ℝ) < 4)
+      _ ≤ log v := (log_le_log_iff hpos4 (by linarith [ha, vu, huv])).mpr (by linarith [ha, vu, huv])
+  have hluv : log u ≤ log v :=
+    (log_le_log_iff (by linarith [ha, vu]) (by linarith [ha, vu, huv])).mpr huv
+  have ha1pos : (0 : ℝ) ≤ (111/1000 : ℝ) := by positivity
+  have hb1pos : (0 : ℝ) ≤ (275/1000 : ℝ) := by positivity
+  rw [G_explicit]
+  apply add_le_add
+  · apply add_le_add
+    · exact mul_le_mul_of_nonneg_left hluv ha1pos
+    · exact mul_le_mul_of_nonneg_left ((log_le_log_iff hlu hvu).mpr hluv) hb1pos
+  · exact le_rfl
+/-- The  explicit  A1  wire:  the  universal  wire  at  the  sharpest
+known  all-t  unconditional  S-bound  (CITED  Trudgian  bound  as  the
+hSbound  input;  e  <  4  CITED  as  hE).  On  the  far  side:
+|S1  -  R|  <=  ( G_explicit  (x  M)  +  1 )  .  (17/2)  .  t^2  / g1^2. -/
+theorem a1_explicit_wire (M : ℕ) (N0 : ℕ) (Nas x : ℕ → ℝ) (t g1 : ℝ)
+    (h4 : 4 ≤ g1) (hM : 0 < M) (h1 : 1 ≤ t) (hfar : 2 * t ≤ g1)
+    (hx0 : x 0 = g1) (hxinc : ∀ j ∈ Finset.range M, x j < x (j + 1))
+    (hE : exp 1 < 4)
+    (hSbound : ∀ j ≤ M, abs (DN N0 Nas j) ≤ G_explicit (x j) + 1 / x j) :
+    abs (S1Sum M (fun j => FarKernel t (x j)) -
+        RSum M (fun j => FarKernel t (x j)) Nas) ≤
+      (G_explicit (x M) + 1) * ((17/2) * t^2 / g1^2) := by
+  have hxM : 4 ≤ x M := by
+    calc 4 ≤ g1 := h4
+      _ = x 0 := hx0.symm
+      _ ≤ x M := grid_ge_origin M x hxinc M (le_rfl)
+  have hG0 : 0 ≤ G_explicit (x M) := by
+    rw [G_explicit]
+    have hlog1s : 1 < log (x M) := by
+      calc 1 = log (exp 1) := by rw [log_exp]
+        _ < log 4 := (log_lt_log (by positivity) hE)
+        _ ≤ log (x M) := (log_le_log_iff (by norm_num : (0 : ℝ) < 4)
+            (by linarith [hxM])).mpr (by linarith [hxM])
+    have hlog1 : 1 ≤ log (x M) := le_of_lt hlog1s
+    have hloglog : 0 ≤ log (log (x M)) := log_nonneg (by linarith [hlog1])
+    have h1a : 0 ≤ (111/1000 : ℝ) * log (x M) :=
+      mul_nonneg (by positivity : (0 : ℝ) ≤ (111/1000 : ℝ)) (by linarith [hlog1s])
+    have h1b : 0 ≤ (275/1000 : ℝ) * log (log (x M)) :=
+      mul_nonneg (by positivity : (0 : ℝ) ≤ (275/1000 : ℝ)) hloglog
+    have h1c : 0 ≤ (2450/1000 : ℝ) := by positivity
+    exact add_nonneg (add_nonneg h1a h1b) h1c
+  have hGrow : NonDecrOn G_explicit g1 := G_explicit_mono g1 h4
+  exact a1_growth_wire M N0 Nas x t g1 G_explicit hM h1 hfar hx0 hxinc
+    hG0 hGrow hSbound
+
+/-- PIN:  at  the  3e10  frontier,  G_explicit  <  7  and  hence  the
+data-free  wire  constant  K  =  G  +  1  carries  |S1  -  R|  <  17  on
+the  far  side.  The  inputs  log  3e10  <  25  and  log  (log  3e10)  <  4
+are  CITED  numerics  (24.124  /  3.183  to  the  eye);  the  rational
+arithmetic  is  LEAN-PROVEN. -/
+theorem pin_explicit_3e10
+    (hL1 : log (30000000000 : ℝ) < 25) (hL2 : log (log (30000000000 : ℝ)) < 4) :
+    G_explicit (30000000000 : ℝ) < 7 := by
+  rw [G_explicit]
+  calc (111/1000 : ℝ) * log (30000000000 : ℝ) +
+          (275/1000 : ℝ) * log (log (30000000000 : ℝ)) +
+          (2450/1000 : ℝ)
+      < (111/1000 : ℝ) * 25 + (275/1000 : ℝ) * 4 + (2450/1000 : ℝ) := by
+        nlinarith [hL1, hL2, (by positivity : (0 : ℝ) ≤ 111/1000),
+          (by positivity : (0 : ℝ) ≤ 275/1000)]
+    _ < 7 := by norm_num
+
+theorem pin_explicit_wire_3e10
+    (hL1 : log (30000000000 : ℝ) < 25) (hL2 : log (log (30000000000 : ℝ)) < 4) :
+    (G_explicit (30000000000 : ℝ) + 1) * ((17/8 : ℝ)) < 17 := by
+  have hpin : G_explicit (30000000000 : ℝ) < 7 := pin_explicit_3e10 hL1 hL2
+  calc (G_explicit (30000000000 : ℝ) + 1) * ((17/8 : ℝ)) < (7 + 1) * ((17/8 : ℝ)) :=
+      by nlinarith [hpin, (by positivity : (0 : ℝ) < 17/8)]
+    _ = 17 := by ring
+
 end A1G
