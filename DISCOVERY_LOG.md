@@ -7943,3 +7943,24 @@ flight and the record docs corrected:
   earlier ~14 h figure was an underestimate;  no code
   change,  no rule bending -- the box runs exactly 2 cores
   busy,  2 reserved,  as instructed.
+
+2026-09-29 ~16:40 EDT -- Hardware correction (owner: "what
+computer do you think you are on?").  Verified with lscpu:
+this box is an AMD RYZEN AI MAX+ 395 (Strix Halo,  Radeon
+8060S) with 16 physical cores / 32 threads,  124 GB RAM,
+band on local NVMe (nvme0n1,  1.9 TB,  not the USB
+drive).  The earlier "4 physical cores" working assumption
+was a stale/wrong carry-over and had throttled the re-issue
+to 2 cores.  Corrected per the standing rule (leave reserved
+cores idle,  never risk the box):  day049f relaunched at
+14 workers on physical cores 0-13,  cores 14-15 fully
+reserved,  single-threaded workers (BLAS/OMP pinned to 1),
+resume-safe (pt03 already complete from the first
+2-worker launch).  First re-issued number in:  pt03
+(k=-11,  x=3490744654.295) ->  mnew = 0.5026556395
+(dps-120 ld-exact),  matching the 0.502 structure and
+within 6e-6 of the p01 neighbor.  Workers at 98% each,
+page cache absorbing most reads (device rate alone
+understates throughput).  Revised ETA ~20:00 EDT today
+(2 waves of ~14 points at warm-cache pace),  down from
+the 33 h estimate that assumed 2 cores.
