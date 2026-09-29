@@ -435,3 +435,68 @@ executed cert grids are 24 straddles per window: 39 x 24 = 936
 points on (10^6, 10^9] and 29 x 24 = 696 points on (3 x 10^9,
 3 x 10^10].  All margin figures and readings in this draft stand
 as written.
+
+## STATUS ADDENDUM (post-day035, append-only)
+
+This addendum carries the post-day035 state of the two layers the
+draft left in flight. All items are committed (git is the timestamp
+authority); nothing here changes earlier sections except where a
+supersession is explicit.
+
+1.  THE  H1  DATA  LAYER  IS  CLOSED  (Section  2,  item  4 --  the
+    measured [S3/S4] fill).  The full 3 x 10^10 census is complete to
+    the wire with a triple-machine record: 696/696 certified points
+    (29 windows x 24 straddles), all mcert = 1.0000, zero non-finite
+    values anywhere, 466/466 of the double-produced points
+    bit-identical across independent machines (8x RTX 4090 volume,
+    v100 box, 5900X + 3090Ti), and the three documented single-machine
+    exceptions closed exactly by the v100 re-issue runs. Full audit
+    trail: scripts/rh/h1_final_fleet/VERIFICATION.md (md5-summed).
+    The sup|DN| = 2.615067 figure of Section 2 item 3 stands and is
+    now the certified band ceiling, not a sweep estimate.
+2.  The A1 pin-and-refutation unit is GREEN (Section 6, item 1 -- the
+    "final reassembly / pin unit"): W2M6 (c = 1/8 Milino-form K pin at
+    the band frontier, K in [6.12, 6.15); the left-pin kernel floor
+    pG1 >= 11.51 on the band; the Milino channel floor >= 70; the
+    refutation wire dev_feed = 1 - 13/t < channel at the pin) with all
+    steps closed over rationals (e-pins). This REJECTS the data-free
+    generic-t O(1) branch AT THE PIN: the only O(1) reading available
+    data-free dies against the certified channel at 3 x 10^10, by
+    construction of the pin. (E14-E16, E17.)
+3.  The margin decider landed (Section 2 / 6 context): the margin is
+    X-ONLY (k-structure in the ledger was rounding noise), min
+    worst-window margin 0.50227 (dps-120, dual-arithmetic
+    cross-checked, 80-bit stream replica bit-exact at the straddle
+    points), smooth monotone rise in x (0.50228 at 3.23e9 to 0.50363
+    at 4.07e9). (E18.) The signed-defect band run read O(1) at all
+    five heights with no growth toward the fence frontier (E18 /
+    day047).
+4.  THE  A1  THEOREM  STATEMENT  (this  is  where  the  draft's  open
+    item now stands).  The online-verified literature pass (E19)
+    establishes that the clause as drafted -- absolute |S(gamma)| <= C
+    at ALL zeros, C independent of t, data-free -- is NOT a known
+    theorem: every published bound on S(t) grows (unconditional
+    O(log t); under RH (1/4 + o(1)) log t / log log t, CCM, with the
+    proof read in full), the discipline's Omega results are unbounded
+    in t, and its entire distribution theory (Selberg CLT line
+    1946-2026) normalizes S by the GROWING scale sqrt(log log t).
+    The flatness of the measured data to 3 x 10^10 is explained
+    quantitatively: at that frontier the growing scales are numerically
+    1.78 (CLT), 2.96 (RH Omega, Bondarenko-Seip), 1.90 (CCM RH main
+    term) -- the growth is present but below the ruler. The clause
+    also is NOT refuted pointwise at the zeros: the attempted
+    zero-specific transfer (RH Omega + the CCM increment bound)
+    fails cleanly (the transfer error swallows the Omega value).
+5.  What is PROVEN (machine-checked, no sorry): the A1 wire at the
+    PROVABLE growth form (formal/RhAttack/A1Growth.lean --
+    a1_growth_wire, with the unconditional a1_growth_wire_log and the
+    RH a1_growth_wire_ccm instantiations; classical inputs carried as
+    cited hypotheses, provenance recorded): from the pointwise
+    |DN(j)| <= G(x(j)) + 1/x(j) one obtains
+    |S1 - R| <= (G(xM) + 1) * (17/8) * t^2/g1^2 on the far side.
+    The claim level of the paper is accordingly: BOUND-LEVEL -- the
+    growth-form A1 is proven and the uniform composition stands on it;
+    "absolute O(1) at all zeros" is filed as the NAMED OPEN PROBLEM
+    with the E19 evidence attached, not claimed. The data remain a
+    measurement (consistent with the theorem, constant priced at
+    ~1..5), never a proof input.
