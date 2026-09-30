@@ -1,3 +1,7 @@
+# SUPERSEDED by out_day052c_autolaunch2.sh:  v1's pgrep picked up a
+# short-lived wrapper pid (gave up at 02:23 while the smoke parent +
+# 14 workers were healthy).  v2 waits on the SMOKE PASS/FAIL verdict
+# LINE in the smoke log (file-based,  race-free).
 #!/bin/bash
 # wait for the day052c smoke (24 worst-24 points vs day049f refs);
 # launch the full in-hand-505 run only on SMOKE PASS.
