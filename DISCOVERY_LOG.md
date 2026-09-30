@@ -8140,3 +8140,18 @@ Remaining:  the 481-point compute (first new-engine points
 expected ~15:00-15:30 this afternoon;  ETA 3-5 days),  then
 day054 final interpretation,  day055 over all 505,  and the
 forensics/preprint/verification closeout.
+
+## 2026-09-30 -- full run wave 1: pacing fixed, k-sign parity
+
+Wave 1 of the full re-issue (14 points,  anchor x = 3.23e9,
+k = +/-1..+/-7) landed at 211-219 min/point  on the
+pass-minimized engine:  all flag=0,  mnew 0.5022753..
+0.5022786,  mcert 0.50215..0.50217.  Two facts:  (1)  the
+pacing is stable at ~216 min/point at 14-way,  so the ETA is
+467 remaining points / 14 x ~216 min ~= 120 h,  i.e.  the
+full ledger lands  ~2026-10-05 (+/- 1 day);  (2)  the
+positive-k margins at this anchor are indistinguishable from
+the negative-k ones (k = 7 at 0.5022756  vs  k = -7 at
+0.5022767):  the margin is a function of anchor position,  not
+k-sign --  the worst-24 shape extends across the whole k-band
+as expected.  38 of 505 points on disk.
