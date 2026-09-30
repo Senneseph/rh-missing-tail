@@ -8118,3 +8118,25 @@ distro wheel.  The 191 never-in-hand points stay a separate
 optional follow-up (new data,  different claim);  the dps-120
 uniform layer for the points beyond the worst-24 is the
 band-free day053c pass (~2 h) afterwards.
+
+---
+
+## 2026-09-30 -- SMOKE PASS, full 505 in flight, precision layer 14/14
+
+The day052c smoke (24 worst-24 points against their day049f
+references) PASSED at 10:37 EDT:  all 24 clean (0 flags,
+mnew 0.502-0.505, every margin under the certificate line,
+pt00/pt01 within 1e-5 of the bit-exact engine-replica
+references).  The file-watching supervisor then auto-launched
+the FULL in-hand 505-point re-issue on 14 of 16 cores (resume
+skips the 24 done).  In parallel the band-free day055
+precision layer ran its first 14 records (one core, 29.5 min):
+STABLE 14/14,  with d30 = 0.00e00 on every point -- the stored
+stream extras (re, im, nlt, pb, la, ar) reproduce the recorded
+margins EXACTLY, so the JSONL checkpoint carries full
+provenance for every margin;  dps-90 == dps-120 to the digit
+and the dps-30 arm sits at the known ~2.8e-9 noise level.
+Remaining:  the 481-point compute (first new-engine points
+expected ~15:00-15:30 this afternoon;  ETA 3-5 days),  then
+day054 final interpretation,  day055 over all 505,  and the
+forensics/preprint/verification closeout.
