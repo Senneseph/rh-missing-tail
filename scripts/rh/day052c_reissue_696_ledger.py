@@ -164,11 +164,17 @@ def do_point(pt):
     p = D37.cert_point(T, t, g, audit=(k == -12))
     el = time.time() - t0
     row = D37._point_row(x, p)
-    p_safe = {kk: (int(vv) if kk == "nlt" else
-                   (bool(vv) if kk == "flag" else float(vv)))
-              for kk, vv in p.items()
-              if kk in SAFE_KEYS
-              and isinstance(vv, (int, float, bool, type(None)))}
+    p_safe = {}
+    for kk in SAFE_KEYS:
+        if kk not in p:
+            continue
+        vv = p[kk]
+        if kk == "nlt":
+            p_safe[kk] = int(vv)
+        elif kk == "flag":
+            p_safe[kk] = bool(vv)
+        else:
+            p_safe[kk] = float(vv)   # mcert et al are mpmath/numpy typed
     rec = {"x": x, "k": int(k), "t": t, "g": g, "row": row,
            "elapsed_s": el, "src": pt.get("src", ""), "p": p_safe}
     print("PT x=%.4g k=%+3d t=%.5f mnew=%.9f mcert=%.9f flag=%d "
