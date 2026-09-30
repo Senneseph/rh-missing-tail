@@ -532,14 +532,25 @@ def cert_point(T, tf, g, audit=False):
 
 
 def nearest_zero(T, x):
-    """the real zero nearest x.  Every 3e10-band window anchor lies
-    inside D,  so the search is a binary search over D alone."""
+    """the real zero nearest x (x in the D band
+    (BAND_LO, G_LAST]).  The search is a FILE-LOCAL binary search
+    over D_F:  its entry j is global zero d0 + j,  so offsets are
+    j * 8 -- NOT (d0 + j) * 8.  The old global-indexed seek treated
+    the 740 GB band file as if it were the full 812 GB tail and
+    silently clamped every x below ~5.79e9 (the band entry at file
+    offset d0*8) to that one zero;  caught by the day052b smoke on
+    2026-09-30  (low-band window g's wrong,  margins off ~5e-3).
+    Verified against the fleet ledger's own g values for the six
+    low-band anchors (exact to the bit)."""
     d0 = T.n_tail - T.nD
+    assert d0 >= 0
+    if not (BAND_LO <= x <= T.G_LAST):
+        raise ValueError("x = %.6g outside the D band" % x)
     lo_i, hi_i = 0, T.nD
     with open(D_F, 'rb', buffering=0) as f:
         while hi_i - lo_i > 1:
             mid = (lo_i + hi_i) // 2
-            f.seek((d0 + mid) * 8)
+            f.seek(mid * 8)
             if struct.unpack('<d', f.read(8))[0] <= x:
                 lo_i = mid
             else:
@@ -547,7 +558,7 @@ def nearest_zero(T, x):
         cands = []
         for k in (lo_i - 1, lo_i, lo_i + 1):
             if 0 <= k < T.nD:
-                f.seek((d0 + k) * 8)
+                f.seek(k * 8)
                 cands.append(struct.unpack('<d', f.read(8))[0])
         return min(cands, key=lambda v: abs(v - x))
 
@@ -663,7 +674,19 @@ def selftest_core():
                  float(err_ar), B_ar, ok_ar), flush=True)
     print("SELFTEST(a): %s" % ("PASS" if ok else "FAIL -- budget too small"),
           flush=True)
-    return ok
+    if not ok:
+        return ok
+    # (d) nearest_zero spot gate:  the fleet ledger's g for the
+    # low-band anchor x = 3.23e9 (window 0).  The file-local vs
+    # global index bug clamped this to 5.7908e9;  a regression here
+    # aborts every driver that calls this selftest at launch.
+    T = Tail3E10(verbose=False)
+    gz = nearest_zero(T, 3232170976.1991162300)
+    okd = abs(gz - 3232170976.1121945381) < 1e-9
+    print("SELFTEST(d): nearest_zero low-band anchor -> %.9f %s"
+          % (gz, "PASS" if okd else "FAIL (ledger g = 3.232170976e9)"),
+          flush=True)
+    return ok and okd
 
 
 def selftest_streaming():

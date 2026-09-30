@@ -1,5 +1,16 @@
-"""day052b: full-696 re-issue of the 3e10 H1 ledger with the FIXED
-engine (adjacent-pair quad_pair + |K| ~ O(|z|) assembly guard).
+"""day052b: grid-driven 696 re-issue of the 3e10 H1 ledger with the
+FIXED engine (adjacent-pair quad_pair + |K| ~ O(|z|) assembly guard).
+
+SUPERSEDED by day052c_reissue_696_ledger.py (found by the day052b
+smoke, 2026-09-30):  (1)  D37.nearest_zero indexed the 740 GB
+band-only D file with GLOBAL zero indices,  silently clamping
+every anchor x < 5.79e9 to a single zero (smoke point 1 landed at
+mnew 0.50740 at the clamped straddle vs the true 0.50228);  (2)
+the in-hand fleet ledger is the 505-point union of the three
+sources,  not the nominal 696 (191 (k,x) pairs were never
+produced).  day052c is ledger-driven:  cert_point on the ledger's
+own (t, g) per point,  no zero lookup at all,  505 in-hand
+points.  Kept as provenance;  do not launch.
 
 Per-point sequential driver (the honest cost model:  each point
 needs one full (1e7, GLAST] band sweep --  ~70 min at the

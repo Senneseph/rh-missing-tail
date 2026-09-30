@@ -467,8 +467,10 @@ supersession is explicit.
     3.2e9..5.13e9 at dps-120:  0.5023..0.5058,  all below 1,
     smooth in anchor position,  flat in k-layer,  cross-checked
     exactly against the independent 10-point map and the
-    bit-exact engine replica);  the fixed engine's full
-    696-point re-issue is running on this box (day052).
+    bit-exact engine replica);  the fixed engine's
+    re-issue of the full in-hand ledger (505 of the nominal
+    696 points --  191 pairs were never generated before the
+    fleet shutdown) is running on this box (day052c).
     The sup|DN| = 2.615067 figure of Section 2 item 3 stands and is
     now the certified band ceiling, not a sweep estimate.
 2.  The A1 pin-and-refutation unit is GREEN (Section 6, item 1 -- the

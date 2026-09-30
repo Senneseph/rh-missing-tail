@@ -641,21 +641,49 @@ Pre-registered readings (day034/docstring, inherited):
       reproduce to full printed precision,  and the two
       verify-engine points carry the bit-exact engine-replica
       margins agreeing with ld-exact to ~4e-7 (the f64-tail
-      level).  RUNNING (owner GO,  this box,  14 of 16
-      cores):  day052b_reissue_696_seq.py,  the FULL 696-point
+      level).  RUNNING (owner GO,  this box,  14 of 16 cores):
+      day052c_reissue_696_ledger.py,  the full IN-HAND 505-point
       ledger through the fixed engine's own certificate arm
       (f64 tail budgets,  dps-30/60 fast parts,  margin_new +
       margin_cert per point,  fleet's 21-column row format,
       resume-safe at POINT granularity,  selftest green at
-      launch).  Cost model (corrected after the vector multi-t
-      attempt proved infeasible --  see day053 STATUS):  each
-      point pays one full (1e7, G_LAST] band sweep,  ~70 min at
-      the measured 14-way concurrency ceiling,  so 696 points are
-      I/O-bound at ~2-3 days of wall;  a 2-point smoke against
-      the verified day049f pt00 record gates the full launch via
-      an autolaunch supervisor.  Effect:  the true
-      certificate-grade ledger replaces the artifact one,  point
-      for point.
+      launch).  day052c is LEDGER-DRIVEN:  cert_point on the
+      ledger's own (t, g) per point,  no zero lookup at all --
+      the point set is exactly what the fleet ledger says  (the
+      grid-driven day052b died in its smoke,  see D2a).  Cost
+      model (unchanged by the vector multi-t dead end --  see
+      day053 STATUS):  each point pays one full (1e7, G_LAST]
+      band sweep,  ~70 min at the measured 14-way concurrency
+      ceiling,  so 505 points are I/O-bound at ~2-2.5 days of
+      wall;  a 24-point smoke (the worst-24 points cross-checked
+      against their deep day049f references:  pt00/pt01 against
+      the bit-exact engine-replica margins,  the other 22
+      against the dps-90 f64 and dps-120 ld-exact margins,
+      every gate ~10x looser than the observed <=1.5e-6 spread
+      and ~10^4 tighter than the clamp bug's 5e-3 signature)
+      gates the full launch via an autolaunch supervisor.
+      Effect:  the true certificate-grade ledger replaces the
+      artifact one,  point for point.
+  D2a  Smoke-caught engine bug + the true ledger scope
+      (2026-09-30).  (i)  day037's nearest_zero indexed the
+      band-only 740 GB D file (92.58e9 zeros in (2.999e9, 3.0e10])
+      with GLOBAL zero offsets (d0 = 9.04e9,  as if the file were
+      the full 812 GB tail).  For every anchor x below the band
+      entry at file offset d0*8 (t = 5.7908e9) -- 8 of the 29
+      windows --  the binary search clamps to that one zero;  the
+      day052b smoke measured the consequence (0.50740 margin at
+      the clamped straddle vs the ledger's true 0.50228 at the
+      same (x, k)).  Fixed to file-local offsets;  verified
+      bit-exact against the fleet ledger's own g values for six
+      low-band anchors;  selftest(d) gates it at every launch.
+      (ii)  The in-hand ledger --  union of the three fleet
+      sources,  deduped by (k, x) -- is 505 points,  not the
+      nominal 29 x 24 = 696:  191 (k, x) pairs were never
+      generated (the fleet was shut down mid-run;  the
+      long-known "505-pt interim reading" was this).  The
+      re-issue covers exactly the 505 in-hand;  the 191 fill
+      points are a separate optional follow-up (new data,  a
+      different claim -- not a re-issue).
   D3  The absolute-O(1) clause itself: zero-scale transfer
       theorem (prove O(1)/gap-away, or refute at the zeros).
       Frontier difficulty; the direct gap-transfer route is a

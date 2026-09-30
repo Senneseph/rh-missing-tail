@@ -8078,19 +8078,34 @@ traffic ~= 2-3 days of wall no matter how the loop is
 ordered.  The vector driver stays in the repo as the
 slab-verified oracle + provenance (STATUS block in its
 docstring).
-The canonical re-issue is now day052b:  per-point,  calls
-the reference D37.cert_point (whose return dict gained the
-non-destructive stream extras:  re,  im,  pb,  Kabs,  la,
-ar -- _point_row/_emit/_summary ignore them),  point-
-granular JSONL resume,  fleet 21-column row view,
-selftest at launch.  A 2-point smoke (cross-checked
-against the verified day049f pt00 record:  engine dps-30
-arm must sit at the expected distance from the dps-90 f64
-and dps-120 ld margins,  row format 21 fields,  no flag)
-is running on cores 0-1;  a supervisor auto-launches the
-full 696 on 14 of 16 cores the moment the smoke prints
-SMOKE PASS.  Honest ETA for the full ledger:  ~2-3 days
-(I/O-bound),  landing ~1-2 days out.  The dps-120
-uniform layer for the remaining 648 points is the
-band-free day053c pass (~2 h) afterwards,  using the
-stored stream extras.
+The day052b smoke then caught TWO things before the full
+run could waste days:  (1)  day037's nearest_zero indexed the
+740 GB band-only D file with GLOBAL zero offsets (d0 = 9.04e9
+in,  as if the file were the full 812 GB tail):  every anchor
+x < 5.79e9 (8 of 29 windows) silently clamps to one zero --
+smoke point 1 landed at 0.50740 at the clamped straddle vs
+the ledger's true 0.50228 at the same (x, k).  Fixed to
+file-local offsets,  verified bit-exact against the fleet
+ledger's own g values for six low-band anchors,  and gated by
+a new selftest(d) at every launch.  (2)  The in-hand fleet
+ledger (union of the three sources,  deduped by (k, x),
+zero (t, g) mismatches) is 505 points,  not the nominal 696 --
+191 (k, x) pairs were never generated (fleet shut down
+mid-run).
+The canonical re-issue is now day052c:  LEDGER-DRIVEN --
+cert_point on the fleet ledger's own (t, g) per point,  no
+zero lookup at all,  so the point set can only be what the
+ledger says (exactly the 505 in-hand);  per-point JSONL
+resume,  fleet 21-column row view,  selftest green at launch.
+A 24-point smoke (the worst-24 points against their deep
+day049f references:  pt00/pt01 vs the bit-exact engine-replica
+margins,  the other 22 vs dps-90 f64 and dps-120 ld-exact,
+gates ~10x looser than the observed spread,  ~10^4 tighter
+than the clamp bug's signature) is running on cores 0-13;
+a supervisor auto-launches the full 505 on 14 of 16 cores the
+moment the smoke prints SMOKE PASS.  Honest ETA:  ~2-2.5 days
+(I/O-bound:  ~410 TB of band traffic),  landing ~2 days out.
+The 191 never-in-hand points stay a separate optional
+follow-up (new data,  different claim);  the dps-120 uniform
+layer for the points beyond the worst-24 is the band-free
+day053c pass (~2 h) afterwards.

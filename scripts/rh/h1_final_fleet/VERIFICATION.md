@@ -40,9 +40,14 @@ the v100 box, including the dedicated w18/w19/w20 re-issue instances.
 > the worst region is DONE (scripts/rh/day049f_...:  24 of
 > 24 points,  margins 0.5023..0.5058,  all below 1,  exact
 > cross-checks against the independent map and the bit-exact
-> engine replica);  the FULL 696-point ledger re-issue runs
-> on this box via the fixed engine (day052_reissue_696.py,
-> 14 of 16 cores,  resume-safe).
+> engine replica);  the IN-HAND ledger --  union of the three
+> fleet sources,  deduped by (k,x) -- is 505 of the nominal 696
+> points  (191 (k,x) pairs were never generated;  the fleet was
+> shut down mid-run),  and the 505-point re-issue runs on this
+> box via the fixed engine (scripts/rh/day052c_reissue_696_ledger.py,
+> ledger-driven:  cert_point on the ledger's own (t,g) per point;
+> a 24-point smoke against the deep day049f references gates the
+> 14-of-16-core launch;  resume-safe).
 
 **696 / 696 certified. Complete. No errors, no NaNs, no non-finite values.**
 
