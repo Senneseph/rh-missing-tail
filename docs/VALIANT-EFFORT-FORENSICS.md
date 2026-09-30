@@ -642,14 +642,20 @@ Pre-registered readings (day034/docstring, inherited):
       verify-engine points carry the bit-exact engine-replica
       margins agreeing with ld-exact to ~4e-7 (the f64-tail
       level).  RUNNING (owner GO,  this box,  14 of 16
-      cores):  day052_reissue_696.py,  the FULL 696-point
+      cores):  day052b_reissue_696_seq.py,  the FULL 696-point
       ledger through the fixed engine's own certificate arm
       (f64 tail budgets,  dps-30/60 fast parts,  margin_new +
       margin_cert per point,  fleet's 21-column row format,
-      resume-safe per-window JSONL),  selftest green at
-      launch;  measured pace ~50 min/point/core -> ~1.7 days
-      wall.  Effect:  the true certificate-grade ledger
-      replaces the artifact one,  point for point.
+      resume-safe at POINT granularity,  selftest green at
+      launch).  Cost model (corrected after the vector multi-t
+      attempt proved infeasible --  see day053 STATUS):  each
+      point pays one full (1e7, G_LAST] band sweep,  ~70 min at
+      the measured 14-way concurrency ceiling,  so 696 points are
+      I/O-bound at ~2-3 days of wall;  a 2-point smoke against
+      the verified day049f pt00 record gates the full launch via
+      an autolaunch supervisor.  Effect:  the true
+      certificate-grade ledger replaces the artifact one,  point
+      for point.
   D3  The absolute-O(1) clause itself: zero-scale transfer
       theorem (prove O(1)/gap-away, or refute at the zeros).
       Frontier difficulty; the direct gap-transfer route is a

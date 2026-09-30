@@ -8057,3 +8057,40 @@ four rhattack gates PASS).  Doc updates committed:
 forensics 7-D2 (worst region DONE,  full 696 running),
 preprint item-1 note (final worst-region numbers),
 VERIFICATION banner (same).
+
+2026-09-30 ~00:45 EDT -- Cost-model correction for the
+full-696 re-issue (autonomy segment).  The sequential
+engine driver (day052) was stopped at 125 min with zero
+windows checkpointed (nothing to keep).  The vector
+multi-t idea (day053) was built and its slab oracle PASSED
+(120 slab/t pairs bit-exact against the engine after fixing
+one budget-aliasing bug the oracle caught:  I had budgeted
+|g2-t2|,  not the integrand's |re_t|),  but the full
+sweep is INFEASIBLE on this box:  a slab is SUB = 2^25
+elements,  so (24, slab) arrays are ~6.4 GB each,  and the
+per-t 80-bit chunk streams are the day049f-style 99-million-
+chunk arrays (~1.6 GB per t;  ~38 GB per worker).  And the
+win does not exist in the first place:  the per-point cost
+is the 813 GB band read itself (one full (1e7, G_LAST]
+sweep per point,  I/O-dominated at the measured ~70 min at
+14-way concurrency),  so 696 points carry ~565 TB of band
+traffic ~= 2-3 days of wall no matter how the loop is
+ordered.  The vector driver stays in the repo as the
+slab-verified oracle + provenance (STATUS block in its
+docstring).
+The canonical re-issue is now day052b:  per-point,  calls
+the reference D37.cert_point (whose return dict gained the
+non-destructive stream extras:  re,  im,  pb,  Kabs,  la,
+ar -- _point_row/_emit/_summary ignore them),  point-
+granular JSONL resume,  fleet 21-column row view,
+selftest at launch.  A 2-point smoke (cross-checked
+against the verified day049f pt00 record:  engine dps-30
+arm must sit at the expected distance from the dps-90 f64
+and dps-120 ld margins,  row format 21 fields,  no flag)
+is running on cores 0-1;  a supervisor auto-launches the
+full 696 on 14 of 16 cores the moment the smoke prints
+SMOKE PASS.  Honest ETA for the full ledger:  ~2-3 days
+(I/O-bound),  landing ~1-2 days out.  The dps-120
+uniform layer for the remaining 648 points is the
+band-free day053c pass (~2 h) afterwards,  using the
+stored stream extras.

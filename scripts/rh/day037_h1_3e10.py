@@ -522,7 +522,13 @@ def cert_point(T, tf, g, audit=False):
             "Btail_re": B_re, "Btail_im": B_im,
             "Bprod_re": B_la, "Bprod_im": B_ar,
             "Bqrem": float(abs(B_qrem)), "Bqext": float(abs(B_qext)),
-            "dmin": dmin, "nlt": nlt, "flag": flag, "audit": aud}
+            "dmin": dmin, "nlt": nlt, "flag": flag, "audit": aud,
+            # day052b:  stream-level extras (non-destructive;  unused
+            # by _point_row/_emit/_summary)  so the re-issue JSONL can
+            # carry the f64 tail totals + K magnitude for the later
+            # dps-120 cross-check sample
+            "re": re, "im": im, "pb": pb,
+            "Kabs": float(L), "la": float(la), "ar": float(ar)}
 
 
 def nearest_zero(T, x):
