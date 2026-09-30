@@ -631,19 +631,25 @@ Pre-registered readings (day034/docstring, inherited):
       whether the 696-point fill is re-issuable at certificate
       grade — the single most direct path to "the room works."
   D2  Re-issue of the degraded fill with the fixed engine.
-      RUNNING (owner GO):  day049f,  the worst-24 negative-k
-      points (7 anchors x 5 k-layers in 3.2e9..5.1e9,  the
-      region where the squeeze is tightest and day048's
-      true map put the worst),  2 single-core workers on
-      this box (cores 0-1 pinned,  2 reserved;  measured
-      pace ~2.8 h/point from day048's own .res records
-      -> ~33 h,  landing ~02:00 EDT the day after the
-      launch).
-      Effect:  the true certificate-grade margin map of the
-      region the claim lives in (shape + extent of the
-      shortfall below 1).  The full 696:  fleet-able now that
-      the fix + selftest are committed (3 boxes,  ~1 day);
-      needs a fleet GO.
+      DONE (worst region):  day049f,  the worst-24 negative-k
+      points (7 anchors in 3.2e9..5.13e9,  k = -12..-8),
+      all 24 landed at dps-120 ld-exact:  margins
+      0.502276..0.505784,  24/24 below the certificate line,
+      fit  m = 0.496408 + 0.001780*(x/1e9) - 0.000004*k
+      (x carries 99.5% of the variance,  k flat to 4e-6),
+      dps-90/120 agree to 0,  the 8 shared day048 points
+      reproduce to full printed precision,  and the two
+      verify-engine points carry the bit-exact engine-replica
+      margins agreeing with ld-exact to ~4e-7 (the f64-tail
+      level).  RUNNING (owner GO,  this box,  14 of 16
+      cores):  day052_reissue_696.py,  the FULL 696-point
+      ledger through the fixed engine's own certificate arm
+      (f64 tail budgets,  dps-30/60 fast parts,  margin_new +
+      margin_cert per point,  fleet's 21-column row format,
+      resume-safe per-window JSONL),  selftest green at
+      launch;  measured pace ~50 min/point/core -> ~1.7 days
+      wall.  Effect:  the true certificate-grade ledger
+      replaces the artifact one,  point for point.
   D3  The absolute-O(1) clause itself: zero-scale transfer
       theorem (prove O(1)/gap-away, or refute at the zeros).
       Frontier difficulty; the direct gap-transfer route is a

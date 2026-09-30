@@ -8025,3 +8025,35 @@ were the artifact's worst rows (they recorded 1 minus
 Pending: pt00/pt01 (verify-engine pair;  ETA ~1 h) will
 add the bit-exact engine-replica margin check at
 dps-90/120, then the final 24-point table is complete.
+
+2026-09-29 20:27-21:05 EDT -- day049f worst-24 COMPLETE
+(24/24;  the last two,  pt00/pt01,  landed the engine-
+replica arms):  engine-replica margins
+  0.502275999797 (pt00)  vs  ld-exact dps-120 0.502276362875
+  0.502658531913 (pt01)  vs  ld-exact dps-120 0.502658103672
+  i.e.  the bit-exact engine replica (f64-tail fleet arm,
+  fixed) agrees with the dps-120 exact-tail margin to
+  ~4e-7,  exactly the f64-tail noise level.  Final map:
+  24/24 in [0.502276,  0.505784],  all below 1,  fit
+  m = 0.496408 + 0.001780*(x/1e9) - 0.000004*k
+  (x:  99.5% of variance;  k flat),  dps90/120 agree to 0,
+  048 cross-check d = 0.00e+00 on all 10 shared points.
+
+2026-09-29 ~21:05 EDT -- day052:  FULL 696-point ledger
+re-issue launched on this box with the fixed engine's own
+certificate arm (f64 tail with budgets,  dps-30/60 fast
+parts,  margin_new + margin_cert,  the fleet's 21-column
+row format).  Driver:  scripts/rh/day052_reissue_696.py
+(OWN dispatch over day037._worker/_emit/_summary:
+per-window JSONL resume checkpoint  BEFORE the .pts view
+advances,  never touches the artifact files).  14 workers
+on cores 0-13 (14-15 reserved),  OMP pinned to 1,
+selftest_core green at launch (0.2 s).  Measured
+single-point probe ~50 min/core at t = 1.55e10  ->  ~40 h
+wall (29 windows,  14 workers,  2 windows per busy
+worker),  landing ~noon EDT Oct 1.  Lean invariants
+re-verified during the launch (full build 0 errors;  all
+four rhattack gates PASS).  Doc updates committed:
+forensics 7-D2 (worst region DONE,  full 696 running),
+preprint item-1 note (final worst-region numbers),
+VERIFICATION banner (same).

@@ -462,9 +462,13 @@ supersession is explicit.
     3.5e-9 on every row); the fill's screen-level validity (point
     set, zero counts, budgets, 3-machine bit-identity) stands and
     is what item 1 claims; the certificate-grade margins of the
-    worst straddles were re-issued at ~0.502 (CRT) and the
-    engine's re-issue is in flight (worst-24, local; full 696
-    fleet-able).
+    worst straddles have now been re-issued in full for the
+    worst region (24 points,  7 anchors x k-layers in
+    3.2e9..5.13e9 at dps-120:  0.5023..0.5058,  all below 1,
+    smooth in anchor position,  flat in k-layer,  cross-checked
+    exactly against the independent 10-point map and the
+    bit-exact engine replica);  the fixed engine's full
+    696-point re-issue is running on this box (day052).
     The sup|DN| = 2.615067 figure of Section 2 item 3 stands and is
     now the certified band ceiling, not a sweep estimate.
 2.  The A1 pin-and-refutation unit is GREEN (Section 6, item 1 -- the

@@ -36,10 +36,13 @@ the v100 box, including the dedicated w18/w19/w20 re-issue instances.
 > 1.3075849021,  fingerprint Efull +1.508628600e9) and the
 > patched module recovers the CRT-verified margin through
 > the full fleet path (mnew 0.50265809882;  see docs/
-> VALIANT-EFFORT-FORENSICS.md 5f-5g).  The re-issue (D2)
-> is a run of the fixed engine (worst-24 staged as
-> scripts/rh/day049f_worst24_reissue.py;  the full 696
-> needs a fleet GO).
+> VALIANT-EFFORT-FORENSICS.md 5f-5g).  The re-issue (D2):
+> the worst region is DONE (scripts/rh/day049f_...:  24 of
+> 24 points,  margins 0.5023..0.5058,  all below 1,  exact
+> cross-checks against the independent map and the bit-exact
+> engine replica);  the FULL 696-point ledger re-issue runs
+> on this box via the fixed engine (day052_reissue_696.py,
+> 14 of 16 cores,  resume-safe).
 
 **696 / 696 certified. Complete. No errors, no NaNs, no non-finite values.**
 
