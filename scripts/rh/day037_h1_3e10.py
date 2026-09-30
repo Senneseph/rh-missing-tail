@@ -283,20 +283,35 @@ def _count_below_file(path, t, stitch=0):
 # pairwise factor)
 # ----------------------------------------------------------------------
 def slab_budget(c, tf, t2, m, start_idx=0, extra_idx=None):
+    # Pass-minimized form of the day037 slab budget.  Every term is
+    # the same floating-point expression in the same element order as
+    # the original (sub_re/sub_im are BIT-IDENTICAL;  the B terms use
+    # the identical summands --  only redundant temporary recomputes
+    # were removed and dead buffers are reused in place):  the A/B
+    # overlap zeros keep their dg x3 treatment below.
     g2 = c * c
     A = g2 + 0.25
-    re_t = np.log(np.abs(g2 - t2)) - np.log(A) + 0.5 / A
+    d2 = g2 - t2
+    absd2 = np.abs(d2)          # reused later for the 2c/|g2-t2| max()
+    halfA = 0.5 / A             # reused for re_t and the s_scale max()
+    re_t = np.log(absd2) - np.log(A) + halfA
     im_t = tf / A
     sub_re = float(np.sum(re_t))             # f64 pairwise within slab
     sub_im = float(np.sum(im_t))
     abs_re = np.abs(re_t)
     s_abs_re = float(abs_re.astype(np.longdouble).sum())
-    s_scale = float(np.maximum(abs_re, 0.5 / A).astype(np.longdouble).sum())
+    np.maximum(abs_re, halfA, out=abs_re)    # s_scale in place (abs_re dead)
+    s_scale = float(abs_re.astype(np.longdouble).sum())
     s_abs_im = float(im_t.astype(np.longdouble).sum())
-    dg = U64 * np.abs(c)
-    dredg = (2.0 * c / np.maximum(np.abs(g2 - t2), 1e-30)
-             + 2.0 * c / A + c / (A * A))
-    dimdg = tf * 2.0 * c / (A * A)
+    dg = U64 * c                      # zeros are all > 0:  |c| == c exactly
+    np.maximum(absd2, 1e-30, out=absd2)     # absd2 dead after its log()
+    dredg = 2.0 * c / absd2
+    cA = c / A                        # scratch:  c/A,  then the dmin buffer
+    dredg = dredg + 2.0 * cA
+    AA = A * A
+    dredg = dredg + c / AA
+    dimdg = (2.0 * tf) * c
+    dimdg = dimdg / AA
     k = int(math.ceil(math.log2(m))) if m > 1 else 0
     B_re = (GAM10_64 * s_scale
             + k * 2.0 * U64 * s_abs_re
@@ -315,8 +330,10 @@ def slab_budget(c, tf, t2, m, start_idx=0, extra_idx=None):
                                  .astype(np.longdouble).sum()))
             B_im += (2.0 * float((dg[loc] * dimdg[loc])
                                  .astype(np.longdouble).sum()))
-    dmin = float(np.min(np.abs(c - tf)))
-    del g2, A, re_t, im_t, abs_re, dg, dredg, dimdg
+    np.subtract(c, tf, out=cA)       # cA dead here
+    np.abs(cA, out=cA)
+    dmin = float(cA.min())
+    del g2, A, d2, absd2, halfA, re_t, im_t, abs_re, dg, cA, AA, dredg, dimdg
     return sub_re, sub_im, B_re, B_im, s_abs_re, dmin
 
 

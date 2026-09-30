@@ -8103,9 +8103,18 @@ margins,  the other 22 vs dps-90 f64 and dps-120 ld-exact,
 gates ~10x looser than the observed spread,  ~10^4 tighter
 than the clamp bug's signature) is running on cores 0-13;
 a supervisor auto-launches the full 505 on 14 of 16 cores the
-moment the smoke prints SMOKE PASS.  Honest ETA:  ~2-2.5 days
-(I/O-bound:  ~410 TB of band traffic),  landing ~2 days out.
-The 191 never-in-hand points stay a separate optional
-follow-up (new data,  different claim);  the dps-120 uniform
-layer for the points beyond the worst-24 is the band-free
-day053c pass (~2 h) afterwards.
+moment the smoke prints SMOKE PASS.  Honest ETA:  ~3-5 days
+(the cost model corrected once the pace data landed:  the
+per-point cost is not the band read --  the drive does 5.9 GB/s
+--  it is slab_budget:  ~12-16 GB of array traffic per 2^25
+slab,  memory-bandwidth-bound at ~1-2 GB/s per core under
+14-way,  ~3 s/slab,  ~= 240 min/point at 14-way as the first
+wave measured).  The engine's slab_budget was pass-minimized
+(2026-09-30,  A/B-verified BIT-EQUAL sub_re/sub_im and
+bit-exact B terms on 12 slab/t probes;  containment selftests
+(a)/(b)/(d) all green) and the run moved to a SIMD-dispatch
+numpy (AVX-512 SKX) venv --  log was 30x slower on the AVX-only
+distro wheel.  The 191 never-in-hand points stay a separate
+optional follow-up (new data,  different claim);  the dps-120
+uniform layer for the points beyond the worst-24 is the
+band-free day053c pass (~2 h) afterwards.

@@ -654,8 +654,16 @@ Pre-registered readings (day034/docstring, inherited):
       model (unchanged by the vector multi-t dead end --  see
       day053 STATUS):  each point pays one full (1e7, G_LAST]
       band sweep,  ~70 min at the measured 14-way concurrency
-      ceiling,  so 505 points are I/O-bound at ~2-2.5 days of
-      wall;  a 24-point smoke (the worst-24 points cross-checked
+      ceiling --  corrected by the first-wave pace data:  the
+      per-point cost is slab_budget's ~12-16 GB of array traffic
+      per 2^25 slab (memory-bandwidth-bound at ~1-2 GB/s per core
+      under 14-way,  the drive itself does 5.9 GB/s),  ~240 min
+      per point as measured,  ~3-5 days total for 505;  the
+      engine's slab_budget was pass-minimized (A/B-verified
+      bit-equal sub_sums and bit-exact B terms,  containment
+      selftests (a)/(b)/(d) green) and the run moved to a
+      SIMD-dispatch numpy (AVX-512 SKX) venv.  A 24-point smoke
+      (the worst-24 points cross-checked
       against their deep day049f references:  pt00/pt01 against
       the bit-exact engine-replica margins,  the other 22
       against the dps-90 f64 and dps-120 ld-exact margins,
