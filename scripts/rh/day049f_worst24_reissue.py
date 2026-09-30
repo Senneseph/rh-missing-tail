@@ -66,7 +66,9 @@ import h1merge_ingest as M          # noqa: E402
 import day037_h1_3e10 as D37         # noqa: E402  (engine, verbatim)
 
 N_WORST = 24
-N_WORKERS = 2  # 4-physical-core box: 2 reserved, 2 max busy (owner rule)
+N_WORKERS = int(os.environ.get("RH_WORKERS", "14"))
+# 16-physical-core box (Ryzen AI MAX+ 395, 32 threads): 2 physical
+# reserved per owner rule -> 14 max busy; each worker single-core.
 CH = 1024
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUTDIR = HERE + "/out_day049f_pts"  # own dir: day048 results are read-only reference
