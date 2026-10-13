@@ -860,13 +860,42 @@ Pre-registered readings (day034/docstring, inherited):
       with NO paper inputs.  Self-test:
       ap2_selftest_RH_counts_on_line  (under RH the same
       contour integral equals the on-line count  N0).
-      AP3 (the Backlund-line explicit 17/2 input)  NAMED
-      BOUNDARY:  its source chain  (Backlund,  ReZeroCount,
-      LocalCount,  Halving,  ZetaGrowth,  +  three lemmas
-      Zeta0/Zeta0EqZeta/ZetaBnd_aux1b  out of the  3060-line
-      PNT+ ZetaBounds  port)  is inventoried and is the
-      remaining port;  Backlund.lean  itself  (explicit
-      ~310 log T horizontal  bound)  sits on top.
+      AP3 COMPLETE (same source commit):  the whole
+      bound layer is now house-PROVEN --
+      Ap3Prelude  (instance hygiene),  Ap3StrongPNTPrefix
+      (the Jensen disk zero-count  ZerosBound,  482-line
+      PNT+ prefix),  Ap3ZetaBounds  (the  three  needed
+      ZetaBounds lemmas  out of the  3060-line  PNT+
+      port:  Zeta0 /  Zeta0EqZeta  /  ZetaBnd_aux1b
+      with their ~450-line  helper closure),
+      Ap3Growth  (explicit half-plane  bound  1/2 +
+      1/|1-s| + |s|/sigma  [Tit 2.1.4],  linear growth
+      (5/2 + delta^-1)|t|,  |zeta - 1| <=  zeta(2) - 1
+      for  Re  >=  2),  Ap3Halving  (reflection
+      halving  N <=  2 x  right-half  count),
+      Ap3BacklundDefs  (reZeroSet),  Ap3LocalCount
+      (Jensen/Landau  local  zero  count),
+      Ap3ReZeroCount  (the  Jensen bound
+      reZeroSet_card_le  counting  the  Re-zeros  of  the
+      horizontal  segment  via the ported disk
+      ZerosBound),  and  Ap3Backlund:  the  explicit
+      Backlund horizontal  bound  backlund_horizontal
+      (|Im int_{1/2}^{2}  zeta'/zeta  d(sigma)|  <=  the
+      explicit  O(log T)  form  with the  raw  ~310 log T
+      integral  constant)  plus  vertical_two
+      (the  sigma  =  2  side  is  bounded  by  pi).
+      This  is  exactly  the  17/2  base-cost  input  the
+      A1Growth line  previously  carried  as  CITED
+      (A1G-6)  --  the  counting  side  of  the  S-identity
+      wire  (N-window  =  contour  +  main  +  the  two
+      bound  inputs)  is  now  fully  house-PROVEN
+      end-to-end  through  the  ported  argument
+      principle.  Remaining  on  the  D4  line:  the
+      main-term  assembly  (RvM/MainTerm + Fold +
+      GammaSide  +  the  23-line  Statement  assembler
+      =  the  full  RvM  formula  N(T1,T2)  =  int  mu  +
+      (1/pi) Im  int  zeta'/zeta  +  bounds)  --  the
+      next  bounded  port  (about  900  lines).
   D5  Push the data beyond 3e10 (the next band): the growth
       scales (1.78..2.96 at 3e10) will start to separate
       "truly O(1)" from "slowly growing"; the census of |DN|

@@ -8372,3 +8372,73 @@ advance D3/D4, or name the stop).
     ZetaBnd_aux1b).  That is the remaining port on the D4
     line;  it is bounded (roughly 1500 lines of source,
     all mathlib-based) but multi-iteration.
+
+## 2026-10-13  ap3 COMPLETE: the Backlund bound layer is house-PROVEN
+
+The final bound layer of the D4 argument-principle line, same
+source commit (anthropics/formal-math e1a4e65,  Apache-2.0):
+
+  * Ap3Prelude            -- the one-line instance-search
+                             hygiene (LieAlgebra.toModule
+                             demoted),  verbatim from the
+                             source Prelude.
+  * Ap3StrongPNTPrefix    -- the  482-line  PNT+ prefix
+                             through  ZerosBound  (the
+                             Jensen/Borel-Caratheodory
+                             disk  zero-count).
+  * Ap3ZetaBounds         -- exactly the  three  ZetaBounds
+                             lemmas the bound layer needs
+                             (Zeta0 /  Zeta0EqZeta /
+                             ZetaBnd_aux1b)  plus  their
+                             ~450-line  helper  closure,
+                             out of the  3060-line  source
+                             file  (the rest  stays
+                             unported  by design).
+  * Ap3Growth             -- the  explicit  half-plane
+                             bound  ||zeta||  <=  1/2 +
+                             1/|1-s| + |s|/sigma  [Tit
+                             (2.1.4)  with  N=1],  linear
+                             growth  (5/2 + delta^-1)|t|
+                             for  sigma  >=  delta,
+                             &&zeta - 1&&  <=  zeta(2) - 1
+                             for  Re  >=  2.
+  * Ap3Halving            -- reflection  halving
+                             N(T1,T2)  <=  2 x  (right-
+                             half  window  count).
+  * Ap3BacklundDefs       -- reZeroSet(T)  (the  zeros  of
+                             Re  zeta(sigma + iT)  on
+                             [1/2, 2]).
+  * Ap3LocalCount         -- the  Jensen/Landau  local
+                             zero  count  on  a  disc
+                             (via the ported disk
+                             ZerosBound).
+  * Ap3ReZeroCount        --  reZeroSet_card_le:  the
+                             Jensen bound  counting  the
+                             horizontal  Re-zeros.
+  * Ap3Backlund           --  backlund_horizontal:  |Im
+                             int_{1/2}^{2}  zeta'/zeta
+                             dsigma|  <=  explicit  O(log
+                             T)  (the  raw  ~310 log T
+                             integral  constant  form,
+                             pre-Rosser-McCurley)  and
+                             vertical_two:  the  sigma  =
+                             2  vertical  side  is  bounded
+                             by  pi.
+
+  * This is the 17/2 base-cost input  A1Growth.lean  used
+    to carry as CITED  (A1G-6):  the counting  side  of
+    the S-identity wire  (window count  =  contour  of
+    Lambda'/Lambda  +  the  two  side-bound  inputs)  is
+    now LEAN-PROVEN end-to-end through  the  in-house
+    weighted  argument  principle.
+
+  * GATES:  lake build  green;  all four  runtime  gates
+    PASS;  zero sorry  in  Ap1*/Ap2*/Ap3*.
+
+  * Next on the D4 line (bounded,  inventoried):  the
+    main-term  assembly  --  RvM/MainTerm  (486)  +
+    RvM/Fold  (203)  +  RvM/GammaSide  (202)  +  the
+    23-line  RvM/Statement  assembler  =  the  full  RvM
+    formula  N(T1,T2)  =  int  mu  +  (1/pi)  Im
+    int_{1/2+iT1}^{2+iT1->2+iT2->1/2+iT2}  zeta'/zeta  +
+    bounds,  with explicit error terms.

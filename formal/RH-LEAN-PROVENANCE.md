@@ -130,14 +130,29 @@ during the E19 pass (full text verified, not recalled from memory):
   ResidueCalcOnRectangles.lean, Tactic/AdditiveCombination.lean)
   plus `zeta23/Zeta23/Analytic/RectangleLogDeriv.lean` (weighted
   argument principle, finset residue theorem, finite zeros in
-  rectangle). **ap1 stage 1 is now PORTED IN-HOUSE**: files
-  `RhAttack/Ap1Tactic.lean`, `Ap1Rectangle.lean`, `Ap1Residue.lean`,
-  `Ap1ArgumentPrinciple.lean` (namespaced `Ap1`, whole-mathlib
-  import, attribution headers preserved, Apache-2.0). Build
-  green at the pinned mathlib v4.33.1 with two self-test
-  theorems running the ported principle; the remaining RvM
-  window identity (ap2) and Backlund bound (ap3) are the next
-  ports from the same source.
+  rectangle). **ap1, ap2 AND ap3 are now PORTED IN-HOUSE**
+  (namespaced `Ap1`/`Ap2`/`Ap3`, whole-mathlib import,
+  attribution headers preserved, Apache-2.0):
+  * Ap1: tactic + rectangle calculus + residue calculus +
+    weighted argument principle (2 self-tests);
+  * Ap2: the zero-count layer (Defs/Counting/Statement/Seam/
+    Reflect) + the RVM window identity
+    `rectangleIntegral'_logDeriv_completedZeta_eq_Ncount`
+    (contour of completed-zeta log-derivative = window zero
+    count); `zetaSeam` discharged from Mathlib with no paper
+    inputs (RH self-test included);
+  * Ap3: the bound layer (StrongPNTPrefix `ZerosBound` Jensen
+    disk count, the 3 needed ZetaBounds lemmas + ~450-line
+    closure, ZetaGrowth explicit bounds, Halving reflection
+    halving, BacklundDefs reZeroSet, LocalCount Jensen/Landau,
+    ReZeroCount `reZeroSet_card_le`) and **backlund_horizontal**
+    (the explicit O(log T) horizontal argument-variation
+    bound — source of the 17/2 base-cost datum) plus
+    **vertical_two** (the sigma = 2 side is bounded by pi).
+  Build green at the pinned mathlib v4.33.1, zero sorry.
+  Remaining on the D4 line: the main-term assembly
+  (RvM/MainTerm + Fold + GammaSide + the 23-line Statement
+  assembler giving the full RvM formula) — the next port.
 
 - **[A1G-7] The frontier of the UNCONDITIONAL S-bound, including at
   zeros** (valiant-effort verification, all cited online during the
