@@ -8230,3 +8230,76 @@ as expected.  38 of 505 points on disk.
   the old RvM/Backlund path is gone from main,  re-inventory
   needed).  Build order ap1 -\u003e ap2 -\u003e ap3 recorded in the
   forensics D4 section.
+
+## 2026-10-13  ap1 stage 1: argument principle PORTED IN-HOUSE (no borrow)
+
+Owner standing directive applied: advance D3/D4 or document the
+named dead end. Worked the cheapest live D4 advance (the ap1
+probe) to completion.
+
+  * Ported the zeta23 argument-principle base from
+    anthropics/formal-math (former zeta-23-lean) commit
+    e1a4e6508154, Apache-2.0, attribution headers preserved:
+      RhAttack/Ap1Tactic.lean            (additive_combination
+                                          tactic, extending
+                                          Mathlib.Tactic.
+                                          LinearCombinationPrime)
+      RhAttack/Ap1Rectangle.lean         (rectangle/border
+                                          calculus, nhds
+                                          characterizations)
+      RhAttack/Ap1Residue.lean           (H/V integrals,
+                                          ResidueTheoremIn
+                                          Rectangle +
+                                          punctured-rectangle
+                                          residue statement)
+      RhAttack/Ap1ArgumentPrinciple.lean (residueTheorem_finset,
+                                          finite_zeros_rectangle,
+                                          rectangleIntegral'_
+                                          mul_logDeriv_of_poles,
+                                          rectangleIntegral'_
+                                          mul_logDeriv [the
+                                          weighted argument
+                                          principle],
+                                          rectangleIntegral'_
+                                          mul_logDeriv')
+
+  * Decided NOT to add TauCeti or zeta23 as package
+    dependencies (different mathlib pins; D4 needs house-
+    proven, not cited). Port instead, per the iron rule's
+    borrow-with-citation clause (source commit + file paths
+    cited in the file headers and in
+    formal/RH-LEAN-PROVENANCE.md [A1G-6], updated here).
+
+  * All mathlib prerequisites verified present at the pinned
+    v4.33.1 (one authorized local grep, per the iron rule):
+    the Rectangle definition itself
+    (Mathlib.Data.Complex.Basic:845),
+    rectangle_eq_convexHull (Analysis.Complex.Convex),
+    differentiableOn_update_limUnder_of_bddAbove,
+    integral_boundary_rect_eq_zero_of_differentiableOn,
+    analyticOrderAt_* + analyticOrderAt_id, logDeriv_*,
+    LinearCombinationPrime helpers (Expanded, add_pf, ...).
+
+  * Two SELF-TEST theorems run the ported principle in
+    working form (Ap1ArgumentPrinciple.lean, section
+    Ap1Selftest), zero sorry:
+      ap1_selftest_residue_finset    : (1/2pi i)-int 1/s around
+                                       [-2,2]x[-2,2] = 1 (the
+                                       finset residue mechanism)
+      ap1_selftest_weighted_simple_zero: the WEIGHTED argument
+                                       principle evaluates a
+                                       simple-zero contour via
+                                       the order sum (1 . g(0))
+                                       = 0, integral never
+                                       computed by hand.
+
+  * GATES: lake build green (17450 jobs, 0 errors, zero sorry
+    in Ap1*); lake exe rhattack all four gates PASS.
+
+  * Next in the same line (ap2/ap3 sources inventoried and
+    ready in the same source commit): the RVM window identity
+    (RvM/CountByIntegral.lean: completed-zeta rectangle integral
+    = zero count in the window) and the Backlund horizontal
+    O(log T) bound (RvM/Backlund.lean, explicit ~310 log T
+    form) -- these carry the S-identity wire ap2 and the 17/2
+    base-cost input ap3, currently CITED in A1Growth.lean.

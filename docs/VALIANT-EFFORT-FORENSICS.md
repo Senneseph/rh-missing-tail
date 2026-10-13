@@ -825,6 +825,31 @@ Pre-registered readings (day034/docstring, inherited):
       (17/2 base cost)  from the relocated zeta23 port or
       an in-house constant.  The 17/8 wire-cost identity
       itself is already LEAN-PROVEN  (pin_wire_cost_at_half).
+      AP1 STAGE 1 COMPLETE (in-house,  NOT borrowed):  the
+      zeta23 argument-principle base was ported into
+      formal/RhAttack/Ap1*.lean  (tactic AdditiveCombination,
+      rectangle calculus,  residue calculus on rectangles
+      incl.  ResidueTheoremInRectangle,  and the weighted
+      argument principle  rectangleIntegral'_mul_logDeriv
+      plus  residueTheorem_finset  and
+      finite_zeros_rectangle).  Source:  anthropics/formal-
+      math  commit  e1a4e65  (former  zeta-23-lean,  Apache-
+      2.0,  attribution preserved in file headers;  port is
+      cited in  formal/RH-LEAN-PROVENANCE.md).  All needed
+      mathlib lemmas verified present at the pinned
+      v4.33.1  (incl.  the  Rectangle  definition and
+      rectangle_eq_convexHull  in  Mathlib.Data.Complex /
+      Analysis.Complex.Convex  themselves).  Build green;
+      two SELF-TEST theorems in  Ap1ArgumentPrinciple.lean
+      run the ported principle in working form
+      (ap1_selftest_residue_finset:  single-pole count = 1;
+      ap1_selftest_weighted_simple_zero:  weighted zero-sum
+      evaluation),  zero sorry.  The simple-pole residue
+      section (residues,  sumResiduesIn,  sum-Residues-on-
+      rectangle)  stays in the source file for the stage-2
+      port (RVM window identity);  the  RvM/Backlund.lean
+      and  RvM/CountByIntegral.lean  sources are inventoried
+      and ready for ap2/ap3.
   D5  Push the data beyond 3e10 (the next band): the growth
       scales (1.78..2.96 at 3e10) will start to separate
       "truly O(1)" from "slowly growing"; the census of |DN|

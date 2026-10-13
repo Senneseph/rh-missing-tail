@@ -117,13 +117,27 @@ during the E19 pass (full text verified, not recalled from memory):
   2.615067 << 17/8 << 5.55 and the certified majorant
   31047116350.92 << 17/8 << 6.7e10.
 
-- **[A1G-6] Zeta23 community port** (borrowing candidate for the
-  classical side, cited per the iron rule): `Zeta23/RvM/Backlund.lean`
-  (github.com/anthropics/zeta-23-lean) carries the explicit
-  Backlund-line machinery in Lean (the raw integral constant
-  ~ 310 log T form, pre-Rosser-McCurley refinement). Not imported
-  into this package; listed as the borrow source if the
-  argument-principle line (ap1-ap3) is built in-house.
+- **[A1G-6] Zeta23 community port** (borrow source for the
+  argument-principle line, cited per the iron rule). The repo
+  MOVED: `anthropics/zeta-23-lean` now resolves to
+  `anthropics/formal-math` (lean package under `zeta23/`).
+  Inventoried at commit `e1a4e6508154` (2026-10-13): the RvM
+  line is `zeta23/Zeta23/RvM/` (Backlund.lean = explicit
+  Backlund O(log T) horizontal bound incl. the raw ~310 log T
+  integral constant; CountByIntegral.lean = the completed-zeta
+  window zero-count identity); the argument-principle base is
+  `zeta23/Zeta23/FromPNTPlus/` (Rectangle.lean,
+  ResidueCalcOnRectangles.lean, Tactic/AdditiveCombination.lean)
+  plus `zeta23/Zeta23/Analytic/RectangleLogDeriv.lean` (weighted
+  argument principle, finset residue theorem, finite zeros in
+  rectangle). **ap1 stage 1 is now PORTED IN-HOUSE**: files
+  `RhAttack/Ap1Tactic.lean`, `Ap1Rectangle.lean`, `Ap1Residue.lean`,
+  `Ap1ArgumentPrinciple.lean` (namespaced `Ap1`, whole-mathlib
+  import, attribution headers preserved, Apache-2.0). Build
+  green at the pinned mathlib v4.33.1 with two self-test
+  theorems running the ported principle; the remaining RvM
+  window identity (ap2) and Backlund bound (ap3) are the next
+  ports from the same source.
 
 - **[A1G-7] The frontier of the UNCONDITIONAL S-bound, including at
   zeros** (valiant-effort verification, all cited online during the
