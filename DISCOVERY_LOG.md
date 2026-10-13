@@ -8155,3 +8155,32 @@ the negative-k ones (k = 7 at 0.5022756  vs  k = -7 at
 0.5022767):  the margin is a function of anchor position,  not
 k-sign --  the worst-24 shape extends across the whole k-band
 as expected.  38 of 505 points on disk.
+
+## 2026-10-13  505-point in-hand re-issue COMPLETE + final census
+
+- day052c full run finished: 481 full-wave points in 123.3 h on 14
+  cores (avg 15.4 min/point -- page cache on NVMe made the slab
+  streams far faster than the cold wave-1 estimate of 216 min/point),
+  plus the 24 smoke points = 505/505 on disk.  Zero flags.  The run
+  was untouched the whole way (no mid-run engine changes).
+- Final census (scripts/rh/out_day052c_696/interpret.md):
+  505/505 mcert < 1;  worst 0.502275 at x = 3.2322e9 (band head,
+  exactly the day049f worst-24 prediction);  best 0.825703 at
+  x = 2.7884e10;  margins rise smoothly and monotonically in x
+  (22 anchors;  per-anchor spread < 0.001);  k is flat (the fit's
+  k-term is 5.2e-6,  rounding-noise level).
+- Artifact delta (reissue minus the pre-fix fleet ledger):  all 505
+  rows matched;  median -0.4892,  min -0.4977 -- every artifact
+  worst-row inversion (true ~0.5 recorded as ~1.0) is explained by
+  the single nested-quad_pair root cause;  no other pathology in the
+  481 rows.
+- Ledger file cleanup: the day052c writer had glued the engine's
+  per-point audit line onto the row strings in 505 of 505 JSONL
+  records and in a few ledger lines, and 23 (x,t) rows were
+  duplicated in the .pts.  Rebuilt the ledger clean from the JSONL
+  (505 rows,  all 21-field,  header + one row per point);
+  the original kept as reissue_ledger_3e10.pts.orig (nothing
+  deleted).
+- day055 precision layer (dps-30/90/120 arm stability) launched on
+  all 505 (14 workers,  ~1.5 h) to close the final verification
+  gate.

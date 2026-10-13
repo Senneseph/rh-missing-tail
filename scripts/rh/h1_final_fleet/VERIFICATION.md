@@ -47,7 +47,17 @@ the v100 box, including the dedicated w18/w19/w20 re-issue instances.
 > box via the fixed engine (scripts/rh/day052c_reissue_696_ledger.py,
 > ledger-driven:  cert_point on the ledger's own (t,g) per point;
 > a 24-point smoke against the deep day049f references gates the
-> 14-of-16-core launch;  resume-safe).
+> 14-of-16-core launch;  resume-safe).  **STATUS: the 505-point
+> re-issue is COMPLETE** (14 workers, 123 h;  smoke 24/24 exact
+> against the day049f references;  0 flags):  505/505 mcert < 1,
+> worst 0.502275 at the band head (x = 3.2322e9 -- the worst-24
+> prediction),  best 0.825703 at x = 2.7884e10,  margins rising
+> smoothly in x;  artifact delta median -0.4892 over all 505
+> matched rows (the artifact's worst rows,  truly ~0.5,  all sat
+> at ~1.0).  The certificate-grade ledger is
+> scripts/rh/out_day052c_696/reissue_ledger_3e10.pts with the
+> census in interpret.md;  this pre-fix ledger above stands as
+> the historical screen-level fill.
 
 **696 / 696 certified. Complete. No errors, no NaNs, no non-finite values.**
 

@@ -470,7 +470,17 @@ supersession is explicit.
     bit-exact engine replica);  the fixed engine's
     re-issue of the full in-hand ledger (505 of the nominal
     696 points --  191 pairs were never generated before the
-    fleet shutdown) is running on this box (day052c).
+    fleet shutdown) is COMPLETE on this box (day052c,  14
+    workers,  123 h):  505/505 mcert < 1,  zero flags;  worst
+    0.502275 at the band head (x = 3.2322e9 --  exactly the
+    worst-24 prediction) and best 0.825703 at x = 2.7884e10;
+    margins rise smoothly and monotonically in x (per-anchor
+    means 0.502276 to 0.825689 over 22 anchors);  artifact
+    delta versus the pre-fix ledger:  median -0.4892 over all
+    505 matched rows (the artifact's worst rows,  truly about
+    0.5,  all sat at about 1.0 --  the single root cause
+    confirmed at full-fleet scale,  no other pathology in the
+    481);  ledger and census at scripts/rh/out_day052c_696/.
     The sup|DN| = 2.615067 figure of Section 2 item 3 stands and is
     now the certified band ceiling, not a sweep estimate.
 2.  The A1 pin-and-refutation unit is GREEN (Section 6, item 1 -- the

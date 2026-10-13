@@ -692,6 +692,33 @@ Pre-registered readings (day034/docstring, inherited):
       re-issue covers exactly the 505 in-hand;  the 191 fill
       points are a separate optional follow-up (new data,  a
       different claim -- not a re-issue).
+  D2-final  Re-issue complete -- the true 3e10 H1 ledger.
+      All 505 in-hand points re-issued on the fixed engine
+      (14 workers, 123 h;  smoke 24/24 bit-exact against the
+      day049f references;  full run 0 flags).  Results
+      (scripts/rh/out_day052c_696/interpret.md):
+      - certificate census:  505/505 mcert < 1;  zero rows
+        on or above the certificate line;  zero flags.
+      - worst point:  x = 3.2322e9 (band head),  margin
+        0.502275 -- exactly the worst-24 prediction;  best
+        0.825703 at x = 2.7884e10.
+      - margins rise smoothly and monotonically in x
+        (per-anchor means 0.502276 to 0.825689 over 22
+        anchors;  the per-anchor spread stays below 0.001).
+      - artifact delta (reissue minus artifact):  min
+        -0.4977,  median -0.4892,  n matched 505 -- the
+        artifact's worst rows (truly about 0.5) all sat at
+        about 1.0;  the single root cause is confirmed at
+        full-fleet scale,  and no other pathology hides in
+        the 481.
+      - geometry:  mnew = 0.445916 + 0.010153*(x/1e9)
+        + 5.22e-6*k across 3.2e9..2.8e10 (R^2 = 0.868);
+        the worst-24 in-band fit remains the local form.
+      The pre-fix fleet ledger is now a historical artifact.
+      The certificate-grade H1 statement over 3e10 rests on
+      out_day052c_696/reissue_ledger_3e10.pts plus the
+      day055 precision layer (dps-30/90/120 stability over
+      all 505).
   D3  The absolute-O(1) clause itself: zero-scale transfer
       theorem (prove O(1)/gap-away, or refute at the zeros).
       Frontier difficulty; the direct gap-transfer route is a
