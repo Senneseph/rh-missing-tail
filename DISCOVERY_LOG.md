@@ -8303,3 +8303,72 @@ probe) to completion.
     O(log T) bound (RvM/Backlund.lean, explicit ~310 log T
     form) -- these carry the S-identity wire ap2 and the 17/2
     base-cost input ap3, currently CITED in A1Growth.lean.
+
+## 2026-10-13  ap2 COMPLETE: the RVM window identity is house-PROVEN
+
+Continuing the D4 argument-principle line (owner directive:
+advance D3/D4, or name the stop).
+
+  * Ported the RVM zero-count layer in-house from the same
+    source commit (anthropics/formal-math e1a4e65,  Apache-
+    2.0,  cited):
+      RhAttack/Ap2Defs.lean            (reflect,  ZeroConfig,
+                                         paperFT,  Params...)
+      RhAttack/Ap2Counting.lean        (abstract
+                                         [eq:trivialchain])
+      RhAttack/Ap2Statement.lean       (IsNontrivialZero,
+                                         zeroMult =
+                                         analyticOrderAt,
+                                         zerosIn,  Ncount,
+                                         N0/N0star/N0s/Ns/
+                                         Nd,  ZetaSeam,  RH
+                                         sanity anchors)
+      RhAttack/Ap2Seam.lean            (one_le_mult via the
+                                         identity theorem;
+                                         finite_window via
+                                         local finiteness of
+                                         the zero set +
+                                         compactness)
+      RhAttack/Ap2Reflect.lean         (Schwarz reflection
+                                         zeta(conj s) =
+                                         conj zeta(s);  order
+                                         invariance under
+                                         conj and under the
+                                         functional equation)
+      RhAttack/Ap2CountByIntegral.lean (zetaSeam,  NO paper
+                                         inputs;  + the main
+                                         theorem)
+
+  * MAIN RESULT,  now LEAN-PROVEN in this repo:
+    rectangleIntegral'_logDeriv_completedZeta_eq_Ncount:
+    for 0 < T1 <= T2 with no zero of ordinate exactly T1 or
+    T2,
+        (1/2 pi i) * int (Lambda'/Lambda) ds  =  N(T1, T2)
+    around the rectangle  (-1 + iT1) -> (2 + iT1) ->
+    (2 + iT2) -> (-1 + iT2),  Lambda = completed zeta,
+    N = multiplicity sum of the nontrivial zeros  (order =
+    analyticOrderAt in Mathlib).  This is the classical
+    RvM counting wire the whole  S-identity argument
+    (N(T) = main + 7/8 + S(T)/pi + ...)  hangs from,  and
+    it was previously CITED  (A1G-6).
+
+  * Self-test (working form):  ap2_selftest_RH_counts_on_line
+    -- under Mathlib's RiemannHypothesis the same contour
+    integral equals the ON-LINE count N0 (the integral is
+    never evaluated by hand).  The sanity anchors
+    (RH_implies_all_on_line,  trivial_chain0,
+    zerosIn_finite)  port over and build.
+
+  * GATES:  lake build green;  all four  lake-exe-rhattack
+    runtime gates  PASS;  zero sorry in Ap1*/Ap2*.
+
+  * AP3 named boundary (documented,  inventoried):  the
+    Backlund-line explicit input  (the  ~310 log T
+    horizontal-variation bound,  source of the  17/2
+    base-cost datum in  A1Growth)  needs  Backlund.lean,
+    ReZeroCount.lean,  LocalCount.lean,  Halving.lean,
+    ZetaGrowth.lean  plus exactly three lemmas out of the
+    3060-line PNT+ ZetaBounds port  (Zeta0,  Zeta0EqZeta,
+    ZetaBnd_aux1b).  That is the remaining port on the D4
+    line;  it is bounded (roughly 1500 lines of source,
+    all mathlib-based) but multi-iteration.

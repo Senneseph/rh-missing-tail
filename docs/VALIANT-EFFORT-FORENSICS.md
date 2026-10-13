@@ -845,11 +845,28 @@ Pre-registered readings (day034/docstring, inherited):
       (ap1_selftest_residue_finset:  single-pole count = 1;
       ap1_selftest_weighted_simple_zero:  weighted zero-sum
       evaluation),  zero sorry.  The simple-pole residue
-      section (residues,  sumResiduesIn,  sum-Residues-on-
-      rectangle)  stays in the source file for the stage-2
-      port (RVM window identity);  the  RvM/Backlund.lean
-      and  RvM/CountByIntegral.lean  sources are inventoried
-      and ready for ap2/ap3.
+      section (residue,  sumResiduesIn,  HasSimplePolesOn,
+      RectangleIntegral'_eq_sumResiduesIn)  was ported in
+      the same pass.  AP2 COMPLETE:  the RVM window identity
+      is now house-PROVEN --  the zero-count layer
+      (Ap2Defs/Ap2Counting/Ap2Statement/Ap2Seam/Ap2Reflect/
+      Ap2CountByIntegral,  from the same source commit)  gives
+      rectangleIntegral'_logDeriv_completedZeta_eq_Ncount:
+      (1/2pi i)-int  Lambda'/Lambda  around  the  [(-1,iT1),
+      (2,iT2)]  rectangle  equals  N(T1,T2)  (nontrivial
+      zeros,  multiplicity = analytic order),  for window
+      edges off the zero ordinates;  zetaSeam  discharged
+      from Mathlib  (finiteness + reflection  rho -> 1-rho')
+      with NO paper inputs.  Self-test:
+      ap2_selftest_RH_counts_on_line  (under RH the same
+      contour integral equals the on-line count  N0).
+      AP3 (the Backlund-line explicit 17/2 input)  NAMED
+      BOUNDARY:  its source chain  (Backlund,  ReZeroCount,
+      LocalCount,  Halving,  ZetaGrowth,  +  three lemmas
+      Zeta0/Zeta0EqZeta/ZetaBnd_aux1b  out of the  3060-line
+      PNT+ ZetaBounds  port)  is inventoried and is the
+      remaining port;  Backlund.lean  itself  (explicit
+      ~310 log T horizontal  bound)  sits on top.
   D5  Push the data beyond 3e10 (the next band): the growth
       scales (1.78..2.96 at 3e10) will start to separate
       "truly O(1)" from "slowly growing"; the census of |DN|
