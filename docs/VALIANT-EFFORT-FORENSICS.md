@@ -894,8 +894,47 @@ Pre-registered readings (day034/docstring, inherited):
       main-term  assembly  (RvM/MainTerm + Fold +
       GammaSide  +  the  23-line  Statement  assembler
       =  the  full  RvM  formula  N(T1,T2)  =  int  mu  +
-      (1/pi) Im  int  zeta'/zeta  +  bounds)  --  the
-      next  bounded  port  (about  900  lines).
+      (1/pi) Im  int  zeta'/zeta  +  bounds)  --  PORTED
+      AND COMPLETE (ap4):  Ap3Hypotheses  (the
+      GammaFacts  +  PaperInputs  structures,  the  paper
+      inputs  as  explicit  hypotheses  by  design),
+      Ap3RvMDefs  (GoodHeight,  halfContour,
+      the  RiemannVonMangoldt  packaging),
+      Ap3XiLogDeriv  (logDeriv  Lambda  =  logDeriv  zeta
+      +  logDeriv  Gamma,  conj-symmetry),
+      Ap3ZetaConj,  Ap3NcountWindow,  Ap3Fold  (the
+      fold:  N(T1,T2)  =  (1/pi) Im halfContour
+      Lambda'/Lambda  via  Lambda(1-s')  =  Lambda(s)),
+      Ap3GammaSide  ((1/pi)(halfContour  logDeriv
+      Gamma).im  =  int  mu),  Ap3MainTerm  (the
+      parametric  assembly  rvM_main_param  and  its
+      corollaries),  Ap3RvMStatement  (the  assembler),
+      and  the  full  GammaFacts  discharge
+      (Ap3GammaSeries  the  digamma  series,
+      Ap3GammaStirling,  Ap3GammaMu  the  mu  asymptotic,
+      Ap3GammaIntMu,  Ap3GammaStirlingVert  the
+      vertical  Stirling  estimate,
+      Ap3GammaComplete:  gammaFacts,  proved  from
+      Mathlib  alone).  TOP-LEVEL  RESULT  now
+      house-PROVEN  in  this  repo  with  NO  paper
+      inputs  and  no  extra  hypotheses:
+      riemannVonMangoldt  gammaFacts,  i.e.
+      N(T,2T)  =  (T/2pi)  ell1(T)  +  O(log T)  and
+      the  packaged  RiemannVonMangoldt
+      zetaZeroConfig  (self-tests
+      ap4_selftest_rvM_main_no_extra_hypotheses  and
+      ap4_selftest_riemannVonMangoldt_no_extra_hypotheses).
+      D4 VERDICT:  the  classical  S-identity  wire  is
+      end-to-end  LEAN-PROVEN  in-house  --  argument
+      principle  (ap1)  +  window  identity  (ap2)  +
+      side  bounds  (ap3)  +  main  term  and  full  RvM
+      (ap4)  --  34  ported  files  (about  7.5k  lines),
+      all  from  the  cited  Apache-2.0  source  commit
+      e1a4e65  +  mathlib,  zero  sorry,  build  green.
+      The  remaining  CITED  inputs  of  A1Growth.lean
+      (the  Trudgian  II  explicit  S-bound,
+      A1G-5)  can  be  re-based  on  the  now-PROVEN
+      explicit  Backlund form  in  a  follow-up.
   D5  Push the data beyond 3e10 (the next band): the growth
       scales (1.78..2.96 at 3e10) will start to separate
       "truly O(1)" from "slowly growing"; the census of |DN|

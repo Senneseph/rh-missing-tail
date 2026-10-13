@@ -150,9 +150,28 @@ during the E19 pass (full text verified, not recalled from memory):
     bound — source of the 17/2 base-cost datum) plus
     **vertical_two** (the sigma = 2 side is bounded by pi).
   Build green at the pinned mathlib v4.33.1, zero sorry.
-  Remaining on the D4 line: the main-term assembly
-  (RvM/MainTerm + Fold + GammaSide + the 23-line Statement
-  assembler giving the full RvM formula) — the next port.
+  and **ap4, the full main-term assembly + the GammaFacts
+  discharge**: `Ap3Hypotheses` (GammaFacts/PaperInputs as
+  explicit structures), `Ap3RvMDefs` (GoodHeight, halfContour,
+  the RiemannVonMangoldt packaging), `Ap3XiLogDeriv`
+  (logDeriv-identity for the completed zeta + conj symmetry),
+  `Ap3ZetaConj`, `Ap3NcountWindow`, `Ap3Fold` (the
+  Lambda(1-s') = conj Lambda(s) fold: N(T1,T2) = (1/pi)Im
+  halfContour of Lambda'/Lambda), `Ap3GammaSide` (the mu
+  integral identity), `Ap3MainTerm` (rvM_main_param +
+  corollaries), `Ap3RvMStatement`, and the complete
+  GammaFacts discharge (`Ap3GammaSeries` digamma series,
+  `Ap3GammaStirling`, `Ap3GammaMu`, `Ap3GammaIntMu`,
+  `Ap3GammaStirlingVert` vertical Stirling estimate,
+  `Ap3GammaComplete` = `gammaFacts`) — all proved from
+  Mathlib alone. **Top-level result, hypothesis-free in
+  this repo: `riemannVonMangoldt gammaFacts`** (N(T,2T) =
+  (T/2pi)ell1(T) + O(log T) and the packaged
+  RiemannVonMangoldt property; self-tests in
+  `Ap3RvMStatement.lean`). Total: 34 ported files (~7.5k
+  lines), zero sorry, build green at the pinned mathlib
+  v4.33.1. The D4 classical S-identity wire (ap1-ap4) is
+  COMPLETE: proven in-house, not cited.
 
 - **[A1G-7] The frontier of the UNCONDITIONAL S-bound, including at
   zeros** (valiant-effort verification, all cited online during the

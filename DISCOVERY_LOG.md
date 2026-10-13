@@ -8442,3 +8442,92 @@ source commit (anthropics/formal-math e1a4e65,  Apache-2.0):
     formula  N(T1,T2)  =  int  mu  +  (1/pi)  Im
     int_{1/2+iT1}^{2+iT1->2+iT2->1/2+iT2}  zeta'/zeta  +
     bounds,  with explicit error terms.
+
+## 2026-10-13  ap4 COMPLETE: the D4 line is done -- full RvM, no extra hypotheses
+
+The final layer of the argument-principle line (same source
+commit,  Apache-2.0,  cited):
+
+  * Ap3Hypotheses   --  the  GammaFacts  and  PaperInputs
+                         structures  (the  paper  inputs  as
+                         explicit  hypotheses  by  design).
+  * Ap3RvMDefs      --  GoodHeight,  halfContour  (the
+                         right  half  contour  1/2+iT1 ->
+                         2+iT1 -> 2+iT2 -> 1/2+iT2  as  three
+                         interval  integrals),  the
+                         RiemannVonMangoldt  packaging.
+  * Ap3XiLogDeriv   --  logDeriv  Lambda  =  logDeriv  zeta
+                         +  logDeriv  Gamma  (Re  s  >  0),
+                         Lambda(1-s)  =  Lambda(s),
+                         conj  symmetry.
+  * Ap3ZetaConj     --  the  41-line  PNT+  zeta
+                         conjugation  helper.
+  * Ap3NcountWindow --  window  count  lemmas.
+  * Ap3Fold         --  the  fold:  for  zero-free
+                         ordinates,  N(T1,T2)  =  (1/pi)
+                         Im  halfContour(Lambda'/Lambda),
+                         via  Lambda(1-s')  =  Lambda(s).
+  * Ap3GammaSide    --  (1/pi)(halfContour  logDeriv
+                         Gamma).im  =  int  mu  (the
+                         gamma  side  becomes  the  mu
+                         density).
+  * Ap3MainTerm     --  rvM_main_param  (the  parametric
+                         assembly  of  the  main  term  with
+                         the  ported  Backlund  +  vertical
+                         +  local-count  +  mu  inputs)
+                         and  its  corollaries  rvM_main /
+                         rvM_main_aux.
+  * Ap3RvMStatement --  the  assembler  (23-line  source).
+  * THE GAMMAFACTS DISCHARGE (about 2.4k lines,  all
+                         mathlib-PROVED):
+      Ap3GammaSeries         (digamma  series)
+      Ap3GammaStirling       (Stirling  for  Gamma
+                               off  the  ported  series)
+      Ap3GammaMu             (mu(tau)  =  (1/2pi)
+                               log(|tau|/2pi)  +  O(tau^-2))
+      Ap3GammaIntMu          (the  mu  integral  identity
+                               against  the  main  term)
+      Ap3GammaStirlingVert   (the  vertical  Stirling
+                               estimate)
+      Ap3GammaComplete       (gammaFacts :
+                               GammaFacts,  the  single
+                               discharge  theorem)
+
+  * TOP-LEVEL RESULT,  hypothesis-free  in  this  repo:
+      ap4_selftest_rvM_main_no_extra_hypotheses :
+        EX  C T0,  forall  T >=  T0,
+          |N(T,2T)  -  (T/2pi)  ell1(T)|  <=  C log T
+      ap4_selftest_riemannVonMangoldt_no_extra_hypotheses :
+        RiemannVonMangoldt  zetaZeroConfig
+    i.e.  the  full  Riemann-Von  Mangoldt  formula,  N =
+    main  +  O(log T),  proven  inside  this  package
+    from  mathlib  +  the  ported  Apache-2.0  sources,
+    no  paper  inputs,  no  extra  hypotheses.
+
+  * D4 VERDICT:  the  classical  S-identity  wire  is
+    COMPLETE  in-house  --  ap1  (argument  principle)  +
+    ap2  (window  identity)  +  ap3  (side  bounds)  +
+    ap4  (main  term,  RvM,  GammaFacts)  =  34  files,
+    about  7.5k  lines,  all  LEAN-PROVEN.  What  used  to
+    be  CITED  (the  whole  classical  counting  side)  is
+    now  PROVEN.  The  one  remaining  CITED  input  in
+    A1Growth.lean  is  the  Trudgian  II  explicit
+    S-bound  itself  (A1G-5)  --  a  genuinely
+    frontier-level  citation  (the  bound  the  wire
+    consumes),  not  part  of  the  counting  wire.
+
+  * GATES:  lake  build  green  (34  new  files,  0
+    errors,  zero  sorry  across  Ap1*/Ap2*/Ap3*);  all
+    four  lake-exe-rhattack  runtime  gates  PASS.
+
+  * WHAT THIS MEANS FOR THE RH PROGRAM:  every  classical
+    input  of  the  S-identity  leg  is  now  machine-
+    checked  in  this  repository.  The  formal  side  of
+    the  margin  certificate  (the  data-free  clause  +
+    the  wire  cost)  has  its  entire  classical 
+    substrate  PROVEN.  What  remains  genuinely  open  on
+    the  formal  side  is  the  growth  form  of  the  S
+    bound  at  the  zeros  (A1G-5,  frontier)  --  i.e.
+    exactly  the  D3  frontier  (zero-scale  transfer),
+    now  that  D4  (the  machinery  under  it)  has  been
+    removed  from  the  trust  pile.
