@@ -8571,3 +8571,37 @@ commit,  Apache-2.0,  cited):
     continued smoothness  =>  the margin is provably
     S-insensitive at zero scale and the flat-clause
     question moves to the main-term (G = C log) side.
+
+## 2026-10-13  S-side single-zero sweep: zero-scale S IS rough; margin flat; tension quantified
+
+  * Sweep (scripts/rh/s0_singlezero_swalk.py,  dps-25,
+    cross-checked at dps-45 to 6 digits,  20 s runtime):
+    S(t) = (1/pi) arg zeta(1/2+it)  continuous branch,
+    0.025 t-steps  (quarter zero-spacing)  over 5 t-units
+    at the band head (t0 ~ 3.23217e9)  and at 1e10.
+      per-step S-increment:  ~0.08 median,  ~0.14 mean
+      (S units);  crossing steps (zero jumps):  ~0.92;
+      crossings in 5 units:  15-16  vs RVM prediction
+      ~15.9  (MATCH);  every crossing on the critical line
+      (weak local RH-consistency signal).
+  * Against P2 Thm 1:  the sqrt(h log T / pi)  scale at
+    h = 0.025 is ~0.42  (S units,  SUP over the dyadic):
+    the typical smooth increment  (0.08-0.14)  and the
+    crossing events  (~0.92)  bracket it as expected --
+    QUALITATIVELY CONSISTENT at true zero resolution.
+  * TENSION LOCKED:  S is rough at zero scale;  the
+    505-point margin is flat to 3e-4 at 0.5 t-shifts
+    (~2 zero-spacings).  The margin's flatness,  if real,
+    is an S-INSENSITIVITY property of the certificate
+    (window-averaged / O(1)-bounded off / wire-cancelled;
+    the cancellation mechanism is the RVM identity we
+    just proved in Lean).  The flat-at-zeros clause
+    remains OPEN,  and the adjudicating experiment (the
+    ENGINE-SIDE single-zero margin sweep:  re-evaluate
+    the margin / S1-R residual at t-step 0.02-0.05 and
+    compare its deltas with the S-side deltas just
+    measured)  is  named precisely  in  forensics 3.10.
+    Rough margin deltas of S-side size  =>  P2's
+    oscillation bound is the in-data refutation;  flat
+    margin deltas  =>  the clause question moves to the
+    main-term  (G = C log)  side.

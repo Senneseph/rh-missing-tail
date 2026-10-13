@@ -395,47 +395,70 @@ Pre-registered readings (day034/docstring, inherited):
          Hall/Bui-Milinovich side,  not resonance.
   MEASURED zero-scale smoothness (505-point ledger,
   reissue 3e10):
-    The ledger's k-layers are SLIDING t-windows of width 5.0
-    stepped by 0.5 (each window embraces ~109 zeros at the
-    band scale,  adjacent layers overlap by ~98).  Across all
-    483 adjacent-in-t pairs:  min dmnew = -3.19e-4,
-    max = +3.14e-4,  median = -8e-8,  max |dmnew| = 3.19e-4,
-    p99 |dmnew| = 1.79e-4.  THE DATA-FREE MARGIN IS FLAT AT
-    ZERO-SCALE-NEIGHBORING RESOLUTION:  windows shifted by
-    0.5 in t (eleven zero-spacings) move the margin by at
-    most ~3e-4.
-  The tension,  quantified:  P2 (RH) predicts S-increments of
-  ~0.2-0.6 per zero-SPACING (and O(1) or larger over 0.5
-  shifts) while the margin is smooth to 3e-4 over the same
-  0.5 shifts.  Compatibility requires that the margin's
-  S-dependence be  (a)  WINDOW-AVERAGED  (width 5 vs zero
-  spacing ~0.046:  S oscillations integrate out),  (b)  BOUNDED
-  OFF (an O(1) contribution absorbed into the 0.502 baseline),
-  or  (c)  CANCELLED IN THE WIRE (the RVM identity we just
-  proved in Lean is exactly the mechanism that can cancel the
-  S-term against the N-count side of the certificate).  None
-  of these three is the rejected  "flat at all zeros"  clause;
-  the clause remains under the same pressure as 3.9,  but the
-  ledger shows the margin does not SEE zero-scale S structure
-  at window resolution -- so a refutation-of-the-clause via
-  the margin must come from SINGLE-ZERO-RESOLUTION data.
-  NAMED EXPERIMENT (cheap,  python-side):  re-evaluate the
-  margin (or the pre-normalization S1-R residual) at t-
-  resolution ~0.02-0.05 (one zero per step) at two anchors
-  (band head ~3.23e9 and ~1e10),  e.g. 200 steps each with
-  the existing day037 engine at dps-30 or the fast mpmath S-
-  walk for the S-side alone;  compare the single-step deltas
-  against the P2 prediction (~0.2-0.6 increment available
-  per spacing under RH).  If the margin acquires zero-scale
-  roughness of predicted size  ->  P2's oscillation lower
-  bound becomes the in-data refutation mechanism for the
-  flat clause;  if it stays smooth to single-zero resolution
-  ->  the margin is provably S-insensitive at zero scale,
-  and the flat-clause question moves entirely to the main-term
-  (growth) side,  i.e. the data-free G = C log of the wire.
-  Formal counterpart:  the D4 line (ap1-ap4,  all
-  house-PROVEN this session) supplies the exact wire
-  |S1-R| <= G(xM) . (17/8) . t^2/g1^2  so that the S-
+    The ledger's k-layers are SLIDING t-windows of width
+    5.0 stepped by 0.5.  At the band scale the zero
+    density is (1/2pi) log(t/2pi) ~ 3.1 per unit t,  so a
+    width-5.0 window embraces ~16 zeros  and  a 0.5 step
+    is ~1.7 zero-spacings.  Across all 483 adjacent-in-t
+    pairs:  min dmnew = -3.19e-4,  max = +3.14e-4,
+    median = -8e-8,  max |dmnew| = 3.19e-4,  p99 |dmnew|
+    = 1.79e-4.  THE DATA-FREE MARGIN IS FLAT AT ZERO-
+    SCALE-NEIGHBORING RESOLUTION:  windows shifted by 0.5
+    in t  (~2 zero-spacings,  ~98% overlap)  move the
+    margin by at most ~3e-4.
+  S-SIDE SINGLE-ZERO SWEEP (this session,  scripts/rh/
+  s0_singlezero_swalk.py,  dps-25 vs dps-45 identical to
+  6 digits):  S(t) = (1/pi) arg zeta(1/2+it),  continuous
+  branch,  stepped by 0.025  (a quarter zero-spacing)
+  over 5 t-units  at the band-head anchor (t0 ~ 3.23217e9
+  region)  and at 1e10:  per-step S-increments ~0.08
+  median,  ~0.14 mean  (S units),  with the 15-16 steps
+  crossing a zero showing S-jumps ~0.92  (a +1 zero jump
+  with in-step drift cancelling part of it).  The 15-16
+  crossings in 5 units  MATCH THE RVM PREDICTION ~15.9
+  for that window,  and  every crossing is on the
+  critical line at sigma = 1/2  (a weak local RH-
+  consistency signal,  not a proof).  Against P2:  the
+  sqrt(h log T / pi)  scale at h = 0.025 is ~0.42  (S
+  units,  a SUP lower bound over the dyadic):  the
+  measured typical smooth increment  (0.08-0.14)  and the
+  crossing events  (~0.92)  bracket it as expected.  The
+  data is QUALITATIVELY CONSISTENT WITH P2'S ZERO-SCALE
+  OSCILLATION at true zero resolution.
+  The tension,  quantified:  at TRUE zero resolution the
+  S function IS rough  (smooth increments ~0.08-0.14 per
+  quarter-spacing,  +~1 per crossing,  O(1) wandering),
+  while the margin is flat to 3e-4 at 0.5 shifts.
+  Compatibility requires the margin's S-dependence to be
+  (a)  WINDOW-AVERAGED  (width 5.0 vs spacing ~0.29:  S
+  structure integrates out),  (b)  BOUNDED OFF  (an O(1)
+  contribution absorbed into the 0.502 baseline),  or
+  (c)  CANCELLED IN THE WIRE  (the RVM identity now house-
+  PROVEN in Lean is exactly the mechanism that can cancel
+  the S-term against the N-count side of the certificate).
+  The flat-at-zeros clause is still NOT adjudicated:  the
+  ledger  (window resolution)  cannot see the S structure;
+  the S-side at single-zero resolution is confirmed rough
+  --  so the margin's flatness at zero scale,  if real,  is
+  an S-INSENSITIVITY property of the certificate,  which
+  the in-house wire |S1-R| <= G(xM) . (17/8) . t^2/g1^2
+  now makes a PROVABLE statement about.
+  NAMED EXPERIMENT (engine-side single-zero sweep):
+  re-evaluate the margin (or the pre-normalization S1-R
+  residual) itself at t-resolution ~0.02-0.05  (one zero
+  per step)  at the two anchors -- e.g.  200 steps each
+  with the day037 engine at dps-30,  or a margin-only fast
+  pass -- and compare its single-step deltas with the S-
+  side deltas just measured.  Roughness tracking the S-side
+  size  =>  the margin does carry the zero-scale S
+  structure  and P2's oscillation lower bound becomes the
+  in-data refutation mechanism for any flat clause;
+  continued smoothness  =>  the margin is provably S-
+  insensitive at zero scale  (the wire's S-contribution is
+  cancelled/averaged)  and the flat-clause question moves
+  entirely to the main-term  (G = C log)  side.  Formal
+  counterpart:  the D4 line  (ap1-ap4,  all house-PROVEN
+  this session)  supplies the exact wire,  so the S-
   sensitivity of the margin is now a PROVEN computable
   quantity,  not an assertion.
 

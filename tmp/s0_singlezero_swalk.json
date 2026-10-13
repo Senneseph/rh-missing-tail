@@ -1,0 +1,30 @@
+{
+ "A_3.23e9": {
+  "t0": 3232170976.1122,
+  "n_steps": 200,
+  "step": 0.025,
+  "max|dS|": 2.8908608684537027,
+  "p99|dS|": 2.8908608684519623,
+  "median|dS|": 0.2507317851457589,
+  "mean|dS|": 0.4487414663924173,
+  "steps|dS|>0.5": 15,
+  "steps|dS|>pi/3 (zero-cross)": 15,
+  "total S change over 5 units": 3.022467225140584,
+  "P2-style per-spacing (loglog read)": 0.15671687607096726,
+  "P2-style per-spacing (log read)": 0.41742804526510463
+ },
+ "B_1e10": {
+  "t0": 10000000000.0,
+  "n_steps": 200,
+  "step": 0.025,
+  "max|dS|": 2.8767429802955773,
+  "p99|dS|": 2.8767429802952935,
+  "median|dS|": 0.26484967329753095,
+  "mean|dS|": 0.4868606043918435,
+  "steps|dS|>0.5": 17,
+  "steps|dS|>pi/3 (zero-cross)": 17,
+  "total S change over 5 units": 0.43714045157370646,
+  "P2-style per-spacing (loglog read)": 0.15798863658503207,
+  "P2-style per-spacing (log read)": 0.42805829009593654
+ }
+}
