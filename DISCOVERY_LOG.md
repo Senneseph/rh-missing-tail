@@ -8184,3 +8184,49 @@ as expected.  38 of 505 points on disk.
 - day055 precision layer (dps-30/90/120 arm stability) launched on
   all 505 (14 workers,  ~1.5 h) to close the final verification
   gate.
+
+## 2026-10-13  Precision layer done; D3/D4 research pass committed
+
+- day055 precision layer COMPLETE over all 505 re-issue points:
+  505/505 stable (stable = exact repro of the recorded dps-30
+  margin AND dps-90/dps-120 agreement to 1e-10).  Max
+  dps-30-vs-recorded delta = 2.2e-16 (machine epsilon: the
+  re-issue arm bit-reproduces from the checkpoint extras);
+  max dps-90/dps-120 arm-noise = 7.6e-9.  All three arms
+  agree:  margins 0.502275 to 0.825703.  The 505-point
+  deliverable (ledger + census + precision layer) is closed;
+  docs/VERIFICATION/forensics are final for the re-issue.
+- RH-advance pass (items 2 and 3 of the route map), online
+  first:
+  (2) The distribution line (D3) was pinned item by item
+  against the 2024-26 CLT wave (forensics section 3.9):
+  Minelli 2507.04150 (zero-weighted log-zeta CLT,  argument
+  side up to the natural barrier under RH),  Inoue-Kobayashi-
+  Toma 2510.14309 (EXPLICIT zero-scale S-oscillation under
+  RH:  sup +/- (S(t+h)-S(t)) >= (1-E) sqrt(h log T/pi),  with
+  the r-gap constant improved to sqrt(2/r);  resonance
+  method),  Wang 2407.14867 + Yu 2505.23573 (unconditional
+  family-direction S-CLTs at sqrt(loglog)),  Jerby
+  2511.18275 (under RH,  a proof of pair correlation for the
+  Z-zeros via a real-hall SDE / Dyson Brownian motion
+  mechanism,  invoking Selberg's probabilistic theory of
+  S(t)).  Verdict:  the flat-at-all-zeros clause is under
+  pressure from three independent directions;  the live move
+  is a zero-restricted t-direction S-CLT with effective T0
+  (it would refute the flat clause by counting,  no gap
+  transfer);  that theorem does not exist in the literature
+  yet,  and P5 (Jerby) is the closest mechanism,  RH-
+  conditional.
+  (3) The Lean D4 scope was re-scouted (online first):  the
+  pinned mathlib v4.33.1 ships Mathlib/Analysis/Meromorphic
+  {Basic,Order,Divisor} with MeromorphicOn.divisor +
+  meromorphicOrderAt (verified against the local lake
+  package) -- the counting-data half of the argument
+  principle is now library-ready at the pin,  and the
+  argument principle itself exists upstream in Tau Ceti
+  (Lean-FRO-incubated,  github TauCetiProject/TauCeti)  as
+  TauCeti.Contour.argumentPrinciple.  The Zeta23 borrow
+  source moved to anthropics/formal-math (zeta23/ subdir;
+  the old RvM/Backlund path is gone from main,  re-inventory
+  needed).  Build order ap1 -\u003e ap2 -\u003e ap3 recorded in the
+  forensics D4 section.

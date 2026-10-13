@@ -304,6 +304,69 @@ Pre-registered readings (day034/docstring, inherited):
   form wire of 3.6 therefore sits at the frontier; no sharper
   data-free clause exists in the literature to import.
 
+  ### 3.9 The CLT line, pinned item by item (online research pass)
+  The D3 surviving route (distribution line) re-surveyed against the
+  2024-26 literature, each pinned paper classified:
+    P1  arXiv:2507.04150 (Minelli et al.).  CLT for log zeta on
+        the critical line WEIGHTED BY THE LOCAL STATISTICS OF THE
+        ZEROS;  complex CLT under a Fourier-support condition on
+        the test function;  for the IMAGINARY PART (the argument)
+        the support condition extends to its  NATURAL BARRIER
+        UNDER RH.  Zero-weighted + argument-side:  the closest
+        published theorem to a  "Selberg-CLT-at-the-zeros"  for
+        the argument;  RH-conditional,  asymptotic.
+    P2  arXiv:2510.14309 (Inoue-Kobayashi-Toma,  v2 2026).  
+        Theorem 1 (RH,  EXPLICIT):  for  h in  [C/log T,
+        c/loglog T],  sup_{t in [T,2T]} +/-(S(t+h)-S(t)) >=
+        (1-E) . sqrt(h log T / pi)  with explicit E  ≈ sqrt(h
+        loglog T)  + min-terms.  Zero-scale oscillation of S
+        quantified under RH at the zero scale (h ~ 1/log T gives
+        (1-o(1)) . sqrt(2/pi)).  Theorem 2 (RH):  r-gap
+        constants improved to sqrt(2/r) -- the S-oscillation
+        is used exactly via the RVM integral (N(t+h)-N(t) is
+        an integer in between).  Theorem 3:  the M-O/resonance
+        method's barrier (lambda_1 >= 3.022,  mu_1 <= 0.508).
+        Method:  resonance (Soundararajan,  Bondarenko-Seip,
+        Montgomery-Odlyzko lineage).
+    P3  arXiv:2407.14867 (Wang,  to appear Lit. Math. J.).
+        UNCONDITIONAL moment asymptotics + weighted CLT for
+        S(t,f) ~ sqrt(loglog q)  in the LEVEL aspect (prime-
+        level cusp forms).  Family-direction template:  the
+        non-degenerate sqrt(loglog) S-distribution exists as a
+        theorem once the parameter is a family -- not yet for
+        zeta in the t-direction.
+    P4  arXiv:2505.23573 (Yu).  UNCONDITIONAL Selberg-type
+        zero-density (twisted GL2 family) + CLT for the
+        argument over the character family.  Second template;
+        the zero-density engine is the shared ingredient.
+    P5  arXiv:2511.18275 (Jerby,  v2 2025-12).  Under RH,  a
+        PROOF of Montgomery pair correlation for the zeros of
+        Z via a variational "real hall"  of sections  +
+        Skorokhod SDE with reflection at the discriminant
+        (bulk  ~  Dyson Brownian motion beta=2  ~  GUE sine
+        kernel),  invoking  "Selberg's probabilistic theory of
+        the argument S(t)"  to pass from ensemble-averaged to
+        deterministic pair correlation.  The most aggressive
+        published attempt at the full zero-side mechanism;
+        RH-conditional;  new and fast-moving,  treat as a
+        source of machinery,  not as closed consensus.
+  Reading for D3:  the flat clause  |S(gamma)| <= C (3.7)  is
+  under pressure from three independent directions now --  the
+  classical zeros-omegas (3.7,  Tsang unconditional (1/3)-power;
+  Bondarenko-Seip  sqrt scale under RH),  the quantitative
+  zero-scale oscillation under RH (P2:  S moves at the zero
+  scale by ~0.8 (1-o(1)),  by integer counting of N),  and the
+  non-degenerate sqrt(loglog) argument distribution in the
+  family direction (P3/P4).  The in-house gap-transfer
+  refutation is still a documented dead end (3.7);  the live
+  move is the zero-RESTRICTED t-direction CLT for S with an
+  effective T0:  if a non-degenerate S(gamma)/sqrt(loglog gamma)
+  limit law lands as a theorem,  the flat clause is refuted in
+  the limit by counting alone (no gap transfer needed -- the
+  statement is already at the zeros).  That theorem does not
+  yet exist in the cited literature;  P5 is the closest
+  mechanism and assumes RH.
+
 ## 4. What connects to what (the composition map)
 
   hs1 (zero side, S1 walk)  <-  data: 3e9 walk pin, 3e10 band
@@ -726,9 +789,42 @@ Pre-registered readings (day034/docstring, inherited):
       (Selberg-CLT-at-the-zeros) is the surviving route.
   D4  The argument-principle line in Lean (ap1-ap3): make the
       classical S-identity and the 17/8 telescope house-PROVEN
-      instead of CITED. Prettier door; mathlib has no
-      argumentPrinciple/windingNumber in the pin (scouted);
-      Zeta23's Backlund port is the borrow candidate ([A1G-6]).
+      instead of CITED.  SCOPE UPDATE from the research pass:
+      (i)  the earlier  "mathlib has no argumentPrinciple"  
+      scouting is STALE at our pin:  the pinned mathlib
+      (v4.33.1,  verified against the local lake package)
+      now ships  Mathlib/Analysis/Meromorphic/{Basic,Order,
+      Divisor}  with  MeromorphicOn.divisor  (a locally-
+      finsuppWithin carrying  meromorphicOrderAt,  positive
+      at zeros,  negative at poles)  and  divisor_apply /
+      divisor_ball_support_finite.  The COUNTING DATA half of
+      ap1 is library-ready at the pin.
+      (ii)  the argument principle itself is available
+      upstream as a maintained Lean theorem:  Tau Ceti
+      (Lean-FRO-incubated community library,  
+      github.com/TauCetiProject/TauCeti)  carries
+      TauCeti.Analysis.Contour.Argument.Principle,
+       TauCeti.Contour.argumentPrinciple  --  for f
+      meromorphic on the closed disc  C(c,R)  with nonzero-
+      order points in a finite set inside,  the contour
+      integral of f'/f  equals  2*pi*i  times the sum of the
+      orders.  Borrow-with-citation candidate per the iron
+      rule (new upstream,  review before any use).
+      (iii)  the Zeta23 borrow source has MOVED:  
+      github.com/anthropics/zeta-23-lean now resolves to
+      anthropics/formal-math  with the lean package under
+      zeta23/;  the documented  RvM/Backlund.lean path is
+      not on main (the file was reorganized);  a fresh file
+      inventory of zeta23/Solution and zeta23/Zeta23 is
+      needed before borrowing from there.
+      Build order:  ap1  =  argumentPrinciple (TauCeti
+      borrow or in-house port on MeromorphicOn)  ->  ap2  =
+      the S-identity wire  N(T) = main + 7/8 + S(T) + O(1/T)
+      with  S = (1/pi) . arg  zeta  from ap1 plus the RVM
+      residual;  ap3  =  the Backlund-line explicit input
+      (17/2 base cost)  from the relocated zeta23 port or
+      an in-house constant.  The 17/8 wire-cost identity
+      itself is already LEAN-PROVEN  (pin_wire_cost_at_half).
   D5  Push the data beyond 3e10 (the next band): the growth
       scales (1.78..2.96 at 3e10) will start to separate
       "truly O(1)" from "slowly growing"; the census of |DN|
