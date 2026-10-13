@@ -8531,3 +8531,43 @@ commit,  Apache-2.0,  cited):
     exactly  the  D3  frontier  (zero-scale  transfer),
     now  that  D4  (the  machinery  under  it)  has  been
     removed  from  the  trust  pile.
+
+## 2026-10-13  D3: P2 read in full; zero-scale oscillation vs measured zero-scale flatness
+
+  * P2 (Inoue-Kobayashi-Toma, arXiv:2510.14309) 8-page PDF
+    read in full:  Theorem 1 (RH,  effective,  h in [C/log
+    T,  c/loglog T]):  sup +/-(S(t+h)-S(t)) >= (1-E)
+    sqrt(h log T / pi)  with explicit E;  AT THE EXACT ZERO
+    SCALE h = c'/log T every E-term tends to zero,  so the
+    zero-scale S-increment is  (1-o(1)) sqrt(c'/pi)  (about
+    0.56 at c' = 1).  Theorem 3:  the M-O/resonance
+    barrier (large gaps <= ~3.022,  small >= ~0.508).  The
+    zero-scale oscillation lower bound is the refutation
+    mechanism for any "S flat at zero scale" clause
+    (counting-only,  RH-conditional).  See forensics
+    section 3.10.
+
+  * MEASURED (505-point ledger,  read-only):  the k-layers
+    are sliding t-windows of width 5.0 stepped by 0.5  (~109
+    zeros per window).  Over all 483 adjacent-in-t pairs:
+    max |dmnew| = 3.19e-4,  median = -8e-8.  The data-free
+    margin is FLAT to 3e-4 between windows shifted by 11
+    zero-spacings,  while P2 (RH) predicts S-increments of
+    ~0.2-0.6 per spacing and O(1)+ over 0.5 shifts.
+    Compatibility requires the margin to be
+    window-averaged / O(1)-bounded off / wire-cancelled in
+    its S-dependence (the D4 Lean line just proved is the
+    cancellation mechanism).  The ledger therefore does not
+    adjudicate the flat clause:  it cannot see zero-scale S
+    structure at window resolution.
+
+  * NAMED NEXT EXPERIMENT (single-zero sweep):  evaluate the
+    margin / S1-R residual at t-resolution 0.02-0.05 (one
+    zero per step) at ~3.23e9 and ~1e10,  200 steps per
+    anchor (engine at dps-30,  or mpmath S-walk for the
+    S-side alone);  compare single-step deltas with the P2
+    prediction.  Roughness of predicted size  =>  P2
+    becomes the in-data refutation of the flat clause;
+    continued smoothness  =>  the margin is provably
+    S-insensitive at zero scale and the flat-clause
+    question moves to the main-term (G = C log) side.

@@ -367,6 +367,78 @@ Pre-registered readings (day034/docstring, inherited):
   yet exist in the cited literature;  P5 is the closest
   mechanism and assumes RH.
 
+### 3.10 Zero-scale oscillation:  P2 read in full + the measured
+          zero-scale smoothness, and the single-zero test
+  P2 (Inoue-Kobayashi-Toma) read in full this session (8-page
+  PDF,  theorem statements extracted):
+    (i)  Theorem 1 (RH,  effective):  for every large T and
+         every h in [C/log T,  c/loglog T] (absolute C large,
+         c small),  sup over t in [T,2T] of +/-(S(t+h)-S(t))
+         >= (1-E) sqrt(h log T / pi),  E an explicit sum of a
+         pi h loglog T term and a minimum of algebraic
+         loglog/log terms.  AT THE EXACT ZERO SCALE h = c'/log
+         T every E-term tends to 0 (the first as loglog T/
+         log T,  the second as (loglog T)^{3/2}/sqrt(log T)),
+         so the zero-scale increment is  (1-o(1)) .
+         sqrt(c'/pi)  --  ~0.56  at  c' = 1.  This is the
+         quantitative refutation mechanism for any  "S is
+         flat at the zero scale"  clause  (RH-conditional,
+         counting-only,  no gap transfer).
+    (ii) Definition used:  S(t)  =  (1/pi) arg zeta(1/2+it)
+         =  (1/pi) Im int_{1}^{1/2+it}  zeta'/zeta  (the
+         horizontal-line integral form -- the same object the
+         in-house D4 line now manipulates in Lean).
+    (iii) Theorem 3 pins the M-O/resonance barrier (large
+         gaps <= ~3.022,  small >= ~0.508,  L <= T),  so the
+         sqrt(2/r) constants of Theorem 2 are optimal for that
+         method;  the route to sharper statements is the
+         Hall/Bui-Milinovich side,  not resonance.
+  MEASURED zero-scale smoothness (505-point ledger,
+  reissue 3e10):
+    The ledger's k-layers are SLIDING t-windows of width 5.0
+    stepped by 0.5 (each window embraces ~109 zeros at the
+    band scale,  adjacent layers overlap by ~98).  Across all
+    483 adjacent-in-t pairs:  min dmnew = -3.19e-4,
+    max = +3.14e-4,  median = -8e-8,  max |dmnew| = 3.19e-4,
+    p99 |dmnew| = 1.79e-4.  THE DATA-FREE MARGIN IS FLAT AT
+    ZERO-SCALE-NEIGHBORING RESOLUTION:  windows shifted by
+    0.5 in t (eleven zero-spacings) move the margin by at
+    most ~3e-4.
+  The tension,  quantified:  P2 (RH) predicts S-increments of
+  ~0.2-0.6 per zero-SPACING (and O(1) or larger over 0.5
+  shifts) while the margin is smooth to 3e-4 over the same
+  0.5 shifts.  Compatibility requires that the margin's
+  S-dependence be  (a)  WINDOW-AVERAGED  (width 5 vs zero
+  spacing ~0.046:  S oscillations integrate out),  (b)  BOUNDED
+  OFF (an O(1) contribution absorbed into the 0.502 baseline),
+  or  (c)  CANCELLED IN THE WIRE (the RVM identity we just
+  proved in Lean is exactly the mechanism that can cancel the
+  S-term against the N-count side of the certificate).  None
+  of these three is the rejected  "flat at all zeros"  clause;
+  the clause remains under the same pressure as 3.9,  but the
+  ledger shows the margin does not SEE zero-scale S structure
+  at window resolution -- so a refutation-of-the-clause via
+  the margin must come from SINGLE-ZERO-RESOLUTION data.
+  NAMED EXPERIMENT (cheap,  python-side):  re-evaluate the
+  margin (or the pre-normalization S1-R residual) at t-
+  resolution ~0.02-0.05 (one zero per step) at two anchors
+  (band head ~3.23e9 and ~1e10),  e.g. 200 steps each with
+  the existing day037 engine at dps-30 or the fast mpmath S-
+  walk for the S-side alone;  compare the single-step deltas
+  against the P2 prediction (~0.2-0.6 increment available
+  per spacing under RH).  If the margin acquires zero-scale
+  roughness of predicted size  ->  P2's oscillation lower
+  bound becomes the in-data refutation mechanism for the
+  flat clause;  if it stays smooth to single-zero resolution
+  ->  the margin is provably S-insensitive at zero scale,
+  and the flat-clause question moves entirely to the main-term
+  (growth) side,  i.e. the data-free G = C log of the wire.
+  Formal counterpart:  the D4 line (ap1-ap4,  all
+  house-PROVEN this session) supplies the exact wire
+  |S1-R| <= G(xM) . (17/8) . t^2/g1^2  so that the S-
+  sensitivity of the margin is now a PROVEN computable
+  quantity,  not an assertion.
+
 ## 4. What connects to what (the composition map)
 
   hs1 (zero side, S1 walk)  <-  data: 3e9 walk pin, 3e10 band
