@@ -15,6 +15,11 @@ verifier scripts, and import paths reference them by name.
 v4.33.1 (`lean-toolchain`). rc/nightly are banned (rc2 regressions burned a
 session; see the day-012 journal).
 
+**Conventions, wiring, and pitfalls:** see [`LEAN-GUIDE.md`](LEAN-GUIDE.md)
+— the kernel table (W_pair / engine kernel / main factor, code-verified),
+formal-to-numeric wiring, pins, and the accumulated gotcha list.  This
+README stays the authoritative per-file statement map.
+
 ## File map (outline piece → file)
 
 ### The proof pieces (`RhAttack/`)
