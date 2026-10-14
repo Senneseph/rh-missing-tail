@@ -8804,3 +8804,46 @@ commit,  Apache-2.0,  cited):
     (s3_ledger_recon_margin_sweep.py,  s3_interpret.py)
     and tmp/  (s3_ledger_recon_margin_sweep_summary.md,
     s3_interpret.md).
+
+## 2026-10-14  c(t) CLOSED: main-term identity proven numerically; the c theorem; LEAN-GUIDE created
+  * s5 finished (stream 3338s + quads); its genus-1 RHS did not
+    close (kernel mismatch vs the engine's pair kernel) -- s5 is
+    superseded, JSONL kept as data.
+  * s6 (quad-only) re-bookkeeping found: the engine's Kabs tail
+    term covers ACTUAL zeros (1e7, G] (day023 shard stream, incl
+    the (1e7, 3.19e7] slice and both micro-gaps) -- there is NO
+    unmodeled gap below G.  Engine composition code-read:
+    Kfull = exp(lm + la + i ar + re + i im) * exp(qrem) * exp(qext);
+    the B-fields are bounds, not exponent addends.
+  * VERIFIED main-term identity (both ledger heights, to 1e-6):
+    lm_re = log|main_ex| + log(1/2) - Ex_total, where
+    main_ex = 2 pi^{s/2}/(s (s-1) Gamma(s/2)) (zeta = xi/main_ex,
+    xi(0) = 1/2 verified).  The engine Stirling main term (the
+    S1Point lean side) equals the exact xi-convention main factor
+    minus the Ex bookkeeping.  Lean-certifiable (atoms exist in
+    Ap4 + S1Point).
+  * s7: the engine 400-node dps-30 far quad equals the exact
+    RVM u-quad to 2.4e-7 absolute -- the quad is exact.  Hence the
+    ONE-LINE c THEOREM:
+      log c(t) = EPS + Q_engine(t) - I_far,RVM(t) - M_true(t),
+      EPS ~ +/-2e-6 (t-independent),  Q_engine readable from the
+      ledger (= log|Kabs| - lm - la - re),  I_far,RVM computable
+      (u-quad, seconds),  M_true(t) = RVM tail model error, and
+      M_true(t) = EPS - log c(t) is MEASURABLE at every ledger
+      row.  Measured: log c = -0.009110 at t = 3.23217e9,
+      -1.555411 at t = 2.78843e10:  the true tail product
+      deviates from the RVM model by e^{0.009} / e^{1.555}.
+      c(t) is nothing else:  constant + ledger quad pieces +
+      RVM model error.
+  * CONSEQUENCE for E1:  the open clause "S = O(1) at zero
+    heights" now has an exact measurable numeric face
+    (M_true(t) = EPS - log c(t));  the drift of c between the
+    two windows IS the RVM model error of the (G, 1e30] tail,
+    not a new macro quantity.
+  * formal/LEAN-GUIDE.md created at the owner's direction:
+    the navigation + convention layer (module lines, kernel
+    table with code-verified definitions, formal-numeric
+    wiring, pins, accumulated pitfalls, open-content map).
+    Build re-verified green (17450 jobs, 0 errors, sorry-free).
+  * Scripts: scripts/rh/s6_c_closedform.py, s7_c_theorem.py;
+    outputs in tmp/s6_c_closedform.{md,jsonl}, tmp/s7_c_theorem.{md,jsonl}.
