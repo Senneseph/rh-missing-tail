@@ -1286,5 +1286,85 @@ Pre-registered readings (day034/docstring, inherited):
     CCM arXiv:1309.1526 (Thm 2 form, carried as cited premises
       in A1Growth.a1_growth_wire_ccm)
 
+### 3.12  M(t) mapped at all 505 rows:  the measurable face of
+          the open clause  (s8)  +  its t -> infinity law
+  (1)  THE SWEEP  (scripts/rh/s8_m_true_sample.py;  505 rows,
+       71 s wall on one core).  Per the 3.11 / s7 c theorem,
+       M(t) = EPS(t) + Q_engine(t) - I_far,RVM(t) - log c(t)
+       is the RVM tail model error over  (G_LAST, 1e30]  --
+       the smooth missing-tail face of the (CL) quantity.  All
+       terms certified independently:  Q_engine ledger-exact;
+       I_far the s7 u-quad (3-way:  engine dps-30 to the last
+       digit at both endpoints,  split-interval dps-40,
+       robust f64 trap in the safe region);  EPS from the
+       verified main-term identity;  log c = log Kabs - log
+       zeta ledger-exact.
+       Result:  M >= 0 at ALL 505 rows.  min +0.009100218
+       (3.232e9),  median +0.043389335,  max +1.555465754
+       (2.788e10).  Flat WITHIN each window  (all 24 k/2
+       straddles):  worst full-window spread 1.8e-3  (window
+       g = 2.214e10),  top window 1.3e-3  (1.5541783 ..
+       1.5554658),  no window above 1.8e-3  --  the
+       zero-scale S-flow wiggle (3.11(b)) is NOT in the
+       smooth residual;  the M drift is ENTIRELY a
+       window-position effect.
+  (2)  THE GROWTH  (in-hand sample  t from G/9.3 to 0.929G).
+       Window medians trend as  M ~ 1.242 (t/G)^2.256  (log-
+       space fit;  max M-space residual 0.50,  at the edge
+       window  -- a TREND description,  not a fitted model
+       with a small error bar)  and accelerate toward  G:
+       local slope dM/dln t  +0.02 at  t/G = 0.11  rising to
+       +6.5 at  t/G = 0.929.  A log fit  (M = a ln t + b)
+       leaves max residual 0.78:  the observed regime is NOT
+       the log regime.
+  (3)  THE t -> INFINITY LAW  (derivation recorded;  no zero
+       positions needed,  RH-free).  For  t >> 1e30,  every
+       window zero satisfies  g << t:
+           W_pair(g,t) = 2 ln t - (g/t)^2 - ln(g^2 + 1/4) + ...
+       so
+           M(t) = 2 * dK * ln t - D + o(1),
+           dK = N_true(G_LAST, 1e30] - N_RVM(G_LAST, 1e30]
+       with D,  dK fixed (the smooth kernel's model error D
+       and the count discrepancy dK,  both t-independent).
+       Generically  dK != 0  (the RVM span count is not an
+       integer,  the true count is):  the raw missing-tail
+       sum is O(ln t) at infinity  --  consistent with,  and
+       sharper in species than,  the P1/P2 zero-weighted
+       sqrt(loglog T) statement (3.8/3.10).  The in-hand
+       sample never reaches this regime  (t < G):  the
+       measured growth is the window-edge approach,  distinct.
+  (4)  THE f64 TRAP DIAGNOSIS  (the near-miss this pass
+       caught and killed).  The NAIVE kernel
+           log|g-t| + log(g+t) - log(g^2 + 1/4)
+       is a difference of three terms all of size ~2u  while
+       the signal is ~t^2/g^2:  for  u > ~45  the f64
+       integrand is CANCELLATION NOISE  (+-1.7e10  measured,
+       true integrand < 1e-27),  contaminating any f64
+       u-trapezoid  (measured bias -4.76e10  against the
+       certified -1.2929983e9  at  t = 3.23e9;  a previous
+       pass  (3.11(3))  hit the same artifact and correctly
+       did not trust the f64 trap).  Fix:  since every ledger
+       row has  g >= G_LAST > t,
+           W_pair = log1p(- (t/g)^2) - log1p(1/(4 g^2))
+       is EXACT and cancellation-free;  the rebuilt trap then
+       agrees with the dps-40 quad to  5e-2  (t/G = 0.11)
+       degrading only as the trapezoid under-resolves the log
+       singularity at g = t  (t/G -> 0.93:  -47.5  bias).
+       The quad remains primary (engine-certified).
+  (5)  CONSEQUENCE.  (CL) / E1  remains the one open clause,
+       unchanged.  New information:  its smooth missing-tail
+       face is bounded by 1.556  on the full in-hand sample
+       (no zero-scale structure,  edge-driven growth law
+       fitted),  and its t -> infinity behavior is now an
+       explicit law  (2 dK ln t - D)  whose coefficient dK
+       is measurable:  any few ledger points at  t > G
+       (engine re-issue,  ~4 h each)  would test the
+       edge-to-asymptotic transition  and pin  dK.
+  (6)  Artifacts:  scripts/rh/s8_m_true_sample.py;  tmp/
+       s8_m_true_sample.{md,jsonl};  DISCOVERY_LOG  entry
+       (s8 / M-map);  EPS  505-row table (|EPS| <= 2.1e-6 at
+       EVERY row)  extends the s7 main-term identity from 2
+       heights to all 505.
+
   Nothing in this file is a date; git is the timestamp
   authority. Nothing here asserts more than the legend marks.

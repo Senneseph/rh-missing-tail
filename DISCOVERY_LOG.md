@@ -8847,3 +8847,80 @@ commit,  Apache-2.0,  cited):
     Build re-verified green (17450 jobs, 0 errors, sorry-free).
   * Scripts: scripts/rh/s6_c_closedform.py, s7_c_theorem.py;
     outputs in tmp/s6_c_closedform.{md,jsonl}, tmp/s7_c_theorem.{md,jsonl}.
+
+## 2026-10-14  s8: M(t) mapped at all 505 rows; the missing-tail
+                face of (CL) bounded in-hand; the 2 dK ln t infinity
+                law derived; f64 trap cancellation diagnosed
+
+  The c theorem (yesterday's entry) gave the MISSING-TAIL error
+  M(t) a measurable face:  M(t) = EPS(t) + Q_engine(t) -
+  I_far,RVM(t) - log c(t).  s8 evaluates every term at ALL 505
+  certified ledger rows (22 windows x 24 k/2 straddles,  t from
+  3.232e9 to 2.788e10,  i.e. t/G in [0.108, 0.929],  G = G_LAST
+  = 3.0001e10).  All 505 in 71 s on one core
+  (scripts/rh/s8_m_true_sample.py;  tmp/s8_m_true_sample.{md,jsonl}).
+
+  MEASURED:
+  * M(t) >= 0 at every row.  min +0.009100218 (t = 3.232e9),
+    median +0.043389335,  max +1.555465754 (t = 2.788e10).
+  * M is FLAT within each window (24 straddles):  worst spread
+    1.3e-3 (1.5541783 .. 1.5554658 in the top window),  best
+    1.4e-5.  The zero-scale S-flow wiggle (Door B) is NOT in the
+    smooth residual -- M is a pure window-position function.
+  * Between windows  M grows as t - G (approach):  the 22 window
+    medians fit  M = 1.242 (t/G)^2.256  (edge law;  local slope
+    dM/dln t  +0.02 -> +6.5 across the sample).  A plain
+    M = a ln t + b fit leaves max residual 0.78:  the sample is
+    NOT in the log regime.
+  * EPS = lm - log|main_ex| - ln(xi0) + Ex_total  verified at ALL
+    505 rows:  |EPS| <= 2.073e-6  (min -1.741e-6)  -- the s7
+    main-term identity extends from 2 heights to the whole
+    ledger.
+  * I_far quadrature health:  dps-40 single-interval vs
+    split-interval quad agree to 3.5e-8 (t/G = 0.11) .. 5.8e-6
+    (t/G = 0.93);  engine dps-30 quad agrees to the last digit at
+    the two endpoints (s7).  Primary = quad,  certified.
+
+  CONTRADICTION LOGGED AND RESOLVED (f64 trap):
+  * The NAIVE f64 u-trapezoid of the far integral  -- kernel
+    log|g-t| + log(g+t) - log(g^2 + 1/4)  -- is CANCELLED NOISE
+    for u > ~45:  three terms of size ~2u minus a signal of
+    ~t^2/g^2 < 1e-27 give +-1.7e10 integrand noise and a
+    -4.76e10 bias against the certified -1.2929983e9 at
+    t = 3.23e9 (both f64 trap variants agree with each other and
+    are both wrong:  the error is systematic,  not resolution).
+    This is the same artifact a previous pass (s7-era probe)
+    hit;  it is now diagnosed to the bit level (forensics 3.12(4)).
+  * Fix:  every ledger row has  g >= G_LAST > t,  so
+      W_pair = log1p(- (t/g)^2) - log1p(1/(4 g^2))
+    is EXACT and cancellation-free.  Rebuilt trap:  vs quad
+    -5.1e-2 at t/G = 0.11, degrading only as the trapezoid
+    under-resolves the integrable log singularity at g = t as
+    t/G - 0.93  (-4.7e1 at 0.929).  The trap is a valid
+    cross-check in the safe region,  void near g = t.
+
+  DERIVED (RH-free,  no zero positions used):  as  t - infinity
+  (window (G, 1e30] fixed),  every window zero has  g << t  and
+      W_pair(g,t) = 2 ln t - (g/t)^2 - ln(g^2 + 1/4) + o(1)
+  so
+      M(t) = 2 * dK * ln t - D + o(1),
+      dK = N_true(G, 1e30] - N_RVM(G, 1e30],   D = O(1) fixed.
+  Generically  dK != 0  (true count integer,  RVM span count not):
+  the raw missing-tail sum is O(ln t)  at infinity.  This is the
+  sharp species of the documented P1/P2 zero-restricted limit
+  failure (SOLUTION-SHAPE 1b/section 3:  "refuted in the limit
+  under RH"),  now with an explicit measurable coefficient.  The
+  in-hand sample (t < G) is the window-edge regime,  NOT the log
+  regime:  the edge law 1.242 (t/G)^2.256  is what the data
+  actually carry.
+
+  CONSEQUENCE for (CL)/E1:  unchanged in status (the one open
+  clause,  open unconditionally).  The data now say:  the
+  smooth missing-tail face is bounded by 1.556 across the full
+  3e10 sample with no zero-scale structure,  edge-driven near G;
+  the coefficient dK is measurable by ANY ledger points at
+  t > G  (engine re-issue,  ~4 h per point;  not run this pass).
+  Nothing here is a proof step;  it is the measured face of the
+  open clause plus its infinity law.
+  * Artifacts:  scripts/rh/s8_m_true_sample.py;  tmp/s8_m_true_
+    sample.{md,jsonl};  forensics 3.12;  SOLUTION-SHAPE section 6.

@@ -281,7 +281,22 @@ either direction in the cited literature.
     margin.
   - Refuted in the limit under RH:  P1 + P2  (+ P5 context,
     classical omegas).
-  - Queued:  the closed form of  c(t)  (the explicit factor 
-    of the Efull identity;  now measured exactly:  window-
-    constant part + zero-scale wiggle;  a one-line theorem 
-    once the wiggle's carrier is named).
+  - CLOSED (2026-10-14):  the closed form of  c(t)  (s6/s7,
+    s8).  One line:  log c(t) = EPS + Q_engine(t) - I_far,
+    RVM(t) - M(t),  with  EPS ~ +/-2e-6  (now verified at ALL
+    505 rows:  |EPS| <= 2.1e-6),  Q_engine  ledger-exact,
+    I_far  engine-certified quad,  and  M(t)  the RVM tail
+    model error  (forensics 3.12).
+  - MEASURED (s8,  505 rows):  M(t) >= 0  everywhere;  flat
+    within windows  (<= 1.8e-3  spread:  the smooth residual
+    carries NO zero-scale structure);  between windows  M
+    trends as  1.242 (t/G)^2.256  (edge behavior,  t < G;
+    trend fit,  max M-space residual 0.50  at the edge
+    window);  and for  t -> infinity  the explicit law
+    M = 2 dK ln t - D + o(1),  dK = the
+    (G, 1e30]  zero-count discrepancy  (generically nonzero:
+    the raw missing-tail sum is O(ln t),  the sharp species
+    of the P1/P2 limit failure).  (CL) unchanged:  one open
+    clause;  its face is now bounded in-hand  (<= 1.556)
+    with a measurable coefficient  dK  awaiting  t > G
+    points.
