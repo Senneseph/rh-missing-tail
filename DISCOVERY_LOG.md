@@ -9046,3 +9046,75 @@ commit,  Apache-2.0,  cited):
   * Artifacts:  formal/RhAttack/E1Clause.lean (new,  gated);
     formal/LEAN-GUIDE.md (73-module map,  Gate C 3/3,  E1Clause
     line,  sections 5/6 updated).
+
+
+## 2026-10-14  E1Clause v2:  clause re-targeted onto the measured face (M_wp + straddleRow);  s9 above-G run launched
+
+  WHY:  a definitional audit against the s7/s8 scripts found the
+  v1 clause was not the clause the data supports,  in two ways:
+
+  1. KERNEL CONVENTION.  The engine pair factor is
+      Ker(g,t) = re[log(1-s/r1)+log(1-s/r2) + s/r1+s/r2]
+              = pairLog(g,t) + (1/2)/(g^2+1/4)
+     while s7/s8's I_far integrates pairLog alone  (the s/r
+     convergence term is t-independent and is tracked in
+     Ex_total,  not I_far).  v1 had the clause on the Ker face
+     with the pairLog-face data  (a t-independent offset,  but the
+     named clause should be the measured face).
+  2. HEIGHT DEFINITION.  v1's "zeroHeight" (t exactly a zero
+     height) is the WRONG clause:  at a true zero height the true
+     pair factor of the zero itself vanishes (|1-s/r1| = 0  with
+     r1 = the zero),  so the missing-tail face is singular there.
+     The program's clause lives at the DETUNED straddle rows
+     (t = g + k/2,  k != 0)  --  exactly what s8 measured
+     (k in -12..12,  k != 0).
+  3. DOMAIN.  The clause's t-domain is (G_LAST, U_TOP)  --  above
+     the last on-disk zero --  but s8's 505 rows all sit BELOW G.
+     The above-G face had never been measured.
+
+  FIX (v2,  gated):  E1Clause.lean re-targeted:
+    - pairLog + convTerm + ker_split + m_true_true_side_shift
+      (the two conventions differ by a t-independent shift;  the
+      true side is an exact theorem,  the model side is integral
+      linearity,  documented).
+    - M_wp = the data face  (s8's M(t) IS M_wp:  zeta-residual
+      EPS + log|zeta| - lm - la - re - I_far;  the true zero set
+      never has to be enumerated).  M_true kept as the Ker-face
+      alias.
+    - straddleRow replaces zeroHeight (self-pair exclusion baked
+      in).  E1Clause q B now:  |M_wp q t| <= B at every straddle
+      row in (G_LAST, U_TOP).
+    - if_E1_and_walk unchanged (pure composition).
+    - Gates:  lake build RhAttack.E1Clause green (8733 jobs),
+      full lake build green (17450 jobs),  0 errors,  sorry-free.
+
+  PINNED-SHAPE FINDINGS (v4.33.1,  added):
+    - A `noncomputable` def used inside another def does NOT unfold
+      under dsimp/unfold unless the reference resolves to the SAME
+      constant;  an unknown `log` (file lacks `open Real`) becomes
+      an autoImplicit GLOBAL via relaxedAutoImplicit-off + the
+      elaboration fallback,  silently poisoning the def (the goal
+      then displays the poisoning as `sorry`  --  misleading).
+      W2Kernel opens `open Real Filter BigOperators`;  E1Clause now
+      opens `Real` too.
+    - Div/log defs need the noncomputable flag (Real.div is
+      marked noncomputable in this pin;  W2Kernel marks every
+      such def;  E1Clause's convTerm/pairLog now do too).
+    - `positivity` refuses 0 < 1/2/(g^2+1/4)  (no hint on the
+      quadratic);  use  div_pos (by norm_num) + nlinarith [sq_nonneg g].
+
+  s9 (LAUNCHED,  taskset -c 0):  scripts/rh/s9_dk_above_g.py  --
+  the above-G face of the clause.  M(t)  at  17 heights:
+  straddle t = G_LAST + k/2 (k = 1..10;  G_LAST is a TRUE zero --
+  the last on-disk one --  so these are provable straddle rows)
+  + log-spread t = G_LAST * r (r = 1.05..2.2)  for the
+  M = a ln t - D  fit  (a = 2*dK).  ONE streaming pass over the
+  1.016e11-zero tail (L+A+B+C+D,  ~815GB),  chunk-vectorized over
+  all 17 heights.  No qrem/qext needed:  qeng cancels identically
+  in the residual.  Components smoke-verified before launch
+  (EPS = 2.07e-6 at G+1/2,  inside s8's verified EPS band;
+  log|zeta| = -0.816 dps-25).  ETA ~30 min.
+
+  * Artifacts:  formal/RhAttack/E1Clause.lean (v2,  gated);
+    scripts/rh/s9_dk_above_g.py (new);  formal/LEAN-GUIDE.md
+    (E1Clause line re-targeted).

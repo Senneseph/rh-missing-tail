@@ -157,23 +157,38 @@ the RVM density the quad scripts integrate against.
 ### Line E1Clause -- the single open clause, named (E1: S = O(1))
 - E1Clause: the missing-tail face of the program, named and pinned.
   Definitions: G_LAST / U_TOP (the s7/s8 far window
-  (3.000104599998e10, 1e30]), farRVM (the RVM model integral of the
-  pair kernel Ker . Rho over the window), farZeros (upper-half-plane
-  true zeros in the window, from B0.finite), M_true (the true
-  far-window tail sum minus farRVM = the missing-tail model error),
-  zeroHeight, and E1Clause q B: |M_true q t| <= B at every zero
-  height in the window.  The E1 CLAUSE itself is the one remaining
-  open statement of the program (NOT proven here or anywhere in the
-  base); this module names it.  Lean-proven glue: farZeros
-  membership + pair-uniqueness (each conjugate pair counted exactly
-  once, from ZeroSet conj + nonReal only), zeta_abs_line (|zeta| =
-  |mainFac| |xiz| on the critical line, MainBridge zeta_eq_main_xi +
-  norm_mul, no nonzero exception), if_E1_and_walk (the residual
-  program: E1Clause + the four P12 legs -> RH on any actual-set zero
-  set, pure composition through ZetaZeroSet.rhIfMarginZeta).  Data
-  face (s8, 505 rows, dps-50 oracle): M_true in [0.009100218,
-  1.555465754] at every measured zero height; data-supported bound
-  B = 2 (margin 0.4445342).  Part C: 3/3 Float #eval gates.
+  (3.000104599998e10, 1e30]), farZeros (upper-half-plane true zeros
+  in the window, from B0.finite), and the face itself in its two
+  registered conventions:  pairLog (the s7/s8 DATA kernel, the
+  exact real pair factor re[log(1-s/r1)+log(1-s/r2)])  and  Ker
+  (= pairLog + convTerm,  the engine Efull convention;  ker_split
+  + m_true_true_side_shift formalize the t-independent split).
+  M_wp = the face on BOTH sides with pairLog  (s8's M(t) IS M_wp,
+  the zeta-residual  EPS + log|zeta| - lm - la - re - I_far);  
+  M_true = the Ker-face alias  (M_wp + t-independent shift).
+  straddleRow:  t = g + k/2 at a true zero height g, k != 0, and t
+  itself not a zero height  (self-pair exclusion:  at a true zero
+  height the true pair factor vanishes and the face is singular —
+  the clause lives on the detuned rows).  THE CLAUSE  (E1Clause q
+  B):  |M_wp q t| <= B  at every straddle row in the t-domain
+  (G_LAST, U_TOP)  --  the one remaining open statement of the
+  program  (NOT proven here or anywhere in the base;  this module
+  NAMES it).  Lean-proven glue:  farZeros membership + pair-
+  uniqueness (each conjugate pair counted exactly once, from
+  ZeroSet conj + nonReal only), zeta_abs_line (|zeta| = |mainFac|
+  |xiz| on the critical line, MainBridge + norm_mul, no nonzero
+  exception), if_E1_and_walk (the residual program:  E1Clause + the
+  four P12 legs -> RH on any actual-set zero set, pure composition
+  through ZetaZeroSet.rhIfMarginZeta).  DATA FACE (s8, 505 rows,
+  dps-50 oracle, all |k| <= 12):  M_wp in [0.009100218,
+  1.555465754] at every measured straddle row BELOW G
+  (3.23e9 <= t <= 2.79e10);  data-supported bound  B = 2  (margin
+  0.4445342).  The clause's t-domain (G, U_TOP) is the above-G
+  regime — the face the pending s9 run targets
+  (scripts/rh/s9_dk_above_g.py,  single 1.016e11-zero streaming
+  pass,  straddle t = G + k/2  k = 1..10  +  log-spread 1.05..2.2;
+  G itself is a true zero — the last on-disk one — so those rows
+  are provable straddles).  Part C:  3/3 Float #eval gates.
 
 ### Front page + records
 - ZetaZeroSet (B-6A): RH on the ACTUAL zero set; records leg-by-leg

@@ -19,24 +19,45 @@ the critical line,  into three pieces,  each with a face:
     bridge_eps_form  (exact,  branch-free,  no zero-free hypothesis).
   - Qwalk on (0, G]  is the W2 telescope + M6 composition  (pin
     K_pin = 2.503,  W2M5).
-  - M_true(t)  =  sum of the pair kernel Ker(g, t)  over the TRUE
-    upper-half-plane zeros  g in (G, 1e30]   minus  the RVM model
-    integral farRVM(t)  =  the true missing-tail model error at
-    height  t.  Bounding it at zero heights  (E1Clause q B)  is the
-    ONE remaining open statement of the program.
+  - The missing-tail face at height  t:  the sum of the pair
+    factor over the TRUE  upper-half-plane zeros  g in (G, 1e30]
+    minus  the RVM model integral.  Two conventions,  one face:
+      pairLog(g, t) = log|g-t| + log(g+t) - log(g^2+1/4)
+                    = re[log(1-s/r1) + log(1-s/r2)]   (s7/s8
+                      DATA kernel;  s8's  I_far integrates it)
+      Ker(g, t)     = pairLog(g, t) + (1/2)/(g^2+1/4)
+                    (engine Efull convention;  the extra term is
+                      re[s/r1+s/r2],  t-independent)
+    M_wp(q, t) = the face on BOTH sides with pairLog  (the s8-
+    measured quantity —  s8's M(t) IS M_wp,  computed as the zeta-
+    residual  EPS + Qeng - I_far - log c).  M_true(q, t) = the
+    same face with Ker on both sides = M_wp + a t-independent
+    shift  (the true-side shift is proven,  m_true_true_side_shift).
+    E1Clause quantifies over M_wp  at the STRADDLE rows  in
+    (G_LAST, U_TOP).  Bounding it  (E1Clause q B)  is the  ONE
+    remaining open statement of the program.
 
 DATA FACE  (s8,  505 rows of the re-issue-696 ledger,  dps-50
-oracle):   0.009100218 <= M_true(t) <= 1.555465754  at every
-measured zero-height row  (3.23e9 <= t <= 2.79e10),  flat within
-windows,  edge-driven between.  Data-supported bound:  B = 2
-(margin 0.4445342).
+oracle):   0.009100218 <= M_wp(t) <= 1.555465754  at every
+measured STRADDLE row  (3.23e9 <= t <= 2.79e10,  |k| <= 12,
+t = g + k/2  at true zero heights  g),  flat within windows,
+edge-driven between,  drift law  M ~= 1.242 (t/G)^2.256.
+The measured rows sit BELOW G_LAST;  the clause's  t-domain
+(G_LAST, U_TOP)  is the above-G regime —  the face the pending
+s9 run targets.  Data-supported bound:  B = 2  (margin
+0.4445342).
 
 WHAT THIS MODULE CONTAINS:
-  - DEFINITIONS:  farRVM,  farZeros,  M_true,  zeroHeight,
-    E1Clause  (the named clause),  the s8 Float data constants.
+  - DEFINITIONS:  farRVM  (Ker-face model integral),  farRVMwp
+    (pairLog-face model integral = s8's  I_far),  farZeros,
+    M_true  (Ker face),  M_wp  (pairLog face = the data face),
+    convTerm / pairLog / ker_split,  straddleRow,  E1Clause
+    (the named clause,  on  M_wp),  the s8 Float data constants.
   - LEAN-PROVEN GLUE:  the farZeros membership/pair-uniqueness
     facts  (each conjugate pair is counted exactly once,  from the
-    ZeroSet axioms conj + nonReal  only),  the line form of
+    ZeroSet axioms conj + nonReal  only),  ker_split +
+    m_true_true_side_shift  (the Ker/pairLog conventions differ
+    by a t-independent shift,  true side exact),  the line form of
     |zeta| = |mainFac| |xiz|  (MainBridge zeta_eq_main_xi +
     norm_mul,  no nonzero exception),  and  if_E1_and_walk  (the
     residual program:  E1Clause + the four legs  ->  RH,  a pure
@@ -62,7 +83,7 @@ set_option linter.style.header false
 
 namespace E1C
 
-open B0 W2K MainBridge Set Finset
+open Real B0 W2K MainBridge Set Finset
 
 /- The pinned far window  (s7/s8):  (G_LAST, U_TOP].  -/
 def G_LAST : ℝ := 30001045999.981975555
@@ -95,26 +116,100 @@ noncomputable def farRVM (t : ℝ) : ℝ :=
 noncomputable def farZeros (q : ZeroSet) : Finset ℂ :=
   (B0.sliceFin q U_TOP uTopPos).filter (fun ρ => G_LAST < ρ.im)
 
-/-- M_true at height `t`:  the true far-window tail product (pair
-    kernel over the true upper zeros in (G, U_TOP])  minus  the RVM
-    model  =  the true missing-tail model error.  -/
+/- M_true at height `t`  (ENGINE convention:  Ker pair factor =
+    re[log(1-s/r1)+log(1-s/r2) + s/r1+s/r2]):  the true far-window
+    tail sum  (Ker  over the true upper zeros  in  (G, U_TOP])
+    minus  the Ker-face RVM model  farRVM.  =  M_wp  (the data
+    face)  plus a t-independent shift  (m_true_true_side_shift +
+    farRVMConvShift).  -/
 noncomputable def M_true (q : ZeroSet) (t : ℝ) : ℝ :=
   (farZeros q).sum (fun ρ => Ker (ρ.im) t) - farRVM t
 
-/-- A zero height of `q`:  a height  t  at which a true zero sits
-    (its conjugate pair shares the height,  nonReal keeps it off
-    the axis).  -/
-def zeroHeight (q : ZeroSet) (t : ℝ) : Prop :=
-    ∃ ρ ∈ q.Z, |(ρ.im : ℝ)| = t
+/-- The s7/s8 data kernel:  the exact real pair factor
+    re[log(1 - s/r1) + log(1 - s/r2)]  at  s = 1/2 + it,  r1  and
+    r2  the conjugate pair at height  g  (closed form;  the s7/s8
+    I_far kernel —  this is the kernel the DATA integrates).  -/
+noncomputable def pairLog (g t : ℝ) : ℝ := log |g - t| + log (g + t) - log (g * g + 1 / 4)
 
-/-- THE E1 CLAUSE  (the single open statement of the program,
-    named):  the missing-tail face  M_true  is bounded by `B`  at
-    every zero height in the far window.  Data face:  s8,  505
-    rows,  B = 2  supported  (min 0.009100218,  max 1.555465754;
-    margin 0.4445342).  -/
+/-- The convergence-factor term  re[s/r1 + s/r2]  =  (1/2)/(g^2+1/4);
+    t-independent.  Engine pair convention:  Ker = pairLog + convTerm.  -/
+noncomputable def convTerm (g : ℝ) : ℝ := (1 / 2) / (g * g + 1 / 4)
+
+theorem ker_split (g t : ℝ) : Ker g t = pairLog g t + convTerm g := by
+  unfold Ker pairLog convTerm
+  ring
+
+theorem convTerm_pos (g : ℝ) : 0 < convTerm g := by
+  unfold convTerm
+  apply div_pos (by norm_num)
+  nlinarith [sq_nonneg g]
+
+/-- The s7/s8 model integral in the DATA convention  (I_far,RVM):
+    int_{G_LAST}^{U_TOP}  pairLog(g, t) Rho(g)  dg.  -/
+theorem farRVMwp_measurable (t : ℝ) :
+    Measurable (fun g : ℝ => pairLog g t * Rho g) := by
+  dsimp only [pairLog, Rho]
+  ring_nf
+  measurability
+
+noncomputable def farRVMwp (t : ℝ) : ℝ :=
+  ∫ g in G_LAST..U_TOP, pairLog g t * Rho g
+
+/-- M_wp:  the DATA face of the missing-tail error  (s7/s8
+    convention:  pairLog kernel on the true side and the RVM model
+    side).  s8's  M(t)  is exactly this quantity,  computed as the
+    zeta-residual  EPS + Qeng - I_far - log c  (s7 c theorem;  the
+    true zero set never has to be enumerated above  G).  -/
+noncomputable def M_wp (q : ZeroSet) (t : ℝ) : ℝ :=
+  (farZeros q).sum (fun ρ => pairLog (ρ.im) t) - farRVMwp t
+
+/- Engine-convention alias  (Ker = pairLog + convTerm  on both
+   sides).  M_true = M_wp + a t-independent shift:  the true-side
+   part of the shift is the theorem  m_true_true_side_shift  below;
+   the model-side part is  farRVMConvShift  (by integral linearity
+   —  not separately formalized).  The clause itself is stated on
+   M_wp  (the measured face),  so no transfer is needed.  -/
+theorem convShift_measurable : Measurable (fun g : ℝ => convTerm g * Rho g) := by
+  dsimp only [convTerm, Rho]
+  measurability
+
+noncomputable def farRVMConvShift : ℝ :=
+  ∫ g in G_LAST..U_TOP, convTerm g * Rho g
+
+/-- The true-side Ker/pairLog split:  the engine-convention true
+    sum equals the data-convention true sum plus the t-independent
+    convergence sum.  -/
+theorem m_true_true_side_shift (q : ZeroSet) (t : ℝ) :
+    (farZeros q).sum (fun ρ => Ker (ρ.im) t) =
+      (farZeros q).sum (fun ρ => pairLog (ρ.im) t) +
+        (farZeros q).sum (fun ρ => convTerm (ρ.im)) := by
+  have h1 : (farZeros q).sum (fun ρ => Ker (ρ.im) t) =
+              (farZeros q).sum (fun ρ => pairLog (ρ.im) t + convTerm (ρ.im)) := by
+    apply Finset.sum_congr rfl
+    intro ρ _
+    exact ker_split (ρ.im) t
+  rw [h1, Finset.sum_add_distrib]
+
+/-- A straddle row of the quantized detector  (S3a convention):
+    t  =  g + k/2  at a true zero height  g  and a nonzero integer
+    offset  k,  and  t  is itself not a zero height  (self-pair
+    exclusion:  at a true zero height the true pair factor  |1-s/r1|
+    of the zero itself  vanishes,  so the missing-tail face is
+    singular there —  the program's clause lives at the detuned
+    rows).  The s8 data face measured  |k| <= 12  (505 rows).  -/
+def straddleRow (q : ZeroSet) (t : ℝ) : Prop :=
+    (∃ (ρ : ℂ) (k : ℤ), ρ ∈ q.Z ∧ k ≠ 0 ∧ t = ρ.im + (k : ℝ) / 2) ∧
+      (∀ (ρ : ℂ), ρ ∈ q.Z → t ≠ ρ.im)
+
+/- THE E1 CLAUSE  (the single open statement of the program,
+    named):  the missing-tail face  M_wp  is bounded by `B`  at
+    every straddle row in the far window  (G_LAST, U_TOP).  Data
+    face:  s8,  505 rows below G,  B = 2  supported  (min
+    0.009100218,  max  1.555465754,  margin  0.4445342);  the
+    above-G clause domain is the pending s9 face.  -/
 def E1Clause (q : ZeroSet) (B : ℝ) : Prop :=
-    ∀ (t : ℝ), G_LAST < t → t < U_TOP → zeroHeight q t →
-      |M_true q t| ≤ B
+    ∀ (t : ℝ), G_LAST < t → t < U_TOP → straddleRow q t →
+      |M_wp q t| ≤ B
 
 /- The s8 data face  (dps-50 oracle:  tmp/s8_m_true_sample.jsonl,
     505 rows of scripts/rh/out_day052c_696/points.jsonl).  -/
@@ -221,3 +316,4 @@ theorem if_E1_and_walk (q : ZeroSet) (hz : ZetaZeroSet.ZetaLike q)
 #eval s8_Bcand - s8_Mmax
 
 end E1C
+
