@@ -60,47 +60,81 @@ reduces,  on the walk side,  to the pointwise clause
 with K a uniform O(1) constant  (the E1 restatement:  S bounded
 at the zeros).
 
-## 1b.  Structural decode of the squeeze margin  (2026-10-13,
-        from the 505-point ledger itself)
+## 1b.  Structural decode of the squeeze margin  (2026-10-13/14,
+        resolved at true single-zero resolution)
 
   One arithmetic pass over  (Kabs,  zeta,  residf)  per ledger
   row showed,  at ALL 505 certified points  (22 windows):
 
       Kfull (zero-product reconstruction) / zeta(1/2+it)
-          =  - c(x)      (negative real,  phase pi,  c > 0)
+          =  - c(t)      (negative real,  phase pi,  c > 0)
 
-  to >= 7 digits,  c(x) constant inside each window  (spread
-  ~ 1e-5)  and slowly x-dependent across the band  (c =
-  0.9909 at 3.23e9  ...  c = 0.2111 at 2.79e10,  collapsing
-  near G_LAST = 3.0001e10).  Hence
+  to >= 7 digits.  Hence
 
-      residf = (1 + c(x)) |zeta|,      mnew = dev/(1 + c(x))
-              ~ 1/(1 + c(x)),
+      residf = (1 + c(t)) |zeta|,      mnew = dev/(1 + c(t))
+              ~ 1/(1 + c(t)),
   with dev ~ 1 exactly  (the straddle window is empty:  
-  R_closed ~ O(1/g) ~ 3e-10;  Bdev ~ 5e-32)  and  pb ~ 1e-24.
+  R_closed ~ O(1/g) ~ 3e-10;  Bdev ~ 5e-32)  and  pb ~ 1e-24;
+  the margin is a pure READOUT of the identity ratio  c(t).
 
-  Consequences:
-    1.  The margin is STRUCTURALLY t-independence inside every
-        window  (assembly noise floor ~ 1e-5).  The 505-point
-        flatness  (deltas ~ 3e-4)  and the band rise
-        0.502 -> 0.826  are the exact prediction  of
+  TWO-SCALE structure of  c(t)  (measured,  s3 ledger-
+  reconstruction,  gated 9.6e-9 against the certified ledger
+  at all 18 anchor rows;  la/ar bit-exact re-evaluation;  
+  re/im exact window correction + exact sawtooth;  dps-30
+  quadrature verified against the u-space tanh-sinh 
+  reference  (mp.quad 400-node log-quad and 1e6-point u-grid
+  agree to 1e-3 on the 1.29e9 exponent)):
+
+    (a)  WINDOW-CONSTANT part:  c is constant to ~3e-6 
+        across the window at the 0.5 ledger sampling  (the 
+        smooth parts -- lm, la, quad, smooth re -- cancel 
+        in the identity to 1e-5);  c varies smoothly across 
+        the band  (c = 0.9909 at 3.23e9  ...  c = 0.2111 
+        at 2.79e10,  collapsing near G_LAST = 3.0001e10), 
+        giving the band rise  mnew 0.502 -> 0.826  =  
         1/(1 + c(x)).
-    2.  The "tension"  (S rough,  margin flat,  forensics
-        3.10)  is RE-SCOPED:  the margin does not track S  --
-        it is the t-independence certificate of the
-        zero-product identity,  modulo the window-constant
-        factor  -c(x).
-    3.  The squeeze is a genuine zero-exclusion certificate:
-        an off-line zero inside a window  (offset d)  would
-        bend the ratio off the negative-real locus by a
-        relative ~ O((d/delta_g)^2)  >= ~1e-2  against the
-        1e-5 noise floor.
-    4.  The single-zero sweeps  (day056 engine,  s3
-        reconstruction)  now test the structural prediction:
-        |dm| ~ 1e-9 .. 1e-5  at the 0.025 step  (flat by
-        construction,  not by zero luck).  E1  (S at zero
-        heights)  is NOT measured by the margin  --  it is
-        measured by the A2 walk  (per-gap increments).
+    (b)  ZERO-SCALE wiggle:  at the true 0.025 step  (one 
+        zero-spacing)  c(t) wiggles:  |dm| median 4.4e-3, 
+        p99 8.7e-2,  max 1.7e-1  (band-wide,  357 steps)  
+        --  an attenuated readout of the zero-scale S-flow 
+        of the discrete product.  S itself at the same 
+        scale:  |dS| median 0.08,  mean 0.25,  max 1.9 per 
+        step  (twin steps);  net S change +9.5 .. +12.5 
+        over the ~3-unit grids  (= ~1 per zero,  as
+        defined).  The 505-point "flatness"  (max 3.2e-4 
+        at the 0.5 step)  was a SAMPLING ARTIFACT:  the 
+        0.5 step is 20 zero-spacings  and averages the 
+        wiggle out.
+
+  DOOR DECISION  (the question:  "is the margin flat at 
+  zero scale?"):  DOOR B  --  the margin is NOT flat at 
+  true single-zero resolution;  it carries zero-scale 
+  structure  (the S-flow of the identity).  The 505 
+  flatness was the 0.5-step artifact the door question 
+  suspected.
+
+  The program's endgame is UNCHANGED by this:  the flat 
+  O(1)-at-zero-heights clause was never the squeeze margin 
+  --  it is E1  (|DN| <= K at zero heights  =  S = O(1) 
+  at the zeros),  open unconditionally,  refuted in the 
+  limit under RH  (P1 zero-weighted CLT:  S at zero-
+  weighted heights ~ sqrt(loglog T)/pi,  unbounded;  P2 
+  zero-scale oscillation).  The squeeze remains what it 
+  always was:  a zero-EXCLUSION certificate  (an off-line 
+  zero at offset d in a window lifts the margin by ~ 
+  (d/(t-g))^2 * c/(1+c):  d = 0.1 -> +3.7e-2 at the band 
+  head,  against the 0.5-step certificate floor 3e-4,  
+  ~100x above noise)  plus the Efull identity  (now known 
+  exactly:  Kfull = -c(t) zeta,  c(t) as above).
+
+  Artifacts:  scripts/rh/s3_ledger_recon_margin_sweep.py,  
+  scripts/rh/s3_interpret.py;  outputs  tmp/s3_ledger_
+  recon_margin_sweep_summary.md,  tmp/s3_interpret.md.  
+  (The day056 engine sweep was stopped for cost  --  ~4 h 
+  re-stream per grid point;  the s3 ledger-anchored 
+  reconstruction is the stricter check,  since la/ar match 
+  the engine bit-exactly and its gate is 100x tighter than 
+  the engine's own Bexp budget.)
 
 ## 2.  What (CL) IS, in classical terms
 
@@ -232,15 +266,22 @@ either direction in the cited literature.
     scale RvM + A1G-6 rebase (S1Point).
   - Data-verified:  near side to 3e10 (505-point margin < 1,
     precision layer).
-  - DECODED (2026-10-13):  the squeeze identity holds as
-    Kfull = -c(x) zeta at every certified point;  the margin
-    is structurally flat  (section 1b);  its role is zero-
-    exclusion at offset-band resolution,  not an S probe.
+  - DECODED + MEASURED (2026-10-13/14):  the squeeze identity
+    holds as  Kfull = -c(t) zeta  at every certified point;  
+    c(t) is window-constant to 3e-6 (smooth cancellation) 
+    plus a zero-scale wiggle  (|dm| median 4.4e-3,  p99 
+    8.7e-2,  max 1.7e-1 per 0.025 step,  band-wide)  --  
+    the margin's 505-point "flatness" was a 0.5-step 
+    sampling artifact  (section 1b,  s3 data).  Door B 
+    (margin carries zero-scale structure:  the S-flow of 
+    the identity).
   - Open (the one clause):  (CL) / E1,  uniform O(1) at zero
-    heights  =  S = O(1) at the zeros.
+    heights  =  S = O(1) at the zeros.  UNCHANGED by the 
+    door result:  E1 is the walk/count clause,  not the 
+    margin.
   - Refuted in the limit under RH:  P1 + P2  (+ P5 context,
     classical omegas).
-  - Empirical structural confirmation running:  day056 + s3
-    (predict |dm| ~ 1e-9 .. 1e-5 at the 0.025 step).
-  - Queued:  the closed form of  c(x)  (the explicit factor of
-    the Efull identity;  a one-line theorem once identified).
+  - Queued:  the closed form of  c(t)  (the explicit factor 
+    of the Efull identity;  now measured exactly:  window-
+    constant part + zero-scale wiggle;  a one-line theorem 
+    once the wiggle's carrier is named).

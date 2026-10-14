@@ -27,17 +27,20 @@ WHY THIS EXISTS
   stream:
     re(t)  = re(t_s) + sum_{|g-t|<1} [k_g(t) - k_g(t_s)]
              (near-zero log-kernel window;  far drift < 1e-8)
-    im(t)  = im(t_s) + pi * (nlt(t) - nlt(t_s))
-             (exact sawtooth;  far drift < 2e-7)
-    la/ar  piecewise-linear between adjacent ledger rows
-             (smooth;  error < 1e-9)
-  plus  lm (closed form),  Qrem/Qext (closed-form 400-node
-  quadrature,  per point),  zeta (mpmath dps-30).
+    im(t)  = im(t_s) + pi * (nlt(t) - nlt(t_s)) + sum (t-t_s)/(g^2+1/4)
+             (exact sawtooth + exact smooth-im window;  far
+              drift < 2e-7)
+    la/ar  BIT-EXACT re-evaluation of the engine's own
+             _prod_budget_day034 (M.GN,  1e7 zeros,  f64)
+             (no interpolation)
+  plus  lm (closed form),  Qrem/Qext (closed-form 120-node
+  quadrature,  per point,  dps-30),  zeta (mpmath dps-30).
 
 GATES (before any grid row is trusted)
-  At the 481 ledger rows inside the three anchor windows:
-    |mnew_recon(t_s) - mnew_ledger(t_s)|  <  1e-6
-  (recon at t_s uses the row's own recorded parts exactly).
+  At the ledger rows inside the three anchor windows:
+    |mnew_recon(t_s) - mnew_ledger(t_s)|  <  1e-5
+  (recon at t_s uses the row's own recorded parts exactly;
+   1e-5 = 10x the 7.6e-6 f64 ulp of the stored im ~ 3.3e10)
 
 OUTPUT
   tmp/s3_ledger_recon_margin_sweep.jsonl  (per grid point)
@@ -56,6 +59,8 @@ import time
 
 import numpy as np
 from mpmath import mp
+
+import day023_p11c_1e7 as M
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, "..", ".."))
@@ -160,41 +165,33 @@ def recon_parts(g, tf, zeros, la_ar_lut):
 
 
 class LaArLUT:
-    def __init__(self, rows):
-        self.ts = [r["t"] for r in rows]
-        self.las = [float(r["p"]["la"]) for r in rows]
-        self.ars = [float(r["p"]["ar"]) for r in rows]
+    """Bit-exact copy of day037._prod_budget_day034 (M.GN, f64).
+       Returns (la, ar) at any t  --  no interpolation."""
 
-    def tf(self, t):
-        ts = self.ts
-        if t <= ts[0]:
-            return self.las[0], self.ars[0]
-        if t >= ts[-1]:
-            return self.las[-1], self.ars[-1]
-        # binary search
-        lo, hi = 0, len(ts) - 1
-        while hi - lo > 1:
-            mid = (lo + hi) // 2
-            if ts[mid] <= t:
-                lo = mid
-            else:
-                hi = mid
-        a, b = ts[lo], ts[hi]
-        w = (t - a) / (b - a)
-        return (self.las[lo] * (1 - w) + self.las[hi] * w,
-                self.ars[lo] * (1 - w) + self.ars[hi] * w)
+    @staticmethod
+    def tf(tf):
+        gv = M.GN
+        A = tf * tf + 0.25
+        Bv = 1.0 / (0.25 + gv * gv)
+        inner = 1.0 - A * Bv
+        la = float(np.sum(0.5 * Bv + np.log(np.abs(inner))))
+        ar = float(tf * float(np.sum(Bv)) - math.pi * float(np.sum(gv < tf)))
+        return la, ar
 
 
 def re_im_at(g, t_s, re_s, im_s, tf, zeros):
     """re(t), im(t) from baseline (t_s, re_s, im_s):
-       re:  near-window log-kernel difference (window 1.0
+       re:  near-window log-kernel difference (window 1.5
             around t and around t_s;  far drift < 1e-8);
-       im:  exact sawtooth  pi * (nlt(t) - nlt(t_s))  (far
-            drift < 2e-7)."""
-    # near window: zeros within 1.0 of t or t_s
+       im:  exact sawtooth  pi * (nlt(t) - nlt(t_s))  plus the
+            exact smooth-im window  (t-t_s)/(g^2+1/4);
+            the far-window smooth part  (tf-t_s)*sum_far
+            < 8e-7  (documented,  negligible)."""
+    # near window: zeros within 1.5 of t or t_s
     win = [vv for vv in zeros
-           if abs(vv - tf) < 1.0 or abs(vv - t_s) < 1.0]
+           if abs(vv - tf) < 1.5 or abs(vv - t_s) < 1.5]
     d = 0.0
+    dim = 0.0
     cnt = 0
     for vv in win:
         u1 = vv * vv - tf * tf
@@ -212,7 +209,8 @@ def re_im_at(g, t_s, re_s, im_s, tf, zeros):
             cnt += 1
         elif tf < vv <= t_s:
             cnt -= 1
-    return re_s + d, im_s + math.pi * cnt
+        dim += (tf - t_s) / (vv * vv + 0.25)
+    return re_s + d, im_s + math.pi * cnt + dim
 
 
 def mnew_at(g, tf, re, im, la, ar, qrem, qext, dps=30):
@@ -249,8 +247,8 @@ def quad_both(tf, dps):
     s = mp.mpc(0.5, mp.mpf(repr(tf)))
     f = _kint(s)
     lo = repr(G_LAST)
-    rem = quad_section(f, lo, REMHI, 400, dps)
-    ext = quad_section(f, REMHI, REMHI2, 400, dps)
+    rem = quad_section(f, lo, REMHI, 120, dps)
+    ext = quad_section(f, REMHI, REMHI2, 120, dps)
     return rem, ext
 
 
@@ -271,20 +269,25 @@ def main():
     del mm
     print("G_LAST = %.6e" % G_LAST, flush=True)
 
-    xs = load_ledger()
-    cand = sorted(xs.keys())
-    anchors = [cand[0], min(cand, key=lambda x: abs(x - 1e10)), cand[-1]]
-
     rows_out = []
     summ = ["# s3 ledger-reconstruction single-zero margin sweep", ""]
     gate_ok = True
     max_cc = 0.0
 
+    xs = load_ledger()
+    cand = sorted(xs.keys())
+    full = [x for x in cand
+            if sum(1 for r in xs[x]
+                   if abs(r["t"] - r["g"]) <= 1.5 + 1e-9) >= 6]
+    anchors = [full[0], min(full, key=lambda x: abs(x - 1e10)), full[-1]]
+    summ.append("anchors (narrow-window >= 6 ledger rows): "
+                + ",  ".join("%.4e" % a for a in anchors))
+    print(summ[-1], flush=True)
+
     for x in anchors:
         win_rows = [r for r in xs[x] if abs(r["t"] - r["g"]) <= 1.5 + 1e-9]
         g = win_rows[0]["g"]
         zeros = zero_window(g, half=3.0)
-        lut = LaArLUT(win_rows)
         rowmap = {round(r["t"], 9): r for r in win_rows}
 
         # -------- GATE: reproduce the ledger rows --------
@@ -293,18 +296,19 @@ def main():
         for r in win_rows:
             tfs = float(r["t"])
             re_s = float(r["p"]["re"]); im_s = float(r["p"]["im"])
-            la, ar = lut.tf(tfs)
+            la, ar = LaArLUT.tf(tfs)
             qrem, qext = quad_both(tfs, 30)
             m = mnew_at(g, tfs, re_s, im_s, la, ar, qrem, qext, dps=30)
             d = abs(m["mnew"] - float(r["p"]["mnew"]))
             max_cc = max(max_cc, d)
             cc.append((tfs, float(r["p"]["mnew"]), m["mnew"], d))
-        ok = all(d < 1e-6 for *_, d in cc)
+        ok = all(d < 1e-5 for *_, d in cc)
         gate_ok = gate_ok and ok
         summ.append("anchor x=%.6e: GATE over %d ledger rows: %s "
                     "(max |dmnew| = %.3e, %.1fs)"
                     % (x, len(cc), "PASS" if ok else "FAIL",
                        max_cc, time.time() - t0))
+        print(summ[-1], flush=True)
         for (tfs, ml, mr, d) in cc:
             rows_out.append(dict(x=x, g=g, t=tfs, role="gate",
                                  mnew_recon=mr, mnew_ledger=ml,
@@ -313,8 +317,8 @@ def main():
             summ.append("  GATE FAIL -- grid discarded for this anchor.")
             continue
 
-        # -------- GRID: 0.025 step --------
-        grid = [g + STEP * j for j in range(-N_J, N_J + 1)]
+        # -------- GRID: 0.025 step,  midpoints (never t == g) --------
+        grid = [g + STEP * (j + 0.5) for j in range(-N_J, N_J)]
         base = min(win_rows, key=lambda r: abs(r["t"] - g))
         t_s = float(base["t"]); re_s = float(base["p"]["re"])
         im_s = float(base["p"]["im"])
@@ -322,8 +326,8 @@ def main():
         ms = []
         for tf in grid:
             re, im = re_im_at(g, t_s, re_s, im_s, tf, zeros)
-            la, ar = lut.tf(tf)
-            qrem, qext = quad_both(tf, 25)
+            la, ar = LaArLUT.tf(tf)
+            qrem, qext = quad_both(tf, 30)
             m = mnew_at(g, tf, re, im, la, ar, qrem, qext, dps=30)
             ms.append(m)
         dt = time.time() - t0
@@ -352,6 +356,7 @@ def main():
         summ.append("")
         summ.append("## x = %.6e   grid %d pts in %.1f s"
                     % (x, len(grid), dt))
+        print("anchor x=%.6e grid done in %.1f s" % (x, dt), flush=True)
         summ.append("- |dmnew| per 0.025 step:  %s" % fmt(stats(dm)))
         summ.append("- |dresidf| per step:       %s" % fmt(stats(dres)))
         summ.append("- |dzabs| per step:         %s" % fmt(stats(dz)))
@@ -367,13 +372,15 @@ def main():
 
     summ.insert(2, "")
     summ.insert(3, "RECONSTRUCTION GATE vs certified ledger:  "
-                   + ("PASS (max |dmnew| = %.3e < 1e-6)" % max_cc
+                   + ("PASS (max |dmnew| = %.3e < 1e-5)" % max_cc
                       if gate_ok else "FAIL (max |dmnew| = %.3e)"
                       % max_cc))
     summ.append("")
     summ.append("DECISION RULES (docs/SOLUTION-SHAPE.md):")
-    summ.append("- |dmnew| median/p99 <= ~1e-4 at the 0.025 step while |dS| ~ 0.25:  Door A alive.")
-    summ.append("- |dmnew| rough (>= ~1e-2) and/or big steps aligned with S crossings: Door B.")
+    summ.append("- |dmnew| median/p99 <= ~1e-4 at the 0.025 step while |dS| ~ 0.25:  "
+                "structural flatness (Door A alive).")
+    summ.append("- |dmnew| rough (>= ~1e-2) and/or big steps aligned with S crossings: "
+                "margin tracks zero-scale structure (Door B).")
 
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     with open(OUT, "w") as fo:

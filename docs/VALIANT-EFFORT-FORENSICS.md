@@ -341,8 +341,8 @@ Pre-registered readings (day034/docstring, inherited):
         S stays fully Gaussian at zero-weighted points  (RH-
         conditional for the barrier support;  the unconditional
         complex-CLT half  (T1.1/C1.3)  already covers  Im log
-        zeta with the restricted  2/(k+2)  support).  Con-  
-        sequences:  (a)  the  S-level  flat-at-zeros  clause
+        zeta with the restricted  2/(k+2)  support).
+        Consequences:  (a)  the  S-level  flat-at-zeros  clause
         is refuted in the limit  (P1  + P2  +  classical  omegas,
         all mutually consistent with the day054 data);  (b)
         by  Prop 1.5  the leading  sqrt(loglog)  fluctuation
@@ -531,6 +531,116 @@ Pre-registered readings (day034/docstring, inherited):
   this session)  supplies the exact wire,  so the S-
   sensitivity of the margin is now a PROVEN computable
   quantity,  not an assertion.
+
+  [ADJUDICATED -- section 3.11:  the experiment was run as
+  the s3 ledger-reconstruction sweep;  the FIRST branch
+  fired:  the margin carries zero-scale structure  (see
+  3.11(4)).]
+
+### 3.11  The squeeze identity decoded,  and the single-zero
+          door adjudicated  (DOOR B)
+  (1)  THE IDENTITY.  One arithmetic pass over  (Kabs,
+       zeta,  residf)  per ledger row  (505 points,  22
+       windows)  shows
+           Kfull / zeta(1/2+it)  =  -c(t),  c(t) > 0 real,
+       at ALL 505 certified points  (phase exactly pi  to
+       >= 7 digits).  Hence  residf = (1+c(t))|zeta|  and
+       mnew = dev/(1+c(t)) ~ 1/(1+c(t))  (dev ~ 1  exactly
+       -- the straddle is empty of zeros by construction,
+       R_closed ~ 3e-10,  Bdev ~ 5e-32;  pb ~ 1e-24).
+       The margin is a PURE READOUT of the identity ratio;
+       the 505 band rise  0.502 -> 0.826  is exactly
+       1/(1+c(x))  with  c = 0.9909 (3.23e9)  ...  0.2111
+       (2.79e10)  collapsing near G_LAST = 3.0001e10.
+  (2)  THE RECONSTRUCTION  (s3,  scripts/rh/s3_ledger_
+       recon_margin_sweep.py).  Kfull rebuilt at any t
+       from the ledger's own recorded parts  (re, im at
+       the nearest row)  plus corrections:  la/ar  BIT-
+       EXACT re-evaluation of the engine's _prod_budget_
+       day034 over M.GN  (verified:  max diff 0.0 against
+       the ledger rows);  re = row-re + near-window log-
+       kernel difference  (window 1.5);  im = row-im +
+       pi-sawtooth + exact smooth-im window;  quadrature
+       (G_LAST, 1e18] + (1e18, 1e30]  120 log-nodes
+       dps-30;  zeta dps-30;  dev over the 500-d grid.
+       GATE:  all 18 ledger rows of the three anchors
+       (3.23e9,  7.54e9,  2.79e10)  reproduced to
+       max |dmnew| = 9.6e-9 < 1e-5  (100x tighter than
+       the engine's own Bexp budget 3.9e-4).
+  (3)  THE QUADRATURE  (a near-miss worth recording).  The
+       far integral
+           int_{G_LAST}^{1e30} bracket(g) (ln g/2pi) dg
+       =  -1.2929983e9  (window A,  t ~ 3.2e9):  the
+       integrand is O(2e9)/ln-unit at the lower limit
+       (h(u) ~ t^2 e^{-u} (u/2pi)^2),  so O(1e9) values
+       are EXPECTED.  Verified three ways:  mp.quad 400-
+       node log-quad  (the engine's exact call)  gives
+       -1292998320.49;  mp.quad tanh-sinh dps-35 on clean
+       two-point u-intervals  gives -1292998324.50;  a
+       1e6-point u-grid trapezoid  gives -1292998230.52.
+       All agree to 1e-3 absolute on the 1.29e9 exponent.
+       TWO TRAPS  (for the record):  integrating in ln-
+       space instead of g-space  (wrong measure:  the RVM
+       density is dN = (ln g/2pi) dg,  not
+       (ln g/2pi) dln g)  gives -0.02;  and a complex128
+       g-linear trapezoid over 15 octaves  gives 10x-
+       1000x garbage.
+  (4)  THE DOOR  (the named experiment of 3.10,  first
+       branch).  At the true 0.025 step  (one zero-
+       spacing;  357 steps,  three ~3-unit windows),  the
+       margin is ROUGH:  |dm| median 4.4e-3,  p99 8.7e-2,
+       max 1.7e-1  (per-window medians 7.0e-3 / 5.1e-3 /
+       5.8e-5;  means ~1.1e-2).  S at the same scale:
+       |dS| median 0.08,  mean 0.25,  max 1.9  (twin-
+       zero steps);  net S change +9.5 .. +12.5 over the
+       ~3-unit grids  (= ~1 per zero,  by definition).
+       The 505-point "flatness"  (max 3.2e-4 at the 0.5
+       step)  is a SAMPLING ARTIFACT:  the 0.5 step is 20
+       zero-spacings and averages the wiggle out.
+       Alignment of the top margin steps with S-crossing
+       steps is WEAK  (0-2 of 5  per anchor)  --  the
+       margin is an ATTENUATED low-pass of the zero-scale
+       S-flow  (via the identity ratio  c(t)),  not a
+       replica of it.
+  (5)  CONSEQUENCES.
+       (a)  The 3.8/3.10 "tension"  resolves:  S rough at
+           zero scale  (measured)  AND margin rough at
+           zero scale  (measured)  --  correlated,  no
+           tension;  the margin's zero-scale wiggle IS
+           the S-flow of the discrete product,  absorbed
+           into the identity ratio  c(t)  by the Efull
+           identity.
+       (b)  The program's one open clause is UNCHANGED:
+           E1 / (CL)  =  |DN| <= K uniform at zero heights
+           =  S = O(1) at the zeros  --  open
+           unconditionally  (3.8 citations),  refuted in
+           the limit under RH  (P1 zero-weighted CLT;
+           P2 zero-scale oscillation;  the measured |dS|
+           mean 0.25 per 0.025 step at 3e10 sits inside
+           P2's oscillation bound).  The squeeze was a
+           zero-EXCLUSION certificate all along  (an off-
+           line zero at offset d lifts the margin by ~
+           (d/(t-g))^2 . c/(1+c):  d = 0.1  ->  +3.7e-2,
+           ~100x the 0.5-step certificate floor 3e-4),
+           not a flat-clause carrier.
+       (c)  DOOR B is the adjudication:  the 505-level
+           "flat clause" hypothesis  (margin structurally
+           flat at zeros)  is REFUTED at true resolution;
+           the re-scoped verified-theorem statement
+           stands:  RH verified to 3e10  (data + wire +
+           squeeze as zero-exclusion),  the far-side
+           counts O(log t)-constrained  (A1Growth),  and
+           the margin's growth shape  (window-constant
+           1/(1+c(x))  plus a zero-scale S-flow wiggle of
+           measured amplitude)  as the explicit sub-RH
+           content.
+       (d)  Queued,  not load-bearing:  the closed form of
+           c(t)  (the explicit factor of the Efull
+           identity:  window-constant part + zero-scale
+           wiggle)  --  a one-line theorem once the
+           wiggle's carrier  (the product's own S-flow)
+           is named and the window-constant part matched
+           to the kernel normalization.
 
 ## 4. What connects to what (the composition map)
 

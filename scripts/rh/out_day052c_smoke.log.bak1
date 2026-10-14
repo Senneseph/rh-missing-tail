@@ -1,0 +1,167 @@
+SELFTEST(a): budget containment (day034 verbatim)
+  tail[stored==true]: err_re=1.118e-12 B_re=2.111e-11 True | err_im=2.065e-15 B_im=9.397e-14 True
+  tail[true=stored+0.5ulp]: err_re=1.115e-12 B_re=2.111e-11 True | err_im=2.026e-15 B_im=9.397e-14 True
+  prod[stored==true]: err_la=1.183e-12 B_la=2.222e-11 True | err_ar=6.233e-13 B_ar=3.979e-12 True
+  prod[true=stored+0.5ulp]: err_la=1.163e-12 B_la=2.222e-11 True | err_ar=6.224e-13 B_ar=3.979e-12 True
+SELFTEST(a): PASS
+SELFTEST(d): nearest_zero low-band anchor -> 3232170976.112194538 PASS
+SELFTEST_CORE ok=True
+day052c: in-hand ledger points = 505  (nominal grid 29 anchors x 24 k = 696;  never-in-hand 191),  dup_tg_mismatches=0, extra=0
+  never-in-hand k=-8 x=8.139e+09
+  never-in-hand k=-7 x=8.139e+09
+  never-in-hand k=-6 x=8.139e+09
+  never-in-hand k=-5 x=8.139e+09
+  never-in-hand k=-4 x=8.139e+09
+  never-in-hand k=-3 x=8.139e+09
+  never-in-hand k=-2 x=8.139e+09
+  never-in-hand k=-1 x=8.139e+09
+  never-in-hand k=+1 x=8.139e+09
+  never-in-hand k=+2 x=8.139e+09
+  never-in-hand k=+3 x=8.139e+09
+  never-in-hand k=+4 x=8.139e+09
+  never-in-hand k=+5 x=8.139e+09
+  never-in-hand k=+6 x=8.139e+09
+  never-in-hand k=+7 x=8.139e+09
+  never-in-hand k=+8 x=8.139e+09
+  never-in-hand k=+9 x=8.139e+09
+  never-in-hand k=+10 x=8.139e+09
+  never-in-hand k=+11 x=8.139e+09
+  never-in-hand k=+12 x=8.139e+09
+  never-in-hand k=-12 x=8.79e+09
+  never-in-hand k=-11 x=8.79e+09
+  never-in-hand k=-10 x=8.79e+09
+  never-in-hand k=-9 x=8.79e+09
+  never-in-hand k=-8 x=8.79e+09
+  never-in-hand k=-7 x=8.79e+09
+  never-in-hand k=-6 x=8.79e+09
+  never-in-hand k=-5 x=8.79e+09
+  never-in-hand k=-4 x=8.79e+09
+  never-in-hand k=-3 x=8.79e+09
+  never-in-hand k=-2 x=8.79e+09
+  never-in-hand k=-1 x=8.79e+09
+  never-in-hand k=+1 x=8.79e+09
+  never-in-hand k=+2 x=8.79e+09
+  never-in-hand k=+3 x=8.79e+09
+  never-in-hand k=+4 x=8.79e+09
+  never-in-hand k=+5 x=8.79e+09
+  never-in-hand k=+6 x=8.79e+09
+  never-in-hand k=+7 x=8.79e+09
+  never-in-hand k=+8 x=8.79e+09
+  ...t=3.232e+09 tail sweep 17% (500 pieces)
+  ...t=3.491e+09 tail sweep 17% (500 pieces)
+  ...t=3.77e+09 tail sweep 17% (500 pieces)
+  ...t=3.232e+09 tail sweep 17% (500 pieces)
+  ...t=3.77e+09 tail sweep 17% (500 pieces)
+  ...t=3.491e+09 tail sweep 17% (500 pieces)
+  ...t=4.072e+09 tail sweep 17% (500 pieces)
+  ...t=3.77e+09 tail sweep 17% (500 pieces)
+  ...t=3.491e+09 tail sweep 17% (500 pieces)
+  ...t=4.072e+09 tail sweep 17% (500 pieces)
+  ...t=3.232e+09 tail sweep 17% (500 pieces)
+  ...t=3.232e+09 tail sweep 17% (500 pieces)
+  ...t=4.397e+09 tail sweep 17% (500 pieces)
+  ...t=3.491e+09 tail sweep 17% (500 pieces)
+  ...t=3.232e+09 tail sweep 33% (1000 pieces)
+  ...t=3.491e+09 tail sweep 33% (1000 pieces)
+  ...t=3.77e+09 tail sweep 33% (1000 pieces)
+  ...t=3.77e+09 tail sweep 33% (1000 pieces)
+  ...t=3.232e+09 tail sweep 33% (1000 pieces)
+  ...t=4.072e+09 tail sweep 33% (1000 pieces)
+  ...t=3.232e+09 tail sweep 33% (1000 pieces)
+  ...t=3.491e+09 tail sweep 33% (1000 pieces)
+  ...t=3.77e+09 tail sweep 33% (1000 pieces)
+  ...t=3.491e+09 tail sweep 33% (1000 pieces)
+  ...t=3.232e+09 tail sweep 33% (1000 pieces)
+  ...t=4.072e+09 tail sweep 33% (1000 pieces)
+  ...t=4.397e+09 tail sweep 33% (1000 pieces)
+  ...t=3.491e+09 tail sweep 33% (1000 pieces)
+  ...t=3.232e+09 tail sweep 50% (1500 pieces)
+  ...t=3.491e+09 tail sweep 50% (1500 pieces)
+  ...t=3.232e+09 tail sweep 50% (1500 pieces)
+  ...t=3.491e+09 tail sweep 50% (1500 pieces)
+  ...t=3.232e+09 tail sweep 50% (1500 pieces)
+  ...t=3.77e+09 tail sweep 50% (1500 pieces)
+  ...t=3.491e+09 tail sweep 50% (1500 pieces)
+  ...t=3.77e+09 tail sweep 50% (1500 pieces)
+  ...t=3.77e+09 tail sweep 50% (1500 pieces)
+  ...t=4.072e+09 tail sweep 50% (1500 pieces)
+  ...t=4.397e+09 tail sweep 50% (1500 pieces)
+  ...t=3.232e+09 tail sweep 50% (1500 pieces)
+  ...t=3.491e+09 tail sweep 50% (1500 pieces)
+  ...t=4.072e+09 tail sweep 50% (1500 pieces)
+  ...t=3.232e+09 tail sweep 66% (2000 pieces)
+  ...t=3.491e+09 tail sweep 66% (2000 pieces)
+  ...t=3.232e+09 tail sweep 66% (2000 pieces)
+  ...t=3.491e+09 tail sweep 66% (2000 pieces)
+  ...t=3.491e+09 tail sweep 66% (2000 pieces)
+  ...t=3.232e+09 tail sweep 66% (2000 pieces)
+  ...t=4.072e+09 tail sweep 66% (2000 pieces)
+  ...t=3.77e+09 tail sweep 66% (2000 pieces)
+  ...t=3.77e+09 tail sweep 66% (2000 pieces)
+  ...t=3.491e+09 tail sweep 66% (2000 pieces)
+  ...t=3.77e+09 tail sweep 66% (2000 pieces)
+  ...t=3.232e+09 tail sweep 66% (2000 pieces)
+  ...t=4.072e+09 tail sweep 66% (2000 pieces)
+  ...t=4.397e+09 tail sweep 66% (2000 pieces)
+  ...t=3.232e+09 tail sweep 83% (2500 pieces)
+  ...t=3.491e+09 tail sweep 83% (2500 pieces)
+  ...t=3.232e+09 tail sweep 83% (2500 pieces)
+  ...t=3.491e+09 tail sweep 83% (2500 pieces)
+  ...t=3.491e+09 tail sweep 83% (2500 pieces)
+  ...t=3.232e+09 tail sweep 83% (2500 pieces)
+  ...t=3.491e+09 tail sweep 83% (2500 pieces)
+  ...t=4.072e+09 tail sweep 83% (2500 pieces)
+  ...t=3.77e+09 tail sweep 83% (2500 pieces)
+  ...t=3.77e+09 tail sweep 83% (2500 pieces)
+  ...t=3.232e+09 tail sweep 83% (2500 pieces)
+  ...t=4.072e+09 tail sweep 83% (2500 pieces)
+  ...t=3.77e+09 tail sweep 83% (2500 pieces)
+  ...t=4.397e+09 tail sweep 83% (2500 pieces)
+  ...t=3.232e+09 tail sweep 99% (3000 pieces)
+  ...t=3.491e+09 tail sweep 99% (3000 pieces)
+PT x=3.232e+09 k=-10 t=3232170971.11219 mnew=0.502277603 mcert=0.502164243 flag=0 (235.5 min)
+  ...t=3.232e+09 tail sweep 99% (3000 pieces)
+  ...t=3.491e+09 tail sweep 99% (3000 pieces)
+  ...t=3.491e+09 tail sweep 99% (3000 pieces)
+  ...t=3.232e+09 tail sweep 99% (3000 pieces)
+  ...t=3.77e+09 tail sweep 99% (3000 pieces)
+  ...t=4.072e+09 tail sweep 99% (3000 pieces)
+  ...t=3.491e+09 tail sweep 99% (3000 pieces)
+  ...t=3.77e+09 tail sweep 99% (3000 pieces)
+  ...t=4.072e+09 tail sweep 99% (3000 pieces)
+  ...t=3.77e+09 tail sweep 99% (3000 pieces)
+  ...t=4.397e+09 tail sweep 99% (3000 pieces)
+  ...t=3.232e+09 tail sweep 99% (3000 pieces)
+PT x=3.232e+09 k= -9 t=3232170971.61219 mnew=0.502276122 mcert=0.502162439 flag=0 (239.6 min)
+PT x=3.491e+09 k=-11 t=3490744648.81855 mnew=0.502655517 mcert=0.502530080 flag=0 (240.1 min)
+PT x=3.491e+09 k= -9 t=3490744649.81855 mnew=0.502658493 mcert=0.502537269 flag=0 (240.4 min)
+PT x=3.232e+09 k=-11 t=3232170970.61219 mnew=0.502275363 mcert=0.502161387 flag=0 (240.5 min)
+PT x=3.491e+09 k=-10 t=3490744649.31855 mnew=0.502657507 mcert=0.502533519 flag=0 (240.7 min)
+PT x=3.491e+09 k=-12 t=3490744648.31855 mnew=0.502658534 mcert=0.502536889 flag=0 (241.4 min)
+PT x=3.77e+09 k=-10 t=3770004221.66975 mnew=0.503105194 mcert=0.502975172 flag=0 (241.1 min)
+PT x=4.072e+09 k=-11 t=4071604559.44571 mnew=0.503623624 mcert=0.503476956 flag=0 (241.5 min)
+PT x=3.77e+09 k=-11 t=3770004221.16975 mnew=0.503093180 mcert=0.502943733 flag=0 (241.5 min)
+PT x=4.072e+09 k=-12 t=4071604558.94571 mnew=0.503625755 mcert=0.503485398 flag=0 (243.3 min)
+PT x=3.77e+09 k=-12 t=3770004220.66975 mnew=0.503104424 mcert=0.502974028 flag=0 (243.0 min)
+PT x=4.397e+09 k=-12 t=4397332924.04375 mnew=0.504236091 mcert=0.504084972 flag=0 (244.0 min)
+PT x=3.232e+09 k=-12 t=3232170970.11219 mnew=0.502276003 mcert=0.502161398 flag=0 (244.0 min)
+  ...t=4.397e+09 tail sweep 17% (500 pieces)
+  ...t=3.232e+09 tail sweep 17% (500 pieces)
+  ...t=4.749e+09 tail sweep 17% (500 pieces)
+  ...t=4.072e+09 tail sweep 17% (500 pieces)
+  ...t=3.77e+09 tail sweep 17% (500 pieces)
+  ...t=5.129e+09 tail sweep 17% (500 pieces)
+  ...t=4.397e+09 tail sweep 17% (500 pieces)
+  ...t=4.749e+09 tail sweep 17% (500 pieces)
+  ...t=3.491e+09 tail sweep 17% (500 pieces)
+  ...t=3.77e+09 tail sweep 17% (500 pieces)
+  ...t=4.397e+09 tail sweep 33% (1000 pieces)
+  ...t=3.232e+09 tail sweep 33% (1000 pieces)
+  ...t=4.749e+09 tail sweep 33% (1000 pieces)
+  ...t=4.072e+09 tail sweep 33% (1000 pieces)
+  ...t=3.77e+09 tail sweep 33% (1000 pieces)
+  ...t=5.129e+09 tail sweep 33% (1000 pieces)
+  ...t=4.397e+09 tail sweep 33% (1000 pieces)
+  ...t=3.491e+09 tail sweep 33% (1000 pieces)
+  ...t=4.749e+09 tail sweep 33% (1000 pieces)
+  ...t=3.77e+09 tail sweep 33% (1000 pieces)

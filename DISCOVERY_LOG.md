@@ -8733,3 +8733,74 @@ commit,  Apache-2.0,  cited):
       flatness prediction (the identity,  not the zeros,
       drives the margin)  --  expected outcome on both,
       ~1e-5 max |dm|.
+
+## 2026-10-14  SINGLE-ZERO DOOR ADJUDICATED:  DOOR B -- the margin
+                 carries zero-scale structure;  the 505 "flatness"
+                 was a 0.5-step sampling artifact
+
+  * Full-throttle owner order,  continued.  The s3 ledger-
+    reconstruction sweep  (engine-free,  anchored on the
+    certified 505-point ledger)  completed:  360 grid
+    points  (3 anchors x 120,  0.025 step  = one zero-
+    spacing)  + 18 gate rows.  GATE PASS at every anchor:
+    max |mnew_recon - mnew_ledger| = 9.6e-9  (100x tighter
+    than the engine's own Bexp budget 3.9e-4).  la/ar
+    bit-exact re-evaluation  (max diff 0.0  vs ledger).
+  * RESULT -- the margin is ROUGH at true single-zero
+    resolution  (Door B,  the first branch of the 3.10
+    named experiment):
+        |dm| per 0.025 step:  median 4.4e-3,  p99 8.7e-2,
+        max 1.7e-1   (band-wide,  357 steps)
+        |dS| per 0.025 step:  median 0.08,  mean 0.25,
+        max 1.9  (twin steps);  net S +9.5..+12.5 over
+        ~3 units  (~1 per zero,  by definition).
+    The 505-point "flatness"  (max 3.2e-4)  was measured
+    at the 0.5 step  = 20 zero-spacings:  a sampling
+    artifact that averages the wiggle out.
+  * MECHANISM (now decoded,  forensics 3.11):  the margin
+    is a pure readout of the Efull identity ratio
+        Kfull / zeta = -c(t)   (negative real,  all 505
+    points,  phase pi to >= 7 digits),
+        mnew ~ 1/(1 + c(t)).
+    c(t) has a window-constant part  (smooth cancellation
+    of lm/la/quad/re to 1e-5;  the band rise 0.502 ->
+    0.826  =  1/(1+c(x)),  c = 0.9909 ... 0.2111)  PLUS a
+    zero-scale wiggle  --  the S-flow of the discrete
+    product  (the margin wiggles at the same zero scale
+    where S wiggles;  attenuated,  weak alignment with S-
+    crossings:  0-2 of 5  top steps per anchor).
+  * NEAR-MISS RECORDED (forensics 3.11(3)):  the far-
+    quadrature value  -1.2929983e9  was chased as a
+    possible mp.quad bug for an hour.  It is CORRECT:
+    the integrand is O(2e9)/ln-unit at the lower limit
+    (h ~ t^2 e^{-u} (u/2pi)^2).  Verified three
+    independent ways  (engine 400-node log-quad,  tanh-
+    sinh dps-35 clean u-intervals,  1e6-pt u-grid)  --
+    agree to 1e-3 absolute on the 1.29e9.  The traps
+    that produce nonsense:  ln-space instead of g-space
+    measure  (returns -0.02),  complex128 g-linear
+    trapezoid over octaves  (10x-1000x garbage).
+  * IMPLICATIONS:
+    (1)  The 3.8/3.10 "tension"  dies:  S rough at zero
+        scale AND margin rough at zero scale  --
+        correlated,  no tension.  S3/S4 (P1/P2) remain
+        the limit refutation of any flat-O(1) clause.
+    (2)  The one open clause is UNCHANGED:  E1  (|DN| <=
+        K at zero heights  =  S = O(1) at the zeros)  --
+        open unconditionally,  refuted in the limit under
+        RH.  The squeeze was a zero-EXCLUSION
+        certificate all along  (off-line zero at offset
+        d lifts the margin ~ (d/(t-g))^2 c/(1+c):
+        d = 0.1  ->  +3.7e-2  vs the 3e-4 floor)  --
+        now with the identity known exactly.
+    (3)  The sub-RH verified-theorem statement gains one
+        ingredient:  the margin's growth shape  (window-
+        constant 1/(1+c(x))  + zero-scale S-flow wiggle
+        of measured amplitude).
+  * The day056 engine sweep (14 workers) was stopped for
+    cost  (~4 h re-stream per grid point  ->  days,  vs
+    s3's 66 min for the whole question with a stricter
+    gate).  s3 is the record;  artifacts in scripts/rh/
+    (s3_ledger_recon_margin_sweep.py,  s3_interpret.py)
+    and tmp/  (s3_ledger_recon_margin_sweep_summary.md,
+    s3_interpret.md).
