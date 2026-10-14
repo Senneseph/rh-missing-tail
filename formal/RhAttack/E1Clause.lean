@@ -173,6 +173,12 @@ theorem convShift_measurable : Measurable (fun g : ℝ => convTerm g * Rho g) :=
   dsimp only [convTerm, Rho]
   measurability
 
+-- dps-50 oracle:  6.17675270883e-11  (mpmath quad,  exact integrand;
+-- the true-side twin  (sum of  convTerm  over the unknown true zeros
+-- in the window)  equals this within  O(model count error x
+-- 1/(2 G^2)  = 5.56e-22/zero)  --  the full Ker/pairLog shift is
+-- thus  < 1e-10  in magnitude:  fourteen orders below the  B = 2
+-- data margin,  immaterial to the clause.)
 noncomputable def farRVMConvShift : ℝ :=
   ∫ g in G_LAST..U_TOP, convTerm g * Rho g
 
