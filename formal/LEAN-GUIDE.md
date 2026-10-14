@@ -26,6 +26,9 @@ numeric record this guide wires against).
            (oracle: scripts/rh/day006_e7a_action_identity.py)
            MainBridge.lean 3/3 Float re-evaluations (E7a-style;
            the O(1e-6) residual C/2 + Ex_total ~= -1.2e-7 at f64)
+           E1Clause.lean 3/3 Float re-evaluations (E7a-style;
+           s8 M_true min/max/B-margin at f64, dps-50 oracle
+           tmp/s8_m_true_sample.jsonl)
   Gate D:  engine invariants in scripts/rh/day037_h1_3e10.py (do not
            modify): Kfull self-test (bad_asm guard), B-field bounds,
            the 400-node adjacent-section quad pair (day049e fix:
@@ -38,7 +41,7 @@ mathlib rev v4.33.1 in `formal/lakefile.toml`.  Do not float these.
 
 ## 1. The map (module lines)
 
-72 modules in `formal/RhAttack/`, ~38.6k lines.  Read top-down as lines;
+73 modules in `formal/RhAttack/`, ~38.8k lines.  Read top-down as lines;
 imports go downward only.
 
 ### Line Ap (ported, Apache-2.0) — argument principle, RVM stack
@@ -150,6 +153,27 @@ the RVM density the quad scripts integrate against.
   Line-level theorems take only t > 0 -- NO zero-free hypothesis
   anywhere.  Part C: f64 data gates (C_float, EPS_float), E7a
   style.
+
+### Line E1Clause -- the single open clause, named (E1: S = O(1))
+- E1Clause: the missing-tail face of the program, named and pinned.
+  Definitions: G_LAST / U_TOP (the s7/s8 far window
+  (3.000104599998e10, 1e30]), farRVM (the RVM model integral of the
+  pair kernel Ker . Rho over the window), farZeros (upper-half-plane
+  true zeros in the window, from B0.finite), M_true (the true
+  far-window tail sum minus farRVM = the missing-tail model error),
+  zeroHeight, and E1Clause q B: |M_true q t| <= B at every zero
+  height in the window.  The E1 CLAUSE itself is the one remaining
+  open statement of the program (NOT proven here or anywhere in the
+  base); this module names it.  Lean-proven glue: farZeros
+  membership + pair-uniqueness (each conjugate pair counted exactly
+  once, from ZeroSet conj + nonReal only), zeta_abs_line (|zeta| =
+  |mainFac| |xiz| on the critical line, MainBridge zeta_eq_main_xi +
+  norm_mul, no nonzero exception), if_E1_and_walk (the residual
+  program: E1Clause + the four P12 legs -> RH on any actual-set zero
+  set, pure composition through ZetaZeroSet.rhIfMarginZeta).  Data
+  face (s8, 505 rows, dps-50 oracle): M_true in [0.009100218,
+  1.555465754] at every measured zero height; data-supported bound
+  B = 2 (margin 0.4445342).  Part C: 3/3 Float #eval gates.
 
 ### Front page + records
 - ZetaZeroSet (B-6A): RH on the ACTUAL zero set; records leg-by-leg
@@ -315,16 +339,22 @@ s = 1/2 + i t; a zero pair is 1/2 +/- i g (g > 0); G = 3.0001045999e10
   sampling artifact; the margin carries zero-scale structure);
   D5 (3e11) dropped from the active queue (locked); the program
   reduces to ONE clause: S = O(1) at zero heights (E1) — whose
-  numeric face is now M_true(t) of the c theorem above.
+  numeric face is now M_true(t) of the c theorem above, and whose
+  formal face is E1Clause (e1clause.lean): the clause is named, the
+  data face supports B = 2, and the residual program is the one
+  line if_E1_and_walk.
 
 
 ## 6. Where the open content lives
 
 - E1 (S = O(1) at zero heights):  formal face = S4Gap (the own-
   regime squeeze failure) + P12Uniform (the hypotheses) +
-  ZetaZeroSet (the actual-zero obligations).  Numeric face:
-  M_true(t) = EPS - log c(t) sampled at zero heights (ledger rows
-  at t = g + k/2 straddles give c at detector scale).
+  ZetaZeroSet (the actual-zero obligations) + E1Clause (the clause
+  named:  M_true(q, t) = true far-window pair-kernel sum minus the
+  RVM model integral farRVM;  E1Clause q B  =  |M_true| <= B  at
+  zero heights in (G_LAST, U_TOP];  B = 2 data-supported,  s8).
+  Numeric face:  M_true(t) = EPS - log c(t) sampled at zero heights
+  (ledger rows at t = g + k/2 straddles give c at detector scale).
 - The main-term identity of section 2 IS the Lean bridge:
   MainBridge (main_term_bridge + bridge_eps_form, exact; the
   O(1e-6) is the named residual EPS, float-gated).

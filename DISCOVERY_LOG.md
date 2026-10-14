@@ -8973,3 +8973,76 @@ commit,  Apache-2.0,  cited):
     formal/LEAN-GUIDE.md (MainBridge line + convention row);
     scratch probes preserved in /tmp/mb_probes/ (moved, not
     deleted).
+
+
+## 2026-10-14  E1Clause.lean GATED: the single open clause is named in Lean (0 errors, sorry-free, lake build green)
+
+  WHAT:  the program's one open clause (E1:  S = O(1) at zero
+  heights) is now a NAMED LEAN STATEMENT with its entire formal
+  neighborhood.  New module formal/RhAttack/E1Clause.lean (223
+  lines), gated with the same 34-fix one-at-a-time method as
+  MainBridge:  `lake build RhAttack.E1Clause` green (8733 jobs),
+  0 errors, 0 warnings, sorry-free;  3/3 Part-C Float #eval gates
+  re-evaluate the s8 data face at f64 against the dps-50 oracle.
+
+  CONTENT:
+    - Definitions pinned:  G_LAST / U_TOP (the s7/s8 far window),
+      farRVM (the RVM model integral of the W2Pair kernel . Rho
+      over the window;  measurability proven,  integrability not
+      claimed),  farZeros (upper-half-plane TRUE zeros in the
+      window, from B0.finite),  M_true (true far-window pair-kernel
+      sum minus farRVM = the missing-tail model error),  zeroHeight,
+      and E1Clause q B:  |M_true q t| <= B  at every zero height in
+      (G_LAST, U_TOP].
+    - E1Clause is the ONE remaining open statement of the program;
+      it is NOT proven here (nor anywhere in the base).  The module
+      names it and proves everything that composes around it.
+    - Lean-proven glue:  farZeros membership + CONJUGATE-PAIR
+      UNIQUENESS (farZeros counts each conjugate pair exactly once
+      —  only the ZeroSet conj + nonReal axioms used);
+      zeta_abs_line  (|zeta(1/2+it)| = |mainFac| |xiz|  on the
+      critical line for t > 0,  from MainBridge.zeta_eq_main_xi +
+      Complex.norm_mul;  no nonzero exception anywhere);
+      if_E1_and_walk  (the residual program:  E1Clause q 2 + the
+      four P12 structural legs  ->  RH q  on any actual-set zero
+      set;  pure one-line composition through
+      ZetaZeroSet.rhIfMarginZeta).
+    - Data face (locked in the module,  Gate C 3/3):  s8's 505
+      measured zero-height rows give  0.009100218 <= M_true <=
+      1.555465754;  data-supported bound  B = 2  with margin
+      0.4445342.
+
+  NEW PINNED-SHAPE FINDINGS (v4.33.1,  added to the MainBridge
+  method note):
+    - Bare `norm_num` does not unfold plain defs:  `theorem gPos :
+      0 < G_LAST := by norm_num` fails on `G_LAST := 30001...`;
+      needs `dsimp only [G_LAST]` first.  (#eval still works on the
+      literal.)
+    - `dsimp [d]` with no `at` site rewrites only the GOAL;  a
+      def buried in a hypothesis needs `at h`.
+    - `dsimp ... at h.1` is a parse error ("unexpected term");
+      extract the component into its own have first.
+    - Conjugation is `star` (and `simp` knows `(star z).im = -z.im`);
+      there is no field `z.conj` and no global `conj` function on
+      C.
+    - In this pin `Set.mem_inter_iff` has ALL arguments explicit
+      (x, s, t);  the short form `Set.mem_inter_iff.mp h` is a
+      "projection on a non-constant" parse, and even parenthesized
+      it needs the three explicit args.
+    - MainBridge / ZetaZeroSet are NAMESPACED:  their definitions
+      are MainBridge.mainFac, MainBridge.zeta_eq_main_xi,
+      ZetaZeroSet.ZetaLike,  ...  (autoImplicit silently turns
+      misspelled names into bound variables —  the error reads
+      "Function expected at X").
+    - `Set.Finite.mem_toFinset` is the toFinset membership iff
+      (protected;  takes the Finite proof explicitly).
+
+  CONSEQUENCE:  the full residual program is now one named clause
+  with a data-supported constant:  E1Clause q 2  +  four structural
+  legs  ->  RH q  (if_E1_and_walk,  pure composition).  Both faces
+  of E1 (Lean clause + numeric M_true) live in the base.  No RH
+  claim is made;  E1Clause is open and named.
+
+  * Artifacts:  formal/RhAttack/E1Clause.lean (new,  gated);
+    formal/LEAN-GUIDE.md (73-module map,  Gate C 3/3,  E1Clause
+    line,  sections 5/6 updated).
