@@ -1026,10 +1026,23 @@ Pre-registered readings (day034/docstring, inherited):
       (ap4)  --  34  ported  files  (about  7.5k  lines),
       all  from  the  cited  Apache-2.0  source  commit
       e1a4e65  +  mathlib,  zero  sorry,  build  green.
-      The  remaining  CITED  inputs  of  A1Growth.lean
-      (the  Trudgian  II  explicit  S-bound,
-      A1G-5)  can  be  re-based  on  the  now-PROVEN
-      explicit  Backlund form  in  a  follow-up.
+      **ap5  (in-house,  no  borrow):**  RhAttack/
+      S1Point.lean  proves  the  POINT-scale  RvM  with
+      O(log T)  error:  |N(T) - f_pt T|  ≤  C·log T  at
+      good  heights  T  ≥  T0,  under  the  single  named
+      input  C9  (no  nontrivial  zero  on  (0,4]:  first
+      zero  14.134725...).  This  is  the  classical
+      S-defect  bound  (Backlund  1918  /  Titchmarsh  9.4
+      point  form)  that  A1G-6  used  to  CITE:  the
+      rebase  is  now  a  formal  theorem  --
+      S1B.rebase_a1g6_dn_form  gives  the  wire's  hSbound
+      premise  form  C·log t  +  1/t  for  the  classical
+      smooth  count  (Nas  =  f_pt).  ~450  lines
+      in-house,  zero  sorry,  all  four  rhattack  gates
+      PASS.  The  only  remaining  CITED  input  of
+      A1Growth.lean  is  the  Trudgian  II  explicit
+      S-bound  (A1G-5),  the  unconditional  frontier  by
+      design.
   D5  Push the data beyond 3e10 (the next band): the growth
       scales (1.78..2.96 at 3e10) will start to separate
       "truly O(1)" from "slowly growing"; the census of |DN|

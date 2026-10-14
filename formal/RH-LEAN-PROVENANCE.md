@@ -173,6 +173,30 @@ during the E19 pass (full text verified, not recalled from memory):
   v4.33.1. The D4 classical S-identity wire (ap1-ap4) is
   COMPLETE: proven in-house, not cited.
 
+  **ap5 (in-house, no borrow):** `RhAttack/S1Point.lean`
+  (namespace `S1B`, ~450 lines) -- the POINT-scale
+  Riemann-von Mangoldt with O(log T) error, a NEW in-repo
+  theorem (no external source; classical reference:
+  Backlund 1918 / Titchmarsh Thm 9.4 point form): for good
+  heights T >= T0, under the single named input
+  `S1B.C9NoZerosLow` (no nontrivial zero on 0 < Im <= 4;
+  first zero 14.134725... in the data layer) --
+      |N(T) - S1B.f_pt T|  <=  C * log T,
+  where f_pt T = T/(2*pi)*(log(T/2*pi) - 1) and N(T) =
+  S1B.Ncount 4 T counts all nontrivial zeros 0 < Im <= T.
+  Components: `int_log_point` (FTC anchor),
+  `int_mu_point_form` (integral of mu over [4,T] =
+  f_pt T - f_pt 4 + O(1), direct integration of the
+  Stirling field), `hc_zeta_im_bound` (the zeta half-
+  contour [4,T] is O(log T): horizontals by
+  `backlund_horizontal_at` at the explicit Jensen constant
+  CJ ~ 48.3, sigma=2 by `vertical_two`), `f_pt_4_abs_le`,
+  `point_rvM`, and **the rebase: `S1B.rebase_a1g6_dn_form`**
+  proves the wire's hSbound premise form C*log t + 1/t in
+  the classical smooth-count instantiation (Nas = f_pt) --
+  the content previously CITED under A1G-6. Zero sorry,
+  build green, all four rhattack gates PASS.
+
 - **[A1G-7] The frontier of the UNCONDITIONAL S-bound, including at
   zeros** (valiant-effort verification, all cited online during the
   pass):

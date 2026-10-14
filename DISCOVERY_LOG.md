@@ -8605,3 +8605,56 @@ commit,  Apache-2.0,  cited):
     oscillation bound is the in-data refutation;  flat
     margin deltas  =>  the clause question moves to the
     main-term  (G = C log)  side.
+
+## 2026-10-13  ap5 (in-house): point-scale RvM with O(log T) error is house-PROVEN; A1G-6 rebase formalized
+
+  * New file  formal/RhAttack/S1Point.lean  (namespace S1B,
+    ~450 lines,  NO external source --  in-house theorem,
+    built only from the ported ap1-ap4 machinery + mathlib):
+      S1B.point_rvM (hΓ : GammaFacts) (hC9 : C9NoZerosLow) :
+        ∃ C T0, ∀ T ≥ T0, GoodHeight T →
+          |(Ncount 4 T : ℝ) - f_pt T| ≤ C · log T
+    where  f_pt T = T/(2π)·(log(T/2π) − 1)  and  Ncount 4 T
+    counts ALL nontrivial zeros 0 < Im ≤ T  (by C9 none lie
+    on (0,4]).  This is the classical point-scale
+    Riemann-von Mangoldt with O(log T) error  (the S-defect
+    bound;  Backlund 1918 / Titchmarsh Thm 9.4  point form)
+    --  the last CITED classical input of the wire line is
+    now an in-repo theorem.
+  * One named input remains:  S1B.C9NoZerosLow  (no
+    nontrivial zero on 0 < Im ≤ 4;  first zero 14.134725...
+    --  numerically trivial,  certified in the data layer,
+    not decidable in Lean).  Everything else is proved:
+    winding identity  (ported ap2),  half-contour split
+    (ap3),  gamma side = int mu  (ap3),  Stirling form of mu
+    (ap3, discharged),  Backlund explicit horizontal bound +
+    vertical_two  (ap3).
+  * Components:  int_log_point  (FTC anchor  ∫_4^T
+    (1/2π)log(τ/2π) = f_pt T − f_pt 4),  int_mu_point_form
+    (direct integration of the Stirling field:  ∫_4^T μ =
+    f_pt T − f_pt 4 + O(1),  NO dyadic telescoping --  the
+    O(1/U) per-window errors are immaterial at the point
+    scale because the log terms integrate exactly),
+    hc_zeta_im_bound  (the ζ part of the half-contour [4,T]
+    is O(log T):  both horizontals by backlund_horizontal_at
+    at the explicit Jensen constant CJ ≈ 48.3,  the σ=2 side
+    by vertical_two ≤ π),  f_pt_4_abs_le  (|f_pt 4| ≤ 2,
+    explicit),  point_rvM  (assembly),  rebase_a1g6_dn_form,
+    s1_selftest_point_rvM_discharged.
+  * REBASE A1G-6:  S1B.rebase_a1g6_dn_form proves the wire's
+    hSbound premise form  |DN| ≤ C·log t + 1/t  in the
+    classical smooth-count instantiation  (Nas = f_pt)  at
+    every good height  t ≥ T0.  The only remaining CITED
+    input in A1Growth.lean is the Trudgian II explicit
+    S-bound  (A1G-5)  --  the unconditional frontier,  by
+    design not a rebase target.
+  * Gates:  lake build green  (0 errors),  all four
+    rhattack runtime gates PASS,  zero sorry in S1Point.lean.
+  * day056  (the adjudicating experiment,  forensics 3.10)
+    launched:  single-zero margin sweep at 0.025 t-steps at
+    three ledger anchors  (band head 3.23217e9,  mid 1e10,
+    top 2.788e10),  the dps-30 chain of cert_point  (no
+    engine change),  self-validated against the certified
+    dps-30 ledger mnew values at 6 ledger t's per anchor
+    (expect agreement < 1e-9;  the cross-check rows verify
+    the fast chain before the grid rows are trusted).
