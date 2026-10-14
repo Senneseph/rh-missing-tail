@@ -307,14 +307,53 @@ Pre-registered readings (day034/docstring, inherited):
   ### 3.9 The CLT line, pinned item by item (online research pass)
   The D3 surviving route (distribution line) re-surveyed against the
   2024-26 literature, each pinned paper classified:
-    P1  arXiv:2507.04150 (Minelli et al.).  CLT for log zeta on
-        the critical line WEIGHTED BY THE LOCAL STATISTICS OF THE
-        ZEROS;  complex CLT under a Fourier-support condition on
-        the test function;  for the IMAGINARY PART (the argument)
-        the support condition extends to its  NATURAL BARRIER
-        UNDER RH.  Zero-weighted + argument-side:  the closest
-        published theorem to a  "Selberg-CLT-at-the-zeros"  for
-        the argument;  RH-conditional,  asymptotic.
+    P1  arXiv:2507.04150 (Fazzari-Gerspach-Minelli),
+        read in full.  SETUP:  N_phi(t) = sum over zeros
+        of phi( (log T / 2 pi) (gamma - t) )  (the Hughes-
+        Rudnick mock zero-count),  phi even,  phi^ smooth
+        compactly supported,  eta = half-width of  supp
+        phi^  (in mean-spacing units).  Theorems:
+          T1.1  (unconditional):  for fixed h, l,  even k,
+                supp phi^  in  (-2/(k+2),  2/(k+2)),
+                (1/T) int_T^{2T} (log zeta)^h (conj)^l
+                (N_phi - phi^(0))^k dt  =  1(h=l) mu_k
+                sigma_phi^k h! (loglog T)^h + O((loglog T)^h'/2).
+                COROLLARY 1.3:  log zeta(1/2 + i tau_k) /
+                sqrt(loglog T) -> complex N(0,1)  under the
+                zero-weighted measure  dmu = |N_phi - phi^(0)|^k
+                dt / C   (the t-average is REWEIGHTED toward
+                zero-statistic fluctuations).
+          T1.2  (RH):  the IMAGINARY PART  Im log zeta = the
+                argument  (hence  pi . S)  extends to the
+                NATURAL BARRIER  supp phi^  in  (-2/k,  2/k)
+                (the full Hughes-Rudnick support).  COROLLARY
+                1.4  (RH):  pi . S(1/2 + i tau_k) /
+                sqrt((1/2) loglog T) -> N(0,1)  zero-weighted
+                (no variance suppression at the zeros).
+          PROP 1.5  (RH):  correlation  (1/T) int log zeta .
+                (N_phi - phi^(0)) dt = -phi(0)/2 + O(sqrt
+                (loglog T) / log T);  the correlation coefficient
+                decays  ~  1/sqrt(loglog T)  --  log zeta and
+                the local zero statistic are  ASYMPTOTICALLY
+                INDEPENDENT,  but only at a slow polyloglog rate.
+        ROLE FOR E19:  this IS the zero-weighted S-CLT (the
+        argument-side one):  it is a theorem,  not data,  that
+        S stays fully Gaussian at zero-weighted points  (RH-
+        conditional for the barrier support;  the unconditional
+        complex-CLT half  (T1.1/C1.3)  already covers  Im log
+        zeta with the restricted  2/(k+2)  support).  Con-  
+        sequences:  (a)  the  S-level  flat-at-zeros  clause
+        is refuted in the limit  (P1  + P2  +  classical  omegas,
+        all mutually consistent with the day054 data);  (b)
+        by  Prop 1.5  the leading  sqrt(loglog)  fluctuation
+        SURVIVES the zero-weighting (independence,  no cancel-  
+        lation),  so any flatness of the  WIRE-COMBINED  margin
+        would have to live in the SECONDARY terms  (beyond the
+        leading  Gaussian  scale)  --  exactly  the  secondary-
+        term  regime  P3/P4/P5  study;  (c)  no  effective  T0
+        (asymptotic  moment  theorem)  --  the  empirical  zero-
+        scale  margin  measurement  (day056,  section  3.10)
+        is  the  effective  counterpart.
     P2  arXiv:2510.14309 (Inoue-Kobayashi-Toma,  v2 2026).  
         Theorem 1 (RH,  EXPLICIT):  for  h in  [C/log T,
         c/loglog T],  sup_{t in [T,2T]} +/-(S(t+h)-S(t)) >=
@@ -339,33 +378,64 @@ Pre-registered readings (day034/docstring, inherited):
         zero-density (twisted GL2 family) + CLT for the
         argument over the character family.  Second template;
         the zero-density engine is the shared ingredient.
-    P5  arXiv:2511.18275 (Jerby,  v2 2025-12).  Under RH,  a
-        PROOF of Montgomery pair correlation for the zeros of
-        Z via a variational "real hall"  of sections  +
-        Skorokhod SDE with reflection at the discriminant
-        (bulk  ~  Dyson Brownian motion beta=2  ~  GUE sine
-        kernel),  invoking  "Selberg's probabilistic theory of
-        the argument S(t)"  to pass from ensemble-averaged to
-        deterministic pair correlation.  The most aggressive
-        published attempt at the full zero-side mechanism;
-        RH-conditional;  new and fast-moving,  treat as a
-        source of machinery,  not as closed consensus.
-  Reading for D3:  the flat clause  |S(gamma)| <= C (3.7)  is
-  under pressure from three independent directions now --  the
-  classical zeros-omegas (3.7,  Tsang unconditional (1/3)-power;
-  Bondarenko-Seip  sqrt scale under RH),  the quantitative
-  zero-scale oscillation under RH (P2:  S moves at the zero
-  scale by ~0.8 (1-o(1)),  by integer counting of N),  and the
-  non-degenerate sqrt(loglog) argument distribution in the
-  family direction (P3/P4).  The in-house gap-transfer
-  refutation is still a documented dead end (3.7);  the live
-  move is the zero-RESTRICTED t-direction CLT for S with an
-  effective T0:  if a non-degenerate S(gamma)/sqrt(loglog gamma)
-  limit law lands as a theorem,  the flat clause is refuted in
-  the limit by counting alone (no gap transfer needed -- the
-  statement is already at the zeros).  That theorem does not
-  yet exist in the cited literature;  P5 is the closest
-  mechanism and assumes RH.
+    P5  arXiv:2511.18275 (Jerby,  v2 2025-12),  read for
+        this  purpose.  Under  RH:  Montgomery  pair  cor-
+        relation  for  the  zeros  of  Hardy's  Z-function.  
+        Mechanism  (exact):  a  finite-dimensional  variational
+        space  of  sections  Z_N(t;a)  approximating  Z  on
+        windows  [2N,2N+2];  the  "real  hall"  RH_N  =  the
+        sections  whose  zeros  stay  real  and  simple  under
+        homotopy  --  the  coefficient  space  IS  the  ensemble;
+        any  admissible  measure  with  smooth  positive
+        density  on  it  gives,  via  a  Skorokhod  SDE  with
+        reflection  at  the  discriminant  boundary,  unfolded-  
+        zero  dynamics  equal  in  law  to  Dyson  BM  beta=2
+        in  the  bulk  -->  (modern  DBM/log-gas  universality)
+        ensemble-averaged  local  pair  correlation  ->  GUE
+        sine  kernel.  The  UPGRADE  to  the  deterministic  Z
+        zeros:  the  CANONICAL  section  Z_N(t;1)  over  distinct
+        windows  is  shown  to  behave  like  decorrelated
+        samples  of  the  GUE  ensemble  --  and  the
+        decorrelation  step  is  exactly  WHERE  "Selberg's
+        probabilistic  theory  of  S(t)"  is  invoked  (S's
+        oscillation  is  the  INPUT  mixing  mechanism,  not
+        the  OUTPUT).  D3  ROLE:  P5  is  the  zero-STATISTICS
+        side  under  RH;  with  P1  (S  stays  fully  Gaussian
+        even  under  zero-weighting,  leading-order  indepen-  
+        dence  of  S  vs  zero  statistics)  it  gives  the
+        complete  asymptotic  under-RH  picture:  BOTH  sides
+        fully  random,  no  flatness  anywhere  at  leading
+        order.  P5  does  NOT  deliver  a  zero-restricted  
+        value  distribution  for  S  itself  (none  of  P1-P5
+        does,  effectively);  it  is  new,  RH-conditional,  
+        asymptotic  (no  T0);  treat  the  main  theorem  with
+        appropriate  caution  (a  proven-MC-under-RH  claim  
+        of  this  size  will  take  time  to  settle  in  peer
+        review)  while  the  machinery  (real  hall  +  SDE-
+        reflection  +  S-mixing  upgrade)  is  a  concrete
+        in-house  source  for  the  zero-side  half  of  any
+        future  D3  formalization.
+  Reading for D3 (updated after the P1 full read):  the flat
+    clause  |S(gamma)| <= C  is refuted in the limit by theorem
+    --  P1  (zero-WEIGHTED S-CLT:  S  stays  fully  Gaussian,
+    variance  (1/2) loglog T,  at zero-weighted points;  under
+    RH  up  to  the  2/k  barrier;  unconditionally  via  the
+    complex-CLT  half  at  the  restricted  2/(k+2)  support)
+    +  P2  (zero-scale  oscillation  (1-o(1)) sqrt(c'/pi))
+    +  the  classical  zeros-omegas  (3.7).  Prop 1.5  adds the
+    mechanism  verdict:  the  leading  sqrt(loglog)  fluctuation
+    is  ASYMPTOTICALLY  INDEPENDENT  of  the  local  zero  stat-
+    istic  (correlation  ~  1/sqrt(loglog T),  slow  decay),  so
+    no  leading-order  cancellation  at  zeros  exists  to  ex-
+    plain  a  flat  clause;  any  flatness  must  be  a  second-
+    ary-term  property  of  the  specific  wire  combination.
+    What  remains  open:  (i)  the  EFFECTIVE  zero-restricted
+    t-direction  S-CLT  with  an  explicit  T0  (none  published
+    --  all  CLT  lines  are  asymptotic;  P5  is  the  closest
+    machinery  and  assumes  RH);  (ii)  whether  the  margin
+    itself  (wire-combined,  not  S  alone)  is  flat  at  zero
+    resolution  --  the  day056  single-zero  margin  sweep
+    (3.10)  is  the  empirical  adjudication  of  exactly  that.
 
 ### 3.10 Zero-scale oscillation:  P2 read in full + the measured
           zero-scale smoothness, and the single-zero test
