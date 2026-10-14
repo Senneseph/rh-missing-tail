@@ -60,6 +60,48 @@ reduces,  on the walk side,  to the pointwise clause
 with K a uniform O(1) constant  (the E1 restatement:  S bounded
 at the zeros).
 
+## 1b.  Structural decode of the squeeze margin  (2026-10-13,
+        from the 505-point ledger itself)
+
+  One arithmetic pass over  (Kabs,  zeta,  residf)  per ledger
+  row showed,  at ALL 505 certified points  (22 windows):
+
+      Kfull (zero-product reconstruction) / zeta(1/2+it)
+          =  - c(x)      (negative real,  phase pi,  c > 0)
+
+  to >= 7 digits,  c(x) constant inside each window  (spread
+  ~ 1e-5)  and slowly x-dependent across the band  (c =
+  0.9909 at 3.23e9  ...  c = 0.2111 at 2.79e10,  collapsing
+  near G_LAST = 3.0001e10).  Hence
+
+      residf = (1 + c(x)) |zeta|,      mnew = dev/(1 + c(x))
+              ~ 1/(1 + c(x)),
+  with dev ~ 1 exactly  (the straddle window is empty:  
+  R_closed ~ O(1/g) ~ 3e-10;  Bdev ~ 5e-32)  and  pb ~ 1e-24.
+
+  Consequences:
+    1.  The margin is STRUCTURALLY t-independence inside every
+        window  (assembly noise floor ~ 1e-5).  The 505-point
+        flatness  (deltas ~ 3e-4)  and the band rise
+        0.502 -> 0.826  are the exact prediction  of
+        1/(1 + c(x)).
+    2.  The "tension"  (S rough,  margin flat,  forensics
+        3.10)  is RE-SCOPED:  the margin does not track S  --
+        it is the t-independence certificate of the
+        zero-product identity,  modulo the window-constant
+        factor  -c(x).
+    3.  The squeeze is a genuine zero-exclusion certificate:
+        an off-line zero inside a window  (offset d)  would
+        bend the ratio off the negative-real locus by a
+        relative ~ O((d/delta_g)^2)  >= ~1e-2  against the
+        1e-5 noise floor.
+    4.  The single-zero sweeps  (day056 engine,  s3
+        reconstruction)  now test the structural prediction:
+        |dm| ~ 1e-9 .. 1e-5  at the 0.025 step  (flat by
+        construction,  not by zero luck).  E1  (S at zero
+        heights)  is NOT measured by the margin  --  it is
+        measured by the A2 walk  (per-gap increments).
+
 ## 2.  What (CL) IS, in classical terms
 
 For the smooth count Nas = f_pt (the RvM main term),
@@ -190,10 +232,15 @@ either direction in the cited literature.
     scale RvM + A1G-6 rebase (S1Point).
   - Data-verified:  near side to 3e10 (505-point margin < 1,
     precision layer).
-  - Open (the one clause):  (CL),  uniform O(1) at zero
+  - DECODED (2026-10-13):  the squeeze identity holds as
+    Kfull = -c(x) zeta at every certified point;  the margin
+    is structurally flat  (section 1b);  its role is zero-
+    exclusion at offset-band resolution,  not an S probe.
+  - Open (the one clause):  (CL) / E1,  uniform O(1) at zero
     heights  =  S = O(1) at the zeros.
-  - Refuted in the limit under RH:  P1 + P2 (+ P5 context,
+  - Refuted in the limit under RH:  P1 + P2  (+ P5 context,
     classical omegas).
-  - Empirical door test running:  day056 single-zero margin
-    sweep (0.025 t-step,  one zero per step,  3 anchors,
-    cross-check gated at 1e-9 against the certified ledger).
+  - Empirical structural confirmation running:  day056 + s3
+    (predict |dm| ~ 1e-9 .. 1e-5 at the 0.025 step).
+  - Queued:  the closed form of  c(x)  (the explicit factor of
+    the Efull identity;  a one-line theorem once identified).

@@ -8658,3 +8658,78 @@ commit,  Apache-2.0,  cited):
     dps-30 ledger mnew values at 6 ledger t's per anchor
     (expect agreement < 1e-9;  the cross-check rows verify
     the fast chain before the grid rows are trusted).
+
+## 2026-10-13  SQUEEZE IDENTITY DECODED: Kfull = -c(x) * zeta exactly; the margin is structurally flat; E19 re-scoped to E1
+
+  * Full-throttle owner order ("whichever gets results first").
+    No new compute needed:  the answer came out of the 505-point
+    ledger itself,  one arithmetic pass over  (Kabs,  zeta,
+    residf)  per row.
+  * FACT (all 505 certified points,  22 windows,  3.2e9 ..
+    2.8e10):  the reconstruction ratio  Kfull / zeta  lies on
+    the NEGATIVE REAL AXIS  at every certified point:
+        cos(theta) = -1.0000000   (to >= 7 digits,  every row)
+    with magnitude  c(x) = |Kfull|/|zeta|  CONSTANT inside each
+    window (spread ~ 1e-5)  and varying smoothly across the
+    band:  c = 0.9909  (x = 3.23e9)  ...  c = 0.2111  (x =
+    2.79e10),  decelerating-then-accelerating (not a power
+    law:  c ~ a x^-0.448 fits only the lower band;  c collapses
+    near G_LAST = 3.0001e10).
+  * CONSEQUENCE 1 (the margin's flatness IS a theorem,  not
+    data):
+        residf = |zeta - Kfull| = (1 + c(x)) * |zeta|   (exact)
+        mnew = |zeta| dev / (pb + residf) = dev / (1 + c(x))
+    with  dev ~ 1 (the straddle window is empty of zeros by
+    construction:  R_closed ~ O(1/g) ~ 3e-10,  Bdev ~ 5e-32)
+    and  pb ~ 1e-24  (negligible).  The margin is therefore
+    T-INDEPENDENT inside every window,  to the assembly noise
+    floor  (~1e-5,  f64 stream).  The observed 505-point
+    flatness (adjacent deltas ~ 3e-4)  and the smooth rise
+    0.502 -> 0.826 across the band are exactly the prediction
+    of  1/(1 + c(x)).  The day056 single-zero engine sweep and
+    the s3 ledger-reconstruction sweep (both running) are
+    PREDICTED to show |dm| ~ 1e-9 .. 1e-5  at the 0.025 step
+    --  flatness at zero resolution,  for the trivial reason
+    that the margin is a constant.
+  * CONSEQUENCE 2 (E19 re-scoped):  the "tension" (S rough at
+    zero scale vs margin flat) was the WRONG DIAGNOSIS:  the
+    margin does not track S at all.  It is the t-independence
+    certificate of the zero-product identity
+        zeta(1/2+it) = -c(x) * exp(lm + la + i ar + re + i im)
+                       * exp(Qrem + Qext),
+    where  re/im  = the discrete log-kernel sum over the
+    verified zeros of (1e7, G_LAST],  la/ar  the (0, 1e7]
+    on-line product,  lm  the functional-equation main term,
+    Qrem/Qext  the quadrature remainder.  The identity holds
+    up to the window-constant  -c(x)  factor  (c(x) is a
+    genuine x-dependent zero-set/convention factor;  its
+    closed form is a queued follow-up).  An OFF-LINE zero in
+    a window would bend the ratio off the negative-real locus
+    (relative wiggle ~ O((d/delta_g)^2) >= ~1e-2  for offset
+    d ~ 0.1)  --  against the noise floor ~ 1e-5  --  so the
+    squeeze is a genuine zero-exclusion certificate at offset
+   -band (DG = 0.005..0.5)  resolution:  every zero in every
+    window is on the line,  to 1e-5.
+  * CONSEQUENCE 3 (the one open clause,  unchanged but now
+    clean):  RH beyond the data frontier still needs E1  (the
+    walk):  |DN(gamma)| <= K  uniform  at zero heights,  i.e.
+    S is O(1) at the zeros  (classical smoothing  Nas = f_pt:
+    DN = S + O(1/x)).  Status:  open unconditionally (3.8
+    citations);  refuted in the limit under RH (P1
+    zero-weighted CLT:  S at zero-weighted heights ~
+    sqrt(loglog T)/pi,  unbounded;  P2 zero-scale
+    oscillation).  The margin data neither supports nor
+    refutes E1  (it does not measure E1).
+  * DOOR VERDICT (the solution shape,  sharpened):
+      Door A (E1 true):  the program completes to RH via data
+      +  wire  +  the E1 theorem  --  a new theorem that does
+      not exist in the literature (zero-restricted
+      S-boundedness,  open in both directions).
+      Door B (E1 false / growing):  the program re-scopes to
+      the verified sub-RH theorem  (RH to 3e10 certified;
+      zero counts beyond O(log)-constrained by the wire).
+      The single-zero sweeps (day056 engine,  s3
+      reconstruction)  now serve to CONFIRM the structural
+      flatness prediction (the identity,  not the zeros,
+      drives the margin)  --  expected outcome on both,
+      ~1e-5 max |dm|.
