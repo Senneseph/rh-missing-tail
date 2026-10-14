@@ -24,6 +24,8 @@ numeric record this guide wires against).
            B4.lean  16/16 float64 cross-check of the pair kernel
            E7a.lean 5/5 cross-check vs the dps-20 Python record
            (oracle: scripts/rh/day006_e7a_action_identity.py)
+           MainBridge.lean 3/3 Float re-evaluations (E7a-style;
+           the O(1e-6) residual C/2 + Ex_total ~= -1.2e-7 at f64)
   Gate D:  engine invariants in scripts/rh/day037_h1_3e10.py (do not
            modify): Kfull self-test (bad_asm guard), B-field bounds,
            the 400-node adjacent-section quad pair (day049e fix:
@@ -132,6 +134,23 @@ the RVM density the quad scripts integrate against.
   14.14, just above the first zero 14.134725...) and the d = 1/2
   edge atom.
 
+### Line MainBridge -- the main-term bridge (exact, no zero-free)
+- MainBridge: mainFac (the xi-convention main factor
+  2 / (s (s-1) GammaR s)), xiz (the xi factor (s/2)(s-1) xi(s)),
+  engine_lm (the engine Stirling main term as a complex function),
+  C_bridge = log(2 sqrt pi) - 1 - gamma/2, Ex_total, EPS.  The
+  core identity exp(engine_lm s) = mainFac s exp(s C_bridge) / 2
+  is BRANCH-FREE for 0 < s.re, s != 0, s != 1.  Theorems:
+  mainFac_reduced (pi^{s/2} / ((s-1) Gamma(s/2+1)) form),
+  zeta_eq_main_xi, contAt_tendsto_hnpunct + xiz_zero_tendsto
+  (xi(0) = 1/2 along the punctured neighborhood), log_abs_decomp
+  (Re-level log|mainFac| into elementary terms), main_term_bridge
+  (headline: (engine_lm (1/2 + it)).re = log|mainFac (1/2 + it)|
+  + C_bridge/2 - log 2,  exact), bridge_eps_form (the EPS face).
+  Line-level theorems take only t > 0 -- NO zero-free hypothesis
+  anywhere.  Part C: f64 data gates (C_float, EPS_float), E7a
+  style.
+
 ### Front page + records
 - ZetaZeroSet (B-6A): RH on the ACTUAL zero set; records leg-by-leg
   what the actual set owes the structural chain.
@@ -200,8 +219,12 @@ s = 1/2 + i t; a zero pair is 1/2 +/- i g (g > 0); G = 3.0001045999e10
       lm_re(t) = log|main_exact(t)| + log(1/2) - Ex_total  +  O(1e-6)
    i.e. the engine Stirling main term (logmain25212, DLMF 25.2.12
    form, the S1Point lean side) equals the exact xi-convention main
-   factor minus the Ex bookkeeping.  Lean-certifiable (S1Point +
-   GammaStirling atoms already exist in Ap4).
+   factor minus the Ex bookkeeping.  LEAN FACE: MainBridge proves
+   the identity EXACTLY (no O-term):  (engine_lm s).re =
+   log|mainFac s| + C_bridge/2 - log 2  for  0 < s.re  (and the
+   line form t > 0, with no zero-free hypothesis).  The measured
+   O(1e-6) is exactly EPS = C_bridge/2 + Ex_total; the Float gate
+   re-evaluates it to -1.2e-7 at f64.
 
 - VERIFIED quad identity (s7):  Q_engine(t) = I_far,RVM(t) to 2.4e-7
    absolute at t0 (engine 400-node dps-30 vs u-quad dps-40); the
@@ -302,8 +325,8 @@ s = 1/2 + i t; a zero pair is 1/2 +/- i g (g > 0); G = 3.0001045999e10
   ZetaZeroSet (the actual-zero obligations).  Numeric face:
   M_true(t) = EPS - log c(t) sampled at zero heights (ledger rows
   at t = g + k/2 straddles give c at detector scale).
-- The main-term identity of section 2 (lm = log|main_ex| + log(1/2)
-  - Ex + O(1e-6)) is the Lean-certifiable bridge not yet written as
-  a theorem (atoms exist: Ap3GammaStirling*, S1Point).
+- The main-term identity of section 2 IS the Lean bridge:
+  MainBridge (main_term_bridge + bridge_eps_form, exact; the
+  O(1e-6) is the named residual EPS, float-gated).
 - W2M6 refutes the data-free branch at the pin; the A1 clause
   (W2Beyond3/E3.2) is the universal assembly question.

@@ -8924,3 +8924,52 @@ commit,  Apache-2.0,  cited):
   open clause plus its infinity law.
   * Artifacts:  scripts/rh/s8_m_true_sample.py;  tmp/s8_m_true_
     sample.{md,jsonl};  forensics 3.12;  SOLUTION-SHAPE section 6.
+## 2026-10-14  MainBridge.lean GATED: the main-term bridge is a Lean theorem (0 errors, sorry-free, lake build green)
+
+  The Lean-certificate face of the s7 c theorem is now in the
+  base.  formal/RhAttack/MainBridge.lean (604 lines) builds clean
+  on the pin (lean 4.33.1 / mathlib v4.33.1):  `lake build
+  RhAttack.MainBridge` green, 0 errors, no sorry (the only grep
+  hit is the header comment).
+
+  CONTENT (exact, no zero-free hypothesis anywhere):
+  - mainFac s = 2 / (s (s-1) GammaR s)  (xi-convention main
+    factor),  xiz s = (s/2) (s-1) xi(s),  engine_lm s (the
+    engine Stirling main term as a complex function).
+  - Core identity exp(engine_lm s) = mainFac s exp(s C_bridge) / 2
+    is BRANCH-FREE for 0 < s.re, s != 0,1 (log/gamma principal
+    branches cancel via Gamma(1 + s/2) = (s/2) Gamma(s/2)).
+  - Headline (line form, t > 0):
+        (engine_lm (1/2 + it)).re =
+          log|mainFac (1/2 + it)| + C_bridge/2 - log 2        exact
+    and its EPS face bridge_eps_form (residual
+    EPS = C_bridge/2 + Ex_total, the measured O(1e-6)).
+  - xiz_zero_tendsto: xi(0) = 1/2 along the punctured
+    neighborhood (pole case handled by |s| >= 2m norm estimates).
+  - Part C (E7a-style f64 gates, compiled into the base):
+    C/2 + Ex_total -> -1.2e-7,  Ex_total -> 0.011548, and the
+    mirror -Ex_total -> -0.011548 at Float precision.
+
+  METHOD NOTE (for the record):  the build closed one error at a
+  time against the PINNED mathlib source (rg + #print + probes),
+  per the doc-first workflow; the latest upstream docs (Lean
+  4.35 era) were consulted online first, then corroborated in
+  .lake.  Several v4.33.1 shapes differ from memory:  Tendsto is
+  the filter-ordering prop (map f l <= l'), ContinuousAt.comp is
+  (outer, inner), Real.log_mul/log_div take *nonzero* (not
+  positivity) arguments, Real.sqrt_pos is an iff,
+  differentiableAt_riemannZeta / ofReal_log / log_inv carry
+  implicit-first signatures, norm_num `at h` closes a FALSE goal
+  when h becomes False, and simp does not unfold context-lets
+  (dsimp first).  All recorded in the pitfalls as they were hit.
+
+  CONSEQUENCE:  the program's one open clause (E1:  S = O(1) at
+  zero heights) now has BOTH faces Lean-adjacent:  the ap stack
+  (S1Point et seq.) + the exact main-term bridge.  Next data step
+  (Python, hours):  sample M_true(t) = EPS - log c(t) at zero
+  heights from the 696-row ledger -- the decisive E1 test.
+
+  * Artifacts:  formal/RhAttack/MainBridge.lean;
+    formal/LEAN-GUIDE.md (MainBridge line + convention row);
+    scratch probes preserved in /tmp/mb_probes/ (moved, not
+    deleted).
