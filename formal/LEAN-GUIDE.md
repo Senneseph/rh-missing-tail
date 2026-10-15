@@ -214,8 +214,17 @@ the RVM density the quad scripts integrate against.
   and  the  defect  law  extends:  21  deduped  rows  above  G
   obey  M = A*ln(t) + B  with  A = -25256007,  B = +523513775,
   max  residual  6704.088  (worse  row  t  =  2.2G;  far
-  4-row  part  (10G, 1000G]:  5792.878);  decade  slope
-  -5.815e7  constant  to  0.5%  across  4.5  log-decades.
+  4-row  part  (10G, 1000G]:  5792.878).
+  EXTENDED  BY  s20:  5  further  rows
+  (2e3G..1e5G)  keep  the  law  --  26
+  rows,  A  =  -2.525487e7,  B  =
+  +5.234857e8,  max  residual  7673  (to
+  -1.64e4  at  1e5G  vs  the  gated
+  constants;  no  family  break);  the
+  gate  itself  stays  on  its  21-row
+  face;  decade  slope  -5.815e7  holds
+  to  ~3e-7  relative  over  5.3
+  log-decades.
   Plunge  forensics:  the  (0.9294G,  0.94G)  transition  is
   fully  in-chain  (re  cusp  sweep  +3.75e9;  I_far  cusp
   approach  with  verified  slope  I_far'(t)  =  -2*Rho(t)*
@@ -248,16 +257,24 @@ the RVM density the quad scripts integrate against.
   zeros  by  1000G  on  the  2080-band  grid;
   +2.4e7  on  the  4240-band  grid  at  the
   same  1.4  fit)  is  grid-representative,  not
-  pinned  --  more  t-coverage  in
-  (100G,  1e5G]  would  sharpen  it.  Read:
-  the  missing  tail  is  a  BOUNDED  Rho
-  departure  in  the  first  un-certified
-  decades  above  G  (not  a  G  boundary
-  layer,  not  individual  missing  zeros,
-  not  a  pole,  not  a  kernel  failure);
-  s19  supersedes  s13's  coarse  O(1e17)
-  centroid  reading.  Not  a  clause  blocker;
-  no  RH  claim.
+  pinned.  s20  (5  leverage  rows
+  2e3G..1e5G)  +  s19b  (84  rows)
+  CLOSED  the  e-track:  the
+  representative  is  UNCHANGED  by
+  them  --  smooth  ln-t  rows  cannot
+  separate  the  e  location,  and
+  pinning  needs  non-smooth  input
+  (an  independent  far  band  census
+  above  the  frontier)  --  see  the
+  log.  Read:  the  missing  tail  is
+  a  BOUNDED  Rho  departure  in  the
+  first  un-certified  decades  above
+  G  (not  a  G  boundary  layer,  not
+  individual  missing  zeros,  not  a
+  pole,  not  a  kernel  failure);
+  s19  supersedes  s13's  coarse
+  O(1e17)  centroid  reading.  Not  a
+  clause  blocker;  no  RH  claim.
 
   THE  RE-DERIVED  CLAUSE  (v3,  GATED  in  this  module):
   T_MEAS  =  1000*G_LAST;  defect_A  =  -25256007;
