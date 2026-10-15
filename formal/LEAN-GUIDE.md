@@ -229,22 +229,35 @@ the RVM density the quad scripts integrate against.
   the  quad).  Interpretation  --  RESOLVED  BY  s19  (two-
   flank  e(g)  deconvolution,  exact  cusp-inclusive
   band  kernels,  79  rows  both  sides,  lam-
-  insensitive  min-norm  read):  the  whole  measured
-  defect  is  reproduced  to  1.4  by  a  bounded
-  e  on  (G,  1e30]  with  max|e|  =  0.0139  per
-  unit  g  =  0.36%  of  Rho  (peak  near  g  ~  4G,
-  decaying  outward);  NO  boundary  layer  at  G
-  (Int_(G,G+500]  e  ~  1e-7  --  the  near-G  delta
-  idea  is  dead);  the  cumulative  count  departure
-  reaches  ~ -8e9  zeros  by  1000G,  built  from  a
-  sub-0.5%  local  bias;  (1e5*G,  1e30]  is
-  unobservable  gauge  for  every  measured  row.
-  Read:  the  RVM  far  model  is  wrong  as  a
-  COUNT  --  a  count-level  Rho  systematic  in  the
-  first  ~1000G  above  the  certified  frontier;
+  insensitive):  the  whole  measured  defect  is
+  reproduced  to  1.4  (stable  1.34..1.55  over
+  the  grid/penalty  sweep)  by  a  bounded,
+  smooth  e  on  (G,  1e30].  STABLE  content:
+  (1)  existence  --  the  minimum  representative
+  has  max|e|  <=  0.36%  of  Rho  (2080-band
+  grid:  peak  0.0139  near  g  ~  4G;  gets
+  THINNER  with  finer  grids:  <=  2e-4  at
+  4240  bands  --  representative,  not
+  predicted);  (2)  NO  boundary  layer  at  G
+  in  every  configuration  (the  near-G  delta
+  idea  is  dead;  also  direct  from  the
+  below-G  O(1)  face);  (3)  (1e5*G,  1e30]
+  is  unobservable  gauge  for  every  measured
+  row.  The  rows  determine  M,  not  e:  the
+  specific  cumulative  (min-norm:  ~ -8e9
+  zeros  by  1000G  on  the  2080-band  grid;
+  +2.4e7  on  the  4240-band  grid  at  the
+  same  1.4  fit)  is  grid-representative,  not
+  pinned  --  more  t-coverage  in
+  (100G,  1e5G]  would  sharpen  it.  Read:
+  the  missing  tail  is  a  BOUNDED  Rho
+  departure  in  the  first  un-certified
+  decades  above  G  (not  a  G  boundary
+  layer,  not  individual  missing  zeros,
+  not  a  pole,  not  a  kernel  failure);
   s19  supersedes  s13's  coarse  O(1e17)
-  centroid  reading.  Not  a  clause  blocker;  no
-  RH  claim.
+  centroid  reading.  Not  a  clause  blocker;
+  no  RH  claim.
 
   THE  RE-DERIVED  CLAUSE  (v3,  GATED  in  this  module):
   T_MEAS  =  1000*G_LAST;  defect_A  =  -25256007;

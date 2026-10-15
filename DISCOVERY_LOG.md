@@ -9365,17 +9365,45 @@ commit,  Apache-2.0,  cited):
     sub-0.5%-of-Rho  local  bias  spread  over  the
     first  ~1000G.
 
-  READ:  the  RVM  far  model  is  wrong  as  a  COUNT:
-  the  true  far  zero  distribution  departs  from
-  Rho  by  ~1e10  cumulative  zeros  by  3e13,  as  a
-  smooth  sub-0.5%  local  density  bias  peaking  near
-  g  ~  4G,  with  the  bias  region  sitting  just
-  above  the  certified  count  frontier  (3.1e10).
-  That  departure  is  the  "missing  tail":  not  a
-  boundary  layer  at  G,  not  missing  individual
-  zeros,  not  a  pole,  not  a  kernel  failure  --
-  a  count-level  Rho  systematic  in  the  un-
-  certified  far  decades.  (s13's  O(1e17)  band
+  ROBUSINESS  (grids  and  penalties  swept  before
+  the  read  was  trusted):  the  FIT  is  stable
+  (max|res|  in  [1.34,  1.55]  across  L  =  500/
+  2000,  h  =  1/4,  n_log  =  80/160,  lam  =
+  1e2/1e8),  but  the  min-norm  representative
+  MOVES  with  the  grid:
+    2080 bands:  max|e|  =  1.39e-2,  E(1000G)  =  -7.4e9
+    2160 bands:  max|e|  =  6.36e-3,  E(1000G)  =  +4.6e9
+    4160 bands:  max|e|  =  2.11e-3,  E(1000G)  =  +3.5e8
+    4240 bands:  max|e|  = 1.72e-4,  E(1000G)  =  +2.4e7
+  so  the  specific  peak  (0.36%  of  Rho  at  4G)
+  and  the  specific  cumulative  (~8e9  by
+  1000G)  are  REPRESENTATIVE,  not  predicted:  the
+  rows  determine  M,  not  e  --  e  is  pinned
+  only  up  to  the  kernel  near-null  space  and
+  the  grid  resolution.
+
+  READ  (the  stable  content):
+    1.  EXISTENCE:  the  entire  measured  defect,
+        both  flanks,  is  reproduced  to  1.4  by  a
+        bounded,  smooth  e  on  (G,  1e30];  the
+        minimum  representative  has  max|e|  <=
+        0.36%  of  Rho  and  can  be  made
+        thinner  still  with  finer  structure.
+    2.  NO  boundary  layer  at  G  (in  every
+        configuration;  also  follows  directly
+        from  the  below-G  O(1)  face).
+    3.  The  far  region  (1e5*G,  1e30]  is
+        unobservable  gauge  for  every  measured
+        row  (t  <=  1000G).
+  So  the  "missing  tail"  is  a  BOUNDED  Rho
+  departure  somewhere  in  the  first  un-
+  certified  decades  above  G:  not  a  boundary
+  layer  at  G,  not  individual  missing  zeros,
+  not  a  pole,  not  a  kernel  failure.  Its
+  location  and  amplitude  are  NOT  yet  pinned
+  by  the  current  rows  (more  t-coverage,
+  especially  (100G,  1e5G],  would  sharpen
+  this).  (s13's  O(1e17)  band
   solve  is  the  coarse-65-band  centroid  basis
   reading  of  the  same  data,  with  rank  6  and
   residual  3.1e5;  s19's  exact-kernel  2080-band
