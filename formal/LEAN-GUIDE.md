@@ -280,7 +280,24 @@ the RVM density the quad scripts integrate against.
   v3  is  the  form  the  above-G  data  supports;
   if_E1_and_walk  composes  unchanged  from  the
   E1Clause  face  (v3  feeds  it  via  e1V3_implies_e1,  or
-  via  folding  M_defect  into  a  walk  baseline).  Nothing
+  via  folding  M_defect  into  a  walk
+  baseline).  if_E1V3_and_walk:  the  v3  TWIN  of
+  the  residual  program  (E1ClauseV3  q  7000  +
+  the  four  P12  legs  ->  RH;  same  pure
+  composition  through  rhIfMarginZeta  --  the
+  walk  baseline  fold  is  a  wire  shift,
+  since  Bwire/Mr/flo  are  generic
+  functions).  CLAUSE  SET  (documented  in
+  the  module):  below-G  face  =  E1Clause
+  q  2  (s8,  505  rows,  to  0.9294G,
+  margin  0.4445342);  above-G  face  =
+  E1ClauseV3  q  7000  ((G,  1000G],  21
+  rows,  margin  295.91);  dead  zone
+  (0.9294G,  G]  carries  the  measured
+  plunge  (s10,  in-chain  explained);  the
+  faces  are  disjoint  by  construction;
+  both  remain  named  OPEN  clauses.
+  Nothing
   in  the  gated  base  (MainBridge,  c  theorem,
   S4/P12/ZetaZeroSet)  is  affected;  no  RH  claim  is
   made.  Part  C:  3/3  Float  #eval  gates  (s8  face).
