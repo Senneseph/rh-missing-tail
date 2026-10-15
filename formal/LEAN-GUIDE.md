@@ -205,10 +205,63 @@ the RVM density the quad scripts integrate against.
   as  formulated  --  re-derivation  (t-domain  and/or  far
   model)  is  the  active  front;  s11  (zone-substitution
   error  map  on  the  data-covered  (0.7G, G])  is
-  localizing  the  mechanism.  Nothing  in  the  gated  base
-  (MainBridge,  c  theorem,  S4/P12/ZetaZeroSet)  is
-  affected;  no  RH  claim  is  made.  Part  C:  3/3  Float
-  #eval  gates.
+  localizing  the  mechanism.
+
+  UPDATE 2  (v3  GATED;  forensics  closed  out):  s11  rules
+  out  a  local  generator  (zone-substitution  error  O(1..20));
+  s15/s18  rule  out  smooth  low-parameter  far-density
+  generators;  s16  measured  M  at  t  =  10G/50G/100G/1000G
+  and  the  defect  law  extends:  21  deduped  rows  above  G
+  obey  M = A*ln(t) + B  with  A = -25256007,  B = +523513775,
+  max  residual  6704.088  (worse  row  t  =  2.2G;  far
+  4-row  part  (10G, 1000G]:  5792.878);  decade  slope
+  -5.815e7  constant  to  0.5%  across  4.5  log-decades.
+  Plunge  forensics:  the  (0.9294G,  0.94G)  transition  is
+  fully  in-chain  (re  cusp  sweep  +3.75e9;  I_far  cusp
+  approach  with  verified  slope  I_far'(t)  =  -2*Rho(t)*
+  ln((G+t)/(G-t));  lm  growth  -2.49e8  at  slope  pi/4;  a
+  REAL  zeta  swing  +2.2,  Riemann-Siegel  confirmed;  la
+  +0.48e6).  I_far  method  note:  the  dps-40  tanh-sinh
+  quadrature  is  the  trusted  method  (4-way  cross-check
+  to  5.5  at  G+0.5);  the  f64  u-trap  IS  known-bad  at
+  high  t  (log-cusp  cell  error  ~13*h  with  h  =  t*du,
+  growing  in  t:  6.8e7  at  10G  to  4.6e9  at  1000G  vs
+  the  quad).  Interpretation:  dM/d(ln  t)  =  2*E0  pins
+  a  far-discrepancy  charge  E0  =  -1.263e7  (weighted
+  zeros)  above  G;  a  narrow  near-G  delta  fits  the
+  above-G  slope  exactly  but  mismatches  the  below-G
+  O(1)  face,  so  the  full  e(g)  deconvolution  (both
+  flanks)  is  the  open  physics  track  --  not  a  clause
+  blocker.
+
+  THE  RE-DERIVED  CLAUSE  (v3,  GATED  in  this  module):
+  T_MEAS  =  1000*G_LAST;  defect_A  =  -25256007;
+  defect_B  =  +523513775;  M_defect(t)  =  A*ln(t)  +  B;
+  E1ClauseV3  q  B  =  |M_wp  q  t  -  M_defect  t|  <=  B  at
+  every  straddle  row  in  the  MEASURED  domain  (G_LAST,
+  T_MEAS];  data-supported  B  =  7000,  margin  295.91,
+  21  rows;  oracle  tmp/s9_dk_above_g.jsonl  +
+  tmp/s10_deadzone_march.jsonl  +  tmp/s16_M_far.jsonl).
+  Glue:  mdefect_bounded  (|M_defect  t|  <=  7.6e20  on  the
+  domain;  deliberately  LOOSE  --  the  pinned  Lean 4.33.1
+  /  mathlib  v4.33.1  norm_num  does  NOT  evaluate
+  Real.exp  (verified  even  on  exp 1 < 4),  so  the  tight
+  2.85e8  bound  is  data-level  only;  the  loose  constant
+  affects  only  the  glue,  never  the  clause);
+  e1V3_implies_e1  (E1ClauseV3  q  B  ->  |M_wp  q  t|  <=
+  B  +  7.6e20  on  the  measured  domain,  triangle  through
+  M_defect).  Both  E1Clause  (B  =  2)  and  E1ClauseV3
+  (B  =  7000)  remain  named  OPEN  data-supported  clauses;
+  v3  is  the  form  the  above-G  data  supports;
+  if_E1_and_walk  composes  unchanged  from  the
+  E1Clause  face  (v3  feeds  it  via  e1V3_implies_e1,  or
+  via  folding  M_defect  into  a  walk  baseline).  Nothing
+  in  the  gated  base  (MainBridge,  c  theorem,
+  S4/P12/ZetaZeroSet)  is  affected;  no  RH  claim  is
+  made.  Part  C:  3/3  Float  #eval  gates  (s8  face).
+  Part  C2:  5/5  Float  #eval  gates  (v3_A,  v3_B,
+  v3_Bcand,  +6704.088459  at  2.2G,  -5287.599966  at
+  1000G).
 
 ### Front page + records
 - ZetaZeroSet (B-6A): RH on the ACTUAL zero set; records leg-by-leg

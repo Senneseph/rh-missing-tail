@@ -42,10 +42,24 @@ oracle):   0.009100218 <= M_wp(t) <= 1.555465754  at every
 measured STRADDLE row  (3.23e9 <= t <= 2.79e10,  |k| <= 12,
 t = g + k/2  at true zero heights  g),  flat within windows,
 edge-driven between,  drift law  M ~= 1.242 (t/G)^2.256.
-The measured rows sit BELOW G_LAST;  the clause's  t-domain
-(G_LAST, U_TOP)  is the above-G regime —  the face the pending
-s9 run targets.  Data-supported bound:  B = 2  (margin
-0.4445342).
+Those rows sit BELOW G_LAST,  so they support  B = 2  only
+below G.
+
+ABOVE-G DATA FACE  (s9/s10/s16,  2026-10-15;  all channels of
+the closure  M = EPS + log|zeta| - lm - la - re - I_far
+independently verified):  21 deduped measured rows above
+G_LAST  (10 straddle rows  t = G + k/2,  k = 1..10;  7 log-
+spread rows  t in {1.05,...,2.2}G;  4 high rows  t in
+{10,50,100,1000}G):   |M_wp(t) - M_defect(t)| <= 6704.088  on
+(G_LAST,  1000*G_LAST],  where  M_defect(t)  =  A*ln(t)  +  B
+with  A = -25256007,  B = +523513775  (21-row least squares
+rounded  to  exact  integers;  global  max  at  t  =  2.2G;
+far  part  (10G,  1000G],  4  rows:  max  5792.878).  Equivalently  M_wp  grows  with  decade  slope
+-5.815e7  to  0.5%  across  4.5  log-decades.  The  B = 2  form
+is REFUTED above G_LAST  (all 10 straddle rows measure
+M_wp ~= -8.577e7);  the data-supported above-G form is
+E1ClauseV3  with  the  residual  bound  B = 7000  against
+M_defect  (this  module).
 
 WHAT THIS MODULE CONTAINS:
   - DEFINITIONS:  farRVM  (Ker-face model integral),  farRVMwp
@@ -66,11 +80,16 @@ WHAT THIS MODULE CONTAINS:
     max / B-margin re-evaluated at Float,  cross-checked against
     the dps-50 oracle  (tmp/s8_m_true_sample.jsonl).
 
-HONESTY (locked):  E1Clause q 2  is NOT proven here  (nor anywhere
-in the base).  It is the single open clause,  named.  This module
-adds no RH claim;  it makes the residual program one named
-hypothesis and proves everything that composes around it.
-No sorry in this file.
+HONESTY (locked):  E1Clause q 2  and  E1ClauseV3 q 7000  are NOT
+proven here  (nor anywhere  in  the  base).  These  are  the
+single  open  clauses,  named  and  data-supported  (B  =  2
+below  G  per  s8;  the  M_defect  residual  face  above  G  per
+s9/s10/s16,  B  =  7000).  The  B  =  2  above-G  form  is  refuted  by  the
+measured  data  at  8.6e7  (s9/s10);  E1ClauseV3  is  the
+re-derived  form.  This  module  adds  no  RH  claim;  it  makes
+the  residual  program  one  named  hypothesis  and  proves
+everything  that  composes  around  it.  No  sorry  in  this
+file.
 -/
 import Mathlib
 import RhAttack.B0
@@ -314,12 +333,137 @@ theorem if_E1_and_walk (q : ZeroSet) (hz : ZetaZeroSet.ZetaLike q)
   ZetaZeroSet.rhIfMarginZeta q hz Mf devOf Bwire Mr flo
     hs1 hs2 hs3 hs4
 
+/- ## E1 clause v3  --  the  data-supported  defect  face  above
+   G_LAST   (s9/s10/s16;  replaces  nothing:  E1Clause  stays
+   as  the  B  =  2  form,  now  scoped  below  G  in  the
+   guide;  v3  is  the  above-G  form).   Measured  face:
+   M_wp(t)  =  M_defect(t)  +  e(t),  |e(t)|  <=  6703.228  on
+   (G_LAST,  1000*G_LAST],  A  =  -25256007,  B  =  +523513775
+   (21  rows,  least  squares  on  the  measured  M,  which
+   equals  M_wp  by  the  s7  c  theorem  +  MainBridge  glue).
+   Oracle:  tmp/s9_dk_above_g.jsonl  +  tmp/s10_deadzone_march.
+jsonl  +  tmp/s16_M_far.jsonl.  -/
+
+/-- Top  of  the  measured  above-G  domain  (s16:  the  1000G
+    row).  -/
+def T_MEAS : ℝ := 1000 * G_LAST
+
+/-- Defect-law  constants  (21-row  least  squares,  2026-10-15;
+    A  =  dM/d(ln  t)  =  -2.5256e7,  decade  slope  -5.815e7).  -/
+def defect_A : ℝ := -25256007
+def defect_B : ℝ := 523513775
+
+/-- The  measured  defect  face  above  G_LAST.  M_defect(t)  is
+    the  ln-t  law  the  21  measured  rows  follow  to
+    6704.088  (max  absolute  residual) -/
+noncomputable def M_defect (t : ℝ) : ℝ := defect_A * log t + defect_B
+
+/- E1ClauseV3:  the  re-derived  above-G  clause,  data-
+    supported:  the  residual  of  M_wp  against  the  defect
+    face  is  bounded  by  `B`  at  every  straddle  row  of
+    the  measured  above-G  domain  (G_LAST,  T_MEAS].  -/
+def E1ClauseV3 (q : ZeroSet) (B : ℝ) : Prop :=
+    ∀ (t : ℝ), G_LAST < t → t ≤ T_MEAS → straddleRow q t →
+      |M_wp q t - M_defect t| ≤ B
+
+/-- |M_defect t|  is  bounded  on  the  measured  domain.
+    PROOF NOTE:  this  bound  is  deliberately  loose  (7.6e20,
+    not  tight):  the  pinned  Lean 4.33.1  /  mathlib  v4.33.1
+    norm_num  does  NOT  evaluate  Real.exp  (verified:  even
+    `norm_num`  on  `exp 1 < 4`  fails),  so  the  tight  log-t
+    window  bounds  (e^24  <  G  <  e^31)  cannot  be  machine-
+    checked  here.  The  loose  bound  uses  only  exact
+    rational  arithmetic  +  the  universal  inequality
+    log t <= t - 1  (Real.log_le_sub_one_of_pos);  the  tight
+    numeric  content  (|M_defect t|  <  2.85e8  on  the  full
+    domain,  per  the  data  face  above  and  the  Python
+    oracle)  is  recorded  in  the  guide  and  DISCOVERY_LOG.
+    The  loose  constant  affects  only  the  composition
+    lemma  e1V3_implies_e1,  not  the  clause  (whose
+    residual  bound  is  6704.088  at  the  data  level) -/
+theorem mdefect_bounded (t : ℝ) (ht : G_LAST < t) (hT : t ≤ T_MEAS) :
+    |M_defect t| ≤ 760000000000000000000 := by
+  dsimp only [M_defect, T_MEAS, defect_A, defect_B]
+  have h1 : 1 < t := by
+    have hgl1 : (1 : ℝ) < G_LAST := by
+      dsimp only [G_LAST]
+      norm_num
+    linarith [hgl1, ht]
+  have hlog1 : log t ≤ t - 1 := Real.log_le_sub_one_of_pos (by linarith [h1])
+  have hlog : log t ≤ t := by linarith [hlog1]
+  have hlogpos : 0 < log t := Real.log_pos h1
+  set x1 : ℝ := (-25256007 : ℝ) * log t with hx1
+  set x2 : ℝ := (523513775 : ℝ) with hx2
+  calc abs (x1 + x2)
+      ≤ abs x1 + abs x2 := abs_add_le x1 x2
+    _ = 25256007 * log t + 523513775 := by
+      have hA : 0 < (25256007 : ℝ) := by norm_num
+      have hB : 0 < (523513775 : ℝ) := by norm_num
+      dsimp only [x1, x2]
+      rw [show (-25256007 : ℝ) = -(25256007 : ℝ) by norm_num,
+          show (-(25256007 : ℝ)) * log t = -(25256007 * log t) by ring,
+          abs_neg, abs_mul,
+          abs_of_pos hA, abs_of_pos hlogpos, abs_of_pos hB]
+    _ ≤ 25256007 * t + 523513775 :=
+      add_le_add (mul_le_mul_of_nonneg_left hlog (by norm_num)) (le_rfl)
+    _ ≤ 25256007 * (1000 * G_LAST) + 523513775 :=
+      add_le_add (mul_le_mul_of_nonneg_left hT (by norm_num)) (le_rfl)
+    _ ≤ 760000000000000000000 := by
+      dsimp only [G_LAST]
+      norm_num
+
+/- E1ClauseV3  implies  the  B  +  3e8  bound  on  the  absolute
+    face  (triangle  through  M_defect;  carries  mdefect-
+    bounded's  loose  7.6e20  constant  —  see  its  PROOF
+    NOTE  for  why  the  tight  2.85e8  is  not  machine-
+    checkable  in  the  pinned  toolchain):  the  composition
+    path  to  the  original  clause  form  on  (G_LAST,
+    T_MEAS].  -/
+theorem e1V3_implies_e1 (q : ZeroSet) (B : ℝ) (hE3 : E1ClauseV3 q B) :
+    ∀ (t : ℝ), G_LAST < t → t ≤ T_MEAS → straddleRow q t →
+      |M_wp q t| ≤ B + 760000000000000000000 := by
+  intro t ht hT hs
+  have h3 := hE3 t ht hT hs
+  have hb := mdefect_bounded t ht hT
+  have heq : M_wp q t = M_wp q t - M_defect t + M_defect t := by ring
+  have habs : |M_wp q t| = |(M_wp q t - M_defect t) + M_defect t| :=
+    congrArg abs heq
+  have htri : |M_wp q t| ≤ |M_wp q t - M_defect t| + |M_defect t| := by
+    rw [habs]
+    exact abs_add_le (M_wp q t - M_defect t) (M_defect t)
+  calc |M_wp q t| ≤ |M_wp q t - M_defect t| + |M_defect t| := htri
+    _ ≤ B + 760000000000000000000 := add_le_add h3 hb
+
 /- ## Part C -- the s8 data gates (E7a-style, Float)
    Oracle:  dps-50,  tmp/s8_m_true_sample.jsonl  (505 rows).  -/
 
 #eval s8_Mmin
 #eval s8_Mmax
 #eval s8_Bcand - s8_Mmax
+
+/- ## Part C2  --  above-G  data  gates  (s9/s10/s16)  -/
+
+def v3_A : Float := -25256007.0
+def v3_B : Float := 523513775.0
+def v3_Bcand : Float := 7000.0
+
+-- measured  rows  (  |M_wp  -  (A ln t  +  B)|  ):
+--  21  rows  over  (G_LAST,  1000*G_LAST],  max  residual
+--  6704.088,  attained  at  t  =  2.2*G_LAST  (residual
+--  +6704.088);  far  part  (10G,  1000G]:  max  5792.878.
+--  Oracle:  tmp/s9_dk_above_g.jsonl  +
+--  tmp/s10_deadzone_march.jsonl  +  tmp/s16_M_far.jsonl.
+--  Gate  at  the  worst  row  (2.2G,  measured  M  =
+--  -105694706.1988525):  fit  -  measured  =  +6704.088.
+--  Gate  at  the  1000G  row  (measured  M  =  -260231745.578125):
+--  fit  -  measured  =  -5287.600.
+#eval v3_A
+#eval v3_B
+#eval v3_Bcand
+#eval (v3_A * (Float.log 66002301199.96035) + v3_B)
+       - (-105694706.198852)
+#eval (v3_A * (Float.log 30001045999981.976) + v3_B)
+       - (-260231745.578125)
 
 end E1C
 

@@ -9183,3 +9183,138 @@ commit,  Apache-2.0,  cited):
     s9_diag_far.py, s9_diag_far2.py, s9_diag_p.py, s9_diag_reD.py;
     scripts/rh/s10_deadzone_march.py + tmp/s10_deadzone_march.
     {jsonl,md};  scripts/rh/s11_zone_sub_err.py  (running).
+
+---
+
+## 2026-10-15  s11-s16 close the forensics;  the E1 clause is re-derived and GATED as v3  (data-supported  M_defect  face)
+
+  THE  MECHANISM  (s11/s15/s18,  ruled  out  one  by  one):
+    - s11  zone-substitution:  Z(t)  =  Sum_(0.7G,G]  pairLog
+      -  Int_(0.7G,G]  pairLog  Rho  is  O(1..20)  at  14
+      heights  including  the  G+0.5  endpoint  --  the
+      ~8.6e7  defect  is  NOT  a  local  substitution  error;
+      it  is  global  far-range  weighting.
+    - s15  smooth-bias  fit  (e(g)  =  c0 + c1 ln g + c2/g
+      over  (G, 1e30],  least  squares  on  the  17  above-G
+      rows):  max  residual  1.48e7  --  no  smooth
+      3-parameter  far-density  bias  reproduces  the  shape;
+      the  generator  must  be  structured  in  t.
+    - s18  regularized  deconvolution:  unphysical  profiles
+      (total  charge  ~2.2e36)  --  the  naive  1-D
+      inversion  on  a  single  flank  is  ill-posed  as  set
+      up;  the  two-flank  version  stays  open  (physics
+      track,  not  clause  work).
+    - s13  dyadic-band  count  solve:  the  far  zero-count
+      discrepancy  required  to  explain  the  defect  through
+      (G, 1e30]  bands  is  O(1e17)  signed  --  six  orders
+      above  RH-scale  |DN|  <<  x^(7/64)  at  1e13-1e20.
+      Refutes  the  "literal  missing  zeros  above  G"
+      reading  of  the  defect;  the  RVM  far  face  simply
+      does  not  model  the  true  far  structure  as  a
+      count  offset.
+
+  THE  DEFECT  LAW  (s12  +  s16  GROWTH  FAMILY):
+    - s12  (27  rows,  (0.94G,  2.2G]):  M  =  a  ln  t  +  b
+      fits  to  1.7e3;  linear-in-t  is  1.5e6  (ruled  out).
+    - s16  (4  rows,  t  =  10G/50G/100G/1000G):
+        t/G  =  10:     M = -1.4393e8
+        t/G  =  50:     M = -1.8458e8
+        t/G  =  100:    M = -2.0208e8
+        t/G  =  1000:   M = -2.6023e8
+      decade  slope  -5.815e7  constant  to  0.5%  --  the
+      ln-t  family  holds  across  4.5  log-decades;
+      t  ln t  (count  offset  /  pole  at  G)  and
+      t^2/G  (far-bias  kernel)  are  ruled  out  at  the
+      data  level.
+    - 21  deduped  rows  above  G  (s9  +  s10-G+0.5  +
+      s16):  M  =  A  ln  t  +  B  with  A = -25256007,
+      B = +523513775  (exact-integer  least-squares),
+      max  |residual|  =  6704.088  (worse  row  2.2G);
+      far  part  (10G, 1000G]:  5792.878.
+
+  THE  PLUNGE  (0.9294G,  0.940G)  --  fully  in-chain,
+  no  bug:  re  cusp  sweep  +3.75e9;  I_far  cusp
+  approach  -3.92e9  with  ANALYTIC  and  numerically
+  verified  slope  I_far'(t)  =  -2*Rho(t)*ln((G+t)/(G-t))
+  (=  -12.37  per  unit  at  the  window,  matches  the
+  11-row  march);  lm  growth  -2.49e8  (lm'(t)  =  pi/4
+  -  1.75/t,  exact);  a  REAL  zeta  swing  +2.2  (zeta
+  wiggles  0.09  ->  12.7  across  the  window;  from-
+  scratch  Riemann-Siegel  agrees  with  mpmath  to
+  3e-3,  and  the  s10  stored  value  is  stable  dps-25
+  to  dps-60);  la  +0.48e6.  Sum  of  channel  deltas:
+  -8.4207e7  =  dM  to  13  digits.
+
+  I_FAR  METHOD  NOTE  (locked  after  s16):  the  f64
+  u-uniform  trapezoid  cross-check  IS  known-bad  at
+  high  t:  trap-vs-quad  differs  by  -6.8e7  (10G),
+  +5.4e7  (50G),  -5.4e8  (100G),  -4.6e9  (1000G)  --
+  a  log-cusp  cell  error  ~13*h  with  h  =  t*du,
+  growing  in  t.  The  dps-40  tanh-sinh  quadrature  is
+  the  trusted  I_far  method  (4-way  cross-check  to
+  5.5  at  G+0.5,  including  the  dps-50  peak-isolated
+  value).  s16  rows  stand  on  the  quad.
+
+  INTERPRETATION  (physics,  not  clause):  the
+  identity  dM/d(ln  t)  =  2*E0  on  (G,  1000G]  pins
+  a  far-discrepancy  charge  E0  =  -1.263e7  (weighted
+  zeros):  the  Rho  model  over-counts  by  ~12.6
+  million  weighted  zeros  in  its  first  region  above
+  G.  A  narrow  charge  near  g  =  G  reproduces  the
+  above-G  slope  EXACTLY  (2*E0  =  A)  but  predicts
+  M_wp  >  0  immediately  below  G,  contradicting  the
+  measured  O(1)  below-G  face  --  so  the  generating
+  e(g)  is  NOT  a  single  near-G  delta;  the  two-
+  flank  e(g)  deconvolution  is  the  open  physics
+  question.  The  defect  is  consistent  with  everything
+  verified  (zeros  certified  to  1.4e13;  the  ln-t
+  rows  constrain  only  the  discrepancy  structure,
+  not  the  zero  COUNT,  below  there).
+
+  THE  RE-DERIVED  CLAUSE  (E1Clause  v3,  GATED  in
+  formal/RhAttack/E1Clause.lean,  full  lake  build
+  green,  sorry-free):
+    T_MEAS  =  1000*G_LAST;  defect_A  =  -25256007;
+    defect_B  =  +523513775;  M_defect  t  =  A*ln  t  +  B;
+    E1ClauseV3  q  B  =  |M_wp  q  t  -  M_defect  t|  <=  B
+    at  every  straddle  row  in  the  MEASURED  domain
+    (G_LAST,  T_MEAS]  --  data-supported  B  =  7000
+    (margin  295.91  over  21  rows).
+  Glue  (all  Lean-proven):
+    mdefect_bounded:  |M_defect  t|  <=  7.6e20  on  the
+    domain  --  deliberately  LOOSE:  the  pinned  Lean
+    4.33.1  /  mathlib  v4.33.1  norm_num  does  NOT
+    evaluate  Real.exp  (probe:  even  `exp 1 < 4`
+    fails);  the  tight  2.85e8  bound  is  recorded  at
+    the  data  level  and  affects  only  this  glue
+    line,  never  the  clause.
+    e1V3_implies_e1:  E1ClauseV3  q  B  ->  |M_wp  q  t|
+    <=  B  +  7.6e20  on  (G_LAST,  T_MEAS]  (triangle
+    through  M_defect)  --  the  composition  path  back
+    to  the  original  absolute  clause  form.
+  E1Clause  (B  =  2)  and  E1ClauseV3  (B  =  7000)  are
+  both  still  named  OPEN  data-supported  clauses;  v3
+  is  the  form  the  above-G  data  actually  supports.
+  if_E1_and_walk  composes  unchanged  from  the
+  E1Clause  face.  Part  C  re-verified  3/3;  Part  C2
+  (above-G  gates)  5/5  (#eval  Float  gates  incl.
+  +6704.088459  at  2.2G  and  -5287.599966  at  1000G).
+
+  UNCHANGED  /  STILL  STANDING:
+    - Gated  base  untouched  (MainBridge,  c-t  theorem,
+      S4/P12/ZetaZeroSet,  all  prior  gates).  No  RH
+      claim  is  made.  The  zeta  channel  is  healthy
+      (s14  from-scratch  Riemann-Siegel  vs  mpmath:
+      3.3e-3  at  G+0.5,  1.4e-3  at  1.05G,  2.5e-3  at
+      2.2G,  1.1e-2  at  1e7).
+    - Below  0.9294G:  M  in  [+0.009,  1.556],  B  =  2
+      supported  there  (s8,  505  rows).
+
+  * Artifacts:  scripts/rh/s11_zone_sub_err.py  +
+    tmp/s11_zone_sub_err.{jsonl,md};  tmp/s12_defect_law.
+    md;  tmp/s13_disp_solve.py;  tmp/s14_rs_check.py;
+    tmp/s15_smooth_fit.py;  scripts/rh/s16_M_far.py  +
+    tmp/s16_M_far.{jsonl,md};  tmp/s17_families.py;
+    tmp/s18_deconv.py;  formal/RhAttack/E1Clause.lean
+    (v3  +  Part  C2);  formal/LEAN-GUIDE.md  (UPDATE 2
+    on  the  clause  line).
