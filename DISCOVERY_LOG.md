@@ -9477,3 +9477,50 @@ commit,  Apache-2.0,  cited):
     cache  now  stores  and  verifies  its  ts);
     tmp/s20_M_farter.{jsonl,md};
     tmp/s19b_twoflank_pin.{py,jsonl}.
+
+---
+
+## 2026-10-15  (pm3)  s21  +  s22:  the  defect  law  is  the  final
+##  law  --  pure  ln  t  over  6.3  log-decades;  sub-log  flag
+##  retired
+
+  s21  (2  new  rows  beyond  the  s20  range):
+    t/G  =  3e5:     M  =  -4.04273493e8
+    t/G  =  1e6:     M  =  -4.34686996e8
+
+  s22  (family  discriminator,  28  rows,
+  t/G  =  1.0  ..  1.0e6,  6.3  log-decades):
+    F1  pure  ln  t:        A  =  -2.525484e7,
+        B  =  +5.234850e8,  max  residual
+        7719  (worst  row  at  10G).
+    New  rows  vs  F1:  3e5G  res  =
+        -3810;  1e6G  res  =  +3625  --
+        both  squarely  inside  the  F1
+        residual  band.
+    F2  with  sub-log  term
+        C*(t/G)^a:  NOTHING  --  the
+        best  interior  a  =  0.10  buys
+        only  650  on  the  7700  scale,
+        and  the  unconstrained  fit
+        degenerates  to  the  a ->  0
+        log  re-split  (C*(t/G)^0.025  =
+        another  ln  t  with  a
+        constant).  The  thin
+        sub-log  flag  (pm2,  2-point
+        fit,  -1344*(t/G)^0.217)  is
+        RETIRED  as  unsupported.
+
+  THE  DEFECT  LAW  (final,  28  rows):
+      M(t)  =  -25254840  ln  t  +
+      523485000    on  (1G,  1e6*G],
+      max  residual  7719  (~2e-5
+      relative  at  the  far  end).
+  The  gated  v3  clause  (21-row  face,
+  B  =  7000,  T_MEAS  =  1000*G)  is
+  UNCHANGED  --  the  extension  is
+  recorded,  not  re-gated.  No  RH
+  claim.
+
+  * Artifacts:  scripts/rh/s21_M_beyond.py;
+    tmp/s21_M_beyond.{jsonl,md};
+    tmp/s22_family.{py,md}.

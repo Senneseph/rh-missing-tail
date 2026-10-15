@@ -223,8 +223,20 @@ the RVM density the quad scripts integrate against.
   constants;  no  family  break);  the
   gate  itself  stays  on  its  21-row
   face;  decade  slope  -5.815e7  holds
-  to  ~3e-7  relative  over  5.3
-  log-decades.
+  to  ~3e-7  relative.  EXTENDED
+  AGAIN  BY  s21/s22:  2  further  rows
+  (3e5G,  1e6G)  --  F1  pure  ln  t
+  now  fits  ALL  28  rows  (1G..1e6G,
+  6.3  log-decades)  with  max
+  residual  7719;  both  new  rows  sit
+  inside  the  F1  band  (res  -3810,
+  +3625);  the  s22  family  test
+  RETIRES  the  thin  sub-log  flag
+  (F2  adds  nothing  structural  --
+  best  interior  a  =  0.10,
+  unconstrained  fit  degenerates  to
+  a  log  re-split).  The  defect  law
+  is  now  final  at  the  data  limit.
   Plunge  forensics:  the  (0.9294G,  0.94G)  transition  is
   fully  in-chain  (re  cusp  sweep  +3.75e9;  I_far  cusp
   approach  with  verified  slope  I_far'(t)  =  -2*Rho(t)*
