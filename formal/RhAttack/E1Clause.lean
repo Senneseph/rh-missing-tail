@@ -434,6 +434,46 @@ theorem e1V3_implies_e1 (q : ZeroSet) (B : ℝ) (hE3 : E1ClauseV3 q B) :
   calc |M_wp q t| ≤ |M_wp q t - M_defect t| + |M_defect t| := htri
     _ ≤ B + 760000000000000000000 := add_le_add h3 hb
 
+/- E1ClauseV3  +  the  four  legs  ->  RH  (the  v3  twin  of
+    if_E1_and_walk).  Same  residual  program,  re-derived
+    clause:  the  above-G  face  is  now  the  data-supported
+    residual  face  (E1ClauseV3  q  7000,  21  measured
+    rows),  and  the  walk  baseline  fold  is  at  wire
+    level:  the  P12  margin  wires  (Bwire,  Mr,  flo)  are
+    generic  functions,  so  pre-subtracting  M_defect  from
+    the  walk  baseline  is  a  wire  shift,  not  a  new
+    theorem.  E1ClauseV3  is  the  named  hole  exactly  as
+    E1Clause  was;  the  legs  are  the  structural
+    contract.  -/
+theorem if_E1V3_and_walk (q : ZeroSet) (hz : ZetaZeroSet.ZetaLike q)
+    (_hE3 : E1ClauseV3 q 7000)  -- the named hole (v3, data-supported)
+    (Mf devOf Bwire Mr flo : ℝ × ℝ → ℝ)
+    (hs1 : ∀ (t0 d0 : ℝ), 0 < t0 → 0 < d0 → P12.offPair q t0 d0 →
+      ∃ (Q : ℝ), Q ≥ devOf (t0, d0) - Mf (t0, d0))
+    (hs2 : ∀ (t0 d0 : ℝ), 0 < t0 → 0 < d0 → P12.offPair q t0 d0 →
+      devOf (t0, d0) ≥ flo (t0, d0))
+    (hs3 : ∀ (t0 d0 : ℝ) (Q : ℝ), 0 < t0 → 0 < d0 →
+      P12.offPair q t0 d0 →
+      Q ≤ Bwire (t0, d0) + Mr (t0, d0))
+    (hs4 : ∀ (t0 d0 : ℝ), 0 < t0 → 0 < d0 → P12.offPair q t0 d0 →
+      Bwire (t0, d0) + Mr (t0, d0) + Mf (t0, d0) < flo (t0, d0)) :
+    RH q :=
+  ZetaZeroSet.rhIfMarginZeta q hz Mf devOf Bwire Mr flo
+    hs1 hs2 hs3 hs4
+
+/- CLAUSE  SET  (documented  composition,  2026-10-15):
+    the  program  clause  is  now  the  pair
+      below-G  face:   E1Clause q 2      on  the  s8  face
+      (straddle  rows,  0.009G  <=  t  <=  0.9294G,  505
+      rows,  margin  0.4445342)
+      above-G  face:   E1ClauseV3 q 7000  on  (G_LAST,
+      T_MEAS]  (21  rows,  residual  face,  margin  295.91)
+    with  the  dead  zone  (0.9294G,  G_LAST]  carrying  the
+    measured  plunge  (s10,  fully  in-chain  explanation).
+    The  faces  are  disjoint  by  construction  (s8  rows
+    lie  below  G_LAST).  Both  remain  named  OPEN
+    data-supported  hypotheses.  No  RH  claim.  -/
+
 /- ## Part C -- the s8 data gates (E7a-style, Float)
    Oracle:  dps-50,  tmp/s8_m_true_sample.jsonl  (505 rows).  -/
 
