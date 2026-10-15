@@ -9652,3 +9652,67 @@ commit,  Apache-2.0,  cited):
   s24  is  running  (12  stratified  targets  below
   G,  ~1.5-2h  at  the  s23  speed  --  the  D  pass
   took  ~45  min,  not  3.5h).  No  RH  claim.
+
+---
+
+## 2026-10-15  (pm6)  s24  landed  --  the  S1  track  is
+##  settled  at  the  data  limit
+
+  s24  (12  stratified  targets  below  G,  ~20  min):
+    L1  face  =  max  |M-prime|  =  13.5856  (at
+    0.65G);  the  structure  is  the  SAME  cusp  pair
+    as  above  G:  logzeta-prime  and  dsum-prime  are
+    both  ~1/d  at  the  nearest  CERTIFIED  zero
+    (partially  cancelling  in
+    M-prime  =  eps-prime  +  logzeta-prime  -
+    lm-prime  -  dsum-prime  -  I_far-prime);
+    targets  far  from  zeros  settle  to
+    |M-prime|  <=  1.1  (the  smooth  remainder
+    face);  per-row  floors  <=  8.1e-5.
+
+  FINAL  STATEMENT  (the  S1  track,  both  flanks):
+    *  The  clause  is  a  ROW-FACE  object  everywhere
+      (M_wp  keeps  the  ln  cusps  at  every  zero  on
+      both  sides  of  G;  the  wp  replacement  fires
+      only  at  the  exact  zero  height).  Its  faces
+      are  measured:  below  G  =  0.0091..1.5555
+      (505  rows,  gated),  above  G  =  the  v3
+      residual  face  (gated  7000/7719  on  28
+      heights).
+    *  CUSP  ROBUSTNESS  (the  operative  between-row
+      evidence):  at  a  row,  the  ln  cusp  amplitude
+      is  at  most  ln(1/d)  +  face  (d  =  the
+      row's  nearest  zero  distance):  ~7  at
+      d  =  1e-3,  ~14  at  d  =  1e-6  --  inside
+      both  faces  by  orders  of  magnitude.
+    *  The  t-Lipschitz  bridge  (S1Sample,  proven)
+      is  OUT  OF  SCOPE  at  the  cusps  (hLip  false);
+      its  uniform  bounds  are  FORMAL  BUT  VACUOUS
+      at  the  measured  L-faces  (below-G  candidate
+      7.89e10  vs  1.5555;  above-G  ~2.1e15  vs
+      7719).  Derivative  interpolation  across  the
+      measured  gaps  is  IMPOSSIBLE  at  L  ~  O(1-80)
+      --  the  gap  regions  must  be  measured
+      directly,  or  controlled  by  the  squeeze  leg
+      (P12,  named  open  program  component;  its
+      O(1)-walk  face  below  G  is  the  s8  c(t)
+      walk,  and  above  G  the  v3  residual  face  on
+      the  28  measured  heights).
+    *  The  proven  lemma  remains  the  bridge  for
+      C^1  auxiliaries  (e.g.  the  cusp-excision
+      face  M*  =  M  -  zero-log-product,  whose
+      derivative  face  is  the  O(0.01-1.1)  smooth
+      remainder  --  a  P3  candidate  if  ever
+      needed).
+    *  S1  track  COMPLETE  at  the  data  limit:
+      row  faces  (gated),  L-faces  (gated:
+      78.9887  above,  13.5856  below,  floors
+      recorded),  covers  (measured:  900G  /
+      5.8099e9  +  the  gap  spectrum),  proven
+      bridge  +  scope  (module),  robustness
+      argument  (this  log).  No  RH  claim.
+
+  * Artifacts:  scripts/rh/s24_mprime_bg.py;
+    tmp/s24_mprime_below_g.{jsonl,md};  all  in
+    the  S1Sample  gates  (9/9  Float,  build
+    green).

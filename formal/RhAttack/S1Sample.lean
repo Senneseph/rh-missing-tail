@@ -175,12 +175,39 @@ def l2SampleFace : Float := 78.9887
 def l2FloorMax : Float := 0.11
 def lmPrimeConst : Float := 0.7853981633974483  --  pi/4
 
+/-  s24  LIP  face  BELOW  G  (12  stratified  targets:
+    4  dense  in  the  0.27..0.47G  skip  region,  8
+    across  the  face):  max  |M-prime|  =  13.5856
+    (target  0.65G,  nearest  certified  zero  cusp
+    pair  logzeta-prime  ~  -77.8  +  dsum-prime  ~
+    -59.3,  partially  cancelling);  targets  far
+    from  zeros  settle  to  |M-prime|  <=  1.1  (the
+    smooth  remainder  face).  Per-row  f64-t  floors
+    <=  8.1e-5.  The  t-metric  uniform  candidate
+    1.5555  +  13.5856  *  5.8099e9  =  7.89e10  is
+    FORMAL  BUT  VACUOUS  (the  measured  L1  face  is
+    ~  12  orders  above  what  a  B  <=  2  uniform
+    bound  would  require):  derivative
+    interpolation  across  the  measured  gaps  is
+    impossible  at  this  L1  --  the  gap  regions
+    must  be  measured  directly,  or  controlled  by
+    the  squeeze  leg  (P12,  named  open).  The
+    bridge  remains  the  proven  instrument  for  C^1
+    auxiliaries  (e.g.  the  cusp-excision  face,
+    P3  candidate).  -/
+def l1SampleFace : Float := 13.5856
+def l1FloorMax : Float := 0.000081
+def belowGUniformVacuous : Float := 7.8931e10
+
 #eval sampleCount
 #eval dvRatioData
 #eval dvData
 #eval l2SampleFace
 #eval l2FloorMax
 #eval lmPrimeConst
+#eval l1SampleFace
+#eval l1FloorMax
+#eval belowGUniformVacuous
 
 /-  AMENDMENT  (check  before  trusting):  the  21  rows
     are  G+0.5..G+5  (gap  <=  0.5),  then  1.05G,
