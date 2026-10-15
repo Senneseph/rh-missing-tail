@@ -29,6 +29,10 @@ numeric record this guide wires against).
            E1Clause.lean 3/3 Float re-evaluations (E7a-style;
            s8 M_true min/max/B-margin at f64, dps-50 oracle
            tmp/s8_m_true_sample.jsonl)
+           S1Sample.lean 3/3 Float re-evaluations (sample
+           count, Dv ratio, Dv; Float literals -- the Real
+           world sits on classical axioms and is not
+           #eval-able)
   Gate D:  engine invariants in scripts/rh/day037_h1_3e10.py (do not
            modify): Kfull self-test (bad_asm guard), B-field bounds,
            the 400-node adjacent-section quad pair (day049e fix:
@@ -337,6 +341,32 @@ the RVM density the quad scripts integrate against.
 ### Front page + records
 - ZetaZeroSet (B-6A): RH on the ACTUAL zero set; records leg-by-leg
   what the actual set owes the structural chain.
+- S1Sample: the SAMPLE -> UNIFORM bridge for the S1 leg
+  (new module, 2026-10-15).  The data supports the
+  residual face |M_wp - M_defect| at DISCRETE sample
+  heights; the whole-domain form (which the walk
+  composition consumes) needs pointwise.  Proven
+  lemma (pure real analysis): Lipschitz + cover ->
+  uniform (sampleToUniform).  Glue:
+  e1V3WholeFromSample (row face + LIP face + cover
+  -> whole-domain face on (G_LAST, T_MEAS]) and
+  e1V3FromWhole (restricts the whole-domain face to
+  the straddle rows = E1ClauseV3 itself).  What
+  stays OPEN after the reduction: three DATA claims
+  -- (1) row face (measured: PART C2, B = 7000,
+  worst 6704.088 at 2.2G), (2) LIP face (s23: max
+  |M' - A/t| over the sample rows, per-channel
+  precision floors documented), (3) cover (measured
+  max gap Dv = 900*G = 2.7000941e13 over the 21
+  in-domain rows; the earlier 2.3383e11 figure was
+  the 2.2G->10G gap only -- AMENDED in the module).
+  The reduced uniform face carries B + L*Dv (worse
+  than the row face by design -- the price of the
+  whole-domain quantification on a log-spaced
+  sample).  Part C: 3/3 Float #eval gates
+  (sampleCount, dvRatioData, dvData; the Real world
+  is not #eval-able -- literals are the recorded
+  data, exact Real forms carry the theorems).
 - A1Growth: the A1 wire at the provable growth form (E19).
 - E2Barrier: NEGATIVE-result record (the R2 absolute-sum barrier).
 - EulerAction + E7a: the exact finite-sum Euler-action identity +
