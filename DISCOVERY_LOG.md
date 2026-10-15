@@ -9524,3 +9524,51 @@ commit,  Apache-2.0,  cited):
   * Artifacts:  scripts/rh/s21_M_beyond.py;
     tmp/s21_M_beyond.{jsonl,md};
     tmp/s22_family.{py,md}.
+
+---
+
+## 2026-10-15  (pm4)  S1Sample  gated;  phase  plan  for  the
+##  sample->uniform  reduction
+
+  S1Sample.lean  GATED  (commit  f13c188,  full  build
+  green):  the  proven  sample  ->  uniform  bridge  for
+  the  S1  leg  (Lipschitz  +  cover  lemma,  glue  on
+  (G_LAST,  T_MEAS],  restriction  back  to  the  named
+  v3  clause).  The  open  surface  of  the  clause  is
+  now  EXACTLY  three  data  claims:  row  face  (gated),
+  LIP  face  (s23  running),  cover  (gated:  Dv  =
+  900*G  =  2.7000941e13  --  AMENDED,  the  earlier
+  2.3383e11  was  the  2.2G  ->  10G  gap  only).
+  Uniform  bound  candidate  on  landing:  B_whole  =
+  7719  +  L2  *  Dv.  Gate  pattern  learned:  the
+  Real  world  is  not  #eval-able  (classical
+  axioms);  data  gates  are  Float  LITERALS,  exact
+  Real  forms  carry  the  theorems.
+
+  BELOW-G  COVER  (measured  now  from  the  505  s8
+  rows):  t  range  (0.107735G,  0.929444G);  gaps:
+  p50  =  p90  =  0.5  (adjacent  straddle  rows),
+  p99  =  1.4026e9,  MAX  =  5.809927e9  at  t/G
+  0.2713  ->  0.4650  (the  s8  rows  skip  0.19G  in
+  one  region);  row  face  min  =  0.0091,  max  =
+  1.5555.  Dv1  =  5.8099e9.
+
+  PHASE  PLAN  (queued):
+    P1  (running,  ~3.6h):  s23  --  M-prime  face
+        above  G  (31  targets:  21  in-domain  rows
+        +  6  s10  dead-zone;  per-channel  dps  with
+        the  streamed  dsum  over  1.016e11  zeros).
+    P2  (queued,  ~3-5h,  launches  after  P1):
+        s24_mprime_bg.py  --  M-prime  face  below  G
+        (28  stratified  targets,  8  dense  in  the
+        0.27..0.47G  big-gap  region;  face  =
+        max|M'|,  uniform  candidate  =  1.5555  +
+        L1  *  5.8099e9).
+  After  P1  +  P2  land:  the  full  two-flank
+  sample  ->  uniform  reduction  is  data-backed  on
+  both  faces  (above-G  residual  face,  below-G
+  absolute  face),  with  uniform  bounds  B +  L*Dv
+  from  the  proven  lemma  --  the  clause  open
+  surface  reduced  to  measured  rows  +  measured
+  derivatives  +  measured  gaps,  each  #eval-gated.
+  No  RH  claim.
