@@ -9416,3 +9416,64 @@ commit,  Apache-2.0,  cited):
     cusp-kernel  verification  (analytic  vs  2e8-point
     shifted  midpoint:  2e-4,  in-band  and  at-band-edge
     cusps).
+
+---
+
+## 2026-10-15  (pm2)  s20:  the  ln-t  defect  law  survives  four  more  decades;  the  e-track  closes  at  the  data  limit
+
+  s20  (5  new  rows,  the  la/re  CACHE-VERIFY
+  FIX  landed  first  --  a  first  launch  had
+  silently  reused  s16's  la/re  cache,  and
+  those  rows  were  invalid  and  discarded
+  before  reporting):
+    t/G  =  2e3:     M  =  -2.77736186e8
+    t/G  =  5e3:     M  =  -3.00875798e8
+    t/G  =  1e4:     M  =  -3.18380239e8
+    t/G  =  5e4:     M  =  -3.59024315e8
+    t/G  =  1e5:     M  =  -3.76528829e8
+
+  THE  LAW  (now  26  rows,  1.05G  ..  1e5G,
+  5.3  log-decades):  A  =  -2.525487e7,
+  B  =  +5.234857e8,  max  residual  7673
+  (growing  smoothly  to  -1.64e4  at  1e5G
+  against  the  gated  21-row  constants  --
+  no  family  break).  Decade  slope
+  -5.815e7  holds  to  ~3e-7  relative  at
+  1e5G.  (Candidate  sub-log  term,  THIN
+  evidence:  the  residual  growth  fits
+  -1344*(t/G)^0.217;  flagged,  not
+  claimed.)  The  gated  v3  clause  is
+  UNCHANGED  (its  21-row  face  stands);
+  the  law  extension  is  recorded,  not
+  re-gated.
+
+  e-TRACK  CLOSURE  (s19b  with  s20  rows,
+  84  rows  total):  the  grid  sweep  is
+  UNCHANGED  by  the  5  leverage  rows
+  (max|res|  ~1.56  in  every  config;
+  E(1000G)  grid-representative  as
+  before;  coarse-representative  peak
+  max|e|  =  0.0139  at  4.2G  unchanged).
+  Conclusion  (the  data  limit):  the
+  measured  defect  is  a  SMOOTH  ln-t
+  law,  and  smooth  rows  cannot
+  separate  the  location  of  the  e  that
+  produces  it  --  pinning  it  needs
+  non-smooth  input  (independent
+  zero-count  data  above  the  3.1e10
+  certified  frontier,  e.g.  a  far
+  band  census).  Stable  physics
+  (final):  the  missing  tail  =  a
+  BOUNDED  Rho  departure  (coarse
+  representative  <=  0.36%  of  Rho,
+  thinner  with  structure),  NO  G
+  boundary  layer,  (1e5*G,  1e30]
+  unobservable;  M  =  A  ln  t  +  B
+  (26-row  constants  above)  on
+  (1G,  1e5G]  to  O(1e4).  No  RH
+  claim.
+
+  * Artifacts:  scripts/rh/s20_M_farter.py  (la/re
+    cache  now  stores  and  verifies  its  ts);
+    tmp/s20_M_farter.{jsonl,md};
+    tmp/s19b_twoflank_pin.{py,jsonl}.
