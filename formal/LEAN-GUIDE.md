@@ -361,23 +361,42 @@ the RVM density the quad scripts integrate against.
   scope -- the v3 clause stays a ROW-FACE clause
   above G (robust: the ln cusp amplitude AT A ROW
   is at most ~ln(1/d) + face, far inside 7719).
-  Below-G claims: (1) row face (s8,
-  0.0091..1.5555, gated), (2) LIP face (s24,
-  running), (3) cover Dv1 = 5.8099e9 (measured;
-  the s8 rows are adjacent straddles elsewhere,
-  one 0.19G skip region).  Above-G record (s23):
+  Below-G claims (s24 LANDED): (1) row face
+  (s8, 0.0091..1.5555, gated), (2) LIP face
+  L1 = 13.5856 (12 stratified targets; cusp
+  pair logzeta-prime / dsum-prime ~ +-1/d at
+  the certified zeros, partially cancelling;
+  targets far from zeros settle to
+  |M-prime| <= 1.1), (3) cover Dv1 = 5.8099e9
+  (measured; the s8 rows are adjacent straddles
+  elsewhere, one 0.19G skip region).
+  VERDICT (both flanks): the t-metric bridge's
+  uniform bound is FORMAL BUT VACUOUS at the
+  measured L-faces (below-G candidate 7.89e10
+  vs 1.5555 row face; above-G ~2.1e15 vs 7719)
+  -- derivative interpolation across the
+  measured gaps is impossible at L ~ O(1-80);
+  the row FACE + cusp-robustness (ln(1/d)
+  amplitude at a row, ~7 at d = 1e-3, ~14 at
+  d = 1e-6) is the operative between-row
+  evidence, and the FORMAL between-row control
+  is the squeeze leg (P12, named open); the
+  proven lemma remains the bridge for C^1
+  auxiliaries (cusp-excision face, P3
+  candidate).  Above-G record (s23):
   max |M-prime| = 78.9887 over 31 rows (cusp
   train from logzeta' at un-certified super-G
   zeros; lm-prime = pi/4 + O(1/t); floors
   <= 0.11 row-dependent).  Above-G cover Dv =
   900*G = 2.7000941e13 (the 2.3383e11 quoted
   earlier was the 2.2G->10G gap only --
-  AMENDED in the module).  Part C: 6/6 Float
+  AMENDED in the module).  Part C: 9/9 Float
   #eval gates (sampleCount, dvRatioData, dvData,
-  l2SampleFace, l2FloorMax, lmPrimeConst; the
-  Real world is not #eval-able -- literals are
-  the recorded data, exact Real forms carry the
-  theorems).
+  l2SampleFace, l2FloorMax, lmPrimeConst,
+  l1SampleFace, l1FloorMax,
+  belowGUniformVacuous; the Real world is not
+  #eval-able -- literals are the recorded data,
+  exact Real forms carry the theorems).
 - A1Growth: the A1 wire at the provable growth form (E19).
 - E2Barrier: NEGATIVE-result record (the R2 absolute-sum barrier).
 - EulerAction + E7a: the exact finite-sum Euler-action identity +
