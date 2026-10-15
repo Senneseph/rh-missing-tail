@@ -9118,3 +9118,68 @@ commit,  Apache-2.0,  cited):
   * Artifacts:  formal/RhAttack/E1Clause.lean (v2,  gated);
     scripts/rh/s9_dk_above_g.py (new);  formal/LEAN-GUIDE.md
     (E1Clause line re-targeted).
+
+## 2026-10-15  s9/s10:  the above-G face of the E1 clause is refuted by data at  ~1e8 scale;  the 7% dead zone located;  forensics clean
+
+  s9 (threaded v2,  cores 0-11,  commit a22553f)  completed at 00:34:
+  17 rows on the clause's real t-domain  (G, 2.2G]:
+    M(t)  =  EPS + log|zeta| - lm - la - re - I_far,RVM
+    t = G + k/2   (k = 1..10,  TRUE straddle rows on the top zero):
+                M = -8.577e7  (all ten,  spread  1.5)
+    t = G*r      (r = 1.05..2.2):  M  falls  -8.70e7 .. -1.057e8
+  The  Lean  E1Clause  (|M_wp|  <=  2  at  every  straddle  row  in
+  (G,  U_TOP])  is  therefore  REFUTED  BY  DATA  on  its  own
+  domain,  by  ~7  orders  of  magnitude,  on  the  measured  rows.
+  This  is  a  model-face  refutation:  the  far  RVM  model
+  (pairLog  x  Rho  over  (G,  1e30])  under-predicts  the  true
+  zero  product  by  ~8.6e7  there.  No  RH  claim  is  affected
+  one  way  or  the  other;  the  clause's  B  =  2  form  is  dead
+  as  formulated  and  must  be  re-derived  (domain,  model,  or
+  both  --  see  the  open  item  below).
+
+  FORENSICS  (all  ruled  out  by  measurement):
+    - I_far  quadrature:  dps-50  peak-isolated  agrees  with  the
+      run's  value  to  5.5;  the  f64  trapezoid  converges  to  it
+      as  resolution  rises  (1.47e7  ->  1.19e6  over  10x  grid).
+    - P(t)  =  log|zeta| - lm - I_far:  12-step  march  across  G,
+      perfectly  smooth,  no  code-path  discontinuity  at  G.
+    - STREAMED  DATA  SIDE:  independent  re-computation  of
+      the  whole  (1e7, G]  re-sum  at  t = G + 0.5  (engine  kernel
+      form,  single-expression,  longdouble  blocks,  8  threads)
+      agrees  with  the  stream  to  1.0e-4  absolute  on
+      1.2883e11.  The  numbers  are  what  they  are.
+    - la/re  kernels  identical  term-for-term  to  the  engine  (
+      day037  _prod_budget_day034).
+
+  THE  DEAD  ZONE  (s10  march,  11  rows,  one  pass):
+    s8  evidence  ends  at  t/G  =  0.92944  (M  =  +1.555);
+    s10:   0.940G:  M  =  -8.421e7
+           0.960G:  -8.474e7      0.980G:  -8.526e7
+           0.990G:  -8.552e7      0.999G:  -8.575e7
+           G-0.90, G-0.59, G-0.33, G-0.08  (true  midpoints  between
+           consecutive  recorded  zeros):  -8.577e7,  flat  at  O(1)
+           within  the  last  1.5  units  of  t  across  G
+    The  entire  ~8.4e7  transition  sits  in  the  t-window
+    (0.9294G,  0.940G)  --  a  7%  hole  no  prior  run  covered.
+    (Side  note:  the  naive  "G - 0.5"  detune  sits  2.3e-4  from
+    the  recorded  zero  at  G - 0.49977;  true  midpoints  used
+    instead.)  s11  (running)  maps  the  zone-substitution  error
+    Sum_minus_Int  over  the  data-covered  (0.7G, G]  at  14
+    heights  to  localize  the  mechanism  (local  substitution
+    vs  global  weighting).
+
+  UNCHANGED  /  STILL  STANDING:
+    - MainBridge  (gated),  c(t)  closure  theorem,  EPS  band
+      (verified  at  every  measured  row,  |EPS|  <=  2.07e-6),
+      and  ALL  below-0.929G  evidence  (M  in  [+0.009,  1.556],
+      flat  within  windows).
+    - The  drift  law  M  ~  1.242 (t/G)^2.256  was  fit  on
+      [0.108G,  0.929G]  ONLY;  its  "threat  near  1.3G"
+      extrapolation  is  retired  --  the  data  never  supported
+      it  and  the  true  structure  is  the  step  located
+      above.
+
+  * Artifacts:  tmp/s9_dk_above_g.{jsonl,md};  scripts/rh/
+    s9_diag_far.py, s9_diag_far2.py, s9_diag_p.py, s9_diag_reD.py;
+    scripts/rh/s10_deadzone_march.py + tmp/s10_deadzone_march.
+    {jsonl,md};  scripts/rh/s11_zone_sub_err.py  (running).

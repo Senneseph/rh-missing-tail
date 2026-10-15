@@ -183,12 +183,32 @@ the RVM density the quad scripts integrate against.
   dps-50 oracle, all |k| <= 12):  M_wp in [0.009100218,
   1.555465754] at every measured straddle row BELOW G
   (3.23e9 <= t <= 2.79e10);  data-supported bound  B = 2  (margin
-  0.4445342).  The clause's t-domain (G, U_TOP) is the above-G
-  regime — the face the pending s9 run targets
-  (scripts/rh/s9_dk_above_g.py,  single 1.016e11-zero streaming
-  pass,  straddle t = G + k/2  k = 1..10  +  log-spread 1.05..2.2;
-  G itself is a true zero — the last on-disk one — so those rows
-  are provable straddles).  Part C:  3/3 Float #eval gates.
+  0.4445342)  --  that  support  holds  ONLY  below
+  t  =  0.9294G  (s8  evidence  ends  at  2.79e10).  The
+  clause's  t-domain  (G, U_TOP)  is  the  above-G
+  regime.  UPDATE  (s9/s10  forensics  complete):  the  clause
+  as  written  is  REFUTED  BY  DATA  on  its  own  domain  --
+  all  ten  true  straddle  rows  t = G + k/2  (k = 1..10,
+  G  =  the  last  on-disk  true  zero,  so  the  rows  are
+  provable  straddles)  measure  M_wp  =  -8.577e7  (spread
+  1.5);  the  s10  march  shows  M_wp  already  at  -8.42e7
+  at  t = 0.94G,  the  full  transition  inside  the  dead
+  zone  (0.9294G, 0.94G)  no  earlier  run  covered,  and
+  M_wp  flat  at  O(1)  within  the  last  1.5  units  of  t
+  across  G.  Forensics:  I_far  4-way  to  5.5;  streamed
+  data  side  re-computed  independently  to  1e-4  on
+  1.29e11;  kernels  engine-identical;  P = log|zeta| - lm -
+  I_far  smooth  across  G.  The  far  RVM  model
+  (pairLog  x  Rho  over  (G, 1e30])  under-predicts  the
+  true  far  zero  product  by  ~8.6e7  at  heights  in
+  (0.94G, 2.2G];  the  B = 2  form  of  the  clause  is  dead
+  as  formulated  --  re-derivation  (t-domain  and/or  far
+  model)  is  the  active  front;  s11  (zone-substitution
+  error  map  on  the  data-covered  (0.7G, G])  is
+  localizing  the  mechanism.  Nothing  in  the  gated  base
+  (MainBridge,  c  theorem,  S4/P12/ZetaZeroSet)  is
+  affected;  no  RH  claim  is  made.  Part  C:  3/3  Float
+  #eval  gates.
 
 ### Front page + records
 - ZetaZeroSet (B-6A): RH on the ACTUAL zero set; records leg-by-leg
@@ -356,8 +376,11 @@ s = 1/2 + i t; a zero pair is 1/2 +/- i g (g > 0); G = 3.0001045999e10
   reduces to ONE clause: S = O(1) at zero heights (E1) — whose
   numeric face is now M_true(t) of the c theorem above, and whose
   formal face is E1Clause (e1clause.lean): the clause is named, the
-  data face supports B = 2, and the residual program is the one
-  line if_E1_and_walk.
+  data  face  supports  B = 2  ONLY  below  0.929G  (s8);
+  s9/s10  measure  |M_wp| ~ 8.6e7  on  the  above-G  straddle
+  rows  (the  B = 2  form  is  dead  as  formulated;  re-
+  derivation  active)  --  the  residual  program  is  the  one
+  line  if_E1_and_walk  with  the  re-derived  clause.
 
 
 ## 6. Where the open content lives
@@ -367,7 +390,11 @@ s = 1/2 + i t; a zero pair is 1/2 +/- i g (g > 0); G = 3.0001045999e10
   ZetaZeroSet (the actual-zero obligations) + E1Clause (the clause
   named:  M_true(q, t) = true far-window pair-kernel sum minus the
   RVM model integral farRVM;  E1Clause q B  =  |M_true| <= B  at
-  zero heights in (G_LAST, U_TOP];  B = 2 data-supported,  s8).
+  zero  heights  in  (G_LAST, U_TOP];  B = 2  data-
+  supported  ONLY  below  0.929G  (s8);  s9/s10  measure
+  |M_wp| ~ 8.6e7  on  the  above-G  straddle  rows  --  the
+  clause's  B = 2  form  is  dead  as  formulated;  re-
+  derivation  active,  s11  localizing.
   Numeric face:  M_true(t) = EPS - log c(t) sampled at zero heights
   (ledger rows at t = g + k/2 straddles give c at detector scale).
 - The main-term identity of section 2 IS the Lean bridge:
