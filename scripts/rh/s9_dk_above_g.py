@@ -24,7 +24,16 @@ never has to be enumerated):
 
 COST MODEL:  re(t) needs one streaming pass over the 1.016e11-zero
 tail  (L + A + B + C + D files,  ~815GB).  The pass is ONCE for ALL
-target heights  (chunk vectorized over the t list).
+target heights  (chunk vectorized over the t list).  v2:  the file
+pass is THREADED  (8 disjoint slices per file,  per-thread partial
+accumulators,  longdouble reduction  --  the tail files sit on the
+local NVMe  and  the serial pass was compute-bound on one core at
+~40MB/s;  5x measured wall speedup at 8 threads).  Precision note:
+threading changes the summation ORDER only  (per-slice f64 sums,
+longdouble tree across slices);  la/re are measurement-grade for
+the dK fit,  not certificate-grade  (dps-40 zeta / I_far untouched;
+the B = 2 margin is 0.44,  orders above the ~1e-6 reorder
+tolerance).
 
 HEIGHTS:
   straddle face:    t = G_LAST + k/2,  k = 1..10
@@ -42,6 +51,7 @@ import math
 import os
 import sys
 import time
+from concurrent.futures import ThreadPoolExecutor
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
@@ -151,43 +161,58 @@ def stream_re(ts):
     the target heights.  re[j]  accumulates in longdouble."""
     re_acc = np.zeros(len(ts), dtype=np.longdouble)
 
-    def chunk(g):
+    def chunk_local(g, acc):
         for j, tv in enumerate(ts):
             t = float(tv)
             lt = g < t
-            w = np.empty(g.shape, dtype=np.float64)
             if np.any(~lt):
                 gg = g[~lt]
                 q = (t / gg) ** 2
-                w[~lt] = np.log1p(-q) - np.log1p(1.0 / (4.0 * gg * gg)) \
-                    + 0.5 / (gg * gg + 0.25)
+                w = (np.log1p(-q) - np.log1p(1.0 / (4.0 * gg * gg))
+                     + 0.5 / (gg * gg + 0.25))
+                acc[j] += np.longdouble(np.sum(w))
             if np.any(lt):
                 gl = g[lt]
-                w[lt] = (np.log(t - gl) + np.log(t + gl)
-                         - np.log(gl * gl + 0.25)
-                         + 0.5 / (gl * gl + 0.25))
-            re_acc[j] += np.longdouble(np.sum(w.astype(np.float64)))
+                w = (np.log(t - gl) + np.log(t + gl)
+                     - np.log(gl * gl + 0.25)
+                     + 0.5 / (gl * gl + 0.25))
+                acc[j] += np.longdouble(np.sum(w))
 
     t0 = time.time()
     # la:  GN  (0, 1e7]
     la_acc = np.zeros(len(ts), dtype=np.longdouble)
-    for g in GN:
-        pass  # GN is small;  do it vectorized per t instead:
+    gg = GN.astype(np.float64)
     for j, tv in enumerate(ts):
         t = float(tv)
         t2 = t * t
-        gg = GN.astype(np.float64)
         w = (np.log(np.abs((gg * gg - t2) / (gg * gg + 0.25)))
              + 0.5 / (gg * gg + 0.25))
         la_acc[j] = np.longdouble(np.sum(w))
 
+    def work_file(arr, n, nsubs=8, step=(1 << 23)):
+        """nsubs disjoint slices in threads;  per-thread partial
+        sums;  longdouble reduction into re_acc."""
+        nonlocal re_acc
+        q = n // nsubs
+
+        def one(i):
+            lo = i * q
+            hi = (i + 1) * q if i < nsubs - 1 else n
+            acc = np.zeros(len(ts), dtype=np.longdouble)
+            for k in range(lo, hi, step):
+                chunk_local(np.ascontiguousarray(
+                    arr[k:min(k + step, hi)]), acc)
+            return acc
+
+        with ThreadPoolExecutor(max_workers=nsubs) as ex:
+            for r in ex.map(one, range(nsubs)):
+                re_acc += r
+
     # L section  (RAM)
     L = np.ascontiguousarray(L_ARR, dtype=np.float64)
-    for i in range(0, L.size, 1 << 22):
-        chunk(L[i:i + (1 << 22)])
+    work_file(L, L.size, nsubs=4)
     print("  L done  (%.0f s)" % (time.time() - t0), flush=True)
 
-    CH = 1 << 24
     for name, path, lo, hi in [
         ("A", A_F, 3.1946e7, 1.006346e9),
         ("B", B_F, 1.002146e9, 2.001746e9),
@@ -196,9 +221,7 @@ def stream_re(ts):
     ]:
         mm = np.memmap(path, dtype=np.float64, mode="r")
         n = int(mm.size)
-        t1 = time.time()
-        for i in range(0, n, CH):
-            chunk(np.ascontiguousarray(mm[i:i + CH]))
+        work_file(mm, n, nsubs=8)
         del mm
         print("  %s (%d zeros) done  (%.0f s)"
               % (name, n, time.time() - t0), flush=True)
