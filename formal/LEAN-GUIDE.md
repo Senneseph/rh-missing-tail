@@ -226,13 +226,25 @@ the RVM density the quad scripts integrate against.
   to  5.5  at  G+0.5);  the  f64  u-trap  IS  known-bad  at
   high  t  (log-cusp  cell  error  ~13*h  with  h  =  t*du,
   growing  in  t:  6.8e7  at  10G  to  4.6e9  at  1000G  vs
-  the  quad).  Interpretation:  dM/d(ln  t)  =  2*E0  pins
-  a  far-discrepancy  charge  E0  =  -1.263e7  (weighted
-  zeros)  above  G;  a  narrow  near-G  delta  fits  the
-  above-G  slope  exactly  but  mismatches  the  below-G
-  O(1)  face,  so  the  full  e(g)  deconvolution  (both
-  flanks)  is  the  open  physics  track  --  not  a  clause
-  blocker.
+  the  quad).  Interpretation  --  RESOLVED  BY  s19  (two-
+  flank  e(g)  deconvolution,  exact  cusp-inclusive
+  band  kernels,  79  rows  both  sides,  lam-
+  insensitive  min-norm  read):  the  whole  measured
+  defect  is  reproduced  to  1.4  by  a  bounded
+  e  on  (G,  1e30]  with  max|e|  =  0.0139  per
+  unit  g  =  0.36%  of  Rho  (peak  near  g  ~  4G,
+  decaying  outward);  NO  boundary  layer  at  G
+  (Int_(G,G+500]  e  ~  1e-7  --  the  near-G  delta
+  idea  is  dead);  the  cumulative  count  departure
+  reaches  ~ -8e9  zeros  by  1000G,  built  from  a
+  sub-0.5%  local  bias;  (1e5*G,  1e30]  is
+  unobservable  gauge  for  every  measured  row.
+  Read:  the  RVM  far  model  is  wrong  as  a
+  COUNT  --  a  count-level  Rho  systematic  in  the
+  first  ~1000G  above  the  certified  frontier;
+  s19  supersedes  s13's  coarse  O(1e17)
+  centroid  reading.  Not  a  clause  blocker;  no
+  RH  claim.
 
   THE  RE-DERIVED  CLAUSE  (v3,  GATED  in  this  module):
   T_MEAS  =  1000*G_LAST;  defect_A  =  -25256007;
