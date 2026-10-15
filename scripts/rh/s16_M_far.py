@@ -18,12 +18,16 @@ import os
 import sys
 import time
 
+import numpy as np
+
 sys.path.insert(0, ".")
 import s9_dk_above_g as S
 
+BASE = "/home/jsmille/Projects/rh-missing-tail"
 G_LAST = S.G_LAST
-JSON = "tmp/s16_M_far.jsonl"
-MD = "tmp/s16_M_far.md"
+JSON = BASE + "/tmp/s16_M_far.jsonl"
+MD = BASE + "/tmp/s16_M_far.md"
+CACHE = BASE + "/tmp/s16_la_re.npz"
 
 TARGETS = [("r=%.0fG" % r, G_LAST * r) for r in (10, 50, 100, 1000)]
 
@@ -31,11 +35,26 @@ TARGETS = [("r=%.0fG" % r, G_LAST * r) for r in (10, 50, 100, 1000)]
 def main():
     ts = [tv for (_, tv) in TARGETS]
     t0 = time.time()
-    print("streaming pass,  %d  rows  ..." % len(ts), flush=True)
-    las, res = S.stream_re(ts)
-    print("stream done  (%.0f s)" % (time.time() - t0), flush=True)
+    if os.path.exists(CACHE):
+        d = np.load(CACHE)
+        las = [float(v) for v in d["las"]]
+        res = [float(v) for v in d["res"]]
+        print("loaded  la/re  cache  (skip  stream)   %.0f  s"
+              % (time.time() - t0), flush=True)
+    else:
+        print("streaming pass,  %d  rows  ..." % len(ts), flush=True)
+        las, res = S.stream_re(ts)
+        np.savez(CACHE, las=np.array(las, dtype=np.float64),
+                 res=np.array(res, dtype=np.float64))
+        print("stream done  (%.0f s)" % (time.time() - t0), flush=True)
 
+    done = set()
+    if os.path.exists(JSON):
+        for line in open(JSON):
+            done.add(json.loads(line)["lab"])
     for (j, (lab, tv)) in enumerate(TARGETS):
+        if lab in done:
+            continue
         t = tv
         tf = time.time()
         lm = S.lm_re(t)
