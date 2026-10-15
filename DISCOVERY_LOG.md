@@ -9716,3 +9716,154 @@ commit,  Apache-2.0,  cited):
     tmp/s24_mprime_below_g.{jsonl,md};  all  in
     the  S1Sample  gates  (9/9  Float,  build
     green).
+
+---
+
+## 2026-10-15  (pm7)  external  input  reviewed:
+##  openai/math  (release  2026-10-06)  --  family  003
+##  (quasi-RH,  Re  s  >  7/8)  +  Z78Strip  module  GATED
+
+  OWNER  ASKED  FOR  A  REVIEW  OF  github.com/openai/math
+  ("744  or  so  things  proven  or  discovered  etc").
+  Catalog  counts  in  flight:  722  at  release  (3
+  withdrawn  ->  719  live  per  the  pinned  commit
+  README),  community  trackers  count  749  at  the
+  Oct-8  update  commit;  372  result  families.
+
+  REVIEW  SUMMARY
+    *  A  single  release  of  model-produced  manuscripts
+      with  a  Lean  library  (123,565  files,  ~26M
+      lines,  Lean  4.34.1  +  Mathlib).  The  number-
+      theory  center  of  gravity  is  FAMILY  003:
+      "The  quasi-Riemann  hypothesis":  every  Dirichlet
+      L-function,  including  zeta,  is  zero-free  in
+      Re  s  >  7/8  (199  pp,  30  Sep);  a  companion
+      11/12  proof  (human  edited);  "Uniform  exclusion
+      of  Landau-Siegel  zeros"  (9  pp,  (1-beta)log  q
+      >=  c  uniform).  The  paper  states  EXPLICITLY
+      that  RH  remains  open.  No  family  in  the
+      catalog  touches  critical-line  |zeta|  behavior
+      (no  mollifiers,  no  Z(t),  no  moments)  --  so
+      nothing  in  the  release  addresses  the  S1-gap
+      form  of  our  program.
+    *  PROOF  STRUCTURE  (read  from  the  preprint):
+      two  stages  (11/12  first,  then  7/8  via  prime
+      compensation  +  asymmetric  scales  +  two  more
+      moment  estimates);  a  common  continuation
+      principle  comparing  two  representations  of  a
+      completed  cubic-theta  sum  over  the  finite-
+      order  Hecke  characters  of  Q(√-3);  builds  on
+      cited  public  results  (Dunn-Radziwill  cusp
+      expansions,  Goldmakher-Louvel  +  Heath-Brown
+      large  sieve,  Huxley,  a  sextic  specialization
+      proved  in  the  paper).  Family-specific  machinery
+      --  not  directly  transferable  to  the  single-
+      function  zeta  walk  of  our  program.
+    *  VERIFICATION  STATUS  (logged  2026-10-15):
+      kernel-verified  by  at  least  TWO  independent
+      replays  on  two  kernels  sharing  no  code  (Lean
+      4.34.1  default  kernel  +  NanoDa;  Goldblatt
+      re-run  Oct-7  63  min  single  machine;  teal-sea
+      laboratory  replay  Oct-8:  #print  axioms  =
+      exactly  propext  +  Classical.choice  +  Quot.
+      sound;  Comparator  exit  0  on  zeta/Dirichlet/
+      Siegel  configs);  the  import  closure  is
+      published  and  text-scanned  sorry-free  (closure
+      sorry-freedom  depends  on  a  published  31k-line
+      patch  to  one  third-party  dependency,  pinned  by
+      their  build);  HUMAN  REVIEW  STILL  IN  PROGRESS
+      (the  199  pp  largely  unread;  Banks  line-
+      checked  the  Siegel  paper,  arXiv  2610.15483,
+      unrefereed;  MathOverflow  discussion  active;
+      follow-up  Liu  arXiv  2610.12234  imports  the
+      OpenAI  preprint  inputs  as  load-bearing  --
+      flagged  by  third-party  review  as  the  soft
+      spot).
+      Sparse  clone  at  references/openai/math  (blobless;
+      manifests  +  comparator  files  +  family  003
+      preprints  inspected).
+
+  LEAN  INTEGRATION  (GATED,  commit  below)
+    *  New  module  formal/RhAttack/Z78Strip.lean:
+      the  three  external  results  as  NAMED  PROPS  in
+      Mathlib  vocabulary  (externalZeroFree78,
+      externalZeroFreeDirichlet78  --  with  [NeZero  q]
+      as  in  their  pinned  comparator,  externalSiegelGap);
+      PROVEN  from  externalZeroFree78:
+      zetaZeroStrip  (every  non-real  zero  of  Mathlib's
+      riemannZeta:  1/8  <=  Re  <=  7/8;  the  lower
+      edge  =  functional  equation  riemannZeta_one_sub
+      +  cpow_ne_zero_iff  +  Gamma_ne_zero  +
+      Complex.cos_eq_zero_iff,  all  pinned-mathlib)
+      and  offPairD0le  (every  off-line  pair  of  an
+      actual-zeta  zero  set  has  d0  <=  3/8).  3/3
+      Float  gates.  Full  build  green  (17450  jobs).
+      A  new  INPUT  CLASS  for  the  program:
+      independently  kernel-verified  external  theorems
+      (stronger  than  citation-only,  weaker  than
+      proven-in-our-base).
+    *  TOOLCHAIN  NOTE  (owner  instruction:  check  the
+      LATEST  Lean/Mathlib  before  assuming  "removed"):
+      verified  online  2026-10-15  --  the  simp  lemma
+      Complex.intCast_im  (int  cast  has  im  0)  EXISTS
+      in  current  Mathlib  master  (file  moved  Data/
+      Complex/Basic  ->  Basic/Complex/Basic  in  the
+      reorg)  and  was  RENAME-TRACKED  in  the  changelog
+      (int_cast_im  ->  intCast_im);  our  PINNED
+      v4.33.1  predates  it.  Nothing  was  deleted
+      upstream;  Z78Strip  uses  the  pinned-safe  path
+      (nat/int  casts  are  definitionally  ofReal  in
+      both  versions:  the  mod_cast  /  ofReal_im  route).
+      No  further  action  needed  on  versions;  the  pin
+      stays  4.33.1  /  mathlib  v4.33.1.
+
+  IMPACT  ASSESSMENT  (how  much  it  helps  US)
+    *  For  proof  of  RH  itself:  ZERO  direct  help.
+      The  release  says  so  itself.  The  7/8  strip
+      gives  no  lower  bound  for  |zeta(1/2  +  it)|
+      and  provides  none  of  the  "different  <  side"
+      the  old  P1.1e  wire  analysis  asked  for.
+    *  For  zero-SET  STRUCTURE:  substantial  and  now
+      FORMAL:  all  non-trivial  zeros  in  1/8  <=  Re
+      <=  7/8  (zetaZeroStrip,  proven  from  the  named
+      input);  the  offPair  domain  of  the  walk/squeeze
+      legs  shrinks  to  d0  <=  3/8  (offPairD0le).  Any
+      theorem  in  our  program  that  quantifies  over
+      "an  off-line  zero"  can  now  assume  the  strip.
+    *  For  the  MEASURED  DATA  (v3  clause  face,  the
+      ln-t  defect  law,  s13/s19  deconvolutions):  NO
+      CHANGE  NEEDED:  the  closure  identity  was  verified
+      to  1e-6  against  the  actual  zeta;  a  zero  in
+      the  1/8..7/8  band  at  height  T  contributes  an
+      O(1/T)  shift  to  the  on-line  closure  identity  at
+      height  T  --  invisible  at  both  test  heights;
+      the  measured  e(g)  (<=  0.5%  of  Rho)  already
+      absorbs  any  such  off-line  component.  The  7/8
+      strip  merely  bounds  WHERE  any  off-line  zeros  can
+      be;  it  does  not  change  what  was  measured.
+    *  For  the  A1  /  cited-classical  inputs:  the
+      classical  SHRINKING  zero-free  region  (Re  >=
+      1  -  c/log...)  can  be  replaced  by  the  FIXED
+      half-plane  in  any  theorem  that  cites  it  --
+      simplification,  not  closure.
+    *  For  STRATEGY:  two  new  options.  (a)  once
+      independent  human  verification  completes
+      (weeks/months,  not  ours  to  drive),  the  7/8
+      theorem  enters  our  base  as  a  cited  verified
+      input  of  the  new  class  --  the  Z78Strip
+      skeleton  is  ready  and  only  the  hypothesis  line
+      changes.  (b)  their  proof  machinery  (completed
+      sums  +  Poisson  comparison  +  large  sieve  +  a
+      truncated-inverse  zero  detector)  is  a  TEMPLATE
+      for  the  squeeze-leg  theory  --  but  it  works
+      over  a  Hecke  FAMILY  over  Q(√-3),  and  the  zeta
+      alone  has  no  such  family;  no  direct  transfer
+      to  the  E1  route  is  claimed  or  assumed.
+    *  NO  RH  CLAIM.  No  change  to  the  gated  clause
+      set  (E1  B=2  below  G;  E1V3  B=7000  above  G;
+      faces  and  covers  unchanged).
+
+  Artifacts:  forms/RhAttack/Z78Strip.lean  (module,
+  gated);  references/openai/math  (sparse  clone,  NOT
+  committed  --  embedded  git  repo,  keep  local);
+  LEAN-GUIDE  updated.

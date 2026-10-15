@@ -29,10 +29,15 @@ numeric record this guide wires against).
            E1Clause.lean 3/3 Float re-evaluations (E7a-style;
            s8 M_true min/max/B-margin at f64, dps-50 oracle
            tmp/s8_m_true_sample.jsonl)
-           S1Sample.lean 3/3 Float re-evaluations (sample
-           count, Dv ratio, Dv; Float literals -- the Real
-           world sits on classical axioms and is not
-           #eval-able)
+           S1Sample.lean 9/9 Float re-evaluations (sample
+           count, Dv ratio, Dv, L-faces both flanks;
+           Float literals -- the Real world sits on
+           classical axioms and is not #eval-able)
+           Z78Strip.lean 3/3 Float re-evaluations
+           (zeroFreeTheta, stripLo, offPairD0Max; the
+           REAL theorems are provable from the NAMED
+           external input externalZeroFree78 -- see the
+           Z78 entry below)
   Gate D:  engine invariants in scripts/rh/day037_h1_3e10.py (do not
            modify): Kfull self-test (bad_asm guard), B-field bounds,
            the 400-node adjacent-section quad pair (day049e fix:
@@ -397,6 +402,27 @@ the RVM density the quad scripts integrate against.
   belowGUniformVacuous; the Real world is not
   #eval-able -- literals are the recorded data,
   exact Real forms carry the theorems).
+- Z78Strip: the EXTERNAL QUASI-RH INPUT (openai/math
+  family 003, reviewed 2026-10-15).  New input class in
+  the program: an INDEPENDENTLY KERNEL-VERIFIED
+  external theorem (two replays, two kernels sharing no
+  code; standard axioms only; published sorry-free
+  import closure), as distinct from measured data faces
+  and citation-only classical facts.  Stated as NAMED
+  PROPS in Mathlib's own vocabulary (externalZeroFree78
+  -- zeta zero-free in Re s > 7/8; externalZeroFree
+  Dirichlet78; externalSiegelGap -- the Landau-Siegel
+  uniform log-gap, line-checked by Banks
+  arXiv 2610.15483; human review of the 199-page zeta
+  argument still in progress as of this entry).
+  PROVEN from it: zetaZeroStrip (every non-real zero of
+  Mathlib's riemannZeta lies in 1/8 <= Re <= 7/8: the
+  lower edge from the functional equation with all
+  remaining factors shown non-zero) and offPairD0le
+  (every off-line pair of an actual-zeta zero set has
+  d0 <= 3/8).  The paper states RH remains open; 7/8
+  is not 1/2; no RH claim anywhere.  Full provenance:
+  the module header + DISCOVERY_LOG (2026-10-15 pm7).
 - A1Growth: the A1 wire at the provable growth form (E19).
 - E2Barrier: NEGATIVE-result record (the R2 absolute-sum barrier).
 - EulerAction + E7a: the exact finite-sum Euler-action identity +
