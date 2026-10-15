@@ -89,6 +89,7 @@ def main():
                 a_[j] += np.sum(w, dtype=np.longdouble)
 
     def work_file(nsubs=8):
+        nonlocal acc
         q = (n - lo_ix) // nsubs
         def one(i):
             lo = lo_ix + i * q
