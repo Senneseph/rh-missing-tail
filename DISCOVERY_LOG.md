@@ -9318,3 +9318,73 @@ commit,  Apache-2.0,  cited):
     tmp/s18_deconv.py;  formal/RhAttack/E1Clause.lean
     (v3  +  Part  C2);  formal/LEAN-GUIDE.md  (UPDATE 2
     on  the  clause  line).
+
+---
+
+## 2026-10-15  (pm)  s19:  the two-flank  e(g)  deconvolution  completes  --  the  defect  IS  a  small  local  Rho  departure  with  a  big  count
+
+  METHOD  (no  quadrature  anywhere):  M  =  Int_G^1e30
+  pairLog(g,t)  e(g)  dg  with  EXACT  analytic  band
+  kernels  (anti-derivatives  of  log|g-t|  (primitive
+  continuous  through  the  cusp),  log(g+t),  and
+  log(g^2+1/4));  cusp  verified  against  a  2e8-point
+  shifted  midpoint  quad  to  2e-4.  Grid:  2000  fine
+  linear  bands  (G,  G+500]  +  80  log  bands  to
+  1e30.  Tikhonov  (first-diff),  lam  swept  1..1e12:
+  the  solution  is  LAM-INSensitive  (min-norm
+  dominated).  79  measured  rows  (58  below-G  from
+  the  upper  s8  face  +  s10  transition  +  s9  +
+  s16).
+
+  FIT:  max|residual|  =  1.4045  on  the  1e8  scale
+  (rel  ~1e-11  at  the  high-t  rows;  O(0.02)  on  the
+  O(1)  below-G  face)  --  the  ENTIRE  measured  defect,
+  both  flanks,  is  reproduced  by  a  single  bounded
+  e  on  (G,  1e30].
+
+  WHERE  THE  CHARGE  IS  (min-norm  read):
+    (G,   1.2G]:     O(1e-7)     (NO  boundary  layer
+                      at  G  --  the  near-G  delta
+                      hypothesis  is  dead)
+    (2G,  5G]:      -7.7e8
+    (5G,  1000G]:   -7.3e8  to  -2.2e9  per  log  band,
+                      cumulative  -8.1e9  zeros  at
+                      1000G
+    (1000G, 1e5G]:  -3.6e9  (slow  tail)
+    (1e5G,  1e30]:  unobservable  gauge  for  every
+                      measured  row  (t  <=  1000G);
+                      min-norm  dresses  it  with
+                      +-1e23  oscillation  --  not
+                      physics.
+
+  LOCAL  AMPLITUDE  (the  honest  size):
+    max|e|  =  0.0139  per  unit  g,  at  g  ~  4.2G:
+    0.36%  of  Rho  there;  0.17%  at  5-9G;  0.09%  at
+    10G;  0.009%  at  100G;  0.001%  at  1000G.  The
+    ~1e10  cumulative  zero  count  is  built  out  of  a
+    sub-0.5%-of-Rho  local  bias  spread  over  the
+    first  ~1000G.
+
+  READ:  the  RVM  far  model  is  wrong  as  a  COUNT:
+  the  true  far  zero  distribution  departs  from
+  Rho  by  ~1e10  cumulative  zeros  by  3e13,  as  a
+  smooth  sub-0.5%  local  density  bias  peaking  near
+  g  ~  4G,  with  the  bias  region  sitting  just
+  above  the  certified  count  frontier  (3.1e10).
+  That  departure  is  the  "missing  tail":  not  a
+  boundary  layer  at  G,  not  missing  individual
+  zeros,  not  a  pole,  not  a  kernel  failure  --
+  a  count-level  Rho  systematic  in  the  un-
+  certified  far  decades.  (s13's  O(1e17)  band
+  solve  is  the  coarse-65-band  centroid  basis
+  reading  of  the  same  data,  with  rank  6  and
+  residual  3.1e5;  s19's  exact-kernel  2080-band
+  solve  supersedes  it.)  No  RH  claim  is  made:
+  this  is  a  statement  about  the  true  zeros  vs
+  the  Rho  model  on  the  M_wp  face,  consistent
+  with  all  data  verified  to  the  frontier.
+
+  * Artifacts:  tmp/s19_twoflank_deconv.{py,jsonl,md};
+    cusp-kernel  verification  (analytic  vs  2e8-point
+    shifted  midpoint:  2e-4,  in-band  and  at-band-edge
+    cusps).
