@@ -25,7 +25,33 @@
    No  RH  claim.  The  reduced  face  carries  a  WORSE
    constant  (B  +  L*Dv)  than  the  row  face  B  --  that
    is  the  price  of  the  whole-domain  quantification  on
-   a  log-spaced  sample.  -/
+   a  log-spaced  sample.
+
+   SCOPE  (settled  by  the  s23  derivative  data):
+     *  BELOW  G  the  wp  face  M_wp  is  FINITE  AND
+       C^1  (the  wp  pairing  cancels  the  self-zero
+       cusp)  --  the  bridge  is  the  correct  reduction
+       of  the  B  =  2  face  (Part  B  applies  with
+       lo  =  the  face  minimum  and  hi  =  the  s8  face
+       maximum,  M  =  M_wp  itself,  no  defect
+       subtraction).  The  LIP  face  is  s24  data.
+     *  ABOVE  G  the  wp  face  KEEPS  the  ln  zero
+       cusps  of  log|zeta|  at  the  (mostly
+       un-certified)  true  super-G  zeros:  M_wp  ->
+       -oo  there,  so  the  hLip  premise  FAILS  at
+       those  points  and  the  Part  B  glue  is  OUT  OF
+       SCOPE  above  G.  The  v3  clause  is  a
+       ROW-FACE  clause  inherently;  its  face  (7719)
+       is  ROBUST  to  unmeasured  rows  because  the  ln
+       cusp  AMPLITUDE  AT  A  ROW  is  at  most
+       ~  ln(1/d)  +  face  (d  =  the  row's  nearest
+       zero  distance,  >=  the  row  offset  net):  the
+       s23  face  |M-prime|  <=  79  (31-row  sample,
+       cusp  train  from  logzeta'  at  true  super-G
+       zeros;  lm-prime  =  pi/4  +  O(1/t)  closed
+       form)  records  the  derivative  structure;  see
+       the  log  for  the  row-robustness  argument.
+  -/
 import Mathlib
 import RhAttack.E1Clause
 
@@ -130,9 +156,31 @@ def dvData : Float := dvRatioData * gLastFloat
 
 def sampleCount : Float := 21.0
 
+/-  s23  LIP  face  (Float  literals,  the  measured
+    values  of  tmp/s23_mprime.jsonl):  max  |M-prime|
+    over  the  31  sample  rows  (6  s10  plunge  rows
+    +  21  in-domain  rows  +  the  rows  out  to
+    1000G)  =  78.9887  (the  nearest  true  super-G
+    zero  cusp  of  logzeta',  d  ~  0.013);  max
+    |M-prime  -  A/t|  (A  =  the  28-row  law  slope)
+    =  78.9887  at  the  same  row.  Per-channel
+    precision  floors  (documented  in  s23):  dsum
+    <=  1.3e-5  (f64-t  cusp  amplification  near
+    G),  lm-prime  ~  1e-11  (linear  main  term),
+    I_far-prime  ~  5e-8,  logzeta-prime  ~  1e-14,
+    eps-prime  ~  1e-38;  the  G_LAST  certification
+    floor  is  row-dependent  (<=  0.11  at  1000G,
+    recorded  per  row  in  the  jsonl).  -/
+def l2SampleFace : Float := 78.9887
+def l2FloorMax : Float := 0.11
+def lmPrimeConst : Float := 0.7853981633974483  --  pi/4
+
 #eval sampleCount
 #eval dvRatioData
 #eval dvData
+#eval l2SampleFace
+#eval l2FloorMax
+#eval lmPrimeConst
 
 /-  AMENDMENT  (check  before  trusting):  the  21  rows
     are  G+0.5..G+5  (gap  <=  0.5),  then  1.05G,

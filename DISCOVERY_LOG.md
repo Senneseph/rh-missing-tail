@@ -9572,3 +9572,83 @@ commit,  Apache-2.0,  cited):
   surface  reduced  to  measured  rows  +  measured
   derivatives  +  measured  gaps,  each  #eval-gated.
   No  RH  claim.
+
+---
+
+## 2026-10-15  (pm5)  s23  landed  --  the  derivative  face
+##  and  the  scope  settlement  of  the  S1Sample  bridge
+
+  s23  (31  rows:  6  s10  plunge  +  21  in-domain  +
+  the  4  far  rows,  all  channels  at  dps,  dsum
+  streamed  over  1.016e11  certified  zeros,  total
+  ~50  min  --  much  faster  than  the  3.6h
+  estimate):
+
+  THE  DERIVATIVE  FACE  (the  main  result):
+    *  M-prime  above  G  is  a  CUSP  TRAIN  at  the
+      TRUE  (mostly  un-certified)  super-G  zeros:
+      the  fast  oscillation  is  logzeta'  =  ~1/d
+      (d  =  distance  to  the  nearest  true  zero,
+      known  only  through  zeta,  not  from  the
+      certified  ledger);  the  certified  dsum  has
+      NO  cusp  above  G  (it  ends  at  G_LAST)  and
+      is  smooth  there  (+8.2..+9.2).
+    *  max  |M-prime|  over  the  31  rows  =  78.9887
+      (a  row  with  d  ~  0.013  to  a  true
+      super-G  zero);  max  |M-prime  -  A/t|  =
+      78.9887  at  the  same  row;  the  far  rows
+      (10G..1000G)  settle  to  |M-prime|  <=  1.34
+      (the  slow  drift  face).
+    *  lm-prime  =  pi/4  +  O(1/t)  confirmed  to
+      2e-6  (the  main  term  is  LINEAR  in  t,
+      ~0.785*t  --  the  earlier  t-log-t  scale
+      estimates  were  wrong;  all  per-channel
+      floors  are  <=  0.11  row-dependent,  see
+      the  module).
+    *  per-channel  floors  (dsum  1.3e-5  f64-t
+      cusp  amplification;  lm  1e-11;  I_far  5e-8;
+      logzeta  1e-14;  eps  1e-38):  the  face  is
+      REAL  data,  not  floor.
+
+  SCOPE  SETTLEMENT  (corrects  the  pm4  framing):
+    *  The  S1Sample  t-Lipschitz  bridge  is  the
+      correct  reduction  ONLY  where  Mres  is  C^1:
+      BELOW  G  (the  wp  pairing  cancels  the
+      self-zero  cusp;  M_wp  finite  and
+      smooth)  --  P2  (s24,  12  targets,
+      RUNNING  now)  measures  that  face.
+    *  ABOVE  G  the  wp  face  KEEPS  the  ln
+      cusps  (M_wp  ->  -oo  at  every  true
+      super-G  zero):  the  hLip  premise  of  the
+      glue  FAILS  at  those  points;  the  t-metric
+      bound  (7719  +  79*2.7e13  ~  2.1e15)  is
+      formal  but  VACUOUS,  and  the  bridge  is
+      declared  OUT  OF  SCOPE  there  (documented
+      in  the  module  header).
+    *  The  v3  clause  stays  a  ROW-FACE  clause
+      above  G,  and  its  face  is  ROBUST  to
+      unmeasured  rows:  the  ln  cusp  AMPLITUDE
+      AT  A  ROW  is  at  most  ln(1/d)  +  face
+      (d  =  nearest  zero  distance  at  the  row):
+      the  row  offset  net  (>=  0.5  from  the
+      row's  own  certified  zero)  plus  the zero
+      spacing  bound  the  reachable  d  from
+      below  in  any  measurable  case;  even  at
+      d  =  1e-6  the  amplitude  is  ~14,  far
+      inside  the  7719  face.  The  clause  needs
+      no  whole-domain  statement  above  G  --
+      the  walk  composition  consumes  the  row
+      face  as  its  S1  input.
+    *  Net:  the  S1  leg's  open  content  is  now
+      (a)  the  below-G  face  =  row  face
+      (0.0091..1.5555,  gated)  +  LIP  face
+      (s24,  running)  +  cover  (5.8099e9,
+      measured)  +  proven  bridge;  (b)  the
+      above-G  v3  row  face  (gated  7000/7719)
+      +  the  derivative  record  (s23,  gated  in
+      the  module)  +  the  robustness  argument
+      (this  entry).  No  RH  claim.
+
+  s24  is  running  (12  stratified  targets  below
+  G,  ~1.5-2h  at  the  s23  speed  --  the  D  pass
+  took  ~45  min,  not  3.5h).  No  RH  claim.
