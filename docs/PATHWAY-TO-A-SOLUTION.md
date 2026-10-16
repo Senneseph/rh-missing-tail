@@ -82,9 +82,12 @@ Data side  (measured,  on disk,  gate-checked where gated):
                  quadrature channel is authoritative;  all 5 census
                  rows pass the exact f64 sum-accounting check
                  (recorded M = fl(sum of recorded channels));
-                 dps-80 I_far recheck at 2e7G / 5e7G is the
-                 outstanding verification (in progress at the
-                 moment of this writing).
+                 dps-80 verification PASSED:  I_far dps-40 == dps-80
+                 bit-identical at 2e7G and 5e7G,  log|zeta| dps-40
+                 == dps-60 bit-identical,  plus a fresh-process 3-
+                 precision cross (dps 40/60/80  bit-identical,  the
+                 integral is cheap:  0.2 s).  The five far rows are
+                 LOCKED as data.
   Derivative face L-faces + floors both flanks;  cusps at true
                  (mostly uncertified) super-G zeros above G,
                  partial cancellation in M' below G;  smooth
@@ -127,11 +130,17 @@ for the ACTUAL zeta zero set.  The branches:
       edge-line exclusion reopen -- both are single-line reverts to
       cited-classical status in this chart.
   B7  far-side structure  (the census drift)
-      NEW.  The drift is the first non-smooth-log input;
-      deconvolution (s27 next) forward-simulates parametric
-      far-count biases against the engine kernel to locate where
-      in (G, 1e30] the count structure sits.  Feeds B1 (the walk)
-      and B5 (law territory).
+      ACTIVE.  Deconvolution first pass (s27):  the drift is
+      consistent with a localized POSITIVE far-side count offset
+      or narrow smooth distribution at g in ~[3e6G, 1e11G]
+      (~1e17..3e21 zeros-heights),  amplitude O(1e8..1e11) zeros,
+      position-amplitude degenerate at the current row set.
+      Pole-family forward fits reach ~1% of the drift amplitude.
+      Min-norm deconvolution does NOT localize (ln-direction
+      degeneracy) -- only the parametric family localizes.
+      s28 transition-window census (5e5G..7e6G) is running to
+      pin the turn-on and break the degeneracy.  Feeds B1 (the
+      walk) and B5 (law territory).
 
 ## 3.  Measured constraints  (anything that proves RH must
     reproduce these)
@@ -156,12 +165,11 @@ for the ACTUAL zeta zero set.  The branches:
 
 ## 4.  What would change our minds
 
-  - The dps-80 I_far recheck fails on any census row  ->  the
-    drift is an engine artifact;  the t^2 family is killed and the
-    far structure is re-derived from clean rows.
   - Deconvolution attributes the drift to a localized mechanism
     (a specific kernel/g behavior) rather than count structure in
-    (G, 1e30]  ->  B7 re-formulated.
+    (G, 1e30]  ->  B7 re-formulated.  (The dps-80 census
+    verification has PASSED -- the drift is measured data,  not an
+    engine artifact.)
   - A between-row violation beyond cusp robustness appears in any
     band  ->  B1 data-refuted there;  the row-face clause
     re-scoped.
@@ -173,16 +181,15 @@ for the ACTUAL zeta zero set.  The branches:
 
 ## 5.  Next moves,  in order
 
-  1.  Land the dps-80 census verification (in progress)  ->  lock
-      the five far rows as data.
-  2.  s27:  deconvolve the drift  ->  locate the far-count
-      structure in (G, 1e30]  (parametric bias forward-simulated
-      through the engine's own kernel;  the s19/s19b smooth-data
-      limit is exactly what this input removes).
-  3.  Formal:  the S1 uniform statement + walk composition against
+  1.  s28:  transition-window census rows (5e5G, 7e5G,  1.5e6G,
+      3e6G,  5e6G,  7e6G)  ->  pin the drift turn-on between the
+      ln-law plateau and the t^2-like drift;  re-deconvolve with
+      the new rows to shrink the g-window and break the
+      position-amplitude degeneracy.
+  2.  Formal:  the S1 uniform statement + walk composition against
       the current faces (P12 squeeze remains the formal
       between-row control);  track the external review of B6.
-  4.  Docs:  this document is updated by EVERY milestone commit;
+  3.  Docs:  this document is updated by EVERY milestone commit;
       no silent re-chart.
 
 ## 6.  Document governance  (flow of truth)

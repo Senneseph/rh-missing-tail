@@ -1,5 +1,12 @@
 # LEAN-GUIDE — the rh-missing-tail formal base, in one file
 
+> **Module index:**  the per-file "what / how / used-for" cards now
+> live in  `formal/cards/`  (one card per  .lean,  ~540  lines
+> total,  readable  in  one  session,  generated  by
+> `scripts/rh/make_lean_cards.py`;  read  `cards/_MAP.md`  first).
+> This  file  keeps  what  it  uniquely  owns:  conventions,  the
+> Float-gate  ledger,  toolchain  facts,  and  the  build  protocol.
+
 Find out what is proven, where it lives, how the pieces connect, and the
 exact conventions every side (Lean, engine, quad scripts) uses.  This is
 the navigation + convention layer; per-file headers stay authoritative for
