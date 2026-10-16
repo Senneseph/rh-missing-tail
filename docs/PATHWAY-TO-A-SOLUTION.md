@@ -293,11 +293,16 @@ for the ACTUAL zeta zero set.  The branches:
       real  X  with  the  C2  lower  bound  dev*(1-mPin)  AND
       the  C3  margin  bound  dev/112.6;  the  engine's
       contradiction  instantiated  at  the  data  face.  Next
-      formal  move:  the  low-band  wire  SHAPE  (definitional
-      zero  wires  below  the  strip,  machine-proven)  +  the
-      hs1  low-band  face  (C2  >=  side  +  QSide  resid  +
-      the  hgrid  margin  face),  then  track  the  external
-      review  of  B6.
+      formal  move:  THE  LOW-BAND  WIRE  SHAPE  IS  GATED
+      (discovery  0092,  LowWires.lean):  the  R-wires  are
+      definitional  zero  below  the  strip,  the  floor  is
+      the  near  pin,  and  lowBandSqueezeShape  pins  the
+      three  nontrivial  low-band  legs  as  JOINTLY
+      contradictory  (0.9975  <=  devStripMin  <=  Qside  <=
+      0)  -  the  squeeze  shape  at  the  low-band  wire
+      configuration;  remaining:  the  hs1  low-band  FACE
+      (C2  >=  side  +  QSide  resid  +  the  hgrid  margin
+      face),  then  track  the  external  review  of  B6.
   3.  Docs:  this document is updated by EVERY milestone commit;
       no silent re-chart.
 
