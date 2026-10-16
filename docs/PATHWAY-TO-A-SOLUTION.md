@@ -130,17 +130,21 @@ for the ACTUAL zeta zero set.  The branches:
       edge-line exclusion reopen -- both are single-line reverts to
       cited-classical status in this chart.
   B7  far-side structure  (the census drift)
-      ACTIVE.  Deconvolution first pass (s27):  the drift is
-      consistent with a localized POSITIVE far-side count offset
-      or narrow smooth distribution at g in ~[3e6G, 1e11G]
-      (~1e17..3e21 zeros-heights),  amplitude O(1e8..1e11) zeros,
-      position-amplitude degenerate at the current row set.
-      Pole-family forward fits reach ~1% of the drift amplitude.
-      Min-norm deconvolution does NOT localize (ln-direction
-      degeneracy) -- only the parametric family localizes.
-      s28 transition-window census (5e5G..7e6G) is running to
-      pin the turn-on and break the degeneracy.  Feeds B1 (the
-      walk) and B5 (law territory).
+      ACTIVE  AT  THE  LEVERAGED  WALL.  Verified  data  (dps-80):
+      the  drift  is  small  positive  at  3e5G-1e6G  (the  (t/g0)^2
+      kernel-tail  bump,  first  data  below  the  2e3G  census
+      onset),  crosses  zero  at  t/G  in  (7e5,  1e6),  then  grows
+      NEGATIVE  t^2-like  (per-doubling  ~4.0  by  1e7G).  s29
+      deconvolution  (33  rows):  positive  far-side  count  excess,
+      g-side  window  [2e8G,  1e11G],  lognormal  sigma  ~1,  best
+      single  configuration  ~1e9G,  amplitude  O(1e8..1e11);
+      position-amplitude  degeneracy  over  ~3-4  decades  because
+      every  measured  row  is  in  t  <<  g0.  Cross-run  lock:  the
+      s28  re-run  of  5e6G  matches  s25  EXACTLY  (-475565520).
+      Breaking  the  g-side  degeneracy  needs  rows  at  t  ~  g0
+      (~3e20),  ~200x  past  the  engine's  verified  1.5e18
+      extreme-quadrature  boundary  --  an  engine  task,  not  a
+      data  task.  Feeds  B1  (the  walk)  and  B5  (law  territory);
 
 ## 3.  Measured constraints  (anything that proves RH must
     reproduce these)
@@ -181,11 +185,11 @@ for the ACTUAL zeta zero set.  The branches:
 
 ## 5.  Next moves,  in order
 
-  1.  s28:  transition-window census rows (5e5G, 7e5G,  1.5e6G,
-      3e6G,  5e6G,  7e6G)  ->  pin the drift turn-on between the
-      ln-law plateau and the t^2-like drift;  re-deconvolve with
-      the new rows to shrink the g-window and break the
-      position-amplitude degeneracy.
+  1.  FAR-ENGINE  FRONTIER:  extend  and  verify  the  extreme-
+      quadrature  regime  from  the  1.5e18  boundary  toward
+      t  ~  1e19-1e20  (rows  there  are  the  only  leverage  that
+      breaks  the  B7  g-side  degeneracy);  until  then  B7  stands
+      at  its  leveraged  wall  with  the  window  of  record.
   2.  Formal:  the S1 uniform statement + walk composition against
       the current faces (P12 squeeze remains the formal
       between-row control);  track the external review of B6.
