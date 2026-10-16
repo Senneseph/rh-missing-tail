@@ -107,7 +107,17 @@ for the ACTUAL zeta zero set.  The branches:
       (as every known local attack does).  Pointwise structure is
       proven;  uniformity is currently measured from the sampled
       row faces,  L-faces,  and covers,  with the P12 squeeze as
-      the formal between-row control.  This is THE open item.
+      the formal between-row control.  The full formal chain is
+      now  GATED:  S1Sample  (t-Lipschitz  bridge,  below  G)
+      +  S1Cusp  (cusp-aware  bridge,  above  G)  +  S1Uni-
+      form  (the  S1  UNIFORM  statement  on  the  full  program
+      domain  --  two-sided  below  G,  dead-zone  plunge,  one-
+      sided  E1-threat  above  G  --  and  its  composition
+      s1UniformAndWalk  into  RH  on  the  four  walk  legs).
+      The  named  open  items  are  the  data  faces  (row
+      faces,  L  faces,  covers,  dead  zone,  cusp  spacing
+      +  amplitude)  and  the  E1ClauseV3  clause  itself.
+      This  is  THE  open  item.
   B2  detector floor  (S2)
       CLOSED:  s2ActualLowBandComplete + s2ActualFullBand,  one
       unified floor floStripMin = mown on the covered band.
@@ -166,7 +176,12 @@ for the ACTUAL zeta zero set.  The branches:
   - Far drift:  turns on around 1e6G-2e6G,  t^2-like per-doubling
     ratios (4.1 / 4.0 / 6.3) over 1e7G-5e7G;  D ~ K x^p global fit
     p = 2.23,  K = 2.0e-10.
-  - Integer quantization of M (f64-exact) at ALL 33 rows to date.
+  - Integer quantization of M (f64-exact) at ALL 35 rows to date
+    (28  law-band  rows  +  the  5  s25  far  rows  +  the  2  s30
+    extreme  rows).
+  - s30  extreme  rows:  M(3.0001e18)  =  -648727552  (1e8G)  and
+    M(9.0003e18)  =  -1458497536  (3e8G);  I_far  dps40  =  dps60
+    =  dps80  on  both;  f64  sum  match  exact  on  both.
   - Sum-accounting:  M = fl(sum of channels) exactly on the census
     rows.
   - Row faces / L-faces / covers as gated in S1Sample.
@@ -193,14 +208,20 @@ for the ACTUAL zeta zero set.  The branches:
 
 ## 5.  Next moves,  in order
 
-  1.  FAR-ENGINE  FRONTIER:  extend  and  verify  the  extreme-
-      quadrature  regime  from  the  1.5e18  boundary  toward
-      t  ~  1e19-1e20  (rows  there  are  the  only  leverage  that
-      breaks  the  B7  g-side  degeneracy);  until  then  B7  stands
-      at  its  leveraged  wall  with  the  window  of  record.
-  2.  Formal:  the S1 uniform statement + walk composition against
-      the current faces (P12 squeeze remains the formal
-      between-row control);  track the external review of B6.
+  1.  FAR-ENGINE  WALL  PROBE  (in  flight):  fresh-process
+      RS-zeta  ladder  at  t  =  9e18/3e19/9e19/3e20  (dps-40)
+      to  settle  whether  the  3e19  zeta  OOM  (s30  died  at
+      117  GB  RSS  there)  is  fundamental  or  a  residency
+      artifact;  the  result  decides  between  engine
+      extension  (rows  toward  1e19+)  and  a  ZETA-CHANNEL
+      replacement  for  the  extreme  rows  (every  other
+      channel  is  cheap  there).
+  2.  Formal:  THE  S1  UNIFORM  STATEMENT  +  WALK
+      COMPOSITION  IS  GATED  (S1Uniform:  s1UniformFace  +
+      s1UniformStatement  +  s1UniformAndWalk;  full  build
+      green  17450).  What  remains  named:  the  data  faces
+      and  E1ClauseV3  q  7000  itself.  Track  the  external
+      review  of  B6.
   3.  Docs:  this document is updated by EVERY milestone commit;
       no silent re-chart.
 
