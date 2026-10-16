@@ -9992,3 +9992,55 @@ commit,  Apache-2.0,  cited):
   NO  RH  CLAIM.  Gates  Z78P12  3/3  (all  true);
   build  green  17450.  Lean  4.33.1  /  mathlib
   v4.33.1  (pinned).
+
+---
+
+## 2026-10-15  (pm8c)  S2  ON  THE  LOW  BAND  COMPLETE
+##  for  the  actual  set  (proven  +  data-vacuous)
+
+  The  last  S2  residual  of  S1LowT.strip_squeeze_v2  was
+  the  SLIVER  (0  <  t0  \u003c  707/50  =  14.14,  the  C1b
+  regime  gap  just  above  the  first  zero):  there  the
+  window  floors  were  a  PINNED  day-010  measurement
+  of  record.  NEW  (Z78P12):
+
+    *  sliverOffPairsEmpty:  under  the  NAMED  on-line
+      record  (the  day030  813-zero  slice:  every  zero
+      in  (0,  1200]  on  the  critical  line,  max  |zeta|
+      1.96e-12  below  the  1e-8  gate),  the  sliver
+      contains  NO  off-pair  --  its  single  zero
+      (14.134725..)  is  on  the  line  (d0  =  0,
+      excluded  by  offPair's  d0  \u003e  0  +  re  !=  1/2).
+      The  statement  keys  on  |rho.im|  (pairs  below  the
+      real  axis  via  conjugation  included).
+
+    *  s2ActualLowBandComplete:  for  the  actual  set,  on
+      the  WHOLE  low  band  (0  \u003c  t0  \u003c  TLow  =  1000,
+      0  \u003c  d0  \u003c=  1/2)  the  concrete  detector
+      devStripMin  dominates  the  concrete  floor
+      floStripMin  --  t0  \u003e=  707/50  (incl.  the  edge
+      d0  =  1/2):  the  PROVEN  s2_strip_min  (C1b
+      window  atom  +  C1a  own-height  atom);  sliver:
+      vacuous.  S2  on  the  low  band  needs  NO
+      hypothesis  anymore  (the  hsliver  leg  of  v2  is
+      discharged  for  the  actual  set).
+
+  INPUT-CLASS  ACCOUNT  (actual-set  composition,  after
+  pm8c):
+    S2  LOW  BAND:  COMPLETE  (proven  atoms  +  on-line
+      data  vacuity;  the  pinned  day-010  sliver  floor
+      is  no  longer  load-bearing)
+    S2  HIGH  BAND  (t0  \u003e=  1000):  pointwise  atoms
+      proven  (far  /  own  /  window  discrete,  P12
+      status  map  S2a/b/c);  the  concrete  dev/flo  wire
+      across  the  high  band  is  the  named  composition
+      item  (day-scale,  not  hours)
+    S1  (zero-side  uniform  walk):  OPEN  RESEARCH
+      (W2-beyond  /  25x;  measured  faces  settled  at
+      data  limit  by  the  s8-s24  track)
+    S3  +  S4-LOW  band:  measured  fills  (day030  margin
+      >=  7.357  +  GridAdequate;  PINNED  data)
+    7/8  input:  kernel-verified,  human  review  in
+      progress  (external,  weeks)
+  NO  RH  CLAIM.  Build  green  17450.  Lean  4.33.1  /
+  mathlib  v4.33.1  (pinned).

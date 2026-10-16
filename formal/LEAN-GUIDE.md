@@ -454,7 +454,19 @@ the RVM density the quad scripts integrate against.
   ch. II.6) is REPLACED, for actual-set zero sets, by a
   lemma PROVEN from [Z78] alone (the strip 1/8 <= Re
   <= 7/8 excludes both lines with margin 1/8) -- the
-  cited paragraph is fully superseded (pm8).
+  cited paragraph is fully superseded (pm8).  Third:
+  S2 ON THE LOW BAND IS COMPLETE for the actual set
+  (s2ActualLowBandComplete): t0 >= 707/50 incl. the edge
+  d0 = 1/2 is the PROVEN s2_strip_min (C1b window +
+  C1a own-height atoms); the sliver t0 < 707/50 is
+  VACUOUS under the named on-line record (the day030
+  813-zero slice: all zeros on the critical line, max
+  |zeta| 1.96e-12) -- sliverOffPairsEmpty: its single
+  zero (14.134725..) is on the line, so the sliver
+  presents no off-pair and the pinned day-010 sliver
+  floor requirement holds by vacuity (pm8c).  S2 is
+  thus fully accounted for on the actual set's low band:
+  proven + data-vacuous, no hypothesis.
 - A1Growth: the A1 wire at the provable growth form (E19).
 - E2Barrier: NEGATIVE-result record (the R2 absolute-sum barrier).
 - EulerAction + E7a: the exact finite-sum Euler-action identity +

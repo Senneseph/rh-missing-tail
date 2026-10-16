@@ -1,6 +1,7 @@
 import Mathlib
 import RhAttack.B0
 import RhAttack.P12Uniform
+import RhAttack.S1LowT
 import RhAttack.S4Asm
 import RhAttack.SliverEdge
 import RhAttack.Z78Strip
@@ -148,5 +149,54 @@ def edgeLineLo : Float := 0.0
 def edgeLineHi : Float := 1.0
 #eval (Z78.stripLo : Float) - edgeLineLo > 0
 #eval edgeLineHi - Z78.zeroFreeTheta > 0
+
+/- S2 ON THE LOW BAND, FOR THE ACTUAL SET: the last S2
+   residual of S1LowT.strip_squeeze_v2 is the SLIVER
+   (t0 < 707/50 = 14.14, the C1b regime gap just above the
+   first zero) where the window floors are the pinned day-010
+   measurement.  Under the named on-line data record (the
+   day030 813-zero slice: all zeros in (0, 1200] on the
+   critical line, max |zeta| 1.96e-12 below the 1e-8 gate),
+   the sliver contains no off-pair at all -- the single
+   sliver zero (14.134725..) is on the line -- so the sliver
+   floor requirement holds vacuously, and S2 on the low band
+   for the actual set is COMPLETE: the t0 >= 707/50 part is
+   the PROVEN s2_strip_min (C1b window + C1a own-height
+   atoms, edge d0 = 1/2 included), the sliver part is the
+   data vacuity below. -/
+theorem sliverOffPairsEmpty (q : ZeroSet)
+    (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) → (|ρ.im| : ℝ) <
+      (707 : ℝ) / 50 → ρ.re = 1 / 2)
+    (t0 d0 : ℝ) (ht0 : 0 < t0) (ht0u : t0 < (707 : ℝ) / 50)
+    (hd0 : 0 < d0) (hd0u : d0 ≤ 1 / 2) :
+    ¬ P12.offPair q t0 d0 := by
+  intro hp
+  have hpair := hp
+  obtain ⟨ρ, hr, hre, him, hd⟩ := hpair
+  have himpos : 0 < (|ρ.im| : ℝ) := by
+    rw [him]
+    exact ht0
+  have himup : (|ρ.im| : ℝ) < (707 : ℝ) / 50 := by
+    rw [him]
+    exact ht0u
+  exact hre (honline ρ hr himpos himup)
+
+/-- (PROVEN)  S2 for the actual set on the whole low band
+    (0 < t0 < TLow = 1000, 0 < d0 <= 1/2): the concrete
+    strip detector devStripMin dominates the concrete floor
+    floStripMin.  Regimes: t0 >= 707/50 -- s2_strip_min
+    (PROVEN atoms, edge included); t0 < 707/50 (the sliver) --
+    vacuous under the named on-line record
+    (sliverOffPairsEmpty). -/
+theorem s2ActualLowBandComplete (q : ZeroSet)
+    (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) → (|ρ.im| : ℝ) <
+      (707 : ℝ) / 50 → ρ.re = 1 / 2)
+    (t0 d0 : ℝ) (ht0 : 0 < t0) (ht0u : t0 < S1LowT.TLow)
+    (hd0 : 0 < d0) (hd0u : d0 ≤ 1 / 2) (hp : P12.offPair q t0 d0) :
+    S1LowT.devStripMin t0 d0 ≥ S1LowT.floStripMin t0 d0 := by
+  by_cases hsliver : t0 < (707 : ℝ) / 50
+  · exact False.elim (
+      sliverOffPairsEmpty q honline t0 d0 ht0 hsliver hd0 hd0u hp)
+  · exact S1LowT.s2_strip_min t0 d0 (by linarith) hd0 hd0u
 
 end Z78P12
