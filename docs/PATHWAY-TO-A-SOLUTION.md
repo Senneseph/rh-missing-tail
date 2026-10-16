@@ -224,11 +224,23 @@ for the ACTUAL zeta zero set.  The branches:
       CONSTANT  to  6  digits  (2.61790e-11):  the  far
       integral  is  t-LINEAR  (settled  channel),  the
       t^2  drift  lives  in  the  M  balance  (the  (t/g0)^2
-      kernel-tail  term  engaging).  Breaking  the  g-side
-      degeneracy  needs  rows  at  t  ~  g0  (~3e20),  ~20x
-      past  the  verified  1.5e19  --  an  engine  task,
-      not  a  data  task.  Feeds  B1  (the  walk)  and  B5
-      (law  territory);
+      kernel-tail  term  engaging).  s33  RE-DECONVOLUTION  (the
+      s29  family  on  all  36  rows,  the  3  extreme  rows  now
+      in  the  far  set):  the  extreme  curvature  PULLS  THE
+      g-side  WINDOW  UP  --  P1  pole  best  h0  =  2e10G
+      (max|res|  2.8e5,  ~1e-4  relative  at  the  5e8G  row),
+      P3  lognormal  best  at  1e11G  (2.75e5),  admissible
+      h0  compressed  from  the  s29  window  [2e8G,  1e11G]
+      to  ~[1e10G,  1e12G]  with  the  best  fits  at  the
+      UPPER  edge  (h0  ~ 1e10G..1e11G,  best-config  amplitude
+      O(1e9..1e12));  the  position-amplitude  degeneracy
+      SURVIVES  but  narrows  to  ~2  decades,  and  the
+      row  needed  to  break  it  moves  to  t  ~  g0  ~
+      3e20..3e21  --  even  deeper  past  the  verified  1.5e19.
+      Breaking  the  g-side  degeneracy  is  therefore  an
+      engine  task  (a  C  zeta  channel  or  more  RAM),
+      not  a  data  task  on  this  machine.  Feeds  B1  (the
+      walk)  and  B5  (law  territory);
 
 ## 3.  Measured constraints  (anything that proves RH must
     reproduce these)
