@@ -154,12 +154,26 @@ for the ACTUAL zeta zero set.  The branches:
       s30  LOCKED  two  new  far  rows  (I_far  dps40/60/80
       identical  +  f64  sum  match):  1e8G  (M = -648727552)  and
       3e8G  (M = -1458497536)  --  the  verified  extreme  boundary
-      now  stands  at  9e18  (was  1.5e18).  Rows  at  1e9G  and
-      higher  (t =  3e19,  9e19,  3e20)  are  currently  blocked  by
-      RS-zeta  memory:  s30  was  OOM-killed  at  117  GB  RSS  on
-      the  t =  3e19  row  in  the  dps-40  zeta  channel  (a
-      fresh-process  wall  probe  at  9e18/3e19/9e19/3e20  is  in
-      flight).  Breaking  the  g-side  degeneracy  needs  rows  at
+      now  stands  at  9e18  (was  1.5e18).  FRESH-PROCESS  WALL
+      PROBE  VERDICT:  the  dps-40  zeta  channel  SUCCEEDS  at
+      t  =  9e18  (logzeta  =  -1.57280218,  63  min,  73.7  GB
+      peak  -  an  independent  re-derivation  of  the  3e8G
+      census  row's  zeta  channel)  but  is  OOM-KILLED  FRESH
+      at  t  =  3e19  (114.6  GB  anon-rss  against  124  GB
+      system  RAM)  -  the  wall  is  FUNDAMENTAL  for  the
+      dps-40  channel  on  this  machine,  at  [9e18,  3e19).
+      s31z  LADDER  VERDICT  (dps  15/20/30/40  at  3e19/9e19/
+      3e20,  fresh  processes:  ALL  OOM-killed  in  the  first
+      dps-15  call,  dmesg  confirmed):  the  per-term  cost  of
+      the  N  =  sqrt(t/2pi)  precompute  is  NEARLY
+      PRECISION-INDEPENDENT  (~  53-62  B  over  dps
+      15..40)  -  low  precision  does  NOT  move  the  wall;
+      it  is  LOCKED  at  [9e18,  3e19)  for  all  mpmath
+      precisions  on  this  124 GB  machine.  s31z2  is  in
+      flight:  the  5e8G  row  (t  =  1.5e19,  N  =  1.545e9,
+      model  83-95  GB  -  the  LAST  reachable  height,  one
+      fresh  process  per  dps  in  the  ladder).
+      Breaking  the  g-side  degeneracy  needs  rows  at
       t  ~  g0  (~3e20),  ~33x  past  the  verified  9e18  --  an
       engine  task,  not  a  data  task.  Feeds  B1  (the  walk)
       and  B5  (law  territory);
@@ -208,14 +222,18 @@ for the ACTUAL zeta zero set.  The branches:
 
 ## 5.  Next moves,  in order
 
-  1.  FAR-ENGINE  WALL  PROBE  (in  flight):  fresh-process
-      RS-zeta  ladder  at  t  =  9e18/3e19/9e19/3e20  (dps-40)
-      to  settle  whether  the  3e19  zeta  OOM  (s30  died  at
-      117  GB  RSS  there)  is  fundamental  or  a  residency
-      artifact;  the  result  decides  between  engine
-      extension  (rows  toward  1e19+)  and  a  ZETA-CHANNEL
-      replacement  for  the  extreme  rows  (every  other
-      channel  is  cheap  there).
+  1.  FAR-ENGINE  WALL  (s31z2  in  flight):  LOCKED  -  the
+      s31z  ladder  shows  the  mpmath  zeta  wall  at
+      [9e18,  3e19)  holds  at  ALL  precisions  (the  N-term
+      precompute  is  ~  precision-independent;  3e19/9e19/3e20
+      OOM  fresh  at  dps-15).  The  5e8G  row  (t  =  1.5e19,
+      the  LAST  reachable  height,  model  83-95  GB)  is  in
+      flight  as  the  s31z2  ladder  (one  fresh  process  per
+       dps  15/20/30/40);  if  it  lands,  the  staggered  row
+      protocol  (streams  +  zeta  +  f64  merge)  locks  the
+       boundary  at  1.5e19;  if  not,  9e18  stands  and  the
+      remaining  levers  are  a  C  zeta  channel  or  more
+      RAM.  Until  then  B7  stands  at  its  leveraged  wall.
   2.  Formal:  THE  S1  UNIFORM  STATEMENT  +  WALK
       COMPOSITION  IS  GATED  (S1Uniform:  s1UniformFace  +
       s1UniformStatement  +  s1UniformAndWalk;  full  build
