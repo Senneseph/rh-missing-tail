@@ -138,6 +138,20 @@ for the ACTUAL zeta zero set.  The branches:
       gies);  the  whole  spine  is  now  retyped  (P12Uniform,
       ZetaZeroSet,  E1Clause,  S4Asm,  Z78P12,  S1Uniform,
       S1LowT,  RHEnd)  -  discovery  0088.
+      LIVENESS  AUDIT  (discovery  0089):  the  retyped  spine
+      is  a  GENUINE  squeeze-contradiction,  not  a  dead  form:
+      the  6-wire  tuple  (zero  side,  dev,  floor,  error,
+      def  side,  residue)  is  jointly  contradictory  ONLY  AT
+      A  PAIR  WHERE  AN  OFF-PAIR  EXISTS  (assume  one;  the
+      wire  hypothesis  materializes  the  tuple  at  its
+      minimum-height  pair;  p9_point_contradiction  forces
+      False)  -  the  contradiction  across  four  SEPARATELY
+      CHECKABLE  legs  is  the  engine's  work.  This  differs
+      from  the  0088  dead  form,  where  the  contradiction
+      sat  INSIDE  ONE  LEG  (S3,  unsatisfiable  for  any
+      finite  wire,  no  data  content).  The  algebraic  core
+      is  cross-checked  independently,  Mathlib-only:
+      ProbeMargin6.margin6_unsat  (green).
   B2  detector floor  (S2)
       CLOSED:  s2ActualLowBandComplete + s2ActualFullBand,  one
       unified floor floStripMin = mown on the covered band.
@@ -260,10 +274,12 @@ for the ACTUAL zeta zero set.  The branches:
       squeeze  regimes  closed  IN  BODY;  the  named  residual
       reduced  to  hs1  (S1  witness),  hs3  (S3  wire),  hWin
       (S4  window-pin  shape),  hS2low  (S2  low-band  pin)),
-      and  the  Q  CONTR  ACT  OF  THE  WALK  SPINE  IS  RE-  TYPED
+      and  the  Q  CONTRACT  OF  THE  WALK  SPINE  IS  RETYPED
       TO  THE  CONCRETE  SCALE  Qside  (the  old  form  was  a
-      dead  form  -  unsatisfiable  S3;  discovery  0088;  full
-      build  green  17450).  Next  formal  move:  concretize
+      dead  form  -  unsatisfiable  S3;  discovery  0088);  the
+      retyped  spine  is  live  (liveness  audit  -  discovery
+      0089,  ProbeMargin6  green;  full  build  17450).  Next
+      formal  move:  concretize
       Qside  as  a  NAMED  DATA  FACE  (the  measured  |zeta|
       fill  under  A4.3,  as  a  def  +  Float  gate  on  the
       audited  band),  which  makes  hs1/hs3  checkable  data
