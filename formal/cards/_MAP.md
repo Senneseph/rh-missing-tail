@@ -10,8 +10,10 @@ A chain of named theorems;  each box names the modules.
 
   S1 zero side
      S1Point (ap5 point RvM)  +  S1Sample (sample->uniform bridge,
-     row faces / L-faces / covers gated)  +  A1Growth (the far
-     wire, from W2Beyond3)  +  W2Telescope (tail = COUNT statement)
+     BELOW G,  row faces / L-faces / covers gated)  +  S1Cusp
+     (cusp-aware bridge,  ABOVE G:  plunge / V-flanks / row-face
+     bridge;  uniform in the plunge)  +  A1Growth (the far wire,
+     from W2Beyond3)  +  W2Telescope (tail = COUNT statement)
   S2 detector floor
      S1LowT (floWin/floOwn/floStripMin, s2_strip_min)  +  C1b
   S3 definition side
@@ -47,9 +49,10 @@ A chain of named theorems;  each box names the modules.
 
   Orphans (terminal or historical,  no one imports them)
      A1Growth  E2Barrier  E1Clause  FloorUnif  M6  S1Point
-     S1Sample  S4Sharp  W2Beyond1  W2M6  Ap3RvMStatement
+     S1Sample  S4Sharp  S1Cusp  W2Beyond1  W2M6  Ap3RvMStatement
      Ap3StrongPNTPrefix  Ap3Halving  ProbeM5  ProbeTmp
 
 Reading order for a fresh session:  this file,  then the cards of
 B0,  P12Uniform,  Closure,  ZetaZeroSet,  E1Clause,  Z78P12,
-FloorUnif,  S1Sample,  S1Point,  S4Asm  --  that is the spine.
+FloorUnif,  S1Sample,  S1Cusp,  S1Point,  S4Asm  --  that is the
+spine.

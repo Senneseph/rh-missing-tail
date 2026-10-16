@@ -141,10 +141,18 @@ for the ACTUAL zeta zero set.  The branches:
       position-amplitude  degeneracy  over  ~3-4  decades  because
       every  measured  row  is  in  t  <<  g0.  Cross-run  lock:  the
       s28  re-run  of  5e6G  matches  s25  EXACTLY  (-475565520).
-      Breaking  the  g-side  degeneracy  needs  rows  at  t  ~  g0
-      (~3e20),  ~200x  past  the  engine's  verified  1.5e18
-      extreme-quadrature  boundary  --  an  engine  task,  not  a
-      data  task.  Feeds  B1  (the  walk)  and  B5  (law  territory);
+      s30  LOCKED  two  new  far  rows  (I_far  dps40/60/80
+      identical  +  f64  sum  match):  1e8G  (M = -648727552)  and
+      3e8G  (M = -1458497536)  --  the  verified  extreme  boundary
+      now  stands  at  9e18  (was  1.5e18).  Rows  at  1e9G  and
+      higher  (t =  3e19,  9e19,  3e20)  are  currently  blocked  by
+      RS-zeta  memory:  s30  was  OOM-killed  at  117  GB  RSS  on
+      the  t =  3e19  row  in  the  dps-40  zeta  channel  (a
+      fresh-process  wall  probe  at  9e18/3e19/9e19/3e20  is  in
+      flight).  Breaking  the  g-side  degeneracy  needs  rows  at
+      t  ~  g0  (~3e20),  ~33x  past  the  verified  9e18  --  an
+      engine  task,  not  a  data  task.  Feeds  B1  (the  walk)
+      and  B5  (law  territory);
 
 ## 3.  Measured constraints  (anything that proves RH must
     reproduce these)
