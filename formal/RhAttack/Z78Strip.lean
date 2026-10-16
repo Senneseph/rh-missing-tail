@@ -193,9 +193,13 @@ theorem zetaZeroStrip (hz78 : externalZeroFree78) (ρ : ℂ)
     zero set: if every element of `q.Z` is an actual zero of
     Mathlib's zeta (the classical instantiation the B-0
     header leaves to citation), then every off-line pair
-    (t0, d0) of `q` has off-line distance `d0 <= 3/8`: the
-    zero sits in the strip `1/8 <= Re <= 7/8`, at most
-    `3/8` off the line. -/
+    (t0, d0) of `q` has off-line distance `d0 <= 3/8` — the
+    sharp value: the zero sits in the strip
+    `1/8 <= Re <= 7/8`, so `|Re - 1/2| <= max(1/2 - 1/8,
+    7/8 - 1/2) = 3/8` (both endpoints attain it).  In
+    particular `d0 < 1/2`, so the far region of the S4
+    squeeze (d0 > 1/2) is EMPTY for any actual-set zero set
+    under [Z78]. -/
 theorem offPairD0le (q : ZeroSet) (hz78 : externalZeroFree78)
     (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
     (t0 d0 : ℝ) (ht0 : 0 < t0) (hd0 : 0 < d0) (hp : P12.offPair q t0 d0) :

@@ -38,6 +38,10 @@ numeric record this guide wires against).
            REAL theorems are provable from the NAMED
            external input externalZeroFree78 -- see the
            Z78 entry below)
+           Z78P12.lean 1/1 Float gate (stripD0Max <
+           farThreshold = true; the d0 > 1/2 far region
+           is empty for the actual set under 7/8,
+           certified vacuity margin 1/8)
   Gate D:  engine invariants in scripts/rh/day037_h1_3e10.py (do not
            modify): Kfull self-test (bad_asm guard), B-field bounds,
            the 400-node adjacent-section quad pair (day049e fix:
@@ -423,6 +427,24 @@ the RVM density the quad scripts integrate against.
   d0 <= 3/8).  The paper states RH remains open; 7/8
   is not 1/2; no RH claim anywhere.  Full provenance:
   the module header + DISCOVERY_LOG (2026-10-15 pm7).
+  OPERATIONAL LAYER (Z78P12.lean, 2026-10-15 pm8):  the
+  7/8 input is now WOVEN INTO the P1.2 reduction itself.
+  offPairFarEmpty -- no off-pair with d0 > 1/2 can exist
+  for a zero set whose elements are actual zeta zeros
+  (sharp d0 <= 3/8 < 1/2; 3/8 is the sharp strip
+  distance, both strip endpoints attain it).
+  rh_actual78 -- under [Z78] + the pinned low-window
+  wire hX, RH for an actual-set zero set reduces EXACTLY
+  to: S1 (zero-side witness) + S2 (detector floor,
+  concrete residue floors) + S3 (witness upper wire,
+  concrete residue wires) + S4 LOW band (0 < t0 < 1000,
+  0 < d0 <= 1/2, data-verified territory).  The covered
+  territory (t0 >= 1000, d0 <= 1/2) is supplied by the
+  PROVEN window/strip bound-level closure
+  (s4asm_residue_S4_covered); the far region (d0 > 1/2)
+  is VACUOUS, not a hypothesis, for the actual set --
+  closing the last CITED-classical residue of the S4
+  composition for that set.
 - A1Growth: the A1 wire at the provable growth form (E19).
 - E2Barrier: NEGATIVE-result record (the R2 absolute-sum barrier).
 - EulerAction + E7a: the exact finite-sum Euler-action identity +

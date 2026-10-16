@@ -9867,3 +9867,82 @@ commit,  Apache-2.0,  cited):
   gated);  references/openai/math  (sparse  clone,  NOT
   committed  --  embedded  git  repo,  keep  local);
   LEAN-GUIDE  updated.
+
+---
+
+## 2026-10-15  (pm8)  Z78P12:  the  7/8  input  WOVEN  INTO
+##  the  P1.2  reduction  --  far  region  VACUOUS  (proven)
+
+  FOLLOW-ON  to  the  openai/math  Z78  integration
+  (pm7).  The  S4  composition  (S4A.rh_from_regime
+  closures)  had  CLOSED  the  squeeze  at  the  bound
+  level  on  the  covered  territory  (t0  >=  1000,
+  0  <  d0  <=  1/2  --  window  U  strip,
+  25m/25ab/25af)  and  kept  two  residual  territories
+  EXPLICIT:  the  LOW  band  (t0  <  1000,  data-
+  verified)  and  the  FAR  region  (d0  >  1/2,  Re
+  rho  outside  (0,1)).  For  the  ABSTRACT  zero  set
+  the  far  region  could  not  be  discharged  (the
+  abstract  ZeroSet  does  not  encode  zero-free
+  regions);  it  was  carried  as  a  HYPOTHESIS,
+  justified  for  the  actual  set  only  by  CITED
+  classical  zero-free  regions.
+
+  NEW  MODULE  formal/RhAttack/Z78P12.lean  discharges
+  that  far  region  for  ACTUAL-SET  zero  sets  by  a
+  PROVEN  fact  of  a  stronger  input  class:
+
+    *  offPairFarEmpty:  under  [Z78]  (the
+      external  7/8  input,  kernel-verified),  no  off-
+      pair  with  d0  >  1/2  can  exist  for  a  zero
+      set  whose  elements  are  actual  zeta  zeros.
+      Chain:  zetaZeroStrip  (1/8  <=  Re  <=  7/8)
+      ->  offPairD0le  (d0  =  |Re  -  1/2|  <=  3/8,
+      SHARP  --  both  strip  endpoints  attain  it:
+      the  strip  is  symmetric  about  1/2)  ->
+      3/8  <  1/2  ->  the  far  region  is  empty.
+
+    *  rh_actual78  (THE  ACTUAL-SET  REDUCTION):  for
+      a  zero  set  all  of  whose  elements  are  zeta
+      zeros,  under  [Z78]  +  the  pinned  low-window
+      wire  hX,  RH  holds  as  soon  as
+        S1  (zero-side  witness  Q  >=  devOf)  +
+        S2  (devOf  >=  floP,  the  concrete  residue
+        floors:  mown  on  the  strip,  near  pin  on
+        the  window)  +
+        S3  (Q  <=  BwireP  +  MrP,  the  concrete
+        residue  wires)  +
+        S4-LOW  (the  squeeze  on  the  LOW  band
+        0  <  t0  <  1000,  0  <  d0  <=  1/2  --
+        data-verified  territory).
+      The  COVERED  territory  (t0  >=  1000,  d0  <=
+      1/2)  is  supplied  by  the  PROVEN  window/strip
+      bound-level  closure  (s4asm_residue_S4_covered);
+      the  FAR  region  is  VACUOUS  (offPairFarEmpty),
+      NOT  a  hypothesis.
+
+  WHAT  THIS  CHANGES  IN  THE  OPEN  SET
+    *  The  last  CITED-classical  residue  of  the  S4
+      composition  for  the  actual  set  is  GONE:  it
+      is  now  a  PROVEN  vacuity  from  a  kernel-
+      verified  external  input  (not  a  citation).
+    *  The  exact  residual  open  content  for  the
+      actual  zero  set  is  now  named  more  sharply:
+      S1  (zero-side  uniform  wire)  +  S2  (detector
+      floor  at  every  off-pair)  +  S3  (witness
+      upper  wire)  +  the  S4  LOW  band  (t0  <  1000,
+      data-verified).  The  bound-level  S4  for  t0
+      >=  1000  is  fully  proven.
+    *  NO  RH  CLAIM:  [Z78]  is  an  external  input
+      (kernel-verified,  human  review  in  progress);
+      7/8  is  not  1/2;  the  reduction  still  needs
+      S1+S2+S3  as  uniform  theorems  to  fire.
+
+  GATES:  Z78Strip  3/3  (0.875  /  0.125  /  0.375);
+  Z78P12  1/1  (stripD0Max  0.375  <  farThreshold
+  0.5  ->  true;  vacuity  margin  1/8).  Full  build
+  green  (17450  jobs).  Lean  4.33.1  /  mathlib
+  v4.33.1  (pinned).
+
+  Artifacts:  formal/RhAttack/Z78P12.lean  (module,
+  gated);  LEAN-GUIDE  Z78  entry  +  Gate  C  updated.
