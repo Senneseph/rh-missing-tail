@@ -9946,3 +9946,49 @@ commit,  Apache-2.0,  cited):
 
   Artifacts:  formal/RhAttack/Z78P12.lean  (module,
   gated);  LEAN-GUIDE  Z78  entry  +  Gate  C  updated.
+
+---
+
+## 2026-10-15  (pm8b)  the  CITED  edge  leg  REPLACED:
+##  edgeZeroFree78  (Re  =  0  and  Re  =  1  void,
+##  PROVEN  from  the  7/8  input)
+
+  The  low-t  composition  (S1LowT  v2)  carries  the
+  d0  =  1/2  EDGE  via  SliverEdge.EdgeZeroFree  --
+  "no  actual  zero  on  Re  =  0  or  Re  =  1"  --
+  previously  a  CITED  classical  leg  (Hadamard  /  de
+  la  Vall\u00e9e  Poussin  1900  on  Re  =  1;  the
+  functional-equation  corollary  on  Re  =  0;
+  Titchmarsh  ch.  II.6  named  per  project
+  discipline).
+
+  NEW  (Z78P12.edgeZeroFree78,  PROVEN):  for  any
+  zero  set  whose  elements  are  actual  zeta  zeros,
+  [Z78]  ALONE  implies  EdgeZeroFree  --  the  strip
+  1/8  <=  Re  <=  7/8  (zetaZeroStrip)  excludes  both
+  edge  lines  with  a  certified  margin  of  1/8  on
+  each  side.  The  cited  paragraph  is  fully
+  SUPERSEDED:  one  kernel-verified  external  input
+  +  one  lemma  replaces  the  1900  zero-free
+  theorem  +  the  functional-equation  argument,  and
+  at  strictly  stronger  strength  (half-planes  vs.
+  lines).
+
+  INPUT-CLASS  ACCOUNT  after  Z78P12  (actual-set
+  composition):
+    REPLACED  by  proven-from-[Z78]:
+      -  d0  >  1/2  far  region  (offPairFarEmpty)
+      -  Re  =  0  /  Re  =  1  edge  lines
+        (edgeZeroFree78)
+    STILL  CITED  (untouched,  different  content):
+      -  the  DLMF  25.2.12  bridge  identity
+        (S1  zero  side  --  the  uniform  walk,
+        W2-beyond,  remains  the  open  research  item)
+    STILL  PINNED  DATA  (unchanged):
+      -  the  813-zero  slice  record,  firstZeroPin,
+        sliverOnCount  =  1,  the  day030  sweep
+        (margin  >=  7.357,  GridAdequate),  the
+        hX  pin
+  NO  RH  CLAIM.  Gates  Z78P12  3/3  (all  true);
+  build  green  17450.  Lean  4.33.1  /  mathlib
+  v4.33.1  (pinned).

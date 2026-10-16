@@ -38,10 +38,12 @@ numeric record this guide wires against).
            REAL theorems are provable from the NAMED
            external input externalZeroFree78 -- see the
            Z78 entry below)
-           Z78P12.lean 1/1 Float gate (stripD0Max <
-           farThreshold = true; the d0 > 1/2 far region
-           is empty for the actual set under 7/8,
-           certified vacuity margin 1/8)
+           Z78P12.lean 3/3 Float gates (stripD0Max <
+           farThreshold = true; edgeLineLo < stripLo;
+           zeroFreeTheta < edgeLineHi -- the d0 > 1/2 far
+           region AND the Re = 0 / Re = 1 edge lines are
+           excluded for the actual set under 7/8,
+           certified margin 1/8 on each side)
   Gate D:  engine invariants in scripts/rh/day037_h1_3e10.py (do not
            modify): Kfull self-test (bad_asm guard), B-field bounds,
            the 400-node adjacent-section quad pair (day049e fix:
@@ -444,7 +446,15 @@ the RVM density the quad scripts integrate against.
   (s4asm_residue_S4_covered); the far region (d0 > 1/2)
   is VACUOUS, not a hypothesis, for the actual set --
   closing the last CITED-classical residue of the S4
-  composition for that set.
+  composition for that set.  Same module, one more
+  upgrade: edgeZeroFree78 -- the CITED classical leg of
+  the low-t composition (SliverEdge.EdgeZeroFree: no
+  actual zero on Re = 0 or Re = 1; Hadamard / de la
+  Vallée Poussin + functional equation, Titchmarsh
+  ch. II.6) is REPLACED, for actual-set zero sets, by a
+  lemma PROVEN from [Z78] alone (the strip 1/8 <= Re
+  <= 7/8 excludes both lines with margin 1/8) -- the
+  cited paragraph is fully superseded (pm8).
 - A1Growth: the A1 wire at the provable growth form (E19).
 - E2Barrier: NEGATIVE-result record (the R2 absolute-sum barrier).
 - EulerAction + E7a: the exact finite-sum Euler-action identity +

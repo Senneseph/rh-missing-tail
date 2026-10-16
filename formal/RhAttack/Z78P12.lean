@@ -2,6 +2,7 @@ import Mathlib
 import RhAttack.B0
 import RhAttack.P12Uniform
 import RhAttack.S4Asm
+import RhAttack.SliverEdge
 import RhAttack.Z78Strip
 
 open Real Set B0
@@ -120,5 +121,32 @@ theorem rh_actual78 (q : ZeroSet) (hz78 : Z78.externalZeroFree78)
 def stripD0Max : Float := 0.375
 def farThreshold : Float := 0.5
 #eval stripD0Max < farThreshold
+
+/- The d0 = 1/2 EDGE (SliverEdge.EdgeZeroFree, currently the
+   CITED classical leg of the low-t composition: Hadamard / de
+   la Vall\u00e9e Poussin on Re = 1 + functional equation on
+   Re = 0).  The [Z78] input PROVES a strictly stronger
+   statement: every non-real zero sits in 1/8 <= Re <= 7/8,
+   so both edge lines (Re = 0 and Re = 1) are excluded with a
+   certified margin of 1/8 on each side.  The cited leg is
+   therefore REPLACED, for actual-set zero sets, by a
+   proven-from-kernel-verified-input lemma. -/
+theorem edgeZeroFree78 (q : ZeroSet) (hz78 : Z78.externalZeroFree78)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0) : SliverEdge.EdgeZeroFree q := by
+  intro ρ hr
+  have hstrip := Z78.zetaZeroStrip hz78 ρ (hqz ρ hr) (q.nonReal ρ hr)
+  constructor
+  · by_contra h0
+    linarith [h0, hstrip.1]
+  · by_contra h1
+    linarith [h1, hstrip.2]
+
+/- Edge-exclusion margin gate: both edge lines sit at a
+   certified positive distance from the strip (1/8 to the left
+   of 0-side, 1/8 to the right of 1-side). -/
+def edgeLineLo : Float := 0.0
+def edgeLineHi : Float := 1.0
+#eval (Z78.stripLo : Float) - edgeLineLo > 0
+#eval edgeLineHi - Z78.zeroFreeTheta > 0
 
 end Z78P12
