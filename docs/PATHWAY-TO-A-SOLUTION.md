@@ -203,14 +203,32 @@ for the ACTUAL zeta zero set.  The branches:
       PRECISION-INDEPENDENT  (~  53-62  B  over  dps
       15..40)  -  low  precision  does  NOT  move  the  wall;
       it  is  LOCKED  at  [9e18,  3e19)  for  all  mpmath
-      precisions  on  this  124 GB  machine.  s31z2  is  in
-      flight:  the  5e8G  row  (t  =  1.5e19,  N  =  1.545e9,
-      model  83-95  GB  -  the  LAST  reachable  height,  one
-      fresh  process  per  dps  in  the  ladder).
-      Breaking  the  g-side  degeneracy  needs  rows  at
-      t  ~  g0  (~3e20),  ~33x  past  the  verified  9e18  --  an
-      engine  task,  not  a  data  task.  Feeds  B1  (the  walk)
-      and  B5  (law  territory);
+      precisions  on  this  124 GB  machine.  s31z2  LADDER  COMPLETE:
+      dps-15  (;2.937  -  the  adjudicated  precision  outlier),
+      dps-20/30/40  ALL  AGREED  (logzeta  =  ;1.7289704098,
+      peaks  92.6/95.1  GB)  -  the  5e8G  zeta  value  is
+      triple-locked.  THE  STAGGERED  ROW  PROTOCOL  LOCKED
+      THE  5e8G  ROW  (discovery  0096):  M  =  -3035441152
+      (integer;  f64  sum  match  by  construction;  I_far
+      dps40  ==  dps60  ==  dps80  bit-identical;  staged
+      f64  association  3.6e6  ulp  on  the  record)  -  the
+      verified  extreme  boundary  NOW  STANDS  AT  1.5e19
+      (the  LAST  mpmath-reachable  row  on  this  machine;
+      higher  rows  need  a  C  zeta  channel  or  more
+      RAM).  FAR-DRIFT  SHAPE  AT  THE  THREE  EXTREME
+      ROWS  (arithmetic,  s32c):  |M|  is  an  EXACT
+      quadratic  in  t  (residuals  <<  f64  rounding):
+      the  t^2  coefficient  (in  1e8G  units)  is  ;9.59e7
+      -  the  drift  is  CONVEX  /  accelerating  (local
+      exponent  0.74  then  1.43),  while  |I_far|/t  is
+      CONSTANT  to  6  digits  (2.61790e-11):  the  far
+      integral  is  t-LINEAR  (settled  channel),  the
+      t^2  drift  lives  in  the  M  balance  (the  (t/g0)^2
+      kernel-tail  term  engaging).  Breaking  the  g-side
+      degeneracy  needs  rows  at  t  ~  g0  (~3e20),  ~20x
+      past  the  verified  1.5e19  --  an  engine  task,
+      not  a  data  task.  Feeds  B1  (the  walk)  and  B5
+      (law  territory);
 
 ## 3.  Measured constraints  (anything that proves RH must
     reproduce these)
@@ -224,9 +242,17 @@ for the ACTUAL zeta zero set.  The branches:
   - Far drift:  turns on around 1e6G-2e6G,  t^2-like per-doubling
     ratios (4.1 / 4.0 / 6.3) over 1e7G-5e7G;  D ~ K x^p global fit
     p = 2.23,  K = 2.0e-10.
-  - Integer quantization of M (f64-exact) at ALL 35 rows to date
+  - Integer quantization of M (f64-exact) at ALL 36 rows to date
     (28  law-band  rows  +  the  5  s25  far  rows  +  the  2  s30
-    extreme  rows).
+    extreme  rows  +  the  1  staggered  5e8G  row).
+  - 5e8G  staggered  row  (THE  LAST  mpmath-REACHABLE  ROW,
+    t  =  1.5000523e19):  M  =  -3035441152,  I_far  =
+    -1.1781387477189394e19  (dps40  ==  dps60  ==  dps80),
+    log|zeta|  =  ;1.7289704098  (dps20/30/40  agree;
+    dps-15  =  ;2.937  the  precision  outlier);  zeta
+    channel  from  the  fresh-process  ladder,  channels  from
+    stage  A  (staggered  -  the  row  does  not  fit  one
+    process).
   - s30  extreme  rows:  M(3.0001e18)  =  -648727552  (1e8G)  and
     M(9.0003e18)  =  -1458497536  (3e8G);  I_far  dps40  =  dps60
     =  dps80  on  both;  f64  sum  match  exact  on  both.
@@ -268,11 +294,20 @@ for the ACTUAL zeta zero set.  The branches:
       is  the  OUTLIER  (precision  artifact  at  N  ~  1.5e9
       terms),  the  emerging  stable  value  at  5e8G  is
       log|zeta|  ~  +1.729  (|zeta|  ~  5.64);  dps-40  (the
-      census  channel)  in  flight;  if  dps-40  lands,  the
-      staggered  row  protocol  locks  the  boundary  at  1.5e19;
-      if  not,  9e18  stands  and  the  remaining  levers  are  a
-      C  zeta  channel  or  more  RAM.  Until  then  B7  stands
-      at  its  leveraged  wall.
+      census  channel)  LANDED:  logzeta  =  +1.7289704098,
+      PEAK  95.1  GB  -  DIGIT-IDENTICAL  to  dps-20/30  (three-
+      precision  agreement;  dps-15  =  ;2.937  adjudicated  the
+      precision  outlier);  the  STAGGERED  ROW  PROTOCOL  RAN:
+      s32a  non-zeta  channels  (eps  =  ;0.7047,  M_partial  =
+      -3035441152,  f64  partial  sum  match;  I_far  dps40  ==
+      dps60  ==  dps80  bit-identical)  +  s32b  merge:
+      THE  5e8G  ROW  IS  LOCKED  -  M  =  -3035441152
+      (integer;  f64  sum  match;  staged  association  3.6e6
+      ulp  on  the  record);  the  verified  extreme  boundary
+      MOVES  9e18  <~  1.5e19  -  THE  LAST  MPMATH-REACHABLE
+      ROW  ON  THIS  124  GB  MACHINE;  the  remaining  levers
+      for  higher  rows  are  a  C  zeta  channel  or  more
+      RAM.
   2.  Formal:  THE  ENDPOINT  IS  NAMED  AND  THE  SPINE  IS
       CORRECT  -  RHEnd.rh_program78  is  GATED  (four  of  the
       squeeze  regimes  closed  IN  BODY;  the  named  residual

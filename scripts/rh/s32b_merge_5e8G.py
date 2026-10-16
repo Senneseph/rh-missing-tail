@@ -63,7 +63,7 @@ def main():
         print("stage A row not found - run s32a first", flush=True)
         sys.exit(1)
     lz_val = {}
-    pat = re.compile(r"t=([0-9.e+-]+)\s+dps(\d+)\s+logzeta=([+-0-9.e]+)")
+    pat = re.compile(r"t=([0-9.e+-]+)\s+dps(\d+)\s+logzeta=([-+]?[0-9.e]+)")
     for line in open(LADDER):
         m = pat.search(line)
         if m:
@@ -73,7 +73,7 @@ def main():
               "stays staged (M_partial recorded) until it lands",
               flush=True)
         sys.exit(1)
-    lz = float(lz_val["40"])
+    lz = float(lz_val[40])
     eps, lm, la, rv, ih = (rec["eps"], rec["lm"], rec["la"],
                            rec["re"], rec["I_far"])
     M = eps + lz - lm - la - rv - ih          # canonical assoc
@@ -92,7 +92,7 @@ def main():
     for d in sorted(lz_val):
         out["logzeta_dps%02d" % d] = float(lz_val[d])
     if 15 in lz_val and 40 in lz_val:
-        d15, d40 = float(lz_val["15"]), float(lz_val["40"])
+        d15, d40 = float(lz_val[15]), float(lz_val[40])
         out["dps15_vs_40_absdiff"] = abs(d15 - d40)
     with open(FINAL, "a") as fh:
         fh.write(json.dumps(out) + "\n")
