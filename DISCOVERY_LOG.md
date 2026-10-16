@@ -10044,3 +10044,48 @@ commit,  Apache-2.0,  cited):
       progress  (external,  weeks)
   NO  RH  CLAIM.  Build  green  17450.  Lean  4.33.1  /
   mathlib  v4.33.1  (pinned).
+
+## 2026-10-15 pm9:  FloorUnif GATED -- floor-unification bridge
+
+FloorUnif.lean (new, sorry-free; gates 3/3 at f64:
+bandLoT = 1000, mownCapBand 6e-4 < floWinCapVal 0.023
+true, margin 0.0224):
+
+  * poffOwnKerC / poffIsOwnKerC:  the B5 factor product
+    poff (t d t) in the rhoPP/PM/NP/NM + sLine notation is
+    DEFINITIONALLY the S4 direct kernel body ownKerC --
+    same four factors (1 - s/rho) exp (s/rho), same four
+    zeros {1/2 +/- d +/- it} (the notations unify under
+    halfR = 1/2).
+  * poffOwnMass:  ||poff (t d t)|| = mown (t d) via
+    hMownProd -- the S2 own-detector and the S4 own-mass
+    are ONE quantity.  The floor mismatch that kept the
+    two bands' reductions in separate notation is closed.
+  * floWinCap:  on 1000 <= t the window floor floWin t =
+    min (23/1000, 1 - 25/t) sits at its cap 23/1000.
+  * mownBelowFloWinCap:  mown (t d) <= (4d²/t²)(1 +
+    1/(16t²)) exp (1/t²) <= 6/t² <= 6e-4 < 23/1000 on the
+    band (4d² <= 1, 1 + 1/(16t²) <= 2, exp (1/t²) <= exp 1
+    < 3 -- Real.exp_one_lt_three; the pinned toolchain's
+    norm_num cannot evaluate Real.exp, so the exp step is
+    the comparison against the certified constant).
+  * floStripMin_eq_mownOnBand:  the concrete S2 floor
+    function floStripMin (t d) = min (||poff (t d t)||,
+    max (floWin t, 0)) = mown (t d) on the band.
+  * s4StripUnifiedFloor:  the PROVEN covered squeeze
+    (s4asm_strip_region_S4, the t^4 wire) reads against
+    the UNIFIED P1.2 floor: for 1000 <= t0, 1/200 <= d0
+    <= 1/2,  BwireR + MrR + MfR < floStripMin -- the SAME
+    floor s2_strip_min proves devStripMin dominates.
+    Low and high bands: one S4 floor function on their
+    common strip domain.  The window branch (d < 1/200)
+    is unchanged (d-independent proven squeeze; blind-
+    spot territory, not closure-relevant below the
+    certified edge d* = 0.0047384091).
+  * s2ActualFullBand:  S2 for the actual set on the FULL
+    band (0 < t0, NO upper cap; the atoms c1b_disc_floor
+    / p9_poff_own_height_pos have no t0 cap; sliver
+    vacuity per Z78P12).
+
+Build green 17450.  Lean 4.33.1 / mathlib v4.33.1
+(pinned).  NO RH CLAIM.

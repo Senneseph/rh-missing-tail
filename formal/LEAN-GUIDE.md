@@ -44,6 +44,11 @@ numeric record this guide wires against).
            region AND the Re = 0 / Re = 1 edge lines are
            excluded for the actual set under 7/8,
            certified margin 1/8 on each side)
+           FloorUnif.lean 3/3 Float re-evaluations
+           (bandLoT = the covered band edge; mownCapBand
+           vs floWinCapVal: mownCapBand < floWinCapVal
+           true, the certified own-mass cap 6e-4 under the
+           window-floor cap 0.023, margin 0.0224)
   Gate D:  engine invariants in scripts/rh/day037_h1_3e10.py (do not
            modify): Kfull self-test (bad_asm guard), B-field bounds,
            the 400-node adjacent-section quad pair (day049e fix:
@@ -467,6 +472,38 @@ the RVM density the quad scripts integrate against.
   floor requirement holds by vacuity (pm8c).  S2 is
   thus fully accounted for on the actual set's low band:
   proven + data-vacuous, no hypothesis.
+- FloorUnif: the FLOOR-UNIFICATION bridge (pm9).  The S2
+  own-detector and the S4 own-mass are the SAME quantity,
+  PROVEN: poffIsOwnKerC -- the B5 factor product poff (t d
+  t), written in the rhoPP/PM/NP/NM + sLine notation, is
+  the S4 direct kernel body ownKerC, the product of the
+  same four factors (1 - s/rho) exp (s/rho) over the same
+  four zeros {1/2 +/- d +/- it} (the notations unify under
+  halfR = 1/2); poffOwnMass -- ||poff (t d t)|| = mown (the
+  norm of the common product via hMownProd).  On the
+  covered band 1000 <= t, 0 < d <= 1/2: floWinCap (the
+  window floor floWin sits at its cap 23/1000) and
+  mownBelowFloWinCap (mown <= 6/t^2 <= 6e-4 < 23/1000, via
+  the proven hMownScale window 4d²/t² (1 + 1/(16t²)) exp
+  (1/t²) with 4d² <= 1, 1 + 1/(16t²) <= 2, exp (1/t²) <=
+  exp 1 < 3) give floStripMin_eq_mownOnBand -- the
+  concrete S2 floor function floStripMin IS the S4 own-mass
+  on the band.  s4StripUnifiedFloor: the PROVEN covered
+  squeeze (s4asm_strip_region_S4, the t^4 wire) now reads
+  against the UNIFIED P1.2 floor (BwireR + MrR + MfR <
+  floStripMin for 1000 <= t, 1/200 <= d <= 1/2) -- the
+  SAME floor that s2_strip_min proves devStripMin
+  dominates: the low and high bands' S4 floors are ONE
+  function on their common strip domain.  The window
+  branch (d < 1/200) is UNCHANGED: the own-mass scale
+  ~ 4d²/t² vanishes with d there and the proven squeeze is
+  the d-independent one against the near pin (the named S4
+  blind-spot territory, not closure-relevant below the
+  certified edge d* = 0.0047384091).  s2ActualFullBand: S2
+  for the actual set with NO upper cap on the height (the
+  atoms have no t0 cap); sliver vacuity per Z78P12, the
+  rest proven.  NO RH CLAIM.  Lean 4.33.1 / mathlib
+  v4.33.1 (pinned); build green 17450.
 - A1Growth: the A1 wire at the provable growth form (E19).
 - E2Barrier: NEGATIVE-result record (the R2 absolute-sum barrier).
 - EulerAction + E7a: the exact finite-sum Euler-action identity +
