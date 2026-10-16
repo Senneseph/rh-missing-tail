@@ -452,11 +452,19 @@ C = {
  "vacuous under the named on-line record).",
  "terminal: the one-clause endpoint; composes "
  "S4A.rh_from_regime_closures + Z78/Z78P12 + FloorUnif + S1LowT + "
- "P8Floor (p8_f_near_pin).",
+ "P8Floor (p8_f_near_pin) + S1Face/P4Limit (Part B2).",
  "No RH claim: hs1/hs3/hWin/hS2low are OPEN (data and "
  "bound-level, as the chart carries); this module only NAMES the "
  "residual once, at the concrete wire. Part C #evals: 0.9975, "
- "0.0006, 1662.500000."),
+ "0.0006, 1662.500000. PART B2 (discovery 0095): "
+ "rh_program78_s1pins RESTATES the endpoint with the bare hs1 "
+ "scale inequality REPLACED by the PIN FAMILY over the witness "
+ "zero (P1 fill = the A0 fill; P2 the kernel-magnitude pin "
+ "devFacePt <= |W_n|; P3 the A4.3 mass pin; P4 the absorption pin "
+ "devProg + mval <= devFacePt) - the hs1 leg is DERIVED IN BODY "
+ "via S1Face.hs1AtZero; the residual narrows from the bare "
+ "inequality to the PIN family (same content, checkable "
+ "shape)."),
 "S1Uniform": (
  "The S1 UNIFORM statement + walk composition (v3): the formal "
  "artifact closing P12.S1's 'uniform height = open' side and "

@@ -317,9 +317,18 @@ for the ACTUAL zeta zero set.  The branches:
       input  is  the  pins,  not  a  bare  witness),  and
       hs1FaceAtAudit  names  the  face  at  the  day-020  band
       (zero-side  claim  vs  resid  pin:  joint  incompatibility
-      =  the  squeeze  the  endpoint  consumes);  remaining:
-      restate  RHEnd  so  hs1  enters  as  "S1Ge  +  pins",  then
-      track  the  external  review  of  B6.
+      =  the  squeeze  the  endpoint  consumes)  -  and  THE
+      ENDPOINT  IS  RESTATED  (discovery  0095,  RHEnd  Part  B2):
+      rh_program78_s1pins  is  the  endpoint  with  the  bare  hs1
+      scale  inequality  REPLACED  by  the  PIN  FAMILY  over  the
+      witness  zero  (P1  fill  =  the  A0  fill;  P2  the  kernel
+      magnitude  pin  devFacePt  <=  |W_n|;  P3  the  A4.3  mass
+      pin;  P4  the  absorption  pin  devProg  +  mval  <=
+      devFacePt):  the  hs1  leg  is  DERIVED  IN  BODY  via
+      S1Face.hs1AtZero,  so  the  residual  narrows  from  "an
+      inequality  to  support"  to  "the  pins  to  support"
+      (same  content,  checkable  shape);  remaining:  track  the
+      external  review  of  B6.
   3.  Docs:  this document is updated by EVERY milestone commit;
       no silent re-chart.
 

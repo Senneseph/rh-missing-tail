@@ -47,7 +47,7 @@ open Real
 
 noncomputable section
 
-namespace S1F
+namespace S1Face
 
 /-- (1) THE HS1 LEG AT AN ACTUAL ZERO: with zeta(s) = 0 the A0 fill
     |zeta(s) - K| is |K|, and the S1Ge pointwise atom (its premises:
@@ -78,4 +78,4 @@ theorem hs1FaceAtAudit :
       X ≤ QSide.devWorst / QSide.marginWorst :=
   QSide.section8_close_at_audit
 
-end S1F
+end S1Face

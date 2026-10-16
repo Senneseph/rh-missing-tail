@@ -77,6 +77,8 @@ import RhAttack.S1LowT
 import RhAttack.FloorUnif
 import RhAttack.Z78Strip
 import RhAttack.Z78P12
+import RhAttack.P4Limit
+import RhAttack.S1Face
 import RhAttack.P8Floor
 
 set_option linter.style.docString false
@@ -223,5 +225,109 @@ def floWinCapData : Float := 0.023
 #eval nearPinData
 #eval mownCapData
 #eval nearPinData / mownCapData
+
+/-  ##  Part  B2  -  the  endpoint  with  the  hs1  FACE  RESTATED
+
+  The  bare  hs1  scale  inequality  (Qside  >=  devProg)  is  not
+  an  indecomposable  premise:  at  an  ACTUAL  off-pair  zero  it  is
+  a  consequence  of  the  S1Face  structure  (discovery  0094)  plus
+  FOUR  pin  families  over  the  witness  zero  (all  data-supported;
+  uniformity  in  the  height  is  the  open  measured  track,
+  NOT  claimed):
+      P1  fill      Qside  (t0,  d0)  =  the  A0  fill  at  the
+                    witness  zero  (=  |K|  once  zeta  =  0)
+      P2  kernel    devFacePt  <=  |W_n|  at  the  witness  (the
+                    S1Ge  hW  pin:  the  deviation  face  reads
+                    the  zero-side  kernel  magnitude)
+      P3  mass      |K  -  (P_n  -  I)|  <=  mvalFace  at  the
+                    witness  (the  A4.3  wired  mass  premise)
+      P4  absorb    devProg  +  mvalFace  <=  devFacePt  at  the
+                    pair  (the  spine's  deviation  is  dominated
+                    by  the  deviation  face  less  the  mass)
+  rh_program78_s1pins  is  rh_program78  with  hs1  DERIVED  from
+  the  pins  -  the  endpoint's  residual  narrows:  the  hs1  scale
+  inequality  is  replaced  by  the  pin  family.  Same  honesty  as
+  rh_program78:  composition  around  the  named  items;  no  RH
+  claim.  -/
+
+/--  rh_program78_s1pins  -  THE  ENDPOINT  WITH  THE  HS1  FACE
+    RESTATED  (discovery  0095):  under  [Z78],  q  a  subset  of
+    the  actual  zeros,  the  named  on-line  sliver  record,  and
+    the  NAMED  RESIDUAL  with  hs1  entered  as  the  PIN  FAMILY
+    (P1  fill  =  the  A0  fill  at  the  witness;  P2  kernel
+    magnitude  pin;  P3  the  A4.3  mass  pin;  P4  the  absorption
+    pin)  instead  of  the  bare  scale  inequality,  plus  hs3
+    (the  S3  wire),  hWin  (the  S4  window-pin  shape),  hS2low
+    (the  S2  low-band  pin),  RH  holds  for  q.  The  hs1  leg  is
+    DERIVED  IN  THE  BODY  from  the  pins  via  S1Face.hs1AtZero
+    (A0  collapse  at  the  zero  +  S1Ge  pointwise  atom).
+    No  RH  claim:  the  pins  are  data  faces  (measured,
+    uniformity  open),  exactly  as  the  chart  records.  -/
+theorem rh_program78_s1pins (q : ZeroSet)
+    (hz78 : Z78.externalZeroFree78)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) →
+      (|ρ.im| : ℝ) < (707 : ℝ) / 50 → ρ.re = 1 / 2)
+    (Qside : ℝ × ℝ → ℝ)
+    (n : ℕ)
+    (Kfun : ℂ → ℂ)
+    (mvalFace : ℝ × ℝ → ℝ)
+    (devFacePt : ℂ → ℝ)
+    (hFill : ∀ (t0 d0 : ℝ) (ρ : ℂ), 0 < t0 → 0 < d0 →
+      ρ ∈ q.Z → ρ.re ≠ (1 / 2 : ℝ) → (|ρ.im| : ℝ) = t0 →
+      |(ρ.re : ℝ) - 1 / 2| = d0 →
+      Qside (t0, d0) = ‖riemannZeta ρ - Kfun ρ‖)
+    (hDev : ∀ (t0 d0 : ℝ) (ρ : ℂ), 0 < t0 → 0 < d0 →
+      ρ ∈ q.Z → ρ.re ≠ (1 / 2 : ℝ) → (|ρ.im| : ℝ) = t0 →
+      |(ρ.re : ℝ) - 1 / 2| = d0 →
+      devFacePt ρ ≤ ‖p4_Wn ρ n‖)
+    (hMass : ∀ (t0 d0 : ℝ) (ρ : ℂ), 0 < t0 → 0 < d0 →
+      ρ ∈ q.Z → ρ.re ≠ (1 / 2 : ℝ) → (|ρ.im| : ℝ) = t0 →
+      |(ρ.re : ℝ) - 1 / 2| = d0 →
+      ‖Kfun ρ - (p4_P n ρ - p4_I n ρ)‖ ≤ mvalFace (t0, d0))
+    (hAbsorb : ∀ (t0 d0 : ℝ) (ρ : ℂ), 0 < t0 → 0 < d0 →
+      ρ ∈ q.Z → ρ.re ≠ (1 / 2 : ℝ) → (|ρ.im| : ℝ) = t0 →
+      |(ρ.re : ℝ) - 1 / 2| = d0 →
+      devProg (t0, d0) + mvalFace (t0, d0) ≤ devFacePt ρ)
+    (hs3 : ∀ (t0 d0 : ℝ), 0 < t0 → 0 < d0 →
+      offPair q t0 d0 →
+      Qside (t0, d0) ≤ Z78P12.BwireP (t0, d0) + Z78P12.MrP (t0, d0))
+    (hWin : ∀ (t0 d0 : ℝ), 1000 ≤ t0 → 0 < d0 → d0 < 1 / 200 →
+      offPair q t0 d0 →
+      Z78P12.BwireP (t0, d0) + Z78P12.MrP (t0, d0) +
+        Z78P12.MfP (t0, d0) < S1LowT.floStripMin t0 d0)
+    (hS2low : ∀ (t0 d0 : ℝ), 0 < t0 → t0 < 1000 →
+      0 < d0 → d0 ≤ 1 / 2 → offPair q t0 d0 →
+      devProg (t0, d0) ≥ p8_f_near_pin) :
+    RH q := by
+  refine rh_program78 q hz78 hqz honline Qside ?hs1 hs3 hWin hS2low
+  intro t0 d0 ht0 hd0 hp
+  obtain ⟨ρ, hrho, hrhooff, hint0, hd0eq⟩ := hp
+  have hzero := hqz ρ hrho
+  have hfill : Qside (t0, d0) = ‖riemannZeta ρ - Kfun ρ‖ :=
+    hFill t0 d0 ρ ht0 hd0 hrho hrhooff hint0 hd0eq
+  have hdev : devFacePt ρ ≤ ‖p4_Wn ρ n‖ :=
+    hDev t0 d0 ρ ht0 hd0 hrho hrhooff hint0 hd0eq
+  have hmas : ‖Kfun ρ - (p4_P n ρ - p4_I n ρ)‖ ≤ mvalFace (t0, d0) :=
+    hMass t0 d0 ρ ht0 hd0 hrho hrhooff hint0 hd0eq
+  have habsb : devProg (t0, d0) + mvalFace (t0, d0) ≤ devFacePt ρ :=
+    hAbsorb t0 d0 ρ ht0 hd0 hrho hrhooff hint0 hd0eq
+  --  the  hs1  leg  at  the  witness  zero:  S1Face  (A0  collapse
+  --  at  the  zero  +  the  S1Ge  pointwise  atom)
+  have hf := S1Face.hs1AtZero ρ n (Kfun ρ) (mvalFace (t0, d0)) (devFacePt ρ)
+    hmas hdev hzero
+  have hfillK : ‖riemannZeta ρ - Kfun ρ‖ = ‖Kfun ρ‖ := by
+    rw [hzero]
+    simp [norm_neg]
+  have habs : devProg (t0, d0) ≤ devFacePt ρ - mvalFace (t0, d0) :=
+    (le_sub_iff_add_le).mpr habsb
+  have hmain : Qside (t0, d0) ≥ devProg (t0, d0) := by
+    calc Qside (t0, d0)
+        _ = ‖riemannZeta ρ - Kfun ρ‖ := hfill
+        _ = ‖Kfun ρ‖ := hfillK
+        _ ≥ devFacePt ρ - mvalFace (t0, d0) := hf
+        _ ≥ devProg (t0, d0) := habs
+  have hmfp : Z78P12.MfP (t0, d0) = 0 := rfl
+  simpa [hmfp, sub_zero] using hmain
 
 end RHEnd
