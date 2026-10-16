@@ -1,0 +1,648 @@
+{
+ "generated_from": "docs/discovery/entries/ (frozen archive DISCOVERY_LOG.md, migrated)",
+ "count": 80,
+ "date_min": "2026-09-11",
+ "date_max": "2026-10-16",
+ "entries": [
+  {
+   "n": 0,
+   "date": "",
+   "time": "",
+   "title": "The chronicle: approach, pieces, contradictions (intro scaffold)",
+   "file": "0000-intro.json",
+   "chars": 18834
+  },
+  {
+   "n": 1,
+   "date": "2026-09-11",
+   "time": "",
+   "title": "The 10\u2077 redundancy lands \u2014 and the LOCKED candidate falls",
+   "file": "0001-2026-09-11-the-10-redundancy-lands-and-the-locked-candi.json",
+   "chars": 2476
+  },
+  {
+   "n": 2,
+   "date": "2026-09-12",
+   "time": "",
+   "title": "The P4 line turns green \u2014 and a formalization trap worth naming",
+   "file": "0002-2026-09-12-the-p4-line-turns-green-and-a-formalization.json",
+   "chars": 1664
+  },
+  {
+   "n": 3,
+   "date": "2026-09-13",
+   "time": "",
+   "title": "The missing-tail law turns green \u2014 and the draft constant had to die",
+   "file": "0003-2026-09-13-the-missing-tail-law-turns-green-and-the-dra.json",
+   "chars": 3873
+  },
+  {
+   "n": 4,
+   "date": "2026-09-15",
+   "time": "",
+   "title": "L5 GREEN \u2014 the P4 line composes: identity at Re s > 1, bound at Re s = 1/2",
+   "file": "0004-2026-09-15-l5-green-the-p4-line-composes-identity-at-re.json",
+   "chars": 2660
+  },
+  {
+   "n": 5,
+   "date": "2026-09-15",
+   "time": "",
+   "title": "L5.f GREEN \u2014 the T4 ratio corollary",
+   "file": "0005-2026-09-15-l5-f-green-the-t4-ratio-corollary.json",
+   "chars": 1500
+  },
+  {
+   "n": 6,
+   "date": "2026-09-16",
+   "time": "",
+   "title": "P8Floor module GREEN through A4.1 \u2014 the residual-floor line",
+   "file": "0006-2026-09-16-p8floor-module-green-through-a4-1-the-residu.json",
+   "chars": 3879
+  },
+  {
+   "n": 7,
+   "date": "2026-09-16",
+   "time": "",
+   "title": "P8Floor completes \u2014 A4.2 + A4.3, module (A0-A4) green",
+   "file": "0007-2026-09-16-p8floor-completes-a4-2-a4-3-module-a0-a4-gre.json",
+   "chars": 1883
+  },
+  {
+   "n": 8,
+   "date": "2026-09-16",
+   "time": "",
+   "title": "Xval pin \u2014 the concrete M(G,t) constant at the measurement point",
+   "file": "0008-2026-09-16-xval-pin-the-concrete-m-g-t-constant-at-the.json",
+   "chars": 1526
+  },
+  {
+   "n": 9,
+   "date": "2026-09-16",
+   "time": "",
+   "title": "Cross-band worst-case audit \u2014 route A HOLDS, min margin >= 112x",
+   "file": "0009-2026-09-16-cross-band-worst-case-audit-route-a-holds-mi.json",
+   "chars": 1956
+  },
+  {
+   "n": 10,
+   "date": "",
+   "time": "",
+   "title": "P9 Closure module GREEN \u2014 the \u00a78 conditional closure (2026-09-16, goal turn)",
+   "file": "0010-0000-00-00-p9-closure-module-green-the-8-conditional-cl.json",
+   "chars": 3316
+  },
+  {
+   "n": 11,
+   "date": "",
+   "time": "",
+   "title": "C1a \u2014 the branch locus IS the pole: the own-height detector facts GREEN (2026-09-16/17, after the P9 module went green)",
+   "file": "0011-0000-00-00-c1a-the-branch-locus-is-the-pole-the-own-hei.json",
+   "chars": 3410
+  },
+  {
+   "n": 12,
+   "date": "2026-09-17",
+   "time": "",
+   "title": "C6 \u2014 the audit-point margin wire: \u00a78 at the audit point is one statement",
+   "file": "0012-2026-09-17-c6-the-audit-point-margin-wire-8-at-the-audi.json",
+   "chars": 3032
+  },
+  {
+   "n": 13,
+   "date": "2026-09-17",
+   "time": "",
+   "title": "C7 \u2014 the record arithmetic, machine-verified",
+   "file": "0013-2026-09-17-c7-the-record-arithmetic-machine-verified.json",
+   "chars": 1182
+  },
+  {
+   "n": 14,
+   "date": "",
+   "time": "",
+   "title": "The cross-band record: coverage to 10^5, the closing margin re-pins to 1.053 (2026-021 records)",
+   "file": "0014-0000-00-00-the-cross-band-record-coverage-to-10-5-the-c.json",
+   "chars": 3053
+  },
+  {
+   "n": 15,
+   "date": "2026-09-13",
+   "time": "",
+   "title": "Sticky point found by the 6e6 tripwire \u2014 the day-020 dev statistic is |K|-scaled",
+   "file": "0015-2026-09-13-sticky-point-found-by-the-6e6-tripwire-the-d.json",
+   "chars": 2847
+  },
+  {
+   "n": 16,
+   "date": "2026-09-13",
+   "time": "",
+   "title": "STICKY POINT #2 \u2014 the composite kernel's (B,\u221e) tail model inflates |K|; the \"1.053 closing\" is the inflation asymptote",
+   "file": "0016-2026-09-13-sticky-point-2-the-composite-kernel-s-b-tail.json",
+   "chars": 241612
+  },
+  {
+   "n": 17,
+   "date": "2026-09-19",
+   "time": "",
+   "title": "(day034) \u2014 item 7: CITED demotion audit (queue 7, part b)",
+   "file": "0017-2026-09-19-day034-item-7-cited-demotion-audit-queue-7-p.json",
+   "chars": 3352
+  },
+  {
+   "n": 18,
+   "date": "2026-09-19",
+   "time": "",
+   "title": "(day034) \u2014 item 7, part a in flight: H1-cert design + budget selftest LANDED",
+   "file": "0018-2026-09-19-day034-item-7-part-a-in-flight-h1-cert-desig.json",
+   "chars": 2997
+  },
+  {
+   "n": 19,
+   "date": "2026-09-19",
+   "time": "",
+   "title": "(day034) \u2014 H1-cert: per-point run rate rejected, two-phase window-batched build",
+   "file": "0019-2026-09-19-day034-h1-cert-per-point-run-rate-rejected-t.json",
+   "chars": 2276
+  },
+  {
+   "n": 20,
+   "date": "2026-09-19",
+   "time": "",
+   "title": "(day034) \u2014 correction: exact day034b grid count",
+   "file": "0020-2026-09-19-day034-correction-exact-day034b-grid-count.json",
+   "chars": 345
+  },
+  {
+   "n": 21,
+   "date": "2026-09-19",
+   "time": "",
+   "title": "(day034) \u2014 crosscheck PASS (bit-exact); phase-1 COW",
+   "file": "0021-2026-09-19-day034-crosscheck-pass-bit-exact-phase-1-cow.json",
+   "chars": 1178
+  },
+  {
+   "n": 22,
+   "date": "2026-09-19",
+   "time": "",
+   "title": "(day034) \u2014 throughput model pinned; fused tail pass;",
+   "file": "0022-2026-09-19-day034-throughput-model-pinned-fused-tail-pa.json",
+   "chars": 2004
+  },
+  {
+   "n": 23,
+   "date": "2026-09-19",
+   "time": "",
+   "title": "(day035, night) \u2014 END_GAME_PLAN written; the",
+   "file": "0023-2026-09-19-day035-night-end-game-plan-written-the.json",
+   "chars": 1849
+  },
+  {
+   "n": 24,
+   "date": "2026-09-19",
+   "time": "",
+   "title": "(day035, night, post-compaction) \u2014 back-pocket",
+   "file": "0024-2026-09-19-day035-night-post-compaction-back-pocket.json",
+   "chars": 1953
+  },
+  {
+   "n": 25,
+   "date": "2026-09-19",
+   "time": "",
+   "title": "(day035, ~11:00 EDT) \u2014 S3b anatomy probe built;",
+   "file": "0025-2026-09-19-day035-11-00-edt-s3b-anatomy-probe-built.json",
+   "chars": 1475
+  },
+  {
+   "n": 26,
+   "date": "2026-09-19",
+   "time": "",
+   "title": "(day034/035, ~11:25 EDT) \u2014 H1 CERT",
+   "file": "0026-2026-09-19-day034-035-11-25-edt-h1-cert.json",
+   "chars": 3201
+  },
+  {
+   "n": 27,
+   "date": "2026-09-19",
+   "time": "",
+   "title": "(day035, ~14:30 EDT) \u2014 S3c: the W2",
+   "file": "0027-2026-09-19-day035-14-30-edt-s3c-the-w2.json",
+   "chars": 3445
+  },
+  {
+   "n": 28,
+   "date": "2026-09-19",
+   "time": "",
+   "title": "(day035, ~14:45-15:10 EDT) \u2014 S3d: the walk pin",
+   "file": "0028-2026-09-19-day035-14-45-15-10-edt-s3d-the-walk-pin.json",
+   "chars": 10962
+  },
+  {
+   "n": 29,
+   "date": "2026-09-20",
+   "time": "",
+   "title": "\u2014 doc alignment day035 end game + the name (tpf)",
+   "file": "0029-2026-09-20-doc-alignment-day035-end-game-the-name-tpf.json",
+   "chars": 2492
+  },
+  {
+   "n": 30,
+   "date": "2026-09-20",
+   "time": "",
+   "title": "\u2014 W2-beyond R2 step 1 in Lean (W2Beyond0 GREEN) + RH-PROOF-OUTLINE current-state note",
+   "file": "0030-2026-09-20-w2-beyond-r2-step-1-in-lean-w2beyond0-green.json",
+   "chars": 2123
+  },
+  {
+   "n": 31,
+   "date": "2026-09-20",
+   "time": "",
+   "title": "\u2014 W2-beyond R2 step 2 in Lean (W2Beyond1 GREEN): the drift reduction",
+   "file": "0031-2026-09-20-w2-beyond-r2-step-2-in-lean-w2beyond1-green.json",
+   "chars": 2098
+  },
+  {
+   "n": 32,
+   "date": "2026-09-20",
+   "time": "",
+   "title": "\u2014 Big-data crunch + deploy plan written (and 3 launch blockers found in the 3e10 script)",
+   "file": "0032-2026-09-20-big-data-crunch-deploy-plan-written-and-3-la.json",
+   "chars": 2766
+  },
+  {
+   "n": 33,
+   "date": "2026-09-20",
+   "time": "",
+   "title": "\u2014 3e10 runtime decomposed: the DECODE is the bottleneck, not the download; GPU ruled out",
+   "file": "0033-2026-09-20-3e10-runtime-decomposed-the-decode-is-the-bo.json",
+   "chars": 1601
+  },
+  {
+   "n": 34,
+   "date": "2026-09-20",
+   "time": "",
+   "title": "\u2014 Naming the telescope + the giants' debt logged (owner's honorific-and-funny request)",
+   "file": "0034-2026-09-20-naming-the-telescope-the-giants-debt-logged.json",
+   "chars": 1984
+  },
+  {
+   "n": 35,
+   "date": "2026-09-20",
+   "time": "",
+   "title": "\u2014 Telescope naming: two candidates of record + the phi verdict (owner's \"Golden\" + Monkey King questions)",
+   "file": "0035-2026-09-20-telescope-naming-two-candidates-of-record-th.json",
+   "chars": 1837
+  },
+  {
+   "n": 36,
+   "date": "2026-09-20",
+   "time": "",
+   "title": "\u2014 Naming round two: width-ladder handle + the Sumerian measuring family (owner's Enki memory, checked primary)",
+   "file": "0036-2026-09-20-naming-round-two-width-ladder-handle-the-sum.json",
+   "chars": 2458
+  },
+  {
+   "n": 37,
+   "date": "2026-09-20",
+   "time": "",
+   "title": "\u2014 RUN INCIDENT + FIX: decoder boundary-rounding invariant (3e10 run at shard 944)",
+   "file": "0037-2026-09-20-run-incident-fix-decoder-boundary-rounding-i.json",
+   "chars": 3768
+  },
+  {
+   "n": 38,
+   "date": "2026-09-20",
+   "time": "",
+   "title": "\u2014 Enki question resolved (the memory was real; characters interleaved)",
+   "file": "0038-2026-09-20-enki-question-resolved-the-memory-was-real-c.json",
+   "chars": 1617
+  },
+  {
+   "n": 39,
+   "date": "2026-09-20",
+   "time": "",
+   "title": "\u2014 T2.5 parallel orchestrator: built, selftest-passed, handed over, one race caught and fixed",
+   "file": "0039-2026-09-20-t2-5-parallel-orchestrator-built-selftest-pa.json",
+   "chars": 3063
+  },
+  {
+   "n": 40,
+   "date": "2026-09-21",
+   "time": "",
+   "title": "00:07-03:00 \u2014 3e10 band COMPLETE; finish gates PASS (after one OOM kill of the in-process gate)",
+   "file": "0040-2026-09-21-00-07-03-00-3e10-band-complete-finish-gates.json",
+   "chars": 2130
+  },
+  {
+   "n": 41,
+   "date": "2026-09-21",
+   "time": "",
+   "title": "03:07-04:26 \u2014 [S1] data layer complete:  epsilon sweep over the 3e10 band",
+   "file": "0041-2026-09-21-03-07-04-26-s1-data-layer-complete-epsilon-s.json",
+   "chars": 1709
+  },
+  {
+   "n": 42,
+   "date": "2026-09-21",
+   "time": "",
+   "title": "20:12-23:44 \u2014 the 3e10 band RE-FETCHED (post-incident) and re-verified:  finish gates PASS,  band canonicalized",
+   "file": "0042-2026-09-21-20-12-23-44-the-3e10-band-re-fetched-post-in.json",
+   "chars": 5797
+  },
+  {
+   "n": 43,
+   "date": "2026-09-22",
+   "time": "",
+   "title": "07:55-10:45 \u2014 H1 full run: incident, root-cause, two latent bugs caught in verification, run relaunched; A1 assembly (W2Beyond3) built green",
+   "file": "0043-2026-09-22-07-55-10-45-h1-full-run-incident-root-cause.json",
+   "chars": 7218
+  },
+  {
+   "n": 44,
+   "date": "2026-09-28",
+   "time": "",
+   "title": "~01:15-01:50 EDT \u2014 W2M6 GREEN + the day048 margin decider landed (day047 in flight)",
+   "file": "0044-2026-09-28-01-15-01-50-edt-w2m6-green-the-day048-margin.json",
+   "chars": 2586
+  },
+  {
+   "n": 45,
+   "date": "2026-09-29",
+   "time": "",
+   "title": "~15:55-16:15 EDT \u2014 H1 fleet delivery landed on the 10TB; verified 696/696 COMPLETE; committed to git",
+   "file": "0045-2026-09-29-15-55-16-15-edt-h1-fleet-delivery-landed-on.json",
+   "chars": 2858
+  },
+  {
+   "n": 46,
+   "date": "2026-09-29",
+   "time": "",
+   "title": "~04:10-05:40 EDT \u2014 E19: the A1 literature verdict (online-verified) + the growth-form wire GREEN (A1Growth)",
+   "file": "0046-2026-09-29-04-10-05-40-edt-e19-the-a1-literature-verdic.json",
+   "chars": 4027
+  },
+  {
+   "n": 47,
+   "date": "2026-09-29",
+   "time": "",
+   "title": "~06:10-12:40 EDT \u2014 Valiant forensics: the 696-point ledger's worst-straddle margins are an instrument artifact (true margins 0.502); the D1 + V4 discriminators are running",
+   "file": "0047-2026-09-29-06-10-12-40-edt-valiant-forensics-the-696-po.json",
+   "chars": 20950
+  },
+  {
+   "n": 48,
+   "date": "2026-09-30",
+   "time": "",
+   "title": "-- SMOKE PASS, full 505 in flight, precision layer 14/14",
+   "file": "0048-2026-09-30-smoke-pass-full-505-in-flight-precision-laye.json",
+   "chars": 990
+  },
+  {
+   "n": 49,
+   "date": "2026-09-30",
+   "time": "",
+   "title": "-- full run wave 1: pacing fixed, k-sign parity",
+   "file": "0049-2026-09-30-full-run-wave-1-pacing-fixed-k-sign-parity.json",
+   "chars": 677
+  },
+  {
+   "n": 50,
+   "date": "2026-10-13",
+   "time": "",
+   "title": "505-point in-hand re-issue COMPLETE + final census",
+   "file": "0050-2026-10-13-505-point-in-hand-re-issue-complete-final-ce.json",
+   "chars": 1491
+  },
+  {
+   "n": 51,
+   "date": "2026-10-13",
+   "time": "",
+   "title": "Precision layer done; D3/D4 research pass committed",
+   "file": "0051-2026-10-13-precision-layer-done-d3-d4-research-pass-com.json",
+   "chars": 2368
+  },
+  {
+   "n": 52,
+   "date": "2026-10-13",
+   "time": "",
+   "title": "ap1 stage 1: argument principle PORTED IN-HOUSE (no borrow)",
+   "file": "0052-2026-10-13-ap1-stage-1-argument-principle-ported-in-hou.json",
+   "chars": 3681
+  },
+  {
+   "n": 53,
+   "date": "2026-10-13",
+   "time": "",
+   "title": "ap2 COMPLETE: the RVM window identity is house-PROVEN",
+   "file": "0053-2026-10-13-ap2-complete-the-rvm-window-identity-is-hous.json",
+   "chars": 3324
+  },
+  {
+   "n": 54,
+   "date": "2026-10-13",
+   "time": "",
+   "title": "ap3 COMPLETE: the Backlund bound layer is house-PROVEN",
+   "file": "0054-2026-10-13-ap3-complete-the-backlund-bound-layer-is-hou.json",
+   "chars": 3381
+  },
+  {
+   "n": 55,
+   "date": "2026-10-13",
+   "time": "",
+   "title": "ap4 COMPLETE: the D4 line is done -- full RvM, no extra hypotheses",
+   "file": "0055-2026-10-13-ap4-complete-the-d4-line-is-done-full-rvm-no.json",
+   "chars": 4319
+  },
+  {
+   "n": 56,
+   "date": "2026-10-13",
+   "time": "",
+   "title": "D3: P2 read in full; zero-scale oscillation vs measured zero-scale flatness",
+   "file": "0056-2026-10-13-d3-p2-read-in-full-zero-scale-oscillation-vs.json",
+   "chars": 1919
+  },
+  {
+   "n": 57,
+   "date": "2026-10-13",
+   "time": "",
+   "title": "S-side single-zero sweep: zero-scale S IS rough; margin flat; tension quantified",
+   "file": "0057-2026-10-13-s-side-single-zero-sweep-zero-scale-s-is-rou.json",
+   "chars": 1665
+  },
+  {
+   "n": 58,
+   "date": "2026-10-13",
+   "time": "",
+   "title": "ap5 (in-house): point-scale RvM with O(log T) error is house-PROVEN; A1G-6 rebase formalized",
+   "file": "0058-2026-10-13-ap5-in-house-point-scale-rvm-with-o-log-t-er.json",
+   "chars": 2762
+  },
+  {
+   "n": 59,
+   "date": "2026-10-13",
+   "time": "",
+   "title": "SQUEEZE IDENTITY DECODED: Kfull = -c(x) * zeta exactly; the margin is structurally flat; E19 re-scoped to E1",
+   "file": "0059-2026-10-13-squeeze-identity-decoded-kfull-c-x-zeta-exac.json",
+   "chars": 4018
+  },
+  {
+   "n": 60,
+   "date": "2026-10-14",
+   "time": "",
+   "title": "SINGLE-ZERO DOOR ADJUDICATED:  DOOR B -- the margin",
+   "file": "0060-2026-10-14-single-zero-door-adjudicated-door-b-the-marg.json",
+   "chars": 3515
+  },
+  {
+   "n": 61,
+   "date": "2026-10-14",
+   "time": "",
+   "title": "c(t) CLOSED: main-term identity proven numerically; the c theorem; LEAN-GUIDE created",
+   "file": "0061-2026-10-14-c-t-closed-main-term-identity-proven-numeric.json",
+   "chars": 2365
+  },
+  {
+   "n": 62,
+   "date": "2026-10-14",
+   "time": "",
+   "title": "s8: M(t) mapped at all 505 rows; the missing-tail",
+   "file": "0062-2026-10-14-s8-m-t-mapped-at-all-505-rows-the-missing-ta.json",
+   "chars": 4007
+  },
+  {
+   "n": 63,
+   "date": "2026-10-14",
+   "time": "",
+   "title": "MainBridge.lean GATED: the main-term bridge is a Lean theorem (0 errors, sorry-free, lake build green)",
+   "file": "0063-2026-10-14-mainbridge-lean-gated-the-main-term-bridge-i.json",
+   "chars": 2475
+  },
+  {
+   "n": 64,
+   "date": "2026-10-14",
+   "time": "",
+   "title": "E1Clause.lean GATED: the single open clause is named in Lean (0 errors, sorry-free, lake build green)",
+   "file": "0064-2026-10-14-e1clause-lean-gated-the-single-open-clause-i.json",
+   "chars": 3696
+  },
+  {
+   "n": 65,
+   "date": "2026-10-14",
+   "time": "",
+   "title": "E1Clause v2:  clause re-targeted onto the measured face (M_wp + straddleRow);  s9 above-G run launched",
+   "file": "0065-2026-10-14-e1clause-v2-clause-re-targeted-onto-the-meas.json",
+   "chars": 3646
+  },
+  {
+   "n": 66,
+   "date": "2026-10-15",
+   "time": "",
+   "title": "s9/s10:  the above-G face of the E1 clause is refuted by data at  ~1e8 scale;  the 7% dead zone located;  forensics clean",
+   "file": "0066-2026-10-15-s9-s10-the-above-g-face-of-the-e1-clause-is.json",
+   "chars": 3424
+  },
+  {
+   "n": 67,
+   "date": "2026-10-15",
+   "time": "",
+   "title": "s11-s16 close the forensics;  the E1 clause is re-derived and GATED as v3  (data-supported  M_defect  face)",
+   "file": "0067-2026-10-15-s11-s16-close-the-forensics-the-e1-clause-is.json",
+   "chars": 6449
+  },
+  {
+   "n": 68,
+   "date": "2026-10-15",
+   "time": "",
+   "title": "(pm)  s19:  the two-flank  e(g)  deconvolution  completes  --  the  defect  IS  a  small  local  Rho  departure  with  a  big  count",
+   "file": "0068-2026-10-15-pm-s19-the-two-flank-e-g-deconvolution-compl.json",
+   "chars": 4133
+  },
+  {
+   "n": 69,
+   "date": "2026-10-15",
+   "time": "pm2",
+   "title": "s20:  the  ln-t  defect  law  survives  four  more  decades;  the  e-track  closes  at  the  data  limit",
+   "file": "0069-2026-10-15-s20-the-ln-t-defect-law-survives-four-more-d.json",
+   "chars": 2057
+  },
+  {
+   "n": 70,
+   "date": "2026-10-15",
+   "time": "pm3",
+   "title": "s21  +  s22:  the  defect  law  is  the  final law  --  pure  ln  t  over  6.3  log-decades;  sub-log  flag retired",
+   "file": "0070-2026-10-15-s21-s22-the-defect-law-is-the-final-law-pure.json",
+   "chars": 1366
+  },
+  {
+   "n": 71,
+   "date": "2026-10-15",
+   "time": "pm4",
+   "title": "S1Sample  gated;  phase  plan  for  the sample->uniform  reduction",
+   "file": "0071-2026-10-15-s1sample-gated-phase-plan-for-the-sample-uni.json",
+   "chars": 1968
+  },
+  {
+   "n": 72,
+   "date": "2026-10-15",
+   "time": "pm5",
+   "title": "s23  landed  --  the  derivative  face and  the  scope  settlement  of  the  S1Sample  bridge",
+   "file": "0072-2026-10-15-s23-landed-the-derivative-face-and-the-scope.json",
+   "chars": 3362
+  },
+  {
+   "n": 73,
+   "date": "2026-10-15",
+   "time": "pm6",
+   "title": "s24  landed  --  the  S1  track  is settled  at  the  data  limit",
+   "file": "0073-2026-10-15-s24-landed-the-s1-track-is-settled-at-the-da.json",
+   "chars": 2678
+  },
+  {
+   "n": 74,
+   "date": "2026-10-15",
+   "time": "pm7",
+   "title": "external  input  reviewed: openai/math  (release  2026-10-06)  --  family  003 (quasi-RH,  Re  s  >  7/8)  +  Z78Strip  module  GATED",
+   "file": "0074-2026-10-15-external-input-reviewed-openai-math-release.json",
+   "chars": 7482
+  },
+  {
+   "n": 75,
+   "date": "2026-10-15",
+   "time": "pm8",
+   "title": "Z78P12:  the  7/8  input  WOVEN  INTO the  P1.2  reduction  --  far  region  VACUOUS  (proven)",
+   "file": "0075-2026-10-15-z78p12-the-7-8-input-woven-into-the-p1-2-red.json",
+   "chars": 3358
+  },
+  {
+   "n": 76,
+   "date": "2026-10-15",
+   "time": "pm8b",
+   "title": "the  CITED  edge  leg  REPLACED: edgeZeroFree78  (Re  =  0  and  Re  =  1  void, PROVEN  from  the  7/8  input)",
+   "file": "0076-2026-10-15-the-cited-edge-leg-replaced-edgezerofree78-r.json",
+   "chars": 1672
+  },
+  {
+   "n": 77,
+   "date": "2026-10-15",
+   "time": "pm8c",
+   "title": "S2  ON  THE  LOW  BAND  COMPLETE for  the  actual  set  (proven  +  data-vacuous)",
+   "file": "0077-2026-10-15-s2-on-the-low-band-complete-for-the-actual-s.json",
+   "chars": 2246
+  },
+  {
+   "n": 78,
+   "date": "2026-10-15",
+   "time": "",
+   "title": "pm9:  FloorUnif GATED -- floor-unification bridge",
+   "file": "0078-2026-10-15-pm9-floorunif-gated-floor-unification-bridge.json",
+   "chars": 2055
+  },
+  {
+   "n": 79,
+   "date": "2026-10-16",
+   "time": "am",
+   "title": "s25 far-band census lands: the smooth ln-t law bends at ~2e6G with a t-squared drift; the f64 trap channel is adjudicated degraded, not a signal",
+   "file": "0079-2026-10-16-s25-far-band-census-lands-the-smooth-ln-t-la.json",
+   "chars": 2897
+  }
+ ]
+}

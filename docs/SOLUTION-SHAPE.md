@@ -1,5 +1,13 @@
 # SOLUTION SHAPE -- the one-clause reduction for the rh-missing-tail program
 
+> **SUPERSEDED as the pathway chart.**  This document states the
+> one-clause E1/CL structure of the early phase and remains valid as
+> the reasoning history behind it.  The CURRENT state of the program,
+> the branches that remain, and the measured constraints are governed
+> by  `docs/PATHWAY-TO-A-SOLUTION.md`  (single source of truth),  with
+> the history in  `docs/discovery/`  and the Lean tree in
+> `formal/LEAN-GUIDE.md`.
+
 This note states, as tightly as the current Lean tree allows, what the
 program's RH claim reduces to, where the published literature stands on
 that clause, and which doors remain.  It is the abstraction that replaces

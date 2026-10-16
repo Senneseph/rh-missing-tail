@@ -1,0 +1,7 @@
+{
+ "n": 48,
+ "date": "2026-09-30",
+ "time": "",
+ "title": "-- SMOKE PASS, full 505 in flight, precision layer 14/14",
+ "body": "The day052c smoke (24 worst-24 points against their day049f\nreferences) PASSED at 10:37 EDT:  all 24 clean (0 flags,\nmnew 0.502-0.505, every margin under the certificate line,\npt00/pt01 within 1e-5 of the bit-exact engine-replica\nreferences).  The file-watching supervisor then auto-launched\nthe FULL in-hand 505-point re-issue on 14 of 16 cores (resume\nskips the 24 done).  In parallel the band-free day055\nprecision layer ran its first 14 records (one core, 29.5 min):\nSTABLE 14/14,  with d30 = 0.00e00 on every point -- the stored\nstream extras (re, im, nlt, pb, la, ar) reproduce the recorded\nmargins EXACTLY, so the JSONL checkpoint carries full\nprovenance for every margin;  dps-90 == dps-120 to the digit\nand the dps-30 arm sits at the known ~2.8e-9 noise level.\nRemaining:  the 481-point compute (first new-engine points\nexpected ~15:00-15:30 this afternoon;  ETA 3-5 days),  then\nday054 final interpretation,  day055 over all 505,  and the\nforensics/preprint/verification closeout."
+}
