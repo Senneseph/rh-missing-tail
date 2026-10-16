@@ -117,7 +117,17 @@ for the ACTUAL zeta zero set.  The branches:
       The  named  open  items  are  the  data  faces  (row
       faces,  L  faces,  covers,  dead  zone,  cusp  spacing
       +  amplitude)  and  the  E1ClauseV3  clause  itself.
-      This  is  THE  open  item.
+      The  whole  program's  residual  now  has  EXACTLY  ONE
+      STATEMENT:  RHEnd.rh_program78  (THE  ENDPOINT,  actual
+      set  +  [Z78],  at  the  CONCRETE  wire):  S2  covered,
+      S4  strip  band,  S4  low  band,  and  the  far  region
+      are  PROVEN  IN  THE  BODY;  the  residual  is  named
+      once  as  hs1  (the  S1  witness),  hs3  (the  S3  wire),
+      hWin  (the  S4  window-pin  SHAPE:  closure  pinned  at
+      0.9975  vs  the  unified  S2  floor  <=  own  mass  <=
+      6e-4,  gate  ratio  1662.5),  and  hS2low  (the  S2  low-
+      band  pin;  the  sliver  part  is  vacuous  under  the
+      named  on-line  record).  This  is  THE  open  item.
   B2  detector floor  (S2)
       CLOSED:  s2ActualLowBandComplete + s2ActualFullBand,  one
       unified floor floStripMin = mown on the covered band.
@@ -234,11 +244,15 @@ for the ACTUAL zeta zero set.  The branches:
        boundary  at  1.5e19;  if  not,  9e18  stands  and  the
       remaining  levers  are  a  C  zeta  channel  or  more
       RAM.  Until  then  B7  stands  at  its  leveraged  wall.
-  2.  Formal:  THE  S1  UNIFORM  STATEMENT  +  WALK
-      COMPOSITION  IS  GATED  (S1Uniform:  s1UniformFace  +
-      s1UniformStatement  +  s1UniformAndWalk;  full  build
-      green  17450).  What  remains  named:  the  data  faces
-      and  E1ClauseV3  q  7000  itself.  Track  the  external
+  2.  Formal:  THE  ENDPOINT  IS  NAMED  -  RHEnd.rh_program78
+      is  GATED  (the  one-clause  endpoint  on  the  actual  set
+      under  [Z78],  at  the  concrete  wire):  four  of  the
+      squeeze  regimes  closed  IN  BODY  (S2  covered,  S4  strip,
+      S4  low,  far  region),  the  named  residual  reduced  to
+      hs1  (S1  witness),  hs3  (S3  wire),  hWin  (S4  window-pin
+      shape),  hS2low  (S2  low-band  pin).  Next  formal  moves:
+      concretize  one  of  the  four  named  legs  (the  witness
+      on  the  audited  band  first),  and  track  the  external
       review  of  B6.
   3.  Docs:  this document is updated by EVERY milestone commit;
       no silent re-chart.

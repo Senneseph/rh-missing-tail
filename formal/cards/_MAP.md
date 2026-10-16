@@ -36,6 +36,12 @@ A chain of named theorems;  each box names the modules.
      FloorUnif    (S2 floor == S4 own-mass:  floStripMin = mown
                    on the covered band;  s4StripUnifiedFloor;
                    s2ActualFullBand,  no t0 cap)
+     RHEnd        (THE ENDPOINT:  rh_program78 -  actual set +
+                   [Z78],  at the CONCRETE wire;  S2 covered / S4
+                   strip / S4 low / far region PROVEN IN BODY;  the
+                   named residual, exactly once:  hs1 (S1 witness),
+                   hs3 (S3 wire),  hWin (S4 window-pin shape),
+                   hS2low (S2 low-band pin))
 
   Foundations / vocabulary
      B0 (composition atoms)  B4/B5 (detector-line notation)
@@ -51,11 +57,14 @@ A chain of named theorems;  each box names the modules.
      machinery,  RvM window identity)  ->  S1Point
 
   Orphans (terminal or historical,  no one imports them)
-     A1Growth  E2Barrier  E1Clause  FloorUnif  M6  S1Point
-     S1Sample  S4Sharp  S1Cusp  S1Uniform  W2Beyond1  W2M6  Ap3RvMStatement
+     A1Growth  E2Barrier  M6  S1Point
+     S1Sample  S4Sharp  S1Cusp  S1Uniform  RHEnd  W2Beyond1
+     W2M6  Ap3RvMStatement
      Ap3StrongPNTPrefix  Ap3Halving  ProbeM5  ProbeTmp
 
-Reading order for a fresh session:  this file,  then the cards of
+Reading order for a fresh session:  this file,  then the card of
+RHEnd (the ENDPOINT - what the whole tree composes into and the
+exact named residual),  then the cards of
 B0,  P12Uniform,  Closure,  ZetaZeroSet,  E1Clause,  Z78P12,
 FloorUnif,  S1Sample,  S1Cusp,  S1Uniform,  S1Point,  S4Asm  --
 that is the spine.
