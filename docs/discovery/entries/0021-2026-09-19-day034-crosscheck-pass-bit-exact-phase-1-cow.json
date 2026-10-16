@@ -1,7 +1,0 @@
-{
- "n": 21,
- "date": "2026-09-19",
- "time": "",
- "title": "(day034) — crosscheck PASS (bit-exact); phase-1 COW",
- "body": "bug found and fixed; chain restarted (v2)\n\nEquivalence gate: PASS, better than the threshold required —\nthe batched window pass and the verified per-point path agree\nBIT-EXACT on the tail sums (|re/im difference| = 0 on all three\nstraddles of the 1e9 window; the 0.5/A -> 0.5*invA precompute\nproved last-ulp-neutral here, and the budget covers it\nindependently) and the full per-point rows agree to 9e-22\n(mnew 1.081644032 on both paths; mcert 1.081636859 both).\n\nPhase 1 (first launch, 10 workers) died ~2 min in with\nBrokenProcessPool: one worker OOM-killed with anon-rss 25.5GB —\na full private copy of the 22GB band. Root cause:\n`phase1_window` (the task) called `TH.tail()` but the parent\n`phase1_run` never loaded T before the pool, so every worker\nloaded its own copy (10 x 25GB on a 124GB machine). Fix in\nday034b: `phase1_run` now loads `T = TH.tail()` in the parent\nbefore the pool (workers COW-inherit the module singleton; the\ntask's own `TH.tail()` call returns the inherited instance).\nP1 workers reduced 10 -> 8 (bandwidth-bound anyway; memory\nmargin: 25GB parent + 8 x ~5GB private). Chain v2 restarted:\ncrosscheck verdict already on file -> straight to phase 1."
-}

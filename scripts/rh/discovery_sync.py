@@ -1,37 +1,48 @@
 #!/usr/bin/env python
 """discovery_sync -- the discovery log reorganization.
 
-The chronicle (root DISCOVERY_LOG.md) was migrated once into JSON:
-one file per entry under  docs/discovery/entries/.  After migration
-the MD is FROZEN;  new entries are written as fresh JSON files into
-that directory and this script regenerates:
+docs/discovery/entries/  IS  the  source  of  truth:  every  .json
+file  in  it  is  a  valid,  well-formed  entry  (browse  it
+straight  through  normal  git  /  GitHub  access  and
+permissions).  There  is  no  index  /  manifest  file  --  the
+directory  is  the  enumeration.  Each  entry's  unique
+identifier  is  its  real  date  +  time  (YYYY-MM-DD  [+T]  HHMM);
+the  n  sequence  number  is  only  a  sort  key.  Duplicated
+identifiers  are  reported  (fix  by  giving  the  later  entry  a
+real  time).
 
-  docs/discovery/index.json         machine manifest
-  docs/discovery/DISCOVERY.html     the interactive view
-                                    (self-contained:  the entries are
-                                    embedded,  so it opens from a
-                                    double-click / file:// with no
-                                    network and no dependencies)
+The  root  DISCOVERY_LOG.md  was  migrated  into  the  entries  once
+and  is  FROZEN  (archival).  New  entries  are  written  as  fresh
+JSON  files  and  this  script  regenerates  the  one  generated
+artifact,  the  interactive  view:
 
-Add-a-new-entry flow:
-  1.  next number  =  (highest existing n)  +  1
-  2.  write  docs/discovery/entries/NNNN-YYYY-MM-DD-slug.json  with
-      { "n": ..., "date": "...", "time": "", "title": "...",
-        "body": "..." }
-  3.  run  python scripts/rh/discovery_sync.py
-  4.  commit  +  push  (the HTML is generated content;  the entry
-      JSON is the source).
+  docs/discovery/DISCOVERY.html     self-contained  (entries
+                                    embedded),  opens  from  a
+                                    double-click  /  file://  with
+                                    no  network  and  no  deps
 
-The  --migrate  flag  parses  the  frozen  DISCOVERY_LOG.md  and  re
-writes  the  entry  files  for  the  migrated  range  (entries with
-n  <=  the  highest  n  present  in  the  log;  hand-written  later
-entries  survive  untouched).
+Add-a-new-entry  flow:
+  1.  next  number  =  (highest  existing  n)  +  1
+  2.  write  entries/NNNN-YYYY-MM-DD[THHMM]-slug.json  with
+      {  "n":  ...,  "date":  "...",  "time":  "HHMM",  "title":
+      "...",  "body":  "..."  }
+      time  =  the  real  wall-clock  time;  whenever  the  date
+      already  has  an  entry  it  is  REQUIRED  (the  identifier
+      must  be  unique).
+  3.  run  python  scripts/rh/discovery_sync.py
+  4.  commit  +  push
 
-Parser  notes  (two  generations  of  header  format  in  the  log):
-  -  numbered  era:    "## 5.  Title  (2026-09-11)"
-  -  dated  era:       "## 2026-10-15  (pm8c)  TITLE"
-      wrapped  title  lines  (a  following  "## frag"  with  neither
-      a  leading  number  nor  a  date)  are  folded  into  the  title.
+The  --migrate  flag  re-parses  the  frozen  log  into  the  entry
+files  (migrated  range  only;  hand-written  later  entries  are
+never  touched).
+
+Parser  notes  (two  generations  of  header  format  in  the
+frozen  log):
+  -  numbered  era:    "##  5.  Title  (2026-09-11)"
+  -  dated  era:       "##  2026-10-15  (pm8c)  TITLE"
+      wrapped  title  lines  (a  following  "##  frag"  with
+      neither  a  leading  number  nor  a  date)  are  folded  into
+      the  title.
   -  sections  1..4  (the  intro  scaffold)  become  entry  0.
 """
 import argparse
@@ -44,13 +55,13 @@ ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 ENT = os.path.join(ROOT, "docs", "discovery", "entries")
 MD = os.path.join(ROOT, "DISCOVERY_LOG.md")
 HTML = os.path.join(ROOT, "docs", "discovery", "DISCOVERY.html")
-IDX = os.path.join(ROOT, "docs", "discovery", "index.json")
 
 DATE_HDR = re.compile(
-    r"^## (\d{4}-\d{2}-\d{2})\s*(\((pm\d+[a-z]?|am\d+[a-z]?)\))?\s*(.*)$")
+    r"^## (\d{4}-\d{2}-\d{2})\s*(\((pm\d*[a-z]?|am\d*[a-z]?)\))?\s*(.*)$")
 NUM_HDR = re.compile(r"^## (\d+)\.\s*(.*)$")
 WRAP_HDR = re.compile(r"^## ")
 TDATE = re.compile(r"\((\d{4}-\d{2}-\d{2})\)")
+BARE_TDATE = re.compile(r"\b(\d{4}-\d{2}-\d{2})\b")
 
 
 def is_hdr(line):
@@ -63,17 +74,26 @@ def clean(bodylines):
     return "\n".join(bodylines).strip()
 
 
-def slug(n, date, title):
-    s = re.sub(r"[^a-z0-9]+", "-", title.lower()).strip("-")[:44].rstrip("-")
-    return "%04d-%s-%s.json" % (n, date or "0000-00-00", s or "entry")
+def ident(date, time):
+    """The  entry's  unique  identifier:  real  date  +  time."""
+    if time:
+        return "%sT%s" % (date, time)
+    return date
+
+
+def slug(n, date, time, title):
+    s = re.sub(r"[^a-z0-9]+", "-", title.lower()).strip("-")[:40].rstrip("-")
+    return "%04d-%s%s-%s.json" % (
+        n, date or "0000-00-00", ("T" + time) if time else "", s or "entry")
 
 
 def migrate(lines):
-    """Parse the frozen log  ->  chronological entry list (intro = 0)."""
+    """Parse  the  frozen  log  ->  chronological  entry  list."""
     entries = []
     i = 0
-    # intro scaffold:  everything before the first entry header
-    # (the numbered era starts at "## 5.";  1..4  are the scaffold)
+    # intro  scaffold:  everything  before  the  first  entry
+    # header  (the  numbered  era  starts  at  "##  5.";
+    # 1..4  are  the  scaffold)
     while i < len(lines):
         m = NUM_HDR.match(lines[i])
         if m and int(m.group(1)) >= 5:
@@ -95,12 +115,15 @@ def migrate(lines):
             e_time = ""
             m2 = NUM_HDR.match(line)
             title = m2.group(2).strip()
-            dm = TDATE.search(title)
+            dm = TDATE.search(title) or BARE_TDATE.search(title)
             date = dm.group(1) if dm else ""
-            if dm:
-                title = (title[:dm.start()] + " " + title[dm.end():]).strip()
+            if dm and title[dm.start():dm.start() + 1] == "(":
+                # the  whole  parenthetical  group  is  just  the  date
+                if title[dm.end():dm.end() + 1] == ")":
+                    title = (title[:dm.start()] + " " +
+                             title[dm.end() + 1:]).strip()
         i += 1
-        # wrapped title (a following "## frag" without date/number)
+        # wrapped  title  (a  following  "##  frag"  without  date/number)
         while i < len(lines) and WRAP_HDR.match(lines[i]) and \
                 not is_hdr(lines[i]):
             title += " " + lines[i][3:].strip()
@@ -115,11 +138,11 @@ def migrate(lines):
     if intro and any(l.strip() for l in intro):
         entries.insert(0, {
             "n": 0, "date": "", "time": "",
-            "title": "The chronicle: approach, pieces, "
-                     "contradictions (intro scaffold)",
+            "title": "The  chronicle:  approach,  pieces,  "
+                     "contradictions  (intro  scaffold)",
             "body": clean(intro)})
     for k, e in enumerate(entries):
-        e["n"] = k            # file order  =  chronological order
+        e["n"] = k            # file  order  =  chronological  order
     return entries
 
 
@@ -140,24 +163,54 @@ def load_entries():
     return out
 
 
-def gen_index(entries):
-    dates = [e["date"] for e in entries if e["date"]]
-    os.makedirs(os.path.dirname(IDX), exist_ok=True)
-    man = {
-        "generated_from": "docs/discovery/entries/ "
-                          "(frozen archive DISCOVERY_LOG.md, migrated)",
-        "count": len(entries),
-        "date_min": min(dates) if dates else "",
-        "date_max": max(dates) if dates else "",
-        "entries": [
-            {"n": e["n"], "date": e["date"], "time": e["time"],
-             "title": e["title"], "file": e.get("file", ""),
-             "chars": len(e["body"])}
-            for e in entries],
-    }
-    with open(IDX, "w") as fh:
-        json.dump(man, fh, indent=1)
-    return man
+def assign_idents(entries):
+    """Make  every  identifier  (date  [+  time])  unique,
+    persisting  the  assignments.  Rules  (in  chronological  n
+    order):
+      -  an  entry  with  a  time  (real  HHMM  or  a  recorded
+        am / pmN  day-marker)  keeps  it  --  those  are  the
+        real  identifiers  and  never  collide  in  practice;
+      -  the  first  bare-date  entry  of  a  day  keeps  the  bare
+        date  as  its  identifier  (date  alone  is  unique  then);
+      -  later  bare-date  entries  of  the  same  day  (the
+        archive  era  recorded  no  wall-clock  times  on
+        multi-entry  days)  are  given  the  deterministic
+        sequence  tokens  s2,  s3,  ...  counting  the  bare-date
+        entries  of  that  day  in  log  order  (token  s1  is  the
+        bare  date  itself).  These  are  order  markers,  NOT
+        wall-clock  times;  entries  written  from  the  migration
+        onward  always  carry  a  real  HHMM  time  instead.
+    Returns  the  list  of  assignments  made."""
+    import os as _os
+    counts = {}
+    made = []
+    for e in entries:
+        if e["n"] == 0:
+            e["time"] = e.get("time", "")
+            continue
+        d = e["date"] or "undated"
+        if not e.get("time"):
+            counts[d] = counts.get(d, 0) + 1
+            if counts[d] >= 2:
+                e["time"] = "s%d" % counts[d]
+        # persist  (schema  keys  only,  not  the  working  "file")
+        f = e.get("file")
+        if f:
+            p = _os.path.join(ENT, f)
+            with open(p, "w") as fh:
+                json.dump({k: e[k] for k in ("n", "date", "time",
+                                              "title", "body")},
+                          fh, indent=1, ensure_ascii=False)
+        # rename  if  the  time  changed  the  slug
+        if e.get("file") and e["n"] > 0:
+            newf = slug(e["n"], e["date"], e["time"], e["title"])
+            oldp = _os.path.join(ENT, e["file"])
+            newp = _os.path.join(ENT, newf)
+            if newf != e["file"] and _os.path.exists(oldp):
+                _os.replace(oldp, newp)
+                made.append((e["n"], ident(e["date"], e["time"]), e["title"][:50]))
+            e["file"] = newf
+    return made
 
 
 def gen_html(entries):
@@ -219,9 +272,10 @@ button.small { padding: 2px 8px; font-size: 12px; }
 <body>
 <header>
   <h1>rh-missing-tail -- the discovery log
-      <small>one JSON per entry (docs/discovery/entries);  generated view</small></h1>
+      <small>source  of  truth:  entries/  (one  JSON  per
+      entry);  generated  view</small></h1>
   <div class="row">
-    <input id="q" type="search" placeholder="search title + body  ( / )">
+    <input id="q" type="search" placeholder="search  title  +  body  ( / )">
     <input id="d1" type="date" title="from date">
     <input id="d2" type="date" title="to date">
     <select id="ord">
@@ -241,7 +295,7 @@ const E = JSON.parse(document.getElementById("data").textContent);
 const $ = id => document.getElementById(id);
 const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;")
                  .replace(/>/g,"&gt;").replace(/"/g,"&quot;");
-function md(src) {  // the log's markdown-lite,  html-safe
+function md(src) {  // the  log's  markdown-lite,  html-safe
   const out = [];
   let pre = false;
   for (const line of src.split("\n")) {
@@ -288,7 +342,7 @@ function render() {
     hd.className = "hd";
     hd.innerHTML =
       '<span class="dt">' + (e.date || "n.d.") + "</span>" +
-      '<span class="tm">' + (e.time ? "(" + e.time + ")" : "") + "</span>" +
+      '<span class="tm">' + (e.time ? (e.time) : "") + "</span>" +
       '<span class="tt">' + hl(esc(e.title), q) + "</span>";
     hd.onclick = () => {
       if (openSet.has(e.n)) openSet.delete(e.n); else openSet.add(e.n);
@@ -323,30 +377,54 @@ render();
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--migrate", action="store_true",
-                    help="parse the frozen log into the entry JSONs "
-                         "(migrated range only)")
+                    help="parse  the  frozen  log  into  the  entry  "
+                         "JSONs  (migrated  range  only)")
     a = ap.parse_args()
     if a.migrate:
         with open(MD) as fh:
             lines = fh.read().split("\n")
         fresh = migrate(lines)
+        # assign  the  bare-date  s-tokens  BEFORE  the  files
+        # are  written  (no  rename  churn):  fresh  entries
+        # have  no  "file"  key,  so  assignment  only  sets
+        # times
+        assign_idents(fresh)
         os.makedirs(ENT, exist_ok=True)
-        # NOTE:  fresh  contains  ONLY  the  log's  entries  (the  log
-        # is  frozen  at  migration)  so  hand-written  later  entries
-        # (n  beyond  the  log's  range)  are  never  touched.
+        # NOTE:  fresh  contains  ONLY  the  log's  entries  (the
+        # log  is  frozen)  so  hand-written  later  entries  are
+        # never  touched.
+        # Stale  migrated  files  from  an  earlier  parse  of  a
+        # different  (repaired)  log  are  removed  first  --
+        # only  files  that  are  NOT  reproduced  now  get  a
+        # check:  every  current  fresh  slug  is  written;
+        # leftover  files  whose  n  is  in  the  fresh  range
+        # are  stale.
+        fresh_n = {e["n"] for e in fresh}
+        for f in os.listdir(ENT):
+            if not f.endswith(".json"):
+                continue
+            m = re.match(r"^(\d{4})-", f)
+            if m and int(m.group(1)) in fresh_n:
+                os.remove(os.path.join(ENT, f))
         wrote = 0
         for e in fresh:
             f = "0000-intro.json" if e["n"] == 0 else \
-                slug(e["n"], e["date"], e["title"])
+                slug(e["n"], e["date"], e["time"], e["title"])
             with open(os.path.join(ENT, f), "w") as fh:
                 json.dump(e, fh, indent=1, ensure_ascii=False)
             wrote += 1
-        print("migrated %d entries from the frozen log "
-              "(%d written)" % (len(fresh), wrote))
+        print("migrated  %d  entries  from  the  frozen  log  "
+              "(%d  written)" % (len(fresh), wrote))
     entries = load_entries()
-    gen_index(entries)
+    made = assign_idents(entries)
+    if made:
+        for n, k, t in made:
+            print("IDENT  n=%d  ->  %s   (%s...)" % (n, k, t))
+    else:
+        print("identifiers  unique  (no  renames)")
     gen_html(entries)
-    print("wrote %s (%d entries)  and  %s" % (HTML, len(entries), IDX))
+    print("wrote  %s  (%d  entries)  --  the  entries/  "
+          "directory  is  the  source  of  truth" % (HTML, len(entries)))
 
 
 if __name__ == "__main__":

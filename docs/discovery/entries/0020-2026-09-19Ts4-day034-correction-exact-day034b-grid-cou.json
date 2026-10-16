@@ -1,0 +1,7 @@
+{
+ "n": 20,
+ "date": "2026-09-19",
+ "time": "s4",
+ "title": "(day034) — correction: exact day034b grid count",
+ "body": "The restructure note above estimated 71 windows / 1775 points at\n12% spacing; the exact count (computed, not estimated) is\n61 geometric windows (x = 1e6*1.12^k, last = 8.976e8) + the\nexplicit 1.0e9 anchor window = **62 windows, 1550 straddle\npoints**.  Phase counts in the chain are keyed to the actual\nfile count (62), not to any hand estimate."
+}

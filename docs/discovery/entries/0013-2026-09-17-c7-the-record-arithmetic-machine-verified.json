@@ -1,7 +1,0 @@
-{
- "n": 13,
- "date": "2026-09-17",
- "time": "",
- "title": "C7 — the record arithmetic, machine-verified",
- "body": "The two closing records carry arithmetic claims computed from\nprinted point values; C7 makes those claims exact-rational\nmachine-checked facts (norm_num; the printed decimals are exact\nrationals) — \"computed, never recalled\" now extends from the\nmeasurement to the verification of the measurement's own arithmetic:\n\n  p9_worstcase_record_margin : 9.198 >= 112.6 * 0.08168\n    (out_day020_worstcase.txt, overall worst point t = 1006.7916,\n     pair g = 999.791572; the closing number 112.6 re-verifies\n     from the printed resid/dev)\n  p9_xval_record_headroom : 3.9665418656908 >= 206 * 0.019253844165493\n    (out_day020_xval_pin.txt, t = 1000.041572, band\n     (2000.083144, 10^5]; the 206x pin re-verifies at 15 digits)\n\nPrecision discipline: per-pair printed values (e.g. the 980 pair's\n\"118.6\") can FAIL such re-verification at 4-significant-figure\nprint precision (1.949/0.01644 = 118.55...); only closing numbers\nare machine-checked, and the closing number is the overall worst\ncase. If a future audit adds a new closing constant, its C7 check\ntravels with it.\n\nRhAttack/Closure.lean C7 section; full build 17430 jobs 0 errors\n0 sorry; B5-CORE PASS; smoke PASS; probe deleted."
-}
