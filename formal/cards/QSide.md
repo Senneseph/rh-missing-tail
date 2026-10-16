@@ -1,4 +1,4 @@
-# QSide.lean  (200 lines)
+# QSide.lean  (251 lines)
 WHAT:  The zero-side scale Qside, NAMED DATA FACE (day-020 audit band).
 HOW:   Qside (the walk-spine Q of discovery 0088) IS the measured |zeta|
          fill resid(t) = |zeta(1/2 + it) - K_on(t)| (the s10 LHS, A0
@@ -9,7 +9,12 @@ HOW:   Qside (the walk-spine Q of discovery 0088) IS the measured |zeta|
          exact-rational norm_num + Float #eval): gate_worst_margin
          (112.6x squeeze gap), gate_xval_headroom, gate_resid_below_dev
          (route-A), gate_def_dominates_fill (48x), bundled in
-         qsideFaceGated.
+         qsideFaceGated; Part E: mPin = 1/112.6 (the C4 margin pin) +
+         mPin_lt_half + section8_close_at_audit (LEAN-PROVEN: the
+         section-8 closure arithmetically closes at the day-020 pins -
+         no real X with the C2 lower bound dev*(1 - mPin) AND the C3
+         margin bound dev/marginWorst; the engine's contradiction
+         instantiated at the data face).
 USES:  used by: (none yet - the face module; the C6 audit-point package
          of Closure.lean consumes this data).
 GOTCHA: MEASURED/PINNED labels per the honesty convention: resid/dev/|x|

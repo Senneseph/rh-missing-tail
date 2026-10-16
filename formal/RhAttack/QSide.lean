@@ -197,4 +197,55 @@ theorem qsideFaceGated :
   refine ⟨gate_resid_below_dev.1, gate_resid_below_dev.2,
     gate_def_dominates_fill, gate_worst_margin, gate_xval_headroom⟩
 
+/-! ## Part E - the section-8 closure, instantiated at the audit
+    band (LEAN-PROVEN arithmetic on the pinned constants).
+
+The outline section-8 contradiction (spec closure-module-
+abstract.md, step 3) at an existing off-pair (t0, d0):
+  C2 (>= side, LEAN-PROVEN composition in the tree):  X >= dev - M
+  C4 (the margin pin, THIS FACE): M <= mPin * dev,  mPin = 1/112.6
+  C3 (< side under the audit margin, THIS FACE): X <= dev / marginWorst
+  hence  X >= dev*(1 - mPin)  and  X <= dev*mPin  (since
+  dev/marginWorst = dev*mPin);  the two sides cannot hold
+  simultaneously because mPin < 1/2 (the 112.6x audit is what makes
+  the gap real: 1 - mPin > mPin).  The engine (C5 / p9_point_
+contradiction, cross-checked in ProbeMargin6) performs the
+contradiction; this module verifies that the AUDIT-BAND PINS make
+it arithmetically close.  No RH claim: this is the gate arithmetic
+of the closure's margin hypothesis at the day-020 constants. -/
+
+/-- The C4 margin pin: m := 1/112.6 (the worst-case audit constant
+    of the day-020 run; spec closure-module-abstract.md C4, PINNED
+    - the explicit margin hypothesis of the closure; per spec sec 3
+    not promoted to a universal forall-t: the Route-A instrument
+    boundary). -/
+def mPin : ℝ := (1 : ℝ) / marginWorst
+
+/-- The pin is far below 1/2: the audit margin (112.6x) is what
+    makes the section-8 gap real (1 - mPin > mPin). -/
+theorem mPin_lt_half : mPin < 1 / 2 := by
+  norm_num [mPin, marginWorst]
+
+/-- THE SECTION-8 CLOSE AT THE AUDIT BAND (the arithmetic): with
+    the C4 margin pin M = mPin*dev (worst case) and the C3 margin
+    bound X <= dev/marginWorst = mPin*dev, there is no real X with
+    the C2 lower bound X >= dev*(1 - mPin) AND the C3 upper bound -
+    the two sides of the closure cannot both hold at the pinned
+    day-020 constants.  This is the concrete instantiation of the
+    engine's contradiction (discovery 0089) at the data face. -/
+theorem section8_close_at_audit : ¬ ∃ (X : ℝ),
+    X ≥ devWorst * (1 - mPin) ∧ X ≤ devWorst / marginWorst := by
+  intro h
+  obtain ⟨X, hlo, hhi⟩ := h
+  have hdiv : devWorst / marginWorst = devWorst * mPin := by
+    rw [mPin]
+    field_simp
+  -- the gap is a rational-arithmetic fact on the pins:
+  have hgap : devWorst * mPin < devWorst * (1 - mPin) := by
+    norm_num [mPin, marginWorst, devWorst]
+  have hB : X ≤ devWorst * mPin := by simpa [hdiv] using hhi
+  -- hlo : devWorst*(1 - mPin) <= X;  hB : X <= devWorst*mPin;
+  -- hgap : devWorst*mPin < devWorst*(1 - mPin)  ->  False.
+  nlinarith [hlo, hB, hgap]
+
 end QSide

@@ -286,11 +286,18 @@ for the ACTUAL zeta zero set.  The branches:
       112.6x;  Xval  pin  headroom  206x)  with  LEAN-PROVEN
       exact-rational  +  Float  gates  (qsideFaceGated);
       Qside  IS  the  measured  |zeta|  fill  resid  =
-      |zeta(1/2+it)  -  K_on(t)|  under  the  A4.3  wiring.
-      Next  formal  move:  hook  the  QSide  face  into  the
-      low-band  leg  (hS2low  /  hs1  at  the  audited  band)
-      as  the  CHECKABLE  INSTANCE  of  the  walk  spine,  then
-      track  the  external  review  of  B6.
+      |zeta(1/2+it)  -  K_on(t)|  under  the  A4.3  wiring;
+      and  THE  SECTION-8  CLOSE  AT  THE  AUDIT  BAND  IS
+      MACHINE-VERIFIED  (discovery  0091):  mPin  =  1/112.6
+      (the  C4  margin  pin)  +  section8_close_at_audit  -  no
+      real  X  with  the  C2  lower  bound  dev*(1-mPin)  AND
+      the  C3  margin  bound  dev/112.6;  the  engine's
+      contradiction  instantiated  at  the  data  face.  Next
+      formal  move:  the  low-band  wire  SHAPE  (definitional
+      zero  wires  below  the  strip,  machine-proven)  +  the
+      hs1  low-band  face  (C2  >=  side  +  QSide  resid  +
+      the  hgrid  margin  face),  then  track  the  external
+      review  of  B6.
   3.  Docs:  this document is updated by EVERY milestone commit;
       no silent re-chart.
 
