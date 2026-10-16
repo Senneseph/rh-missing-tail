@@ -262,11 +262,15 @@ for the ACTUAL zeta zero set.  The branches:
       LADDER:  dps-15  LANDED  (t  =  1.5000523e19,  logzeta  =
       +2.9370199551,  peak  92.6  GB,  69.8  min)  -  the  last
       reachable  height  is  REAL  REACHABLE  (the  model  was
-      ~  11%  low);  dps-20/30/40  in  sequence  (fresh  pro-
-      cess  each);  if  dps-40  (the  census  channel)  lands,
-      the  staggered  row  protocol  locks  the  boundary  at
-      1.5e19;  if  not,  9e18  stands  (the  dps-15  value  is
-      recorded  either  way)  and  the  remaining  levers  are  a
+      ~  11%  low);  dps-20  LANDED  (logzeta  =  +1.7289704098,
+      75.1  min)  and  dps-30  LANDED  (logzeta  =  +1.7289704098
+      -  AGREES  with  dps-20;  peak  95.1  GB):  the  dps-15  value
+      is  the  OUTLIER  (precision  artifact  at  N  ~  1.5e9
+      terms),  the  emerging  stable  value  at  5e8G  is
+      log|zeta|  ~  +1.729  (|zeta|  ~  5.64);  dps-40  (the
+      census  channel)  in  flight;  if  dps-40  lands,  the
+      staggered  row  protocol  locks  the  boundary  at  1.5e19;
+      if  not,  9e18  stands  and  the  remaining  levers  are  a
       C  zeta  channel  or  more  RAM.  Until  then  B7  stands
       at  its  leveraged  wall.
   2.  Formal:  THE  ENDPOINT  IS  NAMED  AND  THE  SPINE  IS
@@ -300,9 +304,14 @@ for the ACTUAL zeta zero set.  The branches:
       three  nontrivial  low-band  legs  as  JOINTLY
       contradictory  (0.9975  <=  devStripMin  <=  Qside  <=
       0)  -  the  squeeze  shape  at  the  low-band  wire
-      configuration;  remaining:  the  hs1  low-band  FACE
-      (C2  >=  side  +  QSide  resid  +  the  hgrid  margin
-      face),  then  track  the  external  review  of  B6.
+      configuration;  and  THE  S1  >=  SIDE  ATOM  IS  GATED
+      (discovery  0093,  S1Ge.lean):  the  pointwise  hs1  core
+      |zeta  -  K|  >=  devW  -  Mval  from  A0  (p8_same_object)
+      +  the  reverse  triangle  +  the  A4.3  mass  premise  -
+      the  P1.2  spec's  "LEAN-PROVEN  POINTWISE  under  the  mass
+      premise"  row;  remaining:  the  hs1  low-band  FACE  (S1Ge
+      atom  +  QSide  resid  +  the  hgrid  margin  face),  then
+      track  the  external  review  of  B6.
   3.  Docs:  this document is updated by EVERY milestone commit;
       no silent re-chart.
 
