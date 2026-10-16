@@ -278,13 +278,19 @@ for the ACTUAL zeta zero set.  The branches:
       TO  THE  CONCRETE  SCALE  Qside  (the  old  form  was  a
       dead  form  -  unsatisfiable  S3;  discovery  0088);  the
       retyped  spine  is  live  (liveness  audit  -  discovery
-      0089,  ProbeMargin6  green;  full  build  17450).  Next
-      formal  move:  concretize
-      Qside  as  a  NAMED  DATA  FACE  (the  measured  |zeta|
-      fill  under  A4.3,  as  a  def  +  Float  gate  on  the
-      audited  band),  which  makes  hs1/hs3  checkable  data
-      faces  instead  of  parameters;  then  track  the  external
-      review  of  B6.
+      0089,  ProbeMargin6  green;  full  build  17450),  and
+      Qside  IS  NOW  A  NAMED  DATA  FACE  (discovery  0090):
+      QSide.lean  pins  the  day-020  audit  band  (4  candidate
+      pairs,  straddle  window  12,  overall  worst  t  =
+      1006.7916,  resid  =  0.08168,  dev  =  9.198,  margin
+      112.6x;  Xval  pin  headroom  206x)  with  LEAN-PROVEN
+      exact-rational  +  Float  gates  (qsideFaceGated);
+      Qside  IS  the  measured  |zeta|  fill  resid  =
+      |zeta(1/2+it)  -  K_on(t)|  under  the  A4.3  wiring.
+      Next  formal  move:  hook  the  QSide  face  into  the
+      low-band  leg  (hS2low  /  hs1  at  the  audited  band)
+      as  the  CHECKABLE  INSTANCE  of  the  walk  spine,  then
+      track  the  external  review  of  B6.
   3.  Docs:  this document is updated by EVERY milestone commit;
       no silent re-chart.
 
