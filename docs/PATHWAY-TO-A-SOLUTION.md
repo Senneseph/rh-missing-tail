@@ -170,9 +170,18 @@ for the ACTUAL zeta zero set.  The branches:
   B6  external quasi-RH input  (Z78)
       KERNEL-VERIFIED externally (two kernels),  human review in
       progress.  Provenance is recorded (openai/math family 003).
-      If the review finds a flaw,  the far-region vacuity and the
-      edge-line exclusion reopen -- both are single-line reverts to
-      cited-classical status in this chart.
+      THE REVIEW PACKET IS COMPILED (B6-REVIEW-PACKET.md, discovery
+      0098):  the exact objects (ONE load-bearing statement -
+      externalZeroFree78,  zeta-only;  Dirichlet/Siegel declared
+      but not woven;  the endpoint carries hz78 as a NAMED
+      hypothesis),  the upstream sources + paths,  the 2-kernel
+      verification record,  an ordered 6-item reviewer checklist
+      (the 31k-line dependency patch is the highest-leverage human
+      item;  the 199-page paper is the long pole),  and the
+      degradation path.  If the review finds a flaw,  the
+      far-region vacuity and the edge-line exclusion reopen --
+      both are single-line reverts to cited-classical status in
+      this chart (nothing else moves).
   B7  far-side structure  (the census drift)
       ACTIVE  AT  THE  LEVERAGED  WALL.  Verified  data  (dps-80):
       the  drift  is  small  positive  at  3e5G-1e6G  (the  (t/g0)^2
