@@ -129,17 +129,18 @@ def tStar : ℝ := 690349.0568
     impossible there (S4c), so the bound-level residue is exactly
     gapW plus a sharper own-regime wire. -/
 theorem rh_from_structural_hypotheses
-    (q : ZeroSet) (Mf devOf Bwire Mr flo : ℝ × ℝ → ℝ)
+    (q : ZeroSet) (Qside Mf devOf Bwire Mr flo : ℝ × ℝ → ℝ)
     (hs1 : ∀ (t0 d0 : ℝ), 0 < t0 → 0 < d0 → P12.offPair q t0 d0 →
-      ∃ (Q : ℝ), Q >= devOf (t0, d0) - Mf (t0, d0))
+      Qside (t0, d0) >= devOf (t0, d0) - Mf (t0, d0))
     (hs2 : ∀ (t0 d0 : ℝ), 0 < t0 → 0 < d0 → P12.offPair q t0 d0 →
       devOf (t0, d0) >= flo (t0, d0))
-    (hs3 : ∀ (t0 d0 : ℝ) (Q : ℝ), 0 < t0 → 0 < d0 →
-      P12.offPair q t0 d0 → Q <= Bwire (t0, d0) + Mr (t0, d0))
+    (hs3 : ∀ (t0 d0 : ℝ), 0 < t0 → 0 < d0 →
+      P12.offPair q t0 d0 →
+      Qside (t0, d0) <= Bwire (t0, d0) + Mr (t0, d0))
     (hs4 : ∀ (t0 d0 : ℝ), 0 < t0 → 0 < d0 → P12.offPair q t0 d0 →
       Bwire (t0, d0) + Mr (t0, d0) + Mf (t0, d0) < flo (t0, d0)) :
     RH q :=
-  P12.p1_2 q Mf devOf Bwire Mr flo hs1 hs2 hs3 hs4
+  P12.p1_2 q Qside Mf devOf Bwire Mr flo hs1 hs2 hs3 hs4
 
 
 /- — 25z reclassification → 25ab/25ae/25af — the window + strip ASSEMBLY
@@ -358,13 +359,14 @@ theorem s4asm_residue_S4_covered (hX : S4W.Xwire S4W.T0 ≤ S4W.RX)
     This is the (i-b) assembly: the bound-level residue of S4 on the
     closure-relevant regimes is exactly window + strip, both closed. -/
 theorem rh_from_regime_closures (q : ZeroSet)
-    (Mf devOf Bwire Mr flo : ℝ × ℝ → ℝ)
+    (Qside Mf devOf Bwire Mr flo : ℝ × ℝ → ℝ)
     (hs1 : ∀ (t0 d0 : ℝ), 0 < t0 → 0 < d0 → P12.offPair q t0 d0 →
-        ∃ (Q : ℝ), Q >= devOf (t0, d0) - Mf (t0, d0))
+        Qside (t0, d0) >= devOf (t0, d0) - Mf (t0, d0))
     (hs2 : ∀ (t0 d0 : ℝ), 0 < t0 → 0 < d0 → P12.offPair q t0 d0 →
         devOf (t0, d0) >= flo (t0, d0))
-    (hs3 : ∀ (t0 d0 : ℝ) (Q : ℝ), 0 < t0 → 0 < d0 →
-        P12.offPair q t0 d0 → Q <= Bwire (t0, d0) + Mr (t0, d0))
+    (hs3 : ∀ (t0 d0 : ℝ), 0 < t0 → 0 < d0 →
+        P12.offPair q t0 d0 →
+        Qside (t0, d0) <= Bwire (t0, d0) + Mr (t0, d0))
     (hs4covered : ∀ (t0 d0 : ℝ), 1000 ≤ t0 → 0 < d0 → d0 ≤ 1 / 2 →
         P12.offPair q t0 d0 →
         Bwire (t0, d0) + Mr (t0, d0) + Mf (t0, d0) < flo (t0, d0))
@@ -375,7 +377,7 @@ theorem rh_from_regime_closures (q : ZeroSet)
         P12.offPair q t0 d0 →
         Bwire (t0, d0) + Mr (t0, d0) + Mf (t0, d0) < flo (t0, d0)) :
     RH q := by
-  refine P12.p1_2 q Mf devOf Bwire Mr flo hs1 hs2 hs3 ?_
+  refine P12.p1_2 q Qside Mf devOf Bwire Mr flo hs1 hs2 hs3 ?_
   intro t0 d0 ht0 hd0 hpair
   by_cases hdm : d0 ≤ 1 / 2
   · by_cases htl : 1000 ≤ t0

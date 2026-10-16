@@ -1,4 +1,4 @@
-# RHEnd.lean  (221 lines)
+# RHEnd.lean  (227 lines)
 WHAT:  THE ENDPOINT of the program on the ACTUAL zeta zero set under the
          named external input [Z78] (Re s > 7/8 zero-free), at the
          CONCRETE wire, with maximal concretization: the residual is
@@ -12,13 +12,13 @@ HOW:   wire: Mf = Z78P12.MfP (0 tail), devOf = devProg (the concrete
          squeeze and S2 floor are ONE object on 1/200 <= d0 <= 1/2); S4
          low band (TRIVIAL - the residue wires are 0 below 1000, floor =
          the pin, 0 < 0.9975); the far region (VACUOUS from [Z78] alone
-         - Z78P12.offPairFarEmpty). NAMED RESIDUAL: hs1 the S1 witness
-         (Q >= devProg - the E1 content, uniform face via S1Uniform),
-         hs3 the S3 wire (Q <= BwireP + MrP), hWin the S4 window-pin
-         shape (25m/25ab closure pinned at 0.9975 vs the unified floor
-         <= own mass <= 6e-4 there - Part C gate: ratio 1662.5), hS2low
-         the S2 low-band pin (H6 regime; sliver part vacuous under the
-         named on-line record).
+         - Z78P12.offPairFarEmpty). NAMED RESIDUAL: hs1 the S1 witness:
+         Qside >= devProg - the E1 content, uniform face via S1Uniform;
+         hs3 the S3 wire: THE SAME Qside <= BwireP + MrP (Qside
+         contract); hWin the S4 window-pin shape (25m/25ab closure
+         pinned at 0.9975 vs the unified floor <= own mass <= 6e-4 there
+         - Part C gate: ratio 1662.5), hS2low the S2 low-band pin (H6
+         regime; sliver part vacuous under the named on-line record).
 USES:  terminal: the one-clause endpoint; composes
          S4A.rh_from_regime_closures + Z78/Z78P12 + FloorUnif + S1LowT +
          P8Floor (p8_f_near_pin).

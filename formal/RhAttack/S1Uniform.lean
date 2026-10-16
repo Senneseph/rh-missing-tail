@@ -199,16 +199,16 @@ theorem s1UniformAndWalk (q : ZeroSet)
     (hspData : ∀ u, u ∈ rows → G_LAST < u → u ≤ T_MEAS →
       ∀ j, eps ≤ |u - g j|)
     (hE3 : E1ClauseV3 q 7000)  -- the named data hole
-    (Mf devOf Bwire Mr flo : ℝ × ℝ → ℝ)
+    (Qside Mf devOf Bwire Mr flo : ℝ × ℝ → ℝ)
     (hs1 : ∀ (t0 d0 : ℝ), 0 < t0 → 0 < d0 →
       P12.offPair q t0 d0 →
-      ∃ (Q : ℝ), Q ≥ devOf (t0, d0) - Mf (t0, d0))
+      Qside (t0, d0) ≥ devOf (t0, d0) - Mf (t0, d0))
     (hs2 : ∀ (t0 d0 : ℝ), 0 < t0 → 0 < d0 →
       P12.offPair q t0 d0 →
       devOf (t0, d0) ≥ flo (t0, d0))
-    (hs3 : ∀ (t0 d0 : ℝ) (Q : ℝ), 0 < t0 → 0 < d0 →
+    (hs3 : ∀ (t0 d0 : ℝ), 0 < t0 → 0 < d0 →
       P12.offPair q t0 d0 →
-      Q ≤ Bwire (t0, d0) + Mr (t0, d0))
+      Qside (t0, d0) ≤ Bwire (t0, d0) + Mr (t0, d0))
     (hs4 : ∀ (t0 d0 : ℝ), 0 < t0 → 0 < d0 →
       P12.offPair q t0 d0 →
       Bwire (t0, d0) + Mr (t0, d0) + Mf (t0, d0) <
@@ -225,7 +225,7 @@ theorem s1UniformAndWalk (q : ZeroSet)
       hL1 hDv1 hBdead hLipB hCoverB hDead hB hL hDv
       hC heps hdv1 hLip hc hC2 hface hrowData hcover
       hspData
-  exact if_E1V3_and_walk q hz hE3 Mf devOf Bwire Mr
+  exact if_E1V3_and_walk q hz hE3 Qside Mf devOf Bwire Mr
     flo hs1 hs2 hs3 hs4
 
 /-  ##  Part  D  --  unified  data  gates  (Float,

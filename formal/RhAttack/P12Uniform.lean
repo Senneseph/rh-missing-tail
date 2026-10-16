@@ -81,13 +81,18 @@ namespace P12
 def offPair (q : ZeroSet) (t0 d0 : ℝ) : Prop :=
     ∃ ρ ∈ q.Z, ρ.re ≠ 1 / 2 ∧ (|ρ.im| : ℝ) = t0 ∧ |(ρ.re : ℝ) - 1 / 2| = d0
 
-/- S1 — ZERO SIDE: for every off-line pair a zero-side scale Q
-    dominates the detector deviation less the bridge-tail defect
-    Mf(t0,d0) (b3 BSBAR wire, A4.3).  Proven pointwise in the audited
-    bands; uniform height = open. -/
-variable (q : ZeroSet) (Mf devOf Bwire Mr flo : ℝ × ℝ → ℝ)
+/- S1 — ZERO SIDE: the concrete zero-side scale Qside (the
+    measured |zeta| fill under the A4.3 residual wire) dominates
+    the detector deviation less the bridge-tail defect Mf(t0,d0)
+    (b3 BSBAR wire, A4.3).  Proven pointwise in the audited bands;
+    uniform height = open.  (The Qside contract is the
+    2026-10-16 re-typing:  the old "exists Q (S1) / for-all Q
+    (S3)" form decoupled the legs and made S3 unsatisfiable for
+    ANY finite wire;  Q is ONE concrete scale, the same in S1
+    and S3.) -/
+variable (q : ZeroSet) (Qside Mf devOf Bwire Mr flo : ℝ × ℝ → ℝ)
 variable (hs1 : ∀ (t0 d0 : ℝ), 0 < t0 → 0 < d0 → offPair q t0 d0 →
-  ∃ (Q : ℝ), Q >= devOf (t0, d0) - Mf (t0, d0))
+  Qside (t0, d0) >= devOf (t0, d0) - Mf (t0, d0))
 
 /- S2 — DETECTOR FLOOR: the detector deviation at an off-line pair
     is bounded below by the regime floor flo(t0,d0) (min of the
@@ -96,10 +101,11 @@ variable (hs1 : ∀ (t0 d0 : ℝ), 0 < t0 → 0 < d0 → offPair q t0 d0 →
 variable (hs2 : ∀ (t0 d0 : ℝ), 0 < t0 → 0 < d0 → offPair q t0 d0 →
   devOf (t0, d0) >= flo (t0, d0))
 
-/- S3 — DEFINITION SIDE: the same Q is bounded above by the
-    P8Floor-composed wire Bwire(t0,d0) + Mr(t0,d0). -/
-variable (hs3 : ∀ (t0 d0 : ℝ) (Q : ℝ), 0 < t0 → 0 < d0 →
-  offPair q t0 d0 → Q <= Bwire (t0, d0) + Mr (t0, d0))
+/- S3 — DEFINITION SIDE: the same scale Qside is bounded above by
+    the P8Floor-composed wire Bwire(t0,d0) + Mr(t0,d0). -/
+variable (hs3 : ∀ (t0 d0 : ℝ), 0 < t0 → 0 < d0 →
+  offPair q t0 d0 →
+  Qside (t0, d0) <= Bwire (t0, d0) + Mr (t0, d0))
 
 /- S4 — THE SQUEEZE (the open mathematics): definition side +
     bridge tail strictly below the detector floor at EVERY off-line
@@ -110,25 +116,23 @@ variable (hs4 : ∀ (t0 d0 : ℝ), 0 < t0 → 0 < d0 → offPair q t0 d0 →
 /-- The four structural hypotheses INSTANTIATE the C5b squeezed-
     margin hypothesis for q.  Lean-provable. -/
 theorem squeeze_gives_margin
-    (q : ZeroSet) (Mf devOf Bwire Mr flo : ℝ × ℝ → ℝ)
+    (q : ZeroSet) (Qside Mf devOf Bwire Mr flo : ℝ × ℝ → ℝ)
     (hs1 : ∀ (t0 d0 : ℝ), 0 < t0 → 0 < d0 → offPair q t0 d0 →
-      ∃ (Q : ℝ), Q >= devOf (t0, d0) - Mf (t0, d0))
+      Qside (t0, d0) >= devOf (t0, d0) - Mf (t0, d0))
     (hs2 : ∀ (t0 d0 : ℝ), 0 < t0 → 0 < d0 → offPair q t0 d0 →
       devOf (t0, d0) >= flo (t0, d0))
-    (hs3 : ∀ (t0 d0 : ℝ) (Q : ℝ), 0 < t0 → 0 < d0 →
-      offPair q t0 d0 → Q <= Bwire (t0, d0) + Mr (t0, d0))
+    (hs3 : ∀ (t0 d0 : ℝ), 0 < t0 → 0 < d0 →
+      offPair q t0 d0 →
+      Qside (t0, d0) <= Bwire (t0, d0) + Mr (t0, d0))
     (hs4 : ∀ (t0 d0 : ℝ), 0 < t0 → 0 < d0 → offPair q t0 d0 →
       Bwire (t0, d0) + Mr (t0, d0) + Mf (t0, d0) < flo (t0, d0)) :
     (∀ (t0 d0 : ℝ), 0 < t0 → 0 < d0 → offPair q t0 d0 →
       ∃ (Q dev f M Bf Mr' : ℝ),
         Q >= dev - M ∧ dev >= f ∧ Q <= Bf + Mr' ∧ Bf + Mr' + M < f) := by
   intro t0 d0 ht0 hd0 hp
-  obtain ⟨Q, hQge⟩ := hs1 t0 d0 ht0 hd0 hp
-  have hdev := hs2 t0 d0 ht0 hd0 hp
-  have hQle := hs3 t0 d0 Q ht0 hd0 hp
-  have hgap := hs4 t0 d0 ht0 hd0 hp
-  exact ⟨Q, devOf (t0, d0), flo (t0, d0), Mf (t0, d0),
-    Bwire (t0, d0), Mr (t0, d0), hQge, hdev, hQle, hgap⟩
+  exact ⟨Qside (t0, d0), devOf (t0, d0), flo (t0, d0), Mf (t0, d0),
+    Bwire (t0, d0), Mr (t0, d0), hs1 t0 d0 ht0 hd0 hp,
+    hs2 t0 d0 ht0 hd0 hp, hs3 t0 d0 ht0 hd0 hp, hs4 t0 d0 ht0 hd0 hp⟩
 
 /-- P1.2 (the full statement): S1 (bridge-tail uniformity) +
     S2 (detector floor, incl. the C1b window promotion) + S3
@@ -136,17 +140,18 @@ theorem squeeze_gives_margin
     mathematics) imply RH for every structural zero set q.
     Compositions only — no sorry. -/
 theorem p1_2
-    (q : ZeroSet) (Mf devOf Bwire Mr flo : ℝ × ℝ → ℝ)
+    (q : ZeroSet) (Qside Mf devOf Bwire Mr flo : ℝ × ℝ → ℝ)
     (hs1 : ∀ (t0 d0 : ℝ), 0 < t0 → 0 < d0 → offPair q t0 d0 →
-      ∃ (Q : ℝ), Q >= devOf (t0, d0) - Mf (t0, d0))
+      Qside (t0, d0) >= devOf (t0, d0) - Mf (t0, d0))
     (hs2 : ∀ (t0 d0 : ℝ), 0 < t0 → 0 < d0 → offPair q t0 d0 →
       devOf (t0, d0) >= flo (t0, d0))
-    (hs3 : ∀ (t0 d0 : ℝ) (Q : ℝ), 0 < t0 → 0 < d0 →
-      offPair q t0 d0 → Q <= Bwire (t0, d0) + Mr (t0, d0))
+    (hs3 : ∀ (t0 d0 : ℝ), 0 < t0 → 0 < d0 → offPair q t0 d0 →
+      Qside (t0, d0) <= Bwire (t0, d0) + Mr (t0, d0))
     (hs4 : ∀ (t0 d0 : ℝ), 0 < t0 → 0 < d0 → offPair q t0 d0 →
       Bwire (t0, d0) + Mr (t0, d0) + Mf (t0, d0) < flo (t0, d0)) :
     RH q :=
     p9_closure_rh_of_margin q
-      (squeeze_gives_margin q Mf devOf Bwire Mr flo hs1 hs2 hs3 hs4)
+      (squeeze_gives_margin q Qside Mf devOf Bwire Mr flo
+        hs1 hs2 hs3 hs4)
 
 end P12

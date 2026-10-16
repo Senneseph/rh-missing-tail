@@ -271,7 +271,9 @@ C = {
  "E1 clause v3: the above-G data clause.",
  "E1ClauseV3 q B on (G, T_MEAS]: M_defect(t) = -25256007 ln t + "
  "523513775, B = 7000 data-supported; mdefect_bounded (loose by "
- "design: norm_num cannot eval Real.exp); if_E1V3_and_walk.",
+ "design: norm_num cannot eval Real.exp); if_E1_and_walk + "
+ "if_E1V3_and_walk (Qside contract: hs1 Qside >= devOf - Mf, "
+ "hs3 Qside <= Bwire + Mr).",
  "terminal (data clause): composes with the walk into RH.",
  "constants are DATA-SUPPORTED, not proven; re-gate only on new "
  "near-band data."),
@@ -315,13 +317,19 @@ C = {
  "used by: E1Clause.",
  None),
 "P12Uniform": (
- "P1.2: the closure decomposition.",
+ "P1.2: the closure decomposition (the Qside contract).",
  "closure = S1 zero side + S2 detector floor + S3 definition side "
- "+ S4 squeeze; the offPair vocabulary and the pointwise atoms; "
- "covered-region composition.",
+ "+ S4 squeeze; Qside (R x R -> R) is THE concrete zero-side "
+ "scale (the measured |zeta| fill under A4.3): S1 = Qside >= "
+ "devOf - Mf, S3 = Qside <= Bwire + Mr - ONE scale in both "
+ "legs; squeeze_gives_margin + p1_2 (offPair vocabulary, "
+ "pointwise atoms, covered-region composition).",
  "used by: E1Clause, S1LowT, S4Asm, Z78P12, Z78Strip, "
  "ZetaZeroSet.",
- None),
+ "2026-10-16 re-typing: the old exists-Q (S1) / for-all-Q "
+ "(S3) form decoupled the legs and made S3 unsatisfiable for "
+ "ANY finite wire (a dead form) - the whole walk spine was "
+ "retyped; discovery 0088."),
 "P4Em": (
  "P4: E_m measure/integral atoms.",
  "aestronglyMeasurable_B1, abs_B1_le_half, "
@@ -365,7 +373,8 @@ C = {
  "S2 detector floor at low t.",
  "floWin = min(23/1000, 1-25/gamma), floOwn = |poff gamma d "
  "gamma|, floStripMin; s2_strip_min proven for gamma >= 707/50 "
- "(edge d = 1/2 included).",
+ "(edge d = 1/2 included); strip_squeeze + strip_squeeze_v2 "
+ "(the low-t P1.2 forms, Qside contract).",
  "used by: FloorUnif, M6, Z78P12, ZetaZeroSet.",
  None),
 "S1Point": (
@@ -409,8 +418,9 @@ C = {
  "S4 low band (TRIVIAL - the residue wires are 0 below 1000, "
  "floor = the pin, 0 < 0.9975); the far region (VACUOUS from "
  "[Z78] alone - Z78P12.offPairFarEmpty). NAMED RESIDUAL: hs1 the "
- "S1 witness (Q >= devProg - the E1 content, uniform face via "
- "S1Uniform), hs3 the S3 wire (Q <= BwireP + MrP), hWin the S4 "
+ "S1 witness: Qside >= devProg - the E1 content, uniform face "
+ "via S1Uniform; hs3 the S3 wire: THE SAME Qside <= BwireP + "
+ "MrP (Qside contract); hWin the S4 "
  "window-pin shape (25m/25ab closure pinned at 0.9975 vs the "
  "unified floor <= own mass <= 6e-4 there - Part C gate: ratio "
  "1662.5), hS2low the S2 low-band pin (H6 regime; sliver part "
@@ -438,8 +448,9 @@ C = {
  "S1Cusp.e1CuspWholeFromRows; (C) s1UniformAndWalk: the S1 "
  "uniform premises (which carry the uniform statement - certified "
  "as hunif in the proof body) + the named data clause "
- "E1ClauseV3 q 7000 + the four walk legs hs1-hs4 on P12.offPair "
- "-> RH q, pure composition through E1C.if_E1V3_and_walk.",
+ "E1ClauseV3 q 7000 + Qside + the four walk legs hs1-hs4 (the "
+ "Qside contract) on P12.offPair -> RH q, pure composition "
+ "through E1C.if_E1V3_and_walk.",
  "terminal: the S1 formal artifact (uniform statement + walk); "
  "composes with the E1 v3 data clause and the P12 legs.",
  "Both bridge bounds are FORMAL BUT VACUOUS at measured "
@@ -480,8 +491,10 @@ C = {
  "gapW / gapO; s4asm_strip_region_S4 (the PROVEN t^4 covered "
  "squeeze on 1000 <= t, 1/200 <= d <= 1/2); "
  "s4asm_residue_S4_covered (the bound-level residue: the named "
- "open S4 gap).",
- "used by: FloorUnif, Z78P12.",
+ "open S4 gap); rh_from_structural_hypotheses + "
+ "rh_from_regime_closures (P1.2 with S4 by regime closures, "
+ "Qside contract).",
+ "used by: FloorUnif, Z78P12, RHEnd.",
  "the residue is NAMED, not sorry: it is the bound-level open "
  "gap of S4."),
 "S4Gap": (
@@ -588,10 +601,10 @@ C = {
  "Z78 woven into P1.2 for actual sets.",
  "offPairFarEmpty (no d0 > 1/2 off-pair: strip 1/8..7/8 -> "
  "d0 <= 3/8 < 1/2, vacuity margin 1/8); rh_actual78 (RH_actual "
- "<= S1 + S2 + S3 + S4 low band t0 < 1000, far VACUOUS); "
- "edgeZeroFree78 (Re = 0/1 excluded from [Z78] alone); "
- "sliverOffPairsEmpty; s2ActualLowBandComplete (S2 on 0 < t0 < "
- "1000, 0 < d0 <= 1/2).",
+ "<= S1 + S2 + S3 + S4 low band t0 < 1000, far VACUOUS; Qside "
+ "contract); edgeZeroFree78 (Re = 0/1 excluded from [Z78] "
+ "alone); sliverOffPairsEmpty; s2ActualLowBandComplete (S2 on "
+ "0 < t0 < 1000, 0 < d0 <= 1/2).",
  "used by: FloorUnif.",
  "the far region is VACUOUS under the named external input, not "
  "a hypothesis."),
@@ -608,7 +621,7 @@ C = {
 "ZetaZeroSet": (
  "The zero-set abstraction + actual-set instantiation.",
  "edgeVacuous, s2legStrip, rhIfMarginZeta (the closure "
- "composition from S1..S4 + margin to RH).",
+ "composition from S1..S4 + margin to RH; Qside contract).",
  "used by: E1Clause.",
  None),
 }

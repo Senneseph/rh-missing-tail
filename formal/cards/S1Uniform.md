@@ -14,8 +14,9 @@ HOW:   (A) e1BelowGWholeFromSample: below G the M_wp face is finite C^1
          S1Cusp.e1CuspWholeFromRows; (C) s1UniformAndWalk: the S1
          uniform premises (which carry the uniform statement - certified
          as hunif in the proof body) + the named data clause E1ClauseV3
-         q 7000 + the four walk legs hs1-hs4 on P12.offPair -> RH q,
-         pure composition through E1C.if_E1V3_and_walk.
+         q 7000 + Qside + the four walk legs hs1-hs4 (the Qside
+         contract) on P12.offPair -> RH q, pure composition through
+         E1C.if_E1V3_and_walk.
 USES:  terminal: the S1 formal artifact (uniform statement + walk);
          composes with the E1 v3 data clause and the P12 legs.
 GOTCHA: Both bridge bounds are FORMAL BUT VACUOUS at measured constants:

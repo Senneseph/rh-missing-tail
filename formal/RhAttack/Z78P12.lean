@@ -94,18 +94,19 @@ theorem offPairFarEmpty (q : ZeroSet) (hz78 : Z78.externalZeroFree78)
 theorem rh_actual78 (q : ZeroSet) (hz78 : Z78.externalZeroFree78)
     (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
     (hX : S4W.Xwire S4W.T0 ≤ S4W.RX)
-    (devOf : ℝ × ℝ → ℝ)
+    (Qside devOf : ℝ × ℝ → ℝ)
     (hs1 : ∀ (t0 d0 : ℝ), 0 < t0 → 0 < d0 → P12.offPair q t0 d0 →
-        ∃ (Q : ℝ), Q >= devOf (t0, d0) - MfP (t0, d0))
+        Qside (t0, d0) >= devOf (t0, d0) - MfP (t0, d0))
     (hs2 : ∀ (t0 d0 : ℝ), 0 < t0 → 0 < d0 → P12.offPair q t0 d0 →
         devOf (t0, d0) >= floP (t0, d0))
-    (hs3 : ∀ (t0 d0 : ℝ) (Q : ℝ), 0 < t0 → 0 < d0 →
-        P12.offPair q t0 d0 → Q <= BwireP (t0, d0) + MrP (t0, d0))
+    (hs3 : ∀ (t0 d0 : ℝ), 0 < t0 → 0 < d0 →
+        P12.offPair q t0 d0 →
+        Qside (t0, d0) <= BwireP (t0, d0) + MrP (t0, d0))
     (hs4low : ∀ (t0 d0 : ℝ), 0 < t0 → t0 < 1000 → 0 < d0 → d0 ≤ 1 / 2 →
         P12.offPair q t0 d0 →
         BwireP (t0, d0) + MrP (t0, d0) + MfP (t0, d0) < floP (t0, d0)) :
     RH q := by
-  refine S4A.rh_from_regime_closures q MfP devOf BwireP MrP floP
+  refine S4A.rh_from_regime_closures q Qside MfP devOf BwireP MrP floP
     hs1 hs2 hs3 ?_ ?_ ?_
   · intro t0 d0 ht0 hd0 hdmax hp
     dsimp only [BwireP, MrP, MfP, floP]

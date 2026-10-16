@@ -146,13 +146,14 @@ theorem strip_squeeze
     (marginLowT : ℝ × ℝ → ℝ)
     (hgrid : GridAdequate marginLowT)
     (_hslice : SliceFacts nSlice (0.221 : ℝ))
-    (Mf devOf Bwire Mr flo : ℝ × ℝ → ℝ)
+    (Qside Mf devOf Bwire Mr flo : ℝ × ℝ → ℝ)
     (hs1 : ∀ (t0 d0 : ℝ), 0 < t0 → t0 < TLow → 0 < d0 → d0 ≤ DLow →
-      offPair q t0 d0 → ∃ Q, Q ≥ devOf (t0, d0) - Mf (t0, d0))
+      offPair q t0 d0 → Qside (t0, d0) ≥ devOf (t0, d0) - Mf (t0, d0))
     (hs2 : ∀ (t0 d0 : ℝ), 0 < t0 → t0 < TLow → 0 < d0 → d0 ≤ DLow →
       offPair q t0 d0 → devOf (t0, d0) ≥ flo (t0, d0))
-    (hs3 : ∀ (t0 d0 : ℝ) (Q : ℝ), 0 < t0 → t0 < TLow → 0 < d0 → d0 ≤ DLow →
-      offPair q t0 d0 → Q ≤ Bwire (t0, d0) + Mr (t0, d0))
+    (hs3 : ∀ (t0 d0 : ℝ), 0 < t0 → t0 < TLow → 0 < d0 → d0 ≤ DLow →
+      offPair q t0 d0 →
+      Qside (t0, d0) ≤ Bwire (t0, d0) + Mr (t0, d0))
     (hs4 : ∀ (t0 d0 : ℝ), 0 < t0 → t0 < TLow → 0 < d0 → d0 ≤ DLow →
       offPair q t0 d0 → Bwire (t0, d0) + Mr (t0, d0) + Mf (t0, d0) < flo (t0, d0)) :
     ∀ (t0 d0 : ℝ), 0 < t0 → t0 < TLow → 0 < d0 → d0 ≤ DLow →
@@ -162,11 +163,10 @@ theorem strip_squeeze
       marginLowT (t0, d0) ≥ (7357 : ℝ) / 1000 := by
   intro t0 d0 ht0 ht0u hd0 hd0u hp
   refine ⟨?_, hgrid t0 d0 ht0 ht0u hd0 hd0u⟩
-  obtain ⟨Qw, hQw⟩ := hs1 t0 d0 ht0 ht0u hd0 hd0u hp
-  exact ⟨Qw, devOf (t0, d0), flo (t0, d0), Mf (t0, d0),
-    Bwire (t0, d0), Mr (t0, d0), hQw,
+  exact ⟨Qside (t0, d0), devOf (t0, d0), flo (t0, d0), Mf (t0, d0),
+    Bwire (t0, d0), Mr (t0, d0), hs1 t0 d0 ht0 ht0u hd0 hd0u hp,
     hs2 t0 d0 ht0 ht0u hd0 hd0u hp,
-    hs3 t0 d0 Qw ht0 ht0u hd0 hd0u hp,
+    hs3 t0 d0 ht0 ht0u hd0 hd0u hp,
     hs4 t0 d0 ht0 ht0u hd0 hd0u hp⟩
 
 /-- The slice-floor norm_num block: the pinned low-t constants
@@ -451,13 +451,15 @@ theorem strip_squeeze_v2
     (marginLowT : ℝ × ℝ → ℝ)
     (hgrid : GridAdequate marginLowT)
     (_hslice : SliceFacts nSlice (0.221 : ℝ))
-    (Mf Bwire Mr : ℝ × ℝ → ℝ)
+    (Qside Mf Bwire Mr : ℝ × ℝ → ℝ)
     (hs1 : ∀ (t0 d0 : ℝ), 0 < t0 → t0 < TLow → 0 < d0 → d0 ≤ DLow →
-      offPair q t0 d0 → ∃ Q, Q ≥ devStripMin t0 d0 - Mf (t0, d0))
+      offPair q t0 d0 →
+      Qside (t0, d0) ≥ devStripMin t0 d0 - Mf (t0, d0))
     (hs2sliver : ∀ (t0 d0 : ℝ), 0 < t0 → t0 < 707 / 50 → 0 < d0 → d0 ≤ DLow →
       offPair q t0 d0 → devStripMin t0 d0 ≥ floStripMin t0 d0)
-    (hs3 : ∀ (t0 d0 : ℝ) (Q : ℝ), 0 < t0 → t0 < TLow → 0 < d0 → d0 ≤ DLow →
-      offPair q t0 d0 → Q ≤ Bwire (t0, d0) + Mr (t0, d0))
+    (hs3 : ∀ (t0 d0 : ℝ), 0 < t0 → t0 < TLow → 0 < d0 → d0 ≤ DLow →
+      offPair q t0 d0 →
+      Qside (t0, d0) ≤ Bwire (t0, d0) + Mr (t0, d0))
     (hs4 : ∀ (t0 d0 : ℝ), 0 < t0 → t0 < TLow → 0 < d0 → d0 ≤ DLow →
       offPair q t0 d0 → Bwire (t0, d0) + Mr (t0, d0) + Mf (t0, d0) < floStripMin t0 d0) :
     ∀ (t0 d0 : ℝ), 0 < t0 → t0 < TLow → 0 < d0 → d0 ≤ DLow →
@@ -467,14 +469,14 @@ theorem strip_squeeze_v2
       marginLowT (t0, d0) ≥ (7357 : ℝ) / 1000 := by
   intro t0 d0 ht0 ht0u hd0 hd0u hp
   refine ⟨?_, hgrid t0 d0 ht0 ht0u hd0 hd0u⟩
-  obtain ⟨Qw, hQw⟩ := hs1 t0 d0 ht0 ht0u hd0 hd0u hp
-  have hQle := hs3 t0 d0 Qw ht0 ht0u hd0 hd0u hp
+  have hQle := hs3 t0 d0 ht0 ht0u hd0 hd0u hp
   have hgap := hs4 t0 d0 ht0 ht0u hd0 hd0u hp
   have hdev : devStripMin t0 d0 ≥ floStripMin t0 d0 := by
     by_cases hsliver : t0 < 707 / 50
     · exact hs2sliver t0 d0 ht0 hsliver hd0 hd0u hp
     · exact s2_strip_min t0 d0 (by nlinarith) hd0 hd0u
-  exact ⟨Qw, devStripMin t0 d0, floStripMin t0 d0, Mf (t0, d0),
-    Bwire (t0, d0), Mr (t0, d0), hQw, hdev, hQle, hgap⟩
+  exact ⟨Qside (t0, d0), devStripMin t0 d0, floStripMin t0 d0,
+    Mf (t0, d0), Bwire (t0, d0), Mr (t0, d0),
+    hs1 t0 d0 ht0 ht0u hd0 hd0u hp, hdev, hQle, hgap⟩
 
 end S1LowT

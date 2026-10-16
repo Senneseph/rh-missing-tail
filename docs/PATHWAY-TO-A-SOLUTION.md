@@ -128,6 +128,16 @@ for the ACTUAL zeta zero set.  The branches:
       6e-4,  gate  ratio  1662.5),  and  hS2low  (the  S2  low-
       band  pin;  the  sliver  part  is  vacuous  under  the
       named  on-line  record).  This  is  THE  open  item.
+      WALK  SPINE  CONTRACT  (2026-10-16):  the  Q  of  the  S1
+      and  S3  legs  is  ONE  CONCRETE  SCALE  Qside  (the
+      measured  |zeta|  fill  under  the  A4.3  wire):  S1 =
+      Qside  \>=  devOf  -  Mf,  S3  =  Qside  \<=  Bwire  +  Mr.
+      The  old  exists-Q  /  for-all-Q  form  decoupled  the
+      legs  and  made  S3  unsatisfiable  for  any  finite  wire
+      (a  dead  form  -  the  spine  was  a  stack  of  tautolo-
+      gies);  the  whole  spine  is  now  retyped  (P12Uniform,
+      ZetaZeroSet,  E1Clause,  S4Asm,  Z78P12,  S1Uniform,
+      S1LowT,  RHEnd)  -  discovery  0088.
   B2  detector floor  (S2)
       CLOSED:  s2ActualLowBandComplete + s2ActualFullBand,  one
       unified floor floStripMin = mown on the covered band.
@@ -234,25 +244,30 @@ for the ACTUAL zeta zero set.  The branches:
 
   1.  FAR-ENGINE  WALL  (s31z2  in  flight):  LOCKED  -  the
       s31z  ladder  shows  the  mpmath  zeta  wall  at
-      [9e18,  3e19)  holds  at  ALL  precisions  (the  N-term
-      precompute  is  ~  precision-independent;  3e19/9e19/3e20
-      OOM  fresh  at  dps-15).  The  5e8G  row  (t  =  1.5e19,
-      the  LAST  reachable  height,  model  83-95  GB)  is  in
-      flight  as  the  s31z2  ladder  (one  fresh  process  per
-       dps  15/20/30/40);  if  it  lands,  the  staggered  row
-      protocol  (streams  +  zeta  +  f64  merge)  locks  the
-       boundary  at  1.5e19;  if  not,  9e18  stands  and  the
-      remaining  levers  are  a  C  zeta  channel  or  more
-      RAM.  Until  then  B7  stands  at  its  leveraged  wall.
-  2.  Formal:  THE  ENDPOINT  IS  NAMED  -  RHEnd.rh_program78
-      is  GATED  (the  one-clause  endpoint  on  the  actual  set
-      under  [Z78],  at  the  concrete  wire):  four  of  the
-      squeeze  regimes  closed  IN  BODY  (S2  covered,  S4  strip,
-      S4  low,  far  region),  the  named  residual  reduced  to
-      hs1  (S1  witness),  hs3  (S3  wire),  hWin  (S4  window-pin
-      shape),  hS2low  (S2  low-band  pin).  Next  formal  moves:
-      concretize  one  of  the  four  named  legs  (the  witness
-      on  the  audited  band  first),  and  track  the  external
+      [9e18,  3e19)  holds  at  ALL  precisions.  THE  5e8G
+      LADDER:  dps-15  LANDED  (t  =  1.5000523e19,  logzeta  =
+      +2.9370199551,  peak  92.6  GB,  69.8  min)  -  the  last
+      reachable  height  is  REAL  REACHABLE  (the  model  was
+      ~  11%  low);  dps-20/30/40  in  sequence  (fresh  pro-
+      cess  each);  if  dps-40  (the  census  channel)  lands,
+      the  staggered  row  protocol  locks  the  boundary  at
+      1.5e19;  if  not,  9e18  stands  (the  dps-15  value  is
+      recorded  either  way)  and  the  remaining  levers  are  a
+      C  zeta  channel  or  more  RAM.  Until  then  B7  stands
+      at  its  leveraged  wall.
+  2.  Formal:  THE  ENDPOINT  IS  NAMED  AND  THE  SPINE  IS
+      CORRECT  -  RHEnd.rh_program78  is  GATED  (four  of  the
+      squeeze  regimes  closed  IN  BODY;  the  named  residual
+      reduced  to  hs1  (S1  witness),  hs3  (S3  wire),  hWin
+      (S4  window-pin  shape),  hS2low  (S2  low-band  pin)),
+      and  the  Q  CONTR  ACT  OF  THE  WALK  SPINE  IS  RE-  TYPED
+      TO  THE  CONCRETE  SCALE  Qside  (the  old  form  was  a
+      dead  form  -  unsatisfiable  S3;  discovery  0088;  full
+      build  green  17450).  Next  formal  move:  concretize
+      Qside  as  a  NAMED  DATA  FACE  (the  measured  |zeta|
+      fill  under  A4.3,  as  a  def  +  Float  gate  on  the
+      audited  band),  which  makes  hs1/hs3  checkable  data
+      faces  instead  of  parameters;  then  track  the  external
       review  of  B6.
   3.  Docs:  this document is updated by EVERY milestone commit;
       no silent re-chart.

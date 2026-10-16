@@ -35,14 +35,20 @@
         (offPairFarEmpty:  d0  <=  3/8  <  1/2).
 
    NAMED  RESIDUAL  (exactly  the  program's  open  legs,  with
-   the  shape  and  support  recorded):
-     *  hs1  -  the  S1  zero-side  witness:  Q  >=  devProg  at
-        every  off-pair  (Mf  =  0  -  the  E1  content,  whose
-        uniform  face  is  S1Uniform;  the  data  clauses  are
-        E1ClauseV3  q  7000  above  G  and  E1Clause  q  2
-        below  G).
-     *  hs3  -  the  S3  definition-side  wire:  Q  <=  BwireP
-        +  MrP.
+   the  shape  and  support  recorded):  the  Q  of  the  S1/S3
+   legs  is  ONE  CONCRETE  SCALE  Qside  (the  measured  |zeta|
+   fill  under  the  A4.3  residual  wire)  -  the  2026-10-16
+   re-typing  of  the  walk  spine  (the  old  exists-Q  /
+   for-all-Q  form  decoupled  the  legs  and  made  S3
+   unsatisfiable  for  any  finite  wire):
+     *  hs1  -  the  S1  zero-side  witness:  Qside  >=  devProg
+        at  every  off-pair  (Mf  =  0  -  the  E1  content,
+        whose  uniform  face  is  S1Uniform;  the  data  clauses
+        are  E1ClauseV3  q  7000  above  G  and  E1Clause  q  2
+        below  G).  The  scale  Qside  is  a  named  parameter
+        (concretized  by  the  |zeta|-fill  data  face).
+     *  hs3  -  the  S3  definition-side  wire:  the  same  Qside
+        is  below  BwireP  +  MrP.
      *  hWin  -  the  S4  WINDOW-PIN  residual  (1000  <=  t0,
         0  <  d0  <  1/200):  the  25m/25ab  window  closure
         s4asm_window_region_S4  is  pinned  at  the  near  pin
@@ -147,11 +153,12 @@ theorem rh_program78 (q : ZeroSet)
     (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
     (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) →
       (|ρ.im| : ℝ) < (707 : ℝ) / 50 → ρ.re = 1 / 2)
+    (Qside : ℝ × ℝ → ℝ)
     (hs1 : ∀ (t0 d0 : ℝ), 0 < t0 → 0 < d0 →
-      offPair q t0 d0 → ∃ (Q : ℝ), Q ≥ devProg (t0, d0))
-    (hs3 : ∀ (t0 d0 : ℝ) (Q : ℝ), 0 < t0 → 0 < d0 →
+      offPair q t0 d0 → Qside (t0, d0) ≥ devProg (t0, d0))
+    (hs3 : ∀ (t0 d0 : ℝ), 0 < t0 → 0 < d0 →
       offPair q t0 d0 →
-      Q ≤ Z78P12.BwireP (t0, d0) + Z78P12.MrP (t0, d0))
+      Qside (t0, d0) ≤ Z78P12.BwireP (t0, d0) + Z78P12.MrP (t0, d0))
     (hWin : ∀ (t0 d0 : ℝ), 1000 ≤ t0 → 0 < d0 → d0 < 1 / 200 →
       offPair q t0 d0 →
       Z78P12.BwireP (t0, d0) + Z78P12.MrP (t0, d0) +
@@ -160,14 +167,13 @@ theorem rh_program78 (q : ZeroSet)
       0 < d0 → d0 ≤ 1 / 2 → offPair q t0 d0 →
       devProg (t0, d0) ≥ p8_f_near_pin) :
     RH q := by
-  refine S4A.rh_from_regime_closures q Z78P12.MfP devProg
+  refine S4A.rh_from_regime_closures q Qside Z78P12.MfP devProg
     Z78P12.BwireP Z78P12.MrP floProg
     ?_ ?_ ?_ ?_ ?_ ?_
   · --  S1  witness  leg  (Mf  =  0:  devProg  -  0  =  devProg):
     intro t0 d0 ht0 hd0 hp
-    obtain ⟨Q, hQ⟩ := hs1 t0 d0 ht0 hd0 hp
     have hzm : Z78P12.MfP (t0, d0) = 0 := rfl
-    exact ⟨Q, by simpa only [hzm, sub_zero] using hQ⟩
+    simpa only [hzm, sub_zero] using hs1 t0 d0 ht0 hd0 hp
   · --  S2  leg:  covered  =  in  body;  low  band  =  hS2low;
     --    far  =  vacuous  from  [Z78].
     intro t0 d0 ht0 hd0 hp

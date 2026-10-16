@@ -319,18 +319,18 @@ theorem zeta_abs_line (t : ℝ) (ht : 0 < t) :
     named hole;  the data face  (s8)  supports  B = 2.  -/
 theorem if_E1_and_walk (q : ZeroSet) (hz : ZetaZeroSet.ZetaLike q)
     (_hE1 : E1Clause q 2)  -- the named hole (data-supported B = 2)
-    (Mf devOf Bwire Mr flo : ℝ × ℝ → ℝ)
+    (Qside Mf devOf Bwire Mr flo : ℝ × ℝ → ℝ)
     (hs1 : ∀ (t0 d0 : ℝ), 0 < t0 → 0 < d0 → P12.offPair q t0 d0 →
-      ∃ (Q : ℝ), Q ≥ devOf (t0, d0) - Mf (t0, d0))
+      Qside (t0, d0) ≥ devOf (t0, d0) - Mf (t0, d0))
     (hs2 : ∀ (t0 d0 : ℝ), 0 < t0 → 0 < d0 → P12.offPair q t0 d0 →
       devOf (t0, d0) ≥ flo (t0, d0))
-    (hs3 : ∀ (t0 d0 : ℝ) (Q : ℝ), 0 < t0 → 0 < d0 →
+    (hs3 : ∀ (t0 d0 : ℝ), 0 < t0 → 0 < d0 →
       P12.offPair q t0 d0 →
-      Q ≤ Bwire (t0, d0) + Mr (t0, d0))
+      Qside (t0, d0) ≤ Bwire (t0, d0) + Mr (t0, d0))
     (hs4 : ∀ (t0 d0 : ℝ), 0 < t0 → 0 < d0 → P12.offPair q t0 d0 →
       Bwire (t0, d0) + Mr (t0, d0) + Mf (t0, d0) < flo (t0, d0)) :
     RH q :=
-  ZetaZeroSet.rhIfMarginZeta q hz Mf devOf Bwire Mr flo
+  ZetaZeroSet.rhIfMarginZeta q hz Qside Mf devOf Bwire Mr flo
     hs1 hs2 hs3 hs4
 
 /- ## E1 clause v3  --  the  data-supported  defect  face  above
@@ -447,18 +447,18 @@ theorem e1V3_implies_e1 (q : ZeroSet) (B : ℝ) (hE3 : E1ClauseV3 q B) :
     contract.  -/
 theorem if_E1V3_and_walk (q : ZeroSet) (hz : ZetaZeroSet.ZetaLike q)
     (_hE3 : E1ClauseV3 q 7000)  -- the named hole (v3, data-supported)
-    (Mf devOf Bwire Mr flo : ℝ × ℝ → ℝ)
+    (Qside Mf devOf Bwire Mr flo : ℝ × ℝ → ℝ)
     (hs1 : ∀ (t0 d0 : ℝ), 0 < t0 → 0 < d0 → P12.offPair q t0 d0 →
-      ∃ (Q : ℝ), Q ≥ devOf (t0, d0) - Mf (t0, d0))
+      Qside (t0, d0) ≥ devOf (t0, d0) - Mf (t0, d0))
     (hs2 : ∀ (t0 d0 : ℝ), 0 < t0 → 0 < d0 → P12.offPair q t0 d0 →
       devOf (t0, d0) ≥ flo (t0, d0))
-    (hs3 : ∀ (t0 d0 : ℝ) (Q : ℝ), 0 < t0 → 0 < d0 →
+    (hs3 : ∀ (t0 d0 : ℝ), 0 < t0 → 0 < d0 →
       P12.offPair q t0 d0 →
-      Q ≤ Bwire (t0, d0) + Mr (t0, d0))
+      Qside (t0, d0) ≤ Bwire (t0, d0) + Mr (t0, d0))
     (hs4 : ∀ (t0 d0 : ℝ), 0 < t0 → 0 < d0 → P12.offPair q t0 d0 →
       Bwire (t0, d0) + Mr (t0, d0) + Mf (t0, d0) < flo (t0, d0)) :
     RH q :=
-  ZetaZeroSet.rhIfMarginZeta q hz Mf devOf Bwire Mr flo
+  ZetaZeroSet.rhIfMarginZeta q hz Qside Mf devOf Bwire Mr flo
     hs1 hs2 hs3 hs4
 
 /- CLAUSE  SET  (documented  composition,  2026-10-15):

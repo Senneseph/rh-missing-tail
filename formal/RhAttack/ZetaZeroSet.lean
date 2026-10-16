@@ -114,30 +114,35 @@ theorem s2legStrip (t0 d0 : ℝ) (ht0 : 707 / 50 ≤ t0)
     If q is a zero set satisfying the actual-set bundle (the
     classical cited legs + the pinned data records),  and the four
     structural wire legs hold —
-      hs1 (zero side:  ∃ Q ≥ devOf − Mf —  the S1 zero-side
-        witness;  OPEN as a uniform theorem:  W2-beyond),
+      hs1 (zero side:  Qside >= devOf − Mf —  the S1 zero-side
+        witness:  the concrete scale Qside (measured |zeta| fill,
+        A4.3) dominates the detector less the tail;  OPEN as a
+        uniform theorem:  W2-beyond),
       hs2 (detector:  devOf ≥ flo —  supplied where it reaches by
         s2legStrip + the sliver pin record + edgeVacuity),
-      hs3 (definition side:  Q ≤ Bwire + Mr —  the measured
-        |zeta| fill under the A4.3 residual wire),
+      hs3 (definition side:  Qside <= Bwire + Mr —  the same
+        scale,  below the A4.3 residual wire:  the measured
+        |zeta| fill),
       hs4 (squeeze:  Bwire + Mr + Mf < flo —  the day030 measured
         squeeze) —
-    then RH holds on q by P12.p1_2.
+    then RH holds on q by P12.p1_2.  (The Qside contract is the
+    2026-10-16 re-typing of the walk spine:  the old forall-Q
+    form of hs3 was unsatisfiable for any finite wire.)
     HONESTY:  this composes the closure;  it does not prove the
     open legs.  The remainder for RH is exactly [S1] (the
     uniform walk bound —  the W2-beyond research item) and the
     measured [S3/S4] fills.  No RH claim is made here. -/
 theorem rhIfMarginZeta (q : ZeroSet) (hz : ZetaLike q)
-    (Mf devOf Bwire Mr flo : ℝ × ℝ → ℝ)
+    (Qside Mf devOf Bwire Mr flo : ℝ × ℝ → ℝ)
     (hs1 : ∀ (t0 d0 : ℝ), 0 < t0 → 0 < d0 → P12.offPair q t0 d0 →
-      ∃ (Q : ℝ), Q ≥ devOf (t0, d0) - Mf (t0, d0))
+      Qside (t0, d0) ≥ devOf (t0, d0) - Mf (t0, d0))
     (hs2 : ∀ (t0 d0 : ℝ), 0 < t0 → 0 < d0 → P12.offPair q t0 d0 →
       devOf (t0, d0) ≥ flo (t0, d0))
-    (hs3 : ∀ (t0 d0 : ℝ) (Q : ℝ), 0 < t0 → 0 < d0 → P12.offPair q t0 d0 →
-      Q ≤ Bwire (t0, d0) + Mr (t0, d0))
+    (hs3 : ∀ (t0 d0 : ℝ), 0 < t0 → 0 < d0 → P12.offPair q t0 d0 →
+      Qside (t0, d0) ≤ Bwire (t0, d0) + Mr (t0, d0))
     (hs4 : ∀ (t0 d0 : ℝ), 0 < t0 → 0 < d0 → P12.offPair q t0 d0 →
       Bwire (t0, d0) + Mr (t0, d0) + Mf (t0, d0) < flo (t0, d0)) :
     RH q :=
-  P12.p1_2 q Mf devOf Bwire Mr flo hs1 hs2 hs3 hs4
+  P12.p1_2 q Qside Mf devOf Bwire Mr flo hs1 hs2 hs3 hs4
 
 end ZetaZeroSet
