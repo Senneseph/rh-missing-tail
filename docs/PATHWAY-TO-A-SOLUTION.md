@@ -309,8 +309,16 @@ for the ACTUAL zeta zero set.  The branches:
       |zeta  -  K|  >=  devW  -  Mval  from  A0  (p8_same_object)
       +  the  reverse  triangle  +  the  A4.3  mass  premise  -
       the  P1.2  spec's  "LEAN-PROVEN  POINTWISE  under  the  mass
-      premise"  row;  remaining:  the  hs1  low-band  FACE  (S1Ge
-      atom  +  QSide  resid  +  the  hgrid  margin  face),  then
+      premise"  row  -  and  THE  HS1  FACE  IS  NAMED
+      (discovery  0094,  S1Face.lean):  hs1AtZero  shows  the
+      hs1  leg  at  an  ACTUAL  zero  IS  THE  S1Ge  THEOREM
+      ITSELF  (zeta  =  0  collapses  the  A0  fill  to  |K|,
+      so  the  leg  reads  |K|  >=  devW  -  Mval  -  its  data
+      input  is  the  pins,  not  a  bare  witness),  and
+      hs1FaceAtAudit  names  the  face  at  the  day-020  band
+      (zero-side  claim  vs  resid  pin:  joint  incompatibility
+      =  the  squeeze  the  endpoint  consumes);  remaining:
+      restate  RHEnd  so  hs1  enters  as  "S1Ge  +  pins",  then
       track  the  external  review  of  B6.
   3.  Docs:  this document is updated by EVERY milestone commit;
       no silent re-chart.
