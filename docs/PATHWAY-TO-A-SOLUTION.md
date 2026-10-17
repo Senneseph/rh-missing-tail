@@ -383,8 +383,34 @@ for the ACTUAL zeta zero set.  The branches:
       devFacePt):  the  hs1  leg  is  DERIVED  IN  BODY  via
       S1Face.hs1AtZero,  so  the  residual  narrows  from  "an
       inequality  to  support"  to  "the  pins  to  support"
-      (same  content,  checkable  shape);  remaining:  track  the
-      external  review  of  B6.
+      (same  content,  checkable  shape)  -  and  THE  LOW-BAND
+      OFF-PAIR  EXCLUSION  IS  GATED  (discovery  0099,
+      LowExcl.lean):  endpointWireLow  pulls  the  definitional-
+      zero  wire  shape  of  LowWires  through  the  endpoint's
+      Z78P12  aliases  (BwireP  +  MrP  =  0,  plus  MfP  =  0,
+      below  the  strip),  and  lowBandLegsFalse  proves  the
+      three  low-band  legs  in  the  EXACT  endpoint  leg  form
+      (hs1  Qside  >=  devProg;  hS2low  devProg  >=  0.9975;
+      hs3  Qside  <=  BwireP  +  MrP)  are  JOINTLY
+      contradictory  at  any  low-band  point  (0.9975  <=
+      devProg  <=  Qside  <=  0);  offPairExcludedLowBand  is
+      the  corollary:  NO  zero  set  carries  a  low-band
+      off-pair  (0  <  t0  <  1000,  0  <  d0  <=  1/2)  while
+      the  three  legs  hold  there  -  the  squeeze  (discovery
+      0089)  stated  as  an  exclusion  about  the  zero  set,
+      not  a  shape  lemma;  the  d0  >  1/2  half  is
+      [Z78]-vacuous  (offPairFarEmpty,  in  the  RHEnd  body).
+      The  low-band  instance  of  the  endpoint  residual  is
+      thereby  SELF-EXCLUDING:  the  obligation  to  support  the
+      three  leg  hypotheses  at  EVERY  off-pair  excludes  low-
+      band  off-pairs  by  pure  logic  (the  contradiction  needs
+      no  datum  -  it  fires  for  ANY  Qside,  ANY  devProg),
+      so  the  data  program  only  has  to  feed  the  legs  for
+      off-pairs  at  1000  and  above  (covered  region  =  the
+      audited  band  data;  window  =  the  window  pin;  far
+      region  =  [Z78]-vacuous  apart  from  the  named  blind
+      spot).  remaining:  the  C  zeta  channel  (s34)  past  the
+      mpmath  wall  and  the  external  review  of  B6.
   3.  Docs:  this document is updated by EVERY milestone commit;
       no silent re-chart.
 

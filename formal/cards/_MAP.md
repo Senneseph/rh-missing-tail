@@ -21,6 +21,9 @@ A chain of named theorems;  each box names the modules.
      exact-rational GATED, the section-8 close machine-verified)
      + LowWires (the LOW-BAND wire shape: R-wires definitionally
      zero below the strip, floor = near pin, lowBandSqueezeShape)
+     + LowExcl (the LOW-BAND OFF-PAIR EXCLUSION: the three low-band
+     legs in endpoint leg form are jointly contradictory, hence no
+     zero set carries a low-band off-pair while the legs hold)
      + ProbeMargin6 (the margin-6 unsatisfiability probe: the
      C5b/P9 6-tuple is inconsistent - the squeeze engine is a
      live contradiction, audited) + S1Uniform (the S1 UNI-
@@ -74,7 +77,7 @@ A chain of named theorems;  each box names the modules.
   Orphans (terminal or historical,  no one imports them)
      A1Growth  E2Barrier  M6  S1Point
      S1Sample  S4Sharp  S1Cusp  S1Uniform  S1Ge  S1Face  QSide
-     LowWires  ProbeMargin6  RHEnd  W2Beyond1
+     LowWires  LowExcl  ProbeMargin6  RHEnd  W2Beyond1
      W2M6  Ap3RvMStatement
      Ap3StrongPNTPrefix  Ap3Halving  ProbeM5  ProbeTmp
 
@@ -83,4 +86,4 @@ RHEnd (the ENDPOINT - what the whole tree composes into and the
 exact named residual),  then the cards of
 B0,  P12Uniform,  Closure,  ZetaZeroSet,  E1Clause,  Z78P12,
 FloorUnif,  S1Sample,  S1Cusp,  S1Uniform,  S1Point,  S1Ge,
-S1Face, S4Asm -- that is the spine.
+S1Face, LowExcl, S4Asm -- that is the spine.
