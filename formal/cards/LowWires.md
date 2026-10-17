@@ -11,8 +11,10 @@ HOW:   Below the program strip (t0 < 1000) the R-wires are
          devStripMin <= Qside <= 0 -> False) - the live squeeze engine
          at the low-band wire configuration, sibling of
          QSide.section8_close_at_audit.
-USES:  used by: (none yet - the shape module documenting the low-band
-         instance of RHEnd's walk).
+USES:  used by: LowExcl (endpointWireLow / endpointWireLowFull via
+         bwireR_low_zero / mrr_low_zero; lowBandLegsFalse via
+         lowBandSqueezeShape) - the shape module the low-band exclusion
+         runs on.
 GOTCHA: the legs stay the NAMED residual of the endpoint (hs1 = C2 >=
           side face, hS2low = the day-030 floor pin, hs3 = the zero-wire
           shape); this module pins only the wire SHAPE they run on - no

@@ -1,4 +1,4 @@
-# RHEnd.lean  (333 lines)
+# RHEnd.lean  (340 lines)
 WHAT:  THE ENDPOINT of the program on the ACTUAL zeta zero set under the
          named external input [Z78] (Re s > 7/8 zero-free), at the
          CONCRETE wire, with maximal concretization: the residual is

@@ -63,6 +63,13 @@
         per  the  program  chart;  the  sliver  part
         (t0  <  707/50)  is  VACUOUS  under  the  named
         on-line  record  honline  (sliverOffPairsEmpty).
+        (LowExcl:  the  three  low-band  legs  hs1  /  hs3  /
+        hS2low  are  JOINTLY  contradictory  at  any  low-band
+        point  for  ANY  Qside,  ANY  devProg  -  so  the
+        obligation  to  support  them  at  EVERY  off-pair
+        SELF-EXCLUDES  low-band  off-pairs  by  pure  logic;
+        the  data  program  feeds  the  legs  only  at  1000
+        and  above.)
 
    Honesty  (locked):  this  is  a  composition  around  the
    named  items;  NOTHING  new  is  claimed  -  the  residual
