@@ -473,8 +473,25 @@ for the ACTUAL zeta zero set.  The branches:
       off-pairs  at  1000  and  above  (covered  region  =  the
       audited  band  data;  window  =  the  window  pin;  far
       region  =  [Z78]-vacuous  apart  from  the  named  blind
-      spot).  remaining:  the  C  zeta  channel  (s34)  past  the
-      mpmath  wall  and  the  external  review  of  B6.
+      spot).  THE  S4  BLIND-SPOT  FACE  IS  NAMED  AND  ITS  OWN-FLOOR
+      FORM  IS  MACHINE-CLOSED-OFF  (discovery  0101,  S4Blind.
+      lean):  blindSpot  =  the  own-regime  strip  at  the  pole-
+      mass-invisible  scale  (2  d  /  t^2  <  6.5e-5,  25a
+      instrument  scale),  squeezeImpossibleOnBlind  proves  the
+      squeeze  BwireO  +  Mr  +  Mf  <  mown  IMPOSSIBLE  at  any
+      blind-spot  pair  (S4G.s4c_squeeze_impossible  on  the
+      strip),  the  25-series  boundary  pins  are  arithmetic-
+      gated  (tstarHold  =  690349.0568,  closing  witness
+      5004.7343  margin  143.3418,  I(1e7)  =  1.29e-6),  and
+      s4OpenFace  is  the  NAMED  open  residue  (S4  at  blind-
+      spot  pairs  in  any  wiring  flo  >=  mown  -  measured
+      at  the  instrument  boundaries,  not  proven).  The
+      remaining  open  content  is  now  EXACTLY  the  named
+      faces:  the  hs1  pin  family,  the  hs3  wire  pin,
+      hWin  (the  S4  window-pin  shape),  the  C  channel  row
+      M  values  (s34f/s34j  in  flight),  the  blind-spot
+      S4  face  (S4Blind.s4OpenFace),  and  the  external
+      review  of  B6.
   3.  Docs:  this document is updated by EVERY milestone commit;
       no silent re-chart.
 

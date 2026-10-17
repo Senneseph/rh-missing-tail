@@ -39,6 +39,9 @@ A chain of named theorems;  each box names the modules.
      S4Asm  (s4asm_strip_region_S4 PROVEN t^4 covered region;
      s4asm_residue_S4_covered = the NAMED open residue)
      regions:  S4Window / S4Strip / S4Gap / S4Growth / S4Own
+     S4Blind  (the BLIND-SPOT FACE: the remaining open
+     mathematics, named - blindSpot predicate, own-floor
+     impossibility PROVEN on it, 25-series pins, s4OpenFace)
 
   The actual-set composition (where the zeros are the real ones):
      Z78Strip     (named external input: Re s > 7/8 zero-free;
