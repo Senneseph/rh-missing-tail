@@ -60,6 +60,11 @@ extern f128 sqrtq(f128);
 extern f128 floorq(f128);
 extern f128 fmaq(f128, f128, f128);
 extern f128 ldexpq(f128, int);
+extern f128 strtoflt128(const char *, char **);
+
+/* off-grid test override: 0 = use ch->t; set only by the ZETAC_TEST_T hook.
+ * (double parsing O(2^k)-quantizes far heights, so the hook must stay f128) */
+static f128 g_test_t = 0.0Q;
 
 /* decimal-string parser (no strtofq in this libquadmath): digit
  * accumulation in quad, ~50 steps ~ 2e-33 relative (fine for the
@@ -194,9 +199,11 @@ static int NCHAINS = 0;
 /* ---------------- the per-height computation ----------------- */
 static void compute_height(const struct zchain *ch, f128 *logz)
 {
-    f128 tq = ch->t;
+    f128 tq = (g_test_t != 0.0Q) ? g_test_t : (f128)ch->t;
     int L = ch->L, M = ch->M, J = ch->J;
     unsigned long long N = ch->N;
+    if (getenv("ZETAC_DEBUG"))
+        fprintf(stderr, "DBG ch_t=%.34Lg N=%llu\n", (long double)tq, N);
 
     /* a, p (quad) */
     f128 a = sqrtq(tq / TWOPY.hi);
@@ -372,8 +379,8 @@ int main(int argc, char **argv)
 
     if (argc > 1 && strcmp(argv[1], "--list") == 0) {
         for (int i = 0; i < NCHAINS; i++)
-            printf("chain %d: t = %.17g  L=%d M=%d J=%d N=%llu\n", i,
-                   ZETAC_CHAINS[i].t, ZETAC_CHAINS[i].L,
+            printf("chain %d: t = %.34Lg  L=%d M=%d J=%d N=%llu\n", i,
+                   (long double)ZETAC_CHAINS[i].t, ZETAC_CHAINS[i].L,
                    ZETAC_CHAINS[i].M, ZETAC_CHAINS[i].J,
                    ZETAC_CHAINS[i].N);
         return 0;
@@ -384,18 +391,20 @@ int main(int argc, char **argv)
 
     const char *tt = getenv("ZETAC_TEST_T");
     if (tt) {
-        /* compute any t with the max chain (L=max, M=max, J=max) */
-        double t = strtod(tt, NULL);
-        (void)t;
+        /* compute any t with the max chain (L=max, M=max, J=max).
+         * f128 parsing: the exact decimal is what gets evaluated
+         * (double parsing would O(2^9)-collapse distinct far heights). */
+        f128 tq = strtoflt128(tt, NULL);
         struct zchain te = ZETAC_CHAINS[3]; /* L=4 M=9 J=62 */
-        te.t = t;
-        te.N = (unsigned long long)sqrt(t / 6.283185307179586);
+        te.N = (unsigned long long)floorq(sqrtq(tq / (f128)6.283185307179586));
+        g_test_t = tq;
         double t0 = omp_get_wtime();
         f128 lz = 0;
         compute_height(&te, &lz);
-        printf("t=%.17g  logzeta=%.12f  N=%llu  (TEST max-chain)  "
+        g_test_t = 0.0Q;
+        printf("t=%.34Lg  logzeta=%.12f  N=%llu  (TEST max-chain)  "
                "%.1f s\n",
-               t, (double)lz, te.N, omp_get_wtime() - t0);
+               (long double)tq, (double)lz, te.N, omp_get_wtime() - t0);
         return 0;
     }
 

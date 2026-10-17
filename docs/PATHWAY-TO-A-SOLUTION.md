@@ -232,81 +232,66 @@ for the ACTUAL zeta zero set.  The branches:
       (the  LAST  mpmath-reachable  row  on  this  machine;
       higher  rows  need  a  C  zeta  channel  or  more
       RAM).  
-      ***  THE  C/QUAD  CHANNEL  AND  THE  RSSUM  FINDING  (s34,
-      discovery  0100)  ***  A  C/quad  (__float128  +  QD  hi/lo,
-      quadmath  linked  without  dev  headers,  tables  as  exact
-      integer  triples, scripts/rh/zetac)  Riemann-Siegel  channel
-      is  NOW  THE  ZETA  CHANNEL  OF  RECORD  PAST  THE  WALL:
-      it  matches  fresh  mpmath  to  ~1e-12  at  t  =  1e17..
-      1.5e18,  and  an  INDEPENDENT  bare-cosine  assembly  (no
-      F/c/rssum  tables)  agrees  with  it  to  1.3e-5..2.9e-5  at
-      1e8G/3e8G/5e8G/1e9G.  THE  5e8G  DECOMPOSITION  (S1  vs  rz
-      =  S1  +  rssum*S3,  instrumented)  LOCALIZES  THE  DAMAGE
-      TO  THE  RSSUM  F/COEFFICIENT  CORRECTION  -  S1
-      (zetasum_sieved)  IS  EXACT  IN  BOTH  CLASSES  (S1
-      dps-40  =  C  S1  to  ~2e-14).  REVISED  SAME  EVENING
-      (discovery  0102):  there  are  TWO  INTERNALY-CONSISTENT
-      CLASSES  of  mpmath  output  at  this  height.  CLEAN:
-      today's  fresh  dps-15  AND  fresh  dps-40  runs,  both
-      logabsz  =  2.937019955061246,  rssumS3  =  1.18e-05;  the
-      dps-40  run's  captured  S1  width  (235)  EQUALS  EXACTLY
-      the  static  reproduction  of  the  code  width  chain
-      (wpR  =  174,  wpsum  =  215,  wp_s1  =  235,  L  =  6)  -
-      the  clean  class  IS  the  canonical  path.  CORRUPTED:
-      the  old  dps-20/30/40  anchors  AND  today's  first
-      instrumented  dps-40  run,  all  1.7289704098  to  10
-      digits,  rssumS3  =  13.86,  with  an  ANOMALOUS  LOW  S1
-      width  (captured  175,  implying  Rzeta_set  was  entered
-      at  ~114  bits  -  an  effective  USER  precision  ~76
-      vs  136).  WHY  A  PROCESS  ENTERS  THE  DEGRADED-WIDTH
-      STATE  IS  NOT  YET  ESTABLISHED.  THE  FRESH  DOUBLE
-      WIDTH-TRACE  (s34l:  two  new  dps-40  processes  at  5e8G
-      with  a  FULL  internal  call  record,  queued  behind
-      s34j)  IS  THE  DECISIVE  EXPERIMENT:  two  clean  runs  ->
-      the  old  anchors  came  from  a  now-vanished  state
-      (script-version  or  environment  dependent);  a
-      divergent  run  ->  mpmath  is  genuinely
-      NONDETERMINISTIC  at  these  heights  (a  worse,
-      more  urgent  bug  for  the  upstream  report).  The
-      dps-20+  zeta  anchors  of  the  THREE  FAR  ROWS  ARE
-      THEREFORE  CORRECTED  (provenance  C/quad,  cross-checked):
-      1e8G  logzeta  =  1.455437142349  (was
-      4.4929618099354),  3e8G  logzeta  =  3.284789950625
-      (was  -1.5728021802385705),  5e8G  logzeta  =
-      2.9370199551  (was  1.7289704098;  C  +  mpmath  dps-15
-      to  1e-12).  THE  M  VALUES  OF  THE  THREE  FAR  ROWS
-      ARE  UNCHANGED  (recomputed  f64  identity, s34g:  M_old
-      ==  M_new  BIT-EXACT,  integer  quantization  resid
-      exactly  0.0  -  the  f64  association  at  1e18-1e19
-      scale  absorbs  lz  shifts  below  ~O(512))  -  so  the
-      s33  re-deconvolution  (fit  on  the  M  values)  STANDS
-      UNCHANGED.  PAST-THE-WALL  LOGZETA  DATUMS  HAVE  LANDED
-      FROM  THE  C  CHANNEL  (the  reason  the  channel  was
-      built):  1e9G  logzeta  =  -1.211098446310  (bare-cos
-      cross  d  =  8.8e-06),  1e10G  logzeta  =
-      0.455887846369,  3e10G  logzeta  =  2.012486593295;
-      the  M  values  of  these  rows  need  the  stream
-      channels.  THE  1e9G  ROW  IS  NOW  LOCKED  (s34f):
-      M  =  -10384437248,  EXACT  INTEGER  (quantization
-      resid  exactly  0.0;  stage-A  M_partial  ==  stage-B  M
-      to  the  bit  -  the  f64  sum  absorbs  the  lz  term  at
-      this  height;  full  |Z|  0.297869906  vs  bare  |Z|
-      0.297861108,  d  =  8.8e-06)  -  the  FIRST  PAST-THE-WALL
-      CENSUS  ROW  IS  ON  THE  RECORD  WITH  A  PROVEN  C
-      CHANNEL.  s34j  1e10G+3e10G  is  queued;  the  g-side
-      degeneracy-break  is  now  a  COMPUTATION  TASK,  not  a
-      wall.  SUB-WALL  ROWS  ARE
-      CLEAN  (re-verified  post-correction):  the  LAST  sub-wall
-      census  row  is  5e7G  (a  =  4.886e8),  which  is  the
-      SAME  height  class  as  the  verified-clean  point
-      t  =  1.5e18  (a  =  4.886e8,  C  ==  mpmath  dps-40  to
-      1e-12);  the  corruption  onset  is  STRICTLY  above  it
-      (first  confirmed  corruption  at  1e8G,  a  =  6.91e8;
-      the  s34k  probe  at  a  =  5.9e8  pins  the  onset).
-      So  no  sub-wall  census  row  (all  a  <=  4.886e8)  is
-      in  the  corrupted  region  and  their  recorded  logzeta
-      channels  stand;  confirmatory  C  crosses  at  5e7G  and
-      2e7G  are  queued  on  the  exact  row  heights.  FAR-DRIFT  SHAPE  AT  THE  THREE
+      ***  THE  FAR-ANCHOR  ADJUDICATION  (s34,  repr-t  finding;
+      discovery  0100/0101,  final  entry  0102)  ***  THE
+      C/QUAD  CHANNEL  (__float128  +  QD  hi/lo,  quadmath
+      without  dev  headers,  exact-integer  tables,
+      scripts/rh/zetac)  IS  THE  ZETA  CHANNEL  OF  RECORD
+      PAST  THE  WALL  AND  (post-adjudication)  AT  ALL
+      FAR  HEIGHTS:  it  matches  fresh  mpmath  to  ~1e-12
+      AT  EXACT  ROW  HEIGHTS  (t  =  1e17..3e20  class),  and
+      the  INDEPENDENT  bare-cosine  assembly  (no  tables)
+      agrees  to  1.3e-5..2.9e-5  at  1e8G..1e9G.  THE  OLD
+      "CORRUPTED"  FAR  ANCHORS  WERE  NOT  MPMATH
+      CORRUPTION:  EVERY  OLD  CENSUS  PROBE  (s30,  s31z2)
+      EVALUATED  mpmath  AT  mpf(repr(f64  t))  -  the
+      decimal  REPR  OF  THE  ROW'S  F64  HEIGHT,  OFFSET
+      FROM  THE  EXACT  F64  INTEGER  BY  O(1..1e4).  ZERO
+      DENSITY  IS  ~6  PER  UNIT  t,  SO  THE  VALUE  CHANGES
+      O(1)  PER  OFFSET.  REPRODUCED  EXACTLY  AT  THE  REPR
+      HEIGHTS  BY  AN  INDEPENDENT  CHANNEL:  5e7G  mpmath
+      (t+120)  =  0.5676737452478491  (=  old  anchor,  all
+      16  digits);  1e8G  C(t+240)  =  4.492961809935  (=
+      old  anchor  4.4929618099354);  3e8G  C(t-256)  =
+      -1.572802180239  (=  old  anchor
+      -1.5728021802385705).  THE  s31z2  5e8G  ANCHOR  (
+      1.7289704098)  WAS  ALSO  AT  THE  REPR  HEIGHT
+      (t+200)  -  its  source  used  mpf(repr(t))  too  -  so
+      the  two  5e8G  "classes"  DIFFER  IN  HEIGHT,  NOT
+      IN  STATE  (confirmation  queued:  fresh  mpmath  at
+      the  repr  5e8G  +  a  forced-low  entry-width  run  at
+      exact  5e8G;  s34l  T1  has  landed  CLEAN,  entry
+      prec  173  /  S1  width  235  /  2.937019955061246  =
+      C  to  all  digits;  T2  running  for  the  determinism
+      call).  MPMATH  HAS  NOT  BEEN  SHOWN  WRONG  AT  ANY
+      HEIGHT  IN  THIS  AUDIT;  the  upstream  issue  draft
+      (docs/MPMATH-RSSUM-ISSUE.md)  is  REWRITTEN  v2  on
+      this  finding  and  is  NOT  filed.  RE-ISSUED  ROWS
+      (s34o):  ALL  EIGHT  FAR  ROWS  (5  sub-wall  +  3
+      extreme)  RECOMPUTED  ON  EXACT-T  C  LOGZETA  -  ALL
+      M  VALUES  UNCHANGED  (0  SHIFT),  ALL  EXACTLY
+      INTEGER-QUANTIZED  (resid  0.0):  THE  M  CHANNEL  IS
+      UNCOUPLED  FROM  O(1-5)  lz  NOISE  AT  THESE
+      SCALES.  RE-ANCHORED  LOGZETA  CHANNELS  (exact  t,  of
+      record):  2e6G  0.865468081636,  5e6G
+      -3.111670188752,  1e7G  0.122468610055,  2e7G
+      1.242954054874,  5e7G  -1.395123890841,  1e8G
+      1.455437142349,  3e8G  3.284789950625,  5e8G
+      2.937019955061,  1e9G  -1.211098446310,  1e10G
+      0.455887846369,  3e10G  2.012486593295.  THE
+      PAST-THE-WALL  CENSUS  IS  COMPLETE  THROUGH  3e10G:
+      1e9G  M  =  -10384437248  (s34f,  resid  0.0),  1e10G
+      M  =  -978196824064  and  3e10G  M  =
+      -8798461100032  (s34j,  resid  0.0).  C-CHANNEL
+      TOOLING  FIX  (same  audit):  the  zchain  struct
+      held  t  AS  A  C  DOUBLE  and  the  ZETAC_TEST_T  hook
+      PARSED  WITH  STRTOD  -  BOTH  SILENTLY  QUANTIZE  FAR
+      HEIGHTS  TO  THE  F64  GRID  (they  would  fake
+      height-flatness);  the  hook  is  now  F128  +  an  f128
+      override;  the  table  rows  are  UNAFFECTED  (their
+      literals  round  to  the  exact  f64  integers  -
+      verified  -  every  recorded  C  value  was  already
+      AT  THE  EXACT  ROW  HEIGHT).  FAR-DRIFT  SHAPE  AT  THE  THREE
       EXTREME  ROWS  (arithmetic,  s32c;  RE-VERIFIED  POST-
       CORRECTION  by  s34g  on  the  unchanged  M  values  -
       identical  fit):  |M|  is  an  EXACT
@@ -335,7 +320,21 @@ for the ACTUAL zeta zero set.  The branches:
       has  LANDED  (see  the  C/QUAD  block  above);  the  row
       M  values  are  queued  (s34f/s34j),  and  the
       degeneracy  break  becomes  a  computation  task  on  this
-      machine].  Feeds  B1  (the  walk)  and  B5  (law
+      machine].  s33b  PAST-THE-WALL  RE-DECONVOLUTION  (39
+      rows,  far  set  through  3e10G):  THE  FAR  DRIFT
+      D(t)  =  M  -  (A  ln  t  +  B)  (A,  B  from  the
+      near  face)  IS  A  PURE  QUADRATIC  IN  t  OVER
+      THREE  DECADES  -  1e9G:  -9.7750e9,  1e10G:
+      -9.7753e11  (ratio  100.000),  3e10G:  -8.7978e12
+      (ratio  9.000);  |D|  =  1.086e-29  *  t^2  to  3
+      digits,  i.e.  in  g  =  t/G  units  M  ~
+      -9.776e-9  *  g^2  dominates.  THE  B7
+      POSITION-AMPLITUDE  DEGENERACY  IS  BROKEN  ON  THE
+      MEASURED  DOMAIN:  the  far  M  law  is  NOT  the
+      near  log  law  -  the  residual  shape  is  NOW
+      EXACTLY  IDENTIFIED  (no  free  shape  parameter);
+      the  s33  "degeneracy  survives"  reading  is
+      SUPERSEDED.  Feeds  B1  (the  walk)  and  B5  (law
       territory);
 
 ## 3.  Measured constraints  (anything that proves RH must

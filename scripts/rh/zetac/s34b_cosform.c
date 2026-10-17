@@ -29,6 +29,7 @@ extern f128 sqrtq(f128);
 extern f128 floorq(f128);
 extern f128 fmaq(f128, f128, f128);
 extern f128 ldexpq(f128, int);
+extern f128 strtoflt128(const char *, char **);
 
 #define Q(x) ((f128)(x))
 
@@ -103,12 +104,18 @@ int main(int argc, char **argv)
     const int nch = (int)(sizeof(ZETAC_CHAINS) / sizeof(ZETAC_CHAINS[0]));
     int only = -1;
     if (argc > 1) only = atoi(argv[1]);
+    const char *envT = getenv("ZETAC_TEST_T");
+    if (envT && only < 0) { fprintf(stderr, "note: ZETAC_TEST_T without index runs ALL chains at test t\n"); }
 
     for (int i = 0; i < nch; i++) {
         if (only >= 0 && only != i) continue;
         const struct zchain *ch = &ZETAC_CHAINS[i];
         f128 tq = ch->t;
         unsigned long long N = ch->N;
+        if (envT) {
+            tq = strtoflt128(envT, NULL);
+            N = (unsigned long long)floorq(sqrtq(tq * INV2PI.hi));
+        }
 
         /* theta (QD) */
         qd u = qd_mul(qd_set(tq), INV2PI);
@@ -151,7 +158,7 @@ int main(int argc, char **argv)
         if (Z < 0.0Q) Z = -Z;
         printf("t=%.17g  bare-cos-form |Z| = %.12f  (true |zeta| within "
                "~2.5e-5; N=%llu)  %.1f s\n",
-               (double)ch->t, (double)Z, N, omp_get_wtime() - t0);
+               (double)tq, (double)Z, N, omp_get_wtime() - t0);
         fflush(stdout);
     }
     return 0;

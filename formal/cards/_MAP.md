@@ -42,6 +42,13 @@ A chain of named theorems;  each box names the modules.
      S4Blind  (the BLIND-SPOT FACE: the remaining open
      mathematics, named - blindSpot predicate, own-floor
      impossibility PROVEN on it, 25-series pins, s4OpenFace)
+     MFar     (the FAR-M LAW PINS: the past-the-wall M rows,
+              s34o/s33b record;  pinGates  machine-checks  the
+              three-decade  |D|  quadratic:  adjacent  ratios
+              100.0033 / 9.0000033,  c  =  1.086e-29  stable
+              to  0.1%,  |M30|  dominated  by  c  t^2  -  the
+              B7  break  on  the  measured  domain;  data
+              record,  no  RH  claim)
 
   The actual-set composition (where the zeros are the real ones):
      Z78Strip     (named external input: Re s > 7/8 zero-free;

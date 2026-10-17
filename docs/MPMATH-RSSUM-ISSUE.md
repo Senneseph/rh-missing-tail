@@ -1,139 +1,108 @@
-# Draft mpmath issue: Riemann-Siegel zeta at Re=1/2 disagrees with
-# independent quadrature channels at high working precision
+# MPMATH RS-ZETA FAR-HEIGHT ANCHOR AUDIT (v2, revised)
 
-Status: DRAFT for upstream.  Local reproduction and cross-channel
-evidence on record in this repo (tmp/s34e_*, scripts/rh/zetac).
-No RH claim anywhere; this is a pure numerical-accuracy report.
+**Status: LOCAL AUDIT RECORD. Upstream filing on hold pending the
+s34l/s34k trace results (T2-T4).**
 
 ## Short version
 
-`mpmath.zeta(0.5 + 1j*t)` for large t, evaluated through the
-Riemann-Siegel path (`rszeta`), returned the WRONG value at dps >= 20 in
-several independent past runs, and the right value when re-run.  The
-right and wrong values are each internally reproducible; which one a
-fresh process returns depends on the internal S1 working width the
-Riemann-Siegel code chooses for that run.  The WRONG runs used a
-narrower S1 width (captured 175 bits) than the RIGHT runs (235 bits),
-and a too-narrow S1 width makes the ADR rssum F/coefficient correction
-return O(10) garbage instead of its natural ~1e-5 scale.  This is
-NOT a precision-limiting effect: raising dps from 20 to 40 did not,
-by itself, fix the value, and the dps-15 run is the clean one.
+The "corrupted far mpmath anchors" of the s31z2/s30 census are, so far,
+**not mpmath corruption at all.** They are **height artifacts**: every old
+census probe evaluated `mpm.zeta(1/2 + i*t)` at `mpf(repr(t))` -- the
+decimal-repr round-trip of the row's f64 height -- not at the row's exact
+f64 integer `t`. At far heights the repr decimal differs from the exact
+integer by O(10..10^4) in `t`, and `|Z(t)|` varies violently on that scale
+(zero density ~ 6 per unit `t` at these heights).
 
-## Reproduction sketch
+Reproducing the repr height under an independent C/quad channel returns
+the old anchor values exactly:
 
-At a single height (the f64 integer 15000522999990988800, ~1.5e19),
-one fresh process per dps:
+| row   | old mpmath anchor      | repr t (offset)       | independent C at repr t | C at exact t (canonical) |
+|-------|------------------------|-----------------------|-------------------------|--------------------------|
+| 5e7G  | 0.5676737452478491     | ...880 + 120          | (mpmath @repr: 0.5676737452478491, exact digits) | -1.395123890841 |
+| 1e8G  | 4.4929618099354        | ...760 + 240          | 4.492961809935          | 1.455437142349           |
+| 3e8G  | -1.5728021802385705    | ...256 - 256          | -1.572802180239         | 3.284789950625           |
+| 5e8G  | 1.7289704098           | ...8800 + 200 (s31z2) | -- (T: repr mpmath pending) | 2.937019955061 |
 
-  dps    log|zeta(1/2 + i t)|     |zeta|        class
-  15     +2.9370199551            18.8595601495  CLEAN
-  20     +1.7289704098            5.63538...     CORRUPTED
-  30     +1.7289704098            5.63538...     CORRUPTED
-  40     +1.7289704098            5.63538...     CORRUPTED
-  40 (re-run, fresh process)      +2.9370199551  18.85956014949     CLEAN
+The 5e7G column was reproduced with fresh mpmath at the repr height
+(matches the recorded anchor to all 16 printed digits). The 1e8G/3e8G
+columns were reproduced with the C/quad channel at the repr height
+(matches to 12-13 digits).
 
-So dps 20/30/40 agreed with each other to 10 digits and dps 15 was
-the lone value in the original batch - but a second fresh dps-40
-process returned the CLEAN value, digit-identical to dps 15.  The
-stable "wrong" value in the first batch is therefore NOT a property
-of dps >= 20 per se: the same (dps = 40, t) call returns a class that
-depends on the internal S1 working width actually used in that run
-(captured 175 bits in the corrupted run vs 235 bits in the clean
-re-run; the clean width matches the fully static reproduction of
-the code's width chain: wptR = 173/174, wpsm = 215, wp_s1 = 235,
-L = 6).
+## What was wrong in the old census scripts
 
-### Decomposition (the localizing evidence)
+`scripts/rh/s30_far_extreme.py` (and `s31z2_5e8G_zeta.py`) did:
 
-mpmath's RS path returns `z = 2 e^{i theta} (S1 + rssum*S3)`.
-Wrapping the two components:
+    t = S.G_LAST * 1e8          # f64, e.g. 3000104599998197760 (+0)
+    z = mp.zeta(mp.mpc(0.5, mp.mpf(repr(t))))   # <= repr(t) = "3.000104599998198e+18"
 
-  component        dps-15              dps-40
-  S1 (zetasum_sieved)  exact (fixed-pt,
-                       wpsum auto)     exact, matches dps-15 and
-                       and the C       an independent C/quad S1 to
-                       channel to ~2e-14 ~2e-14  ->  S1 is fine
-  rssum*S3          (9.1e-06, 7.5e-06), |z| = 1.18e-05  (CLEAN)
-                                 (garbage), |z| = 13.86 (WRONG)
+`repr(t)` is a 17-significant-digit decimal. `mpf(repr(t))` parses it
+**exactly** (decimal exactness is a feature of mpmath). That exact decimal
+is NOT the f64 integer: it is the decimal value of the shortest
+round-trip string, offset from the f64 by a small integer:
 
-The S1 primary sum is correct at BOTH precisions (it is a
-fixed-width fixed-point sieve with its own auto width, `wpsum`,
-which is independent of the outer dps).  The rssum*S3 correction,
-built from the ADR F/coefficient table at a working width that
-grows with dps, is the component that is correct at dps 15 and
-wrong at dps >= 20.  Its magnitude at dps 40 (13.86) dwarfs the
-whole correction's natural scale (~1e-5), which is why the final
-`|zeta|` lands ~13.2 away from the truth and `log|zeta|` shifts by
-~1.2..5.
+    row     exact f64 t              repr decimal t        offset
+    2e6G    60002091999963952        ...99639 50            -2
+    5e6G    150005229999909888       ...99909 900           +12
+    1e7G    300010459999819776       ...99776+24            +24
+    2e7G    600020919999639552       ...639600              +48
+    5e7G    1500052299999098880      ...099000              +120
+    1e8G    3000104599998197760      ...198000              +240
+    3e8G    9000313799994592256      ...4592000             -256
+    5e8G    15000522999990988800     ...0989000             +200
+    1e9G    30001045999981977600     ...1978000             +400
+    1e10G   300010459999819726848    ...19700000            -26848
+    3e10G   900031379999459246080    ...459200000           -46080
 
-### Cross-checks independent of mpmath
+At these heights zero spacing is ~0.16 in t, so an offset of +120 passes
+through ~700 zeros: the "wrong" anchors are simply the true zeta values at
+slightly different heights. They were never wrong *as values at their
+heights*; they were anchored to the wrong height.
 
-Two fixed-precision C assemblies, `__float128` + quad-double
-(hi/lo), link the system `libquadmath` (no headers needed beyond the
-runtime .so):
+## The separate 5e8G two-state observation (pending resolution)
 
-  1.  The full RS form (S1 + rssum*S3 + S3, the same formula mpmath
-      uses, with its own ADR coefficient table emitted at high
-      precision as machine-reconstructible integer triples).
-  2.  A BARE-cosine form:  Z(t) ~ 2 sum_{n<=N} cos(theta - t ln n)
-      / sqrt(n)  +  O(t^-1/4).  This shares NOTHING with the F/
-      coefficient/rssum path (no tables, no Horner, no S3, no
-      rssum) - only the QD trig and the constant 2*pi.
+The instrumented s34e pair (fresh processes, both at the **exact** t, both
+dps-40, one zeta call each) produced:
 
-  height    full RS form     bare cosine     mpmath dps-15
-  1e8G      4.2863568042     4.2863862899    (not run)
-  3e8G      26.7033746986    26.703361444
-  5e8G      18.8595601495    18.8595810231   18.859560149492072
-  1e9G      0.2978699056     0.2978611079
+- clean: log|zeta| = 2.937019955061246, captured widths entry=173 / S1=235
+- other: log|zeta| = 1.7289704098      , captured field "wp_sum" = 175
 
-The full RS C form and the bare-cosine C form agree to ~1e-5 (the
-rssum*S3 + O(t^-1/4) scale), and mpmath at dps 15 agrees with the C
-full RS form to ~1e-14 (same S1, same rssum magnitude); the CLEAN
-dps-40 re-run agrees too.  The independent bare-cosine assembly -
-which cannot inherit an rssum/F-table bug - corroborates the clean
-values against the corrupted-class mpmath values.
+Revised reading: the old "anchor" 1.7289704098 came from s31z2, which ran
+at the **repr** height (t+200). The instrumented "other" run ran at the
+**exact** height. So the two 5e8G values may be a height difference (repr
+vs exact), not a state difference. Open tests:
 
-## Where to look (hypothesis, not a fix)
+- T: fresh mpmath dps-40 at repr 5e8G (t+200):
+  - if it returns 1.72897  -> fully explained by the repr artifact;
+  - if it returns a third value -> genuine two-state behavior at one height.
+- T: forced low entry precision (~dps 23) at exact 5e8G:
+  - if it returns 1.72897  -> the value is a deterministic function of the
+    entry width state; the "corruption" is the width ladder misbehaving at
+    that mid width;
+  - if it returns something else -> no link to the width state.
 
-`mpmath/functions/rszeta.py`:  the width chain.  For the critical
-line the entry precision of `Rzeta_set` is set by `zeta_half` as
-`wpR = 3 + ctx.mag(1.1 + 2*X) + wpinitial + 1` with `X = sqrt(|s|)`;
-`Rzeta_set` then sets `wpsum = 4 + mag((N+sqrt N) ln N / eps1)` and
-calls the S1 sieve at `wpsum + 10`.  A static reproduction of that
-chain at the height above gives exactly the CLEAN run's captured
-widths (wpR 173/174, wpsum 215, wp_s1 235, L 6).  The CORRUPTED
-run captured wp_s1 = 175, which implies `Rzeta_set` was entered
-with a far smaller entry precision (effective user precision
-~76 bits instead of 136) - i.e. the corrupted runs behave as if
-`zeta()` ran at a much lower precision than the context states.
-The rssum/S3 component is the one that produces O(10) garbage
-under that degraded width state (S1 itself stays exact in both
-classes, matching the independent C S1 to ~2e-14).  The trigger
-that puts the process into the degraded-width state is not yet
-established (a double fresh-process width-trace with a full
-call record is the pending decisive experiment).
+Pending results are logged in the discovery entry 010x for this work.
 
-## Suggested tests to add
+## C-channel note (fixed)
 
-  - A dps sweep {10,15,20,30,40} of `mp.zeta(mpc(0.5, t))` at a
-    fixed large t (e.g. the integer 15000522999990988800),
-    asserting convergence of log|zeta| (successive dps differences
-    shrinking), at a height where N = floor(sqrt(t/2pi)) is O(1e9).
-  - A component test wrapping Rszeta_set / the rssum builder to
-    expose rssum*S3 in isolation, asserting |rssum*S3| stays at its
-    natural scale (O(a^-1/2) times O(1)) rather than O(10).
-  - A cross-check of the RS form against the bare-cosine form
-    2 sum cos(theta - t ln n)/sqrt(n) to the O(t^-1/4) + rssum
-    scale, which is an independent route to the same value.
+The C/quad channel's `struct zchain` originally held `t` as a C `double`,
+and its `ZETAC_TEST_T` hook parsed with `strtod`. Both silently quantize
+far heights to the f64 grid (O(2^k) at these t), collapsing off-grid probe
+heights onto the row integer. The table rows themselves are unaffected
+(their literals round to the exact f64 row integers). Fixed: the hook now
+parses with `strtoflt128` and feeds an f128 override into
+`compute_height`. After the fix the C channel demonstrably distinguishes
+neighboring heights (1e8G exact vs +240: logzeta 1.455437142349 vs
+4.492961809935).
 
-## Provenance and caveats
+## Verdict (current)
 
-  - mpmath 1.4.1, CPython 3.12.3, x86-64.
-  - All mpmath values are fresh processes (one process per dps) to
-    avoid state carryover; the C channel is a separate binary.
-  - The C coefficient table for the full RS form is generated from
-    high-precision source and emitted as exact integer triples; the
-    bare cosine form needs no such table.
-  - Nothing here is a claim about the Riemann hypothesis; it is a
-    report that the zeta values a downstream census consumes shift
-    by O(1) in log|zeta| when the working precision crosses a
-    threshold, and that the shift is localized to the rssum term.
+1. mpmath 1.4.1 has not been shown to be wrong at any height in this
+   audit; every "corrupted" value so far reappears exactly at its repr
+   height under an independent channel.
+2. The canonical rows now use exact f64 heights with the C/quad channel of
+   record:
+   1e8G 1.455437142349 / 3e8G 3.284789950625 / 5e8G 2.937019955061 /
+   1e9G -1.211098446310 / 1e10G 0.455887846369 / 3e10G 2.012486593295.
+3. The far-row M integers recomputed on exact-t channels are unchanged
+   (s34g: quantization residual 0 for 1e8G/3e8G/5e8G).
+4. The 5e8G two-state question is the only residue; T2-T4 settle it.

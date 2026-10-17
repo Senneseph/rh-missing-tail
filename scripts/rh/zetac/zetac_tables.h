@@ -149,7 +149,9 @@ static const char *ZETAC_DVALS[] = {
   /* n=3: */ "0.000096450617283950611929865814886397856753319501876831", "0", "-0.033333333333333332870740406406184774823486804962158", "-0.0069444444444444423242268626950135512743145227432251", "0.5",
 };
 
-/* target chains: t (f64 value), L, M, J, N */
+/* target chains: t (the exact row f64, held as double = exact), L, M, J, N.
+ * Off-grid test heights use the g_test_t override in zetac.c (f128);
+ * a double parse there O(2^k)-quantizes far heights. */
 struct zchain { double t; int L; int M; int J; unsigned long long N; };
 static const struct zchain ZETAC_CHAINS[] = {
   {3.000104599998198e+18, 4, 9, 62, 691000345ULL}, /* t/G = 1e+08 */
