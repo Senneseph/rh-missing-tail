@@ -267,13 +267,18 @@ for the ACTUAL zeta zero set.  The branches:
       the  M  values  of  these  rows  need  the  stream
       channels  (s34f  1e9G  queued;  s34j  1e10G+3e10G
       queued)  -  the  g-side  degeneracy-break  rows  are  now
-      a  COMPUTATION  TASK,  not  a  wall.  The  sub-wall  rows
-      carry  an  lz  channel  warning  at  the  top  edge  (a
-      <=  4.9e8  verified  clean;  a  >=  6.9e8  corrupted;
-      5e7G  a  =  4.89e8  on  the  boundary  -  C  crosses
-      queued):  their  locked  M  integers  are  unaffected
-      (same  f64  window),  the  risk  is  to  the  recorded
-      logzeta  CHANNELS  only.  FAR-DRIFT  SHAPE  AT  THE  THREE
+      a  COMPUTATION  TASK,  not  a  wall.  SUB-WALL  ROWS  ARE
+      CLEAN  (re-verified  post-correction):  the  LAST  sub-wall
+      census  row  is  5e7G  (a  =  4.886e8),  which  is  the
+      SAME  height  class  as  the  verified-clean  point
+      t  =  1.5e18  (a  =  4.886e8,  C  ==  mpmath  dps-40  to
+      1e-12);  the  corruption  onset  is  STRICTLY  above  it
+      (first  confirmed  corruption  at  1e8G,  a  =  6.91e8;
+      the  s34k  probe  at  a  =  5.9e8  pins  the  onset).
+      So  no  sub-wall  census  row  (all  a  <=  4.886e8)  is
+      in  the  corrupted  region  and  their  recorded  logzeta
+      channels  stand;  confirmatory  C  crosses  at  5e7G  and
+      2e7G  are  queued  on  the  exact  row  heights.  FAR-DRIFT  SHAPE  AT  THE  THREE
       EXTREME  ROWS  (arithmetic,  s32c;  RE-VERIFIED  POST-
       CORRECTION  by  s34g  on  the  unchanged  M  values  -
       identical  fit):  |M|  is  an  EXACT
