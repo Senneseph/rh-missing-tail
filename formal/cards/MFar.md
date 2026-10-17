@@ -1,6 +1,6 @@
 # MFar.lean  (134 lines)
 WHAT:  THE FAR-M LAW PINS: the past-the-wall M channel, the quadratic
-         identified (128 lines).
+         identified.
 HOW:   Pinned (s33b record, s34o re-issue): the six far-row M values
          (5e8G -3035441152, 1e9G -10384437248, 1e10G -978196824064,
          3e10G -8798461100032; heights the exact f64 row integers) and
@@ -16,5 +16,5 @@ HOW:   Pinned (s33b record, s34o re-issue): the six far-row M values
          1%).  THE FAR M LAW IS -9.776e-9 (t/G)^2 DOMINANT - the B7
          position-amplitude degeneracy is broken on the measured domain;
          the far law is NOT the near log law.  No RH claim.
-USES:  used by: (data record - the B7 face wiring is the next consumer;
-         feeds B1 the walk and B5 law territory).
+USES:  used by: B7Far (the B7 face wiring consumes the pins); feeds B1
+         the walk and B5 law territory.

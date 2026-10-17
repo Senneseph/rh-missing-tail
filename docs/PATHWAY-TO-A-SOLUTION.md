@@ -351,8 +351,23 @@ for the ACTUAL zeta zero set.  The branches:
       the  canonical  value  to  1  ulp  -  the  repr-t  artifact
       record  is  CLOSED  for  the  ENTIRE  row  set  (the  high
       rows'  120..256  unit  offsets  reproduce  even  at  dps-15
-      and  are  adjudicated).  Feeds  B1  (the  walk)  and  B5  (law
-      territory);
+      and  are  adjudicated).  FORMAL:  formal/RhAttack/B7Far.lean
+      GATED  (five  norm_num  gates  on  the  MFar  pins  -
+      decomposition  nl  =  M  -  D,  the  near-log  share  windows
+      and  its  >=10x-per-decade  decay,  NOT-A-LINE-IN-LN-T
+      (second  drop  ratio  8.0804  in  [7,9]  vs  the  ln-line
+      0.477121  and  the  t*ln-t  2.2875),  and  T^2  STEP
+      CONSISTENCY  (drop  ratio  within  4.6e-4  of  the  pure  t^2
+      step  ratio  8.0808081  at  the  exact  pinned  heights  -
+      the  residual  shape  is  the  t^2  /  kernel  -t^2/g^2
+      family,  identified)  plus  b7OpenFace  -  the  open
+      mechanism  (positive  far-side  excess  on  the  s29  g-window
+      [2e8,  1e11]  whose  generated  drift  hits  the  pinned  D)
+      as  a  named  Prop  in  the  S4Blind  s4OpenFace  pattern;
+      the  endpoint  is  untouched  (far  region  vacuous  in  body
+      from  [Z78];  B7  is  a  measured  constraint,  not  one  of
+      the  four  named  residuals).  Feeds  B1  (the  walk)  and
+      B5  (law  territory);
 
 ## 3.  Measured constraints  (anything that proves RH must
     reproduce these)

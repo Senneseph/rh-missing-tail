@@ -49,6 +49,33 @@ A chain of named theorems;  each box names the modules.
               to  0.1%,  |M30|  dominated  by  c  t^2  -  the
               B7  break  on  the  measured  domain;  data
               record,  no  RH  claim)
+     B7Far    (the B7 FAR-SIDE FACE: the census-drift
+              mechanism,  named  -  consumes  the  MFa  pins;
+              the  near-log  PART  nl  =  M  -  D  pinned  from
+              the  s33b  record;  4  GATED  gates:
+              decomposition  (nl  =  M  -  D  exact),  share
+              windows  (|nl|/|M|  in  [5%,  7%]  /  [6e-4,
+              7e-4]  /  [7e-5,  8e-5]  at  the  three  far
+              pins),  share  decay  (>=  10x  per  decade),
+              NOT-A-LINE-IN-LN-T  (second  drop  ratio  in
+              [7,  9],  measured  8.0804,  vs  the  ln-line
+              prediction  0.47712125  and  the  t*ln-t
+              family  2.2875  -  the  far  M  channel  is  not
+              a  continuation  of  the  near  log  law);
+              T^2  STEP  CONSISTENCY  (the  drop  ratio  within
+              1e-3  of  the  pure  t^2  step  ratio
+              8.0808081  at  the  exact  pinned  heights,
+              measured  gap  4.57e-4,  nearest  competing
+              family  0.79  away  -  the  residual  shape  is
+              the  t^2  /  kernel  -t^2/g^2  family,
+              identified);  b7OpenFace:  the  open  MECHANISM  as  a
+              Prop  (a  positive  far-side  excess  on  the
+              s29  g-window  [2e8,  1e11]  whose  generated
+              drift  hits  the  pinned  D)  -  the  S4Blind
+              s4OpenFace  pattern;  measured,  not  proven.
+              The  endpoint's  four  named  residuals  are
+              UNTOUCHED:  a  measured  constraint  any  RH
+              proof  must  reproduce,  not  an  endpoint  leg.)
 
   The actual-set composition (where the zeros are the real ones):
      Z78Strip     (named external input: Re s > 7/8 zero-free;
