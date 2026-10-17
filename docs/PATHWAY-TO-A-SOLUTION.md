@@ -213,10 +213,17 @@ for the ACTUAL zeta zero set.  The branches:
       15..40)  -  low  precision  does  NOT  move  the  wall;
       it  is  LOCKED  at  [9e18,  3e19)  for  all  mpmath
       precisions  on  this  124 GB  machine.  s31z2  LADDER  COMPLETE:
-      dps-15  (;2.937  -  the  adjudicated  precision  outlier),
-      dps-20/30/40  ALL  AGREED  (logzeta  =  ;1.7289704098,
-      peaks  92.6/95.1  GB)  -  the  5e8G  zeta  value  is
-      triple-locked.  THE  STAGGERED  ROW  PROTOCOL  LOCKED
+      dps-15  (;2.937),  dps-20/30/40  ALL  AGREED
+      (logzeta  =  ;1.7289704098,  peaks  92.6/95.1  GB).
+      [CORRECTED,  s34/discovery  0100:  the  'dps-15  is  the
+      outlier'  verdict  FLIPS  -  dps-15  was  the  truthful
+      run;  the  dps-20/30/40  values  are  corrupted  by
+      mpmath's  own  ADR  rssum  correction  (rssumS3  =  13.86
+      magnitude  at  dps-40  vs  1.18e-5  true,  S1  exact  at
+      every  precision;  mpmath  dps-15  ==  C  channel  to
+      1e-12).  The  corrected  5e8G  logzeta  channel  is
+      2.9370199551  (C  +  dps-15),  NOT  1.7289704098.]
+      THE  STAGGERED  ROW  PROTOCOL  LOCKED
       THE  5e8G  ROW  (discovery  0096):  M  =  -3035441152
       (integer;  f64  sum  match  by  construction;  I_far
       dps40  ==  dps60  ==  dps80  bit-identical;  staged
@@ -224,8 +231,52 @@ for the ACTUAL zeta zero set.  The branches:
       verified  extreme  boundary  NOW  STANDS  AT  1.5e19
       (the  LAST  mpmath-reachable  row  on  this  machine;
       higher  rows  need  a  C  zeta  channel  or  more
-      RAM).  FAR-DRIFT  SHAPE  AT  THE  THREE  EXTREME
-      ROWS  (arithmetic,  s32c):  |M|  is  an  EXACT
+      RAM).  
+      ***  THE  C/QUAD  CHANNEL  AND  THE  RSSUM  FINDING  (s34,
+      discovery  0100)  ***  A  C/quad  (__float128  +  QD  hi/lo,
+      quadmath  linked  without  dev  headers,  tables  as  exact
+      integer  triples, scripts/rh/zetac)  Riemann-Siegel  channel
+      is  NOW  THE  ZETA  CHANNEL  OF  RECORD  PAST  THE  WALL:
+      it  matches  fresh  mpmath  to  ~1e-12  at  t  =  1e17..
+      1.5e18,  and  an  INDEPENDENT  bare-cosine  assembly  (no
+      F/c/rssum  tables)  agrees  with  it  to  1.3e-5..2.9e-5  at
+      1e8G/3e8G/5e8G/1e9G.  The  5e8G  decomposition  (S1  vs
+      rz  =  S1  +  rssum*S3  at  dps-15  and  dps-40,  same  t)
+      LOCALIZES  THE  MPMATH  BUG  TO  THE  RSSUM  F/COEFFICIENT
+      CHAIN  AT  THE  HIGH  WORKING-WIDTH  CHAINS  (J  >=  ~33,
+      L  =  4,  M  =  9-12;  the  dps-15  chain  is  clean)  -
+      S1  (zetasum_sieved)  IS  EXACT  AT  EVERY  RELEVANT
+      PRECISION  (S1  dps-40  =  C  S1  to  ~2e-14).  The
+      dps-20+  zeta  anchors  of  the  THREE  FAR  ROWS  ARE
+      THEREFORE  CORRECTED  (provenance  C/quad,  cross-checked):
+      1e8G  logzeta  =  1.455437142349  (was
+      4.4929618099354),  3e8G  logzeta  =  3.284789950625
+      (was  -1.5728021802385705),  5e8G  logzeta  =
+      2.9370199551  (was  1.7289704098;  C  +  mpmath  dps-15
+      to  1e-12).  THE  M  VALUES  OF  THE  THREE  FAR  ROWS
+      ARE  UNCHANGED  (recomputed  f64  identity, s34g:  M_old
+      ==  M_new  BIT-EXACT,  integer  quantization  resid
+      exactly  0.0  -  the  f64  association  at  1e18-1e19
+      scale  absorbs  lz  shifts  below  ~O(512))  -  so  the
+      s33  re-deconvolution  (fit  on  the  M  values)  STANDS
+      UNCHANGED.  PAST-THE-WALL  LOGZETA  DATUMS  HAVE  LANDED
+      FROM  THE  C  CHANNEL  (the  reason  the  channel  was
+      built):  1e9G  logzeta  =  -1.211098446310  (bare-cos
+      cross  d  =  8.8e-06),  1e10G  logzeta  =
+      0.455887846369,  3e10G  logzeta  =  2.012486593295;
+      the  M  values  of  these  rows  need  the  stream
+      channels  (s34f  1e9G  queued;  s34j  1e10G+3e10G
+      queued)  -  the  g-side  degeneracy-break  rows  are  now
+      a  COMPUTATION  TASK,  not  a  wall.  The  sub-wall  rows
+      carry  an  lz  channel  warning  at  the  top  edge  (a
+      <=  4.9e8  verified  clean;  a  >=  6.9e8  corrupted;
+      5e7G  a  =  4.89e8  on  the  boundary  -  C  crosses
+      queued):  their  locked  M  integers  are  unaffected
+      (same  f64  window),  the  risk  is  to  the  recorded
+      logzeta  CHANNELS  only.  FAR-DRIFT  SHAPE  AT  THE  THREE
+      EXTREME  ROWS  (arithmetic,  s32c;  RE-VERIFIED  POST-
+      CORRECTION  by  s34g  on  the  unchanged  M  values  -
+      identical  fit):  |M|  is  an  EXACT
       quadratic  in  t  (residuals  <<  f64  rounding):
       the  t^2  coefficient  (in  1e8G  units)  is  ;9.59e7
       -  the  drift  is  CONVEX  /  accelerating  (local
@@ -245,11 +296,14 @@ for the ACTUAL zeta zero set.  The branches:
       O(1e9..1e12));  the  position-amplitude  degeneracy
       SURVIVES  but  narrows  to  ~2  decades,  and  the
       row  needed  to  break  it  moves  to  t  ~  g0  ~
-      3e20..3e21  --  even  deeper  past  the  verified  1.5e19.
-      Breaking  the  g-side  degeneracy  is  therefore  an
-      engine  task  (a  C  zeta  channel  or  more  RAM),
-      not  a  data  task  on  this  machine.  Feeds  B1  (the
-      walk)  and  B5  (law  territory);
+      3e20..3e21  --  even  deeper  past  the  verified  1.5e19
+      [s34  UPDATE:  the  C  channel  HAS  BROKEN  THE  MPMATH
+      WALL  -  past-the-wall  logzeta  at  1e9G/1e10G/3e10G
+      has  LANDED  (see  the  C/QUAD  block  above);  the  row
+      M  values  are  queued  (s34f/s34j),  and  the
+      degeneracy  break  becomes  a  computation  task  on  this
+      machine].  Feeds  B1  (the  walk)  and  B5  (law
+      territory);
 
 ## 3.  Measured constraints  (anything that proves RH must
     reproduce these)
@@ -265,7 +319,11 @@ for the ACTUAL zeta zero set.  The branches:
     p = 2.23,  K = 2.0e-10.
   - Integer quantization of M (f64-exact) at ALL 36 rows to date
     (28  law-band  rows  +  the  5  s25  far  rows  +  the  2  s30
-    extreme  rows  +  the  1  staggered  5e8G  row).
+    extreme  rows  +  the  1  staggered  5e8G  row)  -
+    RE-VERIFIED  AFTER  THE  RSSUM  CORRECTION  (s34g:  the
+    three  extreme-row  M  values  are  bit-exact  unchanged
+    under  the  corrected  logzeta  channels;  the  quantization
+    resid  is  exactly  0.0).
   - 5e8G  staggered  row  (THE  LAST  mpmath-REACHABLE  ROW,
     t  =  1.5000523e19):  M  =  -3035441152,  I_far  =
     -1.1781387477189394e19  (dps40  ==  dps60  ==  dps80),
@@ -326,9 +384,15 @@ for the ACTUAL zeta zero set.  The branches:
       (integer;  f64  sum  match;  staged  association  3.6e6
       ulp  on  the  record);  the  verified  extreme  boundary
       MOVES  9e18  <~  1.5e19  -  THE  LAST  MPMATH-REACHABLE
-      ROW  ON  THIS  124  GB  MACHINE;  the  remaining  levers
-      for  higher  rows  are  a  C  zeta  channel  or  more
-      RAM.
+      ROW  ON  THIS  124  GB  MACHINE  [s34:  the  C  channel
+      HAS  SINCE  BROKEN  THIS  WALL  -  see  the  C/QUAD  block
+      in  section  2;  1e9G/1e10G/3e10G  logzeta  landed,  M
+      values  queued].  THIS  ROW  ALSO  CARRIES  THE
+      CORRECTED  LOGZETA  CHANNEL  (2.9370199551,  NOT
+      1.7289704098):  the  recorded  M  =  -3035441152  IS
+      UNCHANGED  BY  THE  CORRECTION  (f64  association  window,
+      s34g  bit-exact);  provenance  is  now  C/quad  +  mpmath
+      dps-15  cross.
   2.  Formal:  THE  ENDPOINT  IS  NAMED  AND  THE  SPINE  IS
       CORRECT  -  RHEnd.rh_program78  is  GATED  (four  of  the
       squeeze  regimes  closed  IN  BODY;  the  named  residual
