@@ -105,4 +105,24 @@ neighboring heights (1e8G exact vs +240: logzeta 1.455437142349 vs
    1e9G -1.211098446310 / 1e10G 0.455887846369 / 3e10G 2.012486593295.
 3. The far-row M integers recomputed on exact-t channels are unchanged
    (s34g: quantization residual 0 for 1e8G/3e8G/5e8G).
-4. The 5e8G two-state question is the only residue; T2-T4 settle it.
+4. THE 5e8G TWO-STATE QUESTION IS CLOSED: the two values were two
+   HEIGHTS (exact t vs repr t+200), not two width states.  T1/T2 (fresh
+   dps-40, exact t) and T3 (prec-78 forced, exact t) all return the
+   clean 2.937019955061246 (= C, all digits);  T4 (fresh dps-40, repr
+   t+200) returns the old 1.7289704098077738 through the SAME clean
+   width chain.  The old evidence 'wp_sum = 175' was a misattributed
+   field, not a corrupted low width.
+5. RESOLUTION FLOOR (s34w):  at coarse digit settings (dps-15) the
+   repr shifts of the low rows (2..48 units at 6e16..6e17) are
+   INVISIBLE - the width estimate (53-bit branch) quantizes the sieved
+   term count to an effective height resolution of ~9..90 units.  The
+   old s25 anchors were taken at dps-40, where those shifts show;  the
+   high-row shifts (120..256 units) show even at dps-15.
+6. BOUNDARY (s34k, t = 2190076357998684160, a = 5.9039e8):  C =
+   -1.863686420607;  mpmath dps-15 = dps-40 = -1.8636864206066681
+   (bit-identical through 17 digits).  No precision- or dps-induced
+   discrepancy at the boundary;  the historical 'dps-40 collapse'
+   readings are the same height / artifact class.
+7. The static data reading guide (exact heights, repr offsets, channels,
+   old anchors, M identity inputs, provenance, trap list) is the
+   generated ledger:  docs/DATA-LEDGER.md.

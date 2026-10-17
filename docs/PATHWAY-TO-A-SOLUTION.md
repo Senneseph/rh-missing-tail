@@ -334,7 +334,24 @@ for the ACTUAL zeta zero set.  The branches:
       near  log  law  -  the  residual  shape  is  NOW
       EXACTLY  IDENTIFIED  (no  free  shape  parameter);
       the  s33  "degeneracy  survives"  reading  is
-      SUPERSEDED.  Feeds  B1  (the  walk)  and  B5  (law
+      SUPERSEDED.  DATA  READING  GUIDE:  docs/DATA-LEDGER.md
+      (generated,  machine-verified  tables:  exact  f64  row
+      integers,  repr  offsets,  the  channel  of  record,  the
+      old  anchors,  the  M  identity  inputs,  provenance,  the
+      audit  trap  list)  -  read  it  before  interpreting  any
+      far  number.  RESOLUTION  FLOOR  (s34w,  measured):  the
+      repr  offsets  of  the  four  low  rows  (2..48  units)  are
+      INVISIBLE  at  dps-15  (the  53-bit  width  estimate
+      quantizes  the  term  count  to  an  effective  height
+      resolution  of  ~9..90  units  at  6e16..6e17)  but  WERE
+      resolved  at  the  s25  dps-40:  s34x  re-ran  those  repr
+      heights  at  dps-40  (fresh  process  each)  and  ALL  FOUR
+      OLD  LOW  ANCHORS  REPRODUCE  BIT-EXACTLY  (dt  =  0.0  to
+      the  printed  float),  with  the  exact-height  control  at
+      the  canonical  value  to  1  ulp  -  the  repr-t  artifact
+      record  is  CLOSED  for  the  ENTIRE  row  set  (the  high
+      rows'  120..256  unit  offsets  reproduce  even  at  dps-15
+      and  are  adjudicated).  Feeds  B1  (the  walk)  and  B5  (law
       territory);
 
 ## 3.  Measured constraints  (anything that proves RH must

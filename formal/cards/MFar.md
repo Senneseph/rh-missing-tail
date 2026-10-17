@@ -1,4 +1,4 @@
-# MFar.lean  (128 lines)
+# MFar.lean  (134 lines)
 WHAT:  THE FAR-M LAW PINS: the past-the-wall M channel, the quadratic
          identified (128 lines).
 HOW:   Pinned (s33b record, s34o re-issue): the six far-row M values

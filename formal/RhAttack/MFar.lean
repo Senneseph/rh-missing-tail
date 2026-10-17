@@ -48,7 +48,9 @@ namespace MFa
 
 /--  G  =  3.0001045999981975555e10  (the  f64  row scale;
     t  =  G  *  (t/G);  the  exact  f64  row  integers  are
-    pinned  directly  below  and  the  gates  work  on  them).  -/
+    pinned  directly  below  and  the  gates  work  on  them
+    -  gate  (0)  checks  Gc  itself  against  the  pinned
+    rows).  -/
 noncomputable def Gc : ℝ := (30001045999981975555 : ℝ) / 10 ^ 9
 
 /-  ##  the  pinned  rows  (exact  f64  integer  heights;
@@ -93,6 +95,8 @@ noncomputable def D30 : ℝ := -(87977656784304 : ℝ) / 10
     rounding  (t10  =  10  t9  -  49152;  t30  =  3  t10
     +  65536)  -  the  height  gates  are  1e-4  windows
     around  the  10x  /  3x  steps:
+      (0)   Gc  is  the  row  scale:  t9 / Gc  in  [0.99999,
+            1.00001]  *  1e9;
       (i)   t10  in  [9.9999,  10.0001]  *  t9  and  t30  in
             [3.0000,  3.0001]  *  t10;
       (ii)  the  adjacent  |D|  ratios  land  in  the
@@ -110,6 +114,8 @@ noncomputable def D30 : ℝ := -(87977656784304 : ℝ) / 10
     norm_num.  No  RH  claim:  this  is  the  measured
     record  of  the  far  M  channel.  -/
 theorem pinGates :
+    99999 / 100000 * (10 ^ 9 : ℝ) ≤ t9 / Gc ∧
+    t9 / Gc ≤ 100001 / 100000 * (10 ^ 9 : ℝ) ∧
     99999 / 10000 * t9 ≤ t10 ∧ t10 ≤ 100001 / 10000 * t9 ∧
     (3 : ℝ) * t10 ≤ t30 ∧ t30 ≤ 30001 / 10000 * t10 ∧
     (100 : ℝ) * (10000 / 10001) ≤ -D10 / -D9 ∧
@@ -121,7 +127,7 @@ theorem pinGates :
     (-D30 / t30 ^ 2) * (1000 / 1001) ≤ -D10 / t10 ^ 2 ∧
     -D10 / t10 ^ 2 ≤ (-D30 / t30 ^ 2) * (1001 / 1000) ∧
     -M30 ≤ 101 / 100 * (-D30 / t30 ^ 2) * t30 ^ 2 := by
-  simp only [D9, D10, D30, t9, t10, t30, M30]
+  simp only [D9, D10, D30, t9, t10, t30, M30, Gc]
   field_simp
   norm_num
 
