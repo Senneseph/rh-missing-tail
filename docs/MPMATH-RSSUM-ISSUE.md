@@ -8,30 +8,39 @@ No RH claim anywhere; this is a pure numerical-accuracy report.
 ## Short version
 
 `mpmath.zeta(0.5 + 1j*t)` for large t, evaluated through the
-Riemann-Siegel path (`rszeta`, `sigma = 1/2`, `der = 0`), returns
-values at dps >= 20 that disagree with dps 15 and with two
-independent fixed-precision (quad-double) assemblies by up to ~5
-in `log|zeta|`.  The disagreement is NOT a precision-limiting
-effect: raising dps from 20 to 40 leaves the value digit-identical,
-while dps 15 alone is the outlier-looking branch.  The error is
-localized to the ADR rssum correction (the Arias-de-Reyna
-F/coefficient chain), not to the primary S1 sum.
+Riemann-Siegel path (`rszeta`), returned the WRONG value at dps >= 20 in
+several independent past runs, and the right value when re-run.  The
+right and wrong values are each internally reproducible; which one a
+fresh process returns depends on the internal S1 working width the
+Riemann-Siegel code chooses for that run.  The WRONG runs used a
+narrower S1 width (captured 175 bits) than the RIGHT runs (235 bits),
+and a too-narrow S1 width makes the ADR rssum F/coefficient correction
+return O(10) garbage instead of its natural ~1e-5 scale.  This is
+NOT a precision-limiting effect: raising dps from 20 to 40 did not,
+by itself, fix the value, and the dps-15 run is the clean one.
 
 ## Reproduction sketch
 
 At a single height (the f64 integer 15000522999990988800, ~1.5e19),
 one fresh process per dps:
 
-  dps    log|zeta(1/2 + i t)|     |zeta|
-  15     +2.9370199551            18.859560149492072
-  20     +1.7289704098            5.63538...
-  30     +1.7289704098            5.63538...
-  40     +1.7289704098            5.63538...
+  dps    log|zeta(1/2 + i t)|     |zeta|        class
+  15     +2.9370199551            18.8595601495  CLEAN
+  20     +1.7289704098            5.63538...     CORRUPTED
+  30     +1.7289704098            5.63538...     CORRUPTED
+  40     +1.7289704098            5.63538...     CORRUPTED
+  40 (re-run, fresh process)      +2.9370199551  18.85956014949     CLEAN
 
-So dps 20/30/40 agree with each other to 10 digits and dps 15 is
-the lone value.  That pattern (a stable "wrong" value at high dps,
-a different value at low dps) is the signature of a working-width
-threshold inside the algorithm, not of rounding.
+So dps 20/30/40 agreed with each other to 10 digits and dps 15 was
+the lone value in the original batch - but a second fresh dps-40
+process returned the CLEAN value, digit-identical to dps 15.  The
+stable "wrong" value in the first batch is therefore NOT a property
+of dps >= 20 per se: the same (dps = 40, t) call returns a class that
+depends on the internal S1 working width actually used in that run
+(captured 175 bits in the corrupted run vs 235 bits in the clean
+re-run; the clean width matches the fully static reproduction of
+the code's width chain: wptR = 173/174, wpsm = 215, wp_s1 = 235,
+L = 6).
 
 ### Decomposition (the localizing evidence)
 
@@ -78,22 +87,30 @@ runtime .so):
 
 The full RS C form and the bare-cosine C form agree to ~1e-5 (the
 rssum*S3 + O(t^-1/4) scale), and mpmath at dps 15 agrees with the C
-full RS form to ~1e-14 (same S1, same rssum magnitude).  mpmath at
-dps >= 20 does not.  The independent bare-cosine assembly - which
-cannot inherit an rssum/F-table bug - corroborates the dps-15 and C
-values against the dps-20+ mpmath values.
+full RS form to ~1e-14 (same S1, same rssum magnitude); the CLEAN
+dps-40 re-run agrees too.  The independent bare-cosine assembly -
+which cannot inherit an rssum/F-table bug - corroborates the clean
+values against the corrupted-class mpmath values.
 
 ## Where to look (hypothesis, not a fix)
 
-`mpmath/functions/rszeta.py`, the rssum construction: the ADR
-F(m) coefficients, the `D[n,k]` table, and the working precision
-allocated to their Horner/sum evaluation.  The F table is computed
-at a precision that is a function of the outer dps; the evidence is
-consistent with a too-small working width (or a too-coarse
-fixed-point cutoff) in that chain at dps >= 20 for these large N
-(N ~ 1.5e9 terms), while the S1 sum has its own internal `wpsum`
-auto-width and is unaffected.  The S1 side is exonerated directly
-(zetasum_sieved output is identical and correct at both precisions).
+`mpmath/functions/rszeta.py`:  the width chain.  For the critical
+line the entry precision of `Rzeta_set` is set by `zeta_half` as
+`wpR = 3 + ctx.mag(1.1 + 2*X) + wpinitial + 1` with `X = sqrt(|s|)`;
+`Rzeta_set` then sets `wpsum = 4 + mag((N+sqrt N) ln N / eps1)` and
+calls the S1 sieve at `wpsum + 10`.  A static reproduction of that
+chain at the height above gives exactly the CLEAN run's captured
+widths (wpR 173/174, wpsum 215, wp_s1 235, L 6).  The CORRUPTED
+run captured wp_s1 = 175, which implies `Rzeta_set` was entered
+with a far smaller entry precision (effective user precision
+~76 bits instead of 136) - i.e. the corrupted runs behave as if
+`zeta()` ran at a much lower precision than the context states.
+The rssum/S3 component is the one that produces O(10) garbage
+under that degraded width state (S1 itself stays exact in both
+classes, matching the independent C S1 to ~2e-14).  The trigger
+that puts the process into the degraded-width state is not yet
+established (a double fresh-process width-trace with a full
+call record is the pending decisive experiment).
 
 ## Suggested tests to add
 

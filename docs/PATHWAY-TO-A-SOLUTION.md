@@ -240,13 +240,34 @@ for the ACTUAL zeta zero set.  The branches:
       it  matches  fresh  mpmath  to  ~1e-12  at  t  =  1e17..
       1.5e18,  and  an  INDEPENDENT  bare-cosine  assembly  (no
       F/c/rssum  tables)  agrees  with  it  to  1.3e-5..2.9e-5  at
-      1e8G/3e8G/5e8G/1e9G.  The  5e8G  decomposition  (S1  vs
-      rz  =  S1  +  rssum*S3  at  dps-15  and  dps-40,  same  t)
-      LOCALIZES  THE  MPMATH  BUG  TO  THE  RSSUM  F/COEFFICIENT
-      CHAIN  AT  THE  HIGH  WORKING-WIDTH  CHAINS  (J  >=  ~33,
-      L  =  4,  M  =  9-12;  the  dps-15  chain  is  clean)  -
-      S1  (zetasum_sieved)  IS  EXACT  AT  EVERY  RELEVANT
-      PRECISION  (S1  dps-40  =  C  S1  to  ~2e-14).  The
+      1e8G/3e8G/5e8G/1e9G.  THE  5e8G  DECOMPOSITION  (S1  vs  rz
+      =  S1  +  rssum*S3,  instrumented)  LOCALIZES  THE  DAMAGE
+      TO  THE  RSSUM  F/COEFFICIENT  CORRECTION  -  S1
+      (zetasum_sieved)  IS  EXACT  IN  BOTH  CLASSES  (S1
+      dps-40  =  C  S1  to  ~2e-14).  REVISED  SAME  EVENING
+      (discovery  0102):  there  are  TWO  INTERNALY-CONSISTENT
+      CLASSES  of  mpmath  output  at  this  height.  CLEAN:
+      today's  fresh  dps-15  AND  fresh  dps-40  runs,  both
+      logabsz  =  2.937019955061246,  rssumS3  =  1.18e-05;  the
+      dps-40  run's  captured  S1  width  (235)  EQUALS  EXACTLY
+      the  static  reproduction  of  the  code  width  chain
+      (wpR  =  174,  wpsum  =  215,  wp_s1  =  235,  L  =  6)  -
+      the  clean  class  IS  the  canonical  path.  CORRUPTED:
+      the  old  dps-20/30/40  anchors  AND  today's  first
+      instrumented  dps-40  run,  all  1.7289704098  to  10
+      digits,  rssumS3  =  13.86,  with  an  ANOMALOUS  LOW  S1
+      width  (captured  175,  implying  Rzeta_set  was  entered
+      at  ~114  bits  -  an  effective  USER  precision  ~76
+      vs  136).  WHY  A  PROCESS  ENTERS  THE  DEGRADED-WIDTH
+      STATE  IS  NOT  YET  ESTABLISHED.  THE  FRESH  DOUBLE
+      WIDTH-TRACE  (s34l:  two  new  dps-40  processes  at  5e8G
+      with  a  FULL  internal  call  record,  queued  behind
+      s34j)  IS  THE  DECISIVE  EXPERIMENT:  two  clean  runs  ->
+      the  old  anchors  came  from  a  now-vanished  state
+      (script-version  or  environment  dependent);  a
+      divergent  run  ->  mpmath  is  genuinely
+      NONDETERMINISTIC  at  these  heights  (a  worse,
+      more  urgent  bug  for  the  upstream  report).  The
       dps-20+  zeta  anchors  of  the  THREE  FAR  ROWS  ARE
       THEREFORE  CORRECTED  (provenance  C/quad,  cross-checked):
       1e8G  logzeta  =  1.455437142349  (was
@@ -265,9 +286,16 @@ for the ACTUAL zeta zero set.  The branches:
       cross  d  =  8.8e-06),  1e10G  logzeta  =
       0.455887846369,  3e10G  logzeta  =  2.012486593295;
       the  M  values  of  these  rows  need  the  stream
-      channels  (s34f  1e9G  queued;  s34j  1e10G+3e10G
-      queued)  -  the  g-side  degeneracy-break  rows  are  now
-      a  COMPUTATION  TASK,  not  a  wall.  SUB-WALL  ROWS  ARE
+      channels.  THE  1e9G  ROW  IS  NOW  LOCKED  (s34f):
+      M  =  -10384437248,  EXACT  INTEGER  (quantization
+      resid  exactly  0.0;  stage-A  M_partial  ==  stage-B  M
+      to  the  bit  -  the  f64  sum  absorbs  the  lz  term  at
+      this  height;  full  |Z|  0.297869906  vs  bare  |Z|
+      0.297861108,  d  =  8.8e-06)  -  the  FIRST  PAST-THE-WALL
+      CENSUS  ROW  IS  ON  THE  RECORD  WITH  A  PROVEN  C
+      CHANNEL.  s34j  1e10G+3e10G  is  queued;  the  g-side
+      degeneracy-break  is  now  a  COMPUTATION  TASK,  not  a
+      wall.  SUB-WALL  ROWS  ARE
       CLEAN  (re-verified  post-correction):  the  LAST  sub-wall
       census  row  is  5e7G  (a  =  4.886e8),  which  is  the
       SAME  height  class  as  the  verified-clean  point
