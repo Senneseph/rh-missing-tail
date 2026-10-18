@@ -96,9 +96,11 @@ noncomputable def tPT : ℝ := 30610046000
     +- 2^-102;  an independent verification that the line carries
     them all to that height;  the public zero stream ends there):
     every zero of the set up to height H sits on the critical line.
-    The higher literature frontier (RH verified up to 3 x 10^12,
-    Platt-Trudgian,  arXiv:2004.09765) is a stronger add-on input;
-    the tree pins the record's own frontier.  This is a fact about
+    The higher literature frontier (RH verified up to height
+    3,000,175,332,800,  Platt-Trudgian,  arXiv:2004.09765) is now
+    pinned in the tree as tPT2 (section  D)  and cited the same
+    way;  tPT remains the record's own frontier.  This is a fact
+    about
     the ACTUAL zero set,  carried as a named hypothesis by design
     (the Z78 pattern). -/
 def allOnLineUpTo (q : ZeroSet) (H : ℝ) : Prop :=
@@ -499,5 +501,78 @@ theorem rvmGateDischarged (q : ZeroSet)
     abs ((Ntot q tdata ht0 : ℝ) - (rvm3e9 : ℝ)) ≤ 3 := by
   rw [hcount]
   norm_num [Nline, rvm3e9]
+
+
+/-  ##  Section  D  -  THE  PLATT-TRUDGIAN  FRONTIER:  THE  SPLIT  AT
+    ANY  FRONTIER  (discovery  0115)
+
+  The  record  frontier  tPT  (Platt  isolation,  end  of  the
+  public  stream)  is  NOT  the  highest  rigorous  frontier  in
+  the  literature:  arXiv:2004.09765  (Platt  &  Trudgian,  "The
+  Riemann  hypothesis  is  true  up  to  3x10^12")  verifies  RH
+  rigorously  (interval  arithmetic,  rigorous  truncation
+  bounds)  up  to  height  3,000,175,332,800:  the  lowest
+  12,363,153,437,138  non-trivial  zeros  have  Re  =  1/2,  and
+  the  paper  notes  it  INDEPENDENTLY  VERIFIES  the  Platt
+  tPT  isolation.  This  section  pins  that  frontier  as  tPT2
+  and  generalizes  the  face  split  to  an  arbitrary  frontier
+  H:  under  [Z-H]  (allOnLineUpTo  q  H)  the  hWin  face  is
+  ZERO-EXCLUSION  ON  (H,  inf)  x  (0,  1/200),
+  hWinFaceResidualH  q  H  -  with  the  tPT  statement
+  recovered  as  the  H  =  tPT  instance.  The  monotonicity
+  faceResidualMonotone  makes  the  shrink  relation  between
+  the  two  frontiers  explicit  (the  face  at  the  SMALLER
+  frontier  implies  the  face  at  the  LARGER  one;  the  gap
+  between  them  is  open  content,  not  in  the  tree).
+  RHEnd  part  B6  instantiates  the  endpoint  at  BOTH
+  frontiers.  No  RH  claim:  both  [Z-PT]  and  [Z-PT2]  are
+  CITED  (classical,  docstring  references),  and  the
+  above-frontier  faces  stay  OPEN  at  either  frontier.  -/
+
+/--  THE  PLATT-TRUDGIAN  VERIFIED  FRONTIER  (arXiv:2004.09765,
+    Theorem  1):  RH  is  true  up  to  height
+    3,000,175,332,800  -  the  lowest  12,363,153,437,138
+    non-trivial  zeros  have  Re  =  1/2  (rigorous  interval
+    arithmetic;  independently  verifies  the  Platt  tPT
+    record).  Cited  like  [Z-PT].  -/
+noncomputable def tPT2 : ℝ := 3000175332800
+
+/--  THE  FRONTIER  ORDER:  the  record  frontier  is  strictly
+    below  the  verified  frontier  (one  norm_num).  -/
+theorem ptFrontierOrder : tPT < tPT2 := by
+  norm_num [tPT, tPT2]
+
+/--  THE  hWin  RESIDUAL  FACE  AT  FRONTIER  H:  zero-exclusion
+    of  off-line  zeros  on  (H,  inf)  x  (0,  1/200)  at  height
+    at  least  1000.  hWinFaceResidual  q  is  the  H  =  tPT
+    instance  (kept  for  the  existing  endpoint  variants).  -/
+def hWinFaceResidualH (q : ZeroSet) (H : ℝ) : Prop :=
+    ∀ (t0 d0 : ℝ), 1000 ≤ t0 → t0 > H → 0 < d0 → d0 < (1 / 200 : ℝ) →
+      ¬ P12.offPair q t0 d0
+
+/--  MONOTONICITY  OF  THE  RESIDUAL  IN  THE  FRONTIER:  the  face
+    at  the  SMALLER  frontier  implies  the  face  at  the  LARGER
+    one  (zero-exclusion  on  a  larger  interval  is  the
+    stronger  statement).  The  reverse  direction  over  a
+    nontrivial  gap  is  exactly  the  open  content  between  the
+    frontiers  -  not  in  the  tree.  -/
+theorem faceResidualMonotone (q : ZeroSet) (H1 H2 : ℝ)
+    (hH : H2 ≤ H1) : hWinFaceResidualH q H2 → hWinFaceResidualH q H1 :=
+  fun hf t0 d0 ht0 ht1 hd0 hdw =>
+    hf t0 d0 ht0 (lt_of_le_of_lt hH ht1) hd0 hdw
+
+/--  THE  FACE  SPLIT  AT  AN  ARBITRARY  FRONTIER  H:  under  [Z-H]
+    (allOnLineUpTo  q  H)  the  hWin  face  is  the  residual  at
+    H.  faceSplit  is  the  H  =  tPT  instance  (unchanged).  -/
+theorem faceSplitH (q : ZeroSet) (H : ℝ)
+    (hPT : allOnLineUpTo q H) :
+    S4WC.hWinFace q ↔ hWinFaceResidualH q H := by
+  constructor
+  · intro hf t0 d0 ht0 htgt hd0 hdw
+    exact (S4WC.hwinFaceImpliesZeroExclusion q hf) t0 d0 ht0 hd0 hdw
+  · intro hr t0 d0 ht0 hd0 hdw hz
+    by_cases hle : t0 ≤ H
+    · exact False.elim ((noOffPairBelowPT q H hPT t0 d0 ht0 hd0 hdw hle) hz)
+    · exact False.elim ((hr t0 d0 ht0 (not_le.mp hle) hd0 hdw) hz)
 
 end WinC

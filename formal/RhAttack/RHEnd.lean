@@ -614,4 +614,210 @@ theorem rh_program78_stripfront (q : ZeroSet)
     exact False.elim ((WinC.noOffLineBelowPT q WinC.tPT hPT t0
       (le_of_lt ht0) hle) d0 hp)
 
+
+/-  ##  Part  B6  -  THE  ENDPOINT  AT  ANY  FRONTIER,  AND  AT  THE
+    PLATT-TRUDGIAN  VERIFIED  FRONTIER  (discovery  0115)
+
+  The  bodies  of  rh_program78_frontier  (part  B4)  and
+  rh_program78_stripfront  (part  B5)  are  UNIFORM  in  the
+  frontier  H:  below  H  every  named  residual  is  vacuous
+  (noOffLineBelowPT),  and  above  H  only  the  residual  faces
+  are  asserted.  This  part  writes  them  once  with  H  as  a
+  PARAMETER  (hH:  1000  <=  H  -  for  the  hS2low  vacuity)  and
+  instantiates  at  BOTH  cited  frontiers:
+
+      tPT  =  30,610,046,000       (Platt  isolation  record,
+                                    the  record's  own  frontier;
+                                    [Z-PT])
+      tPT2 =  3,000,175,332,800    (Platt-Trudgian,
+                                    arXiv:2004.09765,  Theorem  1;
+                                    rigorous  interval  arithmetic;
+                                    independently  verifies  the
+                                    tPT  record;  [Z-PT2])
+
+  At  the  stronger  frontier  the  entire  residue  of  the
+  endpoint  (G-hs1,  G-hs3,  the  window  zero-exclusion  face)
+  lives  STRICTLY  ABOVE  3,000,175,332,800  instead  of  above
+  30,610,046,000  -  the  open  height  interval  shrinks  by  a
+  factor  of  about  100  at  ZERO  COMPUTATIONAL  COST  (the
+  citation  is  a  published,  rigorous,  independently
+  verifiable  record;  no  new  zero  walk  is  claimed).  The
+  monotonicity  (WinC.faceResidualMonotone)  says  exactly  how
+  the  two  variants  relate:  the  tPT  residual  face  implies
+  the  tPT2  residual  face  (same  for  the  hs  faces,  by
+  the  same  interval  inclusion);  the  gap  (tPT2,  ...  )  -
+  content  BELOW  tPT2  but  ABOVE  tPT  -  is  NOT  closed  by
+  either  citation  in  the  tree  beyond  what  [Z-PT2]  says.
+  Same  honesty  as  every  earlier  variant:  [Z-PT]  /  [Z-PT2]
+  CITED  (classical,  docstring  references);  the  above-
+  frontier  faces  OPEN;  no  RH  claim.  -/
+
+/--  THE  ENDPOINT  COLLAPSED  TO  AN  ARBITRARY  CITED  FRONTIER  H
+    (the  part  B4  body  with  H  as  a  parameter):  under  [Z-H]
+    (all  non-trivial  zeros  with  0  <  Im  <=  H  on  the
+    line),  the  endpoint  holds  from  hs1  and  hs3  restricted
+    to  t0  >=  H  and  the  hWin  residual  face  at  H
+    (zero-exclusion  of  (H,  inf)  x  (0,  1/200)).  Below  H
+    all  four  named  residuals  are  vacuous;  hS2low  vacuously
+    holds  on  its  whole  domain  (0  <  t0  <  1000  <=  H).  No
+    RH  claim.  -/
+theorem rh_program78_frontierH (q : ZeroSet)
+    (hz78 : Z78.externalZeroFree78)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) →
+      (|ρ.im| : ℝ) < (707 : ℝ) / 50 → ρ.re = 1 / 2)
+    (Qside : ℝ × ℝ → ℝ)
+    (H : ℝ) (hH : 1000 ≤ H)
+    (hPT : WinC.allOnLineUpTo q H)
+    (hs1H : ∀ (t0 d0 : ℝ), H <= t0 → 0 < d0 →
+      offPair q t0 d0 → Qside (t0, d0) ≥ devProg (t0, d0))
+    (hs3H : ∀ (t0 d0 : ℝ), H <= t0 → 0 < d0 →
+      offPair q t0 d0 →
+      Qside (t0, d0) ≤ Z78P12.BwireP (t0, d0) + Z78P12.MrP (t0, d0))
+    (hWinH : WinC.hWinFaceResidualH q H) :
+    RH q := by
+  refine rh_program78 q hz78 hqz honline Qside ?hs1 ?hs3 ?hWin ?hS2low
+  · --  hs1:  vacuous  below  the  frontier,  the  asserted  face
+      --  above  it.
+    intro t0 d0 ht0 hd0 hp
+    by_cases hle : t0 <= H
+    · exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
+        (le_of_lt ht0) hle) d0 hp)
+    · exact hs1H t0 d0 (le_of_lt (not_le.mp hle)) hd0 hp
+  · --  hs3:  the  same  decomposition.
+    intro t0 d0 ht0 hd0 hp
+    by_cases hle : t0 <= H
+    · exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
+        (le_of_lt ht0) hle) d0 hp)
+    · exact hs3H t0 d0 (le_of_lt (not_le.mp hle)) hd0 hp
+  · --  hWin:  the  face  identity  +  the  split  at  H.
+    exact (WinC.faceSplitH q H hPT).mpr hWinH
+  · --  hS2low:  its  whole  domain  (0,  1000)  sits  below  the
+      --  frontier:  vacuous.
+    intro t0 d0 ht0 ht0u hd0 hd0u hp
+    have hle : t0 <= H := le_trans (le_of_lt ht0u) hH
+    exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
+      (le_of_lt ht0) hle) d0 hp)
+
+/--  THE  ENDPOINT  AT  THE  PLATT-TRUDGIAN  FRONTIER  (the
+    [Z-PT2]  variant  of  rh_program78_frontier):  under  [Z78],
+    q  a  subset  of  the  actual  zeros,  the  named  on-line
+    sliver  record,  and  [Z-PT2]  (all  non-trivial  zeros  with
+    0  <  Im  <=  tPT2  on  the  line  -  arXiv:2004.09765,
+    CITED),  the  endpoint  holds  from  hs1  and  hs3  restricted
+    to  t0  >=  tPT2  plus  the  hWin  residual  face  at  tPT2
+    (zero-exclusion  on  (tPT2,  inf)  x  (0,  1/200)).  The
+    residue  lives  STRICTLY  ABOVE  3,000,175,332,800.  No  RH
+    claim.  -/
+theorem rh_program78_frontier_PT2 (q : ZeroSet)
+    (hz78 : Z78.externalZeroFree78)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) →
+      (|ρ.im| : ℝ) < (707 : ℝ) / 50 → ρ.re = 1 / 2)
+    (Qside : ℝ × ℝ → ℝ)
+    (hPT2 : WinC.allOnLineUpTo q WinC.tPT2)
+    (hs1PT2 : ∀ (t0 d0 : ℝ), WinC.tPT2 <= t0 → 0 < d0 →
+      offPair q t0 d0 → Qside (t0, d0) ≥ devProg (t0, d0))
+    (hs3PT2 : ∀ (t0 d0 : ℝ), WinC.tPT2 <= t0 → 0 < d0 →
+      offPair q t0 d0 →
+      Qside (t0, d0) ≤ Z78P12.BwireP (t0, d0) + Z78P12.MrP (t0, d0))
+    (hWinPT2 : WinC.hWinFaceResidualH q WinC.tPT2) :
+    RH q :=
+  rh_program78_frontierH q hz78 hqz honline Qside WinC.tPT2
+    (by norm_num [WinC.tPT2]) hPT2 hs1PT2 hs3PT2 hWinPT2
+
+/--  THE  ENDPOINT  OVER  THE  STRIP  FRONTIER  AT  AN  ARBITRARY
+    CITED  FRONTIER  H  (the  part  B5  body  with  H  as  a
+    parameter):  under  [Z-H],  the  endpoint  holds  from  (i)
+    the  WINDOW  face  (zero-exclusion  of  off-line  zeros  on
+    (H,  inf)  x  (0,  1/200))  and  (ii)  the  two  STRIP-BAND
+    scale  faces  (G-hs1:  scale  >=  devProg;  G-hs3:  scale  <=
+    Bwire  +  Mr)  restricted  to  t0  >=  H,  1/200  <=  d0  <=
+    1/2.  All  other  legs  of  rh_program78  are  DERIVED  IN
+    THE  BODY:  below  H  everything  is  vacuous;  in  the
+    window  band  above  H  the  window  face  kills  every
+    off-pair;  in  the  far  region  [Z78]  kills  every  off-
+    pair;  hS2low  is  vacuous  on  its  whole  domain  (0  <  t0
+    <  1000  <=  H);  hWin  is  the  face  identity  +  the
+    split.  No  RH  claim:  G-hs1/G-hs3  are  the  open  analytic
+    content.  -/
+theorem rh_program78_stripfrontH (q : ZeroSet)
+    (hz78 : Z78.externalZeroFree78)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) →
+      (|ρ.im| : ℝ) < (707 : ℝ) / 50 → ρ.re = 1 / 2)
+    (Qside : ℝ × ℝ → ℝ)
+    (H : ℝ) (hH : 1000 ≤ H)
+    (hPT : WinC.allOnLineUpTo q H)
+    (hs1StripH : ∀ (t0 d0 : ℝ), H <= t0 → (1 / 200 : ℝ) <= d0 →
+      d0 <= 1 / 2 → offPair q t0 d0 → Qside (t0, d0) ≥ devProg (t0, d0))
+    (hs3StripH : ∀ (t0 d0 : ℝ), H <= t0 → (1 / 200 : ℝ) <= d0 →
+      d0 <= 1 / 2 → offPair q t0 d0 →
+      Qside (t0, d0) ≤ Z78P12.BwireP (t0, d0) + Z78P12.MrP (t0, d0))
+    (hWinH : WinC.hWinFaceResidualH q H) :
+    RH q := by
+  refine rh_program78 q hz78 hqz honline Qside ?hs1 ?hs3 ?hWin ?hS2low
+  · --  hs1:  far  =  [Z78]  empty;  below  the  frontier  =
+      --  vacuous;  window  band  above  =  the  window  face
+      --  empty;  strip  band  above  =  the  asserted  G-hs1.
+    intro t0 d0 ht0 hd0 hp
+    by_cases hfar : d0 <= 1 / 2
+    · by_cases hle : t0 <= H
+      · exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
+          (le_of_lt ht0) hle) d0 hp)
+      · by_cases hdw : (1 / 200 : ℝ) <= d0
+        · exact hs1StripH t0 d0 (le_of_lt (not_le.mp hle)) hdw hfar hp
+        · exact False.elim ((hWinH t0 d0
+            (le_trans hH (le_of_lt (not_le.mp hle)))
+            (not_le.mp hle) hd0 (not_le.mp hdw)) hp)
+    · exact False.elim (Z78P12.offPairFarEmpty q hz78 hqz t0 d0
+        (not_le.mp hfar) hp)
+  · --  hs3:  the  same  decomposition  (G-hs3  on  the  strip
+      --  band  above  the  frontier).
+    intro t0 d0 ht0 hd0 hp
+    by_cases hfar : d0 <= 1 / 2
+    · by_cases hle : t0 <= H
+      · exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
+          (le_of_lt ht0) hle) d0 hp)
+      · by_cases hdw : (1 / 200 : ℝ) <= d0
+        · exact hs3StripH t0 d0 (le_of_lt (not_le.mp hle)) hdw hfar hp
+        · exact False.elim ((hWinH t0 d0
+            (le_trans hH (le_of_lt (not_le.mp hle)))
+            (not_le.mp hle) hd0 (not_le.mp hdw)) hp)
+    · exact False.elim (Z78P12.offPairFarEmpty q hz78 hqz t0 d0
+        (not_le.mp hfar) hp)
+  · --  hWin:  the  face  identity  +  the  split  at  H.
+    exact (WinC.faceSplitH q H hPT).mpr hWinH
+  · --  hS2low:  its  whole  domain  (0,  1000)  sits  below  the
+      --  frontier:  vacuous.
+    intro t0 d0 ht0 ht0u hd0 hd0u hp
+    have hle : t0 <= H := le_trans (le_of_lt ht0u) hH
+    exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
+      (le_of_lt ht0) hle) d0 hp)
+
+/--  THE  ENDPOINT  OVER  THE  STRIP  FRONTIER  AT  THE  PLATT-
+    TRUDGIAN  FRONTIER  (the  [Z-PT2]  variant  of
+    rh_program78_stripfront):  under  [Z-PT2],  the  endpoint
+    holds  from  the  window  face  at  tPT2  and  the  two  strip
+    scale  faces  on  t0  >=  tPT2,  1/200  <=  d0  <=  1/2  -
+    the  entire  named  residue  (G-hs1,  G-hs3,  the  window
+    zero-exclusion  face)  lives  STRICTLY  ABOVE
+    3,000,175,332,800.  No  RH  claim.  -/
+theorem rh_program78_stripfront_PT2 (q : ZeroSet)
+    (hz78 : Z78.externalZeroFree78)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) →
+      (|ρ.im| : ℝ) < (707 : ℝ) / 50 → ρ.re = 1 / 2)
+    (Qside : ℝ × ℝ → ℝ)
+    (hPT2 : WinC.allOnLineUpTo q WinC.tPT2)
+    (hs1StripPT2 : ∀ (t0 d0 : ℝ), WinC.tPT2 <= t0 → (1 / 200 : ℝ) <= d0 →
+      d0 <= 1 / 2 → offPair q t0 d0 → Qside (t0, d0) ≥ devProg (t0, d0))
+    (hs3StripPT2 : ∀ (t0 d0 : ℝ), WinC.tPT2 <= t0 → (1 / 200 : ℝ) <= d0 →
+      d0 <= 1 / 2 → offPair q t0 d0 →
+      Qside (t0, d0) ≤ Z78P12.BwireP (t0, d0) + Z78P12.MrP (t0, d0))
+    (hWinPT2 : WinC.hWinFaceResidualH q WinC.tPT2) :
+    RH q :=
+  rh_program78_stripfrontH q hz78 hqz honline Qside WinC.tPT2
+    (by norm_num [WinC.tPT2]) hPT2 hs1StripPT2 hs3StripPT2 hWinPT2
+
 end RHEnd

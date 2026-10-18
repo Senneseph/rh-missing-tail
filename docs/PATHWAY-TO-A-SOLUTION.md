@@ -653,6 +653,39 @@ for the ACTUAL zeta zero set.  The branches:
       all_goals  form  and  verified  green.  No  RH  claim;
       full  tree  green  (17450  jobs),  0  sorry,  100  cards.
 
+  FORMAL:  THE  ENDPOINT  AT  THE  PLATT-TRUDGIAN  FRONTIER
+      (discovery  0115):  the  bodies  of  rh_program78_frontier
+      and  rh_program78_stripfront  are  UNIFORM  in  the
+      frontier  -  RHEnd  part  B6  writes  them  once  with  H  a
+      PARAMETER  (rh_program78_frontierH,  rh_program78_
+      stripfrontH;  hH  1000  <=  H  for  the  hS2low  vacuity)
+      and  instantiates  at  BOTH  cited  frontiers.  The  second
+      frontier  is  the  PLATT-TRUDGIAN  verified  record
+      (arXiv:2004.09765,  Theorem  1,  verified  against  the
+      paper  this  round):  RH  is  true  up  to  height
+      3,000,175,332,800  -  the  lowest  12,363,153,437,138
+      non-trivial  zeros  have  Re  =  1/2,  rigorous  interval
+      arithmetic,  and  the  paper  independently  verifies  the
+      Platt  tPT  isolation.  Pinned  as  WinC.tPT2  with
+      ptFrontierOrder  (tPT  <  tPT2,  one  norm_num);  the  face
+      split  is  generalized  to  WinC.faceSplitH  (S4WC.
+      hWinFace  <->  hWinFaceResidualH  q  H  under  [Z-H])  with
+      faceResidualMonotone  (the  face  at  the  smaller
+      frontier  implies  the  face  at  the  larger;  the  gap
+      between  the  frontiers  is  open  content,  not  in  the
+      tree).  The  instances  rh_program78_frontier_PT2  and
+      rh_program78_stripfront_PT2  put  the  ENTIRE  named
+      residue  of  the  endpoint  (G-hs1,  G-hs3,  the  window
+      zero-exclusion  face)  STRICTLY  ABOVE  3,000,175,332,800
+      instead  of  above  30,610,046,000  -  the  open  height
+      interval  shrinks  by  about  100x  at  ZERO  computational
+      cost  (a  published,  rigorous,  independently
+      verifiable  record  replaces  a  computed  walk;  no  new
+      zeros  are  claimed).  Same  honesty  as  every  variant:
+      [Z-PT2]  CITED;  the  above-frontier  faces  OPEN;  no  RH
+      claim.  Full  tree  green  (17450  jobs),  0  sorry,  100
+      cards.
+
 ## 3.  Measured constraints  (anything that proves RH must
     reproduce these)
 

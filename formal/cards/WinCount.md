@@ -1,4 +1,4 @@
-# WinCount.lean  (503 lines)
+# WinCount.lean  (578 lines)
 WHAT:  THE hWin SHINK: the face is zero-exclusion above 3.06e10 plus the
          3e9 record shadow - pinned and certified.
 HOW:   Two independent shrinks of the hWin face's OPEN content

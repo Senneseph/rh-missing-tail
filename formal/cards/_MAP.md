@@ -236,7 +236,34 @@ A chain of named theorems;  each box names the modules.
                    scale  anti-degeneracy  lower  bound  (measured
                    shadow:  S1Marg  margins);  G-hs1  +  G-hs3  on
                    (tPT,  inf)  x  [1/200,  1/2]  ARE  the
-                   strip-band  zero-exclusion
+                   strip-band  zero-exclusion.  PART  B6  (discovery  0115):
+                   the  endpoint  at  ANY  CITED  FRONTIER  H  (the
+                   B4/B5  bodies  are  uniform  in  H)  and  at  the
+                   PLATT-TRUDGIAN  VERIFIED  FRONTIER  tPT2  =
+                   3,000,175,332,800  (arXiv:2004.09765,  Theorem
+                   1:  RH  rigorously  verified  to  that  height
+                   by  interval  arithmetic,  independently
+                   verifying  the  Platt  tPT  record;  CITED  as
+                   [Z-PT2]):  rh_program78_frontierH /
+                   rh_program78_stripfrontH  (frontier  H
+                   parameter,  hH  1000  <=  H  for  the  hS2low
+                   vacuity)  and  the  instances
+                   rh_program78_frontier_PT2  /
+                   rh_program78_stripfront_PT2  -  the  entire
+                   named  residue  (G-hs1,  G-hs3,  the  window
+                   zero-exclusion  face)  lives  STRICTLY  ABOVE
+                   3,000,175,332,800  instead  of  above
+                   30,610,046,000  (the  open  height  interval
+                   shrinks  by  about  100x  at  zero
+                   computational  cost);  the  face  monotonicity
+                   (WinCount.faceResidualMonotone:  the  face  at
+                   the  smaller  frontier  implies  the  face  at
+                   the  larger)  makes  the  relation  of  the  two
+                   variants  explicit.  WinCount  section  D:
+                   tPT2,  ptFrontierOrder  (tPT  <  tPT2),
+                   hWinFaceResidualH  q  H,  faceResidualMonotone,
+                   faceSplitH  (the  face  split  at  any  frontier:
+                   faceSplit  is  the  H  =  tPT  instance).
 
   Foundations / vocabulary
      B0 (composition atoms)  B4/B5 (detector-line notation)
