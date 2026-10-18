@@ -488,4 +488,130 @@ theorem rh_program78_frontier (q : ZeroSet)
     exact False.elim ((WinC.noOffLineBelowPT q WinC.tPT hPT t0
       (le_of_lt ht0) hle) d0 hp)
 
+/-  ##  Part  B5  -  the  endpoint  over  the  STRIP  FRONTIER
+
+  Where  the  above-frontier  faces  actually  live,  and  what
+  is  BEHIND  them  (the  lever-1  investigation,  discovery  0111):
+
+  In  the  strip  band  (t0  >=  1000,  1/200  <=  d0  <=  1/2)  the
+  four  closure  legs  form  a  CONTRADICTION  at  any  off-pair
+  zero  -  S1:  Qside  >=  devProg;  S2:  devProg  >=  floStripMin
+  (IN  BODY,  s2ActualFullBand,  no  height  cap);  S3:  Qside  <=
+  Bwire  +  Mr;  S4:  Bwire  +  Mr  <  floStripMin  (IN  BODY,
+  s4StripUnifiedFloor,  no  height  cap).  The  two  in-body  legs
+  are  closed-form  in  (t0,  d0)  and  hold  at  every  height,
+  so  above  the  frontier  the  squeeze  cycle  needs  ONLY  the
+  two  SCALE  faces  (hs1,  hs3)  on  that  band.  In  the  window
+  band  (d0  <  1/200)  the  in-body  S4  leg  does  NOT  close
+  (that  is  the  window-pin  shape)  -  but  there  the  hWin
+  residual  face  (zero-exclusion  above  the  frontier)  kills
+  every  off-pair  directly,  so  hs1/hs3  are  VACUOUS  there
+  for  t0  >  tPT.  rh_program78_stripfront  is  the  composition:
+  the  hs1/hS3  premises  of  the  frontier  endpoint  shrink  from
+  all  d0  in  (0,  1/2]  to  the  STRIP  BAND  1/200  <=  d0  <=
+  1/2  above  tPT.
+
+  What  is  BEHIND  the  two  strip  faces  (the  named  gaps  the
+  tree  does  NOT  close  in  body  -  no  RH  claim):
+      G-hs3  (scale  UPPER  bound):  at  a  hypothetical  off-line
+      zero  rho  (Re  =  1/2  +-  d0,  t0  >=  tPT)  the  kernel
+      scale  <=  p8_B(t0,  nGrow)  +  Mr.  The  tree's  B-wire  is
+      a  CRITICAL-LINE  bound:  p8_B_floor  instantiates
+      p4_T4_bound  at  Re  s  =  1/2,  and  an  off-pair  zero  has
+      Re  rho  >=  d0  >  0  from  the  line  by  definition  -
+      p8_B  is  not  applied  at  rho.  G-hs3  is  the  off-line
+      LIFT  of  the  T4  wire  (an  analytic  statement  about
+      exponential  sums  away  from  the  line;  nothing  in  the
+      tree  bounds  <<p4_Wn  rho  n>>  or  the  mass  gap  at  off-line
+      points  -  the  P3  mass  pin  is  a  premise  by  design).
+      G-hs1  (scale  LOWER  bound):  at  the  same  zero  the
+      kernel  scale  >=  devStripMin(t0,  d0)  (anti-degeneracy:
+      the  zero-side  scale  does  not  die  below  the  48-straddle
+      detector  minimum).  The  body  has  UPPER  bounds  on  the
+      kernel  (p8_B  on  the  line,  the  E1/E2  EM  bounds)  and
+      LOWER  bounds  on  the  DETECTOR  (p8_far_detector_mag_ge_two,
+      strideU_floor)  -  no  lower  bound  on  the  kernel  scale  at
+      off-line  points.  Its  measured  shadow  is  exactly  the
+      S1Marg  margin  track  (25  certified  candidates,  >=  1  to
+      2.8e7,  the  exploratory  signal  below  1  from  3.1e7  -
+      the  composite  degrading  with  height).
+  Together  G-hs1  +  G-hs3  on  (tPT,  inf)  x  [1/200,  1/2]
+  ARE  the  strip-band  zero-exclusion  (the  cycle  contradicts
+  every  off-pair),  so  the  entire  above-frontier  residue  of
+  the  endpoint  is  named:  two  analytic  gap  statements  in
+  the  strip  band  plus  the  window  zero-exclusion  face;  the
+  below-frontier  half  is  closed  by  [Z-PT].  -/
+
+/--  rh_program78_stripfront  -  THE  ENDPOINT  OVER  THE  STRIP
+    FRONTIER  (discovery  0111):  under  [Z78],  q  a  subset  of
+    the  actual  zeros,  the  named  on-line  sliver  record,  and
+    [Z-PT],  the  endpoint  holds  from  (i)  the  WINDOW  face
+    (zero-exclusion  of  off-line  zeros  on  (tPT,  inf)  x
+    (0,  1/200)  -  the  hWin  residual)  and  (ii)  the  two
+    STRIP-BAND  scale  faces  restricted  to  t0  >=  tPT,  1/200
+    <=  d0  <=  1/2  (G-hs1:  scale  >=  devProg;  G-hs3:  scale
+    <=  Bwire  +  Mr).  All  other  legs  of  rh_program78  are
+    DERIVED  IN  THE  BODY:  below  tPT  everything  is  vacuous
+    (no  off-line  zeros  below  the  frontier  at  any  offset);
+    in  the  window  band  above  tPT  the  window  face  kills
+    every  off-pair;  in  the  far  region  [Z78]  kills  every
+    off-pair;  hS2low  is  vacuous  on  its  whole  domain;
+    hWin  is  the  face  identity  +  the  split.  No  RH  claim:
+    the  named  gaps  G-hs1/G-hs3  (docstring)  are  the  open
+    analytic  content,  measured  shadows  in  S1Marg  and  the
+    line-bound  T4  wire.  -/
+theorem rh_program78_stripfront (q : ZeroSet)
+    (hz78 : Z78.externalZeroFree78)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) →
+      (|ρ.im| : ℝ) < (707 : ℝ) / 50 → ρ.re = 1 / 2)
+    (Qside : ℝ × ℝ → ℝ)
+    (hPT : WinC.allOnLineUpTo q WinC.tPT)
+    (hs1Strip : ∀ (t0 d0 : ℝ), WinC.tPT <= t0 → (1 / 200 : ℝ) <= d0 →
+      d0 <= 1 / 2 → offPair q t0 d0 → Qside (t0, d0) ≥ devProg (t0, d0))
+    (hs3Strip : ∀ (t0 d0 : ℝ), WinC.tPT <= t0 → (1 / 200 : ℝ) <= d0 →
+      d0 <= 1 / 2 → offPair q t0 d0 →
+      Qside (t0, d0) ≤ Z78P12.BwireP (t0, d0) + Z78P12.MrP (t0, d0))
+    (hWinPT : WinC.hWinFaceResidual q) :
+    RH q := by
+  refine rh_program78 q hz78 hqz honline Qside ?hs1 ?hs3 ?hWin ?hS2low
+  · --  hs1:  far  =  [Z78]  empty;  below  the  frontier  =
+      --  vacuous;  window  band  above  =  the  window  face
+      --  empty;  strip  band  above  =  the  asserted  G-hs1.
+    intro t0 d0 ht0 hd0 hp
+    by_cases hfar : d0 <= 1 / 2
+    · by_cases hle : t0 <= WinC.tPT
+      · exact False.elim ((WinC.noOffLineBelowPT q WinC.tPT hPT t0
+          (le_of_lt ht0) hle) d0 hp)
+      · by_cases hdw : (1 / 200 : ℝ) <= d0
+        · exact hs1Strip t0 d0 (le_of_lt (not_le.mp hle)) hdw hfar hp
+        · exact False.elim ((hWinPT t0 d0
+            (le_trans (by norm_num [WinC.tPT]) (le_of_lt (not_le.mp hle)))
+            (not_le.mp hle) hd0 (not_le.mp hdw)) hp)
+    · exact False.elim (Z78P12.offPairFarEmpty q hz78 hqz t0 d0
+        (not_le.mp hfar) hp)
+  · --  hs3:  the  same  decomposition  (G-hs3  on  the  strip
+      --  band  above  the  frontier).
+    intro t0 d0 ht0 hd0 hp
+    by_cases hfar : d0 <= 1 / 2
+    · by_cases hle : t0 <= WinC.tPT
+      · exact False.elim ((WinC.noOffLineBelowPT q WinC.tPT hPT t0
+          (le_of_lt ht0) hle) d0 hp)
+      · by_cases hdw : (1 / 200 : ℝ) <= d0
+        · exact hs3Strip t0 d0 (le_of_lt (not_le.mp hle)) hdw hfar hp
+        · exact False.elim ((hWinPT t0 d0
+            (le_trans (by norm_num [WinC.tPT]) (le_of_lt (not_le.mp hle)))
+            (not_le.mp hle) hd0 (not_le.mp hdw)) hp)
+    · exact False.elim (Z78P12.offPairFarEmpty q hz78 hqz t0 d0
+        (not_le.mp hfar) hp)
+  · --  hWin:  the  face  identity  +  the  split  (Part  B3).
+    exact (WinC.faceSplit q hPT).mpr hWinPT
+  · --  hS2low:  its  whole  domain  (0,  1000)  sits  below  the
+      --  frontier:  vacuous.
+    intro t0 d0 ht0 ht0u hd0 hd0u hp
+    have hmid : (1000 : ℝ) <= WinC.tPT := by norm_num [WinC.tPT]
+    have hle : t0 <= WinC.tPT := le_trans (le_of_lt ht0u) hmid
+    exact False.elim ((WinC.noOffLineBelowPT q WinC.tPT hPT t0
+      (le_of_lt ht0) hle) d0 hp)
+
 end RHEnd

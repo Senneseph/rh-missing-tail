@@ -1,5 +1,6 @@
 import Mathlib
 import RhAttack.MFar
+import RhAttack.W2Telescope
 
 /-
 B7Far.lean  -  the  B7  FAR-SIDE  FACE  (the  census  drift;
@@ -201,5 +202,83 @@ def b7OpenFace (gen : (ℝ → ℝ) → (ℝ → ℝ)) : Prop :=
       (∀ g, 0 ≤ g → 0 ≤ E g) ∧
       gen E MFa.t9 = MFa.D9 ∧ gen E MFa.t10 = MFa.D10 ∧
       gen E MFa.t30 = MFa.D30
+
+/-  ##  Section  D  -  THE  WALK  CONSUMER  (discovery  0112)
+
+  The  B7F  card's  first  consumer  candidate  was  "the  walk  (B1)"  -
+  in  the  current  module  layout  the  walk  operator  is  the  W2
+  tail  walk  W2T.DN  (W2Telescope  +  W2Beyond  drift  laws):
+  DN  N0  Nas  j  =  N0  +  j  -  Nas  j,  with  the  drift  step
+  law  (W2Beyond.driftStep):  DN(j+1)  -  DN(j)  =  1  -  (Nas(j+1)
+  -  Nas(j)).  b7OpenFace  asks  for  a  mechanism  map  gen  that
+  reproduces  the  three  pinned  drifts  D9/D10/D30  from  an
+  excess  E  supported  on  the  g  window.  The  WALK  CANDIDATE  is
+  the  structural  statement  that  gen  IS  the  tail-walk  drift
+  operator  (over  the  three  consecutive  steps  1,  2,  3  with
+  N0  =  0  and  Nas(0)  =  0)  -  stated  as  its  own  face  in  the
+  b7OpenFace  pattern  (b7WalkFace)  and  RESOLVED  by  construction
+  (b7WalkHitAny  /  b7WalkFaceTrue):  for  ANY  three  real  values
+  a,  b,  c  there  is  a  count  grid  NasGrid  whose  walk  drift
+  hits  them  exactly  at  steps  1,  2,  3  (NasGrid(1)  =  1  -  a,
+  NasGrid(2)  =  2  -  b,  NasGrid(3)  =  3  -  c,  zero  elsewhere):
+  the  walk  operator  carries  NO  structural  constraint  on  a
+  drift  triple  -  the  pinned  D  values  are  trivially  in  its
+  image.  The  open  link  of  the  walk  candidate  is  recorded
+  honestly:  the  E  ->  grid  map  (how  the  far  excess  drives
+  the  count  grid  increments)  is  NOT  in  the  tree  -  the
+  excess  of  b7OpenFace  stays  free  here.  No  RH  claim:  this
+  resolves  the  walk-side  question  for  the  drift  OUTPUT  and
+  leaves  the  mechanism  INPUT  as  the  named  open  link.  -/
+
+/--  b7WalkFace  -  THE  B7  FACE  RESTRICTED  TO  THE  WALK
+    CANDIDATE  (the  b7OpenFace  pattern  with  gen  =  the  W2
+    tail-walk  drift  operator  over  the  three  consecutive
+    steps,  N0  =  0):  there  exists  a  count  grid  whose
+    walk  drift  from  step  0  hits  the  three  pinned  D
+    values  exactly  at  steps  1,  2,  3.  The  excess  E  of
+    b7OpenFace  is  not  part  of  this  face:  the  E  ->  grid
+    link  is  the  open  input  (docstring).  -/
+def b7WalkFace : Prop :=
+    ∃ (NasGrid : ℕ → ℝ),
+      W2T.DN 0 NasGrid 1 - W2T.DN 0 NasGrid 0 = MFa.D9 ∧
+      W2T.DN 0 NasGrid 2 - W2T.DN 0 NasGrid 0 = MFa.D10 ∧
+      W2T.DN 0 NasGrid 3 - W2T.DN 0 NasGrid 0 = MFa.D30
+
+/--  b7WalkHitAny  -  the  WALK  OPERATOR  HAS  EMPTY  STRUCTURAL
+    CONSTRAINT  on  a  drift  triple:  for  ANY  three  real
+    values  a,  b,  c  there  is  a  count  grid  whose  tail-walk
+    drift  hits  them  at  steps  1,  2,  3  (N0  =  0,  Nas(0)  =
+    0).  Pure  construction  from  the  W2T.DN  definition  (the
+    grid  is  free  at  the  three  steps  -  the  drift  step  law
+    W2Beyond.driftStep  is  the  mechanism  by  which  the  grid
+    increments  encode  the  drift).  -/
+theorem b7WalkHitAny (a b c : ℝ) :
+    ∃ (NasGrid : ℕ → ℝ),
+      W2T.DN 0 NasGrid 1 - W2T.DN 0 NasGrid 0 = a ∧
+      W2T.DN 0 NasGrid 2 - W2T.DN 0 NasGrid 0 = b ∧
+      W2T.DN 0 NasGrid 3 - W2T.DN 0 NasGrid 0 = c := by
+  refine ⟨(fun (i : ℕ) =>
+      if i = 1 then 1 - a
+      else if i = 2 then 2 - b
+      else if i = 3 then 3 - c
+      else 0), ?_, ?_, ?_⟩
+  · dsimp only [W2T.DN]
+    split_ifs <;> (try contradiction) <;> ring
+  · dsimp only [W2T.DN]
+    split_ifs <;> (try contradiction) <;> ring
+  · dsimp only [W2T.DN]
+    split_ifs <;> (try contradiction) <;> ring
+
+/--  b7WalkFaceTrue  -  THE  WALK  CANDIDATE  IS  A  WITNESS  SHAPE
+    for  the  B7  far-drift  face:  b7WalkFace  holds  (the  three
+    pinned  D  values  are  in  the  tail-walk  drift  image).  So
+    the  walk  is  NOT  structurally  excluded  as  the  B7
+    mechanism  -  and  the  remaining  open  link  of  the  walk
+    candidate  is  exactly  the  E  ->  grid  input  map  (the
+    excess  driving  the  count-grid  increments),  which  is  NOT
+    in  the  tree.  No  RH  claim.  -/
+theorem b7WalkFaceTrue : b7WalkFace := by
+  obtain ⟨NasGrid, h9, h10, h30⟩ := b7WalkHitAny MFa.D9 MFa.D10 MFa.D30
+  exact ⟨NasGrid, h9, h10, h30⟩
 
 end B7F

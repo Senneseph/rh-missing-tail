@@ -1,4 +1,4 @@
-# RHEnd.lean  (491 lines)
+# RHEnd.lean  (617 lines)
 WHAT:  THE ENDPOINT of the program on the ACTUAL zeta zero set under the
          named external input [Z78] (Re s > 7/8 zero-free), at the
          CONCRETE wire, with maximal concretization: the residual is
@@ -63,4 +63,24 @@ GOTCHA: No RH claim: hs1/hs3/hWin/hS2low are OPEN (data and bound-level,
           named residuals on (0, inf) x (0, 1/2)) reduces to content
           STRICTLY ABOVE tPT = 3.06e10; no RH claim - the open content
           is the above-frontier bound-level faces, where no instrument
-          in the tree reaches.
+          in the tree reaches. PART B5 (discovery 0111):
+          rh_program78_stripfront - the endpoint OVER THE STRIP
+          FRONTIER: in the strip band (t0 >= 1000,  1/200 <= d0 <= 1/2)
+          the four closure legs form a contradiction at any off-pair
+          (S1:  scale >= devProg;  S2:  devProg >= floStripMin IN BODY
+          no cap;  S3:  scale <= Bwire + Mr;  S4: Bwire + Mr <
+          floStripMin IN BODY no cap),  and in the window band above tPT
+          the hWin zero-exclusion kills every off-pair -  so the hs1/hs3
+          premises shrink from all d0 in (0,  1/2] to the STRIP BAND
+          above tPT. The named gaps behind the two strip faces
+          (docstring):  G-hs3 = the off-line LIFT of the critical-line
+          T4 wire  (p8_B_floor needs  Re  s  = 1/2;  an off-pair zero is
+          off the line by definition;  no kernel upper bound at off-line
+          points in the tree;  the P3 mass pin is a premise by design)
+          and  G-hs1  =  the  scale  anti-degeneracy  lower  bound
+          (body has kernel UPPER bounds and detector LOWER bounds only;
+          measured shadow  =  the  S1Marg  margin  track).  G-hs1  +
+          G-hs3  on  (tPT,  inf) x [1/200,  1/2] ARE the strip-band
+          zero-exclusion;  the entire above-frontier residue of the
+          endpoint is named:  two analytic gap statements plus the
+          window face.  No RH claim.

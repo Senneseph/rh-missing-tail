@@ -1,0 +1,16 @@
+{
+  "id": "0112",
+  "timestamp": "2026-10-18T0245:00Z",
+  "title": "B7 WALK CONSUMER WIRED: b7WalkFace PROVEN BY CONSTRUCTION - the walk operator has empty structural constraint on a drift triple, so the walk is NOT excluded as the B7 mechanism; the open link is exactly the E-to-grid INPUT map",
+  "type": "formal",
+  "severity": "minor",
+  "source": "Qwen3.8-Max-Preview via pi",
+  "summary": "B7Far section D wires the B7F card's first consumer candidate (the 'walk (B1)' of the old module layout = the W2T.DN tail-walk drift operator with the W2Beyond drift step law). b7WalkFace states the b7OpenFace pattern restricted to gen = the W2 tail-walk drift over three consecutive steps (N0 = 0, Nas(0) = 0), and b7WalkHitAny proves by construction that for ANY three reals a, b, c there is a count grid whose walk drift hits them at steps 1, 2, 3 (grid = i - value_i at i in {1,2,3}, 0 elsewhere): the walk is NOT structurally excluded as the B7 mechanism, and the remaining open link of the walk candidate is exactly the E -> grid input map (the excess driving the count-grid increments), which is not in the tree. b7WalkFaceTrue instantiates the pins. Full tree green (17450 jobs), 0 sorry, 100 cards. No RH claim.",
+  "details": {
+    "module": "formal/RhAttack/B7Far.lean (section D)",
+    "lean": "b7WalkFace (Prop, b7OpenFace pattern with gen = W2T.DN drift over steps 1,2,3, N0 = 0); b7WalkHitAny (a b c : ℝ) : ∃ NasGrid, DN 0 Nas 1 - DN 0 Nas 0 = a ∧ ... 2 ... = b ∧ ... 3 ... = c - witness grid (i:ℕ) => if i = 1 then 1 - a else if i = 2 then 2 - b else if i = 3 then 3 - c else 0, proved by dsimp [W2T.DN] + split_ifs + ring; b7WalkFaceTrue : b7WalkFace := instantiation at the pins MFa.D9/D10/D30.",
+    "design": "The W2T.DN definition (N0 + j - Nas j) makes the drift at each step freely parameterizable by the grid, so a drift triple carries no structural constraint on the walk side: the candidate mechanism is REALIZABLE (witness shape for the open face) and the open link of the walk candidate is precisely identified as the INPUT map E -> grid (the far excess driving the count-grid increments). The law-territory candidate (B5 = the concrete 4-factor own-detector poff) remains the other unconsumed candidate, recorded on the card.",
+    "honesty": "No new data; pure composition + construction. No RH claim: the B7 far region of the endpoint is vacuous in the body from [Z78]; b7OpenFace and b7WalkFace are measured/named constraints, and b7WalkFaceTrue shows the walk candidate is a consistent witness shape, not a mechanism proof.",
+    "commit": "TBD (this commit)"
+  }
+}

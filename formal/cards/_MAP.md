@@ -95,7 +95,18 @@ A chain of named theorems;  each box names the modules.
               s29  g-window  [2e8,  1e11]  whose  generated
               drift  hits  the  pinned  D)  -  the  S4Blind
               s4OpenFace  pattern;  measured,  not  proven.
-              The  endpoint's  four  named  residuals  are
+              SECTION  D  (discovery  0112):  THE  WALK  CONSUMER  -
+              b7WalkFace  =  b7OpenFace  restricted  to  gen  =  the
+              W2T.DN  tail-walk  drift  operator  (three  consecutive
+              steps,  N0  =  0)  -  PROVEN  BY  CONSTRUCTION:
+              b7WalkHitAny  shows  the  WALK  OPERATOR  HAS  EMPTY
+              STRUCTURAL  CONSTRAINT  on  a  drift  triple  (any  a,
+              b,  c  are  hit  at  steps  1,  2,  3),  so  the  walk
+              is  NOT  excluded  as  the  B7  mechanism;  the  open
+              link  of  the  walk  candidate  is  exactly  the
+              E  ->  grid  INPUT  map  (the  excess  driving  the
+              count-grid  increments),  which  is  not  in  the
+              tree.  The  endpoint's  four  named  residuals  are
               UNTOUCHED:  a  measured  constraint  any  RH
               proof  must  reproduce,  not  an  endpoint  leg.)
      WinCount (the hWin SHINK, GATED:  the  face's  OPEN  CONTENT  =
@@ -179,7 +190,22 @@ A chain of named theorems;  each box names the modules.
                    (0,  1/2))  reduces to content STRICTLY ABOVE
                    tPT  =  3.06e10.  No RH claim:  the open content
                    is the above-frontier bound-level faces,  where
-                   no instrument in the tree reaches)
+                   no instrument in the tree reaches).
+                   PART B5 (discovery 0111):  rh_program78_stripfront
+                   -  the hs1/hs3 premises of Part B4 shrink from
+                   all d0 to the STRIP BAND (1/200 <= d0 <= 1/2)
+                   above tPT:  in the strip band the four closure
+                   legs form a contradiction at any off-pair  (S2
+                   and  S4-strip  IN  BODY,  no  height  cap),  and
+                   in  the  window  band  above  tPT  the  hWin
+                   zero-exclusion  kills  every  off-pair  anyway.
+                   The  two  strip  faces  are  named  analytic
+                   gaps  in  the  docstring  -  G-hs3  the  off-line
+                   LIFT  of  the  critical-line  T4  wire,  G-hs1  the
+                   scale  anti-degeneracy  lower  bound  (measured
+                   shadow:  S1Marg  margins);  G-hs1  +  G-hs3  on
+                   (tPT,  inf)  x  [1/200,  1/2]  ARE  the
+                   strip-band  zero-exclusion
 
   Foundations / vocabulary
      B0 (composition atoms)  B4/B5 (detector-line notation)

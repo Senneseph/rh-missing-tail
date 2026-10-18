@@ -1,4 +1,4 @@
-# B7Far.lean  (205 lines)
+# B7Far.lean  (284 lines)
 WHAT:  THE B7 FAR-SIDE FACE: the census-drift mechanism, named.
 HOW:   Consumes the MFa pins; adds the near-log PART nl = M - D pinned
          from the s33b record by exact arithmetic on the pins (nl9 =
@@ -25,9 +25,21 @@ HOW:   Consumes the MFa pins; adds the near-log PART nl = M - D pinned
          values; measured at the pins, not proven.  No RH claim: the
          endpoint far region is vacuous in the body from [Z78]; this
          face is a measured constraint any RH proof must reproduce.
-USES:  used by: (none yet - the endpoint's four named residuals
-         hs1/hs3/hWin/hS2low are untouched; next consumer candidates:
-         the walk (B1) and the law-territory clause (B5)).
+USES:  used by: B7Far section D (discovery 0112) - the WALK CONSUMER:
+         the card's 'walk (B1)' candidate in the current module layout
+         (the W2T.DN tail walk with the W2Beyond drift step law):
+         b7WalkFace = the b7OpenFace pattern restricted to gen = the W2
+         tail-walk drift operator over three consecutive steps (N0 = 0,
+         Nas(0) = 0), PROVEN by construction (b7WalkHitAny /
+         b7WalkFaceTrue) - for ANY three reals a, b, c there is a count
+         grid whose walk drift hits them at steps 1, 2, 3 (grid: i -
+         value_i at i in {1,2,3}, 0 elsewhere) - the WALK OPERATOR HAS
+         EMPTY STRUCTURAL CONSTRAINT on a drift triple, so the walk is
+         NOT excluded as the B7 mechanism and the open link of the walk
+         candidate is exactly the E -> grid INPUT map (the excess
+         driving the count-grid increments), which is not in the tree;
+         the law-territory candidate (B5 = the concrete 4-factor own-
+         detector poff) remains unconsumed.
 GOTCHA: nl is pinned as M - D (exact on the record), NOT recomputed as
           An * log t + Bn in Lean: the Real log never enters a gate; the
           ln predictions (0.477121, 2.2875) are documented 50-dp facts

@@ -545,6 +545,50 @@ for the ACTUAL zeta zero set.  The branches:
       Re  >  1  -  c/ln  t,  nowhere  near  Re  =  1/2  +-  1/200).
       No  RH  claim;  full  tree  green  (17450  jobs),  0  sorry,  100
       cards.
+      FORMAL:  THE  ENDPOINT  OVER  THE  STRIP  FRONTIER  (discovery
+      0111):  RHEnd  Part  B5  adds  rh_program78_stripfront  -  the
+      lever-1  investigation  of  whether  the  above-frontier  hs1/
+      hs3  faces  are  body-provable  lands  as  a  PRECISE  VERDICT:
+      in  the  strip  band  (t0  >=  1000,  1/200  <=  d0  <=  1/2)
+      the  four  closure  legs  form  a  contradiction  at  any
+      off-pair  zero  -  S1:  scale  >=  devProg;  S2:  devProg  >=
+      floStripMin  (in  body,  s2ActualFullBand,  NO  HEIGHT  CAP);
+      S3:  scale  <=  Bwire  +  Mr;  S4:  Bwire  +  Mr  <  floStripMin
+      (in  body,  s4StripUnifiedFloor,  NO  HEIGHT  CAP)  -  so  the
+      squeeze  cycle  needs  only  the  two  SCALE  faces  there,  and
+      in  the  window  band  (d0  <  1/200)  the  hWin  zero-exclusion
+      above  the  frontier  kills  every  off-pair  directly:  the
+      hs1/hs3  premises  shrink  from  all  d0  in  (0,  1/2]  to  the
+      STRIP  BAND  above  tPT.  What  is  BEHIND  the  two  strip  faces
+      (named  in  the  docstring  -  the  body  does  NOT  close  them).
+      G-hs3  is  the  off-line  LIFT  of  the  critical-line  T4  wire
+      (p8_B_floor  instantiates  p4_T4_bound  at  Re  s  =  1/2;  an
+      off-pair  zero  is  off  the  line  by  definition;  the  tree
+      has  no  kernel  upper  bound  at  off-line  points  -  the  P3
+      mass  pin  is  a  premise  by  design),  and  G-hs1  is  the  scale
+      anti-degeneracy  lower  bound  (body  has  kernel  UPPER  bounds
+      and  detector  LOWER  bounds  only  -  its  measured  shadow  is
+      the  S1Marg  margin  track).  G-hs1  +  G-hs3  on  (tPT,  inf)  x
+      [1/200,  1/2]  ARE  the  strip-band  zero-exclusion:  the entire
+      above-frontier  residue  of  the  endpoint  is  now  named  -
+      two  analytic  gap  statements  plus  the  window  face.
+      FORMAL:  THE  B7  WALK  CONSUMER  (discovery  0112):  B7Far
+      section  D  wires  the  card's  first  consumer  candidate  -  the
+      "walk  (B1)"  of  the  old  layout  is  the  W2T.DN  tail-walk
+      drift  operator  with  the  W2Beyond  drift  step  law.  b7WalkFace
+      states  the  b7OpenFace  pattern  with  gen  =  that  operator  over
+      three  consecutive  steps  (N0  =  0),  and  b7WalkHitAny  proves  it
+      BY  CONSTRUCTION:  for  ANY  three  reals  a,  b,  c  there  is  a
+      count  grid  whose  walk  drift  hits  them  at  steps  1,  2,  3
+      (grid  =  i  -  value_i  at  i  in  {1,  2,  3},  0  elsewhere)  -
+      the  WALK  OPERATOR  HAS  EMPTY  STRUCTURAL  CONSTRAINT  on  a  drift
+      triple,  so  the  walk  is  NOT  excluded  as  the  B7  mechanism,  and
+      the  open  link  of  the  walk  candidate  is  exactly  the  E  ->
+      grid  INPUT  map  (the  excess  driving  the  count-grid
+      increments),  which  is  not  in  the  tree.  The  law-territory
+      candidate  (B5  =  the  concrete  4-factor  own-detector  poff)
+      remains  unconsumed.  No  RH  claim;  full  tree  green  (17450
+      jobs),  0  sorry,  100  cards.
 
 ## 3.  Measured constraints  (anything that proves RH must
     reproduce these)

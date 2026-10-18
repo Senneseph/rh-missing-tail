@@ -1,0 +1,16 @@
+{
+  "id": "0111",
+  "timestamp": "2026-10-18T0230:00Z",
+  "title": "LEVER-1 VERDICT: the above-frontier hs1/hs3 FACES ARE NOT BODY-PROVABLE - they reduce to two NAMED analytic gaps (G-hs1 scale anti-degeneracy, G-hs3 off-line lift of the critical-line T4 wire) on the strip band, and the endpoint shrinks to the strip frontier",
+  "type": "formal",
+  "severity": "major",
+  "source": "Qwen3.8-Max-Preview via pi",
+  "summary": "RHEnd Part B5 (rh_program78_stripfront): in the strip band the four closure legs form a contradiction at any off-pair (S2 and S4-strip proven in body with NO height cap), and in the window band above the frontier the hWin zero-exclusion kills every off-pair - so the hs1/hs3 premises shrink from all d0 in (0, 1/2] to the strip band 1/200 <= d0 <= 1/2 above tPT. The named gaps behind the two strip faces: G-hs3 = the off-line LIFT of the critical-line T4 wire (p8_B_floor needs Re s = 1/2, an off-pair zero is off the line by definition; no kernel upper bound at off-line points in the tree; the P3 mass pin is a premise by design); G-hs1 = the scale anti-degeneracy lower bound (body has kernel UPPER bounds and detector LOWER bounds only; measured shadow = the S1Marg margin track). G-hs1 + G-hs3 on (tPT, inf) x [1/200, 1/2] ARE the strip-band zero-exclusion. Full tree green (17450 jobs), 0 sorry, 100 cards. No RH claim.",
+  "details": {
+    "module": "formal/RhAttack/RHEnd.lean (Part B5)",
+    "lean": "rh_program78_stripfront: the endpoint holds under [Z78] + actual-zero subset + on-line sliver + [Z-PT] + (hs1Strip/hs3Strip: the scale faces on t0 >= tPT, 1/200 <= d0 <= 1/2) + (hWinPT: window zero-exclusion above the frontier); all other legs of rh_program78 derived in body: far region empty from [Z78]; below the frontier vacuous (noOffLineBelowPT); window band above the frontier vacuous from hWinPT (applied pointwise via hWinFaceResidual's definitional forall); hWin by faceSplit (Part B3); hS2low vacuous on its whole domain.",
+    "verdict": "The body squeeze (s2ActualFullBand: devStripMin >= floStripMin, no cap; s4StripUnifiedFloor: Bwire + Mr < floStripMin, no cap) closes the S2/S4 legs at every height; the hs1/hs3 scale faces are the only open legs, and they are NOT reducible to body content: the B-wire bound p8_B is a critical-line bound (p4_T4_bound at Re s = 1/2) and the tree carries no kernel (W_n / mass gap) bound at OFF-line points, nor any kernel-scale LOWER bound (anti-degeneracy) - those lower bounds live on the DETECTOR (p8_far_detector_mag_ge_two, strideU_floor), a different object. The two gaps are analytic statements about exponential sums away from the line and about the zero-side scale at hypothetical off-line zeros; the measured shadow of G-hs1 is exactly the S1Marg margin track (25 certified candidates, >= 1 class to 2.8e7, the exploratory signal below 1 from 3.1e7).",
+    "honesty": "No RH claim. The shrink is a pure composition (no new data); the gaps are named, not claimed. Full tree green (17450 jobs); 0 sorry; RHEnd 617 lines; cards/MAP/PATHWAY updated.",
+    "commit": "TBD (this commit)"
+  }
+}
