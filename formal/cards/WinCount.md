@@ -1,4 +1,4 @@
-# WinCount.lean  (401 lines)
+# WinCount.lean  (451 lines)
 WHAT:  THE hWin SHINK: the face is zero-exclusion above 3.06e10 plus the
          3e9 record shadow - pinned and certified.
 HOW:   Two independent shrinks of the hWin face's OPEN content
@@ -40,12 +40,24 @@ HOW:   Two independent shrinks of the hWin face's OPEN content
          with the record's tolerance n = 3: at most TWO off-line zeros =
          at most ONE off-line orbit below 3e9; with D_even the excess is
          0 or 2). Record-derived: spends only B0's structural axioms +
-         the two record pins + the gate. CARDS/MAP updated after this
-         entry; 99 cards.
-USES:  used by: (none yet) - characterizes how small the hWin residual's
-         open content is; consumer candidates: the endpoint restatement
-         (RHEnd) and any future zero-free-region import that would
-         discharge the residual above the frontier.
+         the two record pins + the gate. (C) THE ROUTE MERGE (discovery
+         0108): the two shrink routes subsume each other below the
+         frontier - dZeroBelowRecord (for ANY zero set consistent with
+         [Z-PT]: D q (3e9) = 0 EXACTLY; the B0.zeroD_of_RH pattern with
+         RH replaced by the frontier on (0, tPT]; strictly sharper than
+         the shadow's D <= 2, and 0 is the even case of D_even) and
+         rvmGateDischarged (for a zero set whose exact count at 3e9
+         matches the pinned Nline - the ACTUAL set's recorded data - the
+         fleet's recorded +-3 gate |Ntot - rvm3e9| <= 3 HOLDS as a
+         theorem: pure record arithmetic via pinGates, no frontier use):
+         [Z-PT] gives D = 0 and the pinned count re-derives the +-3 gate
+         offExcessBound consumed as a hypothesis; below tPT the routes
+         carry each other's load. CARDS/MAP updated after this entry; 99
+         cards.
+USES:  used by: the endpoint (RHEnd Part B3, rh_program78_winpt - the
+         hWin premise is derived from [Z-PT] + hWinFaceResidual in the
+         body; PART B3 wired the route-A shrink at the endpoint in
+         discovery 0107).
 GOTCHA: the counts B0.Ntot/Non/D carry the height proof ht as an
           explicit argument - a theorem's hypotheses must use ONE named
           ht0 (two (by norm_num) terms are not definitionally equal);

@@ -112,6 +112,16 @@ A chain of named theorems;  each box names the modules.
               count  +  strip  gate  +-3  =>  D  <=  2  =  at
               most  one  off-line  orbit  below  3e9;  0  or  2
               with  D_even);  no  RH  claim,  endpoint  untouched)
+     WinCount (C)  (the  ROUTE  MERGE  below  the  frontier,
+              GATED:  dZeroBelowRecord  -  any  set  consistent
+              with  [Z-PT]  has  D(3e9)  =  0  EXACTLY  (the
+              B0.zeroD_of_RH  pattern  with  the  frontier;  0  is
+              the  even  case  of  D_even);  rvmGateDischarged  -
+              the  recorded  exact  count  Nline  implies  the
+              fleet's  +-3  gate  |Ntot  -  rvm3e9|  <=  3  as  a
+              theorem  (pure  record  arithmetic  via  pinGates):
+              below  tPT  the  two  shrink  routes  carry  each
+              other's  load)
 
   The actual-set composition (where the zeros are the real ones):
      Z78Strip     (named external input: Re s > 7/8 zero-free;

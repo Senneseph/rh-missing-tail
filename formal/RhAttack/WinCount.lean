@@ -398,4 +398,54 @@ theorem offExcessBound (q : ZeroSet) (n : ℕ) (hn : 1 ≤ n)
   by_contra hc
   exact hc hsub
 
+/-  ##  (C)  the  frontier  subsumes  the  shadow  height
+      (the  two  routes  merge  below  tPT)  -/
+
+/-- THE  FRONTIER  SUBSUMS  THE  RECORD  SHADOW:  for  ANY  zero  set
+    consistent  with  the  CITED  frontier  [Z-PT],  the  off-line
+    excess  at  the  record  height  3e9  is  EXACTLY  ZERO  (every
+    zero  with  0  <  Im  <=  3e9  <=  tPT  sits  on  the  line).
+    This  is  the  [Z-PT]  route  and  it  is  STRICTLY  SHARPER  than
+    the  record-derived  shadow  (offExcessBound:  D  <=  n  -  1  under
+    the  +-n  strip  gate;  at  the  record's  tolerance  n  =  3,  D
+    <=  2):  the  two  routes  agree  -  0  is  the  even  case  of
+    D_even.  The  proof  is  the  B0.zeroD_of_RH  pattern  with  the
+    RH  hypothesis  replaced  by  the  frontier  on  (0,  tPT].  No  RH
+    claim:  [Z-PT]  is  the  cited  classical  input. -/
+theorem dZeroBelowRecord (q : ZeroSet) (hPT : allOnLineUpTo q tPT)
+    (ht : 0 < tdata) : D q tdata ht = 0 := by
+  have hle : tdata ≤ tPT := by norm_num [tdata, tPT]
+  simp only [D]
+  have hempty : (sliceFin q tdata ht : Finset ℂ).filter
+      (fun ρ => ρ.re ≠ 1 / 2) = ∅ := by
+    apply Finset.filter_false_of_mem
+    rintro x hx hne
+    have hZA : x ∈ q.Z ∧ 0 < x.im ∧ x.im ≤ tdata := by
+      simpa [sliceFin, Finite.mem_toFinset, Set.mem_inter_iff] using hx
+    exact hne (hPT x hZA.1 hZA.2.1 (le_trans hZA.2.2 hle))
+  rw [hempty, Finset.card_empty]
+
+/-- THE  RECORDED  +-3  GATE  IS  DISCHARGED  BELOW  THE  FRONTIER:
+    for  a  zero  set  whose  exact  count  at
+    3e9  matches  the  pinned  record  count  (the  ACTUAL  set  has
+    exactly  these  two  inputs  -  [Z-PT]  cited,  the  exact  count
+    recorded),  the  fleet's  recorded  +-3  RVM  finish  gate  holds:
+    |Ntot  -  rvm3e9|  <=  3.  The  gate  is  not  an  extra  input:
+    it  follows  from  the  two  record  facts  the  fleet  already
+    produced  (and  pinGates  norms  the  arithmetic:  Nline  -
+    rvm3e9  =  21/50,  |21/50|  =  0.42  <=  3).  So  below  the
+    frontier  the  two  shrink  routes  (the  cited  frontier  and  the
+    record  shadow)  carry  each  other's  load:  [Z-PT]  gives  D  =
+    0  (dZeroBelowRecord)  and  the  pinned  count  re-derives  the
+    +-3  gate  that  offExcessBound  consumed  as  a  hypothesis.  The
+    gate  is  pure  record  arithmetic  (the  ACTUAL  set  has  [Z-PT]
+    as  well,  but  the  arithmetic  does  not  use  it).  No  RH
+    claim. -/
+theorem rvmGateDischarged (q : ZeroSet)
+    (ht0 : 0 < tdata)
+    (hcount : Ntot q tdata ht0 = Nline) :
+    abs ((Ntot q tdata ht0 : ℝ) - (rvm3e9 : ℝ)) ≤ 3 := by
+  rw [hcount]
+  norm_num [Nline, rvm3e9]
+
 end WinC

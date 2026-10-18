@@ -453,6 +453,33 @@ for the ACTUAL zeta zero set.  The branches:
       endpoint  statement  itself  (rh_program78)  is  UNTOUCHED;
       full  tree  re-verified  green  (17450  jobs).  No  RH
       claim.
+      FORMAL:  the  two  shrink  routes  MERGE  BELOW  THE
+      FRONTIER  (discovery  0108,  WinCount  section  (C),
+      451  lines  total):  dZeroBelowRecord  proves  that  any
+      zero  set  consistent  with  [Z-PT]  has  D(3e9)  =  0
+      EXACTLY  (the  B0.zeroD_of_RH  slice-filter  pattern  with
+      the  RH  hypothesis  replaced  by  the  frontier  on  (0,
+      tPT];  strictly  sharper  than  the  shadow's  D  <=  2;
+      0  is  the  even  case  of  D_even),  and  rvmGateDischarged
+      proves  that  the  recorded  exact  count  Nline  implies
+      the  fleet's  +-3  RVM  gate  |Ntot  -  rvm3e9|  <=  3  as  a
+      theorem  (pure  record  arithmetic  via  pinGates;  the
+      frontier  is  not  used  in  that  arithmetic).  Below  tPT
+      the  routes  carry  each  other's  load:  [Z-PT]  gives  D
+      =  0,  and  the  pinned  count  re-derives  the  +-3  gate
+      that  offExcessBound  consumed  as  a  hypothesis.  NOTE
+      (search  record):  a  fully  CITED  S(t)  error  bound  at
+      3e9  (to  make  the  shadow  gate  cited  rather  than
+      recorded)  was  pursued  doc-first  -  the  best  available
+      explicit  unconditional  bound  found  (Trudgian,
+      |S(T)|  <=  0.1013  log  T  for  large  T  -  arXiv:1010.4596
+      /  Math.  Comp.  78  (2009))  evaluates  to  <~  2.21  at
+      3e9,  ABOVE  the  3  -  5/8  <=  1.875  needed  to  force
+      the  +-3  gate  from  the  RVM  formula  alone;  the  gate
+      therefore  stays  recorded  data  (as  the  fleet  ran  it),
+      and  the  route  merge  above  is  the  clean  closure.  No
+      RH  claim;  full  tree  green  (17450  jobs),  0  sorry,  99
+      cards.
 
 ## 3.  Measured constraints  (anything that proves RH must
     reproduce these)
