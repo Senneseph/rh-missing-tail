@@ -1,0 +1,17 @@
+{
+  "id": "0110",
+  "timestamp": "2026-10-18T0135:00Z",
+  "title": "THE ENDPOINT COLLAPSES TO THE CITED FRONTIER: EVERY NAMED RESIDUAL IS VACUOUS BELOW tPT, hS2low DISAPPEARS, THE RESIDUE IS CONTENT STRICTLY ABOVE 3.06e10",
+  "type": "formal",
+  "severity": "major",
+  "source": "Qwen3.8-Max-Preview via pi",
+  "summary": "RHEnd Part B4 + WinCount (D) - the endpoint's four named residuals (hs1, hs3, hWin, hS2low) are all quantified over off-pairs, and [Z-PT] excludes all off-line zeros below tPT at ANY offset (noOffLineBelowPT: t0 = 0 by non-realness, 0 < t0 by the sign argument with the conjugate twin). rh_program78_frontier takes [Z-PT] + hs1/hs3 restricted to t0 >= tPT + the hWin residual face; the other three residuals are derived in the body (vacuous below the frontier; hS2low vacuous on its whole domain (0,1000) <= tPT and drops out entirely). Full tree green (17450 jobs), 0 sorry, 100 cards, MAP + PATHWAY updated. No RH claim: the open content is the above-frontier bound-level faces, where no instrument in the tree reaches.",
+  "details": {
+    "module": "formal/RhAttack/RHEnd.lean (Part B4) + formal/RhAttack/WinCount.lean (D)",
+    "lean": "rh_program78_frontier: the endpoint holds for q under [Z78] + actual-zero subset + on-line sliver + [Z-PT] + (hs1PT: hs1 above tPT) + (hs3PT: hs3 above tPT) + (hWinPT: hWinFaceResidual) - the other three named residuals of rh_program78 constructed IN BODY: hs1/hs3 by by_cases at the frontier (below: noOffLineBelowPT contradiction; above: the asserted face), hWin via faceSplit.mpr (Part B3), hS2low by the transitivity t0 < 1000 <= tPT + noOffLineBelowPT. WinCount.noOffLineBelowPT: for any [Z-PT]-consistent set, no off-pair at any offset for 0 <= t0 <= tPT (generalizes noOffPairBelowPT, whose 1000 <= t0 and d0 < 1/200 were the window context; the t0 = 0 case is nonReal, the 0 < t0 case the sign argument with the conjugate twin, heights preserved).",
+    "structure": "The whole residue of the endpoint (four named residuals on (0, inf) x (0, 1/2)) is now content STRICTLY ABOVE tPT = 30,610,046,000 - one height interval: hs1/hs3 as bound-level wire inequalities at hypothetical off-pairs (no measured data above the frontier in the tree) + the hWin residual face (zero-exclusion on (tPT, inf) x (0, 1/200)). hS2low is gone from the endpoint's face entirely.",
+    "open": "The above-frontier faces remain open - the classical zero-free regions stop at Re > 1 - c/ln t, nowhere near Re = 1/2 +- 1/200; no zero list past the frontier in the tree. The measured tracks (S1Marg margin regime, B7 drift, audited band, low-band slice) are all BELOW tPT - measured constraints any RH proof must reproduce, now with the program's formal residue concentrated strictly above the frontier.",
+    "honesty": "No RH claim. [Z-PT] is CITED classical (the rigorous interval-verified zero-isolation record, Platt; the public LMFDB stream ends at exactly tPT - the record's own frontier). No new data; pure composition. Full tree green (17450 jobs); 0 sorry; cards regenerated (100); MAP + PATHWAY updated.",
+    "commit": "TBD (this commit)"
+  }
+}

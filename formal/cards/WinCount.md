@@ -1,4 +1,4 @@
-# WinCount.lean  (451 lines)
+# WinCount.lean  (503 lines)
 WHAT:  THE hWin SHINK: the face is zero-exclusion above 3.06e10 plus the
          3e9 record shadow - pinned and certified.
 HOW:   Two independent shrinks of the hWin face's OPEN content
@@ -52,8 +52,18 @@ HOW:   Two independent shrinks of the hWin face's OPEN content
          theorem: pure record arithmetic via pinGates, no frontier use):
          [Z-PT] gives D = 0 and the pinned count re-derives the +-3 gate
          offExcessBound consumed as a hypothesis; below tPT the routes
-         carry each other's load. CARDS/MAP updated after this entry; 99
-         cards.
+         carry each other's load. (D) THE GENERAL-OFFSET LEMMA + THE
+         ENDPOINT-COLLAPSE ENGINE (discovery 0110): noOffLineBelowPT
+         (for ANY zero set consistent with [Z-PT]: NO off-pair at ANY
+         offset d0 for any 0 <= t0 <= tPT - the t0 = 0 case by non-
+         realness, the 0 < t0 case by the sign argument with the
+         conjugate twin; generalizes noOffPairBelowPT, whose 1000 <= t0
+         and d0 < 1/200 restrictions were the window context) - the
+         engine behind RHEnd Part B4 (rh_program78_frontier): every
+         named residual is quantified over off-pairs, so below the
+         frontier ALL FOUR are vacuous and hS2low drops out entirely
+         (domain (0, 1000) <= tPT). CARDS/MAP updated after this entry;
+         100 cards.
 USES:  used by: the endpoint (RHEnd Part B3, rh_program78_winpt - the
          hWin premise is derived from [Z-PT] + hWinFaceResidual in the
          body; PART B3 wired the route-A shrink at the endpoint in

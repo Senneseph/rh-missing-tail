@@ -1,4 +1,4 @@
-# RHEnd.lean  (406 lines)
+# RHEnd.lean  (491 lines)
 WHAT:  THE ENDPOINT of the program on the ACTUAL zeta zero set under the
          named external input [Z78] (Re s > 7/8 zero-free), at the
          CONCRETE wire, with maximal concretization: the residual is
@@ -48,4 +48,19 @@ GOTCHA: No RH claim: hs1/hs3/hWin/hS2low are OPEN (data and bound-level,
           the 3e9 record shadow (WinC.offExcessBound: off-line excess
           below 3e9 is 0 or 2 under the record's +-3 gate) is an
           independent record-derived constraint on the same open region,
-          kept out of the endpoint premises; no RH claim.
+          kept out of the endpoint premises; no RH claim. PART B4
+          (discovery 0110): rh_program78_frontier - the endpoint
+          COLLAPSED TO THE CITED FRONTIER: every named residual is
+          quantified over off-pairs, and [Z-PT] excludes ALL off-line
+          zeros below tPT at ANY offset (WinC.noOffLineBelowPT: t0 = 0
+          by non-realness, 0 < t0 by the sign argument with the
+          conjugate twin) - so below the frontier all four residuals are
+          VACUOUS and above it only bound-level content remains: the
+          theorem takes [Z-PT] + hs1/hS3 restricted to t0 >= tPT + the
+          hWin residual face (zero-exclusion on (tPT, inf) x (0,
+          1/200)); hS2low DISAPPEARS ENTIRELY (its domain (0, 1000) sits
+          below the frontier). The entire residue of the endpoint (four
+          named residuals on (0, inf) x (0, 1/2)) reduces to content
+          STRICTLY ABOVE tPT = 3.06e10; no RH claim - the open content
+          is the above-frontier bound-level faces, where no instrument
+          in the tree reaches.

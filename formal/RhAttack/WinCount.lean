@@ -142,6 +142,58 @@ theorem noOffPairBelowPT (q : ZeroSet) (H : ℝ)
     rw [show (star ρ).re = ρ.re by simp [star]] at hre'
     exact hre hre'
 
+/-- NO OFF-LINE ZERO BELOW THE FRONTIER,  ANY  OFFSET:  under
+    [Z-PT]  there  is  NO  offPair  q  t0  d0  at  all  with
+    0  <=  t0  <=  H  and  d0  >  0  (any  offset  -  unlike
+    noOffPairBelowPT,  whose  1000  <=  t0  and  d0  <  1/200
+    restrictions  are  the  window  context  and  are  not  used
+    in  the  argument).  At  t0  =  0  the  zero  would  be
+    real  (nonReal);  at  0  <  t0  the  sign  argument  of
+    noOffPairBelowPT:  positive  height  applies  [Z-PT]
+    directly,  negative  height  applies  it  to  the  conjugate
+    twin  (the  height  is  preserved).  This  is  the  engine
+    behind  RHEnd  Part  B4:  every  named  residual  of  the
+    endpoint  is  quantified  over  off-pairs,  so  below  the
+    frontier  all  four  are  vacuous  for  a  set  consistent
+    with  [Z-PT]. -/
+theorem noOffLineBelowPT (q : ZeroSet) (H : ℝ)
+    (hPT : allOnLineUpTo q H)
+    (t0 : ℝ) (ht0 : 0 <= t0) (htH : t0 <= H) :
+    ∀ (d0 : ℝ), ¬ P12.offPair q t0 d0 := by
+  intro d0
+  rintro ⟨ρ, hρ, hre, him, hdd⟩
+  by_cases ht0z : t0 = 0
+  · have himz : ρ.im = 0 := by
+      rw [ht0z] at him
+      exact abs_eq_zero.mp him
+    exact (q.nonReal ρ hρ) himz
+  · have ht0pos : 0 < t0 := lt_of_le_of_ne ht0 (Ne.symm ht0z)
+    by_cases hpos : 0 < ρ.im
+    · have habs : ρ.im = t0 := by
+        rw [abs_of_nonneg (le_of_lt hpos)] at him
+        exact him
+      exact hre (hPT ρ hρ hpos (by simpa [habs] using htH))
+    · have hneg : ρ.im < 0 := by
+        have hle : ρ.im <= 0 := not_lt.mp hpos
+        have hne : ρ.im ≠ 0 := q.nonReal ρ hρ
+        exact lt_of_le_of_ne hle hne
+      have habs : -ρ.im = t0 := by
+        rw [abs_of_nonpos (le_of_lt hneg)] at him
+        exact him
+      have hst : star ρ ∈ q.Z := q.conj ρ hρ
+      have himst : 0 < (star ρ).im := by
+        simp only [star]
+        linarith [habs, ht0pos]
+      have himst2 : (star ρ).im = t0 := by
+        simp only [star] at ⊢
+        exact habs
+      have hin2 : (star ρ).im <= H := by
+        rw [himst2]
+        exact htH
+      have hre' : (star ρ).re = 1 / 2 := hPT _ hst himst hin2
+      rw [show (star ρ).re = ρ.re by simp [star]] at hre'
+      exact hre hre'
+
 /-- THE RESIDUAL FACE (named):  zero-exclusion of off-line zeros
     strictly ABOVE the record's frontier,  on the window band.  Under
     [Z-PT] this is exactly the hWin face (faceSplit).  The residual

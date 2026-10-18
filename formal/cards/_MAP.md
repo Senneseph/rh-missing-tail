@@ -164,7 +164,22 @@ A chain of named theorems;  each box names the modules.
                    the frontier, the residual's open height interval
                    shrinking by ~3e7; the 3e9 record shadow
                    (WinC.offExcessBound) stays an independent
-                   constraint, out of the endpoint premises)
+                   constraint, out of the endpoint premises).
+                   PART B4 (discovery 0110):  rh_program78_frontier -
+                   THE ENDPOINT COLLAPSES TO THE CITED FRONTIER:  the
+                   residual hs1 AND hs3 restricted to t0 >= tPT plus
+                   the hWin residual face;  the other three named
+                   residuals of rh_program78 are DERIVED IN BODY -
+                   [Z-PT] excludes ALL off-line zeros below tPT at
+                   ANY offset (WinC.noOffLineBelowPT),  so below the
+                   frontier ALL FOUR residuals are vacuous  and
+                   hS2low disappears entirely  (domain (0,  1000)  is
+                   below the frontier).  The whole residue of the
+                   endpoint  (four named residuals on  (0,  inf)  x
+                   (0,  1/2))  reduces to content STRICTLY ABOVE
+                   tPT  =  3.06e10.  No RH claim:  the open content
+                   is the above-frontier bound-level faces,  where
+                   no instrument in the tree reaches)
 
   Foundations / vocabulary
      B0 (composition atoms)  B4/B5 (detector-line notation)

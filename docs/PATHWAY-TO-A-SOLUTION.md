@@ -519,6 +519,32 @@ for the ACTUAL zeta zero set.  The branches:
       B2);  this  module  is  a  MEASURED  CONSTRAINT  (anything
       that  proves  RH  must  reproduce  the  margin  regime).  No
       RH  claim;  full  tree  green  (17450  jobs),  100  cards.
+      FORMAL:  THE  ENDPOINT  COLLAPSES  TO  THE  CITED  FRONTIER
+      (discovery  0110):  RHEnd  Part  B4  adds  rh_program78_frontier
+      -  the  strongest  composition  in  the  program  shape  so  far:
+      every  named  residual  of  rh_program78  (hs1  S1  witness,  hs3
+      S3  wire,  hWin  S4  window  pin,  hS2low  S2  low-band  pin)
+      is  quantified  over  OFF-PAIR  zeros,  and  WinCount  adds
+      noOffLineBelowPT  -  for  ANY  zero  set  consistent  with  the
+      cited  [Z-PT]  frontier  (zeros  up  to  tPT  =  3.06e10  on  the
+      line),  there  is  NO  off-line  zero  below  tPT  at  ANY  offset
+      (t0  =  0  by  non-realness,  0  <  t0  by  the  sign  argument
+      with  the  conjugate  twin)  -  so  below  the  frontier  ALL
+      FOUR  residuals  are  VACUOUS,  and  the  new  endpoint  variant
+      takes  [Z-PT]  plus  ONLY  the  above-frontier  content:  hs1  and
+      hs3  restricted  to  t0  >=  tPT  (bound-level  wire  inequalities
+      at  hypothetical  off-pairs  -  no  measured  data  can  speak
+      there;  no  zero  list  past  the  frontier  in  the  tree)  plus
+      the  hWin  residual  face  (zero-exclusion  on  (tPT,  inf)  x
+      (0,  1/200));  hS2low  DISAPPEARS  ENTIRELY  (its  domain  (0,
+      1000)  sits  below  the  frontier  and  is  vacuous  under  [Z-PT]).
+      The  whole  residue  of  the  endpoint  (four  named  residuals  on
+      (0,  inf)  x  (0,  1/2))  is  now  content  STRICTLY  ABOVE  tPT  =
+      3.06e10  -  one  height  interval,  where  no  instrument  in  the
+      tree  reaches  (the  classical  zero-free  regions  stop  at
+      Re  >  1  -  c/ln  t,  nowhere  near  Re  =  1/2  +-  1/200).
+      No  RH  claim;  full  tree  green  (17450  jobs),  0  sorry,  100
+      cards.
 
 ## 3.  Measured constraints  (anything that proves RH must
     reproduce these)

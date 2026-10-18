@@ -403,4 +403,89 @@ theorem rh_program78_winpt (q : ZeroSet)
   have hface : S4WC.hWinFace q := (WinC.faceSplit q hPT).mpr hres
   refine rh_program78 q hz78 hqz honline Qside hs1 hs3 hface hS2low
 
+/-  ##  Part  B4  -  the  endpoint  COLLAPSES  TO  THE  FRONTIER
+
+  Every  named  residual  of  rh_program78  is  quantified  over
+  OFF-PAIR  zeros  (hs1:  the  S1  witness;  hs3:  the  S3  wire;
+  hWin:  the  S4  window  pin;  hS2low:  the  S2  low-band  pin).
+  And  for  a  zero  set  consistent  with  the  CITED  classical
+  frontier  [Z-PT]  (all  non-trivial  zeros  up  to  tPT  =
+  30,610,046,000  on  the  line  -  the  rigorous  interval-verified
+  zero-isolation  record),  there  are  NO  off-line  zeros  below
+  tPT  at  ANY  offset  (WinCount.noOffLineBelowPT:  the  t0  =  0
+  case  by  non-realness,  the  0  <  t0  case  by  the  sign
+  argument  with  the  conjugate  twin).  So  below  the  frontier
+  ALL  FOUR  residuals  are  VACUOUS  -  and  above  it  only  the
+  bound-level  content  remains:  hs1  and  hs3  as  wire
+  inequalities  at  hypothetical  off-pairs  (no  measured  data
+  can  speak  there  -  no  zero  list  past  the  frontier  in
+  the  tree),  and  the  hWin  residual  face  (zero-exclusion  on
+  (tPT,  inf)  x  (0,  1/200));  hS2low  DISAPPEARS  ENTIRELY  (its
+  height  domain  (0,  1000)  sits  below  the  frontier  and  is
+  vacuous  under  [Z-PT]).  rh_program78_frontier  is  the
+  composition:  the  endpoint  holds  for  q  from  [Z-PT]  plus
+  the  ABOVE-FRONTIER  versions  of  hs1  and  hs3  plus  the
+  hWin  residual  face  -  the  entire  residue  of  the  endpoint
+  (all  four  named  residuals  on  (0,  inf)  x  (0,  1/2))
+  reduces  to  content  STRICTLY  ABOVE  tPT.  No  RH  claim:  the
+  open  content  is  exactly  the  above-frontier  bound-level
+  faces  -  where  no  instrument  in  the  tree  reaches  (the
+  classical  zero-free  regions  stop  at  Re  >  1  -  c/ln  t,
+  nowhere  near  Re  =  1/2  +-  1/200).  -/
+
+/--  rh_program78_frontier  -  THE  ENDPOINT  COLLAPSED  TO  THE
+    CITED  FRONTIER  (discovery  0110):  under  [Z78],  q  a
+    subset  of  the  actual  zeros,  the  named  on-line  sliver
+    record,  and  [Z-PT]  (all  non-trivial  zeros  with
+    0  <  Im  <=  tPT  on  the  line  -  CITED,  like  [Z78]),
+    the  endpoint  holds  from  the  ABOVE-FRONTIER  residual:
+    hs1  and  hs3  restricted  to  t0  >=  tPT,  plus  the  hWin
+    residual  face  (zero-exclusion  of  off-line  zeros  on
+    (tPT,  inf)  x  (0,  1/200)).  The  other  three  named
+    residuals  of  rh_program78  are  DERIVED  IN  THE  BODY:
+    below  tPT  all  four  residuals  are  vacuous  (no  off-line
+    zeros  below  the  frontier  at  any  offset),  and  hS2low
+    vacuously  holds  on  its  whole  domain  (0  <  t0  <  1000
+    <=  tPT).  Same  honesty  as  the  other  variants:  [Z-PT]
+    is  CITED  (classical,  docstring  reference);  the
+    above-frontier  faces  are  OPEN  (no  instrument  in  the
+    tree  reaches  above  the  frontier);  no  RH  claim.  -/
+theorem rh_program78_frontier (q : ZeroSet)
+    (hz78 : Z78.externalZeroFree78)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) →
+      (|ρ.im| : ℝ) < (707 : ℝ) / 50 → ρ.re = 1 / 2)
+    (Qside : ℝ × ℝ → ℝ)
+    (hPT : WinC.allOnLineUpTo q WinC.tPT)
+    (hs1PT : ∀ (t0 d0 : ℝ), WinC.tPT <= t0 → 0 < d0 →
+      offPair q t0 d0 → Qside (t0, d0) ≥ devProg (t0, d0))
+    (hs3PT : ∀ (t0 d0 : ℝ), WinC.tPT <= t0 → 0 < d0 →
+      offPair q t0 d0 →
+      Qside (t0, d0) ≤ Z78P12.BwireP (t0, d0) + Z78P12.MrP (t0, d0))
+    (hWinPT : WinC.hWinFaceResidual q) :
+    RH q := by
+  refine rh_program78 q hz78 hqz honline Qside ?hs1 ?hs3 ?hWin ?hS2low
+  · --  hs1:  vacuous  below  the  frontier,  the  asserted  face
+      --  above  it.
+    intro t0 d0 ht0 hd0 hp
+    by_cases hle : t0 <= WinC.tPT
+    · exact False.elim ((WinC.noOffLineBelowPT q WinC.tPT hPT t0
+        (le_of_lt ht0) hle) d0 hp)
+    · exact hs1PT t0 d0 (le_of_lt (not_le.mp hle)) hd0 hp
+  · --  hs3:  the  same  decomposition.
+    intro t0 d0 ht0 hd0 hp
+    by_cases hle : t0 <= WinC.tPT
+    · exact False.elim ((WinC.noOffLineBelowPT q WinC.tPT hPT t0
+        (le_of_lt ht0) hle) d0 hp)
+    · exact hs3PT t0 d0 (le_of_lt (not_le.mp hle)) hd0 hp
+  · --  hWin:  the  face  identity  +  the  split  (Part  B3).
+    exact (WinC.faceSplit q hPT).mpr hWinPT
+  · --  hS2low:  its  whole  domain  (0,  1000)  sits  below  the
+      --  frontier:  vacuous.
+    intro t0 d0 ht0 ht0u hd0 hd0u hp
+    have hmid : (1000 : ℝ) <= WinC.tPT := by norm_num [WinC.tPT]
+    have hle : t0 <= WinC.tPT := le_trans (le_of_lt ht0u) hmid
+    exact False.elim ((WinC.noOffLineBelowPT q WinC.tPT hPT t0
+      (le_of_lt ht0) hle) d0 hp)
+
 end RHEnd
