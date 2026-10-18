@@ -84,6 +84,8 @@ import RhAttack.S1LowT
 import RhAttack.FloorUnif
 import RhAttack.Z78Strip
 import RhAttack.Z78P12
+import RhAttack.S4WinCap
+import RhAttack.WinCount
 import RhAttack.P4Limit
 import RhAttack.S1Face
 import RhAttack.P8Floor
@@ -336,5 +338,69 @@ theorem rh_program78_s1pins (q : ZeroSet)
         _ ≥ devProg (t0, d0) := habs
   have hmfp : Z78P12.MfP (t0, d0) = 0 := rfl
   simpa [hmfp, sub_zero] using hmain
+
+/-  ##  Part  B3  -  the  endpoint  with  the  hWin  FACE  SHRUNK
+
+  The  hWin  hypothesis  of  rh_program78  is  not  indecomposable
+  either:  the  S4WinCap  face  identity  (discovery  0105)  says
+  the  face  IS  zero-exclusion  of  off-line  zeros  on  [1000,
+  inf)  x  (0,  1/200);  and  under  the  CITED  classical
+  frontier  [Z-PT]  (every  non-trivial  zero  with  0  <  Im  <=
+  tPT  =  30,610,046,000  is  on  the  line  -  the  rigorous,
+  interval-verified  zero-isolation  record,  interval  precision
+  +-  2^-102,  the  end  of  the  public  LMFDB  stream;  cited
+  like  [Z78])  that  zero-exclusion  splits  EXACTLY  at  the
+  frontier  (WinCount.faceSplit):  no  off-pairs  below  it  follow
+  from  [Z-PT]  alone,  and  the  residue  is  zero-exclusion  of
+  (tPT,  inf)  x  (0,  1/200).  rh_program78_winpt  is
+  rh_program78  with  hWin  DERIVED  IN  THE  BODY  from  [Z-PT]  +
+  the  residual:  the  endpoint  premise  narrows  from  "the
+  window  squeeze  holds  on  [1000,  inf)"  to  "no  off-line
+  zeros  in  (tPT,  inf)  x  (0,  1/200)"  -  the  open  height
+  interval  of  the  hWin  residual  at  the  endpoint  shrinks  by
+  a  factor  of  about  3e7.  The  3e9  record  shadow
+  (WinCount.offExcessBound:  with  the  pinned  record  counts  and
+  the  record's  +-3  tolerance,  the  off-line  excess  below  3e9
+  is  0  or  2)  is  an  independent  constraint  on  the  same  open
+  region,  record-derived,  and  does  not  appear  in  the
+  endpoint  premises.  Same  honesty  as  rh_program78:  [Z-PT]  is
+  CITED  (classical,  docstring  reference);  the  residual  is
+  OPEN  (no  instrument  in  the  tree  reaches  (tPT,  inf)  x
+  (0,  1/200));  no  RH  claim.  -/
+
+/--  rh_program78_winpt  -  THE  ENDPOINT  WITH  THE  HWIN  FACE
+    SHRUNK  (discovery  0106):  under  [Z78],  q  a  subset  of
+    the  actual  zeros,  the  named  on-line  sliver  record,  and
+    the  NAMED  RESIDUAL  with  hWin  entered  as  the  CITED
+    classical  frontier  [Z-PT]  (all  non-trivial  zeros  with
+    0  <  Im  <=  tPT  on  the  line)  plus  the  residual  face
+    (zero-exclusion  of  off-line  zeros  on  (tPT,  inf)  x  (0,
+    1/200)),  together  with  hs1  (the  S1  witness),  hs3  (the
+    S3  wire),  hS2low  (the  S2  low-band  pin),  RH  holds  for
+    q.  The  hWin  leg  is  DERIVED  IN  THE  BODY  from
+    S4WinCap's  face  identity  and  WinCount.faceSplit  (no
+    off-pairs  on  [1000,  tPT]  from  [Z-PT];  the  residue  is
+    the  asserted  face).  No  RH  claim:  the  residual  is  open
+    (its  content  is  where  no  instrument  in  the  tree
+    reaches).  -/
+theorem rh_program78_winpt (q : ZeroSet)
+    (hz78 : Z78.externalZeroFree78)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) →
+      (|ρ.im| : ℝ) < (707 : ℝ) / 50 → ρ.re = 1 / 2)
+    (Qside : ℝ × ℝ → ℝ)
+    (hs1 : ∀ (t0 d0 : ℝ), 0 < t0 → 0 < d0 →
+      offPair q t0 d0 → Qside (t0, d0) ≥ devProg (t0, d0))
+    (hs3 : ∀ (t0 d0 : ℝ), 0 < t0 → 0 < d0 →
+      offPair q t0 d0 →
+      Qside (t0, d0) ≤ Z78P12.BwireP (t0, d0) + Z78P12.MrP (t0, d0))
+    (hPT : WinC.allOnLineUpTo q WinC.tPT)
+    (hres : WinC.hWinFaceResidual q)
+    (hS2low : ∀ (t0 d0 : ℝ), 0 < t0 → t0 < 1000 →
+      0 < d0 → d0 ≤ 1 / 2 → offPair q t0 d0 →
+      devProg (t0, d0) ≥ p8_f_near_pin) :
+    RH q := by
+  have hface : S4WC.hWinFace q := (WinC.faceSplit q hPT).mpr hres
+  refine rh_program78 q hz78 hqz honline Qside hs1 hs3 hface hS2low
 
 end RHEnd

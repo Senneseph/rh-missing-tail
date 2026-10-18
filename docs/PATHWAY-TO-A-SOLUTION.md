@@ -435,6 +435,24 @@ for the ACTUAL zeta zero set.  The branches:
       measured  zero  walk  ends  at  the  frontier).  The
       endpoint  and  the  other  three  named  residuals  are
       untouched.  No  RH  claim.
+      FORMAL:  the  shrink  is  now  WIRED  AT  THE  ENDPOINT
+      (discovery  0107):  RHEnd  Part  B3  adds
+      rh_program78_winpt  -  rh_program78  with  hWin  DERIVED  IN
+      BODY  from  the  CITED  frontier  [Z-PT]  plus  the  residual
+      face  (WinC.hWinFaceResidual):  under  [Z-PT],  the
+      endpoint's  hWin  premise  is  EXACTLY  zero-exclusion  of
+      off-line  zeros  on  (3.06e10,  inf)  x  (0,  1/200)  (the
+      S4WinCap  face  identity  +  WinC.faceSplit;  no  off-pairs
+      on  [1000,  tPT]  follow  from  [Z-PT]  alone)  -  the
+      residual's  open  height  interval  at  the  endpoint  shrinks
+      by  a  factor  of  about  3e7.  The  3e9  record  shadow
+      (offExcessBound:  off-line  excess  below  3e9  is  0  or  2
+      under  the  record's  +-3  gate)  stays  an  independent,
+      record-derived  constraint  on  the  same  open  region  and
+      is  deliberately  kept  OUT  of  the  endpoint  premises.  The
+      endpoint  statement  itself  (rh_program78)  is  UNTOUCHED;
+      full  tree  re-verified  green  (17450  jobs).  No  RH
+      claim.
 
 ## 3.  Measured constraints  (anything that proves RH must
     reproduce these)

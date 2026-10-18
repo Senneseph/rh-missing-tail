@@ -139,7 +139,16 @@ A chain of named theorems;  each box names the modules.
                    rh_program78_s1pins - the same endpoint with
                    hs1 REPLACED by the PIN FAMILY over the witness
                    zero (fill/kernel/mass/absorb), the hs1 leg
-                   DERIVED IN BODY via S1Face)
+                   DERIVED IN BODY via S1Face. PART B3:
+                   rh_program78_winpt - the same endpoint with hWin
+                   DERIVED IN BODY from cited [Z-PT] (the 3.06e10
+                   zero-isolation frontier) + WinC.hWinFaceResidual
+                   (zero-exclusion on (3.06e10, inf) x (0, 1/200)):
+                   the hWin premise narrows to zero-exclusion above
+                   the frontier, the residual's open height interval
+                   shrinking by ~3e7; the 3e9 record shadow
+                   (WinC.offExcessBound) stays an independent
+                   constraint, out of the endpoint premises)
 
   Foundations / vocabulary
      B0 (composition atoms)  B4/B5 (detector-line notation)

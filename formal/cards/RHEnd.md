@@ -1,4 +1,4 @@
-# RHEnd.lean  (340 lines)
+# RHEnd.lean  (406 lines)
 WHAT:  THE ENDPOINT of the program on the ACTUAL zeta zero set under the
          named external input [Z78] (Re s > 7/8 zero-free), at the
          CONCRETE wire, with maximal concretization: the residual is
@@ -33,3 +33,19 @@ GOTCHA: No RH claim: hs1/hs3/hWin/hS2low are OPEN (data and bound-level,
           devFacePt) - the hs1 leg is DERIVED IN BODY via
           S1Face.hs1AtZero; the residual narrows from the bare
           inequality to the PIN family (same content, checkable shape).
+          PART B3 (discovery 0107): rh_program78_winpt RESTATES the
+          endpoint with hWin DERIVED IN BODY from the CITED classical
+          frontier [Z-PT] (all non-trivial zeros up to tPT =
+          30,610,046,000 on the line - the rigorous interval-verified
+          zero-isolation record, cited like [Z78]) plus the residual
+          face WinC.hWinFaceResidual (zero-exclusion of off-line zeros
+          on (tPT, inf) x (0, 1/200)): S4WC's face identity makes the
+          hWin premise exactly zero-exclusion on [1000, inf) x (0,
+          1/200), and WinC.faceSplit splits it at the frontier (no off-
+          pairs on [1000, tPT] from [Z-PT] alone) - the endpoint's hWin
+          premise narrows to zero-exclusion above the frontier, the open
+          height interval of the residual shrinking by a factor of ~3e7;
+          the 3e9 record shadow (WinC.offExcessBound: off-line excess
+          below 3e9 is 0 or 2 under the record's +-3 gate) is an
+          independent record-derived constraint on the same open region,
+          kept out of the endpoint premises; no RH claim.
