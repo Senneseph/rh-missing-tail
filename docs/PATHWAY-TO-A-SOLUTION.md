@@ -480,6 +480,45 @@ for the ACTUAL zeta zero set.  The branches:
       and  the  route  merge  above  is  the  clean  closure.  No
       RH  claim;  full  tree  green  (17450  jobs),  0  sorry,  99
       cards.
+      FORMAL:  THE  HS1  UNIFORMITY  TRACK  IS  PINNED  AT  ITS
+      FRONTIER  (discovery  0109):  formal/RhAttack/S1Marg.lean
+      GATED  (193  lines,  0  sorry)  -  where  S1Face  closes  hs1
+      at  the  day-020  audited  band,  the  OPEN  piece  is  the
+      uniformity  track  ("does  the  squeeze  hold  at  every
+      witness  height,  with  what  margin?"):  the  P1.1e
+      BEST-STRADDLE  CLOSURE  STATISTIC  (the  margin  of  the  hs1
+      composite  squeeze  at  the  best  straddle  point  of  the
+      window)  is  pinned  from  three  CERTIFIED  runs  at  the  25
+      candidate  heights  in  [1e3,  2.8e7]  (the  1e7  run:  14
+      candidates,  per-t  quadrature  to  1e18;  the  1e6ext:  4;
+      the  (1e7,  1e9]  band  scan:  the  7  REAL-zero  candidates
+      only  -  dps-30  per-t  quadrature  with  the  exact
+      discrete  tail  over  47,517,736  LMFDB  zeros;  the  9
+      higher  "exp"  rows  are  exploratory  nominal  points  and
+      are  deliberately  NOT  pinned)  -  and  the  regime  is
+      GATED  by  exact-rational  norm_num  on  the  anchors:
+      the  25x  window  (margin  >=  25  up  to  the  150000.2616
+      candidate,  38.053;  <  25  at  199999.7053,  21.665:  the
+      certified  25x  regime  closes  between  1.5e5  and  2e5),
+      the  >=  13  class  to  1e6  (13.068  at  999999.7934),
+      the  >=  1  class  to  the  end  of  the  certified  band
+      (minimum  1.4138  at  19999999.8837),  the  height  order,
+      and  the  DECAY  order  (28.918  >  15.504  >  13.068  >
+      5.2362  >  1.4138  -  the  regime  degrades  monotonically
+      with  height).  The  named  face  (hs1MargFace,  b7OpenFace
+      pattern)  is  the  uniform  statement  itself  -  every
+      height  that  carries  an  off-pair  zero  has  margin
+      >=  1  -  OPEN:  the  pins  are  its  measured  shadow  at
+      the  25  candidates;  the  exploratory  "exp"  signal
+      (margins  below  1  from  3.1e7)  is  the  recorded
+      indication  that  the  composite  becomes  the  limiting
+      object  above  the  certified  regime  (the  repair-list
+      class).  The  endpoint  is  UNTOUCHED  (hs1  remains  a
+      named  residual,  read  by  S1Face.hs1AtZero,  closed  at
+      the  audited  band,  pin  family  form  in  RHEnd  Part
+      B2);  this  module  is  a  MEASURED  CONSTRAINT  (anything
+      that  proves  RH  must  reproduce  the  margin  regime).  No
+      RH  claim;  full  tree  green  (17450  jobs),  100  cards.
 
 ## 3.  Measured constraints  (anything that proves RH must
     reproduce these)

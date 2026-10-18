@@ -16,7 +16,13 @@ A chain of named theorems;  each box names the modules.
      ATOM:  the pointwise  hs1  core  |zeta  -  K|  >=  devW  -
      Mval  from  A0  +  reverse  triangle)  +  S1Face (the HS1
      FACE:  hs1AtZero  =  the leg at an actual zero IS the S1Ge
-     theorem; the named face at the day-020 band) + QSide (the
+     theorem; the named face at the day-020 band) + S1Marg (the
+     HS1 UNIFORMITY TRACK:  the P1.1e best-straddle margin regime
+     pinned at its frontier - 25x class up to 1.5e5, 13x class to
+     1e6,  >=  1  to the end of the certified band 2.8e7,  decay
+     order GATED;  the 25 certified candidate heights of three
+     runs;  the named open uniform face is the track above the
+     certified band) + QSide (the
      Qside DATA FACE: A4.3 resid + day-020 pins, 112.6x margin
      exact-rational GATED, the section-8 close machine-verified)
      + LowWires (the LOW-BAND wire shape: R-wires definitionally
@@ -175,7 +181,7 @@ A chain of named theorems;  each box names the modules.
 
   Orphans (terminal or historical,  no one imports them)
      A1Growth  E2Barrier  M6  S1Point
-     S1Sample  S4Sharp  S1Cusp  S1Uniform  S1Ge  S1Face  QSide
+     S1Sample  S4Sharp  S1Cusp  S1Uniform  S1Ge  S1Face  S1Marg  QSide
      LowWires  LowExcl  ProbeMargin6  RHEnd  W2Beyond1
      W2M6  Ap3RvMStatement
      Ap3StrongPNTPrefix  Ap3Halving  ProbeM5  ProbeTmp
