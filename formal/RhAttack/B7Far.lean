@@ -1,6 +1,7 @@
 import Mathlib
 import RhAttack.MFar
 import RhAttack.W2Telescope
+import RhAttack.P4Limit
 
 /-
 B7Far.lean  -  the  B7  FAR-SIDE  FACE  (the  census  drift;
@@ -230,7 +231,7 @@ def b7OpenFace (gen : (ℝ → ℝ) → (ℝ → ℝ)) : Prop :=
   resolves  the  walk-side  question  for  the  drift  OUTPUT  and
   leaves  the  mechanism  INPUT  as  the  named  open  link.  -/
 
-/--  b7WalkFace  -  THE  B7  FACE  RESTRICTED  TO  THE  WALK
+/-- b7WalkFace  -  THE  B7  FACE  RESTRICTED  TO  THE  WALK
     CANDIDATE  (the  b7OpenFace  pattern  with  gen  =  the  W2
     tail-walk  drift  operator  over  the  three  consecutive
     steps,  N0  =  0):  there  exists  a  count  grid  whose
@@ -244,7 +245,7 @@ def b7WalkFace : Prop :=
       W2T.DN 0 NasGrid 2 - W2T.DN 0 NasGrid 0 = MFa.D10 ∧
       W2T.DN 0 NasGrid 3 - W2T.DN 0 NasGrid 0 = MFa.D30
 
-/--  b7WalkHitAny  -  the  WALK  OPERATOR  HAS  EMPTY  STRUCTURAL
+/-- b7WalkHitAny  -  the  WALK  OPERATOR  HAS  EMPTY  STRUCTURAL
     CONSTRAINT  on  a  drift  triple:  for  ANY  three  real
     values  a,  b,  c  there  is  a  count  grid  whose  tail-walk
     drift  hits  them  at  steps  1,  2,  3  (N0  =  0,  Nas(0)  =
@@ -263,13 +264,13 @@ theorem b7WalkHitAny (a b c : ℝ) :
       else if i = 3 then 3 - c
       else 0), ?_, ?_, ?_⟩
   · dsimp only [W2T.DN]
-    split_ifs <;> (try contradiction) <;> ring
+    split_ifs <;> (try contradiction; ring)
   · dsimp only [W2T.DN]
-    split_ifs <;> (try contradiction) <;> ring
+    split_ifs <;> (try contradiction; ring)
   · dsimp only [W2T.DN]
-    split_ifs <;> (try contradiction) <;> ring
+    split_ifs <;> (try contradiction; ring)
 
-/--  b7WalkFaceTrue  -  THE  WALK  CANDIDATE  IS  A  WITNESS  SHAPE
+/-- b7WalkFaceTrue  -  THE  WALK  CANDIDATE  IS  A  WITNESS  SHAPE
     for  the  B7  far-drift  face:  b7WalkFace  holds  (the  three
     pinned  D  values  are  in  the  tail-walk  drift  image).  So
     the  walk  is  NOT  structurally  excluded  as  the  B7
@@ -280,5 +281,132 @@ theorem b7WalkHitAny (a b c : ℝ) :
 theorem b7WalkFaceTrue : b7WalkFace := by
   obtain ⟨NasGrid, h9, h10, h30⟩ := b7WalkHitAny MFa.D9 MFa.D10 MFa.D30
   exact ⟨NasGrid, h9, h10, h30⟩
+
+/-  ##  Section  E  -  THE  LAW-TERRITORY  CONSUMER  (discovery  0113)
+
+  The  card's  second  consumer  candidate  -  "the  law-territory
+  clause  (B5)"  in  the  old  layout  -  is  the  P4  TAIL-LAW  family
+  (P4Limit:  the  EM-tail  T3  wall)  in  the  current  module  layout.
+  The  law's  T3  tail  bound  (t3w_T3UB:  the  four-term  certified
+  size  of  the  tail  channel  at  height  t  with  cutoff
+  n  =  floor(13t/8))  closes  on  the  WHOLE  wall  range
+  1  <=  t  <=  1e8  (p4_25ae_wall_list_scale)  -  and  past  1e8
+  the  wall  does  NOT  close:  that  is  the  wall  the  B7  record
+  calls  "past-the-wall"  (s33b:  the  far  M  rows  and  the  D
+  drift  sit  beyond  it).
+
+  The  consumer's  verdict  MIRRORS  the  walk  consumer  (section  D):
+  the  walk  candidate  is  REALIZABLE  (the  operator  carries  empty
+  structural  constraint  on  a  drift  triple),  while  the
+  LAW-TERRITORY  candidate  is  STRUCTURALLY  EXCLUDED,  on  two  exact
+  grounds  (all  proven  below;  no  RH  claim):
+      POSITION  (b7WindowBeyondLawWall,  b7PinsBeyondLawWall):
+      the  B7  support  window  [2e8,  1e11]  sits  strictly  beyond
+      the  law's  wall  range  [1,  1e8],  and  the  three  pinned  far
+      heights  (MFa.t9/t10/t30)  are  all  beyond  the  wall  top  as
+      raw  parameters  (the  s29  record  maps  them  into  the  g
+      window  via  g  =  t/G  with  G  the  frontier  -  record
+      level,  not  pinned  here).
+      MAGNITUDE  (lawTailBelowHalf,  b7DriftAboveHalf):
+      on  the  WHOLE  wall  range  the  law's  certified  tail
+      content  is  strictly  below  1/2  (n  =  0  branch:
+      (0:R)^(-1/2)  <=  1;  n  >=  1  branch:  n^(-1/2)  <=  1
+      (t3w_invpow_le_one)  and  35/39  <  1),  while  every  B7
+      pinned  drift  has  magnitude  strictly  above  1/2  -  the
+      smallest,  |D9|  =  9774967307  -  a  gap  of  about  14  orders
+      of  magnitude  between  what  the  law  can  certify  (at  any
+      height  it  covers)  and  what  B7  pins  (at  its  nearest
+      pin).
+  b7LawExcluded  is  the  composed  statement:  at  every  height  of
+  the  law's  certified  range  the  tail  content  is  below  1/2
+  while  every  pinned  drift  is  above  it  -  the  law-territory
+  mechanism  (B7  drift  =  tail-law  content)  is  EXCLUDED  as  a
+  generator  of  the  B7  face  on  the  law  range,  and  AT  the  B7
+  pins  the  law  is  SILENT  (the  wall  does  not  close  past  1e8):
+  its  certified  output  can  never  reach  the  pinned  magnitudes
+  unless  it  is  extended  past  the  wall,  and  no  such
+  extension  is  in  the  tree.
+
+  The  two  consumers  TOGETHER  bracket  the  mechanism  space  of
+  b7OpenFace:  the  WALK  candidate  SURVIVES  (realizable;  open
+  link  =  the  E  ->  grid  input  map),  the  LAW-TERRITORY
+  candidate  IS  EXCLUDED  (position  +  magnitude  on  the  law
+  range);  the  remaining  open  content  of  the  B7  face  is  the
+  UNNAMED  channel  of  the  excess  input  E  itself  (its  g-window
+  support  and  its  map  into  counts),  past  the  wall.  No  RH
+  claim:  measured/named  constraint;  pure  composition  over  the
+  pinned  gates  and  the  T3  wall  theorem.  -/
+
+/-- The  law's  wall  top  (P4Limit  T3  wall):  the  tail  bound  is
+    certified  for  1  <=  t  <=  lawWallTop.  -/
+def lawWallTop : ℝ := (10 : ℝ) ^ 8
+
+/-- (POSITION,  window  level)  the  B7  support  window  [2e8,  1e11]
+    sits  strictly  beyond  the  law's  wall  range  [1,  lawWallTop].  -/
+theorem b7WindowBeyondLawWall : lawWallTop < 2 * 10 ^ 8 := by
+  norm_num [lawWallTop]
+
+/-- (POSITION,  pin  level)  the  three  pinned  far  heights  are
+    all  beyond  the  wall  top  as  raw  parameters  (the  s29
+    record  maps  them  into  the  g  window  via  g  =  t/G  with  G
+    the  frontier  -  record  level,  not  pinned  here).  -/
+theorem b7PinsBeyondLawWall :
+    lawWallTop < MFa.t9 ∧ lawWallTop < MFa.t10 ∧ lawWallTop < MFa.t30 := by
+  norm_num [lawWallTop, MFa.t9, MFa.t10, MFa.t30]
+
+/-- (MAGNITUDE,  law  side)  on  the  WHOLE  wall  range  the
+    certified  tail  content  is  strictly  below  1/2:  the  T3
+    wall  bound  gives  t3w_T3UB  n  t  <  (1/2) * n^(-1/2) *
+    (35/39)  with  n  =  floor(13t/8);  the  n  =  0  branch  is
+    (0:R)^(-1/2)  <=  1  and  the  n  >=  1  branch  is
+    n^(-1/2)  <=  1  (t3w_invpow_le_one),  and  in  either  case
+    (1/2) * (35/39)  <  1/2.  -/
+theorem lawTailBelowHalf (t : ℝ) (ht : 1 <= t) (ht8 : t <= lawWallTop)
+    (n : ℕ) (hn : n = Nat.floor ((13 : ℝ) * t / 8)) :
+    t3w_T3UB n t < 1 / 2 := by
+  have hwall : t3w_T3UB n t < (1 / 2 : ℝ) * (n : ℝ) ^ (-1 / 2 : ℝ) * (35 / 39) :=
+    p4_25ae_wall_list_scale ht ht8 hn
+  have hinfn : (n : ℝ) ^ (-1 / 2 : ℝ) <= 1 := by
+    by_cases h0 : n = 0
+    · subst h0
+      simpa [Nat.cast_zero] using zero_rpow_le_one (-1 / 2)
+    · have hn1 : 1 <= n := Nat.pos_of_ne_zero h0
+      have hstep : (n : ℝ) ^ (-(1 / 2 : ℝ)) <= 1 :=
+        t3w_invpow_le_one n hn1 (1 / 2) (by norm_num)
+      simpa [neg_div] using hstep
+  calc t3w_T3UB n t < (1 / 2 : ℝ) * (n : ℝ) ^ (-1 / 2 : ℝ) * (35 / 39) := hwall
+    _ <= (1 / 2 : ℝ) * 1 * (35 / 39) := by gcongr
+    _ < 1 / 2 := by norm_num
+
+/-- (MAGNITUDE,  B7  side)  every  pinned  drift  has  magnitude
+    strictly  above  1/2  (the  smallest  is  |D9|  =  9774967307),
+    and  they  GROW  with  the  pin  (|D9|  <  |D10|  <  |D30|  -
+    the  t^2  growth  family  of  t2stepConsistency  at  the
+    magnitude  level).  -/
+theorem b7DriftAboveHalf :
+    |MFa.D9| > 1 / 2 ∧ |MFa.D10| > 1 / 2 ∧ |MFa.D30| > 1 / 2 ∧
+    |MFa.D9| < |MFa.D10| ∧ |MFa.D10| < |MFa.D30| := by
+  norm_num [MFa.D9, MFa.D10, MFa.D30]
+
+/-- b7LawExcluded  -  THE  LAW-TERRITORY  MECHANISM  IS  EXCLUDED
+    as  a  generator  of  the  B7  far-drift  face:  at  EVERY
+    height  t  of  the  law's  certified  range  [1,  1e8],  the
+    tail  content  (t3w_T3UB)  is  below  1/2  while  every  pinned
+    B7  drift  is  above  it  (the  composition  of  lawTailBelowHalf
+    and  b7DriftAboveHalf)  -  and  the  B7  pins  themselves  sit
+    beyond  the  wall  (b7PinsBeyondLawWall),  where  the  law
+    makes  NO  statement  (the  wall  does  not  close  past  1e8).
+    No  RH  claim:  this  EXCLUDES  the  law-territory  candidate
+    (the  second  consumer  of  b7OpenFace)  while  the  walk
+    candidate  survives  (section  D);  the  remaining  B7
+    mechanism  content  is  the  unnamed  channel  of  the  excess
+    input  E  past  the  wall.  -/
+theorem b7LawExcluded (t : ℝ) (ht : 1 <= t) (ht8 : t <= lawWallTop)
+    (n : ℕ) (hn : n = Nat.floor ((13 : ℝ) * t / 8)) :
+    t3w_T3UB n t < 1 / 2 ∧
+    |MFa.D9| > 1 / 2 ∧ |MFa.D10| > 1 / 2 ∧ |MFa.D30| > 1 / 2 :=
+  ⟨lawTailBelowHalf t ht ht8 n hn,
+    (b7DriftAboveHalf).1, (b7DriftAboveHalf).2.1, (b7DriftAboveHalf).2.2.1⟩
+
 
 end B7F

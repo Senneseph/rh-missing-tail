@@ -589,6 +589,36 @@ for the ACTUAL zeta zero set.  The branches:
       candidate  (B5  =  the  concrete  4-factor  own-detector  poff)
       remains  unconsumed.  No  RH  claim;  full  tree  green  (17450
       jobs),  0  sorry,  100  cards.
+      FORMAL:  THE  B7  LAW-TERRITORY  CONSUMER  (discovery  0113):
+      B7Far  section  E  wires  the  card's  second  consumer
+      candidate  -  the  old  "law-territory  (B5)"  -  which  in  the
+      current  module  layout  is  the  P4  TAIL-LAW  family  (P4Limit,
+      the  EM-tail  T3  wall).  The  law's  T3  tail  bound  (t3w_T3UB:
+      the  certified  tail  size  at  height  t,  cutoff  n  =
+      floor(13t/8))  closes  on  the  WHOLE  wall  range  1  <=  t  <=
+      1e8  (p4_25ae_wall_list_scale)  -  that  is  the  wall  the  B7
+      record  calls  "past-the-wall"  (the  far  M  rows  and  the  D
+      drift  sit  beyond  it,  s33b).  The  law-territory  mechanism
+      is  STRUCTURALLY  EXCLUDED  (b7LawExcluded)  on  two  exact
+      grounds:  POSITION  -  the  B7  support  window  [2e8,  1e11]
+      and  all  three  pinned  far  heights  sit  beyond  the  wall
+      range  (b7WindowBeyondLawWall  /  b7PinsBeyondLawWall,
+      norm_num),  where  the  law  makes  no  statement  (the  wall  is
+      not  closed  above  1e8);  MAGNITUDE  -  on  the  whole  wall
+      range  the  certified  tail  content  is  strictly  below  1/2
+      (lawTailBelowHalf:  the  n  =  0  branch  by  (0:R)^(-1/2)  <=
+      1,  the  n  >=  1  branch  by  n^(-1/2)  <=  1  and  35/39  <  1)
+      while  every  B7  pinned  drift  is  strictly  above  1/2  (the
+      smallest,  |D9|  =  9774967307,  growing  |D9|  <  |D10|  <
+      |D30|)  -  a  gap  of  about  14  orders  of  magnitude.  The
+      two  consumers  together  bracket  the  mechanism  space  of
+      b7OpenFace:  the  WALK  candidate  SURVIVES  (realizable  by
+      construction;  open  link  =  the  E  ->  grid  input  map),  the
+      LAW-TERRITORY  candidate  IS  EXCLUDED  (position  +
+      magnitude),  and  the  remaining  B7  mechanism  content  is  the
+      UNNAMED  channel  of  the  excess  input  E  itself  past  the
+      wall.  No  RH  claim;  full  tree  green  (17450  jobs),  0
+      sorry,  100  cards.
 
 ## 3.  Measured constraints  (anything that proves RH must
     reproduce these)

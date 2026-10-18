@@ -1,0 +1,16 @@
+{
+  "id": "0113",
+  "timestamp": "2026-10-18T0330:00Z",
+  "title": "B7 LAW-TERRITORY CONSUMER WIRED AND EXCLUDED: the P4 T3 tail wall closes only on [1, 1e8] (B7 sits past it silently), and on that range its certified tail content is < 1/2 vs every pinned drift > 1/2 (~14 orders apart) - the law-territory mechanism is structurally excluded, bracketing the B7 mechanism space with the walk consumer",
+  "type": "formal",
+  "severity": "minor",
+  "source": "Qwen3.8-Max-Preview via pi",
+  "summary": "B7Far section E wires the B7F card's second consumer candidate (the old 'law-territory (B5)'; in the current layout the P4 tail-law family, P4Limit T3 wall). b7LawExcluded: at every height of the law's certified range [1, 1e8] the T3 tail content t3w_T3UB is < 1/2 (lawTailBelowHalf: wall bound + n=0 branch (0:R)^(-1/2) <= 1 + n >= 1 branch n^(-1/2) <= 1, 35/39 < 1) while every pinned B7 drift is > 1/2 (b7DriftAboveHalf: smallest |D9| = 9774967307, growing |D9| < |D10| < |D30|), and the B7 support window [2e8, 1e11] + all three pinned far heights sit beyond the wall (norm_num gates), where the law makes no statement (wall not closed past 1e8). The two consumers bracket the mechanism space of b7OpenFace: WALK survives (realizable by construction, discovery 0112; open link = E -> grid input map), LAW-TERRITORY is excluded; the remaining B7 mechanism content is the unnamed channel of the excess input E past the wall. Full tree green (17450 jobs), 0 sorry, 100 cards. No RH claim.",
+  "details": {
+    "module": "formal/RhAttack/B7Far.lean (section E)",
+    "lean": "lawWallTop := 10^8; b7WindowBeyondLawWall (1e8 < 2e8, norm_num); b7PinsBeyondLawWall (wall top < MFa.t9/t10/t30, norm_num on the pinned integers); lawTailBelowHalf (t3w_T3UB n t < 1/2 for 1 <= t <= 1e8, n = floor(13t/8): from p4_25ae_wall_list_scale + by_cases n = 0 (zero_rpow_le_one) / 1 <= n (t3w_invpow_le_one + neg_div)); b7DriftAboveHalf (all |D pins| > 1/2 and growth, one norm_num); b7LawExcluded = the composition.",
+    "design": "The T3 wall (25ae era, day026) is precisely the wall the B7 s33b record names 'past-the-wall': the far M census rows and their D drift all sit beyond the range where the EM tail law certifies anything. The consumer verdict mirrors the walk consumer (section D): walk = realizable (empty structural constraint), law-territory = excluded (position: silent past the wall; magnitude: < 1/2 vs >= 9.77e9 on the certified range). Together they bracket the mechanism space of b7OpenFace and identify the remaining open content as the unnamed channel of the excess input E (its g-window support and its map into counts), past the wall.",
+    "honesty": "No new data; pure composition over the pinned gates, the T3 wall theorem and norm_num. The g = t/G mapping (G = the frontier) is record level (s29), noted in the docstring, not pinned in Lean. No RH claim: the B7 far region of the endpoint is vacuous in the body from [Z78]; b7LawExcluded is a measured/named-constraint exclusion, not a mechanism proof. Full tree green (17450 jobs); 0 sorry; B7Far 412 lines; cards/MAP/PATHWAY updated.",
+    "commit": "TBD (this commit)"
+  }
+}

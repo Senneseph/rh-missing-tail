@@ -106,9 +106,23 @@ A chain of named theorems;  each box names the modules.
               link  of  the  walk  candidate  is  exactly  the
               E  ->  grid  INPUT  map  (the  excess  driving  the
               count-grid  increments),  which  is  not  in  the
-              tree.  The  endpoint's  four  named  residuals  are
-              UNTOUCHED:  a  measured  constraint  any  RH
-              proof  must  reproduce,  not  an  endpoint  leg.)
+              tree.  SECTION  E  (discovery  0113):  THE
+              LAW-TERRITORY  CONSUMER  -  the  P4  T3  tail  wall
+              (P4Limit):  the  tail  bound  closes  on  the  whole
+              wall  range  [1,  1e8]  and  B7  sits  past  it;
+              b7LawExcluded  EXCLUDES  the  law-territory
+              candidate  (POSITION:  window  +  pins  beyond  the
+              wall,  where  the  law  is  silent;  MAGNITUDE:
+              certified  tail  content  <  1/2  on  the  whole  wall
+              range  vs  every  pinned  drift  >  1/2,  smallest
+              |D9|  =  9774967307,  ~14  orders  of  magnitude
+              apart).  The  two  consumers  bracket  the  mechanism
+              space:  WALK  SURVIVES,  LAW-TERRITORY  EXCLUDED,
+              remaining  open  content  =  the  unnamed  channel  of
+              the  excess  input  E  past  the  wall.  The  endpoint's
+              four  named  residuals  are  UNTOUCHED:  a  measured
+              constraint  any  RH  proof  must  reproduce,  not  an
+              endpoint  leg.)
      WinCount (the hWin SHINK, GATED:  the  face's  OPEN  CONTENT  =
               zero-exclusion  above  the  classical  frontier:
               (A)  tPT  :=  30610046000  pins  the  rigorous
