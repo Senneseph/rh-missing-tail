@@ -1,4 +1,4 @@
-# B7Far.lean  (412 lines)
+# B7Far.lean  (541 lines)
 WHAT:  THE B7 FAR-SIDE FACE: the census-drift mechanism, named.
 HOW:   Consumes the MFa pins; adds the near-log PART nl = M - D pinned
          from the s33b record by exact arithmetic on the pins (nl9 =

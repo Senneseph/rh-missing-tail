@@ -119,10 +119,27 @@ A chain of named theorems;  each box names the modules.
               apart).  The  two  consumers  bracket  the  mechanism
               space:  WALK  SURVIVES,  LAW-TERRITORY  EXCLUDED,
               remaining  open  content  =  the  unnamed  channel  of
-              the  excess  input  E  past  the  wall.  The  endpoint's
-              four  named  residuals  are  UNTOUCHED:  a  measured
-              constraint  any  RH  proof  must  reproduce,  not  an
-              endpoint  leg.)
+              the  excess  input  E  past  the  wall.  SECTION  F
+              (discovery  0114):  the  E  FACE  -  the  measured
+              shadow  of  the  excess  premise:  the  SIX-ROW
+              past-the-wall  drift  chain  is  pinned  (dD1e8/
+              dD3e8/dD5e8  at  the  wall-edge  rows  1e8G/3e8G/
+              5e8G,  s33b  cross-checked  against  s33;  D9/
+              D10/D30  from  MFa),  with  dChainGrowth  (|D|
+              grows  at  every  step  of  the  chain,  one
+              norm_num)  and  the  window  anchors  eWinLo  2e8
+              /  eWinHi  1e11  in  g/G  units  (eWindowGates:
+              window  order  +  window  past  the  T3  wall
+              top);  b7ChainLawGap  composes  the  exclusion
+              over  the  whole  chain  (law  content  <  1/2  on
+              the  certified  range  [1,  1e8]  vs  every  chain
+              value  >  1/2,  including  the  wall-edge  row);
+              the  min-norm  deconvolution  localizes  NOTHING
+              (no  delta-e  support  above  3e-3)  -  the  excess
+              exists  only  at  window  +  drift-hit  level.  The
+              endpoint's  four  named  residuals  are
+              UNTOUCHED:  a  measured  constraint  any  RH  proof
+              must  reproduce,  not  an  endpoint  leg.)
      WinCount (the hWin SHINK, GATED:  the  face's  OPEN  CONTENT  =
               zero-exclusion  above  the  classical  frontier:
               (A)  tPT  :=  30610046000  pins  the  rigorous

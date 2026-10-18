@@ -264,11 +264,17 @@ theorem b7WalkHitAny (a b c : ℝ) :
       else if i = 3 then 3 - c
       else 0), ?_, ?_, ?_⟩
   · dsimp only [W2T.DN]
-    split_ifs <;> (try contradiction; ring)
+    split_ifs
+    all_goals try contradiction
+    all_goals ring
   · dsimp only [W2T.DN]
-    split_ifs <;> (try contradiction; ring)
+    split_ifs
+    all_goals try contradiction
+    all_goals ring
   · dsimp only [W2T.DN]
-    split_ifs <;> (try contradiction; ring)
+    split_ifs
+    all_goals try contradiction
+    all_goals ring
 
 /-- b7WalkFaceTrue  -  THE  WALK  CANDIDATE  IS  A  WITNESS  SHAPE
     for  the  B7  far-drift  face:  b7WalkFace  holds  (the  three
@@ -301,12 +307,18 @@ theorem b7WalkFaceTrue : b7WalkFace := by
   LAW-TERRITORY  candidate  is  STRUCTURALLY  EXCLUDED,  on  two  exact
   grounds  (all  proven  below;  no  RH  claim):
       POSITION  (b7WindowBeyondLawWall,  b7PinsBeyondLawWall):
-      the  B7  support  window  [2e8,  1e11]  sits  strictly  beyond
-      the  law's  wall  range  [1,  1e8],  and  the  three  pinned  far
-      heights  (MFa.t9/t10/t30)  are  all  beyond  the  wall  top  as
-      raw  parameters  (the  s29  record  maps  them  into  the  g
-      window  via  g  =  t/G  with  G  the  frontier  -  record
-      level,  not  pinned  here).
+      the  B7  content  lies  outside  the  law's  certified  range
+      [1,  1e8]  under  BOTH  readings:  the  RAW
+      height-parameter  reading  (the  pinned  heights
+      MFa.t9/t10/t30  exceed  1e8)  and  the  g-window  reading
+      (the  support  window  [2e8,  1e11]  sits  past  1e8  in
+      g  =  t/G  units).  Record  notes  (section  F  header):  the
+      census  scale  G  is  record  level  (distinct  from  the
+      zero-isolation  frontier  tPT),  and  the  B7  record's
+      OWN  wall  is  the  mpmath/zeta-evaluation  wall  at
+      ~9e18  (discovery  0085)  -  the  T3  wall  top  1e8  lies
+      below  both  readings,  so  the  exclusion  is  robust  to
+      the  channel  correspondence.
       MAGNITUDE  (lawTailBelowHalf,  b7DriftAboveHalf):
       on  the  WHOLE  wall  range  the  law's  certified  tail
       content  is  strictly  below  1/2  (n  =  0  branch:
@@ -346,10 +358,11 @@ def lawWallTop : ℝ := (10 : ℝ) ^ 8
 theorem b7WindowBeyondLawWall : lawWallTop < 2 * 10 ^ 8 := by
   norm_num [lawWallTop]
 
-/-- (POSITION,  pin  level)  the  three  pinned  far  heights  are
-    all  beyond  the  wall  top  as  raw  parameters  (the  s29
-    record  maps  them  into  the  g  window  via  g  =  t/G  with  G
-    the  frontier  -  record  level,  not  pinned  here).  -/
+/-- (POSITION,  pin  level,  RAW  reading)  the  three  pinned  far
+    heights  exceed  the  wall  top  as  raw  parameters  (the  g
+    reading  is  b7WindowBeyondLawWall;  the  census  scale  G  and
+    the  record's  own  wall  are  record  level  -  section  F
+    header).  -/
 theorem b7PinsBeyondLawWall :
     lawWallTop < MFa.t9 ∧ lawWallTop < MFa.t10 ∧ lawWallTop < MFa.t30 := by
   norm_num [lawWallTop, MFa.t9, MFa.t10, MFa.t30]
@@ -407,6 +420,122 @@ theorem b7LawExcluded (t : ℝ) (ht : 1 <= t) (ht8 : t <= lawWallTop)
     |MFa.D9| > 1 / 2 ∧ |MFa.D10| > 1 / 2 ∧ |MFa.D30| > 1 / 2 :=
   ⟨lawTailBelowHalf t ht ht8 n hn,
     (b7DriftAboveHalf).1, (b7DriftAboveHalf).2.1, (b7DriftAboveHalf).2.2.1⟩
+
+/-  ##  Section  F  -  THE  E  FACE:  THE  MEASURED  SHADOW  OF  THE
+    EXCESS  PREMISE  (discovery  0114)
+
+  b7OpenFace  asserts  the  EXISTENCE  of  a  positive  far-side
+  excess  E  on  the  g  window  whose  generated  drift  hits  the
+  pinned  D  values.  This  section  records  the MEASURED SHADOW  of
+  that  premise  from  the  s29  /  s33  /  s33b  deconvolution
+  records  (scripts/rh/s29_pin.py,  s33_redec_extreme.py,
+  s33b_redec_supwall.py;  outputs  tmp/s29_run.log,
+  tmp/s33_run.log,  tmp/s33b_stdout.txt):
+
+  (i)   THE  FAR  DRIFT  TABLE  (s33b,  39  rows,  A/B  from  the
+        NEAR  face  A  =  -2.527100e+07,  B  =  +5.238779e+08):
+        D(t)  =  M  -  (A  ln  t  +  B)  at  the  six
+        PAST-THE-WALL  rows  (t/G  =  1e8,  3e8,  5e8,  1e9,  1e10,
+        3e10;  the  last  three  are  the  MFa  pins  D9/D10/D30).
+        The  three  extreme-row  values  below  the  wall
+        (dD1e8,  dD3e8,  dD5e8)  are  pinned  here;  cross-checked
+        identical  between  the  s33  and  s33b  records.
+  (ii)  THE  GROWTH  CHAIN  (dChainGrowth,  one  norm_num):
+        |dD1e8|  <  |dD3e8|  <  |dD5e8|  <  |D9|  <  |D10|  <  |D30|
+        -  the  t^2  growth  family  of  t2stepConsistency  extended
+        to  the  wall-edge  row  itself  (1e8G).
+  (iii)  THE  WINDOW  (eWinLo  =  2e8,  eWinHi  =  1e11,  in  g/G
+        units):  the  s29  P1-pole  plateau  -  the  parametric
+        fit  of  the  far  drift  by  a  localized  excess  at  h0
+        carries  max|res|  in  [~2.4e5,  ~2.5e5]  for  ALL  h0  in
+        the  window  (the  location  WITHIN  the  window  is
+        degenerate  -  not  pinned;  the  s33b  extension  moves
+        the  best  single-location  fit  toward  1e11G  and  beyond
+        (P3  lognormal  sig  0.5:  best  at  1e11G;  P1:  ~2e13G),
+        i.e.  the  window  is  a  measured  support  statement,
+        not  a  point  location).
+  (iv)  NON-LOCALIZATION  (record):  the  min-norm  deconvolution
+        (Part  A,  grid  L2000,  lam  1e4)  finds  NO  delta-e
+        support  above  3e-3  in  either  the  s29  or  the  s33b
+        run:  the  drift  is  NOT  localized  at  the  grid.  The
+        excess  exists  only  at  the  window  +  drift-hit  level
+        of  description  -  that  boundary  is  exactly  the  open
+        mechanism  content  identified  in  discovery  0113  (the
+        unnamed  channel  of  E  past  the  wall).
+  (v)   THE  COMPOSED  GAP  (b7ChainLawGap):  on  the  whole  law
+        range  the  certified  tail  content  is  <  1/2,  while
+        EVERY  value  of  the  six-row  past-the-wall  drift  chain
+        (wall-edge  1e8G  through  3e10G)  has  magnitude  >  1/2
+        -  the  exclusion  of  section  E  now  covers  the  entire
+        pinned  drift  chain,  including  the  wall-edge  row.
+
+  RECORD  NOTES  (not  pinned  here):  the  record  scale  G of
+  the  census  (t  =  g*G;  the  1e9G  row  has  t  =
+  30001045999981977600,  so  G  =  3.00010459999819776e10,
+  distinct  from  the  zero-isolation  frontier  tPT  =
+  30610046000)  and  the  B7  record's  OWN  wall  (the
+  mpmath/zeta-evaluation  wall:  dps-40  fits  to  ~9e18  and
+  OOMs  beyond,  discovery  0085  -  the  past-the-wall  rows
+  sit  beyond  it)  are  record-level  facts;  the  P4  T3  wall
+  top  1e8  is  far  below  both  readings,  so  under  either
+  reading  (raw  height  parameter  or  g/G  window  coordinate)
+  the  B7  content  lies  outside  the  law's  certified  range.
+  No  RH  claim. -/
+
+/-- THE  DRIFT  at  the  wall-edge  row  t/G  =  1e8  (s33b;
+    cross-checked  against  s33). -/
+noncomputable def dD1e8 : ℝ := -974462399 / 10
+
+/-- THE  DRIFT  at  t/G  =  3e8  (s33b;  cross-checked  s33). -/
+noncomputable def dD3e8 : ℝ := -8794531922 / 10
+
+/-- THE  DRIFT  at  t/G  = 5 e8  (s33b;  cross-checked  s33). -/
+noncomputable def dD5e8 : ℝ := -24434877337 / 10
+
+/-- THE  MEASURED  WINDOW  of  the  excess  (s29  P1-pole  plateau,
+    in  g/G  units):  the  b7OpenFace  support  statement
+    [eWinLo,  eWinHi]. -/
+noncomputable def eWinLo : ℝ := 2 * 10 ^ 8
+noncomputable def eWinHi : ℝ := 10 ^ 11
+
+/-- THE  WINDOW  ORDER  (eWinLo  <  eWinHi,  and  the  window  lies
+    strictly  past  the  law's  wall  top  -  the  g/G  reading  of
+    the  section  E  position  ground,  with  the  window  ANCHORS
+    now  pinned). -/
+theorem eWindowGates : eWinLo < eWinHi ∧ eWinLo > lawWallTop := by
+  norm_num [eWinLo, eWinHi, lawWallTop]
+
+/-- THE  GROWTH  CHAIN  across  all  six  past-the-wall  rows
+    (wall-edge  1e8G  through  3e10G):  |D|  GROWS  at  every
+    step  -  the  t^2  growth  family  of  t2stepConsistency
+    extended  to  the  wall-edge  row.  One  norm_num  on  the
+    exact  pins. -/
+theorem dChainGrowth :
+    |dD1e8| < |dD3e8| ∧ |dD3e8| < |dD5e8| ∧ |dD5e8| < |MFa.D9| ∧
+    |MFa.D9| < |MFa.D10| ∧ |MFa.D10| < |MFa.D30| := by
+  norm_num [dD1e8, dD3e8, dD5e8, MFa.D9, MFa.D10, MFa.D30]
+
+/-- THE  COMPOSED  GAP  over  the  ENTIRE  past-the-wall  drift
+    chain:  at  EVERY  height  of  the  law's  certified  range
+    [1,  1e8]  the  tail  content  (t3w_T3UB)  is  <  1/2,  while
+    EVERY  value  of  the  six-row  chain  (wall-edge  1e8G
+    through  3e10G)  has  magnitude  >  1/2  -  the  section  E
+    exclusion  covers  the  whole  pinned  chain  including  the
+    wall-edge  row.  No  RH  claim. -/
+theorem b7ChainLawGap (t : ℝ) (ht : 1 <= t) (ht8 : t <= lawWallTop)
+    (n : ℕ) (hn : n = Nat.floor ((13 : ℝ) * t / 8)) :
+    t3w_T3UB n t < 1 / 2 ∧
+    |dD1e8| > 1 / 2 ∧ |dD3e8| > 1 / 2 ∧ |dD5e8| > 1 / 2 ∧
+    |MFa.D9| > 1 / 2 ∧ |MFa.D10| > 1 / 2 ∧ |MFa.D30| > 1 / 2 := by
+  have hmin : 1 / 2 < |dD1e8| := by norm_num [dD1e8]
+  have hg := dChainGrowth
+  refine ⟨lawTailBelowHalf t ht ht8 n hn, ?_, ?_, ?_, ?_, ?_, ?_⟩
+  · exact hmin
+  · exact lt_trans hmin hg.1
+  · exact lt_trans (lt_trans hmin hg.1) hg.2.1
+  · exact lt_trans (lt_trans (lt_trans hmin hg.1) hg.2.1) hg.2.2.1
+  · exact lt_trans (lt_trans (lt_trans (lt_trans hmin hg.1) hg.2.1) hg.2.2.1) hg.2.2.2.1
+  · exact lt_trans (lt_trans (lt_trans (lt_trans (lt_trans hmin hg.1) hg.2.1) hg.2.2.1) hg.2.2.2.1) hg.2.2.2.2
 
 
 end B7F

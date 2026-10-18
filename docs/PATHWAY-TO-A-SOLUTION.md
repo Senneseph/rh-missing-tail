@@ -620,6 +620,39 @@ for the ACTUAL zeta zero set.  The branches:
       wall.  No  RH  claim;  full  tree  green  (17450  jobs),  0
       sorry,  100  cards.
 
+  FORMAL:  THE  E  FACE  (discovery  0114):  B7Far  section  F
+      gives  b7OpenFace  its  measured  shadow,  like  the  other
+      faces:  the  SIX-ROW  past-the-wall  drift  chain  is  pinned
+      (dD1e8  =  -97446239.9,  dD3e8  =  -879453192.2,  dD5e8  =
+      -2443487733.7  at  the  wall-edge  rows  1e8G/3e8G/5e8G  -
+      s33b,  cross-checked  identical  in  s33  -  plus  D9/D10/
+      D30  from  MFa),  with  the  growth  chain  dChainGrowth
+      (|D|  grows  at  every  step,  one  norm_num)  and  the
+      window  anchors  eWinLo  2e8  /  eWinHi  1e11  in  g/G
+      units  (eWindowGates:  window  order  +  window  past
+      the  T3  wall  top).  b7ChainLawGap  is  the  composed
+      exclusion  over  the  whole  chain:  law  content  (t3w_
+      T3UB)  is  <  1/2  at  every  certified  height  in  [1,
+      1e8]  while  every  value  of  the  six-row  chain  is  >
+      1/2  -  including  the  wall-edge  row  itself.  Part  A  of
+      the  deconvolution  record  is  noted:  the  min-norm  solve
+      localizes  NOTHING  (no  delta-e  support  above  3e-3  in
+      either  s29  or  s33b)  -  the  excess  exists  only  at
+      the  window  +  drift-hit  level,  exactly  the  boundary
+      of  the  unnamed  E  channel  (0113).  The  section  E
+      narrative  is  refined  to  the  TWO-READING  position
+      ground  (raw  height  parameter  vs  g/G  window;  the
+      census  scale  G  and  the  record's  own  mpmath  wall  at
+      ~9e18  are  record-level;  the  T3  wall  top  1e8  lies
+      below  both).  Also  fixed:  the  section  D  bullet
+      committed  at  0113  (the  linter-suggested  `split_ifs
+      <;>  (try  contradiction;  ring)`)  parsed  as  try(
+      contradiction;  ring)  and  left  the  true  branches
+      unsolved  (that  round's  full-tree  green  was  a  lake
+      cache  artifact);  rewritten  in  the  unambiguous
+      all_goals  form  and  verified  green.  No  RH  claim;
+      full  tree  green  (17450  jobs),  0  sorry,  100  cards.
+
 ## 3.  Measured constraints  (anything that proves RH must
     reproduce these)
 
