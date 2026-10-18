@@ -395,6 +395,46 @@ for the ACTUAL zeta zero set.  The branches:
       Re  1/2  -  1/200);  the  endpoint  and  the  other  three
       named  residuals  are  untouched  -  hWin  is  now
       CHARACTERIZED,  not  closed.  No  RH  claim.
+      FORMAL:  formal/RhAttack/WinCount.lean  GATED  (the  hWin
+      SHINK;  the  face's  open  content  shrinks  twice,  two
+      INDEPENDENT  routes):  (A)  THE  CLASSICAL  FRONTIER  -
+      tPT  :=  30610046000  pins  the  rigorous  zero-isolation
+      record  (Platt,  "Isolating  some  non-trivial  zeros  of
+      Zeta":  interval-arithmetic  isolation  of  every
+      non-trivial  zero  with  0  <  Im  <=  tPT  to  +-  2^-102,
+      an  independent  verification  of  the  line  to  that
+      height;  the  public  LMFDB  zero  stream  ends  at  exactly
+      this  height  -  the  record's  own  frontier):  [Z-PT]
+      allOnLineUpTo  q  tPT  is  CITED  over  the  ABSTRACT
+      ZeroSet  (the  Z78-strip  pattern),  and  faceSplit
+      certifies  S4WC.hWinFace  q  <->  hWinFaceResidual  q  -
+      under  [Z-PT]  the  face  IS  zero-exclusion  on  (tPT,  inf)
+      x  (0,  1/200):  the  open  face  of  the  endpoint's  hWin
+      residual  shrinks  by  a  height  factor  of  about  3e7
+      (from  1000  to  3.06e10);  the  higher  literature
+      frontier  (RH  verified  up  to  3  x  10^12,
+      Platt-Trudgian,  arXiv:2004.09765)  is  named  as  an
+      optional  add-on  input.  (B)  THE  3e9  RECORD  SHADOW
+      (an  independent  route,  record-derived):  the  H1  3e9
+      stream  record  is  pinned  and  re-gated  -  Nline  :=
+      9064192826  (the  exact  on-line  count  at  3e9)  and
+      rvm3e9  :=  9064192825.58  (the  recorded  RVM  value;
+      RVM  counts  the  STRIP  zeros):  pinGates  machine-checks
+      diff  =  21/50  and  |diff|  =  0.42  <=  3  (the  fleet's
+      own  +-3  RVM  finish  gate);  D_even  (LEAN-PROVEN  for
+      ANY  ZeroSet:  the  off-line  excess  of  (0,  t]  is
+      even  -  the  whole-slice  twin  of  B0.offSliceEven)  and
+      offExcessBound  (q  with  the  pinned  on-line  count  whose
+      strip  count  passes  the  record's  +-3  gate  has
+      B0.D  q  (3e9)  <=  2  -  AT  MOST  ONE  OFF-LINE  ORBIT
+      below  3e9  -  0  or  2  with  D_even).  The  RESIDUAL  IS
+      OPEN:  zero-exclusion  on  (3.06e10,  inf)  x  (0,  1/200)
+      is  where  no  instrument  in  the  tree  reaches  (the
+      classical  zero-free  regions  stop  at  Re  >  1  -  c/ln
+      t,  nowhere  near  Re  =  1/2  +-  1/200,  and  the
+      measured  zero  walk  ends  at  the  frontier).  The
+      endpoint  and  the  other  three  named  residuals  are
+      untouched.  No  RH  claim.
 
 ## 3.  Measured constraints  (anything that proves RH must
     reproduce these)

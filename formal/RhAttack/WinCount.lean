@@ -81,7 +81,7 @@ import RhAttack.S4WinCap
 namespace WinC
 
 open B0
-open Real Set
+open Real Set Complex
 
 /- — (A)  the classical frontier shrink — -/
 
@@ -101,15 +101,15 @@ noncomputable def tPT : ℝ := 30610046000
     the tree pins the record's own frontier.  This is a fact about
     the ACTUAL zero set,  carried as a named hypothesis by design
     (the Z78 pattern). -/
-def allOnLineUpTo (q : ZeroSet) (H : ℝ) (hH : 0 < H) : Prop :=
+def allOnLineUpTo (q : ZeroSet) (H : ℝ) : Prop :=
     ∀ (ρ : ℂ), ρ ∈ q.Z → 0 < ρ.im → ρ.im ≤ H → ρ.re = 1 / 2
 
 /-- NO OFF-PAIR BELOW THE FRONTIER:  under [Z-PT] there is no
     off-line zero at (t0, d0) with 1000 <= t0 <= H,  0 < d0 < 1/200.
     An off-line zero at the negative height is sent by conjugation
     (HFE after HCJ) to a positive-height off-line twin. -/
-theorem noOffPairBelowPT (q : ZeroSet) (H : ℝ) (hH : 0 < H)
-    (hPT : allOnLineUpTo q H hH)
+theorem noOffPairBelowPT (q : ZeroSet) (H : ℝ)
+    (hPT : allOnLineUpTo q H)
     (t0 d0 : ℝ) (ht0 : 1000 ≤ t0) (hd0 : 0 < d0) (hdw : d0 < (1 / 200 : ℝ))
     (htH : t0 ≤ H) :
     ¬ P12.offPair q t0 d0 := by
@@ -117,28 +117,30 @@ theorem noOffPairBelowPT (q : ZeroSet) (H : ℝ) (hH : 0 < H)
   by_cases hpos : 0 < ρ.im
   · have habs : ρ.im = t0 := by
       rw [abs_of_nonneg (le_of_lt hpos)] at him
-      simpa using him.symm
+      exact him
     have hin : ρ.im ≤ H := by simpa [habs] using htH
     have hre' := hPT ρ hρ (by simpa [habs] using (by linarith [ht0])) hin
     exact hre hre'
   · have hneg : ρ.im < 0 := by
+      have hle : ρ.im ≤ 0 := not_lt.mp hpos
       have hne : ρ.im ≠ 0 := q.nonReal ρ hρ
-      by_contra hnn
-      have hle : 0 ≤ ρ.im := le_of_not_lt hnn
-      exact hne (by linarith)
+      exact lt_of_le_of_ne hle hne
     have habs : -ρ.im = t0 := by
-      rw [abs_of_neg (by linarith [hne : ρ.im ≠ 0, hneg])] at him
-      simpa using him.symm
+      rw [abs_of_nonpos (le_of_lt hneg)] at him
+      exact him
     have hst : star ρ ∈ q.Z := q.conj ρ hρ
     have himst : 0 < (star ρ).im := by
-      simp only [Complex.star_im]
-      linarith
+      simp only [star]
+      linarith [habs, ht0]
     have himst2 : (star ρ).im = t0 := by
-      simp only [Complex.star_im] at habs ⊢
-      simpa using habs
-    have hin2 : (star ρ).im ≤ H := by simpa [himst2] using htH
+      simp only [star] at ⊢
+      exact habs
+    have hin2 : (star ρ).im ≤ H := by
+      rw [himst2]
+      exact htH
     have hre' : (star ρ).re = 1 / 2 := hPT _ hst himst hin2
-    exact hre (by simpa [Complex.star_re] using hre')
+    rw [show (star ρ).re = ρ.re by simp [star]] at hre'
+    exact hre hre'
 
 /-- THE RESIDUAL FACE (named):  zero-exclusion of off-line zeros
     strictly ABOVE the record's frontier,  on the window band.  Under
@@ -155,15 +157,15 @@ def hWinFaceResidual (q : ZeroSet) : Prop :=
     hWin face of S4WinCap is equivalent to the residual (zero-
     exclusion above the frontier). -/
 theorem faceSplit (q : ZeroSet)
-    (hPT : allOnLineUpTo q tPT (by norm_num)) :
+    (hPT : allOnLineUpTo q tPT) :
     S4WC.hWinFace q ↔ hWinFaceResidual q := by
   constructor
   · intro hf t0 d0 ht0 htpt hd0 hdw
     exact (S4WC.hwinFaceImpliesZeroExclusion q hf) t0 d0 ht0 hd0 hdw
   · intro hr t0 d0 ht0 hd0 hdw hz
     by_cases hle : t0 ≤ tPT
-    · exact (noOffPairBelowPT q tPT (by norm_num) hPT t0 d0 ht0 hd0 hdw hle) hz
-    · exact (hr t0 d0 ht0 (not_le.mp hle) hd0 hdw) hz
+    · exact False.elim ((noOffPairBelowPT q tPT hPT t0 d0 ht0 hd0 hdw hle) hz)
+    · exact False.elim ((hr t0 d0 ht0 (not_le.mp hle) hd0 hdw) hz)
 
 /- — (B)  the 3e9 record shadow — -/
 
@@ -184,7 +186,7 @@ def rvm3e9 : ℚ := 906419282558 / 100
     fleet's own +-3 finish gate. -/
 theorem pinGates :
     (Nline : ℚ) - rvm3e9 = 21 / 50 ∧ abs ((Nline : ℝ) - (rvm3e9 : ℝ)) ≤ 3 := by
-  constructor <;> norm_num
+  constructor <;> norm_num [Nline, rvm3e9]
 
 /-- D_EVEN:  for ANY ZeroSet,  the off-line excess of (0, t] is even.
     The whole-slice twin of B0.offSliceEven:  the map
@@ -195,10 +197,9 @@ theorem pinGates :
     2-cycle blocks tile the slice,  so its cardinality is even:
     D = B0.D q t is 2 x (number of off-line orbit pairs). -/
 theorem D_even (q : ZeroSet) (t : ℝ) (ht : 0 < t) : Even (D q t ht) := by
-  let S : Finset ℂ := (q.finite t ht).toFinset.filter (fun ρ => ρ.re ≠ 1 / 2)
+  let S : Finset ℂ := (sliceFin q t ht).filter (fun ρ => ρ.re ≠ 1 / 2)
   have hS : D q t ht = S.card := by
     dsimp only [S, D, sliceFin]
-    rfl
   rw [hS]
   let ι (ρ : ℂ) : ℂ := (1 : ℂ) - star ρ
   -- (a) ι maps S into S
@@ -296,11 +297,11 @@ theorem D_even (q : ZeroSet) (t : ℝ) (ht : 0 < t) : Even (D q t ht) := by
               ext y
               dsimp only [orb]
               simp only [Finset.mem_filter]
-              simp [hrho, hinv]
+              simp [hinv]
               tauto)).elim
           · have hi2 : ι ρ = ι ρ' := h.symm.trans h2
             have hrho : ρ = ρ' :=
-                (hinvol ρ).symm.trans ((hinvol ρ').symm.trans (congr_arg ι hi2)))
+                (hinvol ρ).symm.trans ((congr_arg ι hi2).trans (hinvol ρ'))
             exact (hne (by rw [← hbe, ← hbe', hrho])).elim
       · intro hx
         simp at hx
@@ -320,15 +321,17 @@ theorem D_even (q : ZeroSet) (t : ℝ) (ht : 0 < t) : Even (D q t ht) := by
         exact hx.1
       exact horb
     · intro hx
-      dsimp only [S] at hx ⊢
       dsimp only [B]
       rw [Finset.mem_biUnion]
       refine ⟨orb x, ?hborb, ?hmem⟩
       · rw [Finset.mem_image]
         exact ⟨x, hx, rfl⟩
-      · dsimp
-        simp only [Finset.mem_filter]
-        exact ⟨hx, Or.inl rfl⟩
+      · dsimp only [S] at hx
+        dsimp only [S, orb, id] at ⊢
+        apply Finset.mem_filter.mpr
+        constructor
+        · exact hx
+        · exact Or.inl rfl
   -- (f) |block union| = 2 * |blocks|
   have hsum1 : B.sum (fun b => (b : Finset ℂ).card) = B.sum (fun _ => 2) := by
     apply Finset.sum_congr rfl
@@ -367,8 +370,8 @@ theorem offExcessBound (q : ZeroSet) (n : ℕ) (hn : 1 ≤ n)
     dsimp only [Non, Ntot, sliceFin]
     exact Finset.card_mono (Finset.filter_subset _ _)
   have hNtotNnonD : Ntot q tdata ht = Non q tdata ht + D q tdata ht := by
-    rw [show D q tdata ht = Ntot q tdata ht - Non q tdata ht from hD]
-    omega
+    rw [hD]
+    exact (Nat.add_sub_cancel' hnonle).symm
   have hreal : (Ntot q tdata ht : ℝ) = ((Nline : ℝ)) + (D q tdata ht : ℝ) := by
     rw [hNtotNnonD, hline]
     push_cast
@@ -376,11 +379,10 @@ theorem offExcessBound (q : ZeroSet) (n : ℕ) (hn : 1 ≤ n)
   have hdiff : (D q tdata ht : ℝ) + 21 / 50 =
       (Ntot q tdata ht : ℝ) - (rvm3e9 : ℝ) := by
     rw [hreal]
-    have hd : (Nline : ℝ) - (rvm3e9 : ℝ) = 21 / 50 := by norm_num
+    have hd : (Nline : ℝ) - (rvm3e9 : ℝ) = 21 / 50 := by norm_num [Nline, rvm3e9]
     rw [show (Nline : ℝ) + (D q tdata ht : ℝ) - (rvm3e9 : ℝ) =
         (D q tdata ht : ℝ) + ((Nline : ℝ) - (rvm3e9 : ℝ)) by ring]
     rw [hd]
-    ring
   have hDlt : (D q tdata ht : ℝ) + 21 / 50 ≤ (n : ℝ) := by
     have habs : abs ((D q tdata ht : ℝ) + 21 / 50) ≤ (n : ℝ) := by
       simpa [hdiff] using hrvm
@@ -390,7 +392,8 @@ theorem offExcessBound (q : ZeroSet) (n : ℕ) (hn : 1 ≤ n)
       lt_add_of_pos_right _ (by norm_num)
     exact_mod_cast (lt_of_lt_of_le h3 hDlt)
   have hsub : D q tdata ht ≤ n - 1 := by
-    rw [show n = (n - 1) + 1 from (Nat.sub_add_cancel hn).symm]
+    have hn' : (n - 1) + 1 = n := Nat.sub_add_cancel hn
+    rw [← hn'] at hlt
     exact (Nat.lt_succ_iff).mp hlt
   by_contra hc
   exact hc hsub

@@ -92,6 +92,26 @@ A chain of named theorems;  each box names the modules.
               The  endpoint's  four  named  residuals  are
               UNTOUCHED:  a  measured  constraint  any  RH
               proof  must  reproduce,  not  an  endpoint  leg.)
+     WinCount (the hWin SHINK, GATED:  the  face's  OPEN  CONTENT  =
+              zero-exclusion  above  the  classical  frontier:
+              (A)  tPT  :=  30610046000  pins  the  rigorous
+              zero-isolation  record  (Platt,  interval-verified
+              +-  2^-102;  the  public  stream's  own  end);
+              [Z-PT]  allOnLineUpTo  q  tPT  CITED  in  the  Z78
+              pattern;  faceSplit:  hWinFace  q  <->
+              hWinFaceResidual  q  (zero-exclusion  on  (tPT,
+              inf)  x  (0,  1/200))  -  the  open  face  shrinks
+              by  a  height  factor  ~3e7;  higher  literature
+              frontier  (RH  to  3e12,  Platt-Trudgian
+              arXiv:2004.09765)  named  as  add-on;  (B)  the
+              3e9  RECORD  SHADOW:  Nline  :=  9064192826  +
+              rvm3e9  :=  9064192825.58  pinned,  pinGates  (diff
+              21/50,  |diff|  0.42  <=  3,  norm_num);  D_even
+              (Even  (B0.D  q  t),  whole-slice  twin  of
+              B0.offSliceEven);  offExcessBound  (pinned  on-line
+              count  +  strip  gate  +-3  =>  D  <=  2  =  at
+              most  one  off-line  orbit  below  3e9;  0  or  2
+              with  D_even);  no  RH  claim,  endpoint  untouched)
 
   The actual-set composition (where the zeros are the real ones):
      Z78Strip     (named external input: Re s > 7/8 zero-free;
@@ -108,8 +128,13 @@ A chain of named theorems;  each box names the modules.
                    strip / S4 low / far region PROVEN IN BODY;  the
                    named residual, exactly once:  hs1 (S1 witness),
                    hs3 (S3 wire),  hWin (S4 window-pin shape -
-                   now CHARACTERIZED by S4WinCap as zero-exclusion
-                   on [1000, inf) x (0, 1/200); face still open),
+                   now  CHARACTERIZED  by  S4WinCap  as
+                   zero-exclusion  on  [1000,  inf)  x  (0,
+                   1/200),  and  SHRUNK  by  WinCount:  under
+                   cited  [Z-PT]  (zeros  up  to  the  3.06e10
+                   frontier  on  the  line)  the  face  is
+                   zero-exclusion  on  (3.06e10,  inf)  x  (0,
+                   1/200);  face  still  open),
                    hS2low (S2 low-band pin). PART B2:
                    rh_program78_s1pins - the same endpoint with
                    hs1 REPLACED by the PIN FAMILY over the witness
