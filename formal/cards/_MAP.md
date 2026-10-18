@@ -42,6 +42,22 @@ A chain of named theorems;  each box names the modules.
      S4Blind  (the BLIND-SPOT FACE: the remaining open
      mathematics, named - blindSpot predicate, own-floor
      impossibility PROVEN on it, 25-series pins, s4OpenFace)
+     S4WinCap (the hWin WINDOW FLOOR CAP + FACE IDENTITY, GATED:
+              poffOwnMown (own-height |poff| = S4O.mown, the 25n
+              bridge), floorBelowWire (on the WHOLE window band
+              1000 <= t, 0 < d < 1/200 the unified floor
+              floStripMin sits STRICTLY BELOW a single wire term:
+              floor = mown < 31/(10^5 t^2), and that cap is below
+              the p8_B tail term at the wire index on both
+              branches - near: squaring chain to 50000^2 t^4,
+              far: 62t < 100000 t^2), hWinFace = the hWin
+              hypothesis of rh_program78 restated verbatim via the
+              Z78P12 aliases, and the FACE IDENTITY: hWinFace is
+              EQUIVALENT to zero-exclusion of off-line zeros on
+              [1000, inf) x (0, 1/200) - the squeeze instrument is
+              certified NOT to reach the window band; the face is
+              OPEN: it is zero-exclusion on a band no instrument
+              here reaches; no RH claim, endpoint untouched)
      MFar     (the FAR-M LAW PINS: the past-the-wall M rows,
               s34o/s33b record;  pinGates  machine-checks  the
               three-decade  |D|  quadratic:  adjacent  ratios
@@ -91,7 +107,9 @@ A chain of named theorems;  each box names the modules.
                    [Z78],  at the CONCRETE wire;  S2 covered / S4
                    strip / S4 low / far region PROVEN IN BODY;  the
                    named residual, exactly once:  hs1 (S1 witness),
-                   hs3 (S3 wire),  hWin (S4 window-pin shape),
+                   hs3 (S3 wire),  hWin (S4 window-pin shape -
+                   now CHARACTERIZED by S4WinCap as zero-exclusion
+                   on [1000, inf) x (0, 1/200); face still open),
                    hS2low (S2 low-band pin). PART B2:
                    rh_program78_s1pins - the same endpoint with
                    hs1 REPLACED by the PIN FAMILY over the witness

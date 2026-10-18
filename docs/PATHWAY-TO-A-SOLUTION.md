@@ -367,7 +367,34 @@ for the ACTUAL zeta zero set.  The branches:
       the  endpoint  is  untouched  (far  region  vacuous  in  body
       from  [Z78];  B7  is  a  measured  constraint,  not  one  of
       the  four  named  residuals).  Feeds  B1  (the  walk)  and
-      B5  (law  territory);
+      B5  (law  territory);  FORMAL:  formal/RhAttack/S4WinCap.lean
+      GATED  (the  hWin  window  cap  +  face  identity;  s35a  data
+      backstop  survey  in  tmp/s35a_hwin_far_survey.py,  log
+      tmp/s35a_hwin_survey.log):  (1)  poffOwnMown  -  at  the
+      pair's  own  height  the  B5  off-line  factor  mass  equals
+      S4O.mown  (the  8-factor  kernel  =  B5's  four  factors  at
+      (t, d, t);  the  25n  closed-form  bridge  is  S4O.hMownProd);
+      (2)  floorBelowWire  -  on  the  WHOLE  window  band  1000  \<=  t,
+      0  <  d  <  1/200,  floStripMin  <=  mown  <  31/(10^5  t^2)
+      (each  own-kernel  factor  pinned  separately;  exp  pin  via
+      log  x  <=  x-1)  and  that  cap  is  STRICTLY  below  the
+      P8  tail  term  at  the  wire  index  on  BOTH  branches  (near
+      t  ≤  110000:  squaring  chain  to  50000^2  t^4;  far  t  >  110000:
+      62t  <  100000  t^2)  -  so  the  S2  floor  never  meets  the
+      S4  wire  on  the  window  band;  (3)  the  FACE  IDENTITY  -
+      hWinFace  (the  hWin  hypothesis  of  RHEnd.rh_program78,
+      restated  verbatim  over  the  Z78P12  wire  aliases)  is
+      EQUIVALENT  to  zero-exclusion  of  off-line  zeros  on  <= 1000,
+      inf)  x  (0,  1/200):  the  squeeze  instrument  is  certified
+      to  NOT  reach  the  window  band,  so  the  face  IS  the
+      zero-exclusion  statement  there.  hXgrowPos  (S4G.Xgrow  >  0
+      past  T0,  by  the  S4W.hLn27  ln-pin)  carries  the  far
+      branch's  Mr  positivity.  THE  FACE  REMAINS  OPEN:  it
+      asserts  zero-exclusion  on  a  band  no  instrument  in  the
+      tree  reaches  (classical  zero-free  regions  stop  far  from
+      Re  1/2  -  1/200);  the  endpoint  and  the  other  three
+      named  residuals  are  untouched  -  hWin  is  now
+      CHARACTERIZED,  not  closed.  No  RH  claim.
 
 ## 3.  Measured constraints  (anything that proves RH must
     reproduce these)
