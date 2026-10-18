@@ -140,6 +140,39 @@ A chain of named theorems;  each box names the modules.
               endpoint's  four  named  residuals  are
               UNTOUCHED:  a  measured  constraint  any  RH  proof
               must  reproduce,  not  an  endpoint  leg.)
+     T4Off    (the  OFF-LINE  T4  WALL  LIFT  -  the  G-hs3
+              attack,  discovery  0116,  GATED:  p4_T4_bound_gen
+              is  the  T4  wall  of  P4Limit  (the  B-wire
+              source)  proven  OFF  THE  LINE:  for  -1  <  s.re  (BOTH
+              sides  of  the  critical  line)  and  n  >  0,
+              |p4_em_expr  s  n|  <=  (1/2)  n^-s.re  +  (|s|/12)
+              n^-s.re-1  +  (sqrt(3)/216)  |s(s+1)(s+2)|
+              n^-(s.re+2)/(s.re+2)  -  exact  off-line  powers;
+              the  wall's  proof  structure  (per-period  IBP  +
+              |B3poly|  <=  sqrt(3)/36,  FTC  reassembly,  M->inf
+              bounded-limit  passage)  uses  the  critical-line
+              hypothesis  in  exactly  three  places  and  all
+              three  lift  (the  endpoint  norms  need  Re  s  >
+              -1;  the  tail  antiderivative  needs  s.re+2  >
+              0).  Atoms  p4_op2c_bound_gen  /  p4_f2_tail_bound_gen
+              carry  the  exact  constant  (sqrt(3)/108)|s+2|
+              (x/s(s+1))  n^-(s.re+2)/(s.re+2);  sharpness
+              t4genTerm12_at_line  /  t4genTerm3_at_line  recover
+              the  on-line  statement  exactly  at  s.re  =  1/2
+              (sqrt(3)/540).  NAMED  RESIDUE  (file  docstring):
+              G-hs3-i  (EM  scale  at  an  off-pair  zero  via
+              the  lifted  wall  +  the  cited  DLMF  25.2.8
+              identity,  whose  bridge  reaches  every  Re  s  >
+              1/2,  both  sides  of  the  strip  band)  -
+              CLOSED  HERE;  G-hs3-ii  (the  P6  finite-kernel
+              gap  /  Mr  wire  lifted  off  the  line  -  g-
+              product  terms  with  g^-sigma  factors)  -
+              OPEN;  G-hs3-iii  (margin  composition  against
+              floStripMin  above  the  frontier)  -  OPEN,
+              needs  ii  first.  With  ii  +  iii,  hs3  holds
+              in  body  above  the  frontier  and  drops  out  of
+              the  endpoint  premises.  No  RH  claim:  bound
+              theorems  about  a  concrete  kernel  expression.)
      WinCount (the hWin SHINK, GATED:  the  face's  OPEN  CONTENT  =
               zero-exclusion  above  the  classical  frontier:
               (A)  tPT  :=  30610046000  pins  the  rigorous

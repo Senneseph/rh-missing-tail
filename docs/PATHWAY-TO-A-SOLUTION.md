@@ -686,6 +686,52 @@ for the ACTUAL zeta zero set.  The branches:
       claim.  Full  tree  green  (17450  jobs),  0  sorry,  100
       cards.
 
+  FORMAL:  THE  G-hs3  ATTACK  -  THE  T4  WALL  LIFTS  OFF  THE
+      LINE  (discovery  0116):  G-hs3  (the  endpoint's  off-line
+      lift  of  the  critical-line  T4  wire)  is  no  longer  an
+      analytic  barrier.  The  new  module  T4Off.lean  proves  the
+      T4  wall  of  P4Limit  (the  B-wire  source)  OFF  THE
+      LINE:  p4_T4_bound_gen  -  for  -1  <  s.re  (BOTH  sides  of
+      the  critical  line)  and  n  >  0,  |p4_em_expr  s  n|  <=
+      (1/2)  n^-s.re  +  (|s|/12)  n^-s.re-1  +  (sqrt(3)/216)
+      |s(s+1)(s+2)|  n^-(s.re+2)/(s.re+2),  with  exact  off-line
+      powers;  the  atoms  p4_op2c_bound_gen  /
+      p4_f2_tail_bound_gen  carry  the  exact  constant
+      (sqrt(3)/108)|s+2|  (x  |s(s+1)|)  n^-(s.re+2)/(s.re+2).
+      The  wall's  entire  proof  structure  (per-period  IBP  with
+      the  B3  primitive  and  the  |B3poly|  <=  sqrt(3)/36  pin,
+      boundary  cancellation,  unit-interval  summation,  FTC
+      reassembly,  M->inf  bounded-limit  passage)  uses  the
+      critical-line  hypothesis  in  exactly  THREE  places  -  the
+      endpoint  complex-power  norms  (valid  for  every  Re  s  >
+      -1)  and  the  tail  antiderivative  x^-(s.re+2)/-(s.re+2)
+      (needing  s.re  +  2  >  0)  -  and  all  three  lift  to
+      uniform  statements;  sharpness  theorems  (t4genTerm12_
+      at_line  /  t4genTerm3_at_line)  recover  the  on-line
+      statement  exactly  at  s.re  =  1/2  (sqrt(3)/540).  WHAT
+      THIS  CLOSES:  G-hs3-i  -  at  a  hypothetical  off-pair  zero
+      rho  in  the  strip  band  (1/200  <=  |rho.re  -  1/2|  <=
+      1/2),  zeta(rho)  =  0  makes  W_n(rho)  =  -(P_n  -  I_n)(rho)
+      by  the  SAME  cited  DLMF  25.2.8  identity  the  tree  cites
+      on  the  line  (its  analytic-continuation  bridge  reaches
+      every  Re  s  >  1/2  -  BOTH  sides  of  the  strip  band),
+      so  the  EM  scale  |W_n(rho)|  is  now  MACHINE-BOUNDED
+      off  the  line  at  the  strip  n-schedule.  WHAT  REMAINS
+      (named  in  the  file  docstring):  G-hs3-ii  -  the  P6
+      finite-kernel  gap  |K(rho)  -  (P_n  -  I_n)(rho)|  <=
+      M_wire  LIFTED  OFF  THE  LINE  (the  g-product  terms  carry
+      g^-sigma  factors  with  sigma  =  rho.re  =  1/2  +/-  d0  that
+      the  on-line  wire  never  evaluates);  G-hs3-iii  -  the
+      margin  composition  (i)  +  (ii)  <  floStripMin(t0,  d0)
+      on  the  strip  band  above  the  frontier.  With  ii  +  iii,
+      hs3  holds  IN  BODY  at  every  off-pair  above  the
+      frontier  and  drops  out  of  the  endpoint  premises  of
+      rh_program78_stripfront_PT2;  G-hs1  stays  open.  No  RH
+      claim:  bound  theorems  about  a  concrete  kernel
+      expression,  exactly  the  status  of  the  on-line  T4
+      wall.  Full  tree  green  (17450  jobs),  0  sorry,  101
+      cards.
+
 ## 3.  Measured constraints  (anything that proves RH must
     reproduce these)
 
