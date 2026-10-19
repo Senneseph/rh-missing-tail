@@ -173,6 +173,35 @@ A chain of named theorems;  each box names the modules.
               in  body  above  the  frontier  and  drops  out  of
               the  endpoint  premises.  No  RH  claim:  bound
               theorems  about  a  concrete  kernel  expression.)
+     T4OffD   (the  STRIP-BAND  DOMINATION  of  the  lifted
+              T4  wall  -  G-hs3-i  in  ENDPOINT  FORM,
+              discovery  0117,  GATED:  for  every  1000  <=
+              t0  and  1/200  <=  d0  <=  1/2,
+              t4wall_offline_le_bwires  proves  the  off-line
+              lifted  T4  wall  (T4Off  applied  at  the
+              canonical  strip  point  (1/2+d0)+it0  with
+              the  t^4  n-schedule  S4Strip.n4)  TERMWISE
+              below  the  on-line  B-wire  p8_B  t0  (S4Strip.n4
+              t0):  term  1  by  n^(-d0);  term  2  by  the
+              norm  ratio  <=  6/5  against  n^(-d0)  >=  6/5
+              (200th-root  wall  n  >=  (6/5)^200);  term  3  by
+              the  per-factor  ratio  2001/2000  (product
+              (2001/2000)^3)  against  the  wall  constant  540
+              vs  216  plus  the  (5/2+d0)  denominator,  with
+              c^3*n^-d0  <=  (2/5)*(5/2+d0).  CONSEQUENCE:
+              G-hs3-i  closed  at  the  endpoint  level  (top
+              of  discovery  0116's  component  closure);
+              the  hs3  side  of  the  endpoint  premise  is
+              now  dominated  by  the  strip  B-wire  everywhere
+              on  the  band.  REMAINING  G-hs3  CONTENT:
+              G-hs3-ii  (P6  finite-kernel  gap  /  Mr  wire
+              off  the  line)  +  G-hs3-iii  (margin
+              composition  below  floStripMin)  -  both  OPEN;
+              with  ii  +  iii,  hs3  holds  in  body  above
+              the  frontier  and  drops  out  of  the  RHEnd
+              stripfront  premises.  No  RH  claim:  termwise
+              domination  between  two  explicit  wire
+              expressions.)
      WinCount (the hWin SHINK, GATED:  the  face's  OPEN  CONTENT  =
               zero-exclusion  above  the  classical  frontier:
               (A)  tPT  :=  30610046000  pins  the  rigorous

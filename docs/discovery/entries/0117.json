@@ -1,0 +1,25 @@
+{
+  "title": "G-hs3-i closed at the endpoint level: the strip-band domination (T4OffD.lean gated) - the lifted T4 wall is termwise below the on-line B-wire on the whole band",
+  "kind": "formal-milestone",
+  "status": "gated",
+  "artifacts": [
+    {
+      "path": "formal/RhAttack/T4OffD.lean",
+      "note": "NEW MODULE (608 lines, 0 sorry). t4wall_offline_le_bwires: for every 1000 <= t0 and 1/200 <= d0 <= 1/2, the off-line lifted T4 wall (T4Off.p4_T4_bound_gen applied at the canonical strip point (1/2+d0)+it0 with the t^4 n-schedule S4Strip.n4) is TERMWISE below the on-line B-wire P8Floor.p8_B t0 (S4Strip.n4 t0). Term 1 damped by n^(-d0); term 2: norm ratio <= 6/5 against n^(-d0) >= 6/5 at the band edge (200th-root wall n >= (6/5)^200); term 3: per-factor translation ratio <= 2001/2000 (product (2001/2000)^3 = 1.0015...) against the wall constant 540 vs 216 plus the (5/2+d0) denominator, with the damping constant (2001/2000)^3 * n^(-d0) <= (2/5)*(5/2+d0) (n^(-d0) <= 1 and (2001/2000)^3 < 1.0016 <= (2/5)*2.505 = 1.002). Termwise lemmas t4o_T1/t4o_T2/t4o_T3; core hPdiv division step."
+    },
+    {
+      "path": "formal/cards/T4OffD.md",
+      "note": "New card (102 total)."
+    },
+    {
+      "path": "formal/cards/_MAP.md",
+      "note": "T4OffD block added after T4Off."
+    },
+    {
+      "path": "docs/PATHWAY-TO-A-SOLUTION.md",
+      "note": "Discovery 0117 section inserted."
+    }
+  ],
+  "why_it_matters": "Discovery 0116 closed G-hs3-i at the component level (the lifted wall exists off the line); discovery 0117 closes it at the ENDPOINT level: the off-line wall is dominated, termwise, by the wire the endpoint ALREADY pays for on the line (p8_B at the strip n-schedule). Consequence: the hs3 side of the strip-frontier premise (the EM scale at a hypothetical off-pair zero) is bounded by strip BwireR(t0,d0) at EVERY point of the band - so the next consumer step (G-hs3-iii bookkeeping) only needs the other half, the Mr wire. The three dominations are pure constant arithmetic once the wall's structure is in place: (6/5) comes from the canonical strip width 1/200 against the t^4 schedule growth (sqrt(1 + d0^2/t0^2... bounded via the (6/5)^2 norm bridge); (2001/2000)^3 = 1.0015007... from the per-factor translation bound d0 <= (1/2000)*||sOn+k|| for k = 0,1,2; the 540/216 = 2*2.5 factor from the wall constant ratio; and the damping-constant margin (2001/2000)^3 < 1.002 is checked by norm_num on the exact rationals (8012006001/8000000000 <= 1002/1000). WHAT REMAINS for G-hs3: G-hs3-ii - the P6 finite-kernel gap / Mr wire lifted off the line (g-product terms carry g^(-sigma) factors, sigma = 1/2 +/- d0); G-hs3-iii - the final margin composition BwireR + MrR + MfR < floStripMin on the band (the B-wire term is already in the S4A strip floor sum - once ii is in, iii is the composition step). Then hs3 drops out of the endpoint premises of rh_program78_stripfront_PT2 in body. No RH claim: termwise domination between two explicit wire expressions on a concrete band. Full tree green: Build completed successfully (17450 jobs), 0 sorry, 102 cards.",
+  "next": "G-hs3-ii: lift the Mr wire (the P6 finite-kernel deviation-ratio family) off the line - the g-product with the g^(-sigma) factors at sigma = 1/2 +/- d0, first a measured constants audit (the on-line value is 0 at sigma = 1/2; the off-line value grows with |sigma - 1/2| and must stay below the strip floor's Mr slot); then G-hs3-iii (strip-band margin composition against floStripMin); G-hs1 (scale anti-degeneracy) is the other named gap."
+}

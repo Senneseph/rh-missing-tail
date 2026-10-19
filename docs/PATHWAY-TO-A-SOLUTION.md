@@ -732,6 +732,53 @@ for the ACTUAL zeta zero set.  The branches:
       wall.  Full  tree  green  (17450  jobs),  0  sorry,  101
       cards.
 
+  FORMAL:  G-hs3-i  CLOSED  AT  THE  ENDPOINT  LEVEL  -  THE
+      STRIP-BAND  DOMINATION  (discovery  0117):  the  new
+      module  T4OffD.lean  closes  the  last  component  gap
+      between  discovery  0116  and  a  live  endpoint  leg:
+      t4wall_offline_le_bwires  proves  that  for  every
+      1000  <=  t0  and  1/200  <=  d0  <=  1/2,  the
+      OFF-LINE  lifted  T4  wall  (p4_T4_bound_gen  at  the
+      canonical  strip  point  (1/2 + d0) + it0  with  the
+      t^4  n-schedule  S4Strip.n4)  is  TERMWISE  below  the
+      ON-LINE  B-wire  P8Floor.p8_B  t0  (S4Strip.n4  t0)
+      -  the  wire  the  endpoint  already  pays  for  on
+      the  line.  The  three  termwise  dominations:  term
+      1  is  damped  by  n^(-d0);  term  2  trades  the
+      norm  ratio  <=  6/5  (the  1/200  strip  width
+      against  the  t^4  growth)  against  n^(-d0)  >=  6/5
+      at  the  band  edge  (the  200th-root  wall  n  >=
+      (6/5)^200);  term  3  trades  the  per-factor
+      translation  ratio  <=  2001/2000  (product
+      (2001/2000)^3  =  1.0015...)  against  the  wall
+      constant  540  vs  216  (a  factor  2)  and  the
+      (5/2 + d0)  denominator,  with  the  damping  constant
+      (2001/2000)^3  *  n^(-d0)  <=  (2/5)  *  (5/2 + d0)
+      (n^(-d0)  <=  1  and  (2001/2000)^3  <  1.0016  <=
+      (2/5)  *  2.505  =  1.002  -  the  margin  is  pure
+      constant  arithmetic).  CONSEQUENCE  for  the
+      endpoint:  the  hs3  side  of  the  strip-frontier
+      premise  (the  EM  scale  at  an  off-pair  zero)  is
+      now  dominated  by  the  strip  B-wire  BwireR(t0,
+      d0)  at  EVERY  point  of  the  band  -  G-hs3-i  is
+      closed  in  endpoint  form,  not  just  at  component
+      level.  WHAT  REMAINS:  G-hs3-ii  -  the  P6
+      finite-kernel  gap  /  Mr  wire  lifted  off  the
+      line  (the  g-product  terms  carry  g^-sigma  factors
+      the  on-line  wire  never  evaluates);  G-hs3-iii
+      -  the  final  margin  composition  (i)  +  (ii)  <
+      floStripMin(t0,  d0)  on  the  strip  band  above
+      the  frontier  (the  B-wire  term  already  sits  in
+      that  sum  in  the  S4A  strip  floor  -  iii  is
+      largely  the  bookkeeping  step).  With  ii  +  iii,
+      hs3  holds  IN  BODY  at  every  off-pair  above  the
+      frontier  and  drops  out  of  the  endpoint
+      premises;  G-hs1  stays  open.  No  RH  claim:
+      termwise  domination  between  two  explicit  wire
+      expressions  on  a  concrete  band.  Full  tree
+      green  (17450  jobs),  0  sorry,  102  cards.
+
+
 ## 3.  Measured constraints  (anything that proves RH must
     reproduce these)
 
