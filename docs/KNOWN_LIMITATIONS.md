@@ -242,3 +242,55 @@ R_closed) is excluded in both engines, the executed 3e9 grid is
 1.0816362118, 0 rows below 1, 1 budget-width FLAG), and the 3e10
 grid is 29 x 24 = 696 points.  No limitation statement is
 affected.
+
+## POST-MACHINE STATE (discovery 0120, 2026-10-19 — the endpoint's
+## residual is data/record content only)
+
+After discoveries 0116-0120 (G-hs3-ii/iii closed in the machine:
+T4Off.lean, T4OffD.lean, T4OffM.lean; the endpoint machined in
+RHEnd.lean parts B7/B8), the theorem
+`rh_program78_stripfront_mach_s1pins_PT2` (RHEnd.lean, GATED, full
+tree green) states the whole program at the Platt-Trudgian verified
+frontier tPT2 = 3,000,175,332,800 (arXiv:2004.09765, Theorem 1,
+CITED as [Z-PT2]) from EXACTLY four named inputs, all strictly
+above that height:
+
+1. **The P1-P4 pin family** at strip-band witness zeros
+   (1/200 <= d0 <= 1/2, i.e. 1/2 <= Re rho < 1, t0 >= tPT2):
+   P1 fill (`Qside = |zeta rho - Kfun rho|`), P2 kernel magnitude
+   (`devFacePt <= |W_n|`), P3 A4.3 mass, P4 absorption. DATA
+   OBLIGATION: zeta records at heights above 3.000e12 at the
+   off-pair zeros — the per-witness measurement the E1ClauseV3 /
+   S1Face machinery makes below the data extent, re-run where the
+   zero set above tPT2 is known.
+
+2. **The window zero-exclusion face**: no off-line zeros on
+   (tPT2, inf) x (0, 1/200). RECORD OBLIGATION: a zero-verification
+   record in the (1/2, 1/2 + 1/200) box above tPT2 — the next
+   Platt-Trudgian-class verification to be produced or cited. This
+   is the one obligation with NO in-tree analytic substitute (the
+   window squeeze is pinned at the near pin ~1662x above the floor,
+   bound-level, recorded in Part C of the RHEnd docstring).
+
+3. **The machined hs3 face**: at each strip-band off-pair,
+   `Qside <= |EM wall at the canonical point (n4 schedule)| +
+   t4m_MwireOff` — whose only non-machine content is the CITED
+   classical 1.6 convexity mass (the same bound the tree cites on
+   the line, transferred through the functional equation). RECORD
+   OBLIGATION: the per-witness convexity evaluation at the off-pair
+   point, checkable against the same zeta record as item 1.
+
+4. **[Z-PT2] itself**: all non-trivial zeros with 0 < Im <= tPT2 on
+   the line (CITED, arXiv:2004.09765) — plus the standing [Z78]
+   external 7/8-strip zero-free input.
+
+No analytic face of the endpoint remains inside the tree: every
+open item above is either checkable against a zeta record at the
+height (items 1, 3) or a classical verification record (item 2),
+not a theorem the tree cannot produce. No RH claim is made or
+implied anywhere: the endpoint is a composition around these
+named, bounded, recorded obligations.
+
+*Companion: `PATHWAY-TO-A-SOLUTION.md` (the FORMAL blocks at
+discovery 0116-0120), `discovery/DISCOVERY.html` (entries 0116-0120),
+`formal/cards/RHEnd.md` (parts B5-B8 of the endpoint).*
