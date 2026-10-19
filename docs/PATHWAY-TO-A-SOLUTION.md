@@ -778,6 +778,48 @@ for the ACTUAL zeta zero set.  The branches:
       expressions  on  a  concrete  band.  Full  tree
       green  (17450  jobs),  0  sorry,  102  cards.
 
+  FORMAL:  G-hs3-ii  +  G-hs3-iii  CLOSED  IN  THE  MACHINE  -  THE
+      MR  WIRE  LIFTED  OFF  THE  LINE  (discovery  0118):  the  new
+      module  T4OffM.lean  (812  lines,  0  sorry,  GATED,  full
+      tree  green)  closes  the  K-side  half  of  the  G-hs3
+      program.  The  off-line  M-wire:  t4m_ZboundOff  (t0,  d0)
+      :=  1.6  *  t0^(1/4  +  d0/2)  *  ln  t0  -  the  CITED
+      DLMF  25.15.4-type  convexity  mass  (the  SAME  1.6  the
+      tree  already  cites  on  the  line,  transferred  through
+      the  functional  equation  |zeta(rho)  /  C(rho)|  =
+      |zeta(1  -  rho)|  at  the  off-pair  zero;  the  worst
+      side  is  sigma  =  1/2  +  d0)  -  the  ONLY  non-machine
+      input  of  the  module  -  and  t4m_MwireOff  (t0,  d0)
+      :=  ZboundOff  *  e^X4fun  *  X4fun  (the  on-line
+      M  *  e^X  *  X  shape  at  the  lifted  mass;  the  b3
+      correction  is  sigma-independent,  so  no  new  analytic
+      barrier).  Machine  chain  (all  LEAN-proven  on  the
+      band,  pins  audited  by  tmp/t4offm_audit.py,  margin
+      ~16  orders  at  the  corner):  t4m_shape  (ZboundOff  =
+      on-line  Zbound  *  t^(d/2));  t4m_Mterm  (MwireOff  <=
+      MTUBfun  *  t^(d/2)  via  the  on-line  st_hMterm  chain);
+      t4m_Mpin  (MTUBfun  *  t^(d/2)  <=  2.5e-15  *  t^(-9/2));
+      t4m_Bupper  (p8_B  t0  (S4Strip.n4  t0)  <=  9e-5  *
+      t^(-2),  three  termwise  pins  against  the  n  >=  3.1e7
+      *  t^4  floor);  t4m_margin  [G-hs3-iii:  p8_B  +
+      MwireOff  <  S1LowT.floStripMin  on  the  band  -  corner
+      9e-5  +  2.5e-15  *  t^(-5/2)  <  F4];  t4m_Bmono  (p8_B
+      t  n  <=  p8_B  t  m  for  m  <=  n  -  schedule
+      comparison);  t4m_resid_strip  [terminal,  P8Floor-A5
+      shape:  triangle  +  t4m_margin,  under  hW  (the  lifted
+      T4  wall)  and  hK  (K  -  (P_n  -  I_n)(s)  under  the
+      lifted  M-wire)].  CONSEQUENCE:  on  the  strip  band
+      above  the  frontier,  the  endpoint  hs3  leg  reduces  (via
+      T4OffD  +  t4m_Bmono  for  hW,  t4m_resid_strip  for  hK)
+      to  ONE  cited  convexity  mass  -  hs3  becomes  body-
+      provable  above  the  frontier  and  drops  out  of  the
+      RHEnd  stripfront  premises  in  the  next  step.  No  RH
+      claim:  the  only  non-machine  input  is  a  CITED
+      classical  convexity  bound;  every  machine  part  is
+      checked  on  a  concrete  band.  Full  tree  green  (17450
+      jobs),  0  sorry,  102  cards.
+
+
 
 ## 3.  Measured constraints  (anything that proves RH must
     reproduce these)

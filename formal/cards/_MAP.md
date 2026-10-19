@@ -202,6 +202,39 @@ A chain of named theorems;  each box names the modules.
               stripfront  premises.  No  RH  claim:  termwise
               domination  between  two  explicit  wire
               expressions.)
+      T4OffM     (G-hs3-ii  +  G-hs3-iii  CLOSED  IN  THE
+               MACHINE,  discovery  0118,  GATED:  the  Mr
+               wire  LIFTED  OFF  THE  LINE  -  t4m_ZboundOff
+               (t0,d0)  :=  1.6  *  t0^(1/4  +  d0/2)  *  ln
+               t0  (CITED  convexity  mass  -  same  1.6  the
+               tree  already  cites  on  the  line,  via  the
+               functional  equation;  the  ONLY  non-machine
+               input)  +  t4m_MwireOff  :=  ZboundOff  *
+               e^X4fun  *  X4fun  (on-line  M  *  e^X  *  X
+               shape  at  the  lifted  mass;  b3  correction
+               sigma-independent).  Machine  chain:  t4m_shape
+               (ZboundOff  =  on-line  Zbound  *  t^(d/2));
+               t4m_Mterm  (MwireOff  <=  MTUBfun  *  t^(d/2)
+               via  the  on-line  st_hMterm  chain);  t4m_Mpin
+               (MTUBfun  *  t^(d/2)  <=  2.5e-15  t^(-9/2));
+               t4m_Bupper  (p8_B  t0  (S4Strip.n4  t0)  <=
+               9e-5  t^(-2),  three  termwise  pins  against
+               the  n  >=  3.1e7  *  t^4  floor);  t4m_margin
+               [G-hs3-iii:  p8_B  +  MwireOff  <  floStripMin
+               on  the  band  -  corner  9e-5  +  2.5e-15  *
+               t^(-5/2)  <  F4,  margin  ~16  orders];
+               t4m_Bmono  (p8_B  t  n  <=  p8_B  t  m  for
+               m  <=  n  -  the  schedule  comparison);
+               t4m_resid_strip  [terminal,  P8Floor-A5
+               shape:  at  s  =  (1/2  +  d0)  +  i*t0,  under
+               hW  (the  T4OffD  wall  +  t4m_Bmono)  and  hK
+               (K  -  (P_n  -  I_n)(s)  <=  Mval  <=  MwireOff
+               -  the  CITED  mass  lift),  triangle  +
+               t4m_margin  gives  the  residual  <  floStripMin].
+               CONSEQUENCE:  on  the  strip  band  above  the
+               frontier,  the  endpoint  hs3  leg  reduces  to
+               ONE  cited  convexity  mass,  not  an  analytic
+               barrier.)
      WinCount (the hWin SHINK, GATED:  the  face's  OPEN  CONTENT  =
               zero-exclusion  above  the  classical  frontier:
               (A)  tPT  :=  30610046000  pins  the  rigorous
