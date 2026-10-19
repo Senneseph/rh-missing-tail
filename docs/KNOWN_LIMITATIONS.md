@@ -352,8 +352,13 @@ faces, of which exactly one is analytic content inside the tree:
    witness: analytic content in the original sense, not a data or
    citation item. Candidate resolutions: a left-tuned tail theory
    (schedule `n ~ t^{4/(1-2*d0)}`-class, d0-dependent, breaks the
-   n4 wire's uniformity), squeezing the face at measured left-flank
-   zeros below/around the frontier, or a different wall.
+   n4 wire's uniformity) — DONE: discovery 0123, T4OffL section S7;
+   squeezing the face at measured left-flank zeros below/around the
+   frontier — CLOSED as a dead branch by discovery 0124: the face is
+   DATA-MINIMAL (its stated support `t0 >= tPT2` sits entirely above
+   the measured data, and no measured off-line zero exists in the
+   program's ledgers at all — the finders operate on the critical
+   line; VERDICT paragraph below); or a different wall.
 
 **Discovery 0122 (2026-10-19 — endpoint lockstep):** the face is now
 IN THE MACHINE. `RHEnd.lean` part B9 (the file is 1505 lines, 0
@@ -392,6 +397,42 @@ precisely that the FULL S3 squeeze (not just the first T4 term) holds
 at the explicitly given per-point tuned schedule at the left-flank
 witness. The remaining attack candidate is the data squeeze of the
 face at measured left-flank zeros (candidate 1).
+
+**Discovery 0124 (2026-10-19 — VERDICT: candidate 1 DEGENERATES, the
+face is DATA-MINIMAL):** the data squeeze closes as a dead branch,
+evidenced in three independent routes. (1) MECHANISM: the in-tree
+zero finders operate ON THE CRITICAL LINE (Riemann-Siegel / Platt
+record, `day024_platt_fast.py`); the Platt `.pd` format stores per-
+zero 104-bit STEPS for the t-coordinate ONLY and the decoded ledgers
+are 8-byte float64 t-streams — no measured real part of a zero
+exists anywhere in the program's data. (2) ROW FORMAT: the 21-column
+fleet rows (`day037._point_row`: FLAG, x, t, g, mnew, mcert, residf,
+zeta, dev, Bexp, Bph, Bz, Bdev, Btail_re, Btail_im, Bprod_re,
+Bprod_im, Bqrem, Bqext, nlt, flagbit) are CHANNEL/MARGIN values at
+TRIAL points (x, t, g, k) — the Re-looking fields are mnew/mcert
+margins, not coordinates. (3) GEOMETRY: in
+`rh_program78_stripfront_mach_left_PT2` the face `hs3LeftPT2` is
+STATED on `t0 >= WinC.tPT2` — below it the premise `hPT2 : WinC.
+allOnLineUpTo q WinC.tPT2` (the cited [Z-PT2] record) eliminates
+off-pairs from the face's domain of application; above it no
+measured data exists. The face's support is EXACTLY the unverified
+territory: nothing below can be squeezed (the face is not there),
+and the 'check the squeeze at measured left-flank zeros' audit is
+vacuous (there are none, by mechanism and by record). Structural
+lesson: with the endpoint stated AT the verified frontier, every
+analytic face is automatically data-minimal — the squeeze pattern
+(0106/0108) only works when a face extends BELOW a higher verified
+height, and G-hs3-left has no such extension. The two live routes
+remaining for G-hs3-left are now unambiguous: (A) ANALYTIC — prove
+the full S3 squeeze at the explicitly tuned per-point schedule of
+T4OffL S7 (left-flank S3 tail theory; the true residual); (B)
+MEASURED SHADOW (evidence only) — a numerical grid of the
+walk-vs-`BwireP + MrLift` inequality at LEFT-FLANK trial points at
+or below 3e12 against the actual zeros: cannot shrink the machine's
+face (which lives above tPT2), but a clean shadow is recorded
+encouragement for route A and a violation is a discovery (the shape
+of the squeeze failing at trial points). Route (C) — extending the
+verified frontier — is external record-keeping.
 
 The barriers of T4OffL say nothing about whether left-flank zeros
 exist: they are FORMAL NEGATIVE RESULTS about what the current

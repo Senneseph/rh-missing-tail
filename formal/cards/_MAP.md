@@ -284,7 +284,23 @@ A chain of named theorems;  each box names the modules.
                schedule  exists,  per-point  tuning  is
                essential.  G-hs3-left  sharpened  to:  the  FULL
                S3  squeeze  at  the  explicitly  given  per-point
-               tuned  schedule.)
+               tuned  schedule.  Discovery
+               0124  VERDICT:  the  DATA  SQUEEZE  candidate
+               DEGENERATES  -  the  face  is  DATA-MINIMAL  (its
+               stated  support  t0  >=  tPT2  sits  entirely
+               above  the  measured  data;  no  measured  off-
+               line  zero  exists  in  the  program's  ledgers:
+               finders  run  on  the  critical  line,  Platt  .pd
+               stores  t  ONLY;  fleet  rows  are  channel/
+               margin  values  at  trial  points).  Live  routes
+               left  for  G-hs3-left:  (A)  ANALYTIC  -  the
+               full  S3  squeeze  at  S7's  explicit  tuned
+               schedule  (left-flank  S3  tail  theory);
+               (B)  MEASURED  SHADOW  (evidence  only)  -  a
+               numerical  grid  of  walk-vs-BwireP+MrLift  at
+               LEFT-FLANK  trial  points  at  or  below  3e12:
+               a  clean  shadow  encourages  (A),  a  violation
+               is  a  discovery.)
      WinCount (the hWin SHINK, GATED:  the  face's  OPEN  CONTENT  =
               zero-exclusion  above  the  classical  frontier:
               (A)  tPT  :=  30610046000  pins  the  rigorous

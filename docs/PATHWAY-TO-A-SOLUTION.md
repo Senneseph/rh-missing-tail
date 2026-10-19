@@ -981,7 +981,44 @@ for the ACTUAL zeta zero set.  The branches:
       The  analytic  residue  is  unchanged  and  honest:  that
       the  FULL  S3  squeeze  (not  just  the  first  T4  term)
       holds  at  the  tuned  schedule  at  the  left-flank
-      witness.  No  RH  claim.
+      witness.  No  RH  claim.witness.  No  RH  claim.
+
+  VERDICT:  THE  DATA  SQUEEZE  DEGENERATES  -  THE  FACE  IS
+      DATA-MINIMAL  (discovery  0124):  candidate  (1)  of  0122/
+      0123  closes  as  a  dead  branch,  evidenced  in  three
+      independent  routes.  (1)  MECHANISM:  the  in-tree  zero
+      finders  operate  ON  THE  CRITICAL  LINE  (Riemann-Siegel
+      /  Platt  record);  the  Platt  .pd  format  stores  per-
+      zero  104-bit  STEPS  for  the  t-coordinate  ONLY  -  no
+      measured  real  part  of  a  zero  exists  anywhere  in
+      the  program's  data.  (2)  ROW  FORMAT:  the  21-column
+      fleet  rows  are  CHANNEL/MARGIN  values  at  TRIAL  points
+      (x,  t,  g,  k)  -  the  Re-looking  fields  are  mnew/
+      mcert  margins,  not  coordinates.  (3)  GEOMETRY:  in
+      rh_program78_stripfront_mach_left_PT2  the  face  hs3Left-
+      PT2  is  STATED  on  t0  >=  WinC.tPT2  -  below  it  the
+      cited  record  premise  (allOnLineUpTo  q  tPT2)  elimi-
+      nates  off-pairs  from  the  face's  domain;  above  it  no
+      measured  data  exists.  The  face's  support  is  EXACTLY
+      the  unverified  territory:  nothing  below  can  be
+      squeezed  (the  face  is  not  there)  and  the  audit
+      against  measured  left-flank  zeros  is  VACUOUS  (there
+      are  none,  by  mechanism  and  by  record).  Structural
+      lesson:  with  the  endpoint  stated  AT  the  verified
+      frontier,  every  analytic  face  is  automatically  data-
+      minimal  -  the  squeeze  pattern  (0106/0108)  only  works
+      when  a  face  extends  BELOW  a  higher  verified  height.
+      Live  routes  for  G-hs3-left:  (A)  ANALYTIC  -  the  full
+      S3  squeeze  at  S7's  explicit  tuned  schedule  (left-
+      flank  S3  tail  theory;  the  true  residual);  (B)
+      MEASURED  SHADOW  (evidence  only)  -  a  numerical  grid
+      of  the  walk-vs-BwireP+MrLift  inequality  at  LEFT-
+      FLANK  trial  points  at  or  below  3e12  against  the
+      actual  zeros:  a  clean  shadow  is  encouragement  for
+      (A),  a  violation  is  a  discovery  (the  shape  of  the
+      squeeze  failing  at  trial  points).  (C)  frontier
+      extension  is  external  record-keeping.  No  RH  claim.
+
 
 
 
