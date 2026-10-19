@@ -88,6 +88,16 @@
         content  is  the  CITED  classical  1.6  convexity
         mass,  not  an  analytic  barrier  in  the  tree.
 
+   PART  B8  (discovery  0120):  G-hs1  restated  over  the
+        strip  band  as  the  PIN  FAMILY  at  the  witness
+        zero  (the  B2  shape  restricted  to  1/200  <=  d0
+        <=  1/2):  rh_program78_stripfront_mach_s1pins  (+
+        _PT2)  -  the  hs1  scale  face  is  entered  as  the
+        P1  fill  /  P2  kernel-magnitude  /  P3  A4.3  mass
+        /  P4  absorption  pins  at  the  strip-band  witness,
+        derived  in  body  via  S1Face.hs1AtZero.  No  RH
+        claim.
+
    Honesty  (locked):  this  is  a  composition  around  the
    named  items;  NOTHING  new  is  claimed  -  the  residual
    is  the  SAME  residual  the  chart  carries  (S1  witness,
@@ -1049,6 +1059,142 @@ theorem rh_program78_stripfront_mach_PT2 (q : ZeroSet)
     RH q :=
   rh_program78_stripfront_mach q hz78 hqz honline Qside WinC.tPT2
     (by norm_num [WinC.tPT2]) hPT2 hs1StripPT2 hs3MachPT2 hWinPT2
+
+
+/-  ##  Part  B8  -  G-hs1  AS  THE  PIN  FAMILY  OVER  THE  STRIP
+    BAND  ABOVE  THE  FRONTIER  (discovery  0120)
+
+  The  B2  restatement  (rh_program78_s1pins,  discovery  0095)
+  showed  that  the  bare  hs1  scale  inequality  is  the
+  PIN  FAMILY  at  the  witness  zero  (P1  fill  =  the  A0
+  fill,  P2  kernel  magnitude,  P3  the  A4.3  mass,  P4
+  absorption),  with  the  hs1  leg  derived  in  body  via
+  S1Face.hs1AtZero.  Part  B8  does  the  same  for  the
+  MACHINED  stripfront  endpoint:  G-hs1  on  the  strip  band
+  above  the  frontier  is  entered  as  the  pin  family
+  restricted  to  strip-band  off-pair  zeros  (1/200  <=  d0
+  <=  1/2),  and  the  S1  leg  is  derived  in  the  body  the
+  same  way  (the  window  branch  keeps  the  window  face,
+  below  the  frontier  is  vacuous,  the  far  region  is
+  [Z78]).  The  residual  shape  of  G-hs1  narrows  from  the
+  bare  scale  inequality  to  the  checkable  witness-level
+  pin  family;  the  pins  are  data  faces  (measured  where
+  data  reach;  citation  content  above  the  verified
+  frontier,  exactly  like  [Z-PT2]).  No  RH  claim.  -/
+
+theorem rh_program78_stripfront_mach_s1pins (q : ZeroSet)
+    (hz78 : Z78.externalZeroFree78)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) →
+      (|ρ.im| : ℝ) < (707 : ℝ) / 50 → ρ.re = 1 / 2)
+    (Qside : ℝ × ℝ → ℝ)
+    (H : ℝ) (hH : 1000 ≤ H)
+    (hPT : WinC.allOnLineUpTo q H)
+    (n : ℕ)
+    (Kfun : ℂ → ℂ)
+    (mvalFace : ℝ × ℝ → ℝ)
+    (devFacePt : ℂ → ℝ)
+    (hFill : ∀ (t0 d0 : ℝ) (ρ : ℂ), 0 < t0 → (1 / 200 : ℝ) ≤ d0 →
+      d0 ≤ 1 / 2 → ρ ∈ q.Z → ρ.re ≠ (1 / 2 : ℝ) →
+      (|ρ.im| : ℝ) = t0 → |(ρ.re : ℝ) - 1 / 2| = d0 →
+      Qside (t0, d0) = ‖riemannZeta ρ - Kfun ρ‖)
+    (hDev : ∀ (t0 d0 : ℝ) (ρ : ℂ), 0 < t0 → (1 / 200 : ℝ) ≤ d0 →
+      d0 ≤ 1 / 2 → ρ ∈ q.Z → ρ.re ≠ (1 / 2 : ℝ) →
+      (|ρ.im| : ℝ) = t0 → |(ρ.re : ℝ) - 1 / 2| = d0 →
+      devFacePt ρ ≤ ‖p4_Wn ρ n‖)
+    (hMass : ∀ (t0 d0 : ℝ) (ρ : ℂ), 0 < t0 → (1 / 200 : ℝ) ≤ d0 →
+      d0 ≤ 1 / 2 → ρ ∈ q.Z → ρ.re ≠ (1 / 2 : ℝ) →
+      (|ρ.im| : ℝ) = t0 → |(ρ.re : ℝ) - 1 / 2| = d0 →
+      ‖Kfun ρ - (p4_P n ρ - p4_I n ρ)‖ ≤ mvalFace (t0, d0))
+    (hAbsorb : ∀ (t0 d0 : ℝ) (ρ : ℂ), 0 < t0 → (1 / 200 : ℝ) ≤ d0 →
+      d0 ≤ 1 / 2 → ρ ∈ q.Z → ρ.re ≠ (1 / 2 : ℝ) →
+      (|ρ.im| : ℝ) = t0 → |(ρ.re : ℝ) - 1 / 2| = d0 →
+      devProg (t0, d0) + mvalFace (t0, d0) ≤ devFacePt ρ)
+    (hs3MachH : ∀ (t0 d0 : ℝ), H <= t0 → (1 / 200 : ℝ) <= d0 →
+      d0 <= 1 / 2 → offPair q t0 d0 →
+      Qside (t0, d0) ≤
+        ‖p4_em_expr (t4o_sOff t0 d0) (S4Strip.n4 t0)‖ +
+        t4m_MwireOff t0 d0)
+    (hWinH : WinC.hWinFaceResidualH q H) :
+    RH q := by
+  refine rh_program78_stripfront_mach q hz78 hqz honline Qside
+    H hH hPT ?hs1 hs3MachH hWinH
+  --  the  G-hs1  face  over  the  strip  band  above  the
+  --  frontier:  the  pin  family  at  the  witness  zero  +
+  --  S1Face  (the  B2  derivation,  restricted).
+  intro t0 d0 ht0F hdlo hdh hp
+  have ht0 : 0 < t0 := by linarith [hH, ht0F]
+  obtain ⟨ρ, hrho, hrhooff, hint0, hd0eq⟩ := hp
+  have hzero := hqz ρ hrho
+  have hfill : Qside (t0, d0) = ‖riemannZeta ρ - Kfun ρ‖ :=
+    hFill t0 d0 ρ ht0 hdlo hdh hrho hrhooff hint0 hd0eq
+  have hdev : devFacePt ρ ≤ ‖p4_Wn ρ n‖ :=
+    hDev t0 d0 ρ ht0 hdlo hdh hrho hrhooff hint0 hd0eq
+  have hmas : ‖Kfun ρ - (p4_P n ρ - p4_I n ρ)‖ ≤
+      mvalFace (t0, d0) :=
+    hMass t0 d0 ρ ht0 hdlo hdh hrho hrhooff hint0 hd0eq
+  have habsb : devProg (t0, d0) + mvalFace (t0, d0) ≤
+      devFacePt ρ :=
+    hAbsorb t0 d0 ρ ht0 hdlo hdh hrho hrhooff hint0 hd0eq
+  have hf := S1Face.hs1AtZero ρ n (Kfun ρ) (mvalFace (t0, d0))
+    (devFacePt ρ) hmas hdev hzero
+  have hfillK : ‖riemannZeta ρ - Kfun ρ‖ = ‖Kfun ρ‖ := by
+    rw [hzero]
+    simp [norm_neg]
+  have habs : devProg (t0, d0) ≤ devFacePt ρ - mvalFace (t0, d0) :=
+    (le_sub_iff_add_le).mpr habsb
+  calc Qside (t0, d0)
+      _ = ‖riemannZeta ρ - Kfun ρ‖ := hfill
+      _ = ‖Kfun ρ‖ := hfillK
+      _ ≥ devFacePt ρ - mvalFace (t0, d0) := hf
+      _ ≥ devProg (t0, d0) := habs
+
+/-  ##  THE  [Z-PT2]  INSTANCES  (discovery  0120)  -/
+--  (the  two  theorems  below  instantiate  the  frontier  at
+--   tPT2;  the  whole  residual  lives  strictly  above
+--   3,000,175,332,800.)
+
+/--  THE  MACHINED  STRIPFRONT  ENDPOINT  AT  tPT2  -  HS3  AS
+    THE  LIFTED-WIRE  FACE  (discovery  0119,  this  file  part
+    B7  -  see  rh_program78_stripfront_mach_PT2  above).  -/
+theorem rh_program78_stripfront_mach_s1pins_PT2 (q : ZeroSet)
+    (hz78 : Z78.externalZeroFree78)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) →
+      (|ρ.im| : ℝ) < (707 : ℝ) / 50 → ρ.re = 1 / 2)
+    (Qside : ℝ × ℝ → ℝ)
+    (hPT2 : WinC.allOnLineUpTo q WinC.tPT2)
+    (n : ℕ)
+    (Kfun : ℂ → ℂ)
+    (mvalFace : ℝ × ℝ → ℝ)
+    (devFacePt : ℂ → ℝ)
+    (hFill : ∀ (t0 d0 : ℝ) (ρ : ℂ), 0 < t0 → (1 / 200 : ℝ) ≤ d0 →
+      d0 ≤ 1 / 2 → ρ ∈ q.Z → ρ.re ≠ (1 / 2 : ℝ) →
+      (|ρ.im| : ℝ) = t0 → |(ρ.re : ℝ) - 1 / 2| = d0 →
+      Qside (t0, d0) = ‖riemannZeta ρ - Kfun ρ‖)
+    (hDev : ∀ (t0 d0 : ℝ) (ρ : ℂ), 0 < t0 → (1 / 200 : ℝ) ≤ d0 →
+      d0 ≤ 1 / 2 → ρ ∈ q.Z → ρ.re ≠ (1 / 2 : ℝ) →
+      (|ρ.im| : ℝ) = t0 → |(ρ.re : ℝ) - 1 / 2| = d0 →
+      devFacePt ρ ≤ ‖p4_Wn ρ n‖)
+    (hMass : ∀ (t0 d0 : ℝ) (ρ : ℂ), 0 < t0 → (1 / 200 : ℝ) ≤ d0 →
+      d0 ≤ 1 / 2 → ρ ∈ q.Z → ρ.re ≠ (1 / 2 : ℝ) →
+      (|ρ.im| : ℝ) = t0 → |(ρ.re : ℝ) - 1 / 2| = d0 →
+      ‖Kfun ρ - (p4_P n ρ - p4_I n ρ)‖ ≤ mvalFace (t0, d0))
+    (hAbsorb : ∀ (t0 d0 : ℝ) (ρ : ℂ), 0 < t0 → (1 / 200 : ℝ) ≤ d0 →
+      d0 ≤ 1 / 2 → ρ ∈ q.Z → ρ.re ≠ (1 / 2 : ℝ) →
+      (|ρ.im| : ℝ) = t0 → |(ρ.re : ℝ) - 1 / 2| = d0 →
+      devProg (t0, d0) + mvalFace (t0, d0) ≤ devFacePt ρ)
+    (hs3MachPT2 : ∀ (t0 d0 : ℝ), WinC.tPT2 <= t0 → (1 / 200 : ℝ) <= d0 →
+      d0 <= 1/2 → offPair q t0 d0 →
+      Qside (t0, d0) ≤
+        ‖p4_em_expr (t4o_sOff t0 d0) (S4Strip.n4 t0)‖ +
+        t4m_MwireOff t0 d0)
+    (hWinPT2 : WinC.hWinFaceResidualH q WinC.tPT2) :
+    RH q :=
+  rh_program78_stripfront_mach_s1pins q hz78 hqz honline Qside
+    WinC.tPT2 (by norm_num [WinC.tPT2]) hPT2
+    n Kfun mvalFace devFacePt hFill hDev hMass hAbsorb
+    hs3MachPT2 hWinPT2
 
 
 end RHEnd

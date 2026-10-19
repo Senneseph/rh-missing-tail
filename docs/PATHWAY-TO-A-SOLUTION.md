@@ -851,6 +851,34 @@ for the ACTUAL zeta zero set.  The branches:
       0  sorry,  102  cards.
 
 
+  FORMAL:  G-hs1  RESTATED  AS  THE  PIN  FAMILY  (discovery
+      0120):  RHEnd.lean  part  B8  (1190  lines,  0  sorry,
+      GATED,  full  tree  green):  the  theorem
+      rh_program78_stripfront_mach_s1pins  (and  its  _PT2
+      instance)  replaces  the  G-hs1  scale  face  of  the
+      machined  stripfront  endpoint  with  the  B2  PIN
+      FAMILY  restricted  to  strip-band  witness  zeros:
+      P1  fill  (Qside  =  |zeta  rho  -  Kfun  rho|),  P2
+      kernel  magnitude  (devFacePt  <=  |W_n|),  P3  the
+      A4.3  mass,  P4  absorption;  the  face  is  derived  in
+      body  via  S1Face.hs1AtZero  (the  B2  derivation,
+      restricted).  CONSEQUENCE:  the  machined  stripfront
+      endpoint  at  tPT2  has  NO  analytic  face  left  -  its
+      residual  is  (i)  the  P1-P4  pin  family  at  strip-
+      band  witness  zeros  (data  faces,  measurable  by  the
+      E1ClauseV3  /  S1Face  machinery  where  records  reach),
+      (ii)  the  window  zero-exclusion  face  (the  NEXT
+      classical  zero-free  record  to  cite  or  produce
+      above  3,000,175,332,800),  and  (iii)  the  machined
+      hs3  face  (the  per-witness  CITED  1.6  convexity
+      evaluation).  What  the  program  now  needs  is  data
+      and  records  above  the  verified  frontier,  not  new
+      analytic  machinery  in  the  tree.  No  RH  claim.
+      Full  tree  green  (17450  jobs),  0  sorry,  102
+      cards.
+
+
+
 
 
 ## 3.  Measured constraints  (anything that proves RH must

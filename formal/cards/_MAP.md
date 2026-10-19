@@ -377,6 +377,20 @@ A chain of named theorems;  each box names the modules.
                    machined  hs3  face  -  whose  content  is  the
                    CITED  classical  1.6  convexity  mass,  not  an
                    analytic  barrier  in  the  tree.
+                   PART  B8  (discovery  0120):  G-hs1  restated
+                   over  the  strip  band  as  the  PIN  FAMILY
+                   (rh_program78_stripfront_mach_s1pins  /  _PT2):
+                   the  hs1  scale  face  is  entered  at  the
+                   strip-band  witness  as  P1  fill  =  the  A0
+                   fill,  P2  kernel  magnitude  (devFacePt  <=
+                   |W_n|),  P3  the  A4.3  mass,  P4  absorption
+                   (devProg  +  mval  <=  devFacePt),  with  the
+                   derivation  in  body  via  S1Face.hs1AtZero  -
+                   same  content,  checkable  witness-level
+                   shape  (the  B2  restatement  for  the  machined
+                   endpoint);  the  pins  are  data  faces  (measured
+                   where  data  reach,  citation  content  above  the
+                   verified  frontier).
 
   Foundations / vocabulary
      B0 (composition atoms)  B4/B5 (detector-line notation)
