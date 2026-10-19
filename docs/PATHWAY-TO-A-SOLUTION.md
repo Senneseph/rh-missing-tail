@@ -820,6 +820,38 @@ for the ACTUAL zeta zero set.  The branches:
       jobs),  0  sorry,  102  cards.
 
 
+  FORMAL:  G-hs3  MACHINED  AT  THE  ENDPOINT  (discovery
+      0119):  the  splice  0118  predicted  now  exists  in
+      RHEnd.lean  part  B7  (1037  lines,  0  sorry,  GATED,
+      full  tree  green):  the  theorem
+      rh_program78_stripfront_mach  (and  its  [Z-PT2]
+      instance  rh_program78_stripfront_mach_PT2)  calls  the
+      regime  closure  with  the  lifted  wire
+      Mr  :=  MrLift  =  t4m_MwireOff  on  the  strip  band,
+      S4A.MrR  elsewhere.  The  named  hs3  face  is  now
+      the  LIFTED-wire  statement:  over  the  strip  band  above
+      the  frontier,  Qside  <=  ||p4_em_expr  (t4o_sOff  t0
+      d0)  (n4  t0)||  +  t4m_MwireOff  t0  d0  -  the  off-line
+      EM  wall  plus  the  off-line  lifted  M-wire,  whose  only
+      non-machine  content  is  the  CITED  1.6  convexity
+      mass.  Both  machine  steps  of  that  face  are  IN
+      BODY  at  the  endpoint:  the  wall  side  by
+      t4wall_offline_le_bwires  (0117)  and  the  floor  side
+      by  t4m_margin  (0118)  -  so  the  S3  leg  AND  the
+      S4  strip  leg  of  the  stripfront  endpoint  above  the
+      frontier  are  body-proven  from  the  machined  face.
+      The  named  residual  of  the  stripfront  endpoint  is
+      exactly  G-hs1  (S1  scale  face,  open),  the  window
+      zero-exclusion  face  (open),  and  the  machined  hs3
+      face  (cited-content,  not  an  analytic  barrier  in
+      the  tree);  all  strictly  above  3,000,175,332,800.
+      t4m_Bmono  additionally  lets  the  witness  level  run
+      the  wall  on  any  smaller  admissible  schedule.
+      No  RH  claim.  Full  tree  green  (17450  jobs),
+      0  sorry,  102  cards.
+
+
+
 
 ## 3.  Measured constraints  (anything that proves RH must
     reproduce these)

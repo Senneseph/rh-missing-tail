@@ -359,6 +359,24 @@ A chain of named theorems;  each box names the modules.
                    hWinFaceResidualH  q  H,  faceResidualMonotone,
                    faceSplitH  (the  face  split  at  any  frontier:
                    faceSplit  is  the  H  =  tPT  instance).
+                   PART  B7  (discovery  0119):  G-hs3  MACHINED  at
+                   the  endpoint  (rh_program78_stripfront_mach  /
+                   rh_program78_stripfront_mach_PT2):  the  S3  face
+                   on  the  strip  band  above  the  frontier  now
+                   carries  the  LIFTED  wires  -  Qside  <=  (off-line
+                   EM  wall  at  t4o_sOff,  n4  schedule)  +  (off-line
+                   lifted  M-wire  t4m_MwireOff  =  CITED  1.6
+                   convexity  mass);  the  S3  leg  closes  IN  BODY
+                   from  the  face  +  T4OffD  (the  wall  is  termwise
+                   below  the  strip  B-wire)  and  the  S4  strip  leg
+                   is  t4m_margin  (lifted  wire  <  floStripMin,  IN
+                   BODY,  corner  margin  ~16  orders).  The  named
+                   residue  of  the  stripfront  endpoint  is  now
+                   G-hs1  (open,  as  before),  the  window  zero-
+                   exclusion  face  (open,  as  before),  and  the
+                   machined  hs3  face  -  whose  content  is  the
+                   CITED  classical  1.6  convexity  mass,  not  an
+                   analytic  barrier  in  the  tree.
 
   Foundations / vocabulary
      B0 (composition atoms)  B4/B5 (detector-line notation)

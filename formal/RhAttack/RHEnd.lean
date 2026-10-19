@@ -71,6 +71,23 @@
         the  data  program  feeds  the  legs  only  at  1000
         and  above.)
 
+   PART  B7  (discovery  0119):  the  machined  stripfront
+        endpoint  (rh_program78_stripfront_mach  /  _PT2):
+        G-hs3  in  the  strip  band  above  the  frontier  is
+        MACHINED  to  the  LIFTED  wires  -  the  S3  face  now
+        carries  the  OFF-LINE  EM  wall  (t4o_sOff,  n4
+        schedule)  plus  the  OFF-LINE  lifted  M-wire
+        (t4m_MwireOff,  the  CITED  1.6  convexity  mass  of
+        T4OffM),  the  S3  leg  closes  in  body  from  the
+        face  +  T4OffD  (wall  <=  strip  B-wire),  and  the
+        S4  strip  leg  is  t4m_margin  (lifted  wire  <
+        floStripMin,  in  body).  The  named  residue  of  the
+        stripfront  endpoint  is  thus  G-hs1  (open,  as
+        before),  the  window  zero-exclusion  face  (open,  as
+        before),  and  the  machined  hs3  face  -  whose
+        content  is  the  CITED  classical  1.6  convexity
+        mass,  not  an  analytic  barrier  in  the  tree.
+
    Honesty  (locked):  this  is  a  composition  around  the
    named  items;  NOTHING  new  is  claimed  -  the  residual
    is  the  SAME  residual  the  chart  carries  (S1  witness,
@@ -89,6 +106,9 @@ import RhAttack.WinCount
 import RhAttack.P4Limit
 import RhAttack.S1Face
 import RhAttack.P8Floor
+import RhAttack.S4Strip
+import RhAttack.T4OffD
+import RhAttack.T4OffM
 
 set_option linter.style.docString false
 set_option linter.style.longLine false
@@ -819,5 +839,216 @@ theorem rh_program78_stripfront_PT2 (q : ZeroSet)
     RH q :=
   rh_program78_stripfrontH q hz78 hqz honline Qside WinC.tPT2
     (by norm_num [WinC.tPT2]) hPT2 hs1StripPT2 hs3StripPT2 hWinPT2
+
+/-  ##  Part  B7  -  THE  ENDPOINT  WITH  G-hs3  MACHINED
+    (discovery  0118)
+
+  The  strip-band  hs3  face  of  rh_program78_stripfront  (the  S3
+  wire  scale  upper  bound  at  the  off-pair)  is  now  MACHINED:
+  its  off-line  content  is  carried  by  the  T4OffD  wall
+  domination  (the  off-line  EM  wall  is  termwise  below  the
+  strip  B-wire)  plus  the  T4OffM  lifted  Mr  wire  (the  P6
+  finite-kernel  gap  at  the  CITED  1.6  convexity  mass,
+  sigma-independent  b3  correction).  Concretely:
+
+  (1)  the  scale  at  an  off-pair  in  the  strip  band  is
+      bounded  by  the  OFF-LINE  EM  wall  at  the  canonical
+      point  (t4o_sOff,  the  n4  schedule)  plus  the
+      OFF-LINE  lifted  M-wire  (t4m_MwireOff)  -  the
+      only  non-machine  content  anywhere  in  this  face  is
+      the  classical  1.6  convexity  mass  inside  the  wire
+      (CITED  in  the  T4OffM  header);  the  wall  side  has
+      NO  non-machine  content  (T4OffD  is  all  machine  on
+      top  of  the  CITED  classical  T4  bound);
+  (2)  T4OffD  then  dominates  the  wall  by  p8_B  t0  (n4  t0),
+      which  IS  the  strip  branch  of  BwireP  -  so  the  S3
+      leg  closes  in  body  from  the  face  plus  T4OffD;
+  (3)  the  S4  strip  leg  must  match  the  LIFTED  wire:  the
+      regime  closure  is  called  with  Mr  :=  MrLift  (the
+      on-line  MrR  outside  the  strip  band,  t4m_MwireOff
+      inside  it),  and  the  strip  case  is  t4m_margin
+      (p8_B  +  MwireOff  <  floStripMin,  in  body,  corner
+      margin  ~16  orders)  instead  of  the  on-line
+      s4StripUnifiedFloor;  the  window  case  keeps  the
+      on-line  wire  (MrLift  =  MrR  there)  and  the  window
+      face  via  faceSplitH,  as  before.
+
+  The  named  residual  of  rh_program78_stripfront_mach  is
+  thus:  G-hs1  (open,  as  before),  the  window  zero-
+  exclusion  face  (open,  as  before),  and  the  machined
+  hs3  face  -  whose  content  is  a  CITED  classical
+  convexity  mass  (1.6  constant),  not  an  analytic
+  barrier  in  the  tree.  No  RH  claim:  the  citation  is
+  the  same  classical  bound  the  tree  already  uses  on
+  the  line.  -/
+
+/-- The  lifted  Mr  wire  of  the  endpoint  (discovery  0118):
+    the  OFF-LINE  M-wire  (T4OffM,  CITED  1.6  convexity  mass)
+    in  the  strip  band,  the  on-line  S4A.MrR  wire  everywhere
+    else  (so  the  window/low/far  legs  keep  their  on-line
+    shape  and  proofs).  -/
+noncomputable def MrLift (t0 d0 : ℝ) : ℝ :=
+    if 1000 ≤ t0 ∧ d0 ≤ 1 / 2 ∧ (1 / 200 : ℝ) ≤ d0
+    then t4m_MwireOff t0 d0
+    else S4A.MrR t0 d0
+
+/--  THE  ENDPOINT  OVER  THE  STRIP  FRONTIER  WITH  G-hs3
+    MACHINED  AT  AN  ARBITRARY  CITED  FRONTIER  H  (discovery
+    0118):  under  [Z-H],  the  endpoint  holds  from  (i)  the
+    WINDOW  face  (zero-exclusion  of  (H,  inf)  x  (0,  1/200)
+    -  open,  as  before),  (ii)  G-hs1  on  the  strip  band
+    (open,  as  before),  and  (iii)  the  MACHINED  hs3  face:
+    the  scale  at  the  off-pair  in  the  strip  band  is
+    bounded  by  the  OFF-LINE  EM  wall  (T4OffD  wall,  n4
+    schedule)  plus  the  OFF-LINE  lifted  M-wire  (T4OffM,
+    CITED  1.6  convexity  mass).  Everything  else  is  IN
+    BODY:  below  H  vacuous;  window  band  killed  by  the
+    window  face;  far  region  by  [Z78];  S1  from  the  face,
+    S2  covered  /  low-vacuous  /  far;  S3  from  machined
+    face  +  T4OffD  (wall  <=  strip  B-wire);  S4  strip  from
+    t4m_margin  (lifted  wire  <  floor)  and  S4  window
+    from  the  face  via  faceSplitH;  hS2low  vacuous  on  its
+    domain  (0  <  t0  <  1000  <=  H).  No  RH  claim.  -/
+theorem rh_program78_stripfront_mach (q : ZeroSet)
+    (hz78 : Z78.externalZeroFree78)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) →
+      (|ρ.im| : ℝ) < (707 : ℝ) / 50 → ρ.re = 1 / 2)
+    (Qside : ℝ × ℝ → ℝ)
+    (H : ℝ) (hH : 1000 ≤ H)
+    (hPT : WinC.allOnLineUpTo q H)
+    (hs1StripH : ∀ (t0 d0 : ℝ), H <= t0 → (1 / 200 : ℝ) <= d0 →
+      d0 <= 1 / 2 → offPair q t0 d0 → Qside (t0, d0) ≥ devProg (t0, d0))
+    (hs3MachH : ∀ (t0 d0 : ℝ), H <= t0 → (1 / 200 : ℝ) <= d0 →
+      d0 <= 1 / 2 → offPair q t0 d0 →
+      Qside (t0, d0) ≤
+        ‖p4_em_expr (t4o_sOff t0 d0) (S4Strip.n4 t0)‖ +
+        t4m_MwireOff t0 d0)
+    (hWinH : WinC.hWinFaceResidualH q H) :
+    RH q := by
+  refine S4A.rh_from_regime_closures q Qside Z78P12.MfP devProg
+    Z78P12.BwireP (fun p => MrLift p.1 p.2) floProg
+    ?_ ?_ ?_ ?_ ?_ ?_
+  · --  S1  witness  leg:  far  =  [Z78];  below  H  =  vacuous;
+      --  window  above  =  window  face;  strip  above  =  face.
+    intro t0 d0 ht0 hd0 hp
+    by_cases hfar : d0 ≤ (1 / 2 : ℝ)
+    · by_cases hle : t0 ≤ H
+      · exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
+          (le_of_lt ht0) hle) d0 hp)
+      · by_cases hdw : (1 / 200 : ℝ) ≤ d0
+        · have hzm : Z78P12.MfP (t0, d0) = 0 := rfl
+          simpa only [hzm, sub_zero] using
+            hs1StripH t0 d0 (le_of_lt (not_le.mp hle)) hdw hfar hp
+        · exact False.elim ((hWinH t0 d0
+            (le_trans hH (le_of_lt (not_le.mp hle)))
+            (not_le.mp hle) hd0 (not_le.mp hdw)) hp)
+    · exact False.elim (Z78P12.offPairFarEmpty q hz78 hqz t0 d0
+        (not_le.mp hfar) hp)
+  · --  S2  leg:  covered  =  in  body;  low  band  =  vacuous
+      --  below  H;  far  =  [Z78].
+    intro t0 d0 ht0 hd0 hp
+    by_cases hd0h : d0 ≤ (1 / 2 : ℝ)
+    · by_cases ht0k : 1000 ≤ t0
+      · exact hs2_covered q honline t0 d0 ht0 ht0k hd0 hd0h hp
+      · have hle : t0 ≤ H := le_trans (le_of_lt (not_le.mp ht0k)) hH
+        exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
+          (le_of_lt ht0) hle) d0 hp)
+    · exact False.elim (Z78P12.offPairFarEmpty q hz78 hqz t0 d0
+        (not_le.mp hd0h) hp)
+  · --  S3  leg:  below  H  =  vacuous;  window  above  =  window
+      --  face;  strip  above  =  machined  face  +  T4OffD  (the
+      --  off-line  wall  is  dominated  by  the  strip  B-wire);
+      --  far  =  [Z78].
+    intro t0 d0 ht0 hd0 hp
+    by_cases hfar : d0 ≤ (1 / 2 : ℝ)
+    · by_cases hle : t0 ≤ H
+      · exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
+          (le_of_lt ht0) hle) d0 hp)
+      · by_cases hdw : (1 / 200 : ℝ) ≤ d0
+        · have ht01000 : 1000 ≤ t0 :=
+            le_trans hH (le_of_lt (not_le.mp hle))
+          have hwall : ‖p4_em_expr (t4o_sOff t0 d0)
+              (S4Strip.n4 t0)‖ ≤ p8_B t0 (S4Strip.n4 t0) :=
+            t4wall_offline_le_bwires t0 d0 ht01000 hdw hfar
+          have hstrip : Qside (t0, d0) ≤
+              p8_B t0 (S4Strip.n4 t0) + t4m_MwireOff t0 d0 :=
+            le_trans
+              (hs3MachH t0 d0 (le_of_lt (not_le.mp hle)) hdw hfar hp)
+              (add_le_add hwall le_rfl)
+          have hbw : Z78P12.BwireP (t0, d0) = p8_B t0 (S4Strip.n4 t0) := by
+            dsimp only [Z78P12.BwireP, S4A.BwireR]
+            rw [if_pos ⟨ht01000, hfar⟩, if_pos hdw]
+          have hml : MrLift t0 d0 = t4m_MwireOff t0 d0 := by
+            dsimp only [MrLift]
+            rw [if_pos ⟨ht01000, hfar, hdw⟩]
+          simpa only [hbw, hml] using hstrip
+        · exact False.elim ((hWinH t0 d0
+            (le_trans hH (le_of_lt (not_le.mp hle)))
+            (not_le.mp hle) hd0 (not_le.mp hdw)) hp)
+    · exact False.elim (Z78P12.offPairFarEmpty q hz78 hqz t0 d0
+        (not_le.mp hfar) hp)
+  · --  S4  covered:  strip  band  =  t4m_margin  (lifted  wire
+      --  <  floor,  in  body);  window  band  =  the  face  shape
+      --  via  faceSplitH  (on-line  wire  there:  MrLift  =  MrR).
+    intro t0 d0 ht0 hd0 hd0u hp
+    have hif : floProg (t0, d0) = S1LowT.floStripMin t0 d0 := by
+      dsimp only [floProg]
+      rw [if_pos ⟨ht0, hd0u⟩]
+    by_cases hdw : (1 / 200 : ℝ) ≤ d0
+    · have hml : MrLift t0 d0 = t4m_MwireOff t0 d0 := by
+        dsimp only [MrLift]
+        rw [if_pos ⟨ht0, hd0u, hdw⟩]
+      have hbw : Z78P12.BwireP (t0, d0) = p8_B t0 (S4Strip.n4 t0) := by
+        dsimp only [Z78P12.BwireP, S4A.BwireR]
+        rw [if_pos ⟨ht0, hd0u⟩, if_pos hdw]
+      have hM0 : S4A.MfR (t0, d0) = 0 := rfl
+      simpa only [hif, hbw, hml, Z78P12.MfP, hM0, add_zero] using
+        t4m_margin t0 d0 ht0 hdw hd0u
+    · have hna : ¬ (1000 ≤ t0 ∧ d0 ≤ 1 / 2 ∧ (1 / 200 : ℝ) ≤ d0) :=
+        fun h' => by linarith [hdw, h'.2.2]
+      have hml : MrLift t0 d0 = S4A.MrR t0 d0 := by
+        dsimp only [MrLift]
+        rw [if_neg hna]
+      have hwinshp : Z78P12.BwireP (t0, d0) + Z78P12.MrP (t0, d0) +
+          Z78P12.MfP (t0, d0) < S1LowT.floStripMin t0 d0 :=
+        ((WinC.faceSplitH q H hPT).mpr hWinH) t0 d0 ht0 hd0
+          (not_le.mp hdw) hp
+      simpa only [hif, hml, Z78P12.MrP] using hwinshp
+  · --  S4  low  band:  its  whole  domain  (0,  1000)  sits  below
+      --  the  frontier:  vacuous.
+    intro t0 d0 ht0 ht0u hd0 hd0u hp
+    have hle : t0 ≤ H := le_trans (le_of_lt ht0u) hH
+    exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
+      (le_of_lt ht0) hle) d0 hp)
+  · --  S4  far  region:  [Z78].
+    intro t0 d0 ht0 hd0 hd0f hp
+    exact False.elim (Z78P12.offPairFarEmpty q hz78 hqz t0 d0 hd0f hp)
+
+/--  THE  MACHINED  STRIPFRONT  ENDPOINT  AT  THE  PLATT-TRUDGIAN
+    FRONTIER  (the  [Z-PT2]  instantiation):  the  entire  named
+    residue  lives  STRICTLY  ABOVE  3,000,175,332,800,  and  the
+    hs3  leg  of  that  residue  is  CARRY  of  the  CITED  1.6
+    convexity  mass  (T4OffM),  not  an  analytic  barrier.  No
+    RH  claim.  -/
+theorem rh_program78_stripfront_mach_PT2 (q : ZeroSet)
+    (hz78 : Z78.externalZeroFree78)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) →
+      (|ρ.im| : ℝ) < (707 : ℝ) / 50 → ρ.re = 1 / 2)
+    (Qside : ℝ × ℝ → ℝ)
+    (hPT2 : WinC.allOnLineUpTo q WinC.tPT2)
+    (hs1StripPT2 : ∀ (t0 d0 : ℝ), WinC.tPT2 <= t0 → (1 / 200 : ℝ) <= d0 →
+      d0 <= 1 / 2 → offPair q t0 d0 → Qside (t0, d0) ≥ devProg (t0, d0))
+    (hs3MachPT2 : ∀ (t0 d0 : ℝ), WinC.tPT2 <= t0 → (1 / 200 : ℝ) <= d0 →
+      d0 <= 1/2 → offPair q t0 d0 →
+      Qside (t0, d0) ≤
+        ‖p4_em_expr (t4o_sOff t0 d0) (S4Strip.n4 t0)‖ +
+        t4m_MwireOff t0 d0)
+    (hWinPT2 : WinC.hWinFaceResidualH q WinC.tPT2) :
+    RH q :=
+  rh_program78_stripfront_mach q hz78 hqz honline Qside WinC.tPT2
+    (by norm_num [WinC.tPT2]) hPT2 hs1StripPT2 hs3MachPT2 hWinPT2
+
 
 end RHEnd
