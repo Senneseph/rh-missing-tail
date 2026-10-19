@@ -98,6 +98,26 @@
         derived  in  body  via  S1Face.hs1AtZero.  No  RH
         claim.
 
+   PART  B9  (discovery  0122):  the  hs3  face  SPLIT  BY
+        FLANK  (rh_program78_stripfront_mach_left  /  _PT2):
+        the  off-pair  (t0,  d0)  records  no  flank  -  the
+        B7/B8  machinery  lives  at  the  RIGHT  canonical
+        point  (t4o_sOff,  re  =  1/2  +  d0).  At  the  LEFT
+        flank  (re  =  1/2  -  d0)  T4OffL  (discovery  0121)
+        records  that  the  uniform  n^4  wire  CANNOT  carry
+        the  same  load  -  the  first  T4  term  at  the  left
+        point  exceeds  the  endpoint  floor  on  the  band
+        edge  for  t  >=  10^10  and  is  above  the  half-floor
+        at  EVERY  schedule  at  sigma  =  0.  Part  B9  states
+        the  endpoint  with  the  face  split:  right  =  the
+        machine-closable  shape  (wall  at  t4o_sOff  +  lifted
+        M-wire,  T4OffD  in  body  -  the  B7  premise  restricts
+        to  it,  t4l_rightFaceOfSingle);  left  =  the  PAIR-
+        LEVEL  S3  squeeze  (Qside  <=  Bwire  +  Mr)  -  the
+        named  analytic  face  G-hs3-left.  The  residual  of
+        the  split  endpoint  is  EXACTLY  the  four-face
+        ledger  of  discovery  0121.  No  RH  claim.
+
    Honesty  (locked):  this  is  a  composition  around  the
    named  items;  NOTHING  new  is  claimed  -  the  residual
    is  the  SAME  residual  the  chart  carries  (S1  witness,
@@ -1195,6 +1215,291 @@ theorem rh_program78_stripfront_mach_s1pins_PT2 (q : ZeroSet)
     WinC.tPT2 (by norm_num [WinC.tPT2]) hPT2
     n Kfun mvalFace devFacePt hFill hDev hMass hAbsorb
     hs3MachPT2 hWinPT2
+
+
+/-  ##  Part  B9  -  THE  HS3  FACE  SPLIT  BY  FLANK
+    (discovery  0122,  after  T4OffL,  discovery  0121)
+
+  The  off-pair  (t0,  d0)  =  (|im  rho|,  |re  rho  -  1/2|)
+  records  no  FLANK.  The  G-hs3  machinery  of  Parts  B7/
+  B8  lives  at  the  RIGHT  canonical  point  t4o_sOff  (re
+  =  1/2  +  d0:  wall  <=  strip  B-wire,  T4OffD,  machine).
+  T4OffL  (discovery  0121)  records  the  left-flank  barrier:
+  at  the  LEFT  point  t4l_sOffL  (re  =  1/2  -  d0)  the
+  first  T4  term  of  the  wall  is  (1/2)*n^-(1/2-d0)  -  it
+  exceeds  the  endpoint  floor  on  the  band  edge  for
+  t  >=  10^10  (t4l_barrier_edge)  and  is  above  the  half-
+  floor  at  EVERY  schedule  n  at  sigma  =  0  (t4l_barrier_
+  sigma0).  So  the  B7  face,  stated  with  the  right-point
+  wall  as  its  bound,  CANNOT  be  machine-produced  for  left-
+  flank  off-pairs  beyond  the  barrier  region.
+
+  Part  B9  states  the  endpoint  with  the  face  SPLIT  by
+  the  flank  of  the  witness  (t4l_flankSplit):  right  =
+  the  machine-closable  B7  shape  (T4OffD  in  body);  left
+  =  the  PAIR-LEVEL  S3  squeeze  Qside  <=  Bwire  +  Mr  -
+  the  named  analytic  face  G-hs3-left  (the  squeeze  side
+  at  a  left-flank  off-pair;  per-point  closure  needs  a
+  left-tuned  schedule,  no  uniform  one  covers  the  band).
+  The  residual  of  the  split  endpoint  is  exactly  the
+  four-face  ledger  of  discovery  0121:  G-hs1,  window  zero-
+  exclusion,  hs3  at  the  RIGHT  witness  (machined,  cited
+  1.6  mass),  G-hs3-left.  No  RH  claim.  -/
+
+/--  RIGHT-FLANK  WITNESS  (discovery  0122):  a  zero  of  q
+    of  pair  shape  (t0,  d0)  with  re  =  1/2  +  d0.  -/
+def t4l_rightWitness (q : ZeroSet) (t0 d0 : ℝ) (ρ : ℂ) : Prop :=
+    ρ ∈ q.Z ∧ (|ρ.im| : ℝ) = t0 ∧ |(ρ.re : ℝ) - 1 / 2| = d0 ∧
+      ρ.re = 1 / 2 + d0
+
+/--  LEFT-FLANK  WITNESS  (discovery  0122):  a  zero  of  q  of
+    pair  shape  (t0,  d0)  with  re  =  1/2  -  d0.  -/
+def t4l_leftWitness (q : ZeroSet) (t0 d0 : ℝ) (ρ : ℂ) : Prop :=
+    ρ ∈ q.Z ∧ (|ρ.im| : ℝ) = t0 ∧ |(ρ.re : ℝ) - 1 / 2| = d0 ∧
+      ρ.re = 1 / 2 - d0
+
+/--  RIGHT-  /  LEFT-FLANK  OFF-PAIRS  (discovery  0122).  -/
+def t4l_rightOffPair (q : ZeroSet) (t0 d0 : ℝ) : Prop :=
+    ∃ ρ, t4l_rightWitness q t0 d0 ρ
+def t4l_leftOffPair (q : ZeroSet) (t0 d0 : ℝ) : Prop :=
+    ∃ ρ, t4l_leftWitness q t0 d0 ρ
+
+/--  FLANK  SPLIT  (discovery  0122):  an  off-pair  with  d0  ≠
+    0  splits  by  the  flank  of  the  witness  -  the  |.|-shape
+    of  the  pair  gives  re  =  1/2  +-  d0  exactly.  -/
+theorem t4l_flankSplit (q : ZeroSet) (t0 d0 : ℝ) (hd0 : d0 ≠ 0) :
+    offPair q t0 d0 ↔ t4l_rightOffPair q t0 d0 ∨ t4l_leftOffPair q t0 d0 := by
+  constructor
+  · rintro ⟨ρ, hr, hrne, him, hre⟩
+    have hd0n : 0 ≤ d0 := by
+      rw [← hre]
+      exact abs_nonneg ((ρ.re : ℝ) - 1 / 2)
+    rcases (abs_eq hd0n).mp hre with (h | h)
+    · exact Or.inl ⟨ρ, ⟨hr, him, hre, by linarith [h]⟩⟩
+    · exact Or.inr ⟨ρ, ⟨hr, him, hre, by linarith [h]⟩⟩
+  · intro h
+    rcases h with (hro | hlo)
+    · obtain ⟨ρ, hz, him, hre, hrw⟩ := hro
+      refine ⟨ρ, hz, ?_, him, hre⟩
+      intro heq
+      have hd00 : d0 = 0 := by linarith [hrw, heq]
+      exact hd0 hd00
+    · obtain ⟨ρ, hz, him, hre, hlr⟩ := hlo
+      refine ⟨ρ, hz, ?_, him, hre⟩
+      intro heq
+      have hd00 : d0 = 0 := by linarith [hlr, heq]
+      exact hd0 hd00
+
+/--  THE  B7  SINGLE-FACE  PREMISE  RESTRICTS  TO  THE  RIGHT-
+    FLANK  FACE  (discovery  0122):  a  right-flank  witness  is
+    an  off-pair  witness  (d0  >=  1/200  >  0  keeps  re  ≠
+    1/2)  -  so  the  flank-split  endpoint  never  asks  more  of
+    the  right  flank  than  the  B7  endpoint  did.  The  dual
+    NEGATIVE  -  that  the  B7  premise  does  NOT  imply  the
+    left  face  beyond  the  barrier  region  -  is  exactly  the
+    T4OffL  barrier  (discovery  0121),  recorded  there,  not
+    here  (it  is  an  inequality  between  explicit  machine
+    wires,  not  an  implication  between  premises).  -/
+theorem t4l_rightFaceOfSingle (q : ZeroSet) (Qside : ℝ × ℝ → ℝ) (H : ℝ)
+    (hs3MachH : ∀ (t0 d0 : ℝ), H <= t0 → (1 / 200 : ℝ) <= d0 →
+      d0 <= 1 / 2 → offPair q t0 d0 →
+      Qside (t0, d0) <=
+        ‖p4_em_expr (t4o_sOff t0 d0) (S4Strip.n4 t0)‖ + t4m_MwireOff t0 d0)
+    (t0 d0 : ℝ) (ht0 : H <= t0) (hdlo : (1 / 200 : ℝ) <= d0)
+    (hdh : d0 <= 1 / 2) (hro : t4l_rightOffPair q t0 d0) :
+    Qside (t0, d0) <=
+      ‖p4_em_expr (t4o_sOff t0 d0) (S4Strip.n4 t0)‖ + t4m_MwireOff t0 d0 := by
+  obtain ⟨ρ, hz, him, hre, hrw⟩ := hro
+  have hpair : offPair q t0 d0 := by
+    refine ⟨ρ, hz, ?_, him, hre⟩
+    intro heq
+    linarith [hrw, heq, hdlo]
+  exact hs3MachH t0 d0 ht0 hdlo hdh hpair
+
+/--  THE  FLANK-SPLIT  MACHINED  STRIPFRONT  ENDPOINT  AT  AN
+    ARBITRARY  FRONTIER  H  (discovery  0122,  Part  B9):
+    rh_program78_stripfront_mach  with  the  hs3  face  SPLIT  by
+    the  flank  of  the  off-pair  witness.
+    (i)   G-hs1  (open,  as  before);
+    (ii)  the  window  zero-exclusion  face  (open,  as  before);
+    (iii)  hs3  at  a  RIGHT-FLANK  witness  (t4l_rightOffPair)  -
+          the  machine-closable  shape:  the  OFF-LINE  EM  wall
+          at  the  RIGHT  canonical  point  t4o_sOff  on  the  n4
+          schedule  plus  the  lifted  M-wire;  the  S3  leg
+          closes  in  body  via  T4OffD  (wall  <=  strip  B-wire);
+    (iv)  G-hs3-left  -  hs3  at  a  LEFT-FLANK  witness
+          (t4l_leftOffPair),  stated  at  pair  level  (Qside  <=
+          Bwire  +  Mr):  the  analytic  face  T4OffL  (discovery
+          0121)  shows  the  n4  machine  cannot  produce  from
+          wall  +  wire  at  the  left  point.  The  S4  leg  is
+          t4m_margin  on  the  strip  band  (FLANK-INDEPENDENT:
+          it  is  a  statement  about  the  wire  and  the  floor
+          only).  The  residual  is  exactly  the  four-face
+          ledger  of  discovery  0121.  No  RH  claim.  -/
+theorem rh_program78_stripfront_mach_left (q : ZeroSet)
+    (hz78 : Z78.externalZeroFree78)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) →
+      (|ρ.im| : ℝ) < (707 : ℝ) / 50 → ρ.re = 1 / 2)
+    (Qside : ℝ × ℝ → ℝ)
+    (H : ℝ) (hH : 1000 ≤ H)
+    (hPT : WinC.allOnLineUpTo q H)
+    (hs1StripH : ∀ (t0 d0 : ℝ), H <= t0 → (1 / 200 : ℝ) <= d0 →
+      d0 <= 1 / 2 → offPair q t0 d0 → Qside (t0, d0) ≥ devProg (t0, d0))
+    (hs3RightH : ∀ (t0 d0 : ℝ), H <= t0 → (1 / 200 : ℝ) <= d0 →
+      d0 <= 1 / 2 → t4l_rightOffPair q t0 d0 →
+      Qside (t0, d0) <=
+        ‖p4_em_expr (t4o_sOff t0 d0) (S4Strip.n4 t0)‖ + t4m_MwireOff t0 d0)
+    (hs3LeftH : ∀ (t0 d0 : ℝ), H <= t0 → (1 / 200 : ℝ) <= d0 →
+      d0 <= 1 / 2 → t4l_leftOffPair q t0 d0 →
+      Qside (t0, d0) <=
+        Z78P12.BwireP (t0, d0) + (fun p => MrLift p.1 p.2) (t0, d0))
+    (hWinH : WinC.hWinFaceResidualH q H) :
+    RH q := by
+  refine S4A.rh_from_regime_closures q Qside Z78P12.MfP devProg
+    Z78P12.BwireP (fun p => MrLift p.1 p.2) floProg
+    ?_ ?_ ?_ ?_ ?_ ?_
+  · --  S1  witness  leg:  far  =  [Z78];  below  H  =  vacuous;
+      --  window  above  =  window  face;  strip  above  =  face.
+    intro t0 d0 ht0 hd0 hp
+    by_cases hfar : d0 ≤ (1 / 2 : ℝ)
+    · by_cases hle : t0 ≤ H
+      · exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
+          (le_of_lt ht0) hle) d0 hp)
+      · by_cases hdw : (1 / 200 : ℝ) ≤ d0
+        · have hzm : Z78P12.MfP (t0, d0) = 0 := rfl
+          simpa only [hzm, sub_zero] using
+            hs1StripH t0 d0 (le_of_lt (not_le.mp hle)) hdw hfar hp
+        · exact False.elim ((hWinH t0 d0
+            (le_trans hH (le_of_lt (not_le.mp hle)))
+            (not_le.mp hle) hd0 (not_le.mp hdw)) hp)
+    · exact False.elim (Z78P12.offPairFarEmpty q hz78 hqz t0 d0
+        (not_le.mp hfar) hp)
+  · --  S2  leg:  covered  =  in  body;  low  band  =  vacuous
+      --  below  H;  far  =  [Z78].
+    intro t0 d0 ht0 hd0 hp
+    by_cases hd0h : d0 ≤ (1 / 2 : ℝ)
+    · by_cases ht0k : 1000 ≤ t0
+      · exact hs2_covered q honline t0 d0 ht0 ht0k hd0 hd0h hp
+      · have hle : t0 ≤ H := le_trans (le_of_lt (not_le.mp ht0k)) hH
+        exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
+          (le_of_lt ht0) hle) d0 hp)
+    · exact False.elim (Z78P12.offPairFarEmpty q hz78 hqz t0 d0
+        (not_le.mp hd0h) hp)
+  · --  S3  leg:  the  FLANK  SPLIT  (the  content  of  Part  B9).
+      --  below  H  =  vacuous;  window  above  =  window  face;
+      --  far  =  [Z78];  strip  above  =  right  (machined,
+      --  T4OffD  in  body)  or  left  (the  G-hs3-left  face).
+    intro t0 d0 ht0 hd0 hp
+    by_cases hfar : d0 ≤ (1 / 2 : ℝ)
+    · by_cases hle : t0 ≤ H
+      · exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
+          (le_of_lt ht0) hle) d0 hp)
+      · by_cases hdw : (1 / 200 : ℝ) ≤ d0
+        · obtain ⟨ρ, hρ, hρne, hρim, hρd⟩ := hp
+          have hd0n : 0 ≤ d0 := by linarith [hdw]
+          have hht0 : 1000 ≤ t0 :=
+            le_trans hH (le_of_lt (not_le.mp hle))
+          rcases (abs_eq hd0n).mp hρd with (hdir | hdir)
+          · --  RIGHT  FLANK:  the  machined  B7  shape.
+            have hrw : ρ.re = 1 / 2 + d0 := by linarith [hdir]
+            have hroff : t4l_rightOffPair q t0 d0 :=
+              ⟨ρ, ⟨hρ, hρim, hρd, hrw⟩⟩
+            have hface : Qside (t0, d0) <=
+                ‖p4_em_expr (t4o_sOff t0 d0) (S4Strip.n4 t0)‖ +
+                t4m_MwireOff t0 d0 :=
+              hs3RightH t0 d0 (le_of_lt (not_le.mp hle)) hdw hfar hroff
+            have hwall : ‖p4_em_expr (t4o_sOff t0 d0)
+                (S4Strip.n4 t0)‖ <= p8_B t0 (S4Strip.n4 t0) :=
+              t4wall_offline_le_bwires t0 d0 hht0 hdw hfar
+            have hstrip : Qside (t0, d0) <=
+                p8_B t0 (S4Strip.n4 t0) + t4m_MwireOff t0 d0 :=
+              le_trans hface (add_le_add hwall le_rfl)
+            have hbw : Z78P12.BwireP (t0, d0) = p8_B t0 (S4Strip.n4 t0) := by
+              dsimp only [Z78P12.BwireP, S4A.BwireR]
+              rw [if_pos ⟨hht0, hfar⟩, if_pos hdw]
+            have hml : (fun p => MrLift p.1 p.2) (t0, d0) =
+                t4m_MwireOff t0 d0 := by
+              simp only [MrLift]
+              rw [if_pos ⟨hht0, hfar, hdw⟩]
+            simpa only [hbw, hml] using hstrip
+          · --  LEFT  FLANK:  the  named  G-hs3-left  face.
+            have hlr : ρ.re = 1 / 2 - d0 := by linarith [hdir]
+            have hloff : t4l_leftOffPair q t0 d0 :=
+              ⟨ρ, ⟨hρ, hρim, hρd, hlr⟩⟩
+            exact hs3LeftH t0 d0 (le_of_lt (not_le.mp hle))
+              hdw hfar hloff
+        · exact False.elim ((hWinH t0 d0
+            (le_trans hH (le_of_lt (not_le.mp hle)))
+            (not_le.mp hle) hd0 (not_le.mp hdw)) hp)
+    · exact False.elim (Z78P12.offPairFarEmpty q hz78 hqz t0 d0
+        (not_le.mp hfar) hp)
+  · --  S4  covered:  strip  band  =  t4m_margin  (FLANK-INDEPENDENT:
+      --  a  statement  about  the  wire  and  the  floor  only);
+      --  window  band  =  the  face  shape  via  faceSplitH.
+    intro t0 d0 ht0 hd0 hd0u hp
+    have hif : floProg (t0, d0) = S1LowT.floStripMin t0 d0 := by
+      dsimp only [floProg]
+      rw [if_pos ⟨ht0, hd0u⟩]
+    by_cases hdw : (1 / 200 : ℝ) ≤ d0
+    · have hml : MrLift t0 d0 = t4m_MwireOff t0 d0 := by
+        dsimp only [MrLift]
+        rw [if_pos ⟨ht0, hd0u, hdw⟩]
+      have hbw : Z78P12.BwireP (t0, d0) = p8_B t0 (S4Strip.n4 t0) := by
+        dsimp only [Z78P12.BwireP, S4A.BwireR]
+        rw [if_pos ⟨ht0, hd0u⟩, if_pos hdw]
+      have hM0 : S4A.MfR (t0, d0) = 0 := rfl
+      simpa only [hif, hbw, hml, Z78P12.MfP, hM0, add_zero] using
+        t4m_margin t0 d0 ht0 hdw hd0u
+    · have hna : ¬ (1000 ≤ t0 ∧ d0 ≤ 1 / 2 ∧ (1 / 200 : ℝ) ≤ d0) :=
+        fun h' => by linarith [hdw, h'.2.2]
+      have hml : MrLift t0 d0 = S4A.MrR t0 d0 := by
+        dsimp only [MrLift]
+        rw [if_neg hna]
+      have hwinshp : Z78P12.BwireP (t0, d0) + Z78P12.MrP (t0, d0) +
+          Z78P12.MfP (t0, d0) < S1LowT.floStripMin t0 d0 :=
+        ((WinC.faceSplitH q H hPT).mpr hWinH) t0 d0 ht0 hd0
+          (not_le.mp hdw) hp
+      simpa only [hif, hml, Z78P12.MrP] using hwinshp
+  · --  S4  low  band:  its  whole  domain  (0,  1000)  sits  below
+      --  the  frontier:  vacuous.
+    intro t0 d0 ht0 ht0u hd0 hd0u hp
+    have hle : t0 ≤ H := le_trans (le_of_lt ht0u) hH
+    exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
+      (le_of_lt ht0) hle) d0 hp)
+  · --  S4  far  region:  [Z78].
+    intro t0 d0 ht0 hd0 hd0f hp
+    exact False.elim (Z78P12.offPairFarEmpty q hz78 hqz t0 d0 hd0f hp)
+
+/--  THE  FLANK-SPLIT  MACHINED  STRIPFRONT  ENDPOINT  AT  THE
+    PLATT-TRUDGIAN  FRONTIER  (the  [Z-PT2]  instantiation,
+    discovery  0122):  the  entire  named  residue  lives  STRICTLY
+    ABOVE  3,000,175,332,800  -  G-hs1,  window  zero-exclusion,
+    hs3  at  the  right  witness  (machined,  cited  1.6  mass),
+    and  G-hs3-left  (the  analytic  face).  No  RH  claim.  -/
+theorem rh_program78_stripfront_mach_left_PT2 (q : ZeroSet)
+    (hz78 : Z78.externalZeroFree78)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) →
+      (|ρ.im| : ℝ) < (707 : ℝ) / 50 → ρ.re = 1 / 2)
+    (Qside : ℝ × ℝ → ℝ)
+    (hPT2 : WinC.allOnLineUpTo q WinC.tPT2)
+    (hs1StripPT2 : ∀ (t0 d0 : ℝ), WinC.tPT2 <= t0 → (1 / 200 : ℝ) <= d0 →
+      d0 <= 1 / 2 → offPair q t0 d0 → Qside (t0, d0) ≥ devProg (t0, d0))
+    (hs3RightPT2 : ∀ (t0 d0 : ℝ), WinC.tPT2 <= t0 → (1 / 200 : ℝ) <= d0 →
+      d0 <= 1/2 → t4l_rightOffPair q t0 d0 →
+      Qside (t0, d0) <=
+        ‖p4_em_expr (t4o_sOff t0 d0) (S4Strip.n4 t0)‖ +
+        t4m_MwireOff t0 d0)
+    (hs3LeftPT2 : ∀ (t0 d0 : ℝ), WinC.tPT2 <= t0 → (1 / 200 : ℝ) <= d0 →
+      d0 <= 1/2 → t4l_leftOffPair q t0 d0 →
+      Qside (t0, d0) <=
+        Z78P12.BwireP (t0, d0) + (fun p => MrLift p.1 p.2) (t0, d0))
+    (hWinPT2 : WinC.hWinFaceResidualH q WinC.tPT2) :
+    RH q :=
+  rh_program78_stripfront_mach_left q hz78 hqz honline Qside
+    WinC.tPT2 (by norm_num [WinC.tPT2]) hPT2
+    hs1StripPT2 hs3RightPT2 hs3LeftPT2 hWinPT2
 
 
 end RHEnd

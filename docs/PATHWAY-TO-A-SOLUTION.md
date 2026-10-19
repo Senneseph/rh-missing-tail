@@ -918,6 +918,42 @@ for the ACTUAL zeta zero set.  The branches:
       sorry.
 
 
+  FORMAL:  G-hs3-left  AT  THE  ENDPOINT  -  THE  HS3  FACE
+      SPLIT  BY  FLANK  (discovery  0122):  RHEnd.lean  part
+      B9  (1505  lines,  0  sorry,  GATED,  full  tree  green
+      17450  jobs)  states  the  machined  stripfront  endpoint
+      with  the  hs3  face  split  by  the  FLANK  of  the  off-
+      pair  witness  -  the  off-pair  (t0,  d0)  records  no
+      flank,  and  t4l_flankSplit  gives  the  split  (an
+      off-pair  with  d0  !=  0  is  a  right-flank  off-pair
+      (re  =  1/2  +  d0)  or  a  left-flank  off-pair  (re  =
+      1/2  -  d0),  pinned  by  the  |.|-shape  of  the  pair).
+      rh_program78_stripfront_mach_left  (+  _PT2  at  the
+      Platt-Trudgian  frontier):  the  endpoint  holds  from
+      (i)  G-hs1  (open,  as  before),  (ii)  the  window  zero-
+      exclusion  face  (open,  as  before),  (iii)  hs3  at  a
+      RIGHT-FLANK  witness  in  the  machine-closable  B7
+      shape  (off-line  EM  wall  at  t4o_sOff,  n4  schedule
+      +  lifted  M-wire;  T4OffD  closes  the  S3  leg  IN
+      BODY),  and  (iv)  G-hs3-left:  hs3  at  a  LEFT-FLANK
+      witness  stated  at  PAIR  LEVEL  (Qside  <=  Bwire  +
+      Mr)  -  the  named  analytic  face.  t4l_rightFaceOfSingle
+      records  that  the  B7  single-face  premise  restricts  to
+      the  right-flank  face  (the  split  endpoint  asks  no  more
+      of  the  right  flank  than  B7  did);  the  S4  (floor)
+      side  is  FLANK-INDEPENDENT  (t4m_margin)  -  only  the
+      S3  (wire)  side  carries  the  flank.  CONSEQUENCE:  the
+      endpoint  residual  in  THE  MACHINE  is  now  exactly
+      the  four-face  ledger  of  0121  -  machine/ledger
+      lockstep.  The  two  remaining  0121  candidates  attach
+      to  this  theorem:  (1)  squeeze  G-hs3-left  at  the
+      MEASURED  left-flank  zeros  below/around  the  frontier
+      (shrinking  the  analytic  face  to  a  named  height
+      band,  hWin-pattern);  (2)  a  left-tuned  schedule
+      family  (the  barrier's  contrapositive  as  a  construction)
+      would  DISCHARGE  the  face  in  body.  No  RH  claim.
+
+
 
 
 

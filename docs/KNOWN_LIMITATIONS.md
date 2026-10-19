@@ -346,6 +346,23 @@ faces, of which exactly one is analytic content inside the tree:
    n4 wire's uniformity), squeezing the face at measured left-flank
    zeros below/around the frontier, or a different wall.
 
+**Discovery 0122 (2026-10-19 — endpoint lockstep):** the face is now
+IN THE MACHINE. `RHEnd.lean` part B9 (the file is 1505 lines, 0
+sorry, full tree green) states the endpoint with the hs3 face
+SPLIT BY FLANK: `t4l_flankSplit` (an off-pair with `d0 != 0` splits
+by the flank of its witness), `rh_program78_stripfront_mach_left`
+(the right-flank face is the machine-closable B7 shape — T4OffD in
+body; the left-flank face `hs3LeftH` is the pair-level S3 squeeze
+`Qside <= Bwire + Mr`, the named analytic face) and the `_PT2`
+instance. The endpoint residual in the machine is now exactly the
+four-face ledger above: `t4l_rightFaceOfSingle` records that the
+B7 single-face premise restricts to the right-flank face, so the
+split endpoint asks no more of the right flank than B7 did; the
+S4 (floor) side is flank-independent (`t4m_margin`) — only the S3
+(wire) side carries the flank. The 0121 candidates 1 (data squeeze
+of the face) and 2 (left-tuned schedule family) attach to
+`rh_program78_stripfront_mach_left` directly.
+
 The barriers of T4OffL say nothing about whether left-flank zeros
 exist: they are FORMAL NEGATIVE RESULTS about what the current
 machine wire can do, stated exactly. No RH claim is made or implied.

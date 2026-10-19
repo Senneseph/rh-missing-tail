@@ -426,6 +426,33 @@ A chain of named theorems;  each box names the modules.
                    endpoint);  the  pins  are  data  faces  (measured
                    where  data  reach,  citation  content  above  the
                    verified  frontier).
+                   PART  B9  (discovery  0122):  THE  HS3  FACE
+                   SPLIT  BY  FLANK  (rh_program78_stripfront_
+                   mach_left  /  _PT2):  the  off-pair  (t0,  d0)
+                   records  NO  flank  -  t4l_flankSplit  gives  the
+                   split  (d0  !=  0:  right  (re  =  1/2  +  d0)
+                   or  left  (re  =  1/2  -  d0),  pinned  by  the
+                   |.|-shape).  Right  =  the  machine-closable
+                   B7  shape  (wall  at  t4o_sOff  +  lifted
+                   M-wire;  T4OffD  closes  the  S3  leg  IN
+                   BODY);  left  =  hs3LeftH,  the  pair-level
+                   S3  squeeze  (Qside  <=  Bwire  +  Mr)  -  the
+                   NAMED  ANALYTIC  FACE  G-hs3-left  (T4OffL,
+                   discovery  0121:  the  n^4  wire  cannot  carry
+                   it  -  band  edge  t  >=  10^10,  sigma  =  0
+                   unreachable  at  every  schedule).  
+                   t4l_rightFaceOfSingle:  the  B7  single-face
+                   premise  restricts  to  the  right-flank  face
+                   (the  split  endpoint  asks  no  more  of  the
+                   right  flank  than  B7  did);  the  S4  (floor)
+                   side  is  FLANK-INDEPENDENT  (t4m_margin)  -
+                   only  the  S3  (wire)  side  carries  the
+                   flank.  The  endpoint  residual  IN  THE
+                   MACHINE  is  now  exactly  the  four-face
+                   ledger  of  0121  (G-hs1  data,  window
+                   record,  machined  hs3  right  witness,
+                   G-hs3-left  analytic)  -  machine/ledger
+                   lockstep.  No  RH  claim.
 
   Foundations / vocabulary
      B0 (composition atoms)  B4/B5 (detector-line notation)
