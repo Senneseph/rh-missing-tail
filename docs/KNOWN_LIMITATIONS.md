@@ -294,3 +294,58 @@ named, bounded, recorded obligations.
 *Companion: `PATHWAY-TO-A-SOLUTION.md` (the FORMAL blocks at
 discovery 0116-0120), `discovery/DISCOVERY.html` (entries 0116-0120),
 `formal/cards/RHEnd.md` (parts B5-B8 of the endpoint).*
+
+## FLANK ASYMMETRY CORRECTION (discovery 0121, 2026-10-19 — the
+## machined hs3 face covers the RIGHT flank only; G-hs3-left is the
+## remaining analytic face)
+
+The "no analytic face remains" statement above was ALL-FLANKS in
+wording and RIGHT-FLANK in mechanism. The T4Off closure (discovery
+0116-0120) lives at the canonical point `t4o_sOff t0 d0 = (1/2 + d0)
++ i*t0` — i.e. it covers `sigma = Re s = 1/2 + d0 >= 1/2` only.
+Discovery 0121 (`formal/RhAttack/T4OffL.lean`, GATED, 619 lines,
+0 sorry, full tree green) records the formal negative result about
+the machine wire and names the residue:
+
+* **G-hs3-left.** The S3 (wire) content of a LEFT-FLANK off-pair
+  (`Re rho = 1/2 - d0 < 1/2`, `1/200 <= d0 <= 1/2`, `t0 > tPT2`) is
+  NOT machine-supported by the `n4` wire. Formal barriers (exact
+  rational pins, no numerics):
+  1. **Band edge** (`d0 = 1/200`, `sigma = 99/200`):
+     `t4l_barrier_edge` — for every `t >= 10^10` the first T4 term
+     `(1/2)*(n4 t)^{-99/200}` STRICTLY EXCEEDS the endpoint floor
+     `floStripMin t (1/200)`; in particular at the Platt-Trudgian
+     frontier (margin ~13%; crossing threshold
+     `t > (15750/9999)^50 ~= 7.33e9`). The S3 side of the squeeze
+     cycle (wall + mass below floor) cannot hold at the left flank
+     band edge (`t4l_squeezeImpos_edge`).
+  2. **Sigma = 0** (`d0 = 1/2`, `Re = 0`):
+     `t4l_barrier_sigma0` — the first T4 term is identically 1/2 at
+     EVERY schedule `n`; it never falls below the floor. No schedule
+     at all can close the S3 wire at `sigma = 0`
+     (`t4l_squeezeImpos_sigma0`).
+  3. **No uniform schedule covers the band**: per-point closure at
+     fixed `d0 < 1/2` needs a left-tuned schedule whose decay
+     `n^{-sigma}` beats the floor's `t^{-2}` (exists with a large
+     exponent), but NO schedule uniform in `d0` over the band covers
+     it, and `d0 = 1/2` is unreachable at every schedule.
+
+Consequently the endpoint residual at tPT2 is again FOUR named
+faces, of which exactly one is analytic content inside the tree:
+
+1. P1-P4 pin family at strip-band witness zeros (data, above the
+   frontier).
+2. Window zero-exclusion face (record above the frontier).
+3. Machined hs3 face — machine-verified at the **right-flank**
+   witness (`t4o_sOff`); its only non-machine content is the CITED
+   1.6 convexity mass (record, as before).
+4. **G-hs3-left** — satisfaction of the S3 face at a **left-flank**
+   witness: analytic content in the original sense, not a data or
+   citation item. Candidate resolutions: a left-tuned tail theory
+   (schedule `n ~ t^{4/(1-2*d0)}`-class, d0-dependent, breaks the
+   n4 wire's uniformity), squeezing the face at measured left-flank
+   zeros below/around the frontier, or a different wall.
+
+The barriers of T4OffL say nothing about whether left-flank zeros
+exist: they are FORMAL NEGATIVE RESULTS about what the current
+machine wire can do, stated exactly. No RH claim is made or implied.

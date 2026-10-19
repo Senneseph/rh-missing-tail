@@ -878,6 +878,46 @@ for the ACTUAL zeta zero set.  The branches:
       cards.
 
 
+  FORMAL:  G-hs3-left  -  THE  FLANK  ASYMMETRY  AT  THE
+      MACHINE  (discovery  0121):  T4OffL.lean  (619  lines,
+      0  sorry,  GATED,  full  tree  green  17450  jobs).
+      CORRECTION  to  the  0119/0120  all-flanks  wording:
+      the  G-hs3  closure  (0116-0120,  T4OffD/T4OffM)  lives
+      at  the  canonical  point  t4o_sOff  =  (1/2  +  d0)  +
+      i*t  -  i.e.  it  covers  sigma  =  Re  s  >=  1/2  ONLY.
+      The  raw  EM  tail's  first  T4  term  (1/2)*n^{-sigma}
+      decays  in  n  only  at  rate  sigma;  at  the  LEFT
+      FLANK  (sigma  =  1/2  -  d0  <  1/2)  the  tree's
+      uniform  n^4  schedule  cannot  close  the  S3  wire,
+      and  T4OffL  records  this  AS  A  FORMAL  BARRIER
+      (exact  rational  pins,  zero  numerics):  (1)  BAND
+      EDGE  d0  =  1/200  (sigma  =  99/200):  for  t  >=
+      10^10  the  first  T4  term  at  the  n4  schedule
+      STRICTLY  EXCEEDS  the  endpoint  floor  (crossing
+      threshold  t  >  (15750/9999)^50  ~=  7.33e9;  frontier
+      margin  ~13%;  t4l_barrier_edge,  instantiated  at  tPT2
+      in  t4l_barrier_edge_PT2);  (2)  SIGMA  =  0  (d0  =
+      1/2):  the  first  T4  term  is  identically  1/2  at
+      EVERY  schedule  n  and  never  falls  below  the
+      floor  -  no  schedule  can  close  the  wire  there
+      (t4l_barrier_sigma0);  (3)  NO  schedule  uniform  in
+      d0  over  the  band  covers  it,  and  d0  =  1/2  is
+      unreachable  at  every  schedule  (per-point  closure
+      at  fixed  d0  <  1/2  needs  a  left-tuned  schedule
+      with  a  large  exponent).  CONSEQUENCE:  the  endpoint
+      residual  at  tPT2  is  again  FOUR  named  faces  -  the
+      P1-P4  pin  family  (data),  the  window  zero-exclusion
+      (record),  the  machined  hs3  (machine-verified  at
+      the  RIGHT-FLANK  witness;  cited  1.6  mass)  -  plus
+      G-hs3-left:  the  S3  face  at  a  LEFT-FLANK  witness
+      is  ANALYTIC  CONTENT  in  the  original  sense,  not  a
+      data  or  citation  item.  The  barriers  are  formal
+      negative  results  about  the  machine  wire;  they  say
+      nothing  about  whether  left-flank  zeros  exist.  No
+      RH  claim.  Full  tree  green  (17450  jobs),  0
+      sorry.
+
+
 
 
 

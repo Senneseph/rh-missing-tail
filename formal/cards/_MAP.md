@@ -235,6 +235,41 @@ A chain of named theorems;  each box names the modules.
                frontier,  the  endpoint  hs3  leg  reduces  to
                ONE  cited  convexity  mass,  not  an  analytic
                barrier.)
+      T4OffL     (G-hs3-left:  THE  FLANK  ASYMMETRY  AT
+               THE  MACHINE,  discovery  0121,  GATED,  the
+               CORRECTION  to  the  0119/0120  all-flanks
+               wording:  0116-0120  cover  sigma  =  1/2  +
+               d0  >=  1/2  only  -  the  canonical  point  is
+               t4o_sOff;  at  the  LEFT  FLANK  (sigma  =  1/2
+               -  d0  <  1/2,  first  T4  term  (1/2)*n^-sigma
+               decays  in  n  only  at  rate  sigma)  the
+               uniform  n^4  wire  CANNOT  close  the  S3
+               wire.  FORMAL  BARRIERS,  exact  rational
+               pins,  zero  numerics:  t4l_barrier_edge
+               (t  >=  10^10  ->  the  first  T4  term  at  the
+               n4  schedule  STRICTLY  EXCEEDS  floStripMin  t
+               (1/200);  crossing  threshold  t  >  (15750/
+               9999)^50  ~=  7.33e9;  frontier  margin  ~13%;
+               route:  t4l_n4upper  (Nat.ceil_lt_add_one)  +
+               t4l_term1lb  (sqrt(62000000)  <  7875)  +
+               t4l_floorPinEdge  ((1/9999)  t^-2,  via  the
+               pure  log-route  exp  pin  t4l_expU);  the
+               instantiation  t4l_barrier_edge_PT2  lands
+               on  the  cited  frontier).  t4l_barrier_sigma0
+               (d0  =  1/2:  the  first  T4  term  identically
+               1/2  at  EVERY  schedule  n;  no  scheduling
+               can  close  the  wire  at  re  =  0).  Plus
+               squeeze-impossibility  theorems  and  the
+               characterization:  per-point  closure  at  fixed
+               d0  <  1/2  needs  a  left-tuned  schedule;
+               NO  schedule  uniform  in  d0  covers  the
+               band.  CONSEQUENCE:  the  machined  hs3  face
+               is  machine-verified  at  the  RIGHT-FLANK
+               witness  only;  satisfaction  at  a  left-flank
+               witness  is  G-hs3-left  -  ANALYTIC  CONTENT,
+               not  a  data  or  citation  item.  Formal  negative
+               results  about  the  machine  wire;  NO  RH
+               claim,  no  claim  about  zeta.)
      WinCount (the hWin SHINK, GATED:  the  face's  OPEN  CONTENT  =
               zero-exclusion  above  the  classical  frontier:
               (A)  tPT  :=  30610046000  pins  the  rigorous
