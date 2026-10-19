@@ -953,6 +953,36 @@ for the ACTUAL zeta zero set.  The branches:
       family  (the  barrier's  contrapositive  as  a  construction)
       would  DISCHARGE  the  face  in  body.  No  RH  claim.
 
+  FORMAL:  THE  LEFT-TUNED  SCHEDULE  FAMILY,  IN  THE  MACHINE
+      (discovery  0123):  T4OffL.lean  section  S7  (919  lines,
+      0  sorry,  GATED,  full  tree  green  17450  jobs)  is  the
+      POSITIVE  DUAL  of  the  S4  barriers  -  the  barrier's
+      contrapositive  as  a  construction.  (1)  t4l_schedA
+      (sigma)  =  (9999/2)^{1/sigma}  -  the  critical  scale
+      constant:  at  B  =  A(sigma)*t^{2/sigma}  the  first  T4
+      term  computes  (1/2)*B^{-sigma}  =  (1/9999)*t^{-2}  -
+      EXACTLY  the  edge-floor  scale  target.  (2)  t4l_schedA_
+      pos:  positive  for  every  sigma  >  0.  (3)  t4l_sched
+      Term1:  at  t  >=  1000,  sigma  >  0,  EVERY  schedule  n
+      at  or  above  the  critical  scale  puts  the  first  T4
+      term  at  or  below  the  floor  scale  (identity  chain,
+      no  numeric  pins).  (4)  t4l_schedBeat4:  at  t  =  10^10
+      and  the  band  edge  sigma  =  99/200  the  critical  scale
+      STRICTLY  EXCEEDS  the  uniform  machine  schedule  n4  -
+      the  barrier  restated  as  a  schedule  comparison,  pinned
+      to  a  norm_num  99th  power  ((9999/2)^200*10^40  >
+      62000000^99).  (5)  t4l_schedDiverge:  for  EVERY  A  >  0
+      some  d0  in  [1/200,  1/2)  needs  A(1/2-d0)  >  A  -  the
+      tuned  constant  is  UNBOUNDED  as  d0  ->  1/2;  NO  d0-
+      uniform  schedule  exists.  CONSEQUENCE:  G-hs3-left  is
+      not  'the  wire  is  too  weak'  but  'the  wire  is  the
+      wrong  KIND'  -  the  obligation  is  per-point,  and  the
+      per-point  schedule  is  now  EXPLICIT  in  the  machine.
+      The  analytic  residue  is  unchanged  and  honest:  that
+      the  FULL  S3  squeeze  (not  just  the  first  T4  term)
+      holds  at  the  tuned  schedule  at  the  left-flank
+      witness.  No  RH  claim.
+
 
 
 

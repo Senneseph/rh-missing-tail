@@ -329,6 +329,15 @@ the machine wire and names the residue:
      `n^{-sigma}` beats the floor's `t^{-2}` (exists with a large
      exponent), but NO schedule uniform in `d0` over the band covers
      it, and `d0 = 1/2` is unreachable at every schedule.
+     **Discovery 0123 supplies the positive half of this bullet in
+     the machine** (T4OffL section S7): the per-point schedule is
+     explicit — `t4l_schedA (sigma) = (9999/2)^{1/sigma}`, run `n`
+     at or above `A(sigma)*t^{2/sigma}` — at which the first T4 term
+     lands EXACTLY on the edge-floor scale (`t4l_schedTerm1`); the
+     critical scale strictly exceeds the uniform `n4` schedule at
+     the frontier height (`t4l_schedBeat4`); and the tuned constant
+     is unbounded as `d0 -> 1/2` (`t4l_schedDiverge`), which is why
+     no uniform schedule can ever serve the band.
 
 Consequently the endpoint residual at tPT2 is again FOUR named
 faces, of which exactly one is analytic content inside the tree:
@@ -362,6 +371,27 @@ S4 (floor) side is flank-independent (`t4m_margin`) — only the S3
 (wire) side carries the flank. The 0121 candidates 1 (data squeeze
 of the face) and 2 (left-tuned schedule family) attach to
 `rh_program78_stripfront_mach_left` directly.
+
+**Discovery 0123 (2026-10-19 — the schedule family, in the
+machine):** candidate 2 is done, in `T4OffL.lean` section S7 (the
+file is 919 lines, 0 sorry, full tree green). The barrier's
+contrapositive is now a CONSTRUCTION: `t4l_schedA (sigma) :=
+(9999/2)^{1/sigma}` is the critical scale constant (at `B =
+A(sigma)*t^{2/sigma}` the first T4 term computes `(1/9999)*t^{-2}`
+exactly); `t4l_schedTerm1` closes the first T4 term at or below the
+floor scale for every schedule at or above that scale, for every
+`t >= 1000`, `sigma > 0` (identity chain, no numerics); `t4l_sched
+Beat4` shows the critical scale strictly exceeds the uniform machine
+schedule at the frontier height (pinned to the norm_num-able 99th
+power `(9999/2)^200*10^40 > 62000000^99`); `t4l_schedDiverge`
+proves the tuned constant is unbounded as `d0 -> 1/2` — no d0-
+uniform schedule exists, so per-point tuning is essential. The
+residue is thereby sharpened from 'the wire is too weak' to 'the
+wire is the wrong KIND': the analytic face G-hs3-left is now
+precisely that the FULL S3 squeeze (not just the first T4 term) holds
+at the explicitly given per-point tuned schedule at the left-flank
+witness. The remaining attack candidate is the data squeeze of the
+face at measured left-flank zeros (candidate 1).
 
 The barriers of T4OffL say nothing about whether left-flank zeros
 exist: they are FORMAL NEGATIVE RESULTS about what the current

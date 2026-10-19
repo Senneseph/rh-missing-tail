@@ -617,3 +617,303 @@ theorem t4l_barrier_edge_PT2 :
     dsimp only [WinC.tPT2]
     norm_num
   exact t4l_barrier_edge WinC.tPT2 hfront
+
+/-  =================================================================
+   S7  THE  LEFT-TUNED  SCHEDULE  FAMILY  (discovery  0123)
+   =================================================================
+   The  POSITIVE  DUAL  of  the  barriers  (S4/S5):  at  a  FIXED
+   left-flank  point  (d0  <  1/2,  sigma  = 1/2  -  d0  >  0)
+   the  first  T4  term  (1/2)*n^{-sigma}  CAN  be  closed  -
+   against  the  EDGE-FLOOR  SCALE  (1/9999)*t^{-2}  -  by  a
+   d0-DEPENDENT  schedule  n  ~=  A(sigma)  *  t^{2/sigma}  with
+   the  constant  A(sigma)  =  (9999/2)^{1/sigma}.  S4  says  the
+   UNIFORM  n4  schedule  cannot  do  it  (band  edge,  t  >=
+   10^10);  S7  says  how  a  per-point  schedule  must  look:
+   the  power  2/sigma  exceeds  4  at  the  band  edge  (sigma
+   =  99/200:  400/99)  and  the  constant  A(sigma)  DIVERGES
+   as  sigma  ->  0  (d0  ->  1/2)  -  exactly  the  two  sides
+   of  the  no-uniform-schedule  barrier,  now  with  explicit
+   rates.  All  pins  are  exact  (norm_num  on  integer
+   powers);  no  numerics  on  the  rpow  steps.  -/
+
+/--  S7.1  THE  SCHEDULE  CONSTANT  (discovery  0123):  the
+    least-scale  constant  that  crushes  the  first  T4  term
+    (1/2)  down  to  the  edge-floor  scale  1/9999:  with  B
+    =  A(sigma)  *  t^{2/sigma},
+    (1/2)  *  B^{-sigma}  =  (1/2)  *  (A(sigma)^{-sigma})  *
+    t^{-2}  =  (1/2)  *  (2/9999)  *  t^{-2}  =  (1/9999)  *
+    t^{-2}  -  exact.  -/
+noncomputable def t4l_schedA (sigma : ℝ) : ℝ :=
+    (9999 / 2 : ℝ) ^ (1 / sigma)
+
+/--  S7.2  WELL-DEFINED  AND  POSITIVE  for  every  sigma  >  0.
+    -/
+theorem t4l_schedA_pos (sigma : ℝ) (hsig : 0 < sigma) :
+    0 < t4l_schedA sigma := by
+  dsimp only [t4l_schedA]
+  exact Real.rpow_pos_of_pos (by norm_num) (1 / sigma)
+
+/-  S7.3  THE  PER-POINT  CLOSURE:  at  a  fixed  left-flank
+    point  (t  >=  1000,  sigma  >  0)  EVERY  schedule  n  at
+    or  above  the  critical  scale  A(sigma)  *  t^{2/sigma}
+    puts  the  first  T4  term  AT  OR  BELOW  the  edge-floor
+    scale  target.  This  is  the  contrapositive  of  S4.1
+    (t4l_barrier_edge)  as  a  CONSTRUCTION:  the  barrier  is
+    about  the  UNIFORM  n4  schedule  below  this  scale.  -/
+theorem t4l_schedTerm1 (t sigma : ℝ) (ht : 1000 ≤ t) (hsig : 0 < sigma)
+    (n : ℕ) (hn : 0 < n)
+    (hsched : (n : ℝ) ≥ t4l_schedA sigma * t ^ (2 / sigma)) :
+    (1 / 2 : ℝ) * (n : ℝ) ^ (-sigma) ≤ (1 / 9999 : ℝ) * t ^ (-2 : ℝ) := by
+  have hT2 : 0 < t ^ 2 := by positivity
+  have hBsplit : (t4l_schedA sigma * t ^ (2 / sigma)) ^ sigma =
+      (t4l_schedA sigma) ^ sigma * (t ^ (2 / sigma)) ^ sigma := by
+    dsimp only [t4l_schedA]
+    simpa using Real.mul_rpow
+      (le_of_lt (Real.rpow_pos_of_pos (by norm_num : 0 < (9999 / 2 : ℝ)) (1 / sigma)))
+      (le_of_lt (Real.rpow_pos_of_pos (by linarith [ht] : 0 < t) (2 / sigma)))
+  have hBpow : (t4l_schedA sigma * t ^ (2 / sigma)) ^ sigma =
+      (9999 / 2 : ℝ) * t ^ 2 := by
+    rw [hBsplit]
+    rw [show (t4l_schedA sigma) ^ sigma = (9999 / 2 : ℝ) by
+          dsimp only [t4l_schedA]
+          rw [← Real.rpow_mul (by norm_num : 0 ≤ (9999 / 2 : ℝ)) (1 / sigma) sigma]
+          rw [show ((1 / sigma : ℝ) * sigma) = 1 by
+            field_simp [ne_of_gt hsig]]
+          rw [Real.rpow_one (9999 / 2 : ℝ)]]
+    rw [show (t ^ (2 / sigma)) ^ sigma = t ^ 2 by
+          rw [← Real.rpow_mul (by linarith [ht] : 0 ≤ t) (2 / sigma) sigma]
+          rw [show ((2 / sigma : ℝ) * sigma) = 2 by
+            field_simp [ne_of_gt hsig]]
+          exact Real.rpow_natCast t 2]
+  have hinvB : ((9999 / 2 : ℝ) * t ^ 2)⁻¹ = (2 / 9999 : ℝ) * t ^ (-2 : ℝ) := by
+    have hinv : ((9999 / 2 : ℝ) * t ^ 2)⁻¹ =
+        ((9999 / 2 : ℝ)⁻¹) * (t ^ 2)⁻¹ := by
+      field_simp [show (9999 / 2 : ℝ) ≠ 0 by norm_num,
+        show t ^ 2 ≠ 0 by linarith [hT2]]
+    rw [hinv]
+    have hneg : (t ^ 2)⁻¹ = t ^ (-2 : ℝ) := by
+      convert (Real.rpow_neg (le_of_lt (by linarith [ht] : 0 < t)) (2 : ℝ)).symm
+      exact (Real.rpow_natCast t 2).symm
+    rw [hneg]
+    rw [show ((9999 / 2 : ℝ)⁻¹) = 2 / 9999 by norm_num]
+  have hApos : 0 < t4l_schedA sigma := t4l_schedA_pos sigma hsig
+  have hBpos : 0 < t4l_schedA sigma * t ^ (2 / sigma) :=
+    mul_pos hApos (Real.rpow_pos_of_pos (by linarith [ht] : 0 < t) (2 / sigma))
+  have hBpowpos : 0 < (t4l_schedA sigma * t ^ (2 / sigma)) ^ sigma :=
+    Real.rpow_pos_of_pos hBpos sigma
+  have hnpos : 0 < (n : ℝ) ^ sigma :=
+    Real.rpow_pos_of_pos (Nat.cast_pos.mpr hn) sigma
+  have hmono : (t4l_schedA sigma * t ^ (2 / sigma)) ^ sigma ≤
+      (n : ℝ) ^ sigma :=
+    Real.rpow_le_rpow (le_of_lt hBpos) hsched (by linarith [hsig])
+  have hstep : (n : ℝ) ^ (-sigma) ≤
+      ((9999 / 2 : ℝ) * t ^ 2)⁻¹ := by
+    calc (n : ℝ) ^ (-sigma)
+        _ = ((n : ℝ) ^ sigma)⁻¹ :=
+          Real.rpow_neg (le_of_lt (by positivity : 0 < (n : ℝ))) sigma
+        _ ≤ ((t4l_schedA sigma * t ^ (2 / sigma)) ^ sigma)⁻¹ :=
+          (inv_le_inv₀ hnpos hBpowpos).mpr hmono
+        _ = ((9999 / 2 : ℝ) * t ^ 2)⁻¹ := by rw [hBpow]
+  have hterm : (1 / 2 : ℝ) * (n : ℝ) ^ (-sigma) ≤
+      (1 / 2 : ℝ) * ((9999 / 2 : ℝ) * t ^ 2)⁻¹ :=
+    mul_le_mul_of_nonneg_left hstep (by norm_num : (0 : ℝ) ≤ 1 / 2)
+  have hfin : (1 / 2 : ℝ) * ((9999 / 2 : ℝ) * t ^ 2)⁻¹ =
+      (1 / 9999 : ℝ) * t ^ (-2 : ℝ) := by
+    rw [hinvB]
+    ring_nf
+  exact le_trans hterm (le_of_eq hfin)
+
+/-  S7.4  THE  SCHEDULE  BEATS  THE  MACHINE  AT  THE  FRONTIER
+    HEIGHT  (the  break  of  n4-uniformity  with  an  explicit
+    rate):  at  t  =  10^10  and  the  band  edge  (sigma  =
+    99/200),  the  per-point  critical  scale  A(sigma)  *
+    t^{2/sigma}  =  (9999/2)^{200/99}  *  t^{400/99}  EXCEEDS
+    the  uniform  machine  schedule  S4Strip.n4  (<=  2  *
+    31000000  *  t^4)  -  the  schedule  outgrows  the  uniform
+    wire  by  a  margin  pinned  below  to  the  99th  power.
+    The  equivalent  powered  form  ((9999/2)^{200}  *  10^40
+    >  62000000^99)  is  a  pure  norm_num  pin.  -/
+theorem t4l_schedBeat4pin :
+    (9999 / 2 : ℝ) ^ 200 * (10 : ℝ) ^ 40 > (62000000 : ℝ) ^ 99 := by
+  norm_num
+
+/--  S7.4b  AT  t  =  10^10  THE  CRITICAL  SCALE  EXCEEDS  THE
+    UNIFORM  n4  SCHEDULE  (the  break  of  n4-uniformity).  -/
+theorem t4l_schedBeat4 :
+    t4l_schedA (99 / 200) * ((10 : ℝ) ^ 10) ^ (400 / 99 : ℝ) >
+      (S4Strip.n4 (10 ^ 10 : ℝ) : ℝ) := by
+  let T := (10 : ℝ) ^ 10
+  have hupper : (S4Strip.n4 (10 ^ 10 : ℝ) : ℝ) ≤
+      2 * (31000000 : ℝ) * T ^ 4 := by
+    simpa [show T = (10 ^ 10 : ℝ) by norm_num] using
+      t4l_n4upper (10 ^ 10 : ℝ) (by norm_num)
+  by_contra hbad
+  push Not at hbad
+  have hA : t4l_schedA (99 / 200) = (9999 / 2 : ℝ) ^ (200 / 99 : ℝ) := by
+    dsimp only [t4l_schedA]
+    norm_num
+  have hchain : t4l_schedA (99 / 200) * T ^ (400 / 99 : ℝ) ≤
+      2 * (31000000 : ℝ) * T ^ 4 :=
+    le_trans hbad hupper
+  have hchainpos : 0 < t4l_schedA (99 / 200) * T ^ (400 / 99 : ℝ) :=
+    mul_pos (t4l_schedA_pos (99 / 200) (by norm_num))
+      (Real.rpow_pos_of_pos (by norm_num : 0 < T) (400 / 99 : ℝ))
+  have hpow : (t4l_schedA (99 / 200) * T ^ (400 / 99 : ℝ)) ^ (99 : ℝ) ≤
+      (2 * (31000000 : ℝ) * T ^ 4) ^ (99 : ℝ) :=
+    Real.rpow_le_rpow (le_of_lt hchainpos) hchain (by norm_num : (0 : ℝ) ≤ 99)
+  have hL : (t4l_schedA (99 / 200) * T ^ (400 / 99 : ℝ)) ^ (99 : ℝ) =
+      (9999 / 2 : ℝ) ^ 200 * T ^ 400 := by
+    rw [hA]
+    have hsplit : ((9999 / 2 : ℝ) ^ (200 / 99 : ℝ) * T ^ (400 / 99 : ℝ)) ^
+        (99 : ℝ) =
+        ((9999 / 2 : ℝ) ^ (200 / 99 : ℝ)) ^ (99 : ℝ) *
+        (T ^ (400 / 99 : ℝ)) ^ (99 : ℝ) := by
+      rw [Real.mul_rpow
+        (le_of_lt (Real.rpow_pos_of_pos
+          (by norm_num : 0 < (9999 / 2 : ℝ)) (200 / 99 : ℝ)))
+        (le_of_lt (Real.rpow_pos_of_pos (by norm_num : 0 < T) (400 / 99 : ℝ)))]
+    rw [hsplit]
+    rw [show ((9999 / 2 : ℝ) ^ (200 / 99 : ℝ)) ^ (99 : ℝ) =
+        (9999 / 2 : ℝ) ^ 200 by
+      rw [← Real.rpow_mul (by norm_num : 0 ≤ (9999 / 2 : ℝ)) (200 / 99 : ℝ) (99 : ℝ)]
+      rw [show ((200 / 99 : ℝ) * (99 : ℝ)) = (200 : ℝ) by norm_num]
+      exact Real.rpow_natCast (9999 / 2 : ℝ) 200]
+    rw [show (T ^ (400 / 99 : ℝ)) ^ (99 : ℝ) = T ^ 400 by
+      rw [← Real.rpow_mul (le_of_lt (by norm_num : 0 < T)) (400 / 99 : ℝ) (99 : ℝ)]
+      rw [show ((400 / 99 : ℝ) * (99 : ℝ)) = (400 : ℝ) by norm_num]
+      exact Real.rpow_natCast T 400]
+  have hR : (2 * (31000000 : ℝ) * T ^ 4) ^ (99 : ℝ) =
+      (62000000 : ℝ) ^ 99 * T ^ 396 := by
+    have hsplit : (2 * (31000000 : ℝ) * T ^ 4) =
+        (62000000 : ℝ) * T ^ 4 := by norm_num
+    rw [hsplit]
+    rw [Real.mul_rpow (by norm_num : 0 ≤ (62000000 : ℝ))
+      (le_of_lt (by norm_num : 0 < T ^ 4))]
+    rw [show (62000000 : ℝ) ^ (99 : ℝ) = (62000000 : ℝ) ^ 99 by
+      exact Real.rpow_natCast (62000000 : ℝ) 99]
+    rw [show (T ^ 4) ^ (99 : ℝ) = T ^ 396 by
+      have h1 : (T ^ 4) ^ (99 : ℝ) = (T ^ 4) ^ 99 := Real.rpow_natCast (T ^ 4) 99
+      have h2 : (T ^ 4) ^ 99 = T ^ 396 := by
+        rw [pow_mul T 4 99]
+      exact Eq.trans h1 h2]
+  rw [hL, hR] at hpow
+  have hT396pos : 0 < T ^ 396 := pow_pos (by norm_num : 0 < T) 396
+  have hcanceled : (9999 / 2 : ℝ) ^ 200 * T ^ 4 ≤ (62000000 : ℝ) ^ 99 := by
+    have hdiv : ((9999 / 2 : ℝ) ^ 200 * T ^ 400) / T ^ 396 ≤
+        ((62000000 : ℝ) ^ 99 * T ^ 396) / T ^ 396 :=
+      div_le_div_of_nonneg_right hpow (le_of_lt hT396pos)
+    have hR2 : ((62000000 : ℝ) ^ 99 * T ^ 396) / T ^ 396 =
+        (62000000 : ℝ) ^ 99 := by
+      rw [div_eq_mul_inv]
+      rw [mul_assoc]
+      rw [mul_inv_cancel₀ (ne_of_gt hT396pos)]
+      rw [mul_one]
+    rw [hR2] at hdiv
+    have hL2 : ((9999 / 2 : ℝ) ^ 200 * T ^ 400) / T ^ 396 =
+        (9999 / 2 : ℝ) ^ 200 * T ^ 4 := by
+      have hT : T ^ 400 = T ^ 396 * T ^ 4 := by
+        rw [show (400 : ℕ) = 396 + 4 by norm_num, ← pow_add T 396 4]
+      rw [div_eq_mul_inv, hT]
+      rw [mul_assoc ((9999 / 2 : ℝ) ^ 200) (T ^ 396 * T ^ 4) (T ^ 396)⁻¹]
+      rw [show (T ^ 396 * T ^ 4) * (T ^ 396)⁻¹ = T ^ 4 by
+            rw [mul_assoc]
+            rw [show T ^ 4 * (T ^ 396)⁻¹ = (T ^ 396)⁻¹ * T ^ 4 by
+                  rw [mul_comm]]
+            rw [← mul_assoc]
+            rw [mul_inv_cancel₀ (ne_of_gt hT396pos)]
+            rw [one_mul]]
+    rw [← hL2]
+    exact hdiv
+  have hT4 : T ^ 4 = (10 : ℝ) ^ 40 := by
+    dsimp only [T]
+    rw [pow_mul (10 : ℝ) 10 4]
+  have hcontra : (9999 / 2 : ℝ) ^ 200 * (10 : ℝ) ^ 40 ≤
+      (62000000 : ℝ) ^ 99 := by
+    rw [← hT4]
+    exact hcanceled
+  exact lt_irrefl _ (lt_of_lt_of_le t4l_schedBeat4pin hcontra)
+
+/-  S7.5  THE  CONSTANT  DIVERGES  AT  THE  BAND  TOP  (the
+    other  side  of  the  no-uniform-schedule  barrier):  for
+    EVERY  A  >  0  there  exists  a  d0  in  the  strip  band
+    (1/200  <=  d0  <  1/2)  whose  per-point  schedule  constant
+    exceeds  A  -  so  NO  constant  (and  hence  no  n-polynomial
+    schedule  with  a  d0-UNIFORM  leading  constant)  can  serve
+    the  left  wire  across  the  whole  band.  For  A  >  1  the
+    explicit  choice  is  sigma  =  min  (ln(9999/2)  /  (2  ln
+    A),  1/2000)  (d0  =  1/2  -  sigma):  the  schedule  then
+    equals  at  least  A^2  >  A.  -/
+theorem t4l_schedDiverge (A : ℝ) (hA : 0 < A) :
+    ∃ d0, (1 / 200 : ℝ) ≤ d0 ∧ d0 < 1 / 2 ∧
+      t4l_schedA (1 / 2 - d0) > A := by
+  have hB : 1 < (9999 / 2 : ℝ) := by norm_num
+  by_cases hA1 : 1 < A
+  · --  A  >  1:  the  explicit  small-sigma  choice.
+    have hlnA : 0 < Real.log A := Real.log_pos hA1
+    have hlnB : 0 < Real.log (9999 / 2 : ℝ) := Real.log_pos hB
+    let sigma0 := Real.log (9999 / 2 : ℝ) / (2 * Real.log A)
+    let sig := min sigma0 (1 / 2000 : ℝ)
+    have hs0 : 0 < sigma0 := div_pos hlnB (by positivity)
+    have hsm : 0 < sig := (lt_min_iff : (0 : ℝ) < min sigma0 (1 / 2000 : ℝ) ↔
+        (0 : ℝ) < sigma0 ∧ (0 : ℝ) < (1 / 2000 : ℝ)).mpr
+        ⟨hs0, by norm_num⟩
+    have hsmle : sig ≤ sigma0 := min_le_left sigma0 (1 / 2000 : ℝ)
+    have hinv : 1 / sigma0 ≤ 1 / sig :=
+      (one_div_le_one_div hs0 hsm).mpr hsmle
+    have hinv2 : 1 / sigma0 = (2 * Real.log A) / Real.log (9999 / 2 : ℝ) := by
+      dsimp only [sigma0]
+      field_simp [ne_of_gt hlnA, ne_of_gt hlnB]
+    have hlog : Real.log (t4l_schedA sig) =
+        (1 / sig) * Real.log (9999 / 2 : ℝ) := by
+      dsimp only [t4l_schedA]
+      rw [Real.log_rpow (by norm_num : 0 < (9999 / 2 : ℝ)) (1 / sig)]
+    have hge : (1 / sig) * Real.log (9999 / 2 : ℝ) ≥
+        (2 * Real.log A) / Real.log (9999 / 2 : ℝ) * Real.log (9999 / 2 : ℝ) := by
+      calc (1 / sig) * Real.log (9999 / 2 : ℝ) ≥
+          (1 / sigma0) * Real.log (9999 / 2 : ℝ) :=
+        mul_le_mul_of_nonneg_right hinv (le_of_lt hlnB)
+        _ = ((2 * Real.log A) / Real.log (9999 / 2 : ℝ)) *
+            Real.log (9999 / 2 : ℝ) := by rw [hinv2]
+    have hred : (2 * Real.log A) / Real.log (9999 / 2 : ℝ) *
+        Real.log (9999 / 2 : ℝ) = 2 * Real.log A := by
+      field_simp [ne_of_gt hlnB]
+    have hgt : Real.log (t4l_schedA sig) > Real.log A := by
+      calc Real.log (t4l_schedA sig) =
+          (1 / sig) * Real.log (9999 / 2 : ℝ) := hlog
+        _ ≥ 2 * Real.log A := by
+          linarith [hge, hred]
+        _ = Real.log (A * A) := by
+          have hlogA2 : Real.log (A * A) = 2 * Real.log A := by
+            rw [show A * A = A ^ 2 by ring]
+            rw [Real.log_pow A 2]
+            norm_num
+          rw [hlogA2]
+        _ > Real.log A := by
+          apply Real.log_lt_log (by linarith [hA] : 0 < A)
+          nlinarith [hA1]
+    have hgtApos : 0 < t4l_schedA sig := t4l_schedA_pos sig hsm
+    have hgtA : t4l_schedA sig > A :=
+      (Real.log_lt_log_iff hA hgtApos).mp hgt
+    use (1 / 2 : ℝ) - sig
+    constructor
+    · --  sig  <=  99/200
+      have hsmall : sig ≤ (99 / 200 : ℝ) := by
+        calc sig ≤ (1 / 2000 : ℝ) := min_le_right sigma0 (1 / 2000 : ℝ)
+          _ ≤ (99 / 200 : ℝ) := by norm_num
+      linarith
+    · constructor
+      · linarith [hsm]
+      · have harg : (1 / 2 : ℝ) - ((1 / 2 : ℝ) - sig) = sig := by
+          ring_nf
+        rw [harg]
+        exact hgtA
+  · --  A  <=  1:  the  band  edge  itself  suffices  (schedA  >  1  >=  A).
+    use (1 / 200 : ℝ)
+    constructor
+    · norm_num
+    · constructor
+      · norm_num
+      · have hgt1 : 1 < t4l_schedA (99 / 200) := by
+          dsimp only [t4l_schedA]
+          exact Real.one_lt_rpow (by norm_num) (by norm_num)
+        linarith [hA1, hgt1]

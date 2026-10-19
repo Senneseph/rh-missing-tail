@@ -269,7 +269,22 @@ A chain of named theorems;  each box names the modules.
                witness  is  G-hs3-left  -  ANALYTIC  CONTENT,
                not  a  data  or  citation  item.  Formal  negative
                results  about  the  machine  wire;  NO  RH
-               claim,  no  claim  about  zeta.)
+               claim,  no  claim  about  zeta.  S7,  discovery
+               0123,  GATED:  the  POSITIVE  DUAL  of  the
+               barriers  -  the  per-point  schedule  is
+               EXPLICIT:  t4l_schedA  (sigma)  =  (9999/2)^(1/
+               sigma),  run  n  at  or  above  A(sigma)*t^(2/
+               sigma)  and  the  first  T4  term  lands  EXACTLY
+               on  the  edge-floor  scale  (t4l_schedTerm1);
+               t4l_schedBeat4:  at  t  =  10^10  and  the  band
+               edge  the  critical  scale  strictly  exceeds  the
+               uniform  n4  schedule  (99th-power  norm_num  pin);
+               t4l_schedDiverge:  the  tuned  constant  is
+               unbounded  as  d0  ->  1/2  -  NO  d0-uniform
+               schedule  exists,  per-point  tuning  is
+               essential.  G-hs3-left  sharpened  to:  the  FULL
+               S3  squeeze  at  the  explicitly  given  per-point
+               tuned  schedule.)
      WinCount (the hWin SHINK, GATED:  the  face's  OPEN  CONTENT  =
               zero-exclusion  above  the  classical  frontier:
               (A)  tPT  :=  30610046000  pins  the  rigorous
