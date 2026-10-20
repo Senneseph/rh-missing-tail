@@ -239,13 +239,36 @@ follow-up, arXiv 2610.12234).
   cross-check, 300 files examined) - so the OAI 003 source
   under Liu's OAI01-OAI08 is, in the load-bearing subtree,
   THE SAME source the B6 audit covers, not merely the same
-  class.  The recorded caveat stands (her replay reused
-  pinned artifacts, no clean network bootstrap), so an
-  independent replay of her check.py (both modes documented
-  in her README_on_lean.md; pins: Lean 4.34.1, mathlib
-  d13f23b72..., OAI adc7f12..., proof_manifest.json inside
-  foundations.tar.gz) is queued as the machine-side
-  completion of the adoption.
+  class.  The recorded caveat (her replay reused
+  pinned artifacts, no clean network bootstrap) was
+  RESOLVED by an INDEPENDENT REPLAY on 2026-10-20
+  (discovery 0132): a fresh CLEAN-NETWORK bootstrap
+  (every dependency fetched fresh at its pinned SHA -
+  mathlib d13f23b7..., PNT+ c39a751..., the two patched
+  dependencies applied via the BIT-IDENTICAL patches
+  audited in 0130 - no shared package directory, no
+  binary cache), the ENTIRE external closure built
+  from source (8,951 jobs), then a strict trust=0
+  replay of all ten proof files: status PASS.  The
+  declaration-level axiom audit reproduces her exact
+  312-declaration surface with ZERO deviations from
+  propext / Classical.choice / Quot.sound; checker,
+  archive and all ten sources byte-identical to the
+  published repository.  Kernel standing, stated
+  precisely: the Lean 4.34.1 kernel has now replayed
+  the whole [Z78L] source through TWO independent
+  parties (producer 2026-10-11; independent run
+  2026-10-20); the second kernel (NanoDa) covers the
+  OAI 003 FOUNDATION source at the identical pin
+  (teal-sea's 2026-10-08 comparator replay of the
+  openai/math tree at adc7f12..., whose record also
+  independently cross-checks the 0130 patch facts);
+  the DELTA files (PartsI_III, PartIV) are two-party
+  Lean-kernel replayed but not yet second-kernel
+  replayed (queue-able machine step, not blocking).
+  The adoption's machine side is complete: every
+  remaining [Z78L] question is B6 item 5 (the paper
+  reading), shared with [Z78].
   Liu's improved half-plane (boundary B_inf =
   0.874957019420098946... < 7/8), adopted at its certified
   rational bracket liuBUpper =

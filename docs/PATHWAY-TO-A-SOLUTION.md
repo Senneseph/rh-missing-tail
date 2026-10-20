@@ -1338,6 +1338,42 @@ for the ACTUAL zeta zero set.  The branches:
       exact  rational  bracket,  not  a  round  number).
       No  RH  claim.
 
+  VERIFICATION:  THE  INDEPENDENT  [Z78L]  REPLAY  PASSES
+      (discovery  0132).  The  machine-side  completion  of
+      the  0131  adoption  -  a  FRESH  CLEAN-NETWORK  FROM-
+      SOURCE  REPLAY  of  Liu's  byte-identical  checker  on
+      this  machine  (Lean  4.34.1  Release  commit
+      5045d005),  every  dependency  fetched  at  its  pinned
+      SHA  (mathlib  d13f23b7...,  PNT+  c39a751...,  etc.);
+      both  patched  dependencies  applied  via  the  bits
+      audited  in  0130;  the  ENTIRE  external  closure  BUILT
+      FROM  SOURCE  (8,951  jobs,  no  binary  cache)  -
+      ends  status  PASS:  strict  replay  of  all  10  proof
+      files  (--trust=0,  warnings-as-errors,  maxHeartbeats
+      0),  the  DECLARATION-LEVEL  axiom  audit  covers  ALL
+      312  audited  declarations  (Liu's  own  count)  and
+      EVERY  one  depends  on  EXACTLY  propext  /
+      Classical.choice  /  Quot.sound,  and  the  7-theorem
+      final  signature  audit  passes.  THIS  RESOLVES  the
+      recorded  caveat  in  her  own  replay  (which  reused
+      pinned  artifacts  and  did  not  bootstrap  clean):
+      the  second-party  run  WAS  a  clean  bootstrap  from
+      source.  Kernel  standing,  stated  precisely:  the
+      Lean  4.34.1  kernel  has  replayed  the  whole  [Z78L]
+      source  through  TWO  independent  parties  (producer
+      2026-10-11;  this  run  2026-10-20);  the  second-kernel
+      (NanoDa)  coverage  exists  for  the  OAI  003
+      FOUNDATION  source  at  the  identical  pin  (teal-sea
+      2026-10-08  comparator  replay;  its  doc  38  also
+      cross-checks  the  0130  patch  facts  independently)  -
+      the  DELTA  files  are  not  yet  second-kernel  replayed
+      (two-party  Lean-kernel  +  machine  due-diligence  read
+      of  the  one-step  /  bootstrap  mechanism  instead).
+      No  in-tree  change:  the  0131  terminal  ledger  stands
+      as-is.  B6  item  5  (the  199-page  paper,  human,
+      weeks-scale)  remains  the  SOLELY  OPEN  B6  item  and
+      underwrites  the  foundation  of  BOTH  [Z78]  and
+      [Z78L].  No  RH  claim.
 
 
 

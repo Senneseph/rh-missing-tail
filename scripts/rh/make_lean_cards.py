@@ -946,9 +946,19 @@ C = {
  "same input class as Z78Strip - a kernel-verified external "
  "theorem as a named prop, NOT a compiled dependency; its "
  "foundation inherits the B6 OAI 003 input class, its "
- "parameter-improvement delta is human-written Lean. A NO-GO "
- "on [Z78L] reverts the program to the 0129 terminal form "
- "(nothing else depends on it)."),
+ "parameter-improvement delta is human-written Lean. "
+ "VERIFICATION STANDING (discovery 0132): the queued "
+ "independent replay is DONE and PASS - a clean-network, "
+ "from-source run (all dependencies pinned + rebuilt, 8,951 "
+ "jobs; strict trust=0 replay of all ten proof files; the "
+ "axiom audit reproduces the exact 312-declaration surface "
+ "with zero deviations from the standard three axioms; "
+ "byte-identical to the public repository) - so [Z78L] now "
+ "has two-party Lean-kernel strict replay (producer + "
+ "independent); B6 item 5 (the 199-page paper) is the solely "
+ "open B6 item and underwrites the foundation of BOTH [Z78] "
+ "and [Z78L]. A NO-GO on [Z78L] reverts the program to the "
+ "0129 terminal form (nothing else depends on it)."),
 "ZetaZeroSet": (
  "The zero-set abstraction + actual-set instantiation.",
  "edgeVacuous, s2legStrip, rhIfMarginZeta (the closure "

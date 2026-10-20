@@ -364,7 +364,9 @@ A chain of named theorems;  each box names the modules.
                    STRICTLY  STRENGTHENS  [Z78];  zetaZero-
                    StripLiu,  offPairD0leLiu  (d0  <=
                    liuD0max  =  374957019420098947/10^18
-                   <  3/8,  sharp))
+                   <  3/8,  sharp);  INDEPENDENT  STRICT
+                   REPLAY  PASS  (0132:  clean  bootstrap,
+                   from  source,  312/312  axioms  standard))
      FloorUnif    (S2 floor == S4 own-mass:  floStripMin = mown
                    on the covered band;  s4StripUnifiedFloor;
                    s2ActualFullBand,  no t0 cap)
