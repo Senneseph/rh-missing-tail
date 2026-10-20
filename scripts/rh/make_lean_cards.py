@@ -700,7 +700,7 @@ C = {
  "(rhend_sliceTrackExcl) and the 0131 terminal statement is a "
  "THEOREM of the 0133 one (unifiedLiu_ofTrack (+_PT2)). Step size "
  "1.39954e-4 (3.3x the 0131 step; cumulative from 3/8: "
- "1.82935e-4). File 2625 lines, 0 sorry, full tree green. "
+ "1.82935e-4). File 2629 lines, 0 sorry, full tree green. "
  "UPDATED TERMINAL LEDGER: [Z-PT2] record below the frontier + ONE "
  "open face hOffT (the [Z78T]-sharp strip interior, record "
  "footing) + [Z78T] (closes ALL of d0 > qxD0max in body; [Z78L] "

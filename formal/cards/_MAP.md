@@ -680,7 +680,7 @@ A chain of named theorems;  each box names the modules.
                    inputs).  Snapshot  caveat:  the  board
                    moves  daily  -  supersession  is  the
                    designed  exit  (B6  section  8).  File
-                   2625  lines,  0  sorry,  full  tree  green.
+                   2629  lines,  0  sorry,  full  tree  green.
 
   Foundations / vocabulary
      B0 (composition atoms)  B4/B5 (detector-line notation)

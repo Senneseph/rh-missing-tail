@@ -1409,7 +1409,7 @@ for the ACTUAL zeta zero set.  The branches:
       every  off-pair  of  an  actual  set  has  d0  <=
       qxD0max  =  qxUpper  -  1/2  =  74963413/200000000
       =  0.374817065  <  liuD0max).  RHEnd  PART  B14
-      (ADDITIVE  --  B12/B13  preserved;  RHEnd.lean  2625
+      (ADDITIVE  --  B12/B13  preserved;  RHEnd.lean  2629
       lines,  0  sorry,  target  and  full  tree  green):  the
       slice  (qxD0max,  liuD0max]  is  closed  IN  BODY
       (rhend_sliceTrackExcl);  rh_program78_stripfront_mach_
