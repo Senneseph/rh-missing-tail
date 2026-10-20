@@ -310,3 +310,71 @@ residual-pin structure.
     ADOPTED; a NO-GO reverts it to cited-classical
     status with the two re-opens of section 6 -
     nothing else moves.
+
+## 8. Input-upgrade protocol (demonstrated by [Z78L],
+    discovery 0131)
+
+  The [Z78L] adoption (Liu, arXiv 2610.12234 - the improved
+  boundary B_inf = 0.874957019420098946... < 7/8) is the first
+  instance of the protocol for REPLACING the standing
+  external zero-free input with a strictly stronger one.  The
+  pattern is mechanical now; a future successor input passes
+  the same gates:
+
+  1. STATEMENT: a named Lean theorem in Mathlib's vocabulary
+     (the same `riemannZeta` object our tree names), with the
+     zero-free boundary either a fixed rational (preferred -
+     norm_num-certifiable) or a certified algebraic constant
+     with a rational decimal bracket (Liu's form; adopt at the
+     bracket).
+  2. VERIFICATION: a recorded STRICT kernel replay
+     (--trust=0, warnings-as-errors, no native_decide) with
+     `#print axioms` on the final signature returning ONLY
+     propext / Classical.choice / Quot.sound, plus a
+     generated signature audit pinning the statement (Liu's
+     check.py pattern: exact source hashes, dependency
+     revision pins, per-file import allow-list, 7-theorem
+     final audit); an INDEPENDENT replay by a party other
+     than the producer is what upgrades the footing from
+     "recorded PASS" to "second-verified" (the B6 class).
+  3. PIN EQUIVALENCE: if the candidate builds on the OAI
+     003 foundation, machine-check (compare API over the
+     commit range) that the SevenEighths / NumberTheory /
+     preprint subtrees are untouched by the delta commits;
+     verify the patched-dependency patches are
+     bit-identical (sha256) to the B6-audited copies
+     (done for [Z78L]: both patches bit-identical).
+  4. IN-TREE ADOPTION: (a) a named-input module carrying the
+     input as a Prop WITH full provenance and honest
+     caveats (the Z78Liu.lean pattern); (b) the proved
+     implication to the previous input
+     (extLiu_implies_ext78 - so nothing earlier dies);
+     (c) the strip + off-pair lemmas at the new constant
+     (zetaZeroStripLiu / offPairD0leLiu - the FE argument
+     is constant-agnostic); (d) an endpoint part restating
+     the terminal face at the new constant (RHEnd B13),
+     with the slice between old and new constants closed in
+     body and a bridge making the PREVIOUS terminal
+     statement a theorem of the new one (the 0129 statement
+     is now a B13 corollary); (e) docs ledger update
+     (PATHWAY block, KNOWN_LIMITATIONS paragraph, _MAP,
+     cards, discovery entry, graceful degradation note: a
+     NO-GO reverts to the previous terminal form).
+  5. INTEGRITY GATE: the input needs CURRENTLY VERIFIABLE
+     proven - a public repo with the exact source hashes and
+     a replay record.  A search-result claim without one is
+     not adopted (the Washburn "Re s >= 0.6" record,
+     replaced by restricted access during the 0131 recon,
+     is the on-file example - it would have shrunk the face
+     to (0, 1/10) by the functional equation, and still
+     does not enter the ledger).
+
+  The face-shrinking chain (0110/0108 record shrink -> 0122
+  flank split -> 0126 band-empty -> 0127 unification ->
+  0129 3/8-shrink -> 0131 Liu-shrink) is therefore NOT at a
+  hard terminus: it is a repeatable mechanism whose next
+  shrink is bounded by the next strictly stronger VERIFIED
+  zero-free input (Liu's optimality note: her constant is
+  best within the specified comparison system, so the next
+  strength must come from a genuinely new method) or by a
+  verified record/interior input on another route.
