@@ -117,17 +117,45 @@ for the ACTUAL zeta zero set.  The branches:
       The  named  open  items  are  the  data  faces  (row
       faces,  L  faces,  covers,  dead  zone,  cusp  spacing
       +  amplitude)  and  the  E1ClauseV3  clause  itself.
-      The  whole  program's  residual  now  has  EXACTLY  ONE
-      STATEMENT:  RHEnd.rh_program78  (THE  ENDPOINT,  actual
-      set  +  [Z78],  at  the  CONCRETE  wire):  S2  covered,
-      S4  strip  band,  S4  low  band,  and  the  far  region
-      are  PROVEN  IN  THE  BODY;  the  residual  is  named
-      once  as  hs1  (the  S1  witness),  hs3  (the  S3  wire),
-      hWin  (the  S4  window-pin  SHAPE:  closure  pinned  at
-      0.9975  vs  the  unified  S2  floor  <=  own  mass  <=
-      6e-4,  gate  ratio  1662.5),  and  hS2low  (the  S2  low-
-      band  pin;  the  sliver  part  is  vacuous  under  the
-      named  on-line  record).  This  is  THE  open  item.
+      THE  RESIDUAL,  CORRECTED  TO  THE  CURRENT  STATE
+      (discovery  0121  ->  0128  ledger  chain;  RHEnd  parts
+      B7  -  B11,  all  GATED,  2043  lines,  full  tree
+      green):  the  endpoint  at  the  Platt-Trudgian
+      frontier  is  rh_program78_stripfront_mach_unified_PT2
+      (tPT2  =  3,000,175,332,800;  cited  record  [Z-PT2],
+      interval-verified  zero  isolation  +-2^-102).  PROVEN
+      IN  BODY:  S2  covered  (s2ActualFullBand);  S4  strip
+      band  (t4m_margin  -  wire  +  lifted  mass  STRICTLY
+      below  the  floor,  0118);  S4  low  band  (vacuous  below
+      the  frontier);  the  far  region  d0  >  1/2  (vacuous
+      from  [Z78]);  the  RIGHT-flank  hs3  wall  (T4OffD:
+      wall  <=  Bwire  at  the  n4  schedule,  0117);  the
+      LEFT-flank  hs3  wall  (T4OffL  S8:  at  the  per-point
+      square-root  schedule,  0125);  and  the  SQUEEZE
+      CERTIFICATE  ITSELF  (0126:  t4l_bandWireBelow  -  wire
+      +  mass  <  devProg  on  the  WHOLE  strip  band,  both
+      flanks,  the  t4m_margin  x  S2  composition;  t4l_
+      bandEmpty  -  no  Qside  satisfies  BOTH  squeeze  legs
+      at  a  band  off-pair;  t4l_stripFacesEmpty  -  the
+      three  strip  inequality  faces  are  jointly
+      contradictory  at  any  band  off-pair).  THE  RESIDUAL
+      IS  NOW  EXACTLY:  (i)  the  [Z-PT2]  record  below  the
+      frontier  (all  zeros  on  the  line  up  to
+      3,000,175,332,800);  (ii)  ONE  open  EXCLUSION  face
+      above  the  frontier  -  hOff:  no  off-pair  on  (tPT2,
+      inf)  x  (0,  1/2]  -  record  footing,  with  the
+      squeeze  certificate  measured  to  the  frontier  at
+      margin  >=  1.1136x  (0127/0128);  (iii)  [Z78]  for
+      d0  >  1/2  (in  body  from  the  kernel-verified
+      external  input;  B6  packet  item-4  audit  pending).
+      No  analytic  face,  no  inequality  face,  no  scale
+      comparison  remains  in  the  tree;  the  1/200  boundary
+      and  the  flank  split  are  proof  artifacts  of  the
+      retired  forms.  Further  reduction  of  (ii)  requires
+      EXTENDING  the  verified  zero-exclusion  record  above
+      tPT2  (route  C,  external  record-keeping;  no  public
+      record  beyond  tPT2  as  of  the  0128  recon)  or  a
+      new  exclusion  instrument.  This  is  THE  open  item.
       WALK  SPINE  CONTRACT  (2026-10-16):  the  Q  of  the  S1
       and  S3  legs  is  ONE  CONCRETE  SCALE  Qside  (the
       measured  |zeta|  fill  under  the  A4.3  wire):  S1 =
