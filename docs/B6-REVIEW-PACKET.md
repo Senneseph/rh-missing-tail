@@ -227,6 +227,25 @@ follow-up, arXiv 2610.12234).
 
   SUCCESSOR NOTE (discovery 0131): the follow-up named
   above has since entered the program AS AN INPUT - [Z78L],
+  PIN EQUIVALENCE CHECKED (machine): Liu's formalization
+  pins openai/math at adc7f1241b42e322a6451854ab7e4b4c146bf78a
+  (2026-10-06, "Initial commit"); the four commits between
+  that pin and the B6-audited release 1581d4cbdd... are
+  296 ADDITIONS + 4 MODIFICATIONS (other challenge families:
+  Cartier/Hadwiger/honeycomb/logspace/one-tape/uniform-
+  Fourier, plus OAI.lean root +11 lines and doc files) with
+  ZERO touches to the SevenEighths family, the NumberTheory
+  subtree, or the quasi-RH preprint (GitHub compare API
+  cross-check, 300 files examined) - so the OAI 003 source
+  under Liu's OAI01-OAI08 is, in the load-bearing subtree,
+  THE SAME source the B6 audit covers, not merely the same
+  class.  The recorded caveat stands (her replay reused
+  pinned artifacts, no clean network bootstrap), so an
+  independent replay of her check.py (both modes documented
+  in her README_on_lean.md; pins: Lean 4.34.1, mathlib
+  d13f23b72..., OAI adc7f12..., proof_manifest.json inside
+  foundations.tar.gz) is queued as the machine-side
+  completion of the adoption.
   Liu's improved half-plane (boundary B_inf =
   0.874957019420098946... < 7/8), adopted at its certified
   rational bracket liuBUpper =
