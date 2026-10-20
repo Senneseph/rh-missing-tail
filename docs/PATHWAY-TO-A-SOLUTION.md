@@ -1252,6 +1252,92 @@ for the ACTUAL zeta zero set.  The branches:
       input  covering  part  of  the  strip  interior.  No
       RH  claim.
 
+  FORMAL  +  NEW  EXTERNAL  INPUT:  THE  FACE  SHRINKS  TO
+      THE  [Z78L]-SHARP  STRIP  INTERIOR  (discovery  0131).
+      Strip-interior  input  recon  (route  3  of  0129)
+      surfaced  a  genuinely  new  named  input:  [Z78L]  -
+      Liu,  "Slightly  improved  zero-free  half-planes  for
+      the  quasi-Riemann  hypothesis",  arXiv  2610.12234
+      (v2  2026-10-12;  github.com/liubaiying101/Improved-
+      zero-free-half-planes-...):  the  parameter  family
+      b,  l,  kappa  of  the  7/8  argument  optimizes  to
+      B_inf  =  (18*xi+7)/(18*xi+9)
+      =  0.874957019420098946...  (xi  =  the  isolated
+      root  of  1188x^3  -  2160x^2  +  171x  +  190  in
+      (0.38858,  0.38859))  -  a  STRICTLY  STRONGER  zero-
+      free  half-plane  than  [Z78]  (B_inf  <  7/8;  the
+      band  (B_inf,  7/8]  is  newly  covered).  HUMAN  LEAN
+      FORMALIZATION  by  the  author,  recorded  strict
+      replay  PASS  (11  Oct  2026,  Hong  Kong):  Lean
+      4.34.1,  --trust=0,  10  files,  312  audited
+      declarations,  axioms  EXACTLY  propext  /
+      Classical.choice  /  Quot.sound,  generated  7-
+      signature  audit  (incl.  the  certified  decimal
+      bracket  874957019420098946/10^18  <  B_inf  <
+      874957019420098947/10^18,  and  the  zeta  statement
+      zeta_nonzero  (s)  (hs  :  B_inf  <  s.re)  (hpole  :
+      s  !=  1)  :  riemannZeta  s  !=  0).  Caveats  on
+      record:  the  replay  reused  pinned  package
+      artifacts  (no  clean  network  bootstrap);  the
+      foundation  files  OAI01-OAI08  are  the  pinned  2,925
+      required  OAI  003  modules  (so  the  deep  analytic
+      core  inherits  the  B6  input  class;  the  DELTA  -
+      the  parameter  improvement  -  is  human-written
+      Lean  by  an  actual  mathematician,  which  is  the
+      STRONGEST  available  review  footing  for  that  part
+      of  the  input).
+      IN  TREE  (new  module  formal/RhAttack/Z78Liu.lean,
+      262  lines,  0  sorry,  GATED,  target  and  full
+      tree  green  17450  jobs):  the  named  input
+      externalZeroFree78Liu  takes  her  certified  RATIONAL
+      UPPER  boundary  liuBUpper  =
+      874957019420098947/10^18  <  7/8  (norm_num  certified)
+      with  her  pole  guard  (inert  on  the  pinned
+      Mathlib:  riemannZeta_one_ne_zero).  PROVEN  from  it:
+      extLiu_implies_ext78  ([Z78L]  STRICTLY  STRENGTHENS
+      [Z78]),  zetaZeroStripLiu  (zeros  in  [1  -
+      liuBUpper,  liuBUpper]),  offPairD0leLiu  (every
+      off-pair  of  an  actual  set  has  d0  <=  liuD0max
+      =  liuBUpper  -  1/2  =
+      374957019420098947/10^18  <  3/8,  norm_num  certified
+      -  the  bound  is  SHARP  at  both  strip  edges).
+      RHEnd  part  B13  (RHEnd.lean  2425  lines,  0
+      sorry):  rh_program78_stripfront_mach_unifiedLiu
+      (+  _PT2)  -  the  endpoint  under  [Z78L]  with  the
+      single  open  face  hOffL  (no  off-pair  on  [H,  inf)
+      x  (0,  liuD0max])  -  same  proof  shape  as  B12  (in
+      the  S1/S3/S4-covered  legs,  offPairD0leLiu  bounds
+      d0  BEFORE  the  face;  the  S2/S4-far  legs  use  the
+      [Z78]  DERIVED  FROM  [Z78L]).  The  slice  (liuD0max,
+      3/8]  of  the  0129  face  is  closed  IN  BODY  FROM
+      [Z78L]  (rhend_sliceLiuExcl),  and  the  0129  terminal
+      statement  is  a  THEOREM  of  the  0131  one
+      (rh_program78_stripfront_mach_unified38_ofLiu  (+
+      _PT2):  face  by  restriction  or  slice  exclusion).
+      CONCURRENT  RECON  NOTE:  washburn's  Zenodo  record
+      (10.5281/zenodo.18275102)  matched  as  a  certified
+      zero-free  region  in  the  half-plane  Re  s  >=  0.6
+      -  which  would  have  shrunk  the  face  to  ~1/10  by
+      the  functional  equation  -  but  the  record  is
+      REPLACED  by  a  restricted-access  work  ("inner-
+      function  approach  to  the  zeros  in  {Re  s  >  1/2}",
+      2026-02-08)  and  its  claim  is  NO  LONGER
+      PUBLICLY  VERIFIABLE;  NOT  ADOPTED  (the  face  stays
+      at  the  Liu  constant  on  verified  footing).
+      UPDATED  TERMINAL  LEDGER:  [Z-PT2]  record  below  the
+      frontier  +  ONE  open  face  hOffL  on  (tPT2,  inf)
+      x  (0,  liuD0max]  with  liuD0max  =
+      374957019420098947/10^18  <  3/8  (record  footing,
+      [Z78L]-sharp  -  the  squeeze  certificate  still
+      covers  the  face  fully,  the  margins  only  grew)
+      +  [Z78L]  (closes  d0  >  liuD0max  in  body;
+      [Z78]  remains  a  COROLLARY  input  of  it).  The
+      face  is  STILL  exactly  the  region  where  the
+      external  inputs  are  silent  -  only  its  certified
+      width  moved  by  ~4.3e-11  (the  boundary  is  now  an
+      exact  rational  bracket,  not  a  round  number).
+      No  RH  claim.
+
 
 
 

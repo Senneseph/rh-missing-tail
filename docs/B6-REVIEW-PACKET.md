@@ -225,6 +225,28 @@ companion is already line-checked by W. D. Banks and the
 analytic core is carried load-bearing by the independent
 follow-up, arXiv 2610.12234).
 
+  SUCCESSOR NOTE (discovery 0131): the follow-up named
+  above has since entered the program AS AN INPUT - [Z78L],
+  Liu's improved half-plane (boundary B_inf =
+  0.874957019420098946... < 7/8), adopted at its certified
+  rational bracket liuBUpper =
+  874957019420098947/10^18 (formal/RhAttack/Z78Liu.lean +
+  RHEnd part B13).  Its verification footing is a HUMAN
+  Lean formalization with a recorded strict replay PASS
+  (312 declarations, axioms exactly the three
+  classical; see the Z78Liu module header and the 0131
+  entry).  Note the dependency structure: Liu's
+  formalization's foundation files (OAI01-OAI08) are the
+  PINNED OAI 003 modules - so [Z78L]'s deep analytic core
+  inherits exactly the B6 input class under review here,
+  while its improvement delta (the parameter
+  optimization) is human-written Lean.  A GO on the B6
+  paper reading therefore carries directly over to the
+  foundation of [Z78L]; a NO-GO would re-open [Z78L]
+  along with [Z78] (the program reverts to the 0129
+  terminal form, whose face is a COROLLARY of the 0131
+  one).
+
 ## 6. Graceful degradation (what re-opens if the review
     finds a flaw)
 

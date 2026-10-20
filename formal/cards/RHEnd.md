@@ -1,4 +1,4 @@
-# RHEnd.lean  (2240 lines)
+# RHEnd.lean  (2425 lines)
 WHAT:  THE ENDPOINT of the program on the ACTUAL zeta zero set under the
          named external input [Z78] (Re s > 7/8 zero-free), at the
          CONCRETE wire. RESIDUAL LEDGER after Part B12 (discovery 0129,
@@ -193,8 +193,40 @@ GOTCHA: No RH claim: hs1/hs3/hWin/hS2low are OPEN (data and bound-level,
           close. File 2240 lines, 0 sorry, full tree green. The face-
           shrinking chain (0110/0108 record shrink -> 0122 flank split
           -> 0126 band-empty -> 0127 unification -> 0129 3/8-shrink) is
-          AT ITS TERMINUS: the residual face is [Z78]-sharp. Further
-          reduction requires an external record above tPT2 (route C) or
-          a zero-free input covering part of the strip interior. No RH
-          claim: the face is a zero-exclusion statement in the
-          unverified region, on record footing with the [Z-PT2] record.
+          AT ITS TERMINUS: the residual face is [Z78]-sharp. PART B13
+          (discovery 0131): a NEW external input moves the face boundary
+          - [Z78L], Liu's improved zero-free half-plane (arXiv
+          2610.12234; human Lean formalization, recorded strict replay
+          PASS, 312 declarations, axioms exactly
+          propext/Classical.choice/Quot.sound; see Z78Liu.lean header)
+          STRICTLY STRENGTHENS [Z78] (the certified boundary liuBUpper =
+          874957019420098947/10^18 is < 7/8; B_inf =
+          0.874957019420098946... = (18*xi+7)/(18*xi+9) with xi the
+          isolated root of 1188x^3-2160x^2+171x+190 in (0.38858,
+          0.38859)). offPairD0leLiu bounds EVERY actual-set off-pair to
+          d0 <= liuD0max = liuBUpper - 1/2 = 374957019420098947/10^18 <
+          3/8 (sharp at both new strip edges [1 - liuBUpper,
+          liuBUpper]). rh_program78_stripfront_mach_unifiedLiu (+_PT2):
+          the endpoint under [Z78L] with the single open face hOffL (no
+          off-pair on [H, inf) x (0, liuD0max]) - identical proof shape
+          to B12 (offPairD0leLiu bounds d0 before the face in the
+          S1/S3/S4-covered legs; the S2/S4-far legs use the [Z78]
+          DERIVED from [Z78L] via extLiu_implies_ext78). The slice
+          (liuD0max, 3/8] of the 0129 face is closed IN BODY FROM [Z78L]
+          (rhend_sliceLiuExcl) and the 0129 terminal statement is a
+          THEOREM of the 0131 one (unified38_ofLiu (+_PT2): face by
+          restriction or slice exclusion). File 2425 lines, 0 sorry,
+          full tree green. UPDATED TERMINAL LEDGER: [Z-PT2] record below
+          the frontier + ONE open face hOffL (the [Z78L]-sharp strip
+          interior, record footing) + [Z78L] (closes ALL of d0 >
+          liuD0max in body; [Z78] remains a corollary input). RECON NOTE
+          from the 0131 search: a Zenodo record initially matched as a
+          certified zero-free region at Re s >= 0.6 (which would have
+          shrunk the face to ~1/10 by the functional equation) but is
+          REPLACED by a restricted-access work and no longer publicly
+          verifiable - NOT adopted. No RH claim: the face is a zero-
+          exclusion statement in the unverified region, on record
+          footing with the [Z-PT2] record; the further-reduction routes
+          stand (external record above tPT2 = route C; a VERIFIED zero-
+          free input covering more strip interior - [Z78L] is the first
+          instance).

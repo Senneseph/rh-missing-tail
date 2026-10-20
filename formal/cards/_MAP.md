@@ -358,6 +358,13 @@ A chain of named theorems;  each box names the modules.
                    rh_actual78:  S1+S2+S3+S4-low-band only;
                    edgeZeroFree78;  sliverOffPairsEmpty;
                    s2ActualLowBandComplete)
+     Z78Liu       (named external input [Z78L]:  Re s >
+                   liuBUpper = 874957019420098947/10^18
+                   zero-free;  Liu,  arXiv  2610.12234  -
+                   STRICTLY  STRENGTHENS  [Z78];  zetaZero-
+                   StripLiu,  offPairD0leLiu  (d0  <=
+                   liuD0max  =  374957019420098947/10^18
+                   <  3/8,  sharp))
      FloorUnif    (S2 floor == S4 own-mass:  floStripMin = mown
                    on the covered band;  s4StripUnifiedFloor;
                    s2ActualFullBand,  no t0 cap)
@@ -576,6 +583,40 @@ A chain of named theorems;  each box names the modules.
                    [Z78]  (closes  ALL  of  d0  >  3/8  in
                    body).  File  2240  lines,  0  sorry,
                    full  tree  green.
+                   Discovery  0131,  GATED  (B13,  THE
+                   [Z78L]  UPGRADE  -  a  NEW  external
+                   input  moved  the  face  boundary):
+                   [Z78L]  (Liu,  arXiv  2610.12234,  human
+                   Lean  formalization,  recorded  strict
+                   replay  PASS)  is  a  STRICT  STRENGTHENING
+                   of  [Z78]  (extLiu_implies_ext78)  at  the
+                   certified  boundary  liuBUpper  <  7/8;
+                   offPairD0leLiu  bounds  every  actual-set
+                   off-pair  to  d0  <=  liuD0max  =
+                   liuBUpper  -  1/2  =
+                   374957019420098947/10^18  <  3/8  (sharp
+                   at  both  new  strip  edges  [1  -
+                   liuBUpper,  liuBUpper]).  The  endpoint
+                   is  restated  as
+                   rh_program78_stripfront_mach_unifiedLiu
+                   (+_PT2)  with  the  single  open  face
+                   hOffL  (no  off-pair  on  [H,  inf)  x
+                   (0,  liuD0max])  -  identical  proof  shape
+                   to  B12  with  the  derived  [Z78]  in  the
+                   S2/S4-far  legs;  the  slice  (liuD0max,
+                   3/8]  of  the  old  face  is  closed  IN
+                   BODY  FROM  [Z78L]  (rhend_sliceLiuExcl)
+                   and  the  0129  terminal  statement  is  a
+                   THEOREM  of  the  0131  one
+                   (unified38_ofLiu  (+_PT2)).
+                   UPDATED  TERMINAL  LEDGER:  [Z-PT2]
+                   record  below  the  frontier  +  ONE  open
+                   face  hOffL  (the  [Z78L]-sharp  strip
+                   interior,  record  footing)  +  [Z78L]
+                   (closes  ALL  of  d0  >  liuD0max  in
+                   body;  [Z78]  a  corollary  input).
+                   File  2425  lines,  0  sorry,  full  tree
+                   green.
 
   Foundations / vocabulary
      B0 (composition atoms)  B4/B5 (detector-line notation)
