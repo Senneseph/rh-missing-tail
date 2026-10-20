@@ -525,9 +525,29 @@ A chain of named theorems;  each box names the modules.
                    unverified-region  residual  is  now  TWO
                    zero-exclusion  faces  (band,  window)  +
                    [Z78]  +  the  below-frontier  record  -
-                   no  analytic  face  remains  in  the  tree.
-                   File  1862  lines,  0  sorry,  full  tree
-                   green.
+                   no  analytic  face  remains  in  the  tree;
+                   file  1862  lines.  Discovery  0127,
+                   GATED  (B11):  the  two  faces  UNIFY  -
+                   identical  form  above  the  frontier,  the
+                   1/200  boundary  a  proof  artifact,  the
+                   d0  >  1/2  remainder  closed  in  body
+                   from  [Z78]  -  the  endpoint's  above-
+                   frontier  residue  is  ONE  face  hOff  (no
+                   off-pair  on  [H,  inf)  x  (0,  1/2]):
+                   rh_program78_stripfront_mach_unified  (+
+                   _PT2)  +  the  in-body  bridges
+                   unified_ofB10  /  _PT2_ofB10  (the  two-
+                   face  and  one-face  forms  are
+                   EQUIVALENT  in  body;  the  unification
+                   loses  nothing).  FINAL  LEDGER:  [Z-PT2]
+                   record  below  the  frontier  +  ONE  open
+                   exclusion  face  hOff  above  it  (record
+                   footing)  +  [Z78]  -  no  analytic,
+                   inequality,  or  scale-comparison  face
+                   remains  in  the  tree;  hOff  reduction
+                   =  record  extension  above  tPT2  (route
+                   C  of  0124).  File  2043  lines,  0
+                   sorry,  full  tree  green.
 
   Foundations / vocabulary
      B0 (composition atoms)  B4/B5 (detector-line notation)

@@ -1135,6 +1135,45 @@ for the ACTUAL zeta zero set.  The branches:
       exclusion  faces),  not  its  open  height.  No  RH
       claim.
 
+  FORMAL:  THE  ABOVE-FRONTIER  RESIDUAL  IS  ONE  FACE
+      (discovery  0127):  RHEnd.lean  part  B11  (2043
+      lines,  0  sorry,  GATED,  full  tree  green  17450
+      jobs)  closes  out  0126.  The  two  exclusion  faces
+      of  B10  -  the  band  face  hNoStrip  (no  off-pair  on
+      [H,  inf)  x  [1/200,  1/2])  and  the  window  face
+      hWinH  (no  off-pair  on  [H,  inf)  x  (0,  1/200))
+      -  have  the  IDENTICAL  form:  zero-exclusion  above
+      the  frontier.  The  1/200  boundary  is  a  PROOF
+      ARTIFACT  of  the  squeeze  cycle's  band/window  split,
+      not  a  face  boundary;  the  remaining  off-line
+      region  d0  >  1/2  is  closed  in  body  from  [Z78]
+      (Z78P12.offPairFarEmpty).  So  the  endpoint's  entire
+      above-frontier  residue  is  the  SINGLE  face  hOff:
+      forall  (t0  d0),  H  <=  t0  ->  0  <  d0  ->  d0  <=
+      1/2  ->  not  offPair  q  t0  d0.  B11.1:
+      rh_program78_stripfront_mach_unified  (+  _PT2)
+      states  the  endpoint  with  that  one  face  plus  the
+      record  below  the  frontier  plus  [Z78]  -  the  1/200
+      boundary  no  longer  appears  anywhere.  B11.3/B11.4:
+      rh_program78_stripfront_mach_unified_ofB10  (+
+      _PT2_ofB10)  -  the  B10  endpoint  (two-face  form)
+      implies  the  unified  endpoint  IN  BODY  (the  record
+      handles  the  t0  =  H  boundary;  the  d-split  routes
+      to  hNoStrip  /  hWinH)  -  the  unification  loses
+      nothing;  the  two-face  and  one-face  forms  are
+      equivalent  in  body.  FINAL  ABOVE/BELOW  FRONTIER
+      LEDGER  of  the  endpoint:  [Z-PT2]  record  below  the
+      frontier  (all  zeros  on  the  line  up  to  tPT2  =
+      3,000,175,332,800)  +  ONE  open  exclusion  face  hOff
+      above  the  frontier  (on  (0,  1/2],  record
+      footing)  +  [Z78]  (d0  >  1/2,  in  body  from  the
+      external  kernel-verified  input).  No  analytic  face,
+      no  inequality  face,  no  scale  comparison  remains
+      in  the  tree.  Further  reduction  of  hOff  requires
+      EXTENDING  the  verified  zero-exclusion  record  above
+      tPT2  (external  record-keeping,  route  C  of  0124)
+      or  a  new  exclusion  instrument.  No  RH  claim.
+
 
 
 

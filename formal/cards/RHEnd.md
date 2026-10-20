@@ -1,4 +1,4 @@
-# RHEnd.lean  (1862 lines)
+# RHEnd.lean  (2043 lines)
 WHAT:  THE ENDPOINT of the program on the ACTUAL zeta zero set under the
          named external input [Z78] (Re s > 7/8 zero-free), at the
          CONCRETE wire. RESIDUAL LEDGER after Part B10 (discovery 0126):
@@ -146,8 +146,24 @@ GOTCHA: No RH claim: hs1/hs3/hWin/hS2low are OPEN (data and bound-level,
           region is now exactly two zero-exclusion faces (band, window)
           + [Z78] + the below-frontier record; the S1 pin family (B8) is
           the DATA SIDE of the squeeze, and the squeeze certificate
-          certifies the band exclusion in body when the pins hold. File
-          1862 lines, 0 sorry, full tree green. No RH claim: everything
-          in B10 is either body composition of the 0118 S4 wire margin
-          with the S2 floor closure, or a zero-exclusion face on record
-          footing with the window face and [Z-PT2].
+          certifies the band exclusion in body when the pins hold. PART
+          B11 (discovery 0127): the above-frontier residual UNIFIED TO
+          ONE FACE - the band face (hNoStrip, 1/200 <= d0) and the
+          window face (hWinH, d0 < 1/200) have the identical form (zero-
+          exclusion above the frontier; the 1/200 boundary is a proof
+          artifact of the squeeze cycle, not a face boundary) and the
+          far region d0 > 1/2 is closed in body from [Z78] - so the
+          endpoint's above-frontier residue is the SINGLE face hOff (no
+          off-pair on [H, inf) x (0, 1/2]):
+          rh_program78_stripfront_mach_unified (+_PT2 at the Platt-
+          Trudgian frontier) states the endpoint with that one face plus
+          the record below the frontier plus [Z78];
+          rh_program78_stripfront_mach_unified_ofB10 (+_PT2_ofB10)
+          proves the B10 endpoint (two-face form) implies the unified
+          endpoint in body - the unification loses nothing. File 2043
+          lines, 0 sorry, full tree green. The above-frontier ledger is
+          now exactly: ONE record-footing zero-exclusion face + [Z78] +
+          the below-frontier record. No RH claim: everything in B10/B11
+          is either body composition of the 0118 S4 wire margin with the
+          S2 floor closure, or a zero-exclusion face on record footing
+          with the [Z-PT2] record.

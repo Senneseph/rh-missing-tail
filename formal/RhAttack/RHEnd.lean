@@ -1859,4 +1859,185 @@ theorem rh_program78_stripfront_mach_vacant_PT2_ofB9 (q : ZeroSet)
     WinC.tPT2 (by norm_num [WinC.tPT2]) hPT2
     hs1StripPT2 hs3RightPT2 hs3LeftPT2 hWinPT2
 
+
+/-  ##  Part  B11  -  THE  UNIFIED  OFF-LINE  EXCLUSION  FACE:
+    THE  ENDPOINT  RESIDUAL  ABOVE  THE  FRONTIER  IS  ONE  FACE
+    (discovery  0126  close-out)
+
+  Part  B10  left  the  unverified-region  residual  as  TWO
+  zero-exclusion  faces:  the  band  face  hNoStrip  (no  off-
+  pair  on  [H,  inf)  x  [1/200,  1/2])  and  the  window
+  face  hWinH  (no  off-pair  on  [H,  inf)  x  (0,  1/200)).
+  They  have  the  IDENTICAL  form  -  zero-exclusion  above
+  the  frontier,  the  1/200  boundary  being  a  proof  artifact
+  (the  squeeze  cycle's  band/window  split),  not  a  face
+  boundary  -  and  the  far  region  d0  >  1/2  is  closed  in
+  body  from  [Z78]  (Z78P12.offPairFarEmpty).  Part  B11
+  unifies  the  two  into  ONE  face:
+
+      hOffLineEmptyH  q  H  :
+        forall  (t0  d0),  H  <=  t0  ->  0  <  d0  ->
+          d0  <=  1/2  ->  not  offPair  q  t0  d0
+
+  and  states  the  endpoint  with  that  single  face  plus
+  the  record  below  the  frontier  plus  [Z78].  The  named
+  residue  above  the  frontier  is  now  EXACTLY:  no  off-line
+  zero  above  the  frontier  in  the  strip  0  <  d0  <=  1/2
+  (the  remainder  of  the  off-line  region,  d0  >  1/2,  is
+  excluded  in  body  from  [Z78])  -  one  record-footing
+  exclusion  statement,  with  the  far  region  already  in
+  the  tree.
+
+  B11.1/B11.2:  the  unified  endpoint  rh_program78_
+  stripfront_mach_unified  (+  _PT2  at  the  Platt-Trudgian
+  frontier).  B11.3/B11.4:  the  B10  endpoint  (band  face  +
+  window  face)  implies  the  unified  endpoint  in  body  -
+  the  unification  loses  nothing.  No  RH  claim:  the  face
+  is  a  zero-exclusion  statement  in  the  unverified  region,
+  on  record  footing  with  the  window  face  and  the  [Z-PT2]
+  record,  as  before.  -/
+
+/--  B11.1  THE  UNIFIED  OFF-LINE  EXCLUSION  ENDPOINT:  the
+    Part  B10  endpoint  with  the  band  face  and  the  window
+    face  MERGED  into  the  single  face  hOff  (no  off-pair
+    above  the  frontier  in  the  strip  0  <  d0  <=  1/2).
+    The  1/200  boundary  no  longer  appears.  Residual  above
+    the  frontier:  exactly  hOff  plus  [Z78]  (the  far
+    region  d0  >  1/2  is  closed  in  body  from  [Z78]).
+    No  RH  claim.  -/
+theorem rh_program78_stripfront_mach_unified (q : ZeroSet)
+    (hz78 : Z78.externalZeroFree78)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) → (|ρ.im| : ℝ) <
+      (707 : ℝ) / 50 → ρ.re = 1 / 2)
+    (Qside : ℝ × ℝ → ℝ)
+    (H : ℝ) (hH : 1000 ≤ H)
+    (hPT : WinC.allOnLineUpTo q H)
+    (hOff : ∀ (t0 d0 : ℝ), H ≤ t0 → 0 < d0 → d0 ≤ 1 / 2 →
+      ¬ offPair q t0 d0) :
+    RH q := by
+  refine S4A.rh_from_regime_closures q Qside Z78P12.MfP devProg
+    Z78P12.BwireP (fun p => MrLift p.1 p.2) floProg
+    ?_ ?_ ?_ ?_ ?_ ?_
+  · --  S1  witness  leg:  below  H  =  vacuous  (the  record);
+      --  above  H  =  the  unified  face;  far  =  [Z78].
+    intro t0 d0 ht0 hd0 hp
+    by_cases hfar : d0 ≤ (1 / 2 : ℝ)
+    · by_cases hle : t0 ≤ H
+      · exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
+          (le_of_lt ht0) hle) d0 hp)
+      · exact False.elim ((hOff t0 d0
+          (le_of_lt (not_le.mp hle)) hd0 hfar) hp)
+    · exact False.elim (Z78P12.offPairFarEmpty q hz78 hqz t0 d0
+        (not_le.mp hfar) hp)
+  · --  S2  leg:  covered  =  in  body;  low  band  =  vacuous
+      --  below  H;  far  =  [Z78].
+    intro t0 d0 ht0 hd0 hp
+    by_cases hd0h : d0 ≤ (1 / 2 : ℝ)
+    · by_cases ht0k : 1000 ≤ t0
+      · exact hs2_covered q honline t0 d0 ht0 ht0k hd0 hd0h hp
+      · have hle : t0 ≤ H := le_trans (le_of_lt (not_le.mp ht0k)) hH
+        exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
+          (le_of_lt ht0) hle) d0 hp)
+    · exact False.elim (Z78P12.offPairFarEmpty q hz78 hqz t0 d0
+        (not_le.mp hd0h) hp)
+  · --  S3  leg:  below  H  =  vacuous  (the  record);  above
+      --  H  =  the  unified  face;  far  =  [Z78].
+    intro t0 d0 ht0 hd0 hp
+    by_cases hfar : d0 ≤ (1 / 2 : ℝ)
+    · by_cases hle : t0 ≤ H
+      · exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
+          (le_of_lt ht0) hle) d0 hp)
+      · exact False.elim ((hOff t0 d0
+          (le_of_lt (not_le.mp hle)) hd0 hfar) hp)
+    · exact False.elim (Z78P12.offPairFarEmpty q hz78 hqz t0 d0
+        (not_le.mp hfar) hp)
+  · --  S4  covered:  below  H  =  vacuous  (the  record);
+      --  above  H  =  the  unified  face.  (No  t4m_margin,
+      --  no  face  shape,  no  1/200  boundary:  the
+      --  exclusion  is  stronger  than  the  wire  margin.)
+    intro t0 d0 ht0 hd0 hd0u hp
+    by_cases hle : t0 ≤ H
+    · exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
+        (by linarith [ht0]) hle) d0 hp)
+    · exact False.elim ((hOff t0 d0
+        (le_of_lt (not_le.mp hle)) hd0 hd0u) hp)
+  · --  S4  low  band:  its  whole  domain  (0,  1000)  sits
+      --  below  the  frontier:  vacuous.
+    intro t0 d0 ht0 ht0u hd0 hd0u hp
+    have hle : t0 ≤ H := le_trans (le_of_lt ht0u) hH
+    exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
+      (le_of_lt ht0) hle) d0 hp)
+  · --  S4  far  region:  [Z78].
+    intro t0 d0 ht0 hd0 hd0f hp
+    exact False.elim (Z78P12.offPairFarEmpty q hz78 hqz t0 d0 hd0f hp)
+
+/--  B11.1  THE  UNIFIED  ENDPOINT  AT  THE  PLATT-TRUDGIAN
+    FRONTIER  (the  [Z-PT2]  instantiation):  the  entire  named
+    residue  lives  STRICTLY  ABOVE  3,000,175,332,800,  as
+    ONE  zero-exclusion  face  (no  off-pair  in  the  strip
+    0  <  d0  <=  1/2  above  the  frontier)  plus  [Z78].
+    No  RH  claim.  -/
+theorem rh_program78_stripfront_mach_unified_PT2 (q : ZeroSet)
+    (hz78 : Z78.externalZeroFree78)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) → (|ρ.im| : ℝ) <
+      (707 : ℝ) / 50 → ρ.re = 1 / 2)
+    (Qside : ℝ × ℝ → ℝ)
+    (hPT2 : WinC.allOnLineUpTo q WinC.tPT2)
+    (hOffPT2 : ∀ (t0 d0 : ℝ), WinC.tPT2 ≤ t0 → 0 < d0 →
+      d0 ≤ 1 / 2 → ¬ offPair q t0 d0) :
+    RH q :=
+  rh_program78_stripfront_mach_unified q hz78 hqz honline Qside
+    WinC.tPT2 (by norm_num [WinC.tPT2]) hPT2 hOffPT2
+
+/--  B11.3  THE  B10  ENDPOINT  IMPLIES  THE  UNIFIED  ENDPOINT
+    (in  body):  the  band  face  (1/200  <=  d0)  and  the
+    window  face  (d0  <  1/200)  jointly  yield  the  unified
+    face  -  the  record  handles  the  boundary  t0  =  H.  The
+    unification  loses  nothing;  the  1/200  boundary  was  a
+    proof  artifact.  No  RH  claim.  -/
+theorem rh_program78_stripfront_mach_unified_ofB10 (q : ZeroSet)
+    (hz78 : Z78.externalZeroFree78)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) → (|ρ.im| : ℝ) <
+      (707 : ℝ) / 50 → ρ.re = 1 / 2)
+    (Qside : ℝ × ℝ → ℝ)
+    (H : ℝ) (hH : 1000 ≤ H)
+    (hPT : WinC.allOnLineUpTo q H)
+    (hNoStrip : ∀ (t0 d0 : ℝ), H ≤ t0 → (1 / 200 : ℝ) ≤ d0 →
+      d0 ≤ 1 / 2 → ¬ offPair q t0 d0)
+    (hWinH : WinC.hWinFaceResidualH q H) :
+    RH q := by
+  refine rh_program78_stripfront_mach_unified q hz78 hqz honline
+    Qside H hH hPT ?_
+  intro t0 d0 ht0 hd0 hd0u hp
+  by_cases hle : t0 ≤ H
+  · exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
+      (by linarith [ht0]) hle) d0 hp)
+  · by_cases hdw : (1 / 200 : ℝ) ≤ d0
+    · exact False.elim ((hNoStrip t0 d0
+        (le_of_lt (not_le.mp hle)) hdw hd0u) hp)
+    · exact False.elim ((hWinH t0 d0
+        (le_trans hH (le_of_lt (not_le.mp hle)))
+        (not_le.mp hle) hd0 (not_le.mp hdw)) hp)
+
+/--  B11.4  THE  B10  ENDPOINT  AT  tPT2  IMPLIES  THE  UNIFIED
+    ENDPOINT  AT  tPT2  (the  [Z-PT2]  instantiation  of  the
+    unification  above).  No  RH  claim.  -/
+theorem rh_program78_stripfront_mach_unified_PT2_ofB10 (q : ZeroSet)
+    (hz78 : Z78.externalZeroFree78)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) → (|ρ.im| : ℝ) <
+      (707 : ℝ) / 50 → ρ.re = 1 / 2)
+    (Qside : ℝ × ℝ → ℝ)
+    (hPT2 : WinC.allOnLineUpTo q WinC.tPT2)
+    (hNoStripPT2 : ∀ (t0 d0 : ℝ), WinC.tPT2 ≤ t0 →
+      (1 / 200 : ℝ) ≤ d0 → d0 ≤ 1 / 2 → ¬ offPair q t0 d0)
+    (hWinPT2 : WinC.hWinFaceResidualH q WinC.tPT2) :
+    RH q :=
+  rh_program78_stripfront_mach_unified_ofB10 q hz78 hqz honline
+    Qside WinC.tPT2 (by norm_num [WinC.tPT2]) hPT2
+    hNoStripPT2 hWinPT2
+
 end RHEnd

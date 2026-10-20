@@ -547,6 +547,39 @@ true positive-dual record of the G-hs3-left barriers
 (machine-verified, explicit, not load-bearing for the endpoint).
 No RH claim is made or implied.
 
+**Discovery 0127 (2026-10-19 — B11 close-out: the above-
+frontier residual is ONE face):** `RHEnd.lean` part B11 (the
+file is 2043 lines, 0 sorry, full tree green) unifies the two
+exclusion faces of 0126. The band face `hNoStrip` (no off-pair
+on [H, ∞) × [1/200, 1/2]) and the window face `hWinH`
+(no off-pair on [H, ∞) × (0, 1/200)) have the **identical
+form** — zero-exclusion above the frontier — and the
+1/200 boundary is a **proof artifact** of the squeeze cycle's
+band/window split, not a face boundary; the remaining off-line
+region d0 > 1/2 is closed in body from [Z78]
+(`Z78P12.offPairFarEmpty`). The endpoint's entire above-
+frontier residue is therefore the **SINGLE face** `hOff`:
+`forall (t0 d0), H ≤ t0 → 0 < d0 → d0 ≤ 1/2 →
+¬ offPair q t0 d0`. `rh_program78_stripfront_mach_unified`
+(+ `_PT2`) states the endpoint with that one face plus the
+below-frontier record plus [Z78] — the 1/200 boundary no
+longer appears anywhere in the statement or the proof;
+`rh_program78_stripfront_mach_unified_ofB10`
+(+ `_PT2_ofB10`) proves the B10 two-face form **implies** the
+unified endpoint in body (the record handles the t0 = H
+boundary; the d-split routes to the two faces) — the
+unification loses nothing; the two forms are equivalent in
+body. **Final above/below-frontier ledger of the endpoint**:
+[Z-PT2] record below the frontier (all zeros on the line up to
+tPT2 = 3,000,175,332,800) + **one** open exclusion face `hOff`
+above the frontier (on (0, 1/2], record footing) + [Z78]
+(d0 > 1/2, in body from the external kernel-verified input).
+No analytic face, no inequality face, no scale comparison
+remains in the tree. Further reduction of `hOff` requires
+**extending** the verified zero-exclusion record above tPT2
+(external record-keeping, route C of 0124) or a new exclusion
+instrument. No RH claim is made or implied.
+
 The barriers of T4OffL say nothing about whether left-flank zeros
 exist: they are FORMAL NEGATIVE RESULTS about what the current
 machine wire can do, stated exactly. No RH claim is made or implied.
