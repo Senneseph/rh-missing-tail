@@ -118,6 +118,16 @@ discovery entries 0073-0078:
   * Caveat on record: the closure's sorry-freedom depends
     on a published 31k-line patch to one third-party
     dependency, pinned by the build.
+  * AUDIT UPDATE (discovery 0130, machine part of the
+    checklist re-run against the pin): NO UPSTREAM DRIFT
+    (the release HEAD is still the kernel-verified commit;
+    the tree is PR-locked), so the replays above cover the
+    exact bits. The zeta Comparator statement was
+    re-fetched from the pin and is verbatim
+    Z78.externalZeroFree78 (item 1 re-confirmed; the
+    statement literally names Mathlib's riemannZeta, so
+    item 6 passes by construction). The patch's identity
+    and machine spot-check are recorded below.
 
 ## 4. Proof-structure sketch (read from the preprint)
 
@@ -158,6 +168,33 @@ self-contained in the release.
      remaining, because the machine scan covers the OAI
      modules but the patch is where a hidden gap would
      hide.
+     AUDITED (discovery 0130, machine part): the patch is
+     lean/patches/PrimeNumberTheoremAnd-lean4341.patch
+     (39,904 diff lines; 34,322 added / 3,447 removed),
+     applied to github.com/AlexKontorovich/PrimeNumber-
+     TheoremAnd at a full 40-char commit pin (lake-
+     manifest; the lakefile enforces exact commit + exact
+     origin + git apply --check forward/reverse + post-
+     apply reverse verification). It is the only patched
+     dependency in the family-003 zeta closure (the
+     solution module OAI.NumberTheory.DirichletL.
+     Nonvanishing imports PrimeNumberTheoremAnd.Wiener;
+     the one other closure-level external import is a
+     single RellichKondrachov embedding lemma). Finding:
+     ZERO axioms/sorry/admit in any added line; exactly
+     TWO sorry-proof theorems REMOVED (dead Wiener
+     scaffolds - the sorry surface shrinks); NO theorem
+     statements changed (1,033 new signature lines are
+     support machinery; 21 removed = 16 identical
+     relocations + 4 scaffold removals + 1 file move);
+     the body is a genuine Lean 4.34.1 proof port
+     (~18,300 tactic lines of analytic number theory, no
+     placeholder patterns in the sampling). The machine
+     spot-check PASSES; the human reading of the diff is
+     now belt-and-suspenders on the already-recorded
+     kernel verification (any hidden gap would surface as
+     a non-compiling statement or an extra axiom, and
+     the kernels say neither).
   5. THE PAPER (the long pole): read the 199-page
      argument. The load-bearing pieces for the checklist
      above are: the theorem statement and its scope
@@ -173,11 +210,20 @@ self-contained in the release.
      domain subtlety between the paper's zeta and
      Mathlib's.
 
-Effort note: items 1-3 and 6 are a few hours of machine
-and diff work; item 4 is a focused patch audit; item 5 is
-the weeks-scale item. A GO on the input requires item 4 to
-pass and item 5 to reach at least "no flaw found in the
-load-bearing pieces"; items 1-3 and 6 should pass unconditionally.
+STANDING after the 0130 audit: items 1 and 6 PASS
+(re-verified fresh from the pin, section 3); items 2 and 3
+PASS per the recorded kernel replays (no upstream drift,
+section 3); item 4's MACHINE spot-check PASSES (above) -
+the remaining human part of item 4 is optional
+belt-and-suspenders. The solely open item is 5. A GO on
+the input now requires only item 5 to reach at least "no
+flaw found in the load-bearing pieces" - the weeks-scale
+paper reading (load-bearing pieces: theorem statement and
+scope, the 11/12 -> 7/8 two-stage argument, the
+continuation principle, the moment estimates; the Siegel
+companion is already line-checked by W. D. Banks and the
+analytic core is carried load-bearing by the independent
+follow-up, arXiv 2610.12234).
 
 ## 6. Graceful degradation (what re-opens if the review
     finds a flaw)
