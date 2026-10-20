@@ -1464,6 +1464,91 @@ for the ACTUAL zeta zero set.  The branches:
       step  (cumulative  from  3/8:  1.82935e-4).  No
       RH  claim.
 
+  B6  ITEM  5  CLOSED:  THE  FULL  PAPER  READ,  NO  FLAWS  FOUND
+      IN  THE  LOAD-BEARING  PIECES  (discovery  0135).  The  last
+      open  B6  checklist  item  -- the  long  pole  of  the  whole
+      packet  --  is  done.  The  16,677-line  TeX  of  the  [Z78]
+      source  paper  ("The  Quasi-Riemann  Hypothesis:  A  Zero-Free
+      Half-Plane  Re(s)  >  7/8",  OpenAI,  30  Sept  2026;  pinned
+      at  openai/math  1581d4cb...,  TeX  sha256  on  file)  was  read
+      in  full,  section  by  section,  at  claim  level,  with
+      exponent  arithmetic  re-derived  at  the  load-bearing  points
+      (workspace  tmp/b6audit/b6item5/:  six  part  summaries  +
+      VERDICT.md).  The  six  checklist  pieces  the  packet  named:
+      (1)  theorem  statement  and  scope  -- a  uniform  HALF-PLANE
+      Re(s)  >  7/8  for  all  finite-order  Hecke  L  over
+      Q(sqrt(-3))  and  all  Dirichlet  L  including  zeta,  strict,
+      boundary  not  claimed  --  consistent  end  to  end;
+      (2)  principal-pole  allowance  -- the  s  =  1  pole  is  kept
+      and  isolated  at  (z,w)  =  (1/6,1),  with  M(1/6)  >  0  proved
+      without  a  sign  assumption  and  H_eta  a  contraction  on
+      the  target  half-plane;
+      (3)  the  Q(sqrt(-3))  Hecke  setup  -- O  =  Z[omega],
+      primary  generators,  zero-extended  sextic  symbol  powers
+      carried  correctly  through  the  additive  norm,  the
+      quadratic  sieve  and  the  frozen-mask  identity  (including
+      the  "a  local  exponent  divisible  by  six  is  the
+      indicator,  not  one"  subtlety);
+      (4)  the  11/12  ->  7/8  two-stage  argument  -- BOTH  stages
+      are  applications  of  ONE  continuation  principle  (a
+      direct  Z^(1/4+eps)/Z^(3/16+eps)  low  estimate  plus  a
+      high  estimate  measured  against  the  moving  C(beta*),
+      not  C(sigma0));
+      (5)  the  continuation  principle  itself  -- a  fully
+      written,  valid  argument  (Mellin  transform  +  Fourier
+      inversion  at  Re  s  =  2  without  crossing  a  zero  +
+      identity  theorem  ->  1/L  holomorphic  past  beta*  -
+      eps*  ->  contradiction),  whose  only  uniformity  demand
+      is  the  target-independence  of  omega  and  sigma  --  met
+      in  both  stages  with  explicitly  pre-target  choices
+      (Stage  I:  sigma  =  1/4800  fixed;  Stage  II:  sigma
+      =  m/2,  m  =  (1/4)min{m_high,  m_w,  m_z,  m_P}  fixed);
+      (6)  the  moment  estimates  -- balanced  low  (planar
+      additive  sieve  +  unmarked  completed-row  moment
+      Z^(1+eps)),  sextic  large  sieve  (BGL  recursion,
+      fixed  point  4/3  ->  K  +  D  +  (KD)^(2/3)),  the  row
+      envelope  R(delta)  =  min{1,  max(1  -  delta/2,
+      4/3  -  delta)},  and  the  plain/inverse  witness
+      saturations  --  all  verified  at  the  level  used.
+      KEY  RE-DERIVATIONS,  all  matching:  the  Part  II
+      common-high  identity  FORCES  C0  =  -1/48  (the  one
+      remaining  open  thread  from  the  read,  now  closed);
+      the  floor  bin  E(h)  <=  C0  +  (3/4)delta0  =
+      -7/1200;  the  delta  =  5/6  endpoint  E(h)  <=  -1/48
+      -  delta/16;  and  the  compensated  endpoint  certificate
+      --  an  explicit  sum-of-squares  (3+5y){(4vdelta-79)^2
+      +  49}  +  4y{...}  >=  49(3+5y)  --  giving  -E_*
+      >=  49/440640  >  10^-4  UNIFORMLY  on  1/50  <  delta
+      <=  5/6,  measured  against  the  moving  C(beta*)  =
+      C(7/8)  +  Delta  (essential:  the  certificate  is  not
+      a  fixed  negative  exponent).
+      HONEST  SCOPE  NOTES  ON  FILE:  the  audit  is  a
+      second-party  READING  with  re-derivation,  not  a
+      kernel  check;  and  the  slot/amplifier  interior  of
+      Part  II  (the  7/37  moment  requirement,  the
+      S_i/A_T  normalizer  asymptotic)  was  verified  at  the
+      level  its  claims  are  USED  in  the  endpoint
+      assembly,  not  coefficient-by-coefficient  --  a
+      reading-level  assurance,  stated  as  such.
+      IMPLICATION:  the  FULL  B6  CHECKLIST  IS  NOW  CLOSED
+      --  all  six  items  pass.  The  [Z78]  input  class
+      (and  with  it  the  shared  OAI  003  foundation
+      underwriting  [Z78],  [Z78L],  [Z78T])  has  every  review
+      question  answered:  kernel  replays  (two  independent
+      parties  for  [Z78L],  the  independent  tracker  replay
+      0134,  the  0130  patch  audit)  +  this  paper  reading.
+      The  sole  machine-side  residual  in  the  family  is  the
+      queue-able,  non-blocking  second-kernel  replay  of  the
+      [Z78L]  DELTA  files  (the  foundation  already  has  NanoDa
+      coverage  from  the  2026-10-08  teal-sea  comparator  run).
+      What  does  not  move:  no  RH  claim;  the  open  face  hOffT
+      remains  exactly  where  the  external  inputs  are
+      silent;  the  next  steps  of  the  standing  queue  are
+      unchanged  (board  supersession  watch  for  anything
+      beyond  174963413/200000000;  internal-flank  /  new-
+      analytic  work  toward  hOffT;  broader  RH  levers
+      beyond  endpoint  tail  maintenance).
+
 
 
 

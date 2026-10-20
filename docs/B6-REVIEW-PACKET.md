@@ -204,26 +204,46 @@ self-contained in the release.
      companion (9 pp, line checked by Banks) and the 11/12
      companion (human edited) are already at higher review
      strength.
+     STATUS (discovery 0135, 2026-10-20): CLOSED. The
+     16,677-line TeX was read in full section by section
+     in-tree (workspace tmp/b6audit/b6item5/, 6 part
+     summaries + VERDICT.md), with exponent arithmetic
+     re-derived at the load-bearing points. Verdict:
+     NO FLAWS FOUND in the six checklist pieces; the
+     continuation principle is a fully written valid
+     argument; both stages (11/12 and 7/8) are
+     applications of it with pretarget uniform powers;
+     the Part II endpoint certificate (49/440640 > 10^-4)
+     and the C0 = -1/48 identity were independently
+     re-derived. Residual non-blocking notes: the slot/
+     amplifier interior (lem:plain, S_i/A_T asymptotic)
+     verified at the level their claims are used, not
+     coefficient-by-coefficient; reading-level, not
+     kernel-level, audit.
   6. SEMANTIC SCOPE CONFIRMATION (minutes): confirm the
      input's statement covers the classical meromorphic
      zeta (Mathlib's riemannZeta) - no normalization or
      domain subtlety between the paper's zeta and
      Mathlib's.
 
-STANDING after the 0130 audit: items 1 and 6 PASS
+STANDING after the 0135 closeout: items 1 and 6 PASS
 (re-verified fresh from the pin, section 3); items 2 and 3
 PASS per the recorded kernel replays (no upstream drift,
 section 3); item 4's MACHINE spot-check PASSES (above) -
 the remaining human part of item 4 is optional
-belt-and-suspenders. The solely open item is 5. A GO on
-the input now requires only item 5 to reach at least "no
-flaw found in the load-bearing pieces" - the weeks-scale
-paper reading (load-bearing pieces: theorem statement and
-scope, the 11/12 -> 7/8 two-stage argument, the
-continuation principle, the moment estimates; the Siegel
-companion is already line-checked by W. D. Banks and the
-analytic core is carried load-bearing by the independent
-follow-up, arXiv 2610.12234).
+belt-and-suspenders; ITEM 5 PASSES (the full piecewise
+paper reading, verdict above; the audit verdict is that
+the load-bearing pieces are sound, with the stated
+reading-level scope notes). ALL SIX B6 ITEMS ARE NOW
+CLOSED: the [Z78] input is fully reviewed on the B6
+checklist. Its verification footing is the strongest in
+the program: OAI 003 machine-verified Lean (two
+independent kernel replays for [Z78L], second-kernel
+replay of the 003 foundation recorded from the
+publisher), the independent tracker replay for [Z78T]
+(0134), the 0130 machine audit of the Lean-4.34.1
+compatibility patches, and this 0135 paper reading.
+The input now carries no open review item.
 
   SUCCESSOR NOTE (discovery 0131): the follow-up named
   above has since entered the program AS AN INPUT - [Z78L],
@@ -266,9 +286,12 @@ follow-up, arXiv 2610.12234).
   the DELTA files (PartsI_III, PartIV) are two-party
   Lean-kernel replayed but not yet second-kernel
   replayed (queue-able machine step, not blocking).
-  The adoption's machine side is complete: every
-  remaining [Z78L] question is B6 item 5 (the paper
-  reading), shared with [Z78].
+  The adoption's machine side is complete, and its
+  reading side was completed the same day (discovery
+  0135): the [Z78] paper reading is CLOSED - so there is
+  no remaining [Z78L] paper-reading question; the full
+  B6 checklist is closed for the [Z78] class and hence
+  for the family it grounds ([Z78], [Z78L], [Z78T]).
   Liu's improved half-plane (boundary B_inf =
   0.874957019420098946... < 7/8), adopted at its certified
   rational bracket liuBUpper =
@@ -427,8 +450,10 @@ residual-pin structure.
     tracker's openai-baseline (the OAI 003 source at
     commit fd4aeeb2 - the B6-audited family) plus tracker
     records; the deep analytic foundation therefore
-    underwrites as in gates 2-3, with B6 item 5 covering
-    [Z78] / [Z78L] / [Z78T] foundations together.
+    underwrites as in gates 2-3, with the B6 item 5 paper
+    reading (CLOSED at 0135, no flaws found in the
+    load-bearing pieces) covering [Z78] / [Z78L] /
+    [Z78T] foundations together.
     Face: (0, liuD0max] -> (0, qxD0max], shrink
     1.39954e-4 (3.3x the 0131 step).  INDEPENDENT
     second-party replay COMPLETED at 0134 (same day):
