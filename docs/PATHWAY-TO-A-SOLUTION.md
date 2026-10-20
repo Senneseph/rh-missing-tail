@@ -1375,6 +1375,86 @@ for the ACTUAL zeta zero set.  The branches:
       underwrites  the  foundation  of  BOTH  [Z78]  and
       [Z78L].  No  RH  claim.
 
+  FORMAL  +  NEW  EXTERNAL  INPUT:  THE  TRACKER  FRONTIER
+      BEATS  LIU  --  THE  BIGGEST  INPUT  STEP  YET
+      (discovery  0133).  The  0131/0132  strip-interior  input
+      watch  fires  again:  the  QuasiRiemannTracker
+      (github.com/GTimG/QuasiRiemannTracker)  --  a  public
+      COMPETITIVE  LEADERBOARD  of  kernel-verified  zero-free
+      half-planes  (canonical  all-Dirichlet  statement;
+      protected  admission  pipeline:  Comparator  +  Lean  /
+      NanoDa  /  con-ron  in  a  pinned  sandbox  whose
+      tool-pins  sha256-lock  every  kernel  binary)  --  had
+      already  passed  the  Liu  boundary  several  times  over
+      in  the  week  2026-10-13..20.  Top  record  today:
+      two-level-affine-20261019  (PR  #67,  ArviFoxy,
+      MERGED  2026-10-20,  status  framework-verified,  label
+      new-bound),  the  ALL-DIRICHLET  zero-free  half-plane  at
+      the  CERTIFIED  RATIONAL  boundary  theta  =
+      174963413/200000000  =  0.874817065  (principal  pole
+      excluded;  the  class  bound  is  COMPUTED  IN  THE  LEAN
+      KERNEL  into  [0.874817064464,  0.874817064465],  the
+      9-digit  claim  its  ceiling;  no  hard-coded  constants;
+      922  modules,  clean  build  +  three-kernel  acceptance
+      at  the  canonical  statement).  STRICTLY  STRONGER  than
+      [Z78L]:  qxUpper  <  liuBUpper  in  tree  (norm_num
+      cross-multiplication).  ADOPTED  AS  [Z78T]  (new  module
+      formal/RhAttack/Z78Track.lean:  named  input
+      externalZeroFree78Track  at  qxUpper  --  the  chi  =  1
+      specialization  of  the  verified  all-Dirichlet
+      statement,  pole  guard  inert  via
+      riemannZeta_one_ne_zero;  extTrack_implies_extLiu  /
+      ext78  strict-strengthening  chain;  zetaZeroStripTrack
+      /  offPairD0leTrack  re-sharpened  at  the  new  constant:
+      every  off-pair  of  an  actual  set  has  d0  <=
+      qxD0max  =  qxUpper  -  1/2  =  74963413/200000000
+      =  0.374817065  <  liuD0max).  RHEnd  PART  B14
+      (ADDITIVE  --  B12/B13  preserved;  RHEnd.lean  2625
+      lines,  0  sorry,  target  and  full  tree  green):  the
+      slice  (qxD0max,  liuD0max]  is  closed  IN  BODY
+      (rhend_sliceTrackExcl);  rh_program78_stripfront_mach_
+      unifiedTrack  (+  _PT2)  is  the  new  terminal
+      endpoint  with  ONE  open  face  hOffT  (no  off-pair
+      on  [H,  inf)  x  (0,  qxD0max]);  the  0131  Liu-form
+      statement  is  a  THEOREM  of  the  0133  one  (B14.4/
+      B14.5).  STEP  SIZE:  the  face  shrank  by  liuD0max
+      -  qxD0max  =  1.39954e-4  --  3.3x  the  0131  input
+      step  (4.298e-5),  the  second-largest  shrink  of  the
+      chain  after  0129's  1/2  ->  3/8  step  from  [Z78]
+      itself.  FOUNDATION  DEPENDENCY:  the  record  builds  on
+      the  tracker's  openai-baseline  (the  OAI  7/8
+      half-plane  --  the  same  OAI  003  source  under  the
+      B6  audit)  plus  tracker  records  (Levy  PR  6,  Gao
+      PR  63,  Collet  cycle61  PR  42,  radical-asymmetric
+      PR  50)  --  B6  item  5  underwrites  the  foundation
+      of  ALL  THREE  named  inputs  together.  SNAPSHOT
+      CAVEAT:  the  board  moves  daily;  [Z78T]  is  the
+      verified  state  of  2026-10-20  and  a  successor
+      snapshot  supersedes  it  mechanically  --  this  unit  is
+      the  B6-section-8  input-upgrade  protocol  executed  a
+      second  time.  An  INDEPENDENT  REPLAY  of  the
+      submission  through  the  tracker's  pinned  verifier
+      environment  (same  pin  family  as  the  0132  Liu
+      replay)  is  QUEUED  as  the  follow-up  machine  step;
+      the  923-file  sha256  snapshot  and  the  verifier
+      inventory  are  archived  under  tmp/b6audit/tracker/.
+      No  RH  claim.
+
+      UPDATED  TERMINAL  LEDGER:  [Z-PT2]  record  below  the
+      frontier  +  ONE  open  face  hOffT  on  (tPT2,  inf)
+      x  (0,  qxD0max]  with  qxD0max  =
+      74963413/200000000  =  0.374817065  (record  footing,
+      [Z78T]-sharp  --  the  squeeze  certificate  still
+      covers  the  face  fully;  the  face  minimum  is
+      unchanged  at  the  d0  =  1/200  edge,  margin  >=
+      1.1136  measured  to  the  frontier)  +  [Z78T]  (closes
+      d0  >  qxD0max  in  body;  [Z78L]  and  [Z78]  remain
+      COROLLARY  inputs  of  it).  The  face  is  STILL  exactly
+      the  region  where  the  external  inputs  are  silent
+      --  its  certified  width  moved  by  1.39954e-4  in  this
+      step  (cumulative  from  3/8:  1.82935e-4).  No
+      RH  claim.
+
 
 
 

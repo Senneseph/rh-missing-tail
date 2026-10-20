@@ -132,6 +132,7 @@ import RhAttack.FloorUnif
 import RhAttack.Z78Strip
 import RhAttack.Z78P12
 import RhAttack.Z78Liu
+import RhAttack.Z78Track
 import RhAttack.S4WinCap
 import RhAttack.WinCount
 import RhAttack.P4Limit
@@ -2262,7 +2263,9 @@ theorem rh_program78_stripfront_mach_unified38_PT2_ofB11 (q : ZeroSet)
    kernel-verified  external  input  can  make  it.  (The  input
    class  is  unchanged  in  kind  from  [Z78]  --  an  external
    zero-free  half-plane,  still  far  from  1/2  --  only  its
-   certified  boundary  moved  by  ~4.3e-11.)  -/
+   certified  boundary  moved  (7/8  -  liuBUpper  =
+   4.298e-8;  the  face  shrank  by  3/8  -  liuD0max  =
+   4.298e-5).  -/
 
 /--  B13.1  THE  OUTER  SLICE  OF  THE  OLD  FACE  IS  CLOSED
     IN  BODY  FROM  [Z78L]:  for  an  actual-set  zero  set,  no
@@ -2420,6 +2423,207 @@ theorem rh_program78_stripfront_mach_unified38_PT2_ofLiu (q : ZeroSet)
     RH q :=
   rh_program78_stripfront_mach_unified38_ofLiu q hzL hqz honline
     Qside WinC.tPT2 (by norm_num [WinC.tPT2]) hPT2 hOffLPT2
+
+/-!  PART  B14  (discovery  0133).
+
+   0131  left  the  open  face  hOffL  on  H  <=  t0,  0  <
+   d0  <=  liuD0max  --  the  [Z78L]-sharp  strip  interior.
+   [Z78T]  (QuasiRiemannTracker  record
+   two-level-affine-20261019,  PR  #67,  ArviFoxy,  MERGED
+   2026-10-20;  the  kernel-verified  ALL-DIRICHLET  zero-free
+   half-plane  at  the  certified  rational  boundary
+   qxUpper  =  174963413/200000000  =  0.874817065,  whose
+   class  bound  the  record  proves  in  kernel  to  lie  in
+   [0.874817064464,  0.874817064465]  --  Comparator  plus
+   Lean  /  NanoDa  /  con-ron  in  the  tracker's  pinned
+   sandbox;  see  the  Z78Track  module  header  for  the
+   full  provenance  and  the  snapshot  caveat)  is  a  STRICT
+   STRENGTHENING  of  [Z78L]  at  qxUpper  <  liuBUpper
+   (extTrack_implies_extLiu,  transitively
+   extTrack_implies_ext78):  zeros  of  an  actual  set  sit
+   in  [1  -  qxUpper,  qxUpper],  so  every  off-pair
+   satisfies  d0  <=  qxD0max  =  qxUpper  -  1/2  =
+   74963413/200000000  =  0.374817065  <  liuD0max
+   (offPairD0leTrack,  sharp).  The  open  face  shrinks
+   accordingly  --  from  (0,  liuD0max]  to  (0,  qxD0max],
+   the  [Z78T]-sharp  strip  interior  --  and  the  slice
+   (qxD0max,  liuD0max]  of  the  old  face  is  closed  IN
+   BODY  from  [Z78T]  itself.  The  step  removes
+   liuD0max  -  qxD0max  =  1.39954e-4  of  face
+   width  --  3.3x  the  0131  input  step  (4.298e-5),
+   the  second-largest  shrink  of  the  chain  after
+   0129's  1/2  ->  3/8  step.  No  RH  claim:
+   the  face  is  a  zero-exclusion  statement  in  the
+   unverified  region;  the  input  class  is  unchanged  in
+   kind  from  [Z78]  --  an  external  zero-free  half-plane,
+   still  far  from  1/2  --  only  its  certified  boundary
+   moved,  and  the  chain  stays  a  REPEATABLE  MECHANISM
+   (B6  packet  section  8):  a  newer  verified  snapshot  of
+   the  tracker  frontier  supersedes  this  part
+   mechanically.  -/
+
+/--  B14.1  THE  OUTER  SLICE  OF  THE  OLD  FACE  IS  CLOSED
+    IN  BODY  FROM  [Z78T]:  for  an  actual-set  zero  set,
+    no  off-pair  with  d0  >  qxD0max  (of  any  height  t0
+    >  0):  offPairD0leTrack  already  bounds  every  off-pair
+    to  d0  <=  qxD0max.  In  particular  the  slice  (qxD0max,
+    liuD0max]  of  the  B13  face  --  and  a  fortiori  (qxD0max,
+    3/8]  of  the  B12  face  --  needs  no  face  at  all.
+    No  RH  claim.  -/
+theorem rhend_sliceTrackExcl (q : ZeroSet)
+    (hzT : Z78Track.externalZeroFree78Track)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (t0 d0 : ℝ) (ht0 : 0 < t0) (hd0 : 0 < d0)
+    (hT : Z78Track.qxD0max < d0) :
+    ¬ offPair q t0 d0 := by
+  intro hp
+  have hle := Z78Track.offPairD0leTrack q hzT hqz t0 d0 ht0 hd0 hp
+  linarith
+
+/--  B14.2  THE  TRACK-UNIFIED  ENDPOINT:  the  B12  endpoint  with
+    the  external  input  upgraded  [Z78]  ->  [Z78T]  and  the
+    face  shrunk  to  0  <  d0  <=  qxD0max  (the  [Z78T]-sharp
+    strip  interior).  Above  H,  any  off-pair  has  d0  <=
+    qxD0max  BY  [Z78T]  (offPairD0leLiu)  before  the  face  is
+    applied  -  the  d0  <=  1/2  split  of  B11  stays  away  in
+    the  S1/S3  legs  and  in  the  S4-covered  leg;  the  far
+    region  (d0  >  1/2)  is  closed  by  the  [Z78]  derived
+    from  [Z78T].  No  RH  claim.  -/
+theorem rh_program78_stripfront_mach_unifiedTrack (q : ZeroSet)
+    (hzT : Z78Track.externalZeroFree78Track)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) → (|ρ.im| : ℝ) <
+      (707 : ℝ) / 50 → ρ.re = 1 / 2)
+    (Qside : ℝ × ℝ → ℝ)
+    (H : ℝ) (hH : 1000 ≤ H)
+    (hPT : WinC.allOnLineUpTo q H)
+    (hOffT : ∀ (t0 d0 : ℝ), H ≤ t0 → 0 < d0 →
+      d0 ≤ Z78Track.qxD0max → ¬ offPair q t0 d0) :
+    RH q := by
+  have hz78 : Z78.externalZeroFree78 := Z78Track.extTrack_implies_ext78 hzT
+  refine S4A.rh_from_regime_closures q Qside Z78P12.MfP devProg
+    Z78P12.BwireP (fun p => MrLift p.1 p.2) floProg
+    ?_ ?_ ?_ ?_ ?_ ?_
+  · --  S1  witness  leg:  below  H  =  vacuous  (the  record);
+      --  above  H:  [Z78T]  bounds  d0  to  qxD0max,  the  face
+      --  kills.
+    intro t0 d0 ht0 hd0 hp
+    by_cases hle : t0 ≤ H
+    · exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
+        (le_of_lt ht0) hle) d0 hp)
+    · have hL : d0 ≤ Z78Track.qxD0max :=
+        Z78Track.offPairD0leTrack q hzT hqz t0 d0 ht0 hd0 hp
+      exact False.elim ((hOffT t0 d0
+        (le_of_lt (not_le.mp hle)) hd0 hL) hp)
+  · --  S2  leg:  covered  =  in  body;  low  band  =  vacuous
+      --  below  H;  far  =  [Z78]  (from  [Z78T]).
+    intro t0 d0 ht0 hd0 hp
+    by_cases hd0h : d0 ≤ (1 / 2 : ℝ)
+    · by_cases ht0k : 1000 ≤ t0
+      · exact hs2_covered q honline t0 d0 ht0 ht0k hd0 hd0h hp
+      · have hle : t0 ≤ H := le_trans (le_of_lt (not_le.mp ht0k)) hH
+        exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
+          (le_of_lt ht0) hle) d0 hp)
+    · exact False.elim (Z78P12.offPairFarEmpty q hz78 hqz t0 d0
+        (not_le.mp hd0h) hp)
+  · --  S3  leg:  below  H  =  vacuous  (the  record);  above  H:
+      --  [Z78T]  bounds  d0  to  qxD0max,  the  face  kills.
+    intro t0 d0 ht0 hd0 hp
+    by_cases hle : t0 ≤ H
+    · exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
+        (le_of_lt ht0) hle) d0 hp)
+    · have hL : d0 ≤ Z78Track.qxD0max :=
+        Z78Track.offPairD0leTrack q hzT hqz t0 d0 ht0 hd0 hp
+      exact False.elim ((hOffT t0 d0
+        (le_of_lt (not_le.mp hle)) hd0 hL) hp)
+  · --  S4  covered:  below  H  =  vacuous  (the  record);
+      --  above  H:  [Z78T]  bounds  d0  to  qxD0max,  the  face
+      --  kills.
+    intro t0 d0 ht0 hd0 hd0u hp
+    by_cases hle : t0 ≤ H
+    · exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
+        (by linarith [ht0]) hle) d0 hp)
+    · have hL : d0 ≤ Z78Track.qxD0max :=
+        Z78Track.offPairD0leTrack q hzT hqz t0 d0
+        (show 0 < t0 from by linarith [ht0]) hd0 hp
+      exact False.elim ((hOffT t0 d0
+        (le_of_lt (not_le.mp hle)) hd0 hL) hp)
+  · --  S4  low  band:  its  whole  domain  (0,  1000)  sits
+      --  below  the  frontier:  vacuous.
+    intro t0 d0 ht0 ht0u hd0 hd0u hp
+    have hle : t0 ≤ H := le_trans (le_of_lt ht0u) hH
+    exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
+      (le_of_lt ht0) hle) d0 hp)
+  · --  S4  far  region:  [Z78]  (from  [Z78T]).
+    intro t0 d0 ht0 hd0 hd0f hp
+    exact False.elim (Z78P12.offPairFarEmpty q hz78 hqz t0 d0 hd0f hp)
+
+/--  B14.3  THE  TRACK  ENDPOINT  AT  THE  PLATT-TRUDGIAN
+    FRONTIER  (the  [Z-PT2]  instantiation):  the  entire  named
+    residue  lives  STRICTLY  ABOVE  3,000,175,332,800,  as  ONE
+    zero-exclusion  face  (no  off-pair  in  0  <  d0  <=
+    qxD0max  above  the  frontier  -  the  [Z78T]-sharp  strip
+    interior)  plus  [Z78T]  itself  (which  closes  d0  >
+    qxD0max  in  body).  No  RH  claim.  -/
+theorem rh_program78_stripfront_mach_unifiedTrack_PT2 (q : ZeroSet)
+    (hzT : Z78Track.externalZeroFree78Track)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) → (|ρ.im| : ℝ) <
+      (707 : ℝ) / 50 → ρ.re = 1 / 2)
+    (Qside : ℝ × ℝ → ℝ)
+    (hPT2 : WinC.allOnLineUpTo q WinC.tPT2)
+    (hOffTPT2 : ∀ (t0 d0 : ℝ), WinC.tPT2 ≤ t0 → 0 < d0 →
+      d0 ≤ Z78Track.qxD0max → ¬ offPair q t0 d0) :
+    RH q :=
+  rh_program78_stripfront_mach_unifiedTrack q hzT hqz honline Qside
+    WinC.tPT2 (by norm_num [WinC.tPT2]) hPT2 hOffTPT2
+
+/--  B14.4  THE  0131  LIU  ENDPOINT  AS  A  THEOREM  OF  THE
+    [Z78T]  ENDPOINT  (in  body):  given  the  [Z78T]  input
+    and  its  terminal  face  hOffT  on  0  <  d0  <=
+    qxD0max,  the  older  Liu-form  endpoint  follows  --  the
+    Liu  face  (0  <  d0  <=  liuD0max)  splits  into  the
+    qxD0max  half  (the  hOffT  face)  and  the  slice
+    (qxD0max,  liuD0max]  (closed  in  body  from  [Z78T]).
+    The  0131  terminal  statement  is  thus  a  THEOREM  of
+    the  0133  one.  No  RH  claim.  -/
+theorem rh_program78_stripfront_mach_unifiedLiu_ofTrack (q : ZeroSet)
+    (hzT : Z78Track.externalZeroFree78Track)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) → (|ρ.im| : ℝ) <
+      (707 : ℝ) / 50 → ρ.re = 1 / 2)
+    (Qside : ℝ × ℝ → ℝ)
+    (H : ℝ) (hH : 1000 ≤ H)
+    (hPT : WinC.allOnLineUpTo q H)
+    (hOffT : ∀ (t0 d0 : ℝ), H ≤ t0 → 0 < d0 →
+      d0 ≤ Z78Track.qxD0max → ¬ offPair q t0 d0) :
+    RH q := by
+  have hzL : Z78Liu.externalZeroFree78Liu :=
+    Z78Track.extTrack_implies_extLiu hzT
+  apply rh_program78_stripfront_mach_unifiedLiu q hzL hqz honline
+    Qside H hH hPT
+  intro t0 d0 ht0 hd0 hd0L hp
+  by_cases hleT : d0 ≤ Z78Track.qxD0max
+  · exact False.elim ((hOffT t0 d0 ht0 hd0 hleT) hp)
+  · exact False.elim (rhend_sliceTrackExcl q hzT hqz t0 d0
+      (by linarith [ht0, hH]) hd0 (not_le.mp hleT) hp)
+
+/--  B14.5  THE  [Z-PT2]  INSTANCE  OF  B14.4  (the  0131
+    terminal  statement  at  tPT2  is  a  theorem  of  the
+    0133  endpoint  with  the  [Z-PT2]  record).  No  RH
+    claim.  -/
+theorem rh_program78_stripfront_mach_unifiedLiu_PT2_ofTrack (q : ZeroSet)
+    (hzT : Z78Track.externalZeroFree78Track)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) → (|ρ.im| : ℝ) <
+      (707 : ℝ) / 50 → ρ.re = 1 / 2)
+    (Qside : ℝ × ℝ → ℝ)
+    (hPT2 : WinC.allOnLineUpTo q WinC.tPT2)
+    (hOffTPT2 : ∀ (t0 d0 : ℝ), WinC.tPT2 ≤ t0 → 0 < d0 →
+      d0 ≤ Z78Track.qxD0max → ¬ offPair q t0 d0) :
+    RH q :=
+  rh_program78_stripfront_mach_unifiedLiu_ofTrack q hzT hqz honline
+    Qside WinC.tPT2 (by norm_num [WinC.tPT2]) hPT2 hOffTPT2
 
 /-!  -/
 end RHEnd

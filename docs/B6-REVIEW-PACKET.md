@@ -401,3 +401,38 @@ residual-pin structure.
   best within the specified comparison system, so the next
   strength must come from a genuinely new method) or by a
   verified record/interior input on another route.
+
+  EXECUTIONS (the protocol has now run twice):
+
+  * 0131 (2026-10-20): [Z78L] - Liu's formalization; single
+    source formalization, one recorded strict replay at
+    adoption (producer-run caveat), independent clean
+    from-source replay completed the footing at 0132.
+    Face: (0, 3/8] -> (0, liuD0max], shrink 4.298e-5.
+  * 0133 (2026-10-20, same day, ~4h later): [Z78T] - the
+    QuasiRiemannTracker top record two-level-affine-20261019
+    (PR #67, ArviFoxy, merged 2026-10-20, framework-
+    verified, new-bound); all-Dirichlet statement at the
+    EXACT RATIONAL 174963413/200000000 = 0.874817065
+    (gate 1's preferred form - no bracket needed);
+    verification via the tracker's protected pipeline
+    (comparator + Lean/NanoDa/con-ron in the pinned
+    sandbox; the PR's own verification block records the
+    922-module clean build and the three kernel acceptances
+    including con-ron over 132,192 declarations).
+    FOUNDATION INHERITANCE (gate 3, new shape): instead of
+    a personal OAI fork, the record builds on the
+    tracker's openai-baseline (the OAI 003 source at
+    commit fd4aeeb2 - the B6-audited family) plus tracker
+    records; the deep analytic foundation therefore
+    underwrites as in gates 2-3, with B6 item 5 covering
+    [Z78] / [Z78L] / [Z78T] foundations together.
+    Face: (0, liuD0max] -> (0, qxD0max], shrink
+    1.39954e-4 (3.3x the 0131 step).  INDEPENDENT re-
+    playback of the submission through the tracker's
+    pinned verifier environment is QUEUED (machine step,
+    mirrors 0132).  SNAPSHOT CAVEAT (new, carried in the
+    Z78Track module header): the frontier is a moving
+    board - the adopted constant is the verified state of
+    a date, and supersession by a newer snapshot is the
+    designed exit, executed by the same unit.

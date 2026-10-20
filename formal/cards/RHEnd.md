@@ -1,4 +1,4 @@
-# RHEnd.lean  (2425 lines)
+# RHEnd.lean  (2629 lines)
 WHAT:  THE ENDPOINT of the program on the ACTUAL zeta zero set under the
          named external input [Z78] (Re s > 7/8 zero-free), at the
          CONCRETE wire. RESIDUAL LEDGER after Part B12 (discovery 0129,
@@ -229,4 +229,28 @@ GOTCHA: No RH claim: hs1/hs3/hWin/hS2low are OPEN (data and bound-level,
           footing with the [Z-PT2] record; the further-reduction routes
           stand (external record above tPT2 = route C; a VERIFIED zero-
           free input covering more strip interior - [Z78L] is the first
-          instance).
+          instance). PART B14 (discovery 0133): the tracker frontier
+          (QuasiRiemannTracker record two-level-affine-20261019, PR #67,
+          ArviFoxy, MERGED 2026-10-20, framework-verified, new-bound;
+          the all-Dirichlet zero-free half-plane at the exact rational
+          174963413/200000000 = 0.874817065; protected pipeline:
+          comparator + Lean/NanoDa/con-ron in the pinned sandbox; see
+          the Z78Track.lean header) STRICTLY STRENGTHENS [Z78L] (qxUpper
+          < liuBUpper, norm_num) -> the whole chain. offPairD0leTrack
+          bounds EVERY actual-set off-pair to d0 <= qxD0max = qxUpper -
+          1/2 = 74963413/200000000 = 0.374817065 < liuD0max (SHARP).
+          rh_program78_stripfront_mach_unifiedTrack (+_PT2): the
+          endpoint under [Z78T] with the single open face hOffT (no off-
+          pair on [H, inf) x (0, qxD0max]) - identical proof shape to
+          B13; the slice (qxD0max, liuD0max] of the B13 face is closed
+          IN BODY (rhend_sliceTrackExcl) and the 0131 terminal statement
+          is a THEOREM of the 0133 one (unifiedLiu_ofTrack (+_PT2)).
+          Step size 1.39954e-4 (3.3x the 0131 step; cumulative from 3/8:
+          1.82935e-4). File 2625 lines, 0 sorry, full tree green.
+          UPDATED TERMINAL LEDGER: [Z-PT2] record below the frontier +
+          ONE open face hOffT (the [Z78T]-sharp strip interior, record
+          footing) + [Z78T] (closes ALL of d0 > qxD0max in body; [Z78L]
+          and [Z78] remain corollary inputs). SNAPSHOT caveat: the board
+          moves daily - supersession by a newer snapshot is the designed
+          exit, executed by the same unit (B6 packet section 8). No RH
+          claim.

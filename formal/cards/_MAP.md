@@ -366,7 +366,32 @@ A chain of named theorems;  each box names the modules.
                    liuD0max  =  374957019420098947/10^18
                    <  3/8,  sharp);  INDEPENDENT  STRICT
                    REPLAY  PASS  (0132:  clean  bootstrap,
-                   from  source,  312/312  axioms  standard))
+                   from  source,  312/312  axioms  standard);
+                   now  a  COROLLARY  input  of  [Z78T])
+     Z78Track     (named  external  input  [Z78T]:  the
+                   QuasiRiemannTracker  frontier  record
+                   two-level-affine-20261019  (PR  #67,
+                   ArviFoxy,  MERGED  2026-10-20,
+                   framework-verified,  new-bound)  -  the
+                   all-Dirichlet  zero-free  half-plane  at
+                   the  exact  rational  qxUpper  =
+                   174963413/200000000  =  0.874817065
+                   (class  bound  computed  in  kernel  in
+                   [0.874817064464,  0.874817064465]);
+                   STRICTLY  STRENGTHENS  [Z78L]
+                   (qxUpper  <  liuBUpper)  ->  the  whole
+                   chain;  zetaZeroStripTrack,
+                   offPairD0leTrack  (d0  <=  qxD0max  =
+                   qxUpper  -  1/2  =  74963413/200000000
+                   =  0.374817065  <  liuD0max,  sharp);
+                   protected  pipeline  standing  (comparator
+                   +  Lean  /  NanoDa  /  con-ron  in  the
+                   pinned  sandbox;  923-file  sha256
+                   snapshot  archived);  independent  replay
+                   through  the  tracker's  verifier  QUEUED;
+                   SNAPSHOT  of  the  moving  board  -  2026-
+                   10-20  verified  state;  foundation
+                   inherits  the  B6  OAI  003  class)
      FloorUnif    (S2 floor == S4 own-mass:  floStripMin = mown
                    on the covered band;  s4StripUnifiedFloor;
                    s2ActualFullBand,  no t0 cap)
@@ -618,7 +643,37 @@ A chain of named theorems;  each box names the modules.
                    (closes  ALL  of  d0  >  liuD0max  in
                    body;  [Z78]  a  corollary  input).
                    File  2425  lines,  0  sorry,  full  tree
-                   green.
+                   green.  PART  B14  (discovery  0133):  the
+                   tracker  frontier  BEATS  LIU  while  B13
+                   was  green  -  [Z78T]  (Z78Track,  see
+                   above)  STRICTLY  STRENGTHENS  [Z78L]:
+                   offPairD0leTrack  bounds  every  actual-
+                   set  off-pair  to  d0  <=  qxD0max  =
+                   74963413/200000000  =  0.374817065
+                   (sharp);  the  endpoint  is  restated  as
+                   rh_program78_stripfront_mach_unifiedTrack
+                   (+_PT2)  with  the  single  open  face
+                   hOffT  (no  off-pair  on  [H,  inf)  x
+                   (0,  qxD0max])  -  identical  proof  shape
+                   to  B13  with  the  derived  [Z78]  in  the
+                   S2/S4-far  legs;  the  slice  (qxD0max,
+                   liuD0max]  of  the  old  face  is  closed
+                   IN  BODY  FROM  [Z78T]
+                   (rhend_sliceTrackExcl)  and  the  0131
+                   terminal  statement  is  a  THEOREM  of  the
+                   0133  one  (unifiedLiu_ofTrack  (+_PT2)).
+                   Step  size  1.39954e-4  (3.3x  the  0131
+                   step;  cumulative  from  3/8:  1.82935e-4).
+                   UPDATED  TERMINAL  LEDGER:  [Z-PT2]
+                   record  below  the  frontier  +  ONE  open
+                   face  hOffT  (the  [Z78T]-sharp  strip
+                   interior,  record  footing)  +  [Z78T]
+                   (closes  ALL  of  d0  >  qxD0max  in
+                   body;  [Z78L]  /  [Z78]  corollary
+                   inputs).  Snapshot  caveat:  the  board
+                   moves  daily  -  supersession  is  the
+                   designed  exit  (B6  section  8).  File
+                   2625  lines,  0  sorry,  full  tree  green.
 
   Foundations / vocabulary
      B0 (composition atoms)  B4/B5 (detector-line notation)
