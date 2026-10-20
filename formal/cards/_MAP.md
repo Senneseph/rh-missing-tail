@@ -503,6 +503,31 @@ A chain of named theorems;  each box names the modules.
                    record,  machined  hs3  right  witness,
                    G-hs3-left  analytic)  -  machine/ledger
                    lockstep.  No  RH  claim.
+                   Discovery  0126,  GATED  (B10):  the  BAND
+                   SQUEEZE  WINDOW  IS  EMPTY  IN  BODY  (t4l_
+                   bandWireBelow:  BwireP  +  MrLift  <
+                   devProg  on  the  whole  strip  band,
+                   FLANK-INDEPENDENT  -  t4m_margin  (0118)  composed
+                   with  S2  in  body;  measured  margin  >=
+                   1.11  at  the  band  edge),  t4l_bandEmpty
+                   (no  Qside  satisfies  both  squeeze  legs
+                   at  a  band  off-pair),  t4l_stripFacesEmpty
+                   (the  B9  three-face  bundle  G-hs1  +
+                   hs3-right  +  G-hs3-left  is  jointly
+                   contradictory  at  every  band  off-pair)
+                   -  G-hs3-left  and  its  right  twin
+                   DISSOLVE  as  independent  faces:  they  are
+                   components  of  the  strip-band  zero-
+                   exclusion  face  hNoStrip.  The  VACANT
+                   ENDPOINT  rh_program78_stripfront_mach_
+                   vacant  (+  _PT2,  +  _ofB9  variants:  the
+                   B9  endpoint  implies  it  in  body):  the
+                   unverified-region  residual  is  now  TWO
+                   zero-exclusion  faces  (band,  window)  +
+                   [Z78]  +  the  below-frontier  record  -
+                   no  analytic  face  remains  in  the  tree.
+                   File  1862  lines,  0  sorry,  full  tree
+                   green.
 
   Foundations / vocabulary
      B0 (composition atoms)  B4/B5 (detector-line notation)

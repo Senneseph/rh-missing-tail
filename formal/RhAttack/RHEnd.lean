@@ -1502,4 +1502,361 @@ theorem rh_program78_stripfront_mach_left_PT2 (q : ZeroSet)
     hs1StripPT2 hs3RightPT2 hs3LeftPT2 hWinPT2
 
 
+
+/-  ##  Part  B10  -  THE  BAND  SQUEEZE  WINDOW  IS  EMPTY  IN
+    BODY,  AND  THE  STRIP  FACE  BUNDLE  COLLAPSES  TO  ONE
+    ZERO-EXCLUSION  FACE  (discovery  0125  follow-through,
+    after  the  S8  /  S35B  pre-check)
+
+  Part  B9  left  the  endpoint's  strip-band  residual  as  a
+  THREE-face  bundle:  G-hs1  (Qside  >=  devProg),  hs3  at
+  the  RIGHT  witness  (Qside  <=  off-line  EM  wall  +  Mr,
+  the  machined  B7  shape),  and  G-hs3-left  (Qside  <=
+  Bwire  +  Mr  at  a  left-flank  witness).  Part  B10  shows
+  the  bundle  is  JOINTLY  EMPTY  in  body  (flank-
+  independent,  no  numerics):
+
+  (B10.1)  t4l_bandWireBelow:  on  the  strip  band  (1000  <=
+    t0,  1/200  <=  d0  <=  1/2)  at  any  off-pair,  the
+    endpoint  wire  +  mass  sits  STRICTLY  BELOW  the  S1
+    floor:  BwireP  +  MrLift  <  devProg  -  t4m_margin  (the
+    S4  in-body  closure,  discovery  0118)  composed  with
+    S2  in  body  (FUnif.s2ActualFullBand:  devStripMin  >=
+    floStripMin  on  the  band).
+  (B10.2)  t4l_bandEmpty:  no  scale  Qside  can  satisfy  BOTH
+    squeeze  legs  (S1:  Qside  >=  devProg;  S3:  Qside  <=
+    Bwire  +  Mr)  at  a  band  off-pair  -  the  squeeze
+    window  is  EMPTY.  The  S35B  pre-check  (tmp/
+    s35b_leftflank_precheck.py)  measured  the  actual  size
+    of  this  body  gap:  devProg  /  (p8_B  +  MrLift)  >=
+    1.1136  at  the  band  edge  d0  =  1/200,  growing  to
+    ~1.1e4  by  d0  =  1/2.
+  (B10.3)  t4l_stripFacesEmpty:  the  three  strip  faces  of
+    the  B9  endpoint  are  jointly  CONTRADICTORY  at  every
+    band  off-pair  (right  branch  via  the  T4OffD  wall  in
+    body;  left  branch  direct)  -  G-hs3-left  and  its  right-
+    flank  twin  dissolve  as  INDEPENDENT  faces:  they  are
+    components  of  the  strip-band  ZERO-EXCLUSION  face,
+    which  the  squeeze  certificate  above  certifies  in
+    body  from  the  S1  data  side  (the  pin  family  of
+    Part  B8).
+  (B10.4)  rh_program78_stripfront_mach_vacant  (+  _PT2):  the
+    endpoint  with  the  strip  face  bundle  replaced  by  ONE
+    band-zero-exclusion  face  (hNoStrip).  The  residual  in
+    the  unverified  region  is  now  exactly  two  zero-
+    exclusion  faces  (band  +  window)  plus  [Z78]  plus
+    the  below-frontier  record  -  no  analytic  face  remains
+    inside  the  tree.
+  (B10.5)  rh_program78_stripfront_mach_vacant_ofB9  (+  _PT2):
+    the  B9  endpoint  (three  strip  faces  +  window  +
+    [Z78])  implies  the  vacant  endpoint  (band  exclusion  +
+    window  +  [Z78])  in  body  -  the  face  bundle  is
+    equivalent,  for  the  endpoint,  to  the  single  zero-
+    exclusion  face  it  encodes.
+
+  No  RH  claim:  B10.1-B10.3  are  inequalities  between  named
+  explicit  scales  (pure  body  composition  of  the  0118  S4
+  wire  margin  and  the  S2  floor  closure);  hNoStrip  is  a
+  zero-exclusion  face  in  the  unverified  region,  exactly  on
+  record  footing  with  the  window  face  and  the  [Z-PT2]
+  record.  -/
+
+/--  B10.1  THE  BAND  WIRE  SITS  STRICTLY  BELOW  THE  S1
+    FLOOR  (in  body,  FLANK-INDEPENDENT):  on  the  strip  band
+    (1000  <=  t0,  1/200  <=  d0  <=  1/2),  at  any  off-
+    pair,  the  endpoint  wire  +  mass  is  strictly  below
+    devProg.  t4m_margin  (S4  in  body:  wire  +  Mr  <  floor)
+    composed  with  S2  in  body  (floor  <=  devProg).  -/
+theorem t4l_bandWireBelow (q : ZeroSet)
+    (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) → (|ρ.im| : ℝ) <
+      (707 : ℝ) / 50 → ρ.re = 1 / 2)
+    (t0 d0 : ℝ) (ht0 : 1000 ≤ t0) (hdlo : (1 / 200 : ℝ) ≤ d0)
+    (hdh : d0 ≤ 1 / 2) (hp : offPair q t0 d0) :
+    Z78P12.BwireP (t0, d0) + (fun p => MrLift p.1 p.2) (t0, d0) <
+      devProg (t0, d0) := by
+  have hbt0 : 0 < t0 := by linarith [ht0]
+  have hbd0 : 0 < d0 := by linarith [hdlo]
+  have hbw : Z78P12.BwireP (t0, d0) = p8_B t0 (S4Strip.n4 t0) := by
+    dsimp only [Z78P12.BwireP, S4A.BwireR]
+    rw [if_pos ⟨ht0, hdh⟩, if_pos hdlo]
+  have hml : (fun p => MrLift p.1 p.2) (t0, d0) = t4m_MwireOff t0 d0 := by
+    dsimp only [MrLift]
+    rw [if_pos ⟨ht0, hdh, hdlo⟩]
+  have hwire : Z78P12.BwireP (t0, d0) +
+      (fun p => MrLift p.1 p.2) (t0, d0) < S1LowT.floStripMin t0 d0 := by
+    simpa only [hbw, hml] using t4m_margin t0 d0 ht0 hdlo hdh
+  have hs2 : S1LowT.devStripMin t0 d0 ≥ S1LowT.floStripMin t0 d0 :=
+    FUnif.s2ActualFullBand q honline t0 d0 hbt0 hbd0 hdh hp
+  dsimp only [devProg]
+  linarith
+
+/--  B10.2  JOINT  VACUITY  (in  body,  BOTH  FLANKS):  no  scale
+    Qside  can  satisfy  BOTH  squeeze  legs  -  S1  (Qside  >=
+    devProg)  and  S3  (Qside  <=  Bwire  +  Mr)  -  at  a  strip-
+    band  off-pair:  the  squeeze  window  is  EMPTY.  -/
+theorem t4l_bandEmpty (q : ZeroSet)
+    (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) → (|ρ.im| : ℝ) <
+      (707 : ℝ) / 50 → ρ.re = 1 / 2)
+    (Qside : ℝ × ℝ → ℝ)
+    (t0 d0 : ℝ) (ht0 : 1000 ≤ t0) (hdlo : (1 / 200 : ℝ) ≤ d0)
+    (hdh : d0 ≤ 1 / 2) (hp : offPair q t0 d0) :
+    ¬ (Qside (t0, d0) ≥ devProg (t0, d0) ∧
+       Qside (t0, d0) <=
+         Z78P12.BwireP (t0, d0) + (fun p => MrLift p.1 p.2) (t0, d0)) := by
+  intro hs
+  have hw := t4l_bandWireBelow q honline t0 d0 ht0 hdlo hdh hp
+  have hdevlewire : devProg (t0, d0) <=
+      Z78P12.BwireP (t0, d0) + (fun p => MrLift p.1 p.2) (t0, d0) :=
+    le_trans hs.1 hs.2
+  linarith [hw]
+
+/--  B10.3  THE  B9  STRIP  FACE  BUNDLE  IS  JOINTLY  EMPTY  (in
+    body):  the  three  strip  faces  of  the  Part  B9  endpoint
+    -  G-hs1  (Qside  >=  devProg),  hs3  at  the  RIGHT  witness
+    (the  machined  B7  shape),  G-hs3-left  (hs3  at  the  LEFT
+    witness)  -  are  jointly  CONTRADICTORY  at  every  strip-
+    band  off-pair  at  or  above  the  frontier.  G-hs3-left
+    (and  its  right-flank  twin)  dissolve  as  INDEPENDENT
+    faces:  they  are  components  of  the  strip-band  zero-
+    exclusion  face  (B10.4),  which  the  squeeze  certificate
+    (B10.1)  certifies  in  body.  Right  branch:  the  B7  wall
+    in  body  (T4OffD:  wall  <=  Bwire).  Left  branch:  the
+    face  IS  the  Bwire  +  Mr  bound,  direct.  -/
+theorem t4l_stripFacesEmpty (q : ZeroSet)
+    (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) → (|ρ.im| : ℝ) <
+      (707 : ℝ) / 50 → ρ.re = 1 / 2)
+    (Qside : ℝ × ℝ → ℝ)
+    (H : ℝ) (hH : 1000 ≤ H)
+    (hs1StripH : ∀ (t0 d0 : ℝ), H <= t0 → (1 / 200 : ℝ) <= d0 →
+      d0 <= 1 / 2 → offPair q t0 d0 → Qside (t0, d0) ≥ devProg (t0, d0))
+    (hs3RightH : ∀ (t0 d0 : ℝ), H <= t0 → (1 / 200 : ℝ) <= d0 →
+      d0 <= 1 / 2 → t4l_rightOffPair q t0 d0 →
+      Qside (t0, d0) <=
+        ‖p4_em_expr (t4o_sOff t0 d0) (S4Strip.n4 t0)‖ + t4m_MwireOff t0 d0)
+    (hs3LeftH : ∀ (t0 d0 : ℝ), H <= t0 → (1 / 200 : ℝ) <= d0 →
+      d0 <= 1 / 2 → t4l_leftOffPair q t0 d0 →
+      Qside (t0, d0) <=
+        Z78P12.BwireP (t0, d0) + (fun p => MrLift p.1 p.2) (t0, d0))
+    (t0 d0 : ℝ) (ht0 : H <= t0) (hdlo : (1 / 200 : ℝ) <= d0)
+    (hdh : d0 <= 1 / 2) (hp : offPair q t0 d0) :
+    False := by
+  have htt0 : 1000 ≤ t0 := le_trans hH ht0
+  have hs1 : Qside (t0, d0) ≥ devProg (t0, d0) :=
+    hs1StripH t0 d0 ht0 hdlo hdh hp
+  obtain ⟨ρ, hz, hne, him, hd⟩ := hp
+  have hp2 : offPair q t0 d0 := ⟨ρ, hz, hne, him, hd⟩
+  have hd0n : 0 ≤ d0 := by linarith [hdlo]
+  rcases (abs_eq hd0n).mp hd with (hdir | hdir)
+  · --  RIGHT  FLANK:  the  B7  shape  +  the  wall  in  body.
+    have hrw : ρ.re = 1 / 2 + d0 := by linarith [hdir]
+    have hroff : t4l_rightOffPair q t0 d0 := ⟨ρ, ⟨hz, him, hd, hrw⟩⟩
+    have hface : Qside (t0, d0) <=
+        ‖p4_em_expr (t4o_sOff t0 d0) (S4Strip.n4 t0)‖ +
+        t4m_MwireOff t0 d0 :=
+      hs3RightH t0 d0 ht0 hdlo hdh hroff
+    have hwall : ‖p4_em_expr (t4o_sOff t0 d0) (S4Strip.n4 t0)‖ <=
+        p8_B t0 (S4Strip.n4 t0) :=
+      t4wall_offline_le_bwires t0 d0 htt0 hdlo hdh
+    have hstrip : Qside (t0, d0) <=
+        p8_B t0 (S4Strip.n4 t0) + t4m_MwireOff t0 d0 :=
+      le_trans hface (add_le_add hwall le_rfl)
+    have hbw : Z78P12.BwireP (t0, d0) = p8_B t0 (S4Strip.n4 t0) := by
+      dsimp only [Z78P12.BwireP, S4A.BwireR]
+      rw [if_pos ⟨htt0, hdh⟩, if_pos hdlo]
+    have hml : (fun p => MrLift p.1 p.2) (t0, d0) = t4m_MwireOff t0 d0 := by
+      dsimp only [MrLift]
+      rw [if_pos ⟨htt0, hdh, hdlo⟩]
+    have hwire : Qside (t0, d0) <=
+        Z78P12.BwireP (t0, d0) + (fun p => MrLift p.1 p.2) (t0, d0) := by
+      simpa only [hbw, hml] using hstrip
+    exact (t4l_bandEmpty q honline Qside t0 d0 htt0 hdlo hdh hp2)
+      ⟨hs1, hwire⟩
+  · --  LEFT  FLANK:  the  face  is  the  Bwire  +  Mr  bound.
+    have hlr : ρ.re = 1 / 2 - d0 := by linarith [hdir]
+    have hloff : t4l_leftOffPair q t0 d0 := ⟨ρ, ⟨hz, him, hd, hlr⟩⟩
+    have hwire : Qside (t0, d0) <=
+        Z78P12.BwireP (t0, d0) + (fun p => MrLift p.1 p.2) (t0, d0) :=
+      hs3LeftH t0 d0 ht0 hdlo hdh hloff
+    exact (t4l_bandEmpty q honline Qside t0 d0 htt0 hdlo hdh hp2)
+      ⟨hs1, hwire⟩
+
+/--  B10.4  THE  VACANT  STRIPFRONT  ENDPOINT:  the  Part  B9
+    endpoint  with  the  strip  face  BUNDLE  replaced  by  ONE
+    band-zero-exclusion  face  (hNoStrip).  The  S4  strip  case
+    no  longer  needs  t4m_margin  (the  exclusion  is  stronger
+    than  the  wire  margin).  The  residual  in  the  unverified
+    region  is  now  exactly  TWO  zero-exclusion  faces  (band,
+    window)  plus  [Z78]  plus  the  below-frontier  record.
+    No  RH  claim.  -/
+theorem rh_program78_stripfront_mach_vacant (q : ZeroSet)
+    (hz78 : Z78.externalZeroFree78)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) → (|ρ.im| : ℝ) <
+      (707 : ℝ) / 50 → ρ.re = 1 / 2)
+    (Qside : ℝ × ℝ → ℝ)
+    (H : ℝ) (hH : 1000 ≤ H)
+    (hPT : WinC.allOnLineUpTo q H)
+    (hNoStrip : ∀ (t0 d0 : ℝ), H ≤ t0 → (1 / 200 : ℝ) ≤ d0 →
+      d0 ≤ 1 / 2 → ¬ offPair q t0 d0)
+    (hWinH : WinC.hWinFaceResidualH q H) :
+    RH q := by
+  refine S4A.rh_from_regime_closures q Qside Z78P12.MfP devProg
+    Z78P12.BwireP (fun p => MrLift p.1 p.2) floProg
+    ?_ ?_ ?_ ?_ ?_ ?_
+  · --  S1  witness  leg:  below  H  =  vacuous;  band  =
+      --  excluded;  window  above  =  window  face;  far  =
+      --  [Z78].
+    intro t0 d0 ht0 hd0 hp
+    by_cases hfar : d0 ≤ (1 / 2 : ℝ)
+    · by_cases hle : t0 ≤ H
+      · exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
+          (le_of_lt ht0) hle) d0 hp)
+      · by_cases hdw : (1 / 200 : ℝ) ≤ d0
+        · exact False.elim (hNoStrip t0 d0
+            (le_of_lt (not_le.mp hle)) hdw hfar hp)
+        · exact False.elim ((hWinH t0 d0
+            (le_trans hH (le_of_lt (not_le.mp hle)))
+            (not_le.mp hle) hd0 (not_le.mp hdw)) hp)
+    · exact False.elim (Z78P12.offPairFarEmpty q hz78 hqz t0 d0
+        (not_le.mp hfar) hp)
+  · --  S2  leg:  covered  =  in  body;  low  band  =  vacuous
+      --  below  H;  far  =  [Z78].
+    intro t0 d0 ht0 hd0 hp
+    by_cases hd0h : d0 ≤ (1 / 2 : ℝ)
+    · by_cases ht0k : 1000 ≤ t0
+      · exact hs2_covered q honline t0 d0 ht0 ht0k hd0 hd0h hp
+      · have hle : t0 ≤ H := le_trans (le_of_lt (not_le.mp ht0k)) hH
+        exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
+          (le_of_lt ht0) hle) d0 hp)
+    · exact False.elim (Z78P12.offPairFarEmpty q hz78 hqz t0 d0
+        (not_le.mp hd0h) hp)
+  · --  S3  leg:  below  H  =  vacuous;  band  =  excluded;
+      --  window  above  =  window  face;  far  =  [Z78].
+    intro t0 d0 ht0 hd0 hp
+    by_cases hfar : d0 ≤ (1 / 2 : ℝ)
+    · by_cases hle : t0 ≤ H
+      · exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
+          (le_of_lt ht0) hle) d0 hp)
+      · by_cases hdw : (1 / 200 : ℝ) ≤ d0
+        · exact False.elim (hNoStrip t0 d0
+            (le_of_lt (not_le.mp hle)) hdw hfar hp)
+        · exact False.elim ((hWinH t0 d0
+            (le_trans hH (le_of_lt (not_le.mp hle)))
+            (not_le.mp hle) hd0 (not_le.mp hdw)) hp)
+    · exact False.elim (Z78P12.offPairFarEmpty q hz78 hqz t0 d0
+        (not_le.mp hfar) hp)
+  · --  S4  covered:  band  =  excluded  (stronger  than  the
+      --  t4m_margin  wire  margin);  window  band  =  the  face
+      --  shape  via  faceSplitH  (on-line  wire  there:
+      --  MrLift  =  MrR).
+    intro t0 d0 ht0 hd0 hd0u hp
+    by_cases hdw : (1 / 200 : ℝ) ≤ d0
+    · by_cases hle : t0 ≤ H
+      · exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
+          (by linarith [ht0]) hle) d0 hp)
+      · exact False.elim (hNoStrip t0 d0
+          (le_of_lt (not_le.mp hle)) hdw hd0u hp)
+    · have hna : ¬ (1000 ≤ t0 ∧ d0 ≤ 1 / 2 ∧ (1 / 200 : ℝ) ≤ d0) :=
+        fun h' => by linarith [hdw, h'.2.2]
+      have hml : MrLift t0 d0 = S4A.MrR t0 d0 := by
+        dsimp only [MrLift]
+        rw [if_neg hna]
+      have hif : floProg (t0, d0) = S1LowT.floStripMin t0 d0 := by
+        dsimp only [floProg]
+        rw [if_pos ⟨ht0, hd0u⟩]
+      have hwinshp : Z78P12.BwireP (t0, d0) + Z78P12.MrP (t0, d0) +
+          Z78P12.MfP (t0, d0) < S1LowT.floStripMin t0 d0 :=
+        ((WinC.faceSplitH q H hPT).mpr hWinH) t0 d0 ht0 hd0
+          (not_le.mp hdw) hp
+      simpa only [hif, hml, Z78P12.MrP] using hwinshp
+  · --  S4  low  band:  its  whole  domain  (0,  1000)  sits  below
+      --  the  frontier:  vacuous.
+    intro t0 d0 ht0 ht0u hd0 hd0u hp
+    have hle : t0 ≤ H := le_trans (le_of_lt ht0u) hH
+    exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
+      (le_of_lt ht0) hle) d0 hp)
+  · --  S4  far  region:  [Z78].
+    intro t0 d0 ht0 hd0 hd0f hp
+    exact False.elim (Z78P12.offPairFarEmpty q hz78 hqz t0 d0 hd0f hp)
+
+/--  B10.4  THE  VACANT  ENDPOINT  AT  THE  PLATT-TRUDGIAN
+    FRONTIER  (the  [Z-PT2]  instantiation):  the  entire  named
+    residue  lives  STRICTLY  ABOVE  3,000,175,332,800,  as
+    exactly  two  zero-exclusion  faces  (band,  window)  plus
+    [Z78].  No  RH  claim.  -/
+theorem rh_program78_stripfront_mach_vacant_PT2 (q : ZeroSet)
+    (hz78 : Z78.externalZeroFree78)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) → (|ρ.im| : ℝ) <
+      (707 : ℝ) / 50 → ρ.re = 1 / 2)
+    (Qside : ℝ × ℝ → ℝ)
+    (hPT2 : WinC.allOnLineUpTo q WinC.tPT2)
+    (hNoStripPT2 : ∀ (t0 d0 : ℝ), WinC.tPT2 ≤ t0 →
+      (1 / 200 : ℝ) ≤ d0 → d0 ≤ 1 / 2 → ¬ offPair q t0 d0)
+    (hWinPT2 : WinC.hWinFaceResidualH q WinC.tPT2) :
+    RH q :=
+  rh_program78_stripfront_mach_vacant q hz78 hqz honline Qside
+    WinC.tPT2 (by norm_num [WinC.tPT2]) hPT2 hNoStripPT2 hWinPT2
+
+/--  B10.5  THE  B9  ENDPOINT  IMPLIES  THE  VACANT  ENDPOINT
+    (in  body):  the  strip  face  BUNDLE  of  the  Part  B9
+    endpoint  implies  the  band  zero-exclusion  face  -
+    B10.3  at  every  strip-band  off-pair.  For  the  endpoint
+    the  three-face  bundle  (G-hs1,  hs3  right,  G-hs3-left)
+    is  EQUIVALENT  to  the  single  zero-exclusion  face  it
+    encodes:  no  analytic  content  is  lost  in  the  collapse.
+    No  RH  claim.  -/
+theorem rh_program78_stripfront_mach_vacant_ofB9 (q : ZeroSet)
+    (hz78 : Z78.externalZeroFree78)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) → (|ρ.im| : ℝ) <
+      (707 : ℝ) / 50 → ρ.re = 1 / 2)
+    (Qside : ℝ × ℝ → ℝ)
+    (H : ℝ) (hH : 1000 ≤ H)
+    (hPT : WinC.allOnLineUpTo q H)
+    (hs1StripH : ∀ (t0 d0 : ℝ), H <= t0 → (1 / 200 : ℝ) <= d0 →
+      d0 <= 1 / 2 → offPair q t0 d0 → Qside (t0, d0) ≥ devProg (t0, d0))
+    (hs3RightH : ∀ (t0 d0 : ℝ), H <= t0 → (1 / 200 : ℝ) <= d0 →
+      d0 <= 1 / 2 → t4l_rightOffPair q t0 d0 →
+      Qside (t0, d0) <=
+        ‖p4_em_expr (t4o_sOff t0 d0) (S4Strip.n4 t0)‖ + t4m_MwireOff t0 d0)
+    (hs3LeftH : ∀ (t0 d0 : ℝ), H <= t0 → (1 / 200 : ℝ) <= d0 →
+      d0 <= 1 / 2 → t4l_leftOffPair q t0 d0 →
+      Qside (t0, d0) <=
+        Z78P12.BwireP (t0, d0) + (fun p => MrLift p.1 p.2) (t0, d0))
+    (hWinH : WinC.hWinFaceResidualH q H) :
+    RH q := by
+  refine rh_program78_stripfront_mach_vacant q hz78 hqz honline
+    Qside H hH hPT ?_ hWinH
+  intro t0 d0 ht0 hdlo hdh hp
+  exact t4l_stripFacesEmpty q honline Qside H hH hs1StripH
+    hs3RightH hs3LeftH t0 d0 ht0 hdlo hdh hp
+
+/--  B10.5  THE  B9  ENDPOINT  AT  tPT2  IMPLIES  THE  VACANT
+    ENDPOINT  AT  tPT2  (the  [Z-PT2]  instantiation  of  the
+    collapse  above).  No  RH  claim.  -/
+theorem rh_program78_stripfront_mach_vacant_PT2_ofB9 (q : ZeroSet)
+    (hz78 : Z78.externalZeroFree78)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) → (|ρ.im| : ℝ) <
+      (707 : ℝ) / 50 → ρ.re = 1 / 2)
+    (Qside : ℝ × ℝ → ℝ)
+    (hPT2 : WinC.allOnLineUpTo q WinC.tPT2)
+    (hs1StripPT2 : ∀ (t0 d0 : ℝ), WinC.tPT2 <= t0 → (1 / 200 : ℝ) <= d0 →
+      d0 <= 1 / 2 → offPair q t0 d0 → Qside (t0, d0) ≥ devProg (t0, d0))
+    (hs3RightPT2 : ∀ (t0 d0 : ℝ), WinC.tPT2 <= t0 → (1 / 200 : ℝ) <= d0 →
+      d0 <= 1/2 → t4l_rightOffPair q t0 d0 →
+      Qside (t0, d0) <=
+        ‖p4_em_expr (t4o_sOff t0 d0) (S4Strip.n4 t0)‖ +
+        t4m_MwireOff t0 d0)
+    (hs3LeftPT2 : ∀ (t0 d0 : ℝ), WinC.tPT2 <= t0 → (1 / 200 : ℝ) <= d0 →
+      d0 <= 1/2 → t4l_leftOffPair q t0 d0 →
+      Qside (t0, d0) <=
+        Z78P12.BwireP (t0, d0) + (fun p => MrLift p.1 p.2) (t0, d0))
+    (hWinPT2 : WinC.hWinFaceResidualH q WinC.tPT2) :
+    RH q :=
+  rh_program78_stripfront_mach_vacant_ofB9 q hz78 hqz honline Qside
+    WinC.tPT2 (by norm_num [WinC.tPT2]) hPT2
+    hs1StripPT2 hs3RightPT2 hs3LeftPT2 hWinPT2
+
 end RHEnd

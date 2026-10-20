@@ -491,6 +491,62 @@ overstatement that the left face is “fully body-dischargeable”):
   and what the P1–P4 pin family's role is if the squeeze
   window is empty.
 
+**Discovery 0126 (2026-10-19 — S9 done: the band squeeze
+window is EMPTY IN BODY, and G-hs3-left dissolves):** `RHEnd.lean`
+part B10 (the file is 1862 lines, 0 sorry, full tree green)
+resolves the 0125 S9 question — stronger and differently
+than the numeric plan. (1) **`t4l_bandWireBelow`**: on the
+**whole strip band** (1000 ≤ t0, 1/200 ≤ d0 ≤ 1/2),
+at **any** off-pair, **both flanks**: `BwireP (t0, d0) + MrLift
+(t0, d0) < devProg (t0, d0)` — pure **body** composition of
+`t4m_margin` (the S4 wire margin, discovery 0118: `p8_B +
+t4m_MwireOff < floStripMin`) with **S2 in body**
+(`FUnif.s2ActualFullBand`: `devStripMin ≥ floStripMin` on
+the band), via the two band identities (`BwireP = p8_B t0 (n4
+t0)`, `MrLift = t4m_MwireOff t0 d0`). No numerics. The S35B
+pre-check's measured margin (`devProg / wire ≥ 1.1136` at
+the band edge d0 = 1/200, growing to ~1.1e4 by d0 = 1/2) is the
+size of this body inequality, not an ingredient of it. (2)
+**`t4l_bandEmpty`**: no scale Qside can satisfy **both** squeeze
+legs (S1: `Qside ≥ devProg`; S3: `Qside ≤ BwireP +
+MrP`) at a band off-pair — the squeeze window is **EMPTY**,
+in body, flank-independent. (3) **`t4l_stripFacesEmpty`**: the
+**three** strip faces of the B9 endpoint — G-hs1
+(Qside ≥ devProg), hs3 at the right witness (the machined
+B7 shape), and **G-hs3-left** (hs3 at the left witness, pair
+level) — are jointly **contradictory** at every band off-
+pair (right branch: B7 shape + T4OffD wall in body; left branch:
+direct). **G-hs3-left — and its right-flank twin —
+DISSOLVE as independent faces**: they are components of the
+strip-band zero-exclusion face. (4) **The vacant endpoint**:
+`rh_program78_stripfront_mach_vacant` (+ `_PT2`) states the
+endpoint with the three-face bundle replaced by ONE band-
+zero-exclusion face `hNoStrip` (no off-pair on [H, ∞) ×
+[1/200, 1/2]); `rh_program78_stripfront_mach_vacant_ofB9`
+(+ `_PT2_ofB9`) proves the B9 endpoint **implies** the vacant
+endpoint in body — for the endpoint, the bundle is
+**equivalent** to the single exception face it encodes. The
+unverified-region residual is now exactly **two zero-exclusion
+faces** (band, window) plus [Z78] plus the below-frontier
+record — no analytic face remains inside the tree. **B6
+cross-check resolved**: the B6 review packet scopes **only** the
+Z78 input (blast radius = `hz78` + the two theorems
+`offPairFarEmpty` / `edgeZeroFree78`); the P1–P4 pin
+family is **not** in its scope — the pins are the S1-side
+**data faces** of Part B8 (P1 fill, P2 kernel magnitude, P3 the
+A4.3 mass, P4 absorption) and are the **data side of the
+squeeze**: the squeeze certificate (B10.3) certifies in body
+that, when the pins hold at a band off-pair, the S3 face is
+false there (Qside > wire) — the band-exclusion face is
+their combined content. Honest limits: hNoStrip is **OPEN** —
+a zero-exclusion statement in the unverified region above the
+frontier, on record footing with the window face; B10 changes
+the **shape** of the residual (inequality faces → exclusion
+faces), not its open height. The S8 left wall stands as the
+true positive-dual record of the G-hs3-left barriers
+(machine-verified, explicit, not load-bearing for the endpoint).
+No RH claim is made or implied.
+
 The barriers of T4OffL say nothing about whether left-flank zeros
 exist: they are FORMAL NEGATIVE RESULTS about what the current
 machine wire can do, stated exactly. No RH claim is made or implied.
