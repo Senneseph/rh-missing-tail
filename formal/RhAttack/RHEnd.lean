@@ -2040,4 +2040,201 @@ theorem rh_program78_stripfront_mach_unified_PT2_ofB10 (q : ZeroSet)
     Qside WinC.tPT2 (by norm_num [WinC.tPT2]) hPT2
     hNoStripPT2 hWinPT2
 
+
+/-!  PART B12  (discovery  0129).
+
+   B11  left  the  open  face  hOff  on  (t0,  d0)  with  H  <=  t0,
+   0  <  d0  <=  1/2.  But  [Z78]  ITSELF  excludes  the  outer  slice:
+   for  an  actual-set  zero  set,  every  off-pair  satisfies
+   d0  <=  3/8  (Z78.offPairD0le  -  zero-free  at  Re  >  7/8  plus
+   the  functional  equation  put  zeros  in  the  strip  [1/8,  7/8],
+   sharp).  So  the  slice  (3/8,  1/2]  is  closed  IN  BODY  FROM
+   [Z78],  and  the  endpoint's  open  face  shrinks  to  0  <  d0
+   <=  3/8  -  EXACTLY  the  region  where  the  external  inputs  are
+   silent  (zeros  may  live  in  the  strip  interior).  No  RH
+   claim:  the  face  is  a  zero-exclusion  statement  in  the
+   unverified  region,  now  as  narrow  as  [Z78]  can  make  it.  -/
+
+/--  B12.1  THE  OUTER  SLICE  IS  CLOSED  IN  BODY  FROM  [Z78]:
+    for  an  actual-set  zero  set,  no  off-pair  with  3/8  <  d0
+    (of  any  height  t0  >  0):  offPairD0le  already  bounds  every
+    off-pair  to  d0  <=  3/8.  The  slice  (3/8,  1/2]  of  the  B11
+    face  -  including  the  d0  =  1/2  edge  -  needs  no  face  at
+    all.  No  RH  claim.  -/
+theorem rhend_slice38Excl (q : ZeroSet)
+    (hz78 : Z78.externalZeroFree78)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (t0 d0 : ℝ) (ht0 : 0 < t0) (hd0 : 0 < d0) (h38 : 3 / 8 < d0) :
+    ¬ offPair q t0 d0 := by
+  intro hp
+  have hle := Z78.offPairD0le q hz78 hqz t0 d0 ht0 hd0 hp
+  linarith
+
+/--  B12.2  THE  3/8-UNIFIED  ENDPOINT:  the  B11  endpoint  with
+    the  face  shrunk  to  0  <  d0  <=  3/8  (the  [Z78]-SHARP
+    strip  interior).  Above  H,  any  off-pair  has  d0  <=  3/8  BY
+    [Z78]  (offPairD0le)  before  the  face  is  applied  -  the  d0
+    <=  1/2  split  of  B11  disappears  entirely  in  the  S1/S3
+    legs  and  in  the  S4-covered  leg.  No  RH  claim.  -/
+theorem rh_program78_stripfront_mach_unified38 (q : ZeroSet)
+    (hz78 : Z78.externalZeroFree78)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) → (|ρ.im| : ℝ) <
+      (707 : ℝ) / 50 → ρ.re = 1 / 2)
+    (Qside : ℝ × ℝ → ℝ)
+    (H : ℝ) (hH : 1000 ≤ H)
+    (hPT : WinC.allOnLineUpTo q H)
+    (hOff38 : ∀ (t0 d0 : ℝ), H ≤ t0 → 0 < d0 → d0 ≤ 3 / 8 →
+      ¬ offPair q t0 d0) :
+    RH q := by
+  refine S4A.rh_from_regime_closures q Qside Z78P12.MfP devProg
+    Z78P12.BwireP (fun p => MrLift p.1 p.2) floProg
+    ?_ ?_ ?_ ?_ ?_ ?_
+  · --  S1  witness  leg:  below  H  =  vacuous  (the  record);
+      --  above  H:  [Z78]  bounds  d0  to  3/8,  the  face  kills.
+    intro t0 d0 ht0 hd0 hp
+    by_cases hle : t0 ≤ H
+    · exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
+        (le_of_lt ht0) hle) d0 hp)
+    · have h38 : d0 ≤ 3 / 8 := Z78.offPairD0le q hz78 hqz t0 d0
+        ht0 hd0 hp
+      exact False.elim ((hOff38 t0 d0
+        (le_of_lt (not_le.mp hle)) hd0 h38) hp)
+  · --  S2  leg:  covered  =  in  body;  low  band  =  vacuous
+      --  below  H;  far  =  [Z78].
+    intro t0 d0 ht0 hd0 hp
+    by_cases hd0h : d0 ≤ (1 / 2 : ℝ)
+    · by_cases ht0k : 1000 ≤ t0
+      · exact hs2_covered q honline t0 d0 ht0 ht0k hd0 hd0h hp
+      · have hle : t0 ≤ H := le_trans (le_of_lt (not_le.mp ht0k)) hH
+        exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
+          (le_of_lt ht0) hle) d0 hp)
+    · exact False.elim (Z78P12.offPairFarEmpty q hz78 hqz t0 d0
+        (not_le.mp hd0h) hp)
+  · --  S3  leg:  below  H  =  vacuous  (the  record);  above  H:
+      --  [Z78]  bounds  d0  to  3/8,  the  face  kills.
+    intro t0 d0 ht0 hd0 hp
+    by_cases hle : t0 ≤ H
+    · exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
+        (le_of_lt ht0) hle) d0 hp)
+    · have h38 : d0 ≤ 3 / 8 := Z78.offPairD0le q hz78 hqz t0 d0
+        ht0 hd0 hp
+      exact False.elim ((hOff38 t0 d0
+        (le_of_lt (not_le.mp hle)) hd0 h38) hp)
+  · --  S4  covered:  below  H  =  vacuous  (the  record);
+      --  above  H:  [Z78]  bounds  d0  to  3/8,  the  face  kills.
+    intro t0 d0 ht0 hd0 hd0u hp
+    by_cases hle : t0 ≤ H
+    · exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
+        (by linarith [ht0]) hle) d0 hp)
+    · have h38 : d0 ≤ 3 / 8 := Z78.offPairD0le q hz78 hqz t0 d0
+        (show 0 < t0 from by linarith [ht0]) hd0 hp
+      exact False.elim ((hOff38 t0 d0
+        (le_of_lt (not_le.mp hle)) hd0 h38) hp)
+  · --  S4  low  band:  its  whole  domain  (0,  1000)  sits
+      --  below  the  frontier:  vacuous.
+    intro t0 d0 ht0 ht0u hd0 hd0u hp
+    have hle : t0 ≤ H := le_trans (le_of_lt ht0u) hH
+    exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
+      (le_of_lt ht0) hle) d0 hp)
+  · --  S4  far  region:  [Z78].
+    intro t0 d0 ht0 hd0 hd0f hp
+    exact False.elim (Z78P12.offPairFarEmpty q hz78 hqz t0 d0 hd0f hp)
+
+/--  B12.2  THE  3/8-UNIFIED  ENDPOINT  AT  THE  PLATT-TRUDGIAN
+    FRONTIER  (the  [Z-PT2]  instantiation):  the  entire  named
+    residue  lives  STRICTLY  ABOVE  3,000,175,332,800,  as  ONE
+    zero-exclusion  face  (no  off-pair  in  0  <  d0  <=  3/8
+    above  the  frontier  -  the  [Z78]-sharp  strip  interior)
+    plus  [Z78]  itself  (which  closes  (3/8,  inf)  in  body).
+    No  RH  claim.  -/
+theorem rh_program78_stripfront_mach_unified38_PT2 (q : ZeroSet)
+    (hz78 : Z78.externalZeroFree78)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) → (|ρ.im| : ℝ) <
+      (707 : ℝ) / 50 → ρ.re = 1 / 2)
+    (Qside : ℝ × ℝ → ℝ)
+    (hPT2 : WinC.allOnLineUpTo q WinC.tPT2)
+    (hOff38PT2 : ∀ (t0 d0 : ℝ), WinC.tPT2 ≤ t0 → 0 < d0 →
+      d0 ≤ 3 / 8 → ¬ offPair q t0 d0) :
+    RH q :=
+  rh_program78_stripfront_mach_unified38 q hz78 hqz honline Qside
+    WinC.tPT2 (by norm_num [WinC.tPT2]) hPT2 hOff38PT2
+
+/--  B12.3  THE  B11  FORM  IMPLIES  THE  3/8  FORM  (in  body):
+    the  1/2-face  restricts  to  the  3/8-face  (3/8  <  1/2).
+    No  RH  claim.  -/
+theorem rh_program78_stripfront_mach_unified38_ofB11 (q : ZeroSet)
+    (hz78 : Z78.externalZeroFree78)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) → (|ρ.im| : ℝ) <
+      (707 : ℝ) / 50 → ρ.re = 1 / 2)
+    (Qside : ℝ × ℝ → ℝ)
+    (H : ℝ) (hH : 1000 ≤ H)
+    (hPT : WinC.allOnLineUpTo q H)
+    (hOff : ∀ (t0 d0 : ℝ), H ≤ t0 → 0 < d0 → d0 ≤ 1 / 2 →
+      ¬ offPair q t0 d0) :
+    RH q := by
+  refine rh_program78_stripfront_mach_unified38 q hz78 hqz honline
+    Qside H hH hPT ?_
+  intro t0 d0 ht0 hd0 hd038 hp
+  exact False.elim ((hOff t0 d0 ht0 hd0 (by linarith)) hp)
+
+/--  B12.4  THE  3/8  FORM  IMPLIES  THE  B11  FORM  (in  body,
+    FROM  [Z78]):  the  slice  (3/8,  1/2]  of  the  B11  face  is
+    closed  in  body  by  offPairD0le  -  so  the  two  forms  are
+    EQUIVALENT  in  body  (each  implies  the  other),  and  the
+    3/8-form  is  the  NATURAL  one:  its  face  is  exactly  what
+    the  external  inputs  cannot  already  close.  No  RH  claim.  -/
+theorem rh_program78_stripfront_mach_unified_ofB12 (q : ZeroSet)
+    (hz78 : Z78.externalZeroFree78)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) → (|ρ.im| : ℝ) <
+      (707 : ℝ) / 50 → ρ.re = 1 / 2)
+    (Qside : ℝ × ℝ → ℝ)
+    (H : ℝ) (hH : 1000 ≤ H)
+    (hPT : WinC.allOnLineUpTo q H)
+    (hOff38 : ∀ (t0 d0 : ℝ), H ≤ t0 → 0 < d0 → d0 ≤ 3 / 8 →
+      ¬ offPair q t0 d0) :
+    RH q := by
+  refine rh_program78_stripfront_mach_unified q hz78 hqz honline
+    Qside H hH hPT ?_
+  intro t0 d0 ht0 hd0 hd0u hp
+  by_cases hle : t0 ≤ H
+  · exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
+      (by linarith [ht0]) hle) d0 hp)
+  · have h38 : d0 ≤ 3 / 8 := Z78.offPairD0le q hz78 hqz t0 d0
+      (show 0 < t0 from by linarith [ht0, hH]) hd0 hp
+    exact False.elim ((hOff38 t0 d0
+      (le_of_lt (not_le.mp hle)) hd0 h38) hp)
+
+/--  B12.5  THE  [Z-PT2]  INSTANCES  OF  THE  EQUIVALENCE
+    (3/8-form  at  tPT2  ->  1/2-form  at  tPT2).  No  RH  claim.  -/
+theorem rh_program78_stripfront_mach_unified_PT2_ofB12 (q : ZeroSet)
+    (hz78 : Z78.externalZeroFree78)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) → (|ρ.im| : ℝ) <
+      (707 : ℝ) / 50 → ρ.re = 1 / 2)
+    (Qside : ℝ × ℝ → ℝ)
+    (hPT2 : WinC.allOnLineUpTo q WinC.tPT2)
+    (hOff38PT2 : ∀ (t0 d0 : ℝ), WinC.tPT2 ≤ t0 → 0 < d0 →
+      d0 ≤ 3 / 8 → ¬ offPair q t0 d0) :
+    RH q :=
+  rh_program78_stripfront_mach_unified_ofB12 q hz78 hqz honline
+    Qside WinC.tPT2 (by norm_num [WinC.tPT2]) hPT2 hOff38PT2
+
+theorem rh_program78_stripfront_mach_unified38_PT2_ofB11 (q : ZeroSet)
+    (hz78 : Z78.externalZeroFree78)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) → (|ρ.im| : ℝ) <
+      (707 : ℝ) / 50 → ρ.re = 1 / 2)
+    (Qside : ℝ × ℝ → ℝ)
+    (hPT2 : WinC.allOnLineUpTo q WinC.tPT2)
+    (hOffPT2 : ∀ (t0 d0 : ℝ), WinC.tPT2 ≤ t0 → 0 < d0 →
+      d0 ≤ 1 / 2 → ¬ offPair q t0 d0) :
+    RH q :=
+  rh_program78_stripfront_mach_unified38_ofB11 q hz78 hqz honline
+    Qside WinC.tPT2 (by norm_num [WinC.tPT2]) hPT2 hOffPT2
+
+/-!  -/
 end RHEnd

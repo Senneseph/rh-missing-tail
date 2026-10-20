@@ -118,8 +118,8 @@ for the ACTUAL zeta zero set.  The branches:
       faces,  L  faces,  covers,  dead  zone,  cusp  spacing
       +  amplitude)  and  the  E1ClauseV3  clause  itself.
       THE  RESIDUAL,  CORRECTED  TO  THE  CURRENT  STATE
-      (discovery  0121  ->  0128  ledger  chain;  RHEnd  parts
-      B7  -  B11,  all  GATED,  2043  lines,  full  tree
+      (discovery  chain  0121  ->  0129;  RHEnd  parts
+      B7  -  B12,  all  GATED,  2240  lines,  full  tree
       green):  the  endpoint  at  the  Platt-Trudgian
       frontier  is  rh_program78_stripfront_mach_unified_PT2
       (tPT2  =  3,000,175,332,800;  cited  record  [Z-PT2],
@@ -139,23 +139,34 @@ for the ACTUAL zeta zero set.  The branches:
       at  a  band  off-pair;  t4l_stripFacesEmpty  -  the
       three  strip  inequality  faces  are  jointly
       contradictory  at  any  band  off-pair).  THE  RESIDUAL
-      IS  NOW  EXACTLY:  (i)  the  [Z-PT2]  record  below  the
-      frontier  (all  zeros  on  the  line  up  to
-      3,000,175,332,800);  (ii)  ONE  open  EXCLUSION  face
-      above  the  frontier  -  hOff:  no  off-pair  on  (tPT2,
-      inf)  x  (0,  1/2]  -  record  footing,  with  the
-      squeeze  certificate  measured  to  the  frontier  at
-      margin  >=  1.1136x  (0127/0128);  (iii)  [Z78]  for
-      d0  >  1/2  (in  body  from  the  kernel-verified
-      external  input;  B6  packet  item-4  audit  pending).
-      No  analytic  face,  no  inequality  face,  no  scale
-      comparison  remains  in  the  tree;  the  1/200  boundary
-      and  the  flank  split  are  proof  artifacts  of  the
-      retired  forms.  Further  reduction  of  (ii)  requires
-      EXTENDING  the  verified  zero-exclusion  record  above
+      IS  NOW  EXACTLY  (0127  ->  0129):  (i)  the  [Z-PT2]
+      record  below  the  frontier  (all  zeros  on  the  line
+      up  to  3,000,175,332,800);  (ii)  ONE  open  EXCLUSION
+      face  above  the  frontier  -  hOff38:  no  off-pair  on
+      (tPT2,  inf)  x  (0,  3/8]  -  record  footing,  the
+      [Z78]-SHARP  strip  interior  (offPairD0le  bounds  every
+      actual-set  off-pair  to  d0  <=  3/8,  SHARP:  zero-free
+      at  Re  >  7/8  plus  the  functional  equation  put  zeros
+      in  [1/8,  7/8]),  with  the  0126  squeeze  certificate
+      measured  to  the  frontier  at  margin  >=  1.1136x;
+      (iii)  [Z78]  itself,  which  now  closes  ALL  of
+      d0  >  3/8  in  body  (offPairD0le  for  (3/8,  1/2],
+      offPairFarEmpty  for  d0  >  1/2)  -  B6  packet  item-4
+      audit  pending.  No  analytic  face,  no  inequality
+      face,  no  scale  comparison  remains  in  the  tree;
+      the  1/200  boundary,  the  flank  split,  and  the  1/2
+      face  boundary  are  all  proof  artifacts  of  the
+      retired  forms.  The  face-shrinking  chain  (0110/0108
+      record  shrink  ->  0122  flank  split  ->  0126  band-
+      empty  ->  0127  unification  ->  0129  3/8-shrink)  is
+      AT  ITS  TERMINUS:  the  residual  face  is  [Z78]-sharp
+      -  exactly  the  region  the  external  inputs  cannot
+      already  close.  Further  reduction  of  (ii)  requires
+      an  EXTENDED  verified  zero-exclusion  record  above
       tPT2  (route  C,  external  record-keeping;  no  public
       record  beyond  tPT2  as  of  the  0128  recon)  or  a
-      new  exclusion  instrument.  This  is  THE  open  item.
+      ZERO-FREE  INPUT  covering  part  of  the  strip
+      interior.  This  is  THE  open  item.
       WALK  SPINE  CONTRACT  (2026-10-16):  the  Q  of  the  S1
       and  S3  legs  is  ONE  CONCRETE  SCALE  Qside  (the
       measured  |zeta|  fill  under  the  A4.3  wire):  S1 =
@@ -1201,6 +1212,45 @@ for the ACTUAL zeta zero set.  The branches:
       EXTENDING  the  verified  zero-exclusion  record  above
       tPT2  (external  record-keeping,  route  C  of  0124)
       or  a  new  exclusion  instrument.  No  RH  claim.
+
+  FORMAL:  THE  OPEN  FACE  SHRINKS  TO  THE  [Z78]-SHARP
+      STRIP  INTERIOR  (discovery  0129):  RHEnd.lean  part
+      B12  (2240  lines,  0  sorry,  GATED,  full  tree  green
+      17450  jobs)  closes  the  face-shrinking  chain.  Key
+      input:  Z78.offPairD0le  -  for  an  actual-set  zero
+      set,  offPair  q  t0  d0  ->  d0  <=  3/8  ([Z78]  is
+      zero-free  at  Re  >  7/8;  the  functional  equation
+      mirrors  it  below  1/8;  zeros  lie  in  [1/8,  7/8];
+      3/8  is  SHARP).  So  the  slice  (3/8,  1/2]  of  the
+      B11  face  -  including  the  d0  =  1/2  edge  -  is
+      closed  IN  BODY  FROM  [Z78]  with  no  face  (rhend_
+      slice38Excl).  The  endpoint  is  restated  as
+      rh_program78_stripfront_mach_unified38  (+  _PT2):  the
+      single  open  face  hOff38  (no  off-pair  on  [H,  inf)
+      x  (0,  3/8]).  Proof  shape:  in  the  S1/S3  legs  and
+      the  S4-covered  leg,  above  H,  any  off-pair  is
+      first  BOUNDED  to  d0  <=  3/8  FROM  [Z78]  (have
+      h38  :  d0  <=  3/8  :=  Z78.offPairD0le  q  hz78  hqz
+      t0  d0  ht0  hd0  hp)  before  the  face  is  applied
+      -  the  B11  d0  <=  1/2  splits  vanish  from  those
+      legs  (retained  only  in  the  S2  leg,  structural  to
+      hs2_covered).  The  forms  are  EQUIVALENT  in  body:
+      unified38_ofB11  (the  1/2-face  restricts  to  the
+      3/8-face,  no  [Z78]  needed)  and  unified_ofB12  (+
+      _PT2  instances)  (3/8-face  +  [Z78]  close  the
+      (3/8,  1/2]  slice,  recovering  the  1/2-face).
+      TERMINAL  LEDGER:  [Z-PT2]  record  below  the
+      frontier  +  ONE  open  face  hOff38  on  (tPT2,  inf)
+      x  (0,  3/8]  (record  footing,  [Z78]-sharp,  squeeze
+      certificate  covering  it  fully,  margin  >=  1.1136
+      measured  to  the  frontier)  +  [Z78]  (closes  d0  >
+      3/8  in  body).  The  face  is  now  EXACTLY  the
+      region  where  the  external  inputs  are  silent
+      (zeros  may  live  in  the  interior  of  the
+      Z78-allowed  strip);  further  reduction  needs  a
+      higher  verified  record  (route  C)  or  a  zero-free
+      input  covering  part  of  the  strip  interior.  No
+      RH  claim.
 
 
 

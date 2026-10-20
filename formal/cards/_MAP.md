@@ -546,8 +546,36 @@ A chain of named theorems;  each box names the modules.
                    inequality,  or  scale-comparison  face
                    remains  in  the  tree;  hOff  reduction
                    =  record  extension  above  tPT2  (route
-                   C  of  0124).  File  2043  lines,  0
-                   sorry,  full  tree  green.
+                   C  of  0124).  File  2043  lines.
+                   Discovery  0129,  GATED  (B12,  THE
+                   TERMINUS  of  the  face-shrinking
+                   chain):  Z78.offPairD0le  bounds  EVERY
+                   actual-set  off-pair  to  d0  <=  3/8
+                   (zero-free  Re  >  7/8  +  functional
+                   equation  ->  zeros  in  [1/8,  7/8],
+                   SHARP)  -  the  slice  (3/8,  1/2]  of
+                   the  B11  face  (incl.  the  d0  =  1/2
+                   edge)  is  closed  IN  BODY  FROM  [Z78]
+                   (rhend_slice38Excl)  with  no  face;  the
+                   endpoint  restated  as
+                   rh_program78_stripfront_mach_unified38
+                   (+_PT2)  with  the  single  open  face
+                   hOff38  (no  off-pair  on  [H,  inf)  x
+                   (0,  3/8])  -  above  H  the  off-pair
+                   is  BOUNDED  TO  3/8  FROM  [Z78]  (have
+                   h38  :=  Z78.offPairD0le)  before  the
+                   face  applies;  forms  EQUIVALENT  in
+                   body  (unified38_ofB11  the  1/2  ->  3/8
+                   restriction;  unified_ofB12  (+_PT2)  the
+                   3/8  +  [Z78]  ->  1/2  recovery).
+                   TERMINAL  LEDGER:  [Z-PT2]  record  below
+                   the  frontier  +  ONE  open  face  hOff38
+                   (the  [Z78]-sharp  strip  interior,
+                   record  footing,  squeeze  certificate
+                   covering  it  at  margin  >=  1.1136)  +
+                   [Z78]  (closes  ALL  of  d0  >  3/8  in
+                   body).  File  2240  lines,  0  sorry,
+                   full  tree  green.
 
   Foundations / vocabulary
      B0 (composition atoms)  B4/B5 (detector-line notation)
