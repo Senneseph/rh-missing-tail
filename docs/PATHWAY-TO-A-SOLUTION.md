@@ -1432,13 +1432,22 @@ for the ACTUAL zeta zero set.  The branches:
       verified  state  of  2026-10-20  and  a  successor
       snapshot  supersedes  it  mechanically  --  this  unit  is
       the  B6-section-8  input-upgrade  protocol  executed  a
-      second  time.  An  INDEPENDENT  REPLAY  of  the
-      submission  through  the  tracker's  pinned  verifier
-      environment  (same  pin  family  as  the  0132  Liu
-      replay)  is  QUEUED  as  the  follow-up  machine  step;
-      the  923-file  sha256  snapshot  and  the  verifier
-      inventory  are  archived  under  tmp/b6audit/tracker/.
-      No  RH  claim.
+      second  time.  The  INDEPENDENT  REPLAY  of  the
+      submission  is  COMPLETE:  discovery  0134  ran the
+      full  independent  replay  on  this  machine  -  all
+      4077  modules  (922  candidate  +  2927  openai-baseline
+      +  228  akashlevy)  compiled  from  source  through  the
+      Lean  4.34.1  kernel  (0  failures,  2536  s),  pin-
+      exact  external  footprint  built  from  source  at  the
+      identical  pins  and  byte-identical  patches,  kernel-
+      level  statement  match  at  the  exact  rational
+      174963413/200000000,  and  the  axiom  cone  of  the
+      canonical  statement  is  exactly  {propext,
+      Classical.choice,  Quot.sound}  -  [Z78T]  is  now
+      independently  second-party  verified,  same  footing
+      as  [Z78L]  after  0132;  the  923-file  sha256  snapshot,
+      the  replay  workspace  and  the  verifier  inventory
+      are  archived  under  tmp/b6audit/tracker/.  No  RH  claim.
 
       UPDATED  TERMINAL  LEDGER:  [Z-PT2]  record  below  the
       frontier  +  ONE  open  face  hOffT  on  (tPT2,  inf)

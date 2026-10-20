@@ -394,7 +394,8 @@ residual-pin structure.
 
   The face-shrinking chain (0110/0108 record shrink -> 0122
   flank split -> 0126 band-empty -> 0127 unification ->
-  0129 3/8-shrink -> 0131 Liu-shrink) is therefore NOT at a
+  0129 3/8-shrink -> 0131 Liu-shrink -> 0133 tracker-
+  shrink) is therefore NOT at a
   hard terminus: it is a repeatable mechanism whose next
   shrink is bounded by the next strictly stronger VERIFIED
   zero-free input (Liu's optimality note: her constant is
@@ -402,7 +403,8 @@ residual-pin structure.
   strength must come from a genuinely new method) or by a
   verified record/interior input on another route.
 
-  EXECUTIONS (the protocol has now run twice):
+  EXECUTIONS (the protocol has now run TWICE, both
+  end-to-end: adoption + independent second-party replay):
 
   * 0131 (2026-10-20): [Z78L] - Liu's formalization; single
     source formalization, one recorded strict replay at
@@ -428,10 +430,24 @@ residual-pin structure.
     underwrites as in gates 2-3, with B6 item 5 covering
     [Z78] / [Z78L] / [Z78T] foundations together.
     Face: (0, liuD0max] -> (0, qxD0max], shrink
-    1.39954e-4 (3.3x the 0131 step).  INDEPENDENT re-
-    playback of the submission through the tracker's
-    pinned verifier environment is QUEUED (machine step,
-    mirrors 0132).  SNAPSHOT CAVEAT (new, carried in the
+    1.39954e-4 (3.3x the 0131 step).  INDEPENDENT
+    second-party replay COMPLETED at 0134 (same day):
+    all 4077 modules (922 candidate + 2927 openai-
+    baseline + 228 akashlevy) compiled from source
+    through the Lean 4.34.1 kernel (0 failures, 2536 s),
+    pin-exact external footprint built from source at
+    identical pins with byte-identical patches (sha256
+    08904323... / 0c121d85..., the 0130-audited copies),
+    922/922 snapshot files byte-identical, kernel-level
+    statement match at the exact rational, axiom cone of
+    the canonical statement exactly {propext,
+    Classical.choice, Quot.sound} - no sorryAx anywhere.
+    [Z78T] footing now equals [Z78L]'s post-0132 footing:
+    independently second-party verified.  Deviations from
+    the official receipt on file: Lean-default kernel
+    only (no NanoDa/con-ron locally); no sandbox;
+    external footprint rebuilt from source rather than
+    the official prebuilt snapshot libraries (stronger).  SNAPSHOT CAVEAT (new, carried in the
     Z78Track module header): the frontier is a moving
     board - the adopted constant is the verified state of
     a date, and supersession by a newer snapshot is the

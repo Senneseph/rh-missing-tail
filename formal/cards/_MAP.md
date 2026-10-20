@@ -387,11 +387,18 @@ A chain of named theorems;  each box names the modules.
                    protected  pipeline  standing  (comparator
                    +  Lean  /  NanoDa  /  con-ron  in  the
                    pinned  sandbox;  923-file  sha256
-                   snapshot  archived);  independent  replay
-                   through  the  tracker's  verifier  QUEUED;
-                   SNAPSHOT  of  the  moving  board  -  2026-
-                   10-20  verified  state;  foundation
-                   inherits  the  B6  OAI  003  class)
+                   snapshot  archived);  INDEPENDENT  second-
+                   party  replay  COMPLETED  (discovery  0134:
+                   4077/4077  modules  from  source  through
+                   the  Lean  4.34.1  kernel,  0  failures,
+                   2536 s;  pin-exact  footprint  rebuilt  from
+                   source  at  identical  pins  +  byte-
+                   identical  patches;  kernel-level  statement
+                   match  at  the  exact  rational;  axiom  cone
+                   exactly  {propext,  Classical.choice,
+                   Quot.sound});  SNAPSHOT  of  the  moving
+                   board  -  2026-10-20  verified  state;
+                   foundation inherits the B6 OAI 003  class)
      FloorUnif    (S2 floor == S4 own-mass:  floStripMin = mown
                    on the covered band;  s4StripUnifiedFloor;
                    s2ActualFullBand,  no t0 cap)
