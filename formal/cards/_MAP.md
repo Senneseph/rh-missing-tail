@@ -300,7 +300,26 @@ A chain of named theorems;  each box names the modules.
                numerical  grid  of  walk-vs-BwireP+MrLift  at
                LEFT-FLANK  trial  points  at  or  below  3e12:
                a  clean  shadow  encourages  (A),  a  violation
-               is  a  discovery.)
+               is  a  discovery.)  Discovery  0125,  GATED:
+               S8  -  the  S3  LEFT  WALL  at  the  SQUARE-ROOT
+               SCHEDULE  (n  >=  (n4  t)^(1/(2  sigma)),  sigma
+               =  1/2  -  d0):  t4l_schedB  /  t4l_sched_pow  (
+               the  single  schedule  fact)  +  the  left-norm
+               win  (t4l_wall_norm1  /  t4l_wall_norm_prod)  +
+               the  T3  pins  (t4l_T3pin  /  t4l_T3pin2,  exact
+               99th-power  norm_num)  +  t4l_T3margin  ->  THE
+               MAIN  LEFT  WALL  t4l_wall_tuned  (every  n  at
+               or  above  the  schedule:  ||p4_em_expr  (sL)
+               n||  <=  p8_B  t  (n4  t)  -  the  mirror  of
+               t4wall_offline_le_bwires)  and  the  endpoint-
+               face  composition  t4l_face_left_body  /  t4l_
+               face_left_band.  Route  (A)'s  S3  leg  is  now
+               BODY-DISCHARGEABLE;  the  pre-check  shows  the
+               S1  leg  is  NOT  closed  (devProg  /  wire  >=
+               1.11  at  the  band  edge,  ~1.1e4  by  d0  =
+               1/2)  -  residual  =  the  S9  band-emptiness
+               question  (B6  cross-check  pending).  File  1738
+               lines,  0  sorry,  full  tree  green.
      WinCount (the hWin SHINK, GATED:  the  face's  OPEN  CONTENT  =
               zero-exclusion  above  the  classical  frontier:
               (A)  tPT  :=  30610046000  pins  the  rigorous

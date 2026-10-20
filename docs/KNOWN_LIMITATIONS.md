@@ -434,6 +434,63 @@ encouragement for route A and a violation is a discovery (the shape
 of the squeeze failing at trial points). Route (C) — extending the
 verified frontier — is external record-keeping.
 
+**Discovery 0125 (2026-10-19 — S8: the left-flank S3 WALL, in the
+machine, at the square-root schedule):** the S3 LEFT LEG of
+G-hs3-left is now discharged IN BODY, in `T4OffL.lean` section S8
+(the file is 1738 lines, 0 sorry, full tree green). Content:
+(1) `t4l_schedB (t, sigma) := (n4 t)^{1/(2 sigma)}` — the
+square-root schedule; at `n = schedB` the first T4 term computes
+`(1/2)*n^{-sigma} = (1/2)*(n4 t)^{-1/2}` — exactly the on-line
+T1 scale — and `t4l_sched_pow` records the single schedule
+fact (for `a > 0`, `n >= schedB` implies `n^a >= (n4 t)^{a/(2
+sigma)}`). (2) The left-norm win: `t4l_wall_norm1` (`||sL|| <=
+||sOn||` on the band) and `t4l_wall_norm_prod` (the triple product
+`sL(sL+1)(sL+2)` is termwise norm-smaller than the on-line
+product). (3) The T3 coefficient pins, exact 99th-power `norm_num`:
+`t4l_T3pin` (`(31000000)^{2/99} >= 500/499`), `t4l_T3pin2`
+(`(31000000)^{2/99} >= 10/9`), and `t4l_T3margin` — for
+`sigma <= 99/200`: `(n4 t)^{(1-2sigma)/sigma} >= 5/(2(sigma+2))`,
+the one power margin that absorbs the 216-vs-540 constant ratio
+(split at `sigma = 1/4`: the pin2 route for `sigma >= 1/4`, the
+n4-square route for `sigma < 1/4`). (4) The termwise walls
+`t4l_wall_T1/T2/T3` against `p8_B t (n4 t)` and THE MAIN LEFT WALL
+`t4l_wall_tuned`: for `t >= 1000`, `1/200 <= d0 < 1/2`, EVERY `n`
+at or above `t4l_schedB t (1/2 - d0)`: `||p4_em_expr (t4l_sOffL t
+d0) n|| <= p8_B t (n4 t)` — the mirror, on the left flank, of
+`t4wall_offline_le_bwires` (T4OffD) on the right flank. (5) The
+endpoint-face composition `t4l_face_left_body` (the same witnesses
+satisfy `||p4_em_expr(sL) n|| <= S4A.BwireR t d0 + t4m_MwireOff t
+d0`, via the band identity `BwireR = p8_B t (n4 t)` plus M-wire
+nonnegativity) and `t4l_face_left_band` (for EVERY band off-pair at
+`t0 >= 10^10`, `n = ceil(schedB)` witnesses the wall). The S8
+statements were pre-checked numerically before Lean
+(`tmp/s35b_leftflank_precheck.py`, dps50 mpmath detector port with
+the right-wall gate clean at 0.7990): at the square-root schedule
+the max termwise ratio against `p8_B(t, n4(t))` is exactly 1.0000
+on the survey grid (T1 matches by construction, T2/T3 strictly
+below), and the T3 coefficient pin carries ~2.47x worst-case
+headroom (log10 0.3929). The `d0 = 1/2` slice (sigma = 0) remains
+the 0121 barrier — the square-root schedule diverges at sigma
+= 0 and is excluded by `d0 < 1/2`.
+
+STATUS OF G-hs3-left after 0125 (correcting the pre-check
+overstatement that the left face is “fully body-dischargeable”):
+* **S3 left leg: MACHINABLE IN THE BODY** at the square-root
+  schedule (t4l_wall_tuned / t4l_face_left_body /
+  t4l_face_left_band).
+* **S1 leg: NOT closed.** The pre-check measured
+  `devProg(t, d0) / (p8_B(t, n4) + MrLift(t, d0)) >= 1.11` at
+  the band edge `d0 = 1/200`, growing with d0 (×10 by
+  `d0 = 0.015`, ×178 by `d0 = 0.2`, ×11136 by
+  `d0 = 1/2`): the tuned-tail Qside cannot sit between the floor
+  and the wire on the band, so the band squeeze window is
+  numerically EMPTY under the endpoint's concrete definitions.
+* **Residual (next unit, S9, pending the B6 cross-check):**
+  whether the endpoint's left face reduces to BAND-EMPTINESS above
+  the frontier (no band off-pair can satisfy S1 and S3 jointly),
+  and what the P1–P4 pin family's role is if the squeeze
+  window is empty.
+
 The barriers of T4OffL say nothing about whether left-flank zeros
 exist: they are FORMAL NEGATIVE RESULTS about what the current
 machine wire can do, stated exactly. No RH claim is made or implied.
