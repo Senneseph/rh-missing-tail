@@ -1541,13 +1541,114 @@ for the ACTUAL zeta zero set.  The branches:
       queue-able,  non-blocking  second-kernel  replay  of  the
       [Z78L]  DELTA  files  (the  foundation  already  has  NanoDa
       coverage  from  the  2026-10-08  teal-sea  comparator  run).
-      What  does  not  move:  no  RH  claim;  the  open  face  hOffT
+      What  does  not  move:  no  RH  claim;  the  open  face
+      (hOffG  after  0142,  hOffT  at  the  time  of  writing)
       remains  exactly  where  the  external  inputs  are
       silent;  the  next  steps  of  the  standing  queue  are
-      unchanged  (board  supersession  watch  for  anything
-      beyond  174963413/200000000;  internal-flank  /  new-
-      analytic  work  toward  hOffT;  broader  RH  levers
+      unchanged  in  kind  (board  supersession  watch  for
+      anything  beyond  the  adopted  frontier  --  now
+      8748087/10^7  after  0142;  internal-flank  /  new-
+      analytic  work  toward  the  face;  broader  RH  levers
       beyond  endpoint  tail  maintenance).
+
+  BOARD  SUPERSESSION  EXECUTED:  THE  FIVE-STEP-AFFINE  RECORD
+      SUPERSEDES  [Z78T]  --  PROTOCOL  RUN  END  TO  END
+      (discovery  0142).  The  morning  of  2026-10-21,  the
+      board  watcher  fired:  ONE  DAY  after  0141  proved  the
+      adopted  two-level-affine  family  is  at  its  family-
+      internal  optimum  (no  tuning  knob  remains;  the  next
+      record  must  be  a  NEW  structural  cycle),  the  board
+      top  moved  to  EXACTLY  that  species.  NEW  TOP:
+      gao-five-step-affine-20261020  (PR  #68,  Zhongpai  Gao,
+      MERGED  2026-10-21T07:16:31Z;  certificate  theta_exact
+      "8748087/10000000",  three-kernel  admission),  the  ALL-
+      DIRICHLET  zero-free  half-plane  at  the  CERTIFIED
+      RATIONAL  boundary  gaoUpper  =  8748087/10^7  =
+      0.8748087  (pole  excluded)  --  8.365e-6  stronger  than
+      [Z78T],  25-record  board  top.  Structure:  ArviFoxy's
+      two-level  returned-source  organization  extended  to  FIVE
+      affine  junctions  (recursive  region-price  identities,
+      1e-8  per-stage  slack),  joint  count  of  returned  HIGH
+      histories  over  complete  arithmetic  histories  with  one
+      final  density  payment,  the  -h(q)R  double-count
+      correction,  exact  rational  Bernstein-basis  endpoint
+      certificates,  the  kappa-feedback  step  (the  Xu-Sang
+      mechanism  of  0137  inside  a  tracker  construction),
+      and  a  CONCRETE  root  moment  built  from  actual  finite
+      native  sources  ("not  a  hypothesis  of  this  theorem");
+      builds  on  10  records  INCLUDING  two-level-affine --  a
+      direct  descendant  of  [Z78T].  B6  SECTION-8  PROTOCOL
+      (third  end-to-end  demonstration):  (1)  identity:
+      candidate  fetched  at  the  exact  source  commit
+      f07bb241  (1514  self-contained  candidate  Lean  files);
+      entrypoint  byte-identical  to  the  raw  GitHub  fetch;
+      statement  =  canonical  all-Dirichlet  at  8748087/10^7.
+      (2)  INDEPENDENT  REPLAY  PASS  (2026-10-21,  this
+      program's  standard  environment,  same  pins/patches  as
+      0134):  both  Submissions  dependency  subtrees  BYTE-
+      IDENTICAL  to  the  0134  replay  tree  at  f07bb241;
+      snapshot  guard  1514/1514;  4669/4669  modules  compiled
+      from  source  through  Lean  4.34.1,  0  failures  (3089s);
+      kernel  statement  match  at  the  exact  rational
+      (one-line  bridge  to  Candidate.bound  type-checks) ;
+      axiom  cone  of  the  canonical  statement  =  exactly
+      {propext,  Classical.choice,  Quot.sound};  0  sorry  in
+      the  1514-file  cone.  Record:
+      tmp/b6audit/tracker/gao5_replay/.  (3)  Pin
+      equivalence:  the  foundation  is  the  same  byte-identical
+      openai-baseline  subtrees  under  the  B6  audit  --  no
+      OAI  delta.  (4)  IN-TREE  ADOPTION  AS  [Z78G]:  new
+      module  formal/RhAttack/Z78Gao.lean  (named  input
+      externalZeroFree78Gao  at  gaoUpper;  gaoD0max  =
+      gaoUpper  -  1/2  =  3748087/10^7  =  0.3748087;
+      norm_num  chain  gaoUpper  <  qxUpper  <  liuBUpper;
+      extGao_implies_extTrack/_extLiu/_ext78  --  the  full
+      implication  chain  [Z78G]  ->  [Z78T]  ->  [Z78L]  ->
+      [Z78]  preserved;  zetaZeroStripGao  /  offPairD0leGao
+      re-sharpened  at  the  new  constant).  RHEnd  PART  B15
+      (ADDITIVE  --  B12/B13/B14  preserved;  RHEnd.lean  2839
+      lines,  0  sorry,  full  tree  green):  the  slice
+      (gaoD0max,  qxD0max]  is  closed  IN  BODY  (B15.1);  the
+      NEW  terminal  endpoint  rh_program78_stripfront_mach_
+      unifiedGao  (+  _PT2)  carries  ONE  open  face  hOffG  (no
+      off-pair  on  [H,  inf)  x  (0,  gaoD0max]);  the  0133
+      track  endpoint  is  a  theorem  of  the  0142  one  (B15.4/
+      B15.5).  (5)  PAPER  AUDIT  (four  pages,  TeX  on  file,
+      parameters  +  source-bindings  JSON  hash-pinned):  read
+      in  full;  the  moment  is  BUILT  by  backward  induction
+      from  genuine  finite  native  sources  (no  residual
+      hypothesis  --  per  the  bindings  file  itself);  the
+      endpoint  argument  (beta  >  theta  contradiction,
+      Bernstein  certificates  at  theta  -  1e-7,  kappa-
+      feedback,  Levy  +  Collet  improvement,  inherited
+      Hecke-to-Dirichlet  transfer)  is  internally  consistent
+      with  no  load-bearing  flaws  found  at  the  audit
+      level;  the  exact  coefficients  are  the  kernel's  job
+      (re-verified  by  the  replay).  NO  RH  CLAIM:  the  face
+      is  a  zero-exclusion  statement  in  the  unverified
+      region;  [Z78G]  is  an  external  zero-free  half-plane,
+      still  0.3748087  from  the  critical  line  in  off-line
+      distance.
+
+      UPDATED  TERMINAL  LEDGER  (post-0142):  [Z-PT2]  record
+      below  the  frontier  +  ONE  open  face  hOffG  on
+      (tPT2,  inf)  x  (0,  gaoD0max]  with  gaoD0max  =
+      3748087/10^7  =  0.3748087  (record  footing,  [Z78G]-
+      sharp  --  the  squeeze  certificate  still  covers  the
+      face  fully;  face  minimum  still  at  the  d0  =  1/200
+      edge,  margin  >=  1.1136  measured  to  the  frontier)
+      +  [Z78G]  (closes  d0  >  gaoD0max  in  body;  [Z78T],
+      [Z78L],  [Z78]  remain  COROLLARY  inputs  of  it,  each
+      a  named  theorem  of  the  0142  endpoint).  The  face  is
+      STILL  exactly  the  region  where  the  external  inputs
+      are  silent  --  its  certified  width  moved  by  8.365e-6
+      in  this  step  (cumulative  from  3/8:  1.91300e-4;  and
+      the  face  edge  0.3748087  is  now  only  8.365e-6  below
+      the  old  0133  edge).  SNAPSHOT  CAVEAT  UPDATED:  the
+      board  is  live  again  --  the  watcher  anchor  is  now
+      8748087/10^7  (gao-five-step-affine-20261020),  and  the
+      same  unit  (new  constant  module  +  B-part  +  replay
+      +  docs)  is  the  upgrade  path  for  any  successor.
 
 
 

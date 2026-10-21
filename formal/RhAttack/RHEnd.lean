@@ -133,6 +133,7 @@ import RhAttack.Z78Strip
 import RhAttack.Z78P12
 import RhAttack.Z78Liu
 import RhAttack.Z78Track
+import RhAttack.Z78Gao
 import RhAttack.S4WinCap
 import RhAttack.WinCount
 import RhAttack.P4Limit
@@ -2624,6 +2625,215 @@ theorem rh_program78_stripfront_mach_unifiedLiu_PT2_ofTrack (q : ZeroSet)
     RH q :=
   rh_program78_stripfront_mach_unifiedLiu_ofTrack q hzT hqz honline
     Qside WinC.tPT2 (by norm_num [WinC.tPT2]) hPT2 hOffTPT2
+
+/-!  PART  B15  (discovery  0142).
+
+   0133  left  the  open  face  hOffT  on  H  <=  t0,  0  <
+   d0  <=  qxD0max  --  the  [Z78T]-sharp  strip  interior.
+   The  tracker  board  moved  one  day  after  the  0141
+   ceiling  analysis  of  the  cycle63  family  predicted
+   would  be  the  only  way  it  could  move:  [Z78G]
+   (QuasiRiemannTracker  record
+   gao-five-step-affine-20261020,  PR  #68,  Zhongpai  Gao,
+   MERGED  2026-10-21,  first  verified  2026-10-21T02:06:55Z;
+   the  kernel-verified  ALL-DIRICHLET  zero-free  half-plane
+   at  the  certified  rational  boundary
+   gaoUpper  =  8748087/10^7  =  0.8748087,  comparator  plus
+   Lean  /  nanoda  /  con-ron  in  the  tracker's  pinned
+   sandbox  AND  this  program's  independent  second-party
+   replay  --  see  the  Z78Gao  module  header  for  the  full
+   provenance,  the  replay  record  and  the  snapshot
+   caveat)  is  a  STRICT  STRENGTHENING  of  [Z78T]  at
+   gaoUpper  <  qxUpper  (extGao_implies_extTrack,
+   transitively  extGao_implies_extLiu  /  _ext78):  it  is  a
+   FIVE-step  affine  record  building  ON  two-level-affine,
+   i.e.  a  genuine  new  structural  cycle,  exactly  the
+   species  0141  identified  as  the  only  route  past  the
+   cycle63  ceiling.  Zeros  of  an  actual  set  sit  in
+   [1  -  gaoUpper,  gaoUpper],  so  every  off-pair
+   satisfies  d0  <=  gaoD0max  =  gaoUpper  -  1/2  =
+   3748087/10^7  =  0.3748087  <  qxD0max
+   (offPairD0leGao,  sharp).  The  open  face  shrinks
+   accordingly  --  from  (0,  qxD0max]  to  (0,
+   gaoD0max],  the  [Z78G]-sharp  strip  interior  --  and  the
+   slice  (gaoD0max,  qxD0max]  of  the  B14  face  is  closed
+   IN  BODY  from  [Z78G]  itself.  The  step  removes
+   qxD0max  -  gaoD0max  =  8.365e-6  of  face  width
+   (about  one-fifteenth  of  the  0133  step).  No  RH
+   claim:  the  face  is  a  zero-exclusion  statement  in  the
+   unverified  region;  the  input  class  is  unchanged  in
+   kind  --  an  external  zero-free  half-plane,  still  far
+   from  1/2  --  and  the  chain  stays  a  REPEATABLE
+   MECHANISM  (B6  packet  section  8,  now  demonstrated  on
+   a  SECOND  supersession):  a  newer  verified  snapshot  of
+   the  tracker  frontier  supersedes  this  part
+   mechanically.  -/
+
+/--  B15.1  THE  OUTER  SLICE  OF  THE  OLD  FACE  IS  CLOSED
+    IN  BODY  FROM  [Z78G]:  for  an  actual-set  zero  set,
+    no  off-pair  with  d0  >  gaoD0max  (of  any  height  t0
+    >  0):  offPairD0leGao  already  bounds  every  off-pair
+    to  d0  <=  gaoD0max.  In  particular  the  slice
+    (gaoD0max,  qxD0max]  of  the  B14  face  --  and  a
+    fortiori  (gaoD0max,  liuD0max]  of  the  B13  face  and
+    (gaoD0max,  3/8]  of  the  B12  face  --  needs  no  face
+    at  all.  No  RH  claim.  -/
+theorem rhend_sliceGaoExcl (q : ZeroSet)
+    (hzG : Z78Gao.externalZeroFree78Gao)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (t0 d0 : ℝ) (ht0 : 0 < t0) (hd0 : 0 < d0)
+    (hG : Z78Gao.gaoD0max < d0) :
+    ¬ offPair q t0 d0 := by
+  intro hp
+  have hle := Z78Gao.offPairD0leGao q hzG hqz t0 d0 ht0 hd0 hp
+  linarith
+
+/--  B15.2  THE  FIVE-STEP-UNIFIED  ENDPOINT:  the  B12
+    endpoint  with  the  external  input  upgraded
+    [Z78]  ->  [Z78G]  and  the  face  shrunk  to  0  <  d0
+    <=  gaoD0max  (the  [Z78G]-sharp  strip  interior).
+    Above  H,  any  off-pair  has  d0  <=  gaoD0max  BY
+    [Z78G]  (offPairD0leGao)  before  the  face  is  applied  -
+    the  d0  <=  1/2  split  of  B11  stays  away  in  the
+    S1/S3  legs  and  in  the  S4-covered  leg;  the  far
+    region  (d0  >  1/2)  is  closed  by  the  [Z78]  derived
+    from  [Z78G].  No  RH  claim.  -/
+theorem rh_program78_stripfront_mach_unifiedGao (q : ZeroSet)
+    (hzG : Z78Gao.externalZeroFree78Gao)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) → (|ρ.im| : ℝ) <
+      (707 : ℝ) / 50 → ρ.re = 1 / 2)
+    (Qside : ℝ × ℝ → ℝ)
+    (H : ℝ) (hH : 1000 ≤ H)
+    (hPT : WinC.allOnLineUpTo q H)
+    (hOffG : ∀ (t0 d0 : ℝ), H ≤ t0 → 0 < d0 →
+      d0 ≤ Z78Gao.gaoD0max → ¬ offPair q t0 d0) :
+    RH q := by
+  have hz78 : Z78.externalZeroFree78 := Z78Gao.extGao_implies_ext78 hzG
+  refine S4A.rh_from_regime_closures q Qside Z78P12.MfP devProg
+    Z78P12.BwireP (fun p => MrLift p.1 p.2) floProg
+    ?_ ?_ ?_ ?_ ?_ ?_
+  · --  S1  witness  leg:  below  H  =  vacuous  (the  record);
+      --  above  H:  [Z78G]  bounds  d0  to  gaoD0max,  the  face
+      --  kills.
+    intro t0 d0 ht0 hd0 hp
+    by_cases hle : t0 ≤ H
+    · exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
+        (le_of_lt ht0) hle) d0 hp)
+    · have hL : d0 ≤ Z78Gao.gaoD0max :=
+        Z78Gao.offPairD0leGao q hzG hqz t0 d0 ht0 hd0 hp
+      exact False.elim ((hOffG t0 d0
+        (le_of_lt (not_le.mp hle)) hd0 hL) hp)
+  · --  S2  leg:  covered  =  in  body;  low  band  =  vacuous
+      --  below  H;  far  =  [Z78]  (from  [Z78G]).
+    intro t0 d0 ht0 hd0 hp
+    by_cases hd0h : d0 ≤ (1 / 2 : ℝ)
+    · by_cases ht0k : 1000 ≤ t0
+      · exact hs2_covered q honline t0 d0 ht0 ht0k hd0 hd0h hp
+      · have hle : t0 ≤ H := le_trans (le_of_lt (not_le.mp ht0k)) hH
+        exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
+          (le_of_lt ht0) hle) d0 hp)
+    · exact False.elim (Z78P12.offPairFarEmpty q hz78 hqz t0 d0
+        (not_le.mp hd0h) hp)
+  · --  S3  leg:  below  H  =  vacuous  (the  record);  above  H:
+      --  [Z78G]  bounds  d0  to  gaoD0max,  the  face  kills.
+    intro t0 d0 ht0 hd0 hp
+    by_cases hle : t0 ≤ H
+    · exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
+        (le_of_lt ht0) hle) d0 hp)
+    · have hL : d0 ≤ Z78Gao.gaoD0max :=
+        Z78Gao.offPairD0leGao q hzG hqz t0 d0 ht0 hd0 hp
+      exact False.elim ((hOffG t0 d0
+        (le_of_lt (not_le.mp hle)) hd0 hL) hp)
+  · --  S4  covered:  below  H  =  vacuous  (the  record);
+      --  above  H:  [Z78G]  bounds  d0  to  gaoD0max,  the  face
+      --  kills.
+    intro t0 d0 ht0 hd0 hd0u hp
+    by_cases hle : t0 ≤ H
+    · exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
+        (by linarith [ht0]) hle) d0 hp)
+    · have hL : d0 ≤ Z78Gao.gaoD0max :=
+        Z78Gao.offPairD0leGao q hzG hqz t0 d0
+        (show 0 < t0 from by linarith [ht0]) hd0 hp
+      exact False.elim ((hOffG t0 d0
+        (le_of_lt (not_le.mp hle)) hd0 hL) hp)
+  · --  S4  low  band:  its  whole  domain  (0,  1000)  sits
+      --  below  the  frontier:  vacuous.
+    intro t0 d0 ht0 ht0u hd0 hd0u hp
+    have hle : t0 ≤ H := le_trans (le_of_lt ht0u) hH
+    exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
+      (le_of_lt ht0) hle) d0 hp)
+  · --  S4  far  region:  [Z78]  (from  [Z78G]).
+    intro t0 d0 ht0 hd0 hd0f hp
+    exact False.elim (Z78P12.offPairFarEmpty q hz78 hqz t0 d0 hd0f hp)
+
+/--  B15.3  THE  FIVE-STEP  ENDPOINT  AT  THE  PLATT-TRUDGIAN
+    FRONTIER  (the  [Z-PT2]  instantiation):  the  entire  named
+    residue  lives  STRICTLY  ABOVE  3,000,175,332,800,  as  ONE
+    zero-exclusion  face  (no  off-pair  in  0  <  d0  <=
+    gaoD0max  above  the  frontier  -  the  [Z78G]-sharp  strip
+    interior)  plus  [Z78G]  itself  (which  closes  d0  >
+    gaoD0max  in  body).  No  RH  claim.  -/
+theorem rh_program78_stripfront_mach_unifiedGao_PT2 (q : ZeroSet)
+    (hzG : Z78Gao.externalZeroFree78Gao)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) → (|ρ.im| : ℝ) <
+      (707 : ℝ) / 50 → ρ.re = 1 / 2)
+    (Qside : ℝ × ℝ → ℝ)
+    (hPT2 : WinC.allOnLineUpTo q WinC.tPT2)
+    (hOffGPT2 : ∀ (t0 d0 : ℝ), WinC.tPT2 ≤ t0 → 0 < d0 →
+      d0 ≤ Z78Gao.gaoD0max → ¬ offPair q t0 d0) :
+    RH q :=
+  rh_program78_stripfront_mach_unifiedGao q hzG hqz honline Qside
+    WinC.tPT2 (by norm_num [WinC.tPT2]) hPT2 hOffGPT2
+
+/--  B15.4  THE  0133  TRACK  ENDPOINT  AS  A  THEOREM  OF  THE
+    [Z78G]  ENDPOINT  (in  body):  given  the  [Z78G]  input
+    and  its  terminal  face  hOffG  on  0  <  d0  <=
+    gaoD0max,  the  older  track-form  endpoint  follows  --  the
+    track  face  (0  <  d0  <=  qxD0max)  splits  into  the
+    gaoD0max  half  (the  hOffG  face)  and  the  slice
+    (gaoD0max,  qxD0max]  (closed  in  body  from  [Z78G]).
+    The  0133  terminal  statement  is  thus  a  THEOREM  of
+    the  0142  one.  No  RH  claim.  -/
+theorem rh_program78_stripfront_mach_unifiedTrack_ofGao (q : ZeroSet)
+    (hzG : Z78Gao.externalZeroFree78Gao)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) → (|ρ.im| : ℝ) <
+      (707 : ℝ) / 50 → ρ.re = 1 / 2)
+    (Qside : ℝ × ℝ → ℝ)
+    (H : ℝ) (hH : 1000 ≤ H)
+    (hPT : WinC.allOnLineUpTo q H)
+    (hOffG : ∀ (t0 d0 : ℝ), H ≤ t0 → 0 < d0 →
+      d0 ≤ Z78Gao.gaoD0max → ¬ offPair q t0 d0) :
+    RH q := by
+  have hzT : Z78Track.externalZeroFree78Track :=
+    Z78Gao.extGao_implies_extTrack hzG
+  apply rh_program78_stripfront_mach_unifiedTrack q hzT hqz
+    honline Qside H hH hPT
+  intro t0 d0 ht0 hd0 hd0T hp
+  by_cases hleG : d0 ≤ Z78Gao.gaoD0max
+  · exact False.elim ((hOffG t0 d0 ht0 hd0 hleG) hp)
+  · exact False.elim (rhend_sliceGaoExcl q hzG hqz t0 d0
+      (by linarith [ht0, hH]) hd0 (not_le.mp hleG) hp)
+
+/--  B15.5  THE  [Z-PT2]  INSTANCE  OF  B15.4  (the  0133
+    terminal  statement  at  tPT2  is  a  theorem  of  the
+    0142  endpoint  with  the  [Z-PT2]  record).  No  RH
+    claim.  -/
+theorem rh_program78_stripfront_mach_unifiedTrack_PT2_ofGao (q : ZeroSet)
+    (hzG : Z78Gao.externalZeroFree78Gao)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) → (|ρ.im| : ℝ) <
+      (707 : ℝ) / 50 → ρ.re = 1 / 2)
+    (Qside : ℝ × ℝ → ℝ)
+    (hPT2 : WinC.allOnLineUpTo q WinC.tPT2)
+    (hOffGPT2 : ∀ (t0 d0 : ℝ), WinC.tPT2 ≤ t0 → 0 < d0 →
+      d0 ≤ Z78Gao.gaoD0max → ¬ offPair q t0 d0) :
+    RH q :=
+  rh_program78_stripfront_mach_unifiedTrack_ofGao q hzG hqz
+    honline Qside WinC.tPT2 (by norm_num [WinC.tPT2]) hPT2
+    hOffGPT2
 
 /-!  -/
 end RHEnd

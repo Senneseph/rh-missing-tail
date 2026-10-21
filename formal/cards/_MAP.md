@@ -399,6 +399,33 @@ A chain of named theorems;  each box names the modules.
                    Quot.sound});  SNAPSHOT  of  the  moving
                    board  -  2026-10-20  verified  state;
                    foundation inherits the B6 OAI 003  class)
+     Z78Gao       (named  external  input  [Z78G]:  the
+                   QuasiRiemannTracker  FRONTIER  record  gao-
+                   five-step-affine-20261020  (PR  #68,  Zhongpai
+                   Gao,  MERGED  2026-10-21,  framework-verified,
+                   source  commit  f07bb241...)  -  the  five-stage
+                   affine  all-Dirichlet  zero-free  half-plane  at
+                   the  exact  rational  gaoUpper  =  8748087/10^7
+                   =  0.8748087  (pole  excluded);  a  direct
+                   DESCENDANT  of  [Z78T]  (builds  on  two-level-
+                   affine-20261019);  STRICTLY  STRENGTHENS
+                   [Z78T]  (gaoUpper  <  qxUpper)  ->  the  whole
+                   chain  [Z78G]  ->  [Z78T]  ->  [Z78L]  ->  [Z78];
+                   zetaZeroStripGao,  offPairD0leGao  (d0  <=
+                   gaoD0max  =  3748087/10^7  =  0.3748087  <
+                   qxD0max  <  3/8,  sharp);  INDEPENDENT  second-
+                   party  replay  PASS  (discovery  0142:  4669/4669
+                   modules  from  source,  kernel  statement  match
+                   at  the  exact  rational,  axiom  cone  exactly
+                   {propext,  Classical.choice,  Quot.sound},  0
+                   sorry;  both  Submissions  subtrees  byte-
+                   identical  to  the  0134  tree  -  no  OAI  delta);
+                   four-page  paper  read  in  full,  no  load-
+                   bearing  flaws  found  (moment  BUILT  from
+                   actual  finite  native  sources);  SNAPSHOT  of
+                   the  moving  board  -  2026-10-21  verified
+                   state,  board  top  of  25  records;
+                   foundation  inherits  the  B6  OAI  003  class)
      FloorUnif    (S2 floor == S4 own-mass:  floStripMin = mown
                    on the covered band;  s4StripUnifiedFloor;
                    s2ActualFullBand,  no t0 cap)
@@ -680,7 +707,37 @@ A chain of named theorems;  each box names the modules.
                    inputs).  Snapshot  caveat:  the  board
                    moves  daily  -  supersession  is  the
                    designed  exit  (B6  section  8).  File
-                   2629  lines,  0  sorry,  full  tree  green.
+                   2629  lines  at  B14;  NOW  2839,  0  sorry,
+                   full  tree  green.  PART  B15  (discovery
+                   0142):  the  five-step-affine  record  SUPER-
+                   SEDES  [Z78T]  (Gao,  0.8748087)  -  [Z78G]
+                   (Z78Gao,  see  above)  STRICTLY  STRENGTHENS
+                   [Z78T]:  offPairD0leGao  bounds  every  actual-
+                   set  off-pair  to  d0  <=  gaoD0max  =
+                   3748087/10^7  =  0.3748087  (sharp);  the
+                   endpoint  is  restated  as  rh_program78_
+                   stripfront_mach_unifiedGao  (+_PT2)  with  the
+                   single  open  face  hOffG  (no  off-pair  on
+                   [H,  inf)  x  (0,  gaoD0max])  -  identical
+                   proof  shape  to  B14  with  the  derived  [Z78]
+                   in  the  S2/S4-far  legs;  the  slice
+                   (gaoD0max,  qxD0max]  of  the  B14  face  is
+                   closed  IN  BODY  FROM  [Z78G]  (rhend_slice-
+                   GaoExcl)  and  the  0133  terminal  statement
+                   is  a  THEOREM  of  the  0142  one  (unified-
+                   Track_ofGao  (+_PT2)).  Step  size  8.365e-6
+                   (~1/15  of  the  0133  step  -  decaying
+                   returns  as  the  ladders  deepen,  the  0141
+                   forecast).  UPDATED  TERMINAL  LEDGER:  [Z-PT2]
+                   record  below  the  frontier  +  ONE  open  face
+                   hOffG  (the  [Z78G]-sharp  strip  interior,
+                   record  footing)  +  [Z78G]  (closes  ALL  of
+                   d0  >  gaoD0max  in  body;  [Z78T]  /  [Z78L]
+                   /  [Z78]  corollary  inputs).  Snapshot  caveat:
+                   the  board  is  live  again  -  the  watcher
+                   anchor  is  8748087/10^7;  supersession  is  the
+                   designed  exit,  now  a  demonstrated  conveyor
+                   (three  end-to-end  runs).  No  RH  claim.
 
   Foundations / vocabulary
      B0 (composition atoms)  B4/B5 (detector-line notation)

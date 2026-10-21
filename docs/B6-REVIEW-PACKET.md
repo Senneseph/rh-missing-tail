@@ -357,8 +357,8 @@ residual-pin structure.
     status with the two re-opens of section 6 -
     nothing else moves.
 
-## 8. Input-upgrade protocol (demonstrated by [Z78L],
-    discovery 0131)
+## 8. Input-upgrade protocol (demonstrated by [Z78L] 0131,
+    [Z78T] 0133/0134, [Z78G] 0142)
 
   The [Z78L] adoption (Liu, arXiv 2610.12234 - the improved
   boundary B_inf = 0.874957019420098946... < 7/8) is the first
@@ -418,15 +418,18 @@ residual-pin structure.
   The face-shrinking chain (0110/0108 record shrink -> 0122
   flank split -> 0126 band-empty -> 0127 unification ->
   0129 3/8-shrink -> 0131 Liu-shrink -> 0133 tracker-
-  shrink) is therefore NOT at a
+  shrink -> 0142 five-step shrink) is therefore NOT at a
   hard terminus: it is a repeatable mechanism whose next
   shrink is bounded by the next strictly stronger VERIFIED
   zero-free input (Liu's optimality note: her constant is
   best within the specified comparison system, so the next
-  strength must come from a genuinely new method) or by a
-  verified record/interior input on another route.
+  strength must come from a genuinely new method — and
+  0141 showed the adopted cycle63 family itself to be at
+  its own ceiling, so the next record must be a new
+  structural cycle, which is exactly what 0142 was) or by
+  a verified record/interior input on another route.
 
-  EXECUTIONS (the protocol has now run TWICE, both
+  EXECUTIONS (the protocol has now run THREE times, each
   end-to-end: adoption + independent second-party replay):
 
   * 0131 (2026-10-20): [Z78L] - Liu's formalization; single
@@ -477,3 +480,55 @@ residual-pin structure.
     board - the adopted constant is the verified state of
     a date, and supersession by a newer snapshot is the
     designed exit, executed by the same unit.
+
+  * 0142 (2026-10-21, ~24h after the 0141 ceiling
+    analysis of the cycle63 family): [Z78G] - the
+    QuasiRiemannTracker top record gao-five-step-affine-
+    20261020 (PR #68, Zhongpai Gao, merged 2026-10-21,
+    framework-verified, source commit f07bb241...); all-
+    Dirichlet statement at the EXACT RATIONAL 8748087/10^7
+    = 0.8748087 (gate 1's preferred form); a FIVE-stage
+    affine construction (ArviFoxy's two-level returned-
+    source organization deepened to five junctions, joint
+    returned-HISTORY count with one final density payment,
+    exact rational Bernstein-basis certificates, the Xu-
+    Sang kappa-feedback mechanism, a CONCRETE root moment
+    built from actual finite native sources - "not a
+    hypothesis of this theorem"); direct descendant of
+    [Z78T] (builds on two-level-affine-20261019).
+    INDEPENDENT second-party replay same day
+    (tmp/b6audit/tracker/gao5_replay/): both Submissions
+    dependency subtrees BYTE-IDENTICAL to the 0134 replay
+    tree at f07bb241 (gate 3 in its cleanest form - no
+    OAI delta at all); snapshot guard 1514/1514;
+    4669/4669 modules (1514 candidate + 2927 openai-
+    baseline + 228 akashlevy) compiled from source
+    through the Lean 4.34.1 kernel (0 failures, 3088.7 s);
+    kernel-level statement match at the exact rational
+    (one-line bridge `exact Candidate.bound` type-
+    checks); axiom cone of the canonical statement exactly
+    {propext, Classical.choice, Quot.sound}; 0 sorry in
+    the 1514-file cone. Official receipt: certificate
+    theta_exact 8748087/10000000, three kernels (Lean
+    default, nanoda, con-ron), run 39514163334.
+    PAPER AUDIT (four pages, B6 item-5 protocol,
+    tmp/b6audit/tracker/gao5/PAPER-AUDIT.md): no load-
+    bearing flaws found at the audit level; the moment is
+    built by backward induction from genuine finite
+    sources (per the bindings file: "no moment, RAW,
+    count or induction hypothesis remains"); the endpoint
+    argument is internally consistent (Bernstein
+    certificates at theta - 1e-7; kappa-feedback; the
+    inherited Hecke-to-Dirichlet transfer is the OAI
+    section closed in 0135). Face: (0, qxD0max] -> (0,
+    gaoD0max], shrink 8.365e-6 (decaying returns - the
+    0141 forecast). Deviations from the official receipt
+    on file as for 0134 (default kernel only; no
+    sandbox; source-rebuilt external footprint -
+    stronger).
+  * The board watcher's ADOPTED anchor moved to 8748087/
+    10^7 (gao-five-step-affine-20261020) at 0142; a
+    strictly stronger merged record supersedes by this
+    same unit (new constant module + B-part restatement +
+    independent replay + docs), now a demonstrated
+    conveyor with THREE successful runs.

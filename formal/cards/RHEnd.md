@@ -1,4 +1,4 @@
-# RHEnd.lean  (2629 lines)
+# RHEnd.lean  (2839 lines)
 WHAT:  THE ENDPOINT of the program on the ACTUAL zeta zero set under the
          named external input [Z78] (Re s > 7/8 zero-free), at the
          CONCRETE wire. RESIDUAL LEDGER after Part B12 (discovery 0129,
@@ -253,4 +253,34 @@ GOTCHA: No RH claim: hs1/hs3/hWin/hS2low are OPEN (data and bound-level,
           and [Z78] remain corollary inputs). SNAPSHOT caveat: the board
           moves daily - supersession by a newer snapshot is the designed
           exit, executed by the same unit (B6 packet section 8). No RH
+          claim. PART B15 (discovery 0142): the tracker board moved one
+          day after the 0141 ceiling analysis of the cycle63 family -
+          [Z78G] (QuasiRiemannTracker record gao-five-step-
+          affine-20261020, PR #68, Zhongpai Gao, MERGED 2026-10-21,
+          framework-verified; the five-stage affine all-Dirichlet zero-
+          free half-plane at the exact rational 8748087/10^7 =
+          0.8748087; a direct DESCENDANT of [Z78T] - builds on two-
+          level-affine-20261019; independent second-party replay PASS:
+          4669/4669 modules from source, kernel statement match at the
+          exact rational, axiom cone exactly the standard three, 0
+          sorry; see the Z78Gao.lean header) STRICTLY STRENGTHENS [Z78T]
+          (gaoUpper < qxUpper, norm_num) -> the whole chain.
+          offPairD0leGao bounds EVERY actual-set off-pair to d0 <=
+          gaoD0max = gaoUpper - 1/2 = 3748087/10^7 = 0.3748087 < qxD0max
+          (SHARP). rh_program78_stripfront_mach_unifiedGao (+_PT2): the
+          endpoint under [Z78G] with the single open face hOffG (no off-
+          pair on [H, inf) x (0, gaoD0max]) - identical proof shape to
+          B14; the slice (gaoD0max, qxD0max] of the B14 face is closed
+          IN BODY (rhend_sliceGaoExcl) and the 0133 terminal statement
+          is a THEOREM of the 0142 one (unifiedTrack_ofGao (+_PT2)).
+          Step size 8.365e-6 (about one-fifteenth of the 0133 step -
+          decaying returns as the ladders deepen). File 2839 lines, 0
+          sorry, full tree green. UPDATED TERMINAL LEDGER: [Z-PT2]
+          record below the frontier + ONE open face hOffG (the
+          [Z78G]-sharp strip interior, record footing) + [Z78G] (closes
+          ALL of d0 > gaoD0max in body; [Z78T], [Z78L] and [Z78] remain
+          corollary inputs, each a named theorem of the 0142 endpoint).
+          SNAPSHOT caveat: the board is live again - the watcher anchor
+          is 8748087/10^7 and a successor supersedes by the same unit
+          (the protocol has now run three times end-to-end). No RH
           claim.
