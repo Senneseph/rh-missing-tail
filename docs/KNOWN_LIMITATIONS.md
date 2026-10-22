@@ -656,6 +656,30 @@ machine wire can do, stated exactly. No RH claim is made or implied.
   by construction, confirming no channel drift; M per row =
   eps + logzeta - lm - la - re - I_far holds to 0.0.
 
+## T2-CLOSED-FORM ADDENDUM (discovery 0153, 2026-10-22 — the t^2
+## coefficient above is NOT empirical: it is a closed-form constant
+## of the RVM channel's U_TOP cutoff; mechanism resolved)
+- C(U) = -(ln(U/2pi) + 1)/(2 pi U); at U = U_TOP = 1e30 (in-tree):
+  C = -1.0860681706e-29. Free 3-parameter fit on the 33-row face
+  (3.0001046e10 .. 9e18): C_free = -1.0860663478e-29 (rel. 1.7e-5).
+- U-ladder (s19u: I_far rebuilt at U' = 1e25, 1e20 from stored rows):
+  row-wise coefficient tracks the closed form to 6 digits (1e25) and
+  4 digits (1e20); the 1e15/1e12 steps are contaminated by U' < t
+  rows (expected). I_far convergence (s19t: 5 resolutions) — the t^2
+  is structure, not a quadrature-residual; the 0152 "grid residual"
+  hypothesis is retired, the endpoint-U kernel piece is the
+  mechanism (ln(1 - t^2/g^2) ~ -t^2/g^2 integrated with density rho
+  from t to U; antiderivative -(ln(g/2pi)+1)/(2pi g)).
+- S17 COMPLETE: 12th row, the 9e18 wall: M(9e18) = -1.458437e9
+  (23-row pre-wall law predicted -1.461e9; closed-form C matches the
+  wall row to 0.004%; eps = +0.7047 constant to the wall - no
+  channel drift).
+- 33-row pins, C = closed form: A = -25254353.62, B = +523472285.05,
+  max|resid| = 7996.9 @ 3e11 (s16 far-row band; 12 s17 rows within
+  ~+/-400). 0154: in-tree three-term clause (C as a U_TOP
+  expression, A/B pinned with margin, E <= 1e4). No in-tree change
+  yet; no RH claim.
+
 ## S1MR REPAIR NOTE (discovery 0152, 2026-10-22 — the S1Marg
 ## exploratory dip below 1 above 3.1e7 is at least partly a
 ## density-tail model artifact; exact-tail re-measurement running)

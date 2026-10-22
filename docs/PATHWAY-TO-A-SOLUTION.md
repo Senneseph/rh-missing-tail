@@ -1960,3 +1960,30 @@ dps-50 ground truth, danger regime, s0=-2 pin). Part 0 re-measures
 the 4 density-quad exp rows (A/B: dip = model artifact or real);
 part 1 extends the certified real-zero track from 2.8e7 toward
 3e10 with 6 file zeros x 24 straddles. No RH claim.
+
+### 0153 — the t^2 defect law is a channel constant (closed form in U_TOP)
+
+The three-term law's (0152) t^2 coefficient is resolved as an exact
+structural constant of the RVM density channel, not an empirical fit:
+with U = U_TOP = 1e30 (the in-tree upper end of the I_far density
+integral),
+
+    C(U) = -(ln(U/2pi) + 1) / (2 pi U)   =>   C(1e30) = -1.0860681706e-29.
+
+The free 3-parameter fit on the 33-row face (t = 3.0001046e10 .. 9e18)
+returns C_free = -1.0860663478e-29 (relative delta 1.7e-5). The U-ladder
+experiment (scripts/rh/s19u_u_cutoff.py: I_far rebuilt at U' = 1e25/1e20
+from the stored rows) tracks the closed form row-wise to 6 digits at
+1e25 and 4 digits at 1e20 - the channel's U cutoff sets the coefficient.
+I_far numerical convergence verified (scripts/rh/s19t_far_res.py: five
+independent resolutions agree within < 0.5 absolute): the t^2 is
+structure, not a quadrature artifact. S17 completed this unit: the 12th
+row, the 9e18 wall, landed: M(9e18) = -1.458437e9 (the 23-row law
+predicted -1.461e9; closed-form C matches the wall row to 0.004%).
+Pins with C = closed form (A, B fit, 33-row face): A = -25254353.62,
+B = +523472285.05, max|resid| = 7996.9 @ t = 3e11 (the s16 far-row
+band; the 12 s17 rows fit within ~+/-400). 0154: in-tree restatement -
+the three-term clause with C named as an expression of U_TOP, A/B pinned
+from the 33-row fit with margin, E <= 1e4, targeted + full build, cards,
+commit. S18 (S1MR) part-0 stream: files A/B/C done (629/757/776 s), D
+(9.258e10 zeros) in progress. No RH claim.
