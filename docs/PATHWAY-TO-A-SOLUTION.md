@@ -1942,9 +1942,11 @@ The pre-registered "law itself changes" path is activated; the
 E1ClauseV3 three-term (`C` pinned as an in-tree rational,
 `T_MEAS = 10^18.5`, `mdefect_bounded` ~2e4 loose) and attributes
 the t^2 term per component (prime suspect: the I_far density
-channel's grid residual at t >> g). The `eps = +0.7047` constant
-column documents the logmain25212 Stirling truncation error, which
-cancels identically out of M by construction. Separately, the
+channel's grid residual at t >> g). The `eps = +0.7047` constant column is the exact-identity
+offset between the two exact closed forms of the log main term
+(logmain25212 is closed-form with exact mpmath loggamma - no
+truncation), confirming no channel drift; the per-row channel
+identity M = eps + logzeta - lm - la - re - I_far holds to 0.0. Separately, the
 S1Marg dip repair (S1MR, `scripts/rh/s18_S1marg_repair.py`) is
 running under the owner's week-scale compute policy (pre-launch
 alert issued; <= 16 stream threads + 12 row workers serial; 4

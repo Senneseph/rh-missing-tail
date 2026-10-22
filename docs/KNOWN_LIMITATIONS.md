@@ -649,9 +649,12 @@ machine wire can do, stated exactly. No RH claim is made or implied.
   deconvolution from the stored row columns logzeta/lm/la/re/
   I_far): the t^2-scale deviation is in the I_far density channel
   (the only component with t^2-scale grid residual at t >> g);
-  the eps = +0.7047 constant column is the logmain25212 Stirling
-  truncation diagnostic, which cancels identically out of M by
-  construction (M does not use the expansion).
+  the eps = +0.7047 constant column is the EXACT-identity
+  offset between the two exact closed forms of the log main term
+  (logmain25212 is closed-form with exact mpmath loggamma - no
+  Stirling truncation; logmain_ex the equivalent form): constant
+  by construction, confirming no channel drift; M per row =
+  eps + logzeta - lm - la - re - I_far holds to 0.0.
 
 ## S1MR REPAIR NOTE (discovery 0152, 2026-10-22 — the S1Marg
 ## exploratory dip below 1 above 3.1e7 is at least partly a
