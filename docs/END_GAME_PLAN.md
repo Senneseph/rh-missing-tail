@@ -1,5 +1,24 @@
 # END-GAME PLAN — what it takes from here to the final goal
 
+SUPERSEDED STATE POINTER (2026-10-22, 0149): the live state is now the
+**distance-to-Final ledger** in discovery 0149 +
+`docs/PATHWAY-TO-A-SOLUTION.md` (post-0142/0148 terminal ledger):
+the in-tree endpoint has EXACTLY THREE named open items toward RH —
+(1) the residual face hOffG on (H, inf) x (0, 0.3748087], shrinking
+by the demonstrated B6 conveyor to d0 <= 0.3747729897 on PR#69 merge
+(replay of her frozen head FULL GREEN, 0148); (2) G-hs1, the scale
+anti-degeneracy gap (kernel-scale LOWER bound at a hypothetical off-line
+zero; measured shadow = S1Marg margin track, dip below 1 at 3.1e7);
+(3) G-hs3, the T4 off-line lift gap (p8_B is a critical-line bound;
+no in-tree kernel upper bound at off-line points; T4OffL square-root
+schedule family is the attack line; worst-point ratio 1.1136 at
+t = 1000, d0 = 1/200). The 0147 offset band [0.874561, 0.874773)
+of the pending record is closed-by-provenance (frozen certificate
+tables; AI-assisted search not shipped — 0149). The next forward
+line (0150) aims the race's Bernstein tool class directly at the
+in-tree face. The September state below is preserved as history;
+where it disagrees with the above, the above wins.
+
 Status date: 2026-09-19 (evening). H1 band RE-ISSUED at certificate grade (day034b, reading C-1: all 975 points certified >= 1, worst cert margin 1.081637 at the 1e9 window). The S3b anatomy map has landed (section 3.5): the wall is W2, now shaped as a CANCELLATION theorem with a pinned walk bound (max|DN| = 2.439 on the band).
 No prize claim made or implied; this is a working plan, honest by design.
 
