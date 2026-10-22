@@ -624,3 +624,59 @@ machine wire can do, stated exactly. No RH claim is made or implied.
 **Discovery 0147 (2026-10-21 — PR#69 MECHANISM CRACKED + LEAPFROG QUESTION ANSWERED (exact rational arithmetic on the frozen head ac76d5ef): the 0.8747729897 claim is a TWO-STAGE "return" chain — PR67 (0.874817065) → intermediate C30 (theta1 = 8747759/10^7, seedK/6 license, gain 4.1165×10⁻⁵) → final (theta2 = 8747729897/10^10, finalK/6 = kappa1 with ZERO license waste, gain 2.9103×10⁻⁶); the step license is the incumbent inequality 6(2β−1) ≤ K, so the chain is exactly the refined-system fixed-point pattern Liu's family exhibits; THE ENGINE IS INPUT-UNIFORM (SeedStep/NFStep hold for every β in [0.51, 0.87481891]) — feeding [Z78G] instead of PR67 widens the license margin (3.69×10⁻⁶ → 2.042×10⁻⁵ in κ) but does NOT change the output: the "her engine, our better input" leapfrog is impossible by the structure itself; CEILING (all 33 named reserves differentiated at her constants, h/B/λ frozen): the claim is NOT at the family corner — a pure c-offset is admitted up to δc* = 2.116311×10⁻⁴ (binding named margin small_width_shortening 4.232×10⁻³, c-slope −16/dp; next: physical_width_lower 6.67×10⁻⁴, floor 1.365×10⁻³), giving the named-margin ceiling θ* = 0.8745613585650727 — so the next race cycle plausibly lands in [0.874561, 0.874773) as a deeper-c re-run of her generator; the 0144 precedent applies: a CLAIM beyond 0.8747729897 requires re-discharging her generated Bernstein/certificate layer at the offset, which belongs to the generator's owner, so no leapfrog of her claim is available to us from the visible structure — the forward path stays: verify (0148), adopt on merge, watch the band; no in-tree change, no RH claim.**
 
 **Discovery 0148 (2026-10-21 — INDEPENDENT REPLAY OF PR#69 FROZEN HEAD: FULL GREEN (the pending supersession is now machine-verified OUTSIDE the tracker pipeline, at the same standard as 0132/0134/0142): stage C 6474/6474 modules compiled from source (3547 record + 2927 vendored OAI baseline; tracker-pinned mathlib d13f23b, Lean 4.34.1 by pinned binary — PATH lean is 4.35.0 and corrupts the v4.34.1 olean headers, recorded as a runbook lesson), 0 failures, 3472 s, snapshot-guarded on tarball sha 8607635a; stage D1 kernel-accepted the canonical statements at EXACTLY 8747729897/10^10 in BOTH claimed scopes (zeta: θ < Re s → riemannZeta s ≠ 0 — the SAME mathlib object as the in-tree Z78* modules; all-Dirichlet: pole-excluded); stage D2 axiom cone of all six endpoint declarations exactly [propext, Classical.choice, Quot.sound] — no new axioms, no sorry axioms; stage D3 zero sorry tokens across her 3547 modules; REMAINING ADOPTION GATES: (a) PR still DRAFT — "local verification incomplete" — merge identity must be re-checked at the MERGED commit (replay ~58 min if the head moved), (b) standalone paper still 404 (named provenance incomplete), (c) catalogue record; CONVEYOR PRE-STAGED: Z78Collet.lean (colletUpper = 8747729897/10^10, colletD0max = 3747729897/10^10, chain [Z78C] ⇒ [Z78G] ⇒ [Z78T] ⇒ [Z78L] ⇒ [Z78]) + Part B16 splice (rhend_sliceColletExcl, unifiedCollet endpoints, unifiedGao_ofColet bridges, terminal face hOffC: d0 ≤ 3747729897/10^10; face shrink 3.571×10⁻⁵ — largest in-tree shrink to date, 4.3× the 0142 step), staged at tmp/b6audit/collet69/prestage/; no in-tree change yet, no RH claim.**
+
+## S17 VERDICT ADDENDUM (discovery 0152, 2026-10-22 — the ln-t
+## defect law gains a t^2 term above ~3e16; the in-tree pinned
+## two-term law is now known-incorrect on (1e17, T_MEAS])
+- The pinned in-tree defect (E1Clause.lean: defect_A = -25256007,
+  defect_B = +523513775, mdefect_bounded 6704.088) was fit on the
+  21-row face (3e10, 3.0001e13]. S17's 11 new rows (3.16e13 ..
+  3.16e18, dps-40 channel, tmp/s17_M_far2.jsonl) measure: the
+  two-term residual is O(1e4) to 3.16e16, then -83538 (1e17),
+  -1.058e6 (3.16e17), -1.083e7 (1e18), -1.0857e8 (3.16e18) —
+  from 3.16e17 on it is -C*t^2 with C = 1.086035e-29 stable to
+  3%. Three-term law M(t) = A ln t + B + C t^2: 23-row face
+  (8.5 decades) max|resid| 7740.8 (face-native scale), 11 new
+  rows 149.9; two-term on the same face 8.58e7.
+- Consequence: the 0151 pre-staged E1ClauseV3 T_MEAS extension
+  (same two-term constants) is VOID before launch; 0153 re-states
+  the clause three-term (C the in-tree rational -1086035/10^39 or
+  refit), T_MEAS = 10^18.5, mdefect_bounded re-pinned loose ~2e4.
+  No in-tree statement currently covers (3.0001e13, 10^18.5] at
+  all, so nothing in-tree is wrong as of this writing — the known
+  gap is a missing extension, not a broken bound.
+- Mechanism (hypothesis, 0153 nails it by per-component
+  deconvolution from the stored row columns logzeta/lm/la/re/
+  I_far): the t^2-scale deviation is in the I_far density channel
+  (the only component with t^2-scale grid residual at t >> g);
+  the eps = +0.7047 constant column is the logmain25212 Stirling
+  truncation diagnostic, which cancels identically out of M by
+  construction (M does not use the expansion).
+
+## S1MR REPAIR NOTE (discovery 0152, 2026-10-22 — the S1Marg
+## exploratory dip below 1 above 3.1e7 is at least partly a
+## density-tail model artifact; exact-tail re-measurement running)
+- The 9 exploratory S1Marg rows (nominal g at 3.1e7 .. 1e9,
+  margin 0.7763 -> 0.0654) were measured with the (3e7, 1e18] RVM
+  DENSITY quad tail; the S1MR repair re-measures them (and 6 real
+  file zeros toward 3e10) with the (3e7, 3e10] tail EXACT over
+  the 1.014e11 certified H1 zeros. Until the A/B rows land, the
+  "dip" is not a certified sub-1 observation — it is a model
+  evaluation on an unmeasured region, same class as the repair
+  list (0151). The 25 certified real-zero rows (margin >= 1, all
+  at g <= 2.8e7) are unaffected (their t windows are fully inside
+  the exact (1e7, 3e7] cache).
+- Two f64 precision hazards found pre-launch (both fixed, both
+  would have silently corrupted high-t rows): the naive per-pair
+  factor g^2-t^2 (55 lost bits for |g-t| < 2e-6 at t ~ 3e10 ->
+  factored log|g-t| + log(g+t) - log(g^2+1/4)) and
+  mp.mpf(repr(float)) decimal rounding (up to ulp/2 shift in g/t
+  at 3e10 -> mp.mpf(float) exact binary). Arbiter 5/5 gates
+  green, including a dps-50 mpmath ground-truth check in the
+  danger regime.
+- Compute policy (owner, 2026-10-22): week-scale CPU jobs
+  authorized on this machine with pre-launch alert, 4 logical
+  cores + 16 GB free for the OS; S1MR runs <= 16 stream threads /
+  12 row workers in serial phases, ~4-6 GB, resumable (jsonl rows
+  + per-mode stream caches). Earlier assistant-side "40-70h too
+  costly" heuristic superseded by this rule.

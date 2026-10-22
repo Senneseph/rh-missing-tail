@@ -1927,3 +1927,34 @@ rows across that gap (3.16e13 .. 9e18 wall probe last) and re-fits
 the three growth families (ln t / t ln t / (t/G)^2) over the full
 8.5-decade span; verdict rules pre-registered in 0151. Until it
 lands, the data-side frontier is unchanged. No RH claim.
+
+**S17 verdict + t^2 defect law + S1MR repair launched (0152,
+2026-10-22):** S17 landed (11 half-decade rows 3.16e13..3.16e18;
+the 9e18 wall probe is the final row, crash-isolated). The pinned
+ln-t defect law holds at O(1e4) to 3.16e16, then the residual
+turns negative and grows **like t^2**: from 3.16e17 on it is
+`-C*t^2` with `C = 1.086e-29` stable to 3% over 1.5 decades. The
+three-term law `M(t) = A ln t + B + C t^2` fits the new 11 rows to
+max|resid| 149.9 and the full 23-row face (8.5 decades) to 7740.8
+(the original face's own scale; two-term on the same face: 8.58e7).
+The pre-registered "law itself changes" path is activated; the
+0151 pre-staged two-term splice is void and 0153 re-states
+E1ClauseV3 three-term (`C` pinned as an in-tree rational,
+`T_MEAS = 10^18.5`, `mdefect_bounded` ~2e4 loose) and attributes
+the t^2 term per component (prime suspect: the I_far density
+channel's grid residual at t >> g). The `eps = +0.7047` constant
+column documents the logmain25212 Stirling truncation error, which
+cancels identically out of M by construction. Separately, the
+S1Marg dip repair (S1MR, `scripts/rh/s18_S1marg_repair.py`) is
+running under the owner's week-scale compute policy (pre-launch
+alert issued; <= 16 stream threads + 12 row workers serial; 4
+cores + 16 GB reserved): the (3e7, 3e10] tail of the P1.1e
+composite is now EXACT over the 1.014e11 certified H1 zeros
+(factored per-pair form - the naive g^2-t^2 cancels at 55 bits for
+|g-t| < 2e-6 at t ~ 3e10; `mp.mpf(float)` exact-binary conversion -
+`mp.mpf(repr(float))` is a rounded decimal that corrupts close
+logs). Arbiter 5/5 green pre-launch (three-way summation, 400-zero
+dps-50 ground truth, danger regime, s0=-2 pin). Part 0 re-measures
+the 4 density-quad exp rows (A/B: dip = model artifact or real);
+part 1 extends the certified real-zero track from 2.8e7 toward
+3e10 with 6 file zeros x 24 straddles. No RH claim.
