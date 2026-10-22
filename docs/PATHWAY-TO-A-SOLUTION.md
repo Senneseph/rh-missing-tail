@@ -1890,3 +1890,27 @@ Rule:  milestone commit  ->  update this document (if state moved)  +
 write the discovery entry  ->  push.  A document that disagrees with
 this one about state is stale by definition and gets a supersession
 pointer at its top.
+
+
+**Anatomy of the last mile (0150, 2026-10-22 - source-verified):** the
+terminal face `(H, inf) x (0, gaoD0max]` is not body-closable for a
+structural reason: the Qside legs (hs1 / hs3) are *goals* of the B15
+refine for an *arbitrary* Qside - they cannot contradict each other,
+and no explicit-function body fact (S2, S4, the sandwich - all
+zero-existence-independent) refutes a hypothetical off-pair at
+`d0 <= gaoD0max`. The face's closure is the DUAL of two programs:
+the DATA program (hPT on-line record growing; E1-clause fill
+certificates |zeta| >= devProg pointwise; S1Marg dip at 3.1e7 = the
+data frontier) and the STRUCTURAL program (frontier race: 0.3698087
+more d0 to go to 1/2; conveyor demonstrated, [Z78C] pending merge).
+S35C cross-check (50-dps face grid, tmp/s35c_face_shaping.py): the
+strip sandwich ratio dev/(Bwire+MrLift) is T-INVARIANT to 4 digits
+over 9 orders of magnitude in t (>= 1.11355 everywhere) and quadratic
+in d0 - it crosses 1 at d0 ~ 0.004738, the same line as day033's
+certified sharp edge S4Strip.r2prime = 47384091/10^10 =
+0.0047384091 (same own-mass object both sides; n4 wire exactly t^-2,
+dev ~ d0^2 t^-2). The window band (0, 0.005) = 1.33% of the face
+width is structurally bare of classical zero-free information (Re in
+(1/2, 0.505), far left of the 0.8748087 frontier) - the race's last
+target; the sandwich there is ~2e-10 (window wire branch), so it is
+not a sandwich-closable region. No RH claim; no in-tree change.
