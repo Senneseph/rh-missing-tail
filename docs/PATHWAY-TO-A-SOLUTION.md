@@ -1650,6 +1650,26 @@ for the ACTUAL zeta zero set.  The branches:
       same  unit  (new  constant  module  +  B-part  +  replay
       +  docs)  is  the  upgrade  path  for  any  successor.
 
+      FRONTIER  STATUS  (0147 + 0148,  2026-10-21,  no  in-tree
+      change):  open  PR  #69  (Hailey  Collet,  DRAFT,  0.8747729897,
+      NEW  structural  cycle  "finite  ordinary  source  moments")
+      is  now  (a)  mechanism-mapped  in  exact  arithmetic  (two-
+      stage  return  chain  off  PR67;  the  engine  is  input-
+      UNIFORM  across  its  licensed  range,  so  no  input  swap
+      improves  the  output;  the  claim  sits  2.116311e-4  BELOW
+      its  own  family's  named-margin  ceiling  0.8745613585650727
+      --  a  deeper-c  re-run  of  the  generator  is  the  plausible
+      next  cycle)  and  (b)  INDEPENDENTLY  REPLAYED  FULL  GREEN
+      at  the  frozen  head  ac76d5ef  (6474/6474  modules,  canonical
+      statements  at  the  exact  rational  in  both  scopes,  axiom
+      cone  exactly  [propext,  Classical.choice,  Quot.sound],  0
+      sorry).  Adoption  gates  remaining:  merge  identity  check  at
+      the  MERGED  commit,  standalone  paper  (404  at  audit  time),
+      catalogue  record.  The  in-tree  conveyor  (Z78Collet  module
+      +  Part  B16,  face  hOffC:  d0  <=  3747729897/10^10,  shrink
+      3.57103e-5)  is  PRE-STAGED  at  tmp/b6audit/collet69/prestage/
+      and  runs  the  moment  the  gates  clear.
+
 
 
 
