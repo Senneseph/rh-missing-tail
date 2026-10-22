@@ -1914,3 +1914,16 @@ width is structurally bare of classical zero-free information (Re in
 (1/2, 0.505), far left of the 0.8748087 frontier) - the race's last
 target; the sandwich there is ~2e-10 (window wire branch), so it is
 not a sandwich-closable region. No RH claim; no in-tree change.
+
+**Data-side frontier + live S17 run (0151, 2026-10-22):** the
+missing-tail measured face is pinned in-tree as `E1ClauseV3` on
+`(G_LAST = 30001045999.981975555, T_MEAS = 3.0001e13]`; the 21-row raw
+data reproduces the pinned defect law `M(t) = -25256007 ln t +
+523513775` to max|resid| 6704.088 exactly (this unit's audit
+re-derivation). The machine zeta wall (0085/0086) sits at
+`[9e18, 3e19)`, so the gap `(3e13, 9e18]` = 5.5 unmeasured decades.
+S17 (`scripts/rh/s17_M_far2.py`, `tmp/s17_run.log`) is measuring 12
+rows across that gap (3.16e13 .. 9e18 wall probe last) and re-fits
+the three growth families (ln t / t ln t / (t/G)^2) over the full
+8.5-decade span; verdict rules pre-registered in 0151. Until it
+lands, the data-side frontier is unchanged. No RH claim.
