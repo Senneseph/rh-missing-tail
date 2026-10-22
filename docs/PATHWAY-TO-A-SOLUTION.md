@@ -1987,3 +1987,21 @@ the three-term clause with C named as an expression of U_TOP, A/B pinned
 from the 33-row fit with margin, E <= 1e4, targeted + full build, cards,
 commit. S18 (S1MR) part-0 stream: files A/B/C done (629/757/776 s), D
 (9.258e10 zeros) in progress. No RH claim.
+
+### 0154 — the three-term clause is in the tree (E1ClauseV3C, named)
+
+Part D of `formal/RhAttack/E1Clause.lean` (builds green, full tree
+green): T_MEAS3 = 9e18; defect_A3 = -25254354, defect_B3 = 523472285;
+defect_C3 = -(ln(U_TOP/(2 pi)) + 1)/(2 pi * U_TOP) -- the t^2
+coefficient named as an expression of the in-tree truncation (no fit
+constant); defect_C3absT3 : |C3| * T_MEAS3 <= 2439/10^12;
+mdefect3_bounded : |M_defect3 t| <= 2.3e26 on (G_LAST, T_MEAS3];
+E1ClauseV3C q B, e1V3C_implies_abs, if_E1V3C_and_walk. The above-G
+territory now carries two coexisting named data holes:
+E1ClauseV3 q 7000 on (G, 1000 G] and E1ClauseV3C q 10000 on
+(G, 9e18] (33-row face, max residual 7986.8 -> 25% margin). The
+terminal face is NOT rewired yet: S1Uniform.201 still consumes V3;
+the V3/V3C endpoint choice is a wire-budget decision
+V3C's closed form C3 is a model-level identity about I_far's U-top
+truncation at 1e30, verified numerically (0153) and now a named
+expression in the tree. It is not a theorem about zeta. No RH claim.

@@ -707,3 +707,17 @@ machine wire can do, stated exactly. No RH claim is made or implied.
   12 row workers in serial phases, ~4-6 GB, resumable (jsonl rows
   + per-mode stream caches). Earlier assistant-side "40-70h too
   costly" heuristic superseded by this rule.
+
+## 0154: E1ClauseV3C named in-tree (0153 law as a data clause)
+
+The three-term clause is now a NAMED DATA HOLE in
+formal/RhAttack/E1Clause.lean: E1ClauseV3C q 10000 on
+(G_LAST, 9e18]; M_defect3 = -25254354 ln t + 523472285 + C3 t^2
+with C3 = -(ln(U_TOP/(2 pi)) + 1)/(2 pi U_TOP) named in closed form
+at the in-tree truncation U_TOP = 1e30. It coexists with the
+two-term E1ClauseV3 q 7000 on (G_LAST, 1000 G_LAST]; the terminal
+endpoint face still consumes V3 (S1Uniform.201) -- the V3/V3C
+rewire is a wire-budget decision pending the S18 verdict, not yet
+made. C3's closed form is a model-level identity about I_far's
+U-top truncation (verified in 0153), not a theorem about zeta.
+No RH claim.
