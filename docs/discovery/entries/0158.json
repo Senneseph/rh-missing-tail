@@ -1,0 +1,29 @@
+{
+  "id": "0158",
+  "ts": "2026-10-23T03:30:00",
+  "title": "chimes pass executed (F9): isomorphism exact within level (banded chi2 302558/6); 207028 chimes on 78498 branches at X=2e6; 4 hearts found (area 8d); leaves 1509 = F3 exact cross-validation; COMPASS NEGATIVE vs ln-p and li-inversion baselines on the 27805-gap hold-out (all reads |spearman| <= 0.016, baselines flat at the same level) - filed with frozen machinery",
+  "kinds": ["measurement", "negative-result", "side-quest"],
+  "status": "recorded",
+  "claim": "No RH claim: the chimes pass is a prime-gap prediction test on a constructed sieve-growth lattice; the isomorphism statement is a structural fact about the branch member pattern; the compass negative bounds the X=2e6 scale (leaf channel sparse: 1509 leaves / 207028 chimes, 4 hearts).",
+  "evidence": [
+    "tmp/sx2_chimes.py (frozen definitions per protocol 3.3; runs 0.5 s)",
+    "tmp/sx2_chimes_stats.json (census, isomorphism table, reads, baselines, gap stats)",
+    "tmp/sx2_run.log",
+    "docs/PRIME-LATTICE-CHIMES-2026-10-23.md (execution record)",
+    "docs/PRIME-LATTICE-SIDE-QUEST-REPORT-2026-10-23.md (side-quest wrap-up)",
+    "F3 cross-check: pass-2 leaf count 1509 = pass-1 minimal-miss AP count 1509 (786 A-side + 723 B-side)"
+  ],
+  "artifacts": {
+    "chimes_total": 207028,
+    "branches": 78498,
+    "hearts_complete": 4,
+    "leaves_total": 1509,
+    "area_total": 1034557977,
+    "holdout_gaps": 27805,
+    "best_read_spearman": -0.0115,
+    "baseline_spearman": 0.0115,
+    "compass_success": null
+  },
+  "relations": ["0153", "0154", "0156"],
+  "no_rh_claim": true
+}

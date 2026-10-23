@@ -766,3 +766,27 @@ artifacts, not baselines (the 2026-09-14 record already flagged rows
 S1Marg track (through 2.8e7) is UNAFFECTED (it sits below the gap).
 S18 part-1 stream data (targets 1e8..2.9e10) remains valid/reusable.
 No RH claim in any direction.
+
+## 0158: prime-lattice side quest closed - pass 1 to appendix, chimes filed
+
+The side quest (owner idea, 2026-10-22/23) is recorded at measurement
+limits, both passes: (1) pass 1 (F1-F8,
+docs/PRIME-LATTICE-EXPLORATION-2026-10-22.md) closed to appendix via
+the bridge test - the lattice sits ON the Hardy-Littlewood 3-term-AP
+prediction (no structured excess; near-miss classes under the corrected
+null; a second vanishing class at g = 5); theorem-grade kept content:
+F1 (no all-prime a^2+b^2=c^2), F2 (defect identity (p-3d)(p+d), never
+vanishing on prime APs), the two vanishing classes. (2) Chimes pass (F9,
+docs/PRIME-LATTICE-CHIMES-2026-10-23.md): 207,028 chimes on 78,498
+growing branches at X = 2e6; the level isomorphism is exact in its
+testable form (within-size-class normalized pattern identical at every
+level; banded chi2 302558/6); 4 complete conjugate "heart" pairs found
+(area exactly 8d); 1,509 leaves = F3 exact cross-validation; the COMPASS
+(reads R0-R3 of the running area total against next-prime gap) does NOT
+beat the ln-p or li-inversion baselines on the 27,805-gap hold-out
+(all correlations within 0.016 of zero, baselines included) - verdict
+per protocol: documented as an isomorphism curiosity, filed next to the
+seed with frozen machinery; a scale-up pass (X >= 1e8, dense leaf
+channel) is the open hook if the owner opens it. No RH claim in any of
+it - zero-exclusion-free integer theorems and lattice statistics only.
+Full wrap-up: docs/PRIME-LATTICE-SIDE-QUEST-REPORT-2026-10-23.md.

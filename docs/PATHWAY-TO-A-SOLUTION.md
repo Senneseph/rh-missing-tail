@@ -11,6 +11,17 @@ No RH claim is made or implied anywhere in this chart.
 
 ## 1.  Position  (verified  /  measured  /  open)
 
+Side quest (prime branching lattice / chimes, 2026-10-22..23): CLOSED at
+measurement limits. Pass 1 (F1-F8) to appendix via the bridge test
+(on-Hardy-Littlewood lattice, no excess; theorem-grade kept: F1, F2
+defect identity, two vanishing classes). Chimes pass (F9) executed under
+owner directive: isomorphism exact within level (banded chi2 302558/6);
+207028 chimes / 78498 branches / 4 hearts / 1509 leaves (F3 exact
+cross-check); COMPASS NEGATIVE vs ln-p and li-inversion on the 27805-gap
+hold-out at X = 2e6 - filed with frozen machinery (scale-up hook open).
+No RH claim. See docs/PRIME-LATTICE-SIDE-QUEST-REPORT-2026-10-23.md.
+
+
 Lean side  (build green,  sorry-free gated modules,  pinned toolchain):
 
   Closure        the 8-closure:  margin -> RH,  the 1987/1995
