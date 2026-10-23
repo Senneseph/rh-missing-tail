@@ -28,6 +28,14 @@ Reproduce:
    reflection of A(d) about the integer axis 3d (memberwise:
    3d±1 ↔ 3d∓1, 4d±1 ↔ 4d∓1, 5d±1 ↔ 5d∓1). d even; all six members prime
    for a heart; a single realized side is a "half-heart".
+   Disposition of candidate (b) (the FANTASY spectral conjugation, the
+   zero-pair mirror t ↔ T−t of the F6 layer): considered and REJECTED
+   as a compass read, not ignored — the step-4 protocol assigns the
+   metric to sieve-GROWTH levels, and a spectral conjugate has no birth
+   height in growth order (zeros do not grow with the sieve). Candidate
+   (b) instead re-enters as the upgraded baseline of the wrap-up
+   report's hook 3 (zero-sum local prediction, F7 machinery), where it
+   is defined.
 4. **Area (frozen).** F2 identity of pass 1: square defect of triad
    (p, p+d, p+2d) = (p−3d)(p+d), so leaf area = |defect|:
    A-leaf area = 4d−1, B-leaf area = 4d+1; a HEART area = (4d−1)+(4d+1)
