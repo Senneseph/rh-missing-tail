@@ -2005,3 +2005,23 @@ the V3/V3C endpoint choice is a wire-budget decision
 V3C's closed form C3 is a model-level identity about I_far's U-top
 truncation at 1e30, verified numerically (0153) and now a named
 expression in the tree. It is not a theorem about zeta. No RH claim.
+
+### 0155 — two ledger corrections: pure composition, and the face to 9e20
+
+if_E1V3_and_walk takes _hE3 as an UNUSED premise: the endpoint
+composition is PURE (four Qside walk legs through
+ZetaZeroSet.rhIfMarginZeta). The E1 clause is the documented DATA
+ANCHOR for the walk's M-side, not a consumed wire - so extending
+the measured defect-law domain IS extending the data clause.
+The C/quad zeta channel (s34 series, past the mpmath wall
+[9e18, 3e19)) already carries rows at 3.0e19, 3.0e20, 9.0e20,
+all on the three-term closed-form law (residuals -1.3e4 / -2.8e4
+/ -4.3e5, all negative). Third precision hazard found: the M
+ASSOCIATION ITSELF cancels at t >= 3e19 (lm, I_far ~ 2e19..7e20
+vs M ~ 1e10..9e12), giving each far row ~ulp(lm)/2 worst-case
+noise (4096 / 32768 / 131072); the residuals are <= 3.3 sigma of
+that budget, sign-consistent - a ~1e4-scale systematic remains to
+be attributed. FRONTIER: the data-side open part is (9e20, inf);
+(9e18, 3e19) is rowless dps-wall band, law-covered. Chains 4/5
+lack independent zeta crosses (S20a); the V3C window (G, 9e18]
+stays in-tree until those land. No RH claim.

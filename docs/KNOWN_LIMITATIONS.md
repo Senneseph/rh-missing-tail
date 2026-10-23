@@ -708,6 +708,23 @@ machine wire can do, stated exactly. No RH claim is made or implied.
   + per-mode stream caches). Earlier assistant-side "40-70h too
   costly" heuristic superseded by this rule.
 
+## 0155: data face extends to 9e20 (C-channel rows), frontier (9e20, inf)
+
+The C/quad zeta channel already carries census rows at t = 3.0e19,
+3.0e20, 9.0e20 (s34f/s34j, chains 3/4/5, past the mpmath wall
+[9e18, 3e19)). All three sit on the three-term closed-form law
+(0153/0154) with residuals -1.3e4 / -2.8e4 / -4.3e5
+(all negative, <= 3.3 sigma of the f64 association-cancellation
+noise budget at each height - the THIRD precision hazard, after
+g^2-t^2 and repr-float: the M association itself cancels at
+t >= 3e19). A ~1e4-scale sign-consistent systematic remains to be
+attributed; chains 4/5 have NO independent zeta cross yet (S20a).
+The in-tree V3C window (G, 9e18] stays conservative until the
+crosses land. The composition itself is PURE: if_E1V3_and_walk
+ignores _hE3 (the E clause is the documented data anchor, not a
+consumed wire) - extending the law's domain IS extending the data
+clause. The data-side open part is (9e20, inf). No RH claim.
+
 ## 0154: E1ClauseV3C named in-tree (0153 law as a data clause)
 
 The three-term clause is now a NAMED DATA HOLE in
