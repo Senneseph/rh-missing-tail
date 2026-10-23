@@ -1,0 +1,26 @@
+{
+  "id": "0160",
+  "ts": "2026-10-23T06:30:00",
+  "title": "spindle/NS-enclosure feasibility report (F14, pass 4): NS provenance audit (OpenAI 9/8 finite-time singularity C/D, forced variant, machine-check-claimed, CMI announcement pulled, prize claim withdrawn, BA forced-Euler machine-checkable preprints; Ri/Guevremont/NS-7227 affirmative preprints = claims not facts) + frozen spindle construction (root=1, threads = divisors e|v-1, spindle S(T)=d(gcd(p-1,2d))-1, area bound A(T)=|(p-5d)(p-2d)|) + feasibility computation at 2e6: thread budget B=29,326,240 = divisor-sum model to 1.0000026 (EXACT discrete closure from above), phantom field thread-repellent (25.92 vs 13.76, ratio 1.884, parity-dominant), closure A/S >= 8.5 for all 2,204,797 spindles with min AT the F3 triangle (17,23,29), root-aligned bases 21,250 (0.964%), no vortex at 2e6 (chord-class shares within structural gcd bias), verdict FEASIBLE with follow-on tests T1-T6 (T2/T3 scale-up to 1e8 minutes-class)",
+  "kinds": ["feasibility", "provenance-audit", "side-quest", "construction"],
+  "status": "recorded",
+  "claim": "No RH claim. NS used as structural bounding model only; the exact enclosure is the divisor-sum identity, not a PDE statement; NS results cited are reported/claimed, not CMI-certified.",
+  "evidence": [
+    "docs/SPINDLE-NS-FEASIBILITY-2026-10-23.md (report: provenance table, frozen construction, F14 numbers, T1-T6)",
+    "tmp/sx4_spindle.py + tmp/sx4_spindle_stats.json + tmp/sx4_run.log (7.9 s at X=2e6)",
+    "provenance: openai.com page Cloudflare-gated (403) but cross-verified via Quanta/Nature/Science/SciAm x2/NPR/New Scientist; CMI live page fetched - announcement content NO LONGER PRESENT (0 occurrences of Navier); arXiv/viXra/Zenodo claim items as pointers"
+  ],
+  "artifacts": {
+    "thread_budget": 29326240,
+    "budget_model_ratio": 1.0000026435928778,
+    "avg_threads_prime": 25.9157,
+    "avg_threads_composite": 13.7578,
+    "spindles_total": 2204797,
+    "S_max": 47,
+    "closure_A_over_S_min": 8.5,
+    "closure_min_at": "(17, 23, 29) d=6 (F3 canonical triad)",
+    "root_aligned_triangles": 21250
+  },
+  "relations": ["0158", "0159"],
+  "no_rh_claim": true
+}

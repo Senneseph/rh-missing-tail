@@ -214,3 +214,23 @@ docs:     docs/IDEA-SEED-PRIME-LATTICE-2026-10-22.md
 
 Superseded (buggy, kept for the record): tmp/sx1b_fantasy_layer.py,
 tmp/sx1c_triangles.py.
+
+## Pass 4 (same night): the spindle / NS-enclosure feasibility report (F14)
+
+Owner directive: test whether the newly discovered Navier-Stokes
+solutions apply to a combinatorial thread structure growing the
+lattice - threads from a common root into each real or virtual face,
+spindles bound by the triangle area they span; "the structure could be
+very flexible but NS would enclose its game".
+Report: `docs/SPINDLE-NS-FEASIBILITY-2026-10-23.md`
+(`tmp/sx4_spindle.py`, 7.9 s at 2e6). Headline: the NS provenance is
+audited (Sept-2026 blowup results are reported but NOT CMI-certified -
+the announcement was pulled, the formalization is contested, the prize
+claim withdrawn; used as a bounding model only); the spindle structure
+is FROZEN and FEASIBLE (root = 1, threads = divisors, S(T) =
+d(gcd(p-1,2d))-1, area bound A(T)); the discrete closure is EXACT
+(thread budget = divisor-sum model to 1.0000026; A/S >= 8.5 on all
+spindles - the tightest spindle sits on the F3 triangle (17,23,29));
+the phantom field is thread-repellent (1.884 ratio); no discrete
+vortex at 2e6. Follow-on tests T1-T6 defined (scale-up class: minutes
+at 1e8).
