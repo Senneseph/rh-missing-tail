@@ -718,9 +718,15 @@ The C/quad zeta channel already carries census rows at t = 3.0e19,
 noise budget at each height - the THIRD precision hazard, after
 g^2-t^2 and repr-float: the M association itself cancels at
 t >= 3e19). A ~1e4-scale sign-consistent systematic remains to be
-attributed; chains 4/5 have NO independent zeta cross yet (S20a).
-The in-tree V3C window (G, 9e18] stays conservative until the
-crosses land. The composition itself is PURE: if_E1V3_and_walk
+attributed. S20a CLOSED (2026-10-23, 0164): chains 4/5 NOW
+carry independent bare-cosine zeta crosses (s34b at the exact
+chain heights): chain 4 (3e20) full |Z| 1.5775734043 vs bare
+1.5775681862, d = 5.22e-6 (env t^-1/4 = 7.6e-6); chain 5 (9e20)
+7.4818986747 vs 7.4818909371, d = 7.74e-6 (env 5.8e-6) - both
+within the bare-form envelope, ~10^11 below the M association
+noise budgets (32768 / 131072). The in-tree V3C window (G, 9e18]
+now has its data-side margin gate CLEARED (0165: extended in
+tree to (G, 9e20]). The composition itself is PURE: if_E1V3_and_walk
 ignores _hE3 (the E clause is the documented data anchor, not a
 consumed wire) - extending the law's domain IS extending the data
 clause. The data-side open part is (9e20, inf). No RH claim.
@@ -738,6 +744,13 @@ rewire is a wire-budget decision pending the S18 verdict, not yet
 made. C3's closed form is a model-level identity about I_far's
 U-top truncation (verified in 0153), not a theorem about zeta.
 No RH claim.
+
+UPDATED (0165, 2026-10-23): the window is extended in-tree to
+(G_LAST, 9e20] (T_MEAS3 = 9e20, bound 2.3e28, named hole
+E1ClauseV3C q 600000, 36-row face, max residual 4.284e5 at 9e20,
+39% margin) - the in-tree data clause now matches the measured
+data frontier; the s34 far rows carry S20a cross-checked zeta
+(0164). Full tree green.
 
 ## 0156: S18 part-0 verdicts VOID - band-gap defect found by output audit
 

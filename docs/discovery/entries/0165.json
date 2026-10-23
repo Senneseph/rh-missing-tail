@@ -1,0 +1,23 @@
+{
+  "id": "0165",
+  "ts": "2026-10-23T11:00:00",
+  "title": "IN-TREE V3C WINDOW EXTENDED to (G_LAST, 9e20]: the data-side frontier hole in-tree is now 9e20 (was 9e18, 0154). T_MEAS3 := 9e20; defect_C3absT3 rescaled (|C3| T3 <= 2439/10^10, was 2439/10^12); mdefect3_bounded restated |M_defect3 t| <= 2.3e28 (was 2.3e26 - the A3*t linear term dominates the bound, scaled 100x; the bound is the documented DATA ANCHOR, not a consumed wire, so the constant growth is the price of the domain growth - no downstream arithmetic changed, verified: E1ClauseV3C/T_MEAS3/mdefect3_bounded have NO consumers outside E1Clause.lean); e1V3C_implies_abs carries B + 2.3e28; the NAMED DATA HOLE is now E1ClauseV3C q 600000 on (G_LAST, 9e20] (36 measured rows: 33 through 9e18 + the 3 s34 far rows at 3e19/3e20/9e20 with S20a cross-checked zeta; max residual 4.284e5 at the 9e20 row -> 39% margin, was B = 10000 / max 7986.8 / 25%). Full tree lake build GREEN (17450 jobs). Cards 107. The in-tree data clause now matches the measured data frontier exactly: (G, 9e20] certified, (9e20, inf) open on BOTH the in-tree and data sides. Lean surgery notes: two 10^18->10^20 misses caught by the build (the step-intro line and the e1V3C calc body) plus the known norm_num behavior on Real literals at 10^20 scale (rfl fails, norm_num passes); hB/hred exponent bookkeeping for 10^20 - T^10 scaling (2439*9*10^10, not 10^8). No RH claim: the window extension moves the data anchor, not the endpoint - the terminal face is still hOffC under [Z78C], unchanged.",
+  "kinds": ["formal", "extension", "data-face"],
+  "status": "recorded",
+  "claim": "No RH claim: restatement of the above-G data clause on its full measured domain; the terminal endpoint and its open face are untouched.",
+  "evidence": [
+    "formal/RhAttack/E1Clause.lean (T_MEAS3 = 9e20; defect_C3absT3 2439/10^10; mdefect3_bounded 2.3e28; E1ClauseV3C doc + named hole q 600000; addendum updated)",
+    "build: targeted RhAttack.E1Clause green (8733 jobs), full tree green (17450 jobs) - tmp/build_e1c9e20c.txt, tmp/build_full_9e20.txt",
+    "scripts/rh/make_lean_cards.py (E1Clause card: 2.3e28, 2439/10^10, q 600000, 36-row face) - 107 cards | 1581 body lines",
+    "docs/PATHWAY-TO-A-SOLUTION.md + docs/KNOWN_LIMITATIONS.md (window references updated)"
+  ],
+  "artifacts": {
+    "T_MEAS3": "9e20",
+    "bound": "2.3e28",
+    "named_hole": "E1ClauseV3C q 600000 on (G_LAST, 9e20]",
+    "rows": 36,
+    "max_residual": 428400
+  },
+  "relations": ["0153", "0154", "0164"],
+  "no_rh_claim": true
+}

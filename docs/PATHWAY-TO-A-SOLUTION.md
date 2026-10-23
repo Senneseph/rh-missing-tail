@@ -2093,6 +2093,10 @@ vs M ~ 1e10..9e12), giving each far row ~ulp(lm)/2 worst-case
 noise (4096 / 32768 / 131072); the residuals are <= 3.3 sigma of
 that budget, sign-consistent - a ~1e4-scale systematic remains to
 be attributed. FRONTIER: the data-side open part is (9e20, inf);
-(9e18, 3e19) is rowless dps-wall band, law-covered. Chains 4/5
-lack independent zeta crosses (S20a); the V3C window (G, 9e18]
-stays in-tree until those land. No RH claim.
+(9e18, 3e19) is rowless dps-wall band, law-covered. S20a CLOSED (0164):
+chains 4/5 now carry independent bare-cosine zeta crosses
+(s34b exact-height runs: 3e20 d = 5.22e-6, 9e20 d = 7.74e-6,
+both within the bare-form t^-1/4 envelope, ~10^11 below the M
+association noise budgets) - the last cross-check gap of the
+C/quad channel through 9e20. The V3C window is now extended
+in-tree to (G, 9e20] (0165). No RH claim.
