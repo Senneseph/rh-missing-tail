@@ -19,7 +19,7 @@ owner directive: isomorphism exact within level (banded chi2 302558/6);
 207028 chimes / 78498 branches / 4 hearts / 1509 leaves (F3 exact
 cross-check); COMPASS NEGATIVE vs ln-p and li-inversion on the 27805-gap
 hold-out at X = 2e6 - filed with frozen machinery (scale-up hook open).
-No RH claim. See docs/PRIME-LATTICE-SIDE-QUEST-REPORT-2026-10-23.md.
+No RH claim. Same day pass 3 (Euler Primal Bloom, F10-F13): 100% composition accounting, F11 wheel-triangle theorem (d = 0 mod 6 chords), F12 multi-spectrum map (uniform skeleton), F12b rollover census (zero at all scales), F13 measure POSITIVE (past-to-next-vertex r = 0.2508 detrend-stable local persistence, hold-out; revolution r = 0.0939) - first positive measure of the quest. See docs/PRIME-BLOOM-PASS3-2026-10-23.md + the report.
 
 
 Lean side  (build green,  sorry-free gated modules,  pinned toolchain):

@@ -115,6 +115,49 @@ No structured excess → pass 1 closed to appendix.
   scale-up (X ≥ 1e8, dense leaf population) re-runs with zero design
   ambiguity.
 
+
+## The Bloom addendum (executed the same afternoon: pass 3, F10-F13)
+
+The owner extended the quest the same day with the **Euler Primal
+Bloom accounting** (multi-spectrum of incremental 24-bands; seed 3,
+`docs/IDEA-SEED-EULER-PRIMAL-BLOOM-2026-10-23.md`) and directed
+execution. Pass 3 (`docs/PRIME-BLOOM-PASS3-2026-10-23.md`):
+
+- **F10.** 100%-composition bloom at X = 2e6: 2,204,797 fresh triads /
+  20,081,315 fresh pairs / 126,646,888 fresh uniques over
+  148,933 x 1000 rays; the phantom field = 85.0% of all rays (the
+  F7 li-deficit, measured direction-by-direction from inside).
+- **F11 (theorem-grade, the "rule of geometry and triangles").** Prime
+  triads inscribe ONLY the d = 0 mod 6 long-chord shapes on the 24-gon
+  (4 of 12 even shapes carry 99.999% of the triangles); the 8 short
+  shapes are a vanishing class except 117 three-spike degenerates
+  (mod-3 proof, the F2 identity carried onto the wheel).
+- **F12.** The multi-spectrum is mappable: base-24 digit stages 0..4
+  (5 x 24 marginals), four 24x24 transition tables, the 16 phantom
+  wheel bands as outer boundary, the 24-state Fibonacci shadow
+  (Pisano(24) = 24): the entire projected map at this scale is the
+  equidistribution skeleton - no structure beyond it.
+- **F12b.** Piece-change census: 91% of consecutive vertices tick;
+  digit rollovers at ALL FOUR 24^k scales are invisible to the bloom
+  (the apparent 24^4 dip debunked as the boundary-0 low-height
+  artifact by per-boundary decomposition).
+- **F13 (THE MEASURE - positive).** The bloom path of the future is
+  predictable from the past: next-vertex triangle count, moving-window
+  past state, held-out upper 20%: r = 0.2508 - equal after detrending
+  (the ln-trend alone scores 0.0245) - above band-table (-0.009),
+  Fibonacci-shadow (-0.009), marginal (0.000), shuffle (0.004);
+  revolution scale r = 0.0939. Mechanism: local persistence (the 1000
+  ray neighborhoods of consecutive vertices overlap heavily) - the
+  wheel geometry supplies the map; the local state carries the
+  prediction.
+
+The side quest's achievement list now runs F1-F13: three theorem-grade
+kept results (F1, F2, F11), the FANTASY zero-spectrum connection (F6),
+the on-prediction bridge (F8), the chimes isomorphism with its
+null compass (F9), and the first POSITIVE measure of the quest (F13)
+- a constructed prime dynamics with real local-state predictability,
+measured against baselines in the hold-out.
+
 ## What this means (honest read)
 
 - The owner's construction intuition was **taken seriously and
@@ -159,10 +202,14 @@ pass 1:   tmp/sx1a_prime_lattice.py   tmp/sx1b2_fantasy_layer.py
           tmp/sx1e_bridge.py          (+ logs/stats json next to each)
 pass 2:   tmp/sx2_chimes.py           tmp/sx2_chimes_stats.json
           tmp/sx2_run.log
+pass 3:   tmp/sx3_bloom.py            tmp/sx3_bloom_stats.json
+          tmp/sx3_run.log
 docs:     docs/IDEA-SEED-PRIME-LATTICE-2026-10-22.md
           docs/IDEA-SEED-PRIME-LATTICE-CHIMES-2026-10-22.md
+          docs/IDEA-SEED-EULER-PRIMAL-BLOOM-2026-10-23.md
           docs/PRIME-LATTICE-EXPLORATION-2026-10-22.md
           docs/PRIME-LATTICE-CHIMES-2026-10-23.md
+          docs/PRIME-BLOOM-PASS3-2026-10-23.md
           docs/PRIME-LATTICE-SIDE-QUEST-REPORT-2026-10-23.md  (this file)
 
 Superseded (buggy, kept for the record): tmp/sx1b_fantasy_layer.py,

@@ -1,0 +1,29 @@
+{
+  "id": "0159",
+  "ts": "2026-10-23T05:00:00",
+  "title": "Euler Primal Bloom pass 3 (F10-F13): 100%-composition bloom accounting at X=2e6 (2,204,797 fresh triads / 20,081,315 pairs / 126,646,888 phantom uniques out of 148,933,000 rays, 85.0% phantom); F11 theorem-grade wheel-triangle rule (prime triads only on the d = 0 mod 6 long-chord shapes, 4 of 12; 8 short shapes vanish except 117 three-spike degenerates); F12 multi-spectrum map (base-24 digit stages 0-4, 5x24 marginals + 4x24x24 transition tables = equidistribution skeleton, 16 phantom wheel bands); F12b rollover census: ZERO response at all four 24^k scales (k=4 dip debunked as the boundary-0 low-height artifact); F13 THE MEASURE POSITIVE: past-to-next-vertex f3 skill r = 0.2508 (detrended = raw to 4 digits - genuine local persistence via overlapping ray neighborhoods, above ln-rate 0.0245, band-table -0.009, shadow -0.009, marginal 0.000, shuffle 0.004); revolution scale r = 0.0939",
+  "kinds": ["measurement", "theorem", "side-quest", "positive-result"],
+  "status": "recorded",
+  "claim": "No RH claim. The bloom is a constructed growth accounting; F11 is an integer theorem (mod-3 argument on AP endpoints); F13 is a baseline-scored statistical skill measurement on the constructed process, local persistence mechanism, not wheel geometry.",
+  "evidence": [
+    "tmp/sx3_bloom.py (frozen construction per seed doc; 7.4 s at X=2e6)",
+    "tmp/sx3_bloom_stats.json (all censuses, tables, skills)",
+    "tmp/sx3_run.log",
+    "docs/PRIME-BLOOM-PASS3-2026-10-23.md (execution record)",
+    "docs/IDEA-SEED-EULER-PRIMAL-BLOOM-2026-10-23.md (owner's words + frozen construction)",
+    "deconvolution audit: rollover k=4 dip debunked by per-boundary decomposition (true 24^4 boundaries 17.75/14.70/12.71/14.67/12.50 vs baseline 14.8; random-window null 19.58 = height-model 19.3)"
+  ],
+  "artifacts": {
+    "f3_total": 2204797,
+    "f2_total": 20081315,
+    "f1_total": 126646888,
+    "phantom_ray_frac": 0.84998,
+    "live_triangle_shapes": [0, 6, 12, 18],
+    "three_spike_degenerates": 117,
+    "measure_B_ma100": 0.2508,
+    "measure_B_detrended": 0.2508,
+    "measure_C_ma100": 0.0939
+  },
+  "relations": ["0153", "0154", "0156", "0158"],
+  "no_rh_claim": true
+}

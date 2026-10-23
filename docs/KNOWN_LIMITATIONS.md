@@ -790,3 +790,29 @@ seed with frozen machinery; a scale-up pass (X >= 1e8, dense leaf
 channel) is the open hook if the owner opens it. No RH claim in any of
 it - zero-exclusion-free integer theorems and lattice statistics only.
 Full wrap-up: docs/PRIME-LATTICE-SIDE-QUEST-REPORT-2026-10-23.md.
+
+## 0159: Euler Primal Bloom pass 3 - F10-F13 recorded, measure POSITIVE
+
+The owner's third lattice idea (Euler Primal Bloom accounting,
+multi-spectrum of incremental 24-bands) was executed the same day
+(docs/IDEA-SEED-EULER-PRIMAL-BLOOM-2026-10-23.md, pass record
+docs/PRIME-BLOOM-PASS3-2026-10-23.md, tmp/sx3_bloom.py, 7.4 s at
+X = 2e6). Kept content: F11 theorem-grade (prime triads inscribe only
+the d = 0 mod 6 chord shapes on the 24-gon; 8 short shapes a
+vanishing class except 117 three-spike degenerates); F12 the
+multi-spectrum map (base-24 digit stages, 5x24 marginals, four 24x24
+transition tables = equidistribution skeleton; 16 phantom wheel
+bands; Fibonacci shadow, Pisano(24) = 24); F12b censuses (91% of
+vertices tick; digit rollovers invisible to the bloom at all four
+24^k scales - the apparent 24^4 dip debunked as a low-height
+artifact); F13 THE MEASURE POSITIVE - next-vertex bloom triangle
+count predicted from the past (100-window moving state) at r =
+0.2508 in the held-out upper 20%, detrend-stable (local persistence,
+not trend; above ln-rate 0.0245, band -0.009, shadow -0.009,
+marginal 0.000, shuffle 0.004), revolution scale r = 0.0939.
+Limits: the 2e6-scale map is the uniform skeleton (no structured
+excess, consistent with F8); the wheel geometry alone adds no
+prediction - the measurable predictability is the local 1000-ray
+neighbourhood state. No RH claim. Open hooks (owner-gated): scale-up
+X >= 1e8, a shared-ray local-state model, stage-5 digit appearance
+at X >= 7.96e6.
