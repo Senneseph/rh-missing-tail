@@ -1,0 +1,27 @@
+{
+  "id": "0162",
+  "ts": "2026-10-23T08:30:00",
+  "title": "PR #69 Collet frontier ADOPTED IN TREE (0162, B6 section-8 third demonstration): merge identity verified against the frozen-head replay (merged head = frozen head ac76d5ef6008d976a7b8f3c1d921af2317e79ce9; merge commit 2cbdbe7c14e926c1eb33fea0919e561038a27880; FULL merged submission tree blob-SHA-identical to the replayed frozen copy, 3549/3549 files at the merge commit; spot hash ReturnConstants.lean md5 b82c177082d3688840fb07cdfee69c62 in both trees) -> no re-replay needed; Z78Collet.lean in-tree (colletUpper = 8747729897/10^10 = 0.8747729897, colletD0max = 0.3747729897); RHEnd part B16 spliced and green: new terminal endpoints rh_program78_stripfront_mach_unifiedCollet and _PT2 with face hOffC (0 < d0 <= colletD0max above H), slice (colletD0max, gaoD0max] closed in body (rhend_sliceColletExcl), the 0142 Gao endpoint is now a THEOREM of the new one (B16.4); full tree lake build green (17450 jobs); cards 107 | 1578; face shrink gaoD0max - colletD0max = 3.57103e-5 (largest single in-tree face shrink to date, 4.3x the 0142 step); in-tree frontier is now [Z78C]; pending: standalone paper provenance (404 at audit - named TODO, does not block)",
+  "kinds": ["adoption", "formal", "frontier"],
+  "status": "recorded",
+  "claim": "No RH claim: [Z78C] is a zero-free half-plane at 0.8747729897, still 0.3747729897 from the critical line in off-line distance. The in-tree endpoint remains a zero-exclusion statement under named external inputs.",
+  "evidence": [
+    "formal/RhAttack/Z78Collet.lean (in-tree module, headers filled with the 2026-10-23 adoption record)",
+    "formal/RhAttack/RHEnd.lean (part B16: rhend_sliceColletExcl, rh_program78_stripfront_mach_unifiedCollet, _PT2, unifiedGao_ofColet, _PT2_ofColet)",
+    "build: lake build green (17450 jobs) - tmp/build_full_collet.txt; targeted: RhAttack.Z78Collet (8726 jobs) + RhAttack.RHEnd (8746 jobs)",
+    "identity: GitHub trees API at merge commit 2cbdbe7c... vs local frozen replay tree - 3549/3549 blob SHA matches (tmp/b6audit/collet69/); raw fetch of merged ReturnConstants.lean md5-identical",
+    "tmp/b6audit/collet69/replay/ (frozen-head second-party replay PASS 2026-10-21: 6474/6474 modules, 3472s, axiom cone [propext, Classical.choice, Quot.sound], 0 sorry)",
+    "scripts/rh/make_lean_cards.py (107 cards | 1578 body lines)"
+  ],
+  "artifacts": {
+    "colletUpper": 0.8747729897,
+    "colletD0max": 0.3747729897,
+    "face_shrink": 3.57103e-05,
+    "merge_commit": "2cbdbe7c14e926c1eb33fea0919e561038a27880",
+    "frozen_head": "ac76d5ef6008d976a7b8f3c1d921af2317e79ce9",
+    "tree_identity": "3549/3549 blob SHA at merge commit",
+    "in_tree_terminal_face": "hOffC : d0 <= 3747729897/10^10 above H"
+  },
+  "relations": ["0146", "0147", "0148", "0157"],
+  "no_rh_claim": true
+}

@@ -1703,6 +1703,44 @@ for the ACTUAL zeta zero set.  The branches:
       (4-core  reserve  rule).  No  RH  claim  in  any  direction;
       external  input  under  the  B6  section-8  protocol.
 
+      FRONTIER  STATUS  (0162,  2026-10-23):  [Z78C]  ADOPTED.
+      PR  #69  Collet  is  now  the  in-tree  frontier:  merge
+      identity  verified  against  the  frozen-head  replay  in
+      the  strongest  form  (merged  head  =  frozen  head
+      ac76d5ef;  the  FULL  merged  submission  tree  is
+      blob-SHA-identical  to  the  replayed  frozen  copy,
+      3549/3549  files  at  merge  commit  2cbdbe7c;  spot
+      hash  ReturnConstants.lean  md5  b82c1770...)  -  the
+      0148  replay  IS  the  merged-head  verification,  no
+      re-run.  In-tree:  Z78Collet.lean  (colletUpper  =
+      8747729897/10^10  =  0.8747729897;  colletD0max  =
+      0.3747729897)  +  RHEnd  Part  B16  GREEN  (full  tree
+      17450  jobs).  NEW  terminal  endpoint  rh_program78_
+      stripfront_mach_unifiedCollet  (+  _PT2)  with  ONE
+      open  face  hOffC  (no  off-pair  above  H  on
+      0  <  d0  <=  colletD0max)  -  the  slice
+      (colletD0max,  gaoD0max]  of  the  0142  face  is
+      closed  IN  BODY  (rhend_sliceColletExcl)  and  the
+      0142  Gao  endpoint  is  now  a  THEOREM  of  the  0162
+      endpoint  (B16.4).  Face  shrink  gaoD0max  -
+      colletD0max  =  3.57103e-5  -  the  largest  single
+      in-tree  face  shrink  to  date  (4.3x  the  0142
+      step).  Cumulative  from  3/8:  1.94871e-4  of  face
+      width  certified.  Cards  107.  PENDING  NAMING  ONLY:
+      the  standalone  Collet  paper  (haileystorm.github.io)
+      was  404  at  audit  time  -  provenance  TODO,  does
+      not  block  (the  B6  section-8  gate  is  the  kernel
+      replay,  which  is  PASS  and  bit-identical  to  the
+      merged  tree).  SNAPSHOT  CAVEAT  ROLLED  FORWARD:
+      the  board  is  live;  the  watcher  anchor  is  now
+      8747729897/10^10;  the  same  unit  (new  constant
+      module  +  B-part  +  replay  +  docs)  is  the  upgrade
+      path  for  any  successor  (the  conveyor  has  now
+      run  THREE  times:  0133,  0142,  0162).  No  RH
+      claim  in  any  direction:  a  zero-free  half-plane
+      at  0.8747729897,  still  0.3747729897  from  the
+      critical  line  in  off-line  distance.
+
 
 
 

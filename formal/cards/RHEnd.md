@@ -1,4 +1,4 @@
-# RHEnd.lean  (2839 lines)
+# RHEnd.lean  (3057 lines)
 WHAT:  THE ENDPOINT of the program on the ACTUAL zeta zero set under the
          named external input [Z78] (Re s > 7/8 zero-free), at the
          CONCRETE wire. RESIDUAL LEDGER after Part B12 (discovery 0129,

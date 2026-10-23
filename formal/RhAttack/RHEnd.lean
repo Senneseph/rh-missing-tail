@@ -134,6 +134,7 @@ import RhAttack.Z78P12
 import RhAttack.Z78Liu
 import RhAttack.Z78Track
 import RhAttack.Z78Gao
+import RhAttack.Z78Collet
 import RhAttack.S4WinCap
 import RhAttack.WinCount
 import RhAttack.P4Limit
@@ -2834,6 +2835,223 @@ theorem rh_program78_stripfront_mach_unifiedTrack_PT2_ofGao (q : ZeroSet)
   rh_program78_stripfront_mach_unifiedTrack_ofGao q hzG hqz
     honline Qside WinC.tPT2 (by norm_num [WinC.tPT2]) hPT2
     hOffGPT2
+
+/-!
+ADOPTED 2026-10-23 (discovery 0162).  PR #69 (Hailey Collet /
+HaileyStorm) merged; merge identity verified against the frozen-head
+replay: merged head = frozen head ac76d5ef6008d976a7b8f3c1d921af2317e79ce9,
+merge commit 2cbdbe7c14e926c1eb33fea0919e561038a27880, and the
+full merged submission tree is blob-SHA-identical to the replayed
+frozen copy (3549/3549 files, 2026-10-23).  See the Z78Collet module
+header for the complete provenance record.
+-/
+
+/-!
+**Part B16 — the tracker board moved AGAIN: [Z78C] supersedes [Z78G].**
+
+The B6 section-8 mechanism (demonstrated in 0133 and 0142) runs a
+third time: [Z78C] (QuasiRiemannTracker PR #69, record
+hailey-collet-1252270103, Hailey Collet / HaileyStorm; the kernel-
+verified all-Dirichlet zero-free half-plane at the certified rational
+colletUpper = 8747729897/10^10 = 0.8747729897 — see the Z78Collet
+module header for the full provenance: frozen-head identity ac76d5ef,
+this program's independent 6474/6474-module second-party replay PASS
+2026-10-21 at [propext, Classical.choice, Quot.sound] with 0 sorry,
+and the pending gates: merge identity check, standalone paper,
+catalogue record) is a STRICT STRENGTHENING of [Z78G] at
+colletUpper < gaoUpper (extColet_implies_extGao; transitively
+extColet_implies_extTrack/_extLiu/_ext78).  It is a NEW structural
+cycle — "finite ordinary source moments": the accepted PR67 input
+(= the [Z78T] record) plus 64 seed source faces, an intermediate
+return, 221 derived source faces and a final return over a 301-node
+finite source DAG — exactly the species the 0141/0144/0145 ceiling
+line forecast: a new cycle, not tuning.  Zeros of an actual set sit
+in [1 - colletUpper, colletUpper], so every off-pair satisfies
+d0 <= colletD0max = colletUpper - 1/2 = 3747729897/10^10 =
+0.3747729897 < gaoD0max (offPairD0leCollet, sharp).  The open face
+shrinks from (0, gaoD0max] to (0, colletD0max], the [Z78C]-sharp
+strip interior, and the slice (colletD0max, gaoD0max] of the B15
+face is closed IN BODY from [Z78C] itself.  The step removes
+gaoD0max - colletD0max = 3.57103e-5 of face width (4.3x the 0142
+step).  No RH claim: the face is a zero-exclusion statement in the
+unverified region; the input class is unchanged in kind — an external
+zero-free half-plane, still far from 1/2 — and the chain stays a
+REPEATABLE MECHANISM (B6 packet section 8, now demonstrated on a
+THIRD supersession): a newer verified snapshot of the tracker
+frontier supersedes this part mechanically.  Ceiling note (0147):
+the record sits 2.116e-4 above its own family's named-margin corner
+(0.8745613585650727), so a fourth supersession from the same family
+is plausible; the engine is input-uniform.  -/
+
+/--  B16.1  THE  OUTER  SLICE  OF  THE  OLD  FACE  IS  CLOSED  IN
+    BODY  FROM  [Z78C]:  for  an  actual-set  zero  set,  no  off-pair
+    with  d0  >  colletD0max  (of  any  height  t0  >  0):
+    offPairD0leCollet  already  bounds  every  off-pair  to
+    d0  <=  colletD0max.  In  particular  the  slice
+    (colletD0max,  gaoD0max]  of  the  B15  face  --  and  a  fortiori
+    (colletD0max,  qxD0max],  (colletD0max,  liuD0max],  (colletD0max,
+    3/8]  --  needs  no  face  at  all.  No  RH  claim.  -/
+theorem rhend_sliceColletExcl (q : ZeroSet)
+    (hzC : Z78Collet.externalZeroFree78Collet)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (t0 d0 : ℝ) (ht0 : 0 < t0) (hd0 : 0 < d0)
+    (hC : Z78Collet.colletD0max < d0) :
+    ¬ offPair q t0 d0 := by
+  intro hp
+  have hle := Z78Collet.offPairD0leCollet q hzC hqz t0 d0 ht0 hd0 hp
+  linarith
+
+/--  B16.2  THE  SOURCE-MOMENTS-UNIFIED  ENDPOINT:  the  B12
+    endpoint  with  the  external  input  upgraded
+    [Z78]  ->  [Z78C]  and  the  face  shrunk  to  0  <  d0
+    <=  colletD0max  (the  [Z78C]-sharp  strip  interior).
+    Above  H,  any  off-pair  has  d0  <=  colletD0max  BY
+    [Z78C]  (offPairD0leCollet)  before  the  face  is  applied  -
+    the  d0  <=  1/2  split  of  B11  stays  away  in  the
+    S1/S3  legs  and  in  the  S4-covered  leg;  the  far
+    region  (d0  >  1/2)  is  closed  by  the  [Z78]  derived
+    from  [Z78C].  No  RH  claim.  -/
+theorem rh_program78_stripfront_mach_unifiedCollet (q : ZeroSet)
+    (hzC : Z78Collet.externalZeroFree78Collet)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) → (|ρ.im| : ℝ) <
+      (707 : ℝ) / 50 → ρ.re = 1 / 2)
+    (Qside : ℝ × ℝ → ℝ)
+    (H : ℝ) (hH : 1000 ≤ H)
+    (hPT : WinC.allOnLineUpTo q H)
+    (hOffC : ∀ (t0 d0 : ℝ), H ≤ t0 → 0 < d0 →
+      d0 ≤ Z78Collet.colletD0max → ¬ offPair q t0 d0) :
+    RH q := by
+  have hz78 : Z78.externalZeroFree78 := Z78Collet.extColet_implies_ext78 hzC
+  refine S4A.rh_from_regime_closures q Qside Z78P12.MfP devProg
+    Z78P12.BwireP (fun p => MrLift p.1 p.2) floProg
+    ?_ ?_ ?_ ?_ ?_ ?_
+  · --  S1  witness  leg:  below  H  =  vacuous  (the  record);
+      --  above  H:  [Z78C]  bounds  d0  to  colletD0max,  the  face
+      --  kills.
+    intro t0 d0 ht0 hd0 hp
+    by_cases hle : t0 ≤ H
+    · exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
+        (le_of_lt ht0) hle) d0 hp)
+    · have hL : d0 ≤ Z78Collet.colletD0max :=
+        Z78Collet.offPairD0leCollet q hzC hqz t0 d0 ht0 hd0 hp
+      exact False.elim ((hOffC t0 d0
+        (le_of_lt (not_le.mp hle)) hd0 hL) hp)
+  · --  S2  leg:  covered  =  in  body;  low  band  =  vacuous
+      --  below  H;  far  =  [Z78]  (from  [Z78C]).
+    intro t0 d0 ht0 hd0 hp
+    by_cases hd0h : d0 ≤ (1 / 2 : ℝ)
+    · by_cases ht0k : 1000 ≤ t0
+      · exact hs2_covered q honline t0 d0 ht0 ht0k hd0 hd0h hp
+      · have hle : t0 ≤ H := le_trans (le_of_lt (not_le.mp ht0k)) hH
+        exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
+          (le_of_lt ht0) hle) d0 hp)
+    · exact False.elim (Z78P12.offPairFarEmpty q hz78 hqz t0 d0
+        (not_le.mp hd0h) hp)
+  · --  S3  leg:  below  H  =  vacuous  (the  record);  above  H:
+      --  [Z78C]  bounds  d0  to  colletD0max,  the  face  kills.
+    intro t0 d0 ht0 hd0 hp
+    by_cases hle : t0 ≤ H
+    · exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
+        (le_of_lt ht0) hle) d0 hp)
+    · have hL : d0 ≤ Z78Collet.colletD0max :=
+        Z78Collet.offPairD0leCollet q hzC hqz t0 d0 ht0 hd0 hp
+      exact False.elim ((hOffC t0 d0
+        (le_of_lt (not_le.mp hle)) hd0 hL) hp)
+  · --  S4  covered:  below  H  =  vacuous  (the  record);
+      --  above  H:  [Z78C]  bounds  d0  to  colletD0max,  the  face
+      --  kills.
+    intro t0 d0 ht0 hd0 hd0u hp
+    by_cases hle : t0 ≤ H
+    · exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
+        (by linarith [ht0]) hle) d0 hp)
+    · have hL : d0 ≤ Z78Collet.colletD0max :=
+        Z78Collet.offPairD0leCollet q hzC hqz t0 d0
+        (show 0 < t0 from by linarith [ht0]) hd0 hp
+      exact False.elim ((hOffC t0 d0
+        (le_of_lt (not_le.mp hle)) hd0 hL) hp)
+  · --  S4  low:  covered  low  band  below  H;  the  d0  <= 1/2  part
+      --  of  the  low  band  is  vacuous  (the  record)  below  H;
+      --  above  H  the  face  covers  (colletD0max  <  1/2).
+    intro t0 d0 ht0 ht0u hd0 hd0u hp
+    by_cases hle : t0 ≤ H
+    · exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
+        (le_of_lt ht0) hle) d0 hp)
+    · have hL : d0 ≤ Z78Collet.colletD0max :=
+        Z78Collet.offPairD0leCollet q hzC hqz t0 d0 ht0 hd0 hp
+      exact False.elim ((hOffC t0 d0
+        (le_of_lt (not_le.mp hle)) hd0 hL) hp)
+  · --  S4  far:  [Z78]  (from  [Z78C]).
+    intro t0 d0 ht0 hd0 hd0f hp
+    exact False.elim (Z78P12.offPairFarEmpty q hz78 hqz t0 d0
+      hd0f hp)
+
+/--  B16.3  THE  SOURCE-MOMENTS  ENDPOINT  AT  THE  PLATT-TRUDGIAN
+    FRONTIER  (the  [Z-PT2]  instantiation):  the  entire  named
+    residue  lives  STRICTLY  ABOVE  3,000,175,332,800,  as  ONE
+    zero-exclusion  face  (no  off-pair  in  0  <  d0  <=
+    colletD0max  above  the  frontier  -  the  [Z78C]-sharp  strip
+    interior)  plus  [Z78C]  itself  (which  closes  d0  >
+    colletD0max  in  body).  No  RH  claim.  -/
+theorem rh_program78_stripfront_mach_unifiedCollet_PT2 (q : ZeroSet)
+    (hzC : Z78Collet.externalZeroFree78Collet)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) → (|ρ.im| : ℝ) <
+      (707 : ℝ) / 50 → ρ.re = 1 / 2)
+    (Qside : ℝ × ℝ → ℝ)
+    (hPT2 : WinC.allOnLineUpTo q WinC.tPT2)
+    (hOffCPT2 : ∀ (t0 d0 : ℝ), WinC.tPT2 ≤ t0 → 0 < d0 →
+      d0 ≤ Z78Collet.colletD0max → ¬ offPair q t0 d0) :
+    RH q :=
+  rh_program78_stripfront_mach_unifiedCollet q hzC hqz honline Qside
+    WinC.tPT2 (by norm_num [WinC.tPT2]) hPT2 hOffCPT2
+
+/--  B16.4  THE  0142  GA  O  ENDPOINT  AS  A  THEOREM  OF  THE
+    [Z78C]  ENDPOINT  (in  body):  given  the  [Z78C]  input  and
+    its  terminal  face  hOffC  on  0  <  d0  <=  colletD0max,  the
+    older  five-step-form  endpoint  follows  --  the  gao  face
+    (0  <  d0  <=  gaoD0max)  splits  into  the  colletD0max  half
+    (the  hOffC  face)  and  the  slice  (colletD0max,  gaoD0max]
+    (closed  in  body  from  [Z78C]).  The  0142  terminal
+    statement  is  thus  a  THEOREM  of  the  0148  one.  No  RH
+    claim.  -/
+theorem rh_program78_stripfront_mach_unifiedGao_ofColet (q : ZeroSet)
+    (hzC : Z78Collet.externalZeroFree78Collet)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) → (|ρ.im| : ℝ) <
+      (707 : ℝ) / 50 → ρ.re = 1 / 2)
+    (Qside : ℝ × ℝ → ℝ)
+    (H : ℝ) (hH : 1000 ≤ H)
+    (hPT : WinC.allOnLineUpTo q H)
+    (hOffC : ∀ (t0 d0 : ℝ), H ≤ t0 → 0 < d0 →
+      d0 ≤ Z78Collet.colletD0max → ¬ offPair q t0 d0) :
+    RH q := by
+  have hzG : Z78Gao.externalZeroFree78Gao :=
+    Z78Collet.extColet_implies_extGao hzC
+  apply rh_program78_stripfront_mach_unifiedGao q hzG hqz
+    honline Qside H hH hPT
+  intro t0 d0 ht0 hd0 hd0G hp
+  by_cases hleC : d0 ≤ Z78Collet.colletD0max
+  · exact False.elim ((hOffC t0 d0 ht0 hd0 hleC) hp)
+  · exact False.elim (rhend_sliceColletExcl q hzC hqz t0 d0
+      (by linarith [ht0, hH]) hd0 (not_le.mp hleC) hp)
+
+/--  B16.5  THE  [Z-PT2]  INSTANCE  OF  B16.4  (the  0142  terminal
+    statement  at  tPT2  is  a  theorem  of  the  0148  endpoint  with
+    the  [Z-PT2]  record).  No  RH  claim.  -/
+theorem rh_program78_stripfront_mach_unifiedGao_PT2_ofColet (q : ZeroSet)
+    (hzC : Z78Collet.externalZeroFree78Collet)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) → (|ρ.im| : ℝ) <
+      (707 : ℝ) / 50 → ρ.re = 1 / 2)
+    (Qside : ℝ × ℝ → ℝ)
+    (hPT2 : WinC.allOnLineUpTo q WinC.tPT2)
+    (hOffCPT2 : ∀ (t0 d0 : ℝ), WinC.tPT2 ≤ t0 → 0 < d0 →
+      d0 ≤ Z78Collet.colletD0max → ¬ offPair q t0 d0) :
+    RH q :=
+  rh_program78_stripfront_mach_unifiedGao_ofColet q hzC hqz
+    honline Qside WinC.tPT2 (by norm_num [WinC.tPT2]) hPT2
+    hOffCPT2
 
 /-!  -/
 end RHEnd
