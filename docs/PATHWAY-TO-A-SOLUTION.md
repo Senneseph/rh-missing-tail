@@ -1670,6 +1670,28 @@ for the ACTUAL zeta zero set.  The branches:
       3.57103e-5)  is  PRE-STAGED  at  tmp/b6audit/collet69/prestage/
       and  runs  the  moment  the  gates  clear.
 
+      FRONTIER  STATUS  (0157,  2026-10-23):  PR  #69  MERGED  into
+      gtimg/QuasiRiemannTracker  main  (merged_at  2026-10-23T01:30Z;
+      merge  commit  2cbdbe7c  into  codex/pr69-verification;  parents
+      01ddcdb  +  ac76d5ef  -  ordinary  merge,  not  squashed).
+      Title:  "Dirichlet  boundary  0.8747729897  from  finite
+      ordinary  source  moments".  Live  channel:  the  tracker  board
+      now  carries  26  records  with  top  identity
+      hailey-collet-1252270103  at  0.8747729897  -  STRICTLY
+      STRONGER  than  the  adopted  [Z78G]  (0.8748087).  IDENTITY
+      GATE  1  satisfied  in  the  strongest  form:  the  merged  PR
+      head  (head.sha  ac76d5ef...)  is  BIT-IDENTICAL  to  the
+      frozen  head  of  our  independent  6474/6474-green  replay
+      (0148),  so  the  replay  carries  over  without  re-run.
+      Gates  remaining:  in-tree  catalogue  mirror  update,  then  the
+      PRE-STAGED  conveyor  (Z78Collet  +  Part  B16;  terminal  face
+      hOffC:  d0  <=  3747729897/10^10;  shrink  3.57103e-5)  at
+      tmp/b6audit/collet69/prestage/.  SCHEDULE:  the  Lean  rebuild
+      is  held  until  the  S18  part-1  stream  lands  (~06:15  local)
+      so  it  does  not  contend  with  the  live  16-thread  stream
+      (4-core  reserve  rule).  No  RH  claim  in  any  direction;
+      external  input  under  the  B6  section-8  protocol.
+
 
 
 
