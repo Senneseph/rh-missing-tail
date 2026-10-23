@@ -816,3 +816,19 @@ prediction - the measurable predictability is the local 1000-ray
 neighbourhood state. No RH claim. Open hooks (owner-gated): scale-up
 X >= 1e8, a shared-ray local-state model, stage-5 digit appearance
 at X >= 7.96e6.
+
+## 0163.  The  S1  straddle  composite  is  K-DEAD  at  t  >= ~1e8
+  (S18  part1  reissue,  clean  single-process,  2026-10-23)
+
+  The  exact-tail  S1  straddle  composite  (day023  form)  has  a
+  K  assembly  that  stops  tracking  zeta  at  high  t:  at
+  1e8-3e9  it  UNDERFLOWS  to  0  (resid  =  |z|  exactly),  at
+  1e10-2.9e10  it  OVERFLOWS  to  e^{+2.3e6}  /  e^{+9.5e6}
+  (finite  mpf;  the  f64  jsonl  cast  shows  inf  -  the  "VOID"
+  rows).  The  S1Marg  dip  (0.613  at  1e8  ->  0.155  at  3e9
+  ->  ~ 0  at  1e10)  is  therefore  K-death,  not  a  data  defect
+  nor  thread  corruption  (the  clean  reissue  reproduced  the
+  original  finite  rows  bit-exactly).  The  composite  is
+  certifiable  only  where  the  K  side  lives  (margin  >=  1
+  through  2.8e7,  certified  track).  No  RH  claim  in  either
+  direction.

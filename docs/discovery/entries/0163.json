@@ -1,0 +1,21 @@
+{
+  "id": "0163",
+  "ts": "2026-10-23T09:00:00",
+  "title": "S18 part1 reissue COMPLETE (clean single-process, 144/144 rows, 1156s): the S1Marg dip is confirmed with mechanism - dip curve best-margin-per-target 0.613212 (1e8, k=+1) / 0.522862 (3e8, k=+2) / 0.223325 (1e9, k=-1) / 0.155110 (3e9, k=+1) / ~0 (1e10) / ~0 (2.9e10); the clean reissue REPRODUCED the original process's finite rows bit-exactly (retrovalidating the 12-worker run's finite values and best-k choices); MECHANISM: in every part1 row resid = |zeta - K| = |zeta| exactly at 1e8-3e9 (the K assembly UNDERFLOWS to 0, Re(logK) ~ -9.4e6) or = |K| at 1e10-2.9e10 (the K assembly OVERFLOWS to e^{+2.327e6} / e^{+9.499e6} - a FINITE mpf quantity whose f64 jsonl cast reads 'inf', which IS the original run's 'VOID' rows); the dip is K-DEATH of the day023 composite at t >= 1e8 (the K side stops tracking zeta), not a data defect and not thread corruption; the S1 straddle composite is certifiable only where the K side lives (margin >= 1 through 2.8e7 certified track); a high-t repair needs a high-t K assembly (new composite, out of S18 scope); witnesses re-derived bit-exactly (stream keys match 144/144; the earlier G_OF table bug - jsonl t vs g confusion - fixed by re-deriving witnesses with the part1() search)",
+  "kinds": ["reissue", "defect-audit", "mechanism"],
+  "status": "recorded",
+  "claim": "No RH claim: zero-exclusion margin values in the unverified region, decaying from the certified track in one direction only.",
+  "evidence": [
+    "tmp/sx1g_s18b_reissue_part1.py + tmp/s18b_reissue_part1.jsonl (144 rows, 400-pt) + tmp/s18b_reissue_part1.md (+ interpretation section) + tmp/sx1g_run.log (1155.7s)",
+    "stream cache s18_stream_part1_0b4d65098f6f82ed.npz (144 clean vectorized pairs, keys verified bit-exact against re-derived witnesses)",
+    "probe: mpmath dps30 exp window ~ +/-1e7 (e^{2.3e6} finite, e^{9.5e6} finite - the overflow is in the float() jsonl cast, not in mpf)"
+  ],
+  "artifacts": {
+    "dip_curve": {"1e8": 0.613212, "3e8": 0.522862, "1e9": 0.223325, "3e9": 0.155110, "1e10": "~0 (10^-1e6)", "2.9e10": "~0 (10^-4e6)"},
+    "K_1e9_Re_logK": -9.4e06,
+    "K_1e10_Re_logK": 2.327e06,
+    "K_2.9e10_Re_logK": 9.499e06
+  },
+  "relations": ["0156", "0158"],
+  "no_rh_claim": true
+}
