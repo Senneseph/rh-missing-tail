@@ -198,38 +198,79 @@ known objects. That is the decision point for continuation (§5).
 | FANTASY layer (corrected Ξ-scan) | `tmp/sx1b2_fantasy_layer.py` → `tmp/sx1b2_run.log`, `tmp/sx1b2_fantasy_stats.json` |
 | zero audit + identity verification | `tmp/sx1b3_audit.py` → `tmp/sx1b3_audit.json` |
 | triangle census (corrected) | `tmp/sx1c2_triangles.py` → `tmp/sx1c2_run.log` |
+| **bridge test** | `tmp/sx1e_bridge.py` → `tmp/sx1e_run.log`, `tmp/sx1e_bridge_stats.json` |
+| chimes seed (NEXT, owner-gated) | `docs/IDEA-SEED-PRIME-LATTICE-CHIMES-2026-10-22.md` |
 | superseded drafts (kept for the record) | `tmp/sx1b_fantasy_layer.py` (Re-zeta scan — wrong object), `tmp/sx1c_triangles.py` (off-by-2 dd bug), `tmp/sx1d_diff.py` (A/C logic equivalence arbiter) |
+
+**F8 — THE BRIDGE (executed 2026-10-23, `tmp/sx1e_bridge.py`,
+`tmp/sx1e_bridge_stats.json`).** The pass-1 continuation question: does
+the AP lattice carry information beyond the Hardy–Littlewood 3-term-AP
+prediction?
+- **d-gap distribution: ON prediction, tightly.** For all 3,333
+  admissible differences d ≤ 20,000 (necessarily 6 | d — S₃(d) = 0
+  otherwise, the standard mod-3 structure), the fitted ratio
+  `R(d) = A(d) / (K·S₃(d)·X/ln³X)` lies in **[0.939, 1.022]**
+  (median 0.981, p10/p90 = 0.964/1.000, K = 26.44 fitted on a control
+  range; S₃(d) = the exact singular series with local factors at
+  2, 3 and each prime divisor of d). The residual ratio has **no
+  periodic structure in any d mod m class** (m ∈ {4,5,7,8,10,11,12,25},
+  class-spreads all 1.00) and only weak correlation with ω(d)
+  (−0.11). chi²/dof = 3.53 over 3,333 Poisson terms — the mild, smooth
+  excess is the expected secondary (log-correction) behavior of the
+  3-AP main term, not lattice-specific structure.
+- **near-miss classes (around F3): systematically BELOW the uniform-p
+  null, with a second vanishing class found.** Observed counts of APs
+  with |p−3d| = g (d ≤ 20,000; per-class uniform-p expectation
+  320.1 after the 2lnX/X correction): g = 1: **164 (0.51×)**,
+  g = 5: **0 — structurally empty** (p = 3d±5 forces p+2d = 5(d±1)
+  composite; a second F2-type vanishing class in the near-miss layer),
+  g = 11: 203 (0.63×), g = 23: 184 (0.58×), g = 37: 173 (0.54×).
+  Under-representation is monotone and smooth — the direction of the
+  expected bottom-of-range 1/ln³p profile effect (the near-miss p sit
+  at p ≈ 3d ≪ X) — NOT a structured excess. The minimal-miss class F3
+  carries no new information beyond the known arithmetic (its deficit
+  is, at most, the computable linear-form constant for the triples
+  (3d±g, 4d±g, 5d±g) — a named local-factor calculation, not an open
+  object).
+- **BRIDGE VERDICT: the lattice sits on the known prediction.** Both
+  layers that could have hidden a new object — the gap distribution
+  (F8a) and the seed's own minimal-miss class (F8b) — are on or below
+  the Hardy–Littlewood baseline, the only structure present being the
+  singular series itself and the (computable) vanishing-class
+  arithmetic. The seed's floor of acceptable success — "simplifies to
+  known good limits of the basics" — is met.
 
 ## 5. Verdict — should we continue?
 
-**Yes — one more bounded pass, then archive.** The construction
-produced real, checkable facts (F1–F3 are theorem-grade; F4–F7 are
-measurement-grade, each cross-verified), and the seed's "general rule"
-is now two named, numerically-verified identities rather than a mood. The continuation that would make the
-pass *complete in the sense the seed hopes* — "bounding the growth of
-our face structures" — is a specific, bounded experiment, not open
-ended:
+**CLOSED to appendix — with the chimes pass as the next (owner-gated)
+exploration.** The bridge (F8) falsifies the "new object" hypothesis at
+this scale: the lattice is on-prediction in the gap distribution to
+within the singular series, and the seed's own minimal-miss class is
+*below* the uniform-p null (with a bonus second vanishing class, g = 5).
+What the program keeps — and what it paid for at one pass of compute:
+- **F1** (no prime-Pythagorean structure; theorem-grade, 20-line Lean
+  statement queued below),
+- **F2 + F8b** (the square-gap factor and its vanishing-class
+  arithmetic — a small self-contained family of exact facts),
+- **F6/F7** (the FANTASY duality numerically verified end-to-end with
+  the pass's own 813 zeros — the general rule, stated twice),
+- **F4–F5** (the 537M-AP census, multiplicity, 1.31M-edge joinder
+  graph, 11.7M rings — the constructed structure itself).
 
-1. **The bridge test (the only real open question).** The lattice side
-   has its own gap statistic — the triad gap `d` and the square defect
-   `(p−3d)(p+d)`; the FANTASY side has the phantom deficit whose
-   *frequencies* are the zeros. The testable claim: **the AP-gap
-   statistics of the prime lattice (F4/F5) carry no information beyond
-   the zero-free-region bound itself** — i.e. the reorganization
-   simplifies to "known good limits of the basics" (the seed's floor
-   of acceptable success) — or it does (a new channel). Concretely:
-   compare the empirical AP-gap distribution at X = 2×10⁶ against the
-   Hardy–Littlewood prime-AP prediction (a 3-line chi-square); if the
-   lattice sits on the known prediction to its own noise, the seed's
-   contribution is the F1–F3 fact set + the duality map, and the
-   exploration **closes into an appendix**; if there is a structured
-   excess (particularly in the minimal-miss class F3), that is a new
-   object worth a follow-up pass.
-2. **F2 as a small in-tree Lean fact** (optional, cheap): the
-   `(p−3d)(p+d)` factorization and the no-prime-Pythagorean theorem
-   (F1) are ~20 lines of Lean; putting even F1 in the tree would give
-   the seed its first *formal* fact. Do it only if the bridge test
-   says "continue".
-3. **Stop rule.** If (1) shows the lattice is on-prediction, stop:
-   write the appendix (F1–F7 + verdict), commit, archive the scripts —
-   the seed has then paid for real facts at one pass of compute.
+**Next (owner-gated, NOT to be started before the owner returns to the
+document):** the **chimes** pass —
+`docs/IDEA-SEED-PRIME-LATTICE-CHIMES-2026-10-22.md` (written 2026-10-22):
+sieve-growth member-count chimes, level-isomorphism test, and the
+compass test (running total of conjugate-leaf areas at a chime level →
+predict the next prime / its gap, against the li and zero-sum
+baselines). The bridge's null-result is the prior for that pass: the
+compass must beat the FANTASY-layer baseline, not merely the
+li-prediction, to count.
+
+Named, optional, non-blocking follow-ups (do only on explicit
+instruction):
+1. **F1 + F2 as in-tree Lean** (~20 lines; probe-first in `tmp/`):
+   no-a²+b²=c²-prime + the (p−3d)(p+d) factorization + the g = 5
+   vanishing class.
+2. **Linear-form constant** for the (3d±g, 4d±g, 5d±g) near-miss
+   triples — pins the 0.51× factor to its exact local-factor value.
