@@ -1,0 +1,28 @@
+{
+  "id": "0166",
+  "ts": "2026-10-23T13:30:00",
+  "title": "Spindle pass 5 (T7, owner variational variant) executed: F16 CLOSED-NEUTRAL for active optimization / gap-prediction by the primes, with two positive identifications. Setup: the owner asks whether the NS 'game' has new primes competing to minimize an action - predicting the next gap to the next structure, optimizing the spindle energy gradient, a slightly different objective each time. By construction every valid spindle is present (no per-prime chord choice), so the testable readings are: T7a selection edge vs random-odd null; T7c corner = extreme of the functional; T7d density transient = relaxation; T7e (the owner's framing) gap-sequence predictability vs null. Results at 2e6 (2,204,797 spindles, 4.6s; 1e8 controls: 0.5s + F15 T2 already in hand): (1) T7e - the spindle event sequence IS the prime sequence (148928/148933 = 99.997% of primes carry chords; only 5 do not): lag-1(log gap) spindle -0.0658 vs ALL-prime -0.0657 (identical to 3 digits; -25 sigma at n=148928) vs random-odd null -0.0003; 1e8 all-prime lag-1 = -0.0482 at -115 sigma (n = 5,761,455), scale-stable with ~1/ln x decay as the twin-bias theory predicts; Fano 11.8294 (spindle) vs 11.8807 (all primes); the predictability curve (next-gap median vs local rate in the preceding 1e5 window: deciles 12 12 12 12 10 10 10 10 10 8) is the trivial local prime-density effect; search-cost mean gap 13.43 = the typical prime gap ln(2e6) = 14.5. (2) T7a - prime-vs-null selection statistics are textbook congruence arithmetic: chord-richness ratio 14.804/19.812 = 0.7472 vs the mod-3 screening prediction of EXACTLY 3/4 (for prime p both death classes d congruent p and d congruent 2p mod 3 kill 2/3 of the even chords, leaving 1/3; random odd m averages 4/9); per-chord A ratio 0.541 (primes 46% lower area); per-chord 1/S ratio 0.849 (primes carry more threads: p-1 even forces gcd(p-1, 2d) >= 2); KS 0.2853. (3) T7c - the finite corner (A/S < 100, n = 14, all p <= 4201; scale-frozen at 1e8 per F15 T2) is EXACTLY the area-minimizing family |p-5d| = 1: p congruent 1 or 4 (mod 10) with d = (p-1)/5 or (p+1)/5, placing the chord ON the p/5 zero of A(p,d), achieving the per-p minimum area A = 1*(p-2d); 4201/d=840 at r = d/p = 0.2000 EXACT with A = 2521 = 1*2521 (also 3361/672, 1861/372, 2971/594, 449/90, 389/78, 89/18, 29/6 all with |p-5d| = 1). 'The winners (small A/S) are the area minimizers' is literally true - and the winner set is the congruence classes p congruent 1,4 (mod 5) within the chord range: arithmetic, not dynamical choice. (4) T7d - the 100-layer phantom excess decays 29.1% (layer 0) to 11.7% (layer 99), fast at first, persistent ~12% floor = the systematic ln-model gap (F15 T5 low-height asymptotic convergence); rational fit R^2 = 0.46 on the head-30; the power/exponential linearizations score worse under original-scale R^2 (recorded probe caveat). Verdict: CLOSED-NEUTRAL for active optimization/gap-prediction with P1 (corner = area-minimizing congruence family) and P2 (the only predictability in the system is the primes' own gap alternation, inherited verbatim, anti-burst, scale-stable) as the two positives; F15 CLOSED-FLAT thereby gains its variational explanation (the game is near the minimum of every functional in the family because there is no degree of freedom left to move - the structure is fully determined by the primes that built it, which are themselves only weakly self-predicting). NS posture: structural bounding template only (T6); no RH claim in any direction; the A(p,d) form (zeros at d = p/5 and d = p/2, |A| max at d = 7p/20) is our construction, so the corner's location at the p/5 zero is a property of the template + the congruence class, not an independent natural selection.",
+  "kinds": ["side-quest", "measurement", "variational"],
+  "status": "recorded",
+  "claim": "No RH claim: measurement-grade results about the frozen spindle construction (F16-P1, P2 positives; N1, N2 negatives); NS used as structural bounding template only.",
+  "evidence": [
+    "tmp/sx6_variational.py + tmp/sx6_variational_stats.json (2e6 pass, seed 20261023 null, 4.6s)",
+    "1e8 prime-gap control (inline probe, 0.5s): lag-1(log gap) = -0.0482 at -115 sigma, n = 5,761,455 primes",
+    "docs/SPINDLE-VARIATIONAL-PASS5-2026-10-23.md (the T7 report, F16)",
+    "F15 1e8 corner (docs/SPINDLE-NS-FEASIBILITY-2026-10-23.md section 8, T2): same 14 spindles A/S < 100 at 1e8, min 8.5 at (29, 6) - scale-freeze of T7c"
+  ],
+  "artifacts": {
+    "lag1_spindle_2e6": -0.0658,
+    "lag1_allprime_2e6": -0.0657,
+    "lag1_allprime_1e8": -0.0482,
+    "lag1_null_2e6": -0.0003,
+    "richness_ratio_prime_over_null": 0.7472,
+    "mod3_prediction": 0.75,
+    "A_per_chord_ratio": 0.541,
+    "invS_per_chord_ratio": 0.849,
+    "corner_family": "|p - 5d| = 1, p congruent 1 or 4 mod 5, n = 14, p <= 4201",
+    "transient": "29.1% -> 11.7% over 100 layers"
+  },
+  "relations": ["0160", "0161"],
+  "no_rh_claim": true
+}

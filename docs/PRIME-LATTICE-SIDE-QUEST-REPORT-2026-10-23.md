@@ -281,3 +281,42 @@ Files: `tmp/sx5_scale1e8.py` / `tmp/sx5_scale1e8_stats.json` /
 `tmp/sx5_run.log`; plan of record `docs/SPINDLE-EXECUTION-PLAN-
 2026-10-23.md`; results in `docs/SPINDLE-NS-FEASIBILITY-2026-10-23.md`
 §8.
+
+## Pass 5 (F16) — the variational reading (2026-10-23, ~13:00)
+
+Owner variant: *"the NS game — do new primes compete to minimize the
+action, predicting the next gap to the next structure, optimizing
+the spindle energy gradient (a slightly different objective each
+time)?"*  Executed as T7 (docs/SPINDLE-VARIATIONAL-PASS5-2026-10-23.
+md; tmp/sx6_variational.py, 4.6s at 2e6 + 0.5s 1e8 control):
+
+- **F16 verdict: CLOSED-NEUTRAL** for active optimization /
+  gap-prediction.  The game's event sequence IS the prime sequence
+  (99.997% of primes carry chords): spindle lag-1(log gap) =
+  −0.0658 vs all-prime −0.0657 (identical to 3 digits; 1e8:
+  −0.0482 at −115σ; random-odd null: −0.0003).
+- **F16-P1 (positive)**: the finite corner (the only concentrated
+  structure; n = 14, p ≤ 4201, scale-frozen) is EXACTLY the
+  area-minimizing family |p−5d| = 1 — p ≡ 1 or 4 (mod 5) with
+  d = (p∓1)/5 placing the chord ON the p/5 zero of A; 4201/840
+  sits at r = d/p = 0.2000 exact, A = 1·2521.  "The winners are
+  the minimizers" is true — and the winners are a CONGRUENCE CLASS
+  (arithmetic, not choice).
+- **F16-P2 (positive)**: the only predictability in the system is
+  the primes' own gap alternation (anti-burst, small→large, the
+  twin-bias direction), inherited verbatim, scale-stable
+  (~1/ln x decay: −0.0657 @ 2e6 → −0.0482 @ 1e8).
+- **F16-N1**: all prime-vs-null selection statistics are textbook
+  congruence arithmetic: chord-richness ratio 0.7472 vs the
+  mod-3-predicted 3/4; per-chord A 0.54×; per-chord 1/S 0.85×
+  (p−1 even forces gcd ≥ 2).
+- **F16-N2**: the phantom transient (29.1% → 11.7% floor over 100
+  layers) is the documented ln-model asymptotic convergence; mild,
+  density-level.
+- F15 CLOSED-FLAT thereby gains its variational explanation: the
+  game is near the minimum of every functional in the family
+  because there is no degree of freedom left to move.  NS
+  supplied the shape of the question (T6 posture: bounding
+  template only); the data supplied the answer.  No RH claim in
+  any direction; the A(p,d) form (zeros at d = p/5, p/2) is our
+  construction.

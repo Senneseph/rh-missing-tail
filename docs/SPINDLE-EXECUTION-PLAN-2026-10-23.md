@@ -36,6 +36,7 @@ Scale insight: S(T) needs only d(n) for n ≤ 4000 (no 1e8 divisor sieve).
 | **T4** spindle dynamics | 1e8 | **DONE** | flat deciles (3.799–3.808), slope 0.00021, top-1% elongation 0.999× → NO DYNAMICS | vectorized |
 | **T5** phantom flow conservation | 1e8 | **DONE** | B(1e8)=1,862,122,325 (= ln model ×1.0025); ln-detrended drift +0.31%, lag-1 +0.22; only systematic deviation = low-height asymptotic convergence (layers 0–4 +12.9%→, +0.04% at top) → CONSERVED | exact divisor identity |
 | **T6** NS provenance audit | web | **DONE** (primary-source level) | Buckmaster statement full text; OpenAI repo cloned+inspected (claims: forced NS C+D every viscosity + UNFORCED Euler FTS); public papers located; lean4.dev (independent assessment ongoing); CMI announcement pulled; no certification | 1 session slice |
+| **T7** variational reading (owner variant, F16) | 2e6 + 1e8 control | **DONE** | CLOSED-NEUTRAL for active optimization/gap-prediction: game event seq = prime seq (99.997% have chords; lag-1 −0.0658 ≈ all-prime −0.0657, 1e8 −0.0482 @ −115σ, null −0.0003); P1: corner = exactly the area-minimizing family \|p−5d\| = 1 (p ≡ 1,4 mod 5, 4201/840 at r = 0.2000 exact); P2: the only predictability = the primes' own gap alternation; N1: prime-vs-null ratios = congruence arithmetic (richness 0.7472 ≈ 3/4 mod-3 prediction); N2: transient 29%→12% floor = ln-model convergence | 4.6s + 0.5s |
 
 ## 3. Decision gates (adapt-when) rules
 
@@ -91,6 +92,8 @@ docs/SPINDLE-NS-FEASIBILITY-2026-10-23.md   report (F14, T1-T6 defined)
 docs/SPINDLE-EXECUTION-PLAN-2026-10-23.md   THIS plan (living)
 tmp/sx4_spindle.py + stats + log            2e6 pass (F14 numbers)
 tmp/sx5_scale1e8.py + stats + log           1e8 pass (T1r-T5)
+tmp/sx6_variational.py + stats              T7 pass (F16, 2e6 + null)
+docs/SPINDLE-VARIATIONAL-PASS5-2026-10-23.md   T7 report (F16)
 docs/PRIME-LATTICE-SIDE-QUEST-REPORT-...md  quest record (passes 1-4)
 ```
 
@@ -113,6 +116,15 @@ docs/PRIME-LATTICE-SIDE-QUEST-REPORT-...md  quest record (passes 1-4)
 - 06:58 F15 results finalized: CLOSED-FLAT (G4 wall found at 1e8).
   Discovery 0161 recorded, feasibility report §7–8, side-quest
   report addendum, this plan updated, committed, pushed, wiki saved.
-- NEXT (owner-gated): G2 (1e9 after S18 frees RAM; ~10× cost, ~8–10 GB
-  peak) or different face (spindles over chime branches — new seed
-  doc).
+- ~13:00 T7 (owner variational variant, F16): sx6 probe 4.6s at 2e6
+  (T7a null: richness ratio 0.7472 ≈ 3/4 mod-3 prediction; A/chord
+  0.54×; 1/S 0.85×); T7c: corner = the |p−5d| = 1 family (4201/840
+  at r = 0.2000 exact — the competition resolves to p ≡ 1,4 mod 5);
+  T7d: transient 29.1% → 11.7% floor (mild maturation); T7e: gap
+  prediction test — spindle lag-1 = all-prime lag-1 to 3 digits
+  (−0.0658 / −0.0657), 1e8 control −0.0482 @ −115σ, null 0.0003 →
+  CLOSED-NEUTRAL (P1+P2 positives, N1+N2 negatives). Report
+  SPINDLE-VARIATIONAL-PASS5-2026-10-23.md, F16 in side-quest report,
+  discovery 0166.
+- NEXT (owner-gated): G2 (1e9; ~10× cost, ~8–10 GB peak) or different
+  face (spindles over chime branches — new seed doc).
