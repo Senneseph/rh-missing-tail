@@ -32,9 +32,9 @@ until the writeups are audited — that audit is follow-on T6):
 
 | claim | content | status as of 2026-10-23 |
 |---|---|---|
-| OpenAI, 2026-09-08 | internal multi-agent system (~10k agents, 88 h) proved 3D NS **develops a singularity in finite time** — statements **C and D** of Fefferman's formulation (the variants permitting a smooth external force); announced Lean formalization (machine-checked per the announcement, ~17 h) | widely reported (Quanta, Nature, Science, SciAm ×2, NPR, New Scientist). Community: proof "technically believed correct" (NPR) but (i) SciAm/Cao-Labora: it is the FORCED variant — "the most important problem (unforced regularity) is unsolved"; (ii) New Scientist: a team claims a math-into-code mistranslation in the formalization (contested); (iii) OpenAI withdrew the prize claim. **Not CMI-certified.** |
+| OpenAI, 2026-09-08 | internal multi-agent system (~10k agents, 88 h) proved 3D NS **develops a singularity in finite time** — statements **C and D** of Fefferman's formulation (the variants permitting a smooth external force); announced Lean formalization (machine-checked per the announcement, ~17 h) | **T6-AUDITED (primary sources fetched 2026-10-23):** claims verified from the official repo README + announcement page: NS **(C)+(D) at EVERY positive viscosity** (R³: no global smooth solution with uniformly bounded kinetic energy; T³: no global smooth solution), BOTH with smooth forcing; separately an **UNFORCED 3D Euler finite-time singularity** (smooth compactly supported divergence-free data; C¹ norm unbounded, ∫‖ω‖∞ = ∞). Public: two paper PDFs (cdn.openai.com, URLs in the repo README) + the full Lean 4.34.0-rc2/Mathlib formalization repo **`openai/NavierStokesAndEuler` (cloned locally, inspected)**. Status: proof "technically believed correct" (NPR) but (i) forced variant — "the most important problem (unforced viscous) is unsolved" (SciAm/criterion); (ii) formalization independently assessed as ONGOING (lean4.dev, 2026-09-09: "we reviewed the documentation, not a local rebuild"); (iii) **credit/priority dispute** documented in primary source (see T6 appendix): OpenAI announced AFTER being alerted to Buckmaster–Alpöge's in-flight work; OpenAI denies its model saw or trained on their sessions; "conflicting public accounts, not an established finding" (lean4.dev); OpenAI withdrew the prize claim. **Not CMI-certified.** |
 | CMI, 2026-09-11 | "Navier-Stokes Announcement": the problem "apparently settled" | **the live CMI page no longer contains the announcement** (fetched 2026-10-23, 0 occurrences of "Navier") — pulled while verification proceeds. CMI has NOT certified the result. |
-| Buckmaster–Alpöge (Anthropic), 2026-08/09 | forced **Euler** finite-time blowup; published preprints WITH Lean formalizations | the fully machine-checkable artifact of the cluster; priority recognized by OpenAI. |
+| Buckmaster–Alpöge (Anthropic), 2026-08/09 | forced **Euler** finite-time blowup; published preprints WITH Lean formalizations | **T6-AUDITED (primary):** the published statement (fetched in full, 2026-10-23) claims THREE smooth-forcing blowup results — incompressible porous media, Boussinesq, 3D Euler — plus a claimed (UNPUBLISHED, Lean-verification incomplete) hypo-dissipative NS blowup "suggestive of a path to unforced Euler". Credits the program to **Córdoba & Martínez-Zoroa** (rough-forcing blowups); LLM-accelerated (Claude / Codex GPT-5.6 Sol / Astra); first LLM proof Lean-verified 2026-08-22; the author himself calls the Euler writeup "AI slop" (presentation-quality caveat, first-party). The repo's Lean is the fully machine-checkable artifact of the cluster. |
 | Ri, arXiv:2601.15685 (2026-01) | **global regularity** for Leray–Hopf, d ≥ 3 (OPPOSITE direction) | preprint claim, unverified. |
 | Guevremont, viXra:2603.0061 (2026-03, v2) | global regularity "via deterministic harmonic resolution" | non-peer-reviewed repo (by its own disclaimer); "corrected Lean" claim unaudited. |
 | NS-7227, Zenodo (2026-09-17) | global regularity "via the Shelbydon spectral operator" | 0 citations; characteristic of AI-generated slop; **treat as untrusted**. |
@@ -43,7 +43,6 @@ until the writeups are audited — that audit is follow-on T6):
 **The structural fact the owner wants** (independent of any single
 claim's final verdict): the flexible space of NS dynamics is now
 ENCLOSED on both sides —
-
 - from ABOVE: Leray's a-priori energy inequality (1934): the L²
   energy of any weak solution cannot grow past the initial budget;
   growth of the coarse quantity is bounded by a smooth, explicit,
@@ -206,3 +205,120 @@ blowup witness is sought INSIDE our own lattice.
   and the formalization is contested; the affirmative preprints are
   claims, not facts, and the Zenodo NS-7227 item is untrusted by
   character. This report uses NONE of them as established results.
+
+## 7. T6 AUDIT APPENDIX (executed 2026-10-23, primary sources)
+
+Fetched and read in full this session (fetched ≠ adopted; all cited
+as claims-attributed to their authors):
+
+1. **Buckmaster’s statement (primary, 4 pp., extracted):**
+   `https://cims.nyu.edu/~tristanb/statement.pdf`
+   (mirror copy: constable.blog). Content: the three published
+   smooth-forcing blowups (porous media, Boussinesq, Euler); the
+   claimed-but-unreleased hypo-dissipative NS (Lean incomplete);
+   the origin of the program (Córdoba–Martínez-Zoroa); the LLM
+   acceleration history (first LLM proof Lean-verified 2026-08-22;
+   "the Euler writeup ... can only be described as AI slop" —
+   first-party presentation caveat); and the priority-dispute
+   chronology: Sep 3 preemptive e-mail to OpenAI; Sep 6 calls in
+   which OpenAI disclosed an internal model’s forced-NS proof
+   ("options c and d in Fefferman"), "very little human input" was
+   said and "turned out not to be true" per his account (team work,
+   multi-week, easier problems first, Codex-written prompts; first
+   prompt sent "in the past few days, after information about our
+   work had reached OpenAI" — his characterization); training-on-
+   sessions questioned, "the model did not look up user data," the
+   training question unanswered; two authorship proposals, both
+   declined; "Why would you ruin your career?" / "If you don’t want
+   me to be nice, then I don’t have to be nice." His explicit
+   non-claims: he has not seen OpenAI’s proof, does not know
+   whether their data was used, accuses no one.
+2. **OpenAI’s own artifacts:** the announcement page (fetched) and
+   the formalization repo `openai/NavierStokesAndEuler` (cloned
+   locally, structure inspected): Lean 4.34.0-rc2 + Mathlib + Lake;
+   README states the NS (C)+(D)-every-viscosity results and the
+   UNFORCED Euler finite-time singularity; public paper PDFs:
+   `https://cdn.openai.com/pdf/32d9f210-8b73-45e0-91bc-
+   82a30aef8a9a/navier-stokes.pdf` and
+   `https://cdn.openai.com/pdf/315b36cd-ec98-4023-8342-
+   93345194ece1/euler.pdf`. ComparatorChallenges/ shipped for
+   independent checking. NO local rebuild of the proof has been
+   done by us (the audit scope of T6; a rebuild is a separate,
+   heavier task if ever wanted).
+3. **Independent framings fetched:** lean4.dev (2026-09-09 review:
+   "Lean artifact released; independent assessment ongoing"; the
+   dispute = "conflicting public accounts, not an established
+   finding"); Terry Tao’s 2026-09-07 post on the B-A blowups;
+   arXiv:2609.23868 (cites OpenAI’s exact claim: forced NS
+   statements (C)+(D) at every fixed viscosity + unforced Euler);
+   NYU news (institutional corroboration of the B-A work).
+4. **CMI:** the live problem page contains no such announcement
+   (fetched; 0 occurrences) — the earlier "announced settled" item
+   is PULLED in the interim; no certification exists.
+
+**Audit verdict:** the NS material is now at primary-source level
+for the three central items (OpenAI claims, B-A claims, community
+status). What is ESTABLISHED (machine-checkable or multi-source
+stable): the forced-NS C/D CLAIM with public Lean; the unforced-
+Euler CLAIM with public Lean; the B-A forced-blows claims with
+Lean; the existence of a live priority dispute; the absence of CMI
+certification and of an unforced-viscous-3D-NS any-sign blowup or
+regularity proof. What is NOT yet established: correctness of any
+of the Lean artifacts (independent rebuilds pending community-wide),
+and the conduct questions in the dispute (conflicting accounts).
+
+## 8. F15 — T1 / T1r–T5 results at scale (executed 2026-10-23)
+
+Execution: `tmp/sx5_scale1e8.py` (233 s; **50,630,458 spindles** at
+X = 1e8), tables in `tmp/sx5_scale1e8_stats.json`.
+
+- **T1 (2e6): PASS.** Post-parity-matched thread means 16.97 (prime
+  side) vs 13.44 (matched composites): ratio **1.262** — the 1.884
+  gross ratio is NOT pure parity; a genuine +26% prime-side excess
+  survives.
+- **T1r (1e8): the excess is valuation-UNIFORM.** Per 2-adic class
+  v2(p−1) = k, prime/composite means: 1.27718 (k=1), 1.27742 (k=2),
+  1.27431 (k=3), 1.26891 (k=4), 1.26426 (k=5), 1.36202 (k≥6 cap).
+  The phantom field repels root threads by a constant ≈ 1.26–1.28
+  independent of the 2-adic structure — a clean, scale-stable
+  structural factor (1.262 at 2e6 → ~1.274 at 1e8).
+- **T2 (closure): no growing blowup-witness family.** min A/S stays
+  **8.5 at (p,d) = (29,6)** — small-triangle corner; only **14
+  spindles** have A/S < 100 at 1e8 (127 below 1000). And the set is
+  provably height-bounded: A/S < 100 ⇒ (p−5d)(p−2d) < 4700 ⇒ p ≲ 7000
+  (d ≤ 2000) — a FINITE list, exhausted at 2e6. The enclosure stays
+  lax for every spindle above height ~7000; the "tight" corner is the
+  small triangles (top-5: (29,8.5), (7,9.0), (19,25.7), (89,26.5),
+  (11,27.0)).
+- **T3 (vortex): none at 1e8.** Class-mean structural bias
+  [1.0967, 0.9273, 1.0468, 0.9328] (d ≡ 0/12 mod 24 families carry
+  +5–10% of spindle flux — computable from the gcd(p−1, 2d)
+  structure). After removing class means: layer-relative σ = 0.221%,
+  max deviation 0.986% (layer 92, class 0), flags |L−1| > 3.5σ:
+  **2 / 400** — noise level. The uniform skeleton survives at 1e8.
+- **T4 (dynamics): none at 1e8.** Per-decile mean S flat
+  (3.799–3.808); log-log slope α = 0.00021; top-1% S median area
+  0.999× overall — no scale-free elongation, no spindle motion.
+- **T5 (phantom flow): CONSERVED.** B(1e8) = 1,862,122,325 threads
+  (ln-model ratio ≈ 1.0025 — the "turbulence" at scale: +0.25%).
+  Per 1e6 layer, after matching the ln density model: drift
+  +0.31% total, lag-1 +0.22 (mild, consistent with the smooth
+  divisor-fluctuation structure), and the only systematic deviation
+  is LOW-HEIGHT asymptotic convergence: layers 0–4 run +12.9% /
+  +8.3% / +7.1% / +6.6% / +6.3% above the asymptotic density,
+  decaying monotonically to +0.04% by layer 99 — no source term, no
+  pulse. The phantom field is a conserved flux with asymptotic
+  density ln v + 2γ − 1.
+
+**Pass-4 verdict (F15): CLOSED-FLAT at 2e6–1e8.** The spindle game
+is enclosed exactly (divisor-sum budget to ~2.5e-3 at 1e8), its
+interior above height ~7000 is uniformly slack, vortex-free,
+motionless, and phantom-conservative; the only active structure is
+(a) the finite small-triangle corner (p ≲ 7000), (b) the structurally
+computable d ≡ 0/12 mod 24 class bias (+5–10%), and (c) the constant
+1.26–1.28 prime-side thread excess. That flatness IS the result —
+the discrete analogue of "finite energy, no blowup observed": the
+NS enclosure holds and nothing inside it stirs at these scales.
+The honest next step is G2 (1e9, ~10× cost, after S18 frees RAM) or
+a different face (spindles over chime branches — new construction,
+new seed doc when the owner gates it).

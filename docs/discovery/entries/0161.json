@@ -1,0 +1,34 @@
+{
+  "id": "0161",
+  "ts": "2026-10-23T07:00:00",
+  "title": "spindle pass 4 scale-up complete at X=1e8 (F15) + T6 NS audit at primary-source level: T1 PASS (post-parity 1.262 at 2e6) + T1r valuation-uniform prime-side excess (1.264-1.277 across v2=1..5, +26.4-27.7%); T2 closure: min A/S stays 8.5 at (29,d=6), only 14 spindles have A/S<100 at 1e8 and the set is FINITE/height-bounded (p<~7000, since (p-5d)(p-2d)<4700 forces small p for d<=2000) - no growing blowup-witness family; T3 no vortex (class means [1.097,0.927,1.047,0.933] structural gcd bias; layer-relative sigma=0.22%, max dev 0.99%, 2/400 flags at 3.5sigma); T4 no dynamics (flat deciles 3.799-3.808, powerlaw slope 0.00021, top-1% elongation 0.999x); T5 phantom flow CONSERVED (ln-detrended drift +0.3% total, lag-1 +0.22 mild divisor-fluctuation correlation, max 'pulse' = low-height asymptotic convergence in layers 0-4, +12.9% decaying to +0.04%); B(1e8)=1,862,122,325 (model ratio ~1.0025); verdict CLOSED-FLAT at 1e8 (G4) - the wall: exact enclosure, lax at height, no interior motion; honest next = G2 1e9 after S18 lands; T6: NS audit complete (Buckmaster statement primary full-text: Cordoba-Martin-Zoroa program, LLM history, Sep-6 OpenAI-call chronology with both declined authorship offers, first-party AI-slop presentation caveat; OpenAI claims verified from repo README: forced NS C+D every viscosity + UNFORCED Euler FTS; Lean repo cloned+inspected; papers on cdn.openai.com; lean4.dev independent-assessment-ongoing; CMI announcement still pulled; no CMI certification, no unforced-3D-NS-both-ways result)",
+  "kinds": ["scale-up", "side-quest", "provenance-audit", "wall"],
+  "status": "recorded",
+  "claim": "No RH claim. CLOSED-FLAT is a statement about the spindle construction's interior at 2e6-1e8 (enclosure exact but lax above p~7000, no vortex/dynamics/source). NS material cited remains claim-level (machine-check-claimed, not CMI-certified, dispute live).",
+  "evidence": [
+    "tmp/sx5_scale1e8.py + tmp/sx5_scale1e8_stats.json + tmp/sx5_run.log (233s, 50,630,458 triads at 1e8)",
+    "T1: in-session 2e6 run (post-parity-matched means 16.97 vs 13.44)",
+    "docs/SPINDLE-NS-FEASIBILITY-2026-10-23.md sections 7 (T6 audit appendix) and 8 (F15 results)",
+    "docs/SPINDLE-EXECUTION-PLAN-2026-10-23.md (plan of record, G1 verdict logged)",
+    "T6 primary sources: cims.nyu.edu/~tristanb/statement.pdf (extracted full), github openai/NavierStokesAndEuler (cloned+inspected), lean4.dev/proofs/navier-stokes, cdn.openai.com paper PDFs, arXiv 2609.23868 citation check"
+  ],
+  "artifacts": {
+    "triads_1e8": 50630458,
+    "B_1e8": 1862122325,
+    "T1_post_parity_ratio_2e6": 1.26234,
+    "T1r_ratios": {"v2_1": 1.27718, "v2_2": 1.27742, "v2_3": 1.27431, "v2_4": 1.26891, "v2_5": 1.26426, "v2_cap": 1.36202},
+    "T2_min_A_over_S": 8.5,
+    "T2_min_at": "[29, 8.5, S=2, class 6, A=17]",
+    "T2_n_A_over_S_lt_100": 14,
+    "T2_n_A_over_S_lt_1000": 127,
+    "T3_class_means": [1.0967, 0.9273, 1.0468, 0.9328],
+    "T3_sigL": 0.00221,
+    "T3_max_layer_dev": 0.00986,
+    "T4_slope": 0.00021,
+    "T5_drift_vs_ln": 0.00313,
+    "T5_lag1_detrended": 0.2203,
+    "T5_low_height_convergence": "layers 0-4: +12.9% decaying to +0.04% at layer 99"
+  },
+  "relations": ["0160"],
+  "no_rh_claim": true
+}

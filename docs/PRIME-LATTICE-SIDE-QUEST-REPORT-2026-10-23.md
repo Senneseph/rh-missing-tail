@@ -234,3 +234,50 @@ spindles - the tightest spindle sits on the F3 triangle (17,23,29));
 the phantom field is thread-repellent (1.884 ratio); no discrete
 vortex at 2e6. Follow-on tests T1-T6 defined (scale-up class: minutes
 at 1e8).
+
+### Pass 4 executed (F15, same night, X = 1e8, 233 s, 50,630,458 spindles)
+
+- **T1 PASS** (2e6): post-parity-matched thread means 16.97 (prime
+  side) vs 13.44 (matched composites): **1.262** — not pure parity;
+  genuine +26% prime-side excess.
+- **T1r (1e8):** the excess is 2-adic-valuation-UNIFORM — ratios
+  1.27718 / 1.27742 / 1.27431 / 1.26891 / 1.26426 across v2(p−1) =
+  1..5 (cap class 1.362): the phantom field repels root threads by a
+  constant ≈ 1.26–1.28 regardless of 2-adic structure.
+- **T2:** only **14 spindles** at 1e8 have A/S < 100 (127 below
+  1000), min stays 8.5 at (29, d=6); the small-A/S set is provably
+  FINITE (A/S<100 ⇒ p ≲ 7000 for d ≤ 2000) — no growing blowup-
+  witness family; the enclosure is lax above height ~7000.
+- **T3:** **no vortex**: class-mean bias [1.0967, 0.9273, 1.0468,
+  0.9328] (structural gcd, d ≡ 0/12 mod 24); layer-relative σ =
+  0.221%, max deviation 0.986%, flags >3.5σ: 2/400 — noise.
+- **T4:** **no dynamics**: flat deciles (3.799–3.808), log-log slope
+  0.00021, top-1% S median area 0.999× overall.
+- **T5:** phantom flow **CONSERVED**: B(1e8) = 1,862,122,325 (ln
+  model ratio 1.0025); ln-detrended drift +0.31% total; lag-1 +0.22;
+  only systematic deviation = low-height asymptotic convergence
+  (layers 0–4: +12.9% / +8.3% / +7.1% / +6.6% / +6.3%, decaying to
+  +0.04% at layer 99) — no source term.
+- **T6:** NS audit at primary-source level (see the feasibility
+  report §7): Buckmaster statement full text (Córdoba–Martínez-
+  Zoroa program; LLM history; Sep-6 OpenAI-call chronology; first-
+  party presentation caveat), OpenAI claims verified from the repo
+  (forced NS C+D at every viscosity + UNFORCED Euler FTS; public
+  papers; full Lean repo cloned and inspected), lean4.dev
+  independent-assessment-ongoing, CMI announcement pulled, no
+  certification.
+
+**Verdict F15: CLOSED-FLAT at 2e6–1e8.** The spindle game is
+enclosed exactly (divisor-sum budget to ~2.5e-3 at 1e8), uniformly
+slack/vortex-free/motionless/phantom-conservative above height
+~7000; the active structure is (a) the finite small-triangle corner
+(p ≲ 7000), (b) the computable class bias, (c) the constant
+1.26–1.28 prime-side thread excess. That flatness is the result —
+the discrete analogue of "finite energy, no blowup observed".
+Next (owner-gated): G2 — scale to 1e9 after S18 frees RAM — or a
+different face (spindles over the chime branches).
+
+Files: `tmp/sx5_scale1e8.py` / `tmp/sx5_scale1e8_stats.json` /
+`tmp/sx5_run.log`; plan of record `docs/SPINDLE-EXECUTION-PLAN-
+2026-10-23.md`; results in `docs/SPINDLE-NS-FEASIBILITY-2026-10-23.md`
+§8.
