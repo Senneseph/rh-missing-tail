@@ -738,3 +738,31 @@ rewire is a wire-budget decision pending the S18 verdict, not yet
 made. C3's closed form is a model-level identity about I_far's
 U-top truncation (verified in 0153), not a theorem about zeta.
 No RH claim.
+
+## 0156: S18 part-0 verdicts VOID - band-gap defect found by output audit
+
+The S18 exact-tail repair job (scripts/rh/s18_S1marg_repair.py) is
+missing a band in its "exact" (3e7, 3e10] tail: the td cache ends at
+3e7 (day023 LO,HI) while H1 file A starts at 31,946,000.0666, leaving
+(3e7, 31,945,999.623] = 4,772,897 zeros out of the sum. At t = 3.1e7
+the missing near-diagonal zeros shift Re(log K) by +1.8e7, so the
+published part-0 rows have resid = inf and margin = 0.000000
+(3.1e7, 3.75e7) - OVERFLOW ARTIFACTS, not measured margins; the 5e7 /
+7.5e7 rows (0.005-0.51) are likewise inflated-resid values. The
+launch arbiter could not catch this (closed form and stream share the
+same wrong band). Fix is local: the missing zeros are in the LMFDB
+shard scripts/rh/lshards/zeros_29846000.dat (md5-verified), seam
+verified exact to A[0] at dps-40; reissue (tmp/sx1f_s18b_reissue_
+part0.py) runs the UNMODIFIED s18.margin_at with td._G_CACHE extended
+by the stub, reusing the stream caches. Also found: mpmath is not
+thread-safe under concurrent dps-30 use (corrupted zeta 1.4e7 vs
+1.48 single-threaded; sporadic R_closed ZeroDivisionError) - all
+margin reissues serialized; the original 12-worker S18 row phase is
+suspect for auxiliary values. And: the day-023 'exp' baselines
+(0.7763/0.6609/0.3665/0.5257) do not reproduce today (same row now
+gives resid inf, E = -4095.7) - they were pre-repair exploratory
+artifacts, not baselines (the 2026-09-14 record already flagged rows
+> 3.15e7 as not certifiable by density quad). The certified in-tree
+S1Marg track (through 2.8e7) is UNAFFECTED (it sits below the gap).
+S18 part-1 stream data (targets 1e8..2.9e10) remains valid/reusable.
+No RH claim in any direction.
