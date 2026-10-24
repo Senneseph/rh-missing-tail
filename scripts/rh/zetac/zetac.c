@@ -266,6 +266,12 @@ static void compute_height(const struct zchain *ch, f128 *logz)
             f128 t2i = t1r * ci[k] + t1i * cr[k];
             sr += t2r * ainvp[n];
             si += t2i * ainvp[n];
+            if (getenv("ZETAC_DEBUG"))
+                fprintf(stderr,
+                        "DBG rssum-step n=%d k=%d term=(%.17g, %.17g) "
+                        "run=(%.17g, %.17g)\n",
+                        n, k, (double)t2r, (double)t2i,
+                        (double)sr, (double)si);
         }
     }
 
@@ -340,6 +346,24 @@ static void compute_height(const struct zchain *ch, f128 *logz)
                 (double)theta.hi, (double)arg3.hi);
         fprintf(stderr, "DBG S1=(%.17g, %.17g)\n",
                 (double)cre, (double)cim);
+        for (int mm = 0; mm <= M; mm++)
+            fprintf(stderr, "DBG Fr[%d]=(%.17g, %.17g)\n",
+                    mm, (double)Fr[mm], (double)Fi[mm]);
+        fprintf(stderr, "DBG ainv=%.17g ainvp1=%.17g\n",
+                (double)ainv, (double)ainvp[1]);
+        for (int n = 0; n < L; n++)
+            for (int k = 0; k <= 3 * n / 2; k++) {
+                int idx = 3 * n - 2 * k;
+                if (idx > M) continue;
+                fprintf(stderr,
+                        "DBG term n=%d k=%d idx=%d dv=%.17g pw=%.17g\n",
+                        n, k, idx, (double)DVALS[ZETAC_DIDX[n] + k],
+                        (double)pinv[2 * n - k]);
+            }
+        for (int n = 0; n < L; n++)
+            fprintf(stderr, "DBG DIDX[%d]=(%d,%d,%d,%d)\n",
+                    n, ZETAC_DIDX[0], ZETAC_DIDX[1], ZETAC_DIDX[2],
+                    ZETAC_DIDX[3]);
         fprintf(stderr, "DBG rssum=(%.17g, %.17g)\n",
                 (double)sr, (double)si);
         fprintf(stderr, "DBG S3=(%.17g, %.17g) eitheta=(%.17g, %.17g)\n",

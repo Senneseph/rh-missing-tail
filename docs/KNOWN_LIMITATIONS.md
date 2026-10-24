@@ -731,6 +731,57 @@ ignores _hE3 (the E clause is the documented data anchor, not a
 consumed wire) - extending the law's domain IS extending the data
 clause. The data-side open part is (9e20, inf). No RH claim.
 
+## 0167: data face extends to 9e21 (S21a); C FULL-channel wall at
+N > 1.2e10 (0167, 2026-10-23)
+- The data-side frontier is now (9e21, inf): S21a rows at 3e21 /
+  9e21 (tmp/s34t_far_rows.jsonl): M(3e21) = -97753679265792,
+  M(9e21) = -879777311358976, both EXACTLY quantized (0.000e+00)
+  - the 0158 integer structure unbroken on all ten far rows
+  (1e18..9e21). In-tree still (G, 9e20] until the 0168 surgery
+  (pre-staged, tmp/s21b_v3c2_prestage.md: T_MEAS3 -> 9e21,
+  defect_C3absT3 2439/10^9, mdefect3 2.3e29, B = 600000 -> 1e7,
+  38-row face).
+- The 3-term law HOLDS to 9e21: residuals -2.1963e6 (3e21) /
+  +6.5742e6 (9e21), relative class 1e-8..5e-8 - the same class
+  as the 9e20 row (4.9e-8); absolute scale grows ~5x/decade
+  (the growth-rate question the 3e23/9e23 notch will
+  discriminate).
+- ROOT CAUSE FOUND (2026-10-23 23:00Z): the NEW chain-table
+  rows were hand-added by x10-scaling the smaller chains' N
+  (N(3e21) := 10*N(3e19) = 21851349540, N(9e21) :=
+  37847647620) instead of exact floor(a = sqrt(t/2pi)):
+  true floor(a) = 21851349543 / 37847647623 - N off by 3 at
+  both new heights, so p = 1 - 2(a - N) landed at -6.468 /
+  -6.389 OUTSIDE the rssum formula's (-1, 1] domain (all six
+  previously validated chains 0-5 have exact floor-a N and
+  p in-domain: +0.866, -0.407, +0.910, +0.253, -0.336,
+  +0.933). Out-of-domain p blows the Fp/rssum Horner up to
+  ~1e20 (finite in exact arithmetic, per the 60-digit replica:
+  rssum ~ 1.3078e+20) and the C f128 assembly overflows to
+  (inf, inf) in the rssum step (S1 / S3 / eitheta finite in
+  the ZETAC_DEBUG dump). LESSON: decimal scaling of a row
+  index does NOT preserve floor(a) - chain-table N must always
+  be recomputed at the target height with exact floor
+  (mpmath param_chain does this; the generator's selftest
+  re-validates the formula to ~1e-29 after regeneration).
+  FIXED: s34a TARGETS extended (1e11, 3e11), table
+  regenerated (only the two N values changed; CTAB/DVALS
+  byte-identical), both binaries rebuilt, full chains 5/6/7
+  re-issued (regression + both far heights, ~06:30Z). Rows are
+  UNAFFECTED either way: they carry the bare-cosine zeta
+  PRIMARY (12-digit, envelope ~2.5e-5 on |Z| - 3x better than
+  needed against the O(1e6) residual scale); the C-channel
+  defect is provenance-only until the re-issued full values
+  land (then rows upgrade full-primary; M bit-identical at
+  f64 since the full/bare logzeta difference ~5e-10 is ~1e7
+  below ulp(M) ~ 0.011).
+- mpmath CANNOT serve as the fallback oracle past the wall:
+  MemoryError in mpc_zetasum -> primesieve(2.2e10) allocation at
+  3e21, even at dps 15 (another face of the mpmath wall).
+- Next notch (3e23 / 9e23) chains pre-computed (N = 6.91e10 /
+  1.197e11, same table J = 61, L = 3) - queued behind the
+  channel-wall disposition. No RH claim.
+
 ## 0154: E1ClauseV3C named in-tree (0153 law as a data clause)
 
 The three-term clause is now a NAMED DATA HOLE in

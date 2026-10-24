@@ -149,9 +149,7 @@ static const char *ZETAC_DVALS[] = {
   /* n=3: */ "0.000096450617283950611929865814886397856753319501876831", "0", "-0.033333333333333332870740406406184774823486804962158", "-0.0069444444444444423242268626950135512743145227432251", "0.5",
 };
 
-/* target chains: t (the exact row f64, held as double = exact), L, M, J, N.
- * Off-grid test heights use the g_test_t override in zetac.c (f128);
- * a double parse there O(2^k)-quantizes far heights. */
+/* target chains: t (f64 value), L, M, J, N */
 struct zchain { double t; int L; int M; int J; unsigned long long N; };
 static const struct zchain ZETAC_CHAINS[] = {
   {3.000104599998198e+18, 4, 9, 62, 691000345ULL}, /* t/G = 1e+08 */
@@ -160,5 +158,7 @@ static const struct zchain ZETAC_CHAINS[] = {
   {3.0001045999981978e+19, 4, 9, 62, 2185134954ULL}, /* t/G = 1e+09 */
   {3.000104599998197e+20, 3, 6, 61, 6910003450ULL}, /* t/G = 1e+10 */
   {9.000313799994592e+20, 3, 6, 61, 11968477057ULL}, /* t/G = 3e+10 */
+  {3.0001045999981974e+21, 3, 6, 61, 21851349543ULL}, /* t/G = 1e+11 */
+  {9.000313799994592e+21, 3, 6, 61, 37847647623ULL}, /* t/G = 3e+11 */
 };
 static const int ZETAC_DIDX[] = {0, 1, 3, 7};

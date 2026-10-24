@@ -1,0 +1,29 @@
+{
+  "id": "0168",
+  "ts": "2026-10-24T03:35:00",
+  "title": "In-tree E1ClauseV3C window extended (G_LAST, 9e20] -> (G_LAST, 9e21]: T_MEAS3 = 9e21, defect_C3absT3 restated 2439/10^10 -> 2439/10^9 (T-independent proof; the final numeric step is the exact equality 271*9e21/1e30 = 2439/1e9, norm_num), mdefect3_bounded bound shifted one decade 2.3e28 -> 2.3e29 (0165-style exact-exponent shift: inline 2439/10^9 numerals, hT : T_MEAS3 = 9*10^21, hB : 523472285 + 2439*9*10^12 <= 10^21, reduced term 2439*9*10^12 = 2.1951e16 - the 0165 caution exercised: any stray 10^k one position off would surface as leftover goals of the form 100 = 1 / 10 = 1; post-patch grep audit for stray 10^10/10^20 in the V3C block clean), e1V3C_implies_abs now carries B + 2.3e29, the named data hole moves E1ClauseV3C q 600000 -> q 10000000 (R_max = 6.5742e6 at the 9e21 row, 34% margin; rows: the 38 measured = 33 through 9e18 + 3e19/3e20/9e20/3e21/9e21, zeta = bare-cosine primary per the S20a/S21a crosses, the C full channel having run the new rows on a hand-scaled chain-table N - discovery 0167). This is a data-anchor extension, not a consumed wire: the terminal endpoint face still consumes the two-term E1ClauseV3 (S1Uniform.201); the V3/V3C rewire remains a wire-budget decision pending the S18 verdict. If_E1V3C_and_walk and the endpoint face are otherwise UNCHANGED. Targeted build green (8733 jobs, RhAttack.E1Clause); full tree build running at 2 lanes (the C re-issue owns the other 28 lanes). No RH claim - the named hole stays OPEN; it now documents the data track through 9e21 (in-tree and data-side frontiers re-aligned at 9e21, as at 9e20 after 0165).",
+  "kinds": ["formal", "in-tree"],
+  "status": "recorded",
+  "claim": "No RH claim: the extension restates the documented E1ClauseV3C data anchor on a larger window with a larger (still explicitly loose) defect bound; the composition to the endpoint consumes only the 2.3e29 bound and the (named, open) row clause.",
+  "evidence": [
+    "formal/RhAttack/E1Clause.lean: T_MEAS3, defect_C3absT3, mdefect3_bounded, e1V3C_implies_abs, E1ClauseV3C doc + named hole, if_E1V3C_and_walk doc, CLAUSE SET ADDENDUM - 15 targeted edits",
+    "grep audit: zero stray '10 : R) ^ 10 / ^ 20' in the V3C block; 21 occurrences of the new 10^21 form; T_MEAS3 = 9000000000000000000000; q 10000000 in the hole + addendum",
+    "targeted build: lake build RhAttack.E1Clause green, 8733 jobs (build_e1c_9e21.txt)",
+    "arithmetic check recorded in the pre-stage (tmp/s21b_v3c2_prestage.md): (2439/10^9)*9e21 = 2.1951e16; 523472285 + 2.1951e16 < 1e21 (5 orders); 227700001e21 <= 230000000e21"
+  ],
+  "artifacts": {
+    "T_MEAS3": "9e21 = 9000000000000000000000",
+    "defect_C3absT3": "|defect_C3| * T_MEAS3 <= 2439/10^9",
+    "mdefect3_bound": "2.3e29 = (230000000 : R) * 10^21",
+    "named_hole": "E1ClauseV3C q 10000000 on (G_LAST, 9e21]",
+    "rows": "38 (max residual 6.5742e6 at 9e21, 34% margin)",
+    "targeted_build": "green 8733 jobs"
+  },
+  "relations": ["0154", "0165", "0167"],
+  "open_items": [
+    "full-tree build green (in progress, 2 lanes)",
+    "cards: E1Clause card window line (38 rows / 9e21 / B = 1e7) via scripts/rh/make_lean_cards.py",
+    "frontier watch anchor unchanged: the in-tree terminal face is still hOffC <= colletD0max (the E1 face is data-side, not the Z78 face)"
+  ],
+  "no_rh_claim": true
+}

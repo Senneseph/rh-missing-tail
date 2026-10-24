@@ -1,0 +1,50 @@
+{
+  "id": "0167",
+  "ts": "2026-10-24T03:30:00",
+  "title": "S21a: the 3e21/9e21 far rows land and the 3-term law holds to 9e21 (residuals -2.1963e6 / +6.5742e6, relative class 1e-8..5e-8 - same class as the 9e20 row; exact-integer far-M quantization unbroken on all ten far rows 1e18..9e21) - and the first real wall of the campaign is found AND root-caused in the INSTRUMENT: the C/quad FULL zeta channel went defective at the two new heights (logzeta 1304.59 / 1293.06 vs bare 0.4806 / 0.4113) because the two new chain-table rows were hand x10-scaled from smaller chains, missing the exact floor(a = sqrt(t/2pi)) by 3 at both (21851349540 vs 21851349543; 37847647620 vs 37847647623) - p = 1 - 2(a - N) landed at -6.468 / -6.389 OUTSIDE the rszeta rssum formula's (-1, 1] domain (all six previously validated chains have exact floor-a N with in-domain p: +0.866, -0.407, +0.910, +0.253, -0.336, +0.933), the Fp/rssum Horner blew up to ~1e20 (finite in exact arithmetic - 60-digit replica: rssum ~ 1.3078e+20) and the C f128 assembly overflowed to (inf, inf) in the rssum step (ZETAC_DEBUG: S1 / S3 / eitheta all finite). FIX: s34a TARGETS extended with 1e11/3e11 and the table regenerated from exact mpmath floor(a) (diff: only the two N values changed; CTAB/DVALS/chains 0-5 byte-identical); both binaries rebuilt; the formula generator selftest re-validates against mpmath to ~1e-29 at four moderate heights; full chains 5/6/7 re-issued (regression + both far heights, ETA ~09:15Z). Rows are unaffected by the defect: they carry the bare-cosine zeta primary, and M is bit-identical at f64 under full-primary because the full/bare logzeta difference (~5e-10) is ~1e7 below ulp(M) ~ 0.011. mpmath itself has no oracle past the wall (MemoryError in mpc_zetasum -> primesieve(2.2e10) allocation at 3e21, even at dps 15 - another face of the mpmath wall). Setup: S21a extends the E1ClauseV3C data anchor (G_LAST, 9e20] -> (G_LAST, 9e21]: chains 6/7 (L=3 M=6 J=61; corrected N = 21851349543 / 37847647623) - the first heights past N ~ 2e10 (chain 5, N = 1.197e10, was the last-validated full-channel height: 12-13 digits vs bare over 7 heights 3e18..9e20 per S20a/0164). RESULTS: (1) stage A (streams + I_far, no zeta): M_partial(3e21) = -97753679265792.0, M_partial(9e21) = -879777311358976.0 - exact f64 integers. (2) Bare-cosine zeta (independent 12-digit oracle, envelope ~2.5e-5 on |Z|): |Z|(3e21) = 1.616980778788 (logzeta 0.4805606936), |Z|(9e21) = 1.508728071850 (logzeta 0.4113...). (3) MERGED ROWS (bare-primary, defect flagged in provenance): M(3e21) = -97753679265792, M(9e21) = -879777311358976, both integer_quantized with quant_resid = 0.000e+00 - the 0158 exact-integer far-M structure CONTINUES UNBROKEN, all ten far rows (1e18 through 9e21) at 0.000. (Association-order caution recorded: adding the zeta AFTER a structurally-integer partial shows a spurious half-integer at 3e21 - an f64 order artifact; the canonical s34j addition order (eps + logzeta FIRST) gives the exact integers.) (4) THE THREE-TERM LAW TEST (the point of S21a; the C(U_TOP) coefficient is a closed-form PREDICTION, not a fit): residual M - law = -2196301.52 at 3e21 (2.247e-8 relative) and +6574228 at 9e21 (7.49e-9 relative) - the SAME relative class as the 9e20 row (4.284e5 = 4.9e-8). The law extends one full decade past 9e20; the absolute residual scale grows ~5x per decade (4.284e5 -> 2.1963e6 -> 6.5742e6) - a growth-rate question (ln t vs t^1/2 scaling) the 3e23/9e23 notch will discriminate (chains computed through the fixed generator: N = 6.91e10 / 1.197e11 - never hand-scaled). (5) IN-TREE (0168): the V3C window extension (G_LAST, 9e21] applied in formal/RhAttack/E1Clause.lean: T_MEAS3 = 9e21, defect_C3absT3 restated 2439/10^9 (final step the exact equality 271*9e21/1e30 = 2439/1e9), mdefect3_bounded 2.3e28 -> 2.3e29 (0165-style exponent shift 10^9/10^12/10^21, exact-exponent cautions exercised: a stray 10^k surface would be leftover goals of the form 100 = 1; grep audit clean), e1V3C_implies_abs carries 2.3e29, named hole E1ClauseV3C q 600000 -> q 10000000 (R_max = 6.5742e6 at the 9e21 row, 34% margin), 38-row face (G_LAST, 9e21] = 33 through 9e18 + 3e19/3e20/9e20/3e21/9e21. Targeted build green (8733 jobs); full tree running.",
+  "kinds": [
+    "data",
+    "measurement",
+    "instrument-repair"
+  ],
+  "status": "recorded",
+  "claim": "No RH claim: the rows extend the documented E1ClauseV3C data anchor; the 3-term law is a residual measurement with a closed-form coefficient; the channel defect is a chain-table provenance error, repaired at the generator, with the affected full-channel values excluded from the rows until the re-issued runs land.",
+  "evidence": [
+    "tmp/s34t_far_rows.jsonl (4 records: stage A x2 + merged B x2, quant_resid 0.000e+00 both)",
+    "tmp/s21a_chains.log (bare 6/7 sane; full 6/7 defective 1304.589536046124 / 1293.061748311140)",
+    "tmp/s21a_diag6.dbg (ZETAC_DEBUG dump: a = 21851349543.734055, p = -6.468111517523722, rssum = (inf, inf), S1/S3/eitheta finite)",
+    "floor(a) audit of all eight chain-table rows (mpmath 50 digits): chains 0-5 exact floor-a (in-domain p), chains 6/7 off by exactly 3 (p -6.468/-6.389) - the x10-scaling signature: N(3e21) = 10*N(3e19) exactly",
+    "60-digit rssum replica at the exact defective C inputs (DVALS x Fr-Horner x pi-powers x (2i)^-k x a^-n): finite, ~1.3078e+20 - the formula is finite out-of-domain, the C f128 assembly overflows",
+    "scripts/rh/s34a_zetac_tables.py: TARGETS extended (1e8..3e11), regenerated table diff = exactly the two N fixes, selftest |Z| vs mpmath rs_zeta to 3.1e-29..9.6e-29 at t/G = 20/50/100/200",
+    "S20a validation record (0164): full channel 12-13 digit over 7 heights 3e18..9e20",
+    "mpmath MemoryError probe at 3e21 (dps 15-30): mpc_zetasum -> primesieve(2.2e10) - mpmath has no oracle here either"
+  ],
+  "artifacts": {
+    "M_3e21": -97753679265792,
+    "M_9e21": -879777311358976,
+    "quant_resid_both": "0.000e+00 (all ten far rows 1e18..9e21)",
+    "bare_Z_3e21": 1.616980778788,
+    "bare_Z_9e21": 1.50872807185,
+    "full_logzeta_3e21_DEFECTIVE": 1304.589536046124,
+    "full_logzeta_9e21_DEFECTIVE": 1293.06174831114,
+    "defective_N_3e21": 21851349540,
+    "correct_N_3e21": 21851349543,
+    "defective_N_9e21": 37847647620,
+    "correct_N_9e21": 37847647623,
+    "law_resid_3e21": -2196301.52,
+    "law_resid_9e21": 6574228.0,
+    "law_rel_class": "1e-8..5e-8 (9e20 row: 4.9e-8)",
+    "N_max_validated_full_before_fix": "11968477057 (chain 5, 9e20)"
+  },
+  "relations": [
+    "0158",
+    "0164",
+    "0165",
+    "0168"
+  ],
+  "open_items": [
+    "full chains 5/6/7 re-issue on the fixed table running (regression + both far heights, ETA ~09:15Z); on healthy landing, re-issue the rows full-primary (provenance only - M bit-identical)",
+    "3e23/9e23 notch chains via the fixed generator (never hand-scaled) - the growth-rate discriminator for the ~5x/decade residual scale"
+  ],
+  "no_rh_claim": true
+}

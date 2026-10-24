@@ -2100,3 +2100,21 @@ both within the bare-form t^-1/4 envelope, ~10^11 below the M
 association noise budgets) - the last cross-check gap of the
 C/quad channel through 9e20. The V3C window is now extended
 in-tree to (G, 9e20] (0165). No RH claim.
+
+UPDATED (0167, 2026-10-23, S21a): the data-side frontier is now
+(9e21, inf): rows at 3e21 / 9e21 land with the 3-term law holding
+(residuals -2.1963e6 / +6.5742e6, relative class 1e-8..5e-8 -
+same class as the 9e20 row) and the 0158 exact-integer quantization
+unbroken on all ten far rows (1e18..9e21, 0.000e+00). First wall
+of the campaign, in the INSTRUMENT: the C/quad FULL zeta channel
+went defective (logzeta 1304.59 / 1293.06 vs bare 0.4806 /
+0.4113) - ROOT CAUSE: the two new chain-table rows were hand
+x10-scaled from smaller chains, so their N missed the exact
+floor(a) by 3 and p left the rssum formula's (-1, 1] domain
+(-6.468 / -6.389 vs the in-domain |p| < 1 of chains 0-5); table
+repaired at the generator (exact floor, selftest 1e-29), full
+chains re-issued (~06:30Z). The rows carry the bare-cosine zeta
+primary (bit-identical M at f64 either way). In-tree extension
+to (G, 9e21] APPLIED (0168: T_MEAS3 = 9e21, defect_C3absT3
+2439/10^9, mdefect3 bound 2.3e29, named hole B = 600000 -> 1e7,
+38-row face, max residual 6.5742e6 at 9e21). No RH claim.

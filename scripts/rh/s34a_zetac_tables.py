@@ -148,7 +148,12 @@ def d_table(L):
 
 
 G = 30001045999.981975555
-TARGETS = (1e8, 3e8, 5e8, 1e9, 1e10, 3e10)  # as t/G
+TARGETS = (1e8, 3e8, 5e8, 1e9, 1e10, 3e10, 1e11, 3e11)  # as t/G
+# NOTE: every N must be the EXACT floor(a) at the target height
+# (mpmath in param_chain) - decimal x10-scaling of a smaller chain's
+# N does NOT preserve floor(a) and breaks the rssum domain (p in
+# (-1, 1]) - the 3e21/9e21 chains were once hand-scaled and went
+# defective (discovery 0167).
 
 
 def chains_for(wplist):

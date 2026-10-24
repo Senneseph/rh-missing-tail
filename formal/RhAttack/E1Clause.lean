@@ -536,14 +536,20 @@ def v3_Bcand : Float := 7000.0
    its  own  window  (G,  1000*G]  (two-term  residual  there:
    max  6704.088,  unchanged);  the  three-term  hole  below  is
    the  new  NAMED  data  hole  of  the  extended  window  (G,
-   9e18].  They  coexist  as  data-supported  named
+   9e21].  They  coexist  as  data-supported  named
    hypotheses  (no  implication  claimed  between  them  -  the
    defect  functions  differ  by  up  to  ~9806  on  the  old
    window).  No  RH  claim.  -/
 
-/- Measured  wall  (s17  final  row,  2026-10-22):  t  =  9e18.
-    M(9e18)  =  -1458437120.0  (dps-40  channel).  -/
-def T_MEAS3 : ℝ := 900000000000000000000
+/- Measured  wall  (s34t  far  row,  2026-10-23,  0167):
+    t  =  9e21.  M(9e21)  =  -879777311358976  (exactly
+    quantized;  zeta  =  bare-cos-form  chain  7  primary;
+    the  C  full  channel  initially  ran  these  rows  on  a
+    hand-scaled  chain-table  N  (off  by  3  from  floor(a),
+    p  left  its  (-1, 1]  domain  -  defective  1304.59 /
+    1293.06);  table  repaired  at  the  generator,  rows
+    re-issued;  law  resid  +6.5742e6,  7.5e-9  rel).  -/
+def T_MEAS3 : ℝ := 9000000000000000000000
 
 theorem tMeas3Pos : 0 < T_MEAS3 := by
   dsimp only [T_MEAS3]
@@ -626,7 +632,7 @@ theorem defect_L3_le_271 : defect_L3 ≤ (271 : ℝ) := by
         exact hm
       nlinarith [hm9]
 
-lemma defect_C3absT3 : |defect_C3| * T_MEAS3 ≤ (2439 : ℝ) / (10 : ℝ) ^ 10 := by
+lemma defect_C3absT3 : |defect_C3| * T_MEAS3 ≤ (2439 : ℝ) / (10 : ℝ) ^ 9 := by
   have h2pi1 : (1 : ℝ) < 2 * Real.pi := by
     linarith [Real.pi_gt_three]
   have habs : |(-defect_L3) / (2 * Real.pi * U_TOP)| =
@@ -673,16 +679,16 @@ lemma defect_C3absT3 : |defect_C3| * T_MEAS3 ≤ (2439 : ℝ) / (10 : ℝ) ^ 10 
           _ ≤ T_MEAS3 * (271 / U_TOP) :=
             mul_le_mul_of_nonneg_left hdiv2 (le_of_lt hTpos)
           _ = (271 / U_TOP) * T_MEAS3 := by ring
-      _ = (2439 : ℝ) * (10 : ℝ) ^ 20 / ((10 : ℝ) ^ 30) := by
+      _ = (2439 : ℝ) * (10 : ℝ) ^ 21 / ((10 : ℝ) ^ 30) := by
         dsimp only [T_MEAS3, U_TOP]
         field_simp [show (0 : ℝ) < (10 : ℝ) ^ 30 by norm_num]
         <;> norm_num
-      _ = (2439 : ℝ) / (10 : ℝ) ^ 10 := by
+      _ = (2439 : ℝ) / (10 : ℝ) ^ 9 := by
         field_simp [show (0 : ℝ) < (10 : ℝ) ^ 30 by norm_num]
         <;> norm_num
 
 theorem mdefect3_bounded (t : ℝ) (ht : G_LAST < t) (hT : t ≤ T_MEAS3) :
-    |M_defect3 t| ≤ (230000000 : ℝ) * (10 : ℝ) ^ 20 := by
+    |M_defect3 t| ≤ (230000000 : ℝ) * (10 : ℝ) ^ 21 := by
   dsimp only [M_defect3, defect_A3, defect_B3]
   have h1 : (1 : ℝ) < t := by
     have hgl1 : (1 : ℝ) < G_LAST := by
@@ -737,61 +743,62 @@ theorem mdefect3_bounded (t : ℝ) (ht : G_LAST < t) (hT : t ≤ T_MEAS3) :
               mul_le_mul_of_nonneg_left ht2 (le_of_lt hCabs)
             _ = (|defect_C3| * T_MEAS3) * t := by ring
         exact add_le_add (add_le_add le_rfl le_rfl) hstep
-      _ ≤ 25254354 * t + 523472285 + ((2439 : ℝ) / (10 : ℝ) ^ 10) * t :=
+      _ ≤ 25254354 * t + 523472285 + ((2439 : ℝ) / (10 : ℝ) ^ 9) * t :=
         add_le_add (add_le_add le_rfl le_rfl)
           (mul_le_mul_of_nonneg_right defect_C3absT3 htul)
-      _ ≤ 25254354 * T_MEAS3 + 523472285 + ((2439 : ℝ) / (10 : ℝ) ^ 10) * T_MEAS3 := by
+      _ ≤ 25254354 * T_MEAS3 + 523472285 + ((2439 : ℝ) / (10 : ℝ) ^ 9) * T_MEAS3 := by
         have hstep1 : 25254354 * t ≤ 25254354 * T_MEAS3 :=
           mul_le_mul_of_nonneg_left hT (by norm_num : (0 : ℝ) ≤ 25254354)
-        have hstep2 : ((2439 : ℝ) / (10 : ℝ) ^ 10) * t ≤
-            ((2439 : ℝ) / (10 : ℝ) ^ 10) * T_MEAS3 :=
+        have hstep2 : ((2439 : ℝ) / (10 : ℝ) ^ 9) * t ≤
+            ((2439 : ℝ) / (10 : ℝ) ^ 9) * T_MEAS3 :=
           mul_le_mul_of_nonneg_left hT
             (le_of_lt (div_pos (by norm_num : (0 : ℝ) < (2439 : ℝ))
-              (pow_pos (by norm_num : (0 : ℝ) < (10 : ℝ)) 10)))
+              (pow_pos (by norm_num : (0 : ℝ) < (10 : ℝ)) 9)))
         exact add_le_add (add_le_add hstep1 le_rfl) hstep2
-      _ ≤ (230000000 : ℝ) * (10 : ℝ) ^ 20 := by
-        have hT : T_MEAS3 = 9 * (10 : ℝ) ^ 20 := by
+      _ ≤ (230000000 : ℝ) * (10 : ℝ) ^ 21 := by
+        have hT : T_MEAS3 = 9 * (10 : ℝ) ^ 21 := by
           dsimp only [T_MEAS3]
           norm_num
         rw [hT]
         have hA : (25254354 : ℝ) * 9 ≤ (227700000 : ℝ) := by norm_num
-        have hpow : (0 : ℝ) ≤ (10 : ℝ) ^ 20 := by norm_num
-        have hB : (523472285 : ℝ) + 2439 * 9 * (10 : ℝ) ^ 10 ≤ (10 : ℝ) ^ 20 := by
+        have hpow : (0 : ℝ) ≤ (10 : ℝ) ^ 21 := by norm_num
+        have hB : (523472285 : ℝ) + 2439 * 9 * (10 : ℝ) ^ 12 ≤ (10 : ℝ) ^ 21 := by
           norm_num
         have hC : (227700001 : ℝ) ≤ (230000000 : ℝ) := by norm_num
-        calc 25254354 * (9 * (10 : ℝ) ^ 20) + 523472285 +
-              ((2439 : ℝ) / (10 : ℝ) ^ 10) * (9 * (10 : ℝ) ^ 20)
-            ≤ (227700000 : ℝ) * (10 : ℝ) ^ 20 + 523472285 +
-              ((2439 : ℝ) / (10 : ℝ) ^ 10) * (9 * (10 : ℝ) ^ 20) := by
-              have hm : 25254354 * (9 * (10 : ℝ) ^ 20) ≤
-                  (227700000 : ℝ) * (10 : ℝ) ^ 20 := by
-                calc _ = (25254354 * 9) * (10 : ℝ) ^ 20 := by ring
-                  _ ≤ 227700000 * (10 : ℝ) ^ 20 :=
+        calc 25254354 * (9 * (10 : ℝ) ^ 21) + 523472285 +
+              ((2439 : ℝ) / (10 : ℝ) ^ 9) * (9 * (10 : ℝ) ^ 21)
+            ≤ (227700000 : ℝ) * (10 : ℝ) ^ 21 + 523472285 +
+              ((2439 : ℝ) / (10 : ℝ) ^ 9) * (9 * (10 : ℝ) ^ 21) := by
+              have hm : 25254354 * (9 * (10 : ℝ) ^ 21) ≤
+                  (227700000 : ℝ) * (10 : ℝ) ^ 21 := by
+                calc _ = (25254354 * 9) * (10 : ℝ) ^ 21 := by ring
+                  _ ≤ 227700000 * (10 : ℝ) ^ 21 :=
                     mul_le_mul_of_nonneg_right hA hpow
               nlinarith [hm]
-            _ ≤ (227700000 : ℝ) * (10 : ℝ) ^ 20 + (10 : ℝ) ^ 20 := by
-              have hm : 523472285 + ((2439 : ℝ) / (10 : ℝ) ^ 10) *
-                  (9 * (10 : ℝ) ^ 20) ≤ (10 : ℝ) ^ 20 := by
-                have hred : ((2439 : ℝ) / (10 : ℝ) ^ 10) * (9 * (10 : ℝ) ^ 20) =
-                    2439 * 9 * (10 : ℝ) ^ 10 := by
-                  field_simp [show (0 : ℝ) < (10 : ℝ) ^ 10 by norm_num]
+            _ ≤ (227700000 : ℝ) * (10 : ℝ) ^ 21 + (10 : ℝ) ^ 21 := by
+              have hm : 523472285 + ((2439 : ℝ) / (10 : ℝ) ^ 9) *
+                  (9 * (10 : ℝ) ^ 21) ≤ (10 : ℝ) ^ 21 := by
+                have hred : ((2439 : ℝ) / (10 : ℝ) ^ 9) * (9 * (10 : ℝ) ^ 21) =
+                    2439 * 9 * (10 : ℝ) ^ 12 := by
+                  field_simp [show (0 : ℝ) < (10 : ℝ) ^ 9 by norm_num]
                   <;> ring
                 rw [hred]
                 exact hB
               nlinarith [hm]
-            _ = (227700001 : ℝ) * (10 : ℝ) ^ 20 := by norm_num
-            _ ≤ (230000000 : ℝ) * (10 : ℝ) ^ 20 :=
+            _ = (227700001 : ℝ) * (10 : ℝ) ^ 21 := by norm_num
+            _ ≤ (230000000 : ℝ) * (10 : ℝ) ^ 21 :=
               mul_le_mul_of_nonneg_right hC hpow
 
 /- E1ClauseV3C:  the  three-term  clause  on  the  s17  face
-    (G_LAST,  T_MEAS3  =  9e20].  Same  shape  as  E1ClauseV3;
+    (G_LAST,  T_MEAS3  =  9e21].  Same  shape  as  E1ClauseV3;
     the  defect  is  the  three-term  M_defect3  with  the
     closed-form  t^2  coefficient  in  U_TOP.  Named  data
-    hole:  E1ClauseV3C  q  600000  (36  measured  rows  -
-    the  33  through  9e18  plus  the  three  s34  far  rows
-    at  3e19  /  3e20  /  9e20  with  S20a  cross-checked
-    zeta  -  max  residual  4.284e5  at  the  9e20  row  ->
-    39%  margin;  0164  /  0165).  -/
+    hole:  E1ClauseV3C  q  10000000  (38  measured  rows  -
+    the  33  through  9e18  plus  the  five  s34  far  rows
+    at  3e19  /  3e20  /  9e20  /  3e21  /  9e21  with  the
+    S20a  /  S21a  bare-cosine  zeta  crosses  -  max
+    residual  6.5742e6  at  the  9e21  row  ->  34%  margin;
+    0164  /  0165  /  0167).  -/
 def E1ClauseV3C (q : ZeroSet) (B : ℝ) : Prop :=
   ∀ (t : ℝ), G_LAST < t → t ≤ T_MEAS3 → straddleRow q t →
     |M_wp q t - M_defect3 t| ≤ B
@@ -799,10 +806,10 @@ def E1ClauseV3C (q : ZeroSet) (B : ℝ) : Prop :=
 /- Composition:  E1ClauseV3C  +  the  loose  defect  bound  ->
     the  absolute  face  on  (G_LAST,  T_MEAS3]  (the  3-term
     twin  of  e1V3_implies_e1).  Carries  mdefect3_bounded's
-    loose  2.3e28  constant.  -/
+    loose  2.3e29  constant.  -/
 theorem e1V3C_implies_abs (q : ZeroSet) (B : ℝ) (hE3c : E1ClauseV3C q B) :
     ∀ (t : ℝ), G_LAST < t → t ≤ T_MEAS3 → straddleRow q t →
-      |M_wp q t| ≤ B + (230000000 : ℝ) * (10 : ℝ) ^ 20 := by
+      |M_wp q t| ≤ B + (230000000 : ℝ) * (10 : ℝ) ^ 21 := by
   intro t ht hT hs
   have h3 := hE3c t ht hT hs
   have hb := mdefect3_bounded t ht hT
@@ -813,17 +820,17 @@ theorem e1V3C_implies_abs (q : ZeroSet) (B : ℝ) (hE3c : E1ClauseV3C q B) :
     rw [habs]
     exact abs_add_le (M_wp q t - M_defect3 t) (M_defect3 t)
   calc |M_wp q t| ≤ |M_wp q t - M_defect3 t| + |M_defect3 t| := htri
-    _ ≤ B + (230000000 : ℝ) * (10 : ℝ) ^ 20 := add_le_add h3 hb
+    _ ≤ B + (230000000 : ℝ) * (10 : ℝ) ^ 21 := add_le_add h3 hb
 
 /- E1ClauseV3C  +  the  four  legs  ->  RH  (the  3-term  twin
     of  if_E1V3_and_walk;  the  named  hole  is  the  extended
-    data  face  (G_LAST,  9e20],  36  measured  rows).  Same
+    data  face  (G_LAST,  9e21],  38  measured  rows).  Same
     residual  program:  the  hole  documents  the  state  of
     the  data  track,  the  legs  are  the  structural
     contract.  No  RH  claim  -  the  hole  is  OPEN,  as
     before.  -/
 theorem if_E1V3C_and_walk (q : ZeroSet) (hz : ZetaZeroSet.ZetaLike q)
-    (_hE3c : E1ClauseV3C q 600000) -- the named data hole (3-term, s17 face + s34 far rows)
+    (_hE3c : E1ClauseV3C q 10000000) -- named data hole (3-term, 9e21 window)
     (Qside Mf devOf Bwire Mr flo : ℝ × ℝ → ℝ)
     (hs1 : ∀ (t0 d0 : ℝ), 0 < t0 → 0 < d0 → P12.offPair q t0 d0 →
       Qside (t0, d0) ≥ devOf (t0, d0) - Mf (t0, d0))
@@ -842,11 +849,14 @@ theorem if_E1V3C_and_walk (q : ZeroSet) (hz : ZetaZeroSet.ZetaLike q)
     above-G  data  face  now  carries  TWO  named  holes:
       E1ClauseV3   q  7000   on  (G_LAST,  1000*G_LAST]
                    (21  rows,  two-term  law,  max  resid  6704.088)
-      E1ClauseV3C  q  600000  on  (G_LAST,  9e20)
-                   (36  rows,  three-term  law  with  the
+      E1ClauseV3C  q  10000000  on  (G_LAST,  9e21)
+                   (38  rows,  three-term  law  with  the
                    closed-form  U_TOP  coefficient,  max  resid
-                   4.284e5  at  the  s34  3e10G  row;  zeta
-                   cross-checked  at  the  far  rows  by  S20a)
+                   6.5742e6  at  the  s34t  3e11G  row;  zeta
+                   =  bare-cos  primary:  the  C  full  channel
+                   had  run  the  new  rows  on  a  hand-scaled
+                   chain-table  N  (off  3  from  floor(a));
+                   table  repaired  at  the  generator,  0167)
     The  below-G  face  is  unchanged:  E1Clause  q  2  (s8
     505  rows).  No  RH  claim.  -/
 
