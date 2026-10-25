@@ -1,0 +1,22 @@
+{
+ "id": "0176",
+ "ts": "2026-10-25T21:10:00",
+ "title": "In-tree E1ClauseV3C window extended (G, 9e21] -> (G, 9e23] (0168 pattern, now 0176): T_MEAS3 = 9e23, defect_C3absT3 2439/10^9 -> 2439/10^7, mdefect3_bounded 2.3e29 -> 2.3e31, named hole E1ClauseV3C q 10000000 -> 100000000 (40 measured rows: the 33 through 9e18 + the seven s34 far rows 3e19/3e20/9e20/3e21/9e21/3e23/9e23 with same-N bare crosses; max residual 6.333622e7 at the 9e23 row -> 37% margin); targeted build green 8733 jobs, FULL TREE green 17450 jobs; the three-term defect is now in-tree certified to two more decades of height, with the pins (A3 = -25254354, B3 = +523472285, closed-form C3 at U_TOP = 1e30) UNCHANGED",
+ "kinds": [
+  "lean",
+  "data",
+  "checkpoint"
+ ],
+ "status": "recorded",
+ "claim": "No RH claim: the in-tree data clause is a named-open hole documenting the data track (as before; if_E1V3C_and_walk stays the structural contract with the hole open). What changed is the CERTIFIED WINDOW: the three-term law M_defect3(t) = A3 ln t + B3 + C3 t^2 now covers (G_LAST, 9e23] in-tree, and the residual bound B = 1e8 carries a 37% margin over the worst measured row (6.333622e7 at 9e23; the 3e23 row carries 3.726138e7). The loose defect bound mdefect3_bounded scales exactly as the window (2.3e31), so e1V3C_implies_abs / the walk composition close unchanged.",
+ "evidence": [
+  "formal/RhAttack/E1Clause.lean: 15 edits (T_MEAS3, defect_C3absT3 statement+calc, mdefect3_bounded statement + 9 proof-internal exponents, e1V3C_implies_abs statement + proof calc, E1ClauseV3C doc, if_E1V3C_and_walk hole 100000000 + doc, addendum block)",
+  "lake env lean RhAttack/E1Clause.lean: rc=0, 0 errors (tmp/e1v3c_9e23_check2.log); one intermediate fix needed (the e1V3C_implies_abs proof calc carried its own 10^21 copy)",
+  "lake build RhAttack.E1Clause: Build completed successfully (8733 jobs)",
+  "lake build (full tree): Build completed successfully (17450 jobs) - same job count as the 0168 full-tree green",
+  "no external consumers of E1ClauseV3C / T_MEAS3 / mdefect3_bounded outside E1Clause.lean (grep-verified before editing)",
+  "row data: tmp/s34t_far_rows.jsonl rows 8/9 (3e23: t = 3.0001045999981976e+22, Mlaw_resid +3.726138e7, rel 3.812e-9; 9e23: t = 9.000313799994592e+22, Mlaw_resid -6.333622e7, rel 7.2e-10); zeta primaries per 0169/0174 (full f128 cos-form, same-N bare crosses 1.681e-6 / 1.250e-6)",
+  "margin arithmetic: (1e8 - 6.333622e7)/1e8 = 36.66% ~ 37%",
+  "constants in cards/E1Clause.md + make_lean_cards.py map synced (107 cards | 1589 body lines)"
+ ]
+}

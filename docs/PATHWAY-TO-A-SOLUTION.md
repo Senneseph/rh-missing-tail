@@ -2162,3 +2162,15 @@ chime_comb (the full 3-case comb formula - the 24-error wall),
 raman_prime_closed; the formal twin of 0172. Wave-2 (Ramanujan
 full-support, inclusion-exclusion, multiplicativity, Parseval)
 and U4 (parity-as-width) are the next formal steps. No RH claim.
+
+UPDATED (0176, 2026-10-25): the unblocked in-tree step ran - the
+E1ClauseV3C window is now (G_LAST, 9e23] (0168 pattern):
+T_MEAS3 = 9e23, defect_C3absT3 = 2439/10^7, mdefect3_bounded = 2.3e31,
+named hole E1ClauseV3C q 10000000 -> 100000000 with the 40-row face
+(33 through 9e18 + seven s34 far rows; max residual 6.333622e7 at the
+9e23 row -> 37% margin). The pins are UNCHANGED (A3 = -25254354,
+B3 = +523472285, closed-form C3 at U_TOP = 1e30) - the three-term
+law simply certifies two more decades. Targeted build 8733 jobs;
+FULL TREE 17450 jobs (the 0168 green count). No RH claim: the hole
+stays open; the window is a data track, and the next data notch is
+3e24/9e24 (generator-ready, compute-deferred).

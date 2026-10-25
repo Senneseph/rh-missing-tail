@@ -196,10 +196,9 @@ Commit a00c7d6.
    **MEASURED boundary:** the exact-integer M era (0158) closed at
    9e21 — past 2^53 the M partial sum is an f64 ulp multiple (2 / 16);
    the quantization record (0.000e+00, all ten rows 1e18..9e21) stands
-   as the record. In-tree: E1ClauseV3C window (G, 9e21] (0168:
-   T_MEAS3 = 9e21, B = 1e7, 38-row face); the 9e23 extension is
-   UNBLOCKED (0174; 0168 pattern: B 1e7 -> 1e8, bound 2.3e29 -> 2.3e31)
-   - the next build step. No RH claim.
+   as the record. In-tree: E1ClauseV3C window (G, 9e23] (0176:
+   T_MEAS3 = 9e23, hole B = 1e8, 40-row face, max residual
+   6.333622e7 at 9e23 -> 37% margin, full tree 17450 jobs). No RH claim.
 7. **The terminal face (NAMED, unchanged):** the in-tree closure of
    the `hOffC` face remains blocked on the external `[Z78C]` frontier
    (0.8747729897, below in-tree; frontier board sweep 2026-10-24:
@@ -245,7 +244,8 @@ Commit a00c7d6.
    across the session; the p-multiple reindex closed via a
    conv-safe exponent equality (m*a = (p*a)*(m/p); a global rw of
    m = p*(m/p) self-overlaps inside (m/p)). Wave-2 (raman_full_support
-   / inclusion-exclusion / multiplicativity / parseval_units) staged.
+   / inclusion-exclusion / multiplicativity / parseval_units) staged
+   (the 9e23 in-tree step it waited on is now DONE, 0176).
    **U4 TO-BUILD:** the parity-as-width statement.
    Recall incident logged in 0170 (a 65/35 benchmark was unverified
    memory; corrected to the verified LOS framework). No RH claim:

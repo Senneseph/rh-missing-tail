@@ -319,7 +319,7 @@ wiki on each green gate. The in-tree frontier (`Z78C`, hOffC) is
   Lean WAVE-1 GREEN (0175): `SieveAction.lean` builds (0 errors,
   8706 jobs — rou/char_pow/dft/mark_notdiv/raman + idempotent +
   commute + chime_comb [the 24-error wall] + raman_prime_closed;
-  Wave-2 staged after the 9e23 in-tree step). Output: `tmp/kcs2_out.txt`.
+  Wave-2 staged; the 9e23 in-tree step it waited on is DONE, 0176). Output: `tmp/kcs2_out.txt`.
 - **U2 Lean WAVE-2 / U1b / U1c / U4:** as scoped in §5, next build
   sessions (Wave-1 green, 0175).
 
