@@ -23,7 +23,7 @@ So every attack has gone around the door. The gambit is to **stop** pushing it:
 
     The tail is kept exactly as it is — measured, telescoped, certified — and the detector-plus-squeeze, that its smallness unlocks, does the closing.
 
-(Driver and door: Appendix A below.  Where the path stands today: the status section of this README and docs/CEILING-REPORT-DAY035.md.)
+(Driver and door: Appendix A below.  Where the path stands today: the status section of this README, docs/CEILING-REPORT-DAY035.md for the end-game ceiling, and docs/PATHWAY-TO-A-SOLUTION.md / docs/DATA-LEDGER.md for the data-side frontier.)
 
 ## The argument as constructed
 
@@ -78,8 +78,10 @@ agreeing to the last zero, with dps-certified anchors): **N(10⁷) =
 21,136,121**, S(10⁷) = −3.205718 (45 decimal digits), and the parity
 certificate 2K(10⁷) is even. By the counting lemma, **there is no
 off-line zero pair below height 10⁷** — the strongest unconditional
-statement of this repository to date (|S| stays 2.558, 2.509, 3.206 at
-10⁵, 10⁶, 10⁷: an O(1) envelope, no drift).
+statement of this repository's day-023 certification line (|S| stays
+2.558, 2.509, 3.206 at 10⁵, 10⁶, 10⁷: an O(1) envelope, no drift);
+the zero walk has since carried the shape through 3×10¹⁰ (The Final
+State below).
 
 ### 2. The strategy in one paragraph
 
@@ -115,6 +117,11 @@ bounded by 2.503 on (10⁷, 2×10⁹],  2.4772 on (10⁷, 2.9992×10⁹]) plus t
 101,635,962,231 exact;  sup|DN| = 2.615067 on (10⁷, 3×10¹⁰] —  the walk
 keeps its shape through a full decade;  the per-gap ε layer of the [S1]
 walk bound is certified over it,  A2-class,  pre-registered Outcome A).
+  Past the zero-walk band the data side runs a separate far-census line:
+  the far-ζ rows 1e18…9e23 with the closed-form 3-term M law (relative
+  residuals collapsing 2.247e−8 → 7.199e−10 across the last four
+  heights), feeding the in-tree E1ClauseV3C face on (G, 9e21]
+  (docs/DATA-LEDGER.md, docs/PATHWAY-TO-A-SOLUTION.md).
 The legs still open are exactly two and are named on one page:  the
 **[S1] uniform walk bound** (the R2 drift reduction is in Lean —
 W2Beyond0 / W2Beyond1;  the open content is the A1 analytic ε bound and
@@ -379,7 +386,30 @@ Part 7.*
   chain modules;  the 3e9 zero band is streamed,  md5-gated,  seam-
   asserted,  with N(3×10⁹) = 9,064,192,826 exact and RVM(3×10⁹) =
   9,064,192,825.58 (abs diff 0.42).
-- **Open (the two remaining legs,  named on the front page):** the
+- **Post-3e10 additions (day036+,  all machine-checked;  full tree
+  green at 17450 jobs after the V3C extension):** the endpoint line
+  (`RHEnd` — the endpoint named;  the single remaining in-tree face is
+  hOffC,  beyond the cited frontier [Z78C] = 0.8747729897,  which sits
+  below in-tree);  the S1 repair family (S1Cusp / S1Uniform / S1Ge /
+  S1Face / S1Marg / S1Point / S1Sample — the cusp-aware bridge,  the
+  uniform statement,  the side atoms,  the named hs1 face,  the margin
+  wire,  and the named high-t repair vehicle);  the S4 measured-fill
+  family (S4Asm / S4Blind / S4Gap / S4Growth / S4Own / S4Sharp /
+  S4Strip / S4WinCap / S4Window);  the W2Beyond steps (W2Beyond0–W2Beyond3,
+  the drift-reduction line beyond the 3e10 band);  the argument-
+  principle atoms (Ap1ArgumentPrinciple / Ap3ReZeroCount — the anchor
+  of the orbit line);  **E1Clause** — the E1 clause with the V3C
+  data-anchored window (G, 9e21] (T_MEAS3 = 9e21,  B = 1e7,  38
+  measured rows over 1e18–9e21,  max residual 6.5742e6,  34% margin;
+  the named hole);  and **Orbit** (`formal/RhAttack/Orbit.lean`) — the
+  orbit the meta line has been running all along,  proven in-tree:
+  `totalBound` (width n⋅eps),  `surjWidth` (the achievable totals are
+  exactly the open interval of that width — sharp,  not just bounded),
+  `anchorCollapsesWidth` (the closing operator:  one global measurement
+  against an external reference collapses the width;  the campaign
+  instantiation 89 − 61 = 28 free points).  No RH claim in any of it.
+- **Open (the two remaining legs,  named on the front page —
+  the RHEnd / ZetaZeroSet docstrings):** the
   **[S1] uniform walk bound** —  the W2-beyond research item;  its R2
   drift reduction is in Lean (`W2Beyond0` / `W2Beyond1`:  the drift
   identity,  the two-sided MVT gap band,  the regime bounds,  and the
@@ -390,7 +420,11 @@ Part 7.*
   bound (restated in docs/S1-A1-EXPLORATION.md E1 as "S bounded at the
   zeros",  not classically refuted) and the final reassembly / pin
   unit;  the absolute-sum barrier on the literal A1 clause is recorded
-  there (E2).  And the **[S3/S4] measured fills** (the |ζ| fill and the
+  there (E2).  Since the 3e10 close-out this leg has been repaired in
+  the gated S1 family (each machine-checked) and the endpoint has
+  COLLAPSED to the cited frontier:  the single remaining in-tree face is
+  hOffC,  beyond [Z78C] (the external board sweep 2026-10-24:  28
+  records,  nothing new below in-tree).  And the **[S3/S4] measured fills** (the |ζ| fill and the
   zero-side witness on the actual set,  named wire hypotheses with the
   pinned data as their fills today;  the owner-selected route is grade
   (i) H1-full over the 3e10 census —  engine built and self-tested,  CPU
@@ -685,6 +719,34 @@ kernel — is specific enough to fail.
     data entry point (scripts/rh/rh_fetch_data.py,  all bands
     md5-gated and resume-safe),  and the test commands from the
     no-data engine self-test to the full smoke-test to the Lean build
+- **Post-3e10 documents and modules (day036+,  direct links):**
+  - [docs/DATA-LEDGER.md](docs/DATA-LEDGER.md) — **the far census**:
+    the read-only data ledger (the row set,  the M identity and the
+    far law pinned in Lean,  the channels,  the traps) — the data
+    appendix of the pathway narrative
+  - [docs/PATHWAY-TO-A-SOLUTION.md](docs/PATHWAY-TO-A-SOLUTION.md) —
+    the data-side narrative:  the S20a/S21 far line,  the chain-table
+    wall and its repair,  the quantization era (closed at 9e21),  the
+    3-term law through 9e23
+  - [docs/ORBIT-FORMALIZATION.md](docs/ORBIT-FORMALIZATION.md) — the
+    orbit:  the local-observable → global-invariant extraction,  the
+    width `n·eps` and its sharpness,  the anchor and its collapse,  the
+    uncertainty form,  and the campaign instantiation
+  - [RhAttack/Orbit.lean](formal/RhAttack/Orbit.lean) — `totalBound` /
+    `surjPoint` / `surjWidth` / `anchorCollapsesWidth` (proven in-tree,
+    8706-job build green,  zero linter warnings)
+  - [RhAttack/E1Clause.lean](formal/RhAttack/E1Clause.lean) — the E1
+    clause + the V3C data-anchored window (G, 9e21] (38-row face)
+  - [RhAttack/RHEnd.lean](formal/RhAttack/RHEnd.lean) — the named
+    endpoint (the hOffC face,  the cited [Z78C] frontier)
+  - [docs/KANSAS-CITY-SHUFFLE-SIEVE-ORBIT-PLAN-2026-10-25.md](docs/KANSAS-CITY-SHUFFLE-SIEVE-ORBIT-PLAN-2026-10-25.md) — the second-orbit program
+    (the Sieve of Eratosthenes as a Fourier-compatible Action series,
+    paired with the zeta side on their shared Euler factor):  U1a
+    verified EXACT (42/42,  the character-prefix refinement,  the O(1)
+    non-principal orbit),  U3 measured (the mod-4 gap-class bias
+    0.556519 at 1e8 against the Lemke Oliver–Soundararajan anchor,
+    arXiv:1603.03720) — the flank,  a prime-gap class statistic,
+    no RH claim
 - **Master formula ledger (working tree):** `plan/40-prize-islands/
   rh-attack/FORMULAS.md` — every formula this work uses, labeled
   (verbatim-read / measured + file + precision / derived + file /
