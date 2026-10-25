@@ -40,6 +40,8 @@ C3 = -(np.log(U_TOP / (2.0 * np.pi)) + 1.0) / (2.0 * np.pi * U_TOP)
 ROWS = [
     1e11,
     3e11,
+    1e12,  # 3e21 -> 3e23 notch (S21b, after the 0167 table repair)
+    3e12,
 ]
 
 
