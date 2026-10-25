@@ -97,7 +97,9 @@ Reconstruction (faithful):
   predicts 0.550315 (89% of the bias explained, decisively beating
   the one-channel 0.5 baseline); the LOS leading+c₂ terms give
   0.545674, with the next order O((ln x)^{−7/4}) ≈ 0.012 the sized
-  gap — named refinement U3b. **RETRACTION (recall incident, P-0
+  gap — named refinement U3b (RUN 2026-10-25: the leading term
+  reproduces 0.545670 at 1e8, 4e-6 from the recorded value; the sized
+  gap resolves into the transfer coefficient — see §7). **RETRACTION (recall incident, P-0
   discipline)**: an earlier draft of this plan cited a "~65/35
   benchmark (GPY/Maynard/Tao)" — that figure was UNVERIFIED MEMORY,
   contradicted by both the measurement (55.7/44.3 at 1e8) and the
@@ -125,7 +127,7 @@ Reconstruction (faithful):
 | N1 | **Sieve Action identity**: the flat-action (summation-by-parts) reading of the Legendre recursion `U_j(u) = U_{j−1}(u) − U_{j−1}(⌊u/p_j⌋)` / character version `V_j(u) = V_{j−1}(u) − χ(p_j) V_{j−1}(⌊u/p_j⌋)` — the sieve as a *total-differential Action*, E7a-verified exact at reachable scale (exact integer arithmetic; the zeta-side twin is the E7a Euler action). **STATUS U1a (2026-10-25): VERIFIED EXACT** on 42 configurations (z ≤ 31, x ≤ 10^7, χ = 1 and χ = (·/4)) — with the refinement that the multiplicative side is `Σ_{d|P̄} μ(d)χ(d) S_χ(⌊x/d⌋)` with the character prefix S_χ (the ⌊x/d⌋ form is the PRINCIPAL specialization); for non-principal χ the whole quantity is a bounded exact integer (|V| ≤ 4 measured) — no grind on that orbit at all. | **U1a DONE** (U1b/c pending) | the recursion is textbook-true; the *verification + combined two-process identity* is the deliverable |
 | N2 | **Fourier sieve operator theorem (finite, exact)**: on `Z/NZ`, N = P̄(z) squarefree, the mark operator `K_p` (multiply by `1_{p∤·}`) lives in the group algebra (commutative); in the DFT basis `K̂_p` is the **averaging operator over the p-torsion subgroup of the character group** (idempotent, commuting projections); hence `DFT(1_{(·,P̄)=1}) = (1/P̄)·1_{Ĝ[P̄-torsion]}`, and `φ(P̄)` falls out of Parseval. Each chime = the p-torsion comb (the per-prime tone); the full sieve = the joint torsion projection. | to verify (U2) | finite exact algebra; the *package as one theorem with the chime correspondence* is new here |
 | N3 | **Sieve orbit width = the parity gap**, stated as the orbit-2 analogue of `surjWidth`: local reading (per-hop survivors) vs global (final structure); width = measured first-order upper/lower sieve gap; parity = the opacity; anchor = the zeta/L-side (partial). | to verify (U4) | **Scoped honestly**: Legendre exactness is proved; the parity correspondence is a *structural statement*, not a new barrier theorem |
-| N4 | **Two-together next-gap-class prediction**: `predicted(class) ∝ Σ W(2k) e^{−2k/ln X}` predicts the mod-4 (and mod-30) gap-class frequencies at reachable X, beating (i) naive uniform and (ii) one-channel baselines, with a margin log. **STATUS U3 (2026-10-25): MEASURED** at X = 10^7/10^8: measured 0.564864/0.556519 (CI ±0.0012/±0.0008), two-together 0.555808/0.550315, one-channel 0.500000 — the two-together model explains ~90% of the measured bias and beats the one-channel by ~5.0 points; the strict-CI gate (|meas − model| < CI) is NOT yet met (0.0062 ≈ 7.7·se at 1e8): U3b = the exact consecutivity probability (replace the Cramér e^{−2k/L}) and/or the LOS main-conjecture c₂+c₃ terms (O((ln x)^{−7/4}) ≈ 0.012 at 1e8 — the sized gap). | **U3 PARTIAL** (U3b pending) | a prime-gap **class statistic** — **not** an exact next-prime oracle (boundary stated in §6) |
+| N4 | **Two-together next-gap-class prediction**: `predicted(class) ∝ Σ W(2k) e^{−2k/ln X}` predicts the mod-4 (and mod-30) gap-class frequencies at reachable X, beating (i) naive uniform and (ii) one-channel baselines, with a margin log. **STATUS U3 (2026-10-25): MEASURED** at X = 10^7/10^8: measured 0.564864/0.556519 (CI ±0.0012/±0.0008), two-together 0.555808/0.550315, one-channel 0.500000 — the two-together model explains ~90% of the measured bias and beats the one-channel by ~5.0 points; the strict-CI gate (|meas − model| < CI) is NOT yet met (0.0062 ≈ 7.7·se at 1e8 — arithmetically corrected below). **UPDATED U3b (2026-10-25):** three-channel decomposition at X = 1e7/1e8/3e8/1e9 (exact sieve): u3-only 0.555808/0.550315/0.548097/0.545905; LOS-pair (1+δ)/2 0.550123/0.545670/0.543841/0.542016 (the anchor's leading term, verified); naive composed (1±δ)·w·e^{−2k/L} 0.604759/0.595110/0.591169/0.587248 — **ruled out at all four scales** (|z| up to 519). Strict-CI gate still NOT met: u3-only residuals +0.009056/+0.006204/+0.005714/+0.005167 with z = 14.9/30.0/46.3/74.1 (the U3 "7.7·se" was a double-discount: the printed CI half-width IS 1.96·se, so z = diff/se directly — corrected). New named finding: the **transfer coefficient** α(X) = 0.18332/0.13743/0.13170/0.12412 (decaying) — the pair bias transfers DILUTED into the consecutive-gap census, with measured ≈ u3 + 2f(1−f)·α·δ to first order at every scale (2f(1−f) ≈ 0.495 is the class-variance of the ratio). U3c = derive the transfer mechanism and/or the next α decade (3e9/1e10). | **U3b DONE** (gate still open; U3c named) | a prime-gap **class statistic** — **not** an exact next-prime oracle (boundary stated in §6) |
 
 ## 4. What "cancels" and what is hopped (named, concretely)
 
@@ -183,14 +185,38 @@ Nothing here needs GPU, long compute, or the zeta binaries.
 - **U3 — Two-together prediction (the chime compass, made exact).**
   (a) Compute the predicted mod-4 ratio from
   `Σ_k W(2k)·e^{−k/ln X}` (short Python; W(2k) exact via the product)
-  — record the predicted 65.x/34.x and the literature benchmark
-  ≈ 65/35; (b) measure actual consecutive-odd-prime-gap classes at
+  — record the predicted ratio against the verified LOS anchor above
+  (the ~65/35 GPY/Maynard/Tao benchmark is RETRACTED — unverified
+  memory, 2026-10-25); (b) measure actual consecutive-odd-prime-gap
+  classes at
   X = 10^8 (primesieve, seconds) and X = 10^9 if cheap, with a
   binomial CI; (c) margin table: two-together vs naive (50/50) vs
   one-channel (density only = 50/50 at mod 4, showing the correction
   factor is the whole effect). **Gate:** predicted vs measured inside
   CI at X = 10^8, margin over both baselines logged. **Cost:** < 1 h
   wall.
+- **U3b — exact-consecutivity refinement (RUN 2026-10-25, its own
+  gate MET; the strict-CI gate remains open by measurement).**
+  (a) three-channel decomposition at 1e7/1e8/3e8/1e9 (exact numpy
+  sieves, seconds); (b) rule in/out the naive composed model
+  (1±δ)·w·e^{−2k/L} — ruled out at all four scales (it OVERSHOOTS by
+  6–8 percentage points); (c) define + measure the transfer
+  coefficient α(X): the pair bias enters the consecutive-gap census
+  diluted, and measured ≈ u3 + 2f(1−f)·α·δ to first order (first-order
+  identity holds to ~1e-6 at all four scales); (d) SE-arithmetic fix
+  (z = diff/se; the CI half-width already IS 1.96·se — the U3
+  "7.7·se" was diff/CI/1.96, a double-discount).  Output:
+  `tmp/kcs3b_out.txt`.
+- **U3c — transfer mechanism + the α decay (next unit).**
+  (a) derive α from the per-class conditional normalization / the
+  "no prime in between" reweighting (the (1±δ) factor acts on pair
+  COUNTS; the consecutive-gap census conditions on both the pair and
+  the empty interval — the transfer is what that conditioning does to
+  the factor); (b) measure α at 3e9/1e10 (sieve seconds; memory ≤
+  2.5 GB) to resolve the decay law (measured α: 0.183 → 0.137 →
+  0.132 → 0.124 across 1e7 → 1e9, ~7% per ×3, not yet identified with
+  a clean function).  Gate: the strict-CI gate closes when a DERIVED
+  (not fitted) α-variant lands inside CI at 1e8.
 - **U4 — Second-orbit statement (Lean, scoped honestly).**
   `SieveOrbit.lean` (or inside `SieveAction.lean`): (a) prove the
   Legendre exact identity `φ(x,z) = Σ_{d|P̄} μ(d)⌊x/d⌋` (induction);
@@ -236,6 +262,16 @@ wiki on each green gate. The in-tree frontier (`Z78C`, hOffC) is
 - **U3 RUN (2026-10-25):** `scripts/rh/kcs3_gap_class.py` — measured +
   predicted + margin table + the k = 1..8 shape check. Output:
   `tmp/kcs3_out.txt`. Strict-CI gate not met yet → U3b named above.
+- **U3b RUN (2026-10-25):** `scripts/rh/kcs3b_gap_class_u3b.py` — the
+  three-channel decomposition at 1e7/1e8/3e8/1e9 (numbers in the N4
+  line above): naive composition ruled out at all scales (|z| → 519);
+  transfer coefficient α(X) = 0.18332/0.13743/0.13170/0.12412,
+  decaying; first-order identity measured ≈ u3 + 2f(1−f)·α·δ to ~1e-6;
+  SE-arithmetic correction logged (correct z = 14.9 → 74.1 across the
+  four scales). Output: `tmp/kcs3b_out.txt`. The strict-CI gate
+  remains OPEN — U3c (the transfer mechanism + the next α decade) is
+  the named follow-up. Same run, the kcs3 script's retired ~65/35
+  print line was replaced with the verified LOS anchor.
 - **U2 / U1b / U1c / U4:** as scoped in §5, next build sessions.
 
 *The shuffle is a crafted creation: it does not claim to move the face.

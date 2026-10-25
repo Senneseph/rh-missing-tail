@@ -216,8 +216,18 @@ Commit a00c7d6.
    Oliver-Soundararajan statistic, arXiv:1603.03720): 0.556519 at
    10^8 (CI +/-0.00041); the two-together model (HL singular series x
    Cramer consecutivity) 0.550315 — 89% of the bias, beating the
-   one-channel 0.5 by 5.0 points; strict-CI gate NOT met -> U3b
-   (exact consecutivity / LOS higher orders). **U2/U4 TO-BUILD:** the
+   one-channel 0.5 by 5.0 points. **U3b DONE (0171, 2026-10-25):**
+   three-channel decomposition at 1e7/1e8/3e8/1e9 (exact sieves) —
+   the NAIVE composed pair-bias model (1+/-delta)·w·e^{-2k/L} is
+   ruled out at all four scales (|z| up to 519); the strict-CI gate
+   is still NOT met (corrected z = 14.9 -> 74.1 across the scales;
+   the U3 "7.7 se" was a double-discount of the CI half-width —
+   corrected in place); new named finding: the transfer coefficient
+   alpha(X) = 0.183/0.137/0.132/0.124 (decaying) — the pair bias
+   enters the consecutive-gap census DILUTED, and measured =
+   u3 + 2f(1-f)·alpha·delta to first order at every scale; U3c =
+   derive the transfer mechanism and/or the next alpha decade
+   (3e9/1e10). **U2/U4 TO-BUILD:** the
    Fourier-sieve operator theorem (p-torsion chimes; DFT support =
    the joint torsion subgroup) + the parity-as-width statement.
    Recall incident logged in 0170 (a 65/35 benchmark was unverified

@@ -1,0 +1,31 @@
+{
+ "id": "0171",
+ "ts": "2026-10-25T08:30:00",
+ "title": "KCS U3b run: three-channel mod-4 gap-class decomposition at 1e7/1e8/3e8/1e9 (exact sieves) - the naive composed pair-bias model (1+/-delta) w e^{-2k/L} is RULED OUT at all four scales (|z| up to 519); the strict-CI gate remains NOT met; new named finding: transfer coefficient alpha(X) = 0.183/0.137/0.132/0.124 (decaying) with measured = u3 + 2f(1-f)*alpha*delta to first order at every scale; SE-arithmetic correction: U3's '7.7 se' was a double-discount, correct z = 14.9 -> 74.1",
+ "kinds": ["math", "measurement", "statistics-correction"],
+ "status": "recorded",
+ "claim": "No RH claim: an explicit pair heuristic (Hardy-Littlewood singular series x Cramer consecutivity x the Lemke Oliver-Soundararajan pair-bias factor) decomposed and tested against exact-sieve ground truth at four scales. The composed model's failure is a MEASURED ruling-out, not a claim; the transfer coefficient is a measured semi-empirical quantity with a named derivation task (U3c).",
+ "evidence": [
+  "scripts/rh/kcs3b_gap_class_u3b.py + tmp/kcs3b_out.txt: X=1e7: measured 0.564864, u3-only 0.555808, LOS-pair (1+delta)/2 0.550123, composed 0.604759, alpha 0.18332, z(u3) 14.89, z(comp) -65.60; X=1e8: 0.556519 / 0.550315 / 0.545670 / 0.595110, alpha 0.13743, z(u3) 29.98, z(comp) -186.45; X=3e8: 0.553811 / 0.548097 / 0.543841 / 0.591169, alpha 0.13170, z(u3) 46.34, z(comp) -302.97; X=1e9: 0.551072 / 0.545905 / 0.542016 / 0.587248, alpha 0.12412, z(u3) 74.06, z(comp) -518.65",
+  "LOS anchor leading term reproduced: 0.5 + delta/2 at 1e8 = 0.545670 vs the 0170 recorded leading+c2 value 0.545674 (4e-6: the c2 contribution is within 5e-6 at 1e8)",
+  "delta(x) values: 0.100245 (1e7), 0.091339 (1e8), 0.087682 (3e8), 0.084032 (1e9); alpha*delta (effective class factor): 0.018377 / 0.012553 / 0.011548 / 0.010430",
+  "First-order identity (linearization of the class ratio): measured = u3 + 2 f(1-f) alpha delta + O((alpha delta)^2), 2f(1-f) ~ 0.4953 - holds to ~1e-6 at all four scales; the apparent 'half' (residual ~ alpha*delta/2) IS the class-variance factor 2f(1-f) of the ratio, not a mystery",
+  "SE-ARITHMETIC CORRECTION (statistics discipline): z = (measured - model)/se where 1.96*se = the printed 95% CI half-width. The 0170/U3 statement '0.0062 ~ 7.7 se' divided diff/CI-halfwidth by 1.96 AGAIN - a double-discount. Correct z: 14.89 (1e7), 29.98 (1e8), 46.34 (3e8), 74.06 (1e9). The u3-only model error is a SYSTEMATIC bias growing in z with X (absolute residual shrinking 0.009056 -> 0.005167, slower than se ~ 1/sqrt(X))",
+  "U3b verdict: naive composition (undiluted pair-bias transfer) is ruled out; the measured census = u3 (consecutivity-tilted) PLUS a diluted pair-bias transfer (alpha ~ 0.12-0.18 of the raw factor); the strict-CI gate remains OPEN at all four scales",
+  "scripts/rh/kcs3_gap_class.py provenance hygiene: the retired ~65/35 GPY/Maynard/Tao print line (retracted in 0170) was replaced in-tree with the verified LOS anchor the same run; re-ran, tmp/kcs3_out.txt regenerated"
+ ],
+ "artifacts": {
+  "U3b_table": {"X": ["1e7", "1e8", "3e8", "1e9"], "measured": [0.564864, 0.556519, 0.553811, 0.551072], "u3_only": [0.555808, 0.550315, 0.548097, 0.545905], "los_pair": [0.550123, 0.545670, 0.543841, 0.542016], "composed": [0.604759, 0.595110, 0.591169, 0.587248], "alpha": [0.18332, 0.13743, 0.13170, 0.12412], "alpha_delta": [0.018377, 0.012553, 0.011548, 0.010430], "z_u3": [14.89, 29.98, 46.34, 74.06], "z_composed": [-65.60, -186.45, -302.97, -518.65]},
+  "gate": "strict-CI gate NOT met (corrected z listed above); U3c named: derive the transfer mechanism (per-class conditional normalization / no-prime-in-between reweighting) and/or measure the next alpha decade (3e9/1e10) to identify the decay law (alpha ~ -7% per x3, not yet a clean function)"
+ },
+ "relations": ["0170"],
+ "open_items": [
+  "U3c: transfer mechanism derivation + alpha decay law (3e9/1e10 measurement; sieve is seconds, memory <= 2.5 GB)",
+  "U2: Fourier sieve operator theorem (the p-torsion chime package as one theorem; Lean)",
+  "U1b/U1c: the two-process combined identity",
+  "U4: SieveOrbit.lean (parity-as-width, scoped honestly)",
+  "same-N bare crosses b8/b9 (running, PID 4124046) -> then the in-tree E1ClauseV3C 9e23 extension (0168 pattern: T_MEAS3 -> 9e23, B -> 1e8, bound -> 2.3e31)",
+  "README/PLAN/data-line sync for the b8/b9 landing (d_abs on the 3e23/9e23 rows vs the instrument's ~2.5e-5 standard)"
+ ],
+ "no_rh_claim": true
+}

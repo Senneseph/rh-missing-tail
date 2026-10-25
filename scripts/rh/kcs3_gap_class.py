@@ -18,9 +18,12 @@ Model (no RH claim - an explicit pair heuristic with named constants):
   TWO-TOGETHER = the w(k) modulation ON TOP of the density.
 
 Checks:
-  (a) the L -> inf mean-value ratio (K-cutoff) - cross-check against
-      the literature odd-gap mod-4 bias benchmark (~65/35;
-      Goldston-Pintz-Yildirim / Maynard / Tao 2016);
+  (a) the L -> inf mean-value ratio (K-cutoff) - the w(k) side is
+      class-symmetric (1/2);  the measured bias is carried by the
+      e^{-2k/L} consecutivity factor (see U3b);  the verified
+      literature anchor is Lemke Oliver-Soundararajan
+      (arXiv:1603.03720,  PNAS 113(36):10050 (2016)):  class limit
+      1/2 with a bias decaying like ln ln x / ln x;
   (b) the k = 1..8 gap-distribution shape vs measurement (validates
       the e^{-2k/L} factor placement);
   (c) the measured mod-4 class fraction at X = 1e7, 1e8 with a
@@ -129,7 +132,12 @@ wv2 = w2[1:K2 + 1]
 frac_mean = float(wv2[odd2].sum() / wv2.sum())
 W("(a) L->inf mean-value class ratio (K = %d):  frac(k odd) = %.6f"
   % (K2, frac_mean))
-W("    literature odd-gap mod-4 bias benchmark: ~0.65 (GPY/Maynard/Tao)")
+W("    class limit is 1/2 with a decaying bias;  verified anchor:")
+W("    Lemke Oliver-Soundararajan,  arXiv:1603.03720,  PNAS 113:10050")
+W("    (the earlier ~65/35 GPY/Maynard/Tao benchmark is RETRACTED")
+W("    as unverified memory - see the KCS plan,  U3 section)")
+W("    U3b (kcs3b_gap_class_u3b.py) is the exact-consecutivity")
+W("    refinement:  three-channel decomposition at 1e7/1e8/3e8/1e9)")
 W("")
 for X, name in ((10 ** 7, "1e7"), (10 ** 8, "1e8")):
     primes, k, phat, se, L = gap_stats(X, name)
