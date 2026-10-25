@@ -123,6 +123,27 @@ core **and the per-pair zero-side factor** are machine-checked; this
 changes no status line in this plan's postulates (P-E's EXACT label
 is reinforced, not replaced).
 
+**Added (2026-10-25, the orbit line):** `formal/RhAttack/Orbit.lean`
+proven in-tree (leanprover/lean4 v4.33.1, mathlib prebuilt; build
+8706 jobs green, zero linter warnings): the *orbit* — the
+local-observable to global-invariant extraction the campaign has been
+running all along. Objects: `Drift n = Fin n -> R`, `LocallyInvisible
+n δ eps` (each step invisible under eps), `TotalDrift`,
+`irreducibleWidth = n*eps`, `anchorWidth = 2*sigma`. Theorems:
+`totalBound` (|total| < n*eps — the width), `surjPoint` + `surjWidth`
+(achievable totals = exactly `Ioo -(n*eps) (n*eps)` — the width is
+SHARP, not just bounded), `anchorCollapsesWidth` (sigma < n*eps => the
+anchored reading's width 2*sigma is strictly smaller — the closing
+operator: one global measurement against an external reference
+collapses the width). Campaign instantiation: 11 unanchored steps,
+96% step-correct vs 61% trajectory goal-match, width 35 points;
+post-anchor 89% / 7 points; consistency gained 28 points with zero
+extra steps. `docs/ORBIT-FORMALIZATION.md` records the formula, the
+uncertainty form (unobservability product `eps x horizon`, not
+Fourier dx*dx' verbatim), and the correspondence with the
+argument-principle anchor (Ap1/Ap3) and the no-RH-drift ledger.
+Commit a00c7d6.
+
 ## Living documents
 
 - `DISCOVERY_LOG.md` — the chronicle: approach + the pieces as found
@@ -155,3 +176,50 @@ is reinforced, not replaced).
    S = o(log t), classical) with the zero side pinned to the
    explicit-formula kernel. That last is the resolution-shaped end
    of the road; it is not claimed.
+
+   — stage-map sync 2026-10-25 (the map was stale since the day-023
+   era; the S20/S21 data line, the orbit line, and the second-orbit
+   program are the working frontier now): —
+
+6. **S20a/S21 data frontier (DONE through 0169, 2026-10-25):** the
+   C/quad channel is validated through 9e23: the S21a chain-table N
+   wall was an INSTRUMENT bug (hand-scaled N missed the exact
+   floor(a) by 3; p left the rssum (-1,1] domain; generator repaired,
+   selftest 1e-29). Rows: 3e21/9e21 full-primary (0167; re-issued with
+   same-N fixed-table bare crosses d = 3.2788e-6 / 2.3222e-6 vs the
+   instrument's ~2.5e-5 self-declared standard — 0169); 3e23/9e23
+   full-primary (logzeta -0.978704934699 / +0.569323908351; same-N
+   bare crosses queued). The 3-term-law M relative residual collapses
+   monotonically: 2.247e-8 -> 7.473e-9 -> 3.812e-9 -> 7.199e-10.
+   **MEASURED boundary:** the exact-integer M era (0158) closed at
+   9e21 — past 2^53 the M partial sum is an f64 ulp multiple (2 / 16);
+   the quantization record (0.000e+00, all ten rows 1e18..9e21) stands
+   as the record. In-tree: E1ClauseV3C window (G, 9e21] (0168:
+   T_MEAS3 = 9e21, B = 1e7, 38-row face); the 9e23 extension follows
+   the same pattern after the bare crosses close. No RH claim.
+7. **The terminal face (NAMED, unchanged):** the in-tree closure of
+   the `hOffC` face remains blocked on the external `[Z78C]` frontier
+   (0.8747729897, below in-tree; frontier board sweep 2026-10-24:
+   28 records, nothing new, no adoption trigger). The data edge is a
+   FLANK — it never closes the face; the face stays named.
+8. **The second orbit (KANSAS CITY SHUFFLE, IN PROGRESS):**
+   `docs/KANSAS-CITY-SHUFFLE-SIEVE-ORBIT-PLAN-2026-10-25.md` — the
+   owner's crafted creation: a Fourier-compatible Sieve of
+   Eratosthenes as an Action series, paired with the zeta side on
+   their shared Euler factor (1 - chi(p) p^-s). **U1a DONE (0170,
+   EXACT, 42/42):** the character-sieve identity `V_z(x) = sum_d
+   mu(d) chi(d) S_chi(x//d)` + the per-hop edge-flux action, verified
+   over integers, z <= 31, x <= 10^7; the principal remainder
+   |R| <= 19 vs the worst case 2^11 - 1 = 2047 (the grind not
+   reached); the non-principal orbit is O(1) (|V| <= 4). **U3
+   MEASURED (0170):** the mod-4 gap-class bias (the Lemke
+   Oliver-Soundararajan statistic, arXiv:1603.03720): 0.556519 at
+   10^8 (CI +/-0.00041); the two-together model (HL singular series x
+   Cramer consecutivity) 0.550315 — 89% of the bias, beating the
+   one-channel 0.5 by 5.0 points; strict-CI gate NOT met -> U3b
+   (exact consecutivity / LOS higher orders). **U2/U4 TO-BUILD:** the
+   Fourier-sieve operator theorem (p-torsion chimes; DFT support =
+   the joint torsion subgroup) + the parity-as-width statement.
+   Recall incident logged in 0170 (a 65/35 benchmark was unverified
+   memory; corrected to the verified LOS framework). No RH claim:
+   prime-gap class statistic + exact sieve algebra, flank not face.

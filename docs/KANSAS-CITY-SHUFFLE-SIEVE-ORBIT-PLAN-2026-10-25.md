@@ -84,11 +84,26 @@ Reconstruction (faithful):
   adds `≈ e^{−k/ln X}` (the k odd interior integers, each prime with
   probability ≈ 1/ln X). The *class frequencies* (e.g. gaps ≡ 2 vs ≡ 0
   mod 4) are predicted by
-  `predicted(class) ∝ Σ_{k in class} W(2k) · e^{−k/ln X}`.
-  The **odd-gap mod-4 bias** (consecutive odd prime gaps more often
-  ≡ 2 mod 4) is the first-term measurement of this; literature
-  benchmark ≈ **65 / 35** (Goldston–Pintz–Yıldırım; Maynard; Tao's
-  2016 blog "the bias of certain prime gaps"). Naive/uniform = 50/50.
+  `predicted(class) ∝ Σ_{k in class} W(2k) · e^{−2k/ln X}`.
+  **VERIFIED ANCHOR (U3, 2026-10-25)**: the mod-4 gap-class bias is
+  exactly the Lemke Oliver–Soundararajan statistic (arXiv:1603.03720,
+  "Unexpected biases in the distribution of consecutive primes"): their
+  Main Conjecture (under HL k-tuples) gives, for q = 4, Eq. (5.1):
+  pair-count `li(x)/4 · (1 ± (1/(2 ln x)) · ln(2π ln x / 4))`, sign −
+  on the diagonal pairs (gap 0 mod 4), + on the off-diagonal (gap 2
+  mod 4); the bias **vanishes as loglog x / ln x → 0**. Measured at
+  X = 10^8 (this repo's exact sieve, 5,761,454 gaps): gap ≡ 2 mod 4
+  share = **0.556519** (95% CI ±0.00081); the two-together model
+  predicts 0.550315 (89% of the bias explained, decisively beating
+  the one-channel 0.5 baseline); the LOS leading+c₂ terms give
+  0.545674, with the next order O((ln x)^{−7/4}) ≈ 0.012 the sized
+  gap — named refinement U3b. **RETRACTION (recall incident, P-0
+  discipline)**: an earlier draft of this plan cited a "~65/35
+  benchmark (GPY/Maynard/Tao)" — that figure was UNVERIFIED MEMORY,
+  contradicted by both the measurement (55.7/44.3 at 1e8) and the
+  verified literature (the class limit is 1/2 with a loglog-decaying
+  bias, not 65/35). Corrected here; the incident is logged in
+  discovery 0170.
 - **Maynard's method as precedent.** Bounded prime gaps are *proved* by
   a multidimensional Selberg weight — a **Fourier/orthogonality
   optimization of a sieve Action**. "Sieve as harmonic analysis" is a
@@ -107,10 +122,10 @@ Reconstruction (faithful):
 
 | # | Claim | status | honesty mark |
 |---|---|---|---|
-| N1 | **Sieve Action identity**: the flat-action (summation-by-parts) reading of the Legendre recursion `U_j(u) = U_{j−1}(u) − U_{j−1}(⌊u/p_j⌋)` / character version `V_j(u) = V_{j−1}(u) − χ(p_j) V_{j−1}(⌊u/p_j⌋)` — the sieve as a *total-differential Action*, E7a-verified exact at reachable scale (exact integer arithmetic; the zeta-side twin is the E7a Euler action). | to verify (U1) | the recursion is textbook-true; the *verification + combined two-process identity* is the deliverable |
+| N1 | **Sieve Action identity**: the flat-action (summation-by-parts) reading of the Legendre recursion `U_j(u) = U_{j−1}(u) − U_{j−1}(⌊u/p_j⌋)` / character version `V_j(u) = V_{j−1}(u) − χ(p_j) V_{j−1}(⌊u/p_j⌋)` — the sieve as a *total-differential Action*, E7a-verified exact at reachable scale (exact integer arithmetic; the zeta-side twin is the E7a Euler action). **STATUS U1a (2026-10-25): VERIFIED EXACT** on 42 configurations (z ≤ 31, x ≤ 10^7, χ = 1 and χ = (·/4)) — with the refinement that the multiplicative side is `Σ_{d|P̄} μ(d)χ(d) S_χ(⌊x/d⌋)` with the character prefix S_χ (the ⌊x/d⌋ form is the PRINCIPAL specialization); for non-principal χ the whole quantity is a bounded exact integer (|V| ≤ 4 measured) — no grind on that orbit at all. | **U1a DONE** (U1b/c pending) | the recursion is textbook-true; the *verification + combined two-process identity* is the deliverable |
 | N2 | **Fourier sieve operator theorem (finite, exact)**: on `Z/NZ`, N = P̄(z) squarefree, the mark operator `K_p` (multiply by `1_{p∤·}`) lives in the group algebra (commutative); in the DFT basis `K̂_p` is the **averaging operator over the p-torsion subgroup of the character group** (idempotent, commuting projections); hence `DFT(1_{(·,P̄)=1}) = (1/P̄)·1_{Ĝ[P̄-torsion]}`, and `φ(P̄)` falls out of Parseval. Each chime = the p-torsion comb (the per-prime tone); the full sieve = the joint torsion projection. | to verify (U2) | finite exact algebra; the *package as one theorem with the chime correspondence* is new here |
 | N3 | **Sieve orbit width = the parity gap**, stated as the orbit-2 analogue of `surjWidth`: local reading (per-hop survivors) vs global (final structure); width = measured first-order upper/lower sieve gap; parity = the opacity; anchor = the zeta/L-side (partial). | to verify (U4) | **Scoped honestly**: Legendre exactness is proved; the parity correspondence is a *structural statement*, not a new barrier theorem |
-| N4 | **Two-together next-gap-class prediction**: `predicted(class) ∝ Σ W(2k) e^{−k/ln X}` predicts the mod-4 (and mod-30) gap-class frequencies at reachable X, beating (i) naive uniform and (ii) one-channel baselines, with a binomial margin; the exact predicted ratio is computed from the formula (benchmark ≈ 65/35). | to verify (U3) | a prime-gap **class statistic** — **not** an exact next-prime oracle (boundary stated in §6) |
+| N4 | **Two-together next-gap-class prediction**: `predicted(class) ∝ Σ W(2k) e^{−2k/ln X}` predicts the mod-4 (and mod-30) gap-class frequencies at reachable X, beating (i) naive uniform and (ii) one-channel baselines, with a margin log. **STATUS U3 (2026-10-25): MEASURED** at X = 10^7/10^8: measured 0.564864/0.556519 (CI ±0.0012/±0.0008), two-together 0.555808/0.550315, one-channel 0.500000 — the two-together model explains ~90% of the measured bias and beats the one-channel by ~5.0 points; the strict-CI gate (|meas − model| < CI) is NOT yet met (0.0062 ≈ 7.7·se at 1e8): U3b = the exact consecutivity probability (replace the Cramér e^{−2k/L}) and/or the LOS main-conjecture c₂+c₃ terms (O((ln x)^{−7/4}) ≈ 0.012 at 1e8 — the sized gap). | **U3 PARTIAL** (U3b pending) | a prime-gap **class statistic** — **not** an exact next-prime oracle (boundary stated in §6) |
 
 ## 4. What "cancels" and what is hopped (named, concretely)
 
@@ -211,14 +226,17 @@ wiki on each green gate. The in-tree frontier (`Z78C`, hOffC) is
   CI; the plan reports *both* (predicted asymptotic, measured
   finite-X + CI). No extrapolation claims beyond.
 
-## 7. First two steps (immediately actionable, < 2 h)
+## 7. Status (updated 2026-10-25 after the first runs)
 
-1. **U1a script** — exact character-sieve identity (χ = 1, χ = (·/4)),
-   z ≤ 31, x ≤ 10^6, plus the `2^{π(z)}` vs actual remainder table.
-   Expected: exact equalities; measured remainder ≪ worst case.
-2. **U3a/b** — W(2k) predicted mod-4 ratio (computed) vs primesieve
-   ground truth at X = 10^8 with a binomial CI. Expected: measured
-   ≡ 2 mod 4 share ≈ 65%, inside CI, decisively above the naive 50%.
+- **U1a DONE (2026-10-25):** `scripts/rh/kcs1_sieve_action.py` — 42/42
+  configurations EXACT (character-sieve identity incl. the S_χ
+  refinement; per-hop action on the incremental masks; remainder table
+  |R| ≤ 19 vs the 2047 worst case at z = 31: the grind is not
+  reached). Output: `tmp/kcs1_out.txt`. Discovery 0170.
+- **U3 RUN (2026-10-25):** `scripts/rh/kcs3_gap_class.py` — measured +
+  predicted + margin table + the k = 1..8 shape check. Output:
+  `tmp/kcs3_out.txt`. Strict-CI gate not met yet → U3b named above.
+- **U2 / U1b / U1c / U4:** as scoped in §5, next build sessions.
 
 *The shuffle is a crafted creation: it does not claim to move the face.
 It claims a second orbit — and on that orbit, the hops are free.*

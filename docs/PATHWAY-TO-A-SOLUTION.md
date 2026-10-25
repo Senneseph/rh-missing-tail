@@ -2118,3 +2118,26 @@ primary (bit-identical M at f64 either way). In-tree extension
 to (G, 9e21] APPLIED (0168: T_MEAS3 = 9e21, defect_C3absT3
 2439/10^9, mdefect3 bound 2.3e29, named hole B = 600000 -> 1e7,
 38-row face, max residual 6.5742e6 at 9e21). No RH claim.
+
+UPDATED (0169, 2026-10-25, S21c): the data-side frontier is now
+(9e23, inf): the 3e23 / 9e23 rows land FULL-PRIMARY (logzeta
+-0.978704934699 / +0.569323908351, N = 69100034506 /
+119684770570, 16390.1s / 28714.1s, rc=0, queue complete
+2026-10-25T03:56:24Z). The 3-term-law relative residual collapses
+monotonically at every height: 2.247e-8 (3e21) -> 7.473e-9 (9e21)
+-> 3.812e-9 (3e23) -> 7.199e-10 (9e23) - |M| grew 10^3 while the
+relative residual shrank ~31x. The 0158 exact-integer M era CLOSES
+at 9e21: past 2^53 the M partial sum is an f64 multiple of ulp
+2 (3e23) / 16 (9e23) - the exact integer M is no longer
+recoverable from the f64 channel (the quant_resid record through
+9e21 stands: 0.000e+00, all ten rows 1e18..9e21). The 3e21/9e21
+rows are re-issued FULL-PRIMARY (provenance only - M bit-identical
+across channels): same-N fixed-table bare crosses d = 3.2788e-6 /
+2.3222e-6 on |Z|, 5-10x inside the bare instrument's self-declared
+~2.5e-5. Same-N bare crosses for chains 8/9 are queued (serial,
+ETA ~17:40Z); on landing they fill d on the two new rows.
+Provenance discipline note: the per-row envelope computations of
+the S21a session were not persisted and are deliberately not
+cited - the cross standard is the instrument's own declared
+uncertainty. In-tree extension to (G, 9e23] follows after the
+crosses close (0168 pattern: B 1e7 -> 1e8). No RH claim.

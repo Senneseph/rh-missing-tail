@@ -1,0 +1,37 @@
+{
+ "id": "0169",
+ "ts": "2026-10-25T05:10:00",
+ "title": "S21c: the 3e23/9e23 far rows land full-primary (logzeta -0.978704934699 / +0.569323908351); the 3-term-law relative residual collapses monotonically to 7.2e-10 at 9e23; the exact-integer M era closes at 9e21 (f64 ulp 2 / 16 beyond); 3e21/9e21 re-issued full-primary with same-N fixed-table crosses d = 3.2788e-6 / 2.3222e-6",
+ "kinds": ["data", "measurement", "provenance"],
+ "status": "recorded",
+ "claim": "No RH claim: the rows extend the documented far-census anchor set; the 3-term law is a residual measurement with closed-form coefficients; the quantization-era boundary is a floating-point representability statement about the M partial sum (f64), not a number-theoretic claim.",
+ "evidence": [
+  "tmp/s21c_queue.log (queue complete 2026-10-25T03:56:24Z: bare 6/7 same-N fixed table, stage A rc=0, full chain 8 logzeta=-0.978704934699 N=69100034506 16390.1s rc=0, full chain 9 logzeta=0.569323908351 N=119684770570 28714.1s rc=0)",
+  "tmp/s21a_fixed.log (full re-issue on the fixed table: chain 5 regression 2.012486593295 bit-exact, chain 6 0.480535391750 N=21851349543, chain 7 0.411259226758 N=37847647623)",
+  "tmp/s34t_far_rows.jsonl (10 records after s21v merge: A_no_zeta x4 + B_merge (S21a, bare-primary, kept as history) x2 + B_merge_full x2 (3e21/9e21 full-primary) + B_merge x2 (3e23/9e23 full-primary, bare cross pending))",
+  "tmp/s21c_stageA.log (stage A: M_partial -9775295984828416.0 / -87977657223872512.0, C zeta expected ~ +3.726138e7 / -6.333622e7, f64 ulp 2 / 16 past 2^53)",
+  "scripts/rh/s21v_s21c_merge.py (idempotent merge; parses only the persisted logs above)"
+ ],
+ "artifacts": {
+  "logzeta_3e23": -0.978704934699,
+  "logzeta_9e23": 0.569323908351,
+  "N_3e23": 69100034506,
+  "N_9e23": 119684770570,
+  "M_3e23_f64": -9775295984828416.0,
+  "M_9e23_f64": -8.797765722387251e+16,
+  "exact_M_established": "both FALSE: f64 ulp = 2 (3e23) and 16 (9e23); M_partial is an f64 integer multiple of the ulp; the exact-integer M era closed at 9e21 (quant_resid 0.000e+00 through all ten rows 1e18..9e21 remains the record)",
+  "Mlaw_resid_Clog": {"3e23": "+3.726138e+07 (C 'zeta expected', law-M convention as printed)", "9e23": "-6.333622e+07"},
+  "rel_residual_trend": "2.247e-08 (3e21) -> 7.473e-09 (9e21) -> 3.812e-09 (3e23) -> 7.199e-10 (9e23): monotone collapse across four heights; |M| grew 10^3 while the relative residual shrank ~31x",
+  "cross_3e21": {"full_logzeta": 0.480535391750, "bare_Z": 1.616943145536, "d_abs_on_Z": 3.278780e-06},
+  "cross_9e21": {"full_logzeta": 0.411259226758, "bare_Z": 1.508718727696, "d_abs_on_Z": 2.322163e-06},
+  "cross_standard": "the s34b bare instrument self-declares ~2.5e-5 on |Z| on every line; both crosses are 5-10x inside it -> full primary adopted; the per-row envelope computations of the S21a session were NOT persisted and are deliberately not cited",
+  "queue_complete": "2026-10-25T03:56:24Z"
+ },
+ "relations": ["0158", "0164", "0165", "0167", "0168"],
+ "open_items": [
+  "same-N bare crosses for chains 8/9 queued (tmp/s21c_bare_queue.sh, PID 4124046, serial, ETA ~17:40Z 2026-10-25); on landing, fill d_abs on the 3e23/9e23 B_merge rows against the 2.5e-5 standard",
+  "in-tree E1ClauseV3C window extension (G, 9e21] -> (G, 9e23] per the 0168 pattern (B 1e7 -> 1e8, bound 2.3e29 -> 2.3e31, T_MEAS3 = 9e23, 40 rows) - decision: proceed after the bare crosses close, keeping the terminal hOffC face named",
+  "the Kansas City Shuffle (second orbit / sieve Action series) is seeded: docs/KANSAS-CITY-SHUFFLE-SIEVE-ORBIT-PLAN-2026-10-25.md - U1a/U3 first steps next"
+ ],
+ "no_rh_claim": true
+}

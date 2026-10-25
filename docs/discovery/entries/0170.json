@@ -1,0 +1,31 @@
+{
+ "id": "0170",
+ "ts": "2026-10-25T05:40:00",
+ "title": "Kansas City Shuffle U1a/U3 first steps: Sieve Action identity verified EXACT (42/42, with the S_chi prefix refinement and the O(1) non-principal orbit); mod-4 gap-class bias measured 0.556519 at 1e8, two-together model 0.550315 (89% of the bias, beats one-channel by 5.0 points); recall incident logged and corrected (the 65/35 benchmark was unverified memory; the verified literature is Lemke Oliver-Soundararajan arXiv:1603.03720, bias decaying loglog x / ln x to the 1/2 limit)",
+ "kinds": ["math", "measurement", "provenance", "recall-incident"],
+ "status": "recorded",
+ "claim": "No RH claim: elementary sieve arithmetic (exact integer identities) and a prime-gap class statistic (heuristic model + exact-sieve ground truth + cited literature). The U1a identities are exact finite statements; the U3 model is labeled HEURISTIC (Cramer consecutivity x Hardy-Littlewood singular series) and its gate (strict CI agreement) is NOT yet met.",
+ "evidence": [
+  "scripts/rh/kcs1_sieve_action.py + tmp/kcs1_out.txt: 42/42 EXACT (z = 2..31, x = 1e5..1e7, chi = 1 and (n/4): identity + per-hop action on incremental masks)",
+  "tmp/kcs1_out.txt remainder table (principal chi): |R| <= 19 vs worst 2^pi-1 = 2047 at z = 31 (ratio <= 9.7e-2; typical 1e-3..1e-2) - the exponential grind is not reached",
+  "tmp/kcs1_out.txt non-principal: V bounded exact integer, |V| <= 4 across all tested - O(1) orbit, no grind",
+  "scripts/rh/kcs3_gap_class.py + tmp/kcs3_out.txt: C2 = 0.6601618606 (product to 1e6; tail ~4.5e-8 vs literature 0.660161815847); mean-value class ratio (K=1e6) = 0.500002 (the limit is 1/2); X=1e7 measured 0.564864 (CI +/-0.00119) pred 0.555808; X=1e8 measured 0.556519 (CI +/-0.00041) pred 0.550315; k=1..8 shape check close (model underpredicts small-k mass by ~0.002-0.015)",
+  "Literature anchor (fetched, identity-checked): Lemke Oliver & Soundararajan, 'Unexpected biases in the distribution of consecutive primes', arXiv:1603.03720v4 / PNAS 113(36):10050 (2016): Eq (5.1) q=4: pair count li(x)/4*(1 +/- (1/(2 ln x)) ln(2 pi ln x / 4)), sign - diagonal (gap 0 mod 4), + off-diagonal (gap 2 mod 4); c1 = (phi(q)/2)(1/phi(q) - 1_{a=b}) = -1/2 diagonal, +1/2 off-diagonal for q=4; c2 diagonal = -0.22579, c2 off-diagonal = +0.22579 (derived from Eqs 1.1/1.2); next order O((ln x)^(-7/4)) ~ 0.012 at 1e8. LOS leading+c2 mod-4 class fraction at 1e8 = 0.545674.",
+  "RECALL INCIDENT (P-0 discipline): the plan's first draft cited 'literature benchmark ~65/35 (GPY/Maynard/Tao)' for the mod-4 gap-class split. That figure is UNVERIFIED MEMORY - it is contradicted by (a) this repo's measurement (55.7/44.3 at 1e8) and (b) the verified literature (the class limit is 1/2 with a loglog x / ln x decaying bias). The plan has been corrected in place; the corrected provenance (arXiv:1603.03720) replaces the fabricated benchmark. Incident logged per P-0 (the F24 hand-count precedent)."
+ ],
+ "artifacts": {
+  "U1a": {"configs": "42/42 EXACT", "identity": "V_z(x) = sum_{d|Pbar} mu(d) chi(d) S_chi(x//d); principal specialization: + R with x*prod(1 - chi(p)/p), |R| <= 2^pi-1", "per_hop_action": "V_j(x) = V_{j-1}(x) - chi(p_j) V_{j-1}(x//p_j) exact on the incremental masks", "refinement": "the floor-x/d form is the PRINCIPAL-character case; the general form uses the character prefix S_chi; non-principal: V bounded (|V| <= 4 measured)"},
+  "U3_1e8": {"measured_frac_gap2mod4": 0.556519, "ci95_halfwidth": 0.00041, "n_gaps": 5761454, "pred_twotogether": 0.550315, "pred_oneshot_channel": 0.5, "los_leading_plus_c2": 0.545674, "residual_meas_minus_model": 0.006204, "bias_explained_fraction": 0.89, "gate": "NOT met at 95% CI (0.0062 ~ 7.7 se); U3b named (exact consecutivity probability / LOS higher-order terms)"},
+  "U3_1e7": {"measured": 0.564864, "pred": 0.555808},
+  "C2": 0.6601618606
+ },
+ "relations": ["0169"],
+ "open_items": [
+  "U3b: exact consecutivity probability (replace Cramer e^{-2k/L}) or evaluate the LOS main-conjecture c3 term; target: the 0.0062 residual inside the CI at 1e8",
+  "U2: Fourier sieve operator theorem at N = 30030 (exact Q) + Lean attempt (SieveAction.lean)",
+  "U1b/U1c: the two-process combined identity (zeta-side C-channel partial sum under u^{-s} vs sieve-side under chi at a common edge; residual at the dps floor)",
+  "U4: SieveOrbit.lean (Legendre exactness proved; first-order sieve gap measured; parity/anchor correspondence stated, marked)",
+  "same-N bare crosses c8/c9 (queued, PID 4124046, ETA ~17:40Z) -> then the in-tree 9e23 extension (0168 pattern)"
+ ],
+ "no_rh_claim": true
+}
