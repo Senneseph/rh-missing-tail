@@ -12,7 +12,7 @@ and a separation program with explicit falsifiers.**
 **Our approach, the Riemann–von Mangoldt
 Gambit:**
 
-*(tpf — to be finalized;  the name describes the
+*(tbf — to be finalized;  the name describes the
 approach, not any particular theorem)*
 
 ***For 120 years*** the **zero-counting tail**,  S(t), has stood on a door marked:
@@ -696,7 +696,7 @@ kernel — is specific enough to fail.
   - [docs/END_GAME_PLAN.md](docs/END_GAME_PLAN.md) — the end-game plan
     (the 3.6 attack queue 1–5,  close-out 3.7,  and what remains)
   - [docs/PREPRINT-DRAFT-DAY035.md](docs/PREPRINT-DRAFT-DAY035.md) — the
-    pre-print draft (tpf) for owner revision / hosting;  the data
+    pre-print draft (tbf) for owner revision / hosting;  the data
     section is the data-to-3e10 revision,  and the pre-registered
     outcomes carry the post-data classification (Outcome A,  A2-class
     so far —  the pre-registration block itself is preserved verbatim)
@@ -767,7 +767,7 @@ kernel — is specific enough to fail.
   certified zeros to t = 10⁵) lives there too. All paths cited in
   `docs/` resolve from the working-tree root.
 
-## Appendix A.  The door and its mark (provenance of the name) *(tpf)*
+## Appendix A.  The door and its mark (provenance of the name) *(tbf)*
 
 The name ("Riemann–von Mangoldt Gambit") refers to one old theorem and
 the mark on its door.  Brief provenance:  Riemann's 1859 note gave the
@@ -807,9 +807,9 @@ measured [S3/S4] fills,  grade (i) profile-gated);  this is the
 sense in which "we can explain why it will work":  the door was never
 the obstacle,  the *bookkeeping around the door* was,  and the
 bookkeeping is now a machine-checked chain with two named,  planned
-legs.  Alternates for the name (tpf):  "von Mangoldt Gambit" (short),
+legs.  Alternates for the name (tbf):  "von Mangoldt Gambit" (short),
 "the missing-tail gambit" (tail = this project's own W_n object,  Part
-3).  The telescope itself has name candidates (tpf):
+3).  The telescope itself has name candidates (tbf):
 "Euler's Action Periscope" (primary),  "Euler's Monkey
 King Action Bar" (the silly one —  the ruyi bar literally
 telescopes),  and a third mused one,  "Euler's Reed"
@@ -817,7 +817,7 @@ telescopes),  and a third mused one,  "Euler's Reed"
 length at once),  plus the informal non-official handle
 for the width ladder,  "Euler Action's Width Ladder" —  all
 filed in the preprint's "Name of the
-telescope (tpf)" and of record in docs/THE-EULER-ACTION.md
+telescope (tbf)" and of record in docs/THE-EULER-ACTION.md
 (the naming sections),  which also carries the phi
 verdict:  the golden flavor belongs to the width ladder,
 whose measured moduli 5 and 13 are consecutive Fibonacci
