@@ -328,7 +328,7 @@ from the definition side alone. (3) Contradiction. Hence D(t₀) = 0; by
 minimality, D ≡ 0; by the counting lemma, **RH**. ∎ — *conditional on
 Part 7.*
 
-### Status of each piece (current:  post-3e10 data layer;  the day035 close-out entry below is the end-game snapshot,  the day-023 line the last pre-end-game snapshot)
+### Status of each piece (current:  post-3e10 data layer and the post-3e10 machine-checked additions below;  the day035 close-out entry beneath them is the end-game snapshot,  the day-023 line the last pre-end-game snapshot)
 
 - **Proven, machine-checked (Lean 4.33.1 + Mathlib, pinned stable):** the
   counting lemma (Part 1); the per-pair closed forms (Part 4); the detector
