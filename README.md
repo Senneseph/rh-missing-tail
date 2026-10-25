@@ -741,12 +741,18 @@ kernel — is specific enough to fail.
     endpoint (the hOffC face,  the cited [Z78C] frontier)
   - [docs/KANSAS-CITY-SHUFFLE-SIEVE-ORBIT-PLAN-2026-10-25.md](docs/KANSAS-CITY-SHUFFLE-SIEVE-ORBIT-PLAN-2026-10-25.md) — the second-orbit program
     (the Sieve of Eratosthenes as a Fourier-compatible Action series,
-    paired with the zeta side on their shared Euler factor):  U1a
-    verified EXACT (42/42,  the character-prefix refinement,  the O(1)
-    non-principal orbit),  U3 measured (the mod-4 gap-class bias
-    0.556519 at 1e8 against the Lemke Oliver–Soundararajan anchor,
-    arXiv:1603.03720) — the flank,  a prime-gap class statistic,
-    no RH claim
+    paired with the zeta side on their shared Euler factor): **U1a
+    verified EXACT** (42/42, the character-prefix refinement, the O(1)
+    non-principal orbit); **U2 measured** (the finite Fourier sieve
+    operator: each per-prime mark's symbol is the exact (N/p)-torsion
+    chime comb, the completed sieve is the FULL-support Ramanujan
+    field at N = 30030, Parseval exact to 0.0 — the sparse combs
+    convolve into a dense field: the opacity lives in the
+    convolution); **U3b measured** (the two-together combined
+    machinery: three-channel decomposition at 1e7–1e9, naive pair-bias
+    composition ruled out, transfer coefficient α(X) decaying, the
+    Lemke Oliver–Soundararajan anchor arXiv:1603.03720) — the flank,
+    a prime-gap class statistic + exact finite algebra, no RH claim
 - **Master formula ledger (working tree):** `plan/40-prize-islands/
   rh-attack/FORMULAS.md` — every formula this work uses, labeled
   (verbatim-read / measured + file + precision / derived + file /

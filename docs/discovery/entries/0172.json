@@ -1,0 +1,30 @@
+{
+ "id": "0172",
+ "ts": "2026-10-25T09:00:00",
+ "title": "KCS U2 measured: the finite Fourier sieve operator package verified at N = 210 and N = 30030 - marks idempotent+commuting (exact); single-p symbol = exact comb N*delta_0 - (N/p)*1_{p-torsion} (max err 8.9e-15 over all a); full-sieve symbol = Ramanujan field c_N(a) with FULL support for squarefree N (max err 4.5e-13, all 30030 characters); Parseval exact to 0.0; the draft's torsion-subspace support formula corrected in place; new structural fact: sparse combs (p of N points) convolve into a dense full-support field - the opacity lives in the convolution",
+ "kinds": ["math", "measurement", "plan-correction"],
+ "status": "recorded",
+ "claim": "No RH claim: finite exact group algebra on Z/NZ (additive Fourier basis), exact-integer right-hand sides, FFT-only roundoff on the left. The PLAN's original support formula (DFT(1_units) supported on a single torsion subspace) was WRONG at measurement and is corrected; the corrected theorem (comb + full Ramanujan field + Parseval) is the N2 statement now.",
+ "evidence": [
+  "scripts/rh/kcs2_fourier_sieve.py + tmp/kcs2_out.txt",
+  "(i) N = 210: idempotent = True, commuting = True (pointwise indicator algebra, exact)",
+  "(ii) N = 210, all a in Z/210, p in {2,3,5,7}: F[1_{p|/. -}](a) = N*1_{a=0} - (N/p)*1_{(N/p)|a}; max |LHS-RHS| = 8.882e-15 (integer sums; FFT roundoff only); support sizes exactly p: 2/3/5/7; comb values N - N/p at a = 0 (a = 0 sits ON the comb), -N/p at the other p-1 points",
+  "(iii) N = 30030 = 2*3*5*7*11*13, all 30030 characters: F[1_{(.,N)=1}](a) = Ramanujan sum c_N(a) = phi(N)*mu(k)/phi(k), k = N/gcd(a,N); max |FFT - closed form| = 4.547e-13; FULL support: 30030/30030 nonzero - for squarefree N every divisor k of N is squarefree so mu(k) =/= 0; value census: 64 level sets (the 2^6 divisors), level {a: N/gcd(a,N) = k} has size phi(k), value phi(N)*mu(k)/phi(k), sum of level sizes = N (verified)",
+  "(iv) Parseval (numpy convention): (1/N) sum_a |F[mu](a)|^2 = sum_m mu(m)^2 = phi(N) = 5760; diff = 0.000e+00",
+  "PLAN CORRECTION (honesty): the N2 line's original formula DFT(1_{(.,Pbar)=1}) = (1/Pbar)*1_{Ghat[Pbar-torsion]} asserted the full-sieve symbol lives on one torsion subspace; measurement gives full support with Ramanujan values. Corrected in place in docs/KANSAS-CITY-SHUFFLE-SIEVE-ORBIT-PLAN-2026-10-25.md (N2 + the U2 unit + status). The corrected structural reading: each per-prime chime is maximally SPARSE (p of N points); the completed sieve is maximally DENSE (N of N characters) - the opacity lives in the convolution of the combs, not in any single chime",
+  "Lean attempt (SieveAction.lean) NOT yet run: the b8/b9 bare queue holds the 28-lane core budget; the Lean pass is the next build session"
+ ],
+ "artifacts": {
+  "U2": {"N_comb_check": 210, "N_ramanujan_check": 30030, "comb_max_err": 8.882e-15, "ramanujan_max_err": 4.547e-13, "phi_30030": 5760, "parseval_diff": 0.0, "full_support": "30030/30030 nonzero for squarefree N", "level_sets": "64 (the divisors of 30030), sizes phi(k), values phi(N)*mu(k)/phi(k)"},
+  "structural": "sparse per-prime combs (p-torsion subgroups) -> dense full-support Ramanujan field under convolution; the second-orbit opacity is a CONVOLUTION opacity"
+ },
+ "relations": ["0171", "0170"],
+ "open_items": [
+  "U2 Lean: SieveAction.lean (the comb identity + the full-support Ramanujan statement + Parseval; doc-first, pinned mathlib) - next build session",
+  "U1b/U1c: the two-process combined identity",
+  "U3c: the transfer mechanism + the next alpha decade",
+  "U4: SieveOrbit.lean (parity-as-width)",
+  "same-N bare crosses b8/b9 (running, PID 4124046) -> then the in-tree E1ClauseV3C 9e23 extension (0168 pattern)"
+ ],
+ "no_rh_claim": true
+}

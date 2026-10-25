@@ -125,7 +125,7 @@ Reconstruction (faithful):
 | # | Claim | status | honesty mark |
 |---|---|---|---|
 | N1 | **Sieve Action identity**: the flat-action (summation-by-parts) reading of the Legendre recursion `U_j(u) = U_{j−1}(u) − U_{j−1}(⌊u/p_j⌋)` / character version `V_j(u) = V_{j−1}(u) − χ(p_j) V_{j−1}(⌊u/p_j⌋)` — the sieve as a *total-differential Action*, E7a-verified exact at reachable scale (exact integer arithmetic; the zeta-side twin is the E7a Euler action). **STATUS U1a (2026-10-25): VERIFIED EXACT** on 42 configurations (z ≤ 31, x ≤ 10^7, χ = 1 and χ = (·/4)) — with the refinement that the multiplicative side is `Σ_{d|P̄} μ(d)χ(d) S_χ(⌊x/d⌋)` with the character prefix S_χ (the ⌊x/d⌋ form is the PRINCIPAL specialization); for non-principal χ the whole quantity is a bounded exact integer (|V| ≤ 4 measured) — no grind on that orbit at all. | **U1a DONE** (U1b/c pending) | the recursion is textbook-true; the *verification + combined two-process identity* is the deliverable |
-| N2 | **Fourier sieve operator theorem (finite, exact)**: on `Z/NZ`, N = P̄(z) squarefree, the mark operator `K_p` (multiply by `1_{p∤·}`) lives in the group algebra (commutative); in the DFT basis `K̂_p` is the **averaging operator over the p-torsion subgroup of the character group** (idempotent, commuting projections); hence `DFT(1_{(·,P̄)=1}) = (1/P̄)·1_{Ĝ[P̄-torsion]}`, and `φ(P̄)` falls out of Parseval. Each chime = the p-torsion comb (the per-prime tone); the full sieve = the joint torsion projection. | to verify (U2) | finite exact algebra; the *package as one theorem with the chime correspondence* is new here |
+| N2 | **Fourier sieve operator theorem (finite, exact)**: on `Z/NZ`, N = P̄(z) squarefree, the per-prime mark `K_p` = pointwise mult. by `1_{p∤·}` is a self-adjoint IDEMPOTENT (eigenvalues 0/1), and the marks commute; its Fourier symbol is the exact comb `F(1_{p∤·}) = N·δ_0 − (N/p)·1_{p-torsion}` (p support points: value N at the origin, −N/p on the rest of the p-torsion subgroup of the character group); the full-sieve symbol is the iterated convolution of the combs = the RAMANUJAN field `F(1_{(·,N)=1})(a) = c_N(a) = φ(N)·μ(k)/φ(k)`, k = N/gcd(a,N) — and for squarefree N this has FULL support (all N characters, 2^{π(z)} level sets; the sparse combs convolve into a dense field — the opacity lives in the convolution, not in any single chime); `φ(N)` falls out of Parseval. **CORRECTION (U2 run, 0172, 2026-10-25):** the earlier draft's `DFT(1_{units}) = (1/P̄)·1_{Ĝ[P̄-torsion]}` was WRONG at measurement (it asserted a torsion-subspace support; the measured field is full-support Ramanujan — see tmp/kcs2_out.txt). | **U2 MEASURED (0172)** — Lean attempt pending build cycles | finite exact algebra, exact-integer right-hand sides; the *chime-comb + full-Ramanujan-field package with the sparsity→density reading* is new here |
 | N3 | **Sieve orbit width = the parity gap**, stated as the orbit-2 analogue of `surjWidth`: local reading (per-hop survivors) vs global (final structure); width = measured first-order upper/lower sieve gap; parity = the opacity; anchor = the zeta/L-side (partial). | to verify (U4) | **Scoped honestly**: Legendre exactness is proved; the parity correspondence is a *structural statement*, not a new barrier theorem |
 | N4 | **Two-together next-gap-class prediction**: `predicted(class) ∝ Σ W(2k) e^{−2k/ln X}` predicts the mod-4 (and mod-30) gap-class frequencies at reachable X, beating (i) naive uniform and (ii) one-channel baselines, with a margin log. **STATUS U3 (2026-10-25): MEASURED** at X = 10^7/10^8: measured 0.564864/0.556519 (CI ±0.0012/±0.0008), two-together 0.555808/0.550315, one-channel 0.500000 — the two-together model explains ~90% of the measured bias and beats the one-channel by ~5.0 points; the strict-CI gate (|meas − model| < CI) is NOT yet met (0.0062 ≈ 7.7·se at 1e8 — arithmetically corrected below). **UPDATED U3b (2026-10-25):** three-channel decomposition at X = 1e7/1e8/3e8/1e9 (exact sieve): u3-only 0.555808/0.550315/0.548097/0.545905; LOS-pair (1+δ)/2 0.550123/0.545670/0.543841/0.542016 (the anchor's leading term, verified); naive composed (1±δ)·w·e^{−2k/L} 0.604759/0.595110/0.591169/0.587248 — **ruled out at all four scales** (|z| up to 519). Strict-CI gate still NOT met: u3-only residuals +0.009056/+0.006204/+0.005714/+0.005167 with z = 14.9/30.0/46.3/74.1 (the U3 "7.7·se" was a double-discount: the printed CI half-width IS 1.96·se, so z = diff/se directly — corrected). New named finding: the **transfer coefficient** α(X) = 0.18332/0.13743/0.13170/0.12412 (decaying) — the pair bias transfers DILUTED into the consecutive-gap census, with measured ≈ u3 + 2f(1−f)·α·δ to first order at every scale (2f(1−f) ≈ 0.495 is the class-variance of the ratio). U3c = derive the transfer mechanism and/or the next α decade (3e9/1e10). | **U3b DONE** (gate still open; U3c named) | a prime-gap **class statistic** — **not** an exact next-prime oracle (boundary stated in §6) |
 
@@ -172,16 +172,26 @@ Nothing here needs GPU, long compute, or the zeta binaries.
   residual at the dps floor (E7a style). **Gate:** exact (a); logged
   margin (b); floor residual (c). **Cost:** < 1 h wall.
 - **U2 — Fourier sieve operator (finite exact algebra).**
-  Exact verification at N = 30030 (∏_{p≤13} p) and N ≤ 10^7, z ≤ 9:
-  (a) `K̂_p` = p-torsion averaging (idempotent, commutes with all
-  `K̂_q`); (b) `DFT(1_{units}) = (1/P̄)·1_{P̄-torsion}` — verify the
-  *entire* spectrum (exact Q/integer where possible; FFT + tolerance
-  otherwise, with the exact-Q cross-check at N = 30030); (c) Parseval →
-  `φ(P̄) = ∏(p−1)`. **Then** the Lean attempt `SieveAction.lean`
-  (pinned mathlib, doc-first; if `ZMod` additive characters aren't
-  first-class, concrete `Fin N → ℂ` sums at small N — the campaign's
-  style). **Gate:** exact (a)-(c); Lean green or the failure named.
-  **Cost:** < 2 h wall + build cycles.
+  Exact verification at N = 30030 (∏_{p≤13} p): (a) the marks are
+  idempotent + commuting (pointwise, exact); (b) the single-p symbol
+  `F(1_{p∤·}) = N·δ_0 − (N/p)·1_{p-torsion}` verified at ALL character
+  points (exact-integer right-hand side; FFT at tolerance); (c) the
+  full-sieve symbol = the Ramanujan field `c_N(a)` (exact-integer
+  closed form at all a; note it has FULL support for squarefree N —
+  the draft's torsion-subspace support formula is corrected by the
+  measurement, see the N2 correction); (d) Parseval → `φ(N)`.
+  **THEN** the Lean attempt `SieveAction.lean` (pinned mathlib,
+  doc-first; if `ZMod` additive characters aren't first-class, concrete
+  `Fin N → ℂ` sums at small N — the campaign's style). **Gate:** exact
+  (a)-(d) + the correction logged; Lean green or the failure named.
+  **RUN (U2, 0172, 2026-10-25, `scripts/rh/kcs2_fourier_sieve.py`):**
+  (a) idempotent + commuting = True (exact); (b) comb at N = 210, all a,
+  all p: max |LHS−RHS| = 8.9e-15, support sizes exactly p (2/3/5/7);
+  (c) full Ramanujan field at N = 30030, all 30030 characters: max
+  |FFT − closed form| = 4.5e-13, FULL support (30030/30030 nonzero;
+  64 level sets, sizes φ(k), values φ(N)μ(k)/φ(k), Σφ(k) = N) — the
+  sparse-comb → dense-field contrast is the measured content; (d)
+  Parseval: (1/N)Σ|F|² = Σμ² = φ(N) = 5760, diff 0.000e+00.
 - **U3 — Two-together prediction (the chime compass, made exact).**
   (a) Compute the predicted mod-4 ratio from
   `Σ_k W(2k)·e^{−k/ln X}` (short Python; W(2k) exact via the product)
@@ -272,7 +282,16 @@ wiki on each green gate. The in-tree frontier (`Z78C`, hOffC) is
   remains OPEN — U3c (the transfer mechanism + the next α decade) is
   the named follow-up. Same run, the kcs3 script's retired ~65/35
   print line was replaced with the verified LOS anchor.
-- **U2 / U1b / U1c / U4:** as scoped in §5, next build sessions.
+- **U2 MEASURED (2026-10-25):** `scripts/rh/kcs2_fourier_sieve.py` —
+  the finite operator package measured at N = 210 (comb, all a, all p)
+  and N = 30030 (full Ramanujan field, all 30030 characters; Parseval
+  exact to 0.0): comb identity max err 8.9e-15; Ramanujan field max
+  err 4.5e-13; FULL-support fact + the sparse-comb→dense-field contrast
+  recorded (the opacity lives in the convolution). The draft's
+  torsion-subspace support formula is corrected in place (N2). The
+  Lean attempt (`SieveAction.lean`) waits for build cycles (the b8/b9
+  bare queue holds the core budget). Output: `tmp/kcs2_out.txt`.
+- **U2 Lean / U1b / U1c / U4:** as scoped in §5, next build sessions.
 
 *The shuffle is a crafted creation: it does not claim to move the face.
 It claims a second orbit — and on that orbit, the hops are free.*

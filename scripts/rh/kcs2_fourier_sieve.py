@@ -110,12 +110,15 @@ def main():
                                             else 0.0)
             worst = max(worst, abs(f[a].real - rhs))
         nz = np.nonzero(np.abs(f) > 1e-9)[0]
-        W("    p = %d:  support size = %d (expected p = %d),  max error "
-          "= %.3e" % (p, len(nz), p,
-                      max(abs(f[a].real) - ((N1 if a == 0 else 0.0)
-                                             - (N1 / p if a % (N1 // p) == 0
-                                                 else 0.0))
-                          for a in nz)))
+        worst_p = 0.0
+        for a in range(N1):
+            rhs = (N1 if a == 0 else 0.0) - (N1 / p if (a % (N1 // p) == 0)
+                                            else 0.0)
+            worst_p = max(worst_p, abs(f[a].real - rhs))
+        W("    p = %d:  support size = %d (expected p = %d),  max |LHS-RHS| "
+          "= %.3e  (comb values: N at a=0 ... note a=0 sits ON the comb:"
+          % (p, len(nz), p, worst_p))
+        W("    value N - N/p at a=0,  -N/p at the other p-1 points)")
     W("    max |LHS - RHS| over ALL a and p:  %.3e  (integer-valued sums;"
       % worst)
     W("    complex residual per entry < 1e-10 by construction)")
@@ -138,20 +141,36 @@ def main():
     W("    max |FFT - closed form| over ALL %d a:  %.3e  (integer RHS;" %
       (N, worst))
     W("    FFT complex residual is roundoff,  O(1e-10) * N log N)")
-    # support census of the Ramanujan field
+    # value census: for squarefree N, k = N/gcd(a,N) is ALWAYS squarefree,
+    # mu(k) is never 0 - the Ramanujan field has FULL support.  The
+    # level set {a: N/gcd(a,N) = k} has size phi(k),  value
+    # phi(N)*mu(k)/phi(k).
     nz = np.nonzero(np.abs(f) > 1e-6)[0]
-    W("    nonzero-field census:  %d / %d characters (the joint torsion"
-      % (len(nz), N))
-    W("    structure:  c_N(a) != 0 iff N/gcd(a,N) is squarefree and")
-    W("    the unit mask's field factors as the p-combs convolved -")
-    W("    each chime an (N/p)-torsion projection of the character ring)")
+    W("    FULL-SUPPORT fact:  for squarefree N,  c_N(a) != 0 for ALL a -")
+    W("    %d / %d nonzero.  Per-prime combs are maximally SPARSE (p of N" %
+      (len(nz), N))
+    W("    points);  the completed sieve is maximally DENSE (the convolution")
+    W("    of the combs fills the character ring).  The opacity is in the")
+    W("    convolution,  not in any single chime.  Value distribution:" )
+    cens = {}
+    for aa in range(N):
+        g = math.gcd(aa, N) if aa != 0 else N
+        k = N // g
+        cens[k] = cens.get(k, 0) + 1
+    for k in sorted(cens):
+        # recompute the value from the formula directly
+        val = phin * mu(k) // phi(k) if mu(k) else 0
+        W("      k = %5d (phi(k) = %5d,  value %+7d,  mu = %+d):  %5d characters"
+          % (k, phi(k), val, mu(k), cens[k]))
+    W("      (level set size phi(k) x value phi(N)*mu(k)/phi(k);  sum of")
+    W("      level sizes = N = 30030)")
 
     # ---- (iv) Parseval ----------------------------------------
     W("")
-    W("(iv) Parseval:  (1/N) sum_a |F[mu](a)|^2  vs  mean(mu^2)")
+    W("(iv) Parseval (numpy convention):  (1/N) sum_a |F[mu](a)|^2  =  sum_m mu^2")
     lhs = float(np.sum(np.abs(f) ** 2)) / N
-    rhs = phin / N
-    W("    LHS = %.15f   RHS = %.15f   diff = %.3e"
+    rhs = float(phin)  # sum_m mu(m)^2 = phi(N)  (indicator squared = itself)
+    W("    LHS = %.12f   RHS = %.12f   diff = %.3e"
       % (lhs, rhs, abs(lhs - rhs)))
     W("")
     W("U2 (P12 operator package,  measured) done (%.1f s)" % (time.time() - t0))

@@ -227,9 +227,15 @@ Commit a00c7d6.
    enters the consecutive-gap census DILUTED, and measured =
    u3 + 2f(1-f)·alpha·delta to first order at every scale; U3c =
    derive the transfer mechanism and/or the next alpha decade
-   (3e9/1e10). **U2/U4 TO-BUILD:** the
-   Fourier-sieve operator theorem (p-torsion chimes; DFT support =
-   the joint torsion subgroup) + the parity-as-width statement.
+   (3e9/1e10). **U2 MEASURED (0172, 2026-10-25):** the finite Fourier sieve
+   operator package (marks = commuting idempotents; single-p symbol =
+   the exact comb N*delta_0 - (N/p)*1_{p-torsion}, max err 8.9e-15 all-a;
+   full-sieve symbol = the Ramanujan field, FULL support for squarefree
+   N, max err 4.5e-13 all 30030 characters; Parseval exact to 0.0) -
+   the draft's torsion-subspace support formula corrected in place;
+   sparse combs -> dense field under convolution is the measured
+   contrast. **U4 TO-BUILD:** the parity-as-width statement (plus the
+   SieveAction.lean Lean pass of U2, next build session).
    Recall incident logged in 0170 (a 65/35 benchmark was unverified
    memory; corrected to the verified LOS framework). No RH claim:
    prime-gap class statistic + exact sieve algebra, flank not face.
