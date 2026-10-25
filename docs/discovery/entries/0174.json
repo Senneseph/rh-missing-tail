@@ -1,0 +1,20 @@
+{
+ "id": "0174",
+ "ts": "2026-10-25T20:05:00",
+ "title": "S21c same-N bare crosses closed at 3e23 AND 9e23: |full - bare| = 1.681e-6 (3e23, N=69100034506) and 1.250e-6 (9e23, N=119684770570), both a 20x margin inside the bare instrument's self-declared ~2.5e-5 tolerance; the cross lineage now decays monotonically with height (3e21: 3.279e-6, 9e21: 2.322e-6, 3e23: 1.681e-6, 9e23: 1.250e-6); the two in-tree extension preconditions are met - E1ClauseV3C -> 9e23 (0168 pattern: T_MEAS3 9e21 -> 9e23, named hole B 1e7 -> 1e8, bound 2.3e29 -> 2.3e31) is unblocked",
+ "kinds": [
+  "data",
+  "checkpoint"
+ ],
+ "status": "recorded",
+ "claim": "No RH claim: same-N two-channel cross-check of the C-channel at the far heights. The fixed-table (S21a-repaired) chains 8/9 re-issues agree between the full f128-quad cos-form assembly (primary, logzeta -0.978704934699 / 0.569323908351 -> |Z| = exp) and the bare-cos-form channel at the exact same N (exact floor(a) from the fixed generator), so the fixed-table era extends to 9e23.",
+ "evidence": [
+  "tmp/s21c_bare.log (b8 rc=0 2026-10-25T09:47:56Z, b9 rc=0 2026-10-25T18:00:19Z) vs tmp/s21c_queue.log (FULL chain 8: logzeta=-0.978704934699 N=69100034506; FULL chain 9: logzeta=0.569323908351 N=119684770570)",
+  "3e23: full |Z| = 0.3757974661033002, bare |Z| = 0.375799147341, d_abs = 1.681e-6",
+  "9e23: full |Z| = 1.7670719448933583, bare |Z| = 1.767073194708, d_abs = 1.250e-6",
+  "protocol self-check: exp(-0.978704934699) = 0.3757974661033002 reproduces the previously-cited full |Z| for b8 exactly",
+  "tmp/s34t_far_rows.jsonl rows 8/9 (B_merge, stage r=1.0e+12G / r=3.0e+12G) updated: bare + d_abs filled, d_check CLOSED",
+  "N values are the fixed-generator exact floors (S21a repair, 1aba63f): 69100034506 / 119684770570",
+  "cross lineage (same-N, same table era): 3e21: 3.279e-6, 9e21: 2.322e-6, 3e23: 1.681e-6, 9e23: 1.250e-6 (monotone decay, 0.5x per decade pair)"
+ ]
+}

@@ -1,0 +1,19 @@
+{
+ "id": "0175",
+ "ts": "2026-10-25T20:35:00",
+ "title": "KCS U2 Lean Wave-1 builds green: formal/RhAttack/SieveAction.lean (namespace SieveFourier) compiles with 0 errors, lake build 8706 jobs - rou (primitive root of unity) + char_pow + dft + mark_notdiv + raman defs and the four Wave-1 theorems: mark_notdiv_idempotent, mark_notdiv_commute, chime_comb (the full comb formula N*1_{a=0} - (N/p)*1_{(N/p)|a} in three case branches, the former 24-error wall), raman_prime_closed ((p-1)/-1 form). The second-orbit formal line now has a machine-checked core matching the 0172 measurement",
+ "kinds": [
+  "lean",
+  "formalization"
+ ],
+ "status": "recorded",
+ "claim": "No RH claim: pure finite group algebra over Z/NZ with a primitive N-th root of unity; every equality is exact in C with integer-valued structures. This is the formal twin of discovery 0172 (measurement at N=210, N=30030). No external provenance used: all lemmas in-tree Mathlib, tactic-bridged primitive root (hpr : IsPrimitiveRoot (rou N) N taken as hypothesis at the statement level, matching the measured setting).",
+ "evidence": [
+  "formal/RhAttack/SieveAction.lean (0 errors, 11 cosmetic lint warnings only)",
+  "lake build RhAttack.SieveAction: Build completed successfully (8706 jobs)",
+  "check log: tmp/sieveaction_check27.log (rc=0, errors: 0)",
+  "error descent this session: 24 -> 19 -> 15 -> 17 -> 21 -> 22 -> 21 -> 20 -> 2 -> 1 -> 0 across rounds (check logs 9..27)",
+  "key structural fix: the Finset.sum_bij reindex of the p-multiple sum; the exponent equality m*a = (p*a)*(m/p) proved WITHOUT a global rw of m = p*(m/p), because that rewrite self-overlaps (it hits m.val nested inside m.val/p); conv => lhs; rw + ring is the safe form",
+  "Mathlib direction traps documented: pow_mul in this checkout is flat->nested (x^(m*n) = (x^m)^n), so flattening needs <- pow_mul; Nat.cast_ne_zero is an iff (.mpr); mul_div_cancel_right0 is the a*b/b = a lemma; if_pos/if_neg each reduce only one ite occurrence at a time"
+ ]
+}

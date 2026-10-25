@@ -1,0 +1,32 @@
+{
+ "id": "0173",
+ "ts": "2026-10-25T10:10:00",
+ "title": "KCS U3c step 0: the LOS paper's Conjecture 1.2 IS the consecutive-pair statement - its q=4 census prediction (1+delta)/2 = 0.545634 at 1e8 sits 52 sigma BELOW the measured 0.556519; the conjecture's error budget O(x/(log x)^(11/4)) = 0.0057 in fraction terms at 1e8 is the SAME ORDER as the 0.0062 residual, and the paper's flagged (loglog/log)^2 lower-order term = 0.0083 at 1e8 is also the right size - the residual is inside the source's own error budget; 'transfer coefficient' reframed as the measured residual R(X) with three live ansatz families",
+ "kinds": ["math", "literature", "provenance"],
+ "status": "recorded",
+ "claim": "No RH claim: analysis of a published (unproven) main conjecture's stated size against our four-scale measurement. The 52-sigma statement is against the CONJECTURE's prediction, not a proved result; the honest framing is that the measured residual is inside the conjecture's own error budget, with the next term named (the paper's own (loglog/log)^2 flag).",
+ "evidence": [
+  "Paper fetch (ar5iv rendering of arXiv:1603.03720, identity-checked at the fetch, answer-mode): Eq (5.1) main-conjecture form pi(x, 4, (a,a')) = li(x)/4 * (1 +/- (1/(2 log x)) log(2 pi log x / 4)) + O(x/(log x)^(11/4)); Conjecture 1.2 (q = 4): pi(x,4,(a,-a)) - pi(x,4,(a,a)) = x/(4 (log x)^2) * log(2 pi log x / 4) + O(x/(log x)^(11/4)) - per ordered pattern, so the census family fraction = (1+delta)/2",
+  "Sizing at 1e8: (1+delta)/2 = 0.545634 vs measured 0.556519 (z ~ 52); the Cramer-tilt model 0.550315 (z ~ 30); naive composition 0.595110 (z ~ +186). Error budget O(x/(log x)^(11/4)) in fraction terms: 33,069 gaps / 5.79e6 total ~ 0.0057 at 1e8 - the same order as the residuals 0.009056/0.006204/0.005714/0.005167 (1e7..1e9)",
+  "The paper flags: 'there may be additional non-oscillating lower-order terms of size (log log x / log x)^2, i.e. O(x (log log x)^2/(log x)^3), which can be visible in computable ranges' - at 1e8 the (loglog/log)^2 scale = 0.0333 in ratio terms ~ 0.0083 in fraction terms: the right size for the 0.0062 residual",
+  "Residual reframing: R(X) = measured - u3-only: 0.009056 (1e7) / 0.006204 (1e8) / 0.005714 (3e8) / 0.005167 (1e9); decays 43% over two decades - faster than delta (16% over the same span), slower than (loglog/log)^2 (64%). Ansätze: C(X)*(loglog/log)^2 with C = 0.6089/0.3724/0.4739/0.4832 (NOT constant - kills the pure-power ansatz at 1e7); the U3b alpha(X)*delta/2 form; or mixed. The 1e10 measurement discriminates",
+  "Factor bookkeeping check: the paper's difference formula x/(4 log^2 x)*ln(2 pi ln x/4) = 247,689 at 1e8 vs the per-pattern li/4*2delta = 264,293 - ratio 1.067 = li(1e8)/(1e8/ln 1e8) exactly, confirming the per-ordered-pattern reading of Conjecture 1.2",
+  "Plan updated in place (U3c unit in section 5 + status line in section 7); the U3c gate now has an honest half-close: certify the residual INSIDE the source's error budget with the next term named"
+ ],
+ "artifacts": {
+  "paper_conjecture_1e8_frac": 0.545634,
+  "paper_error_budget_frac_terms_1e8": 0.0057,
+  "loglog_over_log_squared_1e8": 0.033318,
+  "loglog_over_log_squared_frac_1e8": 0.0083295,
+  "R_residuals": {"1e7": 0.009056, "1e8": 0.006204, "3e8": 0.005714, "1e9": 0.005167},
+  "C_coefficients_loglog2_ansatz": {"1e7": 0.6089, "1e8": 0.3724, "3e8": 0.4739, "1e9": 0.4832}
+ },
+ "relations": ["0172", "0171", "0170"],
+ "open_items": [
+  "U3c remaining: measure at 1e10 (sieve ~5 GB, single-threaded, minutes) after the b8/b9 queue frees cores - the discriminating next point for the three ansatz families",
+  "U3c: check the paper's r=2, q=4 figure data (text extraction did not capture the figure) against our rows",
+  "SieveAction.lean (U2 Lean pass): wave-1 file written (chime comb + prime closed form), first build in progress; wave-2 statements staged (inclusion-exclusion / multiplicativity / full support / census / Parseval)",
+  "same-N bare crosses b8/b9 (running, PID 4124046) -> then the in-tree E1ClauseV3C 9e23 extension (0168 pattern)"
+ ],
+ "no_rh_claim": true
+}

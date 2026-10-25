@@ -2141,3 +2141,24 @@ the S21a session were not persisted and are deliberately not
 cited - the cross standard is the instrument's own declared
 uncertainty. In-tree extension to (G, 9e23] follows after the
 crosses close (0168 pattern: B 1e7 -> 1e8). No RH claim.
+
+UPDATED (0174 + 0175, 2026-10-25): BOTH pending lines landed.
+(1) DATA: the same-N bare crosses for chains 8/9 CLOSED - 3e23: |full
+- bare| = 1.681e-6 (full |Z| = 0.3757974661033002 from logzeta
+-0.978704934699, bare |Z| = 0.375799147341, N = 69100034506, b8 rc=0
+09:47:56Z); 9e23: |full - bare| = 1.250e-6 (full |Z| =
+1.7670719448933583 from logzeta +0.569323908351, bare |Z| =
+1.767073194708, N = 119684770570, b9 rc=0 18:00:19Z); a 20x margin
+inside the ~2.5e-5 standard; the cross lineage decays monotonically
+3.279e-6 -> 2.322e-6 -> 1.681e-6 -> 1.250e-6 across 3e21..9e23;
+rows 8/9 of tmp/s34t_far_rows.jsonl updated (bare + d_abs filled).
+The in-tree E1ClauseV3C -> (G, 9e23] extension is UNBLOCKED (0168
+pattern: T_MEAS3 9e21 -> 9e23, B 1e7 -> 1e8, bound 2.3e29 -> 2.3e31).
+(2) FORMAL: KCS U2 Lean Wave-1 BUILDS GREEN -
+formal/RhAttack/SieveAction.lean (namespace SieveFourier), 0 errors,
+lake build 8706 jobs: rou + char_pow + dft + mark_notdiv + raman
+and the theorems mark_notdiv_idempotent, mark_notdiv_commute,
+chime_comb (the full 3-case comb formula - the 24-error wall),
+raman_prime_closed; the formal twin of 0172. Wave-2 (Ramanujan
+full-support, inclusion-exclusion, multiplicativity, Parseval)
+and U4 (parity-as-width) are the next formal steps. No RH claim.

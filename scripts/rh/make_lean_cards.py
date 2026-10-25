@@ -427,11 +427,6 @@ C = {
  "probe only; no theorems consumed anywhere.",
  "safe to delete at any time.",
  None),
-"ProbeTmp": (
- "Throwaway probe.",
- "probe only; no theorems consumed anywhere.",
- "safe to delete at any time.",
- None),
 "S1LowT": (
  "S2 detector floor at low t.",
  "floWin = min(23/1000, 1-25/gamma), floOwn = |poff gamma d "
@@ -456,6 +451,18 @@ C = {
  "Dv = 900*G above, 5.809927e9 below.",
  "terminal: the S1 bridge; bridge is vacuous at measured L "
  "(t-metric); cusp robustness operative above G.",
+ None),
+"SieveAction": (
+ "KCS U2 (second orbit): the finite Fourier sieve operator "
+ "package - the formal twin of discovery 0172.",
+ "rou (primitive N-th root) + char_pow + dft + mark_notdiv + "
+ "raman; mark_notdiv_idempotent (M^a = M^b pointwise), "
+ "mark_notdiv_commute (M_p M_q = M_q M_p pointwise), chime_comb "
+ "(F[1_{p|m}] = N*1_{a=0} - (N/p)*1_{(N/p)|a}, the 3-case comb "
+ "formula - the 24-error wall), raman_prime_closed (p-1 / -1).",
+ "N2 statement of KCS U2 (measurement: kcs2_fourier_sieve.py at "
+ "N=210/30030); Wave-2 (raman_full_support / inclusion-exclusion "
+ "/ multiplicativity / parseval_units) staged next.",
  None),
 "ProbeS1U": (
  "Gate probe for S1Uniform Part D: the unified vacuity ledger.",

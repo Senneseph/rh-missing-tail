@@ -189,14 +189,17 @@ Commit a00c7d6.
    same-N fixed-table bare crosses d = 3.2788e-6 / 2.3222e-6 vs the
    instrument's ~2.5e-5 self-declared standard — 0169); 3e23/9e23
    full-primary (logzeta -0.978704934699 / +0.569323908351; same-N
-   bare crosses queued). The 3-term-law M relative residual collapses
+   bare crosses CLOSED 0174: d = 1.681e-6 / 1.250e-6 - cross lineage
+   3.279e-6 -> 2.322e-6 -> 1.681e-6 -> 1.250e-6). The 3-term-law M
+   relative residual collapses
    monotonically: 2.247e-8 -> 7.473e-9 -> 3.812e-9 -> 7.199e-10.
    **MEASURED boundary:** the exact-integer M era (0158) closed at
    9e21 — past 2^53 the M partial sum is an f64 ulp multiple (2 / 16);
    the quantization record (0.000e+00, all ten rows 1e18..9e21) stands
    as the record. In-tree: E1ClauseV3C window (G, 9e21] (0168:
-   T_MEAS3 = 9e21, B = 1e7, 38-row face); the 9e23 extension follows
-   the same pattern after the bare crosses close. No RH claim.
+   T_MEAS3 = 9e21, B = 1e7, 38-row face); the 9e23 extension is
+   UNBLOCKED (0174; 0168 pattern: B 1e7 -> 1e8, bound 2.3e29 -> 2.3e31)
+   - the next build step. No RH claim.
 7. **The terminal face (NAMED, unchanged):** the in-tree closure of
    the `hOffC` face remains blocked on the external `[Z78C]` frontier
    (0.8747729897, below in-tree; frontier board sweep 2026-10-24:
@@ -234,8 +237,16 @@ Commit a00c7d6.
    N, max err 4.5e-13 all 30030 characters; Parseval exact to 0.0) -
    the draft's torsion-subspace support formula corrected in place;
    sparse combs -> dense field under convolution is the measured
-   contrast. **U4 TO-BUILD:** the parity-as-width statement (plus the
-   SieveAction.lean Lean pass of U2, next build session).
+   contrast. **U2 LEAN WAVE-1 DONE (0175, 2026-10-25):** SieveAction.lean
+   (namespace SieveFourier) builds green - 0 errors, lake 8706 jobs:
+   rou/char_pow/dft/mark_notdiv/raman + mark_notdiv_idempotent +
+   mark_notdiv_commute + chime_comb (the 3-case comb formula; the
+   former 24-error wall) + raman_prime_closed; error descent 24 -> 0
+   across the session; the p-multiple reindex closed via a
+   conv-safe exponent equality (m*a = (p*a)*(m/p); a global rw of
+   m = p*(m/p) self-overlaps inside (m/p)). Wave-2 (raman_full_support
+   / inclusion-exclusion / multiplicativity / parseval_units) staged.
+   **U4 TO-BUILD:** the parity-as-width statement.
    Recall incident logged in 0170 (a 65/35 benchmark was unverified
    memory; corrected to the verified LOS framework). No RH claim:
    prime-gap class statistic + exact sieve algebra, flank not face.
