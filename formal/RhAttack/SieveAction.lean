@@ -540,6 +540,67 @@ theorem raman_prime_closed (p : ℕ) (hp : p.Prime) (a : Fin p) :
 
 /-! ## Wave 2  (staged;  measured in 0172) -/
 
+-- (A1)  Orthogonality:  a complete period of the additive characters
+--        e_N(k .)  sums to  N  iff  N | k,  to  0  otherwise.
+theorem rou_sum_orthogonality {N k : ℕ} (hN : 1 < N) :
+    (∑ a : Fin N, (rou N) ^ (a.val * k)) = if N ∣ k then (N : ℂ) else 0 := by
+  by_cases hd : N ∣ k
+  ·
+    rw [if_pos hd]
+    have hw : ∀ (a : Fin N), (rou N) ^ (a.val * k) = 1 := by
+      intro a
+      have hp2 : 1 < N := hN
+      have hpow : (rou N) ^ k = 1 :=
+        (primitive_rou N hp2 |>.pow_eq_one_iff_dvd k).mpr hd
+      have hpowk : (rou N) ^ (a.val * k) = ((rou N) ^ k) ^ a.val := by
+        rw [show (a.val * k : ℕ) = k * a.val from by ring, pow_mul]
+      rw [hpowk, hpow]
+      simp
+    calc (∑ a : Fin N, (rou N) ^ (a.val * k))
+        = ∑ a : Fin N, 1 := by
+          apply Finset.sum_congr rfl
+          intro a _
+          exact hw a
+      _ = (N : ℂ) := by
+        simp [Finset.sum_const, Finset.card_fin, nsmul_eq_mul, mul_one]
+  ·
+    rw [if_neg hd]
+    have hpr := primitive_rou N hN
+    have hw : (rou N) ^ k ≠ 1 := by
+      intro h1
+      exact hd ((hpr.pow_eq_one_iff_dvd k).mp h1)
+    --  flatten the per-term power,  change the Fin N sum to the range N sum,
+    --  apply the geometric formula,  close with  (rou N)^N = 1.
+    have hflat : (∑ a : Fin N, (rou N) ^ (a.val * k)) =
+        ∑ a : Fin N, ((rou N) ^ k) ^ a.val := by
+      apply Finset.sum_congr rfl
+      intro m _
+      rw [show (m.val * k : ℕ) = k * m.val from by ring, pow_mul]
+    have hfin : (∑ a : Fin N, ((rou N) ^ k) ^ a.val) =
+        (∑ i ∈ Finset.range N, ((rou N) ^ k) ^ i) :=
+      Finset.sum_bij
+        (fun a _ => a.val)
+        (fun a _ => by simpa using a.isLt)
+        (fun a₁ _ a₂ _ h => Fin.ext h)
+        (fun b hb => ⟨Fin.mk b (Finset.mem_range.mp hb), by simp [Fin.val]⟩)
+        (fun a _ => rfl)
+    have hωN : ((rou N) ^ k) ^ N = 1 := by
+      have hxN : (rou N) ^ N = 1 := hpr.pow_eq_one
+      rw [show ((rou N) ^ k) ^ N = (rou N) ^ (k * N) from by rw [pow_mul],
+          show (k * N : ℕ) = N * k from by ring,
+          show (rou N) ^ (N * k) = ((rou N) ^ N) ^ k from by rw [pow_mul],
+          hxN]
+      simp
+    calc (∑ a : Fin N, (rou N) ^ (a.val * k))
+        = (∑ a : Fin N, ((rou N) ^ k) ^ a.val) := hflat
+      _ = (∑ i ∈ Finset.range N, ((rou N) ^ k) ^ i) := hfin
+      _ = (((rou N) ^ k) ^ N - 1) / ((rou N) ^ k - 1) := by
+          rw [geom_sum_eq hw N]
+      _ = 0 := by
+          rw [show (((rou N) ^ k) ^ N - 1 : ℂ) = 0 from sub_eq_zero.mpr hωN]
+          exact zero_div _
+
+
 -- TODO(wave-2):
 --   raman_inclusion_exclusion (N squarefree):
 --     raman N a = sum_{d | N} (μ d) * (N / d) * 1_{ (N/d) | a }
@@ -552,5 +613,463 @@ theorem raman_prime_closed (p : ℕ) (hp : p.Prime) (a : Fin p) :
 --     |{a : N | N / gcd(a, N) = k}| = φ k   (the 64 level sets at N = 30030)
 --   parseval_units (N squarefree, 1 < N):
 --     sum_a |raman N a|^2 = N * φ N   (measured diff 0.0)
+
+
+-- (A2.0)  Concrete divisor-sum form of Mobius inversion:
+--         sum_{d | n} mu(d)  =  1_{n = 1}.
+theorem mobius_sum_nat (n : ℕ) :
+    (∑ d ∈ n.divisors, (ArithmeticFunction.moebius d : ℤ)) =
+        if n = 1 then (1 : ℤ) else 0 := by
+  by_cases hn : n = 0
+  · subst n
+    simp
+  ·
+    have hdpos : 0 < n := Nat.pos_of_ne_zero hn
+    have hz1 : ∀ x ∈ n.divisorsAntidiagonal,
+        ((ArithmeticFunction.zeta : ArithmeticFunction ℤ) x.2) = 1 := by
+      intro x hx
+      have hmem : x.1 * x.2 = n ∧ n ≠ 0 := Nat.mem_divisorsAntidiagonal.mp hx
+      have hx2n0 : x.2 ≠ 0 := by
+        intro hx2z
+        nlinarith [hmem.1, show 0 < n from hdpos]
+      simp [ArithmeticFunction.zeta_apply, hx2n0]
+    have hinv : (ArithmeticFunction.moebius * (ArithmeticFunction.zeta : ArithmeticFunction ℤ) :
+                ArithmeticFunction ℤ) n = (1 : ArithmeticFunction ℤ) n :=
+      congrArg (fun F : ArithmeticFunction ℤ => F n)
+        ArithmeticFunction.moebius_mul_coe_zeta
+    have hreduce : (∑ x ∈ n.divisorsAntidiagonal,
+        (ArithmeticFunction.moebius x.1 : ℤ) * ((ArithmeticFunction.zeta : ArithmeticFunction ℤ) x.2)) =
+        (∑ x ∈ n.divisorsAntidiagonal, (ArithmeticFunction.moebius x.1 : ℤ)) := by
+      apply Finset.sum_congr rfl
+      intro x hx
+      rw [hz1 x hx, mul_one]
+    have hbij : (∑ x ∈ n.divisorsAntidiagonal, (ArithmeticFunction.moebius x.1 : ℤ)) =
+        (∑ d ∈ n.divisors, (ArithmeticFunction.moebius d : ℤ)) :=
+      Finset.sum_bij
+        (fun x _ => x.1)
+        (fun x hx => by
+          have hxprod : x.1 * x.2 = n ∧ n ≠ 0 :=
+            Nat.mem_divisorsAntidiagonal.mp hx
+          have hx1p : 0 < x.1 := by
+            by_contra z
+            nlinarith [hxprod.1, hdpos]
+          exact Nat.mem_divisors.mpr
+            ⟨by simpa [hxprod.1] using Nat.dvd_mul_right x.1 x.2, hdpos.ne'⟩)
+        (fun x₁ hx₁ x₂ hx₂ hxy => by
+          have hxprod : x₁.1 * x₁.2 = n := (Nat.mem_divisorsAntidiagonal.mp hx₁).1
+          have hyprod : x₂.1 * x₂.2 = n := (Nat.mem_divisorsAntidiagonal.mp hx₂).1
+          have hx1p : 0 < x₁.1 := by
+            by_contra z
+            nlinarith [hxprod, hdpos]
+          have hyprod' : x₁.1 * x₂.2 = n := by simpa [hxy] using hyprod
+          have hxyprod : x₁.1 * x₁.2 = x₁.1 * x₂.2 := by nlinarith [hxprod, hyprod']
+          have hxy1 : x₁.2 = x₂.2 := Nat.eq_of_mul_eq_mul_left hx1p hxyprod
+          exact (Prod.ext hxy hxy1))
+        (fun d hd => by
+          rw [Nat.mem_divisors] at hd
+          have hdd : d ∣ n := hd.1
+          exact ⟨(d, n / d),
+            ⟨Nat.mem_divisorsAntidiagonal.mpr ⟨Nat.mul_div_cancel' hdd, hdpos.ne'⟩, rfl⟩⟩)
+        (fun x _ => rfl)
+    have heqL : (∑ d ∈ n.divisors, (ArithmeticFunction.moebius d : ℤ)) =
+        (ArithmeticFunction.moebius * (ArithmeticFunction.zeta : ArithmeticFunction ℤ)) n := by
+      calc (∑ d ∈ n.divisors, (ArithmeticFunction.moebius d : ℤ))
+          = (∑ x ∈ n.divisorsAntidiagonal, (ArithmeticFunction.moebius x.1 : ℤ)) := hbij.symm
+        _ = (∑ x ∈ n.divisorsAntidiagonal,
+              (ArithmeticFunction.moebius x.1 : ℤ) * ((ArithmeticFunction.zeta : ArithmeticFunction ℤ) x.2)) :=
+              hreduce.symm
+        _ = (ArithmeticFunction.moebius * (ArithmeticFunction.zeta : ArithmeticFunction ℤ)) n :=
+            by rw [ArithmeticFunction.mul_apply]
+    rw [heqL, hinv, ArithmeticFunction.one_apply]
+
+-- (A2.1)  The unit indicator as a Mobius sum over the common divisors.
+theorem mobius_unit_indicator (m N : ℕ) (hN : 0 < N) :
+    (if Nat.Coprime m N then (1 : ℂ) else 0) =
+        (∑ d ∈ (Nat.gcd m N).divisors, (ArithmeticFunction.moebius d : ℂ)) := by
+  have hz : (∑ d ∈ (Nat.gcd m N).divisors, (ArithmeticFunction.moebius d : ℤ)) =
+      if Nat.gcd m N = 1 then (1 : ℤ) else 0 :=
+    mobius_sum_nat (Nat.gcd m N)
+  have hg : ((if Nat.gcd m N = 1 then (1 : ℤ) else 0) : ℂ) =
+      if Nat.Coprime m N then (1 : ℂ) else 0 := by
+    simp [Nat.coprime_iff_gcd_eq_one]
+    <;> split_ifs <;> simp_all [Int.cast_one, Int.cast_zero]
+  have hzcast : (∑ d ∈ (Nat.gcd m N).divisors, (ArithmeticFunction.moebius d : ℂ)) =
+      if Nat.gcd m N = 1 then (1 : ℂ) else 0 := by
+    rw [← Int.cast_sum (Nat.gcd m N).divisors (fun d => (ArithmeticFunction.moebius d : ℤ))]
+    rw [hz]
+    by_cases h1 : Nat.gcd m N = 1
+    · simp [h1]
+    · simp [h1]
+  rw [hzcast]
+
+set_option maxHeartbeats 400000
+-- (A2.2)  INCLUSION-EXCLUSION (the full-sieve symbol is the Ramanujan
+
+--         field,  in the exact divisor-sum form  verified in 0172):
+--
+--         raman  N  a  =  sum_{d | N}  mu(d) * (N/d) * 1_{ (N/d) | a }
+--
+--         (equivalently  sum_{e | (a, N)}  e * mu(N/e)).  No squarefree
+--         assumption;  the prime closed form  and  the  squarefree
+--         product  are  specializations.
+theorem raman_inclusion_exclusion {N : ℕ} (hN : 1 < N) (a : Fin N) :
+    raman N (Nat.le_of_lt hN) a =
+        (∑ d ∈ N.divisors,
+          if (N / d) ∣ a.val then ((N / d : ℕ) : ℂ) * (ArithmeticFunction.moebius d : ℂ) else 0) := by
+  change (∑ m : Fin N, (if Nat.Coprime m.val N then (1 : ℂ) else 0) *
+      (rou N) ^ (m.val * a.val)) =
+    (∑ d ∈ N.divisors,
+      if (N / d) ∣ a.val then ((N / d : ℕ) : ℂ) * (ArithmeticFunction.moebius d : ℂ) else 0)
+  have hz0 : 0 < N := by omega
+  -- the unit Mobius sum  over  (m, N)-divisors  =  the  N-divisor
+  --    sum  with  the  1_{d | m}  condition
+  have hsumswap (m : Fin N) :
+      (∑ d ∈ (Nat.gcd m.val N).divisors, (ArithmeticFunction.moebius d : ℂ)) =
+          (∑ d ∈ N.divisors,
+            if d ∣ m.val then (ArithmeticFunction.moebius d : ℂ) else 0) := by
+    have hgcnz : 0 < Nat.gcd m.val N := by
+      by_contra z
+      have hg0 : Nat.gcd m.val N = 0 := by omega
+      have hdvd : Nat.gcd m.val N ∣ N := Nat.gcd_dvd_right m.val N
+      have hdvd0 : 0 ∣ N := by simpa [hg0] using hdvd
+      obtain ⟨k, hk⟩ := hdvd0
+      have hN0 : N = 0 := by nlinarith [hk]
+      exact hz0.ne' hN0
+    have hgcnz' : Nat.gcd m.val N ≠ 0 := hgcnz.ne'
+    have hfilter : (∑ d ∈ N.divisors,
+        (if d ∣ m.val then (ArithmeticFunction.moebius d : ℂ) else 0)) =
+        (∑ d ∈ (N.divisors).filter (fun d => d ∣ m.val),
+          (ArithmeticFunction.moebius d : ℂ)) := by
+      rw [Finset.sum_ite (fun d : ℕ => (ArithmeticFunction.moebius d : ℂ)) (fun _ => (0 : ℂ))]
+      have hzero : (∑ d ∈ (N.divisors).filter (fun d => ¬d ∣ m.val), (0 : ℂ)) = 0 := by
+        apply Finset.sum_eq_zero
+        intro d _
+        simp
+      rw [hzero, add_zero]
+    have hbij : (∑ d ∈ (N.divisors).filter (fun d => d ∣ m.val),
+        (ArithmeticFunction.moebius d : ℂ)) =
+        (∑ d ∈ (Nat.gcd m.val N).divisors, (ArithmeticFunction.moebius d : ℂ)) :=
+      Finset.sum_bij
+        (fun d _ => d)
+        (fun d hd => by
+          have hmem := Finset.mem_filter.mp hd
+          have hdM : d ∣ m.val := hmem.2
+          have hdN : d ∣ N := by
+            rw [Nat.mem_divisors] at hmem
+            exact hmem.1.1
+          exact Nat.mem_divisors.mpr
+            ⟨Nat.dvd_gcd_iff.mpr ⟨hdM, hdN⟩, hgcnz'⟩)
+        (fun d₁ _ d₂ _ h => h)
+        (fun d hd => by
+          have hdg : d ∣ Nat.gcd m.val N := by
+            rw [Nat.mem_divisors] at hd
+            exact hd.1
+          have hmem : d ∈ N.divisors :=
+            Nat.mem_divisors.mpr ⟨Nat.dvd_trans hdg (Nat.gcd_dvd_right m.val N), hz0.ne'⟩
+          have hdm : d ∣ m.val := Nat.dvd_trans hdg (Nat.gcd_dvd_left m.val N)
+          exact ⟨d, ⟨Finset.mem_filter.mpr ⟨hmem, hdm⟩, rfl⟩⟩)
+        (fun d _ => rfl)
+    rw [hfilter]
+    exact hbij.symm
+  calc
+    (∑ m : Fin N, (if Nat.Coprime m.val N then (1 : ℂ) else 0) *
+        (rou N) ^ (m.val * a.val))
+        = ∑ m : Fin N, (∑ d ∈ N.divisors,
+            (if d ∣ m.val then (ArithmeticFunction.moebius d : ℂ) else 0) *
+              (rou N) ^ (m.val * a.val)) := by
+          apply Finset.sum_congr rfl
+          intro m _
+          have hui := mobius_unit_indicator m.val N hz0
+          rw [hui, hsumswap m, mul_comm, Finset.mul_sum]
+          apply Finset.sum_congr rfl
+          intro d _
+          ring
+    _ = ∑ d ∈ N.divisors,
+        (∑ m : Fin N,
+          (if d ∣ m.val then (ArithmeticFunction.moebius d : ℂ) else 0) *
+            (rou N) ^ (m.val * a.val)) := by
+          change (∑ m ∈ (Finset.univ : Finset (Fin N)),
+              ∑ d ∈ N.divisors,
+                (if d ∣ m.val then (ArithmeticFunction.moebius d : ℂ) else 0) *
+                  (rou N) ^ (m.val * a.val)) =
+            (∑ d ∈ N.divisors,
+              ∑ m ∈ (Finset.univ : Finset (Fin N)),
+                (if d ∣ m.val then (ArithmeticFunction.moebius d : ℂ) else 0) *
+                  (rou N) ^ (m.val * a.val))
+          rw [Finset.sum_comm]
+    _ = ∑ d ∈ N.divisors,
+        (ArithmeticFunction.moebius d : ℂ) *
+          (∑ m : Fin N,
+            (if d ∣ m.val then (1 : ℂ) else 0) * (rou N) ^ (m.val * a.val)) := by
+          apply Finset.sum_congr rfl
+          intro d _
+          change (∑ m ∈ (Finset.univ : Finset (Fin N)),
+              (if d ∣ m.val then (ArithmeticFunction.moebius d : ℂ) else 0) *
+                (rou N) ^ (m.val * a.val)) =
+            (ArithmeticFunction.moebius d : ℂ) *
+              (∑ m ∈ (Finset.univ : Finset (Fin N)),
+                (if d ∣ m.val then (1 : ℂ) else 0) * (rou N) ^ (m.val * a.val))
+          have hre : (∑ m ∈ (Finset.univ : Finset (Fin N)),
+              (if d ∣ m.val then (ArithmeticFunction.moebius d : ℂ) else 0) *
+                (rou N) ^ (m.val * a.val)) =
+              (∑ m ∈ (Finset.univ : Finset (Fin N)),
+                (ArithmeticFunction.moebius d : ℂ) *
+                  ((if d ∣ m.val then (1 : ℂ) else 0) * (rou N) ^ (m.val * a.val))) := by
+            apply Finset.sum_congr rfl
+            intro m _
+            split_ifs <;> ring
+          rw [hre, ← Finset.mul_sum]
+    _ = ∑ d ∈ N.divisors,
+        if (N / d) ∣ a.val then
+          ((N / d : ℕ) : ℂ) * (ArithmeticFunction.moebius d : ℂ) else 0 := by
+          apply Finset.sum_congr rfl
+          intro d hd
+          have hdN : d ∣ N := (Nat.mem_divisors.mp hd).1
+          have hNps : N = d * (N / d) := (Nat.mul_div_cancel' hdN).symm
+          have hdp : 0 < d := by
+            by_contra z
+            have hd0 : d = 0 := by omega
+            subst hd0
+            obtain ⟨k, hk⟩ := hdN
+            have hN0 : N = 0 := by nlinarith [hk]
+            omega
+          by_cases hdN0 : d = N
+          · subst d
+            -- at d = N  only  m = 0  survives,  contributing  1
+            have hdiv : ∀ m : Fin N, N ∣ m.val ↔ m.val = 0 := by
+              intro m
+              constructor
+              · intro h
+                by_contra hz
+                have hzN : 0 < m.val := Nat.pos_of_ne_zero hz
+                have hle : N ≤ m.val := Nat.le_of_dvd hzN h
+                omega
+              · intro h
+                rw [h]
+                simp
+            have hsum1 : (∑ m : Fin N,
+                (if m.val = 0 then (1 : ℂ) else 0) * (rou N) ^ (m.val * a.val)) =
+                (1 : ℂ) := by
+              have h0s : (∑ m : Fin N,
+                  (if m.val = 0 then (1 : ℂ) else 0) * (rou N) ^ (m.val * a.val)) =
+                  (∑ m ∈ (Finset.univ : Finset (Fin N)).filter
+                    (fun m => m.val = 0), (1 : ℂ) * (rou N) ^ (m.val * a.val)) := by
+                change (∑ m ∈ (Finset.univ : Finset (Fin N)),
+                    (if m.val = 0 then (1 : ℂ) else 0) * (rou N) ^ (m.val * a.val)) =
+                    (∑ m ∈ (Finset.univ : Finset (Fin N)).filter
+                      (fun m => m.val = 0), (1 : ℂ) * (rou N) ^ (m.val * a.val))
+                have hite : (∑ m ∈ (Finset.univ : Finset (Fin N)),
+                    (if m.val = 0 then (1 : ℂ) else 0) * (rou N) ^ (m.val * a.val)) =
+                    (∑ m ∈ (Finset.univ : Finset (Fin N)),
+                      if m.val = 0 then (1 : ℂ) * (rou N) ^ (m.val * a.val) else 0) := by
+                  apply Finset.sum_congr rfl
+                  intro m _
+                  split_ifs <;> ring
+                have hw : (∑ m ∈ (Finset.univ : Finset (Fin N)),
+                    (if m.val = 0 then (1 : ℂ) else 0) *
+                    (rou N) ^ (m.val * a.val)) =
+                    (∑ m ∈ (Finset.univ : Finset (Fin N)),
+                      if m.val = 0 then (1 : ℂ) * (rou N) ^ (m.val * a.val) else 0)
+                    := by
+                  apply Finset.sum_congr rfl
+                  intro m _
+                  split_ifs <;> ring
+                have hsumite : (∑ m ∈ (Finset.univ : Finset (Fin N)),
+                    if m.val = 0 then (1 : ℂ) * (rou N) ^ (m.val * a.val) else 0) =
+                    (∑ m ∈ (Finset.univ : Finset (Fin N)).filter
+                      (fun m => m.val = 0), (1 : ℂ) * (rou N) ^ (m.val * a.val)) +
+                    (∑ m ∈ (Finset.univ : Finset (Fin N)).filter
+                      (fun m => ¬m.val = 0), (0 : ℂ)) :=
+                  Finset.sum_ite (fun (m : Fin N) => (1 : ℂ) * (rou N) ^ (m.val * a.val))
+                    (fun _ => (0 : ℂ))
+                rw [hw, hsumite]
+                have hzero : (∑ m ∈ (Finset.univ : Finset (Fin N)).filter
+                    (fun m => ¬m.val = 0), (0 : ℂ)) = 0 := by
+                  apply Finset.sum_eq_zero
+                  intro m _
+                  simp
+                rw [hzero, add_zero]
+              have hfilter0 : (Finset.univ : Finset (Fin N)).filter
+                  (fun m => m.val = 0) = {Fin.mk 0 (by omega)} := by
+                ext m
+                constructor
+                · intro h
+                  have hmem : m ∈ (Finset.univ : Finset (Fin N)) ∧ m.val = 0 :=
+                    Finset.mem_filter.mp h
+                  have hv : m.val = 0 := hmem.2
+                  have hF : m = Fin.mk 0 (by omega) := (Fin.ext_iff).mpr hv
+                  rw [Finset.mem_singleton]
+                  exact hF
+                · intro h
+                  have hF : m = Fin.mk 0 (by omega) := Finset.mem_singleton.mp h
+                  have hv : m.val = 0 := by
+                    subst hF
+                    rfl
+                  rw [Finset.mem_filter]
+                  exact ⟨Finset.mem_univ _, hv⟩
+              rw [h0s, hfilter0, Finset.sum_singleton]
+              simp
+            have hin : (∑ m : Fin N,
+                (if N ∣ m.val then (1 : ℂ) else 0) * (rou N) ^ (m.val * a.val)) =
+                (1 : ℂ) := by
+              calc _
+                  = ∑ m : Fin N, (if m.val = 0 then (1 : ℂ) else 0) *
+                      (rou N) ^ (m.val * a.val) := by
+                    apply Finset.sum_congr rfl
+                    intro m _
+                    rw [show (if N ∣ m.val then (1 : ℂ) else 0) =
+                            (if m.val = 0 then (1 : ℂ) else 0) from by
+                      by_cases hA : N ∣ m.val
+                      · have hB : m.val = 0 := (hdiv m).1 hA
+                        simp [hA, hB]
+                      · have hnotB : ¬m.val = 0 := by
+                          intro z
+                          exact hA ((hdiv m).2 z)
+                        simp [hA, hnotB]]
+              _ = 1 := hsum1
+            rw [hin, Nat.div_self (show 0 < N from by omega)]
+            simp [Nat.one_dvd]
+          ·
+            have hdlt : d < N := Nat.lt_of_le_of_ne
+                (Nat.le_of_dvd hz0 hdN) hdN0
+            have hM : 1 < N / d := by
+              by_contra hle
+              have hl : N / d ≤ 1 := Nat.le_of_not_gt hle
+              have hpos : 0 < N / d :=
+                Nat.div_pos (Nat.le_of_dvd hz0 hdN) hdp
+              have heq1 : N / d = 1 := by omega
+              have hN : N = d := by simpa [heq1] using hNps
+              subst hN
+              exact hdN0 rfl
+            -- reindex the d-multiples of  < N  as  m  =  d * j,  j < N/d
+            have hreindex : (∑ m : Fin N,
+                (if d ∣ m.val then (1 : ℂ) else 0) * (rou N) ^ (m.val * a.val)) =
+                (∑ j : Fin (N / d), (rou N) ^ ((d * j.val) * a.val)) := by
+              have hst : (∑ m : Fin N,
+                  (if d ∣ m.val then (1 : ℂ) else 0) * (rou N) ^ (m.val * a.val)) =
+                  (∑ m ∈ (Finset.univ : Finset (Fin N)).filter
+                    (fun m => d ∣ m.val), (1 : ℂ) * (rou N) ^ (m.val * a.val)) := by
+                change (∑ m ∈ (Finset.univ : Finset (Fin N)),
+                    (if d ∣ m.val then (1 : ℂ) else 0) * (rou N) ^ (m.val * a.val)) =
+                    (∑ m ∈ (Finset.univ : Finset (Fin N)).filter
+                      (fun m => d ∣ m.val), (1 : ℂ) * (rou N) ^ (m.val * a.val))
+                have hite : (∑ m ∈ (Finset.univ : Finset (Fin N)),
+                    (if d ∣ m.val then (1 : ℂ) else 0) * (rou N) ^ (m.val * a.val)) =
+                    (∑ m ∈ (Finset.univ : Finset (Fin N)),
+                      if d ∣ m.val then (1 : ℂ) * (rou N) ^ (m.val * a.val) else 0) := by
+                  apply Finset.sum_congr rfl
+                  intro m _
+                  split_ifs <;> ring
+                have hsumite : (∑ m ∈ (Finset.univ : Finset (Fin N)),
+                    if d ∣ m.val then (1 : ℂ) * (rou N) ^ (m.val * a.val) else 0) =
+                    (∑ m ∈ (Finset.univ : Finset (Fin N)).filter
+                      (fun m => d ∣ m.val), (1 : ℂ) * (rou N) ^ (m.val * a.val)) +
+                    (∑ m ∈ (Finset.univ : Finset (Fin N)).filter
+                      (fun m => ¬d ∣ m.val), (0 : ℂ)) :=
+                  Finset.sum_ite (fun (m : Fin N) => (1 : ℂ) * (rou N) ^ (m.val * a.val))
+                    (fun _ => (0 : ℂ))
+                rw [hite, hsumite]
+                have hzero : (∑ m ∈ (Finset.univ : Finset (Fin N)).filter
+                    (fun m => ¬d ∣ m.val), (0 : ℂ)) = 0 := by
+                  apply Finset.sum_eq_zero
+                  intro m _
+                  simp
+                rw [hzero, add_zero]
+              rw [hst]
+              let hi_map (m : Fin N) (hm : m ∈ (Finset.univ : Finset (Fin N)).filter
+                  (fun m => d ∣ m.val)) : Fin (N / d) :=
+                (Fin.mk (m.val / d)
+                  (((Nat.div_lt_div_right (Nat.ne_of_gt hdp)
+                      (Finset.mem_filter.mp hm).2 hdN) :
+                     m.val / d < N / d ↔ m.val < N).mpr m.isLt))
+              refine Finset.sum_bij hi_map
+                (fun m _ => by simp)
+                (fun m₁ hm₁ m₂ hm₂ h => by
+                  have hv : m₁.val / d = m₂.val / d := by
+                    dsimp only [hi_map] at h
+                    refine (Fin.ext_iff).mp h
+                  refine (Fin.ext_iff).mpr ?_
+                  have hm₁d : d ∣ m₁.val := (Finset.mem_filter.mp hm₁).2
+                  have hm₂d : d ∣ m₂.val := (Finset.mem_filter.mp hm₂).2
+                  have h₁ : m₁.val = d * (m₁.val / d) := (Nat.mul_div_cancel' hm₁d).symm
+                  have h₂ : m₂.val = d * (m₂.val / d) := (Nat.mul_div_cancel' hm₂d).symm
+                  rw [h₁, h₂]
+                  rw [← hv])
+                (fun j _ => by
+                  have hmN : d * j.val < N :=
+                    Nat.lt_of_lt_of_le (Nat.mul_lt_mul_of_pos_left j.isLt hdp)
+                      (le_of_eq hNps.symm)
+                  have hdiv2 : (d * j.val) / d = j.val := by
+                    have hd : d * ((d * j.val) / d) = d * j.val :=
+                      Nat.mul_div_cancel' (Nat.dvd_mul_right d j.val)
+                    exact Nat.eq_of_mul_eq_mul_left hdp hd
+                  exact ⟨Fin.mk (d * j.val) hmN,
+                    Finset.mem_filter.mpr ⟨Finset.mem_univ _, Nat.dvd_mul_right d j.val⟩,
+                    by
+                      dsimp only [hi_map]
+                      refine (Fin.ext_iff).mpr ?_
+                      simpa [Fin.val] using hdiv2⟩)
+                (fun m hm => by
+                  have hdM : d ∣ m.val := (Finset.mem_filter.mp hm).2
+                  have hdmp : m.val = d * (m.val / d) :=
+                    (Nat.mul_div_cancel' hdM).symm
+                  have hi : (hi_map m hm : Fin (N / d)).val = m.val / d := by
+                    dsimp
+                  rw [show (m.val * a.val : ℕ) = (d * (hi_map m hm).val) * a.val from by
+                    rw [hdmp, hi]]
+                  show (1 : ℂ) * (rou N) ^ ((d * (hi_map m hm).val) * a.val) =
+                       (rou N) ^ ((d * (hi_map m hm).val) * a.val)
+                  ring)
+            rw [hreindex]
+            -- collapse  (rou N)^(d*j)  to  (rou (N/d))^j
+            have hrouN : (rou N) ^ d = (rou (N / d) : ℂ) := by
+              unfold rou
+              rw [← Complex.exp_nat_mul]
+              apply (congrArg Complex.exp)
+              rw [show (d * (2 * Real.pi * I * (1 / (N : ℝ)))) =
+                       (2 * Real.pi * I) * (d * (1 / (N : ℝ))) from by ring]
+              apply (congrArg fun (x : ℂ) => (2 * Real.pi * I) * x)
+              norm_cast
+              have hNreal : (N : ℝ) = (d : ℝ) * (↑(N / d : ℕ) : ℝ) := by
+                trans ((d * (N / d) : ℕ) : ℝ)
+                · exact congrArg (fun x : ℕ => (x : ℝ)) hNps
+                · exact Nat.cast_mul d (N / d)
+              rw [hNreal]
+              field_simp [show (d : ℝ) ≠ 0 by norm_cast; omega,
+                show (↑(N / d : ℕ) : ℝ) ≠ 0 by norm_cast; omega,
+                show (N : ℝ) ≠ 0 by norm_cast; omega]
+            have hroupow : ∀ j : ℕ, (rou N) ^ (d * j) = (rou (N / d) : ℂ) ^ j := by
+              intro j
+              rw [pow_mul, hrouN]
+            rw [show (∑ j : Fin (N / d), (rou N) ^ ((d * j.val) * a.val)) =
+                    (∑ j : Fin (N / d), (rou (N / d) : ℂ) ^ (j.val * a.val))
+                from by
+                  apply Finset.sum_congr rfl
+                  intro j _
+                  calc (rou N) ^ ((d * j.val) * a.val)
+                      = ((rou N) ^ (d * j.val)) ^ a.val := by rw [pow_mul]
+                    _ = ((rou (N / d) : ℂ) ^ j.val) ^ a.val :=
+                        congrArg (fun x : ℂ => x ^ a.val) (hroupow j.val)
+                    _ = (rou (N / d) : ℂ) ^ (j.val * a.val) := by rw [← pow_mul]]
+            -- the unit chime at level  N/d
+            have hchime : (∑ j : Fin (N / d), (rou (N / d) : ℂ) ^ (j.val * a.val)) =
+                if N / d ∣ a.val then (↑(N / d : ℕ) : ℂ) else 0 := by
+              by_cases hM1 : N / d = 1
+              · rw [hM1]
+                have hss : (∑ j : Fin 1, (rou 1 : ℂ) ^ (j.val * a.val)) =
+                    (rou 1 : ℂ) ^ (0 * a.val) :=
+                  Finset.sum_eq_single (Fin.mk 0 (by norm_num : 0 < 1))
+                    (fun k _ hne => by
+                      have hkz : k.val = 0 := by omega
+                      have hk0 : k = Fin.mk 0 (by norm_num : 0 < 1) := (Fin.ext_iff).mpr hkz
+                      exact False.elim (hne hk0))
+                    (fun hn => False.elim (hn (Finset.mem_univ _)))
+                rw [hss]
+                simp [zero_mul, pow_zero, Nat.one_dvd]
+              ·
+                exact rou_sum_orthogonality (N := N / d) (hN := hM) (k := a.val)
+            rw [hchime]
+            split_ifs <;> ring
+set_option maxHeartbeats 200000
 
 end SieveFourier

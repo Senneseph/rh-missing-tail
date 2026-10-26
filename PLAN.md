@@ -243,9 +243,13 @@ Commit a00c7d6.
    former 24-error wall) + raman_prime_closed; error descent 24 -> 0
    across the session; the p-multiple reindex closed via a
    conv-safe exponent equality (m*a = (p*a)*(m/p); a global rw of
-   m = p*(m/p) self-overlaps inside (m/p)). Wave-2 (raman_full_support
-   / inclusion-exclusion / multiplicativity / parseval_units) staged
-   (the 9e23 in-tree step it waited on is now DONE, 0176).
+   m = p*(m/p) self-overlaps inside (m/p)). WAVE-2 A2 GREEN (0177):
+   rou_sum_orthogonality + mobius_sum_nat + mobius_unit_indicator +
+   raman_inclusion_exclusion (the full-sieve symbol = the Ramanujan
+   mu-sum) closed - divisor-branch reindex (Finset.sum_bij, m = d*j)
+   + level collapse (rou N)^d = (rou (N/d)) + orthogonality; error
+   descent 12 -> 0. Remaining Wave-2 (raman_multiplicativity /
+   raman_full_support / raman_level_census / parseval_units) staged.
    **U4 TO-BUILD:** the parity-as-width statement.
    Recall incident logged in 0170 (a 65/35 benchmark was unverified
    memory; corrected to the verified LOS framework). No RH claim:

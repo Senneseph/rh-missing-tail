@@ -316,12 +316,26 @@ wiki on each green gate. The in-tree frontier (`Z78C`, hOffC) is
   err 4.5e-13; FULL-support fact + the sparse-comb→dense-field contrast
   recorded (the opacity lives in the convolution). The draft's
   torsion-subspace support formula is corrected in place (N2). The
-  Lean WAVE-1 GREEN (0175): `SieveAction.lean` builds (0 errors,
-  8706 jobs — rou/char_pow/dft/mark_notdiv/raman + idempotent +
-  commute + chime_comb [the 24-error wall] + raman_prime_closed;
-  Wave-2 staged; the 9e23 in-tree step it waited on is DONE, 0176). Output: `tmp/kcs2_out.txt`.
-- **U2 Lean WAVE-2 / U1b / U1c / U4:** as scoped in §5, next build
-  sessions (Wave-1 green, 0175).
+  Lean WAVE-1 GREEN (0175) and WAVE-2 A1+A2 GREEN (0177):
+  `SieveAction.lean` builds (0 errors, 8706 jobs — rou/char_pow/dft/
+  mark_notdiv/raman + idempotent + commute + chime_comb [the
+  24-error wall] + raman_prime_closed + rou_sum_orthogonality +
+  mobius_sum_nat + mobius_unit_indicator + raman_inclusion_exclusion).
+  Output: `tmp/kcs2_out.txt`.
+- **U2 Lean WAVE-2 A1 + A2 GREEN (2026-10-25, 0177):** `SieveAction.lean`
+  now builds (0 errors; lake 8706 targeted / 17450 full) with A1's
+  `rou_sum_orthogonality` (additive-character orthogonality) and A2's
+  three theorems: `mobius_sum_nat` (Mertens vanishing),
+  `mobius_unit_indicator` (1_{(m,N)=1} as the mu-sum over common
+  divisors — the engine), and `raman_inclusion_exclusion` (THE
+  full-sieve symbol = the Ramanujan sum in mu-sum form, the 0172
+  identity, now machine-checked): sum-swap + divisor-branch reindex
+  (d-multiples m = d*j over Fin (N/d), Finset.sum_bij) + level
+  collapse (rou N)^d = (rou (N/d)) + orthogonality. Error descent
+  12 -> 0 across the session.
+- **U2 Lean WAVE-2 REMAINDER / U1b / U1c / U4:** as scoped in §5,
+  next build sessions (A2 green, 0177): raman_multiplicativity /
+  raman_full_support / raman_level_census / parseval_units.
 
 *The shuffle is a crafted creation: it does not claim to move the face.
 It claims a second orbit — and on that orbit, the hops are free.*

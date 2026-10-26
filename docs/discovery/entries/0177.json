@@ -1,0 +1,21 @@
+{
+  "id": "0177",
+  "ts": "2026-10-25T23:40:00",
+  "title": "KCS U2 Lean Wave-2 A2 builds green: raman_inclusion_exclusion (the full-sieve Fourier symbol is the Ramanujan sum, mu-sum form) plus mobius_sum_nat and mobius_unit_indicator in formal/RhAttack/SieveAction.lean; lake build 8706 jobs targeted, 17450 full tree. The divisor-branch reindex (d-multiples m = d*j over Fin (N/d) via Finset.sum_bij) and the level-collapse (rou N)^d = (rou (N/d))^1 now close, so the measured 0172 identity c_N(a) = sum_{d|N, (N/d)|a} mu(d)*(N/d) has a machine-checked twin",
+  "kinds": [
+   "lean",
+   "formalization"
+  ],
+  "status": "recorded",
+  "claim": "No RH claim: pure finite arithmetic-function + group-algebra statement over Z/NZ with a primitive N-th root of unity; all equalities exact in C. Every input is in-tree Mathlib (ArithmeticFunction.moebius, Nat.divisors, Finset.sum_bij, Complex.exp_nat_mul, Nat.cast_div); no axioms, no external provenance. This is the formal twin of discovery 0172 (measurement at N=210, N=30030).",
+  "evidence": [
+   "formal/RhAttack/SieveAction.lean (0 errors; 28 cosmetic lint warnings only)",
+   "lake build RhAttack.SieveAction: Build completed successfully (8706 jobs)",
+   "lake build (full tree): Build completed successfully (17450 jobs)",
+   "targeted check log: tmp/wave2_a3p.log (rc=0, errors: 0)",
+   "error descent this session: 12 -> 10 -> 8 -> 7 -> 6 -> 6 -> 3 -> 2 -> 1 -> 2 -> 3 -> 6 -> 2 -> 1 -> 1 -> 1 -> 1 (wave2_a2q through wave2_a3p)",
+   "three theorems closed in A2: mobius_sum_nat (Mertens-vanishing mu-sum over divisors of n), mobius_unit_indicator (1_{(m,N)=1} = sum of mu over common divisors, the engine), raman_inclusion_exclusion (main: raman N a as the divisor ite-sum via sum-swap + reindex + level collapse + rou_sum_orthogonality)",
+   "key micro-walls and their closes: (1) Finset.sum_bij surjection bound - construct Fin.mk (d*j.val) with d*j.val < N via hNps directly, then close the val-equality with Nat.div_lt_of_lt_mul; (2) the (rou N)^d = (rou (N/d)) level collapse - factor 2*pi*I out with congrArg (NOT mul_left_cancel, which has the wrong apply-direction), norm_cast to the real goal d*(1/N) = 1/(N/d), bridge N = d*(N/d) in REALS via a cast-form hNreal proved with trans + congrArg + Nat.cast_mul (rw of N under a cast contaminates the nested N/d - never rw the variable N in a context containing N/d), then field_simp; (3) field_simp over C with a rewrite hypothesis in its simp set recurses (maxRecDepth) - do the rw first, then field_simp WITHOUT that hypothesis; (4) Nat.cast_div (hnm : n|m) (hn : (n:K) != 0) : (m/n : K) = m/n is the exact-division cast bridge in this checkout (no div_cast name); (5) ascribed divisions like (N/d : R) elaborate to the division-of-casts form (N:R)/(d:R), while (N/d : N) : R is the cast-of-nat-division - the two are provably equal only under n|m, and term-mode equality (Nat.cast_div) is the safe bridge",
+   "scratch section retained at tmp/a2_section.lean; heartbeat set_option 400000 around the heavy A2.2 block, restored to 200000 after"
+  ]
+}
