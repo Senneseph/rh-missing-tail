@@ -1072,4 +1072,284 @@ theorem raman_inclusion_exclusion {N : ℕ} (hN : 1 < N) (a : Fin N) :
             split_ifs <;> ring
 set_option maxHeartbeats 200000
 
+
+
+
+
+-- (B1) RAMANUJAN MULTIPLICIVITY  (KCS U2 Wave-2 B1)
+-- --------------------------------------------------
+-- The μ-sum closed form of the Ramanujan sum (see
+-- raman_inclusion_exclusion) is multiplicative in the level
+-- for coprime levels:  c_{mn}(K) = c_m(K)·c_n(K), K arbitrary.
+-- Mechanism:  the divisor bijection d ↦ (d.gcd m, d/(d.gcd m))
+-- (mathlib:  Nat.Coprime.mul_injOn_divisors / Nat.divisors_mul)
+-- + μ-multiplicativity + the coprime divisibility split.
+
+open scoped Pointwise
+
+set_option maxHeartbeats 400000
+
+/-- Ramanujan-sum multiplicativity (μ-sum form):  with (m,n) = 1,
+the μ-sum closed form satisfies
+`∑_{d | m·n} [(m·n)/d ∣ K] · (m·n)/d · μ(d)
+ = (∑_{d | m} [m/d ∣ K] · (m/d) · μ(d)) · (∑_{d | n} [n/d ∣ K] · (n/d) · μ(d))`
+for every K (only K mod m·n matters).  The measured U2 fact, now
+machine-checked. -/
+theorem raman_multiplicativity {m n K : ℕ} (hm : 0 < m) (hn : 0 < n)
+    (hcop : m.Coprime n) :
+    (∑ d ∈ (m * n).divisors,
+       if (m * n) / d ∣ K then ((m * n / d : ℕ) : ℂ) * (ArithmeticFunction.moebius d : ℂ) else 0) =
+    (∑ d ∈ m.divisors,
+       if m / d ∣ K then ((m / d : ℕ) : ℂ) * (ArithmeticFunction.moebius d : ℂ) else 0) *
+    (∑ d ∈ n.divisors,
+       if n / d ∣ K then ((n / d : ℕ) : ℂ) * (ArithmeticFunction.moebius d : ℂ) else 0) := by
+  -- pointwise identity:  F (p1·p2) = A p1 · B p2
+  have hprod (p1 : ℕ) (hp1 : p1 ∈ m.divisors) (p2 : ℕ) (hp2 : p2 ∈ n.divisors) :
+      (if (m * n) / (p1 * p2) ∣ K then ((m * n / (p1 * p2) : ℕ) : ℂ) * (ArithmeticFunction.moebius (p1 * p2) : ℂ) else 0) =
+      (if m / p1 ∣ K then ((m / p1 : ℕ) : ℂ) * (ArithmeticFunction.moebius p1 : ℂ) else 0) *
+      (if n / p2 ∣ K then ((n / p2 : ℕ) : ℂ) * (ArithmeticFunction.moebius p2 : ℂ) else 0) := by
+    obtain ⟨hdm, _⟩ := Nat.mem_divisors.mp hp1
+    obtain ⟨hdn, _⟩ := Nat.mem_divisors.mp hp2
+    have hmp : m = p1 * (m / p1) := (Nat.mul_div_cancel' hdm).symm
+    have hnp : n = p2 * (n / p2) := (Nat.mul_div_cancel' hdn).symm
+    -- (m,n) = 1 as a gcd-equation
+    have hmn1 : m.gcd n = 1 := by
+      change m.Coprime n
+      exact hcop
+    -- (m·n)/(p1·p2) = (m/p1)·(n/p2)
+    have hdiv : (m * n) / (p1 * p2) = (m / p1) * (n / p2) := by
+      have hp1p : 0 < p1 := Nat.pos_of_dvd_of_pos hdm (show 0 < m by omega)
+      have hp2p : 0 < p2 := Nat.pos_of_dvd_of_pos hdn (show 0 < n by omega)
+      have hq : (m / p1) * (n / p2) * (p1 * p2) = m * n := by
+        calc (m / p1) * (n / p2) * (p1 * p2)
+            = p1 * (m / p1) * (p2 * (n / p2)) := by ring
+          _ = m * n := by rw [← hmp, ← hnp]
+      exact (Nat.div_eq_of_eq_mul_left (Nat.mul_pos hp1p hp2p) hq.symm)
+    -- (p1, p2) = 1  (p1 | m, p2 | n, (m, n) = 1)
+    have hcop12 : p1.gcd p2 = 1 := by
+      have hpc : p1.gcd p2 ∣ 1 := by
+        rw [← hmn1, Nat.dvd_gcd_iff]
+        exact ⟨dvd_trans (Nat.gcd_dvd_left _ _) hdm,
+               dvd_trans (Nat.gcd_dvd_right _ _) hdn⟩
+      exact Nat.dvd_one.mp hpc
+    -- μ(p1·p2) = μ(p1)·μ(p2),  cast to ℂ
+    have hμ : (ArithmeticFunction.moebius (p1 * p2) : ℂ) =
+        (ArithmeticFunction.moebius p1 : ℂ) * (ArithmeticFunction.moebius p2 : ℂ) := by
+      have hμi := ArithmeticFunction.isMultiplicative_moebius.map_mul_of_coprime hcop12
+      rw [hμi, Int.cast_mul]
+    -- (m/p1) | m   (via m = p1 * (m/p1), without rewriting under the division)
+    have hxm : (m / p1) ∣ m :=
+      (show (m / p1) ∣ p1 * (m / p1) from Nat.dvd_mul_left _ _).trans (dvd_of_eq hmp.symm)
+    -- (n/p2) | n
+    have hyn : (n / p2) ∣ n :=
+      (show (n / p2) ∣ p2 * (n / p2) from Nat.dvd_mul_left _ _).trans (dvd_of_eq hnp.symm)
+    -- the coprime divisibility split
+    have hxy : (m / p1) * (n / p2) ∣ K ↔ (m / p1) ∣ K ∧ (n / p2) ∣ K := by
+      constructor
+      · intro h
+        exact ⟨dvd_trans (dvd_mul_right _ _) h, dvd_trans (dvd_mul_left _ _) h⟩
+      · rintro ⟨h1, h2⟩
+        obtain ⟨t, ht⟩ := h1
+        rw [ht] at h2
+        have hcop21 : (n / p2).Coprime (m / p1) := by
+          have hpc : (n / p2).gcd (m / p1) ∣ 1 := by
+            rw [← hmn1, Nat.dvd_gcd_iff]
+            exact ⟨dvd_trans (Nat.gcd_dvd_right _ _) hxm,
+                   dvd_trans (Nat.gcd_dvd_left _ _) hyn⟩
+          exact Nat.dvd_one.mp hpc
+        obtain ⟨s, hs⟩ := (hcop21.dvd_mul_left).mp h2
+        exact ⟨s, by rw [ht, hs]; ring⟩
+    rw [show (m * n) / (p1 * p2) = (m / p1) * (n / p2) from hdiv]
+    rw [Nat.cast_mul]
+    rw [hμ]
+    by_cases hxK : (m / p1) * (n / p2) ∣ K
+    · have hh := hxy.mp hxK
+      simp [hxK, hh.1, hh.2]
+      ring
+    · by_cases hhx : (m / p1) ∣ K
+      · have hny : ¬(n / p2) ∣ K := by
+          intro hn2
+          exact hxK (hxy.mpr ⟨hhx, hn2⟩)
+        simp [hxK, hhx, hny]
+      · by_cases hnn : (n / p2) ∣ K
+        · simp [hxK, hhx, hnn]
+        · simp [hxK, hhx, hnn]
+  calc
+    (∑ d ∈ (m * n).divisors,
+      if (m * n) / d ∣ K then ((m * n / d : ℕ) : ℂ) * (ArithmeticFunction.moebius d : ℂ) else 0)
+    _ = ∑ d ∈ m.divisors * n.divisors,
+      if (m * n) / d ∣ K then ((m * n / d : ℕ) : ℂ) * (ArithmeticFunction.moebius d : ℂ) else 0 := by
+      rw [Nat.divisors_mul]
+    _ = ∑ p ∈ m.divisors ×ˢ n.divisors,
+      if (m * n) / (p.1 * p.2) ∣ K then ((m * n / (p.1 * p.2) : ℕ) : ℂ) *
+          (ArithmeticFunction.moebius (p.1 * p.2) : ℂ) else 0 := by
+      rw [Finset.mul_def]
+      exact Finset.sum_image (hcop.mul_injOn_divisors)
+    _ = ∑ p1 ∈ m.divisors, ∑ p2 ∈ n.divisors,
+      if (m * n) / (p1 * p2) ∣ K then ((m * n / (p1 * p2) : ℕ) : ℂ) *
+          (ArithmeticFunction.moebius (p1 * p2) : ℂ) else 0 := by
+      rw [Finset.sum_product]
+    _ = ∑ p1 ∈ m.divisors, ∑ p2 ∈ n.divisors,
+      (if m / p1 ∣ K then ((m / p1 : ℕ) : ℂ) * (ArithmeticFunction.moebius p1 : ℂ) else 0) *
+        (if n / p2 ∣ K then ((n / p2 : ℕ) : ℂ) * (ArithmeticFunction.moebius p2 : ℂ) else 0) := by
+      refine Finset.sum_congr rfl (fun p1 hp1 => ?_)
+      exact Finset.sum_congr rfl (fun p2 hp2 => hprod p1 hp1 p2 hp2)
+    _ = (∑ d ∈ m.divisors,
+      if m / d ∣ K then ((m / d : ℕ) : ℂ) * (ArithmeticFunction.moebius d : ℂ) else 0) *
+        (∑ d ∈ n.divisors,
+      if n / d ∣ K then ((n / d : ℕ) : ℂ) * (ArithmeticFunction.moebius d : ℂ) else 0) := by
+      rw [← Finset.sum_mul_sum]
+
+set_option maxHeartbeats 200000
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- (B2) FULL-SUPPORT RAMANUJAN FIELD  (KCS U2 Wave-2 B2)
+-- ------------------------------------------------------
+-- For squarefree level N, the Ramanujan sum never vanishes:
+-- c_N(a) ≠ 0 for every a.  (Measured 0172: the full-sieve symbol on
+-- a squarefree level is a full-support field; the product closed
+-- form c_N(a) = ∏_{p|N} (p−1 if p|a, −1 otherwise) never hits 0.)
+-- Proof: multiplicative induction on N via B1 + the prime closed
+-- form, + μ(1) = 1 as the base.
+
+set_option maxHeartbeats 400000
+
+/-- Full support:  with N squarefree, the Ramanujan sum is nonzero
+for every character a. -/
+theorem raman_full_support {N : ℕ} (hN : 1 < N) (hqs : Squarefree N) (a : Fin N) :
+    raman N (Nat.le_of_lt hN) a ≠ 0 := by
+  have hz0 : 0 < N := Nat.le_of_lt hN
+  set μsum := fun (M K : ℕ) =>
+      (∑ d ∈ M.divisors,
+      if (M / d) ∣ K then ((M / d : ℕ) : ℂ) * (ArithmeticFunction.moebius d : ℂ) else 0)
+  -- the base:  μsum 1 K = 1
+  have hsum1 (K : ℕ) : μsum 1 K ≠ 0 := by
+    dsimp only [μsum]
+    have hdiv1 : (1 : ℕ).divisors = {1} := by
+      ext d
+      simp [Nat.mem_divisors, Nat.dvd_one]
+    rw [hdiv1, Finset.sum_singleton]
+    simp [ArithmeticFunction.moebius_apply_one, Nat.one_dvd]
+  -- the prime closed form:  μsum p K = (p−1) if p ∣ K,  −1 otherwise
+  have hprimesum (p : ℕ) (hp : p.Prime) (K : ℕ) :
+      μsum p K = if p ∣ K then (p - 1 : ℂ) else -1 := by
+    dsimp only [μsum]
+    have hp2 : 1 < p := hp.one_lt
+    have hdivp : p.divisors = {1, p} := by
+      apply Finset.ext
+      intro d
+      rw [Nat.mem_divisors, Finset.mem_insert, Finset.mem_singleton]
+      constructor
+      · rintro ⟨hd, -⟩
+        rcases (Nat.dvd_prime hp).mp hd with (h1 | h1)
+        · simp [h1]
+        · simp [h1]
+      · rintro (h1 | h1)
+        · simp [h1, show (p : ℕ) ≠ 0 from by omega]
+        · simp [h1, show (p : ℕ) ≠ 0 from by omega]
+    rw [hdivp, Finset.sum_pair (a := 1) (b := p) (Nat.ne_of_lt hp.one_lt)]
+    simp [show (p : ℕ) / 1 = p from by simp,
+      show (p : ℕ) / p = 1 from Nat.div_self hp.pos,
+      ArithmeticFunction.moebius_apply_one,
+      ArithmeticFunction.moebius_apply_prime hp, Nat.one_dvd]
+    by_cases hK : p ∣ K
+    · simp [hK]
+      rw [show ((↑(p : ℕ) : ℂ) + (-1 : ℂ)) = (↑(p : ℕ) : ℂ) - 1 from by ring]
+    · simp [hK]
+  -- the multiplication induction
+  have hmain : ∀ M, 0 < M → Squarefree M → ∀ K, μsum M K ≠ 0 := by
+    intro M
+    apply Nat.strong_induction_on
+      (p := fun N => 0 < N → Squarefree N → ∀ K, μsum N K ≠ 0)
+      (n := M)
+    intro n ihM
+    let M := n
+    intro hM hqsM K
+    by_cases hM1 : M = 1
+    · subst hM1
+      exact hsum1 K
+    · have hM2 : 1 < M := by omega
+      obtain ⟨p, hp, hpM⟩ := Nat.ne_one_iff_exists_prime_dvd.mp hM1
+      let k := M / p
+      have hMk : M = p * k := (Nat.mul_div_cancel' hpM).symm
+      have hkm : k < M := by
+        show (M / p) < M
+        exact Nat.div_lt_self hM hp.one_lt
+      have hkM : k ∣ M := by
+        rw [hMk]
+        exact Nat.dvd_mul_left _ _
+      have hkpos : 0 < k := Nat.pos_of_dvd_of_pos hkM hM
+      -- p ∤ k  and  k squarefree  (both from M squarefree)
+      have hnpk : ¬p ∣ k := by
+        intro hpk
+        obtain ⟨t, ht⟩ := hpk
+        have hp2 : p * p ∣ M := by
+          rw [hMk, ht]
+          use t
+          ring
+        exact (Nat.squarefree_iff_prime_squarefree.mp hqsM) p hp hp2
+      have hcop : p.Coprime k := (Nat.Prime.coprime_iff_not_dvd hp).mpr hnpk
+      have hqsk : Squarefree k := by
+        rw [Nat.squarefree_iff_prime_squarefree]
+        intro q hq hqk
+        have hqM : q * q ∣ M := by
+          rw [hMk]
+          obtain ⟨t, ht⟩ := hqk
+          use p * t
+          rw [ht]
+          ring
+        exact (Nat.squarefree_iff_prime_squarefree.mp hqsM) q hq hqM
+      -- multiplicativity (B1) + nonzero factors
+      have hsumM : μsum M K = μsum (p * k) K := by
+        dsimp only [μsum]
+        rw [hMk]
+      have heq : μsum (p * k) K = μsum p K * μsum k K :=
+        raman_multiplicativity (m := p) (n := k) (K := K) hp.pos hkpos hcop
+      rw [hsumM, heq]
+      have hpnz : μsum p K ≠ 0 := by
+        have hp2 : 1 < p := hp.one_lt
+        rw [hprimesum p hp K]
+        by_cases hK : p ∣ K
+        · have hpnat : p - 1 ≠ 0 := by
+            intro hz0
+            exact Nat.not_lt_of_le (Nat.sub_eq_zero_iff_le.mp hz0) hp2
+          rw [if_pos hK]
+          have hbridge : ((p - 1 : ℕ) : ℂ) = (↑p : ℂ) - 1 := by
+            rw [Nat.cast_sub hp2.le]
+            norm_num
+          rw [← hbridge]
+          exact Nat.cast_ne_zero.mpr hpnat
+        · rw [if_neg hK]
+          norm_num
+      by_cases hk1 : k = 1
+      · exact mul_ne_zero hpnz (by simpa [hk1] using hsum1 K)
+      · have hk2 : 1 < k := Nat.lt_of_le_of_ne (Nat.succ_le_of_lt hkpos) (Ne.symm hk1)
+        exact mul_ne_zero hpnz (ihM k hkm hkpos hqsk K)
+  have hnz : μsum N a.val ≠ 0 := hmain N hz0 hqs a.val
+  simpa [μsum, ← raman_inclusion_exclusion hN a] using hnz
+
+set_option maxHeartbeats 200000
+
 end SieveFourier

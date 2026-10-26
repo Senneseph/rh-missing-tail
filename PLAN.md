@@ -248,8 +248,14 @@ Commit a00c7d6.
    raman_inclusion_exclusion (the full-sieve symbol = the Ramanujan
    mu-sum) closed - divisor-branch reindex (Finset.sum_bij, m = d*j)
    + level collapse (rou N)^d = (rou (N/d)) + orthogonality; error
-   descent 12 -> 0. Remaining Wave-2 (raman_multiplicativity /
-   raman_full_support / raman_level_census / parseval_units) staged.
+   descent 12 -> 0. WAVE-2 B GREEN (0178): raman_multiplicativity
+   (c_{mn}(K) = c_m(K)*c_n(K) for (m,n)=1 - divisor-product
+   bijection Nat.Coprime.mul_injOn_divisors + mu multiplicativity
+   on coprimes + coprime divisibility split) + raman_full_support
+   (c_N(a) ≠ 0 for squarefree N - strong induction over the
+   squarefree decomposition M = p*k + prime closed form + B1 +
+   nonzero product): the U2 full-support measurement as theorem.
+   Remaining Wave-2 (raman_level_census / parseval_units) staged.
    **U4 TO-BUILD:** the parity-as-width statement.
    Recall incident logged in 0170 (a 65/35 benchmark was unverified
    memory; corrected to the verified LOS framework). No RH claim:

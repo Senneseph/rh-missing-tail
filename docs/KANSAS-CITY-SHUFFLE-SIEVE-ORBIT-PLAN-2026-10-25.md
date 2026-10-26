@@ -333,9 +333,18 @@ wiki on each green gate. The in-tree frontier (`Z78C`, hOffC) is
   (d-multiples m = d*j over Fin (N/d), Finset.sum_bij) + level
   collapse (rou N)^d = (rou (N/d)) + orthogonality. Error descent
   12 -> 0 across the session.
-- **U2 Lean WAVE-2 REMAINDER / U1b / U1c / U4:** as scoped in §5,
-  next build sessions (A2 green, 0177): raman_multiplicativity /
-  raman_full_support / raman_level_census / parseval_units.
+- **U2 Lean WAVE-2 B GREEN (2026-10-26, 0178):** `SieveAction.lean`
+  builds again (0 errors; lake 8706 targeted / 17450 full) with
+  `raman_multiplicativity` (c_{mn}(K) = c_m(K)*c_n(K) for coprime
+  m, n — divisor-product bijection
+  `Nat.Coprime.mul_injOn_divisors` + mu multiplicativity on
+  coprimes + coprime divisibility split) and `raman_full_support`
+  (c_N(a) ≠ 0 for squarefree N — strong induction over the
+  squarefree decomposition M = p*k + prime closed form (p-1 / -1)
+  + multiplicativity + nonzero product): the U2 full-support
+  measurement as a theorem.
+- **U2 Lean WAVE-2 TAIL / U1b / U1c / U4:** as scoped in §5, next
+  build sessions (B green, 0178): raman_level_census / parseval_units.
 
 *The shuffle is a crafted creation: it does not claim to move the face.
 It claims a second orbit — and on that orbit, the hops are free.*
