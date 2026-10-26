@@ -261,7 +261,22 @@ Commit a00c7d6.
    Finsets + root-of-unity kernel collapse + normSq bridges) -
    error descent 20 -> 0; the U2 Fourier-sieve program is now a
    machine-checked theorem chain end to end.
-   **U4 TO-BUILD:** the parity-as-width statement.
+   **U4a DONE (0180, 2026-10-26):** the LEGENDRE EXACT identity in
+   theorem form (new file SieveOrbit.lean, namespace SieveOrbit):
+   (phi_list x ps : Z) = sum_{d | prod ps} (mu d : Z) * (x / d), by
+   induction on ps - the step engine is the coprime split of mu over
+   the divisor product ((p*P).divisors = p.divisors x^s P.divisors via
+   Nat.Coprime.mul_injOn_divisors + sum_image + sum_product +
+   Prime.divisors = {1,p} + sum_pair, and map_mul_of_coprime giving
+   mu(p*d) = -mu d so the p-half of the sum is exactly the negated
+   x/p-summand of the recursion) + the counting foundations
+   (phi_list_count: the recursion IS the count of n in [1,x] coprime
+   to prod ps; phi_list_mono; prime_dvd_prod_of_prime_list) +
+   legendre_count_eq (sum = exact count) - scratch-first descent
+   (c1..c21), in-tree 0 errors, lake 8706 targeted / 17450 full.
+   **U4(b) TO-BUILD:** the parity-as-width statement + the orbit
+   composition identities; U1c (two-process zeta/sieve residual
+   harness) still pending.
    Recall incident logged in 0170 (a 65/35 benchmark was unverified
    memory; corrected to the verified LOS framework). No RH claim:
    prime-gap class statistic + exact sieve algebra, flank not face.
