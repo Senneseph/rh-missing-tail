@@ -274,9 +274,20 @@ Commit a00c7d6.
    to prod ps; phi_list_mono; prime_dvd_prod_of_prime_list) +
    legendre_count_eq (sum = exact count) - scratch-first descent
    (c1..c21), in-tree 0 errors, lake 8706 targeted / 17450 full.
-   **U4(b) TO-BUILD:** the parity-as-width statement + the orbit
-   composition identities; U1c (two-process zeta/sieve residual
-   harness) still pending.
+   **U4(b) MEASURED (0181, 2026-10-26):** the first-order
+   upper/lower sieve gap at reachable z (the N3 width number),
+   exact integers (kcs4b_width_number.py, tmp/kcs4b_out.txt):
+   width W = U2 - L1 (the pairwise mass) with W/(xV) = 2.10 (z=7)
+   -> 10.12 (z=71); the EXACT sandwich L1 <= Phi <= U2 on all 66
+   rows (0 violations - the discrete level-1 property, named as
+   the next Lean unit); the position rho = (Phi - L1)/W of the
+   exact count is x-stable to ~1e-6 and z-decaying 0.84158 ->
+   0.67288 (above the band's midpoint at reachable z - the first
+   number for the "parity = opacity" reading); Phi triple-checked
+   exact (mu-sum = recursion = brute) 11/11; remainder <= 1194.6
+   vs worst case 2^20 - 1 (877x margin). **U4(c) PENDING:** the
+   parity/anchor statement (structural, not a barrier theorem);
+   U1c (two-process zeta/sieve residual harness) still pending.
    Recall incident logged in 0170 (a 65/35 benchmark was unverified
    memory; corrected to the verified LOS framework). No RH claim:
    prime-gap class statistic + exact sieve algebra, flank not face.

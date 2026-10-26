@@ -126,7 +126,7 @@ Reconstruction (faithful):
 |---|---|---|---|
 | N1 | **Sieve Action identity**: the flat-action (summation-by-parts) reading of the Legendre recursion `U_j(u) = U_{j−1}(u) − U_{j−1}(⌊u/p_j⌋)` / character version `V_j(u) = V_{j−1}(u) − χ(p_j) V_{j−1}(⌊u/p_j⌋)` — the sieve as a *total-differential Action*, E7a-verified exact at reachable scale (exact integer arithmetic; the zeta-side twin is the E7a Euler action). **STATUS U1a (2026-10-25): VERIFIED EXACT** on 42 configurations (z ≤ 31, x ≤ 10^7, χ = 1 and χ = (·/4)) — with the refinement that the multiplicative side is `Σ_{d|P̄} μ(d)χ(d) S_χ(⌊x/d⌋)` with the character prefix S_χ (the ⌊x/d⌋ form is the PRINCIPAL specialization); for non-principal χ the whole quantity is a bounded exact integer (|V| ≤ 4 measured) — no grind on that orbit at all. | **U1a DONE** (U1b/c pending) | the recursion is textbook-true; the *verification + combined two-process identity* is the deliverable |
 | N2 | **Fourier sieve operator theorem (finite, exact)**: on `Z/NZ`, N = P̄(z) squarefree, the per-prime mark `K_p` = pointwise mult. by `1_{p∤·}` is a self-adjoint IDEMPOTENT (eigenvalues 0/1), and the marks commute; its Fourier symbol is the exact comb `F(1_{p∤·}) = N·δ_0 − (N/p)·1_{p-torsion}` (p support points: value N at the origin, −N/p on the rest of the p-torsion subgroup of the character group); the full-sieve symbol is the iterated convolution of the combs = the RAMANUJAN field `F(1_{(·,N)=1})(a) = c_N(a) = φ(N)·μ(k)/φ(k)`, k = N/gcd(a,N) — and for squarefree N this has FULL support (all N characters, 2^{π(z)} level sets; the sparse combs convolve into a dense field — the opacity lives in the convolution, not in any single chime); `φ(N)` falls out of Parseval. **CORRECTION (U2 run, 0172, 2026-10-25):** the earlier draft's `DFT(1_{units}) = (1/P̄)·1_{Ĝ[P̄-torsion]}` was WRONG at measurement (it asserted a torsion-subspace support; the measured field is full-support Ramanujan — see tmp/kcs2_out.txt). | **U2 MEASURED (0172); LEAN WAVE-1 GREEN (0175: SieveAction.lean builds, 8706 jobs)** | finite exact algebra, exact-integer right-hand sides; the *chime-comb + full-Ramanujan-field package with the sparsity→density reading* is new here |
-| N3 | **Sieve orbit width = the parity gap**, stated as the orbit-2 analogue of `surjWidth`: local reading (per-hop survivors) vs global (final structure); width = measured first-order upper/lower sieve gap; parity = the opacity; anchor = the zeta/L-side (partial). | U4: item (a) **DONE (0180)** (Legendre exact identity, theorem form, SieveOrbit.lean); items (b) width-number measure + (c) parity/anchor statement pending | **Scoped honestly**: Legendre exactness is now machine-proved; the parity correspondence remains a *structural statement*, not a new barrier theorem |
+| N3 | **Sieve orbit width = the parity gap**, stated as the orbit-2 analogue of `surjWidth`: local reading (per-hop survivors) vs global (final structure); width = measured first-order upper/lower sieve gap; parity = the opacity; anchor = the zeta/L-side (partial). | U4: item (a) **DONE (0180)** (Legendre exact identity, theorem form, SieveOrbit.lean); item (b) **MEASURED (0181)** (the width number W/(xV) = 2.10→10.12 in z and the position ρ = 0.84→0.67, x-stable, exact sandwich L1 ≤ Φ ≤ U2 on all rows); item (c) parity statement pending | **Scoped honestly**: Legendre exactness is now machine-proved; the width number is measured; the parity correspondence remains a *structural statement*, not a new barrier theorem |
 | N4 | **Two-together next-gap-class prediction**: `predicted(class) ∝ Σ W(2k) e^{−2k/ln X}` predicts the mod-4 (and mod-30) gap-class frequencies at reachable X, beating (i) naive uniform and (ii) one-channel baselines, with a margin log. **STATUS U3 (2026-10-25): MEASURED** at X = 10^7/10^8: measured 0.564864/0.556519 (CI ±0.0012/±0.0008), two-together 0.555808/0.550315, one-channel 0.500000 — the two-together model explains ~90% of the measured bias and beats the one-channel by ~5.0 points; the strict-CI gate (|meas − model| < CI) is NOT yet met (0.0062 ≈ 7.7·se at 1e8 — arithmetically corrected below). **UPDATED U3b (2026-10-25):** three-channel decomposition at X = 1e7/1e8/3e8/1e9 (exact sieve): u3-only 0.555808/0.550315/0.548097/0.545905; LOS-pair (1+δ)/2 0.550123/0.545670/0.543841/0.542016 (the anchor's leading term, verified); naive composed (1±δ)·w·e^{−2k/L} 0.604759/0.595110/0.591169/0.587248 — **ruled out at all four scales** (|z| up to 519). Strict-CI gate still NOT met: u3-only residuals +0.009056/+0.006204/+0.005714/+0.005167 with z = 14.9/30.0/46.3/74.1 (the U3 "7.7·se" was a double-discount: the printed CI half-width IS 1.96·se, so z = diff/se directly — corrected). New named finding: the **transfer coefficient** α(X) = 0.18332/0.13743/0.13170/0.12412 (decaying) — the pair bias transfers DILUTED into the consecutive-gap census, with measured ≈ u3 + 2f(1−f)·α·δ to first order at every scale (2f(1−f) ≈ 0.495 is the class-variance of the ratio). U3c = derive the transfer mechanism and/or the next α decade (3e9/1e10). | **U3b DONE** (gate still open; U3c named) | a prime-gap **class statistic** — **not** an exact next-prime oracle (boundary stated in §6) |
 
 ## 4. What "cancels" and what is hopped (named, concretely)
@@ -366,6 +366,37 @@ wiki on each green gate. The in-tree frontier (`Z78C`, hOffC) is
   machine-checked theorem chain end to end: operator package ->
   identity -> comb -> Ramanujan field -> inclusion-exclusion ->
   multiplicativity -> full support -> census -> Parseval.
+- **U4(b) MEASURED (2026-10-26, 0181):** `scripts/rh/kcs4b_width_number.py`
+  (output `tmp/kcs4b_out.txt`) states and measures the
+  **first-order upper/lower sieve gap** at reachable z (the N3
+  "width number"), pure exact integers over x ∈ {2e5, 1e6..1e10}
+  and π(z) = 4..20 (z ≤ 71), 66 rows in 7s. Definitions: the
+  level-1 lower estimate L1 = x − Σ_{p≤z}⌊x/p⌋, the level-1 upper
+  estimate U2 = L1 + Σ_{p<q≤z}⌊x/pq⌋, width W = U2 − L1
+  (W is exactly the pairwise mass), main term xV(z) = x·∏(1−1/p),
+  and the exact count Φ from the 0180 object. Measured facts:
+  (i) the EXACT SANDWICH L1 ≤ Φ ≤ U2 holds on all 66 rows (0
+  violations) — the discrete level-1 upper/lower sieve property,
+  exact, and named as the next formal unit (Lean `level1_sandwich`);
+  (ii) the Φ cell is triple-checked EXACT (full-Möbius-sum =
+  Legendre recursion = brute force at 2e5, 11/11) — the measured
+  twin of the 0180 theorem; (iii) the width number W/(xV) grows in
+  z: 2.1041 (z=7) → 10.1249 (z=71) — the main term is a shrinking
+  share of the level-1 band; (iv) the POSITION ρ = (Φ−L1)/W of the
+  exact count inside the band is x-stable to ~1e-6 and decreases in
+  z: ρ = 0.84158 (z=7) → 0.67288 (z=71) (ρ0 = Φ/U2: 0.75000 →
+  0.23191) — the exact count sits consistently ABOVE the band's
+  midpoint at reachable z; this is the first number for the N3
+  "parity = the opacity" reading (the width is measured AND the
+  exact position inside it is measured — the level-1 estimates
+  themselves carry no position information); (v) the remainder
+  Φ − xV stays ≤ 1194.6 in absolute value at the largest z vs the
+  classical worst case 2^20 − 1 = 1048575 (877× margin, the grind
+  not reached, twin of the U1a remainder table). No RH claim:
+  finite sieve combinatorics, exact integers.
+- **U4(c) PENDING:** the parity/anchor correspondence with orbit-1,
+  to be stated marked `-- structural, not a barrier theorem`, with
+  the 0181 width/position numbers as its measured anchor.
 - **U4a GREEN (2026-10-26, 0180):** NEW file `SieveOrbit.lean`
   (namespace `SieveOrbit`) builds (0 errors; lake 8706 targeted /
   17450 full) with the **LEGENDRE EXACT identity in theorem form**
