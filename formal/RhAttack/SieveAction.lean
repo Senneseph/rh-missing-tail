@@ -1352,4 +1352,622 @@ theorem raman_full_support {N : ℕ} (hN : 1 < N) (hqs : Squarefree N) (a : Fin 
 
 set_option maxHeartbeats 200000
 
+-- (C) Wave-2 C: level census + parseval units.
+-- Level census: the fiber of a -> N / gcd(a, N) over k (k | N) has
+-- exactly phi(k) points: bijection with {u < k : (u, k) = 1} via
+-- a = (N/k) * u.
+
+theorem level_census (N k : ℕ) (hN : 1 < N) (hk : k ∣ N) :
+    (Finset.filter (fun a : Fin N => N / Nat.gcd a.val N = k) Finset.univ).card =
+      Nat.totient k := by
+  let g0 := N / k
+  have hN0 : 0 < N := by omega
+  have hkg : 0 < k := Nat.pos_of_dvd_of_pos hk hN0
+  have hNm : N = k * g0 := by
+    unfold g0
+    exact (Nat.mul_div_cancel' hk).symm
+  have hg0 : 0 < g0 := by
+    unfold g0
+    exact Nat.div_pos (Nat.le_of_dvd hN0 hk) hkg
+  let sset : Finset (Fin N) :=
+    Finset.filter (fun a => N / Nat.gcd a.val N = k) Finset.univ
+  let tset : Finset ℕ :=
+    Finset.filter (fun u => Nat.Coprime k u) (Finset.range k)
+  -- gcd(a, N) = N / k for every a in the fiber
+  have hg0eq (a : Fin N) (ha : a ∈ sset) : Nat.gcd a.val N = g0 := by
+    let g := Nat.gcd a.val N
+    let hklev := (Finset.mem_filter.mp ha).2
+    have hmdc : g * (N / g) = N :=
+      Nat.mul_div_cancel' (Nat.gcd_dvd_right a.val N)
+    rw [hklev] at hmdc
+    have hNm4 : N = k * g := by rw [← hmdc, Nat.mul_comm]
+    have heqk : k * g = k * g0 := by rw [← hNm4, hNm]
+    exact Nat.mul_left_cancel hkg heqk
+  have hbij : sset.card = tset.card :=
+    Finset.card_bij
+      (fun a (_ha : a ∈ sset) => a.val / g0)
+      (fun a ha =>
+        let hklev := (Finset.mem_filter.mp ha).2
+        have hl : a.val / g0 < k := by
+          apply Nat.div_lt_of_lt_mul
+          simpa [hNm, Nat.mul_comm] using (a.isLt)
+        have hg0dva : g0 ∣ a.val := by
+          have hgd : Nat.gcd a.val N ∣ a.val := Nat.gcd_dvd_left a.val N
+          rwa [hg0eq a ha] at hgd
+        let u := a.val / g0
+        have hgu : Nat.gcd (a.val / g0) k = 1 := by
+          have hu : a.val = g0 * u := (Nat.mul_div_cancel' hg0dva).symm
+          have hbase := hg0eq a ha
+          rw [hu] at hbase
+          have hbase2 : Nat.gcd (g0 * u) N = g0 := hbase
+          have htmp : (g0 * u).gcd N = (g0 * u).gcd (k * g0) :=
+            congrArg (Nat.gcd (g0 * u)) hNm
+          have hbase3 : (g0 * u).gcd (k * g0) = g0 := by
+            rw [← htmp]
+            exact hbase2
+          rw [show (k * g0 : ℕ) = g0 * k from by ring] at hbase3
+          rw [Nat.gcd_mul_left g0 u k] at hbase3
+          refine Nat.mul_left_cancel hg0 ?_
+          simpa [Nat.mul_one] using hbase3
+        have hgu2 : Nat.Coprime k (a.val / g0) := by
+          simpa [Nat.gcd_comm] using hgu
+        Finset.mem_filter.mpr ⟨Finset.mem_range.mpr hl, hgu2⟩)
+      (fun a₁ ha₁ a₂ ha₂ heq => by
+        have hgd01 : g0 ∣ a₁.val := by
+          have hgd : Nat.gcd a₁.val N ∣ a₁.val := Nat.gcd_dvd_left a₁.val N
+          rwa [hg0eq a₁ ha₁] at hgd
+        have hgd02 : g0 ∣ a₂.val := by
+          have hgd : Nat.gcd a₂.val N ∣ a₂.val := Nat.gcd_dvd_left a₂.val N
+          rwa [hg0eq a₂ ha₂] at hgd
+        have h1 : a₁.val = g0 * (a₁.val / g0) := (Nat.mul_div_cancel' hgd01).symm
+        have h2 : a₂.val = g0 * (a₂.val / g0) := (Nat.mul_div_cancel' hgd02).symm
+        have hval : a₁.val = a₂.val := by
+          calc a₁.val
+            _ = g0 * (a₁.val / g0) := h1
+            _ = g0 * (a₂.val / g0) := by rw [heq]
+            _ = a₂.val := h2.symm
+        exact Fin.ext hval)
+      (fun b hb =>
+        let hmem := Finset.mem_filter.mp hb
+        let a : Fin N :=
+          ⟨g0 * b, by
+            simpa [hNm, Nat.mul_comm] using
+              (Nat.mul_lt_mul_of_pos_left (Finset.mem_range.mp hmem.1) hg0)⟩
+        have hgd : Nat.gcd (g0 * b) N = g0 := by
+          rw [hNm, show (k * g0 : ℕ) = g0 * k from by ring,
+            Nat.gcd_mul_left g0 b k,
+            show (b : ℕ).gcd k = 1 from by simpa [Nat.gcd_comm] using hmem.2,
+            mul_one]
+        have ha : a ∈ sset :=
+          Finset.mem_filter.mpr ⟨Finset.mem_univ _, by
+            rw [hgd]
+            exact Nat.div_eq_of_eq_mul_left hg0 hNm⟩
+        ⟨a, ha,
+          Nat.mul_left_cancel hg0 (Nat.mul_div_cancel' (Nat.dvd_mul_right g0 b))⟩)
+  dsimp only [Nat.totient]
+  exact hbij
+
+-- (D) Wave-2 D: Parseval for the DFT.
+--   sum_a normSq (dft N f a) = N * sum_m normSq (f m)
+-- The kernel is rou_sum_orthogonality plus the fact that the inverse of a
+-- root of unity is a positive power (omega^{-k} = omega^{k(N-1)}).
+-- Note: in the pinned mathlib `Complex.abs` no longer exists (deprecated in
+-- PR #21995, removed later); the norm `‖·‖` is the modern object, with
+-- Complex.norm_pow / Complex.normSq_eq_norm_sq / Complex.norm_exp.
+
+theorem parseval_units {N : ℕ} (hN : 1 < N) (f : Fin N → ℂ) :
+    (∑ a : Fin N, Complex.normSq (dft N (Nat.le_of_lt hN) f a)) =
+      (N : ℝ) * (∑ m : Fin N, Complex.normSq (f m)) := by
+  let ω := rou N
+  have hprim : IsPrimitiveRoot ω N := primitive_rou N hN
+  have hωN1 : ω ^ N = 1 := hprim.pow_eq_one
+  let αexp := (2 * Real.pi * I * (1 / (N : ℝ)) : ℂ)
+  have hωe : ω = exp αexp := by
+    unfold ω
+    dsimp only [rou]
+    try rfl
+  have hω0 : ω ≠ 0 := by simpa [hωe] using Complex.exp_ne_zero αexp
+  -- the exponent is pure imaginary
+  have hαr : αexp.re = 0 := by
+    unfold αexp
+    simp [Complex.mul_re, Complex.mul_im, Complex.ofReal_re,
+      Complex.ofReal_im, Complex.I_re, Complex.I_im]
+    try ring
+  -- |omega| = 1 and |omega^k| = 1
+  have habsω : ‖(ω : ℂ)‖ = 1 := by
+    rw [hωe, Complex.norm_exp, hαr]
+    exact Real.exp_zero
+  have hnorm1 (k : ℕ) : ‖(ω : ℂ) ^ k‖ = 1 := by
+    rw [hωe, ← Complex.exp_nat_mul αexp k, Complex.norm_exp]
+    have hkr : (((k : ℂ) * αexp).re : ℝ) = 0 := by
+      simp [Complex.mul_re, hαr]
+      try ring
+    rw [hkr, Real.exp_zero]
+  -- inverse of a root of unity is a positive power
+  have hinv (k : ℕ) : (ω ^ k : ℂ)⁻¹ = ω ^ (k * (N - 1)) := by
+    have hmulone : (ω ^ k) * ω ^ (k * (N - 1)) = 1 := by
+      calc (ω ^ k) * ω ^ (k * (N - 1))
+        _ = ω ^ (k + k * (N - 1)) := (pow_add ω k (k * (N - 1))).symm
+        _ = ω ^ (k * N) := by
+          rw [show (k + k * (N - 1) : ℕ) = k * ((N - 1 : ℕ) + 1) from by ring,
+            show (k * ((N - 1 : ℕ) + 1) : ℕ) = k * N from by
+              rw [Nat.sub_add_cancel (Nat.le_of_lt hN)]]
+        _ = ω ^ (N * k) := by rw [show (k * N : ℕ) = N * k from by ring]
+        _ = (ω ^ N) ^ k := by rw [pow_mul]
+        _ = 1 ^ k := by rw [hωN1]
+        _ = 1 := one_pow k
+    have hnonz : (ω : ℂ) ^ k ≠ 0 := pow_ne_zero k hω0
+    calc (ω ^ k : ℂ)⁻¹
+      _ = (ω ^ k : ℂ)⁻¹ * 1 := (mul_one _).symm
+      _ = (ω ^ k : ℂ)⁻¹ * ((ω ^ k) * ω ^ (k * (N - 1))) := by rw [hmulone]
+      _ = ((ω ^ k : ℂ)⁻¹ * (ω ^ k)) * ω ^ (k * (N - 1)) := by rw [mul_assoc]
+      _ = 1 * ω ^ (k * (N - 1)) := by rw [inv_mul_cancel₀ hnonz]
+      _ = ω ^ (k * (N - 1)) := one_mul _
+  -- star of a root of unity is its inverse (|omega^k| = 1)
+  have hstarinv (k : ℕ) : star (ω ^ k) = (ω ^ k : ℂ)⁻¹ := by
+    have hnorm1 : ‖(ω : ℂ) ^ k‖ = 1 := hnorm1 k
+    have hzre (z : ℂ) : (star z).re = z.re := by
+      simp [Complex.conj_re]
+    have hzim (z : ℂ) : (star z).im = -z.im := by
+      simp [Complex.conj_im]
+    have hgen (z : ℂ) : z * star z = (‖z‖ ^ 2 : ℂ) := by
+      apply (Complex.ext_iff).mpr
+      constructor
+      · have h1 : (z * star z).re = z.re * z.re + z.im * z.im := by
+          rw [Complex.mul_re, hzre, hzim]
+          ring
+        have h2 : ((‖z‖ ^ 2 : ℂ)).re = (‖z‖ : ℝ) ^ 2 := by
+          rw [pow_two, Complex.mul_re, Complex.ofReal_re, Complex.ofReal_im]
+          ring
+        rw [h1, h2, Complex.sq_norm z]
+        exact (Complex.normSq_apply z).symm
+      · have h1 : (z * star z).im = 0 := by
+          rw [Complex.mul_im, hzre, hzim]
+          ring
+        have h2 : ((‖z‖ ^ 2 : ℂ)).im = 0 := by
+          rw [pow_two, Complex.mul_im, Complex.ofReal_re, Complex.ofReal_im]
+          ring
+        rw [h1, h2]
+    have hzz : (ω ^ k) * star (ω ^ k) = (‖(ω : ℂ) ^ k‖ ^ 2 : ℂ) :=
+      hgen (ω ^ k)
+    have hz : (ω ^ k) * star (ω ^ k) = 1 := by
+      rw [hzz, hnorm1]
+      norm_num
+    have hnonz : (ω : ℂ) ^ k ≠ 0 := pow_ne_zero k hω0
+    calc star (ω ^ k)
+      _ = ((ω ^ k : ℂ)⁻¹ * (ω ^ k)) * star (ω ^ k) := by
+        conv_lhs =>
+          rw [← one_mul (star (ω ^ k)), ← inv_mul_cancel₀ hnonz]
+      _ = (ω ^ k : ℂ)⁻¹ * ((ω ^ k) * star (ω ^ k)) := by rw [mul_assoc]
+      _ = (ω ^ k : ℂ)⁻¹ * 1 := by rw [hz]
+      _ = (ω ^ k : ℂ)⁻¹ := mul_one _
+  -- kernel: sum_a omega^{m a} (omega^{n a})^{-1} = if m = n then N else 0
+  have hkernel (m n : Fin N) :
+      (∑ a : Fin N, ω ^ (m.val * a.val) * ((ω ^ (n.val * a.val)) : ℂ)⁻¹) =
+        if m = n then (N : ℂ) else 0 := by
+    let kK := m.val + n.val * (N - 1)
+    have hS : (∑ a : Fin N, ω ^ (m.val * a.val) * ((ω ^ (n.val * a.val)) : ℂ)⁻¹) =
+        (∑ a : Fin N, ω ^ (kK * a.val)) := by
+      apply Finset.sum_congr rfl
+      intro a _
+      rw [hinv (n.val * a.val)]
+      rw [(pow_add ω (m.val * a.val) (n.val * a.val * (N - 1))).symm]
+      have hexp : (m.val * a.val + n.val * a.val * (N - 1) : ℕ) =
+          (kK * a.val : ℕ) := by
+        dsimp only [kK]
+        ring
+      rw [hexp]
+    rw [hS]
+    have hthm : (∑ a : Fin N, ω ^ (a.val * kK)) =
+        (if (N : ℕ) ∣ kK then (N : ℂ) else 0) := by
+      have hthm0 : (∑ a : Fin N, (rou N : ℂ) ^ (a.val * kK)) =
+          (if (N : ℕ) ∣ kK then (N : ℂ) else 0) :=
+        rou_sum_orthogonality (N := N) (k := kK) hN
+      have hsumω : (∑ a : Fin N, (rou N : ℂ) ^ (a.val * kK)) =
+          (∑ a : Fin N, ω ^ (a.val * kK)) := by
+        apply Finset.sum_congr rfl
+        intro a _
+        unfold ω
+        rfl
+      rw [hsumω] at hthm0
+      exact hthm0
+    have hsumeq : (∑ a : Fin N, ω ^ (kK * a.val)) =
+        (∑ a : Fin N, ω ^ (a.val * kK)) := by
+      apply Finset.sum_congr rfl
+      intro a _
+      rw [show (kK * a.val : ℕ) = a.val * kK from by ring]
+    rw [hsumeq, hthm]
+    by_cases hm : m = n
+    · have hd : (N : ℕ) ∣ kK := by
+        dsimp only [kK] at *
+        rw [hm]
+        have hprod : (n.val + n.val * (N - 1) : ℕ) = (n.val * N : ℕ) := by
+          rw [show (n.val + n.val * (N - 1) : ℕ) =
+            n.val * ((N - 1 : ℕ) + 1) from by ring,
+            Nat.sub_add_cancel (Nat.le_of_lt hN)]
+        rw [hprod]
+        exact Nat.dvd_mul_left N n.val
+      rw [if_pos hd]
+      rw [if_pos hm]
+    · have hnd : ¬(N : ℕ) ∣ kK := by
+        dsimp only [kK] at *
+        intro h
+        obtain ⟨q, hq⟩ := h
+        have hqz : ((m.val : ℤ) + (n.val : ℤ) * ((N : ℤ) - 1)) =
+            (N : ℤ) * (q : ℤ) := by
+          have hq1 : ((m.val + n.val * (N - 1) : ℕ) : ℤ) =
+              ((N * q : ℕ) : ℤ) := by exact_mod_cast hq
+          have hsplit : ((m.val + n.val * (N - 1) : ℕ) : ℤ) =
+              (m.val : ℤ) + (n.val : ℤ) * ((N - 1 : ℕ) : ℤ) := by
+            rw [Nat.cast_add (m.val : ℕ) (n.val * (N - 1)),
+                Nat.cast_mul (n.val : ℕ) (N - 1)]
+          rw [hsplit, Nat.cast_sub (Nat.le_of_lt hN)] at hq1
+          rw [Nat.cast_mul (N : ℕ) (q : ℕ)] at hq1
+          exact hq1
+        have hmod0 : ((m.val : ℤ) + (n.val : ℤ) * ((N : ℤ) - 1)) %
+            (N : ℤ) = 0 := by
+          rw [hqz]
+          rw [Int.mul_emod (N : ℤ) (q : ℤ) (N : ℤ),
+              Int.emod_self (a := (N : ℤ)), zero_mul,
+              Int.zero_emod (N : ℤ)]
+        have hNterm : ((m.val : ℤ) + (n.val : ℤ) * ((N : ℤ) - 1)) =
+            ((m.val : ℤ) - (n.val : ℤ)) + ((n.val : ℤ) * (N : ℤ)) := by
+          ring
+        have hmodN : ((m.val : ℤ) + (n.val : ℤ) * ((N : ℤ) - 1)) %
+            (N : ℤ) = ((m.val : ℤ) - (n.val : ℤ)) % (N : ℤ) := by
+          rw [hNterm]
+          have hNk : ((n.val : ℤ) * (N : ℤ)) % (N : ℤ) = 0 := by
+            rw [Int.mul_emod (n.val : ℤ) (N : ℤ) (N : ℤ),
+              Int.emod_self (a := (N : ℤ)), mul_zero,
+              Int.zero_emod (N : ℤ)]
+          rw [Int.add_emod ((m.val : ℤ) - (n.val : ℤ))
+            ((n.val : ℤ) * (N : ℤ)) (N : ℤ), hNk, add_zero,
+            Int.emod_emod ((m.val : ℤ) - (n.val : ℤ)) (N : ℤ)]
+        have hres : ((m.val : ℤ) - (n.val : ℤ)) % (N : ℤ) = 0 := by
+          rw [← hmodN, hmod0]
+        obtain ⟨t, ht⟩ := (Int.dvd_iff_emod_eq_zero).mpr hres
+        have hsmall : Int.natAbs ((m.val : ℤ) - (n.val : ℤ)) < (N : ℕ) := by
+          by_cases hmn : (m.val : ℕ) ≥ (n.val : ℕ)
+          · rw [Int.natAbs_natCast_sub_natCast_of_ge hmn]
+            apply Nat.lt_of_le_of_lt (Nat.sub_le (m.val) (n.val))
+            exact m.isLt
+          · have hlt : (m.val : ℕ) < (n.val : ℕ) := by
+              omega
+            have hneg : ((m.val : ℤ) - (n.val : ℤ)) =
+                -((n.val : ℤ) - (m.val : ℤ)) := by ring
+            rw [hneg, Int.natAbs_neg,
+                Int.natAbs_natCast_sub_natCast_of_ge (Nat.le_of_lt hlt)]
+            apply Nat.lt_of_le_of_lt (Nat.sub_le (n.val) (m.val))
+            exact n.isLt
+        have hge : (N : ℕ) ≤ Int.natAbs ((m.val : ℤ) - (n.val : ℤ)) := by
+          by_cases htnz : (t : ℤ) = 0
+          · rw [htnz, mul_zero] at ht
+            have heqmn : (m.val : ℤ) = (n.val : ℤ) := sub_eq_zero.mp ht
+            have hmn : m = n := Fin.eq_of_val_eq (Nat.cast_inj.mp heqmn)
+            contradiction
+          · have habsd : Int.natAbs ((m.val : ℤ) - (n.val : ℤ)) =
+              (N : ℕ) * Int.natAbs (t : ℤ) := by
+              rw [ht, Int.natAbs_mul]
+              have hNN : Int.natAbs (N : ℤ) = (N : ℕ) :=
+                Nat.cast_inj.mp (Int.natAbs_of_nonneg (by
+                  norm_cast
+                  exact Nat.zero_le N))
+              rw [hNN]
+            have ht1 : 1 ≤ Int.natAbs (t : ℤ) :=
+              Nat.succ_le_of_lt (Int.natAbs_pos.mpr htnz)
+            calc (N : ℕ)
+              _ = N * 1 := by ring
+              _ ≤ N * Int.natAbs (t : ℤ) := Nat.mul_le_mul_left N ht1
+              _ = Int.natAbs ((m.val : ℤ) - (n.val : ℤ)) := habsd.symm
+        exact Nat.lt_irrefl N (Nat.lt_of_le_of_lt hge hsmall)
+      rw [if_neg hnd]
+      rw [if_neg hm]
+  -- dft as a sum in powers of (omega^m)
+  have hD (a : Fin N) :
+      dft N (Nat.le_of_lt hN) f a = ∑ m : Fin N, f m * (ω ^ m.val) ^ a.val := by
+    dsimp only [dft, char_pow]
+    unfold ω
+    apply Finset.sum_congr rfl
+    intro m _
+    rw [← pow_mul]
+  have hst (a : Fin N) :
+      star (∑ m : Fin N, f m * (ω ^ m.val) ^ a.val) =
+        ∑ m : Fin N, star (f m) * (star (ω ^ m.val)) ^ a.val := by
+    rw [star_sum]
+    apply Finset.sum_congr rfl
+    intro m _
+    rw [star_mul, star_pow, mul_comm]
+  -- stage 1: dft * star (dft)
+  have hS1 : (∑ a : Fin N, (dft N (Nat.le_of_lt hN) f a) *
+      star (dft N (Nat.le_of_lt hN) f a)) =
+      (∑ a : Fin N, (∑ m : Fin N, f m * (ω ^ m.val) ^ a.val) *
+        (∑ n : Fin N, star (f n) * (star (ω ^ n.val)) ^ a.val)) := by
+    apply Finset.sum_congr rfl
+    intro a _
+    rw [hD a, hst a]
+  -- stage 2: expand the product of sums
+  let X : Fin N → Fin N → Fin N → ℂ :=
+    fun a m n => (f m * (ω ^ m.val) ^ a.val) *
+      (star (f n) * (star (ω ^ n.val)) ^ a.val)
+  have hS2 : (∑ a : Fin N, (∑ m : Fin N, f m * (ω ^ m.val) ^ a.val) *
+      (∑ n : Fin N, star (f n) * (star (ω ^ n.val)) ^ a.val)) =
+      (∑ a : Fin N, ∑ m : Fin N, ∑ n : Fin N, X a m n) := by
+    apply Finset.sum_congr rfl
+    intro a _
+    rw [Finset.sum_mul_sum (Finset.univ : Finset (Fin N))
+      (Finset.univ : Finset (Fin N))
+      (fun m : Fin N => f m * (ω ^ m.val) ^ a.val)
+      (fun n : Fin N => star (f n) * (star (ω ^ n.val)) ^ a.val)]
+  -- stage 3: change the order of summation
+  have hfub : (∑ a : Fin N, ∑ m : Fin N, ∑ n : Fin N, X a m n) =
+      (∑ m : Fin N, ∑ n : Fin N, ∑ a : Fin N, X a m n) := by
+    have huprod1 : (Finset.univ : Finset (Fin N × Fin N)) =
+        (Finset.univ ×ˢ Finset.univ : Finset (Fin N × Fin N)) := by
+      ext _
+      simp
+    have huprod2 : (Finset.univ : Finset (Fin N × (Fin N × Fin N))) =
+        (Finset.univ ×ˢ Finset.univ :
+          Finset (Fin N × (Fin N × Fin N))) := by
+      ext _
+      simp
+    have huprod3 : (Finset.univ : Finset ((Fin N × Fin N) × Fin N)) =
+        (Finset.univ ×ˢ Finset.univ :
+          Finset ((Fin N × Fin N) × Fin N)) := by
+      ext _
+      simp
+    -- reindex LHS: nested sum over (a, (m, n))
+    have hL : (∑ a : Fin N, ∑ m : Fin N, ∑ n : Fin N, X a m n) =
+        (∑ t : Fin N × (Fin N × Fin N), X t.1 t.2.1 t.2.2) := by
+      have hL1 : (∑ a : Fin N, ∑ m : Fin N, ∑ n : Fin N, X a m n) =
+          (∑ a : Fin N, (∑ p : Fin N × Fin N, X a p.1 p.2)) := by
+        apply Finset.sum_congr rfl
+        intro a _
+        have hmid : (∑ m : Fin N, ∑ n : Fin N, X a m n : ℂ) =
+            (∑ p : Fin N × Fin N, X a p.1 p.2) := by
+          rw [show (∑ p : Fin N × Fin N, X a p.1 p.2 : ℂ) =
+              (∑ p ∈ (Finset.univ ×ˢ Finset.univ : Finset (Fin N × Fin N)),
+                X a p.1 p.2) from by
+            rw [show (∑ p : Fin N × Fin N, X a p.1 p.2 : ℂ) =
+                (∑ p ∈ (Finset.univ : Finset (Fin N × Fin N)),
+                  X a p.1 p.2) from by rfl]
+            rw [huprod1]
+            try rfl]
+          rw [Finset.sum_product (Finset.univ : Finset (Fin N))
+            (Finset.univ : Finset (Fin N))
+            (fun p : Fin N × Fin N => X a p.1 p.2)]
+          try rfl
+        exact hmid
+      have hL2 : (∑ a : Fin N, (∑ p : Fin N × Fin N, X a p.1 p.2)) =
+          (∑ t : Fin N × (Fin N × Fin N), X t.1 t.2.1 t.2.2) := by
+        rw [show (∑ a : Fin N, (∑ p : Fin N × Fin N, X a p.1 p.2)) =
+            (∑ a ∈ (Finset.univ : Finset (Fin N)),
+              ∑ p ∈ (Finset.univ : Finset (Fin N × Fin N)),
+                (fun ap : Fin N × (Fin N × Fin N) =>
+                  X ap.1 ap.2.1 ap.2.2) (a, p)) from by rfl]
+        rw [← Finset.sum_product (Finset.univ : Finset (Fin N))
+          (Finset.univ : Finset (Fin N × Fin N))
+          (fun ap : Fin N × (Fin N × Fin N) => X ap.1 ap.2.1 ap.2.2)]
+        rw [show (∑ t : Fin N × (Fin N × Fin N), X t.1 t.2.1 t.2.2 : ℂ) =
+            (∑ t ∈ (Finset.univ ×ˢ Finset.univ :
+              Finset (Fin N × (Fin N × Fin N))), X t.1 t.2.1 t.2.2) from by
+          rw [show (∑ t : Fin N × (Fin N × Fin N), X t.1 t.2.1 t.2.2 : ℂ) =
+              (∑ t ∈ (Finset.univ : Finset (Fin N × (Fin N × Fin N))),
+                X t.1 t.2.1 t.2.2) from by rfl]
+          rw [huprod2]]
+      rw [hL1, hL2]
+    -- reindex RHS: nested sum over ((m, n), a)
+    have hR : (∑ m : Fin N, ∑ n : Fin N, ∑ a : Fin N, X a m n) =
+        (∑ t : (Fin N × Fin N) × Fin N, X t.1.2 t.2 t.1.1) := by
+      have hR1 : (∑ m : Fin N, ∑ n : Fin N, ∑ a : Fin N, X a m n) =
+          (∑ m : Fin N, (∑ p : Fin N × Fin N, X p.2 m p.1)) := by
+        apply Finset.sum_congr rfl
+        intro m _
+        have hmid : (∑ n : Fin N, ∑ a : Fin N, X a m n : ℂ) =
+            (∑ p : Fin N × Fin N, X p.2 m p.1) := by
+          rw [show (∑ p : Fin N × Fin N, X p.2 m p.1 : ℂ) =
+              (∑ p ∈ (Finset.univ ×ˢ Finset.univ : Finset (Fin N × Fin N)),
+                X p.2 m p.1) from by
+            rw [show (∑ p : Fin N × Fin N, X p.2 m p.1 : ℂ) =
+                (∑ p ∈ (Finset.univ : Finset (Fin N × Fin N)),
+                  X p.2 m p.1) from by rfl]
+            rw [huprod1]
+            try rfl]
+          rw [Finset.sum_product (Finset.univ : Finset (Fin N))
+            (Finset.univ : Finset (Fin N))
+            (fun p : Fin N × Fin N => X p.2 m p.1)]
+          try rfl
+        exact hmid
+      have hR2 : (∑ m : Fin N, (∑ p : Fin N × Fin N, X p.2 m p.1)) =
+          (∑ t : (Fin N × Fin N) × Fin N, X t.1.2 t.2 t.1.1) := by
+        rw [show (∑ m : Fin N, (∑ p : Fin N × Fin N, X p.2 m p.1)) =
+            (∑ m ∈ (Finset.univ : Finset (Fin N)),
+              ∑ p ∈ (Finset.univ : Finset (Fin N × Fin N)),
+                X p.2 m p.1) from by rfl]
+        rw [Finset.sum_comm]
+        rw [show (∑ p ∈ (Finset.univ : Finset (Fin N × Fin N)),
+            (∑ m ∈ (Finset.univ : Finset (Fin N)), X p.2 m p.1)) =
+            (∑ p ∈ (Finset.univ : Finset (Fin N × Fin N)),
+              (∑ m ∈ (Finset.univ : Finset (Fin N)),
+                (fun pm : (Fin N × Fin N) × Fin N =>
+                  X pm.1.2 pm.2 pm.1.1) (p, m))) from by
+          apply Finset.sum_congr rfl
+          intro p _
+          apply Finset.sum_congr rfl
+          intro m _
+          rfl]
+        rw [← Finset.sum_product (Finset.univ : Finset (Fin N × Fin N))
+          (Finset.univ : Finset (Fin N))
+          (fun pm : (Fin N × Fin N) × Fin N => X pm.1.2 pm.2 pm.1.1)]
+        rw [show (∑ t : (Fin N × Fin N) × Fin N, X t.1.2 t.2 t.1.1 : ℂ) =
+            (∑ t ∈ (Finset.univ ×ˢ Finset.univ :
+              Finset ((Fin N × Fin N) × Fin N)), X t.1.2 t.2 t.1.1) from by
+          rw [show (∑ t : (Fin N × Fin N) × Fin N, X t.1.2 t.2 t.1.1 : ℂ) =
+              (∑ t ∈ (Finset.univ : Finset ((Fin N × Fin N) × Fin N)),
+                X t.1.2 t.2 t.1.1) from by rfl]
+          rw [huprod3]]
+        try apply Finset.sum_congr rfl
+        try intro pm _
+        try rfl
+      rw [hR1, hR2]
+    rw [hL, hR]
+    apply Finset.sum_bij
+      (fun t (_ : t ∈ (Finset.univ : Finset (Fin N × (Fin N × Fin N)))) =>
+        ((⟨t.2.2, t.1⟩ : Fin N × Fin N), t.2.1))
+    · intro t _
+      exact Finset.mem_univ _
+    · intro a1 _ a2 _ heq
+      have h1 : ((⟨a1.2.2, a1.1⟩ : Fin N × Fin N), a1.2.1) =
+                ((⟨a2.2.2, a2.1⟩ : Fin N × Fin N), a2.2.1) := by
+        simpa using heq
+      have hz : a1.2.2 = a2.2.2 := by
+        have := congrArg (fun (w : (Fin N × Fin N) × Fin N) => (w.1).1) h1
+        simpa using this
+      have hx : a1.1 = a2.1 := by
+        have := congrArg (fun (w : (Fin N × Fin N) × Fin N) => (w.1).2) h1
+        simpa using this
+      have hy : a1.2.1 = a2.2.1 := by
+        have := congrArg (fun (w : (Fin N × Fin N) × Fin N) => w.2) h1
+        simpa using this
+      have hinner : a1.2 = a2.2 := by
+        calc (a1.2 : Fin N × Fin N) = (a1.2.1, a1.2.2) := rfl
+          _ = (a2.2.1, a1.2.2) := by rw [hy]
+          _ = (a2.2.1, a2.2.2) := by rw [hz]
+          _ = a2.2 := rfl
+      calc a1 = (a1.1, a1.2) := rfl
+        _ = (a2.1, a1.2) := by rw [hx]
+        _ = (a2.1, a2.2) := by rw [hinner]
+        _ = a2 := rfl
+    · intro b hb
+      refine ⟨(⟨b.1.2, ⟨b.2, b.1.1⟩⟩ : Fin N × (Fin N × Fin N)),
+        Finset.mem_univ _, rfl⟩
+    · intro a _
+      rfl
+  -- stage 4: factor the (m, n) part out of the a-sum
+  have hS4 : (∑ m : Fin N, ∑ n : Fin N, ∑ a : Fin N, X a m n) =
+      (∑ m : Fin N, ∑ n : Fin N, (f m * star (f n)) *
+        (∑ a : Fin N, (ω ^ m.val) ^ a.val * (star (ω ^ n.val)) ^ a.val)) := by
+    apply Finset.sum_congr rfl
+    intro m _
+    apply Finset.sum_congr rfl
+    intro n _
+    have hterm (a : Fin N) : X a m n =
+        (f m * star (f n)) * ((ω ^ m.val) ^ a.val * (star (ω ^ n.val)) ^ a.val) := by
+      dsimp only [X]
+      ring
+    rw [show (∑ a : Fin N, X a m n : ℂ) =
+        (∑ a : Fin N, (f m * star (f n)) *
+          ((ω ^ m.val) ^ a.val * (star (ω ^ n.val)) ^ a.val)) from by
+      apply Finset.sum_congr rfl
+      intro a _
+      rw [hterm a]]
+    rw [← (Finset.mul_sum (Finset.univ : Finset (Fin N))
+      (fun a : Fin N => (ω ^ m.val) ^ a.val * (star (ω ^ n.val)) ^ a.val)
+      ((f m * star (f n)) : ℂ))]
+  -- stage 5: rewrite the a-sum in kernel form
+  have hS5 : (∑ m : Fin N, ∑ n : Fin N, (f m * star (f n)) *
+      (∑ a : Fin N, (ω ^ m.val) ^ a.val * (star (ω ^ n.val)) ^ a.val)) =
+      (∑ m : Fin N, ∑ n : Fin N, (f m * star (f n)) *
+        (∑ a : Fin N, ω ^ (m.val * a.val) * ((ω ^ (n.val * a.val)) : ℂ)⁻¹)) := by
+    apply Finset.sum_congr rfl
+    intro m _
+    apply Finset.sum_congr rfl
+    intro n _
+    have hinner : (∑ a : Fin N, (ω ^ m.val) ^ a.val * (star (ω ^ n.val)) ^ a.val) =
+        (∑ a : Fin N, ω ^ (m.val * a.val) * ((ω ^ (n.val * a.val)) : ℂ)⁻¹) := by
+      apply Finset.sum_congr rfl
+      intro a _
+      have h1 : (ω ^ m.val : ℂ) ^ a.val = (ω : ℂ) ^ (m.val * a.val) :=
+        (pow_mul ω (m.val) (a.val)).symm
+      have h2 : (star (ω ^ n.val)) ^ a.val =
+          ((ω ^ (n.val * a.val)) : ℂ)⁻¹ := by
+        rw [hstarinv n.val, inv_pow (ω ^ n.val : ℂ) (a.val)]
+        rw [show ((ω ^ (n.val : ℕ) : ℂ) ^ (a.val : ℕ)) = (ω : ℂ) ^ (n.val * a.val) from
+          (pow_mul ω (n.val) (a.val)).symm]
+      rw [h1, h2]
+    rw [hinner]
+  -- stage 6: apply the kernel
+  have hS6 : (∑ m : Fin N, ∑ n : Fin N, (f m * star (f n)) *
+      (∑ a : Fin N, ω ^ (m.val * a.val) * ((ω ^ (n.val * a.val)) : ℂ)⁻¹)) =
+      (∑ m : Fin N, ∑ n : Fin N, (f m * star (f n)) *
+        (if m = n then (N : ℂ) else 0)) := by
+    apply Finset.sum_congr rfl
+    intro m _
+    apply Finset.sum_congr rfl
+    intro n _
+    rw [hkernel m n]
+  -- stage 7: collapse the single nonzero (m, n) diagonal
+  have hS7 : (∑ m : Fin N, ∑ n : Fin N, (f m * star (f n)) *
+      (if m = n then (N : ℂ) else 0)) =
+      (∑ m : Fin N, (f m * star (f m)) * (N : ℂ)) := by
+    apply Finset.sum_congr rfl
+    intro m _
+    rw [Finset.sum_eq_single (a := m)
+      (fun n _ (hnm : n ≠ m) => by
+        by_cases hm : m = n
+        · exfalso
+          exact hnm hm.symm
+        · rw [if_neg hm]
+          simp)
+      (fun (hnm : m ∉ Finset.univ) => by
+        exfalso
+        exact hnm (Finset.mem_univ m))]
+    rw [if_pos (by rfl)]
+  -- the complex Parseval identity
+  have hc : (∑ a : Fin N, (dft N (Nat.le_of_lt hN) f a) *
+      star (dft N (Nat.le_of_lt hN) f a)) =
+      (N : ℂ) * (∑ m : Fin N, f m * star (f m)) := by
+    rw [hS1, hS2, hfub, hS4, hS5, hS6, hS7]
+    have hs : (∑ m : Fin N, (f m * star (f m)) * (N : ℂ)) =
+        (N : ℂ) * (∑ m : Fin N, f m * star (f m)) := by
+      rw [show (∑ m : Fin N, (f m * star (f m)) * (N : ℂ) : ℂ) =
+          (∑ m : Fin N, (N : ℂ) * (f m * star (f m))) from by
+        apply Finset.sum_congr rfl
+        intro m _
+        rw [mul_comm]]
+      rw [Finset.mul_sum (Finset.univ : Finset (Fin N))
+        (fun m : Fin N => f m * star (f m)) ((N : ℂ))]
+    rw [hs]
+  -- star-conjugation component facts for the real-part bridges
+  have hzre (z : ℂ) : (star z).re = z.re := by
+    simp [Complex.conj_re]
+  have hzim (z : ℂ) : (star z).im = -z.im := by
+    simp [Complex.conj_im]
+  -- take real parts
+  have hl : (((∑ a : Fin N, (dft N (Nat.le_of_lt hN) f a) *
+      star (dft N (Nat.le_of_lt hN) f a)) : ℂ).re : ℝ) =
+      (∑ a : Fin N, Complex.normSq (dft N (Nat.le_of_lt hN) f a)) := by
+    rw [Complex.re_sum]
+    apply Finset.sum_congr rfl
+    intro a _
+    rw [show ((dft N (Nat.le_of_lt hN) f a) *
+        star (dft N (Nat.le_of_lt hN) f a)).re =
+        Complex.normSq (dft N (Nat.le_of_lt hN) f a) from by
+      rw [Complex.mul_re, hzre, hzim,
+        Complex.normSq_apply (dft N (Nat.le_of_lt hN) f a)]
+      ring]
+  have hr : (((N : ℂ) * (∑ m : Fin N, f m * star (f m)) : ℂ).re : ℝ) =
+      (N : ℝ) * (∑ m : Fin N, Complex.normSq (f m)) := by
+    rw [Complex.mul_re,
+      show ((N : ℂ) : ℂ).re = (N : ℝ) from by simp,
+      show ((N : ℂ) : ℂ).im = (0 : ℝ) from by simp]
+    have hSre : ((∑ m : Fin N, f m * star (f m) : ℂ)).re =
+        (∑ m : Fin N, (f m * star (f m)).re) := by
+      rw [Complex.re_sum]
+    rw [hSre]
+    have hSre2 : (∑ m : Fin N, (f m * star (f m)).re) =
+        (∑ m : Fin N, Complex.normSq (f m)) := by
+      apply Finset.sum_congr rfl
+      intro m _
+      rw [show ((f m * star (f m)).re : ℝ) = Complex.normSq (f m) from by
+        rw [Complex.mul_re, hzre, hzim,
+          Complex.normSq_apply (f m)]
+        ring]
+    rw [hSre2]
+    ring
+  calc (∑ a : Fin N, Complex.normSq (dft N (Nat.le_of_lt hN) f a))
+    _ = (((∑ a : Fin N, (dft N (Nat.le_of_lt hN) f a) *
+        star (dft N (Nat.le_of_lt hN) f a)) : ℂ).re : ℝ) := hl.symm
+    _ = (((N : ℂ) * (∑ m : Fin N, f m * star (f m)) : ℂ).re : ℝ) := by rw [hc]
+    _ = (N : ℝ) * (∑ m : Fin N, Complex.normSq (f m)) := hr
+
 end SieveFourier

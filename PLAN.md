@@ -255,7 +255,12 @@ Commit a00c7d6.
    (c_N(a) ≠ 0 for squarefree N - strong induction over the
    squarefree decomposition M = p*k + prime closed form + B1 +
    nonzero product): the U2 full-support measurement as theorem.
-   Remaining Wave-2 (raman_level_census / parseval_units) staged.
+   WAVE-2 C GREEN (0179): level_census + parseval_units (the
+   Parseval identity sum_a |F[f](a)^2| = N * sum_m |f(m)^2| in
+   general form: DFT expansion + triple-sum reindexing over product
+   Finsets + root-of-unity kernel collapse + normSq bridges) -
+   error descent 20 -> 0; the U2 Fourier-sieve program is now a
+   machine-checked theorem chain end to end.
    **U4 TO-BUILD:** the parity-as-width statement.
    Recall incident logged in 0170 (a 65/35 benchmark was unverified
    memory; corrected to the verified LOS framework). No RH claim:

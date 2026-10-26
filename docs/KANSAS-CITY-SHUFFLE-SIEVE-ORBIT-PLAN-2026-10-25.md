@@ -343,8 +343,29 @@ wiki on each green gate. The in-tree frontier (`Z78C`, hOffC) is
   squarefree decomposition M = p*k + prime closed form (p-1 / -1)
   + multiplicativity + nonzero product): the U2 full-support
   measurement as a theorem.
-- **U2 Lean WAVE-2 TAIL / U1b / U1c / U4:** as scoped in §5, next
-  build sessions (B green, 0178): raman_level_census / parseval_units.
+- **U2 Lean WAVE-2 C GREEN (2026-10-26, 0179):** `SieveAction.lean`
+  builds again (0 errors; lake 8706 targeted / 17450 full) with
+  `level_census` (the k-level divisor census, Wave-2 C1) and
+  `parseval_units` (Wave-2 C2/D — the Parseval identity in general
+  form: sum_a |F[f](a)|^2 = N * sum_m |f(m)|^2): DFT expansion +
+  conjugate-sum expansion + the triple-sum reindexing over product
+  Finsets (Finset.sum_product in the paired-lambda form + the
+  huprod univ = univ×ˢuniv bridges) + the root-of-unity kernel
+  collapse sum_a ω^{m·a}·(ω^{n·a})⁻¹ = (if m = n then N else 0)
+  (rou_sum_orthogonality is the engine) + the normSq/norm real-part
+  bridges (Complex.normSq_apply / Complex.sq_norm / Complex.ofReal_*).
+  Error descent 20 -> 0 across the session; the two hardest walls:
+  (1) the type-ascription trap — `(‖z‖ ^ 2 : ℂ)` elaborates as
+  complex-square `((↑‖z‖ : ℂ) ^ 2)`, not `↑(‖z‖ ^ 2)` — ring cannot
+  see through `re` of that; solved by a `pow_two` + `mul_re` +
+  `ofReal_re/im` component chain; (2) `sum_product` matching — the
+  pattern `f (x, y)` only matches when the iterated side is first
+  rewritten into the paired-application form `(fun pm => …) (p, m)`
+  by a `by-rfl` show (and, where projections sit under the pair,
+  via sum_comm first). The U2 Fourier-sieve program is now a
+  machine-checked theorem chain end to end: operator package ->
+  identity -> comb -> Ramanujan field -> inclusion-exclusion ->
+  multiplicativity -> full support -> census -> Parseval.
 
 *The shuffle is a crafted creation: it does not claim to move the face.
 It claims a second orbit — and on that orbit, the hops are free.*
