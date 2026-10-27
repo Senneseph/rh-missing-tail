@@ -59,7 +59,7 @@ the recorded-and-void spurious R(1e12) = +0.005654 of 0192).
 | 3e10   | 0.544733  | 0.540762  | +0.003971     | 1.381e-05 | 0187 |
 | 1e11   | 0.542888  | 0.539233  | +0.003654     | 7.763e-06 | 0187 |
 | 1e12   | 0.539769  | 0.536638  | +0.003131     | 2.570e-06 | **0192 (new)** |
-| 3e12   | in flight | 0.53468*  | pred +0.002932 (derived) / +0.001573 (mixed) | ~1.55e-06 | **0193 (pending)** |
+| 3e12   | in flight | 0.535528* | pred +0.002932 (derived) / +0.001573 (mixed) | ~1.55e-06 | **0194 (pending)** |
 
 \* u3 at 3e12 from the formula (the measurement is in flight; 60 checkpointed
 5e10 windows, ~2 h, same mechanism as 0192).
@@ -80,7 +80,7 @@ reproduction and boundary-gap checks).
 | 19/21 two-component pairs | screen over the 7-pt family | INCONCLUSIVE at 7 points (19 pass the bar; 1/log² scale in 6 of the top-10) | 0188 |
 | 3-point excess hint | e(X) ~(loglog X)^4.2 | the 0187 excess (+6.68e-04/+8.32e-04/+9.99e-04 at 1e10/3e10/1e11) — a DECAY-CANCELLATION appearance in the full 7-pt fits (the growing line f11 = loglog gets coefficient ~2e-4 = dead) | 0187/0188/0190 |
 | **4-pt mixed (0186)** | R = −0.123764·δ + 0.715792·(ll/l)² | the 0186/0187 survivor; under-predicts 1e10/3e10/1e11 (+6.68e-04/+8.32e-04/+9.99e-04 = 28.6/60.3/128.7 se); **RULED OUT at 1e12: +0.001883 vs +0.003131, diff = 485.6 se** | 0186/0187/**0192** |
-| **derived 2-term (0190)** | R = −1.88114·(ll/l)² + 3.69471·δ·(ll/l) (the LOS-derived leading + product terms; pure 7-pt fit, in-sample max 1.51 se) | **CONFIRMED OUT-OF-SAMPLE at 1e12: +0.003139 vs +0.003131, diff = −0.000008 = −3.1 se; second test at 3e12 in flight (pred +0.002932)** | **0190/0192/**0193 |
+| **derived 2-term (0190)** | R = −1.88114·(ll/l)² + 3.69471·δ·(ll/l) (the LOS-derived leading + product terms; pure 7-pt fit, in-sample max 1.51 se) | **CONFIRMED OUT-OF-SAMPLE at 1e12: +0.003139 vs +0.003131, diff = −0.000008 = −3.1 se; second test at 3e12 in flight (pred +0.002932)** | **0190/0192/**0194 (pending) |
 
 ## 4. The recording structure (as of this writing)
 
