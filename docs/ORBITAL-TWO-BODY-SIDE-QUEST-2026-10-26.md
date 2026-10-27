@@ -172,11 +172,28 @@ therefore "run U1c and read the correlation in the orbital vocabulary."
   program names it.
 - **O3 (borrowed).** The level-1 virial band. Already the mainstream
   `level1_sandwich` unit — the side-quest re-uses it, adds no work.
-- **O4 (measurement, cheap).** The "phase diagram" of the dance: at each
-  (x, z) record (W/(xV), ρ, ρ0) — already in 0181 `tmp/kcs4b_out.txt`.
-  Follow-up: z-sweep at fixed x of band *width fraction* (not W/xV alone)
-  and ρ-drift; check whether relative width contracts in z (band-tightening)
-  or only the position stabilizes. MEASURE, do not assert.
+- **O4 (measurement, cheap) — FOLLOW-UP MEASURED (0189, 2026-10-26,
+  `scripts/rh/o4_band_phase_sweep.py`, `tmp/o4_out.txt`).**  The 0181
+  phase table extended to z in {31, 50, 71, 100, 200, 400} at fixed
+  x in {2e5, 1e6, 1e7, 1e8, 1e9, 1e10} (exact integers, the in-tree
+  SieveOrbit definitions; 0.3 s wall):
+    (1) THE BAND DOES NOT TIGHTEN: the relative width W/Φ GROWS in z -
+        6.56 (z = 31) -> 20.35 (z = 400) at x = 1e10 (x3.1 over the
+        sweep), for every x; deeper sieves widen the level-1 band
+        relative to the count;
+    (2) the in-band position rho = (Phi - L1)/W drifts DOWN slowly in z -
+        0.7166 -> 0.6083 (x = 1e10) - no sign of settling by z = 400;
+        at fixed z it is x-STABLE (spread over x <= 2.2e-3 - the 0181
+        x-stability law persists at depth, degrading only mildly);
+    (3) at z = 400 the first VISIBLE SPLIT between the main-term width and
+        the count-based width appears: W/(xV) = 20.3414 vs W/Phi =
+        20.3517, i.e. Phi = 0.99949 * xV - a 5.06e-4 deficit of the exact
+        count from the main term, invisible in the widths until depth
+        (the classical sieve error drifts in z; the band phase resolves
+        it to relative 5e-4).
+  MEASURED only; no assertion of a law; no RH claim; OFF-BOARD.
+  Optional deeper follow-up (named, not done): z beyond 400 with the same
+  memoized recursion - diminishing returns.
 
 ## 4. Open conceptual questions (the "strangely defined" law)
 
