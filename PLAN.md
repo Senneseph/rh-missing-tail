@@ -340,9 +340,20 @@ Commit a00c7d6.
    power law (ansatz B, z = 15.5), leaves the (loglog/log)² form
    alive-but-undetermined (C nearly flat over 1e8..1e10), and the
    2-param mixed form predicts within 1.2 sigma (ansatz C, sole
-   survivor); strict gate still open (28.6 se). Next: U3c(d) =
-   3e10/1e11, where the mixed form predicts R = +0.003139 /
-   +0.002655 (tmp/kcs3c_out.txt, 26 s wall, peak 16 GB).
+   survivor); strict gate still open (28.6 se) (tmp/kcs3c_out.txt,
+   26 s wall, peak 16 GB).
+   **U3c (d) DONE (0187, 2026-10-26):** the 3e10/1e11 points as a
+   clean out-of-sample test (interval-sieve mechanism gated by an exact
+   identity check at 1e10; pi(1e11) = 4118054813 = tabulated): 3e10
+   meas = 0.544733, R = +0.003971 (z = 287.5 vs u3); 1e11 meas =
+   0.542888, R = +0.003654 (z = 470.7 vs u3). The 4-pt-anchored mixed
+   form UNDER-predicts at all three points, the positive excess growing
+   +6.68e-04 -> +8.32e-04 -> +9.99e-04 (28.6/60.3/128.7 se); per-decade
+   R decay stabilizes ~0.83-0.85, creeping up. VERDICT: no tested form
+   confirmed as THE residual law; new named structure = the slowly
+   growing positive excess; strict gate open (470.7 se at 1e11); 1e11
+   = this box's memory ceiling (tmp/kcs3c_d_out.txt, 450 s wall,
+   peak 92.7 GB).
    Recall incident logged in 0170 (a 65/35 benchmark was unverified
    memory; corrected to the verified LOS framework). No RH claim:
    prime-gap class statistic + exact sieve algebra, flank not face.

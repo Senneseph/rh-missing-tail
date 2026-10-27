@@ -260,8 +260,29 @@ Nothing here needs GPU, long compute, or the zeta binaries.
   sole surviving form. Strict gate: still open against the
   measurement CI alone (|meas - model| = 6.68e-04 = 28.6 se); the
   (b) (loglog/log)² test was absorbed into (A); the (c) paper-
-  figure check is still open. **NEXT (U3c(d)): the 3e10/1e11 points,
-  where the mixed form predicts R = +0.003139 / +0.002655.**
+  figure check is still open. **RUN (d) (0187, 2026-10-26,
+  `scripts/rh/kcs3c_d_next_decade.py`, 450 s, 1 core, peak 92.7 GB):**
+  3e10 (verbatim global byte sieve, 80 s) and 1e11 (two 5e10 interval
+  halves - the interval mechanism gated by an EXACT identity check
+  against the global sieve at 1e10; pi(1e11) = 4118054813 = the
+  tabulated pi(10^11)). New points: 3e10 meas = 0.544733, R =
+  +0.003971 (z = 287.5 vs u3); 1e11 meas = 0.542888, R = +0.003654
+  (z = 470.7 vs u3). The out-of-sample test (4-pt-anchored mixed form,
+  anchored BEFORE 1e10 existed in the record): SYSTEMATIC
+  UNDER-prediction at all three points - predicted +0.003639/
+  +0.003139/+0.002655 vs measured +0.004307/+0.003971/+0.003654 at
+  1e10/3e10/1e11; the positive excess GROWS with X: +6.68e-04 ->
+  +8.32e-04 -> +9.99e-04 (28.6/60.3/128.7 measurement se). Per-decade
+  R decay over the 7-point ladder: 0.6853/0.8413/0.8246/0.8337/
+  0.8435/0.8529 (stabilizing ~0.83-0.85, creeping up). VERDICT
+  (supersedes the 0186 verdict line): no tested form is confirmed as
+  THE residual law; the new named structure = a slowly GROWING
+  positive excess (~1.4-1.6x/decade, 2-point hint, not a law); the
+  strict gate stays OPEN (470.7 se vs u3-only at 1e11).
+  Reachability: 1e11 is this box's ceiling under the standing memory
+  rules; 3e11/1e12 named out-of-reach here (not a blocker - the
+  flank's next step is a new bit/segmented ground truth or a bigger
+  machine).
   Gate: the strict-CI gate closes when a DERIVED (not fitted) correction
   lands inside CI at 1e8 — or the residual is certified INSIDE the
   source's error budget with the next term named (the honest
@@ -361,6 +382,18 @@ wiki on each green gate. The in-tree frontier (`Z78C`, hOffC) is
   measurement CI). Next: U3c(d) = 3e10/1e11 (mixed-form predictions
   +0.003139 / +0.002655). Output: `tmp/kcs3c_out.txt`. 26 s wall, peak
   16 GB. No RH claim.
+- **U3c RUN (d) (2026-10-26, 0187):** `scripts/rh/kcs3c_d_next_decade.py`
+  - 3e10 (verbatim global byte sieve, 80 s) + 1e11 (two 5e10 interval
+  halves; the mechanism gated by an exact identity check at 1e10;
+  pi(1e11) = 4118054813 = the tabulated pi(10^11)). Out-of-sample test of
+  the 4-pt-anchored mixed form (anchored BEFORE 1e10 existed): systematic
+  under-prediction at all three points (1e10/3e10/1e11), the positive
+  excess growing +6.68e-04 -> +8.32e-04 -> +9.99e-04 (28.6/60.3/128.7
+  measurement se). Per-decade R decay stabilizes ~0.83-0.85 and creeps
+  up. No tested form confirmed as THE residual law; new named structure =
+  a slowly growing positive excess. Strict gate still open (470.7 se at
+  1e11). 1e11 = this box's memory ceiling (peak 92.7 GB). Output:
+  `tmp/kcs3c_d_out.txt`. 450 s wall. No RH claim.
 - **U2 MEASURED (2026-10-25):** `scripts/rh/kcs2_fourier_sieve.py` —
   the finite operator package measured at N = 210 (comb, all a, all p)
   and N = 30030 (full Ramanujan field, all 30030 characters; Parseval
