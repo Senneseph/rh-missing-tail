@@ -146,6 +146,16 @@ Commit a00c7d6.
 
 ## Living documents
 
+- `ORBITAL-TWO-BODY-SIDE-QUEST-2026-10-26.md` (docs/) — OFF-BOARD
+  side-quest tracking file: the two representations read as a bound
+  two-body / orbital system (center-of-mass = main term, relative
+  coordinate = the residual, the explicit formula = the shared
+  action, level alternation vs zero-oscillation = the turn-taking
+  rhythm). Proven/measured/heuristic/unmapped rows separated; no RH
+  claim; borrows the mainstream units (O1=U1c, O3=level1_sandwich),
+  adds O2 (finite explicit-formula identity, pending provenance
+  fetch) and O4 (band phase diagram, measured). Does not gate the
+  critical path.
 - `DISCOVERY_LOG.md` — the chronicle: approach + the pieces as found
   (in order) + how they combine; important contradictions recorded;
   no setbacks; appended as evidence files land.
