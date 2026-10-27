@@ -298,6 +298,22 @@ Nothing here needs GPU, long compute, or the zeta binaries.
   Mechanism narrowed: decaying loglog-log component (1/log^2-scale
   dominated) + growing ~(loglog X)^4.2 component. Strict gate stays
   OPEN (needs a DERIVED correction).
+  **RUN (c) (0191, 2026-10-27, papers + exact sieves):** the paper
+  arXiv:1603.03720v4 (Lemke Oliver & Soundararajan, PNAS 2016) fetched,
+  identity-checked, persisted (tmp/u3c_c_fig/paper.pdf); its Section 5
+  r = 2, q = 4 ACTUAL rows vs the independent exact pair-class sieve:
+  ALL THREE CHECKED ROWS AGREE at the published precision (1e9:
+  11,413,177/14,010,314 vs 1.141e7/1.401e7; 1e10: 103,160,935 /
+  124,362,340 vs 1.032e8/1.244e8; 1e11: 941,199,658/1,117,820,622 vs
+  9.412e8/1.118e9; pi(1e11) = 4,118,054,813 = tabulated, identity).
+  NEW: pi(1,3) = pi(3,1) EXACTLY at all three scales (the C1.5
+  antisymmetry is exact up to 1e11; the diagonal asymmetry grows
+  slowly: +551/+5,960/+14,252). The recorded 'meas' pipeline
+  re-derived from raw pair counts to ~5e-7. The 1e12 row (8.654e9 /
+  1.015e10) + the NEW 1e12 ladder point = in-flight (checkpointed
+  20-window run; ~40 min) - the out-of-sample discriminator named in
+  0187/0190 (the 0186 mixed and 0190 derived forms predict +0.001851
+  vs +0.003179 at 1e12: ~500 se apart). No RH claim.
   **RUN (f) (0190, 2026-10-27, same script + the (4b) section, seconds,
   no sieving):** the family extended with f8 = delta*(loglog/log) (the
   DERIVED next-order LOS product term) and f11 = loglog X (bare growing
