@@ -483,10 +483,12 @@ C = {
  "composition identities for the orbit program).",
  None),
 "SieveOrbit": (
- "KCS U4a + U4b (second orbit): the LEGENDRE EXACT identity (the "
- "machine-checked inclusion-exclusion engine of the sieve action, the "
- "zeta-free face of the orbit program) AND the discrete level-1 exact "
- "sieve band L1 <= Phi <= U2 (the 0181 width number, now proved).",
+ "KCS U4a + U4b + U4(c) (second orbit): the LEGENDRE EXACT identity "
+ "(the machine-checked inclusion-exclusion engine of the sieve action, "
+ "the zeta-free face of the orbit program), the discrete level-1 exact "
+ "sieve band L1 <= Phi <= U2 (the 0181 width number, proved), and the "
+ "U4(c) structural parity/anchor statement (structural, not a barrier "
+ "theorem).",
  "U4a: phi_list (the Legendre recursion def), nodup_prime_split, "
  "phi_list_count, phi_list_mono, prime_dvd_prod_of_prime_list, "
  "legendre_identity ((phi_list x ps : Z) = sum_{d | prod ps} (mu d : "
@@ -505,13 +507,18 @@ C = {
  "Prod.swap), x_ones_sum / mcount_single_sum_Z / mcount_offdiag_sum_Z "
  "(the integer bridges), phi_indicator (Phi = the 0/1 survivor sum), "
  "level1_lower + level1_upper, and level1_sandwich (THE band: L1 x ps "
- "<= (phi_list x ps : Z) <= U2 x ps).",
- "U4a + U4b of KCS U4 in theorem form; measured counterparts: "
+ "<= (phi_list x ps : Z) <= U2 x ps). U4c (structural): "
+ "level1_width_eq_pairwise (W = U2 - L1 = U2pair - the width IS the "
+ "pairwise mass, the backbone of the 0181 width number), "
+ "level1_width_nonneg, level1_position_in_band (0 <= Phi - L1 <= W - "
+ "the sandwich corollary; the measured anchor is 0181's rho = (Phi - "
+ "L1)/W, 0.84 -> 0.67 x-stable and z-decaying).",
+ "U4a + U4b + U4c of KCS U4 in theorem form; measured counterparts: "
  "tmp/kcs1_out.txt (U1a exact identity + U1b residual/worst case) and "
  "tmp/kcs4b_out.txt (0181 width/position: W/xV 2.10->10.12, rho "
- "0.84->0.67 x-stable). Next: U4(c) structural parity/anchor statement "
- "(structural, not a barrier theorem) + the U1c two-process zeta/sieve "
- "residual harness (also O1 of the orbital side-quest).",
+ "0.84->0.67 x-stable). Next: the U1c two-process zeta/sieve residual "
+ "harness (also O1 of the orbital side-quest: the falsifiable core of "
+ "the orbit reading).",
  "No RH claim: pure finite combinatorics over Nat/Int (no analysis, no "
  "axioms, no external provenance). Pinned-mathlib gotchas (0180): an "
  "ascribed division (x / d : Z) elaborates to Int.ediv (the ascription "
@@ -522,13 +529,14 @@ C = {
  "(t : Z) lifts the operands, so (a / b : Z) is Int.ediv of lifts, NOT "
  "the cast of the Nat quotient - bridge such sums pointwise with "
  "norm_cast to Nat.cast (t) form before cast_sum rewrites (Int.ofNat "
- "terms do not match the Nat.cast_sum rw pattern); hite : ite = 0 "
- "proves by rw [if_neg (Nat.succ_ne_zero k)] alone (rw auto-closes the "
- "0 = 0, so no trailing norm_num); the disjointness application shape "
- "after rw [Finset.disjoint_left] at hdisj is 'hdisj ho hd' "
- "(membership proofs only, first-set side first); do not pre-rewrite "
- "hL where a calc's final target still contains hL.LHS (it breaks the "
- "calc's defeq target).",
+ "terms do not match the Nat.cast_sum rw pattern - in a proof goal "
+ "bridge with rw [show Int.ofNat t = (t : Z) from by norm_cast] "
+ "first); hite : ite = 0 proves by rw [if_neg (Nat.succ_ne_zero k)] "
+ "alone (rw auto-closes the 0 = 0, so no trailing norm_num); the "
+ "disjointness application shape after rw [Finset.disjoint_left] at "
+ "hdisj is 'hdisj ho hd' (membership proofs only, first-set side "
+ "first); do not pre-rewrite hL where a calc's final target still "
+ "contains hL.LHS (it breaks the calc's defeq target).",
 ),
 
 "ProbeS1U": (

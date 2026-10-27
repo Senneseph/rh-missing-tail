@@ -1192,4 +1192,60 @@ theorem level1_sandwich (x : ℕ) (ps : List ℕ)
     (hprime : ∀ p ∈ ps, Nat.Prime p) (hdistinct : ps.Nodup) :
     L1 x ps ≤ (phi_list x ps : ℤ) ∧ (phi_list x ps : ℤ) ≤ U2 x ps := by
   exact ⟨level1_lower x ps hprime hdistinct, level1_upper x ps hprime hdistinct⟩
+
+/-!  ====  U4(c):  structural  parity/anchor  statement  (structural,
+                     not  a  barrier  theorem)  ====  -/
+
+/-
+U4(c)  structural:  the  parity/anchor  correspondence  for  the
+level-1  band  (0181  measured  anchors).  The  parity  side  is
+the  band  itself  (odd  partial  IE  =  lower  =  L1,  even
+partial  IE  =  upper  =  U2  -  level1_sandwich).  The  anchor
+side:  the  width  W  =  U2  -  L1  is  exactly  the  pairwise
+mass  (the  x  term  and  the  single-prime  terms  cancel
+between  the  two  endpoints),  W  >=  0,  and  the  exact  count
+sits  inside  the  band  at  a  measurable  position  0  <=
+Phi  -  L1  <=  W.  The  0181  measured  numbers  (W  /  (x  V(z))
+=  2.10  at  z  =  7  ->  10.12  at  z  =  71;  the  position
+rho  =  (Phi  -  L1)  /  W  =  0.84  ->  0.67,  x-stable  and
+z-decaying,  above  the  midpoint  at  reachable  z)  are  the
+measured  anchors  for  these  statements.  STRUCTURAL,  NOT  A
+BARRIER  THEOREM.  No  RH  claim.
+-/
+
+/-- (U4c,  structural)  The  level-1  band  width  is  exactly  the
+    pairwise  mass:  W  =  U2  -  L1  =  U2pair  (the
+    unordered-pair  floor  sum)  -  the  x  term  and  the
+    single-prime  terms  cancel  between  the  two  endpoints.
+    The  theorem-form  backbone  of  the  0181  width  number.
+    Structural,  not  a  barrier  theorem. -/
+theorem level1_width_eq_pairwise (x : ℕ) (ps : List ℕ) :
+    U2 x ps - L1 x ps = U2pair x ps := by
+  rw [U2]
+  ring
+
+/-- (U4c,  structural)  The  band  width  is  non-negative  (a  sum  of
+    floors).  Structural,  not  a  barrier  theorem. -/
+theorem level1_width_nonneg (x : ℕ) (ps : List ℕ) :
+    0 ≤ U2 x ps - L1 x ps := by
+  rw [level1_width_eq_pairwise x ps]
+  refine Finset.sum_nonneg fun ab _ => by
+    rw [show Int.ofNat (x / (ab.1 * ab.2)) = (x / (ab.1 * ab.2) : ℤ)
+        from by norm_cast]
+    exact Nat.cast_nonneg _
+
+/-- (U4c,  structural)  The  exact  count  sits  inside  the  band  at
+    a  measurable  position:  0  <=  Phi  -  L1  <=  W.  The  0181
+    measured  position  rho  =  (Phi  -  L1)  /  W  (0.84  ->  0.67,
+    x-stable  and  z-decaying,  above  the  midpoint  at  reachable
+    z)  is  the  measured  anchor  for  this  statement.  Corollary
+    of  the  sandwich;  structural,  not  a  barrier  theorem. -/
+theorem level1_position_in_band (x : ℕ) (ps : List ℕ)
+    (hprime : ∀ p ∈ ps, Nat.Prime p) (hdistinct : ps.Nodup) :
+    0 ≤ (phi_list x ps : ℤ) - L1 x ps ∧
+      (phi_list x ps : ℤ) - L1 x ps ≤ U2 x ps - L1 x ps := by
+  obtain ⟨hl, hu⟩ := level1_sandwich x ps hprime hdistinct
+  constructor
+  · exact sub_nonneg.mpr hl
+  · exact sub_le_sub_right hu (L1 x ps)
 end SieveOrbit

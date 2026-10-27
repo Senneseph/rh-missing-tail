@@ -310,9 +310,18 @@ Commit a00c7d6.
    card updated (U4a+U4b + the new pinned-mathlib gotchas: sum
    bodies stop at infix -/+, ascribed summands lift operands to
    Int.ediv, cast_sum pattern matching via Nat.cast form).
-   **U4(c) PENDING:** the
-   parity/anchor statement (structural, not a barrier theorem);
-   U1c (two-process zeta/sieve residual harness) still pending.
+   **U4(c) DONE (0184, 2026-10-26):** the structural
+   parity/anchor statement in tree (SieveOrbit.lean, 1251 total;
+   structural, explicitly NOT a barrier theorem):
+   level1_width_eq_pairwise (W = U2 - L1 = U2pair - the width IS
+   the pairwise mass, the 0181 width number's theorem-form
+   backbone), level1_width_nonneg (W >= 0),
+   level1_position_in_band (0 <= Phi - L1 <= W - the well-defined
+   home of the measured rho; 0181 anchors W/xV = 2.10 -> 10.12,
+   rho = 0.84 -> 0.67 stay measured). The N3 row is now (a) proved
+   (0180), (b) proved (0183, measured 0181), (c) structural
+   statement landed (0184). **U1c PENDING:** the two-process
+   zeta/sieve residual harness (also O1 of the orbital side-quest).
    Recall incident logged in 0170 (a 65/35 benchmark was unverified
    memory; corrected to the verified LOS framework). No RH claim:
    prime-gap class statistic + exact sieve algebra, flank not face.

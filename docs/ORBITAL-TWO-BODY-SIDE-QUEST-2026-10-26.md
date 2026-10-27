@@ -18,15 +18,15 @@ Metaphor rows are allowed **only** when they point at a named object.
 
 | orbital language            | object in the program                                                                  | status     |
 | --------------------------- | --------------------------------------------------------------------------------------- | ---------- |
-| the two bodies              | zero ensemble {ρ} (zeta side)  and  prime-coverage action on [1,x] (sieve side)         | both finite/enumerable: proven 0175-0181 (sieve side); zeta side via E1/S-series |
+| the two bodies              | zero ensemble {ρ} (zeta side)  and  prime-coverage action on [1,x] (sieve side)         | both finite/enumerable: proven 0175-0184 (sieve side); zeta side via E1/S-series |
 | the dance / one system, two representations | Riemann–von Mangoldt explicit formula (spectral trace = geometric trace, shared test potential) | real theorem, off-board; Lean machinery exists (see O2) |
 | Euler action for both       | primes act on [1,x] by coverage (the repo's Euler action, 0180 phi_list); zero side acts through the explicit-formula kernel; a **shared finite trace operator T(φ)** with T_zeta(φ) = T_sieve(φ) + named residual is the named goal | UNMAPPED (O2) |
 | center of mass              | main term: x (zeta side), x·V(z) (sieve side)                                           | PROVEN decompositions (E1 clauses, U4b L1/U2) |
 | relative coordinate         | residual: ψ(x)−x type (zeta); Φ−(sieve main term) (sieve); per-level L_k/U_k slacks     | MEASURED (U1b, 0181); U1c = the two-process relative coordinate |
 | energy conservation         | total mass conserved across levels = Legendre exact identity (0180)                     | PROVEN in-tree |
-| virial / stability band     | level-1 sandwich L1 ≤ Φ ≤ U2; width W = U2−L1 = pairwise mass exactly                   | PROVEN (measured on 66 rows, 0181); in-tree Lean `level1_sandwich` in flight |
-| adiabatic invariant / phase | band position ρ = (Φ−L1)/W: x-stable to ~1e-6, smooth monotone decay in z (0181)        | MEASURED (0181) |
-| two-body integrability      | pair/level-1 structure: fully exact, finite, no approximation                            | PROVEN (0180, 0181, level1_sandwich) |
+| virial / stability band     | level-1 sandwich L1 ≤ Φ ≤ U2; width W = U2−L1 = pairwise mass exactly                   | PROVEN in-tree (0183 `level1_sandwich`; 0184 `level1_width_eq_pairwise`: the width mass identity is now a theorem); measured on 66 rows (0181) |
+| adiabatic invariant / phase | band position ρ = (Φ−L1)/W: x-stable to ~1e-6, smooth monotone decay in z (0181)        | MEASURED (0181); in-tree 0184 `level1_position_in_band` names its home (0 ≤ Φ−L1 ≤ W) |
+| two-body integrability      | pair/level-1 structure: fully exact, finite, no approximation                            | PROVEN (0180, 0183, 0184) |
 | three-body chaos onset      | twin/triple prime correlations; U3/U3b gap-class: model explicit HEURISTIC; naive pair-bias composition ruled out (U3b) | MEASURED + HEURISTIC |
 | turn-taking rhythm          | sieve: odd/even level alternation (inclusion–exclusion parity); zeta: e^{iρt} oscillation in t   | structure named; **cross-correlation of the two residuals UNMAPPED** |
 | harmonic evolution          | "always harmonically evolves" = stability statement of the relative coordinate under x- and z-evolution | candidate statement: see O4; not yet measured as a joint law |
