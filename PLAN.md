@@ -377,6 +377,19 @@ Commit a00c7d6.
    fit prefer different descriptions (both recorded). Out-of-sample
    at 3e11/1e12 = named discriminator, beyond this box (0187).
    Strict gate OPEN.
+   **U3c (c) DONE (rows 1e9/1e10/1e11) (0191, 2026-10-27):** the LOS
+   paper (arXiv:1603.03720v4, PNAS 2016) fetched + identity-checked +
+   persisted; its r = 2, q = 4 Section-5 ACTUAL rows AGREE with the
+   independent exact pair-class sieve at the published precision (1e9
+   11,413,177 / 14,010,314; 1e10 103,160,935 / 124,362,340; 1e11
+   941,199,658 / 1,117,820,622; pi(1e11) = 4,118,054,813 identity).
+   NEW: pi(1,3) = pi(3,1) EXACTLY at all three scales (C1.5
+   antisymmetry exact to 1e11); diagonal asymmetry +551 / +5,960 /
+   +14,252 (growing slowly, measured); the 'meas' pipeline
+   re-derived from raw pair counts to ~5e-7. The 1e12 paper row + the
+   NEW 1e12 ladder point = in-flight (checkpointed ~40 min run) = the
+   out-of-sample discriminator (0186 mixed +0.001851 vs 0190 derived
+   +0.003179 at 1e12 - ~500 se apart). No RH claim.
    Recall incident logged in 0170 (a 65/35 benchmark was unverified
    memory; corrected to the verified LOS framework). No RH claim:
    prime-gap class statistic + exact sieve algebra, flank not face.
