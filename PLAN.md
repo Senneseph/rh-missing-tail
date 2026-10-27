@@ -423,8 +423,27 @@ Commit a00c7d6.
    0192). VERDICT: the residual's TERM STRUCTURE is now DERIVED from
    the paper's own accounting + the exact g; the two COEFFICIENTS
    remain fitted (the paper does not quantify its O-terms) - gate
-   unchanged from 0192. 3e12 point in flight (0194, ~2 h run). No RH
-   claim.
+   unchanged from 0192 at that writing. No RH claim.
+   **Second out-of-sample point (0194, 2026-10-27, ~39 min, 60
+   checkpointed windows, prefix identity-gated on the tabulated
+   pi(1e12)):** R(3e12) = +0.002918 (meas = 0.538446, se 1.515e-06,
+   pi(3e12) = 108,340,298,703, u3 = 0.535528, z vs u3 = +1926.8).
+   The 0190 derived form predicts +0.002932: diff -0.000014 = -9.5 se
+   measurement-only, **-0.9 sigma COMBINED** once the form's own
+   prediction covariance (sigma_pred = 1.52e-05 from the 7-pt fit) is
+   included; the 1e12 point recomputed the same way is -0.6 combined
+   (sigma_pred 1.25e-05) - BOTH out-of-sample points INSIDE the
+   combined 1-sigma band (the strongest statement the law has ever
+   had). The mixed form rejected a second time at 888.3 se. NEW: the
+   C1.5 antisymmetry pi(1,3) - pi(3,1) went non-zero for the first
+   time (-1 at 3e12; exact 0 at 1e9..1e12); the diagonal-asymmetry
+   4-point 'growth' narrative corrected to 'small drift within budget'
+   (+51,539). GATE (updated): MEASURED clause strongly satisfied
+   (both points <= 0.9 combined sigma); DERIVED-NOT-FITTED clause
+   satisfied for the term structure (0193) but not yet the
+   coefficients - named next: the 1e13 point (~7 h, schedule-eligible)
+   and the Section-2-heuristic evaluation of the paper's O-terms. No
+   RH claim.
    Recall incident logged in 0170 (a 65/35 benchmark was unverified
    memory; corrected to the verified LOS framework). No RH claim:
    prime-gap class statistic + exact sieve algebra, flank not face.

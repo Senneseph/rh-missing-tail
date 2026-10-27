@@ -330,6 +330,26 @@ Nothing here needs GPU, long compute, or the zeta binaries.
   data-compatible (first purely derived form to pass the screen); its
   out-of-sample behavior at 3e11/1e12 is the named discriminator
   (beyond this box, 0187). Strict gate OPEN at that writing.
+  **SECOND OUT-OF-SAMPLE POINT (0194, 2026-10-27, ~39 min, 60 windows):**
+  R(3e12) = +0.002918 (meas = 0.538446, se 1.515e-06, pi(3e12) =
+  108,340,298,703, u3 = 0.535528, z vs u3 = +1926.8; prefix integrity:
+  the [0, 1e12] slice of this run sums EXACTLY to tabulated
+  pi(1e12) = 4,118,054,813; max boundary gap 232 <= 2000). VERDICT:
+  the 0190 derived form predicts +0.002932: diff -0.000014 = -9.5 se
+  MEASUREMENT-ONLY but -0.9 sigma COMBINED once the form's own
+  prediction covariance is included (sigma_pred(3e12) = 1.52e-05 from
+  the 7-pt fit); the 1e12 point recomputed the same way is -0.6
+  combined (sigma_pred 1.25e-05) - BOTH OUT-OF-SAMPLE POINTS INSIDE
+  the combined 1-sigma band (the strongest statement the law has
+  ever had); the mixed form rejected a second time at 888.3 se.
+  NEW: C1.5 diff pi(1,3) - pi(3,1) = -1 at 3e12 (first non-zero;
+  exact 0 at 1e9..1e12); diagonal asymmetry +51,539 (the 4-point
+  'growth' narrative corrected to 'small drift within budget').
+  GATE (updated): MEASURED clause strongly satisfied (both points
+  inside 0.9 combined sigma); DERIVED-NOT-FITTED clause satisfied for
+  the term structure (0193) but not the coefficients - named next:
+  the 1e13 point (~7 h) + the Section-2-heuristic evaluation (0193
+  open item 5). No RH claim.
   **RUN (g) - the DERIVATION TEST (0193, 2026-10-27, instant):**
   scripts/rh/kcs3c_g_derivation.py -> tmp/u3c_c_fig/kcs3c_g_out.txt.
   (A) ALGEBRA: the paper's Conjecture 1.1 display formulas (q = 4,

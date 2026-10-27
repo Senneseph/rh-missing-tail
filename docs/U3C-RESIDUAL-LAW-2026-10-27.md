@@ -59,13 +59,17 @@ the recorded-and-void spurious R(1e12) = +0.005654 of 0192).
 | 3e10   | 0.544733  | 0.540762  | +0.003971     | 1.381e-05 | 0187 |
 | 1e11   | 0.542888  | 0.539233  | +0.003654     | 7.763e-06 | 0187 |
 | 1e12   | 0.539769  | 0.536638  | +0.003131     | 2.570e-06 | **0192 (new)** |
-| 3e12   | in flight | 0.535528* | pred +0.002932 (derived) / +0.001573 (mixed) | ~1.55e-06 | **0194 (pending)** |
+| 3e12   | 0.538446  | 0.535528  | +0.002918     | 1.515e-06 | **0194 (measured)** |
 
-\* u3 at 3e12 from the formula (the measurement is in flight; 60 checkpointed
-5e10 windows, ~2 h, same mechanism as 0192).
+\(3e12 measured in 0194: 60 checkpointed 5e10 windows, ~39 min, 56.2
+GB/window; prefix integrity: the [0, 1e12] two-window slice sums
+EXACTLY to the tabulated pi(1e12) = 4,118,054,813; max boundary gap
+232 <= 2000; pi(3e12) = 108,340,298,703.)
 
 Per-decade R decay ratios over the ladder: 0.685, 0.841, 0.825, 0.834, 0.844,
-0.853, **0.857** (0187 + 0192) — a stable, slowly creeping-up sequence.
+0.853, 0.857, 0.868 (0187 + 0192 + 0194 implied, from the 3e12 half-decade
+ratio 0.932) — a stable, slowly creeping-up sequence.
+z(vs u3) at 3e12: +1926.8.
 z(vs u3) at 1e12: +1218.3. Every point was identity-gated (π vs tabulated
 where tabulated; the 1e11/1e12 runs additionally verified by pi(1e10)
 reproduction and boundary-gap checks).
@@ -80,7 +84,7 @@ reproduction and boundary-gap checks).
 | 19/21 two-component pairs | screen over the 7-pt family | INCONCLUSIVE at 7 points (19 pass the bar; 1/log² scale in 6 of the top-10) | 0188 |
 | 3-point excess hint | e(X) ~(loglog X)^4.2 | the 0187 excess (+6.68e-04/+8.32e-04/+9.99e-04 at 1e10/3e10/1e11) — a DECAY-CANCELLATION appearance in the full 7-pt fits (the growing line f11 = loglog gets coefficient ~2e-4 = dead) | 0187/0188/0190 |
 | **4-pt mixed (0186)** | R = −0.123764·δ + 0.715792·(ll/l)² | the 0186/0187 survivor; under-predicts 1e10/3e10/1e11 (+6.68e-04/+8.32e-04/+9.99e-04 = 28.6/60.3/128.7 se); **RULED OUT at 1e12: +0.001883 vs +0.003131, diff = 485.6 se** | 0186/0187/**0192** |
-| **derived 2-term (0190)** | R = −1.88114·(ll/l)² + 3.69471·δ·(ll/l) (the LOS-derived leading + product terms; pure 7-pt fit, in-sample max 1.51 se) | **CONFIRMED OUT-OF-SAMPLE at 1e12: +0.003139 vs +0.003131, diff = −0.000008 = −3.1 se; second test at 3e12 in flight (pred +0.002932)** | **0190/0192/**0194 (pending) |
+| **derived 2-term (0190)** | R = −1.88114·(ll/l)² + 3.69471·δ·(ll/l) (the LOS-derived leading + product terms; pure 7-pt fit, in-sample max 1.51 se) | **CONFIRMED OUT-OF-SAMPLE at BOTH 1e12 and 3e12 within the combined (form + measurement) uncertainty: 1e12 diff −0.000008 (−3.1 se meas-only, −0.6 combined, σ_pred 1.25e-05); 3e12 diff −0.000014 (−9.5 se meas-only, −0.9 combined, σ_pred 1.52e-05)**; the mixed form rejected both times (485.6 / 888.3 se) | **0190/0192/0194** |
 
 ## 4. The recording structure (as of this writing)
 
@@ -99,16 +103,22 @@ R(X) = -1.88114 * (loglog X / log X)^2 + 3.69471 * delta(X) * (loglog X / log X)
 - the (loglog)^4.2 excess hint of 0188 is subsumed: it was this cancellation
   seen on 3 points (0190).
 
-**Honest gate statement (no drift):** the program's strict-CI gate (a
-DERIVED, not fitted, correction landing INSIDE the measurement CI) is
-**NOT declared closed**: −3.1 se sits just outside a 2-se CI, and the two
-coefficients were fitted in-sample on the 7-point ladder (1e11, the nearest
-in-sample point, is one decade in). What IS established: every previously
-live FITTED form is ruled out at 15–486 se across 0186/0187/0192, and the
-derived 2-term form (whose *terms* are a priori from the LOS q=4 expansion)
-is the SOLE SURVIVING candidate, confirmed out-of-sample at the 3.1-se
-level. The 3e12 point (in flight) is its second independent out-of-sample
-test (predictions stand 1359 se apart from the mixed form's there).
+**Honest gate statement (no drift, updated 0194):** the program's
+strict-CI gate has two clauses. (MEASURED) Satisfied at both out-of-sample
+points: the derived-terms form predicts 1e12 to −0.6 combined sigma and
+3e12 to −0.9 combined sigma, where 'combined' = the form's own prediction
+uncertainty (σ_pred = 1.25e-05 / 1.52e-05 from the 7-point fit covariance)
+quadrature-added to the measurement se; the measurement-only statistics
+(−3.1 / −9.5 se) overstate the tension and are retained for the audit
+trail. (DERIVED-NOT-FITTED) Satisfied for the TERM STRUCTURE (0193: the
+terms fall out of the paper's own accounting); NOT yet for the two
+COEFFICIENTS (still fitted; σ_pred is a 7-point Gaussian extrapolation
+that excludes model-form error). Named discriminators for the next
+sharpening: the 1e13 point (~7 h, schedule-eligible) and the
+Section-2-heuristic evaluation of the paper's O-terms (open item 5).
+Every previously live FITTED form is ruled out (single-component 15-485 se,
+alpha power law 15.5 se, 4-pt mixed 485.6/888.3 se at 1e12/3e12) - the
+derived 2-term form is the SOLE SURVIVING candidate.
 
 ## 5. Provenance annex (the 0191/0192 data cross-checks)
 
@@ -127,11 +137,14 @@ test (predictions stand 1359 se apart from the mixed form's there).
   | 1e11 | 9.412e8     | 941,199,658 | 1.118e9     | 1,117,820,622 | 4,118,054,813 ✓ |
   | 1e12 | 8.654e9     | 8,654,138,673 | 1.015e10  | 10,149,785,667 | 37,607,912,018 ✓ |
 
-- **C1.5 antisymmetry EXACT**: π(x;4,(1,3)) = π(x;4,(3,1)) (diff 0) at all
-  four scales 1e9..1e12 — the paper's Conjecture 1.5 zero-sum is empirically
-  0 to 1e12.
+- **C1.5 antisymmetry**: π(x;4,(1,3)) − π(x;4,(3,1)) = 0 at all four scales
+  1e9..1e12, and −1 at 3e12 (0194) - the FIRST non-zero value (1 in 2.9e10,
+  far inside the paper's O budget); the empirical zero-sum held exactly from
+  1e9 to 1e12.
 - **Diagonal asymmetry** π(3,3) − π(1,1) = +551 / +5,960 / +14,252 / +63,337
-  (1e9..1e12), growing a few × per decade — recorded, not fitted.
+  / +51,539 (1e9..3e12) - a small drift within budget, NOT monotone (the
+  4-point 'growing a few × per decade' narrative of 0191/0192 is corrected
+  in place by the 3e12 value) - recorded, not fitted.
 - **Convention notes**: the paper's π(x;q,(a,b)) counts p_n ≤ X with
   successor unrestricted (odd p_n; 2 excluded); the record's `meas` counts
   gaps between consecutive primes both ≤ X (incl. the (2,3) gap). `meas`
@@ -171,8 +184,11 @@ test (predictions stand 1359 se apart from the mixed form's there).
 
 ## 6. Open items (honest)
 
-1. **3e12 in flight** (0194 pending): the derived form's second
-   out-of-sample test (pred +0.002932 vs mixed +0.001573; 1359 se apart).
+1. **3e12 DONE (0194)**: the derived form's second out-of-sample test -
+   R(3e12) = +0.002918 vs pred +0.002932: −0.9 combined sigma (the mixed
+   form rejected at 888.3 se); the C1.5 antisymmetry first went non-zero
+   there (diff −1); the diagonal-asymmetry 'growth' narrative corrected
+   to 'small drift within budget' in the same entry.
 2. **The strict-CI gate**: not declared closed (see §4); closing it would
    require the form to land inside CI on an out-of-sample point (or a full
    derivation of the coefficients from the proven expansion — the next
