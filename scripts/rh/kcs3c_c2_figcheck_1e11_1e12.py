@@ -112,7 +112,11 @@ def interval_sieve(lo, hi):
     idx = np.nonzero(s)[0]
     if len(idx) == 0:
         return np.zeros(0, dtype=np.int64)
-    idx = idx.astype(np.int64)
+    # nonzero already returns int64 on this platform; keep it copy-free
+    # (the astype copy used to add a 13.7 GB transient at 5e10 windows
+    # and pushed the peak from ~40 GB to the measured 56.2 GB)
+    if idx.dtype != np.dtype(np.int64):
+        idx = idx.astype(np.int64)
     idx *= 2
     idx += lo2
     return idx

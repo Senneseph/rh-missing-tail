@@ -359,6 +359,27 @@ Nothing here needs GPU, long compute, or the zeta binaries.
   15:34Z, 200 x 5e10 windows, checkpointed, 1 core, ~8-9 h ETA;
   predictions on file: S(1e13) = 0.004954 (8-pt) / 0.004944 (9-pt),
   band 0.01289). No RH claim.
+  **1e13 OPS - 2-WAY EXPANSION (2026-10-27, 0197 ops note):**
+  the serial run (32/200 windows in) was stopped at the owner's
+  prompt to expand beyond 1 core. The recorded 56.2 GB 'peak' was
+  ru_MAXrss (high-water), not steady state (live working set ~16
+  GB); decomposition of the high-water: 25 GB odd-only bool sieve +
+  13.7 GB nonzero index + 13.7 GB REDUNDANT astype copy.
+  Fix: copy-free dtype path in interval_sieve (arithmetic
+  unchanged) -> per-window peak 40.0 / 39.1 GB (measured).
+  2-way memory accounting: 2 x 40 = 80 GB peak + ~16 GB system
+  < 124 GB, ~28 GB headroom (3-way does not fit). Cross-check
+  BEFORE use: fresh 2-worker recomputation of the whole 1e12 run
+  (scripts/rh/kcs3c_c2_worker.py x2 + kcs3c_c2_xcheck_1e12.py):
+  20/20 windows x 11 fields vs the frozen 0192 shard = 0
+  mismatches; pi(1e12) IDENTITY (37,607,912,018); max boundary gap
+  92 <= 2000; the xcheck pair itself ran 20 windows in ~21 min
+  (~2.5x effective speedup, DRAM contention mild). 1e13 relaunched
+  2-way (strided i mod 2, sharded checkpoints, workers 529319/
+  529320; 84 windows each from window 32 on; merge step re-runs the
+  existing main() tail once both shards complete - identical code
+  path as all recorded points). ETA ~3.5 h. No arithmetic change;
+  validation = 220 exact field matches + pi identity.
   **SECOND OUT-OF-SAMPLE POINT (0194, 2026-10-27, ~39 min, 60 windows):**
   R(3e12) = +0.002918 (meas = 0.538446, se 1.515e-06, pi(3e12) =
   108,340,298,703, u3 = 0.535528, z vs u3 = +1926.8; prefix integrity:
