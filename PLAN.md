@@ -209,11 +209,27 @@ Commit a00c7d6.
    as the record. In-tree: E1ClauseV3C window (G, 9e23] (0176:
    T_MEAS3 = 9e23, hole B = 1e8, 40-row face, max residual
    6.333622e7 at 9e23 -> 37% margin, full tree 17450 jobs). No RH claim.
-7. **The terminal face (NAMED, unchanged):** the in-tree closure of
-   the `hOffC` face remains blocked on the external `[Z78C]` frontier
-   (0.8747729897, below in-tree; frontier board sweep 2026-10-24:
-   28 records, nothing new, no adoption trigger). The data edge is a
-   FLANK — it never closes the face; the face stays named.
+7. **The terminal face (NAMED, adopted forward at 0195):** the
+   in-tree closure of the `hOffC` face is now wired at
+   `[Z78SIL32]` (0.873995 = 174799/200000; tracker record
+   sil-density-split-20261026, PR #83, merged 2026-10-27). Frontier
+   board sweep 2026-10-27: 33 records; six consecutive board-best
+   merges since the 2026-10-24 sweep (PR #70 lewko-acyclic at the
+   old [Z78C] boundary, then #71 slayer, #73 arvi-repeated-marks,
+   #74 sil-fourth-power, #76 arvi-repeated-marks-on-sil-face,
+   #83 sil-density-split). PR #83 was strictly
+   kernel-replayed (stage C 537/537 per-module clean, stage D:
+   canonical compile at 174799/200000, axiom audit
+   {propext, Classical.choice, Quot.sound}, zero sorry) before
+   in-tree adoption: `formal/RhAttack/Z78Sil30.lean` / `Z78Arvi31.lean`
+   / `Z78Sil32.lean` (the three hops, named external inputs, strict
+   strengthening theorems vs every prior [Z78*] record) + RHEnd part
+   B17 (5 theorems; RHEnd targeted build 8749 jobs green, full tree
+   17450). The face is now `hOffC : d0 <= 74799/200000` above H
+   (0.373995 off-line; slice (0.373995, 0.3747729897] closed in the
+   RHEnd body; z-score of the adoption 7.78e-4). The face remains
+   NAMED, not closed; the data edge is a FLANK and never closes it;
+   a future board-best record is the next adoption trigger.
 8. **The second orbit (KANSAS CITY SHUFFLE, IN PROGRESS):**
    `docs/KANSAS-CITY-SHUFFLE-SIEVE-ORBIT-PLAN-2026-10-25.md` — the
    owner's crafted creation: a Fourier-compatible Sieve of

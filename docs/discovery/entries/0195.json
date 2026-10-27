@@ -1,0 +1,35 @@
+{
+  "id": "0195",
+  "ts": "2026-10-27T15:30:00",
+  "title": "S30/A31/S32 frontier hops ADOPTED IN TREE (0195, B6 section-8 fourth demonstration): six tracked records re-merged the board 2026-10-21..27; PR #83 sil-density-split 174799/200000 = 0.873995 strictly kernel-replayed (stage C per-module, stage D statement+axiom audit, zero sorry), in-tree endpoint face shrinks from [Z78C] to [Z78SIL32]; no RH claim",
+  "kinds": ["adoption", "formal", "frontier"],
+  "status": "recorded",
+  "claim": "No RH claim: [Z78SIL32] is a Dirichlet nonvanishing half-plane at 0.873995 (Riemann zeta in scope mod-1, proved at the entry and kernel-checked by the zeta-consequence probe). It is still 0.373995 from the critical line in off-line distance. The in-tree endpoint remains a zero-exclusion statement under named external inputs; what changed is only the width of the named gap.",
+  "evidence": [
+    "catalogue: live QuasiRiemannTracker catalogue (gtimg.github.io .../catalogue.json, as_of 2026-10-27, 33 records; snapshot tmp/tracker_catalog_1027.json). Six records merged after the 2026-10-24 sweep: PR#70 lewko-acyclic-bootstrap 874772906/10^9 (= [Z78C] boundary), PR#71 slayer-recost 0.87477290596, PR#73 arvi-repeated-marks 8747289/10^7, PR#74 sil-fourth-power 1749387/2000000, PR#76 arvi-repeated-marks-on-sil-face 349843/400000, PR#83 sil-density-split 174799/200000 (board best, merged 2026-10-27T06:11Z)",
+    "replay pins (fetched at recorded source_commit, no merge-head fallback needed): sil30 repo_sil30@bf20f0d362f941a544aca2e886ec41f77b191ea5; arvi31 repo_arvi31@2fd55e03fd33d0f181cdd74ab1bd0a87b949f53a; sil32 repo_sil32@f4bc792dff57f9f63fe791521c6c49497ff6a571 (all under tmp/z78s32/)",
+    "dependency cones byte-identical to the frozen 0148/0162 replay copies: openai-baseline 2928/2928 files, hailey-collet-1252270103 3548/3548 files, and arvi31-in-sil32-snapshot 700/700 files (zero differing); the 0148 compiled candlib oleans were therefore reused (6474 oleans), and only each candidate's own new cone was compiled",
+    "stage C strict replay: sil30 478/478 modules, arvi31 699/699, sil32 537/537, each per-module kernel-compiled via the pinned lean 4.34.1 binary with dependency-ordered parallel scheduling, zero failures (tmp/z78s32/stageC_summary.json; driver tmp/z78s32/stageC_driver.py with per-candidate snapshot SHA256 guard files)",
+    "stage D per hop: canonical Candidate/Main.lean kernel-compiled in-tree of the replay (bound at exactly 1749387/2000000, 349843/400000, 174799/200000); axiom audit of the record endpoint theorems (the canonical wrapper is a one-line application of them): {propext, Classical.choice, Quot.sound} for all three; #eval data gates 0.8746935/0.8746075/0.873995; zeta-consequence form (forall Dirichlet => riemannZeta nonzero via DirichletCharacter.LFunction_modOne_eq) compiled at each exact rational; no-sorry sweep clean on all three src trees (tmp/z78s32/stageD_full.log, per-hop logs)",
+    "in-tree: formal/RhAttack/Z78Sil30.lean, Z78Arvi31.lean, Z78Sil32.lean (certified boundary defs, strict strengthening theorems against [Z78C]/[Z78G]/[Z78T]/[Z78L]/[Z78], named external input, zeta strip + offPair theorems); RHEnd.lean part B17: rhend_sliceSil32Excl, rh_program78_stripfront_mach_unifiedSil32 (+PT2), rh_program78_stripfront_mach_unifiedGao_ofSil32 (+PT2) - 5 theorems",
+    "builds: lake build full package green (17450 jobs); targeted: RhAttack.Z78Sil30 / Z78Arvi31 / Z78Sil32 each green (8727 jobs), RhAttack.RHEnd green (8749 jobs, B17 present); logs tmp/z78s32/lake_*.log",
+    "face: hOffC endpoint d0 < 3/8 now reads d0 <= sil32D0max = 74799/200000 = 0.373995 (was 0.3747729897 at [Z78C]); the slice (0.373995, 0.3747729897] between [Z78SIL32] and [Z78C] is closed in the RHEnd body; z-score of the adoption vs the old face: 7.78e-4"
+  ],
+  "artifacts": {
+    "sil30Upper": 0.8746935,
+    "arvi31Upper": 0.8746075,
+    "sil32Upper": 0.873995,
+    "colletUpper": 0.8747729897,
+    "sil32D0max": 0.373995,
+    "gaoD0max": 0.375,
+    "trackD0max": 0.37696,
+    "face_shrink_vs_collet": 0.0007779897,
+    "z_score": 0.000778,
+    "axioms_all_three": ["propext", "Classical.choice", "Quot.sound"],
+    "sorry_count_all_three": 0,
+    "stageC_modules": {"sil30": 478, "arvi31": 699, "sil32": 537},
+    "in_tree_terminal_face": "hOffC : d0 <= 74799/200000 above H (was 3747729897/10^10)"
+  },
+  "relations": ["0133", "0142", "0146", "0147", "0148", "0162", "0194"],
+  "no_rh_claim": true
+}
