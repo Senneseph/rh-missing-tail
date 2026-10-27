@@ -28,7 +28,7 @@ Metaphor rows are allowed **only** when they point at a named object.
 | adiabatic invariant / phase | band position ρ = (Φ−L1)/W: x-stable to ~1e-6, smooth monotone decay in z (0181)        | MEASURED (0181); in-tree 0184 `level1_position_in_band` names its home (0 ≤ Φ−L1 ≤ W) |
 | two-body integrability      | pair/level-1 structure: fully exact, finite, no approximation                            | PROVEN (0180, 0183, 0184) |
 | three-body chaos onset      | twin/triple prime correlations; U3/U3b gap-class: model explicit HEURISTIC; naive pair-bias composition ruled out (U3b) | MEASURED + HEURISTIC |
-| turn-taking rhythm          | sieve: odd/even level alternation (inclusion–exclusion parity); zeta: e^{iρt} oscillation in t   | structure named; **cross-correlation of the two residuals UNMAPPED** |
+| turn-taking rhythm          | sieve: odd/even level alternation (inclusion–exclusion parity); zeta: e^{iρt} oscillation in t   | baseline measured (0185): the two IDENTITY residuals are at different scales (one is roundoff at the dps floor, the other exact structure) - naive turn-taking ruled out at this level; the dynamical variant needs a measured zeta-side datum, O1 open |
 | harmonic evolution          | "always harmonically evolves" = stability statement of the relative coordinate under x- and z-evolution | candidate statement: see O4; not yet measured as a joint law |
 
 ## 1b. The two-body reduction, made concrete (exploration)
@@ -149,11 +149,27 @@ therefore "run U1c and read the correlation in the orbital vocabulary."
   harness *is* the relative-coordinate measurement. Run it on the orbital
   reading: ρ_rel(x) = joint statistic of (sieve residual at x,z) and
   (zeta-side residual at x). x-sweep × z-sweep; exact integers; no RH claim.
+  **RUN (0185, 2026-10-26, `scripts/rh/kcs1c_two_process.py`, 58 s wall, raw
+  table `tmp/kcs1c_out.txt`):** both processes on the same input χ at the same
+  edge x; sieve side EXACT at z = 31 (Φ remainders vs xV: 11.5/19.8/12.2/0.514
+  at x = 1e4…1e7; the χ3/χ5 variants bounded exact integers, measured range
+  {−9,…,11}); zeta side = the C-channel E7a action identity at s = 1/2 + it,
+  t ∈ {10,100}, x ≤ 1e6, dps 30. **Baseline finding (recorded honestly):**
+  the dps sweep at one edge shows the zeta-side identity residual tracks the
+  precision exactly (1.09e-11 at dps 10 → 6.68e-52 at dps 50, i.e. O(10^{-dps}))
+  — it is pure roundoff, NOT a dynamical quantity — while the sieve-side
+  residual is exact and structurally O(1)…O(20) vs xV. The simplest
+  turn-taking reading of the two *identity* residuals is therefore ruled out
+  at this level. O1's corrected next step: take the zeta-side component to be
+  a MEASURED zeta datum (E1/S-series residual type, the mainstream's own
+  residual), and cross-correlate it with the exact sieve residual at matched
+  (x, z). The raw ratio log is recorded as the O1 input.
 - **O2 (off-board, formal).** State + prove a named finite explicit-formula
   identity in Lean for one explicit test function; cite (fetched +
   identity-checked) the 2025 Lean verification project as API anchor.
-  This is the "Euler action for both" in theorem form. Do NOT start before
-  U4c and U1c are green in the main program.
+  This is the "Euler action for both" in theorem form. Precondition now met
+  (U4c green 0184, U1c run 0185) - still OFF-BOARD: start only when the main
+  program names it.
 - **O3 (borrowed).** The level-1 virial band. Already the mainstream
   `level1_sandwich` unit — the side-quest re-uses it, adds no work.
 - **O4 (measurement, cheap).** The "phase diagram" of the dance: at each

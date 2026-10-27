@@ -124,7 +124,7 @@ Reconstruction (faithful):
 
 | # | Claim | status | honesty mark |
 |---|---|---|---|
-| N1 | **Sieve Action identity**: the flat-action (summation-by-parts) reading of the Legendre recursion `U_j(u) = U_{j−1}(u) − U_{j−1}(⌊u/p_j⌋)` / character version `V_j(u) = V_{j−1}(u) − χ(p_j) V_{j−1}(⌊u/p_j⌋)` — the sieve as a *total-differential Action*, E7a-verified exact at reachable scale (exact integer arithmetic; the zeta-side twin is the E7a Euler action). **STATUS U1a (2026-10-25): VERIFIED EXACT** on 42 configurations (z ≤ 31, x ≤ 10^7, χ = 1 and χ = (·/4)) — with the refinement that the multiplicative side is `Σ_{d|P̄} μ(d)χ(d) S_χ(⌊x/d⌋)` with the character prefix S_χ (the ⌊x/d⌋ form is the PRINCIPAL specialization); for non-principal χ the whole quantity is a bounded exact integer (|V| ≤ 4 measured) — no grind on that orbit at all. | **U1a DONE** (U1b/c pending) | the recursion is textbook-true; the *verification + combined two-process identity* is the deliverable |
+| N1 | **Sieve Action identity**: the flat-action (summation-by-parts) reading of the Legendre recursion `U_j(u) = U_{j−1}(u) − U_{j−1}(⌊u/p_j⌋)` / character version `V_j(u) = V_{j−1}(u) − χ(p_j) V_{j−1}(⌊u/p_j⌋)` — the sieve as a *total-differential Action*, E7a-verified exact at reachable scale (exact integer arithmetic; the zeta-side twin is the E7a Euler action). **STATUS U1a (2026-10-25): VERIFIED EXACT** on 42 configurations (z ≤ 31, x ≤ 10^7, χ = 1 and χ = (·/4)) — with the refinement that the multiplicative side is `Σ_{d|P̄} μ(d)χ(d) S_χ(⌊x/d⌋)` with the character prefix S_χ (the ⌊x/d⌋ form is the PRINCIPAL specialization); for non-principal χ the whole quantity is a bounded exact integer (|V| ≤ 4 measured) — no grind on that orbit at all. | **U1 COMPLETE** (a: 0170, b: 0170, c: 0185) | the recursion is textbook-true; the *verification + combined two-process identity* is the deliverable |
 | N2 | **Fourier sieve operator theorem (finite, exact)**: on `Z/NZ`, N = P̄(z) squarefree, the per-prime mark `K_p` = pointwise mult. by `1_{p∤·}` is a self-adjoint IDEMPOTENT (eigenvalues 0/1), and the marks commute; its Fourier symbol is the exact comb `F(1_{p∤·}) = N·δ_0 − (N/p)·1_{p-torsion}` (p support points: value N at the origin, −N/p on the rest of the p-torsion subgroup of the character group); the full-sieve symbol is the iterated convolution of the combs = the RAMANUJAN field `F(1_{(·,N)=1})(a) = c_N(a) = φ(N)·μ(k)/φ(k)`, k = N/gcd(a,N) — and for squarefree N this has FULL support (all N characters, 2^{π(z)} level sets; the sparse combs convolve into a dense field — the opacity lives in the convolution, not in any single chime); `φ(N)` falls out of Parseval. **CORRECTION (U2 run, 0172, 2026-10-25):** the earlier draft's `DFT(1_{units}) = (1/P̄)·1_{Ĝ[P̄-torsion]}` was WRONG at measurement (it asserted a torsion-subspace support; the measured field is full-support Ramanujan — see tmp/kcs2_out.txt). | **U2 MEASURED (0172); LEAN WAVE-1 GREEN (0175: SieveAction.lean builds, 8706 jobs)** | finite exact algebra, exact-integer right-hand sides; the *chime-comb + full-Ramanujan-field package with the sparsity→density reading* is new here |
 | N3 | **Sieve orbit width = the parity gap**, stated as the orbit-2 analogue of `surjWidth`: local reading (per-hop survivors) vs global (final structure); width = measured first-order upper/lower sieve gap; parity = the opacity; anchor = the zeta/L-side (partial). | U4: item (a) **DONE (0180)** (Legendre exact identity, theorem form, SieveOrbit.lean); item (b) **MEASURED (0181)** (the width number W/(xV) = 2.10→10.12 in z and the position ρ = 0.84→0.67, x-stable, exact sandwich L1 ≤ Φ ≤ U2 on all rows); item (c) parity statement pending | **Scoped honestly**: Legendre exactness is now machine-proved; the width number is measured; the parity correspondence remains a *structural statement*, not a new barrier theorem |
 | N4 | **Two-together next-gap-class prediction**: `predicted(class) ∝ Σ W(2k) e^{−2k/ln X}` predicts the mod-4 (and mod-30) gap-class frequencies at reachable X, beating (i) naive uniform and (ii) one-channel baselines, with a margin log. **STATUS U3 (2026-10-25): MEASURED** at X = 10^7/10^8: measured 0.564864/0.556519 (CI ±0.0012/±0.0008), two-together 0.555808/0.550315, one-channel 0.500000 — the two-together model explains ~90% of the measured bias and beats the one-channel by ~5.0 points; the strict-CI gate (|meas − model| < CI) is NOT yet met (0.0062 ≈ 7.7·se at 1e8 — arithmetically corrected below). **UPDATED U3b (2026-10-25):** three-channel decomposition at X = 1e7/1e8/3e8/1e9 (exact sieve): u3-only 0.555808/0.550315/0.548097/0.545905; LOS-pair (1+δ)/2 0.550123/0.545670/0.543841/0.542016 (the anchor's leading term, verified); naive composed (1±δ)·w·e^{−2k/L} 0.604759/0.595110/0.591169/0.587248 — **ruled out at all four scales** (|z| up to 519). Strict-CI gate still NOT met: u3-only residuals +0.009056/+0.006204/+0.005714/+0.005167 with z = 14.9/30.0/46.3/74.1 (the U3 "7.7·se" was a double-discount: the printed CI half-width IS 1.96·se, so z = diff/se directly — corrected). New named finding: the **transfer coefficient** α(X) = 0.18332/0.13743/0.13170/0.12412 (decaying) — the pair bias transfers DILUTED into the consecutive-gap census, with measured ≈ u3 + 2f(1−f)·α·δ to first order at every scale (2f(1−f) ≈ 0.495 is the class-variance of the ratio). U3c = derive the transfer mechanism and/or the next α decade (3e9/1e10). | **U3b DONE** (gate still open; U3c named) | a prime-gap **class statistic** — **not** an exact next-prime oracle (boundary stated in §6) |
@@ -286,6 +286,25 @@ wiki on each green gate. The in-tree frontier (`Z78C`, hOffC) is
   refinement; per-hop action on the incremental masks; remainder table
   |R| ≤ 19 vs the 2047 worst case at z = 31: the grind is not
   reached). Output: `tmp/kcs1_out.txt`. Discovery 0170.
+- **U1c RUN (2026-10-26):** `scripts/rh/kcs1c_two_process.py` — the
+  two-process zeta/sieve residual harness (plan U1 item (c)): both
+  processes on the SAME input χ at the SAME edge x. Sieve side
+  EXACT at z = 31: V_triv = Φ(x,31) with exact remainders vs xV(31)
+  (11.5 / 19.8 / 12.2 / 0.514 at x = 1e4/1e5/1e6/1e7 — consistent
+  with 0181), V_χ3, V_χ5 bounded exact integers (measured range
+  {−9,…,11}, consistent with U1a's boundedness). Zeta side: the
+  C-channel E7a action identity (day006 harness form, N = 1, M = x)
+  at s = 1/2 + i t, t ∈ {10,100}, x ≤ 1e6, dps = 30: floor residual
+  R_z ∈ [0, 5.3e-30]. THE BASELINE FINDING: the dps sweep at one
+  edge shows R_z tracks the precision O(10^{-dps}) exactly (1.09e-11
+  at dps 10 → 6.68e-52 at dps 50) — the zeta-side identity residual
+  is pure roundoff, not a dynamical quantity; the sieve-side residual
+  is exact and structurally O(1)…O(20) vs xV. The simplest
+  "turn-taking" reading of the two residuals is therefore ruled out
+  AT THIS LEVEL: O1 needs a zeta-side residual that is a measured
+  zeta datum (E1/S-series type), not an identity residual. Raw ratio
+  log in `tmp/kcs1c_out.txt` (the O1 input). 58 s wall. No RH
+  claim. Discovery 0185.
 - **U3 RUN (2026-10-25):** `scripts/rh/kcs3_gap_class.py` — measured +
   predicted + margin table + the k = 1..8 shape check. Output:
   `tmp/kcs3_out.txt`. Strict-CI gate not met yet → U3b named above.
@@ -418,10 +437,16 @@ wiki on each green gate. The in-tree frontier (`Z78C`, hOffC) is
   then bridges the ℤ sum to the exact count (both views of U4a
   agree). Scratch-first descent (c1..c21: `tmp/u4a_section.lean`,
   logs `tmp/u4a_c1.log..u4a_c21.log`). U4 item (b) (the first-order
-  width number) and (c) (the structural parity/anchor statement,
-  marked `-- structural, not a barrier theorem`) remain the named
-  U4(b) follow-ups; U1c (two-process zeta/sieve residual harness)
-  remains pending.
+  width number) is MEASURED (0181) and PROVED (`level1_sandwich`,
+  0183); item (c) (the structural parity/anchor statement, marked
+  structural-not-barrier) is GREEN (0184: `level1_width_eq_pairwise`,
+  `level1_width_nonneg`, `level1_position_in_band`). U1c (two-process
+  zeta/sieve residual harness) is RUN (0185, `tmp/kcs1c_out.txt`),
+  with the baseline finding: the zeta-side identity residual is pure
+  roundoff at the dps floor, the sieve-side residual is exact
+  structure - the naive two-identity turn-taking is ruled out at this
+  level, and O1 (orbital reading) narrows to a measured zeta-side
+  datum.
 
 *The shuffle is a crafted creation: it does not claim to move the face.
 It claims a second orbit — and on that orbit, the hops are free.*

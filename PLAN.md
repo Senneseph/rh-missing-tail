@@ -320,8 +320,18 @@ Commit a00c7d6.
    home of the measured rho; 0181 anchors W/xV = 2.10 -> 10.12,
    rho = 0.84 -> 0.67 stay measured). The N3 row is now (a) proved
    (0180), (b) proved (0183, measured 0181), (c) structural
-   statement landed (0184). **U1c PENDING:** the two-process
-   zeta/sieve residual harness (also O1 of the orbital side-quest).
+   statement landed (0184). **U1c DONE (0185, 2026-10-26):** the two-
+   process zeta/sieve residual harness at the common edge
+   (kcs1c_two_process.py, 58 s wall, raw table tmp/kcs1c_out.txt):
+   sieve side EXACT at z = 31 (Phi remainders vs xV = 11.5/19.8/12.2/
+   0.514 at 1e4…1e7, chi-3/chi-5 bounded exact ints in {-9,…,11});
+   zeta side = C-channel E7a action identity at s = 1/2 + it, floor
+   residual in [0, 5.3e-30] at dps 30; dps sweep shows R_z = O(10^-dps)
+   exactly (precision law, not structural floor) — the naive two-
+   identity-residual turn-taking is ruled out at this level; O1's
+   narrow step = cross-correlate the EXACT sieve residual with a
+   MEASURED zeta-side datum (E1/S-series type). The U1 unit is fully
+   closed (a exact 0170, b margin 0170, c floor residual 0185).
    Recall incident logged in 0170 (a 65/35 benchmark was unverified
    memory; corrected to the verified LOS framework). No RH claim:
    prime-gap class statistic + exact sieve algebra, flank not face.
