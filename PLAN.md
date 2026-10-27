@@ -295,7 +295,22 @@ Commit a00c7d6.
    0.67288 (above the band's midpoint at reachable z - the first
    number for the "parity = opacity" reading); Phi triple-checked
    exact (mu-sum = recursion = brute) 11/11; remainder <= 1194.6
-   vs worst case 2^20 - 1 (877x margin). **U4(c) PENDING:** the
+   vs worst case 2^20 - 1 (877x margin).
+   **U4(b) FORMAL GREEN (0183, 2026-10-26):** the level1_sandwich
+   theorem in tree (SieveOrbit.lean +818 lines, 1195 total):
+   L1 x ps <= (phi_list x ps : Z) <= U2 x ps for every x and every
+   distinct-prime list ps - the 0181 measured sandwich promoted to
+   proved, through the mcount counting function, the pointwise
+   residuals slack_t/slack_s (non-negative; level1_lower /
+   level1_upper), the off-diagonal mass m(m-1)
+   (offdiag_pointwise, mcount_offdiag_sum) and ordered = 2 x
+   unordered (ordered_eq_two_pair, sum_bij through Prod.swap);
+   scratch c13 (28 errors) -> c18 (0), in-tree 0 errors strict
+   kernel replay, lake 8706 targeted / 17450 full. SieveOrbit.md
+   card updated (U4a+U4b + the new pinned-mathlib gotchas: sum
+   bodies stop at infix -/+, ascribed summands lift operands to
+   Int.ediv, cast_sum pattern matching via Nat.cast form).
+   **U4(c) PENDING:** the
    parity/anchor statement (structural, not a barrier theorem);
    U1c (two-process zeta/sieve residual harness) still pending.
    Recall incident logged in 0170 (a 65/35 benchmark was unverified
