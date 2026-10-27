@@ -253,7 +253,7 @@ def main():
         if x in meas_rec:
             Wt("  record meas(%d) = %.6f   ours = %.6f   diff = %+.2e"
                % (x, meas_rec[x], meas, meas - meas_rec[x]))
-        if x == 10 ** 12:
+        if x >= 10 ** 12:
             L = math.log(x)
             delta = los_delta(L)
             _C2 = twin_constant()
@@ -267,21 +267,21 @@ def main():
             (a2, b2) = DERIV2
             r2 = a2 * ll * ll + b2 * delta * ll
             Wt("")
-            Wt("  === the NEW 1e12 ladder point (out-of-sample) ===")
-            Wt("  delta(1e12) = %.6f   u3 = S2/(S2+S0) (the ladder"
-               " baseline) = %.6f" % (delta, u3))
-            Wt("  R(1e12) = meas - u3 = %+.6f   se = %.3e   z(vs u3) = "
-               "%+.1f" % (R, se, R / se))
+            Wt("  === the NEW %d ladder point (out-of-sample) ===" % x)
+            Wt("  delta = %.6f   u3 = S2/(S2+S0) (the ladder baseline)"
+               " = %.6f" % (delta, u3))
+            Wt("  R = meas - u3 = %+.6f   se = %.3e   z(vs u3) = %+.1f"
+               % (R, se, R / se))
             Wt("  prediction (i)  0186 4-pt mixed form:  %+.6f   "
                "diff = %+.6f   z = %+.1f"
                % (r4, R - r4, (R - r4) / se))
             Wt("  prediction (ii) 0190 derived 2-term:     %+.6f   "
                "diff = %+.6f   z = %+.1f"
                % (r2, R - r2, (R - r2) / se))
-            Wt("  (the two predictions differ by %+.6f = %.0f se - the"
+            Wt("  (the two predictions differ by %+.6f = %.0f se - this"
                % (r2 - r4, (r2 - r4) / se))
-            Wt("   1e12 point discriminates the 0186 mixed form from the")
-            Wt("   0190 derived form out-of-sample)")
+            Wt("   point tests the 0190 derived form's out-of-sample")
+            Wt("   behavior; the 3e12 point is its SECOND such test)")
         Wt("  No RH claim: exact integer sieve; flank work.")
     text = "\n".join(out)
     os.makedirs(DIR, exist_ok=True)
