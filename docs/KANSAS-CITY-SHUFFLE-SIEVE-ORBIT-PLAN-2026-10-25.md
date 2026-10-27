@@ -330,6 +330,35 @@ Nothing here needs GPU, long compute, or the zeta binaries.
   data-compatible (first purely derived form to pass the screen); its
   out-of-sample behavior at 3e11/1e12 is the named discriminator
   (beyond this box, 0187). Strict gate OPEN at that writing.
+  **RUN (h) - the SECTION-2 HEURISTIC EVALUATION (0196, 2026-10-27,
+  instant): the 0193 deep follow-up, CLOSED.** Read Section 2 of the
+  paper verbatim (pp. 7-11): the pair-density expansion D(a,b;y) is
+  kept only through |A|+|T| <= 2 (2.12)-(2.20); every |A|+|T| >= 3
+  case is assigned explicitly to O(x (loglog x)^2/(log x)^3); the
+  odd-k refinement of (2.2) that would feed those terms is the
+  authors' own future work (deferred twice). VERDICT on 0193's
+  question ('do the R-law coefficients derive?'): SCALE PREDICTED -
+  S = meas - (1+delta)/2 sits inside the truncation band B = u^2
+  (relative) at every ladder point: S/B = 0.496 (1e7) -> 0.388
+  (3e12), monotone ~ b/loglog (u/L dominance); VALUE NOT PREDICTED -
+  the coefficients live inside the explicit remainder; the band
+  |b| <= loglog X (2.78-3.36) vs fitted 0.862 (margin 0.26) is a
+  consistency PASS, not a derivation; 0193's gate stands: structure
+  derived, coefficients fitted. NEW DETERMINATION: the q=4 MIRROR
+  EQUALITY pi(1,3) = pi(3,1) (the (2.9)-(2.10) sums are literally
+  the same sums; h ≡ 2 mod 4 in both, (t+1,4)=1 <=> t odd) -
+  confirmed exact at 1e9/1e10/1e11/1e12, -1 (O(1) noise) at 3e12.
+  METHOD FINDING: the {u^2, u/L, 1/L} basis is ill-conditioned on
+  1e7..3e12 (cond ~ 1.5e8; u spans 0.172-0.117 only): adding 3e12
+  (resid -3.5 se vs the 8-pt form) swings the per-scale coefficients
+  37x/-28%/sign-flip while in-sample predictions move <= 0.22 se -
+  the stable objects are the curve S(X), the band B, and the 0190
+  two-term R-law (9-pt S fit: 0.19905/0.86232/-0.02674, chi2
+  5.14/6, max 2.06 se; 8-pt form reproduced exactly). The 1e13
+  ladder point is RUNNING (kcs3c_c2 1e13 sieve, launched 2026-10-27
+  15:34Z, 200 x 5e10 windows, checkpointed, 1 core, ~8-9 h ETA;
+  predictions on file: S(1e13) = 0.004954 (8-pt) / 0.004944 (9-pt),
+  band 0.01289). No RH claim.
   **SECOND OUT-OF-SAMPLE POINT (0194, 2026-10-27, ~39 min, 60 windows):**
   R(3e12) = +0.002918 (meas = 0.538446, se 1.515e-06, pi(3e12) =
   108,340,298,703, u3 = 0.535528, z vs u3 = +1926.8; prefix integrity:
@@ -397,9 +426,12 @@ Nothing here needs GPU, long compute, or the zeta binaries.
   candidate over 1e7..1e12 (corr. of record: the first 1e12 tally
   used the wrong baseline (1+delta)/2 - the ladder's u3 is
   S2/(S2+S0); the void line is recorded in 0192). No RH claim.
-  **STATUS: U3c mechanism COMPLETE (0173-0192); residual law = the
-  derived 2-term form (confirmed out-of-sample at ~3 se); strict-CI
-  gate: derived form the sole survivor, ~3-se statement.**
+  **STATUS: U3c mechanism COMPLETE (0173-0196); residual law = the
+  derived 2-term form (confirmed out-of-sample at 1e12 and 3e12,
+  combined <= 0.9 sigma); Section-2 evaluation closed (0196): scale
+  predicted, value not - the coefficients remain fitted; the next
+  ladder point (1e13) is running; strict-CI gate: derived form the
+  sole survivor.**
   Gate: the strict-CI gate closes when a DERIVED (not fitted) correction
   lands inside CI at 1e8 — or the residual is certified INSIDE the
   source's error budget with the next term named (the honest
