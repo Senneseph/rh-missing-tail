@@ -329,7 +329,34 @@ Nothing here needs GPU, long compute, or the zeta binaries.
   descriptions - both recorded. The derived 2-term form is now
   data-compatible (first purely derived form to pass the screen); its
   out-of-sample behavior at 3e11/1e12 is the named discriminator
-  (beyond this box, 0187). Strict gate OPEN.
+  (beyond this box, 0187). Strict gate OPEN at that writing.
+  **RUN (c) COMPLETE + the NEW 1e12 LADDER POINT (0192, 2026-10-27,
+  ~38 min, 20 checkpointed 5e10 windows, 1 core, peak 56 GB/window):**
+  the paper's HIGHEST row (1e12: 8.654e9 / 1.015e10) AGREEs (pi(1,1) =
+  8,654,138,673; pi(1,3) = 10,149,785,667; pi(1e12) = 37,607,912,018 =
+  tabulated, IDENTITY) - ALL FOUR PUBLISHED r = 2, q = 4 DATA ROWS NOW
+  CORROBORATED; C1.5 antisymmetry pi(1,3) = pi(3,1) still EXACT
+  (four scales); diagonal asymmetry +63,337. THE 1e12 POINT (first
+  beyond the 0187 memory ceiling): meas = 0.539769 (se 2.570e-6), u3
+  (S2/(S2+S0), the ladder baseline, re-verified to <= 6e-7) =
+  0.536638, **R(1e12) = +0.003131** (per-decade ratio 0.857, in line
+  with 0187). THE OUT-OF-SAMPLE VERDICT (the named discriminator):
+  the 0186 4-pt mixed form predicts +0.001883: diff +0.001248 =
+  485.6 se - DECISIVELY RULED OUT (its under-prediction streak
+  continues); the 0190 DERIVED 2-TERM form predicts +0.003139: diff
+  -0.000008 = -3.1 se - CONFIRMED OUT-OF-SAMPLE at the ~3-se level
+  (the two predictions stood 489 se apart). HONEST GATE STATEMENT:
+  the strict-CI gate is NOT declared closed (-3.1 se sits just outside
+  a 2-se CI; the coefficients are in-sample fitted), but every
+  previously live FITTED form is ruled out at 15-486 se and the
+  derived 2-term form is the SOLE SURVIVING candidate - the residual
+  law R(X) = -1.88114*(ll/l)^2 + 3.69471*delta*(ll/l) is the RECORDING
+  candidate over 1e7..1e12 (corr. of record: the first 1e12 tally
+  used the wrong baseline (1+delta)/2 - the ladder's u3 is
+  S2/(S2+S0); the void line is recorded in 0192). No RH claim.
+  **STATUS: U3c mechanism COMPLETE (0173-0192); residual law = the
+  derived 2-term form (confirmed out-of-sample at ~3 se); strict-CI
+  gate: derived form the sole survivor, ~3-se statement.**
   Gate: the strict-CI gate closes when a DERIVED (not fitted) correction
   lands inside CI at 1e8 — or the residual is certified INSIDE the
   source's error budget with the next term named (the honest
@@ -429,6 +456,19 @@ wiki on each green gate. The in-tree frontier (`Z78C`, hOffC) is
   measurement CI). Next: U3c(d) = 3e10/1e11 (mixed-form predictions
   +0.003139 / +0.002655). Output: `tmp/kcs3c_out.txt`. 26 s wall, peak
   16 GB. No RH claim.
+- **U3c RUN (c) COMPLETE (2026-10-27, 0191 + 0192):**
+  `scripts/rh/kcs3c_c_figcheck.py` + `kcs3c_c2_figcheck_1e11_1e12.py` -
+  the LOS paper (arXiv:1603.03720v4) fetched + identity-checked +
+  persisted (tmp/u3c_c_fig/paper.pdf); its Section 5 r = 2, q = 4
+  ACTUAL rows vs the independent exact pair-class sieve: ALL FOUR
+  PUBLISHED ROWS AGREE at the published precision; pi(1,3) = pi(3,1)
+  EXACTLY at all four scales (C1.5 antisymmetry exact to 1e12);
+  diagonal asymmetry +551/+5,960/+14,252/+63,337; the 'meas' pipeline
+  re-derived to ~5e-7. THE NEW 1e12 LADDER POINT (0192): meas =
+  0.539769 (se 2.570e-6), R(1e12) = +0.003131 - the 0186 mixed form
+  RULED OUT at 485.6 se; the 0190 derived 2-term form CONFIRMED at
+  -3.1 se (out-of-sample; the two predictions stood 489 se apart).
+  Output: tmp/u3c_c_fig/kcs3c_c2_out.txt. No RH claim.
 - **U3c RUN (d) (2026-10-26, 0187):** `scripts/rh/kcs3c_d_next_decade.py`
   - 3e10 (verbatim global byte sieve, 80 s) + 1e11 (two 5e10 interval
   halves; the mechanism gated by an exact identity check at 1e10;

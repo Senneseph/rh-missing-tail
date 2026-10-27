@@ -377,19 +377,32 @@ Commit a00c7d6.
    fit prefer different descriptions (both recorded). Out-of-sample
    at 3e11/1e12 = named discriminator, beyond this box (0187).
    Strict gate OPEN.
-   **U3c (c) DONE (rows 1e9/1e10/1e11) (0191, 2026-10-27):** the LOS
+   **U3c (c) COMPLETE + 1e12 point (0191 + 0192, 2026-10-27):** the LOS
    paper (arXiv:1603.03720v4, PNAS 2016) fetched + identity-checked +
-   persisted; its r = 2, q = 4 Section-5 ACTUAL rows AGREE with the
-   independent exact pair-class sieve at the published precision (1e9
-   11,413,177 / 14,010,314; 1e10 103,160,935 / 124,362,340; 1e11
-   941,199,658 / 1,117,820,622; pi(1e11) = 4,118,054,813 identity).
-   NEW: pi(1,3) = pi(3,1) EXACTLY at all three scales (C1.5
-   antisymmetry exact to 1e11); diagonal asymmetry +551 / +5,960 /
-   +14,252 (growing slowly, measured); the 'meas' pipeline
-   re-derived from raw pair counts to ~5e-7. The 1e12 paper row + the
-   NEW 1e12 ladder point = in-flight (checkpointed ~40 min run) = the
-   out-of-sample discriminator (0186 mixed +0.001851 vs 0190 derived
-   +0.003179 at 1e12 - ~500 se apart). No RH claim.
+   persisted; its r = 2, q = 4 Section-5 ACTUAL rows: ALL FOUR
+   PUBLISHED ROWS AGREE with the independent exact pair-class sieve at
+   the published precision (1e9 11,413,177 / 14,010,314; 1e10
+   103,160,935 / 124,362,340; 1e11 941,199,658 / 1,117,820,622; 1e12
+   8,654,138,673 / 10,149,785,667; pi(1e11) and pi(1e12) = tabulated,
+   IDENTITY). NEW: pi(1,3) = pi(3,1) EXACTLY at all four scales (C1.5
+   antisymmetry exact to 1e12); diagonal asymmetry +551 / +5,960 /
+   +14,252 / +63,337; 'meas' pipeline re-derived to ~5e-7. THE NEW
+   1e12 LADDER POINT (first beyond the 0187 memory ceiling; 20
+   checkpointed 5e10 windows, ~38 min, 56 GB/window): meas(1e12) =
+   0.539769 (se 2.570e-6), u3 = 0.536638 (S2/(S2+S0) baseline
+   re-verified to <= 6e-7), **R(1e12) = +0.003131** (per-decade ratio
+   0.857, in line with 0187). THE OUT-OF-SAMPLE VERDICT (the named
+   discriminator): 0186 mixed form predicts +0.001883 -> diff
+   +0.001248 = 485.6 se, DECISIVELY RULED OUT; 0190 DERIVED 2-TERM
+   form predicts +0.003139 -> diff -0.000008 = -3.1 se, CONFIRMED
+   OUT-OF-SAMPLE (the predictions stood 489 se apart). HONEST GATE:
+   the strict-CI gate is NOT declared closed (-3.1 se just outside a
+   2-se CI; coefficients in-sample fitted) but every live FITTED form
+   is ruled out at 15-486 se - the derived 2-term form is the SOLE
+   SURVIVING candidate and the RECORDING residual law over 1e7..1e12:
+   R(X) = -1.88114*(ll/l)^2 + 3.69471*delta*(ll/l). Corr. of record:
+   the first 1e12 tally used the wrong baseline (1+delta)/2 (void line
+   kept in 0192). No RH claim.
    Recall incident logged in 0170 (a 65/35 benchmark was unverified
    memory; corrected to the verified LOS framework). No RH claim:
    prime-gap class statistic + exact sieve algebra, flank not face.

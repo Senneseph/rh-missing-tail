@@ -49,6 +49,23 @@ import time
 
 import numpy as np
 
+# the VERBATIM u3 (two-together) machinery from kcs3b_gap_class_u3b.py -
+# the SAME baseline the R ladder (0186/0187) uses: u3 = S2/(S2+S0).
+# (0192 correction: the first 1e12 attempt used (1+delta)/2, the wrong
+# baseline - the R ladder's u3 is the two-together pair model.)
+import re as _re
+_SRC = open(
+    "/home/jsmille/Projects/rh-missing-tail/scripts/rh/kcs3b_gap_class_u3b.py"
+).read()
+_NS = {"np": np, "math": math}
+for _name in ["twin_constant", "w_array", "class_sums", "los_delta"]:
+    _m = _re.search(r"\ndef %s\(.*?(?=\ndef |\nOUT |\nif __name__)" % _name,
+                    _SRC, _re.S)
+    assert _m, _name
+    exec(_m.group(0), _NS)
+for _name in ["twin_constant", "w_array", "class_sums", "los_delta"]:
+    globals()[_name] = _NS[_name]
+
 W = 5 * 10 ** 10
 MARGIN = 2000
 DIR = "/home/jsmille/Projects/rh-missing-tail/tmp/u3c_c_fig"
@@ -238,8 +255,11 @@ def main():
                % (x, meas_rec[x], meas, meas - meas_rec[x]))
         if x == 10 ** 12:
             L = math.log(x)
-            delta = math.log(math.pi * L / 2.0) / (2.0 * L)
-            u3 = (1.0 + delta) / 2.0
+            delta = los_delta(L)
+            _C2 = twin_constant()
+            _w = w_array(2000, _C2)
+            _S2, _S0 = class_sums(L, _w, 2000)
+            u3 = _S2 / (_S2 + _S0)   # the R-ladder baseline (u3-only)
             R = meas - u3
             ll = math.log(L) / L
             (a4, b4) = MIX4
@@ -248,8 +268,8 @@ def main():
             r2 = a2 * ll * ll + b2 * delta * ll
             Wt("")
             Wt("  === the NEW 1e12 ladder point (out-of-sample) ===")
-            Wt("  delta(1e12) = %.6f   u3 = (1+delta)/2 = %.6f"
-               % (delta, u3))
+            Wt("  delta(1e12) = %.6f   u3 = S2/(S2+S0) (the ladder"
+               " baseline) = %.6f" % (delta, u3))
             Wt("  R(1e12) = meas - u3 = %+.6f   se = %.3e   z(vs u3) = "
                "%+.1f" % (R, se, R / se))
             Wt("  prediction (i)  0186 4-pt mixed form:  %+.6f   "
@@ -258,7 +278,8 @@ def main():
             Wt("  prediction (ii) 0190 derived 2-term:     %+.6f   "
                "diff = %+.6f   z = %+.1f"
                % (r2, R - r2, (R - r2) / se))
-            Wt("  (the two predictions differ by %+.6f = %.0f se - the")
+            Wt("  (the two predictions differ by %+.6f = %.0f se - the"
+               % (r2 - r4, (r2 - r4) / se))
             Wt("   1e12 point discriminates the 0186 mixed form from the")
             Wt("   0190 derived form out-of-sample)")
         Wt("  No RH claim: exact integer sieve; flank work.")
