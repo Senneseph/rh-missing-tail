@@ -1,0 +1,69 @@
+kcs3c_i  the alpha(X) transfer-coefficient curve  1e7..3e12
+         (U3c(i): the 'next alpha decade' of U3b / 0186;
+          pure post-processing of recorded data; K = 2000)
+
+           X       meas    u3 rec    u3 new     alpha         R
+    10000000   0.564864  0.555808  0.555808   0.18333 +0.009056
+   100000000   0.556519  0.550315  0.550315   0.13742 +0.006204
+   300000000   0.553811  0.548097  0.548097   0.13169 +0.005714
+  1000000000   0.551072  0.545905  0.545905   0.12413 +0.005167
+ 30000000000   0.544733  0.540762  0.540762   0.10620 +0.003971
+100000000000   0.542888  0.539233  0.539233   0.10120 +0.003655
+1000000000000   0.539769  0.536638  0.536638   0.09233 +0.003131
+3000000000000   0.538446  0.535528  0.535528   0.08850 +0.002918
+
+G2  recomputed alpha vs recorded U3b alpha (1e7..1e9):
+       10000000  new 0.18333   rec 0.18332   d = +0.00001  OK
+      100000000  new 0.13742   rec 0.13743   d = -0.00001  OK
+      300000000  new 0.13169   rec 0.13170   d = -0.00001  OK
+     1000000000  new 0.12413   rec 0.12412   d = +0.00001  OK
+
+G3  exact ckpt census (sum godd / sum gn) vs recorded meas
+    (recorded = 6-decimal rounding of the exact census):
+   1000000000000  exact 0.539768635   rec 0.539769   d = -4e-07  rounds-back OK
+   3000000000000  exact 0.538446477   rec 0.538446   d = +5e-07  rounds-back OK
+
+G4  transfer gain  R / (alpha*delta)  across the ladder
+    (first-order transfer meas = u3 + g*alpha*delta would
+    make this X-constant;  g ~ 2f(1-f) ~ 0.495, the U3b line):
+       10000000  alpha*delta = 0.018378   R/(alpha*delta) = 0.4928
+      100000000  alpha*delta = 0.012552   R/(alpha*delta) = 0.4943
+      300000000  alpha*delta = 0.011547   R/(alpha*delta) = 0.4948
+     1000000000  alpha*delta = 0.010431   R/(alpha*delta) = 0.4953
+    30000000000  alpha*delta = 0.008001   R/(alpha*delta) = 0.4964
+   100000000000  alpha*delta = 0.007359   R/(alpha*delta) = 0.4966
+   1000000000000  alpha*delta = 0.006300   R/(alpha*delta) = 0.4971
+   3000000000000  alpha*delta = 0.005868   R/(alpha*delta) = 0.4973
+   max-min drift = 0.91% over 5.7 decades  ->  OK (X-stable)
+
+report (NOT gated): 0190 derived R-law z's vs the MEASUREMENT
+se (the recorded 0196 OOS standard is combined fit+meas sigma;
+the 0199 entry gates R(1e13) properly):
+    30000000000  R meas +0.003971  R law +0.003975  z(meas se) =  -0.25
+   100000000000  R meas +0.003655  R law +0.003653  z(meas se) =  +0.25
+   1000000000000  R meas +0.003131  R law +0.003139  z(meas se) =  -2.98
+   3000000000000  R meas +0.002918  R law +0.002932  z(meas se) =  -9.58
+
+fit A  alpha = A*L^p :    A = 4.23721  p = -1.15726  max|resid(ln)| = 0.0767
+fit B  alpha = A - B/L:  A = -0.02522  B = 3.17215  max|resid| = 0.01174
+fit C  alpha = A/L :     all-8         A = 2.64365  max|resid| = 0.01931
+         converged 1e8..3e12  A = 2.55620  max|resid| = 0.00135
+   alpha*X diagnostics (alpha*L):
+       10000000  alpha*L = 2.9549
+      100000000  alpha*L = 2.5314
+      300000000  alpha*L = 2.5705
+     1000000000  alpha*L = 2.5724
+    30000000000  alpha*L = 2.5621
+   100000000000  alpha*L = 2.5632
+   1000000000000  alpha*L = 2.5511
+   3000000000000  alpha*L = 2.5427
+
+PREDICTIONS on file for the 1e13 point (running):
+   L = 29.933606  u = 0.1135507  delta = 0.064318  u3(new) = 0.534395
+   R(1e13) from the 0190 law          = +0.002729
+   alpha(1e13)  route 1 (fit A power) = 0.08294
+   alpha(1e13)  route 2 (fit C all-8) = 0.08832
+   alpha(1e13)  route 3 (fit C tail)  = 0.08540
+   alpha(1e13)  route 4 (R-law inv.)  = 0.08529
+
+GATE: ALL PASS

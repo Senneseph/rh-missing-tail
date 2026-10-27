@@ -1,0 +1,61 @@
+{
+  "id": "0198",
+  "ts": "2026-10-27T19:30:00",
+  "title": "U3c(i) the alpha(X) transfer-coefficient curve across the recorded ladder 1e7..3e12 (pure post-processing of recorded data, ALL GATES PASS): the 'next alpha decade' named in U3b/0186 is closed - alpha decays 0.18333 (1e7) -> 0.08850 (3e12) with alpha*L CONVERGED (2.53-2.57, max +/-0.6%) from 1e8 on (1e7 sits +15.6% above, the finite-X end); NEW structure: the transfer gain R/(alpha*delta) = 0.4928 -> 0.4973 is X-STABLE (0.91% drift over 5.7 decades) - the first-order transfer identity meas = u3 + g*alpha*delta with g ~ 2f(1-f) ~ 0.495 (the U3b line) is confirmed and alpha(X) is the sole X-carrier, tying U3b's transfer parameter to the 0190 R law as equivalent parameterizations; 1e13 predictions on file: R(1e13) = +0.002729 (0190 law), alpha(1e13) = 0.0829/0.0883/0.0854/0.0853 (four routes, ~ 0.085 +/- 0.002) for the running point; no RH claim",
+  "kinds": [
+    "measurement",
+    "derivation",
+    "flank"
+  ],
+  "status": "recorded",
+  "claim": "No RH claim: measured flank work on the second-orbit mod-4 prime-gap census statistic, pure post-processing of recorded data (zero new sieving). The unit closes U3b's named open question ('derive the transfer mechanism and/or the next alpha decade'). The X-stable transfer gain g ~ 0.495 is a structural constant of the transfer (the class-ratio variance 2f(1-f) with f ~ 0.5), not a fitted coefficient of the residual law; the fitted content remains the decay of alpha(X) (converged 1/L law, A = 2.556) and the 0190 R-law coefficients.",
+  "evidence": [
+    "machinery: scripts/rh/kcs3c_i_alpha_curve.py (new; verbatim copies of the U3b functions twin_constant/w_array/class_sums/los_delta/composed_frac/solve_alpha from kcs3b_gap_class_u3b.py, K = 2000 as in U3b; output scripts/rh/kcs3c_i_alpha_curve.out, 64 lines). alpha(X) = the unique alpha with composed_frac(S2, S0, delta, alpha) = meas(X) (the U3b definition, unchanged); u3(X) = S2/(S2+S0) recomputed as a pure function of ln X at every point.",
+    "meas provenance (recorded): 1e7..1e9 from the U3b table (0170, tmp/kcs3b_out.txt rows 10/12/14/16); 3e10/1e11 from U3c(d) (0187, tmp/kcs3c_d_out.txt); 1e12 from 0192 (0.539769, se 2.570e-6); 3e12 from 0194 (0.538446, se 1.515e-6). NO new data anywhere in this unit.",
+    "G1 PASS: recomputed u3 matches the recorded u3 at ALL 8 points to 6 digits (0.555808/0.550315/0.548097/0.545905/0.540762/0.539233/0.536638/0.535528). G2 PASS: recomputed alpha matches the recorded U3b alpha at 1e7..1e9 to 5 digits (0.18333/0.13742/0.13169/0.12413 vs 0.18332/0.13743/0.13170/0.12412). G3 PASS: exact windowed-ckpt census sum(godd)/sum(gn) rounds back to the recorded meas within the final 6th digit at 1e12 (exact 0.539768635 vs record 0.539769, d = -4e-7) and 3e12 (exact 0.538446477 vs 0.538446, d = +5e-7) - the record convention is 6-decimal rounding of the exact census, confirmed.",
+    "G4 PASS (the new structure): the transfer gain R/(alpha*delta) = 0.4928 (1e7), 0.4943, 0.4948, 0.4953, 0.4964, 0.4966, 0.4971, 0.4973 (3e12) - max-min drift 0.91% over 5.7 decades, X-stable. Interpretation: meas(X) = u3(X) + g*alpha(X)*delta(X) + o(delta) with g a STRUCTURAL constant (the U3b first-order line '2f(1-f) ~ 0.495 is the class-variance of the ratio'), and ALL X-dependence of the residual R = meas - u3 carried by the combination alpha(X)*delta(X). Consequence: U3b's transfer coefficient alpha and the 0190 derived R law R = -1.88114*u^2 + 3.69471*delta*u are EQUIVALENT parameterizations of the same measured residual (alpha(X) = R(X)/(g*delta(X))), with the 0190 law supplying the smooth X-form and alpha supplying the U3b transfer language.",
+    "alpha decay shape (the measured law): alpha*L diagnostics 2.9549 (1e7), then 2.5314/2.5705/2.5724/2.5621/2.5632/2.5511/2.5427 (1e8..3e12) - CONVERGED from 1e8 on within +/-0.6%; converged-tail fit alpha = A/L (through-origin OLS in 1/L): A = 2.55620, max|resid| = 0.00135 (0.5%); all-8: A = 2.64365 (max resid 0.0193, dominated by the 1e7 point at +15.6% above the 1/L law - the finite-X end, same pattern as S/B at 1e7). Reference fits: A*L^p (A = 4.23721, p = -1.15726, max|resid| in ln 7.7%); affine A - B/L (A = -0.02522 - rejected: negative asymptote, predicts alpha(1e13) = -0.131).",
+    "0190 R-law OOS z's vs the MEASUREMENT se (reported, NOT gated - the recorded 0196 OOS standard is combined fit+meas sigma, <= 0.9 sigma at 0192/0194 by that accounting; the 0199 entry gates R(1e13) with the kcs3c_h combined-uncertainty machinery): 3e10: R_meas +0.003971, R_law +0.003975, z = -0.25; 1e11: +0.003655, +0.003653, z = +0.25; 1e12: +0.003131, +0.003139, z = -2.98; 3e12: +0.002918, +0.002932, z = -9.58 (the 3e12 point is the largest X in the law's fit domain - edge of the in-sample range; see 0196's documented -3.5 se for the S-form 8-pt vs 9-pt spread at 3e12).",
+    "PREDICTIONS on file for the running 1e13 point (entry 0199): L = 29.933606, u = 0.1135507, delta = 0.064318, u3(1e13) (recomputed, pinned) = 0.534395; R(1e13) from the 0190 law = +0.002729; alpha(1e13) four routes: 0.08294 (fit A power), 0.08832 (fit C A/L all-8), 0.08540 (fit C A/L tail), 0.08529 (R-law inversion) - consistent envelope, alpha(1e13) ~ 0.085 +/- 0.002. Gate at 0199: meas(1e13) from the completed 2-way run, then R_meas(1e13) = meas - 0.534395 and alpha_meas(1e13) via the solve_alpha inversion, vs the on-file predictions (combined uncertainty per the 0194/0196 protocol)."
+  ],
+  "artifacts": {
+    "script": "scripts/rh/kcs3c_i_alpha_curve.py",
+    "output": "scripts/rh/kcs3c_i_alpha_curve.out",
+    "alpha_curve": {
+      "1e7": 0.18333,
+      "1e8": 0.13742,
+      "3e8": 0.13169,
+      "1e9": 0.12413,
+      "3e10": 0.1062,
+      "1e11": 0.1012,
+      "1e12": 0.09233,
+      "3e12": 0.0885
+    },
+    "alpha_L_converged": "2.556 (A/L tail, 1e8..3e12, +/-0.6%); 2.9549 at 1e7 (+15.6% above)",
+    "transfer_gain": {
+      "value": "0.4928 -> 0.4973",
+      "drift_pct": 0.91,
+      "structure": "g ~ 2f(1-f) ~ 0.495, the U3b line"
+    },
+    "pred_R_1e13": 0.002729,
+    "pred_alpha_1e13": {
+      "route1_power": 0.08294,
+      "route2_AL_all8": 0.08832,
+      "route3_AL_tail": 0.0854,
+      "route4_rlaw_invert": 0.08529,
+      "envelope": "0.085 +/- 0.002"
+    },
+    "u3_1e13_pinned": 0.534395,
+    "gates": "G1 u3 6-digit x8 PASS; G2 alpha 5-digit x4 PASS; G3 exact census rounds-back PASS x2; G4 transfer-gain X-stability (0.91% < 1.5%) PASS"
+  },
+  "relations": [
+    "0170",
+    "0186",
+    "0187",
+    "0190",
+    "0192",
+    "0194",
+    "0196"
+  ],
+  "no_rh_claim": true
+}

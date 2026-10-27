@@ -359,7 +359,8 @@ Nothing here needs GPU, long compute, or the zeta binaries.
   15:34Z, 200 x 5e10 windows, checkpointed, 1 core, ~8-9 h ETA;
   predictions on file: S(1e13) = 0.004954 (8-pt) / 0.004944 (9-pt),
   band 0.01289). No RH claim.
-  **1e13 OPS - 2-WAY EXPANSION (2026-10-27, 0197 ops note):**
+  **1e13 OPS - 2-WAY EXPANSION (2026-10-27; carried into the 1e13
+  entry, 0199):**
   the serial run (32/200 windows in) was stopped at the owner's
   prompt to expand beyond 1 core. The recorded 56.2 GB 'peak' was
   ru_MAXrss (high-water), not steady state (live working set ~16
@@ -447,7 +448,7 @@ Nothing here needs GPU, long compute, or the zeta binaries.
   candidate over 1e7..1e12 (corr. of record: the first 1e12 tally
   used the wrong baseline (1+delta)/2 - the ladder's u3 is
   S2/(S2+S0); the void line is recorded in 0192). No RH claim.
-  **STATUS: U3c mechanism COMPLETE (0173-0196); residual law = the
+  **STATUS: U3c mechanism COMPLETE (0173-0198); residual law = the
   derived 2-term form (confirmed out-of-sample at 1e12 and 3e12,
   combined <= 0.9 sigma); Section-2 evaluation closed (0196): scale
   predicted, value not - the coefficients remain fitted; the next
@@ -468,6 +469,24 @@ Nothing here needs GPU, long compute, or the zeta binaries.
   gates (incl. the on-file 1e13 predictions S = 0.004954 / 0.004944
   and band 0.012894). No measurements performed in-tree; no RH
   claim.
+  **0198 (2026-10-27, this session): U3c(i) - the alpha(X) transfer
+  coefficient curve closes U3b's named 'next alpha decade' (pure
+  post-processing of recorded data, zero new sieving, all gates
+  PASS):** alpha decays 0.18333 (1e7) -> 0.08850 (3e12) with
+  alpha*L CONVERGED (2.53-2.57, +/-0.6%) from 1e8 on (converged
+  law alpha = 2.556/L; the 1e7 point sits +15.6% above, the
+  finite-X end); NEW structure: the transfer gain R/(alpha*delta)
+  = 0.4928 -> 0.4973 is X-STABLE (0.91% drift over 5.7 decades) -
+  the first-order transfer identity meas = u3 + g*alpha*delta with
+  g ~ 2f(1-f) ~ 0.495 (the U3b line) is confirmed; alpha(X) is the
+  sole X-carrier of the residual, tying U3b's transfer parameter to
+  the 0190 R law as equivalent parameterizations. 1e13 predictions
+  on file for the running point: R(1e13) = +0.002729 (0190 law),
+  alpha(1e13) = 0.0829/0.0883/0.0854/0.0853 (four routes,
+  ~ 0.085 +/- 0.002), u3(1e13) = 0.534395 pinned. No RH claim.
+  Gate: the 1e13 point (entry 0199) gates meas/R/alpha against
+  these on-file predictions with the combined-uncertainty
+  machinery.
   Gate: the strict-CI gate closes when a DERIVED (not fitted) correction
   lands inside CI at 1e8 — or the residual is certified INSIDE the
   source's error budget with the next term named (the honest
