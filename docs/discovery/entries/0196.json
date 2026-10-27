@@ -1,0 +1,68 @@
+{
+  "id": "0196",
+  "ts": "2026-10-27T16:20:00",
+  "title": "Section-2 heuristic EVALUATED (0196, the 0193 deep follow-up, closes the 'do the coefficients derive?' question): the paper's derivation predicts the SCALE of the residual (S <= B = u^2 = the explicit truncation band) but NOT its VALUE - the two R-law coefficients live inside the explicitly-discarded O(x (loglog x)^2/(log x)^3) remainder, whose feeder (the odd-k (2.2) refinement) is the authors' own future work; NEW determination: the q=4 mirror equality pi(1,3) = pi(3,1) (the derivation sums literally the same sum), confirmed exact at 1e9..1e12; method finding: the {u^2, u/L, 1/L} basis is ill-conditioned on 1e7..3e12 (cond ~ 1.5e8) - the stable objects are the curve S(X) and the band, and the fits agree in-sample to <= 0.22 se; 1e13 prediction on file (S ~ 0.00495) for the running sieve point; no RH claim",
+  "kinds": [
+    "derivation",
+    "analysis",
+    "flank"
+  ],
+  "status": "recorded",
+  "claim": "No RH claim: this is a scale/valuation audit of the Lemke Oliver-Soundararajan heuristic (arXiv:1603.03720v4, identity-checked 0173/0191) against the recorded mod-4 residual ladder 1e7..3e12 (0170-0194). Conclusions: structure derived, coefficients fitted - 0193's gate stands, now with the quantitative reason. Nothing here gates or moves the terminal face.",
+  "evidence": [
+    "machinery as written (paper.txt Section 2, pp. 7-11, read verbatim): D(a,b;y) kept through |A|+|T| <= 2 only (2.12)-(2.20); every |A|+|T| >= 3 case assigned to O(x (loglog x)^2/(log x)^3) (pp. 8-9); intermediate O(loglog y/log y) discarded in D0-D2 as 'negligible'; the odd-k refinement of Montgomery-Soundararasar (2.2) deferred twice as future work.",
+    "band quantified per point: B(X) = (loglog X)^2/(log X)^2 = u^2 (relative to x/L): 0.02975 (1e7) -> 0.01366 (3e12); measured S = meas - (1+delta)/2: +0.014741 -> +0.005296; S/B = 0.496 -> 0.388, monotone decreasing ~ b/loglog X (u/L dominance) - all inside the band, no tension.",
+    "9-pt 3-scale fit of S (inv-var OLS, pure stdlib; numpy cross-check agrees to all digits): S = +0.19905 u^2 + 0.86232 (u/L) - 0.02674 (1/L), chi2 = 5.14/6 dof, max|resid| = 2.06 se; the 8-pt form (0193) reproduced exactly: +0.00528 / +1.20166 / +0.00979, chi2 4.33/5.",
+    "ill-conditioning (the honest split): adding 3e12 (resid -3.5 se vs the 8-pt form) swings the per-scale coefficients a +37x / b -28% / c sign-flip (-373%) while in-sample predictions move <= 0.22 se (at 3e12 the two forms differ 4.9e-6 = 3.2 se - the refit absorbs the point's own -3.5 se to -0.2 se as designed); cond(weighted X'X) ~ 1.5e8; u = loglog/log spans only 0.172 -> 0.117 (1.5x) across the ladder. The scale SPLIT is not sharply resolvable from the data; the stable objects are the curve S(X), the band B, and the 0190 two-term R-law as a 2-term parametrization of R = S - g (out-of-sample: 0192/0194, inside combined 1-sigma).",
+    "band turned on the coefficients: from |S| <= u^2: |b| <= loglog X (2.78..3.36) and |a| <= 1; fitted |b| = 0.862 inside with margin 0.26 at 3e12 - a consistency PASS, not a derivation: the paper's machinery determines no number below its 1/L order, and the residual's leading u/L scale is exactly where the paper stopped computing.",
+    "NEW determination (q=4 mirror equality): the (2.9)-(2.10) sums over h with (t+a,q) = 1 are literally the same sums for (1,3) and (3,1) (h ≡ 2 mod 4 in both; (t+1,4)=1 <=> (t+3,4)=1 <=> t odd), so the derivation conjectures pi(x;4,(1,3)) = pi(x;4,(3,1)) to all carried orders (antisymmetric 1/L piece = 0). Data (0191/0192/0194): difference exactly 0 at 1e9/1e10/1e11/1e12; -1 at 3e12 (O(1) noise, 3.4e-11 relative on 2.9e10 counts). CONFIRMED (Conjecture 1.6 is stated for prime q; the q=4 case needs it not).",
+    "oscillating part Z(H) (Prop 2.1): measured bound O(H^-1/2+e) is too big to constrain S (2*L^-3/2 ~ 0.13 relative); the CONJECTURED O(H^-3/4) rate gives 2*L^-7/4 = 5.6e-3 at 3e12 vs S = 5.3e-3 and is consistent with the observed smoothness (no oscillation visible on 9 points, max resid 2.06 se).",
+    "pending 1e13 hook: both S forms predict S(1e13) = 0.004954 (8-pt) / 0.004944 (9-pt); band B(1e13) = 0.01289; the running kcs3c_c2 1e13 sieve (200 x 5e10 windows, checkpointed, ~7-9 h) decides; its entry will carry the 10th ladder point and the combined-uncertainty gate (0194 protocol).",
+    "artifacts: scripts/rh/kcs3c_h_section2_eval.py (pure stdlib; argv hook for the 1e13 point: [meas se]); output tmp/u3c_c_fig/kcs3c_h_out.txt (163 lines)"
+  ],
+  "artifacts": {
+    "S_1e7": 0.014741,
+    "S_3e12": 0.005296,
+    "S_over_B_range": [
+      0.496,
+      0.388
+    ],
+    "band_B": "u^2 = (loglog X)^2/(log X)^2",
+    "fit9": [
+      0.19905,
+      0.86232,
+      -0.02674
+    ],
+    "fit9_chi2_dof": [
+      5.14,
+      6
+    ],
+    "fit8": [
+      0.00528,
+      1.20166,
+      0.00979
+    ],
+    "cond_weighted_XtX": 150000000.0,
+    "coeff_swing_8_to_9": {
+      "a": "37x",
+      "b": "-28%",
+      "c": "sign flip -373%"
+    },
+    "in_sample_pred_spread": "0.22 se",
+    "pred_S_1e13": [
+      0.004954,
+      0.004944
+    ],
+    "band_pred_b": "|b| <= loglog X ~ 2.8-3.4",
+    "mirror_equality": "pi(1,3) = pi(3,1) at q=4: exact 0 at 1e9..1e12, -1 at 3e12 (noise)"
+  },
+  "relations": [
+    "0173",
+    "0190",
+    "0191",
+    "0192",
+    "0193",
+    "0194"
+  ],
+  "no_rh_claim": true
+}
