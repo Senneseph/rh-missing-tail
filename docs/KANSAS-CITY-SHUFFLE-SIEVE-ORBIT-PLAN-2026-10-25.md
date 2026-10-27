@@ -283,6 +283,23 @@ Nothing here needs GPU, long compute, or the zeta binaries.
   rules; 3e11/1e12 named out-of-reach here (not a blocker - the
   flank's next step is a new bit/segmented ground truth or a bigger
   machine).
+  **RUN (e) (0188, 2026-10-26, `scripts/rh/kcs3c_e_ansatz_sweep.py`,
+  seconds, no sieving):** the mechanism screen on the 7 recorded
+  residual points (inverse-variance weighted, residuals in se units):
+  (1) NO single-component loglog form survives (best 1/log^2, max
+  3.67 se); (2) 19 of 21 two-component pairs pass the screening bar -
+  the residual law is a TWO-COMPONENT structure, 1/log^2 scale in 6
+  of the top-10 pairs (best: 1/log^2 + floor, chi2 3.17/5 dof, max
+  1.45 se); (3) triples at chi2 2.76-3.00/4 dof (overfit zone -
+  7 points cannot discriminate among the ~20 compatible families;
+  the discriminators 3e11/1e12 are beyond this box per 0187); (4) the
+  0187 growing excess fits ONE power of loglog X, k = 4.23 over the
+  full span (middle point within 2.3%), not a constant floor.
+  Mechanism narrowed: decaying loglog-log component (1/log^2-scale
+  dominated) + growing ~(loglog X)^4.2 component. Strict gate stays
+  OPEN (needs a DERIVED correction). NEXT (U3c (f)): re-screen with
+  the derived next-order product term delta*(loglog/log) added to the
+  family.
   Gate: the strict-CI gate closes when a DERIVED (not fitted) correction
   lands inside CI at 1e8 — or the residual is certified INSIDE the
   source's error budget with the next term named (the honest
@@ -394,6 +411,14 @@ wiki on each green gate. The in-tree frontier (`Z78C`, hOffC) is
   a slowly growing positive excess. Strict gate still open (470.7 se at
   1e11). 1e11 = this box's memory ceiling (peak 92.7 GB). Output:
   `tmp/kcs3c_d_out.txt`. 450 s wall. No RH claim.
+- **U3c RUN (e) (2026-10-26, 0188):** `scripts/rh/kcs3c_e_ansatz_sweep.py`
+  - the mechanism screen on the 7 recorded residual points (no sieving):
+  no single-component form survives (best 1/log^2, 3.67 se); 19/21
+  two-component pairs pass (two-component structure; 1/log^2 scale in 6 of
+  the top-10); triples at chi2 2.76-3.00/4 dof (overfit zone); the 0187
+  excess fits ~(loglog X)^4.2 (middle point within 2.3%), not a floor.
+  Next: U3c (f) = re-screen with the derived product term delta*(loglog/log).
+  Output: `tmp/kcs3c_e_out.txt`. No RH claim.
 - **U2 MEASURED (2026-10-25):** `scripts/rh/kcs2_fourier_sieve.py` —
   the finite operator package measured at N = 210 (comb, all a, all p)
   and N = 30030 (full Ramanujan field, all 30030 characters; Parseval
