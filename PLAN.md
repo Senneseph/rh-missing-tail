@@ -354,6 +354,17 @@ Commit a00c7d6.
    growing positive excess; strict gate open (470.7 se at 1e11); 1e11
    = this box's memory ceiling (tmp/kcs3c_d_out.txt, 450 s wall,
    peak 92.7 GB).
+   **U3c (e) DONE (0188, 2026-10-26):** the mechanism screen on the 7
+   recorded points (no sieving, inverse-variance weighted): no
+   single-component loglog form survives (best 1/log^2, 3.67 se); 19/21
+   two-component pairs pass - the residual law is a TWO-COMPONENT
+   structure (1/log^2 scale in 6 of the top-10 pairs; best: 1/log^2 +
+   floor, chi2 3.17/5 dof); triples at chi2 2.76-3.00/4 dof (overfit
+   zone); the 0187 excess fits ~(loglog X)^4.2 (middle point within
+   2.3%), not a constant floor. Mechanism = decaying loglog-log
+   component + growing ~(loglog)^4.2 component; strict gate open
+   (needs a DERIVED term - next: U3c (f) product term delta*(loglog/log))
+   (tmp/kcs3c_e_out.txt).
    Recall incident logged in 0170 (a 65/35 benchmark was unverified
    memory; corrected to the verified LOS framework). No RH claim:
    prime-gap class statistic + exact sieve algebra, flank not face.
