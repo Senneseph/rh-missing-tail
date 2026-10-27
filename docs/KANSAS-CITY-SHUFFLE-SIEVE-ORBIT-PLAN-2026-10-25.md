@@ -240,6 +240,28 @@ Nothing here needs GPU, long compute, or the zeta binaries.
   α/R decade) after the b8/b9 queue frees cores; (b) the (loglog/log)²
   ansatz test at 1e10; (c) check the paper's r = 2, q = 4 figure (the
   text extraction did not capture the figure data) against our rows.
+  **RUN (a) (0186, 2026-10-26, `scripts/rh/kcs3c_resid_law_1e10.py`,
+  26 s, 1 core, peak 16 GB):** full ladder re-measured - all four
+  recorded points MATCH (ground-truth identity at every point),
+  pi(1e10) = 455052511 = the tabulated value (independent
+  identity of the 1e10 sieve). New point: meas = 0.546585 (se
+  2.33e-05), u3-only = 0.542278, R = +0.004307 (z = 184.5 vs
+  u3-only). Discrimination of the three live ansatze: (A) the
+  (loglog/log)² form - the directly recomputed C table over the five
+  points = 0.3044/0.2480/0.2466/0.2415/0.2321 (superseding the
+  0173 four-point snapshot): nearly flat over 1e8..1e10 (-6.5%),
+  the 1e7 point ~25% above the plateau - alive, undetermined; (B)
+  the alpha power law (4-point OLS b1 = -1.5524) PREDICTS R(1e10) =
+  0.003944 vs measured 0.004307: z = 15.5 - RULED OUT (per-decade
+  alpha ratios settle at ~0.89-0.92/decade, no loglog power law);
+  (C) the 2-param mixed R = a*delta + b*(loglog/log)² (a =
+  -0.123764, b = 0.715792, 4-point fit) PREDICTS R(1e10) =
+  +0.003639 vs +0.004307: z = 1.21 in combined uncertainty - the
+  sole surviving form. Strict gate: still open against the
+  measurement CI alone (|meas - model| = 6.68e-04 = 28.6 se); the
+  (b) (loglog/log)² test was absorbed into (A); the (c) paper-
+  figure check is still open. **NEXT (U3c(d)): the 3e10/1e11 points,
+  where the mixed form predicts R = +0.003139 / +0.002655.**
   Gate: the strict-CI gate closes when a DERIVED (not fitted) correction
   lands inside CI at 1e8 — or the residual is certified INSIDE the
   source's error budget with the next term named (the honest
@@ -328,6 +350,17 @@ wiki on each green gate. The in-tree frontier (`Z78C`, hOffC) is
   right size. The residual is thus inside the source's own error
   budget; "transfer coefficient" reframed as the measured residual
   R(X) with three live ansätze (0173). See the U3c unit in §5.
+- **U3c RUN (a) (2026-10-26, 0186):** `scripts/rh/kcs3c_resid_law_1e10.py`
+  - the 1e10 point on the identical U3b exact sieve (ladder re-measured:
+  1e7/1e8/3e8/1e9 all MATCH the record; pi(1e10) = 455052511 = tabulated).
+  New: meas = 0.546585 (se 2.33e-05), R = +0.004307 (z = 184.5 vs
+  u3-only). The 1e10 point kills the alpha power law (ansatz B, z = 15.5),
+  leaves the (loglog/log)² form alive-but-undetermined (C nearly flat over
+  1e8..1e10), and the 2-param mixed form predicts within 1.2 sigma
+  (ansatz C, sole survivor). Strict gate still open (28.6 se against the
+  measurement CI). Next: U3c(d) = 3e10/1e11 (mixed-form predictions
+  +0.003139 / +0.002655). Output: `tmp/kcs3c_out.txt`. 26 s wall, peak
+  16 GB. No RH claim.
 - **U2 MEASURED (2026-10-25):** `scripts/rh/kcs2_fourier_sieve.py` —
   the finite operator package measured at N = 210 (comb, all a, all p)
   and N = 30030 (full Ramanujan field, all 30030 characters; Parseval

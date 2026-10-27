@@ -332,6 +332,17 @@ Commit a00c7d6.
    narrow step = cross-correlate the EXACT sieve residual with a
    MEASURED zeta-side datum (E1/S-series type). The U1 unit is fully
    closed (a exact 0170, b margin 0170, c floor residual 0185).
+   **U3c (a) DONE (0186, 2026-10-26):** the 1e10 point of the
+   residual law on the identical U3b exact sieve (ladder re-
+   measured: 1e7/1e8/3e8/1e9 all MATCH; pi(1e10) = 455052511 =
+   tabulated): meas = 0.546585 (se 2.33e-05), R = +0.004307
+   (z = 184.5 vs u3-only). The 1e10 point RULES OUT the alpha
+   power law (ansatz B, z = 15.5), leaves the (loglog/log)² form
+   alive-but-undetermined (C nearly flat over 1e8..1e10), and the
+   2-param mixed form predicts within 1.2 sigma (ansatz C, sole
+   survivor); strict gate still open (28.6 se). Next: U3c(d) =
+   3e10/1e11, where the mixed form predicts R = +0.003139 /
+   +0.002655 (tmp/kcs3c_out.txt, 26 s wall, peak 16 GB).
    Recall incident logged in 0170 (a 65/35 benchmark was unverified
    memory; corrected to the verified LOS framework). No RH claim:
    prime-gap class statistic + exact sieve algebra, flank not face.
