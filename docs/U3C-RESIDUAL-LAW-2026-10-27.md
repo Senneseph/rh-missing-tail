@@ -184,5 +184,17 @@ test (predictions stand 1359 se apart from the mixed form's there).
    them, the gate's "derived, not fitted" clause becomes literally true.
 4. **Scale**: 3e12 is the practical ceiling of this box at ~2 h per point
    (60 windows); 1e13 would take ~7 h (named, not scheduled).
+5. **The named DEEP follow-up (0193): evaluate the paper's full Section 2
+   heuristic (D0 + D1 + D2 singular-series densities via
+   Proposition 2.1's S0(q, v; H) sums) to obtain the CONJECTURE's OWN
+   prediction of the R coefficients** (the u/L coefficient 0.834234 and
+   the u^2 coefficient -0.033785). Status: named, not started — the
+   heuristic is unproven (a coefficient predicted by a conjecture's own
+   heuristic has the same status as the (1+delta)/2 prediction: strong
+   confirmation material, not a derivation in the theorem sense), and the
+   extracted display text needs a careful reading pass (alpha-weights,
+   the eps term) before any numeric claim. If the evaluated heuristic
+   reproduces 0.834, the law's structure is triple-anchored
+   (data + term-structure derivation + conjecture-internal prediction).
 
-*No RH claim. Flank record, 2026-10-27.*
+*No RH claim. Flank record, 2026-10-27 (updated with 0193).*
