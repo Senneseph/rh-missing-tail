@@ -1248,4 +1248,125 @@ theorem level1_position_in_band (x : ℕ) (ps : List ℕ)
   constructor
   · exact sub_nonneg.mpr hl
   · exact sub_le_sub_right hu (L1 x ps)
-end SieveOrbit
+
+/-!  ====  U3c-core:  the  derivation  algebra  (the  "derived"  half  of
+    unit  U3c;  discoveries  0193  /  0196)  ======================== 
+
+The  exact  real-algebra  core  of  the  second-orbit  pair-display
+mechanism  —  the  part  of  the  U3c  residual  law  that  is  DERIVED
+rather  than  fitted:
+
+  (i)    the  paper's  pair-display  constant  c  =  ln(pi/2)  cancels
+         against  ln(2/pi)  in  the  N/D  ratio  (0193  constant
+         cancellation,  the  core  of  the  "g  smooths  to  ln(L)");
+  (ii)   the  census  ratio  (1+delta)/2  with  delta  =  (lnL + c)/(2L)
+         is  EXACTLY  the  paper's  (1/2)(1 + u/2 + c/(2L))  display,
+         u  :=  lnL/L   (the  N/D  collapse  to  the  census  ratio);
+  (iii)  the  basis  re-basing  u*delta  =  u^2/2  +  (c/2)(u/L)  and
+         its  two-term  corollary  for  the  0190  R-law  shape
+         a*u^2 + b*(u*delta)  =  (a + b/2)*u^2 + (b*c/2)*(u/L)
+         (0193:  the  u^2  coefficient  re-bases  to  a + b/2,  NOT
+         b/2,  because  delta*u  contributes  +u^2/2);
+  (iv)   the  band  scale  order  u/L  <  u^2  for  L  >  e  (0196:
+         "the  u/L  term  dominates  but  both  are  below  the  u^2
+         truncation  band",  in  theorem  form).
+
+No  measurements  here:  the  ladder  data  (meas,  se,  S)  live  in
+the  Python  pipeline  (kcs3c_c  /  kcs3c_h);  the  pinned  numbers
+below  are  the  0193  /  0194  /  0196  recorded  values,  display-only
+Float  gates  in  the  Z78  pattern.  Structural  flank  work  on  a
+mod-4  prime-gap  census  statistic.  No  RH  claim.
+-/  namespace U3cCore
+
+variable  (L : ℝ)
+
+/--  The  paper's  pair-display  constant  c  =  ln(pi/2). -/
+noncomputable def cConst  :  ℝ  :=  Real.log  (Real.pi  /  2)
+
+/--  u  :=  ln(L)  /  L  (the  0193  /  0196  scale  variable). -/
+noncomputable def uVar    (L  :  ℝ)  :  ℝ  :=  Real.log  L  /  L
+
+/--  delta  :=  (ln(L)  +  c)  /  (2L). -/
+noncomputable def delta   (L  :  ℝ)  :  ℝ  :=  (Real.log  L  +  cConst)  /  (2  *  L)
+
+/--  (i)   0193  constant  cancellation:  ln(pi/2)  +  ln(2/pi)  =  0. -/
+theorem  logPiCancel  :
+    cConst  +  Real.log  (2  /  Real.pi)  =  0  :=  by
+  have  hpos  :  0  <  Real.pi  /  2  :=  by  linarith  [Real.pi_pos]
+  rw  [cConst]
+  rw  [show  (2  /  Real.pi  :  ℝ)  =  (Real.pi  /  2)⁻¹  by  field_simp]
+  rw  [Real.log_inv]
+  ring
+
+/--  (ii)  The  N/D  collapse:  the  paper's  ratio  display  IS  the
+          census  ratio  (1+delta)/2.  0193. -/
+theorem  ratioCollapse  (hL  :  0  <  L)  :
+    (1  /  2)  *  (1  +  uVar  L  /  2  +  cConst  /  (2  *  L))  =
+      (1  +  delta  L)  /  2  :=  by
+  rw  [uVar,  delta,  cConst]
+  field_simp  [hL.ne']
+  ring
+
+/--  (iii-a)   The  basis  re-basing:  delta  *  u  =  u^2/2  +
+             (c/2)  *  (u/L).  0193  (the  identity  behind  the  R-law
+             coefficient  structure). -/
+theorem  deltaUBasis  (hL  :  0  <  L)  :
+    (uVar  L)  *  (delta  L)  =  (uVar  L)  ^  2  /  2  +
+      (cConst  /  2)  *  (uVar  L  /  L)  :=  by
+  rw  [uVar,  delta,  cConst]
+  field_simp  [hL.ne']
+
+/--  (iii-b)   The  two-term  R-law  shape:  a*u^2  +  b*(u*delta)
+             re-bases  to  (a + b/2)*u^2  +  (b*c/2)*(u/L).  The  0190
+             law  (a  =  -1.88114,  b  =  3.69471)  therefore  has  its
+             u^2  coefficient  at  a + b/2  =  -0.0338,  not  b/2. -/
+theorem  rlawRebase  (hL  :  0  <  L)  (a  b  :  ℝ)  :
+    a  *  (uVar  L)  ^  2  +  b  *  ((uVar  L)  *  (delta  L))  =
+      (a  +  b  /  2)  *  (uVar  L)  ^  2  +
+        (b  *  cConst  /  2)  *  (uVar  L  /  L)  :=  by
+  rw  [deltaUBasis  L  hL]
+  field_simp  [hL.ne']
+  ring
+
+/--  (iv)  The  band  scale  order:  for  L  >  e,  u/L  <  u^2  (the
+          u/L  correction  lies  below  the  u^2  truncation  band;
+          0196  scale  structure). -/
+theorem  uOverL_below_uSq  (h  :  Real.exp  1  <  L)  :
+    (uVar  L)  /  L  <  (uVar  L)  ^  2  :=  by
+  have  hL0  :  0  <  L  :=  lt_trans  (Real.exp_pos  1)  h
+  have  hg1  :  1  <  Real.log  L  :=  by
+    rw  [show  (1  :  ℝ)  =  Real.log  (Real.exp  1)  by  rw  [Real.log_exp]]
+    exact  (Real.log_lt_log_iff  (Real.exp_pos  1)  hL0).2  h
+  have  hg0  :  0  <  Real.log  L  :=  lt_trans  zero_lt_one  hg1
+  rw  [uVar,  div_pow]
+  have  hL2  :  0  <  L  ^  2  :=  pow_pos  hL0  2
+  calc
+    Real.log  L  /  L  /  L  =  Real.log  L  /  (L  ^  2)  :=  by  ring
+    _  <  (Real.log  L)  ^  2  /  (L  ^  2)  :=  by
+      rw  [div_lt_div_iff_of_pos_right  hL2]
+      nlinarith  [hg1]
+
+/-!  Float  gates  (0193  /  0194  /  0196  pinned  numbers;  display
+      only  —  this  file  performs  no  measurement;  the  ladder  data
+      live  in  the  kcs3c_c  /  kcs3c_h  Python  pipeline):  -/  
+
+def cPinned              :  Float  :=  0.451583     --  ln(pi/2)  (0193)
+def censusRatio3e12     :  Float  :=  0.533150  --  (1+delta)/2  at  3e12  (0196)
+def meas3e12              :  Float  :=  0.538446  --  0194  point  (6-digit  round)
+def S3e12                   :  Float  :=  0.005296  --  meas  -  census  ratio  (0196)
+def band3e12                :  Float  :=  0.013657  --  u^2  at  3e12  (0196)
+def band1e13                :  Float  :=  0.012894  --  u^2  at  1e13  (0196)
+def S1e13_pred8pt       :  Float  :=  0.004954  --  8-pt  S-form  prediction  (0196)
+def S1e13_pred9pt       :  Float  :=  0.004944  --  9-pt  S-form  prediction  (0196)
+
+#eval  cPinned
+#eval  censusRatio3e12
+#eval  meas3e12
+#eval  S3e12
+#eval  band3e12
+#eval  band1e13
+#eval  S1e13_pred8pt
+#eval  S1e13_pred9pt
+
+end  U3cCore
+end  SieveOrbit

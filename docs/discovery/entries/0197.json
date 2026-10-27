@@ -1,0 +1,53 @@
+{
+  "id": "0197",
+  "ts": "2026-10-27T18:10:00",
+  "title": "U3c derivation core FORMALIZED in tree (SieveOrbit.lean + U3cCore namespace, +122 lines pure append, full build green): the DERIVED half of the U3c residual-law mechanism is now machine-checked - constant cancellation ln(pi/2) + ln(2/pi) = 0; the N/D collapse (1/2)(1 + u/2 + c/2L) = (1+delta)/2 EXACTLY; the basis re-basing u*delta = u^2/2 + (c/2)(u/L) and its two-term corollary (the 0190 law re-bases its u^2 coefficient to a + b/2, NOT b/2); the band scale order u/L < u^2 for L > e; plus the 0193/0194/0196 pinned numbers as Float #eval data gates (incl. the 1e13 predictions 0.004954/0.004944 and band 0.012894). No measurements performed in-tree; no RH claim",
+  "kinds": [
+    "formal",
+    "derivation",
+    "flank"
+  ],
+  "status": "recorded",
+  "claim": "No RH claim: this formalizes the algebraic (derived) core of the second-orbit pair-display mechanism on the mod-4 prime-gap census statistic - flank machinery, zeta-free in content, no zeta input. It pins in what sense 0193's 'g smooths to ln(L)' and the census-ratio collapse are identities rather than fits, and why the 0190 R-law's u^2 coefficient sits at a + b/2 = -0.0338 (not b/2). It does not derive the fitted coefficients (0196: those live in the paper's explicit remainder) and nothing here gates or moves the terminal face.",
+  "evidence": [
+    "file: formal/RhAttack/SieveOrbit.lean - new 'namespace U3cCore' appended after the U4(c) section (git diff: 122 insertions, 1 deletion of the moved 'end SieveOrbit'; zero changes to pre-existing theorems); defs (noncomputable): cConst = Real.log (pi/2), uVar L = log L / L, delta L = (log L + cConst)/(2L).",
+    "theorems (all first-try-after-API-fixes, exact, no axioms): logPiCancel : cConst + log(2/pi) = 0 [rw cConst, show (2/pi) = (pi/2)^-1 by field_simp, Real.log_inv (zero-arg in this toolchain), ring]; ratioCollapse (hL : 0 < L) : (1/2)*(1 + uVar L/2 + cConst/(2*L)) = (1 + delta L)/2 [rw defs, field_simp [hL.ne']; ring]; deltaUBasis (hL) : (uVar L)*(delta L) = (uVar L)^2/2 + (cConst/2)*(uVar L/L) [rw defs, field_simp [hL.ne'] - closes alone]; rlawRebase (hL) (a b) : a*(uVar L)^2 + b*((uVar L)*(delta L)) = (a + b/2)*(uVar L)^2 + (b*cConst/2)*(uVar L/L) [rw deltaUBasis; field_simp [hL.ne']; ring] - the 0193 statement with a = -1.88114, b = 3.69471 gives the u^2 coefficient at a + b/2 = -0.0338, not b/2; uOverL_below_uSq (h : exp 1 < L) : (uVar L)/L < (uVar L)^2 [Real.log_lt_log_iff for 1 < log L, div_pow, calc with ring step, div_lt_div_iff_of_pos_right, nlinarith [1 < log L]].",
+    "Float data gates (Z78 pattern; display only; all #eval outputs equal the pinned literals, build log tmp/u3c_c_fig/lean_u3ccore_build.log): cPinned 0.451583 (ln(pi/2), 0193); censusRatio3e12 0.533150 ((1+delta)/2 at 3e12, 0196); meas3e12 0.538446 (0194, 6-digit round); S3e12 0.005296 (0196); band3e12 0.013657 (u^2 at 3e12, 0196); band1e13 0.012894 (u^2 at 1e13, 0196); S1e13_pred8pt 0.004954 and S1e13_pred9pt 0.004944 (the 0196 on-file predictions for the running 1e13 sieve point).",
+    "builds: 'lake build RhAttack.SieveOrbit' -> Build completed successfully (8706 jobs), log tmp/u3c_c_fig/lean_u3ccore_build.log; full package 'lake build' -> Build completed successfully (17450 jobs). No new axioms endpoint audit needed (no sorry, no axioms - pure Mathlib real algebra + Float literals; the module introduces no external input).",
+    "API notes (pinned toolchain, online-first policy honored via local checkout corroboration): Real.log_inv takes NO hypothesis in this Mathlib (log x^-1 = -log x for x : R); the two-denominator division lemma is div_lt_div_iff_of_pos_right (hc : 0 < c) : a/c < b/c <-> a < b (post-unbundling names; plain div_lt_div_iff / pos_ne_zero / Ne.of_lt / Real.one_lt_exp_one do not exist under those names); field_simp [h.ne'] alone closes fully-cleared field-identity goals, so a trailing 'ring' on such a theorem is a hard 'No goals to be solved' error.",
+    "ops context: built alongside the 2-way kcs3c_c2 1e13 sieve (windows ~60-63/200 at commit; per-worker peak 37.4 GB; ~2.5-3 h remaining) - Lean elaboration on the spare cores, within the 4-core/16 GB reserve policy."
+  ],
+  "artifacts": {
+    "file": "formal/RhAttack/SieveOrbit.lean",
+    "namespace": "SieveOrbit.U3cCore",
+    "theorems": [
+      "logPiCancel",
+      "ratioCollapse",
+      "deltaUBasis",
+      "rlawRebase",
+      "uOverL_below_uSq"
+    ],
+    "rlaw_u2_coeff": "a + b/2 = -0.0338 for a = -1.88114, b = 3.69471 (NOT b/2)",
+    "float_gates": {
+      "cPinned": 0.451583,
+      "censusRatio3e12": 0.533150,
+      "meas3e12": 0.538446,
+      "S3e12": 0.005296,
+      "band3e12": 0.013657,
+      "band1e13": 0.012894,
+      "S1e13_pred8pt": 0.004954,
+      "S1e13_pred9pt": 0.004944
+    },
+    "builds": {
+      "targeted": "8706 jobs green",
+      "full_package": "17450 jobs green"
+    }
+  },
+  "relations": [
+    "0190",
+    "0193",
+    "0194",
+    "0196"
+  ],
+  "no_rh_claim": true
+}

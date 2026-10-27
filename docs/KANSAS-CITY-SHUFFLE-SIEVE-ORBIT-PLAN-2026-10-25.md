@@ -453,6 +453,21 @@ Nothing here needs GPU, long compute, or the zeta binaries.
   predicted, value not - the coefficients remain fitted; the next
   ladder point (1e13) is running; strict-CI gate: derived form the
   sole survivor.**
+  **0197 (2026-10-27, this session): the DERIVED core of this
+  mechanism is machine-checked in tree** (formal/RhAttack/
+  SieveOrbit.lean, new namespace U3cCore, pure 122-line append,
+  targeted 8706 jobs + full package 17450 jobs green): logPiCancel
+  (ln(pi/2) + ln(2/pi) = 0, the 0193 constant cancellation),
+  ratioCollapse ((1/2)*(1 + u/2 + c/(2L)) = (1+delta)/2 EXACTLY, the
+  N/D census-ratio collapse), deltaUBasis (u*delta = u^2/2 +
+  (c/2)*(u/L), the 0193 basis identity), rlawRebase (a*u^2 +
+  b*(u*delta) re-bases to (a + b/2)*u^2 + (b*c/2)*(u/L) - the 0190
+  law's u^2 coefficient sits at a + b/2 = -0.0338, NOT b/2),
+  uOverL_below_uSq (u/L < u^2 for L > e, the 0196 band scale order);
+  the 0193/0194/0196 recorded numbers are pinned as Float #eval data
+  gates (incl. the on-file 1e13 predictions S = 0.004954 / 0.004944
+  and band 0.012894). No measurements performed in-tree; no RH
+  claim.
   Gate: the strict-CI gate closes when a DERIVED (not fitted) correction
   lands inside CI at 1e8 — or the residual is certified INSIDE the
   source's error budget with the next term named (the honest
