@@ -139,9 +139,39 @@ test (predictions stand 1359 se apart from the mixed form's there).
   global/interval sieves were identity-gated (π vs tabulated + the 1e10
   reproduction gate of 0187; boundary gaps ≤ margin, max seen 92).
 
+## 5b. U3c (g) — the DERIVATION TEST (0193, 2026-10-27)
+
+`scripts/rh/kcs3c_g_derivation.py` → `tmp/u3c_c_fig/kcs3c_g_out.txt`.
+
+- **Algebra (verified to machine zero):** the paper's Conjecture 1.1
+  display formulas (q = 4, read verbatim) give
+  N = π(1,3)+π(3,1) = (li/2)[1 + u/2 + ln(π/2)/(2L)] and
+  Diag = π(a,a) = (li/4)[1 − u/2 + ln(2/π)/(2L)] + O(x/log^(7/4)x);
+  in the census ratio the two corrections CANCEL
+  (+u/2 − u/2; ln(π/2) + ln(2/π) = ln 1 = 0) and
+  **meas_paper = (1+δ)/2 EXACTLY to order 1/log x** — the 0173 δ
+  identity is a *consequence* of the full main conjecture
+  (N/D − (1+δ)/2 = ±1.1e-16 at 1e7..1e12).
+- **What the paper leaves for S := meas − (1+δ)/2** (the 0173 52-σ
+  structure): {non-oscillating lower-order terms ("of size
+  (loglog/log)²... we hope to understand these lower order terms in
+  future work")} + {oscillating zero terms} + O(x/log^(7/4)).
+- **The data's answer (8-pt inv-var screen on {u², u/L, 1/L}):**
+  S = 0.00528·u² + 1.20166·(u/L) + 0.00979·(1/L), χ² = 4.33/5 dof,
+  max resid 1.84 se. The paper-flagged (loglog/log)² scale carries
+  **~1%** of S; the leading structure sits ONE ORDER BELOW the flagged
+  scale, at (loglog/log²). The exact baseline gap g = u3 − (1+δ)/2 is
+  3-scale smooth to 0.02 se (no hidden structure at meas precision);
+  the R law in the (u,1/L) basis is the algebraic identity
+  R = −0.033785·u² + 0.834234·(u/L) (matching the recorded R pointwise
+  ≤ 1.9 se; +3.0 se at 1e12 per 0192).
+- **Verified-vs-fitted (no drift):** the TERM STRUCTURE is now DERIVED
+  from the paper's own accounting; the paper's unquantified O-terms
+  leave the two COEFFICIENTS fitted (0190). Gate unchanged from 0192.
+
 ## 6. Open items (honest)
 
-1. **3e12 in flight** (0193 pending): the derived form's second
+1. **3e12 in flight** (0194 pending): the derived form's second
    out-of-sample test (pred +0.002932 vs mixed +0.001573; 1359 se apart).
 2. **The strict-CI gate**: not declared closed (see §4); closing it would
    require the form to land inside CI on an out-of-sample point (or a full

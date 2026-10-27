@@ -403,6 +403,28 @@ Commit a00c7d6.
    R(X) = -1.88114*(ll/l)^2 + 3.69471*delta*(ll/l). Corr. of record:
    the first 1e12 tally used the wrong baseline (1+delta)/2 (void line
    kept in 0192). No RH claim.
+   **U3c (g) the DERIVATION TEST (0193, 2026-10-27, instant):**
+   scripts/rh/kcs3c_g_derivation.py -> tmp/u3c_c_fig/kcs3c_g_out.txt.
+   ALGEBRA: the paper's Conjecture 1.1 display formulas (q = 4,
+   verbatim) collapse in the census ratio to EXACTLY (1+delta)/2 to
+   1/log x (N/D - (1+delta)/2 = +-1.1e-16 at 1e7..1e12; the 0173 delta
+   identity is a consequence of the full main conjecture: +u/2 - u/2
+   and ln(pi/2)+ln(2/pi) = ln 1 cancel). What the paper's own
+   accounting leaves for S = meas - (1+delta)/2 (the 0173 52-sigma
+   structure): {non-oscillating lower-order terms, the paper-flagged
+   (loglog/log)^2 scale} + {oscillating zero terms} + O(x/log^(7/4)).
+   DATA (8-pt inv-var screen on {u^2, u/L, 1/L}): S = 0.00528 u^2 +
+   1.20166 (u/L) + 0.00979 (1/L) (chi2 = 4.33/5 dof, max resid 1.84
+   se) - the paper-flagged (loglog/log)^2 scale carries ~1% of S; the
+   leading structure is ONE ORDER BELOW it at (loglog/log^2) (92% of
+   S(1e12)). g = u3 - (1+delta)/2 is 3-scale smooth to 0.02 se; the R
+   law's (u,1/L) basis = -0.033785 u^2 + 0.834234 (u/L) (algebraic;
+   matches the recorded R pointwise <= 1.9 se, +3.0 se at 1e12 per
+   0192). VERDICT: the residual's TERM STRUCTURE is now DERIVED from
+   the paper's own accounting + the exact g; the two COEFFICIENTS
+   remain fitted (the paper does not quantify its O-terms) - gate
+   unchanged from 0192. 3e12 point in flight (0194, ~2 h run). No RH
+   claim.
    Recall incident logged in 0170 (a 65/35 benchmark was unverified
    memory; corrected to the verified LOS framework). No RH claim:
    prime-gap class statistic + exact sieve algebra, flank not face.
