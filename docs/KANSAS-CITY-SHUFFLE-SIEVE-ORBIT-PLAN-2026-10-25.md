@@ -297,9 +297,23 @@ Nothing here needs GPU, long compute, or the zeta binaries.
   full span (middle point within 2.3%), not a constant floor.
   Mechanism narrowed: decaying loglog-log component (1/log^2-scale
   dominated) + growing ~(loglog X)^4.2 component. Strict gate stays
-  OPEN (needs a DERIVED correction). NEXT (U3c (f)): re-screen with
-  the derived next-order product term delta*(loglog/log) added to the
-  family.
+  OPEN (needs a DERIVED correction).
+  **RUN (f) (0190, 2026-10-27, same script + the (4b) section, seconds,
+  no sieving):** the family extended with f8 = delta*(loglog/log) (the
+  DERIVED next-order LOS product term) and f11 = loglog X (bare growing
+  line). Five named candidates fitted: (a) the derived 2-term
+  R ~ a*(ll/l)^2 + b*delta*ll/l PASSES (chi2 3.88/5 dof, max 1.86 se),
+  signs (-1.881, +3.695): an ~8x-magnitude CANCELLATION structure;
+  (c) + the loglog line is the best named form (chi2 3.26/4, max 1.51
+  se) with the loglog coefficient ~2e-4 = ZERO; (b) f2+f6 reference
+  chi2 3.56/5 max 1.76 se. KEY: the bare growing line is never picked
+  up - the 0187 growing excess is reproduced in-sample by the
+  decay-cancellation (-f2 + f8) (f8 decays slower than f2); the 3-point
+  (loglog)^4.2 excess hint (0188) and the 7-point fit prefer different
+  descriptions - both recorded. The derived 2-term form is now
+  data-compatible (first purely derived form to pass the screen); its
+  out-of-sample behavior at 3e11/1e12 is the named discriminator
+  (beyond this box, 0187). Strict gate OPEN.
   Gate: the strict-CI gate closes when a DERIVED (not fitted) correction
   lands inside CI at 1e8 — or the residual is certified INSIDE the
   source's error budget with the next term named (the honest
@@ -417,8 +431,15 @@ wiki on each green gate. The in-tree frontier (`Z78C`, hOffC) is
   two-component pairs pass (two-component structure; 1/log^2 scale in 6 of
   the top-10); triples at chi2 2.76-3.00/4 dof (overfit zone); the 0187
   excess fits ~(loglog X)^4.2 (middle point within 2.3%), not a floor.
-  Next: U3c (f) = re-screen with the derived product term delta*(loglog/log).
   Output: `tmp/kcs3c_e_out.txt`. No RH claim.
+- **U3c RUN (f) (2026-10-27, 0190):** `scripts/rh/kcs3c_e_ansatz_sweep.py`
+  (4b section) - the named candidates on the 7 recorded points: the
+  derived 2-term R ~ a*(ll/l)^2 + b*delta*ll/l passes (chi2 3.88/5, max
+  1.86 se; signs (-,+), ~8x cancellation); + loglog line best (3.26/4,
+  1.51 se) with loglog coeff ~2e-4 (zero); the growing excess is a
+  decay-cancellation appearance in-sample; derived form data-compatible,
+  out-of-sample at 3e11/1e12 named but unmeasurable here; gate OPEN.
+  No RH claim.
 - **U2 MEASURED (2026-10-25):** `scripts/rh/kcs2_fourier_sieve.py` —
   the finite operator package measured at N = 210 (comb, all a, all p)
   and N = 30030 (full Ramanujan field, all 30030 characters; Parseval

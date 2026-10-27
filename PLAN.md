@@ -365,6 +365,18 @@ Commit a00c7d6.
    component + growing ~(loglog)^4.2 component; strict gate open
    (needs a DERIVED term - next: U3c (f) product term delta*(loglog/log))
    (tmp/kcs3c_e_out.txt).
+   **U3c (f) DONE (0190, 2026-10-27):** the named-candidate screen on
+   the 7 points (no sieving; seconds): family extended with the DERIVED
+   product term f8 = delta*(loglog/log) + a bare growing f11 = loglog;
+   the derived 2-term R ~ a*(ll/l)^2 + b*f8 PASSES (chi2 3.88/5 dof,
+   max 1.86 se; signs (-,+) - an ~8x cancellation structure; first
+   purely derived form data-compatible); the growing line is never
+   picked up (coeff ~2e-4 in every fit containing it) - the 0187
+   growing excess is reproduced in-sample by the decay-cancellation
+   (-f2 + f8); the 3-point (loglog)^4.2 hint (0188) and the 7-point
+   fit prefer different descriptions (both recorded). Out-of-sample
+   at 3e11/1e12 = named discriminator, beyond this box (0187).
+   Strict gate OPEN.
    Recall incident logged in 0170 (a 65/35 benchmark was unverified
    memory; corrected to the verified LOS framework). No RH claim:
    prime-gap class statistic + exact sieve algebra, flank not face.

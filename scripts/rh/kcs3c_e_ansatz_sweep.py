@@ -74,11 +74,18 @@ def fam(X):
         1.0 / L,                 # f5 1/log
         1.0 / (L * L),           # f6 1/log^2
         1.0,                     # f7 the FLOOR
+        # U3c (f): the DERIVED next-order product term of the LOS q=4
+        # expansion (the 0188 named candidate) and a BARE growing
+        # loglog line (the measured 0187 excess GROWS in X, so a
+        # growing candidate must be in the test space)
+        los_delta(X) * ll,       # f8 = delta * (loglog/log)
+        math.log(L),             # f11 = loglog X (bare, growing)
     ]
 
 
 FNAMES = ["f1=delta", "f2=(ll/l)^2", "f3=(ll/l)^3", "f4=ll/l",
-          "f5=1/log", "f6=1/log^2", "f7=floor"]
+          "f5=1/log", "f6=1/log^2", "f7=floor",
+          "f8=delta*ll/l", "f11=loglog"]
 
 
 def ols(cols, y, invvar):
@@ -224,6 +231,40 @@ def main():
          expts[2][1] - e_mean))
     W("    floor.")
     W("")
+
+    # (4b) U3c (f): the named candidate structures
+    W("")
+    W("== (4b) U3c (f): the NAMED candidate structures ==")
+    W("    (the (e) family extended with f8 = delta*ll/l, the derived")
+    W("     next-order product term of the LOS q=4 expansion, and f11 =")
+    W("     loglog X, a bare growing line for the measured 0187 excess)")
+    W("")
+    NI = {n: k for k, n in enumerate(FNAMES)}
+    def col(j):
+        return [FAM[i][j] for i in range(7)]
+    cands = [
+        ("(a) R ~ a*f2 + b*f8       (DERIVED: leading + product term)",
+         ["f2=(ll/l)^2", "f8=delta*ll/l"], True),
+        ("(b) R ~ a*f2 + b*f6       (0188 best pair, reference)",
+         ["f2=(ll/l)^2", "f6=1/log^2"], False),
+        ("(c) R ~ a*f2 + b*f8 + c*f11  (derived + growing loglog line)",
+         ["f2=(ll/l)^2", "f8=delta*ll/l", "f11=loglog"], True),
+        ("(d) R ~ a*f2 + b*f11      (leading + growing loglog line)",
+         ["f2=(ll/l)^2", "f11=loglog"], False),
+        ("(e) R ~ a*f8 + b*f11      (product + growing line, no lead)",
+         ["f8=delta*ll/l", "f11=loglog"], False),
+    ]
+    for label, names, derived in cands:
+        cols = [col(NI[n]) for n in names]
+        co, resid, chi2 = ols(cols, ys, invvar)
+        mx = max(abs(r) for r in resid)
+        tag = "   <-- derived" if derived else ""
+        W(label)
+        W("    chi2 = %7.2f (dof %d)   max|res| = %6.2f se%s"
+          % (chi2, 7 - len(cols), mx, tag))
+        W("    c = " + "   ".join("% .5f" % c for c in co))
+        W("    res by X: " + "  ".join("%+5.1f" % r for r in resid))
+        W("")
 
     # (5) verdict
     W("== (5) screening verdict ==")
