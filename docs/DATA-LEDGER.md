@@ -248,3 +248,43 @@ T5  the mpmath memory wall (N * elem):  do not queue dps ladders or
     past-wall route (staggered launches, one fresh process per (t,
     dps)).
 
+
+## 8  The A1-DN census (zero-grid RVM count-defect; 2026-10-28; handwritten)
+
+STATIC FACTUAL DESCRIPTION of the A1 walk-side data (the object of the
+single open W2Beyond input, the data-free |DN| <= K clause):  the RVM
+count-defect AT THE ZEROS,  DN(z) = N(z) - n_asym(z),  with the project
+RVM n_asym(x) = (x/2pi) log(x/2pi) - x/2pi + 3/4  (day036/day040
+verbatim).  Generated-style table below;  census script
+`tmp/a1_dn_census.py` (day040 verbatim arithmetic + histogram);  output
+`tmp/a1_densus_abc.out` (A/B/C/LOW) and `tmp/a1_densus_d2.out` (D,
+the 740GB band).  Anchors:  D FRONTIER = the certified N(OLD_END) =
+9,061,794,704  (day040 / fleet A2 layer);  C/B/A anchored down the
+chain;  LOW = LMFDB exact indices.
+
+| domain             | zeros          | sup |DN|   | at t               | min(DN)  | q50    | q99    | q99.9  | q99.99 | q99.999 |
+|--------------------|----------------|-----------|--------------------|-----------|--------|--------|--------|--------|---------|
+| [14, 1e7] LMFDB    |    21,136,125  | 2.110059872 | 4,998,855.44     | -0.87914 | 0.6251 | 1.4099 | 1.6285 | 1.7876  | 1.9088  |
+| (3.19e7, 1.01e9] A | 2,792,198,664  | 2.438651562 | 487,931,556.15   | -1.16536 | 0.6251 | 1.4622 | 1.7040 | 1.8845  | 2.0268  |
+| (1.00e9, 2.00e9] B | 3,066,173,720  | 2.503013134 | 1,035,537,870.15 | -1.24162 | 0.6251 | 1.4734 | 1.7200 | 1.9049  | 2.0506  |
+| (2.00e9, 2.999e9] C| 3,142,622,346  | 2.477177620 | 2,631,384,288.23 | -1.26177 | 0.6252 | 1.4778 | 1.7262 | 1.9131  | 2.0609  |
+| (2.999e9, 3e10] D  | 92,577,877,714 | 2.615066528 | 29,565,113,205.57| -1.39166 | 0.6252 | 1.4917 | 1.7463 | 1.9391  | 2.0932  |
+
+Decade sup ladder (monotone):  2.1101 (<=1e7) -> 2.2969 (3.2e7..1e8)
+-> 2.3773 (1e8..3e8) -> 2.4387 (3e8..1e9) -> 2.5030 (1e9..3e9) ->
+2.5539 (3e9..1e10) -> 2.6151 (1e10..3e10).  D tail mass:  P(|DN|>2.0)
+= 4.256e-5,  P(>2.4) = 1.579e-8,  P(>2.6) = 1.080e-11.  D band
+VERIFICATION vs the certified record (2026-10-28 sweep):  all five pins
+OK (sup|DN| 2.615066528 tol 5e-7;  argmax t 29,565,113,205.570534;
+N(3e10) = 101,635,962,231;  DN(seam-in) 0.525129318;  DN(band end)
+0.904983521).
+
+GAPS AND CAVEATS:  the interval (1e7, 3.19e7] is not covered locally
+(52,290,633 zeros;  the certified A2 record covers the full (1e7, 3e10]
+domain from the fleet census).  The A/B file overlap (12,626,784 zeros)
+agrees element-wise to one f64 ULP (152 entries at exactly 2^-23).
+The RVM gate at A head:  S = -0.599  (|S| < 3, PASS).  The +3/4 RVM
+convention makes DN = S(z) - 1/8 + O(1/z) at low t (the LOW band reads
+the classical S directly).  No RH content:  bookkeeping of the A1
+clause's data side;  the machine-checked record is
+`formal/RhAttack/W2Beyond4.lean`.

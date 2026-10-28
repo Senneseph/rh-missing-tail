@@ -234,7 +234,29 @@ Commit a00c7d6.
    data edge is a FLANK and never closes it; a future board-best
    record is the next adoption trigger (the board moved twice in the
    last 24h).
-8. **The second orbit (KANSAS CITY SHUFFLE, IN PROGRESS):**
+8. **The A1 walk-side data layer (0201, 2026-10-28):** the single
+   open W2Beyond input - the data-free |DN| <= K clause (S bounded at
+   the zeros, E1) - now carries its DATA side as a named, machine-
+   checked record: `formal/RhAttack/W2Beyond4.lean` (targeted build
+   green; full tree 17450 jobs green with it integrated) pins the
+   measured K instances, the GROWTH LADDER theorem (the sup of the RVM
+   count-defect at the zeros is MONOTONE in the decade: 2.1101 ->
+   2.6151 from 1e7 to 3e10, span < 1, drift ~0.15/decade - the data
+   says o(log) and non-constant), and the universal wire INSTANCED at
+   K = 2.62 on the certified (2.999e9, 3e10] domain (wire cost <=
+   2.62 * 17/8 = 2227/400 = 5.5675). The census behind it (scripts/rh
+   a1_dn_census.py; DATA LEDGER section 8): 121.6 billion zeros
+   (A/B/C/LOW local + D the 740GB band), the D band re-derives the
+   certified A2 record EXACTLY (all five pins OK:  sup 2.615066528,
+   argmax t, N(3e10) = 101,635,962,231, both seam DNs); positive-side
+   dominance (sup+ 2.615 vs min -1.392); the shape (quantiles/tails)
+   quantified on 92.6 billion zeros.  The anchor chain D-seam -> C ->
+   B -> A reproduces Titchmarsh main + 7/8 at A head (S = -0.599,
+   |S| < 3 gate PASS); the A/B overlap agrees to one f64 ULP.  The
+   DATA-FREE version (K uniform in the frontier) remains the single
+   named open theorem - now with its growth quantified from below.
+   No RH claim.
+9. **The second orbit (KANSAS CITY SHUFFLE, IN PROGRESS):**
    `docs/KANSAS-CITY-SHUFFLE-SIEVE-ORBIT-PLAN-2026-10-25.md` — the
    owner's crafted creation: a Fourier-compatible Sieve of
    Eratosthenes as an Action series, paired with the zeta side on
