@@ -773,8 +773,11 @@ certificate:
   - the jazz (the per-hit residual after the exact mechanism) is the
     SAME object the KCS deficit flank measures to 1e13.
 Remaining named next steps (off-board, when the groove restarts):
-  (i) the X12 local audit at a scale where the 1e13 KCS law and the
-      mechanism's local prediction can be compared window by window;
+  (i) DONE (11.14, 2026-10-28): the X12 local audit at 1e8 - the
+      side-quest census reproduces the KCS U3 statistic to 1e-6;  the
+      mechanism's OOS carries the era's stale bias (z = -46, band-only
+      control -46):  the transportable object is the decay (the KCS
+      law), not the local finite-state machine;
       (ii) DONE (11.12, 2026-10-28): the point-process intensity fit -
       in-sample structure real (twin anti-persistence + after-quiet
       recovery), OOS non-transportable (-12 sigma / -839 sigma vs the
@@ -860,3 +863,34 @@ SECONDARY tuner of the twin event (its curve flattens, not inverts,
 as the lines are added - the structure is there, it is just not the
 primary obstruction:  the -2 class does the blocking, the -1/+1
 decoration tunes it).  No RH claim;  off-board.
+
+### 11.14 X12: the local audit at the comparable scale (DONE 2026-10-28)
+
+`scripts/rh/pattern_groove_5_x12.py` (1 core, ~1s, output
+`tmp/x12.out`):  the audit the groove named - at 1e8, the scale where
+both the KCS U3 census and the side-quest mechanism can be computed,
+the two are put against each other, plus the cross-scale OOS test of
+the mechanism.
+
+MEASURED:
+  - (a) CROSS-PROGRAM REPRODUCTION:  the side-quest census of the
+    EXACT U3 statistic (frac(gap % 4 == 2), twins included) at 0..1e8
+    is 0.556520 against KCS U3's 0.556519 (CI +/-0.00041) - agreement
+    to 1e-6 on independent code and independent sieves.  The era
+    structure:  0.570915 on 0..2e6 vs 0.556138 on 2e6..1e8 - the
+    2-mod-4 bias is DECAYING (0.5709 -> 0.5561 -> 0.5371 at 1e13 per
+    the KCS ladder) exactly as the Lemke-Oliver-Soundarararadar
+    theorem and the KCS law say.
+  - (b) MECHANISM OOS:  the (band, D, prev-gap) transition machine
+    trained on 0..2e6 predicts 0.570748 for the 2e6..1e8 stretch;
+    realized 0.556138;  z = -45.8.  The band-only control:  z =
+    -46.3.
+
+VERDICT:  the mechanism reproduces the IN-ERA structure (its in-sample
+tracking is near-perfect, X14b) but it CARRys the era's stale bias
+across the scale:  the D/gap-class refinement changes nothing (both
+machines at -46 sigma).  The transportable object is the DECAY itself
+- the KCS law as measured on the 1e9..1e13 ladder - not any local
+finite-state machine.  The side-quest and the KCS program now agree
+on the 1e8 datum to 1e-6, which is the cross-flank audit the groove
+was named for.  No RH claim;  off-board.
