@@ -775,9 +775,51 @@ certificate:
 Remaining named next steps (off-board, when the groove restarts):
   (i) the X12 local audit at a scale where the 1e13 KCS law and the
       mechanism's local prediction can be compared window by window;
-      (ii) the point-process intensity fit (X14b formalization: lambda
-      as a function of the state, the martingale test on real time,
-      not indices); (iii) the D-score curve beyond q=43 toward the
+      (ii) DONE (11.12, 2026-10-28): the point-process intensity fit -
+      in-sample structure real (twin anti-persistence + after-quiet
+      recovery), OOS non-transportable (-12 sigma / -839 sigma vs the
+      -0.27 sigma Cramer control) - (iii) the D-score curve beyond q=43 toward the
       singular-series limit at 1e8; (iv) an out-of-sample hold of the
       whole deficit-signature machine (train 2e6, predict 1e8, the
       cross-scale OOS the KCS program set as the standard).
+
+### 11.12 X14b: the point-process intensity fit (DONE 2026-10-28)
+
+`scripts/rh/pattern_groove_3_x14b.py` (1 core, <1 min, output
+`tmp/x14b.out`).  The prime stream as a STATE-MODULATED CRAMER PROCESS
+on real time:  lam(t, s) = w(s) / ln(t),  s = (band = p mod 24,
+Dclass = the groove D(p) over the 10 lines 3..31, gapclass = previous
+gap in {2, 4, >= 6}), w(s) the MLE on the train stretch
+(N_s / sum gap/ln).  The test battery:  the compensated count
+M(t) = N(t) - integral lam (the martingale test), the increment
+shape against the exponential ideal, and the CROSS-SCALE OOS the KCS
+program set as the standard (train 0..2e6, predict 2e6..1e8, z vs
+sqrt).
+
+RESULTS (2e6 train / 1e8 test; plain-Cramer w = 1 control in parens):
+  - IN-SAMPLE (0..2e6]:  the fitted process tracks the count path
+    to sup |M|/sqrt(Lam(t)) = 0.585;  binned (20 equal-time bins)
+    chi2 = 2.40 / 17 dof (0.14 per dof - essentially perfect);
+    the final M is 0 BY MLE construction (the Poisson MLE identity),
+    reported as such.  The increment shape vs the exponential ideal:
+    skew -1.79 (ideal +2), excess kurtosis +4.86 (ideal +6),
+    lag-1 autocorrelation -0.034 (mild anti-persistence, the X6
+    signature on the intensity scale).
+  - GLOBAL OOS (2e6 -> 1e8]:  z = -12.08 (control: -0.27).
+  - LOCAL OOS (fit 2e6..2.5e7 -> predict 5e7..1e8]:  z = -839
+    (control: -0.20).
+  - the w(s) table (91 states with N >= 50):  the RICH states
+    (w = +7..+18%) are uniformly gapclass >= 6 (after the quiet) in
+    the bands {5, 11, 17, 23};  the LEAN states (w = -20..-30%) are
+    uniformly gapclass = the twin-just-before state.
+
+VERDICT:  the state modulation is a real IN-SAMPLE structure (the
+twin anti-persistence and the after-quiet recovery, quantified as
+intensity ratios) but it is NOT TRANSPORTABLE:  the OOS failure grows
+monotonically as the training stretch shrinks (global 2e6: -12 sigma,
+near-decade: -839 sigma) while the unweighted Cramer main term sits
+at -0.27 sigma over five decades.  The transportable part of the
+prime point process at this state resolution is EXACTLY 1/ln(t); the
+deficit signature is an in-sample pattern residual, not out-of-sample
+predictability - consistent with the X11b causal null.  No RH claim;
+off-board.
