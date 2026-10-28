@@ -823,3 +823,40 @@ prime point process at this state resolution is EXACTLY 1/ln(t); the
 deficit signature is an in-sample pattern residual, not out-of-sample
 predictability - consistent with the X11b causal null.  No RH claim;
 off-board.
+
+### 11.13 The D-score curve toward the singular-series limit (DONE 2026-10-28)
+
+`scripts/rh/pattern_groove_4_dscore.py` (1 core, ~1s, output
+`tmp/dscore43.out`):  X13's D-class twin-share curve at 1e8 re-measured
+with the line set Q extended from the primes <= 31 (10 lines) to the
+primes <= 43 (13 lines: +37, 41, 43), with the singular-series partial
+products as the reference.
+
+MEASURED (1e8, 440,312 twins, twin share 0.076424):
+  - the D-class distribution shifts as the lines are added (D = 1..10
+    now: 0.116/0.306/0.319/0.180/0.062/0.014/0.0022/...):  the extra
+    lines redistribute primes toward higher D;
+  - the twin share by D-class at 13 lines sits slightly BELOW the
+    10-line curve at the same D label (D=3: 0.0807 vs 0.0839;
+    D=6: 0.1243 vs 0.1312; D=8: 0.1507 vs 0.1617) - the curve's
+    slope D=1 -> 8 falls from +0.119 to +0.108 (-9%) when the three
+    far lines enter.
+  - the singular-series anchor product prod_q (1 - 1/(q-1)^2)
+    converges FAST:  S_31 = 0.6643994,  S_43 = 0.6630957 vs the full
+    twin-prime constant 0.6601618...  - the lines <= 43 carry 99.55%
+    of the structure;  the remainder of all lines beyond 43 moves the
+    constant by < 0.45%.
+  - the per-line twin factor read ON a known prime (the -2 block, the
+    meditation's law, quantified):  p+2 is blocked by q iff p = -2
+    mod q,  probability 1/(q-1) on the prime classes,  per-line
+    retention (q-2)/(q-1);  the product over the 13 lines gives
+    0.061 against the measured all-prime twin share 0.0764 (the gap
+    is the middle-line / 1-ln-t scale, expected, not a failure of the
+    local picture).
+
+VERDICT:  the local obstruction structure CONVERGES by q = 43 (within
+0.45% of the singular-series limit);  the +/-1 D-score is a stable
+SECONDARY tuner of the twin event (its curve flattens, not inverts,
+as the lines are added - the structure is there, it is just not the
+primary obstruction:  the -2 class does the blocking, the -1/+1
+decoration tunes it).  No RH claim;  off-board.
