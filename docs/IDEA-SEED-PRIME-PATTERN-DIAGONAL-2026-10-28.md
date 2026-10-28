@@ -8,7 +8,14 @@ influence back) HOLDS at 2e6 (X11: +0.06%, noise); 1/p is a
 convergent turned-away ledger (B1, gamma - B1); the twin -2 block is
 exact except at the line's first prime; the music = the product of the
 turned away (Mertens III, 0.99995 at 2e6); the KCS deficit re-derives
-as the jazz residual after the exact mechanism (11.6).
+as the jazz residual after the exact mechanism (11.6) +
+FULL GROOVE EXECUTION COMPLETE 2026-10-28: entire frozen queue run at
+2e6 and 1e8; the void's axiom HOLDS at 1e8 clean (+0.26%); the twin
+blocker saturation curve = the singular series measured prime by prime
+(0.776 -> 0.939); the 24-word is scale-invariant (same 114 2-grams / 962
+3-grams 2e6 -> 1e8); the /5 fib shadow is a protected dead end; the Lean
+certificate formals/RhAttack/PrimeMusic.lean landed (12 atoms, build
+green, off the RH critical path). No RH claim.
 Companions: `docs/IDEA-SEED-EULER-PRIMAL-BLOOM-2026-10-23.md` (seed 3,
 the 24-wheel + Fibonacci shadow + the F13 prediction measure),
 `docs/IDEA-SEED-PRIME-LATTICE-2026-10-22.md` (seed 1),
@@ -606,3 +613,171 @@ is subtracted. Consequences for the 4-frame model (10.1):
   unaffected (they ran before the broken section).
 - Probe 1 bugs (twin-target off-by-one revealing twin anti-persistence;
   AUC tie-average in the incrementing loop) are recorded in 10.6.
+
+## 11.9 GROOVE EXECUTION COMPLETE (2026-10-28): the frozen queue,
+## executed, until the inspiration exhausts
+
+All frozen experiments of 11.7 run (2e6 + 1e8), plus the Lean X5
+certificate landed in tree. Results below; scripts:
+`scripts/rh/pattern_groove_2e6.py`, `pattern_groove_1e8.py`,
+`pattern_groove_2b.py`, `pattern_groove_2c.py`; outputs in `tmp/`.
+
+### X11b — the void's axiom at 1e8: HOLDS (clean split, scale-free)
+
+Protocol: train = [2, 0.8n), hold = [0.8n, n), target the scale-free
+step h = g/ln at the centered prime; shrinkage tables from TRAIN only.
+    2e6 (clean):  causal +0.51%   noncausal +0.52%   future-only +0.46%
+                  retrocausal gain = +0.01%
+    1e8 (clean):  causal +0.12%   noncausal +0.38%   future-only +0.20%
+                  retrocausal gain = +0.26%
+Verdict: the future contributes only through the SAME local field the
+causal state reads (sub-2% at both scales; well inside the check bar).
+The "violation" flagged by the first in-sample 1e8 run (+1.9%) was a
+mismeasurement (global anchor + in-sample tables) — the clean protocol
+settles it: **the axiom holds to within 0.26% at 1e8, two orders of
+magnitude beyond 2e6.** New scale reading inside: the PAST half of the
+state weakens with height (causal skill +0.51% -> +0.12%; step-deficit
+anti-persistence -0.056 -> -0.037) while the window keeps ~0.4-0.5%
+total skill — the local field is scale-stable, its past-half memory
+decays slowly with height.
+
+### X14 — the clatter's whiteness (both scales)
+
+Raw step-deficit autocorr: lag1 -0.056 (2e6) / -0.037 (1e8) — OUTSIDE
+the shuffle nulls (~+-0.007 / +-0.013): a real short ANTI-persistence.
+After demeaning by the (band, 2-gap) state: lag1 -0.003 (2e6) — the
+state explains the memory completely. The state explains only ~1.0% of
+the CLATTER VARIANCE (raw 120.4 -> state-cond 119.2): the clatter is
+~99% irreducible white noise GIVEN the (band, 2-gap) state; what it
+explains is the short memory, not the spread.
+
+### X6/X7 — the deficit signature and the cross-frame
+
+The 24-step window deficit (realized span - theory span, the
+ln+0.44-blocker walk): mean -2.48 (theory runs ~0.7% fast at 2e6),
+std 45.5, skew +0.333 (long-tailed: windows that eat a gap cluster).
+NOTE: the window-deficit sequence itself is a random-walk object by
+construction (23/24 step overlap) — its high lag corr (0.942/0.889...)
+is the walk fingerprint, NOT memory; the white test is the per-step
+deficit (X14). Cross-frame (state -> 24-step deficit, held-out):
+band +0.48%, D-class +0.46%, 3-tail +1.98%, composite (mean) +1.27% of
+MAE over theory-alone: **the 24-unit future is ~98-100% clatter; the
+state's entire 2e6 power is ~2% of MAE, carried by the 3-tail.** The
+jazz hit, at the 24-revolution scale, is essentially unforecastable —
+the model's honest claim is the mean field (the music), not the hit.
+
+### X8 — the twin-score saturation curve (the singular series,
+### measured as a partial sum)
+
+AUC of the hard blocker score (p = -2 mod q for q in Q; held-out):
+    Q={3}: 0.7759    {3,5}: 0.8444    {3,5,7}: 0.8788    +11: 0.8962
+    +13: 0.9091     +17: 0.9178      +19: 0.9253        +23: 0.9308
+    +29: 0.9355     +31: 0.9392      (at 1e8: 0.9295)
+Each small line adds a decaying increment (0.068, 0.034, 0.017, 0.013,
+0.009, 0.008, 0.005, 0.005, 0.004, ~ 0.15/q for q >= 11): the
+distance-one mechanism IS the singular series, measured prime by prime.
+The graded (product) score adds nothing over the hard one (0.9392 =
+0.9392 at 2e6): for the twin label the ORDERING of unblocked primes
+carries no extra information at this scale.
+
+### X13 — the distance-one score at 1e8: scale-stable
+
+D-class twin share at 1e8 (q <= 43): 0.0424 (D=1) 0.0627 0.0807 0.0974
+0.1117 0.1243 0.1400 0.1507 0.1789 (D=9) — monotone, matching the 2e6
+curve on the overlap (within ~3%): **the D-law is scale-stable.**
+
+### X4 — the 24-word's scale invariance (clean, matched definition:
+### letters = gap mod 24)
+
+    2e6:  13 letters, p(2) = 0.1979 (114/576), p(3) = 0.06959 (962/13824)
+          H1 = 3.3787, excess 2H1-H2 = +0.3309, H1-H3/3 = +0.2762
+    1e8:  13 letters, p(2) = 0.1979 (114/576), p(3) = 0.06959 (962/13824)
+          H1 = 3.4436, excess 2H1-H2 = +0.3112, H1-H3/3 = +0.2582
+**The word's SKELETON is scale-invariant: the same 13 gap-letters, the
+same 114 2-grams, the same 962 3-grams from 2e6 to 1e8** (saturated by
+2e6). What drifts with height is the AMPITUDE (H1 3.38 -> 3.44: the
+letter distribution shifts as ln grows) and the excess persists
+(0.33 -> 0.31 bits, a 6% decay). The word is structure-complete early;
+the growth is in the measure, not the alphabet.
+
+### X2 — the seeded-/5 Fibonacci shadow: PROTECTED DEAD END
+
+The 4-cycle orbit {(1,3),(3,4),(4,2),(2,1)} is UNREACHABLE by the
+Fibonacci pair from seed (0,1) (none of the 20 cycle pairs is in the
+orbit — the pair never leaves the 20-cycle). The honest shadow is the
+cycle POSITION k mod 20 on the block index: grouped block deficits give
+chi = 3303.6 vs the shuffle null median 4909 / max 9366 — the fib
+position carries NOTHING (the real grouping is FLATTER than random).
+The band grouping (chi 971.3, 10 groups) dwarfs it. **The /5 fib state
+is a map, not a locator — the last untested fib object in the program
+is now also a protected dead end.**
+
+### X5 — the Lean certificate: LANDED IN TREE
+
+`formal/RhAttack/PrimeMusic.lean` (namespace PrimeMusic; OFF the RH
+critical path; no RHEnd import; build green: targeted 8706 jobs + full
+17450 jobs):
+  bands8_coprime      : (Finset.Ico 1 24).filter (gcd b 24 = 1) = {1,5,7,11,13,17,19,23}  (decide)
+  bands8_pm1_lattice  : every band is 1 (mod 2) and +-1 (mod 3)                            (decide)
+  minusTwoClass3      : the 3-line's -2 class on the bands = {1, 7, 13, 19}                (decide)
+  minusTwoClass5      : the 5-line's -2 class on the bands = {13, 23}                      (decide)
+  twinMinusTwoBlocked : p+2 = q*k, q >= 3, k >= 2  =>  p+2 is NOT prime                    (number theory)
+  twinEscapeFirstPrime: p+2 = q  =>  p+2 is prime  ("the line admits its first prime")
+  turnedAway2         : 1 - 1/2 = 1/2   (2 halving the music)
+  survivors23         : (1-1/2)(1-1/3) = 1/3  (the 8 bands out of 24)
+  fiveLedgerSurvivors : (1-1/2)(1-1/3)(1-1/5) = 4/15
+  fiveLedgerMasses    : the masses 1/2, 1/6, 1/15
+  musicHalvingBy2     : (1 - 1/2) * oddProduct = oddProduct / 2
+  fivegramsDistinct   : the 10 five-grams below 47 are distinct
+The measured claims (ledgers, AUCs, whiteness, scale invariance) stay
+in this file's header comment and in the data ledger, per the
+formalization-honesty rule (0197).
+
+### 11.10 Correction record (append, groove round)
+
+- First 1e8 X11b run: the "+1.9% VIOLATION" flag was a PROTOCOL ERROR
+  (global gmean anchor + in-sample hold tables). The clean split
+  (train tables, hold-local anchor, scale-free target) gives +0.26%:
+  axiom holds. The in-sample protocol must not be used for the
+  retrocausal verdict.
+- X4 first 1e8 run used the COARSE GAP word (5-6 classes), not the
+  probe-0-style 24-word: p(2) = "0.0000" was types-per-N, not
+  types-per-576. The matched-definition re-run (gap mod 24, both
+  scales) is the record.
+- X2 first version: the 4-cycle orbit is unreachable from seed (0,1)
+  (the fib pair mod 5 lives on the 20-cycle forever): the fibstate
+  was constant, chi = 0.0 exactly — the shadow is the cycle position,
+  and it carries nothing (below the null).
+- X6: the window-deficit lag corr (0.942...) is the overlapping-window
+  random-walk fingerprint, not memory — the per-step deficit is the
+  white-test object (X14).
+- Lean: `Nat.Prime.eq_one_or_self` does not exist in this pinned
+  Mathlib — the name is `Prime.eq_one_or_self_of_dvd`
+  (Mathlib/Data/Nat/Prime/Defs.lean:88). The `+/-1` sequence inside
+  Lean comments OPENS a nested comment (the header broke until
+  re-phrased as `+-1`). `field_simp` leaves `(2-1)*r = r` on the
+  halving goal — `ring` closes it.
+
+### 11.11 The groove verdict (where the inspiration stands)
+
+The turned-away mechanism is now a MEASURED MODEL with a formal
+certificate:
+  - the music = the Euler product of the event log (Mertens III + PNT),
+    convergent ledgers to 1e-8 at 2e6 (B1, gamma - B1);
+  - the structure (wheel, -2 block, D-score, saturation curve, scale
+    invariance) is exact where it claims exact and scale-stable where
+    it claims stable;
+  - the clatter = ~99% white given the (band, 2-gap) state, with a
+    short anti-persistence the state fully explains;
+  - the future is causal (sub-2% at 2e6 and 1e8, clean protocol);
+  - the jazz (the per-hit residual after the exact mechanism) is the
+    SAME object the KCS deficit flank measures to 1e13.
+Remaining named next steps (off-board, when the groove restarts):
+  (i) the X12 local audit at a scale where the 1e13 KCS law and the
+      mechanism's local prediction can be compared window by window;
+      (ii) the point-process intensity fit (X14b formalization: lambda
+      as a function of the state, the martingale test on real time,
+      not indices); (iii) the D-score curve beyond q=43 toward the
+      singular-series limit at 1e8; (iv) an out-of-sample hold of the
+      whole deficit-signature machine (train 2e6, predict 1e8, the
+      cross-scale OOS the KCS program set as the standard).
