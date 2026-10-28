@@ -308,3 +308,78 @@ convention makes DN = S(z) - 1/8 + O(1/z) at low t (the LOW band reads
 the classical S directly).  No RH content:  bookkeeping of the A1
 clause's data side;  the machine-checked record is
 `formal/RhAttack/W2Beyond4.lean`.
+
+
+## 9  The S-at-zeros object identity, machine-checked (0204; 2026-10-28)
+
+The section-8 census measured the RVM count-defect
+`DN(z) = N(z) - n_asym(z)` with the project RVM asymptotic
+`n_asym = (z/2pi) log(z/2pi) - z/2pi + 3/4`.  The Riemann-von Mangoldt
+formula (CITED, standard) puts +7/8 in the same place:
+
+    N(T) = (T/2pi) log(T/2pi) - T/2pi + 7/8 + S(T) + O(1/T)
+
+so the two main terms differ by exactly 7/8 - 3/4 = 1/8 and
+
+    S(T) = DN(T) - 1/8 + O(1/T).
+
+**0204 pinned the exact core in-tree** (`formal/RhAttack/W2SAtZeros.lean`,
+targeted build green, full tree 17452 jobs green, root-import; the O(1/T)
+remainder of RvM is CITED per the ZetaZeroSet convention and is < 1e-9 for
+T >= 1e9, far below every ledger tolerance):
+
+- `rvmShiftCore`    : the 7/8 main term = the 3/4 main term + 1/8  (exact).
+- `sDefect_le_dnPlusShift`: any uniform |DN| <= K transfers to
+  |sDefect| = |DN - 1/8| <= K + 1/8.
+- `instDnBoundToSBound_3e10`: the in-tree K = 262/100 ledger (W2Beyond4
+  `a1_wire_3e10_instanced`) gives  **|S| <= 262/100 + 1/8 = 549/200 = 2.745**
+  on the certified 3e10 domain.  (First in-tree |S|-at-the-zeros bound.)
+- `instSignedExtremaToSBound_3e10`: with the signed measured extrema
+  (max DN = +2.615066528, min DN = -1.391662598) the S range is
+  [-1.516662598, +2.490066528], hence the sharper one-sided in-tree bound
+  **|S| <= 2490066528/10^9 = 2.490066528** on the certified domain.
+
+### 9.1  The growth-form flank  (measured script
+`tmp/a1_sat_zeros_growth_fit.py`; 8 points, T in [1e7, 3e10])
+
+The S-at-zeros running-max ladder (sup|DN| - 1/8 on the positive side):
+1.9851 (1e7) -> 2.0637 (3.19e7) -> 2.1719 (1e8) -> 2.2523 (3e8) ->
+2.3137 (1e9) -> 2.3780 (3e9) -> 2.4289 (1e10) -> 2.4901 (3e10).
+
+Fits:  c*ln t + b with c = 0.0628, b = 0.997 (R^2 = 0.986).  The
+sqrt(loglog t) CLT scale under-predicts the top by -14.7% (pure
+proportional: predicts 2.124 vs measured 2.490).  The RH main-term scale
+(1/4) ln t / loglog t equals 1.895 at 3e10 (measured 2.490).  Decisive
+diagnostic: the proportional coefficient S/ln t drifts -16.2%
+(0.123 -> 0.103); O(1)-flat would give -33%, ln t/loglog t gives -12.8%,
+sqrt(loglog t) gives -28.5%.
+
+**Reading (honest, no RH claim):** the data to 3e10 does NOT support the
+O(1)-at-zeros clause (hA1); the S-at-zeros running max behaves like a slow,
+sub-ln-t growth, shape closest to ln t / loglog t and clearly NOT the
+flatter sqrt(loglog t) shape.  Eight points over 1.4 decades in ln t cannot
+yet separate "slow O(1) saturation" from "slow divergence"; the next
+discriminating test is a higher-T census of dS/d(ln t).
+
+### 9.2  The frontier, pinned (online-verified 2026-10-28)
+
+- **Selberg's CLT (1946) is a generic-tau statement** (tau uniform in [T,2T])
+  about log zeta(1/2 + i tau) = log|zeta| + i pi S(tau); it is NOT a
+  zeros statement, so it neither proves nor refutes the O(1)-at-zeros clause.
+  (Fetched and checked: the CLT formulations in the 2024-26 follow-ups
+  (arXiv 2507.04150, 2403.19803, 2202.06799) all state the generic-tau
+  version.)
+- **Bondarenko-Seip (arXiv 1704.06158, Math. Ann.)**: under RH,
+  max|S(t)| on [T^beta, T] (0 <= beta < 1) >= c sqrt(log T logloglog T /
+  loglog T).  A generic-t omega; the statement gives no claim about the
+  location of the maximizing t (zero or otherwise).
+- **E19 gap-transfer (docs/A1-THEOREM-ATTACK-PLAN.md)**: driving a
+  generic-t omega to the zeros fails (the CCM increment bound swallows the
+  omega value; the transfer-error/omega ratio -> infinity).  hA1 is
+  therefore characterized and named, not refuted, and not proven.
+
+Net: the A1 clause's status is now sharper - the object identity and the
+domain-verified bound are machine-checked in-tree; the clause is open; the
+data presses it toward slow divergence (shape ~ ln t/loglog t, not
+sqrt(loglog t)); the known omegas are generic-t and do not yet transfer.
+No RH claim: all of this is the data flank of the A1 input.

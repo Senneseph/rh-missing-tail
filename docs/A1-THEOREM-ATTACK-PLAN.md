@@ -54,6 +54,38 @@ set; do not re-derive it from memory.
    as the named open problem with the E19 evidence — never as
    claimed.
 
+5. **0204 (2026-10-28): the clause's data side is now the S-at-zeros
+   census itself, machine-checked, and the frontier is pinned.**
+   (a) OBJECT IDENTITY IN-TREE: `formal/RhAttack/W2SAtZeros.lean`
+   (root-imported, full tree 17452 jobs green) proves the exact core
+   `rvmShiftCore` (the RvM +7/8 main term = the project RVM +3/4 main
+   term + 1/8) and the conversion `sDefect_le_dnPlusShift`
+   (|DN| <= K  =>  |S| = |DN - 1/8| <= K + 1/8).  The in-tree K = 262/100
+   ledger (W2Beyond4, certified 3e10 domain) gives the first in-tree
+   |S|-at-the-zeros bound: |S| <= 549/200 = 2.745; with the signed
+   measured extrema it sharpens to |S| <= 2.490066528
+   (`instSignedExtremaToSBound_3e10`).  The O(1/T) RvM remainder is
+   CITED (< 1e-9 for T >= 1e9).  So "what the 0201/0202 censuses
+   measured" and "S(gamma) at the zeros" are now the same in-tree
+   object, exactly, not just documented.
+   (b) GROWTH-FORM FLANK (`tmp/a1_sat_zeros_growth_fit.py`): the
+   S-at-zeros running-max ladder (1.9851 -> 2.4901 over [1e7, 3e10])
+   fits c*ln t + b (c = 0.0628, R^2 = 0.986); the proportional
+   coefficient S/ln t drifts -16.2%, versus -33% for O(1)-flat,
+   -12.8% for ln t/loglog t, -28.5% for sqrt(loglog t).  The data does
+   NOT support O(1) and most resembles the ln t/loglog t (RH
+   main-term) shape; sqrt(loglog t) under-predicts the top by -14.7%.
+   Eight points cannot yet separate slow saturation from slow
+   divergence; the next test is a higher-T census of dS/d(ln t).
+   (c) FRONTIER PINNED (online-verified): Selberg's CLT (1946) is a
+   GENERIC-tau statement (tau uniform in [T,2T]; the 2024-26
+   follow-ups arXiv 2507.04150 / 2403.19803 / 2202.06799 all state the
+   generic-tau form) — it is not a zeros statement.  Bondarenko-Seip
+   (arXiv 1704.06158) gives, under RH, max|S(t)| >= c sqrt(log T
+   logloglog T / loglog T) on [T^beta, T] — a generic-t omega with no
+   zeros-vs-generic location claim.  With E19's failed gap-transfer,
+   hA1 stays characterized and open from all three angles at once.
+
 ## The target (the one open clause)
 
 The A1 assembly in `formal/RhAttack/W2Beyond3.lean`

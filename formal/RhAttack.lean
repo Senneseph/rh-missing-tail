@@ -108,3 +108,4 @@ import RhAttack.W2M6
 -- field's omegas + sqrt(loglog) distribution theory contradict it in
 -- the limit). GREEN, no sorry.
 import RhAttack.A1Growth
+import RhAttack.W2SAtZeros
