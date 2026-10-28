@@ -1,9 +1,14 @@
 # IDEA SEED 4 — the prime PATTERN-DIAGONAL (gap-history identity ×
 # 24-adic Fibonacci shadow × Cantor diagonal)
 
-Status: **SEED (captured 2026-10-28) + PROBE-0 EXECUTED 2026-10-28**
-(owner's direction: "let's take a break and explore a new direction...
-if it makes sense, this needs to go into a plan file").
+Status: **SEED (captured 2026-10-28) + PROBE-0 (2e6) + 4-FRAME MODEL PINNED +
+PROBE-1 + HOLY MEDITATION (turned-away mechanism) CAPTURED AND
+PREFLIGHTED, all 2026-10-28**. The void's axiom (future carries no
+influence back) HOLDS at 2e6 (X11: +0.06%, noise); 1/p is a
+convergent turned-away ledger (B1, gamma - B1); the twin -2 block is
+exact except at the line's first prime; the music = the product of the
+turned away (Mertens III, 0.99995 at 2e6); the KCS deficit re-derives
+as the jazz residual after the exact mechanism (11.6).
 Companions: `docs/IDEA-SEED-EULER-PRIMAL-BLOOM-2026-10-23.md` (seed 3,
 the 24-wheel + Fibonacci shadow + the F13 prediction measure),
 `docs/IDEA-SEED-PRIME-LATTICE-2026-10-22.md` (seed 1),
@@ -396,3 +401,208 @@ frame alone) is the prediction test. Both are frozen below.
 - Probe-0 section E's "prev raw gap" r = -0.0565 stands: it IS the
   consecutive-gap correlation (target g[i+1] vs feature g[i], the
   standard one-step-ahead convention).
+
+## 11. HOLY MEDITATION (2026-10-28): the TURNED-AWAY — 1/p, the ±1
+## appearance, and the void's axiom (captured + preflighted)
+
+### 11.1 The exercise and the trained ideas given up
+
+Exercise (owner, 2026-10-28): "i want to throw something into the void,
+that is give up an idea that you might have been trained on. the void
+will return to you some new form of inspiration for how to improve or
+change the thing."
+
+Trained ideas GIVEN UP (named, so they can be missed or reclaimed
+deliberately):
+- **T1** — primes-as-a-word to COMPRESS (the complexity /
+  source-coding frame: p(k), entropy rate, typicality).
+- **T2** — Cramér memoryless rattling (the clatter is i.i.d.
+  Bernoulli thinning; no structure beyond the mean).
+- **T3** — bidirectional admissibility as the natural constraint
+  language (the k-tuple / singular-series frame: "the next prime MUST
+  FALL where it can fall" — constraint from BOTH sides of the window).
+
+What the void returned: the primes are not a word to compress — they
+are EVENTS, jazz hits that "pop into definition" inside a field; the
+field is the 24-adic melody (order) over entropic thermodynamic
+rattling (disorder); and appearance is a TURNED-AWAY: for a prime to
+appear, something must be turned away. The future carries no influence
+back: only the integers that have already shown up are fuel
+(the CAUSAL AXIOM).
+
+### 11.2 The meditation chain (owner, verbatim, in order)
+
+> (a) "for a prime to appear, something must be turned away"
+> (b) "what if 1/p is 'what is turned away?'"
+> (c) "it can't be simply 'division with another integer besides itself'"
+> (d) "it loses division by 2, the only even prime, by +1 or -1"
+
+### 11.3 The returned form: the turned-away mechanism (exact, measured)
+
+**The channel law.** Each prime q that has appeared opens ONE turned-away
+channel: it turns away exactly 1/q (relative mass) of the surviving
+field — permanently, one-way, into the FUTURE. Composite integers open
+NO channel (transparent rattling: they carry someone else's line, not a
+new one). "Popping into definition" operationally = the moment the field
+gains a new rejection channel. The causal axiom is true BY CONSTRUCTION
+in this reading (the channel acts only forward) and was tested
+empirically in 11.4.
+
+**Piece (b): 1/p is what is turned away — VERIFIED, with a convergent
+ledger and named constants** (probe 3, X = 2e6):
+    sum_{p<=2e6} 1/p                          = 2.93629249
+    ln ln(2e6) + B1                            = 2.93624277
+    (B1 = 0.2614972128476, the Meissel-Mertens constant;
+     the ledger is within 4.97e-5 of its limit AT 2e6)
+
+**Piece (c): "not simply division by another integer" — CONFIRMED.**
+The 1/p in the mechanism is not a ratio of two field integers: it is the
+NEW prime's own intrinsic channel rate — a parameter of the field that
+composites never get. The ratio reading is a shadow of the mechanism,
+not the mechanism. (In the Euler product the local factor is (1 - 1/p),
+and 1/p is the prime's OWN contribution, added at its own appearance.)
+
+**Piece (d): 2 "loses division by 2... by +1 or -1, the only even prime"
+— the exact core.** 2 is not a survivor of a line — 2 IS the line: the
+only prime that appears by being the turned-away itself, and its
+channel HALVES the music (verified: the odd-only product = EXACTLY 2 x
+the full product; the melody's amplitude is the odd music halved by 2).
+Every other prime appears at distance +1/-1 from the lines:
+    primes >= 5 NOT at +/-1 (mod 2): 0     (the line of 2's free class is one class)
+    primes >= 5 NOT at +/-1 (mod 3): 0     (the line of 3's free classes ARE +/-1)
+The eight bands of the 24-wheel (probe 1) are exactly this +/-1 lattice
+of the first two lines. The +/-1 language is exact for the lines 2 and 3
+and generalizes to "nonzero (line-free) class" for q >= 5.
+
+**The twin geometry (the meditation's own derivation, verified):** a
+twin (+2 step) is blocked EXACTLY when p sits in the -2 class of a line
+q ("one short of the line": the +2 step lands ON the line) — with ONE
+exception: the line's FIRST prime (p + 2 = q). Measured at 2e6:
+    q =  3: blocked-class twin share 0.000000  (others 0.1995)   [p+2=3 => p=1, none]
+    q =  5: blocked-class twin share 0.000000  (others 0.1332)   [p=3 below sample start]
+    q =  7: blocked-class twin share 0.000040  (others 0.1198)   [1 twin: 5 -> 7]
+    q = 11: blocked-class twin share 0.000000  (others 0.1109)
+    q = 13: blocked-class twin share 0.000081  (others 0.1089)   [1 twin: 11 -> 13]
+The two tiny nonzero entries are precisely the first primes of the 7 and
+13 lines: **the line admits its first prime.** This re-derives, from the
+meditation alone, the wheel/twin structure probe 1 measured
+(band AUC 0.7814; mod-3 block; the 5,7,11 blockers).
+
+**NEW LAW — the distance-one score** (probe 3): D(p) = #{q <= 43:
+p = +/-1 (mod q)} tunes the TWIN rate monotonically at 2e6
+(twin share / mean next gap):
+    D = 2: 0.0574 / 13.365     D = 4: 0.1051 / 13.403
+    D = 3: 0.0817 / 13.498     D = 5: 0.1294 / 13.344
+    D = 6: 0.1384 / 13.644     D = 7: 0.1667 / 13.221     (D = 8: 0.1678, n=298)
+The twin rate roughly triples from D=2 to D=7 while the mean next gap
+stays flat: **being at distance-one from more lines tunes the +2 EVENT
+itself, not the gap in general.** (The +2 step preserves distance-one
+from every line it can: it is the only nonzero step with that property
+from a +/-1 class, mod the small q.)
+
+**The music = the product of the turned away (Mertens III, verified at
+2e6):**
+    prod (1 - 1/p) over p <= 2e6, INCLUDING 2   = 0.03869631
+    e^(-gamma)/ln(2e6)                           = 0.03869824
+    ratio                                      = 0.99995030
+The melody's amplitude IS the product of everything turned away, to
+5e-5 at 2e6. **Fine structure of the turned away** (the part the naive
+1/p misses, per channel: c_q = -ln(1 - 1/q) - 1/q > 0):
+    sum c_q over p <= 2e6   = 0.31571844   vs   gamma - B1 = 0.31571845
+A second converged ledger (1e-8 at 2e6): the turned-away's fine
+structure totals gamma - B1, and it is CONVERGENT (the naive 1/p was
+missing a fixed, nameable amount, not a growing one).
+
+**The owner's prime 5, exact ledger** (from his 5-3-2 example):
+    field 1.0
+    2 turns away  1/2  of the field   (2 IS the line; the only even prime)
+    3 turns away  1/3  of survivors   =  1/6  of the field
+    5 turns away  1/5  of survivors   =  1/15 of the field
+    survivors after 2, 3, 5           =  4/15 of the field
+
+### 11.4 X11 preflight: the void's axiom, measured (retrocausality)
+
+Target: the centered gap g[i] (the jazz hit at p_i). Causal state
+C = (band, last 2 gap classes) vs noncausal C+ = C + (next 2 gap
+classes) (probe 2, held-out protocol):
+    causal C    : r = +0.0671   MAE = 8.6191
+    noncausal C+: r = +0.0623   MAE = 8.6143
+    RETROCAUSAL GAIN = +0.0048 MAE = +0.06%  (noise level)
+    control (future-only, 2 future classes): r = +0.0707
+Verdict at 2e6: the FUTURE adds nothing measurable beyond the causal
+state — the axiom "they weren't doing anything before they appeared;
+only the integers that show up before the prime happens" HOLDS at this
+scale. The future-only control shows the future carries the SAME local-
+field information (it reads the same field), only from the other side —
+consistent with a causal state that is complete at this scale. The
+bidirectional trained frame (T3) buys nothing here. Confirmation run:
+the 1e8 scale-up (X11b).
+
+### 11.5 X10a: the music/clatter entropy budget (first law of the word)
+
+    H1 (total, coarse word)   = 2.9780 bits/letter
+    = MUSIC share (band)      0.3562  +  CLATTER share  2.6219
+    jazz hits (gaps >= 14)    = 37.9% of letters, 32.9% of marginal entropy
+The split is coarse (one band feature); X12 refines the music side with
+the full Euler ledger.
+
+### 11.6 Unification with the KCS flank (the punchline)
+
+The KCS program (0173-0199) measured the windowed odd-density residual
+(the "deficit of primes" as a LAW, verified to 1e13). The turned-away
+mechanism re-derives the SAME object from the event side: the local
+realized survivor density after every channel <= t is folded in IS the
+local PNT ratio, and the KCS/measured deficit is exactly the JAZZ
+RESIDUAL left after the exact turned-away mechanism (the Euler music)
+is subtracted. Consequences for the 4-frame model (10.1):
+  - the FUTURE-ABSOLUTE frame is UPGRADED: the music is not the
+    ln p postulate but the EULER PRODUCT OF THE EVENT LOG (the two
+    agree by Mertens III + PNT; the KCS correction IS the jazz);
+  - the DEFICIT SIGNATURE (X6, 10.4) is the local jazz at the prime
+    scale — the model's output object, now with a mechanism-derived
+    null (subtract the Euler music, not a fitted mean);
+  - the "deficits should always be changing" (owner) is the Euler
+    ledger in motion: each hit adds 1/p to the ledger and (1 - 1/p)
+    to the product, so both the ledger and the music tick at every
+    event — the change is the mechanism, not a property of the data.
+
+### 11.7 Frozen experiments (additions; X2-X10 of earlier sections stand)
+
+- **X12 — the Euler-music frame (the upgraded future-absolute frame).**
+  Per-prime frame from the event log: melody(t) = e^(-gamma)/ln t
+  (1 + KCS residual correction); the local audit = realized windowed
+  survivor ratio vs the frame (the local PNT deficit = the local KCS
+  census — the same object from both sides; cross-check the 1e13 law
+  against 2e6 from the mechanism side).
+- **X13 — the distance-one score curve.** D(p) vs twin rate at
+  2e6 -> 1e8: the saturation shape; D(p) is the PARTIAL-SUM reading of
+  the singular-series weight (all small q counted), so the curve toward
+  the full twin weight is pre-registered.
+- **X14 — the event-intensity fit (the point-process frame).**
+  State-dependent intensity lambda(band, D-class, 2-gap class); the
+  martingale test (the compensated count has zero drift if the state is
+  complete) and the residual autocorrelation of the deficit-signature
+  sequence (the clatter given the state should be white noise; any
+  leftover correlation = the state is incomplete — operationally: the
+  missing state variable).
+- **X11b — the retrocausality scale-up at 1e8** (the confirmation run
+  for the void's axiom; also re-measures the memory peak of 10.3).
+- **X5 (Lean certificate) — four new norm_num-certifiable atoms:**
+  (i) the eight bands = the +/-1 lattice of {2,3} (zero exceptions);
+  (ii) the twin -2 block classes for q = 3..13 INCLUDING the first-
+  prime exception (p+2 = q); (iii) the odd-only product = 2 x full
+  product (2 halving the music); (iv) the owner's 5-ledger in exact
+  rationals (1/2, 1/6, 1/15; survivors 4/15).
+
+### 11.8 Correction record (append-only)
+
+- Probe 3 first run: the f-string subscript `{p<=X}` rendered as the
+  boolean (labels "sum_True"/"prod_True") — values correct, labels
+  wrong; fixed in the committed copies. The "ratio 2.000" of that run =
+  the product was EXCLUDING 2 (the line of 2); including 2 the ratio is
+  0.99995030; the odd-only = 2 x full is the halving law, not a bug.
+- Probe 2: the Counter/int division bug and the X10a index bug (gap
+  index vs word index) fixed in the committed copy; X11 numbers
+  unaffected (they ran before the broken section).
+- Probe 1 bugs (twin-target off-by-one revealing twin anti-persistence;
+  AUC tie-average in the incrementing loop) are recorded in 10.6.
