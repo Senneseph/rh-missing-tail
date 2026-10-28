@@ -1,0 +1,69 @@
+{
+  "id": "0199",
+  "ts": "2026-10-28T04:00:00",
+  "title": "1e13 ladder point LANDING (10th point, 2-way run complete, all checks green): pi(1e13) = 346065536839 exact, max boundary gap 232 <= 2000; meas(1e13) = 0.537106 (se 8.476e-07); S(1e13) = +0.004947 hits the PRE-REGISTERED 9-pt S-form prediction 0.004947 at +0.1 se (the 8-pt pre-3e12 form: -8 se) and S/B = 0.384 continues the monotone in-band sequence 0.496 -> 0.384; R(1e13) = +0.002712: on the program's combined-sigma standard (0194) the 0190 two-term R-law is at z(combine) = -0.97 - marginally inside the combined 1-sigma (sigma_pred(1e13) = 2.01e-05 recomputed, the recorded 1e12/3e12 sigma_pred reproduced at a uniform 1.136x, cross-check) BUT it is the THIRD consecutive one-sided OOS miss (-0.6 -> -0.9 -> -0.97, all low-side), riding the band edge; the composite (9-pt S-form + exact baseline g = u3 - (1+delta)/2) predicts +0.002711 within +1.2 se and supersedes the 2-term law as the working extrapolation (the 2-term form keeps its derived in-tree status, 0197); alpha(1e13) = 0.08475 PASSES the 0198 envelope (0.0829-0.0883), alpha*L = 2.5367 in the converged band, transfer gain 0.4974 continues the X-stable sequence; mirror equality pi(1,3) - pi(3,1) = -1 (O(1), row continues 0/0/0/0 at 1e9..1e12, -1 at 3e12/1e13); N/D - (1+delta)/2 = +1.11e-16 at 1e13 (in-tree at 0197); no RH claim",
+  "kinds": [
+    "measurement",
+    "flank"
+  ],
+  "status": "recorded",
+  "claim": "No RH claim: exact-integer flank measurement on the second-orbit mod-4 prime-gap census (the kcs3c_c2 machinery verified at 0186-0194), the 10th ladder point. Verdicts: (i) the S-form 9-pt 3-scale prediction (pre-registered in 0196, before this run existed) is CONFIRMED out-of-sample at +0.1 se at 1e13 - the strongest OOS hit on the ladder; (ii) on the program's own COMBINED-sigma standard (0194), the 0190 two-term R-law at 1e13 is z(combine) = -0.97: marginally INSIDE the combined 1-sigma, but the third consecutive one-sided OOS miss (-0.6 -> -0.9 -> -0.97, all low-side) riding the band edge (measurement-only z is -23); the composite of the 9-pt S-form with the EXACT baseline g (a pure function of X, not fitted) lands at +1.2 se; (iii) the 0198 alpha gate passes (0.08475 in the on-file envelope 0.0829-0.0883, envelope center 0.085 +/- 0.002). The stable objects are updated: the curve S(X) (10 pts), the paper's band B = u^2 (S/B = 0.384, in-band, monotone), the 9-pt 3-scale S-form plus exact baseline as the WORKING extrapolation (it supersedes the 0190 two-term R-law for extrapolation use; the 2-term form keeps its DERIVED in-tree status, 0197, and its fitted coefficients now show the edge of their reach: three one-sided combined-sigma misses accumulating), and the transfer decomposition R = g_alpha(X)*alpha(X) with X-stable gain 0.4974. The strict-CI gate of the U3 unit is unchanged: the residual is still hugely significant against 0 (z(vs u3) = +3199) - no derived correction has landed inside CI.",
+  "evidence": [
+    "2-way run completed: 200 windows of 5e10 (windows 0-31 serial, 32-199 by the two strided workers, 84 each); shards ckpt_10000000000000_w0of2.json / _w1of2.json (84 records each) + main ckpt (32) merged to ckpt_10000000000000.json (200/200, all integer fields asserted present per record). Worker peak 37.4 GB each (the astype-free interval_sieve path, 0197 ops note); total wall ~5.5 h vs ~8.4 h serial ETA. Cosmetic worker bug found and fixed: the final 'WORKER DONE' print used '%' in the format string without a '*' (ValueError after all per-window checkpointing - shards complete; fixed in scripts/rh/kcs3c_c2_worker.py).",
+    "verification tail (scripts/rh/kcs3c_c2_figcheck_1e11_1e12.py 10000000000000, identical code path to 0192/0194; log tmp/u3c_c_fig/run1e13_tail.log): pi(1e13) = 346065536839 (exact table identity); pi(x;4,(1,1)) = 80095731440, (1,3) = 92936977743, (3,1) = 92936977744, (3,3) = 80095849911 (sums to pi); max boundary gap = 232 <= margin 2000 [VERIFIED]; off-diagonal frac (paper conv) = meas (record conv) = 0.537106, se = 8.476e-07.",
+    "mirror equality (0196) at 1e13: pi(x;4,(1,3)) - pi(x;4,(3,1)) = -1. Row: exact 0 at 1e9/1e10/1e11/1e12, -1 at 3e12, -1 at 1e13. Consistent with the derivation's prediction (the (2.9)-(2.10) sums are identical; all antisymmetric 1/L pieces zero): the difference is O(1) and shows no growth - no tension.",
+    "S-side (kcs3c_h machinery, argv-fed the landed point; output tmp/u3c_c_fig/kcs3c_h_out.txt, now the 10-point record): S(1e13) = meas - (1+delta)/2 = 0.537106 - 0.532159 = +0.004947 (se 8.48e-07). PRE-REGISTERED 9-pt S-form (0196, pre-1e13: +0.10432 u^2 + +1.03258 (u/L) + -0.00944 (1/L), chi2 5.53/7): predicts S(1e13) = +0.004947 - RESIDUAL +0.1 se, the strongest OOS hit on the ladder (0192: within combined 1-sigma; 0194: absorbed -3.5 se to -0.2 se by refit; 1e13: +0.1 se direct). 8-pt pre-3e12 form (0.00528/1.20166/0.00979): predicts 0.004954, residual ~ -8 se (the 8-pt form had already been superseded at 3e12). Band: B(1e13) = u^2 = 0.01289, S/B = 0.384 - the monotone in-band sequence continues (0.496, 0.434, 0.430, 0.423, 0.411, 0.406, 0.401, 0.392, 0.388, 0.384); fitted |a| = 0.10432 <= 1, |b| = 1.03258 <= m = 3.399, |c| = 0.00944 <= m^2/L = 0.386 - inside every bound at the new point. Adding 1e13 to the 9-pt fit: chi2 5.53 + 0.01 = 5.54 / 8 dof (chi2/dof ~ 0.7) - no strain.",
+    "R-side: R(1e13) = meas - u3 = 0.537106 - 0.534395 = +0.002712 (u3(1e13) = 0.534395 matches the 0198 pinned value to all recorded digits; z(vs u3) = +3199.2 - the residual is enormously significant against 0; the strict-CI gate remains open). COMBINED-sigma gate (the program's OOS standard, 0194): recomputed the 0190 two-term-form 7-pt inv-variance fit (domain 1e7..1e11, basis (u^2, delta*u)) from the recorded R-values: fit a = -1.86978 / b = 3.67486 (vs recorded 0190 -1.88114/+3.69471, ~0.7% - the recorded fit used the higher-precision R values); its Gaussian prediction se reproduces the RECORD at a uniform 1.136x (1e12: 1.420e-05 vs recorded 1.25e-05; 3e12: 1.727e-05 vs 1.52e-05 - cross-check of the machinery), giving sigma_pred(1e13) = 2.011e-05. Result: R_law(1e13) = +0.002731 (7-pt recompute; the 0190 recorded-coeff value is +0.002729), diff = -1.95e-05, z(meas-se only) = -23.0, z(COMBINE) = -0.97 - marginally INSIDE the combined 1-sigma, the third consecutive one-sided OOS miss (-0.6 at 1e12, -0.9 at 3e12, -0.97 at 1e13, all low-side) riding the band edge: the 2-term form's reach is at its limit, not yet broken. COMPOSITE prediction (the 9-pt S-form + EXACT baseline g(1e13) = u3 - (1+delta)/2 = 0.534395 - 0.532159 = 0.002236, a pure function of X with no fitted content): 0.004947 - 0.002236 = +0.002711, diff vs measured +0.000001 ~ +1.2 se - CONFIRMED. Verdict: the working extrapolation object is the 3-scale S-form plus exact baseline (supersedes the 2-term R-law for extrapolation use; what the 2-term form lacks is exactly the (u/L) scale the 3-scale S-form carries); the 2-term R-law's DERIVED status stands (the form u*delta = u^2/2 + (c/2)(u/L) and the u^2-coefficient re-basing to a + b/2 are in-tree theorems, 0197), with the new honest caveat that its fitted coefficients now show three one-sided edge-of-band OOS misses.",
+    "alpha-side (0198 gate): alpha(1e13) via the U3b inversion (solve_alpha on S2, S0 from class_sums, delta(1e13) = 0.064318, meas 6-digit record) = 0.08475; alpha*L = 2.5367 (inside the converged band 2.53-2.57 established at 1e8..3e12, tail fit A = 2.556); 0198 on-file predictions 0.08294/0.08832/0.08540/0.08529 (envelope ~0.085 +/- 0.002) - PASS (center route: 0.08529, diff -0.00054). Transfer gain R/(alpha*delta) = 0.4974 at 1e13 - the X-stable sequence 0.4928 -> 0.4973 (3e12) -> 0.4974 (1e13) continues; the U3b structural constant is held at ~0.497 at the new decade.",
+    "algebraic identity (0193, in-tree at 0197 as ratioCollapse/logPiCancel): the paper's N/D display minus the census ratio (1+delta)/2 at 1e13 = +1.11e-16 (machine precision) - the collapse is exact across the ladder including the new decade.",
+    "ladder (the 10 points, S and S/B): 1e7 +0.014741 (0.496); 1e8 +0.010849; 3e8 +0.009970; 1e9 +0.009056; 1e10 +0.007627; 3e10 +0.007066; 1e11 +0.006531; 1e12 +0.005654; 3e12 +0.005296 (0.388); 1e13 +0.004947 (0.384)."
+  ],
+  "artifacts": {
+    "pi_1e13": 346065536839,
+    "classes": {
+      "p11": 80095731440,
+      "p13": 92936977743,
+      "p31": 92936977744,
+      "p33": 80095849911
+    },
+    "mirror_diff_p13_minus_p31": -1,
+    "meas_1e13": 0.537106,
+    "se_1e13": 8.476e-07,
+    "max_boundary_gap": 232,
+    "u3_1e13": 0.534395,
+    "delta_1e13": 0.064318,
+    "S_1e13": 0.004947,
+    "S_pred_9pt": 0.004947,
+    "S_9pt_resid_se": 0.1,
+    "S_pred_8pt": 0.004954,
+    "band_B_1e13": 0.01289,
+    "S_over_B_1e13": 0.384,
+    "R_1e13": 0.002712,
+    "R_0190law_pred": 0.002729,
+    "R_0190law_z_meas_se": -23.0,
+    "R_0190law_z_combined": -0.97,
+    "sigma_pred_1e13": 2.011e-05,
+    "sigma_pred_repro_ratio": 1.136,
+    "OOS_one_sided_row": "-0.6 (1e12) / -0.9 (3e12) / -0.97 (1e13), all low-side",
+    "R_composite_pred": 0.002711,
+    "R_composite_z": 1.2,
+    "alpha_1e13": 0.08475,
+    "alpha_L_1e13": 2.5367,
+    "transfer_gain_1e13": 0.4974,
+    "nd_identity_1e13": 1.11e-16,
+    "fit9_chi2_with_1e13": "5.54 / 8 dof"
+  },
+  "relations": [
+    "0170",
+    "0186",
+    "0187",
+    "0190",
+    "0192",
+    "0193",
+    "0194",
+    "0196",
+    "0197",
+    "0198"
+  ],
+  "no_rh_claim": true
+}

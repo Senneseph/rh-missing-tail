@@ -57,7 +57,7 @@ def main():
         gc.collect()
         print("  worker %d window %3d: n = %13d   %6.1f s   peak %.1f MB"
               % (K, i, rec["n"], rec["dt"], rec["rss_mb"]), flush=True)
-    print("WORKER % OF % DONE (shard has %d records)"
+    print("WORKER %d of %d DONE (shard has %d records)"
           % (K, N, len(myrecs)), flush=True)
     json.dump([myrecs[j] for j in sorted(myrecs)], open(shard, "w"))
 

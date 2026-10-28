@@ -457,9 +457,15 @@ Commit a00c7d6.
    (+51,539). GATE (updated): MEASURED clause strongly satisfied
    (both points <= 0.9 combined sigma); DERIVED-NOT-FITTED clause
    satisfied for the term structure (0193) but not yet the
-   coefficients - named next: the 1e13 point (~7 h, schedule-eligible)
-   and the Section-2-heuristic evaluation of the paper's O-terms. No
-   RH claim.
+   coefficients - 1e13 point LANDED (0199): S(1e13) = +0.004947 hits
+   the pre-registered 9-pt S-form at +0.1 se (S/B = 0.384, in-band
+   sequence continues); on the combined-sigma standard the 0190
+   two-term R-law is z(combine) = -0.97 at 1e13 - marginally inside
+   the combined 1-sigma, third consecutive one-sided OOS miss (-0.6/
+   -0.9/-0.97) at the edge of its reach; working extrapolation object
+   updated to 3-scale S-form + exact baseline. The Section-2 heuristic
+   evaluation (scale vs value) is CLOSED (0196: scale predicted,
+   value not); no RH claim.
    Recall incident logged in 0170 (a 65/35 benchmark was unverified
    memory; corrected to the verified LOS framework). No RH claim:
    prime-gap class statistic + exact sieve algebra, flank not face.

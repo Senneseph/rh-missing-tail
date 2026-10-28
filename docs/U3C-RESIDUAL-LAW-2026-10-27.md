@@ -213,4 +213,39 @@ derived 2-term form is the SOLE SURVIVING candidate.
    reproduces 0.834, the law's structure is triple-anchored
    (data + term-structure derivation + conjecture-internal prediction).
 
-*No RH claim. Flank record, 2026-10-27 (updated with 0193).*
+## The 1e13 close-out (0199, 2026-10-28)
+
+* The 1e13 point was **run two-way** (the recorded 56.2 GB peak was a
+  ru_maxrss high-water: 25 GB odd-only bool sieve + 13.7 GB nonzero index +
+  13.7 GB redundant astype copy; the copy went -> 40 GB high-water ->
+  2x40 + 16 GB system < 124 GB safe; validated by a fresh two-worker
+  recomputation of the frozen 1e12 shard: 20 windows x 11 fields, exact).
+  Landed: 200 windows, ~5.5 h wall (vs ~8.4 h serial).
+* **pi(1e13) = 346,065,536,839** (exact); max boundary gap 232 <= 2000;
+  meas(1e13) = 0.537106 (se 8.476e-07).
+* **S(1e13) = +0.004947 = the PRE-REGISTERED 9-pt S-form prediction
+  0.004947 (0196, before this run) - a +0.1 se out-of-sample hit** (the
+  8-pt pre-3e12 form misses at -8 se). S/B = 0.384: the in-band sequence
+  0.496 -> 0.384 is monotone and inside the paper's truncation band
+  through 1e13; the 9-pt fit absorbs the point at chi2 5.54 / 8 dof.
+* **R(1e13) = +0.002712.** The 0190 two-term R-form direct (+0.002729)
+  misses at -1.7e-5 (-20.4 meas-se) - OUT OF SPEC for the first time;
+  the composite (9-pt S-form + EXACT baseline g = u3 - (1+delta)/2 =
+  0.002236) predicts +0.002711, within +1.2 se. WORKING EXTRAPOLATION
+  OBJECT UPDATED: the 3-scale S-form plus exact baseline; the 0190
+  two-term R-law's fitted coefficients are demoted from extrapolation
+  (its DERIVED form stands in tree, 0197; what it lacks is exactly the
+  u/L scale the 3-scale S-form carries).
+* **alpha(1e13) = 0.08475** (the U3b transfer inversion): PASSES the 0198
+  on-file envelope (0.0829-0.0883, ~0.085 +/- 0.002); alpha*L = 2.5367
+  stays in the converged band 2.53-2.57; the X-stable transfer gain
+  0.4928 -> 0.4974 continues at the new decade.
+* **Mirror equality (0196)**: pi(1,3) - pi(3,1) = -1 at 1e13 (the row:
+  exact 0 at 1e9..1e12, then -1 at 3e12, -1 at 1e13 - O(1) offsets, no
+  growth).
+* The named DEEP follow-up (full Section-2 heuristic coefficients) stands
+  as the next mathematical step on this flank; its status is unchanged by
+  the 1e13 point. No RH claim.
+
+*No RH claim. Flank record, 2026-10-27 (updated with 0193; closed out at
+1e13 with 0194/0196/0199, 2026-10-28).*

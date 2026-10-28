@@ -448,7 +448,7 @@ Nothing here needs GPU, long compute, or the zeta binaries.
   candidate over 1e7..1e12 (corr. of record: the first 1e12 tally
   used the wrong baseline (1+delta)/2 - the ladder's u3 is
   S2/(S2+S0); the void line is recorded in 0192). No RH claim.
-  **STATUS: U3c mechanism COMPLETE (0173-0198); residual law = the
+  **STATUS: U3c mechanism COMPLETE (0173-0199); residual law = the
   derived 2-term form (confirmed out-of-sample at 1e12 and 3e12,
   combined <= 0.9 sigma); Section-2 evaluation closed (0196): scale
   predicted, value not - the coefficients remain fitted; the next
@@ -487,6 +487,30 @@ Nothing here needs GPU, long compute, or the zeta binaries.
   Gate: the 1e13 point (entry 0199) gates meas/R/alpha against
   these on-file predictions with the combined-uncertainty
   machinery.
+  **0199 (2026-10-28, this session, 1e13 LANDED, 2-way run complete):
+  the 10th ladder point closes the U3c measurement program at the
+  box's practical limit.** pi(1e13) = 346065536839 exact (table
+  identity), max boundary gap 232 <= 2000; meas = 0.537106 (se
+  8.476e-07). S(1e13) = +0.004947 HITS the pre-registered 9-pt S-form
+  prediction (+0.1 se; the 8-pt pre-3e12 form: -8 se); S/B = 0.384,
+  the monotone in-band sequence continues through 1e13. R(1e13) =
+  +0.002712: on the program's combined-sigma standard (0194) the
+  0190 two-term R-law is z(combine) = -0.97 (sigma_pred(1e13) =
+  2.01e-05 recomputed; the recorded 1e12/3e12 sigma_pred reproduced
+  at uniform 1.136x) - marginally inside the combined 1-sigma, the
+  THIRD consecutive one-sided OOS miss (-0.6/-0.9/-0.97, all low-side)
+  riding the band edge (meas-se-only: -23); the composite (9-pt S-form
+  + exact baseline g) lands within +1.2 se - the working extrapolation
+  object is updated to the 3-scale S-form + exact baseline (the 0190
+  R-law form stands in tree, 0197; its fitted coefficients are at the
+  edge of their reach). alpha(1e13) = 0.08475 PASSES the 0198 envelope
+  (0.0829-0.0883); alpha*L = 2.5367 in the converged band; transfer
+  gain 0.4974 continues the X-stable sequence. Mirror equality at
+  1e13: -1 (O(1), no growth). Ops: 2-way completion ~5.5 h vs ~8.4 h
+  serial; worker-format-string cosmetic bug fixed. The strict-CI gate
+  is unchanged: the residual is still hugely significant (z(vs u3) =
+  +3199); the U3c flank's next mathematical step remains the named
+  Section-2 full-heuristic coefficient evaluation (0193 deep follow-up).
   Gate: the strict-CI gate closes when a DERIVED (not fitted) correction
   lands inside CI at 1e8 — or the residual is certified INSIDE the
   source's error budget with the next term named (the honest
