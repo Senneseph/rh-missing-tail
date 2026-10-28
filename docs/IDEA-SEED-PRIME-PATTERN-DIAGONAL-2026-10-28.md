@@ -244,3 +244,155 @@ mean-field precision on the relevant window scale — not demonstrated at
     # → ~6 s, 1 core; output: X line, sections A–F; full: tmp/pattern_diag_probe.out
     # probe-0 artifacts: tmp/pattern_diag_probe.py (tmp copy),
     # tmp/pattern_diag_probe.out
+## 10. THE LOCAL MODEL (owner's 2026-10-28 refinement, pinned) + PROBE-1 results
+
+### 10.1 The model, as specified by the owner (pinned verbatim meaning)
+
+The local model of the prime p on the integer line has **one central
+state + four frames** (two frames x two times), all 24-step wide:
+
+```
+                 PAST                          FUTURE
+        ABSOLUTE   [past-absolute]    [future-absolute]
+        RELATIVE   [past-relative]    [future-relative]
+                   +  CENTRAL: the normal orbit, the "state of the moment"
+```
+
+1. **Past-absolute** — "the full 24-step pattern for the absolute
+   position of the current prime (the one starting from zero)": the
+   base-24 digit word of p, least significant first (d_0, d_1, ...).
+   The digits ARE the 24-step pattern of the position going back to 0.
+2. **Past-relative** — "the full 24-step pattern back for the spaces":
+   the last 24 gaps (spaces) behind p as a 24-symbol word.
+3. **Future-relative** — the 24-step predicted PATTERN OF GAPS for the
+   future. Prime distribution theory gives a per-step prediction that
+   CHANGES EACH STEP ("the deficits should always be changing"): the ln
+   density slope (smooth) + the wheel phase + the small-prime blockers
+   (discrete step-jumps).
+4. **Future-absolute** — the 24-step predicted PATTERN OF COUNTS for
+   the next 24 absolute steps (each 24 units = one revolution of the
+   wheel): expected counts (8 prime bands x local density).
+5. **Central — the normal orbit, the state of the moment** — the local
+   field state at p (the seed-3/bloom neighborhood state).
+
+**The Taylor clause (owner):** the only place the FULL history is
+allowed is "the normal taylor series (and related structures) that are
+'the moment up to that point'". Everything else is 24-wide. This agrees
+with probe 0 A (the full history = the prime set itself, no
+compression) and with the tail program (infinite history enters only
+through the Taylor accumulator).
+
+### 10.2 Probe-1 results (X = 2e6, 1.2 s, 1 core; tmp/pattern_diag_probe1_full24.py)
+
+Target 1 — the NEXT GAP magnitude (held-out upper 20%, detrended vs
+ln(p_{i+1})):
+
+```
+  band (= p mod 24)                   r = +0.0118   MAE = 8.6318
+  m2 = p mod 576 (digits d0,d1)       r = +0.0038   MAE = 8.6330
+  m3 = p mod 13824 (digits d0..d2)    r = +0.0107   MAE = 8.6537
+  p mod 5 only (d0 - d1)              r = +0.0047   MAE = 8.6315
+  band x mod 5 [32 nodes]             r = +0.0336   MAE = 8.6111
+  exact-gap tail K=1                  r = +0.0680
+  exact-gap tail K=2                  r = +0.0742   <-- MEMORY PEAK
+  exact-gap tail K=3                  r = +0.0555
+  exact-gap tail K=4                  r = +0.0324
+  exact-gap tail K>=6                 r ~= 0        (memory dies by K=6)
+  central = 1/d_local (last 576 u)    r = -0.0317   <-- WRONG GRANULARITY
+  (ln trend baseline MAE = 8.8893)
+```
+
+Target 2 — the TWIN event g[i] == 2 (the sharp sieve target; AUC,
+Mann-Whitney, ties half-ranked):
+
+```
+  band (p mod 24 alone)               AUC = 0.7814   <-- the wheel phase is the engine
+  band x mod 5                        AUC = 0.7354
+  p mod 5 hard blocker                AUC = 0.6380   (theory ~0.66: blocked class = 1/4 of non-twins)
+  a-priori blocker product (5,7,11)   AUC = 0.7416   (< band: missing the mod-3 block, which 24 holds)
+  band x mod5 / graded mod5           AUC = 0.637 / 0.735
+  twin share by p mod 5:  0.1329 / 0.1343 / 0.0000 / 0.1322
+                            (class 3 = 0 mod5: BLOCKED, exactly 0)
+```
+
+Future-frame demo (the per-step pattern CHANGES each step, as the
+owner said): at p = 1441051 the predicted gap word starts
+14.181, 14.181, 14.181, **14.621**, 14.621, 14.181, ... — the +0.44
+step-jumps are the mod-5 twin blocker firing as the running height
+crosses h = 3 (mod 5); the smooth ln slope adds ~1e-5/step. The
+absolute frame's per-step expected count likewise slopes down each
+step (8/ln at the running height). The "deficit should always be
+changing" is EXACTLY this: smooth ln slope + discrete wheel/phase
+events.
+
+### 10.3 Frame roles (verified, pinned)
+
+- **Past-absolute = the PREDICTION ENGINE, not memory.** The base-24
+  digits of p ARE the small-prime residues (d_0..d_1 carry mod 5 via
+  d_0 - d_1, etc.). The wheel phase (d_0) alone is the strongest sieve
+  predictor in hand (AUC 0.7814 on the twin event); deeper digits add
+  the 5/7/11 refinements. This frame BUILDS the future frame.
+- **Past-relative = the MEMORY frame.** Real short memory, peak
+  r = 0.0742 at K = 2, decays to ~0 by K = 6. The 24-step width is
+  MORE than the memory needs; 2-wide is the effective memory.
+- **Future (rel + abs) = the THEORY frame** — built, not predicted:
+  ln slope + wheel phase + small-prime blockers + the KCS residual law
+  (the measured deficit shape to 1e13). Its per-prime realized minus
+  predicted residual is the object in 10.4.
+- **Central = the neighborhood field.** The 576-unit (24 absolute
+  steps) local count is the WRONG granularity at this scale
+  (r = -0.0317, pure noise); the working central state is the seed-3
+  1000-ray neighborhood field (F13: r = 0.2508). Pinned: central =
+  neighborhood-scale field, not a 24-step count.
+
+### 10.4 THE PIECE NOT SEEN (named): the per-prime DEFICIT SIGNATURE
+
+    signature(p)  :=  realized next-24-pattern (gaps + revolution
+                      counts)  -  theory next-24-pattern (engine).
+
+A 24-symbol vector per prime. It is the model's OUTPUT object — the
+"deficit should always be changing" made into a data object per prime.
+Not yet computed. Its typicality distribution (is the actual prime
+typical in its deficit signature?) is the new measure this model
+exists to produce. The cross-frame test (does central + past frames
+predict which signature-CLASS the future lands in, above the theory
+frame alone) is the prediction test. Both are frozen below.
+
+### 10.5 Frozen experiments (update to section 7)
+
+- **X6 — the deficit signature (the named object).** Assemble the
+  theory 24-pattern for each prime (ln slope + wheel phase + 5,7,11
+  blockers + KCS residual at the scale), the realized 24-pattern
+  (next 24 gaps; next 24 revolution counts), take the difference;
+  report its distribution + the typicality test (real word vs
+  i.i.d.-from-marginals of the signature components).
+- **X7 — the cross-frame test.** (central 1000-ray field) +
+  (2-wide exact gap tail) + (band) -> signature class (coarse bins of
+  the deficit signature), baseline-scored vs theory-frame-alone and
+  shuffle. The composite-state test: does the four-frame state beat
+  the theory frame on the realized future?
+- **X8 — the a-priori twin score v2.** band UNION 5,7,11 blocker
+  product (the mod-3 block lives in 24): expected AUC > 0.7814;
+  the singular-series limit (all small primes) is the Hardy-Littlewood
+  twin weight — measure the AUC curve as more small primes are
+  included (the "more digits = more small primes = better a-priori"
+  law; it must saturate at the singular series).
+- X2 (seeded /5-fib shadow vs deficit), X3 (K-scan — now ANSWERED at
+  2e6: peak K=2, dies K=6), X4 (scale-up), X5 (Lean certificate)
+  stand as before.
+
+### 10.6 Probe-1 correction record (append-only discipline)
+
+- The twin AUC target had an OFF-BY-ONE: originally scored the
+  blocker at P[i] against the twin at P[i+1] (gap g[i+1]); correct:
+  the twin FROM P[i] is g[i] == 2. The misaligned version's
+  AUC ~ 0.48 (slightly below 0.5) was the known TWIN ANTI-PERSISTENCE
+  (after a twin, the next gap is less often a twin) — a real effect,
+  just not the one being tested. Corrected.
+- The tie-average rank formula was evaluated inside the incrementing
+  loop (r advanced per element), corrupting AUC (unit test: "perfect"
+  returned 1.4). Fixed: compute the group average once, before the
+  element loop. AUC unit re-test: perfect = 1.0, all-tie = 0.5.
+- Probe-0 section E's "prev raw gap" r = -0.0565 stands: it IS the
+  consecutive-gap correlation (target g[i+1] vs feature g[i], the
+  standard one-step-ahead convention).
