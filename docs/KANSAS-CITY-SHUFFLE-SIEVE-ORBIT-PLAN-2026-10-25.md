@@ -528,9 +528,9 @@ Nothing here needs GPU, long compute, or the zeta binaries.
 **Sequencing:** U1a (exact, minutes) → U3a/b (the visible "prediction"
 result, hours) → U1b/c + U2 (the operator, a day including builds) →
 U4 (the formalization, next build session). Discovery entry + cards +
-wiki on each green gate. The in-tree frontier (`Z78SIL32` as of
-0195 — formerly `Z78C`; hOffC) is **untouched** by this program — it
-is the flank, and it says so.
+wiki on each green gate. The in-tree frontier (`Z78FineChain` as of
+0200 — previously `Z78SIL32` at 0195, formerly `Z78C`; hOffC) is
+**untouched** by this program — it is the flank, and it says so.
 
 ## 6. Honest boundaries (what this does NOT claim)
 

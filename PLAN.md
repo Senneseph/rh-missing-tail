@@ -209,27 +209,31 @@ Commit a00c7d6.
    as the record. In-tree: E1ClauseV3C window (G, 9e23] (0176:
    T_MEAS3 = 9e23, hole B = 1e8, 40-row face, max residual
    6.333622e7 at 9e23 -> 37% margin, full tree 17450 jobs). No RH claim.
-7. **The terminal face (NAMED, adopted forward at 0195):** the
+7. **The terminal face (NAMED, adopted forward at 0200):** the
    in-tree closure of the `hOffC` face is now wired at
-   `[Z78SIL32]` (0.873995 = 174799/200000; tracker record
-   sil-density-split-20261026, PR #83, merged 2026-10-27). Frontier
-   board sweep 2026-10-27: 33 records; six consecutive board-best
-   merges since the 2026-10-24 sweep (PR #70 lewko-acyclic at the
-   old [Z78C] boundary, then #71 slayer, #73 arvi-repeated-marks,
-   #74 sil-fourth-power, #76 arvi-repeated-marks-on-sil-face,
-   #83 sil-density-split). PR #83 was strictly
-   kernel-replayed (stage C 537/537 per-module clean, stage D:
-   canonical compile at 174799/200000, axiom audit
-   {propext, Classical.choice, Quot.sound}, zero sorry) before
-   in-tree adoption: `formal/RhAttack/Z78Sil30.lean` / `Z78Arvi31.lean`
-   / `Z78Sil32.lean` (the three hops, named external inputs, strict
-   strengthening theorems vs every prior [Z78*] record) + RHEnd part
-   B17 (5 theorems; RHEnd targeted build 8749 jobs green, full tree
-   17450). The face is now `hOffC : d0 <= 74799/200000` above H
-   (0.373995 off-line; slice (0.373995, 0.3747729897] closed in the
-   RHEnd body; z-score of the adoption 7.78e-4). The face remains
-   NAMED, not closed; the data edge is a FLANK and never closes it;
-   a future board-best record is the next adoption trigger.
+   `[Z78FineChain]` (0.8739558 = 4369779/5000000; tracker record
+   density-split-fine-chain, PR #86, merged 2026-10-28 04:30Z). Front-
+   ier board sweep 2026-10-28 (35 records): two new board-best merges
+   since the 2026-10-27 sweep - PR #84 density-split-third 0.873985
+   (Rohan Arun) and PR #86 density-split-fine-chain 0.8739558 (Jacob
+   Sussman) - the latter the current BOARD BEST, replayed and adopted
+   as 0200 (stage C 93/93 clean in 90s on the frozen 0148/0195 olean
+   reuse after five-way byte-identity, stage D: canonical compile at
+   4369779/5000000, axiom audit
+   {propext, Classical.choice, Quot.sound}, zero sorry); #84 strictly
+   subsumed by #86 (0.873985 > 0.8739558) and not adopted separately.
+   In tree: `formal/RhAttack/Z78FineChain.lean` (named external input,
+   strict strengthening chain, sharp strip + off-pair theorems) +
+   RHEnd part B18 (5 theorems; B18.1 closes the slice (0.3739558,
+   0.373995] in body, including the entire #84 face; targeted builds
+   Z78FineChain 8728 / RHEnd 8750 / full tree 17450 all green; the
+   214-line B17 block verified byte-identical - pure append). The
+   face is now `hOffC : d0 <= 1869779/5000000` above H (0.3739558
+   off-line; step removed sil32D0max - fineChainD0max = 196/5000000 =
+   3.92e-5 of face width). The face remains NAMED, not closed; the
+   data edge is a FLANK and never closes it; a future board-best
+   record is the next adoption trigger (the board moved twice in the
+   last 24h).
 8. **The second orbit (KANSAS CITY SHUFFLE, IN PROGRESS):**
    `docs/KANSAS-CITY-SHUFFLE-SIEVE-ORBIT-PLAN-2026-10-25.md` — the
    owner's crafted creation: a Fourier-compatible Sieve of

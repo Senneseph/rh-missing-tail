@@ -138,6 +138,7 @@ import RhAttack.Z78Collet
 import RhAttack.Z78Sil30
 import RhAttack.Z78Arvi31
 import RhAttack.Z78Sil32
+import RhAttack.Z78FineChain
 import RhAttack.S4WinCap
 import RhAttack.WinCount
 import RhAttack.P4Limit
@@ -3272,4 +3273,219 @@ theorem rh_program78_stripfront_mach_unifiedGao_PT2_ofSil32 (q : ZeroSet)
     honline Qside WinC.tPT2 (by norm_num [WinC.tPT2]) hPT2
     hOffCPT2
 
- end RHEnd
+
+
+/-!  -/
+
+/-!
+**Part B18 - the tracker board moved AGAIN: [Z78FineChain] supersedes
+[Z78FineChain] (and, with it, the 2026-10-27 frontier map).**
+
+The B6 section-8 mechanism (demonstrated in 0133, 0142, 0162, 0195) runs a
+FIFTH time.  The 2026-10-28 catalogue pull (as_of 2026-10-28, 35 records)
+shows TWO new framework-verified, MERGED records since the 2026-10-27
+sweep: PR #84 density-split-third 0.873985 (Rohan Arun, merged
+2026-10-27 14:48Z) and PR #86 density-split-fine-chain 0.8739558 (Jacob
+Sussman, AI-assisted (Claude), merged 2026-10-28 04:30Z) - the latter the
+current BOARD BEST.  This program second-party replayed #86 in full
+(Stage C: independent per-module kernel compilation, 93/93 modules clean;
+Stage D: canonical statement at the exact rational, axiom audit, zeta
+consequence, 0 sorry; all five dependency trees byte-identical to the
+frozen 0195 replay copies - see the module header for the complete
+provenance record).  #84 is strictly subsumed by #86 (0.873985 >
+0.8739558: its face d0 <= 74797/200000 contains fineChainD0max) and is
+not adopted separately.  [Z78FineChain] (record density-split-fine-chain;
+Sil's density-split bootstrap with a 30-native-step + 46-transition
+source chain and retuned all-shift return) is the strongest: the
+all-Dirichlet zero-free half-plane at fineChainUpper = 4369779/5000000 =
+0.8739558, a STRICT STRENGTHENING of [Z78SIL32] (extFineChain_implies_
+extSil32; transitively of [Z78C], [Z78G], [Z78T], [Z78L], [Z78]).
+Zeros of an actual set sit in [1 - fineChainUpper, fineChainUpper], so
+every off-pair satisfies d0 <= fineChainD0max = fineChainUpper - 1/2 =
+1869779/5000000 = 0.3739558 < sil32D0max (offPairD0leFineChain, sharp).
+The open face shrinks from (0, sil32D0max] to (0, fineChainD0max], the
+[Z78FineChain]-sharp strip interior, and the slice (fineChainD0max,
+fineChainD0max] of the B17 face - which includes the entire face of the
+subsumed #84 record - is closed IN BODY from [Z78FineChain] itself.
+The step removes sil32D0max - fineChainD0max = 196/5000000 = 3.92e-5 of
+face width.  No RH claim: the face is a zero-exclusion statement in the
+unverified region; the input class is unchanged in kind - an external
+zero-free half-plane, still 0.3739558 away from 1/2 - and the chain
+stays a REPEATABLE MECHANISM (B6 packet section 8, now demonstrated on a
+FIFTH supersession): a newer verified snapshot of the tracker frontier
+supersedes this part mechanically.
+-/
+
+/--  B18.1  THE  OUTER  SLICE  OF  THE  pre-B17  FACE  IS  CLOSED  IN
+    BODY  FROM  [Z78FineChain]:  for  an  actual-set  zero  set,  no
+    off-pair with  d0  >  fineChainD0max  (of  any  height  t0  >  0):
+    offPairD0leFineChain  already  bounds  every  off-pair  to
+    d0  <=  fineChainD0max.  In  particular  the  slice
+    (fineChainD0max,  sil32D0max]  of  the pre-B17 face  --  and  a
+    fortiori  (fineChainD0max,  gaoD0max],  (fineChainD0max,  qxD0max],
+    (fineChainD0max,  liuD0max],  (fineChainD0max,  3/8]  --  needs  no
+    face  at  all.  No  RH  claim.  -/
+theorem rhend_sliceFineChainExcl (q : ZeroSet)
+    (hzF : Z78FineChain.externalZeroFree78FineChain)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (t0 d0 : ℝ) (ht0 : 0 < t0) (hd0 : 0 < d0)
+    (hC : Z78FineChain.fineChainD0max < d0) :
+    ¬ offPair q t0 d0 := by
+  intro hp
+  have hle := Z78FineChain.offPairD0leFineChain q hzF hqz t0 d0 ht0 hd0 hp
+  linarith
+
+/--  B18.2  THE  DENSITY-SPLIT-UNIFIED  ENDPOINT:  the  B12
+    endpoint  with  the  external  input  upgraded
+    [Z78]  ->  [Z78FineChain]  and  the  face  shrunk  to  0  <  d0
+    <=  fineChainD0max  (the  [Z78FineChain]-sharp  strip  interior,
+    fineChainD0max = 1869779/5000000 = 0.3739558).  Above  H,  any
+    off-pair  has  d0  <=  fineChainD0max  BY  [Z78FineChain]
+    (offPairD0leFineChain)  before  the  face  is  applied  -  the
+    d0  <=  1/2  split  of  B11  stays  away  in  the  S1/S3
+    legs  and  in  the  S4-covered  leg;  the  far  region  (d0
+    >  1/2)  is  closed  by  the  [Z78]  derived  from
+    [Z78FineChain].  No  RH  claim.  -/
+theorem rh_program78_stripfront_mach_unifiedFineChain (q : ZeroSet)
+    (hzF : Z78FineChain.externalZeroFree78FineChain)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) → (|ρ.im| : ℝ) <
+      (707 : ℝ) / 50 → ρ.re = 1 / 2)
+    (Qside : ℝ × ℝ → ℝ)
+    (H : ℝ) (hH : 1000 ≤ H)
+    (hPT : WinC.allOnLineUpTo q H)
+    (hOffC : ∀ (t0 d0 : ℝ), H ≤ t0 → 0 < d0 →
+      d0 ≤ Z78FineChain.fineChainD0max → ¬ offPair q t0 d0) :
+    RH q := by
+  have hz78 : Z78.externalZeroFree78 := Z78FineChain.extFineChain_implies_ext78 hzF
+  refine S4A.rh_from_regime_closures q Qside Z78P12.MfP devProg
+    Z78P12.BwireP (fun p => MrLift p.1 p.2) floProg
+    ?_ ?_ ?_ ?_ ?_ ?_
+  · --  S1  witness  leg:  below  H  =  vacuous  (the  record);
+      --  above  H:  [Z78FineChain]  bounds  d0  to  fineChainD0max,  the  face
+      --  kills.
+    intro t0 d0 ht0 hd0 hp
+    by_cases hle : t0 ≤ H
+    · exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
+        (le_of_lt ht0) hle) d0 hp)
+    · have hL : d0 ≤ Z78FineChain.fineChainD0max :=
+        Z78FineChain.offPairD0leFineChain q hzF hqz t0 d0 ht0 hd0 hp
+      exact False.elim ((hOffC t0 d0
+        (le_of_lt (not_le.mp hle)) hd0 hL) hp)
+  · --  S2  leg:  covered  =  in  body;  low  band  =  vacuous
+      --  below  H;  far  =  [Z78]  (from  [Z78FineChain]).
+    intro t0 d0 ht0 hd0 hp
+    by_cases hd0h : d0 ≤ (1 / 2 : ℝ)
+    · by_cases ht0k : 1000 ≤ t0
+      · exact hs2_covered q honline t0 d0 ht0 ht0k hd0 hd0h hp
+      · have hle : t0 ≤ H := le_trans (le_of_lt (not_le.mp ht0k)) hH
+        exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
+          (le_of_lt ht0) hle) d0 hp)
+    · exact False.elim (Z78P12.offPairFarEmpty q hz78 hqz t0 d0
+        (not_le.mp hd0h) hp)
+  · --  S3  leg:  below  H  =  vacuous  (the  record);  above  H:
+      --  [Z78FineChain]  bounds  d0  to  fineChainD0max,  the  face  kills.
+    intro t0 d0 ht0 hd0 hp
+    by_cases hle : t0 ≤ H
+    · exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
+        (le_of_lt ht0) hle) d0 hp)
+    · have hL : d0 ≤ Z78FineChain.fineChainD0max :=
+        Z78FineChain.offPairD0leFineChain q hzF hqz t0 d0 ht0 hd0 hp
+      exact False.elim ((hOffC t0 d0
+        (le_of_lt (not_le.mp hle)) hd0 hL) hp)
+  · --  S4  covered:  below  H  =  vacuous  (the  record);
+      --  above  H:  [Z78FineChain]  bounds  d0  to  fineChainD0max,  the  face
+      --  kills.
+    intro t0 d0 ht0 hd0 hd0u hp
+    by_cases hle : t0 ≤ H
+    · exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
+        (by linarith [ht0]) hle) d0 hp)
+    · have hL : d0 ≤ Z78FineChain.fineChainD0max :=
+        Z78FineChain.offPairD0leFineChain q hzF hqz t0 d0
+        (show 0 < t0 from by linarith [ht0]) hd0 hp
+      exact False.elim ((hOffC t0 d0
+        (le_of_lt (not_le.mp hle)) hd0 hL) hp)
+  · --  S4  low:  covered  low  band  below  H;  the  d0  <= 1/2  part
+      --  of  the  low  band  is  vacuous  (the  record)  below  H;
+      --  above  H  the  face  covers  (colletD0max  <  1/2).
+    intro t0 d0 ht0 ht0u hd0 hd0u hp
+    by_cases hle : t0 ≤ H
+    · exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
+        (le_of_lt ht0) hle) d0 hp)
+    · have hL : d0 ≤ Z78FineChain.fineChainD0max :=
+        Z78FineChain.offPairD0leFineChain q hzF hqz t0 d0 ht0 hd0 hp
+      exact False.elim ((hOffC t0 d0
+        (le_of_lt (not_le.mp hle)) hd0 hL) hp)
+  · --  S4  far:  [Z78]  (from  [Z78FineChain]).
+    intro t0 d0 ht0 hd0 hd0f hp
+    exact False.elim (Z78P12.offPairFarEmpty q hz78 hqz t0 d0
+      hd0f hp)
+
+/--  B18.3  THE  DENSITY-SPLIT  ENDPOINT  AT  THE  PLATT-TRUDGIAN
+    FRONTIER  (the  [Z-PT2]  instantiation):  the  entire  named
+    residue  lives  STRICTLY  ABOVE  3,000,175,332,800,  as  ONE
+    zero-exclusion  face  (no  off-pair  in  0  <  d0  <=
+    fineChainD0max  above  the  frontier  -  the  [Z78FineChain]-sharp
+    strip  interior)  plus  [Z78FineChain]  itself  (which  closes
+    d0  >  fineChainD0max  in  body).  No  RH  claim.  -/
+theorem rh_program78_stripfront_mach_unifiedFineChain_PT2 (q : ZeroSet)
+    (hzF : Z78FineChain.externalZeroFree78FineChain)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) → (|ρ.im| : ℝ) <
+      (707 : ℝ) / 50 → ρ.re = 1 / 2)
+    (Qside : ℝ × ℝ → ℝ)
+    (hPT2 : WinC.allOnLineUpTo q WinC.tPT2)
+    (hOffCPT2 : ∀ (t0 d0 : ℝ), WinC.tPT2 ≤ t0 → 0 < d0 →
+      d0 ≤ Z78FineChain.fineChainD0max → ¬ offPair q t0 d0) :
+    RH q :=
+  rh_program78_stripfront_mach_unifiedFineChain q hzF hqz honline Qside
+    WinC.tPT2 (by norm_num [WinC.tPT2]) hPT2 hOffCPT2
+
+/--  B18.4  THE  0142  GA  O  ENDPOINT  AS  A  THEOREM  OF  THE
+    [Z78FineChain]  ENDPOINT  (in  body):  given  the  [Z78FineChain]
+    input  and  its  terminal  face  hOffC  on  0  <  d0  <=
+    fineChainD0max,  the  older  five-step-form  endpoint  follows
+    --  the  gao  face  (0  <  d0  <=  gaoD0max)  splits  into
+    the  fineChainD0max  half  (the  hOffC  face)  and  the  slice
+    (fineChainD0max,  gaoD0max]  (closed  in  body  from
+    [Z78FineChain]).  The  0142  terminal  statement  is  thus  a
+    THEOREM  of  the  B18  one.  No  RH  claim.  -/
+theorem rh_program78_stripfront_mach_unifiedGao_ofFineChain (q : ZeroSet)
+    (hzF : Z78FineChain.externalZeroFree78FineChain)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) → (|ρ.im| : ℝ) <
+      (707 : ℝ) / 50 → ρ.re = 1 / 2)
+    (Qside : ℝ × ℝ → ℝ)
+    (H : ℝ) (hH : 1000 ≤ H)
+    (hPT : WinC.allOnLineUpTo q H)
+    (hOffC : ∀ (t0 d0 : ℝ), H ≤ t0 → 0 < d0 →
+      d0 ≤ Z78FineChain.fineChainD0max → ¬ offPair q t0 d0) :
+    RH q := by
+  have hzG : Z78Gao.externalZeroFree78Gao :=
+    Z78FineChain.extFineChain_implies_extGao hzF
+  apply rh_program78_stripfront_mach_unifiedGao q hzG hqz
+    honline Qside H hH hPT
+  intro t0 d0 ht0 hd0 hd0G hp
+  by_cases hleC : d0 ≤ Z78FineChain.fineChainD0max
+  · exact False.elim ((hOffC t0 d0 ht0 hd0 hleC) hp)
+  · exact False.elim (rhend_sliceFineChainExcl q hzF hqz t0 d0
+      (by linarith [ht0, hH]) hd0 (not_le.mp hleC) hp)
+
+/--  B18.5  THE  [Z-PT2]  INSTANCE  OF  B18.4  (the  0142
+    terminal  statement  at  tPT2  is  a  theorem  of  the  B18
+    endpoint  with  the  [Z-PT2]  record).  No  RH  claim.  -/
+theorem rh_program78_stripfront_mach_unifiedGao_PT2_ofFineChain (q : ZeroSet)
+    (hzF : Z78FineChain.externalZeroFree78FineChain)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) → (|ρ.im| : ℝ) <
+      (707 : ℝ) / 50 → ρ.re = 1 / 2)
+    (Qside : ℝ × ℝ → ℝ)
+    (hPT2 : WinC.allOnLineUpTo q WinC.tPT2)
+    (hOffCPT2 : ∀ (t0 d0 : ℝ), WinC.tPT2 ≤ t0 → 0 < d0 →
+      d0 ≤ Z78FineChain.fineChainD0max → ¬ offPair q t0 d0) :
+    RH q :=
+  rh_program78_stripfront_mach_unifiedGao_ofFineChain q hzF hqz
+    honline Qside WinC.tPT2 (by norm_num [WinC.tPT2]) hPT2
+    hOffCPT2
+
+end RHEnd
