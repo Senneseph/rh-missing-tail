@@ -209,31 +209,34 @@ Commit a00c7d6.
    as the record. In-tree: E1ClauseV3C window (G, 9e23] (0176:
    T_MEAS3 = 9e23, hole B = 1e8, 40-row face, max residual
    6.333622e7 at 9e23 -> 37% margin, full tree 17450 jobs). No RH claim.
-7. **The terminal face (NAMED, adopted forward at 0200):** the
+7. **The terminal face (NAMED, adopted forward at 0203):** the
    in-tree closure of the `hOffC` face is now wired at
-   `[Z78FineChain]` (0.8739558 = 4369779/5000000; tracker record
-   density-split-fine-chain, PR #86, merged 2026-10-28 04:30Z). Front-
-   ier board sweep 2026-10-28 (35 records): two new board-best merges
-   since the 2026-10-27 sweep - PR #84 density-split-third 0.873985
-   (Rohan Arun) and PR #86 density-split-fine-chain 0.8739558 (Jacob
-   Sussman) - the latter the current BOARD BEST, replayed and adopted
-   as 0200 (stage C 93/93 clean in 90s on the frozen 0148/0195 olean
-   reuse after five-way byte-identity, stage D: canonical compile at
-   4369779/5000000, axiom audit
-   {propext, Classical.choice, Quot.sound}, zero sorry); #84 strictly
-   subsumed by #86 (0.873985 > 0.8739558) and not adopted separately.
-   In tree: `formal/RhAttack/Z78FineChain.lean` (named external input,
-   strict strengthening chain, sharp strip + off-pair theorems) +
-   RHEnd part B18 (5 theorems; B18.1 closes the slice (0.3739558,
-   0.373995] in body, including the entire #84 face; targeted builds
-   Z78FineChain 8728 / RHEnd 8750 / full tree 17450 all green; the
-   214-line B17 block verified byte-identical - pure append). The
-   face is now `hOffC : d0 <= 1869779/5000000` above H (0.3739558
-   off-line; step removed sil32D0max - fineChainD0max = 196/5000000 =
-   3.92e-5 of face width). The face remains NAMED, not closed; the
-   data edge is a FLANK and never closes it; a future board-best
-   record is the next adoption trigger (the board moved twice in the
-   last 24h).
+   `[Z78DensityRefined]` (0.8739461 = 8739461/10000000; tracker record
+   density-refined, PR #90, SovereignSteak, AI-assisted (OpenAI Codex),
+   merged 2026-10-28 19:48Z). Evening board sweep 2026-10-28 (37
+   records + 1 historical): two new merged records since the 0200
+   snapshot - PR #85 density-split-fourth 0.873981 (Rohan Arun)
+   strictly WEAK than [Z78FineChain], subsumed, not adopted; and PR
+   #90 density-refined 0.8739461 - the current BOARD BEST - replayed
+   and adopted as 0203 (stage C 119/119 clean on the frozen
+   0148/0195/0200 olean reuse after six-way byte-identity of all
+   dependency trees, stage D: canonical compile at 8739461/10000000,
+   axiom audit {propext, Classical.choice, Quot.sound}, zero sorry).
+   In tree: `formal/RhAttack/Z78DensityRefined.lean` (named external
+   input; strict strengthening chain through [Z78FineChain] to
+   [Z78]) + RHEnd part B19 (5 theorems; B19.1 closes the slice
+   (0.3739461, 0.3739558] in body from [Z78DensityRefined]; targeted
+   builds Z78DensityRefined 8729 / RHEnd 8751 / full tree 17450 all
+   green; B16/B17/B18 preserved - pure append). The face is now
+   `hOffC : d0 <= 3739461/10000000` above H (0.3739461 off-line; this
+   step removed fineChainD0max - denRefinedD0max = 97/10000000 =
+   9.7e-6 of face width). History: 0200 wired [Z78FineChain]
+   (0.8739558, face d0 <= 1869779/5000000, step 3.92e-5); 0195 wired
+   [Z78SIL32] (0.873995), formerly [Z78C] (0.8747729897 at 0162). The
+   face remains NAMED, not closed; the data edge is a FLANK and never
+   closes it; a future board-best record is the next adoption trigger
+   (the board moved THREE times in 24h - the B6 sixth-supersession
+   mechanism is now the standard response).
 8. **The A1 walk-side data layer (0201 + 0202, 2026-10-28):** the
    single open W2Beyond input - the data-free |DN| <= K clause (S
    bounded at the zeros, E1) - now carries its DATA side as a named,

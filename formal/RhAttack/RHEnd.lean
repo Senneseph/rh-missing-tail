@@ -139,6 +139,7 @@ import RhAttack.Z78Sil30
 import RhAttack.Z78Arvi31
 import RhAttack.Z78Sil32
 import RhAttack.Z78FineChain
+import RhAttack.Z78DensityRefined
 import RhAttack.S4WinCap
 import RhAttack.WinCount
 import RhAttack.P4Limit
@@ -3485,6 +3486,220 @@ theorem rh_program78_stripfront_mach_unifiedGao_PT2_ofFineChain (q : ZeroSet)
       d0 ≤ Z78FineChain.fineChainD0max → ¬ offPair q t0 d0) :
     RH q :=
   rh_program78_stripfront_mach_unifiedGao_ofFineChain q hzF hqz
+    honline Qside WinC.tPT2 (by norm_num [WinC.tPT2]) hPT2
+    hOffCPT2
+
+/-!
+**Part B19 - the tracker board moved AGAIN: [Z78DensityRefined]
+supersedes [Z78FineChain] (and, with it, the 2026-10-28 morning frontier
+map).**
+
+The B6 section-8 mechanism (demonstrated in 0133, 0142, 0162, 0195, 0200)
+runs a SIXTH time.  The 2026-10-28 evening catalogue pull (as_of 2026-10-28,
+37 records + 1 historical) shows TWO new framework-verified, MERGED records
+since the 0200 snapshot: PR #85 density-split-fourth 0.873981 (Rohan Arun,
+merged 2026-10-28 10:29Z) - strictly WEAKER than [Z78FineChain]
+(0.873981 > 0.8739558), subsumed, NOT adopted - and PR #90
+density-refined 0.8739461 (SovereignSteak, AI-assisted (OpenAI Codex),
+merged 2026-10-28 19:48Z) - the current BOARD BEST.  This program
+second-party replayed #90 in full (Stage C: independent per-module kernel
+compilation, 119/119 modules clean; Stage D: canonical statement at the
+exact rational, axiom audit, zeta consequence, 0 sorry; all six dependency
+trees byte-identical to the frozen 0200 replay copies - see the module
+header for the complete provenance record).  [Z78DensityRefined] (record
+density-refined; the PR86 fine chain refined by 59 exact count-source
+transitions, each decrementing Lambda by 1/400, on the widened density
+interface of PR89, reaching
+G(488842537/500000000, 4388001/2000000, 1/10)) is the strongest: the
+all-Dirichlet zero-free half-plane at denRefinedUpper = 8739461/10000000 =
+0.8739461, a STRICT STRENGTHENING of [Z78FineChain]
+(extDenRefined_implies_extFineChain; transitively of [Z78SIL32], [Z78C],
+[Z78G], [Z78T], [Z78L], [Z78]).  Zeros of an actual set sit in
+[1 - denRefinedUpper, denRefinedUpper], so every off-pair satisfies
+d0 <= denRefinedD0max = denRefinedUpper - 1/2 = 3739461/10000000 =
+0.3739461 < fineChainD0max (offPairD0leDenRefined, sharp).  The open face
+shrinks from (0, fineChainD0max] to (0, denRefinedD0max], the
+[Z78DensityRefined]-sharp strip interior, and the slice
+(denRefinedD0max, fineChainD0max] of the B18 face is closed IN BODY from
+[Z78DensityRefined] itself.  The step removes fineChainD0max -
+denRefinedD0max = 97/10000000 = 9.7e-6 of face width.  No RH claim: the
+face is a zero-exclusion statement in the unverified region; the input
+class is unchanged in kind - an external zero-free half-plane, still
+0.3739461 away from 1/2 - and the chain stays a REPEATABLE MECHANISM (B6
+packet section 8, now demonstrated on a SIXTH supersession): a newer
+verified snapshot of the tracker frontier supersedes this part
+mechanically.
+-/
+
+/--  B19.1  THE  OUTER  SLICE  OF  THE  pre-B17  FACE  IS  CLOSED  IN
+    BODY  FROM  [Z78DensityRefined]:  for  an  actual-set  zero  set,  no
+    off-pair with  d0  >  denRefinedD0max  (of  any  height  t0  >  0):
+    offPairD0leDenRefined  already  bounds  every  off-pair  to
+    d0  <=  denRefinedD0max.  In  particular  the  slice
+    (denRefinedD0max,  fineChainD0max]  of  the pre-B19 face  --  and  a
+    fortiori  (denRefinedD0max,  gaoD0max],  (denRefinedD0max,  qxD0max],
+    (denRefinedD0max,  liuD0max],  (denRefinedD0max,  3/8]  --  needs  no
+    face  at  all.  No  RH  claim.  -/
+theorem rhend_sliceDensityRefinedExcl (q : ZeroSet)
+    (hzF : Z78DensityRefined.externalZeroFree78DenRefined)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (t0 d0 : ℝ) (ht0 : 0 < t0) (hd0 : 0 < d0)
+    (hC : Z78DensityRefined.denRefinedD0max < d0) :
+    ¬ offPair q t0 d0 := by
+  intro hp
+  have hle := Z78DensityRefined.offPairD0leDenRefined q hzF hqz t0 d0 ht0 hd0 hp
+  linarith
+
+/--  B19.2  THE  DENSITY-SPLIT-UNIFIED  ENDPOINT:  the  B12
+    endpoint  with  the  external  input  upgraded
+    [Z78]  ->  [Z78DensityRefined]  and  the  face  shrunk  to  0  <  d0
+    <=  denRefinedD0max  (the  [Z78DensityRefined]-sharp  strip  interior,
+    denRefinedD0max = 3739461/10000000 = 0.3739461).  Above  H,  any
+    off-pair  has  d0  <=  denRefinedD0max  BY  [Z78DensityRefined]
+    (offPairD0leDenRefined)  before  the  face  is  applied  -  the
+    d0  <=  1/2  split  of  B11  stays  away  in  the  S1/S3
+    legs  and  in  the  S4-covered  leg;  the  far  region  (d0
+    >  1/2)  is  closed  by  the  [Z78]  derived  from
+    [Z78DensityRefined].  No  RH  claim.  -/
+theorem rh_program78_stripfront_mach_unifiedDenRefined (q : ZeroSet)
+    (hzF : Z78DensityRefined.externalZeroFree78DenRefined)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) → (|ρ.im| : ℝ) <
+      (707 : ℝ) / 50 → ρ.re = 1 / 2)
+    (Qside : ℝ × ℝ → ℝ)
+    (H : ℝ) (hH : 1000 ≤ H)
+    (hPT : WinC.allOnLineUpTo q H)
+    (hOffC : ∀ (t0 d0 : ℝ), H ≤ t0 → 0 < d0 →
+      d0 ≤ Z78DensityRefined.denRefinedD0max → ¬ offPair q t0 d0) :
+    RH q := by
+  have hz78 : Z78.externalZeroFree78 := Z78DensityRefined.extDenRefined_implies_ext78 hzF
+  refine S4A.rh_from_regime_closures q Qside Z78P12.MfP devProg
+    Z78P12.BwireP (fun p => MrLift p.1 p.2) floProg
+    ?_ ?_ ?_ ?_ ?_ ?_
+  · --  S1  witness  leg:  below  H  =  vacuous  (the  record);
+      --  above  H:  [Z78DensityRefined]  bounds  d0  to  denRefinedD0max,  the  face
+      --  kills.
+    intro t0 d0 ht0 hd0 hp
+    by_cases hle : t0 ≤ H
+    · exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
+        (le_of_lt ht0) hle) d0 hp)
+    · have hL : d0 ≤ Z78DensityRefined.denRefinedD0max :=
+        Z78DensityRefined.offPairD0leDenRefined q hzF hqz t0 d0 ht0 hd0 hp
+      exact False.elim ((hOffC t0 d0
+        (le_of_lt (not_le.mp hle)) hd0 hL) hp)
+  · --  S2  leg:  covered  =  in  body;  low  band  =  vacuous
+      --  below  H;  far  =  [Z78]  (from  [Z78DensityRefined]).
+    intro t0 d0 ht0 hd0 hp
+    by_cases hd0h : d0 ≤ (1 / 2 : ℝ)
+    · by_cases ht0k : 1000 ≤ t0
+      · exact hs2_covered q honline t0 d0 ht0 ht0k hd0 hd0h hp
+      · have hle : t0 ≤ H := le_trans (le_of_lt (not_le.mp ht0k)) hH
+        exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
+          (le_of_lt ht0) hle) d0 hp)
+    · exact False.elim (Z78P12.offPairFarEmpty q hz78 hqz t0 d0
+        (not_le.mp hd0h) hp)
+  · --  S3  leg:  below  H  =  vacuous  (the  record);  above  H:
+      --  [Z78DensityRefined]  bounds  d0  to  denRefinedD0max,  the  face  kills.
+    intro t0 d0 ht0 hd0 hp
+    by_cases hle : t0 ≤ H
+    · exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
+        (le_of_lt ht0) hle) d0 hp)
+    · have hL : d0 ≤ Z78DensityRefined.denRefinedD0max :=
+        Z78DensityRefined.offPairD0leDenRefined q hzF hqz t0 d0 ht0 hd0 hp
+      exact False.elim ((hOffC t0 d0
+        (le_of_lt (not_le.mp hle)) hd0 hL) hp)
+  · --  S4  covered:  below  H  =  vacuous  (the  record);
+      --  above  H:  [Z78DensityRefined]  bounds  d0  to  denRefinedD0max,  the  face
+      --  kills.
+    intro t0 d0 ht0 hd0 hd0u hp
+    by_cases hle : t0 ≤ H
+    · exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
+        (by linarith [ht0]) hle) d0 hp)
+    · have hL : d0 ≤ Z78DensityRefined.denRefinedD0max :=
+        Z78DensityRefined.offPairD0leDenRefined q hzF hqz t0 d0
+        (show 0 < t0 from by linarith [ht0]) hd0 hp
+      exact False.elim ((hOffC t0 d0
+        (le_of_lt (not_le.mp hle)) hd0 hL) hp)
+  · --  S4  low:  covered  low  band  below  H;  the  d0  <= 1/2  part
+      --  of  the  low  band  is  vacuous  (the  record)  below  H;
+      --  above  H  the  face  covers  (colletD0max  <  1/2).
+    intro t0 d0 ht0 ht0u hd0 hd0u hp
+    by_cases hle : t0 ≤ H
+    · exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
+        (le_of_lt ht0) hle) d0 hp)
+    · have hL : d0 ≤ Z78DensityRefined.denRefinedD0max :=
+        Z78DensityRefined.offPairD0leDenRefined q hzF hqz t0 d0 ht0 hd0 hp
+      exact False.elim ((hOffC t0 d0
+        (le_of_lt (not_le.mp hle)) hd0 hL) hp)
+  · --  S4  far:  [Z78]  (from  [Z78DensityRefined]).
+    intro t0 d0 ht0 hd0 hd0f hp
+    exact False.elim (Z78P12.offPairFarEmpty q hz78 hqz t0 d0
+      hd0f hp)
+
+/--  B19.3  THE  DENSITY-SPLIT  ENDPOINT  AT  THE  PLATT-TRUDGIAN
+    FRONTIER  (the  [Z-PT2]  instantiation):  the  entire  named
+    residue  lives  STRICTLY  ABOVE  3,000,175,332,800,  as  ONE
+    zero-exclusion  face  (no  off-pair  in  0  <  d0  <=
+    denRefinedD0max  above  the  frontier  -  the  [Z78DensityRefined]-sharp
+    strip  interior)  plus  [Z78DensityRefined]  itself  (which  closes
+    d0  >  denRefinedD0max  in  body).  No  RH  claim.  -/
+theorem rh_program78_stripfront_mach_unifiedDenRefined_PT2 (q : ZeroSet)
+    (hzF : Z78DensityRefined.externalZeroFree78DenRefined)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) → (|ρ.im| : ℝ) <
+      (707 : ℝ) / 50 → ρ.re = 1 / 2)
+    (Qside : ℝ × ℝ → ℝ)
+    (hPT2 : WinC.allOnLineUpTo q WinC.tPT2)
+    (hOffCPT2 : ∀ (t0 d0 : ℝ), WinC.tPT2 ≤ t0 → 0 < d0 →
+      d0 ≤ Z78DensityRefined.denRefinedD0max → ¬ offPair q t0 d0) :
+    RH q :=
+  rh_program78_stripfront_mach_unifiedDenRefined q hzF hqz honline Qside
+    WinC.tPT2 (by norm_num [WinC.tPT2]) hPT2 hOffCPT2
+
+/--  B19.4  THE  0142  GA  O  ENDPOINT  AS  A  THEOREM  OF  THE
+    [Z78DensityRefined]  ENDPOINT  (in  body):  given  the  [Z78DensityRefined]
+    input  and  its  terminal  face  hOffC  on  0  <  d0  <=
+    denRefinedD0max,  the  older  five-step-form  endpoint  follows
+    --  the  gao  face  (0  <  d0  <=  gaoD0max)  splits  into
+    the  denRefinedD0max  half  (the  hOffC  face)  and  the  slice
+    (denRefinedD0max,  gaoD0max]  (closed  in  body  from
+    [Z78DensityRefined]).  The  0142  terminal  statement  is  thus  a
+    THEOREM  of  the  B19  one.  No  RH  claim.  -/
+theorem rh_program78_stripfront_mach_unifiedGao_ofDenRefined (q : ZeroSet)
+    (hzF : Z78DensityRefined.externalZeroFree78DenRefined)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) → (|ρ.im| : ℝ) <
+      (707 : ℝ) / 50 → ρ.re = 1 / 2)
+    (Qside : ℝ × ℝ → ℝ)
+    (H : ℝ) (hH : 1000 ≤ H)
+    (hPT : WinC.allOnLineUpTo q H)
+    (hOffC : ∀ (t0 d0 : ℝ), H ≤ t0 → 0 < d0 →
+      d0 ≤ Z78DensityRefined.denRefinedD0max → ¬ offPair q t0 d0) :
+    RH q := by
+  have hzG : Z78Gao.externalZeroFree78Gao :=
+    Z78DensityRefined.extDenRefined_implies_extGao hzF
+  apply rh_program78_stripfront_mach_unifiedGao q hzG hqz
+    honline Qside H hH hPT
+  intro t0 d0 ht0 hd0 hd0G hp
+  by_cases hleC : d0 ≤ Z78DensityRefined.denRefinedD0max
+  · exact False.elim ((hOffC t0 d0 ht0 hd0 hleC) hp)
+  · exact False.elim (rhend_sliceDensityRefinedExcl q hzF hqz t0 d0
+      (by linarith [ht0, hH]) hd0 (not_le.mp hleC) hp)
+
+/--  B19.5  THE  [Z-PT2]  INSTANCE  OF  B19.4  (the  0142
+    terminal  statement  at  tPT2  is  a  theorem  of  the  B19
+    endpoint  with  the  [Z-PT2]  record).  No  RH  claim.  -/
+theorem rh_program78_stripfront_mach_unifiedGao_PT2_ofDenRefined (q : ZeroSet)
+    (hzF : Z78DensityRefined.externalZeroFree78DenRefined)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) → (|ρ.im| : ℝ) <
+      (707 : ℝ) / 50 → ρ.re = 1 / 2)
+    (Qside : ℝ × ℝ → ℝ)
+    (hPT2 : WinC.allOnLineUpTo q WinC.tPT2)
+    (hOffCPT2 : ∀ (t0 d0 : ℝ), WinC.tPT2 ≤ t0 → 0 < d0 →
+      d0 ≤ Z78DensityRefined.denRefinedD0max → ¬ offPair q t0 d0) :
+    RH q :=
+  rh_program78_stripfront_mach_unifiedGao_ofDenRefined q hzF hqz
     honline Qside WinC.tPT2 (by norm_num [WinC.tPT2]) hPT2
     hOffCPT2
 
