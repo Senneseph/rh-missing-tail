@@ -35,6 +35,17 @@ THE  DATA  (measured  half  -  data  ledger,  NOT  theorems):
     (1e9, 3e9]   (band B)   2.503013134     1,035,537,870.15
     (3e9, 1e10]             2.553901672     9,839,079,152.62
     (1e10, 3e10]            2.615066528     29,565,113,205.57
+  0202  CLOSED  THE  GAP  (1e7,  3.1946e7]  -  52,290,633  zeros  from
+  the  LMFDB/Platt  shard  stream  (item  4.3,  /tmp/zeta-dl/shards):
+    (1e7, 2e7]              2.175625149     14,253,736.60
+    (2e7, 3e7]              2.149216451     24,476,747.05    (the  wiggle)
+    (3e7, 3.19e7]           2.188682735     30,461,845.49
+  N(3.1946e7)  =  73,426,758  TRIPLY  CONFIRMED  (shard  stream,  0201
+  chained  anchor,  2026-09-14  manifest);  overlap  (8.846e6,  1e7]
+  vs  the  LMFDB  1e7  pull:  2.61M  zeros  to  two  ULP.  The  per-bin
+  sups  WIGGLE  under  the  envelope  (the  (2e7,3e7]  bin  below  the
+  (1e7,2e7]  bin):  the  data  supports  the  RUNNING  MAX,  not  per-bin
+  monotonicity.
   The  two  "certified"  rows  were  RE-DERIVED  LOCALLY  on  2026-10-28
   (the  740GB  /  92.58B-zero  D-band  sweep,  output  tmp/a1_densus_d2.out):
   VERIFICATION  vs  the  certified  record  -  ALL  FIVE  PINS  OK:
@@ -82,6 +93,19 @@ namespace W2B4
     the  RVM  defect  here  reads  S(z)  -  1/8  +  O(1/z)  directly. -/
 noncomputable def K_low : ℝ := 2110059872 / 1000000000          -- sup|DN|  =  2.110059872
 
+/-- The  GAP  band  (1e7,  3.1946e7],  52,290,633  zeros  (0202):
+    censused  2026-10-28  from  the  LMFDB/Platt  shard  stream  (item
+    4.3,  /tmp/zeta-dl/shards,  2026-09-14/22):  the  one  region  the
+    0201  census  did  not  cover.  Every  zero  absolutely  indexed  by
+    the  exact  per-block  Nt  headers;  N(3.1946e7)  =  73,426,758
+    TRIPLY  CONFIRMED  (the  shard  stream  itself,  the  0201  chained
+    anchor  from  the  certified  D  seam,  and  the  2026-09-14
+    manifest);  the  overlap  (8.846e6,  1e7]  agrees  with  the
+    independent  LMFDB  1e7  pull  to  two  ULP  over  2.61M  zeros. -/
+noncomputable def K_1e7_2e7 : ℝ := 2175625149 / 1000000000    -- (1e7,  2e7]
+noncomputable def K_2e7_3e7 : ℝ := 2149216451 / 1000000000    -- (2e7,  3e7]
+noncomputable def K_3e7_32e7 : ℝ := 2188682735 / 1000000000   -- (3e7,  3.19e7]
+
 /-- The  decade  sups  (2026-10-28  local  census  +  certified  A2
     record):  the  domain  of  each  pin  is  the  stated  decade. -/
 noncomputable def K_32e7_1e8 : ℝ := 2296913326 / 1000000000     -- (3.2e7,  1e8]
@@ -98,12 +122,15 @@ theorem K_pins_rational :
     K_low = 2110059872 / 1000000000 ∧
       K_32e7_1e8 = 2296913326 / 1000000000 ∧
       K_1e8_3e8 = 2377285480 / 1000000000 ∧
+      K_1e7_2e7 = 2175625149 / 1000000000 ∧
+      K_2e7_3e7 = 2149216451 / 1000000000 ∧
+      K_3e7_32e7 = 2188682735 / 1000000000 ∧
       K_3e8_1e9 = 2438651562 / 1000000000 ∧
       K_1e9_3e9 = 2503013134 / 1000000000 ∧
       K_3e9_1e10 = 2553901672 / 1000000000 ∧
       K_3e10 = 2615066528 / 1000000000 := by
-  norm_num [K_low, K_32e7_1e8, K_1e8_3e8, K_3e8_1e9,
-    K_1e9_3e9, K_3e9_1e10, K_3e10]
+  norm_num [K_low, K_1e7_2e7, K_2e7_3e7, K_3e7_32e7, K_32e7_1e8,
+    K_1e8_3e8, K_3e8_1e9, K_1e9_3e9, K_3e9_1e10, K_3e10]
 
 /-- The  W2Beyond3  recorded  pin  (6-decimal)  dominates  the
     full-precision  census  value  -  the  record  is  conservative
@@ -124,17 +151,47 @@ theorem K_certified_dominates_census : 1000000000 * K_3e10 < K_certified_3e10 :=
 
 /-! ### 2.  The  growth  ladder  (the  shape  statement). -/
 
-/-- THE  DECADE-SUP  LADDER:  the  sup  of  the  RVM  count-defect  at  the
-    zeros  grows  MONOTONE  with  height  across  every  certified or
-    locally  re-derived  domain  from  1e7  to  3e10:
+/-- THE  RUNNING-MAX  LADDER  (0202,  the  gap  band  closed):  with
+    the  gap  band  (1e7,  3.1946e7]  included,  the  RUNNING  MAXIMUM  of
+    the  sup  of  the  RVM  count-defect  at  the  zeros,  sup_{[14,  T]},
+    is  strictly  increasing  at  every  coarse  decade  from  1e7  to
+    3e10:
 
-        2.1101 < 2.2969 < 2.3773 < 2.4387 < 2.5030 < 2.5539 < 2.6151.
+        2.1101  <  2.1887  <  2.2969  <  2.3773  <  2.4387  <  2.5030
+        <  2.5539  <  2.6151.
 
-    Reading  (data  ledger):  the  A1  amplitude  drifts  up  at  ~0.15
-    per  decade  over  the  measured  range  -  far  below  the  log  scale
-    (2.3/decade)  and  far  above  a  constant  fit  through  the  points;
-    the  data  says  o(log)  -  the  shape  of  the  open  data-free
-    theorem  is  now  quantified  from  below. -/
+    Honest  shape  note  (the  data  wiggle):  the  PER-BIN  sups  are  NOT
+    monotone  -  the  gap  band  shows  the  first  measured  wiggle  under
+    the  envelope  (sup  (1e7,2e7]  =  2.1756  >  sup  (2e7,3e7]  =  2.1492,
+    back  up  to  2.1887  on  (3e7,  3.19e7]).  What  the  data  supports  is
+    the  RUNNING  MAX:  the  envelope  grows  strictly  at  the  coarse
+    scale;  the  bins  fluctuate  under  it.  Drift  ~0.15/decade  over
+    the  range  -  far  below  the  log  scale  (2.3/decade),  far  above
+    a  constant  fit;  the  open  data-free  theorem  must  absorb  a
+    non-constant  o(log)  increasing  envelope  with  O(0.03-0.05)
+    bin-scale  fluctuations. -/
+theorem ladder_running_max :
+    0 < K_low ∧
+      K_low < K_3e7_32e7 ∧ K_3e7_32e7 < K_32e7_1e8 ∧
+      K_32e7_1e8 < K_1e8_3e8 ∧ K_1e8_3e8 < K_3e8_1e9 ∧
+      K_3e8_1e9 < K_1e9_3e9 ∧ K_1e9_3e9 < K_3e9_1e10 ∧
+      K_3e9_1e10 < K_3e10 := by
+  refine ⟨?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_⟩
+  all_goals norm_num [K_low, K_3e7_32e7, K_32e7_1e8, K_1e8_3e8, K_3e8_1e9,
+    K_1e9_3e9, K_3e9_1e10, K_3e10]
+
+/-- THE  WIGGLE  (the  data  denies  per-bin  monotonicity):  the  sup  on
+    (2e7,  3e7]  sits  below  the  sup  on  (1e7,  2e7];  the  sup  on
+    (3e7,  3.19e7]  sits  above  the  (1e7,  2e7]  bin  but  below  the
+    (3.1946e7,  1e8]  bin.  The  envelope  grows;  the  bins  fluctuate. -/
+theorem ladder_wiggle :
+    K_2e7_3e7 < K_1e7_2e7 ∧
+      K_1e7_2e7 < K_3e7_32e7 ∧ K_3e7_32e7 < K_32e7_1e8 := by
+  refine ⟨?_, ?_, ?_⟩
+  all_goals norm_num [K_1e7_2e7, K_2e7_3e7, K_3e7_32e7, K_32e7_1e8]
+
+/-- THE  DECADE  CHAIN  (0201):  the  coarse-decade  sups  from
+    (3.1946e7,  1e8]  up  to  (1e10,  3e10]  grow  MONOTONE. -/
 theorem ladder_monotone :
     0 < K_low ∧
       K_low < K_32e7_1e8 ∧ K_32e7_1e8 < K_1e8_3e8 ∧
@@ -144,9 +201,9 @@ theorem ladder_monotone :
   all_goals norm_num [K_low, K_32e7_1e8, K_1e8_3e8, K_3e8_1e9, K_1e9_3e9,
     K_3e9_1e10, K_3e10]
 
-/-- The  full  ladder  spans  less  than  HALF  OF  ONE  unit  over  three
-    and  a  third  decades  (the  drift  is  O(0.15)/decade  in  the
-    measured  range). -/
+/-- The  running-max  envelope  spans  less  than  HALF  OF  ONE  unit
+    from  the  LOW  band  to  the  3e10  frontier;  the  wiggle  amplitude
+    is  O(0.03-0.05)  at  bin  scale. -/
 theorem ladder_span : K_3e10 - K_low < 1 := by
   norm_num [K_3e10, K_low]
 

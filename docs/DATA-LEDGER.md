@@ -265,24 +265,44 @@ chain;  LOW = LMFDB exact indices.
 | domain             | zeros          | sup |DN|   | at t               | min(DN)  | q50    | q99    | q99.9  | q99.99 | q99.999 |
 |--------------------|----------------|-----------|--------------------|-----------|--------|--------|--------|--------|---------|
 | [14, 1e7] LMFDB    |    21,136,125  | 2.110059872 | 4,998,855.44     | -0.87914 | 0.6251 | 1.4099 | 1.6285 | 1.7876  | 1.9088  |
+| (1e7, 3.19e7] GAP  |   52,290,633   | 2.188682735 | 30,461,845.49    | -0.95143 | 0.6250 | 1.4304 | 1.6578 | 1.8242  | 1.9497  |
 | (3.19e7, 1.01e9] A | 2,792,198,664  | 2.438651562 | 487,931,556.15   | -1.16536 | 0.6251 | 1.4622 | 1.7040 | 1.8845  | 2.0268  |
 | (1.00e9, 2.00e9] B | 3,066,173,720  | 2.503013134 | 1,035,537,870.15 | -1.24162 | 0.6251 | 1.4734 | 1.7200 | 1.9049  | 2.0506  |
 | (2.00e9, 2.999e9] C| 3,142,622,346  | 2.477177620 | 2,631,384,288.23 | -1.26177 | 0.6252 | 1.4778 | 1.7262 | 1.9131  | 2.0609  |
 | (2.999e9, 3e10] D  | 92,577,877,714 | 2.615066528 | 29,565,113,205.57| -1.39166 | 0.6252 | 1.4917 | 1.7463 | 1.9391  | 2.0932  |
 
-Decade sup ladder (monotone):  2.1101 (<=1e7) -> 2.2969 (3.2e7..1e8)
--> 2.3773 (1e8..3e8) -> 2.4387 (3e8..1e9) -> 2.5030 (1e9..3e9) ->
-2.5539 (3e9..1e10) -> 2.6151 (1e10..3e10).  D tail mass:  P(|DN|>2.0)
+Running-max ladder (strict at the coarse scale, 0202 gap included):
+2.1101 (<=1e7) -> 2.1887 (3e7..3.19e7) -> 2.2969 (3.2e7..1e8) ->
+2.3773 (1e8..3e8) -> 2.4387 (3e8..1e9) -> 2.5030 (1e9..3e9) ->
+2.5539 (3e9..1e10) -> 2.6151 (1e10..3e10).  The per-bin sups WIGGLE
+under the envelope (first measured wiggle: sup (1e7,2e7] = 2.175625149
+> sup (2e7,3e7] = 2.149216451, back up to 2.188682735 on (3e7,3.19e7]
+- the data supports the running max, not per-bin monotonicity).  D tail mass:  P(|DN|>2.0)
 = 4.256e-5,  P(>2.4) = 1.579e-8,  P(>2.6) = 1.080e-11.  D band
 VERIFICATION vs the certified record (2026-10-28 sweep):  all five pins
 OK (sup|DN| 2.615066528 tol 5e-7;  argmax t 29,565,113,205.570534;
 N(3e10) = 101,635,962,231;  DN(seam-in) 0.525129318;  DN(band end)
 0.904983521).
 
-GAPS AND CAVEATS:  the interval (1e7, 3.19e7] is not covered locally
-(52,290,633 zeros;  the certified A2 record covers the full (1e7, 3e10]
-domain from the fleet census).  The A/B file overlap (12,626,784 zeros)
-agrees element-wise to one f64 ULP (152 entries at exactly 2^-23).
+GAPS AND CAVEATS:  (0202 CLOSED THE ONE LOCAL GAP) the interval
+(1e7, 3.1946e7]  (52,290,633 zeros)  is now censused from the
+LMFDB/Platt shard stream on disk  (/tmp/zeta-dl/shards,  item 4.3,
+2026-09-14/22;  .dat decode per  scripts/rh/hi1e9/convert_hi3e10.py;
+census  script  tmp/a1_gap_census.py,  output  tmp/a1_gap.out):
+every zero absolutely indexed by the exact per-block Nt headers;
+N(3.1946e7) = 73,426,758 TRIPLY CONFIRMED (the shard stream itself,
+the 0201 chained anchor from the certified D seam, the 2026-09-14
+manifest Nt0);  the overlap (8.846e6, 1e7] agrees with the
+independent LMFDB 1e7 pull element-wise to two ULP over 2,611,739
+zeros;  the census zero count matches N(end) - N(1e7) exactly.
+The local census now covers [14, 3e10] END-TO-END.  DATA-HYGIENE NOTE
+(0202):  the band counts above intentionally overlap at their seams
+(the A/B file overlap (12,626,784 zeros) agrees element-wise to one
+f64 ULP (152 entries at exactly 2^-23); small B/C and C/D boundary
+overlaps).  Sum of band counts = 101,652,299,202 vs the certified
+endpoint N(3e10) = 101,635,962,231:  delta 16,336,971 = the
+double-counted overlap.  For any point the CERTIFIED N (anchored at
+the D seam and chained) is authoritative, not the band sum.
 The RVM gate at A head:  S = -0.599  (|S| < 3, PASS).  The +3/4 RVM
 convention makes DN = S(z) - 1/8 + O(1/z) at low t (the LOW band reads
 the classical S directly).  No RH content:  bookkeeping of the A1

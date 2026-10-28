@@ -234,28 +234,35 @@ Commit a00c7d6.
    data edge is a FLANK and never closes it; a future board-best
    record is the next adoption trigger (the board moved twice in the
    last 24h).
-8. **The A1 walk-side data layer (0201, 2026-10-28):** the single
-   open W2Beyond input - the data-free |DN| <= K clause (S bounded at
-   the zeros, E1) - now carries its DATA side as a named, machine-
-   checked record: `formal/RhAttack/W2Beyond4.lean` (targeted build
-   green; full tree 17450 jobs green with it integrated) pins the
-   measured K instances, the GROWTH LADDER theorem (the sup of the RVM
-   count-defect at the zeros is MONOTONE in the decade: 2.1101 ->
-   2.6151 from 1e7 to 3e10, span < 1, drift ~0.15/decade - the data
-   says o(log) and non-constant), and the universal wire INSTANCED at
-   K = 2.62 on the certified (2.999e9, 3e10] domain (wire cost <=
-   2.62 * 17/8 = 2227/400 = 5.5675). The census behind it (scripts/rh
-   a1_dn_census.py; DATA LEDGER section 8): 121.6 billion zeros
-   (A/B/C/LOW local + D the 740GB band), the D band re-derives the
-   certified A2 record EXACTLY (all five pins OK:  sup 2.615066528,
-   argmax t, N(3e10) = 101,635,962,231, both seam DNs); positive-side
-   dominance (sup+ 2.615 vs min -1.392); the shape (quantiles/tails)
-   quantified on 92.6 billion zeros.  The anchor chain D-seam -> C ->
-   B -> A reproduces Titchmarsh main + 7/8 at A head (S = -0.599,
-   |S| < 3 gate PASS); the A/B overlap agrees to one f64 ULP.  The
-   DATA-FREE version (K uniform in the frontier) remains the single
-   named open theorem - now with its growth quantified from below.
-   No RH claim.
+8. **The A1 walk-side data layer (0201 + 0202, 2026-10-28):** the
+   single open W2Beyond input - the data-free |DN| <= K clause (S
+   bounded at the zeros, E1) - now carries its DATA side as a named,
+   machine-checked record covering [14, 3e10] END-TO-END:
+   `formal/RhAttack/W2Beyond4.lean` (targeted + full-tree builds
+   green) pins the measured K instances per domain, the RUNNING-MAX
+   growth theorem (the sup of the RVM count-defect at the zeros,
+   sup_[14,T], is strictly increasing at every coarse decade: 2.1101
+   -> 2.1887 -> 2.2969 -> 2.3773 -> 2.4387 -> 2.5030 -> 2.5539 ->
+   2.6151; span < 1; drift ~0.15/decade - o(log) and non-constant)
+   plus the WIGGLE theorem (the data denies per-bin monotonicity:
+   sup (1e7,2e7] 2.1756 > sup (2e7,3e7] 2.1492 - the envelope grows,
+   the bins fluctuate at O(0.03-0.05)), and the universal wire
+   INSTANCED at K = 2.62 on the certified (2.999e9, 3e10] domain
+   (wire cost <= 2.62 * 17/8 = 2227/400 = 5.5675). The census behind
+   it (DATA LEDGER section 8): ~101.6 billion zeros (band
+   counts; the certified endpoint N(3e10) = 101,635,962,231 is
+   authoritative) - LOW (LMFDB
+   exact), the GAP band (1e7, 3.1946e7] censused 0202 from the
+   LMFDB/Platt shards on disk (N(3.1946e7) = 73,426,758 TRIPLY
+   confirmed: shard stream, 0201 chained anchor, 2026-09-14
+   manifest; overlap to two ULP over 2.6M zeros vs the independent
+   LMFDB pull), A/B/C local, D the 740GB band (re-derives the
+   certified A2 record EXACTLY, all five pins OK).  Positive-side
+   dominance (sup+ 2.615 vs min -1.392); shape quantified on 92.6B
+   zeros.  The DATA-FREE version (K uniform in the frontier) remains
+   the single named open theorem - now with its shape quantified: a
+   non-constant o(log) increasing ENVELOPE with O(0.03-0.05) bin-
+   scale fluctuations.  No RH claim.
 9. **The second orbit (KANSAS CITY SHUFFLE, IN PROGRESS):**
    `docs/KANSAS-CITY-SHUFFLE-SIEVE-ORBIT-PLAN-2026-10-25.md` — the
    owner's crafted creation: a Fourier-compatible Sieve of
