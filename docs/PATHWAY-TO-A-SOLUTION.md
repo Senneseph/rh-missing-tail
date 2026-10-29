@@ -29,15 +29,33 @@ Lean side  (build green,  sorry-free gated modules,  pinned toolchain):
   P1.2           closure = S1 zero side + S2 detector floor
                  + S3 definition side + S4 squeeze.  Named,
                  pointwise atoms,  covered region proven.
-  Z78 input      external quasi-RH strip (Re s > 7/8 zero-free,
-                 openai/math family 003,  kernel-verified on two
-                 kernels,  human review in progress) entered as a
-                 NAMED external input (prop with provenance,  not a
-                 dependency).  Proven from it:  zetaZeroStrip
-                 (1/8 <= Re <= 7/8),  offPairD0le (d0 <= 3/8,
-                 sharp),  offPairFarEmpty (far region d0 > 1/2
-                 VACUOUS for actual-set zero sets),
-                 edgeZeroFree78 (edge lines Re = 0 / 1 excluded).
+  Z78 input      external quasi-RH half-plane,  NAMED external
+                 input  (prop  with  provenance,  not  a
+                 dependency).  Current:  [Z78ArviDensity]  (tracker
+                 record  arvi-density,  PR  #94,  ArviFoxy;  the
+                 B6  SEVENTH  supersession,  0211):  zero-free  Re
+                 s  >  43693617/50000000  =  0.87387234,  second-
+                 party  kernel-verified  (stages  C/D,  328/328
+                 clean,  exact  rational,  0  sorry,  axioms  =  the
+                 standard  Lean  class).  Seven  strict
+                 supersessions  7/8  ->  ...  ->  0.8739461  ->
+                 0.87387234,  each  with  in-tree  transfer  theorems
+                 (extArvi_implies_*).  Proven  from  it  in-tree:
+                 zetaZeroStripArvi  (1  -  theta  <=  Re  <=
+                 theta),  offPairD0leArvi  (d0  <=  arviD0max  =
+                 theta  -  1/2  =  0.37387234,  sharp,  the
+                 terminal-face  edge),  offPairFarEmpty  (far
+                 region  d0  >  1/2  VACUOUS  for  actual-set  zero
+                 sets),  edgeZeroFree  (edge  lines  Re  =  0  /
+                 1  excluded).  The  external  input  GIVES
+                 CONTAINMENT  (off-pairs  can  only  sit  in  0  <
+                 d0  <=  0.37387234);  the  EXCLUSION  inside  that
+                 strip  is  the  terminal  face  hOffCPT2  of  the
+                 RHEnd  B21.3  endpoint,  and  the  face  edge
+                 reaches  0  in  off-line  distance  exactly  when
+                 the  board  theta  reaches  1/2  (the  B6
+                 mechanism  is  the  named  route;  watcher  live
+                 since  0212).
   S2             COMPLETE for the actual set:  low band
                  (s2ActualLowBandComplete;  sliver vacuous under
                  the on-line record)  and full band,  no t0 cap
@@ -1800,6 +1818,83 @@ for the ACTUAL zeta zero set.  The branches:
     E1 v4 re-gate.
 
 ## 5.  Next moves,  in order
+
+  TERMINAL  STATE  (0212,  2026-10-29)  -  supersedes  the  items
+  below  (retained  as  history):
+
+  The  RH  solution  object  is  RHEnd  Part  B21.3
+  (rh_program78_stripfront_mach_unifiedArvi_PT2  :  RH  q),
+  gated  on  exactly:  (i)  the  [Z78ArviDensity]  external  input
+  (board-best  quasi-RH  half-plane,  theta  =  0.87387234);
+  (ii)  the  zero-set  condition  +  the  on-line  data  records
+  (below  14.14  and  below  tPT2  =  3,000,175,332,800,  the
+  Platt-Trudgian  frontier,  certified);  (iii)  the  terminal
+  face  hOffCPT2  (no  off-pair  in  t0  >=  tPT2,  0  <  d0  <=
+  0.37387234)  -  the  one  named  residual,  external  by  design.
+  The  logical  reduction  is  complete  and  machine-checked:
+  the  external  input  +  the  in-tree  strip  lemmas  leave
+  EXACTLY  that  face  (containment  in-tree  via
+  zetaZeroStripArvi  +  offPairD0leArvi;  exclusion  over  the
+  face  region  is  the  gate).  face  edge  =  theta  -  1/2
+  moves  to  0  exactly  when  the  board  theta  reaches  1/2;
+  every  merged  board  record  below  the  current  face  shrinks
+  it  (the  B6  mechanism,  demonstrated  SEVEN  times,
+  0133/0133,  0142,  0162,  0195,  0200,  0203,  0211).
+
+  The  A1  lane  of  the  program  is  CLOSED  AT  THE  FRONTIER
+  (0209):  A1G.a1_zerofree_frontier  carries  the  full
+  data-free  frontier  wire  |S1Sum  -  RSum|  <  16  from  exactly
+  the  two  CITED  theorems  (Trudgian  A1G-5;  the  RvM
+  identity  with  explicit  residual)  +  e  <  4;  the
+  grid-clause  exhibit  K  =  33206/5000  =  6.6412  is  the  one
+  the  W2Beyond3  assembly  consumes.  The  stronger  ABSOLUTE  A1
+  clause  (one  K  over  ALL  zeros,  unbounded)  remains  named
+  and  open  (A1G.face_unbounded  -  the  data-free  growth
+  outruns  every  K);  it  is  NOT  what  the  assembly
+  consumes,  and  per  the  owner's  standing  directive  it  is
+  the  "metaphysical  void"  the  program  does  not  get  stuck
+  on.
+
+  Named  open  items  (exactly  three):
+   (a)  the  terminal  face  (0  <  d0  <=  0.37387234  above
+       tPT2)  -  external  by  design;  the  B6  mechanism  is  the
+       named  route.  The  board  is  QUIET  at  the  in-tree  face
+       (0212  re-pull:  41  records,  as_of  2026-10-29,  none
+       below  43693617/50000000);  watched  continuously  by  the
+       0212  daemon  (tmp/b6audit/tracker/watcher_daemon_0212.sh:
+       official  catalogue  =  the  gate;  open-PR  QRH-Bound
+       channel;  leaderboard  early  signal;  machine alerts in
+       WATCHER_ALERT.json  +  B6-FIRED-*  markers).
+   (b)  the  absolute  A1  clause  (face_unbounded)  -  named,
+       not  on  the  critical  path.
+   (c)  Collet  paper  provenance  (PR  #69  standalone  paper
+       "A  zero-free  half-plane  from  finite  ordinary  source
+       moments"):  the  URL  still  404s,  the  QRH-Catalogue
+       carries  NO  public-paper  record  for  it  (base-data
+       shards  +  components  grepped,  0212),  and  no  manuscript
+       is  in  the  PR  #69  submission  tree  (0212  re-confirmed)
+       -  the  B6  gate  (kernel  replay)  does  not  depend  on
+       it;  non-blocking.
+
+  Invariants  (0212  re-verified):  full  build  17454  jobs
+  green;  rhattack  cross-check  4/4  PASS  0  FAIL.
+
+  Next  moves,  in  order  (0212):
+   1.  Watch  the  board  (daemon  live);  on  a  merged  record
+       below  43693617/50000000  run  the  B6  section-8
+       conveyor  (fetch  at  pinned  commit,  identity  checks,
+       Stages  C/D,  in-tree  module  +  B-part,  gates,  docs,
+       push).
+   2.  Optional  compute  lane  (off  the  critical  path):  the
+       A1  high-T  discriminator  census  beyond  3e10  (slow
+       saturation  vs  slow  divergence  of  S/lnT)  -  fleet-
+       scale,  needs  the  owner's  compute  window.
+   3.  Keep  every  milestone  in  docs/discovery/  +  this
+       document  current  (no  silent  re-chart).
+
+  The  items  1-2  below  are  the  pre-0101  charter  (retained
+  as  history;  their  content  is  superseded  by  the  terminal
+  state  above).
 
   1.  FAR-ENGINE  WALL  (s31z2  in  flight):  LOCKED  -  the
       s31z  ladder  shows  the  mpmath  zeta  wall  at

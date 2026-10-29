@@ -265,7 +265,25 @@ Commit a00c7d6.
    as_of 2026-10-28, theta stored as STRING fractions - int()
    them): density-side board best is still the in-tree face
    0.8739461 (lower theta = better, i.e. MIN wins) - NO B6 fire.
-   Builds RHEnd 8760 / full tree 17454 green.
+   Builds RHEnd 8760 / full tree 17454 green. 0212 (2026-10-29)
+   STATE+WATCHER: board re-pull QUIET at the in-tree face (41
+   records, as_of 2026-10-29 - no merged record below
+   43693617/50000000, NO B6 fire); the B6 section-8 mechanism is
+   AUTOMATED (tmp/b6audit/tracker/ watcher daemon 0212: official
+   catalogue = the gate + open-PR QRH-Bound channel + leaderboard
+   early signal; machine alerts in WATCHER_ALERT.json + B6-FIRED-*
+   markers; 300s cycle, ~0 CPU, 4-cores-open respected); the
+   TERMINAL STATE of the RH solution object is crystallized in
+   PATHWAY-TO-A-SOLUTION.md section 5 (exactly three named open
+   items: (a) the terminal face 0 < d0 <= 0.37387234 above tPT2 -
+   external by design, the B6 mechanism the named route; (b) the
+   absolute A1 clause A1G.face_unbounded - named, NOT on the
+   critical path; (c) the Collet paper provenance - re-confirmed
+   ABSENT this entry: URL still 404, no QRH-Catalogue public-paper
+   record, no manuscript in the PR #69 submission tree - non-
+   blocking, the B6 gate is the kernel replay); invariants re-
+   verified fresh: full build 17454 green, cross-check 4/4 PASS
+   0 FAIL.
 8. **The A1 walk-side data layer (0201 + 0202, 2026-10-28):** the
    single open W2Beyond input - the data-free |DN| <= K clause (S
    bounded at the zeros, E1) - now carries its DATA side as a named,
