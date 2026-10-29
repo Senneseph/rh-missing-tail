@@ -536,3 +536,21 @@ residual-pin structure.
     PR #94 arvi-density at 43693617/50000000, replayed in
     tmp/z78s35: stage C 328/328 in 326s, stage D clean; all five
     dependency trees byte-identical to the frozen 0203 copies).
+  As of 0212 (2026-10-29) this mechanism is also AUTOMATED and tracked
+     (scripts/rh/b6/): (a) a live watcher daemon (tracker_watch2.py +
+     watcher_daemon_0212.sh, 300s cycle, ~0 CPU) polling the OFFICIAL
+     catalogue = the gate + the open-PR QRH-Bound channel + a leaderboard
+     early signal, with machine alerts (WATCHER_ALERT.json level 1/2 +
+     B6-FIRED-*/B6-PENDING-* markers) so a board move is detected without
+     turn latency; (b) b6_preflight.py - the one-command replay conveyor
+     (fetch at the record pinned source_commit, canonical-statement
+     boundary identity, build-cone BYTE-IDENTICAL check against the
+     frozen replay copies via a date-aware slug matcher, the proven
+     stage-C per-module driver, stage-D canonical-compile + axiom audit +
+     zeta probe + 0-sorry sweep) emitting a verdict JSON at exit 10 =
+     ADOPTABLE / 20 = QUIET / 30 = REFUSED (protocol guard) / 40 = replay
+     fail. The in-tree adoption (module + B-part + gates + docs) remains
+     human-in-the-loop via the gen_* template (the 0211 model). Verified
+     at 0212: detection correct (board QUIET at the anchor, 41 records),
+     --record fire path correct, 7/7 build-cone deps of the 0211 record
+     resolve + byte-identical. No RH claim.
