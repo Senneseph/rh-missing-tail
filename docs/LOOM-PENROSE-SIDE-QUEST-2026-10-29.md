@@ -197,13 +197,22 @@ the residual 9% (named L2C': the window ladder W = 1e3, 1e4).
 - **L2B'**: content at fixed wheel phase (the controlled tail-memory test).
 - **L2C'**: the window ladder (W = 1e3, 1e4): where does the deep tail become
   necessary?
-- **L2D**: zero-origin cuts (0214 C1 machine + L2A models).
-- **L3**: M1 lane-Markov vs the LD/sieve model prediction (subsumed-vs-new,
-  the LOOM-1 discriminator, now at lane resolution).
-- **LOOM-1 (discriminator):** Cramér/LD-model gap word at X=2e6 and 2e7;
-  compare H_m ladders. Predicts subsumed-vs-new for the multi-order tension.
-- **LOOM-1b (bloom scale):** BLOOM(24) front/antipode ratios at X = 1e7,
-  1e8: decay (LO slow law) vs fixed (sieve geometry).
+- **L2D**: zero-origin cuts (0214 C1 machine + L2A models) - **DONE 0218**:
+  same predictability as prime-origin (zeros carry no EXTRA lane memory:
+  M1 0.1476 vs 0.1225 within ~1 SE; due-lane 0.1119 vs 0.1275).
+- **L3/LOOM-1**: subsumed-vs-new discriminator - **FIRST CUT DONE 0218**
+  (Cramer floor + pair law + order-2 law: real H3 = 1.3506, ~7 SE BELOW the
+  order-2 floor 1.4173 => a genuine deeper weave; the FINAL LD-generator
+  comparison is named LOOM-1b2, below).
+- (see LOOM-1b line below; first cut landed as L3/LOOM-1 above)
+- **LOOM-1b (bloom scale):** BLOOM(24) front/antipode ratios - **DONE
+  0218: DECAYS** (0.073 -> 0.065 -> 0.056 over 2e6 -> 1e8) = an LO-type slow
+  bias, not fixed sieve geometry; the exact decay form feeds LOOM-1b2.
+- **LOOM-1b2 (NEW 0218):** the FINAL adjudication - simulate the full
+  Landau-Lodsmann/LO k-consecutive-gap joint law (not just the pair) and
+  compare its H_m ladder to the real H_m at X=2e6/1e7. LD matches => the
+  loom IS the sieve (subsumed, 0098 Euler-action); real < LD => excess
+  structure beyond the sieve law (a genuinely new object).
 - **LOOM-2 (sieve-as-substitution model):** formalize the sieve cascade as a
   substitution; measure its complexity/entropy; test "the loom IS the sieve"
   as a theorem-statement candidate (off-board, in its own file).
@@ -212,6 +221,120 @@ the residual 9% (named L2C': the window ladder W = 1e3, 1e4).
   Deferred: the hole was t-flat (0214) ⇒ no prediction channel *from* the
   hole; the cross-correlation would use the *class-conditional* frames
   instead — named, not yet run.
+
+## L3 (0218): PATH COMPLETION - the owner's idea, all named branches executed
+
+Owner: "wait, did we explore the whole path for my idea or is that just a
+preliminary report?" - it was a preliminary report. This section executes the
+remainder. Scripts: scripts/sq/loom3_path_completion.py (+ fix-up re-runs
+loom3_lm1_only.py, loom3_l4k_only.py); output tmp/loom/loom3_out.txt.
+
+### L2D - zero-origin cuts (the "or zeta zero" half of the sentence)
+
+813 certified zeros (0<=gamma<=1200, dec20) as origins; tail = all primes
+<= gamma (height scale, the 0909/0214 machine); target = the LANE of the first
+prime above gamma. Band-matched prime-origin baseline, same band:
+
+| origin (n)           | M1 top-1 | due-lane top-1 |
+|---|---|---|
+| zero-origin (813)    | 0.1476   | 0.1119         |
+| prime-origin (204)   | 0.1225   | 0.1275         |
+
+Split within ~1 SE in both columns (SE ~0.012/0.024): **a zero as origin is
+NOT a privileged origin** - it carries the same lane predictability as a
+prime. Predictability comes from the local gap law (context), not from the
+TYPE of origin; zeros add no extra memory (consistent with the 0214 t-flat
+hole). Low absolute rates (0.12-0.15 vs 0.22 at 1e7) = the tiny 14-1200 band,
+not a method failure.
+
+### LJ - joint pointing: the "point at the next prime" number
+
+Predicted lane (M1 argmax, + top-2) x survivor field S_y in (N, N+500]
+(no small factor <= y) = candidate set C; all 654,986 cuts:
+
+| gate y | |S| raw | |C1| lane-1 | 1st-cand==next | |C2| lane-2 | 1st-cand==next | certainty gain |
+|---|---|---|---|---|---|---|
+| 541    | 43.51  | 5.48        | 0.2168         | 11.00       | 0.3823         | 2.12 nats |
+| 1223   | 37.05  | 4.67        | 0.2190         | 9.37        | 0.3975         | 2.14 nats |
+
+The joint machine compresses the ~37-43 survivor field to a **5-6 candidate
+set**; the next prime is its head 21.9% (1 lane) / 39.8% (top-2 lanes).
+The 21.9% tracks the standalone lane top-1 (0.22): the POINTING power is
+carried by the lane law; the field supplies the candidate list. That is the
+honest decomposition of "link the many primes in the history to the future
+prediction field and what is allowed through".
+
+### L4K - the progression ladder ("the pattern" beyond the single next prime)
+
+UNCONDITIONAL (no context) frequency of the next K lanes as an ordered
+K-tuple vs an order-free multiset:
+
+| K | ordered top-1 | top-3 union | multiset top-1 | top pattern (lanes) |
+|---|---|---|---|---|
+| 1 | 0.1252 | 0.3753 | 0.1252 | [23]         |
+| 2 | 0.0278 | 0.0832 | 0.0389 | [13, 17]     |
+| 3 | 0.0062 | 0.0183 | 0.0175 | [13, 17, 23] |
+| 4 | 0.0016 | 0.0045 | 0.0101 | [1, 5, 7, 11]|
+
+**No strong unconditional long-range pattern**: monotone 0.125 -> 0.028 ->
+0.006 -> 0.0016. The "pattern" is LOCAL (context-conditional: the one-step
+gap law 0.22 + weak due-lane 0.155, L2A), not a free-riding sequence
+statistic. Top patterns are small-gap/twin-type progressions ([13,17]=+4,
+[1,5,7,11]=+4,+2,+4), consistent with BLOOM-24. (A base-8 encoding bug was
+found and fixed while measuring: the first cut silently equated the ordered
+code with the multiset sum; the corrected ladder above is the real one.)
+
+### L1b - BLOOM(24) scale ladder
+
+mean|f(c)-f(c+12)| over the six antipode pairs:
+
+| X      | mean asymmetry | gap~6/gap~18 ratio |
+|---|---|---|
+| 2e6 (0216) | 0.07315 | 2.69 |
+| 1e7        | 0.06493 | 2.39 |
+| 1e8        | 0.05602 | 2.11 |
+
+**The front BLOOM DECAYS with X** (an LO-type slow bias, not fixed sieve
+geometry): monotone 0.073 -> 0.065 -> 0.056 over two decades; every pair
+ratio decays (gap~6: 2.69->2.39->2.11; gap~10: 3.08->2.79->2.41; gap~4:
+2.70->2.37->2.07). The 24-adic front bloom is a SLOW-VANISHING bias, same
+family as the mod-4 gap bias (0196), not an immutable lattice asymmetry.
+Exact decay form (ln / ln-ln / power) = named LOOM-1b2.
+
+### LM1 - the model discriminator (LOOM-1 first cut, X = 2e6)
+
+Does the multi-order loom tension exceed the known laws?
+
+| model (X=2e6 A6 word)               | H1      | H2      | H3             |
+|---|---|---|---|
+| REAL primes                          | 1.52391 | 1.41279 | 1.35063+/-0.009 |
+| FLOOR-0 Cramer iid (same marginal)   | 1.75107 | 1.74921 | (~1.75)        |
+| FLOOR-1 pair law (order-1 chain)     | 1.52391 | -       | 1.52268        |
+| FLOOR-2 order-2 law chain            | -       | 1.41727 | 1.41727        |
+
+Real H_m sits BELOW EVERY FLOOR, and each added order of memory captures
+real structure: Cramer says no memory (1.75); the pair law says H3~1.52;
+the order-2 law says H3~1.42; the REAL word gives H3 = 1.3506 - ~7 block-SE
+BELOW the order-2 floor. **The tension is a genuine deeper weave that
+exceeds even the order-2 (two-gap) law at this resolution** - a LOOM
+BOOM-for-real candidate. What it is NOT yet: a refutation of "the loom IS
+the sieve" - the Landau-Lodsmann/LO k-tuple joint law (the FULL
+k-consecutive-gap prediction, not just the pair) is the ACTUAL sieve
+prediction and itself carries k-th order correlations; comparing the real
+H_m ladder against an LD-model gap word is the final subsumption test, named
+LOOM-1b2 (heavier: needs the LO joint-formula implementation). Honest state
+until then: **deeper than Cramer and pair-law; LD comparison pending**.
+
+### Path-complete status
+
+All eight named branches of the owner's idea are now either EXECUTED
+(LOOM-0, L2A, L2B, L2C, L2D, LJ, L4K, L1b, LM1-first-cut) or explicitly
+named with a stated reason to stay deferred (L2B' controlled content,
+L2C' long windows, LOOM-1b2 LD generator [the final subsumed-vs-boom
+adjudication], LOOM-1b2 decay-form fit, LOOM-2 sieve-as-substitution,
+wheel-loom cross-test [hole t-flat]). The idea is explored TO THE FULL
+NAMED DEPTH; what remains is the named refinements + the LOOM-1b2
+adjudication.
 
 ### No-RH-claim discipline (continued)
 
