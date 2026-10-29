@@ -1,4 +1,5 @@
 import Mathlib
+import RhAttack.TransNums
 
 /-!
 # W2SAtZeros — the S-at-zeros object identity and its in-tree |·| bound (0204)
@@ -281,47 +282,21 @@ slowly than 1/log(T) would, in the range of the slow log/loglog-type
 shapes of the RH-flank S-bounds.  All of this is a flanking DATA reading
 on the measured domain — not a refutation of anything, and no RH claim.
 
-The theorem below is stated with eleven NAMED premises — each an
-elementary numeric fact (documented with its verification).
+The eleven numeric brackets this theorem needs are now PROVED IN TREED
+by  `RhAttack.TransNums`  (exact-rational exp/Taylor-series machinery):
 
-  decade-ratio log LOWER bounds, verified via the positive 3-term partial
-  sum of  log x = 2 (u + u^3/3 + u^5/5 + ...)  with  u = (x - 1)/(x + 1)
-  (all terms positive for x > 1, so the partial sum is an exact lower
-  bound):
-    hlog3  :  log 3 > 109/100             [sum3 = 1.09583 > 1.09;
-                                           true 1.09861]
-    hlog10 :  log (10/3) > 119/100        [sum3 = 1.19911 > 1.19;
-                                           true 1.20397]
-    hlogR2 :  log (31946/10000) > 115/100 [sum3 = 1.15755 > 1.15;
-                                           true 1.16146]
-    hlogR3 :  log (50000/15973) > 113/100 [sum3 = 1.13761 > 1.13;
-                                           true 1.14112]
-  log UPPER bounds  (T_i < exp(b_i), via exp series partial sums, large
-  margins;  equivalently  log T_i ≤ b_i):
-    T1 = 1e7     < exp 17   [exp 17 = 2.4155e7]
-    T2 = 3.1946e7 < exp 18  [exp 18 = 6.5660e7]
-    T3 = 1e8     < exp 19   [exp 19 = 1.7848e8]
-    T4 = 3e8     < exp 20   [exp 20 = 4.8517e8]
-    T5 = 1e9     < exp 21   [exp 21 = 1.3188e9]
-    T6 = 3e9     < exp 22   [exp 22 = 3.5849e9]
-    T7 = 1e10    < exp 24   [exp 24 = 2.6510e10]
+  decade-ratio log LOWER bounds  (exp(b) < ratio  via the N = 10 Taylor
+  partial sum plus a geometric tail;  margins +0.86% / +1.39% / +1.14% /
+  +1.11%):
+    log 3 > 109/100,   log (10/3) > 119/100,
+    log (31946/10000) > 115/100,   log (50000/15973) > 113/100
+  log UPPER bounds  (T_i < exp(b_i)  via the same machinery):
+    T1 = 1e7 < exp 17,   T2 = 3.1946e7 < exp 18,   T3 = 1e8 < exp 19,
+    T4 = 3e8 < exp 20,   T5 = 1e9 < exp 21,
+    T6 = 3e9 < exp 22,   T7 = 1e10 < exp 24
 
-Proving these eleven brackets in-tree (exp / Taylor-remainder machinery)
-is a NAMED STRETCH GOAL;  the project convention cites elementary
-transcendental numeric facts as named inputs (cf.  the `hE : exp 1 < 4`
-cited input of `A1Growth.a1_explicit_wire`). -/
-theorem sLadderSublnDrift
-    (hlog3  : (109 : ℝ) / 100 < Real.log 3)
-    (hlog10 : (119 : ℝ) / 100 < Real.log (10 / 3))
-    (hlogR2 : (115 : ℝ) / 100 < Real.log (31946000 / 10000000))
-    (hlogR3 : (113 : ℝ) / 100 < Real.log (100000000 / 31946000))
-    (hL1 : Real.log T1 ≤ 17)
-    (hL2 : Real.log T2 ≤ 18)
-    (hL3 : Real.log T3 ≤ 19)
-    (hL4 : Real.log T4 ≤ 20)
-    (hL5 : Real.log T5 ≤ 21)
-    (hL6 : Real.log T6 ≤ 22)
-    (hL7 : Real.log T7 ≤ 24) :
+The theorem below is therefore unconditional (no numeric premises). -/
+theorem sLadderSublnDrift :
     SL1 / Real.log T1 > SL2 / Real.log T2 ∧
       SL2 / Real.log T2 > SL3 / Real.log T3 ∧
       SL3 / Real.log T3 > SL4 / Real.log T4 ∧
@@ -329,6 +304,21 @@ theorem sLadderSublnDrift
       SL5 / Real.log T5 > SL6 / Real.log T6 ∧
       SL6 / Real.log T6 > SL7 / Real.log T7 ∧
       SL7 / Real.log T7 > SL8 / Real.log T8 := by
+  -- the eleven numeric brackets, proven in-tree (RhAttack.TransNums):
+  have hlog3 : (109 : ℝ) / 100 < Real.log 3 := TransNums.log3_gt_109_100
+  have hlog10 : (119 : ℝ) / 100 < Real.log (10 / 3) :=
+    TransNums.log10div3_gt_119_100
+  have hlogR2 : (115 : ℝ) / 100 < Real.log (31946000 / 10000000) :=
+    TransNums.log_r2_gt_115_100
+  have hlogR3 : (113 : ℝ) / 100 < Real.log (100000000 / 31946000) :=
+    TransNums.log_r3_gt_113_100
+  have hL1 : Real.log T1 ≤ 17 := by dsimp [T1]; exact TransNums.log_1e7_le_17
+  have hL2 : Real.log T2 ≤ 18 := by dsimp [T2]; exact TransNums.log_3_1946e7_le_18
+  have hL3 : Real.log T3 ≤ 19 := by dsimp [T3]; exact TransNums.log_1e8_le_19
+  have hL4 : Real.log T4 ≤ 20 := by dsimp [T4]; exact TransNums.log_3e8_le_20
+  have hL5 : Real.log T5 ≤ 21 := by dsimp [T5]; exact TransNums.log_1e9_le_21
+  have hL6 : Real.log T6 ≤ 22 := by dsimp [T6]; exact TransNums.log_3e9_le_22
+  have hL7 : Real.log T7 ≤ 24 := by dsimp [T7]; exact TransNums.log_1e10_le_24
   have h1l : 0 < Real.log T1 := Real.log_pos (by norm_num [T1])
   have h2l : 0 < Real.log T2 := Real.log_pos (by norm_num [T2])
   have h3l : 0 < Real.log T3 := Real.log_pos (by norm_num [T3])
@@ -478,7 +468,6 @@ theorem sLadderSublnDrift
     have hcomm : SL7 / Real.log T7 * Real.log T8 =
         SL7 * Real.log T8 / Real.log T7 := by
       field_simp [h7l.ne, h8l.ne]
-      <;> ring_nf
     apply (div_lt_iff₀ h8l).mpr
     rw [hcomm]
     exact (lt_div_iff₀ h7l).mpr hc

@@ -109,6 +109,31 @@ set; do not re-derive it from memory.
    transcendental numeric facts, cf.  the `hE : exp 1 < 4` cited input
    of `A1Growth.a1_explicit_wire`). No RH claim: this is the DATA side
    of the clause, exactly in the W2Beyond4 footing.
+7. **0206 (2026-10-28/29): the eleven brackets are PROVED IN-TREE —
+   `sLadderSublnDrift` is now unconditional.**  New module
+   `formal/RhAttack/TransNums.lean` builds the exact-rational
+   exp/Taylor machinery and proves all eleven numeric brackets of 0205
+   with no premises: the seven log-UPPER bounds (`log T_i <= 17,18,
+   19,20,21,22,24`) via `exp b <= finsum(N) + geometric tail`
+   (`exp_eq_tsum_real` + `Real.tsum_le_of_sum_range_le` + a sharp
+   induction with tail ratio `a/(N+2)`; truncation points give
+   margins +10.5%..+46.8%), and the four decade-ratio log-LOWER bounds
+   (`log 3 > 1.09`, `log (10/3) > 1.19`, `log (31946/10000) > 1.15`,
+   `log (50000/15973) > 1.13`) via `exp b < rational` with N = 10
+   (margins +0.86% / +1.39% / +1.14% / +1.11%), each closed by
+   `norm_num` on exact rationals (pins: tmp/transcnums_pins.json).
+   `W2SAtZeros.sLadderSublnDrift` now takes NO numeric premises: the
+   sub-ln-t drift statement (S/log T strictly down at all seven
+   steps, -16.19% total) is a fully in-tree certificate. The 0204-0206
+   flank is therefore complete on the data side: rising (0), concave-
+   in-T (0), sub-ln-t drift (0) — all premise-free, machine-checked.
+   The board re-sweep of the same orbit (37 catalogue records, as_of
+   2026-10-28) confirms the in-tree face (0.8739461) IS the board
+   best — no new B6 candidate. The next named A1 discriminator is the
+   data-free `|DN| <= K` / `hA1` theorem itself, with the higher-T
+   census (dS/d ln t beyond 3e10) as the optional data flank.
+   No RH claim: all of 0205/0206 is the measured/structural data flank
+   of the A1 input.
 
 ## The target (the one open clause)
 

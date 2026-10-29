@@ -406,11 +406,12 @@ Pinned in `formal/RhAttack/W2SAtZeros.lean` (targeted 8706 + full tree
 - `sLadderConcaveInT` (no premises, norm_num on exact pins):  the
   decade increment strictly shrinks at every step - no linear-in-T
   drift in the running max.
-- `sLadderSublnDrift` (eleven named numeric premises, each documented
-  in the module docstring with its verified value and margin):
+- `sLadderSublnDrift` (**unconditional as of 0206**, no premises):
   S(T_i) / log(T_i) strictly decreases at every step; total drift
-  -16.19%.  NAMED STRETCH GOAL: the eleven exp / arctanh brackets
-  in-tree.
+  -16.19%.  The eleven numeric brackets (four decade-ratio log lower
+  bounds, seven log upper bounds) are proved in-tree in
+  `formal/RhAttack/TransNums.lean` (exact-rational exp Taylor
+  machinery + norm_num; margins +0.86%..+46.8%).
 
 Flank reading (data only, no RH claim):  the measured domain
 contradicts O(1)-at-the-zeros, and the coefficient S / log(T) decays

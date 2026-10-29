@@ -265,14 +265,16 @@ Commit a00c7d6.
    zeros.  The DATA-FREE version (K uniform in the frontier) remains
    the single named open theorem - now with its shape quantified: a
    non-constant o(log) increasing ENVELOPE with O(0.03-0.05) bin-
-   scale fluctuations.  0204/0205 deepened the data side:  the RVM
+   scale fluctuations.  0204/0205/0206 deepened the data side:
+   the RVM
    +7/8 vs +3/4 shift is now pinned EXACTLY in-tree (`W2SAtZeros`:
    S = DN - 1/8 + O(1/T), so the census is exactly S(gamma) at the
    zeros), giving the first in-tree |S| <= 2.490066528 on the
    certified 3e10 domain, and the shape of the S-ladder pinned
-   in-tree (`sLadderRising` and `sLadderConcaveInT` premise-free;
-   `sLadderSublnDrift` pins the S/ln T drift -16.19% over eleven
-   named numeric premises) - on the measured domain the data already
+   in-tree, ALL THREE premise-free after 0206 (`sLadderRising`,
+   `sLadderConcaveInT`, and `sLadderSublnDrift` - the last now with
+   its eleven numeric brackets proved in-tree in `TransNums`;
+   S/ln T drift -16.19%) - on the measured domain the data already
    contradicts O(1)-at-the-zeros, in-tree.  No RH claim.
 9. **The second orbit (KANSAS CITY SHUFFLE, IN PROGRESS):**
    `docs/KANSAS-CITY-SHUFFLE-SIEVE-ORBIT-PLAN-2026-10-25.md` — the
