@@ -227,12 +227,31 @@ Commit a00c7d6.
    [Z78]) + RHEnd part B19 (5 theorems; B19.1 closes the slice
    (0.3739461, 0.3739558] in body from [Z78DensityRefined]; targeted
    builds Z78DensityRefined 8729 / RHEnd 8751 / full tree 17450 all
-   green; B16/B17/B18 preserved - pure append). The face is now
-   `hOffC : d0 <= 3739461/10000000` above H (0.3739461 off-line; this
-   step removed fineChainD0max - denRefinedD0max = 97/10000000 =
-   9.7e-6 of face width). History: 0200 wired [Z78FineChain]
-   (0.8739558, face d0 <= 1869779/5000000, step 3.92e-5); 0195 wired
-   [Z78SIL32] (0.873995), formerly [Z78C] (0.8747729897 at 0162). The
+   green; B16/B17/B18 preserved - pure append). 0211 (2026-10-29)
+   SUPERSEDED AGAIN - B6 SEVENTH: PR #94 arvi-density (ArviFoxy,
+   merged 07:51Z) at 43693617/50000000 = 0.87387234 - the new board
+   best (the 0210 re-sweep caught its open-PR state on the
+   bigospeedrun board; it merged before the 0211 catalogue pull
+   as_of 2026-10-29, 41 records, along with the subsumed new
+   records PR #91/92/93). Full second-party replay (tmp/z78s35):
+   stage C 328/328 clean in 326s (all five dependency trees
+   byte-identical to the frozen 0203 copies), stage D: kernel-
+   accepted at the exact rational, axioms {propext,
+   Classical.choice, Quot.sound}, zeta consequence, 0 sorry.
+   In tree: `formal/RhAttack/Z78ArviDensity.lean` (named external
+   input; strict strengthening chain through [Z78DensityRefined]
+   to [Z78]) + RHEnd part B21 (5 theorems; B21.1 closes the slice
+   (0.37387234, 0.3739461] in body from [Z78ArviDensity]; builds
+   Z78ArviDensity 8730 / RHEnd 8761 / full tree 17454 all green;
+   B19/B20 preserved - pure append). The face is now
+   `hOffC : d0 <= 37387234/100000000` above H (0.37387234
+   off-line; this step removed denRefinedD0max - arviD0max =
+   7376/100000000 = 7.376e-5 of face width - the LARGEST single
+   in-tree face shrink of the B-part series). History: 0203 wired
+   [Z78DensityRefined] (0.8739461, step 9.7e-6); 0200 wired
+   [Z78FineChain] (0.8739558, face d0 <= 1869779/5000000, step
+   3.92e-5); 0195 wired [Z78SIL32] (0.873995), formerly [Z78C]
+   (0.8747729897 at 0162). The
    face remains NAMED, not closed; the data edge is a FLANK and never
    closes it; a future board-best record is the next adoption trigger
    (the board moved THREE times in 24h - the B6 sixth-supersession

@@ -531,4 +531,8 @@ residual-pin structure.
     strictly stronger merged record supersedes by this
     same unit (new constant module + B-part restatement +
     independent replay + docs), now a demonstrated
-    conveyor with THREE successful runs.
+    conveyor with SEVEN successful runs (0131/0133, 0142,
+    0162, 0195, 0200, 0203, 0211 - the SEVENTH, 0211, adopting
+    PR #94 arvi-density at 43693617/50000000, replayed in
+    tmp/z78s35: stage C 328/328 in 326s, stage D clean; all five
+    dependency trees byte-identical to the frozen 0203 copies).
