@@ -290,14 +290,14 @@ mean|f(c)-f(c+12)| over the six antipode pairs:
 
 | X      | mean asymmetry | gap~6/gap~18 ratio |
 |---|---|---|
-| 2e6 (0216) | 0.07315 | 2.69 |
+| 2e6 (0216) | 0.07315 | 2.68 |
 | 1e7        | 0.06493 | 2.39 |
 | 1e8        | 0.05602 | 2.11 |
 
 **The front BLOOM DECAYS with X** (an LO-type slow bias, not fixed sieve
 geometry): monotone 0.073 -> 0.065 -> 0.056 over two decades; every pair
-ratio decays (gap~6: 2.69->2.39->2.11; gap~10: 3.08->2.79->2.41; gap~4:
-2.70->2.37->2.07). The 24-adic front bloom is a SLOW-VANISHING bias, same
+ratio decays (gap~6: 2.68->2.39->2.11; gap~10: 3.13->2.79->2.41; gap~4:
+2.68->2.37->2.07). The 24-adic front bloom is a SLOW-VANISHING bias, same
 family as the mod-4 gap bias (0196), not an immutable lattice asymmetry.
 Exact decay form (ln / ln-ln / power) = named LOOM-1b2.
 
