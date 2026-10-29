@@ -525,6 +525,99 @@ single-threaded, 4 cores open, reproducible. G-1/G-2/G-3 scripts are
 named (loom5_splat_field.py, loom6_spline_motion.py,
 loom7_nn_marriage.py) and run after the loom4 marriage results land.
 
+## L6 (0222): THE REFLECTED DREAM WALK (RDW) + THE SINGLE-FILE VISUALIZER
+
+### The owner's progression, made finite (0221 message)
+
+Owner: "0 progresses to 1 when it first reaches itself... one without another
+make 2... from 1 back to zero is +1=>-1 (total moved 2), mark 2... they pass
+1 and need one more so they go back and do 3 (you me and baby makes three)...
+you started with 2 but what if we started with 3? and now we get to 5. and if
+I started with 5 then the dream is for 6 but 7 will appear? why? was 1 passed
+in its own mirror? did something go past one in the back and forth only a
+-1 or +1 time? i am guessing -1? can we write a formula?"
+
+**Decode:** the 0,1,2,3,5,7 sequence = {0,1} ∪ the primes, seen as a
+walker on the parity lattice: the dream step is +1 (the naive "prime every
+integer" expectation), but **the parity anchor (the 50% coin, layer 0, past
+2) kills every +1 dream from an odd mark** - the walk reflects, and the
+marks that survive are the primes. The formula:
+
+    RDW:  a_0 = 2  (the anchor: past 2 all marks are odd)
+          a_{n+1} = a_n + 2 t_n ,   t_n = min { t >= 1 : a_n + 2t is prime }
+
+- gap g_n = a_n - a_{n-1} = 2 t_{n-1};  t = 1 + k with k = the number of
+  EXTRA mirror rounds beyond the forced parity bounce ("what you missed").
+- **Exact structural fact (the 50% made manifest):** between two consecutive
+  marks (both odd), the missed integers split EXACTLY in half: (t-1) evens
+  (killed by the anchor mark 2 - the parity mirrors, the "+1 up" pass,
+  uniform, one killer) and (t-1) odds (killed by AUDIT - the "-1 / look-back"
+  pass: every odd miss m has killer = spf(m) >= 3, and since EVERY prime is a
+  mark, the killer is ALWAYS an earlier mark). "Go back and see what you
+  missed" = literally the audit layer; the mirror genealogy is the sieve.
+- "why 7 and not the dream 6?": 6 is a DOUBLE DEAD - parity (even) AND
+  3-audited (6 = 2x3, the mark 3 already appeared). The walk reflects to 7.
+- "-1 or +1? (owner's guess: -1)": both are real; **+1 is where the ANCHOR
+  lives** (a uniform, always-present parity pass, single killer = 2), and
+  **-1 (the look-back) is where the INFORMATION lives** (the odd misses carry
+  the whole killer genealogy 3,5,7,11,13,...). The guess is right in the
+  sense that the structure is on the return.
+- Honest boundary: the RDW recursion is a FAITHFUL re-expression of the sieve
+  walk (it reproduces the primes exactly), not a shortcut formula. The
+  expectation-level "suggestion of a progression" is Cramer/sieve:
+  E[gap | p] ~ ln p (PNT); locally P(t=k) ~ geometric(2/ln p); the
+  class-conditional refinement is the measured void field (0217 L2B: 100% at
+  N mod 120120). The measured objects above (bloom decay, pair bias, G24
+  excess 0219) are the deviations of the walk from Cramer, class by class.
+
+### The single-file renderable (the owner's "play it like a fractal")
+
+Owner: "note a side quest in a single file to make this renderable somehow,
+with colors, and maybe it plays like a fractal... decent controls for
+changing the angle, view, zoom, mouse controls."
+
+Delivered: **sq/LOOM-VIS.html** - ONE self-contained file (774 KB, no deps,
+no network, open in any browser; sent to the owner over Telegram):
+
+- **Embedded real data** (finite, reproducible - generator
+  scripts/sq/loom_vis_gen.py, template sq/LOOM-VIS-template.html): the last
+  100,000 primes under 1e5 (full table)/1e6/1e7/1e8, windows anchored above
+  2 (the anchor is the boundary, not part of the weave); gaps int16, base64.
+  Integrity verified: p0 + sum(gaps) == pL at every scale; all gaps even;
+  all p0 odd. JS validated with node --check (v22).
+- **Four views** (tabs / keys 1-4):
+  - **TAPE** - the 24-adiic swirl tape: each prime drops an anisotropic
+    streak (sigma_x ~ local median gap = the swirl STRETCHES as the integers
+    progress; sigma_theta = one circle symbol) on the integer x 24-circle
+    lattice; 12-hue class colors; red columns = the even parity mirrors (the
+    visible 50% anchor); drag pan, wheel zoom (centered on cursor), the
+    angle slider tilts the view (shear transform), bloom side-bar (B).
+  - **WHEEL** - the BLOOM(24): 12 petals, warm front / cool back, dashed
+    antipode links, bright ring = asymmetry above mean, breathing + spin.
+  - **WALK** - the RDW made live: primes = green marks, red = parity mirrors,
+    white ticks = the +1 dreams, the walker dot animates (speed slider,
+    space = play/pause), colored dust = the odd misses by killer genealogy
+    (2 red, 3 orange, 5 gold, 7 teal, 11 violet, 13 pink, higher white - M).
+  - **WORD** - the gap-class chirality spiral (dot i at angle 12 x class(i),
+    radius ~ i^0.82; spin/angle + wheel zoom).
+- **The fractal play mode**: the scale ladder IS the playback - the
+  "fractal play" button cycles 1e5 -> 1e6 -> 1e7 -> 1e8 (and Q/W/E/R jump),
+  so the measured scale-behavior plays as the zoom: streak stretch
+  (meanGap 10.43 / 12.74 / 16.05 / 18.42), bloom decay (0.0942 / 0.0766 /
+  0.0600 / 0.0527 - continuing the 0218 ladder), and the 4-adic pair bias
+  (1.2501 / 1.2388 / 1.2095 / 1.1838 - continuing 0196).
+- Keys: 1-4 views, Q/W/E/R scale, space play/pause, M genealogy, B bloom,
+  + / - zoom, 0 recenter, F fullscreen (button).
+- Footer states OFF-BOARD / NO RH CLAIM / real primes.
+
+### loom8b (anchored swirl-tape measurement)
+
+scripts/sq/loom8b_aniso_tape.py: the same tape as a MEASURED object (tropic,
+unit-free aspect, spin table omega_r, own-spin coherence C/L_c, own-spin
+motor fidelity, the 3-way metric phase 1 d(data,pair) vs d(pair,pair) noise
+floor; must re-split 0219: L8 small/married, G24 large/deeper). Running in
+background at the time of writing; results fold into 0223.
+
 ### No-RH-claim discipline (continued)
 
 No RH statement, no hOffCPT2, no A1, no Z78. All numbers finite (X = 1e7,

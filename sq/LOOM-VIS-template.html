@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LOOM — the prime weave (parity-anchored swirl tape) · off-board side quest</title>
+<style>
+  :root { --bg:#07080c; --panel:#0d1017; --ink:#cfd6e4; --dim:#6b7484; --acc:#7fd4c1; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html,body { height:100%; background:var(--bg); color:var(--ink);
+    font:14px/1.45 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; overflow:hidden; }
+  #app { display:flex; flex-direction:column; height:100%; }
+  header { display:flex; align-items:center; gap:14px; padding:8px 14px;
+    background:var(--panel); border-bottom:1px solid #1b2029; flex-wrap:wrap; }
+  header h1 { font-size:14px; letter-spacing:.06em; color:var(--acc); font-weight:600; }
+  header h1 small { color:var(--dim); font-weight:400; }
+  .tabs { display:flex; gap:6px; }
+  .tabs button, .scl button { background:#151a24; color:var(--ink); border:1px solid #232a38;
+    border-radius:6px; padding:4px 10px; font:inherit; font-size:12px; cursor:pointer; }
+  .tabs button.on, .scl button.on { background:#1d4038; border-color:#3a7d6d; color:#d9fff5; }
+  .scl { display:flex; gap:4px; align-items:center; }
+  .scl label { color:var(--dim); font-size:11px; margin-right:4px; }
+  #stats { margin-left:auto; color:var(--dim); font-size:11px; text-align:right; }
+  #stats b { color:var(--ink); font-weight:500; }
+  #stage { position:relative; flex:1; min-height:0; }
+  canvas { position:absolute; inset:0; width:100%; height:100%; display:block; cursor:crosshair; }
+  #hud { position:absolute; left:12px; top:10px; background:rgba(10,12,18,.78);
+    border:1px solid #1f2634; border-radius:8px; padding:8px 12px; font-size:11px;
+    color:var(--dim); max-width:330px; pointer-events:none; }
+  #hud b { color:var(--ink); font-weight:500; }
+  #hud .k { color:var(--acc); }
+  #bar { display:flex; gap:16px; align-items:center; padding:6px 14px; background:var(--panel);
+    border-top:1px solid #1b2029; flex-wrap:wrap; font-size:12px; }
+  #bar label { color:var(--dim); font-size:11px; }
+  #bar input[type=range] { vertical-align:middle; accent-color:var(--acc); }
+  #bar button { background:#151a24; color:var(--ink); border:1px solid #232a38; border-radius:6px;
+    padding:3px 9px; font:inherit; font-size:12px; cursor:pointer; }
+  #bar button.on { background:#1d4038; border-color:#3a7d6d; color:#d9fff5; }
+  #foot { padding:5px 14px; background:#090b10; border-top:1px solid #141922; color:#4c5566;
+    font-size:10.5px; display:flex; gap:18px; flex-wrap:wrap; }
+  #foot b { color:#77839a; font-weight:500; }
+  @media (max-width:800px){ #hud{ display:none; } }
+</style>
+</head>
+<body>
+<div id="app">
+  <header>
+    <h1>LOOM <small>· prime weave · 24-adic swirl tape · parity-anchored</small></h1>
+    <div class="tabs" id="tabs">
+      <button data-v="TAPETAPE" class="on">TAPE</button>
+      <button data-v="WHEEL">WHEEL</button>
+      <button data-v="WALK">WALK</button>
+      <button data-v="WORD">WORD</button>
+    </div>
+    <div class="scl" id="scl">
+      <label>scale (the scale ladder plays as the fractal)</label>
+      <button data-s="0">1e5</button><button data-s="1">1e6</button>
+      <button data-s="2">1e7</button><button data-s="3" class="on">1e8</button>
+    </div>
+    <div id="stats"></div>
+  </header>
+  <div id="stage"><canvas id="cv"></canvas>
+    <div id="hud"></div>
+  </div>
+  <div id="bar">
+    <label>angle (view tilt)
+      <input id="tilt" type="range" min="0" max="75" value="12" style="width:110px"></label>
+    <label id="spinWrap" style="display:none">swirl spin
+      <input id="spin" type="range" min="0" max="360" value="0" style="width:110px"></label>
+    <label id="spdWrap" style="display:none">walk speed
+      <input id="spd" type="range" min="0" max="100" value="30" style="width:110px"></label>
+    <button id="play">▶ play</button>
+    <button id="fractal">⟳ fractal play (scales)</button>
+    <button id="kill">mirrors ✓</button>
+    <button id="bloom">bloom ✓</button>
+    <button id="recenter">⌂ recenter</button>
+    <button id="full">⛶</button>
+  </div>
+  <div id="foot">
+    <span><b>OFF-BOARD SIDE QUEST — NO RH CLAIM.</b> All data = real primes ≤ 1e8 (finite, measured, reproducible).</span>
+    <span><b>TaPE</b> = streaks: integer×24-circle lattice; hue = gap-class (12-wheel); red columns = the even parity mirrors (the 50% anchor); streak σ ∝ local gap (the swirl stretches as the integers progress).</span>
+    <span><b>WHEEL</b> = the 24-adic BLOOM (front = warm, back = cool; bright ring = antipode asymmetry).</span>
+    <span><b>WALK</b> = the reflected dream walk: every +1 dream dies on a parity mirror (red); odd composites are "misses" colored by the mark that explains them (killer genealogy: 2 red · 3 orange · 5 gold · 7 teal · 11 violet · 13 pink · higher white).</span>
+    <span><b>WORD</b> = the gap-class chirality: dot n at angle 12·class(n), radius ∝ n.</span>
+  </div>
+</div>
+<script>
+"use strict";
+/* ================= data (injected by scripts/sq/loom_vis_gen.py) ================= */
+const DATA = __DATA__;
+
+const LANES=[1,5,7,11,13,17,19,23];
+const LANEIDX=new Array(24).fill(-1);
+LANES.forEach((v,i)=>LANEIDX[v]=i);
+const TH=48;                      // theta bins on the 24-circle
+const MAXVW=6000;                 // max visible integers (perf)
+
+/* ---------- b64 (int16 big-endian) decode ---------- */
+function b64toI16(b64){
+  const s=atob(b64); const u=new Uint8Array(s.length);
+  for(let i=0;i<s.length;i++)u[i]=s.charCodeAt(i);
+  const o=new Int16Array(u.length/2);
+  for(let i=0;i<o.length;i++){ let v=(u[2*i]<<8)|u[2*i+1]; if(v>32767)v-=65536; o[i]=v; }
+  return o;
+}
+
+/* ---------- per-scale cache ---------- */
+const SCL=[];
+function scl(i){
+  if(SCL[i])return SCL[i];
+  const d=DATA.scales[i];
+  const g=b64toI16(d.gaps);
+  const n=g.length;
+  const px=new Int32Array(n+1); let a=d.p0; px[0]=a;
+  for(let k=0;k<n;k++){a+=g[k];px[k+1]=a;}
+  const gc=new Int16Array(n);
+  for(let k=0;k<n;k++)gc[k]=(g[k]%24)/2;
+  // prime positions (integers) and class per prime index (class of the following gap)
+  SCL[i]={d,g,n,px,gc,xL:px[n]-px[0],
+    meanGap:d.stats.meanGap,
+    class12Freq:freq(g,12), laneFreq:freq(g,8,true),
+    word:null};
+  return SCL[i];
+}
+function freq(g,A,isLane){
+  const f=new Float64Array(A);
+  for(let k=0;k<g.length;k++){
+    const c=isLane?LANEIDX[(g[k]%24+24)%24]===-1?0:LANEIDX[g[k]%24]:(g[k]%24)/2;
+    if(c>=0&&c<A)f[c]++;
+  }
+  const t=f.reduce((x,y)=>x+y,0)||1;
+  for(let i=0;i<A;i++)f[i]/=t;
+  return f;
+}
+
+/* ---------- color ---------- */
+function hsl2rgb(h,s,l){
+  const a=s*Math.min(l,1-l);
+  const f=n=>{const k=(n+h/30)%12;return l-a*Math.max(-1,Math.min(k-3,9-k,1));};
+  return [f(0)*255,f(8)*255,f(4)*255];
+}
+const CLASS12=[]; for(let c=0;c<12;c++)CLASS12.push(hsl2rgb(c*30,0.72,0.58));
+const KILLERCOL={2:[255,90,90],3:[255,160,60],5:[235,214,80],7:[90,214,190],
+  11:[170,130,255],13:[255,120,200]};
+
+/* ---------- small prime sieve (for the killer genealogy) ---------- */
+const SMALLP=(()=>{const M=10001,s=new Uint8Array(M+1).fill(1);s[0]=s[1]=0;
+  for(let i=2;i*i<=M;i++)if(s[i])for(let j=i*i;j<=M;j+=i)s[j]=0;
+  const o=[];for(let i=2;i<=M;i++)if(s[i])o.push(i);return o;})();
+function killerOf(m){
+  if(m<2)return 0;
+  for(let i=0;i<SMALLP.length;i++){const q=SMALLP[i];if(q*q>m)break;if(m%q===0)return q;}
+  return m;
+}
+
+/* ---------- view state ---------- */
+const cv=document.getElementById('cv'), ctx=cv.getContext('2d');
+let dpr=1,CW=0,CH=0;
+const view={ mode:'TAPE', si:3, x0:0, zoom:20, tilt:12, spin:0, playing:false,
+  fractal:false, kill:true, bloom:true, wx:0, playF:0, pulse:0, fade:1, fadeTo:null };
+function resize(){ dpr=window.devicePixelRatio||1;
+  const r=cv.getBoundingClientRect(); CW=r.width; CH=r.height;
+  cv.width=Math.round(CW*dpr); cv.height=Math.round(CH*dpr); }
+window.addEventListener('resize',resize);
+
+function autoFit(){ const s=scl(view.si); const span=s.xL;
+  view.zoom=Math.max(CW*0.9/span, CW*0.9/MAXVW);
+  view.x0=Math.max(0,span*0.5-CW/(2*view.zoom));
+  view.wx=s.px[s.n-1]-s.px[0]; }
+
+/* ---------- TAPE ---------- */
+const oCanvas=document.createElement('canvas'); const oCtx=oCanvas.getContext('2d');
+let tapeKey='';
+function drawTape(){
+  const s=scl(view.si);
+  const vw=Math.min(MAXVW,Math.ceil(CW/view.zoom)+8);
+  if(view.x0<0)view.x0=0; if(view.x0>s.xL-vw/2)view.x0=Math.max(0,s.xL-vw+2);
+  const f=new Float32Array(vw*TH*3);
+  const sx=Math.max(1.5,s.meanGap/2); const gw=Math.ceil(4*sx);
+  const s0=Math.floor(view.x0)-gw-2, s1=Math.min(s.xL,view.x0+vw+gw+2);
+  for(let k=0;k<=s.n;k++){
+    const xk=s.px[k]-s.px[0];
+    if(xk<s0||xk>s1)continue;
+    if(k>=s.n)break;
+    const c=s.gc[k]; const colr=CLASS12[c];
+    const ox=xk-view.x0;
+    const tcent=c*(TH/12);
+    for(let dx=-gw;dx<=gw;dx++){
+      const col=ox+dx; if(col<0||col>=vw)continue;
+      const gxe=Math.exp(-0.5*dx*dx/(sx*sx));
+      if(gxe<0.01)continue;
+      for(let dy=-6;dy<=6;dy++){
+        const row=(tcent+dy+TH)%TH;
+        const gth=Math.exp(-0.5*dy*dy/3.0);
+        const idx=(col*TH+row)*3;
+        f[idx]+=gxe*gth*colr[0]; f[idx+1]+=gxe*gth*colr[1]; f[idx+2]+=gxe*gth*colr[2];
+      }
+    }
+  }
+  const tkey=scl(view.si)+'|'+Math.floor(view.x0)+'|'+view.zoom.toFixed(4)+'|'+view.tilt;
+  if(tkey===tapeKey && oCanvas.width===vw){ return; }   // nothing changed: blit fast
+  tapeKey=tkey;
+  oCanvas.width=vw; oCanvas.height=TH;
+  const img=oCtx.createImageData(vw,TH);
+  const p0abs=s.d.p0;
+  for(let col=0;col<vw;col++){
+    const xint=p0abs+Math.floor(view.x0)+col;
+    const even=(xint&1)===0;
+    const bgA=even?1:0, bgR=even?30:18, bgG=even?12:17, bgB=even?14:22;
+    for(let row=0;row<TH;row++){
+      const idx=(col*TH+row)*3;
+      const m=f[idx]+f[idx+1]+f[idx+2];
+      let R,G,B;
+      if(m>1e-4){
+        const cr=f[idx]/m*255, cg=f[idx+1]/m*255, cb=f[idx+2]/m*255;
+        const a=Math.min(1,Math.pow(m/(s.meanGap*1.5),0.5))*0.92;
+        R=bgR+(cr-bgR)*a; G=bgG+(cg-bgG)*a; B=bgB+(cb-bgB)*a;
+      } else { R=bgR;G=bgG;B=bgB; }
+      const oidx=(col*TH+row)*4;
+      img.data[oidx]=R; img.data[oidx+1]=G; img.data[oidx+2]=B; img.data[oidx+3]=255;
+    }
+  }
+  oCtx.putImageData(img,0,0);
+  const T=TH_RAD(view.tilt), cosT=Math.cos(T), sh=-Math.sin(T);
+  const hPix=CH*0.86/TH, yTop=CH*0.05;
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  ctx.clearRect(0,0,CW,CH);
+  ctx.fillStyle='#07080c'; ctx.fillRect(0,0,CW,CH);
+  ctx.setTransform(dpr*view.zoom,0,dpr*sh, dpr*hPix*cosT, dpr*0, dpr*(yTop+ (hPix*(1-cosT))*0 ) );
+  ctx.drawImage(oCanvas,0,0);
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  // axis label row
+  ctx.fillStyle='#4c5566'; ctx.font='10px ui-monospace,monospace';
+  const xAt=x=>(x-view.x0)*view.zoom + sh*0;
+  for(let v=Math.ceil(view.x0/100)*100; v<view.x0+CW/view.zoom; v+=100){
+    if(xAt(v)<0||xAt(v)>CW)continue;
+    ctx.fillText(''+(p0abs+v), xAt(v)+2, CH*0.955);
+  }
+  if(view.bloom){
+    // class frequency side bar
+    const bx=CW-14, bh=CH*0.7; const by=CH*0.1;
+    for(let c=0;c<12;c++){
+      const f=s.class12Freq[c];
+      ctx.fillStyle='rgba('+CLASS12[c][0]+','+CLASS12[c][1]+','+CLASS12[c][2]+',0.8)';
+      const hgt=Math.max(1,f*1.6*bh/6);
+      ctx.fillRect(bx,by+c*(bh/12)+ (bh/12-hgt)/2, 8, hgt);
+    }
+  }
+}
+function TH_RAD(d){return d*Math.PI/180;}
+
+/* ---------- WHEEL ---------- */
+function drawWheel(){
+  const s=scl(view.si);
+  const cx=CW/2, cy=CH/2, R=Math.min(CW,CH)*0.38;
+  ctx.setTransform(dpr,0,0,dpr,0,0); ctx.clearRect(0,0,CW,CH);
+  ctx.fillStyle='#07080c'; ctx.fillRect(0,0,CW,CH);
+  const br=view.playing?1+0.05*Math.sin(performance.now()/300):1;
+  const rot=TH_RAD(view.spin);
+  // reference spokes: the 8 lanes
+  ctx.strokeStyle='#1c2431'; ctx.lineWidth=1;
+  for(let i=0;i<8;i++){
+    const a=rot+i*(2*Math.PI/8);
+    ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(cx+Math.cos(a)*R*1.15,cy+Math.sin(a)*R*1.15); ctx.stroke();
+  }
+  let asym=0; const pairs=[];
+  for(let c=0;c<6;c++){const f1=s.class12Freq[c],f2=s.class12Freq[c+6];
+    pairs.push(Math.abs(f1-f2)); asym+=Math.abs(f1-f2);}
+  asym/=6;
+  for(let c=0;c<12;c++){
+    const f=s.class12Freq[c];
+    const front=c<6;
+    const a0=c*(2*Math.PI/12)-Math.PI/12+rot;
+    const a1=(c+1)*(2*Math.PI/12)-Math.PI/12+rot;
+    const len=R*Math.min(1.15,Math.pow(f*12,0.8))*br;
+    const col=front?[255,120+40*(1-c/6)|0,70]:[90,140,255];
+    const diff=Math.abs(s.class12Freq[c]-s.class12Freq[(c+6)%12]);
+    ctx.beginPath(); ctx.moveTo(cx,cy);
+    ctx.arc(cx,cy,len,a0,a1); ctx.closePath();
+    ctx.fillStyle='rgba('+col[0]+','+col[1]+','+col[2]+',0.5)'; ctx.fill();
+    if(diff>asym){ ctx.strokeStyle='rgba(127,212,193,0.9)'; ctx.lineWidth=1.6; ctx.stroke(); }
+    else { ctx.strokeStyle='#232a38'; ctx.lineWidth=1; ctx.stroke(); }
+    // antipode link
+    const c2=(c+6)%12;
+    const a2m=c2*(2*Math.PI/12)+rot;
+    const l2=R*Math.min(1.15,Math.pow(s.class12Freq[c2]*12,0.8))*br;
+    if(c<6){
+      ctx.setLineDash([3,4]); ctx.strokeStyle='rgba(107,116,132,0.5)'; ctx.lineWidth=1;
+      ctx.beginPath(); ctx.moveTo(cx+Math.cos(a2m)*l2,cy+Math.sin(a2m)*l2);
+      ctx.lineTo(cx+Math.cos(a0+Math.PI/12)*len,cy+Math.sin(a0+Math.PI/12)*len); ctx.stroke();
+      ctx.setLineDash([]);
+    }
+    ctx.fillStyle=front?'#ffd2a1':'#a9c4ff'; ctx.font='10px ui-monospace,monospace';
+    const am=a0+Math.PI/12;
+    ctx.fillText(''+(2*(c+1)), cx+Math.cos(am)*(R*1.22)-6, cy+Math.sin(am)*(R*1.22)+3);
+  }
+  ctx.fillStyle='#cfd6e4'; ctx.font='12px ui-monospace,monospace';
+  ctx.fillText('BLOOM(24)  mean|front-back| = '+asym.toFixed(4)+'  (0216/0218: decays with scale 0.073 -> 0.056)',
+    cx-Math.min(CW,CH)*0.42, CH*0.06);
+  ctx.fillText('warm = front gaps (2..12) · cool = back gaps (14..24) · dashed = antipode links · ring = asymmetry above mean',
+    cx-Math.min(CW,CH)*0.42, CH*0.93);
+}
+
+/* ---------- WALK ---------- */
+function firstPrimeAtOrAfter(s,x0){
+  let lo=0,hi=s.n;
+  while(lo<hi){const m=(lo+hi)>>1; if(s.px[m]-s.px[0]<x0)lo=m+1;else hi=m;}
+  return lo;
+}
+function lastPrimeAtOrBefore(s,x1){
+  let lo=0,hi=s.n,ans=0;
+  while(lo<=hi){const m=(lo+hi)>>1;
+    if(s.px[m]-s.px[0]<=x1){ans=m;lo=m+1;}else hi=m-1;}
+  return ans;
+}
+function drawWalk(){
+  const s=scl(view.si);
+  ctx.setTransform(dpr,0,0,dpr,0,0); ctx.clearRect(0,0,CW,CH);
+  ctx.fillStyle='#07080c'; ctx.fillRect(0,0,CW,CH);
+  const vw=Math.min(MAXVW,Math.ceil(CW/view.zoom)+4);
+  const x0=Math.floor(view.x0);
+  const xAt=x=>(x-view.x0)*view.zoom;
+  const yMid=CH*0.52;
+  const k1=firstPrimeAtOrAfter(s,x0), k2=lastPrimeAtOrBefore(s,x0+vw);
+  const markSet=new Set();
+  for(let k=k1;k<=k2;k++)markSet.add(s.px[k]-s.px[0]);
+  const step=1;
+  // parity lattice (the anchor)
+  for(let x=x0; x<x0+vw; x+=step){
+    const X=xAt(x); if(X<-4||X>CW+4)continue;
+    const even=((s.d.p0+x)&1)===0;
+    if(even){ ctx.fillStyle='rgba(180,70,70,0.55)'; ctx.fillRect(X-0.75,yMid-7,1.5,14); }
+    else { ctx.fillStyle='rgba(107,116,132,0.30)'; ctx.fillRect(X-0.5,yMid-4,1,8); }
+  }
+  // odd composites (the misses) colored by killer   [only when zoomed enough]
+  if(view.kill && vw<=12000){
+    if(!s.km)s.km=new Map();
+    for(let x=x0;x<x0+vw;x++){
+      if(markSet.has(x))continue;
+      const v=s.d.p0+x;
+      if(v<4||(v&1)===0)continue;
+      let kk=s.km.get(v);
+      if(kk===undefined){ kk=killerOf(v); s.km.set(v,kk); }
+      const col=KILLERCOL[kk]||[200,200,205];
+      ctx.fillStyle='rgba('+col[0]+','+col[1]+','+col[2]+',0.55)';
+      ctx.fillRect(xAt(x)-1.5,yMid+14,3,3);
+    }
+  }
+  // primes (the marks)
+  for(let k=k1;k<=k2;k++){
+    const X=xAt(s.px[k]-s.px[0]);
+    ctx.fillStyle='#41e08c'; ctx.beginPath(); ctx.arc(X,yMid,2.6,0,7); ctx.fill();
+  }
+  // walker
+  const Xw=xAt(view.wx);
+  if(Xw>-20&&Xw<CW+20){
+    const g=ctx.createRadialGradient(Xw,yMid,0,Xw,yMid,26);
+    g.addColorStop(0,'rgba(127,212,193,0.9)'); g.addColorStop(1,'rgba(127,212,193,0)');
+    ctx.fillStyle=g; ctx.beginPath(); ctx.arc(Xw,yMid,26,0,7); ctx.fill();
+    ctx.fillStyle='#eafff9'; ctx.beginPath(); ctx.arc(Xw,yMid,3.4,0,7); ctx.fill();
+    if(view.pulse>0){
+      ctx.strokeStyle='rgba(65,224,140,'+view.pulse.toFixed(2)+')'; ctx.lineWidth=2;
+      ctx.beginPath(); ctx.arc(Xw,yMid,6+(1-view.pulse)*22,0,7); ctx.stroke();
+    }
+  }
+  // dream ticks (the +1 dreams and mirrors) around the walker
+  for(let d=-6;d<=6;d++){
+    const X=xAt(Math.floor(view.wx)+d);
+    if(X<0||X>CW)continue;
+    ctx.fillStyle=Math.abs(d)<1?'rgba(255,255,255,0.9)':'rgba(255,255,255,0.25)';
+    ctx.fillRect(X-0.6,yMid-24,1.2,9);
+  }
+  // labels
+  ctx.fillStyle='#4c5566'; ctx.font='10px ui-monospace,monospace';
+  const lbl=Math.max(100,Math.ceil(100/(CW/view.zoom)*10));
+  for(let v=Math.ceil(view.x0/lbl)*lbl; v<view.x0+vw; v+=lbl){
+    const X=xAt(v); if(X<0||X>CW)continue;
+    ctx.fillText(''+(s.d.p0+v), X+2, CH*0.9);
+  }
+  ctx.fillText('marks = primes · red = parity mirrors (even, dead by the 50% anchor) · colored dust = misses by killer',
+    12, CH*0.07);
+}
+
+/* ---------- WORD ---------- */
+function buildWord(s){
+  if(s.word)return s.word;
+  const W=1400;
+  const wc=document.createElement('canvas'); wc.width=W; wc.height=W;
+  const c=wc.getContext('2d');
+  c.fillStyle='#07080c'; c.fillRect(0,0,W,W);
+  const cx=W/2, cy=W/2, R=W*0.48;
+  c.strokeStyle='#141922';
+  for(let r=0;r<4;r++){c.beginPath();c.arc(cx,cy,R*(r+1)/4,0,7);c.stroke();}
+  const n=s.n;
+  c.lineWidth=1;
+  let prevX=cx,prevY=cy;
+  for(let i=0;i<n;i++){
+    const f=Math.pow(i/n,0.82);
+    const a=2*Math.PI*s.gc[i]/12 + i*0.00012;
+    const x=cx+Math.cos(a)*R*f, y=cy+Math.sin(a)*R*f;
+    c.strokeStyle='#10141c';
+    c.beginPath(); c.moveTo(prevX,prevY); c.lineTo(x,y); c.stroke();
+    const col=CLASS12[s.gc[i]];
+    c.fillStyle='rgba('+col[0]+','+col[1]+','+col[2]+',0.95)';
+    c.fillRect(x-1.1,y-1.1,2.2,2.2);
+    prevX=x;prevY=y;
+  }
+  s.word=wc;
+  return s.word;
+}
+function drawWord(){
+  const s=scl(view.si);
+  const img=buildWord(s);
+  ctx.setTransform(dpr,0,0,dpr,0,0); ctx.clearRect(0,0,CW,CH);
+  ctx.fillStyle='#07080c'; ctx.fillRect(0,0,CW,CH);
+  const R=Math.min(CW,CH)*view.zoom/20;
+  ctx.save();
+  ctx.translate(CW/2,CH/2);
+  ctx.rotate(TH_RAD(view.spin)/10);
+  ctx.drawImage(img,-R,-R,R*2,R*2);
+  ctx.restore();
+  ctx.fillStyle='#4c5566'; ctx.font='11px ui-monospace,monospace';
+  ctx.fillText('dot i = gap class of prime i (angle = 12-wheel) · radius ∝ i^0.82 · spin: A slider · zoom: wheel',12,CH*0.06);
+}
+
+/* ---------- stats / hud ---------- */
+let statT=0;
+function stats(){
+  const s=scl(view.si);
+  const now=performance.now();
+  if(now-statT<200)return; statT=now;
+  document.getElementById('stats').innerHTML=
+    'window <b>'+fmtN(s.d.p0)+'..'+fmtN(s.px[s.n])+'</b> · n=<b>'+s.n.toLocaleString()+'</b> · '+
+    'mean gap <b>'+s.meanGap.toFixed(2)+'</b> · bloom asym <b>(see WHEEL)</b>';
+  const hud={
+    TAPETAPE:'<b>TAPE</b> — drag: pan · wheel: zoom · <span class="k">A</span>-slider: tilt the view.<br>'+
+      'streak σ ∝ local median gap (the swirl <b>stretches as the integers progress</b>).<br>'+
+      'red columns = even integers = the parity mirrors (the 50% anchor, layer 0).<br>'+
+      'colors = 12 gap-classes on the 24-circle (antipodes 6 apart; the BLOOM is the front bias).',
+    WHEEL:'<b>WHEEL</b> — the 24-adic BLOOM of the current window.<br>front (warm) beats back (cool) at finite scale; the asymmetry <b>decays with scale</b> (0218: 0.073→0.056 across 2e6→1e8).',
+    WALK:'<b>WALK</b> — the reflected dream walk.<br>every <b>+1 dream dies on a parity mirror</b> (the 50% anchor);<br>odd composites = misses, colored by the earlier mark that explains them<br>(go back and see what you missed). <span class="k">space</span> play/pause · M genealogy.',
+    WORD:'<b>WORD</b> — the gap-class chirality of the sequence.<br>The swirl: as the integers progress, the class angle drifts; its memory is the measured pair law (0219: MARRIED at lane resolution).'}
+  document.getElementById('hud').innerHTML=hud[view.mode]||'';
+}
+function fmtN(x){ 
+  if(x>=1e8)return (x/1e8).toFixed(3)+'e8';
+  if(x>=1e4)return (x/1e3).toFixed(1)+'e3';
+  return ''+x;
+}
+
+/* ---------- controls ---------- */
+document.querySelectorAll('#tabs button').forEach(b=>b.onclick=()=>{
+  view.mode=b.dataset.v;
+  document.querySelectorAll('#tabs button').forEach(x=>x.classList.toggle('on',x===b));
+  document.getElementById('spinWrap').style.display= view.mode==='WORD'?'inline':'none';
+  document.getElementById('spdWrap').style.display= view.mode==='WALK'?'inline':'none';
+  if(view.mode==='WALK'){ const s=scl(view.si); view.wx=s.xL*0.5; }
+});
+document.querySelectorAll('#scl button').forEach(b=>b.onclick=()=>setScale(+b.dataset.s));
+function setScale(i){
+  view.si=i;
+  document.querySelectorAll('#scl button').forEach(x=>x.classList.toggle('on',+x.dataset.s===i));
+  autoFit();
+  const s=scl(i);
+  view.wx=s.xL*0.5;
+}
+let drag=null;
+cv.addEventListener('pointerdown',e=>{drag={x:e.clientX,y:e.clientY,x0:view.x0,spin:view.spin,mode:view.mode};cv.setPointerCapture(e.pointerId);});
+cv.addEventListener('pointermove',e=>{
+  if(!drag)return;
+  const dx=e.clientX-drag.x, dy=e.clientY-drag.y;
+  if(drag.mode==='WHEEL'||drag.mode==='WORD'){ view.spin=(drag.spin+dx*0.3+dy*0.15+360)%360;
+    document.getElementById('spin').value=view.spin|0; }
+  else view.x0=drag.x0-dx/view.zoom;
+});
+cv.addEventListener('pointerup',()=>drag=null);
+cv.addEventListener('dblclick',autoFit);
+cv.addEventListener('wheel',e=>{
+  e.preventDefault();
+  const f=Math.pow(1.12,-Math.sign(e.deltaY));
+  const mx=e.offsetX;
+  const anchor=view.x0+mx/view.zoom;
+  view.zoom=Math.max(0.05,Math.min(400,view.zoom*f));
+  view.x0=anchor-mx/view.zoom;
+},{passive:false});
+document.getElementById('tilt').addEventListener('input',e=>{view.tilt=+e.target.value;});
+document.getElementById('spin').addEventListener('input',e=>view.spin=+e.target.value);
+document.getElementById('spd').addEventListener('input',e=>{});
+function playOn(){document.getElementById('play').classList.toggle('on',view.playing);
+  document.getElementById('play').textContent=view.playing?'⏸ pause':'▶ play';}
+document.getElementById('play').onclick=()=>{view.playing=!view.playing;playOn();};
+document.getElementById('fractal').onclick=function(){view.fractal=!view.fractal;this.classList.toggle('on',view.fractal);
+  if(view.fractal)lastFrac=performance.now();};
+document.getElementById('kill').onclick=function(){view.kill=!view.kill;this.classList.toggle('on',view.kill);};
+document.getElementById('bloom').onclick=function(){view.bloom=!view.bloom;this.classList.toggle('on',view.bloom);};
+document.getElementById('recenter').onclick=autoFit;
+document.getElementById('full').onclick=()=>{document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();};
+window.addEventListener('keydown',e=>{
+  if(e.code==='Space'){view.playing=!view.playing;playOn();e.preventDefault();}
+  if(e.key==='1')document.querySelector('#tabs button[data-v="TAPETAPE"]').click();
+  if(e.key==='2')document.querySelector('#tabs button[data-v="WHEEL"]').click();
+  if(e.key==='3')document.querySelector('#tabs button[data-v="WALK"]').click();
+  if(e.key==='4')document.querySelector('#tabs button[data-v="WORD"]').click();
+  if(e.key>='q'&&e.key<='r'){const m={q:0,w:1,e:2,r:3}[e.key];setScale(m);}
+  if(e.key==='m'||e.key==='M')document.getElementById('kill').click();
+  if(e.key==='b'||e.key==='B')document.getElementById('bloom').click();
+  if(e.key==='+'||e.key==='=')view.zoom*=1.3;
+  if(e.key==='-')view.zoom/=1.3;
+  if(e.key==='0')autoFit();
+});
+
+/* ---------- animation ---------- */
+let lastFrac=0;
+function frame(){
+  // walker physics
+  if(view.playing&&view.mode==='WALK'){
+    const s=scl(view.si);
+    const sp=Math.pow(10,document.getElementById('spd').value/100*3-1); // 0.1..10 int/frame
+    view.wx+=sp*(view.zoom<0.5?4:1);
+    const ax=Math.floor(view.wx);
+    const k=firstPrimeAtOrAfter(s,ax);
+    if(s.px[k]===s.px[0]+ax){ view.pulse=1; }
+    if(view.wx>s.xL){view.wx=0;}
+    if(view.pulse>0)view.pulse-=0.03;
+    // keep walker in view
+    const half=CW/(2*view.zoom);
+    if(view.wx>view.x0+half*0.95)view.x0=view.wx-half*0.95;
+    if(view.wx<view.x0+half*0.05)view.x0=view.wx-half*0.05;
+  }
+  if(view.fractal){
+    const now=performance.now();
+    if(now-lastFrac>3500){ lastFrac=now; setScale((view.si+1)%DATA.scales.length); }
+  }
+  if(view.mode==='TAPE')drawTape();
+  else if(view.mode==='WHEEL')drawWheel();
+  else if(view.mode==='WALK')drawWalk();
+  else drawWord();
+  stats();
+  requestAnimationFrame(frame);
+}
+
+/* ---------- boot ---------- */
+document.getElementById('kill').classList.add('on');
+document.getElementById('bloom').classList.add('on');
+resize(); autoFit();
+// prewarm the largest scale decode
+scl(view.si);
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>
