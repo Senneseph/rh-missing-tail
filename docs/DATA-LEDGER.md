@@ -430,3 +430,10 @@ measured wire cost 2.615066528 . (17/8) < 17 (pin_face_wire_3e10,
 margin ~3x); and face_unbounded proves the gap is the CONSTANTNESS of
 the growth function, not a numeric.  The absolute clause hA1 is the
 growth wire at constant G: NAMED, NOT CLOSED, no RH claim.
+
+0208 sharpening (A1Growth section 8, no premises):  the interval is
+now [2.490066528, 6.0162)  (G_explicit 3e10 < 30081/5000,  true value
+6.0032  -  within  0.013  of  sharp,  via  the  sharp  frontier
+brackets  log 3e10 < 24.2  /  log log 3e10 < 3.2  in  TransNums),  and
+the  data-free  wire  constant  sharpens  to  <  15  (596377/40000  =
+14.909425).

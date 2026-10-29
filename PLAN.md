@@ -281,10 +281,11 @@ Commit a00c7d6.
    verified end to end via three new `TransNums` frontier log pins,
    the single cited input left being the Trudgian bound A1G-5 itself)
    and QUANTIFIED the A1 terminal face in-tree:  any absolute K on the
-   measured 3e10 domain lies in [2.490066528, 7),  and `face_unbounded`
-   proves the gap is the CONSTANTNESS of the growth function G (the
-   absolute clause is the growth wire at constant G),  not a numeric.
-   No RH claim.
+   measured 3e10 domain lies in [2.490066528, 6.0162)  (0208 sharp:
+   G_explicit 3e10 < 30081/5000,  within 0.013 of the sharp value 6.0032;
+   wire constant < 15),  and `face_unbounded` proves the gap is the
+   CONSTANTNESS of the growth function G  (the absolute clause is the
+   growth wire at constant G),  not a numeric.  No RH claim.
 9. **The second orbit (KANSAS CITY SHUFFLE, IN PROGRESS):**
    `docs/KANSAS-CITY-SHUFFLE-SIEVE-ORBIT-PLAN-2026-10-25.md` — the
    owner's crafted creation: a Fourier-compatible Sieve of

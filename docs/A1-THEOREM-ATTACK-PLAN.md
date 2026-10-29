@@ -166,6 +166,15 @@ set; do not re-derive it from memory.
    strictly rising at every ladder step, so the interval's lower end
    only grows with the data. The face is NAMED, NOT CLOSED; no RH
    claim.
+   0208 SHARPENS the interval: the coarse 25/4 log brackets are
+   replaced by the sharp frontier brackets log 3e10 < 24.2 (finsum
+   margin x1.0234) and log log 3e10 < 3.2, pinning
+   G_explicit 3e10 < 30081/5000 = 6.0162 (true value 6.0032 — within
+   0.013 of sharp; the pin must be the EXACT bracketed sum, not a
+   rounded cap, or the downstream wire inequality cannot close — the
+   6.1-cap attempt died exactly there). The face interval is now
+   [2.490066528, 6.0162) and the data-free wire constant sharpens to
+   < 15 (596377/40000 = 14.909425 at the step).
 
 ## The target (the one open clause)
 

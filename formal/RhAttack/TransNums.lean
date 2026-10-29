@@ -440,4 +440,60 @@ theorem log_3e10_gt_24 : 24 < log (30000000000 : ℝ) := by
     log_lt_log (exp_pos 24) exp_24_lt_3e10
   simpa [log_exp] using h
 
+/-!
+##  The sharp 3e10 frontier log pins  (0208)
+
+Sharpened versions  of  the  0207  brackets  at  the  frontier,
+for  face-interval  tightening:
+
+    log (3e10)      <  242/10  = 24.2     (via  3e10  <
+                               finsum(24.2, 32)  <=  exp 24.2,
+                               margin  x1.0234)
+    log (log 3e10)  <  32/10   = 3.2       (via  log 3e10
+                               <  24.2  <  exp 3.2,
+                               finsum(3.2, 8)  =  428771741/17578125
+                               about  24.3945)
+
+Exact-rational  norm_num  throughout;  no  external  input.  -/ --
+
+-- finsum(242/10, 32)  >  3e10  (exact  rational,  margin  x1.0234).
+theorem exp242_finsum_gt_3e10 :
+    (∑ n ∈ Finset.range (32 + 1), ((242/10 : ℝ)) ^ n / n !) > 30000000000 := by
+  norm_num
+
+-- 3e10  <  exp (242/10).
+theorem exp_242_gt_3e10 : (30000000000 : ℝ) < exp (242/10 : ℝ) := by
+  have h1 : (∑ n ∈ Finset.range (32 + 1), ((242/10 : ℝ)) ^ n / n !) > 30000000000 :=
+    exp242_finsum_gt_3e10
+  have h2 : (∑ n ∈ Finset.range (32 + 1), ((242/10 : ℝ)) ^ n / n !) <= exp (242/10 : ℝ) :=
+    expFinsum_le_exp (242/10 : ℝ) (by norm_num) 32
+  exact lt_of_lt_of_le h1 h2
+
+-- log (3e10)  <  242/10  (premise-free  sharp  upper  bracket,  0208).
+theorem log_3e10_lt_242 : log (30000000000 : ℝ) < (242/10 : ℝ) := by
+  rw [log_lt_iff_lt_exp (by norm_num : (0 : ℝ) < 30000000000)]
+  exact exp_242_gt_3e10
+
+-- finsum(32/10, 8)  =  428771741/17578125  >  242/10  =  24.2.
+theorem exp32_finsum_gt_242 :
+    (∑ n ∈ Finset.range (8 + 1), ((32/10 : ℝ)) ^ n / n !) > (242/10 : ℝ) := by
+  norm_num
+
+-- 242/10  <  exp (32/10).
+theorem exp_32_gt_242 : (242/10 : ℝ) < exp (32/10 : ℝ) := by
+  have h1 : (∑ n ∈ Finset.range (8 + 1), ((32/10 : ℝ)) ^ n / n !) > (242/10 : ℝ) :=
+    exp32_finsum_gt_242
+  have h2 : (∑ n ∈ Finset.range (8 + 1), ((32/10 : ℝ)) ^ n / n !) <= exp (32/10 : ℝ) :=
+    expFinsum_le_exp (32/10 : ℝ) (by norm_num) 8
+  exact lt_of_lt_of_le h1 h2
+
+-- log (log 3e10)  <  32/10  (premise-free  sharp  upper  bracket,  0208).
+theorem log_log_3e10_lt_32 : log (log (30000000000 : ℝ)) < (32/10 : ℝ) := by
+  have hL : log (30000000000 : ℝ) < (242/10 : ℝ) := log_3e10_lt_242
+  have hmid : log (30000000000 : ℝ) < exp (32/10 : ℝ) := hL.trans exp_32_gt_242
+  have hpos : (0 : ℝ) < log (30000000000 : ℝ) :=
+    log_pos (by norm_num : (1 : ℝ) < 30000000000)
+  rw [log_lt_iff_lt_exp hpos]
+  exact hmid
+
 end TransNums

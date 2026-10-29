@@ -470,4 +470,51 @@ theorem face_unbounded (hE : exp 1 < 4) (K : ℝ) : ∃ T, K < G_explicit T := b
         nlinarith [hUll, (by norm_num : (0 : ℝ) ≤ 275/1000)]
       _ = G_explicit (exp U) := by rw [G_explicit, log_exp]
 
+/-! ## 8. Sharp face constants at the frontier (0208)
+
+The 0207 face interval [2.490066528, 7) is sharpened using the sharp
+frontier log brackets (24.2 / 3.2, TransNums 0208):
+
+    G_explicit (3e10) < (111/1000) . (242/10) + (275/1000) . (32/10)
+                       + 2450/1000  =  30081/5000  =  6.0162
+
+(true value 6.0032 to the eye - within 0.013 of the sharp value), so
+any absolute K valid on the measured 3e10 domain now lies in
+[2.490066528, 6.0162), and the data-free wire constant sharpens from
+< 17 to  (30081/5000 + 1) . (17/8) = 596377/40000 = 14.909425 < 15.
+All premise-free (only cited input: Trudgian A1G-5). The face
+remains NAMED, NOT CLOSED; no RH claim. -/ --
+
+/-- G_explicit (3e10) < 30081/5000 = 6.0162 (premise-free, 0208). -/ --
+theorem pin_explicit_3e10_sharp :
+    G_explicit (30000000000 : ℝ) < (111/1000 : ℝ) * (242/10 : ℝ) +
+      (275/1000 : ℝ) * (32/10 : ℝ) + 2450/1000 := by
+  rw [G_explicit]
+  nlinarith [TransNums.log_3e10_lt_242, TransNums.log_log_3e10_lt_32,
+    (by norm_num : (0 : ℝ) ≤ 111/1000), (by norm_num : (0 : ℝ) ≤ 275/1000)]
+
+/-- The numeric identity behind the pin: the exact sum is 6.0162. -/ --
+theorem pin_explicit_3e10_sharp_val :
+    (111/1000 : ℝ) * (242/10 : ℝ) + (275/1000 : ℝ) * (32/10 : ℝ) + 2450/1000
+      = 30081/5000 := by
+  norm_num
+
+/-- (G_explicit 3e10 + 1) . (17/8) < 15 (premise-free, 0208). -/ --
+theorem pin_explicit_wire_3e10_sharp :
+    (G_explicit (30000000000 : ℝ) + 1) * ((17/8 : ℝ)) < 15 := by
+  have hpin : G_explicit (30000000000 : ℝ) < (30081 : ℝ) / 5000 := by
+    simpa [pin_explicit_3e10_sharp_val] using pin_explicit_3e10_sharp
+  calc (G_explicit (30000000000 : ℝ) + 1) * ((17/8 : ℝ))
+      < ((30081 : ℝ) / 5000 + 1) * ((17/8 : ℝ)) :=
+        by nlinarith [hpin, (by positivity : (0 : ℝ) < 17/8)]
+    _ = (596377 : ℝ) / 40000 := by ring
+    _ < 15 := by norm_num
+
+/-- Sharp S-side face pin (0208): the measured |S| frontier pin sits
+strictly below the sharp data-free certificate - any absolute K valid
+on the measured 3e10 domain lies in [2.490066528, 6.0162), both ends
+machine-checked, no premises. -/ --
+theorem pin_face_S_sharp_3e10 : sPinMeasured0207 < (30081 : ℝ) / 5000 := by
+  norm_num [sPinMeasured0207]
+
 end A1G
