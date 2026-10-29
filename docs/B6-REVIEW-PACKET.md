@@ -554,3 +554,41 @@ residual-pin structure.
      at 0212: detection correct (board QUIET at the anchor, 41 records),
      --record fire path correct, 7/7 build-cone deps of the 0211 record
      resolve + byte-identical. No RH claim.
+
+## Addendum 0215 (2026-10-29): first PENDING of the automated era + the alert-path fix
+
+- **PENDING (level 2, live since 2026-10-29T12:59:28Z):** PR #95
+  `GTimG/QuasiRiemannTracker` (author **josephbebel**, new contributor;
+  head `joint-detector-source-curves-8738357029730854`, submission
+  `submissions/2026-10-29-joint-detector-source-curves/`) declares
+  `QRH-Bound: 4369178514865427/5000000000000000 = 0.8738357029730854` —
+  **strictly below** the in-tree face 43693617/50000000 (a merge would be
+  the **EIGHTH** supersession, step 3.6637027e-5). Claim: Dirichlet
+  nonvanishing at that Re(s) for all moduli/characters (no analytic or
+  source-provider premise); machinery: ordinary-source sextic norm +
+  amplitude gap, repeated-mark counting, Hecke feedback, finite source
+  transfer on certified polynomial curves (459-piece curve, 284-window
+  return, 4,260 admission guards, 1,826 HIGH regions); deps: OpenAI,
+  Hailey Collet, ArviFoxy, Sil, Jacob Sussman. Self-declared: compiled
+  locally on Lean 4.34.1, axiom closure {propext, Classical.choice,
+  Quot.sound}; **isolated rebuild "still in progress"** (unverified claim —
+  the conveyor re-proves everything from the pinned commit regardless).
+  Audit packet: `tmp/b6audit/tracker/pr95_pending_audit.json`.
+- **Protocol (unchanged):** UNMERGED = claimed, not board-best. The
+  official catalogue (41 records, top = arvi-density 0.87387234) remains
+  the gate; **no B6 fire**. On a merged record below the anchor (watcher
+  exit 10) the conveyor is one command:
+  `python3 scripts/rh/b6/b6_preflight.py`.
+- **Operational defect found & fixed (0215):** the watcher's
+  pending-detail `print` formatted the open-PR row's bound with
+  `{b:.9f}` on a value that is `None` by construction → `TypeError`
+  (rc=1) **before** the `alert(2, …)` write, silently skipping the
+  level-2 alert + `B6-PENDING-*` marker for exactly the 3 cycles
+  13:02/13:07/13:12Z (the error window was 15 minutes, not hours: 41
+  rc=0 before, 73 correct rc=11 after the fix). Patch (both the tracked
+  `scripts/rh/b6/tracker_watch2.py` and the working copy): n/a-safe
+  format + `try/except` so no log-line bug can ever swallow an alert,
+  alert write kept authoritative. Daemon re-deployed FULLY DETACHED at
+  19:22:34Z (`setsid nohup`, session leader — an earlier foreground
+  restart died with its session; the detached pattern survives turn
+  cleanup): pid 2139718, first cycle rc=11 correct.

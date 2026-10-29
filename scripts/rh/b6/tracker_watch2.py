@@ -185,11 +185,15 @@ def main():
     print(f'[watch] no merged record below the anchor; [Z78ArviDensity] '
           f'remains the in-tree face.')
     if pending:
-        for src, b, why in pending:
-            print(f'[watch]   PENDING early signal: {src} {b:.9f} ({why})')
-        alert(2, f'pending stronger bound (' +
-                 (f'{pending[0][1]:.9f} ' if pending[0][1] is not None else '') +
-                 f'({pending[0][2]})', pending)
+        try:
+            for src, b, why in pending:
+                bs = f'{b:.9f}' if b is not None else 'n/a'
+                print(f'[watch]   PENDING early signal: {src} {bs} ({why})')
+        except Exception as e:   # a log-line bug must never swallow the alert
+            print(f'[watch]   (pending detail print failed: {e})')
+        extra = (f'{pending[0][1]:.9f} '
+                 if pending[0][1] is not None else '')
+        alert(2, f'pending stronger bound: {extra}({pending[0][2]})', pending)
         sys.exit(11)
     sys.exit(0)
 
