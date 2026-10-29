@@ -156,6 +156,22 @@ Commit a00c7d6.
   adds O2 (finite explicit-formula identity, pending provenance
   fetch) and O4 (band phase diagram, measured). Does not gate the
   critical path.
+- `LOOM-PENROSE-SIDE-QUEST-2026-10-29.md` (docs/) — OFF-BOARD side-quest
+  tracking file: the owner's "wheel connected to a loom" idea, measured.
+  LOOM-0 (0216): the prime gap-class words (A2 parity, A6 = gap/2 mod 6) —
+  NOT a Penrose substitution loom (A2 has maximal 2^n complexity; A6 ~4^n
+  exponential, not linear; no phi-inflation symmetry), but a real multi-order
+  loom tension (H_m = 1.750/1.523/1.417/1.369, depth 0-3) and a 24-adic FRONT
+  BLOOM (every front gap class c<12 beats its antipode c+12 mod 24, e.g.
+  gap~6 0.194 vs gap~18 0.072 = 2.7x; the anchor stays 4/4 balanced 0.4998
+  — the wheel is balanced, the loom blooms). L2 (0217): the full-tail
+  prediction machine — next 24-adic prime (lane) predictability: one-step gap
+  law 0.2205 top-1 + whole-tail due-lane renewal 0.1551 (~74 sigma); the
+  future void field (where primes can't be) is a fixed phase lattice (100% at
+  N mod 120120 = lcm(24, 30030); the 24-frame keeps 52.6%); what's allowed
+  through = the sieve gate ladder (91% @ y=1223, W=200). Named next: L2B',
+  L2C', L2D (zero-origin cuts), L3 (lane-resolution subsumed-vs-new),
+  LOOM-1/1b/2. No RH claim; does not gate the critical path.
 - `DISCOVERY_LOG.md` — the chronicle: approach + the pieces as found
   (in order) + how they combine; important contradictions recorded;
   no setbacks; appended as evidence files land.
