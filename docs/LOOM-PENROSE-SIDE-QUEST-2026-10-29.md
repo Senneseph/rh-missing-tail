@@ -208,11 +208,18 @@ the residual 9% (named L2C': the window ladder W = 1e3, 1e4).
 - **LOOM-1b (bloom scale):** BLOOM(24) front/antipode ratios - **DONE
   0218: DECAYS** (0.073 -> 0.065 -> 0.056 over 2e6 -> 1e8) = an LO-type slow
   bias, not fixed sieve geometry; the exact decay form feeds LOOM-1b2.
-- **LOOM-1b2 (NEW 0218):** the FINAL adjudication - simulate the full
-  Landau-Lodsmann/LO k-consecutive-gap joint law (not just the pair) and
-  compare its H_m ladder to the real H_m at X=2e6/1e7. LD matches => the
-  loom IS the sieve (subsumed, 0098 Euler-action); real < LD => excess
-  structure beyond the sieve law (a genuinely new object).
+- **LOOM-1b2a (PAIR-LAW MARRIAGE, DONE 0219):** the pair law (2-gap bias
+  as an order-1 generator, fit at each scale) vs the real H3 ladder, at
+  3 alphabets x 3 scales. **LANE word MARRIED** at 1e7/1e8 (perfect -0.0004
+  at 1e8); FINER gap-class words (A6/G24) NOT subsumable even at 1e8
+  (A6 -0.146 35SE; G24 -0.130 9SE) but the excess DECAYS with X. The deeper
+  weave lives in the fine 24-adic gap resolution; its two horn explanations
+  (slow-law bias vs LD k-tuple k>=3 correlation) are separated by G-1 + G-3.
+- **LOOM-1b2b (LD k-tuple joint generator, the FINAL adjudicator):**
+  simulate the full Landau-Lodsmann/LO k-consecutive-gap joint law (not just
+  the pair) and compare its H_m ladder to the real H_m at 2e6/1e7/1e8. LD
+  matches => the loom IS the sieve (subsumed, 0098 Euler-action); real < LD
+  => excess structure beyond the sieve law (a genuinely new object).
 - **LOOM-2 (sieve-as-substitution model):** formalize the sieve cascade as a
   substitution; measure its complexity/entropy; test "the loom IS the sieve"
   as a theorem-statement candidate (off-board, in its own file).
@@ -221,6 +228,28 @@ the residual 9% (named L2C': the window ladder W = 1e3, 1e4).
   Deferred: the hole was t-flat (0214) ⇒ no prediction channel *from* the
   hole; the cross-correlation would use the *class-conditional* frames
   instead — named, not yet run.
+## G-lane (0220): the Gaussian-splat field trip (see L5 for the full synthesis)
+Owner's "boom as a Gaussian splat / neural nets / movement" question. Three
+named programs (scripts loom5/6/7), each a translation of a 2024-2025
+graphics trick into the prime weave:
+- **G-1 (MIP + ANALYTIC splat field):** raw-bin vs analytic window-integral
+  measurement of the 24-adic front/antipode asymmetry. Tests whether the L1b
+  *decay* (0.073->0.056) is true LO-law decay or **mip-blur** (footprint
+  widens as ln X while the measurement window widens with it). Falsifiable:
+  corrected asymmetry flat => fixed geometry, widening lens; still decays
+  => genuine slow bias, now clean. THE priority.
+- **G-2 (SPLINE MOTION / ADC-GS anchors):** the weave statistics as a moving
+  splat field vs X; fit few cubic-Hermite control points + rank-decompose the
+  pair-matrix EVOLUTION (anchor-driven group drifts + local residuals).
+  "The motive for movement": how many control points does the weave's
+  evolution need (2 = pure LO slow law; >=3 = an extra degree of freedom)?
+- **G-3 (the BABY model / NN marriage):** the third of "you me and baby
+  makes three". Interpolated k-grams (k=1..4) + a small hand-rolled numpy
+  GRU (no torch on box), fit on 80% of the tail, held-out per-symbol nats =
+  extrapolated entropy H_nn. Saturated at the pair level => pair law IS the
+  loom; still improving with context => deep weave, and the depth is
+  measured. NN is a MEASUREMENT INSTRUMENT (model-capacity ladder), not a
+  proof object.
 
 ## L3 (0218): PATH COMPLETION - the owner's idea, all named branches executed
 
@@ -335,6 +364,166 @@ adjudication], LOOM-1b2 decay-form fit, LOOM-2 sieve-as-substitution,
 wheel-loom cross-test [hole t-flat]). The idea is explored TO THE FULL
 NAMED DEPTH; what remains is the named refinements + the LOOM-1b2
 adjudication.
+
+### L4 (0219): THE MARRIAGE TEST (first cut) - pair law vs the full weave
+
+Owner (2026-10-29): "let's do the pair law and let these two get married
+already!" Script scripts/sq/loom4_pair_law_marriage.py; output
+tmp/loom/loom4_out.txt. Pair law = the measured 2-consecutive-gap bias as an
+order-1 Markov generator fitted at EACH scale (the classical LO/Maynard-Tao
+pair, empirical); marriage test = does the model's H3 (beyond the pair)
+equal the REAL H3? Three alphabets x three scales (2e6/1e7/1e8).
+
+| X | alphabet | REAL H3 (+/-SE) | PAIR model H3 | D = real - model | verdict |
+|---|---|---|---|---|---|
+| 2e6 | L8 lanes | 1.7386 (+/-0.026) | 1.9273 | -0.1886 (7.2 SE) | deeper (finite-scale) |
+| 2e6 | G24 gap class | 1.6283 (+/-0.022) | 2.0744 | -0.4461 (20.6 SE) | deeper |
+| 2e6 | A6 | 1.3501 (+/-0.012) | 1.5231 | -0.1730 (15.0 SE) | deeper |
+| 1e7 | L8 lanes | 1.9160 (+/-0.020) | 1.9558 | -0.0398 (~2 SE) | **MARRIED** (borderline) |
+| 1e7 | G24 gap class | 1.8966 (+/-0.022) | 2.1043 | -0.2077 (9.3 SE) | deeper |
+| 1e7 | A6 | 1.3782 (+/-0.006) | 1.5302 | -0.1520 (24.1 SE) | deeper |
+| 1e8 | L8 lanes | 1.9832 (+/-0.013) | 1.9836 | **-0.0004 (0.04 SE)** | **MARRIED (perfect)** |
+| 1e8 | G24 gap class | 2.0037 (+/-0.014) | 2.1332 | -0.1295 (8.9 SE) | deeper (decaying) |
+| 1e8 | A6 | 1.3919 (+/-0.004) | 1.5375 | -0.1456 (35.6 SE) | deeper (persistent) |
+
+**The split verdict (itself the finding):**
+
+1. **The lane word - the M1 prediction machine's own alphabet, the
+   "out-of-order" 24-adiic lane - is MARRIED to the pair law at 1e7/1e8**
+   (perfect at 1e8 to 4e-4). The pair law (the 2-gap bias) is a COMPLETE
+   description of everything the lane process does beyond the pair, at
+   scale. The 2e6 lane excess (0.19) is finite-scale: the bias is still
+   in transition there. The prediction machine's alphabet contains no
+   hidden structure beyond the pair.
+2. **The FINER gap-class words (A6, G24) are NOT subsumed by the pair law
+   even at 1e8**: the A6 excess is -0.146 (35.6 pooled SE) and the G24
+   excess -0.130 (8.9 pooled SE) persistent at 1e8, but the G24 excess
+   DECAYS with X (-0.446 -> -0.208 -> -0.130, roughly halving per decade).
+   So the "deeper weave" lives in the FINE 24-adiic gap resolution (the
+   detail the lane word averages away) and either (a) decays away (finite-
+   scale / slow-bias residue) or (b) is exactly the LD/LO k-tuple
+   *k>=3-gap correlation* - the part of the sieve law that is genuinely
+   beyond any pair (order-1) model. Those two horns are separated by the
+   NN baby-model (G-3: can a tail-trained variable-context model EARN the
+   residual from the tail? yes => deep memory / LD k-tuple law; no =>
+   slow-law bias) and by the splat/mip test (G-1: is the decay just
+   footprint blur through a widening lens?).
+3. Cramer floors (memoryless) sit well above everything: the pair law
+   captures all the memory visible at lane resolution; the residual at
+   gap-class resolution is the measured object beyond it.
+
+Caveats (honest): (a) the order-1 model's H_m is a plug-in estimator on a
+1.0M-symbol chain (the model's H3 reads slightly low; de-biasing makes the
+real-model gap WIDER, so the "deeper" verdicts are conservative); (b) the
+pair law here is EMPIRICAL at each scale (not the theoretical LO
+asymptote); the LD k-tuple joint generator remains the final adjudicator.
+
+### L5 (0220): GAUSSIAN-SPLAT FIELD TRIP - the owner's "boom as a Gaussian
+splat" question, and the movement motivation it buys
+
+Owner (2026-10-29): "you me and baby makes three... what if we need neural
+networks and not Markov chains and if we see the 'boom' as more like a
+Gaussian splat... cool programming tricks for Gaussian splats in video games
+that might be a motive for movement in our analysis? let's look online."
+Research pass (web, 2024-2026 graphics/games literature); synthesis below.
+No RH claim; off-board.
+
+**The tricks, one line each (what the games folks actually do):**
+
+1. **EWA projection** (the core 3DGS primitive): a 3D Gaussian with
+   covariance Sigma renders as an exact 2D elliptical Gaussian whose
+   covariance is J Sigma J^T (Jacobian of the projection) - O(1) analytic
+   per splat. (*the math of "how does a blob's footprint look through my
+   window"*)
+2. **Tile binning** (the 100-FPS trick, NVIDIA vk_gaussian_splatting /
+   engine plugins): splats are binned into screen tiles, sorted per tile,
+   rasterized with early alpha termination - what makes *billions* of
+   splats render in real time (LCC plugin: billion-point; UE5 virtual
+   texturing for 3DGS, arXiv 2506.19415).
+3. **Analytic-Splatting** (ECCV 2024 *oral*): stop point-sampling the pixel;
+   integrate the Gaussian over the *pixel area* analytically (precomputed
+   1D Gaussian-CDF tables) - kills the aliasing ring/blur. (*exact
+   "how much mass is in my window"*)
+4. **Mip-Splatting** (CVPR 2024): the aliasing when you *zoom* (change
+   scale) comes from splats whose footprint is smaller than the sample
+   spacing; the fix is a 3D smoothing filter that *constrains the minimum
+   splat size per axis* at each scale. (*the scale-ladder is not free:
+   zoom-out blurs unless you correct the footprint*)
+5. **SplineGS / MOVotion-Adaptive SpLine** (CVPR 2025): a moving splat's
+   trajectory = *cubic Hermite splines with a few control points*;
+   COLMAP-free, real-time dynamic. (4D-GS: canonical splats + a learned
+   deformation field + decoder; ADC-GS: *anchor-driven* group motion -
+   groups of splats share a motion anchor, individuals carry small
+   residuals; SplineGS/MoSca/CTRL-GS all 2025.)
+6. **Densification** (vanilla 3DGS): the splat *set is not static* - where
+   reconstruction error is large, the optimizer clones/splits splats;
+   where opacity ~ 0, they are pruned; SH coefficients are pruned
+   (compaction). (*refine where it's hard, drop what's empty*)
+7. **SDF hybrids** (3DGSR ICCV'24/25, SplatSDF): a continuous SDF glued to
+   the discrete splats so the blob field has exact geometry queries
+   (surface distance, relighting).
+8. **4D-native representation** (4DGS, arXiv 2412.20720): the scene is a
+   collection of 4D primitives with *explicit motion and appearance
+   parameters* - the movement is *data*, not an afterthought.
+
+**The triple ("you me and baby makes three"):** the REAL data, the PAIR LAW
+(the 2-gap bias, Markov at its most classical), and a LEARNED/BABY model
+(bigger than order-2: interpolated k-grams and a small numpy GRU - no
+torch on this box, so the NN is hand-rolled and auditable). If the pair law
+marries the data at H3 and the NN finds nothing deeper, the loom is the
+sieve law; if the NN keeps earning nats as context grows, the weave has
+structure beyond the pair (and beyond any fixed finite order).
+
+**The movement motivation - three named programs (G-lane), each a direct
+translation of a splat trick into the prime weave:**
+
+- **G-1 (MIP + ANALYTIC splat field of the weave; the big one).**
+  Splat a 2D Gaussian (position = prime N, class = gap class mod 24) and
+  measure the 24-adic front/antipode asymmetry in TWO ways: (a) raw bins
+  (what we have done - ALIASED), and (b) analytic window integrals of the
+  splat field (the Analytic-Splatting trick). The trap Mip-Splatting names:
+  the "scale ladder" 2e6 -> 1e8 is a ZOOM, and the measurement window
+  (typical gap) grows like ln X (14.5 -> 18.4) while the footprint grows
+  with it - so the L1b *decay* (0.073 -> 0.056) may be partly pure
+  **mip-blur artifact**, not true LO-law decay. Test: does the
+  corrected (footprint-deconvolved) asymmetry go flat (=> the bloom is
+  fixed geometry we were sampling with a widening lens - a SHARP new
+  verdict, and the 0196/0216/0218 "slow bias" gets re-explained) or still
+  decay (=> genuine LO-type bias, now measured cleanly)?
+- **G-2 (SPLINE MOTION of the weave; the ADC-GS/4DGS move).**
+  The weave statistics (bloom masses, the 12x12 pair matrix, lane biases)
+  as a function of X are a *moving splat field*. Fit a few cubic-Hermite
+  control points per collective coordinate (SplineGS), then ask: (i) how
+  many control points does the evolution need? (2 = pure LO slow law with
+  one twist; >=3 = an extra degree of freedom); (ii) is the motion
+  anchor-driven - a low-rank decomposition of the pair-matrix *evolution*
+  (a few collective drifts + local residuals, the ADC-GS structure)?
+  This is "the motive for movement" literally: the weave's motion as a
+  small spline trajectory, measured, not asserted.
+- **G-3 (the BABY model; the NN marriage).**
+  Fit, on the first 80% of the tail: (i) interpolated k-gram models
+  k = 1..4 (classical smoothing - the capacity axis is explicit), (ii) a
+  small numpy GRU (d = 16, hand-rolled tanh, auditable); score both on
+  the held-out last 20%: per-symbol nats = an *extrapolated entropy rate*
+  H_nn. Ladder vs the pair law: H_nn <= H_pair (saturated: pair law IS
+  the whole loom - the marriage holds) vs H_nn clearly below H_pair and
+  still improving with context (deep weave; the boom is real and the NN
+  has measured how deep).
+
+**Infrastructure translations (noted, not built):** tile binning -> on-demand
+window queries over the sieve field (compute the weave only where a cut
+looks); virtual texturing -> streaming checkpoints (the weave state is
+compact: splat set + motion spline, resumable); densification -> refine the
+splat field adaptively where the entropy residual is large (the "loom
+tension localized" map).
+
+**Honesty notes:** (1) the NN here is a MEASUREMENT INSTRUMENT (model
+capacity ladder), not a proof object - the side-quest discipline holds;
+(2) the G-1 mip correction could *kill* the L1b decay (that's the point -
+a falsifiable re-explanation, not a rescue); (3) all finite-scale,
+single-threaded, 4 cores open, reproducible. G-1/G-2/G-3 scripts are
+named (loom5_splat_field.py, loom6_spline_motion.py,
+loom7_nn_marriage.py) and run after the loom4 marriage results land.
 
 ### No-RH-claim discipline (continued)
 
