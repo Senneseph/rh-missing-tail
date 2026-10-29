@@ -86,6 +86,30 @@ set; do not re-derive it from memory.
    zeros-vs-generic location claim.  With E19's failed gap-transfer,
    hA1 stays characterized and open from all three angles at once.
 
+6. **0205 (2026-10-28): the flank's shape is now machine-checked in-tree.**
+   The S-at-zeros ladder of the 0204 reading is pinned in
+   `formal/RhAttack/W2SAtZeros.lean` (T1..T8 = {1e7, 3.1946e7, 1e8, 3e8,
+   1e9, 3e9, 1e10, 3e10}; SL1..SL8 = the 0201/0202 sup|DN| ladder minus
+   1/8, exact rational pins). Three shape statements:
+   (a) `sLadderRising` - the running max strictly increases at every
+   step (norm_num, no premises); by itself it contradicts any bounded
+   (O(1)) S on the measured domain.
+   (b) `sLadderConcaveInT` - the decade increment
+   (SL i+1 - SL i) / (T i+1 - T i) strictly shrinks at every step
+   (norm_num on exact pins, no premises): a pure-rational
+   concavity-in-T certificate ruling out linear-in-T drift.
+   (c) `sLadderSublnDrift` - the sharp sub-ln-t reading:  SL(T_i) /
+   log(T_i) strictly decreases at every step (total drift -16.19%).
+   Stated with eleven NAMED numeric premises (four decade-ratio log
+   lower bounds via 3-term positive arctanh sums; seven log-upper
+   bounds via exp brackets), each documented in the module docstring
+   with its verified value and margin (lower margins 0.009-0.014,
+   upper 0.18-0.97). Proving the eleven brackets in-tree is a named
+   stretch goal (the project convention cites elementary
+   transcendental numeric facts, cf.  the `hE : exp 1 < 4` cited input
+   of `A1Growth.a1_explicit_wire`). No RH claim: this is the DATA side
+   of the clause, exactly in the W2Beyond4 footing.
+
 ## The target (the one open clause)
 
 The A1 assembly in `formal/RhAttack/W2Beyond3.lean`

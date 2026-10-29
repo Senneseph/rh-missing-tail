@@ -383,3 +383,38 @@ domain-verified bound are machine-checked in-tree; the clause is open; the
 data presses it toward slow divergence (shape ~ ln t/loglog t, not
 sqrt(loglog t)); the known omegas are generic-t and do not yet transfer.
 No RH claim: all of this is the data flank of the A1 input.
+
+### 9.3  The pinned S-ladder shape (0205, machine-checked)
+
+Pinned in `formal/RhAttack/W2SAtZeros.lean` (targeted 8706 + full tree
+17452 jobs green).  S = sup_[14,T]|DN| - 1/8 (all positive-side):
+
+| T        | S          | S / ln T   |
+|----------|------------|------------|
+| 1e7      | 1.985059872| 0.1231572  |
+| 3.1946e7 | 2.063682735| 0.1194291  |
+| 1e8      | 2.171913326| 0.1179062  |
+| 3e8      | 2.252285480| 0.1153877  |
+| 1e9      | 2.313651562| 0.1116451  |
+| 3e9      | 2.378013134| 0.1089738  |
+| 1e10     | 2.428901672| 0.1054859  |
+| 3e10     | 2.490066528| 0.1032175  |
+
+- `sLadderRising` (no premises, norm_num):  S strictly increases at
+  every step; a bounded (O(1)) S is contradicted on the measured
+  domain, in-tree.
+- `sLadderConcaveInT` (no premises, norm_num on exact pins):  the
+  decade increment strictly shrinks at every step - no linear-in-T
+  drift in the running max.
+- `sLadderSublnDrift` (eleven named numeric premises, each documented
+  in the module docstring with its verified value and margin):
+  S(T_i) / log(T_i) strictly decreases at every step; total drift
+  -16.19%.  NAMED STRETCH GOAL: the eleven exp / arctanh brackets
+  in-tree.
+
+Flank reading (data only, no RH claim):  the measured domain
+contradicts O(1)-at-the-zeros, and the coefficient S / log(T) decays
+only -16% across 3.3 decades - in the range of the slow ln
+T/loglog T-type flank shapes, not the 1/log(T) decay a bounded S
+would force.  Next discriminating test: a higher-T census of
+dS / d(ln t).

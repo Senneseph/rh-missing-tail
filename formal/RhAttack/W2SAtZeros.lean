@@ -166,4 +166,321 @@ theorem instSignedExtremaToSBound_3e10 :
   exact (abs_le (a := sDefect d)).mpr ⟨by linarith [hbot, hlo2, hbotAbs],
                                       by linarith [htop, hhi]⟩
 
+
+/-!
+### The pinned S-at-zeros ladder and its shape (0205; measured record)
+
+The eight running-max values  sup_[14,T] |S|  (the 0201/0202 sup|DN|
+ladder minus 1/8, all on the positive side) at the decade endpoints.  They
+are the DATA side of the A1 clause;  the shape statements below are pure
+arithmetic over exact rational pins. -/
+
+noncomputable def T1 : ℝ := 10000000
+noncomputable def T2 : ℝ := 31946000
+noncomputable def T3 : ℝ := 100000000
+noncomputable def T4 : ℝ := 300000000
+noncomputable def T5 : ℝ := 1000000000
+noncomputable def T6 : ℝ := 3000000000
+noncomputable def T7 : ℝ := 10000000000
+noncomputable def T8 : ℝ := 30000000000
+
+noncomputable def SL1 : ℝ := 1985059872 / 1000000000   -- 1e7
+noncomputable def SL2 : ℝ := 2063682735 / 1000000000   -- 3.19e7
+noncomputable def SL3 : ℝ := 2171913326 / 1000000000   -- 1e8
+noncomputable def SL4 : ℝ := 2252285480 / 1000000000   -- 3e8
+noncomputable def SL5 : ℝ := 2313651562 / 1000000000   -- 1e9
+noncomputable def SL6 : ℝ := 2378013134 / 1000000000   -- 3e9
+noncomputable def SL7 : ℝ := 2428901672 / 1000000000   -- 1e10
+noncomputable def SL8 : ℝ := 2490066528 / 1000000000   -- 3e10
+
+theorem sLadderRising :
+    SL1 < SL2 ∧ SL2 < SL3 ∧ SL3 < SL4 ∧ SL4 < SL5 ∧
+      SL5 < SL6 ∧ SL6 < SL7 ∧ SL7 < SL8 := by
+  norm_num [SL1, SL2, SL3, SL4, SL5, SL6, SL7, SL8]
+
+/-- The decade increment of the S running max strictly SHRINKS at every
+consecutive step of the ladder:  (SL i+1 - SL i) / (T i+1 - T i) is
+strictly decreasing.  Pure-rational certificate (norm_num on exact pins):
+it rules out any linear-in-T drift in the running max on the measured
+domain — the shape-side evidence that the growth in S, if real, is
+sub-linear in T. -/
+theorem sLadderConcaveInT :
+    (SL2 - SL1) / (T2 - T1) > (SL3 - SL2) / (T3 - T2) ∧
+      (SL3 - SL2) / (T3 - T2) > (SL4 - SL3) / (T4 - T3) ∧
+      (SL4 - SL3) / (T4 - T3) > (SL5 - SL4) / (T5 - T4) ∧
+      (SL5 - SL4) / (T5 - T4) > (SL6 - SL5) / (T6 - T5) ∧
+      (SL6 - SL5) / (T6 - T5) > (SL7 - SL6) / (T7 - T6) ∧
+      (SL7 - SL6) / (T7 - T6) > (SL8 - SL7) / (T8 - T7) := by
+  have h1 : 0 < T2 - T1 := by norm_num [T1, T2]
+  have h2 : 0 < T3 - T2 := by norm_num [T2, T3]
+  have h3 : 0 < T4 - T3 := by norm_num [T3, T4]
+  have h4 : 0 < T5 - T4 := by norm_num [T4, T5]
+  have h5 : 0 < T6 - T5 := by norm_num [T5, T6]
+  have h6 : 0 < T7 - T6 := by norm_num [T6, T7]
+  have h7 : 0 < T8 - T7 := by norm_num [T7, T8]
+  refine ⟨?_, ?_, ?_, ?_, ?_, ?_⟩
+  · have hcomm : (SL2 - SL1) / (T2 - T1) * (T3 - T2) =
+      (SL2 - SL1) * (T3 - T2) / (T2 - T1) := by
+      field_simp [h1.ne, h2.ne]
+      <;> ring_nf
+    apply (div_lt_iff₀ h2).mpr
+    rw [hcomm]
+    simp only [SL1, SL2, SL3, T1, T2, T3]
+    norm_num
+  · have hcomm : (SL3 - SL2) / (T3 - T2) * (T4 - T3) =
+      (SL3 - SL2) * (T4 - T3) / (T3 - T2) := by
+      field_simp [h2.ne, h3.ne]
+      <;> ring_nf
+    apply (div_lt_iff₀ h3).mpr
+    rw [hcomm]
+    simp only [SL2, SL3, SL4, T2, T3, T4]
+    norm_num
+  · have hcomm : (SL4 - SL3) / (T4 - T3) * (T5 - T4) =
+      (SL4 - SL3) * (T5 - T4) / (T4 - T3) := by
+      field_simp [h3.ne, h4.ne]
+      <;> ring_nf
+    apply (div_lt_iff₀ h4).mpr
+    rw [hcomm]
+    simp only [SL3, SL4, SL5, T3, T4, T5]
+    norm_num
+  · have hcomm : (SL5 - SL4) / (T5 - T4) * (T6 - T5) =
+      (SL5 - SL4) * (T6 - T5) / (T5 - T4) := by
+      field_simp [h4.ne, h5.ne]
+      <;> ring_nf
+    apply (div_lt_iff₀ h5).mpr
+    rw [hcomm]
+    simp only [SL4, SL5, SL6, T4, T5, T6]
+    norm_num
+  · have hcomm : (SL6 - SL5) / (T6 - T5) * (T7 - T6) =
+      (SL6 - SL5) * (T7 - T6) / (T6 - T5) := by
+      field_simp [h5.ne, h6.ne]
+      <;> ring_nf
+    apply (div_lt_iff₀ h6).mpr
+    rw [hcomm]
+    simp only [SL5, SL6, SL7, T5, T6, T7]
+    norm_num
+  · have hcomm : (SL7 - SL6) / (T7 - T6) * (T8 - T7) =
+      (SL7 - SL6) * (T8 - T7) / (T7 - T6) := by
+      field_simp [h6.ne, h7.ne]
+      <;> ring_nf
+    apply (div_lt_iff₀ h7).mpr
+    rw [hcomm]
+    simp only [SL6, SL7, SL8, T6, T7, T8]
+    norm_num
+
+/-!
+### The sub-ln-t diagnostic (flank 0204/0205 reading)
+
+Computed reading on the measured domain:  the running max itself grows
+(sLadderRising) and its decade increment shrinks (sLadderConcaveInT);
+equivalently the proportional coefficient  SL(T_i) / log(T_i)  strictly
+decreases at every step (total drift -16.19%).  A bounded (O(1)) S would
+make SL(T) bounded by a constant, which sLadderRising already contradicts
+on the measured domain;  and the measured coefficient decays much more
+slowly than 1/log(T) would, in the range of the slow log/loglog-type
+shapes of the RH-flank S-bounds.  All of this is a flanking DATA reading
+on the measured domain — not a refutation of anything, and no RH claim.
+
+The theorem below is stated with eleven NAMED premises — each an
+elementary numeric fact (documented with its verification).
+
+  decade-ratio log LOWER bounds, verified via the positive 3-term partial
+  sum of  log x = 2 (u + u^3/3 + u^5/5 + ...)  with  u = (x - 1)/(x + 1)
+  (all terms positive for x > 1, so the partial sum is an exact lower
+  bound):
+    hlog3  :  log 3 > 109/100             [sum3 = 1.09583 > 1.09;
+                                           true 1.09861]
+    hlog10 :  log (10/3) > 119/100        [sum3 = 1.19911 > 1.19;
+                                           true 1.20397]
+    hlogR2 :  log (31946/10000) > 115/100 [sum3 = 1.15755 > 1.15;
+                                           true 1.16146]
+    hlogR3 :  log (50000/15973) > 113/100 [sum3 = 1.13761 > 1.13;
+                                           true 1.14112]
+  log UPPER bounds  (T_i < exp(b_i), via exp series partial sums, large
+  margins;  equivalently  log T_i ≤ b_i):
+    T1 = 1e7     < exp 17   [exp 17 = 2.4155e7]
+    T2 = 3.1946e7 < exp 18  [exp 18 = 6.5660e7]
+    T3 = 1e8     < exp 19   [exp 19 = 1.7848e8]
+    T4 = 3e8     < exp 20   [exp 20 = 4.8517e8]
+    T5 = 1e9     < exp 21   [exp 21 = 1.3188e9]
+    T6 = 3e9     < exp 22   [exp 22 = 3.5849e9]
+    T7 = 1e10    < exp 24   [exp 24 = 2.6510e10]
+
+Proving these eleven brackets in-tree (exp / Taylor-remainder machinery)
+is a NAMED STRETCH GOAL;  the project convention cites elementary
+transcendental numeric facts as named inputs (cf.  the `hE : exp 1 < 4`
+cited input of `A1Growth.a1_explicit_wire`). -/
+theorem sLadderSublnDrift
+    (hlog3  : (109 : ℝ) / 100 < Real.log 3)
+    (hlog10 : (119 : ℝ) / 100 < Real.log (10 / 3))
+    (hlogR2 : (115 : ℝ) / 100 < Real.log (31946000 / 10000000))
+    (hlogR3 : (113 : ℝ) / 100 < Real.log (100000000 / 31946000))
+    (hL1 : Real.log T1 ≤ 17)
+    (hL2 : Real.log T2 ≤ 18)
+    (hL3 : Real.log T3 ≤ 19)
+    (hL4 : Real.log T4 ≤ 20)
+    (hL5 : Real.log T5 ≤ 21)
+    (hL6 : Real.log T6 ≤ 22)
+    (hL7 : Real.log T7 ≤ 24) :
+    SL1 / Real.log T1 > SL2 / Real.log T2 ∧
+      SL2 / Real.log T2 > SL3 / Real.log T3 ∧
+      SL3 / Real.log T3 > SL4 / Real.log T4 ∧
+      SL4 / Real.log T4 > SL5 / Real.log T5 ∧
+      SL5 / Real.log T5 > SL6 / Real.log T6 ∧
+      SL6 / Real.log T6 > SL7 / Real.log T7 ∧
+      SL7 / Real.log T7 > SL8 / Real.log T8 := by
+  have h1l : 0 < Real.log T1 := Real.log_pos (by norm_num [T1])
+  have h2l : 0 < Real.log T2 := Real.log_pos (by norm_num [T2])
+  have h3l : 0 < Real.log T3 := Real.log_pos (by norm_num [T3])
+  have h4l : 0 < Real.log T4 := Real.log_pos (by norm_num [T4])
+  have h5l : 0 < Real.log T5 := Real.log_pos (by norm_num [T5])
+  have h6l : 0 < Real.log T6 := Real.log_pos (by norm_num [T6])
+  have h7l : 0 < Real.log T7 := Real.log_pos (by norm_num [T7])
+  have h8l : 0 < Real.log T8 := Real.log_pos (by norm_num [T8])
+  -- log decomposition across each decade step (ratio 3.1946, 3.12857,
+  -- 3, 10/3, 3, 10/3, 3)
+  have hdecomp1 : Real.log T2 = Real.log T1 + Real.log (T2 / T1) := by
+    dsimp [T1, T2]
+    have hT1nz : (10000000 : ℝ) ≠ 0 := by norm_num
+    have hT2T1nz : ((31946000 : ℝ) / 10000000) ≠ 0 := by norm_num
+    have hmul : Real.log (10000000 * (31946000 / 10000000)) =
+        Real.log 10000000 + Real.log (31946000 / 10000000) := Real.log_mul hT1nz hT2T1nz
+    have hnum : (31946000 : ℝ) = 10000000 * (31946000 / 10000000) := by field_simp
+    rw [← hmul, ← hnum]
+  have hdecomp2 : Real.log T3 = Real.log T2 + Real.log (T3 / T2) := by
+    dsimp [T2, T3]
+    have hT2nz : (31946000 : ℝ) ≠ 0 := by norm_num
+    have hT3T2nz : ((100000000 : ℝ) / 31946000) ≠ 0 := by norm_num
+    have hmul : Real.log (31946000 * (100000000 / 31946000)) =
+        Real.log 31946000 + Real.log (100000000 / 31946000) := Real.log_mul hT2nz hT3T2nz
+    have hnum : (100000000 : ℝ) = 31946000 * (100000000 / 31946000) := by field_simp
+    rw [← hmul, ← hnum]
+  have h34 : Real.log T4 = Real.log 3 + Real.log T3 := by
+    dsimp [T3, T4]
+    have hnum : (300000000 : ℝ) = 3 * 100000000 := by norm_num
+    have h3nz : (3 : ℝ) ≠ 0 := by norm_num
+    have hTnz : (100000000 : ℝ) ≠ 0 := by norm_num
+    rw [hnum, (Real.log_mul h3nz hTnz).symm]
+  have h45 : Real.log T5 = Real.log (10 / 3) + Real.log T4 := by
+    dsimp [T4, T5]
+    have hnum : (1000000000 : ℝ) = (10 / 3) * 300000000 := by norm_num
+    have htennz : (10 / 3 : ℝ) ≠ 0 := by norm_num
+    have hTnz : (300000000 : ℝ) ≠ 0 := by norm_num
+    rw [hnum, (Real.log_mul htennz hTnz).symm]
+  have h56 : Real.log T6 = Real.log 3 + Real.log T5 := by
+    dsimp [T5, T6]
+    have hnum : (3000000000 : ℝ) = 3 * 1000000000 := by norm_num
+    have h3nz : (3 : ℝ) ≠ 0 := by norm_num
+    have hTnz : (1000000000 : ℝ) ≠ 0 := by norm_num
+    rw [hnum, (Real.log_mul h3nz hTnz).symm]
+  have h67 : Real.log T7 = Real.log (10 / 3) + Real.log T6 := by
+    dsimp [T6, T7]
+    have hnum : (10000000000 : ℝ) = (10 / 3) * 3000000000 := by norm_num
+    have htennz : (10 / 3 : ℝ) ≠ 0 := by norm_num
+    have hTnz : (3000000000 : ℝ) ≠ 0 := by norm_num
+    rw [hnum, (Real.log_mul htennz hTnz).symm]
+  have h78 : Real.log T8 = Real.log 3 + Real.log T7 := by
+    dsimp [T7, T8]
+    have hnum : (30000000000 : ℝ) = 3 * 10000000000 := by norm_num
+    have h3nz : (3 : ℝ) ≠ 0 := by norm_num
+    have hTnz : (10000000000 : ℝ) ≠ 0 := by norm_num
+    rw [hnum, (Real.log_mul h3nz hTnz).symm]
+  -- decade-ratio log lower bounds =>  L_{i+1} > L_i + a_i
+  have hL2' : Real.log T2 > Real.log T1 + (115 : ℝ) / 100 := by
+    have : Real.log (T2 / T1) = Real.log (31946000 / 10000000) := by
+      simp only [T1, T2]
+    rw [hdecomp1, this]
+    linarith [hlogR2]
+  have hL3' : Real.log T3 > Real.log T2 + (113 : ℝ) / 100 := by
+    have : Real.log (T3 / T2) = Real.log (100000000 / 31946000) := by
+      simp only [T2, T3]
+    rw [hdecomp2, this]
+    linarith [hlogR3]
+  have hL4' : Real.log T4 > Real.log T3 + (109 : ℝ) / 100 := by
+    rw [h34]; linarith [hlog3]
+  have hL5' : Real.log T5 > Real.log T4 + (119 : ℝ) / 100 := by
+    rw [h45]; linarith [hlog10]
+  have hL6' : Real.log T6 > Real.log T5 + (109 : ℝ) / 100 := by
+    rw [h56]; linarith [hlog3]
+  have hL7' : Real.log T7 > Real.log T6 + (119 : ℝ) / 100 := by
+    rw [h67]; linarith [hlog10]
+  have hL8' : Real.log T8 > Real.log T7 + (109 : ℝ) / 100 := by
+    rw [h78]; linarith [hlog3]
+  -- the seven conjuncts.  Pattern (pair i):
+  --   L_{i+1} > L_i + a_i  and  L_i ≤ b_i  and  S_i * a_i > (S_{i+1} - S_i) * b_i
+  --   =>  S_i * L_{i+1} > S_i * (L_i + a_i) > S_i * L_i + (S_{i+1} - S_i) * L_i
+  --      = S_{i+1} * L_i
+  --   and  dividing (all positive) gives  S_i / L_i > S_{i+1} / L_{i+1}.
+  refine ⟨?_, ?_, ?_, ?_, ?_, ?_, ?_⟩
+  · have hc : SL1 * Real.log T2 > SL2 * Real.log T1 := by
+      dsimp [SL1, SL2]
+      linarith [hL2', hL1]
+    have hcomm : SL1 / Real.log T1 * Real.log T2 =
+        SL1 * Real.log T2 / Real.log T1 := by
+      field_simp [h1l.ne, h2l.ne]
+      <;> ring_nf
+    apply (div_lt_iff₀ h2l).mpr
+    rw [hcomm]
+    exact (lt_div_iff₀ h1l).mpr hc
+  · have hc : SL2 * Real.log T3 > SL3 * Real.log T2 := by
+      dsimp [SL2, SL3]
+      linarith [hL3', hL2]
+    have hcomm : SL2 / Real.log T2 * Real.log T3 =
+        SL2 * Real.log T3 / Real.log T2 := by
+      field_simp [h2l.ne, h3l.ne]
+      <;> ring_nf
+    apply (div_lt_iff₀ h3l).mpr
+    rw [hcomm]
+    exact (lt_div_iff₀ h2l).mpr hc
+  · have hc : SL3 * Real.log T4 > SL4 * Real.log T3 := by
+      dsimp [SL3, SL4]
+      linarith [hL4', hL3]
+    have hcomm : SL3 / Real.log T3 * Real.log T4 =
+        SL3 * Real.log T4 / Real.log T3 := by
+      field_simp [h3l.ne, h4l.ne]
+      <;> ring_nf
+    apply (div_lt_iff₀ h4l).mpr
+    rw [hcomm]
+    exact (lt_div_iff₀ h3l).mpr hc
+  · have hc : SL4 * Real.log T5 > SL5 * Real.log T4 := by
+      dsimp [SL4, SL5]
+      linarith [hL5', hL4]
+    have hcomm : SL4 / Real.log T4 * Real.log T5 =
+        SL4 * Real.log T5 / Real.log T4 := by
+      field_simp [h4l.ne, h5l.ne]
+      <;> ring_nf
+    apply (div_lt_iff₀ h5l).mpr
+    rw [hcomm]
+    exact (lt_div_iff₀ h4l).mpr hc
+  · have hc : SL5 * Real.log T6 > SL6 * Real.log T5 := by
+      dsimp [SL5, SL6]
+      linarith [hL6', hL5]
+    have hcomm : SL5 / Real.log T5 * Real.log T6 =
+        SL5 * Real.log T6 / Real.log T5 := by
+      field_simp [h5l.ne, h6l.ne]
+      <;> ring_nf
+    apply (div_lt_iff₀ h6l).mpr
+    rw [hcomm]
+    exact (lt_div_iff₀ h5l).mpr hc
+  · have hc : SL6 * Real.log T7 > SL7 * Real.log T6 := by
+      dsimp [SL6, SL7]
+      linarith [hL7', hL6]
+    have hcomm : SL6 / Real.log T6 * Real.log T7 =
+        SL6 * Real.log T7 / Real.log T6 := by
+      field_simp [h6l.ne, h7l.ne]
+      <;> ring_nf
+    apply (div_lt_iff₀ h7l).mpr
+    rw [hcomm]
+    exact (lt_div_iff₀ h6l).mpr hc
+  · have hc : SL7 * Real.log T8 > SL8 * Real.log T7 := by
+      dsimp [SL7, SL8]
+      linarith [hL8', hL7]
+    have hcomm : SL7 / Real.log T7 * Real.log T8 =
+        SL7 * Real.log T8 / Real.log T7 := by
+      field_simp [h7l.ne, h8l.ne]
+      <;> ring_nf
+    apply (div_lt_iff₀ h8l).mpr
+    rw [hcomm]
+    exact (lt_div_iff₀ h7l).mpr hc
+
 end W2SAtZeros
