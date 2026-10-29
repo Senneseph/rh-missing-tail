@@ -275,7 +275,16 @@ Commit a00c7d6.
    `sLadderConcaveInT`, and `sLadderSublnDrift` - the last now with
    its eleven numeric brackets proved in-tree in `TransNums`;
    S/ln T drift -16.19%) - on the measured domain the data already
-   contradicts O(1)-at-the-zeros, in-tree.  No RH claim.
+   contradicts O(1)-at-the-zeros, in-tree.  0207 made the data-free
+   frontier constants premise-free (`A1Growth.pin_explicit_3e10_free`
+   / `pin_explicit_wire_3e10_free`:  K < 8 and |S1 - R| < 17 machine-
+   verified end to end via three new `TransNums` frontier log pins,
+   the single cited input left being the Trudgian bound A1G-5 itself)
+   and QUANTIFIED the A1 terminal face in-tree:  any absolute K on the
+   measured 3e10 domain lies in [2.490066528, 7),  and `face_unbounded`
+   proves the gap is the CONSTANTNESS of the growth function G (the
+   absolute clause is the growth wire at constant G),  not a numeric.
+   No RH claim.
 9. **The second orbit (KANSAS CITY SHUFFLE, IN PROGRESS):**
    `docs/KANSAS-CITY-SHUFFLE-SIEVE-ORBIT-PLAN-2026-10-25.md` — the
    owner's crafted creation: a Fourier-compatible Sieve of

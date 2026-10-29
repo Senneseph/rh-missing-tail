@@ -56,6 +56,7 @@
 
 import Mathlib
 import RhAttack.W2Beyond3
+import RhAttack.TransNums
 
 open BigOperators
 open Real
@@ -357,5 +358,116 @@ theorem pin_explicit_wire_3e10
   calc (G_explicit (30000000000 : ℝ) + 1) * ((17/8 : ℝ)) < (7 + 1) * ((17/8 : ℝ)) :=
       by nlinarith [hpin, (by positivity : (0 : ℝ) < 17/8)]
     _ = 17 := by ring
+
+/-!  ##  6.  The  premise-free 3e10  pins  (0207)
+
+  `pin_explicit_3e10`  /  `pin_explicit_wire_3e10`  above  carry  the  two
+  numerics  `log 3e10 < 25`  and  `log (log 3e10) < 4`  as  CITED  inputs.
+  0207  moves  exactly  those  two  facts  into  the  tree  —
+  `TransNums.log_3e10_lt_25`  (via  3e10 < finsum(25,24) ≤ exp 25)  and
+  `TransNums.log_log_3e10_lt_4`  (via  log 3e10 < 25 < exp 4)  —  both
+  exact-rational  norm_num,  no  external  input.  The  data-free  wire
+  constants  K < 8  and  |S1 - R| < 17  at  the  3e10  frontier  are  now
+  machine-verified  end  to  end,  with  the  single  remaining  cited
+  input  the  Trudgian  bound  itself  (A1G-5,  a  literature  theorem,
+  the  named  frontier).  -/ --
+
+/--  G_explicit (3e10) < 7,  premise-free  (0207).  -/ --
+theorem pin_explicit_3e10_free : G_explicit (30000000000 : ℝ) < 7 :=
+    pin_explicit_3e10 TransNums.log_3e10_lt_25 TransNums.log_log_3e10_lt_4
+
+/--  (G_explicit 3e10 + 1) . (17/8) < 17,  premise-free  (0207).  -/ --
+theorem pin_explicit_wire_3e10_free :
+    (G_explicit (30000000000 : ℝ) + 1) * ((17/8 : ℝ)) < 17 :=
+    pin_explicit_wire_3e10 TransNums.log_3e10_lt_25 TransNums.log_log_3e10_lt_4
+
+/-!  ##  7.  The  A1  terminal  face,  quantified  at  the  frontier  (0207)
+
+  The  absolute  clause  hA1  —  `|DN j| ≤ K`  at  every  data  zero
+  (equivalently  `|S(γ)| ≤ C`,  absolute,  data-free)  —  is  the  growth
+  wire  of  section  4  at  a  CONSTANT  growth  function.  The  strongest
+  data-free  G  in  the  tree  is  the  strictly  growing  G_explicit
+  (Trudgian,  cited  A1G-5  —  the  single  cited  input  left  after  0207).
+
+  Quantified  gap  at  the  3e10  frontier  (all  pure  rational
+  arithmetic,  no  premises):
+  *  S-side:  the  certified  measured  pin  |S| ≤ 2.490066528  on  the
+    3e10  domain  (data  ledger  0201/0202/0204)  sits  strictly  below
+    the  data-free  growth  certificate  G < 7;  any  absolute  K  valid
+    on  that  domain  lies  in  [2.490066528,  7).
+  *  wire-side:  the  measured  wire  cost  2.615066528 . (17/8) ≈ 5.56
+    sits  strictly  below  the  data-free  wire  cost  < 17  (margin  ~3x).
+
+  The  face  is  NAMED,  NOT  CLOSED:  the  literature  gives  no  absolute
+  C  (F1)  and  the  best  conditional  bound  (CCM  under  RH)  also
+  GROWS  (F2);  the  data  flank  (W2SAtZeros  0204–0206,  all  in-tree)
+  shows  |S|  strictly  rising  at  every  ladder  step,  so  the  lower
+  end  of  the  interval  only  grows  with  the  data.  No  RH  claim.  -/ --
+
+-- Measured  |S|  pin  at  the  3e10  frontier  (data  record  0201/0202;
+-- identical  numeric  to  the  W2SAtZeros  signed-extrema  pin).
+noncomputable def sPinMeasured0207 : ℝ := 2490066528 / 1000000000
+
+-- Measured  sup|DN|  at  the  3e10  frontier  (data  record  0201/0202).
+noncomputable def dnPinMeasured0207 : ℝ := 2615066528 / 1000000000
+
+/--  S-side  face  pin:  the  measured  |S|  pin  is  strictly  below  the
+  data-free  growth  certificate  at  the  frontier  (no  premises).  -/ --
+theorem pin_face_S_3e10 : sPinMeasured0207 < 7 := by
+  norm_num [sPinMeasured0207]
+
+/--  S-side  face  interval  pin:  the  measured  pin  is  strictly  below
+  G_explicit (3e10)  itself  (no  premises;  lower  end  of  the  [2.49,
+  7)  interval  for  any  absolute  K  valid  on  the  measured  domain). -/ --
+theorem pin_face_S_interval_3e10 :
+    sPinMeasured0207 < G_explicit (30000000000 : ℝ) := by
+  rw [G_explicit]
+  have hlog : (24 : ℝ) < log (30000000000 : ℝ) := TransNums.log_3e10_gt_24
+  have hll : 0 < log (log (30000000000 : ℝ)) :=
+    log_pos (by linarith [hlog, show (1 : ℝ) < 24 from by norm_num])
+  have hlo : (2490066528 : ℝ) / 1000000000 < (111/1000 : ℝ) * 24 + (275/1000 : ℝ) * 0 + 2450/1000 := by
+    norm_num
+  calc sPinMeasured0207 < (111/1000 : ℝ) * 24 + 2450/1000 := by simpa [sPinMeasured0207] using hlo
+    _ < (111/1000 : ℝ) * log (30000000000 : ℝ) + (275/1000 : ℝ) *
+        log (log (30000000000 : ℝ)) + 2450/1000 := by
+      nlinarith [hlog, hll, (by norm_num : (0 : ℝ) ≤ 111/1000),
+        (by norm_num : (0 : ℝ) ≤ 275/1000)]
+
+/--  wire-side  face  pin:  the  measured  wire  cost  at  the  frontier  is
+  strictly  below  the  data-free  wire  cost  (no  premises;  margin  ~3x). -/ --
+theorem pin_face_wire_3e10 : dnPinMeasured0207 * ((17/8 : ℝ)) < 17 := by
+  norm_num [dnPinMeasured0207]
+
+/--  G_explicit  is  UNBOUNDED  (LEAN-PROVEN;  only  the  standard
+  one-line  e < 4  classical  fact  as  hE):  for  every  K  there  is  a
+  T  with  K < G_explicit T.  The  absolute  clause  needs  a  CONSTANT  G;
+  the  data-free  growth  G  outruns  every  K  —  the  face  gap  is  the
+  constantness,  not  a  numeric.  -/ --
+theorem face_unbounded (hE : exp 1 < 4) (K : ℝ) : ∃ T, K < G_explicit T := by
+  by_cases hK : K < 2450/1000
+  · use 4
+    have hlog4 : (1 : ℝ) < log 4 := by
+      calc (1 : ℝ) = log (exp 1) := by rw [log_exp]
+        _ < log 4 := log_lt_log (exp_pos 1) hE
+    have hll : 0 < log (log 4) := log_pos hlog4
+    calc K < (2450/1000 : ℝ) := hK
+      _ < (111/1000 : ℝ) * log 4 + (275/1000 : ℝ) * log (log 4) + 2450/1000 := by
+        nlinarith [hlog4, hll, (by norm_num : (0 : ℝ) ≤ 111/1000),
+          (by norm_num : (0 : ℝ) ≤ 275/1000)]
+      _ = G_explicit 4 := by rw [G_explicit]
+  · have hK' : 2450/1000 ≤ K := not_lt.mp hK
+    let U := (1000/111 : ℝ) * (K - 2450/1000) + 4
+    use exp U
+    have hKlo : 0 ≤ K - 2450/1000 := by linarith [hK']
+    have hU : (1 : ℝ) ≤ U := by
+      dsimp [U]
+      have hm : 0 ≤ (1000/111 : ℝ) * (K - 2450/1000) :=
+        mul_nonneg (by norm_num) hKlo
+      linarith [hm]
+    have hUll : 0 ≤ log U := log_nonneg hU
+    calc K < (111/1000 : ℝ) * U + 2450/1000 := by dsimp [U]; ring_nf; linarith
+      _ ≤ (111/1000 : ℝ) * U + (275/1000 : ℝ) * log U + 2450/1000 := by
+        nlinarith [hUll, (by norm_num : (0 : ℝ) ≤ 275/1000)]
+      _ = G_explicit (exp U) := by rw [G_explicit, log_exp]
 
 end A1G

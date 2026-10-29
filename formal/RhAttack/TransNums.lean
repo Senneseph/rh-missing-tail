@@ -370,4 +370,74 @@ theorem log_r3_gt_113_100 : (113 : ℝ) / 100 < log (100000000 / 31946000) := by
   rw [lt_log_iff_exp_lt (by norm_num : (0 : ℝ) < 100000000 / 31946000)]
   exact lt_of_le_of_lt hexp hC
 
+/-!
+##  The 3e10 frontier log pins  (0207)
+
+These two retire the two CITED numerics of  `A1Growth.pin_explicit_3e10`
+(`log 3e10 < 25`  /  `log (log 3e10) < 4`):
+
+    log (3e10)  < 25      (3e10 < finsum(25, 24) <= exp 25,
+                           finsum margin x1.136)
+    log (log 3e10) < 4    (log 3e10 < 25 < exp 4,
+                           finsum(4, 7) = 16319/315,  about 51.81)
+
+Exact-rational  norm_num  throughout;  no  external  input.  -/
+
+-- finsum(25, 24) = 33838768480593780243940600998001 /
+--                 992717442773183102976  >  3e10 (margin x1.136).
+theorem exp25_finsum_gt_3e10 :
+    (∑ n ∈ Finset.range 25, (25 : ℝ) ^ n / ↑n !) > 30000000000 := by
+  norm_num
+
+-- 3e10 < exp 25  (finsum lower bound + all-terms-nonneg).
+theorem exp_25_gt_3e10 : (30000000000 : ℝ) < exp 25 := by
+  have h1 : (∑ n ∈ Finset.range 25, (25 : ℝ) ^ n / ↑n !) > 30000000000 :=
+    exp25_finsum_gt_3e10
+  have h2 : (∑ n ∈ Finset.range 25, (25 : ℝ) ^ n / ↑n !) ≤ exp 25 :=
+    expFinsum_le_exp 25 (by norm_num) 24
+  exact lt_of_lt_of_le h1 h2
+
+-- log (3e10) < 25  (premise-free;  replaces a CITED numeric).
+theorem log_3e10_lt_25 : log (30000000000 : ℝ) < 25 := by
+  rw [log_lt_iff_lt_exp (by norm_num : (0 : ℝ) < 30000000000)]
+  exact exp_25_gt_3e10
+
+-- finsum(4, 7) = 16319/315 > 25.
+theorem exp4_finsum_gt_25 : (∑ n ∈ Finset.range 8, (4 : ℝ) ^ n / ↑n !) > 25 := by
+  norm_num
+
+-- 25 < exp 4.
+theorem exp_4_gt_25 : (25 : ℝ) < exp 4 := by
+  have h1 : (∑ n ∈ Finset.range 8, (4 : ℝ) ^ n / ↑n !) > 25 := exp4_finsum_gt_25
+  have h2 : (∑ n ∈ Finset.range 8, (4 : ℝ) ^ n / ↑n !) ≤ exp 4 :=
+    expFinsum_le_exp 4 (by norm_num) 7
+  exact lt_of_lt_of_le h1 h2
+
+-- log (log 3e10) < 4  (premise-free;  replaces a CITED numeric).
+theorem log_log_3e10_lt_4 : log (log (30000000000 : ℝ)) < 4 := by
+  have hL : log (30000000000 : ℝ) < 25 := log_3e10_lt_25
+  have hmid : log (30000000000 : ℝ) < exp 4 := hL.trans exp_4_gt_25
+  have hpos : (0 : ℝ) < log (30000000000 : ℝ) :=
+    log_pos (by norm_num : (1 : ℝ) < 30000000000)
+  rw [log_lt_iff_lt_exp hpos]
+  exact hmid
+
+-- exp 24 < 3e10  (finsum(24, 27) + geometric  tail;  bracket
+-- 2.875467e10,  margin x1.043).
+theorem exp24_bracket_lt_3e10 :
+    (∑ n ∈ Finset.range (27 + 1), (24 : ℝ) ^ n / n !) +
+      (24 : ℝ) ^ (27 + 1) / (27 + 1) ! * (1 - 24 / (27 + 2))⁻¹ < 30000000000 := by
+  norm_num
+
+-- exp 24 < 3e10.
+theorem exp_24_lt_3e10 : exp 24 < (30000000000 : ℝ) := by
+  have h0 := exp_le_finsum_plus_geometric 24 27 (by norm_num) (by norm_num)
+  exact lt_of_le_of_lt h0 exp24_bracket_lt_3e10
+
+-- 24 < log (3e10)  (premise-free;  the lower log bracket at the frontier).
+theorem log_3e10_gt_24 : 24 < log (30000000000 : ℝ) := by
+  have h : log (exp 24) < log (30000000000 : ℝ) :=
+    log_lt_log (exp_pos 24) exp_24_lt_3e10
+  simpa [log_exp] using h
+
 end TransNums

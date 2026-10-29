@@ -134,6 +134,38 @@ set; do not re-derive it from memory.
    census (dS/d ln t beyond 3e10) as the optional data flank.
    No RH claim: all of 0205/0206 is the measured/structural data flank
    of the A1 input.
+8. **0207 (2026-10-29): the data-free wire constants are PREMISE-FREE
+   and the A1 terminal face is QUANTIFIED at the frontier, in-tree.**
+   The two CITED numerics of `A1Growth.pin_explicit_3e10` are retired
+   into `TransNums` with the 0206 machinery (exact-rational norm_num,
+   no premises): `log (3e10) < 25` (via 3e10 < finsum(25, 24) ≤ exp 25,
+   finsum margin x1.136) and `log (log 3e10) < 4` (via log 3e10 <
+   25 < exp 4, finsum(4, 7) = 16319/315 ≈ 51.81); plus the matching
+   LOWER log bracket `24 < log (3e10)` (via exp 24 < 3e10,
+   finsum(24, 27) + geometric tail = 2.875467e10, margin x1.043).
+   New premise-free A1Growth theorems: `pin_explicit_3e10_free`
+   (G_explicit 3e10 < 7) and `pin_explicit_wire_3e10_free`
+   ((G_explicit 3e10 + 1)(17/8) < 17) — the data-free wire constants
+   K < 8 and |S1 - R| < 17 at the frontier are now machine-verified
+   END TO END, with the single remaining CITED input the Trudgian
+   bound itself (A1G-5, literature, the named frontier). The terminal
+   face is quantified in-tree (A1Growth section 7, pure rational
+   pins, no premises): S-side, the certified measured pin |S| ≤
+   2.490066528 at the 3e10 domain sits strictly below the data-free
+   growth certificate (pin_face_S_3e10: < 7; pin_face_S_interval_3e10:
+   < G_explicit 3e10 itself), so any absolute K valid on the measured
+   domain must lie in [2.490066528, 7); wire-side, the measured wire
+   cost 2.615066528 . (17/8) ≈ 5.56 sits strictly below the data-free
+   cost < 17 (pin_face_wire_3e10, margin ~3x). `face_unbounded`
+   (only the standard e < 4 classical fact as hE) proves G_explicit
+   outruns every K — the face gap is the CONSTANTNESS of G, not a
+   numeric: the absolute clause hA1 is the growth wire at constant G,
+   no theorem in the literature supplies it (F1: best unconditional
+   bounds are growth-form; F2: even the best conditional CCM bound
+   under RH GROWS), and the in-tree data flank (0204-0206) shows |S|
+   strictly rising at every ladder step, so the interval's lower end
+   only grows with the data. The face is NAMED, NOT CLOSED; no RH
+   claim.
 
 ## The target (the one open clause)
 

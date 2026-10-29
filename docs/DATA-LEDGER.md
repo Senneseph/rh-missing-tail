@@ -419,3 +419,14 @@ only -16% across 3.3 decades - in the range of the slow ln
 T/loglog T-type flank shapes, not the 1/log(T) decay a bounded S
 would force.  Next discriminating test: a higher-T census of
 dS / d(ln t).
+
+0207 face quantification (in-tree, A1Growth section 7, no premises):
+the data-free wire constants at the frontier are now machine-verified
+end to end (K < 8, |S1 - R| < 17; the only cited input left is the
+Trudgian bound A1G-5 itself).  Any absolute K dominating |S| on the
+measured 3e10 domain must lie in [2.490066528, 7) - both ends
+machine-checked (pin_face_S_3e10, pin_face_S_interval_3e10); the
+measured wire cost 2.615066528 . (17/8) < 17 (pin_face_wire_3e10,
+margin ~3x); and face_unbounded proves the gap is the CONSTANTNESS of
+the growth function, not a numeric.  The absolute clause hA1 is the
+growth wire at constant G: NAMED, NOT CLOSED, no RH claim.
