@@ -236,7 +236,17 @@ Commit a00c7d6.
    face remains NAMED, not closed; the data edge is a FLANK and never
    closes it; a future board-best record is the next adoption trigger
    (the board moved THREE times in 24h - the B6 sixth-supersession
-   mechanism is now the standard response).
+   mechanism is now the standard response). 0210 appends RHEnd Part
+   B20 (append-only, after B19.5): the A1 assembly face is
+   RESTATED AS IN-TREE (0209) - the W2Beyond3 A1 clause is grid-
+   restricted and closed data-free at the frontier - and the
+   endpoint's external input surface is NAMED in the record (new
+   reference theorem a1GridClauseNamed; the surface = the two
+   standing CITED theorems + e < 4). Live board re-sweep (37/37,
+   as_of 2026-10-28, theta stored as STRING fractions - int()
+   them): density-side board best is still the in-tree face
+   0.8739461 (lower theta = better, i.e. MIN wins) - NO B6 fire.
+   Builds RHEnd 8760 / full tree 17454 green.
 8. **The A1 walk-side data layer (0201 + 0202, 2026-10-28):** the
    single open W2Beyond input - the data-free |DN| <= K clause (S
    bounded at the zeros, E1) - now carries its DATA side as a named,

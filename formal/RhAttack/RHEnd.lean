@@ -140,6 +140,9 @@ import RhAttack.Z78Arvi31
 import RhAttack.Z78Sil32
 import RhAttack.Z78FineChain
 import RhAttack.Z78DensityRefined
+import RhAttack.W2Beyond0
+import RhAttack.A1Growth
+import RhAttack.W2Telescope
 import RhAttack.S4WinCap
 import RhAttack.WinCount
 import RhAttack.P4Limit
@@ -3702,5 +3705,57 @@ theorem rh_program78_stripfront_mach_unifiedGao_PT2_ofDenRefined (q : ZeroSet)
   rh_program78_stripfront_mach_unifiedGao_ofDenRefined q hzF hqz
     honline Qside WinC.tPT2 (by norm_num [WinC.tPT2]) hPT2
     hOffCPT2
+
+/-!
+**Part B20 - the A1 assembly face moved IN-TREE (0209): the endpoint's
+external input surface is restated.**
+
+Not a tracker event: no new board record has appeared since the B19
+snapshot (live re-pull, as_of 2026-10-28, 37/37 records parsed; the
+density-side board best is still [Z78DensityRefined] 0.8739461 - the
+record this file's B19 endpoint is built on - so B6 does NOT fire).
+What moved is the A1 lane of this program: the A1 assembly of
+W2Beyond3 consumes a GRID-RESTRICTED clause (one uniform K for the
+finite zero grid x 0 ... x M - that is its own signature), and 0209
+closed that clause data-free at the certified 3e10 frontier:
+`A1G.dn_defect_to_sbridge` reduces the clause to exactly the two
+standing CITED theorems - (A) Trudgian (2012), A1G-5: |S u| <=
+G_explicit u for u >= e, and (B) the Riemann-von Mann identity with
+explicit residual: |DN j - S (x j) - 1/8| <= 1/x j (Titchmarsh Thm.
+9.7-type; its 0204 in-tree object identity, whose exact 7/8 - 3/4
+shift is `W2SAtZeros.rvmShiftCore`) - and `A1G.a1_grid_clause_exhibit`
+exhibits the uniform K = 33206/5000 = 6.6412 on every grid point of
+[4, 3e10], while `A1G.a1_zerofree_frontier` carries the full frontier
+wire |S1Sum - RSum| < 16.  With the 0206-0208 premise-free numeric
+pins (every numeric input of the data flank now proved in-tree,
+TransNums/A1Growth), the A1 lane's external surface is exactly: two
+peer-reviewed theorems + e < 4 (the module's standing one-line
+analysis fact).  What remains NAMED and OPEN, and is NOT what the
+W2Beyond3 assembly consumes, is the STRONGER absolute clause (one K
+over ALL zeros, unbounded): `A1G.face_unbounded` proves the data-free
+growth G outruns every K, and the literature scan (F1/F2) finds no
+live theorem there.  No RH claim: the B19 endpoint's external input
+(the zero-free half-plane record [Z78DensityRefined]) and its
+terminal face hOffC on 0 < d0 <= 3739461/10000000 are unchanged by
+this part; B20 is a state record, and the B6 mechanism (B6 packet
+section 8) remains the named route for future board motion.
+-/
+
+/--  B20.1  THE  0209  A1  GRID  CLAUSE,  NAMED  IN  THE  RECORD:  the
+    clause  the  W2Beyond3  A1  assembly  consumes  --  one  uniform
+    K  over  the  zero  grid  --  holds  at  the  certified  3e10
+    frontier  from  exactly  the  two  standing  CITED  theorems
+    (Trudgian  A1G-5;  the  RvM  identity  with  explicit  residual)
+    plus  e  <  4,  with  K  =  33206/5000  =  6.6412.  No  RH
+    claim.  -/
+theorem a1GridClauseNamed (M N0 : ℕ) (Nas x : ℕ → ℝ) (S : ℝ → ℝ)
+    (hgrid : ∀ j ≤ M, 4 <= x j ∧ x j <= 30000000000)
+    (hE : exp 1 < 4)
+    (hRVM : ∀ j ≤ M, |W2T.DN N0 Nas j - S (x j) - 1/8| <= 1 / x j)
+    (hTrudgian : ∀ u, exp 1 <= u -> |S u| <= A1G.G_explicit u) :
+    ∃ K : ℝ, (∀ j ≤ M, |W2T.DN N0 Nas j| <= K) ∧
+      K = (33206 : ℝ) / 5000 := by
+  refine ⟨(33206 : ℝ) / 5000, ?_, rfl⟩
+  simpa using A1G.a1_grid_clause_exhibit M N0 Nas x S hE hgrid hRVM hTrudgian
 
 end RHEnd
