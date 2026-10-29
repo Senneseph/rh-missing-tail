@@ -285,7 +285,19 @@ Commit a00c7d6.
    G_explicit 3e10 < 30081/5000,  within 0.013 of the sharp value 6.0032;
    wire constant < 15),  and `face_unbounded` proves the gap is the
    CONSTANTNESS of the growth function G  (the absolute clause is the
-   growth wire at constant G),  not a numeric.  No RH claim.
+   growth wire at constant G),  not a numeric.  0209 then re-read the
+   assembly's own signature  (W2Beyond3.a1_universal_wire):  the A1
+   clause is GRID-RESTRICTED  (one uniform K for the finite zero
+   grid)  -  and  THAT  clause  is  now  CLOSED  DATA-FREE  at  the
+   certified  3e10  frontier  (A1Growth  section  9:  the
+   zero-free  bridge  dn_defect_to_sbridge  +  the  uniform
+   K  =  33206/5000  =  6.6412  exhibit  +  the  full  frontier  wire
+   |S1Sum  -  RSum|  <  16),  with  the  lane's  external  input
+   surface  reduced  to  two  peer-reviewed  theorems  (Trudgian
+   2012;  the  RvM  identity  with  explicit  residual)  +  e  <  4.
+   The  STRONGER  absolute  clause  (all  zeros)  remains  NAMED/
+   OPEN  per  0207;  it  is  not  what  the  assembly  consumes.
+   No RH claim.
 9. **The second orbit (KANSAS CITY SHUFFLE, IN PROGRESS):**
    `docs/KANSAS-CITY-SHUFFLE-SIEVE-ORBIT-PLAN-2026-10-25.md` — the
    owner's crafted creation: a Fourier-compatible Sieve of

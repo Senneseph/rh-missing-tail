@@ -175,6 +175,31 @@ set; do not re-derive it from memory.
    6.1-cap attempt died exactly there). The face interval is now
    [2.490066528, 6.0162) and the data-free wire constant sharpens to
    < 15 (596377/40000 = 14.909425 at the step).
+9. **0209 (2026-10-29): the A1 grid clause is CLOSED DATA-FREE at the
+   certified 3e10 frontier.**  Re-reading `W2Beyond3.a1_universal_wire`
+   shows the assembly's clause is GRID-RESTRICTED by signature (one
+   uniform K for the finite zero grid x 0 ... x M) - the 0204-0208
+   'absolute at all zeros' framing quantified the STRONGER statement
+   (the one lit. F1/F2 says is not a live theorem); the assembly
+   consumes the grid clause, and the grid is the certified frontier.
+   New A1Growth section 9: `dn_defect_to_sbridge` turns exactly the
+   two standing CITED inputs - (A) Trudgian A1G-5 (|S u| <= G_explicit u,
+   u >= e) and (B) the RvM identity with explicit residual
+   |DN j - S(x j) - 1/8| <= 1/x j (Titchmarsh Thm 9.7; the 0204 object
+   identity, its exact 7/8-3/4 shift in-tree via rvmShiftCore) - into
+   |DN j| <= G_explicit (x j) + 1/8 + 1/x j; `a1_grid_clause_exhibit`
+   exhibits the uniform K = 33206/5000 = 6.6412 on every grid point of
+   [4, 3e10] (data-free end to end; the only external inputs are the
+   two CITED theorems + e < 4 per module convention); and
+   `a1_zerofree_frontier` carries the full wire through
+   `a1_growth_wire` at the shifted growth G' = G_explicit + 1/8
+   (NonDecrOn survives the shift: `nondecr_on_add`): |S1Sum - RSum| <=
+   (G(3e10) + 9/8)(17/8) = 607002/40000 = 15.17505 < 16 on the far
+   side. The external input surface of the entire data-free lane is
+   now two peer-reviewed theorems + one one-line analysis fact. The
+   STRONGER absolute clause (one K over all zeros, unbounded) remains
+   NAMED and OPEN per 0207 (face_unbounded) - but it is NOT what the
+   assembly consumes. No RH claim.
 
 ## The target (the one open clause)
 

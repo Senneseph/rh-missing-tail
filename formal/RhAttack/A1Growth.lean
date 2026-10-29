@@ -517,4 +517,172 @@ machine-checked, no premises. -/ --
 theorem pin_face_S_sharp_3e10 : sPinMeasured0207 < (30081 : ℝ) / 5000 := by
   norm_num [sPinMeasured0207]
 
+/-! ## 9. The zero-free bridge: the A1 grid clause, closed at the frontier (0209)
+
+The single open clause of the W2Beyond3 A1 assembly, exactly as
+`a1_universal_wire` consumes it, is GRID-RESTRICTED:  for one finite
+zero grid  (x 0 ... x M),  a  UNIFORM  K  with  |DN j|  <=  K  on  the
+grid  (hA1_0 / hA1M / hA1).  This  section  EXHIBITS  such  a  K
+DATA-FREE  on  the  certified  3e10  frontier,  up  to  the  two
+classical  inputs  the  module  has  cited  all  along  (now  as
+explicit,  exactly-stated  inputs):
+
+  (A) Trudgian  A1G-5:  |S(u)|  <=  G_explicit u  for  u  >=  exp 1
+      (Math.  Comp.  81:1053-1061  (2012),  Theorem  1  -  CITED).
+  (B) RvM identity with explicit residual  (Titchmarsh  Thm  9.7;
+      0204 object identity,  the  exact  7/8 - 3/4  shift  in-tree
+      via  rvmShiftCore):  |DN j  -  S (x j)  -  1/8|  <=  1/x j
+      (CITED  theorem  applied  pointwise  on  the  grid).
+
+The  bridge  (dn_defect_to_sbridge)  turns  them  into
+|DN j|  <=  G_explicit (x j)  +  1/8  +  1/x j;  with  x j  in
+[4,  3e10]  that  is  <=  G (3e10)  +  5/8  <  33206/5000  =  6.6412
+-  the  uniform  K  of  the  grid  clause,  machine-verified  end  to
+end  (a1_grid_clause_exhibit).  The  same  bridge  runs  through
+a1_growth_wire  at  the  shifted  growth  G' := G_explicit + 1/8  to
+carry  the  full  frontier  wire:  |S1Sum  -  RSum|  <=
+(G (3e10)  +  9/8)  .  (17/8)  =  607002/40000  =  15.17505  <  16
+(a1_zerofree_frontier).
+
+The  stronger  ABSOLUTE  clause  (one  K  over  ALL  zeros,
+unbounded)  remains  NAMED  and  OPEN  per  0207  (face_unbounded;
+lit.  F1/F2)  -  it  is  NOT  what  the  assembly  consumes:  the
+assembly's  clause  is  grid-restricted,  and  the  grid  IS  the
+certified  data  frontier.  Every  ingredient  beyond  the  two
+CITED  theorems  is  LEAN-PROVEN  in-tree  (0204-0208).  No
+RH  claim.  -/ --
+
+-- NonDecrOn  survives  adding  a  constant.
+lemma nondecr_on_add (G : ℝ → ℝ) (a c : ℝ) (h : NonDecrOn G a) :
+    NonDecrOn (fun u ↦ G u + c) a := by
+  intro u v vu huv
+  linarith [h u v vu huv, (by ring : (G u + c) + 0 = G u + c)]
+
+-- The bridge:  CITED (A) + (B)  give  the  wire input pointwise.
+theorem dn_defect_to_sbridge (M N0 : ℕ) (Nas x : ℕ → ℝ) (S : ℝ → ℝ)
+    (hRVM : ∀ j ≤ M, |DN N0 Nas j - S (x j) - 1/8| <= 1 / x j)
+    (hS : ∀ j ≤ M, |S (x j)| <= G_explicit (x j)) :
+    ∀ j ≤ M, |DN N0 Nas j| <= G_explicit (x j) + 1/8 + 1 / x j := by
+  intro j hj
+  have hres : |DN N0 Nas j - S (x j) - 1/8| <= 1 / x j := hRVM j hj
+  have hSj : |S (x j)| <= G_explicit (x j) := hS j hj
+  calc |DN N0 Nas j|
+      = |(DN N0 Nas j - S (x j) - 1/8) + (S (x j) + 1/8)| := by ring
+    _ <= |DN N0 Nas j - S (x j) - 1/8| + |S (x j) + 1/8| :=
+      abs_add_le (DN N0 Nas j - S (x j) - 1/8) (S (x j) + 1/8)
+    _ <= |DN N0 Nas j - S (x j) - 1/8| + |S (x j)| + 1/8 := by
+      have htri2 : |S (x j) + 1/8| <= |S (x j)| + 1/8 := by
+        calc |S (x j) + 1/8| <= |S (x j)| + |1/8| := abs_add_le (S (x j)) (1/8)
+          _ = |S (x j)| + 1/8 := by
+            rw [abs_of_nonneg (by norm_num : 0 <= (1/8 : ℝ))]
+      nlinarith [htri2]
+    _ <= 1 / x j + G_explicit (x j) + 1/8 := by nlinarith [hres, hSj]
+    _ = G_explicit (x j) + 1/8 + 1 / x j := by ring
+
+-- The A1 grid clause EXHIBITED data-free at the 3e10 frontier (0209).
+-- Uniform  K  =  33206/5000  =  6.6412  on  every  grid  point  of
+-- [4,  3e10];  the  only  inputs  are  the  two  CITED  theorems
+-- (A)/(B)  and  the  standard  e  <  4  fact  (hE,  module
+-- convention).
+theorem a1_grid_clause_exhibit (M N0 : ℕ) (Nas x : ℕ → ℝ) (S : ℝ → ℝ)
+    (hE : exp 1 < 4)
+    (hgrid : ∀ j ≤ M, 4 <= x j ∧ x j <= 30000000000)
+    (hRVM : ∀ j ≤ M, |DN N0 Nas j - S (x j) - 1/8| <= 1 / x j)
+    (hTrudgian : ∀ u, exp 1 <= u -> |S u| <= G_explicit u) :
+    ∀ j ≤ M, |DN N0 Nas j| <= (33206 : ℝ) / 5000 := by
+  intro j hj
+  have hx4 : 4 <= x j := (hgrid j hj).1
+  have hxM : x j <= 30000000000 := (hgrid j hj).2
+  have hSp : ∀ k ≤ M, |S (x k)| <= G_explicit (x k) := fun k hk =>
+    hTrudgian (x k) (le_of_lt (by
+      calc exp 1 < 4 := hE
+        _ <= x k := (hgrid k hk).1))
+  have hb : |DN N0 Nas j| <= G_explicit (x j) + 1/8 + 1 / x j :=
+    dn_defect_to_sbridge M N0 Nas x S hRVM hSp j hj
+  have hfold : G_explicit (x j) + 1/8 + 1 / x j <= G_explicit (30000000000 : ℝ) + 5/8 := by
+    have hmon : G_explicit (x j) <= G_explicit (30000000000 : ℝ) :=
+      G_explicit_mono 4 (by norm_num) (x j) 30000000000 (by linarith [hx4]) hxM
+    have hinv : 1 / x j <= 1/4 := by
+      rw [div_le_div_iff₀ (by linarith [hx4] : 0 < x j) (by norm_num : (0 : ℝ) < 4)]
+      nlinarith [hx4]
+    nlinarith [hmon, hinv, (by norm_num : 0 <= (1/8 : ℝ)) ,
+      (by norm_num : 0 <= (5/8 : ℝ))]
+  have hsharp : G_explicit (30000000000 : ℝ) + 5/8 < (33206 : ℝ) / 5000 := by
+    nlinarith [pin_explicit_3e10_sharp,
+      show (30081 : ℝ) / 5000 + 5/8 = (33206 : ℝ) / 5000 from by norm_num]
+  linarith [hb, hfold, hsharp]
+
+-- The full data-free frontier wire (0209):  |S1Sum  -  RSum|  <  16
+-- on  the  far  side  at  the  certified  3e10  frontier.  Inputs:
+-- the  two  CITED  theorems  (A)/(B)  +  hE  (module  convention).
+theorem a1_zerofree_frontier (M N0 : ℕ) (Nas x : ℕ → ℝ) (S : ℝ → ℝ)
+    (t g1 : ℝ) (hM : 0 < M) (h1 : 1 <= t) (hfar : 2 * t <= g1)
+    (h4 : 4 <= g1) (hx0 : x 0 = g1)
+    (hxinc : ∀ j ∈ Finset.range M, x j < x (j + 1))
+    (hfront : x M = (30000000000 : ℝ))
+    (hE : exp 1 < 4)
+    (hRVM : ∀ j ≤ M, |DN N0 Nas j - S (x j) - 1/8| <= 1 / x j)
+    (hTrudgian : ∀ u, exp 1 <= u -> |S u| <= G_explicit u) :
+    |S1Sum M (fun j => FarKernel t (x j)) -
+        RSum M (fun j => FarKernel t (x j)) Nas| < 16 := by
+  have hx4 : ∀ j ≤ M, (4 : ℝ) <= x j := fun j hj =>
+    calc (4 : ℝ) <= g1 := h4
+      _ = x 0 := hx0.symm
+      _ <= x j := grid_ge_origin M x hxinc j hj
+  have hSj : ∀ j ≤ M, |S (x j)| <= G_explicit (x j) := fun j hj =>
+    hTrudgian (x j) (le_of_lt (by
+      calc exp 1 < 4 := hE
+        _ <= x j := hx4 j hj))
+  set G' := fun u => G_explicit u + 1/8 with hGp
+  have hdef' : ∀ j ≤ M, |DN N0 Nas j| <= G' (x j) + 1 / x j := by
+    intro j hj
+    have hb := dn_defect_to_sbridge M N0 Nas x S hRVM hSj j hj
+    simpa [G'] using hb
+  have hG0' : 0 <= G' (x M) := by
+    dsimp [G']
+    have hG0 : 0 <= G_explicit (x M) := by
+      have logx : log (x M) > 1 := by
+        calc 1 = log (exp 1) := by rw [log_exp]
+          _ < log 4 := log_lt_log (exp_pos 1) hE
+          _ <= log (x M) := (log_le_log_iff (by norm_num : (0 : ℝ) < 4)
+              (by linarith [hx4 M (le_rfl)])).mpr (by linarith [hx4 M (le_rfl)])
+      have hll : 0 <= log (log (x M)) := log_nonneg (le_of_lt logx)
+      rw [G_explicit]
+      nlinarith [(by norm_num : 0 <= (111/1000 : ℝ)),
+        (by norm_num : 0 <= (275/1000 : ℝ)),
+        (by norm_num : 0 <= (2450/1000 : ℝ)), logx, hll]
+    nlinarith [hG0]
+  have hGrow' : NonDecrOn G' g1 := nondecr_on_add G_explicit g1 (1/8)
+    (G_explicit_mono g1 h4)
+  have hw := a1_growth_wire M N0 Nas x t g1 G' hM h1 hfar hx0 hxinc
+    hG0' hGrow' hdef'
+  have ho1 : (17/2) * t^2 / g1^2 <= 17/8 := W2B3.a1_far_side_o1 t g1 h1 hfar
+  have hpos : 0 <= G' (x M) + 1 := by nlinarith [hG0']
+  have hw2 : |S1Sum M (fun j => FarKernel t (x j)) -
+        RSum M (fun j => FarKernel t (x j)) Nas| <=
+      (G' (x M) + 1) * (17/8 : ℝ) := by
+    calc |S1Sum M (fun j => FarKernel t (x j)) -
+            RSum M (fun j => FarKernel t (x j)) Nas|
+        <= (G' (x M) + 1) * ((17/2) * t^2 / g1^2) := hw
+      _ <= (G' (x M) + 1) * (17/8 : ℝ) :=
+        mul_le_mul_of_nonneg_left ho1 hpos
+  have hmono_front : G_explicit (x M) <= G_explicit (30000000000 : ℝ) :=
+    G_explicit_mono 4 (by norm_num) (x M) 30000000000
+      (by linarith [hx4 M (le_rfl)]) (hfront ▸ le_rfl)
+  have hsh : (G' (x M) + 1) * (17/8 : ℝ) < 16 := by
+    dsimp [G']
+    calc (G_explicit (x M) + 1/8 + 1) * (17/8 : ℝ)
+        = (G_explicit (x M) + 9/8) * (17/8 : ℝ) := by ring
+      _ <= (G_explicit (30000000000 : ℝ) + 9/8) * (17/8 : ℝ) :=
+        mul_le_mul_of_nonneg_right
+          (add_le_add hmono_front (le_rfl : (9/8 : ℝ) <= 9/8))
+          (by norm_num : 0 <= (17/8 : ℝ))
+      _ < (30081/5000 + 9/8) * (17/8 : ℝ) := by
+        have hp : G_explicit (30000000000 : ℝ) + 9/8 < (30081 : ℝ) / 5000 + 9/8 := by
+          simpa [pin_explicit_3e10_sharp_val] using
+            add_lt_add_of_lt_of_le pin_explicit_3e10_sharp (le_rfl : (9/8 : ℝ) <= 9/8)
+        exact mul_lt_mul_of_pos_right hp (by norm_num : 0 < (17/8 : ℝ))
+      _ < 16 := by norm_num
+  linarith [hw2, hsh]
+
 end A1G
