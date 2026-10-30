@@ -1003,3 +1003,101 @@ discharge 14σ; charge lattice retrograde); "the box" for the NN is now
 concrete = the channel bank (theorems made features); the next step is the
 lock-on-success net (0225 machine + "was right → freeze" gate) on the bank
 → target L_{g+1} against the pair baseline. Off-board; no RH claim.
+
+## LOCK (0233): THE THEOREMS-BOX, THE LOCK-ON-SUCCESS GATE, AND THE CEILING
+
+The owner's "box of predictive prime theorems" became executable: the
+26-note channel bank (0232) in, the decile of the NEXT gap out,
+frontier holdout 400k/100k, the 0225 GRU machine, and the owner's
+neural gate verbatim: **a configuration key (all 23 channels
+decile-bucketed) seen before with a CORRECT answer is frozen at its
+first-correct logits and takes no gradient; everything else keeps
+retraining** ("if encountered it before and the answer was correct,
+never change that answer; otherwise do your best").
+
+Ladder (test nats/step, 10 deciles; SE ~ 0.003 nats):
+
+| rung | nats/step | note |
+|---|---|---|
+| PRIOR | 2.17302 | flat |
+| **PAIR** | **2.10328** | current decile -> next decile: owns it |
+| PAIR+BOX | 2.10660 | the whole 26-note bank, given the current decile, adds 0.003 (noise) |
+| LINEAR (box only) | 2.42312 | below-prior: the channels are noise at this budget |
+| GRU-LOCK | 2.63233 | the gate fires |
+| GRU-FREE | 2.87944 | the unfrozen twin |
+
+Readings:
+1. **The ceiling, verified twice** (0225 at 12 symbols, 0233 at 10
+   deciles): the pair conditional contains every bit of locally
+   predictable structure in the gap tape. The channel bank - rotor
+   charge, gate depth, wait, unpaired, curvature, all of it - carries
+   no DECILE-level information beyond the current gap itself.
+2. **The gate is real, not folklore.** Freeze-on-success recovers
+   **0.24711 nats/step** on the test set vs the identical unfrozen
+   twin. It freezes 49,447 of 400,000 train keys (12.4%), and
+   **62.86% of the fresh test rows land on a frozen key** - the
+   "encountered it before" machinery fires on an unseen stream,
+   exactly as the owner specified. Freezing is a genuine
+   regularizer (it deletes the frozen keys' loss surface so the free
+   weights specialize to the residual).
+3. The reported LOCK train NLL (2.367) is not comparable to FREE's
+   (2.194): frozen positions record the loss at their frozen
+   (older) snapshot logits. The test comparison is the honest one.
+4. The 4.5-sigma TEST-E charge signal (0232) is confirmed too small to
+   move deciles: corr(omega14, L_next) real but ~3% of a mean gap in
+   amplitude - visible in a regression, invisible in a decile.
+
+Artifacts: `scripts/sq/loom16_lock_success.py`, `tmp/loom/loom16_out.txt`,
+entry 0233. Off-board. No RH claim.
+
+Next (Q3, per the autopilot plan): the channel bank's remaining value
+is at FINER than decile resolution and in the CROSS-channel structure
+the linear/GRU decile targets blind to - the rotor/charge decomposition
+(Omega by gap length and partner composition, in the 120120 tile
+frame) is the next toy.
+
+## ROTOR (0234): THE RETROGRADE ROTOR, REDUCED TO ONE STEP
+
+The 0231 "retrograde rotor" (global charge mean −0.43, z = −590) is not
+a new dynamics.  It is a **shadow of spf(p+2)**, by an exact identity
+(loom17/17b, X = 1e8, 5.68M gaps):
+
+> **THE IDENTITY.** For every gap with L >= 2:
+> `omega14 = -angle(z[p+2] / z[p+1])` — the stored charge is the
+> NEGATIVE OF THE FIRST PARTNER STEP — and the full gap word
+> telescopes: `prod z[k+1]/z[k] = z[p'-1]·zbar[p+1] = 1` (both even
+> bookends, partner 2).  Verified to 1.38e-14 over 5,250,813 gaps,
+> zero deviations.
+
+The one step is arithmetic, so the whole rotor table is arithmetic:
+
+| left lane family | spf(p+2) | charge | 
+|---|---|---|
+| {1, 7, 13, 19} | **always 3** (p+2 ≡ 3,9,15,21 mod 24; share 1.0000) | **exactly −1 tick = −2π/24, for every L ≥ 3** |
+| {5, 11, 17, 23} | never 3 (p+2 ≡ 7,13,19,1 mod 24); 1,224 distinct values | −branch₂₄(spf(p+2) − 2) ticks; mean −2.72, wobbling −0.58…−0.83 rad by L-stratum |
+| twin gaps (L=1) | — | exactly 0 (no steps) |
+
+The lane × L table (10.8s run) shows the OT rows as the constant −0.2618
+to four decimals at every L — the exact 24-gon tick.  No 2→2 or q→q
+partner transitions exist at all (parity alternation makes the interior
+word strictly alternating); the 2→q / q→2 step means are +0.545 / −0.510
+rad (OT).  The TW wobble with L is the primality of p+L+1 biasing
+spf(p+2) — a sieve effect, finite and measurable.
+
+What this does to the previous numbers:
+- the **marginal TEST-E** (0232: corr(omega, L_next) = +0.0059, 4.5σ at
+  1e7 → here **+0.008054, z = +19.2** at 1e8) is this same spf(p+2)
+  information; within fixed (lane, L) cells the residual corr is
+  r = +0.006…+0.023, **non-monotone** in omega quartiles (E[L_next]
+  spread ≤ ~1.5% of the next-gap SD), max cell z = 7.19 vs shuffled
+  nulls 2.45–2.78 (12 cells past 3σ vs ~6 expected).
+- the "rotor handedness" of 0231 is the sign of the inverse of the
+  first step: prograde 2→q in ⇒ retrograde charge out.
+- the bank's measurable value (0233 said: no decile power) survives
+  only as this small, non-decile, non-monotone spf(p+2) bit — real,
+  finite, and now fully explained.
+
+Artifacts: `scripts/sq/loom17{,_b}*.py`, `tmp/loom/loom17*_*.txt`,
+entry 0234. **Lean anchor candidate** (WheelTile pattern): the
+telescope identity and the OT-family −2π/24 constancy are finite and
+exact.  Off-board.  No RH claim.

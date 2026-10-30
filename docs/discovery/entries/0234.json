@@ -1,0 +1,16 @@
+{
+  "id": "0234",
+  "ts": "2026-10-30T14:20:00Z",
+  "kind": "side-quest",
+  "board": "off (no RH claim)",
+  "title": "ROTOR REDUCTION: the stored charge is EXACTLY the inverse of the first partner step; the retrograde rotor is a shadow of spf(p+2)",
+  "summary": "Loom17/17b (scripts/sq/loom17_rotor_cells.py, scripts/sq/loom17b_rotor_backbone.py; tmp/loom/loom17_out.txt, loom17b_out.txt) at X=1e8 (5.68M gaps) reduce the 0231 'retrograde rotor' to a one-step exact identity: the stored charge omega14 = -angle(first partner step of the gap word), verified to 1.38e-14 over 5,250,813 gaps with zero deviations, because the full word telescopes: prod z[k+1]/z[k] = z[p'-1]/z[p+1] = 1 (both even bookends, partner 2). Consequences, all measured: (i) twin gaps (L=1) have no steps -> charge exactly 0; (ii) left lanes {1,7,13,19}: p+2 is always divisible by 3 -> spf(p+2) = 3 with share 1.0000 -> charge EXACTLY -1 tick = -2pi/24 for every L >= 3 (the OT rows of the lane x L table are the constant -0.2618 to 4 decimals); (iii) twin-capable lanes {5,11,17,23}: spf(p+2) = 3 share 0.0000, 1224 distinct values (5,7,11,13,17,19,...) -> charge = -branch24(spf(p+2)-2) ticks, mean -2.72 at 1e8, L-stratum-dependent wobble (-0.58..-0.83 rad) as the primality of p+L+1 biases spf(p+2); (iv) no 2->2 or q->q partner transitions exist (parity alternation); 2->q mean +0.545/ q->2 mean -0.510 rad (OT). The marginal TEST-E signal (corr(omega, L_next) = +0.008054, z = +19.2 at 1e8, up from 0232's 4.5 sigma at 1e7) is this same spf(p+2) information: within fixed (lane, L) cells the residual corr is r = +0.006..+0.023, non-monotone in omega quartiles (E[L_next] spread <= ~1.5% of the next-gap SD), max cell z = 7.19 with shuffled nulls 2.45-2.78 (12 cells |z|>3 vs ~6 expected). The rotor is arithmetic, not a new dynamics: it carries a small, genuine, non-decile bit about the next gap (through spf(p+2)) and a large deterministic lane-family backbone. LEX-LEAN anchor candidate (WheelTile pattern): the telescope identity + the OT-family -2pi/24 constancy are finite and exact. Off-board; no RH claim.",
+  "artifacts": [
+    "scripts/sq/loom17_rotor_cells.py",
+    "scripts/sq/loom17b_rotor_backbone.py",
+    "tmp/loom/loom17_out.txt",
+    "tmp/loom/loom17b_out.txt"
+  ],
+  "verdict": "REDUCTION COMPLETE: rotor = inverse of first partner step (exact, 1.4e-14); OT lanes forced -2pi/24; TW lanes = -branch24(spf(p+2)-2) ticks; marginal 19-sigma TEST-E is spf(p+2) shadow with within-cell residual r <= 0.023 non-monotone",
+  "links": ["0231", "0232", "0233"]
+}
