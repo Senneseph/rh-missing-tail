@@ -2,7 +2,7 @@
 """TRACKED COPY (scripts/rh/b6/): the working copy mirrored at
 tmp/b6audit/ (replay artifacts, logs, pids stay untracked in tmp/).
 
-"""B6 section-8 conveyor - preflight + replay (0212 generation).
+B6 section-8 conveyor - preflight + replay (0212 generation).
 
 Turns "the board moved" into a kernel-verified verdict with ONE command.
 Templatized from the proven seventh-run infrastructure (tmp/z78s35):
@@ -53,6 +53,9 @@ FROZEN_DEPS = {                                     # builds_on id -> frozen src
     'sil-density-split-20261026': '2026-10-26-sil-density-split/src',
     'density-split-fine-chain': '2026-10-28-density-split-fine-chain/src',
     'arvi-density': '2026-10-29-arvi-density/src',
+    'joint-detector-fine-chain': '2026-10-28-joint-detector-fine-chain/src',
+    'arvi-selected-leaf': '2026-10-30-arvi-selected-leaf/src',
+    'positive-reserve-selected-gap': '2026-10-30-positive-reserve-selected-gap/src',
 }
 FROZEN_ROOT = f'{Z78S35}/repo_arvi/submissions'
 # anchor = the current in-tree face (0211: [Z78ArviDensity])
@@ -153,16 +156,25 @@ def main():
     repo = next(d for d in os.listdir(W) if d.startswith('QuasiRiemannTracker-'))
     repo = os.path.join(W, repo)
     # locate the submission src tree
-    sub = next((d for d in os.listdir(f'{repo}/submissions')
-                if (os.path.exists(f'{repo}/submissions/{d}/src/Candidate/Main.lean'))), None)
-    if sub is None:
-        # the record id may not be the submission dir name; match by metadata
-        for d in os.listdir(f'{repo}/submissions'):
+    subs = sorted(os.listdir(f'{repo}/submissions'))
+    sub = None
+    for d in subs:  # 1) dir name == rid or date-prefixed rid
+        if d == rid or d.endswith('-' + rid):
+            sub = d
+            break
+    if sub is None:  # 2) metadata title / id match against the catalogue record
+        for d in subs:
             m = f'{repo}/submissions/{d}/metadata.json'
-            if os.path.exists(m) and rid in open(m).read():
+            if not os.path.exists(m):
+                continue
+            try:
+                md = json.load(open(m))
+            except Exception:
+                continue
+            if md.get('title') == best.get('title') or md.get('id') == rid:
                 sub = d
                 break
-    if sub is None:
+    if sub is None or not os.path.exists(f'{repo}/submissions/{sub}/src/Candidate/Main.lean'):
         print(f'REFUSED: no submission tree found for {rid}'); sys.exit(30)
     src = f'{repo}/submissions/{sub}/src'
     # 3. identity: exact boundary in Candidate.bound statement text
