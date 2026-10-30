@@ -108,17 +108,43 @@ obstacle. So:
   `tmp/z78s39/verdict.json` + entry 0235 + build green + 4/4 gates PASS
   + watcher anchor moved. The face step is 4.9037e-4 (≈34% of all
   cumulative Z78 face width in one move).
-- **Q1' — 0234 follow-ups (the new Q1, off-board toys, measured first).**
-  (a) LEX-LEAN anchor for the 0234 identities (charge ≡
-  −angle(first partner step); OT lanes forced to −2π/24; TW lanes
-  = −branch₂₄(spf(p+2)−2) ticks) — Python tables frozen first, Lean
-  `native_decide`/`decide` module after (WheelTile pattern).
-  (b) `spf(p+2) → (L, L_next)` transfer matrix — the within-cell
-  residual was ≤0.023 and non-monotone in 0234; the transfer matrix
-  is the next instrument to see whether the cell-internal signal is
-  a permutation (reorderable, no predictivity) or a genuine map.
-  Trigger: after B22 landing (now). Action: Python at 1e8, tables +
-  nulls. Artifact: `scripts/sq/loom18_*.py` + `tmp/loom/` + entry.
+- **Q1' — 0234 follow-ups (b) CLOSED 0236+0237 with a twist; (a) PENDING.**
+  (b) Transfer matrix at 1e8: the pair family P(L_next | L) still owns
+  the next-gap DECILE (gain(S) = +0.0877 < 0.2 band, null
+  +0.00132 +/- 0.00003, z = +2573), but at EXACT-value resolution the
+  ceiling BREAKS: gain(S) = +0.2088 (z = +5238), monotone in target
+  resolution (0236 decile / 0237 exact-32). The honest frontier is
+  now: (L_g, spf(p+2)-class) is the deeper conditional model; the
+  decile is its coarse projection. All 0232/0234 structure anchors
+  re-exact at 1e8 (T1-T5: s=3 <=> OT-lane 1.000000 both ways over
+  2,875,733; TW = 1,224 distinct spf, never 3; parity 0/535,058;
+  s=5 lane bias x2.18 stable).
+  (a) LEX-LEAN anchor of T1-T5 + the resolution ladder (WheelTile
+  pattern, frozen tables, native_decide) - the in-tree item.
+- **Q1'' — carrier decomposition (CLOSED, 0238).**
+  The +0.2088 exact-value gain decomposes:
+  **79.8% = the ONE BIT `p mod 3`** (PAIR+MOD3 gain +0.16667, z =
+  +92856; 24-lane table equals it to 1.2e-4) + **20.2% = the fine
+  spf(p+2) value** (TW-only +0.10112, z = +1506, per-L rows all
+  positive).  AND the one bit is a THEOREM: p'' = p + L + L_next + 1
+  prime => L_next != -L (mod 3) [OT] / != -1-L (mod 3) [TW] —
+  measured **0 hits / 3,776,589 gaps** across every mass row.  The
+  0233 pair-family ceiling is the coarse projection of this hard
+  support constraint.  Next measurements: the same support game on
+  the other sieves (q = 5, 7, ...; the wheel-30030 availability
+  picture) and the fine-spf residual beyond the support fix.
+- **Q1''' — LEX-LEAN anchor (FIRST HALF DONE THIS TURN).**
+  DONE: `formal/RhAttack/LoomWheel.lean` BUILT GREEN (3006 jobs, 0
+  sorry): loom_summation, loom3mod3_rule1/rule2 (the row-wise
+  forbidden residues), loom3mod3_gap (gap form), census-row sanity
+  battery (decided).  The loom track's first TRUE theorem is
+  in-tree.  REMAINING: (a) the wheel-prime generalization q = 5..23
+  - MEASURED EXACT at q = 5, 7 (0239: 0 violations / 5,011,556 gaps;
+  the same one-line theorem family); Lean generalization pending -
+  (b) the
+  T1-T5 + 1e8 frozen-table anchors (WheelTile pattern), (c) measure
+  the fine-spf residual +0.0421 beyond the mod-3 support fix (the
+  density modulation on the SUPPORTED bins).
 - **Q2 — Lock-on-success net (LANDED, 0233, CEILING).**
   Result (test nats/step, 10 deciles): PRIOR 2.17302 · **PAIR 2.10328** ·
   PAIR+BOX 2.10660 (the 26-note bank adds ~0 given the current decile) ·

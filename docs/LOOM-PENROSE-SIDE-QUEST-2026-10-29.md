@@ -1101,3 +1101,210 @@ Artifacts: `scripts/sq/loom17{,_b}*.py`, `tmp/loom/loom17*_*.txt`,
 entry 0234. **Lean anchor candidate** (WheelTile pattern): the
 telescope identity and the OT-family −2π/24 constancy are finite and
 exact.  Off-board.  No RH claim.
+
+## TRANSFER (0236): THE spf(p+2) -> (L, L_next) TRANSFER MATRIX — small, real, MARSHALLED
+
+loom18b, `scripts/sq/loom18b_transfer.py`, `tmp/loom/loom18_out.txt`,
+X = 1e8 (5,312,773 gaps with L >= 2, i.e. p+2 is a composite in the
+gap; 5,751,861 gaps total with both L and L_next).
+
+**The question**: given the current gap length L_g — the pair
+family's full state (0233) — does s = spf(p+2) carry ADDITIONAL
+information about the NEXT gap's decile?
+
+**Ladder** (nats/step, NLL of the L_{g+1} decile, 10 deciles,
+test = the run itself, frontier order):
+
+| model | nats/step |
+|---|---|
+| PRIOR | 2.26957 |
+| **PAIR  P(. \| L_g)** | **2.21172** (baseline, owns) |
+| PAIR+LANE  (+ left lane, 24) | 2.16001 |
+| PAIR+S     (+ s, 128+rest) | **2.12398** |
+
+gain(S) = **+0.08774** nats/step, gain(LANE) = +0.05171 (strictly
+ordered: finer class -> more gain).
+
+**Null**: 200 shuffles of the s labels WITHIN each L_g stratum
+(preserves P(s|L_g) and all (L_g, s) cell masses exactly):
+null gains = **+0.00132 +/- 0.00003** — the refit-to-noise floor.
+Observed gain z = **+2573**.  The signal is overwhelmingly REAL and
+strictly conditional (it cannot be carried by the L-dependent
+marginal of s — the within-L shuffle removes exactly that path).
+
+**Band discipline** (|gain| < 0.2 nats/step, same as
+0225/0228/0233): +0.0877 is INSIDE the band -> **MARSHALLED at the
+decile level**: the pair family P(L_next | L) still owns the
+next-gap decile; spf(p+2) adds ~4% of the PAIR NLL, not a new
+predictor.  But "MARSHALLED" here is "MARSHALLED-but-real": a small,
+monotone-in-resolution, 2573-sigma conditional signal.  The 0233
+ceiling survives; it is no longer strict.
+
+**Exact-structure anchors, re-verified at 1e8** (0232/0234 side):
+
+| # | anchor | result |
+|---|---|---|
+| T1 | spf(p+2) = 3  <=>  left lane p mod 24 in {1,7,13,19} | share 1.000000 BOTH directions (2,875,733) |
+| T2 | (same, converse) | 1.000000 |
+| T3 | TW lanes {5,11,17,23}: s = 3 never | 0.000000; 1,224 distinct s (exactly 0234's count) |
+| T4 | parity theorem: adjacent odd composites in a gap share no spf | 0 violations / 535,058 checked pairs (the 0232 xrun = 1 theorem) |
+| T5 | s = 5 -> lane(c_2) in {1,13} | share 0.5000 vs base 0.2294 = x2.18 (0231 A4 x2.225 @1e7 — stable) |
+
+**Within-pair-cell heterogeneity**: for every mass pair tested
+(L_g = 3..25), the sum over s-cells of chi2_d/(A-1) is
+7.4e4..6.5e5 against a null expectation of ~120 (number of
+contributing cells) — s splits the pair cell with a huge-n shift
+whose NLL expression is exactly the +0.088 gain above.
+
+**What this closes / what opens**: the decile side of the 0234
+follow-ups is now CLOSED: (L_g, s) is the honest conditional state
+for the next-gap decile; no capacity model is warranted (0233's
+GRU is still far above).  New openings: (a) the sub-decile target
+(exact L_next, or 3-binned) where the 0.088 may concentrate;
+(b) the LEX-LEAN anchor of this table family (the T1-T5 anchors are
+finite, exact, and now re-verified at 1e8 — frozen-table candidates
+in the WheelTile pattern).
+
+Artifacts: `scripts/sq/loom18b_transfer.py`, `tmp/loom/loom18_out.txt`,
+entry 0236.  Off-board.  No RH claim.
+
+## TRANSFER-2 (0237): SUB-DECILE TARGET — the pair family's CEILING BREAKS at exact-value resolution
+
+loom18c, `scripts/sq/loom18c_subdecile.py`, `tmp/loom/loom18c_out.txt`,
+same population/null protocol as 0236, target = EXACT L_next value
+(1, 3, ..., 31 + rest = 33; 17 buckets - L_next is always odd; max in-run 219).
+
+| model | exact-L nats/step | (decile, 0236) |
+|---|---|---|
+| PRIOR | 2.66830 | 2.26957 |
+| **PAIR** | **2.48811** | 2.21172 |
+| PAIR+LANE | 2.32131 (+0.16679) | 2.16001 (+0.05171) |
+| PAIR+S | **2.27933 (+0.20877)** | 2.12398 (+0.08774) |
+
+Null (within-L stratum shuffle, 200 perms): +0.00149 +/- 0.00004;
+observed z = **+5238**.
+
+**The resolution ladder**: both gains grow with target resolution:
+gain(LANE) +0.0517 (10 deciles) -> +0.1668 (exact 17); gain(S)
++0.0877 (10 deciles, MARSHALLED, inside the 0.2 band) ->
+**+0.2088 (exact 17-value, DEEPER, outside the band)**.  The 0233 pair-family ceiling was a DECILE-level
+statement; at exact-value resolution the pair family no longer owns
+the next gap: (L_g, s) is a strictly deeper conditional model,
+carrying ~8.4% of the PAIR's exact-value NLL (0.2088/2.4881) beyond
+the pair law — real, 5238-sigma, and monotone in resolution.
+
+Reading: s = spf(p+2) is a coarse label of the gap's local odd
+divisibility; it mildly conditions which NEXT residues are available
+(through mod-q congruences on p' = p + L + 1).  At decile scale that
+conditioning averages out (MARSHALLED); at exact scale it is
+directly visible (DEEPER).  The 0234 "within-cell residual
+non-monotone, r <= 0.023" was the decile-scale shadow of this.
+
+New frontier (the old ceiling is the new floor): 0237 opens
+Q1'' = the TW-only / s-value-level decomposition (where in the
+1,224-value TW family does the +0.21 concentrate? 0234's OT family
+is a deterministic constant by T1, so the gain is expected TW-
+driven and value-level) and hardens (a), the LEX-LEAN anchor set
+(T1-T5 + the resolution ladder, all finite, all re-verified at 1e8).
+
+Artifacts: entry 0237.  Off-board.  No RH claim.
+
+## TRANSFER-3 (0238): THE CARRIER IS ONE BIT — p mod 3 — AND IT IS A THEOREM
+
+loom19 (`scripts/sq/loom19_tw_value.py`, `tmp/loom/loom19_run.log`),
+loom19b (`scripts/sq/loom19b_mod3.py`, `tmp/loom/loom19b_run.log`),
+X = 1e8, same population/null protocol as 0236/0237.
+
+**(i) TW-only** (left lane {5,11,17,23}, 2,437,040 gaps): PAIR
+2.31708 -> PAIR+S FULL(1224) gain +0.10112 (z = +1506, null +0.00269
++/- 0.00007); truncated top-128+rest +0.10327 (the tail pools fine).
+Per-L rows (TW): +0.04..+0.15 nats/step, every mass row positive.
+
+**(ii) The carrier test.** Decomposition check: the full-population
++0.2088 (0237) cannot be TW-only (0.459 mass x 0.101 = 0.047). The
+missing ~0.16 must sit in the OT/TW FAMILY INDICATOR itself — and
+that indicator is exactly `p mod 3` (T1: OT <=> p = 1 mod 3).
+looM19b: PAIR + MOD3 (just 2 classes: p mod 3):
+
+  PAIR          2.48811
+  PAIR+MOD3     2.32143   gain = **+0.16667**   (null +0.00002 +/- 0.00000, z = +92856)
+
+Convergence: PAIR+LANE (24 lanes, 0237) = 2.32131, gain +0.16679 —
+the 24-lane table is, to 1e-4, the 2-class mod-3 table.
+
+**Decomposition (exact-value, 1e8, honest, approximate additivity):**
+  +0.1667 (79.8%)  =  the ONE BIT `p mod 3` (the T1 OT/TW family)
+  +0.0421 (20.2%)  =  the fine spf(p+2) value beyond mod 3
+  (interaction with the s-class tail: 19's TW fine gain 0.101 x 0.459
+  mass = 0.0464 vs 0.0421 — a ~0.004 non-additive overlap, expected.)
+
+**(iii) WHY the one bit buys +0.16 — it is a hard support theorem.**
+p'' = p + L + L_next + 1 is prime, so p'' != 0 (mod 3).  Row-wise:
+  p = 1 (mod 3) (OT):   L_next != -L       (mod 3)
+  p = 2 (mod 3) (TW):   L_next != -1 - L   (mod 3)
+Measured at 1e8, every mass row tested (L = 3,5,7,9,11,13,15,17,19,
+21 x both families): share(L_next in the forbidden class) =
+0.00000000; **TOTAL 0 hits over 3,776,589 gaps.**  The coarse PAIR
+table P(.,|L) mixes the two families and therefore puts positive mass
+on the exactly-vacant (L, residue) bins; PAIR+MOD3 splits the row and
+z's the impossible bins.  The +0.1667 is mostly the SUPPORT
+correction of those vacated bins (plus a small residual density
+modulation beyond the support fix).
+
+Consequences:
+  * The 0233 "pair family owns the decile" is the coarse projection
+    of a HARD arithmetic support constraint (the mod-3 one-bit) plus
+    a small fine spf correction.  The ceiling was never a mystery:
+    it is the shadow of p mod 3.
+  * The first TRUE THEOREM of the loom track, Lean-ready:
+    for primes p < p' < p'' with p > 3:
+      (L_next + L + (p = 1 (mod 3) ? 0 : 1)) mod 3 != 0
+    — a universal arithmetic statement provable by a 3-case
+    computation, not a frozen table.  Next (Q1'''): `formal/` module
+    (decide / case split), then the frozen-table anchors (T1-T5,
+    1e8 re-verification) in the WheelTile pattern.
+  * Beyond mod 3: +0.0421 remains in the fine spf value (TW family,
+    1,224 classes) — the next measurement is the support structure
+    at mod q for q = 5, 7 (the same game on the other sieves): for
+    each small q, the rows with p fixing p' mod q forbid a residue
+    class of L_next mod q; the combined support over the wheel primes
+    2,3,5,7,11,13,17,19,23 (wheel 30030) is the full "availability"
+    picture of the 120120 tile family.
+
+**LEAN ANCHOR — BUILT GREEN (this turn).**
+`formal/RhAttack/LoomWheel.lean` (module target `RhAttack.LoomWheel`,
+`lake build RhAttack.LoomWheel` = 3006 jobs, 0 sorry, 0 errors):
+  * `loom_summation` — p'' = p + L + L_next + 2 bookkeeping identity
+  * `prime_gt3_not_dvd_3`
+  * `loom3mod3_rule1` — OT row: p ≡ 1 (mod 3) => L + L_next ≠ 0 (mod 3)
+  * `loom3mod3_rule2` — TW row: p ≡ 2 (mod 3) => L + L_next + 1 ≠ 0 (mod 3)
+  * `loom3mod3_gap` — the measured statement in gap form (the
+    measured 0/3,776,589 table is the empirical shadow of these
+    theorems)
+  * sanity battery: the census rows re-derived by the kernel
+    ((3+1) % 3 ≠ 0; ¬ Prime 15; (3+5) % 3 ≠ 0; the forbidden TW
+    (1+1+1) % 3 = 0 with ¬ Prime 9).
+The loom track's first TRUE theorem is in-tree: measured first
+(0238), anchored second (WheelTile pattern).
+
+
+## SUPPORT GAME (0239): THE SAME THEOREM AT EVERY SMALL SIEVE
+
+Mod 5 and mod 7, same measurement (X = 1e8, L = 3..11, all
+p mod q classes, >= 5k gaps/row): **0 violations over 5,011,556
+gaps** - every (L, p mod q) row's single forbidden L_next residue
+class (the one making p'' = p + L + L_next + 2 = 0 mod q) is exactly
+vacant.  Sample q = 5 rows: (L=3, p=2): 146,539 gaps, forb 3, 0;
+(L=5, p=1): 264,944, forb 2, 0; (L=5, p=2): 237,150, forb 1, 0;
+(L=7, p=1): 95,819, forb 0, 0.  The support hierarchy by sieve
+weight: mod 2 (parity, trivial) -> mod 3 (one-bit carrier, +0.1667
+nats/step = 79.8% of the 0237 gain) -> mod 5, 7, ... (exact,
+thinner).  The coarse pair family violates ALL of them at once; the
+residue conditioning zeroes them out row by row.  Generalization
+formalized in Lean = pending (Q1'''a); mod 3 is in-tree (LoomWheel).
+
+Artifacts: entry 0239.  Off-board.  No RH claim.
+
+Artifacts: `formal/RhAttack/LoomWheel.lean`, entries 0236-0238.
+Off-board.  No RH claim (the theorem is elementary arithmetic,
+stated as such).
