@@ -1,0 +1,26 @@
+{
+  "id": "0230",
+  "date": "2026-10-30",
+  "title": "LOOM12 WHEEL-TO-LOOM CVT: NEGATIVE/FLAT - the 24-adic fiber frame at the prime's OWN scale does not transmit the gap-class word at any height: class-conditional WF-24 (0214) readings at cut heights t = 4..404 (300k primes from [2e6, 1e8]), honest test-set logloss vs the class-only baseline, EMA-zeta selfcheck PASS: lane-target gain peaks at -0.11546 @ t*=404 and g24-target gain at -0.43242 @ t*=404 - both far below the same-protocol noise-null band (+/-0.054), monotonically approaching it from below across all 201 heights (no interior peak anywhere) - the frame carries no usable transmission of the target beyond the class prior at the prime's own scale; the wavefront's live-region tests (0214 C1/C2) remain the positive 24-territory facts, while this cross-test closes the 'does the frame at the cut transmit' question in the negative",
+  "status": "concluded_negative",
+  "offboard": true,
+  "artifacts": {
+    "script": "/home/jsmille/Projects/rh-missing-tail/scripts/sq/loom12_wheel_cvt.py",
+    "out": "/home/jsmille/Projects/rh-missing-tail/tmp/loom/loom12_out.txt",
+    "log": "/home/jsmille/Projects/rh-missing-tail/tmp/loom/loom12_run.log"
+  },
+  "key_numbers": {
+    "heights": [4, 404],
+    "n_heights": 201,
+    "peak_lane_gain": -0.11546,
+    "peak_g24_gain": -0.43242,
+    "t_star": 404,
+    "noise_null_band": "+/-0.05443",
+    "class_only_baseline_logloss": {"lane": 1.35908, "g24": 1.42886},
+    "primes_sampled": 300000,
+    "primes_range": [2000000, 100000000],
+    "run_s": 449.1
+  },
+  "verdict": "NO positive CVT transmission: the wheel's 24-fiber frame, read at the prime's own scale and any height in [4, 404], adds nothing beyond the coarse class prior on the gap-class target (gains negative and flat, within no-peak structure, vs same-protocol nulls). Honest negative result, reported as such. Off-board; no RH claim.",
+  "next": "none - if the 24-frame is revisited, the 0214 live-region (high-t zero) channel is the one with positive signal, not the own-scale transmission channel"
+}

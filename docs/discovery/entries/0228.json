@@ -1,0 +1,24 @@
+{
+  "id": "0228",
+  "date": "2026-10-30",
+  "title": "LOOM-1b2b FINAL ADJUDICATOR: the LD k-tuple JOINT law - Cramer(1/log q) conditioned on the small-prime wheel lattice (Y=13 120120-wheel, Y=17 510510-wheel), 4M sampled words each, H_m ladders m=1..4 vs REAL prime k-slices, X = 2e6/1e7/1e8: ALL 72 verdict cells (3 words L8/G24/A6 x 4 orders m x 2 wheels Y) = DEEPER (real strictly below LD, z <= -4.16, mostly -20..-92, none below the 2SEp threshold in the SUBSUMED direction) - the LD Cramer-on-wheel generator is NOT a subsuming model of the prime word: the real joint lane law carries order-3/4 structure the wheel-conditioned memoryless generator misses (m4 deepest for L8: z -48.7/-31.9/-6.4 over the scales, G24 m4 z -28.4/-127.9/-4.2, A6 uniformly deepest z -20..-92); the PAIR-FIT column tracks real to ~0.002 (L8 1e8 m1: 1.99755 vs 1.99767) confirming 0219/0225: the pair/Markov family owns orders 1-2, and the DEEPER residue beyond pair is exactly the order-3+ joint structure A6 carries (0219 H3 excess -0.1456@35.6SE re-confirmed at word level)",
+  "status": "adjudicated",
+  "offboard": true,
+  "artifacts": {
+    "script": "/home/jsmille/Projects/rh-missing-tail/scripts/sq/loom11_ld_joint.py",
+    "out": "/home/jsmille/Projects/rh-missing-tail/tmp/loom/loom11_out.txt",
+    "log": "/home/jsmille/Projects/rh-missing-tail/tmp/loom/loom11_run.log"
+  },
+  "key_numbers": {
+    "settings": "NWORDS=4e6 per (Y,X); seed 11; wheels Y=13 (P=30030, lattice 5760, max gap 22) and Y=17 (P=510510, lattice 92160, max gap 26); words L8/G24/A6; H_m m=1..4; scales 2e6/1e7/1e8; 2SEp rule",
+    "verdict_cells": "72/72 DEEPER (0 SUBSUMED, 0 UNDERSTRUCTURED)",
+    "z_L8_m1": [-4.94, -5.79, -6.96],
+    "z_L8_m4": [-48.74, -31.85, -6.44],
+    "z_G24_m4": [-28.40, -127.87, -4.16],
+    "z_A6_range": [-20.04, -92.37],
+    "pair_vs_real_L8_1e8_m1": [1.99755, 1.99767],
+    "run_s": 318.1
+  },
+  "verdict": "NOT SUBSUMED - DEEPER everywhere. The Cramer-on-wheel LD model is a floor, not a law: real k-slice entropy rates sit strictly below both LD wheels at every order and scale, and the pair-fit column (order-2 conditionals) already tracks real to ~0.002 - so the excess depth over the LD floor is prime-specific order-3+ joint structure, strongest in A6, stable from 2e6 to 1e8 (weakening mildly with scale, never crossing). Off-board measurement; no RH claim.",
+  "next": "the order-3+ joint law is the surviving named target if the Loom track resumes (G-3 baby, 0225, already localized it on the NLL instrument)"
+}

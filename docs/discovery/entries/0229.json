@@ -1,0 +1,31 @@
+{
+  "id": "0229",
+  "date": "2026-10-30",
+  "title": "TILE TRACK CONCLUSION (LOOM13) + Lean WHEEL-TILE ANCHOR: the tiled pattern the wheel pops out of is the 120120 first-survivor map - 23040 wheel points (density 0.191808) tile the period into same-lane runs (sizes 1..22; 22 tiles of the full 22-run; spectrum 1:23040 2:23040 3:17100 ... 22:8; lane histogram [13204,16826,13204,16826,13204,16826,13204,16826] over lanes 1,5,7,11,13,17,19,23). REAL-PRIME AGREEMENT (p' = next prime, c(phase) = tile lane): rho_class = 0.4025/0.3717/0.3350 at X = 2e6/1e7/1e8 vs independence null 0.1250 (z_class +211/+413/+1067); coarse 24-frame rho_24 = 0.2331/0.2205/0.2060; exact-hit sig = 0.37648/0.34024/0.29606 (p' literally equals the wheel's first survivor). GATE LADDER (first survivor of the y-gated lattice, X=1e7): rho_class rises monotonically with the gate - y=17: 0.3931, y=23: 0.4307, y=29: 0.4449, y=71: 0.5412, y=173: 0.6348 - the harder the lattice, the more the survivor lane locks to the true next-prime lane; the y=13 wheel row (30030) reproduces the 1e7 agreement row EXACTLY (0.3717) = internal consistency. LEAN ANCHOR: formal/RhAttack/WheelTile.lean BUILDS GREEN under toolchain v4.33.1 (full lake build 17454 jobs) - 31 declarations, 0 sorry, #eval cross-checks exact (firstStep 0 = 1; firstStep 9439 = 22; firstSurvivor 9439 = 9461; laneHistogram 1 = 13204; laneHistogram 23 = 16826); structural theorems are ordinary proofs (gcdShift, firstStepMod = step sees only mod 30030 via the O(n) ite_peeling proof, firstStepPeriodic, firstSurvivorPeriodic = the 120120 tile, sharpWitnessOn/NoEarlier/Hit); 30030/120120-domain tab/histogram/counts use native_decide (named TCB); off-board - no RH endpoint contact, no RH claim",
+  "status": "concluded",
+  "offboard": true,
+  "artifacts": {
+    "script": "/home/jsmille/Projects/rh-missing-tail/scripts/sq/loom13_tile.py",
+    "out": "/home/jsmille/Projects/rh-missing-tail/tmp/loom/loom13_out.txt",
+    "png": "/home/jsmille/Projects/rh-missing-tail/tmp/loom/loom13_tile.png",
+    "gen": "/home/jsmille/Projects/rh-missing-tail/scripts/rh/gen_wheeltile.py",
+    "lean": "/home/jsmille/Projects/rh-missing-tail/formal/RhAttack/WheelTile.lean"
+  },
+  "key_numbers": {
+    "period": 120120,
+    "wheel_points": 23040,
+    "wheel_density": 0.191808,
+    "lane_histogram": [13204, 16826, 13204, 16826, 13204, 16826, 13204, 16826],
+    "max_same_lane_run": 22,
+    "tile_size_spectrum": "1:23040 2:23040 3:17100 4:17100 5:11160 6:11160 7:4400 8:4400 9:2824 10:2824 11:1072 12:1072 13:320 14:320 15:88 16:88 17:40 18:40 19:8 20:8 21:8 22:8",
+    "rho_class": [0.4025, 0.3717, 0.3350],
+    "rho_24": [0.2331, 0.2205, 0.2060],
+    "null": 0.1250,
+    "sig": [0.37648, 0.34024, 0.29606],
+    "z_class": [211.2, 413.2, 1066.9],
+    "gate_ladder": {"y17": 0.3931, "y23": 0.4307, "y29": 0.4449, "y71": 0.5412, "y173": 0.6348, "wheel30030": 0.3717},
+    "lean": "build exit 0, 0 errors, 31 declarations, 0 sorry, #eval all exact"
+  },
+  "verdict": "the wheel pops a deterministic 120120 tile (exact, finite, now formal in Lean), and the tile PREDICTS: the survivor lane beats the independence null by ~3x at every scale (z up to +1067), and gating the lattice harder locks the prediction monotonically (0.393 -> 0.635) - the stronger the small-prime conditioning, the more the sieve's first survivor is the prime's next. 0217's PHASE_A = 1.0000 stays a tile identity; its real-data content is exactly this rho ladder. Off-board; no RH claim.",
+  "next": "none - the Loom/Wheel/tile track reaches its conclusion here (tracks 1b2b/LOOM12/LOOM13 + Lean anchor all closed)"
+}

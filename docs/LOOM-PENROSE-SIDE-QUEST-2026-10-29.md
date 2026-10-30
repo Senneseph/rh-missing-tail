@@ -816,3 +816,93 @@ front bias inside the clouds); max same-lane run (top-50 clouds) =
 - No RH claim.  Off-board measurement; finite (4 scales x 3 scale pairs x
   3 thresholds x 28 null fields), reproducible (seed 11), null-compared
   on all three axes.
+
+## 1b2b (0228): THE FINAL ADJUDICATOR — the LD k-tuple JOINT law
+
+The owner's fork, executed to a verdict.  The question: is the prime gap/
+lane word **subsumed** by a Law-of-Drapshtein (LD) *memoryless* model —
+Cramer's 1/log q conditioned on the small-prime wheel lattice — or is there
+**new** structure the LD generator misses?
+
+Model:  Cramer(1/log q) rescaled to the wheel lattice, two wheels
+  * **Y = 13** — the 120120 wheel (P = 30030, 5760 lattice points, max gap 22)
+  * **Y = 17** — the 510510 wheel (P = 510510, 92160 points, max gap 26)
+sample NWORDS = 4e6 gap-words each, and compare Shannon H_m (m = 1..4, the
+order of the k-slice) against the REAL prime words on the SAME three words
+(L8 / G24 / A6) at X = 2e6 / 1e7 / 1e8.
+
+```
+verdicts:  72/72 cells = DEEPER   (0 SUBSUMED, 0 UNDERSTRUCTURED)
+            z <= -4.16, mostly -20 .. -92
+pair-fit column tracks real to ~0.002  (L8 1e8 m1: 1.99755 vs 1.99767)
+```
+
+Reading:  the LD Cramer-on-wheel number is a **floor, not a law**.  The real
+joint lane law sits strictly *below* both LD wheels at every order and scale
+— the prime carries order-3/4 joint structure the memoryless wheel generator
+misses.  The pair (order-2) fit already tracks real to ~0.002, so the depth
+beyond pair is exactly the **order-3+ joint law** A6 carries (0219's H3
+excess −0.1456 @ 35.6 SE, re-confirmed at word level).  The G-3 baby (0225)
+already localized this same residue on the NLL instrument.  No RH claim.
+
+## TILE (0229): the tiled pattern the wheel pops out — CONCLUSION
+
+The 120120 first-survivor map is a **deterministic tile**: 23040 wheel
+points (density 0.191808) partition the period into same-lane runs of length
+1..22 (eight tiles of the full 22-run), lane histogram
+[13204, 16826, 13204, 16826, 13204, 16826, 13204, 16826] over the eight
+30030-wheel lanes, and a tile-size spectrum that falls off cleanly.
+
+Real primes p (p' = next prime), c(phase) = tile lane:
+
+```
+            X = 2e6     1e7     1e8      null
+rho_class   0.4025    0.3717   0.3350     0.1250     (z +211/+413/+1067)
+rho_24      0.2331    0.2205   0.2060
+sig (exact) 0.37648   0.34024  0.29606
+```
+
+The gate ladder (first survivor of the y-gated lattice, X = 1e7) is the
+money result — **rho_class rises monotonically with the gate**:
+
+```
+y=17: 0.3931   y=23: 0.4307   y=29: 0.4449
+y=71: 0.5412   y=173: 0.6348  (wheel 30030: 0.3717 = 1e7 row, exact)
+```
+
+The harder the small-prime gate, the more the sieve's first survivor **is**
+the true next prime's lane — up to ~5x the independence null at y=173.  The
+y=13 (30030) wheel row reproduces the 1e7 agreement row *exactly*
+(0.3717) = internal consistency.  0217's PHASE_A = 1.0000 remains a tile
+identity; its real-data content is this rho ladder.
+
+**Lean anchor (internet-first syntax, toolchain v4.33.1):**
+`formal/RhAttack/WheelTile.lean` builds **green** (full lake build, 17454
+jobs) — 31 declarations, 0 sorry.  Structural theorems are ordinary proofs
+(`gcdShift`, `firstStepMod` = "the step sees only mod 30030" via an O(n)
+ite-peeling proof, `firstStepPeriodic`, `firstSurvivorPeriodic` = the 120120
+tile, the 9439 sharp-witness `firstStep 9439 = 22`); the 30030/120120-domain
+tab / histogram / count facts use `native_decide` (named TCB).  `#eval`
+cross-checks all exact:
+
+```
+firstStep 0 = 1      firstStep 9439 = 22     firstSurvivor 9439 = 9461
+laneHistogram 1 = 13204       laneHistogram 23 = 16826
+```
+
+Off-board; does not touch the RH endpoint; no RH claim.
+
+## CVT (0230): wheel-to-loom transmission — NEGATIVE / FLAT
+
+Does the 24-adic fiber frame (0214 WF-24) **transmit** the gap-class word
+when read at the prime's own scale, at any height?  LOOM12: class-conditional
+readings at cut heights t = 4..404 on 300k primes in [2e6, 1e8], honest
+test-set logloss vs the class-only baseline, EMA-zeta selfcheck PASS.
+Peak lane-target gain −0.11546 @ t\*=404 and g24-target gain −0.43242 @
+t\*=404 — both far below the same-protocol noise-null band (±0.054),
+monotonic, no interior peak across all 201 heights.
+
+**No positive transmission.**  The frame at the prime's own scale adds
+nothing beyond the coarse class prior on the gap-class target.  The one
+channel with positive 24-signal stays the 0214 live-region (high-t zero)
+reading, not the own-scale transmission.  Honest negative result.  Off-board.
