@@ -1,0 +1,14 @@
+{
+  "id": "0233",
+  "ts": "2026-10-30T13:30:00Z",
+  "kind": "side-quest",
+  "board": "off (no RH claim)",
+  "title": "LOOM16: the theorems-box with the owner's LOCK-ON-SUCCESS gate - the pair family still owns the exact one, twice verified",
+  "summary": "The 26-note channel bank (23 live channels) was fed to the 0225 GRU machine with the owner's neural gate: a configuration key (per-channel decile buckets) seen before with a correct answer is FROZEN at its first-correct logits and takes no gradient; everything else keeps retraining. Same protocol as 0225 (frontier holdout 400k/100k, target = decile of L_next, 10 bins, verified GRU backward, exhaustive gradcheck worst_abs 8.1e-09 PASS). Ladder (test nats/step): PRIOR 2.17302; PAIR 2.10328 (owns it); PAIR+BOX 2.10660 (the box adds no conditional power given the current decile); LINEAR-corrected 2.42312 (box alone is below-prior); GRU-LOCK 2.63233 (D vs PAIR +0.529); GRU-FREE 2.87944 (D +0.776). The gate is MEASURED, not folklore: it recovers 0.24711 nats/step on the test set vs the identical unfrozen twin, freezes 49447/400000 train keys (12.4%), and 62.86% of the fresh test rows land on a frozen key - 'encountered it before and the answer was correct' fires on unseen streams. CEILING (verified twice: 0225 12-symbol, 0233 10-decile): the pair conditional (current gap -> next gap) contains all locally predictable decile structure; the 26-note channel bank carries no decile-level information beyond the current gap. Off-board measurement; no RH claim.",
+  "artifacts": [
+    "scripts/sq/loom16_lock_success.py",
+    "tmp/loom/loom16_out.txt"
+  ],
+  "verdict": "CEILING (pair family owns the exact one at this budget); the lock-on-success gate is a real 0.247 nats/step regularizer vs its own free twin",
+  "links": ["0225", "0232"]
+}
