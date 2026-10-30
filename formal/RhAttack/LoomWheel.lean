@@ -142,3 +142,139 @@ example : (3 + 5) % 3 ≠ 0 := by decide
     p'' = 5 + 1 + 1 + 2 = 9 is indeed composite. -/
 example : (1 + 1 + 1) % 3 = 0 := by decide
 example : ¬ Nat.Prime 9 := by decide
+
+/-# The support game at an arbitrary small prime q (0239) -/
+
+/-- a prime strictly below p'' does not divide p'' (the q-general
+    of prime_gt3_not_dvd_3). -/
+theorem prime_hq_not_dvd_q (hp'' : Nat.Prime p'') (hq : Nat.Prime q)
+    (hlt : q < p'') : p'' % q ≠ 0 := by
+  intro h
+  have hdv : q ∣ p'' := Nat.dvd_of_mod_eq_zero h
+  have h1 := Nat.Prime.eq_one_or_self_of_dvd hp'' q hdv
+  rcases h1 with h0 | h0
+  · -- q = 1 contradicts Nat.Prime.ne_one
+    have hno := Nat.Prime.ne_one hq
+    rw [h0] at hno
+    exact hno rfl
+  · -- q = p'' contradicts q < p''
+    omega
+
+/-- GENERAL SUPPORT (measured exact at q = 3 (0238), q = 5, 7 (0239),
+    0 violations / 5,011,556 gaps at 1e8): p'' = p + L + L_next + 2 is
+    prime above q (q prime) => the row-wait residue class of L_next
+    mod q is vacant, i.e.
+      L_next + (p + L + 2) != 0 (mod q)
+    (the class that would make p'' = 0 mod q is impossible). -/
+theorem loom_supp_mod_q {p q L Ln p'' : ℕ}
+    (hsum : p'' = p + L + Ln + 2)
+    (hp'' : Nat.Prime p'')
+    (hq : Nat.Prime q) (hpp' : q < p'') :
+    (Ln + (p + L + 2)) % q ≠ 0 := by
+  subst hsum
+  have this' : (p + L + Ln + 2) % q ≠ 0 := prime_hq_not_dvd_q hp'' hq hpp'
+  have hre : (Ln + (p + L + 2)) % q = (p + L + Ln + 2) % q := by
+    ring_nf
+  intro h
+  have hzero : (p + L + Ln + 2) % q = 0 := by
+    rw [← hre]
+    exact h
+  exact this' hzero
+
+/-# T1 as a THEOREM (the 0234 backbone, no frozen table needed) -/
+
+/-- T1 (the 0234 backbone, measured 1.000000 both ways at 1e8): for an
+    odd prime p > 2, spf(p + 2) = 3 <=> p = 1 (mod 3).  This is the
+    OT/TW split of 0238 in spf-language: the OT lanes {1, 7, 13, 19}
+    mod 24 are exactly the odd prime classes congruent to 1 mod 3,
+    and their partner word starts with the spf-3 claim. -/
+theorem loom_t1_spf3 (p : ℕ)
+    (hp : Nat.Prime p) (hp2 : 2 < p) :
+    (Nat.minFac (p + 2) = 3) ↔ (p % 3 = 1) := by
+  have hpm2 : p % 2 = 1 := by
+    rcases Nat.Prime.eq_two_or_odd hp with h0 | h0
+    · rw [h0] at hp2
+      omega
+    · assumption
+  have hpm1 : p + 2 ≠ 1 := by omega
+  constructor
+  · intro h
+    have hdv : 3 ∣ p + 2 := by
+      rw [← h]
+      exact Nat.minFac_dvd (p + 2)
+    have hmod : (p + 2) % 3 = 0 := Nat.mod_eq_zero_of_dvd hdv
+    by_cases h0 : p % 3 = 0
+    · -- p + 2 ≡ 2 mod 3 contradicts (p + 2) % 3 = 0
+      exfalso
+      have h2m : (p + 2) % 3 = 2 := by
+        rw [Nat.add_mod, h0]
+        <;> norm_num
+      omega
+    by_cases h2 : p % 3 = 2
+    · -- p + 2 ≡ 1 mod 3 contradicts (p + 2) % 3 = 0
+      exfalso
+      have h1m : (p + 2) % 3 = 1 := by
+        rw [Nat.add_mod, h2]
+        <;> norm_num
+      omega
+    -- p % 3 < 3 and neither 0 nor 2: p % 3 = 1
+    have hlt : p % 3 < 3 := by
+      exact Nat.mod_lt _ (by omega)
+    omega
+  · intro h
+    have hmod : (p + 2) % 3 = 0 := by
+      rw [Nat.add_mod, h]
+    have hdv : 3 ∣ p + 2 := Nat.dvd_of_mod_eq_zero hmod
+    have hle : Nat.minFac (p + 2) ≤ 3 :=
+      Nat.minFac_le_of_dvd (by omega) hdv
+    have hgt : 3 ≤ Nat.minFac (p + 2) := by
+      have hp1 : Nat.Prime (Nat.minFac (p + 2)) := Nat.minFac_prime hpm1
+      by_contra hlt3
+      have h2eq : Nat.minFac (p + 2) = 2 := by
+        have hpos := Nat.Prime.two_le hp1
+        omega
+      have hmfdv := Nat.minFac_dvd (p + 2)
+      rw [h2eq] at hmfdv
+      have hmodc : (p + 2) % 2 = 0 := Nat.mod_eq_zero_of_dvd hmfdv
+      have hmodp : (p + 2) % 2 = p % 2 := by
+        rw [Nat.add_mod]
+        <;> norm_num [hpm2]
+      omega
+    omega
+
+/-# T3 as a THEOREM (the parity anchor, 0234: 0 violations / 535,058
+    adjacent pairs measured at 1e8) -/
+
+/-- T3 (parity theorem, in its strongest uniform form): for odd c >= 3,
+    consecutive odd integers c and c + 2 share no spf.  (The 0234
+    measurement restricted this to composite c: consecutive ODD
+    composites in one gap word never share their smallest prime
+    factor, and the measured table showed 0 violations over
+    535,058 adjacent odd-composite pairs.)
+    Proof: a common spf q would divide both c and c + 2, hence q | 2,
+    hence (q prime) q = 2, hence c even -- contradiction. -/
+theorem loom_t3_parity (c : ℕ) (hc : 3 ≤ c) (hcodd : c % 2 = 1) :
+    Nat.minFac c ≠ Nat.minFac (c + 2) := by
+  intro h
+  have hmc : Nat.minFac c ∣ c := Nat.minFac_dvd c
+  have hmc2d : Nat.minFac (c + 2) ∣ c + 2 := Nat.minFac_dvd (c + 2)
+  have hdv2 : Nat.minFac c ∣ c + 2 := by
+    rw [h]
+    exact hmc2d
+  have hsubraw : Nat.minFac c ∣ c + 2 - c := dvd_sub hdv2 hmc
+  have h2 : c + 2 - c = 2 := Nat.add_sub_cancel_left c 2
+  rw [h2] at hsubraw
+  have hp1 : Nat.Prime (Nat.minFac c) := Nat.minFac_prime (by
+    intro h1
+    omega)
+  rcases Nat.Prime.eq_one_or_self_of_dvd Nat.prime_two (Nat.minFac c) hsubraw with h0 | h0
+  · -- minFac c = 1 contradicts primality
+    have hno := Nat.Prime.ne_one hp1
+    rw [h0] at hno
+    exact hno rfl
+  · -- minFac c = 2 => 2 | c => c even, contradiction
+    have hdv2c : 2 ∣ c := by
+      rw [h0] at hmc
+      exact hmc
+    have hmodc : c % 2 = 0 := Nat.mod_eq_zero_of_dvd hdv2c
+    omega

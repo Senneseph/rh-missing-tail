@@ -133,18 +133,20 @@ obstacle. So:
   support constraint.  Next measurements: the same support game on
   the other sieves (q = 5, 7, ...; the wheel-30030 availability
   picture) and the fine-spf residual beyond the support fix.
-- **Q1''' — LEX-LEAN anchor (FIRST HALF DONE THIS TURN).**
+- **Q1''' — LEX-LEAN anchor (LARGELY DONE).**
   DONE: `formal/RhAttack/LoomWheel.lean` BUILT GREEN (3006 jobs, 0
-  sorry): loom_summation, loom3mod3_rule1/rule2 (the row-wise
-  forbidden residues), loom3mod3_gap (gap form), census-row sanity
-  battery (decided).  The loom track's first TRUE theorem is
-  in-tree.  REMAINING: (a) the wheel-prime generalization q = 5..23
-  - MEASURED EXACT at q = 5, 7 (0239: 0 violations / 5,011,556 gaps;
-  the same one-line theorem family); Lean generalization pending -
-  (b) the
-  T1-T5 + 1e8 frozen-table anchors (WheelTile pattern), (c) measure
-  the fine-spf residual +0.0421 beyond the mod-3 support fix (the
-  density modulation on the SUPPORTED bins).
+  sorry): loom_summation, loom3mod3_rule1/rule2/gap, prime_hq_not_dvd_q,
+  loom_supp_mod_q (the GENERAL q-support theorem), loom_t1_spf3, 
+  loom_t3_parity, census-row battery.  DONE (a): the wheel-prime 
+  generalization - formalized at arbitrary q AND measured exact at
+  q = 5..11 (0239/0240).  DONE (c, CORRECTED answer): the "fine-spf
+  residual" was a lossy-summary artifact - the mod-ladder (0240) shows
+  the JOINT support row p mod 2310 is the dominant instrument
+  (holdout +0.5555 vs +0.2043 for full spf); the 24-block chord mask
+  (0241: +0.0120, z +94.9) and the global prime/non-prime SUM STICKS
+  (0241: NULL, z -0.395 / r +0.0126) are measured.  REMAINING: (b) the
+  frozen p mod 2310 support-row TABLE anchors T6+ (WheelTile pattern,
+  pending 1e8 table freeze).
 - **Q2 — Lock-on-success net (LANDED, 0233, CEILING).**
   Result (test nats/step, 10 deciles): PRIOR 2.17302 · **PAIR 2.10328** ·
   PAIR+BOX 2.10660 (the 26-note bank adds ~0 given the current decile) ·

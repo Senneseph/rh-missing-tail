@@ -1308,3 +1308,76 @@ Artifacts: entry 0239.  Off-board.  No RH claim.
 Artifacts: `formal/RhAttack/LoomWheel.lean`, entries 0236-0238.
 Off-board.  No RH claim (the theorem is elementary arithmetic,
 stated as such).
+
+## HARMONY-LADDER (0240): THE JOINT MISSING-NOTE PATTERN DOMINATES
+
+The owner's 2026-10-31 intuition ("the calculation might be HELPED by
+the absence of primes before the current integer - the missing hole in
+the run-up sharpens the future search field") was put on the scale:
+the instrument is the joint sieve label p mod N (which of the small
+primes do NOT hit the run-up composites p+2, p+4, ...).
+
+Ladder (X = 1e8, 0237 exact-value protocol, 17 buckets; `loom20_out.txt`):
+
+```
+PAIR        2.48811   (baseline)
+PAIR+S      2.27933   gain +0.20877   (0237 anchor, reproduced)
+PAIR+M3     2.32143   gain +0.16667   (0238 one-bit anchor, reproduced)
+PAIR+M15    2.12073   gain +0.36737   z = +76627
+PAIR+M105   1.97112   gain +0.51698
+PAIR+M2310  1.89358   gain +0.59452   z = +8410
+PAIR+M30030 2.10877   gain +0.37933   z = +3245, step -0.215
+```
+
+HOLDOUT (fit odds / score evens, `loom20b_out.txt`): PAIR+S +0.20434,
+PAIR+M15 +0.36711 (in-sample +0.36737), PAIR+M2310 +0.55551
+(in-sample +0.59452): the gain GENERALIZES.
+
+The 0236-0238 narrative is corrected: the full single value
+s = spf(p+2) keeps only the FIRST note struck; the JOINT missing-note
+pattern (p mod 2310) is the dominant next-gap instrument, ~2.7x
+stronger. Sieves 13/17/19/23 add nothing (the null-adjusted M30030
+margin is -0.221). Mechanism: the row-wise support game (0238/0239),
+now a theorem family in-tree:
+
+`formal/RhAttack/LoomWheel.lean` BUILT GREEN (3006 jobs, 0 sorry),
+new this turn: `prime_hq_not_dvd_q`, `loom_supp_mod_q` (the GENERAL
+support theorem at arbitrary small prime q), `loom_t1_spf3`
+(minFac (p + 2) = 3 <-> p % 3 = 1 for odd prime p > 2),
+`loom_t3_parity` (odd c >= 3: minFac c != minFac (c + 2)).
+
+Artifacts: `loom20_modladder.py`, `loom20b_holdout.py`, entries 0240.
+Off-board. No RH claim.
+
+## MASK & STICK (0241): THE PERIOD MASK IS WEAK, THE GLOBAL STICK IS NULL
+
+`loom21_harmony_stick.py` measured the other two forms of the idea
+(`loom21_out.txt`):
+
+**A - the 24-block missing-note mask** (which of the 8 admissible
+classes are realized per 24-period; 4,162,499 blocks, 227/256 masks,
+ZERO full-harmony periods, mean 1.382 notes per period): holdout gain
++0.01204 nats/block (fit first half, score second half) vs shuffle
+null -> z = +94.9. Real, but ~46x weaker than 0240's row form: the
+chord carries far less than the prime's exact position in the period.
+(Raw point-biserial r = +0.037 and lag-1 -0.036 are drift confounds,
+not the headline.)
+
+**B - the stick** (P(x) = full sum of primes <= x, N(x) = the
+non-prime sum; 8192 primes, P up to 2.79e14, Miller-Rabin cross-
+verified vs trial division):
+  * modular guide: corr(P mod 24, forward top quartile) = +0.0126 at
+    primes vs -0.0134 at random odds - ~1.1 sigma / 1.7 sigma delta:
+    NOT confirmable
+  * far pointer: MR primality of the odd-neighbor of P(x_k) vs the
+    local forward distance: z = -0.395 - NULL
+  * movie pair: (P,N) primality pair vs the local quartile: flat;
+    the two guides uncorrelated (r = +0.0081)
+
+The global additive invariants do NOT steer the local tape at 1e8.
+The absence-sharpens-future mechanism is the LOCAL/JOINT support row
+(0240) - the theorem side of it already in-tree. Negative result
+reported per discipline.
+
+Artifacts: `loom21_harmony_stick.py`, entry 0241. Off-board.
+No RH claim.
