@@ -1,0 +1,31 @@
+{
+  "id": "0231",
+  "date": "2026-10-30",
+  "title": "VORTEX/VOID DOT INSTRUMENT (LOOM14): the churn-vs-pin picture made finite and measured on the prime tape [1e5, 1e7] (654,986 gaps, 9.24M claimed composites; partner = spf(n) = the vortex that churns n out; voids = the primes = the claim map's holes). A1 VORTEX SHARE: the churn is top-heavy - partner 2 claims 53.5% of all composites, 3 claims 17.9%, the six wheel vortices (partners <= 13) do 86.55% of all claiming, claim entropy only 0.327 of max over 446 active vortices. A2 CHURN MOMENTUM (the dot of each gap's partner lane word with the 24-gon unit-circle frame, vs a same-length shuffled-partner null): NULL - E|V|/sqrt(L) 2.6268 real vs 2.6061 null, short/long gap deciles the same: the vortex has no net directional drift in the 24-frame. A3 CHURN CIRCULATION (discrete cross/curl = per-gap net wrapped angle change of the claim word): STRONG REAL - P(Omega > 0) = 0.0962 vs null 0.4598 (z = -590!), E[Omega] = -0.4300 vs +0.0049, E|Omega| = 0.7321 vs 1.4824 - the claim word is not a random meander on the 24-gon, it is a coherent RETROGRADE rotor: the vortex has a measurable handedness, and this is exactly the component the unsigned anisotropic filter cannot see (A6's 1D aniso-frame dot is null too: with-flow 0.8109 vs 0.8031 null, net drift 0.2050 vs 0.2510 null). A4 VOID HANDOVER (odd flank partner lane at p'-2 x void lane p' mod 24; the immediate flanks p+1/p'-1 are always even = partner 2 vacuously): chi2 = 597255 over 72 cells, but the top cells (partner 3 -> void lanes {5,11,17,23} at x1.823; partner 5 -> void lanes {1,13} at x2.225) are the MOD-6 ARITHMETIC shadow - p'-2 divisible by the flank partner forces p' mod 6, which then splits into two mod-24 lanes: 'what the void wants' is the sieve's modular arithmetic made visible, not a new interaction. A5 FLANK PAIR (odd vortex at p+2 | odd vortex at p'-2, same void): weak real pair excess - (5,5) x1.256, (5,7) x1.147, (7,5) x1.129, (3,3) only x1.038 - the two vortices flanking one void talk at order 2 (consistent with 0228: the pair family owns orders <= 2). B BOIL BALANCE (the syringe rate-match): the 0229 gate transfer curve rho(y) is LINEAR IN LOG LOG Y (the Mertens vacuum depth) - rho = -0.0005 + 0.3795*loglog y, R2 = 0.9859 over y = 13..173 (+ the y=13 wheel row): the vacuum-depth -> first-boil conversion is first-order and nearly exact, with the y -> inf endpoint rho -> 1 (the 0217 identity: at y = sqrt(x) the pin set is exactly the primes, partner cannot reach sqrt(n) <=> n is prime); PNT renewal slack R(x) = pi(x)log(x)/x - 1 = +0.0804/+0.0712/+0.0613 at 2e6/1e7/1e8 - the rate match is TIGHTENING with scale. CONCLUSION: the syringe formalizes - ambient integer flow in (density 1), sieve vacuum (depth log log y), boil = spf-claiming, work = y-rough residue -> primes at y = sqrt(x), rate match = the Mertens renewal fixed point (PNT) with measured decaying slack; and the churn itself, which 0228 had only bounded, is now directly characterized: isotropic in direction (A2 null, A6 null), massively chiral (A3, z -590 retrograde), order-2 paired at the void flanks (A5), arithmetically handed over into the void (A4)",
+  "status": "measured",
+  "offboard": true,
+  "artifacts": {
+    "script": "/home/jsmille/Projects/rh-missing-tail/scripts/sq/loom14_vortex_void.py",
+    "out": "/home/jsmille/Projects/rh-missing-tail/tmp/loom/loom14_out.txt"
+  },
+  "key_numbers": {
+    "runs": 654986,
+    "claimed_composites": 9245002,
+    "partner2_share": 0.5354,
+    "partner3_share": 0.1785,
+    "wheel_share_le13": 0.8655,
+    "claim_entropy_frac": 0.327,
+    "momentum_REAL_over_NULL": "2.6268 / 2.6061 (null)",
+    "chirality_P_Omega_gt_0": [0.0962, 0.45983],
+    "chirality_z": -590.48,
+    "E_Omega": [-0.42999, 0.004852],
+    "E_abs_Omega": [0.7321, 1.4824],
+    "aniso_dot_withflow": [0.81092, 0.80309],
+    "gate_transfer_fit": {"slope_per_loglog": 0.3795, "intercept": -0.0005, "R2": 0.9859},
+    "PNT_slack_R": [0.080409, 0.071175, 0.061299],
+    "flank_pair_top": {"33": 1.038, "55": 1.256, "57": 1.147, "75": 1.129},
+    "run_s": 2.0
+  },
+  "verdict": "YES the syringe thinking applies, and it is now instrumented: the integer system is a self-sustaining churn engine (input = the flow, vacuum = the sieve pressure, conversion = spf-claiming, output = primes, rate match = the PNT renewal with measured decaying slack +0.080 -> +0.061), the vacuum->work conversion is first-order in vacuum depth (R2 = 0.9859), the 'void wants' is the modular arithmetic of the claim boundaries, and the vortex itself is a retrograde rotor (chirality z = -590) with no net directional drift. The dot product belongs IN ADDITION to anisotropic filtering: the filter gives the frame, the cross term gives the handedness the filter is structurally blind to - and the handedness is real and huge. Off-board; no RH claim.",
+  "next": "if resumed: the retrograde rotor (A3) is the new named object - decomposition of Omega by gap length / partner composition vs the pair law, and whether the rotor's handedness flips or persists under the 120120 tile frame"
+}

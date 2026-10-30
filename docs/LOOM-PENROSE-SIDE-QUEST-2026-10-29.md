@@ -906,3 +906,50 @@ monotonic, no interior peak across all 201 heights.
 nothing beyond the coarse class prior on the gap-class target.  The one
 channel with positive 24-signal stays the 0214 live-region (high-t zero)
 reading, not the own-scale transmission.  Honest negative result.  Off-board.
+
+## VV (0231): VORTEX / VOID — the syringe, made finite
+
+The owner's vortex/void + cavitation-syringe picture, mapped to named
+objects and measured (script `loom14_vortex_void.py`, 2s run, X = 1e7):
+
+Syringe term            -> integer object
+  ambient energy in     -> the integer flow (density 1; window = the room)
+  vacuum hold           -> sieve pressure Pi_y, depth ~ log log y (Mertens)
+  boiling / conversion  -> a composite is CLAIMED by spf(n) = its vortex
+  useful work out       -> the y-rough residue; at y = sqrt(x) EXACTLY the
+                           primes (no partner can reach sqrt(n) <=> prime)
+  rate match            -> the Mertens renewal fixed point (PNT); measured
+                           slack R(x) = pi log x / x - 1:
+                           +0.0804 / +0.0712 / +0.0613 at 2e6/1e7/1e8
+                           (the match is tightening)
+
+Measurements on 654,986 gaps (9.24M claimed composites):
+- **A1 vortex share**: partner 2 claims 53.5%, partner 3 17.9%; the six
+  wheel vortices (<= 13) do 86.55% of all claiming; entropy 0.327 of max.
+- **A2 churn momentum** (dot of the gap's partner-lane word with the
+  24-gon frame): NULL — 2.6268 real vs 2.6061 null (per sqrt L).  No net
+  directional drift.
+- **A3 churn circulation** (the discrete cross/curl of the claim word):
+  **REAL and huge** — P(Omega > 0) = 0.0962 vs 0.4598 null (z = -590),
+  E[Omega] = -0.43, E|Omega| halved vs null.  The churn is a coherent
+  **RETROGRADE ROTOR** on the 24-gon — the vortex has a measured
+  handedness.  This is the component anisotropic filtering is structurally
+  blind to (A6's 1D aniso-frame dot: null, 0.8109 vs 0.8031).
+- **A4 void handover** (odd flank partner at p'-2 x void lane p' mod 24):
+  the top cells are the mod-6 arithmetic shadow (partner 3 forces the
+  {5,11,17,23} lane pair at x1.82, partner 5 forces {1,13} at x2.22) —
+  "what the void wants" is the sieve's modular arithmetic, not a new
+  interaction.  (Immediate flanks p+1 / p'-1 are always even = partner 2,
+  vacuous.)
+- **A5 flank pair**: weak real order-2 excess — (5,5) x1.256, (5,7)/(7,5)
+  ~x1.13-1.15 — the vortices flanking one void talk at order 2 (0228's
+  pair family again).
+- **B boil balance**: the 0229 gate transfer curve is **linear in log log y**
+  (the vacuum depth): rho = -0.0005 + 0.3795 loglog y, **R2 = 0.9859**,
+  endpoint y -> inf gives rho -> 1 (the 0217 identity).  First-order engine.
+
+Verdict: yes — the system is a self-sustaining churn engine and the
+bookkeeping closes (PNT renewal, measured decaying slack); the new named
+object is the retrograde rotor (A3); the void handover is arithmetic;
+the dot product belongs in ADDITION to aniso filtering — the filter gives
+the frame, the cross term gives the handedness.  Off-board; no RH claim.
