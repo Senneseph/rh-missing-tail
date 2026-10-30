@@ -953,3 +953,53 @@ bookkeeping closes (PNT renewal, measured decaying slack); the new named
 object is the retrograde rotor (A3); the void handover is arithmetic;
 the dot product belongs in ADDITION to aniso filtering — the filter gives
 the frame, the cross term gives the handedness.  Off-board; no RH claim.
+
+## FC (0232): THE FLUX CAPACITOR — stored charge, inverse discharge, the exact one
+
+The owner's flux-capacitor picture (charge + direction stored; discharge is
+the *inverse* directional out-rush; 3D-movie = two 2D channels; 26 named
+characteristics; idempotent order-preserving cavity) made finite and
+measured (script `loom15_flux_cap.py`, 14 s, X = 1e7).
+
+**The even bookends kill the naive phase.** Every gap's partner word is
+framed `2, (interior), 2` (p+1 and p'−1 are always even). So the full
+telescoping displacement `z[p'−1]·z̄[p+1] = 1 EXACTLY` for all gaps — the
+net phase of the word is erased by the even framing. The stored charge is
+therefore the 0231 interior sum **Ω** (word from p+2 to p'−1, signed rad):
+cross-check vs 0231 EXACT (E[Ω] = −0.4300, P(Ω>0) = 0.0962). Ω lives on a
+**discrete retrograde lattice**: quantiles −2.88 / −0.785 / −0.262 /
+−0.262 / +2.356 rad. The 3D-movie pair: per-step (Re,Im) = (+0.4156, 0.000)
+— locally symmetric (the A2 null in complex language); per-gap charge mean
+pair (0.584, −0.312) — the retrograde movie.
+
+**The capacitor test (does the charge survive across the void, and how is
+it discharged?):**
+- corr(ω_i, ω_{i+1}) = **−0.01850** vs null +0.00007 ± 0.00132
+  (p− = 0.0000): the discharge is **not even and not persistent — it
+  partially runs OPPOSITE to the stored charge** (the inverse out-rush,
+  real at ~14σ, small magnitude).
+- sign persistence 0.8094 vs null 0.8113 (no sign memory), flip 0.1906 vs
+  0.1887.
+
+**The 26-note bank** (A–Z; V = void lane = target, Y = scale): xrun ≡ 1
+for ALL gaps (parity theorem: consecutive odd composites c, c+2 cannot
+share spf, since q | 2 forces q = 2 — a theorem, not a bug); echo ≈ 0;
+C cycle ≡ 0 (no gap loops the 24-gon: "looped" is vacuous). Top channels
+vs the void lane: G gate χ² = 447,852 (the known mod-6 arithmetic shadow),
+then W wait 96,302, U unpaired 71,896, D drift 58,516, **F flux 30,856**
+(x1.377, most-negative-charge quartile → lane 11: the charge talks to the
+void beyond the gate), T turn 14,643, B bias 8,564, K keep 8,330, M moment
+7,861, Z zeta 4,302 — the rest is weaker.
+
+**TEST E — "the exact one":** corr(ω_i, L_{i+1}) = **+0.00592** vs null
++0.00009 ± 0.00130 (~4.5σ beyond ALL shuffled structure) — the stored
+charge predicts the exact next gap length, but the size is ~3% of one mean
+gap across the charge quartiles (E[L_next] = 13.83 / 13.68 / 14.08 /
+14.23, grand 13.97). Self sanity: corr(ω_i, L_i) = −0.046 (it knows its
+own gap better, as it should).
+
+Verdict: the flux capacitor is a real **weak-linear** object (inverse
+discharge 14σ; charge lattice retrograde); "the box" for the NN is now
+concrete = the channel bank (theorems made features); the next step is the
+lock-on-success net (0225 machine + "was right → freeze" gate) on the bank
+→ target L_{g+1} against the pair baseline. Off-board; no RH claim.

@@ -1,0 +1,34 @@
+{
+  "id": "0232",
+  "date": "2026-10-30",
+  "title": "FLUX CAPACITOR (LOOM15) measured: the stored charge is the 0231 rotor (cross-check EXACT), the discharge is a partial INVERSE out-rush (14 sigma), and the charge's power on 'the exact one' (next gap length) is real but tiny (4.5 sigma, r=0.006). The even bookends (p+1 and p'-1 always partner 2, lane 2) TELESCOPE the full gap word to exactly 1: the net phase of the gap is erased by the even framing, so the stored charge is the loom14 interior sum Omega (p+2 -> p'-1, signed rad) - a DISCRETE RETROGRADE LATTICE (quantiles -2.88/-0.785/-0.262/-0.262/+2.356). The per-step movie pair (Re,Im) = (+0.4156, 0.0000): locally symmetric (the 0231 A2 null in complex language). The capacitor test across the void: corr(omega_i, omega_{i+1}) = -0.01850 vs null +0.00007 +/- 0.00132 (p- = 0.0000): the discharge is NOT even and NOT fully persistent - it partially runs OPPOSITE to the stored charge (the owner's 'inverse out-rush', linear-level, real, ~14 sigma, small magnitude); sign persistence 0.8094 vs null 0.8113 (no sign-memory), flip rate 0.1906 vs null 0.1887. 26-note channel bank built (A-Z, V = void lane target, Y = scale); xrun == 1 for EVERY gap (parity theorem: consecutive odd composites c, c+2 cannot share spf since q | 2 forces q = 2), echo ~ 0 (same-lane consecutive claims ~ never). Top channels vs void lane by chi2: G gate 447852 (x1.823, the known mod-6 arithmetic shadow of 0231 A4), W wait 96302 (x1.450), U unpaired 71896 (x1.506), D drift 58516 (x1.501), F flux 30856 (x1.377, quart 0 -> lane 11: the charge talks to the void beyond the gate), T turn 14643, B bias 8564, K keep 8330, M moment 7861, Z zeta 4302 - the rest of the bank is weaker; C cycle = 0 (no gap completes a full 24-gon loop: the 'looped' channel is vacuous). TEST E (the exact one): corr(omega_i, L_{i+1}) = +0.00592 vs null +0.00009 +/- 0.00130 (p+ = 0.0000, ~4.5 sigma) - the stored charge predicts the EXACT next gap length beyond all shuffled structure, but the effect size is ~3% of one mean gap across the charge quartiles (E[L_next] Q0..Q3 = 13.83/13.68/14.08/14.23 vs grand 13.97); self sanity corr(omega_i, L_i) = -0.0464. The 'box of predictive prime theorems' for the NN is now concrete: this channel bank IS the box (PNT slack, Mertens/gate rho(y), pair law, LD floor, 24-frame, tile phase, charge, even/odd bias, claim energy); the owner's lock-on-success learning gate ('seen it and was right -> freeze the answer, retrain to make a difference') is the 0225 hand-rolled numpy machine with one bolted rule - Python first, Lean anchors only the measured tables after (WheelTile pattern)",
+  "status": "measured",
+  "offboard": true,
+  "artifacts": {
+    "script": "/home/jsmille/Projects/rh-missing-tail/scripts/sq/loom15_flux_cap.py",
+    "out": "/home/jsmille/Projects/rh-missing-tail/tmp/loom/loom15_out.txt"
+  },
+  "key_numbers": {
+    "charge_crosscheck": {"E_Omega": -0.43, "P_Omega_gt_0": 0.0962},
+    "perstep_pair": [0.415558, 0.0],
+    "full_word_telemetric": "z[p'-1] * zbar[p+1] = 1 EXACTLY (even bookends)",
+    "charge_quantiles": [-2.88, -0.785, -0.262, -0.262, 2.356],
+    "charge_mean_pair": [0.583522, -0.311502],
+    "capacitor": {
+      "corr_omega_next": {"real": -0.0185, "null": 0.00007, "null_se": 0.00132, "sign": "negative, ~14 sigma"},
+      "sign_persistence": [0.80942, 0.81128],
+      "flip_rate": [0.19058, 0.18872]
+    },
+    "top_channels_vs_void_lane": {"G": 447852, "W": 96302, "U": 71896, "D": 58516, "F": 30856, "T": 14643, "B": 8564, "K": 8330, "M": 7861, "Z": 4302},
+    "test_e_exact_one": {
+      "corr_omega_L_next": {"real": 0.005917, "null": 0.000093, "null_se": 0.001299, "p_plus": 0.0000},
+      "self_sanity_corr_omega_L": -0.046448,
+      "E_L_next_by_quartile": [13.8278, 13.6814, 14.0814, 14.2288],
+      "grand_L_next": 13.9709
+    },
+    "xrun": "1 for all gaps (parity theorem)",
+    "run_s": 14.4
+  },
+  "verdict": "The flux capacitor exists as a WEAK-LINEAR object: the void discharges the stored charge partially in INVERSE (14 sigma negative correlation, no sign memory), the 3D-movie framing is confirmed (per-step pair is the (stay, turn) = (+0.416, 0.000) local symmetry; per-gap charge pair (0.584, -0.312) is the retrograde movie), and 'the exact one' is measured: the charge carries 4.5-sigma but tiny next-gap power. The box for the NN is the 26-channel bank (theorems made features); its ceiling on the exact target is what the lock-on-success net next measures (0225 machine + freeze rule). xrun == 1 is a parity theorem, not a bug. Off-board; no RH claim.",
+  "next": "lock-on-success NN on the bank -> target L_{g+1} (the exact one) vs the 0225 pair-baseline; condition TEST E on the void lane to separate the charge's arithmetic content from its order-3+ content"
+}
