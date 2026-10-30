@@ -624,3 +624,56 @@ No RH statement, no hOffCPT2, no A1, no Z78. All numbers finite (X = 1e7,
 654,986 cuts, 1000/300 sampled phase cuts), reproducible from the script.
 Negative results reported as measured (M2 ≤ 0; content split confounded;
 PHASE_B loss quantified as a loss, not a failure).
+
+## RBE (0224): RATTLEBACK + FINGER TRAP (the owner's two motion ideas, made finite)
+
+RBE-1 RATTLEBACK (class swirl, 12-wheel): d = signed class step of
+consecutive gap-classes (half-turn |d|=6 = FLIP, excluded from momentum);
+chiral current J = mean(d); spin walk W = cumsum(d-J); zero-crossing
+excursions; reversal ratio rho = H(next opposite)/H(current); the trap
+curve rho(H); chirality split; settling after near-full flips.
+
+RBE-2 FINGER TRAP (gap tension): the gap sequence IS the tension record;
+C1 = corr(g_i, g_{i+1}) (traps constrict under tension if >0), C2 = 2-step;
+top-5% tension rebound; tension excursions in ln units.
+
+Nulls: 80 no-memory walks (iid increments / iid Cramer-geometric at the
+window rate, same local law) = the structural-vs-trivial discriminator.
+
+Windows: the visualizer ladder 1e5/1e6/1e7/1e8 (last 100k primes).
+
+### Measured
+RBE-1: flips 2.3-4.1%; J tiny & sign-unstable across scales
+(-0.012/-0.007/+0.008/-0.012 = the 0221b chirality wobble); medH 2.9-3.7
+wheel-steps, medT 2-3 symbols; top-decile H = 17.5/21.3/27.3/23.5 vs the
+NO-MEMORY null median 30.6-32.5 (the real swirl tail is LIGHTER than
+noise: the wheel CAGES sustained rotation); med rho 0.87-1.04 inside the
+null band (0.77-1.27); chirality split inside the null band; trap curve
+rho(H) DECREASES with depth (0.48[21]->0.23[17] @1e5; 1.41[75]->0.36[76]
+@1e8): deep momentum PERSISTS, it does not flip.
+
+RBE-2: C1 < 0 at EVERY scale: -0.0701/-0.0432/-0.0405/-0.0339 (ln-norm:
+-0.092/-0.057/-0.041/-0.034) vs the null band [-0.0078, +0.0068] - the real
+1-step gap ANTI-PERSISTENCE sits OUTSIDE the no-memory null at all four
+scales. C2 ~ -0.01..-0.02 (the memory is 1 step). REBOUND: after a top-5%
+tension gap the next gap is shorter: 0.860/0.927/0.939/0.933 vs null 1.000
+(7-14% release, stable past 1e6). C1 decays with X (0.070->0.034) in the
+same LO-type fashion as the BLOOM (0.094->0.053) and the mod-4 bias
+(1.250->1.184).
+
+### Verdict
+- The LITERAL rattleback (deep momentum forces a complete mode reversal):
+  NULL. Nothing in either object reverses more than the no-memory null,
+  and rho(H) does not rise with depth - it falls.
+- The trap is REAL as a 1-step elastic constraint: anti-persistent gaps
+  (outside the null at all scales) + the rebound after extreme tension
+  (0.86-0.94): pull the void hard and the next interval gives back ~10%.
+  That structure is the KNOWN pair law seen in the tension domain (the M1
+  gap-law of 0218/0219, married at lane resolution) - real, subsumed, and
+  now measured in the form the owner's metaphor named.
+- The swirl is CAGED: its momentum tail is 30-45% lighter than the
+  no-memory null - the wheel resists sustained rotation; plus a settle
+  ratio 2.5-3.0 after near-full flips (the toy does settle).
+- Physics in one line: the sieve is an elastic spring, not a rattleback -
+  it absorbs extremes and gives back a little, one step later, instead of
+  flipping your mode.

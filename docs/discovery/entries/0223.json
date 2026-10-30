@@ -1,0 +1,44 @@
+{
+  "id": "0223",
+  "date": "2026-10-30",
+  "title": "G-4b ANCHORED SWIRL TAPE LANDS: the parity anchor is verified exactly (odd-substrate 0.5, prime-on-odd 1.0, pair-world on-odd 1.0 - the 50% lives in the lattice and the metric shares it); swirl = class-driven with a faint persistent rotation (w* ~ +/-0.01 cyc/int, chirality flips sign 2e6->1e7), spin table encodes the BLOOM in time (front-lane spins ~6x faster than back-lane at 1e8), coherence weak-but-long (C~0.03-0.05, Lc ~ 60k-92k int); the 3-way metric RE-SPLITs 0219 only PARTIALLY: G24 d(data,pair)/floor = 0.65/2.25/1.80 (1e7,1e8 CLEARED; 2e6 underpowered), L8 = 1.18/0.88/1.83 (mixed) - the 5-dim tape signature is a coarser instrument than H3",
+  "status": "measured",
+  "offboard": true,
+  "artifacts": {
+    "script": "/home/jsmille/Projects/rh-missing-tail/scripts/sq/loom8b_aniso_tape.py",
+    "out": "/home/jsmille/Projects/rh-missing-tail/tmp/loom/loom8b_out.txt",
+    "doc": "docs/LOOM-PENROSE-SIDE-QUEST-2026-10-29.md (the L6b / G-4b section)"
+  },
+  "key_numbers": {
+    "anchor_odd_substrate": 0.5,
+    "prime_mass_on_odd": 1.0,
+    "pair_mass_on_odd": 1.0,
+    "tropic_w_star_cyc_per_int": "L8 -0.011/+0.012/+0.012; G24 -0.010/-0.011/+0.011 @ 2e6/1e7/1e8",
+    "spin_range_G24_1e8": "0.013-0.062 rad/int (front-lane spins ~5x the back-lane)",
+    "coherence_C": [
+      0.054,
+      0.044,
+      0.037,
+      0.033,
+      0.037,
+      0.025
+    ],
+    "metric_split_G24": [
+      0.65,
+      2.25,
+      1.8
+    ],
+    "metric_split_L8": [
+      1.18,
+      0.88,
+      1.83
+    ],
+    "cond_density_primes_per_odd_int": [
+      0.138,
+      0.123,
+      0.109
+    ]
+  },
+  "verdict": "the 50% parity anchor is a VERIFIED layer of the system, not an assumption (real, synthetic, and the metric all share the exact denominator); the swirl is a real faint rotation with BLOOM-encoded spin rates; the metric partially re-splits 0219 (G24-deeper at 1e7/1e8 CLEARED, L8 mixed, 2e6 underpowered) - keep H3 as the sharper instrument and the tape for dynamics",
+  "next": "RBE (0224) measures the rattleback + finger-trap on these objects"
+}

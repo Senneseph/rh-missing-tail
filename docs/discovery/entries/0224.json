@@ -1,0 +1,69 @@
+{
+  "id": "0224",
+  "date": "2026-10-30",
+  "title": "RBE: the rattleback is NULL; the finger trap is REAL as a 1-step elastic constraint - gap anti-persistence C1 = -0.070/-0.043/-0.041/-0.034 (ln-norm -0.092..-0.034) sits OUTSIDE the no-memory null band [-0.0078,+0.0068] at all four scales; after a top-5% tension gap the next gap is 0.860/0.927/0.939/0.933 of average (vs null 1.000): pull the void hard, the next interval gives back ~10%; C2 ~ -0.01..-0.02 (memory = 1 step); the class swirl is CAGED (momentum tail 30-45% lighter than the iid null) and its reversal ratio matches the null (no mode-flip); rho(H) FALLS with depth in both objects (deep momentum persists, it does not flip) - the sieve is an elastic spring, not a rattleback",
+  "status": "measured",
+  "offboard": true,
+  "artifacts": {
+    "script": "/home/jsmille/Projects/rh-missing-tail/scripts/sq/loom9_rattleback_trap.py",
+    "out": "/home/jsmille/Projects/rh-missing-tail/tmp/loom/loom9_out.txt",
+    "doc": "docs/LOOM-PENROSE-SIDE-QUEST-2026-10-29.md (the RBE section)"
+  },
+  "key_numbers": {
+    "C1": [
+      -0.0701,
+      -0.0432,
+      -0.0405,
+      -0.0339
+    ],
+    "C1_ln": [
+      -0.0922,
+      -0.0568,
+      -0.0406,
+      -0.0339
+    ],
+    "C2": [
+      -0.0215,
+      -0.0117,
+      -0.0227,
+      -0.0163
+    ],
+    "rebound_top5pct": [
+      0.86,
+      0.927,
+      0.939,
+      0.933
+    ],
+    "null_C1_band": [
+      -0.0078,
+      0.0068
+    ],
+    "null_rebound": 1.0,
+    "spin_top_decile_H_real": [
+      17.5,
+      21.3,
+      27.3,
+      23.5
+    ],
+    "spin_top_decile_H_null": [
+      30.6,
+      31.0,
+      32.5,
+      32.5
+    ],
+    "flip_fraction_abs_d_6": [
+      0.0228,
+      0.0305,
+      0.0368,
+      0.0411
+    ],
+    "chiral_current_J": [
+      -0.0122,
+      -0.0069,
+      0.008,
+      -0.0119
+    ]
+  },
+  "verdict": "the trap's RELEASE (the rebound) is the one null-rejecting, scale-stable number: the pair law, measured in the tension domain where the owner's metaphor names it; the rattleback's mode-reversal is a clean null; the cage (lighter-than-noise swirl tail) is the anti-persistence seen from the swirl side; C1 decays with X like the other LO biases",
+  "next": "optional: G-3 baby NN sees whether the 1-step trap + swirl cage is all the learnable structure (it should be, by 0219)"
+}
