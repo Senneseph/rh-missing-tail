@@ -87,6 +87,14 @@ def detect(include_equal=False):
     return c, best, bestv
 
 def workdir_for(name):
+    # resume hook (0234): B6_WORKDIR=<existing workdir> reuses a
+    # completed stage-C root (the driver's resume logic no-ops when every
+    # olean exists) instead of allocating a fresh z78sN and recompiling.
+    ov = os.environ.get('B6_WORKDIR')
+    if ov:
+        ov = os.path.abspath(ov)
+        os.makedirs(ov, exist_ok=True)
+        return ov
     n = 36
     while os.path.exists(f'{BASE}/tmp/z78s{n}'):
         n += 1
@@ -241,6 +249,29 @@ def main():
                  f"COLLET_CANDLIB = '{SEED_WORK}'", gen, count=1)
     gen = gen.replace("WORK = f'{BASE}/work'", "WORK = f'{BASE}/work_new'")
     open(f'{W}/stageC_driver.py', 'w').write(gen)
+    # 5a. populate the merged root BEFORE stage C (0233 bugfix): the driver
+    #     only compiles the record's OWN tree; the dependency cones must
+    #     already resolve from LEAN_PATH root {W}/work_new.  Hard-link-copy
+    #     the frozen seed (z78s35/work: 0148/0195/0200/0203/0211 oleans incl.
+    #     Submissions/*; grown 2026-10-30 by the asl pre-stage) into the
+    #     fresh workdir.  Without this step every dependency import fails
+    #     with "unknown module prefix 'Submissions'" and stage C fast-fails.
+    import shutil
+    def _seed_link():
+        nlink = 0
+        for dirpath, _dirs, filenames in os.walk(SEED_WORK):
+            rel = os.path.relpath(dirpath, SEED_WORK)
+            for fn in filenames:
+                dstf = os.path.join(W, 'work_new', rel, fn)
+                os.makedirs(os.path.dirname(dstf), exist_ok=True)
+                if not os.path.exists(dstf):
+                    try:
+                        os.link(os.path.join(dirpath, fn), dstf); nlink += 1
+                    except OSError:
+                        shutil.copy2(os.path.join(dirpath, fn), dstf); nlink += 1
+        return nlink
+    nseed = _seed_link()
+    print(f'seed populated: {nseed} files hard-linked into {W}/work_new', flush=True)
     r = subprocess.run([sys.executable, f'{W}/stageC_driver.py'],
                        capture_output=True, text=True, timeout=DEADLINE_S * 3 + 900)
     print(r.stdout[-4000:]); print(r.stderr[-2000:], file=sys.stderr)
@@ -264,7 +295,7 @@ def main():
     for root, dirs, files in os.walk(src):
         for f in files:
             if f.endswith('.lean'):
-                sorry += open(os.path.join(root, f), errors='ignore').count('sorry')
+                sorry += open(os.path.join(root, f), errors='ignore').read().count('sorry')
     verdict = {'fires': True, 'record': rid, 'rational': f'{num}/{den}',
                'commit': commit, 'sub': sub,
                'identity': ok_id, 'cone': dep_report,

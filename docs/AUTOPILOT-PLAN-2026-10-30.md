@@ -10,47 +10,58 @@ honest completion definition, ranked queue, toys ledger.
 ## 1. WHERE WE STAND (measured, 2026-10-30)
 
 ### RH program (in-tree, formal)
-- Terminal endpoint: `RHEnd.rh_program78_stripfront_mach_unifiedArvi_PT2 : RH q`
+- Terminal endpoint: `RHEnd.rh_program78_stripfront_mach_unifiedPosReserve_PT2 : RH q`
   — a **machine**, not a claim: `RH q` is assembled from named finite
   pieces; the one unconsumed face is
   ```
-  hOffCPT2 : ∀ (t0 d0 : ℝ), WinC.tPT2 ≤ t0 → 0 < d0 →
-             d0 ≤ Z78ArviDensity.arviD0max → ¬ offPair q t0 d0
+  hOffC: ∀ (t0 d0 : ℝ), (H q) → WinC.tPT2 ≤ t0 → 0 < d0 →
+         d0 ≤ Z78PosReserve.posReserveD0max → ¬ offPair q t0 d0
   ```
   with `WinC.tPT2 = 3,000,175,332,800` and
-  `Z78ArviDensity.arviD0max = 0.37387234` (board anchor
-  `43693617/50000000 = 0.87387234` in-tree).
-- This turn (re-verified live): cross-checks **B-3 PASS, B-4 PASS**
-  (worst dLa·1e15 = 85.27, dAr·1e15 = 0.444 vs 1e-12 thresholds),
-  **B-5 PASS** (12/12, dCD_rel·1e12 = 0.0186, dRec_rel·1e6 = 0.0416),
-  WheelTile `#eval` battery exact (1 / 22 / 9461 / 5 / 13204 / 16826);
-  `formal/` untouched since the last full green build (17454 jobs,
-  `4b66c9a`).
+  `Z78PosReserve.posReserveD0max = 0.3733819666133` (board anchor
+  `8733819666133/10000000000000 = 0.8733819666133` in-tree since 0235).
+- This turn (re-verified live after B22): cross-checks **B-3 PASS,
+  B-4 PASS** (worst dLa·1e15 = 85.265128, dAr·1e15 = 0.444089 vs 1e-12
+  thresholds), **B-5 PASS** (12/12, dCD_rel·1e12 = 0.018554,
+  dRec_rel·1e6 = 0.041622), float-table gate worst |diff|·1e12 = 0.019664;
+  WheelTile `#eval` battery exact (laneHistogram 1 = 13204 / 5 = 16826;
+  rest compile-time `native_decide`); `lake build` 17454 jobs green;
+  B22 Float mirrors eval 0.873382 / 0.126618 / 0.373382.
 - Off the critical path (named, open): the stronger absolute A1 clause
   (`A1G.face_unbounded` not consumed by the universal wire); Collet
   standalone provenance (URL 404).
 
-### B6 board gate — **EIGHTH CHALLENGER IS ON THE BOARD (this morning)**
-- Live record: **`positive-reserve-selected-gap`** —
-  `8733819666133/10000000000000 = 0.873381966613` **< anchor 0.87387234**,
-  status `framework-verified`, merged 2026-10-30T12:44:37Z, PR #98,
+### B6 board gate — **EIGHTH RECORD ADOPTED in tree (0235, this turn)**
+- **`positive-reserve-selected-gap`** —
+  `8733819666133/10000000000000 = 0.8733819666133`, status
+  `framework-verified`, merged 2026-10-30T12:44:37Z, PR #99,
   pinned commit `9e17ac75…` (Joseph Bebel; all-moduli Dirichlet
   nonvanishing; builds on arvi-selected-leaf → arvi-density → …, 8 deps).
-- The official B6 conveyor (`scripts/rh/b6/b6_preflight.py`) was fired:
-  - fixed a field bug (submission resolver picked the first dir with
-    `Main.lean` → spurious identity REFUSED; record **does** state the
-    boundary literally in `Candidate/Main.lean:11`);
-  - fixed a corrupted tracked-copy docstring;
-  - froze the two new dep trees from the pinned commit
-    (`arvi-selected-leaf` 179 files sha `da3cd8e5…`,
-    `joint-detector-fine-chain` 535 files sha `e8ce1a37…`; record itself
-    236 files sha `658fe894…` — `tmp/b6audit/freeze_log_0233.txt`);
-  - now running: identity ✓ · dependency cone **8/8 BYTE-IDENTICAL** ✓ ·
-    236 files snapshot-guarded ✓ · **stage C kernel compile in flight**
-    (per-module deadline 1800 s) → stage D (canonical compile + axiom
-    audit + 0-sorry sweep) → `verdict.json`.
-- Watcher daemon (`pid 2139718`) alive and watching
-  (`tmp/b6audit/tracker/watcher_0212.log`, 5-min cadence).
+- The official B6 conveyor (`scripts/rh/b6/b6_preflight.py`) fired and
+  completed: verdict `ADOPTABLE` (`tmp/z78s39/verdict.json`) —
+  identity ✓ · dependency cone **8/8 BYTE-IDENTICAL** ✓ · 236 files
+  snapshot-guarded ✓ · stage C **235/235 clean in 137 s** (0 failed,
+  0 skipped) · stage D: D1 canonical compile at the exact rational ✓ ·
+  D2 axioms {propext, Classical.choice, Quot.sound} ✓ · D3 zeta
+  consequence (q = 1 probe) compiled ✓ · D4 0 sorry across 236 files ✓.
+  Repairs landed along the way: the pre-stage seed gain (178-module
+  `arvi-selected-leaf` cone, 227.5 s — `tmp/z78s35/prestage_asl.py`),
+  seed-hardlink-into-`work_new` before stage C, `B6_WORKDIR` resume,
+  stage-D sorry-counter fix (both tracked and tmp copies of
+  `b6_preflight.py`).
+- Adoptions: `formal/RhAttack/Z78PosReserve.lean` + RHEnd **Part B22**
+  (5 theorems; slice (0.3733819666133, 0.37387234] closed IN BODY; step
+  4.9037e-4 — the largest single B-part face shrink, ~34% of the whole
+  cumulative Z78 face width removed by the seven earlier
+  supersessions). `lake build` green; all four `rhattack` gates PASS
+  (re-run 2026-10-30, post-B22).
+- Watcher daemon (`pid 2139718`) alive, 5-min cadence; anchor moved to
+  the EIGHTH record (`tracker_watch2.py` ADOPTED /
+  ADOPTED_ID = `positive-reserve-selected-gap`), picks up on next poll.
+- The 2026-10-30 pull's other two new records (PR #98
+  selected-leaf-refined-return 0.87347222, PR #97 arvi-selected-leaf
+  0.87391362) are subsumed by #99 — NOT adopted (one record per face
+  step, the board best).
 
 ### Loom / vortex / void track (off-board toys, 0216 → 0232)
 Closed and landed: L2 prediction machine, L3 path, pair-law marriage,
@@ -80,26 +91,34 @@ some other named face. Board records are the conveyor's input;
 standing hard rule (no RH claim)** — the gate is the protocol, not an
 obstacle. So:
 
-- **B6 EIGHTH adoption** (if the conveyor verdict is clean) = the first
-  move of the endgame: new in-tree Z78-family module + RHEnd B-part
-  restatement at `0.873381966613` + gates + docs.
+- **B6 EIGHTH adoption — DONE (0235, this turn)**: in-tree Z78-family
+  module + RHEnd B22 restatement at `0.3733819666133` + gates + docs
+  + commit. The face `hOffC` is now bounded by `posReserveD0max`.
 - "Solved/finished" = every named face consumed in-tree with the build
   green and cross-checks passing. Today, exactly **one** named face
-  remains: `hOffCPT2`. That is what the autopilot is pointed at.
+  remains: `hOffC` (d0 ≤ 0.3733819666133, t0 ≥ 3.1e12). That is what
+  the autopilot is pointed at.
 
 ---
 
 ## 3. THE QUEUE (ranked; each item = trigger → action → artifact)
 
-- **Q1 — B6 EIGHTH (IN FLIGHT now).**
-  Trigger: conveyor `verdict.json`.
-  Action: if `ADOPTABLE` (stageC clean + stageD canonical compile +
-  0 sorry + axiom audit clean) → run the adoption template
-  (`z78s35/gen_*` model: new `Z78<name>` module with the exact rational,
-  RHEnd B-part restatement, cross-checks, full `lake build`, discovery
-  entry, docs, commit). If `REFUSED`/failed stage → record honestly,
-  keep the seventh anchor, leave the record as a pending signal.
-  Artifact: `formal/RhAttack/Z78<…>.lean` + `verdict.json` + entry.
+- **Q1 — B6 EIGHTH (CLOSED, 0235).** Verdict ADOPTABLE → adoption run:
+  `formal/RhAttack/Z78PosReserve.lean` + RHEnd Part B22 (5 theorems) +
+  `tmp/z78s39/verdict.json` + entry 0235 + build green + 4/4 gates PASS
+  + watcher anchor moved. The face step is 4.9037e-4 (≈34% of all
+  cumulative Z78 face width in one move).
+- **Q1' — 0234 follow-ups (the new Q1, off-board toys, measured first).**
+  (a) LEX-LEAN anchor for the 0234 identities (charge ≡
+  −angle(first partner step); OT lanes forced to −2π/24; TW lanes
+  = −branch₂₄(spf(p+2)−2) ticks) — Python tables frozen first, Lean
+  `native_decide`/`decide` module after (WheelTile pattern).
+  (b) `spf(p+2) → (L, L_next)` transfer matrix — the within-cell
+  residual was ≤0.023 and non-monotone in 0234; the transfer matrix
+  is the next instrument to see whether the cell-internal signal is
+  a permutation (reorderable, no predictivity) or a genuine map.
+  Trigger: after B22 landing (now). Action: Python at 1e8, tables +
+  nulls. Artifact: `scripts/sq/loom18_*.py` + `tmp/loom/` + entry.
 - **Q2 — Lock-on-success net (LANDED, 0233, CEILING).**
   Result (test nats/step, 10 deciles): PRIOR 2.17302 · **PAIR 2.10328** ·
   PAIR+BOX 2.10660 (the 26-note bank adds ~0 given the current decile) ·
@@ -115,8 +134,8 @@ obstacle. So:
   −2π/24 (spf(p+2)=3 share 1.0000); TW lanes {5,11,17,23} =
   −branch₂₄(spf(p+2)−2) ticks (1,224 values, mean −2.72); marginal
   TEST-E +0.008054 z = +19.2 is spf(p+2) shadow, within-cell residual
-  r ≤ 0.023 non-monotone.  Follow-ups: the LEX-LEAN anchor (a) and
-  the spf(p+2) → (L, L_next) transfer matrix (b); decile side closed.
+  r ≤ 0.023 non-monotone.  Follow-ups (a)/(b) promoted to Q1'.
+  Decile side closed.
 - **Q4 — B6 watch hygiene (weekly cadence).**
   Watcher alive? (`ps -p <pid>`; restart `watcher_daemon_0212.sh` if
   not.) New merged record below the *current* anchor → `b6_preflight`.
