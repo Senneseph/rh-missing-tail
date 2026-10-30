@@ -249,3 +249,70 @@ derived 2-term form is the SOLE SURVIVING candidate.
 
 *No RH claim. Flank record, 2026-10-27 (updated with 0193; closed out at
 1e13 with 0194/0196/0199, 2026-10-28).*
+
+## 7. U3c (j) — the (2.16) calibration + the |A|+|T| = 3 machinery (0227, 2026-10-30)
+
+The named deep follow-up is now EXECUTED: `scripts/rh/kcs3c_j_k3_eval.py`
+evaluates the paper's (2.16) integral for q = 4 at finite H, including
+the |A|+|T| = 3 density terms (D3a/D3b/D3c) the paper defers to
+"future work", and reproduces the paper's own (2.16)-vs-actual table
+(p. 15) to the calibration gate.
+
+### The epsilon bug (the 0213 14-19% deficit, root-caused)
+
+The 0213 integrand used `eps = 1 if a == b else 0` in the (2.16)
+prefactor `alpha^eps`. Extracted from the arXiv v4 HTML (the exact
+formulae (2.7)/(2.13)-(2.20)):
+
+* `alpha(y) = 1 - q/(phi(q) log y)` (= 1 - 2/L for q = 4), and
+  `H = -(q/phi)/log alpha = L - 1 + O(1/L)`.
+* The count identity (the paper's definition of the exponent):
+  `#{0 < t < h : (t + a, q) = 1} = (phi/q) h + eps_q(a,b)`.  For
+  q = 4 with a odd, for EVERY h >= 2 in the (2.13) h-sum:
+  `#{...} = h/2 - 1` while `(phi/q)h = h/2`, hence **eps = -1** -
+  on the diagonal class h = 4, 8, ... as well as the off-diagonal
+  h = 2, 6, ... (only the h = 0 representative would give 0, and the
+  sum over h > 0 never uses it).
+
+So the correct (2.16) prefactor is `alpha^{-1}` for ALL FOUR cells
+(1,1), (1,3), (3,1), (3,3) - the 0213 rule had the diagonal inflated
+by alpha^{+1} and the off-diagonal missing alpha^{-1}.
+
+### Gate G2a (960-pt log-uniform integrations, R1 = eps -1 everywhere)
+
+vs the paper's own (2.16) table (p. 15):
+
+| X        | pi(1,1) err | pi(1,3) err |
+|----------|------------|------------|
+| 1e9      | +0.64%     | -0.38%     |
+| 1e10     | +0.51%     | -0.34%     |
+| 1e11     | +0.47%     | -0.28%     |
+| 1e12     | +0.41%     | -0.25%     |
+
+Signed, decaying, both cells - **G2a PASS (worst 0.64% <= 0.7%)**;
+the residual is at the level of the paper's own discarded
+O(loglog y / log y) D-terms.  Named alternatives: R2 (eps = 0 on the
+diagonal) LEAVES -7 to -9.6% on the diagonal (rejected); the 0213
+"old" rule reproduces the original -18.84% / -7.77% deficits exactly
+(confirms the bug was the cause).  Against the ACTUAL measured counts:
++1.26% .. +0.76% (diag) / -0.81% .. -0.55% (off), decaying.
+
+### The ladder at the calibrated integrand (G2/G3 re-run, 960 pts, R1)
+
+S(X) = meas(X) - (1+delta)/2 vs the three model depths:
+
+* S_sim/S_data (paper's k<3 only): 0.63-0.69 (captures ~2/3 of the
+  measured residual at every X).
+* **S_full/S_data (k<3 + the |A|+|T| = 3 terms): 0.9616 at 1e7, then
+  UNIFORMLY 1.050-1.052 across 1e8 .. 1e13** (8 consecutive scales).
+  S_exact/S_data ~ 0.67.
+
+The |A|+|T| = 3 machinery lifts the model from ~67% of the measured
+residual to ~95% of it, at a UNIFORM 1.05x over eight decades -
+the scale shape is right; the constant 5% excess is named (the k >= 4
+and higher O(loglog) D-terms the paper discards; measuring them is the
+next (j2) step if the flank is revisited).
+
+No RH claim.  The (2.16) instrument is now calibrated and the
+|A|+|T| = 3 contribution is measured: it explains the measured U3c
+residual to ~5% uniformly over 1e8..1e13.

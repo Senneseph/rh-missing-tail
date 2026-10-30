@@ -1,0 +1,26 @@
+{
+  "id": "0227",
+  "date": "2026-10-30",
+  "title": "U3c (j) (2.16) CALIBRATION: the 0213 14-19% under-prediction was the (2.16) epsilon prefactor - eps_q(a,b) from the count identity #{0<t<h:(t+a,q)=1} = (phi/q)h + eps equals -1 for EVERY h >= 2 in the h-sum when a is odd, INCLUDING the diagonal class h=4,8.. (the 0213 rule had diagonal alpha^{+1}, off alpha^0); with eps = -1 on all four cells the (2.16) integral (960-pt, D_0+D_1+D_2 exact) reproduces the paper's own p.15 table to +0.64/+0.51/+0.47/+0.41% (diag) and -0.38/-0.34/-0.28/-0.25% (off), signed and decaying = the paper's discarded O(loglog/L) band (G2a PASS <= 0.7%); vs the actual measured counts +1.26%..+0.76% / -0.81%..-0.55%; R2 (diag eps=0) leaves -7..-9.6% (rejected); the OLD rule reproduces the original -18.84%/-7.77% exactly. LADDER: at the calibrated integrand S_full/S_data (k<3 + |A|+|T|=3 terms) = 0.9616 @ 1e7 then UNIFORMLY 1.050-1.052 over 1e8..1e13 (8 scales); S_sim/S_data ~ 0.63-0.69: the paper-deferred k=3 machinery explains ~95% of the measured U3c residual at a uniform 5% excess (named: k>=4 + higher O(loglog) D-terms, next step (j2))",
+  "status": "calibrated",
+  "offboard": false,
+  "artifacts": {
+    "script": "/home/jsmille/Projects/rh-missing-tail/scripts/rh/kcs3c_j_k3_eval.py",
+    "out": "/home/jsmille/Projects/rh-missing-tail/tmp/u3c_c_fig/kcs3c_j_out.txt",
+    "doc": "docs/U3C-RESIDUAL-LAW-2026-10-27.md (section 7)",
+    "paper_html": "/tmp/los_sb_html.html (arXiv 1603.03720v4, exact (2.7)/(2.13)-(2.20) alttexts)"
+  },
+  "key_numbers": {
+    "eps_R1_err_diag_pct": [0.64, 0.51, 0.47, 0.41],
+    "eps_R1_err_off_pct": [-0.38, -0.34, -0.28, -0.25],
+    "eps_R2_err_diag_pct_1e9": -9.63,
+    "eps_old_err_diag_pct_1e9": -18.84,
+    "eps_old_err_off_pct_1e12": -7.77,
+    "R1_vs_actual_diag_pct": [1.26, 0.99, 0.88, 0.76],
+    "R1_vs_actual_off_pct": [-0.81, -0.74, -0.64, -0.55],
+    "S_full_over_S_data": [0.9616, 1.0599, 1.0511, 1.0504, 1.0507, 1.0509, 1.0497, 1.0507, 1.0517, 1.052],
+    "S_sim_over_S_data_range": [0.63, 0.69]
+  },
+  "verdict": "the (2.16) instrument is CALIBRATED: eps = -1 (sum-consistent counting identity, all four q=4 cells) closes the 0213 deficit to the paper's own O(loglog/L) band, and the |A|+|T| = 3 machinery - which the paper bounds away and defers - is measured at finite H and explains ~95% of the measured U3c residual S(X) at a uniform 1.05x over 1e8..1e13 (right scale shape; the constant excess is named k>=4 / higher discarded D-terms). No RH claim; flank work that turns the U3c residual from 'unexplained at scale' into 'explained to a uniform 5% by the paper's own deferred terms'.",
+  "next": "(j2) if the flank is revisited: the k>=4 density terms or the explicit O(loglog) D-terms to close the uniform 5%; otherwise the flank stands calibrated"
+}

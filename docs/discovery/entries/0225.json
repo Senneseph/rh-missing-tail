@@ -1,0 +1,29 @@
+{
+  "id": "0225",
+  "date": "2026-10-30",
+  "title": "LOOM G-3 the BABY capstone: a hand-rolled numpy GRU (h=24, exact full-BPTT, sigmoid gates, exhaustive FD-verified backprop worst_abs 8.7e-9) on the G24 gap word learns NOTHING beyond the pair family at 28 min/60-epoch budget - TEST nats/sym: K1 pair 2.15379, K2 2.04817 (D=-0.1056), K4 interp 2.08003, GRU 2.25145 (D=+0.0977 ~ 10 SE above the pair, still descending at the budget edge) - the 1-step-NLL instrument is fully owned by the k-gram/pair ladder; the sharper 'deeper' detector remains the H3 entropy rate (0219: A6 -0.1456 @ 35.6 SE, persistent to 1e8)",
+  "status": "measured",
+  "offboard": true,
+  "artifacts": {
+    "script": "/home/jsmille/Projects/rh-missing-tail/scripts/sq/loom7_nn_marriage.py",
+    "out": "/home/jsmille/Projects/rh-missing-tail/tmp/loom/loom7_out.txt",
+    "doc": "docs/LOOM-PENROSE-SIDE-QUEST-2026-10-29.md (the G-3 (0225) section)"
+  },
+  "key_numbers": {
+    "K1_pair_test_nats": 2.15379,
+    "K2_test_nats": 2.04817,
+    "K4_interp_test_nats": 2.08003,
+    "GRU_test_nats": 2.25145,
+    "GRU_train_nats_epoch60": 2.23157,
+    "GRU_D_vs_K1": 0.09767,
+    "K2_D_vs_K1": -0.10562,
+    "gradcheck_worst_abs": 8.652e-09,
+    "gradcheck_worst_rel_sig": 4.614e-06,
+    "train_syms": 400000,
+    "test_syms": 100000,
+    "epochs": 60,
+    "runtime_s": 1681.5
+  },
+  "verdict": "the marriage already happened in 0219: on the 1-step NLL instrument the G24 word is exactly its empirical pair law plus order-2+ k-gram context; a 400k-trained 24-unit GRU at budget does not surface any extra channel (it does not even close its own training NLL to the K1 level). The deeper structure of 0219 (A6 H3, 35.6 SE) lives in the order-3+ joint distribution, which a small RNN at this budget samples worse than an order-k table. Named next if revisited: longer GRU budget, or the GRU on the A6 word (smaller alphabet, more relative capacity).",
+  "next": "G-1b MIP/analytic splat field (loom5) or the A6-word GRU; the CLOUDBURST hunt (owner 0226 ask) is the live next lane"
+}

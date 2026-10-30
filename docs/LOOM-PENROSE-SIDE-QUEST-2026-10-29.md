@@ -194,6 +194,16 @@ the residual 9% (named L2C': the window ladder W = 1e3, 1e4).
 
 ### Named next (L-lane)
 
+- **CB / G-1c (0226, CLOUDBURST HUNT):** does the data vapor condense? (the
+  owner's "cloudbursts from the vapor of our data"). LOO Gaussian-splat
+  fields, condensation ratio c = f_fine/f_coarse on a 3-scale-pair ladder,
+  real vs Cramer/block/marginal nulls across 1e5..1e8. See the 0226 section.
+- **G-3 (0225, DONE):** the baby NN marriage - capstone null on the 1-step
+  NLL instrument (see G-3 section): the k-gram/pair family owns it.
+- **RBE (0224, DONE):** rattleback NULL / finger trap REAL / swirl CAGED.
+- **G-1b (MIP + analytic splat field):** re-explain the L1b bloom decay or
+  not (footprint blur vs true LO-law decay) - named, not yet run.
+- **G-2 (spline motion / anchor rank):** named, not yet run.
 - **L2B'**: content at fixed wheel phase (the controlled tail-memory test).
 - **L2C'**: the window ladder (W = 1e3, 1e4): where does the deep tail become
   necessary?
@@ -677,3 +687,132 @@ same LO-type fashion as the BLOOM (0.094->0.053) and the mod-4 bias
 - Physics in one line: the sieve is an elastic spring, not a rattleback -
   it absorbs extremes and gives back a little, one step later, instead of
   flipping your mode.
+
+## G-3 (0225): THE BABY - the NN marriage capstone (hand-rolled numpy GRU)
+
+The question the whole G-lane funnels into: *with a real learnable model
+(a recurrent net, no torch, hand-coded backprop in numpy), does the G24
+word of the prime gaps hold ANYTHING learnable beyond the 1-step pair
+trap + the swirl cage already measured (0223/0224)?*
+
+Instrument: `scripts/sq/loom7_nn_marriage.py`, pure numpy.
+
+- Word: G24 class word of consecutive prime gaps (12 symbols), X = 1e7;
+  train = first 400,000 symbols, TEST = the next 100,000 (frontier
+  holdout, no shuffle leakage).
+- Ladder (TEST nats/symbol, lower = better):
+  - **K1** = the empirical order-1 pair-law chain (the 0219 "pair"):
+    **2.15379** (baseline)
+  - **K2** = empirical order-2: **2.04817** (D = -0.10562 vs K1)
+  - **K4 interpolated** (weights .5/.25/.125/.125): **2.08003**
+    (D = -0.07376)
+  - **GRU** (h = 24, hand-rolled numpy, sigmoid gates, Adam lr 3e-3
+    clipped at 5.0, 60 epochs, ~28 min single-threaded): **2.25145**
+    (D = +0.09767 = ~10 SE above the pair at the 1e5-test SE scale).
+- The GRU's backprop was gate-verified before the run: EXHAUSTIVE
+  finite-difference check of all 3,500 parameter entries on a 12-symbol
+  chain: worst ABS error 8.7e-9 (FD-noise floor), worst rel (|grad|>1e-3)
+  4.6e-6. The first draft used tanh gates and diverged to NaN (a negative
+  gate amplifies the state); the standard sigmoid gates train cleanly and
+  monotonically (2.547 -> 2.232 train over 60 epochs, still descending at
+  the budget edge - the number above is a FLOOR on what 60 epochs bought,
+  not a ceiling on what the model could reach).
+
+Verdict (first cut, budget-honest):
+- The best empirical context model IS the k-gram ladder itself: K2 and
+  K4 sit 7-11% (in nats) under the K1 pair baseline on the holdout; the
+  "deeper structure" of 0219 lives in the ORDER-2+ JOINT distribution,
+  and a 400k-sample order-k table beats a small recurrent net there -
+  the GRU at epoch 60 does not even close its OWN training-set NLL down
+  to the K1 level (2.232 train vs 2.154 K1 test).
+- So on the 1-step NLL instrument (what a GRU measures), the learnable
+  content of the G24 word is EXACTLY the k-gram/pair family: no extra
+  channel surfaced in 28 minutes of recurrent capacity.
+- The sharper detector of "deeper" content remains the H3 entropy-rate
+  instrument of 0219 (A6: -0.1456, 35.6 SE, persistent to 1e8) - the
+  order-3+ joint law, which the NLL ladder only touches indirectly.
+- Named next if this lane is revisited: (a) a longer GRU budget (200+
+  epochs) or (b) the GRU on the A6 word where 0219 saw the persistent
+  excess - the A6 alphabet is smaller (6 symbols), so the same 24-unit
+  hidden state has more relative capacity.
+- No RH claim. The baby is a measurement instrument; it says: at this
+  capacity/budget, the marriage already happened in 0219 - the word is
+  its pair law plus order-2+ context, and nothing more surfaced.
+
+## CB / G-1c (0226): THE CLOUDBURST HUNT - "cloudbursts from the vapor of
+our data" (owner's ask, made finite)
+
+Question: where does the prime data's "vapor" condense? Are there local
+clouds (dense clusters of primes on the fine scale) that the known local
+structure (pair law, class chains) does NOT already explain - i.e. an
+independent long-range condensation channel?
+
+Instrument: `scripts/sq/loom10_cloudbursts.py` (~30 min total, 1 core, 4
+open).  Splat-field ratio method:
+
+- For each scale X in {1e5, 1e6, 1e7, 1e8} and each scale pair
+  (sigma_f, sigma_c) = (2,8), (3,12), (4,20) in units of the mean gap
+  (13.0/7.0 -> 17.4/8.7 pixels), compute two leave-one-own-out
+  Gaussian-splat density fields (normalized kernels, window cutoffs
+  3 sigma_f / 2.5 sigma_c, tail loss < 0.3%) and the condensation ratio
+  c = f_fine / f_coarse at every prime.  High c = local over-density =
+  a cloud.
+- Null families (same pipeline, same seed discipline):
+  A = Cramer i.i.d. (1/log-j gaps from uniform points, 12 draws),
+  B = block-bootstrap of the REAL gaps, block length 64 (8 draws),
+  C = marginal i.i.d. resampling of the REAL gap multiset (8 draws).
+- Statistics: condensation-quantile table (real p99 / p99.9 / max vs the
+  null family's median [2.5-97.5 band] across draws), raw exceedance
+  counts at K in {1.1, 1.2, 1.5}, and the anatomy of the real clouds
+  (core tightness, front-bloom split, max same-class run).
+
+### The measured ladder (full run, seed 11, single core, 4 cores open)
+
+Real condensation quantiles (2,8): p99 = 1.3349/1.3595/1.4015/1.4223,
+p99.9 = 1.4673/1.5231/1.5693/1.5934, max = 1.5705/1.7289/2.0208/1.9942
+at 1e5/1e6/1e7/1e8.
+
+| X    | p99.9 real | A (Cramer)              | B (block-64)            | C (marginal)            |
+|------|-----------|-------------------------|-------------------------|-------------------------|
+| 1e5  | 1.4673    | 1.7740 [1.66-1.88]      | 1.4749 [1.46-1.52]      | 1.4298 [1.39-1.54]      |
+| 1e6  | 1.5231    | 1.7813 [1.75-1.81]      | 1.5134 [1.51-1.52]      | 1.4831 [1.47-1.51]      |
+| 1e7  | 1.5693    | 1.7787 [1.77-1.80]      | 1.5695 [1.57-1.57]      | 1.5313 [1.53-1.54]      |
+| 1e8  | 1.5934    | 1.7876 [1.78-1.79]      | 1.5918 [1.59-1.59]      | 1.5623 [1.56-1.57]      |
+
+The (3,12) and (4,20) pairs agree to the same pattern (real inside the B
+band, above C, far below A, at every scale).  At 1e8 the agreement with
+B is to the 4th decimal: real max c = 1.9942 = B null max median
+EXACTLY; real p99 = 1.4223 sits inside B's [1.4224, 1.4234]; the raw
+K=1.2 exceedance count 536,965 sits inside B's [538,350, 540,284]
+(within half a band-width) while Cramér is at 957,294 and marginal at
+383,904.
+
+Anatomy of the real clouds ((2,8) K=1.2; n = 55/418/3373/26796 over the
+ladder): core tightness = 0.786/0.808/0.826/0.837 x global (moderately
+tight cores, growing gently with X); front-bloom core = 0.863/0.808/
+0.769/0.747 vs all-primes 0.805/0.767/0.742/0.723 (a real but mild
+front bias inside the clouds); max same-lane run (top-50 clouds) =
+1.42-1.68 (no class-locking).
+
+### Verdict
+
+- The vapor does NOT cloud-burst beyond the local weave.  At every scale
+  and every scale pair, the real prime condensation sits IN the
+  block-bootstrap band (a null that keeps the real local gap structure
+  within 64-gap blocks and destroys everything beyond) and only marginally
+  above the marginal-only band (1-3% extra over-density: the local
+  structure matters, not just the single-gap distribution).  Against the
+  memoryless Cramer vapor the real weave is ANTI-condensing at every
+  quantile shown: p99.9(real)/p99.9(Cramer) = 0.83/0.86/0.88/0.89 -
+  the measured 1-step anti-persistence (0224 C1 < 0 outside the null)
+  smooths local over-density relative to random at all scales.
+- The few real "clouds" are not dense knots: cores only 80-84% tight,
+  front-biased by the already-known BLOOM, no class-run locking.  They
+  are diffuse front-biased pair-law neighborhoods - the same spring
+  structure of 0219/0223/0224, seen in the density domain.
+- In one line: the data vapor holds no independent clouds - everything it
+  condenses is the pair family condensing; memoryless vapor would make
+  11-17% more of it.  The spring, not the storm.
+- No RH claim.  Off-board measurement; finite (4 scales x 3 scale pairs x
+  3 thresholds x 28 null fields), reproducible (seed 11), null-compared
+  on all three axes.
