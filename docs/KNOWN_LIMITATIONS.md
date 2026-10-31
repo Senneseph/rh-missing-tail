@@ -376,9 +376,20 @@ the machine wire and names the residue:
      ~ 1.76e-106) against ~38% island headroom — the full wall lies
      below the own floor on the same island (boundaries shifted
      inward by ~1e-19) — 'the floor is the wire's ceiling' holds
-     full-wall, not just first-term, in the middle of the band. The
-     face stays OPEN at the machine (edge sliver + deep band);
-     no RH claim.
+     full-wall, not just first-term, in the middle of the band.
+     **Discovery 0247 (day058d_island_textent.py) measures the
+     T-EXTENT of that slice**: the face quantifies over t0 >= tPT2,
+     and f_t(d0) = T1/own grows like t^(4*d0) at every d0 > 0
+     (wire t^(-(2-4d0)) vs floor t^-2; pointwise law verified to
+     1.000): the island shrinks (boundary 0.01026/0.01684 at 100x
+     tPT2), the argmin drifts (d* 0.01513 -> 0.01288), and it
+     VANISHES at bisected t* = 9.69798068531e14 = 323.247 x
+     tPT2 — above t* the n4 wire's first term exceeds the own
+     floor across the WHOLE left band. So the 0244/0245
+     controllability is a certificate for the SLICE
+     tPT2 <= t0 < t* only; G-hs3-left is open for all t0 >= t*
+     by this mechanism. The face stays OPEN at the machine (edge
+     sliver + deep band + all t0 >= t*); no RH claim.
 
 Consequently the endpoint residual at tPT2 is again FOUR named
 faces, of which exactly one is analytic content inside the tree:

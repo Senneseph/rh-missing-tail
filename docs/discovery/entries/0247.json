@@ -1,0 +1,15 @@
+{
+  "id": "0247",
+  "ts": "2026-10-31T00:00:00Z",
+  "title": "Middle-band island t-extent: t* = 9.69798068531e14 (323.247 x tPT2); the 0244/0245 controllability certificate carries only tPT2 <= t0 < t* on G-hs3-left",
+  "kind": "measurement",
+  "board": "G-HS3-LEFT",
+  "tags": ["left-flank", "t4-wall", "island", "t-extent", "closed-form"],
+  "content": "day058d_island_textent.py (closed forms; no zeta evaluation, no zero-existence statement, no RH claim) measures how far in t the 0244/0245 middle-band island carries. The G-hs3-left face quantifies over t0 >= tPT2, but the island was measured at tPT2. f_t(d0) = T1/own grows in t at every d0 > 0 because the n4 wire's first term decays like t^(-4sigma) = t^(-(2-4d0)) against a floor scaling t^(-2): the pointwise law f_t(d) = f_tPT2(d) * (t/tPT2)^(4d) is VERIFIED (predicted crossing factor 1.000 at the drifted argmin vs measured 1). Measured: island min 0.7245 (tPT2) -> 0.8289 (10x) -> 0.9405 (100x) -> 0.9625 (155x) -> 0.9754 (200x) -> GONE (500x); boundaries shrink 0.008084/0.025421 -> 0.01026/0.01684 (100x) -> 0.0111/0.0152 (200x); the argmin drifts d*(tPT2) = 0.01513 -> d*(t*) = 0.01288. BISECTED t* = 9.69798068531e14 = 323.247 x tPT2: ABOVE t* the n4 wire's first term exceeds the witness's own floor ACROSS THE WHOLE left strip band (0.005 < d0 <= posReserveD0max = 0.3733819666133), so by this mechanism G-hs3-left is open for ALL t0 >= t* and the 0244/0245 middle-band controllability is a certificate for the SLICE tPT2 <= t0 < t* only. Quantified honest status of G-hs3-left at the machine: (i) edge sliver [0.005, 0.008084) broken at tPT2 and WORSE for all t > tPT2 (T1/edge grows t^(1/50)); (ii) middle band full-wall controllable on the slice tPT2 <= t0 < t* (9.7e14); (iii) deep band (0.025421, 0.37338] broken at tPT2 and worse for all t > tPT2; (iv) all t0 >= t*: whole band broken. No RH claim; the face remains open.",
+  "artifacts": [
+    "scripts/rh/day058d_island_textent.py",
+    "scripts/rh/out_day058d_island_textent.txt"
+  ],
+  "related": ["0244", "0245", "0246"],
+  "rh_claim": false
+}

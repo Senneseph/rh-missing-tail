@@ -1,0 +1,49 @@
+==========================================================================
+day058d  -  T-EXTENT  of  the  middle-band  island  (n4  wire)
+closed-form;  no  zeta  eval,  no  zero-existence,  no  RH  claim.
+==========================================================================
+
+PART 1:  verification at tPT2 (reproduce 0244/0245)
+--------------------------------------------------------------------------
+tPT2:  island  [0.00809,  0.02543]  (0244:  [0.008083954801,  0.02542065612])
+      T1/own minimum  0.724457  at  d0  =  0.01513   (0244:  0.724  at  0.016)
+
+PART 2:  island min and boundaries vs t
+--------------------------------------------------------------------------
+    t/tPT2               t    min T1/own   lo boundary   hi boundary   island?
+         1  3000175332800.0    0.72445686       0.00809       0.02543       yes
+         2  6000350665600.0    0.75517056       0.00828       0.02411       yes
+         5  15000876664000.0    0.79675043       0.00859       0.02245       yes
+        10  30001753328000.0    0.82894469       0.00886       0.02118       yes
+        20  60003506656000.0    0.86177655       0.00918       0.01993       yes
+        50  1.5000876664e+14    0.90615633       0.00972       0.01823       yes
+       100  3.0001753328e+14    0.94046866       0.01026       0.01684       yes
+       155  4.65027176584e+14    0.96249228       0.01073       0.01586       yes
+       200  6.0003506656e+14     0.9754186        0.0111        0.0152       yes
+       500  1.5000876664e+15     1.0225985             -             -      GONE
+      1000  3.0001753328e+15      1.059029             -             -      GONE
+
+PART 3:  bisection for t* (island minimum crosses 1)
+--------------------------------------------------------------------------
+min f at  tPT2      =  0.724457  (< 1,  alive)
+min f at  1000*tPT2 =  1.05903  (> 1,  gone)
+t*  =  9.69798068531e+14   (  =  323.247 x tPT2 )
+
+pointwise-law check:  f_t(d) ~= f_tPT2(d) * (t/tPT2)^(4 d).  At  the
+DRIFTED  argmin  d*(t*)  ~=  0.01288:  f_tPT2(d*(t*)) * (t*/tPT2)^(4 d*(t*))  =  1.0
+vs the measured 1 (crossing) - agreement confirms the t^(4 d0) law
+(the argmin itself drifts:  d*(tPT2)  =  0.01513  ->  d*(t*)  =  0.01288).
+
+VERDICT (machine-level, no RH claim):
+  the 0244/0245 middle-band island (full-wall controllable at
+  tPT2)  SHRINKS  AND  VANISHES  as  t  grows:  at  t
+  above  t*  ~=  9.7e+14  the  n4  wire's  first term
+  exceeds  the  witness's  own  floor  ACROSS  THE  WHOLE  left
+  strip band  (0.005 < d0 <= posReserveD0max).  Structurally:
+  T1/own  scales  like  t^(4 d0)  (wire  t^-(2-4d0)  vs  floor
+  t^-2),  so  no  fixed  t-threshold  schedule  of  the  n4
+  family  can  serve  both  the  tPT2  slice  AND  t  ->  inf:
+  G-hs3-left  at  t0  >=  tPT2  is  open  FOR  ALL  t0  >=  t*
+  by  this  mechanism,  and  the  0244/0245  controllability
+  certificate  carries  only  the  slice  tPT2  <=  t0  <  t*.
+==========================================================================
