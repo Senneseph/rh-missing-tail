@@ -1,0 +1,38 @@
+{
+  "id": "0251",
+  "ts": "2026-10-31T19:30:00Z",
+  "title": "Record-layer spec landed (RECORD-REQUIREMENTS.md): 'complete RH' = discharge exactly 6 endpoint premises; hzF = external [Z78] record (#NINE PR #101 pre-staged), hPT2/honline = Platt-Trudgian 3e12 data (cited in tree; H1 3e10 = forensic-corrected screen-level cross-check only), hqz/Qside = definitional/inert; the ENTIRE residual is hOffCPT2 - the terminal band-exclusion face [tPT2,inf) x (0, 0.3733819666133] - with closure routes named: (a) direct far-strip computation DEAD (width 0.373), (b) zero-free theta->1/2 = RH itself (shrink only, #NINE = -9.25e-14), (c) per-point-schedule squeeze discharge WARM (the only in-program route; T4OffLC 0250 = its formal margin foundation; open question = does the 0125/0126 uniform-schedule gap close - i.e. does the fill-lower-bound record (S1 leg) exist at PER-POINT run sizes; first probe = A4.3 fill vs devProg/wire-side on the verified data range), (d) external exclusion record out of scope",
+  "kind": "status",
+  "board": "ENDPOINT",
+  "tags": [
+    "endpoint",
+    "record-layer",
+    "spec",
+    "audit",
+    "hOffCPT2",
+    "hPT2",
+    "hzF",
+    "B10",
+    "no-rh-claim"
+  ],
+  "content": "PRECISION AUDIT of the terminal record layer (green tree, master b91cbc5, full build 17454 jobs). Endpoint exact signature read from formal/RhAttack/RHEnd.lean:3653 (six premises -> RH q); offPair definition from P12Uniform.lean:81. B10 BLOCK AUDIT (in body, no RH claim): B10.1 t4l_bandWireBelow (endpoint wire + mass STRICTLY below devProg at ANY band off-pair, flank-independent), B10.2 t4l_bandEmpty (the squeeze window is EMPTY in body: no Qside satisfies both engine legs S1 (Qside >= devProg) and S3 (Qside <= Bwire + Mr) at a band off-pair), B10.3 t4l_stripFacesEmpty (the B9 strip-face bundle G-hs1/hs3-right/G-hs3-left JOINTLY CONTRADICTORY at every band off-pair at/above the frontier), B10.4/B10.5 (B9 endpoint body-equivalent to the vacant form with ONE band-exclusion face). Reading: the in-body squeeze is a CONDITIONAL exclusion - an off-pair would force the measured zero-side fill into the empty interval (devProg, Bwire + Mr]; the S1/S3 legs are NOT provable in body at required strength (0125/0126 dissolution), so closing the conditional into unconditional not-offPair needs one more ingredient (the hOffCPT2 content). Record shapes exact: hzF = externalZeroFree78PosReserve (forall s, 0.8733819666133 < s.re -> s != 1 -> zeta s != 0), hPT2 = allOnLineUpTo q 3000175332800 (Platt-Trudgian arXiv:2004.09765 Thm 1, 12,363,153,437,138 zeros, cited in WinCount section D; in-house H1 3e10 fleet = screen-level fill with 2026-09-29 forensic correction on mcert - cross-check, NOT a certificate), honorine = on-line below 14.14 (trivial data, subsumed). VERDICT: 'complete RH once and for all' residualizes to EXACTLY the terminal face hOffCPT2 (no off-pair on [tPT2, inf) x (0, 0.3733819666133]) plus the routine record adoptions (hzF via #NINE once merged; hPT2 provenance already in tree). Closure route (c) - the per-point witness schedule (058e; C > 5000, e.g. C = 5001) - is the only in-program candidate: the wire side (S3 leg) is a body theorem of the wire machinery, while the S1 fill lower bound is a DATA record about the A4.3 residual fill - the open feasibility question is whether that fill record exists at PER-POINT run sizes (the 0125/0126 gap was a uniform-schedule fill/wire gap). First concrete probe = measure the A4.3 fill vs devProg and the per-point wire side at the verified data range. Its margin foundation is now exact (T4OffLC, 0250). Full spec: docs/RECORD-REQUIREMENTS.md. No RH claim; off-board margin records cited, not load-bearing.",
+  "artifacts": [
+    "docs/RECORD-REQUIREMENTS.md",
+    "formal/RhAttack/RHEnd.lean (rh_program78_stripfront_mach_unifiedPosReserve_PT2 @3653; B10 block @1560-1700)",
+    "formal/RhAttack/WinCount.lean (allOnLineUpTo @106; tPT2 @538; section D citation)",
+    "formal/RhAttack/Z78PosReserve.lean (externalZeroFree78PosReserve @128; posReserveD0max @101)",
+    "formal/RhAttack/P12Uniform.lean (offPair @81)",
+    "tmp/b6audit/prestage101/IDEM-PRESTAGE.md"
+  ],
+  "related": [
+    "0249",
+    "0248",
+    "0250",
+    "0247",
+    "0246",
+    "0125",
+    "0126",
+    "0235"
+  ],
+  "rh_claim": false
+}
