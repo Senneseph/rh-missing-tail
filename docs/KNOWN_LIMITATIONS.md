@@ -400,7 +400,10 @@ the machine wire and names the residue:
      margin 2e-4 t-independent; exact C-threshold 5000) are
      OFF-BOARD POSITIVE-DUAL MARGIN RECORDS in the status of the S8
      wall (machine-verified, explicit, NOT load-bearing for the
-     endpoint). The terminal endpoint (RHEnd.lean,
+     endpoint). The 058e map is now FORMALIZED as exact Lean pins in
+     `formal/RhAttack/T4OffLC.lean` (discovery 0250; C = 5001,
+     sigma-cancel exact, whole-band closure, mass pin, tPT2 pin -
+     full tree green, no RH claim). The terminal endpoint (RHEnd.lean,
      rh_program78_stripfront_mach_unifiedPosReserve_PT2) stands on
      exactly three external records: [Z78] (hzF, theta =
      0.8733819666133; B6 pre-stage awaiting PR #101 at
