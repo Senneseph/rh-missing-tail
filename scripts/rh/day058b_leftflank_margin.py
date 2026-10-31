@@ -141,27 +141,73 @@ def main():
     P("-" * 74)
     P("PART 2: per-point schedule vs n4 breakdown at t = tPT2")
     P("-" * 74)
-    P("sigma = 1/2 - d0, d0 in [1/200, 1/2):  T1(n4, sigma) vs flo_edge;")
-    P("critical scale crit(sigma) = (9999/2)^(1/sigma) * t^(2/sigma)")
-    P(f"{'d0':>12}  {'sigma':>12}  {'T1n4/floor':>14}  {'crit/n4':>16}  "
-      f"{'crit scale':>18}")
-    ds = [1 / 200, 0.01, 0.02, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4,
-          0.45, 0.49, 0.495, mp.mpf(1) / 2 - mp.mpf(1) / 1000]
+    P("sigma = 1/2 - d0, d0 in [1/200, 1/2):  T1(n4, sigma) vs the EDGE")
+    P("floor (band minimum) AND vs the witness's OWN floor;  critical")
+    P("scale crit(sigma) = (9999/2)^(1/sigma) * t^(2/sigma)")
+    P(f"{'d0':>12}  {'sigma':>12}  {'T1/edge':>14}  {'T1/own':>14}  "
+      f"{'crit/n4':>14}")
+    ds = [1 / 200, 0.008, 0.01, 0.015, 0.02, 0.03, 0.05, 0.1, 0.15, 0.2,
+          0.25, 0.3, 0.4, 0.49, mp.mpf(1) / 2 - mp.mpf(1) / 1000]
     n4t = n4_real(T_PT2)
     for d in ds:
         d = mp.mpf(d)
         sigma = mp.mpf(1) / 2 - d
-        ratio = t1(n4t, sigma) / flo_edge(T_PT2)
+        flo_own = pairfac(d, T_PT2) * pairfac(-d, T_PT2)
+        ratio_e = t1(n4t, sigma) / flo_edge(T_PT2)
+        ratio_o = t1(n4t, sigma) / flo_own
         crit = (mp.mpf(9999) / 2) ** (1 / sigma) * T_PT2 ** (2 / sigma)
         P(f"{mp.nstr(d, 12):>12}  {mp.nstr(sigma, 12):>12}  "
-          f"{mp.nstr(ratio, 14):>14}  {mp.nstr(crit / n4t, 16):>16}  "
-          f"{mp.nstr(crit, 18):>18}")
+          f"{mp.nstr(ratio_e, 14):>14}  {mp.nstr(ratio_o, 14):>14}  "
+          f"{mp.nstr(crit / n4t, 14):>14}")
     P()
-    P("reading:  T1n4/floor > 1  =  the n4 wire is BROKEN at that sigma")
-    P("(the S3 wire leg of the squeeze cannot hold there);  crit/n4 is the")
-    P("outgrowth factor the per-point schedule must carry (0123 S7).")
+    P("references:  T1/edge vs flo_edge (band MINIMUM floor, d0 = 1/200);")
+    P("T1/own vs the witness's own floor floStripMin(tPT2, d0) =")
+    P("pairfac(d0)*pairfac(-d0) ~ 4 d0^2 t^-2 off-edge.  The two")
+    P("references CROSS:  against its own floor the n4 wire dips BELOW")
+    P("the floor on a middle band (the island) and re-emerges at large")
+    P("d0 (sigma0 ceiling 4.5e28);  against the edge scale it is broken")
+    P("across the whole band.")
     P()
-    P("n4 closure crossover on the left band (ratio T1/floor = 1):")
+    P("MIDDLE-BAND ISLAND scan (T1/own = 1 crossings, d0 in [0.005, 0.5]):")
+    IS = lambda d: t1(n4t, mp.mpf(1) / 2 - d) / \
+        (pairfac(d, T_PT2) * pairfac(-d, T_PT2)) - 1
+    prev = IS(mp.mpf(1) / 200)
+    islands = []
+    dstep = mp.mpf(1) / 40000
+    dv = mp.mpf(1) / 200 + dstep
+    last_val = prev
+    last_d = mp.mpf(1) / 200
+    crossings = []
+    while dv < mp.mpf(1) / 2 - dstep:
+        v = IS(dv)
+        if (last_val < 0 <= v) or (last_val >= 0 > v):
+            a, b = last_d, dv
+            va = IS(a)
+            for _ in range(120):
+                m = (a + b) / 2
+                vm = IS(m)
+                if (vm < 0) == (va < 0):
+                    a, va = m, vm
+                else:
+                    b = m
+            crossings.append(((a + b) / 2, v < 0))
+        last_val, last_d, dv = v, dv, dv + dstep
+    for c, below_after in crossings:
+        side = "BELOW 1 (island side)" if below_after else "above 1"
+        P(f"  crossing at d0 = {mp.nstr(c, 10)}  (T1/own goes {side})")
+    if not crossings:
+        P("  (no crossings: T1/own stays on one side of 1)")
+    P()
+    if len(crossings) == 2 and crossings[0][1] and not crossings[1][1]:
+        P(f"MIDDLE-BAND ISLAND (own floor):  d0 in "
+          f"[{mp.nstr(crossings[0][0], 8)}, "
+          f"{mp.nstr(crossings[1][0], 8)}]  -  the FIRST T4 TERM of the")
+        P("n4 wire is BELOW the witness's own floor there (measured")
+        P("minimum T1/own ~= 0.724 at d0 ~= 0.016);  the full S3 wall")
+        P("(T1 + nonnegative mass terms) may or may not still break")
+        P("the face - the island is a first-term statement only.")
+    P()
+    P("n4 closure crossover vs the EDGE floor reference (T1/flo_edge = 1):")
     H = lambda s: t1(n4t, s) / flo_edge(T_PT2) - 1
     lo, hi = mp.mpf(99) / 200, mp.mpf(1) / 2
     if H(lo) < 0 and H(hi) < 0:
@@ -271,11 +317,16 @@ def main():
     P("    by 1.739 = 73.9% (growing slowly like t^{1/50}, i.e. effectively")
     P("    frozen in the endpoint regime).  sigma0: T1 = 1/2 at every")
     P("    schedule, 4.5e28 above the floor - unreachable.")
-    P("  - the WHOLE left strip band [1/200, 1/2) is broken at tPT2 on n4:")
-    P("    ratio 1.739 (edge d0 = 1/200) -> 4.5e28 (d0 = 1/2); the sigma")
-    P("    where the n4 wire would close is 0.49919 (d0 ~= 0.000814),")
-    P("    far below the band edge (d0 >= 1/200 = 0.005 is fully broken) - i.e.")
-    P("    no height buys the band on n4.")
+    P("  - against the BAND-MINIMUM (edge) scale the n4 wire is broken")
+    P("    across the whole strip band (1.739 at the edge d0 = 1/200,")
+    P("    growing like t^{1/50} in t);  against the witness's OWN floor")
+    P("    the picture is split: broken on [0.005, 0.0081) and")
+    P("    (0.0254, 1/2], but BELOW the own floor on the middle-band")
+    P("    island d0 in [0.008084, 0.025421] (T1/own minimum ~= 0.724")
+    P("    at d0 ~= 0.016) - the floor there is the wire's ceiling:")
+    P("    the first T4 term is machine-controllable in d0, only the")
+    P("    edge sliver and the deep band (sigma0 ceiling 4.5e28) keep")
+    P("    the S3 first term above the face.")
     P("  - per-point (d0-adaptive) schedule: closes at every d0 < 1/2 with")
     P("    outgrowth crit/n4 = 3.057 at the band edge, diverging as")
     P("    t^{2/sigma} * (9999/2)^{1/sigma} for d0 -> 1/2 (0123 rate).")

@@ -363,8 +363,15 @@ the machine wire and names the residue:
      same factor as the 0123 per-point outgrowth at the edge (the
      two maps agree to 4 digits) — or k = 4.0389 at the n4
      constant; C0*t^5 / C0*t^8 / C0*t^16 cover d0 <= 0.090 / 0.233 /
-     0.362 only; d0 -> 1/2 is unreachable at every fixed (C,k). The
-     face stays OPEN at the machine; no RH claim.
+     0.362 only; d0 -> 1/2 is unreachable at every fixed (C,k).  The measured map also SPLITs the band against the witness's
+     OWN floor (the squeeze floor at that d0): the first T4 term of
+     n4 is above the own floor on [0.005, 0.008084) and
+     (0.025421, 1/2], but BELOW it on the middle-band island
+     d0 in [0.008084, 0.025421] (T1/own minimum ~= 0.724 at
+     d0 ~= 0.016) — there the S3 first-term leg is
+     machine-controllable (full wall = T1 + mass terms: whether the
+     mass re-breaks the island is the next measurable) — 'the
+     floor is the wire's ceiling' in the middle of the band. The face stays OPEN at the machine; no RH claim.
 
 Consequently the endpoint residual at tPT2 is again FOUR named
 faces, of which exactly one is analytic content inside the tree:

@@ -27,30 +27,45 @@ exact-floor crossing (T1(n4) vs flo_edge, n4 real) = 5.902213676
 --------------------------------------------------------------------------
 PART 2: per-point schedule vs n4 breakdown at t = tPT2
 --------------------------------------------------------------------------
-sigma = 1/2 - d0, d0 in [1/200, 1/2):  T1(n4, sigma) vs flo_edge;
-critical scale crit(sigma) = (9999/2)^(1/sigma) * t^(2/sigma)
-          d0         sigma      T1n4/floor           crit/n4          crit scale
-       0.005         0.495  1.7389572221256  3.057344501356435  7.67878690492805035e+57
-        0.01          0.49  3.3673529525672  11.91271162869559  2.99198124437817006e+58
-        0.02          0.48  12.626649413136  196.9063727318296  4.94547498902800574e+59
-        0.05          0.45  665.71228170476  1878770.097399246  4.71869467601021949e+63
-         0.1           0.4  493496.39126632  171041451715102.2  4.295854978224094e+71
-        0.15          0.35  365831748.76874  2.926807610461139e+24  7.35093213816162718e+81
-         0.2           0.3  271193205818.14  1.290578951851517e+38  3.24140140270631885e+95
-        0.25          0.25  2.0103710279233e+14  1.632793042102455e+57  4.10090188547327919e+114
-         0.3           0.2  1.4902997505858e+17  7.347692718329809e+85  1.84543699939323087e+143
-        0.35          0.15  1.1047678840111e+20  4.183284424834418e+133  1.05066830534656363e+191
-         0.4           0.1  8.1897086613796e+22  1.355970400258054e+229  3.40563771873011523e+286
-        0.45          0.05  6.0710787242254e+25  4.617943940600399e+515  1.15983682712372635e+573
-        0.49          0.01  1.2002281099854e+28  8.356727368290573e+2807  2.09886483695945193e+2865
-       0.495         0.005  2.3241466888835e+28  1.753964122536178e+5673  4.40523360382482673e+5730
-       0.499         0.001  3.9433318641294e+28  6.605359805099725e+28595  1.65899362506366887e+28653
+sigma = 1/2 - d0, d0 in [1/200, 1/2):  T1(n4, sigma) vs the EDGE
+floor (band minimum) AND vs the witness's OWN floor;  critical
+scale crit(sigma) = (9999/2)^(1/sigma) * t^(2/sigma)
+          d0         sigma         T1/edge          T1/own         crit/n4
+       0.005         0.495  1.7389572221256  1.7389572221256  3.0573445013564
+       0.008         0.492  2.5851678325397  1.0098311845858  6.891336853636
+        0.01          0.49  3.3673529525672  0.84183823814179  11.912711628696
+       0.015         0.485  6.5206123318562  0.72451248131735  47.737048707529
+        0.02          0.48  12.626649413136  0.78916558832102  196.90637273183
+        0.03          0.47  47.346469956679  1.3151797210189  3667.3241984287
+        0.05          0.45  665.71228170476  6.6571228170476  1878770.0973992
+         0.1           0.4  493496.39126632  1233.7409781658  1.710414517151e+14
+        0.15          0.35  365831748.76874  406479.72085415  2.9268076104611e+24
+         0.2           0.3  271193205818.14  169495753.63634  1.2905789518515e+38
+        0.25          0.25  2.0103710279233e+14  80414841116.931  1.6327930421025e+57
+         0.3           0.2  1.4902997505858e+17  41397215294050.0  7.3476927183298e+85
+         0.4           0.1  8.1897086613796e+22  1.2796419783406e+19  1.3559704002581e+229
+        0.49          0.01  1.2002281099854e+28  1.2497168991934e+24  8.3567273682906e+2807
+       0.499         0.001  3.9433318641294e+28  3.9591526380712e+24  6.6053598050997e+28595
 
-reading:  T1n4/floor > 1  =  the n4 wire is BROKEN at that sigma
-(the S3 wire leg of the squeeze cannot hold there);  crit/n4 is the
-outgrowth factor the per-point schedule must carry (0123 S7).
+references:  T1/edge vs flo_edge (band MINIMUM floor, d0 = 1/200);
+T1/own vs the witness's own floor floStripMin(tPT2, d0) =
+pairfac(d0)*pairfac(-d0) ~ 4 d0^2 t^-2 off-edge.  The two
+references CROSS:  against its own floor the n4 wire dips BELOW
+the floor on a middle band (the island) and re-emerges at large
+d0 (sigma0 ceiling 4.5e28);  against the edge scale it is broken
+across the whole band.
 
-n4 closure crossover on the left band (ratio T1/floor = 1):
+MIDDLE-BAND ISLAND scan (T1/own = 1 crossings, d0 in [0.005, 0.5]):
+  crossing at d0 = 0.008083954801  (T1/own goes BELOW 1 (island side))
+  crossing at d0 = 0.02542065612  (T1/own goes above 1)
+
+MIDDLE-BAND ISLAND (own floor):  d0 in [0.0080839548, 0.025420656]  -  the FIRST T4 TERM of the
+n4 wire is BELOW the witness's own floor there (measured
+minimum T1/own ~= 0.724 at d0 ~= 0.016);  the full S3 wall
+(T1 + nonnegative mass terms) may or may not still break
+the face - the island is a first-term statement only.
+
+n4 closure crossover vs the EDGE floor reference (T1/flo_edge = 1):
   sigma_break = 0.4991862215   (d0_break = 0.0008137784792)  -  wire CLOSED for
   d0 < d0_break, broken for d0 > d0_break  at t = tPT2
 
@@ -90,11 +105,16 @@ VERDICT (G-hs3-left, machine-level, no RH claim):
     by 1.739 = 73.9% (growing slowly like t^{1/50}, i.e. effectively
     frozen in the endpoint regime).  sigma0: T1 = 1/2 at every
     schedule, 4.5e28 above the floor - unreachable.
-  - the WHOLE left strip band [1/200, 1/2) is broken at tPT2 on n4:
-    ratio 1.739 (edge d0 = 1/200) -> 4.5e28 (d0 = 1/2); the sigma
-    where the n4 wire would close is 0.49919 (d0 ~= 0.000814),
-    far below the band edge (d0 >= 1/200 = 0.005 is fully broken) - i.e.
-    no height buys the band on n4.
+  - against the BAND-MINIMUM (edge) scale the n4 wire is broken
+    across the whole strip band (1.739 at the edge d0 = 1/200,
+    growing like t^{1/50} in t);  against the witness's OWN floor
+    the picture is split: broken on [0.005, 0.0081) and
+    (0.0254, 1/2], but BELOW the own floor on the middle-band
+    island d0 in [0.008084, 0.025421] (T1/own minimum ~= 0.724
+    at d0 ~= 0.016) - the floor there is the wire's ceiling:
+    the first T4 term is machine-controllable in d0, only the
+    edge sliver and the deep band (sigma0 ceiling 4.5e28) keep
+    the S3 first term above the face.
   - per-point (d0-adaptive) schedule: closes at every d0 < 1/2 with
     outgrowth crit/n4 = 3.057 at the band edge, diverging as
     t^{2/sigma} * (9999/2)^{1/sigma} for d0 -> 1/2 (0123 rate).
