@@ -271,6 +271,18 @@ above that height:
    is the one obligation with NO in-tree analytic substitute (the
    window squeeze is pinned at the near pin ~1662x above the floor,
    bound-level, recorded in Part C of the RHEnd docstring).
+   **REV2 closure map (discovery 0243, formal/RhAttack/S4WinGate.lean)**:
+   the window floor has a leading d^2 factor and vanishes as d -> 0
+   (windowFloorLo); the in-tree window wire (13t/8 / nGrow schedule)
+   misses it by ~ t/(8 d^2), but the N4-schedule wire closes it on
+   the d-substrip [1/210, 1/200) above tPT2 with measured margin
+   1.1135529 (t-independent; partCgate_n4; the crossing
+   sqrt(A1/4) ~= 4.7384e-3 is pinned formally below 1/210 by
+   rev2mapPin).  The near-line slice (0, 1/210) remains bound-level
+   open by structure.  The record obligation itself is UNCHANGED:
+   zero-exclusion of the actual zero set still rides on the record +
+   the S1 zero-side leg; the module is bound-level arithmetic only
+   (no RH claim).
 
 3. **The machined hs3 face**: at each strip-band off-pair,
    `Qside <= |EM wall at the canonical point (n4 schedule)| +
