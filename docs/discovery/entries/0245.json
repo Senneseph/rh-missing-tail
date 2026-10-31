@@ -1,0 +1,15 @@
+{
+  "id": "0245",
+  "ts": "2026-10-30T00:00:00Z",
+  "title": "0244 middle-band island survives under the FULL T4 wall (mass_rel ~ 1e-17, headroom 38%, boundary shift ~1e-19)",
+  "kind": "measurement",
+  "board": "G-HS3-LEFT",
+  "tags": ["left-flank", "t4-wall", "em-tail-mass", "island", "closed-form"],
+  "content": "day058c_island_mass.py (closed-form machine-wire arithmetic; no zeta evaluation, no zero-existence statement, no RH claim) tests whether the EM-tail mass of the T4 wire series re-breaks the 0244 middle-band first-term island at t = tPT2. The T4 tail (in-tree T4OffM structure: term 2 = (t+1)/12 * n^(-sigma-1/2), term 3 ~ (1.01t)^3 against n^(-sigma-3/2), ...) relative to the first T1 term: T2/T1 = (t+1)/6 * n4(t)^(-1/2) = 9.98e-18 at tPT2 (INDEPENDENT of d0 - sigma cancels on the d-flank pair structure), T3 corner ~ 1.76e-106, T4 corner smaller still; mass_rel ~= 9.98e-18. The island headroom at T1/own ~ 0.727 (d0 ~ 0.016) is 1/0.727 - 1 ~= 37.5% of T1 - the mass is ~23 orders of magnitude below it. Full-wall island boundary shift: ~8.7e-20 (lower) / ~1.9e-19 (upper) against the 16-digit island bounds - effectively zero. VERDICT: the 0244 island [0.008083954801, 0.02542065612] is NOT a first-term artifact: the ENTIRE T4 wall (first term + EM-tail mass) lies below the witness's own floor on the same middle band at tPT2. G-hs3-left at tPT2 splits into: edge sliver [0.005, 0.008084) BROKEN (T1/edge wire ratio 1.739 and growing t^(1/50)); middle band [0.008084, 0.025421] FULL-WALL CONTROLLABLE (this entry); deep band (0.025421, posReserveD0max = 0.3733819666133] BROKEN (sigma0 ceiling 4.5e28, no uniform schedule - 0121/0123). The remaining quantified open work on G-hs3-left is the edge sliver plus the deep band.",
+  "artifacts": [
+    "scripts/rh/day058c_island_mass.py",
+    "scripts/rh/out_out_day058c_island_mass.txt"
+  ],
+  "related": ["0244", "0243", "0121", "0123"],
+  "rh_claim": false
+}

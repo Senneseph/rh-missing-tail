@@ -1,0 +1,16 @@
+{
+  "id": "0246",
+  "ts": "2026-10-30T00:00:00Z",
+  "title": "T4OffLB formal anchor: exact rational pins for the 0244 left-flank margin map (edge lever, formal margin, wire skeleton) - GATING GREEN",
+  "kind": "formal",
+  "board": "G-HS3-LEFT",
+  "tags": ["lean", "anchor", "left-flank", "t4", "exact-pins"],
+  "content": "New in-tree module formal/RhAttack/T4OffLB.lean (GATING: targeted and full lake build green, 0 sorry, 0 admit) formalizes the three machine constants of the 0244/0245 left-flank map as EXACT rational pins, by closed-form rpow arithmetic reduced to integer-power norm_num comparisons at the frontier height tPT2 = 3000175332800. Pins: (1) edgeLeverBounded: 3 < K < 153/50 where K = t4l_schedA(99/200) * tPT2^(400/99) / (edgeC0 * tPT2^4) is the 0244 edge-lever ratio (measured 3.05734...; the 0123 per-point outgrowth factor needed to cover the band edge = 3.058x the n4 constant at k=4, the two maps agreeing to 4 digits) - proved via K^99 = (9999/2)^200 * tPT2^4 / edgeC0^99 (edgeLeverK99exact, exact) plus norm_num on 3^99 and (153/50)^99. (2) edgeFormalMarginBounds: 112/100 < (9999/15750) * tPT2^(1/50) < 113/100 - the FORMAL lower-bound margin of discovery 0121 (the '~13%' of the T4OffL docstring; the wire lower bound (1/15750) t^(-99/50) against the formal floor pin (1/9999) t^-2), pinned by 50th-power norm_num comparisons against the rational constants. (3) edgeWireRatioBounds: 3/2 < edgeWireRatio < 9/5 where edgeWireRatio = (1/2)(edgeC0 tPT2^4)^(-99/200) * 9999 * tPT2^2 is the measured 1st-T4-term skeleton against the exact pairfac floor pin at tPT2 (measured 1.738957... via the full pairfac in the day058b sweep; the pin brackets the skeleton exactly) - proved via the exact identity (2/9999) * edgeWireRatio = tPT2^(1/50) / edgeC0^(99/200) (edgeWireRatioForm) plus 200th-power norm_num comparisons tPT2^4 * 9999^200 vs 3^200 * edgeC0^99 and tPT2^4 * 5555^200 vs 2^200 * edgeC0^99. The middle-band island [0.008084, 0.025421] (0244/0245) remains MEASURED-ONLY (its boundaries are transcendental pairfac crossings with no exact pin yet) and is recorded in the sweep output. HONESTY BOUNDARY: bound-level machine-wire arithmetic only - no zeta evaluation, no zero-existence statement, no RH claim; G-hs3-left stays open at the machine (edge sliver + deep band unaccounted).",
+  "artifacts": [
+    "formal/RhAttack/T4OffLB.lean",
+    "scripts/rh/day058b_leftflank_margin.py",
+    "scripts/rh/day058c_island_mass.py"
+  ],
+  "related": ["0244", "0245", "0243", "0121", "0123"],
+  "rh_claim": false
+}

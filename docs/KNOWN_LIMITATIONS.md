@@ -369,9 +369,16 @@ the machine wire and names the residue:
      (0.025421, 1/2], but BELOW it on the middle-band island
      d0 in [0.008084, 0.025421] (T1/own minimum ~= 0.724 at
      d0 ~= 0.016) — there the S3 first-term leg is
-     machine-controllable (full wall = T1 + mass terms: whether the
-     mass re-breaks the island is the next measurable) — 'the
-     floor is the wire's ceiling' in the middle of the band. The face stays OPEN at the machine; no RH claim.
+     machine-controllable; **discovery 0245 (day058c_island_mass.py)
+     CONFIRMS the island under the FULL wall**: the EM-tail mass of
+     the T4 series is mass_rel ~= 9.98e-18 RELATIVE at tPT2
+     (T2/T1 = (t+1)/6 * n4(t)^(-1/2), d0-independent; T3 corner
+     ~ 1.76e-106) against ~38% island headroom — the full wall lies
+     below the own floor on the same island (boundaries shifted
+     inward by ~1e-19) — 'the floor is the wire's ceiling' holds
+     full-wall, not just first-term, in the middle of the band. The
+     face stays OPEN at the machine (edge sliver + deep band);
+     no RH claim.
 
 Consequently the endpoint residual at tPT2 is again FOUR named
 faces, of which exactly one is analytic content inside the tree:

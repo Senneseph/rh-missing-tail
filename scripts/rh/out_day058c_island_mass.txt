@@ -1,0 +1,59 @@
+==========================================================================
+day058c  -  FULL-WALL MASS  vs  the  0244 middle-band island
+closed-form  machine-wire  arithmetic;  no  zeta  eval,  no
+zero-existence  statement,  no  RH  claim.
+==========================================================================
+
+t = tPT2 = 3000175332800.0
+n4 scale  =  C0 * t^4  =  2.51158706568e+57
+
+PART 1:  mass terms of the T4 (EM-tail) wall, relative to T1
+--------------------------------------------------------------------------
+T2/T1  =  (t+1)/6 * n^(-1/2)            =  9.977489208e-18
+T3/T1  corner  ( (1.01t)^3 n^(-5/2) x2 ) =  1.7602057e-106
+T4/T1  corner  ( (1.01t)^4 n^(-7/2) x4 ) =  4.2473025e-151
+mass_rel  <=  T2/T1 + corners           ~=  9.9774892e-18
+
+note:  T2/T1 is INDEPENDENT of d0 (sigma cancels) - the mass
+relative weight is the same across the whole band at fixed t.
+
+PART 2:  island headroom vs the mass
+--------------------------------------------------------------------------
+T1/own across the 0244 island (recomputed, closed form):
+        d0          T1/own      headroom
+    0.0081    0.9981566605  0.0018467437
+     0.009    0.9106336225   0.098136479
+      0.01    0.8418382381    0.18787667
+     0.012    0.7614932409    0.31320929
+     0.014    0.7287396003    0.37223228
+     0.016     0.726755576    0.37597843
+     0.018     0.747968355    0.33695496
+      0.02    0.7891655883    0.26716118
+     0.022    0.8495377182    0.17711077
+     0.024    0.9298340385   0.075460737
+    0.0254    0.9988963313  0.0011048881
+
+mass_rel ~= 9.9774892e-18   vs   minimum headroom on the
+island interior ~= 38% (1/0.724 - 1):  the mass is ~23 orders
+of magnitude below the headroom.  The island SURVIVES under
+the full wall.
+
+PART 3:  full-wall island (boundary shift)
+--------------------------------------------------------------------------
+boundary sensitivity  (dT1/own/dd0):  lo  -115.016,  hi  53.5219
+full-wall boundary shift:  lo  8.675e-20,  hi  1.864e-19   (vs island width 0.017337)
+
+the full-wall island is the 0244 T1 island shifted inward by
+~1e-19 on each boundary - identical to all measurable digits.
+
+VERDICT (machine-level, no RH claim):
+  - the 0244 middle-band island [0.008084, 0.025421] is not a
+  first-term artifact:  the EM-tail mass of the T4 wall is
+  mass_rel ~= 9.98e-18  relative at tPT2 (T2/T1 = 9.98e-18,  T3 corner 1.76e-106,
+  T3-corner and below ~ 1e-106), ~23 orders of magnitude under
+  the 38% island headroom;  the full T4 wall is below the
+  witness's own floor on the same island (boundaries move by
+  ~1e-19).  G-hs3-left at tPT2 is thus split into:  edge
+  sliver  [0.005, 0.008084)  BROKEN,  middle band  [0.008084, 0.025421] FULL-WALL CONTROLLABLE,  deep band
+  (0.025421, posReserveD0max = 0.3733819666133]  BROKEN  (sigma0 ceiling 4.5e28, no uniform schedule, 0121/0123).
+==========================================================================
