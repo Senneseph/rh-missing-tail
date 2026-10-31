@@ -76,34 +76,28 @@ conditional into an unconditional `¬ offPair` needs exactly one more ingredient
   zeros lie in `d0 ≤ posReserveD0max`; to exclude off-pairs by zero-free region alone
   would require θ → 1/2 — i.e. RH itself. Each θ improvement (like #NINE, −9.25e-14)
   only SHRINKS the face. NOT a closure, but a live record-layer improvement.
-- **(c) Squeeze discharge under the per-point schedule (the program's own route, WARM).**
-  The engine's S3 leg (fill <= wire side) is a body theorem of the wire machinery;
-  the S1 leg (zero-side fill >= devProg) is a DATA record about the measured |zeta|
-  fill under the A4.3 residual wire. Under the uniform `n4` schedule the S1 fill
-  lower bound could not be established in body at required strength (0125/0126
-  dissolution; S8 square-root schedule wall; uniform-wire island dies at t* =
-  9.698e14, 0247). The 058e per-point witness run `n = C^(1/σ) t^(2/σ)` (C > 5000,
-  e.g. C = 5001) puts the wire side (first T4 term + EM-tail mass <=
-  1001/30006000000 of it) strictly below the own-mass floor `S4O.mown` on the
-  WHOLE band for ALL t >= 1000 - t-independently, edge margin 2e-4 - and is now
-  FORMALIZED as exact rational pins in `T4OffLC.lean` (0250). Re-activating (c) =
-  measure the A4.3 fill under the PER-POINT run on the data range (first Python
-  probe: fill vs devProg / wire-side at per-point run sizes, on-line positions of
-  the verified range), and if the per-point fill lower bound is data-carryable,
-  restate S1 as a body theorem and combine with B10.2 (bandEmpty under the new
-  schedule) to close `hOffCPT2` in body. OPEN feasibility question = whether the
-  fill record exists at per-point run sizes. This is the only closure route that
-  stays INSIDE the program. Named, finite, measurable. **The next in-tree
-  research direction.**
+- **(c) Squeeze discharge under the per-point schedule - MEASURED NEGATIVE (0252, day059 probe; closed).**  The engine's S3 leg is structural (triangle + 3-term EM bound + A4.3/P5 mass, at any run) and the S4 wire margin at the per-point run is Lean-pinned for C > 5000 (058e/T4OffLC, 0250), but the day059 probe measures the full two-leg map:  the S1 fill leg (the S1Ge lower bound (T1-T2-T3) - Mval against devProg) closes iff C < C*(t,d0) = t^-2/(2 devProg) ~ 1/(8 d0^2) pointwise, while the S4 wire-margin leg (per-point wire < floor) closes iff C > t^-2/(2 floor) >= t^-2/(2 devProg) (floor <= devProg, S2 in body).  The knife-edge thresholds coincide, so NO C > 0 closes both legs at ANY band point:  joint closure = 0 points measured on the full grid (t 1e3..1e16 x d0 1/200..posReserveD0max x C 1..1e8);  knife edge exact at tPT2 (R1(C) = 5000/C, R3(C) = C/5000 to 10 digits;  C = 5000:  both = 1.0000000000);  C*(d0) = 1/(8 d0^2 f) runs 5000 (d0 = 1/200) -> 1913 (0.008084) -> 193.4 (0.025421) -> 50 (0.05) -> 0.8965 (posReserveD0max), t-independent to O(t^-2);  C = 5001 closes S3/S4 on the whole band (margin >= 2e-4, edge-worst, T4OffLC-pinned) and its S1 mirror is open on the whole band (edge deficit 2e-4;  at posReserveD0max the fill lower bound is 1/5577 of the requirement;  worst R1 = 1.79286e-4);  C = 4999.5 (in-tree 0123) is the exact mirror.  Cross-validated:  R1 = 5000/C to 10 digits at the edge reproduces the 058e
+  C > 5000 threshold exactly (R1 = 1 iff C = 5000);  R1(C = 5001) < 1 on the
+  whole band (0.9998 at the edge, 1.79e-4 at posReserveD0max) is the S1 mirror
+  image of the 058e/0245 whole-band wire closure at C > 5000;  uniform-n4
+  reference R1@n4(edge) = 1.1535..1.3552 (t = 1e9..1e16), npp/n4 = 1.33..1.84
+  (the per-point run is not an artifact).  Consequence:  the per-point witness family is EXHAUSTED as a discharge mechanism for hOffCPT2 - the 0126 window-emptiness fact (t4l_bandEmpty) is schedule-independent and now quantified with exact thresholds at the per-point family.  The per-point route is CLOSED, not deferred.
 - **(d) External record asserting the band exclusion directly.** Equivalent to a
   proof of RH above the frontier; no such record exists and the board format has
   no vehicle for it. OUT OF SCOPE by design.
 
 ## 5. "Complete RH" — the spec, in order
 
-1. **hOffCPT2** — the terminal face; route (c) is the program-internal candidate;
-   its gate is the 058e/T4OffLC per-point margin foundation (now formal, 0250).
-   Everything else is mechanical relative to this.
+1. **hOffCPT2** — the terminal face. In-program candidates: route (c)
+   per-point-schedule squeeze — CLOSED NEGATIVE by measurement (0252, the day059
+   knife edge: no C in the 0123 family closes both squeeze legs at any band point);
+   route (a) direct zero computation — DEAD (0251); route (b) stronger zero-free
+   regions — shrinks only. What remains IN-PROGRAM: a genuinely new
+   (non-schedule, non-squeeze-family) analytic argument for the band exclusion,
+   if one is found — nothing in the tree blocks it (B10.4/B10.5 give the endpoint
+   equivalence either way). Otherwise the face is discharged by (A) a
+   frontier/record extension above tPT2 — the external record layer (0126 route A,
+   the B6-board family). Everything else is mechanical relative to this.
 2. **hzF** — adopt the strongest MERGED board [Z78]-class record. #NINE (PR #101)
    pre-staged; one-shot conveyor ready (`IDEM-PRESTAGE.md`); B10.1-style margins are
    schedule-independent so the record layer is orthogonal to (c).

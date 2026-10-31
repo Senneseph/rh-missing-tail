@@ -403,7 +403,22 @@ the machine wire and names the residue:
      endpoint). The 058e map is now FORMALIZED as exact Lean pins in
      `formal/RhAttack/T4OffLC.lean` (discovery 0250; C = 5001,
      sigma-cancel exact, whole-band closure, mass pin, tPT2 pin -
-     full tree green, no RH claim). The terminal endpoint (RHEnd.lean,
+     full tree green, no RH claim). ROUTE (c) MEASURED NEGATIVE
+     (discovery 0252, scripts/rh/day059_route_c_s1_perpoint.py/.txt,
+     closed forms only): the per-point witness family
+     n = C^(1/sigma) t^(2/sigma) can NEVER discharge the band
+     squeeze - the S1 fill leg (S1Ge lower bound vs devProg) closes
+     iff C < C*(t,d0) ~ 1/(8 d0^2) and the S4 wire-margin leg
+     closes iff C > t^-2/(2 floor) >= t^-2/(2 devProg), the
+     knife-edge thresholds coincide, and the joint-closure count
+     over the full measured grid (t 1e3..1e16 x the band x
+     C 1..1e8) is 0 points (knife edge exact at tPT2: R1(C) = 5000/C,
+     R3(C) = C/5000; C*(d0) = 1/(8 d0^2) runs 5000 at d0 = 1/200
+     down to 0.8965 at posReserveD0max) - the 0126 window-emptiness
+     fact (t4l_bandEmpty) in its schedule-independent, quantified,
+     per-point form; the per-point route is CLOSED as a discharge
+     mechanism for hOffCPT2 and the completion layer is the record
+     layer. No RH claim. The terminal endpoint (RHEnd.lean,
      rh_program78_stripfront_mach_unifiedPosReserve_PT2) stands on
      exactly three external records: [Z78] (hzF, theta =
      0.8733819666133; B6 pre-stage awaiting PR #101 at
