@@ -1,0 +1,110 @@
+==========================================================================
+day058b LEFT-FLANK MARGIN SWEEP (G-hs3-left, 0121/0123 map)
+closed-form machine-wire arithmetic; no zeta, no RH claim
+==========================================================================
+tPT2 = 3000175332800.0
+n4(tPT2) ~= 2.51158706567783e+57   (scale C0 t^4)
+
+--------------------------------------------------------------------------
+PART 1: the 0121 pins, reproduced numerically (edge d0 = 1/200)
+--------------------------------------------------------------------------
+                     t     T1(n4,99/200)       flo_edge(t)    T1/floor
+          7330000000.0  2.869723777171301e-24  1.861195743817573e-24  1.541871019   0121 crossing (15750/9999)^50 ~ 7.33e9
+         10000000000.0  1.551479229737316e-24           1.0e-24  1.55147923   1e10 (0121 barrier threshold)
+       1000000000000.0  1.701163147175991e-28           1.0e-28  1.701163147   1e12
+       3000175332800.0  1.931948861982726e-29  1.11098124634785e-29  1.738957222   tPT2 (frontier)
+
+sigma0 barrier (d0 = 1/2, sigma = 0): T1 = 1/2 at EVERY schedule
+  T1/flo_edge(tPT2) = 4.500526e+28  (never below the floor)
+
+measured crossover (1/9999 scale) = 2.9165759
+0121 sufficient-threshold pin (15750/9999)^50 = 7348513346.25
+relation: both thresholds are inside the barrier region (ratio
+t^{1/50} grows with t); the measured crossover is the sharp one.
+
+exact-floor crossing (T1(n4) vs flo_edge, n4 real) = 5.902213676
+
+--------------------------------------------------------------------------
+PART 2: per-point schedule vs n4 breakdown at t = tPT2
+--------------------------------------------------------------------------
+sigma = 1/2 - d0, d0 in [1/200, 1/2):  T1(n4, sigma) vs flo_edge;
+critical scale crit(sigma) = (9999/2)^(1/sigma) * t^(2/sigma)
+          d0         sigma      T1n4/floor           crit/n4          crit scale
+       0.005         0.495  1.7389572221256  3.057344501356435  7.67878690492805035e+57
+        0.01          0.49  3.3673529525672  11.91271162869559  2.99198124437817006e+58
+        0.02          0.48  12.626649413136  196.9063727318296  4.94547498902800574e+59
+        0.05          0.45  665.71228170476  1878770.097399246  4.71869467601021949e+63
+         0.1           0.4  493496.39126632  171041451715102.2  4.295854978224094e+71
+        0.15          0.35  365831748.76874  2.926807610461139e+24  7.35093213816162718e+81
+         0.2           0.3  271193205818.14  1.290578951851517e+38  3.24140140270631885e+95
+        0.25          0.25  2.0103710279233e+14  1.632793042102455e+57  4.10090188547327919e+114
+         0.3           0.2  1.4902997505858e+17  7.347692718329809e+85  1.84543699939323087e+143
+        0.35          0.15  1.1047678840111e+20  4.183284424834418e+133  1.05066830534656363e+191
+         0.4           0.1  8.1897086613796e+22  1.355970400258054e+229  3.40563771873011523e+286
+        0.45          0.05  6.0710787242254e+25  4.617943940600399e+515  1.15983682712372635e+573
+        0.49          0.01  1.2002281099854e+28  8.356727368290573e+2807  2.09886483695945193e+2865
+       0.495         0.005  2.3241466888835e+28  1.753964122536178e+5673  4.40523360382482673e+5730
+       0.499         0.001  3.9433318641294e+28  6.605359805099725e+28595  1.65899362506366887e+28653
+
+reading:  T1n4/floor > 1  =  the n4 wire is BROKEN at that sigma
+(the S3 wire leg of the squeeze cannot hold there);  crit/n4 is the
+outgrowth factor the per-point schedule must carry (0123 S7).
+
+n4 closure crossover on the left band (ratio T1/floor = 1):
+  sigma_break = 0.4991862215   (d0_break = 0.0008137784792)  -  wire CLOSED for
+  d0 < d0_break, broken for d0 > d0_break  at t = tPT2
+
+--------------------------------------------------------------------------
+PART 3: fixed-power family n = C * t^k at t = tPT2 (the lever map)
+--------------------------------------------------------------------------
+coverage:  T1(n, sigma) <= flo_edge  for sigma > sigma*(C,k);
+sigma*(C,k) solved numerically from the exact edge floor.
+             C       k        sigma*   covers edge 99/200?       scale at tPT2
+    31000000.0       4  0.499186221521                    no  2.51158706567782804e+57   n4 (machine)
+    31000000.0       5  0.410052297224                   yes  7.53520156062615319e+69   C0 t^5
+    31000000.0       8  0.267017561414                   yes  2.03486115757424596e+107   C0 t^8
+    31000000.0      16  0.138337551485                   yes  1.33569675180787105e+207   C0 t^16
+1000000000000.0       4  0.462831811803                   yes  8.10189376025105819e+61   1e12 t^4
+       1.0e+20       8  0.23914153988                   yes  6.56406825023950311e+119   1e20 t^8
+       1.0e+40      16  0.11957076994                   yes  4.3086991993802292e+239   1e40 t^16
+
+required lever at C = 3.1e7 (n4 constant):  solve
+  (1/2)(C t^4)^(-sigma_edge) = flo_edge(tPT2)  for C:
+  C_required = 94796829.4398   (n4 has C0 = 3.1e7;
+  factor 3.0579622x at the t^4 power)
+required lever at k-power with C = 3.1e7:
+  k_required = 4.0389057   (n4 has k = 4)
+
+--------------------------------------------------------------------------
+CONSISTENCY: window map (0243) continuity at d = 1/200
+--------------------------------------------------------------------------
+pairfac(+d,tPT2)*pairfac(-d,tPT2) at d = 1/200 - 1e-6: 1.11053689829e-29
+at d = 1/200 (the edge floor itself):               1.11098124635e-29
+
+==========================================================================
+VERDICT (G-hs3-left, machine-level, no RH claim):
+  - 0121 barrier numerically REPRODUCED: the first left-flank T4
+    term on n4 is above the EXACT edge floor for every t >= ~5.9
+    (sharp crossover; the 0121 sufficient threshold (15750/9999)^50
+    = 7.35e9 sits far inside the barrier region), and above tPT2
+    by 1.739 = 73.9% (growing slowly like t^{1/50}, i.e. effectively
+    frozen in the endpoint regime).  sigma0: T1 = 1/2 at every
+    schedule, 4.5e28 above the floor - unreachable.
+  - the WHOLE left strip band [1/200, 1/2) is broken at tPT2 on n4:
+    ratio 1.739 (edge d0 = 1/200) -> 4.5e28 (d0 = 1/2); the sigma
+    where the n4 wire would close is 0.49919 (d0 ~= 0.000814),
+    far below the band edge (d0 >= 1/200 = 0.005 is fully broken) - i.e.
+    no height buys the band on n4.
+  - per-point (d0-adaptive) schedule: closes at every d0 < 1/2 with
+    outgrowth crit/n4 = 3.057 at the band edge, diverging as
+    t^{2/sigma} * (9999/2)^{1/sigma} for d0 -> 1/2 (0123 rate).
+  - fixed-power lever (C t^k, at tPT2): covering the BAND EDGE ALONE
+    needs C = 9.48e7 = 3.058x the n4 constant at k = 4 (exactly the
+    crit/n4 factor - the two maps agree), or k = 4.0389 at C0; a
+    schedule C0 t^5 covers only d0 <= 0.09, C0 t^8 d0 <= 0.233,
+    C0 t^16 d0 <= 0.362; d0 -> 1/2 is unreachable at every fixed
+    (C, k).  The no-uniform-schedule barrier in quantitative form:
+    the band edge is a 3.06x n4 bump, the band interior is not.
+  - G-hs3-left remains open at the machine; this map is the measured
+    margin (0121 negative + 0123 positive half, both confirmed).
+==========================================================================

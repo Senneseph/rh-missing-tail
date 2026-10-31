@@ -350,6 +350,21 @@ the machine wire and names the residue:
      the frontier height (`t4l_schedBeat4`); and the tuned constant
      is unbounded as `d0 -> 1/2` (`t4l_schedDiverge`), which is why
      no uniform schedule can ever serve the band.
+     **Discovery 0244 (day058b sweep) supplies the measured margin
+     map** (scripts/rh/day058b_leftflank_margin.py, closed forms,
+     output out_day058b_leftflank_margin.txt): the sharp t-crossover
+     of the first T4 term against the EXACT edge floor is t ~= 5.90
+     (the 0121 sufficient threshold (15750/9999)^50 = 7.35e9 sits
+     far inside the barrier); at tPT2 the measured margin is
+     T1/floor = 1.739 (growing slowly like t^{1/50}); the n4 wire is
+     broken across the WHOLE left strip band (closure crossover at
+     d0 ~= 0.000814, just under the band edge 1/200); covering the
+     band edge alone needs 3.058x the n4 constant at k = 4 — the
+     same factor as the 0123 per-point outgrowth at the edge (the
+     two maps agree to 4 digits) — or k = 4.0389 at the n4
+     constant; C0*t^5 / C0*t^8 / C0*t^16 cover d0 <= 0.090 / 0.233 /
+     0.362 only; d0 -> 1/2 is unreachable at every fixed (C,k). The
+     face stays OPEN at the machine; no RH claim.
 
 Consequently the endpoint residual at tPT2 is again FOUR named
 faces, of which exactly one is analytic content inside the tree:
