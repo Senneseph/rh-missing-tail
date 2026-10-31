@@ -1381,3 +1381,61 @@ reported per discipline.
 
 Artifacts: `loom21_harmony_stick.py`, entry 0241. Off-board.
 No RH claim.
+
+## T6 ANCHOR (0242): THE MOD-LADDER TABLES, FROZEN AND BUILT GREEN
+
+The queued next in-tree item of the track (autopilot 2026-10-30, Q1'''
+frontier) is delivered in the WheelTile pattern: measure first
+(0240/0240b/0241, Python at X = 1e8), anchor second (Lean).
+
+`gen_loomladder.py` (`scripts/rh/gen_loomladder.py`) re-measures the
+0240 population exactly (5,312,773 gaps, p >= 1e5, p'' <= 1e8,
+L >= 2) and **emits** `formal/RhAttack/LoomLadder.lean` - the module
+is a pure function of the census; regeneration is idempotent and
+re-asserts everything.
+
+Frozen exact-integer census objects:
+  * `t6Total = 5312773` (the population)
+  * `t6M3Flat`  - 32 L-buckets x {p mod 3 = 1, 2} x 17 L_next-buckets
+    = 1088 cells (the joint MISSING-NOTE table at sieve q = 3)
+  * `t6M15Flat` - 32 x 8 (gcd-coprime classes mod 15) x 17 = 4352 cells
+  * `t6ForbidM3 = 0`, `t6ForbidM5 = 0` - the row-wise support
+    forbidden-hit counts, the empirical shadow of
+    `LoomWheel.loom_supp_mod_q` at q = 3, 5 (0238/0239)
+  * `t6OT = t6S3 = 2875733` - the T1 anchors (`LoomWheel.loom_t1_spf3`)
+  * `t6M3SumClass0Frozen = 2875733` / `t6M3SumClass1Frozen = 2437040`
+    - per-class totals (frozen; Python-asserted at generation)
+  * the 0240 ladder as documented Float constants (PAIR 2.48811;
+    gains +0.20877 S, +0.16667 M3, +0.36737 M15, +0.51698 M105,
+    +0.59452 M2310, +0.37933 M30030; holdout +0.20434 / +0.36711 /
+    +0.55551)
+
+Battery (`native_decide`, WheelTile TCB note): table sizes 1088 /
+4352; **both frozen tables sum to n** (genuine array-level
+recomputation); the two support zeros; T1 equality; class-total
+mutual consistency. `#eval` probe (lake env lean): every frozen
+value exact, incl. `t6M3Flat[34]! = 55308` (L = 3, p = 1 mod 3,
+L_next = 1).
+
+LEAN TOOLCHAIN LESSONS (4.33.1, new to this repo):
+  1. a 4352-cell `#[...]` Array literal hits `maximum recursion
+     depth` at elaboration (1088 passes) - chunk into <= 512-cell
+     literals, concatenate with `++`;
+  2. per-element access into the concatenated array inside a derived
+     `def` exceeds the elaborator's whnf budget (200k heartbeats)
+     even for closed indices - `Array.get` re-traverses the nested
+     `++` chain on every access; derived values (class sums, M15 -> M3
+     aggregation) are computed + asserted in the generator and frozen,
+     with mutual-consistency theorems kept in Lean;
+  3. this Mathlib's `List.sum` is f-FIRST (`List.sum f l`); the dot
+     form resolves ambiguously - use `∑ i ∈ s, f i` (Finset) for
+     derived sums;
+  4. `Array.get!` is not a projection (use `[i]!` / `get`);
+  5. `RhAttack/` modules carry no extra namespace (root identifiers;
+     `#eval` probes use bare names).
+
+BUILD: `lake build RhAttack.LoomLadder` green (3006 jobs, 0 errors,
+0 sorry); full `lake build` re-verified green before commit.
+
+Artifacts: `gen_loomladder.py`, `LoomLadder.lean`, entry 0242.
+Off-board. No RH claim.

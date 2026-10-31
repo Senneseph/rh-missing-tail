@@ -133,7 +133,7 @@ obstacle. So:
   support constraint.  Next measurements: the same support game on
   the other sieves (q = 5, 7, ...; the wheel-30030 availability
   picture) and the fine-spf residual beyond the support fix.
-- **Q1''' — LEX-LEAN anchor (LARGELY DONE).**
+- **Q1''' - LEX-LEAN anchor (DONE THROUGH T6, 0242).**
   DONE: `formal/RhAttack/LoomWheel.lean` BUILT GREEN (3006 jobs, 0
   sorry): loom_summation, loom3mod3_rule1/rule2/gap, prime_hq_not_dvd_q,
   loom_supp_mod_q (the GENERAL q-support theorem), loom_t1_spf3, 
@@ -144,9 +144,25 @@ obstacle. So:
   the JOINT support row p mod 2310 is the dominant instrument
   (holdout +0.5555 vs +0.2043 for full spf); the 24-block chord mask
   (0241: +0.0120, z +94.9) and the global prime/non-prime SUM STICKS
-  (0241: NULL, z -0.395 / r +0.0126) are measured.  REMAINING: (b) the
-  frozen p mod 2310 support-row TABLE anchors T6+ (WheelTile pattern,
-  pending 1e8 table freeze).
+  (0241: NULL, z -0.395 / r +0.0126) are measured.  DONE (b, T6 -
+  0242): `formal/RhAttack/LoomLadder.lean` BUILT GREEN - the 1e8 mod-
+  ladder census is FROZEN in Lean (t6M3Flat 1088 cells, t6M15Flat 4352
+  cells, population 5312773, support zeros at q = 3, 5, T1 anchors
+  2875733, per-class totals; native_decide battery incl. both table
+  sums = n; #eval probe exact), emitted by scripts/rh/gen_loomladder.py
+  (idempotent, pure function of the census).  Deferred: the full
+  p mod 2310 joint table (32 x 480 x 17 ~ 251k cells) is too heavy for
+  a single in-lean literal file at this toolchain - freeze it as a
+  generated binary table + checksum if/when it is actually consumed
+  (nothing reads it yet; the M3/M15 anchors + theorems already carry
+  the structural content).
+  NEXT (Q1''' remainder, queued behind the RH critical path): the
+  fine-spf residual beyond mod 2310 (0240 measured it as the tail of
+  the ladder: M30030 marginal null-adjusted ~ -0.221 - i.e. the
+  residual +0.0421 of 0238 is mostly M3 shadow, NOT new information
+  beyond the wheel sieves) - a formal statement that the wheel-sieve
+  support carries the ladder, plus the T2/T5 row-law anchors if the
+  owner wants them.
 - **Q2 — Lock-on-success net (LANDED, 0233, CEILING).**
   Result (test nats/step, 10 deciles): PRIOR 2.17302 · **PAIR 2.10328** ·
   PAIR+BOX 2.10660 (the 26-note bank adds ~0 given the current decile) ·
