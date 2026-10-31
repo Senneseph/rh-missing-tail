@@ -1,0 +1,17 @@
+{
+  "id": "0249",
+  "ts": "2026-10-31T00:00:00Z",
+  "title": "Critical-path reorient: no in-tree analytic face remains (0126); the terminal RH q endpoint = 3 external records (hzF [Z78], hPT2 [Z-PT2], hOffCPT2 exclusion); 0244-0247 left-flank wire maps + 058e witness-schedule are off-board margin records",
+  "kind": "status",
+  "board": "ENDPOINT",
+  "tags": ["endpoint", "critical-path", "faces", "reorient", "honesty-boundary"],
+  "content": "Terminal-state audit of formal/RhAttack/RHEnd.lean (full tree green at 17454 jobs post-T4OffLB). Per discovery 0125 (S8) + 0126 (S9, in body): the G-hs3-left analytic face DISSOLVED - the three strip faces (G-hs1, right hs3, left hs3) are jointly contradictory at every band off-pair (t4l_bandEmpty: the squeeze window is empty in body; t4l_stripFacesEmpty), and the endpoint is equivalent (in body) to the vacant form where the bundle is ONE band zero-exclusion face. The CURRENT terminal endpoint rh_program78_stripfront_mach_unifiedPosReserve_PT2 (B22) states RH q from EXACTLY: (1) hzF : Z78PosReserve.externalZeroFree78PosReserve - the [Z78] quasi-RH record at theta = 0.8733819666133 (external classical zero-free region; B6 adoption pipeline live - PR #101 pre-staged at 0.87338196661320752, see 0248); (2) hPT2 : WinC.allOnLineUpTo q 3000175332800 - the [Z-PT2] on-line record up to the frontier (external data); (3) hOffCPT2 : forall t0 >= tPT2, 0 < d0 <= posReserveD0max (= 0.3733819666133) -> not (offPair q t0 d0) - the terminal zero-exclusion face above the frontier (external data/record, unified band+window by the posReserve slice (posReserveD0max, gaoD0max] closed in body from [Z78PosReserve]); plus the structural premises hqz (q is a zero set) and honline (on-line below 14.14). CONCLUSION: the remaining gap to 'complete RH' is entirely the RECORD LAYER - three external obligations - not in-tree proof work. The 0244/0245/0247 left-flank margin maps (n4 wire vs edge/own floor, island, t-extent t* = 9.698e14), the T4OffLB anchor (0246), and the 058e witness-schedule measurement (per-point 0123-family schedule with constant C > 5000 - e.g. C = 5001 - takes the first T4 term to (1/2)C^-1 t^-2 and the FULL wall below the own floor across the WHOLE face band [1/200, posReserveD0max] at ALL t >= tPT2, t-independence exact to 12 digits, edge margin 2e-4, mass ~1e-17 relative) are OFF-BOARD POSITIVE-DUAL MARGIN RECORDS in the same status as the S8 left wall (machine-verified, explicit, NOT load-bearing for the endpoint) - they characterize how far each mechanism carries and keep the per-point-run squeeze variant warm should a future endpoint shape re-activate it. HONESTY: no RH claim; the P1-P4 pin family remains the data side of the squeeze (Part B8 data faces); the window near-line slice (0, 1/210) stays structurally open by bound (window floor vanishes as d -> 0, 0243/REV2).",
+  "artifacts": [
+    "formal/RhAttack/RHEnd.lean (rh_program78_stripfront_mach_unifiedPosReserve_PT2)",
+    "formal/RhAttack/Z78PosReserve.lean",
+    "scripts/rh/day058e_tuned_schedule.py",
+    "scripts/rh/out_day058e_tuned_schedule.txt"
+  ],
+  "related": ["0125", "0126", "0235", "0244", "0245", "0246", "0247", "0248", "0243"],
+  "rh_claim": false
+}

@@ -1,0 +1,16 @@
+{
+  "id": "0248",
+  "ts": "2026-10-31T00:00:00Z",
+  "title": "B6 pre-stage: PR #101 is the #NINE candidate (0.87338196661320752, static gates PASS, board verify queued); #100 failed verify; #96 closed paper-only",
+  "kind": "b6-review",
+  "board": "Z78",
+  "tags": ["b6", "adoption", "pr101", "nine", "prestage"],
+  "content": "The B6 watcher (5-min cadence, alive) raised a LEVEL-2 pending alert on 2026-10-31: open PRs now declare QRH-Bounds below the adopted anchor 0.8733819666133. Pre-stage audit (clone at tmp/b6audit/prestage101/qr, heads fetched): PR #101 (josephbebel, 'positive-gap-contact-return', created 2026-10-31T06:03Z, head 20a4c9a5, open, non-draft) declares 5458637291332547/6250000000000000 = 0.87338196661320752 (Re s > bound, Dirichlet nonvanishing, pole excluded) - 9.25e-14 below the EIGHTH anchor. Submission = single commit, 237 files / 27931 insertions, all under submissions/2026-10-31-positive-gap-contact-return/src/Candidate (234-file Local.Qrh.PositiveGap 'contact-return' machinery + Main + Notices). STATIC GATES PASS: 0 sorry, 0 axiom, 0 native_decide, 0 zeta mentions; imports = Mathlib (7 modules) + 4 already-merged board lineages (openai_baseline 2927 files, hailey_collet_1252270103 3547, arvi_repeated_marks 699, arvi_selected_leaf 178 - all present in board master fc2f46af, the #99-merged base); full Notices attribution with pinned source trees; #print axioms self-checks embedded; proof shape = return_source (GlobalSource via uniform_restrict on globalFace + the incumbent-source hbeta >= 51/100) -> beta_le_theta -> bound. Board CI: 'verify (positive-gap-contact-return)' QUEUED, 'qrh/pr-admission' in_progress (test/prepare already pass); per the B6 protocol a MERGED catalogue record below the anchor is the formal adoption trigger - watch-only until then, conveyor pre-staged (frozen-base byte-identity vs fc2f46af, stage C compile, stage D statement/axiom/zeta/sorry, in-tree Z78 successor module + B-part + gates + docs + push). PR #100 (same author, 0.8733819666132079, 'selected-gap-contact-return') FAILED board verify + admission - dead candidate. PR #96 (1049/1250 = 0.8392, sextic-cubic probe) is self-declared 'contains no Lean proof', CLOSED unmerged - not adoptable. PR #72 (0.8747712) and #52 (WIP, sorry) remain weak as before. Board still 45 records, top = EIGHTH. No RH claim; the in-tree [Z78] input stays at 0.8733819666133 until adoption.",
+  "artifacts": [
+    "tmp/b6audit/prestage101/qr (pr100/pr101/pr96 heads)",
+    "scripts/rh/b6/tracker_watch2.py (watcher, level-2 pending marker 2026-10-31T142903Z)",
+    "tmp/b6audit/tracker/B6-PENDING-2026-10-31T142903Z"
+  ],
+  "related": ["0235", "0212", "0216"],
+  "rh_claim": false
+}

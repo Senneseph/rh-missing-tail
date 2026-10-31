@@ -388,8 +388,26 @@ the machine wire and names the residue:
      floor across the WHOLE left band. So the 0244/0245
      controllability is a certificate for the SLICE
      tPT2 <= t0 < t* only; G-hs3-left is open for all t0 >= t*
-     by this mechanism. The face stays OPEN at the machine (edge
-     sliver + deep band + all t0 >= t*); no RH claim.
+     by this mechanism. STATUS NOTE (0249, 2026-10-31): the in-tree
+     analytic left face DISSOLVED at 0125/0126 (S8 square-root
+     schedule wall + S9 band-emptiness: the three strip faces are
+     jointly contradictory at every band off-pair, and the endpoint
+     is equivalent in body to the vacant form with ONE band
+     zero-exclusion face) - so the 0244-0247 wire maps and the 058e
+     per-point witness-schedule measurement (any C > 5000, e.g.
+     C = 5001, puts the FULL wall below the own floor across the
+     WHOLE band [1/200, 0.3733819666133] at ALL t >= tPT2, edge
+     margin 2e-4 t-independent; exact C-threshold 5000) are
+     OFF-BOARD POSITIVE-DUAL MARGIN RECORDS in the status of the S8
+     wall (machine-verified, explicit, NOT load-bearing for the
+     endpoint). The terminal endpoint (RHEnd.lean,
+     rh_program78_stripfront_mach_unifiedPosReserve_PT2) stands on
+     exactly three external records: [Z78] (hzF, theta =
+     0.8733819666133; B6 pre-stage awaiting PR #101 at
+     0.87338196661320752, 0248), [Z-PT2] (hPT2, on-line up to tPT2),
+     and hOffCPT2 (no off-pair on [tPT2, inf) x
+     (0, 0.3733819666133]). No analytic face remains in the tree;
+     no RH claim.
 
 Consequently the endpoint residual at tPT2 is again FOUR named
 faces, of which exactly one is analytic content inside the tree:
