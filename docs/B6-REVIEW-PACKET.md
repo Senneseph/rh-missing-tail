@@ -592,3 +592,35 @@ residual-pin structure.
   19:22:34Z (`setsid nohup`, session leader — an earlier foreground
   restart died with its session; the detached pattern survives turn
   cleanup): pid 2139718, first cycle rc=11 correct.
+
+## PRE-STAGE NOTE (2026-10-31, 0241 era / goal push): CANDIDATE #NINE = PR #72
+
+Watched directly (api.github.com + watcher_0212.log through
+00:35Z 2026-10-31):
+
+- Board still at the EIGHTH anchor (45 records; top =
+  positive-reserve-selected-gap, 0.8733819666133, merged 10-30).
+- **PR #72 — `das-acyclic-bootstrap-874771265`:**
+  QRH-Bound **174954253/200000000 = 0.874771265** (> EIGHTH, the top
+  of the ladder if merged), 3 commits, **374,491 lines added / 0
+  deleted**, created 10-25, last update 10-27, OPEN, NOT marked WIP,
+  no `sorry` declared. Statement: a Dirichlet-boundary theta covering
+  every positive modulus, every complex character, Re(s) > theta
+  region. **This is the leading #NINE fire candidate.**
+- PR #52 — `count-affine-plain-20261014`: 2187109/2500000 = 0.8748436
+  (higher) but SELF-DECLARED WIP with explicit `sorry` — not
+  adoptable until the proof is complete; expect rejection or long
+  silence. Board-merge discipline (merged-at-catalogue-only) keeps it
+  PENDING either way.
+
+PRE-STAGE PLAN for #72 (runs the instant it merges; or pre-run for
+readiness): fetch the PR Lean at its head commit; run the b6audit
+replay (stages C + D at the EXACT rational 174954253/200000000,
+axiom audit expecting [propext, Classical.choice, Quot.sound]);
+derive the new dmax' the terminal face receives
+(`offPairD0lePosReserve`-style conversion for the record class);
+then `b6_preflight.py` adoption: gen B23 (Z78DasAcyclic-style
+module), RHEnd Part B23, build, watcher anchor move to
+0.874771265, discovery entry. 374k lines ≈ the heaviest replay to
+date (the 8th was 235 stage-C checks / 137s) — budget accordingly.
+No RH claim. Off-board conveyor mechanics only.
