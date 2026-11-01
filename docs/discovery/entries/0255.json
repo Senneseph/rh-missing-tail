@@ -1,0 +1,20 @@
+{
+ "seq": "0255",
+ "ts": "2026-11-01T09:32:32.254600+00:00",
+ "title": "Frontier-and-record plan: hPT2 provenance-complete (Platt tPT2 exact + P-T independent verification); hOffCPT2 routes all named (decoupled-run variant parked, citing the 2026-10-16 Qside re-typing rejection); 3e10 re-issue scoped at 1-1.5d local fleet; in-house 3e12 infeasible and strictly below cited coverage - deferred",
+ "kind": "record-layer scoping (docs/FRONTIER-AND-RECORD-PLAN.md)",
+ "evidence": [
+  "docs/FRONTIER-AND-RECORD-PLAN.md (new, this commit)",
+  "docs/RECORD-REQUIREMENTS.md 0251 (spec this plan scopes)",
+  "formal/RhAttack/WinCount.lean L509-538 (tPT2 = Platt's exact isolation frontier; P-T arXiv:2004.09765 independent verification, 12363153437138 zeros, cited in tree)",
+  "docs/VALIANT-EFFORT-FORENSICS.md s5 + scripts/rh/h1_final_fleet/VERIFICATION.md (engine bug signature, fixed engine, day048/049a/049f CRT-verified re-issues, worst mnew 0.50265809882)",
+  "docs/H1-FLEET-RUNBOOK.md s5 (measured fleet pace: 3-machine fleet ~12-24h wall at 3e10 scale)",
+  "formal/RhAttack/P12Uniform.lean L84-92 (2026-10-16 Qside re-typing note: decoupled leg form tried and rejected - 'made S3 unsatisfiable for ANY finite wire'; one concrete scale Q in S1 and S3)",
+  "formal/RhAttack/T4OffLD.lean (0253 knife-edge formalization the plan builds on)"
+ ],
+ "status": "committed",
+ "next": [
+  "PR #101 merge check (all gates green; maintainer action only) - B23 one-shot conveyor ready at tmp/b6audit/prestage101/CONVEYOR-101.md",
+  "owner decision on plan section 3 matrix (3e10 re-issue fleet launch recommended if desired)"
+ ]
+}
