@@ -1,0 +1,35 @@
+{
+ "id": "0258",
+ "title": "Q2 formal unit landed: T4OffLE in-body EM-kernel floor at every run + the decoupled-run squeeze - the S1 side of the terminal squeeze is now a body fact (measured pin 2.0000 / coarse 1.419) once the cited A2c bridge and the S3 face are named; hOffCPT2 support face narrows from {S1 and S3} to {S3, cited bridge, measured pin}",
+ "kind": "formal-unit",
+ "date": "2026-11-01",
+ "summary": "The 0257 formal work item (Q2, first-order measured no-scale-blocker) is now an in-tree Lean unit: formal/RhAttack/T4OffLE.lean (the T4OffLC/T4OffLD off-board positive-dual margin-record class). Five body theorems, zero measurement in the proof bodies (all scale content is the measured pin, carried as a named hypothesis): (S1.1) t4LE_emFloor - the EM-kernel norm lower bound ||p4_em_expr s n|| >= T1 - T2 - T3 (the reverse triangle on the SAME t1 + t2 - tk decomposition the upper wall p4_T4_bound_gen uses, with ||t1|| EXACT = (1/2) n^-s.re and the wall's own T3 tail bound), for EVERY s with -1 < s.re and EVERY run n >= 1 - THE RUN IS A FREE PARAMETER: the decoupling itself, in body (the upper S3 wall T4OffL.t4l_wall_tuned holds over all runs at/above the square-root schedule; the lower floor holds at all runs). (S1.2) t4LE_floor_off - at the left point sL = (1/2 - d0) + it of any band pair (t >= 1000, 1/200 <= d0 < 1/2) the kernel norm is >= the closed wallLo(t, d0, N) at every run N. (S3) the decoupled fill run nIdeal(t, d0) = (16 d0^2)^(-1/sigma) t^(2/sigma) (= the ideal 058e per-point run at C_off = C*(d0)/2 = 1/(16 d0^2), with C*(d0) = 1/(8 d0^2) the knife-edge, sigma = 1/2 - d0) and its ceiling Noff; t4LE_nIdeal_ge proves in body nIdeal >= 250000 > 1 on the band (the log chain log nIdeal = (2 log t - log (16 d0^2))/sigma > log 250000, exact rpow logs), and t4LE_ceil_bounds the ceiling loss nIdeal <= Noff <= 2 nIdeal. (S4) t4LE_flo_eq_own - the band floor equals the own mass S1LowT.floStripMin t d = ||poff t d t|| (composed from FUnif.floStripMin_eq_mownOnBand + FUnif.poffOwnMass). (S5) t4LE_squeeze_decoupled - on the strip band at the frontier (t >= tPT2, 1/200 <= d0 < 1/2), GIVEN (i) the CITED A2c bridge (fill = kernel norm at the run - the DLMF 25.2.8 / Apostol 12.21 continuation, the same provenance class as the machined hs3 cited mass), (ii) the NAMED S3 face (fill <= BwireR + MrR, the endpoint's hs3 at the pair), (iii) the MEASURED pin (wallLo(t, d0, N) > ||poff t d0 t||; day061: 2.0000 uniform at the decoupled run, worst 1.999999 t-flat to 1e-5; the coarse ceiling pin >= 1.419123 everywhere) - the off-pair at (t, d0) is EXCLUDED IN BODY via the strict cycle BwireR + MrR < floStripMin = own < wallLo <= kernel <= fill <= BwireR + MrR (first step FUnif.s4StripUnifiedFloor in body, middle S4 in body, rest the named/pin inputs). VERDICT: the hOffCPT2 support obligation on the strip band ABOVE THE FRONTIER narrows from {S1 witness AND S3 face} to {S3 face} + the cited A2c bridge + the measured pin. The single worst-point in-body norm_num pin of (iii) at the decoupled run Noff (measured coarse scale >= 1.419, ideal scale 2.0) is the named next fire (T4OffLE.pin). Build green: targeted 8740 jobs, full tree 17454 jobs, zero warnings on the new file. No RH claim: a squeeze-shape record around named inputs, exactly the P12 squeeze_gives_margin shape.",
+ "module": "formal/RhAttack/T4OffLE.lean",
+ "artifacts": {
+  "module": "formal/RhAttack/T4OffLE.lean (5 theorems + 3 defs: t4LE_emFloor, t4LE_floor_off, nIdeal, Noff, t4LE_nIdeal_ge, t4LE_ceil_bounds, t4LE_flo_eq_own, t4LE_squeeze_decoupled, wallLo)",
+  "measurement_source": "scripts/rh/day061_q2_inbody_pin.py + out (0257's decoupled bracket: wall_lo(N_off)/own = 2.0000 uniform, worst 1.999999; coarse ceiling pin >= 1.419123 worst at t = 1000, d0 = 1/200; single-C 5001 run fails the S1 side 0.9998 -> 1.79e-4 the knife edge in one number)",
+  "context": "0257 (scale measurement, Q2 re-scope); 0252/0253 (single-C exhaustion T4OffLD); P12 squeeze_gives_margin (the shape this record mirrors); P12Uniform.lean 2026-10-16 note (the shared-value constraint)"
+ },
+ "content": {
+  "body_facts": {
+   "s1.1_floor": "||p4_em_expr s n|| >= (1/2) n^-s.re - (||s||/12) n^-s.re-1 - (sqrt3/216) ||s(s+1)(s+2)|| n^-s.re-2/(s.re+2) for -1 < s.re, n >= 1 - reverse triangle, exact ||t1||, the wall's T3 bound; run-free",
+   "s1.2_left_point": "on band 1000 <= t, 1/200 <= d0 < 1/2: ||p4_em_expr (t4l_sOffL t d0) N|| >= wallLo t d0 N for every N >= 1",
+   "s3_runs": "nIdeal >= 250000 > 1 on the band (body, exact rpow-log chain); nIdeal <= Noff <= 2 nIdeal (ceil loss)",
+   "s4_own": "S1LowT.floStripMin t d = ||poff t d t|| on the band (FUnif composition)",
+   "s5_squeeze": "t >= tPT2, 1/200 <= d0 < 1/2, N >= 1: cited A2c bridge + named S3 face + measured pin => no off-pair (strict cycle closed in body)"
+  },
+  "named_residue": {
+   "T4OffLE.pin": "the measured pin (iii) as an in-body worst-point norm_num: wallLo(t, d0, Noff(t, d0)) > ||poff t d0 t|| over the band - measured coarse scale >= 1.419123 (worst at t = 1000, d0 = 1/200), ideal scale 2.0000; NO SCALE BLOCKER (cert terms below at 3.1e-46, 0257); next fire",
+   "A2c_bridge": "the cited fill = kernel-norm bridge at the run (DLMF 25.2.8 / Apostol 12.21 continuation; same provenance class as the machined hs3 cited mass)",
+   "S3_face": "the endpoint's hs3 at the pair (the named S3 face - the one the squeeze does NOT close)"
+  },
+  "verdict": "Q2 (0255 named open question 2) RESOLVED AT THE FORMAL UNIT LEVEL: the decoupled-run single-shared-value squeeze is in body; the S1 side of the terminal squeeze leaves the named-face set and becomes the measured pin + cited bridge. hOffCPT2 remains genuinely open: its strip-band support obligation is now {S3 face} + {cited A2c bridge} + {T4OffLE.pin (next fire)}, and the frontier-record obligation (certified on-line data or a non-schedule exclusion above tPT2) is untouched. No RH claim."
+ },
+ "notes": [
+  "Off-board positive-dual margin record (the T4OffLB/LC/LD class): the terminal endpoint is NOT re-wired here; the record narrows the support face of hOffCPT2 on the strip band, exactly as T4OffLD recorded the 0252 knife edge.",
+  "No zeta evaluation, no zero-existence statement, no RH claim anywhere in the module or this entry.",
+  "Build evidence: lake build RhAttack.T4OffLE -> Build completed successfully (8740 jobs); lake build (full tree) -> Build completed successfully (17454 jobs); zero errors and zero warnings on T4OffLE.lean.",
+  "Lean 4.33.1 lessons carried (see wiki): Real.log_mul/Real.log_div take `x ne 0` args in this mathlib; `>` goals are GT (not defeq to the inner `<` for rw) - state inequalities in `<` form internally; ring on C terms is unreliable in this toolchain for pure group identities - use sub_add_cancel / neg_sub / sub_eq_add_neg with explicit arguments; the reverse triangle is the forward triangle on (x-y) + y = x (mathlib 4.33.1 has no named additive reverse-triangle lemma); FloorUnif's namespace is FUnif; S4Own's namespace is S4O."
+ ],
+ "status": "committed"
+}

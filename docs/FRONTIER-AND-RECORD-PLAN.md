@@ -107,6 +107,23 @@ CRT-verified margins (worst re-issued piece: mnew 0.50265809882 vs the ledger
    NOTHING at the scale level blocks it. RE-SCOPED from research surface
    to a FORMAL work item: re-typed single-shared-value S3 statement +
    certificate in body + decoupled-run per-pin data (research scale).
+   **FORMALIZED 0258 (T4OffLE landed, build green 17454, zero warnings):**
+   the formal unit is in tree. `t4LE_emFloor` is the in-body EM-kernel
+   floor at EVERY run (the reverse triangle on the wall's own
+   decomposition; the run is a free parameter - the decoupling itself,
+   in body); the decoupled fill run `nIdeal`/`Noff` (C_off = C*/2) has
+   its scale pin in body (nIdeal >= 250000 on the band, ceil loss
+   <= 2x); and `t4LE_squeeze_decoupled` runs the strict squeeze cycle
+   in body (BwireR + MrR < floStripMin = own < wallLo <= kernel <= fill
+   <= BwireR + MrR) given (i) the cited A2c bridge (fill = kernel norm
+   at the run), (ii) the NAMED S3 face at the pair, (iii) the MEASURED
+   PIN (wallLo > own; day061: 2.0000 uniform, worst 1.999999; coarse
+   ceiling pin >= 1.419123). The S1 side of the terminal squeeze leaves
+   the named-face set; the face residue is now {S3 face} + {cited A2c
+   bridge} + {T4OffLE.pin}. `T4OffLE.pin` - the worst-point in-body
+   norm_num form of (iii) - is the named next fire (no scale blocker:
+   certificate terms at 3.1e-46, 0257). hOffCPT2 stays open; this is a
+   support-face narrowing record, not an RH claim.
 3. **Frontier extension (0126 route A, B6-board family).** An external
    record family that extends the certified on-line frontier past tPT2
    (new isolation record beyond Platt) would re-label the face to a higher

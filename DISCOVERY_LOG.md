@@ -9140,3 +9140,33 @@ full band grid (108 points, t 1e3..1e20 x d0 1/200..0.3733819666133):
 Verdict: Q2 re-scoped from research surface to a FORMAL work item (re-
 typed single-shared-value S3 + certificate in body + decoupled-run
 per-pin data - the 2026-10-16 note items (i)+(ii), now scaled).
+
+## 0258 - Q2 formal unit landed: T4OffLE in-body EM-kernel floor +
+   decoupled-run squeeze (the S1 side becomes a body fact + pin)
+The 0257 formal work item is now an in-tree unit: formal/RhAttack/T4OffLE.lean.
+  * S1.1 t4LE_emFloor: ||p4_em_expr s n|| >= T1 - T2 - T3 (the reverse
+    triangle on the wall's own t1 + t2 - tk decomposition; ||t1|| exact,
+    the wall's T3 tail bound) for -1 < s.re and EVERY run n >= 1 - the
+    decoupling itself, in body (upper wall run-lower-bounded by schedB,
+    lower floor run-free).
+  * S1.2 t4LE_floor_off: at the band left point sL = (1/2 - d0) + it the
+    kernel norm is >= the closed wallLo(t, d0, N) at every run N.
+  * S3: nIdeal = (16 d0^2)^(-1/sigma) t^(2/sigma) = the ideal 058e run at
+    C_off = C*/2 = 1/(16 d0^2) (C* = 1/(8 d0^2) the knife-edge); in body
+    nIdeal >= 250000 > 1 on the band and nIdeal <= Noff <= 2 nIdeal.
+  * S4: t4LE_flo_eq_own: floStripMin = ||poff t d t|| on the band
+    (FUnif.floStripMin_eq_mownOnBand + FUnif.poffOwnMass).
+  * S5: t4LE_squeeze_decoupled: on t >= tPT2, 1/200 <= d0 < 1/2, GIVEN
+    (i) the cited A2c bridge (fill = kernel norm at the run), (ii) the
+    NAMED S3 face (fill <= BwireR + MrR), (iii) the MEASURED PIN
+    (wallLo > own; day061: 2.0000 uniform / worst 1.999999, coarse
+    ceiling pin >= 1.419123) - the off-pair is EXCLUDED IN BODY via the
+    strict cycle BwireR + MrR < floStripMin = own < wallLo <= kernel <=
+    fill <= BwireR + MrR.
+Verdict: the hOffCPT2 SUPPORT face on the strip band narrows from
+{S1 and S3} to {S3 face} + {cited A2c bridge} + {T4OffLE.pin}.
+The worst-point norm_num pin (measured scale >= 1.419 coarse, 2.0 ideal,
+cert terms 3.1e-46 - no scale blocker) is the named next fire.
+Q2 (0255 open question 2) resolved at the formal-unit level.
+Build green: targeted 8740 jobs, full tree 17454 jobs, zero warnings on
+the new file. No RH claim (off-board positive-dual margin-record class).
