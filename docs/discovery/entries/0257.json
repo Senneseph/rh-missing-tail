@@ -1,0 +1,27 @@
+{
+ "id": "0257",
+ "title": "Q2 first-order probe: decoupled-run squeeze measured - knife-edge identity C*1 == C*4 = 1/(8 d0^2) holds even with decoupled runs (relative <= 3.5e-9, machine precision at large t); decoupled joint closes 108/108 at margin ratio 2.0000 but is the known shared-value pathology; tail-transfer term scale measured cert/devProg = 3.1e-46 - no scale blocker, Q2 work is FORMAL (re-typed single-shared-value S3 + certificate in body)",
+ "kind": "probe-negative-sharpened",
+ "date": "2026-11-01",
+ "summary": "First-order Python probe of parked open questions Q1+Q2 (0255 named list) against the terminal face hOffCPT2. Closed forms only (3-term EM legs + Mval masses + pinned devProg straddle map from the 0252 engine); no zeta evaluation, no zero-set data, no RH claim. Measured on the full band grid (t 1e3..1e20 x d0 1/200..0.3733819666133, 108 points): (1) the S1 fill-leg threshold C*1 (R1 = 1, decreasing in the decoupled fill run Coff) and the S4 wire-leg threshold C*4 (R4 = 1, increasing in the decoupled wire run Con) are the SAME function: C*1 == C*4 == C*(d0) ~= 1/(8 d0^2), t-independent to O(t^-2), measured to relative 3.5e-9 worst (finite dev-grid at small t) and 1e-25 (dps-60 machine) at large t. (2) The decoupled joint (R1 > 1 and R4 > 1 simultaneously) closes on 108/108 band points via the direct construction Coff = C*/2 < C* < 2C* = Con with measured margin ratio min(R1, R4) = 2.0000 at every point (knife-edge asymptotic, t- and d0-independent). (3) This is exactly the 2026-10-16 in-tree rejection, now quantified: with decoupled runs the legs bound DIFFERENT quantities (a fill truncated at run n_off vs a wire truncated at run n_on), so no single shared Qside value is squeezed - decoupling alone is NOT a route; the shared-value constraint is the obstruction. (4) Tail-transfer scale at (tPT2, 1/200): the runs differ (n_off/n_on = 3.792 even at C = C*), the T1 terms are identically (1/2C) t^-2 (knife-edge normalization; dps-60 roundoff between evaluation paths 2.16e-25 relative), and the higher EM terms + mass triangle scale is cert/devProg = 3.1198e-46 (d23_off = 7.23e-76, d23_on = 2.74e-75, |dMval| = 6.78e-84, devProg = 1.1110e-29). VERDICT: nothing at the SCALE level blocks a tail-transfer certificate; the Q2 route is a FORMAL work item - a re-typed single-shared-value S3 statement (S1 certified at fill run n_off, S4/S3 wire at wire run n_on, the same shared fill bounded by both via a term-level certificate in body) plus the per-pin data at the decoupled runs (the 2026-10-16 note items (i)+(ii) named in 0255). Decoupled run-decoupling (Q1) is closed sharpened: trivially satisfiable at the closed-form leg level, void at the shared-value level. No RH claim.",
+ "module": "scripts/rh/day060_openq2_decoupled_bracket.py",
+ "artifacts": {
+  "probe": "scripts/rh/day060_openq2_decoupled_bracket.py (reuses the 0252 engine legs verbatim: T1/T2/T3, npp, devStripMin, Mval; devStripMin cached per (t,d0); dps 60)",
+  "output": "scripts/rh/day060_openq2_decoupled_bracket.txt (grid table 108 points, C*-gap panel at tPT2, tail-transfer scale panel, pathology note)",
+  "context": "docs/FRONTIER-AND-RECORD-PLAN.md (0255, named open questions 1+2); 0252/0253 (single-C exhaustion); P12Uniform.lean S1 block (2026-10-16 Qside re-typing note)"
+ },
+ "content": {
+  "measured": {
+   "knife_edge_identity": "C*1 == C*4 over 108/108 band points; max relative deviation 3.500e-09 (small-t finite dev-grid artifact); 1e-20..1e-25 at t >= 1e4; C*(d0) reproduces 1/(8 d0^2) at all 9 d0 stations (5000.00000 / 1912.74644 / 193.43041 / 50 / 12.5 / 3.125 / 1.38889 / 1.02041 / 0.89661)",
+   "decoupled_joint": "108/108 points close with Coff = C*/2, Con = 2C*; measured min(R1, R4) = 2.0000 at every point (asymptotic; higher terms below the 4th decimal)",
+   "tail_transfer_scale_at_tPT2_edge": "n_off = 7.6803e+57, n_on = 2.0255e+57 (ratio 3.792); T1(off) == T1(on) == 1.110981e-29 == devProg identically; d23_off = 7.2331e-76; d23_on = 2.7427e-75; |dMval| = 6.7810e-84; cert/devProg = 3.1198e-46"
+  },
+  "verdict": "Q1 (decoupled-run variant): CLOSED SHARPENED - decoupling the C parameters is trivially satisfiable at the closed-form leg level (108/108, margin ratio 2) and exactly void at the shared-value level (the legs then bound different quantities); the 2026-10-16 rejection is confirmed and quantified. Q2 (asymmetric EM families): RE-SCOPED - the tail-transfer certificate needed for a single-shared-value squeeze at decoupled runs has measured term scale 3.1e-46 relative to devProg: no scale blocker; the remaining work is formal (re-typed S3 statement + certificate in body + decoupled-run per-pin data). This is a research-scale formal work item, not a mechanism available in this turn."
+ },
+ "notes": [
+  "Python-first, closed-form, off-board positive-dual margin record; no zeta evaluation, no zero-existence statement, no RH claim.",
+  "The probe reproduces the 0252 knife edge (R1 = C*/Coff, R4 = Con/C* to 4 decimals) as a control: the decoupled thresholds are the single-C thresholds, because the 3-term legs' leading terms normalize identically in C.",
+  "devProg = devStripMin (the pinned 48-straddle map) is the only zero-set-derived input, carried over verbatim from the 0252 engine."
+ ],
+ "status": "committed"
+}

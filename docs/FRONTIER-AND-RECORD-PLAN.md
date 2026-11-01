@@ -88,13 +88,25 @@ CRT-verified margins (worst re-issued piece: mnew 0.50265809882 vs the ledger
    `Q >= dev − M ∧ Q <= Bf + Mr'`). A run-decoupled variant (S1 certified at
    fill run C1, S3 at wire run C2, C1 < C* < C2) would need (i) a re-typed
    S3 statement with independent wire runs (against the record above) and
-   (ii) new per-pin measurement data at the decoupled run. PARKED as a
-   named open question — not a live route, not a measured negative.
+   (ii) new per-pin measurement data at the decoupled run. **MEASURED 0257
+   (day060 probe, closed forms):** the decoupled construction Coff < C* <
+   Con is trivially satisfiable at the closed-form leg level (108/108 band
+   points, margin ratio 2.0000, C*1 == C*4 == 1/(8 d0^2) to machine
+   precision) and is EXACTLY the shared-value pathology the note describes
+   (the legs then bound different quantities). CLOSED SHARPENED as a
+   decoupling route; the only residue is the tail-transfer certificate of
+   (i)+(ii) — now scoped under Q2.
 2. **Asymmetric EM families.** Any family where the S1 fill engine and the
    S4 tail wall do not share the (1/2)C⁻¹t⁻² scale (e.g. higher-order EM
    truncation with a tail-transfer certificate between runs) escapes the
    knife-edge identity. 0252/0253 close the 0123 family, not all families.
-   PARKED as research surface (Python-first probe discipline applies).
+   **MEASURED 0257 (day060 first-order probe, closed forms):** the
+   tail-transfer certificate a single-shared-value squeeze at decoupled
+   runs would need has measured term scale cert/devProg = 3.1e-46 at
+   (tPT2, 1/200) (d23 = 7.2e-76 / 2.7e-75, |dMval| = 6.8e-84, dps-60):
+   NOTHING at the scale level blocks it. RE-SCOPED from research surface
+   to a FORMAL work item: re-typed single-shared-value S3 statement +
+   certificate in body + decoupled-run per-pin data (research scale).
 3. **Frontier extension (0126 route A, B6-board family).** An external
    record family that extends the certified on-line frontier past tPT2
    (new isolation record beyond Platt) would re-label the face to a higher

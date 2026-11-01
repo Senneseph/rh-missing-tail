@@ -9117,3 +9117,26 @@ the ladder idles; watcher re-anchored to T; B25 = same runbook.
 No RH claim (zero-exclusion face in the unverified region).
 
 Build green 17454. No RH claim.
+
+## 0257 - Q2 first-order probe: decoupled-run squeeze measured (closed forms)
+
+Day060 probe scripts/rh/day060_openq2_decoupled_bracket.py (reuses the
+0252 engine legs verbatim; dps 60; no zeta evaluation, no zero-set data
+beyond the pinned devProg straddle map, no RH claim). Measured on the
+full band grid (108 points, t 1e3..1e20 x d0 1/200..0.3733819666133):
+  * knife-edge identity even DECOUPLED: C*1 (S1 threshold, decreasing in
+    the fill run) == C*4 (S4 threshold, increasing in the wire run) ==
+    1/(8 d0^2), t-independent to O(t^-2); max relative deviation 3.5e-9
+    (small-t finite dev-grid), 1e-20..1e-25 at t >= 1e4 (dps-60 machine).
+  * decoupled joint (R1 > 1 and R4 > 1 simultaneously) closes 108/108 at
+    Coff = C*/2 < C* < 2C* = Con with margin ratio 2.0000 at every point
+    (the knife-edge asymptotic).
+  * this is the 2026-10-16 rejection quantified: decoupled runs bound
+    DIFFERENT quantities, so no single shared Qside is squeezed -
+    decoupling alone is NOT a route (Q1 closed sharpened).
+  * tail-transfer term scale at (tPT2, 1/200): runs differ (n_off/n_on =
+    3.792), T1 terms identically (1/2C) t^-2, cert = d23off + d23on +
+    |dMval| gives cert/devProg = 3.1198e-46 (dps-60) - no scale blocker.
+Verdict: Q2 re-scoped from research surface to a FORMAL work item (re-
+typed single-shared-value S3 + certificate in body + decoupled-run
+per-pin data - the 2026-10-16 note items (i)+(ii), now scaled).
