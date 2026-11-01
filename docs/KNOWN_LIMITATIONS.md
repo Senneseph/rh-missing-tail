@@ -418,7 +418,21 @@ the machine wire and names the residue:
      fact (t4l_bandEmpty) in its schedule-independent, quantified,
      per-point form; the per-point route is CLOSED as a discharge
      mechanism for hOffCPT2 and the completion layer is the record
-     layer. No RH claim. The terminal endpoint (RHEnd.lean,
+     layer. The 0252 exhaustion fact is now FORMALIZED as exact
+     Lean pins in `formal/RhAttack/T4OffLD.lean` (discovery 0253):
+     the reciprocal knife-edge identity in body (t4LD_reciprocal /
+     t4LD_noJoint: for every C > 0 the edge leg ratios satisfy
+     r1*r3 = 1 exactly, so joint closure of both squeeze legs is
+     impossible), C* = 5000 as a rational identity
+     (t4LD_cstarEdge), the C = 5001 / C = 9999/2 exact mirror
+     pins (S1 open at 5000/5001 with margin 1/5001, S4 closed at
+     5001/5000; mirror: S1 closed at 10000/9999, S4 open with
+     1/9999 = (1 + 1/9999)/10000), the worst-case pin at the face
+     upper edge d0 = posReserveD0max (1/(8*5001*d0max^2) in
+     (1.7e-4, 1.8e-4), as exact Q statements), and the strict
+     product lemma (t4LD_productStrict: the measured joint count
+     of 0 points carries a strict margin, not a knife touch). Full
+     tree green (17454 jobs), no RH claim. The terminal endpoint (RHEnd.lean,
      rh_program78_stripfront_mach_unifiedPosReserve_PT2) stands on
      exactly three external records: [Z78] (hzF, theta =
      0.8733819666133; B6 pre-stage awaiting PR #101 at
