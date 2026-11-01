@@ -31,8 +31,8 @@ T = '/home/jsmille/Projects/rh-missing-tail/tmp/b6audit/tracker'
 CATALOGUE = 'https://gtimg.github.io/QuasiRiemannTracker/catalogue.json'
 PULLS = 'https://api.github.com/repos/GTimG/QuasiRiemannTracker/pulls?state=open&per_page=100'
 LEADER = 'https://bigospeedrun.com/other/quasi-riemann'
-ADOPTED = 8733819666133 / 10000000000000  # [Z78PosReserve] positive-reserve-selected-gap PR #99 (0235)
-ADOPTED_ID = 'positive-reserve-selected-gap'
+ADOPTED = 5458637291332547 / 6250000000000000  # [Z78GapContact] positive-gap-contact-return PR #101 (0254; was positive-reserve-selected-gap PR #99, 0235)
+ADOPTED_ID = 'positive-gap-contact-return'
 SEEN_PRS = os.path.join(T, 'watcher_seen_prs.json')
 ALERT = os.path.join(T, 'WATCHER_ALERT.json')
 
@@ -55,7 +55,7 @@ def alert(level, summary, detail):
     payload = {
         'level': level, 'ts': now_iso(),
         'anchor': {'id': ADOPTED_ID, 'theta': ADOPTED,
-                   'rational': '8733819666133/10000000000000'},
+                   'rational': '5458637291332547/6250000000000000'},
         'summary': summary, 'detail': detail,
         'action': ('run the B6 section-8 conveyor '
                    '(tmp/z78s35 pipeline: fetch at pinned source_commit, '
@@ -155,8 +155,8 @@ def main():
 
     lb_top, lb_merged = None, None
     with open(f'{T}/watch_{now}.txt', 'w') as f:
-        f.write(f'frontier watch {now}Z — adopted [Z78PosReserve] = '
-                f'{ADOPTED:.13f} (8733819666133/10000000000000)\n')
+        f.write(f'frontier watch {now}Z — adopted [Z78GapContact] = '
+                f'{ADOPTED:.17f} (5458637291332547/6250000000000000)\n')
         f.write(f'catalogue as_of {c.get("as_of", "?")} (dict) / '
                 f'board: {len(rows)} records with numeric bounds\n')
         for v, rid, m in rows[:12]:
@@ -184,7 +184,7 @@ def main():
                         'open PR declares a QRH-Bound below the anchor'))
     if lb_top is not None and lb_top < ADOPTED - 1e-15 and lb_merged is False:
         pending.append(('leaderboard', lb_top, 'open PR at board rank 1'))
-    print(f'[watch] no merged record below the anchor; [Z78PosReserve] '
+    print(f'[watch] no merged record below the anchor; [Z78GapContact] '
           f'remains the in-tree face.')
     if pending:
         try:
