@@ -1,0 +1,44 @@
+{
+ "id": "0256",
+ "title": "B24: #TEN supersession - [Z78FractionContact] adopted (PR #103 closest-fraction-contact MERGED 8b1a0167 2026-11-01T12:23:55Z), theta = 280496628...632654341/321161460...5872271 (127/127-digit exact rational, 0.8733819666132075199...), face step 7.097e-20, full tree green",
+ "kind": "formal-anchor",
+ "date": "2026-11-01",
+ "summary": "The B24 one-shot conveyor (tmp/b6audit/prestage103/CONVEYOR-103.md) fired on the MERGED board record: stage C 236/236 kernel-clean (firetree/work103, hard-linked NINE root + gao5_replay deps, lean 4.34.1: 202 cone modules byte-identical vs NINE src, 33 differs + 1 new rebuilt fresh; identity audit firetime/cone_identity_vs_nine.json; a parallel-driver transient stale-dependency cascade on the tip modules resolved by sequential individual recompile, final log rc=0 per module, ok=236/236 failed=[]). Stage D all clean (D1 canonical Candidate/Main.lean rc=0; D2 #print axioms = [propext, Classical.choice, Quot.sound] standard class only on all three canonical declarations; D3 zeta-consequence (q=1) at the EXACT 127/127-digit rational rc=0; D4 static sweep 0 sorry / 0 admit / 0 axiom decls / 0 native_decide / 3 intended zeta-mention files). In-tree successor: formal/RhAttack/Z78FractionContact.lean (13 theorems) + RHEnd Part B23 -> B24 in place (terminal endpoint rh_program78_stripfront_mach_unifiedFractionContact_PT2; the B23 commit's missing `import RhAttack.Z78GapContact` defect is repaired as a side effect - the only new import is Z78FractionContact, which itself imports Z78GapContact). NINE module survives as predecessor ref (B-series in-place supersession convention). Full tree green (17454 jobs), zero warnings on new files. No RH claim.",
+ "module": "formal/RhAttack/Z78FractionContact.lean",
+ "artifacts": {
+  "runbook": "tmp/b6audit/prestage103/CONVEYOR-103.md",
+  "identity": "tmp/b6audit/prestage103/IDEM-PRESTAGE-103.md",
+  "generator": "tmp/b6audit/prestage103/gen_z78fractioncontact_b24.py",
+  "stageC_driver": "tmp/b6audit/prestage103/firetime/stageC_driver103.py (+ seq_tip103.py for the transient-event cleanup)",
+  "firetime_root": "tmp/b6audit/prestage103/firetime/ (work103 replay root, stageC103.log, stageC_summary.json final ok=236/236, cone_identity_vs_nine.json, stageD/ D1-D4)",
+  "merge": "PR #103 (GTimG/QuasiRiemannTracker), Joseph Bebel, MERGED 2026-11-01T12:23:55Z, merge commit 8b1a0167c8e324099884152181e3fb2206510e88 (single PR; the branch tip's lineage is the NINE merge d4fba59d + saddle-closure merge 069f1749)",
+  "endpoint": "formal/RhAttack/RHEnd.lean (Part B24 supersedes B23 in place; B20 and earlier remain)"
+ },
+ "content": {
+  "constants": {
+   "fractionContactUpper": "2804966284017490358030969257914123810640482798488248385236764587735806455694206308975383836842958115341512355256943573632654341 / 3211614609922119834694179379888743028634953588197852962423516288191911449231164741438582626063161096341458934143644085157872271 : Q (127/127-digit, coprime, exactly the record's declared boundary - the statement works at the rational, no bracketing)",
+   "fractionContactD0max": "fractionContactUpper - 1/2 = 2398317958112860881367759135939504592646012008778643808050012887279701462157247876512185047622755134341565776370243062107436411 / 6423229219844239669388358759777486057269907176395705924847032576383822898462329482877165252126322192682917868287288170315744542 : Q (exact face half-width; exact decimal 0.3733819666132075199290267786...)",
+   "face_step": "gapContactD0max - fractionContactD0max = 7.097322135762814e-20 - the face shrinks by ~7.1e-20; the record sits within ~2.2e-254 of the method-limiting contact (777 - sqrt(1081))/852 (its own description: the closest declarable fraction above that contact) - the ladder is effectively at the contact for this method family"
+  },
+  "theorems_B24": [
+   "B24.1 slice exclusion: (fractionContactD0max, gapContactD0max] of the B23 face closed IN BODY from [Z78FractionContact] itself (extFractionContact_implies_extGapContact)",
+   "B24.2 unified endpoint (vacant form)",
+   "B24.3 terminal [Z-PT2] endpoint rh_program78_stripfront_mach_unifiedFractionContact_PT2",
+   "B24.4 Gao-of",
+   "B24.5 PT2-Gao"
+  ],
+  "narrative": "closest-fraction-contact declares theta exactly at the closest declarable rational above the family-contact (777 - sqrt(1081))/852 - the ladder's method limit for this family. After B24 the remaining face sliver below the contact is not reachable by this record family without a genuinely different argument; the B-series mechanism stays ready for any MERGED record below the new anchor.",
+  "gates": {
+   "stageC": "236/236 (final: failed=[], ok=236/236 in 5695s incl. transient cleanup; 2 transient stale-dependency events on tip modules resolved by sequential recompile, all per-module logs rc=0)",
+   "stageD": "D1 rc=0, D2 standard class only [propext, Classical.choice, Quot.sound], D3 rc=0 at exact 127/127 rational, D4 0/0/0/0",
+   "build": "targeted 8764 jobs green + FULL tree 17454 jobs green; 0 warnings on Z78FractionContact/RHEnd"
+  }
+ },
+ "notes": [
+  "Adoption fired on a MERGED catalogue record only (stage 0 guard): board 49 records, top = closest-fraction-contact MERGED 2026-11-01T12:23:55Z; runner-up saddle-closure-selected-gap (PR #102) at T + 9.732e-22 is WEAKER than T - not adoptable over it.",
+  "Two fire-time defects caught and fixed on the board side of the tree: (1) the B23 commit shipped RHEnd without importing Z78GapContact - the B24 part adds the missing import chain (single new import line); (2) B23's RHEnd file lacked a trailing newline - restored.",
+  "Watcher anchor moved to the TEN rational (b6audit tracker scripts); next candidate = first MERGED record with theta < fractionContactUpper (B25, same runbook). Board re-audit at fire time: NO merged record sits below T - the ladder is at the family contact and idles until the board moves.",
+  "No RH claim: the face is a zero-exclusion statement in the unverified region; the input class is unchanged in kind (external zero-free half-plane, now T - 1/2 ~= 0.37338196661320752 away from 1/2)."
+ ],
+ "status": "committed"
+}

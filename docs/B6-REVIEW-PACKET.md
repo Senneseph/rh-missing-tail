@@ -596,6 +596,28 @@ residual-pin structure.
 ## LADDER-DIRECTION CORRECTION + WATCH STATE (2026-10-31, goal push)
 
 CORRECTION to the earlier pre-stage note (this turn's first version
+
+**B6-FIRED-TEN (0256, 2026-11-01):** the board record
+`closest-fraction-contact` (PR #103, Joseph Bebel) MERGED
+2026-11-01T12:23:55Z (merge 8b1a0167) at the exact 127/127-digit rational
+2804966284017490358030969257914123810640482798488248385236764587735806455694206308975383836842958115341512355256943573632654341
+/ 3211614609922119834694179379888743028634953588197852962423516288191911449231164741438582626063161096341458934143644085157872271
+(≈ 0.8733819666132075199290267786...; 7.097e-20 below NINE; its own description: the closest
+declarable fraction above the method-contact (777 - sqrt(1081))/852).
+Fire-time replay 100% clean (stage C 236/236 kernel-clean - 202 byte-
+identical to NINE src, 33 differs + 1 new fresh; stage D: canonical
+rc=0, axioms standard class [propext, Classical.choice, Quot.sound],
+zeta-consequence at the EXACT rational rc=0, sweep 0/0/0/0). In-tree
+successor: `Z78FractionContact.lean` (B24, 13 theorems) + RHEnd Part B24
+in place of B23; full tree green (17454 jobs); zero warnings on new
+files. Side-effect repair: the B23 commit shipped RHEnd without importing
+Z78GapContact - the B24 import line fixes the chain (only new import).
+Watcher re-anchored to the TEN rational; B25 fires on the first MERGED
+record below it (board idle at the family contact as of this entry -
+runner-up saddle-closure-selected-gap at T + 9.732e-22 is weaker). No RH
+claim. (B6-FIRED-NINE (0254): see discovery 0254 - NINE module survives
+as predecessor ref.)
+
 named PR #72 as "candidate #NINE" - WRONG, caught immediately by
 re-deriving the ladder from the catalogue):
 

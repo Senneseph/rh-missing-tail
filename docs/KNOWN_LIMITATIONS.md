@@ -432,13 +432,35 @@ the machine wire and names the residue:
      (1.7e-4, 1.8e-4), as exact Q statements), and the strict
      product lemma (t4LD_productStrict: the measured joint count
      of 0 points carries a strict margin, not a knife touch). Full
-     tree green (17454 jobs), no RH claim. STATUS NOTE (0254,
-     2026-11-01): the [Z78] record layer ADVANCED: board record
+     tree green (17454 jobs), no RH claim. STATUS NOTE (0256,
+     2026-11-01): the [Z78] record layer ADVANCED AGAIN: board record
+     `closest-fraction-contact` (PR #103, Joseph Bebel) MERGED
+     2026-11-01T12:23:55Z (merge 8b1a0167) at the exact 127/127-digit
+     rational 2804966284017490358030969257914123810640482798488248385236764587735806455694206308975383836842958115341512355256943573632654341
+     / 3211614609922119834694179379888743028634953588197852962423516288191911449231164741438582626063161096341458934143644085157872271
+     = 0.8733819666132075199290267786... (7.097e-20 below the NINE anchor 0.87338196661320752;
+     its own description: the CLOSEST declarable fraction above the
+     method-contact (777 - sqrt(1081))/852 - within ~2.2e-254 of it,
+     i.e. this record family is at its method limit); fire-time replay
+     clean (stage C 236/236 kernel-clean: 202 cone modules
+     byte-identical vs NINE src, 33 differs + 1 new rebuilt fresh;
+     stage D: canonical compile rc=0, axioms = standard class only
+     [propext, Classical.choice, Quot.sound], zeta-consequence (q=1) at
+     the EXACT rational rc=0, static sweep 0 sorry / 0 admit / 0 axiom
+     decls / 0 native_decide); in-tree successor B24
+     (`formal/RhAttack/Z78FractionContact.lean`, 13 theorems, terminal
+     endpoint `rh_program78_stripfront_mach_unifiedFractionContact_PT2`),
+     full tree green (17454 jobs); NINE/EIGHTH modules remain in the
+     tree as predecessor refs (in-place supersession convention); the
+     B23 commit's missing `import RhAttack.Z78GapContact` was repaired
+     as a side effect (the B24 import line is the only new one).
+     STATUS NOTE (0254, 2026-11-01, predecessor): the [Z78] record layer
+     ADVANCED: board record
      `positive-gap-contact-return` (PR #101, Joseph Bebel) MERGED
      2026-11-01T09:53:34Z (merge d4fba59d) at the exact rational
      5458637291332547/6250000000000000 = 0.87338196661320752
      (9.248e-14 below the EIGHTH anchor - the smallest single
-     in-tree face step of the B-series, 578/6250000000000000);
+     in-tree face step of the B-series before B24, 578/6250000000000000);
      fire-time replay clean (stage C 235/235 kernel-clean against
      the frozen EIGHTH olean root: 182 cone modules byte-identical
      vs EIGHTH src, 0 differs, 53 new; stage D: canonical compile,
@@ -450,15 +472,19 @@ the machine wire and names the residue:
      endpoint `rh_program78_stripfront_mach_unifiedGapContact_PT2`),
      full tree green (17454 jobs); the EIGHTH module/b22 lineage
      remain in the tree as predecessor refs by the in-place
-     supersession convention. The terminal endpoint (RHEnd.lean,
-     rh_program78_stripfront_mach_unifiedGapContact_PT2) stands on
-     exactly three external records: [Z78GapContact] (hzF, theta =
-     0.87338196661320752, MERGED d4fba59d; its record description
-     notes the return sits within 7.1e-20 of the method-limiting
-     contact (777 - sqrt(1081))/852), [Z-PT2] (hPT2, on-line up to
-     tPT2), and hOffCPT2 (no off-pair on [tPT2, inf) x
-     (0, 0.37338196661320752]). No analytic face remains in the
-     tree; no RH claim.
+     supersession convention. The terminal endpoint NOW (RHEnd.lean,
+     rh_program78_stripfront_mach_unifiedFractionContact_PT2) stands on
+     exactly three external records: [Z78FractionContact] (hzF, theta =
+     0.8733819666132075199290267786... = 280496628.../321161460... exact 127/127-digit, MERGED
+     8b1a0167; its record description notes it is the closest
+     declarable fraction above the method-contact (777 -
+     sqrt(1081))/852), [Z-PT2] (hPT2, on-line up to tPT2), and
+     hOffCPT2 (no off-pair on [tPT2, inf) x (0, 0.3733819666132075199290267786...]); the NINE
+     terminal (rh_program78_stripfront_mach_unifiedGapContact_PT2, d0max
+     0.37338196661320752) survives in the tree as the predecessor
+     ref. No analytic face remains in the tree; no RH claim; board
+     idle below the TEN anchor (no merged record weaker-adjacent:
+     runner-up saddle-closure-selected-gap at T + 9.732e-22).
 
 Consequently the endpoint residual at tPT2 is again FOUR named
 faces, of which exactly one is analytic content inside the tree:

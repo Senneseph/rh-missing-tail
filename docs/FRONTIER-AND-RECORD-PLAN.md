@@ -13,11 +13,11 @@ exactly three external records:
 
 | record | obligation | status |
 |---|---|---|
-| `[Z78]` (hzF) | zero-free half-plane θ | EIGHTH in tree (0.8733819666133); #NINE (PR #101, 0.87338196661320752) all-gates-green, pre-staged, merge = maintainer action |
+| `[Z78]` (hzF) | zero-free half-plane θ | **TEN in tree (0256)**: `closest-fraction-contact` at the exact 127/127-digit rational ≈ 0.8733819666132075199290267786... (PR #103 MERGED 2026-11-01T12:23:55Z, stage C 236/236 replay clean, B24 in-tree); NINE/EIGHTH survive as predecessor refs. Board idle below TEN (runner-up T + 9.732e-22, weaker) — the record family is at its method contact (777 − √1081)/852 |
 | `[Z-PT2]` (hPT2) | on-line data up to tPT2 = 3,000,175,332,800 | **provenance-complete**: Platt isolation record (tPT2 is Platt's exact isolation frontier, `WinCount.lean` L538) + Platt–Trudgian arXiv:2004.09765 independent verification (12,363,153,437,138 zeros, interval arithmetic), cited in tree (`WinCount.lean` section D, Z78 pattern). Coverage = [0, tPT2] exactly — no gap. |
 | `hOffCPT2` | no off-pair on [tPT2, ∞) × (0, posReserveD0max] | the TERMINAL FACE (0251 §4) |
 
-hPT2/honline/hqz/Qside: no gating work. hzF: one merge away (conveyor ready).
+hPT2/honline/hqz/Qside: no gating work. hzF: at the family contact (conveyor ready for the next MERGED record below TEN).
 
 ## 2. hPT2 in-house integrity program (forensics closure)
 
@@ -67,11 +67,14 @@ CRT-verified margins (worst re-issued piece: mnew 0.50265809882 vs the ledger
 
 **Live mechanisms:**
 - (b) board ladder — each MERGED [Z78]-class record shrinks the face by
-  its δθ. NINE (pending merge): −9.248e-14, the smallest step in the
-  B-series; the frontier is converging. The ladder alone closes the face
-  only in the limit θ → 1/2 (a full-RH board record) — a convergence
-  statement, not a termination. The B-series machinery
-  (`CONVEYOR-101.md`, B23/B24/...) is the repeatable adoption loop.
+  its δθ. EIGHTH→NINE −9.248e-14 (0254); NINE→TEN −7.097e-20 (0256): the
+  frontier is converging, and TEN is the closest declarable fraction above
+  the method-contact (777 − √1081)/852 — this record family is at its
+  limit; further shrinkage needs a different family or a full-RH board
+  record. The ladder alone closes the face only in the limit θ → 1/2 — a
+  convergence statement, not a termination. The B-series machinery
+  (`CONVEYOR-101.md`/`CONVEYOR-103.md`, B23/B24/B25...) is the repeatable
+  adoption loop (idle until a weaker MERGED record appears).
 
 **Named open questions (parked, precisely scoped):**
 1. **Decoupled-run variant.** 0252 measured the SINGLE-C section of the
@@ -102,7 +105,7 @@ CRT-verified margins (worst re-issued piece: mnew 0.50265809882 vs the ledger
 **Decision matrix (owner's call):**
 | option | cost | endpoint effect |
 |---|---|---|
-| (A) wait for #NINE merge | 0 (watcher alive) | hzF face −9.248e-14 (B23 fires one-shot) |
+| (A) wait for a new BOARD merge below TEN | 0 (watcher alive) | hzF face −δθ per weaker MERGED record (B25 fires one-shot); board idle at the family contact as of 0256 |
 | (B) 3e10 re-issue fleet | 1–1.5 days local | integrity loop only (forensics closure); no gating |
 | (C) in-house 3e12 run | 100–150 fleet-days (cloud) | none (citation already covers [0, tPT2]) |
 | (D) Platt checksum pinning | hours | provenance hardening |

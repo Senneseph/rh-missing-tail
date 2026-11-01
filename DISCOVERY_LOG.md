@@ -9082,3 +9082,38 @@ true, margin 0.0224):
 
 Build green 17450.  Lean 4.33.1 / mathlib v4.33.1
 (pinned).  NO RH CLAIM.
+
+## 0256 - B24: #TEN supersession - [Z78FractionContact] adopted
+(PR #103 closest-fraction-contact MERGED 2026-11-01T12:23:55Z, merge
+8b1a0167; exact 127/127-digit theta = 280496628.../321161460... ≈
+0.8733819666132075199290267786...)
+
+The B24 one-shot conveyor (tmp/b6audit/prestage103/CONVEYOR-103.md)
+fired on the MERGED record after a full fire-time replay:
+  * stage C 236/236 kernel-clean (work103 root = hard-linked NINE root +
+    gao5_replay deps, lean 4.34.1; 202 modules byte-identical vs NINE
+    src, 33 differs + 1 new (Return.Tuning.ContactQ) rebuilt from source;
+    two transient parallel-driver stale-dependency events on tip modules
+    resolved by sequential recompile; final ok=236/236 failed=[]).
+  * stage D: D1 canonical Candidate/Main.lean rc=0; D2 #print axioms =
+    [propext, Classical.choice, Quot.sound] (standard class) on all three
+    canonical declarations; D3 zeta-consequence (q=1) at the exact
+    127/127-digit rational rc=0; D4 static sweep 0 sorry / 0 admit /
+    0 axiom decls / 0 native_decide / 3 intended zeta-mention files.
+In-tree successor: formal/RhAttack/Z78FractionContact.lean (13
+theorems; constants fractionContactUpper / fractionContactD0max =
+T - 1/2 exact) + RHEnd Part B24 in place of B23 (slice
+(fractionContactD0max, gapContactD0max] closed in body from
+[Z78FractionContact] itself; terminal endpoint
+rh_program78_stripfront_mach_unifiedFractionContact_PT2). Side-effect
+repairs: the B23 commit's missing `import RhAttack.Z78GapContact`
+(the B24 import line is the only new one) and RHEnd's missing trailing
+newline. Full tree green (17454 jobs); zero warnings on new files.
+Narrative: T is the closest declarable fraction above the
+method-contact (777 - sqrt(1081))/852 (within ~2.2e-254) - the record
+family is at its method limit. Board re-audit: NO merged record below
+TEN (runner-up saddle-closure-selected-gap at T + 9.732e-22, weaker) -
+the ladder idles; watcher re-anchored to T; B25 = same runbook.
+No RH claim (zero-exclusion face in the unverified region).
+
+Build green 17454. No RH claim.
