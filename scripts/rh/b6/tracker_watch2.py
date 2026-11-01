@@ -26,13 +26,19 @@ written to WATCHER_ALERT.json (plus a B6-FIRED-<utc> marker file) so a
 continuing agent turn can act once without re-deriving state.
 """
 import json, urllib.request, datetime, os, sys, re, time
+from fractions import Fraction
+from decimal import Decimal, getcontext
+getcontext().prec = 40
 
 T = '/home/jsmille/Projects/rh-missing-tail/tmp/b6audit/tracker'
 CATALOGUE = 'https://gtimg.github.io/QuasiRiemannTracker/catalogue.json'
 PULLS = 'https://api.github.com/repos/GTimG/QuasiRiemannTracker/pulls?state=open&per_page=100'
 LEADER = 'https://bigospeedrun.com/other/quasi-riemann'
-ADOPTED = 5458637291332547 / 6250000000000000  # [Z78GapContact] positive-gap-contact-return PR #101 (0254; was positive-reserve-selected-gap PR #99, 0235)
-ADOPTED_ID = 'positive-gap-contact-return'
+# [Z78FractionContact] closest-fraction-contact PR #103 (0256; was positive-gap-contact-return PR #101, 0254; was positive-reserve-selected-gap PR #99, 0235)
+ADOPTED_EX = Fraction(int('2804966284017490358030969257914123810640482798488248385236764587735806455694206308975383836842958115341512355256943573632654341'), int('3211614609922119834694179379888743028634953588197852962423516288191911449231164741438582626063161096341458934143644085157872271'))  # exact T
+ADOPTED = float(ADOPTED_EX)          # display / float fallback only
+ADOPTED_RAT = '2804966284017490358030969257914123810640482798488248385236764587735806455694206308975383836842958115341512355256943573632654341/3211614609922119834694179379888743028634953588197852962423516288191911449231164741438582626063161096341458934143644085157872271'
+ADOPTED_ID = 'closest-fraction-contact'
 SEEN_PRS = os.path.join(T, 'watcher_seen_prs.json')
 ALERT = os.path.join(T, 'WATCHER_ALERT.json')
 
@@ -46,16 +52,40 @@ def val(r):
     except Exception:
         return None
 
+def val_exact(r):
+    """Exact Fraction from the catalogue's integer theta fields, else None."""
+    b = r.get('theta') or r.get('exact_bound') or {}
+    try:
+        return Fraction(int(b['numerator']), int(b['denominator']))
+    except Exception:
+        return None
+
+def is_stronger(exact, v_float):
+    """True iff a record is strictly below the adopted anchor.
+    EXACT rational comparison when the exact field is available (steps as
+    small as ~1e-20 are below float resolution at magnitude ~1); float
+    comparison with a 1e-15 band only as fallback for legacy records."""
+    if exact is not None:
+        return exact < ADOPTED_EX
+    return v_float is not None and v_float < ADOPTED - 1e-15
+
+def disp(exact, v_float, digits=22):
+    '''Exact decimal rendering from the Fraction (floats cannot represent
+    these 1e-20-scale steps at magnitude ~1); float fallback only.'''
+    if exact is not None:
+        return f'{Decimal(exact.numerator) / Decimal(exact.denominator):.{digits}f}'
+    return f'{v_float:.{digits}f}' if v_float is not None else '?'
+
 def pr_bound(body):
     m = re.search(r'QRH-Bound:\s*(\d+)\s*/\s*(\d+)', body or '')
-    return int(m.group(1)) / int(m.group(2)) if m else None
+    return Fraction(int(m.group(1)), int(m.group(2))) if m else None
 
 def alert(level, summary, detail):
     """level 1 = merged stronger (B6 fires); level 2 = pending stronger."""
     payload = {
         'level': level, 'ts': now_iso(),
         'anchor': {'id': ADOPTED_ID, 'theta': ADOPTED,
-                   'rational': '5458637291332547/6250000000000000'},
+                   'rational': ADOPTED_RAT},
         'summary': summary, 'detail': detail,
         'action': ('run the B6 section-8 conveyor '
                    '(tmp/z78s35 pipeline: fetch at pinned source_commit, '
@@ -123,7 +153,11 @@ def scan_open_prs(f):
         return 0
     seen = {}
     if os.path.exists(SEEN_PRS):
-        seen = json.load(open(SEEN_PRS))
+        try:
+            seen = json.load(open(SEEN_PRS))
+        except Exception:
+            f.write('seen-PR state file corrupt - resetting (NEW markers repeat once)\n')
+            seen = {}
     flags = 0
     f.write(f'open PRs: {len(prs)} total\n')
     for p in prs:
@@ -132,14 +166,17 @@ def scan_open_prs(f):
         bound = pr_bound(p.get('body'))
         newmark = '' if str(num) in seen else '  ** NEW PR **'
         strongmark = ''
-        if bound is not None and bound < ADOPTED - 1e-15:
+        if bound is not None and bound < ADOPTED_EX:
             strongmark = '   *** PENDING SUPERSESSION: stronger than adopted (OPEN) ***'
             flags += 1
         if bound is not None:
-            f.write(f'  PR #{num}  bound={bound:.12f}  {title}{newmark}{strongmark}\n')
+            f.write(f'  PR #{num}  bound={disp(bound, None)} ({bound.numerator}/{bound.denominator})  {title}{newmark}{strongmark}\n')
         else:
             f.write(f'  PR #{num}  (no QRH-Bound)  {title}{newmark}\n')
-        seen[str(num)] = {'title': title, 'bound': bound, 'first_seen': now_iso()}
+        seen[str(num)] = {'title': title,
+                          'bound': (f"{bound.numerator}/{bound.denominator}"
+                                    if bound is not None else None),
+                          'first_seen': now_iso()}
     json.dump(seen, open(SEEN_PRS, 'w'), indent=1)
     return flags
 
@@ -148,26 +185,27 @@ def main():
     now = datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%d_%H%M')
     c = json.loads(urllib.request.urlopen(CATALOGUE, timeout=60).read())
     recs = c if isinstance(c, list) else c.get('records', c.get('results', []))
-    rows = [(val(r), r.get('id'), (r.get('merged_at') or '')[:19]) for r in recs]
+    rows = [(val(r), val_exact(r), r.get('id'), (r.get('merged_at') or '')[:19])
+            for r in recs]
     rows = [x for x in rows if x[0] is not None]
-    rows.sort(key=lambda x: x[0])
-    top = rows[0] if rows else (None, None, '')
+    rows.sort(key=lambda x: (x[1] if x[1] is not None else x[0]))
+    top = rows[0] if rows else (None, None, '', '')
 
     lb_top, lb_merged = None, None
     with open(f'{T}/watch_{now}.txt', 'w') as f:
-        f.write(f'frontier watch {now}Z — adopted [Z78GapContact] = '
-                f'{ADOPTED:.17f} (5458637291332547/6250000000000000)\n')
+        f.write(f'frontier watch {now}Z — adopted [Z78FractionContact] = '
+                f'{disp(ADOPTED_EX, ADOPTED, 20)} ... exact {ADOPTED_RAT}\n')
         f.write(f'catalogue as_of {c.get("as_of", "?")} (dict) / '
                 f'board: {len(rows)} records with numeric bounds\n')
-        for v, rid, m in rows[:12]:
-            mark = ' ** STRONGER THAN ADOPTED **' if v < ADOPTED - 1e-15 else ''
-            f.write(f'  {v:.12f}  {rid}  merged={m}{mark}\n')
+        for v, ex, rid, m in rows[:12]:
+            mark = ' ** STRONGER THAN ADOPTED **' if is_stronger(ex, v) else ''
+            f.write(f'  {disp(ex, v)}  {rid}  merged={m}{mark}\n')
         f.write(f'  (merged-board gate: official catalogue as_of '
                 f'{c.get("as_of", "?")})\n')
         lb_top, lb_merged = scan_leaderboard(f)
         pr_flags = scan_open_prs(f)
-    stronger = [r for r in rows if r[0] < ADOPTED - 1e-15]
-    print(f'[watch] board: {len(rows)} records; top = {top[0]:.12f} '
+    stronger = [r for r in rows if is_stronger(r[1], r[0])]
+    print(f'[watch] board: {len(rows)} records; top = {disp(top[1], top[0])} '
           f'({top[1]}, merged {top[2]})')
     if stronger:
         print(f'[watch] !!! B6 FIRES: {len(stronger)} MERGED record(s) '
@@ -184,8 +222,8 @@ def main():
                         'open PR declares a QRH-Bound below the anchor'))
     if lb_top is not None and lb_top < ADOPTED - 1e-15 and lb_merged is False:
         pending.append(('leaderboard', lb_top, 'open PR at board rank 1'))
-    print(f'[watch] no merged record below the anchor; [Z78GapContact] '
-          f'remains the in-tree face.')
+    print(f'[watch] no merged record below the anchor; [Z78FractionContact] '
+          f'TEN (T = {ADOPTED_RAT}) remains the in-tree face.')
     if pending:
         try:
             for src, b, why in pending:
