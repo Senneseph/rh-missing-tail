@@ -635,3 +635,62 @@ generation with dmax' = theta' - 1/2 < 0.3733819666133). Given the
 10-30 cluster pace (3 merges/day, ~1e-4 per day of compression),
 the board itself is the engine; our conveyor is the consumer.
 No RH claim. Off-board conveyor mechanics only.
+
+## #NINE ADOPTED (2026-11-01, discovery 0254)
+
+The trigger FIRED: board record `positive-gap-contact-return`
+(Joseph Bebel, PR #101, single commit 20a4c9a5) MERGED at
+2026-11-01T09:53:34Z (merge commit d4fba59d479ece73d28b862b7397e3351acc7b6a).
+Board is now 46 records; top = 0.87338196661320752, strictly below
+the EIGHTH anchor (watcher flipped to the NINE top at 11:24Z).
+
+**The number.** Exact rational 5458637291332547/6250000000000000
+= 0.87338196661320752 = 9.248e-14 below the EIGHTH anchor
+(578/6250000000000000 of face width removed - the SMALLEST single
+in-tree face step of the B-series; the frontier is converging). The
+record's own description: the reserve-parametric seed + above-half
+selected energy of positive-reserve-selected-gap instantiated at
+smaller fixed gaps, five count windows kept, h retuned, reserve/conductor
+extension to 10^-20; the return sits within **7.1e-20 of the
+method-limiting contact (777 - sqrt(1081))/852** - the remaining
+sliver of THIS method family on the ladder.
+
+**Fire-time replay (CONVEYOR-101.md, artifact root
+`tmp/b6audit/prestage101/firetime/`):**- stage 0 merge guard +
+catalogue snapshot (46 records, exact rational in the record).
+- stage 1 identity re-verify on the FETCHED merge tree: canonical
+  `Candidate.bound` / `Qrh.PositiveGap.bound` at the exact rational
+  (rename of the EIGHTH entry, `PR98Improvement` -> `PositiveGap`);
+  0 sorry / 0 admit / 0 axiom decls / 0 native_decide (237 files);
+  all four direct prefix trees BYTE-IDENTICAL vs the frozen EIGHTH
+  base; tree = EIGHTH + {selected-leaf-refined-return (151f),
+  positive-gap-contact-return (237f)}, purely additive.
+- stage C: 235/235 cone modules kernel-clean (lean 4.34.1, frozen
+  EIGHTH olean root + gao5 deps); identity vs EIGHTH src: 182
+  byte-identical / 0 differs / 53 genuinely new; wall 128s.
+- stage D: D1 canonical `Main.lean` compile rc=0; D2 `#print
+  axioms` = [propext, Classical.choice, Quot.sound] on all three
+  canonical declarations (standard class only); D3 zeta-consequence
+  (q = 1, zeta != 0 for Re(s) > theta, s != 1) at the exact rational
+  rc=0; D4 sweep 0/0/0/0/0 (incl. 0 zeta mentions in the new tree).
+
+**In-tree successor (B23, this commit):** new module
+`formal/RhAttack/Z78GapContact.lean` (namespace Z78GapContact,
+gapContactUpper / gapContactD0max at the exact rational, external
+input `externalZeroFree78GapContact`, chain
+`extGapContact_implies_extPosReserve`); RHEnd B22 -> B23 in-place
+(5 theorems; terminal endpoint
+`rh_program78_stripfront_mach_unifiedGapContact_PT2`); the B23.1
+slice (gapContactD0max, posReserveD0max] of the B22 face is closed
+IN BODY from [Z78GapContact] itself. EIGHTH module `Z78PosReserve`
+untouched (predecessor ref). Full tree builds green (17454 jobs);
+zero warnings on the new files.
+
+**Ladder state.** EIGHTH -> NINE: 0.8733819666133 ->
+0.87338196661320752. Next candidate (B24): the first MERGED record
+below 0.87338196661320752 - same runbook, generator pattern general.
+Note the limiting contact (777 - sqrt(1081))/852: the within-method
+headroom is now ~7e-20 (numerically exhausted for this family);
+subsequent ladder steps likely come from other method families on
+the board. Watcher re-anchored to the NINE top.
+No RH claim. Off-board conveyor mechanics only.

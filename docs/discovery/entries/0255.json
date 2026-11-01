@@ -1,20 +1,31 @@
 {
- "seq": "0255",
- "ts": "2026-11-01T09:32:32.254600+00:00",
- "title": "Frontier-and-record plan: hPT2 provenance-complete (Platt tPT2 exact + P-T independent verification); hOffCPT2 routes all named (decoupled-run variant parked, citing the 2026-10-16 Qside re-typing rejection); 3e10 re-issue scoped at 1-1.5d local fleet; in-house 3e12 infeasible and strictly below cited coverage - deferred",
- "kind": "record-layer scoping (docs/FRONTIER-AND-RECORD-PLAN.md)",
- "evidence": [
-  "docs/FRONTIER-AND-RECORD-PLAN.md (new, this commit)",
-  "docs/RECORD-REQUIREMENTS.md 0251 (spec this plan scopes)",
-  "formal/RhAttack/WinCount.lean L509-538 (tPT2 = Platt's exact isolation frontier; P-T arXiv:2004.09765 independent verification, 12363153437138 zeros, cited in tree)",
-  "docs/VALIANT-EFFORT-FORENSICS.md s5 + scripts/rh/h1_final_fleet/VERIFICATION.md (engine bug signature, fixed engine, day048/049a/049f CRT-verified re-issues, worst mnew 0.50265809882)",
-  "docs/H1-FLEET-RUNBOOK.md s5 (measured fleet pace: 3-machine fleet ~12-24h wall at 3e10 scale)",
-  "formal/RhAttack/P12Uniform.lean L84-92 (2026-10-16 Qside re-typing note: decoupled leg form tried and rejected - 'made S3 unsatisfiable for ANY finite wire'; one concrete scale Q in S1 and S3)",
-  "formal/RhAttack/T4OffLD.lean (0253 knife-edge formalization the plan builds on)"
- ],
- "status": "committed",
- "next": [
-  "PR #101 merge check (all gates green; maintainer action only) - B23 one-shot conveyor ready at tmp/b6audit/prestage101/CONVEYOR-101.md",
-  "owner decision on plan section 3 matrix (3e10 re-issue fleet launch recommended if desired)"
- ]
+ "id": "0255",
+ "title": "Frontier-and-record plan: hPT2 provenance-complete (Platt tPT + P-T independent verification, coverage [0, tPT2] exactly); hOffCPT2 routes all named (decoupled-run variant cites the 2026-10-16 Qside re-typing rejection); compute scoping (3e10 re-issue 1-1.5d local, in-house 3e12 deferred)",
+ "kind": "record-layer scoping",
+ "date": "2026-11-01",
+ "summary": "docs/FRONTIER-AND-RECORD-PLAN.md scopes the hPT2 / hOffCPT2 completion layer: hPT2 is provenance-complete in tree (tPT2 is Platt's EXACT isolation frontier; P-T arXiv:2004.09765 independently verifies it - coverage [0, tPT2], no gap); hOffCPT2 routes remain (a) data-infeasible, (b) ladder shrinks-only, (c) measured negative + formalized, (d) out of scope. The decoupled-run variant (S1 fill run C1, S3 wire run C2, C1 < C* < C2) is PARKED as a named open question with the in-tree prior recorded: the 2026-10-16 Qside re-typing note (P12Uniform.lean) says the decoupled leg form was tried and rejected ('made S3 unsatisfiable for ANY finite wire'; ONE concrete scale Q in S1 and S3). Compute: 3e10 fixed-engine re-issue = 1-1.5 days local fleet (integrity loop, no gate); in-house 3e12 run = 100-150 fleet-days and strictly below the cited P-T coverage, so deferred. Decision matrix handed to the owner. No RH claim.",
+ "module": null,
+ "artifacts": {
+  "plan": "docs/FRONTIER-AND-RECORD-PLAN.md",
+  "spec": "docs/RECORD-REQUIREMENTS.md (0251)",
+  "qside_note": "formal/RhAttack/P12Uniform.lean (S1 block, 2026-10-16 re-typing note)",
+  "forensics": "docs/VALIANT-EFFORT-FORENSICS.md s5 + scripts/rh/h1_final_fleet/VERIFICATION.md",
+  "pace": "docs/H1-FLEET-RUNBOOK.md s5 (measured fleet pace)",
+  "tpt2_source": "formal/RhAttack/WinCount.lean L509-538 (tPT2 = Platt exact frontier; P-T verification)"
+ },
+ "content": {
+  "hpt2": "provenance-complete: Platt isolation (tPT2 = Platt's exact isolation frontier) + Platt-Trudgian arXiv:2004.09765 (12,363,153,437,138 zeros, interval arithmetic) independently verifies the Platt tPT; cited in tree (WinCount.lean section D). Coverage [0, tPT2] exactly - no gap.",
+  "hoffcpt2_routes": {
+   "a_direct_far_strip_data": "DEAD (data-side infeasible; 0.373-wide negative certificate beyond current methods)",
+   "b_board_ladder": "LIVE mechanism: each MERGED record shrinks the face by dtheta; NINE (0254) = -9.248e-14, smallest B-series step; closes only in the limit theta -> 1/2 (a full-RH board record)",
+   "c_per_point_squeeze": "MEASURED NEGATIVE (0252) + FORMALIZED (0253 T4OffLD)",
+   "d_direct_band_record": "OUT OF SCOPE by design (equivalent to RH above the frontier)"
+  },
+  "parked_open_questions": [
+   "decoupled-run variant (S1@C1, S3@C2): needs re-typed S3 with independent wire runs (against the 2026-10-16 rejection note) + new per-pin data at decoupled runs",
+   "asymmetric EM families (fill engine and tail wall not sharing the (1/2)C^-1 t^-2 scale)",
+   "frontier extension (0126 route A): re-labels the face, close only at H = infinity"
+  ]
+ },
+ "status": "committed"
 }

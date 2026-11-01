@@ -1,0 +1,41 @@
+{
+ "id": "0254",
+ "title": "B23: #NINE supersession - [Z78GapContact] adopted (PR #101 positive-gap-contact-return MERGED d4fba59d 2026-11-01T09:53:34Z), theta = 0.87338196661320752, face step 9.248e-14 (smallest B-series step), full tree green",
+ "kind": "formal-anchor",
+ "date": "2026-11-01",
+ "summary": "The B23 one-shot conveyor (tmp/b6audit/prestage101/CONVEYOR-101.md) fired on the MERGED board record: stage C 235/235 kernel-clean (182 cone modules byte-identical vs EIGHTH src, 0 differs, 53 new; identity audit firetime/cone_identity_vs_eighth.json), stage D all clean (canonical Main.lean rc=0; #print axioms = [propext, Classical.choice, Quot.sound] on all three canonical declarations; zeta-consequence (q=1) at the exact rational rc=0; static sweep 0 sorry / 0 admit / 0 axiom decls / 0 native_decide / 0 zeta mentions). In-tree successor: formal/RhAttack/Z78GapContact.lean (5 theorems) + RHEnd B22 -> B23 in-place (terminal endpoint rh_program78_stripfront_mach_unifiedGapContact_PT2). EIGHTH module remains as predecessor ref. Full tree green (17454 jobs), zero warnings on new files. No RH claim.",
+ "module": "formal/RhAttack/Z78GapContact.lean",
+ "artifacts": {
+  "runbook": "tmp/b6audit/prestage101/CONVEYOR-101.md",
+  "generator": "tmp/b6audit/prestage101/gen_z78gapcontact_b23.py (all 9 replay PROV fields filled at fire time)",
+  "firetime_root": "tmp/b6audit/prestage101/firetime/ (catalogue snapshot, stageC driver + logs + summary, stageC101_run2.log = final 235/235, cone_identity_vs_eighth.json, stageD/ D1-D4)",
+  "merge": "PR #101 (GTimG/QuasiRiemannTracker), Joseph Bebel, single commit 20a4c9a5, MERGED 2026-11-01T09:53:34Z, merge commit d4fba59d479ece73d28b862b7397e3351acc7b6a",
+  "endpoint": "formal/RhAttack/RHEnd.lean (Part B23 supersedes B22 in place; B20 and earlier remain)"
+ },
+ "content": {
+  "constants": {
+   "gapContactUpper": "5458637291332547/6250000000000000 = 0.87338196661320752 : Q (exact rational, the record's Lean statement works at the rational - no bracketing)",
+   "gapContactD0max": "2333637291332547/6250000000000000 = 0.37338196661320752 = gapContactUpper - 1/2 : Q",
+   "face_step": "posReserveD0max - gapContactD0max = 578/6250000000000000 = 9.248e-14 - SMALLEST single in-tree face shrink of the B-series (the frontier is converging)"
+  },
+  "theorems_B23": [
+   "B23.1 slice exclusion: (gapContactD0max, posReserveD0max] of the B22 face closed IN BODY from [Z78GapContact] itself (extGapContact_implies_extPosReserve)",
+   "B23.2 unified endpoint (vacant form)",
+   "B23.3 terminal [Z-PT2] endpoint rh_program78_stripfront_mach_unifiedGapContact_PT2",
+   "B23.4 Gao-of",
+   "B23.5 PT2-Gao"
+  ],
+  "narrative": "The record's own description: reserve-parametric seed + above-half selected energy of positive-reserve-selected-gap instantiated at smaller fixed positive gaps, five count windows kept, h retuned, reserve/conductor to 10^-20; the return sits within 7.1e-20 of the method-limiting contact (777 - sqrt(1081))/852 - the remaining sliver of this method family on the ladder.",
+  "gates": {
+   "stageC": "235/235 (run 2: failed=[], skipped=[]); run-1 flag on FinalRows was a transient worker event (its log: 2.2s rc=0, healthy 209KB olean), recompiled clean in run 2",
+   "stageD": "D1 rc=0, D2 standard class only, D3 rc=0, D4 0/0/0/0/0",
+   "build": "targeted 8732 jobs green + FULL tree 17454 jobs green; 0 warnings on Z78GapContact/RHEnd"
+  }
+ },
+ "notes": [
+  "Adoption fired on a MERGED catalogue record only (stage 0 guard): board 46 records, top = positive-gap-contact-return merged 2026-11-01T09:53:34; all check-runs success since 2026-11-01T02:40Z.",
+  "Watcher anchor moved to the NINE value (b6audit tracker script); next candidate = first MERGED record below 0.87338196661320752 (B24, same runbook).",
+  "No RH claim: the face is a zero-exclusion statement in the unverified region; the input class is unchanged in kind (external zero-free half-plane, still 0.37338196661320752 away from 1/2)."
+ ],
+ "status": "committed"
+}

@@ -3495,81 +3495,79 @@ theorem rh_program78_stripfront_mach_unifiedGao_PT2_ofFineChain (q : ZeroSet)
     hOffCPT2
 
 /-!
-**Part B22 - the tracker board moved AGAIN: [Z78PosReserve]
-supersedes [Z78ArviDensity].**
+**Part B23 - the tracker board moved AGAIN: [Z78GapContact]
+supersedes [Z78PosReserve].**
 
 The B6 section-8 mechanism (demonstrated in 0133, 0142, 0162, 0195,
-0200, 0203, 0211) runs an EIGHTH time.  The 2026-10-30 catalogue pull
-(as_of 2026-10-30, 45 records) carries a morning batch of THREE new
-framework-verified, MERGED records below the 0211 in-tree face:
-PR #99 positive-reserve-selected-gap 8733819666133/10000000000000 =
-0.8733819666133 (Joseph Bebel, merged 2026-10-30T12:44:37Z) - the
-current BOARD BEST, an all-moduli Dirichlet nonvanishing statement
-built on the arvi-selected-leaf -> arvi-density chain; selected-leaf-
-refined-return 0.8733821435 (merged 10:00:03Z), strictly weaker and
-subsumed, NOT adopted; and the board-best's own dependency
-arvi-selected-leaf 0.87341198 (merged 07:47:37Z), subsumed, NOT
-adopted.  This program second-party replayed it in full (Stage C:
-independent per-module kernel compilation, 235/235 modules
-clean in 137s; Stage D: canonical statement at the
-exact rational, axiom audit {propext, Classical.choice, Quot.sound}, zeta consequence,
-0 sorry; all dependency trees byte-identical to the frozen replay
-copies - see the module header for the complete provenance record).
-[Z78PosReserve] is the strongest: the all-Dirichlet zero-free
-half-plane at posReserveUpper = 8733819666133/10000000000000 =
-0.8733819666133, a STRICT STRENGTHENING of [Z78ArviDensity]
-(extPosReserve_implies_extArvi; transitively of [Z78DensityRefined],
-[Z78FineChain], [Z78SIL32], [Z78C], [Z78G], [Z78T], [Z78L], [Z78]).
-Zeros of an actual set sit in [1 - posReserveUpper, posReserveUpper],
-so every off-pair satisfies d0 <= posReserveD0max = posReserveUpper -
-1/2 = 3733819666133/10000000000000 = 0.3733819666133 < arviD0max
-(offPairD0lePosReserve, sharp).  The open face shrinks from
-(0, arviD0max] to (0, posReserveD0max], the [Z78PosReserve]-sharp strip
-interior, and the slice (posReserveD0max, arviD0max] of the B21 face is
-closed IN BODY from [Z78PosReserve] itself.  The step removes
-arviD0max - posReserveD0max = 4903733867/10000000000000 = 4.9037e-4 of
-face width - the LARGEST single in-tree face shrink of the B-part
-series (6.6x the B21 step of 7.376e-5).  No RH claim: the face is a
-zero-exclusion statement in the unverified region; the input class is
-unchanged in kind - an external zero-free half-plane, still
-0.3733819666133 away from 1/2 - and the chain stays a REPEATABLE
-MECHANISM (B6 packet section 8, now demonstrated on an EIGHTH
+0200, 0203, 0211, 0235) runs a NINTH time.  The merge-time catalogue
+pull carries PR #101 positive-gap-contact-return
+5458637291332547/6250000000000000 = 0.87338196661320752 (Joseph Bebel,
+merged 2026-11-01T09:53:34Z (merge commit d4fba59d479ece73d28b862b7397e3351acc7b6a)) - the current BOARD BEST, an all-moduli
+Dirichlet nonvanishing statement built on the same four Submissions
+prefixes as the EIGHTH record.  This program second-party replayed it in
+full (Stage C: independent per-module kernel compilation,
+True modules clean in 128 (113s run 1 + 15s run 2; 235/235 kernel-clean against the frozen EIGHTH olean root + gao5_replay deps, lean 4.34.1; identity vs EIGHTH src: 182 byte-identical / 0 differs / 53 new)s; Stage D:
+canonical statement at the exact rational, axiom audit
+#print axioms (fire-time, merged tree): Candidate.bound, Qrh.PositiveGap.bound, Qrh.PositiveGap.beta_le_theta all = [propext, Classical.choice, Quot.sound] - standard class only; D1 canonical Main.lean compile rc=0; D3 zeta-consequence (q=1) at the exact rational rc=0; D4 sweep: 0 sorry / 0 admit / 0 axiom decls / 0 native_decide / 0 zeta mentions in the new tree (237 files), zeta consequence, [] (run 1 flagged Candidate.Local.Qrh.PositiveGap.Return.Tuning.FinalRows; its log is 2.2s rc=0 with a healthy 209KB olean - transient worker event, not a compile error; run 2 recompiled it fresh: rc=0, 235/235) sorry;
+all dependency trees byte-identical to the frozen replay copies - see
+the module header for the complete provenance record).
+[Z78GapContact] is the strongest: the all-Dirichlet zero-free half-plane
+at gapContactUpper = 5458637291332547/6250000000000000 =
+0.87338196661320752, a STRICT STRENGTHENING of [Z78PosReserve]
+(extGapContact_implies_extPosReserve; transitively of [Z78ArviDensity],
+[Z78DensityRefined], [Z78FineChain], [Z78SIL32], [Z78C], [Z78G], [Z78T],
+[Z78L], [Z78]).  Zeros of an actual set sit in
+[1 - gapContactUpper, gapContactUpper], so every off-pair satisfies
+d0 <= gapContactD0max = gapContactUpper - 1/2 =
+2333637291332547/6250000000000000 = 0.37338196661320752 < posReserveD0max
+(offPairD0leGapContact, sharp).  The open face shrinks from
+(0, posReserveD0max] to (0, gapContactD0max], the [Z78GapContact]-sharp
+strip interior, and the slice (gapContactD0max, posReserveD0max] of the
+B22 face is closed IN BODY from [Z78GapContact] itself.  The step
+removes posReserveD0max - gapContactD0max = 578/6250000000000000 =
+9.248e-14 of face width - the SMALLEST single in-tree face shrink of
+the B-part series (the frontier is converging; the mechanism is
+unchanged in kind).  No RH claim: the face is a zero-exclusion
+statement in the unverified region; the input class is unchanged in
+kind - an external zero-free half-plane, still
+0.37338196661320752 away from 1/2 - and the chain stays a REPEATABLE
+MECHANISM (B6 packet section 8, now demonstrated on a NINTH
 supersession): a newer verified snapshot of the tracker frontier
 supersedes this part mechanically.
 -/
 
-/--  B22.1  THE  OUTER  SLICE  OF  THE  pre-B17  FACE  IS  CLOSED  IN
-    BODY  FROM  [Z78PosReserve]:  for  an  actual-set  zero  set,  no
-    off-pair with  d0  >  posReserveD0max  (of  any  height  t0  >  0):
-    offPairD0leDenRefined  already  bounds  every  off-pair  to
-    d0  <=  posReserveD0max.  In  particular  the  slice
-    (posReserveD0max,  denRefinedD0max]  of  the pre-B21 face  --  and  a
-    fortiori  (posReserveD0max,  gaoD0max],  (posReserveD0max,  qxD0max],
-    (posReserveD0max,  liuD0max],  (posReserveD0max,  3/8]  --  needs  no
+/--  B23.1  THE  OUTER  SLICE  OF  THE  pre-B23  FACE  IS  CLOSED  IN
+    BODY  FROM  [Z78GapContact]:  for  an  actual-set  zero  set,  no
+    off-pair with  d0  >  gapContactD0max  (of  any  height  t0  >  0):
+    offPairD0leGapContact  already  bounds  every  off-pair  to
+    d0  <=  gapContactD0max.  In  particular  the  slice
+    (gapContactD0max,  denRefinedD0max]  of  the pre-B21 face  --  and  a
+    fortiori  (gapContactD0max,  gaoD0max],  (gapContactD0max,  qxD0max],
+    (gapContactD0max,  liuD0max],  (gapContactD0max,  3/8]  --  needs  no
     face  at  all.  No  RH  claim.  -/
-theorem rhend_slicePosReserveExcl (q : ZeroSet)
-    (hzF : Z78PosReserve.externalZeroFree78PosReserve)
+theorem rhend_sliceGapContactExcl (q : ZeroSet)
+    (hzF : Z78GapContact.externalZeroFree78GapContact)
     (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
     (t0 d0 : ℝ) (ht0 : 0 < t0) (hd0 : 0 < d0)
-    (hC : Z78PosReserve.posReserveD0max < d0) :
+    (hC : Z78GapContact.gapContactD0max < d0) :
     ¬ offPair q t0 d0 := by
   intro hp
-  have hle := Z78PosReserve.offPairD0lePosReserve q hzF hqz t0 d0 ht0 hd0 hp
+  have hle := Z78GapContact.offPairD0leGapContact q hzF hqz t0 d0 ht0 hd0 hp
   linarith
 
-/--  B22.2  THE  DENSITY-SPLIT-UNIFIED  ENDPOINT:  the  B12
+/--  B23.2  THE  DENSITY-SPLIT-UNIFIED  ENDPOINT:  the  B12
     endpoint  with  the  external  input  upgraded
-    [Z78]  ->  [Z78PosReserve]  and  the  face  shrunk  to  0  <  d0
-    <=  posReserveD0max  (the  [Z78PosReserve]-sharp  strip  interior,
-    posReserveD0max = 3733819666133/10000000000000 = 0.3733819666133).  Above  H,  any
-    off-pair  has  d0  <=  posReserveD0max  BY  [Z78PosReserve]
+    [Z78]  ->  [Z78GapContact]  and  the  face  shrunk  to  0  <  d0
+    <=  gapContactD0max  (the  [Z78GapContact]-sharp  strip  interior,
+    gapContactD0max = 2333637291332547/6250000000000000 = 0.37338196661320752).  Above  H,  any
+    off-pair  has  d0  <=  gapContactD0max  BY  [Z78GapContact]
     (offPairD0leDenRefined)  before  the  face  is  applied  -  the
     d0  <=  1/2  split  of  B11  stays  away  in  the  S1/S3
     legs  and  in  the  S4-covered  leg;  the  far  region  (d0
     >  1/2)  is  closed  by  the  [Z78]  derived  from
-    [Z78PosReserve].  No  RH  claim.  -/
-theorem rh_program78_stripfront_mach_unifiedPosReserve (q : ZeroSet)
-    (hzF : Z78PosReserve.externalZeroFree78PosReserve)
+    [Z78GapContact].  No  RH  claim.  -/
+theorem rh_program78_stripfront_mach_unifiedGapContact (q : ZeroSet)
+    (hzF : Z78GapContact.externalZeroFree78GapContact)
     (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
     (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) → (|ρ.im| : ℝ) <
       (707 : ℝ) / 50 → ρ.re = 1 / 2)
@@ -3577,25 +3575,25 @@ theorem rh_program78_stripfront_mach_unifiedPosReserve (q : ZeroSet)
     (H : ℝ) (hH : 1000 ≤ H)
     (hPT : WinC.allOnLineUpTo q H)
     (hOffC : ∀ (t0 d0 : ℝ), H ≤ t0 → 0 < d0 →
-      d0 ≤ Z78PosReserve.posReserveD0max → ¬ offPair q t0 d0) :
+      d0 ≤ Z78GapContact.gapContactD0max → ¬ offPair q t0 d0) :
     RH q := by
-  have hz78 : Z78.externalZeroFree78 := Z78PosReserve.extPosReserve_implies_ext78 hzF
+  have hz78 : Z78.externalZeroFree78 := Z78GapContact.extGapContact_implies_ext78 hzF
   refine S4A.rh_from_regime_closures q Qside Z78P12.MfP devProg
     Z78P12.BwireP (fun p => MrLift p.1 p.2) floProg
     ?_ ?_ ?_ ?_ ?_ ?_
   · --  S1  witness  leg:  below  H  =  vacuous  (the  record);
-      --  above  H:  [Z78PosReserve]  bounds  d0  to  posReserveD0max,  the  face
+      --  above  H:  [Z78GapContact]  bounds  d0  to  gapContactD0max,  the  face
       --  kills.
     intro t0 d0 ht0 hd0 hp
     by_cases hle : t0 ≤ H
     · exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
         (le_of_lt ht0) hle) d0 hp)
-    · have hL : d0 ≤ Z78PosReserve.posReserveD0max :=
-        Z78PosReserve.offPairD0lePosReserve q hzF hqz t0 d0 ht0 hd0 hp
+    · have hL : d0 ≤ Z78GapContact.gapContactD0max :=
+        Z78GapContact.offPairD0leGapContact q hzF hqz t0 d0 ht0 hd0 hp
       exact False.elim ((hOffC t0 d0
         (le_of_lt (not_le.mp hle)) hd0 hL) hp)
   · --  S2  leg:  covered  =  in  body;  low  band  =  vacuous
-      --  below  H;  far  =  [Z78]  (from  [Z78PosReserve]).
+      --  below  H;  far  =  [Z78]  (from  [Z78GapContact]).
     intro t0 d0 ht0 hd0 hp
     by_cases hd0h : d0 ≤ (1 / 2 : ℝ)
     · by_cases ht0k : 1000 ≤ t0
@@ -3606,24 +3604,24 @@ theorem rh_program78_stripfront_mach_unifiedPosReserve (q : ZeroSet)
     · exact False.elim (Z78P12.offPairFarEmpty q hz78 hqz t0 d0
         (not_le.mp hd0h) hp)
   · --  S3  leg:  below  H  =  vacuous  (the  record);  above  H:
-      --  [Z78PosReserve]  bounds  d0  to  posReserveD0max,  the  face  kills.
+      --  [Z78GapContact]  bounds  d0  to  gapContactD0max,  the  face  kills.
     intro t0 d0 ht0 hd0 hp
     by_cases hle : t0 ≤ H
     · exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
         (le_of_lt ht0) hle) d0 hp)
-    · have hL : d0 ≤ Z78PosReserve.posReserveD0max :=
-        Z78PosReserve.offPairD0lePosReserve q hzF hqz t0 d0 ht0 hd0 hp
+    · have hL : d0 ≤ Z78GapContact.gapContactD0max :=
+        Z78GapContact.offPairD0leGapContact q hzF hqz t0 d0 ht0 hd0 hp
       exact False.elim ((hOffC t0 d0
         (le_of_lt (not_le.mp hle)) hd0 hL) hp)
   · --  S4  covered:  below  H  =  vacuous  (the  record);
-      --  above  H:  [Z78PosReserve]  bounds  d0  to  posReserveD0max,  the  face
+      --  above  H:  [Z78GapContact]  bounds  d0  to  gapContactD0max,  the  face
       --  kills.
     intro t0 d0 ht0 hd0 hd0u hp
     by_cases hle : t0 ≤ H
     · exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
         (by linarith [ht0]) hle) d0 hp)
-    · have hL : d0 ≤ Z78PosReserve.posReserveD0max :=
-        Z78PosReserve.offPairD0lePosReserve q hzF hqz t0 d0
+    · have hL : d0 ≤ Z78GapContact.gapContactD0max :=
+        Z78GapContact.offPairD0leGapContact q hzF hqz t0 d0
         (show 0 < t0 from by linarith [ht0]) hd0 hp
       exact False.elim ((hOffC t0 d0
         (le_of_lt (not_le.mp hle)) hd0 hL) hp)
@@ -3634,46 +3632,46 @@ theorem rh_program78_stripfront_mach_unifiedPosReserve (q : ZeroSet)
     by_cases hle : t0 ≤ H
     · exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
         (le_of_lt ht0) hle) d0 hp)
-    · have hL : d0 ≤ Z78PosReserve.posReserveD0max :=
-        Z78PosReserve.offPairD0lePosReserve q hzF hqz t0 d0 ht0 hd0 hp
+    · have hL : d0 ≤ Z78GapContact.gapContactD0max :=
+        Z78GapContact.offPairD0leGapContact q hzF hqz t0 d0 ht0 hd0 hp
       exact False.elim ((hOffC t0 d0
         (le_of_lt (not_le.mp hle)) hd0 hL) hp)
-  · --  S4  far:  [Z78]  (from  [Z78PosReserve]).
+  · --  S4  far:  [Z78]  (from  [Z78GapContact]).
     intro t0 d0 ht0 hd0 hd0f hp
     exact False.elim (Z78P12.offPairFarEmpty q hz78 hqz t0 d0
       hd0f hp)
 
-/--  B22.3  THE  DENSITY-SPLIT  ENDPOINT  AT  THE  PLATT-TRUDGIAN
+/--  B23.3  THE  DENSITY-SPLIT  ENDPOINT  AT  THE  PLATT-TRUDGIAN
     FRONTIER  (the  [Z-PT2]  instantiation):  the  entire  named
     residue  lives  STRICTLY  ABOVE  3,000,175,332,800,  as  ONE
     zero-exclusion  face  (no  off-pair  in  0  <  d0  <=
-    posReserveD0max  above  the  frontier  -  the  [Z78PosReserve]-sharp
-    strip  interior)  plus  [Z78PosReserve]  itself  (which  closes
-    d0  >  posReserveD0max  in  body).  No  RH  claim.  -/
-theorem rh_program78_stripfront_mach_unifiedPosReserve_PT2 (q : ZeroSet)
-    (hzF : Z78PosReserve.externalZeroFree78PosReserve)
+    gapContactD0max  above  the  frontier  -  the  [Z78GapContact]-sharp
+    strip  interior)  plus  [Z78GapContact]  itself  (which  closes
+    d0  >  gapContactD0max  in  body).  No  RH  claim.  -/
+theorem rh_program78_stripfront_mach_unifiedGapContact_PT2 (q : ZeroSet)
+    (hzF : Z78GapContact.externalZeroFree78GapContact)
     (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
     (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) → (|ρ.im| : ℝ) <
       (707 : ℝ) / 50 → ρ.re = 1 / 2)
     (Qside : ℝ × ℝ → ℝ)
     (hPT2 : WinC.allOnLineUpTo q WinC.tPT2)
     (hOffCPT2 : ∀ (t0 d0 : ℝ), WinC.tPT2 ≤ t0 → 0 < d0 →
-      d0 ≤ Z78PosReserve.posReserveD0max → ¬ offPair q t0 d0) :
+      d0 ≤ Z78GapContact.gapContactD0max → ¬ offPair q t0 d0) :
     RH q :=
-  rh_program78_stripfront_mach_unifiedPosReserve q hzF hqz honline Qside
+  rh_program78_stripfront_mach_unifiedGapContact q hzF hqz honline Qside
     WinC.tPT2 (by norm_num [WinC.tPT2]) hPT2 hOffCPT2
 
-/--  B22.4  THE  0142  GA  O  ENDPOINT  AS  A  THEOREM  OF  THE
-    [Z78PosReserve]  ENDPOINT  (in  body):  given  the  [Z78PosReserve]
+/--  B23.4  THE  0142  GA  O  ENDPOINT  AS  A  THEOREM  OF  THE
+    [Z78GapContact]  ENDPOINT  (in  body):  given  the  [Z78GapContact]
     input  and  its  terminal  face  hOffC  on  0  <  d0  <=
-    posReserveD0max,  the  older  five-step-form  endpoint  follows
+    gapContactD0max,  the  older  five-step-form  endpoint  follows
     --  the  gao  face  (0  <  d0  <=  gaoD0max)  splits  into
-    the  posReserveD0max  half  (the  hOffC  face)  and  the  slice
-    (posReserveD0max,  gaoD0max]  (closed  in  body  from
-    [Z78PosReserve]).  The  0142  terminal  statement  is  thus  a
+    the  gapContactD0max  half  (the  hOffC  face)  and  the  slice
+    (gapContactD0max,  gaoD0max]  (closed  in  body  from
+    [Z78GapContact]).  The  0142  terminal  statement  is  thus  a
     THEOREM  of  the  B19  one.  No  RH  claim.  -/
-theorem rh_program78_stripfront_mach_unifiedGao_ofPosReserve (q : ZeroSet)
-    (hzF : Z78PosReserve.externalZeroFree78PosReserve)
+theorem rh_program78_stripfront_mach_unifiedGao_ofGapContact (q : ZeroSet)
+    (hzF : Z78GapContact.externalZeroFree78GapContact)
     (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
     (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) → (|ρ.im| : ℝ) <
       (707 : ℝ) / 50 → ρ.re = 1 / 2)
@@ -3681,32 +3679,32 @@ theorem rh_program78_stripfront_mach_unifiedGao_ofPosReserve (q : ZeroSet)
     (H : ℝ) (hH : 1000 ≤ H)
     (hPT : WinC.allOnLineUpTo q H)
     (hOffC : ∀ (t0 d0 : ℝ), H ≤ t0 → 0 < d0 →
-      d0 ≤ Z78PosReserve.posReserveD0max → ¬ offPair q t0 d0) :
+      d0 ≤ Z78GapContact.gapContactD0max → ¬ offPair q t0 d0) :
     RH q := by
   have hzG : Z78Gao.externalZeroFree78Gao :=
-    Z78PosReserve.extPosReserve_implies_extGao hzF
+    Z78GapContact.extGapContact_implies_extGao hzF
   apply rh_program78_stripfront_mach_unifiedGao q hzG hqz
     honline Qside H hH hPT
   intro t0 d0 ht0 hd0 hd0G hp
-  by_cases hleC : d0 ≤ Z78PosReserve.posReserveD0max
+  by_cases hleC : d0 ≤ Z78GapContact.gapContactD0max
   · exact False.elim ((hOffC t0 d0 ht0 hd0 hleC) hp)
-  · exact False.elim (rhend_slicePosReserveExcl q hzF hqz t0 d0
+  · exact False.elim (rhend_sliceGapContactExcl q hzF hqz t0 d0
       (by linarith [ht0, hH]) hd0 (not_le.mp hleC) hp)
 
-/--  B22.5  THE  [Z-PT2]  INSTANCE  OF  B22.4  (the  0142
+/--  B23.5  THE  [Z-PT2]  INSTANCE  OF  B23.4  (the  0142
     terminal  statement  at  tPT2  is  a  theorem  of  the  B19
     endpoint  with  the  [Z-PT2]  record).  No  RH  claim.  -/
-theorem rh_program78_stripfront_mach_unifiedGao_PT2_ofPosReserve (q : ZeroSet)
-    (hzF : Z78PosReserve.externalZeroFree78PosReserve)
+theorem rh_program78_stripfront_mach_unifiedGao_PT2_ofGapContact (q : ZeroSet)
+    (hzF : Z78GapContact.externalZeroFree78GapContact)
     (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
     (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) → (|ρ.im| : ℝ) <
       (707 : ℝ) / 50 → ρ.re = 1 / 2)
     (Qside : ℝ × ℝ → ℝ)
     (hPT2 : WinC.allOnLineUpTo q WinC.tPT2)
     (hOffCPT2 : ∀ (t0 d0 : ℝ), WinC.tPT2 ≤ t0 → 0 < d0 →
-      d0 ≤ Z78PosReserve.posReserveD0max → ¬ offPair q t0 d0) :
+      d0 ≤ Z78GapContact.gapContactD0max → ¬ offPair q t0 d0) :
     RH q :=
-  rh_program78_stripfront_mach_unifiedGao_ofPosReserve q hzF hqz
+  rh_program78_stripfront_mach_unifiedGao_ofGapContact q hzF hqz
     honline Qside WinC.tPT2 (by norm_num [WinC.tPT2]) hPT2
     hOffCPT2
 

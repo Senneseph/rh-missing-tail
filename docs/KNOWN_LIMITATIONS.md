@@ -432,14 +432,33 @@ the machine wire and names the residue:
      (1.7e-4, 1.8e-4), as exact Q statements), and the strict
      product lemma (t4LD_productStrict: the measured joint count
      of 0 points carries a strict margin, not a knife touch). Full
-     tree green (17454 jobs), no RH claim. The terminal endpoint (RHEnd.lean,
-     rh_program78_stripfront_mach_unifiedPosReserve_PT2) stands on
-     exactly three external records: [Z78] (hzF, theta =
-     0.8733819666133; B6 pre-stage awaiting PR #101 at
-     0.87338196661320752, 0248), [Z-PT2] (hPT2, on-line up to tPT2),
-     and hOffCPT2 (no off-pair on [tPT2, inf) x
-     (0, 0.3733819666133]). No analytic face remains in the tree;
-     no RH claim.
+     tree green (17454 jobs), no RH claim. STATUS NOTE (0254,
+     2026-11-01): the [Z78] record layer ADVANCED: board record
+     `positive-gap-contact-return` (PR #101, Joseph Bebel) MERGED
+     2026-11-01T09:53:34Z (merge d4fba59d) at the exact rational
+     5458637291332547/6250000000000000 = 0.87338196661320752
+     (9.248e-14 below the EIGHTH anchor - the smallest single
+     in-tree face step of the B-series, 578/6250000000000000);
+     fire-time replay clean (stage C 235/235 kernel-clean against
+     the frozen EIGHTH olean root: 182 cone modules byte-identical
+     vs EIGHTH src, 0 differs, 53 new; stage D: canonical compile,
+     axioms = standard class only [propext, Classical.choice,
+     Quot.sound], zeta-consequence (q=1) at the exact rational,
+     static sweep 0 sorry / 0 admit / 0 axiom decls / 0
+     native_decide); in-tree successor B23
+     (`formal/RhAttack/Z78GapContact.lean`, 5 theorems, terminal
+     endpoint `rh_program78_stripfront_mach_unifiedGapContact_PT2`),
+     full tree green (17454 jobs); the EIGHTH module/b22 lineage
+     remain in the tree as predecessor refs by the in-place
+     supersession convention. The terminal endpoint (RHEnd.lean,
+     rh_program78_stripfront_mach_unifiedGapContact_PT2) stands on
+     exactly three external records: [Z78GapContact] (hzF, theta =
+     0.87338196661320752, MERGED d4fba59d; its record description
+     notes the return sits within 7.1e-20 of the method-limiting
+     contact (777 - sqrt(1081))/852), [Z-PT2] (hPT2, on-line up to
+     tPT2), and hOffCPT2 (no off-pair on [tPT2, inf) x
+     (0, 0.37338196661320752]). No analytic face remains in the
+     tree; no RH claim.
 
 Consequently the endpoint residual at tPT2 is again FOUR named
 faces, of which exactly one is analytic content inside the tree:
