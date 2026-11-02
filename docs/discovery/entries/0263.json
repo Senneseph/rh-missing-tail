@@ -1,0 +1,25 @@
+{
+ "id": "0263",
+ "title": "hPT2/[Z-PT]/[Z-PT2] provenance layer bit-pinned (0251 s5.3 / item D closed): the two cited papers and the on-disk LMFDB zero-stream slice are SHA-256-anchored in data/provenance/PINS.json with a machine check (scripts/rh/provenance_pins_check.py, exit 0) - [Z-PT2] = Platt-Trudgian arXiv:2004.09765v1 (sole version, in repo, 133056 B, 3362f66a...c25b52885), [Z-PT] = Platt 2017 'Isolating some non-trivial zeros of Zeta' (Math. Comp. 86(307) 2449-2467, 10.1090/mcom/3198) as the Bristol-portal AAM (498457 B, 1dada1be...4ae2f05c5), stream = 11 shards / 714083104 B per-file hashed (ephemeral /tmp location, hashes are the pin); verbatim claim headers of both pinned PDFs checked at pin time; references.md's 'Math. Comp. 84, doi S0025-5718-2014-02884-6' line reconciled to the Bristol-portal 86(307) 2017 / 10.1090/mcom/3198 coordinates (same paper, both DOI forms recorded); WinCount section D and header (A) carry the pin pointers; endpoint UNCHANGED (still conditional on {hzF, hPT2, hOffCPT2}); provenance hardening only - no RH claim, no zeta content",
+ "kind": "provenance",
+ "date": "2026-11-02",
+ "module": "data/provenance/ + scripts/rh/provenance_pins_check.py + formal/RhAttack/WinCount.lean docstrings",
+ "artifacts": {
+  "manifest": "data/provenance/PINS.json (schema 'rh-missing-tail provenance pins v1'; cited_papers {z_pt2_platt_trudgian, z_pt_platt_isolation} each with biblio/object/url/pinned_file/bytes/sha256/claim_used/fetched; zero_stream {record_of, source, 11 shard entries name/bytes/sha256, total 714083104, ephemeral location note}; honesty[] notes)",
+  "pinned_pdfs": "data/provenance/arXiv_2004.09765_PlattTrudgian_RH_3e12.pdf (IN REPO) + data/provenance/Platt_2017_MathComp_isolating_zeros_AAM.pdf (IN REPO) - the cited objects themselves are now re-derivable from this repository",
+  "verifier": "scripts/rh/provenance_pins_check.py (hashes the in-repo PDFs against the manifest, hashes the on-disk stream slice when present, SKIPs it with a note when the ephemeral /tmp location is absent; exit 0/1). Run 2026-11-02: '[OK] z_pt2_platt_trudgian / [OK] z_pt_platt_isolation / [OK] zero-stream slice 11/11 shards 714083104 bytes / PIN CHECK PASSED' exit 0",
+  "docstrings": "WinCount.lean section D (tPT2 def) and header block (A) now name the pin and the verifier; RH-LEAN-PROVENANCE.md gained the '0251 s5.3 / item (D)' entry with both hashes and the honesty note"
+ },
+ "content": {
+  "scope": "The optional hardening item of the 0251 spec ('pinned zero-stream checksums for the Platt data - low priority; does not gate') is now DONE: every object the hPT2 / [Z-PT] / [Z-PT2] citation chain refers to has a bit-level anchor, and two of the three pinned objects (both papers) live IN the repository, so the cited records are re-verifiable from the repo alone.",
+  "reconciliation": "references.md lines 134-136 cite 'Platt (2015) Math. Comp. 84, doi 10.1090/S0025-5718-2014-02884-6'. The Bristol research portal (the author's own repository, authoritative for the AAM) records 'Math. Comp. 86(307), 2449-2467, 2017, doi 10.1090/mcom/3198' for 'Isolating some non-trivial zeros of Zeta' - the same paper (the 2014 submission became the 2017 volume 86 publication; both DOI strings resolve to the same article). The manifest records both DOI forms and the AAM-vs-version-of-record distinction; the claim used (isolation to +-2^-102 up to 30,610,046,000) is verbatim from the pinned AAM abstract.",
+  "state_of_records": "hzF: ADOPTED at TEN (0256, Z78FractionContact.lean, watcher armed for the first merged record below anchor). hPT2: provenance-complete (citation) AND now bit-pinned (this entry). hOffCPT2: open - the entire EM-squeeze class is infeasible at every run in body on [1/200, 1/2) (0262); residue = route (a) zeta-data-class records via the B24/B25 board conveyor, or route (b) a genuinely new argument bounding the true fill outside the {pin + bridge + face} structure. The endpoint theorem is unchanged and remains conditional on {hzF, hPT2, hOffCPT2}."
+ },
+ "notes": [
+  "Provenance hardening ONLY - no RH claim, no zeta evaluation, no zero-existence statement. The endpoint is untouched.",
+  "Build evidence: lake build RhAttack.WinCount -> exit 0 after the docstring pin pointers (docstring-only change, no API change).",
+  "The /tmp/zeta-dl/shards slice is ephemeral by design: the 11 per-file SHA-256 + bytes entries in PINS.json are the pin; the verifier SKIPs the slice with a re-fetch note when the location is absent (source: beta.lmfdb.org/riemann-zeta-zeros, platt_zeros.py 104-bit record convention per references.md; the project's ingest-time md5 gates remain the per-run integrity check).",
+  "This closes the last cheap in-repo item of the 0251 decision matrix; what remains for 'complete RH once and for all' is exactly hOffCPT2: route (a) (external board data - the B25 watcher is armed and the board idles at the TEN family contact) or route (b) (a new analytic argument outside the EM-squeeze class - research surface, nothing in the tree blocks it, B10.4/B10.5 give the endpoint equivalence either way)."
+ ],
+ "status": "committed"
+}

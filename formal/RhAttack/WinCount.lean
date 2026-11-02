@@ -32,6 +32,9 @@ the equivalence of that face to zero-exclusion on [1000, inf) x
               tree pins the RECORD'S OWN frontier.
        [Z-PT] is a cited fact about the ACTUAL zero set;  the theorems
        are conditional on it as a named hypothesis.  No RH claim.
+       BIT-PINNED 2026-11-02 (0263):  the Platt 2017 paper (AAM) and the
+       LMFDB zero-stream slice are SHA-256-anchored in
+       data/provenance/PINS.json (verifier: scripts/rh/provenance_pins_check.py).
 
   (B)  THE 3e9 RECORD SHADOW  (a measured constraint,  the MFar /
        B7Far pattern):  the H1 3e9 stream record (day035 ceiling
@@ -534,7 +537,11 @@ theorem rvmGateDischarged (q : ZeroSet)
     3,000,175,332,800  -  the  lowest  12,363,153,437,138
     non-trivial  zeros  have  Re  =  1/2  (rigorous  interval
     arithmetic;  independently  verifies  the  Platt  tPT
-    record).  Cited  like  [Z-PT].  -/
+    record).  Cited  like  [Z-PT].  BIT-PINNED  2026-11-02 (0263):
+    arXiv:2004.09765v1 (sole version) SHA-256-anchored in
+    data/provenance/PINS.json;  the  pinned  PDF  is  in  repo  at
+    data/provenance/arXiv_2004.09765_PlattTrudgian_RH_3e12.pdf.
+    -/
 noncomputable def tPT2 : ℝ := 3000175332800
 
 /--  THE  FRONTIER  ORDER:  the  record  frontier  is  strictly

@@ -14,7 +14,7 @@ exactly three external records:
 | record | obligation | status |
 |---|---|---|
 | `[Z78]` (hzF) | zero-free half-plane θ | **TEN in tree (0256)**: `closest-fraction-contact` at the exact 127/127-digit rational ≈ 0.8733819666132075199290267786... (PR #103 MERGED 2026-11-01T12:23:55Z, stage C 236/236 replay clean, B24 in-tree); NINE/EIGHTH survive as predecessor refs. Board idle below TEN (runner-up T + 9.732e-22, weaker) — the record family is at its method contact (777 − √1081)/852 |
-| `[Z-PT2]` (hPT2) | on-line data up to tPT2 = 3,000,175,332,800 | **provenance-complete**: Platt isolation record (tPT2 is Platt's exact isolation frontier, `WinCount.lean` L538) + Platt–Trudgian arXiv:2004.09765 independent verification (12,363,153,437,138 zeros, interval arithmetic), cited in tree (`WinCount.lean` section D, Z78 pattern). Coverage = [0, tPT2] exactly — no gap. |
+| `[Z-PT2]` (hPT2) | on-line data up to tPT2 = 3,000,175,332,800 | **provenance-complete AND BIT-PINNED (0263)**: Platt isolation record (tPT2 is Platt's exact isolation frontier, `WinCount.lean` L538) + Platt–Trudgian arXiv:2004.09765 independent verification (12,363,153,437,138 zeros, interval arithmetic), cited in tree (`WinCount.lean` section D, Z78 pattern); both cited papers now SHA-256-anchored in `data/provenance/PINS.json` (P-T arXiv v1 + Platt 2017 AAM in repo; LMFDB stream slice 11 shards pinned; verifier `scripts/rh/provenance_pins_check.py` exit 0). Coverage = [0, tPT2] exactly — no gap. |
 | `hOffCPT2` | no off-pair on [tPT2, ∞) × (0, posReserveD0max] | the TERMINAL FACE (0251 §4) |
 
 hPT2/honline/hqz/Qside: no gating work. hzF: at the family contact (conveyor ready for the next MERGED record below TEN).
@@ -199,8 +199,8 @@ CRT-verified margins (worst re-issued piece: mnew 0.50265809882 vs the ledger
 | (A) wait for a new BOARD merge below TEN | 0 (watcher alive) | hzF face −δθ per weaker MERGED record (B25 fires one-shot); board idle at the family contact as of 0256 |
 | (B) 3e10 re-issue fleet | 1–1.5 days local | integrity loop only (forensics closure); no gating |
 | (C) in-house 3e12 run | 100–150 fleet-days (cloud) | none (citation already covers [0, tPT2]) |
-| (D) Platt checksum pinning | hours | provenance hardening |
-| (E) open-question pursuit (1)–(3) | research scale | the only non-board paths to hOffCPT2 |
+| (D) Platt checksum pinning | hours | provenance hardening | **CLOSED 0263**: cited papers + stream slice SHA-256-pinned (data/provenance/PINS.json, verifier exit 0) |
+| (E) open-question pursuit (1) decoupled-run variant — CLOSED 0260/0261 (S3-leg infeasible at Noff, in body); (2) asymmetric EM families — RESOLVED BY 0262 (any instance reusing the {pin+bridge+face} cycle at a run is killed in body; a surviving one must bound the true fill without the pin on that run); (3) genuinely new argument outside the squeeze class — OPEN (research) | research scale | the only non-board path to hOffCPT2 |
 
 ## 4. Honesty boundary
 

@@ -1,0 +1,56 @@
+{
+ "schema": "rh-missing-tail provenance pins v1",
+ "pinned": "2026-11-02",
+ "purpose": "0251 spec section 5.3 / FRONTIER item (D): pinned zero-stream + cited-record checksums for the hPT2 / [Z-PT] / [Z-PT2] provenance layer. Bit-anchors the exact objects the in-tree citations refer to, so the citation chain [Z-PT] (Platt isolation) + [Z-PT2] (Platt-Trudgian Theorem 1) is verifiable against immutable artifacts. Provenance hardening only - does not gate the endpoint, adds no RH claim, no zeta content in the pinned objects beyond what the papers and stream already assert.",
+ "verifier": "scripts/rh/provenance_pins_check.py",
+ "cited_papers": {
+  "z_pt2_platt_trudgian": {
+   "cited_as": "[Z-PT2]  (WinCount.lean section D, tPT2 = 3000175332800; RHEnd part B6)",
+   "biblio": "Platt, D., Trudgian, T., 'The Riemann hypothesis is true up to 3x10^12', J. Number Theory 147 (2015) 842-851 (preprint arXiv:2004.09765)",
+   "object": "arXiv:2004.09765v1 [math.NT], 21 Apr 2020 (sole version) - the preprint of the cited journal paper",
+   "url": "https://arxiv.org/pdf/2004.09765",
+   "pinned_file": "data/provenance/arXiv_2004.09765_PlattTrudgian_RH_3e12.pdf",
+   "bytes": 133056,
+   "sha256": "3362f66af9fa9373977eee70e2282ec33989d5d8b97e0852df9e32cc25b52885",
+   "claim_used": "Theorem 1: all zeros beta + i gamma with 0 < gamma <= 3x10^12 have beta = 1/2 (rigorous interval arithmetic); 12,363,153,437,138 lowest non-trivial zeros on the line; independently verifies the Platt tPT isolation. Verbatim header of the pinned PDF checked at pin time.",
+   "fetched": "2026-11-02"
+  },
+  "z_pt_platt_isolation": {
+   "cited_as": "[Z-PT]  (WinCount.lean header (A), tPT = 30610046000)",
+   "biblio": "Platt, D. J., 'Isolating some non-trivial zeros of Zeta', Math. Comp. 86(307) (2017) 2449-2467, doi 10.1090/mcom/3198 (the references.md line 134-136 citation 'Math. Comp. 84, doi 10.1090/S0025-5718-2014-02884-6' is the same paper's old-style DOI form; the Bristol portal records 86(307), 2017, 10.1090/mcom/3198)",
+   "object": "author accepted manuscript (AAM) as served by the University of Bristol research portal (10 pages: 1 portal cover page + 9 paper pages); the version of record is the AMS-published 86(307) 2449-2467 behind the AMS paywall",
+   "url": "https://research-information.bris.ac.uk/ws/files/78836669/platt_zeta_submitted.pdf",
+   "pinned_file": "data/provenance/Platt_2017_MathComp_isolating_zeros_AAM.pdf",
+   "bytes": 498457,
+   "sha256": "1dada1be00d87af8dcd45f9696e2d910ba594b21363873a106075d44ae2f05c5",
+   "claim_used": "Interval-arithmetic isolation of every non-trivial zero with 0 < Im <= 30,610,046,000 to +- 2^-102, an independent verification of the line to that height (verbatim abstract of the pinned PDF checked at pin time).",
+   "fetched": "2026-11-02"
+  }
+ },
+ "zero_stream": {
+  "record_of": "the LMFDB public zeta-zero stream referenced in [Z-PT] ('the public LMFDB zeta-zero stream - the source of the project's own 24b series - ends at exactly this height', WinCount.lean header (A)) and in references.md (beta.lmfdb.org/riemann-zeta-zeros, 12,857 shards from the 3x10^9 frontier toward 3x10^10, 104-bit record format per the LMFDB repository's platt_zeros.py, md5-gated ingest)",
+  "pinned_slice": "the 11-shard on-disk slice used by the project (item 4.3 LMFDB shard stream, discovery series 0110-0120 era), stored at /tmp/zeta-dl/shards/ (ephemeral location - the hashes below are the pin; the slice re-fetches from the LMFDB source)",
+  "source": "beta.lmfdb.org/riemann-zeta-zeros (raw zero files, platt_zeros.py 104-bit record convention per references.md)",
+  "shards": [
+   {"name": "zeros_8846000.dat",  "bytes": 62024952, "sha256": "a3f3dd838cc50b451852cf81862e604c85927378a2fd89a9fc3736c3dbd4cb98"},
+   {"name": "zeros_10946000.dat", "bytes": 62863725, "sha256": "61caaf9cb2323154aec10e97edcd26ab3aa8e150b733534dca5371007c098532"},
+   {"name": "zeros_13046000.dat", "bytes": 63566244, "sha256": "a15a4ed06705d036952d97dc1acb0cea0956ecdb4a4d8a91a4633e24d29368de"},
+   {"name": "zeros_15146000.dat", "bytes": 64170537, "sha256": "f045a46b258a25d12cab78c816e48d0305fbbb16118ab8c9137e829395edae76"},
+   {"name": "zeros_17246000.dat", "bytes": 64700937, "sha256": "6bef2be9aedc9f7f30289f63a8cc16327ba510216168b6f7223dcb15035b112d"},
+   {"name": "zeros_19346000.dat", "bytes": 65173500, "sha256": "b0a7eb6d810aeaa660b70816cae2255d8d9b522b29ca7f7516d05805ee4bb406"},
+   {"name": "zeros_21446000.dat", "bytes": 65599672, "sha256": "664fa86b5dae489e9fc44c8443eea7bb812b17520fcae5faf2ffc589b46b286f"},
+   {"name": "zeros_23546000.dat", "bytes": 65987651, "sha256": "3d3fdd3e2142d13e38217a46b45dd4b490e532118750332102e709a6d03ffc8d"},
+   {"name": "zeros_25646000.dat", "bytes": 66343896, "sha256": "bf3037c59386dc3e7a6caedc9c006611fcb3ba165f88a98fac40940e705d50c8"},
+   {"name": "zeros_27746000.dat", "bytes": 66673011, "sha256": "3d99cf2ecff90b451006f673be8f34f1053370d0f7fa92a9b618295e27353e52"},
+   {"name": "zeros_29846000.dat", "bytes": 66978979, "sha256": "922adf144ab3cfe24f6411fcd32e8ee8a066742025dc8bc92d20b8d5400ea5c9"}
+  ],
+  "total_bytes": 714083104,
+  "shard_directory": "/tmp/zeta-dl/shards  (ephemeral; hashes are the pin)"
+ },
+ "honesty": [
+  "No RH claim: these pins anchor the provenance of CITED records ([Z-PT], [Z-PT2], the LMFDB stream). The endpoint stays conditional; hOffCPT2 stays open (0261/0262).",
+  "The Platt 2017 pin is the AAM, not the AMS version of record - the version-of-record coordinates (86(307), 2449-2467, 10.1090/mcom/3198) are recorded beside it; the two differ in the journal's production typography, not in the theorem content claimed here.",
+  "The zero-stream pin covers the on-disk project slice (11 shards, ~682 MB), not the full 12,857-shard public stream; the full-stream claim of [Z-PT] rests on the Platt 2017 paper (pinned) plus the LMFDB database as public witness (URL recorded).",
+  "The project's own ingest-time md5 gates on the LMFDB shards (references.md) remain the per-run integrity check; this pin is the cross-run, cross-machine bit anchor."
+ ]
+}

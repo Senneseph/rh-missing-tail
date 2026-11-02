@@ -231,6 +231,42 @@ Gaussian-window results (typical scale sqrt(loglog t)); and the 2024–2026
 follow-ups carrying the same normalization (2407.14867, 2505.23573,
 2511.18275, 2507.04150, 2510.14309).
 
+## 0251 §5.3 / item (D) — pinned provenance objects (2026-11-02, 0263)
+
+The hPT2 / [Z-PT] / [Z-PT2] citation chain now has BIT-LEVEL
+anchors: the exact objects the in-tree citations refer to are
+pinned by SHA-256 in `data/provenance/PINS.json`, verified by
+`scripts/rh/provenance_pins_check.py` (exit 0 on 2026-11-02):
+
+- **[Z-PT2]** Platt–Trudgian, "The Riemann hypothesis is true
+  up to 3×10^12" — pinned as arXiv:2004.09765v1 [math.NT] (sole
+  version, 21 Apr 2020), 133056 bytes, sha256
+  `3362f66af9fa9373977eee70e2282ec33989d5d8b97e0852df9e32cc25b52885`,
+  in repo at `data/provenance/arXiv_2004.09765_PlattTrudgian_RH_3e12.pdf`
+  (verbatim header checked: Theorem 1 claim, 12,363,153,437,138
+  zeros, 3·10^12).
+- **[Z-PT]** Platt, "Isolating some non-trivial zeros of Zeta",
+  Math. Comp. 86(307) (2017) 2449–2467, 10.1090/mcom/3198 —
+  pinned as the author-accepted manuscript served by the University
+  of Bristol research portal, 498457 bytes, sha256
+  `1dada1be00d87af8dcd45f9696e2d910ba594b21363873a106075d44ae2f05c5`,
+  in repo at `data/provenance/Platt_2017_MathComp_isolating_zeros_AAM.pdf`
+  (verbatim abstract checked: isolation to ±2^-102, 0 < Im ≤
+  30,610,046,000). The references.md line cites the same paper in
+  old-style DOI form (S0025-5718-2014-02884-6, "Math. Comp. 84");
+  the Bristol portal records 86(307), 2017 — same paper, both DOI
+  forms recorded in the manifest.
+- **LMFDB zero stream** (the public stream named in [Z-PT]): the
+  11-shard on-disk project slice at `/tmp/zeta-dl/shards`
+  (ephemeral) — 11 files, 714083104 bytes total, per-file SHA-256
+  in the manifest; source beta.lmfdb.org/riemann-zeta-zeros
+  (platt_zeros.py 104-bit record convention per references.md;
+  the project's own ingest-time md5 gates remain the per-run check).
+
+Honesty: provenance hardening only — the endpoint stays
+conditional, hOffCPT2 stays open (0261/0262), no RH claim, no
+zeta content beyond the cited records themselves.
+
 ## Build
 
     cd formal/                  # or through the working-tree symlink
