@@ -119,11 +119,19 @@ CRT-verified margins (worst re-issued piece: mnew 0.50265809882 vs the ledger
    at the run), (ii) the NAMED S3 face at the pair, (iii) the MEASURED
    PIN (wallLo > own; day061: 2.0000 uniform, worst 1.999999; coarse
    ceiling pin >= 1.419123). The S1 side of the terminal squeeze leaves
-   the named-face set; the face residue is now {S3 face} + {cited A2c
-   bridge} + {T4OffLE.pin}. `T4OffLE.pin` - the worst-point in-body
-   norm_num form of (iii) - is the named next fire (no scale blocker:
-   certificate terms at 3.1e-46, 0257). hOffCPT2 stays open; this is a
-   support-face narrowing record, not an RH claim.
+   the named-face set. **DISCHARGED 0259 (T4OffLF landed, build green
+   17454 jobs, zero warnings): the measured pin is now an IN-BODY
+   closed-form inequality on the whole band (1000 <= t, 1/200 <= d0 <
+   1/2), at EVERY run N in [nIdeal, 2 nIdeal], in particular N = Noff -
+   the bound chain T1b - T2b - T3b >= A (2^(101/200) - 1.03^-8 -
+   1.23^-9) > A (1 + 2^-24) (1 + 10^-6) >= own, strict step 2^(101/200)
+   > 1001/1000 in exact rationals (norm_num), worst margin ratio 1.4191
+   at (1000, 1/200) (day062, dps 62, every step a Lean lemma).**
+   `T4OffLF.squeeze_discharged` runs the squeeze on the band from the
+   two external faces alone; the face residue is now {S3 face} + {cited
+   A2c bridge}. hOffCPT2 stays open; this is a support-face narrowing
+   record, not an RH claim. The next named fire is the S3 face itself
+   (or a frontier-extension board record under the B25 watch).
 3. **Frontier extension (0126 route A, B6-board family).** An external
    record family that extends the certified on-line frontier past tPT2
    (new isolation record beyond Platt) would re-label the face to a higher

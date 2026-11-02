@@ -1,0 +1,26 @@
+{
+ "id": "0259",
+ "title": "T4OffLF landed: the in-body pin - wallLo(Noff) > ||poff t d0 t|| on the whole band with NO measured datum (day062 chain: T1b - T2b - T3b >= A (2^(101/200) - 1.03^-8 - 1.23^-9) > A (1 + 1/(16.t^2)_worst) (1 + exp tail) >= own; strict step 2^(101/200) > 1001/1000 in exact rationals); squeeze_discharged runs the terminal squeeze on the band from the cited A2c bridge + the named S3 face alone; the hOffCPT2 support face is now exactly {S3 face, cited bridge}",
+ "kind": "formal-unit",
+ "date": "2026-11-02",
+ "module": "formal/RhAttack/T4OffLF.lean",
+ "artifacts": {
+  "module": "formal/RhAttack/T4OffLF.lean (11 theorems: T4OffLF.tinv2, nIdeal_pow_sig, nIdeal_inv_cap, ownCap, t2cap, t2bLead, t3cap, t3bLead, t5strict, pin, squeeze_discharged)",
+  "measurement_source": "scripts/rh/day062_t4offlf_pin_check.py (Python-first cross-check of the exact Lean bound chain; worst L0b/own = 1.4191226467 at (t, d0) = (1000, 1/200); L0b = 4 d0^2 t^-2 2^(1/2+d0) - T2b - T3b with T2b = sqrt(t^2+1/4)/12 * 4096 d0^6 t^-6, T3b = (sqrt3/216) cK 1048576 d0^10 t^-7/(sigma+2), cK = (1001/1000)(501/500)^2, ownU = 4 d0^2 t^-2 (1 + d0^2/(4 t^2)) exp(1/t^2))",
+  "context": "0258 (T4OffLE: in-body EM-kernel floor at every run + decoupled-run squeeze - the pin premise hpin was the measured residue); 0257 (Q2 re-scope, cert/devProg 3.1e-46); 0252/0253 (single-C knife edge); 058e (C > 5000 threshold, the family this pin CARRIES where 5001 does not)"
+ },
+ "content": {
+  "s0_s1_knifeedge": "T1b = (1/2) nIdeal^-(1/2-d0) (t^2+1/4)^((1/2-d0)/2) nIdeal^(-1/2) >= (16 d0^2 t^-2) 2^(1/2+d0) (t^2+1/4)^(-1/4) >= (16 d0^2 t^-2) 2^(1/2+d0) (1/16000000)... the exact closed form of T4OffLE.nIdeal (S0, T4OffLF.tinv2, nIdeal_pow_sig, nIdeal_inv_cap - the norm-num-strict t^-inverse lemmas).",
+  "s2_s3_caps": "t2cap/t3cap at EVERY run N >= nIdeal (the free-run content of 0258): (||s||/12) N^-(3/2-d0) <= T2b(t,d0) = exact wall T2 at the ideal run; the T3 cap by the same recursion (t3cap, n^-1/2 <= (t+2) term, N^-(sigma+2) <= nIdeal^-(sigma+2)).",
+  "s4_own": "ownCap: ||poff t d0 t|| = S4O.mown t d0 (S4O.hMownScale = 1 + d0^2/(4 t^2) in body) <= 4 d0^2 t^-2 (1 + 1/16000000) exp(1/t^2); the exp tail pinned by the tsum tail <= r^2/(2(1-r)) at r <= 1e-6.",
+  "s5_pin": "t2bLead <= A 1.03^-8, t3bLead <= A 1.23^-9 (the 1.03/1.23 are the (1.001, 1.002)-type band-corner constants of the wall's own T2/T3 bounds), strict gap 2^(101/200) > 1.001 + 1.03^-8 + 1.23^-9 (norm_num on exact rationals) => pin: wallLo t d0 (Noff t d0) > ||poff t d0 t|| on 1000 <= t, 1/200 <= d0 < 1/2 - NO HYPOTHESIS DATA AT ALL.",
+  "s6_discharge": "squeeze_discharged: t >= tPT2, band d0, N = Noff - given ONLY (i) the cited A2c bridge (fill = ||kernel|| at the run) and (ii) the named S3 face (fill <= S4A.BwireR + S4A.MrR) - the terminal squeeze closes (False), the pin premise being T4OffLF.pin in body."
+ },
+ "notes": [
+  "OFF-BOARD positive-dual margin record (the T4OffLB/LC/LD/LE class). NO RH claim anywhere in the module, this entry, or the doc update - the record narrows the hOffCPT2 support face and does nothing to the endpoint.",
+  "The pin CARRIES the S1 side for the whole decoupled family {C in (C*/2, C*)}, i.e. at every fill run in [nIdeal, 2 nIdeal) - the single-C 5001 family (058e) cannot (knife edge 0.9998 -> 1.79e-4, 0257).",
+  "Build evidence: lake build RhAttack.T4OffLF -> Build completed successfully (8741 jobs), zero errors, zero warnings on the module; lake build (full tree) -> Build completed successfully (17454 jobs). Probe files removed before commit.",
+  "Lean 4.33.1 lessons banked (see wiki observation): mul_le_mul argument order (h1, h2, 0<=c, 0<=b) with the b0 slot being the 4th; (1/n : R) literal casts vs nat-literal traps in by-positivity slots; != is not Lean (use !=); norm_num at h auto-closes and deletes falsified hypotheses; the extra-space linter fires on double-spaced theorem headers."
+ ],
+ "status": "committed"
+}
