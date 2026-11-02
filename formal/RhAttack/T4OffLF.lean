@@ -50,6 +50,7 @@ import  RhAttack.T4OffL
 import  RhAttack.Closure
 import  RhAttack.T4OffLE
 
+import  RhAttack.P8A2c
 open  Real
 
 --  the  atomic  constant  lines  (the  cK  product,  T3b,  the
@@ -1180,6 +1181,41 @@ theorem squeeze_discharged (t d0 : ℝ)
     exact  T4OffLE.t4LE_squeeze_decoupled  t  d0  (T4OffLE.Noff  t  d0)  ht
       hdlow  hdhigh  hNp  hbridge  hs3face
       (pin  t  d0  htp  hdlow  hdhigh)
+
+
+/-  S  S7  THE  DISCHARGED  SQUEEZE  WITH  THE  BRIDGE  FROM  BODY:
+    S6  with  the  cited  A2c  premise  replaced  by
+    a2c_sL_bridge  -  the  terminal  squeeze  at  Noff  now
+    stands  on  the  NAMED  S3  face  alone  (the  pin  in  body,  the
+    bridge  in  body).  No  RH  claim. -/
+theorem squeeze_discharged_inbody (t d0 : ℝ)
+    (ht : WinC.tPT2 <= t) (hdlow : (1 / 200 : ℝ) <= d0)
+    (hdhigh : d0 < (1 / 2 : ℝ))
+    (hs3face : ‖riemannZeta (t4l_sOffL t d0) -
+          (p4_P (T4OffLE.Noff t d0) (t4l_sOffL t d0) -
+          p4_I (T4OffLE.Noff t d0) (t4l_sOffL t d0))‖ <=
+          S4A.BwireR t d0 + S4A.MrR t d0) :
+    False :=
+  by
+    have hd0 : 0 < d0 := by linarith [hdlow]
+    have htp : (1000 : ℝ) <= t := by
+      have h : (1000 : ℝ) <= WinC.tPT2 := by
+        dsimp only [WinC.tPT2]
+        norm_num
+      linarith [ht]
+    have hN1 : (1 : ℝ) <= (T4OffLE.Noff t d0 : ℝ) :=
+      le_trans (T4OffLE.t4LE_nIdeal_ge t d0 htp hdlow hdhigh)
+        (T4OffLE.t4LE_ceil_bounds t d0 htp hdlow hdhigh).1
+    have hNz : T4OffLE.Noff t d0 ≠ 0 := by
+      intro hN0
+      rw [hN0] at hN1
+      have hbad : (1 : ℝ) <= (0 : ℝ) := by simpa using hN1
+      have hcon : (0 : ℝ) < 1 := by norm_num
+      exact lt_irrefl (0 : ℝ) (lt_of_lt_of_le hcon hbad)
+    have hNp : 0 < T4OffLE.Noff t d0 := Nat.pos_of_ne_zero hNz
+    have hbridge := a2c_sL_bridge t d0 htp hd0 hdhigh
+      (T4OffLE.Noff t d0) hNp
+    exact squeeze_discharged t d0 ht hdlow hdhigh hbridge hs3face
 
 end  T4OffLF
 

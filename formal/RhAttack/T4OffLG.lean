@@ -61,6 +61,7 @@ import  RhAttack.Closure
 import  RhAttack.T4OffLE
 import  RhAttack.T4OffLF
 
+import  RhAttack.P8A2c
 open  Real
 
 set_option  linter.style.longLine  false
@@ -138,5 +139,32 @@ theorem s3faceFalseAtNoff (t d0 : ℝ)
             hbridge
           _  >  S4A.BwireR  t  d0  +  S4A.MrR  t  d0  :=  hin
     exact  not_le_of_gt  hfill  hface
+
+
+/-  S  S3  THE  S3  FACE  IS  FALSE  AT  NOFF  -  BRIDGE  FROM
+    BODY:  s3faceFalseAtNoff  with  the  cited  A2c  premise
+    replaced  by  a2c_sL_bridge.  No  RH  claim. -/
+theorem s3faceFalseAtNoff_inbody (t d0 : ℝ)
+    (ht : 1000 <= t) (hdlow : (1 / 200 : ℝ) <= d0)
+    (hdhigh : d0 < (1 / 2 : ℝ)) :
+    ¬ ‖riemannZeta (t4l_sOffL t d0) -
+        (p4_P (T4OffLE.Noff t d0) (t4l_sOffL t d0) -
+        p4_I (T4OffLE.Noff t d0) (t4l_sOffL t d0))‖ <=
+        S4A.BwireR t d0 + S4A.MrR t d0 :=
+  by
+    have hd0 : 0 < d0 := by linarith [hdlow]
+    have hN1 : (1 : ℝ) <= (T4OffLE.Noff t d0 : ℝ) :=
+      le_trans (T4OffLE.t4LE_nIdeal_ge t d0 ht hdlow hdhigh)
+        (T4OffLE.t4LE_ceil_bounds t d0 ht hdlow hdhigh).1
+    have hNz : T4OffLE.Noff t d0 ≠ 0 := by
+      intro hN0
+      rw [hN0] at hN1
+      have hbad : (1 : ℝ) <= (0 : ℝ) := by simpa using hN1
+      have hcon : (0 : ℝ) < 1 := by norm_num
+      exact lt_irrefl (0 : ℝ) (lt_of_lt_of_le hcon hbad)
+    have hNp : 0 < T4OffLE.Noff t d0 := Nat.pos_of_ne_zero hNz
+    have hbridge := a2c_sL_bridge t d0 ht hd0 hdhigh
+      (T4OffLE.Noff t d0) hNp
+    exact s3faceFalseAtNoff t d0 ht hdlow hdhigh hbridge
 
 end  T4OffLG

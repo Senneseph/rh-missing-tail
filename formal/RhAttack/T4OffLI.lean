@@ -67,6 +67,7 @@ import  RhAttack.T4OffLE
 import  RhAttack.T4OffLF
 import  RhAttack.T4OffLG
 
+import  RhAttack.P8A2c
 open  Real
 
 set_option  linter.style.longLine  false
@@ -170,5 +171,78 @@ theorem noffS3faceImpossible (t d0 : ℝ)
     exact  squeezeNeverFires  t  d0  (T4OffLE.Noff  t  d0)  ht  hdlow
       hdhigh  hNp  hbridge  hface
       (T4OffLF.pin  t  d0  ht  hdlow  hdhigh)
+
+
+/-  S  S1'  IN-BODY  BRIDGE  VARIANT  (entry  0262  hardening):  S1
+    with  the  A2c  premise  supplied  by  a2c_sL_bridge  -  the
+    squeeze  now  stands  on  its  pin  premise  alone.  No  RH
+    claim. -/
+theorem  s1_fillAboveWire_inbody  (t  d0  :  ℝ)  (N  :  ℕ)
+    (ht  :  1000  <=  t)
+    (hdlow  :  (1  /  200  :  ℝ)  <=  d0)
+    (hdhigh  :  d0  <  (1  /  2  :  ℝ))
+    (HN  :  0  <  N)
+    (hpin  :  T4OffLE.wallLo  t  d0  N  >  ‖poff  t  d0  t‖)  :
+    ‖riemannZeta  (t4l_sOffL  t  d0)  -
+      (p4_P  N  (t4l_sOffL  t  d0)  -  p4_I  N  (t4l_sOffL  t  d0))‖  >
+      S4A.BwireR  t  d0  +  S4A.MrR  t  d0  :=
+  by
+    have  hd0  :  0  <  d0  :=  by  linarith  [hdlow]
+    have  hbridge  :=  a2c_sL_bridge  t  d0  ht  hd0  hdhigh  N  HN
+    exact  s1_fillAboveWire  t  d0  N  ht  hdlow  hdhigh  HN  hbridge
+      hpin
+
+/-  S  S2'  IN-BODY  BRIDGE  VARIANT:  the  squeeze's  premise  set
+    {A2c  bridge,  S3  face,  pin}  is  inconsistent  with  the
+    bridge  supplied  IN  BODY  -  0262  now  stands  on  the
+    squeeze's  own  two  face  premises  (S3  face  +  pin)  only:
+    the  EM-squeeze  class  is  infeasible  at  every  run  GIVEN
+    its  face  and  pin  premises  -  the  first  of  its  two
+    external  premises  is  now  a  theorem.  No  RH  claim. -/
+theorem  squeezeNeverFires_inbody  (t  d0  :  ℝ)  (N  :  ℕ)
+    (ht  :  1000  <=  t)
+    (hdlow  :  (1  /  200  :  ℝ)  <=  d0)
+    (hdhigh  :  d0  <  (1  /  2  :  ℝ))
+    (HN  :  0  <  N)
+    (hface  :  ‖riemannZeta  (t4l_sOffL  t  d0)  -
+          (p4_P  N  (t4l_sOffL  t  d0)  -  p4_I  N  (t4l_sOffL  t  d0))‖  <=
+          S4A.BwireR  t  d0  +  S4A.MrR  t  d0)
+    (hpin  :  T4OffLE.wallLo  t  d0  N  >  ‖poff  t  d0  t‖)  :
+    False  :=
+  by
+    have  hd0  :  0  <  d0  :=  by  linarith  [hdlow]
+    have  hbridge  :=  a2c_sL_bridge  t  d0  ht  hd0  hdhigh  N  HN
+    exact  squeezeNeverFires  t  d0  N  ht  hdlow  hdhigh  HN  hbridge
+      hface  hpin
+
+/-  S  S3'  IN-BODY  BRIDGE  VARIANT:  noffS3faceImpossible  with
+    the  A2c  premise  from  body  -  the  S3  face  of  the
+    decoupled  squeeze  is  impossible  at  Noff  from  the
+    squeeze's  own  structure  alone.  No  RH  claim. -/
+theorem  noffS3faceImpossible_inbody  (t  d0  :  ℝ)
+    (ht  :  1000  <=  t)
+    (hdlow  :  (1  /  200  :  ℝ)  <=  d0)
+    (hdhigh  :  d0  <  (1  /  2  :  ℝ))  :
+    ¬  ‖riemannZeta  (t4l_sOffL  t  d0)  -
+        (p4_P  (T4OffLE.Noff  t  d0)  (t4l_sOffL  t  d0)  -
+        p4_I  (T4OffLE.Noff  t  d0)  (t4l_sOffL  t  d0))‖  <=
+        S4A.BwireR  t  d0  +  S4A.MrR  t  d0  :=
+  by
+    have  hd0  :  0  <  d0  :=  by  linarith  [hdlow]
+    have  hN1  :  (1  :  ℝ)  <=  (T4OffLE.Noff  t  d0  :  ℝ)  :=
+      le_trans  (T4OffLE.t4LE_nIdeal_ge  t  d0  ht  hdlow  hdhigh)
+        (T4OffLE.t4LE_ceil_bounds  t  d0  ht  hdlow  hdhigh).1
+    have  hNz  :  T4OffLE.Noff  t  d0  ≠  0  :=
+      by
+        intro  hN0
+        rw  [hN0]  at  hN1
+        have  hbad  :  (1  :  ℝ)  <=  (0  :  ℝ)  :=  by  simpa  using  hN1
+        have  hcon  :  (0  :  ℝ)  <  1  :=  by  norm_num
+        exact  lt_irrefl  (0  :  ℝ)  (lt_of_lt_of_le  hcon  hbad)
+    have  hNp  :  0  <  T4OffLE.Noff  t  d0  :=
+      Nat.pos_of_ne_zero  hNz
+    have  hbridge  :=  a2c_sL_bridge  t  d0  ht  hd0  hdhigh
+      (T4OffLE.Noff  t  d0)  hNp
+    exact  noffS3faceImpossible  t  d0  ht  hdlow  hdhigh  hbridge
 
 end  T4OffLI

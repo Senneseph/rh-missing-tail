@@ -76,6 +76,7 @@ import  RhAttack.T4OffM
 import  RhAttack.T4OffL
 import  RhAttack.Closure
 
+import  RhAttack.P8A2c
 open  Real
 
 noncomputable  section
@@ -459,6 +460,32 @@ theorem t4LE_squeeze_decoupled (t d0 : ℝ) (N : ℕ)
       _ ≤ fill := hlo
       _ ≤ S4A.BwireR t d0 + S4A.MrR t d0 := hs3face
   exact lt_irrefl _ hchain
+
+
+/-  =================================================================
+   S  S6  THE  DECOUPLED  SQUEEZE  WITH  THE  BRIDGE  DISCHARGED
+   IN  BODY:  the  cited  A2c  premise  (hbridge)  is  replaced  by
+   a2c_sL_bridge  -  the  identity  theorem  on  the  pole-cut
+   half-plane  (P8A2c  U5/U6).  The  named  S3  face  and  the  pin
+   remain  the  squeeze's  own  premises.  No  RH  claim. -/
+theorem t4LE_squeeze_decoupled_inbody (t d0 : ℝ) (N : ℕ)
+    (ht : WinC.tPT2 ≤ t) (hdlow : (1 / 200 : ℝ) ≤ d0)
+    (hdhigh : d0 < (1 / 2 : ℝ)) (HN : 0 < N)
+    (hs3face : ‖riemannZeta (t4l_sOffL t d0) -
+              (p4_P N (t4l_sOffL t d0) - p4_I N (t4l_sOffL t d0))‖ ≤
+              S4A.BwireR t d0 + S4A.MrR t d0)
+    (hpin : wallLo t d0 N > ‖poff t d0 t‖) :
+    False := by
+  have hd0 : 0 < d0 := by linarith [hdlow]
+  have ht1000 : 1000 ≤ t := by
+    calc (1000 : ℝ) ≤ (10 : ℝ) ^ (10 : ℕ) := by norm_num
+      _ ≤ WinC.tPT2 := by
+          dsimp only [WinC.tPT2]
+          norm_num
+      _ ≤ t := ht
+  have hbridge := a2c_sL_bridge t d0 ht1000 hd0 hdhigh N HN
+  exact t4LE_squeeze_decoupled t d0 N ht hdlow hdhigh HN
+    hbridge hs3face hpin
 
 end  T4OffLE
 
