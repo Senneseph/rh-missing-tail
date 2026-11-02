@@ -132,6 +132,20 @@ CRT-verified margins (worst re-issued piece: mnew 0.50265809882 vs the ledger
    A2c bridge}. hOffCPT2 stays open; this is a support-face narrowing
    record, not an RH claim. The next named fire is the S3 face itself
    (or a frontier-extension board record under the B25 watch).
+   **EXHAUSTED 0260 (T4OffLG landed, build green 17454 jobs, zero
+   warnings; NEGATIVE record): the S3 face is FALSE at the Noff fill
+   run on the whole band, proven in body - kernel(Noff) >= wallLo
+   (Noff) > own > BwireR + MrR (T4OffLG.s3legInfeas, pure closed
+   chain), worst infeasibility margin 2.2271 at (1000, 1/200),
+   t-flat (day063, exact B3Core model): the decoupled squeeze's
+   premise set is inconsistent in body and CANNOT discharge an
+   off-pair - the Q2 decoupled construction is CLOSED as a route,
+   both legs in body (S1 carries with factor 2.0000, 0258/0259; S3
+   cannot, 0260). The only residue of the Q2 line is the tail-
+   transfer certificate scale 3.1e-46 (0257): the next named
+   mathematics is a genuinely ASYMMETRIC EM family (fill engine and
+   wire wall at different scales, per-run bridge) - research
+   surface, no scale blocker.
 3. **Frontier extension (0126 route A, B6-board family).** An external
    record family that extends the certified on-line frontier past tPT2
    (new isolation record beyond Platt) would re-label the face to a higher

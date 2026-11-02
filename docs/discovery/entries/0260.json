@@ -1,0 +1,24 @@
+{
+ "id": "0260",
+ "title": "Q2 decoupled route EXHAUSTED IN BODY (negative record): the S3 face of the T4OffLE decoupled squeeze is FALSE at the Noff fill run on the whole band - kernel(Noff) >= wallLo(Noff) > own > BwireR + MrR (T4OffLG.s3legInfeas, pure closed chain, no zeta); the 0257 shared-value pathology is now a body fact (S1 leg carries with factor 2.0000 - 0258/0259; S3 leg cannot, worst infeasibility margin 2.2271 at the (1000, 1/200) corner, t-flat, day063); the Q2 line's only residue is the 3.1e-46 tail-transfer certificate scale pointing at genuinely ASYMMETRIC EM families (fill engine and wire wall at different scales with a per-run bridge) as the next research surface - not a route; hOffCPT2 stays open",
+ "kind": "negative-record",
+ "date": "2026-11-02",
+ "module": "formal/RhAttack/T4OffLG.lean",
+ "artifacts": {
+  "module": "formal/RhAttack/T4OffLG.lean (2 theorems: T4OffLG.s3legInfeas - kernel(Noff) > BwireR + MrR on the band, in body; T4OffLG.s3faceFalseAtNoff - given the cited A2c bridge, the S3-face premise of the decoupled squeeze FAILS at Noff: the premise set {bridge, S3 face, pin} is inconsistent in body)",
+  "measurement_source": "scripts/rh/day063_s3leg_infeas_check.py + .txt (exact closed forms with the in-tree B3Core model - Sbar/Bf/Cf/Kbar of B3Core.lean, exact X4fun, S4W Zbound = 1.6 t^(1/4) ln t: worst L/U = 2.2271 at d0 = 1/200, t-flat on t in [1e3, 1e18]; L/own = 2.0000 uniform - the 0258 knife-edge factor again)",
+  "context": "0259 (T4OffLF in-body pin - the S1 side); 0258 (T4OffLE decoupled squeeze + floor at every run); 0257 (Q2 re-scope: shared-value pathology named, tail-transfer certificate 3.1e-46); 0252/0253 (single-C knife-edge exhaustion T4OffLD); 058e (C > 5000, the family the decoupled S1 side CARRIES where 5001 does not)"
+ },
+ "content": {
+  "s1_s3leg_infeasible": "On 1000 <= t, 1/200 <= d0 < 1/2: ||p4_em_expr (t4l_sOffL t d0) (Noff t d0)|| >= wallLo t d0 (Noff t d0) [T4OffLE.t4LE_floor_off, run-free] > ||poff t d0 t|| [T4OffLF.pin] = S1LowT.floStripMin t d0 [T4OffLE.t4LE_flo_eq_own] > BwireR t d0 + MrR t d0 [FUnif.s4StripUnifiedFloor, MfR = 0] - a PURE CLOSED CHAIN, no zeta evaluation, no A2c, no zero existence.",
+  "s2_route_exhausted": "Given the A2c bridge (cited DLMF 25.2.8 / Apostol 12.21), the fill at Noff EXCEEDS BwireR + MrR - the S3 premise of t4LE_squeeze_decoupled is false in the actual world at the decoupled fill run: the squeeze's premise set is inconsistent in body, so it CANNOT discharge an off-pair; the decoupled construction (C_off < C* < C_on, 0257) is closed as a closure route, both legs in body: S1 carries (factor 2.0000, 0258/0259), S3 cannot (2.2271 worst, here).",
+  "residue": "The Q2 line's only surviving datum: the tail-transfer certificate a genuinely ASYMMETRIC family would need (fill engine at the low run, wire wall at the window run, a per-run bridge of term scale 3.1e-46 = cert/devProg at (tPT2, 1/200), 0257). FRONTIER plan item 2 (asymmetric EM families) is therefore a research surface - NO scale blocker - and the next named mathematics."
+ },
+ "notes": [
+  "OFF-BOARD negative margin record (the T4OffLB/LC/LD class). NO RH claim anywhere in the module or this entry - the record NARROWS nothing further; it CLOSES the Q2 decoupled construction as a route (honestly: the S3 leg fails in body).",
+  "Build evidence: lake build RhAttack.T4OffLG -> Build completed successfully, zero errors, zero warnings on the module; lake build (full tree) -> Build completed successfully (17454 jobs).",
+  "The in-body chain makes the S4 window's design intent a theorem at the decoupled run: sub-schedule runs (n < schedB = n4^(1/(2 sigma)) with n4 = ceil(3.1e7 t^4)) have kernel norms that the n4 wire wall cannot cover - the T4OffL wall (t4l_wall_tuned) requires n >= schedB precisely for this reason.",
+  "Lean 4.33.1 lessons: a > b is definitionally b < a (GT) - pin the calc steps in < direction; no lt_of_gt on the path here (Unknown identifier in this build); T4OffLE's defs live in namespace T4OffLE (qualified use outside); the file-level 'end' pattern in T4OffLE/T4OffLF closes a 'noncomputable section' - a fresh file without that section must not copy the trailing 'end'."
+ ],
+ "status": "committed"
+}
