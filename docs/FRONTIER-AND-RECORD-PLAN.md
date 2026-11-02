@@ -141,11 +141,28 @@ CRT-verified margins (worst re-issued piece: mnew 0.50265809882 vs the ledger
    premise set is inconsistent in body and CANNOT discharge an
    off-pair - the Q2 decoupled construction is CLOSED as a route,
    both legs in body (S1 carries with factor 2.0000, 0258/0259; S3
-   cannot, 0260). The only residue of the Q2 line is the tail-
-   transfer certificate scale 3.1e-46 (0257): the next named
-   mathematics is a genuinely ASYMMETRIC EM family (fill engine and
-   wire wall at different scales, per-run bridge) - research
-   surface, no scale blocker.
+   cannot, 0260). **EXHAUSTED FOR ALL d0 0261 (T4OffLH landed, build
+   green 17454 jobs; negative margin record + in-body near-line band):
+   the near-line half-subband (0, 1e-3] is now covered IN BODY - S1
+   Noff >= schedB (T4OffLH.NoFf_above_sched), S2 wallLo(Noff) <=
+   BwireR + MrR (T4OffLH.noTension_target, worst ratio at d0near
+   1e-3: 0.089 wall-ratio / 0.0445 own-ratio), S3 tension => d0 >
+   d0near (T4OffLH.tensionImpliesAbove); the measured seams
+   (1e-3, d0star] and [d0star, 1/200) (day064: 0/60 closure points,
+   wallLo/own = 2.0000 uniform, best wallLo/(BwireR+MrR) = 0.971 at
+   the d0star edge, Noff/schedB crossing 1 at d0star =
+   31000000^(-1/4)/4 = 3.350423e-3, t-independent; t-flat on
+   [1e3, 1e16]) join 0260's in-body [1/200, 1/2): tension (T, onset
+   ~4.74e-3, t-uniform) and S3-face (F, d0 <= d0star = 3.35e-3) are
+   DISJOINT in d0 at target height - the Q2 decoupled family has NO
+   contradiction zone for ANY d0 at ANY t >= tPT2. The Q2 line
+   (0257-0261) is closed as a closure route for hOffCPT2. Sharpened
+   residue: any S3 leg discharging a tension-zone pair (d0 > ~4.74e-3)
+   must bound the TRUE fill |zeta - (p4_P - p4_I) Noff|, NOT the EM
+   kernel lower bound (which sits above the wire wall there) - route
+   (a) zeta-data-class input or route (b) genuinely new argument
+   outside the EM-squeeze class (asymmetric EM families, 3.1e-46
+   certificate scale, no blocker). hOffCPT2 stays open.
 3. **Frontier extension (0126 route A, B6-board family).** An external
    record family that extends the certified on-line frontier past tPT2
    (new isolation record beyond Platt) would re-label the face to a higher
