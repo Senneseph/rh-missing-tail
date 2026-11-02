@@ -186,6 +186,26 @@ CRT-verified margins (worst re-issued piece: mnew 0.50265809882 vs the ledger
    asymmetric construction that reuses the squeeze cycle at a run
    is killed by the same chain; a surviving one must bound the true
    fill without asserting the pin on that run. hOffCPT2 stays open.
+   **ATTACK STARTED 0264 (P8A2c U0 landed, build green 17454 jobs,
+   zero module warnings): the cited A2c bridge itself is now under
+   formal attack - the 0255 parked question (1).** The identity-
+   theorem plan: on U = {s | s.re > -1} \ {1}, both sides
+   (W = zeta - p4_P n + p4_I n, and p4_em_expr s n) are analytic
+   and equal on {Re s > 1} (P4Limit.p4_identity, LEAN) => equal on
+   U by the identity principle => the bridge is an in-body theorem,
+   and 0262's squeeze infeasibility stands on its own premises
+   without the citation. U0 in body: D/U domains (open, D convex +
+   connected), the 3-segment path geometry through the vertical line
+   {Re = 2} (anchor + segment lemmas segA/segM - every path point
+   stays in U), and a2c_sL_in_Dcut (band off-points in U). U1-U6
+   roadmap pinned with all Mathlib APIs verified in this checkout
+   (hasFDerivAt_integral_of_dominated_loc_of_lip, DifferentiableOn.
+   analyticOnNhd, AnalyticOnNhd algebra, eqOn_of_preconnected_of_
+   eventuallyEq, analyticOn_riemannZeta; template: Mathlib
+   ZetaAsymp:477 does exactly this move zeta-on-{1}^c style). The
+   only genuinely new mathematics is U1-U4: s-analyticity of the
+   tail integral INT_{Ioi n} (B2 x) s(s+1) x^(-s-2) dx on
+   {Re s > -1} (its exact absolute-convergence domain).
 3. **Frontier extension (0126 route A, B6-board family).** An external
    record family that extends the certified on-line frontier past tPT2
    (new isolation record beyond Platt) would re-label the face to a higher
@@ -200,7 +220,7 @@ CRT-verified margins (worst re-issued piece: mnew 0.50265809882 vs the ledger
 | (B) 3e10 re-issue fleet | 1–1.5 days local | integrity loop only (forensics closure); no gating |
 | (C) in-house 3e12 run | 100–150 fleet-days (cloud) | none (citation already covers [0, tPT2]) |
 | (D) Platt checksum pinning | hours | provenance hardening | **CLOSED 0263**: cited papers + stream slice SHA-256-pinned (data/provenance/PINS.json, verifier exit 0) |
-| (E) open-question pursuit (1) decoupled-run variant — CLOSED 0260/0261 (S3-leg infeasible at Noff, in body); (2) asymmetric EM families — RESOLVED BY 0262 (any instance reusing the {pin+bridge+face} cycle at a run is killed in body; a surviving one must bound the true fill without the pin on that run); (3) genuinely new argument outside the squeeze class — OPEN (research) | research scale | the only non-board path to hOffCPT2 |
+| (E) open-question pursuit (1) decoupled-run variant — CLOSED 0260/0261 (S3-leg infeasible at Noff, in body); (2) asymmetric EM families — RESOLVED BY 0262 (any instance reusing the {pin+bridge+face} cycle at a run is killed in body; a surviving one must bound the true fill without the pin on that run); (3) A2c bridge in body — ATTACK 0264 (P8A2c U0 landed; U1-U6 roadmap pinned; the third, non-board provenance-hardening track); (4) genuinely new argument outside the squeeze class — OPEN (research) | (3) formal scale, (4) research scale | (3) makes 0262's record citation-free; (4) the only non-board path to hOffCPT2 |
 
 ## 4. Honesty boundary
 
