@@ -163,6 +163,29 @@ CRT-verified margins (worst re-issued piece: mnew 0.50265809882 vs the ledger
    (a) zeta-data-class input or route (b) genuinely new argument
    outside the EM-squeeze class (asymmetric EM families, 3.1e-46
    certificate scale, no blocker). hOffCPT2 stays open.
+   **GENERALIZED 0262 (T4OffLI landed, build green 17454 jobs;
+   negative record): the infeasibility of 0260 generalizes with the
+   FREE RUN PARAMETER - at ANY run N (not just Noff), given the
+   squeeze's own two external premises (the cited A2c bridge at N
+   and the pin wallLo(N) > own), the S3-face premise is FALSE in
+   body: fill(N) = kernel(N) [bridge] >= wallLo(N)
+   [T4OffLE.t4LE_floor_off, run-free] > own [pin] = floStripMin
+   [t4LE_flo_eq_own] > BwireR + MrR [FUnif.s4StripUnifiedFloor,
+   MfR = 0]. The premise set {bridge, face, pin} is jointly
+   inconsistent in body for EVERY N: NO squeeze instance -
+   in-program schedule run (0252/0253), decoupled fill run Noff
+   (0257-0261), or any un-named run - can discharge hOffCPT2 on
+   [1/200, 1/2) at target height. T4OffLG.s3faceFalseAtNoff
+   re-derives as the Noff instantiation (0259 pin supplies the pin
+   premise). Residue narrowed: surviving inputs must sit OUTSIDE
+   the {pin + bridge + face} structure - route (a) zeta-data-class
+   records (B24/B25 board conveyor; board idle at the TEN family
+   contact, watcher armed) or route (b) a direct bound on the TRUE
+   fill that does not route through the EM-truncation cycle. The
+   0257 'asymmetric family' question is settled accordingly: an
+   asymmetric construction that reuses the squeeze cycle at a run
+   is killed by the same chain; a surviving one must bound the true
+   fill without asserting the pin on that run. hOffCPT2 stays open.
 3. **Frontier extension (0126 route A, B6-board family).** An external
    record family that extends the certified on-line frontier past tPT2
    (new isolation record beyond Platt) would re-label the face to a higher
