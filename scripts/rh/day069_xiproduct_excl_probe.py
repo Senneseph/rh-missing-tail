@@ -113,13 +113,21 @@ def fpair_chunk(g, sr, t, a):
     return 0.5 * (np.log(A) + np.log(B)) + sr / den
 
 def load_lshard(path):
-    """LMFDB .dat block format (day-023 reader): u64 nblk at offset 0, then
-    per block [t0 f64][t1 f64][Nt0 u64][Nt1 u64] followed by (Nt1-Nt0)
-    13-byte records: Z (288 bits), v = t0 + Z * 2^-101.  Vectorized parse."""
+    """LMFDB .dat block format (day-023 reader, CUMSUM-DIFFERENTIAL edition,
+    verified 2026-11-03): u64 nblk at offset 0, then per block
+    [t0 f64][t1 f64][Nt0 u64][Nt1 u64] followed by (Nt1-Nt0) 13-byte records.
+    Each record holds an INCREMENT delta Z (104 bits: u64 lo, u32 mid, 1 byte hi)
+    and the zeros are CUMULATIVE:  v_k = t0 + cumsum_j (Z_j * 2^-101).
+    (The absolute-read v = t0 + Z*2^-101 is only correct for the FIRST record
+    of each block - that is exactly why the pre-fix 'block-0 verification'
+    passed while the rest of every shard came out as garbage clustered in
+    t0(file) +- a few units.)  Gate: 1:1 match to the T10M text over the
+    overlap window, max |diff| 3.0e-4 (the text's own quantization)."""
     import struct as _st
     d = open(path, "rb").read()
     (nblk,) = _st.unpack_from("Q", d, 0)
     off = 8
+    E2 = np.float64(2.0 ** -101)
     out = []
     for _ in range(nblk):
         t0, t1, Nt0, Nt1 = _st.unpack_from("<ddQQ", d, off)
@@ -128,10 +136,11 @@ def load_lshard(path):
         buf = d[off:off + 13 * cnt]
         off += 13 * cnt
         b = np.frombuffer(buf, dtype=np.uint8).reshape(-1, 13)
-        lo = np.frombuffer(b[:, 0:8].tobytes(), dtype="<u8").astype(np.float64) * (2.0 ** -101)
-        mid = np.frombuffer(b[:, 8:12].tobytes(), dtype="<u4").astype(np.float64) * (2.0 ** -37)
-        hi = b[:, 12].astype(np.float64) * (1.0 / 32.0)
-        out.append(t0 + lo + mid + hi)
+        lo = np.frombuffer(b[:, 0:8].tobytes(), dtype="<u8").astype(np.float64)
+        mid = np.frombuffer(b[:, 8:12].tobytes(), dtype="<u4").astype(np.float64)
+        hi = b[:, 12].astype(np.float64)
+        Z = lo + mid * np.float64(2.0 ** 64) + hi * np.float64(2.0 ** 96)
+        out.append(np.float64(t0) + np.cumsum(Z, dtype=np.float64) * E2)
     return np.concatenate(out) if out else np.array([])
 
 
