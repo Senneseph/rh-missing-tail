@@ -1,0 +1,17 @@
+{
+  "id": "0272",
+  "kind": "probe-record",
+  "date": "2026-11-03",
+  "module": "scripts/rh/day067_efull_singlezero_calib.py",
+  "status": "landed",
+  "title": "0272 CALIBRATION GREEN: the Efull single-zero identity verified to 7e-25 at the first 5 on-line zeros - the local identity is a concrete computable object (M_K(g;g) = log|zeta'(r)| - log 2 + log|r| = the zero-derivative residue; singular parts cancel exactly)",
+  "summary": "The 0272 unit (named by 0271) is run and green. Identity: for an on-line zero r = 1/2+ig and the Efull genus-1 primary factor K_g(s) = (1-s/r)(1+s/r) (s = 1/2+it), the desingularized quantity M_K(t;g) = log|zeta(1/2+it)| - log|K_g(1/2+it)| has a removable singularity at t = g with removable value M_K(g;g) = log|zeta'(r)| - log 2 + log|r| (the zero-derivative residue). day067 verifies at the first 5 on-line zeros (located to ~1e-45 by sign-bisection on Re zeta: |zeta| at the located point ~1e-47): L_direct (mpmath derivative, dps-60) vs L_extrap (4-point Newton extrapolation of M_K at delta -> 0): worst |diff| = 7.0e-25 = the dps-60 error floor. The W2K smooth terms (-log(g^2+1/4) + 0.5/(g^2+1/4)) carry no singularity and are added back as a plain finite correction. Calibration constants (M_K values): 1.72438 / 2.48096 / 2.84243 / 2.98764 / 3.12512 for g1..g5. LESSON (recorded): the single-zero identity is an identity of analytic functions - it holds for ANY zero, known or unknown; by itself it cannot EXCLUDE an off-line zero (the product formula is true regardless of RH). The exclusion content enters via COUNTING: the explicit formula N(t;[a,1/2]) = main term - prime sum - boundary terms, where the boundary contribution is bounded by R-vM spacing in the UNKNOWN territory while the KNOWN-zero side (all zeros below tPT2, bit-pinned Platt 0263) is exact. 0273 is therefore the COUNT-RESIDUAL calibration: evaluate the explicit-formula count in a region where the zero count is fully known (data territory below tPT2, e.g. t < 1e3 over sigma in [0.1, 1/2]); the magnitude of the residual (prime-sum truncation + boundary R-vM bound) measures exactly what the same formula can certify in the unknown territory above tPT2: if the total error < 1/2 at the target (t, strip), the count in the terminal strip is 0 - Claim (b) discharged. No RH claim (the known region is known, the error budget is the unit of attack).",
+  "artifacts": [
+    "scripts/rh/day067_efull_singlezero_calib.py (re-runnable, dps-60)",
+    "scripts/rh/out_day067_singlezero_calib.txt (5-zero table + tails)"
+  ],
+  "links": ["0271", "0270", "0269", "0263", "0266"],
+  "next": [
+    "0273 unit: count-residual calibration of the explicit formula in the fully-known territory (data zeros below tPT2) - the error budget (prime-sum truncation + boundary R-vM bound) is exactly the quantity that must stay below 1/2 at (t >= tPT2, sigma in [1-colletUpper, 1/2]) to discharge Claim (b) - the 0270-scoped claim, hence RH"
+  ]
+}
