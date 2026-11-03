@@ -1,0 +1,21 @@
+0273a: xi-product exclusion probe at face heights (t = tPT2)
+tPT2 = 3.00017533e+12
+
+empirical fluctuation (known band 3e9 - 1.6e7 .. 3e9):
+  D =    100:  max|N_data - Int rho| = 3.0500   (band 2.98352e+09 .. 2.99925e+09, 50000000 zeros)
+  D =   1000:  max|N_data - Int rho| = 3.0668   (band 2.98352e+09 .. 2.99925e+09, 50000000 zeros)
+
+       sigma |         K(s) |        B_unk | U_actual:14 | |U|<=B:6 | zeta-excluded:12 | |zeta(s)|:12
+GLAST (last known zero) = 3001345999.873009
+
+ 0.125227010 | -380910.180452 | +12605.554480 | +380920.349916 | NO     | -            | 2.609408e+04   (145s, 9068457837 zeros)
+ 0.250000000 | -380913.532503 | +12684.661681 | +380920.427207 | NO     | -            | 9.870341e+02   (141s, 9068457837 zeros)
+ 0.400000000 | -380917.562776 | +12863.685531 | +380920.650067 | NO     | -            | 2.191761e+01   (141s, 9068457837 zeros)
+ 0.490000000 | -380919.980745 | +13313.532184 | +380921.072896 | NO     | -            | 2.980678e+00   (141s, 9068457837 zeros)
+
+interpretation:
+ - U_actual must land inside B_unk (bound validity check).
+ - EXCLUDED at s means the known field alone (Titchmarsh-9.2
+   unknown side) disproves a zero at s. If never excluded, the
+   known field alone does not discharge the face (0273c: the
+   psi-sup lever or the 1/8-sliver density arithmetic).

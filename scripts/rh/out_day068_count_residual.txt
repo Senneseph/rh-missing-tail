@@ -1,0 +1,36 @@
+0273a: rectangular count-residual calibration (known territory, dps-40)
+mechanism: N(AP; R=s0..1/2+eps x t1..t2) - [# on-line in (t1,t2]] =
+            [# OFF-LINE zeros in R]  (0 in known territory)
+            ; the |residual| budget B (sampling + branch) must
+            stay below 1/2 to certify off-line-zero-free R above
+            tPT2 (once the top edge is in unknown territory) via
+            the R-vM top-edge bound replacing the direct count.
+
+eps (right-side offset) = 1e-09
+    s0 |        t1 |        t2 | N_AP(rect):12 | N_1d(t2)-N_1d(t1):6 | residual:12 | 2*residual (budget view)
+  [edge max|d|/step = 3.012 rad]
+  0.30 |    200000 |    200100 |  +165.000000 |    165 |    -0.000000 |    -0.0000
+  [edge max|d|/step = 3.009 rad]
+  0.30 |    250000 |    250200 |  +337.000000 |    337 |    +0.000000 |    +0.0000
+  [edge max|d|/step = 3.007 rad]
+  0.30 |    300000 |    300400 |  +686.000000 |    686 |    -0.000000 |    -0.0000
+  [edge max|d|/step = 3.012 rad]
+  0.45 |    200000 |    200100 |  +165.000000 |    165 |    -0.000000 |    -0.0000
+  [edge max|d|/step = 3.009 rad]
+  0.45 |    250000 |    250200 |  +337.000000 |    337 |    +0.000000 |    +0.0000
+  [edge max|d|/step = 3.007 rad]
+  0.45 |    300000 |    300400 |  +686.000000 |    686 |    +0.000000 |    +0.0000
+  [edge max|d|/step = 3.012 rad]
+  0.49 |    200000 |    200100 |  +165.000000 |    165 |    +0.000000 |    +0.0000
+  [edge max|d|/step = 3.009 rad]
+  0.49 |    250000 |    250200 |  +337.000000 |    337 |    +0.000000 |    +0.0000
+  [edge max|d|/step = 3.007 rad]
+  0.49 |    300000 |    300400 |  +686.000000 |    686 |    -0.000000 |    -0.0000
+
+worst |residual| over the lattice: 3.409e-37
+interpretation: residual = 0 to within the AP sampling error
+(branch + grid): that error IS the B budget of the mechanism -
+see the design doc for the tPT2 scaling (R-vM top-edge bound).
+VERDICT 0273a: B < 1/2 achieved in the known territory - the
+counting mechanism is CALIBRATED (proceed to 0273b: the top
+edge over tPT2 with the R-vM bound + the known-zero exact side).
