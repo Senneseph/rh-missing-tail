@@ -231,6 +231,15 @@ CRT-verified margins (worst re-issued piece: mnew 0.50265809882 vs the ledger
    Named next formal fire: the weak-pin range extension (in-body
    range-pin wallLo(N) > own for N in [nIdeal, 2 nIdeal] +
    wallLo monotonicity in N - components already in T4OffLF).
+   **LANDED 0267 (T4OffLK): pinRange (the range pin, verbatim port of
+   the 0259 pin with the free N in [nIdeal, 2 nIdeal]) +
+   s3faceInfeasiblePinRange (S3 face infeasible THROUGHOUT the range
+   via weak-pin + S4 gap; no pin premise) - the first in-body
+   face-infeasibility over an INTERVAL of runs. Next formal fire:
+   the WIRE-CROSSING extension (wallLo(N) > wire for N beyond
+   2 nIdeal up to the day065 N1 crossing - a closed log/rpow chain;
+   day065 margins: tightest log10(N1/N2) = 0.094 at (1e3, 1/200),
+   robust at every grid point).
 3. **Frontier extension (0126 route A, B6-board family).** An external
    record family that extends the certified on-line frontier past tPT2
    (new isolation record beyond Platt) would re-label the face to a higher
