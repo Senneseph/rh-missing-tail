@@ -1,0 +1,18 @@
+{
+  "id": "0270",
+  "kind": "scope-anchor",
+  "date": "2026-11-03",
+  "module": "docs/ROUTE-B-SCOPE-2026-11-03.md",
+  "status": "landed",
+  "title": "ROUTE (b) SCOPED + gap probe: no classical boundary/density method reaches the terminal strip; Claim (b) = zero-freeness of (0.1252270103, 1/2) at t >= tPT2, EXACTLY the terminal face (= RH by [Z78C] + Platt below)",
+  "summary": "Route (b) (the only live non-data route, per 0269) is now scoped to an exact claim and quantitatively gap-probed. Claim (b): no zero of zeta with |im| >= tPT2 and re in (1-colletUpper, 1/2) = (0.1252270103, 1/2); with [Z78C]'s functional-equation shell and the Platt on-line record below tPT2, Claim (b) IS the terminal face hOffCPT2, hence IS RH - a direct |zeta| exclusion with no census kernels, no squeeze, no pin family. Gap probe (50-dp): at tPT2 (log t = 28.73), de la Valllee Poussin scale reaches sigma <= 0.000605 (left, by FE), Korobov-Vinogradov sigma <= 0.001237 - the target strip's left edge 0.125227 is 0.123990 WIDER than any classical reach, at every height probed (tPT2, 10x, 100x); zero-density exponents cannot go negative in the left strip (best at sigma=1/2 is T^0.543). Tool review: Levinson's method RULED OUT (extends right-side regions only, cannot start left of 1/2); classical rectangle/argument-principle attempts die on the missing LEFT-EDGE |zeta| lower bound at sigma = 0.125227 (convexity gives upper bounds only); density+repulsion RULED OUT unconditionally; the explicit formula at explicit heights (project-native: known zeros below tPT2 as explicit input via the bit-pinned Platt record 0263, residual over t > tPT2 to be bounded - where the project's W-kernel/A4.3/A4.3-mass/S4-floor machinery may contribute as analytic bounds rather than census data) is the FIRST attack line. First concrete unit named: the left-edge control sub-claim - a BELOW bound for |zeta(colletLower + it)| for t >= tPT2 (Jensen/Turan or explicit-formula-tail); if it holds, the rectangle argument proceeds. Numeric probe to be written: day066 left-edge |zeta| survey at a = colletLower over explicit height windows, interval arithmetic. No RH claim; scoping record only.",
+  "artifacts": [
+    "docs/ROUTE-B-SCOPE-2026-11-03.md (claim, gap probe, tool review, first unit)",
+    "gap numbers: K-V left edge 0.001237 at tPT2 vs target 0.125227 (gap 0.123990); gap at 10x: 0.12406; at 100x: 0.12412"
+  ],
+  "links": ["0269", "0255", "0263", "0266"],
+  "next": [
+    "day066 probe: left-edge |zeta| survey at a = colletLower over explicit height windows above tPT2 (interval arithmetic, Riemann-Siegel + explicit-formula hybrid), quantifying whether a below-bound is visible",
+    "if the probe is encouraging: formal sub-claim in a new module (explicit formula with known zeros truncated at tPT2, tail bound - the project-native attack)"
+  ]
+}
