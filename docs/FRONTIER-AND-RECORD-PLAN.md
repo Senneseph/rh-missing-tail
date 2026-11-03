@@ -289,7 +289,104 @@ CRT-verified margins (worst re-issued piece: mnew 0.50265809882 vs the ledger
 | (B) 3e10 re-issue fleet | 1–1.5 days local | integrity loop only (forensics closure); no gating |
 | (C) in-house 3e12 run | 100–150 fleet-days (cloud) | none (citation already covers [0, tPT2]) |
 | (D) Platt checksum pinning | hours | provenance hardening | **CLOSED 0263**: cited papers + stream slice SHA-256-pinned (data/provenance/PINS.json, verifier exit 0) |
-| (E) open-question pursuit (1) decoupled-run variant — CLOSED 0260/0261 (S3-leg infeasible at Noff, in body); (2) asymmetric EM families — CLOSED BY 0262+0266 (0262: the {pin+bridge+face} cycle killed in body at every pinned run; 0266: the face-premise pair {S3 face, pin} internally inconsistent at EVERY run WITHOUT the bridge premise — total EM-class exhaustion, day065 map 36/36 EXHAUSTED; no EM run/scale/asymmetry survives; 0267/0268 sharpen the record to interval-valued face death on [nIdeal, Nstar) in closed form); (3) A2c bridge in body — COMPLETE 0265/0266 (bridge an in-body theorem; _inbody squeeze companions; T4OffLJ total-exhaustion record); (4) genuinely new argument outside the squeeze class — OPEN (research): now the ONLY live route to hOffCPT2 beside board/data route (a); 0269 pins its exact content (analytic zero-freeness of sigma in [1-colletUpper, 1/2] at t >= tPT2 - IS the terminal face = RH); 0270 scopes it: Claim (b) exact + gap probe (no classical boundary/density reaches it: K-V left edge 0.001237 vs target 0.125227 at tPT2) + tool review (Levinson and density ruled out; explicit-formula-at-explicit-heights = FIRST attack line, project-native) — see docs/ROUTE-B-SCOPE-2026-11-03.md; 0271: day066 window survey shows the grid is 1.2e6 oscillation periods coarse (zero spacing ~0.205 at 3e12) - a window-wide |zeta| below-bound is CERTIFIED-VOID (depends on unknown zero positions above tPT2); attack line corrected to the LOCAL disk explicit-formula identity at a single off-line zero (prime side explicit + known-zero side exact via Platt 0263 + unknown-zero side bounded by R-vM spacing) — 0272 calibration unit; 0272 GREEN: single-zero Efull identity verified to 7e-25 at 5 on-line zeros (removable value = zero-derivative residue); LESSON: the identity holds for ANY zero and cannot exclude off-line zeros alone - the exclusion enters via the explicit-formula COUNT + R-vM boundary bound + exact known-zero side; 0273 (entry 0273, RE-CORRECTED same day after day070/day071 forensics): day068 count-residual calibration GREEN in known territory (9 rectangles, worst residual 3.4e-37 = the dps-40 noise floor, the AP counting mechanism is CALIBRATED); day069 xi-product face probe at tPT2: NOT VALIDATED - the printed EXCLUDED labels are provisional (the validity check |U|<=B_unk fails because the printed U_actual is contaminated by two pinned defects: the lshard .dat reader emits garbage after a leading stretch (~54.9M spurious zeros injected, ~4.55e7 real zeros missing in 8.85e6..3.19e7) and the unknown-side MAIN TERM quad over (3.001e9,16t) is off by O(1e12); the earlier 'the xi kernel is the wrong lever' reading is RETRACTED as premature); day070/day071 t=1e9 anchor forensics pin every side: U_true = -1.13363e9 +/-0.1 in closed form, Re log phi dps-60 stable, zeta dps-60 stable, S_required = +3.4823e8, the hi-f64 chain + T10M txt proven continuous and correctly read (3-way dps-30 cross-check passed on the extra file), clean anchor residual -1.3e7 at the known data-gap floor - the xi mechanism itself is NOT in doubt; no exclusion claim, no RH claim. NEXT UNIT 0273a-r: (1) repair the lshard reader across all blocks (gate: every shard internally continuous, per-block counts within 0.1% R-vM); (2) re-close the t=1e9 anchor to the data-floor; (3) recompute the tPT2 unknown-side MAIN TERM by u-substitution (analytic 2ln|u-1| dip extraction + dps-50 fine+log regular quad + exact c4/g^2 tail, error << B_unk); (4) re-run the 4 face sigmas with corrected K': the corrected fluctuation log|zeta(s)|-K' against B_unk is the theorem's premise - certified exclusion of the probed face points iff K'-B_unk > 0 (K' ~ +4.6e11 ~ 3e7 x B_unk); then extend in sigma (margin monotone on (0.1252,0.5)) and in t (K'(t)-B(t)>0 monotone) = 0273c endgame; 0273b (top-edge AP rectangle AT tPT2) stays documented but is computationally infeasible with direct dps-40 zeta (superseded) - full record: docs/ROUTE-B-0273-DESIGN-2026-11-03.md sec 5, entry 0273 | (4) research scale | (3) DONE — 0262's record citation-free and premise-minimal; (4) the terminal face itself |
+| (E) open-question pursuit (1) decoupled-run variant — CLOSED 0260/0261 (S3-leg infeasible at Noff, in body); (2) asymmetric EM families — CLOSED BY 0262+0266 (0262: the {pin+bridge+face} cycle killed in body at every pinned run; 0266: the face-premise pair {S3 face, pin} internally inconsistent at EVERY run WITHOUT the bridge premise — total EM-class exhaustion, day065 map 36/36 EXHAUSTED; no EM run/scale/asymmetry survives; 0267/0268 sharpen the record to interval-valued face death on [nIdeal, Nstar) in closed form); (3) A2c bridge in body — COMPLETE 0265/0266 (bridge an in-body theorem; _inbody squeeze companions; T4OffLJ total-exhaustion record); (4) genuinely new argument outside the squeeze class — OPEN (research): now the ONLY live route to hOffCPT2 beside board/data route (a); 0269 pins its exact content (analytic zero-freeness of sigma in [1-colletUpper, 1/2] at t >= tPT2 - IS the terminal face = RH); 0270 scopes it: Claim (b) exact + gap probe (no classical boundary/density reaches it: K-V left edge 0.001237 vs target 0.125227 at tPT2) + tool review (Levinson and density ruled out; explicit-formula-at-explicit-heights = FIRST attack line, project-native) — see docs/ROUTE-B-SCOPE-2026-11-03.md; 0271: day066 window survey shows the grid is 1.2e6 oscillation periods coarse (zero spacing ~0.205 at 3e12) - a window-wide |zeta| below-bound is CERTIFIED-VOID (depends on unknown zero positions above tPT2); attack line corrected to the LOCAL disk explicit-formula identity at a single off-line zero (prime side explicit + known-zero side exact via Platt 0263 + unknown-zero side bounded by R-vM spacing) — 0272 calibration unit; 0272 GREEN: single-zero Efull identity verified to 7e-25 at 5 on-line zeros (removable value = zero-derivative residue); LESSON: the identity holds for ANY zero and cannot exclude off-line zeros alone - the exclusion enters via the explicit-formula COUNT + R-vM boundary bound + exact known-zero side; 0273 (entry 0273, RE-CORRECTED same day after day070/day071 forensics): day068 count-residual calibration GREEN in known territory (9 rectangles, worst residual 3.4e-37 = the dps-40 noise floor, the AP counting mechanism is CALIBRATED); day069 xi-product face probe at tPT2: NOT VALIDATED - the printed EXCLUDED labels are provisional (the validity check |U|<=B_unk fails because the printed U_actual is contaminated by two pinned defects: the lshard .dat reader emits garbage after a leading stretch (~54.9M spurious zeros injected, ~4.55e7 real zeros missing in 8.85e6..3.19e7) and the unknown-side MAIN TERM quad over (3.001e9,16t) is off by O(1e12); the earlier 'the xi kernel is the wrong lever' reading is RETRACTED as premature); day070/day071 t=1e9 anchor forensics pin every side: U_true = -1.13363e9 +/-0.1 in closed form, Re log phi dps-60 stable, zeta dps-60 stable, S_required = +3.4823e8, the hi-f64 chain + T10M txt proven continuous and correctly read (3-way dps-30 cross-check passed on the extra file), clean anchor residual -1.3e7 at the known data-gap floor - the xi mechanism itself is NOT in doubt; no exclusion claim, no RH claim. NEXT UNIT 0273a-r: (1) repair the lshard reader across all blocks (gate: every shard internally continuous, per-block counts within 0.1% R-vM); (2) re-close the t=1e9 anchor to the data-floor; (3) recompute the tPT2 unknown-side MAIN TERM by u-substitution (analytic 2ln|u-1| dip extraction + dps-50 fine+log regular quad + exact c4/g^2 tail, error << B_unk); (4) re-run the 4 face sigmas with corrected K': the corrected fluctuation log|zeta(s)|-K' against B_unk is the theorem's premise - certified exclusion of the probed face points iff K'-B_unk > 0 (K' ~ +4.6e11 ~ 3e7 x B_unk); 0273a-r then RAN TO COMPLETION (same session, 2026-11-07; supersedes this NEXT-UNIT line): lshard reader repaired (13-byte records = CUMULATIVE intra-block deltas; all 11 shards validated); t=1e9 anchor closed at the data floor (rel 1.7e-7); tPT2 main term dual-validated (gates rel 2.18e-9 / 4.37e-10, tPT2 spread rel 3.5e-9); identity closes INSIDE the certified bound at face height (|fluct| = 9052 <= B_unk = 25,210, all four sigmas) - BUT K' = -9,042 (face-flat) < B_unk and K' - B_unk = -34,253..-35,679 < 0: the probed face at tPT2 is NOT excluded; the EXPECTED K' ~ +4.6e11 was the broken-reader artifact. 0274 optimal-split (in-repo ordinates actually run to 3e10, hi3e10 band 92,577,877,714 zeros): face NOT excluded at the strongest data cut - premise holds with positive slack (B_unk - fluc = +1,243.29..+2,304.48, optimal cut); FIRST CERTIFIED FACE REDUCTION: frontier unit window (tPT2-1, tPT2+1] carries <= 33/33/34/34 zeros (vs ~196 raw law); gap to window exclusion +936..+955 (9.4-10.2% envelope sharpening would close sigA = next unit 0275); formal record LANDED (T4OffLM: validA..N / openA..N / windowA..N / gapToExclA..N / gDataBelowTPT2Over100, composite faceOpenAtTPT2); day073b pin K'_opt = -9,049.40..-9,059.20 (density residual -7.2100); day074 slope dK'/dt = -3.006e-9 (K' t-frozen, no crossing in t). FOURTH CORRECTION: the 'K' - B_unk < 0 wall margin' framing of the first 0274 draft is WITHDRAWN (criterion defect - B_unk is the all-configuration envelope; the signed numbers are true arithmetic, not exclusion margins); see sec 3bis. Route (b) as designed is REFUTED at face height with a fully validated machine (excludes nothing; the face is conformant). 0273b (top-edge AP rectangle AT tPT2) stays documented but is computationally infeasible with direct dps-40 zeta (superseded) - full record: docs/ROUTE-B-0273-DESIGN-2026-11-03.md (incl. 0274 appendix), entries 0273/0274 | (4) research scale | (3) DONE — 0262's record citation-free and premise-minimal; (4) the terminal face itself |
+
+
+## 3bis. 0273a-r / 0273xi / 0274 FINAL STATUS (2026-11-07, discoveries 0273-0274)
+
+The route-(b) explicit-formula program (0270 attack line 3) has been executed to
+completion with a fully validated machine. Authoritative record: entry 0273
+(re-corrected final), entry 0274, docs/ROUTE-B-0273-DESIGN-2026-11-03.md (incl.
+the 0274 appendix), formal module RhAttack.T4OffLM (the named wall record),
+scripts/rh/day068..day074 + outputs.
+
+**What landed (validated):**
+1. day068: the AP rectangular count-residual mechanism is CALIBRATED in known
+   territory (9 rectangles, worst residual 3.409e-37 = dps-40 noise floor).
+2. The lshard .dat reader was REPAIRED (13-byte records are cumulative
+   intra-block deltas: Z_k = lo + mid*2^64 + hi*2^96, v_k = t0 + cumsum(Z)*2^-101)
+   and validated on all 11 shards (54,902,376 zeros, 1:1 vs T10M text overlap to
+   3e-4, seams exact). The earlier 4.5e7-injected / 4.5e7-missing garbage is gone.
+3. The t = 1e9 anchor identity closes end-to-end at the data floor (residual
+   ~192 on the 1.13e9 scale = rel 1.7e-7): the xi-product mechanism (S known
+   side + U unknown side + phi + zeta) is validated at low height.
+4. Day072: the tPT2 unknown-side main term is dual (c4-decomp g-space pin vs
+   u-substitution y-space, dps-60, 0.01-step dip core windows; gates at t = 1e9
+   rel 2.18e-9 and t = 4e9 dip-in-range rel 4.37e-10; tPT2 dual spread rel
+   3.5e-9): I_unk = -2.498792312e12 (sigma-flat). The S stream over the repaired
+   data (9,068,473,888 zeros): S = +1.424601076e11. K' = S + I_unk - Re log phi
+   + log(1/2) = -9,042.2 / -9,045.5 / -9,049.6 / -9,052.0 for the four probed
+   sigmas (the left-edge value 0.1252270103, 1/4, 2/5, 49/100).
+5. Day073 (0274 unit A): the in-repo zero ORDINATES actually run to 3.0e10
+   (hi3e10 band: 92,577,877,714 zeros, raw f64, last = 30,001,045,999.981976).
+   At the optimal split G = 3e10: K'_opt in [K3 - 1799.20, K3 + 1799.20] (all
+   sigmas), certified B_unk_opt = 10,302.85 / 10,421.49 / 10,690.00 /
+   11,364.76 (exact telescoping per-unit form, B1 = 3.4 ln tPT2, asserted
+   monotone pieces). Max-band K'_opt - B_unk_opt = -17,545.84 / -17,667.83 /
+   -17,940.37 / -18,617.55 < 0 on EVERY probed sigma: the wall PERSISTS at the
+   optimal data cut.
+6. The identity closes INSIDE its certified bound at face height (|fluct| =
+   9,052.4..9,053.1 <= B_unk = 25,210..26,627 all four sigmas): the mechanism's
+   validity premise holds; the failure is the SIGN OF K', not the bound.
+7. Formal landing: RhAttack/T4OffLM.lean (T4OffL* class, off-board negative
+   margin record): faceSigma, gData, gDataBelowTPT2Over100 (the 100x data gap
+   as a named theorem), K3A..K3N, bandOpt, BunkA..N, kOptNeg* (K'_opt negative
+   on its whole band), wallA..wallN, named margins marginA..N =
+   -17,545.835335 / -17,667.827874 / -17,940.368635 / -18,617.546604, plus the
+   composite faceWallAtTPT2. No RH claim.
+
+**The honest verdict (no RH claim, nothing is excluded):** the pointwise
+xi-product + R-vM per-unit count-law attack line (0270 line 3) is REFUTED at
+face height: the corrected main term K' is negative on its whole validated band
+and strictly below the certified fluctuation bound, at BOTH data cuts available
+in the repo (GLAST cut: K' - B = -34.3k..-35.7k; optimal 3e10 cut:
+-17.5k..-18.6k). The tPT2 split (with hypothetical full Platt ordinates) would
+only shift the band by O(B1 TV) ~ 4.6k and the wall persists (margin
+~-8.3k worst case). The 0270 line-2 sub-claim (a uniform left-edge |zeta|
+lower bound at sigma = 0.1252270103 for t >= tPT2) remains the open lever of
+the rectangle-AP approach; per-cell rectangle AP above tPT2 is a finite
+computation that cannot by itself cover the infinite face.
+
+**Provenance map of the gap (authoritative, 2026-11-07):**
+- in-repo zero ORDINATES: (0, 3.0001e10] (T10M text + 11 lshards + hi-f64
+  chain + 3e10 band; 3e10 band is the ceiling).
+- [Z-PT2] (Platt-Trudgian arXiv:2004.09765, pinned 0263): ON-LINE-NESS of all
+  zeros in (0, tPT2] by rigorous interval sign-change counting. The paper
+  itself states NO zero list beyond the counting was generated ("we had
+  nowhere to store that many zeroes"): no ordinates for (3e10, 3e12] exist in
+  the repo or in the cited record; producing them is the 100-150 fleet-day
+  (C) run.
+- the terminal face (claim (b)) lives at t >= tPT2 = 3.0002e12: 100x above the
+  ordinate data and 30x above the citation boundary.
+
+**0274 FINAL (2026-11-07, landed; entry 0274; FOURTH CORRECTION):**
+day073b pinned K'_opt at the data floor: -9,049.3953 / -9,052.7478 /
+-9,056.7786 / -9,059.1966 (92,571,198,520 zeros in (GLAST, gData]; SUM =
++987,406,884,352.812; density residual SUM - Int = -7.2100 sigma-flat to 4
+digits; two-form rel 2.2e-8; pre-flight worst 1.8e-15). day074 settled the
+t-slope at t = tPT2 + 3e9 (dual main term rel 3.5e-9, identity closure ALL
+FOUR): dK'/dt = -3.006e-9 per unit (sigma-flat, measured to ~1e-10): K' is
+t-FROZEN (the 0273 'decreasing in t (dK'/dt ~ -0.04)' line is WITHDRAWN -
+the leading asymmetries cancel exactly in K': -pi/4 (I_unk) vs +pi/4 (phi),
+-2N_G1/t (I_unk) vs +2N_G1/t (S)). **FOURTH CORRECTION (the exclusion
+criterion defect, 0274):** the 0273-design step-4 criterion 'K' - B_unk > 0
+<=> exclusion' is WITHDRAWN - B_unk is the ALL-configuration envelope
+(covers a probe-disk zero) and K' < 0 < B_unk is by construction, not a
+margin; the signed 'wall' numbers (-17.5k..-20.4k) are true arithmetic but
+not exclusion margins. **Sound record:** the premise HOLDS with positive
+slack (B_unk - fluc = +1,243.29 / +1,361.85 / +1,630.13 / +2,304.48 at the
+optimal cut): the face is CONFORMANT - NO EXCLUSION (T4OffLM openA..N); and
+the FIRST CERTIFIED FACE REDUCTION: the frontier unit window (tPT2-1,
+tPT2+1] on the zero ORDINATES contains at most 33/33/34/34 zeros (vs ~196
+raw law: 5.9x; T4OffLM windowA..N); the gap to window exclusion is E_win -
+fluc = +936.4 / +946.7 / +954.0 / +955.0 (a 9.4-10.2% envelope sharpening
+closes sigA). **NEXT UNIT 0275 (named):** envelope sharpening WITHOUT new
+data (sharp local-count constant A0: 3.4 -> ~3.08, kernel/TV sharpening)
+targeted at E_win < fluc at sigA => the frontier window certified EMPTY;
+then the t-supremum for the face-wide statement. Beside it: (a) the fleet
+3e12 data extension (the only concrete data path) and (b') a genuinely new
+mechanism. The terminal face (claim (b), hence RH) remains OPEN at this
+record. No RH claim.
 
 ## 4. Honesty boundary
 

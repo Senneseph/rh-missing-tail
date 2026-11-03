@@ -1,0 +1,18 @@
+3e10 band: n = 92577877714 (expect 92,577,877,714)  first = 2999246000.182257 last = 30001045999.981976
+G2 = 30001045999.981976  (expect ~30,001,045,999.98)
+
+B1 = A0 ln(tPT2) = 97.6810
+
+UNIT A: optimal-split (G2 = 3.0e10) wall quantification at t = tPT2
+  K'_opt = K'(G1) + [sum_{(G1,G2]} f - Int_{G1}^{G2} f rho dg]
+        Int center (dps-40) shown; band = B1*(|f(G1)|+TV(G1->G2)) telescoping
+       sigma |    Int(G1,G2) |      band |            K_opt range |    f(G2) |      f(t) |  B_opt(cert) |  maxK-B(min) | wall
+0.1252270103 | +987406884360.0220 |   1799.20 | [-10841.39,  -7242.98] |   9.2103 | -29.01798 |     10302.85 |    -17545.83 | YES(<0)
+0.2500000000 | +987406884360.0220 |   1799.20 | [-10844.74,  -7246.34] |   9.2103 | -29.42284 |     10421.49 |    -17667.83 | YES(<0)
+0.4000000000 | +987406884360.0220 |   1799.20 | [-10848.77,  -7250.37] |   9.2103 | -30.33913 |     10690.00 |    -17940.37 | YES(<0)
+0.4900000000 | +987406884360.0220 |   1799.20 | [-10851.19,  -7252.78] |   9.2103 | -32.64171 |     11364.76 |    -18617.55 | YES(<0)
+
+UNIT A VERDICT: optimal-split wall on the face at t = tPT2: CONFIRMED (max K_opt - min B_opt < 0 for every face sigma)
+  (the 0273 wall at the G1 = 3e9 split was maxK-B = -16,085..-19,274;
+   this is the SHARPEST available negative statement with current data.)
+DONE.

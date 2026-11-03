@@ -1,0 +1,41 @@
+/home/jsmille/Projects/rh-missing-tail/scripts/rh/day072_face_U_repair.py:160: SyntaxWarning: invalid escape sequence '\i'
+  """Exact per-unit-sum fluctuation bound (independent of day069 TV-quad).
+GLAST = 3001345999.873009
+0274 t-slope probe at t2 = tPT2 + 3e9 =  3003175332800.0
+GLAST = 3001345999.873009
+  sigma= 0.125227010  c4pin=-2.501166634166e+12  usub=-2.501166625334e+12  spread=8.832e+03 (rel 3.53e-09) AGREE  (1151s)
+  sigma= 0.250000000  c4pin=-2.501166634168e+12  usub=-2.501166625336e+12  spread=8.832e+03 (rel 3.53e-09) AGREE  (327s)
+  sigma= 0.400000000  c4pin=-2.501166634170e+12  usub=-2.501166625338e+12  spread=8.832e+03 (rel 3.53e-09) AGREE  (969s)
+  sigma= 0.490000000  c4pin=-2.501166634171e+12  usub=-2.501166625339e+12  spread=8.832e+03 (rel 3.53e-09) AGREE  (920s)
+S stream at t2 (4 sigmas, one pass):
+  file  0 (zeros_T10000000_ext_full.txt              ) n=    18524378 (3s)
+  file  1 (zeros_8846000.dat                         ) n=     4768688 (3s)
+  file  2 (zeros_10946000.dat                        ) n=     4833209 (4s)
+  file  3 (zeros_13046000.dat                        ) n=     4887244 (4s)
+  file  4 (zeros_15146000.dat                        ) n=     4933733 (4s)
+  file  5 (zeros_17246000.dat                        ) n=     4974533 (5s)
+  file  6 (zeros_19346000.dat                        ) n=     5010884 (5s)
+  file  7 (zeros_21446000.dat                        ) n=     5043664 (5s)
+  file  8 (zeros_23546000.dat                        ) n=     5073511 (6s)
+  file  9 (zeros_25646000.dat                        ) n=     5100912 (6s)
+  file 10 (zeros_27746000.dat                        ) n=     5126231 (6s)
+  file 11 (zeros_29846000.dat                        ) n=     5149767 (6s)
+  file 12 (zeros_hi31946e6_to_1e9.f64                ) n=  2779571880 (118s)
+  file 13 (zeros_1002e6_to_2000e6.f64                ) n=  3066173718 (297s)
+  file 14 (zeros_2002e6_to_3000e6.f64                ) n=  3142622344 (452s)
+  file 15 (zeros_2999e6_to_3000e6.f64                ) n=     6679192 (452s)
+  TOTAL n = 9068473888 (expect same 9,068,473,888 as day072)
+
+slope probe: t1 = tPT2 = 3000175332800.0 (validated day072 K'), t2 = 3003175332800.0
+       sigma |          S(t2) |       I_unk(t2) |     -Re phi(t2) |      K(t2) |    K(tPT2) |  slope dK/dt |      B(t2) |    log|z| |       fluct | |f|<=B |     K-B(t2)
+0.1252270103 | +142478234419.367 | -2501166634166.167 | +2358688390696.289 | -9051.2034 | -9042.1853 | -3.006022e-09 |   11203.46 | +10.534851 |   +9061.738 |    yes |   -20254.66
+0.2500000000 | +142478234419.370 | -2501166634167.844 | +2358688390694.611 | -9054.5559 | -9045.5379 | -3.006022e-09 |   11322.10 | +7.175256 |   +9061.731 |    yes |   -20376.66
+0.4000000000 | +142478234419.374 | -2501166634169.861 | +2358688390692.594 | -9058.5867 | -9049.5686 | -3.006022e-09 |   11590.62 | +3.057442 |   +9061.644 |    yes |   -20649.21
+0.4900000000 | +142478234419.376 | -2501166634171.071 | +2358688390691.383 | -9061.0052 | -9051.9866 | -3.006185e-09 |   12265.40 | -0.163281 |   +9060.842 |    yes |   -21326.41
+
+slopes (dK/dt): min -3.006185e-09  max -3.006022e-09
+margins K(t2)-B(t2): min -21326.41  max -20254.66
+identity closure at t2 (|fluct| <= B): ALL FOUR
+VERDICT: slope <= 0 -> the residual gap WIDENS in t. The unexcluded
+  residual is the WHOLE face (t >= tPT2), worst at t = tPT2.
+NO RH claim.

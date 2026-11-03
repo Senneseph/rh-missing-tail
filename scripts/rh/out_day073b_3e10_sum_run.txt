@@ -1,0 +1,8 @@
+preflight: 4096 stored zeros sampled (41 deep per sigma) worst |mpmath - float| = 1.776e-15
+unit B: n_in = 92571198520  wallclock = 31.2 min  maxformdiff = 2.235e-08
+  sigma=0.1252270103: SUM = +987406884352.812012   K_pinned =   -9049.3953   B_opt =  10302.85   K-B =  -19352.2453
+  sigma=0.2500000000: SUM = +987406884352.812012   K_pinned =   -9052.7478   B_opt =  10421.49   K-B =  -19474.2378
+  sigma=0.4000000000: SUM = +987406884352.812012   K_pinned =   -9056.7786   B_opt =  10690.00   K-B =  -19746.7786
+  sigma=0.4900000000: SUM = +987406884352.812012   K_pinned =   -9059.1966   B_opt =  11364.76   K-B =  -20423.9566
+  VERDICT (pinned): optimal-split wall CONFIRMED at t = tPT2
+  saved /home/jsmille/Projects/rh-missing-tail/scripts/rh/out_day073b_3e10_sum.json
