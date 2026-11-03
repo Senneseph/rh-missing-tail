@@ -255,6 +255,26 @@ CRT-verified margins (worst re-issued piece: mnew 0.50265809882 vs the ledger
    relative 1e-16 at small d0. Next formal fire (optional
    sharpen): unfreeze T2/T3 for N > 2*nIdeal to push the face-death
    region from Nstar to the true N1 (gain = relative tail size).
+   **REDUCTION 0269 (read-level, cross-checked in tree): the whole
+   terminal face quantified.** hOffCPT2 = no off-pair at t0 >= tPT2,
+   0 < d0 <= colletD0max = 8747729897/10^10 - 1/2 = 0.3747729897
+   (the [Z78C] functional-equation shell: off-line zeros above the
+   frontier sit in sigma in [0.125227, 0.874773]). Face split at
+   target height: nearline (0, 1e-3] IN BODY (0261); two measured
+   seams (1e-3, 1/200) (0261/day064, 0/60, t-flat); strip band
+   [1/200, 0.374773] = 98.7% of the width, discharged IN BODY (B10:
+   t4l_bandWireBelow/t4l_bandEmpty/t4l_stripFacesEmpty: wire+Mr <
+   devProg from t4m_margin + FUnif.s2ActualFullBand) GIVEN the G-hs1
+   pin family at band zeros (B8: P1 hFill in body at a zero; P2 hDev
+   CENSUS-DEPENDENT; P3 hMass measured; P4 hAbsorb in-body). THE
+   ENTIRE RESIDUE OF RH = {P1-P4 at t0 >= tPT2} + {nearline seams}.
+   Route (a) = extend the pin/data machinery past tPT2 (board). Route
+   (b) sharpened = analytic zero-freeness of sigma in
+   [1-colletUpper, 1/2] at t >= tPT2 - a DIRECT |zeta| exclusion
+   never using the census kernels; with [Z78C]'s shell it IS full RH
+   above the frontier (the whole B10/squeeze/EM machinery 0257-0268
+   then becomes irrelevant - it is the data-side bookkeeping of
+   route (a)).
 3. **Frontier extension (0126 route A, B6-board family).** An external
    record family that extends the certified on-line frontier past tPT2
    (new isolation record beyond Platt) would re-label the face to a higher
@@ -269,7 +289,7 @@ CRT-verified margins (worst re-issued piece: mnew 0.50265809882 vs the ledger
 | (B) 3e10 re-issue fleet | 1–1.5 days local | integrity loop only (forensics closure); no gating |
 | (C) in-house 3e12 run | 100–150 fleet-days (cloud) | none (citation already covers [0, tPT2]) |
 | (D) Platt checksum pinning | hours | provenance hardening | **CLOSED 0263**: cited papers + stream slice SHA-256-pinned (data/provenance/PINS.json, verifier exit 0) |
-| (E) open-question pursuit (1) decoupled-run variant — CLOSED 0260/0261 (S3-leg infeasible at Noff, in body); (2) asymmetric EM families — CLOSED BY 0262+0266 (0262: the {pin+bridge+face} cycle killed in body at every pinned run; 0266: the face-premise pair {S3 face, pin} internally inconsistent at EVERY run WITHOUT the bridge premise — total EM-class exhaustion, day065 map 36/36 EXHAUSTED; no EM run/scale/asymmetry survives; 0267/0268 sharpen the record to interval-valued face death on [nIdeal, Nstar) in closed form); (3) A2c bridge in body — COMPLETE 0265/0266 (bridge an in-body theorem; _inbody squeeze companions; T4OffLJ total-exhaustion record); (4) genuinely new argument outside the squeeze class — OPEN (research): now the ONLY live route to hOffCPT2 beside board/data route (a) | (4) research scale | (3) DONE — 0262's record citation-free and premise-minimal; (4) the terminal face itself |
+| (E) open-question pursuit (1) decoupled-run variant — CLOSED 0260/0261 (S3-leg infeasible at Noff, in body); (2) asymmetric EM families — CLOSED BY 0262+0266 (0262: the {pin+bridge+face} cycle killed in body at every pinned run; 0266: the face-premise pair {S3 face, pin} internally inconsistent at EVERY run WITHOUT the bridge premise — total EM-class exhaustion, day065 map 36/36 EXHAUSTED; no EM run/scale/asymmetry survives; 0267/0268 sharpen the record to interval-valued face death on [nIdeal, Nstar) in closed form); (3) A2c bridge in body — COMPLETE 0265/0266 (bridge an in-body theorem; _inbody squeeze companions; T4OffLJ total-exhaustion record); (4) genuinely new argument outside the squeeze class — OPEN (research): now the ONLY live route to hOffCPT2 beside board/data route (a); 0269 pins its exact content: analytic zero-freeness of sigma in [1-colletUpper, 1/2] at t >= tPT2 (direct |zeta| exclusion, no census kernels) — see 0269 reduction block | (4) research scale | (3) DONE — 0262's record citation-free and premise-minimal; (4) the terminal face itself |
 
 ## 4. Honesty boundary
 

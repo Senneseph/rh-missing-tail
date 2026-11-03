@@ -1,0 +1,20 @@
+{
+  "id": "0269",
+  "kind": "reduction-anchor",
+  "date": "2026-11-03",
+  "module": "docs/FRONTIER-AND-RECORD-PLAN.md + formal/RhAttack/RHEnd.lean (read-level analysis)",
+  "status": "landed",
+  "title": "TERMINAL FACE REDUCTION - hOffCPT2 quantified: 98.7% in-body-conditional to the G-hs1 pin family; irreducible content = the P1-P4 pins at t0 >= tPT2 (route a data) or analytic zero-freeness of the strip (route b)",
+  "summary": "Read-level reduction of the terminal face hOffCPT2 (every part cross-checked against RHEnd.lean/P12Uniform.lean/Z78Collet.lean in the tree). hOffCPT2 = no off-pair at t0 >= tPT2 for 0 < d0 <= colletD0max where colletUpper = 8747729897/10^10 so colletD0max = 0.3747729897 (the [Z78C] functional-equation shell: off-line zeros above the frontier sit in d0 <= 0.3748, i.e. sigma in [0.125227, 0.874773], and [Z78C] itself closes sigma outside that shell). Face decomposition at target height: region A (0, 1e-3] nearline = IN BODY (0261 T4OffLH: S1 Noff >= schedB, S2 wallLo(Noff) <= BwireR+MrR, S3 tension => d0 > d0near; tension and S3-face disjoint in d0, onset 4.74e-3 vs d0star 3.35e-3); region B (1e-3, d0star=31000000^(-1/4)/4] and region C [d0star, 1/200) = MEASURED seams (day064: 0/60 closure points, t-flat on [1e3,1e16]); region D [1/200, 0.374773] = 98.7% of the face width, discharged IN BODY (B10 t4l_bandWireBelow/t4l_bandEmpty/t4l_stripFacesEmpty: wire+Mr < devProg in body from t4m_margin + FUnif.s2ActualFullBand) GIVEN the G-hs1 pin family at band off-pair zeros (B8 Part: P1 hFill Qside = ||zeta(rho)-Kfun(rho)|| = ||Kfun(rho)|| at a zero - in body; P2 hDev devFacePt(rho) <= ||p4_Wn rho n|| - CENSUS-DEPENDENT; P3 hMass ||Kfun-(P-I)|| <= mvalFace - measured A4.3 mass; P4 hAbsorb devProg + mval <= devFacePt - in-body structure; S1Face.hs1AtZero derivation in body). Hence the ENTIRE RESIDUE of RH is exactly: pins P1-P4 holding at band off-pair zeros for t0 >= tPT2 (they are measured where data reach and citation content above the verified frontier, exactly like [Z-PT2]) plus the two nearline seams. Route (a) = extend the board/data pin machinery past tPT2 (watcher armed at the TEN contact). Route (b) sharpened = an analytic zero-freeness of the strip sigma in [1-colletUpper, 1/2] at heights t >= tPT2 - a DIRECT |zeta| exclusion that never uses the census kernels (P2/P3) at all; with [Z78C]'s functional-equation shell it is full RH above the frontier, and the B10 squeeze machinery (all of 0257-0268) is then irrelevant. No RH claim; no new formal lemmas in this entry (read-level record).",
+  "artifacts": [
+    "face decomposition probe output (98.7% / 1.1% / 0.3% split) at tPT2",
+    "colletUpper = 8747729897/10^10, colletD0max = 0.3747729897, d0star = 31000000^(-1/4)/4 = 3.350423e-3",
+    "pin family P1-P4 (RHEnd Part B8) mapped to data-vs-body status",
+    "B10 (t4l_bandWireBelow, t4l_bandEmpty, t4l_stripFacesEmpty) identified as the in-body discharger of region D given the pins"
+  ],
+  "links": ["0251", "0261", "0254", "0256"],
+  "next": [
+    "route (b) first concrete unit: analytic sub-problem scoping - (i) quantify what a zero-free claim in [0.125227, 1/2] at t >= tPT2 would need (Levinson/argument-principle vs zero-density); (ii) identify the strongest in-tree proxy: does any combination of the landed zero machinery (W2 kernel, A4.3 mass, Platt on-line record) already give a |zeta| exclusion usable ABOVE tPT2 without the census?",
+    "route (a): board idle at the TEN contact; watcher armed (no action due)"
+  ]
+}
