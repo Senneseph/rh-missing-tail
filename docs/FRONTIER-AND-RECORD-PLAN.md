@@ -206,6 +206,31 @@ CRT-verified margins (worst re-issued piece: mnew 0.50265809882 vs the ledger
    only genuinely new mathematics is U1-U4: s-analyticity of the
    tail integral INT_{Ioi n} (B2 x) s(s+1) x^(-s-2) dx on
    {Re s > -1} (its exact absolute-convergence domain).
+   **COMPLETE 0265/0266 (P8A2c U1-U6 + T4OffLJ landed, build green
+   17454 jobs, zero module warnings): the A2c bridge is IN BODY
+   (0265: identity theorem on {s | s.re > -1} \ {1} at basepoint
+   2+2i against p4_identity at Re s > 1; a2c_inbody_identity +
+   a2c_sL_bridge + seven _inbody squeeze companions in T4OffLE/
+   LF/LG/LI). The squeeze line advances to TOTAL EXHAUSTION
+   (0266: T4OffLJ - the face-premise pair {S3 face, pin} is
+   jointly impossible IN BODY at EVERY run on the band, no bridge
+   premise, no pin fact; weak-pin face-death extension
+   s3faceDeadWeakPin; day065 map 36/36 band points EXHAUSTED -
+   live window W = (N1, min(N2,N3)) empty everywhere, N1 >= N2 a
+   direct consequence of the in-body S4 gap wire < own; strict
+   A2c-exact fill at t = 1e3: |em(sL,Noff)|/wallLo - 1 <= 6.1e-15,
+   |em(sL,Noff)|/own = 2.000000 - the 0259 pin in the exact fill).
+   The EM-squeeze class has no premise-consistent instance
+   anywhere on the band at target height; the 0262 record stands
+   in its strongest form, citation-free. Residue for hOffCPT2 =
+   the NON-EM class ONLY: (a) board / zeta-data records above
+   tPT2 (external, board idle at the TEN contact, watcher armed)
+   or (b) a direct |zeta| lower bound / genuinely new argument at
+   height >= tPT2, sigma in [1/2 - d0max, 1/2], outside the EM
+   kernel entirely - research scale, the terminal face itself.
+   Named next formal fire: the weak-pin range extension (in-body
+   range-pin wallLo(N) > own for N in [nIdeal, 2 nIdeal] +
+   wallLo monotonicity in N - components already in T4OffLF).
 3. **Frontier extension (0126 route A, B6-board family).** An external
    record family that extends the certified on-line frontier past tPT2
    (new isolation record beyond Platt) would re-label the face to a higher
@@ -220,7 +245,7 @@ CRT-verified margins (worst re-issued piece: mnew 0.50265809882 vs the ledger
 | (B) 3e10 re-issue fleet | 1–1.5 days local | integrity loop only (forensics closure); no gating |
 | (C) in-house 3e12 run | 100–150 fleet-days (cloud) | none (citation already covers [0, tPT2]) |
 | (D) Platt checksum pinning | hours | provenance hardening | **CLOSED 0263**: cited papers + stream slice SHA-256-pinned (data/provenance/PINS.json, verifier exit 0) |
-| (E) open-question pursuit (1) decoupled-run variant — CLOSED 0260/0261 (S3-leg infeasible at Noff, in body); (2) asymmetric EM families — RESOLVED BY 0262 (any instance reusing the {pin+bridge+face} cycle at a run is killed in body; a surviving one must bound the true fill without the pin on that run); (3) A2c bridge in body — ATTACK 0264 (P8A2c U0 landed; U1-U6 roadmap pinned; the third, non-board provenance-hardening track); (4) genuinely new argument outside the squeeze class — OPEN (research) | (3) formal scale, (4) research scale | (3) makes 0262's record citation-free; (4) the only non-board path to hOffCPT2 |
+| (E) open-question pursuit (1) decoupled-run variant — CLOSED 0260/0261 (S3-leg infeasible at Noff, in body); (2) asymmetric EM families — CLOSED BY 0262+0266 (0262: the {pin+bridge+face} cycle killed in body at every pinned run; 0266: the face-premise pair {S3 face, pin} internally inconsistent at EVERY run WITHOUT the bridge premise — total EM-class exhaustion, day065 map 36/36 EXHAUSTED; no EM run/scale/asymmetry survives); (3) A2c bridge in body — COMPLETE 0265/0266 (bridge an in-body theorem; _inbody squeeze companions; T4OffLJ total-exhaustion record); (4) genuinely new argument outside the squeeze class — OPEN (research): now the ONLY live route to hOffCPT2 beside board/data route (a) | (4) research scale | (3) DONE — 0262's record citation-free and premise-minimal; (4) the terminal face itself |
 
 ## 4. Honesty boundary
 
