@@ -1,0 +1,17 @@
+{
+  "id": "0271",
+  "kind": "probe-record",
+  "date": "2026-11-03",
+  "module": "scripts/rh/day066_leftedge_survey.py + scripts/rh/out_day066_leftedge_coarse.txt",
+  "status": "landed",
+  "title": "day066 left-edge survey (coarse): grid 2.5e5 is 1.2e6 oscillation periods COARSE at t ~ 3e12 (zero spacing ~0.205) - window-minimum by grid is certified-VOID; attack line corrected to LOCAL disk explicit formula at a single zero",
+  "summary": "First concrete unit of route (b) (0270) run: day066 surveys |zeta(sigma' + it)| with sigma' = 0.8747729897 (the gamma-factor-stripped left edge via the functional equation) at 41 points on [tPT2, tPT2 + 1e7], step 2.5e5, dps 50: min 0.3310621 (t = 3.000176e12), max 3.351879, median 0.841. LESSON (the record): the oscillation scale at t ~ 3e12 is the on-line zero spacing ~ 2*pi/log(2*pi*t/e) = 0.205 - the grid is ~1.2e6 periods coarse, so the window minimum by grid certification is VOID: the true minimum is set by the local zero geometry (nearest on-line zeros ~0.2 apart), i.e. by zero POSITIONS that above tPT2 are exactly what RH asserts - a window survey cannot prove a below-bound. CORRECTED ATTACK LINE (the named 0272 unit): the explicit-formula sub-claim must be LOCAL, disk-sized. A hypothetical off-line zero rho in the terminal strip satisfies 0 = zeta(rho) via the explicit formula on D(rho, r): f_primes(rho) [explicit sum, computable] + f_knownZeros(rho) [EXACT below tPT2 via the bit-pinned Platt record 0263] + f_unknownZeros(rho; r) [bounded by R-vM spacing for zeros within O(r) of rho]. If the bounds cannot force a zero, no such rho exists; the required bound quality is measurable NOW by calibration at a known on-line zero below tPT2 (where the identity must hold with equality and the unknown-zero side = the actual nearby zeros). This converts Claim (b) from a window-wide |zeta| lower bound (shown void) into a local identity + bounding problem - the project's native spectral direction. No RH claim.",
+  "artifacts": [
+    "scripts/rh/day066_leftedge_survey.py (functional-equation left-edge reducer, re-runnable)",
+    "scripts/rh/out_day066_leftedge_coarse.txt (41-point survey + hand-recorded lesson)"
+  ],
+  "links": ["0270", "0269", "0263"],
+  "next": [
+    "0272 unit: local explicit-formula identity at a single off-critical-line zero - first a CALIBRATION probe below tPT2 at known on-line zeros (identity must hold exactly; measure the unknown-side bound quality at the r-scales where the prime side is computable), then the formal statement for a hypothetical strip zero"
+  ]
+}

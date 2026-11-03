@@ -1,0 +1,46 @@
+a = 0.1252270103  (collet lower edge)
+sigma' = 0.8747729897  (reflected right sigma)
+window: t in [3000175332800.0, 3000185332800.0], step 250000.0
+scale factor C(a) = 0.07831
+
+    10 points done (t = 3.000178e+12, |zeta| = 6.223511e-01)
+    20 points done (t = 3.000180e+12, |zeta| = 4.773394e-01)
+    30 points done (t = 3.000183e+12, |zeta| = 7.047417e-01)
+    40 points done (t = 3.000185e+12, |zeta| = 5.664926e-01)
+
+points: 41
+min |zeta(sigma'+it)| = 3.310621e-01 at t = 3.000176e+12
+max |zeta(sigma'+it)| = 3.351879e+00 at t = 3.000182e+12
+median = 8.410161e-01
+
+at the minimum: t = 3.000176e+12
+  |zeta(sigma' + it)|        = 3.310621e-01
+  |zeta(a + it)| (left edge, Stirling-scaled exact product of the
+   explicit factors at this t) = 2.309573e-2046684822911
+
+interpretation (per 0270):
+ - a below-bound |zeta(a+it)| >= f(t) on [tPT2, tPT2+W] is VISIBLE iff
+   min |zeta(sigma'+it)| stays above the interval-arithmetic floor;
+ - the probe scale decides the formal sub-claim's target exponent.
+
+---- day066 LESSON (recorded by hand) ----
+Oscillation scale at t ~ 3e12: mean on-line zero spacing = 2*pi/log(2*pi*t/e)
+= ~0.205 in t. The survey grid step 2.5e5 is ~1.2e6 oscillation periods
+COARSE - the 0.331 "minimum" is a grid artifact, NOT the window minimum.
+The true min of |zeta(sigma'+it)| on [tPT2, tPT2+W] is set by the local
+on-line zero geometry (nearest zeros are ~0.2 apart) and is of order
+|zeta(0.875 + i*gamma)| for the nearest on-line zero gamma - i.e. it
+requires the zero POSITIONS in the window, which above tPT2 are exactly
+what RH asserts. A grid survey of the window cannot certify a below-bound.
+
+Corrected attack line (0271): the explicit-formula-at-explicit-heights
+sub-claim should be LOCAL, not window-wide. For a hypothetical off-line
+zero rho in the terminal strip, the explicit formula on a small disk
+D(rho, r) gives an identity 0 = zeta(rho) = f_primes(rho) + f_knownZeros(rho)
++ f_unknownZeros(rho; r); the known-zero side is EXACT below tPT2 (Platt,
+bit-pinned 0263); the unknown-zero side is bounded by R-vM spacing in a
+nearby box (zeros within O(r) of rho); the prime side is explicit. If the
+sum of the bounds cannot reach zero, no such rho exists - and the bound
+quality needed is measurable numerically NOW (probe: the identity at a
+trial point near a known on-line zero below tPT2, where it must hold with
+equality for the on-line zero... i.e. a calibration run).
