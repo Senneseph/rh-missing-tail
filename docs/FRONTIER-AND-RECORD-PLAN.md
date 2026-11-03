@@ -240,6 +240,21 @@ CRT-verified margins (worst re-issued piece: mnew 0.50265809882 vs the ledger
    2 nIdeal up to the day065 N1 crossing - a closed log/rpow chain;
    day065 margins: tightest log10(N1/N2) = 0.094 at (1e3, 1/200),
    robust at every grid point).
+   **LANDED 0268 (T4OffLL, the wire-crossing fire): Nstar in CLOSED
+   FORM - (2*(BwireR+MrR+C2+C3))^(-(1/(1/2-d0))), the crossing where
+   the T1-only wall (T2/T3 frozen at their 2*nIdeal values) touches
+   the wire; wirePos + Nstar_pos + wallLoAboveWire (wall strictly
+   above wire for every run in [2*nIdeal, Nstar)) +
+   s3faceInfeasibleBelowNstar (A2c-exact fill strictly above the wire
+   for every run in [nIdeal, Nstar), by cases 0267-range /
+   0266-atom). The S3 face is now premise-impossible in one piece
+   across [nIdeal, Nstar) - the interval-valued face-death record
+   reaches the (frozen-tail) wire crossing in closed form; numerics
+   (50-dp): Nstar < N1 strictly at every point, N1/Nstar = 1+4e-16
+   at (1e3,1/200) - the frozen crossing IS the true crossing up to
+   relative 1e-16 at small d0. Next formal fire (optional
+   sharpen): unfreeze T2/T3 for N > 2*nIdeal to push the face-death
+   region from Nstar to the true N1 (gain = relative tail size).
 3. **Frontier extension (0126 route A, B6-board family).** An external
    record family that extends the certified on-line frontier past tPT2
    (new isolation record beyond Platt) would re-label the face to a higher
@@ -254,7 +269,7 @@ CRT-verified margins (worst re-issued piece: mnew 0.50265809882 vs the ledger
 | (B) 3e10 re-issue fleet | 1–1.5 days local | integrity loop only (forensics closure); no gating |
 | (C) in-house 3e12 run | 100–150 fleet-days (cloud) | none (citation already covers [0, tPT2]) |
 | (D) Platt checksum pinning | hours | provenance hardening | **CLOSED 0263**: cited papers + stream slice SHA-256-pinned (data/provenance/PINS.json, verifier exit 0) |
-| (E) open-question pursuit (1) decoupled-run variant — CLOSED 0260/0261 (S3-leg infeasible at Noff, in body); (2) asymmetric EM families — CLOSED BY 0262+0266 (0262: the {pin+bridge+face} cycle killed in body at every pinned run; 0266: the face-premise pair {S3 face, pin} internally inconsistent at EVERY run WITHOUT the bridge premise — total EM-class exhaustion, day065 map 36/36 EXHAUSTED; no EM run/scale/asymmetry survives); (3) A2c bridge in body — COMPLETE 0265/0266 (bridge an in-body theorem; _inbody squeeze companions; T4OffLJ total-exhaustion record); (4) genuinely new argument outside the squeeze class — OPEN (research): now the ONLY live route to hOffCPT2 beside board/data route (a) | (4) research scale | (3) DONE — 0262's record citation-free and premise-minimal; (4) the terminal face itself |
+| (E) open-question pursuit (1) decoupled-run variant — CLOSED 0260/0261 (S3-leg infeasible at Noff, in body); (2) asymmetric EM families — CLOSED BY 0262+0266 (0262: the {pin+bridge+face} cycle killed in body at every pinned run; 0266: the face-premise pair {S3 face, pin} internally inconsistent at EVERY run WITHOUT the bridge premise — total EM-class exhaustion, day065 map 36/36 EXHAUSTED; no EM run/scale/asymmetry survives; 0267/0268 sharpen the record to interval-valued face death on [nIdeal, Nstar) in closed form); (3) A2c bridge in body — COMPLETE 0265/0266 (bridge an in-body theorem; _inbody squeeze companions; T4OffLJ total-exhaustion record); (4) genuinely new argument outside the squeeze class — OPEN (research): now the ONLY live route to hOffCPT2 beside board/data route (a) | (4) research scale | (3) DONE — 0262's record citation-free and premise-minimal; (4) the terminal face itself |
 
 ## 4. Honesty boundary
 

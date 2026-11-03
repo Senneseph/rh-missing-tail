@@ -1,0 +1,23 @@
+{
+  "id": "0268",
+  "kind": "positive-anchor",
+  "date": "2026-11-03",
+  "module": "formal/RhAttack/T4OffLL.lean",
+  "status": "landed",
+  "title": "WIRE-CROSSING EXTENSION (0266 fire) - closed-form weak wire crossing Nstar + S3 face infeasibility on the whole [nIdeal, Nstar) at every band point",
+  "summary": "The second named fire of 0266 landed as T4OffLL (0268). The weak-pin face-death region, previously [nIdeal, 2*nIdeal] (0267 T4OffLK), is extended to the CLOSED FORM of the wire crossing: Nstar(t,d0) = (2*(BwireR+MrR+C2+C3))^(-(1/(1/2-d0))), where C2/C3 are the T2/T3 tail constants FROZEN at their 2*nIdeal values (the T1-only wall model). Theorems: (S0) wirePos - wire strictly positive on the band. (S1) wallLoAboveWire - for every run 2*nIdeal <= N < Nstar, wallLo(t,d0,N) > BwireR+MrR: T1 strictly decreasing with the T2/T3 caps frozen above their actual values (T4OffLF t2cap/t3cap pattern generalized to free N). (S2) s3faceInfeasibleBelowNstar - for every run nIdeal <= N < Nstar, the A2c-exact fill ||p4_em_expr(sL,N)|| is strictly above the wire, by cases: [nIdeal, 2*nIdeal] via T4OffLK range face death, (2*nIdeal, Nstar) via S1 + the 0266 weak-pin atom T4OffLJ.s3faceDeadWeakPin. No pin premise, no bridge premise, no RH claim. Numerics (50-dp): Nstar < N1 (the day065 true wall=wire crossing) STRICTLY at every checked point, N1/Nstar = 1+4e-16 at (1000,1/200) and 1+6e-16 at (1e6,1/200) - the T1-only crossing is the true crossing up to relative 1e-16 at small d0; at large d0 the interval [2*nIdeal, Nstar) is thick (Nstar/2nIdeal >> 1). The S3 face is now formally premise-impossible in one piece across the whole interval [nIdeal, Nstar) - past 0267's single-instantiation pin, this is the first interval-valued face-death record, and it reaches the (frozen-tail) wire crossing in closed form.",
+  "artifacts": [
+    "T4OffLL.C2 / T4OffLL.C3 - frozen T2/T3 tail constants at 2*nIdeal",
+    "T4OffLL.Nstar - closed-form weak wire crossing (T1-only wall model)",
+    "T4OffLL.wirePos - band-positivity of BwireR+MrR",
+    "T4OffLL.Nstar_pos - Nstar > 0 on the band",
+    "T4OffLL.wallLoAboveWire - wall strictly above wire on [2*nIdeal, Nstar)",
+    "T4OffLL.s3faceInfeasibleBelowNstar - A2c-exact fill strictly above wire on [nIdeal, Nstar)"
+  ],
+  "build": "lake build 17454 jobs green (formulation only; no axioms)",
+  "links": ["0262", "0265", "0266", "0267"],
+  "next": [
+    "unfreeze-fire (optional sharpen): extend wallLoAboveWire past Nstar toward the TRUE crossing N1 by propagating the shrinking T2/T3 caps for N > 2*nIdeal (day065 shows N1/Nstar = 1+O(1e-16) at small d0 - the gain is at most the relative tail size; the record value is mainly at large d0 where the frozen interval already has thickness)",
+    "non-EM route (b): the terminal face hOffCPT2 residue is unchanged - a direct |zeta| lower bound / genuinely new argument at height >= tPT2, outside the EM kernel entirely, remains the only non-board route"
+  ]
+}
