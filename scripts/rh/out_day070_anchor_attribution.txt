@@ -1,0 +1,48 @@
+0273a-r: t=1e9 anchor attribution experiment
+GLAST = 3001345999.8730092049  (n = 6679194)
+
+(1) S per-file subtotals (float64 chunks, dedup ownership):
+  zeros_T10000000_ext_full.txt               n=    18524378  S= +2.09391210e+08
+  lshards/zeros_8846000.dat                  n=     4767155  S= +4.40224329e+07
+  lshards/zeros_10946000.dat                 n=     4833148  S= +4.27665841e+07
+  lshards/zeros_13046000.dat                 n=     4885261  S= +4.16479013e+07
+  lshards/zeros_15146000.dat                 n=     4930115  S= +4.06584818e+07
+  lshards/zeros_17246000.dat                 n=     4974533  S= +3.98105732e+07
+  lshards/zeros_19346000.dat                 n=     5008263  S= +3.89904830e+07
+  lshards/zeros_21446000.dat                 n=     5042332  S= +3.82663963e+07
+  lshards/zeros_23546000.dat                 n=     5069146  S= +3.75637702e+07
+  lshards/zeros_25646000.dat                 n=     5100907  S= +3.69626852e+07
+  lshards/zeros_27746000.dat                 n=     5125823  S= +3.63659727e+07
+  lshards/zeros_29846000.dat                 n=     5149642  S= +3.58090819e+07
+  hi1e9/zeros_hi31946e6_to_1e9.f64           n=  2779571880  S= +4.16900405e+08
+  hi1e9/zeros_1002e6_to_2000e6.f64           n=  3066173720  S= -2.55227814e+08
+  hi3e9/zeros_2002e6_to_3000e6.f64           n=  3142622346  S= -1.90300734e+07
+  hi3e9/extra/zeros_2999e6_to_3000e6.f64     n=     6679194  S= -7.86531125e+05
+  TOTAL                                      n=  9068457843  S= +7.84111559e+08   (143s)
+
+    dps-30 sum: 2000000/6679194 (202s)
+    dps-30 sum: 4000000/6679194 (262s)
+    dps-30 sum: 6000000/6679194 (321s)
+(2) S_crosscheck extra.f64 (n=6679194):
+    float64 chunk          = -7.8653112530e+05
+    dps-30 f_mp sum        = -7.8653112530e+05
+    dps-30 complex-log x4  = -7.8653136091e+05
+    (pairwise max diff = 2.356e-01: must be < 1)
+
+(3) U (t=1e9, g > GLAST):  c4 = -1.000000000000e+18
+    U_c4 exact (GL..160t) = -1.0879316395e+09
+    U_corr (f-c4/g^2)     = -2.0869357134e+07
+    U_tail exact (160t..) = +nan
+    U_asym total          = +nan   (the pinned U_true ~ -1.14e9)
+    U_quad (full f, ref)  = +nan
+
+(4) Re log phi: dps-30 = -785398130.557704210281   dps-60 = -785398130.557704210281   (diff 0.00e+00)
+    log|zeta| : dps-30 = 7.517145989231   dps-60 = 7.517145989231   (diff 0.00e+00)
+
+Traceback (most recent call last):
+  File "/home/jsmille/Projects/rh-missing-tail/scripts/rh/day070_anchor_attribution.py", line 186, in <module>
+    main()
+  File "/home/jsmille/Projects/rh-missing-tail/scripts/rh/day070_anchor_attribution.py", line 172, in main
+    RHS = lz60 - float(mpm.mpf("0.5").log()) * -1 + phi60
+                       ^^^^^^^^^^^^^^^^^^
+AttributeError: 'mpf' object has no attribute 'log'
