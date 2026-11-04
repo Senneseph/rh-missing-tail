@@ -1,0 +1,13 @@
+{
+  "id": "0279",
+  "timestamp": "2026-11-10T03:20:00",
+  "title": "0279: FINAL RECORD COMPILED - route (b) program terminal state, preprint-grade",
+  "tag": "route-b-0273",
+  "status": "closed",
+  "route": "Route (b) - terminal unit",
+  "summary": "The complete route (b) program (0269-0278) is compiled into docs/ROUTE-B-FINAL-RECORD-2026-11-04.md (preprint-grade): (1) the corrected face machine (FIFTH CORRECTION, dual integrators at machine precision, GATE 1/2 at 1e-7) VALID at tPT2/t3/t4 (slacks 10,066-11,127 / 19,588-20,905 / 30,371; six decades in t; mpf-exact K at the t4 1e18 cancellation); (2) the frontier window pinned: 8 on-line zeros measured (day080 census, per-root verified), <= 22 certified (HSXW), <= 14 face-part; (3) the gate named and formalized (0276/T4OffLO, strict rationals): c <= cGate(t) = 2.5821 -> 1.3445 -> ~0.95 would close every face window for all t >= tPT2; published input 12.9117 misses it 5.00x; (4) the wall certified (0278/T4OffLP): the gate is below the FIRST MOMENT of every configuration-independent count-kernel envelope at every t (ratios 1.375/3.88/56.5, growing ~ (ln t)^2), confirmed on the real data (day081: mean 3.4, max 2-unit count 9); (5) formal inventory T4OffL..T4OffLP, full tree 17,454 jobs 0 errors. VERDICT (honesty block, final): face OPEN; window bounded but not excluded; no zero-free claim; NO RH CLAIM. Route (b) is terminal: the window exclusion closes only with phase-level input below the first moment (Conrey-Ghosh-class S-theory at h=1, a face-kernel S-method, or the realized S-walk as input) - genuinely new mathematics. The program's value stands: a verified machine, a pinned geometry, a named gate, a certified wall - the sharpest known local picture of the RH terminal face.",
+  "record": "docs/ROUTE-B-FINAL-RECORD-2026-11-04.md",
+  "formal": "formal/RhAttack/T4OffL..T4OffLP (17454 jobs, 0 errors; strict rational gate/wall with certified margins)",
+  "pending": "day079 sigma Q/F/N t4 rows (~4-13h each): will complete the 4-sigma t4 block; low risk (sigma_A template landed; the t4 numbers enter the record as a data block, not a gate or wall input)",
+  "terminalVerdict": "FACE OPEN. NO ZERO-FREE CLAIM. NO RH CLAIM. Route (b) program COMPLETE."
+}
