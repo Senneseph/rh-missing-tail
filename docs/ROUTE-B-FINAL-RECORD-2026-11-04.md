@@ -233,3 +233,52 @@ corrected / day075 / day078 / day079 / day080).  Re-verification:
 * Entries: `docs/discovery/entries/0{269..0278}.json`; design history
   `docs/ROUTE-B-0273-DESIGN-2026-11-03.md`; frontier plan
   `docs/FRONTIER-AND-RECORD-PLAN.md`.
+
+## 10 · Literature audit (0280) — the S-route class exhausted as of 2026
+
+Fresh sweep of the explicit S-theory literature through its 2026 state
+of the art (arXiv 2604.05733, 2510.14309, 2412.15470, 2603.21490,
+2402.04272; JNT 2021; CJS 2011; Trans 8571):
+
+* **Best unconditional explicit |S(t)|** at t = 3.0002e12: the
+  0.11 log t + 0.29 log log t + 2.29 family (2024) gives ≈ 6.42; the
+  0.112/0.278/2.510 bound (valid T ≥ e) gives ≈ 6.66; the HSXW-2022
+  machinery of 0276 gives 6.86.  All sit at **5.0–5.2×** the per-piece
+  gate requirement after the triangle (piece ≈ 12.9–13.3 vs cGate =
+  2.5821).
+* **The 2024 R-vM improvement** (arXiv 2412.15470, Fiori appendix:
+  0.10076 log T + 0.24460 log log T + 8.08344) is asymptotically sharper
+  but **worse at our heights** (the O(8.08) constant dominates until
+  astronomically larger T).
+* **S-difference forms:** Conrey–Ghosh–Gonek give
+  |S(T+H) − S(T)| ≤ (1/2+o(1)) log T/log log T **under RH** (≈ 4.1 at
+  3e12, *growing* in t — conditional and the wrong asymptotic for the
+  decaying gate).  The explicit 2nd/4th moments of S(t+h) − S(t)
+  (Trans 8571, h ≪ 1/log T) are **mean-value** (positive-proportion)
+  results — structurally incapable of delivering the pointwise sup a
+  configuration-independent gate needs.
+* **2026 zero-free regions** (1 − 1/(4.896 log t); the
+  55.241 (log)^(2/3)(log log)^(1/3) form) stay near the right edge
+  (σ ≥ 0.993 at our heights); the face at Re = 0.125227 is untouched,
+  as always.
+* **No published sub-O(ln t) unit-scale pointwise S-difference bound
+  exists** — the 0276 audit re-confirmed against the 2024–2026
+  literature and now holds as the state of the art.
+
+**Decomposition of the 5.00× miss (for the record):**
+5.00 = **1.60** (the irreducible first-moment wall, 0278: cGate 2.5821
+< per-unit mean 4.1199, ratio growing in t) × **3.1** (sup-overhead of
+explicit S constants above the first moment — the Conrey–Ghosh-class
+constant-chase territory, in principle unengineerable for
+configuration-independent bounds).  No sharpening of any published
+constant can cross the 1.60 factor; that is the wall.
+
+**VERDICT (record sealed):** the S-route and every published
+count-kernel class is exhausted.  The face remains OPEN; the window is
+pinned (8 on-line + ≤ 14 face-part); the gate is named; the wall is
+certified; the literature is audited to 2026.  **No zero-free claim.
+No RH claim.**  Route (b) is terminal; its value stands as the sharpest
+known local picture of the RH terminal face — a verified machine, a
+pinned geometry, a named gate, a certified wall, and a complete audit
+of why the gate cannot be met from the existing mathematical
+machinery.
