@@ -515,5 +515,4 @@ the first moment (1.596×, growing; below the realized typical-face
 floors 1.087–1.722×), piece S-route ≤ 264.2433 S-units at tPT2,
 profile 2.5821 → 1.3445 → 1.2578** — is a unit-scale
 zero-density/pair-correlation result of strength that does not exist
-in the literature through 2026.  That is the exact, measured
-remaind
+in the literature through 2026.  That is the exact, measured remainder of RH.  The face remains OPEN; no zero-free claim; **no RH claim.**
