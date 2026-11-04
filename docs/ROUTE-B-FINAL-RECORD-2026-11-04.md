@@ -516,3 +516,63 @@ floors 1.087–1.722×), piece S-route ≤ 264.2433 S-units at tPT2,
 profile 2.5821 → 1.3445 → 1.2578** — is a unit-scale
 zero-density/pair-correlation result of strength that does not exist
 in the literature through 2026.  That is the exact, measured remainder of RH.  The face remains OPEN; no zero-free claim; **no RH claim.**
+## 14 · 0284 — CT-5: the uniform S-diff gate is structurally dead
+
+The 0276 gate closes the face window W(t) **only if** its antecedent
+holds for **every** t ≥ tPT2: per-piece S-diff
+c1(t), c2(t) ≤ cGate, with cGate a **fixed finite** threshold
+(2.5821 → 1.3445 → 1.2578, decaying).  CT-5 audits that uniform
+form.  **It is impossible** — three certified layers (T4OffLS,
+green):
+
+**L1 — the measured envelope exceeds the gate at every t.**
+The piece constant is c1 = Smax(t) + Smax(GLAST) (0274 g2
+envelope; 0276 input 12.9117 = 6.862091 + 6.049376).  Its fixed
+part, **Smax(GLAST) = 6.049376** — the measured S-maximum at the
+data cut, independent of t — already exceeds the **strongest**
+gate constant (6.049376 > 2.5847 = cGateN), and the profile decays
+below it.  Violation **2.34× at tPT2, diverging** with the gate's
+decay.  **Consequence:** the "5.00× miss" recorded in 0275–0280
+was a misreading of where the obstruction sits — it is not an
+asymptotic O(ln t) gap awaiting a sharper constant; it is a
+**structural** violation (one fixed measured number alone exceeds
+the whole gate), plus a strict 5× at published input level
+(12.9117 > 5 × 2.5821, formal).
+
+**L2 — the actual S-diff is unbounded in t (published).**
+Unconditionally, S(t) = Ω±((ln t/ln ln t)^(1/3)) (Ramachandra;
+Conrey's RH survey): |S| is unbounded on every tail.  With gData
+fixed, the piece S-diff |S(t−1) − S(gData)| ≥ |S(t−1)| − |S(g)|
+is unbounded in t: for every C there is t ≥ tPT2 with piece
+S-diff ≥ C.  Any **valid** per-piece bound c1(t) dominates the
+actual diff — hence unbounded — while the gate threshold is fixed
+finite.  **The antecedent is false for every uniform finite
+threshold, for every S-stream** (formal `gateAntecedentFalse`).
+The gate is a one-way sufficient criterion, so it **cannot close
+the face for all t ≥ tPT2**: arbitrarily large t exist where its
+hypothesis fails.  This is a theorem **about the method**, not
+about the face.
+
+**L3 — the CT framing, corrected.**  "CT = a uniform all-t
+S-diff theorem below the first moment" is not "needed future
+mathematics of unknown existence" — it is **provably false**
+(unbounded S vs fixed/decaying threshold).  A face exclusion, IF
+TRUE, must come from a **non-gate** mechanism (t-adaptive, direct
+zero-count machinery from the 1e15 census + R-vM, or a different
+reduction); none is available in present mathematics through 2026.
+
+**Terminal closure of the S-route avenue — three independent
+walls:**
+
+```
+  wall        tPT2            t3              t4
+  measured    1.087-1.722x    1.586x          1.599x    (0283, T4OffLR)
+  mean        1.596x          3.882x          5.032x    (0281, T4OffLP, growing)
+  STRUCTURAL  antecedent FALSE at all large t (T4OffLS, 0284)
+```
+
+The program-side (S-route) work is **terminally exhausted**: the
+face remains **OPEN**, no zero-free claim, **no RH claim** — and
+any future exclusion must arrive from outside the S-route
+envelope, a domain where the known literature through 2026 gives
+no mechanism below these walls.  Full tree 17,454 jobs, 0 errors.
