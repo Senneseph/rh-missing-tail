@@ -479,3 +479,41 @@ zero-density / pair-correlation result of strength that does not
 exist in the literature through 2026.  Face **OPEN**; no zero-free
 claim; **no RH claim**.  (T4OffLR built green; full tree 17,454
 jobs, 0 errors.)
+
+### 13.1 · CT-4 — the realized wall over the whole profile (DONE, T4OffLR)
+
+At t3 and t4 the fedge signature is **negative** (−35.9257 /
+−42.8335): the realized S-route **rises with k** (floor at k = 0,
+no escape reading).  Certified floors, for **all** face counts:
+
+```
+  point :  S-route floor (k = 0)     gate product          ratio
+  tPT2 :  455.14 (k* = 0) / 287.26 (k* = 6)   264.2366     1.7225 / 1.0871
+                                                            (escape k* >= 7)
+  t3   :  321.365  (166.685 + 154.68, fedge rising)  202.6000  1.5861
+  t4   :  400.28   (207.52  + 192.76, fedge rising)  250.3565  1.5989
+  mean :  421.6058 / 786.62 / 1259.92  (T4OffLP)       1.596 / 3.882 / 5.032
+```
+
+`ct4Profile` (formal): the gate is below the **realized** floor at
+tPT2 (typical readings k ≤ 6), at t3 for all k, at t4 for all k —
+and below the **mean** (first moment) at every point (T4OffLP,
+growing).  The two certified lower bounds (mean, realized) now
+bracket the gate from above at every profile point; the only escape
+in the entire profile is the tPT2 face-count reading k ≥ 7 — a world
+with 7+ face zeros in one 2-unit window, the far-from-RH regime.
+`cGate4A := 12578/10000` (1.2578, day079 LANDED) now sits
+canonically in T4OffLO.  Full tree 17,454 jobs, 0 errors.
+
+**Where the program stands:** every mechanism class is closed
+(published constants; kernel families; in-machine S-tail; data;
+spacing-only; RH-conditional CGG; mean-value moments; conformant
+subclass + realized), two certified walls (mean AND realized) sit
+above the gate at every profile point, and the single remaining
+theorem — **CT: an unconditional, pointwise, sup-form bound below
+the first moment (1.596×, growing; below the realized typical-face
+floors 1.087–1.722×), piece S-route ≤ 264.2433 S-units at tPT2,
+profile 2.5821 → 1.3445 → 1.2578** — is a unit-scale
+zero-density/pair-correlation result of strength that does not exist
+in the literature through 2026.  That is the exact, measured
+remaind

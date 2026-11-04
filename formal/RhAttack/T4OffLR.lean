@@ -124,7 +124,62 @@ theorem  realizedWall_kle6  (k : ℕ)  (hk : k <= 6)  :  sRouteLoA  k  >  gatePr
 theorem  realizedRelease7  :  sRouteLoA  7  <  gateProdA  :=  by
   norm_num  [sRouteLoA,  flucLoA,  negKLoA,  fedgeHiA,  gateProdA,  cGateA,  W1A,  W2A]
 
-/-  CT-3 COMPOSITE (the wall the CLOSING THEOREM must beat):
+
+/-  ================  CT-4:  the t-profile realized wall  ================
+
+  At t3 and t4 the fedge signature is NEGATIVE (kernel edge
+  asymmetry flips:  +27.97 at tPT2,  -35.9257 at t3,  -42.8335 at
+  t4), so the realized S-route FLOORS at k = 0 and RISES with k -
+  there is NO escape reading at t3 / t4 (the k-ambiguity escape
+  7..14 exists only at tPT2).  Certified floors (conservative
+  margins on the cell outputs;  t3 fluc/fedge are the T4OffLO
+  certified constants):
+      t3:  fluc = 166.685,  K = -154.6931  (dps-60,  day075)  =>
+           S-route(k) >= fluc3Lo + negK3Lo + fedgeAbs3*k
+           k = 0 floor:  321.365  (kernel mass 150.688,
+           gate3 product 202.6000,  ratio 1.5861)
+      t4:  fluc = 207.525,  K = -192.7693  (dps-60,  day079)  =>
+           k = 0 floor:  400.28  (kernel mass 199.04,
+           gate4 product 250.3565,  ratio 1.5989)
+  -/
+
+/-  t3  (sigma_A)  -/
+def  fluc3Lo   :  ℚ  :=  T4OffLO.fluc_t3_A        --  166.685  (T4OffLO  certified)
+def  negK3Lo   :  ℚ  :=  15468  /  100            --  154.68  (floor  of  -K  =  154.6931)
+def  fedgeAbs3 :  ℚ  :=  T4OffLO.fedge_t3_A       --  35.9257  (T4OffLO  certified)
+
+def  sRouteLo3  (k : ℕ)  :  ℚ  :=  fluc3Lo + negK3Lo + fedgeAbs3 * k
+
+/-  t4  (sigma_A,  day079  LANDED  0281)  -/
+def  fluc4Lo   :  ℚ  :=  20752  /  100            --  207.52  (floor  of  207.525)
+def  negK4Lo   :  ℚ  :=  19276  /  100            --  192.76  (floor  of  -K  =  192.7693)
+def  fedgeAbs4 :  ℚ  :=  4283  /  100             --  42.83  (floor  of  |fedge|  =  42.8335)
+
+def  sRouteLo4  (k : ℕ)  :  ℚ  :=  fluc4Lo + negK4Lo + fedgeAbs4 * k
+
+/-  the realized wall at t3,  for EVERY face count k  -/
+theorem  realizedWall3  (k : ℕ)  :
+    sRouteLo3  k  >  cGate3A  *  (T4OffLP.wSpanLo3 : ℚ)  :=  by
+  dsimp  [sRouteLo3]
+  have  h0k  :  (k : ℚ)  >=  0  :=  by  exact_mod_cast  (Nat.zero_le  k)
+  have  hbase  :  fluc3Lo + negK3Lo  >  cGate3A  *  (T4OffLP.wSpanLo3 : ℚ)  :=  by
+    norm_num  [fluc3Lo,  negK3Lo,  fedgeAbs3,  cGate3A,  T4OffLP.wSpanLo3,  T4OffLO.fluc_t3_A,  T4OffLO.fedge_t3_A]
+  have  hnn  :  0  <=  fedgeAbs3  *  (k : ℚ)  :=
+    mul_nonneg  (by  norm_num  [fedgeAbs3,  T4OffLO.fedge_t3_A])  h0k
+  linarith  [hbase,  hnn]
+
+/-  the realized wall at t4,  for EVERY face count k  -/
+theorem  realizedWall4  (k : ℕ)  :
+    sRouteLo4  k  >  cGate4A  *  (T4OffLP.wSpanLo4 : ℚ)  :=  by
+  dsimp  [sRouteLo4]
+  have  h0k  :  (k : ℚ)  >=  0  :=  by  exact_mod_cast  (Nat.zero_le  k)
+  have  hbase  :  fluc4Lo + negK4Lo  >  cGate4A  *  (T4OffLP.wSpanLo4 : ℚ)  :=  by
+    norm_num  [fluc4Lo,  negK4Lo,  fedgeAbs4,  cGate4A,  T4OffLP.wSpanLo4]
+  have  hnn  :  0  <=  fedgeAbs4  *  (k : ℚ)  :=
+    mul_nonneg  (by  norm_num  [fedgeAbs4])  h0k
+  linarith  [hbase,  hnn]
+
+/-  CT-3/CT-4 COMPOSITE (the wall the CLOSING THEOREM must beat):
       1.  MEAN (always):  first moment E1 > requirement > gate
           (T4OffLQ.ct1Bracket + T4OffLP.firstMomentWall_tPT2),
           ratio 1.596, growing in t (3.882 / 5.032).
@@ -146,5 +201,19 @@ theorem  ct3Wall  :
       (T4OffLP.dmainLo * T4OffLP.wSpanLo : ℚ)  >  T4OffLP.reqLo  ∧
         sRouteLoA  7  <  gateProdA  :=
   ⟨realizedWall6,  T4OffLP.firstMomentWall_tPT2,  realizedRelease7⟩
+
+/-  CT-4:  the REALIZED WALL over the WHOLE gate profile
+      (gate < realized floor at tPT2 for the typical readings
+      k <= 6,  and at t3 / t4 for ALL face counts:  no escape
+      reading there).  With the mean wall (T4OffLP:  1.596 /
+      3.882 / 5.032,  growing) the gate is below BOTH certified
+      lower bounds at every profile point:  realized ratios
+      1.087-1.722 (tPT2,  k = 6..0) / 1.586 (t3) / 1.599 (t4).
+      face OPEN;  no zero-free claim;  NO RH CLAIM.  -/
+theorem  ct4Profile  :
+    sRouteLoA  6  >  gateProdA  ∧
+      (∀  k : ℕ,  sRouteLo3  k  >  cGate3A  *  (T4OffLP.wSpanLo3 : ℚ))  ∧
+        (∀  k : ℕ,  sRouteLo4  k  >  cGate4A  *  (T4OffLP.wSpanLo4 : ℚ))  :=
+  ⟨realizedWall6,  realizedWall3,  realizedWall4⟩
 
 end  T4OffLR

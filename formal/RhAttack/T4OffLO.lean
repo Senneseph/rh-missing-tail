@@ -183,6 +183,7 @@ theorem  gateGapNpos  :  (gateGapN : ℝ)  >  0  :=  by
     t  >=  tPT2)  is  governed  by  the  tPT2  value.  (t4  =  10^6
     tPT2  point:  day079  cell,  appended  below  once  landed.)  -/
 def  cGate3A  :  ℚ  :=  13445  / 10000        --  1.3445  (t3)
+def  cGate4A  :  ℚ  :=  12578  /  10000        --  1.2578  (t4,  sigma_A,  day079  LANDED  0281)
 def  eWinS_A_t3  :  ℚ  :=  20662  / 10          --  2,066.2
 def  fluc_t3_A  :  ℚ  :=  166685  / 1000       --  166.685
 def  fedge_t3_A  :  ℚ  :=  359257  / 10000     --  35.9257
