@@ -1,0 +1,42 @@
+{
+  "id": "0286",
+  "timestamp": "2026-11-10T13:05:00",
+  "title": "0286: RECONCILIATION - the route-(b) terminal face, the [S1]/A1 'face', and G-hs1 are ONE open object; the program is a complete reduction; the remaining gap is a short list of named analytic faces (chief = absolute A1 walk bound, filed OPEN/PROBABLY FALSE) + CITED classical inputs",
+  "tag": "route-b-0273:s1-a1:reconciliation",
+  "status": "reconciliation",
+  "route": "Cross-program reconciliation: Route (b) terminal (0269-0285) x [S1]/A1 frontier (S1-A1-EXPLORATION E1-E19, A1Growth 0207-0209) x formal endpoint (RHEnd.lean)",
+  "summary": "This unit reconciles three bodies of work that had drifted into separate frames, so the project carries ONE coherent terminal state. (1) Route (b) 0269-0285 attacked the 'terminal face' (the 0276 S-diff gate / sparse-face window exclusion at the frontier) and closed TERMINALLY (0284 antecedent false, 0285 pervasive-face refuted / sparse-face not excluded). (2) The live [S1]/A1 log (E1-E19) and A1Growth.lean (0207-0209) work the SAME object from the wire side: the A1 clause the W2B3 assembly consumes (a uniform K on the DN walk = S-at-zeros), its proven growth form, and its NAMED-but-NOT-CLOSED absolute form ('the face', face_unbounded). (3) RHEnd.lean states the actual one-clause endpoint on the zero set, whose NAMED RESIDUAL is exactly G-hs1 (the S1 zero-side witness = the E1 content = the A1 walk bound, 'whose uniform face is S1Uniform'), the window zero-exclusion face, and G-hs3-left. FINDING: these are the same open problems viewed from three angles, not three different gaps.",
+  "identity": {
+    "sameObject": "Route-(b) 'terminal face' / '0276 S-diff gate' / 'sparse-face window exclusion'  ==  [S1]/A1 'absolute clause' / 'the face' (A1Growth 0207-0209, face_unbounded)  ==  RHEnd G-hs1 (the S1 zero-side witness, E1 content, uniform face S1Uniform)  ==  the uniform/ABSOLUTE S-at-zeros / DN-walk bound (one K over all zeros / all heights).",
+    "whatItSays": "There is NO off-line zero pair at ANY positive height (unconditionally) iff the S-at-zeros walk (DN = S + 1/8) is bounded by a UNIFORM data-free constant K at every zero for every height. Route (b) tried to force this at the frontier window by an S-diff gate and failed terminally; A1Growth proves the GROWTH / GRID form and files the ABSOLUTE form as the open face; RHEnd names it G-hs1.",
+    "evidence": [
+      "docs/S1-A1-EXPLORATION.md E1 (A1 = S bounded AT THE ZEROS), E15/E16 (the closer is the data-free O(1) SIGNED-defect / LEVEL theorem), E19 (growth form PROVEN; absolute form OPEN/PROBABLY-FALSE; omegas + sqrt(loglog) CLT)",
+      "formal/RhAttack/A1Growth.lean: a1_growth_wire / a1_grid_clause_exhibit (K=33206/5000 on [4,3e10], CITED Trudgian A1G-5 + RvM 1/x) / a1_zerofree_frontier (|S1Sum-RSum|<16) / face_unbounded (G_explicit unbounded -> absolute form is the constantness, not a numeral)",
+      "formal/RhAttack/RHEnd.lean head + PART B7-B9 (the NAMED RESIDUAL is G-hs1 = the E1 content; window zero-exclusion face; G-hs3-left)",
+      "route (b) 0284 (uniform S-diff gate antecedent FALSE, T4OffLS) and 0285 (zero-density: pervasive face refuted, sparse face NOT refuted, no local mechanism)"
+    ]
+  },
+  "proven": {
+    "note": "All machine-verified (Lean 4.33.1 + mathlib v4.33.1, full tree green) or data-certified. NO RH CLAIM.",
+    "skeleton": "P12: RH = S1 / S2 / S3 / S4 (p1_2). S2 (detector floor) and S3 (definition-side wire) LEAN-proven on the covered region; S4 squeeze (strip 25af + window 25ab + S4Asm assembly) LEAN-proven at the bound level for 1000<=t0, 0<d0<=1/2; S4 low band trivial (residue wires 0); S4 far region VACUOUS from [Z78] (offPairFarEmpty, d0<=3/8<1/2).",
+    "s1_walk_leg": "[S1]/A1 at the data frontier: the GROWTH form (A1Growth.a1_growth_wire, CITED Backlund/Trudgian) and the GRID clause (a1_grid_clause_exhibit: uniform K=6.6412 on the grid [4,3e10]; a1_zerofree_frontier: |S1Sum-RSum|<16) - inputs exactly the two CITED classical theorems (Trudgian A1G-5 growth bound; RvM residual 1/x). The MILINO data-free generic-K branch is REFUTED by arithmetic (E15/E17: feed<=1 vs channel>=70).",
+    "data": "No off-line zero pair <= 1e7 (2K(1e7) even, S/2K fingerprint). sup|DN| = 2.615066528 on (1e7,3e10]; S at the five worst global excursions tame O(1) (2.40..2.48, decaying within a handful of gaps); signed splice defect O(1) to the wire (max |D|=5.171, 5.041 wire-nearest); min worst-window margin 0.50227 (dps-120, dual-mode).",
+    "endpoint": "RHEnd rh_program78: the one-clause endpoint with S2/S4(low+strip)/far PROVEN IN BODY; only G-hs1 / window-face / G-hs3-left remain NAMED."
+  },
+  "openFaces": [
+    {"name": "G-hs1 (absolute A1 walk bound = 'the face')", "role": "the single analytic load-bearing face", "status": "OPEN / PROBABLY FALSE",
+     "evidence": "No absolute C at the zeros in the literature (F1: best bounds are growth - Backlund O(log t); CCM (1/4+o(1))log/loglog under RH, itself GROWING); face_unbounded (LEAN: G_explicit outruns every K); the sqrt(loglog) distribution theory (Selberg CLT + 2024-26 follow-ups) is consistent only with a GROWING typical scale; the data's flatness to 3e10 is the slow growth being ~2 there (the 'invisible' red hat)."},
+    {"name": "Window zero-exclusion face (1000<=t0, 0<d0<1/200, Part-C gate gap)", "role": "route (b)'s object", "status": "ROUTE (b) TERMINALLY DEAD (0284/0285)",
+     "evidence": "uniform S-diff gate antecedent FALSE (0284/T4OffLS); zero-density refutes the PERVASIVE face but cannot localize; a SPARSE face is consistent with all known bounds and no local mechanism excludes it."},
+    {"name": "G-hs3-left (S3 pair-level flank squeeze, left flank)", "role": "named analytic face", "status": "OPEN",
+     "evidence": "RHEnd PART B9 four-face ledger: left flank re=1/2-d0 cannot carry the uniform n^4 wire (T4OffL); the pair-level S3 squeeze Qside<=Bwire+Mr there is the named residual."}
+  ],
+  "citedInputs": [
+    "[Z78]  Re s > 7/8 zero-free (the endpoint's named external input; kernel-verified, human review in progress)",
+    "Trudgian A1G-5  |S(u)| <= G_explicit u  (Math. Comp. 81:1053-1061 (2012) Thm 1) - the single cited input of the grid clause",
+    "RvM identity with explicit residual  N(t) = (t/2pi)log(t/(2pi e)) + 7/8 + S(t) + O(1/t)  (Titchmarsh Thm 9.7; in-tree object identity via rvmShiftCore, the exact 7/8-3/4 shift)",
+    "the 1.6 convexity mass (PART B7 machined hs3 face) - a CITED classical constant, not an analytic barrier in the tree"
+  ],
+  "bottomLine": "RH is a COMPLETE reduction: a machine-verified skeleton (P12 + RHEnd, S2/S3/S4 in body) plus (a) a short list of named ANALYTIC faces - chief G-hs1, the absolute A1 walk bound, filed OPEN/PROBABLY-FALSE - and (b) CITED classical inputs ([Z78], Trudgian, RvM, convexity mass). 'Completing RH once and for all' = closing these faces. The chief face is a new-thesis problem outside the 2026 literature, and the field's own distribution theory points toward it being FALSE (growth, not O(1)). Route (b) - one approach to the window-exclusion face - is terminally dead. The growth/GRID form (the form the assembly actually consumes at the data frontier) is PROVEN. NO RH CLAIM. NO ZERO-FREE CLAIM beyond the named faces.",
+  "honesty": "NO RH CLAIM. No zero-free claim beyond the named faces and the [Z78] input. This unit RECONCILES, it does not advance a new mechanism; it corrects the superseded 'mechanism map complete / sparse face' framing of 0285 by identifying that object with G-hs1 / the absolute A1 clause and recording the stronger E19/A1Growth-0209 calibration (PROBALLY-FALSE, growth-not-O(1)). Route (b) history (0269-0285) is preserved as-is; this entry supersedes its TERMINAL framing, not its content."
+}

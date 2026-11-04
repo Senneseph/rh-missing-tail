@@ -629,3 +629,68 @@ no known mechanism excludes a sparse face; no zero-free claim;
 through 2026, has exhausted every avenue by certificate.  The
 remainder — sparse-face window exclusion — is a new-thesis
 problem.  Full tree 17,454 jobs, 0 errors (T4OffLM…T4OffLS).
+
+---
+
+## 16 · 0286 — Reconciliation: the route-(b) face, the [S1]/A1 face,
+and G-hs1 are ONE object (the record's terminal framing, corrected)
+
+The route (b) book above closed at 0281 and extended through 0285 on a
+terminal framing: *"the remainder is sparse-face window exclusion, a
+new-thesis problem."*  That framing is **preserved in content but is now
+identified more precisely**, because the program's live [S1]/A1 frontier
+(`docs/S1-A1-EXPLORATION.md` E1–E19, `formal/RhAttack/A1Growth.lean`
+§7–9 = 0207–0209) and the formal endpoint (`formal/RhAttack/RHEnd.lean`)
+had continued in parallel and named the same object from two other
+angles.  This section makes that identification explicit so the project
+carries **one** coherent terminal state.
+
+**The identity.**  Three names, one open problem:
+
+```
+  Route (b) "terminal face" / "0276 S-diff gate" /
+          "sparse-face window exclusion"   (0269-0285)
+      ==
+  [S1]/A1 "absolute clause" / "the face"
+          (A1Growth 0207-0209; face_unbounded)
+      ==
+  RHEnd G-hs1  (the S1 zero-side witness = the E1 content =
+   the A1 walk bound, "whose uniform face is S1Uniform")
+      ==
+  the UNIFORM / ABSOLUTE S-at-zeros / DN-walk bound:
+  one data-free K at every zero for every height.
+```
+
+Route (b) attacked it from the *gate* side and closed terminally (0284
+antecedent false; 0285 pervasive-face refuted / sparse face not
+excluded).  The [S1]/A1 line attacked it from the *wire* side and
+proved the **growth / grid form** while filing the **absolute** form as
+the open face.  RHEnd *names* it in the endpoint as **G-hs1**.
+
+**What is PROVEN** (machine-verified; no RH claim):
+the full skeleton (P12 `RH = S1∧S2∧S3∧S4`;  S2/S3 in body;  S4
+strip+low+far), and the [S1] walk leg **at the data frontier** —
+`a1_grid_clause_exhibit` (uniform `K = 6.6412` on the grid
+`[4, 3e10]`) and `a1_zerofree_frontier` (`|S1Sum − RSum| < 16`), with
+*exactly two* CITED classical inputs (Trudgian A1G-5 growth bound;  the
+RvM residual `1/x`).  Data: no off-line pair `≤ 1e7` (2K even);  the
+walk is tame to 3e10 (sup|DN| = 2.615067).
+
+**What is OPEN** (the endpoint's named residual — `RHEnd`):
+`G-hs1` (the absolute A1 walk bound — filed **OPEN / PROBABLY FALSE**:
+no absolute C in the literature, the data-free bound is unbounded
+(`face_unbounded`), the CCM RH-conditional bound grows, and the whole
+CLT/distribution theory normalizes by the growing √(log log));  the
+window zero-exclusion face (**route (b)**, terminally dead);  and
+`G-hs3-left`.  Plus the **CITED classical inputs** ([Z78] Re s > 7/8
+zero-free;  Trudgian;  RvM;  the 1.6 convexity mass).
+
+**Corrected terminal statement.**  "Completing RH once and for all" =
+a *complete reduction* (done, machine-verified) + closing the named
+analytic faces — chief **G-hs1**, a new-thesis problem the field's own
+distribution theory points toward being **false** (growth, not O(1)) —
++ discharging the CITED classical inputs.  The single most load-bearing
+open object is **G-hs1 = the absolute A1 walk bound**.  Route (b) was
+one (dead) approach to its window-exclusion facet.
+
+NO RH CLAIM.  NO zero-free claim beyond the named faces and [Z78].
