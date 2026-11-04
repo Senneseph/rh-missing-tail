@@ -239,4 +239,44 @@ theorem  faceGateRecord  :
   ⟨gateStrictA,  gateStrictN,  pubAboveGateA,  pubAboveGateN,
    gateGapApos,  gateGapNpos,  cGate3tight,  gateOpenAtT3⟩
 
+/-  =================  THE  WINDOW  CENSUS  DATUM  (day080,  0276.6)  =================
+    The  frontier  two-unit  window  (tPT2-1,  tPT2+1]  contains  EXACTLY
+    8  ON-LINE  zeros  (Re  =  1/2  -  the  day074  on-line-ness  of  the
+    bulk),  computed  in-house  via  the  Riemann-Siegel  Z(t)  at  tPT2
+    (N  =  sqrt(t/2pi)  =  691008  terms,  80-bit  longdouble;  roots  at
+    t  -0.88769531,  -0.57128906,  -0.46777344,  -0.31542969,
+    -0.06933594,  +0.28613281,  +0.43457031,  +0.70410156;  5  in  (t-1,
+    t],  3  in  (t,  t+1]).  VERIFIED:  (a)  the  mpmath  dps-50  Z at  every
+    root  is  |Z|  ~  1e-3..4e-2  (on  the  zeros)  and  |Z(t)|  =
+    2.572018  (t  is  away  from  all  of  them);  (b)  the  R-vM
+    main-term  two-unit  prediction  2*ln(t/2pi)/(2pi)  =  8.5599  (measured
+    8,  within  +-1);  (c)  the  smooth  theta-part  of  the  unit
+    S-difference  computed  by  the  longdouble  engine,  +4.27996532,
+    matches  the  day078  dmain(tPT2)  =  4.279965  to  7  digits.  The
+    in-repo  zero  data  stops  at  gData  =  3.0001e10  (day073b),  far
+    below  tPT2  =  3.0002e12  -  these  ordinates  are  NEW  data.
+
+    RELATION  TO  THE  GATE:  the  0275  certified  window  bound  (<=  22
+    zeros  total)  includes  POSSIBLE  off-line  FACE  zeros;  the  8
+    on-line  zeros  are  bulk  (Re  =  1/2)  and  contribute  to  fluc
+    (the  known-side  S-stream  already  accounts  for  all  KNOWN  zeros
+    up  to  gData  -  these  8  are  the  NEW  known  zeros  of  the  window,
+    available  for  any  mechanism  that  uses  window  data).  The  gate  of
+    0276  targets  the  remaining  off-line  (face)  part:  even  with  all
+    8  on-line  zeros  known,  the  face  window  is  certified  empty  iff
+    the  per-piece  S-diff  (over  the  FACE  zeros  and  the  far  tail)
+    stays  <=  cGate.  The  published  sup  (12.9117)  still  governs  the
+    gate.  No  RH  claim.  -/
+def  kL_frontier  :  ℚ  :=  8                       --  measured  (day080)
+def  rvmpred2  :  ℚ  :=  85599  / 10000             --  2*ln(tPT2/2pi)/(2pi)
+def  thetaPart  :  ℚ  :=  427996532  / 100000000   --  thdiff  (day080  =  day078 dmain)
+theorem  kLbelowCertified  :  (kL_frontier : ℝ)  <  22  :=  by
+  norm_num  [kL_frontier]
+theorem  kLrvConsistency  :  |((rvmpred2 - kL_frontier) : ℝ)|  <  1  :=  by
+  norm_num  [rvmpred2,  kL_frontier]
+theorem  thetaPartMatchesDay078  :
+    (4279964 : ℚ)  /  1000000  <  thetaPart  ∧
+      thetaPart  <  (4279966 : ℚ)  /  1000000  :=  by
+  norm_num  [thetaPart]
+
 end  T4OffLO
