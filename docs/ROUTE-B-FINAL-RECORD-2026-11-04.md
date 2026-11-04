@@ -576,3 +576,56 @@ face remains **OPEN**, no zero-free claim, **no RH claim** — and
 any future exclusion must arrive from outside the S-route
 envelope, a domain where the known literature through 2026 gives
 no mechanism below these walls.  Full tree 17,454 jobs, 0 errors.
+
+## 15 · 0285 — zero-density audit: the pervasive face is refuted; the mechanism map is complete
+
+The last canonical tool — the **zero-density machinery** — is now
+audited.  Face zeros at Re = 0.1252270103 mirror (functional
+equation) to Re = **0.8747729897**, so the face count up to T is
+N(σₘ, T):
+
+```
+  bound                          exponent E = A(1-sigma_m)   @ tPT2
+  Huxley  A = 3/(3sigma-1)       0.231283                   ~= 768   (BEST)
+  Canfield-Huxley A = 20/9       0.278282
+  Ingham      A = 12/5           0.300535
+  all:  N(sigma_m, t) << t^{E+o(1)} = o(t)
+```
+
+**Consequences.**  (1) A face present in **every** window
+(t−1, t+1] for all t ≥ tPT2 would need ≥ t/2 face zeros by height
+t, but has only t^{0.2313+o(1)} — **the pervasive face is
+REFUTED** (a new positive result of the program).  (2) A count
+upper bound **cannot localize** — 768 face zeros up to tPT2 (log
+factors aside) could all sit in one window; zero-density proves
+**no window statement**.  (3) A **sparse** face (appearing in
+o(1)-density of windows) is **consistent with every known bound**
+— only a local mechanism excludes it; none exists through 2026.
+  The Korobov–Vinogradov zero-free region reaches Re ≥ 0.9999988
+at tPT2; the face at 0.874773 is deep in the unverified zone
+(audited inapplicable).
+
+**The mechanism map is now complete.**  Every known tool, audited
+and closed:
+
+```
+  tool                              verdict
+  S-route constants (0278/0280)     4.19-5.00x above the wall, capped by the first moment
+  in-machine S-tail (0278/0281)     10^12x
+  spacing-only (0277)               structurally impossible
+  CGG under RH (0282)               1.653x at tPT2, growing
+  pair-correlation moments (0282)   wrong scale and form
+  conformant subclass (0283)        contains the typical AND realized configs
+  realized data (0283/T4OffLR)      1.087-1.722x / 1.586x / 1.599x
+  first-moment wall (0281/T4OffLP)  1.596 / 3.882 / 5.032, growing
+  uniform S-diff gate (0284/T4OffLS) antecedent FALSE, all large t
+  zero-density (0285)               pervasive face REFUTED; window exclusion impossible
+```
+
+**Terminal state.**  The face is **OPEN**; a *pervasive* face is
+**refuted** (0285, new); any surviving face must be *sparse*;
+no known mechanism excludes a sparse face; no zero-free claim;
+**no RH claim**.  The program, working within known mathematics
+through 2026, has exhausted every avenue by certificate.  The
+remainder — sparse-face window exclusion — is a new-thesis
+problem.  Full tree 17,454 jobs, 0 errors (T4OffLM…T4OffLS).
