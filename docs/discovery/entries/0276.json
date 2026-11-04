@@ -1,0 +1,44 @@
+{
+  "id": "0276",
+  "date": "2026-11-04",
+  "unit": "0276 - THE S-DIFFERENCE GATE: the exact named input that would certify the face window",
+  "status": "complete (t4 profile point: day079 cell running; append on landing)",
+  "title": "0276: the S-difference gate is named and certified as a conditional exclusion certificate: per-piece S-diff <= cGate(tPT2) = 2.5821/2.5805/2.5809/2.5847 (sigma A/Q/F/N, gData cut) certifies W(t) empty at every t >= tPT2; published input 12.9117 misses the gate by 5.00x; the gate tightens in t (t3: 1.3445, t4 pending); face REMAINS OPEN; no RH claim.",
+  "why_this_unit": "0275 proved the window can't be certified by ANY published per-unit law (structural: E_win_S ~ (ln t)(kernel ~ ln t) vs t-FROZEN fluc, day074; A0 = data constant 3.4; HSXW the first all-t-explicit source). 0276 sharpens 'structurally infeasible under published input' into the EXACT named input the next mechanism must deliver: the per-piece S-difference gate, certified conditionally in Lean (T4OffLO) with strict margins, its t-profile, and its literature status.",
+  "content": {
+    "gate_definition": "The S-route window envelope (0274 g2-cut kernel shape, day078 e_win_s) is piece-linear in its per-piece S-difference constants: E_win_S = c1*W1 + c2*W2, c1 = Smax(t)+Smax(GLAST) [piece (gData, t-1]], c2 = Smax(t+1)+Smax(GLAST) [piece [t+1, ...]]; W1 = |f(gData)| + (f(gData)-f(t-1)) = 46.3914/46.4268/46.4521/46.4571, W2 = 2|f(t+1)| = 55.9417/56.0125/56.0631/56.0730 (sigma A/Q/F/N; pure kernel, 0274 values unchanged). The 0274(g) exclusion criterion fires iff E_win_S < fluc + fedge. Hence W(t) is CERTIFIED EMPTY at sigma iff a per-piece S-diff bound c <= cGate(sigma) = (fluc+fedge)/(W1+W2) holds at that height.",
+    "gate_constants_tPT2": {
+      "cGate": {"A": 2.5821, "Q": 2.5805, "F": 2.5809, "N": 2.5847},
+      "recorded_rationals": "strictly below the exact boundary values 2.58216/... (strict margin 3.4e-3 .. 1.4e-2, certified)",
+      "inputs": "fluc 236.27/236.35/236.57/236.99 and fedge 27.97/28.00/28.03/28.03 = T4OffLM FIFTH-CORRECTION lower bounds (unchanged in 0276)"
+    },
+    "published_input_status": "c1 = c2 = 12.9117 at tPT2 (HSXW 2022 Cor. 1.4, two applications, Smax(tPT2)+Smax(GLAST) = 6.862091+6.049376; Smax(tPT2+1) same): MISSES the gate by ratio 5.00x on every probed sigma; gateGap = E_win_S - (fluc+fedge) = 1,057.05/1,058.31/1,059.04/1,058.81 > 0 (window OPEN under the published law - the 0275 verdict, now named as a conditional input).",
+    "t_profile": {
+      "cGate_A_tPT2": 2.5821,
+      "cGate_A_t3": 1.3445,
+      "t3_basis": "day075b fluc(t3) = +166.685, fedge(t3) = 35.9257, day078 S-route span(t3) = 2066.2/13.7117 = 150.688",
+      "cGate_A_t4": "pending (day079 cell at t4 = 1e6*tPT2; expected ~0.95: monotone decay)",
+      "structural_basis": "the gate TIGHTENS in t: E_win ~ (ln t)(kernel ~ ln t) grows in t while fluc is t-FROZEN (day074 dK'/dt = -3.006e-9); the UNIFORM face input (all t >= tPT2) is governed by the tPT2 value. The all-t face window statement = countable union of cell statements (0269 terminal-face reduction + cell uniformity T4OffLM.kUniform).",
+      "caveat": "three-point profile (tPT2, t3, t4); monotone decay expected but NOT yet proven between points - the uniform gate must be verified pointwise (day079 + any suspect height) before a face-wide use."
+    },
+    "gate_statement": "IF for every t >= tPT2 the unknown-side S-fluctuation obeys a per-piece S-difference c1(t) <= cGate and c2(t) <= cGate with cGate = 2.5821 (sigma_A) / 2.5805 (sigma_Q) / 2.5809 (sigma_F) / 2.5847 (sigma_N) (uniform in t - the tPT2 values, the profile being easier above), THEN E_win_S(t) < fluc(t) + fedge(t) at every t and every probed sigma - hence W(t) = (t-1, t+1] carries NO face zero at any t >= tPT2.",
+    "literature_status": "Web search 2026-11-04 (S-diff / narrow-strip zero-count literature, 3 angles): NO published pointwise unit-scale S-difference bound below O(ln t). The pointwise |S(t)| bounds (Backlund family O((ln t)^c), e.g. O(ln t) under RH / O((ln t)^{22/31+...}) unconditional refinements) and the moment bounds for S(t+h)-S(t) at h ~ 1/ln t (small h) do NOT reach the unit-scale pointwise gate. The required cGate ~ 2.58 (tPT2, decreasing) is pair-correlation-strength input (unproven territory). The Titchmarsh 9.2 disc proof (Jensen on the sqrt(5) disk, N(T+1)-N(T) <= n(sqrt(5))) is the disk-route side - same class constant 81.191752 (Zeta23 witness, existential; see 0275).",
+    "fleet_route_assessment": "Fleet path (a) (full on-line ordinates up to tPT2, 100-150 fleet-days, Strix 32-core) pins k_L (the actual on-line count in (t-1, t], the 0263 on-line-ness census) but does NOT close the gate: the per-piece S-FLUCTUATION bound (the gate itself) is unchanged by zero data - data fixes positions, not the unknown-zero S-fluctuation bound. Fleet (a) remains valuable for the count side and the 0263 census; it is not a route to the gate.",
+    "next_unit": "0277 = the mechanism unit (research): a proof technique delivering c <= cGate (pair-correlation-strength unit-scale S-diff, uniform in t >= tPT2) - e.g. a face-localized pair-correlation estimate for the unknown zeros against the known-side S-stream, or a new S-method with the face kernel. If 0277 fails, the face window remains open (the 0275/0276 ceiling holds) and the program returns to fleet (a) for the k_L census."
+  },
+  "formal": "RhAttack.T4OffLO (formal/RhAttack/T4OffLO.lean) - ALL norm_num-certified, 8736-job full-tree build 0 errors: gateStrictA/Q/F/N (the conditional discriminant, STRICT), cPubValue, pubAboveGateA/Q/F/N, gateGapA/Q/F/Npos, cGate3tight (gate tightening tPT2->t3), gateOpenAtT3, gateA_statement, gateN_statement, faceGateRecord (composite). t4 block appends with day079.",
+  "artifacts": [
+    "formal/RhAttack/T4OffLO.lean",
+    "scripts/rh/day079_cell_t4.py + scripts/rh/out_day079_cell_t4.txt (t4 cell: dual I_unk dps-60 AGREE rel 1.15e-23 all four sigmas at 1.36e18 scale; S stream n = 9,068,473,894 (the day075b +6 boundary-seam count, same artifact); zeta/grid rows pending)",
+    "scripts/rh/out_day078_hsxw_window.txt (E_win_S values, c1 = 12.9117, spans)"
+  ],
+  "supersedes": [],
+  "retract": [],
+  "unchanged": [
+    "0274 FIFTH CORRECTION (T4OffLM) - fluc/fedge/K' records stand",
+    "0275 (T4OffLN) - structural infeasibility under PUBLISHED laws stands; 0276 names the exact input that WOULD work",
+    "HSXW 2022 as first all-t-explicit source; A0 provenance (3.4 data constant / 81.191752 Zeta23 witness)",
+    "no RH claim; no zero-free claim; face OPEN at tPT2, t3; window OPEN"
+  ],
+  "honesty": "No RH claim. No zero-free claim. The gate is a CONDITIONAL sufficiency statement: it names the exact input (per-piece unit-scale S-difference <= 2.5821..2.5847, uniform in t >= tPT2) whose delivery would certify the entire terminal face window-free, and certifies that no published law delivers it (5.00x miss at tPT2, gaps growing in t). The 2.58 value is pair-correlation-strength input - unproven. The t-profile is three points (tPT2, t3, t4-pending); monotone decay is expected (structural: fluc frozen, envelope ~ (ln t)^2) but the uniform face use requires pointwise verification at suspect heights before any face-wide claim."
+}

@@ -437,6 +437,57 @@ validity + no exclusion). No RH claim.
    fleet data past tPT2 (100-150 fleet-days) and the asymptotic map. No
    RH claim.
 
+## 3quater. 0276: THE S-DIFFERENCE GATE (conditional exclusion certificate, 2026-11-04)
+
+**0276 COMPLETE (entry 0276):** 0275's "structurally infeasible under
+published input" is sharpened into the EXACT named input the next
+mechanism must deliver, certified conditionally in Lean
+(formal/RhAttack/T4OffLO.lean, all norm_num, 8736-job build green).
+
+1. GATE (t = tPT2, gData cut). The S-route envelope is piece-linear in
+   its per-piece S-diff constants (day078 e_win_s; 0274 kernel shape
+   unchanged): E_win_S = c1*W1 + c2*W2 (W1 = 46.3914/46.4268/46.4521/
+   46.4571, W2 = 55.9417/56.0125/56.0631/56.0730 sigma A/Q/F/N). W(t) is
+   CERTIFIED EMPTY at sigma iff c1, c2 <= cGate(sigma) =
+   (fluc+fedge)/(W1+W2). The gate (T4OffLM FIFTH-CORRECTION fluc/fedge):
+       cGate(tPT2) = 2.5821 / 2.5805 / 2.5809 / 2.5847  (A/Q/F/N)
+   recorded as rationals STRICTLY below the exact boundary (strict
+   margin 3.4e-3..1.4e-2, theorems gateStrictA/Q/F/N).
+2. PUBLISHED INPUT MISSES THE GATE 5.00x. c1 = c2 = 12.9117 at tPT2
+   (HSXW Cor 1.4, two applications: Smax(t)+Smax(GLAST) = 6.862091 +
+   6.049376); gateGap = E_win_S - (fluc+fedge) = 1,057.05/1,058.31/
+   1,059.04/1,058.81 > 0 (window OPEN under the published law = the 0275
+   verdict, now a named conditional input).
+3. THE GATE STATEMENT. IF for every t >= tPT2 the unknown-side
+   S-fluctuation obeys a per-piece S-diff c <= cGate (uniform in t,
+   cGate = tPT2 values), THEN E_win_S(t) < fluc(t) + fedge(t) at every
+   t and probed sigma -> W(t) = (t-1, t+1] carries NO face zero at any
+   t >= tPT2 (all-t face window = countable union of cell statements,
+   0269 reduction + T4OffLM.kUniform).
+4. T-PROFILE (the gate TIGHTENS in t). cGate(A, tPT2) = 2.5821; cGate
+   (A, t3) = 1.3445 (day075b/dag078: (166.685+35.9257)/150.688;
+   cGate3tight certified); cGate(A, t4) ~ 0.95 expected (day079 cell,
+   t4 = 1e6*tPT2, running: dual I_unk dps-60 AGREE rel 1.15e-23 all
+   four; S stream n = 9,068,473,894 same +6 boundary-seam count).
+   Structural basis: fluc t-FROZEN (day074 dK'/dt = -3.006e-9) vs
+   E_win ~ (ln t)*(kernel ~ ln t). CAVEAT: three-point profile; monotone
+   decay between points EXPECTED not proven - a face-wide use needs
+   pointwise verification at suspect heights.
+5. LITERATURE + ROUTES. Search 2026-11-04: NO published pointwise
+   unit-scale S-diff below O(ln t) (Backlund-family |S(t)| pointwise,
+   moment bounds at h ~ 1/ln t - neither reaches the gate); cGate is
+   PAIR-CORRELATION-STRENGTH input (unproven). Fleet (a) (100-150
+   fleet-days, Strix 32-core) pins k_L (on-line count (t-1, t], 0263
+   census) but does NOT close the gate (the S-FLUCTUATION bound is
+   unchanged by zero data) - fleet (a) stays for the count side. NEXT
+   UNIT 0277 = the mechanism (research): prove c <= cGate uniform in t
+   >= tPT2 (face-localized pair correlation of unknown zeros against the
+   known-side S-stream, or a new face-kernel S-method). If 0277 fails,
+   the 0275/0276 ceiling holds and the program returns to fleet (a).
+6. VERDICT: the gate is the exact remaining input of the face;
+   published misses it 5.00x at tPT2 (gaps growing in t); the face
+   window and the face REMAIN OPEN. No RH claim. No zero-free claim.
+
 ## 4. Honesty boundary
 
 - The endpoint is CONDITIONAL (three named external inputs + the terminal
