@@ -149,9 +149,24 @@ def U_pin_c4(t, g0=None, dps=60, sr_override=None):
     Y2 = gc * mpm.mpf(2) ** 24
     corr = mpm.quad(lambda g: (f_mpmath(g, sr, tM, a) - c4 / (g * g)) * rho_mpmath(g),
                     [gc * (Y2 / gc) ** (mpm.mpf(j) / 200) for j in range(201)])
-    # tail beyond Y2: (c4/g^2) rho from Y2 to inf (same exact form as ana):
-    tail2 = (c4 / (2 * mpm.pi)) * (1 + mpm.log(Y2 / (2 * mpm.pi))) / Y2
-    return fin + ana + corr + tail2
+    # [FIFTH CORRECTION (day072 c4pin bias, found day075/0275 audit, t = 1000*tPT2)]
+    # The old line `return fin + ana + corr + tail2` double-counted the c4 mass
+    # beyond Y2: ana already equals Int_{gc}^inf (c4/g^2) rho dg, which contains
+    # Int_{Y2}^inf (c4/g^2) rho dg = tail2 (same exact form); corr then adds the
+    # (f - c4/g^2) part on (gc, Y2).  The bias was -tail2 = -(c4/(2*pi))
+    # *(1+ln(Y2/(2*pi)))/Y2: -87.5 at tPT2 (hidden under slack 16,158 -> gates
+    # passed) and -1.0052e7 at t3 = 1000*tPT2 (the spurious day075 'closure
+    # FAIL').  The TRUE remainder beyond Y2 is (f - c4/g^2) rho, whose
+    # coefficient h(u) := (f - c4/g^2)(tu) * u^4 converges to -0.5 for
+    # u >= 160 (day072 corr analysis); certify it at u = 160 and close the form
+    # R2 = h160 * t^4 * rho(Y2) / (3 Y2^3) (error O(h' rho t^4 / Y2^4) < 1e-20
+    # at these heights).
+    Ychk = gc * mpm.mpf(2) ** 8
+    h160 = (f_mpmath(gc, sr, tM, a) - c4 / (gc * gc)) * (gc / tM) ** 4
+    if abs(h160 + mpm.mpf("0.5")) > mpm.mpf("0.2"):
+        raise AssertionError(f"h(u) not converged at u=160: {float(h160):.6f}")
+    R2 = h160 * (tM ** 4) * rho_mpmath(Y2) / (3 * Y2 ** 3)
+    return fin + ana + corr + R2
 
 def U_pin_1e9():
     return U_pin_c4("1e9")

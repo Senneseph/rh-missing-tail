@@ -1,0 +1,54 @@
+{
+ "id": "0275",
+ "title": "0275 envelope sharpening without new data: A0 provenance audit (3.4 = data-level class constant), HSXW 2022 = first published explicit source valid at face height (window <= 22 certified), t3 asymptotic cell closes (the day075 'FAIL' was the c4pin bias of 0250), and the window-exclusion target is structurally infeasible under every published per-unit law",
+ "date": "2026-11-09",
+ "status": "complete (0275a/0275b/0275c all landed; formal T4OffLN green + T4OffLM rewritten Fifth green; the face remains OPEN at tPT2 and t3; no RH claim)",
+ "summary": "The 0275 unit was executed in three parts with NO new zero data. (a) Provenance: A0 = 3.4 in every landed envelope is a DATA-LEVEL CLASS CONSTANT (sup|DN-main| on the 3e10 band ~2.48e9, on the 3e9 band 2.615), not a theorem constant - Zeta23's in-machine local count (N(t,t+1] <= A0 ln(|t|+3), Titchmarsh 9.2 as cited) is existential (witness 81.191752 from Lean #eval, not certified), and Titchmarsh 9.2 as cited is bare O(log t). (b) HSXW 2022 (Hasanalizade-Shen-Wong, J. Number Theory 235 (2022) 219-241, Cor 1.2/1.4) supplies the FIRST published explicit two-sided R-vM/S bounds valid at all T >= e (analytic route above T0 = 3,061,004,600 - the 0263 [Z-PT2] citation is its numerical instantiation - database-verified |S| <= 2.5167 below): they therefore apply at tPT2 = 3.0002e12 and t3 = 3.0002e15 WITHOUT any in-repo data. At tPT2: per-unit count law 30.707 (3.2x sharper than 3.4), per-unit S-route 13.724 (sharpest published), and the frontier unit window W = (tPT2-1, tPT2+1] carries AT MOST 22 zeros (sigma-independent, published, 8.9x below the raw A0c ~195) - this replaces the retracted draft-0274 line 33/33/34/34; kernel-refined S-route k <= 39 per sigma (gData cut); the corrected 0274 face record is simultaneously VALID under this published pair (full S-route envelope 1106.18/1116.63/1140.30/1199.76 >= corrected fluc 229.06/229.14/229.36/229.79, slack 78-80%). (c) The t3 = 1000*tPT2 asymptotic cell, re-run with the repaired main term (day075b; the first run OOM'd loading 24-56GB f64 files into RAM, fixed with a streamed 2^22-chunk reader): identity closure ALL FOUR sigmas (|fluc| <= B with slack 19,588..20,905 = 98-99% of the A0c envelope), K(t3) = -154.69/-158.69/-163.69/-166.69 (K' face-flat at 1000x too), fluc(t3) = 166.685/166.409/166.432/166.987, window counts growing in t (A0c k_max 458..503; raw HSXW two-unit <= 26): the old 'day075 closure FAIL' (-1.023e4) was the FIFTH-CORRECTION bias -1.0052e7 in action; the corrected cell CLOSES. VERDICT: window exclusion (E_win < fluc) at sigA requires a per-unit S-difference <= 2.5801; the best published S-route gives 6.46 (6.1x) and the gap grows in t (E_win ~ (ln t)*kernel vs t-frozen fluc): per-unit-law window exclusion is STRUCTURALLY INFEASIBLE at this face. The face (claim (b)) is OPEN at tPT2 and t3. No RH claim.",
+ "fifth_correction_ref": "docs/discovery/entries/0274.json #fifth_correction (the c4pin tail2 double count of 0250; bias -8,823.29 at tPT2 / -1.0052e7 at t3; corrected K'/fluc/K'' lines; retracted 33/33/34/34 window line; verdict invariant: face OPEN, validity slack 10,066.58..11,127.77 at 98%)",
+ "a0_provenance": {
+  "conclusion": "A0 = 3.4 is a measured, asserted DATA-LEVEL CLASS CONSTANT (sup|DN - main| class constants of the project's 3e9/3e10 bands), not a theorem constant; every B_unk/E_win envelope certified under it is a 'class constant' certificate (machine + assertion).",
+  "evidence": [
+   "Zeta23 (cited source, Collet et al.; fetched repo artifacts): RvM/LocalCount.lean et al. state only the EXISTENTIAL form (exists A0, N(t,t+1] <= A0*ln(|t|+3)); the explicit existential constant 81.191752 is a #eval witness, not a certified bound.",
+   "Titchmarsh Thm 9.2 as cited in docs/W2-LEAN-PLAN.md: bare O(log(1+|t|)) - no constant in the cited statement.",
+   "No `import Zeta23` anywhere in the pinned build (grep-verified); Zeta23 remains a cited source (0263 [Z-PT2] pin)."
+  ]
+ },
+ "hsxw_2022": {
+  "citation": "Hasanalizade, Shen, Wong, 'Counting zeros of the Riemann zeta function', J. Number Theory 235 (2022) 219-241. Cor 1.2: |N(T) - (T/2pi)ln(T/2pi e)| <= 0.1038 ln T + 0.2573 lnln T + 9.3675 (T >= e). Cor 1.4: |S(T)| <= min(0.1038 ln T + 0.2573 lnln T + 8.3675, 0.1095 ln T + 0.2042 lnln T + 3.0305) (T >= e). T0 = 3,061,004,600 (analytic route; [Z-PT2] is its numerical instantiation); below T0 database-verified |S| <= 2.5167.",
+  "why_it_matters": "First published explicit two-sided R-vM/S pair valid at ALL T >= e without local zero data => applies at tPT2 and t3 directly; first all-t-explicit validity certificate for the 0274 corrected face record (78-80% slack).",
+  "tPT2_numbers": "dmain = 4.279965; count-law per-unit B1_H = 30.707241 (ratio 3.18 vs A0c 97.680952); Smax = 6.862091; S-route per-unit B1_S = 13.724182; raw frontier window N(tPT2+1)-N(tPT2-1) <= 22.2841 => <= 22 (sigma-independent); kernel S-route k_max (gData cut) = 39/39/39/41... (sigA 39); count-law HSXW k_max = 104 (all sigmas); full S-route envelope = 1106.18/1116.63/1140.30/1199.76 >= fluc 229.06/229.14/229.36/229.79 (slack 877.12/887.49/910.93/969.97, 79.3-80.8%).",
+  "t3_numbers": "dmain = 5.379369; Smax = 7.662488; S-route per-unit 15.324976; raw 2-unit window N(t3+1)-N(t3-1) <= 26.0837 => <= 26 (growing in t: 22 -> 26 - structural decay of the per-unit family)."
+ },
+ "tPT2_window_counts": {
+  "sigma_note": "sigmas: 0.1252270103 / 0.25 / 0.40 / 0.49 (gData cut for window theorems)",
+  "raw_A0c": "k <= 349 (sigA, GLAST cut) / 348 (gData cut) - NO refined reduction (weaker than raw 195)",
+  "raw_HSXW_count": "k <= 104 (all sigmas, gData cut)",
+  "raw_published_S_route": "k <= 22 (sigma-INDEPENDENT, published, no in-repo data) - the certified window count of record",
+  "kernel_refined_S_route": "k <= 39/39/39/41 (per sigma, gData cut); E_win_S(gData cut) = 1312.89/1314.26/1315.24/1315.43; gap E_win_S - fluc = +1,076.6... (structural)"
+ },
+ "t3_cell": {
+  "identity": "closure ALL FOUR sigmas at t3 = 1000*tPT2: |fluc(t3)| <= B(t3) (A0c G1-cut) with slack 19,588.15/19,735.60/20,068.65/20,905.09 (98-99%)",
+  "K_t3": "-154.6931/-158.6931/-163.6931/-166.6931 (face-flat at 1000x; consistent with day074 slope -3.006e-9/unit)",
+  "fluc_t3": "+166.685/+166.409/+166.432/+166.987 (vs 236.27..236.99 at tPT2 gData cut: slowly decaying)",
+  "S_t3": "+267,745,707,647.930 (stream total n = 9,068,473,894 vs day072/074's 9,068,473,888: +6 = 2 hi1e9/1002e6 chunk-boundary + 4 lshard/T10M list convention; rel 6.6e-10; |dS| <= 6*max|f| <= 240 absorbed by the 19,588 margin)",
+  "windows_t3": "A0c k_max 458/498/486/458 (growing 349 -> 503: (ln t) decay of the discriminant); raw HSXW two-unit <= 26; S-route E_win_S(t3) = 2,066.2../2,068.9 (1,321 -> 2,066 = (ln t)*kernel growth)",
+  "A0_hierarchy_t3": "B_rig (A0 = 81.19 Zeta23 witness) = 471,744/475,258/483,212/503,199 (|fluc| <= B trivially; the witness is a conservative floor, HSXW the sharp certificate)",
+  "superseded": "the old day075 'closure FAIL' (-1.023e4 at sigA, out_day075b_cell_oom_partial.txt era) = the FIFTH-CORRECTION bias -1.0052e7; the corrected cell CLOSES"
+ },
+ "structural_verdict": {
+  "window_exclusion": "E_win < fluc at sigA requires per-unit S-difference <= 2.5801 (tPT2); best published: HSXW S-route 6.4621 (6.1x), CG97 two-sided S 18.23 (6.7x), A0c 235.26 (85.3x); the gap GROWS in t (E_win ~ (ln t)*kernel vs t-frozen fluc, k_max 349 -> 503 at t3): per-unit-law window exclusion is STRUCTURALLY INFEASIBLE at this face - a genuine mechanism (new input on S(t+1)-S(t)) is required, not a sharper constant.",
+  "face_status": "OPEN at tPT2 (corrected slack 10,066..11,128 A0c; 877..970 published-S 78-80%) and at t3 (slack 19,588..20,905 A0c). Nothing excluded. No RH claim."
+ },
+ "next_unit_0276": "a genuinely new mechanism for the S-difference kernel S(t+1)-S(t) at face height (the per-unit law family is exhausted structurally); beside it route (a) fleet data past tPT2 (100-150 fleet-days) and the asymptotic cell map (t3 done; t4 = 10^6*tPT2 optional).",
+ "artifacts": [
+  "scripts/rh/out_day078_hsxw_window.txt (HSXW per-unit laws, window counts, structural row at tPT2 + t3; canonical 0275 numeric record)",
+  "scripts/rh/day078_hsxw_window.py (the 0275 probe: parses out_day072c + out_day075b tables)",
+  "scripts/rh/out_day072c_face_corrected.txt (corrected tPT2 face table after the U_pin_c4 repair)",
+  "scripts/rh/out_day075_cell_corrected_FINAL.txt (t3 cell: identity closure ALL FOUR, K face-flat, window counts; streamed reader)",
+  "scripts/rh/out_day075b_cell_oom_partial.txt (historical: first t3 run, OOM on in-RAM f64 loads; superseded)",
+  "formal/RhAttack/T4OffLM.lean (REWRITTEN Fifth: *_old preserved + *_n corrected group, theorems validn*/openn*/windown*/gapPosn*/faceFlat*/faceOpenAtTPT2, green)",
+  "formal/RhAttack/T4OffLN.lean (0275 module: HSXW published theorems countLawPubA..N/windowPubA..N/validPubA..N/windowOpenPub/faceOpenUnderPublishedLaws, green)",
+  "docs/ROUTE-B-0273-DESIGN-2026-11-03.md (sec 6: Fifth correction + 0275 complete; retraction pointers on the 33/33/34/34 and 9.4% lines)"
+ ],
+ "honesty": "No RH claim. No zero-exclusion claim (the face is OPEN at tPT2 and t3). Certified by this entry: (1) the frontier unit window carries at most 22 zeros (published HSXW S-route, sigma-independent, NO in-repo data - the first fully published input to the face record); (2) kernel-refined window counts 39/39/39/41 (gData cut); (3) the 0274 corrected face record is valid under BOTH the A0c class constant (98% slack) and the first all-t-explicit published pair (78-80% slack); (4) the machine closes at t3 = 1000*tPT2 (all four sigmas) - the t-sweep of the cell continues the face-flat K' and t-frozen fluc; (5) the window-exclusion target of the 0274 draft is structurally infeasible under every published per-unit law (quantified 6.1x gap, growing in t). The draft-0274 33/33/34/34 window line and the -9,042 K' family are retracted (bias artifacts); preserved as *_old in T4OffLM.lean."
+}

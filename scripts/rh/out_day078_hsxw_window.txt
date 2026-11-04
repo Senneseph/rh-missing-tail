@@ -1,0 +1,52 @@
+0275 probe part 2: HSXW 2022 explicit per-unit laws (no data, no RH claim)
+tPT2 = 3000175332800.0 ; t3 = 3.000175e+15 ; GLAST = 3001345999.873009 ; g2 = gData = 30001045999.981976
+Smax(GLAST) = 6.049580 ; E_hsxw(GLAST) = 12.425896
+
+--- height tPT2 = 3.00017533e+12 ---
+  dmain = 4.279965 /unit ; E_hsxw(t) = 13.213638
+  B1_H (count law, /unit) = 30.707241   (A0_cite route: 97.680952/unit)
+  Smax(t) = 6.862091 ; S-diff per unit = 13.724182
+  raw 2-unit window count N(t+1)-N(t-1) <= 22.2841 -> <= 22
+  sigA: fluc=229.063294  kernel34=102.3331
+      count-law(A0c): E_win=9995.99 k_max=349  | count-law(HSXW): E_win=3142.37 k_max=104
+      S-route(HSXW):  E_win=1321.29  k_max=39  window open  (raw 2-unit S: <= 22)
+      full S-route envelope = 1106.18  |fluc|<=B: yes  (slack 877.12)
+  sigQ: fluc=229.141074  kernel34=102.4393
+      count-law(A0c): E_win=10006.37 k_max=349  | count-law(HSXW): E_win=3145.63 k_max=104
+      S-route(HSXW):  E_win=1322.66  k_max=39  window open  (raw 2-unit S: <= 22)
+      full S-route envelope = 1116.63  |fluc|<=B: yes  (slack 887.49)
+  sigF: fluc=229.363934  kernel34=102.5153
+      count-law(A0c): E_win=10013.79 k_max=349  | count-law(HSXW): E_win=3147.96 k_max=104
+      S-route(HSXW):  E_win=1323.64  k_max=39  window open  (raw 2-unit S: <= 22)
+      full S-route envelope = 1140.30  |fluc|<=B: yes  (slack 910.93)
+  sigN: fluc=229.787251  kernel34=102.5300
+      count-law(A0c): E_win=10015.23 k_max=349  | count-law(HSXW): E_win=3148.41 k_max=104
+      S-route(HSXW):  E_win=1323.83  k_max=39  window open  (raw 2-unit S: <= 22)
+      full S-route envelope = 1199.76  |fluc|<=B: yes  (slack 969.97)
+
+--- height t3 = 3.00017533e+15 ---
+  dmain = 5.379369 /unit ; E_hsxw(t) = 13.986102
+  B1_H (count law, /unit) = 33.351573   (A0_cite route: 121.167320/unit)
+  Smax(t) = 7.662488 ; S-diff per unit = 15.324976
+  raw 2-unit window count N(t+1)-N(t-1) <= 26.0837 -> <= 26
+
+--- structural row (window exclusion under published per-unit S laws) ---
+  t3 rows parsed: 4
+  0.1252270103: fluc=166.685  E_win(A0c)=-35.9 (k=-1)  E_win(S)=2066.2 (k=-3)  window open  raw 2-unit S <= 26
+  0.25: fluc=166.409  E_win(A0c)=-36.3 (k=-1)  E_win(S)=2067.7 (k=-3)  window open  raw 2-unit S <= 26
+  0.4: fluc=166.432  E_win(A0c)=-37.2 (k=-1)  E_win(S)=2068.7 (k=-3)  window open  raw 2-unit S <= 26
+  0.49: fluc=166.987  E_win(A0c)=-39.5 (k=-1)  E_win(S)=2068.9 (k=-4)  window open  raw 2-unit S <= 26
+
+Conclusions (record):
+  * HSXW 2022 Cor 1.2/1.4 are the first PUBLISHED explicit two-sided R-vM/S
+    bounds valid at all T >= e (analytic above 3.061e10, database-verified
+    below) -> they apply at tPT2 and t3 WITHOUT any in-repo data.
+  * Count-law per unit at tPT2: 30.71/unit (3.18x sharper than 3.4*ln form).
+  * S-route per-unit at tPT2: 2*Smax ~ 13.7/unit (sharpest certified).
+  * Certified window count W=(tPT2-1,tPT2+1]: <= 22 (raw S-route, 8.9x below
+    the 195 raw A0_cite count); kernel-refined k_max per sigma in table.
+  * The 0274 '33/33/34/34' window count is RETRACTED (c4pin bias artifact:
+    fluc was overstated by +8823.29; corrected fluc ~ 229 at tPT2).
+  * Window exclusion at tPT2: NOT achieved under any published per-unit law;
+    structural: E_win_S ~ (ln t)*kernel ~ (ln t)^2 growth vs t-frozen fluc.
+  * Face at tPT2 and at t3: OPEN.  No RH claim.

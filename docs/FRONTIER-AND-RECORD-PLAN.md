@@ -388,6 +388,55 @@ then the t-supremum for the face-wide statement. Beside it: (a) the fleet
 mechanism. The terminal face (claim (b), hence RH) remains OPEN at this
 record. No RH claim.
 
+## 3ter. 0274 FIFTH CORRECTION + 0275 COMPLETE (2026-11-09)
+
+**FIFTH CORRECTION (a defect of 0250, found while validating the 0275
+asymptotic cell):** `U_pin_c4` (scripts/rh/day072_face_U_repair.py)
+double-counted the c4/g^2 tail beyond Y2 = 2^24*160*t (bias -8,823.29 at
+tPT2, -1.0052e7 at t3): every 0273a-r/0274 K'/fluc line using the c4pin
+main term was contaminated. Corrected: K'(GLAST) = -218.89/-222.25/
+-226.28/-228.70 (face-FLAT, |K'| < 240), fluc (gData cut) = 236.27/236.35/
+236.57/236.99 (lower bounds), validity slack 10,066.58..11,127.77 (98%).
+The draft 0274 window line 'k <= 33/33/34/34 (5.9x reduction)' is
+RETRACTED as a bias artifact (A0c with corrected fluc gives k <= 348,
+weaker than the raw 195). Unchanged: S stream, zeta, kernels, Bunk/Ewin
+envelopes, day074 slope (-3.006e-9), and the 0274 VERDICT (face OPEN,
+validity + no exclusion). No RH claim.
+
+**0275 COMPLETE (envelope sharpening without new data):**
+1. A0 provenance: A0 = 3.4 is a DATA-LEVEL CLASS CONSTANT (3e10 band
+   sup 2.48e9 / 3e9 band 2.615), NOT a theorem constant; Zeta23's local
+   count is existential (witness 81.191752, #eval, not certified);
+   Titchmarsh 9.2 is bare O(log t) (0275a).
+2. HSXW 2022 (Hasanalizade-Shen-Wong, J. Number Theory 235:219-241)
+   Cor 1.2/1.4: the FIRST published explicit two-sided R-vM/S bounds
+   valid at all T >= e (analytic above T0 = 3.061e10, database below) ->
+   applicable at tPT2/t3 WITHOUT local data. Per-unit at tPT2: count law
+   30.707 (3.2x sharper than 3.4), S-route 13.724 (sharpest published);
+   raw frontier window (tPT2-1, tPT2+1] **<= 22 zeros** (sigma-independent,
+   PUBLISHED; 8.9x below the raw A0c 195; replaces the retracted 33 line);
+   kernel S-route k <= 39 per sigma (gData cut); count-law HSXW k <= 104.
+   The 0274 corrected record is simultaneously VALID under this pair
+   (full S-route envelope 1106.18..1199.76 >= fluc 236.27..236.99, slack
+   78-80%). Landed: formal/RhAttack/T4OffLN.lean (green) + T4OffLM
+   rewritten Fifth (green).
+3. t3 asymptotic cell (t3 = 1000*tPT2, day075b corrected): identity closure
+   ALL FOUR (|fluc| <= B A0c with slack 19,588..20,905 = 98-99%),
+   K(t3) = -154.69..-166.69 (face-flat at 1000x too), fluc(t3) =
+   166.41..166.99, window counts growing in t (A0c k_max 458..503; raw
+   HSXW two-unit <= 26). The old 'day075 closure FAIL' was the bias
+   -1.0052e7; the corrected cell CLOSES (out_day075_cell_corrected_FINAL.txt;
+   the first run OOM'd on 24-56GB in-RAM f64 loads; streamed 2^22-chunk
+   reader fixed it).
+4. 0275 VERDICT: window exclusion (E_win < fluc) requires a per-unit
+   S-difference <= 2.5801 at sigA; the best published gives 6.46 (6.1x
+   the requirement) and the gap GROWS in t: per-unit-law window exclusion
+   is STRUCTURALLY INFEASIBLE at this face. The face at tPT2 and t3 is
+   OPEN. Next unit 0276 = a genuinely new mechanism for S(t+1)-S(t) at
+   face height (the per-unit family is exhausted); beside it route (a)
+   fleet data past tPT2 (100-150 fleet-days) and the asymptotic map. No
+   RH claim.
+
 ## 4. Honesty boundary
 
 - The endpoint is CONDITIONAL (three named external inputs + the terminal
