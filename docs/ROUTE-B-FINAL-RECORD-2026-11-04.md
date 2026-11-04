@@ -417,3 +417,65 @@ the best bound known under RH**, and 46% below the first moment of
 the like-sign jumps.  No such theorem exists.  This is the exact
 measure of what remains of RH.  The face is **OPEN**; **no RH
 claim**; no zero-free claim.
+
+## 13 · 0283 — CT-3: the conformant-subclass route closes, and the REALIZED WALL
+
+**CT-3 verdict (closed, T4OffLR).** The conformant-subclass attempt —
+can the *subclass* of zero configurations satisfying every known law
+(face-band mirror geometry at Re ≈ 0.125227/0.874773, density bounds,
+R-vM 1e-7, |S| ≤ 6.46, window ≤ 22) beat the first moment? **No.**
+Two certified reasons:
+
+1. **The subclass contains the typical — and the realized —
+   configurations.**  The measured tPT2 world is itself conformant
+   (day081 landscape: mean 3.4 zeros/unit, max 9 per 2-unit window —
+   typical counts, none of the known laws strained).  A sup-form
+   bound cannot sit below its own first moment:
+   E1 = 421.6058 S-units piece-total, ratio 1.596 at tPT2, growing
+   3.882 / 5.032 at t3 / t4 (T4OffLP).  The new conformant
+   constraints bind the **off-line** zeros (mirror partners,
+   density-bounded) — which carry only the fedge·k machine
+   signature; the **S-route is carried by the on-line unknown
+   zeros**, whose first moment *is* the wall.  No h = 1
+   pair-correlation result in the known literature can force a sup
+   below the mean (the unconditional pair-correlation results are
+   mean-value / positive-proportion, structurally).
+
+2. **The REALIZED WALL (new, formal).**  The machine identity
+   `fluc = K + fedge·k + S-route` with the measured fluc = 236.273255
+   and the corrected K = −218.893831 (dps-60, GATE 1/2 at 1e-7)
+   pins the S-route the machine **actually measured**:
+   `S-route(k) = 455.167086 − 27.970831·k`, k = the true (unknown)
+   face count in the window, 0 ≤ k ≤ 14.  Certified strict-rational
+   floors (T4OffLR): k = 0 → 455.14 (**1.7225×** the gate 264.2366);
+   k = 6 → 287.26 (**1.0871×** — still above); k = 7 → 259.28
+   (below — the **escape reading**).  Under the typical readings
+   k ≤ 6 (7 of 15 admissible), **the gate constant is below the
+   S-route the real world exhibits**: any sup-form theorem at gate
+   strength is *refuted by the data themselves* — and the only
+   escape, the k ≥ 7 readings, is precisely the many-face-zero
+   regime, far from the RH-typical picture.
+
+**CT-2 unit corrigendum (0283):** the 0282 pinning's "9.45 S-units /
+27.97" conversion, "20.6 over a 52-unit piece", and "61.9× under RH"
+were unit errors (details in entry 0283; old values preserved).
+All machine quantities are **already S-units** (1/π argument scale);
+the requirement is **264.2433 S-units piece-total**; the first
+moment is **421.6058 S-units piece-total**; CGG's 4.2694 bounds
+*total S* at value scale (h ≤ √t) — a different object; under RH
+the S-route *is* the zero count (first moment stands; the
+circularity is vacuity); 37.3% below the first moment (0281) is the
+true fraction.
+
+**The final gap statement (units fixed):**  CT = an unconditional,
+pointwise, sup-form bound, piece S-route ≤ **264.2433 S-units**
+(2.5821 per kernel-mass unit) at tPT2, profile 2.5821 → 1.3445 →
+1.2578, all t ≥ tPT2 — versus **published 1321.29 (5.00×), family
+1106–1200 (4.19–4.54×), first moment 421.61 (1.596×, growing),
+realized typical-face 287.26–455.14 (1.087–1.722×, T4OffLR)**.  The
+subclasses are closed; what remains is a theorem **below its own
+first moment, unconditional, in sup form** — a unit-scale
+zero-density / pair-correlation result of strength that does not
+exist in the literature through 2026.  Face **OPEN**; no zero-free
+claim; **no RH claim**.  (T4OffLR built green; full tree 17,454
+jobs, 0 errors.)
