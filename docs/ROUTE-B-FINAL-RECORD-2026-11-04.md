@@ -103,11 +103,12 @@ closed items.  The machine is valid over **six orders of magnitude in t**.
   (4.279965) — the census is consistent with the certified main term
   down to the digit.
 * **Face-part:** at most **14** (22 − 8).
-* **Boundary reach:** the K–V zero-free left edge (0.001237) is a 38x
-  miss against the face Re 0.125227; Titchmarsh 9.2 as commonly cited is
-  bare O(log t); the local count constant 81.191752 (A0-provenance audit)
-  is a `#eval` witness, not a certified bound.  **No classical mechanism
-  reaches the face.**
+* **Boundary reach:** the classical zero-free reach at tPT2 is
+  δ = 0.001237 (from 1) against the required δ = 0.125227 — a gap of
+  **0.123990 that GROWS in t** (0.12406 at 10x, 0.12412 at 100x; 0270);
+  Titchmarsh 9.2 as commonly cited is bare O(log t); the local count
+  constant 81.191752 (A0-provenance audit) is a `#eval` witness, not a
+  certified bound.  **No classical mechanism reaches the face.**
 
 ## 5 · The gate (0276, formal: T4OffLO)
 
@@ -156,7 +157,7 @@ first moment is a lower bound on every sup-form envelope), and
 ```
   point :  E1 = dmain_lo × Wspan_lo        requirement          ratio
   tPT2 :   4.1199 × 102.3313 = 421.59   ≥  fluc+fedge ≤ 306.62  1.375
-  t3   :   5.2202 × 150.6    = 786.18   ≥  fluc+fedge ≤ 202.62  3.88
+  t3   :   5.2202 × 150.6    = 786.16   ≥  fluc+fedge ≤ 202.62  3.88
   t4   :   6.33 × 2229       = 14109.57 ≥  fluc+fedge ≤ 250.50  56.5
 ```
 
