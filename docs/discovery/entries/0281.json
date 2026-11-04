@@ -1,0 +1,26 @@
+{
+  "id": "0281",
+  "timestamp": "2026-11-10T06:05:00",
+  "title": "0281: t4 4-sigma cell LANDED + record corrections - the route (b) book is closed",
+  "tag": "route-b-0273",
+  "status": "closed",
+  "route": "Route (b) - final unit",
+  "summary": "The day079 t4 cell completed with ALL FOUR sigmas closed (identity |fluc|<=B at t4 = 3.000175e18 for A/Q/F/N; slacks 30,371.10 / 30,546.91 / 30,944.80 / 31,944.53; K(t4) = -192.7693/-197.8455/-203.9481/-207.6097 mpf-exact at the 1e18 cancellation; fluc +207.525/+207.415/+207.157/+206.659; E_win 28,792-28,821; k_max 667/661/647/615; S-stream 9,068,473,894 with the known +6 seam). The t4 gate point landed: c*(t4) = 1.2578/1.2586/1.2615/1.2704 (spans 199.04-199.24), published c1(t4) = 14.5046 = 11.53x above the gate (vs 5.00x at tPT2 - the published miss GROWS in t); the gate profile is complete and measured: 2.5821 -> 1.3445 -> 1.2578 (monotone decay, then flattening). CORRECTIONS (recorded per honesty convention): the 0278 draft wall used (a) tPT2 requirement 306.62 (wrong fedge 70.34; true T4OffLM fedgeA = 27.97 -> req 264.2433) and (b) a t4 span 2229 (E_win/cPub normalization; true day079 gate span 199.04, req 250.3585) with the ~0.95 expected gate (true 1.2578). The wall was true throughout and is STRONGER corrected: ratios 1.596/3.882/5.032 (replacing 1.375/3.88/56.5); 'growing ~ (ln t)^2' corrected to monotone growth (dmain ~ ln t growing, gate decaying/flattening). T4OffLP rewritten: self-consistent numerals + formal t4 completion block (gateProfile_t4ltt3, gateProfile_t3lttPT2, kT4faceFlat, t4Closures, pubMissGrowth, 14-conjunct routeBTerminal); T4OffLO header updated; full tree 17,454 jobs, 0 errors. Record section 11 appended. BOOK CLOSED: route (b) 0269-0281 complete - machine valid at 4 profile points x 4 sigmas; window pinned (8 + <=14); gate named with complete profile; wall certified; all mechanism classes audited to the 2026 literature. Face OPEN. No zero-free claim. NO RH CLAIM.",
+  "t4": {
+    "sigma_A": "K=-192.7693 fluc=+207.525 slack=30,371.10 E_win=28,792.14 fedge=-42.8335 kmax=667",
+    "sigma_Q": "K=-197.8455 fluc=+207.415 slack=30,546.91 E_win=28,807.50 fedge=-43.2383 kmax=661",
+    "sigma_F": "K=-203.9481 fluc=+207.157 slack=30,944.80 E_win=28,818.49 fedge=-44.1546 kmax=647",
+    "sigma_N": "K=-207.6097 fluc=+206.659 slack=31,944.53 E_win=28,820.63 fedge=-46.4572 kmax=615",
+    "S_stream": "9,068,473,894 through gData (+6 seam, annotated)",
+    "gate": "c*(t4) = 1.2578/1.2586/1.2615/1.2704; published c1 = 14.5046 (11.53x miss)"
+  },
+  "corrections": {
+    "tPT2_requirement": "306.62 -> 264.2433 (fluc 236.273255 + T4OffLM fedgeA 27.97)",
+    "t4_span": "2229 (E_win/cPub normalization of the cell E_win) -> 199.04 (day079 S-route gate span)",
+    "t4_requirement": "250.50 -> 250.3585 (207.525 + 42.8335)",
+    "gate_t4": "expected ~0.95 -> LANDED 1.2578 (A) / 1.2586-1.2704 (Q/F/N)",
+    "wall_ratio_profile": "draft 1.375/3.88/56.5 -> corrected 1.596/3.882/5.032 (monotone growth; the '(ln t)^2' phrasing replaced)",
+    "status": "theorems true under both numeral sets; STRONGER corrected; old values preserved in entry 0278 correction_0281 field"
+  },
+  "terminalVerdict": "Face OPEN. No zero-free claim. NO RH CLAIM. Route (b) book closed at 0281."
+}

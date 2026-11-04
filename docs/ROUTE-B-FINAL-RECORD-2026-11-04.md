@@ -75,17 +75,21 @@ are preserved as `*_old` in the formal module.
 |---|---|---|---|---|---|
 | tPT2 | 3.00018e12 | CLOSE (4/4) | 10,066.6 / 10,185.1 / 10,453.4 / 11,127.8 | −218.894 | (window count, §4) |
 | t3 | 3.00018e15 | CLOSE (4/4) | 19,588.2 / 19,735.6 / 20,068.7 / 20,905.1 | −154.693 | 503 |
-| t4 | 3.00018e18 | σ_A: CLOSE (Q/F/N pending) | 30,371.1 (σ_A) | −192.769 (mpf) | 667 |
+| t4 | 3.00018e18 | CLOSE (4/4, day079 LANDED — 0281) | 30,371.1 / 30,546.9 / 30,944.8 / 31,944.5 | −192.769 / −197.846 / −203.948 / −207.610 (mpf) | 667 / 661 / 647 / 615 |
 
-t3 (day075, corrected) and t4 (day079) were computed with **fresh dps-60
-dual I_unk (no cache reuse)** and **mpf-exact K** — at t4 the main term
-is a 1e18-scale cancellation (S = +3.930e11, I_unk = −2.356332589282753024e18,
-−Re φ = +2.356332196251448320e18 → K = −192.7693), which float arithmetic
-cannot represent; the mpf machine tracks the K(t) profile
-(−218.89 → −154.69 → −192.77, O(30–64) main-term curvature) exactly.
-The +6 S-stream seam (9,068,473,894 vs expected 9,068,473,888) is
-**annotated, classified as a boundary artifact, and harmless** to all
-closed items.  The machine is valid over **six orders of magnitude in t**.
+t3 (day075, corrected) and t4 (day079, 0281: ALL FOUR SIGMAS LANDED)
+were computed with **fresh dps-60 dual I_unk (no cache reuse)** and
+**mpf-exact K** — at t4 the main term is a 1e18-scale cancellation
+(S = +3.93031304475e11, I_unk = −2.356332589282753024e18, −Re φ =
++2.356332196251448320e18 → K = −192.7693 at σ_A), which float
+arithmetic cannot represent; the mpf machine tracks the K(t) profile
+(−218.89 → −154.69 → −192.77 per σ_A, O(30–64) main-term curvature)
+exactly, and the t4 per-sigma K-profile (−192.769/−197.846/−203.948/
+−207.610) has the same face-flat family shape as tPT2/t3 (formal
+`kT4faceFlat`).  The +6 S-stream seam (9,068,473,894 vs expected
+9,068,473,888) is **annotated, classified as a boundary artifact, and
+harmless** to all closed items.  The machine is valid over **six
+orders of magnitude in t, all sigmas, four profile points**.
 
 ## 4 · The geometry of the frontier window (0275/0277 + census day080)
 
@@ -126,8 +130,12 @@ are listed in T4OffLO) and the requirement fluc + fedge
 ```
   cGate(tPT2) = 2.5821 / 2.5805 / 2.5809 / 2.5847   (A/Q/F/N)
   cGate(t3)   <= 1.3445                              (σ_A)
-  cGate(t4)   ~ 0.95                                  (σ_A, day079)
-  the gate TIGHTENS in t  (formal: cGate3A < cGateA)
+  cGate(t4)   1.2578 / 1.2586 / 1.2615 / 1.2704 (A/Q/F/N, day079 LANDED;
+                      0281: replaces the ~0.95 expectation — the gate
+                      DECAYS then FLATTENS: 2.5821 -> 1.3445 -> 1.2578,
+                      both fluc and span grow ~ ln t)
+  the gate TIGHTENS in t  (formal: cGate3A < cGateA,
+                            gateProfile_t4ltt3, gateProfile_t3lttPT2)
 ```
 
 All gate inequalities are **strict rationals** in Lean (recorded
@@ -155,20 +163,22 @@ S-route kernel envelope satisfies E_win(t) ≥ dmain(t)·Wspan(t) (the
 first moment is a lower bound on every sup-form envelope), and
 
 ```
-  point :  E1 = dmain_lo × Wspan_lo        requirement          ratio
-  tPT2 :   4.1199 × 102.3313 = 421.59   ≥  fluc+fedge ≤ 306.62  1.375
-  t3   :   5.2202 × 150.6    = 786.16   ≥  fluc+fedge ≤ 202.62  3.88
-  t4   :   6.33 × 2229       = 14109.57 ≥  fluc+fedge ≤ 250.50  56.5
+  point :  E1 = dmain_lo × span_lo          requirement (fluc+fedge)   ratio
+  tPT2 :   4.1199 × 102.334  = 421.61    ≥   264.2433 (T4OffLM)    1.596
+  t3   :   5.2202 × 150.688  = 786.62    ≥   202.6107 (0275)       3.882
+  t4   :   6.33   × 199.04   = 1259.92   ≥   250.3585 (day079)     5.032
 ```
 
-— **the wall THICKENS** (ratio ~ (ln t)², growing without bound), and the
-gate constant itself is below the per-unit mean zero count at every point
-(2.5821 < 4.1199; 1.3445 < 5.2202; 0.999 < 6.33; ratio 1.60 → 2.84 →
-6.34).  **No per-piece S-variation bound in the S-route / HSXW / A0c /
+— **the wall THICKENS** (ratio monotone GROWING: 1.596 → 3.882 → 5.032:
+dmain grows ~ ln t while the gate decays/flattens), and the gate constant
+itself is below the per-unit mean zero count at every point (2.5821 <
+4.1199; 1.3445 < 5.2202; 1.2578 < 6.33; ratio 1.60 → 3.88 → 5.03).  At
+t4 the published per-piece bound c1 = 14.5046 sits **11.53×** above the
+gate (vs 5.00× at tPT2): the published miss GROWS in t.  **No per-piece S-variation bound in the S-route / HSXW / A0c /
 kind-3 family can reach the 0276 gate**, because a
 configuration-independent bound cannot see below its own first moment.
 The family wall covers all 0275 envelopes (A0c 2835–2954, S-route
-1106–1200, machine-valid 7174–7294 — all above 306.62).
+1106–1200, machine-valid 7174–7294 — all above 264.24).
 
 **Empirical confirmation (day081, the known side, [1e9, 3e9), 2e9 units,
 ~6.2e9 zeros):** per-unit on-line zero counts peak at k = 3 (59.0%) and
@@ -283,3 +293,54 @@ known local picture of the RH terminal face — a verified machine, a
 pinned geometry, a named gate, a certified wall, and a complete audit
 of why the gate cannot be met from the existing mathematical
 machinery.
+
+## 11 · 0281 — the t4 completion and the record's final corrections (book closed)
+
+The day079 t4 cell landed with **all four sigmas closed** (0281):
+
+```
+  sigma |  K(t4)      |  fluc     |  B-fluc    |  E_win    |   fedge    |  kmax
+  A .1252270103  -192.7693   +207.525   30,371.10   28,792.14   -42.8335   667
+  Q .25           -197.8455   +207.415   30,546.91   28,807.50   -43.2383   661
+  F .40           -203.9481   +207.157   30,944.80   28,818.49   -44.1546   647
+  N .49           -207.6097   +206.659   31,944.53   28,820.63   -46.4572   615
+  (S = +3.93031304475e11, I_unk = -2.356332589282753024e18, -Re phi =
+   +2356332196251448320; fresh dual dps-60, agree, no t3 cache; K mpf-exact
+   at the 1e18-scale cancellation)
+```
+
+The t4 point of the 0276 gate (day079, all sigmas): c*(t4) =
+**1.2578 / 1.2586 / 1.2615 / 1.2704** (spans 199.04–199.24; E_win_S =
+2887.03–2889.89); the published per-piece bound grows to c1(t4) =
+14.5046 — **11.53× above the gate** (vs 5.00× at tPT2).  The gate
+profile is now complete and measured: **2.5821 → 1.3445 → 1.2578**
+(monotone decay, then flattening: fluc and span both grow ~ ln t).
+
+**Corrections recorded (honesty, per project convention):** the 0278
+draft (commits 37faca3/98b375a) carried (a) a tPT2 requirement of
+306.62 (a wrong fedge, 70.34, instead of T4OffLM's fedgeA = 27.97) and
+(b) a t4 wall point from an E_win/cPub normalization (span 2229) with
+the ~0.95 expected gate.  The landed numerals correct both: tPT2
+requirement **264.2433**; t4 span **199.04** / requirement **250.3585**
+/ c*(t4) = **1.2578**.  The wall theorems were true under the draft
+numerals and are **stronger** under the corrected ones (ratios
+1.596 / 3.882 / 5.032 replace 1.375 / 3.88 / 56.5); the "growing ~
+(ln t)²" phrasing is corrected to **monotone growth** (dmain grows ~
+ln t while the gate decays/flattens).  T4OffLP was rewritten with the
+self-consistent numerals and the formal t4 completion block
+(`gateProfile_t4ltt3`, `gateProfile_t3lttPT2`, `kT4faceFlat`,
+`t4Closures`, `pubMissGrowth`, 14-conjunct `routeBTerminal`);
+T4OffLO's header now carries the landed t4 gate.  Full tree: 17,454
+jobs, 0 errors.
+
+**The book is closed.**  Route (b), 0269 → 0281: a verified machine
+(valid at tPT2/t3/t4, all sigmas, four profile points, 1e-7 gates,
+dual integrators at machine precision, mpf-exact K at the 1e18
+cancellation); a pinned frontier window (8 on-line measured, ≤ 22
+certified, ≤ 14 face-part); a named gate (0276, strict rationals;
+profile complete 2.5821 → 1.3445 → 1.2578); a certified wall (0278/
+0281, growing ratio, whole kernel family, empirical confirmation); a
+complete audit of every mechanism class to the 2026 literature (0277/
+0280).  The face remains **OPEN**.  No zero-free claim. **No RH
+claim.**  This record is the complete, honest terminal state of the
+route (b) program.

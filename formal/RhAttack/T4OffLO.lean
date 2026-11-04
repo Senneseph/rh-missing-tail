@@ -57,7 +57,11 @@
      cGate(A,  tPT2)  =  2.5821   (this  file,  section  tPT2)
      cGate(A,  t3)    =  1.3445   (day075b  fluc  166.685  +  fedge
                                   35.9257,  day078  span  150.688)
-     cGate(A,  t4)    =  (day079)  (expected  ~ 0.95:  monotone  decay)
+     cGate(A,  t4)    =  1.2578  (day079 LANDED:  1.2578/1.2586/1.2615/
+                                  1.2704  A/Q/F/N;  monotone decay, then
+                                  FLATTENING - the gate c* = (fluc+fedge)/span
+                                  with both ~ ln t)   [0281:  replaces the
+                                  ~0.95 expectation]
    The  UNIFORM  face  input  (all  t  >=  tPT2)  is  therefore
    governed  by  the  tPT2  value:  cGate  =  2.5821  at  sigma_A
    (2.5847  at  sigma_N  -  the  worst  sigma),  decreasing  above.
