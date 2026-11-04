@@ -10,11 +10,13 @@
   "gap": "37% below the first moment at tPT2 (ratio 1.596), growing (3.882 at t3, 5.032 at t4); the published-constant view (5.00x) decomposes as 1.596 (wall) x 3.13 (sup-overhead).",
   "mechanismAudit": "published constants: 5.00x miss; class/envelope kernel families: 3.2-4.9x; continuous R-vM S-tail: 10^12x; data wave: retracted 0277; spacing-only cancellation: structurally impossible without phase info; Conrey-Ghosh-Gonek: RH-conditional + 1.65x + growing (circularity + miss); Trans 8571 moments: mean-square, not pointwise sup; 2026 zero-free regions: sigma ~ 0.993 edge, cannot reach Re = 0.125227 face.",
   "nextMoves": [
-    "CT-1: DONE (T4OffLQ, strict rationals, gate < FIRST MOMENT < published, full chain formal)",
-    "CT-2: DONE with CORRIGENDUM (0283 unit audit; final gap statement in 0283)",
-    "CT-3: DONE (0283): conformant-subclass route CLOSED (subclass contains the typical AND the realized configs; face geometry constrains only off-line zeros; S-route = on-line unknown zeros = the first moment) + NEW REALIZED WALL (T4OffLR: measured S-route = 455.167086 - 27.970831k; typical readings k <= 6 sit 1.087-1.722x ABOVE the gate; k >= 7 escape = the many-face-zero regime)",
-    "CT-4: formalize the t-profile realized wall (t3 floor 321.38 = 1.586x gate3; t4 floor 400.29 = 1.600x gate4; mean wall 3.882/5.032 dominates there) and the corrected CT statement in the final record",
-    "CT-5 (research, open): the only remaining mechanism class after 0275-0283 - a below-first-moment UNCONDITIONAL theorem of genuinely new strength (unit-scale zero-density/pair-correlation below its own first moment); no such theorem exists in the literature through 2026"
+    "CT-1: DONE (T4OffLQ: gate < FIRST MOMENT < published, strict rationals, green)",
+    "CT-2: DONE with unit CORRIGENDUM (0283; final gap statement units fixed)",
+    "CT-3: DONE (0283/T4OffLR: conformant-subclass route closed - subclass contains the typical AND realized configs; NEW realized wall)",
+    "CT-4: DONE (0283 addendum/T4OffLR: realized wall over the WHOLE profile; t3 all-k 1.586x, t4 all-k 1.599x; no escape at t3/t4)",
+    "CT-5: DONE (0284/T4OffLS: the uniform S-diff gate is STRUCTURALLY DEAD - fixed measured Smax(GLAST) = 6.049376 exceeds every gate constant (2.34x, diverging); actual piece S-diff unbounded in t (published S = Omega\u00b1((ln t/ln ln t)^(1/3))) => gate antecedent FALSE for all large t; the 'needed future theorem' is PROVABLY FALSE, not merely unproved)",
+    "0285: DONE (zero-density audit: pervasive face REFUTED by Huxley N << t^{0.231283+o(1)}; window-local exclusion impossible from counts; sparse face NOT refuted) - MECHANISM MAP COMPLETE",
+    "TERMINAL: face OPEN; pervasive face refuted; any surviving face sparse; no known mechanism excludes a sparse face (a new-thesis problem outside the 2026 literature); no zero-free claim; NO RH CLAIM"
   ],
   "honesty": "NO RH CLAIM. No zero-free claim. Face OPEN. CT is stated as the open work needed, not as something proved or even known to exist.",
   "ct2Pin": {
