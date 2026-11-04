@@ -1,0 +1,34 @@
+GLAST = 3001345999.873009
+========================================================================
+day079: 0276 structural cell at t4 = 3.000175e+18  (1e6 x tPT2)
+No RH claim. Asymptotic profile continuation of day075b (t3).
+========================================================================
+
+dual I_unk at t4 (dps-60, c4pin vs u-sub):
+  sigma=0.1252270103  c4pin=-2.356333e+18  usub=-2.356333e+18  spread=2.701e-05 (rel 1.15e-23) AGREE  (299s)
+  sigma=0.2500000000  c4pin=-2.356333e+18  usub=-2.356333e+18  spread=2.701e-05 (rel 1.15e-23) AGREE  (247s)
+  sigma=0.4000000000  c4pin=-2.356333e+18  usub=-2.356333e+18  spread=2.701e-05 (rel 1.15e-23) AGREE  (251s)
+  sigma=0.4900000000  c4pin=-2.356333e+18  usub=-2.356333e+18  spread=2.701e-05 (rel 1.15e-23) AGREE  (253s)
+
+S stream at t4 = 3.000175e+18:
+  file  0 (zeros_T10000000_ext_full.txt              ) n=18524378 (3s)
+  file  1 (zeros_8846000.dat                         ) n=23293066 (3s)
+  file  2 (zeros_10946000.dat                        ) n=28126275 (4s)
+  file  3 (zeros_13046000.dat                        ) n=33013519 (4s)
+  file  4 (zeros_15146000.dat                        ) n=37947252 (4s)
+  file  5 (zeros_17246000.dat                        ) n=42921785 (4s)
+  file  6 (zeros_19346000.dat                        ) n=47932669 (5s)
+  file  7 (zeros_21446000.dat                        ) n=52976333 (5s)
+  file  8 (zeros_23546000.dat                        ) n=58049844 (5s)
+  file  9 (zeros_25646000.dat                        ) n=63150756 (6s)
+  file 10 (zeros_27746000.dat                        ) n=68276987 (6s)
+  file 11 (zeros_29846000.dat                        ) n=73426754 (6s)
+  file 12 (zeros_hi31946e6_to_1e9.f64                ) n=2852998634 (96s)
+  file 13 (zeros_1002e6_to_2000e6.f64                ) n=5919172354 (193s)
+  file 14 (zeros_2002e6_to_3000e6.f64                ) n=9061794700 (295s)
+  file 15 (zeros_2999e6_to_3000e6.f64                ) n=9068473894 (295s)
+  TOTAL n = 9068473894 (day072/074 convention 9,068,473,888)
+
+asymptotic cell: t4 = 3.000175e+18  (1e6 x tPT2 = 3000175332800.0
+       sigma |          S(t4) |        I_unk(t4) |      -Re phi(t4) |       K(t4) |   B(t4)-G1cut |    log|z| |       fluc | |f|<=B |     B-fluc |      E_win |     fedge |  k_max
+0.1252270103 | +393031304475.112 | -2356332589282753024.000 | +2356332196251448320.000 |   -192.7693 |      30578.63 | +14.756230 |   +207.525 |    yes |   30371.10 |   28792.14 |  -42.8335 |    667

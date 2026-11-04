@@ -1,0 +1,38 @@
+  file zeros_T10000000_ext_full.txt             n_in=0 (2s)
+  file zeros_8846000.dat                        n_in=0 (3s)
+  file zeros_10946000.dat                       n_in=0 (3s)
+  file zeros_13046000.dat                       n_in=0 (3s)
+  file zeros_15146000.dat                       n_in=0 (3s)
+  file zeros_17246000.dat                       n_in=0 (3s)
+  file zeros_19346000.dat                       n_in=0 (3s)
+  file zeros_21446000.dat                       n_in=0 (4s)
+  file zeros_23546000.dat                       n_in=0 (4s)
+  file zeros_25646000.dat                       n_in=0 (4s)
+  file zeros_27746000.dat                       n_in=0 (4s)
+  file zeros_29846000.dat                       n_in=0 (4s)
+  file zeros_hi31946e6_to_1e9.f64               n_in=19077390 (10s)
+  file zeros_1002e6_to_2000e6.f64               n_in=3085251110 (461s)
+  file zeros_2002e6_to_3000e6.f64               n_in=6227873456 (919s)
+  file zeros_2999e6_to_3000e6.f64               n_in=6230271578 (920s)
+
+known on-line zeros in [1e9, 3e9): 6230271578  over 2000000000 units = 3.1151/unit  (R-vM mean at 2e9: 3.1160/unit)
+
+PER-UNIT COUNT DISTRIBUTION (units with exactly k on-line zeros):
+  k= 0:         -4197512 units  -0.21%  
+  k= 1:          6204792 units   0.31%  
+  k= 2:        301502645 units  15.08%  #######
+  k= 3:       1179884599 units  58.99%  #############################
+  k= 4:        501624419 units  25.08%  ############
+  k= 5:         14976319 units   0.75%  
+  k= 6:             4738 units   0.00%  
+  k= 7:                0 units   0.00%  
+  k= 8:                0 units   0.00%  
+  k= 9:                0 units   0.00%  
+  k=10:                0 units   0.00%  
+  k=11:                0 units   0.00%  
+  k>=15:               0 units
+
+consecutive-unit PAIR max (count[t]+count[t+1], the 2-unit (t-1,t+1] window count): 9
+  vs 0276 gate cGate(tPT2) = 2.5821 (per piece; the 2-unit window reading is the binding piece)
+  vs HSXW certified two-unit upper 22 (0275): 9 <= 22: ok
+No RH claim.

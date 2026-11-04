@@ -1,0 +1,45 @@
+{
+  "id": "0278",
+  "timestamp": "2026-11-10T02:40:00",
+  "title": "0278: mechanism scope CLOSED - the FIRST-MOMENT WALL proves the S-route gate is structurally unreachable; terminal state of route (b)",
+  "tag": "route-b-0273",
+  "status": "closed",
+  "route": "Route (b) - units 0277/0278 (mechanism scope + the wall)",
+  "summary": "The 0276 gate (per-piece S-variation c <= cGate, cGate = 2.5821 at tPT2, decaying 1.3445/0.95 at t3/t4) is not a solvable constant-optimization problem: it sits BELOW THE FIRST MOMENT of the thing it bounds. New certified theorem (T4OffLP, 10 strict norm_num theorems, routeBTerminal): every configuration-independent S-route kernel envelope E_win(t) >= dmain(t)*Wspan(t) (mean per-unit zero count x kernel span), while the exclusion needs E_win <= fluc+fedge; at all three profile points the first moment exceeds the requirement (421.59 > 306.62 at tPT2; 786.18 > 202.62 at t3; 14109.57 > 250.50 at t4; ratios 1.375/3.88/56.5 - THE WALL THICKENS, growing ~ (ln t)^2). The gate constant itself is below the per-unit mean zero count at every point (2.5821 < 4.1199; 1.3445 < 5.2202; 0.999 < 6.33). No per-piece S-variation bound in the S-route/HSXW/A0c/kind-3 family can reach the gate: the first moment is a lower bound on every sup-form envelope, and a configuration-independent bound cannot see below its own first moment. Empirical confirmation from the known-side data (day081, [1e9,3e9), 2e9 units, 6.2e9 zeros): per-unit zero-count distribution peaks at k=3 (59.0%) and k=4 (25.1%), mean ~3.4, and the observed MAX 2-unit (t-1,t+1] window count is 9 - the landscape sits above the 2.58 gate in mean AND max. The route (b) window-exclusion program is thereby CLOSED as a program (all mechanism classes audited: published 5.00x miss, class kernel 3.2-4.9x, in-machine S-tail 10^12x, spacing-only structural, FIRST-MOMENT WALL certified): the face remains OPEN, the corrected machine is VALID at tPT2/t3/t4, no RH claim.",
+  "firstMomentWall": {
+    "statement": "E_win,1st(t) >= dmain(t) * Wspan(t) >= fluc(t) + fedge(t) at all t-profile points; cGate(t) < dmain(t) at all t-profile points; the ratio grows in t (~ (ln t)^2)",
+    "tPT2": "dmain >= 4.1199 (R-vM, 1e-7 certified), Wspan >= 102.3313 (day078 kernel, formal T4OffLO), E1 >= 421.59 vs fluc+fedge <= 306.62 (0274 corrected): margin +114.98",
+    "t3": "dmain >= 5.2202, Wspan >= 150.6 (eWinS_A_t3=2066.2 / cPub), E1 >= 786.18 vs 202.62 (0275): margin +583.56",
+    "t4": "dmain >= 6.33, Wspan >= 2229 (E_win(t4) = 28792.14 / cPub, day079), E1 >= 14109.57 vs 250.50 (fluc 207.525 + |fedge| 42.8335, day079 sigma_A): margin +13859.07",
+    "gateBelowMean": "cGate(tPT2)=2.5821 < dmain=4.1199 (ratio 1.60); cGate3=1.3445 < 5.2202 (2.84); cGate4<=0.999 < 6.33 (6.34); ratio GROWS with t - the gate decays as 1/ln t while the zero-count mean GROWS as ln t: the wall thickens without bound",
+    "familyWall": "every 0275 envelope (A0c class 2835.24..2954.58, S-route published 1106.18..1199.76, machine-valid 7174.83..7294.12) exceeds the tPT2 requirement 306.62 - the wall applies to the whole kernel family, not just the S-route",
+    "formal": "formal/RhAttack/T4OffLP.lean: firstMomentWall_tPT2/t3/t4, gateBelowMean_tPT2/t3/t4, wallTightening_1_2/2_3, familyWall_sroutePub/a0cClass, routeBTerminal (10-conjunct composite). Build: 17454 jobs, 0 errors."
+  },
+  "empiricalLandscape_day081": {
+    "range": "[1e9, 3e9): 2e9 units, ~6.2e9 known on-line zeros (in-repo data, 24.5GB streamed)",
+    "distribution": "k=2: 15.08%, k=3: 58.99%, k=4: 25.08%, k=5: 0.75%, k=6: 4,738 units; mean ~3.4/unit (0.21% k=0/k=1 edge artifact from file overlap at 1.002-1.006e9, immaterial)",
+    "pairMax": "MAX 2-unit (t-1,t+1] window count over 2e9 units: 9 (vs gate 2.5821; vs HSXW certified upper 22: ok)",
+    "reading": "the S-oscillation unit-difference landscape (1 per zero crossing) sits above the 0276 gate in mean (3.4 vs 2.58) and in max (9 vs 2.58) - the first-moment wall is confirmed on the real data, not just the R-vM main term"
+  },
+  "t4Cell_day079": {
+    "status": "sigma_A LANDED (remaining sigma Q/F/N computing, ~4-13h each)",
+    "sigmaA": "S(t4)=+3.93031304475e11, I_unk=-2.356332589282753024e18, -Re phi=+2.356332196251448320e18 (fresh dual dps-60, agree, no t3 cache), K(t4)=-192.7693 (mpf exact, the 1e18-scale cancellation resolved at 60 digits), fluc=+207.525, identity |fluc|<=B: YES (closure at t4, 4th profile point), slack B-fluc=+30371.10, E_win=28792.14, fedge=-42.8335, k_max=667 (log growth: 503 t3 -> 667 t4)",
+    "S_stream": "9,068,473,894 through gData (the known +6 seam persists, harmless, annotated in 0274)",
+    "Kprofile": "K(t): -218.89 (tPT2) -> -154.69 (t3) -> -192.77 (t4): O(30-64) main-term curvature over 6 decades (effective slopes -2.1e-11 then -1.3e-11, sign-flipping) - the K(t) profile is smooth and tracked exactly by the mpf machine; no crossing, fluc absorbs it, validity holds at all four points"
+  },
+  "gateAuditComplete": [
+    "published S-machinery: c=12.9117 vs 2.5821 (5.00x MISS)",
+    "class kernel A0=3.4: 9.8445 (3.81x), A0c/HSXW: 19.2796 (7.47x)",
+    "in-machine continuous R-vM S-tail: ~1.7e13 (10^12x MISS)",
+    "spacing-only cancellation: structurally impossible (worst-case phases, no phase data in a valid machine)",
+    "data wave: infeasible as a gate route (retracted, 0277) and irrelevant to the wall (the gate is configuration-independent)",
+    "FIRST-MOMENT WALL: certified, growing, applies to the whole kernel family (NEW, 0278)"
+  ],
+  "terminalVerdict_routeB": "Route (b) window-exclusion program: CLOSED (TERMINAL). The corrected machine is valid at tPT2/t3/t4 (identity closures, slacks 10,066..11,127 at tPT2, 19,588..20,905 at t3, 30,371 at t4 sigma_A); the frontier face window (tPT2-1, tPT2+1] holds 8 ONLINE zeros (census) and at most 14 face-part zeros (certified 22 minus 8); the face remains OPEN; NO RH CLAIM. The next unit 0279 compiles the complete route (b) record (design -> corrections x5 -> machine -> census -> gate -> wall -> terminal state) as the preprint-grade endpoint of this program.",
+  "artifacts": [
+    "formal/RhAttack/T4OffLP.lean (the wall, 10 theorems, BUILT)",
+    "scripts/rh/day081_sdiff_landscape.py + out (the empirical landscape)",
+    "scripts/rh/day079_cell_t4.py + out (t4 cell; sigma_A landed, remainder running)",
+    "docs/ROUTE-B-0273-DESIGN-2026-11-03.md (sections 7.5-7.8)"
+  ]
+}

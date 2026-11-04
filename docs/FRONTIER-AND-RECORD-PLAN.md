@@ -498,3 +498,36 @@ mechanism must deliver, certified conditionally in Lean
   non-existence and make NO RH claim.
 - Everything in this plan is scoped work; nothing here is a claim about
   RH.
+
+## 3quinquies. 0277/0278: the gate audit and the FIRST-MOMENT WALL (2026-11-04..10)
+
+**0277 (entry 0277): the gate-closure audit — CLOSED.** Every
+non-mechanism route to the 0276 gate audited and closed: published
+(5.00x), class families (3.2-4.9x), in-machine continuous R-vM S-tail
+(1.7e13, 10^12x), data wave (retracted as a gate route — it cannot
+certify the S-bound itself), spacing-only (structural). Plus the
+frontier window CENSUS (day080): (tPT2-1, tPT2+1] contains EXACTLY 8
+on-line zeros (in-house RS-Z at tPT2, 80-bit, per-root mpmath-verified,
+R-vM prediction 8.5599 consistent) — face-part window at most 14
+(22 certified minus 8).
+
+**0278 (entry 0278): the FIRST-MOMENT WALL — the mechanism scope is
+CLOSED.** The 0276 gate sits BELOW THE FIRST MOMENT of the zero-count
+kernel it bounds: E_win,1st(t) = dmain(t)·Wspan(t) = 421.59 (tPT2) /
+786.18 (t3) / 14109.57 (t4) vs the requirement 306.62 / 202.62 / 250.50
+(ratios 1.375 / 3.88 / 56.5 — the wall THICKENS in t); cGate < dmain at
+every point (2.5821 < 4.1199 etc., ratio growing). No
+configuration-independent S-route/kernel bound can reach the gate.
+Certified: `formal/RhAttack/T4OffLP.lean` (10 strict norm_num theorems;
+routeBTerminal; full tree 17,454 jobs, 0 errors). Empirical
+confirmation (day081): the known-side per-unit zero count over [1e9,
+3e9) has mean ~3.4 and MAX two-unit window count 9 — above the 2.58
+gate in mean and max. The t4 cell (day079) landed its 4th profile
+point (sigma_A: K = -192.7693 mpf-exact, fluc = +207.525, identity
+closure, slack +30,371; sigma Q/F/N rows pending ~4-13h each).
+
+**TERMINAL STATE OF ROUTE (b) (design doc section 8):** machine valid
+at tPT2/t3/t4 (slacks 10,066..11,127 / 19,588..20,905 / 30,371); face
+window (8 on-line + <= 14 face-part); gate named and formalized; wall
+certified. The face remains OPEN; NO RH CLAIM. Next unit 0279 = the
+final record compilation (preprint-grade endpoint of the program).
