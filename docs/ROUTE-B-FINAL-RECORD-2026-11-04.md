@@ -375,3 +375,45 @@ goal, stated plainly: *the proof of RH now requires a theorem (CT)
 of strictly new strength — a below-first-moment, configuration-
 independent, unit-scale S-variation result — whose existence and
 proof are the open mathematical content of the next phase.*
+
+### 12.1 · CT-2 pinning (exact, 0282 addendum)
+
+The Conrey–Ghosh–Gonek S-difference result, pinned to its letter
+(Bull. LMS 2006, arXiv/math/0511092, **Theorem 1; assuming RH**):
+for t large and 0 < h ≤ √t,
+
+      |S(t+h) − S(t)|  ≤  (1/2 + o(1)) · log t / log log t.
+
+At tPT2 the leading term is **(1/2)·28.7283/3.35826 = 4.2694 S-units**
+over *any* interval up to √t (the o(1) refinement is an explicit
+constant computation, not a mechanism).  Consequences, exactly:
+
+- **Under RH the gate is closed by a wide margin** (4.2694 total over
+  the full 52-unit piece = 0.0816 per unit vs the gate 2.5821 per
+  unit; even on the 2-unit window, 2.1347 < 2.5821) — as it must be,
+  since the face is empty under RH.  The circularity is now
+  quantified: the CGG route would need its bound **unconditionally**
+  at strength ≤ 9.45 S-units piece-total (= 2.5821 × 102.334;
+  requirement 264.24 fluc / 27.97 fluc per S-jump) — a factor **2.21
+  sharper than the best bound that assumes RH**, versus a factor
+  139.7 (per-unit 4.25, the 5.00× Smax normalization) sharper than
+  the best unconditional (the 1321.29 Smax-triangle piece bound).
+- **The unconditional moment machinery does not reach unit scale.**
+  The explicit 2nd/4th moments of S(t+h) − S(t) (Trans,
+  arXiv:2010.10675) are proved for **h ≪ 1/log t** (≈ 0.035 units at
+  tPT2) and control mean squares, not the pointwise sup the 0276 gate
+  needs.  Two gaps, not one (scale + moment-vs-sup).
+- **The first moment, in S units:** the like-sign (1/π)-jumps of the
+  unknown-side S-oscillation over the 52-unit piece have first moment
+  **20.6 S-units**; the gate 9.45 sits **46% below it** (the S-unit
+  twin of 0281's fluc-unit 37% — same wall, different normalization).
+
+**CT, final form (0282 + pinning):** an unconditional, pointwise,
+sup-form bound on the unknown-side S-difference over the S-route
+pieces, ≤ 9.45 S-units piece-total (2.5821 per unit) at tPT2, with
+the decaying/flattening gate profile 2.5821 → 1.3445 → 1.2578 (per
+unit), for all t ≥ tPT2 — **2.21× stronger, unconditionally, than
+the best bound known under RH**, and 46% below the first moment of
+the like-sign jumps.  No such theorem exists.  This is the exact
+measure of what remains of RH.  The face is **OPEN**; **no RH
+claim**; no zero-free claim.
