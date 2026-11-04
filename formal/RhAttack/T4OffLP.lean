@@ -62,6 +62,9 @@ set_option linter.style.docString false
 
 open Real
 
+namespace  T4OffLP
+
+
 /-! ## Profile constants (certified lower bounds where marked UPPER bounds
 on the requirement side; 0274 GATE 1/2 R-vM 1e-7 certification keeps the
 true dmain within 1e-3 of the main term at all three heights)  -/
@@ -186,3 +189,4 @@ theorem  routeBTerminal  :
                             ((Kt4N : ℝ)  <  (Kt4F : ℝ)  ∧  (Kt4F : ℝ)  <  (Kt4Q : ℝ)  ∧  (Kt4Q : ℝ)  <  (Kt4A : ℝ)  ∧  (Kt4A - Kt4N : ℝ)  >  -20) ∧
                               (slackT4A  >  30000 ∧ slackT4Q  > 30000 ∧ slackT4F  > 30000 ∧ slackT4N  > 31000)  :=  by
   exact  ⟨firstMomentWall_tPT2, ⟨firstMomentWall_t3, ⟨firstMomentWall_t4, ⟨gateBelowMean_tPT2, ⟨gateBelowMean_t3, ⟨gateBelowMean_t4, ⟨gateProfile_t4ltt3, ⟨gateProfile_t3lttPT2, ⟨wallTightening_1_2, ⟨wallTightening_2_3, ⟨familyWall_sroutePub, ⟨familyWall_a0cClass, ⟨kT4faceFlat, t4Closures⟩⟩⟩⟩⟩⟩⟩⟩⟩⟩⟩⟩⟩
+end  T4OffLP
