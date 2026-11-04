@@ -344,3 +344,34 @@ complete audit of every mechanism class to the 2026 literature (0277/
 0280).  The face remains **OPEN**.  No zero-free claim. **No RH
 claim.**  This record is the complete, honest terminal state of the
 route (b) program.
+
+## 12 · 0282 — the Closing Theorem (the single remaining work item)
+
+The program now reduces to one theorem (design doc §9, entry 0282):
+
+**CT.** *A configuration-independent, sup-form, pointwise bound on the
+unknown-side S-oscillation variation over the S-route pieces, valid for
+**all** t ≥ tPT2, at or below the 0276 gate constants c*(t) =
+2.5821 / 1.3445 / 1.2578 (tPT2 / t3 / t4 profile; T4OffLO strict
+rationals). CT closes every face window for all t ≥ tPT2; with the
+known zero-free region below tPT2, RH follows.*
+
+The gap, exactly (0281's correction makes the true size visible): **a
+37% reduction below the first moment** at tPT2 (ratio 1.596, growing
+to 5.032 at t4) — the published-constant 5.00× decomposes as
+1.596 (the wall: a sup bound cannot beat its own first moment) ×
+3.13 (sup-overhead in the published constants).  No theorem of this
+shape exists in a century of work: every S-result ever published
+bounds the sup *above* the first moment; Conrey–Ghosh–Gonek's is the
+best S-difference form at all but is RH-conditional (circular for
+RH) and 1.65× above the gate even there.  CT-1…CT-4 are the next
+moves (sharpest sup-to-wall bound from the 1e-7 R-vM machine; exact
+pinning of the CG route's minimal new ingredient; a conformant-
+subclass pair-correlation attempt at h = 1 where geometry — not all
+configurations — might beat the mean; formalization once pinned).
+
+The face remains **OPEN**.  **No RH claim.**  What remains of the
+goal, stated plainly: *the proof of RH now requires a theorem (CT)
+of strictly new strength — a below-first-moment, configuration-
+independent, unit-scale S-variation result — whose existence and
+proof are the open mathematical content of the next phase.*
