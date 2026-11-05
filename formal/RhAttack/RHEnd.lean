@@ -392,6 +392,105 @@ theorem rh_growth_frontier_subsumes_data (q : ZeroSet)
   intro ρ hρ him hin
   exact hGrowth ρ hρ him (le_trans hin (le_of_lt WinC.ptFrontierOrder))
 
+/-  ##  0288  ·  THE  EXACT  RESIDUAL  (the  iff):  all-heights  RH  =
+    the  cited  census  [Z-PT2]  +  ONE  named  open  object,  the
+    TERMINAL  FACE  (0288)
+
+  0287  pinned  what  is  PROVEN  (no  off-line  pair  up  to  the
+  growth  frontier  tPT2  =  3 x 10^12,  under  [Z78]  +  the  3e10
+  census  +  the  growth  wire).  This  section  pins,  as  a
+  pure-logic  machine-verified  equivalence,  EXACTLY  what  REMAINS
+  for  all-heights  RH:
+
+      RH  q   iff   [  the  census:  every  zero  up  to  tPT2  is  on
+                     the  line  (allOnLineUpTo  q  tPT2,  the  cited
+                     3e10  census  +  growth-wire  frontier)  ]
+             AND  [  the  TERMINAL  FACE:  no  off-line  zero  with
+                     positive  height  ABOVE  the  growth  frontier
+                     tPT2  =  3 x 10^12  ].
+
+  Given  the  cited  census  (a  known,  bit-pinned  fact  about  the
+  ACTUAL  zero  set,  0263  /  PINS.json),  all-heights  RH  holds
+  iff  the  terminal  face  is  empty.  The  terminal  face  is  ONE
+  named  open  object  -  the  HEART  of  RH  above  3 x 10^12  (the
+  core  critical  strip  0  <  d0  <=  3/8  at  heights  the  census
+  does  not  reach).  It  is  a  THESIS-LEVEL  open  problem:  every
+  known  mechanism  through  2026  is  exhausted  (route  (b)
+  terminally  dead,  0284/0285;  the  absolute  A1  clause
+  A1G.face_unbounded  is  OPEN  /  PROBABLY  FALSE,  E19  F1/F2).
+
+  NO  RH  CLAIM:  the  terminal  face  remains  a  named  open  object;
+  this  unit  states  the  EXACT  reduction,  it  does  NOT  close  the
+  face.  -/
+
+/--  0288  ·  THE  TERMINAL  FACE  (the  single  named  open  object  for
+    all-heights  RH):  no  off-line  zero  with  POSITIVE  height  above
+    the  growth  frontier  WinC.tPT2  =  3,000,175,332,800.  This  is
+    the  heart  of  RH  above  3 x 10^12.  -/
+def terminalFace (q : ZeroSet) : Prop :=
+    ∀ (ρ : ℂ), ρ ∈ q.Z → (WinC.tPT2 : ℝ) < ρ.im → ρ.re = 1 / 2
+
+/--  0288  ·  THE  EXACT  RESIDUAL  (the  iff,  pure  logic,
+    machine-verified):  all-heights  RH  decomposes  at  the  growth
+    frontier  into  the  cited  census  clause  AND  the  terminal
+    face.  Conjugation  (ZeroSet.conj)  sends  a  negative-height  zero
+    to  its  positive-height  twin  without  changing  the  Re-part,  so
+    the  positive-height  clauses  cover  every  zero.  NO  RH  claim.  -/
+theorem rh_split_at_growth_frontier (q : ZeroSet) :
+    RH q ↔
+      WinC.allOnLineUpTo q WinC.tPT2 ∧ terminalFace q := by
+  constructor
+  · --  RH  =>  census  +  terminal  face  (both  are  restrictions):
+    intro hRH
+    exact ⟨fun ρ hρ him himH => hRH ρ hρ, fun ρ hρ himgt => hRH ρ hρ⟩
+  · --  census  +  terminal  face  =>  RH:
+    rintro ⟨hCensus, hFace⟩ ρ hρ
+    by_cases hpos : 0 < ρ.im
+    · by_cases hle : ρ.im ≤ WinC.tPT2
+      · exact hCensus ρ hρ hpos hle
+      · exact hFace ρ hρ (not_le.mp hle)
+    · --  ρ.im  <  0:  reduce  to  the  positive-height  conjugate  twin.
+      have hneg : ρ.im < 0 := by
+        have hle0 : ρ.im ≤ 0 := not_lt.mp hpos
+        have hne0 : ρ.im ≠ 0 := q.nonReal ρ hρ
+        exact lt_of_le_of_ne hle0 hne0
+      have hst : star ρ ∈ q.Z := q.conj ρ hρ
+      have hstpos : 0 < (star ρ).im := by
+        have h : (star ρ).im = -ρ.im := by rfl
+        rw [h]
+        exact neg_pos.mpr hneg
+      have hstRe : (star ρ).re = 1 / 2 := by
+        by_cases hle : (star ρ).im ≤ WinC.tPT2
+        · exact hCensus _ hst hstpos hle
+        · exact hFace _ hst (not_le.mp hle)
+      have hreEq : (star ρ).re = ρ.re := by rfl
+      simpa [hreEq] using hstRe
+
+/--  0288  ·  GIVEN  THE  CITED  CENSUS,  ALL-HEIGHTS  RH  IS  EXACTLY
+    THE  TERMINAL  FACE:  accepting  the  3e10  census  (a  known,
+    bit-pinned  fact),  RH  holds  over  ALL  heights  iff  there  is  no
+    off-line  zero  above  3 x 10^12.  This  is  the  exact  statement
+    of  what  "completing  RH  once  and  for  all"  reduces  to.  NO  RH
+    claim:  the  face  is  open.  -/
+theorem rh_iff_terminal_face (q : ZeroSet)
+    (hCensus : WinC.allOnLineUpTo q WinC.tPT2) :
+    RH q ↔ terminalFace q := by
+  have hsplit := rh_split_at_growth_frontier q
+  constructor
+  · exact fun hRH => (hsplit.mp hRH).2
+  · exact fun hFace => hsplit.mpr ⟨hCensus, hFace⟩
+
+/--  0288  ·  THE  FINAL  STEP,  NAMED:  given  the  cited  census  AND
+    a  closing  of  the  terminal  face,  all-heights  RH  holds.  This
+    is  the  SINGLE  remaining  work  item  for  "completing  RH  once
+    and  for  all"  -  close  the  terminal  face.  NO  RH  claim:  no
+    closing  of  the  terminal  face  is  supplied  here.  -/
+theorem rh_of_terminal_face (q : ZeroSet)
+    (hCensus : WinC.allOnLineUpTo q WinC.tPT2)
+    (hFace : terminalFace q) :
+    RH q :=
+  (rh_iff_terminal_face q hCensus).mpr hFace
+
 /-  ##  Part  C  -  the  window-pin  residual  gate  (Float)
 
   The  shape  of  hWin  recorded  numerically:  the  window

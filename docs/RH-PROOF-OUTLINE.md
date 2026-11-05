@@ -42,8 +42,12 @@ per-gap ε layer of the [S1] walk bound certified over it,  A2-class).  The
   census + the Trudgian / Platt–Trudgian growth-wire frontier, NO OFF-LINE
   ZERO PAIR up to 3 × 10¹² — the certified 3e10 data frontier (tPT =
   30,610,046,000) plus the finite height the growth wire reaches (tPT2 =
-  3,000,175,332,800) — a finite-height theorem; all-heights RH remains the
-  explicit open goal.  The residual
+  3,000,175,332,800) — a finite-height theorem.  And the EXACT residual is
+  pinned (discovery 0288): all-heights RH  iff  the cited census  AND  the
+  TERMINAL FACE (`RHEnd.terminalFace`, no off-line zero with positive
+  height above 3 × 10¹²) — ONE named open object, the heart of RH
+  (thesis-level; absolute A1 clause OPEN / PROBABLY FALSE).  All-heights
+  RH remains the explicit open goal.  The residual
 floor of §10 as a single open piece has been SUPERSEDED by the two-leg
 map of the front page:  the **[S1] uniform walk bound** (the W2-beyond
 research item —  its drift reduction in Lean,  W2Beyond0 / W2Beyond1;

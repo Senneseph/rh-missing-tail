@@ -1,0 +1,35 @@
+{
+  "id": "0288",
+  "timestamp": "2026-11-10T15:00:00",
+  "title": "0288: THE EXACT RESIDUAL (the iff, machine-verified) - all-heights RH = the cited census [Z-PT2] AND the TERMINAL FACE (no off-line zero with positive height above the growth frontier tPT2 = 3,000,175,332,800). 'Completing RH once and for all' reduces to closing ONE named open object: the terminal face.",
+  "tag": "consolidation:exact-residual:iff",
+  "status": "reduction",
+  "route": "Sharpening of the 0287 consolidation: after pinning what is PROVEN (no off-line pair up to tPT2), this unit states, as a pure-logic machine-verified equivalence, EXACTLY what remains for all-heights RH.",
+  "summary": "The program's complete reduction is now stated in its sharpest form as a named machine-verified iff. 0287 proved: no off-line zero pair up to the growth frontier tPT2 = 3,000,175,332,800 (conditional on [Z78] + the 3e10 census [Z-PT] + the growth-wire frontier [Z-PT2]). 0288 completes the reduction by stating, as a pure-logic (LEAN-proven, no analysis) equivalence, that all-heights RH decomposes at the growth frontier into the cited census clause AND one single named open object - the TERMINAL FACE: no off-line zero with positive height ABOVE tPT2 = 3 x 10^12. Conjugation (ZeroSet.conj) sends a negative-height zero to its positive-height twin without changing the Re-part, so the positive-height clauses cover every zero. Given the cited census (a known, bit-pinned fact about the actual zero set, 0263/PINS.json), all-heights RH holds IF AND ONLY IF the terminal face is empty.",
+  "theorem": {
+    "file": "formal/RhAttack/RHEnd.lean (section 0288, after the 0287 consolidation theorems)",
+    "residual": "terminalFace (q : ZeroSet) : Prop := (forall rho, rho in q.Z -> tPT2 < rho.im -> rho.re = 1/2)  -- the single named open object: no off-line zero with positive height above the growth frontier.",
+    "main": "rh_split_at_growth_frontier : RH q <-> (WinC.allOnLineUpTo q WinC.tPT2) AND (terminalFace q).  Pure logic; conjugation (ZeroSet.conj) handles negative heights.",
+    "corollary": "rh_iff_terminal_face (hCensus : allOnLineUpTo q tPT2) : RH q <-> terminalFace q.  Given the cited census, ALL-HEIGHTS RH is EXACTLY the terminal face.",
+    "finalStep": "rh_of_terminal_face (hCensus) (hFace : terminalFace q) : RH q.  The SINGLE remaining work item for 'completing RH once and for all': close the terminal face.",
+    "note": "The iff is a pure-logic fact (quantifier split at tPT2 + conjugation symmetry); it carries no [Z78] and no analysis - it is the exact statement that the machine-verified reduction is COMPLETE and that the known part (the census, below the frontier) is separate from the single open part (the terminal face, above the frontier). All heights at or below the frontier are covered by the cited census; every height above the frontier is the terminal face."
+  },
+  "build": {
+    "command": "cd formal && lake build RhAttack.RHEnd && lake build",
+    "status": "GREEN. RhAttack.RHEnd: 'Build completed successfully (8764 jobs)'. Full tree: 'Build completed successfully (17454 jobs)', 0 errors.",
+    "notes": "star field facts ((star rho).im = -rho.im, (star rho).re = rho.re) resolve by `rfl` (definitional). Dependent-forall arg order is hRH rho hrho (rho first, then the membership proof)."
+  },
+  "whatIsProven": [
+    "The EXACT reduction of all-heights RH, machine-verified: RH q <-> [the census: all zeros up to tPT2 are on the line] AND [the terminal face: no off-line zero with positive height above tPT2].",
+    "Given the cited census (a known bit-pinned fact), all-heights RH is equivalent to the terminal face alone.",
+    "The terminal face is the HEART of RH above 3 x 10^12 (the core critical strip 0 < d0 <= 3/8 at heights the census does not reach), and is a single, precisely-named open object."
+  ],
+  "whatRemainsOpen": [
+    "THE TERMINAL FACE (the single named open object): no off-line zero with positive height above 3,000,175,332,800. This is the heart of RH and a THESIS-LEVEL problem: every known mechanism through 2026 is exhausted - route (b) terminally dead (0284 uniform S-diff gate antecedent false; 0285 pervasive face refuted / sparse face not excluded, no local mechanism); the absolute A1 clause is OPEN / PROBABLY FALSE (A1Growth.face_unbounded: the data-free growth G outruns every absolute K; literature F1/F2: no absolute C, CCM RH-conditional bound grows, distribution theory normalizes by the growing sqrt(log log))."
+  ],
+  "honesty": "NO RH CLAIM. This unit states the EXACT reduction (a pure-logic iff, machine-verified); it does NOT close the terminal face. The terminal face is an open thesis-level problem - the single object that 'completing RH once and for all' reduces to. All prior status (0273-0287) is preserved; this sharpens the statement of what remains into its crispest machine-verified form.",
+  "nextMoves": [
+    "Closing the terminal face = the remaining work. It is a new-thesis problem; no mechanism in the 2026 literature closes it.",
+    "Any proof of RH must close terminalFace (equivalently, produce the missing analytic content above 3 x 10^12). The machine-verified reduction guarantees that closing terminalFace (given the cited census) IS sufficient for all-heights RH."
+  ]
+}

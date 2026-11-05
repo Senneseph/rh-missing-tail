@@ -764,3 +764,63 @@ unit **names and machine-verifies** the proven partial result; it does
 not close `G-hs1` and does not prove RH.
 
 NO RH CLAIM.  NO zero-free claim beyond the cited frontier inputs.
+
+## 18 · 0288 — THE EXACT RESIDUAL (the iff): all-heights RH = the
+cited census + ONE named open object, the TERMINAL FACE
+
+0287 pinned what is **PROVEN** (no off-line pair up to the growth
+frontier `tPT2 = 3,000,175,332,800`, under `[Z78]` + the 3e10 census +
+the growth wire).  This section pins, as a **pure-logic
+machine-verified equivalence**, *exactly what remains* for all-heights
+RH.
+
+**The theorem** (`formal/RhAttack/RHEnd.lean`, section 0288):
+
+```text
+def terminalFace (q : ZeroSet) : Prop :=
+    ∀ (ρ : ℂ), ρ ∈ q.Z → tPT2 < ρ.im → ρ.re = 1 / 2
+
+theorem rh_split_at_growth_frontier (q : ZeroSet) :
+    RH q ↔ (allOnLineUpTo q tPT2) ∧ (terminalFace q)
+
+theorem rh_iff_terminal_face (q : ZeroSet) (hCensus : allOnLineUpTo q tPT2) :
+    RH q ↔ terminalFace q
+
+theorem rh_of_terminal_face (q : ZeroSet)
+    (hCensus : allOnLineUpTo q tPT2) (hFace : terminalFace q) : RH q
+```
+
+The iff is pure logic: `RH q` is `∀ ρ ∈ q.Z, ρ.re = 1/2`, and splitting
+the universal quantifier at the frontier gives `allOnLineUpTo q tPT2`
+(zeros at or below the frontier — the cited census) **and** `terminalFace`
+(zeros with positive height above the frontier).  Conjugation
+(`ZeroSet.conj`) sends a negative-height zero to its positive-height
+twin without changing the Re-part, so the positive-height clauses cover
+every zero.  (The `star` field facts resolve by `rfl`, being
+definitional.)
+
+**The content.**  Given the cited census — a **known, bit-pinned fact**
+about the actual zero set (0263 / PINS.json) — **all-heights RH holds if
+and only if the terminal face is empty.**  The terminal face is **one
+single named open object**: *no off-line zero with positive height
+above `3 × 10¹²`* — the heart of RH (the core critical strip
+`0 < d0 ≤ 3/8` at heights the census does not reach).  The known part
+(below the frontier) and the open part (the terminal face, above the
+frontier) are now crisply and provably separated.
+
+**What remains open (thesis-level).**  The terminal face is the single
+object that *“completing RH once and for all”* reduces to, and it is a
+new-thesis problem: every known mechanism through 2026 is exhausted —
+route (b) terminally dead (0284 uniform S-diff gate antecedent false;
+0285 pervasive face refuted / sparse face not excluded, no local
+mechanism) — and the absolute A1 clause it is identified with is
+**OPEN / PROBABLY FALSE** (`A1Growth.face_unbounded`: the data-free
+growth `G` outruns every absolute `K`;  literature F1/F2: no absolute
+`C`, the CCM RH-conditional bound grows, the distribution theory
+normalizes by the growing `√(log log)`).
+
+Full tree **green** (`lake build`, 17454 jobs, 0 errors).
+
+NO RH CLAIM.  This unit states the *exact* reduction (machine-verified
+iff); it does **not** close the terminal face — which is precisely what
+remains.
