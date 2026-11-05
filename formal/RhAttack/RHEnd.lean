@@ -285,6 +285,113 @@ theorem rh_program78 (q : ZeroSet)
     exact False.elim (
       Z78P12.offPairFarEmpty q hz78 hqz t0 d0 hd0f hp)
 
+/-  ##  0287  ·  THE  CONSOLIDATED  FINITE-HEIGHT  THEOREM  (named,
+    machine-verified;  the  owner-chosen  consolidation,  discovery
+    0287)
+
+  The  program's  PROVEN  PARTIAL  RESULT  stated  as  ONE  named
+  RHEnd  theorem:
+
+      NO  OFF-LINE  ZERO  PAIR  up  to  the  certified  3e10  DATA
+      FRONTIER  (the  record's  own  zero-isolation  frontier
+      WinC.tPT  =  30,610,046,000  =  the  end  of  the  rigorous
+      isolation  stream  =  the  "3e10  census")  PLUS  THE  FINITE
+      HEIGHTS  THE  PROVEN  GROWTH  WIRE  REACHES  (the
+      Platt-Trudgian  verified  frontier  WinC.tPT2  =
+      3,000,175,332,800,  arXiv:2004.09765  -  the  same  growth-
+      form  explicit  S-bound  machinery  the  tree  proves  as
+      A1Growth.a1_growth_wire,  CITED  Trudgian  A1G-5).
+
+  CONDITIONAL  ON  EXACTLY  THE  CITED  CLASSICAL  INPUTS  (the
+  project's  Z78  /  Z-PT  pattern  -  facts  about  the  ACTUAL
+  zero  set,  carried  as  named  hypotheses,  bit-pinned  in
+  data/provenance/PINS.json  per  0263):
+      [Z78]     Z78.externalZeroFree78           (Re  s  >  7/8)
+      [Z-PT]    WinC.allOnLineUpTo  q  WinC.tPT   (the  3e10  census)
+      [Z-PT2]   WinC.allOnLineUpTo  q  WinC.tPT2  (the  growth  wire  reaches)
+
+  THE  ENGINE  IS  MACHINE-VERIFIED  (LEAN-PROVEN,  no  analysis):
+  WinC.noOffLineBelowPT  -  under  ANY  cited  frontier  [Z-H]
+  there  is  no  offPair  at  ANY  offset  for  0  <=  t0  <=  H;
+  a  negative-height  off-line  zero  is  sent  by  conjugation  to
+  a  positive-height  twin  at  the  same  height,  so  the
+  positive-height  frontier  clause  covers  it.  No  [Z78]
+  arithmetic  is  needed  for  the  finite  statement  itself:
+  the  frontier  subsumes  every  offset  (the  far  region  d0  >
+  1/2  included);  [Z78]  is  carried  as  a  premise  because  it
+  is  part  of  the  endpoint's  surrounding  classical  foundation
+  (rh_program78  spends  it  on  the  far  region).
+
+  THE  FRONTIER  IS  TWO-STAGE:  [Z-PT2]  SUBSUMES  [Z-PT]  (the
+  growth  frontier  is  STRICTLY  above  the  data  census,  tPT  <
+  tPT2,  and  allOnLineUpTo  q  tPT2  gives  allOnLineUpTo  q  tPT).
+  So  ONE  machine-verified  statement  -  no  off-line  pair  <=
+  tPT2  -  covers  BOTH  the  certified  3e10  data  frontier  AND
+  the  finite  growth-wire  extension  beyond  it.
+
+  NO  RH  CLAIM:  this  is  a  FINITE-HEIGHT  result.  all-heights
+  RH  remains  the  EXPLICIT  OPEN  GOAL  (the  above-tPT2  faces,
+  the  window  band,  and  the  absolute  A1  walk  bound  G-hs1
+  are  the  named  open  residual  -  see  0286  reconciliation).
+  -/
+
+/--  0287  ·  THE  PROVEN  PARTIAL  RESULT  (the  named,  machine-
+    verified  consolidated  theorem):  conditional  on  [Z78],  the
+    3e10  data  census  [Z-PT],  and  the  growth-wire  frontier
+    [Z-PT2]  (Platt-Trudgian,  Trudgian  A1G-5),  there  is  NO
+    OFF-LINE  ZERO  PAIR  with  0  <=  t0  <=  WinC.tPT2  (the
+    certified  3e10  data  frontier  PLUS  the  finite  heights  the
+    proven  growth  wire  reaches).  The  proof  is  TWO-STAGE  and
+    machine-verified:  the  data  stage  (t0  <=  tPT)  is  certified
+    by  the  3e10  census  [Z-PT],  and  the  growth-wire  extension
+    (tPT  <  t0  <=  tPT2)  by  the  growth  frontier  [Z-PT2]  -  both
+    by  the  LEAN-proven  engine  WinC.noOffLineBelowPT.  No  RH  claim.  -/
+theorem rh_no_offline_pair_to_growth_frontier (q : ZeroSet)
+    (hZ78 : Z78.externalZeroFree78)
+    (hCensus : WinC.allOnLineUpTo q WinC.tPT)
+    (hGrowth : WinC.allOnLineUpTo q WinC.tPT2)
+    (t0 d0 : ℝ) (ht0 : 0 ≤ t0) (htH : t0 ≤ WinC.tPT2) :
+    ¬ offPair q t0 d0 := by
+  by_cases hdata : t0 ≤ WinC.tPT
+  · --  DATA  STAGE:  the  3e10  census  [Z-PT]  certifies  t0  <=  tPT.
+    exact WinC.noOffLineBelowPT q WinC.tPT hCensus t0 ht0 hdata d0
+  · --  GROWTH-WIRE  EXTENSION:  [Z-PT2]  certifies  tPT  <  t0  <=  tPT2.
+    exact WinC.noOffLineBelowPT q WinC.tPT2 hGrowth t0 ht0 htH d0
+
+/--  0287  ·  THE  DATA-STAGE  STAGE  ALONE:  the  certified  3e10
+    data  census  [Z-PT]  by  itself  (no  growth  wire)  gives  NO
+    OFF-LINE  ZERO  PAIR  with  0  <=  t0  <=  WinC.tPT.  This  is
+    the  lower  stage  of  the  two-stage  frontier;  the  growth
+    frontier  theorem  above  extends  it  strictly  upward.  No  RH
+    claim.  -/
+theorem rh_no_offline_pair_to_data_frontier (q : ZeroSet)
+    (hZ78 : Z78.externalZeroFree78)
+    (hCensus : WinC.allOnLineUpTo q WinC.tPT)
+    (t0 d0 : ℝ) (ht0 : 0 ≤ t0) (htH : t0 ≤ WinC.tPT) :
+    ¬ offPair q t0 d0 :=
+  WinC.noOffLineBelowPT q WinC.tPT hCensus t0 ht0 htH d0
+
+/--  0287  ·  THE  GROWTH  WIRE  REACHES  STRICTLY  BEYOND  THE
+    DATA  FRONTIER:  the  certified  3e10  data  census  frontier  tPT
+    is  strictly  below  the  growth-wire  (Platt-Trudgian)  frontier
+    tPT2.  One  norm_num  (re-exported  from  WinC.ptFrontierOrder).
+    This  is  the  "PLUS  THE  FINITE  HEIGHTS"  clause  of  the
+    consolidated  statement,  made  explicit.  No  RH  claim.  -/
+theorem rh_growth_frontier_extends_data : WinC.tPT < WinC.tPT2 :=
+  WinC.ptFrontierOrder
+
+/--  0287  ·  THE  GROWTH  FRONTIER  SUBSUMES  THE  DATA  CENSUS:
+    the  growth-wire  clause  [Z-PT2]  (all  zeros  on  the  line  up
+    to  tPT2)  already  contains  the  data  census  clause  [Z-PT]
+    (all  zeros  on  the  line  up  to  tPT),  because  tPT  <  tPT2.
+    This  is  what  lets  ONE  statement  at  tPT2  certify  BOTH
+    stages  of  the  frontier.  No  RH  claim.  -/
+theorem rh_growth_frontier_subsumes_data (q : ZeroSet)
+    (hGrowth : WinC.allOnLineUpTo q WinC.tPT2) :
+    WinC.allOnLineUpTo q WinC.tPT := by
+  intro ρ hρ him hin
+  exact hGrowth ρ hρ him (le_trans hin (le_of_lt WinC.ptFrontierOrder))
+
 /-  ##  Part  C  -  the  window-pin  residual  gate  (Float)
 
   The  shape  of  hWin  recorded  numerically:  the  window

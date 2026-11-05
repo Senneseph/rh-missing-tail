@@ -36,8 +36,14 @@ docstring maps every leg to its supplier — with the data side at
 (10⁷, 2×10⁹],  2.4772 on (10⁷, 2.9992×10⁹] —  plus the 3×10¹⁰ band:
 N(3×10¹⁰) = 101,635,962,231 exact and audited,  sup|DN| = 2.615067 on
 (10⁷, 3×10¹⁰] —  the walk keeps its shape through the decade,  and the
-per-gap ε layer of the [S1] walk bound certified over it,  A2-class).
-  The residual
+per-gap ε layer of the [S1] walk bound certified over it,  A2-class).  The
+  PROVEN finite-height result, named and machine-verified (discovery 0287),
+  is `RHEnd.rh_no_offline_pair_to_growth_frontier`: under `[Z78]` + the 3e10
+  census + the Trudgian / Platt–Trudgian growth-wire frontier, NO OFF-LINE
+  ZERO PAIR up to 3 × 10¹² — the certified 3e10 data frontier (tPT =
+  30,610,046,000) plus the finite height the growth wire reaches (tPT2 =
+  3,000,175,332,800) — a finite-height theorem; all-heights RH remains the
+  explicit open goal.  The residual
 floor of §10 as a single open piece has been SUPERSEDED by the two-leg
 map of the front page:  the **[S1] uniform walk bound** (the W2-beyond
 research item —  its drift reduction in Lean,  W2Beyond0 / W2Beyond1;

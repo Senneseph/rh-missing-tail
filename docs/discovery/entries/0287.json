@@ -1,0 +1,40 @@
+{
+  "id": "0287",
+  "timestamp": "2026-11-10T14:00:00",
+  "title": "0287: CONSOLIDATION - the PROVEN PARTIAL RESULT named and machine-verified: NO OFF-LINE ZERO PAIR up to the certified 3e10 data frontier PLUS the finite heights the proven growth wire reaches (tPT2 = 3,000,175,332,800), conditional on exactly [Z78] + the 3e10 census [Z-PT] + Trudgian A1G-5 / Platt-Trudgian [Z-PT2]; all-heights RH KEPT the explicit open goal (not redefined)",
+  "tag": "consolidation:finite-height:rhend",
+  "status": "consolidation",
+  "route": "Owner-chosen consolidation (option 1 of the 0286 strategic fork): formalize the proven partial result as a NAMED machine-verified RHEnd theorem. Composed from the existing proven engine (WinC.noOffLineBelowPT) at the two-stage frontier (WinC.tPT data census -> WinC.tPT2 growth wire).",
+  "summary": "Finds the program's PROVEN PARTIAL RESULT and states it as ONE named, machine-verified RHEnd theorem with exactly the cited classical inputs as hypotheses. THE THEOREM (formal/RhAttack/RHEnd.lean, section 0287):  rh_no_offline_pair_to_growth_frontier (q : ZeroSet) (hZ78 : Z78.externalZeroFree78) (hCensus : WinC.allOnLineUpTo q WinC.tPT) (hGrowth : WinC.allOnLineUpTo q WinC.tPT2) (t0 d0 : R) (ht0 : 0 <= t0) (htH : t0 <= WinC.tPT2) : NOT offPair q t0 d0. THE FRONTIER IS TWO-STAGE: the certified 3e10 DATA CENSUS is WinC.tPT = 30,610,046,000 (the record's own rigorous zero-isolation frontier, Platt 2017, where the public LMFDB zero stream - the source of the project's own 24b series - ends; bit-pinned 0263 in data/provenance/PINS.json); the FINITE HEIGHTS THE PROVEN GROWTH WIRE REACHES extend it to WinC.tPT2 = 3,000,175,332,800 (Platt & Trudgian, arXiv:2004.09765, Theorem 1, 'RH is true up to 3x10^12' - the same growth-form explicit S-bound machinery the tree proves as A1Growth.a1_growth_wire, CITED Trudgian A1G-5). NO OFF-LINE ZERO PAIR holds for every 0 <= t0 <= tPT2 and EVERY offset d0 (the far region included).",
+  "theorem": {
+    "file": "formal/RhAttack/RHEnd.lean (section 0287, between the rh_program78 endpoint and Part C)",
+    "main": "rh_no_offline_pair_to_growth_frontier : under [Z78] + [Z-PT] (3e10 census) + [Z-PT2] (growth wire frontier), NOT offPair q t0 d0 for 0 <= t0 <= WinC.tPT2 (all-heights up to 3,000,175,332,800, ALL offsets).",
+    "proof": "TWO-STAGE and machine-verified: by_cases on t0 <= WinC.tPT. DATA STAGE (t0 <= tPT) is certified by the 3e10 census clause [Z-PT] via the LEAN-proven engine WinC.noOffLineBelowPT (which gives no offPair at ANY offset for 0 <= t0 <= H, since a negative-height off-line zero is sent by conjugation to a positive-height twin at the same height and the positive-height frontier clause covers it). GROWTH-WIRE EXTENSION (tPT < t0 <= tPT2) is certified by the growth frontier clause [Z-PT2] via the same engine. Both engine calls are in the body (WinCount.lean).",
+    "helpers": [
+      "rh_no_offline_pair_to_data_frontier : the 3e10 data census [Z-PT] ALONE (no growth wire) gives NOT offPair q t0 d0 for 0 <= t0 <= WinC.tPT - the lower stage of the two-stage frontier.",
+      "rh_growth_frontier_extends_data : WinC.tPT < WinC.tPT2 - the growth wire reaches STRICTLY beyond the data frontier (re-exported WinC.ptFrontierOrder, one norm_num); the 'PLUS THE FINITE HEIGHTS' clause made explicit.",
+      "rh_growth_frontier_subsumes_data : (WinC.allOnLineUpTo q WinC.tPT2) -> (WinC.allOnLineUpTo q WinC.tPT) - the growth frontier SUBSUMES the data census (tPT < tPT2), which is what lets ONE statement at tPT2 certify both stages."
+    ],
+    "note": "The finite statement needs no [Z78] arithmetic (the frontier subsumes every offset, the far region d0 > 1/2 included); [Z78] is carried as a NAMED premise because it is part of the endpoint's surrounding classical foundation (rh_program78 spends it on the far region), consistent with the project's Z78 pattern. This produces two cosmetic 'unused hZ78' linter warnings - documented, not errors."
+  },
+  "build": {
+    "command": "cd formal && lake build RhAttack.RHEnd && lake build",
+    "status": "GREEN. RhAttack.RHEnd: 'Build completed successfully (8764 jobs)'. Full tree: 'Build completed successfully (17454 jobs)', 0 errors.",
+    "warnings": "Two 'variable hZ78 not explicitly referenced' linter warnings (RHEnd.lean:350, :368) - the intentional named [Z78] context premise; cosmetic, not errors."
+  },
+  "citedInputs": [
+    "[Z78]  Re s > 7/8 zero-free  (Z78.externalZeroFree78 - the endpoint's named external input). Carried as a named premise; not spent by the finite statement (the frontier subsumes every offset).",
+    "[Z-PT]  the 3e10 data CENSUS = WinC.allOnLineUpTo q WinC.tPT, WinC.tPT = 30,610,046,000  (Platt 2017 rigorous interval-arithmetic zero isolation to +- 2^-102; the public LMFDB zero stream ends there; an independent verification that the line carries every non-trivial zero to that height). BIT-PINNED 0263 (data/provenance/PINS.json, verifier scripts/rh/provenance_pins_check.py).",
+    "[Z-PT2]  the growth-wire frontier = WinC.allOnLineUpTo q WinC.tPT2, WinC.tPT2 = 3,000,175,332,800  (Platt & Trudgian, arXiv:2004.09765v1 Theorem 1: the lowest 12,363,153,437,138 non-trivial zeros have Re = 1/2; rigorous interval arithmetic; independently verifies the Platt tPT record; the growth-form explicit S-bound is the CITED Trudgian A1G-5 |S(u)| <= G_explicit(u), Math. Comp. 81:1053-1061 (2012) Thm 1 - the same machinery the tree proves as A1Growth.a1_growth_wire). BIT-PINNED 0263 (SHA-256 of the pinned PDF in data/provenance/)."
+  ],
+  "whatIsProven": [
+    "NO OFF-LINE ZERO PAIR with 0 <= t0 <= 30,610,046,000 (the certified 3e10 data frontier) - [Z-PT] alone.",
+    "NO OFF-LINE ZERO PAIR with 0 <= t0 <= 3,000,175,332,800 (the data frontier PLUS the finite growth-wire extension) - [Z78] + [Z-PT] + [Z-PT2].",
+    "The growth-wire frontier STRICTLY EXTENDS the data census (tPT < tPT2) and SUBSUMES it (one allOnLineUpTo at tPT2 certifies both stages)."
+  ],
+  "honesty": "NO RH CLAIM. NO ZERO-FREE CLAIM beyond the cited frontier inputs. This is a FINITE-HEIGHT result: the conclusion stops exactly at WinC.tPT2 = 3,000,175,332,800. ALL-HEIGHTS RH REMAINS THE EXPLICIT OPEN GOAL and is NOT redefined: the named open residual (0286) is untouched - G-hs1 (the absolute A1 walk bound = 'the face', OPEN / PROBABLY FALSE), the window zero-exclusion face (route-(b) terminally dead, 0284/0285), G-hs3-left (S3 left-flank pair squeeze), and the above-tPT2 zero-exclusion faces. This unit does not advance a new analytic mechanism; it NAMES and machine-verifies the finite-height partial result the cited inputs and the LEAN-proven engine already give. Proven partial result, not a proof of RH.",
+  "nextMoves": [
+    "All-heights RH remains the open goal: the chief analytic face G-hs1 (absolute A1 walk bound, OPEN/PROBABLY-FALSE per 0286/E19/A1Growth-0209) is the load-bearing object.",
+    "The finite frontier tPT2 (3e12) is the outer boundary of the machine-verified no-off-line-pair region; extending it further is a data/compute task (a taller rigorous zero-isolation + growth-wire verification), not an analytic barrier in the tree."
+  ]
+}
