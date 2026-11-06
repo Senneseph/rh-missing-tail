@@ -2428,3 +2428,87 @@ No RH claim - proportion lanes stay face-blind; the
 
 Face OPEN at tCE5 (PROBABLY TRUE). Wall UNMOVED. NO RH
 CLAIM. (discovery 0308)
+
+## 40 · 0309 — KMRZ-CITATION REFUTED + 17/33 LEVER AUDIT (2026-11-14)
+
+* **PROVENANCE CORRUPTION, THIRD INSTANCE:** the plan-level
+  citation "Kowalski–Michel–Radziwiłł–Zaharescu 2011, Math.
+  Ann. 351 No.1, 63–124 (13/4 exponent)" is **FABRICATED**.
+  Primary evidence: FULL TOCs of Math. Ann. 351 No. 1 (pp.
+  1–250; Dialnet 298436) and No. 2 (pp. 251–508; Dialnet
+  298437) — no KMRZ article, no zeta-zero article at all;
+  the claimed span 63–124 is occupied by Lie-theory /
+  harmonic-analysis / algebra / PDE papers (Tamaru
+  51–66; Bushnell–Henniart 67–80; Kirchheim–Kopecká–
+  Müller 81–94; Testa–Várilly–Velasco 95–107; Tignol–
+  Wadsworth 109–148). No arXiv version (API: 0 results);
+  no trace in author bibliographies or secondary
+  citations. Internal corroboration: the numeric chain
+  does not even reduce — 3.4 − 4/3 = 2.06667 and
+  1 − (1 + 13/4)e^{−13/4} = 0.83521, NEITHER = 2.977412,
+  which has no in-repo origin (grep: only the plan text
+  itself). The whole chain is RETRACTED. (First: the 9.45/
+  46%/61.9x CT-2 fabrication, corrected 0283; second:
+  arXiv:2608.05281 misattribution, corrected 0307; third:
+  here.)
+* **CORRECT SCOPE, THEN VERDICT:** 17/33 is **PRZZ
+  Theorem 4.1 Case 1** (generic coefficients, error
+  T^{3/20}N^{33/20} + N^{1/2}T^{1/2+eps} = o(T) iff
+  θ < 17/33) — in-tree at LevWall6.przzGeneric, NOT a CGG
+  result. The face-local lever hypothesis ("a 17/33-style
+  bound could close the face without moving the wall") is
+  **STRUCTURALLY DEAD** (audit parity with M6/0285/
+  0284): every PRZZ family (17/33, 9/17, 6/11, 4/7) is a
+  Levinson second-moment asymptotic → proportion-only
+  output → face-blind by construction; density bounds
+  cannot localize (0285); the 0276 gate's pointwise
+  consumer is already closed (0278/CT-3/CT-4/0284).
+* **MECHANISM FACE-SENSITIVITY MAP (new register):**
+  face-SENSITIVE: pointwise S bounds (CGG-2006 4.2694 =
+  DIFFERENT OBJECT, value-scale, h ≤ √t; under RH the S-
+  route IS the zero count and the first moment stands —
+  the circularity is VACUITY, not margin [0283]);
+  zero-free regions (K-V ≈ 0.9999988 at tPT2, face mirror
+  0.874773 out of reach [0285]); CERTIFIED WINDOWS (the
+  only ACTIVE face machine — shrinks, never closes).
+  face-BLIND: all proportion machinery (Levinson ladder,
+  ALL PRZZ families, Kintali 29/50, Claude 2/3
+  [formal-in-tree since 0308], Lamzouri, Cobeli–
+  Zaharescu) + all gap/count machinery (CGGGH-1985 71%
+  [Tao 2019-05-08], Bredberg 2.766 RH, GRH 3.07, CGG gap
+  note 0.5155/2.6950 RH, zero-density 0285). Operational
+  consequence: no known mathematics closes the face.
+* **HONESTY PATCH (in-tree):** `T4OffLQ.lean` CT-1
+  docstring carried the 0283-SUPERSEDED "2.21x sharper
+  under RH / 46% below / 20.6 over 52" phrasing — patched
+  to the 0283-corrected frame (264.2433 requirement;
+  37.3% below first moment 421.6058; family floor
+  1106.18 4.19x; realized 1.087–1.722x; CGG 4.2694 =
+  different object; vacuity-under-RH). Code constants
+  UNTOUCHED (always correct). **T4OffLQ GREEN (8738).**
+* **M5 — WINDOW 6 LANDED AND CERTIFIED (the CLEANEST window
+  of the chain):** a = 12,363,153,537,128 (= CE5's final b,
+  no snap at either endpoint), b = 12,363,153,557,128,
+  M = 60, C_R = 1, 28 workers, 34,159 evals, 2666.1 s.
+  **b − a = 20,000 zeros, all simple, on the line.**
+  Rosser-block exceptions: **NONE** (rosser_failures = []
+  and rescued = []; windows 2/3/4/5 each had one rescued
+  exception). Runs 45/44 (K = 12). Verifier CERTIFIED:
+  true, roesser_failures_inside = 0, sign_changes = 20,000
+  = b − a, turing_ok. Seam: g_a6 BIT-IDENTICAL to CE5's
+  g_b5. g_b6 = 3,000,175,360,835.7184258… (frac 0.7183,
+  dist 0.2817 to next integer).
+* **CE6** (`formal/RhAttack/CE6.lean`, **GREEN 8771 jobs,
+  first attempt**): tCE6 = **3,000,175,360,835**;
+  faceShrinkCE6 = **4,673**; above H0 by **28,035**;
+  band of six windows → allOnLineUpToCE6;
+  rh_reanchored_CE6: RH ↔ terminalFaceCE6 (cited
+  census); rh_of_terminalFaceCE6 = final named step (no
+  closing supplied); terminalFaceCE6_of_thetaInf. Full
+  tree green (re-verified this unit).
+* **Chain:** certified zeros over (g_a1, g_b6] =
+  20,000 + 19,999 + 19,999 + 20,000 + 20,000 + 20,000 =
+  **119,998**.
+
+Wall UNMOVED. Face OPEN at tCE6. NO RH CLAIM.
+(discovery 0309)

@@ -3087,3 +3087,32 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
 
     No RH claim - face OPEN / PROBABLY TRUE; wall
     UNMOVED.
+
+* **E39 (2026-11-14, 0309):**
+    * PROVENANCE: the plan-level KMRZ citation (Math.
+      Ann. 351:63-124, "13/4") is FABRICATED — full
+      TOCs of 351:1 and 351:2 checked; no such paper
+      anywhere; the 2.977412 chain does not reduce
+      numerically. Third plan-level provenance
+      corruption (after 0283, 0307); retracted in its
+      entirety.
+    * 17/33 = PRZZ Case 1 (NOT CGG) — correct scope
+      pinned; the "17/33 face-local lever" is
+      STRUCTURALLY DEAD (Levinson moments →
+      proportion-only → face-blind; density can't
+      localize; pointwise gate already closed).
+    * NEW REGISTER: mechanism face-sensitivity map
+      (sensitive: pointwise S / zero-free / certified
+      windows only; blind: ALL proportion + ALL
+      gap/count machinery).
+    * T4OffLQ docstring patched to 0283 frame (GREEN
+      8738).
+    * M5 WINDOW 6 CERTIFIED - cleanest of the chain (ZERO
+      Rosser exceptions): 20,000 zeros; seam bit-identical;
+      **tCE6 = 3,000,175,360,835** (4,673 shrink; 28,035
+      above H0); 119,998 zeros certified over
+      (g_a1, g_b6]; CE6 GREEN 8771 first attempt; full
+      tree green.
+
+    No RH claim - face OPEN / PROBABLY TRUE; wall
+    UNMOVED.

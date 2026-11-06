@@ -35,17 +35,27 @@ import  RhAttack.T4OffLM
     3.  Hence NO per-piece S-variation bound of the S-route /
         HSXW / A0c / kind-3 class can close the gate: the gate is
         below the first moment, and a sup-form envelope cannot go
-        below its own first moment.  Closing the gate (the CLOSING
-        THEOREM CT, entry 0282) requires a bound BELOW the first
-        moment — 2.21x sharper, unconditionally, than the best
-        bound known under RH (Conrey-Ghosh-Gonek Theorem 1,
-        leading 4.2694 S-units at tPT2; entry 0282 ct2Pin), which
-        is 46% below the S-unit first moment (20.6 over the 52-unit
-        piece).  No such theorem exists; that is the exact measure
-        of what remains of RH.
+        below its own first moment.  Closing the gate (the
+        CLOSING THEOREM CT, entry 0282 - 0283 CORRIGENDUM
+        applies to this docstring) requires an unconditional
+        pointwise sup-form piece S-unk-route bound <=
+        264.2433 S-units at tPT2 (profile 2.5821 -> 1.3445 ->
+        1.2578): below the first moment 421.6058 (37.3% below
+        it; the 1.596x wall, growing 3.882 / 5.032), below the
+        family floor 1106.18 (4.19x), and below the realized
+        typical-face 287.26-455.14 (1.087-1.722x).  The
+        Conrey-Ghosh-Gonek Theorem 1 bound (leading 4.2694
+        S-units at tPT2, h <= sqrt t; entry 0282 ct2Pin) is a
+        DIFFERENT OBJECT - value-scale S difference, not the
+        count-scale S-route; under RH the S-route is the zero
+        count and the first moment stands, so the circularity is
+        vacuity under RH, not margin.  No such theorem exists;
+        that is the exact measure of what remains of RH.
 
   Sources: entries 0274 (published envelope), 0276 (gate), 0278 +
-  0281 (wall, corrected numerals), 0282 (CT + CT-2 pinning).
+  0281 (wall, corrected numerals), 0282 (CT + CT-2 pinning),
+  0283 (CT-2 corrigendum - supersedes the old "46% below /
+  20.6 over 52" / "61.9x under-RH margin" phrasings).
   face OPEN; no zero-free claim; NO RH CLAIM.
 
 -/
