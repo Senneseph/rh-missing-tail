@@ -3179,3 +3179,16 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
 
     No RH claim - face OPEN / PROBABLY TRUE at tCE7; wall
     UNMOVED.
+
+* **E43 (2026-11-14, 0313):**
+    * M5 WINDOW 8 CERTIFIED (19,999 zeros, all simple and
+      on the line; seam bit-identical; zero Rosser
+      exceptions - clean) + CE8 GREEN 8773, full tree
+      17454.
+    * Frontier re-anchored: tCE8 = 3,000,175,370,181
+      (tCE8 - tCE7 = 4,673; 37,381 above H0); 159,997
+      certified over (g_a1, g_b8].
+    * Window 9 in flight (a9 = 12,363,153,597,127).
+
+    No RH claim - face OPEN / PROBABLY TRUE at tCE8; wall
+    UNMOVED.

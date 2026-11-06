@@ -2643,3 +2643,38 @@ NUMERALS (2026-11-14)
 
 Wall UNMOVED; face OPEN at tCE7. NO RH CLAIM.
 (discovery 0312)
+
+## 44 · 0313 — M5 WINDOW 8 CERTIFIED + CE8 RE-ANCHOR (2026-11-14)
+
+* **Window 8 (in-house, seamless):** a = 12,363,153,577,128
+  (= window 7's b), b_requested = a + 20,000, driver
+  snapped final b DOWN ONE (a + 20,000 not a good Gram
+  point; a needed no snap), M = 60, C_R = 1, 32,867
+  evaluations in 2464.2 s, N_range = [691008, 691008].
+  Certificate window8_b8.json: **b − a = 19,999 zeros,
+  all simple and on the line** in (g_a8, g_b8], g_a8 =
+  3,000,175,365,508.653559473769 ± 1.29e-26 (bit-identical
+  dyadic ball to window 7's g_b7), g_b8 = 3,000,175,
+  370,181.355046086348... ± 1.29e-26 (floor distance 0.6450
+  - robust).
+* **Verifier:** CERTIFIED true, 32,867 points,
+  sign_changes_inside = 19,999 = b − a, Rosser runs 45/49 ≥
+  K = 12, turing_ok, **ZERO Rosser exceptions** (clean
+  window, as window 6), 0 cross-check failures, 0
+  undetermined signs.
+* **Formal (CE8.lean, GREEN 8773; full tree 17454, oolean
+  fresh):** gB8Lo := 300017537018135/100, tCE8 :=
+  3,000,175,370,181; faceShrinkCE8 = 4673;
+  frontierGapAboveH0 = 37,381; bandOfWindows8 (eight-way);
+  rh_reanchored_CE8: under [Z-PT2] + the eight cited window
+  clauses, RH q ↔ terminalFaceCE8 q; rh_of_terminalFaceCE8
+  (final named step — no closing supplied);
+  terminalFaceCE8_of_thetaInf (M2 lane lands at tCE8).
+* **Frontier:** certified zeros over (g_a1, g_b8] =
+  20,000 + 19,999 + 19,999 + 20,000 × 3 + 20,000 + 19,999 =
+  159,997. Chain integrity 1→8: every seam bit-identical
+  (exact dyadic tuples), N_range constant, C_R/M constant.
+
+Wall UNMOVED at 4/7 (both doors pinned, 0310-0312); face
+OPEN / PROBABLY TRUE at tCE8. NO RH CLAIM.
+(discovery 0313)
