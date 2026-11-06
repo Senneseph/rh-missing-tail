@@ -2779,3 +2779,89 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
 
     NO  RH  CLAIM  —  wall  UNMOVED,  now  pinned  at
     its  exact  published  obstruction.
+
+
+## E34.  THE  d-l  LEVER  AUDITED  -  A  KAPPA  LEVER,  NOT  A  WALL
+        LEVER  (0304)  (2026-11-06)
+
+    PRZZ's  own  open  question  (section  9  item  4,
+    verbatim):  "It  would  also  be  interesting  to
+    set  d  =  1  and  analyze  how  a  large
+    truncation  of  ℓ  could  yield  terms  from  a
+    higher  degree  d  ≥  2.  What  would  be  a  good
+    balance  between  the  degree  d  and  the
+    truncation  ℓ?"
+
+    AUDIT  (primary  source,  full  text):
+  *  the  5/12  theorem  itself  is  already  AT
+    θ  =  4/7  -  eps:  d  =  1,  truncation
+    K  =  3,  R  =  1.3036,  degree-5  Q,
+    κ  ≥  0.417293962  (section  8);
+  *  the  A*  error  bound  is  UNIFORM  in  the
+    coefficient  family  (mu  *  Λ₁^{*k₁}  *  ...
+    *  Λ_D^{*k_D};  Λ_k  =  mu  *  log^k,
+    ℓ  =  k₁  +  ...  +  k_D)  -  the  d-l  choice
+    enters  the  MAIN  TERM  (κ  richness),  not  the
+    error  exponents;
+  *  for  d  =  1,  large  ℓ₁  expands  (mu  *
+    Λ₁^{*ℓ₁})  into  products  of  logs  of  distinct
+    primes  dividing  n  -  the  SAME  term  shapes
+    as  degree  d  ≥  2  -  "large  truncation
+    mimics  higher  degree"  =  more  main-term
+    degrees  of  freedom  =  better  κ;
+  *  the  "1/d"  in
+        A*  ≪  (T^eps/d)(T^{1/2}N^{7/8} + N^{7/4})
+    is  a  DIVISOR  (h  |  d^infty,  U  =
+    N1/(d h))  of  the  bilinear  decomposition  -
+    INTERNAL  to  the  optimization  whose  ENDPOINT
+    is  (7/4,  7/8)  -  the  "make  d  large"
+    reading  is  a  MISREADING;
+  *  the  (7/4,  7/8)  extraction  is  FORCED  by  the
+    structure:  h-powers  strictly  below  U-powers
+    (needed  for  the  h-sum  convergence)  +
+    W  =  U^{1/4}  balance  (the  proof's
+    verbatim  paragraph).
+
+    JUDGMENT:  as  a  proportion  lever  the  d-l
+    trade-off  is  structurally  blind  to  the
+    sparse  face  (0285/0292  logic).  No  new  wall
+    lever.  The  wall  levers  remain  the  0303
+    menu:  L1  (sharper  bilinear  Kloosterman)  /
+    L2  (new  balance)  /  L3  (new  decomposition).
+
+    MACHINE  (RhAttack.LevWall7,  new):  the  wall
+    as  a  piecewise-linear  function  of
+    (hypothetical)  exponent  improvements  -
+  *  **DOUBLE  WASTE  THEOREM**:  improving
+        EITHER  published  error  exponent
+        ALONE,  by  ANY  amount,  does  NOT  move
+        the  wall  (the  unimproved  term  binds
+        at  exactly  4/7)  -  BOTH  must  move;
+  *  **wallUnderBothImprovements**:  under  (δ,
+        δ2)  the  wall  =  EXACTLY
+        4/7  +  min(8δ/7,  4δ2/7);
+  *  simultaneousShiftBindsSecond:  equal  δ  >  0
+        ->  4/7  +  4δ/7,  the  N^{7/4}  term
+        BINDS  (4δ/7  <  8δ/7);
+  *  publishedStateIsCorner:  δ  =  δ2  =  0
+        ⟺  the  published  LevWall6  corner;
+  *  wallShiftDemo:  a  1/7  improvement  on  the
+        7/4  side  moves  the  wall  28/49  ->
+        32/49.
+
+    Quantitative  reading:  any  future  wall
+    movement  must  carry  BOTH  exponents  with
+    it;  the  N^{7/4}  (bilinear  Kloosterman)
+    side  is  the  binding  side  -  L1  is  the
+    best  wall-movement-per-unit  lever.
+
+    HONESTY  NOTE:  the  draft  "single-side
+    improvement  shifts  the  wall"  theorem  was
+    MATHEMATICALLY  WRONG  before  build
+    (claimed  4/7  +  4δ2/7;  linarith  refused)
+    -  corrected  to  the  double  waste  theorem.
+
+    NO  RH  CLAIM  -  wall  UNMOVED;  the
+    option-B  analytic  menu  is  EXHAUSTED  at
+    the  published  frontier  (map  0286-0304
+    complete).  Tree  green  17454.

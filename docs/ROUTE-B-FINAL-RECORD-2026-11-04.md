@@ -1983,3 +1983,99 @@ Build:  RhAttack.LevWall6  green  (8768);  full  tree
 green  (17454).  NO  RH  CLAIM  —  the  wall  is
 UNMOVED,  now  Pinned  at  its  exact  published
 obstruction.  (discovery  0303;  formal/RhAttack/LevWall6.lean)
+
+
+## 34 · 0304 — the d-l lever audited:  a  KAPPA  lever,  not  a  wall  lever
+(2026-11-06)
+
+The  0280-pattern  audit  of  PRZZ's  own  degree-d  /
+truncation-ℓ  open  question  (section  9  item  4,  the
+named  0303  next  lever):
+
+* **PRIME  SOURCE  (arXiv:1802.10521,  full  text
+  extracted  2026-11-06):**
+  *  THE  BINDING  ESTIMATE  (end  of  the  Theorem
+    4.1  proof,  verbatim):  "The  variable  U  is  of
+    size  N1/(d h),  thus  when  U  appears  there  is
+    a  hidden  h.  ...  we  need  some  positive  power
+    of  h  in  the  denominator  at  the  end  of  the
+    day  so  we  can  sum  over  h  and  not  have  it
+    blow  up.  Since  sum_{h  |  d^infty}  G(h)/h^eps
+    ≪  (dT)^eps,  we  find  that  ...
+    A*_{M,N1,N2}  ≪  (T^eps/d)(T^{1/2}N^{7/8} +
+    N^{7/4}).  Thus,  taking  N  =  T^{4/7-eps}  is
+    permissible."
+  *  THE  IDENTITY  OF  "1/d":  **d  is  a  DIVISOR
+    (h  |  d^infty)  of  the  Type  I/II  bilinear
+    decomposition,  U  =  N1/(d h)**  -  the  1/d
+    factor  is  INTERNAL  to  the  optimization  whose
+    ENDPOINT  is  (7/4,  7/8);  the  "make  d  large"
+    reading  is  a  MISREADING  -  it  is  not  a  free
+    lever.
+  *  THE  5/12  THEOREM  ITSELF  (section  8)  uses
+    d  =  1,  truncation  K  =  3,  θ  =  4/7  -
+    eps,  R  =  1.3036,  degree-5  Q,  achieving
+    κ  ≥  0.417293962  >  5/12  -  i.e.  the
+    proportion  result  is  already  AT  the  wall;
+    the  unused  room  (d  ≥  2,  K  >  3)  improves
+    κ,  not  the  θ-bound  -  and  the  A*  error
+    bound  is  UNIFORM  in  the  coefficient
+    family  (the  structure  enters  only  via  the
+    separation  reduction  to  bilinear
+    Kloosterman  sums).
+* **AUDITED  JUDGMENT:**  the  d-l  lever  (degree
+  vs  truncation  balance)  is  a  KAPPA
+  (proportion)  lever  -  structurally  blind  to  the
+  sparse  face  (0285/0292  logic).  It  adds  NO  new
+  wall  lever.  The  wall  levers  remain  exactly  the
+  0303  menu:  L1  sharper  bilinear  Kloosterman
+  estimate,  L2  new  balance  beyond  the  forced  h-U
+  constraint,  L3  different  decomposition  /
+  coefficient  structure  (section  9  item  3).
+* **MACHINE  ( RhAttack.LevWall7,  new):**  the  wall
+  as  a  piecewise-linear  function  of  (hypothetical)
+  exponent  improvements  (δ  on  the  T^{1/2}N^{7/8}
+  side,  δ2  on  the  N^{7/4}  side):
+      improvedAdmissible  δ  δ2  θ  ↔
+          (θ  <  4/7  +  8δ/7)  ∧  (θ  <  4/7  +
+          4δ2/7)                       (iff,  no
+          sign  hypotheses)
+      **DOUBLE  WASTE  THEOREM**
+          (wallUnmovedByFirstExponent  +
+          wallUnmovedBySecondExponent):
+          improving  EITHER  published  error
+          exponent  ALONE,  by  ANY  amount,  does
+          NOT  move  the  wall  -  the  unimproved
+          term  binds  at  exactly  4/7;  in  the
+          simultaneous-saturation  corner  BOTH
+          exponents  must  move
+      **wallUnderBothImprovements**:  under  (δ,
+          δ2)  the  wall  sits  at  EXACTLY
+          4/7  +  min(8δ/7,  4δ2/7)
+      simultaneousShiftBindsSecond:  equal  δ  >  0
+          ->  4/7  +  4δ/7,  the  N^{7/4}  term
+          BINDS  (4δ/7  <  8δ/7)
+      publishedStateIsCorner:  δ  =  δ2  =  0  ⟺
+          LevWall6.admissibleDegreeD  (the
+          published  corner)
+      wallShiftDemo:  a  hypothetical  1/7
+          improvement  on  the  7/4  side  moves  the
+          wall  28/49  ->  32/49
+  Quantitative  reading:  any  future  move  of  the
+  wall  must  carry  BOTH  exponents  with  it;  the
+  N^{7/4}  (bilinear  Kloosterman)  side  is  the
+  binding  side  of  movement  -  L1  is  the  best
+  wall-movement-per-unit  lever.
+* **HONESTY:**  the  draft  of  the  "single-side
+  improvement  shifts  the  wall"  theorem  was
+  MATHEMATICALLY  WRONG  before  build  (claimed  4/7
+  +  4δ2/7;  linarith  refused  -  the  unimproved
+  term  binds)  -  corrected  to  the  double  waste
+  theorem;  recorded  as  a  Lean  pitfall  (0304).
+
+Build:  RhAttack.LevWall7  green  (8769);  full
+tree  green  (17454).  NO  RH  CLAIM  -  wall
+UNMOVED;  the  option-B  analytic  menu  is  now
+EXHAUSTED  at  the  published  frontier  (map
+0286-0304  complete).  (discovery  0304;
+formal/RhAttack/LevWall7.lean)

@@ -1035,3 +1035,50 @@ green  17454.  NO  RH  CLAIM  —  wall  UNMOVED,  now
 pinned  at  its  exact  published  obstruction.  Record:
 ROUTE-B-FINAL-RECORD  §33;  discovery  0303;
 S1-A1-EXPLORATION.md  E33.
+
+**0304 note (the d-l lever audited - KAPPA lever, not wall
+lever  -  2026-11-06).**  PRZZ's  own  open  question
+(section  9  item  4):  "What  would  be  a  good
+balance  between  the  degree  d  and  the
+truncation  ℓ?"  -  audited  against  the  full
+primary  text:  the  5/12  theorem  itself  is  already
+AT  θ  =  4/7  -  eps  (d  =  1,  truncation  K  =  3,
+R  =  1.3036,  degree-5  Q,  κ  ≥  0.417293962);  the
+A*  error  bound  is  UNIFORM  in  the  coefficient
+family  (Λ_k  =  mu  *  log^k;  ℓ  =  k₁  +  ...  +
+k_D)  -  the  d-l  choice  enters  the  MAIN  TERM
+(κ),  not  the  error  exponents;  large  ℓ₁  at  d  =
+1  mimics  higher  degree  (products  of  logs  of
+distinct  primes)  =  more  main-term  freedom  =
+better  κ;  the  "1/d"  in  A*  ≪  (T^eps/d)(T^{1/2}N^{7/8}
++  N^{7/4})  is  a  DIVISOR  (h  |  d^infty,  U  =
+N1/(d h))  internal  to  the  (7/4,  7/8)  endpoint
+-  the  "make  d  large"  reading  is  a  MISREADING;
+the  extraction  is  FORCED  (h-powers  <  U-powers
+for  the  h-sum;  W  =  U^{1/4}).  JUDGMENT:  d-l  is
+a  proportion  lever  (face-blind,  0285/0292
+logic);  the  wall  levers  remain  the  0303  menu
+(L1  /  L2  /  L3).  MACHINE  (RhAttack.LevWall7,
+new):  **DOUBLE  WASTE  THEOREM**  (improving
+EITHER  published  error  exponent  ALONE,  by  ANY
+amount,  does  NOT  move  the  wall  -  the
+unimproved  term  binds  at  4/7;  BOTH  must
+move)  +  **wallUnderBothImprovements**  (the  wall
+=  EXACTLY  4/7  +  min(8δ/7,  4δ2/7)  under  (δ,
+δ2)  improvements)  +  simultaneousShiftBindsSecond
+(equal  δ  >  0  ->  4/7  +  4δ/7,  N^{7/4}  side
+binds)  +  publishedStateIsCorner  (δ  =  δ2  =  0
+⟺  the  LevWall6  corner)  +  wallShiftDemo
+(1/7  on  the  7/4  side  moves  the  wall
+28/49  ->  32/49).  Any  future  wall  movement  must
+carry  BOTH  exponents;  the  N^{7/4}  (bilinear
+Kloosterman)  side  is  the  binding  side  -  L1  is
+the  best  lever.  Lean  pitfall  recorded:  the
+draft  "single-side  shift"  theorem  was
+mathematically  wrong  before  build  (linarith
+refused);  corrected  to  the  double  waste
+theorem.  Tree  green  17454.  NO  RH  CLAIM  -  wall
+UNMOVED;  the  option-B  analytic  menu  is
+EXHAUSTED  at  the  published  frontier  (map
+0286-0304  complete).  Record:  ROUTE-B-FINAL-RECORD
+§34;  discovery  0304;  S1-A1-EXPLORATION.md  E34.
