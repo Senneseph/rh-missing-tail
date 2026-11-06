@@ -3116,3 +3116,37 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
 
     No RH claim - face OPEN / PROBABLY TRUE; wall
     UNMOVED.
+
+* **E40 (2026-11-14, 0310):**
+    * BG 2017 primary re-read (arXiv:1604.02740):
+      antecedent reach = Levinson 1/2 -> CONREY 4/7
+      ("k > 2/5") — door 2's reach IS door 1's (1.2)
+      wall.
+    * LevWall9 GREEN 8771: door2ReachIsDoor1Wall +
+      door2ResidualIsDoor1Wall (machinically: same open
+      set {theta | 4/7 < theta}); conreyKappa 2/5 rung;
+      [DIAG-RANGE] named honesty gap (levWallAt ->
+      thetaBounded, real in-tree objects).
+    * 0311 candidate: [DIAG-RANGE]@1/2 + [BG-T1] ->
+      zero-free Re s > 3/5 in-tree (Levinson region
+      wired through door 2; formalization completeness,
+      red line: no gain past 4/7).
+
+    No RH claim - face OPEN / PROBABLY TRUE; wall
+    UNMOVED (both doors pinned).
+
+* **E41 (2026-11-14, 0311):**
+    * M5 WINDOW 7 CERTIFIED (20,000 zeros, all simple and
+      on the line; seam bit-identical; 2 Rosser rescues,
+      quotas met, recorded) + CE7 GREEN 8772, full tree
+      17454.
+    * Frontier re-anchored: tCE7 = 3,000,175,365,508
+      (tCE7 - tCE6 = 4,673; 32,708 above H0); 139,998
+      certified over (g_a1, g_b7].
+    * Next: window 8 (a8 = 12,363,153,577,128); 0312
+      candidate = [DIAG-RANGE]@1/2 + [BG-T1] => zero-free
+      Re s > 3/5 in-tree (Levinson through door 2; red
+      line: formalization completeness only).
+
+    No RH claim - face OPEN / PROBABLY TRUE at tCE7; wall
+    UNMOVED.

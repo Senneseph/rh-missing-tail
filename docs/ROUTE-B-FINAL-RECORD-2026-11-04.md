@@ -2512,3 +2512,84 @@ CLAIM. (discovery 0308)
 
 Wall UNMOVED. Face OPEN at tCE6. NO RH CLAIM.
 (discovery 0309)
+
+## 41 · 0310 — DOORS MEET: BG 2017 PRIMARY RE-READ (2026-11-14)
+
+* **PRIMARY (arXiv:1604.02740 = Bettin–Gonek, Mathematika
+  63 (2017) 29–33, read in full):** (1.1) I_N(T1,T2) =
+  ∫|M_N(1/2+it)|²|ζ(1/2+it)|² dt, M_N = the LEVINSON
+  mollifier Σ μ(n) n^{-s}(1 − log n/log N). Theorem 1
+  (PROVEN in BG 2017 = [BG-T1-ARB] in-tree): antecedent
+  I_N(0,T) ≪_ε T^{1+eps} on 2 ≤ N ≤ T^θ ⇒ zero-free
+  Re s > 1/2 + 1/(2θ); "In particular ... θ arbitrarily
+  large ⇒ RH." THE PAPER'S OWN CITATION RECORD for the
+  antecedent's reach: Levinson: (1.2) for 0 < θ < 1/2;
+  **CONREY: "(1.2) (with a slightly different mollifier)
+  remains valid for θ < 4/7, and thereby deduced that
+  κ > 2/5"**; Farmer: θ=∞ conjecture + (1.2)@all θ ⇒
+  κ=1; Radziwiłł: M_{T^θ} essentially best possible
+  (κ=1 needs θ arbitrarily large). BG 2017 proves NO
+  antecedent past 4/7 — only the implication.
+* **THE DOORS MEET (machine, new module LevWall9 GREEN
+  8771; full tree 17454):** door 2's published reach is
+  Conrey's 4/7 — the SAME (1.2) family that pins door 1.
+  `door2ReachIsDoor1Wall : bgConreyReach = LevWall8.
+  fullWall`; `door2ResidualIsDoor1Wall : (4/7 : ℝ) < θ
+  ↔ θ ∈ LevWall.levWallGap` — the two doors have the
+  SAME open set {θ | 4/7 < θ}, machinically. κ-ladder
+  bottom rung added: conreyKappa := 2/5 < 417/1000 <
+  PRZZ 0.417293962.
+* **NAMED HONESTY GAP [DIAG-RANGE]** (the real in-tree
+  objects): `diagToRange θ : LevWall.levWallAt θ →
+  ThetaInf.thetaBounded θ` — diagonal (1.2)@θ ⇒ range
+  antecedent at θ (standard dyadic-in-N + small-N
+  second-moment argument; NOT proven in-tree; NOT a
+  theorem in BG 2017; moves nothing past 4/7).
+  Housekeeping wire for 0311-plus: [DIAG-RANGE]@1/2 +
+  [BG-T1] ⇒ zero-free Re s > 3/5 in-tree (the classical
+  Levinson region, wired through the door-2 machinery) —
+  formalization completeness only, red line.
+* **Face menu (complete, unchanged):** door 1/2 = θ >
+  4/7 (same wall, two shapes); door 3 = M5 certification
+  (active, shrinking, at tCE6); door 4 = θInf (0290
+  conditional wire).
+
+Wall UNMOVED at 4/7 (both doors pinned at the primary).
+Face OPEN. NO RH CLAIM. (discovery 0310)
+
+## 42 · 0311 — M5 WINDOW 7 CERTIFIED + CE7 RE-ANCHOR (2026-11-14)
+
+* **Window 7 (in-house, seamless):** a = 12,363,153,557,128
+  (= window 6's b), b = a + 20,000, no snap at either
+  endpoint, M = 60, C_R = 1, 34,213 evaluations in 2606.0 s,
+  N_range = [691008, 691008]. Certificate window7_b7.json:
+  **b − a = 20,000 zeros, all simple and on the line** in
+  (g_a7, g_b7], g_a7 = 3,000,175,360,835.718425833876 ±
+  1.29e-26 (**bit-identical** dyadic ball to window 6's
+  g_b6), g_b7 = 3,000,175,365,508.653559473769... ± 1.29e-26
+  (floor distance 0.3464 - robust).
+* **Verifier:** CERTIFIED true, 34,213 points,
+  sign_changes_inside = 20,000 = b − a, Rosser runs
+  50/53 ≥ K = 12, turing_ok, 0 cross-check failures, 0
+  undetermined signs. **Two Rosser rescue exceptions**
+  (blocks [..570227, ..570230] → union quota 6 = 6;
+  [..576544, ..576546] → union quota 5 = 5) — the same
+  documented 3-block union mechanism as windows 2/3/4/5;
+  zeros displaced into adjacent Gram intervals; only the
+  window total and the end runs enter the Turing step —
+  recorded, not suppressed.
+* **Formal (CE7.lean, GREEN 8772; full tree 17454, oolean
+  freshness verified):** gB7Lo := 3000175365508653/1000,
+  tCE7 := 3,000,175,365,508; faceShrinkCE7 = 4673;
+  frontierGapAboveH0 = 32,708; bandOfWindows7 (seven-way);
+  rh_reanchored_CE7: under [Z-PT2] + the seven cited window
+  clauses, RH q ↔ terminalFaceCE7 q; rh_of_terminalFaceCE7
+  (the final named step — no closing supplied);
+  terminalFaceCE7_of_thetaInf (M2 lane lands at tCE7).
+* **Frontier:** certified zeros over (g_a1, g_b7] =
+  20,000 + 19,999 + 19,999 + 20,000 × 4 = 139,998. Chain
+  integrity 1→7: every seam bit-identical (exact dyadic
+  tuples), N_range constant, C_R/M constant.
+
+Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE7.
+NO RH CLAIM. (discovery 0311)
