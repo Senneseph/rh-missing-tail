@@ -2187,3 +2187,63 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
         The  face  remains  OPEN;  the  re-anchor  is  a
         certificate;  the  two  face  formulations  are  provably
         the  same  open  object.
+
+## E23.  THE  2026  MECHANISM  SEAL  -  M2  target  pinned,
+       lane  M6  audited,  face-menu  COMPLETE  (0292)
+
+    1.  M2  TARGET  (the  theta  =  1/2  BARRIER,  primary  sources).
+
+        *  BG  (1.2):  lim  I_{T^th}(0,T)/T  =  1  +  1/th
+          proven  only  for  0  <  th  <  1/2;  th  =  inf  is
+          Farmer's  extension.
+        *  PRZZ  (arXiv:1802.10521)  section  1.3:  B-C-H-B  "pushed
+          the  size  of  the  length  th  PAST  THE  1/2  BARRIER
+          to  9/17"  (degree-2  test  functions);  section  9(3):
+          generic-coefficient  ceiling  th  =  17/33  -  eps;
+          section  9(4):  "What  would  be  a  good  balance  in
+          the  degree  d  vs  truncation  l?"  (the  active
+          FRONTIER  question);  on  th  =  inf  itself:  "Bettin-
+          Gonek  proved  ...  RH  would  follow  (not  just
+          100%)...  Of  course,  we  are  VERY  FAR  AWAY  from
+          such  lengths  of  mollifiers."
+        The  record  proportion  line  (with  multiplicity):
+        kappa  >=  0.417293962  (PRZZ  2020).  The  1/2  barrier
+        is  REAL  and  NAMED;  the  escape  mechanisms  (degree,
+        arithmetic,  twists)  are  the  2026  frontier.
+
+    2.  LANE  M6  (NEW,  audited  BLIND)  -  the  2026
+        proportion-COMPLETE  family.
+
+        *  Alpog-Furman  2026:  >=  2/3  simple  AND  on  the
+          line  (Gabor-frame  Gram  certificate,  bandwidth
+          L  =  log(T/2pi));  first  public  route:  Aug-2026
+          Anthropic  preprint,  problem  of  J.  Sumner;
+          independent  proof  by  Lamzouri.
+        *  Ainta:  0.673008528  (7-point  finite
+          certificates).
+        *  Clipped-Gram  (zenodo  23286387):  liminf
+          N_ms0/N  >=  66812491/99194876  =
+          0.67354780502...  (simple  on  line,  WITH
+          multiplicity)  -  highest  constant.
+        *  Spectral  TWIN  (rStation  p.109,  Nov  2026):  a
+          lattice  of  REFLECTED  OFF-LINE  PAIRS  at  spacing
+          <=  frame  step  has  EXACTLY  the  Gram  matrix  of
+          on-line  double  zeros,  AT  EVERY  DEPTH,  every
+          window;  the  2/3  certificate's  extremal  data  are
+          reproduced  by  a  configuration  with  A  THIRD  of
+          its  zeros  at  ANY  depth  (model  corollary,
+          caveat  recorded  verbatim);  "no  zero-density
+          estimate  beyond  N(sigma)  <=  (1/6+o(1))N".
+        Verdict:  the  family  is  compatible  with  the  SPARSE
+        face  BY  CONSTRUCTION  (twin  =  on-line  doubles,
+        certified-equivalent).  AUDITED  and  CLOSED  as  a
+        face-closer;  the  proportion  results  STAND.
+
+    3.  FACE-MENU  (terminal  state,  M1-M6):  M1  dead  (gate
+        antecedent  false,  0284);  M2  wired  +  target  pinned
+        (0290/0292);  M3  dead  walls  (0278-0283);  M4  wrong
+        side  (0285);  M5  WORKING  (0291  -  re-anchor  or
+        detect);  M6  audited  blind  (0292).
+
+    4.  NO  RH  CLAIM.  Record-level  unit  (0280/0285  pattern);
+        nothing  new  in-tree  logic  this  unit.

@@ -140,6 +140,38 @@ unit band higher; every future window above H0 re-anchors by the
 same two-line composition.  Record: docs/ROUTE-B-FINAL-RECORD-
 2026-11-04.md §21; discovery 0291; S1-A1-EXPLORATION.md E22.
 
+**0292 note (the 2026 mechanism seal — M2 target pinned, lane M6
+audited, face-menu COMPLETE, 2026-11-11).**  (1) **M2 target**:
+the analytic gap is exactly “(1.2) beyond θ = 1/2”; the 1/2
+barrier is real and named in the leading work (PRZZ §1.3: B-C-H-B
+pushed the length “past the 1/2 barrier to 9/17” via higher-degree
+test functions; §9(3) generic-coefficient ceiling 17/33 − ε; §9(4)
+open question: the degree-d vs truncation-ℓ balance); PRZZ on
+θ = ∞ itself: “Bettin–Gonek proved … RH would follow (not just
+100%). **Of course, we are very far away from such lengths of
+mollifiers.**”  (2) **Lane M6 (new)**: the 2026 proportion-
+certificate family (Alpöge–Furman ≥ 2/3 simple-and-on-line, Gabor-
+frame Gram certificate; Ainta 0.673008528; clipped-Gram
+66812491/99194876 ≈ 0.67354780502… with multiplicity — highest;
+results STAND as unconditional mathematics) is audited
+**structurally blind**: the spectral-twin theorem (rStation paper
+109, Nov 2026) — a lattice of reflected off-line pairs at spacing
+≤ the frame step has EXACTLY the Gram matrix of on-line double
+zeros, **at every depth**, every length-L window; the extremal
+certificate data are reproduced by a configuration with a third of
+its zeros at any depth (model corollaries, caveat recorded
+verbatim); no zero-density information beyond the trivial.  The
+lane is closed as a face-closer; its proportion results stand.
+(3) **Face-menu terminal state (M1–M6)**: M1 dead (0284); M2
+wired + target pinned (0290/0292); M3 dead walls (0278–0283); M4
+wrong side (0285); M5 **working** (0291 — re-anchor or detect);
+M6 audited blind (0292).  The two proven structural allies of the
+sparse face (zero-density 0285; spectral twin 0292) make a
+pervasive face impossible at two independent levels while leaving
+the sparse face untouched.  Record-level unit (0280/0285 pattern);
+NO RH CLAIM.  Record: docs/ROUTE-B-FINAL-RECORD-2026-11-04.md
+§22; discovery 0292; S1-A1-EXPLORATION.md E23.
+
 ---
 
 ## 1. The hypothesis

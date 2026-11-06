@@ -1096,3 +1096,107 @@ sources and the Anthropic preprint’s own abstract):
 **NO RH CLAIM.**  The face remains OPEN; the re-anchor is a
 certificate, and the two face formulations are provably the same
 open object.
+
+## 22 · 0292 — THE 2026 MECHANISM SEAL (M2 target pinned; lane M6
+### audited; the face-menu is now COMPLETE)
+
+### 22.1 · M2’s research target: the θ = 1/2 barrier (primary sources)
+
+The analytic content of lane M2 (0290) is the single statement
+“extend the Levinson–Conrey asymptotic (1.2) beyond θ = 1/2”.  The
+barrier is now pinned from the leading journal work itself:
+
+- **Bettin–Gonek** (arXiv:1604.02740): (1.2)
+  `lim I_{T^θ}(0,T)/T = 1 + 1/θ` is proven for `0 < θ < 1/2`
+  (Levinson 1974 / Conrey 1989); the θ=∞ conjecture is its
+  extension to every θ > 0.
+- **PRZZ** (arXiv:1802.10521; Res. Math. Sci. 7 (2020)), §1.3:
+  “Balasubramanian, Conrey and Heath-Brown … showed that one could
+  push the size of the length θ **past the 1/2 barrier** to 9/17”
+  (the **degree mechanism**: higher-degree test functions); §9(3):
+  the generic-coefficient ceiling is `θ = 17/33 − ε` (“the best
+  size one can take for coefficients aₙ about which we know
+  nothing”); §9(4) (their open question): “analyze how a large
+  truncation of ℓ could yield terms from a higher degree d ≥ 2.
+  **What would be a good balance between the degree d and the
+  truncation ℓ?**”
+- **PRZZ on θ = ∞ itself** (§1.3, verbatim from the pull): “Bettin–
+  Gonek proved that if one takes θ = ∞, then RH would follow (not
+  just 100%). **Of course, we are very far away from such lengths
+  of mollifiers.**”
+
+The 1/2 barrier is **real and named**; the known escape mechanisms
+(degree, coefficient-arithmetic, twists) are the active 2026
+frontier; the leading work openly calls the θ=∞ gap “very far”.
+
+### 22.2 · Lane M6 (new): the 2026 proportion-certificate family —
+audited structurally blind
+
+The August-2026 “≥ 2/3” generation (0291 §21.3) is not one result
+but a family, all counted from **Gram-matrix / pair-correlation
+certificate data**:
+
+- **Alpöge–Furman (2026)**: unconditionally ≥ 2/3 of the zeros are
+  **simple and on the line** (Gabor-frame Gram certificate with
+  bandwidth `L = log(T/2π)`; the first public route was the
+  August-2026 Anthropic preprint, problem of J. Sumner, with an
+  independent proof by Lamzouri — the two attributions are kept
+  as the two dated sources state them).
+- **Ainta (Sunghyeon Jo, 2026)**: 0.673008528 (7-point finite
+  certificates).
+- **Clipped-Gram energies** (zenodo 23286387):
+  `liminf N_ms0(T)/N(T) ≥ 66812491/99194876 =
+  0.67354780502…` (simple on-line, **with multiplicity**) — the
+  highest proportion constant found; the results stand as valid
+  unconditional mathematics.
+- (Also: arXiv:2610.26841 — unconditionally ≥ 13/20 of the zeros
+  are `c`-isolated, hence simple and on the line; answers
+  Gonek–Sahay.)
+
+**The blind spot is now a theorem.**  “Off-line zeros of any depth
+can be hidden from the two-thirds pair-correlation certificate”
+(rStation paper 109, Nov 2026; “span_of_dilates” v2):
+
+- **Theorem 1 (spectral twin)**: a lattice of *reflected off-line
+  pairs* at spacing at most the frame step `2π/L` has **exactly
+  the Gram matrix of on-line double zeros** at the same ordinates,
+  **at every depth**, for every window supported in an interval of
+  length `L` (id est: the certificate’s data cannot distinguish
+  the off-line lattice from on-line doubles).
+- **Corollary 3 (model)**: the certificate’s extremal
+  configuration, with its doubles replaced by pair-chains, has per
+  period trace `N` and squared Hilbert–Schmidt norm
+  `(4/3 + o(1))N` while **a third of its zeros lie at depth ε, for
+  every fixed ε ∈ (0, 1/2)**.
+- **Corollary 4 (model)**: the data give no zero-density estimate
+  beyond `N(σ) ≤ (1/6 + o(1))N` — i.e., **no information about
+  off-line structure at all**.
+- **Model caveat (recorded exactly)**: the chain corollaries are
+  proved in the model (indicator window, untruncated frame,
+  periodic configuration); the source states that restricting to
+  `T < γ ≤ 2T`, truncating the frame and smoothing the window
+  “change the data. We expect the change to be lower order, but we
+  do not prove it.”
+
+**Verdict.**  Like zero-density (0285) — which was compatible with
+the sparse face by *sparseness* — the 2026 proportion-certificate
+lane is compatible with the sparse face **by construction**: the
+twin/chain configurations are certified-equivalent to on-line
+configurations, at every depth.  The lane is **audited and closed
+as a face-closer**; its proportion results stand.
+
+### 22.3 · The face-menu, terminal state (M1–M6)
+
+| Lane | Object | 2026 verdict |
+|---|---|---|
+| M1 | 0276 S-diff gate | **DEAD** — uniform antecedent false (0284) |
+| M2 | θ=∞ | **WIRED** (0290), **TARGET PINNED** (0292: the 1/2 barrier, “very far”) |
+| M3 | S-route | **DEAD WALLS** — first-moment / realized walls (0278–0283) |
+| M4 | zero-free regions | **WRONG SIDE** — reach only from Re = 1 (0285) |
+| M5 | frontier extension | **WORKING** — pipeline in CE1; frontier `tCE1`; next window above `g_b` re-anchors or **detects** an off-line pair (0291) |
+| M6 | 2/3 proportion family | **AUDITED BLIND** — spectral twin at every depth (0292) |
+
+The two proven structural allies of the sparse face (zero-density
+0285; spectral twin 0292) make a *pervasive* face impossible at two
+independent levels, while leaving the *sparse* face untouched.
+Record-level unit (0280/0285 pattern); **NO RH CLAIM**.

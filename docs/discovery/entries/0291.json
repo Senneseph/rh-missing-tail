@@ -57,8 +57,9 @@
     "provenanceNote": "the Murphy certificate is AI-assisted (its own provenance note); it is unrefereed; it carries positive/negative controls and an independent audit; it rests on one unrefereed preprint (Amberger's block-count correction) for the Turing step"
   },
   "nextMoves": [
-    "0292 (NEXT): the M3/S-unit lane audit is COMPLETE (dead walls 0278-0285); the W2 wire is DEAD (0289); M2 is WIRAED and SEALED (0290-0291); M5 now WORKS END-TO-END (0291). Remaining direct-attack content: (i) attempt a genuine analytic extension of the Levinson-Conrey asymptotic beyond th = 1/2 (the M2 research target - a real research risk, honest negative audit if it fails); (ii) watch for further certified windows above H0 in the 2026-10/11 literature and re-anchor (mechanism proven); (iii) the sparse-face sparsity program (distributional zero-free in the band, beyond pointwise zero-free regions).",
-    "terminalFace status: OPEN / PROBABLY TRUE; the absolute A1 clause: OPEN / PROBABLY FALSE (the W2-wire input, 0289)"
+    "DONE in 0292: the 2026 mechanism seal - M2 target pinned (the theta=1/2 barrier, primary sources: BG (1.2), PRZZ 1/2-barrier/degree/17-33/very-far statements) + NEW lane M6 audited structurally blind (the 2026 proportion-certificate family, spectral twin at every depth, model caveat recorded); face-menu COMPLETE (M1 dead, M2 wired+target-pinned, M3 dead walls, M4 wrong side, M5 WORKING, M6 audited blind).",
+    "0293 (NEXT, research-risk unit): a genuine scoped attempt at the M2 target - the theta > 1/2 side of (1.2): (i) a new weaker-but-sufficient range-uniform boundedness bound at a fixed theta > 1/2 from new inputs; (ii) naming/formalizing the exact cross-term obstruction as a named inequality; (iii) if neither succeeds, a rigorous negative audit (0280 pattern). No faking.",
+    "M5 stays open for the next external certified window above g_b (mechanism proven; two-line re-anchor in CE1's pattern)"
   ],
   "buildEvidence": "cd formal && lake build => 'Build completed successfully (17454 jobs)'; RhAttack.CE1 => 'Build completed successfully (8766 jobs)'",
   "rhClaim": "NONE",
