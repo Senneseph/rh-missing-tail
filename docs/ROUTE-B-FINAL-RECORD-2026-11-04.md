@@ -1582,3 +1582,108 @@ TRUE**  —  and  now  is  attacked  through  **one  wall**  (three
 names),  with  two  sufficiency  wires  (0290  θ = ∞  form;  0296
 BG  Theorem-1  form)  both  closing  the  face  given  their
 cited  inputs.
+
+## 27 · 0297 — M5 FRONTIER EXTENSION (SECOND RUN): the certified
+       frontier MOVES AGAIN — this time OUR OWN production of a fresh
+       window (LEAN: `formal/RhAttack/CE2`, tree green 17454)
+
+**What ran.**  Lane M5 (the machine-verified shrinking lane) executed
+end-to-end a second time — but the second window is not a cited
+artifact:  it is **our own production**,  run on this machine
+(32 cores) on 2026-11-11 with Murphy's Apache-2.0 pipeline (zenodo
+dataset 23486196:  `code/window.py` + independent verifier
+`code/verify_window.py` + controls;  trust base:  128-bit Arb ball
+arithmetic,  the kernel-checked Lean 4 remainder theorem
+RSInt.rs_Z_C0'  ((3/5) t^(-3/4),  t >= 4250),  cross-checked at every
+point against Arb's own zeta,  Turing's method at the Amberger-corrected
+block count with  K = 12,  and the pipeline's missing-pair controls).
+Parameters:  `a = 12 363 153 457 130`  (= CE1's  b —  the seam is
+seamless:  the recorded g_a2 matches CE1's g_b to the 128-bit record),
+`b_requested = a + 20 000`,  `M = 60`,  `C_R = 1`,  28 workers.
+Runtime:  33 268 evaluations,  2548.8 s (42.5 min wall).
+
+**Result  (certificate  `tmp/ce2/ce1_window_H0_v1/window2_b2.json`).**
+The  b − a = **19 999**  zeros of  ζ  with
+`g_a2 < Im s <= g_b2`  (the driver snapped the end down one good Gram
+point:  b = 12 363 153 477 129)  are **ALL SIMPLE AND ON THE LINE**:
+
+*  certified sign changes in window:  `19 999 = b − a`
+*  consecutive good Rosser blocks:  **47** left of g_a2,  **50** right
+    of g_b2  (both  >=  K = 12;  the required-K check shows the run at
+    5.72 / 11.44 (doubled) / 9.15 (Amberger)  —  K = 12  holds)
+*  Rosser failures inside:  0;  cross-check (RS vs Arb-zeta) failures:
+    0;  undetermined Gram signs:  0;  max phase contribution 4.04e-21
+*  endpoints (recorded dyadic balls,  radius ~1.3e-26):
+        g_a2 = 3 000 175 337 471.5100470881271857...
+             (= CE1's g_b — the seamless seam)
+        g_b2 = 3 000 175 342 144.2115353245153768...
+
+**Verification (three layers).**
+(1)  **Environment repeat:**  before the run,  Murphy's own window-1
+     certificate RE-VERIFIED `CERTIFIED: true` in this environment
+     with the same code —  pipeline + flint 0.9.0 consistent.
+(2)  **Pipeline verifier** (separate code):  `verify_window.py` on
+     `window2_b2.json`  →  `CERTIFIED: true`,  gram points recomputed
+     and matched,  Turing K-construction checked.
+(3)  **Independent spot check** (third implementation,  mpmath
+     `grampoint` + `siegeltheta` + `zeta`,  tmp/ce2/spotcheck_window2.py):
+     (i)  both  endpoint  Gram  points  reproduced  by  mpmath  to  the
+     record's  own  displayed  precision  (dps-15  and  dps-30);
+     (ii)  the  sign  sample  at  first  settings  flagged  ONE  point
+     —  the  midpoint  of  Gram  interval  12 363 153
+     462 055  (t  =  3 000 175 338 622.337147484...,  |Z|  ~
+     4.5e-3)  —  and  both  flags  were  proven  to  be  ARTIFACTS
+     OF  THE  CHECK  ITSELF,  not  of  the  certificate:  first  the
+     check  decoded  the  exact  dyadic  t  through  float64  (ulp
+     ~2.4e-4  in  t  near  a  zero  >  |Z|,  enough  to  rotate  the
+     sign);  after  switching  to  exact  mpf  decode,  the  same
+     point  was  re-flagged  at  dps-15  because  the  phase
+     theta(t)  ~  1.2e13  is  NOT  representable  to  1e-15  at
+     15-digit  precision  (the  identity  Z  =  Re(e^{itheta}
+     zeta)  needs  the  phase  to  absolute  precision  ~1e-15,
+     i.e.  dps  >=  ~30  at  this  height);  the  dps-35  exact-
+     decode  re-test  gives  Z  =  +0.004453253988,  in  AGREEMENT
+     with  the  certified  sign  +1.  (The  window's  minimum
+     certified  |Z|  is  4.28e-5,  ~1e5  times  the  t^(-3/4)
+     remainder  bound  —  a  dps-35  mpmath  error  ~1e-21|zeta|
+     cannot  touch  any  certified  sign.)
+     Final 16-point  dps-35  exact-decode  sign  sample:  running
+     at  commit  time  (independent  process;  raw  output  in
+     tmp/ce2/spotcheck_out.txt;  final  tally  to  be  appended  by
+     addendum).  This  layer  is  a  CONTROL  (sample),  not  a
+     second  certificate.
+
+**The frontier moved.**  Machine-verified in `RhAttack.CE2`
+(same composition shape as CE1 = 0291;  the two window clauses are
+consumed as named cited Inputs [CE1-WIN] / [CE2-WIN],  the seam split
+is machine logic):
+
+*  new cited frontier:  **tCE2 = 3 000 175 342 144**
+    (an integer strictly below the certified g_b2 ball)
+*  `allOnLineUpToCE2`:  [Z-PT2] + [CE1-WIN] + [CE2-WIN]  =>  the
+    on-line census holds up to  tCE2  —  the frontier is
+    **9 344 units** above the Platt-Trudgian H0  (machine:
+    `frontierGapAboveH0 : tCE2 − tPT2 = 9344`;  the certified real
+    height is  9344.2115...)
+*  `terminalFaceCE2`:  the face re-anchored at  tCE2  —  the height
+    domain shrank by a further **4673** units past  tCE1  (machine:
+    `faceShrinkCE2`)
+*  `rh_split_at_CE2` + `rh_reanchored_CE2` (headline):
+    **all-heights RH  ↔  terminalFaceCE2**  given the three cited
+    census Inputs;  `rh_of_terminalFaceCE2`  is the final named step;
+    `terminalFaceCE2_of_thetaInf`  —  the 0290 M2 lane lands directly
+    at the new frontier.
+*  total certified zeros added by the two windows above g_a1:
+    20 000 + 19 999 = **39 999**.
+
+**Honesty.**  No RH claim.  The face is the same open object,
+certified  9344  units higher  (a 1.6e-9  relative extension per
+window —  exactly the source's own "negligible" caveat,  now
+doubled).  The trust base is the pipeline's own controls +
+kernel-checked remainder + our three verification layers;  the
+spot check is a CONTROL (sample),  not a second certificate;  the
+window is a re-run of a third-party pipeline on new points  (same
+trust base as CE1's cited window,  now produced in-house).
+`[CE2-WIN]`  is a named cited Input in the Z78 pattern;  nothing
+analytic is proven in-tree beyond pure logic and rational
+arithmetic.  Tree green 17454.

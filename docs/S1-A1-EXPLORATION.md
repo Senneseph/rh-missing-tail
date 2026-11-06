@@ -2499,3 +2499,65 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
     cited);  compact-uniform  reading  flagged  interpretive  (per-
     paper  verbatim  uniformity  not  audited).  Face  status:
     OPEN  /  PROBABLY  TRUE.
+
+## E28.  M5  FRONTIER  EXTENSION,  SECOND  RUN:  OUR  OWN  WINDOW
+       (0297,  LEAN:  RhAttack.CE2,  tree  green  17454)
+
+    The  M5  lane  (the  machine-verified  shrinking  lane,  0289
+    face-menu)  runs  a  second  time  -  and  this  time  the  window
+    is  OUR  OWN  PRODUCTION,  not  a  cited  artifact:  Murphy's
+    Apache-2.0  pipeline  (zenodo  23486196:  window.py  +
+    verify_window.py  +  controls;  128-bit  Arb,  kernel-checked
+    Lean-4  RS  remainder  (3/5) t^(-3/4),  Arb-zeta  cross-check
+    at  every  point,  Turing  at  the  Amberger-corrected  block
+    count  K = 12,  missing-pair  controls)  run  in-house  on  this
+    machine  (28  workers;  33 268  evals;  2548.8 s)  for  the  next
+    window  above  CE1's  end:
+
+    1.  RESULT:  the  19 999  zeros  with  g_a2 < Im  s <= g_b2  are
+        ALL  SIMPLE  AND  ON  THE  LINE  (sign  changes  19999 =
+        b-a;  Rosser  runs  47 / 50  > K = 12;  0  failures  in  any
+        check;  b  snapped  to  12 363 153 477 129  by  the  driver).
+        Endpoints  (recorded  dyadic  balls,  radius  ~1.3e-26):
+            g_a2 = 3 000 175 337 471.5100470881271857...  (= CE1's
+                   g_b:  the  seam  is  seamless  to  the  128-bit
+                   record)
+            g_b2 = 3 000 175 342 144.2115353245153768...
+        Certificate:  tmp/ce2/ce1_window_H0_v1/window2_b2.json  (+
+        .cache.jsonl  raw  records  +  run  log).
+
+    2.  THREE  VERIFICATION  LAYERS:  (i)  before  the  run,
+        Murphy's  OWN  window-1  certificate  re-verified
+        CERTIFIED:true  in  this  environment  (pipeline  +  flint
+        0.9.0  consistent);  (ii)  the  pipeline's  INDEPENDENT
+        verifier  (separate  code)  on  the  new  certificate:
+        CERTIFIED:true,  gram  points  recomputed  and  matched,
+        Turing  K  checked;  (iii)  an  INDEPENDENT  SPOT  CHECK
+        (mpmath  grampoint  +  siegeltheta  +  zeta  -  a  third  R-S
+        implementation):  both  endpoint  Gram  points  reproduced,
+        sample  of  certified  signs  agree  [see  0297  record  for
+        the  count]  -  a  control  (sample),  not  a  second
+        certificate.
+
+    3.  THE  FRONTIER  (RhAttack.CE2,  machine):  new  cited
+        frontier  tCE2 = 3 000 175 342 144  (strictly  below  the
+        certified  g_b2  ball);  allOnLineUpToCE2  =  [Z-PT2] +
+        [CE1-WIN]  +  [CE2-WIN]  (the  two  window  clauses  as
+        named  cited  Inputs  in  the  Z78  pattern;  the  seam  split
+        at  gA2Hi  is  machine  logic,  bandOfWindows);
+        terminalFaceCE2;  rh_split_at_CE2;  rh_reanchored_CE2
+        (all-heights  RH  <->  terminalFaceCE2);  rh_of_terminal-
+        FaceCE2  (final  step);  terminalFaceCE2_of_thetaInf  (the
+        0290  lane  lands  directly  here);  faceShrinkCE2  =  4673
+        (a  further  4673  units  past  tCE1);  frontierGapAboveH0
+        =  9344  (tCE2  -  tPT2;  certified  real  height  9344.2115).
+        Total  certified  zeros  added  above  g_a1:  39 999.
+
+    HONESTY:  no  RH  claim;  the  face  is  the  same  open  object,
+    certified  9344  units  higher  (per  the  source's  own
+    caveat,  the  extension  itself  is  negligible  -  the  value  is
+    that  M5  now  works  END-TO-END  IN-HOUSE  on  a  fresh  window,
+    and  every  future  window  re-anchors  the  face  by  the  same
+    two-line  machine  composition);  [CE2-WIN]  is  a  named  cited
+    Input;  trust  base  =  pipeline  controls  +  kernel-checked
+    remainder  +  the  three  layers  above.

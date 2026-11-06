@@ -313,6 +313,33 @@ inputs cited; compact-uniform reading flagged
 interpretive.  Record: ROUTE-B-FINAL-RECORD §28;
 discovery 0298; S1-A1-EXPLORATION.md E29.
 
+**0297 note (M5 FRONTIER EXTENSION, SECOND RUN — our own
+window — 2026-11-11).**  The M5 shrinking lane produced a FRESH
+certified window in-house (Murphy's Apache-2.0 pipeline, zenodo
+23486196, run on this machine: 28 workers, 33,268 ball evaluations,
+42.5 min): the **19,999 zeros with g_a2 < Im s ≤ g_b2 are all
+simple and on the line** (19,999 = b − a certified sign changes;
+Rosser runs 47/50 ≥ K = 12; 0 failures; b snapped to Gram point
+12,363,153,477,129).  g_b2 = 3,000,175,342,144.2115353245153768…
+(recorded dyadic ball, radius ~1.3e-26); the seam g_a2 = CE1's g_b
+is seamless to the 128-bit record.  Three verification layers:
+Murphy's own certificate re-verified in our environment, the
+pipeline's independent verifier (CERTIFIED: true), and an
+independent mpmath spot-check (third R-S implementation: endpoints
+reproduced; certified signs agree — count in the record).  Machine
+(`formal/RhAttack/CE2`, tree green 17454): new cited frontier
+**tCE2 = 3,000,175,342,144** (strictly below the certified g_b2
+ball); `allOnLineUpToCE2` = [Z-PT2] + [CE1-WIN] + [CE2-WIN]
+(the two window clauses as named cited Inputs; the seam split is
+machine logic); `terminalFaceCE2`; `rh_reanchored_CE2`
+(all-heights RH ↔ terminalFaceCE2 given the three cited census
+Inputs); `rh_of_terminalFaceCE2`; `terminalFaceCE2_of_thetaInf`
+(the 0290 lane lands directly at the new frontier); face shrank a
+further **4,673** units; frontier 9,344 units above H0 (9,344.2115
+certified).  No RH claim; the face is the same open object,
+certified 9,344 units higher.  Record: ROUTE-B-FINAL-RECORD §27;
+discovery 0297; S1-A1-EXPLORATION.md E28.
+
 ---
 
 ## 1. The hypothesis

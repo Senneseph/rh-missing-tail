@@ -25,7 +25,7 @@
   },
   "wallMapAfter": "M2 lane wall = the (1.2) asymptotic family (1.2)@theta at theta in {theta | 4/7 < theta} (canonical shape); equivalent forms: the sharp residual levSharp @theta (0294, machine-bridged), the BG antecedent thetaBounded @theta (0298, this decomposition). All three names, ONE gap set. Cited sufficiency wires to terminalFace: 0290 (thetaInf), 0293/0295 (unified wall), 0296 (BG-T1-ARB + thetaBoundedAll).",
   "nextMoves": [
-    "0297 (running): M5 frontier extension - the next 20000-zero Murphy-method window (g_b, g_b2] (b = 12363153457130, b2 = b + 20000) via the Apache-2.0 pipeline (zenodo 23486196) with 28 workers; on completion: verify_window re-check, independent spot checks, tCE2 re-anchor",
+    "DONE 0297: M5 frontier extension SECOND RUN - our own window (Murphy Apache-2.0 pipeline in-house, 28 workers, 33268 evals): 19999 zeros (g_a2, g_b2] ALL SIMPLE AND ON LINE; 3 verification layers; new frontier tCE2 = 3,000,175,342,144 (LEAN CE2 machine re-anchor, tree green 17454); face certified 9344 units above H0; no RH claim (entry 0297, route record 27, S1-A1 E28)",
     "after 0297: package the 0288-0298 option-B phase (front-page consolidation + the wall map with its three names + the two-sufficiency-wires structure)",
     "the analytic gap is unchanged: (1.2) at theta > 4/7 (three names, one object); no RH claim"
   ],
