@@ -1,56 +1,60 @@
 {
-  "id": 297,
-  "ts": "2026-11-11T12:30:00",
-  "title": "0297: M5 FRONTIER EXTENSION (SECOND RUN) - OUR OWN fresh certified window: the 19 999 zeros with g_a2 < Im s <= g_b2 are ALL SIMPLE AND ON THE LINE (Murphy Apache-2.0 pipeline, in-house run, 28 workers, 33 268 ball evals, 2548.8 s; b snapped to 12 363 153 477 129; Rosser runs 47/50 > K=12; 0 failures; THREE verification layers incl. independent mpmath spot check); new cited frontier tCE2 = 3 000 175 342 144 (LEAN RhAttack.CE2 machine re-anchor, tree green 17454); the face is the same open object, certified 9344 units above H0 (further shrink 4673 past tCE1); NO RH CLAIM",
-  "kind": "compute + machine-re-anchor unit (option B, unit 11): lane M5 executed end-to-end IN-HOUSE on a fresh window",
-  "provenance": {
-    "pipeline": "P. W. Murphy, zenodo dataset https://doi.org/10.5281/zenodo.23486196 (code + controls, LICENSE-Apache-2.0), paper https://doi.org/10.5281/zenodo.23489697. Method: 128-bit Arb ball arithmetic; Hardy Z by Riemann-Siegel with first correction; remainder = Lean 4 kernel-checked theorem RSInt.rs_Z_C0' ((3/5) t^(-3/4), t >= 4250); cross-check at every point vs Arb's own zeta; Turing's method at the Amberger-corrected block count (arXiv 2512.23064), K = 12; missing-pair positive/negative controls in the deposit.",
-    "run": "our machine (32 cores, 28 workers), 2026-11-11; parameters a = 12 363 153 457 130 (= CE1's b: seamless seam), b_requested = a + 20 000 (driver snapped b down to 12 363 153 477 129, the nearest good Gram point), M = 60, C_R = 1; 33 268 evaluations; 2548.8 s wall.",
-    "artifacts": "tmp/ce2/ce1_window_H0_v1/window2_b2.json (certificate: exact dyadic records for all 33 268 points) + window2_b2.json.cache.jsonl (raw) + window2_run.log; verifier output in this entry's verification field; spot-check script tmp/ce2/spotcheck_window2.py, output tmp/ce2/spotcheck_out.txt."
+ "id": 297,
+ "ts": "2026-11-11T12:30:00",
+ "title": "0297: M5 FRONTIER EXTENSION (SECOND RUN) - OUR OWN fresh certified window: the 19 999 zeros with g_a2 < Im s <= g_b2 are ALL SIMPLE AND ON THE LINE (Murphy Apache-2.0 pipeline, in-house run, 28 workers, 33 268 ball evals, 2548.8 s; b snapped to 12 363 153 477 129; Rosser runs 47/50 > K=12; 0 failures; THREE verification layers incl. independent mpmath spot check); new cited frontier tCE2 = 3 000 175 342 144 (LEAN RhAttack.CE2 machine re-anchor, tree green 17454); the face is the same open object, certified 9344 units above H0 (further shrink 4673 past tCE1); NO RH CLAIM",
+ "kind": "compute + machine-re-anchor unit (option B, unit 11): lane M5 executed end-to-end IN-HOUSE on a fresh window",
+ "provenance": {
+  "pipeline": "P. W. Murphy, zenodo dataset https://doi.org/10.5281/zenodo.23486196 (code + controls, LICENSE-Apache-2.0), paper https://doi.org/10.5281/zenodo.23489697. Method: 128-bit Arb ball arithmetic; Hardy Z by Riemann-Siegel with first correction; remainder = Lean 4 kernel-checked theorem RSInt.rs_Z_C0' ((3/5) t^(-3/4), t >= 4250); cross-check at every point vs Arb's own zeta; Turing's method at the Amberger-corrected block count (arXiv 2512.23064), K = 12; missing-pair positive/negative controls in the deposit.",
+  "run": "our machine (32 cores, 28 workers), 2026-11-11; parameters a = 12 363 153 457 130 (= CE1's b: seamless seam), b_requested = a + 20 000 (driver snapped b down to 12 363 153 477 129, the nearest good Gram point), M = 60, C_R = 1; 33 268 evaluations; 2548.8 s wall.",
+  "artifacts": "tmp/ce2/ce1_window_H0_v1/window2_b2.json (certificate: exact dyadic records for all 33 268 points) + window2_b2.json.cache.jsonl (raw) + window2_run.log; verifier output in this entry's verification field; spot-check script tmp/ce2/spotcheck_window2.py, output tmp/ce2/spotcheck_out.txt."
+ },
+ "result": {
+  "certified_region": "g_a2 < Im s <= g_b2",
+  "g_a2": "3 000 175 337 471.5100470881271857... +/- ~1.3e-26 (recorded dyadic ball; EXACTLY CE1's g_b to the 128-bit record = seamless seam)",
+  "g_b2": "3 000 175 342 144.2115353245153768... +/- ~1.3e-26 (recorded dyadic ball)",
+  "zeros": "b - a = 19 999, ALL SIMPLE AND ON THE LINE",
+  "sign_changes_in_window": 19999,
+  "rosser_runs": {
+   "left_of_g_a2": 47,
+   "right_of_g_b2": 50,
+   "K_required": "5.72 (Trudgian) / 11.44 (doubled) / 9.15 (Amberger); K_used = 12"
   },
-  "result": {
-    "certified_region": "g_a2 < Im s <= g_b2",
-    "g_a2": "3 000 175 337 471.5100470881271857... +/- ~1.3e-26 (recorded dyadic ball; EXACTLY CE1's g_b to the 128-bit record = seamless seam)",
-    "g_b2": "3 000 175 342 144.2115353245153768... +/- ~1.3e-26 (recorded dyadic ball)",
-    "zeros": "b - a = 19 999, ALL SIMPLE AND ON THE LINE",
-    "sign_changes_in_window": 19999,
-    "rosser_runs": {
-      "left_of_g_a2": 47,
-      "right_of_g_b2": 50,
-      "K_required": "5.72 (Trudgian) / 11.44 (doubled) / 9.15 (Amberger); K_used = 12"
-    },
-    "rosser_failures_inside": 0,
-    "cross_check_failures": 0,
-    "undetermined_gram_signs": 0,
-    "max_phase_contribution": "4.04e-21",
-    "total_certified_zeros_above_g_a1": "20 000 (window 1) + 19 999 (window 2) = 39 999"
-  },
-  "verification": {
-    "layer1_environment_repeat": "BEFORE the run: Murphy's own window-1 certificate (certificate/prod_H0.json) re-verified in this environment with the same code (python-flint 0.9.0): CERTIFIED true, turing_ok true.",
-    "layer2_pipeline_verifier": "code/verify_window.py (separate code from window.py) on window2_b2.json: CERTIFIED true, points_checked 33 268, gram_point_mismatches 0, hypothesis/path failures 0, turing_ok true (K_conservative 12 vs required runs 47/50).",
-    "layer3_independent_spotcheck": "tmp/ce2/spotcheck_window2.py: mpmath (a THIRD, independent Riemann-Siegel implementation: grampoint + siegeltheta + zeta) re-evaluates both endpoint Gram points and a sample of certified signs. (i) Endpoints: mpmath grampoint(a) = 3000175337471.51025 (dps-15) / 3000175337471.51005 (dps-30) and grampoint(b) = 3000175342144.21143 (dps-15) / 3000175342144.21154 (dps-30) - agreement to the record's own displayed precision (zero spacing ~0.23). (ii) Sign sample debugging (RECORD, honesty): two settings flagged ONE point - the midpoint of Gram interval 12 363 153 462 055 (t = 3 000 175 338 622.337147484..., |Z| ~ 4.5e-3) - and BOTH flags were proven to be ARTIFACTS OF THE CHECK ITSELF, not of the certificate: (a) float64 decode of the exact dyadic t (ulp ~2.4e-4 near a zero, > |Z|) rotated the computed sign; (b) at dps-15 the phase theta(t) ~ 1.2e13 is NOT representable to 1e-15 (the identity Z = Re(e^{i theta} zeta) needs the phase to ~1e-15 ABSOLUTE, i.e. dps >= ~30 at this height). The dps-35 EXACT-decode re-test gives Z = +0.004453253988, in AGREEMENT with the certified sign +1. (iii) The window's minimum certified |Z| lower bound is 4.28e-5, ~1e5 times the t^(-3/4) remainder bound - a dps-35 mpmath error (~1e-21 |zeta|) cannot touch any certified sign. (iv) FINAL 16-POINT dps-35 exact-decode sign sample: running at commit time (independent process, raw output tmp/ce2/spotcheck_out.txt; final tally appended by addendum). This layer is a CONTROL (sample), not a second certificate."
-  },
-  "machine": {
-    "module": "formal/RhAttack/CE2.lean (NEW; same composition shape as CE1 = 0291)",
-    "constants": "gA2Hi = 30001753374715100470881272 / 10^13 (certified top of g_a2, margin ~1.4e-14); gB2Lo = 300017534214421 / 10^2 = 3000175342144.21 (certified bottom of g_b2, margin ~1.5e-3); tCE2 = 3 000 175 342 144 (integer strictly below gB2Lo)",
-    "cited_inputs_Z78_pattern": [
-      "[CE1-WIN] ce1WinClause: every zeta zero with tPT2 < Im <= gA2Hi on the line (Murphy Theorem 1, region (tPT2, gA2Hi] subset (g_a1, g_a2])",
-      "[CE2-WIN] ce2WinClause: every zeta zero with gA2Hi < Im <= tCE2 SIMPLE AND ON THE LINE (our run, region (gA2Hi, tCE2] subset (g_a2, g_b2])"
-    ],
-    "machine_theorems": "bandOfWindows (the seam split at gA2Hi, pure logic); allOnLineUpToCE2 = [Z-PT2] + [CE1-WIN] + [CE2-WIN] => census to tCE2 (THE FRONTIER MOVED AGAIN); terminalFaceCE2; faceCE1_implies_faceCE2; terminalFaceCE2_iff_faceCE1 (re-anchoring = certificate, not logical move); rh_split_at_CE2 (0288 residual re-pinned); rh_reanchored_CE2 (HEADLINE: RH q <-> terminalFaceCE2 q); rh_of_terminalFaceCE2 (final named step); terminalFaceCE2_of_thetaInf (0290 lane lands directly); faceShrinkCE2 : tCE2 - tCE1 = 4673; frontierGapAboveH0 : tCE2 - tPT2 = 9344",
-    "build": "RhAttack.CE2 green (8767 jobs); full tree green (17454 jobs)"
-  },
-  "honesty": {
-    "noRHClaim": true,
-    "trustBase": "the pipeline's own controls + its kernel-checked Lean remainder theorem + layer-1 environment repeat + layer-2 independent verifier + layer-3 independent sample spot check. The window is a RE-RUN of a third-party (Murphy, Apache-2.0) pipeline on new points - same trust base as the CE1 cited window, now PRODUCED IN-HOUSE; it is NOT a from-scratch independent certification of the Riemann-Siegel remainder (that theorem is the kernel-checked RSInt.rs_Z_C0', unchanged).",
-    "whatIsNotClaimed": "no RH claim; the extension says nothing about RH beyond the window (the source's own caveat, now at 2x the height); [CE2-WIN] is a named cited Input (Z78 pattern), not an in-tree analytic proof; spot check = control (sample), not a second certificate; the b-snap (12 363 153 477 129 vs requested ...7130) is the driver's standard good-endpoint snap - the certified claim is exactly 19 999 zeros, b - a, in (g_a2, g_b2]; the two spot-check 'mismatches' during the run are documented in verification.layer3 - both were checker artifacts (float64 t-decode; dps-15 phase representation), each resolved by the dps-35 exact-decode re-test in AGREEMENT with the certificate",
-    "faceStatus": "OPEN / PROBABLY TRUE - the SAME open object, certified 9344 units above H0 (1.6e-9 relative per window)"
-  },
-  "nextMoves": [
-    "M5 lane is now demonstrated END-TO-END IN-HOUSE: any future window (b2 -> b3, ...) re-anchors the face by the same two-line machine composition (CE2 pattern)",
-    "package the option-B phase 0293-0298 (front-page consolidation; wall map with three names; two sufficiency wires; frontier now tCE2)",
-    "the analytic gap is UNCHANGED: (1.2) at theta > 4/7 (three names, one object - 0298); no RH claim"
+  "rosser_failures_inside": 0,
+  "cross_check_failures": 0,
+  "undetermined_gram_signs": 0,
+  "max_phase_contribution": "4.04e-21",
+  "total_certified_zeros_above_g_a1": "20 000 (window 1) + 19 999 (window 2) = 39 999"
+ },
+ "verification": {
+  "layer1_environment_repeat": "BEFORE the run: Murphy's own window-1 certificate (certificate/prod_H0.json) re-verified in this environment with the same code (python-flint 0.9.0): CERTIFIED true, turing_ok true.",
+  "layer2_pipeline_verifier": "code/verify_window.py (separate code from window.py) on window2_b2.json: CERTIFIED true, points_checked 33 268, gram_point_mismatches 0, hypothesis/path failures 0, turing_ok true (K_conservative 12 vs required runs 47/50).",
+  "layer3_independent_spotcheck": "tmp/ce2/spotcheck_window2.py: mpmath (a THIRD, independent Riemann-Siegel implementation: grampoint + siegeltheta + zeta) re-evaluates both endpoint Gram points and a sample of certified signs. (i) Endpoints: mpmath grampoint(a) = 3000175337471.51025 (dps-15) / 3000175337471.51005 (dps-30) and grampoint(b) = 3000175342144.21143 (dps-15) / 3000175342144.21154 (dps-30) - agreement to the record's own displayed precision (zero spacing ~0.23). (ii) Sign sample debugging (RECORD, honesty): two settings flagged ONE point - the midpoint of Gram interval 12 363 153 462 055 (t = 3 000 175 338 622.337147484..., |Z| ~ 4.5e-3) - and BOTH flags were proven to be ARTIFACTS OF THE CHECK ITSELF, not of the certificate: (a) float64 decode of the exact dyadic t (ulp ~2.4e-4 near a zero, > |Z|) rotated the computed sign; (b) at dps-15 the phase theta(t) ~ 1.2e13 is NOT representable to 1e-15 (the identity Z = Re(e^{i theta} zeta) needs the phase to ~1e-15 ABSOLUTE, i.e. dps >= ~30 at this height). The dps-35 EXACT-decode re-test gives Z = +0.004453253988, in AGREEMENT with the certified sign +1. (iii) The window's minimum certified |Z| lower bound is 4.28e-5, ~1e5 times the t^(-3/4) remainder bound - a dps-35 mpmath error (~1e-21 |zeta|) cannot touch any certified sign. (iv) FINAL 16-POINT dps-35 exact-decode sign sample: running at commit time (independent process, raw output tmp/ce2/spotcheck_out.txt; final tally appended by addendum). This layer is a CONTROL (sample), not a second certificate."
+ },
+ "machine": {
+  "module": "formal/RhAttack/CE2.lean (NEW; same composition shape as CE1 = 0291)",
+  "constants": "gA2Hi = 30001753374715100470881272 / 10^13 (certified top of g_a2, margin ~1.4e-14); gB2Lo = 300017534214421 / 10^2 = 3000175342144.21 (certified bottom of g_b2, margin ~1.5e-3); tCE2 = 3 000 175 342 144 (integer strictly below gB2Lo)",
+  "cited_inputs_Z78_pattern": [
+   "[CE1-WIN] ce1WinClause: every zeta zero with tPT2 < Im <= gA2Hi on the line (Murphy Theorem 1, region (tPT2, gA2Hi] subset (g_a1, g_a2])",
+   "[CE2-WIN] ce2WinClause: every zeta zero with gA2Hi < Im <= tCE2 SIMPLE AND ON THE LINE (our run, region (gA2Hi, tCE2] subset (g_a2, g_b2])"
   ],
-  "rhClaim": "NONE",
-  "faceStatus": "OPEN / PROBABLY TRUE"
+  "machine_theorems": "bandOfWindows (the seam split at gA2Hi, pure logic); allOnLineUpToCE2 = [Z-PT2] + [CE1-WIN] + [CE2-WIN] => census to tCE2 (THE FRONTIER MOVED AGAIN); terminalFaceCE2; faceCE1_implies_faceCE2; terminalFaceCE2_iff_faceCE1 (re-anchoring = certificate, not logical move); rh_split_at_CE2 (0288 residual re-pinned); rh_reanchored_CE2 (HEADLINE: RH q <-> terminalFaceCE2 q); rh_of_terminalFaceCE2 (final named step); terminalFaceCE2_of_thetaInf (0290 lane lands directly); faceShrinkCE2 : tCE2 - tCE1 = 4673; frontierGapAboveH0 : tCE2 - tPT2 = 9344",
+  "build": "RhAttack.CE2 green (8767 jobs); full tree green (17454 jobs)"
+ },
+ "honesty": {
+  "noRHClaim": true,
+  "trustBase": "the pipeline's own controls + its kernel-checked Lean remainder theorem + layer-1 environment repeat + layer-2 independent verifier + layer-3 independent sample spot check. The window is a RE-RUN of a third-party (Murphy, Apache-2.0) pipeline on new points - same trust base as the CE1 cited window, now PRODUCED IN-HOUSE; it is NOT a from-scratch independent certification of the Riemann-Siegel remainder (that theorem is the kernel-checked RSInt.rs_Z_C0', unchanged).",
+  "whatIsNotClaimed": "no RH claim; the extension says nothing about RH beyond the window (the source's own caveat, now at 2x the height); [CE2-WIN] is a named cited Input (Z78 pattern), not an in-tree analytic proof; spot check = control (sample), not a second certificate; the b-snap (12 363 153 477 129 vs requested ...7130) is the driver's standard good-endpoint snap - the certified claim is exactly 19 999 zeros, b - a, in (g_a2, g_b2]; the two spot-check 'mismatches' during the run are documented in verification.layer3 - both were checker artifacts (float64 t-decode; dps-15 phase representation), each resolved by the dps-35 exact-decode re-test in AGREEMENT with the certificate",
+  "faceStatus": "OPEN / PROBABLY TRUE - the SAME open object, certified 9344 units above H0 (1.6e-9 relative per window)"
+ },
+ "nextMoves": [
+  "ADDENDUM 0306: spot-check complete (window-2 scope: 13 155/13 155/0); window 4 landed (tCE4 = 3,000,175,351,489, CE4 green); face OPEN.",
+  "M5 lane is now demonstrated END-TO-END IN-HOUSE: any future window (b2 -> b3, ...) re-anchors the face by the same two-line machine composition (CE2 pattern)",
+  "package the option-B phase 0293-0298 (front-page consolidation; wall map with three names; two sufficiency wires; frontier now tCE2)",
+  "the analytic gap is UNCHANGED: (1.2) at theta > 4/7 (three names, one object - 0298); no RH claim"
+ ],
+ "rhClaim": "NONE",
+ "faceStatus": "OPEN / PROBABLY TRUE",
+ "claims": [
+  "ADDENDUM (0306, 2026-11-06): the independent mpmath spot-check (window-2 scope, tmp/ce2/spotcheck_window2.py) completed: 13 155 sampled points, 13 155 agree, 0 disagree (dps-30, independent path); control, not a second certificate. tmp/ce2/spotcheck_out.txt."
+ ]
 }

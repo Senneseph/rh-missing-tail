@@ -1,51 +1,52 @@
 {
-  "id": 304,
-  "ts": "2026-11-06T11:35:00",
-  "title": "0304: THE d-l LEVER AUDITED - the degree/truncation trade-off (PRZZ's own open question, section 9 item 4) is a KAPPA (proportion) LEVER, NOT A WALL LEVER - the 5/12 theorem itself is already AT theta = 4/7 - eps with d = 1, K = 3 (truncation 3), so the unused room (d >= 2, K > 3) improves kappa, not the theta-bound, and as a proportion lever is structurally blind to the sparse face (0285/0292 logic); the 'make d large' reading of the 1/d factor in A* << (T^eps/d)(T^{1/2}N^{7/8} + N^{7/4}) is a MISREADING - d is a DIVISOR LENGTH VARIABLE of the bilinear decomposition (h | d^infty, U = N1/(d h)), part of the full Type I/II optimization whose endpoint IS the exponent pair (7/4, 7/8); the (7/4, 7/8) endpoint is FORCED by the structure (positive power of h in the denominator needed for the h-sum; W = U^{1/4} balance); MACHINE THEOREM (LevWall7): the DOUBLE WASTE THEOREM - improving EITHER published error exponent ALONE, by ANY amount, does NOT move the wall (the unimproved term still binds at exactly 4/7) - in the simultaneous-saturation corner BOTH exponents must move; wallUnderBothImprovements: under improvements (delta on the T^{1/2}N^{7/8} side, delta2 on the N^{7/4} side) the wall sits at EXACTLY 4/7 + min(8 delta/7, 4 delta2/7); simultaneous improvements bind on the N^{7/4} side (4 delta/7 < 8 delta/7); the wall levers remain exactly the 0303 menu L1 (sharper bilinear Kloosterman) / L2 (new balance) / L3 (new decomposition) - the d-l lever adds none; LEAN LevWall7 green (8769) + tree green (17454); NO RH CLAIM, wall UNCHANGED",
-  "kind": "record-level audit + machine kernel (option B, unit 16; 0280 pattern; the 0303 nextMove 'the genuine lever = PRZZ's degree-d/truncation-l open question (named next lever 0304)')",
-  "primarySource": {
-    "paper": "Pratt, Robles, Zaharescu, Zeindler, arXiv:1802.10521, Res. Math. Sci. 7 (2020) - full-text extraction 2026-11-06",
-    "bindingEstimate": "end of the Theorem 4.1 proof: 'The variable U is of size N1/(d h), thus when U appears there is a hidden h. The significance of the power of h being less than the power of U is that we need some positive power of h in the denominator at the end of the day so we can sum over h and not have it blow up. Since sum_{h|d^infty} G(h)/h^eps << (dT)^eps, we find that ... A*_{M,N1,N2} << (T^eps/d)(T^{1/2}N^{7/8} + N^{7/4}). Thus, taking N = T^{4/7-eps} is permissible.'",
-    "dIdentity": "d is a DIVISOR (h | d^infty) in the Type I/II bilinear decomposition with U = N1/(d h) - the 1/d factor is INTERNAL to the optimization whose endpoint is (7/4, 7/8); it is not the degree of the coefficient family and not a free parameter",
-    "coefficientFamily": "section 2/3.4/7: Lambda_k(n) := (mu * log^k)(n) (Lambda_1 = the usual von Mangoldt); the degree-D family (mu * Lambda_1^{*k1} * ... * Lambda_D^{*kD})(n), total truncation l = k1 + ... + kD contour variables; the mu^2-restricted variant agrees at l = 1 and is relaxed to the unrestricted form between Theorem 4.1's second and third error cases",
-    "mainTheoremSetup": "section 8: the 5/12 proof uses d = 1 (linear case only), truncation K = 3 (mollifier has polynomials P_1, P_2, P_3), theta = 4/7 - eps, R = 1.3036, degree-5 Q(x) = 0.490464 + 0.636851(1-2x) - 0.159327(1-2x)^3 + 0.032011(1-2x)^5, achieving kappa >= 0.417293962 > 5/12",
-    "openQuestions": "section 9 verbatim: item 3 'how one can increase the length of the Dirichlet polynomials without specializing the coefficients a_n too much'; item 4 'It would also be interesting to set d = 1 and analyze how a large truncation of l could yield terms from a higher degree d >= 2. What would be a good balance between the degree d and the truncation l?'"
-  },
-  "audit": {
-    "leverIdentity": "the d-l trade-off (section 9 item 4) acts on the MAIN TERM (the richness of the kappa optimization): for fixed d = 1, large l_1 expands (mu * Lambda_1^{*l_1})(n) into products of logs of distinct primes dividing n - the SAME term shapes that arise at degree d >= 2 - so large truncation mimics higher degree; this changes the main-term structure (more degrees of freedom for the polynomial Q -> better kappa), while the ERROR bound A* is UNIFORM in the family (the structure enters only via the separation reduction to bilinear Kloosterman sums)",
-    "misreadingSealed": "the 'make d large' reading of the 1/d factor is a MISREADING: d is a divisor length (h | d^infty) inside the bilinear decomposition; the (7/4, 7/8) endpoint already includes it, the h-U power constraint (h-powers strictly below U-powers, needed for the h-sum convergence), and the W = U^{1/4} balance - the proof's paragraph explains why the current extraction is FORCED by the structure",
-    "wallLeverVerdict": "as a proportion lever (kappa) the d-l trade-off is structurally blind to the sparse face (0285/0292 logic: proportion results cannot exclude a sparse off-line zero set); it adds NO new wall lever. The wall levers remain exactly the 0303 menu: L1 sharper bilinear Kloosterman estimate (changes 7/4 or 7/8), L2 new balance beyond the forced h-U constraint, L3 different decomposition/coefficient structure (section 9 item 3)"
-  },
-  "machine": {
-    "module": "/home/jsmille/Projects/rh-missing-tail/formal/RhAttack/LevWall7.lean",
-    "namespace": "LevWall7",
-    "defs": [
-      "improvedAdmissible (δ δ2 θ) := (1/2 + (7/8)θ - δ < 1) ∧ ((7/4)θ - δ2 < 1) (the o(T) condition under hypothetical improvements δ of the T^{1/2}N^{7/8} exponent and δ2 of the N^{7/4} exponent)"
-    ],
-    "theorems": [
-      "improvedAdmissible_iff (NO sign hypotheses - valid for all δ, δ2, θ): improvedAdmissible δ δ2 θ ↔ (θ < 4/7 + 8δ/7) ∧ (θ < 4/7 + 4δ2/7) - each error term contributes exactly ONE upper bound",
-      "**wallUnmovedByFirstExponent** (DOUBLE WASTE, first side): improving ONLY the T^{1/2}N^{7/8} exponent by any δ ≥ 0 does NOT move the wall - the unimproved N^{7/4} term binds at exactly 4/7 (admissible set stays [0, 4/7))",
-      "**wallUnmovedBySecondExponent** (DOUBLE WASTE, second side): improving ONLY the N^{7/4} exponent by any δ2 ≥ 0 does NOT move the wall either - the unimproved T^{1/2}N^{7/8} term binds at exactly 4/7. TOGETHER: in the simultaneous-saturation corner, BOTH exponents must move for the wall to move - a single side is worth exactly NOTHING",
-      "**wallUnderBothImprovements** (min-form boundary, no sign hypotheses): under independent improvements (δ, δ2) the wall sits at EXACTLY 4/7 + min(8δ/7, 4δ2/7) - the movement governed by the smaller per-side contribution",
-      "simultaneousShiftBindsSecond (0 < δ): equal improvements put the wall at 4/7 + 4δ/7 and the N^{7/4} term BINDS (4δ/7 < 8δ/7 - the T^{1/2}N^{7/8} side has strict slack) - the N^{7/4} side is the binding side of any equal movement",
-      "publishedStateIsCorner: at δ = δ2 = 0 the improved regime is exactly the published Case-3 regime (LevWall6.admissibleDegreeD) - the 4/7 boundary is a CORNER with two independent saturation conditions",
-      "wallShiftDemo / wallShiftDemoOrder: a hypothetical second-exponent improvement of 1/7 (7/4 -> 6/7) would move the wall 4/7 = 28/49 -> 32/49 (norm_num)"
-    ],
-    "quantitativeReading": "ANY future move of the wall must carry BOTH exponents with it; when both move, the N^{7/4} side is the binding side of the movement (coefficient 4/7 per unit vs 8/7) - sharpening the bilinear Kloosterman N^{7/4} contribution (L1) is the lever with the best wall-movement per unit of improvement on the binding side",
-    "build": "RhAttack.LevWall7 green (8769 jobs); full tree green (17454 jobs)"
-  },
-  "leanPitfalls": [
-    "the draft theorem 'improving only the second exponent moves the wall to 4/7 + 4δ2/7' was MATHEMATICALLY WRONG before build - the unimproved first term still binds at 4/7; the correct statement is the DOUBLE WASTE THEOREM (single-side improvements worth nothing). Caught by linarith's refusal to close the wrong goal - a good failure",
-    "rw [← min_eq_left h] / rw [← min_eq_right h] rewrite ALL occurrences of the lemma's RHS pattern, including occurrences INSIDE an existing min on the other side of the equation, producing non-rfL nested mins - use the FORWARD direction (rw [min_eq_left h]) when the goal's target side is the plain sum",
-    "min_add' and lt_min-iff do not exist under those names; lt_min is the one-way implication (a < b -> a < c -> a < min b c); the min-distribution over addition is not needed - case-split with by_cases on 8δ/7 ≤ 4δ2/7 + min_eq_left/min_eq_right",
-    "calc steps with a raw-form inequality hypothesis (1/2 + 7θ/8 - δ < 1) cannot feed a calc line typed θ < 4/7 + 8δ/7 - convert with an intermediate 'have ... := by linarith' first"
+ "id": 304,
+ "ts": "2026-11-06T11:35:00",
+ "title": "0304: THE d-l LEVER AUDITED - the degree/truncation trade-off (PRZZ's own open question, section 9 item 4) is a KAPPA (proportion) LEVER, NOT A WALL LEVER - the 5/12 theorem itself is already AT theta = 4/7 - eps with d = 1, K = 3 (truncation 3), so the unused room (d >= 2, K > 3) improves kappa, not the theta-bound, and as a proportion lever is structurally blind to the sparse face (0285/0292 logic); the 'make d large' reading of the 1/d factor in A* << (T^eps/d)(T^{1/2}N^{7/8} + N^{7/4}) is a MISREADING - d is a DIVISOR LENGTH VARIABLE of the bilinear decomposition (h | d^infty, U = N1/(d h)), part of the full Type I/II optimization whose endpoint IS the exponent pair (7/4, 7/8); the (7/4, 7/8) endpoint is FORCED by the structure (positive power of h in the denominator needed for the h-sum; W = U^{1/4} balance); MACHINE THEOREM (LevWall7): the DOUBLE WASTE THEOREM - improving EITHER published error exponent ALONE, by ANY amount, does NOT move the wall (the unimproved term still binds at exactly 4/7) - in the simultaneous-saturation corner BOTH exponents must move; wallUnderBothImprovements: under improvements (delta on the T^{1/2}N^{7/8} side, delta2 on the N^{7/4} side) the wall sits at EXACTLY 4/7 + min(8 delta/7, 4 delta2/7); simultaneous improvements bind on the N^{7/4} side (4 delta/7 < 8 delta/7); the wall levers remain exactly the 0303 menu L1 (sharper bilinear Kloosterman) / L2 (new balance) / L3 (new decomposition) - the d-l lever adds none; LEAN LevWall7 green (8769) + tree green (17454); NO RH CLAIM, wall UNCHANGED",
+ "kind": "record-level audit + machine kernel (option B, unit 16; 0280 pattern; the 0303 nextMove 'the genuine lever = PRZZ's degree-d/truncation-l open question (named next lever 0304)')",
+ "primarySource": {
+  "paper": "Pratt, Robles, Zaharescu, Zeindler, arXiv:1802.10521, Res. Math. Sci. 7 (2020) - full-text extraction 2026-11-06",
+  "bindingEstimate": "end of the Theorem 4.1 proof: 'The variable U is of size N1/(d h), thus when U appears there is a hidden h. The significance of the power of h being less than the power of U is that we need some positive power of h in the denominator at the end of the day so we can sum over h and not have it blow up. Since sum_{h|d^infty} G(h)/h^eps << (dT)^eps, we find that ... A*_{M,N1,N2} << (T^eps/d)(T^{1/2}N^{7/8} + N^{7/4}). Thus, taking N = T^{4/7-eps} is permissible.'",
+  "dIdentity": "d is a DIVISOR (h | d^infty) in the Type I/II bilinear decomposition with U = N1/(d h) - the 1/d factor is INTERNAL to the optimization whose endpoint is (7/4, 7/8); it is not the degree of the coefficient family and not a free parameter",
+  "coefficientFamily": "section 2/3.4/7: Lambda_k(n) := (mu * log^k)(n) (Lambda_1 = the usual von Mangoldt); the degree-D family (mu * Lambda_1^{*k1} * ... * Lambda_D^{*kD})(n), total truncation l = k1 + ... + kD contour variables; the mu^2-restricted variant agrees at l = 1 and is relaxed to the unrestricted form between Theorem 4.1's second and third error cases",
+  "mainTheoremSetup": "section 8: the 5/12 proof uses d = 1 (linear case only), truncation K = 3 (mollifier has polynomials P_1, P_2, P_3), theta = 4/7 - eps, R = 1.3036, degree-5 Q(x) = 0.490464 + 0.636851(1-2x) - 0.159327(1-2x)^3 + 0.032011(1-2x)^5, achieving kappa >= 0.417293962 > 5/12",
+  "openQuestions": "section 9 verbatim: item 3 'how one can increase the length of the Dirichlet polynomials without specializing the coefficients a_n too much'; item 4 'It would also be interesting to set d = 1 and analyze how a large truncation of l could yield terms from a higher degree d >= 2. What would be a good balance between the degree d and the truncation l?'"
+ },
+ "audit": {
+  "leverIdentity": "the d-l trade-off (section 9 item 4) acts on the MAIN TERM (the richness of the kappa optimization): for fixed d = 1, large l_1 expands (mu * Lambda_1^{*l_1})(n) into products of logs of distinct primes dividing n - the SAME term shapes that arise at degree d >= 2 - so large truncation mimics higher degree; this changes the main-term structure (more degrees of freedom for the polynomial Q -> better kappa), while the ERROR bound A* is UNIFORM in the family (the structure enters only via the separation reduction to bilinear Kloosterman sums)",
+  "misreadingSealed": "the 'make d large' reading of the 1/d factor is a MISREADING: d is a divisor length (h | d^infty) inside the bilinear decomposition; the (7/4, 7/8) endpoint already includes it, the h-U power constraint (h-powers strictly below U-powers, needed for the h-sum convergence), and the W = U^{1/4} balance - the proof's paragraph explains why the current extraction is FORCED by the structure",
+  "wallLeverVerdict": "as a proportion lever (kappa) the d-l trade-off is structurally blind to the sparse face (0285/0292 logic: proportion results cannot exclude a sparse off-line zero set); it adds NO new wall lever. The wall levers remain exactly the 0303 menu: L1 sharper bilinear Kloosterman estimate (changes 7/4 or 7/8), L2 new balance beyond the forced h-U constraint, L3 different decomposition/coefficient structure (section 9 item 3)"
+ },
+ "machine": {
+  "module": "/home/jsmille/Projects/rh-missing-tail/formal/RhAttack/LevWall7.lean",
+  "namespace": "LevWall7",
+  "defs": [
+   "improvedAdmissible (\u03b4 \u03b42 \u03b8) := (1/2 + (7/8)\u03b8 - \u03b4 < 1) \u2227 ((7/4)\u03b8 - \u03b42 < 1) (the o(T) condition under hypothetical improvements \u03b4 of the T^{1/2}N^{7/8} exponent and \u03b42 of the N^{7/4} exponent)"
   ],
-  "nextMoves": [
-    "the wall levers (L1/L2/L3) are all beyond the published record (0300 sweep) - the option-B analytic menu is EXHAUSTED at the published frontier: the program state = the map is complete (0286-0304), the face OPEN / PROBABLY TRUE, the wall UNMOVED but fully characterized",
-    "M5 window 4 (a4 = 12363153497128) if compute allows - the frontier extension lane remains open and in-house",
-    "window 2 spot-check final tally (running > ~4h, control only) - file as 0297 addendum when it lands",
-    "no RH claim"
+  "theorems": [
+   "improvedAdmissible_iff (NO sign hypotheses - valid for all \u03b4, \u03b42, \u03b8): improvedAdmissible \u03b4 \u03b42 \u03b8 \u2194 (\u03b8 < 4/7 + 8\u03b4/7) \u2227 (\u03b8 < 4/7 + 4\u03b42/7) - each error term contributes exactly ONE upper bound",
+   "**wallUnmovedByFirstExponent** (DOUBLE WASTE, first side): improving ONLY the T^{1/2}N^{7/8} exponent by any \u03b4 \u2265 0 does NOT move the wall - the unimproved N^{7/4} term binds at exactly 4/7 (admissible set stays [0, 4/7))",
+   "**wallUnmovedBySecondExponent** (DOUBLE WASTE, second side): improving ONLY the N^{7/4} exponent by any \u03b42 \u2265 0 does NOT move the wall either - the unimproved T^{1/2}N^{7/8} term binds at exactly 4/7. TOGETHER: in the simultaneous-saturation corner, BOTH exponents must move for the wall to move - a single side is worth exactly NOTHING",
+   "**wallUnderBothImprovements** (min-form boundary, no sign hypotheses): under independent improvements (\u03b4, \u03b42) the wall sits at EXACTLY 4/7 + min(8\u03b4/7, 4\u03b42/7) - the movement governed by the smaller per-side contribution",
+   "simultaneousShiftBindsSecond (0 < \u03b4): equal improvements put the wall at 4/7 + 4\u03b4/7 and the N^{7/4} term BINDS (4\u03b4/7 < 8\u03b4/7 - the T^{1/2}N^{7/8} side has strict slack) - the N^{7/4} side is the binding side of any equal movement",
+   "publishedStateIsCorner: at \u03b4 = \u03b42 = 0 the improved regime is exactly the published Case-3 regime (LevWall6.admissibleDegreeD) - the 4/7 boundary is a CORNER with two independent saturation conditions",
+   "wallShiftDemo / wallShiftDemoOrder: a hypothetical second-exponent improvement of 1/7 (7/4 -> 6/7) would move the wall 4/7 = 28/49 -> 32/49 (norm_num)"
   ],
-  "rhClaim": "NONE",
-  "faceStatus": "OPEN / PROBABLY TRUE (wall unchanged and now quantitatively characterized: double-waste + min-form boundary; frontier tCE3; map 0286-0304 complete)"
+  "quantitativeReading": "ANY future move of the wall must carry BOTH exponents with it; when both move, the N^{7/4} side is the binding side of the movement (coefficient 4/7 per unit vs 8/7) - sharpening the bilinear Kloosterman N^{7/4} contribution (L1) is the lever with the best wall-movement per unit of improvement on the binding side",
+  "build": "RhAttack.LevWall7 green (8769 jobs); full tree green (17454 jobs)"
+ },
+ "leanPitfalls": [
+  "the draft theorem 'improving only the second exponent moves the wall to 4/7 + 4\u03b42/7' was MATHEMATICALLY WRONG before build - the unimproved first term still binds at 4/7; the correct statement is the DOUBLE WASTE THEOREM (single-side improvements worth nothing). Caught by linarith's refusal to close the wrong goal - a good failure",
+  "rw [\u2190 min_eq_left h] / rw [\u2190 min_eq_right h] rewrite ALL occurrences of the lemma's RHS pattern, including occurrences INSIDE an existing min on the other side of the equation, producing non-rfL nested mins - use the FORWARD direction (rw [min_eq_left h]) when the goal's target side is the plain sum",
+  "min_add' and lt_min-iff do not exist under those names; lt_min is the one-way implication (a < b -> a < c -> a < min b c); the min-distribution over addition is not needed - case-split with by_cases on 8\u03b4/7 \u2264 4\u03b42/7 + min_eq_left/min_eq_right",
+  "calc steps with a raw-form inequality hypothesis (1/2 + 7\u03b8/8 - \u03b4 < 1) cannot feed a calc line typed \u03b8 < 4/7 + 8\u03b4/7 - convert with an intermediate 'have ... := by linarith' first"
+ ],
+ "nextMoves": [
+  "DONE 0306: M5 run 4 landed (tCE4 = 3,000,175,351,489; CE4 green; face OPEN 18 689 above H0; see 0306.json)",
+  "the wall levers (L1/L2/L3) are all beyond the published record (0300 sweep) - the option-B analytic menu is EXHAUSTED at the published frontier: the program state = the map is complete (0286-0304), the face OPEN / PROBABLY TRUE, the wall UNMOVED but fully characterized",
+  "M5 window 4 (a4 = 12363153497128) if compute allows - the frontier extension lane remains open and in-house",
+  "window 2 spot-check final tally (running > ~4h, control only) - file as 0297 addendum when it lands",
+  "no RH claim"
+ ],
+ "rhClaim": "NONE",
+ "faceStatus": "OPEN / PROBABLY TRUE (wall unchanged and now quantitatively characterized: double-waste + min-form boundary; frontier tCE3; map 0286-0304 complete)"
 }

@@ -2865,3 +2865,145 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
     option-B  analytic  menu  is  EXHAUSTED  at
     the  published  frontier  (map  0286-0304
     complete).  Tree  green  17454.
+
+
+## E35.  L1  STATE  OF  THE  ART  +  THE  KINTALI  FINDING  -  THE
+        WALL  LANDSCAPE  REFINED  (0305)  (2026-11-06)
+
+    The  0280/0300-pattern  audit  of  the  0303  best
+    lever  (L1,  bilinear  Kloosterman)  found  a
+    MAJOR  new  item  the  0300  sweep  missed:
+
+    **KINTALI**  (preprint  2026-08-08,  45  pp.,
+    shivakintali.github.io/papers/RH421.pdf  -  NOT
+    on  arXiv  at  sweep  time):
+        Theorem  1.1:  κ  >  421/1000
+            (unconditional,  computer-assisted
+            Levinson-Conrey;  lineage  record  above
+            PRZZ  0.417293962)
+        Theorem  2.2  (NEW  asymptotic):
+            selected  twisted  second  moment,  fixed
+            power  saving,  for  the  RESTRICTED
+            coefficient  (marked-subset  selector  W
+            on  the  signed  (−1)³(μ  *  Λ^{*3})
+            degree-3  Feng  piece)  at  limiting
+            length  **29/50  =  0.58  >  4/7**  -
+            "the  only  point  at  which  the  length
+            exceeds  4/7"
+
+    THE  MECHANISM  =  the  0303  menu's  L2/L3
+    (structure,  not  a  new  Kloosterman  bound):
+        the  PRZZ  Thm  4.1  off-diagonal  argument
+        with  the  Heath-Brown  partition  REPLACED
+        by  the  marked-tuple  structure;  the  RAW
+        D-I  1984  Acta  Arith  Lemma  1  applied
+        unchanged;  the  selector's  forced
+        factorization  (q  −  21/29  ≤  z  ≤  min(q/2,
+        42/29  −  q))  makes  ALL  SEVEN  λ_j  ≤  1
+        simultaneously  at  the  longer  length.
+
+    THE  LANDSCAPE  REFINEMENT:
+        the  4/7  boundary  is  a  PARTITION-
+        STRUCTURE  BARRIER  of  the  full  (μ  *
+        Λ^{*k})  argument  -  NOT  an  absolute
+        bilinear-Kloosterman  barrier;  the  D-I
+        bound  is  more  flexible  than  the  full
+        argument  exploits.
+        THE  (1.2)  FULL-FAMILY  WALL  IS
+        UNMOVED  (explicit  T^{4/7  −  eps}
+        short-short  restriction  in  the  paper;
+        no  (1.2)  extension  claimed)  -  and  the
+        wall  still  BINDS  INSIDE  the  0.421
+        argument  itself  (the  non-selected  pieces
+        sit  exactly  AT  4/7:
+        29/50  ·  200/203  =  4/7,  machine).
+
+    L1  STATE  OF  THE  ART  (the  audit  proper):
+        D-I  1982  Inventiones  (9.11)  carries  a
+        2019  correction  (arXiv:1903.01371):
+        D²NR/S  ->  D²NR  (WEAKENING,  harmless  -
+        S  =  1  in  most  apps;  the  (1.2)  wall
+        stands  on  the  corrected  bound,  PRZZ
+        2020  being  post-correction);
+        the  2017-2023  active  line  (KMS  Annals
+        2017/2020,  FKM,  BFKMM,  Shparlinski,
+        Bag-Shparlinski  JLMS  2023,  Chen
+        2211.14702)  =  MIXED  MOMENTS  /  modulus
+        p  (p^{-1/68}  ->  p^{-1/64}),  NOT  the
+        Levinson  t-variable  second  moment.
+
+    MACHINE  (RhAttack.LevWall8,  new):
+        fullWall  =  4/7  <  selectedWall  =  29/50
+            (gap  3/350,  norm_num)
+        refinedLadderOrdering:
+            1/2  <  17/33  <  9/17  <  6/11  <  4/7
+            <  29/50  <  1
+        fullWallIsLevWallBoundary  (wall  UNMOVED)
+        wallSitsAboveFullWallRegister
+        selectedShortPieceCapIsWall
+            (29/50  ·  200/203  =  4/7)
+    Green:  RhAttack.LevWall8  (8769),  full  tree
+    (17454).
+
+    NAMED  NEXT  DIRECTION  (0306  candidate):
+        extend  the  marked-tuple  /  selector
+        structure  to  the  FULL  family  (or  to
+        the  (1.2)  integral)  -  the  first
+        published  positive  instance  of  lever
+        L2  makes  this  the  concrete  research
+        question.
+
+    ALSO:  the  window-2  independent  mpmath
+    spot-check  LANDED  -  13,155 / 13,155  agree
+    at  dps-30  (0297  control  addendum).
+
+    NO  RH  CLAIM  -  wall  UNMOVED  ((1.2)  full
+    family);  face  OPEN  /  PROBABLY  TRUE;  the
+    0.421  record  is  face-blind  (0285/0292).
+
+  # E36 · 2026-11-06 · 0306 — M5 RUN 4 LANDED (OUR WINDOW 4) +
+  # CE4 RE-ANCHOR + 0297 SPOT-CHECK SCOPE CONFIRMED
+
+    The M5 lane paid again, end-to-end in-house (run 4 of the
+    Murphy pipeline on our chosen windows):
+
+    * WINDOW 4 (a = 12 363 153 497 128 = CE3's b, seamless;
+      b = 12 363 153 517 128, NO snap-down; M = 60, C_R = 1,
+      28 workers, 34 275 evals, 2723.6 s): the 20 000 zeros
+      with g_a4 < Im s <= g_b4 are ALL SIMPLE and on the line
+      (verifier CERTIFIED: true; turing_ok; K = 12; runs
+      49/46; 0 cross-check failures; 0 undetermined signs).
+    * ONE first-quota Rosser block (g-indices ..498 083 -
+      ..498 085) rescued by the pipeline's documented
+      3-block union refinement (union ..498 082 - ..498 086
+      at 8 subdivisions: need 4 / found 4) - a zero
+      displaced into an adjacent Gram interval; sound
+      because only the window TOTAL + the two end runs
+      enter the Turing step (verifier recomputes both).
+      Recorded (rosser_failures_inside = 1), not
+      suppressed.
+    * Seam: g_a4 ball bit-identical to window-3's g_b3
+      ball (exact dyadic decode) - the chain
+      1 -> 2 -> 3 -> 4 is seamless by construction.
+    * FRONTIER (machine, NEW formal module
+      formal/RhAttack/CE4.lean, 24 decls):
+      **tCE4 = 3 000 175 351 489** (tCE4 - tCE3 = 4 673;
+      tCE4 - tPT2 = 18 689; 79 998 certified zeros over
+      (g_a1, g_b4]); rh_reanchored_CE4 /
+      rh_of_terminalFaceCE4 / terminalFaceCE4_of_thetaInf
+      mirror CE1-CE3; iff vs terminalFaceCE3 under the
+      band. RhAttack.CE4 green (8769); full tree green
+      (17454).
+    * 0297 CONTROL ADDENDUM (scope-confirmed): the
+      independent mpmath spot-check is WINDOW-2 SCOPE
+      (spotcheck_window2.py): 13 155 points / 13 155 agree
+      / 0 disagree at dps-30 (control, not a second
+      certificate).
+    * NAMED NEXT (0307 candidate): primary reading of the
+      Kintali preprint arXiv:2608.05281 Theorem 2.2 -
+      exactly what the marked-tuple restriction is and
+      whether it is removable for the full family / the
+      (1.2) integral (the 0305 direction, renumbered).
+
+    No RH claim - face OPEN / PROBABLY TRUE; wall UNMOVED
+    at 4/7 for the (1.2) full family.

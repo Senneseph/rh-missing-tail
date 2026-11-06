@@ -1,0 +1,73 @@
+{
+ "id": 305,
+ "ts": "2026-11-06T12:30:00",
+ "title": "0305: L1 STATE OF THE ART AUDITED + KINTALI FINDING - the (1.2) full-family wall {theta | 4/7 < theta} is UNMOVED, but the wall's LANDSCAPE is REFINED: a new 2026-08-08 preprint (Shiva Kintali, 'More than 42.1% of the zeros of the Riemann zeta-function are on the critical line', personal-site, not on arXiv as of this sweep) proves a NEW selected-twisted-second-moment asymptotic (Theorem 2.2) for a RESTRICTED coefficient (marked-subset selector on the signed (-1)^3 (mu * Lambda^*3) degree-3 Feng piece) at limiting length 29/50 = 0.58 > 4/7 - PAST the full wall - with the SAME Deshouillers-Iwaniec 1984 Acta Arith input (no new Kloosterman bound; the marked-tuple structure REPLACES the Heath-Brown partition and forces all seven D-I exponents lambda_j <= 1 simultaneously via q - 21/29 <= z <= min(q/2, 42/29 - q)); this is the FIRST PUBLISHED POSITIVE INSTANCE of the 0303 lever menu in the L2/L3 sense (a decomposition-structure change), correcting the 0304 'menu exhausted' phrasing (the WALL itself remains unmoved - that stands); the short-short pieces INSIDE the 0.421 argument are still capped AT 4/7 by PRZZ Theorem 4.1 (verbatim dependence note); the classical (1.2) is nowhere extended; D-I 1982 Inventiones Lemma carries a 2019 correction (arXiv:1903.01371: final term D^2NR/S -> D^2NR, a weakening, harmless - the 4/7 statement stands on the corrected bound); the 2017-2023 bilinear-Kloosterman line (KMS Annals 2017/2020, FKM 2014, BFKMM 2017, Shparlinski 2019, Bag-Shparlinski arXiv:2111.07311 JLMS 2023, Chen arXiv:2211.14702) targets MIXED MOMENTS / the modulus variable p, NOT the Levinson t-variable second moment; MACHINE (LevWall8 new): fullWall = 4/7 < selectedWall = 29/50 (gap 3/350), refined ladder 1/2 < 17/33 < 9/17 < 6/11 < 4/7 < 29/50 < 1, wall UNMOVED (fullWallIsLevWallBoundary + wallSitsAboveFullWallRegister), selectedShortPieceCapIsWall (29/50 * 200/203 = 4/7 - the non-selected pieces sit exactly AT the wall); Kintali kappa > 0.421 computer-assisted record (Levinson-Conrey-Feng-PRZZ lineage, above PRZZ 0.417293962) = proportion result, face-blind (0285/0292 logic); ALSO LANDED: window-2 independent mpmath spot-check COMPLETE - 13,155 certified-sign sample points at dps-30 with exact dyadic decoding, 13,155 agree / 0 disagree (0297 control addendum); LEAN LevWall8 green (8769) + tree green (17454); NO RH CLAIM, wall UNCHANGED",
+ "kind": "record-level literature audit + machine kernel (option B, unit 17; 0280/0300 pattern; the 0304 nextMove 'the wall levers (L1/L2/L3) are all beyond the published record' - CORRECTED by this unit at the level of L2/L3 in the restricted setting)",
+ "primarySources": {
+  "kintali": {
+   "citation": "Shiva Kintali, 'More than 42.1% of the Zeros of the Riemann Zeta Function Are on the Critical Line', preprint 2026-08-08, 45 pp., https://shivakintali.github.io/papers/RH421.pdf (personal site; NOT found on arXiv in the 0305 sweep)",
+   "theorem1_1": "unconditionally kappa > 421/1000 (more than 42.1% of the non-trivial zeros on the critical line) - a computer-assisted Levinson-Conrey argument in the lineage Levinson 1/3 (1974) -> Conrey 2/5 (J. Reine Angew. Math. 399, 1989) -> Feng (J. Number Theory 132, 2012) -> PRZZ kappa >= 0.417293962 (2020); above PRZZ in this lineage",
+   "theorem2_2": "(NEW analytic input) 'Selected twisted second moment': fixed delta > 0, rho = 29/50 - delta, Y = T^rho, a_sel(n) = finite linear combination of smooth product-box pieces of (-1)^3 P(1 - log n/log Y)(log Y)^3 sum_{m q1 q2 q3 = n} mu(m) Lambda(q1) Lambda(q2) Lambda(q3) W(t0, t1, t2, t3) (the marked-subset selector W on the signed degree-3 (mu * Lambda^*3) Feng component, supported n <= Y) - the twisted second moment = main term + O(T^{1-eps0}) (fixed power saving); the paper: 'In particular rho = 29/50 is admissible in Theorem 2.1' and 'We give all exponent checks because this is the only point at which the length exceeds 4/7'",
+   "mechanism": "the proof follows PRZZ Theorem 4.1's off-diagonal argument REPLACING its Heath-Brown partition by a partition already present in the marked tuple (the fixed admissible subset-sum witness); the RAW Deshouillers-Iwaniec Lemma 1 (Acta Arith. 43 (1984), 'Power mean-values for Dirichlet's polynomials and the Riemann zeta-function, II') is applied term by term to the two supported factors - NO new Kloosterman bound; the selector's forced factorization constraint q - 21/29 <= z <= min(q/2, 42/29 - q) makes ALL SEVEN D-I exponents lambda_j <= 1 simultaneously at the longer length",
+   "shortShortCap": "the non-selected pieces (degrees k in {0, 2, 4, 5}, T^{29/50 . 200/203} = T^{4/7} limiting) use PRZZ Theorem 4.1 AT T^{4/7 - eps} - verbatim: 'the one input of the present paper whose range of validity we do not reprove: the published short-short asymptotic must cover mu * Lambda^*k for 0 <= k <= 5 at length T^{4/7 - eps}, which is the setting of [6] as treated in [8]' - the full-family 4/7 wall IS STILL DOING WORK inside the 0.421 argument",
+   "no12Extension": "the classical I_{T^theta}(0,T)/T = 1 + 1/theta + o(1) is nowhere claimed or implied for theta > 4/7"
+  },
+  "di1982Correction": {
+   "citation": "arXiv:1903.01371 'Some corrections to an old paper' (the Bombieri-Friedlander-Iwaniec line), correcting Deshouillers-Iwaniec, 'Kloosterman sums and Fourier coefficients of cusp forms', Invent. Math. 70 (1982), bound (9.11) as carried into BFI Lemma 1 (p. 210)",
+   "content": "the final term of I^2(C,D,N,R,S) was D^2 N R / S in print and is corrected to D^2 N R (a WEAKENING - the larger term); in most applications S = 1 (forms coincide); the only affected location (BFI section 10, Lemma 8 proof) is a proof-only change (Q^2 H N^3 -> Q^2 H N^5) dominated by earlier terms; 'already sufficient for our applications'",
+   "consequence": "the (1.2) full-family wall stands on the CORRECTED bound (PRZZ 2020 is post-correction; no retraction of the 4/7 statement); Kintali's proof uses the 1984 Acta Arith Lemma 1 instead, so the correction does not touch its input either way"
+  },
+  "bilinearLine2017to2023": {
+   "items": [
+    "Kowalski-Michel-Sawin, 'Bilinear forms with Kloosterman sums and applications', Annals 186 (2017) + 2020 follow-up",
+    "FKM 2014; BFKMM 2017 (Blomer-Fouvry-Kowalski-Michel-Milicevic); Shparlinski 2019",
+    "Bag-Shparlinski, 'Bounds on bilinear sums of Kloosterman sums', arXiv:2111.07311, J. Lond. Math. Soc. (2023): Theorem 3.1 controls r-fold hyper-Kloosterman bilinear sums over F_p with prime MODULUS p - application: improves the p^{-1/68+o(1)} -> p^{-1/64+o(1)} error term for MIXED MOMENTS of Hecke L-functions",
+    "Chen, 'Bilinear forms with trace functions over arbitrary sets', arXiv:2211.14702 (2022-2023)"
+   ],
+   "verdict": "active and improving, but aimed at MIXED MOMENTS / the modulus variable p - NOT the t-variable Levinson second moment with a long Dirichlet mollifier; none changes the (7/4, 7/8) exponents or the 4/7 endpoint of PRZZ Case 3"
+  }
+ },
+ "audit": {
+  "wallStatus": "THE (1.2) FULL-FAMILY WALL {theta | 4/7 < theta} IS UNMOVED - not by Kintali (explicit 4/7 short-short restriction; the restricted result is a DIFFERENT coefficient class, and no (1.2) extension is claimed), not by the 2017-2023 bilinear line (different objects), not by anything in the 0300/0305 sweeps; the sufficiency doors (0296/0298: thetaBounded / (1.2) asymptotic) open only up to 4/7 as before; the terminal face is UNCHANGED",
+  "landscapeRefinement": "the 4/7 boundary is a PARTITION-STRUCTURE BARRIER of the full (mu * Lambda^*k) family argument (the Heath-Brown partition together with its balance), NOT an absolute bilinear-Kloosterman barrier: a structural change (marked tuple replacing the partition) demonstrably moves the restricted off-diagonal PAST it, to 29/50, with the SAME D-I 1984 input (all seven lambda_j <= 1). The D-I bound is more flexible than the full-family argument currently exploits.",
+  "leverAccounting": "LEVER L2 (the 0303 menu) HAS ITS FIRST PUBLISHED POSITIVE INSTANCE (restricted coefficient setting; L2/L3 hybrid: a decomposition-structure change, not a new Kloosterman bound): this CORRECTS the 0304 phrasing 'the option-B analytic menu is EXHAUSTED at the published frontier' - the WALL itself remains unmoved (that part of 0304 stands), but L2 is empirically movable in the literature, making 'extend the marked-tuple/selector structure to the full family, or to the (1.2) integral' the NAMED NEXT RESEARCH DIRECTION (a scoped future attempt, 0306 candidate). The 0304 double waste theorem + min-form boundary remain valid for the PUBLISHED full-family exponents (7/4, 7/8) - Kintali does not improve those exponents (he sidesteps the partition structure on a restricted coefficient).",
+  "faceRelevance": "none: the 0.421 result is a proportion record (kappa in the Levinson-Conrey-Feng-PRZZ lineage, above PRZZ's 0.417293962, computer-assisted finite part) - proportion results are structurally blind to the sparse off-line face (0285/0292 logic); note the separate windowed/simple-or-on-line lineage (5/12, 0.6603, Alp\u00f6ge-Furman 2/3 with 0.6725/0.8362 windows, Cobeli-Zaharescu 8/9) is a different statistic",
+  "m5Note": "independent mpmath spot-check of window 2 has LANDED in the meantime (control layer, not a certificate): 13,155 certified-sign sample points re-evaluated at dps-30 with exact dyadic decoding - 13,155 agree, 0 disagree (recorded as 0297 addendum in this unit's commit)"
+ },
+ "machine": {
+  "module": "/home/jsmille/Projects/rh-missing-tail/formal/RhAttack/LevWall8.lean",
+  "namespace": "LevWall8",
+  "defs": [
+   "fullWall : Q := 4/7 (NAMED CITED INPUT, Z78 pattern: the full-family (1.2) wall boundary, PRZZ Thm 4.1 / LevWall6 saturation)",
+   "selectedWall : Q := 29/50 (NAMED CITED INPUT, Z78 pattern: the Kintali 2026-08-08 restricted selected record, Theorem 2.2 + Theorem 2.1 admissibility of 29/50)",
+   "kintaliSelectedAdmissible (rho) := rho <= 29/50 (cited regime shape)",
+   "kintaliShortShortAdmissible (rho) := rho <= 4/7 (cited regime shape: the short pieces stay at the full wall)"
+  ],
+  "theorems": [
+   "fullWallCast: (fullWall : R) = (4 : R)/7 (norm_num)",
+   "selectedStrictlyPastFullWall: 4/7 < 29/50 (norm_num) - THE REFINEMENT",
+   "selectedFullGap: 29/50 - 4/7 = 3/350 (norm_num, about 0.008571)",
+   "refinedLadderOrdering: 1/2 < 17/33 < 9/17 < 6/11 < 4/7 < 29/50 < 1 (norm_num + LevWall6 projections) - the 0303 ladder extended by the restricted register",
+   "fullWallIsLevWallBoundary: {theta >= 0 : theta < fullWall} = {theta >= 0 : theta < 4/7} (the (1.2) wall UNMOVED)",
+   "wallSitsAboveFullWallRegister: LevWall.levWallGap is a subset of {theta : fullWall < theta} (the open wall set sits strictly above the register - machine wiring to LevWall)",
+   "selectedShortPieceCapIsWall: (29/50) * (200/203) = 4/7 (norm_num) - inside the 0.421 argument the NON-SELECTED pieces sit exactly AT the wall (the full wall still binds there; the selected piece is the only one past it)"
+  ],
+  "build": "RhAttack.LevWall8 green (8769 jobs); full tree green (17454 jobs)"
+ },
+ "corrigenda": [
+  "0304 nextMove 'the wall levers (L1/L2/L3) are all beyond the published record' - CORRECTED for L2/L3 in the restricted setting: the Kintali 2026-08-08 preprint (found by the 0305 sweep; not in the 0300 sweep) is a published positive instance. The 4/7 wall itself remains unmoved (0304's core claim stands)."
+ ],
+ "leanPitfalls": [
+  "a conjunction of rational comparisons with mixed ascriptions ((1/2 : Q) < 17/33 - 17/33 < 9/17 - ...) silently types the unascribed numerals as NATURAL divisions (17/33 : N = 0) - ascribe (Q) to every conjunct",
+  "a Q-valued def coerced to R (fullWall : R = (4:Q)/7 cast) is NOT definitionally equal to (4:R)/7 - bridge with a norm_num cast theorem (fullWallCast) and rw it, instead of simp-only + rfl",
+  "rw [h] can close the goal P <-> P entirely (Prop extensionality + defeq) - a trailing 'rfl' then fails with 'No goals to be solved'"
+ ],
+ "nextMoves": [
+  "DONE 0306: M5 run 4 landed (tCE4 = 3,000,175,351,489; CE4 green; face OPEN 18 689 above H0; see 0306.json)",
+  "window 4 (M5): running - verify + CE4 re-anchor when it lands (a4 = 12363153497128, b4 requested 12363153517128)",
+  "0307 candidate scoped attempt: read Kintali Theorem 2.2 in full primary text - what exactly would an extension of the marked-tuple/selector structure to the FULL family (or to the (1.2) integral) require? (the named L2 direction, 0280 pattern)",
+  "no RH claim"
+ ],
+ "rhClaim": "NONE",
+ "faceStatus": "OPEN / PROBABLY TRUE (wall UNMOVED at 4/7 for the (1.2) full family; landscape refined: restricted selected off-diagonal now published at 29/50 past the wall, short pieces still at the wall; frontier tCE3; window 4 in flight)"
+}

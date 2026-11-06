@@ -1,86 +1,86 @@
 {
-  "id": 303,
-  "ts": "2026-11-11T16:05:00",
-  "title": "0303: THE 4/7 WALL'S EXACT PUBLISHED OBSTRUCTION PINNED FROM PRIMARY SOURCES (PRZZ Theorem 4.1) - the wall {theta | 4/7 < theta} is now a MACHINE-characterized saturation of the exact published error term: Case-3 exponents (7/4, 7/8) BOTH saturate simultaneously at theta = 4/7 (o(T) condition fails for exactly theta >= 4/7, boundary included); full (1.2)-level ladder refined and machine-ordered: 1/2 (B-C-H-B 1985 generic) < 17/33 (PRZZ Case 1 generic, Bettin-Chandee-Radziwill trilinear Kloosterman ingredient) < 9/17 (B-C-H-B (1.3) coefficient mu(n) n^{sigma0-1/2} P(log(y/n)/log y), Vaughan + Weil) < 6/11 (PRZZ Case 2 mu^2-degree-D; the 2017 Feng-variant 1706.04593) < 4/7 (PRZZ Case 3 degree-D, contains Levinson's mu at D=0, 'taking N = T^{4/7-eps} is permissible' verbatim); moving the wall requires changing the exponents 7/4 or 7/8 themselves (sharper bilinear Kloosterman estimate / balance / PRZZ's own degree-d-vs-truncation-l open question); LEAN LevWall6 green (8768) + tree green (17454); NO RH CLAIM, wall UNCHANGED",
-  "kind": "record-level audit + machine kernel (option B, unit 15; 0280 pattern on the degree/truncation ladder; the 0302 nextMove '0303: pin the degree-2 test function at the (1.2) level - the exact obstruction at the 17/33 - eps ceiling')",
-  "primarySource": {
-    "paper": "Pratt, Robles, Zaharescu, Zeindler, 'More than five-twelfths of the zeros of zeta are on the critical line', arXiv:1802.10521, Res. Math. Sci. 7 (2020) - pulled 2026-11-11",
-    "theorem4_1": "the twisted second moment I(alpha,beta) = int zeta(1/2+alpha+it) zeta(1/2+beta+it) |sum_{d<=N} a_d d^{-(1/2+it)}|^2 Phi(t/T) dt, N = T^theta, theta < 1, alpha,beta << L^-1, is computed unconditionally with explicit main term plus error E by coefficient regime:",
-    "regimes": [
-      {
-        "case": 1,
-        "coefficients": "arbitrary a_n << n^eps",
-        "error": "E = T^{3/20} N^{33/20} + N^{1/2} T^{1/2+eps}",
-        "saturation": "theta < 17/33 (first term: 33theta/20 + 3/20 < 1; second term slack: theta/2 + 1/2 < 1 fails only at theta > 2)",
-        "ingredient": "Bettin, Chandee and Radziwill, the trilinear Kloosterman sum (improvement of Duke-Friedlander-Iwaniec due to Bettin and Chandee) - the paper says the 17/33 - eps best bound for arbitrary coefficients is DUE to them"
-      },
-      {
-        "case": 2,
-        "coefficients": "mu^2(n) (mu * Lambda_1^{*k1} * ... * Lambda_D^{*kD})(n)",
-        "error": "E = T^eps (N^{11/6} + N^{11/12} T^{1/2})",
-        "saturation": "theta < 6/11 (both terms saturate: 11theta/6 = 1 and 11theta/12 + 1/2 = 1 at theta = 6/11)",
-        "note": "consistent with the 2017 Pratt-Robles 'Perturbed moments and a longer mollifier' (arXiv:1706.04593) which increased the Feng-mollifier length from theta < 17/33 to theta < 6/11"
-      },
-      {
-        "case": 3,
-        "coefficients": "(mu * Lambda_1^{*k1} * ... * Lambda_D^{*kD})(n) - the DEGREE-D family, CONTAINING the classical Levinson coefficients mu(n) at D = 0",
-        "error": "E = T^eps (N^{7/4} + N^{7/8} T^{1/2})",
-        "saturation": "theta < 4/7 (BOTH terms saturate simultaneously: 7theta/4 = 1 and 7theta/8 + 1/2 = 1 at theta = 4/7)",
-        "verbatim": "the proof states: 'Thus, taking N = T^{4/7-eps} is permissible.'"
-      }
-    ],
-    "errorStructure": "Type I: summation by parts + the Weil bound for incomplete Kloosterman sums; Type II: bilinear Kloosterman sums via Deshouillers-Iwaniec Lemma 1 with the balance W = U^{1/4}; the combined bound carries the exponents 7/4 (Case 3), 33/20 (Case 1), 11/6 (Case 2) - the bilinear Kloosterman-sum estimates ARE the source of the exponents",
-    "bchb917": "section 1.3 verbatim: 'Balasubramanian, Conrey and Heath-Brown examined the error terms from the mean value integral in (1.2) and the resulting exponential sums. In particular they showed using Vaughan's identity on 1/zeta(s) and Weil's bound for Kloosterman sums that one could push the size of the length theta past the 1/2 barrier to 9/17 when the coefficients are given by (1.3)' with (1.3) b_C(n,y) = mu(n) n^{sigma0 - 1/2} P(log(y/n)/log y), P real polynomial, P(0) = 0, P(1) = 1",
-    "openQuestion": "section 9 item 4 verbatim: 'Moreover, it would also be interesting to set d = 1 and analyze how a large truncation of l could yield terms from a higher degree d >= 2. What would be a good balance between the degree d and the truncation l?'"
-  },
-  "ladderRefinement": {
-    "fullLadder_at_1_2_level": "1/2 (B-C-H-B 1985, generic) < 17/33 (PRZZ Case 1, generic, B-C-R ingredient) < 9/17 (B-C-H-B (1.3) coefficients) < 6/11 (PRZZ Case 2 mu^2-degree-D = the 2017 Feng-variant) < 4/7 (PRZZ Case 3 degree-D = the Conrey-variant boundary per 0293) < 1",
-    "supersedesNote": "the 0294/0300 ladder 1/2 < 9/17 < 4/7 (with 6/11 attributed to the Feng variant alone) is REFINED (not contradicted): 17/33 is inserted as the generic-coefficient reach (B-C-H-B's 1/2 is its 1985 form; B-C-R's trilinear Kloosterman input improves it to 17/33 - eps), and 6/11 is the mu^2-degree-D regime of the same Theorem 4.1 framework (2017 Feng-variant reading now confirmed as a regime of PRZZ 2020). The wall boundary 4/7 and the open set {theta | 4/7 < theta} are UNCHANGED."
-  },
-  "machine": {
-    "module": "/home/jsmille/Projects/rh-missing-tail/formal/RhAttack/LevWall6.lean",
-    "namespace": "LevWall6",
-    "defs": [
-      "admissibleDegreeD theta := (7/4)*theta < 1 AND (7/8)*theta + 1/2 < 1 (Case 3, published exponents)",
-      "admissibleGeneric theta := (33/20)*theta + 3/20 < 1 AND theta/2 + 1/2 < 1 (Case 1)",
-      "admissibleMu2 theta := (11/6)*theta < 1 AND (11/12)*theta + 1/2 < 1 (Case 2)",
-      "przzDegreeD theta := admissibleDegreeD theta (NAMED CITED INPUT, Z78 pattern: PRZZ Theorem 4.1 Case 3 - the twisted-moment asymptotic with E = T^eps(N^{7/4} + N^{7/8} T^{1/2}) = o(T), exact provenance in docstring)",
-      "przzGeneric theta := admissibleGeneric theta (NAMED CITED INPUT: PRZZ Theorem 4.1 Case 1)"
-    ],
-    "theorems": [
-      "saturationDegreeD_first: (7/4)*(4/7) = 1 (norm_num)",
-      "saturationDegreeD_second: (7/8)*(4/7) + 1/2 = 1 (norm_num) - the SIMULTANEOUS saturation",
-      "saturationMu2_first/second: (11/6)*(6/11) = 1, (11/12)*(6/11) + 1/2 = 1",
-      "saturationGeneric: (33/20)*(17/33) + 3/20 = 1 (+ slackGenericSecond: the second term is slack there)",
-      "admissibleDegreeD_iff47: for 0 <= theta, admissible iff theta < 4/7 (linarith)",
-      "admissibleGeneric_iff1733: iff theta < 17/33",
-      "admissibleMu2_iff611: iff theta < 6/11",
-      "wallGapFailsObstruction: every theta in LevWall.levWallGap (the wall) FAILS the published Case-3 o(T) condition (the wall is the failure set of the exact published exponents)",
-      "boundary47Fails: theta = 4/7 itself fails (both exponents = 1; the T^eps residue leaves T*T^eps = T^{1+eps}, not o(T) - the proof's 'N = T^{4/7-eps} permissible' is sharp at the boundary)",
-      "admissibleSetIsHalfline: {theta >= 0 admissible} = [0, 4/7) (machine closure)",
-      "publishedLatticeOrdering: 1/2 < 17/33 < 9/17 < 6/11 < 4/7 < 1 (norm_num)",
-      "ladderExtendsLevWall2: the 0294 ladder facts are special cases (consistency cross-reference)"
-    ],
-    "build": "RhAttack.LevWall6 green (8768 jobs); full tree green (17454 jobs)"
-  },
-  "audit": {
-    "wallNow": "the wall {theta | 4/7 < theta} is Pinned at its exact published obstruction: a theta enters the wall IFF, at the published Case-3 exponents, the o(T) condition fails - a machine characterization, not a named frontier",
-    "movingTheWall": "requires changing the exponents 7/4 or 7/8 THEMSELVES - i.e. (i) a sharper bilinear Kloosterman-sum estimate (Type II, Deshouillers-Iwaniec Lemma 1), or (ii) a better Type I / II balance (W != U^{1/4}), or (iii) a different decomposition - none in the published record as of the 0300 sweep",
-    "genuineLever": "PRZZ's own open question (quoted verbatim above): the degree d vs truncation l balance - the named next lever for a future scoped attempt (the d = 1 / large-l question); 0302 sealed the amplitude (weight) knob, 0303 pins the exponent obstacle and names this one",
-    "whatWasNotClaimed": "no wall movement; no new analytic theorem - the exponents and the o(T) structure are cited from PRZZ Theorem 4.1 (primary source, exact quotations in the docstring and this entry); the machine part is rational/linear arithmetic on the published exponents + the wiring"
-  },
-  "leanPitfalls": [
-    "top-level forward references within the same namespace FAILED (the przz defs referencing the later admissible defs gave 'Unknown identifier') - reorder so referents precede referents (or mutual blocks)",
-    "rw [zeroArgDef] at h does NOT unfold the def when h is a SET-MEMBERSHIP hypothesis whose type shows the unfolded set form - use 'simpa [def] using h' to extract the inequality",
-    "linarith cannot read set-membership hypotheses - extract the pointwise inequality first",
-    "exact_mod_cast on a Q-equality involving division did not match the R-goal - direct norm_num on the R side is the robust path",
-    "a theorem type written as projections of a conjunction (LevWall2.publishedLandscape.1 AND ...) mis-parses ('argument of sort Prop expected sort Type') - write the literal conjunction instead"
+ "id": 303,
+ "ts": "2026-11-11T16:05:00",
+ "title": "0303: THE 4/7 WALL'S EXACT PUBLISHED OBSTRUCTION PINNED FROM PRIMARY SOURCES (PRZZ Theorem 4.1) - the wall {theta | 4/7 < theta} is now a MACHINE-characterized saturation of the exact published error term: Case-3 exponents (7/4, 7/8) BOTH saturate simultaneously at theta = 4/7 (o(T) condition fails for exactly theta >= 4/7, boundary included); full (1.2)-level ladder refined and machine-ordered: 1/2 (B-C-H-B 1985 generic) < 17/33 (PRZZ Case 1 generic, Bettin-Chandee-Radziwill trilinear Kloosterman ingredient) < 9/17 (B-C-H-B (1.3) coefficient mu(n) n^{sigma0-1/2} P(log(y/n)/log y), Vaughan + Weil) < 6/11 (PRZZ Case 2 mu^2-degree-D; the 2017 Feng-variant 1706.04593) < 4/7 (PRZZ Case 3 degree-D, contains Levinson's mu at D=0, 'taking N = T^{4/7-eps} is permissible' verbatim); moving the wall requires changing the exponents 7/4 or 7/8 themselves (sharper bilinear Kloosterman estimate / balance / PRZZ's own degree-d-vs-truncation-l open question); LEAN LevWall6 green (8768) + tree green (17454); NO RH CLAIM, wall UNCHANGED",
+ "kind": "record-level audit + machine kernel (option B, unit 15; 0280 pattern on the degree/truncation ladder; the 0302 nextMove '0303: pin the degree-2 test function at the (1.2) level - the exact obstruction at the 17/33 - eps ceiling')",
+ "primarySource": {
+  "paper": "Pratt, Robles, Zaharescu, Zeindler, 'More than five-twelfths of the zeros of zeta are on the critical line', arXiv:1802.10521, Res. Math. Sci. 7 (2020) - pulled 2026-11-11",
+  "theorem4_1": "the twisted second moment I(alpha,beta) = int zeta(1/2+alpha+it) zeta(1/2+beta+it) |sum_{d<=N} a_d d^{-(1/2+it)}|^2 Phi(t/T) dt, N = T^theta, theta < 1, alpha,beta << L^-1, is computed unconditionally with explicit main term plus error E by coefficient regime:",
+  "regimes": [
+   {
+    "case": 1,
+    "coefficients": "arbitrary a_n << n^eps",
+    "error": "E = T^{3/20} N^{33/20} + N^{1/2} T^{1/2+eps}",
+    "saturation": "theta < 17/33 (first term: 33theta/20 + 3/20 < 1; second term slack: theta/2 + 1/2 < 1 fails only at theta > 2)",
+    "ingredient": "Bettin, Chandee and Radziwill, the trilinear Kloosterman sum (improvement of Duke-Friedlander-Iwaniec due to Bettin and Chandee) - the paper says the 17/33 - eps best bound for arbitrary coefficients is DUE to them"
+   },
+   {
+    "case": 2,
+    "coefficients": "mu^2(n) (mu * Lambda_1^{*k1} * ... * Lambda_D^{*kD})(n)",
+    "error": "E = T^eps (N^{11/6} + N^{11/12} T^{1/2})",
+    "saturation": "theta < 6/11 (both terms saturate: 11theta/6 = 1 and 11theta/12 + 1/2 = 1 at theta = 6/11)",
+    "note": "consistent with the 2017 Pratt-Robles 'Perturbed moments and a longer mollifier' (arXiv:1706.04593) which increased the Feng-mollifier length from theta < 17/33 to theta < 6/11"
+   },
+   {
+    "case": 3,
+    "coefficients": "(mu * Lambda_1^{*k1} * ... * Lambda_D^{*kD})(n) - the DEGREE-D family, CONTAINING the classical Levinson coefficients mu(n) at D = 0",
+    "error": "E = T^eps (N^{7/4} + N^{7/8} T^{1/2})",
+    "saturation": "theta < 4/7 (BOTH terms saturate simultaneously: 7theta/4 = 1 and 7theta/8 + 1/2 = 1 at theta = 4/7)",
+    "verbatim": "the proof states: 'Thus, taking N = T^{4/7-eps} is permissible.'"
+   }
   ],
-  "nextMoves": [
-    "DONE 0304 (2026-11-06): the PRZZ degree-d/truncation-l lever audited = a KAPPA (proportion) lever, NOT a wall lever (LevWall7 green + tree green): 5/12 theorem already AT 4/7 with d=1 K=3; the 1/d factor is a divisor length (h|d^infty, U = N1/(dh)) internal to the (7/4, 7/8) endpoint; MACHINE double waste theorem (single-side exponent improvements worth nothing) + wallUnderBothImprovements min-form 4/7 + min(8d/7, 4d2/7) + N^{7/4} side binds; option-B analytic menu EXHAUSTED at the published frontier, map 0286-0304 complete",
-    "window 4 (M5) if compute allows (a4 = 12363153497128, seamless)",
-    "no RH claim"
+  "errorStructure": "Type I: summation by parts + the Weil bound for incomplete Kloosterman sums; Type II: bilinear Kloosterman sums via Deshouillers-Iwaniec Lemma 1 with the balance W = U^{1/4}; the combined bound carries the exponents 7/4 (Case 3), 33/20 (Case 1), 11/6 (Case 2) - the bilinear Kloosterman-sum estimates ARE the source of the exponents",
+  "bchb917": "section 1.3 verbatim: 'Balasubramanian, Conrey and Heath-Brown examined the error terms from the mean value integral in (1.2) and the resulting exponential sums. In particular they showed using Vaughan's identity on 1/zeta(s) and Weil's bound for Kloosterman sums that one could push the size of the length theta past the 1/2 barrier to 9/17 when the coefficients are given by (1.3)' with (1.3) b_C(n,y) = mu(n) n^{sigma0 - 1/2} P(log(y/n)/log y), P real polynomial, P(0) = 0, P(1) = 1",
+  "openQuestion": "section 9 item 4 verbatim: 'Moreover, it would also be interesting to set d = 1 and analyze how a large truncation of l could yield terms from a higher degree d >= 2. What would be a good balance between the degree d and the truncation l?'"
+ },
+ "ladderRefinement": {
+  "fullLadder_at_1_2_level": "1/2 (B-C-H-B 1985, generic) < 17/33 (PRZZ Case 1, generic, B-C-R ingredient) < 9/17 (B-C-H-B (1.3) coefficients) < 6/11 (PRZZ Case 2 mu^2-degree-D = the 2017 Feng-variant) < 4/7 (PRZZ Case 3 degree-D = the Conrey-variant boundary per 0293) < 1",
+  "supersedesNote": "the 0294/0300 ladder 1/2 < 9/17 < 4/7 (with 6/11 attributed to the Feng variant alone) is REFINED (not contradicted): 17/33 is inserted as the generic-coefficient reach (B-C-H-B's 1/2 is its 1985 form; B-C-R's trilinear Kloosterman input improves it to 17/33 - eps), and 6/11 is the mu^2-degree-D regime of the same Theorem 4.1 framework (2017 Feng-variant reading now confirmed as a regime of PRZZ 2020). The wall boundary 4/7 and the open set {theta | 4/7 < theta} are UNCHANGED."
+ },
+ "machine": {
+  "module": "/home/jsmille/Projects/rh-missing-tail/formal/RhAttack/LevWall6.lean",
+  "namespace": "LevWall6",
+  "defs": [
+   "admissibleDegreeD theta := (7/4)*theta < 1 AND (7/8)*theta + 1/2 < 1 (Case 3, published exponents)",
+   "admissibleGeneric theta := (33/20)*theta + 3/20 < 1 AND theta/2 + 1/2 < 1 (Case 1)",
+   "admissibleMu2 theta := (11/6)*theta < 1 AND (11/12)*theta + 1/2 < 1 (Case 2)",
+   "przzDegreeD theta := admissibleDegreeD theta (NAMED CITED INPUT, Z78 pattern: PRZZ Theorem 4.1 Case 3 - the twisted-moment asymptotic with E = T^eps(N^{7/4} + N^{7/8} T^{1/2}) = o(T), exact provenance in docstring)",
+   "przzGeneric theta := admissibleGeneric theta (NAMED CITED INPUT: PRZZ Theorem 4.1 Case 1)"
   ],
-  "rhClaim": "NONE",
-  "faceStatus": "OPEN / PROBABLY TRUE (wall unchanged, now pinned at its exact published obstruction; frontier tCE3)"
+  "theorems": [
+   "saturationDegreeD_first: (7/4)*(4/7) = 1 (norm_num)",
+   "saturationDegreeD_second: (7/8)*(4/7) + 1/2 = 1 (norm_num) - the SIMULTANEOUS saturation",
+   "saturationMu2_first/second: (11/6)*(6/11) = 1, (11/12)*(6/11) + 1/2 = 1",
+   "saturationGeneric: (33/20)*(17/33) + 3/20 = 1 (+ slackGenericSecond: the second term is slack there)",
+   "admissibleDegreeD_iff47: for 0 <= theta, admissible iff theta < 4/7 (linarith)",
+   "admissibleGeneric_iff1733: iff theta < 17/33",
+   "admissibleMu2_iff611: iff theta < 6/11",
+   "wallGapFailsObstruction: every theta in LevWall.levWallGap (the wall) FAILS the published Case-3 o(T) condition (the wall is the failure set of the exact published exponents)",
+   "boundary47Fails: theta = 4/7 itself fails (both exponents = 1; the T^eps residue leaves T*T^eps = T^{1+eps}, not o(T) - the proof's 'N = T^{4/7-eps} permissible' is sharp at the boundary)",
+   "admissibleSetIsHalfline: {theta >= 0 admissible} = [0, 4/7) (machine closure)",
+   "publishedLatticeOrdering: 1/2 < 17/33 < 9/17 < 6/11 < 4/7 < 1 (norm_num)",
+   "ladderExtendsLevWall2: the 0294 ladder facts are special cases (consistency cross-reference)"
+  ],
+  "build": "RhAttack.LevWall6 green (8768 jobs); full tree green (17454 jobs)"
+ },
+ "audit": {
+  "wallNow": "the wall {theta | 4/7 < theta} is Pinned at its exact published obstruction: a theta enters the wall IFF, at the published Case-3 exponents, the o(T) condition fails - a machine characterization, not a named frontier",
+  "movingTheWall": "requires changing the exponents 7/4 or 7/8 THEMSELVES - i.e. (i) a sharper bilinear Kloosterman-sum estimate (Type II, Deshouillers-Iwaniec Lemma 1), or (ii) a better Type I / II balance (W != U^{1/4}), or (iii) a different decomposition - none in the published record as of the 0300 sweep",
+  "genuineLever": "PRZZ's own open question (quoted verbatim above): the degree d vs truncation l balance - the named next lever for a future scoped attempt (the d = 1 / large-l question); 0302 sealed the amplitude (weight) knob, 0303 pins the exponent obstacle and names this one",
+  "whatWasNotClaimed": "no wall movement; no new analytic theorem - the exponents and the o(T) structure are cited from PRZZ Theorem 4.1 (primary source, exact quotations in the docstring and this entry); the machine part is rational/linear arithmetic on the published exponents + the wiring"
+ },
+ "leanPitfalls": [
+  "top-level forward references within the same namespace FAILED (the przz defs referencing the later admissible defs gave 'Unknown identifier') - reorder so referents precede referents (or mutual blocks)",
+  "rw [zeroArgDef] at h does NOT unfold the def when h is a SET-MEMBERSHIP hypothesis whose type shows the unfolded set form - use 'simpa [def] using h' to extract the inequality",
+  "linarith cannot read set-membership hypotheses - extract the pointwise inequality first",
+  "exact_mod_cast on a Q-equality involving division did not match the R-goal - direct norm_num on the R side is the robust path",
+  "a theorem type written as projections of a conjunction (LevWall2.publishedLandscape.1 AND ...) mis-parses ('argument of sort Prop expected sort Type') - write the literal conjunction instead"
+ ],
+ "nextMoves": [
+  "DONE 0304 (2026-11-06): the PRZZ degree-d/truncation-l lever audited = a KAPPA (proportion) lever, NOT a wall lever (LevWall7 green + tree green): 5/12 theorem already AT 4/7 with d=1 K=3; the 1/d factor is a divisor length (h|d^infty, U = N1/(dh)) internal to the (7/4, 7/8) endpoint; MACHINE double waste theorem (single-side exponent improvements worth nothing) + wallUnderBothImprovements min-form 4/7 + min(8d/7, 4d2/7) + N^{7/4} side binds; option-B analytic menu EXHAUSTED at the published frontier, map 0286-0304 complete",
+  "window 4 (M5) if compute allows (a4 = 12363153497128, seamless)",
+  "no RH claim"
+ ],
+ "rhClaim": "NONE",
+ "faceStatus": "OPEN / PROBABLY TRUE (wall unchanged, now pinned at its exact published obstruction; frontier tCE3)"
 }

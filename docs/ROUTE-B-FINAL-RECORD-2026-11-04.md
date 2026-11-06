@@ -2079,3 +2079,159 @@ UNMOVED;  the  option-B  analytic  menu  is  now
 EXHAUSTED  at  the  published  frontier  (map
 0286-0304  complete).  (discovery  0304;
 formal/RhAttack/LevWall7.lean)
+
+
+## 35 · 0305 — L1 state of the art audited  +  the KINTALI  finding
+(2026-11-06)
+
+The  0280/0300-pattern  audit  of  the  0303  best  lever
+(L1,  the  bilinear  Kloosterman  estimate)  -  with  a
+MAJOR  FINDING  that  refines  the  wall  landscape:
+
+* **THE  (1.2)  FULL-FAMILY  WALL  IS  UNMOVED**  at
+  {theta  |  4/7  <  theta}:  the  2017-2023  bilinear-
+  Kloosterman  line  (Kowalski-Michel-Sawin  Annals
+  2017/2020,  FKM  2014,  BFKMM  2017,  Shparlinski
+  2019,  Bag-Shparlinski  arXiv:2111.07311  /  JLMS
+  2023,  Chen  arXiv:2211.14702)  targets  MIXED
+  MOMENTS  /  the  modulus  variable  p  (e.g.  the
+  p^{-1/68}  ->  p^{-1/64}  error-term  for  mixed
+  moments  of  Hecke  L-functions)  -  NOT  the
+  t-variable  Levinson  second  moment;  none  changes
+  the  (7/4,  7/8)  exponents.
+* **THE  D-I  1982  FIX  (arXiv:1903.01371):**  the
+  final  term  of  D-I  Inventiones  bound  (9.11)
+  (Lemma  1  of  BFI)  was  D²NR/S  in  print  and  is
+  corrected  to  D²NR  (a  WEAKENING)  -  harmless
+  (S  =  1  in  most  applications;  the  BFI  §10
+  change  is  proof-only  and  dominated).  The  (1.2)
+  wall  stands  on  the  CORRECTED  bound  (PRZZ
+  2020  is  post-correction).
+* **THE  KINTALI  FINDING  (new  -  NOT  in  the  0300
+  sweep):**  Shiva  Kintali,  "More  than  42.1%  of
+  the  zeros  of  the  Riemann  zeta-function  are  on
+  the  critical  line"  (preprint  2026-08-08,  45  pp.,
+  personal  site;  not  on  arXiv  as  of  the  sweep):
+  Theorem  1.1:  unconditionally  κ  >  421/1000
+  (computer-assisted  Levinson-Conrey;  lineage
+  record  above  PRZZ's  0.417293962).
+  *  **Theorem  2.2  (NEW  asymptotic):**  a  selected
+    twisted  second  moment  with  a  fixed  power
+    saving  for  a  RESTRICTED  coefficient  -  the
+    marked-subset  selector  W  on  the  signed
+    (−1)³(μ  *  Λ^{*3})  degree-3  Feng  piece,  at
+    limiting  length  **29/50  =  0.58  >  4/7**:
+    "this  is  the  only  point  at  which  the
+    length  exceeds  4/7";
+  *  **THE  MECHANISM  (lever  L2/L3,  first  published
+    positive  instance):**  the  proof  follows
+    PRZZ  Thm  4.1's  off-diagonal  argument,
+    REPLACING  its  Heath-Brown  partition  by  the
+    structure  of  the  marked  tuple;  the  RAW
+    D-I  1984  Acta  Arith  Lemma  1  is  used
+    unchanged  (NO  new  Kloosterman  bound)  -  the
+    selector's  forced  factorization
+    q  −  21/29  ≤  z  ≤  min(q/2,  42/29  −  q)
+    makes  ALL  SEVEN  D-I  exponents
+    λ_j  ≤  1  simultaneously;
+  *  **THE  WALL  STILL  BINDS  INSIDE  THE  ARGUMENT:**
+    the  non-selected  pieces  (degrees  0,  2,  4,  5,
+    T^{29/50 · 200/203}  =  T^{4/7}  limiting)  use
+    PRZZ  Thm  4.1  AT  T^{4/7  −  eps}  (verbatim:
+    "the  published  short-short  asymptotic  must
+    cover  μ  *  Λ^{*k}  for  0  ≤  k  ≤  5  at
+    length  T^{4/7  −  eps}");
+  *  NO  extension  of  the  classical  (1.2)  is
+    claimed  anywhere.
+* **THE  REFINED  LANDSCAPE:**  the  4/7  boundary  is
+  a  PARTITION-STRUCTURE  BARRIER  of  the  full
+  (μ  *  Λ^{*k})  family  argument  (Heath-Brown
+  partition  +  balance)  -  NOT  an  absolute
+  bilinear-Kloosterman  barrier.  The  D-I  1984  bound
+  is  more  flexible  than  the  full-family
+  argument  exploits.  **CORRIGENDUM  TO  0304:**
+  "the  menu  is  EXHAUSTED"  stands  for  the  WALL
+  (unmoved  -  correct)  but  L2  has  its  first
+  published  positive  instance  (restricted
+  setting)  -  "extend  the  marked-tuple  /
+  selector  structure  to  the  full  family  (or  to
+  the  (1.2)  integral)"  is  the  NAMED  NEXT
+  RESEARCH  DIRECTION  (now  0307  candidate;
+  0306  went  to  M5  run  4).
+* **MACHINE  (RhAttack.LevWall8,  new):**  the  two
+  registers  (full  =  4/7;  restricted  selected  =
+  29/50)  as  named  cited  inputs  (Z78  pattern);
+  selectedStrictlyPastFullWall  (4/7  <  29/50),
+  selectedFullGap  (3/350),  refinedLadderOrdering
+  (1/2  <  17/33  <  9/17  <  6/11  <  4/7  <  29/50  <
+  1),  fullWallIsLevWallBoundary  (wall  UNMOVED),
+  wallSitsAboveFullWallRegister,
+  selectedShortPieceCapIsWall  (29/50  ·  200/203  =
+  4/7  -  the  short  pieces  sit  exactly  AT  the
+  wall).
+* **0297  CONTROL  ADDENDUM  (landed  meanwhile):**
+  the  independent  mpmath  spot-check  of  window  2
+  is  COMPLETE  -  **13,155  certified-sign  sample
+  points  re-evaluated  at  dps-30  with  exact
+  dyadic  decoding:  13,155  agree,  0  disagree**
+  (control  layer  -  NOT  a  second  certificate).
+
+Build:  RhAttack.LevWall8  green  (8769);  full  tree
+green  (17454).  NO  RH  CLAIM  -  wall  UNMOVED  (the
+(1.2)  full  family);  the  face  remains  OPEN  /
+PROBABLY  TRUE.  (discovery  0305;  formal/RhAttack/
+LevWall8.lean)
+## 36 · 0306 — M5 run 4: OUR FOURTH WINDOW CERTIFIED IN-HOUSE + CE4 re-anchor
+**THE FOURTH RUN LANDED - THE SEAMLESS CHAIN EXTENDS AGAIN (M5 LANED,
+END-TO-END IN-HOUSE, RUN 4).**
+
+* **RUN** (a = 12 363 153 497 128 = CE3's final b, seamless;
+  b_requested = b = 12 363 153 517 128 - NO snap-down; M = 60,
+  C_R = 1, 28 workers, 34 275 evals, 2723.6 s): the **20 000 zeros
+  with g_a4 < Im s <= g_b4 are ALL SIMPLE and on the line**;
+  verifier `CERTIFIED: true` (turing_ok, K = 12, runs 49/46,
+  0 cross-check failures, 0 undetermined signs).
+* **ONE FIRST-QUOTA BLOCK** (g-indices ..498 083 - ..498 085)
+  RESCUED by the pipeline's DOCUMENTED 3-block union refinement
+  (union ..498 082 - ..498 086 recount at 8 subdivisions:
+  need 4 / found 4): a zero displaced into an adjacent Gram
+  interval. Sound because only the window TOTAL and the two end
+  Rosser RUNS enter the Turing step (the pipeline's own
+  statement); the independent verifier recomputes BOTH
+  (total 20 000 = b - a; runs 49/46 >= 12). Recorded for
+  honesty: rosser_failures_inside = 1, not suppressed.
+* **SEAM AUDIT**: g_a4 ball bit-IDENTICAL to window-3's
+  recorded g_b3 ball (exact dyadic decode, this session) -
+  the chain window 1 -> 2 -> 3 -> 4 is seamless by
+  construction.
+* **FRONTIER** (machine, CE4): **tCE4 =
+  3,000,175,351,489**; tCE4 - tCE3 = 4 673; tCE4 - tPT2 =
+  18 689; **79 998 certified zeros over (g_a1, g_b4]**
+  (20 000 + 19 999 + 19 999 + 20 000).
+* **MACHINE (RhAttack.CE4, new, 24 decls)**: tCE4_lt_gB4Lo,
+  faceShrinkCE4 (4 673), frontierGapAboveH0 (18 689),
+  bandOfWindows4 (split points gA2Hi / gB2Lo / gB3Lo),
+  allOnLineUpToCE4 (M5 census to tCE4), terminalFaceCE4,
+  iff vs terminalFaceCE3 under the band,
+  rh_split_at_CE4, rh_reanchored_CE4 (HEADLINE:
+  RH <-> terminalFaceCE4 given [Z-PT2] + the four cited
+  window clauses), rh_of_terminalFaceCE4 (final named
+  step), terminalFaceCE4_of_thetaInf (M5 x M2).
+* **0297 CONTROL ADDENDUM (scope-confirmed)**: the
+  independent mpmath spot-check is WINDOW-2 SCOPE
+  (tmp/ce2/spotcheck_window2.py): 13 155 sampled points,
+  13 155 agree, 0 disagree at dps-30 (control, not a
+  second certificate). tmp/ce2/spotcheck_out.txt.
+* **NAMED NEXT (0307 candidate)**: PRIMARY READING of the
+  Kintali preprint (arXiv:2608.05281) Theorem 2.2 - exactly
+  what the MARKED-TUPLE restriction is, what it forbids,
+  and whether it is removable for the FULL family
+  (0.4339) or for the (1.2) t-variable integral (the
+  0305 direction, renumbered).
+
+Builds: RhAttack.CE4 green (8769); full tree green
+(17454). NO RH CLAIM - the face remains OPEN
+(PROBABLY TRUE); the M2 wall UNMOVED at 4/7 for the
+(1.2) full family (the 0305 Kintali restricted 29/50
+record is face-blind to the (1.2) integral per 0305).
+(discovery 0306; formal/RhAttack/CE4.lean)

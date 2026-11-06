@@ -1,0 +1,65 @@
+{
+ "id": "0306",
+ "ts": "2026-11-06T13:05Z",
+ "stage": "route-b option-B M5 frontier extension, run 4 (OUR OWN PIPELINE, window 4) + CE4 machine re-anchor + 0297 spot-check addendum",
+ "title": "0306: M5 RUN 4 - OUR FOURTH WINDOW (20 000 zeros, 3000175346816.91..3000175351489.85) CERTIFIED IN-HOUSE (1 first-quota block rescued by the pipeline's documented 3-block union refinement at 8-fold subdivision, independently verified); frontier re-anchored tCE4 = 3,000,175,351,489 (tCE4 - tCE3 = 4 673; tCE4 - tPT2 = 18 689; 79 998 certified zeros over (g_a1, g_b4]); NEW FORMAL MODULE CE4 (rh_of_terminalFaceCE4); 0297 INDEPENDENT mpmath SPOT-CHECK COMPLETE: 13 155 sampled points, 13 155 agree, 0 disagree",
+ "claims": [
+  "Window 4 (a = 12 363 153 497 128 = CE3's final b, seamless; b_requested = b = 12 363 153 517 128 - NO snap-down, b was already a good Gram point; M = 60, C_R = 1, 28 workers, 34 275 evaluations, 2723.6 s): the 20 000 zeros with g_a4 < Im s <= g_b4 are ALL SIMPLE and on the line; verifier 'CERTIFIED: true' (points_checked = 34 275, sign_changes_inside = 20 000 = b - a, turing_ok = true, K_conservative = 12, runs 49/46 >= 12, 0 cross-check failures, 0 undetermined signs).",
+  "One internal Rosser-block quota exception (block g-indices 12 363 153 498 083 - 12 363 153 498 085, below quota): RESCUED by the pipeline's documented 3-block union refinement (union 12 363 153 498 082 - 12 363 153 498 086 recounted at 8 subdivisions: need 4, found 4) - a zero displaced into an adjacent Gram interval; SOUND because only the window TOTAL and the two end Rosser RUNS enter the Turing step (pipeline's own statement); the independent verifier recomputes the total (20 000) and the runs (49/46) - rosser_failures_inside = 1 is recorded for honesty, not suppressed.",
+  "Seam audit: the recorded g_a4 ball [232127324168847418695735016638755780725, -86, 16777217, -110] is BIT-IDENTICAL to window 3's recorded g_b3 ball (exact dyadic decode, 2026-11-06): g_a4 = 3 000 175 346 816.913023290278 + or - 1.15e-26 (= tCE3 + 0.913...); g_b4 = 3 000 175 351 489.848157742130 + or - 1.29e-26 (fractional 0.848..., distance 0.1518 from the next integer - the floor is robust to the radius by many orders of magnitude).",
+  "NEW FORMAL MODULE /home/jsmille/Projects/rh-missing-tail/formal/RhAttack/CE4.lean (RhAttack.CE4, 24 decls): gB4Lo = 300017535148984/100; tCE4 = 3000175351489; tCE4_lt_gB4Lo, tCE3_lt_tCE4, gB3Lo_lt_tCE4 (faceShrinkCE4: tCE4 - tCE3 = 4673), frontierGapAboveH0 (tCE4 - tPT2 = 18 689), gB3Lo_lt_gB4Lo; clauses [CE3-WIN-FULL] (gB2Lo < Im <= gB3Lo) and [CE4-WIN] (gB3Lo < Im <= tCE4) with machine well-ordering; bandOfWindows4 (4 split points gA2Hi/gB2Lo/gB3Lo); allOnLineUpToCE4 (M5 census to tCE4); terminalFaceCE4; iff terminalFaceCE4 <-> terminalFaceCE3 under the band; rh_split_at_CE4 (0288 residual re-pinned at tCE4); rh_reanchored_CE4 (HEADLINE: RH <-> terminalFaceCE4 given the five cited inputs); rh_of_terminalFaceCE4 (final named step); terminalFaceCE4_of_thetaInf (M5 x M2 at the new frontier). RhAttack.CE4 green (8769 jobs); full tree green (17454 jobs).",
+  "0297 INDEPENDENT SPOT-CHECK ADDENDUM (the in-flight tally completed, window-2 scope, as the script tmp/ce2/spotcheck_window2.py defines it): for a random sample of 13 155 certified Gram-interval / refinement points from the WINDOW-2 certificate, each Z(t) re-evaluated with mpmath at dps-30 (independent Riemann-Siegel path, not Arb): 13 155 agree with the certificate-recorded signs, 0 disagree; the endpoint Gram points independently re-matched (mpmath g_a = 3000175337471.51005, g_b = 3000175342144.21154). A CONTROL, not a second certificate: it re-verifies a sample of the dyadic records through a different code path. Output: tmp/ce2/spotcheck_out.txt.",
+  "Honesty: the trust base is unchanged from 0297/0301/0302/0303 - the pipeline's own controls, its kernel-checked Lean 4 remainder theorem (RSInt.rs_Z_C0'), and our three verification layers (environment repeat + pipeline verifier + seam audit); a RE-RUN of a third-party pipeline, not a from-scratch independent certification. NO RH CLAIM.",
+  "Status: face OPEN (now certified to 3 000 175 351 489, i.e., 18 689 units above Platt-Trudgian H0 and 36 688 units above the original tPT2). Remaining analytic faces unchanged: M2 (1.2) extension past 4/7 (the 0305 Kintali restricted 29/50 record is the first published positive instance of the structural lever, restricted family only); M3/M4 dead; M5 lane continues (each run ~46 min wall on 28 workers)."
+ ],
+ "provenance": {
+  "run": {
+   "a": 12363153497128,
+   "b": 12363153517128,
+   "M": 60,
+   "C_R": "1",
+   "workers": 28,
+   "evals": 34275,
+   "seconds": 2723.6,
+   "zeros": 20000,
+   "b_minus_a": 20000,
+   "rosser_runs": [
+    49,
+    46
+   ],
+   "K_conservative": 12,
+   "rescued_rosser_exceptions": [
+    {
+     "block": [
+      12363153498083,
+      12363153498085
+     ],
+     "union": [
+      12363153498082,
+      12363153498086
+     ],
+     "need": 4,
+     "found": 4,
+     "m": 8
+    }
+   ],
+   "cross_check_failures": [],
+   "undetermined_gram_signs": [],
+   "seam": "g_a4 ball bit-identical to window 3's g_b3 ball"
+  },
+  "certificate": "tmp/ce2/ce1_window_H0_v1/window4_b4.json (verifier: CERTIFIED: true, 2026-11-06)",
+  "spotcheck": "0297 independent mpmath spot-check (window-2 scope): 13 155 sampled points / 13 155 agree / 0 disagree, dps-30 (tmp/ce2/spotcheck_out.txt, completed 2026-11-06)",
+  "formal": "formal/RhAttack/CE4.lean (RhAttack.CE4, 24 decls, built green; full tree green 17454 jobs)"
+ },
+ "links": {
+  "0297": "spot-check addendum complete",
+  "0301": "window 3 (seam source)",
+  "0302/0303/0304/0305": "M2 program (unchanged; 0305 names 0307 candidate)",
+  "CE3": "superseded-as-frontier by CE4"
+ },
+ "nextMoves": [
+  "0307 candidate (named in 0305): PRIMARY READING of the Kintali preprint arXiv:2608.05281 Theorem 2.2 (marked-tuple restriction lifting the SELECTED length to 29/50) - determine exactly what the marked-tuple restriction is, what it forbids, and whether the restriction is removable for the full family (0.4339) or for the (1.2) t-variable integral; if the restriction is a technicality of the partition, this is the L2/L3 lever's first candidate extension past the full wall.",
+  "continue M5 runs (each ~46 min wall): the lane keeps paying; the face keeps shrinking by ~4 673/run.",
+  "no RH claim; face OPEN."
+ ]
+}

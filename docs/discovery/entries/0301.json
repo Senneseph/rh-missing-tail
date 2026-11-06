@@ -1,115 +1,116 @@
 {
-  "id": 301,
-  "ts": "2026-11-11T15:10:00",
-  "title": "0301: M5 RUN 3 - window 3 LANDED: 19999 zeros certified in (g_a3, g_b3] (all simple, on the line); seam g_a3 BIT-IDENTICAL to CE2's g_b2 ball (exact dyadic audit); new certified frontier tCE3 = 3,000,175,346,816 (face shrunk 4672 more past tCE2, certified 14016 units above Platt-Trudgian H0; 59998 certified zeros over (g_a1, g_b3]); LEAN CE3 module green (8768) + full tree green (17454); NO RH CLAIM",
-  "kind": "compute + machine-re-anchor unit (option B, M5 lane, run 3); the 0299 nextMove 'window 3 (in flight) -> tCE3 on completion (verify + LEAN CE3-pattern re-anchor + record addendum)'",
-  "run": {
-    "pipeline": "Murphy's Apache-2.0 deposit (zenodo 23486196), same trust base as CE1/CE2",
-    "a": 12363153477129,
-    "a_note": "= CE2's b: the windows are seamless",
-    "b_requested": 12363153497129,
-    "b": 12363153497128,
-    "b_note": "driver snapped the end down to the nearest good Gram point",
-    "M": 60,
-    "C_R": "1",
-    "workers": 28,
-    "evals": 33326,
-    "seconds": 2614.4
-  },
-  "certificate": {
-    "file": "/home/jsmille/Projects/rh-missing-tail/tmp/ce2/ce1_window_H0_v1/window3_b3.json",
-    "verifier": "python3 code/verify_window.py window3_b3.json",
-    "verifierVerdict": "CERTIFIED: true",
-    "zeros": "b - a = 19999 in (g_a3, g_b3], ALL SIMPLE and on the line",
-    "N_range": [
-      691008,
-      691008
-    ],
-    "rosser": "runs 48 (left of g_a3) / 49 (right of g_b3), both >= K = 12; roesser_failures_inside = 0; 15864 blocks inside; blocks_len_gt1 all determined",
-    "cross_check_failures": [],
-    "undetermined_gram_signs": [],
-    "turing_ok": true,
-    "K_conservative": 12,
-    "K_required": "Trudgian 5.7190 +/- 1.21e-6; doubled 11.4380; Amberger 9.14967"
-  },
-  "endpoints": {
-    "g_a3": "3000175342144.2115353245153768158080805... + or - 16777217*2^-110 (radius approx 1.1487e-26)",
-    "g_b3": "3000175346816.9130232902776878587225914... + or - 1.1487e-26",
-    "seamAudit": "the recorded g_a3 exact-dyadic ball (mantissa 232127323807314652221910600316605045059, exp -86, radius tuple [16777217, -110]) is BIT-IDENTICAL to CE2's recorded g_b2 ball (verified by exact decode and direct tuple comparison, 2026-11-11): the seam is seamless by construction (a3 = b2)",
-    "verifierEndpointBalls": "g_a = 3000175342144.211535324515 +/- 3.77e-13; g_b = 3000175346816.913023290278 +/- 3.13e-13 (recomputed at 128-bit)"
-  },
-  "frontier": {
-    "tCE3": 3000175346816,
-    "tCE3_minus_tCE2": 4672,
-    "tCE3_minus_tPT2_H0": 14016,
-    "certifiedZeros_over_ga1_gb3": 59998,
-    "decomposition": "20000 (CE1 window, cited) + 19999 (our window 2) + 19999 (our window 3)"
-  },
-  "lean": {
-    "module": "/home/jsmille/Projects/rh-missing-tail/formal/RhAttack/CE3.lean",
-    "namespace": "CE3",
-    "constants": {
-      "gB3Lo": "300017534681691 / 100 (= 3000175346816.91, certified lower bound for g_b3, margin approx 3e-3)",
-      "tCE3": "3000175346816"
-    },
-    "machineTheorems": [
-      "tCE3_lt_gB3Lo",
-      "tCE2_lt_tCE3",
-      "gB2Lo_lt_tCE3",
-      "faceShrinkCE3 (= 4672)",
-      "frontierGapAboveH0 (= 14016)",
-      "gA2Hi_lt_gB2Lo"
-    ],
-    "citedClauses_Z78pattern": [
-      {
-        "clause": "CE2.ce1WinClause (reused)",
-        "region": "(tPT2, gA2Hi]",
-        "source": "Murphy window 1, re-verified in environment"
-      },
-      {
-        "clause": "ce2WinClauseFull (new)",
-        "region": "(gA2Hi, gB2Lo]",
-        "source": "window2_b2.json; the region is a slice of the certified region (g_a2, g_b2] (gA2Hi certified top of g_a2, gB2Lo certified bottom of g_b2)"
-      },
-      {
-        "clause": "ce3WinClause (new)",
-        "region": "(gB2Lo, tCE3]",
-        "source": "UNION OF window2_b2.json AND window3_b3.json: for t0 in (gB2Lo, tCE3], either t0 <= g_a3 (true, in the exact dyadic ball, bit-identical in both certificates) hence t0 in (g_a2, g_b2] (window 2 region) - since t0 > gB2Lo > gA2Hi >= g_a2 - or t0 > g_a3 hence t0 in (g_a3, g_b3] (window 3 region) - since t0 <= tCE3 < gB3Lo <= g_b3. The two certified regions union to (g_a2, g_b3] which contains (gB2Lo, tCE3]. No rational split point is needed: the true Gram point g_a3 sits inside its recorded ball and both certificates cover their side of it."
-      }
-    ],
-    "reanchorTheorems": [
-      "bandOfWindows3",
-      "allOnLineUpToCE3",
-      "terminalFaceCE3",
-      "faceCE2_implies_faceCE3",
-      "terminalFaceCE3_iff_faceCE2",
-      "rh_split_at_CE3",
-      "rh_reanchored_CE3 (headline: RH q <-> terminalFaceCE3 q under the four cited census inputs)",
-      "rh_of_terminalFaceCE3 (final named step)",
-      "terminalFaceCE3_of_thetaInf (0290 lane lands directly)"
-    ],
-    "build": "RhAttack.CE3 green (8768 jobs); full tree green (17454 jobs)",
-    "pitfalls": [
-      "docstring '+/-' opened a nested comment -> unterminated comment error; fixed per standing convention ('+ or -')",
-      "clause slicing follows the CE2 pattern exactly (named cited Props with recorded containments)"
-    ]
-  },
-  "verificationLayers": [
-    "(1) ENVIRONMENT REPEAT (CE2 header): Murphy's own window-1 certificate re-verified CERTIFIED true in this environment",
-    "(2) PIPELINE VERIFIER: CERTIFIED true, 33326 points checked, endpoints recomputed and matched, Turing K-construction checked",
-    "(3) SEAM AUDIT (new this run): recorded g_a3 ball bit-identical to CE2's recorded g_b2 ball (exact dyadic decode, this machine)"
+ "id": 301,
+ "ts": "2026-11-11T15:10:00",
+ "title": "0301: M5 RUN 3 - window 3 LANDED: 19999 zeros certified in (g_a3, g_b3] (all simple, on the line); seam g_a3 BIT-IDENTICAL to CE2's g_b2 ball (exact dyadic audit); new certified frontier tCE3 = 3,000,175,346,816 (face shrunk 4672 more past tCE2, certified 14016 units above Platt-Trudgian H0; 59998 certified zeros over (g_a1, g_b3]); LEAN CE3 module green (8768) + full tree green (17454); NO RH CLAIM",
+ "kind": "compute + machine-re-anchor unit (option B, M5 lane, run 3); the 0299 nextMove 'window 3 (in flight) -> tCE3 on completion (verify + LEAN CE3-pattern re-anchor + record addendum)'",
+ "run": {
+  "pipeline": "Murphy's Apache-2.0 deposit (zenodo 23486196), same trust base as CE1/CE2",
+  "a": 12363153477129,
+  "a_note": "= CE2's b: the windows are seamless",
+  "b_requested": 12363153497129,
+  "b": 12363153497128,
+  "b_note": "driver snapped the end down to the nearest good Gram point",
+  "M": 60,
+  "C_R": "1",
+  "workers": 28,
+  "evals": 33326,
+  "seconds": 2614.4
+ },
+ "certificate": {
+  "file": "/home/jsmille/Projects/rh-missing-tail/tmp/ce2/ce1_window_H0_v1/window3_b3.json",
+  "verifier": "python3 code/verify_window.py window3_b3.json",
+  "verifierVerdict": "CERTIFIED: true",
+  "zeros": "b - a = 19999 in (g_a3, g_b3], ALL SIMPLE and on the line",
+  "N_range": [
+   691008,
+   691008
   ],
-  "honesty": {
-    "noRHClaim": true,
-    "trustBase": "the pipeline's own controls (missing-pair refusal, Rosser runs, cross-checks), its kernel-checked Lean 4 remainder theorem RSInt.rs_Z_C0', and our three verification layers; a RE-RUN of a third-party pipeline on new points, not a from-scratch independent certification",
-    "whatWasNotClaimed": "the face is NOT closed; the certified frontier moved (tCE2 -> tCE3); the residual is the SAME open object terminalFaceCE3 (machine iff terminalFaceCE2 under the band clauses)"
+  "rosser": "runs 48 (left of g_a3) / 49 (right of g_b3), both >= K = 12; roesser_failures_inside = 0; 15864 blocks inside; blocks_len_gt1 all determined",
+  "cross_check_failures": [],
+  "undetermined_gram_signs": [],
+  "turing_ok": true,
+  "K_conservative": 12,
+  "K_required": "Trudgian 5.7190 +/- 1.21e-6; doubled 11.4380; Amberger 9.14967"
+ },
+ "endpoints": {
+  "g_a3": "3000175342144.2115353245153768158080805... + or - 16777217*2^-110 (radius approx 1.1487e-26)",
+  "g_b3": "3000175346816.9130232902776878587225914... + or - 1.1487e-26",
+  "seamAudit": "the recorded g_a3 exact-dyadic ball (mantissa 232127323807314652221910600316605045059, exp -86, radius tuple [16777217, -110]) is BIT-IDENTICAL to CE2's recorded g_b2 ball (verified by exact decode and direct tuple comparison, 2026-11-11): the seam is seamless by construction (a3 = b2)",
+  "verifierEndpointBalls": "g_a = 3000175342144.211535324515 +/- 3.77e-13; g_b = 3000175346816.913023290278 +/- 3.13e-13 (recomputed at 128-bit)"
+ },
+ "frontier": {
+  "tCE3": 3000175346816,
+  "tCE3_minus_tCE2": 4672,
+  "tCE3_minus_tPT2_H0": 14016,
+  "certifiedZeros_over_ga1_gb3": 59998,
+  "decomposition": "20000 (CE1 window, cited) + 19999 (our window 2) + 19999 (our window 3)"
+ },
+ "lean": {
+  "module": "/home/jsmille/Projects/rh-missing-tail/formal/RhAttack/CE3.lean",
+  "namespace": "CE3",
+  "constants": {
+   "gB3Lo": "300017534681691 / 100 (= 3000175346816.91, certified lower bound for g_b3, margin approx 3e-3)",
+   "tCE3": "3000175346816"
   },
-  "nextMoves": [
-    "0302: the scoped weighted-variant attempt (0280 pattern) - DONE this turn (LevWall5 + audit, sealed at the published boundary)",
-    "window 4 in flight if compute allows (a4 = 12363153497128, seamless); each window re-anchors by the same two-clause machine composition",
-    "DONE 0303 (2026-11-11): the exact published obstruction of the 4/7 wall pinned from PRZZ Theorem 4.1 (LevWall6 green): Case-3 exponents (7/4, 7/8) saturate simultaneously at 4/7; wall = failure set of the published o(T) condition (machine); ladder refined to 1/2 < 17/33 < 9/17 < 6/11 < 4/7; the genuine lever = PRZZ degree-d/truncation-l open question",
-    "no RH claim"
+  "machineTheorems": [
+   "tCE3_lt_gB3Lo",
+   "tCE2_lt_tCE3",
+   "gB2Lo_lt_tCE3",
+   "faceShrinkCE3 (= 4672)",
+   "frontierGapAboveH0 (= 14016)",
+   "gA2Hi_lt_gB2Lo"
   ],
-  "rhClaim": "NONE",
-  "faceStatus": "OPEN / PROBABLY TRUE (wall unchanged; frontier tCE3 = 3,000,175,346,816, 14016 units above H0)"
+  "citedClauses_Z78pattern": [
+   {
+    "clause": "CE2.ce1WinClause (reused)",
+    "region": "(tPT2, gA2Hi]",
+    "source": "Murphy window 1, re-verified in environment"
+   },
+   {
+    "clause": "ce2WinClauseFull (new)",
+    "region": "(gA2Hi, gB2Lo]",
+    "source": "window2_b2.json; the region is a slice of the certified region (g_a2, g_b2] (gA2Hi certified top of g_a2, gB2Lo certified bottom of g_b2)"
+   },
+   {
+    "clause": "ce3WinClause (new)",
+    "region": "(gB2Lo, tCE3]",
+    "source": "UNION OF window2_b2.json AND window3_b3.json: for t0 in (gB2Lo, tCE3], either t0 <= g_a3 (true, in the exact dyadic ball, bit-identical in both certificates) hence t0 in (g_a2, g_b2] (window 2 region) - since t0 > gB2Lo > gA2Hi >= g_a2 - or t0 > g_a3 hence t0 in (g_a3, g_b3] (window 3 region) - since t0 <= tCE3 < gB3Lo <= g_b3. The two certified regions union to (g_a2, g_b3] which contains (gB2Lo, tCE3]. No rational split point is needed: the true Gram point g_a3 sits inside its recorded ball and both certificates cover their side of it."
+   }
+  ],
+  "reanchorTheorems": [
+   "bandOfWindows3",
+   "allOnLineUpToCE3",
+   "terminalFaceCE3",
+   "faceCE2_implies_faceCE3",
+   "terminalFaceCE3_iff_faceCE2",
+   "rh_split_at_CE3",
+   "rh_reanchored_CE3 (headline: RH q <-> terminalFaceCE3 q under the four cited census inputs)",
+   "rh_of_terminalFaceCE3 (final named step)",
+   "terminalFaceCE3_of_thetaInf (0290 lane lands directly)"
+  ],
+  "build": "RhAttack.CE3 green (8768 jobs); full tree green (17454 jobs)",
+  "pitfalls": [
+   "docstring '+/-' opened a nested comment -> unterminated comment error; fixed per standing convention ('+ or -')",
+   "clause slicing follows the CE2 pattern exactly (named cited Props with recorded containments)"
+  ]
+ },
+ "verificationLayers": [
+  "(1) ENVIRONMENT REPEAT (CE2 header): Murphy's own window-1 certificate re-verified CERTIFIED true in this environment",
+  "(2) PIPELINE VERIFIER: CERTIFIED true, 33326 points checked, endpoints recomputed and matched, Turing K-construction checked",
+  "(3) SEAM AUDIT (new this run): recorded g_a3 ball bit-identical to CE2's recorded g_b2 ball (exact dyadic decode, this machine)"
+ ],
+ "honesty": {
+  "noRHClaim": true,
+  "trustBase": "the pipeline's own controls (missing-pair refusal, Rosser runs, cross-checks), its kernel-checked Lean 4 remainder theorem RSInt.rs_Z_C0', and our three verification layers; a RE-RUN of a third-party pipeline on new points, not a from-scratch independent certification",
+  "whatWasNotClaimed": "the face is NOT closed; the certified frontier moved (tCE2 -> tCE3); the residual is the SAME open object terminalFaceCE3 (machine iff terminalFaceCE2 under the band clauses)"
+ },
+ "nextMoves": [
+  "DONE 0306: M5 run 4 landed (tCE4 = 3,000,175,351,489; CE4 green; face OPEN 18 689 above H0; see 0306.json)",
+  "0302: the scoped weighted-variant attempt (0280 pattern) - DONE this turn (LevWall5 + audit, sealed at the published boundary)",
+  "window 4 in flight if compute allows (a4 = 12363153497128, seamless); each window re-anchors by the same two-clause machine composition",
+  "DONE 0303 (2026-11-11): the exact published obstruction of the 4/7 wall pinned from PRZZ Theorem 4.1 (LevWall6 green): Case-3 exponents (7/4, 7/8) saturate simultaneously at 4/7; wall = failure set of the published o(T) condition (machine); ladder refined to 1/2 < 17/33 < 9/17 < 6/11 < 4/7; the genuine lever = PRZZ degree-d/truncation-l open question",
+  "no RH claim"
+ ],
+ "rhClaim": "NONE",
+ "faceStatus": "OPEN / PROBABLY TRUE (wall unchanged; frontier tCE3 = 3,000,175,346,816, 14016 units above H0)"
 }

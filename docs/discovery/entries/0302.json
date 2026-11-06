@@ -1,53 +1,53 @@
 {
-  "id": 302,
-  "ts": "2026-11-11T15:12:00",
-  "title": "0302: THE SCOPED WEIGHTED-VARIANT ATTEMPT (0280 pattern) - the weight-agnostic wall kernel is now MACHINE (LevWall5: residExpandGen + residSharpGen for ANY mollifier family W, with the classical 0294 wall proved to be the Wlev instance); audit: smooth reweighting M_{a,Y} is an AMPLITUDE-LEVEL lever (bound constant O_a(1), no exponent change) and CANNOT move the wall past 4/7 - SEALED at the published boundary; the genuine remaining knob is the degree/truncation trade-off (0292-PRZZ); NO RH CLAIM",
-  "kind": "scoped analytic attempt + machine kernel (option B, unit 14; the 0299 nextMove 'the analytic program remains: attack the wall with a scoped attempt + rigorous negative audit (0280 pattern) if it fails')",
-  "attempt": {
-    "variant": "smooth reweighting of the classical Levinson mollifier (a = 1 power in ThetaInf.thetaMoll): M_{a,Y}(s) = sum_{n<=Y} mu(n) exp(-s log n) (1 - log n/log Y)^a, fixed a > 0",
-    "motivation": "natural candidate: the (1.2) program's off-diagonal sums are weighted by the mollifier coefficients; a different smooth weight might rebalance the sums past the published exponent barrier",
-    "verdict": "SEALED at the published boundary (0280 negative-audit pattern): smooth reweighting does not move the wall {theta | 4/7 < theta}"
-  },
-  "machine": {
-    "module": "/home/jsmille/Projects/rh-missing-tail/formal/RhAttack/LevWall5.lean",
-    "namespace": "LevWall5",
-    "kernel": [
-      "residGenF (W Y T) = \u222b_T^{2T} ||1 - W Y t||^2 dt (general family W : Y \u21a6 w_Y)",
-      "iMomF (W Y T) = \u222b_T^{2T} ||W Y t||^2 dt ((1.2)-style moment, general)",
-      "reMainF (W Y T) = \u222b_T^{2T} Re(W Y t) dt (general)"
-    ],
-    "theorems": [
-      "residExpandGen: residGenF W Y T = (2T - T) + iMomF W Y T - 2 * reMainF W Y T for ANY family, hypothesis Continuous (W Y) + 0 <= T ONLY (the exact LevWall2.residExpand bookkeeping, integrand-generalized)",
-      "residSharpGen: for ANY family W (continuous on positive lengths), [iMomF W (T^theta) T / T -> 1 + 1/theta] + [reMainF W (T^theta) T / T -> 1] imply residGenF W (T^theta) T / T -> 1/theta (the sharp Radziwill c = 1 algebra, weight-agnostic)",
-      "classicInstance_eq: residGenF Wlev Y T = LevWall2.thetaResid Y T (definitional)",
-      "reMainF_Wlev_eq: reMainF Wlev Y T = LevWall2.thetaReMain Y T (definitional)",
-      "iMomF_Wlev_eq: iMomF Wlev Y T = thetaIMoment Y T (2*T) (integrand congruence via LevWall2.wThetaNormEqMoment)",
-      "residSharp_is_instance: the 0294 wall theorem LevWall2.residSharp re-derived through residSharpGen at Wlev given the same two named inputs (asympAt2T theta, mozMain theta) - the general kernel specializes correctly"
-    ],
-    "build": "RhAttack.LevWall5 green (8768 jobs); full tree green (17454 jobs)"
-  },
-  "auditExponents": {
-    "claimA_machineSupported": "the wall ALGEBRA is weight-agnostic (LevWall5): any explicit variant's reach is EXACTLY the published reach of its two named inputs (the (1.2) asymptotic + the mollifier main term) - carried by the off-diagonal EXPONENT barrier",
-    "claimB_recordLevel": "for fixed a > 0, the reweighted coefficient ratio w_a(n)/w_1(n) = (1 - log n/log Y)^{a-1} is a smoothly varying AMPLITUDE on [1, Y]; in the Conrey-type off-diagonal double sum (the published (1.2) proof, 0/theta < theta < 1/2 Levinson-moment, 4/7 via Conrey's variant, 6/11 for the Feng variant - 0295/0300 lattice) its insertion changes the sum's BOUND CONSTANT (O_a(1) via bounded variation / summation-by-parts of the smooth weight), NONE of the sum's EXONENTS; the published reach is a constraint purely on those exponents (the Deshouillers-Iwaniec / Kloosterman off-diagonal range, 0292-PRZZ pin: the open knob is the degree/truncation trade-off, not the amplitude)",
-    "honesty_note": "claim B is a record-level exponent argument about the PUBLISHED off-diagonal sums' machinery (0280 pattern) - NOT a machine theorem (the off-diagonal sums are the cited analytic content); claim A is the machine-supported structural part"
-  },
-  "distinctionKept": "the genuine remaining attack surface is the degree/truncation TRADE-OFF (0292-PRZZ: B-C-H-B degree-2 test function reaches 9/17; generic ceiling 17/33 - eps): next scoped attempt (0303) is to pin the degree-2 test function AT THE (1.2) LEVEL and name the exact obstruction - amplitude reweighting (this unit) cannot touch that knob",
-  "leanPitfalls": [
-    "thetaIMoment/thetaMoll live in ThetaInf (LevWall2 opens it, so qualified access from outside the namespace needs ThetaInf.thetaIMoment or open ThetaInf)",
-    "dsimp closes definitionally-equal goals (its internal reflexivity check) - no extra rfl after a closing dsimp",
-    "rw of a multi-arg noncomputable def in a curried-family integrand failed where dsimp succeeded; integral-congr rewrites that leave a line-t vs Complex.mk(1/2,t) residue close by an explicit trailing rfl (they are definitionally equal after unfolding line)",
-    "tendsto bookkeeping (filter_upwards Ioi_mem_atTop 1, tendsto_const_nhds.add/sub, tendsto_congr') copied verbatim from LevWall2.residSharp and re-composed in the general kernel"
+ "id": 302,
+ "ts": "2026-11-11T15:12:00",
+ "title": "0302: THE SCOPED WEIGHTED-VARIANT ATTEMPT (0280 pattern) - the weight-agnostic wall kernel is now MACHINE (LevWall5: residExpandGen + residSharpGen for ANY mollifier family W, with the classical 0294 wall proved to be the Wlev instance); audit: smooth reweighting M_{a,Y} is an AMPLITUDE-LEVEL lever (bound constant O_a(1), no exponent change) and CANNOT move the wall past 4/7 - SEALED at the published boundary; the genuine remaining knob is the degree/truncation trade-off (0292-PRZZ); NO RH CLAIM",
+ "kind": "scoped analytic attempt + machine kernel (option B, unit 14; the 0299 nextMove 'the analytic program remains: attack the wall with a scoped attempt + rigorous negative audit (0280 pattern) if it fails')",
+ "attempt": {
+  "variant": "smooth reweighting of the classical Levinson mollifier (a = 1 power in ThetaInf.thetaMoll): M_{a,Y}(s) = sum_{n<=Y} mu(n) exp(-s log n) (1 - log n/log Y)^a, fixed a > 0",
+  "motivation": "natural candidate: the (1.2) program's off-diagonal sums are weighted by the mollifier coefficients; a different smooth weight might rebalance the sums past the published exponent barrier",
+  "verdict": "SEALED at the published boundary (0280 negative-audit pattern): smooth reweighting does not move the wall {theta | 4/7 < theta}"
+ },
+ "machine": {
+  "module": "/home/jsmille/Projects/rh-missing-tail/formal/RhAttack/LevWall5.lean",
+  "namespace": "LevWall5",
+  "kernel": [
+   "residGenF (W Y T) = \u222b_T^{2T} ||1 - W Y t||^2 dt (general family W : Y \u21a6 w_Y)",
+   "iMomF (W Y T) = \u222b_T^{2T} ||W Y t||^2 dt ((1.2)-style moment, general)",
+   "reMainF (W Y T) = \u222b_T^{2T} Re(W Y t) dt (general)"
   ],
-  "honesty": {
-    "noRHClaim": true,
-    "whatWasNotClaimed": "no wall movement; the attempt was scoped, audited, and sealed with its exact boundary named; no new analytic result beyond the machine kernel and the record-level exponent audit"
-  },
-  "nextMoves": [
-    "DONE 0303 (2026-11-11): the exact published obstruction of the 4/7 wall pinned from PRZZ Theorem 4.1 (LevWall6 green): Case-3 exponents (7/4, 7/8) saturate simultaneously at 4/7; wall = failure set of the published o(T) condition (machine); ladder refined to 1/2 < 17/33 < 9/17 < 6/11 < 4/7; the genuine lever = PRZZ degree-d/truncation-l open question",
-    "window 4 (M5) if compute allows: a4 = 12363153497128 (seamless)",
-    "the 0300 tool list (short-interval reciprocity 2608.14852, amplified moments 2606.27323) is the recorded infrastructure for any future (1.2) program",
-    "no RH claim"
+  "theorems": [
+   "residExpandGen: residGenF W Y T = (2T - T) + iMomF W Y T - 2 * reMainF W Y T for ANY family, hypothesis Continuous (W Y) + 0 <= T ONLY (the exact LevWall2.residExpand bookkeeping, integrand-generalized)",
+   "residSharpGen: for ANY family W (continuous on positive lengths), [iMomF W (T^theta) T / T -> 1 + 1/theta] + [reMainF W (T^theta) T / T -> 1] imply residGenF W (T^theta) T / T -> 1/theta (the sharp Radziwill c = 1 algebra, weight-agnostic)",
+   "classicInstance_eq: residGenF Wlev Y T = LevWall2.thetaResid Y T (definitional)",
+   "reMainF_Wlev_eq: reMainF Wlev Y T = LevWall2.thetaReMain Y T (definitional)",
+   "iMomF_Wlev_eq: iMomF Wlev Y T = thetaIMoment Y T (2*T) (integrand congruence via LevWall2.wThetaNormEqMoment)",
+   "residSharp_is_instance: the 0294 wall theorem LevWall2.residSharp re-derived through residSharpGen at Wlev given the same two named inputs (asympAt2T theta, mozMain theta) - the general kernel specializes correctly"
   ],
-  "rhClaim": "NONE",
-  "faceStatus": "OPEN / PROBABLY TRUE (wall unchanged; frontier tCE3; this unit sealed one natural variant family at its published boundary)"
+  "build": "RhAttack.LevWall5 green (8768 jobs); full tree green (17454 jobs)"
+ },
+ "auditExponents": {
+  "claimA_machineSupported": "the wall ALGEBRA is weight-agnostic (LevWall5): any explicit variant's reach is EXACTLY the published reach of its two named inputs (the (1.2) asymptotic + the mollifier main term) - carried by the off-diagonal EXPONENT barrier",
+  "claimB_recordLevel": "for fixed a > 0, the reweighted coefficient ratio w_a(n)/w_1(n) = (1 - log n/log Y)^{a-1} is a smoothly varying AMPLITUDE on [1, Y]; in the Conrey-type off-diagonal double sum (the published (1.2) proof, 0/theta < theta < 1/2 Levinson-moment, 4/7 via Conrey's variant, 6/11 for the Feng variant - 0295/0300 lattice) its insertion changes the sum's BOUND CONSTANT (O_a(1) via bounded variation / summation-by-parts of the smooth weight), NONE of the sum's EXONENTS; the published reach is a constraint purely on those exponents (the Deshouillers-Iwaniec / Kloosterman off-diagonal range, 0292-PRZZ pin: the open knob is the degree/truncation trade-off, not the amplitude)",
+  "honesty_note": "claim B is a record-level exponent argument about the PUBLISHED off-diagonal sums' machinery (0280 pattern) - NOT a machine theorem (the off-diagonal sums are the cited analytic content); claim A is the machine-supported structural part"
+ },
+ "distinctionKept": "the genuine remaining attack surface is the degree/truncation TRADE-OFF (0292-PRZZ: B-C-H-B degree-2 test function reaches 9/17; generic ceiling 17/33 - eps): next scoped attempt (0303) is to pin the degree-2 test function AT THE (1.2) LEVEL and name the exact obstruction - amplitude reweighting (this unit) cannot touch that knob",
+ "leanPitfalls": [
+  "thetaIMoment/thetaMoll live in ThetaInf (LevWall2 opens it, so qualified access from outside the namespace needs ThetaInf.thetaIMoment or open ThetaInf)",
+  "dsimp closes definitionally-equal goals (its internal reflexivity check) - no extra rfl after a closing dsimp",
+  "rw of a multi-arg noncomputable def in a curried-family integrand failed where dsimp succeeded; integral-congr rewrites that leave a line-t vs Complex.mk(1/2,t) residue close by an explicit trailing rfl (they are definitionally equal after unfolding line)",
+  "tendsto bookkeeping (filter_upwards Ioi_mem_atTop 1, tendsto_const_nhds.add/sub, tendsto_congr') copied verbatim from LevWall2.residSharp and re-composed in the general kernel"
+ ],
+ "honesty": {
+  "noRHClaim": true,
+  "whatWasNotClaimed": "no wall movement; the attempt was scoped, audited, and sealed with its exact boundary named; no new analytic result beyond the machine kernel and the record-level exponent audit"
+ },
+ "nextMoves": [
+  "DONE 0303 (2026-11-11): the exact published obstruction of the 4/7 wall pinned from PRZZ Theorem 4.1 (LevWall6 green): Case-3 exponents (7/4, 7/8) saturate simultaneously at 4/7; wall = failure set of the published o(T) condition (machine); ladder refined to 1/2 < 17/33 < 9/17 < 6/11 < 4/7; the genuine lever = PRZZ degree-d/truncation-l open question",
+  "window 4 (M5) if compute allows: a4 = 12363153497128 (seamless)",
+  "the 0300 tool list (short-interval reciprocity 2608.14852, amplified moments 2606.27323) is the recorded infrastructure for any future (1.2) program",
+  "no RH claim"
+ ],
+ "rhClaim": "NONE",
+ "faceStatus": "OPEN / PROBABLY TRUE (wall unchanged; frontier tCE3; this unit sealed one natural variant family at its published boundary)"
 }

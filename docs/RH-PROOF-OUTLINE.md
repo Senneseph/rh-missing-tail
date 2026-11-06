@@ -1082,3 +1082,17 @@ UNMOVED;  the  option-B  analytic  menu  is
 EXHAUSTED  at  the  published  frontier  (map
 0286-0304  complete).  Record:  ROUTE-B-FINAL-RECORD
 §34;  discovery  0304;  S1-A1-EXPLORATION.md  E34.
+
+**0306 (M5 run 4, 2026-11-06):** the seamless chain
+extends AGAIN - our window-4 certification (20 000 zeros,
+one first-quota block rescued by the pipeline's
+documented union refinement, independently verified) moves
+the certified frontier to **tCE4 = 3 000 175 351 489**
+(18 689 above Platt-Trudgian H0; 79 998 zeros over
+(g_a1, g_b4]); NEW formal module RhAttack.CE4
+(24 decls): RH <-> terminalFaceCE4 under the cited
+inputs; 0297 spot-check scope confirmed (window 2:
+13 155/13 155/0 at dps-30). Tree green 17454. NO RH
+CLAIM - face OPEN / PROBABLY TRUE; M2 wall UNMOVED
+((1.2) full family); next named direction: 0307
+candidate (0305's Kintali Theorem 2.2 primary reading).
