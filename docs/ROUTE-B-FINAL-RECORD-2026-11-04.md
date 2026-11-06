@@ -994,3 +994,105 @@ flank zero-free combines Theorem 1 (right flank, cited) with the
 functional equation (left flank, classical).  **NO RH CLAIM** — the
 conjecture is a conjecture; the face remains open without the cited
 inputs.
+
+## 21 · 0291 — THE M5 RE-ANCHOR: the certified frontier moves
+### (and the 0290 proportion corrigendum)
+
+### 21.1 · The new cited input (primary source, pulled 2026-11-11)
+
+**P. W. Murphy**, “A certified window of zeros of the Riemann zeta
+function just above 3e12, with a machine-checked Riemann–Siegel
+remainder”, October 2026 (paper
+`zenodo.org/records/23489697/files/ce1_window_paper.pdf`;
+record `doi.org/10.5281/zenodo.23486195`; dataset
+`doi.org/10.5281/zenodo.23486196`).  Theorem 1, verbatim numbers:
+with `g_n` the n-th Gram point, `a = 12,363,153,437,130`,
+`b = 12,363,153,457,130`:
+
+- `g_a ∈ [3000175332798.574911824343 ± 1.60·10⁻¹³]`,
+  `g_b ∈ [3000175337471.510047088127 ± 1.86·10⁻¹³]`;
+- the `b − a = 20,000` zeros with `g_a < Im s ≤ g_b` are **all
+  simple and on the line** `Re s = 1/2`.
+
+Since `g_a` lies just **below** `H0 = 3,000,175,332,800` (exactly
+`WinC.tPT2`) and the certificate independently reproduces
+Platt–Trudgian’s count `12,363,153,437,138` at `H0`, the two results
+together show every zero with `0 < Im ρ ≤ g_b` is on the line — the
+verified region now extends **strictly above** the Platt–Trudgian
+height.  Method (as described): 128-bit Arb ball arithmetic;
+Riemann–Siegel + first correction with the remainder bounded by a
+**Lean-4-kernel-checked theorem** (`RSInt.rs_Z_C0′`:
+`(3/5)·t^(-3/4)`); Turing method with a Gram-block count meeting
+Amberger’s correction (arXiv 2512.23064, unrefereed); positive and
+negative controls (a hidden off-line pair is detected and
+certification refused); Odlyzko calibration; the whole window
+reproduced by independently written audit code; AI-assisted
+(Claude, Anthropic) under the author’s direction — the source’s own
+provenance note.
+
+### 21.2 · The formal re-anchor (DONE, `RhAttack.CE1`)
+
+New module (build green; full tree green 17454 jobs):
+
+- **Constants** (certified, rationals):
+  `gAHi = 3000175332798.57491182451` (upper bound for `g_a`),
+  `gBLo = 3000175337471.51004708794` (lower bound for `g_b`), and the
+  **new certified census frontier**
+  **`tCE1 := 3,000,175,337,471`** (integer, strictly below `g_b`,
+  machine-verified).
+- **`ce1WindowAboveTPT2`** — the cited clause (Z78 pattern):
+  every zeta zero with `tPT2 < Im ≤ tCE1` is on the line; the
+  inclusion `(tPT2, tCE1] ⊂ (g_a, g_b]` is machine-verified
+  (`gAHi_lt_tPT2`, `tCE1_lt_gBLo`).
+- **`allOnLineUpToCE1`** — [Z-PT2] + [CE1] ⟹ the census holds up to
+  `tCE1`.  **The frontier moved.**
+- **`terminalFaceCE1`** — the re-anchored face (no off-line zero of
+  positive height above `tCE1`); `faceShrinkExact`: the height domain
+  shrank by **exactly 4671 units**.
+- **`rh_split_at_CE1`** — the 0288 exact residual **RE-PINNED**:
+  `RH q ↔ (census up to tCE1) ∧ terminalFaceCE1 q` (pure logic,
+  conjugation as in 0288).
+- **`terminalFaceCE1_iff_face0`** — under [CE1], the 0288 face and
+  the re-anchored face are **equivalent**: the shrink is a
+  certificate, not a logical move (honesty).
+- **`rh_reanchored_CE1`** — headline: given [Z-PT2] + [CE1],
+  **all-heights RH ⟺ `terminalFaceCE1`**.
+- **`terminalFaceCE1_of_thetaInf`** — the 0290 M2 closing lands
+  **directly** at the new frontier.
+
+The extension is tiny (`~1.6·10⁻⁹` relative; the source itself says
+it “says nothing about the Riemann hypothesis beyond the window”);
+its value is that **lane M5 now works end-to-end on a fresh 2026
+cited artifact** — every future window above `H0` re-anchors the
+face by the same two-line machine composition.
+
+### 21.3 · CORRIGENDUM to unit 0290 (proportion attribution)
+
+0290 stated the unconditional proportion record as “at least 2/3 of
+the zeros on the line (Conrey-Chandee-Farb-Young)”.  **Both parts are
+wrong** (checked against the August-2026 FRONTIER_MAP from primary
+sources and the Anthropic preprint’s own abstract):
+
+- The **accepted** Levinson-lineage record (on-line, **with
+  multiplicity**, `N₀/N`) is **κ ≥ 0.417293962** —
+  Pratt–Robles–Zaharescu–Zeindler, Res. Math. Sci. 7 (2020),
+  arXiv:1802.10521v3.  No Levinson-side improvement has been
+  accepted since 2020.
+- The “≥ 2/3” figure (**0.67250070367941164573**) is an
+  **August-2026, not-yet-refereed** result counting **distinct /
+  simple** on-line zeros (`N*₀`): the Anthropic (Claude) preprint
+  “More than two thirds of the zeros of the Riemann zeta function
+  lie on the critical line” (problem posed by J. Sumner), extended
+  to 0.673008528 by Ainta (Sunghyeon Jo) via 7-point finite
+  certificates, with an independent proof by Lamzouri.  It counts a
+  formally different quantity and is “incomparable at the count
+  level” with the Levinson lineage.  The CCFY attribution is
+  **retracted**.
+- History chain: Selberg 1942 (κ > 0) → Levinson 1974 (1/3) →
+  Conrey 1989 (0.4088) → Bui–Conrey–Young 2011 (0.4105) → Feng 2012
+  (0.4107) → Pratt–Robles 2018 (0.4128) → **PRZZ 2020
+  (0.417293962)** → [2026 unrefereed: 0.6725… distinct counting].
+
+**NO RH CLAIM.**  The face remains OPEN; the re-anchor is a
+certificate, and the two face formulations are provably the same
+open object.

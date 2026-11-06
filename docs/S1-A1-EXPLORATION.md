@@ -2094,3 +2094,96 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
         not  known.  The  face  remains  OPEN  without  the  cited
         inputs.  This  unit  NAMES,  CITES,  and  WIREs  the  lane
         -  it  does  not  prove  it.
+
+## E22.  THE  M5  RE-ANCHOR  +  the  0290  proportion  corrigendum
+       (0291,  option  B,  unit  3;  discovery  0291)
+
+    0.  WHAT  CHANGED  (the  M5  lane,  from  the  outside  in).
+
+        0289  named  M5  the  "only  machine-verified  SHRINKING
+        lane".  It  now  WORKS  END-TO-END:  a  fresh  October-2026
+        certified  artifact  moves  the  census  frontier  strictly
+        above  the  Platt-Trudgian  height,  and  the  0288  exact
+        residual  is  RE-PINNED  at  the  new  frontier
+        (machine-verified).
+
+    1.  THE  CITATION  (primary  source,  pulled  2026-11-11).
+
+        P.  W.  Murphy,  "A  certified  window  of  zeros  of  the
+        Riemann  zeta  function  just  above  3e12,  with  a
+        machine-checked  Riemann-Siegel  remainder",  October
+        2026  (zenodo  record  23486195;  dataset  23486196;  paper
+        23489697).  Theorem  1:  the  20,000  zeros  between  the
+        Gram  points  g_a  (a  =  12363153437130)  and  g_b
+        (b  =  12363153457130)  are  all  simple  and  on  the
+        line,  with  g_a  in
+        [3000175332798.574911824343  ±  1.60e-13]  and  g_b  in
+        [3000175337471.510047088127  ±  1.86e-13].  g_a  lies
+        just  below  H0  =  3000175332800  (exactly  WinC.tPT2);
+        combined  with  Platt-Trudgian,  every  zero  with
+        0  <  Im  <=  g_b  is  on  the  line.  Method:  128-bit  Arb
+        ball  arithmetic;  the  RS  remainder  by  a  Lean-4
+        kernel-checked  theorem;  Turing  counting  (Amberger-
+        corrected  block  count);  positive/negative  controls;
+        independent  audit;  AI-assisted  (its  own  provenance
+        note).
+
+    2.  THE  MODULE  (DONE,  RhAttack.CE1;  build  green,  full
+        tree  green  17454  jobs).
+
+            *  tCE1  :=  3,000,175,337,471   the  NEW  certified
+              census  frontier  (an  integer  strictly  below  g_b,
+              machine-verified).
+            *  ce1WindowAboveTPT2  -  the  cited  window  clause
+              (Z78  pattern).
+            *  allOnLineUpToCE1  -  [Z-PT2]  +  [CE1]  =>  the
+              census  up  to  tCE1.  THE  FRONTIER  MOVED.
+            *  terminalFaceCE1  -  the  re-anchored  face;
+              faceShrinkExact:  the  height  domain  shrank  by
+              exactly  4671  units.
+            *  rh_split_at_CE1  -  the  0288  residual  RE-PINNED
+              (RH  q  iff  census-tCE1  and  faceCE1;  pure
+              logic).
+            *  terminalFaceCE1_iff_face0  -  the  two  face
+              formulations  EQUIVALENT  under  [CE1]  (the  shrink
+              is  a  certificate,  not  a  logical  move).
+            *  rh_reanchored_CE1  -  HEADLINE:  RH  q  iff
+              terminalFaceCE1  q,  given  [Z-PT2]  +  [CE1].
+            *  terminalFaceCE1_of_thetaInf  -  the  0290  M2
+              closing  lands  DIRECTLY  at  the  new  frontier.
+
+        The  extension  is  tiny  (~1.6e-9  relative;  the  source
+        says  it  "says  nothing  about  RH  beyond  the  window");
+        the  value  is  that  M5  is  now  a  WORKING  PIPELINE:
+        every  future  window  above  H0  re-anchors  the  face  by
+        the  same  two-line  machine  composition.
+
+    3.  THE  0290  CORRIGENDUM  (proportion  attribution).
+
+        0290  attributed  "at  least  2/3  of  the  zeros  on  the
+        line"  to  CCFY.  BOTH  PARTS  CORRECTED  (FRONTIER_MAP
+        August  2026,  from  primary  sources):
+
+            *  Accepted  Levinson-lineage  record  (with
+              multiplicity,  N0/N):  kappa  >=  0.417293962,
+              Pratt-Robles-Zaharescu-Zeindler,  Res.  Math.
+              Sci.  7  (2020),  arXiv:1802.10521v3.
+            *  The  0.67250070367941164573  figure  is  an
+              August-2026  NOT-YET-REFEREED  result  for  DISTINCT
+              /  simple  on-line  zeros  (N*0):  Anthropic
+              preprint  (problem  of  J.  Sumner),  extended  to
+              0.673008528  by  Ainta  (Sunghyeon  Jo),  independent
+              proof  by  Lamzouri.  Formally  a  different  count.
+              The  CCFY  attribution  is  RETRACTED.
+            *  Chain:  Selberg  1942  ->  Levinson  1974  (1/3)
+              ->  Conrey  1989  (0.4088)  ->  B-C-Y  2011
+              (0.4105)  ->  Feng  2012  (0.4107)  ->  Pratt-
+              Robles  2018  (0.4128)  ->  PRZZ  2020
+              (0.417293962)  ->  [2026  unrefereed:  0.6725  ...
+              distinct  counting].
+
+    4.  NO  RH  CLAIM.
+
+        The  face  remains  OPEN;  the  re-anchor  is  a
+        certificate;  the  two  face  formulations  are  provably
+        the  same  open  object.

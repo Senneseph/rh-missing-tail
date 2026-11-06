@@ -1,0 +1,66 @@
+{
+  "id": "0291",
+  "timestamp": "2026-11-11T14:00:00",
+  "title": "0291: THE M5 RE-ANCHOR (option B, unit 3) - the certified census frontier MOVES: Murphy's October-2026 certified window (20,000 zeros between Gram points g_a = 12363153437130 and g_b = 12363153457130, all simple and on the line; g_a in [3000175332798.574911824343 ± 1.60e-13], g_b in [3000175337471.510047088127 ± 1.86e-13]) extends the verified region strictly above the Platt-Trudgian height H0 = 3,000,175,332,800 = WinC.tPT2. New module RhAttack.CE1 (LEAN-PROVEN, Z78 citation pattern): the cited window clause ce1WindowAboveTPT2 (zeros in (tPT2, tCE1] on the line); allOnLineUpToCE1 ([Z-PT2] + [CE1] => census up to tCE1 = 3,000,175,337,471, an integer strictly below g_b, machine-verified); terminalFaceCE1 (the re-anchored face, height domain strictly smaller by exactly 4671 units); rh_split_at_CE1 (the 0288 exact residual RE-PINNED at the new frontier); terminalFaceCE1_iff_face0 (the two face formulations EQUIVALENT under [CE1] - the shrink is a certificate, not a logical move); rh_reanchored_CE1 (headline: RH q iff terminalFaceCE1 q, given [Z-PT2] + [CE1]); terminalFaceCE1_of_thetaInf (the 0290 M2 closing lands directly at the new frontier). ALSO: CORRIGENDUM to 0290's proportion attribution (the 'at least 2/3' record is an August-2026 UNREFEREED result counting DISTINCT on-line zeros, not CCFY; the accepted Levinson-lineage record remains kappa >= 0.417293962, PRZZ 2020). NO RH CLAIM.",
+  "lane": "M5 (frontier extension), from the 0289 face-menu — the only machine-verified SHRINKING lane",
+  "primarySource": {
+    "paper": "P. W. Murphy, 'A certified window of zeros of the Riemann zeta function just above 3e12, with a machine-checked Riemann-Siegel remainder', October 2026",
+    "paperUrl": "https://zenodo.org/records/23489697/files/ce1_window_paper.pdf",
+    "recordUrl": "https://doi.org/10.5281/zenodo.23486195",
+    "datasetUrl": "https://doi.org/10.5281/zenodo.23486196",
+    "theorem1Numbers": "a = 12363153437130, b = 12363153457130; g_a in [3000175332798.574911824343 ± 1.60·10^-13]; g_b in [3000175337471.510047088127 ± 1.86·10^-13]; the b-a = 20000 zeros with g_a < Im s <= g_b are all simple and on the line Re s = 1/2; combined with Platt-Trudgian (Bull. LMS 53 (2021), H0 = 3000175332800 = exactly WinC.tPT2): every non-trivial zero with 0 < Im rho <= g_b has Re = 1/2",
+    "method": "128-bit Arb ball arithmetic; Hardy Z via Riemann-Siegel + first correction; remainder by Lean-4-kernel-checked theorem RSInt.rs_Z_C0' ((3/5)·t^(-3/4), t >= 4250, Arda project, commit 5b8eea03d); Turing method, Gram-block count meeting Amberger's correction (arXiv 2512.23064, unrefereed); positive/negative controls (hidden off-line pair detected, certification refused); Odlyzko calibration; whole window reproduced by independently written audit code; AI-assisted (Claude, Anthropic) under the author's direction (source's own provenance note)",
+    "note": "The certificate reproduces Platt-Trudgian's count 12363153437138 at H0 independently. The extension is tiny (about 1.6e-9 relative); the source says it 'says nothing about the Riemann hypothesis beyond the window itself; what is new is how the certificate is anchored'."
+  },
+  "module": {
+    "path": "formal/RhAttack/CE1.lean",
+    "namespace": "CE1",
+    "build": "RhAttack.CE1 GREEN (8766 jobs); full tree GREEN (17454 jobs)"
+  },
+  "formalObjects": {
+    "constants": [
+      "gAHi : Q = 3000175332798.57491182451 (certified UPPER bound for g_a, top rounded up)",
+      "gBLo : Q = 3000175337471.51004708794 (certified LOWER bound for g_b, bottom rounded down)",
+      "tCE1 : Nat = 3000175337471 (THE NEW CERTIFIED CENSUS FRONTIER, strictly below g_b)"
+    ],
+    "machineFacts": [
+      "gAHi_lt_tPT2 : (gAHi : R) < WinC.tPT2  =>  (tPT2, tCE1] starts to the RIGHT of g_a",
+      "tCE1_lt_gBLo : (tCE1 : R) < (gBLo : R)  =>  tCE1 <= g_b in the certified sense",
+      "tPT2_le_tCE1, faceShrinkExact : (tCE1 : R) - WinC.tPT2 = 4671"
+    ],
+    "citedInput": [
+      "ce1WindowAboveTPT2 : Prop - [CITED MURPHY 2026 THEOREM 1 + PLATT-TRUDGIAN] every zeta zero with tPT2 < Im <= tCE1 is on the line (Z78 pattern)"
+    ],
+    "theorems": [
+      "allOnLineUpToCE1 - [Z-PT2] + [CE1] => the census holds up to tCE1 (THE FRONTIER MOVED)",
+      "terminalFaceCE1 (def) - no off-line zero with positive height above tCE1",
+      "face0_implies_faceCE1 - pure logic (tCE1 >= tPT2)",
+      "terminalFaceCE1_iff_face0 - the two face formulations are EQUIVALENT under [CE1] (the shrink is a certificate, not a logical move)",
+      "rh_split_at_CE1 - the 0288 exact residual RE-PINNED: RH q iff (census up to tCE1) and terminalFaceCE1 q (pure logic, conjugation as in 0288)",
+      "rh_reanchored_CE1 - HEADLINE: given [Z-PT2] + [CE1], all-heights RH iff terminalFaceCE1 q",
+      "rh_of_terminalFaceCE1 - the final named step, re-anchored (RH of a face closing; NO CLOSING SUPPLIED)",
+      "terminalFaceCE1_of_thetaInf - the 0290 M2 closing lands DIRECTLY at the new frontier"
+    ]
+  },
+  "corrigendum0290": {
+    "whatWasWrong": "0290 stated: 'the unconditional Levinson-type proportion record stands at at least 2/3 of the zeros on the line (Conrey-Chandee-Farb-Young).' Both the size-attribution and the CCFY attribution are WRONG.",
+    "correctedState": {
+      "acceptedLevinsonLineageRecord": "kappa >= 0.417293962 (on-line, with multiplicity, N0/N) - Pratt, Robles, Zaharescu, Zeindler, Res. Math. Sci. 7 (2020), arXiv:1802.10521v3. No Levinson-side improvement since 2020.",
+      "the2ThirdsResult": "0.67250070367941164573 for DISTINCT (N*0) and SIMPLE on-line zeros - August 2026, NOT YET REFEREED: Anthropic (Claude) preprint 'More than two thirds of the zeros of the Riemann zeta function lie on the critical line' (problem posed by J. Sumner; Lean formalization anthropics/zeta-23-lean, sorry-free per its page, semantic fidelity pending human verification); extended to 0.673008528 by Ainta (Sunghyeon Jo) via 7-point finite certificates; independent proof by Lamzouri (per Cairn Commons 2026 entry). It counts a DIFFERENT quantity (distinct/simple on-line) than the Levinson lineage (multiplicity) and is 'formally incomparable at the count level.'",
+      "historyChain": "Selberg 1942 (kappa > 0) -> Levinson 1974 (1/3) -> Conrey 1989 (0.4088, th = 4/7 - eps) -> Bui-Conrey-Young 2011 (0.4105) -> Feng 2012 (0.4107 rigorous; claimed 0.4128, gap found) -> Pratt-Robles 2018 (0.4128 validated) -> PRZZ 2020 (0.417293962) -> [2026 unrefereed: 0.6725... distinct counting]."
+    },
+    "provenance": "FRONTIER_MAP (zeta-record, August 2026, from primary sources, checked against arXiv:1802.10521 section 1.3) + the Anthropic preprint abstract itself (pulled verbatim)."
+  },
+  "honesty": {
+    "noRHClaim": true,
+    "faceStatus": "the face REMAINS OPEN; the re-anchor is a 4671-unit height extension (1.6e-9 relative) certified by a fresh 2026 interval-arithmetic artifact; it says nothing about RH beyond the window; every FUTURE window above H0 re-anchors the face by the same two-line machine composition (allOfLineUpToCE1 + rh_split_at_CE1)",
+    "provenanceNote": "the Murphy certificate is AI-assisted (its own provenance note); it is unrefereed; it carries positive/negative controls and an independent audit; it rests on one unrefereed preprint (Amberger's block-count correction) for the Turing step"
+  },
+  "nextMoves": [
+    "0292 (NEXT): the M3/S-unit lane audit is COMPLETE (dead walls 0278-0285); the W2 wire is DEAD (0289); M2 is WIRAED and SEALED (0290-0291); M5 now WORKS END-TO-END (0291). Remaining direct-attack content: (i) attempt a genuine analytic extension of the Levinson-Conrey asymptotic beyond th = 1/2 (the M2 research target - a real research risk, honest negative audit if it fails); (ii) watch for further certified windows above H0 in the 2026-10/11 literature and re-anchor (mechanism proven); (iii) the sparse-face sparsity program (distributional zero-free in the band, beyond pointwise zero-free regions).",
+    "terminalFace status: OPEN / PROBABLY TRUE; the absolute A1 clause: OPEN / PROBABLY FALSE (the W2-wire input, 0289)"
+  ],
+  "buildEvidence": "cd formal && lake build => 'Build completed successfully (17454 jobs)'; RhAttack.CE1 => 'Build completed successfully (8766 jobs)'",
+  "rhClaim": "NONE",
+  "zeroFreeClaim": "none beyond [Z78] + the citations (open inputs)"
+}

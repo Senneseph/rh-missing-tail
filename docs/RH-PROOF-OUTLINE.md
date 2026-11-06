@@ -107,7 +107,38 @@ the Levinson–Conrey asymptotic beyond θ = 1/2 (frontier:
 Conrey–Chandee–Farb–Young; the unconditional record is ≥ 2/3 of the
 zeros on the line; the lane is active in 2026 via arXiv:2605.24363).
 NO RH CLAIM.  Record: docs/ROUTE-B-FINAL-RECORD-2026-11-04.md §20;
-discovery 0290; S1-A1-EXPLORATION.md E21.
+discovery 0290; S1-A1-EXPLORATION.md E21.  **Corrigendum (0291,
+2026-11-11):** the proportion line above is corrected — the
+accepted Levinson-lineage record is κ ≥ 0.417293962 (PRZZ 2020,
+with multiplicity); the “≥ 2/3” (0.6725…) figure is an
+August-2026 unrefereed result for distinct/simple on-line zeros
+(Anthropic preprint; Ainta to 0.673008528; independent proof by
+Lamzouri); the CCFY attribution is retracted.  Record: §21.3;
+discovery 0291.
+
+**0291 note (the M5 re-anchor — the certified frontier moves,
+2026-11-11).**  Lane M5 (the only machine-verified shrinking lane)
+now works end-to-end on a fresh 2026 cited artifact: Murphy’s
+October-2026 certified window (20,000 zeros between the Gram points
+a = 12,363,153,437,130 and b = 12,363,153,457,130, all simple and
+on the line; g_b ≈ 3,000,175,337,471.51 — Zenodo 23486195/6196,
+128-bit Arb ball arithmetic, Lean-kernel-checked Riemann–Siegel
+remainder, independent audit) extends the verified region strictly
+above the Platt–Trudgian height.  `RhAttack.CE1` (build green, full
+tree green): the new cited clause [CE1] + [Z-PT2] ⟹ the census up
+to **tCE1 := 3,000,175,337,471** (machine-verified); the 0288
+exact residual is RE-PINNED (`rh_split_at_CE1`: RH q iff census up
+to tCE1 ∧ `terminalFaceCE1 q`); the two face formulations are
+equivalent under [CE1] (`terminalFaceCE1_iff_face0` — the shrink is
+a certificate, not a logical move); headline
+`rh_reanchored_CE1`: all-heights RH ⟺ the re-anchored face given
+[Z-PT2] + [CE1]; the 0290 M2 closing lands directly at the new
+frontier (`terminalFaceCE1_of_thetaInf`).  The height domain of the
+face shrank by exactly 4671 units (~1.6·10⁻⁹ relative); NO RH
+CLAIM — the face remains the same open object, certified one 4671-
+unit band higher; every future window above H0 re-anchors by the
+same two-line composition.  Record: docs/ROUTE-B-FINAL-RECORD-
+2026-11-04.md §21; discovery 0291; S1-A1-EXPLORATION.md E22.
 
 ---
 
