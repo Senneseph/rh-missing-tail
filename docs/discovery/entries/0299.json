@@ -1,0 +1,52 @@
+{
+  "id": 299,
+  "ts": "2026-11-11T13:30:00",
+  "title": "0299: OPTION-B PHASE (0289-0298) PACKAGED - the complete map: the face is ONE object (0288/0289 identity machine-proven) that lane M2 reaches through ONE wall {theta | 4/7 < theta} with THREE names - (1.2) pointwise asymptotic (door 1, published 0<th<4/7) / levSharp sharp residual (0294, machine bridge) / thetaBounded BG antecedent (door 2, in-tree def; 0298 decomposition: door2 = door1-on-interval + classical estimates, uniform shape adds no content) - and TWO cited sufficiency wires (0290 theta=inf Farmer+BG form; 0296 BG Theorem-1 antecedent family via the in-paper 'In particular' clause), either of which at all theta>4/7 completes RH given the cited censuses; M5 works IN-HOUSE (frontier H0 -> tCE1 [cited] -> tCE2 = 3,000,175,342,144 [our own window]; window 3 in flight -> tCE3); all other menu lanes sealed (M1/M3/M4 dead, M6 audited blind); 7 new Lean modules; tree green 17454; NO RH CLAIM - the phase mapped and re-anchored the single open object, it did not close it",
+  "kind": "phase-package unit (option B, phase closure record 0289->0298; 0279/0281 book-closed pattern)",
+  "phaseMap": {
+    "face": {
+      "object": "RHEnd.terminalFace (0288): no off-line zero with positive height above the frontier",
+      "identity_machine_proven": "0289: faceIdentity_z78_plus_unified38 + faceIdentity_terminalFace_gives_unified38 (the endpoint's own face)",
+      "status": "OPEN / PROBABLY TRUE (0289 reframe: the face is probably true; the absolute A1 clause of the dead W2 wire is probably false)",
+      "certified_frontier_at_package": "tCE2 = 3 000 175 342 144 (9344 units above H0 = 3 000 175 332 800; 39 999 certified zeros above g_a1 in the two windows; window 3 in flight -> tCE3)"
+    },
+    "laneM2_wall": {
+      "gap_set": "{theta | 4/7 < theta} (0295 unifiedGap; machine LevWall3: set equality + nesting 1/2 < 9/17 < 4/7 < 1)",
+      "three_names": [
+        "(1.2) pointwise asymptotic I_{T^theta}(0,T)/T = 1 + 1/theta - door 1, published 0 < theta < 4/7 (Levinson 1/2 -> Conrey 4/7; the exact (1.2) proven 0<th<1/2 per BG 2017 section 1)",
+        "levSharp: the sharp residual asymptotic (Radziwiill sharpening, 0294): thetaResid/T -> 1/theta; machine bridge LevWall2 (residPointwise + wThetaNormEqMoment + residExpand interval linearity + residSharp limit algebra from named inputs asympAt2T + mozMain)",
+        "thetaBounded (in-tree def, LevWall4): the BG Theorem-1 antecedent I_N(0,T) <<_eps T^(1+eps) uniformly over 2 <= N <= T^theta - door 2; 0298 decomposition: = short-mollifier STANDARD part (N <= T^delta: I_N << N*T*log*T via |M_N| <= C sqrt(N) + Hardy-Littlewood pointwise second moment, cited) + (1.2) part (N in [T^delta, T^theta]) - the uniform range shape ADDS NO ANALYTIC CONTENT; door-2 published reach 4/7"
+      ],
+      "sufficiency_wires": [
+        "0290 (ThetaInf): cited thetaInfConjecture + thetaInfImpliesAllOnLine (Farmer kappa = 1 + BG Theorem-1 particular case) => terminalFace (machine: terminalFace_of_thetaInf / _CE1 / _CE2)",
+        "0296 (LevWall4): cited [BG-ANT-ALL] thetaBoundedAll + [BG-T1-ARB] (BG 2017 'In particular' clause - proven in-paper) => terminalFace (machine: terminalFace_of_bgArb); thetaFacesCover: the theta-shrink family is collective (no single theta closes, theta -> infinity does)"
+      ],
+      "whatCompletesRH": "proving EITHER wire's input family (i.e. the one wall, in either shape) at every theta > 4/7, given the cited censuses [Z78]/[Z-PT2] + windows",
+      "audits": "ratios conjecture (Farmer 1993) = heuristic parent of the thetaInf conjecture, NOT a published shortcut (0296 negative audit); 2025-2026 literature: off-diagonal barrier UNMOVED (0295: Lin 2025 = Q-side only, VK = constants, chain re-confirmed via MO 515314)"
+    },
+    "laneM5": {
+      "status": "WORKING, demonstrated in-house",
+      "frontier_chain": "H0 = 3 000 175 332 800 (Platt-Trudgian cited) -> tCE1 = 3 000 175 337 471 (0291 Murphy cited window, 20 000 zeros, LEAN CE1) -> tCE2 = 3 000 175 342 144 (0297 OUR OWN window, 19 999 zeros, LEAN CE2, three verification layers; min certified |Z| = 4.28e-5 ~ 1e5x the t^(-3/4) remainder)",
+      "in_flight_at_package": "window 3 (a = 12 363 153 477 129, b_requested = +20 000) running in background -> tCE3 on completion",
+      "reuse_pattern": "any future window re-anchors by the same two-line machine composition (named window clause + bandOfWindows + rh_split/rh_reanchored)"
+    },
+    "otherLanes": "M1 dead (0289 mechanism theorem); M3 dead (S maximal order growth); M4 dead (zero-free regions on the wrong side); M6 audited structurally blind to off-line zeros (0292: spectral-twin Gram-model argument; the 2026 proportion-certificate results STAND as proportions); zero-density (0285) refutes the PERVASIVE face at two levels combined with 0292; the SPARSE face is untouched and IS the face"
+  },
+  "machineState": {
+    "newModules": ["RhAttack.ThetaInf (0290)", "RhAttack.CE1 (0291)", "RhAttack.LevWall (0293)", "RhAttack.LevWall2 (0294)", "RhAttack.LevWall3 (0295)", "RhAttack.LevWall4 (0296)", "RhAttack.CE2 (0297)"],
+    "build": "all green; full tree green 17454 jobs (post-CE2)",
+    "citedInputs": "all named Props, Z78 pattern, provenance docstrings: thetaInfConjecture / thetaInfImpliesAllOnLine / thetaBounded(All) / bgArbImpliesAllOnLine / asympAt / asympAt2T / mozMain / [LEV-WALL] / [BARRIER-ASYMP] / [UNIFIED-WALL] / [CE1-WIN] / [CE2-WIN] / Z78 / allOnLineUpTo census"
+  },
+  "honesty": {
+    "noRHClaim": true,
+    "whatThePhaseDidNotDo": "close the face; prove any member of the wall family; move the analytic gap (still the (1.2) asymptotic at theta > 4/7, three names)",
+    "whatThePhaseDidDo": "map the face completely (object/identity/wall/doors/wires); move the certified frontier in-house from H0 to tCE2 (window 3 -> tCE3); machine-verify every link; audit and seal the other lanes; record two checker-artifact debugs in the 0297 control (float64 t-decode; dps-15 phase representation) resolved in AGREEMENT with the certificate"
+  },
+  "nextMoves": [
+    "window 3 -> tCE3 (in flight; on completion: verify_window + spot-check + CE3 module or a CE2-pattern two-line addendum + record addendum)",
+    "the analytic program (the only path to completion): attack the wall {theta | 4/7 < theta} in either shape - a scoped new attempt (e.g. a weighted/short-weight mollifier program or a new off-diagonal treatment) with a rigorous negative audit in the 0280 pattern if it fails, OR a literature hunt for a 2026 off-diagonal advance past 4/7 the 0295 audit may have missed",
+    "no RH claim at any step"
+  ],
+  "rhClaim": "NONE",
+  "faceStatus": "OPEN / PROBABLY TRUE (frontier tCE2, window 3 in flight)"
+}

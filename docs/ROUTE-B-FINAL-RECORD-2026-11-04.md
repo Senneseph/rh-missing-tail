@@ -1687,3 +1687,85 @@ trust base as CE1's cited window,  now produced in-house).
 `[CE2-WIN]`  is a named cited Input in the Z78 pattern;  nothing
 analytic is proven in-tree beyond pure logic and rational
 arithmetic.  Tree green 17454.
+
+## 29 · 0299 — PHASE PACKAGE (option B, 0289 → 0298): the COMPLETE
+       map of the direct-attack program — the face is ONE object;
+       M2 is ONE wall with two doors (three names); M5 works
+       in-house; every link machine-verified
+
+**The terminal state of the phase, one page.**
+
+1.  **THE FACE (unchanged, now fully mapped).**  The single open
+    object is  `RHEnd.terminalFace`  (0288:  all-heights  RH  =
+    cited  census  ∧  terminalFace;  0289:  face  identity  with
+    the  endpoint  face  machine-proven).  After  the  phase:
+    OPEN  /  PROBABLY  TRUE;  certified  up  to  tCE2  =
+    3 000 175 342 144  (9344  units  above  Platt-Trudgian  H0;
+    39 999  certified  zeros  in  the  two  windows  above  g_a1).
+
+2.  **LANE  M2 = ONE WALL,  TWO DOORS,  THREE  NAMES**  (the
+    phase's  analytic  core):
+        wall  =  {θ  |  4/7  <  θ}   (0295  unified  gap;
+                   machine  LevWall3  set  equality)
+        name I    =  the  (1.2)  pointwise  asymptotic
+                     I_{T^θ}(0,T)/T  =  1  +  1/θ
+                     (door  1;  published  0  <  θ  <  4/7)
+        name II   =  the  sharp  residual  asymptotic  levSharp
+                     (0294  Radziwiłł  sharpening;  machine  bridge
+                     LevWall2:  interval  expansion  +  limit  algebra)
+        name III  =  the  BG  Theorem-1  antecedent
+                     I_N(0,T)  ≪_ε  T^{1+ε}  uniformly  over
+                     2  ≤  N  ≤  T^θ  (door  2;  in-tree  def
+                     `thetaBounded`;  0298  decomposition:
+                     door  2  =  door  1  on  [δ, θ]  +  classical
+                     short-mollifier  estimates  —  the  uniform
+                     shape  ADDS  NO  ANALYTIC  CONTENT)
+    Two  CITED  sufficiency  wires  each  close  the  face  given
+    their  inputs:  (0290)  the  θ  =  ∞  form  (Farmer  κ = 1  +
+    BG  Theorem-1  particular  case)  and  (0296)  the  Theorem-1
+    antecedent  family  at  every  θ  (the  "In  particular"
+    clause,  verbatim  from  BG  2017,  proven  in-paper).
+    Proving  EITHER  family  (i.e.  the  one  wall)  at  every
+    θ  >  4/7  completes  RH  given  the  cited  censuses.
+    The  ratios  conjecture  (Farmer  1993)  is  the  heuristic
+    PARENT  —  not  a  published  shortcut  (0296  negative
+    audit).  The  2025-2026  literature  audit  found  the
+    off-diagonal  barrier  UNMOVED  (0295).
+
+3.  **LANE  M5 WORKS IN-HOUSE**  (the  phase's  concrete  motion):
+        H0  =  3 000 175 332 800  (Platt-Trudgian,  cited)
+      →  tCE1  =  3 000 175 337 471   (0291:  Murphy  cited  window,
+           20 000  zeros  certified)
+      →  tCE2  =  3 000 175 342 144   (0297:  OUR  OWN  window  via
+           the  Apache-2.0  pipeline,  19 999  zeros  certified,
+           triply  verified  incl.  an  independent  mpmath  control
+           whose  two  flags  were  debugged  as  checker  artifacts
+           and  resolved  in  AGREEMENT)
+    Re-anchoring  is  a  two-line  machine  composition  (CE1/CE2
+    pattern);  window  3  (b2  →  b3)  is  IN  FLIGHT  at  package
+    time  →  tCE3.
+
+4.  **THE  REST  OF  THE  MENU  (sealed  0289/0292):**  M1  dead
+    (mechanism  theorem),  M3  dead  (S  maximal  order),  M4  dead
+    (wrong  side),  M6  audited  structurally  blind  (the  2026
+    proportion-certificate  family  is  compatible  with  a  sparse
+    face  by  construction  —  its  results  stand  as  proportions).
+    Zero-density  (0285)  +  spectral-twin  model  (0292)  make  a
+    PERVASIVE  face  impossible  at  two  levels;  the  SPARSE  face
+    is  untouched  —  it  IS  the  face.
+
+5.  **MACHINE  STATE:**  seven  new  modules  in  the  phase
+    (`ThetaInf`,  `CE1`,  `LevWall`,  `LevWall2`,  `LevWall3`,
+    `LevWall4`,  `CE2`)  —  all  green;  full  tree  green
+    (17454  jobs).  All  cited  inputs  are  named  Props  in  the
+    Z78  pattern  with  provenance  docstrings;  nothing  analytic
+    is  claimed  proven  in-tree  beyond  pure  logic  +  rational
+    arithmetic  +  the  interval  algebra  of  LevWall2.
+
+**Honesty  of  the  package.**  NO  RH  CLAIM.  The  phase  did  not
+close  the  face  —  it  MAPPED  it  completely  (one  object,  one
+wall,  three  names,  two  doors,  two  sufficiency  wires),  moved
+the  certified  frontier  in-house,  and  machine-verified  every
+link.  The  analytic  gap  —  the  (1.2)  asymptotic  at
+θ  >  4/7  —  stands  as  the  single  named  open  object  of
+the  whole  program,  in  all  three  of  its  forms.

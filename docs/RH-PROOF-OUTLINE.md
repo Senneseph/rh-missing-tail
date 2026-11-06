@@ -340,6 +340,36 @@ certified).  No RH claim; the face is the same open object,
 certified 9,344 units higher.  Record: ROUTE-B-FINAL-RECORD §27;
 discovery 0297; S1-A1-EXPLORATION.md E28.
 
+**0299 note (PHASE PACKAGE, option B 0289→0298 — the complete
+map — 2026-11-11).**  The phase mapped the single open object
+completely:  (1)  THE FACE — `RHEnd.terminalFace` (0288 iff;
+0289 identity with the endpoint face, machine both ways),
+OPEN / PROBABLY TRUE, certified to **tCE2 = 3,000,175,342,144**
+(window 3 in flight → tCE3).  (2)  LANE M2 = ONE WALL with
+THREE names and TWO doors:  gap set `{θ | 4/7 < θ}` (0295,
+machine);  names = the (1.2) pointwise asymptotic (door 1,
+published 0 < θ < 4/7)  /  `levSharp` (0294, machine bridge)
+/  `thetaBounded` (door 2, in-tree;  0298:  door 2 = door 1 on
+[δ, θ] + classical short-mollifier estimates — the uniform
+shape adds no analytic content;  its published reach is 4/7);
+TWO cited sufficiency wires each close the face — 0290 (θ = ∞
+form:  Farmer κ = 1 + BG Theorem-1 particular case) and 0296
+(BG Theorem-1 antecedent family at every θ, "In particular"
+clause verbatim in-paper) — proving EITHER family past 4/7
+completes RH given the cited censuses.  (3)  LANE M5 works
+IN-HOUSE (H0 → tCE1 cited → tCE2 our-own-window, triply
+verified;  every future window re-anchors by the same two-line
+machine composition).  (4)  All other lanes sealed:  M1/M3/M4
+dead,  M6 audited structurally blind (its proportion results
+stand),  pervasive face refuted at two levels (0285 + 0292),
+the sparse face untouched — it IS the face.  Machine:  seven
+new modules (ThetaInf, CE1, LevWall, LevWall2, LevWall3,
+LevWall4, CE2);  full tree green 17454.  NO RH CLAIM:  the
+phase mapped and re-anchored the single open object
+(the  (1.2)  asymptotic  at  θ  >  4/7)  —  it  did  not  close
+it.  Record:  ROUTE-B-FINAL-RECORD §29;  discovery 0299;
+S1-A1-EXPLORATION.md E30.
+
 ---
 
 ## 1. The hypothesis

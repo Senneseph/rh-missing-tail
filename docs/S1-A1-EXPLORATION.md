@@ -2561,3 +2561,50 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
     two-line  machine  composition);  [CE2-WIN]  is  a  named  cited
     Input;  trust  base  =  pipeline  controls  +  kernel-checked
     remainder  +  the  three  layers  above.
+
+## E30.  OPTION-B  PHASE  (0289 -> 0298)  PACKAGED  (0299)  -  the
+       complete  map  in  one  place
+
+    THE  FACE  (unchanged  object,  fully  mapped):
+        RHEnd.terminalFace  (0288:  all-heights  RH  =  cited
+        census  AND  terminalFace;  0289:  identity  with  the
+        endpoint's  own  face,  machine-proven  both  ways)
+    Status:  OPEN  /  PROBABLY  TRUE;  certified  up  to  tCE2  =
+    3 000 175 342 144  (9344  units  above  H0;  39 999  certified
+    zeros  in  the  two  windows).
+
+    LANE  M2  =  ONE  WALL,  TWO  DOORS,  THREE  NAMES:
+        gap  set  =  {theta  |  4/7  <  theta}
+                    (0295  unifiedGap,  machine  LevWall3)
+        (1.2)  pointwise  asymp  =  door  1
+              (published  0  <  theta  <  4/7)
+        levSharp  (0294  machine  bridge  via  interval  algebra)
+        thetaBounded  (0296  in-tree  def,  door  2;  0298:
+              door2  =  door1-on-interval  +  classical
+              short-mollifier  estimates  -  uniform  shape  adds
+              NO  content;  published  reach  4/7)
+        Two  CITED  sufficiency  wires  each  close  the  face:
+        0290  (theta=inf  form:  Farmer  kappa=1  +  BG  Theorem-1
+        particular  case)  and  0296  (BG  Theorem-1  antecedent
+        family  at  every  theta,  "In  particular"  clause  ver-
+        batim  in-paper).  Proving  EITHER  family  past  4/7
+        COMPLETES  RH  given  the  cited  censuses.
+
+    LANE  M5  =  WORKING  IN-HOUSE:
+        H0  ->  tCE1  (0291  cited  window)  ->  tCE2  (0297
+        OUR  window,  triply  verified)  ->  tCE3  (window  3
+        IN  FLIGHT  at  package  time).
+
+    OTHER  LANES  SEALED:  M1/M3/M4  dead  (mechanism  /  S
+    maximal  order  /  wrong  side);  M6  audited  blind  (0292
+    spectral-twin  Gram  model  -  compatible  with  a  sparse
+    face  BY  CONSTRUCTION;  proportion  results  STAND);
+    pervasive  face  refuted  at  two  levels  (0285  zero-density
+    +  0292  model);  the  SPARSE  face  is  untouched  -  it  IS
+    the  face.
+
+    HONESTY:  NO  RH  CLAIM.  The  phase  MAPPED  and  RE-ANCHORED
+    the  single  open  object;  it  did  not  close  it.  The
+    analytic  gap  -  (1.2)  at  theta  >  4/7  in  any  of  its
+    three  forms  -  stands.  Machine:  7  new  modules,  tree
+    green  17454.
