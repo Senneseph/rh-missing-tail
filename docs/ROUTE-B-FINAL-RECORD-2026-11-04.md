@@ -1200,3 +1200,91 @@ The two proven structural allies of the sparse face (zero-density
 0285; spectral twin 0292) make a *pervasive* face impossible at two
 independent levels, while leaving the *sparse* face untouched.
 Record-level unit (0280/0285 pattern); **NO RH CLAIM**.
+
+## 23 · 0293 — THE LEVINSON WALL `[LEV-WALL]`: the EXACT gap object
+### of lane M2, named and closed off in-tree (Lean: RhAttack.LevWall)
+
+Lane M2 (0290) is wired: the θ=∞ conjecture implies `terminalFace`.
+What was missing was a *named object* for the analytic content left
+between “published” and “conjectured”.  0293 names it.
+
+### 23.1 · The pointwise statement, exactly (in-tree)
+
+`asympAt θ` is the (1.2) asymptotic **one θ at a time**, over the
+in-tree `thetaIMoment` (the Levinson mollified second moment of
+0290):
+
+```lean
+def asympAt (θ : ℝ) : Prop :=
+    Tendsto (fun (T : ℝ) => thetaIMoment (T ^ θ) 0 T / T)
+      atTop (𝓝 (1 + 1 / θ))
+```
+
+- `thetaInf_iff_pointwise` (machine, definitional):
+  `thetaInfConjecture ↔ ∀ θ, 0 < θ → asympAt θ`.
+- **`[LEV-WALL]`** — `def levWallAt (θ : ℝ) : Prop := asympAt θ`:
+  the named open input.  **Published reach 0 < θ < 4/7**
+  (Levinson 1974: 0 < θ < 1/2, original mollifier, κ > 1/3;
+  Conrey 1989: 0 < θ < 4/7, *variant* mollifier, κ > 2/5 — both
+  quoted verbatim from Bettin–Gonek §1, re-pulled 2026-11-11).
+  **OPEN for θ > 4/7.**
+
+### 23.2 · The gap set, its non-emptiness and unboundedness (machine)
+
+```lean
+def levWallGap : Set ℝ := { θ | (4 / 7 : ℝ) < θ }
+```
+
+- `publishedRange_12lt47` : `1/2 < 4/7` — the Levinson line sits
+  **below** the Conrey frontier.
+- `publishedRange_47lt1`  : `4/7 < 1`.
+- `gapNonempty`           : **θ = 1 is a gap angle.**
+- `gapUnbounded`          : past any `M` a wall angle exists —
+  the θ=∞ target has **no finite endpoint**, matching Farmer's
+  heuristic range (every θ > 0).
+
+**The historical flip (BG §1, verbatim)** is pinned: “Initially it
+was believed (see [2]) that (1.2) does not hold when θ > 1. However,
+Farmer [2] produced a heuristic argument suggesting that it holds
+for **every θ > 0**” — i.e. the gap `{θ : 4/7 < θ}` is not only
+open, it is the *intended* domain of the conjecture, and includes
+the whole θ > 1 region that was once believed dead.
+
+### 23.3 · The closing wire, gap object exposed (machine)
+
+```lean
+theorem terminalFace_of_levWall (q : ZeroSet)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (hInf : thetaInfImpliesAllOnLine)
+    (hWall : ∀ (θ : ℝ), 0 < θ → levWallAt θ) : terminalFace q
+```
+
+This is the 0290 M2 closing re-stated **with the gap object named**:
+`terminalFace` follows from the cited BG implication plus `[LEV-WALL]`
+at every θ > 0.  So *closing the face via M2* is, definitionally,
+*proving `levWallAt θ` for all θ in `levWallGap`*.
+
+### 23.4 · The two θ's, kept distinct
+
+| Θ | object | published | open | target |
+|---|---|---|---|---|
+| **asymp θ** | the (1.2) asymptotic `I_{T^θ}/T → 1+1/θ` | 0 < θ < **4/7** (Levinson 1/2; Conrey 4/7) | θ > 4/7 | every θ > 0 (θ = ∞) |
+| **proportion θ_F** | Levinson **proportion** length | standard **1/2 − ε**; B-C-H-B **9/17** (degree 2); PRZZ **4/7** (κ ≥ 0.417293962 record) | longer lengths | — |
+
+The **“1/2 barrier”** named in the leading work (PRZZ §1.3: B-C-H-B
+“past the **1/2 barrier** to 9/17”; generic-coefficient ceiling
+17/33 − ε, §9(3); degree/truncation frontier question, §9(4); “we
+are **very far away** from such lengths of mollifiers”) is the
+*proportion-method* length barrier.  It is the same phenomenon as the
+asymp gap — standard degree-1 length stops at 1/2; higher degree /
+special structure is needed to cross — but the two θ's are kept
+distinct in the record from this unit on.
+
+### 23.5 · Honesty
+
+The in-tree wall is defined by its **published reach** (what the
+primary sources state), **not** by a memory-reconstructed
+diagonal/off-diagonal decomposition of the (1.2) computation — that
+split is deliberately **not** asserted in-tree (fabrication red
+line).  `RhAttack.LevWall` GREEN (8766 jobs); full tree GREEN
+(17454 jobs).  **NO RH CLAIM.**

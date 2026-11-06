@@ -37,9 +37,9 @@
     "proportionResultsStand": "the 2/3 / 0.673 / 0.6735 proportion results remain valid unconditional mathematics; the audit concerns ONLY their (non-)use as face closers"
   },
   "nextMoves": [
-    "0293 (NEXT, research-risk unit): a genuine scoped attempt at the M2 target - the theta > 1/2 side of (1.2). Honest options: (i) prove a NEW, weaker, but sufficient-in-context bound (e.g., the range-uniform <<_eps antecedent at a fixed theta > 1/2 from NEW inputs, not the pointwise asymptotic); (ii) identify and (if possible) formalize the exact cross-term obstruction so that 'the gap' is a named inequality rather than folklore; (iii) if neither succeeds this session, a rigorous negative audit of the attempt (0280 pattern). No faking.",
-    "M5 stays open for the next external certified window above g_b (mechanism proven; re-anchor is two lines in CE1's pattern)",
-    "the sparse face remains THE object; its two proven structural allies (zero-density 0285, spectral twin 0292) make 'pervasive' impossible at two independent levels, while leaving 'sparse' untouched"
+    "DONE in 0293: THE LEVINSON WALL [LEV-WALL] - the exact gap object of lane M2, named and closed off in-tree (RhAttack.LevWall GREEN): asympAt theta (exact pointwise (1.2)); thetaInf_iff_pointwise (machine, definitional); levWallAt := asympAt (NAMED open input, published reach 0<th<4/7, OPEN for th>4/7); levWallGap = {th | 4/7<th} NONEMPTY (th=1) and UNBOUNDED (machine); 1/2<4/7<1 (machine); terminalFace_of_levWall (the M2 closing wire with the gap object named); historical flip pinned (BG section 1 verbatim: (1.2) 'initially believed' to fail for th>1; Farmer heuristic: every th>0); the two thetas (asymp-th vs proportion-th_F) kept distinct.",
+    "0294 (NEXT): the M2 research attempt, scoped and honest - (a) publish-cite the EXACT published cross-term bound from the Levinson 1974 / Conrey 1989 primary texts (the wall becomes a cited inequality, not just a range statement); (b) a scoped NEW computation attempt (weighted mollifier range) with rigorous negative audit if it fails (0280 pattern); (c) if the primaries are unobtainable: record-level audit of the attempt at published-reach precision",
+    "M5 stays open for the next external certified window above g_b (mechanism proven; two-line re-anchor in CE1's pattern)"
   ],
   "rhClaim": "NONE",
   "faceStatus": "OPEN / PROBABLY TRUE"

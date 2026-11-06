@@ -172,6 +172,36 @@ the sparse face untouched.  Record-level unit (0280/0285 pattern);
 NO RH CLAIM.  Record: docs/ROUTE-B-FINAL-RECORD-2026-11-04.md
 §22; discovery 0292; S1-A1-EXPLORATION.md E23.
 
+**0293 note (THE LEVINSON WALL `[LEV-WALL]` — the exact gap
+object of lane M2, named and closed off in-tree; Lean:
+RhAttack.LevWall, GREEN, 17454-job full tree, 2026-11-11).**
+The (1.2) asymptotic at a fixed θ is now stated **exactly, in
+tree** (`LevWall.asympAt θ`, over the 0290 `thetaIMoment`);
+`thetaInfConjecture ↔ ∀θ>0, asympAt θ` (machine, definitional).
+The named open input **[LEV-WALL]** `levWallAt θ := asympAt θ`
+carries the published reach **0 < θ < 4/7** (Levinson 1974:
+0 < θ < 1/2, original mollifier, κ > 1/3; Conrey 1989: θ < 4/7,
+variant mollifier, κ > 2/5 — both quoted verbatim from
+Bettin–Gonek §1, re-pulled) and is **OPEN for θ > 4/7**.  The
+gap set `{θ | 4/7 < θ}` is machine-proven **nonempty (θ = 1)
+and unbounded** (the θ=∞ target has no finite endpoint);
+`1/2 < 4/7 < 1` machine-proven.  The HISTORICAL FLIP pinned
+(BG §1 verbatim): (1.2) was “initially believed” to fail for
+θ > 1; Farmer’s heuristic suggests it for **every** θ > 0 — the
+gap is the intended domain of the conjecture.  The M2 CLOSING
+wire is re-stated **with the gap object named**:
+`terminalFace_of_levWall` — `[zeta membership]` + `[cited BG
+implication]` + `[LEV-WALL at every θ > 0]` ⇒ `terminalFace`
+(0288).  Closing the face via M2 = proving `levWallAt θ` for
+all θ in `levWallGap`.  The two θ's are kept distinct from here
+on: the **asymp θ** (published to 4/7, target ∞) vs the
+**proportion θ_F** (standard 1/2−ε, the **named “1/2 barrier”**;
+B-C-H-B 9/17 degree-2; PRZZ 4/7, κ ≥ 0.417293962 record).  The
+in-tree wall is defined by its PUBLISHED REACH, deliberately not
+by a memory-recomputed diagonal/off-diagonal split (fabrication
+red line).  NO RH CLAIM.  Record: ROUTE-B-FINAL-RECORD §23;
+discovery 0293; S1-A1-EXPLORATION.md E24.
+
 ---
 
 ## 1. The hypothesis

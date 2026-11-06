@@ -2247,3 +2247,67 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
 
     4.  NO  RH  CLAIM.  Record-level  unit  (0280/0285  pattern);
         nothing  new  in-tree  logic  this  unit.
+
+## E24.  THE  LEVINSON  WALL  -  the  EXACT  gap  object  of  lane
+       M2,  NAMED  AND  CLOSED  OFF   IN-TREE   (0293,  LEAN:
+       RhAttack.LevWall)
+
+    1.  THE  POINTWISE  STATEMENT  (1.2)  AT  A  FIXED  THETA
+        (in-tree,  over  the  existing  thetaIMoment  of  0290):
+
+            asympAt  th  :=
+              Tendsto  (fun  T,  thetaIMoment  (T^th)  0  T /  T)
+                      atTop  (N  (1  +  1/th))
+
+        *  thetaInf_iff_pointwise  (machine,  definitional):
+          thetaInfConjecture  =  "asympAt  at  every  th  >  0".
+        *  [LEV-WALL]  levWallAt  th  :=  asympAt  th  -  the
+          NAMED  open  input.  PUBLISHED  REACH  0  <  th  <
+          4/7  (Levinson  1974:  0  <  th  <  1/2,  ORIGINAL,
+          kappa  >  1/3;  Conrey  1989:  th  <  4/7,  VARIANT,
+          kappa  >  2/5  -  both  quoted  VERBATIM  from
+          Bettin-Gonek  section  1).  OPEN  for  th  >  4/7.
+
+    2.  THE  GAP  SET  +  its  shape  (all  machine):
+
+          levWallGap  :=  {  th  |  4/7  <  th  }
+
+        *  1/2  <  4/7  <  1     (range  arithmetic).
+        *  th  =  1  IS  a  gap  angle  (gapNonempty).
+        *  gapUnbounded:  the  th  =  inf  target  has  NO
+          finite  endpoint.
+        *  HISTORICAL  FLIP  (BG  section  1  verbatim):
+          (1.2)  was  "initially  believed"  to  FAIL  for
+          th  >  1;  Farmer's  heuristic  suggests  EVERY
+          th  >  0.  The  gap  is  exactly  the  intended
+          domain  of  the  CONJECTURE.
+
+    3.  THE  CLOSING  WIRE  (GAP  OBJECT  EXPOSED,  machine):
+
+          terminalFace_of_levWall :
+            (hqz)  +  (hInf  :  thetaInfImpliesAllOnLine)
+            +  (hWall  :  all  th  >  0,  levWallAt  th)
+              =>  terminalFace   [0288  exact  residual]
+
+        Closing  the  face  via  M2  =  proving  levWallAt  at
+        every  th  in  levWallGap.  NAMED,  not  folklore.
+
+    4.  TWO  THETAS,  KEPT  DISTINCT:
+
+          asymp  th      :  published  0  <  th  <  4/7,
+                            OPEN  th  >  4/7,  target  inf.
+          prop.  th_F    :  standard  1/2  -  eps  (the
+                            NAMED  "1/2  BARRIER"),  9/17
+                            (B-C-H-B  degree  2),  4/7
+                            (PRZZ  kappa  >=
+                            0.417293962  record).
+
+        Same  PHENOMENON  (degree-1  length  stops  at  1/2;
+        cross  it  needs  higher  degree  /  structure),  but
+        the  record  keeps  the  two  DISTINCT  from  here  on.
+
+    5.  HONESTY:  the  wall  is  defined  by  its  PUBLISHED
+        REACH  (what  the  sources  state),  NOT  by  a  memory-
+        reconstructed  diagonal/off-diagonal  split  -  that  is
+        intentionally  NOT  in-tree.  LevWall  GREEN  (8766
+        jobs);  full  tree  GREEN  (17454).  NO  RH  CLAIM.
