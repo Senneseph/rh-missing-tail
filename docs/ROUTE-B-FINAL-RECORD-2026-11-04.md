@@ -1517,3 +1517,68 @@ the face to a point" made machine-precise.
 **open** inputs.  Proven:  the second wire, the face-cover
 arithmetic  (tree green 17454).  Face status:  **OPEN,
 PROBABLY TRUE**  —  now with exactly **two** named doors.
+
+## 28 · 0298 — DOOR-2 DECOMPOSITION: the two doors are the SAME WALL (record-level audit, 0280 pattern)
+
+The 0296 map has two doors on the face:  **door 1** = the
+sharp  (1.2)  asymptotic input  at every  θ  (wall:  `θ > 4/7`,
+the  0295  unified  gap);  **door 2**  =  the  BG  Theorem-1
+antecedent  —  the  `I_N(0,T) ≪_ε T^{1+ε}`  uniform  range  shape
+(one  C,  one  T0,  all  integer  `2 ≤ N ≤ T^θ`,  machine-defined
+in-tree  as  `thetaBounded`  in  `LevWall4`).  This  unit  answers
+the  0296  nextMove:  **what  is  the  uniform  range  shape  made
+of?**
+
+**The  decomposition  (ε  >  0  given;  δ := ε/3).**  The  range
+`[2, T^θ]`  splits:
+
+* **Part  A —  the  short  mollifier  part  (`N ≤ T^δ`):
+  STANDARD.**  `|M_N(1/2+it)| ≤ C√N`  (elementary:  the  weights
+  `1 − log n/log N ≤ 2`,  `Σ_{n≤N} n^{-1/2} ≤ 1+2√N`),  and  the
+  classical  **Hardy–Littlewood  pointwise  second  moment**
+  `∫_0^T |ζ(1/2+it)|²dt = T·log(T/2π) + O(T)`  (cited,  not
+  in-tree)  give  `I_N(0,T) ≤ C₁·N·T·log T ≤ C₂·T^{1+δ} ≪_ε
+  T^{1+ε}`  for  `N ≤ T^{ε/3}`.
+
+* **Part  B —  the  long  mollifier  part  (`T^δ ≤ N ≤ T^θ`,
+  `θ' := log N/log T ∈ [δ, θ]`):**  the  (1.2)  asymptotic
+  `I_{T^{θ'}}(0,T)/T ∼ 1 + 1/θ'`  (published  for  `0 < θ' < 4/7`;
+  the  standard  compact-uniform  reading  on  `[δ, θ]`  —  the
+  methods'  constants  diverge  at  `θ' → 0`,  not  on  compact
+  subintervals)  gives  `I_N(0,T) ≤ T·(1+1/δ)·(1+o_ε(T)) =
+  O_ε(T) ≪_ε T^{1+ε}`.
+
+Parts  A+B  cover  the  whole  range  with  one  `C_ε`  and  one
+`T₀`  —  **exactly  the  antecedent's  shape**.
+
+**Consequences  (record-level,  cited  inputs):**
+
+1.  **Door  2  at  θ  =  door  1  on  `[δ, θ]`  +  classical
+    estimates.**  The  antecedent's  "genuinely  stronger  shape"
+    (0296  note)  **adds  no  new  analytic  content**:  it  is  the
+    (1.2)  family  plus  the  elementary  short-mollifier  estimate.
+    The  reverse  implication  fails  (a  big-O  shape  carries  no
+    asymptotic)  —  door  1  is  the  canonical  (stronger)  form.
+2.  **UPGRADE  of  0296's  conservative  note:**  door  2's
+    **published  reach  is  `θ ≤ 4/7`**  (cited:  (1.2)  on
+    `[δ, 4/7]`  +  the  pointwise  second  moment)  —  not  the
+    `1/2`  pointwise-shape  reading  (that  1/2  was  the
+    Radziwiłł-Prop-B  reading  of  the  (1.2)  *proof*  range).
+3.  **The  two  doors'  gaps  coincide:**  `{θ | 4/7 < θ}`  —  the
+    0295  unified  gap.  **Three  names,  one  object:**  the  (1.2)
+    asymptotic  (door  1),  the  sharp  residual  `levSharp`
+    (0294,  machine-bridged  to  (1.2)),  the  BG  antecedent
+    `thetaBounded`  (door  2,  this  decomposition).
+
+**Honesty.**  No  RH  claim;  no  in-tree  proof  of
+`thetaBounded(θ)`  at  any  θ  (inputs  cited);  the  compact-
+uniform  reading  of  the  published  (1.2)  is  the  standard
+interpretation  of  the  Levinson/Conrey/B-C-H-B  proofs  —  the
+per-paper  verbatim  uniformity  wording  was  **not**  audited  (
+flagged  interpretive  step);  the  pointwise  second  moment  is
+classical  (Hardy–Littlewood;  cited).  No  published  frontier
+moved  by  this  audit.  The  face  remains  **OPEN  /  PROBABLY
+TRUE**  —  and  now  is  attacked  through  **one  wall**  (three
+names),  with  two  sufficiency  wires  (0290  θ = ∞  form;  0296
+BG  Theorem-1  form)  both  closing  the  face  given  their
+cited  inputs.

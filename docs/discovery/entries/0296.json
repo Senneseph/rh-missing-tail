@@ -28,16 +28,23 @@
   "twoDoors": "door 1 (0290/0293-0295): the ASYMPTOTIC input - (1.2) at every theta (published to 4/7; the unified wall is theta > 4/7). door 2 (this module): the UNIFORM-BOUNDEDNESS input - I_N(0,T) <<_epsilon T^{1+epsilon} uniformly over 2 <= N <= T^theta at every theta (published to 0 < theta <= 1/2 pointwise-asymptotic-shape; the in-range link 'asymptotic implies the <<_epsilon boundedness' is a standard estimate, cited not in-tree; the RANGE-uniformity is the genuinely stronger shape of the antecedent). Proving EITHER family for every theta (past their respective published reaches) closes the face. The two families are NOT linked in-tree by an in-tree proof (honesty red line: the thetaInf ==> BG-ANT-ALL step involves the uniform-in-N range shape, proven inside BG 2017 if anywhere, not re-proven here).",
   "honesty": {
     "noRHClaim": true,
-    "namedOpen": ["thetaInfConjecture / unified wall (1.2) at theta > 4/7", "thetaBoundedAll (Theorem-1 antecedent at every theta)", "bgArbImpliesAllOnLine (cited, proven in BG 2017)", "the ratios conjecture (sibling, not in the in-tree chain)"],
+    "namedOpen": [
+      "thetaInfConjecture / unified wall (1.2) at theta > 4/7",
+      "thetaBoundedAll (Theorem-1 antecedent at every theta)",
+      "bgArbImpliesAllOnLine (cited, proven in BG 2017)",
+      "the ratios conjecture (sibling, not in the in-tree chain)"
+    ],
     "provenByMachine": "terminalFace_of_bgArb (wiring), thetaFaceExist, thetaFacesCover - all machine, tree green 17454 jobs"
   },
   "faceMenuUpdate": "M2 now exposes TWO attack doors (asymptotic 1.2@all-theta; uniform boundedness <<_eps at all theta) instead of one; the 2025-2026 audit shows neither door has been moved since the published reaches; the ratios conjecture is recorded as the natural sibling research program (with its own literature) whose eventual theorem 'ratios-2 ==> (1.2)@theta' WOULD close door 1 - but no such theorem exists as of 2026-11-11",
   "build": "RhAttack.LevWall4 GREEN (8766 jobs); full tree GREEN (17454 jobs)",
   "nextMoves": [
+    "DONE 0298: door-2 decomposition audit - antecedent = short-mollifier STANDARD part (N<=T^delta: I_N<<N*T*log*T via |M_N|<=C sqrt(N) + HARDY-LITTLEWOOD pointwise second moment (cited)) + (1.2)-part (N in [T^delta, T^theta]); door 2 at theta = door 1 on [delta,theta] + classical estimates; door-2 published reach UPGRADED 1/2 -> 4/7; the two doors' gaps coincide = {theta | 4/7 < theta} (three names, one object). Record-level audit, cited inputs, no RH claim (entry 0298, route record section 28, S1-A1 E29)",
     "0297: decide next step. Candidates: (a) PACKAGE/CONSOLIDATE the option-B phase: the 0288-0296 block yields a complete, machine-verified map of the face's doors and the single open analytic object (unified wall / BG-ANT-ALL, two names for the two doors) - a record-level consolidation unit + a front-page state refresh; (b) attempt a SCOPED computation on door 2: audit the exact RANGE-uniformity gap of the Theorem-1 antecedent (is I_N(0,T) <= C T^{1+eps} for 2<=N<=T^(1/2) known in that uniform shape? the Levinson machinery gives pointwise-in-theta asymptotics; the uniform range shape may be a genuine published theorem - audit primary sources before asserting); (c) re-run the M5 two-line re-anchor check (the next certified window above g_b) to keep the census frontier current while the analytic program settles",
     "M5 re-anchor stays open (two-line re-anchor per 0291)",
     "the face now has exactly two named doors; both are open; no RH claim"
   ],
   "rhClaim": "NONE",
-  "faceStatus": "OPEN / PROBABLY TRUE"
+  "faceStatus": "OPEN / PROBABLY TRUE",
+  "status": "landed (0296); superseded-by-extension: 0298 upgrades door-2 published reach to 4/7 via decomposition (doors = same wall)"
 }

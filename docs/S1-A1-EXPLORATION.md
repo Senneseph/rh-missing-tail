@@ -2455,3 +2455,47 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
         theta-faces  =  the  whole  off-line  range):
         no  single  cited  theta  closes  the  face,
         infinitely  many  do.
+
+## E29.  DOOR-2  DECOMPOSITION:  THE  TWO  DOORS  ARE  THE  SAME
+       WALL  (0298,  record-level  audit  -  entry  0298,
+       route  record  section  28)
+
+    The  0296  face  has  two  doors  (door  1:  the  (1.2)  sharp
+    asymptotic;  door  2:  the  BG  Theorem-1  antecedent,
+    `thetaBounded`  in-tree).  Audit  (0280  pattern):
+
+    1.  DECOMPOSITION:  the  antecedent  `I_N(0,T) ≪_ε
+        T^(1+eps)`  uniformly  over  `2 <= N <= T^theta`  splits
+        into  (A)  N <= T^(eps/3):  STANDARD  -  |M_N(1/2+it)| <=
+        C sqrt(N)  +  the  Hardy-Littlewood  POINTWISE  SECOND
+        MOMENT  int_0^T |zeta(1/2+it)|^2 dt = T log(T/2pi) + O(T)
+        (cited,  classical)  =>  I_N <= C N T log T <= O_eps
+        (T^(1+eps));  (B)  T^(eps/3) <= N <= T^theta:  the  (1.2)
+        asymptotic  on  [delta,  theta]  (compact-uniform  reading,
+        standard  -  the  methods'  constants  diverge  at  theta' ->
+        0,  not  on  compacts)  =>  I_N <= (1 + 1/delta)(1 + o)(T)
+        = O_eps(T).  Parts  A+B  =  EXACTLY  the  antecedent's
+        shape  (one  C_eps,  one  T0).
+
+    2.  CONSEQUENCE:  door  2  at  theta  =  door  1  on  [delta,
+        theta]  +  classical  estimates  -  the  "uniform  range
+        shape"  ADDS  NO  ANALYTIC  CONTENT.  The  big-O  shape  does
+        NOT  give  the  asymptotic  (no  reverse  implication)  -
+        door  1  is  the  canonical/stronger  form.
+
+    3.  UPGRADE  of  the  0296  conservative  note:  door  2's
+        PUBLISHED  REACH  is  theta <= 4/7  (via  cited  (1.2)@[delta,
+        4/7]  +  pointwise  second  moment)  -  not  the  1/2
+        pointwise-shape  reading.
+
+    4.  THE  TWO  GAPS  COINCIDE:  {theta | 4/7 < theta}  -  the
+        0295  unified  gap.  THREE  NAMES,  ONE  OBJECT:  (1.2)
+        (door  1)  /  levSharp  (0294  machine  bridge)  /
+        thetaBounded  (door  2).  Two  sufficiency  wires  stand
+        (0290  thetaInf;  0296  BG  Theorem-1),  both  closing  the
+        face  given  their  cited  inputs.
+
+    HONESTY:  no  RH  claim;  no  in-tree  thetaBounded  (inputs
+    cited);  compact-uniform  reading  flagged  interpretive  (per-
+    paper  verbatim  uniformity  not  audited).  Face  status:
+    OPEN  /  PROBABLY  TRUE.

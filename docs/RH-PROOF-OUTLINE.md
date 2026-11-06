@@ -290,6 +290,29 @@ closes the face, θ → ∞ does).  NO RH CLAIM.  Record:
 ROUTE-B-FINAL-RECORD §26; discovery 0296;
 S1-A1-EXPLORATION.md E27.
 
+**0298 note (DOOR-2 DECOMPOSITION — the two doors are
+the SAME WALL — 2026-11-11).**  Record-level audit
+(0280 pattern; no Lean): the BG Theorem-1 antecedent
+`I_N(0,T) ≪_ε T^{1+ε}` uniformly over `2 ≤ N ≤ T^θ`
+**decomposes** into (A) `N ≤ T^{ε/3}`: STANDARD —
+`|M_N(1/2+it)| ≤ C√N` + the HARDY–LITTLEWOOD pointwise
+second moment `∫_0^T |ζ(1/2+it)|²dt = T·log(T/2π) + O(T)`
+(cited, classical) ⇒ `I_N ≤ C·N·T·log T`; (B)
+`T^{ε/3} ≤ N ≤ T^θ`: the (1.2) asymptotic on
+`[ε/3, θ]` (compact-uniform reading, standard) ⇒
+`I_N = O_ε(T)`.  Parts A+B = exactly the antecedent's
+shape.  Consequences: **door 2 at θ = door 1 on
+`[δ, θ]` + classical estimates** (the uniform shape adds
+no analytic content; no reverse implication — door 1 is
+the canonical/stronger form); **door 2's published reach
+UPGRADES from the 0296 conservative `1/2` to `4/7`**;
+**the two doors' gaps coincide = `{θ | 4/7 < θ}`** —
+three names, one object: (1.2) / `levSharp` (0294
+machine bridge) / `thetaBounded` (door 2).  No RH claim;
+inputs cited; compact-uniform reading flagged
+interpretive.  Record: ROUTE-B-FINAL-RECORD §28;
+discovery 0298; S1-A1-EXPLORATION.md E29.
+
 ---
 
 ## 1. The hypothesis
