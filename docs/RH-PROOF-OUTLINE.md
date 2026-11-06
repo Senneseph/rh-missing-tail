@@ -999,3 +999,39 @@ attempt  0303:  the  degree-2  test  function  at  the  (1.2)
 level.  Tree  green  17454.  NO  RH  CLAIM.  Record:
 ROUTE-B-FINAL-RECORD  §32;  discovery  0302;  S1-A1-EXPLORATION.md
 E32.
+
+**0303 note (the 4/7 wall's exact published obstruction, pinned —
+2026-11-11).**  Primary source:  PRZZ  (arXiv:1802.10521,
+Res.  Math.  Sci.  7  (2020))  Theorem  4.1  —  the
+twisted  second  moment  (N  =  T^theta)  by
+coefficient  regime:  Case  1  (arbitrary  coefficients)
+:  E  =  T^{3/20} N^{33/20}  +  ...  ->  theta  <
+17/33  (Bettin-Chandee-Radziwill  trilinear  Kloosterman
+ingredient);  Case  2  (mu² · degree-D):  E  =
+T^eps(N^{11/6} + N^{11/12} T^{1/2})  ->  theta  <  6/11
+(=  the  2017  Feng-variant  1706.04593);  Case  3
+(degree-D  family,  contains  Levinson's  mu  at  D  =
+0):  E  =  T^eps(N^{7/4} + N^{7/8} T^{1/2})  ->
+theta  <  4/7  -  verbatim  "taking  N  =  T^{4/7-eps}
+is  permissible".  THE  EXACT  OBSTRUCTION  (machine,
+`RhAttack.LevWall6`):  the  Case-3  exponents  (7/4,
+7/8)  SATURATE  SIMULTANEOUSLY  at  theta  =  4/7;
+admissible  iff  theta  <  4/7;  **wallGapFailsObstruction**
+(every  wall  theta  fails  the  published  o(T)
+condition)  +  boundary47Fails  (4/7  itself  fails  -
+sharp);  admissible  set  =  [0,  4/7).  THE  LADDER
+REFINED  (machine-ordered):  1/2  (B-C-H-B  1985)  <
+17/33  (PRZZ  generic)  <  9/17  (B-C-H-B  (1.3)
+coefficients  b_C  =  μ(n)n^{σ₀−1/2}P(log(y/n)/log y),
+Vaughan  +  Weil  -  the  degree-2  entry)  <  6/11
+(PRZZ  Case  2)  <  4/7  (PRZZ  Case  3).  MOVING  THE
+WALL  =  changing  the  exponents  7/4 /  7/8  (sharper
+bilinear  Kloosterman  estimate,  better  balance
+W  ≠  U^{1/4},  or  new  decomposition)  —  none
+published  (0300  sweep);  the  GENUINE  LEVER  is
+PRZZ's  own  open  question:  the  degree  d  vs
+truncation  ℓ  balance  (section  9,  verbatim).  Tree
+green  17454.  NO  RH  CLAIM  —  wall  UNMOVED,  now
+pinned  at  its  exact  published  obstruction.  Record:
+ROUTE-B-FINAL-RECORD  §33;  discovery  0303;
+S1-A1-EXPLORATION.md  E33.

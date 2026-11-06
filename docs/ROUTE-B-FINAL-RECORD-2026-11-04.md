@@ -1906,3 +1906,80 @@ The 0280-pattern scoped analytic attempt promised in 0299:
 Build:  RhAttack.LevWall5 green (8768 jobs);  full tree green
 (17454 jobs).  NO RH CLAIM.  (discovery 0302;
 formal/RhAttack/LevWall5.lean)
+
+
+## 33 · 0303 — the 4/7 wall's EXACT PUBLISHED OBSTRUCTION, pinned
+from the primary source  (PRZZ  Theorem  4.1)  (2026-11-11)
+
+The  0280-pattern  audit  of  the  degree/truncation  ladder
+(the  0302  nextMove):  the  wall  is  now  a  MACHINE-
+characterized  saturation  of  the  exact  published  error
+term,  not  a  named  frontier.
+
+* **PRIMARY  SOURCE:**  Pratt-Robles-Zaharescu-Zeindler,
+  "More  than  five-twelfths  of  the  zeros  of  zeta
+  are  on  the  critical  line",  arXiv:1802.10521  (Res.
+  Math.  Sci.  7  (2020)),  Theorem  4.1  —  the  twisted
+  second  moment  N  =  T^theta,  computed  unconditionally
+  by  coefficient  regime:
+      Case  1  (arbitrary  a_n  ≪  n^eps):
+          E  =  T^{3/20} N^{33/20}  +  N^{1/2} T^{1/2+eps}
+               ⇔  theta  <  17/33
+          (ingredient:  Bettin-Chandee-Radziwill,  the
+          trilinear  Kloosterman  sum  —  the  paper  says
+          the  17/33  -  eps  best  bound  is  DUE  to
+          them);
+      Case  2  (mu²  ·  degree-D):
+          E  =  T^eps (N^{11/6}  +  N^{11/12} T^{1/2})
+               ⇔  theta  <  6/11
+          (=  the  2017  Feng-variant  1706.04593,  now
+          identified  as  a  regime  of  the  same
+          framework);
+      Case  3  (degree-D  family  (mu  *  Λ₁^{*k₁}  *  ...
+          *  Λ_D^{*k_D})  -  contains  the  classical
+          Levinson  coefficients  mu  at  D  =  0):
+          E  =  T^eps (N^{7/4}  +  N^{7/8} T^{1/2})
+               ⇔  theta  <  4/7,  with  the  proof  stating
+          verbatim:  "Thus,  taking  N  =  T^{4/7-eps}
+          is  permissible."
+  Error  structure:  Type  I  (summation  by  parts  +
+  Weil  incomplete  Kloosterman)  +  Type  II  (bilinear
+  Kloosterman,  Deshouillers-Iwaniec  Lemma  1,  balance
+  W  =  U^{1/4})  -  the  BILINEAR  KLOOSTERMAN  SUM
+  estimates  are  the  source  of  the  exponents
+  themselves.
+* **THE  EXACT  OBSTRUCTION  (machine,  `RhAttack.LevWall6`):**
+  the  Case-3  exponents  (7/4,  7/8)  SATURATE
+  SIMULTANEOUSLY  at  theta  =  4/7  ((7/4)(4/7)  =  1
+  AND  (7/8)(4/7) + 1/2  =  1,  norm_num);  admissible
+  iff  theta  <  4/7  (linarith);  **wallGapFailsObstruction**
+  (every  theta  in  the  wall  fails  the  published  o(T)
+  condition)  +  boundary47Fails  (theta  =  4/7  itself
+  fails  -  T^eps  residue  →  T^{1+eps},  not  o(T));
+  admissibleSetIsHalfline  ([0,  4/7)).
+* **THE  LADDER  REFINED  (machine-ordered):**
+  1/2  (B-C-H-B  1985,  generic)  <  17/33  (PRZZ
+  generic  /  B-C-R)  <  9/17  (B-C-H-B  (1.3)
+  coefficients  b_C(n,y)  =  μ(n)n^{σ₀−1/2}
+  P(log(y/n)/log y),  Vaughan  +  Weil  —  the  degree-2
+  entry)  <  6/11  (PRZZ  Case  2)  <  4/7  (PRZZ  Case  3
+  =  the  Conrey-variant  boundary)  -  the  0294/0300
+  ladder  1/2  <  9/17  <  4/7  is  REFINED  (17/33
+  inserted;  6/11  re-sourced),  not  contradicted;  the
+  wall  boundary  and  open  set  {theta  |  4/7  <  theta}
+  are  UNCHANGED.
+* **MOVING  THE  WALL  requires  changing  the  exponents
+  7/4  or  7/8  themselves:**  (i)  a  sharper  bilinear
+  Kloosterman  estimate  (Type  II),  (ii)  a  better
+  balance  W  ≠  U^{1/4},  or  (iii)  a  different
+  decomposition  -  none  in  the  published  record  as
+  of  the  0300  sweep.  The  GENUINE  LEVER  is  PRZZ's
+  own  open  question  (section  9,  verbatim):  "What
+  would  be  a  good  balance  between  the  degree  d
+  and  the  truncation  ℓ?"  —  the  named  next
+  lever.
+
+Build:  RhAttack.LevWall6  green  (8768);  full  tree
+green  (17454).  NO  RH  CLAIM  —  the  wall  is
+UNMOVED,  now  Pinned  at  its  exact  published
+obstruction.  (discovery  0303;  formal/RhAttack/LevWall6.lean)

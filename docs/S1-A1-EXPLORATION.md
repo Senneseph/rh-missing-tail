@@ -2706,3 +2706,76 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
 
     NO  RH  CLAIM  -  no  wall  movement;  one  natural  variant
     family  audited  and  sealed  at  its  exact  boundary.
+
+
+## E33.  THE  4/7  WALL'S  EXACT  PUBLISHED  OBSTRUCTION  -  PINNED
+        FROM  PRZZ  THEOREM  4.1  (0303)  (2026-11-11)
+
+    The  0280-pattern  audit  the  0302  unit  pointed  at:
+
+    PRIMARY  SOURCE  (arXiv:1802.10521,  Res.  Math.  Sci.
+    7  (2020),  Theorem  4.1):  the  twisted  second
+    moment  (N  =  T^theta,  unconditional)  by
+    coefficient  regime  -
+        Case  1  (arbitrary  coefficients):
+            E  =  T^{3/20} N^{33/20}  +  N^{1/2}T^{1/2+eps}
+            ->  theta  <  17/33
+            (Bettin-Chandee-Radziwill  trilinear
+            Kloosterman  ingredient)
+        Case  2  (mu²  ·  degree-D):
+            E  =  T^eps(N^{11/6}  +  N^{11/12}T^{1/2})
+            ->  theta  <  6/11
+            (=  2017  Feng-variant  1706.04593)
+        Case  3  (degree-D  family,  contains  Levinson's
+            mu  at  D  =  0):
+            E  =  T^eps(N^{7/4}  +  N^{7/8}T^{1/2})
+            ->  theta  <  4/7,  verbatim  "taking
+            N  =  T^{4/7-eps}  is  permissible"
+
+    THE  EXACT  OBSTRUCTION:  the  Case-3  exponents
+    (7/4,  7/8)  saturate  SIMULTANEOUSLY  at
+    theta  =  4/7  —  the  wall's  boundary  is  one
+    exact  equation,  not  a  frontier  of  uncertain
+    source.  (Type  II  bilinear  Kloosterman  sums,
+    Deshouillers-Iwaniec  Lemma  1,  balance
+    W  =  U^{1/4},  are  the  source  of  the
+    exponents.)
+
+    MACHINE  (RhAttack.LevWall6,  new):
+        admissibleDegreeD/General/Mu2  (the  published
+            o(T)  conditions)
+        saturation  theorems  (all  three  regimes
+            saturate  at  their  published  frontier,
+            norm_num)
+        admissibleDegreeD_iff47  etc.
+            (iff  theorems,  linarith)
+        **wallGapFailsObstruction**  (every  wall  theta
+            fails  the  published  o(T)  condition)
+        boundary47Fails  (4/7  itself  fails  -  sharp)
+        admissibleSetIsHalfline  ([0,  4/7))
+        publishedLatticeOrdering
+            (1/2  <  17/33  <  9/17  <  6/11  <  4/7  <  1)
+    Green:  RhAttack.LevWall6  (8768),  full  tree
+    (17454).
+
+    THE  LADDER  REFINED:  the  0294/0300  ladder
+    1/2  <  9/17  <  4/7  gains  17/33  (generic  reach,
+    B-C-R  input)  and  re-sources  6/11  (PRZZ  Case  2
+    =  Feng  variant);  the  9/17  entry  is  the
+    B-C-H-B  (1.3)-coefficient  result  (b_C(n,y)  =
+    μ(n)n^{σ₀−1/2}P(log(y/n)/log y),  Vaughan  +  Weil)
+    —  the  degree-2  test-function  entry  the  0302
+    unit  named.
+
+    MOVING  THE  WALL  =  changing  the  exponents
+    7/4  or  7/8  themselves  (sharper  bilinear
+    Kloosterman  estimate,  better  balance,  or  a
+    new  decomposition)  —  none  in  the  published
+    record  (0300  sweep).  The  GENUINE  LEVER  is
+    PRZZ's  own  open  question  (section  9,
+    verbatim):  "What  would  be  a  good  balance
+    between  the  degree  d  and  the  truncation  ℓ?"
+    -  the  named  next  lever  (0304  candidate).
+
+    NO  RH  CLAIM  —  wall  UNMOVED,  now  pinned  at
+    its  exact  published  obstruction.

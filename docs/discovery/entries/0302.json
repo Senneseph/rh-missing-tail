@@ -12,9 +12,9 @@
     "module": "/home/jsmille/Projects/rh-missing-tail/formal/RhAttack/LevWall5.lean",
     "namespace": "LevWall5",
     "kernel": [
-      "residGenF (W Y T) = ∫_T^{2T} ||1 - W Y t||^2 dt (general family W : Y ↦ w_Y)",
-      "iMomF (W Y T) = ∫_T^{2T} ||W Y t||^2 dt ((1.2)-style moment, general)",
-      "reMainF (W Y T) = ∫_T^{2T} Re(W Y t) dt (general)"
+      "residGenF (W Y T) = \u222b_T^{2T} ||1 - W Y t||^2 dt (general family W : Y \u21a6 w_Y)",
+      "iMomF (W Y T) = \u222b_T^{2T} ||W Y t||^2 dt ((1.2)-style moment, general)",
+      "reMainF (W Y T) = \u222b_T^{2T} Re(W Y t) dt (general)"
     ],
     "theorems": [
       "residExpandGen: residGenF W Y T = (2T - T) + iMomF W Y T - 2 * reMainF W Y T for ANY family, hypothesis Continuous (W Y) + 0 <= T ONLY (the exact LevWall2.residExpand bookkeeping, integrand-generalized)",
@@ -43,7 +43,7 @@
     "whatWasNotClaimed": "no wall movement; the attempt was scoped, audited, and sealed with its exact boundary named; no new analytic result beyond the machine kernel and the record-level exponent audit"
   },
   "nextMoves": [
-    "0303: degree-2 test function at the (1.2) level - the exact obstruction at the 17/33 - eps ceiling (B-C-H-B 9/17 is the degree-2 result at the PROPORTION level; pinning it at the (1.2) LEVEL is the next scoped attempt)",
+    "DONE 0303 (2026-11-11): the exact published obstruction of the 4/7 wall pinned from PRZZ Theorem 4.1 (LevWall6 green): Case-3 exponents (7/4, 7/8) saturate simultaneously at 4/7; wall = failure set of the published o(T) condition (machine); ladder refined to 1/2 < 17/33 < 9/17 < 6/11 < 4/7; the genuine lever = PRZZ degree-d/truncation-l open question",
     "window 4 (M5) if compute allows: a4 = 12363153497128 (seamless)",
     "the 0300 tool list (short-interval reciprocity 2608.14852, amplified moments 2606.27323) is the recorded infrastructure for any future (1.2) program",
     "no RH claim"

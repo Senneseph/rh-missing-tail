@@ -21,7 +21,10 @@
     "verifier": "python3 code/verify_window.py window3_b3.json",
     "verifierVerdict": "CERTIFIED: true",
     "zeros": "b - a = 19999 in (g_a3, g_b3], ALL SIMPLE and on the line",
-    "N_range": [691008, 691008],
+    "N_range": [
+      691008,
+      691008
+    ],
     "rosser": "runs 48 (left of g_a3) / 49 (right of g_b3), both >= K = 12; roesser_failures_inside = 0; 15864 blocks inside; blocks_len_gt1 all determined",
     "cross_check_failures": [],
     "undetermined_gram_signs": [],
@@ -45,16 +48,51 @@
   "lean": {
     "module": "/home/jsmille/Projects/rh-missing-tail/formal/RhAttack/CE3.lean",
     "namespace": "CE3",
-    "constants": {"gB3Lo": "300017534681691 / 100 (= 3000175346816.91, certified lower bound for g_b3, margin approx 3e-3)", "tCE3": "3000175346816"},
-    "machineTheorems": ["tCE3_lt_gB3Lo", "tCE2_lt_tCE3", "gB2Lo_lt_tCE3", "faceShrinkCE3 (= 4672)", "frontierGapAboveH0 (= 14016)", "gA2Hi_lt_gB2Lo"],
-    "citedClauses_Z78pattern": [
-      {"clause": "CE2.ce1WinClause (reused)", "region": "(tPT2, gA2Hi]", "source": "Murphy window 1, re-verified in environment"},
-      {"clause": "ce2WinClauseFull (new)", "region": "(gA2Hi, gB2Lo]", "source": "window2_b2.json; the region is a slice of the certified region (g_a2, g_b2] (gA2Hi certified top of g_a2, gB2Lo certified bottom of g_b2)"},
-      {"clause": "ce3WinClause (new)", "region": "(gB2Lo, tCE3]", "source": "UNION OF window2_b2.json AND window3_b3.json: for t0 in (gB2Lo, tCE3], either t0 <= g_a3 (true, in the exact dyadic ball, bit-identical in both certificates) hence t0 in (g_a2, g_b2] (window 2 region) - since t0 > gB2Lo > gA2Hi >= g_a2 - or t0 > g_a3 hence t0 in (g_a3, g_b3] (window 3 region) - since t0 <= tCE3 < gB3Lo <= g_b3. The two certified regions union to (g_a2, g_b3] which contains (gB2Lo, tCE3]. No rational split point is needed: the true Gram point g_a3 sits inside its recorded ball and both certificates cover their side of it."}
+    "constants": {
+      "gB3Lo": "300017534681691 / 100 (= 3000175346816.91, certified lower bound for g_b3, margin approx 3e-3)",
+      "tCE3": "3000175346816"
+    },
+    "machineTheorems": [
+      "tCE3_lt_gB3Lo",
+      "tCE2_lt_tCE3",
+      "gB2Lo_lt_tCE3",
+      "faceShrinkCE3 (= 4672)",
+      "frontierGapAboveH0 (= 14016)",
+      "gA2Hi_lt_gB2Lo"
     ],
-    "reanchorTheorems": ["bandOfWindows3", "allOnLineUpToCE3", "terminalFaceCE3", "faceCE2_implies_faceCE3", "terminalFaceCE3_iff_faceCE2", "rh_split_at_CE3", "rh_reanchored_CE3 (headline: RH q <-> terminalFaceCE3 q under the four cited census inputs)", "rh_of_terminalFaceCE3 (final named step)", "terminalFaceCE3_of_thetaInf (0290 lane lands directly)"],
+    "citedClauses_Z78pattern": [
+      {
+        "clause": "CE2.ce1WinClause (reused)",
+        "region": "(tPT2, gA2Hi]",
+        "source": "Murphy window 1, re-verified in environment"
+      },
+      {
+        "clause": "ce2WinClauseFull (new)",
+        "region": "(gA2Hi, gB2Lo]",
+        "source": "window2_b2.json; the region is a slice of the certified region (g_a2, g_b2] (gA2Hi certified top of g_a2, gB2Lo certified bottom of g_b2)"
+      },
+      {
+        "clause": "ce3WinClause (new)",
+        "region": "(gB2Lo, tCE3]",
+        "source": "UNION OF window2_b2.json AND window3_b3.json: for t0 in (gB2Lo, tCE3], either t0 <= g_a3 (true, in the exact dyadic ball, bit-identical in both certificates) hence t0 in (g_a2, g_b2] (window 2 region) - since t0 > gB2Lo > gA2Hi >= g_a2 - or t0 > g_a3 hence t0 in (g_a3, g_b3] (window 3 region) - since t0 <= tCE3 < gB3Lo <= g_b3. The two certified regions union to (g_a2, g_b3] which contains (gB2Lo, tCE3]. No rational split point is needed: the true Gram point g_a3 sits inside its recorded ball and both certificates cover their side of it."
+      }
+    ],
+    "reanchorTheorems": [
+      "bandOfWindows3",
+      "allOnLineUpToCE3",
+      "terminalFaceCE3",
+      "faceCE2_implies_faceCE3",
+      "terminalFaceCE3_iff_faceCE2",
+      "rh_split_at_CE3",
+      "rh_reanchored_CE3 (headline: RH q <-> terminalFaceCE3 q under the four cited census inputs)",
+      "rh_of_terminalFaceCE3 (final named step)",
+      "terminalFaceCE3_of_thetaInf (0290 lane lands directly)"
+    ],
     "build": "RhAttack.CE3 green (8768 jobs); full tree green (17454 jobs)",
-    "pitfalls": ["docstring '+/-' opened a nested comment -> unterminated comment error; fixed per standing convention ('+ or -')" , "clause slicing follows the CE2 pattern exactly (named cited Props with recorded containments)"]
+    "pitfalls": [
+      "docstring '+/-' opened a nested comment -> unterminated comment error; fixed per standing convention ('+ or -')",
+      "clause slicing follows the CE2 pattern exactly (named cited Props with recorded containments)"
+    ]
   },
   "verificationLayers": [
     "(1) ENVIRONMENT REPEAT (CE2 header): Murphy's own window-1 certificate re-verified CERTIFIED true in this environment",
@@ -69,7 +107,7 @@
   "nextMoves": [
     "0302: the scoped weighted-variant attempt (0280 pattern) - DONE this turn (LevWall5 + audit, sealed at the published boundary)",
     "window 4 in flight if compute allows (a4 = 12363153497128, seamless); each window re-anchors by the same two-clause machine composition",
-    "0303: pin the degree-2 test function at the (1.2) level (the genuine remaining knob per 0292-PRZZ) and name the exact obstruction at 17/33 - eps",
+    "DONE 0303 (2026-11-11): the exact published obstruction of the 4/7 wall pinned from PRZZ Theorem 4.1 (LevWall6 green): Case-3 exponents (7/4, 7/8) saturate simultaneously at 4/7; wall = failure set of the published o(T) condition (machine); ladder refined to 1/2 < 17/33 < 9/17 < 6/11 < 4/7; the genuine lever = PRZZ degree-d/truncation-l open question",
     "no RH claim"
   ],
   "rhClaim": "NONE",
