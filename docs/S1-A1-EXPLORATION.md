@@ -3131,6 +3131,10 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
       zero-free Re s > 3/5 in-tree (Levinson region
       wired through door 2; formalization completeness,
       red line: no gain past 4/7).
+      [CORRECTED 0312: theta = 1/2 boundary is Re s > 3/2,
+      NOT 3/5 (3/5 <=> theta = 5, in the wall); best
+      reachable boundary 19/16 > 1 = trivial region;
+      wire landed in LevWall10 with corrected numerals.]
 
     No RH claim - face OPEN / PROBABLY TRUE; wall
     UNMOVED (both doors pinned).
@@ -3147,6 +3151,31 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
       candidate = [DIAG-RANGE]@1/2 + [BG-T1] => zero-free
       Re s > 3/5 in-tree (Levinson through door 2; red
       line: formalization completeness only).
+      [CORRECTED 0312/LevWall10: same sketch arithmetic
+      fix - boundary at theta = 1/2 is 3/2 not 3/5; reachable
+      family inside Re s >= 1; see E42.]
+
+    No RH claim - face OPEN / PROBABLY TRUE at tCE7; wall
+    UNMOVED.
+
+* **E42 (2026-11-14, 0312):**
+    * LevWall10 GREEN 8772: the door-2 wire parameterized
+      and machine (door2Wire / door2WireLeft /
+      door2WireAt12 @ 3/2); reach boundary 19/16 = 1/2 +
+      7/8 (theta -> 4/7^-); boundaryLadder 1 < 19/16 < 3/2;
+      reachableInsideTrivialRegion (1 < 19/16 - inside
+      classically zero-free Re s >= 1); nonvacuousPastWall
+      (theta > 1 => inside the wall; non-vacuity threshold
+      theta > 1.0288 at the frontier scale, boundary
+      0.98599645, c = 1/2pi, dps-30).
+    * CORRECTION: 0310/0311 'Re s > 3/5' sketch =
+      arithmetic error (theta = 1/2 gives 3/2; 3/5 <=>
+      theta = 5 is unpublished); genuine Levinson region
+      is a different theorem, not in-tree; records patched.
+    * Consequence: door 2's Theorem-1 machinery has NO
+      partial value below the wall - all-or-nothing at 4/7,
+      exactly like door 1 (doors-meet now complete in its
+      strongest form).
 
     No RH claim - face OPEN / PROBABLY TRUE at tCE7; wall
     UNMOVED.

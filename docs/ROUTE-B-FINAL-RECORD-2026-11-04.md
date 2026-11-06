@@ -2549,6 +2549,14 @@ Wall UNMOVED. Face OPEN at tCE6. NO RH CLAIM.
   [BG-T1] ⇒ zero-free Re s > 3/5 in-tree (the classical
   Levinson region, wired through the door-2 machinery) —
   formalization completeness only, red line.
+  **[CORRECTED 0312/LevWall10: arithmetic error in this
+  sketch — BG Theorem 1 at θ = 1/2 gives boundary
+  Re s > 3/2, NOT 3/5 (3/5 ↔ θ = 5, unpublished, inside the
+  wall); the reachable family at published reach θ < 4/7 has
+  best boundary 19/16 > 1, strictly INSIDE the classically
+  zero-free Re s ≥ 1; the wire landed in LevWall10 with the
+  corrected numerals — formalization completeness, red line
+  unchanged.]**
 * **Face menu (complete, unchanged):** door 1/2 = θ >
   4/7 (same wall, two shapes); door 3 = M5 certification
   (active, shrinking, at tCE6); door 4 = θInf (0290
@@ -2593,3 +2601,45 @@ Face OPEN. NO RH CLAIM. (discovery 0310)
 
 Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE7.
 NO RH CLAIM. (discovery 0311)
+
+## 43 · 0312 — THE DOOR-2 WIRE, LANDED IN-TREE WITH CORRECTED
+NUMERALS (2026-11-14)
+
+* **LevWall10 GREEN 8772 (full tree 17454, oolean fresh):**
+  the door-2 wire parameterized and machine —
+  `door2Wire`: [thetaBounded θ] + [bgThetaShrink θ] (Z78
+  cited inputs) ⇒ zero-free Re s > 1/2 + 1/(2θ) (right
+  flank, BG Thm 1 verbatim) and mirror
+  `door2WireLeft` (left flank, functional-equation
+  reflection); `door2WireAt12` states the θ = 1/2
+  corollary at its CORRECT boundary 3/2.
+* **Reach numerics (machine):** best reachable boundary
+  = 1/2 + 7/8 = 19/16 (θ → 4/7⁻ limit of 1/(2θ));
+  `boundaryLadder : 1 < 19/16 < 3/2`;
+  `reachableInsideTrivialRegion : 1 < 19/16` — the ENTIRE
+  reachable family sits strictly inside the elementarily
+  zero-free Re s ≥ 1 (Hadamard–de la Vallée Poussin / Pólya,
+  cited).
+* **Non-vacuity is past the wall (machine + record):**
+  non-vacuity against the classical boundary
+  1 − c/((log t)^{2/3}(log log t)^{1/3}) (c = 1/2π;
+  0.98599645 at t = 3e9) needs 1/2 + 1/(2θ) < 0.98599645,
+  i.e. θ > 1.0288; `nonvacuousPastWall : θ > 1 ⇒ θ ∈
+  levWallGap` — the ENTIRE non-vacuous territory of BG
+  Thm 1 lies inside the unified wall. Door 2's machinery
+  has NO partial value at the published frontier: all-or-
+  nothing at the wall, like door 1.
+* **CORRECTION (honesty):** the 0310/0311 sketch
+  "[DIAG-RANGE]@1/2 + [BG-T1] ⇒ Re s > 3/5" carried an
+  arithmetic error — at θ = 1/2 the boundary is 1/2 + 1 =
+  3/2, NOT 3/5 (3/5 ↔ θ = 5, unpublished, deep in the
+  wall); the genuine Levinson-1949 region 1/2 + 0.08662…
+  is a DIFFERENT theorem (Levinson's direct argument), not
+  a BG-Thm-1 product, and is not in-tree. Sketch patched in
+  0310/0311 + docs with [CORRECTED 0312] markers;
+  corrected numerals machine-landed here. (norm_num also
+  caught a reversed boundary ordering in the first draft —
+  19/16 = 1.1875 < 3/2 = 1.5.)
+
+Wall UNMOVED; face OPEN at tCE7. NO RH CLAIM.
+(discovery 0312)

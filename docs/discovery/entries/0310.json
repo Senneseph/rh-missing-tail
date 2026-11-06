@@ -25,7 +25,7 @@
   },
   "nextMoves": [
     "window 7 landing -> verify + CE7 (pattern CE6; a7 = 12,363,153,557,128) - in flight (30k/34k evals at 16:05 local).",
-    "0311 candidate (housekeeping wire, named above): [DIAG-RANGE] at theta = 1/2 => in-tree zero-free region Re s > 3/5 via BG Theorem 1 + in-tree thetaBounded(1/2) (Levinson 3/5, wired through the door-2 machinery rather than re-derived) - formalization completeness only, NO analytic gain past 4/7.",
+    "0311 candidate (housekeeping wire, named above): [DIAG-RANGE] at theta = 1/2 => in-tree zero-free region Re s > 3/5 via BG Theorem 1 + in-tree thetaBounded(1/2) (Levinson 3/5, wired through the door-2 machinery rather than re-derived) - formalization completeness only, NO analytic gain past 4/7. [CORRECTED 0312/LevWall10: arithmetic error in this sketch - BG Theorem 1 at theta = 1/2 gives boundary Re s > 3/2, NOT 3/5; 3/5 corresponds to theta = 5 (unpublished, in the wall); the reachable family at the published reach theta < 4/7 has best boundary 19/16 = 1/2 + 7/8, strictly INSIDE the classically zero-free Re s >= 1 - the wire is pure formalization completeness, LevWall10 wired it machine with the corrected numerals; genuine Levinson-1949 region 1/2 + 0.08662 is a DIFFERENT theorem, not a BG-Theorem-1 product]",
     "the analytic situation is UNCHANGED and now fully pinned at both doors: wall UNMOVED at 4/7; face OPEN; certification is the only active progress machine. NO RH CLAIM."
   ]
 }

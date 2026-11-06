@@ -22,7 +22,7 @@
   },
   "nextMoves": [
     "Window 8 launch (a8 = 12,363,153,577,128, b_requested = a8 + 20,000, M=60, C_R=1, 28 workers) - the certification machine keeps running while the analytic walls stay pinned.",
-    "0312 candidate (named housekeeping wire from 0310): [DIAG-RANGE] at theta = 1/2 + [BG-T1] => in-tree zero-free half-plane Re s > 3/5 (the classical Levinson region wired through the door-2 machinery; formalization completeness only - red line: NO analytic gain past the 4/7 wall).",
+    "0312 candidate (named housekeeping wire from 0310): [DIAG-RANGE] at theta = 1/2 + [BG-T1] => in-tree zero-free half-plane Re s > 3/5 (the classical Levinson region wired through the door-2 machinery; formalization completeness only - red line: NO analytic gain past the 4/7 wall). [CORRECTED 0312/LevWall10: arithmetic error in this sketch - BG Theorem 1 at theta = 1/2 gives boundary Re s > 3/2, NOT 3/5; 3/5 corresponds to theta = 5 (unpublished, in the wall); the reachable family at the published reach theta < 4/7 has best boundary 19/16 = 1/2 + 7/8, strictly INSIDE the classically zero-free Re s >= 1 - the wire is pure formalization completeness, LevWall10 wired it machine with the corrected numerals; genuine Levinson-1949 region 1/2 + 0.08662 is a DIFFERENT theorem, not a BG-Theorem-1 product]",
     "NO RH CLAIM - the open object remains the all-heights terminal face (now at tCE7); the analytic residual is the (1.2) wall, unmoved and fully characterized."
   ]
 }
