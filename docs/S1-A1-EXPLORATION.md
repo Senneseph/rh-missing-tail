@@ -2416,3 +2416,42 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
         (Levinson)  <  2/5  (Conrey)  <  0.417293962
         (PRZZ  kappa  record);  gap  =  {  th  |  4/7  <
         th  }.
+
+## E27.  THE  SECOND  DOOR  +  THE  RATIOS  AUDIT  (0296,  LEAN:
+       RhAttack.LevWall4,  tree  green  17454)
+
+    1.  RATIOS  AUDIT  (negative  result):  the  ratios
+        conjecture  (Farmer  1993  (7.4),  4-ratio  mean)
+        is  the  HEURISTIC  PARENT  of  the  thetaInf
+        conjecture  -  the  ratios  support  for  (1.2)@all-
+        theta  is  CONJECTURAL  in  1993,  and  BG  2017
+        never  mentions  ratios.  The  PUBLISHED  direction
+        is  the  REVERSE:  (1.2)@all-theta  =>  kappa  =  1
+        (100%  on  the  line,  Farmer  1993  PROVEN).  The
+        2023-2026  ratios  literature  (arXiv:2307.08091
+        etc.)  proves  SPECIAL  means,  nothing  past  4/7.
+        The  ratios  conjecture  is  a  SIBLING,  not  a
+        citable  shortcut  (as  of  2026-11-11).
+
+    2.  THE  TWO  DOORS  (machine  LevWall4):
+            DOOR  1  [thetaInf /  unified  wall]
+                    (1.2)  at  every  theta  (published  to
+                    4/7;  gap  {  theta  |  4/7  <  theta  })
+            DOOR  2  [BG-ANT-ALL  +  BG-T1-ARB]
+                    I_N(0,T)  ≪_eps  T^(1+eps)  on  2<=N
+                    <=  T^theta  at  EVERY  theta  (published
+                    pointwise-shape  to  theta  <=  1/2;
+                    the  RANGE-uniform  shape  is  the
+                    genuinely  stronger  form)
+        terminalFace_of_bgArb  (machine):  door  2  +  the
+        cited  [BG-T1-ARB]  implication  (proven  INSIDE
+        BG  2017,  the  "In  particular"  clause)
+        =>  terminalFace.  The  doors  are  NOT  linked
+        in-tree  by  proof  (honesty).
+
+    3.  THE  THETA-FACE  FAMILY  IS  COLLECTIVE  (machine):
+        thetaFaceExist  (every  d0  >  0  in  some
+        theta-face);  thetaFacesCover  (the  union  of  the
+        theta-faces  =  the  whole  off-line  range):
+        no  single  cited  theta  closes  the  face,
+        infinitely  many  do.

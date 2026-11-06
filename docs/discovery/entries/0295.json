@@ -27,15 +27,20 @@
   },
   "honesty": {
     "noRHClaim": true,
-    "notProved": ["levWallAt theta for theta >= 4/7 (the unified wall - named open input)", "mozMain theta at 4/7 (cited input, standard Levinson first-moment)", "Lin 2025's constructions (cited, not formalized in-tree)"],
+    "notProved": [
+      "levWallAt theta for theta >= 4/7 (the unified wall - named open input)",
+      "mozMain theta at 4/7 (cited input, standard Levinson first-moment)",
+      "Lin 2025's constructions (cited, not formalized in-tree)"
+    ],
     "provenByMachine": "the set equality unifiedGap = levWallGap, the reach nesting arithmetic (1/2 < 9/17 < 4/7 and the subset relation), all in LevWall3 (tree green 17454 jobs)"
   },
   "stateAfter": "M2 lane: ONE named wall (the moment (1.2) asymptotic at every theta in {theta | 4/7 < theta}, equivalently - via the machine corollary residSharp - the sharp residual there); the 2026 literature audit is current to 2026-11-11. Terminal face remains single residual, OPEN / PROBABLY TRUE. NO RH CLAIM.",
   "build": "RhAttack.LevWall3 GREEN (8768 jobs); full tree GREEN (17454 jobs)",
   "nextMoves": [
-    "0296: the next honest move is now a research attempt on the unified wall itself (or a packaging decision): candidates: (a) scoped NEGATIVE-AUDIT attempt at a fixed theta in (4/7, 1] (0280 pattern): state precisely what off-diagonal input an extension to theta = 1 would require (e.g. a T^1-length off-diagonal in the B-C-H-B quadratic form), identify the exact inequality that fails/is unknown, cite what DOES exist (ratios conjecture special cases - Farmer 1993 IS the natural candidate input: audit whether the ratios conjecture at order 2 implies (1.2) at theta = 1 - that implication may be PROVE-ABLE from the 1993 paper's content); (b) if (a) yields a genuine provable implication chain (ratios-2 => (1.2)@theta=1), wire it as a named cited input with the machine wiring; (c) otherwise land the negative audit and re-examine the face menu options for 0297+",
-    "M5 re-anchor stays open for the next certified window above g_b (two-line re-anchor per 0291)",
-    "the 2025-2026 audit is current; re-run a literature sweep if any new preprint on zeta mollifier lengths appears"
+    "0296 (DONE): Ratios audit (negative: ratios-2 => (1.2)@theta is NOT a published theorem as of 2026-11-11 - Farmer 1993 heuristic, BG 2017 no ratios content, 2023-2026 ratios literature = special means only) + the SECOND face-closing door: [BG-ANT-ALL] (Theorem-1 antecedent I_N(0,T) <<_eps T^(1+eps) at every theta, the 'theta arbitrarily large' clause) + cited [BG-T1-ARB] (proven inside BG 2017) closes the face (machine: LevWall4.terminalFace_of_bgArb); thetaFacesCover (the 0290 theta-shrink family is collective - tree green 17454). The face now has exactly two named doors.",
+    "0297 (NEXT): candidates: (a) package/consolidate the 0288-0296 option-B block (complete machine-verified map of the face's two doors + the single open analytic object, two names); (b) audit door 2's RANGE-uniformity: is I_N(0,T) <= C*T^(1+eps) for 2 <= N <= T^(1/2) known in the UNIFORM range shape (one C, one T0, all N) - check primary sources (Levinson 1974, Conrey 1989, B-C-H-B 2012) before asserting; (c) re-run the M5 two-line re-anchor check for the next certified window above g_b",
+    "M5 re-anchor stays open (two-line re-anchor per 0291)",
+    "the face has exactly two named doors (asymptotic / uniform-boundedness); both open; no RH claim"
   ],
   "rhClaim": "NONE",
   "faceStatus": "OPEN / PROBABLY TRUE"

@@ -1,0 +1,43 @@
+{
+  "id": 296,
+  "ts": "2026-11-11T10:45:00",
+  "title": "0296: SECOND FACE-CLOSING PATH + RATIOS AUDIT - the face has TWO named sufficient input families: [thetaInf] (the 1.2 asymptotic at every theta, the 0295 unified wall) and [BG-ANT-ALL] (Theorem-1 antecedent I_N(0,T) <<_epsilon T^{1+epsilon} at EVERY theta, BG 2017 'In particular' clause); the ratios conjecture is a HEURISTIC PARENT of the thetaInf conjecture, NOT a published implication shortcut (negative audit). Machine (LevWall4): terminalFace_of_bgArb + thetaFacesCover (the 0290 theta-face family covers the whole face).",
+  "kind": "research-unit (option B, unit 8): audit + Lean LevWall4",
+  "lean": "formal/RhAttack/LevWall4.lean",
+  "primarySources": {
+    "farmer1993": {
+      "citation": "D.W. Farmer, 'Long mollifiers of the Riemann zeta-function', Mathematika 40 (1993) 71-87, doi 10.1112/S0025579300013723",
+      "abstractReVerified": "the purpose of this paper is to show that, contrary to the general case, one would expect the formulas involving zeta(s)M(s) to remain valid for ALL fixed theta > 0 ... We will refer to this as the theta = infinity conjecture",
+      "provenInside": "(1.2)@all theta  ==>  kappa = 1  (100% of the non-trivial zeros on the critical line) - re-confirmed verbatim via the BG 2017 citation: 'he proved that this conjecture implies that kappa = 1, in other words, that 100% of the non-trivial zeros of zeta(s) lie on the critical line'",
+      "conjectured": "(1.2)@all theta (the thetaInf conjecture) via ratios-flavored HEURISTIC; the ratios conjecture itself (4-ratio mean (7.4)) as conjecture"
+    },
+    "bg2017": {
+      "citation": "Bettin-Gonek, Mathematika 63 (2017) 29-33 = arXiv:1604.02740 (re-pulled verbatim 0295)",
+      "theorem1ProvenInside": "fixed theta > 0: I_N(0,T) <<_epsilon T^{1+epsilon} for 2 <= N <= T^theta  ==>  no zeros in Re s > 1/2 + 1/(2theta); IN PARTICULAR: the same with theta arbitrarily large ==> RH",
+      "noRatiosMention": "BG 2017 makes NO mention of the ratios conjecture"
+    }
+  },
+  "ratiosAuditVerdict": "the ratios-2 ==> (1.2)@theta link is NOT a published theorem (as of 2026-11-11): BG 2017 has no ratios content; Farmer 1993 presents the ratios support for (1.2)@all-theta as HEURISTIC (it CONJECTURES both); the 2023-2026 ratios literature (e.g. arXiv:2307.08091 'Mean values of ratios of the Riemann zeta function') proves SPECIAL ratio means at specific parameters - nothing extends (1.2) past 4/7 and nothing proves a 'ratios-2 ==> (1.2) at theta > 4/7' implication. The PUBLISHED implication direction is the REVERSE: (1.2)@all theta ==> 100% on-line (Farmer 1993, proven). The thetaInf conjecture remains the minimal named open input of the M2 lane; the ratios conjecture is a SIBLING conjecture (heuristically stronger, independently attackable, with its own 2020s partial results), not a citable shorter path to the face.",
+  "machineProven": [
+    "thetaBoundedAll := forall theta > 0, thetaBounded theta - [BG-ANT-ALL], the 'theta arbitrarily large' hypothesis named",
+    "bgArbImpliesAllOnLine : thetaBoundedAll --> (all zeta zeros on the line) - [BG-T1-ARB], the 'In particular' clause (proven INSIDE BG 2017, named cited input, Z78 pattern)",
+    "terminalFace_of_bgArb (q) (hqz) (hArb) (hB) : terminalFace q - THE SECOND FACE-CLOSING WIRE (machine): either named input family closes the face",
+    "thetaFaceExist (d0 > 0) : exists theta > 0, d0 <= 1/(2*theta) (take theta = 1/(4*d0)) - PROVEN",
+    "thetaFacesCover : {d0 | 0 < d0} = union_{theta > 0} {d0 | 0 < d0, d0 <= 1/(2*theta)} - PROVEN: the 0290 theta-shrink family is COLLECTIVE - no single cited theta closes the face, infinitely many do ('theta -> infinity collapses the face to a point' made machine-precise)"
+  ],
+  "twoDoors": "door 1 (0290/0293-0295): the ASYMPTOTIC input - (1.2) at every theta (published to 4/7; the unified wall is theta > 4/7). door 2 (this module): the UNIFORM-BOUNDEDNESS input - I_N(0,T) <<_epsilon T^{1+epsilon} uniformly over 2 <= N <= T^theta at every theta (published to 0 < theta <= 1/2 pointwise-asymptotic-shape; the in-range link 'asymptotic implies the <<_epsilon boundedness' is a standard estimate, cited not in-tree; the RANGE-uniformity is the genuinely stronger shape of the antecedent). Proving EITHER family for every theta (past their respective published reaches) closes the face. The two families are NOT linked in-tree by an in-tree proof (honesty red line: the thetaInf ==> BG-ANT-ALL step involves the uniform-in-N range shape, proven inside BG 2017 if anywhere, not re-proven here).",
+  "honesty": {
+    "noRHClaim": true,
+    "namedOpen": ["thetaInfConjecture / unified wall (1.2) at theta > 4/7", "thetaBoundedAll (Theorem-1 antecedent at every theta)", "bgArbImpliesAllOnLine (cited, proven in BG 2017)", "the ratios conjecture (sibling, not in the in-tree chain)"],
+    "provenByMachine": "terminalFace_of_bgArb (wiring), thetaFaceExist, thetaFacesCover - all machine, tree green 17454 jobs"
+  },
+  "faceMenuUpdate": "M2 now exposes TWO attack doors (asymptotic 1.2@all-theta; uniform boundedness <<_eps at all theta) instead of one; the 2025-2026 audit shows neither door has been moved since the published reaches; the ratios conjecture is recorded as the natural sibling research program (with its own literature) whose eventual theorem 'ratios-2 ==> (1.2)@theta' WOULD close door 1 - but no such theorem exists as of 2026-11-11",
+  "build": "RhAttack.LevWall4 GREEN (8766 jobs); full tree GREEN (17454 jobs)",
+  "nextMoves": [
+    "0297: decide next step. Candidates: (a) PACKAGE/CONSOLIDATE the option-B phase: the 0288-0296 block yields a complete, machine-verified map of the face's doors and the single open analytic object (unified wall / BG-ANT-ALL, two names for the two doors) - a record-level consolidation unit + a front-page state refresh; (b) attempt a SCOPED computation on door 2: audit the exact RANGE-uniformity gap of the Theorem-1 antecedent (is I_N(0,T) <= C T^{1+eps} for 2<=N<=T^(1/2) known in that uniform shape? the Levinson machinery gives pointwise-in-theta asymptotics; the uniform range shape may be a genuine published theorem - audit primary sources before asserting); (c) re-run the M5 two-line re-anchor check (the next certified window above g_b) to keep the census frontier current while the analytic program settles",
+    "M5 re-anchor stays open (two-line re-anchor per 0291)",
+    "the face now has exactly two named doors; both are open; no RH claim"
+  ],
+  "rhClaim": "NONE",
+  "faceStatus": "OPEN / PROBABLY TRUE"
+}

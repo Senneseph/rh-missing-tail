@@ -256,8 +256,39 @@ re-confirmed (MO 515314).  **The off-diagonal barrier is
 UNMOVED to end-of-2026**; the single named open
 requirement of the M2 lane is `[UNIFIED-WALL]`:  the (1.2)
 asymptotic for every θ > 4/7.  NO RH CLAIM.  Record:
-ROUTE-B-FINAL-RECORD §25; discovery 0295;
-S1-A1-EXPLORATION.md E26.
+ROUTE-B-FINAL-RECORD §25; discovery 0295; S1-A1-EXPLORATION.md E26.
+
+**0296 note (THE SECOND FACE-CLOSING DOOR + THE RATIOS
+AUDIT; Lean: RhAttack.LevWall4, GREEN, 17454-job full
+tree, 2026-11-11).**  Ratios audit (negative, 0280
+pattern): the ratios conjecture (Farmer 1993 (7.4), first
+zeta case) is the **heuristic parent** of the θ = ∞
+conjecture — the ratios support for (1.2)@all-θ is
+*conjectural* in 1993, BG 2017 never mentions ratios, and
+the 2023–2026 ratios literature proves *special* means
+only — **no published "ratios-2 ⟹ (1.2) at θ > 4/7"
+implication exists** (as of 2026-11-11).  The PUBLISHED
+direction is the reverse: (1.2)@all-θ ⟹ κ = 1 (100%
+on-line, Farmer 1993, proven).  Ratios = a *sibling*
+conjecture, not a citable shortcut.  The second door
+(machine): BG 2017 Theorem 1's "In particular" clause
+(proven inside that note): the Theorem-1 antecedent
+`I_N(0,T) ≪_ε T^{1+ε}` for `2 ≤ N ≤ T^θ` **with θ
+arbitrarily large** ⟹ RH — now named in-tree as
+`[BG-ANT-ALL]` (`thetaBoundedAll`) + `[BG-T1-ARB]`
+(`bgArbImpliesAllOnLine`, cited), wired by
+`terminalFace_of_bgArb` (machine).  **The face has exactly
+two named sufficient input families** — door 1 = the
+(1.2) asymptotic at every θ (unified wall, gap θ > 4/7);
+door 2 = the uniform-boundedness antecedent at every θ
+(range-uniform shape — strictly stronger than the
+pointwise asymptotic; the two doors NOT linked in-tree by
+proof, honesty).  Plus machine: `thetaFacesCover` — the
+0290 θ-face family `{0 < d0 ≤ 1/(2θ) : θ > 0}` *covers*
+the whole off-line range (collectivity; no single θ
+closes the face, θ → ∞ does).  NO RH CLAIM.  Record:
+ROUTE-B-FINAL-RECORD §26; discovery 0296;
+S1-A1-EXPLORATION.md E27.
 
 ---
 

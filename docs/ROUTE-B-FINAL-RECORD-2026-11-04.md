@@ -1441,3 +1441,79 @@ primary sources).**
 reach-nesting arithmetic,  tree green (17454).  Named open:
 `[UNIFIED-WALL]`  (the (1.2) asymptotic for every θ > 4/7).
 Face status:  **OPEN, PROBABLY TRUE.**
+
+## 26 · 0296 — the second face-closing door and the RATIOS audit:
+the ratios conjecture is a heuristic parent, not a published
+shortcut (negative result); the face has exactly two named
+sufficient input families (machine: `terminalFace_of_bgArb`,
+`thetaFacesCover`)
+
+**Unit 0296, option B, unit 8.**  Primary sources pulled and
+re-verified (Farmer 1993 abstract via Cambridge DOI; BG 2017
+= arXiv:1604.02740 re-pulled verbatim).
+
+**(1)  The RATIOS audit (negative result, 0280 pattern).**
+The ratios conjecture (Farmer 1993, (7.4), first zeta case —
+the 4-ratio mean) is the **heuristic parent** of the θ = ∞
+conjecture:  Farmer's 1993 argument for (1.2) at all θ is
+ratios-flavored and **conjectural** — he *conjectures* both.
+The **published** implication direction is the **reverse**:
+(1.2)@all-θ  ⟹  **κ = 1** (100% of the zeros on the line) —
+proven **inside** Farmer 1993 (re-confirmed verbatim through
+BG 2017:  "he proved that this conjecture implies that κ =
+1, in other words, that 100% of the non-trivial zeros of ζ
+lie on the critical line.").  BG 2017 makes **no** mention of
+the ratios conjecture.  The 2023–2026 ratios literature
+(e.g. arXiv:2307.08091, *Mean values of ratios of the Riemann
+zeta function*) proves **special** ratio means at specific
+parameters;  nothing extends (1.2) past 4/7 and nothing
+proves a "ratios-2 ⟹ (1.2) at θ > 4/7" implication.
+**Verdict:**  the θ = ∞ conjecture (0295's unified wall)
+remains the **minimal** named open input of the M2 lane;  the
+ratios conjecture is a **sibling** —  heuristically stronger,
+independently attackable, with its own 2020s partial
+results  —  but **not** a citable shorter path to the face.
+A future published theorem "ratios-2 ⟹ (1.2) at θ" would
+**close door 1**;  no such theorem exists as of 2026-11-11.
+
+**(2)  The second face-closing door (machine: LevWall4.lean).**
+BG 2017 Theorem 1's "In particular" clause (proven inside
+that 5-page note):  the Theorem-1 antecedent  `I_N(0,T) ≪_ε
+T^{1+ε}`  for `2 ≤ N ≤ T^θ`  **with θ arbitrarily large**
+  ⟹  **RH**.  The 0296 module names this second input family
+and wires it:
+
+- `thetaBoundedAll`  —  **[BG-ANT-ALL]**:  the Theorem-1
+  antecedent at **every** θ > 0  (named open input family);
+- `bgArbImpliesAllOnLine`  —  **[BG-T1-ARB]**:  the "In
+  particular" clause  (named cited input — proven inside BG
+  2017);
+- `terminalFace_of_bgArb`  —  **the second wire**  (machine):
+  `[zeta membership]` + `[BG-T1-ARB]` + `[BG-ANT-ALL]`  ⟹
+  `terminalFace`  (0288).
+
+**Two doors to the same face:**  door 1 = the **asymptotic**
+input  (1.2) at every θ  (published to 4/7 —  0295 unified
+wall);  door 2 = the **uniform-boundedness** input  `≪_ε
+T^{1+ε}`  at every θ  (published pointwise-shape to
+`0 < θ ≤ 1/2`;  the antecedent's **range-uniform** shape
+—  one C, one T0, all N —  is strictly stronger than the
+pointwise asymptotic;  the in-range link "asymptotic implies
+`≪_ε`" is a standard estimate, cited, **not** in-tree;  the
+two doors are **not** linked in-tree by proof  —  honesty
+red line).  Proving **either** family past its published
+reach closes the face.
+
+**(3)  The θ-face family is collective (machine).**
+`thetaFaceExist`:  every `d0 > 0` lies in some θ-face  (take
+`θ = 1/(4·d0)`);  `thetaFacesCover`:
+`{d0 | 0 < d0} = ⋃_{θ>0} {d0 | 0 < d0 ≤ 1/(2θ)}` —
+the 0290 θ-shrink family is **collective**:  no single cited
+θ closes the face (each leaves the outer band),  the family
+**as** θ → ∞ covers every off-line zero —  "θ → ∞ collapses
+the face to a point" made machine-precise.
+
+**Honesty.**  No RH claim.  Both input families are named
+**open** inputs.  Proven:  the second wire, the face-cover
+arithmetic  (tree green 17454).  Face status:  **OPEN,
+PROBABLY TRUE**  —  now with exactly **two** named doors.
