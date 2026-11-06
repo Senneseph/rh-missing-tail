@@ -63,6 +63,7 @@
   "rw [h] can close the goal P <-> P entirely (Prop extensionality + defeq) - a trailing 'rfl' then fails with 'No goals to be solved'"
  ],
  "nextMoves": [
+  "DONE 0307: Kintali Thm 2.2 + Claude 2/3 full primary reads - selector LOAD-BEARING, wall UNMOVED (3rd primary confirmation), kappa ladder consolidated, misidentified arXiv:2608.05281 corrected (see 0307.json)",
   "DONE 0306: M5 run 4 landed (tCE4 = 3,000,175,351,489; CE4 green; face OPEN 18 689 above H0; see 0306.json)",
   "window 4 (M5): running - verify + CE4 re-anchor when it lands (a4 = 12363153497128, b4 requested 12363153517128)",
   "0307 candidate scoped attempt: read Kintali Theorem 2.2 in full primary text - what exactly would an extension of the marked-tuple/selector structure to the FULL family (or to the (1.2) integral) require? (the named L2 direction, 0280 pattern)",

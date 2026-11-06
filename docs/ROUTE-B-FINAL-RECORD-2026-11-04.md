@@ -2223,7 +2223,12 @@ END-TO-END IN-HOUSE, RUN 4).**
   13 155 agree, 0 disagree at dps-30 (control, not a
   second certificate). tmp/ce2/spotcheck_out.txt.
 * **NAMED NEXT (0307 candidate)**: PRIMARY READING of the
-  Kintali preprint (arXiv:2608.05281) Theorem 2.2 - exactly
+  Kintali preprint (personal-site PDF
+  shivakintali.github.io/papers/RH421.pdf  -  NOT  on
+  arXiv;  the  2608.05281  identifier  written  here  at
+  0306-landing  is  CORRECTED  by  0307  -  it  is  an
+  unrelated  astrophysics  preprint)  Theorem  2.2  -
+  exactly
   what the MARKED-TUPLE restriction is, what it forbids,
   and whether it is removable for the FULL family
   (0.4339) or for the (1.2) t-variable integral (the
@@ -2235,3 +2240,103 @@ Builds: RhAttack.CE4 green (8769); full tree green
 (1.2) full family (the 0305 Kintali restricted 29/50
 record is face-blind to the (1.2) integral per 0305).
 (discovery 0306; formal/RhAttack/CE4.lean)
+## 37 · 0307 — KINTALI Thm 2.2 + CLAUDE 2/3: FULL PRIMARY READS (2026-11-11)
+**The two 2026 proportion papers read in full primary text; the
+(1.2) wall confirmed UNMOVED for the third time at primary level;
+the kappa ladder consolidated with corrected provenance.**
+
+**CORRECTION (honesty):** the identifier `arXiv:2608.05281`
+written at 0306-landing was meant to point at the Kintali
+preprint. VERIFIED WRONG - that ID is an unrelated
+astrophysics paper (Mallik, Ly-alpha, 2026-08-05). The Kintali
+preprint is personal-site only
+(shivakintali.github.io/papers/RH421.pdf). All three
+occurrences corrected.
+
+* **KINTALI (45 pp, 2026-08-08) — fully read.** Theorem 1.1
+  κ > 421/1000 via a computer-assisted Levinson–Conrey
+  argument: R = 13/10, target c < e^{7527/10000}; four
+  shortened pieces of length EXACTLY T^{4/7} (rho = 200/203,
+  rho·29/50 = 4/7 - sitting AT the (1.2) wall) plus ONE long
+  selected piece at T^{29/50}: the degree-3 Feng convolution
+  with the MARKED-SUBSET SELECTOR W - the indicator that some
+  nonempty subset-sum of the three marked masses lies in
+  S = [8/29, 13/29] ∪ [16/29, 21/29]. Theorem 2.2 (the only
+  new analytic part) is admissible ONLY for finite
+  product-box combinations in a SINGLE FIXED buffered witness
+  slab. VERDICT: the restriction is LOAD-BEARING - the
+  subset-sum geometry is exactly what forces the
+  Deshouillers–Iwaniec seven-term exponent system to be
+  feasible box-by-box past 4/7 ((SM.7): q − 21/29 ≤ z ≤
+  min(q/2, 42/29 − q), a case analysis on the subset sum s);
+  without it one is back at the (1.2) infeasibility at
+  length > 4/7 - the wall the LevWall program pins. Same
+  geometry also makes the diagonal exactly computable
+  (sec.3.7: selector faces are flow-null, the radial
+  operator never differentiates them, P_3(0) = 0). The final
+  certificate closes with c_sel ≤ 2.122496896689520 <
+  2.122723640072098 (margin ~1.07e-4 relative). The 0305
+  "first published L2/L3 instance" reading stands, now
+  fully scoped: NOT removable within the DI framework.
+* **CLAUDE (17 pp, 2026-08-10) — fully read**
+  (arXiv:2608.13637 Alpöge–Furman per 0300; author Claude,
+  human co-author J. Sumner; F. Furman + L. Alpöge verified
+  and take communication responsibility; Lean: E. Easley).
+  Theorem A: ≥ 2/3 of the zeros in (T, 2T] simple AND on
+  line (≥ 5/6 distinct; MT window 0.67250 / 0.83625),
+  unconditional, and Theorem B for primitive Dirichlet
+  L-functions. MECHANISM: Weil-form compression at the
+  critical-density Gabor grid (Poisson–Gabor identity,
+  no aliasing) -> real symmetric d×d matrix G~ = P + Q
+  (on-line zeros rank-1-positive in P; off-line pairs
+  signature (1,1) in Q, n_+(Q) ≤ #pairs; tr G~ = N + o(N))
+  + Montgomery's UNCONDITIONAL prime side ‖G~‖²_HS =
+  (R(ψ) + o(1))N (R(indicator) = 4/3; no mollifier, no
+  zero-density, no zero-free region) + the NEW rank–trace
+  inequality (Lemma 3.2: r ≥ 2 tr P + 4 tr Q − 4b −
+  ‖P+Q‖²_HS, matrix form of m² ≥ 2m−1) -> chain
+  (1.2): N0simple ≥ rank P₁ ≥ (2 − R(ψ) − o(1))N.
+  SHARPNESS (sec.7): the method cannot distinguish "two
+  thirds" from "all"; higher moments add nothing
+  unconditionally (Rudnick–Sarnak); bandwidth-one ceiling
+  0.6819 (Lean-verified numerics, interval enclosures
+  interval-arithmetic certified NOT kernel-checked at tag
+  v1.0 - recorded honestly in the paper); even the
+  conditional 100% version "certifies 100% of SIMPLE zeros
+  on the line" - a proportion, still face-blind.
+* **FACE-BLINDNESS AT MECHANISM LEVEL:** "the inputs are
+  insensitive to o(N) off-line zeros and hold for Epstein
+  zeta functions, for which the analogue of RH is FALSE"
+  (sec.1.4). 0300/M6 audit stands: the entire proportion
+  ladder (Levinson-κ 5/12→0.421→2/3 and SDP/inertia
+  κ) is κ-PROGRESS, not face-PROGRESS. terminalFace
+  UNCHANGED; the certified frontier stays tCE4 =
+  3,000,175,351,489 (0306).
+* **KAPPA LADDER (consolidated, exact provenance):**
+  5/12 [BCY 2011] / 0.417293962 [PRZZ 2020 - the (1.2)
+  wall anchor] → 421/1000 [Kintali 2026-08-08, personal
+  site; now SUPERSEDED] → **2/3 (0.67250 MT) simple-on-line
+  + 5/6 (0.83625 MT) distinct [Claude 2026-08-10;
+  arXiv:2608.13637; Lean at github.com/anthropics/zeta-23-lean
+  tag v1.0 (toolchain v4.33.0-rc2, Mathlib 51e6992efd06;
+  #print axioms = 3 standard; new Mathlib: von Neumann
+  trace inequality + Sylvester inertia)]** → +88.76%
+  simple-OR-on-line / +83.62% average [Lamzouri
+  arXiv:2609.02882, 2026-09-08, simpler Hilbert-space
+  proof, BGSTB24 directly] → simple-OR-on-line > 8/9
+  [Cobeli–Zaharescu arXiv:2610.23467, per 0300].
+* **FORMAL ASSET NOTE (0308 candidate):** our toolchain
+  v4.33.1 is the same minor series as zeta-23-lean's
+  v4.33.0-rc2 - the Claude 2/3 declarations + the two new
+  Mathlib lemmas are a plausible import for a formal
+  kappa register (RhAttack.Claude23 candidate; Z78-citation
+  fallback).
+* **M5 (in flight):** window 5 launched this unit
+  (a₅ = 12363153517128 = window 4's b; b₅ requested
+  12363153537128; M = 60, C_R = 1, 28 workers; ~46 min
+  wall expected) -> CE5 re-anchor on landing.
+
+Builds: unchanged tree (no Lean this unit - audit unit);
+full tree stays green (17454 from 0306). NO RH CLAIM -
+wall UNMOVED (third primary confirmation); face OPEN /
+PROBABLY TRUE. (discovery 0307)

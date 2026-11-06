@@ -1096,3 +1096,21 @@ inputs; 0297 spot-check scope confirmed (window 2:
 CLAIM - face OPEN / PROBABLY TRUE; M2 wall UNMOVED
 ((1.2) full family); next named direction: 0307
 candidate (0305's Kintali Theorem 2.2 primary reading).
+
+**0307 (primary audit, 2026-11-11):** both 2026 proportion
+papers read in FULL primary text. KINTALI Thm 2.2 (42.1%,
+selected T^{29/50} mollifier): the marked-subset selector
+is LOAD-BEARING - it is exactly what makes the
+Deshouillers–Iwaniec seven-term exponent system feasible
+past 4/7; the (1.2) full-family wall UNMOVED (third
+primary confirmation). CLAUDE 2/3 (arXiv:2608.13637
+Alpöge–Furman; zeta-23-lean v1.0, toolchain v4.33.0-rc2):
+Weil-form Gabor compression + new rank–trace inequality +
+unconditional prime side - FACE-BLIND by construction
+(holds for Epstein zeta), sharp at 0.6819; even the
+conditional 100% is a proportion. κ ladder consolidated
+(5/12 → 0.421 [superseded] → 2/3/5/6 → 88.76% → 8/9).
+CORRECTION: 'arXiv:2608.05281' (0306) was an unrelated
+astro preprint. 0308 candidates: zeta-23-lean borrow audit
+(formal κ register); window 5 → CE5 (in flight). NO RH
+CLAIM - face OPEN / PROBABLY TRUE; wall UNMOVED.

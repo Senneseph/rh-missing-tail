@@ -41,6 +41,7 @@
   "calc steps with a raw-form inequality hypothesis (1/2 + 7\u03b8/8 - \u03b4 < 1) cannot feed a calc line typed \u03b8 < 4/7 + 8\u03b4/7 - convert with an intermediate 'have ... := by linarith' first"
  ],
  "nextMoves": [
+  "DONE 0307: Kintali Thm 2.2 + Claude 2/3 full primary reads - selector LOAD-BEARING, wall UNMOVED (3rd primary confirmation), kappa ladder consolidated, misidentified arXiv:2608.05281 corrected (see 0307.json)",
   "DONE 0306: M5 run 4 landed (tCE4 = 3,000,175,351,489; CE4 green; face OPEN 18 689 above H0; see 0306.json)",
   "the wall levers (L1/L2/L3) are all beyond the published record (0300 sweep) - the option-B analytic menu is EXHAUSTED at the published frontier: the program state = the map is complete (0286-0304), the face OPEN / PROBABLY TRUE, the wall UNMOVED but fully characterized",
   "M5 window 4 (a4 = 12363153497128) if compute allows - the frontier extension lane remains open and in-house",

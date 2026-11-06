@@ -43,6 +43,7 @@
   "whatWasNotClaimed": "no wall movement; the attempt was scoped, audited, and sealed with its exact boundary named; no new analytic result beyond the machine kernel and the record-level exponent audit"
  },
  "nextMoves": [
+  "DONE 0307: Kintali Thm 2.2 + Claude 2/3 full primary reads - selector LOAD-BEARING, wall UNMOVED (3rd primary confirmation), kappa ladder consolidated, misidentified arXiv:2608.05281 corrected (see 0307.json)",
   "DONE 0303 (2026-11-11): the exact published obstruction of the 4/7 wall pinned from PRZZ Theorem 4.1 (LevWall6 green): Case-3 exponents (7/4, 7/8) saturate simultaneously at 4/7; wall = failure set of the published o(T) condition (machine); ladder refined to 1/2 < 17/33 < 9/17 < 6/11 < 4/7; the genuine lever = PRZZ degree-d/truncation-l open question",
   "window 4 (M5) if compute allows: a4 = 12363153497128 (seamless)",
   "the 0300 tool list (short-interval reciprocity 2608.14852, amplified moments 2606.27323) is the recorded infrastructure for any future (1.2) program",

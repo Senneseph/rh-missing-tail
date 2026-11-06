@@ -58,7 +58,8 @@
   "CE3": "superseded-as-frontier by CE4"
  },
  "nextMoves": [
-  "0307 candidate (named in 0305): PRIMARY READING of the Kintali preprint arXiv:2608.05281 Theorem 2.2 (marked-tuple restriction lifting the SELECTED length to 29/50) - determine exactly what the marked-tuple restriction is, what it forbids, and whether the restriction is removable for the full family (0.4339) or for the (1.2) t-variable integral; if the restriction is a technicality of the partition, this is the L2/L3 lever's first candidate extension past the full wall.",
+  "0307 candidate (named in 0305): PRIMARY READING of the Kintali preprint (personal-site PDF shivakintali.github.io/papers/RH421.pdf - CORRECTED: NOT on arXiv; the 'arXiv:2608.05281' written here at 0306-landing is an unrelated astrophysics preprint, Mallik 2026, verified 2026-11-11) Theorem 2.2 (marked-tuple restriction lifting the SELECTED length to 29/50) - determine exactly what the marked-tuple restriction is, what it forbids, and whether the restriction is removable for the full family (0.4339) or for the (1.2) t-variable integral; if the restriction is a technicality of the partition, this is the L2/L3 lever's first candidate extension past the full wall. [DONE as 0307 - see 0307.json: restriction is LOAD-BEARING, wall UNMOVED, kapp ladder consolidated, Claude 2/3 primary-read.]",
+  "0308 candidate: zeta-23-lean (github.com/anthropics/zeta-23-lean, tag v1.0, toolchain v4.33.0-rc2, Mathlib rev 51e6992efd06) BORROW AUDIT vs our toolchain v4.33.1 - if mathlib-revision compatible, import the Claude 2/3 theorems + the new Mathlib lemmas (von Neumann trace inequality, Sylvester inertia) into the formal kapp register; else cite in Z78 pattern. Also: window 5 CE5 landing (in flight).",
   "continue M5 runs (each ~46 min wall): the lane keeps paying; the face keeps shrinking by ~4 673/run.",
   "no RH claim; face OPEN."
  ]

@@ -105,6 +105,7 @@
   "whatWasNotClaimed": "the face is NOT closed; the certified frontier moved (tCE2 -> tCE3); the residual is the SAME open object terminalFaceCE3 (machine iff terminalFaceCE2 under the band clauses)"
  },
  "nextMoves": [
+  "DONE 0307: Kintali Thm 2.2 + Claude 2/3 full primary reads - selector LOAD-BEARING, wall UNMOVED (3rd primary confirmation), kappa ladder consolidated, misidentified arXiv:2608.05281 corrected (see 0307.json)",
   "DONE 0306: M5 run 4 landed (tCE4 = 3,000,175,351,489; CE4 green; face OPEN 18 689 above H0; see 0306.json)",
   "0302: the scoped weighted-variant attempt (0280 pattern) - DONE this turn (LevWall5 + audit, sealed at the published boundary)",
   "window 4 in flight if compute allows (a4 = 12363153497128, seamless); each window re-anchors by the same two-clause machine composition",

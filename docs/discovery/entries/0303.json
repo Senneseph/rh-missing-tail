@@ -77,6 +77,7 @@
   "a theorem type written as projections of a conjunction (LevWall2.publishedLandscape.1 AND ...) mis-parses ('argument of sort Prop expected sort Type') - write the literal conjunction instead"
  ],
  "nextMoves": [
+  "DONE 0307: Kintali Thm 2.2 + Claude 2/3 full primary reads - selector LOAD-BEARING, wall UNMOVED (3rd primary confirmation), kappa ladder consolidated, misidentified arXiv:2608.05281 corrected (see 0307.json)",
   "DONE 0304 (2026-11-06): the PRZZ degree-d/truncation-l lever audited = a KAPPA (proportion) lever, NOT a wall lever (LevWall7 green + tree green): 5/12 theorem already AT 4/7 with d=1 K=3; the 1/d factor is a divisor length (h|d^infty, U = N1/(dh)) internal to the (7/4, 7/8) endpoint; MACHINE double waste theorem (single-side exponent improvements worth nothing) + wallUnderBothImprovements min-form 4/7 + min(8d/7, 4d2/7) + N^{7/4} side binds; option-B analytic menu EXHAUSTED at the published frontier, map 0286-0304 complete",
   "window 4 (M5) if compute allows (a4 = 12363153497128, seamless)",
   "no RH claim"

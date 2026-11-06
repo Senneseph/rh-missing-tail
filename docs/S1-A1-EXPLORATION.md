@@ -3000,10 +3000,66 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
       / 0 disagree at dps-30 (control, not a second
       certificate).
     * NAMED NEXT (0307 candidate): primary reading of the
-      Kintali preprint arXiv:2608.05281 Theorem 2.2 -
+      Kintali preprint (personal-site PDF, NOT on arXiv -
+      0307 corrigendum) Theorem 2.2 -
       exactly what the marked-tuple restriction is and
       whether it is removable for the full family / the
       (1.2) integral (the 0305 direction, renumbered).
 
     No RH claim - face OPEN / PROBABLY TRUE; wall UNMOVED
     at 4/7 for the (1.2) full family.
+
+  # E37 · 2026-11-11 · 0307 — KINTALI Thm 2.2 + CLAUDE 2/3
+  # FULL PRIMARY READS
+
+    * CORRECTION: 'arXiv:2608.05281' (0306-landing) is an
+      unrelated astrophysics preprint; the Kintali paper is
+      personal-site only (RH421.pdf). Three occurrences
+      corrected.
+    * KINTALI (45 pp) fully read: κ > 421/1000 via
+      computer-assisted Levinson–Conrey (R = 13/10,
+      c < e^{7527/10000}); four pieces exactly AT T^{4/7}
+      (rho·29/50 = 4/7) + one LONG SELECTED piece at
+      T^{29/50} (degree-3 Feng convolution, marked-subset
+      selector W: some nonempty subset-sum of the three
+      marked masses in [8/29,13/29] ∪ [16/29,21/29]).
+      Thm 2.2 (the only new analytic content) admissible
+      ONLY for single-witness-slab product-box
+      combinations. VERDICT: the restriction is
+      LOAD-BEARING - the subset-sum geometry is what makes
+      the DI seven-term exponent system feasible past 4/7
+      ((SM.7)); the finite side is tied to the same
+      rational-polyhedral geometry (selector faces
+      flow-null, radial operator, P_3(0) = 0). NOT
+      removable within the DI framework => the (1.2)
+      full-family wall {θ | 4/7 < θ} UNMOVED (third
+      primary confirmation).
+    * CLAUDE (17 pp) fully read: ≥ 2/3 simple-on-line /
+      ≥ 5/6 distinct (MT window 0.67250 / 0.83625),
+      unconditional, + Dirichlet L-functions. Mechanism
+      = Weil-form Gabor compression (G~ = P + Q; off-line
+      pairs signature (1,1)) + unconditional prime side
+      (‖G~‖² = (R(ψ)+o(1))N, R(1) = 4/3; no mollifier) +
+      new rank–trace inequality (m² ≥ 2m−1 in matrix
+      form). Sharpness: method cannot distinguish "two
+      thirds" from "all"; higher moments add nothing
+      unconditionally; bandwidth-1 ceiling 0.6819.
+      FACE-BLIND BY CONSTRUCTION (sec.1.4: holds for
+      Epstein zeta where the RH analogue is FALSE) -
+      0300/M6 audit at mechanism level.
+    * KAPPA LADDER consolidated: 5/12 [BCY] / 0.417293962
+      [PRZZ] → 421/1000 [Kintali, superseded] → 2/3 + 5/6
+      [Claude, arXiv:2608.13637, Lean-verified
+      zeta-23-lean v1.0] → +88.76% simple-OR / +83.62%
+      average [Lamzouri 2609.02882] → simple-OR > 8/9
+      [Cobeli–Zaharescu 2610.23467 per 0300]. ALL
+      proportion statements - κ-progress, not face-progress.
+    * FORMAL ASSET: zeta-23-lean (v4.33.0-rc2; Mathlib
+      51e6992efd06; #print axioms = 3 standard; new
+      Mathlib: von Neumann trace inequality + Sylvester
+      inertia) vs our v4.33.1 - 0308 borrow audit
+      (RhAttack.Claude23 candidate).
+    * M5: window 5 in flight (a₅ = 12363153517128) ->
+      CE5 on landing.
+
+    No RH claim - face OPEN / PROBABLY TRUE; wall UNMOVED.
