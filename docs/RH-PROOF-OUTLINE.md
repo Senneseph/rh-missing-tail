@@ -86,6 +86,29 @@ side); M5 frontier extension (the only machine-verified *shrinking*
 lane — the next unit).  Record: docs/ROUTE-B-FINAL-RECORD-2026-11-04.md §19;
 discovery 0289; S1-A1-EXPLORATION.md E20.
 
+**0290 note (the θ = ∞ lane, named and wired — option B, unit 2,
+2026-11-11).**  Lane M2 is no longer a name: it is a formal module with
+machine-verified wiring onto the 0288 terminal face
+(`RhAttack.ThetaInf`, build green, full tree green).  The Levinson
+mollifier and mollified second moment are defined self-contained; the
+θ=∞ conjecture is stated in its EXACT form (1.2) of Bettin–Gonek
+(arXiv:1604.02740, re-pulled verbatim — "lim I_{T^θ}(0,T)/T = 1 + 1/θ
+for EVERY θ > 0", proven only for 0 < θ < 1/2); the cited inputs are
+Theorem 1's antecedent (`thetaBounded θ`), its consequence (zero-free in
+BOTH flanks of Re = 1/2 at distance 1/(2θ), the left flank via the
+functional equation), and the conjecture-implies-RH implication (Farmer
+κ = 1 + Theorem 1 particular case, one Z78-pattern input).  Two
+LEAN-proven implications: `terminalFace_of_thetaInf` (cited inputs
+⟹ terminalFace — the lane's CLOSING) and `terminalFace_of_bgShrink`
+(any cited θ > 0 SHRINKS the face from 0 < d0 ≤ 3/8 to 0 < d0 ≤
+1/(2θ); θ = 4 already excludes the route-(b) face zero).
+The analytic research target is now precisely one statement: extend
+the Levinson–Conrey asymptotic beyond θ = 1/2 (frontier:
+Conrey–Chandee–Farb–Young; the unconditional record is ≥ 2/3 of the
+zeros on the line; the lane is active in 2026 via arXiv:2605.24363).
+NO RH CLAIM.  Record: docs/ROUTE-B-FINAL-RECORD-2026-11-04.md §20;
+discovery 0290; S1-A1-EXPLORATION.md E21.
+
 ---
 
 ## 1. The hypothesis

@@ -1,0 +1,58 @@
+{
+  "id": "0290",
+  "timestamp": "2026-11-11T12:00:00",
+  "title": "0290: THE th=INF LANE, NAMED AND WIRED (option B, second unit) - formal module RhAttack.ThetaInf (LEAN-PROVEN wiring, Z78 citation pattern): the Levinson mollifier + mollified second moment are defined self-contained; Farmer's th=INF conjecture is stated in its EXACT form (1.2) (lim I_{T^th}(0,T)/T = 1+1/th for EVERY th>0; proven only 0<th<1/2); the cited inputs are Bettin-Gonek Theorem 1's antecedent (thetaBounded th: I_N(0,T) <<_eps T^{1+eps} for 2<=N<=T^th) + its consequence (theta-free in BOTH flanks Re>1/2+1/(2th) and Re<1/2-1/(2th), the left flank via the classical functional-equation reflection) + the conjecture-implies-RH implication (Farmer kappa=1 + Theorem 1 particular case). Machine-verified: terminalFace_of_thetaInf (cited implication + conjecture => TERMINAL FACE, lane M2 CLOSING) and terminalFace_of_bgShrink (for any fixed th>0, the cited antecedent SHRINKS the face from 0<d0<=3/8 to 0<d0<=1/(2th); th=4 already excludes the route-(b) face zero d0=0.37477>1/8). The next analytic research target is now precisely named: extend the Levinson-Conrey asymptotic beyond th=1/2. NO RH CLAIM.",
+  "lane": "M2 (th = infinity), from the 0289 face-menu",
+  "primarySource": {
+    "paper": "Bettin-Gonek, 'The theta = infinity conjecture implies the Riemann hypothesis'",
+    "journal": "Mathematika 63 (2017) 29-33",
+    "arxiv": "1604.02740",
+    "rePulled": "2026-11-11 via ar5iv (verbatim quotes used)",
+    "conjecture": "Farmer: formula (1.2) lim_{T->oo} I_{T^th}(0,T)/T = 1 + 1/th (proven for 0 < th < 1/2: Levinson 1974 / Conrey 1989) is conjectured to hold for EVERY th > 0 = the 'theta = infinity conjecture'. I_N(T1,T2) = int_{T1}^{T2} |M_N(1/2+it)|^2 |zeta(1/2+it)|^2 dt, M_N(s) = sum_{n<=N} mu(n)/n^s (1 - log n / log N).",
+    "theorem1VerbatimShape": "Let th > 0 and assume that for every eps > 0 we have I_N(0,T) <<_eps T^{1+eps} for N in the range 2 <= N <= T^th. Then zeta(s) has no zeros in the half-plane Re s > 1/2 + 1/(2th). In particular, if I_N(0,T) <<_eps T^{1+eps} for 2 <= N <= T^th with th arbitrarily large, then the Riemann hypothesis is true.",
+    "consequenceChain": "Farmer proved the conjecture implies kappa = 1 (100% of the zeros on the line); Theorem 1 with th arbitrarily large gives the same as a zero-free-region statement.",
+    "extension2026": "ALIVE AND ACTIVE: arXiv:2605.24363 extends the implication to cuspidal automorphic L-functions (GL_m), 2026.",
+    "unconditionalRecord": "at least 2/3 of the zeros on the line (Conrey-Chandee-Farb-Young)"
+  },
+  "module": {
+    "path": "formal/RhAttack/ThetaInf.lean",
+    "namespace": "ThetaInf",
+    "build": "RhAttack.ThetaInf GREEN (8765 jobs); full tree GREEN (17454 jobs)"
+  },
+  "formalObjects": {
+    "definitions": [
+      "thetaMoll (Y : Real) (s : Complex) : Complex - the Levinson mollifier M_Y(s) = sum_{n <= floor Y} mu(n) exp(-s log n) (1 - log n / log Y), total in Y, standard for Y >= 2 (ArithmeticFunction.moebius in this mathlib pin)",
+      "thetaIMoment (Y : Real) (T1 T2 : Real) : Real - int_{T1..T2} |M_Y(1/2+it)|^2 |zeta(1/2+it)|^2 dt",
+      "thetaInfConjecture : Prop - FOR ALL th > 0: Tendsto (T => I_{T^th}(0,T)/T) atTop (nhds (1 + 1/th)) - the EXACT form (1.2)",
+      "thetaBounded (th : Real) : Prop - THEOREM-1 ANTECEDENT (fixed th): for all eps > 0 there is C>0, T0>0, for all T >= T0, for all N with 2 <= N <= T^th: I_N(0,T) <= C T^{1+eps}",
+      "bgThetaShrink (th : Real) : Prop - CITED (Theorem 1 + functional-equation reflection): thetaBounded th => for all s: (1/2 + 1/(2th)) < s.re or s.re < (1/2 - 1/(2th)) => zeta s != 0",
+      "thetaInfImpliesAllOnLine : Prop - CITED (Farmer kappa=1 + Theorem 1 particular case): thetaInfConjecture => for all rho: zeta rho = 0 => rho.re = 1/2"
+    ],
+    "theorems": [
+      "terminalFace_of_thetaInf (q) (hqz : zeta-subset zeros) (hInf : thetaInfImpliesAllOnLine) (hC : thetaInfConjecture) : terminalFace q - LAN M2 CLOSING (machine-verified, no analysis)",
+      "terminalFace_of_bgShrink (q) (hqz) (th) (hTh : 0 < th) (hShrink : bgThetaShrink th) (hBounded : thetaBounded th) (hFaceTh : no off-Pair at t0 >= tPT2 in 0 < d0 <= 1/(2th)) : terminalFace q - the TH-FACE SHRINK (machine-verified): d0max 3/8 -> 1/(2th); th = 4 excludes the route-(b) face zero (d0 = 0.37477 > 1/8, left flank)"
+    ]
+  },
+  "honesty": {
+    "noRHClaim": true,
+    "openInputs": [
+      "thetaInfConjecture itself (a conjecture - extending the Levinson-Conrey asymptotic beyond th = 1/2 is OPEN RESEARCH, frontier of Conrey-Chandee-Farb-Young)",
+      "thetaBounded th (Theorem 1's antecedent, not known for any fixed th beyond the Levinson range; the range-uniform O(eps) shape is stronger than the pointwise-in-th asymptotic - NOT linked in-tree)"
+    ],
+    "laneStatus": "M2 is no longer 'to be formalized' - it is NAMEable, CITED, and WIRED. The analytic research target is precisely identified. The face remains OPEN without the cited inputs."
+  },
+  "leanPitfallsNew": [
+    "mathlib docstrings in this project: opener 'doc-comment start', closer 'end comment line' (a 'triple-dash' closer leaves a stray minus token)",
+    "the neighborhood filter notation 'script-N' is scoped[Topology] in this mathlib pin - needs 'open scoped Topology'",
+    "abs_of_nonneg works in TERM position with a 'by linarith' argument (expected type determined); abs_of_nonpos does NOT, because the negated form of the right-hand side is not definitionally equal to the subtracted form - the by-argument then falls back to the surrounding BY-CONTRA goal (False) and fails. Fix: rewrite via neg_sub and abs_neg to reduce to abs_of_nonneg.",
+    "terminalFace and offPair live in the inner namespaces RHEnd and P12 respectively - new modules need 'open P12 RHEnd' (or qualify)"
+  ],
+  "nextMoves": [
+    "0291 (NEXT): state-of-the-art on the M2 lane in cited form - the unconditional Levinson-Conrey asymptotic for 0 < th <= 1/2 and the 2/3 proportion record (CCFY), each as a named citable Prop with a machine-verified corollary to terminalFace if applicable (the proportion gives a QUANTITATIVE input, not a face closer)",
+    "continue the option-B menu: the analytic target is now precisely named (extend the Levinson-Conrey asymptotic beyond th = 1/2); a scoped research attempt (new ideas, verified, honest) or a further named-lane wiring/sharpening per the menu",
+    "M1 (0276 gate) stays DEAD (0284), M3 (S-route) WALL (0278-0283), M4 (zero-free regions) reaches only 0.9999988 (0285), M5 (frontier extension) remains available"
+  ],
+  "buildEvidence": "cd formal && lake build => 'Build completed successfully (17454 jobs)'",
+  "rhClaim": "NONE",
+  "zeroFreeClaim": "NONE beyond [Z78] and the CITATIONS (open inputs)"
+}

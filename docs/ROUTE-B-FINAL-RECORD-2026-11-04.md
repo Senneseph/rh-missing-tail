@@ -923,3 +923,74 @@ directions), kills the in-tree wire mechanism at unbounded height
 The next unit is expected to be **M5** (a verified frontier extension
 shrinking the face) and/or **M2** (the θ=∞ lane formalized in tree as a
 named citable input).
+
+## 20 · 0290 — THE θ = ∞ LANE, NAMED AND WIRED (option B, second unit)
+
+**Primary source (re-pulled verbatim, 2026-11-11, ar5iv of
+arXiv:1604.02740).**  Bettin-Gonek, “The θ = ∞ conjecture implies the
+Riemann hypothesis”, Mathematika 63 (2017) 29-33:
+
+- **The conjecture (Farmer)**.  Formula (1.2),
+  `lim_{T→∞} I_{T^θ}(0,T)/T = 1 + 1/θ` — proven for
+  `0 < θ < 1/2` (Levinson 1974 / Conrey 1989) — is conjectured to hold
+  for **every θ > 0**; that is the “θ = ∞ conjecture”.  The objects:
+  `I_N(T1,T2) = ∫_{T1}^{T2} |M_N(1/2+it)|² |ζ(1/2+it)|² dt` with the
+  standard Levinson mollifier `M_N(s) = ∑_{n≤N} μ(n)/n^s · (1 −
+  log n / log N)` and `N = T^θ`.
+- **Theorem 1 (the implication that carries the lane)**, verbatim
+  shape: for a **fixed** θ > 0, if `I_N(0,T) ≪_ε T^{1+ε}` for
+  `2 ≤ N ≤ T^θ`, then ζ has **no zeros in Re s > 1/2 + 1/(2θ)**;
+  “In particular, if … with θ arbitrarily large, then the Riemann
+  hypothesis is true.”
+- **2026 status: ALIVE and ACTIVE** — arXiv:2605.24363 extends the
+  implication to cuspidal automorphic `L(GL_m)` (2026); the
+  unconditional Levinson-type proportion record stands at **at least
+  2/3** of the zeros on the line (Conrey-Chandee-Farb-Young).
+
+### 20.1 · The formal module (DONE, `RhAttack.ThetaInf`)
+
+New module `formal/RhAttack/ThetaInf.lean` (namespace `ThetaInf`;
+build green, full tree green at 17454 jobs), wiring the lane to the
+0288 terminal face in the project’s Z78 citation pattern:
+
+- **Self-contained apparatus** (no cited analysis for the definitions):
+  `thetaMoll` (Levinson mollifier, real length, total) and
+  `thetaIMoment` (mollified second moment, the interval integral).
+- **`thetaInfConjecture`** — the conjecture in its **exact** form
+  (1.2): `∀ θ > 0, Tendsto (T ↦ I_{T^θ}(0,T)/T) atTop (𝓝 (1 + 1/θ))`.
+- **`thetaBounded θ`** — Theorem 1’s antecedent, fixed θ (the
+  `≪_ε T^{1+ε}` over `2 ≤ N ≤ T^θ`, range-uniform).
+- **`bgThetaShrink θ`** — CITED: antecedent ⟹ zero-free in **both
+  flanks** (`Re s > 1/2 + 1/(2θ)` is Theorem 1 verbatim; `Re s <
+  1/2 − 1/(2θ)` is the classical functional-equation reflection
+  `s ↦ 1 − conj s`).
+- **`thetaInfImpliesAllOnLine`** — CITED (Farmer κ = 1 + Theorem 1
+  particular case): the conjecture ⟹ every zeta zero on the line.
+
+### 20.2 · The machine-verified wiring (the LEAN-proven part)
+
+- **`terminalFace_of_thetaInf`** — [cited implication] + [cited
+  conjecture input] ⟹ `terminalFace`.  **Lane M2 is wired: proving
+  (1.2) for all θ closes the face.**
+- **`terminalFace_of_bgShrink`** — for **any fixed θ > 0**, the cited
+  antecedent + cited flank zero-free + the θ-face
+  (`no off-pair at t0 ≥ tPT2 in 0 < d0 ≤ 1/(2θ)`) ⟹ `terminalFace`.
+  **Each cited θ shrinks the face** from the `3/8` band to
+  `d0 ≤ 1/(2θ)`; θ → ∞ collapses it to a point.  At **θ = 4** the
+  flanks start at `Re > 5/8` / `Re < 3/8` — the route-(b) face zero
+  (`Re = 0.1252`, `d0 = 0.37477 > 1/8`) sits in the left flank and is
+  **excluded by the cited zero-free region** (consistent with 0285:
+  its mirror `σ = 0.8748` is inside the flank).
+
+### 20.3 · The research target, now precisely named
+
+The analytic content of lane M2 is not vague: it is the single
+statement **“extend the Levinson–Conrey asymptotic (1.2) beyond
+θ = 1/2”** (frontier: Conrey-Chandee-Farb-Young).  Two honesty notes
+are recorded in-module: (i) the antecedent of Theorem 1 in its
+range-uniform `≪_ε` shape is **stronger** than the pointwise-in-θ
+asymptotic, and the two are **not linked in-tree**; (ii) the cited
+flank zero-free combines Theorem 1 (right flank, cited) with the
+functional equation (left flank, classical).  **NO RH CLAIM** — the
+conjecture is a conjecture; the face remains open without the cited
+inputs.

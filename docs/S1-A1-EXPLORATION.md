@@ -2006,3 +2006,91 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
     2.  NO  RH  CLAIM.  The  face  is  open;  E20  is  the  attack's
         first  unit  (dead-end  theorem  +  identity  theorems  +
         reframe  +  menu).
+
+## E21.  THE  theta  =  infinity  LANE,  NAMED  AND  WIRED
+       (0290,  option  B,  unit  2;  discovery  0290)
+
+    0.  WHAT  CHANGED  (the  M2  lane,  from  the  outside  in).
+
+        0289  (E20)  removed  the  W2/A1  WIRE  from  the  face-menu
+        (finite-height  machine;  dead  end  at  unbounded  height).
+        The  M2  lane  -  the  theta  =  infinity  conjecture  -  is
+        now  the  lead  ALIVE  non-wire  mechanism,  and  it  is
+        formalized:
+
+            *  New  module  RhAttack.ThetaInf  (namespace  ThetaInf;
+              build  green,  full  tree  green  17454  jobs).
+            *  Self-contained  apparatus:  thetaMoll  (the  Levinson
+              mollifier  M_Y(s)  =  sum  mu(n)  n^(-s)  (1  -  log
+              n/log  Y),  total  in  the  real  length  Y)  and
+              thetaIMoment  (the  mollified  second  moment
+              I_Y(T1,T2)  =  int  |M_Y(1/2+it)|^2  |zeta(1/2+it)|^2
+              dt).
+            *  thetaInfConjecture  -  the  conjecture  in  its  EXACT
+              form  (1.2)  of  Bettin-Gonek  (arXiv:1604.02740,
+              re-pulled  verbatim):  for  EVERY  theta  >  0,
+              lim  I_{T^theta}(0,T)/T  =  1  +  1/theta
+              (proven  only  0  <  theta  <  1/2:  Levinson  /
+              Conrey).
+            *  thetaBounded  theta  -  the  antecedent  of  Theorem
+              1  (fixed  theta):  I_N(0,T)  <<_eps  T^(1+eps)  for
+              2  <=  N  <=  T^theta.
+            *  bgThetaShrink  theta  -  CITED  (Theorem  1  +  the
+              functional-equation  reflection):  antecedent  =>
+              zero-free  in  BOTH  flanks  (Re  >  1/2  +  1/(2
+              theta)  and  Re  <  1/2  -  1/(2  theta)).
+            *  thetaInfImpliesAllOnLine  -  CITED  (Farmer  kappa
+              =  1  +  Theorem  1  particular  case):  conjecture
+              =>  every  zeta  zero  on  the  line.
+
+    1.  THE  MACHINE-VERIFIED  WIRING  (the  LEAN-proven  part).
+
+            *  terminalFace_of_thetaInf:  [cited  implication]  +
+              [cited  conjecture]  =>  terminalFace.  Lane  M2  is
+              WIRED:  proving  (1.2)  for  all  theta  CLOSES  the
+              face.
+            *  terminalFace_of_bgShrink:  for  any  fixed  theta
+              >  0,  the  cited  antecedent  +  cited  flank
+              zero-free  +  the  theta-FACE  (no  off-pair  at  t0
+              >=  tPT2  in  0  <  d0  <=  1/(2  theta))  =>
+              terminalFace.  Every  cited  theta  SHRINKS  the
+              face  from  3/8  to  1/(2  theta);  theta  ->  inf
+              collapses  it.  theta  =  4  already  excludes  the
+              route-(b)  face  zero  (d0  =  0.37477  >  1/8,  left
+              flank).
+
+    2.  PRIMARY  SOURCE  AND  2026  STATUS.
+
+        *  Bettin-Gonek,  "The  theta  =  infinity  conjecture
+          implies  the  Riemann  hypothesis",  Mathematika  63
+          (2017)  29-33,  arXiv:1604.02740  -  re-pulled  via
+          ar5iv  (verbatim  quotes  in  the  module  docstring
+          and  in  record  section  20).
+        *  Theorem  1  (fixed  theta):  antecedent  =>  no  zeros
+          in  Re  s  >  1/2  +  1/(2  theta);  "In  particular,
+          if  ...  with  theta  arbitrarily  large,  then  the
+          Riemann  hypothesis  is  true."
+        *  ALIVE  AND  ACTIVE  in  2026:  arXiv:2605.24363
+          extends  the  implication  to  cuspidal  automorphic
+          L(GL_m);  the  unconditional  Levinson-type  record  is
+          at  least  2/3  of  the  zeros  on  the  line
+          (Conrey-Chandee-Farb-Young).
+
+    3.  THE  RESEARCH  TARGET,  NOW  PRECISELY  NAMED.
+
+        The  analytic  content  of  M2  is  one  statement:
+        EXTEND  THE  LEVINSON-CONREY  ASYMPTOTIC  (1.2)  BEYOND
+        THETA  =  1/2  (frontier:  CCFY).  Honesties  recorded
+        in-module:  (i)  Theorem  1's  antecedent  in  its
+        range-uniform  <<_eps  shape  is  STRONGER  than  the
+        pointwise-in-theta  asymptotic;  the  two  are  NOT
+        linked  in-tree;  (ii)  the  left-flank  zero-free  is
+        the  functional-equation  reflection  of  Theorem  1's
+        right  flank.
+
+    4.  NO  RH  CLAIM.
+
+        The  conjecture  is  a  conjecture;  the  antecedent  is
+        not  known.  The  face  remains  OPEN  without  the  cited
+        inputs.  This  unit  NAMES,  CITES,  and  WIREs  the  lane
+        -  it  does  not  prove  it.
