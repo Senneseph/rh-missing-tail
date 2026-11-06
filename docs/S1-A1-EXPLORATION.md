@@ -1947,3 +1947,62 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
     known  growth  scale,"  proven,  and  the  absolute-O(1)  form  is
     now  correctly  filed  as  the  open  problem  the  field  itself
     has  not  claimed.
+
+## E20.  THE  A1  WIRE  DEAD  END  +  the  face/method  reframe
+       (0289,  option  B,  discovery  0289)
+
+    0.  WHAT  CHANGED  (the  A1  lane,  from  the  outside  in).
+
+        Option  B  (the  owner's  direct  attack  on  the  terminal
+        face)  needs  the  exact  status  of  the  A1  lane's  two  K
+        forms:
+            *  the  GRID-RESTRICTED  clause  (one  uniform  K  over  a
+              finite  zero  grid)  -  CLOSED  data-free  at  the
+              certified  frontier  (E14/E15,  0209:  K  =  6.6412  on
+              [4,  3e10],  a1_grid_clause_exhibit);
+            *  the  ABSOLUTE  clause  (one  uniform  K  over  ALL
+              zeros,  unbounded  height)  -  filed  OPEN  /  PROBABLY
+              FALSE  (E19  F1/F2,  face_unbounded).
+
+        0289  adds  the  missing  quantitative  theorem  between  the
+        two:  the  wire's  far-side  defect  bound  at  the  data-free
+        growth  ceiling,  (G_explicit  g  +  1)  .  (17/8),  has  NO
+        uniform  form  in  the  frontier:
+
+            A1G.face_unbounded_ge4
+                forall  K,  exists  T  >=  4,  K  <  G_explicit  T
+            A1G.a1_wire_no_uniform_defect_bound
+                not  exists  C,  forall  g  >=  4,
+                    (G_explicit  g  +  1)  .  (17/8)  <=  C
+
+        hence  the  grid-restricted  closure  does  NOT  extend  to  an
+        all-heights  closure:  the  wire  is  a  FINITE-HEIGHT  machine
+        (machine-verified).
+
+    1.  THE  REFRAME  (goal  vs  method  -  corrects  the  E19/0286
+        truth-value  attribution  at  the  face).
+
+        *  THE  FACE  (the  object  RH  reduces  to,  0288)  is
+          PROBABLY  TRUE  -  it  is  RH  above  3e12.
+        *  THE  ABSOLUTE  A1  CLAUSE  is  the  INPUT  the  W2  wire
+          method  would  need  -  PROBABLY  FALSE  (E19  F1/F2;  now
+          quantitative  via  a1_wire_no_uniform_defect_bound).
+
+        Goal  and  method  were  conflated  as  "one  object,  probably
+        false".  They  are  the  same  object  operationally  (the
+        0286  identity,  now  a  theorem  in  both  directions:
+        RHEnd.faceIdentity_z78_plus_unified38  and
+        faceIdentity_terminalFace_gives_unified38  -  the  0288
+        terminalFace  IS  the  endpoint's  unified38  face,  +/-
+        [Z78]  and  the  census),  but  the  face  is  probable-TRUE
+        while  the  wire's  required  input  is  probable-FALSE.  The
+        attack  on  the  face  therefore  must  use  a  NON-WIRE
+        mechanism  (the  face-menu,  discovery  0289  /  record  19.4):
+        the  theta  =  infinity  lane  (alive,  named  conjecture,
+        Bettin-Gonek  2017)  and  frontier  extension  (the  only
+        machine-verified  shrinking  lane);  the  S-route  is  dead
+        (its  absolute  bound  is  exactly  what  is  probably  false).
+
+    2.  NO  RH  CLAIM.  The  face  is  open;  E20  is  the  attack's
+        first  unit  (dead-end  theorem  +  identity  theorems  +
+        reframe  +  menu).

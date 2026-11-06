@@ -62,6 +62,30 @@ the authoritative current state is docs/CEILING-REPORT-DAY035.md
 (with its post-data addendum) and docs/S1-A1-EXPLORATION.md (the
 research log).
 
+**0289 note (option B launched — the direct attack on the terminal
+face, 2026-11-11).**  The attack is now a machine-verified program, not
+a restatement: (1) **face identity** — `RHEnd.terminalFace` (0288) is
+the endpoint's own unified38 face in BOTH directions
+(`faceIdentity_z78_plus_unified38`,
+`faceIdentity_terminalFace_gives_unified38`): [Z78] + "no off-pair in
+0 < d0 ≤ 3/8 above 3×10¹²" ⟺ the terminal face (± the census at the
+boundary height).  (2) **wire dead end** —
+`A1G.a1_wire_no_uniform_defect_bound`: the W2/A1 wire's far-side defect
+bound at the data-free growth ceiling, (G_explicit g + 1)·(17/8), has no
+uniform all-heights form; the W2 wire is a FINITE-HEIGHT machine and
+cannot close the face.  (3) **the reframe** — the face (what RH reduces
+to) is *probably true*; the absolute A1 clause (the wire's required
+input) is *probably false* — goal vs. method, the 0286 identity kept as
+a theorem, the truth-value attribution corrected.  (4) **the face-menu**
+named with 2026 audits: M1 0276-gate (in-tree, mechanism dead); M2
+θ=∞ lane (alive: Ratios → θ=∞ → RH, Bettin–Gonek 2017,
+arXiv:1604.02740; the Levinson-type asymptotic for arbitrary polynomial
+mollifier length is the named research target); M3 S-route (dead: the
+true maximal order of S grows); M4 zero-free regions (dead: wrong
+side); M5 frontier extension (the only machine-verified *shrinking*
+lane — the next unit).  Record: docs/ROUTE-B-FINAL-RECORD-2026-11-04.md §19;
+discovery 0289; S1-A1-EXPLORATION.md E20.
+
 ---
 
 ## 1. The hypothesis

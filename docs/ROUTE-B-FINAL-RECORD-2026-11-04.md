@@ -824,3 +824,102 @@ Full tree **green** (`lake build`, 17454 jobs, 0 errors).
 NO RH CLAIM.  This unit states the *exact* reduction (machine-verified
 iff); it does **not** close the terminal face — which is precisely what
 remains.
+
+## 19 · 0289 — OPTION B LAUNCHED: the direct attack on the terminal face
+### (face identity, the W2-wire dead end, the reframe, and the face-menu)
+
+**Context (owner selection, 2026-11-10).**  After the 0288 exact residual
+(“*RH q* ↔ *the cited census* ∧ *terminalFace q*”), the owner chose
+**option B**: a new long-shot research program attacking the terminal face
+directly — not merely packaging the reduction (A) and not merely extending
+the frontier (C).  This section records the **first unit** of that program.
+
+### 19.1 · The FACE IDENTITY (machine-verified, both directions)
+
+The terminal face is **the endpoint’s own object**.  Let the *unified38
+face* be the `hOff38PT2` premise of
+`RHEnd.rh_program78_stripfront_mach_unified38_PT2`:
+
+> no off-pair at height `t0 ≥ tPT2` in the `[Z78]`-sharp strip interior
+> `0 < d0 ≤ 3/8` (with `[Z78]` closing `d0 > 3/8`, since
+> `Z78.offPairD0le` forces every off-pair into `d0 ≤ 3/8`).
+
+Then, both implications are now LEAN-proven in `RHEnd` (section 0289):
+
+- **`faceIdentity_z78_plus_unified38`**:  `[Z78]` + the unified38 face
+  ⟹ `terminalFace`.  (An off-line positive-height zero above `tPT2`
+  builds an off-pair `(t0 = ρ.im, d0 = |ρ.re − 1/2|)`;
+  `Z78.offPairD0le` forces `d0 ≤ 3/8`; the face kills it.)
+- **`faceIdentity_terminalFace_gives_unified38`**:  `terminalFace` + the
+  census (for the boundary height exactly at `tPT2`) ⟹ the unified38 face
+  (conjugation as in 0288; the `d0 ≤ 3/8` side condition is not even
+  needed — the clauses cover every `d0`).
+
+So 0286’s *“one object”* reconciliation is **a theorem in both
+directions**: *the 0288 residual ≡ the endpoint’s unified38 face ≡ the
+route-(b) face* (the route-(b) face zero sits **inside** the unified38
+band: `d0 = 0.3747729897 < 0.375 = 3/8`).
+
+### 19.2 · THE W2/A1 WIRE DEAD END (machine-verified)
+
+The program’s **one in-tree mechanism reaching the face at unbounded
+height** is the W2/A1 wire
+(`W2B3.a1_universal_wire`, instantiated by the data-free ceiling
+`A1G.G_explicit = 0.111·log T + 0.275·log log T + 2.45`, CITED
+Trudgian A1G-5, via `RvM` with explicit residual).  Its far-side defect
+bound is
+
+> `|S1 − R| ≤ (G_explicit(frontier) + 1) · (17/8)`  (far side, `g1 ≥ 2t`).
+
+**`A1G.a1_wire_no_uniform_defect_bound`** (with the new strengthening
+**`A1G.face_unbounded_ge4`**: ∀K ∃T ≥ 4, K < G_explicit T) proves this
+quantity has **no uniform all-heights form**: there is no `C` with
+`(G_explicit g) + 1)·(17/8) ≤ C` for all `g ≥ 4`.  The wire closes at a
+**fixed** data frontier (3e10: ≈ 14.9 < 16, `a1_zerofree_frontier`), but
+its **all-heights closure would need exactly the uniform O(1) form the
+theorem denies** — equivalently, the *absolute A1 clause* (one uniform
+`K` over all zeros, unbounded height), which E19 F1/F2 filed
+**OPEN / PROBABLY FALSE**.
+
+> **THE W2 WIRE IS A FINITE-HEIGHT MACHINE.  IT CANNOT CLOSE THE FACE.**
+
+### 19.3 · THE REFRAME (goal vs. method — corrects the truth-value
+attribution)
+
+The face (what “completing RH” reduces to, 0288) is **probably TRUE** — it
+*is* RH above `3×10¹²`.  The absolute A1 clause is the **method’s
+required input** and is **probably FALSE**.  0286/0288 conflated the two
+as “one object, probably false”; 0289 keeps the object-identity (now a
+theorem, §19.1) and corrects the attribution: **the face is the goal
+(probable true); the wire’s input is the method (probable false), and the
+method is proven incapable**.  This is a *reframe*, recorded per the
+project’s honesty convention — not an overwrite; the 0286 reconciliation
+and the 0288 exact residual stand.
+
+### 19.4 · THE FACE-MENU (named sufficient conditions, 2026 audits)
+
+| lane | statement (sufficient condition) | verdict (2026) |
+|------|----------------------------------|----------------|
+| **M1** 0276 gate | per-piece S-bound `< c*(t)` for all `t ≥ tPT2` | in-tree (`T4OffLO`); implication valid; mechanism audit **dead** (0277/0284) |
+| **M2** θ=∞ | mollified 2nd moments bounded at arbitrary polynomial length | **ALIVE** named-conjecture lane: Ratios → θ=∞ → RH (Bettin-Gonek, Mathematika 63 (2017) 29–33, arXiv:1604.02740); active in 2026 (arXiv:2605.24363, automorphic L-functions); unconditional proportion record 2/3 (Conrey-Chandee-Farb-Young) |
+| **M3** S-route | an absolute (uniform, non-growing) bound on `S` | **DEAD**: best unconditional upper `O(log t)` (Trudgian A1G-5 explicit; Ivić 0.1013·log T); under RH `C log t/log log t`, C > 0.372 (Soundararajan); true maximal order **grows** (B-S ω `√(log t·log log log t / log log t)`) |
+| **M4** zero-free region | a region reaching `Re ≥ 1/2` above tPT2 | **DEAD**: Korobov-Vinogradov approaches `Re = 1`, never `1/2`; reaching `1/2` above tPT2 **is** the face (tautology) |
+| **M5** frontier extension | a newly verified frontier `H' > 3e12` | **the only shrinking lane**: A1G-5 is uniform in height; 0287 engine `WinC.noOffLineBelowPT` machine-verified-shrinks the face to above `H'`. Finite per step; the limit `H'→∞` needs an M2/M3-type mechanism |
+
+**Reading.**  M5 **shrinks** the face with machine-verified steps (the
+concrete short-term program).  M2 is the **alive** named-conjecture lane
+(the long-shot that, if the Levinson-type asymptotic extended to arbitrary
+polynomial length, would close the face by a *different, non-wire*
+mechanism — exactly what §19.2 says the wire cannot do).  M1/M3/M4 are
+audited dead (0277/0284/0285 + §19.2 + 2026 SOP).
+
+**Full tree green** (`lake build`, 17454 jobs, 0 errors;
+`A1Growth` 8713; `RHEnd` 8764).
+
+NO RH CLAIM.  0289 is an attack *launch*, not a closure: the terminal face
+remains **open**; 0289 makes it the endpoint’s own object (both
+directions), kills the in-tree wire mechanism at unbounded height
+(theorem), and names the remaining lanes with 2026 literature verdicts.
+The next unit is expected to be **M5** (a verified frontier extension
+shrinking the face) and/or **M2** (the θ=∞ lane formalized in tree as a
+named citable input).

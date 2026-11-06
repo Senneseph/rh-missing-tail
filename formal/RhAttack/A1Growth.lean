@@ -685,4 +685,108 @@ theorem a1_zerofree_frontier (M N0 : ℕ) (Nas x : ℕ → ℝ) (S : ℝ → ℝ
       _ < 16 := by norm_num
   linarith [hw2, hsh]
 
+/-!  ##  10.  THE  W2  WIRE  IS  A  FINITE-HEIGHT  MACHINE  (0289,  the
+    dead  end  --  direction  B)
+
+  The  W2  wire's  far-side  defect  bound  at  the  data-free  growth
+  ceiling  (a1_growth_wire  /  a1_explicit_wire  with  G  =  G_explicit)
+  is
+
+      |S1  -  R|  <=  ( G_explicit  (frontier)  +  1 )  .  (17/8)   (far  side),
+
+  which  is  strictly  increasing  in  the  frontier  and  unbounded  as
+  the  frontier  ->  oo  (face_unbounded_ge4).  Hence:
+
+  *  there  is  NO  uniform  C  with  (G_explicit  g  +  1)  .  (17/8)
+     <=  C  for  all  g  >=  4  (a1_wire_no_uniform_defect_bound);
+  *  an  all-heights  wire  closure  above  the  data  frontier  would
+     EXACTLY  need  such  a  uniform  C  --  i.e.  a  UNIFORM  (absolute,
+     data-free)  bound  G  =  O(1)  on  S  at  the  zeros;  that  is
+     precisely  the  ABSOLUTE  A1  clause,  which  the  literature  does
+     not  provide  (F1)  and  the  distribution  theory  contradicts
+     (F2:  S  grows  like  sqrt(log  log));
+  *  therefore  the  W2  wire  is  a  FINITE-HEIGHT  machine:  it  closes
+     'no  off-line  zeros'  up  to  (and  including)  a  fixed  data
+     frontier  (a1_zerofree_frontier,  the  0287  finite  statement)
+     but  CANNOT  close  the  all-heights  terminal  face  (RH  above
+     3  x  10^12).
+
+  THE  REFRAME  (corrects  the  0286  'residual  is  PROBABLY  FALSE'
+  wording):  the  FACE  (terminalFace  =  RH  above  3  x  10^12)  is
+  PROBABLY  TRUE  -  it  is  RH  itself,  at  high  height.  It  is  the
+  W2  WIRE's  required  INPUT  (the  absolute  A1  clause)  that  is
+  PROBABLY  FALSE.  Those  are  two  different  objects.  Closing  the
+  face  therefore  needs  a  NEW  (non-wire,  non-absolute-A1)  method
+  -  the  actual  research  program  of  direction  B.  NO  RH  claim.  -/
+
+/--  0289  ·  strengthening  of  `face_unbounded`  with  the  witness
+    height  inside  the  wire  domain:  for  every  K  there  is  a
+    T  >=  4  with  K  <  G_explicit  T.  (In  `face_unbounded`  the  case
+    K  <  2.45  gives  T  =  4;  the  case  K  >=  2.45  gives  T  =  exp
+    U  with  U  >=  4,  hence  T  >=  exp  4  >  4.)  -/
+theorem face_unbounded_ge4 (hE : exp 1 < 4) (K : ℝ) :
+    ∃ T, 4 ≤ T ∧ K < G_explicit T := by
+  by_cases hK : K < 2450/1000
+  · use 4
+    constructor
+    · norm_num
+    · have hlog4 : (1 : ℝ) < log 4 := by
+        calc (1 : ℝ) = log (exp 1) := by rw [log_exp]
+          _ < log 4 := log_lt_log (exp_pos 1) hE
+      have hll : 0 < log (log 4) := log_pos hlog4
+      calc K < (2450/1000 : ℝ) := hK
+        _ < (111/1000 : ℝ) * log 4 + (275/1000 : ℝ) * log (log 4) + 2450/1000 := by
+          nlinarith [hlog4, hll, (by norm_num : 0 ≤ 111/1000),
+            (by norm_num : 0 ≤ 275/1000)]
+        _ = G_explicit 4 := by rw [G_explicit]
+  · have hK' : 2450/1000 ≤ K := not_lt.mp hK
+    let U := (1000/111 : ℝ) * (K - 2450/1000) + 4
+    have hU4 : 4 ≤ U := by
+      dsimp [U]
+      have hm : 0 ≤ (1000/111 : ℝ) * (K - 2450/1000) :=
+        mul_nonneg (by norm_num : 0 ≤ (1000/111 : ℝ)) (by linarith [hK'])
+      linarith [hm]
+    use exp U
+    constructor
+    · have hexp4 : 4 < exp 4 := by
+        have hlog4le : log 4 ≤ 3 := by
+          calc log 4 ≤ 4 - 1 := log_le_sub_one_of_pos (by norm_num : (0 : ℝ) < 4)
+            _ = 3 := by norm_num
+        have hlog4 : log 4 < 4 := by linarith [hlog4le]
+        have heq : exp (log 4) = 4 := by rw [exp_log (by norm_num : (0 : ℝ) < 4)]
+        linarith [heq, exp_lt_exp.mpr hlog4]
+      calc 4 ≤ exp 4 := le_of_lt hexp4
+        _ ≤ exp U := exp_le_exp.mpr (by linarith [hU4])
+    · have hUll : 0 ≤ log U := log_nonneg (by linarith [hU4])
+      calc K < (111/1000 : ℝ) * U + 2450/1000 := by dsimp [U]; ring_nf; linarith
+        _ ≤ (111/1000 : ℝ) * U + (275/1000 : ℝ) * log U + 2450/1000 := by
+          nlinarith [hUll, (by norm_num : 0 ≤ 275/1000)]
+        _ = G_explicit (exp U) := by rw [G_explicit, log_exp]
+
+/--  0289  ·  THE  DEAD  END  (machine-verified):  the  W2  wire's
+    far-side  defect  bound  at  the  data-free  growth  ceiling  has
+    NO  uniform  all-heights  form:  there  is  no  constant  C  with
+    (G_explicit  g  +  1)  .  (17/8)  <=  C  for  every  g  >=  4.
+    Proof:  such  a  C  would  make  G_explicit  bounded  on  [  4,  oo )
+    by  (8/17)  C  -  1,  contradicting  face_unbounded_ge4.  Consequence
+    (section  docstring):  the  W2  wire  cannot  close  the  all-heights
+    terminal  face;  it  is  a  finite-height  machine,  and  the  face
+    (RH  above  3  x  10^12,  PROBABLY  TRUE)  needs  a  new  (non-wire)
+    method.  NO  RH  claim.  -/
+theorem a1_wire_no_uniform_defect_bound (hE : exp 1 < 4) :
+    ¬ ∃ C, ∀ g : ℝ, 4 ≤ g → (G_explicit g + 1) * (17/8 : ℝ) ≤ C := by
+  rintro ⟨C, hC⟩
+  set K := (8/17 : ℝ) * C - 1 with hKdef
+  have hbound : ∀ g : ℝ, 4 ≤ g → G_explicit g ≤ K := by
+    intro g hg
+    have hCg : (G_explicit g + 1) * (17/8 : ℝ) ≤ C := hC g hg
+    have hstep : (G_explicit g + 1) * (17/8 : ℝ) * (8/17 : ℝ) ≤ C * (8/17 : ℝ) :=
+      mul_le_mul_of_nonneg_right hCg (by norm_num : (0 : ℝ) ≤ (8/17 : ℝ))
+    have hlhs : (G_explicit g + 1) * (17/8 : ℝ) * (8/17 : ℝ) = G_explicit g + 1 := by ring
+    have hrhs : C * (8/17 : ℝ) = (8/17 : ℝ) * C := by ring
+    rw [hlhs, hrhs] at hstep
+    nlinarith [hstep, hKdef]
+  obtain ⟨T, hT4, hTgt⟩ := face_unbounded_ge4 hE K
+  linarith [hbound T hT4, hTgt]
+
 end A1G

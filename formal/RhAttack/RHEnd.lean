@@ -491,6 +491,131 @@ theorem rh_of_terminal_face (q : ZeroSet)
     RH q :=
   (rh_iff_terminal_face q hCensus).mpr hFace
 
+/-!  ##  0289  ·  THE  FACE  IDENTITY  +  the  W2-wire  dead  end
+    (direction  B  -  the  direct  attack  on  the  terminal  face,
+    launched;  owner  selection  2026-11-10)
+
+  Unit  0289  does  three  machine-verifiable  things:
+
+  (1)  FACE  IDENTITY  (this  section):  the  0288  residual  object
+      `terminalFace`  is  THE  SAME  object  as  the  ENDPOINT'S
+      unified38  face  (the  hOff38PT2  premise  of
+      rh_program78_stripfront_mach_unified38_PT2:  no  off-pair  in
+      0  <  d0  <=  3/8  at  t0  >=  tPT2),  up  to  [Z78]  (which
+      closes  the  d0  >  3/8  part  by  Z78.offPairD0le)  and  the
+      census  (which  covers  the  boundary  height  exactly  at
+      tPT2).  0286's  "one  object"  reconciliation  is  hereby  a
+      machine-verified  theorem,  in  BOTH  directions.
+
+  (2)  THE  W2/A1  WIRE  DEAD  END  (A1Growth  section  10):
+      A1G.a1_wire_no_uniform_defect_bound  proves  the  wire's
+      far-side  defect  bound  at  the  data-free  growth  ceiling,
+      (G_explicit  g  +  1)  .  (17/8),  has  NO  uniform  all-heights
+      form  (it  grows  without  bound  with  the  frontier  -
+      A1G.face_unbounded_ge4);  the  W2  wire  is  a  FINITE-HEIGHT
+      machine  and  cannot  close  the  face.  THE  REFRAME:  the
+      face  (probably  TRUE  -  it  is  RH  above  3  x  10^12)  is
+      NOT  the  absolute  A1  clause  (probably  FALSE  -  E19
+      F1/F2,  face_unbounded);  the  0286/0288  identification  is  an
+      identification  of  METHOD  (the  input  the  wire  would  need),
+      not  of  the  face  with  its  own  truth  value.
+
+  (3)  THE  FACE-MENU  (record,  entry  0289):  the  named
+      sufficient-condition  program  -  0276  gate  (pointwise,  in
+      tree,  mechanism  audited  dead  0277/0284);  theta  =
+      infinity  lane  (Ratios  ->  theta  =  infinity  ->  RH,
+      Bettin-Gonek  2017,  arXiv:1604.02740);  the  S-route
+      (structurally  dead:  best  unconditional  O(log  t)  -
+      Backlund/Trudgian  A1G-5;  under  RH  C  .  log  t  /  log  log
+      t  with  C  >  0.372  -  Soundararajan;  the  true  maximal
+      order  grows  -  Bondarenko-Seip  omega  sqrt(log  t  .  log
+      log  log  t  /  log  log  t));  zero-free  regions  (wrong
+      side:  approach  Re  =  1,  not  1/2);  frontier  extension
+      (finite,  in  tree,  0287  machinery;  the  only  lane  that
+      SHRINKS  the  face  with  machine-verified  steps).
+
+  NO  RH  CLAIM:  the  face  remains  open;  this  unit  launches  the
+  attack  by  killing  the  wire  route  (theorem),  pinning  the  face
+  to  the  endpoint  (theorems),  and  naming  the  menu  of  routes.
+  -/
+
+/--  0289  ·  FACE  IDENTITY  (direction  1):  [Z78]  +  the
+    endpoint's  unified38  face  (no  off-pair  in  0  <  d0  <=
+    3/8  at  t0  >=  tPT2)  implies  the  0288  terminal  face
+    (no  off-line  zero  with  positive  height  above  tPT2,  at
+    ANY  d0).  [Z78]  closes  the  d0  >  3/8  part  (Z78.offPairD0le
+    forces  every  off-pair  into  d0  <=  3/8).  The  endpoint's
+    unified38  terminal  statement  and  the  0288  exact  residual
+    are  thus  THE  SAME  reduction  of  RH.  NO  RH  claim.  -/
+theorem faceIdentity_z78_plus_unified38 (q : ZeroSet)
+    (hz78 : Z78.externalZeroFree78)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (hFace38 : ∀ (t0 d0 : ℝ), WinC.tPT2 ≤ t0 → 0 < d0 → d0 ≤ 3/8 →
+      ¬ offPair q t0 d0) :
+    terminalFace q := by
+  intro ρ hρ ht
+  by_contra hnot
+  set t0 := ρ.im with ht0def
+  set d0 := |ρ.re - 1 / 2| with hd0def
+  have hd0pos : 0 < d0 := by
+    rw [hd0def]
+    exact abs_pos.mpr (by
+      intro hz
+      have hre : ρ.re = 1 / 2 := by linarith [hz]
+      exact hnot hre)
+  have htpos2 : 0 < WinC.tPT2 := by norm_num [WinC.tPT2]
+  have ht0pos : 0 < t0 := by
+    rw [ht0def]
+    linarith [ht, htpos2]
+  have hp : offPair q t0 d0 :=
+    ⟨ρ, hρ,
+      by intro hre; exact (show ¬ ρ.re = 1 / 2 from hnot) hre,
+      by rw [ht0def, abs_of_nonneg (le_of_lt ht0pos)],
+      by rw [hd0def]⟩
+  have h38 : d0 ≤ 3 / 8 :=
+    Z78.offPairD0le q hz78 hqz t0 d0 ht0pos hd0pos hp
+  exact (hFace38 t0 d0 (le_of_lt ht) hd0pos h38) hp
+
+/--  0289  ·  FACE  IDENTITY  (direction  2):  the  0288  terminal
+    face  (plus  the  census  for  the  boundary  height  exactly  at
+    tPT2)  implies  the  endpoint's  unified38  face  condition
+    (no  off-pair  in  0  <  d0  <=  3/8  at  t0  >=  tPT2).  The
+    d0  <=  3/8  bound  is  not  needed  (the  clauses  cover  every
+    d0);  height  <  0  is  handled  by  conjugation  as  in  0288.
+    Together  with  the  previous  theorem:  the  0288  residual  and
+    the  endpoint's  unified38  face  are  the  SAME  open  object
+    (up  to  [Z78]  and  the  census)  -  0286's  "one  object"
+    reconciliation,  machine-verified.  NO  RH  claim.  -/
+theorem faceIdentity_terminalFace_gives_unified38 (q : ZeroSet)
+    (hCensus : WinC.allOnLineUpTo q WinC.tPT2)
+    (hFace : terminalFace q) :
+    ∀ (t0 d0 : ℝ), WinC.tPT2 ≤ t0 → 0 < d0 → d0 ≤ 3/8 → ¬ offPair q t0 d0 := by
+  intro t0 d0 _ hd0 hd0u hpo
+  obtain ⟨ρ, hρ, hre, him, hd⟩ := hpo
+  by_cases hpos : 0 < ρ.im
+  · by_cases hle : ρ.im ≤ WinC.tPT2
+    · exact hre (hCensus ρ hρ hpos hle)
+    · exact hre (hFace ρ hρ (not_le.mp hle))
+  · --  ρ.im  <  0:  the  conjugate  twin  at  the  same  positive
+      --  height  carries  the  same  Re-part  (0288  pattern).
+    have hneg : ρ.im < 0 := by
+      have hle0 : ρ.im ≤ 0 := not_lt.mp hpos
+      have hne0 : ρ.im ≠ 0 := q.nonReal ρ hρ
+      exact lt_of_le_of_ne hle0 hne0
+    have hst : star ρ ∈ q.Z := q.conj ρ hρ
+    have hstpos : 0 < (star ρ).im := by
+      have h : (star ρ).im = -ρ.im := by rfl
+      rw [h]
+      exact neg_pos.mpr hneg
+    have hstRe : (star ρ).re = 1 / 2 := by
+      by_cases hle : (star ρ).im ≤ WinC.tPT2
+      · exact hCensus _ hst hstpos hle
+      · exact hFace _ hst (not_le.mp hle)
+    have hstRe2 : ρ.re = 1 / 2 := by
+      have hreEq : (star ρ).re = ρ.re := by rfl
+      simpa [hreEq] using hstRe
+    exact hre hstRe2
+
 /-  ##  Part  C  -  the  window-pin  residual  gate  (Float)
 
   The  shape  of  hWin  recorded  numerically:  the  window
