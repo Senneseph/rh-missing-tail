@@ -2340,3 +2340,91 @@ Builds: unchanged tree (no Lean this unit - audit unit);
 full tree stays green (17454 from 0306). NO RH CLAIM -
 wall UNMOVED (third primary confirmation); face OPEN /
 PROBABLY TRUE. (discovery 0307)
+
+## 38 · 0308(a) — zeta-23-lean BORROW AUDIT + Claude23 bridge (2026-11-14)
+
+* **AUDIT (0307 candidate (a), executed):** cloned
+  github.com/anthropics/zeta-23-lean at **tag v1.0**
+  (MIT; LICENSE + NOTICE retained). Their Mathlib pin
+  **51e6992efd06 is a direct ancestor of ours** (git
+  merge-base check: yes; ours 95 commits ahead). Their
+  toolchain v4.33.0-rc2 vs ours v4.33.1 (same minor
+  series). → vendor + rewire; citation-fallback not
+  needed.
+* **VENDORING:** 317 .lean files (~103k lines) at
+  `formal/vendor/zeta23/`, registered as library
+  `Zeta23` in `formal/lakefile.toml`. **`lake build Zeta23`
+  GREEN (9019 jobs).** Renames (mechanical, vendor side
+  only, word-boundary; no logic touched), resolving
+  global-name collisions with our intentionally-global
+  day-017 port `RhAttack.P4Em` (same upstream
+  Euler–Maclaurin port): `B1 → Z23B1` + 6 EM lemmas →
+  `Z23v_*` + `Cf → Z23vCf` (the single global `def Cf` at
+  FromPNTPlus/StrongPNTPrefix.lean:241; all 87
+  occurrences verified to resolve to it; exactly one
+  `def Cf` in the whole vendor tree). The collision set
+  was computed deterministically (comment-stripped,
+  namespace-depth-aware scan): **7 true-global
+  collisions** out of our 603 / their 373 true-global
+  names; all 7 renamed on the vendor side.
+* **CLAUDE23 BRIDGE** (`formal/RhAttack/Claude23.lean`,
+  **GREEN 8871 jobs**): direct import installs the
+  Claude 2/3 headline theorems in-tree —
+  `Zeta23.two_thirds_on_critical_line`, `thmB0_mult`,
+  `thmC0_mult`, the Montgomery–Taylor variants, ThmD/
+  ThmE Dirichlet-L theorems — plus the repo's new
+  Mathlib content (von Neumann trace inequality,
+  Sylvester inertia both directions). The module
+  carries the explicit **face-blindness clause**:
+  proportion statements over (T, 2T], insensitive to
+  o(N) off-line zeros (the paper's own sec. 1.4: same
+  argument holds for Epstein zeta functions, where the
+  RH analogue is FALSE). The κ ladder is now FORMAL
+  IN-TREE.
+* **Builds:** `Zeta23` 9019 ✓ · `RhAttack.Claude23`
+  8871 ✓ · **full tree 17454 ✓.**
+
+No RH claim - proportion lanes stay face-blind; the
+(1.2) wall UNMOVED. (discovery 0308)
+
+## 39 · 0308(b) — M5 run 5: OUR FIFTH WINDOW CERTIFIED IN-HOUSE + CE5 re-anchor
+
+* **WINDOW 5 LANDED AND CERTIFIED** (Murphy's Apache-2.0
+  pipeline, our production, seamless): a = 12,363,153,
+  517,128 (= CE4's final b), b = 12,363,153,537,128
+  (no snap), M = 60, C_R = 1, 28 workers, 34,559 evals,
+  2820.5 s. **b − a = 20,000 zeros, all simple, on the
+  line** in (g_a5, g_b5]. g_a5 **bit-identical** dyadic
+  tuple to CE4's g_b4 (seam seamless); g_b5 = 3,000,
+  175,356,162.7832919… ± 1.29e-26 (frac 0.7832, dist
+  0.2168 to next integer). N = 691008. Cross-checks:
+  0 failures / 34,559. Rosser runs 50 / 44 (≥ K = 12).
+* **HONESTY (recorded, not suppressed):** 1 Rosser-
+  block below quota at first pass (g-indices
+  12,363,153,534,959–534,961, need 2, found 0 at 64
+  subdiv) rescored on its 3-block union (need 4, found
+  4); plus one further rescue (12,363,153,519,191–
+  519,193, union …189–…194, need 5, found 5 at 128
+  subdiv). Same documented mechanism as window 4; sound
+  because only the TOTAL and the two end RUNS enter the
+  Turing step — the independent verifier recomputed
+  sign_changes = 20,000 = b − a and runs 50/44.
+* **VERIFIER:** CERTIFIED: true; 34,559 points; 0
+  hypothesis/path failures; 0 Gram mismatches;
+  turing_ok; K_conservative = 12 (Trudgian 5.71899
+  ± 1.21e-6; Amberger 9.14967 ± 4.11e-6).
+* **CE5** (`formal/RhAttack/CE5.lean`, **GREEN 8770
+  jobs**; full tree **17454 ✓**): pattern CE4. tCE5 =
+  **3,000,175,356,162**; faceShrinkCE5 = **4,673**;
+  above H0 by **23,362**; band of five windows →
+  allOnLineUpToCE5; **rh_reanchored_CE5**: RH ↔
+  terminalFaceCE5 (cited census); rh_of_terminalFaceCE5
+  = the final named step (no closing supplied);
+  terminalFaceCE5_of_thetaInf (the 0290 M2/M5 lane
+  lands at the new frontier).
+* **Chain:** certified zeros over (g_a1, g_b5] =
+  20,000 + 19,999 + 19,999 + 20,000 + 20,000 =
+  **99,998**.
+
+Face OPEN at tCE5 (PROBABLY TRUE). Wall UNMOVED. NO RH
+CLAIM. (discovery 0308)

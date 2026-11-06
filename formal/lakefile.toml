@@ -21,3 +21,13 @@ name = "RhAttack"
 [[lean_exe]]
 name = "rhattack"
 root = "Main"
+
+# 0308: vendored from github.com/anthropics/zeta-23-lean at tag v1.0 (Apache-2.0,
+# see vendor/zeta23/LICENSE + NOTICE; attribution: Claude (Anthropic), argued in a
+# single interactive session; verified by R. Furman + L. Alpöge; Lean: E. Easley).
+# Their mathlib pin 51e6992efd06 is a direct ancestor of our v4.33.1 pin (95 commits
+# behind ours, verified by merge-base, 2026-11-11).
+[[lean_lib]]
+name = "Zeta23"
+srcDir = "vendor/zeta23"
+importAll = true

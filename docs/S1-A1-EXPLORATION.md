@@ -3063,3 +3063,27 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
       CE5 on landing.
 
     No RH claim - face OPEN / PROBABLY TRUE; wall UNMOVED.
+
+* **E38 (2026-11-14, 0308):**
+    * zeta-23-lean **vendored + in-tree**: 317 files,
+      MIT, formal/vendor/zeta23; their Mathlib pin
+      51e6992efd06 verified ANCESTOR of ours (95
+      behind); 7 true-global name collisions computed
+      deterministically, all renamed vendor-side
+      (ledger in 0308); `Zeta23` GREEN 9019.
+    * **Claude23 bridge GREEN 8871**: Claude 2/3
+      theorems (2/3 simple-on-line, 5/6 distinct, MT
+      window) + ThmD/ThmE installed by direct import
+      with the formal face-blindness clause; κ ladder
+      now FORMAL IN-TREE.
+    * **M5 window 5 CERTIFIED**: 20,000 zeros; seam
+      bit-identical; **tCE5 = 3,000,175,356,162**
+      (4,673 shrink; 23,362 above H0); 99,998 zeros
+      certified over (g_a1, g_b5]; CE5 GREEN 8770;
+      full tree 17454.
+    * 0309 candidate named: KMRZ 2011 (13/4 exponent,
+      2.977412 constant) primary + 17/33 ↔ 4/7
+      family-intersection audit (face-local lever).
+
+    No RH claim - face OPEN / PROBABLY TRUE; wall
+    UNMOVED.
