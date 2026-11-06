@@ -2678,3 +2678,39 @@ Wall UNMOVED; face OPEN at tCE7. NO RH CLAIM.
 Wall UNMOVED at 4/7 (both doors pinned, 0310-0312); face
 OPEN / PROBABLY TRUE at tCE8. NO RH CLAIM.
 (discovery 0313)
+
+## 45 · 0314 — M5 WINDOW 9 CERTIFIED + CE9 RE-ANCHOR (2026-11-14)
+
+* **Window 9 (in-house, seamless):** a = 12,363,153,597,127
+  (= window 8's b), b = a + 20,000 (no snap at either
+  endpoint), M = 60, C_R = 1, 34,206 evaluations in 2619.8 s,
+  N_range = [691008, 691008]. Certificate window9_b9.json:
+  **b − a = 20,000 zeros, all simple and on the line** in
+  (g_a9, g_b9], g_a9 = 3,000,175,370,181.355046086348 ±
+  1.29e-26 (bit-identical dyadic ball to window 8's g_b8),
+  g_b9 = 3,000,175,374,854.290179184949 ± 1.29e-26 (floor
+  distance 0.7098; gB9Lo bottom margin 1.79e-4 — still 25+
+  orders above the radius).
+* **Verifier:** CERTIFIED true, 34,206 points,
+  sign_changes_inside = 20,000 = b − a, Rosser runs 45/49 ≥
+  K = 12, turing_ok. **Two Rosser rescue exceptions**
+  (blocks [..603657, ..603660] → union quota 5 = 5;
+  [..611231, ..611233] → union quota 5 = 5) — the same
+  documented 3-block union mechanism as windows 2/3/4/5/7;
+  zeros displaced into adjacent Gram intervals; only the
+  window total and the end runs enter the Turing step —
+  recorded, not suppressed.
+* **Formal (CE9.lean, GREEN 8774; full tree 17454, oolean
+  fresh):** gB9Lo := 300017537485429/100, tCE9 :=
+  3,000,175,374,854; faceShrinkCE9 = 4673;
+  frontierGapAboveH0 = 42,054; bandOfWindows9 (nine-way);
+  rh_reanchored_CE9: under [Z-PT2] + the nine cited window
+  clauses, RH q ↔ terminalFaceCE9 q; rh_of_terminalFaceCE9
+  (final named step — no closing supplied);
+  terminalFaceCE9_of_thetaInf (M2 lane lands at tCE9).
+* **Frontier:** certified zeros over (g_a1, g_b9] =
+  179,997. Chain integrity 1→9: every seam bit-identical
+  (exact dyadic tuples), N_range constant, C_R/M constant.
+
+Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE9.
+NO RH CLAIM. (discovery 0314)

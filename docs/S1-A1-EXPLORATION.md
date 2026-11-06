@@ -3192,3 +3192,16 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
 
     No RH claim - face OPEN / PROBABLY TRUE at tCE8; wall
     UNMOVED.
+
+* **E44 (2026-11-14, 0314):**
+    * M5 WINDOW 9 CERTIFIED (20,000 zeros, all simple and
+      on the line; seam bit-identical; 2 Rosser rescues,
+      quotas met, recorded) + CE9 GREEN 8774, full tree
+      17454.
+    * Frontier re-anchored: tCE9 = 3,000,175,374,854
+      (tCE9 - tCE8 = 4,673; 42,054 above H0); 179,997
+      certified over (g_a1, g_b9].
+    * Window 10 in flight (a10 = 12,363,153,617,127).
+
+    No RH claim - face OPEN / PROBABLY TRUE at tCE9; wall
+    UNMOVED.
