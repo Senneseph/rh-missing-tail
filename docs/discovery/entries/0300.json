@@ -1,0 +1,39 @@
+{
+  "id": 300,
+  "ts": "2026-11-11T14:30:00",
+  "title": "0300: 2025-2026 LITERATURE RE-SWEEP (post-0299) - the wall UNMOVED: no off-diagonal advance past 4/7 in the (1.2) family; the NEW 2026 items are (i) proportion records inside the audited-blind M6 lane - arXiv:2608.13637 FORMALLY IDENTIFIED as the Aug-2026 Anthropic preprint of the 0291/0292 corrigendum (Alpoge-Furman: >= 2/3 simple+on-line with multiplicity, 0.6725/0.8362 with the Montgomery-Taylor window, >= 5/6 distinct, discovered by Claude, authors verified, accompanying Lean 4) and arXiv:2610.23467 Cobeli-Zaharescu (> 8/9 simple-OR-on-line, unconditionally improving Lamzouri 0.88762 -> 0.88893 - counts simple OFF-line zeros as good, maximally blind) - and (ii) tool-level infrastructure for a future (1.2) program: 2608.14852 short-interval twisted second moment reciprocity (Khan extension), 2606.27323 two-piece amplified moments (Keating-Snaith lower bounds), 2603.25961 Mobius double sum; the Feng-variant range 6/11 (1706.04593, 2017: 17/33 -> 6/11) sits BELOW 4/7 and reinforces the published-reach lattice; NO RH CLAIM, wall {theta | 4/7 < theta} UNCHANGED",
+  "kind": "literature audit unit (option B, unit 12; 0280/0292/0295 negative-audit pattern)",
+  "sweepScope": "arXiv 2603-2610 (May-Nov 2026) math.NT plus 2508/2511 carryovers + MathOverflow 515314 thread; queries on: mollifier length / (1.2) asymptotic / off-diagonal second moment / proportion records / short-interval reciprocity / amplified moments.",
+  "findings": {
+    "wallStatus": "UNMOVED. No 2025-2026 off-diagonal advance past 4/7 in the (1.2) family (Levinson-moment 1/2, Feng-moment 6/11, Conrey-proportion-corollary 4/7 remain the published reach lattice; max = 4/7).",
+    "proportionLane_M6_newRecords": [
+      {"id": "arXiv:2608.13637 (v2 2026-08-19)", "authors": "Levent Alpoge, Ralph Furman", "claim": ">= 2/3 of nontrivial zeros simple AND on the critical line (with multiplicity); >= 5/6 distinct; previous unconditional records 5/12 and 0.6603; with the Montgomery-Taylor window: 0.6725 and 0.8362", "provenance": "FORMALLY IDENTIFIES the 'Aug-2026 Anthropic preprint' referenced in the 0291 proportion corrigendum and 0292 face-menu audit: 'the mathematical argument in this paper was discovered and written by Claude, an AI developed by Anthropic. The listed authors verified the proof and take responsibility for its content. Jarred Sumner posed the problem and guided the investigation; the accompanying Lean 4 formalisation was...' - submitted 13 Aug 2026", "faceRelevance": "PROPORTION result - structurally BLIND to the sparse face (0292 spectral-twin audit stands: proportion records cannot exclude a sparse off-line set; the 2026 proportion family is compatible with the face by construction)"},
+      {"id": "arXiv:2610.23467 (2026-10-16)", "authors": "Cristian Cobeli, Alexandru Zaharescu", "claim": "lower limiting proportion of zeros SIMPLE OR ON THE CRITICAL LINE > 8/9 (unconditionally), improving Lamzouri's record 0.88762 to ~0.88893; refinement of the Hilbert-space/pair-correlation framework (retaining an extra term)", "faceRelevance": "MAXIMALLY BLIND: simple off-line zeros are COUNTED as good in this quantity - a sparse face of simple off-line zeros sits fully inside the 8/9. Literature movement in an audited-blind lane; the 0292 audit (closed as face-closer) stands unmodified."}
+    ],
+    "toolLevelInfrastructure": [
+      {"id": "arXiv:2608.14852", "claim": "reciprocity formula for the twisted second moment over SHORT intervals T^delta T^delta, delta in (1/2, 1), centered at T - extends Khan's reciprocity to the short-interval setting", "relevance": "reciprocity is core off-diagonal machinery for second-moment programs; potentially useful infrastructure for a future (1.2) attack (short-interval setting, not directly the [0,T] (1.2) range)"},
+      {"id": "arXiv:2606.27323 (2026-06-25)", "claim": "asymptotic formulae for two-piece AMPLIFIED second and fourth moments of zeta; unconditional effective lower bounds for joint moments agreeing with Keating-Snaith; in particular a six... (joint moment) lower bound", "relevance": "amplified moments = a Levinson-program variant (Conrey-type amplification); tool-level, no (1.2) range advance"},
+      {"id": "arXiv:2603.25961", "claim": "On a Mobius double sum S_eps(X) = sum_{d,e<=X} mu(d)mu(e)/[d,e]^(1+eps) (converges at eps=0) - diagonal contributions in squared mean values; zero-density applications", "relevance": "technique-level paper; no range advance"},
+      {"id": "arXiv:2511.06109", "claim": "Levinson's theorem and its generalization for Dirichlet L-functions (expository, Young-2010 style proof)", "relevance": "expository; no advance"},
+      {"id": "arXiv:2508.11108 (Lin 2025, re-confirmed)", "claim": "calculus-of-variations linear combinations of zeta derivatives in Levinson's method - doubles proportions with Levinson's original short mollifier", "relevance": "AUDITED in 0295 as Q-side only (the derivative combination acts on the Q form of the moment, not the off-diagonal mollifier-length frontier); no wall movement"}
+    ],
+    "fengVariantLattice": "arXiv:1706.04593 'Perturbed moments and a longer mollifier for critical zeros of zeta' (2017): New main terms for I(alpha, beta) = int zeta(1/2+alpha+it)zeta(1/2+beta+it)|A(1/2+it)|^2 Phi(t/T) dt; the FENG mollifier error term's admissible length increased from theta < 17/33 (=0.5152) to theta < 6/11 (=0.5455) via Type I/II decomposition. Sits BELOW the 4/7 = 0.5714 unified wall boundary - reinforces that the published reach is a LATTICE of variant-specific ranges (Levinson-moment 1/2, Feng-moment 6/11, Conrey-corollary 4/7) with max = 4/7 = the wall."
+  },
+  "provenanceRefinement": {
+    "0291_0292_corrigendum": "the 'Aug-2026 UNREFEREED distinct-counting result (Anthropic preprint; Ainta; Lamzouri)' now resolves to a named arXiv preprint: arXiv:2608.13637 (Alpoge-Furman, 13 Aug 2026, v2 19 Aug 2026), with the exact constants (2/3 multiplicity; 0.6725/0.8362 Montgomery-Taylor window; 5/6 distinct). The Ainta (0.673008528) and clipped-Gram (66812491/99194876 = 0.67354780502) figures of 0292 remain the distinct-counting variants. The CCFY retraction of 0291 stands.",
+    "m6TerminalState": "the M6 proportion lane's 2026 record ladder now reads (all BLIND to the face): 5/12 (old record) -> 0.6603 -> 2/3 (2608.13637, multiplicity) -> 0.6725 (Montgomery-Taylor window, distinct) with the distinct-counting variants Ainta 0.6730 / clipped-Gram 0.6735; separate simplicity-or-on-line ladder: Lamzouri 0.88762 -> 8/9+ (2610.23467, ~0.88893). NONE of these touches the wall or the face (0285 zero-density + 0292 spectral-twin: pervasive face impossible, sparse face untouched)."
+  },
+  "honesty": {
+    "noRHClaim": true,
+    "whatWasNotClaimed": "no in-tree content; no new analytic result; the audit is record-level (0280 pattern). The wall {theta | 4/7 < theta} and the face status OPEN/PROBABLY TRUE are UNCHANGED by this sweep.",
+    "residualUncertainty": "a web sweep cannot be exhaustive over all 2025-2026 preprints; the 0295 audit + this re-sweep cover the identified literature channels (arXiv math.NT, MO 515314, the 2026 proportion-certificate family). If a past-4/7 off-diagonal advance exists, it is not in the channels swept."
+  },
+  "nextMoves": [
+    "window 3 (in flight) -> tCE3 on completion (verify + LEAN CE3-pattern re-anchor + record addendum)",
+    "spot-check final tally (in flight) -> 0297 addendum commit",
+    "the analytic program remains: attack the wall {theta | 4/7 < theta} in either shape with a scoped attempt + rigorous negative audit (0280 pattern) if it fails; the 0300 tool list (short-interval reciprocity, amplified moments) is the recorded infrastructure",
+    "no RH claim"
+  ],
+  "rhClaim": "NONE",
+  "faceStatus": "OPEN / PROBABLY TRUE (wall unchanged; frontier tCE2, window 3 in flight)"
+}

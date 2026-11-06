@@ -33,7 +33,15 @@
     "otherLanes": "M1 dead (0289 mechanism theorem); M3 dead (S maximal order growth); M4 dead (zero-free regions on the wrong side); M6 audited structurally blind to off-line zeros (0292: spectral-twin Gram-model argument; the 2026 proportion-certificate results STAND as proportions); zero-density (0285) refutes the PERVASIVE face at two levels combined with 0292; the SPARSE face is untouched and IS the face"
   },
   "machineState": {
-    "newModules": ["RhAttack.ThetaInf (0290)", "RhAttack.CE1 (0291)", "RhAttack.LevWall (0293)", "RhAttack.LevWall2 (0294)", "RhAttack.LevWall3 (0295)", "RhAttack.LevWall4 (0296)", "RhAttack.CE2 (0297)"],
+    "newModules": [
+      "RhAttack.ThetaInf (0290)",
+      "RhAttack.CE1 (0291)",
+      "RhAttack.LevWall (0293)",
+      "RhAttack.LevWall2 (0294)",
+      "RhAttack.LevWall3 (0295)",
+      "RhAttack.LevWall4 (0296)",
+      "RhAttack.CE2 (0297)"
+    ],
     "build": "all green; full tree green 17454 jobs (post-CE2)",
     "citedInputs": "all named Props, Z78 pattern, provenance docstrings: thetaInfConjecture / thetaInfImpliesAllOnLine / thetaBounded(All) / bgArbImpliesAllOnLine / asympAt / asympAt2T / mozMain / [LEV-WALL] / [BARRIER-ASYMP] / [UNIFIED-WALL] / [CE1-WIN] / [CE2-WIN] / Z78 / allOnLineUpTo census"
   },
@@ -43,8 +51,11 @@
     "whatThePhaseDidDo": "map the face completely (object/identity/wall/doors/wires); move the certified frontier in-house from H0 to tCE2 (window 3 -> tCE3); machine-verify every link; audit and seal the other lanes; record two checker-artifact debugs in the 0297 control (float64 t-decode; dps-15 phase representation) resolved in AGREEMENT with the certificate"
   },
   "nextMoves": [
-    "window 3 -> tCE3 (in flight; on completion: verify_window + spot-check + CE3 module or a CE2-pattern two-line addendum + record addendum)",
-    "the analytic program (the only path to completion): attack the wall {theta | 4/7 < theta} in either shape - a scoped new attempt (e.g. a weighted/short-weight mollifier program or a new off-diagonal treatment) with a rigorous negative audit in the 0280 pattern if it fails, OR a literature hunt for a 2026 off-diagonal advance past 4/7 the 0295 audit may have missed",
+    "DONE 0300 (2026-11-11): the literature hunt - wall UNMOVED; new 2026 items = proportion records in the audited-blind M6 lane (arXiv:2608.13637 = the Alpoge-Furman Anthropic preprint formally identified; arXiv:2610.23467 Cobeli-Zaharescu 8/9) + tool-level infrastructure (2608.14852 short-interval reciprocity, 2606.27323 amplified moments, 2603.25961 Mobius double sum)",
+    "DONE 0301 (2026-11-11): window 3 LANDED -> tCE3 = 3,000,175,346,816 (19999 zeros certified (g_a3, g_b3]; seam g_a3 bit-identical to CE2's g_b2; LEAN CE3 module green; face certified 14016 units above H0)",
+    "DONE 0302 (2026-11-11): the scoped weighted-variant attempt - LevWall5 weight-agnostic wall kernel (machine) + 0280-pattern audit: smooth reweighting is an amplitude-level lever, SEALED at the published boundary 4/7",
+    "0303 (next): pin the degree-2 test function at the (1.2) level - the exact obstruction at the 17/33 - eps ceiling (the genuine remaining knob per 0292-PRZZ)",
+    "window 4 (M5) if compute allows (a4 = 12363153497128, seamless)",
     "no RH claim at any step"
   ],
   "rhClaim": "NONE",

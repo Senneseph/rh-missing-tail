@@ -1769,3 +1769,140 @@ the  certified  frontier  in-house,  and  machine-verified  every
 link.  The  analytic  gap  —  the  (1.2)  asymptotic  at
 θ  >  4/7  —  stands  as  the  single  named  open  object  of
 the  whole  program,  in  all  three  of  its  forms.
+
+
+## 30 · 0300 — 2025–2026 literature re-sweep: the wall UNMOVED (2026-11-11)
+
+Post-0299 sweep of the identified channels (arXiv 2508–2610 math.NT
++ carryovers, MO 515314, the 2026 proportion family):
+
+* NO off-diagonal advance past 4/7 in the  (1.2)  family.  The
+  published-reach lattice stands:  Levinson-moment  1/2  <
+  B-C-H-B length  9/17  <  Feng-variant  6/11  (arXiv:1706.04593,
+  2017:  17/33  →  6/11  for the Feng mollifier)  <  Conrey-
+  frontier  4/7  =  the  wall  (`LevWall.levWallGap`  =
+  `{θ | 4/7 < θ}`).
+* **PROVENANCE REFINEMENT (names the corrigendum's preprint):**
+  arXiv:2608.13637  (Alpöge–Furman,  13 Aug 2026,  v2  19 Aug)
+  "More than two thirds of the zeros of the Riemann zeta
+  function are simple and on the critical line"  IS  the
+  Aug-2026 Anthropic preprint of the  0291/0292  proportion
+  corrigendum:  ≥ 2/3  with multiplicity  (previous records
+  5/12,  0.6603),  ≥ 5/6 distinct,  0.6725 / 0.8362  with the
+  Montgomery–Taylor window;  "discovered and written by Claude ...
+  the listed authors verified the proof ...  Jarred Sumner posed
+  the problem ... accompanying Lean 4 formalisation".
+* New proportion record, audited lane (M6,  structurally blind
+  to the sparse face —  0292  audit stands maximally blind:
+  this quantity counts SIMPLE OFF-LINE zeros as good):
+  arXiv:2610.23467  (Cobeli–Zaharescu,  16 Oct 2026):
+  > 8/9  of zeros simple-OR-on-line unconditionally,  improving
+  Lamzouri 0.88762  →  ~0.88893.
+* Tool-level infrastructure recorded for a future  (1.2)
+  program:  2608.14852  (short-interval twisted second-moment
+  reciprocity,  Khan extension,  T^δ,  1/2 < δ < 1),
+  2606.27323  (two-piece amplified moments,  Keating–Snaith
+  lower bounds),  2603.25961  (Möbius double sum),
+  2511.06109  (Levinson expository),  2508.11108  (Lin 2025,
+  re-confirmed Q-side-only per  0295).
+
+Wall status:  UNCHANGED.  NO RH CLAIM.  (discovery 0300)
+
+
+## 31 · 0301 — M5 run 3: window 3 landed,  frontier tCE3 (2026-11-11)
+
+Lane M5,  run 3  (the in-house frontier-extension lane):
+
+* **RUN:**  Murphy pipeline  (same trust base as CE2),
+  a  =  12363153477129  (= CE2's  b,  seamless),
+  b_requested  =  a + 20 000,  snapped  b  =  12363153497128,
+  M  =  60,  C_R  =  1,  28 workers;  33 326 evaluations,
+  2614.4 s  (~44 min).
+* **CERTIFICATE  (window3_b3.json,  verifier "CERTIFIED: true"):**
+  the  b − a  =  19 999  zeros in  (g_a3, g_b3]  are ALL SIMPLE
+  and on the line;  0 Rosser failures in  15 864 blocks,
+  0 cross-check failures,  0 undetermined Gram signs,  Rosser
+  runs  48 / 49  ≥ K  =  12,  turing_ok.
+* **SEAM AUDIT (this run's third verification layer):**
+  the recorded  g_a3  exact-dyadic ball
+  (3 000 175 342 144.2115353245153768...  + or - 1.15e-26)
+  is  **BIT-IDENTICAL**  to CE2's recorded  g_b2  ball
+  (same mantissa / exponent / radius tuple;  decoded and
+  compared  2026-11-11);
+  g_b3  =  3 000 175 346 816.913023290278...  + or - 1.15e-26.
+* **FRONTIER ARITHMETIC  (machine,  `RhAttack.CE3`):**
+  tCE3  =  3 000 175 346 816;
+  tCE3 − tCE2  =  4 672  (further shrink past tCE2);
+  tCE3 − tPT2  =  14 016  (certified above Platt–Trudgian H0);
+  certified zeros over  (g_a1, g_b3]  =  20 000 + 19 999 + 19 999
+  =  59 998.
+* **MACHINE  (`RhAttack.CE3`,  new module,  CE2-pattern):**
+  constants  gB3Lo  =  300017534681691/100,  tCE3  =
+  3000175346816;  cited clauses  ce2WinClauseFull  (window-2
+  (gA2Hi, gB2Lo]  slice  of  (g_a2, g_b2])  and
+  ce3WinClause  ((gB2Lo, tCE3],  union-of-two-certificates
+  derivation recorded);  bandOfWindows3;
+  allOnLineUpToCE3;  terminalFaceCE3;
+  terminalFaceCE3_iff_faceCE2  (the band  (tCE2, tCE3]
+  certified empty  -  re-anchoring is a certificate,  not a
+  logical move);  rh_split_at_CE3;
+  **rh_reanchored_CE3**  (headline:
+  RH  ↔  terminalFaceCE3  under the four cited census inputs);
+  rh_of_terminalFaceCE3  (final named step);
+  terminalFaceCE3_of_thetaInf  (0290 lane lands directly).
+  Build:  RhAttack.CE3 green (8768 jobs);  full tree green
+  (17454 jobs).
+* Lean pitfalls logged:  `+/-`  in a docstring opened a nested
+  comment  (replaced with  "+ or -"),  per the standing
+  convention.
+
+The residual face is the SAME open object,  now certified
+14 016 units above H0.  NO RH CLAIM.  (discovery 0301;
+formal/RhAttack/CE3.lean)
+
+
+## 32 · 0302 — the scoped weighted-variant attempt:  sealed at the
+published boundary,  the wall algebra made weight-agnostic (2026-11-11)
+
+The 0280-pattern scoped analytic attempt promised in 0299:
+
+* **THE VARIANT:**  smooth reweighting of the Levinson mollifier
+  (classical  a  =  1  in  `ThetaInf.thetaMoll`):
+  M_{a,Y}(s)  =  Σ_{n≤Y} μ(n) e^{-s log n} (1 − log n/log Y)^a,
+  a > 0 fixed.
+* **MACHINE  (`RhAttack.LevWall5`,  new module):**
+  the WEIGHT-AGNOSTIC wall kernel —  residGenF / iMomF /
+  reMainF  for ANY family  W : Y ↦ w_Y;
+  residExpandGen  (the interval expansion,  continuity only);
+  **residSharpGen**  (the sharp 1/θ limit algebra,  no property
+  of the weight used);  the bridges
+  classicInstance_eq / reMainF_Wlev_eq / iMomF_Wlev_eq
+  (the classical LevWall2 objects are the  Wlev  instance,
+  definitional / integrand-congruent);
+  **residSharp_is_instance**  (the 0294 wall theorem
+  `LevWall2.residSharp`  is exactly  `residSharpGen`  at
+  Wlev  with the same two named inputs).
+* **THE AUDIT  (record-level,  exponents):**
+  (A)  by  (A),  a variant's reach  =  the published reach of
+  its two inputs  (the off-diagonal exponent barrier,  not the
+  algebra);  (B)  smooth reweighting inserts the amplitude
+  (1 − log n/log Y)^{a−1},  smoothly varying on  [1, Y]:
+  in the Conrey-type off-diagonal double sum it changes the
+  bound's  O_a(1)  constant  (bounded variation /
+  summation-by-parts),  NONE  of  the  exponents;  the
+  published reaches  (1/2,  9/17,  6/11,  4/7)  are pure
+  exponent constraints  (Deshouillers–Iwaniec / Kloosterman
+  range)  ⇒  NO smooth reweighting moves the wall past  4/7.
+  **SEALED** at the published boundary —  the  0280
+  negative-audit verdict,  machine-supported at the algebra
+  level.
+* **DISTINCTION KEPT:**  the genuine remaining attack surface is
+  the degree/truncation TRADE-OFF  (0292-PRZZ pin:  B-C-H-B
+  degree-2  →  9/17;  generic ceiling  17/33 − ε),  not the
+  amplitude  —  next scoped attempt  (0303):  pin the degree-2
+  test function at the  (1.2)  level and name the exact
+  obstruction.
+
+Build:  RhAttack.LevWall5 green (8768 jobs);  full tree green
+(17454 jobs).  NO RH CLAIM.  (discovery 0302;
+formal/RhAttack/LevWall5.lean)

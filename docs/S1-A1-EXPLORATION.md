@@ -2608,3 +2608,101 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
     analytic  gap  -  (1.2)  at  theta  >  4/7  in  any  of  its
     three  forms  -  stands.  Machine:  7  new  modules,  tree
     green  17454.
+
+
+## E31.  M5 RUN 3:  WINDOW  3  LANDED,  FRONTIER  tCE3  (0301)  -
+        the  in-house  frontier  extension  continues  (2026-11-11)
+
+    Window  3  (Murphy  pipeline,  same  trust  base  as  CE1/CE2):
+    a  =  12363153477129  (= CE2's  b,  seamless),  b  snapped  to
+    12363153497128;  33326  evals,  2614.4 s.  Verifier:
+    "CERTIFIED: true"  -  b  -  a  =  19999  zeros  in  (g_a3,
+    g_b3],  ALL  SIMPLE,  on  the  line;  0  Rosser  failures  in
+    15864  blocks;  0  cross-check  failures;  Rosser  runs  48/49
+    >=  K  =  12.
+
+    THE  SEAM  AUDIT  (this  run's  third  verification  layer):
+    the  recorded  g_a3  exact-dyadic  ball  is  BIT-IDENTICAL  to
+    CE2's  recorded  g_b2  ball  (same  mantissa/exponent/radius
+    tuple,  decoded  and  compared  on  this  machine).
+
+    FRONTIER:
+        tCE3   =  3 000 175 346 816     (machine  CE3)
+        tCE3 - tCE2  =  4 672           (further  shrink)
+        tCE3 - tPT2  =  14 016          (above  Platt-Trudgian  H0)
+        certified  zeros  over  (g_a1, g_b3]  =  59 998
+        (20000 + 19999 + 19999).
+
+    MACHINE  (RhAttack.CE3,  CE2-pattern):  constants
+    gB3Lo  =  300017534681691/100,  tCE3  =  3000175346816;
+    cited  clauses  ce2WinClauseFull  ((gA2Hi, gB2Lo]  slice  of
+    (g_a2, g_b2])  and  ce3WinClause  ((gB2Lo, tCE3],  union-of-
+    two-certificates  derivation  recorded);  bandOfWindows3;
+    allOnLineUpToCE3;  terminalFaceCE3;
+    terminalFaceCE3_iff_faceCE2  (band  (tCE2, tCE3]  certified
+    empty  -  re-anchoring  is  a  certificate,  not  a  logical
+    move);  rh_reanchored_CE3  (RH  <->  terminalFaceCE3  under
+    the  four  cited  census  inputs);  rh_of_terminalFaceCE3;
+    terminalFaceCE3_of_thetaInf.  Green:  RhAttack.CE3  (8768),
+    full  tree  (17454).
+
+    The  lane  M5  works  IN-HOUSE  for  the  third  window  in  a
+    row;  every  future  window  re-anchors  by  the  same  two-
+    clause  machine  composition.  NO  RH  CLAIM  -  the  face  is
+    the  same  open  object,  certified  14016  units  above  H0.
+
+
+## E32.  THE  SCOPED  WEIGHTED-VARIANT  ATTEMPT:  SEALED  AT  THE
+        PUBLISHED  BOUNDARY;  THE  WALL  ALGEBRA  MADE
+        WEIGHT-AGNOSTIC  (0302)  (2026-11-11)
+
+    The  0280-pattern  scoped  analytic  attempt  promised  in
+    0299,  executed:
+
+    VARIANT:  smooth  reweighting  of  the  Levinson  mollifier
+        M_{a,Y}(s)  =  sum_{n<=Y}  mu(n)  e^{-s log n}
+                    (1  -  log  n/log  Y)^a,   a  >  0
+    (the  classical  weight  is  a  =  1  in
+    ThetaInf.thetaMoll).
+
+    MACHINE  (RhAttack.LevWall5,  new  module):  the
+    WEIGHT-AGNOSTIC  wall  kernel  -  for  ANY  family
+    W  :  Y  ↦  w_Y:
+        residExpandGen  (the  interval  expansion,  continuity
+            only)
+        residSharpGen   (the  sharp  1/theta  limit  algebra  -
+            the  Radziwill  c  =  1  algebra,  NO  property  of
+            the  weight  used)
+    +  the  bridges  proving  the  classical  objects  are  the
+    Wlev  instance  (classicInstance_eq  /  reMainF_Wlev_eq  /
+    iMomF_Wlev_eq)  and  **residSharp_is_instance**  (the  0294
+    wall  theorem  is  residSharpGen  at  Wlev).  Green:
+    RhAttack.LevWall5  (8768),  full  tree  (17454).
+
+    AUDIT  (record-level,  exponents):
+        (A)  machine-supported:  a  variant's  reach  =  the
+            published  reach  of  its  two  named  inputs  (the
+            EXONENT  barrier,  not  the  algebra);
+        (B)  record-level:  the  reweight  amplitude
+            (1  -  log  n/log  Y)^{a-1}  is  smoothly  varying
+            on  [1,  Y];  in  the  Conrey-type  off-diagonal
+            double  sum  it  changes  only  the  O_a(1)  bound
+            constant  (bounded  variation  /  summation-by-
+            parts),  NONE  of  the  exponents;  the  published
+            reaches  (1/2,  9/17,  6/11  Feng,  4/7  Conrey)
+            are  pure  exponent  constraints  (Deshouillers-
+            Iwaniec  /  Kloosterman  range).
+
+    VERDICT:  NO  smooth  reweighting  moves  the  wall  {theta
+        |  4/7  <  theta}  -  SEALED  at  the  published
+        boundary  (0280  negative-audit).
+
+    THE  GENUINE  KNOB  (kept  distinct,  no  conflation):
+    the  degree/truncation  TRADE-OFF  (0292-PRZZ:  B-C-H-B
+    degree-2  ->  9/17;  generic  ceiling  17/33  -  eps).
+    NEXT  SCOPED  ATTEMPT  (0303):  pin  the  degree-2  test
+    function  AT  THE  (1.2)  LEVEL  and  name  the  exact
+    obstruction.
+
+    NO  RH  CLAIM  -  no  wall  movement;  one  natural  variant
+    family  audited  and  sealed  at  its  exact  boundary.

@@ -940,3 +940,62 @@ dt/dt2-stability verdict). The Lean artifacts are machine-checked against
 mathlib on a pinned stable toolchain (Lean 4.33.1); nothing is "known by
 memory," and no measured value stands in for a theorem except where this
 document says so explicitly.
+
+**0300 note (2025-2026 literature re-sweep — the wall UNMOVED — 2026-11-11).**
+Post-0299 sweep:  no off-diagonal advance past 4/7 in the (1.2)
+family  (published-reach lattice  1/2  <  9/17  <  6/11  (Feng,
+1706.04593)  <  4/7  stands).  PROVENANCE REFINEMENT:
+arXiv:2608.13637  (Alpoge-Furman,  13 Aug 2026)  is the exact
+arXiv identity of the "Aug-2026 Anthropic preprint" of the
+0291/0292  proportion corrigendum  (>= 2/3  with multiplicity;
+>= 5/6 distinct;  0.6725/0.8362  Montgomery-Taylor window;
+"discovered and written by Claude, ... authors verified";
+accompanying Lean 4).  New record in the audited-blind M6 lane
+(0292 audit stands  -  maximally blind:  counts simple OFF-line
+zeros as good):  arXiv:2610.23467  Cobeli-Zaharescu  >  8/9
+simple-OR-on-line  (Lamzouri  0.88762  ->  ~0.88893).  Tool-level
+infrastructure recorded:  2608.14852  (short-interval twisted
+second-moment reciprocity),  2606.27323  (amplified moments),
+2603.25961  (Mobius double sum).  NO RH CLAIM;  wall
+{theta | 4/7 < theta}  UNCHANGED.  Record:  ROUTE-B-FINAL-RECORD
+§30;  discovery 0300.
+
+**0301 note (M5 run 3:  window 3 landed,  frontier tCE3 — 2026-11-11).**
+Window  3  (Murphy pipeline,  seamless  a  =  CE2's  b):
+19 999  zeros certified in  (g_a3, g_b3],  all simple on the
+line  (verifier  "CERTIFIED: true",  Rosser  48/49  >=  K = 12);
+the recorded g_a3 exact-dyadic ball is **BIT-IDENTICAL** to
+CE2's  g_b2  ball  (seam audit,  this machine).  New frontier
+**tCE3  =  3,000,175,346,816**:  4 672  past  tCE2,  14 016
+above  Platt-Trudgian  H0;  59 998  certified zeros over
+(g_a1, g_b3].  Machine  (`RhAttack.CE3`):  bandOfWindows3  (splits
+at  gA2Hi  and  gB2Lo;  ce3WinClause  covers  (gB2Lo, tCE3]
+by the union of the window-2 and window-3 certified regions  -
+the true Gram point sits inside its recorded ball,  no rational
+split needed);  rh_reanchored_CE3  (RH  <->  terminalFaceCE3
+under the four cited census inputs);  tree green  17454.  NO
+RH  CLAIM.  Record:  ROUTE-B-FINAL-RECORD  §31;  discovery  0301;
+S1-A1-EXPLORATION.md  E31.
+
+**0302 note (the scoped weighted-variant attempt — SEALED at the
+published boundary;  the wall algebra now weight-agnostic —
+2026-11-11).**  The  0280-pattern  scoped  attempt  on  the
+wall:  the smooth reweighting family  M_{a,Y}  (classical
+a  =  1).  Machine  (`RhAttack.LevWall5`,  new):  the
+WEIGHT-AGNOSTIC  wall  kernel  —  for  ANY  mollifier  family
+W,  the interval expansion and the sharp  1/theta  limit
+algebra  hold  (continuity only),  and  the  classical  0294
+wall  theorem  is  proved  to  be  the  Wlev  instance
+(`residSharp_is_instance`).  Audit  (exponents):  smooth
+reweighting  is  an  AMPLITUDE-LEVEL  lever  —  it  changes
+only  the  O_a(1)  bound  constant  of  the  Conrey-type
+off-diagonal  double  sum,  none  of  the  exponents;  the
+published  reach  lattice  (1/2,  9/17,  6/11,  4/7)  is  a
+pure  exponent  constraint  (Deshouillers-Iwaniec  /
+Kloosterman  range)  =>  NO  smooth  reweighting  moves  the
+wall  past  4/7  —  SEALED.  The genuine remaining knob is
+the  degree/truncation  trade-off  (0292-PRZZ)  —  next  scoped
+attempt  0303:  the  degree-2  test  function  at  the  (1.2)
+level.  Tree  green  17454.  NO  RH  CLAIM.  Record:
+ROUTE-B-FINAL-RECORD  §32;  discovery  0302;  S1-A1-EXPLORATION.md
+E32.
