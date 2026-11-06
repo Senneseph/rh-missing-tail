@@ -1,0 +1,52 @@
+{
+  "id": 294,
+  "ts": "2026-11-11T09:30:00",
+  "title": "0294: RADZIWILL LIMITATION + WALL SHARPENED - the M2 gap object is now the SHARP residual asymptotic 1/theta (named levSharp, machine-bridged by residSharp); the universal limitation is ℐ ≥ c/theta for ALL theta (unconditional, ineffective c) and is NOT the gap; published reach of the sharp version: 0 < theta < 1/2",
+  "kind": "research-unit (option B, unit 6)",
+  "lean": "formal/RhAttack/LevWall2.lean",
+  "primarySource": {
+    "paper": "Maksym Radziwill, 'Limitations to mollifying zeta(s)'",
+    "arxiv": "arXiv:1207.6583 (pulled 2026-11-11 via ar5iv)",
+    "keyStatements": [
+      "THE SETUP: the residual I(M) = inf_{T>=T0} (1/T) int_T^{2T} |1 - M_T(1/2+it) zeta(1/2+it) - R_T|^2 dt, T0 'sufficiently large' depending on the mollifier class M.",
+      "THEOREM 1 (UNCONDITIONAL, PUBLISHED): for theta > 0 and an admissible coefficient set M (in particular M_T = sum_{n<=T^theta} a_n n^{-it}), int_T^{2T} |1 - M_T(1/2+it) zeta(1/2+it)|^2 dt >= (c/theta) T, c > 0 INEFFECTIVE.",
+      "THE PROOF SPLIT: the lower bound goes through Proposition A (a SOBOLEV-INEQUALITY-ON-THE-ZEROS argument, valid for ALL theta) AND, for theta <= 1/2, Proposition B (the B-C-H-B / Soundararajan explicit off-diagonal quadratic form - cited as 'the method of [15], see Proposition B of [15]'), which is where the sharp bound lives.",
+      "SHARP REACH: the ASYMPTOTIC residual ~ (1/theta)T (i.e. constant 1, the top of the universal bound) is PUBLISHED ONLY for 0 < theta < 1/2 (the (1.2) moment asymptotic I_theta(T) ~ T/theta + O(T) is a corollary of it; Conrey carried (1.2) to 4/7 for the moment, but the sharp residual machinery is the theta < 1/2 one). For theta > 1/2 only the unconditional c/theta lower bound (Prop A) remains - the explicit off-diagonal form is the barrier."
+    ]
+  },
+  "sharpening": "0293 named [LEV-WALL] = the pointwise (1.2) asymptotic (published 0 < theta < 4/7). 0294 pins the MECHANISM from the primary source and narrows the obstacle: (a) the UNIVERSAL limitation (no mollifier kills the residual better than c/theta, all theta) is UNCONDITIONAL and does not restrict the theta-frontier to 1/2 - a positive lower bound alone cannot be the frontier obstruction; (b) what M2's lane actually needs past the published frontier is the SHARP asymptotic - residual/T -> exactly 1/theta - and its published reach is 0 < theta < 1/2, because the sharp constant comes from the B-C-H-B explicit OFF-DIAGONAL quadratic form (Soundararajan Prop B) which breaks down for theta > 1/2. The named obstruction to extending M2 is therefore levSharp(theta) at theta > 1/2, i.e. exactly: new off-diagonal control of int |sum_{m,n<=T^theta, m ne n} ...|^2 at longer sums.",
+  "machineProven": [
+    "line objects: line t = mk (1/2) t, line_ne_pole (avoids zeta's pole at 1), line_cont",
+    "zetaLineContinuous / mollLineContinuous / wThetaContinuous (mathlib differentiableAt_riemannZeta + continuity/continuity-tactic machinery)",
+    "residPointwise: ||1-w||^2 = 1 + ||w||^2 - 2 Re w (the algebraic heart)",
+    "wThetaNormEqMoment: ||w(Y,t)||^2 = ||M_Y(line t)||^2 . ||zeta(line t)||^2 = exactly the (1.2)-moment integrand",
+    "residExpand: int_T^{2T} ||1-w||^2 dt = (2T - T) + thetaIMoment(Y,T,2T) - 2 thetaReMain(Y,T) - INTERVAL LINEARITY of the residual (all IntervalIntegrable content machine-proven with mathlib's interval-integral calculus)",
+    "residSharp (THE WALL THEOREM, limit algebra): [asympAt2T theta] + [mozMain theta] imply levSharp theta - ANY proof of the (1.2) asymptotic at scale T^theta (with the mollifier main term) MUST make the residual achieve EXACTLY 1/theta (c = 1 in Radziwill's bound)",
+    "range arithmetic: (PROVEN) 1/2 < 9/17 = 1/2 + 1/34 (B-C-H-B length) < 4/7 (Conrey's frontier for (1.2)) < 1"
+  ],
+  "namedCitedInputs": {
+    "ASYMP-2T theta": "asympAt2T theta - the published (1.2) asymptotic, window form int_T^{2T} ||M_{T^theta} zeta||^2 dt ~ (T/theta) (cited; published 0 < theta < 4/7)",
+    "MOZ-MAIN theta": "mozMain theta - the mollifier main term Re(int M zeta)/T -> 1 (cited analytic input: the reason for the mollifier)",
+    "BARRIER-ASYMP theta": "levSharp theta - the SHARP residual asymptotic (named OPEN proposition; published reach 0 < theta < 1/2 via B-C-H-B/Soundararajan Prop B)"
+  },
+  "whyThisIsTheGapObject": "residSharp (machine) proves (1.2) + main-term  <=>  sharp residual 1/theta (at scale T^theta). So M2's lane, once past the diagonal, is EXACTLY the proposition family levSharp. The published reach of that family is theta < 1/2 (off-diagonal explicit form). The universal c/theta limitation (Radziwill Thm 1) is unconditional and weaker - it is a CONSTRAINT on any solution (no mollifier route can do better than 1/theta), not the frontier itself. Frontier numerals, PROVEN in-tree ordering: 1/2 (Levinson wall / where the sharp form dies) < 9/17 (B-C-H-B length) < 4/7 (published (1.2) frontier) < 1 < ... < infinity (RH).",
+  "escapeReadings": [
+    "a SHARPER off-diagonal control valid beyond theta > 1/2 (new arithmetic or new analytic input) would move the levSharp frontier and hence M2's published reach",
+    "twists / degree d / coefficient-arithmetic routes (0292 face menu) attack the same off-diagonal object from the arithmetic side",
+    "Radziwill's universal bound forbids any mollifier from beating c/theta - the 1/theta residual mass at long scales is an invariant floor, so M2 cannot close the face by 'mollifier improvement' alone; it can only close it if the RESIDUAL MASS LIVES WHERE IT IS UNHARMFUL (the face-local vs average split - the 0285 sparse-face observation is the project-side echo of exactly this structure)"
+  ],
+  "honesty": {
+    "noRHClaim": true,
+    "notProved": ["levSharp theta for any theta (named open input)", "the B-C-H-B off-diagonal computation itself (cited)", "Radziwill Prop A (the zeros Sobolev inequality) (cited, not repuduced in-tree)"],
+    "provenByMachine": "only the critical-line objects, continuity, the pointwise identity, the interval-linearity expansion, the limit-algebra implication (1.2)+main => sharp residual, and the range-arithmetic ordering",
+    "twoThetasDistinct": "the asymptotic theta of (1.2) is NOT the proportion-method length theta_F of 0290/0291 - the file keeps them separate (asympAt2T takes an asymptotic theta; 0291's theta_F = 1/2 - epsilon is a different object)"
+  },
+  "build": "RhAttack.LevWall2 GREEN (8767 jobs); full tree GREEN (17454 jobs)",
+  "nextMoves": [
+    "0295: decide the next honest move on the sharpened gap: (a) scope an ATTEMPT at the off-diagonal object at a FIXED theta in (1/2, 4/7] with rigorous negative-audit fallback (0280 pattern); (b) audit the 2024-2026 zero-density / mollifier literature for anything moving the theta < 1/2 sharp-residual frontier; (c) wire levSharp into the ThetaInf/CE1 endpoint as the canonical named M2 residual",
+    "M5 re-anchor stays open for the next certified window above g_b (two-line re-anchor per 0291)",
+    "the terminal face remains the single residual; the M2 obstruction is now pinned to levSharp(theta > 1/2) with a machine-verified equivalence to the (1.2) lane"
+  ],
+  "rhClaim": "NONE",
+  "faceStatus": "OPEN / PROBABLY TRUE"
+}

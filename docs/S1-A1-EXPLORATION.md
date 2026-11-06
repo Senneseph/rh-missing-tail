@@ -2311,3 +2311,66 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
         reconstructed  diagonal/off-diagonal  split  -  that  is
         intentionally  NOT  in-tree.  LevWall  GREEN  (8766
         jobs);  full  tree  GREEN  (17454).  NO  RH  CLAIM.
+
+## E25.  THE  RADZIWILL  LIMITATION  +  THE  WALL  SHARPENED  -
+       the  M2  gap  object  is  the  SHARP  residual  asymptotic
+       1/th  (0294,  LEAN:  RhAttack.LevWall2,  tree  green  17454)
+
+    1.  THE  PRIMARY  SOURCE  (arXiv:1207.6583,  pulled  2026-11-11):
+
+        *  THE  RESIDUAL:
+          I(M)  =  (1/T)  int_T^{2T}
+                   |1  -  M_T(1/2+it)  .  zeta(1/2+it)|^2  dt
+          (infimum  over  T  >=  T0  "sufficiently  large").
+        *  RADZIWILL  THEOREM  1  (UNCONDITIONAL,  ALL  th  >  0):
+          int_T^{2T} |1 - M_T zeta|^2 dt  >=  (c/th) . T,
+          c  >  0  INEFFECTIVE.  Proof  split:  Prop  A  =
+          Sobolev-inequality-ON-THE-ZEROS  (valid  for  ALL
+          th);  Prop  B  =  the  B-C-H-B  /  Soundararajan
+          EXPLICIT  OFF-DIAGONAL  QUADRATIC  FORM  (the  sharp
+          bound;  th  <=  1/2).
+        *  THE  SHARP  ASYMPTOTIC  (residual/T  ->  1/th,  c  =
+          1)  IS  PUBLISHED  ONLY  FOR  0  <  th  <  1/2.
+          Conrey's  4/7  is  the  (1.2)  MOMENT  frontier,  a
+          corollary  of  the  sharp-residual  machinery  in  its
+          published  range.
+
+    2.  THE  SHARPENING  (what  the  M2  lane  actually  needs):
+
+        *  the  universal  limitation  (all  th,  ineffective
+          c)  is  NOT  the  frontier  obstruction  -  it  is
+          unconditional  and  a  CONSTRAINT  on  every
+          solution:  NO  MOLLIFIER  ROUTE  CAN  BEAT  1/th
+          (the  1/th  residual  mass  at  long  scales  is  an
+          invariant  floor  -  mollifier  improvement  alone
+          can  never  close  the  face).
+        *  the  NAMED  OBSTRUCTION  is  now  [BARRIER-ASYMP]
+          levSharp  th  at  th  >  1/2:  exactly  the  new
+          OFF-DIAGONAL  CONTROL  at  longer  sums.
+
+    3.  THE  MACHINE  BRIDGE  (LevWall2.lean,  ALL  PROVEN):
+
+        *  line objects:  line  t  =  1/2  +  it  (avoids  the
+          pole  at  1),  continuity  of  zeta-circle-line  via
+          mathlib  differentiableAt_riemannZeta,  continuity
+          of  the  full  integrand  w  =  M .  zeta.
+        *  residPointwise:  |1-w|^2  =  1  +  |w|^2  -  2 Re w.
+        *  wThetaNormEqMoment:  |w|^2  =  |M|^2 .  |zeta|^2  =
+          EXACTLY  the  (1.2)-moment  integrand.
+        *  residExpand  (interval  linearity):
+          int  |1-w|^2 dt  =  T  +  thetaIMoment  -  2 .
+          thetaReMain.
+        *  residSharp  (THE  WALL  THEOREM,  limit  algebra):
+          [ASYMP-2T  th]  +  [MOZ-MAIN  th]  =>  levSharp  th
+          -  ANY  proof  of  (1.2)  past  the  frontier  MUST
+          make  the  residual  achieve  EXACTLY  1/th.
+        *  range  ordering  (PROVEN):
+          1/2  <  9/17  =  1/2 + 1/34  (B-C-H-B  length)
+          <  4/7  (Conrey  (1.2)  frontier)  <  1.
+
+    4.  CONSEQUENCE:  extending  M2  <=>  levSharp  past
+        th  =  1/2  <=>  new  off-diagonal  control.  The  two
+        thetas  stay  distinct:  the  (1.2)  asymptotic  th
+        !=  the  0290/0291  proportion-method  length  th_F.
+        levSharp  at  any  th  is  a  NAMED  OPEN  input.
+        NO  RH  CLAIM.  Face  OPEN  /  PROBABLY  TRUE.

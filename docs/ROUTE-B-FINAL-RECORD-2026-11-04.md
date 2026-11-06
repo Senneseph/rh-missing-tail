@@ -1288,3 +1288,80 @@ diagonal/off-diagonal decomposition of the (1.2) computation — that
 split is deliberately **not** asserted in-tree (fabrication red
 line).  `RhAttack.LevWall` GREEN (8766 jobs); full tree GREEN
 (17454 jobs).  **NO RH CLAIM.**
+
+## 24 · 0294 — the RADZIWILL LIMITATION and the WALL SHARPENED: the gap object is the SHARP residual asymptotic `1/θ` (machine-bridged; published reach `0 < θ < 1/2`)
+
+**Unit 0294, option B, unit 6.**  The gap object of lane M2, named `[LEV-WALL]`
+in 0293, is pinned to its mechanism from the primary source
+(Radziwiłł, *Limitations to mollifying ζ(s)*, arXiv:1207.6583, pulled
+2026-11-11):
+
+**What the primary source says.**  The residual
+
+    ℐ(𝔐) = inf_T (1/T) ∫_T^{2T} |1 − M_T(1/2+it)·ζ(1/2+it)|² dt
+
+satisfies, **unconditionally** for every `θ > 0` and every admissible
+mollifier class, the limitation  `∫ ≥ (c/θ)·T`  (Radziwiłł Theorem 1,
+`c > 0` **ineffective**).  The proof splits:  **Proposition A** — a
+Sobolev-type inequality on the zeros of ζ, valid for **all** θ — and,
+for `θ ≤ 1/2`, **Proposition B** (the B-C-H-B / Soundararajan explicit
+**off-diagonal quadratic form**), which is where the *sharp* constant
+lives.  The **sharp** asymptotic  `residual/T → 1/θ`  (c = 1, the top of
+the universal bound)  is **published only for `0 < θ < 1/2`**;  Conrey's
+`4/7` frontier is for the *moment* (1.2), which is a corollary of the
+sharp-residual machinery in its published range.
+
+**The sharpening.**  The universal limitation (`ℐ ≥ c/θ`, all θ,
+ineffective c)  is a **constraint on every solution** — no mollifier
+route can beat `1/θ` — but it is **not the frontier obstruction**:  it
+is unconditional and does not stop at any θ.  What M2's lane needs past
+the published frontier is the **sharp** asymptotic, and *that* stops at
+`θ < 1/2`, because the sharp constant comes from the explicit
+off-diagonal quadratic form which breaks down beyond.  So the named
+obstruction to extending M2 is now  **`levSharp(θ)` for `θ > 1/2`** —
+i.e. exactly the new off-diagonal control problem.
+
+**Machine content (LevWall2.lean, all PROVEN, tree green 17454 jobs):**
+
+- the critical-line objects:  `line t = 1/2 + it`  (pole-avoiding:
+  Re = 1/2 ≠ 1),  continuity of ζ∘line (mathlib
+  `differentiableAt_riemannZeta`),  continuity of the Levinson
+  mollifier factor,  continuity of the full integrand `w = M·ζ`;
+- `residPointwise`:  `‖1−w‖² = 1 + ‖w‖² − 2 Re w`  (the algebraic
+  heart of the residual expansion);
+- `wThetaNormEqMoment`:  `‖w(Y,t)‖²`  **is exactly** the (1.2)-moment
+  integrand  `‖M_Y‖²·‖ζ‖²`  at the critical line;
+- `residExpand`:  **interval linearity** —
+  `∫_T^{2T} ‖1−w‖² dt = (2T−T) + θIMoment(Y,T,2T) − 2·θReMain(Y,T)`,
+  with all IntervalIntegrable content machine-proven;
+- `residSharp` — **the wall theorem, limit algebra:**
+  `[asympAt2T θ]`  (the (1.2) asymptotic at scale `T^θ`, cited)
+  + `[mozMain θ]`  (the mollifier main term `Re∫Mζ / T → 1`, cited)
+  **imply**  `levSharp θ`  —  the residual achieves **exactly** `1/θ`.
+  Any proof of (1.2) past the frontier must hit Radziwiłł's bound with
+  `c = 1`;
+- range arithmetic (PROVEN):  `1/2 < 9/17 (= 1/2 + 1/34, the B-C-H-B
+  length) < 4/7 (Conrey's (1.2) frontier) < 1`.
+
+**Named cited inputs (Z78-pattern):**  `[ASYMP-2T θ] = asympAt2T θ`;
+`[MOZ-MAIN θ] = mozMain θ`;  **`[BARRIER-ASYMP θ] = levSharp θ`**  —
+the named open proposition, published reach `0 < θ < 1/2`.
+
+**Consequence for the program.**  M2's residual is now pinned to a
+single named proposition family with a machine-verified equivalence to
+the (1.2) lane:  extending M2 ⟺  proving `levSharp(θ)` past `θ = 1/2`
+⟺  new off-diagonal control at longer sums.  The Radziwiłł
+limitation (universal, unconditional) says the `1/θ` residual mass at
+long scales is an invariant floor:  M2 can never close the face by
+pure mollifier improvement — only by showing the residual mass lives
+where it is face-harmless (the 0285 sparse-face structure, the
+project-side echo of exactly this phenomenon).  The two θ's remain
+distinct:  the asymptotic θ of (1.2) ≠ the 0290/0291
+proportion-method length `θ_F`.
+
+**Honesty.**  No RH claim.  The in-tree proven content is the
+critical-line objects, continuity, the pointwise identity, the
+interval-linearity expansion, the limit-algebra implication, and the
+range ordering.  `levSharp` at any θ is a **named open input**, not a
+theorem of this repo.  Front-page status:  **face OPEN, PROBABLY
+TRUE.**

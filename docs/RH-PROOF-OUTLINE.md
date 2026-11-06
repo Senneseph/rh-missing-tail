@@ -202,6 +202,36 @@ by a memory-recomputed diagonal/off-diagonal split (fabrication
 red line).  NO RH CLAIM.  Record: ROUTE-B-FINAL-RECORD §23;
 discovery 0293; S1-A1-EXPLORATION.md E24.
 
+**0294 note (the RADZIWILL LIMITATION + the WALL SHARPENED —
+the gap object is the SHARP residual asymptotic `1/θ`; Lean:
+RhAttack.LevWall2, GREEN, 17454-job full tree, 2026-11-11).**
+Radziwiłł, *Limitations to mollifying ζ(s)* (arXiv:1207.6583,
+pulled primary) says: the residual `ℐ(𝔐) = (1/T)∫_T^{2T}
+|1−M_T(1/2+it)ζ(1/2+it)|² dt` obeys, **unconditionally for
+every θ > 0**, the limitation `∫ ≥ (c/θ)T` (ineffective
+c > 0) — via Prop A (a Sobolev inequality **on the zeros**,
+all θ) + Prop B (the B-C-H-B/Soundararajan explicit
+**off-diagonal** quadratic form, θ ≤ 1/2, where the SHARP
+constant lives).  The **sharp** asymptotic `residual/T → 1/θ`
+(c = 1) is **published only for 0 < θ < 1/2**; Conrey's 4/7 is
+the (1.2) *moment* frontier (corollary of the
+sharp-residual machinery in range).  Hence: the universal
+limitation is a **constraint on every solution** (no mollifier
+route beats 1/θ — mollifier improvement alone can never close
+the face), while the **named frontier obstruction** of M2 is
+now **[BARRIER-ASYMP] `levSharp θ` at θ > 1/2** = new
+off-diagonal control at longer sums.  Machine bridge
+(LevWall2, all PROVEN): `residPointwise` (‖1−w‖² = 1 + ‖w‖²
+− 2 Re w), `wThetaNormEqMoment` (‖w‖² = exactly the
+(1.2)-moment integrand), `residExpand` (interval linearity of
+the residual), and the **wall theorem** `residSharp`:
+`[ASYMP-2T θ]` + `[MOZ-MAIN θ]` ⇒ `levSharp θ` — ANY proof of
+(1.2) past the frontier must make the residual achieve
+**exactly** 1/θ.  Range ordering PROVEN: `1/2 < 9/17 (B-C-H-B
+length) < 4/7 (Conrey frontier) < 1`.  NO RH CLAIM.  Record:
+ROUTE-B-FINAL-RECORD §24; discovery 0294;
+S1-A1-EXPLORATION.md E25.
+
 ---
 
 ## 1. The hypothesis

@@ -5,26 +5,26 @@
   "lean": {
     "module": "formal/RhAttack/LevWall.lean (namespace LevWall)",
     "objects": {
-      "asympAt": "def asympAt (θ : ℝ) : Prop := Tendsto (fun T : ℝ => thetaIMoment (T ^ θ) 0 T / T) atTop (𝓝 (1 + 1 / θ)) - the EXACT pointwise (1.2)",
-      "thetaInf_iff_pointwise": "(PROVEN, machine, Iff.rfl) thetaInfConjecture ↔ ∀ θ, 0 < θ → asympAt θ",
-      "levWallAt": "def levWallAt (θ : ℝ) : Prop := asympAt θ - [LEV-WALL] the named open input (cited); docstring carries the full published-reach record verbatim",
-      "levWallGap": "def levWallGap : Set ℝ := { θ | (4/7 : ℝ) < θ } - the gap: every angle strictly above the Conrey frontier",
-      "publishedRange_12lt47": "(PROVEN, machine) (1/2 : ℚ) < 4/7",
-      "publishedRange_47lt1": "(PROVEN, machine) (4/7 : ℚ) < 1",
-      "gapNonempty": "(PROVEN, machine) 1 ∈ levWallGap (θ = 1 is a gap angle)",
-      "gapUnbounded": "(PROVEN, machine) ∀ M, ∃ θ, θ ∈ levWallGap ∧ M < θ (the θ = ∞ target has no finite endpoint)",
-      "terminalFace_of_levWall": "(PROVEN, machine) terminalFace_of_thetaInf wired with the wall: (hqz) + (hInf : thetaInfImpliesAllOnLine, explicit cited input) + (hWall : ∀ θ, 0 < θ → levWallAt θ) → terminalFace q - the M2 CLOSING with the gap object named"
+      "asympAt": "def asympAt (\u03b8 : \u211d) : Prop := Tendsto (fun T : \u211d => thetaIMoment (T ^ \u03b8) 0 T / T) atTop (\ud835\udcdd (1 + 1 / \u03b8)) - the EXACT pointwise (1.2)",
+      "thetaInf_iff_pointwise": "(PROVEN, machine, Iff.rfl) thetaInfConjecture \u2194 \u2200 \u03b8, 0 < \u03b8 \u2192 asympAt \u03b8",
+      "levWallAt": "def levWallAt (\u03b8 : \u211d) : Prop := asympAt \u03b8 - [LEV-WALL] the named open input (cited); docstring carries the full published-reach record verbatim",
+      "levWallGap": "def levWallGap : Set \u211d := { \u03b8 | (4/7 : \u211d) < \u03b8 } - the gap: every angle strictly above the Conrey frontier",
+      "publishedRange_12lt47": "(PROVEN, machine) (1/2 : \u211a) < 4/7",
+      "publishedRange_47lt1": "(PROVEN, machine) (4/7 : \u211a) < 1",
+      "gapNonempty": "(PROVEN, machine) 1 \u2208 levWallGap (\u03b8 = 1 is a gap angle)",
+      "gapUnbounded": "(PROVEN, machine) \u2200 M, \u2203 \u03b8, \u03b8 \u2208 levWallGap \u2227 M < \u03b8 (the \u03b8 = \u221e target has no finite endpoint)",
+      "terminalFace_of_levWall": "(PROVEN, machine) terminalFace_of_thetaInf wired with the wall: (hqz) + (hInf : thetaInfImpliesAllOnLine, explicit cited input) + (hWall : \u2200 \u03b8, 0 < \u03b8 \u2192 levWallAt \u03b8) \u2192 terminalFace q - the M2 CLOSING with the gap object named"
     },
     "build": "RhAttack.LevWall GREEN (8766 jobs); full tree GREEN (17454 jobs)"
   },
   "primaryPinning": {
-    "bgSection1_asympReach": "Bettin-Gonek section 1 (verbatim from the 2026-11-11 pull): 'Levinson [4] computed the asymptotic formula (1.2) ... for 0 < θ < 1/2, and used this result to deduce that κ > 1/3. Conrey [1] later proved that (1.2) (with a slightly different mollifier) remains valid for θ < 4/7, and thereby deduced that κ > 2/5.'",
-    "bgSection1_historicalFlip": "verbatim: 'Initially it was believed (see [2]) that (1.2) does not hold when θ > 1. However, Farmer [2] produced a heuristic argument suggesting that it holds for every θ > 0, and called this the θ = ∞ conjecture.'",
-    "bgTheorem1_particular": "verbatim: 'In particular, if I_N(0,T) ≪_ε T^{1+ε} for 2 ≤ N ≤ T^θ with θ arbitrarily large, then the Riemann hypothesis is true.'",
+    "bgSection1_asympReach": "Bettin-Gonek section 1 (verbatim from the 2026-11-11 pull): 'Levinson [4] computed the asymptotic formula (1.2) ... for 0 < \u03b8 < 1/2, and used this result to deduce that \u03ba > 1/3. Conrey [1] later proved that (1.2) (with a slightly different mollifier) remains valid for \u03b8 < 4/7, and thereby deduced that \u03ba > 2/5.'",
+    "bgSection1_historicalFlip": "verbatim: 'Initially it was believed (see [2]) that (1.2) does not hold when \u03b8 > 1. However, Farmer [2] produced a heuristic argument suggesting that it holds for every \u03b8 > 0, and called this the \u03b8 = \u221e conjecture.'",
+    "bgTheorem1_particular": "verbatim: 'In particular, if I_N(0,T) \u226a_\u03b5 T^{1+\u03b5} for 2 \u2264 N \u2264 T^\u03b8 with \u03b8 arbitrarily large, then the Riemann hypothesis is true.'",
     "przz": "as pinned in 0292 (1/2 barrier named; 9/17 degree-2; 17/33-eps generic ceiling; degree/truncation frontier question; 'very far away')"
   },
   "stateOfArt_twoThetas": {
-    "asympTheta": "(1.2): PUBLISHED 0 < θ < 4/7 (Levinson 1/2 original; Conrey 4/7 variant); OPEN 4/7 < θ; CONJECTURED all θ > 0 (θ = ∞)",
+    "asympTheta": "(1.2): PUBLISHED 0 < \u03b8 < 4/7 (Levinson 1/2 original; Conrey 4/7 variant); OPEN 4/7 < \u03b8; CONJECTURED all \u03b8 > 0 (\u03b8 = \u221e)",
     "proportionThetaF": "length exponent of the Levinson PROPORTION method: 1/2-eps standard (named 1/2 barrier); 9/17 B-C-H-B (degree-2); 4/7 mixing (PRZZ, kappa >= 0.417293962 record) - a DIFFERENT theta; kept distinct in-tree record from this session on"
   },
   "honesty": {
@@ -33,9 +33,10 @@
     "build": "LevWall green + full tree green, no errors in the module"
   },
   "nextMoves": [
-    "0294 (NEXT): the M2 research attempt, scoped and honest - candidates: (a) identify and PUBLISH-CITE the exact published bound on the cross terms (from Levinson 1974 / Conrey 1989 primary texts) so the wall's content is a cited inequality, not just a range statement; (b) a scoped NEW computation attempt (e.g., a new weighted mollifier range) with rigorous negative audit if it fails (0280 pattern); (c) if the primary texts are unobtainable: record-level audit of the attempt, keeping the wall at published-reach precision",
+    "0294 (DONE): Radziwill limitation pulled from primary source (arXiv:1207.6583); the M2 gap object SHARPENED to [BARRIER-ASYMP] levSharp(theta) at theta > 1/2 (the sharp residual asymptotic 1/theta, published reach 0 < theta < 1/2 via B-C-H-B/Soundararajan Prop B off-diagonal form); machine bridge residExpand + residSharp in RhAttack.LevWall2 (tree green 17454)",
+    "0295 (NEXT): decide the next honest move on the sharpened gap: (a) scoped attempt at the off-diagonal object at a fixed theta in (1/2, 4/7] with rigorous negative-audit fallback (0280 pattern); (b) 2024-2026 literature audit for anything moving the theta < 1/2 sharp-residual frontier; (c) wire levSharp into the ThetaInf/CE1 endpoint as the canonical named M2 residual",
     "M5 stays open for the next certified window above g_b (two-line re-anchor per 0291)",
-    "the terminal face remains the single residual; M2's remaining content is now the single named proposition family levWallAt at θ in levWallGap"
+    "the terminal face remains the single residual; the M2 obstruction is levSharp(theta > 1/2), machine-equivalent to the (1.2) lane"
   ],
   "rhClaim": "NONE",
   "faceStatus": "OPEN / PROBABLY TRUE"
