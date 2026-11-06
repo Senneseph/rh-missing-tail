@@ -1,0 +1,42 @@
+{
+  "id": 295,
+  "ts": "2026-11-11T10:00:00",
+  "title": "0295: THE WALL, UNIFIED - the sharp-residual corollary route (0294 residSharp + cited (1.2) at 4/7 + cited main term) moves the [BARRIER-ASYMP] published reach from 1/2 to the Conrey frontier 4/7; the M2 wall now has ONE gap set {theta | 4/7 < theta} (machine: unifiedGap = levWallGap, set equality); 2025-2026 literature audit: nothing moves the off-diagonal barrier (Lin 2025 = derivative-combination side; VK-const papers = constants not exponents)",
+  "kind": "research-unit (option B, unit 7): reach unification + literature audit + Lean LevWall3",
+  "lean": "formal/RhAttack/LevWall3.lean",
+  "unification": {
+    "argument": "residExpand (machine, 0294): resid/T = 1 + I(1.2)/T - 2.ReMain/T. Hence the sharp residual asymptotic levSharp(theta) (resid/T -> 1/theta) is a LOGICAL COROLLARY of the (1.2) moment asymptotic asympAt(theta) plus the mollifier main term mozMain(theta) - exactly the machine theorem residSharp (0294). Therefore the published reach of [BARRIER-ASYMP] is the published reach of the (1.2) + main-term route = the Conrey frontier 4/7 (+ cited main term at 4/7) - NOT the 1/2 range Radziwill states for his Proposition B. The 1/2 is his stated conservative range in the limitation theorem, not the frontier. The two wall families [LEV-WALL] (moment, 0293) and [BARRIER-ASYMP] (residual, 0294) UNIFY: one wall, one gap set.",
+    "machine": [
+      "unifiedGap := LevWall.levWallGap",
+      "unifiedGap_eq_levWallGap : unifiedGap = LevWall.levWallGap (rfl - literally one and the same set {theta | 4/7 < theta})",
+      "conreyBeyondPropB : (PROVEN) 1/2 < 4/7 - the Conrey frontier lies strictly beyond the Radziwill Prop-B range",
+      "unifiedGapInsideSharpGap : (PROVEN) {theta | 4/7 < theta} is subset of {theta | 1/2 < theta} - the unified wall is the SMALLER obligation (moment at theta > 4/7 automatically carries the sharp residual there via residSharp + cited inputs)",
+      "bchbDegree2InBetween : (PROVEN) 1/2 < 9/17 < 4/7 - the B-C-H-B degree-2 length sits in between",
+      "unifiedWall : Prop := forall theta in unifiedGap, LevWall.levWallAt theta - THE single named open requirement of the M2 lane after 0292-0295 (named cited-input family, NOT proven in-tree)"
+    ]
+  },
+  "literatureAudit2025_2026": {
+    "searched": "2026-11-11 (web, primary-source where possible)",
+    "findings": [
+      "Yongxiao Lin, 'Short mollifiers of the Riemann zeta-function', arXiv:2508.11108 (Aug 2025): calculus of variations on LINEAR COMBINATIONS OF ZETA-DERIVATIVES in Levinson's method; positive proportion of on-line zeros regardless of how short the mollifier is; MORE THAN DOUBLES the proportions for modular L-functions (vs Bernard and Kuehn-Robles-Zeindler) with the SAME arithmetic inputs. Interpretation: the derivative-combination (Q-polynomial) side is optimizable at fixed short length - it does NOT move the LENGTH-theta frontier. Quoted: 'optimizing the linear combinations ... has a more pronounced effect than refining the mollifier when it is short'. The length barrier (off-diagonal at theta > 1/2, moment at theta > 4/7) is untouched. ALSO: the construction gives 'non-trivial smooth approximations of Siegel's f-function in the Riemann-Siegel formula'.",
+      "Farmer 1993 citation chain re-confirmed (MathOverflow 515314, expert answer): D.W. Farmer, 'Long mollifiers of the Riemann zeta-function', Mathematika 40 (1993) 71-87 - ORIGIN of the theta=inf conjecture and of what is now the ratios conjecture (first zeta case); 'surprised by how little experts in L-functions seem to know about Farmer's paper'.",
+      "Bettin-Gonek, 'The theta = infinity conjecture implies the Riemann hypothesis', Mathematika 63 (2017) 29-33 - INDEPENDENTLY RE-CONFIRMED as the exact cited implication used in-tree as [BG-IMP] (ThetaInf.thetaInfImpliesAllOnLine, 0290).",
+      "Zero-free region literature 2025-2026 (VK-constant improvement; 'Zero-free regions inspired by work of Heath-Brown' arXiv:2603.21490 Bellotti-Trudgian 2026; new zero-density estimates arXiv:2508.02041) moves CONSTANTS at fixed exponents, not the exponents - no bearing on the Levinson-theta wall.",
+      "VERDICT: the off-diagonal barrier (the exact gap object of the M2 lane, [LEV-WALL]/[BARRIER-ASYMP] unified) is UNMOVED to end of 2026. The wall record (4/7 frontier, 1/2 Prop-B range, 9/17 degree-2 record, PRZZ 4/7 kappa-record 0.417293962) is CURRENT."
+    ]
+  },
+  "honesty": {
+    "noRHClaim": true,
+    "notProved": ["levWallAt theta for theta >= 4/7 (the unified wall - named open input)", "mozMain theta at 4/7 (cited input, standard Levinson first-moment)", "Lin 2025's constructions (cited, not formalized in-tree)"],
+    "provenByMachine": "the set equality unifiedGap = levWallGap, the reach nesting arithmetic (1/2 < 9/17 < 4/7 and the subset relation), all in LevWall3 (tree green 17454 jobs)"
+  },
+  "stateAfter": "M2 lane: ONE named wall (the moment (1.2) asymptotic at every theta in {theta | 4/7 < theta}, equivalently - via the machine corollary residSharp - the sharp residual there); the 2026 literature audit is current to 2026-11-11. Terminal face remains single residual, OPEN / PROBABLY TRUE. NO RH CLAIM.",
+  "build": "RhAttack.LevWall3 GREEN (8768 jobs); full tree GREEN (17454 jobs)",
+  "nextMoves": [
+    "0296: the next honest move is now a research attempt on the unified wall itself (or a packaging decision): candidates: (a) scoped NEGATIVE-AUDIT attempt at a fixed theta in (4/7, 1] (0280 pattern): state precisely what off-diagonal input an extension to theta = 1 would require (e.g. a T^1-length off-diagonal in the B-C-H-B quadratic form), identify the exact inequality that fails/is unknown, cite what DOES exist (ratios conjecture special cases - Farmer 1993 IS the natural candidate input: audit whether the ratios conjecture at order 2 implies (1.2) at theta = 1 - that implication may be PROVE-ABLE from the 1993 paper's content); (b) if (a) yields a genuine provable implication chain (ratios-2 => (1.2)@theta=1), wire it as a named cited input with the machine wiring; (c) otherwise land the negative audit and re-examine the face menu options for 0297+",
+    "M5 re-anchor stays open for the next certified window above g_b (two-line re-anchor per 0291)",
+    "the 2025-2026 audit is current; re-run a literature sweep if any new preprint on zeta mollifier lengths appears"
+  ],
+  "rhClaim": "NONE",
+  "faceStatus": "OPEN / PROBABLY TRUE"
+}

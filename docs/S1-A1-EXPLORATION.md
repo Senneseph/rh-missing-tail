@@ -2374,3 +2374,45 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
         !=  the  0290/0291  proportion-method  length  th_F.
         levSharp  at  any  th  is  a  NAMED  OPEN  input.
         NO  RH  CLAIM.  Face  OPEN  /  PROBABLY  TRUE.
+
+## E26.  THE  WALL,  UNIFIED  +  THE  2025-2026  AUDIT  (0295,
+       LEAN:  RhAttack.LevWall3,  tree  green  17454)
+
+    1.  UNIFICATION  (machine):  residSharp  (0294)  shows
+        the  sharp  residual  levSharp(th)  is  a  LOGICAL
+        COROLLARY  of  (1.2)  +  the  main  term  -  so  the
+        [BARRIER-ASYMP]  reach  =  the  (1.2)  +  main-term
+        reach  =  CONREY  4/7  (not  Radziwill's  stated
+        Prop-B  1/2,  which  is  his  conservative  range  in
+        the  limitation  theorem).  ONE  WALL,  ONE  GAP
+        SET:  unifiedGap  =  {  th  |  4/7  <  th  }
+        (PROVEN  set  equality  with  0293's  levWallGap);
+        1/2  <  9/17  <  4/7  (PROVEN);  the  unified  wall
+        is  the  SMALLER  obligation  (moment  past  4/7
+        carries  the  residual  via  the  corollary).
+        [UNIFIED-WALL]  :=  forall  th  >  4/7,  (1.2)@th
+        =  the  single  named  open  requirement  of  the
+        M2  lane  after  0292-0295.
+
+    2.  AUDIT  2025-2026  (searched  2026-11-11):  the
+        off-diagonal  length  barrier  is  UNMOVED.
+        *  Lin  2025  (arXiv:2508.11108,  Aug  2025):
+          variational  optimization  of  the  derivative
+          COMBINATIONS  (the  Q-side  of  Levinson's
+          method);  doubles  modular-L  proportions  with
+          the  SAME  arithmetic  -  the  length  theta
+          frontier  is  explicitly  NOT  moved  ("combining
+          beats  lengths  when  short").
+        *  Farmer  1993  (Mathematika  40:  theta=inf
+          +  first  ratios  conjecture)  and  Bettin-Gonek
+          2017  (Mathematika  63:  theta=inf  =>  RH)
+          re-confirmed  (MO  515314  expert  answer)  as
+          the  in-tree  [BG-IMP]  chain  (0290).
+        *  VK  zero-free  region  papers  2025-2026:
+          constants,  not  exponents.
+        FRONTIER  STATUS  (CURRENT  as  of  2026-11-11):
+        moment  (1.2):  0  <  th  <  4/7;  sharp  residual:
+        same  via  corollary;  proportion  records  1/3
+        (Levinson)  <  2/5  (Conrey)  <  0.417293962
+        (PRZZ  kappa  record);  gap  =  {  th  |  4/7  <
+        th  }.

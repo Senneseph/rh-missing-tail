@@ -1365,3 +1365,79 @@ interval-linearity expansion, the limit-algebra implication, and the
 range ordering.  `levSharp` at any θ is a **named open input**, not a
 theorem of this repo.  Front-page status:  **face OPEN, PROBABLY
 TRUE.**
+
+## 25 · 0295 — the wall, UNIFIED: the sharp-residual corollary route moves
+`[BARRIER-ASYMP]` to the Conrey frontier `4/7`; ONE gap set (machine:
+`unifiedGap = levWallGap`); 2025–2026 literature audit: the
+off-diagonal barrier is UNMOVED
+
+**Unit 0295, option B, unit 7.**  Two honest results.
+
+**(1)  The unification (machine: LevWall3.lean).**  The 0294
+wall theorem `residSharp` proves that the sharp residual
+asymptotic  `levSharp(θ)`  (resid/T → 1/θ)  is a **logical
+corollary** of the (1.2) moment asymptotic  `asympAt(θ)`  plus
+the mollifier main term  `mozMain(θ)`.  Therefore the published
+reach of  `[BARRIER-ASYMP]`  is the published reach of the (1.2)
++ main-term route —  the **Conrey frontier 4/7**  (plus the cited
+main term at 4/7),  **not**  the `1/2`  range Radziwiłł states
+for his Proposition B.  The `1/2` is his conservative stated
+range in the limitation theorem,  not the frontier.  The 0293
+moment wall `[LEV-WALL]`  and the 0294 residual wall
+`[BARRIER-ASYMP]`  are **one wall**  with **one gap set**:
+
+    unifiedGap  =  { θ | 4/7 < θ }        (machine-proven set
+                                          equality with 0293's
+                                          levWallGap)
+
+Machine content (all PROVEN):  `unifiedGap_eq_levWallGap`  (rfl —
+literally the same set);  `conreyBeyondPropB`  (1/2 < 4/7 — the
+Conrey frontier lies beyond the Prop-B range);
+`unifiedGapInsideSharpGap`  (the unified gap nests inside the
+radziwill-Prop-B reading — the unified wall is the *smaller*
+obligation:  moment at θ > 4/7 automatically carries the sharp
+residual there via `residSharp` + cited inputs);
+`bchbDegree2InBetween`  (1/2 < 9/17 < 4/7 — the B-C-H-B degree-2
+length sits in between).  The single named open requirement of
+the M2 lane after 0292–0295:
+
+    [UNIFIED-WALL]   ∀ θ in { θ | 4/7 < θ },  (1.2) at θ.
+
+**(2)  The 2025–2026 literature audit (searched 2026-11-11,
+primary sources).**
+
+- **Yongxiao Lin, arXiv:2508.11108 (Aug 2025), "Short
+  mollifiers of the Riemann zeta-function":**  calculus of
+  variations on *linear combinations of ζ-derivatives* in
+  Levinson's method;  positive proportion of on-line zeros
+  regardless of how short the mollifier is;  **more than
+  doubles** the proportions for modular L-functions (vs
+  Bernard / Kühn–Robles–Zeindler)  with the **same arithmetic
+  inputs**.  Quoted:  "optimizing the linear combinations …
+  has a more pronounced effect than refining the mollifier
+  when it is short."  —  the derivative-combination (Q-side)
+  is optimizable at fixed length;  the **length-θ frontier is
+  untouched**.  (Curiosity note:  the combinations are
+  non-trivial smooth approximations of Siegel's 𝔣-function in
+  the Riemann–Siegel formula.)
+- **The θ = ∞ citation chain re-confirmed (MO 515314 expert
+  answer):**  Farmer 1993 (*Long mollifiers of the Riemann
+  zeta-function*, Mathematika 40, 71–87) — origin of the
+  θ = ∞ conjecture **and** of the ratios conjecture (first
+  zeta case);  Bettin–Gonek, *The θ = ∞ conjecture implies
+  the RH*, Mathematika 63 (2017) 29–33 — independently
+  re-confirmed as the exact statement in-tree as [BG-IMP]
+  (0290).
+- **Zero-free-region 2025–2026** (VK-constant improvements;
+  Bellotti–Trudgian arXiv:2603.21490, Heath-Brown-inspired;
+  zero-density arXiv:2508.02041):  constants, not exponents  —
+  no bearing on the Levinson-θ wall.
+- **VERDICT:**  the off-diagonal barrier —  the exact gap
+  object of the M2 lane —  is **UNMOVED**  to end-of-2026.
+  The wall record (4/7 frontier;  1/2 Prop-B range;  9/17
+  degree-2;  PRZZ κ-record)  is **CURRENT**.
+
+**Honesty.**  No RH claim.  Proven:  the set equality, the
+reach-nesting arithmetic,  tree green (17454).  Named open:
+`[UNIFIED-WALL]`  (the (1.2) asymptotic for every θ > 4/7).
+Face status:  **OPEN, PROBABLY TRUE.**

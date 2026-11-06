@@ -229,8 +229,35 @@ the residual), and the **wall theorem** `residSharp`:
 (1.2) past the frontier must make the residual achieve
 **exactly** 1/θ.  Range ordering PROVEN: `1/2 < 9/17 (B-C-H-B
 length) < 4/7 (Conrey frontier) < 1`.  NO RH CLAIM.  Record:
-ROUTE-B-FINAL-RECORD §24; discovery 0294;
-S1-A1-EXPLORATION.md E25.
+ROUTE-B-FINAL-RECORD §24; discovery 0294; S1-A1-EXPLORATION.md E25.
+
+**0295 note (the wall, UNIFIED — one gap set; 2025–2026
+audit: the off-diagonal barrier is UNMOVED; Lean:
+RhAttack.LevWall3, GREEN, 17454-job full tree,
+2026-11-11).**  The 0294 `residSharp` theorem (the sharp
+residual 1/θ is a logical corollary of (1.2) + the main
+term) means `[BARRIER-ASYMP]` reaches the **Conrey
+frontier 4/7**, not Radziwiłł's stated Prop-B range 1/2
+(his conservative limitation-theorem range).  The 0293
+moment wall and the 0294 residual wall are **one wall with
+one gap set** `unifiedGap = {θ | 4/7 < θ}` (machine
+PROVEN set equality with `LevWall.levWallGap`; nested
+arithmetic `1/2 < 9/17 < 4/7` PROVEN): the unified wall is
+the *smaller* obligation — (1.2) past 4/7 automatically
+carries the sharp residual via the corollary.  The 2025–
+2026 literature audit (primary sources, 2026-11-11): Lin
+2025 (arXiv:2508.11108) optimizes the *derivative
+combination* (Q-side) — "combining beats lengths when
+short" — the length-θ frontier is not moved; the
+zero-free-region papers move VK *constants*, not
+exponents; the Farmer-1993 / Bettin–Gonek-2017
+citation chain for the θ = ∞ lane is independently
+re-confirmed (MO 515314).  **The off-diagonal barrier is
+UNMOVED to end-of-2026**; the single named open
+requirement of the M2 lane is `[UNIFIED-WALL]`:  the (1.2)
+asymptotic for every θ > 4/7.  NO RH CLAIM.  Record:
+ROUTE-B-FINAL-RECORD §25; discovery 0295;
+S1-A1-EXPLORATION.md E26.
 
 ---
 

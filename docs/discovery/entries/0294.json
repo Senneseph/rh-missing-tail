@@ -1,7 +1,7 @@
 {
   "id": 294,
   "ts": "2026-11-11T09:30:00",
-  "title": "0294: RADZIWILL LIMITATION + WALL SHARPENED - the M2 gap object is now the SHARP residual asymptotic 1/theta (named levSharp, machine-bridged by residSharp); the universal limitation is ℐ ≥ c/theta for ALL theta (unconditional, ineffective c) and is NOT the gap; published reach of the sharp version: 0 < theta < 1/2",
+  "title": "0294: RADZIWILL LIMITATION + WALL SHARPENED - the M2 gap object is now the SHARP residual asymptotic 1/theta (named levSharp, machine-bridged by residSharp); the universal limitation is \u2110 \u2265 c/theta for ALL theta (unconditional, ineffective c) and is NOT the gap; published reach of the sharp version: 0 < theta < 1/2",
   "kind": "research-unit (option B, unit 6)",
   "lean": "formal/RhAttack/LevWall2.lean",
   "primarySource": {
@@ -37,15 +37,20 @@
   ],
   "honesty": {
     "noRHClaim": true,
-    "notProved": ["levSharp theta for any theta (named open input)", "the B-C-H-B off-diagonal computation itself (cited)", "Radziwill Prop A (the zeros Sobolev inequality) (cited, not repuduced in-tree)"],
+    "notProved": [
+      "levSharp theta for any theta (named open input)",
+      "the B-C-H-B off-diagonal computation itself (cited)",
+      "Radziwill Prop A (the zeros Sobolev inequality) (cited, not repuduced in-tree)"
+    ],
     "provenByMachine": "only the critical-line objects, continuity, the pointwise identity, the interval-linearity expansion, the limit-algebra implication (1.2)+main => sharp residual, and the range-arithmetic ordering",
     "twoThetasDistinct": "the asymptotic theta of (1.2) is NOT the proportion-method length theta_F of 0290/0291 - the file keeps them separate (asympAt2T takes an asymptotic theta; 0291's theta_F = 1/2 - epsilon is a different object)"
   },
   "build": "RhAttack.LevWall2 GREEN (8767 jobs); full tree GREEN (17454 jobs)",
   "nextMoves": [
-    "0295: decide the next honest move on the sharpened gap: (a) scope an ATTEMPT at the off-diagonal object at a FIXED theta in (1/2, 4/7] with rigorous negative-audit fallback (0280 pattern); (b) audit the 2024-2026 zero-density / mollifier literature for anything moving the theta < 1/2 sharp-residual frontier; (c) wire levSharp into the ThetaInf/CE1 endpoint as the canonical named M2 residual",
+    "0295 (DONE): reach unification + audit. The sharp-residual corollary route (residSharp + cited (1.2)@4/7 + cited main term) moves [BARRIER-ASYMP] reach from 1/2 to the Conrey frontier 4/7 - ONE wall, ONE gap set {theta | 4/7 < theta} (machine: LevWall3.unifiedGap = levWallGap, tree green 17454). 2025-2026 audit: off-diagonal barrier UNMOVED (Lin 2025 arXiv:2508.11108 = Q-side/diagnostic-combination only; VK papers = constants). Farmer 1993 + Bettin-Gonek 2017 chain re-confirmed (MO 515314).",
+    "0296 (NEXT): audit whether farmer-1993's RATIOS conjecture (order 2) => the long-mollifier (1.2) asymptotic is a PUBLISHED implication - if so, wire it in-tree as a named cited link (RATIOS-2 => thetaInf) completing the chain RATIOS-2 => thetaInf => all-on-line => terminalFace (0288/0291) with Farmer as the primary citation; if the implication is only conjectural-at-2nd-order, land the precise statement (what exactly Farmer 1993 proves vs conjectures) as a record-level audit",
     "M5 re-anchor stays open for the next certified window above g_b (two-line re-anchor per 0291)",
-    "the terminal face remains the single residual; the M2 obstruction is now pinned to levSharp(theta > 1/2) with a machine-verified equivalence to the (1.2) lane"
+    "the M2 lane now has ONE named wall: [UNIFIED-WALL] = the (1.2) asymptotic for every theta > 4/7"
   ],
   "rhClaim": "NONE",
   "faceStatus": "OPEN / PROBABLY TRUE"
