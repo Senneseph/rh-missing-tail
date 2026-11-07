@@ -3046,3 +3046,40 @@ NO RH CLAIM. (discovery 0322)
 
 Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE18.
 NO RH CLAIM. (discovery 0323)
+
+## 55 · 0324 — M5 WINDOW 19 CERTIFIED + CE19 RE-ANCHOR
+(2026-11-15)
+
+* **Window 19 (in-house, seamless):** a = 12,363,153,797,124
+  (= window 18's b), b_requested = a + 20,000, driver
+  snapped final b DOWN ONE (12,363,153,817,124 not a good
+  Gram point; a needed no snap), M = 60, C_R = 1, 33,237
+  evaluations in 2476.0 s, N_range = [691008, 691008].
+  Certificate window19_b19.json: **b − a = 19,999 zeros,
+  all simple and on the line** in (g_a19, g_b19], g_a19 =
+  3,000,175,416,910.005424623397 ± 1.29e-26 (bit-identical
+  to window 18's g_b18), g_b19 = 3,000,175,421,582.
+  706908258997 ± 1.29e-26 (floor tCE19 sits 0.7069 above
+  the previous integer - robust).
+* **Verifier:** CERTIFIED true, 33,237 points,
+  sign_changes_inside = 19,999 = b − a, Rosser runs 47/45 ≥
+  K = 12, turing_ok. **One Rosser rescue exception**
+  (4 = 4; union quota met) — the documented 3-block union
+  mechanism; recorded, not suppressed.
+* **Formal (CE19.lean, GREEN 8784; full tree 17454, oolean
+  fresh):** gB19Lo := 300017542158270/100, tCE19 :=
+  3,000,175,421,582; faceShrinkCE19 = **4672** (the
+  second 4672 in the chain — this window carried 19,999
+  zeros); frontierGapAboveH0 = 88,782; bandOfWindows19
+  (nineteen-way); rh_reanchored_CE19: under [Z-PT2] + the
+  nineteen cited window clauses, RH q ↔ terminalFaceCE19
+  q; rh_of_terminalFaceCE19 (final named step — no closing
+  supplied); terminalFaceCE19_of_thetaInf (M2 lane lands at
+  tCE19).
+* **Frontier:** certified zeros over (g_a1, g_b19] =
+  **379,993**. Chain integrity 1→19: every seam
+  bit-identical (exact dyadic tuples), N_range constant,
+  C_R/M constant.
+
+Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE19.
+NO RH CLAIM. (discovery 0324)
