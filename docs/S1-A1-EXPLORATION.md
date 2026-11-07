@@ -3391,3 +3391,15 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
 
     No RH claim - face OPEN / PROBABLY TRUE at tCE22; wall
     UNMOVED.
+
+* **E58 (2026-11-15, 0328):**
+    * M5 WINDOW 23 CERTIFIED (20,000 zeros, all simple and
+      on the line; seam bit-identical; 1 Rosser exception
+      6=6, recorded) + CE23 GREEN 8788, full tree 17454.
+    * Frontier re-anchored: tCE23 = 3,000,175,440,274
+      (tCE23 - tCE22 = 4,673; 107,474 above H0 - 100k mark
+      still crossed); 459,992 certified over (g_a1, g_b23].
+    * Window 24 in flight (a24 = 12,363,153,897,122).
+
+    No RH claim - face OPEN / PROBABLY TRUE at tCE23; wall
+    UNMOVED.
