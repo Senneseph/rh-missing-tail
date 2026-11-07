@@ -3485,7 +3485,7 @@ NO RH CLAIM. (discovery 0333)
   (5 = 5, m = 4). Both quotas met by the union recounts;
   both displaced within the window (total 20,000
   unchanged); verifier recomputes window total and end
-  runs (44/45... 44/47). All RECORDED, not suppressed.
+  runs (44/47). All RECORDED, not suppressed.
   Multi-rescue is now a documented steady-state phenomenon
   of the lane (windows 28 and 29 in a row); the recording
   convention is unchanged.
