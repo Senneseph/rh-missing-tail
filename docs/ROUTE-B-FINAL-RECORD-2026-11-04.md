@@ -3163,3 +3163,42 @@ NO RH CLAIM. (discovery 0325)
 
 Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE21.
 NO RH CLAIM. (discovery 0326)
+
+## 58 · 0327 — M5 WINDOW 22 CERTIFIED + CE22 RE-ANCHOR
+(2026-11-15) — **MILESTONE: the frontier CROSSES 100k above H0**
+
+* **Window 22 (in-house, seamless):** a = 12,363,153,857,122
+  (= window 21's b), b = a + 20,000 (no snap at either
+  endpoint), M = 60, C_R = 1, 33,067 evaluations in 2486.5
+  s, N_range = [691008, 691008]. Certificate
+  window22_b22.json: **b − a = 20,000 zeros, all simple and
+  on the line** in (g_a22, g_b22], g_a22 =
+  3,000,175,430,928.343521474804 ± 1.29e-26 (bit-identical
+  to window 21's g_b21), g_b22 = 3,000,175,435,601.
+  278651054984 ± 1.29e-26 (floor tCE22 sits 0.2787 above
+  the previous integer - robust).
+* **Verifier:** CERTIFIED true, 33,067 points,
+  sign_changes_inside = 20,000 = b − a, Rosser runs 49/49 ≥
+  K = 12, turing_ok. **CLEAN window** — zero Rosser
+  exceptions, zero rescue failures (clean tally now: 6, 8,
+  10, 12, 13, 14, 16, 18, 22).
+* **Formal (CE22.lean, GREEN 8787; full tree 17454, oolean
+  fresh):** gB22Lo := 300017543560127/100, tCE22 :=
+  3,000,175,435,601; faceShrinkCE22 = 4673;
+  frontierGapAboveH0 = 102,801; **frontierPast100k :
+  tCE22 − tPT2 > 100000 (in-tree machine fact)** — the
+  100,000-unit mark above the Platt–Trudgian frontier is
+  CROSSED at this re-anchor; bandOfWindows22 (twenty-two-way);
+  rh_reanchored_CE22: under [Z-PT2] + the twenty-two cited
+  window clauses, RH q ↔ terminalFaceCE22 q;
+  rh_of_terminalFaceCE22 (final named step — no closing
+  supplied); terminalFaceCE22_of_thetaInf (M2 lane lands at
+  tCE22).
+* **Frontier:** certified zeros over (g_a1, g_b22] =
+  **439,992**. Chain integrity 1→22: every seam
+  bit-identical, N_range/C_R/M constant. Nine clean windows
+  of twenty-two; every rescue (13 of them, incl. window 21's
+  wider union 6 = 6) quota-met and recorded.
+
+Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE22.
+NO RH CLAIM. (discovery 0327)

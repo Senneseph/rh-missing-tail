@@ -3377,3 +3377,17 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
 
     No RH claim - face OPEN / PROBABLY TRUE at tCE21; wall
     UNMOVED.
+
+* **E57 (2026-11-15, 0327):**
+    * M5 WINDOW 22 CERTIFIED (20,000 zeros, all simple and
+      on the line; CLEAN window - zero exceptions; seam
+      bit-identical; runs 49/49) + CE22 GREEN 8787, full
+      tree 17454.
+    * MILESTONE: frontier CROSSES 100k above H0 - tCE22 =
+      3,000,175,435,601, tCE22 - tPT2 = 102,801 (in-tree
+      frontierPast100k); 439,992 certified over (g_a1,
+      g_b22].
+    * Window 23 in flight (a23 = 12,363,153,877,122).
+
+    No RH claim - face OPEN / PROBABLY TRUE at tCE22; wall
+    UNMOVED.
