@@ -3238,3 +3238,39 @@ NO RH CLAIM. (discovery 0327)
 
 Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE23.
 NO RH CLAIM. (discovery 0328)
+
+## 60 · 0329 — M5 WINDOW 24 CERTIFIED + CE24 RE-ANCHOR
+(2026-11-15)
+
+* **Window 24 (in-house, seamless):** a = 12,363,153,897,122
+  (= window 23's b), b = a + 20,000 (no snap at either
+  endpoint), M = 60, C_R = 1, 33,110 evaluations in 2460.5
+  s, N_range = [691008, 691008]. Certificate
+  window24_b24.json: **b − a = 20,000 zeros, all simple and
+  on the line** in (g_a24, g_b24], g_a24 =
+  3,000,175,440,274.213780364512 ± 1.29e-26 (bit-identical
+  to window 23's g_b23), g_b24 = 3,000,175,444,947.
+  148909403387 ± 1.29e-26 (floor tCE24 sits 0.1489 above
+  the previous integer - robust).
+* **Verifier:** CERTIFIED true, 33,110 points,
+  sign_changes_inside = 20,000 = b − a, Rosser runs 47/53 ≥
+  K = 12, turing_ok. **One Rosser exception** rescued to
+  union ([..899400, ..899402] → [..899397, ..899404],
+  need 7 = found 7, m = 2); recorded, not suppressed.
+* **Formal (CE24.lean, GREEN 8789; full tree 17454, oolean
+  fresh):** gB24Lo := 300017544494714/100, tCE24 :=
+  3,000,175,444,947; faceShrinkCE24 = 4673;
+  frontierGapAboveH0 = 112,147; frontierPast100k carried;
+  bandOfWindows24 (twenty-four-way); rh_reanchored_CE24:
+  under [Z-PT2] + the twenty-four cited window clauses,
+  RH q ↔ terminalFaceCE24 q; rh_of_terminalFaceCE24 (final
+  named step — no closing supplied);
+  terminalFaceCE24_of_thetaInf (M2 lane lands at tCE24).
+* **Frontier:** certified zeros over (g_a1, g_b24] =
+  **479,992**. Chain integrity 1→24: every seam
+  bit-identical, N_range/C_R/M constant. Nine clean windows
+  of twenty-four. Window 25 in flight (the 25-window chain
+  is imminent).
+
+Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE24.
+NO RH CLAIM. (discovery 0329)
