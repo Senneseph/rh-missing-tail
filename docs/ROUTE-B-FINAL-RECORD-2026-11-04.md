@@ -3790,3 +3790,44 @@ NO RH CLAIM. (discovery 0340)
 
 Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE36.
 NO RH CLAIM. (discovery 0341)
+
+## 73 · 0342 — M5 WINDOW 37 CERTIFIED + CE37 RE-ANCHOR
+(2026-11-15) — the 175k mark is 2,105 units ahead
+
+* **Window 37 (in-house, seamless):** a = 12,363,154,157,121
+  (= window 36's b), b = a + 20,000 (no snap at either
+  endpoint), M = 60, C_R = 1, 33,746 evaluations in 2579.3
+  s, N_range = [691008, 691008]. Certificate
+  window37_b37.json: **b − a = 20,000 zeros, all simple and
+  on the line** in (g_a37, g_b37], g_a37 =
+  3,000,175,501,022.136790002671 ± 1.29e-26 (bit-identical
+  to window 36's g_b36), g_b37 = 3,000,175,505,695.
+  071915523071 ± 1.29e-26 (floor tCE37 sits 0.0719 above
+  the previous integer - robust; margin ~1.9e-3; the
+  two-decimal round-down (0.07) does not equal the floor,
+  so no CASING needed).
+* **ROSSER EVENT: one rescue** — [..174780, ..174783] →
+  [..174779, ..174784] (5 = 5, m = 8). Quota met by the
+  union recount; displaced within the window (total
+  unchanged); verifier recomputes window total and end
+  runs (48/49). RECORDED, not suppressed.
+* **Formal (CE37.lean, GREEN 8802; full tree 17454, oolean
+  fresh):** gB37Lo := 300017550569507/100, tCE37 :=
+  3,000,175,505,695; faceShrinkCE37 = 4673 (running
+  pattern); frontierGapAboveH0 = 172,895;
+  frontierPast150k carried; bandOfWindows37
+  (thirty-seven-way); rh_reanchored_CE37: under [Z-PT2] +
+  the thirty-seven cited window clauses, RH q ↔
+  terminalFaceCE37 q; rh_of_terminalFaceCE37 (final named
+  step — no closing supplied);
+  terminalFaceCE37_of_thetaInf (M2 lane lands at tCE37).
+  The single-rescue event recorded in the header.
+* **Frontier:** certified zeros over (g_a1, g_b37] =
+  **739,991**. Chain integrity 1→37: every seam
+  bit-identical, N_range/C_R/M constant. Fifteen clean
+  windows of thirty-seven; all rescues quota-met and
+  recorded. **The 175k mark sits 2,105 units ahead —
+  window 38 is expected to cross it.**
+
+Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE37.
+NO RH CLAIM. (discovery 0342)
