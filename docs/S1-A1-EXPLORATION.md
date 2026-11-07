@@ -3619,3 +3619,17 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
 
     No RH claim - face OPEN / PROBABLY TRUE at tCE35; wall
     UNMOVED.
+
+* **E71 (2026-11-15, 0341):**
+    * M5 WINDOW 36 CERTIFIED (CLEAN - fifteenth clean
+      window; 20,000 zeros all simple and on the line; seam
+      bit-identical) + CE36 GREEN 8801, full tree 17454.
+    * 719,991 certified over (g_a1, g_b36].
+    * Frontier re-anchored: tCE36 = 3,000,175,501,022
+      (tCE36 - tCE35 = 4,673, running pattern; 168,222
+      above H0; the 175k mark is 6,778 units away -
+      ~1-2 windows out).
+    * Window 37 in flight (a37 = 12,363,154,157,121).
+
+    No RH claim - face OPEN / PROBABLY TRUE at tCE36; wall
+    UNMOVED.

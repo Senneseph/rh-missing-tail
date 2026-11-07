@@ -3753,3 +3753,40 @@ NO RH CLAIM. (discovery 0339)
 
 Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE35.
 NO RH CLAIM. (discovery 0340)
+
+## 72 · 0341 — M5 WINDOW 36 CERTIFIED + CE36 RE-ANCHOR
+(2026-11-15) — CLEAN window; 719,991 certified
+
+* **Window 36 (in-house, seamless):** a = 12,363,154,137,121
+  (= window 35's b), b = a + 20,000 (no snap at either
+  endpoint), M = 60, C_R = 1, 33,318 evaluations in 2563.2
+  s, N_range = [691008, 691008]. Certificate
+  window36_b36.json: **b − a = 20,000 zeros, all simple and
+  on the line** in (g_a36, g_b36], g_a36 =
+  3,000,175,496,349.201664211618 ± 1.29e-26 (bit-identical
+  to window 35's g_b35), g_b36 = 3,000,175,501,022.
+  136790002671 ± 1.29e-26 (floor tCE36 sits 0.1368 above
+  the previous integer - robust; margin ~6.8e-3, no
+  CASING).
+* **CLEAN WINDOW** (fifteenth of thirty-six): ZERO Rosser
+  exceptions.
+* **Formal (CE36.lean, GREEN 8801; full tree 17454, oolean
+  fresh):** gB36Lo := 300017550102213/100, tCE36 :=
+  3,000,175,501,022; faceShrinkCE36 = 4673 (running
+  pattern); frontierGapAboveH0 = 168,222;
+  frontierPast150k carried; bandOfWindows36
+  (thirty-six-way); rh_reanchored_CE36: under [Z-PT2] +
+  the thirty-six cited window clauses, RH q ↔
+  terminalFaceCE36 q; rh_of_terminalFaceCE36 (final named
+  step — no closing supplied);
+  terminalFaceCE36_of_thetaInf (M2 lane lands at tCE36).
+  Clean status recorded in the header.
+* **Frontier:** certified zeros over (g_a1, g_b36] =
+  **719,991**. Chain integrity 1→36: every seam
+  bit-identical, N_range/C_R/M constant. Fifteen clean
+  windows of thirty-six; all rescues quota-met and
+  recorded. **The 175k mark is 6,778 units away — ~1-2
+  windows out (window 37 or 38).**
+
+Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE36.
+NO RH CLAIM. (discovery 0341)
