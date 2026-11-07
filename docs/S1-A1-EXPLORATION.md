@@ -3416,3 +3416,23 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
 
     No RH claim - face OPEN / PROBABLY TRUE at tCE24; wall
     UNMOVED.
+
+* **E60 (2026-11-15, 0330):**
+    * MILESTONE: M5 WINDOW 25 CERTIFIED (20,000 zeros, all
+      simple and on the line; CLEAN window; seam
+      bit-identical) + CE25 GREEN 8790, full tree 17454.
+      The 25-window chain is complete: 499,992 certified
+      zeros over (g_a1, g_b25] - within EIGHT of the
+      half-million mark.
+    * Frontier re-anchored: tCE25 = 3,000,175,449,620
+      (tCE25 - tCE24 = 4,673; 116,820 above H0; 125k mark
+      ~2 windows out).
+    * CASING refined (0330): the 3-decimal bound (CE18)
+      triggers only when the two-decimal round-down would
+      equal the floor (frac < ~0.01); window 25's frac
+      0.0840 keeps the standard 2-decimal bound adequate
+      (margin 4.0e-3 vs radius 1.29e-26).
+    * Window 26 in flight (a26 = 12,363,153,937,122).
+
+    No RH claim - face OPEN / PROBABLY TRUE at tCE25; wall
+    UNMOVED.

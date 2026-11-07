@@ -3274,3 +3274,51 @@ NO RH CLAIM. (discovery 0328)
 
 Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE24.
 NO RH CLAIM. (discovery 0329)
+
+## 61 · 0330 — M5 WINDOW 25 CERTIFIED + CE25 RE-ANCHOR
+(2026-11-15) — **MILESTONE: the 25-window chain is complete**
+
+* **Window 25 (in-house, seamless):** a = 12,363,153,917,122
+  (= window 24's b), b = a + 20,000 (no snap at either
+  endpoint), M = 60, C_R = 1, 33,817 evaluations in 2561.0
+  s, N_range = [691008, 691008]. Certificate
+  window25_b25.json: **b − a = 20,000 zeros, all simple and
+  on the line** in (g_a25, g_b25], g_a25 =
+  3,000,175,444,947.148909403387 ± 1.29e-26 (bit-identical
+  to window 24's g_b24), g_b25 = 3,000,175,449,620.
+  084038171608 ± 1.29e-26 (floor tCE25 sits 0.0840 above
+  the previous integer - near the CE18 CASING zone; see
+  below).
+* **Verifier:** CERTIFIED true, 33,817 points,
+  sign_changes_inside = 20,000 = b − a, Rosser runs 47/46 ≥
+  K = 12, turing_ok. **CLEAN window** — zero exceptions,
+  zero failures (clean tally now ten of twenty-five: 6, 8,
+  10, 12, 13, 14, 16, 18, 22, 25).
+* **CASING (refined):** g_b25's frac 0.0840 is near the
+  CE18 zone (0.0054), but the two-decimal lower bound 0.08
+  is still strictly below, with margin 4.0e-3 (the certified
+  radius 1.29e-26 is 22 orders smaller), so the standard
+  bound was ADEQUATE. The 3-decimal rule triggers only
+  when round-down would equal the floor (frac < ~0.01).
+  Recorded in the CE25 docstring.
+* **Formal (CE25.lean, GREEN 8790; full tree 17454, oolean
+  fresh):** gB25Lo := 300017544962008/100, tCE25 :=
+  3,000,175,449,620; faceShrinkCE25 = 4673;
+  frontierGapAboveH0 = 116,820; frontierPast100k carried;
+  bandOfWindows25 (twenty-five-way);
+  rh_reanchored_CE25: under [Z-PT2] + the twenty-five cited
+  window clauses, RH q ↔ terminalFaceCE25 q;
+  rh_of_terminalFaceCE25 (final named step — no closing
+  supplied); terminalFaceCE25_of_thetaInf (M2 lane lands at
+  tCE25).
+* **MILESTONE:** certified zeros over (g_a1, g_b25] =
+  **499,992** — within EIGHT of the half-million mark.
+  Eighteen windows carried 20,000, seven the snapped
+  19,999. Chain integrity 1→25: every seam bit-identical,
+  N_range/C_R/M constant, ten clean windows. The wall per
+  window is UNCHANGED: 4/7 UNMOVED, face 4,672–4,673
+  shrink, terminal face now at tCE25 = 3,000,175,449,620
+  (116,820 above H0; 125k mark ~2 windows out).
+
+Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE25.
+NO RH CLAIM. (discovery 0330)
