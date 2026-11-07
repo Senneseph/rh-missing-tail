@@ -3275,3 +3275,18 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
 
     No RH claim - face OPEN / PROBABLY TRUE at tCE14; wall
     UNMOVED.
+
+* **E50 (2026-11-14, 0320):**
+    * M5 WINDOW 15 CERTIFIED (20,000 zeros, all simple and
+      on the line; seam bit-identical; 2 Rosser rescues,
+      union quotas met, recorded) + CE15 GREEN 8780, full
+      tree 17454.
+    * Frontier re-anchored: tCE15 = 3,000,175,402,891
+      (tCE15 - tCE14 = 4,673; 70,091 above H0);
+      299,996 certified over (g_a1, g_b15] - the chain is
+      now at 300,000 minus 4 consecutive on-line zeros past
+      H0.
+    * Window 16 in flight (a16 = 12,363,153,737,126).
+
+    No RH claim - face OPEN / PROBABLY TRUE at tCE15; wall
+    UNMOVED.

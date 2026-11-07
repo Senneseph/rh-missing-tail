@@ -2892,3 +2892,41 @@ NO RH CLAIM. (discovery 0318)
 
 Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE14.
 NO RH CLAIM. (discovery 0319)
+
+## 51 · 0320 — M5 WINDOW 15 CERTIFIED + CE15 RE-ANCHOR
+(2026-11-14)
+
+* **Window 15 (in-house, seamless):** a = 12,363,153,717,126
+  (= window 14's b), b = a + 20,000 (no snap at either
+  endpoint), M = 60, C_R = 1, 33,213 evaluations in 2492.2
+  s, N_range = [691008, 691008]. Certificate
+  window15_b15.json: **b − a = 20,000 zeros, all simple and
+  on the line** in (g_a15, g_b15], g_a15 =
+  3,000,175,398,218.732193861580 ± 1.29e-26 (bit-identical
+  dyadic ball to window 14's g_b14), g_b15 =
+  3,000,175,402,891.667325336277 ± 1.29e-26 (floor tCE15
+  sits 0.6673 above the previous integer - robust).
+* **Verifier:** CERTIFIED true, 33,213 points,
+  sign_changes_inside = 20,000 = b − a, Rosser runs 49/50 ≥
+  K = 12, turing_ok. **Two Rosser rescue exceptions**
+  (5 = 5, 5 = 5; union quotas met) — the same documented
+  3-block union mechanism (windows 2/3/4/5/7/9/11);
+  recorded, not suppressed.
+* **Formal (CE15.lean, GREEN 8780; full tree 17454, oolean
+  fresh):** gB15Lo := 300017540289166/100, tCE15 :=
+  3,000,175,402,891; faceShrinkCE15 = 4673;
+  frontierGapAboveH0 = 70,091; bandOfWindows15 (fifteen-way);
+  rh_reanchored_CE15: under [Z-PT2] + the fifteen cited
+  window clauses, RH q ↔ terminalFaceCE15 q;
+  rh_of_terminalFaceCE15 (final named step — no closing
+  supplied); terminalFaceCE15_of_thetaInf (M2 lane lands at
+  tCE15).
+* **Frontier:** certified zeros over (g_a1, g_b15] =
+  **299,996** — the chain has now certified three hundred
+  thousand minus 4 consecutive on-line zeros just above the
+  Platt–Trudgian H0 frontier. Chain integrity 1→15: every
+  seam bit-identical (exact dyadic tuples), N_range
+  constant, C_R/M constant.
+
+Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE15.
+NO RH CLAIM. (discovery 0320)
