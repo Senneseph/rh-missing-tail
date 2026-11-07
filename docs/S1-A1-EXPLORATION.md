@@ -3436,3 +3436,21 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
 
     No RH claim - face OPEN / PROBABLY TRUE at tCE25; wall
     UNMOVED.
+
+* **E61 (2026-11-15, 0331):**
+    * M5 WINDOW 26 CERTIFIED (20,000 zeros, all simple and
+      on the line; seam bit-identical; 1 Rosser exception
+      5=5, recorded) + CE26 GREEN 8791, full tree 17454.
+    * Frontier re-anchored: tCE26 = 3,000,175,454,293
+      (tCE26 - tCE25 = 4,673; 121,493 above H0; the 125k
+      mark is ONE WINDOW OUT).
+    * 519,992 certified over (g_a1, g_b26] - past the
+      half-million-minus-19,992 mark. CASING: window 26's
+      frac 0.0192 (second near-CASING window after 25's
+      0.0840) stays on the 2-decimal side (margin 9.17e-3
+      vs radius 1.29e-26).
+    * Window 27 in flight (a27 = 12,363,153,957,122; the
+      125k crossing is expected).
+
+    No RH claim - face OPEN / PROBABLY TRUE at tCE26; wall
+    UNMOVED.

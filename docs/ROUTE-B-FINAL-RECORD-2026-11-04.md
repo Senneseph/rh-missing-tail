@@ -3322,3 +3322,47 @@ NO RH CLAIM. (discovery 0329)
 
 Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE25.
 NO RH CLAIM. (discovery 0330)
+
+## 62 · 0331 — M5 WINDOW 26 CERTIFIED + CE26 RE-ANCHOR
+(2026-11-15)
+
+* **Window 26 (in-house, seamless):** a = 12,363,153,937,122
+  (= window 25's b), b = a + 20,000 (no snap at either
+  endpoint), M = 60, C_R = 1, 33,675 evaluations in 2565.8
+  s, N_range = [691008, 691008]. Certificate
+  window26_b26.json: **b − a = 20,000 zeros, all simple and
+  on the line** in (g_a26, g_b26], g_a26 =
+  3,000,175,449,620.084038171608 ± 1.29e-26 (bit-identical
+  to window 25's g_b25), g_b26 = 3,000,175,454,293.
+  019166669177 ± 1.29e-26 (floor tCE26 sits 0.0192 above
+  the previous integer).
+* **Verifier:** CERTIFIED true, 33,675 points,
+  sign_changes_inside = 20,000 = b − a, Rosser runs 50/45 ≥
+  K = 12, turing_ok. **One Rosser exception** rescued to
+  union ([..947212, ..947214] → [..947211, ..947216],
+  need 5 = found 5, m = 4); recorded, not suppressed.
+* **CASING (second near-miss):** g_b26's frac 0.0192 is
+  above the 0.01 threshold of the refined 0330 rule, so the
+  two-decimal bound 0.01 is strictly below with margin
+  9.17e-3 (certified radius 1.29e-26 is 21 orders
+  smaller) — ADEQUATE, standard bound, no 3-decimal needed.
+  (Window 25's frac 0.0840 was the first; this is the
+  second near-CASING window in a row — the 0.01 zone is
+  being sampled correctly.)
+* **Formal (CE26.lean, GREEN 8791; full tree 17454, oolean
+  fresh):** gB26Lo := 300017545429301/100, tCE26 :=
+  3,000,175,454,293; faceShrinkCE26 = 4673;
+  frontierGapAboveH0 = 121,493; frontierPast100k carried;
+  bandOfWindows26 (twenty-six-way);
+  rh_reanchored_CE26: under [Z-PT2] + the twenty-six cited
+  window clauses, RH q ↔ terminalFaceCE26 q;
+  rh_of_terminalFaceCE26 (final named step — no closing
+  supplied); terminalFaceCE26_of_thetaInf (M2 lane lands at
+  tCE26).
+* **Frontier:** certified zeros over (g_a1, g_b26] =
+  **519,992**. Chain integrity 1→26: every seam
+  bit-identical, N_range/C_R/M constant. The 125k mark is
+  3,507 units out — window 27 should cross it.
+
+Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE26.
+NO RH CLAIM. (discovery 0331)
