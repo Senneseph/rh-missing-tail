@@ -3125,3 +3125,41 @@ NO RH CLAIM. (discovery 0324)
 
 Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE20.
 NO RH CLAIM. (discovery 0325)
+
+## 57 · 0326 — M5 WINDOW 21 CERTIFIED + CE21 RE-ANCHOR
+(2026-11-15)
+
+* **Window 21 (in-house, seamless):** a = 12,363,153,837,123
+  (= window 20's b), b_requested = a + 20,000, driver
+  snapped final b DOWN ONE (12,363,153,857,123 not a good
+  Gram point; a needed no snap), M = 60, C_R = 1, 33,566
+  evaluations in 2574.1 s, N_range = [691008, 691008].
+  Certificate window21_b21.json: **b − a = 19,999 zeros,
+  all simple and on the line** in (g_a21, g_b21], g_a21 =
+  3,000,175,426,255.642038380470 ± 1.29e-26 (bit-identical
+  to window 20's g_b20), g_b21 = 3,000,175,430,928.
+  343521474804 ± 1.29e-26 (floor tCE21 sits 0.3435 above
+  the previous integer - robust).
+* **Verifier:** CERTIFIED true, 33,566 points,
+  sign_changes_inside = 19,999 = b − a, Rosser runs 45/47 ≥
+  K = 12, turing_ok. **One Rosser exception** rescued to a
+  WIDER union ([..847076, ..847079] → [..847075, ..847081],
+  need 6 = found 6, m = 2) — quota met by the union
+  recount; recorded, not suppressed.
+* **Formal (CE21.lean, GREEN 8786; full tree 17454, oolean
+  fresh):** gB21Lo := 300017543092834/100, tCE21 :=
+  3,000,175,430,928; faceShrinkCE21 = 4673;
+  frontierGapAboveH0 = 98,128 (within 1,872 units of the
+  100,000 mark); bandOfWindows21 (twenty-one-way);
+  rh_reanchored_CE21: under [Z-PT2] + the twenty-one cited
+  window clauses, RH q ↔ terminalFaceCE21 q;
+  rh_of_terminalFaceCE21 (final named step — no closing
+  supplied); terminalFaceCE21_of_thetaInf (M2 lane lands at
+  tCE21).
+* **Frontier:** certified zeros over (g_a1, g_b21] =
+  **419,992**. Chain integrity 1→21: every seam
+  bit-identical (exact dyadic tuples), N_range constant,
+  C_R/M constant.
+
+Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE21.
+NO RH CLAIM. (discovery 0326)
