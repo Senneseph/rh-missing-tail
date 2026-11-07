@@ -3454,3 +3454,22 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
 
     No RH claim - face OPEN / PROBABLY TRUE at tCE26; wall
     UNMOVED.
+
+* **E62 (2026-11-15, 0332):**
+    * MILESTONE: M5 WINDOW 27 CERTIFIED (20,000 zeros, all
+      simple and on the line; seam bit-identical; 1 Rosser
+      exception 6=6, recorded) + CE27 GREEN 8792, full tree
+      17454.
+    * Frontier CROSSES 125k above H0: tCE27 =
+      3,000,175,458,965, tCE27 - tPT2 = 126,165 (in-tree
+      frontierPast125k) - second round-mark crossing after
+      100k at CE22.
+    * NEW: the face shrink came out as the 4,672 VARIANT
+      (tCE27 - tCE26 = 4,672; g_b27's high frac 0.9543 is
+      the cause - expected floor arithmetic, chain
+      unaffected).
+    * 539,992 certified over (g_a1, g_b27]. Window 28 in
+      flight (a28 = 12,363,153,977,122).
+
+    No RH claim - face OPEN / PROBABLY TRUE at tCE27; wall
+    UNMOVED.

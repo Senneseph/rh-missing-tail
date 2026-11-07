@@ -3366,3 +3366,53 @@ NO RH CLAIM. (discovery 0330)
 
 Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE26.
 NO RH CLAIM. (discovery 0331)
+
+## 63 · 0332 — M5 WINDOW 27 CERTIFIED + CE27 RE-ANCHOR
+(2026-11-15) — **MILESTONE: the frontier CROSSES 125k above
+H0 (and the face shrink is the 4,672 variant)**
+
+* **Window 27 (in-house, seamless):** a = 12,363,153,957,122
+  (= window 26's b), b = a + 20,000 (no snap at either
+  endpoint), M = 60, C_R = 1, 34,123 evaluations in 2637.4
+  s, N_range = [691008, 691008]. Certificate
+  window27_b27.json: **b − a = 20,000 zeros, all simple and
+  on the line** in (g_a27, g_b27], g_a27 =
+  3,000,175,454,293.019166669177 ± 1.29e-26 (bit-identical
+  to window 26's g_b26), g_b27 = 3,000,175,458,965.
+  954294896093 ± 1.29e-26 (floor tCE27 sits 0.9543 above
+  the previous integer - the HIGHEST frac in the chain so
+  far; robust).
+* **NEW BEHAVIOR (4,672 variant):** tCE27 − tCE26 =
+  **4,672**, not the running 4,673 - first since the
+  windows 2/3/8/11/15/17/18/19 cluster. Cause: g_b27's high
+  frac 0.9543 makes the floor jump 4,672 instead of 4,673
+  Gram units. Expected floor arithmetic; chain integrity
+  UNAFFECTED (seam bit-identical, window total exactly
+  b − a).
+* **Verifier:** CERTIFIED true, 34,123 points,
+  sign_changes_inside = 20,000 = b − a, Rosser runs 51/48 ≥
+  K = 12, turing_ok. **One Rosser exception** rescued to
+  union ([..965056, ..965059] → [..965055, ..965061],
+  need 6 = found 6, m = 4); recorded, not suppressed.
+* **Formal (CE27.lean, GREEN 8792; full tree 17454, oolean
+  fresh):** gB27Lo := 300017545896595/100, tCE27 :=
+  3,000,175,458,965; faceShrinkCE27 = 4672 (the variant,
+  cause recorded); frontierGapAboveH0 = 126,165;
+  **frontierPast125k : tCE27 − tPT2 > 125000 (in-tree
+  MILESTONE fact)** — the 125,000-unit mark above the
+  Platt–Trudgian frontier is CROSSED at this re-anchor
+  (second round-mark crossing after 100,000 at CE22);
+  bandOfWindows27 (twenty-seven-way);
+  rh_reanchored_CE27: under [Z-PT2] + the twenty-seven cited
+  window clauses, RH q ↔ terminalFaceCE27 q;
+  rh_of_terminalFaceCE27 (final named step — no closing
+  supplied); terminalFaceCE27_of_thetaInf (M2 lane lands at
+  tCE27).
+* **Frontier:** certified zeros over (g_a1, g_b27] =
+  **539,992**. Chain integrity 1→27: every seam
+  bit-identical, N_range/C_R/M constant. Ten clean windows
+  of twenty-seven; all rescues quota-met and recorded.
+
+Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE27
+(126,165 above H0, past the 125k mark). NO RH CLAIM.
+(discovery 0332)
