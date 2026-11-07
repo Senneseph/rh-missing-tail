@@ -3219,3 +3219,17 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
 
     No RH claim - face OPEN / PROBABLY TRUE at tCE10; wall
     UNMOVED.
+
+* **E46 (2026-11-14, 0316):**
+    * M5 WINDOW 11 CERTIFIED (19,999 zeros, all simple and
+      on the line; seam bit-identical; 1 Rosser rescue,
+      quota met, recorded) + CE11 GREEN 8776, full tree
+      17454.
+    * Frontier re-anchored: tCE11 = 3,000,175,384,199
+      (tCE11 - tCE10 = 4,672 - first non-4673 shrink, because
+      the window snapped its final b down one; 51,399 above
+      H0); 219,996 certified over (g_a1, g_b11].
+    * Window 12 in flight (a12 = 12,363,153,657,126).
+
+    No RH claim - face OPEN / PROBABLY TRUE at tCE11; wall
+    UNMOVED.

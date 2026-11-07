@@ -2747,3 +2747,39 @@ NO RH CLAIM. (discovery 0314)
 
 Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE10.
 NO RH CLAIM. (discovery 0315)
+
+## 47 · 0316 — M5 WINDOW 11 CERTIFIED + CE11 RE-ANCHOR (2026-11-14)
+
+* **Window 11 (in-house, seamless):** a = 12,363,153,637,127
+  (= window 10's b), b_requested = a + 20,000, driver
+  snapped final b DOWN ONE (a + 20,000 not a good Gram
+  point; a needed no snap), M = 60, C_R = 1, 33,310
+  evaluations in 2536.6 s, N_range = [691008, 691008].
+  Certificate window11_b11.json: **b − a = 19,999 zeros,
+  all simple and on the line** in (g_a11, g_b11], g_a11 =
+  3,000,175,379,527.225312012897 ± 1.29e-26 (bit-identical
+  to window 10's g_b10), g_b11 = 3,000,175,384,199.
+  926797813571 ± 1.29e-26 (floor tCE11 sits 0.9268 above
+  the previous integer - robust).
+* **Verifier:** CERTIFIED true, 33,310 points,
+  sign_changes_inside = 19,999 = b − a, Rosser runs 46/51 ≥
+  K = 12, turing_ok. **One Rosser rescue exception**
+  (block [..644976, ..644979] → union quota 7 = 7) — the
+  same documented 3-block union mechanism; recorded, not
+  suppressed.
+* **Formal (CE11.lean, GREEN 8776; full tree 17454, oolean
+  fresh):** gB11Lo := 300017538419992/100, tCE11 :=
+  3,000,175,384,199; faceShrinkCE11 = **4672** (the first
+  4672 in the chain — this window carried 19,999 zeros);
+  frontierGapAboveH0 = 51,399; bandOfWindows11
+  (eleven-way); rh_reanchored_CE11: under [Z-PT2] + the
+  eleven cited window clauses, RH q ↔ terminalFaceCE11 q;
+  rh_of_terminalFaceCE11 (final named step — no closing
+  supplied); terminalFaceCE11_of_thetaInf (M2 lane lands at
+  tCE11).
+* **Frontier:** certified zeros over (g_a1, g_b11] =
+  219,996. Chain integrity 1→11: every seam bit-identical
+  (exact dyadic tuples), N_range constant, C_R/M constant.
+
+Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE11.
+NO RH CLAIM. (discovery 0316)
