@@ -2819,3 +2819,40 @@ NO RH CLAIM. (discovery 0316)
 
 Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE12.
 NO RH CLAIM. (discovery 0317)
+
+## 49 · 0318 — M5 WINDOW 13 CERTIFIED + CE13 RE-ANCHOR
+(2026-11-14)
+
+* **Window 13 (in-house, seamless):** a = 12,363,153,677,126
+  (= window 12's b), b = a + 20,000 (no snap at either
+  endpoint), M = 60, C_R = 1, 33,978 evaluations in 2613.7
+  s, N_range = [691008, 691008]. Certificate
+  window13_b13.json: **b − a = 20,000 zeros, all simple and
+  on the line** in (g_a13, g_b13], g_a13 =
+  3,000,175,388,872.861930100227 ± 1.29e-26 (bit-identical
+  dyadic ball to window 12's g_b12), g_b13 =
+  3,000,175,393,545.797062116230 ± 1.29e-26 (floor tCE13
+  sits 0.7971 above the previous integer - robust).
+* **Verifier:** CERTIFIED true, 33,978 points,
+  sign_changes_inside = 20,000 = b − a, Rosser runs 44/48 ≥
+  K = 12, turing_ok, **ZERO Rosser exceptions** (clean
+  window, as windows 6, 8, 10 and 12), 0 cross-check
+  failures, 0 undetermined signs.
+* **Formal (CE13.lean, GREEN 8778; full tree 17454, oolean
+  fresh):** gB13Lo := 300017539354579/100, tCE13 :=
+  3,000,175,393,545; faceShrinkCE13 = 4673;
+  frontierGapAboveH0 = 60,745; bandOfWindows13
+  (thirteen-way); rh_reanchored_CE13: under [Z-PT2] + the
+  thirteen cited window clauses, RH q ↔ terminalFaceCE13 q;
+  rh_of_terminalFaceCE13 (final named step — no closing
+  supplied); terminalFaceCE13_of_thetaInf (M2 lane lands at
+  tCE13).
+* **Frontier:** certified zeros over (g_a1, g_b13] =
+  **259,996** — the chain has now certified a quarter
+  million consecutive on-line zeros just above the
+  Platt–Trudgian H0 frontier. Chain integrity 1→13: every
+  seam bit-identical (exact dyadic tuples), N_range
+  constant, C_R/M constant.
+
+Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE13.
+NO RH CLAIM. (discovery 0318)
