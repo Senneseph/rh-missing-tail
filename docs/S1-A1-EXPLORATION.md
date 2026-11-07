@@ -3290,3 +3290,16 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
 
     No RH claim - face OPEN / PROBABLY TRUE at tCE15; wall
     UNMOVED.
+
+* **E51 (2026-11-14, 0321):**
+    * M5 WINDOW 16 CERTIFIED (20,000 zeros, all simple and
+      on the line; seam bit-identical; zero Rosser
+      exceptions - clean) + CE16 GREEN 8781, full tree
+      17454.
+    * Frontier re-anchored: tCE16 = 3,000,175,407,564
+      (tCE16 - tCE15 = 4,673; 74,764 above H0);
+      319,996 certified over (g_a1, g_b16].
+    * Window 17 in flight (a17 = 12,363,153,757,126).
+
+    No RH claim - face OPEN / PROBABLY TRUE at tCE16; wall
+    UNMOVED.
