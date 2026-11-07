@@ -3006,3 +3006,43 @@ NO RH CLAIM. (discovery 0321)
 
 Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE17.
 NO RH CLAIM. (discovery 0322)
+
+## 54 · 0323 — M5 WINDOW 18 CERTIFIED + CE18 RE-ANCHOR
+(2026-11-15)
+
+* **Window 18 (in-house, seamless):** a = 12,363,153,777,125
+  (= window 17's b), b_requested = a + 20,000, driver
+  snapped final b DOWN ONE (12,363,153,797,125 not a good
+  Gram point; a needed no snap), M = 60, C_R = 1, 33,068
+  evaluations in 2447.2 s, N_range = [691008, 691008].
+  Certificate window18_b18.json: **b − a = 19,999 zeros,
+  all simple and on the line** in (g_a18, g_b18], g_a18 =
+  3,000,175,412,237.303940717172 ± 1.29e-26 (bit-identical
+  to window 17's g_b17), g_b18 = 3,000,175,416,910.
+  005424623397 ± 1.29e-26.
+* **NEW CASING (documented):** g_b18 sits only 5.4e-3 above
+  the previous integer, so the usual two-decimal lower-bound
+  rounding would collide with the floor. CE18 uses a
+  THREE-decimal certified lower bound instead (gB18Lo =
+  3,000,175,416,910.005, margin 4.2e-4; tCE18 sits 5e-3
+  below gB18Lo; floor robust to the radius by ~4 × 10^22).
+* **Verifier:** CERTIFIED true, 33,068 points,
+  sign_changes_inside = 19,999 = b − a, Rosser runs 48/48 ≥
+  K = 12, turing_ok, **ZERO Rosser exceptions** (clean
+  window, as windows 6, 8, 10, 12, 13, 14 and 16).
+* **Formal (CE18.lean, GREEN 8783; full tree 17454, oolean
+  fresh):** gB18Lo := 3000175416910005/1000 (3-decimal),
+  tCE18 := 3,000,175,416,910; faceShrinkCE18 = 4673;
+  frontierGapAboveH0 = 84,110; bandOfWindows18
+  (eighteen-way); rh_reanchored_CE18: under [Z-PT2] + the
+  eighteen cited window clauses, RH q ↔ terminalFaceCE18
+  q; rh_of_terminalFaceCE18 (final named step — no closing
+  supplied); terminalFaceCE18_of_thetaInf (M2 lane lands at
+  tCE18).
+* **Frontier:** certified zeros over (g_a1, g_b18] =
+  **359,994**. Chain integrity 1→18: every seam
+  bit-identical (exact dyadic tuples), N_range constant,
+  C_R/M constant.
+
+Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE18.
+NO RH CLAIM. (discovery 0323)

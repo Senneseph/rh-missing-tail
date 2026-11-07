@@ -3317,3 +3317,21 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
 
     No RH claim - face OPEN / PROBABLY TRUE at tCE17; wall
     UNMOVED.
+
+* **E53 (2026-11-15, 0323):**
+    * M5 WINDOW 18 CERTIFIED (19,999 zeros, all simple and
+      on the line; final b snapped down one; seam
+      bit-identical; zero Rosser exceptions - clean) + CE18
+      GREEN 8783, full tree 17454.
+    * NEW CASING: g_b18 only 5.4e-3 above the previous
+      integer -> 3-decimal lower bound (gB18Lo =
+      3,000,175,416,910.005) in place of the usual
+      2-decimal one; floor still robust by ~4e22 to the
+      radius.
+    * Frontier re-anchored: tCE18 = 3,000,175,416,910
+      (tCE18 - tCE17 = 4,673; 84,110 above H0); 359,994
+      certified over (g_a1, g_b18].
+    * Window 19 in flight (a19 = 12,363,153,797,124).
+
+    No RH claim - face OPEN / PROBABLY TRUE at tCE18; wall
+    UNMOVED.
