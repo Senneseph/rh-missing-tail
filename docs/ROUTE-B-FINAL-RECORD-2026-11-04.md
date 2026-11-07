@@ -2967,3 +2967,42 @@ NO RH CLAIM. (discovery 0320)
 
 Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE16.
 NO RH CLAIM. (discovery 0321)
+
+## 53 · 0322 — M5 WINDOW 17 CERTIFIED + CE17 RE-ANCHOR
+(2026-11-14)
+
+* **Window 17 (in-house, seamless):** a = 12,363,153,757,126
+  (= window 16's b), b_requested = a + 20,000, driver
+  snapped final b DOWN ONE (12,363,153,777,126 not a good
+  Gram point; a needed no snap), M = 60, C_R = 1, 34,926
+  evaluations in 2692.9 s, N_range = [691008, 691008].
+  Certificate window17_b17.json: **b − a = 19,999 zeros,
+  all simple and on the line** in (g_a17, g_b17], g_a17 =
+  3,000,175,407,564.602456540321 ± 1.29e-26 (bit-identical
+  to window 16's g_b16), g_b17 = 3,000,175,412,237.
+  303940717172 ± 1.29e-26 (floor tCE17 sits 0.3039 above
+  the previous integer - robust).
+* **Verifier:** CERTIFIED true, 34,926 points,
+  sign_changes_inside = 19,999 = b − a, Rosser runs 49/46 ≥
+  K = 12, turing_ok. **One Rosser exception** rescued to a
+  WIDER union ([..763962, ..763965] → [..763959,
+  ..763966], need 7 = found 7, m = 2) — the union
+  refinement with the quota still met by the union recount;
+  recorded, not suppressed.
+* **Formal (CE17.lean, GREEN 8782; full tree 17454, oolean
+  fresh):** gB17Lo := 300017541223730/100, tCE17 :=
+  3,000,175,412,237; faceShrinkCE17 = 4673 (span; the
+  window carried 19,999 zeros — the floor did not move with
+  the snap); frontierGapAboveH0 = 79,437;
+  bandOfWindows17 (seventeen-way); rh_reanchored_CE17:
+  under [Z-PT2] + the seventeen cited window clauses, RH q
+  ↔ terminalFaceCE17 q; rh_of_terminalFaceCE17 (final named
+  step — no closing supplied);
+  terminalFaceCE17_of_thetaInf (M2 lane lands at tCE17).
+* **Frontier:** certified zeros over (g_a1, g_b17] =
+  **339,995**. Chain integrity 1→17: every seam
+  bit-identical (exact dyadic tuples), N_range constant,
+  C_R/M constant.
+
+Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE17.
+NO RH CLAIM. (discovery 0322)
