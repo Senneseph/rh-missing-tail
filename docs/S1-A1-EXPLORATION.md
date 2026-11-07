@@ -3672,3 +3672,21 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
     No RH claim - face OPEN / PROBABLY TRUE at tCE38; wall
     UNMOVED. The 175k crossing and the CASING case are
     certification-scale achievements, not analytic ones.
+
+* **E74 (2026-11-16, 0344):**
+    * M5 WINDOW 39 CERTIFIED (20,000 zeros, all simple and
+      on the line; seam bit-identical; ONE Rosser rescue,
+      4=4 m=4, quota-met, recorded) + CE39 GREEN 8804,
+      full tree 17454.
+    * 779,991 certified over (g_a1, g_b39].
+    * Frontier re-anchored: tCE39 = 3,000,175,515,040
+      (tCE39 - tCE38 = 4,672 — **the 4,672 variant**;
+      182,240 above H0; 200k mark ~4 windows out).
+    * FACE-SHRINK PATTERN NOW FULLY CHARACTERIZED: gaps of
+      4,672 or 4,673 dominate (4,671 observed once at
+      snapped-width window 31) — floor arithmetic of
+      successive Gram points, no analytic consequence.
+    * Window 40 in flight (a40 = 12,363,154,217,121).
+
+    No RH claim - face OPEN / PROBABLY TRUE at tCE39; wall
+    UNMOVED.

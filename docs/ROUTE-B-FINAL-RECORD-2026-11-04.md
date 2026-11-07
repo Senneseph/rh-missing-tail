@@ -3883,3 +3883,44 @@ NO RH CLAIM. (discovery 0342)
 
 Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE38.
 NO RH CLAIM. (discovery 0343)
+
+## 75 · 0344 — M5 WINDOW 39 CERTIFIED + CE39 RE-ANCHOR
+(2026-11-16) — 4,672 variant
+
+* **Window 39 (in-house, seamless):** a = 12,363,154,197,121
+  (= window 38's b), b = a + 20,000 (no snap at either
+  endpoint), M = 60, C_R = 1, 34,456 evaluations in 2726.6
+  s, N_range = [691008, 691008]. Certificate
+  window39_b39.json: **b − a = 20,000 zeros, all simple and
+  on the line** in (g_a39, g_b39], g_a39 =
+  3,000,175,510,368.007040772818 ± 1.29e-26 (bit-identical
+  to window 38's g_b38), g_b39 = 3,000,175,515,040.
+  942165751912 ± 1.29e-26 (frac 0.9422 - standard
+  two-decimal bound, margin ~0.94, no CASING needed).
+* **ROSSER EVENT: one rescue** — [..206334, ..206336] →
+  [..206333, ..206337] (4 = 4, m = 4). Quota met by the
+  union recount; displaced within the window (total
+  unchanged); verifier recomputes window total and end
+  runs (50/47). RECONCILED AND RECORDED.
+* **Formal (CE39.lean, GREEN 8804; full tree 17454, oolean
+  fresh):** gB39Lo := 300017551504094/100, tCE39 :=
+  3,000,175,515,040; **faceShrinkCE39 = 4672 (the 4,672
+  VARIANT of the running pattern)**;
+  frontierGapAboveH0 = 182,240; frontierPast175k carried;
+  bandOfWindows39 (thirty-nine-way); rh_reanchored_CE39:
+  under [Z-PT2] + the thirty-nine cited window clauses, RH
+  q ↔ terminalFaceCE39 q; rh_of_terminalFaceCE39 (final
+  named step — no closing supplied);
+  terminalFaceCE39_of_thetaInf (M2 lane lands at tCE39).
+  The single-rescue event recorded in the header.
+* **Frontier:** certified zeros over (g_a1, g_b39] =
+  **779,991**. Chain integrity 1→39: every seam
+  bit-identical, N_range/C_R/M constant. Sixteen clean
+  windows of thirty-nine; all rescues quota-met and
+  recorded. The 4,672 variant confirms the running pattern
+  allows both 4,672 and 4,673 (4,671 observed once at
+  snapped-width window 31).
+
+Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE39.
+NO RH CLAIM — the 200k mark is ~4 windows out.
+(discovery 0344)
