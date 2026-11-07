@@ -3473,3 +3473,22 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
 
     No RH claim - face OPEN / PROBABLY TRUE at tCE27; wall
     UNMOVED.
+
+* **E63 (2026-11-15, 0333):**
+    * M5 WINDOW 28 CERTIFIED (20,000 zeros, all simple and
+      on the line; seam bit-identical) + CE28 GREEN 8793,
+      full tree 17454.
+    * NEW: FIRST MULTI-EXCEPTION WINDOW - three Rosser
+      rescues in one window (6=6 m=8, 4=4 m=8, 4=4 m=8),
+      all quota-met, all displaced within the window, all
+      recounted by the verifier, all recorded. The union
+      mechanism handles multi-rescue transparently.
+    * Frontier re-anchored: tCE28 = 3,000,175,463,638
+      (tCE28 - tCE27 = 4,673, running pattern resumes after
+      the 27th window's 4,672 variant; 130,838 above H0;
+      150k mark ~4 windows out).
+    * 559,992 certified over (g_a1, g_b28]. Window 29 in
+      flight (a29 = 12,363,153,997,122).
+
+    No RH claim - face OPEN / PROBABLY TRUE at tCE28; wall
+    UNMOVED.

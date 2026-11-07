@@ -3416,3 +3416,51 @@ H0 (and the face shrink is the 4,672 variant)**
 Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE27
 (126,165 above H0, past the 125k mark). NO RH CLAIM.
 (discovery 0332)
+
+## 64 · 0333 — M5 WINDOW 28 CERTIFIED + CE28 RE-ANCHOR
+(2026-11-15) — **NEW: the first multi-exception window**
+
+* **Window 28 (in-house, seamless):** a = 12,363,153,977,122
+  (= window 27's b), b = a + 20,000 (no snap at either
+  endpoint), M = 60, C_R = 1, 33,787 evaluations in 2582.3
+  s, N_range = [691008, 691008]. Certificate
+  window28_b28.json: **b − a = 20,000 zeros, all simple and
+  on the line** in (g_a28, g_b28], g_a28 =
+  3,000,175,458,965.954294896093 ± 1.29e-26 (bit-identical
+  to window 27's g_b27), g_b28 = 3,000,175,463,638.
+  889422852356 ± 1.29e-26 (floor tCE28 sits 0.8894 above
+  the previous integer - robust).
+* **NEW EVENT: THREE Rosser rescues in one window** (first
+  multi-exception window): [..983686, ..983689] →
+  [..983685, ..983691] (6 = 6, m = 8), [..985487, ..985489]
+  → [..985486, ..985490] (4 = 4, m = 8), [..991175,
+  ..991177] → [..991174, ..991178] (4 = 4, m = 8). All
+  quotas met by the union recounts; all three rescued zeros
+  displaced into adjacent Gram intervals WITHIN the same
+  window, so the window total (20,000) is unchanged; the
+  verifier independently recomputes the window total and
+  the two end runs (50/50). All three RECORDED, not
+  suppressed. The union mechanism handles multi-rescue
+  transparently - the recording convention extends without
+  change.
+* **Formal (CE28.lean, GREEN 8793; full tree 17454, oolean
+  fresh):** gB28Lo := 300017546363888/100, tCE28 :=
+  3,000,175,463,638; faceShrinkCE28 = 4673 (running
+  pattern RESUMES after window 27's 4,672 variant);
+  frontierGapAboveH0 = 130,838; frontierPast125k carried;
+  bandOfWindows28 (twenty-eight-way);
+  rh_reanchored_CE28: under [Z-PT2] + the twenty-eight cited
+  window clauses, RH q ↔ terminalFaceCE28 q;
+  rh_of_terminalFaceCE28 (final named step — no closing
+  supplied); terminalFaceCE28_of_thetaInf (M2 lane lands at
+  tCE28). The three-exception event is recorded in full in
+  the module header.
+* **Frontier:** certified zeros over (g_a1, g_b28] =
+  **559,992**. Chain integrity 1→28: every seam
+  bit-identical, N_range/C_R/M constant. Ten clean windows
+  of twenty-eight; all rescues (incl. all three of window
+  28) quota-met and recorded. The 150k mark is ~4 windows
+  out.
+
+Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE28.
+NO RH CLAIM. (discovery 0333)
