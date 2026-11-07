@@ -2856,3 +2856,39 @@ NO RH CLAIM. (discovery 0317)
 
 Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE13.
 NO RH CLAIM. (discovery 0318)
+
+## 50 · 0319 — M5 WINDOW 14 CERTIFIED + CE14 RE-ANCHOR
+(2026-11-14)
+
+* **Window 14 (in-house, seamless):** a = 12,363,153,697,126
+  (= window 13's b), b = a + 20,000 (no snap at either
+  endpoint), M = 60, C_R = 1, 33,414 evaluations in 2536.0
+  s, N_range = [691008, 691008]. Certificate
+  window14_b14.json: **b − a = 20,000 zeros, all simple and
+  on the line** in (g_a14, g_b14], g_a14 =
+  3,000,175,393,545.797062116230 ± 1.29e-26 (bit-identical
+  dyadic ball to window 13's g_b13), g_b14 =
+  3,000,175,398,218.732193861580 ± 1.29e-26 (floor tCE14
+  sits 0.7322 above the previous integer - robust).
+* **Verifier:** CERTIFIED true, 33,414 points,
+  sign_changes_inside = 20,000 = b − a, Rosser runs 49/44 ≥
+  K = 12, turing_ok, **ZERO Rosser exceptions** (clean
+  window, as windows 6, 8, 10, 12 and 13), 0 cross-check
+  failures, 0 undetermined signs.
+* **Formal (CE14.lean, GREEN 8779; full tree 17454, oolean
+  fresh):** gB14Lo := 300017539821873/100, tCE14 :=
+  3,000,175,398,218; faceShrinkCE14 = 4673;
+  frontierGapAboveH0 = 65,418; bandOfWindows14
+  (fourteen-way); rh_reanchored_CE14: under [Z-PT2] + the
+  fourteen cited window clauses, RH q ↔ terminalFaceCE14
+  q; rh_of_terminalFaceCE14 (final named step — no closing
+  supplied); terminalFaceCE14_of_thetaInf (M2 lane lands at
+  tCE14). (Process note: the CE14 draft initially dropped
+  the CE2 import; caught by the first build, fixed before
+  the green - the committed file is green at 8779.)
+* **Frontier:** certified zeros over (g_a1, g_b14] =
+  279,996. Chain integrity 1→14: every seam bit-identical
+  (exact dyadic tuples), N_range constant, C_R/M constant.
+
+Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE14.
+NO RH CLAIM. (discovery 0319)
