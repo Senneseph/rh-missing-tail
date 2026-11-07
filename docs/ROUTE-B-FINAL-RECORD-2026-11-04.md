@@ -3464,3 +3464,47 @@ Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE27
 
 Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE28.
 NO RH CLAIM. (discovery 0333)
+
+## 65 · 0334 — M5 WINDOW 29 CERTIFIED + CE29 RE-ANCHOR
+(2026-11-15)
+
+* **Window 29 (in-house, seamless):** a = 12,363,153,997,122
+  (= window 28's b), b = a + 20,000 (no snap at either
+  endpoint), M = 60, C_R = 1, 33,541 evaluations in 2565.1
+  s, N_range = [691008, 691008]. Certificate
+  window29_b29.json: **b − a = 20,000 zeros, all simple and
+  on the line** in (g_a29, g_b29], g_a29 =
+  3,000,175,463,638.889422852356 ± 1.29e-26 (bit-identical
+  to window 28's g_b28), g_b29 = 3,000,175,468,311.
+  824550537966 ± 1.29e-26 (floor tCE29 sits 0.8246 above
+  the previous integer - robust).
+* **RECURRING EVENT: two Rosser rescues** — the SECOND
+  consecutive multi-exception window (window 28 had three):
+  [..006636, ..006638] → [..006634, ..006639] (5 = 5,
+  m = 4), [..011105, ..011107] → [..011104, ..011109]
+  (5 = 5, m = 4). Both quotas met by the union recounts;
+  both displaced within the window (total 20,000
+  unchanged); verifier recomputes window total and end
+  runs (44/45... 44/47). All RECORDED, not suppressed.
+  Multi-rescue is now a documented steady-state phenomenon
+  of the lane (windows 28 and 29 in a row); the recording
+  convention is unchanged.
+* **Formal (CE29.lean, GREEN 8794; full tree 17454, oolean
+  fresh):** gB29Lo := 300017546831182/100, tCE29 :=
+  3,000,175,468,311; faceShrinkCE29 = 4673 (running
+  pattern); frontierGapAboveH0 = 135,511;
+  frontierPast125k carried; bandOfWindows29
+  (twenty-nine-way); rh_reanchored_CE29: under [Z-PT2] +
+  the twenty-nine cited window clauses, RH q ↔
+  terminalFaceCE29 q; rh_of_terminalFaceCE29 (final named
+  step — no closing supplied); terminalFaceCE29_of_thetaInf
+  (M2 lane lands at tCE29). The two-exception event is
+  recorded in full in the module header.
+* **Frontier:** certified zeros over (g_a1, g_b29] =
+  **579,992**. Chain integrity 1→29: every seam
+  bit-identical, N_range/C_R/M constant. Ten clean windows
+  of twenty-nine; all rescues quota-met and recorded.
+  The 150k mark is ~3 windows out (window 30 or 31).
+
+Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE29.
+NO RH CLAIM. (discovery 0334)

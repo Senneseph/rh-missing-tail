@@ -3492,3 +3492,22 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
 
     No RH claim - face OPEN / PROBABLY TRUE at tCE28; wall
     UNMOVED.
+
+* **E64 (2026-11-15, 0334):**
+    * M5 WINDOW 29 CERTIFIED (20,000 zeros, all simple and
+      on the line; seam bit-identical) + CE29 GREEN 8794,
+      full tree 17454.
+    * RECURRING: second consecutive multi-exception window
+      (two Rosser rescues, 5=5 m=4 twice, both quota-met,
+      both recorded) - multi-rescue is now a documented
+      steady-state phenomenon of the lane (windows 28 and
+      29 in a row); convention unchanged.
+    * Frontier re-anchored: tCE29 = 3,000,175,468,311
+      (tCE29 - tCE28 = 4,673, running pattern; 135,511
+      above H0; 150k mark ~3 windows out).
+    * 579,992 certified over (g_a1, g_b29]. Window 30 in
+      flight (a30 = 12,363,154,017,122; the 30-window
+      milestone is imminent).
+
+    No RH claim - face OPEN / PROBABLY TRUE at tCE29; wall
+    UNMOVED.

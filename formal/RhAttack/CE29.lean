@@ -1,0 +1,462 @@
+import Mathlib
+import RhAttack.B0
+import RhAttack.P12Uniform
+import RhAttack.WinCount
+import RhAttack.RHEnd
+import RhAttack.ThetaInf
+import RhAttack.CE1
+import RhAttack.CE2
+import RhAttack.CE3
+import RhAttack.CE4
+import RhAttack.CE5
+import RhAttack.CE6
+import RhAttack.CE7
+import RhAttack.CE8
+import RhAttack.CE9
+import RhAttack.CE10
+import RhAttack.CE11
+import RhAttack.CE12
+import RhAttack.CE13
+import RhAttack.CE14
+import RhAttack.CE15
+import RhAttack.CE16
+import RhAttack.CE17
+import RhAttack.CE18
+import RhAttack.CE19
+import RhAttack.CE20
+import RhAttack.CE21
+import RhAttack.CE22
+import RhAttack.CE23
+import RhAttack.CE24
+import RhAttack.CE25
+import RhAttack.CE26
+import RhAttack.CE27
+import RhAttack.CE28
+
+set_option linter.style.whitespace false
+set_option linter.style.longLine false
+set_option linter.style.docString false
+
+open Real Set Complex Filter B0 P12 RHEnd CE1 CE2 CE3 CE4 CE5 CE6 CE7 CE8 CE9 CE10 CE11 CE12 CE13 CE14 CE15 CE16 CE17 CE18 CE19 CE20 CE21 CE22 CE23 CE24 CE25 CE26 CE27 CE28
+open scoped Topology
+
+/-!
+**CE29 — the terminal face re-anchored at the TWENTY-NINTH
+certified  window  (0334,  option  B,  unit  45  —  lane
+M5:  OUR  OWN  production,  continuing  the  seamless  chain:
+windows  1  ->  2  ->  ...  ->  29).  NOTE:  the SECOND
+consecutive  multi-exception  window  (window  28  had  three
+rescues)  -  this  one  has  TWO,  each  quota-met  by  the
+union  refinement  and  recounted  by  the  verifier;  the
+multi-rescue  behavior  of  the  last  days  is  now  a
+documented  steady-state  phenomenon  of  the  lane,  and
+the  recording  convention  (all  exceptions,  all  quotas,
+all  displacements)  has  been  applied  unchanged  to  both.**
+
+PROVENANCE  (our  run,  2026-11-06;  pipeline  =  Murphy's
+Apache-2.0  deposit,  same  as  CE1-CE28):
+  RUN  PARAMETERS:  a  =  12 363 153 997 122  (=  CE28's  final
+  b;  seamless),  b  =  a  +  20 000  =  12 363 154 017 122
+  (b  was  already  a  good  Gram  point  -  NO  snap  at
+  either  endpoint),  M  =  60,  C_R  =  1,  28  workers,
+  33 541  evaluations  in  2565.1  s.
+  CERTIFICATE  (window29_b29.json):  the  b  −  a  =  20 000
+  zeros  of  ζ  with  g_a29  <  Im  s  <=  g_b29  are  ALL
+  SIMPLE  and  on  the  line,  where
+      g_a29  (recorded  exact  dyadic  ball,  this  run's  a)
+            =  3 000 175 463 638.889422852356  + or -  1.29e-26
+            and  this  ball  is  BIT-IDENTICAL  to  CE28's
+            recorded  g_b28  (exact  dyadic  tuple  comparison,
+            2026-11-06);
+      g_b29  =  3 000 175 468 311.824550537966  + or -
+               1.29e-26  (exact  dyadic  decode;  the  floor
+               tCE29  sits  0.8246  above  the  previous
+               integer,  robust  to  the  radius  of  1.29e-26
+               by  many  orders  of  magnitude;  the  face
+               shrink  came  out  as  the  running  4 673).
+      Turing  runs  of  consecutive  good  Rosser  blocks:  44
+      left  of  g_a29,  47  right  of  g_b29  (both  >=  K  =
+      12);  0  cross-check  failures  (all  33 541  records);
+      0  undetermined  Gram  signs.  INTERNAL  ROSSER-BLOCK
+      EXCEPTIONS:  TWO  (the  SECOND  consecutive
+      multi-exception  window  after  window  28's  three),
+      each  RESCUED  BY  THE  PIPELINE'S  DOCUMENTED  UNION
+      REFINEMENT  (window.py):
+        1. block  [12 363 154 006 636,  .. 006 638]  rescued
+           to  union  [.. 006 634,  .. 006 639],  need  5  =
+           found  5,  m  =  4;
+        2. block  [12 363 154 011 105,  .. 011 107]  rescued
+           to  union  [.. 011 104,  .. 011 109],  need  5  =
+           found  5,  m  =  4.
+      Both  quotas  were  met  by  the  union  recounts,  and
+      both  rescued  zeros  were  DISPLACED  into  adjacent
+      Gram  intervals  within  the  same  window,  so  the
+      window  total  is  unchanged.  The  independent
+      verifier  recomputes  the  WINDOW  TOTAL
+      (sign_changes_inside  =  20 000)  and  the  two  end
+      Rosser  runs  (44  /  47)  -  the  only  quantities
+      that  enter  the  Turing  step.  Recorded,  not
+      suppressed.
+  VERIFICATION  (three  layers,  same  as  CE2-CE28):
+    (1)  ENVIRONMENT  REPEAT  (Murphy's  window-1
+         certificate  re-verified  -  see  CE2  header);
+    (2)  PIPELINE  VERIFIER  on  window29_b29.json:
+         "CERTIFIED:  true",  points_checked  = 33 541,
+         sign_changes_inside  =  20 000  =  b  −  a,
+         roesser_failures_inside  =  2  (both  rescued,
+         both  quotas  met),  turing_ok  =  true,
+         K_conservative  = 12,  endpoints  recomputed  and
+         matched;
+    (3)  SEAM  AUDIT  (this  run):  the  recorded  g_a29  ball
+         is  bit-identical  to  CE28's  recorded  g_b28  ball
+         (exact  dyadic  decode,  2026-11-06).
+  FRONTIER  ARITHMETIC  (machine,  below):
+      tCE29  =  3 000 175 468 311,
+      tCE29  −  tCE28  =  4 673   (face  shrink  past
+      tCE28  -  the  running  pattern),
+      tCE29  −  tPT2  = 135 511  (above  the  Platt-Trudgian
+      H0;  the  125 000-unit  mark  crossed  at  CE27  remains
+      crossed;  the  next  round  mark  150 000  is  14 489
+      units  away,  i.e.  ~3  windows  out),
+      certified  zeros  over  (g_a1,  g_b29]  =  559 992  +
+      20 000  =  579 992.
+  HONESTY  (trust  base):  as  CE2-CE28  -  the  pipeline's
+  own  controls,  its  kernel-checked  Lean  remainder
+  theorem,  and  our  three  verification  layers;  a  RE-RUN
+  of  a  third-party  pipeline,  not  a  from-scratch
+  independent  certification.  NO  RH  CLAIM.  -/
+
+namespace CE29
+
+/-! ### 1.  The  certified  constants
+-/
+/-- Certified  LOWER  bound  for  g_b29  (the  recorded  ball  is
+    3 000 175 468 311.824550537966  with  radius  ~= 1.29e-26;
+    this  rational  rounds  the  bottom  down  at  two
+    decimals,  margin  ~2.5e-3).  -/
+def gB29Lo : ℚ := 300017546831182 / 100
+
+/-- THE  NEW  CERTIFIED  CENSUS  FRONTIER:  an  integer  strictly
+    below  the  certified  lower  bound  gB29Lo:
+    tCE29  =  3 000 175 468 311.  -/
+def tCE29 : ℕ := 3000175468311
+
+theorem tCE29_lt_gB29Lo : (tCE29 : ℝ) < (gB29Lo : ℝ) := by
+  norm_num [gB29Lo, tCE29]
+
+theorem tCE28_lt_tCE29 : (tCE28 : ℝ) < (tCE29 : ℝ) := by
+  norm_num [CE28.tCE28, tCE29]
+
+/-- Record:  the  seam  order  gB28Lo  <  tCE29  (the  band
+    (gB28Lo,  tCE29]  is  nonempty  and  lies  above  CE28's
+    frontier  tCE28).  -/
+theorem gB28Lo_lt_tCE29 : (gB28Lo : ℝ) < (tCE29 : ℝ) := by
+  norm_num [CE28.gB28Lo, tCE29]
+
+/-- The  face  height  shrunk  by  further  4 673  units  past
+    tCE28  (the  running  pattern).  -/
+theorem faceShrinkCE29 : (tCE29 : ℝ) - (tCE28 : ℝ) = 4673 := by
+  norm_num [tCE29, CE28.tCE28]
+
+/-- The  new  frontier  is  135 511  units  above  the
+    Platt-Trudgian  frontier  H0  (machine;  the  125 000-unit
+    mark  crossed  at  CE27  remains  crossed;  the  next
+    round  mark  150 000  is  14 489  units  away,  i.e.  ~3
+    windows  out).  -/
+theorem frontierGapAboveH0 : (tCE29 : ℝ) - WinC.tPT2 = 135511 := by
+  norm_num [tCE29, WinC.tPT2]
+
+/-- MILESTONE  CARRY  (machine):  tCE29  −  tPT2  =  135 511
+    exceeds  125 000.  -/
+theorem frontierPast125k : (tCE29 : ℝ) - WinC.tPT2 > 125000 := by
+  have h : (tCE29 : ℝ) - WinC.tPT2 = 135511 := frontierGapAboveH0
+  linarith [h]
+
+/-- (PROVEN,  machine)  the  slice  is  well  ordered:
+    gB27Lo  <  gB28Lo  (re-stated  at  the  CE29  level  from
+    CE28's  window-28  band  ordering).  -/
+theorem gB27Lo_lt_gB28Lo : (gB27Lo : ℝ) < (gB28Lo : ℝ) := by
+  norm_num [CE27.gB27Lo, CE28.gB28Lo]
+
+/-- Record:  the  rationalized  slice  caps  are  well  ordered
+    (gB28Lo  <  gB29Lo)  -  the  window-29  band  (gB28Lo,
+    gB29Lo]  (hence  (gB28Lo,  tCE29])  lies  strictly  above
+    window  28's  certified  region.  -/
+theorem gB28Lo_lt_gB29Lo : (gB28Lo : ℝ) < (gB29Lo : ℝ) := by
+  norm_num [CE28.gB28Lo, gB29Lo]
+
+/-! ### 2.  The  cited  window  clauses  (Z78  pattern)
+-/
+/-- [CITED,  OUR  WINDOW-28  RUN  (window28_b28.json),  FULL
+    SLICE]  every  zeta  zero  with  gB27Lo  <  Im  ρ  <=
+    gB28Lo  is  on  the  critical  line.  Derivation  (recorded):
+    the  region  (gB27Lo,  gB28Lo]  lies  inside  (g_a28,
+    g_b28]  -  window  28's  own  certified  region  -  since
+    gB27Lo  is  the  certified  bottom  of  g_a28  (=  g_b27,
+    bit-identical  dyadic  ball  in  windows  27  and  28)  and
+    gB28Lo  the  certified  bottom  of  g_b28  (machine:
+    gB27Lo  <  gB28Lo,  below).  Named  Prop  consumed  as  a
+    hypothesis;  not  proven  in-tree.  -/
+def ce28WinClauseFull : Prop :=
+    ∀ (ρ : ℂ), riemannZeta ρ = 0 → (gB27Lo : ℝ) < ρ.im →
+      ρ.im ≤ (gB28Lo : ℝ) → ρ.re = 1 / 2
+
+/-- [CITED,  OUR  WINDOW-29  RUN  (window29_b29.json),  SLICE]
+    every  zeta  zero  with  gB28Lo  <  Im  ρ  <=  tCE29  is  on
+    the  critical  line.  Derivation  (recorded):  for
+    t0  =  Im  ρ  in  (gB28Lo,  tCE29],  either  t0  <=  g_b28
+    (the  true  Gram  point  -  g_a29  =  g_b28,  recorded  exact
+    dyadic  ball  3 000 175 463 638.889422852356  +  or  -
+    1.29e-26,  bit-identical  in  both  certificates;  the
+    numerical  order  g_a29  =  g_a28  <  gB28Lo  <  g_b28
+    puts  t0  in  window  28's  region  (g_a28,  g_b28])  -
+    or  t0  >  g_b28  =  g_a29,  in  which  case  t0  <=  tCE29
+    <  gB29Lo  <=  g_b29  puts  t0  in  window  29's  region
+    (g_a29,  g_b29].  The  two  certified  regions  union  to
+    (g_a28,  g_b29]  which  contains  (gB28Lo,  tCE29]
+    (machine:  gB28Lo  <  tCE29  <  gB29Lo).  Named  Prop
+    consumed  as  a  hypothesis;  not  proven  in-tree.  -/
+def ce29WinClause : Prop :=
+    ∀ (ρ : ℂ), riemannZeta ρ = 0 → (gB28Lo : ℝ) < ρ.im →
+      ρ.im ≤ (tCE29 : ℝ) → ρ.re = 1 / 2
+
+/-- THE  COMPOSITE  BAND  CLAUSE  (machine):  zeros  in
+    (tPT2,  tCE29]  are  on  the  line,  given  the
+    twenty-nine  window  clauses  -  the  splits  at  gA2Hi,
+    gB2Lo,  gB3Lo,  gB4Lo,  gB5Lo,  gB6Lo,  gB7Lo,  gB8Lo,
+    gB9Lo,  gB10Lo,  gB11Lo,  gB12Lo,  gB13Lo,  gB14Lo,
+    gB15Lo,  gB16Lo,  gB17Lo,  gB18Lo,  gB19Lo,  gB20Lo,
+    gB21Lo,  gB22Lo,  gB23Lo,  gB24Lo,  gB25Lo,  gB26Lo,
+    gB27Lo,  gB28Lo  are  pure  case  splits.  -/
+theorem bandOfWindows29 (h1 : CE2.ce1WinClause)
+    (h2 : CE3.ce2WinClauseFull) (h3 : CE4.ce3WinClauseFull)
+    (h4 : CE5.ce4WinClauseFull) (h5 : CE6.ce5WinClauseFull)
+    (h6 : CE7.ce6WinClauseFull) (h7 : CE8.ce7WinClauseFull)
+    (h8 : CE9.ce8WinClauseFull) (h9 : CE10.ce9WinClauseFull)
+    (h10 : CE11.ce10WinClauseFull) (h11 : CE12.ce11WinClauseFull)
+    (h12 : CE13.ce12WinClauseFull) (h13 : CE14.ce13WinClauseFull)
+    (h14 : CE15.ce14WinClauseFull) (h15 : CE16.ce15WinClauseFull)
+    (h16 : CE17.ce16WinClauseFull) (h17 : CE18.ce17WinClauseFull)
+    (h18 : CE19.ce18WinClauseFull) (h19 : CE20.ce19WinClauseFull)
+    (h20 : CE21.ce20WinClauseFull) (h21 : CE22.ce21WinClauseFull)
+    (h22 : CE23.ce22WinClauseFull) (h23 : CE24.ce23WinClauseFull)
+    (h24 : CE25.ce24WinClauseFull) (h25 : CE26.ce25WinClauseFull)
+    (h26 : CE27.ce26WinClauseFull) (h27 : CE28.ce27WinClauseFull)
+    (h28 : ce28WinClauseFull) (h29 : ce29WinClause) :
+    ∀ (ρ : ℂ), riemannZeta ρ = 0 → WinC.tPT2 < ρ.im →
+      ρ.im ≤ (tCE29 : ℝ) → ρ.re = 1 / 2 := by
+  intro ρ hz ht htH
+  by_cases hseam1 : ρ.im ≤ (gA2Hi : ℝ)
+  · exact h1 ρ hz ht hseam1
+  · by_cases hseam2 : ρ.im ≤ (gB2Lo : ℝ)
+    · exact h2 ρ hz (not_le.mp hseam1) hseam2
+    · by_cases hseam3 : ρ.im ≤ (gB3Lo : ℝ)
+      · exact h3 ρ hz (not_le.mp hseam2) hseam3
+      · by_cases hseam4 : ρ.im ≤ (gB4Lo : ℝ)
+        · exact h4 ρ hz (not_le.mp hseam3) hseam4
+        · by_cases hseam5 : ρ.im ≤ (gB5Lo : ℝ)
+          · exact h5 ρ hz (not_le.mp hseam4) hseam5
+          · by_cases hseam6 : ρ.im ≤ (gB6Lo : ℝ)
+            · exact h6 ρ hz (not_le.mp hseam5) hseam6
+            · by_cases hseam7 : ρ.im ≤ (gB7Lo : ℝ)
+              · exact h7 ρ hz (not_le.mp hseam6) hseam7
+              · by_cases hseam8 : ρ.im ≤ (gB8Lo : ℝ)
+                · exact h8 ρ hz (not_le.mp hseam7) hseam8
+                · by_cases hseam9 : ρ.im ≤ (gB9Lo : ℝ)
+                  · exact h9 ρ hz (not_le.mp hseam8) hseam9
+                  · by_cases hseam10 : ρ.im ≤ (gB10Lo : ℝ)
+                    · exact h10 ρ hz (not_le.mp hseam9) hseam10
+                    · by_cases hseam11 : ρ.im ≤ (gB11Lo : ℝ)
+                      · exact h11 ρ hz (not_le.mp hseam10) hseam11
+                      · by_cases hseam12 : ρ.im ≤ (gB12Lo : ℝ)
+                        · exact h12 ρ hz (not_le.mp hseam11) hseam12
+                        · by_cases hseam13 : ρ.im ≤ (gB13Lo : ℝ)
+                          · exact h13 ρ hz (not_le.mp hseam12) hseam13
+                          · by_cases hseam14 : ρ.im ≤ (gB14Lo : ℝ)
+                            · exact h14 ρ hz (not_le.mp hseam13) hseam14
+                            · by_cases hseam15 : ρ.im ≤ (gB15Lo : ℝ)
+                              · exact h15 ρ hz (not_le.mp hseam14) hseam15
+                              · by_cases hseam16 : ρ.im ≤ (gB16Lo : ℝ)
+                                · exact h16 ρ hz (not_le.mp hseam15) hseam16
+                                · by_cases hseam17 : ρ.im ≤ (gB17Lo : ℝ)
+                                  · exact h17 ρ hz (not_le.mp hseam16) hseam17
+                                  · by_cases hseam18 : ρ.im ≤ (gB18Lo : ℝ)
+                                    · exact h18 ρ hz (not_le.mp hseam17) hseam18
+                                    · by_cases hseam19 : ρ.im ≤ (gB19Lo : ℝ)
+                                      · exact h19 ρ hz (not_le.mp hseam18) hseam19
+                                      · by_cases hseam20 : ρ.im ≤ (gB20Lo : ℝ)
+                                        · exact h20 ρ hz (not_le.mp hseam19) hseam20
+                                        · by_cases hseam21 : ρ.im ≤ (gB21Lo : ℝ)
+                                          · exact h21 ρ hz (not_le.mp hseam20) hseam21
+                                          · by_cases hseam22 : ρ.im ≤ (gB22Lo : ℝ)
+                                            · exact h22 ρ hz (not_le.mp hseam21) hseam22
+                                            · by_cases hseam23 : ρ.im ≤ (gB23Lo : ℝ)
+                                              · exact h23 ρ hz (not_le.mp hseam22) hseam23
+                                              · by_cases hseam24 : ρ.im ≤ (gB24Lo : ℝ)
+                                                · exact h24 ρ hz (not_le.mp hseam23) hseam24
+                                                · by_cases hseam25 : ρ.im ≤ (gB25Lo : ℝ)
+                                                  · exact h25 ρ hz (not_le.mp hseam24) hseam25
+                                                  · by_cases hseam26 : ρ.im ≤ (gB26Lo : ℝ)
+                                                    · exact h26 ρ hz (not_le.mp hseam25) hseam26
+                                                    · by_cases hseam27 : ρ.im ≤ (gB27Lo : ℝ)
+                                                      · exact h27 ρ hz (not_le.mp hseam26) hseam27
+                                                      · by_cases hseam28 : ρ.im ≤ (gB28Lo : ℝ)
+                                                        · exact h28 ρ hz (not_le.mp hseam27) hseam28
+                                                        · exact h29 ρ hz (not_le.mp hseam28) htH
+
+/-! ### 3.  The  machine-verified  re-anchoring
+-/
+/-- M5  ·  THE  FRONTIER  MOVED  AGAIN:  [Z-PT2]  +  the
+    twenty-nine  cited  window  clauses  =>  the  on-line
+    census  holds  up  to  tCE29.  -/
+theorem allOnLineUpToCE29 (q : ZeroSet)
+    (hZPT2 : WinC.allOnLineUpTo q WinC.tPT2)
+    (hW1 : CE2.ce1WinClause) (hW2 : CE3.ce2WinClauseFull)
+    (hW3 : CE4.ce3WinClauseFull) (hW4 : CE5.ce4WinClauseFull)
+    (hW5 : CE6.ce5WinClauseFull) (hW6 : CE7.ce6WinClauseFull)
+    (hW7 : CE8.ce7WinClauseFull) (hW8 : CE9.ce8WinClauseFull)
+    (hW9 : CE10.ce9WinClauseFull) (hW10 : CE11.ce10WinClauseFull)
+    (hW11 : CE12.ce11WinClauseFull) (hW12 : CE13.ce12WinClauseFull)
+    (hW13 : CE14.ce13WinClauseFull) (hW14 : CE15.ce14WinClauseFull)
+    (hW15 : CE16.ce15WinClauseFull) (hW16 : CE17.ce16WinClauseFull)
+    (hW17 : CE18.ce17WinClauseFull) (hW18 : CE19.ce18WinClauseFull)
+    (hW19 : CE20.ce19WinClauseFull) (hW20 : CE21.ce20WinClauseFull)
+    (hW21 : CE22.ce21WinClauseFull) (hW22 : CE23.ce22WinClauseFull)
+    (hW23 : CE24.ce23WinClauseFull) (hW24 : CE25.ce24WinClauseFull)
+    (hW25 : CE26.ce25WinClauseFull) (hW26 : CE27.ce26WinClauseFull)
+    (hW27 : CE28.ce27WinClauseFull) (hW28 : ce28WinClauseFull)
+    (hW29 : ce29WinClause)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0) :
+    WinC.allOnLineUpTo q (tCE29 : ℝ) := by
+  have hband := bandOfWindows29 hW1 hW2 hW3 hW4 hW5 hW6 hW7 hW8 hW9 hW10 hW11 hW12 hW13 hW14 hW15 hW16 hW17 hW18 hW19 hW20 hW21 hW22 hW23 hW24 hW25 hW26 hW27 hW28 hW29
+  intro ρ hρ ht htH
+  by_cases hmid : ρ.im ≤ WinC.tPT2
+  · exact hZPT2 ρ hρ ht hmid
+  · exact hband ρ (hqz ρ hρ) (not_le.mp hmid) htH
+
+/-- M5  ·  THE  RE-ANCHORED  FACE  (twenty-ninth  run):  no
+    off-line  zero  with  positive  height  above  tCE29.  -/
+def terminalFaceCE29 (q : ZeroSet) : Prop :=
+    ∀ (ρ : ℂ), ρ ∈ q.Z → (tCE29 : ℝ) < ρ.im → ρ.re = 1 / 2
+
+/-- Pure  logic:  the  CE28  face  implies  the  CE29  face
+    (tCE29  >  tCE28).  -/
+theorem faceCE28_implies_faceCE29 (q : ZeroSet)
+    (hface : CE28.terminalFaceCE28 q) :
+    terminalFaceCE29 q := by
+  intro ρ hρ ht
+  exact hface ρ hρ (by linarith [tCE28_lt_tCE29, ht])
+
+/-- M5  ·  THE  TWO  FACE  FORMULATIONS,  EQUIVALENT  UNDER  THE
+    BAND:  the  extra  band  (tCE28,  tCE29]  is  certified
+    empty  (windows  28+29  together)  -  re-anchoring  is  a
+    CERTIFICATE,  not  a  logical  move  (the  face  is  the
+    same  open  object,  now  certified  4 673  higher).  -/
+theorem terminalFaceCE29_iff_faceCE28 (q : ZeroSet)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (hW28 : ce28WinClauseFull) (hW29 : ce29WinClause) :
+    terminalFaceCE29 q ↔ CE28.terminalFaceCE28 q := by
+  constructor
+  · intro hface ρ hρ ht
+    by_cases hmid : ρ.im ≤ (tCE29 : ℝ)
+    · by_cases hseam28 : ρ.im ≤ (gB28Lo : ℝ)
+      · exact hW28 ρ (hqz ρ hρ) (by linarith [ht, gB27Lo_lt_tCE28, tCE28_lt_tCE29]) hseam28
+      · exact hW29 ρ (hqz ρ hρ) (not_le.mp hseam28) hmid
+    · exact hface ρ hρ (not_le.mp hmid)
+  · exact faceCE28_implies_faceCE29 q
+
+/-- M5  ·  THE  0288  EXACT  RESIDUAL,  RE-PINNED  AT  tCE29
+    (pure  logic).  -/
+theorem rh_split_at_CE29 (q : ZeroSet) :
+    RH q ↔ WinC.allOnLineUpTo q (tCE29 : ℝ) ∧ terminalFaceCE29 q := by
+  constructor
+  · intro hRH
+    exact ⟨fun ρ hρ him himH => hRH ρ hρ, fun ρ hρ himgt => hRH ρ hρ⟩
+  · rintro ⟨hCensus, hFace⟩ ρ hρ
+    by_cases hpos : 0 < ρ.im
+    · by_cases hle : ρ.im ≤ (tCE29 : ℝ)
+      · exact hCensus ρ hρ hpos hle
+      · exact hFace ρ hρ (not_le.mp hle)
+    · have hneg : ρ.im < 0 := by
+        have hle0 : ρ.im ≤ 0 := not_lt.mp hpos
+        have hne0 : ρ.im ≠ 0 := q.nonReal ρ hρ
+        exact lt_of_le_of_ne hle0 hne0
+      have hst : star ρ ∈ q.Z := q.conj ρ hρ
+      have hstpos : 0 < (star ρ).im := by
+        have h : (star ρ).im = -ρ.im := by rfl
+        rw [h]
+        exact neg_pos.mpr hneg
+      have hstRe : (star ρ).re = 1 / 2 := by
+        by_cases hle : (star ρ).im ≤ (tCE29 : ℝ)
+        · exact hCensus _ hst hstpos hle
+        · exact hFace _ hst (not_le.mp hle)
+      have hreEq : (star ρ).re = ρ.re := by rfl
+      simpa [hreEq] using hstRe
+
+/-- M5  ·  HEADLINE:  given  [Z-PT2]  +  the  twenty-nine
+    cited  window  clauses  ([CE1-WIN],  [CE2-WIN-FULL],  ...,
+    [CE28-WIN-FULL],  [CE29-WIN]),  all-heights  RH  <->
+    terminalFaceCE29.  NO  RH  CLAIM.  -/
+theorem rh_reanchored_CE29 (q : ZeroSet)
+    (hZPT2 : WinC.allOnLineUpTo q WinC.tPT2)
+    (hW1 : CE2.ce1WinClause) (hW2 : CE3.ce2WinClauseFull)
+    (hW3 : CE4.ce3WinClauseFull) (hW4 : CE5.ce4WinClauseFull)
+    (hW5 : CE6.ce5WinClauseFull) (hW6 : CE7.ce6WinClauseFull)
+    (hW7 : CE8.ce7WinClauseFull) (hW8 : CE9.ce8WinClauseFull)
+    (hW9 : CE10.ce9WinClauseFull) (hW10 : CE11.ce10WinClauseFull)
+    (hW11 : CE12.ce11WinClauseFull) (hW12 : CE13.ce12WinClauseFull)
+    (hW13 : CE14.ce13WinClauseFull) (hW14 : CE15.ce14WinClauseFull)
+    (hW15 : CE16.ce15WinClauseFull) (hW16 : CE17.ce16WinClauseFull)
+    (hW17 : CE18.ce17WinClauseFull) (hW18 : CE19.ce18WinClauseFull)
+    (hW19 : CE20.ce19WinClauseFull) (hW20 : CE21.ce20WinClauseFull)
+    (hW21 : CE22.ce21WinClauseFull) (hW22 : CE23.ce22WinClauseFull)
+    (hW23 : CE24.ce23WinClauseFull) (hW24 : CE25.ce24WinClauseFull)
+    (hW25 : CE26.ce25WinClauseFull) (hW26 : CE27.ce26WinClauseFull)
+    (hW27 : CE28.ce27WinClauseFull) (hW28 : ce28WinClauseFull)
+    (hW29 : ce29WinClause)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0) :
+    RH q ↔ terminalFaceCE29 q := by
+  have hcensus := allOnLineUpToCE29 q hZPT2 hW1 hW2 hW3 hW4 hW5 hW6 hW7 hW8 hW9 hW10 hW11 hW12 hW13 hW14 hW15 hW16 hW17 hW18 hW19 hW20 hW21 hW22 hW23 hW24 hW25 hW26 hW27 hW28 hW29 hqz
+  have hsplit := rh_split_at_CE29 q
+  constructor
+  · exact fun hRH => (hsplit.mp hRH).2
+  · exact fun hFace => hsplit.mpr ⟨hcensus, hFace⟩
+
+/-- M5  ·  THE  FINAL  NAMED  STEP  AT  THE  NEW  FRONTIER:
+    given  the  cited  census  inputs  and  a  closing  of
+    the  re-anchored  face,  all-heights  RH  holds.  NO  RH
+    CLAIM:  no  closing  is  supplied.  -/
+theorem rh_of_terminalFaceCE29 (q : ZeroSet)
+    (hZPT2 : WinC.allOnLineUpTo q WinC.tPT2)
+    (hW1 : CE2.ce1WinClause) (hW2 : CE3.ce2WinClauseFull)
+    (hW3 : CE4.ce3WinClauseFull) (hW4 : CE5.ce4WinClauseFull)
+    (hW5 : CE6.ce5WinClauseFull) (hW6 : CE7.ce6WinClauseFull)
+    (hW7 : CE8.ce7WinClauseFull) (hW8 : CE9.ce8WinClauseFull)
+    (hW9 : CE10.ce9WinClauseFull) (hW10 : CE11.ce10WinClauseFull)
+    (hW11 : CE12.ce11WinClauseFull) (hW12 : CE13.ce12WinClauseFull)
+    (hW13 : CE14.ce13WinClauseFull) (hW14 : CE15.ce14WinClauseFull)
+    (hW15 : CE16.ce15WinClauseFull) (hW16 : CE17.ce16WinClauseFull)
+    (hW17 : CE18.ce17WinClauseFull) (hW18 : CE19.ce18WinClauseFull)
+    (hW19 : CE20.ce19WinClauseFull) (hW20 : CE21.ce20WinClauseFull)
+    (hW21 : CE22.ce21WinClauseFull) (hW22 : CE23.ce22WinClauseFull)
+    (hW23 : CE24.ce23WinClauseFull) (hW24 : CE25.ce24WinClauseFull)
+    (hW25 : CE26.ce25WinClauseFull) (hW26 : CE27.ce26WinClauseFull)
+    (hW27 : CE28.ce27WinClauseFull) (hW28 : ce28WinClauseFull)
+    (hW29 : ce29WinClause)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (hFace : terminalFaceCE29 q) :
+    RH q :=
+  (rh_reanchored_CE29 q hZPT2 hW1 hW2 hW3 hW4 hW5 hW6 hW7 hW8 hW9 hW10 hW11 hW12 hW13 hW14 hW15 hW16 hW17 hW18 hW19 hW20 hW21 hW22 hW23 hW24 hW25 hW26 hW27 hW28 hW29 hqz).mpr hFace
+
+/-- M5  ×  M2  ·  the  0290  lane  closing  lands  DIRECTLY  at
+    the  new  frontier.  -/
+theorem terminalFaceCE29_of_thetaInf (q : ZeroSet)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (hInf : ThetaInf.thetaInfImpliesAllOnLine)
+    (hC : ThetaInf.thetaInfConjecture) :
+    terminalFaceCE29 q := by
+  intro ρ hρ ht
+  have hall := hInf hC
+  exact hall ρ (hqz ρ hρ)
+
+end CE29
