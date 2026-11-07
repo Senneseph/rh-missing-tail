@@ -3673,3 +3673,44 @@ NO RH CLAIM. (discovery 0337)
 
 Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE33.
 NO RH CLAIM. (discovery 0338)
+
+## 70 · 0339 — M5 WINDOW 34 CERTIFIED + CE34 RE-ANCHOR
+(2026-11-15)
+
+* **Window 34 (in-house, seamless):** a = 12,363,154,097,121
+  (= window 33's b), b = a + 20,000 (no snap at either
+  endpoint), M = 60, C_R = 1, 33,680 evaluations in 2582.7
+  s, N_range = [691008, 691008]. Certificate
+  window34_b34.json: **b − a = 20,000 zeros, all simple and
+  on the line** in (g_a34, g_b34], g_a34 =
+  3,000,175,487,003.331411817553 ± 1.29e-26 (bit-identical
+  to window 33's g_b33), g_b34 = 3,000,175,491,676.
+  266538149912 ± 1.29e-26 (floor tCE34 sits 0.2665 above
+  the previous integer - robust).
+* **ROSSER EVENT: one rescue** — [..113559, ..113561] →
+  [..113557, ..113562] (5 = 5, m = 4). Quota met by the
+  union recount; displaced within the window (total
+  unchanged); verifier recomputes window total and end
+  runs (49/48). RECORDED, not suppressed. The FOUR-window
+  clean streak (30-31-32-33, the longest in the chain up
+  to that point) ENDS as expected — the usual mix of the
+  lane returns.
+* **Formal (CE34.lean, GREEN 8799; full tree 17454, oolean
+  fresh):** gB34Lo := 300017549167626/100, tCE34 :=
+  3,000,175,491,676; faceShrinkCE34 = 4673 (running
+  pattern); frontierGapAboveH0 = 158,876;
+  frontierPast150k carried; bandOfWindows34
+  (thirty-four-way); rh_reanchored_CE34: under [Z-PT2] +
+  the thirty-four cited window clauses, RH q ↔
+  terminalFaceCE34 q; rh_of_terminalFaceCE34 (final named
+  step — no closing supplied);
+  terminalFaceCE34_of_thetaInf (M2 lane lands at tCE34).
+  The single-rescue event recorded in the header.
+* **Frontier:** certified zeros over (g_a1, g_b34] =
+  **679,991**. Chain integrity 1→34: every seam
+  bit-identical, N_range/C_R/M constant. Fourteen clean
+  windows of thirty-four; all rescues quota-met and
+  recorded. The 175k mark is ~3-4 windows out.
+
+Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE34.
+NO RH CLAIM. (discovery 0339)
