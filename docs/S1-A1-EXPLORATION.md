@@ -3540,7 +3540,7 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
       the line; no gap - window 32 starts from exactly this
       b; seam bit-identical) + CE31 GREEN 8796, full tree
       17454.
-    * 619,992... 619,991 certified over (g_a1, g_b31] -
+    * 619,991 certified over (g_a1, g_b31] -
       OVER SIX HUNDRED THOUSAND certified on-line zeros.
       (Twelfth clean window, second consecutive clean.)
     * Frontier re-anchored: tCE31 = 3,000,175,477,657
