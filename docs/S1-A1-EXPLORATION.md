@@ -3531,3 +3531,24 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
 
     No RH claim - face OPEN / PROBABLY TRUE at tCE30; wall
     UNMOVED.
+
+* **E66 (2026-11-15, 0336):**
+    * MILESTONE - 600K CROSSED: M5 WINDOW 31 CERTIFIED
+      (CLEAN + snapped: final b snapped down one per the
+      documented endpoint policy; b - a = 19,999 =
+      sign_changes_inside EXACTLY zeros, all simple and on
+      the line; no gap - window 32 starts from exactly this
+      b; seam bit-identical) + CE31 GREEN 8796, full tree
+      17454.
+    * 619,992... 619,991 certified over (g_a1, g_b31] -
+      OVER SIX HUNDRED THOUSAND certified on-line zeros.
+      (Twelfth clean window, second consecutive clean.)
+    * Frontier re-anchored: tCE31 = 3,000,175,477,657
+      (tCE31 - tCE30 = 4,673, running pattern INTACT
+      despite the snapped width; 144,857 above H0; the
+      150k mark is ~1 window out - window 32).
+    * Window 32 in flight (a32 = 12,363,154,057,121).
+
+    No RH claim - face OPEN / PROBABLY TRUE at tCE31; wall
+    UNMOVED. The 600k milestone is a certification-scale
+    achievement, not an analytic one.

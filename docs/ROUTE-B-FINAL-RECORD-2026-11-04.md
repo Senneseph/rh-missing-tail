@@ -3549,3 +3549,48 @@ NO RH CLAIM. (discovery 0334)
 
 Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE30.
 NO RH CLAIM. (discovery 0335)
+
+## 67 · 0336 — MILESTONE: 600K CROSSED + WINDOW 31 + CE31
+(2026-11-15) — CLEAN + snapped window
+
+* **Window 31 (in-house, seamless):** a = 12,363,154,037,122
+  (= window 30's b), requested b = a + 20,000, **final b
+  snapped down one** (not a good Gram point at working
+  precision — the documented endpoint policy; third snap in
+  the chain after the 2/11/17/18/19/21 family), M = 60,
+  C_R = 1, 33,374 evaluations in 2482.6 s, N_range =
+  [691008, 691008]. Certificate window31_b31.json: **b − a
+  = 19,999 = sign_changes_inside EXACTLY zeros, all simple
+  and on the line** in (g_a31, g_b31]; g_a31 =
+  3,000,175,472,984.759677952923 ± 1.29e-26 (bit-identical
+  to window 30's g_b30), g_b31 = 3,000,175,477,657.
+  461158340877 ± 1.29e-26 (floor tCE31 sits 0.4612 above
+  the previous integer - robust). No gap: window 32 starts
+  from exactly this b.
+* **CLEAN WINDOW** (twelfth of thirty-one, second
+  consecutive clean): ZERO Rosser exceptions - the
+  post-multi-exception baseline is confirmed.
+* **Formal (CE31.lean, GREEN 8796; full tree 17454, oolean
+  fresh):** gB31Lo := 300017547765746/100, tCE31 :=
+  3,000,175,477,657; faceShrinkCE31 = 4673 (running
+  pattern INTACT despite the snapped width);
+  frontierGapAboveH0 = 144,857; frontierPast125k carried;
+  bandOfWindows31 (thirty-one-way); rh_reanchored_CE31:
+  under [Z-PT2] + the thirty-one cited window clauses, RH
+  q ↔ terminalFaceCE31 q; rh_of_terminalFaceCE31 (final
+  named step — no closing supplied);
+  terminalFaceCE31_of_thetaInf (M2 lane lands at tCE31).
+  Snapped-endpoint event documented in full in the header.
+* **MILESTONE (600k crossed):** certified zeros over
+  (g_a1, g_b31] = 599,992 + 19,999 = **619,991 — OVER SIX
+  HUNDRED THOUSAND** certified on-line zeros in consecutive
+  seamless certificates. Chain integrity 1→31: every seam
+  bit-identical, N_range/C_R/M constant. Twelve clean
+  windows of thirty-one; nine snapped-width windows
+  (2, 3, 8, 11, 17, 18, 19, 21, 31); all rescues
+  quota-met and recorded.
+* **Frontier:** tCE31 − tCE30 = 4,673; tCE31 − tPT2 =
+  144,857 (the 150k mark is ~1 window out - window 32).
+
+Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE31.
+NO RH CLAIM. (discovery 0336)
