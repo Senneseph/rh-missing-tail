@@ -3569,3 +3569,22 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
 
     No RH claim - face OPEN / PROBABLY TRUE at tCE32; wall
     UNMOVED.
+
+* **E68 (2026-11-15, 0338):**
+    * MILESTONE - 150K CROSSED: M5 WINDOW 33 CERTIFIED
+      (CLEAN - fourth consecutive clean: 30, 31, 32, 33;
+      20,000 zeros all simple and on the line; seam
+      bit-identical) + CE33 GREEN 8798, full tree 17454.
+      frontierPast150k proven in-tree (tCE33 - tPT2 =
+      154,203 > 150,000).
+    * Round-mark sequence: 100k @ CE22 (102,801), 125k @
+      CE27 (126,165), 150k @ CE33 (154,203). Next: 175k,
+      ~4-5 windows out.
+    * 659,991 certified over (g_a1, g_b33].
+    * Frontier re-anchored: tCE33 = 3,000,175,487,003
+      (tCE33 - tCE32 = 4,673, running pattern).
+    * Window 34 in flight (a34 = 12,363,154,097,121).
+
+    No RH claim - face OPEN / PROBABLY TRUE at tCE33; wall
+    UNMOVED. The 150k crossing is a certification-scale
+    achievement, not an analytic one.

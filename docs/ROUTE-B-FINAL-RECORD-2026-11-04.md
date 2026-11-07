@@ -3632,3 +3632,44 @@ units ahead
 
 Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE32.
 NO RH CLAIM. (discovery 0337)
+
+## 69 · 0338 — MILESTONE: 150K CROSSED + WINDOW 33 + CE33
+(2026-11-15) — FOURTH consecutive clean window
+
+* **Window 33 (in-house, seamless):** a = 12,363,154,077,121
+  (= window 32's b), b = a + 20,000 (no snap at either
+  endpoint), M = 60, C_R = 1, 32,986 evaluations in 2501.5
+  s, N_range = [691008, 691008]. Certificate
+  window33_b33.json: **b − a = 20,000 zeros, all simple and
+  on the line** in (g_a33, g_b33], g_a33 =
+  3,000,175,482,330.396285214541 ± 1.29e-26 (bit-identical
+  to window 32's g_b32), g_b33 = 3,000,175,487,003.
+  331411817553 ± 1.29e-26 (floor tCE33 sits 0.3314 above
+  the previous integer - robust).
+* **CLEAN WINDOW** (fourteenth of thirty-three, FOURTH
+  CONSECUTIVE clean - 30, 31, 32, 33): ZERO Rosser
+  exceptions. The longest clean streak in the chain; the
+  post-multi-exception baseline is confirmed stable.
+* **Formal (CE33.lean, GREEN 8798; full tree 17454, oolean
+  fresh):** gB33Lo := 300017548700333/100, tCE33 :=
+  3,000,175,487,003; faceShrinkCE33 = 4673 (running
+  pattern); frontierGapAboveH0 = 154,203;
+  **frontierPast150k (NEW MILESTONE: tCE33 − tPT2 > 150,000
+  proven in-tree)**; frontierPast125k carried;
+  bandOfWindows33 (thirty-three-way); rh_reanchored_CE33:
+  under [Z-PT2] + the thirty-three cited window clauses, RH
+  q ↔ terminalFaceCE33 q; rh_of_terminalFaceCE33 (final
+  named step — no closing supplied);
+  terminalFaceCE33_of_thetaInf (M2 lane lands at tCE33).
+* **MILESTONE (150k crossed):** certified frontier is now
+  154,203 units above the Platt–Trudgian H0 frontier.
+  Round-mark sequence: 100k at CE22 (102,801), 125k at CE27
+  (126,165), 150k NOW at CE33 (154,203). Next mark 175,000
+  is 20,797 units away (~4-5 windows).
+* **Frontier:** certified zeros over (g_a1, g_b33] =
+  **659,991**. Chain integrity 1→33: every seam
+  bit-identical, N_range/C_R/M constant. Fourteen clean
+  windows of thirty-three.
+
+Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE33.
+NO RH CLAIM. (discovery 0338)
