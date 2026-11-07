@@ -3511,3 +3511,23 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
 
     No RH claim - face OPEN / PROBABLY TRUE at tCE29; wall
     UNMOVED.
+
+* **E65 (2026-11-15, 0335):**
+    * MILESTONE - the 30-WINDOW CHAIN is COMPLETE: M5 WINDOW
+      30 CERTIFIED (20,000 zeros, all simple and on the
+      line; seam bit-identical) + CE30 GREEN 8795, full
+      tree 17454.
+    * CLEAN WINDOW (eleventh of thirty, first since window
+      25) - the multi-exception spell (windows 28-29) is
+      over and fully recorded; the lane has returned to
+      clean behavior.
+    * 599,992 certified over (g_a1, g_b30] - WITHIN EIGHT
+      OF THE 600,000 MARK.
+    * Frontier re-anchored: tCE30 = 3,000,175,472,984
+      (tCE30 - tCE29 = 4,673, running pattern; 140,184
+      above H0; 150k mark ~2 windows out).
+    * Window 31 in flight (a31 = 12,363,154,037,122; the
+      150k crossing is expected in window 31 or 32).
+
+    No RH claim - face OPEN / PROBABLY TRUE at tCE30; wall
+    UNMOVED.

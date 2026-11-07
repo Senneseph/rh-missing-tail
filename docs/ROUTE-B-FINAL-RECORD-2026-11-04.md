@@ -3508,3 +3508,44 @@ NO RH CLAIM. (discovery 0333)
 
 Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE29.
 NO RH CLAIM. (discovery 0334)
+
+## 66 · 0335 — MILESTONE: THE 30-WINDOW CHAIN + CE30
+(2026-11-15) — CLEAN window, 599,992 certified
+
+* **Window 30 (in-house, seamless):** a = 12,363,154,017,122
+  (= window 29's b), b = a + 20,000 (no snap at either
+  endpoint), M = 60, C_R = 1, 32,841 evaluations in 2492.9
+  s, N_range = [691008, 691008]. Certificate
+  window30_b30.json: **b − a = 20,000 zeros, all simple and
+  on the line** in (g_a30, g_b30], g_a30 =
+  3,000,175,468,311.824550537966 ± 1.29e-26 (bit-identical
+  to window 29's g_b29), g_b30 = 3,000,175,472,984.
+  759677952923 ± 1.29e-26 (floor tCE30 sits 0.7597 above
+  the previous integer - robust).
+* **CLEAN WINDOW** (eleventh of thirty, first since window
+  25): ZERO Rosser exceptions, ZERO rescue failures — the
+  multi-exception spell of windows 28 (three rescues) and
+  29 (two rescues) is over and fully recorded; the lane
+  has returned to clean behavior.
+* **Formal (CE30.lean, GREEN 8795; full tree 17454, oolean
+  fresh):** gB30Lo := 300017547298475/100, tCE30 :=
+  3,000,175,472,984; faceShrinkCE30 = 4673 (running
+  pattern); frontierGapAboveH0 = 140,184;
+  frontierPast125k carried; bandOfWindows30 (thirty-way);
+  rh_reanchored_CE30: under [Z-PT2] + the thirty cited
+  window clauses, RH q ↔ terminalFaceCE30 q;
+  rh_of_terminalFaceCE30 (final named step — no closing
+  supplied); terminalFaceCE30_of_thetaInf (M2 lane lands at
+  tCE30). The clean-window status recorded in the header.
+* **MILESTONE (thirty windows):** certified zeros over
+  (g_a1, g_b30] = **599,992 — within EIGHT of the 600,000
+  mark**. Chain integrity 1→30: every seam bit-identical,
+  N_range/C_R/M constant. Eleven clean windows of thirty
+  (6, 8, 10, 12, 13, 14, 16, 18, 22, 25, 30); all nineteen
+  rescue windows quota-met and recorded.
+* **Frontier:** tCE30 − tCE29 = 4,673 (running pattern);
+  tCE30 − tPT2 = 140,184 (125k crossed at CE27; the 150k
+  mark is ~2 windows out).
+
+Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE30.
+NO RH CLAIM. (discovery 0335)
