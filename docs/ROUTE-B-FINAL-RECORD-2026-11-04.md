@@ -2714,3 +2714,36 @@ OPEN / PROBABLY TRUE at tCE8. NO RH CLAIM.
 
 Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE9.
 NO RH CLAIM. (discovery 0314)
+
+## 46 · 0315 — M5 WINDOW 10 CERTIFIED + CE10 RE-ANCHOR (2026-11-14)
+
+* **Window 10 (in-house, seamless):** a = 12,363,153,617,127
+  (= window 9's b), b = a + 20,000 (no snap at either
+  endpoint), M = 60, C_R = 1, 33,372 evaluations in 2572.5 s,
+  N_range = [691008, 691008]. Certificate window10_b10.json:
+  **b − a = 20,000 zeros, all simple and on the line** in
+  (g_a10, g_b10], g_a10 = 3,000,175,374,854.290179184949 ±
+  1.29e-26 (bit-identical dyadic ball to window 9's g_b9),
+  g_b10 = 3,000,175,379,527.225312012897 ± 1.29e-26 (floor
+  distance 0.7747).
+* **Verifier:** CERTIFIED true, 33,372 points,
+  sign_changes_inside = 20,000 = b − a, Rosser runs 50/46 ≥
+  K = 12, turing_ok, **ZERO Rosser exceptions** (clean
+  window, as windows 6 and 8), 0 cross-check failures, 0
+  undetermined signs.
+* **Formal (CE10.lean, GREEN 8775; full tree 17454, oolean
+  fresh):** gB10Lo := 300017537952722/100, tCE10 :=
+  3,000,175,379,527; faceShrinkCE10 = 4673;
+  frontierGapAboveH0 = 46,727; bandOfWindows10 (ten-way);
+  rh_reanchored_CE10: under [Z-PT2] + the ten cited window
+  clauses, RH q ↔ terminalFaceCE10 q; rh_of_terminalFaceCE10
+  (final named step — no closing supplied);
+  terminalFaceCE10_of_thetaInf (M2 lane lands at tCE10).
+* **Frontier:** certified zeros over (g_a1, g_b10] =
+  199,997 — the chain has now certified just under 200,000
+  consecutive on-line zeros just above the Platt–Trudgian H0
+  frontier. Chain integrity 1→10: every seam bit-identical
+  (exact dyadic tuples), N_range constant, C_R/M constant.
+
+Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE10.
+NO RH CLAIM. (discovery 0315)
