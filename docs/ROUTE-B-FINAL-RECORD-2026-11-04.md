@@ -3083,3 +3083,45 @@ NO RH CLAIM. (discovery 0323)
 
 Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE19.
 NO RH CLAIM. (discovery 0324)
+
+## 56 · 0325 — M5 WINDOW 20 CERTIFIED + CE20 RE-ANCHOR
+(2026-11-15) — **MILESTONE: the 20-window chain**
+
+* **Window 20 (in-house, seamless):** a = 12,363,153,817,123
+  (= window 19's b), b = a + 20,000 (no snap at either
+  endpoint), M = 60, C_R = 1, 34,270 evaluations in 2593.9
+  s, N_range = [691008, 691008]. Certificate
+  window20_b20.json: **b − a = 20,000 zeros, all simple and
+  on the line** in (g_a20, g_b20], g_a20 =
+  3,000,175,421,582.706908258997 ± 1.29e-26 (bit-identical
+  to window 19's g_b19), g_b20 = 3,000,175,426,255.
+  642038380470 ± 1.29e-26 (floor tCE20 sits 0.6420 above
+  the previous integer - robust).
+* **Verifier:** CERTIFIED true, 34,270 points,
+  sign_changes_inside = 20,000 = b − a, Rosser runs 49/51 ≥
+  K = 12, turing_ok. **One Rosser rescue exception**
+  (4 = 4; union quota met) — the documented 3-block union
+  mechanism; recorded, not suppressed.
+* **Formal (CE20.lean, GREEN 8785; full tree 17454, oolean
+  fresh):** gB20Lo := 300017542625564/100, tCE20 :=
+  3,000,175,426,255; faceShrinkCE20 = 4673;
+  frontierGapAboveH0 = 93,455; bandOfWindows20 (twenty-way);
+  rh_reanchored_CE20: under [Z-PT2] + the twenty cited
+  window clauses, RH q ↔ terminalFaceCE20 q;
+  rh_of_terminalFaceCE20 (final named step — no closing
+  supplied); terminalFaceCE20_of_thetaInf (M2 lane lands at
+  tCE20).
+* **Frontier:** certified zeros over (g_a1, g_b20] =
+  **399,993** (20,000 in 13 windows, 19,999 in the seven
+  snap-trimmed windows 2, 3, 8, 11, 17, 18, 19).
+* **MILESTONE:** the in-house M5 machine has now produced
+  and verified **twenty consecutive seamless certificates**
+  above the Platt–Trudgian H0 frontier — bit-identical
+  seams throughout, N_range constant, one verifier pass per
+  window. The wall behavior per window is unchanged: the
+  face shrinks 4,672–4,673 units; the (1.2) wall at 4/7 is
+  UNMOVED on both doors. The program is stable and
+  automatable; the analytic gap is unchanged.
+
+Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE20.
+NO RH CLAIM. (discovery 0325)
