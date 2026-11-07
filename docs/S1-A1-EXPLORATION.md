@@ -3552,3 +3552,20 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
     No RH claim - face OPEN / PROBABLY TRUE at tCE31; wall
     UNMOVED. The 600k milestone is a certification-scale
     achievement, not an analytic one.
+
+* **E67 (2026-11-15, 0337):**
+    * M5 WINDOW 32 CERTIFIED (20,000 zeros, all simple and
+      on the line; seam bit-identical) + CE32 GREEN 8797,
+      full tree 17454.
+    * CLEAN WINDOW (thirteenth of thirty-two; THIRD
+      CONSECUTIVE clean - 30, 31, 32) - the
+      post-multi-exception baseline is confirmed stable.
+    * 639,991 certified over (g_a1, g_b32].
+    * Frontier re-anchored: tCE32 = 3,000,175,482,330
+      (tCE32 - tCE31 = 4,673, running pattern; 149,530
+      above H0; the 150k mark sits 470 units ahead -
+      window 33 is expected to cross it).
+    * Window 33 in flight (a33 = 12,363,154,077,121).
+
+    No RH claim - face OPEN / PROBABLY TRUE at tCE32; wall
+    UNMOVED.

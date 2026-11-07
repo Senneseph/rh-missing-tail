@@ -3594,3 +3594,41 @@ NO RH CLAIM. (discovery 0335)
 
 Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE31.
 NO RH CLAIM. (discovery 0336)
+
+## 68 · 0337 — M5 WINDOW 32 CERTIFIED + CE32 RE-ANCHOR
+(2026-11-15) — THIRD consecutive clean window; 150k is 470
+units ahead
+
+* **Window 32 (in-house, seamless):** a = 12,363,154,057,121
+  (= window 31's b), b = a + 20,000 (no snap at either
+  endpoint), M = 60, C_R = 1, 33,567 evaluations in 2517.1
+  s, N_range = [691008, 691008]. Certificate
+  window32_b32.json: **b − a = 20,000 zeros, all simple and
+  on the line** in (g_a32, g_b32], g_a32 =
+  3,000,175,477,657.461158340877 ± 1.29e-26 (bit-identical
+  to window 31's g_b31), g_b32 = 3,000,175,482,330.
+  396285214541 ± 1.29e-26 (floor tCE32 sits 0.3963 above
+  the previous integer - robust).
+* **CLEAN WINDOW** (thirteenth of thirty-two, THIRD
+  CONSECUTIVE clean - 30, 31, 32): ZERO Rosser exceptions.
+  The post-multi-exception baseline is confirmed
+  stable.
+* **Formal (CE32.lean, GREEN 8797; full tree 17454, oolean
+  fresh):** gB32Lo := 300017548233039/100, tCE32 :=
+  3,000,175,482,330; faceShrinkCE32 = 4673 (running
+  pattern); frontierGapAboveH0 = 149,530;
+  frontierPast125k carried; bandOfWindows32
+  (thirty-two-way); rh_reanchored_CE32: under [Z-PT2] +
+  the thirty-two cited window clauses, RH q ↔
+  terminalFaceCE32 q; rh_of_terminalFaceCE32 (final named
+  step — no closing supplied); terminalFaceCE32_of_thetaInf
+  (M2 lane lands at tCE32). Clean status recorded in the
+  header.
+* **Frontier:** certified zeros over (g_a1, g_b32] =
+  **639,991**. Chain integrity 1→32: every seam
+  bit-identical, N_range/C_R/M constant. Thirteen clean
+  windows of thirty-two. **The 150k mark sits 470 units
+  ahead — window 33 is expected to cross it.**
+
+Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE32.
+NO RH CLAIM. (discovery 0337)
