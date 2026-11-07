@@ -3605,3 +3605,17 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
 
     No RH claim - face OPEN / PROBABLY TRUE at tCE34; wall
     UNMOVED.
+
+* **E70 (2026-11-15, 0340):**
+    * M5 WINDOW 35 CERTIFIED (20,000 zeros, all simple and
+      on the line; seam bit-identical; ONE Rosser rescue,
+      5=5 m=4, quota-met, recorded) + CE35 GREEN 8800,
+      full tree 17454.
+    * 699,991 certified over (g_a1, g_b35].
+    * Frontier re-anchored: tCE35 = 3,000,175,496,349
+      (tCE35 - tCE34 = 4,673, running pattern; 163,549
+      above H0; 175k mark ~2-3 windows out).
+    * Window 36 in flight (a36 = 12,363,154,137,121).
+
+    No RH claim - face OPEN / PROBABLY TRUE at tCE35; wall
+    UNMOVED.

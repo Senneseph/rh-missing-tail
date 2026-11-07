@@ -3714,3 +3714,42 @@ NO RH CLAIM. (discovery 0338)
 
 Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE34.
 NO RH CLAIM. (discovery 0339)
+
+## 71 · 0340 — M5 WINDOW 35 CERTIFIED + CE35 RE-ANCHOR
+(2026-11-15)
+
+* **Window 35 (in-house, seamless):** a = 12,363,154,117,121
+  (= window 34's b), b = a + 20,000 (no snap at either
+  endpoint), M = 60, C_R = 1, 33,957 evaluations in 2606.4
+  s, N_range = [691008, 691008]. Certificate
+  window35_b35.json: **b − a = 20,000 zeros, all simple and
+  on the line** in (g_a35, g_b35], g_a35 =
+  3,000,175,491,676.266538149912 ± 1.29e-26 (bit-identical
+  to window 34's g_b34), g_b35 = 3,000,175,496,349.
+  201664211618 ± 1.29e-26 (floor tCE35 sits 0.2017 above
+  the previous integer - robust; standard two-decimal lower
+  bound, margin ~1.66e-2, no CASING needed).
+* **ROSSER EVENT: one rescue** — [..118192, ..118195] →
+  [..118191, ..118196] (5 = 5, m = 4). Quota met by the
+  union recount; displaced within the window (total
+  unchanged); verifier recomputes window total and end
+  runs (49/48). RECORDED, not suppressed.
+* **Formal (CE35.lean, GREEN 8800; full tree 17454, oolean
+  fresh):** gB35Lo := 300017549634920/100, tCE35 :=
+  3,000,175,496,349; faceShrinkCE35 = 4673 (running
+  pattern); frontierGapAboveH0 = 163,549;
+  frontierPast150k carried; bandOfWindows35
+  (thirty-five-way); rh_reanchored_CE35: under [Z-PT2] +
+  the thirty-five cited window clauses, RH q ↔
+  terminalFaceCE35 q; rh_of_terminalFaceCE35 (final named
+  step — no closing supplied);
+  terminalFaceCE35_of_thetaInf (M2 lane lands at tCE35).
+  The single-rescue event recorded in the header.
+* **Frontier:** certified zeros over (g_a1, g_b35] =
+  **699,991**. Chain integrity 1→35: every seam
+  bit-identical, N_range/C_R/M constant. Fourteen clean
+  windows of thirty-five; all rescues quota-met and
+  recorded. The 175k mark is ~2-3 windows out.
+
+Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE35.
+NO RH CLAIM. (discovery 0340)
