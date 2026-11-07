@@ -3648,3 +3648,27 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
 
     No RH claim - face OPEN / PROBABLY TRUE at tCE37; wall
     UNMOVED.
+
+* **E73 (2026-11-16, 0343):**
+    * MILESTONE - 175K CROSSED: M5 WINDOW 38 CERTIFIED
+      (CLEAN - sixteenth clean window; 20,000 zeros all
+      simple and on the line; seam bit-identical) + CE38
+      GREEN 8803, full tree 17454. frontierPast175k proven
+      in-tree (tCE38 - tPT2 = 177,568 > 175,000).
+    * NEW: FIRST CASING CASE IN THE CHAIN - g_b38's frac
+      part 0.00704 < 0.01, so the two-decimal round-down
+      would equal the floor; per the documented CASING
+      rule, gB38Lo uses the THREE-decimal round-down 0.007
+      (margin ~4.07e-5, nineteen orders above the radius).
+      The re-anchoring machinery is unchanged by CASING.
+    * Round-mark sequence: 100k @ CE22 (102,801), 125k @
+      CE27 (126,165), 150k @ CE33 (154,203), 175k @ CE38
+      (177,568). Next: 200k, ~5 windows out.
+    * 759,991 certified over (g_a1, g_b38].
+    * Frontier re-anchored: tCE38 = 3,000,175,510,368
+      (tCE38 - tCE37 = 4,673, running pattern).
+    * Window 39 in flight (a39 = 12,363,154,197,121).
+
+    No RH claim - face OPEN / PROBABLY TRUE at tCE38; wall
+    UNMOVED. The 175k crossing and the CASING case are
+    certification-scale achievements, not analytic ones.

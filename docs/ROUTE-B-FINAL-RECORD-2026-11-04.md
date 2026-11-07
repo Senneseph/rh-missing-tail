@@ -3831,3 +3831,55 @@ NO RH CLAIM. (discovery 0341)
 
 Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE37.
 NO RH CLAIM. (discovery 0342)
+
+## 74 · 0343 — MILESTONE: 175K CROSSED + FIRST CASING CASE
+(2026-11-16) — WINDOW 38 + CE38
+
+* **Window 38 (in-house, seamless):** a = 12,363,154,177,121
+  (= window 37's b), b = a + 20,000 (no snap at either
+  endpoint), M = 60, C_R = 1, 33,109 evaluations in 2557.8
+  s, N_range = [691008, 691008]. Certificate
+  window38_b38.json: **b − a = 20,000 zeros, all simple and
+  on the line** in (g_a38, g_b38], g_a38 =
+  3,000,175,505,695.071915523071 ± 1.29e-26
+  (bit-identical to window 37's g_b37), g_b38 =
+  3,000,175,510,368.007040772818 ± 1.29e-26.
+* **NEW EVENT: FIRST CASING CASE IN THE CHAIN.** g_b38's
+  frac part is **0.00704 < 0.01** — the standard
+  two-decimal round-down (0.00) would equal the floor
+  tCE38 exactly, leaving no margin for the strict seam
+  order tCE38 < gB38Lo. Per the documented CASING rule:
+  **gB38Lo uses the three-decimal round-down 0.007**
+  (margin ~4.07e-5, nineteen orders of magnitude above
+  the radius 1.29e-26). The re-anchoring machinery is
+  UNCHANGED by CASING — it operates on the rational caps.
+  The convention activates exactly as predicted.
+* **CLEAN WINDOW** (sixteenth of thirty-eight): ZERO
+  Rosser exceptions.
+* **Formal (CE38.lean, GREEN 8803; full tree 17454, oolean
+  fresh):** gB38Lo := 3000175510368007/1000 (THREE-decimal
+  CASING cap), tCE38 := 3,000,175,510,368;
+  tCE38_lt_gB38Lo (the strict seam order CASING was needed
+  FOR); faceShrinkCE38 = 4673 (running pattern);
+  frontierGapAboveH0 = 177,568;
+  **frontierPast175k (NEW MILESTONE: tCE38 − tPT2 > 175,000
+  proven in-tree)**; frontierPast150k carried;
+  bandOfWindows38 (thirty-eight-way); rh_reanchored_CE38:
+  under [Z-PT2] + the thirty-eight cited window clauses, RH
+  q ↔ terminalFaceCE38 q; rh_of_terminalFaceCE38 (final
+  named step — no closing supplied);
+  terminalFaceCE38_of_thetaInf (M2 lane lands at tCE38).
+* **MILESTONE (175k crossed):** certified frontier is now
+  177,568 units above the Platt–Trudgian H0 frontier.
+  Round-mark sequence: 100k @ CE22 (102,801), 125k @ CE27
+  (126,165), 150k @ CE33 (154,203), 175k NOW @ CE38
+  (177,568). Next mark 200,000 is 22,432 units away
+  (~5 windows).
+* **Frontier:** certified zeros over (g_a1, g_b38] =
+  **759,991**. Chain integrity 1→38: every seam
+  bit-identical, N_range/C_R/M constant. Sixteen clean
+  windows of thirty-eight; all rescues quota-met and
+  recorded.
+
+Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE38.
+NO RH CLAIM. (discovery 0343)
