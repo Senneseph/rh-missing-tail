@@ -3822,3 +3822,15 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
   assumed); 224,296 above H0; **225k-mark distance 704 — the crossing is expected in w48**
   (compute the floor, never pre-announce). Cumulative certified 959,989. M2: SWall in-tree
   GREEN; wall {θ | 4/7 < θ} pinned. **NO RH CLAIM.**
+
+## E84 · 0354 — window 48 + CE48 ★ MILESTONE (225,000-unit mark CROSSED: 228,969 above H0; 979,989 certified; 960k also crossed; 3rd consecutive CLEAN)
+- **0354 (window 48 + CE48, MILESTONE UNIT):** launched correctly from b47 (a48 = 12,363,154,397,119);
+  seam audit g_a48 ≡ g_b47 exact dyadic BEFORE the module; 20,000 zeros simple+on-line (33,506
+  pts, 2574.9 s; verifier CERTIFIED/turing_ok, K_cons 12 vs K_req ≤ 11.4380); THIRD CONSECUTIVE
+  CLEAN WINDOW (0 failures/rescues) — clean tally 22 of 49; Rosser runs 48/48. CE48 GREEN 8814
+  (0 errors 0 warnings, full tree green): tCE48 = 3,000,175,561,769, gB48Lo = 300017556176982/100,
+  increment 4,673 (17th), **tCE48 − tPT2 = 228,969 > 225,000 — THE 225k MARK IS CROSSED (by 3,969),
+  proven in-tree as frontierPast225k** (as frontierPast200k was in CE42B). Round marks: 100k@CE22,
+  125k@CE27, 150k@CE33, 175k@CE38, 200k@CE42B, **225k@CE48**; next 250k is 21,031 ahead. Cumulative
+  certified 979,989 (960k mark crossed inside w48; 1M mark 20,011 ahead, crosses in w50). Honest
+  scope: a frontier record, NOT an RH statement — face open at tCE48; M2 wall pinned. **NO RH CLAIM.**

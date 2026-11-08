@@ -4322,3 +4322,53 @@ out).
 - **NO RH CLAIM.** Face open at tCE47; next unit — window 48
   (a48 = 12,363,154,397,119), the expected 225k milestone-crossing unit
   (if the floor arithmetic confirms).
+
+## 85 · 0354: window 48 + CE48 — ★ MILESTONE: the 225,000-unit mark is CROSSED (228,969 above H0, proven in-tree as frontierPast225k) — 979,989 certified (960k also crossed), 3rd consecutive CLEAN
+- **0354 (M5 LANE - WINDOW 48 + CE48, MILESTONE UNIT):** window 48
+  landed. Launch a48 = 12,363,154,397,119 (= b47), b = a + 20,000
+  (NO snap), M = 60, C_R = 1, 28 workers, N_range [691008, 691008],
+  33,506 evals, 2574.9 s.
+- **Seam audit FIRST (0348 rule):** g_a48 ≡ g_b47 exact dyadic tuple
+  [116063670219236339931915844848888957081, −85, 16777217, −110] —
+  bit-identical, before CE48 was written.
+- **THIRD CONSECUTIVE CLEAN WINDOW** (after w46, w47): 0 Rosser
+  failures / rescues / mismatches. Clean tally now 22 of 49 chain
+  windows. Rosser runs 48/48 (both ≥ K = 12).
+- **Verifier (layer 2):** CERTIFIED: true, turing_ok: true,
+  points_checked 33,506, sign_changes_inside 20,000 = b − a,
+  K_conservative 12 (K_required: Trudgian Cor2.3 [5.71899 ± 1.23e-6],
+  doubled [11.4380 ± 1.76e-5], Amberger Thm2.3 [9.14967 ± 4.14e-6] —
+  all < 12); endpoints recomputed and matched.
+- **★ THE CROSSING (machine, PROVEN in CE48):** g_b48 =
+  3,000,175,561,769.826171875000 ± 1.29e-26 — exact recorded tuple
+  [232127340800023522916592057211907166017, −86, 16777217, −110].
+  **tCE48 = 3,000,175,561,769**; tCE48 − tCE47 = 4,673 (17th
+  increment — the 4,673 pace after the one-shot 4,672 break);
+  **tCE48 − tPT2 = 228,969 > 225,000 — the 225,000-unit frontier mark
+  is CROSSED (by 3,969)**; proven in-tree as
+  `frontierPast225k : (tCE48 : ℝ) - WinC.tPT2 > 225000` (from
+  frontierGapAboveH0 = 228969, by linarith) — exactly as
+  frontierPast200k was proven in CE42B. NO CASING (two-dec round-down
+  0.82 ≠ 0.00; margin ~1.7e-3; CE38 remains the only CASING case).
+- **Round-mark sequence above H0 (each proven in-tree when crossed):**
+  100,000 @ CE22 (102,801) · 125,000 @ CE27 (126,165) · 150,000 @
+  CE33 (154,203) · 175,000 @ CE38 (177,568) · 200,000 @ CE42B
+  (200,932) · **225,000 @ CE48 (228,969)**. Next: 250,000 — 21,031
+  ahead (~4.5 windows).
+- **Cumulative certified zeros over (g_a1, g_b48] = 959,989 + 20,000 =
+  979,989 — the 960,000 mark was also crossed inside window 48.**
+  Watch: 1,000,000 certified zeros sits 20,011 ahead — it will be
+  crossed in window 50 (w49 lands at 999,989, 11 short).
+- **CE48.lean GREEN** (8,814 targeted jobs, 0 errors, 0 warnings; full
+  tree green; olean fresh): gB48Lo := 300017556176982/100;
+  ce47WinClauseFull (w47 full slice re-cited); ce48WinClause (terminal
+  slice); 49-way band; terminalFaceCE48 NAMED OPEN; iff/split/reanchor/
+  thetaInf at the new frontier.
+- **WHAT THE CROSSING IS (and is not):** a frontier record on route
+  (b) — more height certified all-on-the-line than any prior step of
+  the program — machine-proven in-tree. NOT an RH statement: all-
+  heights RH still requires the open terminal face plus one of the
+  pinned analytic doors (M2 wall {θ | 4/7 < θ} PINNED via SWall;
+  absolute clause dead as published input; θ=∞ lane conjectural).
+- **NO RH CLAIM.** Face open at tCE48; next unit — window 49
+  (a49 = 12,363,154,417,119).
