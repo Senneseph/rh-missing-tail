@@ -4414,3 +4414,49 @@ out).
 - **NO RH CLAIM.** Next unit — window 50 (a50 = 12,363,154,437,119),
   expected to carry the 1M certified-zero crossing (and, if the floor
   allows, the 250k frontier crossing).
+
+## 87 · 0356: window 50 + CE50 — ★ MILESTONE (CERTIFIED COUNT): the 1,000,000-certified-zero mark is CROSSED (1,019,989 total); 225k carried at 238,315; 5th consecutive CLEAN
+- **0356 (M5 LANE - WINDOW 50 + CE50, MILESTONE UNIT):** window 50
+  landed. Launch a50 = 12,363,154,437,119 (= b49), b = a + 20,000
+  (NO snap), M = 60, C_R = 1, 28 workers, N_range [691008, 691008],
+  33,100 evals, 2460.0 s.
+- **Seam audit FIRST (0348 rule):** g_a50 ≡ g_b49 exact dyadic tuple
+  [29015917645196795743551458640382313851, −83, 16777217, −110] —
+  bit-identical, before CE50 was written.
+- **FIFTH CONSECUTIVE CLEAN WINDOW** (after w46–w49): 0 Rosser
+  failures / rescues / mismatches. Clean tally now 24 of 51 chain
+  windows. Rosser runs 49/44 (both ≥ K = 12).
+- **Verifier (layer 2):** CERTIFIED: true, turing_ok: true,
+  points_checked 33,100, sign_changes_inside 20,000 = b − a,
+  K_conservative 12 (K_required: Trudgian Cor2.3 [5.71899 ± 1.23e-6],
+  doubled [11.4380 ± 1.76e-5], Amberger Thm2.3 [9.14967 ± 4.14e-6] —
+  all < 12); endpoints recomputed and matched.
+- **★ CERTIFIED-COUNT MILESTONE (recorded from the verified chain
+  counts — pipeline data, cited, not re-derived in-tree):**
+  cumulative over (g_a1, g_b50] = 999,989 + 20,000 =
+  **1,019,989 — the 1,000,000-certified-zero mark is CROSSED in
+  window 50.** Round marks for certified counts: 800,000 @ CE41 ·
+  900,000 @ w45 · 960,000 @ w48 · **1,000,000 @ w50 (this unit)**.
+  The first seven-figure all-on-the-line certified region in the
+  program's history.
+- **Frontier:** g_b50 = 3,000,175,571,115.696289062500 ± 1.29e-26 —
+  exact recorded tuple [116063670761562604479645262733743461387,
+  −85, 16777217, −110]. **tCE50 = 3,000,175,571,115**;
+  tCE50 − tCE49 = 4,673 (19th increment); **tCE50 − tPT2 =
+  238,315** — the 225,000-unit mark (CE48) is CARRIED, re-proven
+  in-tree as `frontierPast225k` at the new frontier; the next
+  round mark 250,000 now sits **11,685 ahead (~2.5 windows —
+  expect w52 or w53)**. NO CASING (two-dec round-down 0.69 ≠ 0.00;
+  margin ~3.1e-3; CE38 remains the only CASING case).
+- **CE50.lean GREEN** (8,816 targeted jobs, 0 errors, 0 warnings;
+  full tree green; olean fresh): gB50Lo := 300017557111569/100;
+  ce49WinClauseFull (w49 full slice re-cited); ce50WinClause
+  (terminal slice); 51-way band; terminalFaceCE50 NAMED OPEN;
+  iff/split/reanchor/thetaInf at the new frontier.
+- **WHAT THE MILESTONE IS (and is not):** a frontier record — the
+  largest all-on-the-line certified region the program has ever
+  assembled. NOT an RH statement: all-heights RH still requires the
+  open terminal face plus one of the pinned analytic doors (M2 wall
+  {θ | 4/7 < θ} PINNED via SWall; absolute clause dead as published
+  input; θ=∞ lane conjectural).
+- **NO RH CLAIM.** Next unit — window 51 (a51 = 12,363,154,457,119).

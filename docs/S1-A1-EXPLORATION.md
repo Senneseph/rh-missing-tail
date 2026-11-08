@@ -3846,3 +3846,17 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
   ahead (~3.5 windows). Cumulative certified 999,989 — **ELEVEN short of the 1,000,000 mark,
   which lands in window 50** (1,019,989 at w50's end; recorded from verified data in CE50).
   Honest scope unchanged: NO analytic move; face open at tCE49; M2 wall pinned. **NO RH CLAIM.**
+
+## E86 · 0356 — window 50 + CE50 ★ MILESTONE (CERTIFIED COUNT): 1,000,000-certified-zero mark CROSSED — 1,019,989 total
+- **0356 (window 50 + CE50, MILESTONE UNIT):** launched correctly from b49 (a50 = 12,363,154,437,119);
+  seam audit g_a50 ≡ g_b49 exact dyadic BEFORE the module; 20,000 zeros simple+on-line (33,100
+  pts, 2460.0 s; verifier CERTIFIED/turing_ok, K_cons 12 vs K_req ≤ 11.4380); FIFTH CONSECUTIVE
+  CLEAN WINDOW (0 failures/rescues) — clean tally 24 of 51; Rosser runs 49/44. CE50 GREEN 8816
+  (0 errors 0 warnings, full tree green): tCE50 = 3,000,175,571,115, gB50Lo = 300017557111569/100,
+  increment 4,673 (19th), tCE50 − tPT2 = 238,315 — the 225k CE48 crossing CARRIED (frontierPast225k
+  re-proven at the new frontier); 250k mark 11,685 ahead (~2.5 windows → expect w52/w53). THE
+  MILESTONE: cumulative certified zeros over (g_a1, g_b50] = **1,019,989 — the 1,000,000 mark is
+  CROSSED** (recorded from the verified per-window chain counts; round marks: 800k@CE41,
+  900k@w45, 960k@w48, 1M@w50) — the first seven-figure all-on-the-line certified region in the
+  program. Honest scope: a frontier record, NOT an RH statement; face open at tCE50; M2 wall
+  pinned. **NO RH CLAIM.**
