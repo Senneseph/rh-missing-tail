@@ -3834,3 +3834,15 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
   125k@CE27, 150k@CE33, 175k@CE38, 200k@CE42B, **225k@CE48**; next 250k is 21,031 ahead. Cumulative
   certified 979,989 (960k mark crossed inside w48; 1M mark 20,011 ahead, crosses in w50). Honest
   scope: a frontier record, NOT an RH statement — face open at tCE48; M2 wall pinned. **NO RH CLAIM.**
+
+## E85 · 0355 — window 49 + CE49 (225k crossing carried at 233,642; 999,989 certified = 11 short of 1M, lands in w50; 4th consecutive CLEAN)
+- **0355 (window 49 + CE49):** launched correctly from b48 (a49 = 12,363,154,417,119);
+  seam audit g_a49 ≡ g_b48 exact dyadic BEFORE the module; 20,000 zeros simple+on-line (32,784
+  pts, 2436.3 s; verifier CERTIFIED/turing_ok, K_cons 12 vs K_req ≤ 11.4380); FOURTH
+  CONSECUTIVE CLEAN WINDOW (0 failures/rescues) — clean tally 23 of 50; Rosser runs 48/50.
+  CE49 GREEN 8815 (0 errors 0 warnings, full tree green): tCE49 = 3,000,175,566,442,
+  gB49Lo = 300017556644276/100, increment 4,673 (18th), tCE49 − tPT2 = 233,642 — the 225k
+  CE48 crossing CARRIED, re-proven as frontierPast225k at the new frontier; 250k mark 16,358
+  ahead (~3.5 windows). Cumulative certified 999,989 — **ELEVEN short of the 1,000,000 mark,
+  which lands in window 50** (1,019,989 at w50's end; recorded from verified data in CE50).
+  Honest scope unchanged: NO analytic move; face open at tCE49; M2 wall pinned. **NO RH CLAIM.**

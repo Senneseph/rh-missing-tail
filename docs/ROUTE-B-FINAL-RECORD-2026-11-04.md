@@ -4372,3 +4372,45 @@ out).
   absolute clause dead as published input; θ=∞ lane conjectural).
 - **NO RH CLAIM.** Face open at tCE48; next unit — window 49
   (a49 = 12,363,154,417,119).
+
+## 86 · 0355: window 49 + CE49 — 225k crossing CARRIED at the new frontier (233,642 above H0); 999,989 certified = ELEVEN short of 1M (lands in w50); 4th consecutive CLEAN
+- **0355 (M5 LANE - WINDOW 49 + CE49):** window 49 landed.
+  Launch a49 = 12,363,154,417,119 (= b48), b = a + 20,000 (NO snap),
+  M = 60, C_R = 1, 28 workers, N_range [691008, 691008], 32,784
+  evals, 2436.3 s (fastest recent window).
+- **Seam audit FIRST (0348 rule):** g_a49 ≡ g_b48 exact dyadic tuple
+  [232127340800023522916592057211907166017, −86, 16777217, −110] —
+  bit-identical, before CE49 was written.
+- **FOURTH CONSECUTIVE CLEAN WINDOW** (after w46–w48): 0 Rosser
+  failures / rescues / mismatches. Clean tally now 23 of 50 chain
+  windows. Rosser runs 48/50 (both ≥ K = 12).
+- **Verifier (layer 2):** CERTIFIED: true, turing_ok: true,
+  points_checked 32,784, sign_changes_inside 20,000 = b − a,
+  K_conservative 12 (K_required: Trudgian Cor2.3 [5.71899 ± 1.23e-6],
+  doubled [11.4380 ± 1.76e-5], Amberger Thm2.3 [9.14967 ± 4.14e-6] —
+  all < 12); endpoints recomputed and matched.
+- **Frontier:** g_b49 = 3,000,175,566,442.761230468750 ± 1.29e-26 —
+  exact recorded tuple [29015917645196795743551458640382313851, −83,
+  16777217, −110]. **tCE49 = 3,000,175,566,442**;
+  tCE49 − tCE48 = 4,673 (18th increment — the 4,673 pace after the
+  one-shot 4,672 break); **tCE49 − tPT2 = 233,642** — the 225,000-unit
+  mark (CE48) is CARRIED, re-proven in-tree as
+  `frontierPast225k : (tCE49 : ℝ) - WinC.tPT2 > 225000`; the next
+  round mark 250,000 now sits 16,358 ahead (~3.5 windows). NO CASING
+  (two-dec round-down 0.76 ≠ 0.00; margin ~3.9e-3; CE38 remains the
+  only CASING case).
+- **Cumulative certified zeros over (g_a1, g_b49] = 979,989 + 20,000 =
+  999,989 — ELEVEN SHORT of the 1,000,000 mark: the 1M crossing
+  lands in WINDOW 50** (999,989 + 20,000 = 1,019,989 at w50's end —
+  recorded from the verified data in CE50).
+- **CE49.lean GREEN** (8,815 targeted jobs, 0 errors, 0 warnings; full
+  tree green; olean fresh): gB49Lo := 300017556644276/100;
+  ce48WinClauseFull (w48 full slice re-cited); ce49WinClause (terminal
+  slice); 50-way band; terminalFaceCE49 NAMED OPEN; iff/split/
+  reanchor/thetaInf at the new frontier.
+- **No analytic move:** the named terminal face is the same open
+  object (terminalFaceCE49); M2 wall {θ | 4/7 < θ} pinned; absolute
+  clause dead as published input; θ=∞ lane conjectural.
+- **NO RH CLAIM.** Next unit — window 50 (a50 = 12,363,154,437,119),
+  expected to carry the 1M certified-zero crossing (and, if the floor
+  allows, the 250k frontier crossing).
