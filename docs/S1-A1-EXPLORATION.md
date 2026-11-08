@@ -3924,3 +3924,21 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
   warnings, full tree green; 19 doc blocks swept, clause-doc audit OK). Certified count
   1,099,987 (full width) — **1,100,000 mark 13 short, expect w55**. Honest tally 25 of 55
   clean. NO analytic move: face open at tCE54; M2 wall pinned. **NO RH CLAIM.**
+
+## E91 · 0361 — window 55 + CE55 (THE 1,100,000 CERTIFIED-ZERO MARK LANDED: 1,119,987 total, exactly where predicted; NON-SNAPPED width 20,000, one recorded quota-met rescue with odd-width-5 union; 4,673 standing pace RESUMES; 261,679 above H0, 250k carried)
+- **0361 (window 55 + CE55 — THE 1.1M CERTIFIED-ZERO MILESTONE UNIT):** launched correctly
+  from b54 (a55 = 12,363,154,537,117); seam audit g_a55 ≡ g_b53 tuple
+  [232127342969292425709106731252692813973, −86, 16777217, −110] BEFORE the module;
+  **NON-SNAPPED (b = a + 20,000)**; 20,000 zeros simple+on-line (33,350 pts, 2471.6 s;
+  verifier CERTIFIED/turing_ok, K_cons 12); **ONE Rosser exception, RESCUED, QUOTA-MET,
+  RECORDED** ([..556,936, ..556,938] need 2 found 0, 129 pts → union [..556,934, ..556,939]
+  need 5 found 5, m = 4 — **odd union width 5**; interior — Turing step passes); g_b55 =
+  3,000,175,594,479.904785156250 ± 1.29e-26 (tuple [..87921, −83, ..]), frac 0.9048,
+  no CASING (margin ~4.8e-3). **tCE55 = 3,000,175,594,479; increment 4,673 — THE STANDING
+  PACE RESUMES** (the two 4,672's remain isolated); **tCE55 − tPT2 = 261,679 — 250k
+  CARRIED** (frontierPast250k re-proven; 275k 13,321 ahead, expect w59). CE55 GREEN
+  (8,821 targeted, 0 errors 0 warnings, full tree green; 19 doc blocks swept,
+  clause-doc audit OK). **Certified count 1,099,987 + 20,000 = 1,119,987 — THE 1,100,000
+  MARK LANDED (13 short at w54's end, exactly where predicted)**; next 1.2M 80,013 ahead
+  (~w59/60). Honest tally 26 of 56 clean. NO analytic move: face open at tCE55; M2 wall
+  pinned. **NO RH CLAIM.**
