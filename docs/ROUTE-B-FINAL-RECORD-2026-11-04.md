@@ -4634,3 +4634,54 @@ out).
   lane conjectural.
 - **NO RH CLAIM.** Next unit — window 54 (a54 = 12,363,154,517,117);
   the 275,000-unit mark is 22,666 ahead (expect w59 or w60).
+
+## 91 · 0360: window 54 + CE54 — NON-SNAPPED (width 20,000), one recorded quota-met Rosser rescue; THE 4,672 INCREMENT RECURS (the w45/w46 one-shot anomaly — second occurrence, no pattern claimed); tCE54 = 257,006 above H0 (250k milestone CARRIED, frontierPast250k re-proven); certified 1,099,987 (1.1M mark 13 short — expect w55)
+- **0360 (M5 LANE - WINDOW 54 + CE54).**
+  Launch a54 = 12,363,154,517,117 (= b53), b requested = a + 20,000 =
+  12,363,154,537,117, **b ACTUAL = 12,363,154,537,117 — NON-SNAPPED**
+  (width 20,000). M = 60, C_R = 1, 28 workers, N_range [691008, 691008],
+  33,606 evals, 2559.1 s.
+- **Seam audit FIRST (0348 rule):** g_a54 ≡ g_b53 exact dyadic
+  tuple [29015917825967697847748600342133254453, −83, 16777217, −110]
+  — bit-identical, BEFORE CE54 was written.
+- **ONE ROSSER-BLOCK EXCEPTION, RESCUED, QUOTA-MET, RECORDED:**
+  [12,363,154,518,280, 12,363,154,518,282] (need 2, found 0, 129 pts,
+  m = 64) → union [12,363,154,518,279, 12,363,154,518,283] (need 4,
+  **found 4**, m = 4). INTERIOR — the verifier's recompute of the
+  WINDOW TOTAL (20,000) and END RUNS (48/49) — the only quantities in
+  the Turing step — passes.
+- **Verifier (layer 2):** CERTIFIED: true, turing_ok: true,
+  points_checked 33,606, sign_changes_inside 20,000 = b − a,
+  roesser_failures_inside 1 (the recorded rescue), Rosser runs 48/49,
+  K_conservative 12 (K_required all < 12; identical to w53 — same
+  N_range); endpoints recomputed and matched.
+- **INCREMENTS: 4,672 — THE RECURRING ANOMALY.** g_b54 =
+  3,000,175,589,806.969726562500 ± 1.29e-26 — exact tuple
+  [232127342969292425709106731252692813973, −86, 16777217, −110].
+  **tCE54 = 3,000,175,589,806**; **tCE54 − tCE53 = 4,672** — the
+  w45/w46 one-shot 4,672 anomaly RECURS (second 4,672 in the chain;
+  the other twenty corrected-chain increments are 4,673); no pattern
+  assumed, recorded honestly. **tCE54 − tPT2 = 257,006** — the 250k
+  MILESTONE (CE53, 252,334) is CARRIED, re-proven in-tree
+  (`frontierPast250k`); next round mark 275k sits 17,994 ahead
+  (expect w58 or w59). NO CASING (two-dec round-down 0.96 ≠ 0.00;
+  margin ~9.7e-3).
+- **CE54.lean GREEN** (8,820 targeted jobs, 0 errors, 0 warnings;
+  full tree green; olean fresh): gB54Lo := 300017558980696/100;
+  faceShrinkCE54 = 4672; frontierGapAboveH0 = 257006; all four
+  milestone-carry theorems re-proven; ce53WinClauseFull (w53 full
+  slice re-cited); ce54WinClause (terminal slice, documented); 55-way
+  band; terminalFaceCE54 NAMED OPEN. All 19 declaration doc blocks
+  swept to CE54-correct text; clause-doc audit passes.
+- **Certified count (pipeline data, machine-tracked):** 1,079,987 +
+  20,000 = **1,099,987** over (g_a1, g_b54] (full width). The 1M mark
+  (w50) is carried; the **1,100,000 mark is now 13 short — expect w55**.
+- **Honest tally:** 25 of 55 chain windows clean; rescue windows 7,
+  21, 28, 29, 34, 37, 42, 43, 44 (one each), 45 (two), 51 (one), 52
+  (two), 53 (three), 54 (one) — all quota-met, none suppressed.
+- **NO analytic move:** face open at tCE54; M2 wall {θ | 4/7 < θ}
+  pinned via SWall; absolute clause dead as published input; θ=∞
+  lane conjectural.
+- **NO RH CLAIM.** Next unit — window 55 (a55 = 12,363,154,537,117);
+  the 1,100,000-certified-zero mark is 13 short (expect w55); the
+  275,000-unit mark is 17,994 ahead (expect w58 or w59).

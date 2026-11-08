@@ -3908,3 +3908,19 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
   1M mark carried). Doc-provenance repair in CE52/CE53 (stale WINDOW-50 full-slice attributions) —
   theorem content never affected, both re-built GREEN. Honest tally 24 of 54 clean. NO analytic
   move: face open at tCE53; M2 wall pinned. **NO RH CLAIM.**
+
+## E90 · 0360 — window 54 + CE54 (NON-SNAPPED width 20,000; ONE recorded quota-met Rosser rescue; THE 4,672 INCREMENT RECURS — second occurrence, no pattern claimed; 250k milestone CARRIED: 257,006 above H0; certified 1,099,987 — 1.1M mark 13 short, expect w55)
+- **0360 (window 54 + CE54):** launched correctly from b53 (a54 = 12,363,154,517,117);
+  seam audit g_a54 ≡ g_b53 tuple [29015917825967697847748600342133254453, −83, 16777217,
+  −110] BEFORE the module; **NON-SNAPPED (b = a + 20,000)**; 20,000 zeros simple+on-line
+  (33,606 pts, 2559.1 s; verifier CERTIFIED/turing_ok, K_cons 12); **ONE Rosser exception,
+  RESCUED, QUOTA-MET, RECORDED** ([..518,280, ..518,282] need 2 found 0, 129 pts → union
+  [..518,279, ..518,283] need 4 found 4, m = 4; interior — Turing step passes); g_b54 =
+  3,000,175,589,806.969726562500 ± 1.29e-26 (tuple [..96973, −86, ..]), frac 0.9697, no
+  CASING (margin ~9.7e-3). **tCE54 = 3,000,175,589,806; increment 4,672 — THE w45/w46
+  ONE-SHOT ANOMALY RECURS** (second 4,672; other twenty increments 4,673; no pattern
+  assumed); **tCE54 − tPT2 = 257,006 — 250k CARRIED** (frontierPast250k re-proven; next
+  mark 275k 17,994 ahead, expect w58/w59). CE54 GREEN (8,820 targeted, 0 errors 0
+  warnings, full tree green; 19 doc blocks swept, clause-doc audit OK). Certified count
+  1,099,987 (full width) — **1,100,000 mark 13 short, expect w55**. Honest tally 25 of 55
+  clean. NO analytic move: face open at tCE54; M2 wall pinned. **NO RH CLAIM.**
