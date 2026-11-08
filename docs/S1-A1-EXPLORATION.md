@@ -3773,3 +3773,15 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
   17454): tCE44 = 3,000,175,543,078, shrink 4,673 (13th consecutive), 210,278 above
   H0 (200k carried); corrected chain w1..w42,w42b,w43,w44 seamless. Cumulative
   certified 899,989. Wall pinned; face open at tCE44. **NO RH CLAIM.**
+
+## E80 · 0350 — the M2 wall literature audit (2025-grade primary sources; no movement)
+- **0350 (M2 LANE - WALL AUDIT):** pulled Conrey's book (1407.4358 §VIII),
+  CCM (1309.1526 / Math. Ann. 356 (2013)), Inoue (1904.11051; 2510.14309),
+  Tsang 1986 (via the citation). Findings: S UNBOUNDED unconditionally
+  (Selberg 1946 mean-square, verbatim); best RH upper bound DIVERGES
+  ((1/4+o(1)) log/loglog, CCM Thm 2); best RH Ω GROWS
+  ((log t log log log t)/(log log t), Inoue/Bondarenko-Seip); ΔΩ unconditional
+  (Tsang) and under RH (Inoue 2025). Verdict: Door 1 (absolute |S(zero)| ≤ K)
+  DEAD as a published input (E19 gap exact: no at-zeros Ω found); Door 2
+  (growth, 4/7 wall) ALIVE + PINNED; Door 3 (θ=∞) ALIVE + conjectural. Wall
+  UNMOVED; face open at tCE44. **NO RH CLAIM.**

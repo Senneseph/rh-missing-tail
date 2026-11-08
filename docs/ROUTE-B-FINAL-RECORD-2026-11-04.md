@@ -4149,3 +4149,50 @@ recorded); snaps at 2,3,8,11,17,18,19,21,31,40; CASING only at 38. Next (in
 flight): window 45 (a45 = 12,363,154,357,119) → seam first → CE45. Wall
 {θ | 4/7 < θ} pinned; active lanes M5 + the queued M2 wall literature audit.
 **No RH claim.**
+
+## 81 · 0350 (M2 LANE): the wall's literature audit — 2025-grade primary sources
+
+**Question answered:** can published analysis close the terminal face?
+**Method:** primary-source pull on the S-function (argument of ζ on the line):
+Conrey's book (arXiv:1407.4358, §VIII), Carneiro–Chandee–Milinovich
+(arXiv:1309.1526 / Math. Ann. 356 (2013)), Inoue (arXiv:1904.11051,
+arXiv:2510.14309), Tsang (Acta Arith. 46 (1986), as cited in 2510.14309).
+
+**Findings (verbatim-level citations in the entry):**
+1. **S is unbounded — unconditional, classical.** Conrey §VIII verbatim:
+   *"It is known that S(y) is unbounded … The roughest estimate is the known
+   fact that S(y) = O(log y) … not written explicitly in Riemann's paper, but
+   only later by von Mangoldt."* The clean derivation: Selberg (1946)
+   mean-square *(1/T)∫₀ᵀ S(y)² dy = (2π²)⁻¹ log log T + O(√log log T)*
+   (same section, verbatim) — divergent mean square ⇒ limsup |S| = ∞,
+   unconditionally.
+2. **Best published upper bound (under RH) DIVERGES:** CCM 2013 Thm 2:
+   |S(t)| ≤ (1/4+o(1))·log t/log log t (improves Goldston–Gonek's 1/2;
+   Conrey §VIII: *"these are upper bounds, and S(y) may actually be much
+   smaller"*). No finite-constant upper bound is published anywhere.
+3. **Best published Ω (under RH) GROWS:** Inoue 1904.11051:
+   S(t) = Ω±((log t·log log log t)/(log log t)) — improves Montgomery,
+   matches Bondarenko–Seip. Under RH the published oscillation band OPENS.
+4. **Short-interval ΔΩ:** unconditional sup ±(S(t+h)−S(t)) ≥ c(h log T)^{1/3}
+   (Tsang 1986); under RH sup ± ≥ (1−E)√(h log T/π) (Inoue 2510.14309 Thm 1).
+
+**Verdict for the program — no movement, now fully cited:**
+- **Door 1 (absolute clause G-hs1/A1: uniform finite |S(zero)| ≤ K):**
+  DEAD as a published input — no published theorem supplies it (F1,
+  re-confirmed against 2013/2018/2021/2023/2025 sources), and every
+  published upper bound DIVERGES. The E19 gap stands exactly: no published
+  at-zeros Ω appeared in the sources pulled, so |S(γₙ)| ≤ K is NOT A LIVE
+  PUBLISHED THEOREM and NOT YET REFUTED BY PUBLISHED ANALYSIS —
+  "under pressure — not refuted," unchanged, with the full 2025 citation
+  record.
+- **Door 2 (quantitative growth, the {θ | θ < 4/7} Levinson/PRZZ wall):**
+  ALIVE, **PINNED at 4/7** (0310–0312) — the only analytic path; the audit
+  found no source past 4/7.
+- **Door 3 (θ = ∞ conjecture lane, ThetaInf/0290):** ALIVE, **conjectural by
+  nature** (Bettin–Gonek Theorem 1 + Farmer's conjecture; no 2025 fragment
+  past any fixed bound found).
+
+The three named doors (0289 face-menu) are the whole menu; the wall is
+UNMOVED; the face at tCE44 (210,278 above H0) remains OPEN. **NO RH CLAIM.**
+Active lane remains M5 (window 45 in flight at audit time; 225k ~3 windows
+out).
