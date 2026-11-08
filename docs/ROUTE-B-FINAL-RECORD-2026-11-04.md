@@ -3924,3 +3924,43 @@ NO RH CLAIM. (discovery 0343)
 Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE39.
 NO RH CLAIM — the 200k mark is ~4 windows out.
 (discovery 0344)
+
+## 76 · 0345 — MILESTONE: 40TH WINDOW + FIRST SNAP-BY-2
+(2026-11-16) — WINDOW 40 + CE40
+
+* **Window 40 (in-house, seamless):** a = 12,363,154,217,121
+  (= window 39's b, seamless). Requested b = a + 20,000 =
+  12,363,154,237,121 was NOT a good Gram point at working
+  precision → **pipeline snapped b DOWN BY 2** to
+  b = 12,363,154,237,119 (good Gram point). **b − a =
+  19,998 — FIRST 19,998-WIDTH WINDOW OF THE CHAIN** (all
+  nine prior snaps were by exactly 1 → 19,999-width).
+  M = 60, C_R = 1, 34,546 evaluations in 2721.1 s,
+  N_range = [691008, 691008].
+* **Certificate (window40_b40.json): b − a = 19,998 zeros,
+  all simple and on the line** in (g_a40, g_b40]. g_a40 =
+  3,000,175,515,040.942165751912 ± 1.29e-26 (bit-identical
+  to window 39's g_b39); g_b40 = 3,000,175,519,713.
+  409996947896 ± 1.29e-26 (frac 0.4100 — standard
+  two-decimal bound, no CASING).
+* **CLEAN WINDOW** (seventeenth of forty): ZERO Rosser
+  exceptions.
+* **Formal (CE40.lean, GREEN 8805; full tree 17454, olean
+  fresh):** gB40Lo := 300017551971340/100, tCE40 :=
+  3,000,175,519,713; faceShrinkCE40 = 4673 (running
+  pattern restored after window 39's 4,672 variant);
+  frontierGapAboveH0 = 186,913; bandOfWindows40
+  (forty-way); rh_reanchored_CE40: under [Z-PT2] + the
+  forty cited window clauses, RH q ↔ terminalFaceCE40 q;
+  rh_of_terminalFaceCE40 (final named step — no closing
+  supplied); terminalFaceCE40_of_thetaInf (M2 lane lands
+  at tCE40). The snap-by-2 event recorded in the header.
+* **Chain integrity 1→40:** every seam bit-identical,
+  N_range/C_R/M constant. Seventeen clean windows of
+  forty. Window 41 in flight from the SNAPPED b (a41 =
+  12,363,154,237,119) — seamless continuation.
+
+Window 41 a41 = 12,363,154,237,119 (the snapped b of
+window 40) — in flight. 200k mark ~3 windows out; 800k
+mark ~1 window out. NO RH CLAIM — wall UNMOVED at 4/7,
+face OPEN at tCE40. (discovery 0345)

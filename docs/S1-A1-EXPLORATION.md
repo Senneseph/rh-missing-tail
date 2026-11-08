@@ -3690,3 +3690,27 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
 
     No RH claim - face OPEN / PROBABLY TRUE at tCE39; wall
     UNMOVED.
+
+* **E75 (2026-11-16, 0345):**
+    * MILESTONE - 40TH WINDOW: M5 WINDOW 40 CERTIFIED
+      (b - a = 19,998 zeros, all simple and on the line;
+      seam bit-identical; CLEAN window) + CE40 GREEN
+      8805, full tree 17454.
+    * NEW EVENT: **FIRST SNAP BY 2** (first 19,998-width
+      window) — requested b was not a good Gram point,
+      pipeline snapped b down by 2. This extends the
+      documented "snap the final b downward" convention:
+      it can snap by more than 1. The window total is
+      still the certified quantity. The chain remains
+      seamless: window 41 starts from the snapped b.
+    * 799,989 certified over (g_a1, g_b40] — within 11 of
+      the 800,000 mark.
+    * Frontier re-anchored: tCE40 = 3,000,175,519,713
+      (tCE40 - tCE39 = 4,673, running pattern restored;
+      186,913 above H0; 200k mark ~3 windows out).
+    * Window 41 in flight (a41 = 12,363,154,237,119 =
+      the snapped b of window 40).
+
+    No RH claim - face OPEN / PROBABLY TRUE at tCE40; wall
+    UNMOVED. The 40th window is a certification-scale
+    achievement, not an analytic one.
