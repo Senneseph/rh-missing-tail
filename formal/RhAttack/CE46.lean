@@ -175,8 +175,8 @@ namespace CE46
 def gB46Lo : ℚ := 300017555242395 / 100
 
 /-- THE  NEW  CERTIFIED  CENSUS  FRONTIER:  an  integer  strictly
-    below  the  certified  lower  bound  gB45Lo:
-    tCE45  =  3 000 175 547 751.  -/
+    below  the  certified  lower  bound  gB46Lo:
+    tCE46  =  3 000 175 552 423.  -/
 def tCE46 : ℕ := 3000175552423
 
 theorem tCE46_lt_gB46Lo : (tCE46 : ℝ) < (gB46Lo : ℝ) := by

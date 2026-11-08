@@ -4284,3 +4284,41 @@ out).
   {θ | 4/7 < θ} PINNED; no new external analytic inputs.
 - **NO RH CLAIM.** Face open at tCE46; next unit — window 47
   (a47 = 12,363,154,377,119), where the 225k crossing is expected.
+
+## 84 · 0353: window 47 + CE47 — 224,296 above H0 (225k now just 704 out — crossing expected in w48), 959,989 certified, 2nd consecutive CLEAN
+- **0353 (M5 LANE - WINDOW 47 + CE47):** window 47 landed. Launch a47 =
+  12,363,154,377,119 (= b46), b = a + 20,000 (NO snap), M = 60, C_R = 1,
+  28 workers, N_range [691008, 691008], 33,302 evals, 2511.2 s.
+- **Seam audit FIRST (0348 rule):** g_a47 ≡ g_b46 exact dyadic tuple
+  [232127340076921836790130566544415780883, −86, 16777217, −110] —
+  bit-identical, before CE47 was written.
+- **SECOND CONSECUTIVE CLEAN WINDOW:** 0 Rosser failures / rescues /
+  cross-check failures / Gram mismatches. Clean tally now 21 of 48 chain
+  windows. Rosser runs 48/47 (both ≥ K = 12).
+- **Verifier (layer 2):** CERTIFIED: true, turing_ok: true,
+  points_checked 33,302, sign_changes_inside 20,000 = b − a,
+  K_conservative 12 (K_required: Trudgian Cor2.3 [5.71899 ± 1.23e-6],
+  doubled [11.4380 ± 1.76e-5], Amberger Thm2.3 [9.14967 ± 4.14e-6] —
+  all < 12); endpoints recomputed and matched.
+- **Frontier (machine, in CE47):** g_b47 = 3,000,175,557,096.891113281250
+  ± 1.29e-26 — exact recorded tuple
+  [116063670219236339931915844848888957081, −85, 16777217, −110].
+  **tCE47 = 3,000,175,557,096**; tCE47 − tCE46 = **4,673** — the 16th
+  increment: the 4,673 RESUME after the 4,672 break of w45→46 (spacings
+  wobble by units; no periodicity assumed). tCE47 − tPT2 = **224,296**;
+  **225k mark now only 704 ahead (~1/7 window) — crossing expected in
+  w48; compute the floor, do not pre-announce.** NO CASING (two-dec
+  round-down 0.89 ≠ 0.00; margin ~1.1e-3; CE38 remains the only CASING
+  case).
+- **Cumulative certified zeros over (g_a1, g_b47] = 939,989 + 20,000 =
+  959,989.**
+- **CE47.lean GREEN** (8,813 targeted jobs, 0 errors, 0 warnings; full
+  tree green; olean fresh): gB47Lo := 300017555709689/100;
+  ce46WinClauseFull (w46 full slice re-cited); ce47WinClause (terminal
+  slice); 48-way band; terminalFaceCE47 NAMED OPEN; iff/split/reanchor/
+  thetaInf at the new frontier; machine facts incl. faceShrinkCE47 = 4673
+  and frontierGapAboveH0 = 224296.
+- **M2:** SWall GREEN in the same tree; wall {θ | 4/7 < θ} PINNED.
+- **NO RH CLAIM.** Face open at tCE47; next unit — window 48
+  (a48 = 12,363,154,397,119), the expected 225k milestone-crossing unit
+  (if the floor arithmetic confirms).

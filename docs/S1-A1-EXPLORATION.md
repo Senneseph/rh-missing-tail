@@ -3811,3 +3811,14 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
   stretch** (recorded honestly; no periodicity assumed), endpoint high in unit (frac 0.9561);
   219,623 above H0; 225k-mark distance 5,377 (crossing expected in w47 — compute, don't assume).
   Cumulative certified 939,989. M2: SWall in-tree GREEN; wall {θ | 4/7 < θ} pinned. **NO RH CLAIM.**
+
+## E83 · 0353 — window 47 + CE47 (224,296 above H0; 959,989 certified; 2nd consecutive CLEAN; 225k just 704 out)
+- **0353 (window 47 + CE47):** launched correctly from b46 (a47 = 12,363,154,377,119); seam audit
+  g_a47 ≡ g_b46 exact dyadic BEFORE the module; 20,000 zeros simple+on-line (33,302 pts, 2511.2 s;
+  verifier CERTIFIED/turing_ok, K_cons 12 vs K_req ≤ 11.4380); SECOND CONSECUTIVE CLEAN WINDOW
+  (0 failures/rescues) — clean tally 21 of 48; Rosser runs 48/47. CE47 GREEN 8813, 0 errors 0
+  warnings (full tree green): tCE47 = 3,000,175,557,096, gB47Lo = 300017555709689/100,
+  **increment 4,673 — the resume after the 4,672 break** (wobble, not periodic; no pattern
+  assumed); 224,296 above H0; **225k-mark distance 704 — the crossing is expected in w48**
+  (compute the floor, never pre-announce). Cumulative certified 959,989. M2: SWall in-tree
+  GREEN; wall {θ | 4/7 < θ} pinned. **NO RH CLAIM.**
