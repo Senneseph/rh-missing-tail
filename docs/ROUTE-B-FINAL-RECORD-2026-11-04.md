@@ -4240,3 +4240,47 @@ out).
   logDivLoglog_eventuallyAbove). Wall {θ | 4/7 < θ} stays PINNED.
 - **NO RH CLAIM.** Face open at tCE45; next unit — window 46
   (a46 = 12,363,154,357,119).
+
+## 83 · 0352: window 46 + CE46 — 219,623 above H0 (225k now 5,377 out — crossing expected in w47), 939,989 certified, CLEAN window
+- **0352 (M5 LANE - WINDOW 46 + CE46):** window 46 landed. Launch a46 =
+  12,363,154,357,119 (= b45, launched correctly from the chain frontier),
+  b = a + 20,000 (NO snap), M = 60, C_R = 1, 28 workers, N_range
+  [691008, 691008], 33,356 evals, 2518.0 s.
+- **Seam audit FIRST (0348 rule):** g_a46 ≡ g_b45 exact dyadic tuple
+  [58031834928842748423872171928891447925, −84, 16777217, −110] —
+  bit-identical, before CE46 was written.
+- **CLEAN WINDOW** (first after the w45 double-rescue): 0 Rosser failures,
+  0 rescues, 0 cross-check failures, 0 Gram mismatches, 0 undetermined
+  signs. Clean tally now **20 of 47** chain windows; rescue list unchanged
+  (7, 21, 28, 29, 34, 37, 42, 43, 44 one each; 45 has two). Rosser runs
+  47/45 (both ≥ K = 12).
+- **Verifier (layer 2):** CERTIFIED: true, turing_ok: true,
+  points_checked 33,356, sign_changes_inside 20,000 = b − a,
+  K_conservative 12 (K_required: Trudgian Cor2.3 [5.71899 ± 1.23e-6],
+  doubled [11.4380 ± 1.76e-5], Amberger Thm2.3 [9.14967 ± 4.14e-6] —
+  all < 12); endpoints recomputed and matched (g_b recomputed
+  [3,000,175,552,423.955862328893 ± 1.86e-13]).
+- **Frontier (machine, in CE46):** g_b46 = 3,000,175,552,423.956054687500
+  ± 1.29e-26 — exact recorded tuple
+  **[232127340076921836790130566544415780883, −86, 16777217, −110]**.
+  Endpoint is HIGH in its unit (fractional 0.9561; next integer only
+  0.0439 above) — floor robust to 1.29e-26 by orders of magnitude.
+  **tCE46 = 3,000,175,552,423**; tCE46 − tCE45 = **4,672** — the 15th
+  increment, and the **4,673 stretch of FOURTEEN consecutive shrinks ENDS
+  HERE** (Gram spacings not exactly periodic; recorded honestly).
+  tCE46 − tPT2 = **219,623**; 200k mark carried; **225k mark 5,377 ahead
+  (~1.15 windows) — crossing expected in w47, compute don't assume**. NO
+  CASING (two-dec round-down 0.95 ≠ 0.00; margin ~6.1e-3; CE38 remains
+  the only CASING case).
+- **Cumulative certified zeros over (g_a1, g_b46] = 919,989 + 20,000 =
+  939,989.**
+- **CE46.lean GREEN** (8,812 targeted jobs; full tree green; olean fresh):
+  gB46Lo := 300017555242395/100; ce45WinClauseFull (w45 full slice
+  re-cited); ce46WinClause (terminal slice); 47-way band;
+  terminalFaceCE46 NAMED OPEN; iff/split/reanchor/thetaInf at the new
+  frontier; machine facts incl. faceShrinkCE46 = 4672 and
+  frontierGapAboveH0 = 219623.
+- **M2:** SWall.lean (0350 audit in-tree) GREEN in the same tree; wall
+  {θ | 4/7 < θ} PINNED; no new external analytic inputs.
+- **NO RH CLAIM.** Face open at tCE46; next unit — window 47
+  (a47 = 12,363,154,377,119), where the 225k crossing is expected.

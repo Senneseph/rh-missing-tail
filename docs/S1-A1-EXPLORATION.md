@@ -3800,3 +3800,14 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
   GREEN 8706 — the 0350 wall audit formalized in-tree (cited Props +
   LEAN-PROVEN consequences; upperRH_bound_diverges proves the CCM 13/50 bound
   diverges). Wall {θ | 4/7 < θ} pinned; face open at tCE45. **NO RH CLAIM.**
+
+## E82 · 0352 — window 46 + CE46 (219,623 above H0; 939,989 certified; CLEAN window; 225k ~1 window out)
+- **0352 (window 46 + CE46):** launched correctly from b45 (a46 = 12,363,154,357,119;
+  the 0348 lesson held, no correction needed this time); seam audit g_a46 ≡ g_b45 exact dyadic
+  BEFORE the module; 20,000 zeros simple+on-line (33,356 pts, 2518.0 s; verifier CERTIFIED/
+  turing_ok, K_cons 12 vs K_req ≤ 11.4380); CLEAN WINDOW (0 failures / 0 rescues) — clean tally
+  20 of 47; Rosser runs 47/45. CE46 GREEN 8812 (full tree green): tCE46 = 3,000,175,552,423,
+  gB46Lo = 300017555242395/100, **shrink 4,672 — the 15th increment BREAKS the 14-long 4,673
+  stretch** (recorded honestly; no periodicity assumed), endpoint high in unit (frac 0.9561);
+  219,623 above H0; 225k-mark distance 5,377 (crossing expected in w47 — compute, don't assume).
+  Cumulative certified 939,989. M2: SWall in-tree GREEN; wall {θ | 4/7 < θ} pinned. **NO RH CLAIM.**
