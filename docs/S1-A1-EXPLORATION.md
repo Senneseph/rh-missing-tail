@@ -3785,3 +3785,18 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
   DEAD as a published input (E19 gap exact: no at-zeros Ω found); Door 2
   (growth, 4/7 wall) ALIVE + PINNED; Door 3 (θ=∞) ALIVE + conjectural. Wall
   UNMOVED; face open at tCE44. **NO RH CLAIM.**
+
+## E81 · 0351 — window 45 + CE45 (214,951 above H0; 919,989 certified; 900k crossed; 225k ~2 windows out)
+- **0351 (window 45 + CE45):** launched correctly from b44 (a45 = 12,363,154,337,119;
+  the earlier "a45 = 357,119" status line was b45 mislabeled — typo recorded in
+  the CE45 header); seam audit g_a45 ≡ g_b44 exact dyadic BEFORE the module;
+  20,000 zeros simple+on-line (33,537 pts, verifier CERTIFIED/turing_ok, K_cons
+  12 vs K_req ≤ 11.4380); FIRST DOUBLE-RESCUE WINDOW: two quota-met union
+  rescues ([..354,108,..354,113] need 5 = found 5 m 2; [..355,776,..355,780]
+  need 4 = found 4 m 8); Rosser runs 46/47. CE45 GREEN 8811 (full tree green):
+  tCE45 = 3,000,175,547,751, gB45Lo = 300017554775102/100, shrink 4,673
+  (14th consecutive), 214,951 above H0, 25k-mark distance 10,049. Cumulative
+  certified 919,989 — 900,000 mark crossed inside w45. Same unit: SWall.lean
+  GREEN 8706 — the 0350 wall audit formalized in-tree (cited Props +
+  LEAN-PROVEN consequences; upperRH_bound_diverges proves the CCM 13/50 bound
+  diverges). Wall {θ | 4/7 < θ} pinned; face open at tCE45. **NO RH CLAIM.**

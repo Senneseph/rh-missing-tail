@@ -4196,3 +4196,47 @@ The three named doors (0289 face-menu) are the whole menu; the wall is
 UNMOVED; the face at tCE44 (210,278 above H0) remains OPEN. **NO RH CLAIM.**
 Active lane remains M5 (window 45 in flight at audit time; 225k ~3 windows
 out).
+
+## 82 · 0351: window 45 + CE45 — 214,951 above H0 (225k now 10,049 out, ~2 windows), 919,989 certified (900k mark crossed inside w45)
+- **0351 (M5 LANE - WINDOW 45 + CE45):** window 45 landed. Launch a45 =
+  12,363,154,337,119 (= b44; an earlier status draft's "a45 = 357,119" was a
+  typo — 357,119 is b45), b = a + 20,000 (NO snap), M = 60, C_R = 1, 28
+  workers, N_range [691008, 691008], 33,537 evals, 2568.6 s.
+- **Seam audit FIRST (0348 rule):** g_a45 ≡ g_b44 exact dyadic tuple
+  [116063669676910075289953026587486486005, −85, 16777217, −110] —
+  bit-identical, before CE45 was written.
+- **Two quota-met Rosser rescues — first double-rescue window of the
+  chain:** block [..354,109,..354,111] (need 2, 0 changes @129 pts, m = 64)
+  → union [..354,108,..354,113], need 5 = found 5, m = 2; block
+  [..355,777,..355,779] (same raw shape) → union [..355,776,..355,780],
+  need 4 = found 4, m = 8. Displaced in-window; total unchanged; recorded,
+  not suppressed. Rosser runs 46/47 (both ≥ K = 12); 0 cross-check
+  failures; 0 undetermined Gram signs.
+- **Verifier (layer 2):** CERTIFIED: true, points_checked 33,537,
+  sign_changes_inside 20,000 = b − a, turing_ok: true, K_conservative 12
+  (K_required: Trudgian Cor2.3 [5.71899 ± 1.23e-6], doubled [11.4380 ±
+  1.76e-5], Amberger Thm2.3 [9.14967 ± 4.14e-6] — all < 12); endpoints
+  recomputed and matched. Layer 3 = the seam audit above. Layer 1 = the
+  environment repeat (CE2 header). Re-run of a third-party pipeline, not a
+  from-scratch certification.
+- **Frontier (machine, in CE45):** g_b45 = 3,000,175,547,751.020507812500 ±
+  1.29e-26 (dyadic: 58031834928842748423872171928891447925 × 2^−84 ±
+  16777217 × 2^−110). **tCE45 = 3,000,175,547,751**; tCE45 − tCE44 = **4,673**
+  (14th consecutive 4,673 shrink); tCE45 − tPT2 = **214,951**; 200k mark
+  carried (crossed at CE42B fill); **225k mark now 10,049 ahead (~2
+  windows)** — watch the floor arithmetic, do not assume. NO CASING (two-
+  decimal round-down 0.02 ≠ 0.00; CE38 remains the only CASING case).
+- **Cumulative certified zeros over (g_a1, g_b45] = 899,989 + 20,000 =
+  919,989 — the 900,000 mark was crossed inside window 45.**
+- **CE45.lean GREEN** (8,811 targeted jobs; full tree green; olean fresh):
+  gB45Lo := 300017554775102/100 (margin ~5.1e-4); ce44WinClauseFull
+  (w44 full slice re-cited); ce45WinClause (terminal slice); band of 46
+  clauses; terminalFaceCE45 NAMED OPEN; iff/split/reanchor/thetaInf all at
+  the new frontier; machine facts incl. frontierGapAboveH0 = 214,951.
+- **M2 side note in the same unit:** SWall.lean GREEN (8,706 jobs) — the
+  0350 audit is now an in-tree Lean unit (cited Props + LEAN-PROVEN
+  consequences: noUniformAllT_of_citedUnbounded, noUniformAllT_of_RHOmega,
+  upperRH_bound_diverges, atZeroUnbounded_kills_uniformZeros; workhorse
+  logDivLoglog_eventuallyAbove). Wall {θ | 4/7 < θ} stays PINNED.
+- **NO RH CLAIM.** Face open at tCE45; next unit — window 46
+  (a46 = 12,363,154,357,119).
