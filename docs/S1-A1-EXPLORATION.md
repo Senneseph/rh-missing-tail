@@ -3763,3 +3763,13 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
   rescue recorded). Cumulative certified: **879,989**. The audit is the lane's
   load-bearing safety net — and it demonstrably caught a real launch error.
   Wall {θ | 4/7 < θ} pinned; face open at tCE43. **NO RH CLAIM.**
+
+## E79 · 0349 — window 44 + CE44 (210,278 above H0; 899,989 certified; 225k ~3 windows out)
+- **0349 (window 44 + CE44):** w44 launched from b43 correctly (the 0348 rule
+  held), seam audit passed BEFORE the module (g_a44 ≡ g_b43 exact dyadic), 20,000
+  zeros simple+on-line (33,953 pts, verifier CERTIFIED, runs 46/48), ONE quota-met
+  rescue ([..324,338,..324,340] → union [..324,337,..324,341], need 4 = found 4,
+  m = 4; first two-in-a-row rescue stretch since w28/w29). CE44 GREEN 8810 (full
+  17454): tCE44 = 3,000,175,543,078, shrink 4,673 (13th consecutive), 210,278 above
+  H0 (200k carried); corrected chain w1..w42,w42b,w43,w44 seamless. Cumulative
+  certified 899,989. Wall pinned; face open at tCE44. **NO RH CLAIM.**

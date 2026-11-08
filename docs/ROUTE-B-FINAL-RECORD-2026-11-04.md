@@ -4107,3 +4107,45 @@ region and is re-anchored in its corrected position.
 - Next (in flight): window 44 (a44 = 12,363,154,337,119 … requested b44 = a44 +
   20000) → seam audit first → CE44. The analytic wall {θ | 4/7 < θ} remains
   pinned; the active lane remains M5 certification. **No RH claim.**
+
+## 80 · 0349: window 44 + CE44 — 210,278 above H0 (225k ~3 windows out), 899,989 certified
+
+**Run (the 0348 rule held — launched from b43 correctly; seam audited BEFORE the module):**
+`a44 = b43 = 12,363,154,317,119`, `b44 = a44 + 20,000 = 12,363,154,337,119` (no
+snap), M = 60, C_R = 1, 28 workers, 33,953 evaluations, N_range [691008, 691008].
+
+**Certificate `window44_b44.json`:** the 20,000 zeros of ζ with
+`g_a44 < Im s ≤ g_b44` are ALL SIMPLE and on the line.
+- `g_b44 = 3,000,175,543,078.085449218750 ± 1.29e-26`
+  (exact dyadic `116063669676910075289953026587486486005 × 2^-85`; frac 0.0854;
+  standard 2-dec bound `gB44Lo`, margin ~5.6e-3; no CASING).
+- Verifier: `CERTIFIED: true`, 33,953 points, sign_changes = b − a,
+  roesser_failures = 1 (rescued), runs 46/48 (both ≥ K = 12), turing_ok.
+- **ONE rescued exception (quota met):** block
+  `[12,363,154,324,338, ..324,340]` (raw need 2, 0 changes / 129 pts, m = 64)
+  → union `[..324,337, ..324,341]`, need 4 = found 4, m = 4. Recorded, not
+  suppressed. First two-in-a-row rescue stretch since the w28/w29 episode.
+- **SEAM AUDIT (pre-module, per the 0348 rule):** `g_a44` bit-identical to
+  `g_b43` (exact dyadic tuple) → corrected chain `w42 → w42b → w43 → w44`
+  seamless end-to-end.
+
+**CE44.lean — GREEN 8810 (full tree 17454, fresh):**
+- `gB44Lo := 300017554307808/100`; `tCE44 := 3000175543078`;
+  `faceShrinkCE44 : tCE44 − tCE43 = 4673` (13th consecutive running-pattern
+  shrink); `frontierGapAboveH0 : tCE44 − tPT2 = 210278` (frontierPast200k
+  carried from the CE42B fill; 225k sits 14,722 ≈ 3 windows out).
+- Clauses: `fillWinClauseFull` (fill full slice, re-cited at this level),
+  `ce43WinClauseFull` (w43 full slice), `ce44WinClause` (w44 terminal slice);
+  45-way `bandOfWindows44` over the corrected chain; `allOnLineUpToCE44`;
+  `terminalFaceCE44_iff_faceCE43`; `rh_split_at_CE44`; headline
+  `rh_reanchored_CE44` (RH q ↔ `terminalFaceCE44 q`);
+  `rh_of_terminalFaceCE44` (no closing supplied);
+  `terminalFaceCE44_of_thetaInf` (M2/0290 lane). **NO RH CLAIM.**
+
+**State at 0349 land:** frontier **tCE44 = 3,000,175,543,078 = 210,278 above
+H0**; cumulative certified zeros over `(g_a1, g_b44]` = **899,989**; clean
+windows 19/45; rescue windows 7,21,28,29,34,37,42,43,44 (all quota-met,
+recorded); snaps at 2,3,8,11,17,18,19,21,31,40; CASING only at 38. Next (in
+flight): window 45 (a45 = 12,363,154,357,119) → seam first → CE45. Wall
+{θ | 4/7 < θ} pinned; active lanes M5 + the queued M2 wall literature audit.
+**No RH claim.**
