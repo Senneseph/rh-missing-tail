@@ -4044,3 +4044,66 @@ OPEN at tCE41. (discovery 0346)
 
 Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE42.
 NO RH CLAIM. (discovery 0347)
+
+## 79 · 0348 (CORRECTION + 200k MILESTONE): M5 LAUNCH ARITHMETIC ERROR — CAUGHT BY THE SEAM AUDIT — FILL WINDOW + CE42B + CE43
+
+**The correction (logged in full per the program's honesty conventions):** the
+window-43 launch command contained an M5 launch arithmetic error — `a` was set to
+`b42 + 20000` = 12,363,154,297,119 instead of `b42` = 12,363,154,277,119, so the
+run certified a **valid but misplaced** window, leaving the 20,000-point interval
+`(b42, b42 + 20000]` **uncertified** in the chain. The **exact-dyadic-tuple seam
+audit caught the break** (w43's `g_a` is NOT bit-identical to w42's `g_b`; gap
+4,672.935 height units). The correction: a FILL window between w42 and w43,
+certified and double-seamed; the misplaced certificate stays valid in its own
+region and is re-anchored in its corrected position.
+
+### Fill window `window42b_fill.json` (a = b42 = 277,119 … b = 297,119)
+- 20,000 zeros all **simple and on the line**; 33,301 evaluations, 2533.4 s,
+  M = 60, C_R = 1, 28 workers, N_range [691008, 691008].
+- Verifier: `CERTIFIED: true`, 33,301 points, sign_changes = b − a,
+  roesser_failures = **0** (CLEAN), Rosser runs 47/47, turing_ok.
+- `g_b42b = 3,000,175,533,732.215369449384 ± 1.29e-26`;
+  `tCE42B = 3,000,175,533,732`; frac 0.2154; standard 2-dec bound
+  (margin ~5.4e-3); no CASING.
+- **BOTH seams bit-identical:** SEAM 1 (fill `g_a` ≡ w42 `g_b`), SEAM 2
+  (fill `g_b` ≡ w43 `g_a`) — the chain `w42 → w42b → w43` is seamless again.
+
+### CE42B.lean (fill module — GREEN 8808)
+- `gB42BLo := 300017553373221/100`; `tCE42B := 3000175533732`;
+  `faceShrinkCE42B : tCE42B − tCE42 = 4673` (running pattern).
+- **`frontierGapAboveH0 : tCE42B − tPT2 = 200932` and
+  `frontierPast200k : tCE42B − tPT2 > 200000` — MILESTONE: the 200k frontier
+  mark is crossed, proven in-tree at the fill.**
+- Clauses `ce42WinClauseFull` (full w42 slice) + `ce42BWinClause` (terminal
+  slice); 43-way `bandOfWindows42B`; `allOnLineUpToCE42B`;
+  `terminalFaceCE42B_iff_faceCE42`; `rh_split_at_CE42B`; headline
+  `rh_reanchored_CE42B` (RH q ↔ `terminalFaceCE42B q`);
+  `rh_of_terminalFaceCE42B` (no closing supplied);
+  `terminalFaceCE42B_of_thetaInf` (M2/0290 lane). **NO RH CLAIM.**
+
+### CE43.lean (window 43 in its corrected position — GREEN 8809; full tree 17454)
+- `gB43Lo := 300017553840515/100`; `tCE43 := 3000175538405`;
+  `faceShrinkCE43 : tCE43 − tCE42B = 4673`;
+  **`frontierGapAboveH0 : tCE43 − tPT2 = 205605`** (225k ~4 windows out).
+- W43: 20,000 zeros simple+on-line; 33,541 evals, 2587.6 s; runs 47/52;
+  **ONE rescued exception** (block [..309,601, ..309,604] → union [..309,599,
+  ..309,605], need 6 = found 6, m = 8; quota met, displaced in-window, total
+  unchanged). Verifier `CERTIFIED: true` at 33,541.
+- 44-way `bandOfWindows43` over the **corrected chain**
+  (w1…w42, w42b, w43); `allOnLineUpToCE43`; `terminalFaceCE43`;
+  `terminalFaceCE43_iff_faceCE42B`; `rh_split_at_CE43`; headline
+  `rh_reanchored_CE43` (RH q ↔ `terminalFaceCE43 q`);
+  `rh_of_terminalFaceCE43` (no closing); `terminalFaceCE43_of_thetaInf`.
+  **NO RH CLAIM.**
+
+### State at 0348 land
+- Frontier **tCE43 = 3,000,175,538,405 = 205,605 above the Platt–Trudgian H0
+  frontier** (200k crossed at the fill); cumulative certified zeros over
+  `(g_a1, g_b43]` = **879,989** via the corrected chain; both `.olean` fresh.
+- **Process lesson (adopted):** no formal module for a window is written until
+  its seam audit against the immediate chain predecessor (possibly a fill)
+  passes bit-identically. Clean tally: 19; snaps: 2,3,8,11,17,18,19,21,31,40;
+  CASING: 38; misplaced-launch corrections: 1 (this one).
+- Next (in flight): window 44 (a44 = 12,363,154,337,119 … requested b44 = a44 +
+  20000) → seam audit first → CE44. The analytic wall {θ | 4/7 < θ} remains
+  pinned; the active lane remains M5 certification. **No RH claim.**

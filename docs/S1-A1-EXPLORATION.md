@@ -3751,3 +3751,15 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
 
     No RH claim - face OPEN / PROBABLY TRUE at tCE42; wall
     UNMOVED.
+
+## E78 · 0348 — the seam audit earns its keep (M5 launch error caught + corrected; 200k crossed)
+- **0348 (CORRECTION + 200k MILESTONE):** window 43's launch carried an M5
+  arithmetic error (a = b42 + 20000, not b42) → 20,000-point gap left between
+  w42 and w43 → the exact-dyadic-tuple SEAM AUDIT caught the break (gap
+  4,672.935 units) → FILL window certified clean (33,301 pts, runs 47/47, both
+  seams bit-identical) → CE42B (fill, GREEN 8808; **frontierPast200k proven
+  in-tree: tCE42B − tPT2 = 200,932**) + CE43 (w43 in corrected position, GREEN
+  8809, full 17454; tCE43 = 3,000,175,538,405, 205,605 above H0; one quota-met
+  rescue recorded). Cumulative certified: **879,989**. The audit is the lane's
+  load-bearing safety net — and it demonstrably caught a real launch error.
+  Wall {θ | 4/7 < θ} pinned; face open at tCE43. **NO RH CLAIM.**
