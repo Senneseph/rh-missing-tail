@@ -3735,3 +3735,19 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
     No RH claim - face OPEN / PROBABLY TRUE at tCE41; wall
     UNMOVED. The 800k crossing and the seam-across-snap
     are certification-scale achievements.
+
+* **E77 (2026-11-16, 0347):**
+    * M5 WINDOW 42 CERTIFIED (CLEAN - nineteenth clean
+      window; 20,000 zeros all simple and on the line;
+      seam bit-identical) + CE42 GREEN 8807, full tree
+      17454.
+    * 839,989 certified over (g_a1, g_b42].
+    * Frontier re-anchored: tCE42 = 3,000,175,529,059
+      (tCE42 - tCE41 = 4,673, running pattern;
+      196,259 above H0; **the 200k mark sits 3,741 units
+      ahead - the crossing is expected in window 43, in
+      flight**).
+    * Window 43 in flight (a43 = 12,363,154,317,119).
+
+    No RH claim - face OPEN / PROBABLY TRUE at tCE42; wall
+    UNMOVED.

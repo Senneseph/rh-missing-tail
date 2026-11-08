@@ -4006,3 +4006,41 @@ the seam across window 40's snap), N_range/C_R/M
 constant. Eighteen clean windows of forty-one. 200k mark
 ~2 windows out. NO RH CLAIM — wall UNMOVED at 4/7, face
 OPEN at tCE41. (discovery 0346)
+
+## 78 · 0347 — M5 WINDOW 42 CERTIFIED + CE42 RE-ANCHOR
+(2026-11-16) — 200k is 3,741 away
+
+* **Window 42 (in-house, seamless):** a = 12,363,154,277,119
+  (= window 41's b), b = a + 20,000 (no snap at either
+  endpoint), M = 60, C_R = 1, 33,763 evaluations in 2641.2
+  s, N_range = [691008, 691008]. Certificate
+  window42_b42.json: **b − a = 20,000 zeros, all simple and
+  on the line** in (g_a42, g_b42], g_a42 =
+  3,000,175,524,386.345121385712 ± 1.29e-26 (bit-identical
+  to window 41's g_b41), g_b42 = 3,000,175,529,059.
+  280245552874 ± 1.29e-26 (frac 0.2802 — standard
+  two-decimal bound, margin ~0.28, no CASING).
+* **CLEAN WINDOW** (nineteenth of forty-two): ZERO Rosser
+  exceptions.
+* **Formal (CE42.lean, GREEN 8807; full tree 17454, olean
+  fresh):** gB42Lo := 300017552905928/100, tCE42 :=
+  3,000,175,529,059; faceShrinkCE42 = 4673 (running
+  pattern); frontierGapAboveH0 = 196,259;
+  bandOfWindows42 (forty-two-way); rh_reanchored_CE42:
+  under [Z-PT2] + the forty-two cited window clauses, RH
+  q ↔ terminalFaceCE42 q; rh_of_terminalFaceCE42 (final
+  named step — no closing supplied);
+  terminalFaceCE42_of_thetaInf (M2 lane lands at tCE42).
+* **Frontier:** certified zeros over (g_a1, g_b42] =
+  **839,989** (800k mark crossed at CE41 remains crossed).
+  Chain integrity 1→42: every seam bit-identical,
+  N_range/C_R/M constant. Nineteen clean windows of
+  forty-two.
+* **200k mark:** 3,741 units ahead of tCE42 — **the
+  crossing is expected in window 43** (in flight; a43 =
+  12,363,154,317,119). When it lands, frontierPast200k
+  will be proven in-tree (as frontierPast175k was in
+  CE38).
+
+Wall UNMOVED at 4/7; face OPEN / PROBABLY TRUE at tCE42.
+NO RH CLAIM. (discovery 0347)
