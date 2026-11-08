@@ -1052,9 +1052,9 @@ theorem gB51Lo_lt_gB52Lo : (gB51Lo : ℝ) < (gB52Lo : ℝ) := by
 -/
 /-- [CITED,
     OUR
-    WINDOW-50
+    WINDOW-51
     RUN
-    (window50_b50.json),
+    (window51_b51.json),
     FULL
     SLICE
     -
@@ -1067,55 +1067,50 @@ theorem gB51Lo_lt_gB52Lo : (gB51Lo : ℝ) < (gB52Lo : ℝ) := by
     zeta
     zero
     with
-    gB49Lo
+    gB50Lo
     <
     Im
     ρ
     <=
-    gB50Lo
+    gB51Lo
     is
     on
     the
     critical
     line.
-    Same
-    derivation
-    as
-    at
-    the
-    CE50
-    level:
+    Derivation
+    (recorded):
     for
     t0
     =
     Im
     ρ
     in
-    (gB49Lo,
-    gB50Lo],
+    (gB50Lo,
+    gB51Lo],
     either
     t0
     <=
-    g_b49
-    (g_a50
+    g_b50
+    (g_a51
     =
-    g_b49,
-    recorded
-    exact
-    dyadic
-    tuple
-    [29015917645196795743551458640382313851,
-    -83,
-    16777217,
-    -110]
+    g_b50
     -
     the
     chain
     seam,
+    recorded
+    exact
+    dyadic
+    tuple
+    [116063670761562604479645262733743461387,
+    -85,
+    16777217,
+    -110],
     audit
     PASSED
     BEFORE
-    CE50
+    CE51
     was
     written)
     -
@@ -1124,55 +1119,71 @@ theorem gB51Lo_lt_gB52Lo : (gB51Lo : ℝ) < (gB52Lo : ℝ) := by
     sits
     in
     window
-    49's
+    50's
     certified
     region
-    (g_a49,
-    g_b49]
+    (g_a50,
+    g_b50]
     -
     or
     t0
     >
-    g_b49
+    g_b50
     =
-    g_a50,
+    g_a51,
     in
     which
     case
     t0
     <=
-    gB50Lo
+    gB51Lo
     <=
-    g_b50
+    g_b51
     puts
     t0
     in
     window
-    50's
+    51's
     certified
     region
-    (g_a50,
-    g_b50].
+    (g_a51,
+    g_b51]
+    (window
+    51
+    is
+    SNAPPED,
+    width
+    19
+    999,
+    one
+    recorded
+    quota-met
+    rescue
+    -
+    see
+    the
+    CE51
+    header).
     The
     two
     certified
     regions
     union
     to
-    (g_a49,
-    g_b50]
+    (g_a50,
+    g_b51]
     which
     contains
-    (gB49Lo,
-    gB50Lo]
+    (gB50Lo,
+    gB51Lo]
     (machine:
-    gB49Lo
+    gB50Lo
     <
-    tCE50
+    tCE51
     <
-    gB50Lo,
+    gB51Lo,
     from
-    CE50).
+    CE51).
     Named
     Prop
     consumed

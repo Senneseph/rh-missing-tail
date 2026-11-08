@@ -3891,3 +3891,20 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
   CARRIED (frontierPast225k re-proven); **250k mark 2,339 ahead → crossing expected in w53**.
   Certified count 1,059,987 (snap cost 1; 1M mark carried). Honest tally 24 of 53 clean.
   NO analytic move: face open at tCE52; M2 wall pinned. **NO RH CLAIM.**
+
+## E89 · 0359 — window 53 + CE53 (NON-SNAPPED width 20,000 — the w51/w52 streak ends; THREE recorded quota-met Rosser rescues; THE 250,000-UNIT FRONTIER MILESTONE CROSSED: 252,334 above H0, frontierPast250k proven in-tree; certified 1,079,987)
+- **0359 (window 53 + CE53 — THE 250 000-UNIT MILESTONE UNIT):** launched correctly from b52
+  (a53 = 12,363,154,497,117); seam audit g_a53 ≡ g_b53 tuple [113343428831147822184536190820181931, −75,
+  16777217, −110] BEFORE the module; **NON-SNAPPED (b = a + 20,000 exactly)**; 20,000 zeros
+  simple+on-line (34,037 pts, 2554.0 s; verifier CERTIFIED/turing_ok, K_cons 12 vs K_req ≤ 11.4380);
+  **THREE Rosser exceptions, all RESCUED, QUOTA-MET, RECORDED** (blocks [..499,170, ..499,172],
+  [..507,862, ..507,864], [..510,768, ..510,770] — each need 2 found 0 → unions need 4/5/5 found
+  4/5/5; the most rescues in one window of the corrected chain); all interior — Turing step
+  (recomputed window total 20,000 + end runs 47/49) passes. CE53 GREEN (8,819 targeted for CE52+CE53,
+  0 errors 0 warnings, full tree green): tCE53 = 3,000,175,585,134, gB53Lo = 300017558513403/100,
+  increment 4,673 (22nd), **tCE53 − tPT2 = 252,334 → THE 250 000-UNIT MARK IS CROSSED, exactly where
+  the ~4,673/window pace predicted** (2,339 short at w52's end); `frontierPast250k` proven in-tree;
+  next round mark 275k is 22,666 ahead (expect w59 or w60). Certified count 1,079,987 (full width;
+  1M mark carried). Doc-provenance repair in CE52/CE53 (stale WINDOW-50 full-slice attributions) —
+  theorem content never affected, both re-built GREEN. Honest tally 24 of 54 clean. NO analytic
+  move: face open at tCE53; M2 wall pinned. **NO RH CLAIM.**

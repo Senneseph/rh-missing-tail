@@ -4570,3 +4570,67 @@ out).
   lane conjectural.
 - **NO RH CLAIM.** Next unit — window 53 (a53 = 12,363,154,497,117)
   — where the 250,000-unit frontier mark is expected to cross.
+
+## 90 · 0359: window 53 + CE53 — THE 250,000-UNIT FRONTIER MILESTONE IS CROSSED (252,334 above H0, proven in-tree as frontierPast250k); NON-SNAPPED window (width 20,000, the w51/w52 streak ends) with THREE recorded quota-met Rosser rescues; certified total 1,079,987
+- **0359 (M5 LANE - WINDOW 53 + CE53 — THE 250 000-UNIT MILESTONE UNIT).**
+  Launch a53 = 12,363,154,497,117 (= b52), b requested = a + 20,000 =
+  12,363,154,517,117, **b ACTUAL = 12,363,154,517,117 — NON-SNAPPED**
+  (the requested endpoint WAS a good Gram point; width b − a = 20,000;
+  the two-in-a-row snapped streak w51/w52 ENDS here). M = 60, C_R = 1,
+  28 workers, N_range [691008, 691008], 34,037 evals, 2554.0 s.
+- **Seam audit FIRST (0348 rule):** g_a53 ≡ g_b52 exact dyadic
+  tuple [113343428831147822184536190820181931, −75, 16777217, −110]
+  — bit-identical, BEFORE CE53 was written.
+- **THREE ROSSER-BLOCK EXCEPTIONS, RESCUED, QUOTA-MET, RECORDED**
+  (not suppressed): (1) [12,363,154,499,170, 12,363,154,499,172]
+  (need 2, found 0, 129 pts, m = 64) → union [12,363,154,499,169,
+  12,363,154,499,173] (need 4, **found 4**, m = 4); (2)
+  [12,363,154,507,862, 12,363,154,507,864] (need 2, found 0, 129 pts,
+  m = 64) → union [12,363,154,507,861, 12,363,154,507,866] (need 5,
+  **found 5**, m = 8); (3) [12,363,154,510,768,
+  12,363,154,510,770] (need 2, found 0, 129 pts, m = 64) → union
+  [12,363,154,510,767, 12,363,154,510,772] (need 5, **found 5**,
+  m = 2). All three INTERIOR — the verifier's recompute of the WINDOW
+  TOTAL (20,000) and the two END RUNS (47/49) — the only quantities
+  in the Turing step — passes. The most rescues in a single window
+  of the corrected chain.
+- **Verifier (layer 2):** CERTIFIED: true, turing_ok: true,
+  points_checked 34,037, sign_changes_inside 20,000 = b − a,
+  roesser_failures_inside 3 (all recorded quota-met rescues), Rosser
+  runs 47/49, K_conservative 12 (K_required all < 12); endpoints
+  recomputed and matched.
+- **THE MILESTONE:** g_b53 = 3,000,175,585,134.034179687500 ±
+  1.29e-26 — exact recorded tuple [29015917825967697847748600342133254453,
+  −83, 16777217, −110]. **tCE53 = 3,000,175,585,134**;
+  tCE53 − tCE52 = 4,673 (22nd increment); **tCE53 − tPT2 =
+  252,334 — the 250,000-unit mark is CROSSED in window 53, exactly
+  where the ~4,673/window pace predicted** (2,339 short at w52's
+  end). Proven in-tree: `frontierPast250k : (tCE53 : ℝ) -
+  WinC.tPT2 > 250000`. Round-mark sequence above H0: 100k @ CE22,
+  125k @ CE27, 150k @ CE33, 175k @ CE38, 200k @ CE42B, 225k @ CE48,
+  **250k @ CE53**; next 275k sits 22,666 ahead (expect w59 or w60).
+  NO CASING (two-dec round-down 0.03 ≠ 0.00; margin ~4.2e-3).
+- **CE53.lean GREEN** (8,819 targeted jobs for CE52+CE53, 0 errors,
+  0 warnings; full tree green; olean fresh, both): gB53Lo :=
+  300017558513403/100; ce52WinClauseFull (w52 full slice re-cited);
+  ce53WinClause (terminal slice, documented); 54-way band;
+  terminalFaceCE53 NAMED OPEN; iff/split/reanchor/thetaInf at the
+  new frontier.
+- **PROVENANCE REPAIR (this unit):** a doc-line misattribution was
+  found and repaired in CE52.lean and CE53.lean — the re-cited
+  full-slice clause docs above ce51WinClauseFull / ce52WinClauseFull
+  had carried the stale WINDOW-50 attribution from the generator;
+  they now correctly cite the window-51 / window-52 certificates
+  with matching derivations. Theorem content was never affected;
+  both modules re-built GREEN after the repair.
+- **Certified count (pipeline data, machine-tracked):** 1,059,987 +
+  20,000 = **1,079,987** over (g_a1, g_b53] (full width, no snap
+  cost). The 1M mark (w50) is carried.
+- **Honest tally:** 24 of 54 chain windows clean; rescue windows
+  7, 21, 28, 29, 34, 37, 42, 43, 44 (one each), 45 (two), 51
+  (one), 52 (two), 53 (three) — all quota-met, none suppressed.
+- **NO analytic move:** face open at tCE53; M2 wall {θ | 4/7 < θ}
+  pinned via SWall; absolute clause dead as published input; θ=∞
+  lane conjectural.
+- **NO RH CLAIM.** Next unit — window 54 (a54 = 12,363,154,517,117);
+  the 275,000-unit mark is 22,666 ahead (expect w59 or w60).
