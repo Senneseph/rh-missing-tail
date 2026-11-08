@@ -3964,3 +3964,45 @@ Window 41 a41 = 12,363,154,237,119 (the snapped b of
 window 40) — in flight. 200k mark ~3 windows out; 800k
 mark ~1 window out. NO RH CLAIM — wall UNMOVED at 4/7,
 face OPEN at tCE40. (discovery 0345)
+
+## 77 · 0346 — MILESTONE: 800K CERTIFIED CROSSED
+(2026-11-16) — WINDOW 41 + CE41
+
+* **Window 41 (in-house, seamless):** a = 12,363,154,237,119
+  (= window 40's SNAPPED b — the seam continues seamlessly
+  across the previous window's right-edge snap by 2),
+  b = a + 20,000 (no snap at either endpoint), M = 60,
+  C_R = 1, 33,279 evaluations in 2557.4 s,
+  N_range = [691008, 691008]. Certificate
+  window41_b41.json: **b − a = 20,000 zeros, all simple
+  and on the line** in (g_a41, g_b41], g_a41 =
+  3,000,175,519,713.409996947896 ± 1.29e-26 (bit-identical
+  to window 40's g_b40 — seam verified across the snap),
+  g_b41 = 3,000,175,524,386.345121385712 ± 1.29e-26
+  (frac 0.3451 — standard two-decimal bound, no CASING).
+* **SEAM ACROSS A SNAP (first of its kind, verified):**
+  the exact-dyadic-tuple seam audit confirms the chain
+  remains seamless even across window 40's right-edge
+  snap by 2. A snapped endpoint is a legitimate chain
+  endpoint; the seam discipline is unchanged.
+* **CLEAN WINDOW** (eighteenth of forty-one): ZERO Rosser
+  exceptions.
+* **Formal (CE41.lean, GREEN 8806; full tree 17454, olean
+  fresh):** gB41Lo := 300017552438634/100, tCE41 :=
+  3,000,175,524,386; faceShrinkCE41 = 4673 (running
+  pattern); frontierGapAboveH0 = 191,586;
+  bandOfWindows41 (forty-one-way); rh_reanchored_CE41:
+  under [Z-PT2] + the forty-one cited window clauses, RH
+  q ↔ terminalFaceCE41 q; rh_of_terminalFaceCE41 (final
+  named step — no closing supplied);
+  terminalFaceCE41_of_thetaInf (M2 lane lands at tCE41).
+* **MILESTONE (800k certified zeros crossed):**
+  cumulative certified zeros over (g_a1, g_b41] =
+  799,989 + 20,000 = **819,989**. The 800,000th certified
+  on-line zero lands inside window 41.
+
+Chain integrity 1→41: every seam bit-identical (including
+the seam across window 40's snap), N_range/C_R/M
+constant. Eighteen clean windows of forty-one. 200k mark
+~2 windows out. NO RH CLAIM — wall UNMOVED at 4/7, face
+OPEN at tCE41. (discovery 0346)

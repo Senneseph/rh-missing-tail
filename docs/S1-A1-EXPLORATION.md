@@ -3714,3 +3714,24 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
     No RH claim - face OPEN / PROBABLY TRUE at tCE40; wall
     UNMOVED. The 40th window is a certification-scale
     achievement, not an analytic one.
+
+* **E76 (2026-11-16, 0346):**
+    * MILESTONE - 800K CROSSED: M5 WINDOW 41 CERTIFIED
+      (CLEAN - eighteenth clean window; 20,000 zeros all
+      simple and on the line) + CE41 GREEN 8806, full
+      tree 17454.
+    * SEAM ACROSS WINDOW 40'S SNAP BY 2 VERIFIED:
+      window 41's g_a ball is bit-identical to window
+      40's snapped g_b ball. The exact-dyadic-tuple seam
+      audit handles snapped and un-snapped endpoints
+      identically — the chain is seamless across a snap.
+    * 819,989 certified over (g_a1, g_b41] — the 800,000
+      mark is CROSSED.
+    * Frontier re-anchored: tCE41 = 3,000,175,524,386
+      (tCE41 - tCE40 = 4,673, running pattern;
+      191,586 above H0; 200k mark ~2 windows out).
+    * Window 42 in flight (a42 = 12,363,154,257,119).
+
+    No RH claim - face OPEN / PROBABLY TRUE at tCE41; wall
+    UNMOVED. The 800k crossing and the seam-across-snap
+    are certification-scale achievements.
