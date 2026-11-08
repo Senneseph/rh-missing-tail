@@ -3876,3 +3876,18 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
   the crossing in w53** (~2,339 left after w52). Certified count 1,039,988 (snap cost 1; 1M
   mark carried). Honest scope unchanged: NO analytic move; face open at tCE51; M2 wall pinned.
   **NO RH CLAIM.**
+
+## E88 · 0358 — window 52 + CE52 (SNAPPED, width 19,999, second in a row; TWO recorded quota-met Rosser rescues; 225k carried at 247,661; 250k now 2,339 ahead → crossing expected in w53; certified 1,059,987)
+- **0358 (window 52 + CE52):** launched correctly from b51 (a52 = 12,363,154,477,118 — the
+  snapped w51 endpoint); seam audit g_a52 ≡ g_b52 exact dyadic BEFORE the module; **b ACTUAL
+  12,363,154,497,117 — SNAPPED DOWN 1 AGAIN (width 19,999)**; 19,999 zeros simple+on-line
+  (33,708 pts, 2498.0 s; verifier CERTIFIED/turing_ok, K_cons 12 vs K_req ≤ 11.4380); **TWO
+  Rosser exceptions, both RESCUED, QUOTA-MET, RECORDED** (block1 [..479,388, ..479,390] need
+  2 found 0 → union [..479,387, ..479,392] need 5 FOUND 5; block2 [..480,004, ..480,007] need
+  3 found 1 → union [..480,003, ..480,009] need 6 FOUND 6) — both INTERIOR, neither touches an
+  end run; Turing step (recomputed window total 19,999 + end runs 48/45) passes. CE52 GREEN 8818
+  (0 errors 0 warnings, full tree green): tCE52 = 3,000,175,580,461, gB52Lo =
+  300017558046109/100, increment 4,673 (21st), tCE52 − tPT2 = 247,661 — the 225k CE48 crossing
+  CARRIED (frontierPast225k re-proven); **250k mark 2,339 ahead → crossing expected in w53**.
+  Certified count 1,059,987 (snap cost 1; 1M mark carried). Honest tally 24 of 53 clean.
+  NO analytic move: face open at tCE52; M2 wall pinned. **NO RH CLAIM.**

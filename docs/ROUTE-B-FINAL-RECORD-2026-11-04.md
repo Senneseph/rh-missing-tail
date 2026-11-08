@@ -4511,3 +4511,62 @@ out).
   pinned via SWall; absolute clause dead as published input; θ=∞
   lane conjectural.
 - **NO RH CLAIM.** Next unit — window 52 (a52 = 12,363,154,477,118).
+
+## 89 · 0358: window 52 + CE52 — SNAPPED again (width 19,999, second in a row) with TWO recorded quota-met Rosser rescues; 225k carried at 247,661; 250k mark now only 2,339 ahead (crossing expected in w53); certified total 1,059,987
+- **0358 (M5 LANE - WINDOW 52 + CE52):** window 52 landed.
+  Launch a52 = 12,363,154,477,118 (= b51 — the SNAPPED endpoint of
+  w51), b requested = a + 20,000 = 12,363,154,497,118, **b ACTUAL =
+  12,363,154,497,117 — SNAPPED DOWN by 1 again** (requested endpoint
+  not a good Gram point at working precision; a remains good).
+  Width b − a = 19,999 — the SECOND consecutive snapped window
+  (w51, w52). Snapped-width family now: 2, 3, 8, 11, 17, 18, 19,
+  21, 31 (19,999), 40 (19,998), 51, 52 (19,999). M = 60, C_R = 1,
+  28 workers, N_range [691008, 691008], 33,708 evals, 2498.0 s.
+- **Seam audit FIRST (0348 rule):** g_a52 ≡ g_b51 exact dyadic
+  tuple [116063670942328987203539826434559195545, −85, 16777217,
+  −110] — bit-identical, BEFORE CE52 was written.
+- **TWO ROSSER-BLOCK EXCEPTIONS, RESCUED, QUOTA-MET, RECORDED**
+  (not suppressed): (1) block [12,363,154,479,388,
+  12,363,154,479,390] (need 2, found 0, 129 pts, m = 64) → union
+  [12,363,154,479,387, 12,363,154,479,392] (need 5, **FOUND 5**,
+  m = 4); (2) block [12,363,154,480,004, 12,363,154,480,007]
+  (need 3, found 1, 193 pts, m = 64) → union [12,363,154,480,003,
+  12,363,154,480,009] (need 6, **FOUND 6**, m = 2). Both RESCUED
+  BLOCKS ARE INTERIOR — they touch neither end Rosser run; the
+  verifier's recompute of the WINDOW TOTAL (19,999) and the two
+  END RUNS (48/45) — the only quantities in the Turing step —
+  passes.
+- **Verifier (layer 2):** CERTIFIED: true, turing_ok: true,
+  points_checked 33,708, sign_changes_inside 19,999 = b − a,
+  roesser_failures_inside 2 (both recorded quota-met rescues),
+  Rosser runs 48/45, K_conservative 12 (K_required: Trudgian
+  Cor2.3 [5.71899 ± 1.23e-6], doubled [11.4380 ± 1.76e-5],
+  Amberger Thm2.3 [9.14967 ± 4.14e-6] — all < 12); endpoints
+  recomputed and matched.
+- **Frontier:** g_b52 = 3,000,175,580,461.099121093750 ±
+  1.29e-26 — exact recorded tuple [113343428831147822184536190820181931,
+  −75, 16777217, −110]. **tCE52 = 3,000,175,580,461**;
+  tCE52 − tCE51 = 4,673 (21st increment); **tCE52 − tPT2 =
+  247,661** — the 225,000-unit mark (CE48) is CARRIED, re-proven
+  as `frontierPast225k`; **THE 250,000-UNIT MARK NOW SITS 2,339
+  AHEAD — CROSSING EXPECTED IN WINDOW 53** (compute from the
+  decoded endpoint when it lands; the crossing module proves
+  `frontierPast250k`). NO CASING (two-dec round-down 0.09 ≠ 0.00;
+  margin ~9.1e-3).
+- **CE52.lean GREEN** (8,818 targeted jobs, 0 errors, 0 warnings;
+  full tree green; olean fresh): gB52Lo := 300017558046109/100;
+  ce51WinClauseFull (w51 full slice re-cited); ce52WinClause
+  (SNAPPED terminal slice with the two recorded rescues,
+  documented); 53-way band; terminalFaceCE52 NAMED OPEN;
+  iff/split/reanchor/thetaInf at the new frontier.
+- **Certified count (pipeline data, machine-tracked; the snap cost
+  one unit):** 1,039,988 + 19,999 = **1,059,987** over (g_a1,
+  g_b52]. The 1M mark (w50) is carried.
+- **Honest tally:** 24 of 53 chain windows clean; rescue windows
+  7, 21, 28, 29, 34, 37, 42, 43, 44 (one each), 45 (two), 51
+  (one), 52 (two) — all quota-met, none suppressed.
+- **NO analytic move:** face open at tCE52; M2 wall {θ | 4/7 < θ}
+  pinned via SWall; absolute clause dead as published input; θ=∞
+  lane conjectural.
+- **NO RH CLAIM.** Next unit — window 53 (a53 = 12,363,154,497,117)
+  — where the 250,000-unit frontier mark is expected to cross.
