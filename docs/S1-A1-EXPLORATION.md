@@ -3860,3 +3860,19 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
   900k@w45, 960k@w48, 1M@w50) — the first seven-figure all-on-the-line certified region in the
   program. Honest scope: a frontier record, NOT an RH statement; face open at tCE50; M2 wall
   pinned. **NO RH CLAIM.**
+
+## E87 · 0357 — window 51 + CE51 (SNAPPED, width 19,999; one recorded quota-met Rosser rescue; 225k carried at 242,988; certified 1,039,988)
+- **0357 (window 51 + CE51):** launched correctly from b50 (a51 = 12,363,154,457,119);
+  seam audit g_a51 ≡ g_b50 exact dyadic BEFORE the module; **b ACTUAL 12,363,154,477,118 —
+  SNAPPED DOWN 1 (width 19,999**, first since w40); 19,999 zeros simple+on-line (33,636 pts,
+  2532.2 s; verifier CERTIFIED/turing_ok, K_cons 12 vs K_req ≤ 11.4380); **ONE Rosser
+  exception, RESCUED, QUOTA-MET, RECORDED** (block [..473,629, ..473,632] need 3 found 1 →
+  union [..473,628, ..473,633] need 5 FOUND 5, m = 4) — first since w45 double-rescue; the
+  5-consecutive-clean streak (w46–w50) ends here, honest tally 24 of 52; the block is interior
+  and the Turing step (recomputed window total 19,999 + end runs 49/47) passes. CE51 GREEN 8817
+  (0 errors 0 warnings, full tree green): tCE51 = 3,000,175,575,788, gB51Lo =
+  300017557578839/100, increment 4,673 (20th), tCE51 − tPT2 = 242,988 — the 225k CE48 crossing
+  CARRIED (frontierPast225k re-proven at the new frontier); **250k mark 7,012 ahead — expect
+  the crossing in w53** (~2,339 left after w52). Certified count 1,039,988 (snap cost 1; 1M
+  mark carried). Honest scope unchanged: NO analytic move; face open at tCE51; M2 wall pinned.
+  **NO RH CLAIM.**
