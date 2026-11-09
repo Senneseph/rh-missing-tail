@@ -3942,3 +3942,21 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
   MARK LANDED (13 short at w54's end, exactly where predicted)**; next 1.2M 80,013 ahead
   (~w59/60). Honest tally 26 of 56 clean. NO analytic move: face open at tCE55; M2 wall
   pinned. **NO RH CLAIM.**
+
+## E92 · 0362 — window 56 + CE56 (NON-SNAPPED width 20,000; FOUR recorded quota-met rescues — most since w53; 4,673 standing pace; 266,352 above H0, 250k carried, 275k now 8,648 ahead; certified 1,139,987)
+- **0362 (window 56 + CE56):** launched correctly from b55 (a56 = 12,363,154,557,117);
+  seam audit g_a56 ≡ g_b55 tuple [29015917916355408576910488047858487921, −83,
+  16777217, −110] BEFORE the module; **NON-SNAPPED (b = a + 20,000)**; 20,000 zeros
+  simple+on-line (34,778 pts, 2647.0 s; verifier CERTIFIED/turing_ok, K_cons 12);
+  **FOUR Rosser exceptions (most in a window since w53), ALL RESCUED, QUOTA-MET,
+  RECORDED** — [..560,392..394]→[..560,391..396] (5/5, m8), [..568,076..079]→[
+  ..568,075..080] (5/5, m8), [..571,197..199]→[..571,195..200] (5/5, m4),
+  [..575,445..448]→[..575,443..449] (6/6, m8) — all interior (Turing step passes:
+  total 20,000, end runs 49/48). g_b56 = 3,000,175,599,152.839843750000 ± 1.29e-26
+  (frac 0.8398, no CASING, margin ~9.8e-3). **tCE56 = 3,000,175,599,152; increment
+  4,673 (standing pace continues)**; **tCE56 − tPT2 = 266,352 — 250k CARRIED**
+  (re-proven; 275k now 8,648 ahead — expect w58 or w59). CE56 GREEN (8,822 targeted,
+  0 errors 0 warnings, full tree green; 19 doc blocks swept, clause-doc audit OK).
+  **Certified 1,139,987** (1.1M carried; 1.2M 60,013 ahead — expect crossing w60,
+  with the running total landing 1,199,987 [13 short] at w59). Honest tally
+  26 of 57 clean. NO analytic move: face open at tCE56; M2 wall pinned. **NO RH CLAIM.**
