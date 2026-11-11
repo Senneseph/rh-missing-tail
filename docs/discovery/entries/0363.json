@@ -1,0 +1,29 @@
+{
+  "id": "0363",
+  "ts": "2026-11-09T01:30:00Z",
+  "lane": "M5 - certified window production + terminal-face re-anchoring (option B)",
+  "status": "COMPLETE",
+  "title": "window 57 certified CLEAN (width 20 000, ZERO Rosser failures - first clean window since w50) + CE57 re-anchor: 4 673 standing pace; tCE57 = 3 000 175 603 825 = 271 025 above H0 (250k carried; 275k now only 3 975 ahead - expect w58); certified 1 159 987",
+  "facts": [
+    "Launch (0362 hand-off): a57 = 12 363 154 577 117 (= b56, W56's final b), b requested = a + 20 000 = 12 363 154 597 117, b ACTUAL = 12 363 154 597 117 - NON-SNAPPED (width 20 000; both endpoints good Gram points at working precision). Run: M = 60, C_R = 1, 28 workers, N_range = [691008, 691008] (constant across the chain), 33 523 evaluations, 2519.3 s. Certificate: tmp/ce2/ce1_window_H0_v1/window57_b57.json.",
+    "Seam audit FIRST (0348 process rule - passed BEFORE CE57 was written): g_a57 == g_b56 bit-identical in exact dyadic form, tuple [232127343692394111500520322163846277315, -86, 16777217, -110] on both sides (i.e. 3 000 175 599 152.839843750000 +/- 1.29e-26).",
+    "CLEAN WINDOW: roesser_failures_inside = 0, rescued_rosser_exceptions = [] - the FIRST clean window since window 50 (windows 51-56 carried 1, 2, 3, 1, 1, 4 recorded quota-met rescues respectively). Nothing to record or suppress. End Rosser runs: 49 left of g_a57, 48 right of g_b57 (both >= K = 12); 0 cross-check failures (all 33 523 records); 0 undetermined Gram signs.",
+    "Verifier (layer 2, code/verify_window.py on window57_b57.json): CERTIFIED: true, turing_ok: true, points_checked = 33 523, sign_changes_inside = 20 000 = b - a, roesser_failures_inside = 0, roesser_run_left_of_a = 49, roesser_run_right_of_b = 48, K_conservative = 12 (Trudgian Cor2.3 = [5.71899 +/- 1.23e-6], doubled = [11.4380 +/- 1.76e-5], Amberger Thm2.3 = [9.14967 +/- 4.14e-6] - all below 12), endpoints recomputed and matched.",
+    "Endpoint decode: g_b57 = 3 000 175 603 825.774902343750 +/- 1.29e-26 - exact recorded tuple [116063672026972477182407992315941454601, -85, 16777217, -110] (mid 116063672026972477182407992315941454601 x 2^-85, rad 16777217 x 2^-110). floor(g_b57) = tCE57 = 3 000 175 603 825.",
+    "Increment: tCE57 - tCE56 = 4 673 - the standing pace continues (isolated 4 672's at w45->w46 and w53->w54 remain; no pattern assumed, recorded honestly). tCE57 - tPT2 = 271 025 - THE 250 000-UNIT MILESTONE (crossed in window 53 at 252 334) is CARRIED and re-proven (frontierPast250k at the new frontier); the next round mark 275 000 sits 3 975 ahead - at the ~4 673/window pace the crossing lands in WINDOW 58 (271 025 + 4 672 = 275 697 >= 275 000 even at the slowest observed increment); compute the floor when it lands, do not pre-announce.",
+    "CASING: NOT triggered - frac(g_b57) = 0.77490234375, two-decimal round-down 0.77 != 0.00; margin ~4.9e-3. gB57Lo := 300017560382577/100. Window 38 / CE38 remains the only CASING case so far.",
+    "Cumulative certified count (machine-tracked pipeline data, recorded not re-derived): 1 139 987 (at g_b56) + 20 000 (full width) = 1 159 987 over (g_a1, g_b57]. The 1 100 000-certified-zero mark (window 55, 0361) is carried; next mark 1 200 000 sits 40 013 ahead (running total at w59 should be 1 199 987 - 13 short again - crossing expected in w60 at 20 000/window, pending snaps).",
+    "CE57 formal module: formal/RhAttack/CE57.lean - GREEN (targeted build 8 823 jobs, 0 errors 0 warnings; full tree green at 0362; .olean fresh). All 19 declaration doc blocks swept to CE57-correct text; clause-doc audit passed (ce56WinClauseFull re-cites the WINDOW-56 run as a full slice at the CE57 level; ce57WinClause cites the WINDOW-57 terminal slice). Generator: /tmp/gen_ce57.py (derived mechanically from gen_ce56.py - gen_ce56's NEW strings are exactly the CE56.lean contents, so the shift is construction-safe; two hand fixes: band-signature h55 slot restoration and iff arg-name convention). Exports: gB57Lo, tCE57, tCE57_lt_gB57Lo, tCE56_lt_tCE57, gB56Lo_lt_tCE57, faceShrinkCE57 (= 4673), frontierGapAboveH0 (= 271025), frontierPast200k/175k/225k/250k (carried, re-proven), gB56Lo_lt_gB57Lo, ce56WinClauseFull, ce57WinClause, bandOfWindows57 (58-way), allOnLineUpToCE57, terminalFaceCE57, faceCE56_implies_faceCE57, terminalFaceCE57_iff_faceCE56, rh_split_at_CE57, rh_reanchored_CE57, rh_of_terminalFaceCE57, terminalFaceCE57_of_thetaInf.",
+    "Honest tallies: 27 of 58 chain windows clean (no internal failures); rescue windows: 7, 21, 28, 29, 34, 37, 42, 43, 44 (one each), 45 (two), 51 (one), 52 (two), 53 (three), 54 (one), 55 (one), 56 (four) - all quota-met, none suppressed. Snapped-width windows unchanged through w52 (w53-w57 NON-SNAPPED).",
+    "NO RH CLAIM. terminalFaceCE57 is the named open face; it is NOT closed. The M2 wall {theta | 4/7 < theta} remains pinned (SWall); the absolute clause remains dead as a published input; the theta = inf lane remains conjectural by nature. No analytic move in this unit.",
+    "Next unit: window 58 (a58 = 12 363 154 597 117, b_req = 12 363 154 617 117), then CE58 re-anchor after the exact-dyadic seam audit. MILESTONE WATCH: the 275 000-unit frontier mark is 3 975 ahead - EXPECTED TO LAND IN WINDOW 58 (271 025 + 4 672 = 275 697 >= 275 000 at even the slowest observed increment); if it lands, CE58 will add frontierPast275k proven in-tree. The 1 200 000-certified-zero mark is 40 013 ahead (expect ~w59/60)."
+  ],
+  "artifacts": [
+    "tmp/ce2/ce1_window_H0_v1/window57_b57.json",
+    "tmp/ce2/ce1_window_H0_v1/verify57.log",
+    "formal/RhAttack/CE57.lean",
+    "/tmp/gen_ce57.py",
+    "/tmp/derive_gen_ce57.py",
+    "/tmp/ce57_docsweep.py"
+  ]
+}

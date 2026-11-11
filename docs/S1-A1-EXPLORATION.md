@@ -3960,3 +3960,20 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
   **Certified 1,139,987** (1.1M carried; 1.2M 60,013 ahead — expect crossing w60,
   with the running total landing 1,199,987 [13 short] at w59). Honest tally
   26 of 57 clean. NO analytic move: face open at tCE56; M2 wall pinned. **NO RH CLAIM.**
+
+## E93 · 0363 — window 57 + CE57 (CLEAN WINDOW — first since w50; NON-SNAPPED width 20,000; 4,673 standing pace; 271,025 above H0, 250k carried, 275k now 3,975 ahead — EXPECTED IN W58; certified 1,159,987)
+- **0363 (window 57 + CE57):** launched correctly from b56 (a57 = 12,363,154,577,117);
+  seam audit g_a57 ≡ g_b56 tuple [232127343692394111500520322163846277315, −86,
+  16777217, −110] BEFORE the module; **NON-SNAPPED (b = a + 20,000)**; **CLEAN:
+  ZERO Rosser failures (first clean window since w50)**; 20,000 zeros simple+on-line
+  (33,523 pts, 2519.3 s; verifier CERTIFIED/turing_ok, K_cons 12, end runs 49/48).
+  g_b57 = 3,000,175,603,825.774902343750 ± 1.29e-26 (frac 0.7749, no CASING,
+  margin ~4.9e-3). **tCE57 = 3,000,175,603,825; increment 4,673 (standing pace
+  continues)**; **tCE57 − tPT2 = 271,025 — 250k CARRIED** (re-proven; 275k now
+  3,975 ahead — expected in W58: 271,025 + 4,672 = 275,697 ≥ 275,000 even at the
+  slowest observed increment). CE57 GREEN (8,823 targeted, 0 errors
+  0 warnings, olean fresh; 19 doc blocks swept, clause-doc audit OK; generator
+  derived mechanically from gen_ce56 for construction safety). **Certified
+  1,159,987** (1.1M carried; 1.2M 40,013 ahead — running total at w59 should land
+  1,199,987 [13 short again], crossing expected w60). Honest tally 27 of 58 clean.
+  NO analytic move: face open at tCE57; M2 wall pinned. **NO RH CLAIM.**

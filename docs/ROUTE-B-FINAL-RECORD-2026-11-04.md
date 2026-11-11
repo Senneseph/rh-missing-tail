@@ -4790,3 +4790,45 @@ out).
   pinned via SWall; absolute clause dead as published input; θ=∞
   lane conjectural.
 - **NO RH CLAIM.** Next unit — window 57 (a57 = 12,363,154,577,117).
+
+## 94 · 0363: window 57 + CE57 — CLEAN WINDOW (zero Rosser failures, first since w50), NON-SNAPPED (width 20,000); 4,673 standing pace; tCE57 = 271,025 above H0 (250k CARRIED; 275k now only 3,975 ahead — EXPECTED TO LAND IN W58); certified 1,159,987
+- **0363 (M5 LANE - WINDOW 57 + CE57).**
+  Launch a57 = 12,363,154,577,117 (= b56), b = a + 20,000 = 12,363,154,597,117
+  — **NON-SNAPPED** (width 20,000). M = 60, C_R = 1, 28 workers,
+  N_range [691008, 691008], 33,523 evals, 2519.3 s.
+- **Seam audit FIRST (0348 rule):** g_a57 ≡ g_b56 exact dyadic
+  [232127343692394111500520322163846277315, −86, 16777217, −110] —
+  bit-identical, BEFORE CE57 was written.
+- **CLEAN WINDOW:** roesser_failures_inside = 0 — the FIRST clean window
+  since window 50 (w51–w56 carried 1, 2, 3, 1, 1, 4 recorded rescues).
+  Nothing to record or suppress. End Rosser runs 49/48 (both ≥ 12);
+  0 cross-check failures; 0 undetermined Gram signs.
+- **Verifier (layer 2):** CERTIFIED: true, turing_ok: true,
+  points_checked 33,523, sign_changes_inside 20,000 = b − a,
+  K_conservative 12, endpoints recomputed and matched.
+- **Endpoint:** g_b57 = 3,000,175,603,825.774902343750 ± 1.29e-26 —
+  exact tuple [116063672026972477182407992315941454601, −85,
+  16777217, −110]. **tCE57 = 3,000,175,603,825**.
+- **INCREMENTS: 4,673 (standing pace continues).**
+  **tCE57 − tPT2 = 271,025** — 250k MILESTONE (CE53) CARRIED,
+  re-proven (`frontierPast250k`); next mark 275k is **3,975 ahead —
+  EXPECTED TO LAND IN W58** (271,025 + 4,672 = 275,697 ≥ 275,000 at even
+  the slowest observed increment). NO CASING (frac 0.7749, margin ~4.9e-3).
+- **Certified total: 1,139,987 + 20,000 = 1,159,987.** 1.1M mark [w55]
+  carried; 1.2M mark 40,013 ahead (running total at w59 should land
+  1,199,987 — 13 short again — crossing expected w60).
+- **CE57.lean GREEN** (8,823 targeted jobs, 0 errors 0 warnings; olean
+  fresh): gB57Lo := 300017560382577/100; faceShrinkCE57 = 4673;
+  frontierGapAboveH0 = 271025; four milestone-carry theorems re-proven;
+  ce56WinClauseFull (w56 full slice re-cited); ce57WinClause (terminal
+  slice, documented); 58-way band; terminalFaceCE57 NAMED OPEN; all 19
+  doc blocks swept; clause-doc audit OK.
+- **Honest tally:** 27 of 58 chain windows clean; rescue windows 7, 21,
+  28, 29, 34, 37, 42, 43, 44 (one each), 45 (two), 51 (one), 52 (two),
+  53 (three), 54 (one), 55 (one), 56 (four) — all quota-met, none
+  suppressed.
+- **NO analytic move:** face open at tCE57; M2 wall {θ | 4/7 < θ}
+  pinned via SWall; absolute clause dead as published input; θ=∞
+  lane conjectural.
+- **NO RH CLAIM.** Next unit — window 58 (a58 = 12,363,154,597,117);
+  the 275,000-unit mark is 3,975 ahead (EXPECTED IN W58).
