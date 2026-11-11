@@ -4025,3 +4025,20 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
   clause-doc audit OK; generator derived mechanically from gen_ce59 for
   construction safety). **Certified 1,219,987 — THE 1,200,000 CERTIFIED-ZERO
   MARK IS CROSSED IN WINDOW 60** (as predicted in 0365). Honest tally 29 of 61 clean.
+
+## E97 · 0367 — window 61 + CE61 (NON-SNAPPED width 20,000; THREE interior Rosser exceptions, all rescued/quota-met/recorded; 4,673 standing pace; 289,717 above H0 — 275k [CE58] CARRIED re-proven, 300k 10,283 ahead (~w64); certified 1,239,987 — 1.2M [w60] carried)
+- **0367 (window 61 + CE61):** launched correctly from b60 (a61 = 12,363,154,657,117);
+  seam audit g_a61 ≡ g_b60 tuple [58031836284649370708014610130223021139, −84,
+  16777217, −110] BEFORE the module; **NON-SNAPPED (b = a + 20,000)**;
+  **THREE interior Rosser exceptions** (blocks ..660,796-98 / ..668,681-83 /
+  ..671,952-55) **all rescued, quota-met, recorded** — union widths 5/4/6,
+  m = 4/8/8; end runs 50/45 (both ≥ 12); 0 cross-check failures (34,517 pts,
+  2678.2 s); verifier CERTIFIED/turing_ok, K_cons 12. g_b61 =
+  3,000,175,622,517.515378547149186 ± 1.29e-26 (frac 0.5154, no CASING,
+  margin ~5.4e-3). **tCE61 = 3,000,175,622,517; increment 4,673 (standing
+  pace)**; **tCE61 − tPT2 = 289,717 — 275k [CE58] CARRIED** (re-proven; 300k
+  now 10,283 ahead — expect ~w64). CE61 GREEN (8,827 targeted, 0 errors
+  0 warnings, olean fresh; 20 doc blocks swept; clause-doc audit OK;
+  generator derived mechanically from gen_ce60 for construction safety).
+  **Certified 1,239,987 (1.2M [w60] carried; 1.3M is 60,013 ahead — ~w64/65).**
+  Honest tally 29 of 62 clean; w61 the heaviest rescue window since w56.
