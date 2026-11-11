@@ -4922,3 +4922,48 @@ out).
   lane conjectural.
 - **NO RH CLAIM.** Next unit — window 60 (a60 = 12,363,154,637,117);
   the 1,200,000-certified-zero mark is 13 ahead (EXPECTED IN W60).
+
+## 97 · 0366: window 60 + CE60 — CLEAN WINDOW (zero Rosser failures), NON-SNAPPED (width 20,000); 4,673 standing pace; tCE60 = 285,044 above H0 (275k [CE58] CARRIED re-proven; 300k 14,956 ahead — expect ~w64) — **THE 1,200,000 CERTIFIED-ZERO MARK IS CROSSED IN WINDOW 60** (total 1,219,987)
+- **0366 (M5 LANE - WINDOW 60 + CE60).**
+  Launch a60 = 12,363,154,637,117 (= b59), b = a + 20,000 = 12,363,154,657,117
+  — **NON-SNAPPED** (width 20,000). M = 60, C_R = 1, 28 workers,
+  N_range [691008, 691008], 33,650 evals, 2645.7 s.
+- **Seam audit FIRST (0348 rule):** g_a60 ≡ g_b59 exact dyadic
+  [232127344777046640030585043774150839739, −86, 16777217, −110] —
+  bit-identical, BEFORE CE60 was written.
+- **CLEAN WINDOW:** roesser_failures_inside = 0 — nothing to record or
+  suppress (streak: w57 CLEAN, w58 CLEAN, w59 one recorded rescue, w60 CLEAN).
+  End Rosser runs 49/42 (both ≥ 12); 0 cross-check failures;
+  0 undetermined Gram signs.
+- **Verifier (layer 2):** CERTIFIED: true, turing_ok: true,
+  points_checked 33,650, sign_changes_inside 20,000 = b − a,
+  K_conservative 12, endpoints recomputed and matched.
+- **Endpoint:** g_b60 = 3,000,175,617,844.5802597930180285 ± 1.29e-26 —
+  exact tuple [58031836284649370708014610130223021139, −84,
+  16777217, −110]. **tCE60 = 3,000,175,617,844**.
+- **INCREMENTS: 4,673 (standing pace continues).**
+  **tCE60 − tPT2 = 285,044** — 275k MILESTONE [CE58] CARRIED (margin 10,044),
+  re-proven (`frontierPast275k`); next mark 300k sits **14,956 ahead**
+  (expected ~w64; compute, do not pre-announce). NO CASING (frac 0.58026).
+  HONEST NOTE: two-decimal lower-bound margin unusually thin (~2.6e-4, vs the
+  usual ~5e-3 to 1e-2) — recorded openly; exact rational comparison by
+  norm_num, no floating point; gB60Lo := 300017561784458/100.
+- **Certified total: 1,199,987 + 20,000 = 1,219,987 — THE 1,200,000
+  CERTIFIED-ZERO MARK IS CROSSED IN WINDOW 60** (as predicted in 0365).
+  1.1M [w55] and 1.0M [w50] marks carried.
+- **CE60.lean GREEN** (8,826 targeted jobs, 0 errors 0 warnings; full
+  tree 17,454; olean fresh): gB60Lo := 300017561784458/100;
+  faceShrinkCE60 = 4673; frontierGapAboveH0 = 285044; five milestone
+  theorems (175k/200k/225k/250k/275k) carried + re-proven;
+  ce59WinClauseFull (w59 full slice re-cited); ce60WinClause (terminal
+  slice, documented); 61-way band; terminalFaceCE60 NAMED OPEN; all 20
+  doc blocks swept; clause-doc audit OK.
+- **Honest tally:** 29 of 61 chain windows clean; rescue windows 7, 21,
+  28, 29, 34, 37, 42, 43, 44 (one each), 45 (two), 51 (one), 52 (two),
+  53 (three), 54 (one), 55 (one), 56 (four), 59 (one) — all quota-met,
+  none suppressed.
+- **NO analytic move:** face open at tCE60; M2 wall {θ | 4/7 < θ}
+  pinned via SWall; absolute clause dead as published input; θ=∞
+  lane conjectural.
+- **NO RH CLAIM.** Next unit — window 61 (a61 = 12,363,154,657,117);
+  the 300,000-unit frontier mark is 14,956 ahead (expect ~w64).

@@ -1,0 +1,29 @@
+{
+  "id": "0366",
+  "ts": "2026-11-11T17:35:00Z",
+  "lane": "M5 - certified window production + terminal-face re-anchoring (option B)",
+  "status": "COMPLETE",
+  "title": "window 60 certified CLEAN (width 20 000, ZERO Rosser failures) + CE60 re-anchor: 4 673 standing pace; tCE60 = 3 000 175 617 844 = 285 044 above H0 (275k [CE58] CARRIED, re-proven; 300k 14 956 ahead - expected ~w64); **THE 1 200 000 CERTIFIED-ZERO MARK IS CROSSED IN WINDOW 60** (total 1 219 987)",
+  "facts": [
+    "Launch (0365 hand-off): a60 = 12 363 154 637 117 (= b59, W59's final b), b requested = a + 20 000 = 12 363 154 657 117, b ACTUAL = 12 363 154 657 117 - NON-SNAPPED (width 20 000; both endpoints good Gram points at working precision). Run: M = 60, C_R = 1, 28 workers, N_range = [691008, 691008] (constant across the chain), 33 650 evaluations, 2645.7 s. Certificate: tmp/ce2/ce1_window_H0_v1/window60_b60.json.",
+    "Seam audit FIRST (0348 process rule - passed BEFORE CE60 was written): g_a60 == g_b59 bit-identical in exact dyadic form, tuple [232127344777046640030585043774150839739, -86, 16777217, -110] on both sides (i.e. 3 000 175 613 171.645140768233954 +/- 1.29e-26).",
+    "CLEAN WINDOW: roesser_failures_inside = 0, rescued_rosser_exceptions = [] - nothing to record or suppress (recent streak: w57 CLEAN, w58 CLEAN, w59 one recorded interior rescue, w60 CLEAN). End Rosser runs: 49 left of g_a60, 42 right of g_b60 (both >= K = 12); 0 cross-check failures (all 33 650 records); 0 undetermined Gram signs.",
+    "Verifier (layer 2, code/verify_window.py on window60_b60.json): CERTIFIED: true, turing_ok: true, points_checked = 33 650, sign_changes_inside = 20 000 = b - a, roesser_failures_inside = 0, roesser_run_left_of_a = 49, roesser_run_right_of_b = 42, K_conservative = 12 (Trudgian Cor2.3 = [5.71899 +/- 1.24e-6], doubled = [11.4380 +/- 1.76e-5], Amberger Thm2.3 = [9.14967 +/- 4.15e-6] - all below 12), endpoints recomputed and matched.",
+    "Endpoint decode: g_b60 = 3 000 175 617 844.5802597930180285 +/- 1.29e-26 - exact recorded tuple [58031836284649370708014610130223021139, -84, 16777217, -110] (mid 58031836284649370708014610130223021139 x 2^-84, rad 16777217 x 2^-110). floor(g_b60) = tCE60 = 3 000 175 617 844.",
+    "Increment: tCE60 - tCE59 = 4 673 - the standing pace continues (isolated 4 672's at w45->w46 and w53->w54 remain; no pattern assumed, recorded honestly). tCE60 - tPT2 = 285 044 - the 275 000-unit MILESTONE (crossed in WINDOW 58 at 275 698) is CARRIED (margin 10 044) and re-proven (frontierPast275k at the new frontier); the next round mark 300 000 sits 14 956 ahead - at the ~4 673/window pace, expected in window 64 (compute from the decoded endpoint, do not pre-announce).",
+    "CASING: NOT triggered - frac(g_b60) = 0.5802597930180285, two-decimal round-down 0.58 != 0.00. gB60Lo := 300017561784458/100. HONEST NOTE: the two-decimal lower-bound margin is unusually thin here (~2.6e-4, versus the usual ~5e-3 to 1e-2) - recorded openly; the inequality gB60Lo < g_b60 is an EXACT rational comparison proved by norm_num in Lean, no floating point involved, so the thin margin has no effect on the formal content. Window 38 / CE38 remains the only CASING case so far.",
+    "MILESTONE (certified count): 1 199 987 (at g_b59) + 20 000 (full width) = 1 219 987 over (g_a1, g_b60] - THE 1 200 000 CERTIFIED-ZERO MARK IS CROSSED IN WINDOW 60 (pipeline data, recorded not re-derived). The 1 100 000 mark [window 55, 0361] and the 1 000 000 mark [window 50] are carried.",
+    "CE60 formal module: formal/RhAttack/CE60.lean - GREEN (targeted build 8 826 jobs, 0 errors 0 warnings; full tree green at 17 454 jobs; .olean fresh). All 20 inherited declaration doc blocks swept to CE60-correct text (including the frontierPast275k carry-doc and the thin-margin honest note); clause-doc audit passed (ce59WinClauseFull re-cites the WINDOW-59 run as a full slice at the CE60 level; ce60WinClause cites the WINDOW-60 terminal slice). Generator: /tmp/gen_ce60.py (derived mechanically from gen_ce59.py - gen_ce59's NEW strings are exactly the CE59.lean contents, so the shift is construction-safe; hand fixes: band-signature h59/h60/h61 slot surgery, iff arg-name convention, band-body terminal extension hseam60, frontierPast275k carry). Exports: gB60Lo, tCE60, tCE60_lt_gB60Lo, tCE59_lt_tCE60, gB59Lo_lt_tCE60, faceShrinkCE60 (= 4673), frontierGapAboveH0 (= 285044), frontierPast175k/200k/225k/250k/275k (carried, re-proven), gB59Lo_lt_gB60Lo, ce59WinClauseFull, ce60WinClause, bandOfWindows60 (61-way), allOnLineUpToCE60, terminalFaceCE60, faceCE59_implies_faceCE60, terminalFaceCE60_iff_faceCE59, rh_split_at_CE60, rh_reanchored_CE60, rh_of_terminalFaceCE60, terminalFaceCE60_of_thetaInf.",
+    "Honest tallies: 29 of 61 chain windows clean (no internal failures); rescue windows: 7, 21, 28, 29, 34, 37, 42, 43, 44 (one each), 45 (two), 51 (one), 52 (two), 53 (three), 54 (one), 55 (one), 56 (four), 59 (one) - all quota-met, none suppressed. Snapped-width windows unchanged through w52 (w53-w60 NON-SNAPPED).",
+    "NO RH CLAIM. terminalFaceCE60 is the named open face; it is NOT closed. The M2 wall {theta | 4/7 < theta} remains pinned (SWall); the absolute clause remains dead as a published input; the theta = inf lane remains conjectural by nature. No analytic move in this unit.",
+    "Next unit: window 61 (a61 = 12 363 154 657 117, b_req = 12 363 154 677 117), then CE61 re-anchor after the exact-dyadic seam audit. MILESTONE WATCH: the 300 000-unit frontier mark is 14 956 ahead (expected ~w64); the next certified-zero round mark is 1 300 000 (80 013 ahead - expect ~w64/65)."
+  ],
+  "artifacts": [
+    "tmp/ce2/ce1_window_H0_v1/window60_b60.json",
+    "tmp/ce2/ce1_window_H0_v1/verify60.log",
+    "formal/RhAttack/CE60.lean",
+    "/tmp/gen_ce60.py",
+    "/tmp/derive_gen_ce60.py",
+    "/tmp/ce60_docsweep.py"
+  ]
+}
