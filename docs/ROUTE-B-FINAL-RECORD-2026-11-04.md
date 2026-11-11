@@ -4878,3 +4878,47 @@ out).
   pinned via SWall; absolute clause dead as published input; θ=∞
   lane conjectural.
 - **NO RH CLAIM.** Next unit — window 59 (a59 = 12,363,154,617,117).
+
+## 96 · 0365: window 59 + CE59 — NON-SNAPPED (width 20,000), ONE interior Rosser exception rescued/quota-met/recorded; 4,673 standing pace; tCE59 = 280,371 above H0 — 275k [CE58] CARRIED (re-proven), 300k now 19,629 ahead (expect ~w64); certified 1,199,987 (1.2M now only 13 ahead — expect w60)
+- **0365 (M5 LANE - WINDOW 59 + CE59).**
+  Launch a59 = 12,363,154,617,117 (= b58), b = a + 20,000 = 12,363,154,637,117
+  — **NON-SNAPPED** (width 20,000). M = 60, C_R = 1, 28 workers,
+  N_range [691008, 691008], 34,153 evals, 2638.4 s.
+- **Seam audit FIRST (0348 rule):** g_a59 ≡ g_b58 exact dyadic
+  [29015918051936974651021361477904096537, −83, 16777217, −110] —
+  bit-identical, BEFORE CE59 was written.
+- **ONE INTERNAL ROSSER EXCEPTION, RESCUED, QUOTA-MET, RECORDED** (interior
+  block — touches neither end run): block [12,363,154,630,886,
+  12,363,154,630,889] (need 3, found 1, 193 pts, m = 64) → union
+  [12,363,154,630,885, 12,363,154,630,891] (need 6, FOUND 6, m = 4).
+  End Rosser runs 45/51 (both ≥ 12); 0 cross-check failures;
+  0 undetermined Gram signs.
+- **Verifier (layer 2):** CERTIFIED: true, turing_ok: true,
+  points_checked 34,153, sign_changes_inside 20,000 = b − a,
+  roesser_failures_inside 1, K_conservative 12, endpoints matched.
+- **Endpoint:** g_b59 = 3,000,175,613,171.645140768233954 ± 1.29e-26 —
+  exact tuple [232127344777046640030585043774150839739, −86,
+  16777217, −110]. **tCE59 = 3,000,175,613,171**.
+- **INCREMENTS: 4,673 (standing pace continues).**
+  **tCE59 − tPT2 = 280,371** — 275k MILESTONE [CE58] CARRIED (margin 5,371),
+  re-proven (`frontierPast275k`); next mark 300k sits **19,629 ahead**
+  (expected ~w64; compute, do not pre-announce). NO CASING
+  (frac 0.64514, margin ~5.0e-3).
+- **Certified total: 1,179,987 + 20,000 = 1,199,987.** 1.1M mark [w55]
+  carried; **1.2M mark now only 13 ahead — crossing expected in w60.**
+- **CE59.lean GREEN** (8,825 targeted jobs, 0 errors 0 warnings; full
+  tree 17,454; olean fresh): gB59Lo := 300017561317164/100;
+  faceShrinkCE59 = 4673; frontierGapAboveH0 = 280371; five milestone
+  theorems (175k/200k/225k/250k/275k) carried + re-proven;
+  ce58WinClauseFull (w58 full slice re-cited); ce59WinClause (terminal
+  slice, documented); 60-way band; terminalFaceCE59 NAMED OPEN; all 20
+  doc blocks swept; clause-doc audit OK.
+- **Honest tally:** 28 of 60 chain windows clean; rescue windows 7, 21,
+  28, 29, 34, 37, 42, 43, 44 (one each), 45 (two), 51 (one), 52 (two),
+  53 (three), 54 (one), 55 (one), 56 (four), 59 (one) — all quota-met,
+  none suppressed.
+- **NO analytic move:** face open at tCE59; M2 wall {θ | 4/7 < θ}
+  pinned via SWall; absolute clause dead as published input; θ=∞
+  lane conjectural.
+- **NO RH CLAIM.** Next unit — window 60 (a60 = 12,363,154,637,117);
+  the 1,200,000-certified-zero mark is 13 ahead (EXPECTED IN W60).

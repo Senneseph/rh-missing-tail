@@ -3993,3 +3993,19 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
   derived mechanically from gen_ce57 for construction safety). **Certified
   1,179,987** (1.1M carried; 1.2M 20,013 ahead — running total at w59 should land
   1,199,987 [13 short again], crossing expected w60). Honest tally 28 of 59 clean.
+
+## E95 · 0365 — window 59 + CE59 (NON-SNAPPED width 20,000; ONE interior Rosser exception rescued/quota-met/recorded; 4,673 standing pace; 280,371 above H0 — 275k [CE58] CARRIED re-proven, 300k 19,629 ahead (~w64); certified 1,199,987 — 1.2M now only 13 ahead, expect w60)
+- **0365 (window 59 + CE59):** launched correctly from b58 (a59 = 12,363,154,617,117);
+  seam audit g_a59 ≡ g_b58 tuple [29015918051936974651021361477904096537, −83,
+  16777217, −110] BEFORE the module; **NON-SNAPPED (b = a + 20,000)**; **ONE interior
+  Rosser exception, rescued, quota-met, recorded** (block [12,363,154,630,886,
+  12,363,154,630,889] need 3/found 1 → union [..885, ..891] need 6/FOUND 6, m = 4);
+  20,000 zeros simple+on-line (34,153 pts, 2638.4 s; verifier CERTIFIED/turing_ok,
+  K_cons 12, end runs 45/51). g_b59 = 3,000,175,613,171.645140768233954 ± 1.29e-26
+  (frac 0.64514, no CASING, margin ~5.0e-3). **tCE59 = 3,000,175,613,171;
+  increment 4,673 (standing pace continues)**; **tCE59 − tPT2 = 280,371 — 275k
+  [CE58] CARRIED** (re-proven; 300k now 19,629 ahead — expect ~w64). CE59 GREEN
+  (8,825 targeted, 0 errors 0 warnings, olean fresh; 20 doc blocks swept,
+  clause-doc audit OK; generator derived mechanically from gen_ce58 for
+  construction safety). **Certified 1,199,987** (1.1M carried; **1.2M now only
+  13 ahead — crossing expected in w60**). Honest tally 28 of 60 clean.
