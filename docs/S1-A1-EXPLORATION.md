@@ -3977,3 +3977,19 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
   1,159,987** (1.1M carried; 1.2M 40,013 ahead — running total at w59 should land
   1,199,987 [13 short again], crossing expected w60). Honest tally 27 of 58 clean.
   NO analytic move: face open at tCE57; M2 wall pinned. **NO RH CLAIM.**
+
+## E94 · 0364 — window 58 + CE58 (CLEAN WINDOW — second consecutive; NON-SNAPPED width 20,000; 4,673 standing pace; 275,698 above H0 — **THE 275,000-UNIT MILESTONE IS CROSSED IN WINDOW 58**, frontierPast275k proven in-tree, exactly as predicted from 0363; certified 1,179,987)
+- **0364 (window 58 + CE58):** launched correctly from b57 (a58 = 12,363,154,597,117);
+  seam audit g_a58 ≡ g_b57 tuple [116063672026972477182407992315941454601, −85,
+  16777217, −110] BEFORE the module; **NON-SNAPPED (b = a + 20,000)**; **CLEAN:
+  ZERO Rosser failures (second consecutive clean window)**; 20,000 zeros simple+on-line
+  (33,532 pts, 2617.8 s; verifier CERTIFIED/turing_ok, K_cons 12, end runs 48/46).
+  g_b58 = 3,000,175,608,498.709960937500 ± 1.29e-26 (frac 0.70996, no CASING,
+  margin ~9.96e-3). **tCE58 = 3,000,175,608,498; increment 4,673 (standing pace
+  continues)**; **tCE58 − tPT2 = 275,698 — THE 275,000-UNIT MILESTONE IS CROSSED
+  IN WINDOW 58 (margin 698)**, exactly where 0363 predicted; `frontierPast275k`
+  proven in-tree. CE58 GREEN (8,824 targeted, 0 errors 0 warnings, olean fresh;
+  19 doc blocks swept + new milestone doc, clause-doc audit OK; generator
+  derived mechanically from gen_ce57 for construction safety). **Certified
+  1,179,987** (1.1M carried; 1.2M 20,013 ahead — running total at w59 should land
+  1,199,987 [13 short again], crossing expected w60). Honest tally 28 of 59 clean.

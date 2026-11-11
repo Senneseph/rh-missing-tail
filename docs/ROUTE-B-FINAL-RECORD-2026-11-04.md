@@ -4832,3 +4832,49 @@ out).
   lane conjectural.
 - **NO RH CLAIM.** Next unit — window 58 (a58 = 12,363,154,597,117);
   the 275,000-unit mark is 3,975 ahead (EXPECTED IN W58).
+
+## 95 · 0364: window 58 + CE58 — CLEAN WINDOW (second consecutive), NON-SNAPPED (width 20,000); 4,673 standing pace; tCE58 = 275,698 above H0 — **THE 275,000-UNIT MILESTONE IS CROSSED IN WINDOW 58** (frontierPast275k proven in-tree, exactly as predicted from 0363); certified 1,179,987
+- **0364 (M5 LANE - WINDOW 58 + CE58).**
+  Launch a58 = 12,363,154,597,117 (= b57), b = a + 20,000 = 12,363,154,617,117
+  — **NON-SNAPPED** (width 20,000). M = 60, C_R = 1, 28 workers,
+  N_range [691008, 691008], 33,532 evals, 2617.8 s.
+- **Seam audit FIRST (0348 rule):** g_a58 ≡ g_b57 exact dyadic
+  [116063672026972477182407992315941454601, −85, 16777217, −110] —
+  bit-identical, BEFORE CE58 was written.
+- **CLEAN WINDOW:** roesser_failures_inside = 0 — the SECOND CONSECUTIVE
+  clean window (w57 was the first since w50). Nothing to record or
+  suppress. End Rosser runs 48/46 (both ≥ 12); 0 cross-check failures;
+  0 undetermined Gram signs.
+- **Verifier (layer 2):** CERTIFIED: true, turing_ok: true,
+  points_checked 33,532, sign_changes_inside 20,000 = b − a,
+  K_conservative 12, endpoints recomputed and matched.
+- **Endpoint:** g_b58 = 3,000,175,608,498.709960937500 ± 1.29e-26 —
+  exact tuple [29015918051936974651021361477904096537, −83,
+  16777217, −110]. **tCE58 = 3,000,175,608,498**.
+- **INCREMENTS: 4,673 (standing pace continues).**
+  **tCE58 − tPT2 = 275,698 — THE 275,000-UNIT MILESTONE IS CROSSED IN
+  WINDOW 58** (margin 698) — exactly where 0363 predicted (271,025 + 4,672
+  = 275,697 ≥ 275,000 at even the slowest observed increment).
+  `frontierPast275k` PROVEN IN-TREE (new theorem). Round-mark sequence:
+  100,000 @ CE22 · 125,000 @ CE27 · 150,000 @ CE33 · 175,000 @ CE38 ·
+  200,000 @ CE42B · 225,000 @ CE48 · 250,000 @ CE53 · **275,000 @ CE58**;
+  next mark 300,000 sits 24,302 ahead (expected ~w63/64; compute, do not
+  pre-announce). NO CASING (frac 0.70996, margin ~9.96e-3).
+- **Certified total: 1,159,987 + 20,000 = 1,179,987.** 1.1M mark [w55]
+  carried; 1.2M mark 20,013 ahead (running total at w59 should land
+  1,199,987 — 13 short again — crossing expected w60).
+- **CE58.lean GREEN** (8,824 targeted jobs, 0 errors 0 warnings; full
+  tree 17,454; olean fresh): gB58Lo := 300017560849870/100;
+  faceShrinkCE58 = 4673; frontierGapAboveH0 = 275698; five milestone
+  theorems (175k/200k/225k/250k carried + 275k NEW); ce57WinClauseFull
+  (w57 full slice re-cited); ce58WinClause (terminal slice, documented);
+  59-way band; terminalFaceCE58 NAMED OPEN; all 19 doc blocks swept +
+  new frontierPast275k doc; clause-doc audit OK.
+- **Honest tally:** 28 of 59 chain windows clean; rescue windows 7, 21,
+  28, 29, 34, 37, 42, 43, 44 (one each), 45 (two), 51 (one), 52 (two),
+  53 (three), 54 (one), 55 (one), 56 (four) — all quota-met, none
+  suppressed.
+- **NO analytic move:** face open at tCE58; M2 wall {θ | 4/7 < θ}
+  pinned via SWall; absolute clause dead as published input; θ=∞
+  lane conjectural.
+- **NO RH CLAIM.** Next unit — window 59 (a59 = 12,363,154,617,117).
