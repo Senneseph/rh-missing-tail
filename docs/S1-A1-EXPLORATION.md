@@ -4192,3 +4192,15 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
   certified total **1 419 986 - the 1 400 000 CERTIFIED-ZERO MARK CROSSED
   IN WINDOW 70** exactly as forecast at 0374/0375. W71 to launch in
   overlap.
+- **0376 (unit 90) — WINDOW 70 + CE70:** W70 certified (non-snapped
+  20 000; 33 731 evals, 2 490.4 s, seeded 136 403, 32 workers; runs
+  47/50, K = 12) - ONE interior Rosser failure rescued quota-met
+  (m = 16), recorded. tCE70 = 3 000 175 664 573 (increment 4 673);
+  331 773 above H0 (325k carried, margin 6 773; 300k carried, margin
+  31 773; 350k 18 227 ahead ~w74). **CENSUS: certified total 1 419 986 =
+  THE 1 400 000 CERTIFIED-ZERO MARK CROSSED IN WINDOW 70 - the 0375
+  forecast (14 ahead) confirmed exactly**; 1.5M 80 014 ahead (~w78). CE70
+  green (8 836 / 17 454, fresh, 21 docs; deriver now slices PAST blocks
+  verbatim from the predecessor - closes the hand-carry drift hole from
+  0371/0374). Face now **terminalFaceCE70** - OPEN, NO RH CLAIM. Tally: 32
+  of 69 clean (37 rescue windows, 56 failures). W71 running in overlap.

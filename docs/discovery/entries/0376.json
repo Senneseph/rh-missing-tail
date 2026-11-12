@@ -1,0 +1,132 @@
+{
+  "id": "0376",
+  "ts": "2026-11-12T04:53:13",
+  "lane": "M5",
+  "unit": 90,
+  "status": "LANE_PROGRESS",
+  "rh_claim": false,
+  "no_rh_claim": true,
+  "title": "window 70 certified + CE70 green + terminalFaceCE70: 1 400 000 CERTIFIED-ZERO MARK CROSSED (1 419 986 - forecast confirmed, 14 were ahead at 0375); frontier 331 773 above H0 (325k carried, margin 6 773); W71 launched in overlap",
+  "facts": {
+    "window": 70,
+    "a": 12363154837116,
+    "b_requested": 12363154857116,
+    "b_actual": 12363154857116,
+    "snapped": false,
+    "width_b_minus_a": 20000,
+    "run": {
+      "M": 60,
+      "C_R": 1,
+      "N_range": [
+        691008,
+        691008
+      ],
+      "workers": 32,
+      "prec": 128,
+      "evals": 33731,
+      "seconds": 2490.4,
+      "resumed_from_cache": 136403,
+      "cache_seeded_from": "window69_b69.json.cache.jsonl"
+    },
+    "verifier": {
+      "certified": true,
+      "turing_ok": true,
+      "points_checked": 33731,
+      "sign_changes_inside": 20000,
+      "rosser_failures_inside": 1,
+      "rosser_run_left_of_a": 47,
+      "rosser_run_right_of_b": 50,
+      "K_conservative": 12,
+      "cross_check_failures": 0,
+      "undetermined_gram_signs": 0
+    },
+    "rosser_exceptions_rescued_quota_met": [
+      {
+        "block": [
+          12363154845313,
+          12363154845315
+        ],
+        "need": 2,
+        "found": 0,
+        "points": 129,
+        "m": 64,
+        "union": [
+          12363154845312,
+          12363154845317
+        ],
+        "union_need": 5,
+        "union_found": 5,
+        "union_m": 16
+      }
+    ],
+    "rosser_policy": "recorded, not suppressed; quota met at m=16",
+    "seam": {
+      "g_a70_eq_g_b69": true,
+      "tuple": [
+        116063674196268494780427453099147563155,
+        -85,
+        16777217,
+        -110
+      ],
+      "audit": "bit-identical exact dyadic tuple, performed before CE70 was written and before W71 launch (0348 process rule)"
+    },
+    "endpoint_g_b70": {
+      "tuple": [
+        116063674377043916076460899967516404691,
+        -85,
+        16777217,
+        -110
+      ],
+      "decimal": "3 000 175 664 573.697788399139269329",
+      "radius": "~1.29e-26"
+    },
+    "frontier": {
+      "tCE70": 3000175664573,
+      "increment_over_tCE69": 4673,
+      "gap_above_H0": 331773,
+      "gB70Lo": "300017566457369 / 100",
+      "gB70Lo_margin": "~7.8e-3",
+      "frac": 0.6978,
+      "casing": false,
+      "only_casing_case": "window 38 / CE38"
+    },
+    "milestone": {
+      "frontier_325k": "CARRIED (crossed window 69 [0375] at 327 100; now margin 6 773)",
+      "frontier_300k": "CARRIED (margin 31 773)",
+      "frontier_350k": "18 227 ahead - expected ~window 74 (compute, do not pre-announce)",
+      "round_mark_sequence_above_H0": "100 000 @ CE22, 125 000 @ CE27, 150 000 @ CE33, 175 000 @ CE38, 200 000 @ CE42B, 225 000 @ CE48, 250 000 @ CE53, 275 000 @ CE58, 300 000 @ CE64, 325 000 @ CE69"
+    },
+    "certified_zeros": {
+      "total_through_g_b70": 1419986,
+      "1.4M": "CROSSED IN THIS WINDOW - exactly as forecast at 0375 (1 400 000 - 1 399 986 = 14 ahead, confirm from the verified count, never pre-announced)",
+      "1.5M": "80 014 ahead - expected ~window 78 (20 000/window; pipeline data)"
+    },
+    "formal": {
+      "module": "CE70.lean",
+      "targeted_build": "lake build RhAttack.CE70 green (8836 jobs)",
+      "full_build": "lake build green (17454 jobs)",
+      "fresh_olean": true,
+      "terminal_face": "terminalFaceCE70 (OPEN HYPOTHESIS)",
+      "iff": "terminalFaceCE70_iff_faceCE69",
+      "milestone_handling": "frontierPast275k + frontierPast300k + frontierPast325k all carried/proven at 331 773 (PAST blocks extracted verbatim from CE69.lean in the deriver - no hand-carry drift); the five older markers carry via value shift; 350 000 NOT crossed - no new theorem",
+      "doc_sweep": "21/21 single-line docs (ce70_docsweep.py)",
+      "stale_token_scan": "clean (only legitimate hits: crossing-history '327 100' inside milestone docs; forecast arithmetic '1 399 986' in header; seam decimals)"
+    },
+    "generator_lessons": {
+      "past_block_extraction": "the 4-arg past reps for CE70 now slice the EXACT contiguous text (doc + theorem + embedded 325k block) from the predecessor .lean file at deriver run time - immune to the hand-carry drift holes found in 0371/0374",
+      "margin_audits": "a margin-arithmetic slip (300k carry margin written as 56 773 instead of 31 773) was caught pre-commit by recomputation - margins are now double-checked against the mark list (331 773 - mark) at writing time"
+    },
+    "pipeline_overlap": {
+      "w71": "launched before CE70 formalization finished (legal: W70 seam audit already passed); W71 = 5th seeded-cache + 32-worker overlap run",
+      "critical_path": "max(run, formalization); run times flat at ~2 490-2 499 s for windows 67-70"
+    },
+    "tally_certificate_derived": {
+      "scope": "windows 2..70 named certificates (recomputed from certificates on 2026-11-12)",
+      "clean": 32,
+      "with_recorded_rescue": 37,
+      "total_internal_failures": 56,
+      "note": "W70 adds 1 interior failure (total 56); all quota-met, all recorded"
+    }
+  },
+  "honesty": "re-run of third-party pipeline, not from-scratch certification; Rosser exceptions recorded not suppressed; only window total and end Rosser runs enter the Turing step; NO RH CLAIM (terminalFaceCE70 is an open hypothesis; re-anchoring is a certificate, not a logical move)"
+}

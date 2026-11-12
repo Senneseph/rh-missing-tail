@@ -5419,3 +5419,50 @@ out).
   3 000 175 664 573.697788... + or - 1.29e-26; tCE70 - tPT2 = 331 773;
   **certified total 1 419 986 -> the 1 400 000 CERTIFIED-ZERO MARK IS
   CROSSED IN WINDOW 70, exactly as forecast**).
+
+## 0376 — WINDOW 70 + CE70 (unit 90, 2026-11-12): the 1 400 000 certified-zero
+mark is crossed
+- **WINDOW:** a = 12 363 154 837 116 (= b69); b requested/actual =
+  12 363 154 857 116; **NON-SNAPPED, width b - a = 20 000**; M = 60,
+  C_R = 1, N_range constant, 32 workers, prec 128; 33 731 evals,
+  2 490.4 s; resumed_from_cache = 136 403 (seeded from window69's cache).
+- **ROSSER:** **one recorded interior failure**, rescued quota-met,
+  RECORDED not suppressed: block [12 363 154 845 313, 12 363 154 845 315]
+  (need 2, found 0, 129 pts, m = 64) -> union [12 363 154 845 312,
+  12 363 154 845 317] (need 5, FOUND 5, m = 16). End runs 47 / 50
+  (>= K = 12). Verifier: CERTIFIED: true, turing_ok: true, points
+  33 731, 0 cross-check failures, 0 undetermined signs.
+- **SEAM:** g_a70 == g_b69 BIT-IDENTICAL
+  ([116063674196268494780427453099147563155, -85, 16777217, -110]);
+  audited before CE70 was written and before W71 launch.
+- **ENDPOINT g_b70:** [116063674377043916076460899967516404691, -85,
+  16777217, -110] = 3 000 175 664 573.697788399139269329 + or -
+  1.29e-26; tCE70 = 3 000 175 664 573; gB70Lo = 300017566457369/100
+  (margin ~7.8e-3; frac 0.6978 -> NO CASING; window 38 remains the only
+  CASING case).
+- **INCREMENT:** 4 673 (the usual one; the 4 672 occurrences remain three).
+- **FRONTIER:** 331 773 certified zeros above H0 - 325 000-unit mark
+  CARRIED (margin 6 773; crossed in window 69, 0375); 300 000-unit mark
+  CARRIED (margin 31 773); 350 000-unit mark 18 227 ahead (expected
+  ~window 74, compute, do not pre-announce).
+- **CENSUS MILESTONE:** **the 1 400 000 CERTIFIED-ZERO MARK IS CROSSED IN
+  WINDOW 70** - cumulative total 1 419 986 over (g_a1, g_b70]. EXACTLY as
+  forecast at 0375 (1 400 000 - 1 399 986 = 14 ahead; confirmed from the
+  verified count, never pre-announced). The 1 500 000 mark is 80 014 ahead
+  (expected ~window 78; pipeline data).
+- **LEAN:** CE70.lean green (targeted 8 836 / full tree 17 454, olean
+  fresh, 21 docs swept; stale-token scan clean). All seven milestone
+  theorems (175k-325k) carried/proven at 331 773; the deriver now slices
+  the predecessor's PAST text VERBATIM (no hand-carry drift). Terminal face
+  is now **terminalFaceCE70** - OPEN, NO RH CLAIM.
+- **TALLY (certificate-derived):** 32 of 69 clean; 37 rescue windows; 56
+  total internal Rosser failures (W70 adds 1).
+- **OVERLAP:** W70 ran while CE69 formalized (fourth overlap run, flat at
+  2 490.4 s); W71 launched before CE70 closeout - per-unit critical path =
+  max(run, formalization).
+- **HONEST ARITHMETIC NOTE:** a 300 000-carry margin was initially drafted
+  as 56 773 (the 275 000 margin); caught and corrected to 31 773 before
+  commit (331 773 - 300 000 = 31 773). Margins are now double-checked
+  against the mark list at writing time.
+- **NO RH CLAIM.** Next unit — window 71 (a71 = 12 363 154 877 116; seeds
+  cache from window70, 32 workers; running in pipeline overlap).
