@@ -4082,3 +4082,23 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
   clause-doc audit OK; generator derived mechanically from gen_ce62 for
   construction safety). **Certified 1,279,986 (SNAPPED: +19,999; 1.2M [w60]
   carried; 1.3M is 20,014 ahead — ~w64/65).** Honest tally 29 of 64 clean.
+
+## E100 · 0370 — window 64 + CE64 (CLEAN WINDOW — zero Rosser failures; NON-SNAPPED width 20,000; 4,673 standing pace; tCE64 = 303,736 above H0 — **THE 300,000-UNIT MILESTONE IS CROSSED IN WINDOW 64**, margin 3,736, the 0369 prediction is EXACT; certified 1,299,986 — the 1,300,000 mark is 14 ahead, expect w65)
+- **0370 (window 64 + CE64):** launched correctly from the SNAPPED b63
+  (a64 = 12,363,154,717,116); seam audit g_a64 ≡ g_b63 tuple
+  [232127346223231933568697690834737861837, −86, 16777217, −110] BEFORE the
+  module; **NON-SNAPPED (b = a + 20,000)**; **CLEAN: ZERO Rosser failures**
+  (nothing to record or suppress); 20,000 zeros simple+on-line (33,769 pts,
+  2672.5 s; verifier CERTIFIED/turing_ok, K_cons 12, end runs 46/50). g_b64
+  = 3,000,175,636,536.08708642973481849 ± 1.29e-26 (frac 0.0871, no CASING,
+  margin ~7.1e-3). **tCE64 = 3,000,175,636,536; increment 4,673 (standing
+  pace)**; **tCE64 − tPT2 = 303,736 — THE 300,000-UNIT MILESTONE IS CROSSED
+  IN WINDOW 64** (margin 3,736; the 0369 prediction 299,063 + 4,673 =
+  303,736 is EXACT). CE64 GREEN (8,830 targeted, 0 errors 0 warnings, olean
+  fresh; 20 doc blocks swept; clause-doc audit OK; **new frontierPast300k
+  proven in-tree**, gen_ce58 pattern; generator derived mechanically from
+  gen_ce63 for construction safety). **Certified 1,299,986 (1.2M [w60]
+  carried; the 1,300,000 mark is 14 ahead — EXPECTED IN WINDOW 65; the
+  325,000-unit frontier mark is 21,264 ahead — expect ~w69).** Honest tally
+  30 of 65 clean. Round-mark sequence above H0 now ends: 250 000 @ CE53,
+  275 000 @ CE58, **300 000 @ CE64**.

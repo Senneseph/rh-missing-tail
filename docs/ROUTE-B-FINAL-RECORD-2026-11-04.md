@@ -5105,3 +5105,51 @@ out).
 - **NO RH CLAIM.** Next unit — window 64 (a64 = 12,363,154,717,116 —
   launched from the SNAPPED b63); the 300,000-unit frontier mark is 937
   ahead (**expect the crossing in WINDOW 64**).
+
+## 101 · 0370: window 64 + CE64 — CLEAN WINDOW (zero Rosser failures), NON-SNAPPED (width 20,000); 4,673 standing pace; tCE64 = 303,736 above H0 — **THE 300,000-UNIT MILESTONE IS CROSSED IN WINDOW 64** (margin 3,736 — the 0369 prediction is EXACT); certified 1,299,986 (1.3M is 14 ahead — expect w65)
+- **0370 (M5 LANE - WINDOW 64 + CE64).**
+  Launch a64 = 12,363,154,717,116 (= b63, the SNAPPED endpoint), b =
+  a + 20,000 = 12,363,154,737,116 — **NON-SNAPPED** (width 20,000). M = 60,
+  C_R = 1, 28 workers, N_range [691008, 691008], 33,769 evals, 2672.5 s.
+- **Seam audit FIRST (0348 rule):** g_a64 ≡ g_b63 exact dyadic
+  [232127346223231933568697690834737861837, −86, 16777217, −110] —
+  bit-identical, BEFORE CE64 was written.
+- **CLEAN WINDOW:** roesser_failures_inside = 0 — nothing to record or
+  suppress (streak: w59 one rescue, w60 CLEAN, w61 three, w62 one, w63 one,
+  w64 CLEAN). End Rosser runs 46/50 (both ≥ 12); 0 cross-check failures;
+  0 undetermined Gram signs.
+- **Verifier (layer 2):** CERTIFIED: true, turing_ok: true,
+  points_checked 33,769, sign_changes_inside 20,000 = b − a,
+  roesser_failures_inside 0, K_conservative 12, endpoints recomputed
+  and matched.
+- **Endpoint:** g_b64 = 3,000,175,636,536.08708642973481849 ± 1.29e-26 —
+  exact tuple [232127346584782776286409114165073595457, −86,
+  16777217, −110]. **tCE64 = 3,000,175,636,536**.
+- **INCREMENTS: 4,673 (standing pace continues).**
+  **tCE64 − tPT2 = 303,736 — THE 300,000-UNIT MILESTONE IS CROSSED IN
+  WINDOW 64** (margin 3,736; EXACTLY the 0369 prediction: 299,063 + 4,673
+  = 303,736). Proven in-tree as **frontierPast300k**. Round-mark sequence
+  above H0 now ends: ... 250 000 @ CE53, 275 000 @ CE58, **300 000 @ CE64**;
+  next mark 325k sits 21,264 ahead (expect ~w69; compute, do not
+  pre-announce). NO CASING (frac 0.0871, margin ~7.1e-3).
+  gB64Lo := 300017563653608/100.
+- **Certified total: 1,279,986 + 20,000 = 1,299,986.** 1.2M mark [window 60,
+  0366] carried; **the 1,300,000-certified-zero mark is now 14 ahead —
+  EXPECTED IN WINDOW 65** (confirm from the verified count).
+- **CE64.lean GREEN** (8,830 targeted jobs, 0 errors 0 warnings; full
+  tree 17,454; olean fresh): gB64Lo; faceShrinkCE64 = 4673;
+  frontierGapAboveH0 = 303736; five milestone theorems carried + re-proven
+  PLUS **frontierPast300k (THE NEW MILESTONE)**; ce63WinClauseFull (w63 full
+  slice re-cited); ce64WinClause (terminal slice, documented); 65-way band;
+  terminalFaceCE64 NAMED OPEN; 20 doc blocks swept + past300k milestone doc
+  verified; clause-doc audit OK.
+- **Honest tally:** 30 of 65 chain windows clean; rescue windows 7, 21, 28,
+  29, 34, 37, 42, 43, 44 (one each), 45 (two), 51 (one), 52 (two), 53
+  (three), 54 (one), 55 (one), 56 (four), 59 (one), 61 (three), 62 (one),
+  63 (one) — all quota-met, none suppressed. Snapped: 2, 3, 8, 11, 17, 18,
+  19, 21, 31, 40, 51, 52, 63.
+- **NO analytic move:** face open at tCE64; M2 wall {θ | 4/7 < θ} pinned
+  via SWall; absolute clause dead as published input; θ=∞ lane conjectural.
+- **NO RH CLAIM.** Next unit — window 65 (a65 = 12,363,154,737,116);
+  **the 1,300,000-certified-zero mark is 14 ahead (expect w65)**; the
+  325,000-unit frontier mark is 21,264 ahead (expect ~w69).
