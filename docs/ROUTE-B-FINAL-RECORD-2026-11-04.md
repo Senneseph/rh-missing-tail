@@ -5058,3 +5058,50 @@ out).
   via SWall; absolute clause dead as published input; θ=∞ lane conjectural.
 - **NO RH CLAIM.** Next unit — window 63 (a63 = 12,363,154,697,117); the
   300,000-unit frontier mark is 5,610 ahead (expect w64).
+
+## 100 · 0369: window 63 + CE63 — SNAPPED DOWN by 1 (width 19,999 — FIRST SNAP SINCE WINDOW 52), ONE interior Rosser exception (rescued, quota-met, recorded); 4,673 standing pace; tCE63 = 299,063 above H0 (275k [CE58] CARRIED re-proven; 300k 937 ahead — expect w64); certified 1,279,986 (snapped, +19,999)
+- **0369 (M5 LANE - WINDOW 63 + CE63).**
+  Launch a63 = 12,363,154,697,117 (= b62), b requested = a + 20,000 =
+  12,363,154,717,117, **b ACTUAL = 12,363,154,717,116 — SNAPPED DOWN by 1**
+  (width 19,999 — the requested endpoint was not a good Gram point at working
+  precision; **FIRST SNAP SINCE WINDOW 52**, recorded honestly). M = 60,
+  C_R = 1, 28 workers, N_range [691008, 691008], 33,849 evals, 2662.2 s.
+- **Seam audit FIRST (0348 rule):** g_a63 ≡ g_b62 exact dyadic
+  [232127345861699168372182968546863997789, −86, 16777217, −110] —
+  bit-identical, BEFORE CE63 was written.
+- **ONE interior Rosser-block exception — rescued, quota-met, recorded**
+  (interior; touches neither end Rosser run): [..704,631, ..704,633] need 2
+  found 0 → union [..704,630, ..704,634] FOUND 4/4 (m 8).
+  End Rosser runs 46/49 (both ≥ 12); 0 cross-check failures;
+  0 undetermined Gram signs.
+- **Verifier (layer 2):** CERTIFIED: true, turing_ok: true,
+  points_checked 33,849, sign_changes_inside 19,999 = b − a (SNAPPED),
+  roesser_failures_inside 1, K_conservative 12, endpoints recomputed
+  and matched.
+- **Endpoint:** g_b63 = 3,000,175,631,863.1519684875488765 ± 1.29e-26 —
+  exact tuple [232127346223231933568697690834737861837, −86,
+  16777217, −110]. **tCE63 = 3,000,175,631,863**.
+- **INCREMENTS: 4,673 (standing pace continues).**
+  **tCE63 − tPT2 = 299,063** — 275k MILESTONE [CE58] CARRIED (margin 24,063),
+  re-proven (`frontierPast275k`); next mark 300k sits **937 ahead** —
+  the w63 prediction (937 short) is EXACT; w64 lands ~303,736 —
+  **EXPECTED IN WINDOW 64** (compute, do not pre-announce). NO CASING
+  (frac 0.1520, margin ~1.97e-3). gB63Lo := 300017563186315/100.
+- **Certified total: 1,259,987 + 19,999 = 1,279,986 (SNAPPED, +19 999).**
+  1.2M mark [window 60, 0366] carried; 1.3M sits 20,014 ahead (~w64/65).
+- **CE63.lean GREEN** (8,829 targeted jobs, 0 errors 0 warnings; full
+  tree 17,454; olean fresh): gB63Lo; faceShrinkCE63 = 4673;
+  frontierGapAboveH0 = 299063; five milestone theorems carried + re-proven;
+  ce62WinClauseFull (w62 full slice re-cited); ce63WinClause (terminal slice,
+  documented); 64-way band; terminalFaceCE63 NAMED OPEN; all 20 doc blocks
+  swept; clause-doc audit OK.
+- **Honest tally:** 29 of 64 chain windows clean; rescue windows 7, 21, 28,
+  29, 34, 37, 42, 43, 44 (one each), 45 (two), 51 (one), 52 (two), 53
+  (three), 54 (one), 55 (one), 56 (four), 59 (one), 61 (three), 62 (one),
+  63 (one) — all quota-met, none suppressed. Snapped: 2, 3, 8, 11, 17, 18,
+  19, 21, 31, 40, 51, 52, **63**.
+- **NO analytic move:** face open at tCE63; M2 wall {θ | 4/7 < θ} pinned
+  via SWall; absolute clause dead as published input; θ=∞ lane conjectural.
+- **NO RH CLAIM.** Next unit — window 64 (a64 = 12,363,154,717,116 —
+  launched from the SNAPPED b63); the 300,000-unit frontier mark is 937
+  ahead (**expect the crossing in WINDOW 64**).

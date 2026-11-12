@@ -4062,3 +4062,23 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
   generator derived mechanically from gen_ce61 for construction safety).
   **Certified 1,259,987 (1.2M [w60] carried; 1.3M is 40,013 ahead —
   ~w64/65).** Honest tally 29 of 63 clean.
+
+## E99 · 0369 — window 63 + CE63 (SNAPPED DOWN by 1 — width 19,999, FIRST SNAP SINCE WINDOW 52 — recorded honestly; ONE interior Rosser exception rescued/quota-met/recorded; 4,673 standing pace; 299,063 above H0 — 275k [CE58] CARRIED re-proven, 300k 937 ahead — expect w64; certified 1,279,986)
+- **0369 (window 63 + CE63):** launched correctly from b62 (a63 = 12,363,154,697,117);
+  seam audit g_a63 ≡ g_b62 tuple [232127345861699168372182968546863997789, −86,
+  16777217, −110] BEFORE the module; **SNAPPED DOWN by 1** (b requested
+  12,363,154,717,117 not a good Gram point at working precision; b ACTUAL
+  12,363,154,717,116, width 19,999 — **FIRST SNAP SINCE WINDOW 52**, recorded
+  honestly); **ONE interior Rosser exception** (block ..704,631-33, need 2
+  found 0) **rescued, quota-met, recorded** — union [..704,630, ..704,634]
+  FOUND 4/4, m = 8; end runs 46/49 (both ≥ 12); 0 cross-check failures
+  (33,849 pts, 2662.2 s); verifier CERTIFIED/turing_ok, K_cons 12. g_b63 =
+  3,000,175,631,863.1519684875488765 ± 1.29e-26 (frac 0.1520, no CASING,
+  margin ~1.97e-3). **tCE63 = 3,000,175,631,863; increment 4,673 (standing
+  pace)**; **tCE63 − tPT2 = 299,063 — 275k [CE58] CARRIED** (re-proven; the
+  w63 prediction of 937 short of 300k is EXACT — w64 lands ~303,736:
+  **expect the 300k crossing in WINDOW 64**). CE63 GREEN (8,828+1 = 8,829
+  targeted, 0 errors 0 warnings, olean fresh; 20 doc blocks swept;
+  clause-doc audit OK; generator derived mechanically from gen_ce62 for
+  construction safety). **Certified 1,279,986 (SNAPPED: +19,999; 1.2M [w60]
+  carried; 1.3M is 20,014 ahead — ~w64/65).** Honest tally 29 of 64 clean.
