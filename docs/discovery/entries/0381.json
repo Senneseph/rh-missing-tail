@@ -1,0 +1,32 @@
+{
+  "id": "0381",
+  "ts": "2026-11-12T18:16Z",
+  "lane": "M5",
+  "unit": 95,
+  "kind": "census-milestone-crossing + window-certified + CE75 green + terminal face re-anchored (1 500 000 CERTIFIED-ZERO CROSSING)",
+  "summary": "CENSUS MILESTONE: THE 1 500 000 CERTIFIED-ZERO MARK WAS CROSSED IN WINDOW 75 - cumulative census 1 519 986 over (g_a1, g_b75], margin 19 986 - the corridor predicted at 0380/0378/0377-correction ('w74 -> 1 499 986 [14 short], w75 -> 1 519 986') landed EXACTLY. Window 75 CERTIFIED + verified + seam-audited (bit-identical g_a75 == g_b74, passed BEFORE formalization per 0348) + CE75 green (8841 targeted, 17454 full) + terminalFaceCE75 (355 138 above H0; 350 000 CARRIED margin 5 138 [crossed W74 at 350 465, margin 465]; 325 000 CARRIED margin 30 138; 300 000 CARRIED margin 55 138; 375 000 is 19 862 ahead -> expected window 80 [w80 -> 378 503, margin ~3 503]). W75 facts: NON-SNAPPED (width 20 000); CLEAN WINDOW - zero Rosser failures anywhere (third clean of the stretch, after W72 and W74; no rescues, no suppressions because nothing failed); end runs 49/43, K = 12; cross_check_failures []; undetermined_gram_signs []. 33 302 evals in 2 387.5 s (series: 2 497.2 / 2 498.3 / 2 498.5 / 2 490.4 / 2 483.4 / 2 375.0 / 2 459.6 / 2 490.2 / 2 387.5), 32 workers, seed cache resumed_from_cache = 303 685 - NINTH seeded-cache + 32-worker overlap run: window 75 ran while CE74's formalization proceeded (critical path = max(run, formalization)). tCE75 = 3 000 175 687 938 (increment 4 673, the usual); g_b75 = 3 000 175 687 938.37353515625 + or - 1.29e-26, tuple [232127350561842044799144947263211551961, -86, 16777217, -110]; gB75Lo = 3 000 175 687 938.37 (frac 0.37353515625, round-down 0.37 != floor - no CASING, window 38 remains the only CASING case). NO NEW frontierPastNNNk THEOREM for the census crossing (it is a CENSUS milestone, not a unit-frontier round mark): the 350 000 UNIT mark stays as frontierPast350k (proven at the W74 frontier tCE74, margin 465, re-proven carried under tCE75 - tPT2 = 355 138 via faceShrinkCE75 + frontierGapAboveH0); the 1 500 000 crossing is recorded in the frontierGapAboveH0 / rh_split / rh_reanchored / terminalFace docs as a census fact. CE75 iff RHS = predecessor face (terminalFaceCE75 q <-> CE74.terminalFaceCE74 q); face-implication advance faceCE74_implies_faceCE75. Tally through W75: clean 35, rescue 40, 60 interior failures, all rescues quota-met, recorded not suppressed. W76 launched in overlap (a76 = 12 363 154 957 116 = b75, cache seeded 336 802 lines) while CE75 closes. NO RH CLAIM.",
+  "artifacts": {
+    "certificate": "tmp/ce2/ce1_window_H0_v1/window75_b75.json",
+    "verifier": [
+      "verify75.log: CERTIFIED true, turing_ok true, points_checked 33302, sign_changes_inside 20000, roser_failures_inside 0, left_of_a 49, right_of_b 43, K 12"
+    ],
+    "lean": "formal/RhAttack/CE75.lean",
+    "terminal_face": "terminalFaceCE75",
+    "no_new_theorem": "census crossing is recorded in docs, not a frontierPastNNNk theorem (350k unit mark stays frontierPast350k, now proven carried)",
+    "tCE75": 3000175687938,
+    "gap_above_H0": 355138,
+    "frontier_milestone": "350 000 CARRIED (margin 5 138, crossed W74 margin 465); 375 000 is 19 862 ahead -> expected window 80 [378 503, margin ~3 503]",
+    "census": {
+      "total_certified": 1519986,
+      "milestone_1500k": "CROSSED THIS WINDOW (margin 19 986) - corridor from 0380/0378/0377-correction landed exactly",
+      "next": "1 600 000 is 80 014 ahead"
+    },
+    "doc_sweep": "21/21",
+    "stale_scan": "clean (270 230 x0; eighth x0; 345 792 x0; 341 119 x0; no tCE74-tPT2=350 465 frontierGap); targeted 8841 + full 17454 green",
+    "tally": {
+      "clean": 35,
+      "with_recorded_rescue": 40,
+      "total_internal_failures": 60
+    }
+  }
+}
