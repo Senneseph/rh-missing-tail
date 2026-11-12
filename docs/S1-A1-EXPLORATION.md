@@ -4166,3 +4166,14 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
   W68 launched at 01:45 (seam audit already PASSED) and runs while CE67
   formalized: per-unit critical path = max(run, formalization), ~10-15
   min/unit recovered.
+- **0374 (unit 88) — WINDOW 68 + CE68:** W68 certified (non-snapped
+  20 000; 34 145 evals, 2 498.3 s; runs 47/50, K = 12) - TWO interior
+  Rosser failures, both rescued quota-met, recorded not suppressed.
+  tCE68 = 3 000 175 655 227 (increment 4 673); 322 427 above H0 (300k
+  carried, margin 22 427; **325k 2 573 ahead - expected window 69**);
+  certified 1 379 986 (1.4M 20 014 ahead, ~w69/70). CE68 green (8 834 /
+  17 454, fresh, 21 docs). Face now **terminalFaceCE68** - OPEN, NO RH
+  CLAIM. Tally: 32 of 69 clean (37 rescue windows, 53 failures).
+  **PIPELINE OVERLAP CONFIRMED:** W68 ran while CE67 formalized (run time
+  flat at 2 498.3 s vs 2 497.2 s - the gain is the overlap itself); W69
+  launched 02:32 and runs while CE68 formalized.

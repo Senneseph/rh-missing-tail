@@ -5329,3 +5329,43 @@ out).
 - **NO RH CLAIM.** Next unit — window 68 (a68 = 12 363 154 797 116;
   seeded, 32 workers, launched in pipeline overlap at 01:45; near
   completion at entry time).
+
+## UNIT 88 — WINDOW 68 + CE68 (discovery 0374)
+- **W68 CERTIFIED** (window68_b68.json; NON-SNAPPED, b - a = 20 000;
+  34 145 evals, 2 498.3 s; verifier CERTIFIED, turing_ok, points 34 145,
+  sign changes 20 000, runs 47/50, K = 12; wall clock < 1 s).
+- **TWO recorded interior Rosser failures, BOTH RESCUED quota-met, not
+  suppressed:** [12 363 154 799 266, ...268] (need 2, found 0, 129 pts,
+  m = 64) -> union [...265, ...269] (need 4, FOUND 4, m = 4);
+  [12 363 154 812 473, ...476] (need 3, found 1, 193 pts, m = 64) ->
+  union [...472, ...477] (need 5, FOUND 5, m = 4). Extensions clean.
+- **PIPELINE OVERLAP CONFIRMED:** W68 ran 01:45-02:27 while CE67 was being
+  formalized and committed; W69 was launched at 02:32 (seeded, 32 workers)
+  and is running while CE68 was formalized — per-unit critical path is now
+  max(run, formalization). W68's own run time (2 498.3 s) is flat with W67
+  (2 497.2 s): the per-window compute is unchanged, the gain is the overlap.
+- **SEAM:** g_a68 == g_b67 bit-identical ([232127347669435304313898854163678052853,
+  -86, 16777217, -110]; BEFORE the module AND before the W69 launch).
+- **ENDPOINT:** g_b68 = 3 000 175 655 227.827555491949439917 + or -
+  1.29e-26 ([116063674015493073473923628809964265701, -85, 16777217, -110]
+  - first chain endpoint with mantissa exponent -85; exact-tuple
+  comparison, no chain effect); tCE68 = 3 000 175 655 227; gB68Lo =
+  300017565522782/100 (margin 7.6e-3; frac 0.8276 -> NO CASING).
+- **INCREMENT:** 4 673 (the usual one; the 4 672 occurrences remain three).
+- **FRONTIER:** 322 427 certified zeros above H0 (300 000-unit milestone
+  carried, margin 22 427; **325 000 mark 2 573 ahead - under one unit:
+  expected at window 69**, compute, do not pre-announce).
+- **CENSUS:** certified total 1 379 986 (1 300 000 [w65] carried;
+  1 400 000 mark 20 014 ahead - expected ~window 69/70).
+- **LEAN:** CE68.lean green (targeted 8 834 / full tree 17 454, olean fresh,
+  21 docs). Terminal face is now **terminalFaceCE68** - OPEN, NO RH CLAIM.
+- **TALLY (certificate-derived, W68 appended):** 32 of 69 clean; 37 rescue
+  windows; 53 total internal Rosser failures.
+- **GENERATOR LESSONS (recorded in 0374):** the derived deriver's output
+  path had silently defaulted to the previous unit's generator file
+  (recovered); the header was written fresh instead of mechanically
+  shifted (a blind shift would have shipped a corrupted provenance block);
+  scaffold 4-arg reps + milestone-carrier 4-arg reps audited before
+  execution.
+- **NO RH CLAIM.** Next unit — window 69 (a69 = 12 363 154 837 116;
+  seeded, 32 workers; launched in pipeline overlap at 02:32).

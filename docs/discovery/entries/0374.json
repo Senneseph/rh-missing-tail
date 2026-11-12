@@ -1,0 +1,85 @@
+{
+  "id": "0374",
+  "ts": "2026-11-12T03:05Z",
+  "lane": "M5",
+  "unit": 88,
+  "headline": "WINDOW 68 CERTIFIED + CE68 GREEN + terminalFaceCE68 - frontier 4 673 further up (322 427 above H0; 300 000 mark carried, margin 22 427; 325 000 is now 2 573 ahead - expected at window 69); cumulative 1 379 986 certified zeros (1.4M is 20 014 ahead - expected ~w69/70); W68 = second pipeline-overlap run (34 145 evals, 2 498.3 s - flat with W67; the throughput gain is confirmed to be the OVERLAP: W68 ran while CE67 formalized, and W69 is running while CE68 formalized); TWO interior Rosser failures, both rescued quota-met, recorded not suppressed",
+  "status": "LANE_PROGRESS",
+  "facts": {
+    "window": 68,
+    "a": 12363154797116,
+    "b_requested": 12363154817116,
+    "b_actual": 12363154817116,
+    "snapped": false,
+    "width": 20000,
+    "M": 60,
+    "C_R": 1,
+    "workers": 32,
+    "evals": 34145,
+    "seconds": 2498.3,
+    "resumed_from_cache": 67928,
+    "rosser_failures_inside": 2,
+    "rescued_rosser_exceptions": [
+      {"block": [12363154799266, 12363154799268], "need": 2, "found": 0, "points": 129, "m": 64, "union": [12363154799265, 12363154799269], "union_need": 4, "union_found": 4, "union_m": 4},
+      {"block": [12363154812473, 12363154812476], "need": 3, "found": 1, "points": 193, "m": 64, "union": [12363154812472, 12363154812477], "union_need": 5, "union_found": 5, "union_m": 4}
+    ],
+    "rosser_note": "BOTH RESCUED quota-met at coarser m, RECORDED, not suppressed; the M = 60 extensions were clean; nothing outside the window",
+    "end_runs": [47, 50],
+    "K_conservative": 12,
+    "cross_check_failures": 0,
+    "undetermined_gram_signs": 0,
+    "seam_audit": "g_a68 == g_b67 PASS (bit-identical exact dyadic tuple [232127347669435304313898854163678052853, -86, 16777217, -110] = 3 000 175 650 554.892438632375155589 +/- 1.29e-26); audit performed BEFORE CE68 was written AND before W69 was launched (0348 process rule + pipeline safety)",
+    "g_b68": [116063674015493073473923628809964265701, -85, 16777217, -110],
+    "g_b68_decimal": "3 000 175 655 227.827555491949439917 +/- 1.29e-26",
+    "g_b68_note": "first chain endpoint whose mantissa exponent is -85 (mantissa grown past 2^84) - the exact dyadic tuple is what is compared, no effect on the chain",
+    "tCE68": 3000175655227,
+    "gB68Lo": "300017565522782 / 100",
+    "gB68Lo_margin": "~7.6e-3 (usual cent granularity; frac 0.8276; two-decimal round-down 0.82 != floor - NO CASING; window 38 / CE38 remains the only CASING case)",
+    "faceShrink_units": 4673,
+    "gap_above_H0": 322427,
+    "milestone_300k": {"crossed_in": "window 64 / CE64 (0370)", "carried": true, "margin_now": 22427},
+    "next_mark_325k": {"gap": 2573, "crossed": false, "expected": "window 69 (2 573 < ~4 673; compute from the decoded endpoint, do not pre-announce)"},
+    "certified_total_through_g_b68": 1379986,
+    "round_marks": "1 300 000 [w65, 0371] CARRIED; 1 400 000 is 20 014 ahead - expected ~window 69/70, confirm from the verified count",
+    "verifier": {
+      "CERTIFIED": true,
+      "turing_ok": true,
+      "points_checked": 34145,
+      "sign_changes_inside": 20000,
+      "rosser_run_left_of_a": 47,
+      "rosser_run_right_of_b": 50,
+      "K_conservative": 12,
+      "note": "verified in <1 s from the recorded exact dyadic enclosures"
+    },
+    "lean": {
+      "module": "formal/RhAttack/CE68.lean",
+      "targeted_jobs": 8834,
+      "full_tree_jobs": 17454,
+      "fresh_olean": true,
+      "docs": "21 single-line docs swept (hW window labels continued to be stated against the actual slice types)"
+    },
+    "generators": ["/tmp/derive_gen_ce68.py", "/tmp/gen_ce68.py", "/tmp/ce68_docsweep.py"],
+    "pipeline_state": {
+      "W68": "launched 01:45 in overlap with CE67's formalization; finished 02:27 while CE67 was still being committed - the overlap is real and confirmed",
+      "W69": "launched 02:32 (a69 = 12 363 154 837 116 = b68, seeded from W68's 101 872-line cache, 32 workers) - running while CE68 was formalized"
+    }
+  },
+  "tally": {
+    "clean": "32 of 69 chain windows clean (W68 not clean: 2 recorded interior failures); rescue windows: 37; total internal Rosser failures: 53 (51 + 2)"
+  },
+  "generator_lessons": [
+    "The derived deriver's output path had silently defaulted to the PREVIOUS unit's generator filename and overwrote /tmp/gen_ce67.py (recovered by re-running derive_gen_ce67.py; gen_ce66.py was intact so the chain is restorable). Standing rule: AUDIT the deriver's output write-path and its scaffold 4-arg reps BEFORE executing.",
+    "Scaffold 4-arg reps (import / open / namespace) must be re-handled every unit, preserving the file's exact double-backslash escape form; the HEADER was written fresh this unit instead of mechanically shifted - a blind value-shift of the CE67 header produced double-shift corruption (e.g. 'tCE68 - tCE68 = 4 673'), which would have shipped a broken provenance block.",
+    "Milestone-carrier 4-arg reps (frontierPast275k / frontierPast300k) remain separately re-handled per the standing 0371 rule (third consecutive unit)."
+  ],
+  "artifacts": [
+    "tmp/ce2/ce1_window_H0_v1/window68_b68.json",
+    "tmp/ce2/ce1_window_H0_v1/verify68.log",
+    "formal/RhAttack/CE68.lean",
+    "docs/discovery/entries/0374.json",
+    "docs/ROUTE-B-FINAL-RECORD-2026-11-04.md (appended)",
+    "docs/S1-A1-EXPLORATION.md (appended)"
+  ],
+  "rh_claim": false,
+  "no_rh_claim": true
+}
