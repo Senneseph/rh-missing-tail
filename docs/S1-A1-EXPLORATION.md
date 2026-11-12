@@ -4150,3 +4150,19 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
   32 workers from W67; no M/C_R/precision/verifier changes; expected
   ~30–36 min/window vs ~45. Also: roesser→rosser field-name typo swept
   from 164 record/formal files.
+- **0373 (unit 87) — WINDOW 67 + CE67 + speed-up measurement:** W67
+  certified (non-snapped 20 000; 33 835 evals, 2 497.2 s; runs 49/44,
+  K = 12) — CLEAN WINDOW (zero Rosser failures anywhere, no rescues).
+  tCE67 = 3 000 175 650 554 (increment 4 673, the usual one); 317 754
+  above H0 (300k carried, margin 17 754; **325k 7 246 ahead — expected
+  window 69**); certified 1 359 986 (1.4M 40 014 ahead, ~w69). CE67
+  green (8 833 / 17 454, fresh; hW labels corrected in docs against the
+  slice types; the 'hence <= tCE..' boundary phrasing fixed in CE66/CE67
+  docs). Face now **terminalFaceCE67** — OPEN, NO RH CLAIM. Tally: 32 of
+  68 clean (36 rescue windows, 51 failures). **Speed-up, honest
+  numbers:** seed-cache + 32 workers measured -117 s (~4.5%) — only
+  ~175-177 cache hits because the shared region between consecutive
+  windows is only the M = 60 band; the REAL lever is PIPELINE OVERLAP —
+  W68 launched at 01:45 (seam audit already PASSED) and runs while CE67
+  formalized: per-unit critical path = max(run, formalization), ~10-15
+  min/unit recovered.

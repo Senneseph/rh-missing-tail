@@ -1,0 +1,105 @@
+{
+  "id": "0373",
+  "ts": "2026-11-12T02:30Z",
+  "lane": "M5",
+  "unit": 87,
+  "headline": "WINDOW 67 CERTIFIED + CE67 GREEN + terminalFaceCE67 - frontier 4 673 further up (317 754 above H0; 300 000 mark carried, margin 17 754; 325 000 is 7 246 ahead - expected ~w69); cumulative 1 359 986 certified zeros (1.4M is 40 014 ahead - expected ~w69); W67 = first seed-cache + 32-worker run (2 497.2 s vs 2 614.6 s baseline; ~175-177 seam-band cache hits measured - the shared region between consecutive windows is only the M = 60 band, so the real throughput lever is PIPELINE OVERLAP: W68 runs while CE67 was formalized)",
+  "status": "LANE_PROGRESS",
+  "facts": {
+    "window": 67,
+    "a": 12363154777116,
+    "b_requested": 12363154797116,
+    "b_actual": 12363154797116,
+    "snapped": false,
+    "width": 20000,
+    "M": 60,
+    "C_R": 1,
+    "workers": 32,
+    "evals": 33835,
+    "seconds": 2497.2,
+    "resumed_from_cache": 34268,
+    "measured_cache_hits": "~175-177 (new cache entries with n beyond W66's range: 33 658; total evals 33 835; the shared region between CONSECUTIVE windows is only the M = 60 extension band - 121 gram points + the few seam-band block refinements; the Rosser-run refinement regions extend beyond the band and are per-window)",
+    "speed_up_measurement": {
+      "W66": "34 268 evals / 2 614.6 s / 28 workers",
+      "W67": "33 835 evals / 2 497.2 s / 32 workers / seed cache",
+      "delta": "-117 s (~4.5%) total: workers 28 -> 32 contribute the bulk; cache seeding contributes ~0.5% (measured seam-band hits ~175-177). Honest record: the pre-launch estimate of ~30-36 min/window was too optimistic because the genuinely shared region is only the extension band. THE REAL LEVER, ADOPTED FROM W67: PIPELINE OVERLAP - the next window's run is launched immediately (after the seam audit passes), overlapping the run with the current unit's formalization (~10-15 min of otherwise-idle agent time per unit). Per-unit critical path: max(run, formalization) instead of run + formalization.",
+      "cache_file_note": "each window's seed cache is the full previous cache (deterministic, all values bit-identical by global key); files grow ~10 MB/unit - trivial disk cost; the 20 MB 'doubled file' observed transiently at W68 launch was an audit artifact (comparing the certificate file size against the cache file size), not a driver anomaly: W68's cache currently holds 101 872 unique keys, zero duplicate lines, uniform ~296 B lines - all consistent"
+    },
+    "rosser_failures_inside": 0,
+    "rosser_failures_anywhere": 0,
+    "clean": true,
+    "end_runs": [
+      49,
+      44
+    ],
+    "K_conservative": 12,
+    "cross_check_failures": 0,
+    "undetermined_gram_signs": 0,
+    "seam_audit": "g_a67 == g_b66 PASS (bit-identical exact dyadic tuple [232127347307884461659009695793288718733, -86, 16777217, -110] = 3 000 175 645 881.9573215021479575 +/- 1.29e-26); audit performed BEFORE CE67 was written AND before W68 was launched (0348 process rule + pipeline safety)",
+    "g_b67": [
+      232127347669435304313898854163678052853,
+      -86,
+      16777217,
+      -110
+    ],
+    "g_b67_decimal": "3 000 175 650 554.892438632375155589 +/- 1.29e-26",
+    "tCE67": 3000175650554,
+    "gB67Lo": "300017565055489 / 100",
+    "faceShrink_units": 4673,
+    "note_increments": "4 673 - the usual increment (the 4 672 occurrences remain the three recorded ones: w45->w46, w53->w54, w65->w66; no pattern assumed)",
+    "gap_above_H0": 317754,
+    "milestone_300k": {
+      "crossed_in": "window 64 / CE64 (discovery 0370), margin 3 736",
+      "carried": true,
+      "margin_now": 17754
+    },
+    "next_mark_325k": {
+      "gap": 7246,
+      "crossed": false,
+      "expected": "window 69 at the ~4 673/window pace (7 246 / 4 673 ~ 1.55 units from W67) - compute from the decoded endpoint, do not pre-announce"
+    },
+    "casings": "none (frac 0.8924; two-decimal round-down 0.89 != floor; window 38 / CE38 remains the only CASING case); gB67Lo margin 2.4e-3 (usual cent granularity)",
+    "certified_total_through_g_b67": 1359986,
+    "round_marks": "1 300 000 mark [window 65, 0371: 1 319 986] CARRIED; 1 400 000 mark is 40 014 ahead - expected ~window 69, confirm from the verified count",
+    "verifier": {
+      "CERTIFIED": true,
+      "turing_ok": true,
+      "points_checked": 33835,
+      "sign_changes_inside": 20000,
+      "rosser_run_left_of_a": 49,
+      "rosser_run_right_of_b": 44,
+      "K_conservative": 12,
+      "note": "verified in <1 s from the recorded exact dyadic enclosures"
+    },
+    "lean": {
+      "module": "formal/RhAttack/CE67.lean",
+      "targeted_jobs": 8833,
+      "full_tree_jobs": 17454,
+      "fresh_olean": true,
+      "doc_fix": "the full-slice doc's imprecise boundary phrasing ('hence <= tCE..') was corrected to exact slice wording in CE66 (ce65WinClauseFull) and CE67 (ce66WinClauseFull) in this unit - record-accuracy fix, no code change"
+    },
+    "generators": [
+      "/tmp/derive_gen_ce67.py",
+      "/tmp/gen_ce67.py",
+      "/tmp/ce67_docsweep.py (21 docs; hW window labels corrected against the actual slice types: argument index lags window number by 1 from hW44 on)"
+    ],
+    "generator_notes": "4-arg audit re-handled past275k + past300k carries (second consecutive unit of the standing rule); faceShrink pair handled the 4672 -> 4673 increment explicitly; a generator-scope bug (L[i + 2] vs L[i66 + 2] in the band-body surgery template) was caught by execution and fixed pre-generation",
+    "terminal_face": "terminalFaceCE67 (open hypothesis at tCE67 = 3 000 175 650 554, 317 754 above H0)",
+    "pipeline_state": "W68 (a68 = 12 363 154 797 116, seeded, 32 workers) LAUNCHED at 01:45 - running in overlap with CE67's formalization; near completion at the time of this entry"
+  },
+  "tally": {
+    "clean": "32 of 68 chain windows clean (W67 CLEAN); rescue windows: 36; total internal Rosser failures: 51 (unchanged by W67). Authoritative clean list: w2, w3, w6, w8, w10, w12, w13, w14, w16, w18, w22, w25, w30, w31, w32, w33, w36, w38, w40, w41, w42, w42b(fill), w46, w47, w48, w49, w50, w57, w58, w60, w64, w67",
+    "rescue_windows": 36,
+    "total_internal_rosser_failures": 51
+  },
+  "artifacts": [
+    "tmp/ce2/ce1_window_H0_v1/window67_b67.json",
+    "tmp/ce2/ce1_window_H0_v1/verify67.log",
+    "formal/RhAttack/CE67.lean",
+    "docs/discovery/entries/0373.json",
+    "docs/ROUTE-B-FINAL-RECORD-2026-11-04.md (appended)",
+    "docs/S1-A1-EXPLORATION.md (appended)"
+  ],
+  "rh_claim": false,
+  "no_rh_claim": true
+}

@@ -5281,3 +5281,51 @@ out).
   internal Rosser failures.
 - **NO RH CLAIM.** Next unit — window 67 (a67 = 12,363,154,777,116),
   first instrumented run (seeded cache + 32 workers).
+
+## UNIT 87 — WINDOW 67 + CE67 + SPEED-UP MEASUREMENT (discovery 0373)
+- **W67 CERTIFIED** (window67_b67.json; NON-SNAPPED, b - a = 20 000;
+  33 835 evals, 2 497.2 s — 41.6 min, vs W66's 2 614.6 s / 43.6 min;
+  verifier CERTIFIED, turing_ok, points 33 835, sign changes 20 000,
+  runs 49/44, K = 12; wall clock < 1 s).
+- **CLEAN WINDOW:** zero Rosser failures even in the M = 60 extensions;
+  no rescues; nothing to record or suppress.
+- **SPEED-UP MEASUREMENT (the honest numbers for the unit-86 question):**
+  W67 was the first seeded-cache + 32-worker run: resumed_from_cache =
+  34 268, but the MEASURED hits are ~175-177 (~0.5% of the work) — the
+  genuinely shared region between CONSECUTIVE windows is only the
+  M = 60 extension band (121 gram points + a few seam-band refinements);
+  the per-window Rosser-run refinement regions extend beyond the band and
+  are NOT shared. Net: -117 s (~4.5%), mostly the worker 28 -> 32 step.
+  The pre-launch estimate (~30-36 min/window) was too optimistic —
+  recorded honestly. **THE REAL LEVER — PIPELINE OVERLAP (adopted from
+  W67):** W68 was launched at 01:45 (after W67's seam audit PASSED) and
+  runs while CE67's formalization proceeds — the per-unit critical path
+  is now max(run, formalization) instead of their sum (~10-15 min/unit
+  recovered). Cache files grow ~10 MB/unit (trivial); the transient "20
+  MB doubled file" seen at W68 launch was an audit artifact (certificate
+  vs cache file-size mix-up), not a driver anomaly — W68's cache:
+  101 872 unique keys, zero duplicates, uniform line sizes.
+- **SEAM:** g_a67 == g_b66 bit-identical ([232127347307884461659009695793288718733,
+  -86, 16777217, -110]; BEFORE the module AND before the W68 launch).
+- **ENDPOINT:** g_b67 = 3 000 175 650 554.892438632375155589 + or -
+  1.29e-26 ([232127347669435304313898854163678052853, -86, 16777217,
+  -110]); tCE67 = 3 000 175 650 554; gB67Lo = 300017565055489/100
+  (margin 2.4e-3, cent granularity; frac 0.8924 → NO CASING; window 38
+  remains the only CASING case).
+- **INCREMENT:** 4 673 (the usual one; the 4 672 occurrences remain three).
+- **FRONTIER:** 317 754 certified zeros above H0 (300 000-unit milestone
+  carried, margin 17 754; **325 000 mark 7 246 ahead — ~1.55 units:
+  expected window 69**, compute, do not pre-announce).
+- **CENSUS:** certified total 1 359 986 (1 300 000 [w65, 0371] carried;
+  1 400 000 mark 40 014 ahead — expected ~window 69).
+- **LEAN:** CE67.lean green (targeted 8 833 / full tree 17 454, olean
+  fresh, 21 docs; hW window labels corrected in this unit's docs against
+  the actual slice types — argument index lags window number by 1 from
+  hW44 on; the imprecise full-slice boundary phrasing ('hence <= tCE..')
+  corrected in CE66 + CE67 docs — record-accuracy, no code change).
+  Terminal face is now **terminalFaceCE67** — OPEN, NO RH CLAIM.
+- **TALLY (certificate-derived, W67 appended):** 32 of 68 clean; 36
+  rescue windows; 51 total internal Rosser failures.
+- **NO RH CLAIM.** Next unit — window 68 (a68 = 12 363 154 797 116;
+  seeded, 32 workers, launched in pipeline overlap at 01:45; near
+  completion at entry time).
