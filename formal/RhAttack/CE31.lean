@@ -87,7 +87,7 @@ Apache-2.0  deposit,  same  as  CE1-CE30):
       left  of  g_a31,  47  right  of  g_b31  (both  >=  K  =
       12);  0  cross-check  failures  (all  33 374  records);
       0  undetermined  Gram  signs.  INTERNAL  ROSSER-BLOCK
-      EXCEPTIONS:  NONE  -  roesser_failures  =  []  and
+      EXCEPTIONS:  NONE  -  rosser_failures  =  []  and
       rescued_rosser_exceptions  =  []:  a  CLEAN  window
       (as  windows  6,  8,  10,  12,  13,  14,  16,  18,  22,
       25  and  30;  the  clean  tally  is  now  TWELVE  of
@@ -98,7 +98,7 @@ Apache-2.0  deposit,  same  as  CE1-CE30):
     (2)  PIPELINE  VERIFIER  on  window31_b31.json:
          "CERTIFIED:  true",  points_checked  = 33 374,
          sign_changes_inside  =  19 999  =  b  −  a  (the
-         snapped  width),  roesser_failures_inside  = 0,
+         snapped  width),  rosser_failures_inside  = 0,
          turing_ok  =  true,  K_conservative  = 12,
          endpoints  recomputed  and  matched;
     (3)  SEAM  AUDIT  (this  run):  the  recorded  g_a31

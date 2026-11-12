@@ -181,7 +181,7 @@ Murphy's  Apache-2.0  deposit,  same  as  CE1-CE50):
          window51_b51.json:  "CERTIFIED:
          true",  points_checked  = 33 636,
          sign_changes_inside  =  19 999
-         =  b  −  a,  roesser_failures_inside
+         =  b  −  a,  rosser_failures_inside
          =  1  (the  recorded,  quota-met
          rescue  above),  turing_ok  =
          true,  K_conservative  = 12

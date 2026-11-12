@@ -122,7 +122,7 @@ the only CASING case so far.
 VERIFICATION (three layers, same as CE2-CE58): (1) ENVIRONMENT REPEAT
 (Murphy's window-1 certificate re-verified - see CE2 header); (2) PIPELINE
 VERIFIER on window59_b59.json: "CERTIFIED: true", points_checked = 34 153,
-sign_changes_inside = 20 000 = b - a, roesser_failures_inside = 1 (the
+sign_changes_inside = 20 000 = b - a, rosser_failures_inside = 1 (the
 single recorded, quota-met interior rescue above), turing_ok = true,
 K_conservative = 12 (Trudgian Cor2.3 = [5.71899 + or - 1.24e-6], doubled =
 [11.4380 + or - 1.76e-5], Amberger Thm2.3 = [9.14967 + or - 4.14e-6] - all

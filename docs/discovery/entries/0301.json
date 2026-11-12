@@ -25,7 +25,7 @@
    691008,
    691008
   ],
-  "rosser": "runs 48 (left of g_a3) / 49 (right of g_b3), both >= K = 12; roesser_failures_inside = 0; 15864 blocks inside; blocks_len_gt1 all determined",
+  "rosser": "runs 48 (left of g_a3) / 49 (right of g_b3), both >= K = 12; rosser_failures_inside = 0; 15864 blocks inside; blocks_len_gt1 all determined",
   "cross_check_failures": [],
   "undetermined_gram_signs": [],
   "turing_ok": true,

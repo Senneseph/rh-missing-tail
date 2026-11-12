@@ -133,7 +133,7 @@ Apache-2.0  deposit,  same  as  CE1-CE44):
     (2)  PIPELINE  VERIFIER  on  window45_b45.json:
          "CERTIFIED:  true",  points_checked  = 33 537,
          sign_changes_inside  =  20 000  =  b  −  a,
-         roesser_failures_inside  = 2  (both  rescued,
+         rosser_failures_inside  = 2  (both  rescued,
          quota  met),  turing_ok  =  true,
          K_conservative  = 12  (K_required:  Trudgian
          Cor2.3  =  [5.71899  +  or -  1.23e-6],  doubled

@@ -4132,3 +4132,21 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
   recount artifact — see the TALLY CORRECTION fact in 0371). Side-step
   since 0370: Millennial-puzzle feasibility check PARKED (back-pocket
   §5; no analytic move either way).
+- **0372 (unit 86) — WINDOW 66 + CE66:** W66 certified (non-snapped,
+  20 000; 34 268 evals, 2 614.6 s; verifier certified/turing_ok, runs
+  20/51, K = 12 — 0.65 s wall). TWO recorded Rosser exceptions, both
+  rescued quota-met: one INTERIOR (..770 603–605 → union FOUND 5/5) and
+  the SEAM-ADJACENT block (..757 083–086) that failed in W65's interior
+  failing again in W66's left extension — same physical block,
+  deterministic; recorded, not suppressed. Seam bit-identical (pre-module
+  audit). tCE66 = 3 000 175 645 881 (increment **4 672 — Third
+  occurrence**, no pattern assumed); 313 081 above H0 (300k carried,
+  13 081 margin; 325k 11 919 ahead, expect w68/69); certified 1 339 986
+  (1.3M [w65] carried; 1.4M 60 014 ahead, expect ~w69/70). CE66 green
+  (8 832 / 17 454, fresh); face now **terminalFaceCE66** — OPEN, NO RH
+  CLAIM. Tally: 31 of 67 clean (36 rescue windows, 51 internal failures).
+  **Speed-up decision (user question):** cross-window cache seeding
+  (global cache keys; resumed_from_cache logged in each certificate) +
+  32 workers from W67; no M/C_R/precision/verifier changes; expected
+  ~30–36 min/window vs ~45. Also: roesser→rosser field-name typo swept
+  from 164 record/formal files.

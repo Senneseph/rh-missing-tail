@@ -2494,7 +2494,7 @@ CLAIM. (discovery 0308)
   Rosser-block exceptions: **NONE** (rosser_failures = []
   and rescued = []; windows 2/3/4/5 each had one rescued
   exception). Runs 45/44 (K = 12). Verifier CERTIFIED:
-  true, roesser_failures_inside = 0, sign_changes = 20,000
+  true, rosser_failures_inside = 0, sign_changes = 20,000
   = b − a, turing_ok. Seam: g_a6 BIT-IDENTICAL to CE5's
   g_b5. g_b6 = 3,000,175,360,835.7184258… (frac 0.7183,
   dist 0.2817 to next integer).
@@ -4061,7 +4061,7 @@ region and is re-anchored in its corrected position.
 - 20,000 zeros all **simple and on the line**; 33,301 evaluations, 2533.4 s,
   M = 60, C_R = 1, 28 workers, N_range [691008, 691008].
 - Verifier: `CERTIFIED: true`, 33,301 points, sign_changes = b − a,
-  roesser_failures = **0** (CLEAN), Rosser runs 47/47, turing_ok.
+  rosser_failures = **0** (CLEAN), Rosser runs 47/47, turing_ok.
 - `g_b42b = 3,000,175,533,732.215369449384 ± 1.29e-26`;
   `tCE42B = 3,000,175,533,732`; frac 0.2154; standard 2-dec bound
   (margin ~5.4e-3); no CASING.
@@ -4120,7 +4120,7 @@ snap), M = 60, C_R = 1, 28 workers, 33,953 evaluations, N_range [691008, 691008]
   (exact dyadic `116063669676910075289953026587486486005 × 2^-85`; frac 0.0854;
   standard 2-dec bound `gB44Lo`, margin ~5.6e-3; no CASING).
 - Verifier: `CERTIFIED: true`, 33,953 points, sign_changes = b − a,
-  roesser_failures = 1 (rescued), runs 46/48 (both ≥ K = 12), turing_ok.
+  rosser_failures = 1 (rescued), runs 46/48 (both ≥ K = 12), turing_ok.
 - **ONE rescued exception (quota met):** block
   `[12,363,154,324,338, ..324,340]` (raw need 2, 0 changes / 129 pts, m = 64)
   → union `[..324,337, ..324,341]`, need 4 = found 4, m = 4. Recorded, not
@@ -4484,7 +4484,7 @@ out).
   (the only quantities in the Turing step) passes.
 - **Verifier (layer 2):** CERTIFIED: true, turing_ok: true,
   points_checked 33,636, sign_changes_inside 19,999 = b − a,
-  roesser_failures_inside 1 (the recorded rescue), Rosser runs
+  rosser_failures_inside 1 (the recorded rescue), Rosser runs
   49/47, K_conservative 12 (K_required: Trudgian Cor2.3
   [5.71899 ± 1.23e-6], doubled [11.4380 ± 1.76e-5], Amberger
   Thm2.3 [9.14967 ± 4.14e-6] — all < 12); endpoints recomputed and
@@ -4538,7 +4538,7 @@ out).
   passes.
 - **Verifier (layer 2):** CERTIFIED: true, turing_ok: true,
   points_checked 33,708, sign_changes_inside 19,999 = b − a,
-  roesser_failures_inside 2 (both recorded quota-met rescues),
+  rosser_failures_inside 2 (both recorded quota-met rescues),
   Rosser runs 48/45, K_conservative 12 (K_required: Trudgian
   Cor2.3 [5.71899 ± 1.23e-6], doubled [11.4380 ± 1.76e-5],
   Amberger Thm2.3 [9.14967 ± 4.14e-6] — all < 12); endpoints
@@ -4596,7 +4596,7 @@ out).
   of the corrected chain.
 - **Verifier (layer 2):** CERTIFIED: true, turing_ok: true,
   points_checked 34,037, sign_changes_inside 20,000 = b − a,
-  roesser_failures_inside 3 (all recorded quota-met rescues), Rosser
+  rosser_failures_inside 3 (all recorded quota-met rescues), Rosser
   runs 47/49, K_conservative 12 (K_required all < 12); endpoints
   recomputed and matched.
 - **THE MILESTONE:** g_b53 = 3,000,175,585,134.034179687500 ±
@@ -4652,7 +4652,7 @@ out).
   the Turing step — passes.
 - **Verifier (layer 2):** CERTIFIED: true, turing_ok: true,
   points_checked 33,606, sign_changes_inside 20,000 = b − a,
-  roesser_failures_inside 1 (the recorded rescue), Rosser runs 48/49,
+  rosser_failures_inside 1 (the recorded rescue), Rosser runs 48/49,
   K_conservative 12 (K_required all < 12; identical to w53 — same
   N_range); endpoints recomputed and matched.
 - **INCREMENTS: 4,672 — THE RECURRING ANOMALY.** g_b54 =
@@ -4704,7 +4704,7 @@ out).
   (47/47) — the only quantities in the Turing step — passes.
 - **Verifier (layer 2):** CERTIFIED: true, turing_ok: true,
   points_checked 33,350, sign_changes_inside 20,000 = b − a,
-  roesser_failures_inside 1 (the recorded rescue), Rosser runs 47/47,
+  rosser_failures_inside 1 (the recorded rescue), Rosser runs 47/47,
   K_conservative 12 (K_required all < 12; identical to w53/w54 — same
   N_range); endpoints recomputed and matched.
 - **THE 1,100,000 CERTIFIED-ZERO MARK:** 1,099,987 (w54) + 20,000 =
@@ -4762,7 +4762,7 @@ out).
   RUNS (49/48) — the only quantities in the Turing step — passes.
 - **Verifier (layer 2):** CERTIFIED: true, turing_ok: true,
   points_checked 34,778, sign_changes_inside 20,000 = b − a,
-  roesser_failures_inside 4 (the four recorded rescues), Rosser
+  rosser_failures_inside 4 (the four recorded rescues), Rosser
   runs 49/48, K_conservative 12.
 - **Endpoint:** g_b56 = 3,000,175,599,152.839843750000 ± 1.29e-26 —
   exact tuple [232127343692394111500520322163846277315, −86,
@@ -4799,7 +4799,7 @@ out).
 - **Seam audit FIRST (0348 rule):** g_a57 ≡ g_b56 exact dyadic
   [232127343692394111500520322163846277315, −86, 16777217, −110] —
   bit-identical, BEFORE CE57 was written.
-- **CLEAN WINDOW:** roesser_failures_inside = 0 — the FIRST clean window
+- **CLEAN WINDOW:** rosser_failures_inside = 0 — the FIRST clean window
   since window 50 (w51–w56 carried 1, 2, 3, 1, 1, 4 recorded rescues).
   Nothing to record or suppress. End Rosser runs 49/48 (both ≥ 12);
   0 cross-check failures; 0 undetermined Gram signs.
@@ -4841,7 +4841,7 @@ out).
 - **Seam audit FIRST (0348 rule):** g_a58 ≡ g_b57 exact dyadic
   [116063672026972477182407992315941454601, −85, 16777217, −110] —
   bit-identical, BEFORE CE58 was written.
-- **CLEAN WINDOW:** roesser_failures_inside = 0 — the SECOND CONSECUTIVE
+- **CLEAN WINDOW:** rosser_failures_inside = 0 — the SECOND CONSECUTIVE
   clean window (w57 was the first since w50). Nothing to record or
   suppress. End Rosser runs 48/46 (both ≥ 12); 0 cross-check failures;
   0 undetermined Gram signs.
@@ -4895,7 +4895,7 @@ out).
   0 undetermined Gram signs.
 - **Verifier (layer 2):** CERTIFIED: true, turing_ok: true,
   points_checked 34,153, sign_changes_inside 20,000 = b − a,
-  roesser_failures_inside 1, K_conservative 12, endpoints matched.
+  rosser_failures_inside 1, K_conservative 12, endpoints matched.
 - **Endpoint:** g_b59 = 3,000,175,613,171.645140768233954 ± 1.29e-26 —
   exact tuple [232127344777046640030585043774150839739, −86,
   16777217, −110]. **tCE59 = 3,000,175,613,171**.
@@ -4931,7 +4931,7 @@ out).
 - **Seam audit FIRST (0348 rule):** g_a60 ≡ g_b59 exact dyadic
   [232127344777046640030585043774150839739, −86, 16777217, −110] —
   bit-identical, BEFORE CE60 was written.
-- **CLEAN WINDOW:** roesser_failures_inside = 0 — nothing to record or
+- **CLEAN WINDOW:** rosser_failures_inside = 0 — nothing to record or
   suppress (streak: w57 CLEAN, w58 CLEAN, w59 one recorded rescue, w60 CLEAN).
   End Rosser runs 49/42 (both ≥ 12); 0 cross-check failures;
   0 undetermined Gram signs.
@@ -4986,7 +4986,7 @@ out).
   0 undetermined Gram signs. (Most rescues in a window since W56's four.)
 - **Verifier (layer 2):** CERTIFIED: true, turing_ok: true,
   points_checked 34,517, sign_changes_inside 20,000 = b − a,
-  roesser_failures_inside 3, K_conservative 12, endpoints recomputed
+  rosser_failures_inside 3, K_conservative 12, endpoints recomputed
   and matched.
 - **Endpoint:** g_b61 = 3,000,175,622,517.515378547149186 ± 1.29e-26 —
   exact tuple [116063672750074162806295541049855739823, −85,
@@ -5028,7 +5028,7 @@ out).
   0 undetermined Gram signs.
 - **Verifier (layer 2):** CERTIFIED: true, turing_ok: true,
   points_checked 33,287, sign_changes_inside 20,000 = b − a,
-  roesser_failures_inside 1, K_conservative 12, endpoints recomputed
+  rosser_failures_inside 1, K_conservative 12, endpoints recomputed
   and matched.
 - **Endpoint:** g_b62 = 3,000,175,627,190.4504970306274269 ± 1.29e-26 —
   exact tuple [232127345861699168372182968546863997789, −86,
@@ -5076,7 +5076,7 @@ out).
   0 undetermined Gram signs.
 - **Verifier (layer 2):** CERTIFIED: true, turing_ok: true,
   points_checked 33,849, sign_changes_inside 19,999 = b − a (SNAPPED),
-  roesser_failures_inside 1, K_conservative 12, endpoints recomputed
+  rosser_failures_inside 1, K_conservative 12, endpoints recomputed
   and matched.
 - **Endpoint:** g_b63 = 3,000,175,631,863.1519684875488765 ± 1.29e-26 —
   exact tuple [232127346223231933568697690834737861837, −86,
@@ -5114,13 +5114,13 @@ out).
 - **Seam audit FIRST (0348 rule):** g_a64 ≡ g_b63 exact dyadic
   [232127346223231933568697690834737861837, −86, 16777217, −110] —
   bit-identical, BEFORE CE64 was written.
-- **CLEAN WINDOW:** roesser_failures_inside = 0 — nothing to record or
+- **CLEAN WINDOW:** rosser_failures_inside = 0 — nothing to record or
   suppress (streak: w59 one rescue, w60 CLEAN, w61 three, w62 one, w63 one,
   w64 CLEAN). End Rosser runs 46/50 (both ≥ 12); 0 cross-check failures;
   0 undetermined Gram signs.
 - **Verifier (layer 2):** CERTIFIED: true, turing_ok: true,
   points_checked 33,769, sign_changes_inside 20,000 = b − a,
-  roesser_failures_inside 0, K_conservative 12, endpoints recomputed
+  rosser_failures_inside 0, K_conservative 12, endpoints recomputed
   and matched.
 - **Endpoint:** g_b64 = 3,000,175,636,536.08708642973481849 ± 1.29e-26 —
   exact tuple [232127346584782776286409114165073595457, −86,
@@ -5170,7 +5170,7 @@ out).
   failures; 0 undetermined Gram signs.
 - **Verifier (layer 2):** CERTIFIED: true, turing_ok: true,
   points_checked 33,892, sign_changes_inside 20,000 = b − a,
-  roesser_failures_inside 1 (the recorded rescue), K_conservative 12,
+  rosser_failures_inside 1 (the recorded rescue), K_conservative 12,
   endpoints recomputed and matched.
 - **Endpoint:** g_b65 = 3,000,175,641,209.02220410126784534 ±
   1.29e-26 — exact tuple [232127346946333618983179782472505556991,
@@ -5221,3 +5221,63 @@ out).
 - **NO RH CLAIM.** Next unit — window 66 (a66 = 12,363,154,757,116);
   milestone watch: 325k frontier mark 16,591 ahead (expect ~w69);
   1,400,000 certified-zero mark 80,014 ahead (expect ~w69).
+
+## UNIT 86 — WINDOW 66 + CE66 + SPEED-UP DECISION (discovery 0372)
+- **W66 CERTIFIED** (window66_b66.json; NON-SNAPPED, b - a = 20 000;
+  34 268 evals, 2 614.6 s, 28 workers; verifier CERTIFIED, turing_ok,
+  points 34 268, sign changes 20 000, rosser... rosser runs 20/51,
+  K = 12; verifier wall clock 0.65 s — the window RUN is ~100% of the
+  per-unit wall clock).
+- **TWO RECORDED ROSSER EXCEPTIONS, BOTH RESCUED QUOTA-MET:** (i) ONE
+  INTERIOR block [..770 603, ..770 605] (need 2, found 0, m = 64)
+  widened to [..770 601, ..770 606] (FOUND 5, m = 4) — the only
+  rosser→rosser_failures_inside entry; (ii) the SEAM-ADJACENT block
+  [..757 083, ..757 086] that failed in WINDOW 65's INTERIOR fails AGAIN
+  in W66's LEFT EXTENSION — same physical Gram block, deterministic
+  evaluations, so it fails in both certificates — re-rescued (union
+  [..757 082, ..757 087], FOUND 5, m = 8). Both recorded, none
+  suppressed (honest local-difficulty data point; also the basis of the
+  cross-window cache seeding's expected savings).
+- **SEAM:** g_a66 == g_b65 bit-identical ([232127346946333618983179782472505556991,
+  -86, 16777217, -110]; audit BEFORE the module, 0348 rule).
+- **ENDPOINT:** g_b66 = 3 000 175 645 881.9573215021479575 ± 1.29e-26
+  ([232127347307884461659009695793288718733, -86, 16777217, -110]);
+  tCE66 = 3 000 175 645 881; gB66Lo = 300017564588195/100 (margin
+  7.3e-3, usual cent granularity; frac 0.9573 → NO CASING; window 38
+  remains the only CASING case).
+- **INCREMENT 4 672 — THIRD OCCURRENCE** (w45→w46, w53→w54, w65→w66;
+  other increments 4 673; no pattern assumed).
+- **FRONTIER:** 313 081 certified zeros above H0 (300 000-unit
+  milestone carried, margin 13 081; 325 000 mark 11 919 ahead —
+  expected w68/69, compute, do not pre-announce).
+- **CENSUS:** certified total 1 339 986 through g_b66 (1,300,000 mark
+  [window 65, 0371] carried; 1,400,000 mark 60 014 ahead — expected
+  ~w69/70, confirm from the verified count).
+- **LEAN:** CE66.lean green (targeted 8 832 / full tree 17 454, olean
+  fresh, 21 single-line docs swept, clause-doc audit OK, no stale
+  tokens). Terminal face is now **terminalFaceCE66** — OPEN, NO RH
+  CLAIM.
+- **GEN PIPELINE:** derived via the 4-ARG AUDIT standing rule (import +
+  open line scaffold-re-handled; past275k + past300k carries
+  explicitly re-handled) — clean first generation, stale-scan clean.
+- **SPEED-UP DECISION (user question "can we speed up the re-runs?"):**
+  measured — per-unit wall clock = window RUN only (2 567–2 780 s);
+  verifier < 1 s. Adopted for W67 onward, both safe, neither changes
+  certification content: (1) CROSS-WINDOW CACHE SEEDING — cp the
+  previous window's .cache.jsonl into the new run's cache before launch:
+  cache keys are GLOBAL (Gram index n / sample (n,i,m)), so the new
+  window's left extension + left Rosser-run region are cache hits
+  (deterministic overlap with the previous run's right side); the
+  certificate still embeds ALL records and the verifier re-derives
+  everything; resumed_from_cache is logged in the run (provenance is
+  built in). (2) WORKERS 28 → 32 (32-core machine, +14% parallel
+  throughput; recorded in the run log). NOT done: no driver fork into a
+  persistent pool (trust base is "re-run of a third-party pipeline"),
+  no M / C_R / precision / N_range changes, no verifier-skip. Expected
+  ~35–45 min → ~30–36 min per window; the W67 resumed_from_cache count
+  is the measurement.
+- **TALLY (certificate-derived, W66 appended):** 31 of 67 clean;
+  36 rescue windows (W66's interior failure joins the record); 51 total
+  internal Rosser failures.
+- **NO RH CLAIM.** Next unit — window 67 (a67 = 12,363,154,777,116),
+  first instrumented run (seeded cache + 32 workers).

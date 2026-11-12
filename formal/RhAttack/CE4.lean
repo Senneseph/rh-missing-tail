@@ -61,7 +61,7 @@ Apache-2.0  deposit,  same  as  CE1/CE2/CE3):
     (2)  PIPELINE  VERIFIER  on  window4_b4.json:
          "CERTIFIED:  true",  points_checked  =  34 275,
          sign_changes_inside  =  20 000  =  b  −  a,
-         roesser_failures_inside  =  1  (the  rescued  block  -
+         rosser_failures_inside  =  1  (the  rescued  block  -
          see  above;  the  total  and  the  runs  are  what
          Turing  uses,  both  independently  verified),
          turing_ok  =  true,  K_conservative  =  12,

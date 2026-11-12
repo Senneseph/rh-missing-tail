@@ -435,7 +435,7 @@ Murphy's  Apache-2.0  deposit,  same  as  CE1-CE51):
          =
          b  -
          a,
-         roesser_failures_inside
+         rosser_failures_inside
          =
          2
          (the

@@ -44,7 +44,7 @@ deposit,  same as CE1/CE2):
          re-verified in this environment  -  see CE2 header);
     (2)  PIPELINE VERIFIER  on  window3_b3.json:  "CERTIFIED: true",
          points_checked = 33 326,  sign_changes_inside = 19 999
-         = b − a,  roesser_failures_inside = 0,
+         = b − a,  rosser_failures_inside = 0,
          turing_ok = true,  K_conservative = 12,  endpoints
          recomputed and matched;
     (3)  SEAM AUDIT  (this run):  the recorded g_a3 ball is

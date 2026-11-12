@@ -124,7 +124,7 @@ Apache-2.0  deposit,  same  as  CE1-CE42):
     (2)  PIPELINE  VERIFIER  on  window42b_fill.json:
          "CERTIFIED:  true",  points_checked  = 33 301,
          sign_changes_inside  =  20 000  =  b  −  a,
-         roesser_failures_inside  = 0,  turing_ok  =  true,
+         rosser_failures_inside  = 0,  turing_ok  =  true,
          K_conservative  = 12,  endpoints  recomputed  and
          matched;
     (3)  SEAM  AUDIT  (both  directions,  both  verified):

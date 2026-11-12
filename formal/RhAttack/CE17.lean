@@ -79,7 +79,7 @@ Apache-2.0  deposit,  same  as  CE1-CE16):
     (2)  PIPELINE  VERIFIER  on  window17_b17.json:
          "CERTIFIED:  true",  points_checked  =  34 926,
          sign_changes_inside  =  19 999  =  b  −  a,
-         roesser_failures_inside  =  1  (rescued,  union
+         rosser_failures_inside  =  1  (rescued,  union
          quota  met),  turing_ok  =  true,
          K_conservative  =  12,  endpoints  recomputed  and
          matched;

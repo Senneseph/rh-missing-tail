@@ -53,7 +53,7 @@ Apache-2.0  deposit,  same  as  CE1-CE11):
       left  of  g_a12,  47  right  of  g_b12  (both  >=  K  =
       12);  0  cross-check  failures  (all  33 371  records);
       0  undetermined  Gram  signs.  INTERNAL  ROSSER-BLOCK
-      EXCEPTIONS:  NONE  -  roesser_failures  =  []  and
+      EXCEPTIONS:  NONE  -  rosser_failures  =  []  and
       rescued_rosser_exceptions  =  []:  a  CLEAN  window  (as
       windows  6,  8  and  10).
   VERIFICATION  (three  layers,  same  as  CE2-CE11):
@@ -62,7 +62,7 @@ Apache-2.0  deposit,  same  as  CE1-CE11):
     (2)  PIPELINE  VERIFIER  on  window12_b12.json:
          "CERTIFIED:  true",  points_checked  =  33 371,
          sign_changes_inside  =  20 000  =  b  −  a,
-         roesser_failures_inside  =  0,  turing_ok  =  true,
+         rosser_failures_inside  =  0,  turing_ok  =  true,
          K_conservative  =  12,  endpoints  recomputed  and
          matched;
     (3)  SEAM  AUDIT  (this  run):  the  recorded  g_a12  ball

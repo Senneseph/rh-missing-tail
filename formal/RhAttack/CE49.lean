@@ -135,7 +135,7 @@ Apache-2.0  deposit,  same  as  CE1-CE48):
     (2)  PIPELINE  VERIFIER  on  window49_b49.json:
          "CERTIFIED:  true",  points_checked  = 32 784,
          sign_changes_inside  =  20 000  =  b  −  a,
-         roesser_failures_inside  =  0  (clean  window),
+         rosser_failures_inside  =  0  (clean  window),
          turing_ok  =  true,  K_conservative  = 12
          (K_required:  Trudgian  Cor2.3  =  [5.71899  + or -
          1.23e-6],  doubled  =  [11.4380  + or -
