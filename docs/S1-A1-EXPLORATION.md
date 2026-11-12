@@ -4102,3 +4102,30 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
   325,000-unit frontier mark is 21,264 ahead — expect ~w69).** Honest tally
   30 of 65 clean. Round-mark sequence above H0 now ends: 250 000 @ CE53,
   275 000 @ CE58, **300 000 @ CE64**.
+
+## E101 · 0371 — window 65 + CE65 (NON-SNAPPED width 20,000; one interior Rosser rescue, quota-met, recorded; 4,673 standing pace; tCE65 = 308,409 above H0 — 300k milestone carried with margin 8,409; **THE 1,300,000 CERTIFIED-ZERO MARK IS CROSSED IN WINDOW 65** — 1,319,986 total, the 0370 prediction EXACT; generator 4-arg-rep hole found and patched)
+- **0371 (window 65 + CE65):** launched from b64 (a65 = 12,363,154,737,116);
+  seam audit g_a65 ≡ g_b64 tuple [232127346584782776286409114165073595457,
+  −86, 16777217, −110] BEFORE the module (0348 rule); **NON-SNAPPED
+  (b = a + 20,000)**; **ONE interior Rosser exception, rescued,
+  quota-met, recorded** (block [..757,083, ..757,086] need 3/found 1 →
+  union [..757,082, ..757,087] FOUND 5/5, m=8; touches neither end run);
+  20,000 zeros simple+on-line (33,892 pts, 2780.3 s; verifier
+  CERTIFIED/turing_ok, K_cons 12, end runs 43/47; 0 cross-check
+  failures). g_b65 = 3,000,175,641,209.02220410126784534 ± 1.29e-26
+  (frac 0.0222, no CASING; two-decimal Lo margin THIN ~2.2e-3 —
+  recorded honestly, exact norm_num comparison). **tCE65 =
+  3,000,175,641,209; increment 4,673 (standing pace)**; tCE65 − tPT2 =
+  308,409 — **300k milestone [window 64] CARRIED** (margin 8,409);
+  325k is 16,591 ahead (expect ~w69). CE65 GREEN (8,831 targeted, 0
+  errors 0 warnings, olean fresh; 21 doc blocks swept incl. past300k
+  carry doc; clause-doc audit OK). **Generator reliability note:**
+  gen_ce64's milestone rep was 4-arg (invisible to the 3-arg AST
+  de-river) → p275k carry stranded in first gen; stale-scan caught it
+  pre-build; patched + regenerated. Standing rule: re-handle every
+  4-arg rep of the source generator explicitly. **Certified 1,319,986 —
+  THE 1,300,000 CERTIFIED-ZERO MARK IS CROSSED IN WINDOW 65** (the
+  0370 "14 ahead" prediction, EXACT; 1.2M [w60] carried; 1.4M is
+  80,014 ahead, expect ~w69). Honest tally 30 of 66 clean. Side-step
+  since 0370: Millennial-puzzle feasibility check PARKED (back-pocket
+  §5; no analytic move either way).

@@ -5153,3 +5153,66 @@ out).
 - **NO RH CLAIM.** Next unit — window 65 (a65 = 12,363,154,737,116);
   **the 1,300,000-certified-zero mark is 14 ahead (expect w65)**; the
   325,000-unit frontier mark is 21,264 ahead (expect ~w69).
+
+## 102 · 0371: window 65 + CE65 — NON-SNAPPED (width 20,000), one interior Rosser rescue (quota-met, recorded); 4,673 standing pace; tCE65 = 308,409 above H0 (300k milestone carried, margin 8,409); **THE 1,300,000 CERTIFIED-ZERO MARK IS CROSSED IN WINDOW 65 — 1,319,986 total (the 0370 prediction is EXACT)**; generator 4-arg-rep hole found and patched
+- **0371 (M5 LANE - WINDOW 65 + CE65).**
+  Launch a65 = 12,363,154,737,116 (= b64), b = a + 20,000 =
+  12,363,154,757,116 — **NON-SNAPPED** (width 20,000). M = 60, C_R = 1,
+  28 workers, N_range [691008, 691008], 33,892 evals, 2780.3 s.
+- **Seam audit FIRST (0348 rule):** g_a65 ≡ g_b64 exact dyadic
+  [232127346584782776286409114165073595457, −86, 16777217, −110] —
+  bit-identical, BEFORE CE65 was written.
+- **ONE interior Rosser exception, rescued, quota-met, recorded**
+  (interior — touches neither end Rosser run): original block
+  [12,363,154,757,083, 12,363,154,757,086] (need 3, found 1, 193 pts,
+  m = 64) → union [12,363,154,757,082, 12,363,154,757,087] (need 5,
+  FOUND 5, m = 8). End Rosser runs 43/47 (both ≥ 12); 0 cross-check
+  failures; 0 undetermined Gram signs.
+- **Verifier (layer 2):** CERTIFIED: true, turing_ok: true,
+  points_checked 33,892, sign_changes_inside 20,000 = b − a,
+  roesser_failures_inside 1 (the recorded rescue), K_conservative 12,
+  endpoints recomputed and matched.
+- **Endpoint:** g_b65 = 3,000,175,641,209.02220410126784534 ±
+  1.29e-26 — exact tuple [232127346946333618983179782472505556991,
+  −86, 16777217, −110]. **tCE65 = 3,000,175,641,209**.
+- **INCREMENTS: 4,673 (standing pace continues).**
+  **tCE65 − tPT2 = 308,409** — the 300,000-unit MILESTONE [WINDOW 64] is
+  **CARRIED** (margin 8,409), re-proven in-tree (frontierPast300k now
+  carry-text). Next round mark 325k sits 16,591 ahead (expect ~w69;
+  compute, do not pre-announce). No CASING (frac 0.0222); HONEST NOTE:
+  the two-decimal lower-bound margin is thin (~2.2e-3) — recorded
+  openly; exact rational norm_num comparison, no floating point in the
+  inequality. gB65Lo := 300017564120902/100.
+- **Certified total: 1,299,986 + 20,000 = 1,319,986 —
+  THE 1,300,000 CERTIFIED-ZERO MARK IS CROSSED IN WINDOW 65** — the
+  0370 prediction ("14 ahead — expect w65") is EXACT again. 1.2M mark
+  [window 60] carried; 1.4M is 80,014 ahead (expect ~w69; confirm from
+  the verified count).
+- **CE65.lean GREEN** (8,831 targeted jobs, 0 errors 0 warnings; full
+  tree 17,454; olean fresh): gB65Lo; faceShrinkCE65 = 4673;
+  frontierGapAboveH0 = 308409; six milestone theorems carried +
+  re-proven (frontierPast175k/200k/225k/250k/275k + **frontierPast300k
+  as carry**); ce64WinClauseFull (w64 full slice re-cited); ce65WinClause
+  (terminal slice, documented); 66-way band; terminalFaceCE65 NAMED
+  OPEN; 21 doc blocks swept (20 inherited + past300k carry doc);
+  clause-doc audit OK.
+- **GENERATOR HOLE FOUND AND PATCHED (reliability note):** gen_ce64's
+  "past275k carry + past300k milestone" was a 4-arg labeled rep,
+  invisible to the 3-arg AST de-river → the first unspotted CE65
+  generation stranded frontierPast275k at tCE64/303736 (would-be type
+  error); caught by the stale-scan before any build; patched with an
+  explicit p275k-carry rep + full regeneration from CE64.lean.
+  Standing rule appended to the de-river checklist: audit every 4-arg
+  rep in the source generator and re-handle each explicitly.
+- **Honest tally:** 30 of 66 chain windows clean; rescue windows 7, 21,
+  28, 29, 34, 37, 42, 43, 44 (one each), 45 (two), 51 (one), 52 (two),
+  53 (three), 54 (one), 55 (one), 56 (four), 59 (one), 61
+  (three), 62 (one), 63 (one), 65 (one) — all quota-met, none
+  suppressed. Snapped: 2, 3, 8, 11, 17, 18, 19, 21, 31, 40, 51, 52, 63.
+- **NO analytic move:** face open at tCE65; M2 wall {θ | 4/7 < θ} pinned
+  via SWall; absolute clause dead as published input; θ=∞ lane
+  conjectural; the Millennial-puzzle feasibility check is PARKED in the
+  back-pocket notes (§5, seed: "three pieces at one zero").
+- **NO RH CLAIM.** Next unit — window 66 (a66 = 12,363,154,757,116);
+  milestone watch: 325k frontier mark 16,591 ahead (expect ~w69);
+  1,400,000 certified-zero mark 80,014 ahead (expect ~w69).
