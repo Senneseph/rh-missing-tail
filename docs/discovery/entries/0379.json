@@ -1,0 +1,32 @@
+{
+  "id": "0379",
+  "ts": "2026-11-12T09:10Z",
+  "lane": "M5",
+  "unit": 93,
+  "kind": "window-certified + CE73 green + terminal face re-anchored + FIRST PREDICTION within one window",
+  "summary": "Window 73 CERTIFIED + verified + seam-audited (bit-identical g_a73 == g_b72, passed BEFORE formalization per 0348) + CE73 green FIRST TRY (8839 targeted, 17454 full) + terminalFaceCE73 (345 792 above H0; 325 000 CARRIED margin 20 792; 300 000 CARRIED margin 45 792; 350 000 is 4 208 ahead -> crossing expected w74 [w74 -> 350 465, margin ~465] \u2014 the FIRST PREDICTION, now one window away). W73 facts: NON-SNAPPED (width 20 000); THREE interior Rosser failures - the most since W68 - each RESCUED quota-met (blocks [..900 282, ..900 284] / [..901 943, ..901 945] / [..904 389, ..904 391]; need 2 found 0 at m = 64 each; one-step union extensions FOUND 4 with m = 4, 4, 8) - RECORDED, not suppressed; no M = 60 extension failures. End runs 44/48, K = 12; cross_check_failures []; undetermined_gram_signs []. 34 089 evals in 2 459.6 s (series: 2 497.2 / 2 498.3 / 2 498.5 / 2 490.4 / 2 483.4 / 2 375.0 / 2 459.6 - count moved, content did not), 32 workers, seed cache resumed_from_cache = 236 325 - seventh seeded-cache + 32-worker overlap run: window 73 ran while CE72's formalization proceeded (critical path = max(run, formalization)). tCE73 = 3 000 175 678 592 (increment 4 673, the usual); g_b73 = 3 000 175 678 592.5029296875 + or - 1.29e-26, tuple [116063674919370179901738976229011051919, -85, 16777217, -110]; gB73Lo = 3 000 175 678 592.50 (margin ~2.9e-3; frac 0.5029, round-down 0.50 != floor - no CASING, window 38 remains the only CASING case). Certified zero census: cumulative 1 479 986 over (g_a1, g_b73] (1 400 000 mark carries from window 70 [0376]; 1 500 000 is 20 014 ahead: w74 -> 1 499 986 [14 short], w75 -> 1 519 986 -> crossing expected w75). iff RHS = predecessor face, verified against the real CE72.lean text pre-generation (terminalFaceCE73 q <-> CE72.terminalFaceCE72 q; the 0371/0376 typo lesson held a third time). One generator-side typo caught by the iff hygiene assert before codegen (faceCE72_implies_faceCE72 self-replace) - fixed at builder level, CE73 output verified clean. Tally through W73: clean 33, rescue 40, 60 interior failures, all rescues quota-met, recorded not suppressed. W74 launched in overlap (a74 = 12 363 154 917 116 = b73, cache seeded 270 230 lines) BEFORE CE73 closeout finished - per-unit critical path = max(run, formalization). NO RH CLAIM.",
+  "artifacts": {
+    "certificate": "tmp/ce2/ce1_window_H0_v1/window73_b73.json",
+    "verifier": [
+      "verify73.log: CERTIFIED true, turing_ok true, points_checked 34089, sign_changes_inside 20000, roser_failures_inside 3 (all rescued quota-met), left_of_a 44, right_of_b 48, K 12"
+    ],
+    "cert_rosser_detail": "rescued_rosser_exceptions: 3 entries, found == need == 4 each, m = 4/4/8",
+    "lean": "formal/RhAttack/CE73.lean",
+    "terminal_face": "terminalFaceCE73",
+    "tCE73": 3000175678592,
+    "gap_above_H0": 345792,
+    "frontier_milestone": "350 000 is 4 208 ahead -> crossing expected w74 [350 465, margin ~465] - FIRST PREDICTION one window away",
+    "census": {
+      "total_certified": 1479986,
+      "milestone_1400k": "CARRIED (crossed W70)",
+      "milestone_1500k": "20 014 ahead -> expected w75"
+    },
+    "doc_sweep": "21/21",
+    "stale_scan": "clean (341 119 x0; 1 459 986 x0; 673 919 x2 = previous endpoint history); targeted 8839 + full 17454 green",
+    "tally": {
+      "clean": 33,
+      "with_recorded_rescue": 40,
+      "total_internal_failures": 60
+    }
+  }
+}
