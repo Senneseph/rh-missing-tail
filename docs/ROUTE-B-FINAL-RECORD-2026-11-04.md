@@ -5466,3 +5466,43 @@ mark is crossed
   against the mark list at writing time.
 - **NO RH CLAIM.** Next unit — window 71 (a71 = 12 363 154 877 116; seeds
   cache from window70, 32 workers; running in pipeline overlap).
+
+## 0377 — WINDOW 71 + CE71 (unit 91, 2026-11-12): frontier at 336 446 above H0
+- **WINDOW:** a = 12 363 154 857 116 (= b70); b requested/actual =
+  12 363 154 877 116; **NON-SNAPPED, width b - a = 20 000**; M = 60,
+  C_R = 1, N_range constant, 32 workers, prec 128; 33 981 evals, 2 483.4 s;
+  resumed_from_cache = 169 900 (seeded from window70's cache).
+- **ROSSER:** one recorded interior failure, rescued quota-met, RECORDED not
+  suppressed: block [12 363 154 866 345, 12 363 154 866 347] (need 2, found
+  0, 129 pts, m = 64) -> union [12 363 154 866 344, 12 363 154 866 349]
+  (need 5, FOUND 5, m = 8). End runs 48 / 43 (>= K = 12). Verifier:
+  CERTIFIED: true, turing_ok: true, points 33 981, 0 cross-check failures,
+  0 undetermined signs.
+- **SEAM:** g_a71 == g_b70 BIT-IDENTICAL
+  ([116063674377043916076460899967516404691, -85, 16777217, -110]); audited
+  before CE71 was written; chain seam g_a70 == g_b69 re-audited in the same
+  pass.
+- **ENDPOINT g_b71:** [232127349115638674724047938866396552305, -86,
+  16777217, -110] = 3 000 175 669 246.632904446754815351 + or - 1.29e-26;
+  tCE71 = 3 000 175 669 246; gB71Lo = 300017566924663/100 (margin ~2.9e-3,
+  somewhat thin, recorded honestly; frac 0.6329 -> NO CASING; window 38
+  remains the only CASING case).
+- **INCREMENT:** 4 673 (the usual one).
+- **FRONTIER:** 336 446 certified zeros above H0 - 325 000-unit mark
+  CARRIED (margin 11 446); 300 000-unit mark CARRIED (margin 36 446); 350
+  000-unit mark 13 554 ahead (13 554 / 4 673 = 2.9 units - expected
+  ~window 74, computed, not pre-announced).
+- **CENSUS:** cumulative total 1 439 986 over (g_a1, g_b71] - the 1 400 000
+  mark carries from window 70 [0376]; 1 500 000 mark 60 014 ahead (~w78).
+- **LEAN:** CE71.lean green on first try (targeted 8 837 / full tree 17 454,
+  olean fresh, 21 docs swept; stale-token scan clean - 331 773 and 1 419 986
+  both 0). iff goal: terminalFaceCE71 q <-> CE70.terminalFaceCE70 q
+  (predecessor-face RHS; a typo'd variant was caught by diff pre-generation).
+  Terminal face now **terminalFaceCE71** - OPEN, NO RH CLAIM.
+- **TALLY (certificate-derived):** 32 of 70 clean; 38 rescue windows; 57
+  total internal Rosser failures (W71 adds 1).
+- **OVERLAP:** W71 ran while CE70 formalized (fifth overlap run, 2 483.4 s -
+  the fastest in the 67-71 series); W72 launched before CE71 closeout -
+  per-unit critical path = max(run, formalization).
+- **NO RH CLAIM.** Next unit — window 72 (a72 = 12 363 154 877 116; seeds
+  cache from window71, 32 workers; running in pipeline overlap).

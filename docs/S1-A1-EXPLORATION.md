@@ -4204,3 +4204,14 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
   verbatim from the predecessor - closes the hand-carry drift hole from
   0371/0374). Face now **terminalFaceCE70** - OPEN, NO RH CLAIM. Tally: 32
   of 69 clean (37 rescue windows, 56 failures). W71 running in overlap.
+- **0377 (unit 91) — WINDOW 71 + CE71:** W71 certified (non-snapped 20 000;
+  33 981 evals, 2 483.4 s, seeded 169 900, 32 workers; runs 48/43, K = 12)
+  - ONE interior Rosser failure rescued quota-met (m = 8), recorded. tCE71
+  = 3 000 175 669 246 (increment 4 673); 336 446 above H0 (325k carried,
+  margin 11 446; 300k carried, margin 36 446; 350k 13 554 ahead ~w74).
+  Certified total 1 439 986 (1.4M carried from W70; 1.5M 60 014 ahead
+  ~w78). CE71 green on first try (8 837 / 17 454, fresh, 21 docs; iff RHS =
+  predecessor face CE70.terminalFaceCE70). Face now **terminalFaceCE71** -
+  OPEN, NO RH CLAIM. Tally: 32 of 70 clean (38 rescue windows, 57
+  failures). W72 running in overlap (fifth run overlapped the formalization:
+  2 483.4 s, fastest of the series).

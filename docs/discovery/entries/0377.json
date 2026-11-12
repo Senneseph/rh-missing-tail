@@ -1,0 +1,131 @@
+{
+  "id": "0377",
+  "ts": "2026-11-12T06:39:07",
+  "lane": "M5",
+  "unit": 91,
+  "status": "LANE_PROGRESS",
+  "rh_claim": false,
+  "no_rh_claim": true,
+  "title": "window 71 certified + CE71 green + terminalFaceCE71: frontier 336 446 above H0 (325k carried margin 11 446; 350k 13 554 ahead ~w74); certified total 1 439 986 (1.4M carried); W72 launched in overlap",
+  "facts": {
+    "window": 71,
+    "a": 12363154857116,
+    "b_requested": 12363154877116,
+    "b_actual": 12363154877116,
+    "snapped": false,
+    "width_b_minus_a": 20000,
+    "run": {
+      "M": 60,
+      "C_R": 1,
+      "N_range": [
+        691008,
+        691008
+      ],
+      "workers": 32,
+      "prec": 128,
+      "evals": 33981,
+      "seconds": 2483.4,
+      "resumed_from_cache": 169900,
+      "cache_seeded_from": "window70_b70.json.cache.jsonl",
+      "overlap": "W71 RAN WHILE CE70's formalization proceeded (fifth overlap run)"
+    },
+    "verifier": {
+      "certified": true,
+      "turing_ok": true,
+      "points_checked": 33981,
+      "sign_changes_inside": 20000,
+      "rosser_failures_inside": 1,
+      "rosser_run_left_of_a": 48,
+      "rosser_run_right_of_b": 43,
+      "K_conservative": 12,
+      "cross_check_failures": 0,
+      "undetermined_gram_signs": 0
+    },
+    "rosser_exceptions_rescued_quota_met": [
+      {
+        "block": [
+          12363154866345,
+          12363154866347
+        ],
+        "need": 2,
+        "found": 0,
+        "points": 129,
+        "m": 64,
+        "union": [
+          12363154866344,
+          12363154866349
+        ],
+        "union_need": 5,
+        "union_found": 5,
+        "union_m": 8
+      }
+    ],
+    "rosser_policy": "recorded, not suppressed; quota met at m=8",
+    "seam": {
+      "g_a71_eq_g_b70": true,
+      "tuple": [
+        116063674377043916076460899967516404691,
+        -85,
+        16777217,
+        -110
+      ],
+      "audit": "bit-identical exact dyadic tuple, performed before CE71 was written (0348 process rule); chain seam g_a70 == g_b69 re-audited in the same pass"
+    },
+    "endpoint_g_b71": {
+      "tuple": [
+        232127349115638674724047938866396552305,
+        -86,
+        16777217,
+        -110
+      ],
+      "decimal": "3 000 175 669 246.632904446754815351",
+      "radius": "~1.29e-26"
+    },
+    "frontier": {
+      "tCE71": 3000175669246,
+      "increment_over_tCE70": 4673,
+      "gap_above_H0": 336446,
+      "gB71Lo": "300017566924663 / 100",
+      "gB71Lo_margin": "~2.9e-3 (somewhat thin, recorded honestly)",
+      "frac": 0.6329,
+      "casing": false,
+      "only_casing_case": "window 38 / CE38"
+    },
+    "milestone": {
+      "frontier_325k": "CARRIED (crossed window 69 [0375] at 327 100; now margin 11 446)",
+      "frontier_300k": "CARRIED (margin 36 446)",
+      "frontier_350k": "13 554 ahead (13 554 / 4 673 = 2.9 units) - expected ~window 74 (compute, do not pre-announce)",
+      "round_mark_sequence_above_H0": "100 000 @ CE22, 125 000 @ CE27, 150 000 @ CE33, 175 000 @ CE38, 200 000 @ CE42B, 225 000 @ CE48, 250 000 @ CE53, 275 000 @ CE58, 300 000 @ CE64, 325 000 @ CE69"
+    },
+    "certified_zeros": {
+      "total_through_g_b71": 1439986,
+      "1.4M": "CARRIED (crossed in window 70 [0376])",
+      "1.5M": "60 014 ahead - expected ~window 78 (20 000/window; pipeline data)"
+    },
+    "formal": {
+      "module": "CE71.lean",
+      "targeted_build": "lake build RhAttack.CE71 green (8837 jobs, first try)",
+      "full_build": "lake build green (17454 jobs)",
+      "fresh_olean": true,
+      "terminal_face": "terminalFaceCE71 (OPEN HYPOTHESIS)",
+      "iff": "terminalFaceCE71_iff_faceCE70 (goal: terminalFaceCE71 q <-> CE70.terminalFaceCE70 q)",
+      "doc_sweep": "21/21 single-line docs (ce71_docsweep.py); frontierPast325k doc carried by the generator's PAST block (new325doc, W71 carry)",
+      "stale_token_scan": "clean (331 773 -> 0, 1 419 986 -> 0, 'hence <= tCE' -> 0; seam decimals 664 573 x2 legitimate)"
+    },
+    "generator_lessons": {
+      "iff_right_hand_side": "the iff goal's RHS is the PREDECESSOR module's face: CE70.lean states terminalFaceCE70 q <-> CE69.terminalFaceCE69 q (NOT CE69.terminalFaceCE70); the ce71 derivation initially carried a typo'd version and was caught by the diff before generation",
+      "deriver_reuse": "derive_gen_ce71 built from derive_gen_ce70 by a 24-edit exact transform (build_derive71.py; each edit asserted unique); all spot-checks + PAST asserts passed before generation"
+    },
+    "tally_certificate_derived": {
+      "scope": "windows 2..71 named certificates (recomputed from certificates)",
+      "clean": 32,
+      "with_recorded_rescue": 38,
+      "total_internal_failures": 57,
+      "note": "W71 adds 1 interior failure (total 57); all quota-met, all recorded"
+    },
+    "pipeline_overlap": {
+      "w72": "launched before CE71 closeout (W71 seam audit already passed): a72 = 12363154877116, b_req = 12363154897116, seeded cache from window71, 32 workers"
+    }
+  },
+  "honesty": "re-run of third-party pipeline, not from-scratch certification; Rosser exceptions recorded not suppressed; only window total and end Rosser runs enter the Turing step; NO RH CLAIM (terminalFaceCE71 is an open hypothesis; re-anchoring is a certificate, not a logical move)"
+}
