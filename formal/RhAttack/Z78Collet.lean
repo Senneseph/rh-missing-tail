@@ -155,6 +155,25 @@ theorem colletUpper_lt_gao : colletUpper < Z78Gao.gaoUpper := by
   dsimp only [colletUpper, Z78Gao.gaoUpper]
   norm_num
 
+/-- (PROVEN)  [Z78C] STRICTLY STRENGTHENS [Z78L] directly at the
+    boundary (norm_num certificate, cross-multiplication:
+    8747729897 * 10^8 < 874957019420098947): the current
+    frontier boundary 0.8747729897 lies strictly BELOW the
+    Liu26 boundary 0.874957019420098947 (the 0384-audited
+    input of discovery 0384 / unit 98) - the [Z78L]
+    zero-free half-plane is strictly smaller than the [Z78C]
+    one, so the 0384 queued Z78 re-anchor to the Liu26
+    half-plane is SUPERSEDED: the frontier it should have
+    audited has since moved past Liu26, and the frontier
+    re-anchor itself already exists in-tree as
+    `zetaZeroStripCollet` (discovery 0162).  Transitivity
+    also holds via `colletUpper_lt_gao`,
+    `Z78Gao.gaoUpper_lt_qx`, `Z78Track.qxUpper_lt_liuB`; this
+    certificate states the dominance directly. -/
+theorem colletUpper_lt_liu : colletUpper < Z78Liu.liuBUpper := by
+  dsimp only [colletUpper, Z78Liu.liuBUpper]
+  norm_num
+
 /-- The off-pair bound is strictly below the [Z78G]
     off-pair bound (no numeric work: subtraction is
     monotone). -/

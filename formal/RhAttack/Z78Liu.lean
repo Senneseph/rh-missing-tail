@@ -52,6 +52,25 @@ PROVENANCE (no recall — every reference resolves):
       possible analytic methods or actual zero distributions";
       it "proves neither the Riemann hypothesis nor
       nonvanishing on the boundary Re(s) = B_inf".
+    * FULL PROGRAM AUDIT (this program, 2026-11-12,
+      discovery 0384 / unit 98): independent mpmath @ 80
+      digits reproduction of the numeric core (unique cubic
+      root in (0.38858, 0.38859), trig closed form matching
+      to 1e-81, B_inf 18-digit prefix, the three-part 7/8
+      decomposition 2.5e-5 + 1.7930200831e-5 +
+      5.037906979388974e-8 to 24 digits) + the strict Lean
+      replay RE-BOUND against the current release (all 13
+      replay-relevant files hash-MATCH a fresh clone;
+      checker_sha256 + archive_sha256 verified; axioms
+      exactly propext / Classical.choice / Quot.sound; final
+      signatures PASS).  FRONTIER NOTE (discovery 0386 /
+      unit 100): the quasi-RH frontier has since moved past
+      this record - [Z78C] (Z78Collet.lean,
+      0.8747729897) strictly dominates this boundary
+      (`Z78Collet.colletUpper_lt_liu`), so the 0384 queued
+      re-anchor to this half-plane is closed as SUPERSEDED
+      (the frontier re-anchor already exists in-tree as
+      `Z78Collet.zetaZeroStripCollet`, discovery 0162).
   STATUS IN THIS PROGRAM:  a NAMED EXTERNAL INPUT of the same
   class as [Z78] — a kernel-verified external theorem, entered
   only as a hypothesis.  Because its formalized zeta statement
