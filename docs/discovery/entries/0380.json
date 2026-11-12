@@ -1,0 +1,32 @@
+{
+  "id": "0380",
+  "ts": "2026-11-12T10:15Z",
+  "lane": "M5",
+  "unit": 94,
+  "kind": "milestone-crossing + window-certified + CE74 green + terminal face re-anchored + FIRST PREDICTION DELIVERED",
+  "summary": "MILESTONE: THE 350 000-UNIT MARK WAS CROSSED IN WINDOW 74 - tCE74 - tPT2 = 350 465, margin 465 - the FIRST PREDICTION of the series, delivered EXACTLY (one window ahead, at 0379: '350 000 is 4 208 ahead -> w74 -> 350 465, margin ~465'; the increment was the usual 4 673 >= 4 208). Window 74 CERTIFIED + verified + seam-audited (bit-identical g_a74 == g_b73, passed BEFORE formalization per 0348) + CE74 green FIRST TRY (8840 targeted, 17454 full) + terminalFaceCE74 (350 465 above H0; 300 000 CARRIED margin 50 465; 325 000 CARRIED margin 25 465; 375 000 is 24 535 ahead -> expected window 80 [w80 -> 378 503, margin ~3 503]). W74 facts: NON-SNAPPED (width 20 000); CLEAN WINDOW - zero Rosser failures anywhere (second clean of the stretch, after W72; no rescues, no suppressions because nothing failed); end runs 47/46, K = 12; cross_check_failures []; undetermined_gram_signs []. 33 703 evals in 2 490.2 s (series: 2 497.2 / 2 498.3 / 2 498.5 / 2 490.4 / 2 483.4 / 2 375.0 / 2 459.6 / 2 490.2), 32 workers, seed cache resumed_from_cache = 270 230 - eighth seeded-cache + 32-worker overlap run: window 74 ran while CE73's formalization proceeded (critical path = max(run, formalization)). tCE74 = 3 000 175 683 265 (increment 4 673, the usual); g_b74 = 3 000 175 683 265.4385 + or - 1.29e-26, tuple [232127350200291202311781827190793855211, -86, 16777217, -110]; gB74Lo = 3 000 175 683 265.43 (margin ~8.3e-3; frac 0.4385, round-down 0.43 != floor - no CASING, window 38 remains the only CASING case). NEW THEOREM: frontierPast350k (machine-proofed crossing theorem, same have/linarith [frontierGapAboveH0] pattern as all carries) - first new past-thm since frontierPast325k at CE69/0375. Certified zero census: cumulative 1 499 986 over (g_a1, g_b74] (1 400 000 mark carries from window 70 [0376]; the 1 500 000 mark is 14 SHORT - the corridor predicted at 0378/0377-correction 'w74 -> 1 499 986 [14 short], w75 -> 1 519 986' landed exactly; crossing in window 75 EFFECTIVELY GUARANTEED: w75 adds 20 000 if non-snapped -> 1 519 986; w75 would have to lose >= 19 986 zeros to a snap to avoid it, and no window in the series except W1 has ever snapped). iff RHS = predecessor face, verified against the real CE73.lean text pre-generation (terminalFaceCE74 q <-> CE73.terminalFaceCE73 q). One more builder typo (face self-replace) caught by reading before running - fixed pre-execution; CE74 output verified clean. Tally through W74: clean 34, rescue 40, 60 interior failures, all rescues quota-met, recorded not suppressed. W75 launched in overlap (a75 = 12 363 154 937 116 = b74, cache seeded 303 685 lines) BEFORE CE74 closeout finished. NO RH CLAIM.",
+  "artifacts": {
+    "certificate": "tmp/ce2/ce1_window_H0_v1/window74_b74.json",
+    "verifier": [
+      "verify74.log: CERTIFIED true, turing_ok true, points_checked 33703, sign_changes_inside 20000, roser_failures_inside 0, left_of_a 47, right_of_b 46, K 12"
+    ],
+    "lean": "formal/RhAttack/CE74.lean",
+    "terminal_face": "terminalFaceCE74",
+    "new_theorem": "frontierPast350k (350 000-unit milestone CROSSED in window 74, margin 465, FIRST PREDICTION delivered exactly)",
+    "tCE74": 3000175683265,
+    "gap_above_H0": 350465,
+    "frontier_milestone": "350 000 CROSSED THIS WINDOW (margin 465); 375 000 is 24 535 ahead -> expected window 80 [378 503, margin ~3 503]",
+    "census": {
+      "total_certified": 1499986,
+      "milestone_1400k": "CARRIED (crossed W70)",
+      "milestone_1500k": "14 SHORT -> crossing window 75 effectively guaranteed [w75 -> 1 519 986 if non-snapped]"
+    },
+    "doc_sweep": "21/21",
+    "stale_scan": "clean (345 792 x0; 1 479 986 x0; 678 592 x2 = previous endpoint history); targeted 8840 + full 17454 green",
+    "tally": {
+      "clean": 34,
+      "with_recorded_rescue": 40,
+      "total_internal_failures": 60
+    }
+  }
+}
