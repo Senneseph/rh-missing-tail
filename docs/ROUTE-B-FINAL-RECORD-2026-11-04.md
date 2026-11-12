@@ -5204,11 +5204,16 @@ out).
   explicit p275k-carry rep + full regeneration from CE64.lean.
   Standing rule appended to the de-river checklist: audit every 4-arg
   rep in the source generator and re-handle each explicitly.
-- **Honest tally:** 30 of 66 chain windows clean; rescue windows 7, 21,
-  28, 29, 34, 37, 42, 43, 44 (one each), 45 (two), 51 (one), 52 (two),
-  53 (three), 54 (one), 55 (one), 56 (four), 59 (one), 61
-  (three), 62 (one), 63 (one), 65 (one) — all quota-met, none
-  suppressed. Snapped: 2, 3, 8, 11, 17, 18, 19, 21, 31, 40, 51, 52, 63.
+- **Honest tally (CORRECTED by the 0371 certificate-derived audit):** 31 of
+  66 chain windows clean; 35 rescue windows; 50 total internal Rosser
+  failures — every one has a recorded quota-met rescue, none suppressed.
+  The carried per-unit tallies ("29 of 62" ... "30 of 66") were recounted
+  from ALL 66 chain certificates in this unit and found inaccurate (the
+  rescue list carried in earlier units was incomplete: it omitted e.g. w1,
+  w4, w5, w9, w11, w15, w17, w19, w20, w23, w24, w26, w27, w29, w35, w39;
+  undercounted w7/w28/w29; and listed w42, which is CLEAN). The audit is
+  authoritative and supersedes them; see the TALLY CORRECTION fact in 0371.
+  Snapped: 2, 3, 8, 11, 17, 18, 19, 21, 31, 40, 51, 52, 63.
 - **NO analytic move:** face open at tCE65; M2 wall {θ | 4/7 < θ} pinned
   via SWall; absolute clause dead as published input; θ=∞ lane
   conjectural; the Millennial-puzzle feasibility check is PARKED in the

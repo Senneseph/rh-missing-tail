@@ -4126,6 +4126,9 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
   4-arg rep of the source generator explicitly. **Certified 1,319,986 —
   THE 1,300,000 CERTIFIED-ZERO MARK IS CROSSED IN WINDOW 65** (the
   0370 "14 ahead" prediction, EXACT; 1.2M [w60] carried; 1.4M is
-  80,014 ahead, expect ~w69). Honest tally 30 of 66 clean. Side-step
+  80,014 ahead, expect ~w69). Honest tally CORRECTED by the 0371
+  certificate-derived audit to **31 of 66 clean** (50 internal failures
+  across 35 rescue windows, all quota-met; the carried "30 of 66" was a
+  recount artifact — see the TALLY CORRECTION fact in 0371). Side-step
   since 0370: Millennial-puzzle feasibility check PARKED (back-pocket
   §5; no analytic move either way).
