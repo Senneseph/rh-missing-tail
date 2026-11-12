@@ -1,0 +1,31 @@
+{
+  "id": "0378",
+  "ts": "2026-11-12T08:10Z",
+  "lane": "M5",
+  "unit": 92,
+  "kind": "window-certified + CE72 green + terminal face re-anchored",
+  "summary": "Window 72 CERTIFIED + verified + seam-audited (bit-identical g_a72 == g_b71, passed BEFORE formalization per 0348) + CE72 green on FIRST TRY (8838 targeted, 17454 full) + terminalFaceCE72 (341 119 above H0; 325 000 CARRIED margin 16 119; 300 000 CARRIED margin 41 119; 350 000 is 8 881 ahead -> crossing expected w74 [w74 -> 350 465, margin ~465]). W72 facts: NON-SNAPPED (b - a = 20 000, requested endpoint was a good Gram point); CLEAN WINDOW - ZERO Rosser failures anywhere (interior, M = 60 extensions, no rescues, no suppressions because nothing failed); end runs 50/50 (strongest balanced pair of the series), K = 12; 32 794 evals in 2 375.0 s (fastest of the 67-72 series), 32 workers, seed cache resumed_from_cache = 203 697 - sixth seeded-cache + 32-worker overlap run: window 72 ran while CE71's formalization proceeded (critical path = max(run, formalization)). tCE72 = 3 000 175 673 919 (increment 4 673, the usual); g_b72 = 3 000 175 673 919.568020223717449540 + or - 1.29e-26, tuple [232127349477189517274233323028641326643, -86, 16777217, -110]; gB72Lo = 3 000 175 673 919.56 (margin ~8.0e-3; frac 0.5680 - no CASING, window 38 remains the only CASING case). Certified zero census: cumulative 1 459 986 over (g_a1, g_b72] (1 400 000 mark carries from window 70 [0376]; 1 500 000 is 40 014 ahead: w73 -> 1 479 986, w74 -> 1 499 986 [14 short], w75 -> 1 519 986). CORRECTION: the ~w78 expectation for the 1.5M mark recorded at 0376/0377 was an arithmetic slip (division misread); corrected corridor is ~w75 - computed, not pre-announced. iff RHS = predecessor face, verified against CE71.lean (terminalFaceCE72 q <-> CE71.terminalFaceCE71 q; the 0371 typo lesson held again - no variant). Tally through W72: clean 33, rescue 39, 57 interior failures, all rescues quota-met, recorded not suppressed. W73 launched in overlap (a73 = 12 363 154 897 116 = b72, cache seeded 236 325 lines) BEFORE CE72 closeout finished - per-unit critical path = max(run, formalization). NO RH CLAIM.",
+  "artifacts": {
+    "certificate": "tmp/ce2/ce1_window_H0_v1/window72_b72.json",
+    "verifier": [
+      "verify72.log: CERTIFIED true, turing_ok true, points_checked 32794, sign_changes_inside 20000, roser_failures_inside 0, left_of_a 50, right_of_b 50, K 12, cross_check_failures [], undetermined []"
+    ],
+    "lean": "formal/RhAttack/CE72.lean",
+    "terminal_face": "terminalFaceCE72",
+    "tCE72": 3000175673919,
+    "gap_above_H0": 341119,
+    "frontier_milestone": "325 000 CARRIED (margin 16 119); 300 000 CARRIED (margin 41 119); 350 000 8 881 ahead -> expected w74",
+    "census": {
+      "total_certified": 1459986,
+      "milestone_1400k": "CARRIED (crossed W70)",
+      "milestone_1500k": "40 014 ahead -> expected w75 (correction of ~w78 in 0376/0377)"
+    },
+    "doc_sweep": "21/21",
+    "stale_scan": "clean (336 446 x0; 1 439 986 x0; 669 246 x2 = previous endpoint in history); full build 17454 green",
+    "tally": {
+      "clean": 33,
+      "with_recorded_rescue": 39,
+      "total_internal_failures": 57
+    }
+  }
+}

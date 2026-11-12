@@ -4215,3 +4215,6 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
   OPEN, NO RH CLAIM. Tally: 32 of 70 clean (38 rescue windows, 57
   failures). W72 running in overlap (fifth run overlapped the formalization:
   2 483.4 s, fastest of the series).
+
+### 0378 (M5/92) — 2026-11-12 — W72 + CE72 + `terminalFaceCE72` (341 119)
+W72: NON-SNAPPED width 20 000, **CLEAN — zero Rosser failures anywhere**, end runs 50/50, K = 12, 32 794 evals / 2 375.0 s (fastest of series), 6th seeded-cache + 32-worker overlap run; seam g_a72 == g_b71 bit-identical (audit before formalization). Endpoint: `g_b72 = 3 000 175 673 919.568020223717449540 ± 1.29e-26`, `tCE72 = 3 000 175 673 919` (increment 4 673), `gB72Lo = 3 000 175 673 919.56` (margin ~8.0e-3, no CASING). `tCE72 − tPT2 = 341 119`: 325 000 CARRIED (16 119), 300 000 CARRIED (41 119), 350 000 is 8 881 ahead → **expected crossing w74** (w74 → 350 465, margin ~465). Census: **1 459 986** certified zeros (1.4M carries from W70; 1.5M is 40 014 ahead → **expected w75** — CORRECTION of the ~w78 slip recorded at 0376/0377). CE72.lean GREEN FIRST TRY (8 838 / 17 454); face = `terminalFaceCE72`; iff RHS = `CE71.terminalFaceCE71`. W73 launched in overlap before CE72 closeout finished. NO RH CLAIM.
