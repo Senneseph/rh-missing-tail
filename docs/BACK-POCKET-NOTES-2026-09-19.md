@@ -124,3 +124,62 @@ position P(n) = n plus 1.
 - W3 falsification: the staged 3e10 zero chain extends the
   evidence edge into real-zero territory; the decision-maker for
   the theorem investment.
+
+## 5. The Millennium-puzzle hypothesis (2026-11-11 — feasibility check, PARKED)
+
+Question (owner, 2026-11-11 side-step): what if the open Millennium problems
+must be solved TOGETHER — their basic formulations interlocking the way the
+three pieces of the old hexagonal-prism toy must be inserted simultaneously —
+so that no single effort can close RH?
+
+Test used: the claim "the formulation of X is needed to close RH" is
+checkable at STATEMENT level — shared formal terms, known implications, or a
+named shared program. Overlap matrix over the six open problems:
+
+- RH <> B&S <> Hodge: ONE TRIANGLE — the motivic L-function family (zeta =
+  the trivial motive; L(E,s) motivic; same functional equation / Euler
+  product; special-value <> zero duality).
+- P vs NP, Yang-Mills, Navier-Stokes: NO shared formal terms with the
+  triangle; no known implication either way with RH (the field's own
+  notes: "solving one has really nothing to do with solving the other";
+  2025 literature re-checked — nothing new).
+
+Consequences:
+1. "All seven together": REJECTED as strategy — 3 of 6 share no terms;
+   cost x6 with overlap ~0.
+2. "The triangle together": REAL but ALREADY EXISTS — it is the Langlands
+   program + motives (periods <> L-values is the interlock piece). 2025
+   progress check (arithmetic Langlands; relative Langlands / periods
+   papers) confirms it is active and is the field's largest standing
+   program — and it has not moved RH's zeros.
+3. Precedent the toy was pointing at (real): Weil-Deligne finite-field RH
+   was closed in exactly the three-piece shape — cohomology + purity +
+   trace formula, none sufficient alone. The lesson: the pieces were all
+   INTERNAL to one formalism, not borrowed from unrelated problems.
+4. Decisive fact for OUR wall: the residual (G-hs1 / S-at-zeros bound, M2
+   wall 4/7) is a CANCELLATION gap, not a formulation gap — S unbounded
+   unconditionally (Selberg 1946), RH-upper diverging (CCMM 2013; Milinovich
+   2015 GL(m) generalization = same wall), RH-Omega growing (Inoue 2019).
+   None of the other problems' formulations touches those estimates. One
+   slot is non-empty: the E19 GAP (no published at-zeros Omega) — it is
+   inside the triangle and is live.
+5. The only version worth parking — "three pieces at ONE zero" micro-move:
+   at a fixed zero gamma, insert (a) the growth upper bound [absolute
+   version dead as published; growth-corrected is the best available],
+   (b) the at-zeros Omega [E19 gap — the live published side], (c) a NEW
+   arithmetic-rigidity identity pinning S(gamma) (or the DN step at gamma)
+   to an explicit special-value / class-number object. All three landing at
+   the same gamma squeezes the S-difference object. Statement-level
+   feasibility: (a) partial (divergent), (b) open (E19), (c) NO known
+   published identity of that shape exists (2026-11-11 search: the S(t)
+   at-zeros literature is all GL(1) measure/growth flavor). => SEED, not
+   LEVER: two of three pieces are gaps inside our own field; the third is
+   a formula hunt.
+6. Anti-pattern warning: "it is the puzzle" is unfalsifiable as stated —
+   it is a rationalization risk for endless diversification. The lane is
+   currently machine-tracked and producing certified units.
+
+Cheap falsifier (if this is ever revisited): search the literature for any
+published identity expressing S(gamma) or the DN step at a gamma in terms of
+an L-value / special value / arithmetic invariant. If none (expected),
+piece (c) remains a new-formula hunt and this stays a seed.
