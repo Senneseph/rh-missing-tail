@@ -1,0 +1,149 @@
+{
+  "id": "0375",
+  "ts": "2026-11-12T04:24:01",
+  "lane": "M5",
+  "unit": 89,
+  "status": "LANE_PROGRESS",
+  "rh_claim": false,
+  "no_rh_claim": true,
+  "title": "window 69 certified + CE69 green + terminalFaceCE69: 325 000-UNIT MILESTONE CROSSED (327 100 above H0, margin 2 100 - inside the predicted corridor); 1 399 986 certified (1.4M 14 ahead, expected w70); W70 launched in overlap",
+  "facts": {
+    "window": 69,
+    "a": 12363154817116,
+    "b_requested": 12363154837116,
+    "b_actual": 12363154837116,
+    "snapped": false,
+    "width_b_minus_a": 20000,
+    "run": {
+      "M": 60,
+      "C_R": 1,
+      "N_range": [
+        691008,
+        691008
+      ],
+      "workers": 32,
+      "evals": 34723,
+      "seconds": 2498.5,
+      "resumed_from_cache": 101872,
+      "cache_seeded_from": "window68_b68.json.cache.jsonl"
+    },
+    "verifier": {
+      "certified": true,
+      "turing_ok": true,
+      "points_checked": 34723,
+      "sign_changes_inside": 20000,
+      "rosser_failures_inside": 2,
+      "rosser_run_left_of_a": 46,
+      "rosser_run_right_of_b": 47,
+      "K_conservative": 12,
+      "cross_check_failures": 0,
+      "undetermined_gram_signs": 0
+    },
+    "rosser_exceptions_rescued_quota_met": [
+      {
+        "block": [
+          12363154829318,
+          12363154829320
+        ],
+        "need": 2,
+        "found": 0,
+        "points": 129,
+        "m": 64,
+        "union": [
+          12363154829317,
+          12363154829321
+        ],
+        "union_need": 4,
+        "union_found": 4,
+        "union_m": 8
+      },
+      {
+        "block": [
+          12363154830844,
+          12363154830847
+        ],
+        "need": 3,
+        "found": 1,
+        "points": 193,
+        "m": 64,
+        "union": [
+          12363154830843,
+          12363154830849
+        ],
+        "union_need": 6,
+        "union_found": 6,
+        "union_m": 8
+      }
+    ],
+    "rosser_policy": "recorded, not suppressed; quota met at m=4/8",
+    "seam": {
+      "g_a69_eq_g_b68": true,
+      "tuple": [
+        116063674015493073473923628809964265701,
+        -85,
+        16777217,
+        -110
+      ],
+      "audit": "bit-identical exact dyadic tuple, performed before CE69 was written and before W70 launch (0348 process rule)"
+    },
+    "endpoint_g_b69": {
+      "tuple": [
+        116063674196268494780427453099147563155,
+        -85,
+        16777217,
+        -110
+      ],
+      "decimal": "3 000 175 659 900.762672080870811008",
+      "radius": "~1.29e-26"
+    },
+    "frontier": {
+      "tCE69": 3000175659900,
+      "increment_over_tCE68": 4673,
+      "gap_above_H0": 327100,
+      "gB69Lo": "300017565990076 / 100",
+      "gB69Lo_margin": "~2.7e-3",
+      "frac": 0.7627,
+      "casing": false,
+      "only_casing_case": "window 38 / CE38"
+    },
+    "milestone": {
+      "325k": "CROSSED IN THIS WINDOW at 327 100 (margin 2 100) - predicted at 0374 as ~w69 (2 573 was ahead); computed, never pre-announced",
+      "300k": "carried, margin 27 100",
+      "350k": "22 900 ahead - expected ~w74 (compute, do not pre-announce)",
+      "round_mark_sequence_above_H0": "100 000 @ CE22, 125 000 @ CE27, 150 000 @ CE33, 175 000 @ CE38, 200 000 @ CE42B, 225 000 @ CE48, 250 000 @ CE53, 275 000 @ CE58, 300 000 @ CE64, 325 000 @ CE69"
+    },
+    "certified_zeros": {
+      "total_through_g_b69": 1399986,
+      "1.3M": "carried [window 65, 0371]",
+      "1.4M": "14 ahead - crossing expected in window 70"
+    },
+    "formal": {
+      "module": "CE69.lean",
+      "targeted_build": "lake build RhAttack.CE69 green (8835 jobs)",
+      "full_build": "lake build green (17454 jobs)",
+      "fresh_olean": true,
+      "terminal_face": "terminalFaceCE69 (OPEN HYPOTHESIS)",
+      "iff": "terminalFaceCE69_iff_faceCE68",
+      "milestone_theorems": "frontierPast275k + frontierPast300k carried at 327 100; NEW frontierPast325k proven (327 100 > 325 000)",
+      "doc_sweep": "21/21 single-line docs (ce69_docsweep.py)",
+      "stale_token_scan": "0 stale window-68 frontier tokens (322 427 / 22 427 / 1 379 986 / 2 573 ahead / SIXTY-NINE all zero)"
+    },
+    "pipeline_overlap": {
+      "w70": "launched before CE69 formalization finished (legal: W69 seam audit already passed); W70 = 4th seeded-cache + 32-worker overlap run; 1.4M mark expected to be crossed there",
+      "critical_path": "max(run, formalization)"
+    },
+    "tally_certificate_derived": {
+      "scope": "windows 2..70 named certificates (window 1 = Murphy's deposit certificate, separate name; w42b FILL certificate separate, 0 failures)",
+      "note": "per-window failure list re-derived from all certificates on 2026-11-12 (w4..w70, 37 windows carry recorded rescues, all quota-met); W70's +1 (56) is already on disk at this entry's time",
+      "clean_through_w70": 32,
+      "with_recorded_rescue_through_w70": 37,
+      "total_internal_failures_through_w70": 56,
+      "through_w69_this_unit": {
+        "clean": 32,
+        "with_recorded_rescue": 36,
+        "total_internal_failures": 55
+      }
+    }
+  },
+  "honesty": "re-run of third-party pipeline, not from-scratch certification; Rosser exceptions recorded not suppressed; only window total and end Rosser runs enter the Turing step; NO RH CLAIM (terminalFaceCE69 is an open hypothesis; re-anchoring is a certificate, not a logical move)"
+}

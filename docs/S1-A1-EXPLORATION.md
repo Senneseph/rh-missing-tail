@@ -4177,3 +4177,18 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
   **PIPELINE OVERLAP CONFIRMED:** W68 ran while CE67 formalized (run time
   flat at 2 498.3 s vs 2 497.2 s - the gain is the overlap itself); W69
   launched 02:32 and runs while CE68 formalized.
+- **0375 (unit 89) — WINDOW 69 + CE69:** W69 certified (non-snapped
+  20 000; 34 723 evals, 2 498.5 s, seeded 101 872, 32 workers; runs
+  46/47, K = 12) - TWO interior Rosser failures, both rescued quota-met,
+  recorded. tCE69 = 3 000 175 659 900 (increment 4 673); **327 100 above
+  H0 = THE 325 000-UNIT MILESTONE CROSSED IN WINDOW 69** (margin 2 100,
+  inside the predicted corridor); 350k 22 900 ahead (~w74). Certified
+  1 399 986 (1.4M 14 ahead -> expected w70). CE69 green (8 835 / 17 454,
+  fresh, 21 docs; frontierPast325k proven in-tree). Face now
+  **terminalFaceCE69** - OPEN, NO RH CLAIM. Tally through W70: 32 of 69
+  clean (37 rescue windows, 56 failures). **THE 1.4M FORECAST CONFIRMED
+  IN THE MEANTIME:** W70 certified (33 731 evals, 2 490.4 s; one
+  rescue, runs 47/50; seam bit-identical; tCE70 - tPT2 = 331 773) with
+  certified total **1 419 986 - the 1 400 000 CERTIFIED-ZERO MARK CROSSED
+  IN WINDOW 70** exactly as forecast at 0374/0375. W71 to launch in
+  overlap.
