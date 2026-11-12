@@ -4042,3 +4042,23 @@ green  (17444  jobs),  mathlib  v4.33.1  pinned.
   generator derived mechanically from gen_ce60 for construction safety).
   **Certified 1,239,987 (1.2M [w60] carried; 1.3M is 60,013 ahead — ~w64/65).**
   Honest tally 29 of 62 clean; w61 the heaviest rescue window since w56.
+
+## E98 · 0368 — window 62 + CE62 (NON-SNAPPED width 20,000; ONE interior Rosser exception rescued/quota-met/recorded; 4,673 standing pace; 294,390 above H0 — 275k [CE58] CARRIED re-proven, 300k 5,610 ahead — expect w64; certified 1,259,987 — 1.2M [w60] carried)
+- **0368 (window 62 + CE62):** launched correctly from b61 (a62 = 12,363,154,677,117);
+  seam audit g_a62 ≡ g_b61 tuple [116063672750074162806295541049855739823, −85,
+  16777217, −110] BEFORE the module; **NON-SNAPPED (b = a + 20,000)**;
+  **ONE interior Rosser exception** (block ..684,272-74, need 2 found 0)
+  **rescued, quota-met, recorded** — union [..684,271, ..684,276] FOUND 5/5,
+  m = 4; end runs 45/44 (both ≥ 12); 0 cross-check failures (33,287 pts,
+  2567.8 s); verifier CERTIFIED/turing_ok, K_cons 12. g_b62 =
+  3,000,175,627,190.4504970306274269 ± 1.29e-26 (frac 0.4505, no CASING;
+  honest note: two-decimal lower-bound margin ~5.0e-4 — second-thinnest in
+  the chain after W60's ~2.6e-4 — exact rational norm_num, no floating
+  point). **tCE62 = 3,000,175,627,190; increment 4,673 (standing pace)**;
+  **tCE62 − tPT2 = 294,390 — 275k [CE58] CARRIED** (re-proven; 300k now
+  5,610 ahead — w63 lands ~299,063 (937 short), w64 ~303,736: **expect
+  the 300k crossing in WINDOW 64**). CE62 GREEN (8,828 targeted, 0 errors
+  0 warnings, olean fresh; 20 doc blocks swept; clause-doc audit OK;
+  generator derived mechanically from gen_ce61 for construction safety).
+  **Certified 1,259,987 (1.2M [w60] carried; 1.3M is 40,013 ahead —
+  ~w64/65).** Honest tally 29 of 63 clean.

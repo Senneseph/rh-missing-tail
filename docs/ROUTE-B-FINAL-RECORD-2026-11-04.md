@@ -5012,3 +5012,49 @@ out).
   via SWall; absolute clause dead as published input; θ=∞ lane conjectural.
 - **NO RH CLAIM.** Next unit — window 62 (a62 = 12,363,154,677,117); the
   300,000-unit frontier mark is 10,283 ahead (expect ~w64).
+
+## 99 · 0368: window 62 + CE62 — NON-SNAPPED (width 20,000), ONE interior Rosser exception (rescued, quota-met, recorded); 4,673 standing pace; tCE62 = 294,390 above H0 (275k [CE58] CARRIED re-proven; 300k 5,610 ahead — expect w64); certified 1,259,987 (1.2M [w60] carried)
+- **0368 (M5 LANE - WINDOW 62 + CE62).**
+  Launch a62 = 12,363,154,677,117 (= b61), b = a + 20,000 = 12,363,154,697,117
+  — **NON-SNAPPED** (width 20,000). M = 60, C_R = 1, 28 workers,
+  N_range [691008, 691008], 33,287 evals, 2567.8 s.
+- **Seam audit FIRST (0348 rule):** g_a62 ≡ g_b61 exact dyadic
+  [116063672750074162806295541049855739823, −85, 16777217, −110] —
+  bit-identical, BEFORE CE62 was written.
+- **ONE interior Rosser-block exception — rescued, quota-met, recorded**
+  (interior; touches neither end Rosser run): [..684,272, ..684,274] need 2
+  found 0 → union [..684,271, ..684,276] FOUND 5/5 (m 4).
+  End Rosser runs 45/44 (both ≥ 12); 0 cross-check failures;
+  0 undetermined Gram signs.
+- **Verifier (layer 2):** CERTIFIED: true, turing_ok: true,
+  points_checked 33,287, sign_changes_inside 20,000 = b − a,
+  roesser_failures_inside 1, K_conservative 12, endpoints recomputed
+  and matched.
+- **Endpoint:** g_b62 = 3,000,175,627,190.4504970306274269 ± 1.29e-26 —
+  exact tuple [232127345861699168372182968546863997789, −86,
+  16777217, −110]. **tCE62 = 3,000,175,627,190**.
+- **INCREMENTS: 4,673 (standing pace continues).**
+  **tCE62 − tPT2 = 294,390** — 275k MILESTONE [CE58] CARRIED (margin 19,390),
+  re-proven (`frontierPast275k`); next mark 300k sits **5,610 ahead** —
+  at ~4,673/window, w63 lands ~299,063 (937 short), w64 ~303,736 —
+  **EXPECTED IN WINDOW 64** (compute, do not pre-announce). NO CASING
+  (frac 0.4505). HONEST NOTE: two-decimal lower-bound margin ~5.0e-4 —
+  the SECOND-THINNEST in the chain after W60's ~2.6e-4 — recorded openly;
+  exact rational comparison by norm_num, no floating point;
+  gB62Lo := 300017562719045/100.
+- **Certified total: 1,239,987 + 20,000 = 1,259,987.** 1.2M mark [window 60,
+  0366] carried; 1.3M sits 40,013 ahead (~w64/65).
+- **CE62.lean GREEN** (8,828 targeted jobs, 0 errors 0 warnings; full
+  tree 17,454; olean fresh): gB62Lo; faceShrinkCE62 = 4673;
+  frontierGapAboveH0 = 294390; five milestone theorems carried + re-proven;
+  ce61WinClauseFull (w61 full slice re-cited); ce62WinClause (terminal slice,
+  documented); 63-way band; terminalFaceCE62 NAMED OPEN; all 20 doc blocks
+  swept; clause-doc audit OK.
+- **Honest tally:** 29 of 63 chain windows clean; rescue windows 7, 21, 28,
+  29, 34, 37, 42, 43, 44 (one each), 45 (two), 51 (one), 52 (two), 53
+  (three), 54 (one), 55 (one), 56 (four), 59 (one), 61 (three), 62 (one)
+  — all quota-met, none suppressed.
+- **NO analytic move:** face open at tCE62; M2 wall {θ | 4/7 < θ} pinned
+  via SWall; absolute clause dead as published input; θ=∞ lane conjectural.
+- **NO RH CLAIM.** Next unit — window 63 (a63 = 12,363,154,697,117); the
+  300,000-unit frontier mark is 5,610 ahead (expect w64).
