@@ -1,5 +1,5 @@
 {
-  "id": 0267,
+  "id": "0267",
   "title": "T4OffLK landed: the 0259 pin as a RANGE theorem - wallLo(N) > own at EVERY run N in [nIdeal, 2 nIdeal] (previously only the single run Noff = ceil nIdeal was a landed statement), and the S3 face is infeasible THROUGHOUT the range (s3faceInfeasiblePinRange = T4OffLJ's weak-pin face death applied to the range pin via the S4 strict gap; no pin premise at the corollary level). The face-infeasibility record now covers an interval of runs, extending 0262/0266 from discrete points to the first in-body range.",
   "kind": "positive-anchor",
   "date": "2026-11-02",
