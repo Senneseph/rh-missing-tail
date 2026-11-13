@@ -56,4 +56,5 @@ theorem ap4_selftest_riemannVonMangoldt_no_extra_hypotheses :
     RiemannVonMangoldt zetaZeroConfig :=
   riemannVonMangoldt gammaFacts
 
+end
 end Ap3

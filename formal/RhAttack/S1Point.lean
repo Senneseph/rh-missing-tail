@@ -519,4 +519,5 @@ theorem s1_selftest_point_rvM_discharged (hC9 : C9NoZerosLow) :
       |(Ncount 4 T : ℝ) - f_pt T| ≤ C * Real.log T :=
   point_rvM gammaFacts hC9
 
+end
 end S1B

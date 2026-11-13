@@ -412,7 +412,7 @@ theorem RectangleIntegral.translate' (f : ℂ → E) (z w p : ℂ) :
     RectangleIntegral' (fun s => f (s - p)) z w = RectangleIntegral' f (z - p) (w - p) := by
   simp_rw [RectangleIntegral', RectangleIntegral.translate]
 
-lemma Complex.inv_re_add_im : (x + y * I)⁻¹ = (x - I * y) / (x ^ 2 + y ^ 2) := by
+lemma inv_re_add_im : (x + y * I)⁻¹ = (x - I * y) / (x ^ 2 + y ^ 2) := by
   rw [Complex.inv_def, div_eq_mul_inv]
   congr <;> simp [conj_ofReal, normSq] <;> ring
 

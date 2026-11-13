@@ -20,7 +20,12 @@ Changes in this port (mechanical, per project convention):
     need no paper hypotheses).
 -/
 import Mathlib
-import RhAttack.Ap2Reflectimport RhAttack.Ap3BacklundDefsimport RhAttack.Ap3Growthimport RhAttack.Ap3LocalCountset_option linter.style.header false
+import RhAttack.Ap2Reflect
+import RhAttack.Ap3BacklundDefs
+import RhAttack.Ap3Growth
+import RhAttack.Ap3LocalCount
+
+set_option linter.style.header false
 
 namespace Ap3
 
@@ -374,4 +379,5 @@ theorem reZeroSet_card_le_at : ∀ T : ℝ, 4 ≤ T →
 
 end Zeta23.RvM
 
+end
 end Ap3

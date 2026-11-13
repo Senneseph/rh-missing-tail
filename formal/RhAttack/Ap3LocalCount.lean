@@ -20,7 +20,12 @@ Changes in this port (mechanical, per project convention):
     need no paper hypotheses).
 -/
 import Mathlib
-import RhAttack.Ap2Statementimport RhAttack.Ap2CountByIntegralimport RhAttack.Ap3StrongPNTPrefiximport RhAttack.Ap3Growthset_option linter.style.header false
+import RhAttack.Ap2Statement
+import RhAttack.Ap2CountByIntegral
+import RhAttack.Ap3StrongPNTPrefix
+import RhAttack.Ap3Growth
+
+set_option linter.style.header false
 
 namespace Ap3
 
@@ -297,4 +302,5 @@ theorem zetaZeroConfig_local_count : ∃ A₀ : ℝ, 1 ≤ A₀ ∧ ∀ t : ℝ,
 
 end Zeta23.RvM
 
+end
 end Ap3

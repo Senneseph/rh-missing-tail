@@ -497,4 +497,5 @@ theorem digamma_series {z : ℂ} (hz : z ∈ Complex.integerComplement) :
 
 end DigammaSeries
 
+end
 end Ap3

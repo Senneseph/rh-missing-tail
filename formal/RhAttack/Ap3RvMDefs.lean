@@ -59,4 +59,5 @@ lemma halfContour_add (F G : ℂ → ℂ) (T₁ T₂ : ℝ)
 
 end Ap3
 
+end
 end Ap3

@@ -486,4 +486,5 @@ theorem rvM_main (hΓ : GammaFacts) : ∃ C T₀ : ℝ, ∀ T : ℝ, T₀ ≤ T 
     |(zetaZeroConfig.N T (2 * T) : ℝ) - T / (2 * Real.pi) * ell1 T| ≤ C * Real.log T :=
   rvM_main_aux hΓ backlund_horizontal vertical_two
 
+end
 end Ap3

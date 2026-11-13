@@ -20,7 +20,9 @@ Changes in this port (mechanical, per project convention):
     need no paper hypotheses).
 -/
 import Mathlib
-import RhAttack.Ap1Residueset_option linter.style.header false
+import RhAttack.Ap1Residue
+
+set_option linter.style.header false
 
 namespace Ap3
 

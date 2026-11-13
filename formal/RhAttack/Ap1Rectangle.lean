@@ -95,17 +95,17 @@ lemma mem_Rect {z w : ℂ} (zRe_lt_wRe : z.re ≤ w.re) (zIm_lt_wIm : z.im ≤ w
 lemma square_neg (p : ℂ) (c : ℝ) : Square p (-c) = Square p c := by
   simpa [Square] using! Rectangle.symm
 
-theorem Set.left_not_mem_uIoo {a b : ℝ} : a ∉ Set.uIoo a b :=
+theorem left_not_mem_uIoo {a b : ℝ} : a ∉ Set.uIoo a b :=
   fun ⟨h1, h2⟩ ↦ (left_lt_sup.mp h2) (le_of_not_ge (inf_lt_left.mp h1))
 
-theorem Set.right_not_mem_uIoo {a b : ℝ} : b ∉ Set.uIoo a b :=
+theorem right_not_mem_uIoo {a b : ℝ} : b ∉ Set.uIoo a b :=
   fun ⟨h1, h2⟩ ↦ (right_lt_sup.mp h2) (le_of_not_ge (inf_lt_right.mp h1))
 
-theorem Set.ne_left_of_mem_uIoo {a b c : ℝ} (hc : c ∈ Set.uIoo a b) : c ≠ a :=
-  fun h ↦ Set.left_not_mem_uIoo (h ▸ hc)
+theorem ne_left_of_mem_uIoo {a b c : ℝ} (hc : c ∈ Set.uIoo a b) : c ≠ a :=
+  fun h ↦ left_not_mem_uIoo (h ▸ hc)
 
-theorem Set.ne_right_of_mem_uIoo {a b c : ℝ} (hc : c ∈ Set.uIoo a b) : c ≠ b :=
-  fun h ↦ Set.right_not_mem_uIoo (h ▸ hc)
+theorem ne_right_of_mem_uIoo {a b c : ℝ} (hc : c ∈ Set.uIoo a b) : c ≠ b :=
+  fun h ↦ right_not_mem_uIoo (h ▸ hc)
 
 lemma left_mem_rect (z w : ℂ) : z ∈ Rectangle z w := ⟨left_mem_uIcc, left_mem_uIcc⟩
 
@@ -258,10 +258,10 @@ theorem not_mem_rectangleBorder_of_rectangle_mem_nhds {z w p : ℂ}
     p ∉ RectangleBorder z w := by
   refine Set.disjoint_right.mp (rectangleBorder_disjoint_singleton ?_) rfl
   have h1 := rectangle_mem_nhds_iff.mp hp
-  exact ⟨Set.ne_left_of_mem_uIoo h1.1, Set.ne_right_of_mem_uIoo h1.1,
-    Set.ne_left_of_mem_uIoo h1.2, Set.ne_right_of_mem_uIoo h1.2⟩
+  exact ⟨ne_left_of_mem_uIoo h1.1, ne_right_of_mem_uIoo h1.1,
+    ne_left_of_mem_uIoo h1.2, ne_right_of_mem_uIoo h1.2⟩
 
-theorem Complex.nhds_hasBasis_square (p : ℂ) : (𝓝 p).HasBasis (0 < ·) (Square p ·) := by
+theorem nhdsHasBasisSquare (p : ℂ) : (𝓝 p).HasBasis (0 < ·) (Square p ·) := by
   suffices
       (𝓝 p.re ×ˢ 𝓝 p.im).HasBasis (0 < ·)
         (equivRealProdCLM.symm.toHomeomorph ⁻¹' Square p ·)
@@ -279,7 +279,7 @@ lemma square_mem_nhds (p : ℂ) {c : ℝ} (hc : c ≠ 0) :
   wlog hc_pos : 0 < c generalizing c with h
   · rw [← square_neg]
     exact h (neg_ne_zero.mpr hc) <| neg_pos.mpr <| hc.lt_of_le <| not_lt.mp hc_pos
-  exact (nhds_hasBasis_square p).mem_of_mem hc_pos
+  exact (nhdsHasBasisSquare p).mem_of_mem hc_pos
 
 lemma square_subset_square {p : ℂ} {c₁ c₂ : ℝ} (hc₁ : 0 < c₁) (hc : c₁ ≤ c₂) :
     Square p c₁ ⊆ Square p c₂ := by
@@ -287,7 +287,7 @@ lemma square_subset_square {p : ℂ} {c₁ c₂ : ℝ} (hc₁ : 0 < c₁) (hc : 
 
 lemma SmallSquareInRectangle {z w p : ℂ} (pInRectInterior : Rectangle z w ∈ nhds p) :
     ∀ᶠ (c : ℝ) in 𝓝[>]0, Square p c ⊆ Rectangle z w := by
-  obtain ⟨ε, hε0, hε⟩ := ((Complex.nhds_hasBasis_square p).1 _).mp pInRectInterior
+  obtain ⟨ε, hε0, hε⟩ := ((nhdsHasBasisSquare p).1 _).mp pInRectInterior
   filter_upwards [Ioo_mem_nhdsGT (hε0)] with _ ⟨hε'0, hε'⟩
   exact subset_trans (square_subset_square hε'0 hε'.le) hε
 

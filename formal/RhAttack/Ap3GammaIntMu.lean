@@ -537,4 +537,5 @@ theorem int_mu_sq_of_stirling (hst : StirlingHyp) :
 
 end MuInts
 
+end
 end Ap3

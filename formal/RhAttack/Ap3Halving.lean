@@ -13,24 +13,27 @@ is cited in formal/RH-LEAN-PROVENANCE.md.
 Changes in this port (mechanical, per project convention):
   * `import Mathlib` (whole library) in place of per-file import
     lists;
-  * content namespaced under `Ap2`;
+  * content namespaced under `Ap2.Zeta23` / `Ap2.Zeta23.ZeroConfig`
+    (dot-notation `Z.reflect_mem_window` requires the lemma to live in
+    the namespace named after the type — see the 2026-11-13 repair
+    note: a nested `namespace Ap2...` inside `namespace Ap3` resolves
+    RELATIVELY to `Ap3.Ap2...` and silently breaks the call sites);
   * intra-project imports redirected to RhAttack.Ap1*/Ap2*;
   * the Zeta23.Hypotheses import dropped where the part actually
     ported does not use the paper inputs (the definitions + the seam
     need no paper hypotheses).
 -/
 import Mathlib
-import RhAttack.Ap2Statementset_option linter.style.header false
+import RhAttack.Ap2Statement
 
-namespace Ap3
+set_option linter.style.header false
 
-open Ap2
-
-
+open Complex
 open Set
 
 noncomputable section
 
+namespace Ap2.Zeta23
 
 @[simp] lemma reflect_re (ρ : ℂ) : (reflect ρ).re = 1 - ρ.re := by simp [reflect]
 @[simp] lemma reflect_im (ρ : ℂ) : (reflect ρ).im = ρ.im := by simp [reflect]
@@ -41,7 +44,7 @@ noncomputable section
 lemma reflect_injective : Function.Injective reflect :=
   Function.LeftInverse.injective reflect_reflect
 
-namespace Ap2.ZeroConfig
+namespace ZeroConfig
 
 variable (Z : ZeroConfig) (T₁ T₂ : ℝ)
 
@@ -92,6 +95,6 @@ theorem N_le_two_mul_half :
   push_cast
   linarith
 
-end Ap2.ZeroConfig
+end ZeroConfig
 
-end Ap3
+end Ap2.Zeta23

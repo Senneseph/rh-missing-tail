@@ -20,11 +20,13 @@ Changes in this port (mechanical, per project convention):
     need no paper hypotheses).
 -/
 import Mathlib
+import RhAttack.Ap2Defs
 set_option linter.style.header false
 
 namespace Ap3
 
 open Ap2
+open Ap2.Zeta23
 
 
 open scoped BigOperators ArithmeticFunction ComplexConjugate ContDiff
@@ -158,5 +160,7 @@ structure PaperInputs (Z : ZeroConfig) : Prop where
   MV : ∃ C : ℝ, 0 < C ∧ MVHilbert C
   /-- H-Γ [eq:mufacts] + Γ-halves of [eq:muints] -/
   Gamma : GammaFacts
+
+end
 
 end Ap3

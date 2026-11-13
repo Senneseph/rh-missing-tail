@@ -26,6 +26,7 @@ set_option linter.style.header false
 namespace Ap3
 
 open Ap2
+open Ap2.Zeta23
 
 
 noncomputable section
@@ -121,4 +122,5 @@ theorem completedZeta_zeros_strip {ρ : ℂ} (h : 0 < ρ.re) (h' : ρ.re < 1) :
     rw [show (Gammaℝ * riemannZeta) = (fun u => Gammaℝ u * riemannZeta u) from rfl] at hmul
     rw [hmul, hΓan.analyticOrderAt_eq_zero.mpr hΓ, zero_add]
 
+end
 end Ap3

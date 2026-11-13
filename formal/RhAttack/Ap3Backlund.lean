@@ -415,4 +415,5 @@ theorem vertical_two : ∀ T₁ T₂ : ℝ,
     _ ≤ π / 2 + π / 2 := add_le_add h1 h2
     _ = π := by ring
 
+end
 end Ap3

@@ -42,4 +42,5 @@ theorem gammaFacts_of_stirling (hst : MuInts.StirlingHyp) : GammaFacts :=
 /-- **H-Γ, unconditionally.** -/
 theorem gammaFacts : GammaFacts := gammaFacts_of_stirling StirlingVert.mu_stirling
 
+end
 end Ap3

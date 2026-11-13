@@ -199,4 +199,5 @@ theorem ap2_selftest_RH_counts_on_line {T₁ T₂ : ℝ} (hT₁ : 0 < T₁) (hT 
     exact hall.1
   simpa using hN.symm
 
+end
 end Ap2

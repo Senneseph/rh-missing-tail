@@ -21,6 +21,7 @@ Changes in this port (mechanical, per project convention):
 -/
 import Mathlib
 import RhAttack.Ap3GammaSeries
+import Zeta23.GammaFacts.Series
 set_option linter.style.header false
 
 namespace Ap3
@@ -287,4 +288,5 @@ theorem hasSum_trigamma {z : ℂ} (hz : z ∈ Complex.integerComplement) :
 
 end Stirling
 
+end
 end Ap3

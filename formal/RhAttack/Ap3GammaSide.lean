@@ -211,4 +211,5 @@ theorem mu_le_log (hΓ : Zeta23.GammaFacts) : ∃ C : ℝ, 0 < C ∧ ∀ τ : �
       nlinarith
     nlinarith
 
+end
 end Ap3
