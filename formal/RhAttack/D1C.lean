@@ -55,6 +55,7 @@ against the face is a separate explicit unit, and none has been executed.
 namespace D1C
 
 open MeasureTheory
+open Set
 
 open scoped Topology
 
@@ -64,79 +65,104 @@ open scoped Topology
 def hp (a : ℝ) : Set ℂ := {s | s.re > a}
 
 /-- `hp a` is open. -/
-theorem isOpen_hp (a : ℝ) : IsOpen (hp a) :=
-  isOpen_preimage (continuous Complex.re) (isOpen_Ioi a)
+theorem isOpen_hp (a : ℝ) : IsOpen (hp a) := by
+  have hpre : hp a = (Complex.re)⁻¹' (Ioi a) := by
+    ext s
+    simp [hp, Set.mem_preimage, Set.mem_Ioi]
+  rw [hpre]
+  exact (by continuity : Continuous Complex.re).isOpen_preimage (Ioi a) (isOpen_Ioi (a := a))
 
 /-- `hp a` is connected: it is the continuous image of `Ioi a ×ˢ univ`
     under `(x, y) ↦ x + y·i`, with image exactly `hp a`. -/
 theorem isConnected_hp (a : ℝ) : IsConnected (hp a) := by
   let f : ℝ × ℝ → ℂ := fun p => p.1 + p.2 * Complex.I
   have hconn : IsConnected (Ioi a ×ˢ Set.univ : Set (ℝ × ℝ)) :=
-    IsConnected.prod (isConnected_Ioi _) (isConnected_univ)
+    IsConnected.prod isConnected_Ioi isConnected_univ
   have hc : Continuous f := by continuity
   have hleft : f '' (Ioi a ×ˢ Set.univ) ⊆ hp a := by
     rintro s ⟨⟨x, y⟩, hx, rfl⟩
-    have hx' : a < x := (Set.mem_prod_set.mp hx).1
-    simp only [hp, Complex.add_re, Complex.mul_re, Complex.I_re, Complex.I_im,
-      Complex.re_ofReal, Complex.im_ofReal, add_zero, mul_zero, zero_mul]
-    exact hx'
+    simp [hp, f, Complex.add_re, Complex.mul_re, Complex.I_re, Complex.I_im,
+      Complex.ofReal_re, Complex.ofReal_im]
+    exact hx.1
   have hright : hp a ⊆ f '' (Ioi a ×ˢ Set.univ) := by
     intro s hs
-    use s.re, s.im
+    use (s.re, s.im)
     constructor
-    · simp only [Set.mem_prod_set, Set.mem_setOf_eq, Set.mem_Ioi]
-      exact ⟨hs, True.intro⟩
-    · fun_prop
+    · exact ⟨hs, True.intro⟩
+    · apply Complex.ext
+      · simp [f, Complex.ofReal_re, Complex.ofReal_im, Complex.I_re, Complex.I_im,
+          Complex.add_re, Complex.mul_re]
+      · simp [f, Complex.ofReal_re, Complex.ofReal_im, Complex.I_re, Complex.I_im,
+          Complex.add_im, Complex.mul_im]
   rw [show hp a = f '' (Ioi a ×ˢ Set.univ) from Set.Subset.antisymm hright hleft]
-  exact IsConnected.image hconn f (hc.continuousOn.mono (Set.subset_univ _))
+  exact IsConnected.image hconn f hc.continuousOn
 
 /- Section 2: Laplace kernel -/
 
 /-- For Re s > 0, t ↦ e^{-s t} is integrable on (c, ∞) for every c. -/
 theorem laplaceKernelIntegrable (s : ℂ) (hs : 0 < s.re) (c : ℝ) :
-    IntegrableOn (fun (t : ℝ) => Complex.exp (-(s * t))) (Ioi c) :=
-  integrableOn_exp_mul_complex_Ioi (a := -s) (by simp only [Complex.neg_re]; linarith) c
+    IntegrableOn (fun (t : ℝ) => Complex.exp (-(s * t))) (Ioi c) := by
+  simpa [neg_mul] using
+    integrableOn_exp_mul_complex_Ioi (a := -s) (by simp only [Complex.neg_re]; linarith) c
 
 /-- The half-line Laplace integral of the kernel: ∫_{(c,∞)} e^{-s t} dt = e^{-s c} / s. -/
 theorem integral_laplaceKernel (s : ℂ) (hs : 0 < s.re) (c : ℝ) :
     (∫ (t : ℝ) in Ioi c, Complex.exp (-(s * t))) = Complex.exp (-(s * c)) / s := by
   have ha : (-s).re < 0 := by simp only [Complex.neg_re]; linarith
   have h := integral_exp_mul_complex_Ioi (a := -s) ha c
-  rw [h]
   have hne : s ≠ 0 := by
     intro h
-    rw [h] at hs
+    subst h
     simp at hs
-  field_simp [hne]
+  have hnec : (-s : ℂ) ≠ 0 := by
+    intro h
+    apply hne
+    simpa using h
+  have hnorm : (∫ (t : ℝ) in Ioi c, Complex.exp ((-s) * (t : ℂ))) =
+      (∫ (t : ℝ) in Ioi c, Complex.exp (-(s * t))) := by
+    apply integral_congr_ae
+    exact Filter.Eventually.of_forall (fun t =>
+      congrArg Complex.exp (by ring : (-(s : ℂ)) * (t : ℂ) = -(s * (t : ℂ))))
+  rw [← hnorm, h]
   have hexp : Complex.exp ((-s) * (c : ℂ)) = Complex.exp (-(s * (c : ℂ))) := by
     congr
     ring
-  simp only [hexp]
-  ring
+  rw [hexp]
+  field_simp [hne, hnec]
 
 /- Section 3: Laplace integrability under an exponential bound -/
 
 /-- Zero extension below 0 (strict: 0 at t = 0 too; the measure-zero
     difference is ignored by the integral). -/
-def Fext (F : ℝ → ℂ) (t : ℝ) : ℂ :=
+noncomputable def Fext (F : ℝ → ℂ) (t : ℝ) : ℂ :=
   if ht : 0 < t then F t else 0
 
 /-- `Fext` is measurable from a measurable `F`. -/
 theorem measurable_Fext (F : ℝ → ℂ) (hF : Measurable F) : Measurable (Fext F) := by
-  simpa [Fext] using Measurable.ite (measurable_set_Ioi 0) hF measurable_const
+  have heq : Fext F = (fun t : ℝ => if 0 < t then F t else 0) := by
+    ext t
+    simp [Fext]
+  rw [heq]
+  exact Measurable.ite (by continuity : MeasurableSet (Ioi (0 : ℝ))) hF measurable_const
 
 /-- The zero-extended Laplace integrand at parameter s. -/
-def laplaceIntegrand (F : ℝ → ℂ) (s : ℂ) (t : ℝ) : ℂ :=
+noncomputable def laplaceIntegrand (F : ℝ → ℂ) (s : ℂ) (t : ℝ) : ℂ :=
   Fext F t * Complex.exp (-(s * t))
 
 /-- The integrand is measurable. -/
 theorem measurable_laplaceIntegrand (F : ℝ → ℂ) (hF : Measurable F) (s : ℂ) :
     Measurable (laplaceIntegrand F s) := by
-  have hexp : Measurable (fun t : ℝ => Complex.exp (-(s * t))) := by continuity
-  simpa [laplaceIntegrand] using (measurable_Fext F hF).mul hexp
+  have hexp : Measurable (fun t : ℝ => Complex.exp (-(s * t))) := by
+    have hcont : Continuous (fun t : ℝ => Complex.exp (-(s * (t : ℂ)) : ℂ)) := by continuity
+    exact hcont.measurable
+  have heq : laplaceIntegrand F s = (fun t : ℝ => Fext F t * Complex.exp (-(s * t))) := by
+    ext t
+    simp [laplaceIntegrand]
+  rw [heq]
+  exact (measurable_Fext F hF).mul hexp
 
 /-- The integrable majorant: C·e^{(alpha − Re s)·t} on (0, ∞), else 0. -/
-def laplaceMajor (α : ℝ) (C : ℝ) (s : ℂ) (t : ℝ) : ℝ :=
+noncomputable def laplaceMajor (α : ℝ) (C : ℝ) (s : ℂ) (t : ℝ) : ℝ :=
   if ht : 0 < t then C * Real.exp ((α - s.re) * t) else 0
 
 /-- Exponential-bound absolute integrability (the D1C core): if
@@ -146,43 +172,52 @@ theorem laplaceAbsIntegrable {α C : ℝ} (hC : 0 ≤ C) (F : ℝ → ℂ) (hF :
     (hB : ∀ (t : ℝ), 0 < t → ‖F t‖ ≤ C * Real.exp (α * t))
     (s : ℂ) (hs : s.re > α) :
     Integrable (laplaceIntegrand F s) := by
-  -- (1) the majorant is integrable on (0, ∞):
+  -- (1) the explicit kernel C·exp((α − Re s)·t) is integrable on (0, ∞):
   have ha : α - s.re < 0 := by linarith
-  have hmajIoi : IntegrableOn (fun t : ℝ => C * Real.exp ((α - s.re) * t)) (Ioi 0) :=
-    (integrableOn_exp_mul_Ioi (a := α - s.re) ha 0).const_mul C
+  have hkernel : IntegrableOn (fun t : ℝ => C * Real.exp ((α - s.re) * t)) (Ioi (0 : ℝ)) :=
+    (integrableOn_exp_mul_Ioi (a := α - s.re) ha (c := (0 : ℝ))).const_mul C
   -- (2) the majorant is pointwise 0 on (-∞, 0], hence integrable there:
-  have hzero : EqOn (laplaceMajor α C s) (fun _ : ℝ => 0) (Iic 0) := by
+  have hzero : EqOn (fun _ : ℝ => (0 : ℝ)) (laplaceMajor α C s) (Iic (0 : ℝ)) := by
     intro t ht
     by_cases hpos : 0 < t
     · exfalso
-      exact ht.le.not_of_lt hpos?
+      have hle : t ≤ 0 := by simpa using ht
+      exact lt_irrefl (0 : ℝ) (lt_of_lt_of_le hpos hle)
     · simp [laplaceMajor, hpos]
-  have hmajIic : IntegrableOn (laplaceMajor α C s) (Iic 0) :=
-    IntegrableOn.congr_fun (integrableOn_zero (s := (Iic 0 : Set ℝ))) hzero (measurableSet_Iic 0)
+  have hmajIic : IntegrableOn (laplaceMajor α C s) (Iic (0 : ℝ)) :=
+    IntegrableOn.congr_fun (integrableOn_zero (s := (Iic (0 : ℝ)))) hzero (by continuity)
   -- (3) the majorant on (0, ∞) agrees with the explicit kernel there:
-  have hpoint : EqOn (laplaceMajor α C s) (fun _ : ℝ => C * Real.exp ((α - s.re) * (· : ℝ))) (Ioi 0) := by
+  have hpoint : EqOn (fun t : ℝ => C * Real.exp ((α - s.re) * (t : ℝ))) (laplaceMajor α C s)
+      (Ioi (0 : ℝ)) := by
     intro t ht
-    simp [laplaceMajor, ht]
-  have hmajIoi' : IntegrableOn (laplaceMajor α C s) (Ioi 0) :=
-    IntegrableOn.congr_fun hmajIoi hpoint (measurableSet_Ioi 0)
+    have hpos : 0 < t := ht
+    simp [laplaceMajor, hpos]
+  have hmajIoi : IntegrableOn (laplaceMajor α C s) (Ioi (0 : ℝ)) :=
+    IntegrableOn.congr_fun hkernel hpoint (by continuity)
   -- (4) combine (0, ∞) with (-∞, 0] to get integrability on ℝ:
-  have hunion : IntegrableOn (laplaceMajor α C s) (Ioi 0 ∪ Iic 0) := hmajIoi'.union hmajIic
-  have huniv : Ioi (0 : ℝ) ∪ Iic 0 = Set.univ := by
+  have hunion : IntegrableOn (laplaceMajor α C s) (Ioi (0 : ℝ) ∪ Iic (0 : ℝ)) :=
+    hmajIoi.union hmajIic
+  have huniv : Ioi (0 : ℝ) ∪ Iic (0 : ℝ) = Set.univ := by
     ext t
-    simp only [Set.mem_union, Set.mem_Ioi, Set.mem_Iic, Set.mem_univ, and_self]
-    exact ⟨fun h => by tauto, fun _ => lt_or_le 0 t⟩
-  have hmajInt : Integrable (laplaceMajor α C s) (volume.restrict univ) := by
-    simpa [← huniv] using hunion
+    constructor
+    · intro _; trivial
+    · intro _
+      by_cases h : 0 < t
+      · left
+        exact h
+      · right
+        by_contra h2
+        exact h ((not_le (a := (t : ℝ)) (b := (0 : ℝ))).mp h2)
   have hmaj : Integrable (laplaceMajor α C s) := by
-    simpa [Measure.restrict_univ] using hmajInt
+    rw [huniv] at hunion
+    simpa using hunion
   -- (5) pointwise norm bound, everywhere:
   have hbound : ∀ (t : ℝ), ‖laplaceIntegrand F s t‖ ≤ ‖laplaceMajor α C s t‖ := by
     intro t
     by_cases hpos : 0 < t
     · have hFext : Fext F t = F t := by simp [Fext, hpos]
       have hre : (-(s * t)).re = -(s.re * t) := by
-        simp only [Complex.neg_re, Complex.mul_re, Complex.ofReal_re, Complex.ofReal_im,
-          neg_mul, mul_neg, sub_zero, zero_mul]
+        simp only [Complex.neg_re, Complex.mul_re, Complex.ofReal_re, Complex.ofReal_im]
         ring
       have hA : 0 ≤ Real.exp (-(s.re * t)) := (Real.exp_pos _).le
       calc
@@ -194,35 +229,44 @@ theorem laplaceAbsIntegrable {α C : ℝ} (hC : 0 ≤ C) (F : ℝ → ℂ) (hF :
           mul_le_mul_of_nonneg_right (hB t hpos) hA
         _ = C * Real.exp (α * t) * Real.exp (-(s.re * t)) := by ring
         _ = C * Real.exp ((α - s.re) * t) := by
-          rw [Real.exp_add, show α * t + -(s.re * t) = (α - s.re) * t from by ring]
-        _ = C * Real.exp ((α - s.re) * t) * 1 := one_mul?
-        _ ≤ abs (C * Real.exp ((α - s.re) * t)) := le_of_eq? (show _ = _ from by
-          rw [abs_of_nonneg (mul_nonneg hC (Real.exp_pos _).le)])?
-        _ = ‖C * Real.exp ((α - s.re) * t)‖ := by simp?
+          have hexp : Real.exp (α * t) * Real.exp (-(s.re * t)) = Real.exp ((α - s.re) * t) := by
+            rw [← Real.exp_add, show (α * t) + (-(s.re * t)) = (α - s.re) * t from by ring]
+          rw [show C * Real.exp (α * t) * Real.exp (-(s.re * t)) =
+              C * (Real.exp (α * t) * Real.exp (-(s.re * t))) from by ring, hexp]
+        _ = ‖C * Real.exp ((α - s.re) * t)‖ := by
+          rw [Real.norm_eq_abs, abs_of_nonneg (mul_nonneg hC (Real.exp_pos _).le)]
         _ = ‖laplaceMajor α C s t‖ := by simp [laplaceMajor, hpos]
     · have hFext : Fext F t = 0 := by simp [Fext, hpos]
-      simp [hFext, laplaceMajor, hpos]
+      have hprod : laplaceIntegrand F s t = 0 := by simp [laplaceIntegrand, hFext]
+      simp [hprod, laplaceMajor, hpos]
   -- (6) comparison:
-  exact Integrable.mono hmaj (measurable_laplaceIntegrand F hF s).aestronglyMeasurable hbound
+  exact Integrable.mono hmaj (measurable_laplaceIntegrand F hF s).aestronglyMeasurable
+    (Filter.Eventually.of_forall hbound)
 
 /- Section 4: the pole obstruction -/
 
 /-- A complex differentiable function on an open set is locally bounded at
     each point of the set: there is a ball around x on which ‖f y‖ ≤ B. -/
-theorem DifferentiableOn.locallyBoundedAt {U : Set ℂ} (hf : DifferentiableOn ℂ f U)
+theorem DifferentiableOn.locallyBoundedAt {f : ℂ → ℂ} {U : Set ℂ} (hf : DifferentiableOn ℂ f U)
     (hU : IsOpen U) {x : ℂ} (hx : x ∈ U) :
     ∃ B δ : ℝ, 0 < δ ∧ ∀ (y : ℂ), y ∈ Metric.ball x δ → ‖f y‖ ≤ B := by
   have hcont : ContinuousAt f x := (hf.continuousOn).continuousAt (hU.mem_nhds hx)
   have hV : {y : ℂ | f y ∈ Metric.ball (f x) 1} ∈ 𝓝 x :=
-    hcont.mem (Metric.ball (f x) 1) (ball_mem_nhds (f x) (by norm_num : 0 < (1 : ℝ)))
-  obtain ⟨δ, hδ0, hball⟩ := Metric.nhds_basis_ball.mem_nhds hV
+    hcont.preimage_mem_nhds (Metric.ball_mem_nhds (f x) (by norm_num : 0 < (1 : ℝ)))
+  obtain ⟨δ, hδ0, hball⟩ := Metric.mem_nhds_iff.mp hV
   refine ⟨‖f x‖ + 1, δ, hδ0, ?_⟩
   intro y hy
+  have hm : ‖f y - f x‖ < 1 := by
+    simpa [dist_eq_norm_sub] using Metric.mem_ball.mp (hball hy)
   have hlt : ‖f y‖ < ‖f x‖ + 1 := by
     calc
-      ‖f y‖ = ‖(f y - f x) + f x‖ := by ring
+      ‖f y‖ = ‖(f y - f x) + f x‖ := by
+        congr
+        ring
       _ ≤ ‖f y - f x‖ + ‖f x‖ := norm_add_le _ _
-      _ < 1 + ‖f x‖ := add_lt_add_right (Metric.mem_ball.mp (hball hy)) 0
+      _ < 1 + ‖f x‖ := by
+        simpa [add_comm] using
+          add_lt_add_right hm (‖f x‖ : ℝ)
       _ = ‖f x‖ + 1 := by ring
   exact hlt.le
 
@@ -233,9 +277,9 @@ theorem poleObstruction (α : ℝ) {f : ℂ → ℂ} (hf : DifferentiableOn ℂ 
     (s0 : ℂ) (hs0 : s0 ∈ hp α)
     (hPole : ∀ (B : ℝ), ∀ (δ : ℝ) (hδ : 0 < δ), ∃ (y : ℂ), y ∈ Metric.ball s0 δ ∧ y ∈ hp α ∧ ‖f y‖ > B) :
     False := by
-  rcases hf.locallyBoundedAt isOpen_hp hs0 with ⟨B, δ, hδ0, hBdd⟩
+  rcases DifferentiableOn.locallyBoundedAt hf (isOpen_hp α) hs0 with ⟨B, δ, hδ0, hBdd⟩
   rcases hPole B δ hδ0 with ⟨y, hy_ball, _hy_hp, hyPole⟩
-  exact hyPole.le.not (hBdd y hy_ball)
+  linarith [hyPole, hBdd y hy_ball]
 
 /-- (Composed form) If the Laplace transform Φ of an O(e^{alpha t})
     oscillation F is differentiable on `hp alpha` (guaranteed by D1C-2
