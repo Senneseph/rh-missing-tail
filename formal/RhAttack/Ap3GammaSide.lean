@@ -22,11 +22,13 @@ Changes in this port (mechanical, per project convention):
 import Mathlib
 import RhAttack.Ap3RvMDefs
 import RhAttack.Ap3Hypotheses
+-- H-Γ is the PROJECT's `Ap3.GammaFacts` (Ap3Hypotheses); the vendor Zeta23.Hypotheses
+-- import was dropped 2026-11-04 to avoid two GammaFacts structures in one environment.
 set_option linter.style.header false
 
 namespace Ap3
 
-open Ap2
+open Ap2 Ap2.Zeta23 -- mu (Ap2Defs)
 
 
 open Complex MeasureTheory Set
@@ -170,11 +172,11 @@ theorem gamma_side {T₁ T₂ : ℝ} (_h0 : 0 < T₁) (_h0' : 0 < T₂) :
 /-! ### helpers for the assembly -/
 
 /-- μ is continuous (given H-Γ's smoothness field). -/
-theorem mu_continuous (hΓ : Zeta23.GammaFacts) : Continuous mu :=
+theorem mu_continuous (hΓ : GammaFacts) : Continuous mu :=
   hΓ.smooth.continuous
 
 /-- |μ(τ)| ≪ log(τ+3) for τ ≥ 1, from H-Γ's Stirling field. -/
-theorem mu_le_log (hΓ : Zeta23.GammaFacts) : ∃ C : ℝ, 0 < C ∧ ∀ τ : ℝ, 1 ≤ τ →
+theorem mu_le_log (hΓ : GammaFacts) : ∃ C : ℝ, 0 < C ∧ ∀ τ : ℝ, 1 ≤ τ →
     |mu τ| ≤ C * Real.log (τ + 3) := by
   obtain ⟨C₀, hC₀⟩ := hΓ.stirling
   have hlog2π : 0 ≤ Real.log (2 * Real.pi) :=
@@ -201,15 +203,57 @@ theorem mu_le_log (hΓ : Zeta23.GammaFacts) : ∃ C : ℝ, 0 < C ∧ ∀ τ : �
   have h2π : 1 / (2 * Real.pi) ≤ 1 := by
     rw [div_le_one (by positivity)]; nlinarith [Real.pi_gt_three]
   have h2π0 : 0 < 1 / (2 * Real.pi) := by positivity
+  have hlog2πp : 0 < Real.log (2 * Real.pi) := Real.log_pos (by linarith [Real.pi_gt_three])
+  set L := Real.log (2 * Real.pi) with hLdef
+  have hC1 : 0 < 1 + |C₀| + L := by linarith [abs_nonneg C₀, hlog2π]
+  have hbig : (1 + |C₀| + L) * Real.log (τ + 3) ≥ 1 + |C₀| + L := by
+    simpa [mul_one] using mul_le_mul_of_nonneg_left hlog3 hC1.le
   rw [abs_le]
   constructor
   · -- lower bound: mu τ ≥ (1/2π)(log τ − log 2π) − C₀/τ² ≥ −(…)·log(τ+3)
-    have e1 : -(Real.log (2 * Real.pi)) ≤ 1 / (2 * Real.pi) * (Real.log τ - Real.log (2 * Real.pi)) := by
-      nlinarith
-    nlinarith
-  · have e2 : 1 / (2 * Real.pi) * (Real.log τ - Real.log (2 * Real.pi)) ≤ Real.log (τ + 3) := by
-      nlinarith
-    nlinarith
+    have e1 : -L ≤ 1 / (2 * Real.pi) * (Real.log τ - L) := by
+      nlinarith [hlogτ0, hlog2πp, h2π0, Real.pi_gt_three]
+    have hnegC : -(1 + |C₀| + L) * Real.log (τ + 3) ≤ -(1 + |C₀| + L) := by
+      have hm : (-(1 + |C₀| + L)) * Real.log (τ + 3) ≤ (-(1 + |C₀| + L)) * 1 :=
+        mul_le_mul_of_nonpos_left hlog3 (by linarith)
+      simpa [mul_one] using hm
+    have hmid : -(1 + |C₀| + L) ≤ -L - |C₀| := by linarith
+    have hnegc : -|C₀| ≤ -(C₀ / τ ^ 2) := by linarith [hCr]
+    have hlow : -L - |C₀| ≤ 1 / (2 * Real.pi) * (Real.log τ - L) - C₀ / τ ^ 2 := by
+      nlinarith [e1, hnegc]
+    have hhl : 1 / (2 * Real.pi) * (Real.log τ - L) - C₀ / τ ^ 2 ≤ Zeta23.mu τ := by
+      linarith [hl]
+    have hgoal : -((1 + |C₀| + L) * Real.log (τ + 3)) ≤
+        1 / (2 * Real.pi) * (Real.log τ - L) - C₀ / τ ^ 2 := by
+      rw [← neg_mul]
+      exact le_trans hnegC (le_trans hmid hlow)
+    exact le_trans hgoal hhl
+  · have hstep : 1 / (2 * Real.pi) * (Real.log τ - L) ≤ Real.log τ := by
+      have hnc : (1 : ℝ) / (2 * Real.pi) ≠ 0 := h2π0.ne'
+      field_simp [hnc]
+      nlinarith [hlogτ0, hlog2πp, Real.pi_gt_three]
+    have hXle : 1 / (2 * Real.pi) * (Real.log τ - L) ≤ Real.log (τ + 3) := le_trans hstep hlogτ
+    have hR1 : Zeta23.mu τ ≤ Real.log (τ + 3) + |C₀| := by
+      have hhr : Zeta23.mu τ ≤ 1 / (2 * Real.pi) * (Real.log τ - L) + C₀ / τ ^ 2 := by
+        linarith [hr]
+      nlinarith [hXle, hCr]
+    have hRC : |C₀| ≤ |C₀| * Real.log (τ + 3) := by
+      simpa [mul_one] using mul_le_mul_of_nonneg_left hlog3 (abs_nonneg C₀)
+    have hRL : L ≤ L * Real.log (τ + 3) := by
+      simpa [mul_one] using mul_le_mul_of_nonneg_left hlog3 hlog2π
+    have hA2nn : 0 ≤ L * Real.log (τ + 3) := mul_nonneg hlog2π (by linarith)
+    have hR2 : Real.log (τ + 3) + |C₀| ≤ (1 + |C₀| + L) * Real.log (τ + 3) := by
+      have hA : Real.log (τ + 3) + |C₀| ≤ Real.log (τ + 3) + |C₀| * Real.log (τ + 3) := by
+        calc Real.log (τ + 3) + |C₀| = |C₀| + Real.log (τ + 3) := by ring
+         _ ≤ |C₀| * Real.log (τ + 3) + Real.log (τ + 3) := add_le_add_left hRC (Real.log (τ + 3))
+         _ = Real.log (τ + 3) + |C₀| * Real.log (τ + 3) := by ring
+      have hB : Real.log (τ + 3) + |C₀| * Real.log (τ + 3) ≤
+          Real.log (τ + 3) + |C₀| * Real.log (τ + 3) + L * Real.log (τ + 3) :=
+        le_add_of_nonneg_right hA2nn
+      have hC : (1 + |C₀| + L) * Real.log (τ + 3) =
+          Real.log (τ + 3) + |C₀| * Real.log (τ + 3) + L * Real.log (τ + 3) := by ring
+      simpa [hC] using le_trans hA hB
+    exact le_trans hR1 hR2
 
 end
 end Ap3

@@ -21,6 +21,7 @@ Changes in this port (mechanical, per project convention):
 -/
 import Mathlib
 import RhAttack.Ap1Residue
+import RhAttack.Ap2Defs -- needed for `open Ap2`
 
 set_option linter.style.header false
 

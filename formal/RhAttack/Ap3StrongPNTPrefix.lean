@@ -97,10 +97,13 @@ lemma DerivativeBound {M r r' R : ℝ} {f : ℂ → ℂ} {z : ℂ}
       · exact le_of_eq (by field)
       · refine mul_nonneg (mul_nonneg ?_ ?_) (inv_nonneg.mpr ?_) <;> linarith
     have hdist : r' - r ≤ ‖z' - z‖ := by
-      have h1 : r' = ‖z'‖ := by simpa using hz'
+      have h1 : ‖z'‖ = r' := by simpa using hz'
       have h2 : ‖z‖ ≤ r := by simpa using z_in_r
-      rw [← h1]
-      exact le_trans (by linarith [h2]) (norm_sub_norm_le z' z)
+      have h3 : ‖z'‖ ≤ ‖z' - z‖ + ‖z‖ := by
+        have := norm_add_le (z' - z) z
+        rw [show (z' - z) + z = z' by ring] at this
+        exact this
+      linarith
     rw [norm_pow, norm_inv, one_div, inv_pow]
     gcongr
 

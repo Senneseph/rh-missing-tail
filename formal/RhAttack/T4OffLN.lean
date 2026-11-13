@@ -316,8 +316,8 @@ theorem  validPubN  :  (T4OffLM.flucNn : ℝ) <= (bSfull_N : ℝ)  :=  by
 def  b1sTPT2  :  ℚ  :=  1373 / 100            --  13.73  upper  of  13.724182
 def  b1hTPT2  :  ℚ  :=  31                    --  30.707241  upper
 
-theorem  b1sValue  :  (13.724182 : ℝ) <= (b1sTPT2 : ℝ)  :=  by  norm_num
-theorem  b1hValue  :  (30.707241 : ℝ) <= (b1hTPT2 : ℝ)  :=  by  norm_num
+theorem  b1sValue  :  (13.724182 : ℝ) <= (b1sTPT2 : ℝ)  :=  by  norm_num [b1sTPT2]
+theorem  b1hValue  :  (30.707241 : ℝ) <= (b1hTPT2 : ℝ)  :=  by  norm_num [b1hTPT2]
 
 def  eWinSg_A  :  ℚ  :=  1313               --  1,312.89  (UPPER)
 def  eWinSg_Q  :  ℚ  :=  1315               --  1,314.26  (UPPER)

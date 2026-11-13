@@ -24,6 +24,8 @@ import RhAttack.Ap2Statement
 import RhAttack.Ap2CountByIntegral
 import RhAttack.Ap3StrongPNTPrefix
 import RhAttack.Ap3Growth
+import RhAttack.Ap3Halving -- reflect_mem_window / reflect_injective / reflect_re / N_le_two_mul_half
+import RhAttack.Ap2Counting -- ZeroConfig counting methods (window_finite, finsum_mult_mono, ...)
 
 set_option linter.style.header false
 
@@ -34,10 +36,20 @@ open Ap2
 
 
 open Complex Set Filter Topology Metric
+  open Ap2 Ap2.Zeta23 -- Ap2 names used below (zeroMult, zetaZeros, riemannZeta_zeros_locallyFinite, ...)
+  open Ap2.Zeta23.ZeroConfig -- window_finite / finsum_mult_mono / N_le_two_mul_half / reflect_mem_window (dot-notation on Z)
 
 noncomputable section
 
 namespace Zeta23.RvM
+
+-- (from vendor Zeta23/Statement/SeamClosed:26) the ζ-zero configuration instance.
+abbrev zetaZeroConfig : ZeroConfig := zetaZeros zetaSeam
+
+/-- `zetaZeroConfig.N` is `Ncount` (same carriers: nontrivial zeros, same window). -/
+@[simp] lemma zetaZeroConfig_N (T₁ T₂ : ℝ) : zetaZeroConfig.N T₁ T₂ = Ncount T₁ T₂ := by
+  unfold ZeroConfig.N Ncount
+  simp only [zetaZeroConfig, zetaZeros_window zetaSeam, zetaZeros_mult zetaSeam]
 
 /-- zeros of ζ in any compact set are finite (none accumulate, none near the pole). -/
 theorem riemannZeta_zeros_finite_of_isCompact {K : Set ℂ} (hK : IsCompact K) :
@@ -95,13 +107,13 @@ lemma norm_sub_center_le {ρ : ℂ} {t : ℝ} (h1 : 0 < ρ.re) (h2 : ρ.re < 1) 
 
 
 /-- zeros with β ≥ 1/2 in the window (t, t+1], with multiplicity, as a real number. -/
-def NhalfR (t : ℝ) : ℝ := ∑ᶠ ρ ∈ zetaZeroConfig.window t (t + 1) ∩ {ρ | 1/2 ≤ ρ.re}, (zeroMult ρ : ℝ)
+def NhalfR (t : ℝ) : ℝ := ∑ᶠ ρ ∈ (zetaZeros zetaSeam).window t (t + 1) ∩ {ρ | 1/2 ≤ ρ.re}, (zeroMult ρ : ℝ)
 
 /-- the β ≥ 1/2 half-window count is ≪ log(|t|+3) for |t| ≥ 4 (disc argument). -/
 theorem half_count_large :
     ∃ A₁ : ℝ, ∀ t : ℝ, 4 ≤ |t| → NhalfR t ≤ A₁ * Real.log (|t| + 3) := by
-  obtain ⟨A, C, hC, hgrowth⟩ := zeta_growth_right
-  have hL := zeta_lower_bound_two
+  obtain ⟨A, C, hC, hgrowth⟩ := Ap3.RvM.zeta_growth_right
+  have hL := Ap3.RvM.zeta_lower_bound_two
   set A' : ℝ := max A 0 with hA'
   have hA'0 : 0 ≤ A' := le_max_right _ _
   -- constants
@@ -191,7 +203,7 @@ theorem half_count_large :
   have hZ := ZerosBound (B := B) (r := r) (R := R) (by norm_num [hr]) (by norm_num [hr])
     (by norm_num [hr, hR]) (by norm_num [hR]) hfAnalytic hg0 hfin hfz
   -- the window's β ≥ 1/2 part maps injectively into the zero finset of g
-  set W : Set ℂ := zetaZeroConfig.window t (t + 1) ∩ {ρ | 1/2 ≤ ρ.re} with hW
+  set W : Set ℂ := (zetaZeros zetaSeam).window t (t + 1) ∩ {ρ | 1/2 ≤ ρ.re} with hW
   have hWfin : W.Finite := (zetaZeroConfig.window_finite t (t + 1)).subset inter_subset_left
   set φ : ℂ → ℂ := fun ρ => (ρ - c₀) / κ with hφ
   have hφinj : Function.Injective φ := by
@@ -259,7 +271,7 @@ theorem half_count_large :
 /-- small heights: N(t,t+1] ≤ N(−4,5] for |t| ≤ 4. -/
 theorem count_small (t : ℝ) (ht : |t| ≤ 4) : (Ncount t (t + 1) : ℝ) ≤ Ncount (-4) 5 := by
   obtain ⟨h1, h2⟩ := abs_le.mp ht
-  have hsub : zetaZeroConfig.window t (t + 1) ⊆ zetaZeroConfig.window (-4) 5 := by
+  have hsub : (zetaZeros zetaSeam).window t (t + 1) ⊆ zetaZeroConfig.window (-4) 5 := by
     rintro ρ ⟨hρ, ha, hb⟩; exact ⟨hρ, by linarith, by linarith⟩
   have h' : zetaZeroConfig.N t (t + 1) ≤ zetaZeroConfig.N (-4) 5 :=
     zetaZeroConfig.finsum_mult_mono (-4) 5 hsub subset_rfl

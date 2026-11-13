@@ -107,7 +107,7 @@ T₂:  (1/2πi)∮_{∂([−1,2]×[T₁,T₂])} Λ'/Λ = Ncount T₁ T₂. -/
 theorem rectangleIntegral'_logDeriv_completedZeta_eq_Ncount {T₁ T₂ : ℝ} (hT₁ : 0 < T₁)
     (hT : T₁ ≤ T₂) (hgood₁ : ∀ ρ, IsNontrivialZero ρ → ρ.im ≠ T₁)
     (hgood₂ : ∀ ρ, IsNontrivialZero ρ → ρ.im ≠ T₂) :
-    RectangleIntegral' (logDeriv completedRiemannZeta) (-1 + T₁ * I) (2 + T₂ * I)
+    Ap1.RectangleIntegral' (logDeriv completedRiemannZeta) (-1 + T₁ * I) (2 + T₂ * I)
       = (Ncount T₁ T₂ : ℂ) := by
   classical
   set z : ℂ := -1 + T₁ * I with hzdef
@@ -128,7 +128,7 @@ theorem rectangleIntegral'_logDeriv_completedZeta_eq_Ncount {T₁ T₂ : ℝ} (h
     have hi : 0 < s.im := by linarith [((hmem s).mp hs).2.1]
     exact analyticAt_completedRiemannZeta (fun h => by simp [h] at hi) (fun h => by simp [h] at hi)
   have hg : AnalyticOnNhd ℂ (fun _ : ℂ => (1 : ℂ)) (Rectangle z w) := fun _ _ => analyticAt_const
-  have hfin := zetaSeam.finite_window T₁ T₂
+  have hfin := ZetaSeam.finite_window_holds T₁ T₂
   have hZ : ∀ s ∈ Rectangle z w, completedRiemannZeta s = 0 ↔ s ∈ hfin.toFinset := by
     intro s hs
     rw [Set.Finite.mem_toFinset]
@@ -144,18 +144,18 @@ theorem rectangleIntegral'_logDeriv_completedZeta_eq_Ncount {T₁ T₂ : ℝ} (h
     rw [Finset.mem_coe, Set.Finite.mem_toFinset] at hs
     obtain ⟨⟨_, h1, h2⟩, hi1, hi2⟩ := hs
     exact (hmem s).mpr ⟨⟨by linarith, by linarith⟩, hi1.le, hi2⟩
-  have hborder : ∀ s ∈ RectangleBorder z w, completedRiemannZeta s ≠ 0 := by
+  have hborder : ∀ s ∈ Ap1.RectangleBorder z w, completedRiemannZeta s ≠ 0 := by
     intro s hs h0
-    obtain ⟨⟨hr1, hr2⟩, ⟨hi1, hi2⟩⟩ := (hmem s).mp (rectangleBorder_subset_rectangle z w hs)
+    obtain ⟨⟨hr1, hr2⟩, ⟨hi1, hi2⟩⟩ := (hmem s).mp (Ap1.rectangleBorder_subset_rectangle z w hs)
     have hnz := completedRiemannZeta_eq_zero_iff.mp h0
-    simp only [RectangleBorder, mem_union, mem_reProdIm, mem_singleton_iff, hzre, hzim, hwre,
+    simp only [Ap1.RectangleBorder, mem_union, mem_reProdIm, mem_singleton_iff, hzre, hzim, hwre,
       hwim] at hs
     rcases hs with ((⟨_, h'⟩ | ⟨h', _⟩) | ⟨_, h'⟩) | ⟨h', _⟩
     · exact hgood₁ s hnz h'
     · linarith [hnz.2.1]
     · exact hgood₂ s hnz h'
     · linarith [hnz.2.2]
-  have key := Ap1.rectangleIntegral'_mul_logDeriv hre him hf hg hborder
+  have key := Ap1.Zeta23.Analytic.rectangleIntegral'_mul_logDeriv hre him hf hg hborder
     hfin.toFinset hZ hZsub
   simp only [one_mul, mul_one] at key
   rw [show (fun s => logDeriv completedRiemannZeta s) = logDeriv completedRiemannZeta from rfl]
@@ -171,7 +171,6 @@ theorem rectangleIntegral'_logDeriv_completedZeta_eq_Ncount {T₁ T₂ : ℝ} (h
   rw [analyticOrderNatAt_completedRiemannZeta h1 (fun h' => by simp [h'] at h2)]
 
 end RvM
-end Zeta23
 
 
 /-- The zeta-seam, fully discharged from Mathlib (no paper inputs): finiteness
@@ -189,15 +188,17 @@ theorem ap2_selftest_RH_counts_on_line {T₁ T₂ : ℝ} (hT₁ : 0 < T₁) (hT 
     (hgood₁ : ∀ ρ, IsNontrivialZero ρ → ρ.im ≠ T₁)
     (hgood₂ : ∀ ρ, IsNontrivialZero ρ → ρ.im ≠ T₂)
     (hRH : RiemannHypothesis) :
-    RectangleIntegral' (logDeriv completedRiemannZeta) (-1 + T₁ * I) (2 + T₂ * I)
+    Ap1.RectangleIntegral' (logDeriv completedRiemannZeta) (-1 + T₁ * I) (2 + T₂ * I)
         = (N0 T₁ T₂ : ℂ) := by
-  have hin := rectangleIntegral'_logDeriv_completedZeta_eq_Ncount hT₁ hT hgood₁ hgood₂
+  have hin := RvM.rectangleIntegral'_logDeriv_completedZeta_eq_Ncount hT₁ hT hgood₁ hgood₂
   rw [hin]
   have hall := RH_implies_all_on_line hRH T₁ T₂
   have hN : (N0 T₁ T₂ : ℂ) = (Ncount T₁ T₂ : ℂ) := by
     norm_cast
     exact hall.1
   simpa using hN.symm
+
+end Zeta23
 
 end
 end Ap2

@@ -29,7 +29,8 @@ set_option linter.style.header false
 
 namespace Ap3
 
-open Ap2
+open Ap2 Ap2.Zeta23 -- riemannZeta_analyticOnNhd_compl_one etc.
+open Ap3.RvM -- norm_riemannZeta_sub_one_le (Ap3Growth)
 
 
 open Complex Set Metric

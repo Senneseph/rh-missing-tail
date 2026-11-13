@@ -26,7 +26,7 @@ set_option linter.style.header false
 namespace Ap3
 
 open Ap2
-
+open Ap2.Zeta23
 
 noncomputable section
 
@@ -37,7 +37,7 @@ open MeasureTheory intervalIntegral
 /-- The Stirling-field statement, as a standing hypothesis (same statement as
 GammaFacts.stirling). -/
 def StirlingHyp : Prop := ∃ C : ℝ, ∀ τ : ℝ, 1 ≤ |τ| →
-  |Ap2.mu τ - (1 / (2 * Real.pi)) * Real.log (|τ| / (2 * Real.pi))| ≤ C / τ ^ 2
+  |Ap2.Zeta23.mu τ - (1 / (2 * Real.pi)) * Real.log (|τ| / (2 * Real.pi))| ≤ C / τ ^ 2
 
 /-- FTC anchor: ∫_T^{2T} (1/2π)·log(τ/2π) dτ = T·ℓ₁/(2π) for T > 0. -/
 lemma integral_main_eq {T : ℝ} (hT : 0 < T) :
@@ -99,17 +99,17 @@ lemma integral_main_eq {T : ℝ} (hT : 0 < T) :
 /-- **[eq:muints].1 given Stirling**: ∫_T^{2T} μ = Tℓ₁/(2π) + O(1/T). -/
 theorem int_mu_of_stirling (hst : StirlingHyp) :
     ∃ C T₀ : ℝ, ∀ T : ℝ, T₀ ≤ T →
-      |(∫ τ in T..(2 * T), Ap2.mu τ) - T * ell1 T / (2 * Real.pi)| ≤ C / T := by
+      |(∫ τ in T..(2 * T), Ap2.Zeta23.mu τ) - T * ell1 T / (2 * Real.pi)| ≤ C / T := by
   obtain ⟨C, hC⟩ := hst
   have hC0 : 0 ≤ C := by
     have h := hC 1 (by norm_num)
-    have := abs_nonneg (Ap2.mu 1 - 1 / (2 * Real.pi) * Real.log (|1| / (2 * Real.pi)))
+    have := abs_nonneg (Ap2.Zeta23.mu 1 - 1 / (2 * Real.pi) * Real.log (|1| / (2 * Real.pi)))
     nlinarith
-  have hμcont : Continuous Ap2.mu := Ap2.mu_smooth.continuous
+  have hμcont : Continuous Ap2.Zeta23.mu := mu_smooth.continuous
   refine ⟨C, 1, fun T hT => ?_⟩
   have hT0 : (0 : ℝ) < T := by linarith
   -- split μ = main + error on [T, 2T]
-  have hint_mu : IntervalIntegrable Ap2.mu volume T (2 * T) :=
+  have hint_mu : IntervalIntegrable Ap2.Zeta23.mu volume T (2 * T) :=
     hμcont.intervalIntegrable _ _
   have hint_main : IntervalIntegrable
       (fun τ : ℝ => (1 / (2 * Real.pi)) * Real.log (τ / (2 * Real.pi))) volume T (2 * T) := by
@@ -120,10 +120,10 @@ theorem int_mu_of_stirling (hst : StirlingHyp) :
     have hτ0 : (0 : ℝ) < τ := lt_of_lt_of_le hT0 hτ.1
     exact ((Real.continuousAt_log (by positivity)).comp
       (continuousAt_id.div_const _)).continuousWithinAt
-  have hsplit : (∫ τ in T..(2 * T), Ap2.mu τ)
+  have hsplit : (∫ τ in T..(2 * T), Ap2.Zeta23.mu τ)
       = (∫ τ in T..(2 * T), (1 / (2 * Real.pi)) * Real.log (τ / (2 * Real.pi)))
         + ∫ τ in T..(2 * T),
-            (Ap2.mu τ - (1 / (2 * Real.pi)) * Real.log (τ / (2 * Real.pi))) := by
+            (Ap2.Zeta23.mu τ - (1 / (2 * Real.pi)) * Real.log (τ / (2 * Real.pi))) := by
     rw [← intervalIntegral.integral_add hint_main (hint_mu.sub hint_main)]
     congr 1
     funext τ
@@ -132,10 +132,10 @@ theorem int_mu_of_stirling (hst : StirlingHyp) :
   rw [add_sub_cancel_left]
   -- bound the error integral
   have herr_int : IntervalIntegrable
-      (fun τ : ℝ => Ap2.mu τ - (1 / (2 * Real.pi)) * Real.log (τ / (2 * Real.pi)))
+      (fun τ : ℝ => Ap2.Zeta23.mu τ - (1 / (2 * Real.pi)) * Real.log (τ / (2 * Real.pi)))
       volume T (2 * T) := hint_mu.sub hint_main
   have hbound : ∀ τ ∈ Set.Icc T (2 * T),
-      |Ap2.mu τ - (1 / (2 * Real.pi)) * Real.log (τ / (2 * Real.pi))| ≤ C / τ ^ 2 := by
+      |Ap2.Zeta23.mu τ - (1 / (2 * Real.pi)) * Real.log (τ / (2 * Real.pi))| ≤ C / τ ^ 2 := by
     intro τ hτ
     have hτ1 : (1 : ℝ) ≤ τ := le_trans hT hτ.1
     have habs : |τ| = τ := abs_of_pos (by linarith)
@@ -166,9 +166,9 @@ theorem int_mu_of_stirling (hst : StirlingHyp) :
     field_simp
     ring
   calc |∫ τ in T..(2 * T),
-        (Ap2.mu τ - (1 / (2 * Real.pi)) * Real.log (τ / (2 * Real.pi)))|
+        (Ap2.Zeta23.mu τ - (1 / (2 * Real.pi)) * Real.log (τ / (2 * Real.pi)))|
       ≤ ∫ τ in T..(2 * T),
-          |Ap2.mu τ - (1 / (2 * Real.pi)) * Real.log (τ / (2 * Real.pi))| :=
+          |Ap2.Zeta23.mu τ - (1 / (2 * Real.pi)) * Real.log (τ / (2 * Real.pi))| :=
         intervalIntegral.abs_integral_le_integral_abs (by linarith)
     _ ≤ ∫ τ in T..(2 * T), C / τ ^ 2 := by
         refine intervalIntegral.integral_mono_on (by linarith) herr_int.abs hCtau ?_
@@ -241,15 +241,15 @@ set_option maxHeartbeats 1600000 in
 /-- **[eq:muints].2 given Stirling**: ∫_T^{2T} μ² = (Tℓ₁²/4π²)(1 + O(l⁻²)). -/
 theorem int_mu_sq_of_stirling (hst : StirlingHyp) :
     ∃ C T₀ : ℝ, ∀ T : ℝ, T₀ ≤ T →
-      |(∫ τ in T..(2 * T), Ap2.mu τ ^ 2) - T * ell1 T ^ 2 / (4 * Real.pi ^ 2)|
+      |(∫ τ in T..(2 * T), Ap2.Zeta23.mu τ ^ 2) - T * ell1 T ^ 2 / (4 * Real.pi ^ 2)|
         ≤ C * (T * ell1 T ^ 2 / (4 * Real.pi ^ 2)) / l T ^ 2 := by
   obtain ⟨C, hC⟩ := hst
   have hC0 : 0 ≤ C := by
     have h := hC 1 (by norm_num)
-    have := abs_nonneg (Ap2.mu 1 - 1 / (2 * Real.pi) * Real.log (|1| / (2 * Real.pi)))
+    have := abs_nonneg (Ap2.Zeta23.mu 1 - 1 / (2 * Real.pi) * Real.log (|1| / (2 * Real.pi)))
     nlinarith
   have hπ : (0 : ℝ) < Real.pi := Real.pi_pos
-  have hμcont : Continuous Ap2.mu := Ap2.mu_smooth.continuous
+  have hμcont : Continuous Ap2.Zeta23.mu := mu_smooth.continuous
   set C₂ : ℝ := C * (1 + C) + 1 with hC₂
   have hC₂0 : (0 : ℝ) < C₂ := by nlinarith
   refine ⟨8 * (1 + 2 * Real.log 2 ^ 2) + 1,
@@ -318,7 +318,7 @@ theorem int_mu_sq_of_stirling (hst : StirlingHyp) :
     rw [one_div, div_eq_mul_inv (L + m), mul_comm (L + m)]
     exact mul_le_mul_of_nonneg_left hlog_le (by positivity)
   have herr_bound : ∀ τ ∈ Set.Icc T (2 * T),
-      |Ap2.mu τ ^ 2 - ((1 / (2 * Real.pi)) * Real.log (τ / (2 * Real.pi))) ^ 2|
+      |Ap2.Zeta23.mu τ ^ 2 - ((1 / (2 * Real.pi)) * Real.log (τ / (2 * Real.pi))) ^ 2|
         ≤ C / τ ^ 2 * (2 * ((L + m) / (2 * Real.pi)) + C) := by
     intro τ hτ
     have hτT : T ≤ τ := hτ.1
@@ -327,9 +327,9 @@ theorem int_mu_sq_of_stirling (hst : StirlingHyp) :
     have herr := hC τ (by rwa [habs])
     rw [habs] at herr
     have hmb := hmain_bound τ hτ
-    have hsq : Ap2.mu τ ^ 2 - ((1 / (2 * Real.pi)) * Real.log (τ / (2 * Real.pi))) ^ 2
-        = (Ap2.mu τ - (1 / (2 * Real.pi)) * Real.log (τ / (2 * Real.pi)))
-          * (Ap2.mu τ + (1 / (2 * Real.pi)) * Real.log (τ / (2 * Real.pi))) := by
+    have hsq : Ap2.Zeta23.mu τ ^ 2 - ((1 / (2 * Real.pi)) * Real.log (τ / (2 * Real.pi))) ^ 2
+        = (Ap2.Zeta23.mu τ - (1 / (2 * Real.pi)) * Real.log (τ / (2 * Real.pi)))
+          * (Ap2.Zeta23.mu τ + (1 / (2 * Real.pi)) * Real.log (τ / (2 * Real.pi))) := by
       ring
     rw [hsq, abs_mul]
     have hτ2 : (0 : ℝ) < τ ^ 2 := by positivity
@@ -337,19 +337,19 @@ theorem int_mu_sq_of_stirling (hst : StirlingHyp) :
       rw [div_le_iff₀ hτ2]
       have hτsq1 : (1 : ℝ) ≤ τ ^ 2 := by nlinarith
       nlinarith
-    have hsum_bound : |Ap2.mu τ + (1 / (2 * Real.pi)) * Real.log (τ / (2 * Real.pi))|
+    have hsum_bound : |Ap2.Zeta23.mu τ + (1 / (2 * Real.pi)) * Real.log (τ / (2 * Real.pi))|
         ≤ 2 * ((L + m) / (2 * Real.pi)) + C := by
-      have h4 := abs_sub_abs_le_abs_sub (Ap2.mu τ)
+      have h4 := abs_sub_abs_le_abs_sub (Ap2.Zeta23.mu τ)
         ((1 / (2 * Real.pi)) * Real.log (τ / (2 * Real.pi)))
-      have h5 : |Ap2.mu τ - (1 / (2 * Real.pi)) * Real.log (τ / (2 * Real.pi))| ≤ C :=
+      have h5 : |Ap2.Zeta23.mu τ - (1 / (2 * Real.pi)) * Real.log (τ / (2 * Real.pi))| ≤ C :=
         le_trans herr hCτ
-      have h3 : |Ap2.mu τ| ≤ (L + m) / (2 * Real.pi) + C := by linarith
-      calc |Ap2.mu τ + (1 / (2 * Real.pi)) * Real.log (τ / (2 * Real.pi))|
-          ≤ |Ap2.mu τ| + |(1 / (2 * Real.pi)) * Real.log (τ / (2 * Real.pi))| :=
+      have h3 : |Ap2.Zeta23.mu τ| ≤ (L + m) / (2 * Real.pi) + C := by linarith
+      calc |Ap2.Zeta23.mu τ + (1 / (2 * Real.pi)) * Real.log (τ / (2 * Real.pi))|
+          ≤ |Ap2.Zeta23.mu τ| + |(1 / (2 * Real.pi)) * Real.log (τ / (2 * Real.pi))| :=
             abs_add_le _ _
         _ ≤ 2 * ((L + m) / (2 * Real.pi)) + C := by linarith
     exact mul_le_mul herr hsum_bound (abs_nonneg _) (by positivity)
-  have hint_mu2 : IntervalIntegrable (fun τ : ℝ => Ap2.mu τ ^ 2) volume T (2 * T) :=
+  have hint_mu2 : IntervalIntegrable (fun τ : ℝ => Ap2.Zeta23.mu τ ^ 2) volume T (2 * T) :=
     (hμcont.pow 2).intervalIntegrable _ _
   have hint_main2 : IntervalIntegrable
       (fun τ : ℝ => ((1 / (2 * Real.pi)) * Real.log (τ / (2 * Real.pi))) ^ 2)
@@ -374,10 +374,10 @@ theorem int_mu_sq_of_stirling (hst : StirlingHyp) :
         = fun τ : ℝ => (1 / (4 * Real.pi ^ 2)) * Real.log (τ / (2 * Real.pi)) ^ 2
       from funext fun τ => by field_simp; ring]
     rw [intervalIntegral.integral_const_mul, integral_main_sq_eq hT0, hm]
-  have hsplit : (∫ τ in T..(2 * T), Ap2.mu τ ^ 2)
+  have hsplit : (∫ τ in T..(2 * T), Ap2.Zeta23.mu τ ^ 2)
       = (∫ τ in T..(2 * T), ((1 / (2 * Real.pi)) * Real.log (τ / (2 * Real.pi))) ^ 2)
         + ∫ τ in T..(2 * T),
-            (Ap2.mu τ ^ 2 - ((1 / (2 * Real.pi)) * Real.log (τ / (2 * Real.pi))) ^ 2) := by
+            (Ap2.Zeta23.mu τ ^ 2 - ((1 / (2 * Real.pi)) * Real.log (τ / (2 * Real.pi))) ^ 2) := by
     rw [← intervalIntegral.integral_add hint_main2 (hint_mu2.sub hint_main2)]
     congr 1
     funext τ
@@ -409,7 +409,7 @@ theorem int_mu_sq_of_stirling (hst : StirlingHyp) :
     field_simp
     ring
   have herrI : |∫ τ in T..(2 * T),
-      (Ap2.mu τ ^ 2 - ((1 / (2 * Real.pi)) * Real.log (τ / (2 * Real.pi))) ^ 2)|
+      (Ap2.Zeta23.mu τ ^ 2 - ((1 / (2 * Real.pi)) * Real.log (τ / (2 * Real.pi))) ^ 2)|
       ≤ (C / (2 * T)) * (2 * ((L + m) / (2 * Real.pi)) + C) := by
     have hCint2 : ∫ τ in T..(2 * T), C / τ ^ 2 * (2 * ((L + m) / (2 * Real.pi)) + C)
         = (C / (2 * T)) * (2 * ((L + m) / (2 * Real.pi)) + C) := by
@@ -419,9 +419,9 @@ theorem int_mu_sq_of_stirling (hst : StirlingHyp) :
       rw [intervalIntegral.integral_const_mul, hCint]
       ring
     calc |∫ τ in T..(2 * T),
-          (Ap2.mu τ ^ 2 - ((1 / (2 * Real.pi)) * Real.log (τ / (2 * Real.pi))) ^ 2)|
+          (Ap2.Zeta23.mu τ ^ 2 - ((1 / (2 * Real.pi)) * Real.log (τ / (2 * Real.pi))) ^ 2)|
         ≤ ∫ τ in T..(2 * T),
-            |Ap2.mu τ ^ 2 - ((1 / (2 * Real.pi)) * Real.log (τ / (2 * Real.pi))) ^ 2| :=
+            |Ap2.Zeta23.mu τ ^ 2 - ((1 / (2 * Real.pi)) * Real.log (τ / (2 * Real.pi))) ^ 2| :=
           intervalIntegral.abs_integral_le_integral_abs (by linarith)
       _ ≤ ∫ τ in T..(2 * T), C / τ ^ 2 * (2 * ((L + m) / (2 * Real.pi)) + C) := by
           refine intervalIntegral.integral_mono_on (by linarith)
@@ -439,25 +439,25 @@ theorem int_mu_sq_of_stirling (hst : StirlingHyp) :
     positivity
   have htri : |(1 / (4 * Real.pi ^ 2)) * (T * (ell1 T ^ 2 + 1 - 2 * m ^ 2))
       + (∫ τ in T..(2 * T),
-          (Ap2.mu τ ^ 2 - ((1 / (2 * Real.pi)) * Real.log (τ / (2 * Real.pi))) ^ 2))
+          (Ap2.Zeta23.mu τ ^ 2 - ((1 / (2 * Real.pi)) * Real.log (τ / (2 * Real.pi))) ^ 2))
       - T * ell1 T ^ 2 / (4 * Real.pi ^ 2)|
       ≤ |(1 / (4 * Real.pi ^ 2)) * (T * (ell1 T ^ 2 + 1 - 2 * m ^ 2))
           - T * ell1 T ^ 2 / (4 * Real.pi ^ 2)|
         + |∫ τ in T..(2 * T),
-            (Ap2.mu τ ^ 2 - ((1 / (2 * Real.pi)) * Real.log (τ / (2 * Real.pi))) ^ 2)| := by
+            (Ap2.Zeta23.mu τ ^ 2 - ((1 / (2 * Real.pi)) * Real.log (τ / (2 * Real.pi))) ^ 2)| := by
     have h1 := abs_add_le
       ((1 / (4 * Real.pi ^ 2)) * (T * (ell1 T ^ 2 + 1 - 2 * m ^ 2))
         - T * ell1 T ^ 2 / (4 * Real.pi ^ 2))
       (∫ τ in T..(2 * T),
-        (Ap2.mu τ ^ 2 - ((1 / (2 * Real.pi)) * Real.log (τ / (2 * Real.pi))) ^ 2))
+        (Ap2.Zeta23.mu τ ^ 2 - ((1 / (2 * Real.pi)) * Real.log (τ / (2 * Real.pi))) ^ 2))
     calc |(1 / (4 * Real.pi ^ 2)) * (T * (ell1 T ^ 2 + 1 - 2 * m ^ 2))
         + (∫ τ in T..(2 * T),
-            (Ap2.mu τ ^ 2 - ((1 / (2 * Real.pi)) * Real.log (τ / (2 * Real.pi))) ^ 2))
+            (Ap2.Zeta23.mu τ ^ 2 - ((1 / (2 * Real.pi)) * Real.log (τ / (2 * Real.pi))) ^ 2))
         - T * ell1 T ^ 2 / (4 * Real.pi ^ 2)|
         = |((1 / (4 * Real.pi ^ 2)) * (T * (ell1 T ^ 2 + 1 - 2 * m ^ 2))
             - T * ell1 T ^ 2 / (4 * Real.pi ^ 2))
           + ∫ τ in T..(2 * T),
-              (Ap2.mu τ ^ 2 - ((1 / (2 * Real.pi)) * Real.log (τ / (2 * Real.pi))) ^ 2)| := by
+              (Ap2.Zeta23.mu τ ^ 2 - ((1 / (2 * Real.pi)) * Real.log (τ / (2 * Real.pi))) ^ 2)| := by
           congr 1
           ring
       _ ≤ _ := h1
@@ -522,12 +522,12 @@ theorem int_mu_sq_of_stirling (hst : StirlingHyp) :
       _ ≤ X := hX1
   calc |(1 / (4 * Real.pi ^ 2)) * (T * (ell1 T ^ 2 + 1 - 2 * m ^ 2))
       + (∫ τ in T..(2 * T),
-          (Ap2.mu τ ^ 2 - ((1 / (2 * Real.pi)) * Real.log (τ / (2 * Real.pi))) ^ 2))
+          (Ap2.Zeta23.mu τ ^ 2 - ((1 / (2 * Real.pi)) * Real.log (τ / (2 * Real.pi))) ^ 2))
       - T * ell1 T ^ 2 / (4 * Real.pi ^ 2)|
       ≤ |(1 / (4 * Real.pi ^ 2)) * (T * (ell1 T ^ 2 + 1 - 2 * m ^ 2))
           - T * ell1 T ^ 2 / (4 * Real.pi ^ 2)|
         + |∫ τ in T..(2 * T),
-            (Ap2.mu τ ^ 2 - ((1 / (2 * Real.pi)) * Real.log (τ / (2 * Real.pi))) ^ 2)| := htri
+            (Ap2.Zeta23.mu τ ^ 2 - ((1 / (2 * Real.pi)) * Real.log (τ / (2 * Real.pi))) ^ 2)| := htri
     _ ≤ 8 * (1 + 2 * m ^ 2) * X + 1 * X := by
         have := le_trans herrI herr_final
         linarith [hmain_dev]

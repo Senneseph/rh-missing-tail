@@ -27,13 +27,12 @@ set_option linter.style.header false
 namespace Ap3
 
 open Ap2
+  open Ap2.Zeta23 -- IsNontrivialZero/zeroMult live in Ap2.Zeta23 (Ap2Statement)
 
 
 open Complex
 
 noncomputable section
-
-namespace Ap3
 
 /-- T is a zero-free ordinate: no nontrivial zero of ζ has Im ρ = T. -/
 def GoodHeight (T : ℝ) : Prop := ∀ ρ : ℂ, IsNontrivialZero ρ → ρ.im ≠ T
@@ -56,8 +55,6 @@ lemma halfContour_add (F G : ℂ → ℂ) (T₁ T₂ : ℝ)
   rw [intervalIntegral.integral_add hb hb', intervalIntegral.integral_add hr hr',
     intervalIntegral.integral_add ht ht']
   ring
-
-end Ap3
 
 end
 end Ap3

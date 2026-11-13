@@ -23,11 +23,12 @@ import Mathlib
 import RhAttack.Ap3MainTerm
 import RhAttack.Ap3LocalCount
 import RhAttack.Ap3Hypotheses
+import RhAttack.Ap3GammaComplete -- gammaFacts : GammaFacts
 set_option linter.style.header false
 
 namespace Ap3
 
-open Ap2
+open Ap2 Ap2.Zeta23 Zeta23.RvM -- Ncount, ell1, zetaZeroConfig, zetaZeroConfig_local_count
 
 
 noncomputable section

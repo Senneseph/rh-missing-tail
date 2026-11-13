@@ -26,3 +26,26 @@ import Mathlib.Algebra.Lie.OfAssociative
 -- (Prelude/InstancePriorities.lean): demote LieAlgebra.toModule so the
 -- NormedSpace path for complex derivatives is tried first.
 attribute [instance 10] LieAlgebra.toModule
+
+namespace Ap3
+
+/-- Reverse triangle inequality, restored under the legacy name
+(`norm_sub_norm_le` was renamed away in current Mathlib; the AP ports from the
+zeta-23 era use the old name at several call sites in `Ap3Growth` /
+`Ap3LocalCount` / `Ap3StrongPNTPrefix`). -/
+theorem norm_sub_norm_le (a b : ℂ) : ‖a‖ - ‖b‖ ≤ ‖a - b‖ := by
+  have := norm_add_le (a - b) b
+  rw [show (a - b) + b = a by ring] at this
+  linarith
+
+/-- Absolute-value variant (for call sites needing the symmetric form). -/
+theorem abs_norm_sub_norm_le (a b : ℂ) : |‖a‖ - ‖b‖| ≤ ‖a - b‖ := by
+  have hh3 : ‖b - a‖ = ‖a - b‖ := by rw [show b - a = -(a - b) by ring, norm_neg]
+  rw [abs_le]
+  constructor
+  · have := norm_sub_norm_le b a
+    rw [hh3] at this
+    linarith
+  · exact norm_sub_norm_le a b
+
+end Ap3

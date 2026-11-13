@@ -33,7 +33,8 @@ set_option linter.style.header false
 
 namespace Ap3
 
-open Ap2
+open Ap2 Ap2.Zeta23 -- Ncount, IsNontrivialZero, zeroMult
+open Zeta23.RvM -- zetaZeroConfig, zetaZeroConfig_N (Ap3LocalCount)
 
 
 open Complex MeasureTheory
@@ -49,7 +50,7 @@ N(T₁,T₂) = (1/π)·Im ∫_L Λ'/Λ ds, L the right half-contour.  [Tit86 §9
 theorem N_eq_halfContour_completedZeta {T₁ T₂ : ℝ} (h1 : 1 ≤ T₁) (h12 : T₁ < T₂)
     (hg1 : GoodHeight T₁) (hg2 : GoodHeight T₂) :
     (Ncount T₁ T₂ : ℝ) = (1 / Real.pi) * (halfContour (logDeriv completedRiemannZeta) T₁ T₂).im :=
-  Ncount_eq_im_halfContour h1 h12 hg1 hg2
+  Ap3.Ncount_eq_im_halfContour h1 h12 hg1 hg2
 
 /-- Points on the half-contour: ζ and Γℝ facts packaged. -/
 private lemma contour_point_facts {s : ℂ} (hre1 : 1/2 ≤ s.re) (_hre2 : s.re ≤ 2)
@@ -74,12 +75,12 @@ private lemma contour_point_facts {s : ℂ} (hre1 : 1/2 ≤ s.re) (_hre2 : s.re 
 /-- logDeriv ζ is continuous at good points. -/
 private lemma continuousAt_logDeriv_zeta {s : ℂ} (hs1 : s ≠ 1) (hζ : riemannZeta s ≠ 0) :
     ContinuousAt (logDeriv riemannZeta) s := by
-  have ha := Zeta23.WeilEF.analyticAt_riemannZeta hs1
+  have ha := Ap3.analyticAt_riemannZeta hs1
   exact (ha.deriv.continuousAt).div ha.continuousAt hζ
 
 private lemma continuousAt_logDeriv_Gammaℝ {s : ℂ} (hre : 0 < s.re) :
     ContinuousAt (logDeriv Complex.Gammaℝ) s := by
-  have ha := Zeta23.WeilEF.analyticAt_Gammaℝ hre
+  have ha := Ap3.analyticAt_Gammaℝ hre
   exact (ha.deriv.continuousAt).div ha.continuousAt (Gammaℝ_ne_zero_of_re_pos hre)
 
 theorem halfContour_completedZeta_split {T₁ T₂ : ℝ} (h1 : 1 ≤ T₁) (h12 : T₁ < T₂)
@@ -125,7 +126,7 @@ theorem halfContour_completedZeta_split {T₁ T₂ : ℝ} (h1 : 1 ≤ T₁) (h12
     intro σ hσ
     obtain ⟨hs0, hs1, hζ, hre⟩ := hseg T₁ h1 hg1 σ hσ
     simp only
-    rw [Zeta23.WeilEF.logDeriv_completedZeta _ hs1 hζ hre]
+    rw [logDeriv_completedZeta _ hs1 hζ hre]
     ring
   have keyt : Set.EqOn (fun σ : ℝ => logDeriv completedRiemannZeta ((σ:ℂ) + T₂*I))
       (fun σ : ℝ => logDeriv riemannZeta ((σ:ℂ) + T₂*I)
@@ -133,7 +134,7 @@ theorem halfContour_completedZeta_split {T₁ T₂ : ℝ} (h1 : 1 ≤ T₁) (h12
     intro σ hσ
     obtain ⟨hs0, hs1, hζ, hre⟩ := hseg T₂ (by linarith) hg2 σ hσ
     simp only
-    rw [Zeta23.WeilEF.logDeriv_completedZeta _ hs1 hζ hre]
+    rw [logDeriv_completedZeta _ hs1 hζ hre]
     ring
   have keyr : Set.EqOn (fun t : ℝ => logDeriv completedRiemannZeta ((2:ℂ) + t*I))
       (fun t : ℝ => logDeriv riemannZeta ((2:ℂ) + t*I)
@@ -141,7 +142,7 @@ theorem halfContour_completedZeta_split {T₁ T₂ : ℝ} (h1 : 1 ≤ T₁) (h12
     intro t ht
     obtain ⟨hs0, hs1, hζ, hre⟩ := hvert t ht
     simp only
-    rw [Zeta23.WeilEF.logDeriv_completedZeta _ hs1 hζ hre]
+    rw [logDeriv_completedZeta _ hs1 hζ hre]
     ring
   -- integrability of the ζ and Γℝ pieces on each segment
   have hintb : ∀ (T : ℝ), 1 ≤ T → GoodHeight T →
@@ -253,8 +254,8 @@ theorem rvM_main_param {CB TB A₀ Cμ Tμ CM : ℝ}
   -- window arithmetic
   have hadd : (Ncount T₁ T₂ : ℝ)
       = (Ncount T₁ T : ℝ) + (Ncount T (2*T) : ℝ) + (Ncount (2*T) T₂ : ℝ) := by
-    have e1 := Zeta23.Ncount_add (a := T₁) (b := T) (c := T₂) hT₁b (by linarith)
-    have e2 := Zeta23.Ncount_add (a := T) (b := 2*T) (c := T₂) (by linarith) hT₂a
+    have e1 := Ncount_add (a := T₁) (b := T) (c := T₂) hT₁b (by linarith)
+    have e2 := Ncount_add (a := T) (b := 2*T) (c := T₂) (by linarith) hT₂a
     rw [e1, e2]
     push_cast
     ring
@@ -268,7 +269,7 @@ theorem rvM_main_param {CB TB A₀ Cμ Tμ CM : ℝ}
           ring
   have hw1 : (Ncount T₁ T : ℝ) ≤ 2 * A₀ * Real.log T := by
     have hsub : Ncount T₁ T ≤ Ncount T₁ (T₁ + 1) :=
-      Zeta23.Ncount_mono le_rfl (by linarith)
+      Ncount_mono le_rfl (by linarith)
     calc (Ncount T₁ T : ℝ) ≤ (Ncount T₁ (T₁ + 1) : ℝ) := by exact_mod_cast hsub
       _ ≤ A₀ * Real.log (|T₁| + 3) := hA₀ T₁
       _ ≤ A₀ * (2 * Real.log T) := by
@@ -278,7 +279,7 @@ theorem rvM_main_param {CB TB A₀ Cμ Tμ CM : ℝ}
       _ = 2 * A₀ * Real.log T := by ring
   have hw2 : (Ncount (2*T) T₂ : ℝ) ≤ 2 * A₀ * Real.log T := by
     have hsub : Ncount (2*T) T₂ ≤ Ncount (2*T) (2*T + 1) :=
-      Zeta23.Ncount_mono le_rfl hT₂b
+      Ncount_mono le_rfl hT₂b
     calc (Ncount (2*T) T₂ : ℝ) ≤ (Ncount (2*T) (2*T+1) : ℝ) := by exact_mod_cast hsub
       _ ≤ A₀ * Real.log (|2*T| + 3) := hA₀ (2*T)
       _ ≤ A₀ * (2 * Real.log T) := by

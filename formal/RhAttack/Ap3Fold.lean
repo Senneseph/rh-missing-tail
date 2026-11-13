@@ -28,14 +28,12 @@ set_option linter.style.header false
 
 namespace Ap3
 
-open Ap2
+open Ap2 Ap2.Zeta23 Ap2.Zeta23.RvM -- analyticAt_completedRiemannZeta (Ap2CountByIntegral)
 
 
 open Complex MeasureTheory Set intervalIntegral
 
 noncomputable section
-
-namespace Ap3
 
 section ConjSymmetry
 
@@ -77,8 +75,8 @@ lemma logDeriv_completedZeta_conj {s : ℂ} (hre : 0 < s.re) (hs0 : s ≠ 0) (hs
   have hζc : riemannZeta (starRingEnd ℂ s) ≠ 0 := by
     rw [_root_.riemannZeta_conj]
     exact (map_ne_zero _).mpr hζs
-  rw [Zeta23.WeilEF.logDeriv_completedZeta _ hc1 hζc hcre,
-    Zeta23.WeilEF.logDeriv_completedZeta _ hs1 hζs hre, map_add, logDeriv_Gammaℝ_conj,
+  rw [Ap3.logDeriv_completedZeta _ hc1 hζc hcre,
+    Ap3.logDeriv_completedZeta _ hs1 hζs hre, map_add, logDeriv_Gammaℝ_conj,
     logDerivZeta_conj']
 
 /-- The fold symmetry: Λ'/Λ(1 − s̄) = −conj(Λ'/Λ(s)) (Re s > 0, s ≠ 1, ζ(s) ≠ 0). -/
@@ -89,7 +87,7 @@ lemma logDeriv_completedZeta_one_sub_conj {s : ℂ} (hre : 0 < s.re) (hs1 : s �
   have hs0 : s ≠ 0 := fun h => by simp [h] at hre
   have hc0 : starRingEnd ℂ s ≠ 0 := (map_ne_zero _).mpr hs0
   have hc1 : starRingEnd ℂ s ≠ 1 := fun h => hs1 (by rw [← Complex.conj_conj s, h, map_one])
-  rw [Zeta23.WeilEF.logDeriv_completedZeta_one_sub _ hc0 hc1,
+  rw [Ap3.logDeriv_completedZeta_one_sub _ hc0 hc1,
     logDeriv_completedZeta_conj hre hs0 hs1 hζs]
 
 end ConjSymmetry
@@ -174,13 +172,13 @@ lemma vertical_fold {T₁ T₂ : ℝ} (h1 : 1 ≤ T₁) (h12 : T₁ ≤ T₂) :
 ∮_{∂([−1,2]×[T₁,T₂])} Λ'/Λ = 2i · Im(halfContour (Λ'/Λ) T₁ T₂). -/
 theorem rectangleIntegral_logDeriv_completedZeta_eq_halfContour {T₁ T₂ : ℝ} (h1 : 1 ≤ T₁)
     (h12 : T₁ < T₂) (hg1 : GoodHeight T₁) (hg2 : GoodHeight T₂) :
-    RectangleIntegral (logDeriv completedRiemannZeta) (-1 + T₁ * I) (2 + T₂ * I)
+    Ap1.RectangleIntegral (logDeriv completedRiemannZeta) (-1 + T₁ * I) (2 + T₂ * I)
       = 2 * I * ((halfContour (logDeriv completedRiemannZeta) T₁ T₂).im : ℂ) := by
   have hre1 : (-1 + T₁ * I).re = -1 := by simp
   have him1 : (-1 + T₁ * I).im = T₁ := by simp
   have hre2 : (2 + T₂ * I : ℂ).re = 2 := by simp
   have him2 : (2 + T₂ * I : ℂ).im = T₂ := by simp
-  simp only [RectangleIntegral, HIntegral, VIntegral, hre1, him1, hre2, him2, smul_eq_mul,
+  simp only [Ap1.RectangleIntegral, Ap1.HIntegral, Ap1.VIntegral, hre1, him1, hre2, him2, smul_eq_mul,
     Complex.ofReal_neg, Complex.ofReal_one, Complex.ofReal_ofNat]
   rw [horizontal_fold h1 hg1, horizontal_fold (by linarith) hg2, vertical_fold h1 h12.le]
   simp only [halfContour, Complex.add_im, Complex.sub_im, Complex.mul_I_im]
@@ -200,7 +198,7 @@ theorem Ncount_eq_im_halfContour {T₁ T₂ : ℝ} (h1 : 1 ≤ T₁) (h12 : T₁
     (Ncount T₁ T₂ : ℝ)
       = (1 / Real.pi) * (halfContour (logDeriv completedRiemannZeta) T₁ T₂).im := by
   have h := rectangleIntegral'_logDeriv_completedZeta_eq_Ncount (by linarith) h12.le hg1 hg2
-  change (1 / (2 * Real.pi * I)) • RectangleIntegral _ _ _ = _ at h
+  change (1 / (2 * Real.pi * I)) • Ap1.RectangleIntegral _ _ _ = _ at h
   rw [rectangleIntegral_logDeriv_completedZeta_eq_halfContour h1 h12 hg1 hg2, smul_eq_mul] at h
   have h' : ((Ncount T₁ T₂ : ℝ) : ℂ)
       = (((1 / Real.pi) * (halfContour (logDeriv completedRiemannZeta) T₁ T₂).im : ℝ) : ℂ) := by
@@ -209,7 +207,6 @@ theorem Ncount_eq_im_halfContour {T₁ T₂ : ℝ} (h1 : 1 ≤ T₁) (h12 : T₁
     field_simp
   exact_mod_cast h'
 
-end Ap3
-
 end
+
 end Ap3

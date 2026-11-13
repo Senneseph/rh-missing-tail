@@ -29,7 +29,8 @@ set_option linter.style.header false
 
 namespace Ap3
 
-open Ap2
+open Ap2 Ap2.Zeta23 -- IsNontrivialZero, zeroMult (Ap2Statement)
+open Ap3.RvM -- analyticOnNhd_riemannZeta (Ap3Growth)
 
 
 open Complex Set MeasureTheory Real intervalIntegral
@@ -333,7 +334,7 @@ theorem backlund_horizontal_of_count
 theorem backlund_horizontal : ∃ C T₀ : ℝ, ∀ T : ℝ, T₀ ≤ T →
     (∀ ρ, IsNontrivialZero ρ → ρ.im ≠ T) →
     |(∫ σ in (1 / 2 : ℝ)..2, logDeriv riemannZeta (σ + T * I)).im| ≤ C * Real.log T :=
-  backlund_horizontal_of_count reZeroSet_card_le
+  backlund_horizontal_of_count Ap3.Zeta23.RvM.reZeroSet_card_le
 
 /-- **Backlund's bound, explicit**: for T ≥ 4 a zero-free height,
 |Im ∫_{1/2}^{2} ζ'/ζ(σ+iT)dσ| ≤ 2π·(C_J + 1)·log T with C_J = (1/log(0.9/0.8))(|log 40| + 2) ≈ 48.3
@@ -343,7 +344,7 @@ theorem backlund_horizontal_at : ∀ T : ℝ, max 4 3 ≤ T →
     |(∫ σ in (1 / 2 : ℝ)..2, logDeriv riemannZeta (σ + T * I)).im|
       ≤ 2 * Real.pi * ((1 / Real.log ((0.9 : ℝ) / 0.8)
           * (|Real.log (6 * (20 / 3 : ℝ))| + 2 * max (1 : ℝ) 0)) + 1) * Real.log T :=
-  backlund_horizontal_of_count_at reZeroSet_card_le_at
+  backlund_horizontal_of_count_at Ap3.Zeta23.RvM.reZeroSet_card_le_at
 
 /-! ## The vertical side σ = 2 -/
 

@@ -20,6 +20,7 @@ Changes in this port (mechanical, per project convention):
     need no paper hypotheses).
 -/
 import Mathlib
+import Zeta23.GammaFacts.Mu -- vendor MuFields (mu_eq etc.)
 import RhAttack.Ap3GammaMu
 set_option linter.style.header false
 
@@ -622,7 +623,7 @@ theorem re_digamma_stirling' {a : ℝ} (ha0 : 0 < a) (ha1 : a ≤ 1) {t : ℝ} (
 /-- **H-Γ [eq:mufacts], Stirling clause** in the exact shape of `Ap3.stirling`:
 `|μ(τ) − (1/2π) log(|τ|/2π)| ≤ C/τ²` for `|τ| ≥ 1`, with `C = 20/(2π) ≤ 4`. -/
 theorem mu_stirling : ∃ C : ℝ, ∀ τ : ℝ, 1 ≤ |τ| →
-    |Ap2.mu τ - (1 / (2 * Real.pi)) * Real.log (|τ| / (2 * Real.pi))| ≤ C / τ ^ 2 := by
+    |Ap2.Zeta23.mu τ - (1 / (2 * Real.pi)) * Real.log (|τ| / (2 * Real.pi))| ≤ C / τ ^ 2 := by
   refine ⟨20 / (2 * Real.pi), fun τ hτ => ?_⟩
   have hπ := Real.pi_pos
   have ht : 1 / 2 ≤ |τ / 2| := by rw [abs_div, abs_two]; linarith
@@ -636,9 +637,9 @@ theorem mu_stirling : ∃ C : ℝ, ∀ τ : ℝ, 1 ≤ |τ| →
     rw [abs_div, abs_two, Real.log_div hτ0.ne' (by positivity), Real.log_div hτ0.ne' two_ne_zero,
       Real.log_mul two_ne_zero hπ.ne']
     ring
-  have key : Ap2.mu τ - (1 / (2 * Real.pi)) * Real.log (|τ| / (2 * Real.pi))
+  have key : Ap2.Zeta23.mu τ - (1 / (2 * Real.pi)) * Real.log (|τ| / (2 * Real.pi))
       = (1 / (2 * Real.pi)) * D := by
-    rw [Zeta23.MuFields.mu_eq τ, hlogs, hD]
+    rw [MuFields.mu_eq τ, hlogs, hD]
     ring
   rw [key, abs_mul, abs_of_pos (by positivity : (0:ℝ) < 1 / (2 * Real.pi))]
   calc 1 / (2 * Real.pi) * |D| ≤ 1 / (2 * Real.pi) * (5 / (τ / 2) ^ 2) := by gcongr

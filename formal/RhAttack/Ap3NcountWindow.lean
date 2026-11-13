@@ -26,7 +26,7 @@ set_option linter.style.header false
 
 namespace Ap3
 
-open Ap2
+open Ap2 Ap2.Zeta23 -- zerosIn, zeroMult, Ncount, ...
 
 
 noncomputable section
@@ -46,6 +46,10 @@ theorem zerosIn_union {a b c : ℝ} (h1 : a ≤ b) (h2 : b ≤ c) :
   · rintro (⟨hρ, ha, hb⟩ | ⟨hρ, ha, hb⟩)
     · exact ⟨hρ, ha, le_trans hb h2⟩
     · exact ⟨hρ, lt_of_le_of_lt h1 ha, hb⟩
+
+lemma zerosIn_finite (T₁ T₂ : ℝ) : (zerosIn T₁ T₂).Finite := by
+  rw [show zerosIn T₁ T₂ = (zetaZeros zetaSeam).window T₁ T₂ from (zetaZeros_window zetaSeam T₁ T₂).symm]
+  exact (zetaZeros zetaSeam).finite_window T₁ T₂
 
 /-- window additivity: N(a,c] = N(a,b] + N(b,c]. -/
 theorem Ncount_add {a b c : ℝ} (h1 : a ≤ b) (h2 : b ≤ c) :

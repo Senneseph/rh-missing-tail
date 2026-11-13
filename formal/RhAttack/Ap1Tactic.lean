@@ -47,6 +47,16 @@ Lastly, calls a normalization tactic on this target.
 
 -/
 
+
+/-! NOTE 2026-11-13 (tree repair): this file's tactic block is a verbatim copy of
+the vendor module `Zeta23.FromPNTPlus.Tactic.AdditiveCombination` (same Mathlib
+namespace). MODULES MUST NOT import both this (via RhAttack.Ap1Tactic / Ap1Residue)
+and a vendor module that transitively imports the real one (e.g.
+Zeta23.FromPNTPlus.ZetaBounds -> ResidueCalcOnRectangles) -- the environment then
+contains two `elabAdditiveCombination` declarations and compilation fails. Such
+vendored theorems must be ported by hand instead (see RhAttack.Ap3ZetaBounds).
+-/
+
 namespace Mathlib.Tactic.LinearCombinationPrime
 open Lean
 open Elab Meta Term

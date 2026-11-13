@@ -21,14 +21,99 @@ Changes in this port (mechanical, per project convention):
 -/
 import Mathlib
 import RhAttack.Ap3GammaStirling
+import Zeta23.Analytic.Stirling -- vendor Stirling/digamma helpers (differentiableAt_digamma, hasSum_trigamma)
 set_option linter.style.header false
 
 namespace Ap3
 
 open Ap2
 
+open scoped ContDiff
 
 noncomputable section
+
+/-!
+  ## Ported from vendor `Zeta23/GammaFacts.lean` (digamma conj-compatibility +
+  the [eq:mufacts] even/smooth facts), now for `Ap2.Zeta23.mu`.
+  The AP port of `RhAttack.Ap3GammaComplete` needs `mu_even` and `mu_smooth`
+  as bare `Ap3` names to discharge the `GammaFacts` record (Ap3Hypotheses:130).
+-/ 
+
+private lemma gamma_ne_neg_nat {z : ℂ} (hz : 0 < z.re) : ∀ m : ℕ, z ≠ -m := by
+  intro m h
+  rw [h] at hz
+  simp only [Complex.neg_re, Complex.natCast_re] at hz
+  exact (not_lt.mpr (neg_nonpos.mpr (Nat.cast_nonneg m))) hz
+
+private lemma analyticAt_digamma {z : ℂ} (hz : 0 < z.re) :
+    AnalyticAt ℂ Complex.digamma z := by
+  have hU : IsOpen {w : ℂ | 0 < w.re} := isOpen_lt continuous_const Complex.continuous_re
+  have hGamD : DifferentiableOn ℂ Complex.Gamma {w : ℂ | 0 < w.re} := fun w hw =>
+    (Complex.differentiableAt_Gamma w (gamma_ne_neg_nat hw)).differentiableWithinAt
+  have hGamA := hGamD.analyticOnNhd hU
+  have h1 : AnalyticAt ℂ (deriv Complex.Gamma) z := (hGamA z hz).deriv
+  have h2 : AnalyticAt ℂ Complex.Gamma z := hGamA z hz
+  have h3 : Complex.Gamma z ≠ 0 := Complex.Gamma_ne_zero (gamma_ne_neg_nat hz)
+  have h4 := h1.div h2 h3
+  exact h4.congr (by
+    filter_upwards with w
+    rw [Complex.digamma_def, logDeriv_apply]
+    rfl)
+
+/-- Γ'/Γ commutes with complex conjugation (from Γ(z̄) = Γ(z)̄). -/
+theorem digamma_conj (z : ℂ) :
+    Complex.digamma ((starRingEnd ℂ) z) = (starRingEnd ℂ) (Complex.digamma z) := by
+  have hG : (starRingEnd ℂ) ∘ Complex.Gamma ∘ (starRingEnd ℂ) = Complex.Gamma := by
+    funext w
+    simp only [Function.comp_apply]
+    rw [Complex.Gamma_conj]
+    exact Complex.conj_conj _
+  have hd : deriv Complex.Gamma ((starRingEnd ℂ) z)
+      = (starRingEnd ℂ) (deriv Complex.Gamma z) := by
+    conv_lhs => rw [← hG, deriv_conj_conj]
+    simp only [Function.comp_apply, Complex.conj_conj]
+  simp only [Complex.digamma_def, logDeriv_apply]
+  rw [hd, Complex.Gamma_conj, ← map_div₀]
+
+/-- [eq:mufacts] "μ is even": μ(−τ) = μ(τ). -/
+theorem mu_even (τ : ℝ) : Ap2.Zeta23.mu (-τ) = Ap2.Zeta23.mu τ := by
+  unfold Ap2.Zeta23.mu
+  have harg : (1 / 4 + Complex.I * ((-τ : ℝ) : ℂ) / 2 : ℂ)
+      = (starRingEnd ℂ) (1 / 4 + Complex.I * (τ : ℂ) / 2) := by
+    apply Complex.ext <;> simp [map_ofNat]
+  rw [show ((-τ : ℝ) : ℂ) = -(τ : ℂ) by push_cast; ring] at harg ⊢
+  rw [harg, digamma_conj]
+  simp
+
+-- The set_option below is Mathlib's own workaround for instance-path defeq on
+-- IsScalarTower ℝ ℂ ℂ (cf. Analysis/CStarAlgebra/ContinuousFunctionalCalculus/
+-- RealImaginaryPart.lean, "fails to find IsScalarTower ℝ ℂ A").
+set_option backward.isDefEq.respectTransparency false in
+/-- [eq:mufacts] "μ is smooth": μ ∈ C^∞(ℝ). -/
+theorem mu_smooth : ContDiff ℝ ∞ Ap2.Zeta23.mu := by
+  have hc : ContDiff ℝ ∞ (fun τ : ℝ => (1 / 4 + Complex.I * (τ : ℂ) / 2 : ℂ)) := by
+    have h1 : ContDiff ℝ ∞ (fun τ : ℝ => (τ : ℂ)) := Complex.ofRealCLM.contDiff
+    have h2 : ContDiff ℝ ∞ (fun τ : ℝ => Complex.I * (τ : ℂ)) := contDiff_const.mul h1
+    have h3 : ContDiff ℝ ∞ (fun τ : ℝ => Complex.I * (τ : ℂ) / 2) := by
+      simpa [div_eq_mul_inv] using h2.mul contDiff_const
+    exact contDiff_const.add h3
+  refine contDiff_iff_contDiffAt.mpr fun τ => ?_
+  have hz : (0 : ℝ) < (1 / 4 + Complex.I * (τ : ℂ) / 2 : ℂ).re := by
+    simp
+  have h4' : AnalyticAt ℝ Complex.digamma (1 / 4 + Complex.I * (τ : ℂ) / 2) :=
+    AnalyticAt.restrictScalars (analyticAt_digamma hz)
+  have h4 : ContDiffAt ℝ ∞ Complex.digamma (1 / 4 + Complex.I * (τ : ℂ) / 2) :=
+    h4'.contDiffAt
+  have h5 : ContDiffAt ℝ ∞
+      (fun τ : ℝ => Complex.digamma (1 / 4 + Complex.I * (τ : ℂ) / 2)) τ :=
+    h4.comp τ hc.contDiffAt
+  have h6 : ContDiffAt ℝ ∞
+      (fun τ : ℝ => (Complex.digamma (1 / 4 + Complex.I * (τ : ℂ) / 2)).re) τ :=
+    (Complex.reCLM.contDiff.contDiffAt).comp τ h5
+  have h7 : ContDiffAt ℝ ∞ Ap2.Zeta23.mu τ := by
+    have := (contDiffAt_const (c := (1 / (2 * Real.pi) : ℝ))).mul h6
+    exact (this.sub contDiffAt_const)
+  exact h7
 
 namespace MuFields
 
@@ -139,18 +224,18 @@ theorem re_digamma_mono (ha0 : 0 < a) (ha1 : a < 1) :
     (summable_re_terms ha0 ha1 t₂)
   linarith
 
-/-- Bridge to Ap2.mu: μ(τ) in terms of the parametrized line at a = 1/4, t = τ/2. -/
+/-- Bridge to Ap2.Zeta23.mu: μ(τ) in terms of the parametrized line at a = 1/4, t = τ/2. -/
 lemma mu_eq (τ : ℝ) :
-    Ap2.mu τ = (1 / (2 * Real.pi))
+    Ap2.Zeta23.mu τ = (1 / (2 * Real.pi))
         * (Complex.digamma ((((1 : ℝ) / 4 : ℝ) : ℂ) + Complex.I * ((τ / 2 : ℝ) : ℂ))).re
       - Real.log Real.pi / (2 * Real.pi) := by
-  unfold Ap2.mu
+  unfold Ap2.Zeta23.mu
   congr 3
   push_cast
   ring
 
 /-- [eq:mufacts] "increasing in |τ|": μ is monotone on τ ≥ 0. -/
-theorem mu_monotoneOn : MonotoneOn Ap2.mu (Set.Ici (0 : ℝ)) := by
+theorem mu_monotoneOn : MonotoneOn Ap2.Zeta23.mu (Set.Ici (0 : ℝ)) := by
   intro t₁ h₁ t₂ h₂ h12
   rw [mu_eq, mu_eq]
   have hmono := re_digamma_mono (a := 1 / 4) (by norm_num) (by norm_num)
@@ -163,16 +248,16 @@ theorem mu_monotoneOn : MonotoneOn Ap2.mu (Set.Ici (0 : ℝ)) := by
   linarith
 
 /-- [eq:mufacts] "μ ≥ μ(0)". -/
-theorem mu_zero_le (τ : ℝ) : Ap2.mu 0 ≤ Ap2.mu τ := by
-  have heven := Ap2.mu_even
+theorem mu_zero_le (τ : ℝ) : Ap2.Zeta23.mu 0 ≤ Ap2.Zeta23.mu τ := by
+  have heven := mu_even
   rcases le_total 0 τ with h | h
   · exact mu_monotoneOn (Set.mem_Ici.mpr le_rfl) (Set.mem_Ici.mpr h) h
-  · have h1 : Ap2.mu τ = Ap2.mu (-τ) := (heven τ).symm
+  · have h1 : Ap2.Zeta23.mu τ = Ap2.Zeta23.mu (-τ) := (heven τ).symm
     rw [h1]
     exact mu_monotoneOn (Set.mem_Ici.mpr le_rfl) (Set.mem_Ici.mpr (by linarith)) (by linarith)
 
 /-- [eq:mufacts] "μ(0) > −1". -/
-theorem neg_one_lt_mu_zero : (-1 : ℝ) < Ap2.mu 0 := by
+theorem neg_one_lt_mu_zero : (-1 : ℝ) < Ap2.Zeta23.mu 0 := by
   rw [mu_eq]
   rw [show ((0 : ℝ) / 2 : ℝ) = (0 : ℝ) by norm_num]
   have hre := re_digamma_vertical (a := 1 / 4) (by norm_num) (by norm_num) 0
@@ -369,7 +454,7 @@ lemma summable_quarter_line (t : ℝ) :
 
 set_option backward.isDefEq.respectTransparency false in
 /-- [eq:mufacts] "μ′(τ) ≪ |τ|⁻¹" (the GammaFacts.deriv_bound field shape). -/
-theorem mu_deriv_bound : ∃ C : ℝ, ∀ τ : ℝ, 1 ≤ |τ| → |deriv Ap2.mu τ| ≤ C / |τ| := by
+theorem mu_deriv_bound : ∃ C : ℝ, ∀ τ : ℝ, 1 ≤ |τ| → |deriv Ap2.Zeta23.mu τ| ≤ C / |τ| := by
   refine ⟨24 / Real.pi, fun τ hτ => ?_⟩
   have hτ0 : (0 : ℝ) < |τ| := by linarith
   set zA : ℂ := (1 / 4 : ℂ) + (Complex.I / 2) * (τ : ℂ) with hzA
@@ -397,14 +482,14 @@ theorem mu_deriv_bound : ∃ C : ℝ, ∀ τ : ℝ, 1 ≤ |τ| → |deriv Ap2.mu
       (fun x : ℝ => (Complex.digamma ((1 / 4 : ℂ) + (Complex.I / 2) * (x : ℂ))).re)
       (((Complex.I / 2) • deriv Complex.digamma zA).re) τ :=
     (Complex.reCLM.hasFDerivAt.comp_hasDerivAt τ hcompd)
-  have hmuD : HasDerivAt Ap2.mu
+  have hmuD : HasDerivAt Ap2.Zeta23.mu
       (1 / (2 * Real.pi) * (((Complex.I / 2) • deriv Complex.digamma zA).re)) τ := by
     have h4 := (hre.const_mul (1 / (2 * Real.pi))).sub_const (Real.log Real.pi / (2 * Real.pi))
-    have h5 : Ap2.mu = fun x : ℝ =>
+    have h5 : Ap2.Zeta23.mu = fun x : ℝ =>
         1 / (2 * Real.pi) * (Complex.digamma ((1 / 4 : ℂ) + (Complex.I / 2) * (x : ℂ))).re
           - Real.log Real.pi / (2 * Real.pi) := by
       funext x
-      unfold Ap2.mu
+      unfold Ap2.Zeta23.mu
       rw [show ((1 / 4 : ℂ) + Complex.I * (x : ℂ) / 2)
           = (1 / 4 : ℂ) + (Complex.I / 2) * (x : ℂ) from by ring]
     rw [h5]

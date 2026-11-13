@@ -169,7 +169,6 @@ theorem RectangleBorderIntegrable.add {f g : ℂ → E}
   rw [h₁, h₂, h₃, h₄]
   module
 
-omit [NormedSpace ℂ E] in
 theorem ContinuousOn.rectangleBorder_integrable (hf : ContinuousOn f (RectangleBorder z w)) :
     RectangleBorderIntegrable f z w :=
   ⟨(hf.comp (by fun_prop) (mapsTo_rectangleBorder_left_im z w)).intervalIntegrable,
@@ -177,12 +176,10 @@ theorem ContinuousOn.rectangleBorder_integrable (hf : ContinuousOn f (RectangleB
     (hf.comp (by fun_prop) (mapsTo_rectangleBorder_right_re z w)).intervalIntegrable,
     (hf.comp (by fun_prop) (mapsTo_rectangleBorder_left_re z w)).intervalIntegrable⟩
 
-omit [NormedSpace ℂ E] in
 theorem ContinuousOn.rectangleBorderIntegrable (hf : ContinuousOn f (Rectangle z w)) :
     RectangleBorderIntegrable f z w :=
   ContinuousOn.rectangleBorder_integrable (hf.mono (rectangleBorder_subset_rectangle z w))
 
-omit [NormedSpace ℂ E] in
 theorem ContinuousOn.rectangleBorderNoPIntegrable
     (hf : ContinuousOn f (Rectangle z w \ {p})) (pNotOnBorder : p ∉ RectangleBorder z w) :
     RectangleBorderIntegrable f z w := by
@@ -191,11 +188,12 @@ theorem ContinuousOn.rectangleBorderNoPIntegrable
 
 theorem HolomorphicOn.rectangleBorderIntegrable'
     (hf : HolomorphicOn f (Rectangle z w \ {p})) (hp : Rectangle z w ∈ nhds p) :
-    RectangleBorderIntegrable f z w :=
-  hf.continuousOn.rectangleBorderNoPIntegrable (not_mem_rectangleBorder_of_rectangle_mem_nhds hp)
+    RectangleBorderIntegrable f z w := by
+  exact ContinuousOn.rectangleBorderNoPIntegrable (DifferentiableOn.continuousOn hf) (not_mem_rectangleBorder_of_rectangle_mem_nhds hp)
 
 theorem HolomorphicOn.rectangleBorderIntegrable (hf : HolomorphicOn f (Rectangle z w)) :
-    RectangleBorderIntegrable f z w := hf.continuousOn.rectangleBorderIntegrable
+    RectangleBorderIntegrable f z w := by
+  exact ContinuousOn.rectangleBorderIntegrable (DifferentiableOn.continuousOn hf)
 
 /-- Given `x₀ a x₁ : ℝ`, and `y₀ y₁ : ℝ` and a function
 `f : ℂ → ℂ` so that both `(t : ℝ) ↦ f(t + y₀ * I)` and
@@ -437,7 +435,7 @@ lemma integral_self_div_sq_add_sq (hy : y ≠ 0) :
   exact integral_deriv_eq_sub (fun _ _ => e2.differentiableAt) (e4.intervalIntegrable _ _)
 
 lemma integral_const_div_sq_add_sq (hy : y ≠ 0) :
-    ∫ x in x₁..x₂, y / (x ^ 2 + y ^ 2) = arctan (x₂ / y) - arctan (x₁ / y) := by
+    ∫ x in x₁..x₂, y / (x ^ 2 + y ^ 2) = Real.arctan (x₂ / y) - Real.arctan (x₁ / y) := by
   nth_rewrite 1 [← div_mul_cancel₀ x₁ hy, ← div_mul_cancel₀ x₂ hy]
   simp_rw [← mul_integral_comp_mul_right, ← intervalIntegral.integral_const_mul,
     ← integral_one_div_one_add_sq]
@@ -449,7 +447,7 @@ set_option backward.isDefEq.respectTransparency false in
 lemma integral_const_div_self_add_im (hy : y ≠ 0) :
     ∫ x : ℝ in x₁..x₂, A / (x + y * I) =
     A * (Real.log (x₂ ^ 2 + y ^ 2) / 2 - Real.log (x₁ ^ 2 + y ^ 2) / 2) -
-    A * I * (arctan (x₂ / y) - arctan (x₁ / y)) := by
+    A * I * (Real.arctan (x₂ / y) - Real.arctan (x₁ / y)) := by
   have e1 {x : ℝ} : A / (x + y * I) = A * x / (x ^ 2 + y ^ 2) - A * I * y / (x ^ 2 + y ^ 2) := by
     ring_nf
     simp_rw [inv_re_add_im]
@@ -472,7 +470,7 @@ lemma integral_const_div_self_add_im (hy : y ≠ 0) :
 lemma integral_const_div_re_add_self (hx : x ≠ 0) :
     ∫ y : ℝ in y₁..y₂, A / (x + y * I) =
     A / I * (Real.log (y₂ ^ 2 + (-x) ^ 2) / 2 - Real.log (y₁ ^ 2 + (-x) ^ 2) / 2) -
-    A / I * I * (arctan (y₂ / -x) - arctan (y₁ / -x)) := by
+    A / I * I * (Real.arctan (y₂ / -x) - Real.arctan (y₁ / -x)) := by
   have l1 {y : ℝ} : A / (x + y * I) = A / I / (y + ↑(-x) * I) := by
     have e1 : x + y * I ≠ 0 := by
       contrapose! hx
@@ -502,7 +500,7 @@ lemma ResidueTheoremAtOrigin' {z w c : ℂ}
   have r4 : w.im * w.re⁻¹ = (w.re * w.im⁻¹)⁻¹ := by group
   have r6 := arctan_inv_of_pos <| mul_pos h3 <| inv_pos.mpr h4
   ring_nf
-  simp only [one_div, inv_I, mul_neg, neg_mul, I_sq, neg_neg, arctan_neg, ofReal_neg,
+  simp only [one_div, inv_I, mul_neg, neg_mul, I_sq, neg_neg, Real.arctan_neg, ofReal_neg,
     sub_neg_eq_add]
   rw [l1, l3, l4, l6, r1, r3, r4, r6]
   ring_nf

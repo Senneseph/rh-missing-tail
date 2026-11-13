@@ -4,7 +4,8 @@ import RhAttack.B5
 open Real
 open Complex
 
-def wFloorC (t d : ℝ) : ℝ :=
+
+noncomputable def wFloorC (t d : ℝ) : ℝ :=
     (1 / 2 + d) / ((1 / 2 + d) ^ 2 + t ^ 2) + (1 / 2 - d) / ((1 / 2 - d) ^ 2 + t ^ 2)
 
 example (t d : ℝ) :
@@ -20,3 +21,6 @@ example (t d : ℝ) :
            fac (((1 / 2 : ℝ) - d) - (t : ℂ) * I) (((1 / 2 : ℝ) : ℂ) + (t : ℂ) * I)‖ =
       d ^ 2 * (d ^ 2 + 4 * t ^ 2) * Real.exp (wFloorC t d) /
         (((1 / 2 + d) ^ 2 + t ^ 2) * ((1 / 2 - d) ^ 2 + t ^ 2))
+
+  -- scratch probe: remainder deferred to the W-group line
+  sorry
