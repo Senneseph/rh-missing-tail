@@ -1,0 +1,29 @@
+{
+  "id": 0398,
+  "ts": "2026-11-13T01:00:00Z",
+  "kind": "discovery",
+  "title": "CE87 / W87: the terminal face is re-anchored at the EIGHTY-SEVENTH certified window - the 400 000 UNIT MILESTONE CARRIES with margin 11 212 and the 1 700 000 CENSUS MARK carries margin 59 983; W87 is a SNAPPED (19 999) CLEAN WINDOW (zero Rosser failures - first clean window since W80) - NO RH CLAIM",
+  "status": "gated",
+  "lane": "M5",
+  "unit": 112,
+  "facts": [
+    "Window 87 (g_a87 < Im s <= g_b87): SNAPPED, b requested = 12 363 155 197 114 (= a87 + 20 000), b actual = 12 363 155 197 113 (width 19 999; a = 12 363 155 177 114 = b86). All 19 999 zeros simple and on the line.",
+    "CLEAN WINDOW - ZERO Rosser failures, no rescue: the first CLEAN window since the W80 clean record (first since W74); the W81-W86 stretch is all rescue. roser_failures_inside = 0; end Rosser runs 45 / 48 (both >= K = 12); cross_check_failures = 0 (33 880 records); undetermined Gram signs = 0; max phase contribution 4.08e-21 (radius 1.67e-24).",
+    "Endpoints (exact dyadic tuples, authoritative): g_b87 = [232127354900397920387789697032352194265, -86, 16777217, -110] -> g_b87 ball 232127354900397920387789697032352194265 x 2^-86 with radius 16777217 x 2^-110; the CONSERVATIVE center-minus-radius boundary is the EXACT dyadic 3 000 175 744 012.89378413307058175668781603069745223404407785314469662733017623427989560569439930759472190402448177337646484375 (denominator 2^110 - base-10 expansion terminates exactly) + or - 1.29e-26; g_a87 = CE86's recorded g_b86 bit-identical ([232127354538865155693824816296248215211, -86, 16777217, -110]; seam audit PERFORMED BEFORE writing the module, per the 0348 process rule). Normalization: -86 for the fourth consecutive endpoint (g_b84, g_b85, g_b86, g_b87). All endpoint arithmetic from integer tuples / Fractions only (the float64 quantization lesson of W86 [0397] continues to hold: the exact frac is 0.8937841330705..., not the float-grid reading).",
+    "tCE87 = 3 000 175 744 012 = floor(g_b87) (frac 0.89378413307058175668... exact, robust at the 1.29e-26 radius); gB87Lo = 3 000 175 744 012.89 = 300017574401289/100, exact margin 0.00378413307058175668781603069745223404407785314469662733017623427989560569439930759472190402448177337646484375 (110-digit terminator) - THIN (eighth sub-cent case: W79 1.76e-4, W81 4.03e-4, W82 1.87e-3, W83 6.98e-3, W84 2.09e-3, W85 7.2e-3, W86 2.3e-3, W87 3.8e-3; radius 1.29e-26, eight orders smaller; no pattern claimed); no CASING (window 38 / CE38 remains the only CASING case). floor(100*lo) verified by integer arithmetic.",
+    "MILESTONES (no new crossing): tCE87 - tPT2 = 411 212 - the 400 000 UNIT MILESTONE (crossed W85 [0396], margin 1 867) CARRIES margin 11 212; 425 000 still 13 788 ahead (~3 windows at the 4 672-4 673 pace - predicted around window 90 absent snaps; compute, do not pre-announce). CENSUS: 1 739 984 + 19 999 = 1 759 983 over (g_a1, g_b87] - the 1 700 000 CERTIFIED-ZERO MARK (crossed W85 [0396]) CARRIES margin 59 983; 1 800 000 still 40 017 ahead (~8.5 windows - around window 95-96 absent snaps). 1 600 000 carries 159 983; 1 500 000 carries 259 983.",
+    "Increment: tCE87 - tCE86 = 4 672 - the FIFTH recorded 4 672 increment of the series (w45 -> w46, w53 -> w54, w65 -> w66, w77 -> w78 [SNAP], w86 -> w87 [SNAP, this one]); every 4 672 increment recorded so far has gone with a snap (no pattern claimed beyond the recorded data). Cumulative tally through window 87: 87 windows - 37 clean, 50 rescue; 74 total internal Rosser failures, ALL RECORDED.",
+    "Pipeline run (twenty-second in the overlap pipeline): seed cache (window 86's cache - resumed_from_cache = 705 558, logged) + 32 workers, 33 880 evals in 2 505.4 s. M = 60, C_R = 1, N_range = [691 008, 691 008], prec = 128. Verifier: CERTIFIED true, turing_ok true, points 33 880, sign_changes_inside = 19 999, roser_failures_inside = 0, end runs 45/48, K_conservative = 12.",
+    "Formal module formal/RhAttack/CE87.lean (namespace CE87): gB87Lo, tCE87, tCE87_lt_gB87Lo, tCE86_lt_tCE87, gB86Lo_lt_tCE87, faceShrinkCE87 (= 4672), frontierGapAboveH0 (= 411212), frontierPast{175,200,225,250,275,300,325}k carries (margins 236 212 .. 86 212), frontierPast350k (WINDOW-74 frontier, THIRTEEN face shrinks: eleven 4 673 + two 4 672 SNAP [w77, w86] = 60 747 -> 350 465), frontierPast375k (carry margin 36 212), frontierPast400k (CARRIED margin 11 212), gB86Lo_lt_gB87Lo, ce86WinClauseFull (W86 full re-citation), ce87WinClause (W87 terminal slice), bandOfWindows87 (h1..h88 - the hseam87 nest level added), allOnLineUpToCE87 (88 clauses), terminalFaceCE87, faceCE86_implies_faceCE87, terminalFaceCE87_iff_faceCE86, rh_split_at_CE87, rh_reanchored_CE87, rh_of_terminalFaceCE87, terminalFaceCE87_of_thetaInf. Build: RhAttack.CE87 green first try; all RhAttack modules green (9092 jobs); full default tree green (17454 jobs).",
+    "The terminal face is the SAME object, re-anchored: terminalFaceCE87 q <-> CE86.terminalFaceCE86 q (proved). The band now covers (g_a1, tCE87]; everything above tCE87 = 3 000 175 744 012 remains open. NO RH CLAIM: window 87 certified by the pipeline's verifier + seam audit + in-tree arithmetic; the open face is strictly smaller in height but identical in content.",
+    "Window 88 launched from the audited W87 seam (a88 = b87 = 12 363 155 197 113, b requested = 12 363 155 217 113); W87's run overlapped this module's closeout - per-unit critical path = max(run, formalization) holds again."
+  ],
+  "provenance": {
+    "run_dir": "/home/jsmille/Projects/rh-missing-tail/tmp/ce2/ce1_window_H0_v1",
+    "certificate": "window87_b87.json",
+    "verify_log": "verify87.log",
+    "pipeline": "Murphy Apache-2.0 deposit (re-run, not a from-scratch independent certification)",
+    "formal_module": "formal/RhAttack/CE87.lean"
+  },
+  "gated_by": "formal/RhAttack/CE87.lean (machine-checked)"
+}
