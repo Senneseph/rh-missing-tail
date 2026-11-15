@@ -1,0 +1,22 @@
+{
+  "id": 0411,
+  "ts": "2026-11-15T07:35:00Z",
+  "kind": "discovery",
+  "title": "FrontierCE95: the endpoint pushed to the CE95 census frontier - H = tCE95 = 3 000 175 781 396, margin 448 596 over Platt-Trudgian, census 1 919 982 (1 900 000 mark crossed at CE95); the re-anchored terminal face terminalFaceCE95 alone discharges the endpoint hWin residual leg at the frontier (the two RH decompositions agree at the frontier); nothing off-line at all above tCE95 at every offset d0 > 0 - NO RH CLAIM",
+  "status": "gated",
+  "lane": "M5",
+  "unit": 125,
+  "facts": [
+    "ROLE: RHEnd.rh_program78_frontierH is the arbitrary-frontier endpoint form: given a frontier H with the allOnLineUpTo census at H (plus the zero-set premises, the named on-line sliver record below 707/50, and [Z78]), RH follows from the residual legs hs1 (zero-side witness: Qside >= devProg on every off-pair above H), hs3 (S3 definition-side wire: Qside <= BwireP + MrP) and the hWin residual face (zero-exclusion of (H, inf) x (0, 1/200)). The strongest in-tree instantiation before this module was H = tCE94 (FrontierCE94, 0407: margin 443 923, census 1 899 982); the CE95 re-anchor (0410) pushed the certified census frontier past tCE94, so this module performs the strict push to the current frontier.",
+    "THEOREMS (formal/RhAttack/FrontierCE95.lean, namespace FrontierCE95, all LEAN-PROVEN): (1) ce95AbovePT2: WinC.tPT2 < (CE95.tCE95 : R) (norm_num). (2) ce95PT2Margin: (CE95.tCE95 : R) - WinC.tPT2 = 448 596 (norm_num) - the 445 000-unit round-mark crossing (+ the 1 900 000 CERTIFIED-ZERO mark in the same window, margin 19 982) recorded at CE95 (0410). (3) terminalFaceCE95_elim_hWin: the RE-ANCHORED TERMINAL FACE of the CE series (all zeros of q with Im > tCE95 on the line) ALONE discharges WinC.hWinFaceResidualH q (tCE95 : R): positive-height half is the face itself; negative-height half through the ZeroSet symmetry fields (q.conj / star, the HFE-after-HCJ pattern). (4) face_above_frontier_no_offPair: the same elimination at EVERY offset d0 > 0 - nothing off-line at all above tCE95. (5) rh_program78_frontier_CE95: THE ENDPOINT AT THE CENSUS FRONTIER - the census input is CE95.allOnLineUpToCE95 (tPT2 + the 96 verified window-slice clauses, windows 1..95, corrected w1-w95 band with W42b fill, re-anchored 43..95 bit-identical at their seams; W94 NON-SNAPPED 20 000 CLEAN [sixth clean record]; W95 NON-SNAPPED 20 000 with two recorded interior failures, both determined and rescued); the residue (hs1, hs3, hWin) lives STRICTLY ABOVE 3 000 175 781 396 = tPT2 + 448 596.",
+    "SIGNIFICANCE: the endpoint machinery is now instantiated at the highest certified census frontier (1 919 982 zeros over (g_a1, g_b95]); 445 000 unit round mark and 1 900 000 certified-zero mark both crossed at CE95); the CE census-iff decomposition and the endpoint squeeze AGREE at the frontier: the re-anchored terminal face alone discharges the endpoint's hWin residual leg. Together with Face38Any (0409), the open object at tCE95 is now fully pinned in all three languages: all-zeros-on-line above tCE95 <-> no off-pair in (0, 1/200) above tCE95 (this module) <-> no off-pair in the [Z78]-sharp 3/8 strip above tCE95 (Face38Any instantiation).",
+    "Build: RhAttack.FrontierCE95 green (8862 jobs); all 264 non-probe RhAttack modules green (9106 incremental jobs, exit 0); full default tree green (17454 jobs, exit 0).",
+    "CONCURRENCY: window 96 (from the audited W95 seam, a96 = 12 363 155 357 112) is running while this unit reached green; the per-unit critical path is max(run, formalization).",
+    "NO RH CLAIM: hs1, hs3 and hWin at the tCE95 frontier remain the NAMED open legs; this is an endpoint push, not a closing of the face."
+  ],
+  "provenance": {
+    "pipeline": "none (pure formal wiring over RHEnd + CE95)",
+    "formal_module": "formal/RhAttack/FrontierCE95.lean"
+  },
+  "gated_by": "formal/RhAttack/FrontierCE95.lean (machine-checked)"
+}
