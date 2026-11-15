@@ -1,0 +1,21 @@
+{
+  "id": 0407,
+  "ts": "2026-11-15T06:45:00Z",
+  "kind": "discovery",
+  "title": "FrontierCE94: THE ENDPOINT AT THE CE94 CENSUS FRONTIER - the RHEnd endpoint machinery (rh_program78_frontierH) is now instantiated at H = tCE94 = 3 000 175 776 723 (margin 443 923 over Platt-Trudgian; census 1 899 982 over (g_a1, g_b94]); the re-anchored terminal face terminalFaceCE94 ALONE discharges the endpoint's hWin residual leg at the CE94 frontier - machine-checked; NO RH CLAIM",
+  "status": "gated",
+  "lane": "M5",
+  "unit": 121,
+  "facts": [
+    "ROLE: RHEnd.rh_program78_frontierH is the ARBITRARY-FRONTIER form of the endpoint (census at H + zero-set premises + the 707/50 sliver record + [Z78] => RH from the residual legs hs1 / hs3 / hWin). FrontierCE92 (0404) wired the strongest instantiation at H = tCE92 (margin 434 577, census 1 859 983). The CE re-anchors CE93 (0405) and CE94 (0406) since pushed the certified census frontier past tCE92, so that wiring was one module behind - this unit completes the push to the CE94 frontier: H = tCE94 = tPT2 + 443 923 = 3 000 175 776 723.",
+    "THEOREMS (formal/RhAttack/FrontierCE94.lean, namespace FrontierCE94, all LEAN-PROVEN): (1) ce94AbovePT2 : WinC.tPT2 < (CE94.tCE94 : R) - the CERTIFIED census frontier (94 windows, 1 899 982 zeros over (g_a1, g_b94]) sits above the Platt-Trudgian frontier (norm_num); (2) ce94PT2Margin : (CE94.tCE94 : R) - WinC.tPT2 = 443923 (norm_num) - the 440 000-unit milestone crossing recorded at CE94 (0406); (3) terminalFaceCE94_elim_hWin : CE94.terminalFaceCE94 q -> WinC.hWinFaceResidualH q (CE94.tCE94 : R) - the RE-ANCHORED TERMINAL FACE of the CE series ALONE discharges the hWin residual face at tCE94 (positive-height half = the face; negative-height half through the ZeroSet symmetry fields q.conj / star, the HFE-after-HCJ pattern); (4) face_above_frontier_no_offPair : the same elimination at EVERY offset d0 > 0 (no window restriction) - nothing off-line at all above tCE94; (5) rh_program78_frontier_CE94 : THE ENDPOINT AT THE CENSUS FRONTIER - under [Z78] + the zero-set premises + the 707/50 sliver + the CE94 CENSUS (95 window-slice clauses, windows 1..94, corrected w1-w94 band with W42b fill, re-anchored 43..94 bit-identical, clean windows incl. W94 NON-SNAPPED 20 000 CLEAN), RH q follows from hs1 / hs3 / hWin restricted to t0 >= tCE94 - the residue lives STRICTLY ABOVE 3 000 175 776 723 = tPT2 + 443 923. The engine is one instantiation of RHEnd.rh_program78_frontierH (H := tCE94, hPT := CE94.allOnLineUpToCE94) with 1000 <= tCE94 by norm_num.",
+    "SIGNIFICANCE: the endpoint frontier is now driven by the CERTIFIED CENSUS at the CE94 frontier, and the CE series' census-iff decomposition and the endpoint squeeze AGREE at that frontier: terminalFaceCE94 is EXACTLY the hWin residual leg the endpoint needs there. As of this unit, the endpoint wiring is no longer one module behind the CE re-anchors. The endpoint can be pushed again at each future re-anchor with the same five-line adaptation.",
+    "Build: RhAttack.FrontierCE94 green (8861 jobs); probe-checked public names green (8862 jobs, probe removed after the check); all 261 non-probe RhAttack modules green (9102 incremental jobs, exit 0); full default tree green (17454 jobs, exit 0).",
+    "NO RH CLAIM: hs1, hs3 and hWin at the tCE94 frontier remain the NAMED open legs, now stated strictly above a STRICTLY HIGHER frontier than the tCE92 instantiation; the terminal-face -> hWin fact shows the face is EXACTLY what the legs need, not that it is closed. The open terminal face is unchanged in content (terminalFaceCE94 q <-> CE93.terminalFaceCE93 q <-> ... <-> the original terminal face above tPT2); only the certified band below it grew."
+  ],
+  "provenance": {
+    "pipeline": "none (pure formal wiring over RHEnd + CE94)",
+    "formal_module": "formal/RhAttack/FrontierCE94.lean"
+  },
+  "gated_by": "formal/RhAttack/FrontierCE94.lean (machine-checked)"
+}
