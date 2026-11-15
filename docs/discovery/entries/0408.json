@@ -1,0 +1,21 @@
+{
+  "id": 0408,
+  "ts": "2026-11-15T07:00:00Z",
+  "kind": "discovery",
+  "title": "Face38CE94: [Z78]-SHARP FACE IDENTITY at the CE94 census frontier - the re-anchored terminal face terminalFaceCE94 and the 3/8-strip no-off-pair statement (tCE94, inf) x (0, 3/8] are THE SAME open object at H = tCE94 = 3 000 175 776 723 (iff, machine-checked, under [Z78] + zero-set premise + boundary census); closing either closes RH with the certified census; the endpoint hWin leg (0, 1/200) is discharged by the 3/8 face since 1/200 < 3/8 - NO RH CLAIM",
+  "status": "gated",
+  "lane": "M5",
+  "unit": 122,
+  "facts": [
+    "ROLE: RHEnd.lean (0289) already proved, at the GROWTH frontier tPT2, that the named open object of all-heights RH has two equivalent languages: (a) the 0288 terminal face (no off-line zero with positive height above the frontier, ANY offset d0) and (b) the unified38 face (no off-pair (t0, d0) with 0 < d0 <= 3/8 above the frontier) - the [Z78]-SHARP form, since Z78.offPairD0le forces every off-pair into 0 < d0 <= 3/8 (zero-free at Re > 7/8 plus the functional equation put the zero into [1/8, 7/8]). This module performs the SAME reconciliation at the CERTIFIED CENSUS frontier H = tCE94 = 3 000 175 776 723 (the CE94 frontier, 0406; margin 443 923 over tPT2; census 1 899 982 over (g_a1, g_b94]).",
+    "THEOREMS (formal/RhAttack/Face38CE94.lean, namespace Face38CE94, all LEAN-PROVEN): (1) z78_plus_strip38_gives_terminalFaceCE94 (direction 1, NO census input): [Z78] + the zero-set premise + 'no off-pair in (tCE94, inf) x (0, 3/8]' => CE94.terminalFaceCE94 - the 3/8-strip form IS a closing of the re-anchored face; [Z78] closes the d0 > 3/8 part. (2) terminalFaceCE94_gives_strip38 (direction 2, boundary census at the exact frontier height): terminalFaceCE94 + WinC.allOnLineUpTo q (tCE94 : R) => the no-off-pair statement in (tCE94, inf) x (0, 3/8] - in fact at EVERY d0 (the 3/8 restriction is not used); the zero at the frontier height tCE94 exactly is carried by the census; the negative-height half runs through the ZeroSet symmetry fields (q.conj / star, the HFE-after-HCJ pattern). (3) terminalFaceCE94_iff_strip38 (the combined iff, under [Z78] + zero-set premise + boundary census): the two languages are THE SAME open object at the CE94 frontier - closing either closes all of RH together with the certified census (via FrontierCE94.rh_program78_frontier_CE94 / CE94.rh_of_terminalFaceCE94). (4) strip38_discharges_hWin (corollary): since 1/200 < 3/8 and tCE94 >= 1000, the 3/8-strip face at tCE94 discharges WinC.hWinFaceResidualH q (tCE94 : R) (the (0, 1/200) endpoint window) - so the FrontierCE94 endpoint (0407) and the 0289 unified38 endpoint both reduce to the same named 3/8-strip object at the same frontier.",
+    "SIGNIFICANCE: the open face now has a SINGLE machine-verified identity at the highest certified frontier, in both languages (all-zeros-on-line above tCE94 <-> no off-pair in the [Z78]-sharp 3/8 strip above tCE94). Any future closing attack (the squeeze certificate, a better zero-free record shrinking the strip below 3/8, or a uniform S-at-zeros estimate) may be stated and verified in either language; the boundary census input for direction 2 is exactly CE94.allOnLineUpToCE94 under the 95 window-slice clauses (machine-realized, no new input).",
+    "Build: RhAttack.Face38CE94 green (8861 jobs); all 262 non-probe RhAttack modules green (9103 incremental jobs, exit 0); full default tree green (17454 jobs, exit 0). (Two style 'missing space' linter warnings on the 3/8 signature tokens - the identical pattern in RHEnd's 0289 theorems carries the same lint; left consistent with the in-tree convention.)",
+    "NO RH CLAIM: the 3/8-strip face at tCE94 remains the NAMED open object; this unit reconciles the two languages of the face, it does NOT close it. The face is unchanged in content - only its identity is now pinned at the CE94 frontier in both the CE-series language and the endpoint/Z78 language."
+  ],
+  "provenance": {
+    "pipeline": "none (pure formal wiring over RHEnd + CE94 + Z78)",
+    "formal_module": "formal/RhAttack/Face38CE94.lean"
+  },
+  "gated_by": "formal/RhAttack/Face38CE94.lean (machine-checked)"
+}
