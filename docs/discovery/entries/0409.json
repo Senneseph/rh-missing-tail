@@ -1,0 +1,21 @@
+{
+  "id": 0409,
+  "ts": "2026-11-15T06:31:00Z",
+  "kind": "discovery",
+  "title": "Face38Any: the [Z78]-SHARP FACE IDENTITY as a generic engine at ANY frontier H > 0 - faceAboveH q H <-> no off-pair in (H, inf) x (0, 3/8] (under [Z78] + zero-set premise + the boundary census WinC.allOnLineUpTo q H); direction 1 needs no census input (Z78.offPairD0le closes d0 > 3/8); instantiations recover the 0289 pair at H = tPT2 and 0408 at H = tCE94 - per-window face bookkeeping reduced to one-line instantiation for every future re-anchor - NO RH CLAIM",
+  "status": "gated",
+  "lane": "M5",
+  "unit": 123,
+  "facts": [
+    "MOTIVATION: the pipeline re-anchors the terminal face at every certified window (CE95, CE96, ...). Face38CE94 (0408) proved the [Z78]-sharp 3/8-strip identity at the concrete CE94 frontier. This module lifts it to an ARBITRARY frontier H > 0 so that each future re-anchor (and the original 0289 growth frontier) inherits the identity by one-line instantiation instead of a fresh per-window module. Over a long pipeline run the per-window formal cost is what matters; the engine makes the face bookkeeping O(1) per window.",
+    "THEOREMS (formal/RhAttack/Face38Any.lean, namespace Face38Any, all LEAN-PROVEN): (0) faceAboveH (q) (H) : Prop := the 0288 terminal face with the growth frontier replaced by H (RHEnd.terminalFace = H := WinC.tPT2; CE94.terminalFaceCE94 = H := CE94.tCE94). (1) z78_plus_strip38_H (q) (H) (hH : 0 < H) ([Z78]) (hqz) ([no off-pair in (H, inf) x (0, 3/8]]) : faceAboveH q H - NO census input; the off-line zero above H gives the off-pair (rho.im, |rho.re - 1/2|) at positive height and Z78.offPairD0le forces its offset into 0 < d0 <= 3/8. (2) faceAboveH_gives_strip38 (q) (H) (hCensus : WinC.allOnLineUpTo q H) (hFace : faceAboveH q H) : the no-off-pair statement in (H, inf) x (0, 3/8] - in fact at EVERY d0 (the 3/8 restriction is not used); the boundary height t0 = H exactly is carried by the census; the negative-height half via q.conj / star (HFE-after-HCJ pattern); direction 2 has NO H > 0 assumption (the conjugate's height -rho.im is strictly positive on its own). (3) faceAboveH_iff_strip38 (q) (H) (hH) ([Z78]) (hqz) (hCensus) : faceAboveH q H <-> [no off-pair in (H, inf) x (0, 3/8]]. (4) at_growth_frontier: the H := WinC.tPT2 instance recovers the 0289 pair (faceAboveH = RHEnd.terminalFace). (5) at_ce94_frontier: the H := CE94.tCE94 instance recovers 0408 (margin 443 923, census 1 899 982).",
+    "SIGNIFICANCE: the open face has a single reusable engine for its two-language identity at ANY frontier; the per-window formal units going forward reduce to (a) the mechanical CE(N) re-anchor and (b) a one-line instantiation of faceAboveH_iff_strip38 at H := tCE(N) whenever the 3/8 identity is needed at that frontier. The 0289 growth-frontier pair and the 0408 CE94-frontier identity are now both special cases of the same machine-checked theorem.",
+    "Build: RhAttack.Face38Any green (8861 jobs; one style 'missing space' linter warning on a 3/8 token - same house pattern as RHEnd's 0289 theorems).",
+    "NO RH CLAIM: for every H above the certified census, the 3/8-strip face above H remains a NAMED open object; this is a language reconciliation engine, not a closing. The W95 window (launched from the audited W94 seam, a95 = 12 363 155 337 112) runs concurrently per the per-unit critical path; its CE95 re-anchor is the next pipeline unit."
+  ],
+  "provenance": {
+    "pipeline": "none (pure formal engine over RHEnd + CE94 + Z78)",
+    "formal_module": "formal/RhAttack/Face38Any.lean"
+  },
+  "gated_by": "formal/RhAttack/Face38Any.lean (machine-checked)"
+}
