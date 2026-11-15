@@ -1,0 +1,772 @@
+import Mathlib
+import RhAttack.B0
+import RhAttack.P12Uniform
+import RhAttack.WinCount
+import RhAttack.RHEnd
+import RhAttack.ThetaInf
+import RhAttack.CE1
+import RhAttack.CE2
+import RhAttack.CE3
+import RhAttack.CE4
+import RhAttack.CE5
+import RhAttack.CE6
+import RhAttack.CE7
+import RhAttack.CE8
+import RhAttack.CE9
+import RhAttack.CE10
+import RhAttack.CE11
+import RhAttack.CE12
+import RhAttack.CE13
+import RhAttack.CE14
+import RhAttack.CE15
+import RhAttack.CE16
+import RhAttack.CE17
+import RhAttack.CE18
+import RhAttack.CE19
+import RhAttack.CE20
+import RhAttack.CE21
+import RhAttack.CE22
+import RhAttack.CE23
+import RhAttack.CE24
+import RhAttack.CE25
+import RhAttack.CE26
+import RhAttack.CE27
+import RhAttack.CE28
+import RhAttack.CE29
+import RhAttack.CE30
+import RhAttack.CE31
+import RhAttack.CE32
+import RhAttack.CE33
+import RhAttack.CE34
+import RhAttack.CE35
+import RhAttack.CE36
+import RhAttack.CE37
+import RhAttack.CE38
+import RhAttack.CE39
+import RhAttack.CE40
+import RhAttack.CE41
+import RhAttack.CE42
+import RhAttack.CE42B
+import RhAttack.CE43
+import RhAttack.CE44
+import RhAttack.CE45
+import RhAttack.CE46
+import RhAttack.CE47
+import RhAttack.CE48
+import RhAttack.CE49
+import RhAttack.CE50
+import RhAttack.CE51
+import RhAttack.CE52
+import RhAttack.CE53
+import RhAttack.CE54
+import RhAttack.CE55
+import RhAttack.CE56
+import RhAttack.CE57
+import RhAttack.CE58
+import RhAttack.CE59
+import RhAttack.CE60
+import RhAttack.CE61
+import RhAttack.CE62
+import RhAttack.CE63
+import RhAttack.CE64
+import RhAttack.CE65
+import RhAttack.CE66
+import RhAttack.CE67
+import RhAttack.CE68
+import RhAttack.CE69
+import RhAttack.CE70
+import RhAttack.CE71
+import RhAttack.CE72
+import RhAttack.CE73
+import RhAttack.CE74
+import RhAttack.CE75
+import RhAttack.CE76
+import RhAttack.CE77
+import RhAttack.CE78
+import RhAttack.CE79
+import RhAttack.CE80
+import RhAttack.CE81
+import RhAttack.CE82
+import RhAttack.CE83
+import RhAttack.CE84
+import RhAttack.CE85
+import RhAttack.CE86
+import RhAttack.CE87
+import RhAttack.CE88
+import RhAttack.CE89
+import RhAttack.CE90
+import RhAttack.CE91
+import RhAttack.CE92
+
+set_option linter.style.whitespace false
+set_option linter.style.longLine false
+set_option linter.style.docString false
+
+open Real Set Complex Filter B0 P12 RHEnd CE1 CE2 CE3 CE4 CE5 CE6 CE7 CE8 CE9 CE10 CE11 CE12 CE13 CE14 CE15 CE16 CE17 CE18 CE19 CE20 CE21 CE22 CE23 CE24 CE25 CE26 CE27 CE28 CE29 CE30 CE31 CE32 CE33 CE34 CE35 CE36 CE37 CE38 CE39 CE40 CE41 CE42 CE42B CE43 CE44 CE45 CE46 CE47 CE48 CE49 CE50 CE51 CE52 CE53 CE54 CE55 CE56 CE57 CE58 CE59 CE60 CE61 CE62 CE63 CE64 CE65 CE66 CE67 CE68 CE69 CE70 CE71 CE72 CE73 CE74 CE75 CE76 CE77 CE78 CE79 CE80 CE81 CE82 CE83 CE84 CE85 CE86 CE87 CE88 CE89 CE90 CE91 CE92
+open scoped Topology
+
+/-!
+**CE93 - the terminal face re-anchored at the NINETY-THIRD certified
+window (0405, option B, unit 119 - lane M5).
+
+MILESTONE STATE: tCE93 - tPT2 = 439 250 - the 435 000 UNIT MILESTONE
+CROSSED IN THIS WINDOW (margin 4 250 - a regular round crossing, not
+one of the series' PREDICTED milestones); the 430 000 mark (crossed
+W92 [0403]) CARRIES margin 9 250; the 425 000 mark (crossed W90
+[0401], FOURTH PREDICTION of the series) carries 14 250; the 400 000
+mark (crossed W85 [0396], third prediction) carries 39 250; the 375
+000 mark (crossed W80 [0389], second prediction) carries 64 250; the
+350 000 mark (crossed W74 [0380], first prediction) carries 89 250;
+the 325 000 and 300 000 marks carry 114 250 and 139 250. Next round
+mark 440 000: 750 ahead (less than one 4 673 step - compute at that
+window, do not pre-announce); the 450 000 round mark: 10 750 ahead
+(about two to three full 4 673 steps - compute from the decoded
+endpoint, do not pre-announce).
+CERTIFIED-ZERO CENSUS: cumulative total 1 879 982 over (g_a1, g_b93]
+- the 1 880 000 CERTIFIED-ZERO MARK is only 18 ahead (compute at that
+window, do not pre-announce); the 1 860 000 mark (crossed W92 [0403])
+carries 19 982; the 1 870 000 mark carries 9 982; the 1 840 000 mark
+(crossed W91 [0402]) carries 39 982; the 1 700 000 mark carries
+179 983; the 1 600 000 mark carries 279 983; the 1 900 000 mark is
+20 018 ahead; 2 000 000 is 120 018 ahead (about six full windows;
+compute at that window, do not pre-announce).
+
+WINDOW 93: SNAPPED (b requested = a + 20 000 = 12 363 155 317 113;
+certified b = 12 363 155 317 112; certified width 19 999). NOT CLEAN:
+ONE recorded interior Rosser failure block (Gram block [12363155309041,
+12363155309044]; need 3, changes 1, 193 points, m = 64 - determined
+TRUE; rescue: the expanded union [12363155309040, 12363155309045] at
+m = 4 found all 5 required sign changes). End Rosser runs: 45 left of
+g_a93, 43 right of g_b93 (both >= K = 12); 0 cross-check failures; 0
+undetermined Gram signs; max phase contribution 4.10e-21 (radius
+2.61e-24). INCREMENT: 4 673 (the usual step - W93 is a SNAP but the
+floor still advances by 4 673: the exact endpoint lo advances by
+4 672.7015... (width 19 999 plus the fractional carry 0.2708... -
+0.5693...), whose floor is 4 673; the five recorded 4 672 occurrences
+remain the five recorded - w45 -> w46, w53 -> w54, w65 -> w66,
+w77 -> w78 [SNAP], w86 -> w87 [SNAP] - no pattern claimed). Census:
+the full width adds 19 999 certified zeros (1 859 983 + 19 999 =
+1 879 982). Cumulative tally through window 93: 93 windows - 40
+clean, 53 rescue; 78 total internal Rosser failures, ALL RECORDED.
+
+INDEPENDENT AUDIT (performed BEFORE this module was written): a
+separate raw-record recompute (a different code path from both the
+pipeline and its verifier, exact-dyadic Fraction arithmetic)
+reproduced from the recorded data EXACTLY 15 924 blocks inside,
+sign changes inside = 19 999 = b - a, ONE recorded interior Rosser
+failure at exactly the recorded block [12363155309041, 12363155309044],
+and the end Rosser runs 45 / 43, with every recorded point in strictly
+increasing t-order. On top of that, 414 sampled Gram points (every 50th
+Gram point of [a - 60, b + 60] plus or minus 5 around both ends) had
+their signs cross-checked against DIRECT dps-60 Riemann-Siegel
+evaluations from a different engine (mpmath, theta as the classical
+series 0.5 t log(t/(2 pi)) - 0.5 t - pi/8 + 1/(48 t) - 1/(5760 t^3)):
+matching signs at every sampled point (0 mismatches). This is a FOURTH
+verification layer on W93, beyond the three standard layers below.
+
+PIPELINE RUN (twenty-eighth in the overlap pipeline): seed cache
+(window 92's cache copied in before launch - resumed_from_cache =
+905 263, logged for provenance) + 32 workers: 34 082 evaluations in
+2 569.1 s (same M = 60, C_R = 1, N_range = [691 008, 691 008], same
+pipeline, same verifier, same seam discipline). Window 93 RAN WHILE
+the formal unit FrontierCE92 (THE ENDPOINT AT THE CENSUS FRONTIER:
+the RHEnd endpoint machinery instantiated at H = tCE92 - the
+endpoint frontier is now driven by the certified census at the
+CE92 frontier (margin over the cited Platt-Trudgian frontier:
+machine, see that module), and the re-anchored terminal face
+alone discharges the endpoint's hWin residual leg - the two RH
+decompositions agree at the frontier) reached GREEN; the per-unit
+critical path is max(run, formalization); window 94 will be launched
+from the audited W93 seam.
+
+PROVENANCE (our run, 2026-11-15; pipeline = Murphy's Apache-2.0
+deposit, same as CE1-CE92): RUN PARAMETERS: a = 12 363 155 297 113
+(= b92), b = 12 363 155 317 112 (SNAPPED from the requested
+12 363 155 317 113), M = 60, C_R = 1, 32 workers, 34 082 evaluations,
+2 569.1 s, resumed_from_cache = 905 263 (seeded from
+window92_b92.json.cache.jsonl). CERTIFICATE (window93_b93.json): the
+19 999 (= b - a) zeros of zeta with g_a93 < Im s <= g_b93 are ALL
+SIMPLE and on the line, where g_a93 (recorded exact dyadic ball) is
+14507959794259508203379026585482346095 times 2 to the minus 82 with
+radius 16777217 times 2 to the minus 110 (i.e. 3 000 175 767 377.56933865932508049036619741348262176088310120177189669913332119936789053882275624118847190402448177337646484375, the W92
+endpoint, plus or minus 1.29e-26), and this ball is BIT-IDENTICAL to
+CE92's recorded g_b92 (exact dyadic tuple comparison, 2026-11-15 -
+audit performed BEFORE this module was written, per the 0348 process
+rule); g_b93 = 3 000 175 772 050.27080199711937376226281446697711909483531605286295266846764145189630466903363270603222190402448177337646484375 (the EXACT conservative center-minus-radius
+reading: lo is dyadic with denominator 2 to the 110, so its base-10
+expansion terminates exactly; the recorded endpoint ball's radius is
+1.29e-26) with exact dyadic tuple [232127357069684895822392110724959343951,
+-86, 16777217, -110] - normalizes to exponent -86, back in the -86
+family of g_b86 through g_b91 (g_b92, exponent -82, was the only
+outlier so far); the exact dyadic tuple is authoritative over the
+exponent representation. The floor tCE93 sits 0.27080199711937376226281446697711909483531605286295266846764145189630466903363270603222190402448177337646484375 below the
+endpoint (EXACT) - robust to the 1.29e-26 radius by many orders of
+magnitude; the standard two-decimal lower bound gB93Lo
+(3 000 175 772 050.27) has the exact margin 0.00080199711937376226281446697711909483531605286295266846764145189630466903363270603222190402448177337646484375 (EXACT, 110-digit
+terminator - integer-tuple arithmetic, conservative center-minus-
+radius reading); the two-decimal round-down (0.27) is strictly below
+the exact fractional part (0.2708...), so no CASING is needed -
+window 38 / CE38 remains the only CASING case so far. (The gB93Lo
+margin is 8.0e-4 - the FOURTEENTH sub-cent case in the current run:
+W79 (1.76e-4), W81 (4.03e-4), W82 (1.87e-3), W83 (6.98e-3), W84
+(2.09e-3), W85 (7.2e-3), W86 (2.3e-3), W87 (3.8e-3), W88 (8.9e-3),
+W89 (4.0e-3), W90 (9.1e-3), W91 (4.2e-3), W92 (9.3e-3), W93
+(8.0e-4) - the SECOND-THINNEST margin of the run after W79; still not
+a precision danger: the certified radius is 1.29e-26, seven orders of
+magnitude smaller; no pattern claimed on thin margins.)
+
+VERIFICATION (three layers, same as CE2-CE92): (1) ENVIRONMENT REPEAT
+(Murphy's window-1 certificate re-verified - see CE2 header); (2)
+PIPELINE VERIFIER on window93_b93.json: "CERTIFIED: true",
+points_checked = 34 082, sign_changes_inside = 19 999 (= b - a),
+rosser_failures_inside = 1 (the recorded and rescued exception above -
+determined TRUE, all 5 required sign changes found at m = 4),
+turing_ok = true, K_conservative = 12, end Rosser runs 45 / 43,
+endpoints recomputed and matched; (3) SEAM AUDIT (this run): the
+recorded g_a93 ball is bit-identical to CE92's recorded g_b92 ball
+(exact dyadic decode, 2026-11-15).
+FRONTIER ARITHMETIC (machine, below): tCE93 = 3 000 175 772 050,
+tCE93 - tCE92 = 4 673, tCE93 - tPT2 = 439 250 (the 435 000 UNIT
+MILESTONE was CROSSED in THIS window, margin 4 250 - regular round,
+not a predicted milestone; census 1 879 982 - the 1 880 000 CENSUS
+MARK is only 18 ahead). HONESTY (trust base): as CE2-CE92 - the
+pipeline's own controls, its kernel-checked Lean remainder theorem,
+and our verification layers (three standard, here four for W93); a
+RE-RUN of a third-party pipeline, not a from-scratch independent
+certification. Cumulative certified count = 1 879 982 over
+(g_a1, g_b93] (pipeline data, not in-tree arithmetic). NO RH CLAIM.
+-/
+namespace CE93
+
+
+/-! ### 1.  The  certified  constants
+-/
+/-- STANDARD TWO-DECIMAL CERTIFIED LOWER BOUND ON THE CERTIFIED g_b93 (machine): gB93Lo = 3 000 175 772 050.27 = 300017577205027/100 - the two-decimal round-down of the certified lower bound (the endpoint g_b93 '3 000 175 772 050.27080199711937376226281446697711909483531605286295266846764145189630466903363270603222190402448177337646484375' minus the certified radius 1.29e-26). The margin is the exact 0.00080199... (110-digit terminator) - THIN by cent-granularity luck of the endpoint (FOURTEENTH sub-cent case in the current run: W79 (1.76e-4), W81 (4.03e-4), W82 (1.87e-3), W83 (6.98e-3), W84 (2.09e-3), W85 (7.2e-3), W86 (2.3e-3), W87 (3.8e-3), W88 (8.9e-3), W89 (4.0e-3), W90 (9.1e-3), W91 (4.2e-3), W92 (9.3e-3), W93 (8.0e-4) - the second-thinnest margin of the run after W79; not a precision danger - the certified radius is 1.29e-26, seven orders of magnitude smaller); no CASING is needed (the two-decimal round-down 0.27 is strictly below the exact fractional part 0.2708... - window 38 / CE38 remains the only CASING case; no pattern claimed on thin margins). -/
+def gB93Lo : ℚ := 300017577205027 / 100
+
+/-- THE NEW LOWER BOUND (machine): 3 000 175 772 050 = floor(g_b93) = int(3 000 175 772 050.27080199...). The endpoint sits 0.27080199... above the integer boundary (exact, 110-digit terminator) and the certified radius is 1.29e-26, so the floor is robust by many orders of magnitude. tCE93 - tCE92 = 4 673 (the USUAL step - W93 ran SNAPPED at width 19 999 (b requested = a + 20 000, certified b = 12 363 155 317 112) with ONE recorded interior Rosser failure (determined and rescued at m = 4), but the floor still advances by 4 673: the exact endpoint lo advances by 4 672.7015... (width 19 999 plus the fractional carry 0.2708... - 0.5693...), whose floor increment is 4 673; the five recorded 4 672 INCREMENT occurrences remain the five recorded (w45 -> w46, w53 -> w54, w65 -> w66, w77 -> w78 [SNAP], w86 -> w87 [SNAP]) - no pattern claim beyond the recorded data). -/
+def tCE93 : ℕ := 3000175772050
+
+theorem tCE93_lt_gB93Lo : (tCE93 : ℝ) < (gB93Lo : ℝ) := by
+  norm_num [gB93Lo, tCE93]
+
+theorem tCE92_lt_tCE93 : (tCE92 : ℝ) < (tCE93 : ℝ) := by
+  norm_num [CE92.tCE92, tCE93]
+
+/-- ORDERING (machine, norm_num): (gB92Lo : R) < (tCE93 : R), with gB92Lo = 75004394184439/25 (the STANDARD lower bound introduced at CE92) and tCE93 = 3000175772050. So the window-93 terminal slice starts strictly below the new floor. -/
+theorem gB92Lo_lt_tCE93 : (gB92Lo : ℝ) < (tCE93 : ℝ) := by
+  norm_num [CE92.gB92Lo, tCE93]
+
+/-- THE FACE SHRINK - THIS UNIT (machine, norm_num): tCE93 - tCE92 = 4 673. THE USUAL STEP DESPITE THE SNAP: W93 ran SNAPPED (b requested = a + 20 000 = 12 363 155 317 113; certified b = 12 363 155 317 112; certified width 19 999) with ONE recorded interior Rosser failure (Gram block [12363155309041, 12363155309044], need 3 / changes 1, 193 points, m = 64 - determined TRUE; rescue union [12363155309040, 12363155309045] at m = 4 found all 5 required sign changes); the flooR still advances by the full 4 673 (the exact endpoint lo advances by 4 672.7015..., whose floor increment is 4 673). The five recorded 4 672 INCREMENT occurrences remain the five recorded (w45 -> w46, w53 -> w54, w65 -> w66, w77 -> w78 [SNAP], w86 -> w87 [SNAP]) - no pattern claim beyond the recorded data points. -/
+theorem faceShrinkCE93 : (tCE93 : ℝ) - (tCE92 : ℝ) = 4673 := by
+  norm_num [tCE93, CE92.tCE92]
+
+/-- FRONTIER STATE (machine): the terminal face now sits (tCE93 : R) - WinC.tPT2 = 3 000 175 772 050 - 3 000 175 332 800 = 439 250 above the H0 frontier WinC.tPT2 - the 435 000 UNIT MILESTONE was CROSSED in THIS WINDOW [W93, margin 4 250 - a regular round crossing, not one of the series' PREDICTED milestones]: the 430 000 mark (crossed W92 [0403]) CARRIES margin 9 250; the 425 000 mark (crossed W90 [0401], FOURTH PREDICTION of the series) carries 14 250; the 400 000 mark (crossed W85 [0396], third prediction) carries 39 250; the 375 000 mark (crossed W80 [0389], second prediction) carries 64 250; the 350 000 mark (crossed W74 [0380], first prediction) carries 89 250; the 325 000 and 300 000 marks carry 114 250 and 139 250. Next round mark 440 000: 750 ahead (less than one 4 673 step - compute at that window, do not pre-announce); the 450 000 round mark: 10 750 ahead (about two to three full 4 673 steps - compute from the decoded endpoint, do not pre-announce). CERTIFIED-ZERO CENSUS: cumulative total 1 879 982 over (g_a1, g_b93] - the 1 880 000 CERTIFIED-ZERO MARK is only 18 ahead (compute at that window, do not pre-announce); the 1 860 000 mark (crossed W92 [0403]) carries 19 982; the 1 870 000 mark carries 9 982; the 1 840 000 mark (crossed W91 [0402]) carries 39 982; the 1 700 000 mark carries 179 982; the 1 600 000 mark carries 279 982; the 1 900 000 mark is 20 018 ahead; 2 000 000 is 120 018 ahead (about six full windows; compute at that window, do not pre-announce). -/
+theorem frontierGapAboveH0 : (tCE93 : ℝ) - WinC.tPT2 = 439250 := by
+  norm_num [tCE93, WinC.tPT2]
+
+/-- MILESTONE CARRY (machine, PROVEN - norm_num + linarith): the 200 000-unit milestone (CROSSED in WINDOW 42B at 200 823, margin 823) is STILL strictly exceeded at the WINDOW-93 lower bound - (tCE93 : R) - WinC.tPT2 = 439 250 > 200 000, margin 239 250. CARRIED INTO WINDOW-93: the face has since crossed 250 000 @ CE53, 275 000 @ CE58, 300 000 @ CE64, 325 000 @ CE69, 350 000 @ CE74 (margin 465), 375 000 @ CE80 (margin 3 502 - ACHIEVED), 400 000 @ CE85 (margin 1 867 - ACHIEVED), 425 000 @ CE90 (margin 231 - ACHIEVED - the FOURTH PREDICTION of the series), 430 000 @ CE92 (margin 4 577 - ACHIEVED - a regular round crossing), 435 000 @ CE93 (margin 4 250 - ACHIEVED - a regular round crossing, not a predicted milestone); the next round mark 440 000 is 750 ahead (less than one 4 673 step - compute at that window, do not pre-announce). -/
+theorem frontierPast200k : (tCE93 : ℝ) - WinC.tPT2 > 200000 := by
+  have h : (tCE93 : ℝ) - WinC.tPT2 = 439250 := frontierGapAboveH0
+  linarith [h]
+
+/-- MILESTONE CARRY (machine, PROVEN - norm_num + linarith): the 175 000-unit milestone (CROSSED in WINDOW 38 at 175 404, margin 404) is STILL strictly exceeded at the WINDOW-93 lower bound - (tCE93 : R) - WinC.tPT2 = 439 250 > 175 000, margin 264 250. CARRIED INTO WINDOW-93: the face has since crossed 250 000 @ CE53, 275 000 @ CE58, 300 000 @ CE64, 325 000 @ CE69, 350 000 @ CE74 (margin 465), 375 000 @ CE80 (margin 3 502 - ACHIEVED), 400 000 @ CE85 (margin 1 867 - ACHIEVED), 425 000 @ CE90 (margin 231 - ACHIEVED - the FOURTH PREDICTION of the series), 430 000 @ CE92 (margin 4 577 - ACHIEVED - a regular round crossing), 435 000 @ CE93 (margin 4 250 - ACHIEVED - a regular round crossing, not a predicted milestone); the next round mark 440 000 is 750 ahead (less than one 4 673 step - compute at that window, do not pre-announce). -/
+theorem frontierPast175k : (tCE93 : ℝ) - WinC.tPT2 > 175000 := by
+  have h : (tCE93 : ℝ) - WinC.tPT2 = 439250 := frontierGapAboveH0
+  linarith [h]
+
+
+/-- MILESTONE CARRY (machine, PROVEN - norm_num + linarith): the 225 000-unit milestone (CROSSED in WINDOW 48 at 225 364, margin 364) is STILL strictly exceeded at the WINDOW-93 lower bound - (tCE93 : R) - WinC.tPT2 = 439 250 > 225 000, margin 214 250. CARRIED INTO WINDOW-93: the face has since crossed 250 000 @ CE53, 275 000 @ CE58, 300 000 @ CE64, 325 000 @ CE69, 350 000 @ CE74 (margin 465), 375 000 @ CE80 (margin 3 502 - ACHIEVED), 400 000 @ CE85 (margin 1 867 - ACHIEVED), 425 000 @ CE90 (margin 231 - ACHIEVED - the FOURTH PREDICTION of the series), 430 000 @ CE92 (margin 4 577 - ACHIEVED - a regular round crossing), 435 000 @ CE93 (margin 4 250 - ACHIEVED - a regular round crossing, not a predicted milestone); the next round mark 440 000 is 750 ahead (less than one 4 673 step - compute at that window, do not pre-announce). -/
+theorem frontierPast225k : (tCE93 : ℝ) - WinC.tPT2 > 225000 := by
+  have h : (tCE93 : ℝ) - WinC.tPT2 = 439250 := frontierGapAboveH0
+  linarith [h]
+
+/-- MILESTONE CARRY (machine, PROVEN - norm_num + linarith): the 250 000-unit milestone (CROSSED in WINDOW 53 at 250 944, margin 944) is STILL strictly exceeded at the WINDOW-93 lower bound - (tCE93 : R) - WinC.tPT2 = 439 250 > 250 000, margin 189 250. CARRIED INTO WINDOW-93: the face has since crossed 250 000 @ CE53, 275 000 @ CE58, 300 000 @ CE64, 325 000 @ CE69, 350 000 @ CE74 (margin 465), 375 000 @ CE80 (margin 3 502 - ACHIEVED), 400 000 @ CE85 (margin 1 867 - ACHIEVED), 425 000 @ CE90 (margin 231 - ACHIEVED - the FOURTH PREDICTION of the series), 430 000 @ CE92 (margin 4 577 - ACHIEVED - a regular round crossing), 435 000 @ CE93 (margin 4 250 - ACHIEVED - a regular round crossing, not a predicted milestone); the next round mark 440 000 is 750 ahead (less than one 4 673 step - compute at that window, do not pre-announce). -/
+theorem frontierPast250k : (tCE93 : ℝ) - WinC.tPT2 > 250000 := by
+  have h : (tCE93 : ℝ) - WinC.tPT2 = 439250 := frontierGapAboveH0
+  linarith [h]
+
+/-- MILESTONE CARRY (machine, PROVEN - norm_num + linarith): the 275 000-unit milestone (CROSSED in WINDOW 58 at 275 088, margin 88) is STILL strictly exceeded at the WINDOW-93 lower bound - (tCE93 : R) - WinC.tPT2 = 439 250 > 275 000, margin 164 250. CARRIED INTO WINDOW-93: the face has since crossed 250 000 @ CE53, 275 000 @ CE58, 300 000 @ CE64, 325 000 @ CE69, 350 000 @ CE74 (margin 465), 375 000 @ CE80 (margin 3 502 - ACHIEVED), 400 000 @ CE85 (margin 1 867 - ACHIEVED), 425 000 @ CE90 (margin 231 - ACHIEVED - the FOURTH PREDICTION of the series), 430 000 @ CE92 (margin 4 577 - ACHIEVED - a regular round crossing), 435 000 @ CE93 (margin 4 250 - ACHIEVED - a regular round crossing, not a predicted milestone); the next round mark 440 000 is 750 ahead (less than one 4 673 step - compute at that window, do not pre-announce). -/
+theorem frontierPast275k : (tCE93 : ℝ) - WinC.tPT2 > 275000 := by
+  have h : (tCE93 : ℝ) - WinC.tPT2 = 439250 := frontierGapAboveH0
+  linarith [h]
+
+/-- MILESTONE CARRY (machine, PROVEN - norm_num + linarith): the 300 000-unit round mark (CROSSED in WINDOW 64 at 300 972, margin 972) is STILL strictly exceeded at the WINDOW-93 lower bound - (tCE93 : R) - WinC.tPT2 = 439 250 > 300 000, margin 139 250. CARRIED INTO WINDOW-93: the face has since crossed 250 000 @ CE53, 275 000 @ CE58, 300 000 @ CE64, 325 000 @ CE69, 350 000 @ CE74 (margin 465), 375 000 @ CE80 (margin 3 502 - ACHIEVED), 400 000 @ CE85 (margin 1 867 - ACHIEVED), 425 000 @ CE90 (margin 231 - ACHIEVED - the FOURTH PREDICTION of the series), 430 000 @ CE92 (margin 4 577 - ACHIEVED - a regular round crossing), 435 000 @ CE93 (margin 4 250 - ACHIEVED - a regular round crossing, not a predicted milestone); the next round mark 440 000 is 750 ahead (less than one 4 673 step - compute at that window, do not pre-announce). -/
+theorem frontierPast300k : (tCE93 : ℝ) - WinC.tPT2 > 300000 := by
+  have h : (tCE93 : ℝ) - WinC.tPT2 = 439250 := frontierGapAboveH0
+  linarith [h]
+
+/-- MILESTONE CARRY (machine, PROVEN - norm_num + linarith): the 325 000-unit milestone (CROSSED in WINDOW 69 at 327 100, margin 2100 - predicted one window ahead and delivered exactly [0375]) is STILL strictly exceeded at the WINDOW-93 lower bound - (tCE93 : R) - WinC.tPT2 = 439 250 > 325 000, margin 114 250. CARRIED INTO WINDOW-93: the face has since crossed 250 000 @ CE53, 275 000 @ CE58, 300 000 @ CE64, 325 000 @ CE69, 350 000 @ CE74 (margin 465), 375 000 @ CE80 (margin 3 502 - ACHIEVED), 400 000 @ CE85 (margin 1 867 - ACHIEVED), 425 000 @ CE90 (margin 231 - ACHIEVED - the FOURTH PREDICTION of the series), 430 000 @ CE92 (margin 4 577 - ACHIEVED - a regular round crossing), 435 000 @ CE93 (margin 4 250 - ACHIEVED - a regular round crossing, not a predicted milestone); the next round mark 440 000 is 750 ahead (less than one 4 673 step - compute at that window, do not pre-announce). -/
+theorem frontierPast325k : (tCE93 : ℝ) - WinC.tPT2 > 325000 := by
+  have h : (tCE93 : ℝ) - WinC.tPT2 = 439250 := frontierGapAboveH0
+  linarith [h]
+
+/-- MILESTONE CARRIED (machine, PROVEN - norm_num + linarith): the 350 000 UNIT MILESTONE was CROSSED in WINDOW 74 (at 350 465, margin 465 - the FIRST PREDICTION of the series, delivered exactly [predicted one window ahead at 0379: w74 -> 350 465, margin ~465]); CARRIED into WINDOW-93 - tCE93 - tPT2 = 439 250 exceeds 350 000 with margin 89 250. Proven at the WINDOW-74 frontier: (tCE74 : R) - WinC.tPT2 = 350 465, through NINETEEN face shrinks (CE75-CE93: seventeen 4 673 + two 4 672 SNAP [w77 -> w78, w86 -> w87] = 88 785: 350 465 -> 439 250). -/
+theorem frontierPast350k : (tCE74 : ℝ) - WinC.tPT2 > 350000 := by
+  have hgap : (tCE93 : ℝ) - WinC.tPT2 = 439250 := frontierGapAboveH0
+  have hshrink1 : (tCE93 : ℝ) - (tCE92 : ℝ) = 4673 := faceShrinkCE93
+  have hshrink2 : (tCE92 : ℝ) - (tCE91 : ℝ) = 4673 := CE92.faceShrinkCE92
+  have hshrink3 : (tCE91 : ℝ) - (tCE90 : ℝ) = 4673 := CE91.faceShrinkCE91
+  have hshrink4 : (tCE90 : ℝ) - (tCE89 : ℝ) = 4673 := CE90.faceShrinkCE90
+  have hshrink5 : (tCE89 : ℝ) - (tCE88 : ℝ) = 4673 := CE89.faceShrinkCE89
+  have hshrink6 : (tCE88 : ℝ) - (tCE87 : ℝ) = 4673 := CE88.faceShrinkCE88
+  have hshrink7 : (tCE87 : ℝ) - (tCE86 : ℝ) = 4672 := CE87.faceShrinkCE87
+  have hshrink8 : (tCE86 : ℝ) - (tCE85 : ℝ) = 4673 := CE86.faceShrinkCE86
+  have hshrink9 : (tCE85 : ℝ) - (tCE84 : ℝ) = 4673 := CE85.faceShrinkCE85
+  have hshrink10 : (tCE84 : ℝ) - (tCE83 : ℝ) = 4673 := CE84.faceShrinkCE84
+  have hshrink11 : (tCE83 : ℝ) - (tCE82 : ℝ) = 4673 := CE83.faceShrinkCE83
+  have hshrink12 : (tCE82 : ℝ) - (tCE81 : ℝ) = 4673 := CE82.faceShrinkCE82
+  have hshrink13 : (tCE81 : ℝ) - (tCE80 : ℝ) = 4673 := CE81.faceShrinkCE81
+  have hshrink14 : (tCE80 : ℝ) - (tCE79 : ℝ) = 4673 := CE80.faceShrinkCE80
+  have hshrink15 : (tCE79 : ℝ) - (tCE78 : ℝ) = 4673 := CE79.faceShrinkCE79
+  have hshrink16 : (tCE78 : ℝ) - (tCE77 : ℝ) = 4672 := CE78.faceShrinkCE78
+  have hshrink17 : (tCE77 : ℝ) - (tCE76 : ℝ) = 4673 := CE77.faceShrinkCE77
+  have hshrink18 : (tCE76 : ℝ) - (tCE75 : ℝ) = 4673 := CE76.faceShrinkCE76
+  have hshrink19 : (tCE75 : ℝ) - (tCE74 : ℝ) = 4673 := CE75.faceShrinkCE75
+  have h : (tCE74 : ℝ) - WinC.tPT2 = 350465 := by linarith [hgap, hshrink1, hshrink2, hshrink3, hshrink4, hshrink5, hshrink6, hshrink7, hshrink8, hshrink9, hshrink10, hshrink11, hshrink12, hshrink13, hshrink14, hshrink15, hshrink16, hshrink17, hshrink18, hshrink19]
+  linarith [h]
+
+/-- MILESTONE CARRIED (machine, PROVEN - norm_num + linarith): the 375 000 UNIT MILESTONE was CROSSED in WINDOW 80 (at 378 502, margin 3 502 - the SECOND PREDICTION of the series ACHIEVED [0389], with the 1 600 000 CENSUS MARK in the same window - the DOUBLE CONVERGENCE); CARRIED into WINDOW-93 - tCE93 - tPT2 = 439 250 exceeds 375 000 with margin 64 250. The 435 000 UNIT MILESTONE was CROSSED in THIS WINDOW (margin 4 250 - a regular round crossing, not a predicted milestone); the next round mark 440 000 is 750 ahead (compute at that window, do not pre-announce). -/
+theorem frontierPast375k : (tCE93 : ℝ) - WinC.tPT2 > 375000 := by
+  have h : (tCE93 : ℝ) - WinC.tPT2 = 439250 := frontierGapAboveH0
+  linarith [h]
+
+/-- MILESTONE CARRIED (machine, PROVEN - norm_num + linarith): the 400 000 UNIT MILESTONE was CROSSED in WINDOW 85 (tCE85 - tPT2 = 401 867, margin 1 867 - the THIRD PREDICTION of the series ACHIEVED, with the 1 700 000 CENSUS MARK in the same window - the PREDICTED DOUBLE CROSSING [0396]); CARRIED into WINDOW-93 - tCE93 - tPT2 = 439 250 exceeds 400 000 with margin 39 250. The 425 000 mark (the FOURTH PREDICTION) was CROSSED in WINDOW 90 (margin 231) and CARRIES here with margin 14 250; the 430 000 round mark was CROSSED in WINDOW 92 (margin 4 577) and carries 9 250; the 435 000 round mark was CROSSED in THIS WINDOW 93 (margin 4 250 - a regular round crossing, not a predicted milestone). -/
+theorem frontierPast400k : (tCE93 : ℝ) - WinC.tPT2 > 400000 := by
+  have h : (tCE93 : ℝ) - WinC.tPT2 = 439250 := frontierGapAboveH0
+  linarith [h]
+
+/-- MILESTONE CARRIED (machine, PROVEN - norm_num + linarith): the 425 000 UNIT MILESTONE - the FOURTH PREDICTION of the series (predicted at CE89 [0400] as landing in window 90 absent snaps, ACHIEVED: CROSSED in WINDOW 90 at 425 231, margin 231, with the 1 800 000 CERTIFIED-ZERO MARK in the same window - the PREDICTED DOUBLE CROSSING) - is CARRIED into WINDOW-93: (tCE93 : R) - WinC.tPT2 = 439 250 > 425 000, margin 14 250. The 430 000 round mark was CROSSED in WINDOW 92 (margin 4 577) and carries 9 250; the 435 000 round mark was CROSSED in THIS WINDOW 93 (margin 4 250 - a regular round crossing, not a predicted milestone; the next round mark 440 000 is 750 ahead - compute at that window, do not pre-announce). All four PREDICTED crossings of the series (second @ W80, third @ W85, fourth @ W90) have landed in their predicted windows; the fifth is not predicted (no pattern claimed). -/
+theorem frontierPast425k : (tCE93 : ℝ) - WinC.tPT2 > 425000 := by
+  have h : (tCE93 : ℝ) - WinC.tPT2 = 439250 := frontierGapAboveH0
+  linarith [h]
+
+/-- MILESTONE CARRIED (machine, PROVEN - norm_num + linarith): the 430 000 UNIT MILESTONE was CROSSED in WINDOW 92 [0403] (margin 4 577 - a regular round crossing, not one of the series' PREDICTED milestones) and is CARRIED into WINDOW-93 - (tCE93 : R) - WinC.tPT2 = 439 250 exceeds 430 000 with margin 9 250. The 425 000 mark (crossed W90 [0401], fourth prediction) carries 14 250; the 400 000 mark (crossed W85 [0396], third prediction) carries 39 250; the 435 000 round mark was CROSSED in THIS WINDOW, WINDOW 93 (margin 4 250 - a regular round crossing). -/
+theorem frontierPast430k : (tCE93 : ℝ) - WinC.tPT2 > 430000 := by
+  have h : (tCE93 : ℝ) - WinC.tPT2 = 439250 := frontierGapAboveH0
+  linarith [h]
+
+/-- MILESTONE CARRIED (machine, PROVEN - norm_num + linarith): the 435 000 UNIT MILESTONE was CROSSED in THIS WINDOW, WINDOW 93 (tCE93 - tPT2 = 439 250, margin 4 250 - a regular round crossing: not one of the series' PREDICTED milestones [the second @ W80, third @ W85 and fourth @ W90 were the only predictions claimed, and all landed]; the 440 000 round mark is 750 ahead - less than one 4 673 step - compute at that window, do not pre-announce); CARRIED at WINDOW-93 - (tCE93 : R) - WinC.tPT2 = 439 250 exceeds 435 000 with margin 4 250. The 430 000 mark (crossed W92 [0403]) carries 9 250; the 425 000 mark (crossed W90 [0401], fourth prediction) carries 14 250. -/
+theorem frontierPast435k : (tCE93 : ℝ) - WinC.tPT2 > 435000 := by
+  have h : (tCE93 : ℝ) - WinC.tPT2 = 439250 := frontierGapAboveH0
+  linarith [h]
+
+/-- ORDERING (machine, norm_num): (gB92Lo : R) < (gB93Lo : R) - the standard lower bounds rise strictly across the re-anchor, with gB92Lo = 75004394184439/25 (the STANDARD lower bound on the window-92 endpoint g_b92 = 3 000 175 767 377.56933865932508049036619741348262176088310120177189669913332119936789053882275624118847190402448177337646484375 - normalizes to exponent -82, the FIRST non-minus-86 normalization in the current run [g_b86 through g_b91 all normalized to exponent -86]) and gB93Lo = 300017577205027/100 (the STANDARD lower bound on the window-93 endpoint g_b93 = 3 000 175 772 050.27080199711937376226281446697711909483531605286295266846764145189630466903363270603222190402448177337646484375 - normalizes to exponent -86, back in the -86 family of g_b86 through g_b91 [g_b92, exponent -82, was the only outlier so far]; the exact dyadic tuple is authoritative over the exponent representation). -/
+theorem gB92Lo_lt_gB93Lo : (gB92Lo : ℝ) < (gB93Lo : ℝ) := by
+  norm_num [CE92.gB92Lo, gB93Lo]
+
+/-! ### 2.  The  cited  window  clauses  (Z78  pattern)
+-/
+/-- WINDOW 92 FULL slice (re-cited in the W93 band - window 92 of 93, the full recorded window (gB91, g_b92], NON-SNAPPED 20 000, CLEAN WINDOW: ZERO recorded interior Rosser failure blocks, no rescue [the FIFTH clean record in this stretch, after W80, W87, W89 and W91]): the zeros of zeta with gB91 ('3 000 175 762 704.63422829537998660138987980956374344019439350656171220957958150425660091842328114353222190402448177337646484375', the W91 endpoint, re-cited from the CE91 record) < Im s <= gB92 ('3 000 175 767 377.56933865932508049036619741348262176088310120177189669913332119936789053882275624118847190402448177337646484375', the W92 endpoint, + or - 1.29e-26) are all simple and on the line. Provenance: window92_b92.json (Murphy pipeline; NON-SNAPPED 20 000; M = 60, C_R = 1, 32 workers, 33 324 evals in 2 536.5 s, twenty-seventh overlap run, resumed_from_cache = 872 144); verifier CERTIFIED (points 33 324, sign_changes_inside = 20 000, roser_failures_inside = 0, turing_ok, K_conservative = 12, end runs 47/50, 0 cross-check failures, 0 undetermined Gram signs, max phase 4.04e-21 radius 2.10e-25). SEAM: its g_a ball is the CE91 g_b ball EXACTLY (bit-identical tuple). Window-92 data per 0403 (unit 117); the W93 band also re-cites it in full so that the W93 terminal slice starts at gB92; no RH CLAIM about window 92. -/
+def ce92WinClauseFull : Prop :=
+    ∀ (ρ : ℂ), riemannZeta ρ = 0 → (gB91Lo : ℝ) < ρ.im →
+      ρ.im ≤ (gB92Lo : ℝ) → ρ.re = 1 / 2
+
+/-- WINDOW 93 TERMINAL slice (re-cited - window 93 of 93, the (gB92, g_b93] portion of the recorded window, up to floor(gB93) - SNAPPED 19 999 (b requested = a + 20 000; certified b = 12 363 155 317 112) with ONE recorded interior Rosser failure (Gram block [12363155309041, 12363155309044], need 3 / changes 1, 193 points, m = 64 - determined TRUE; rescue union [12363155309040, 12363155309045] at m = 4 found all 5 required sign changes) - NOT clean): the zeros of zeta with gB92 ('3 000 175 767 377.56933865932508049036619741348262176088310120177189669913332119936789053882275624118847190402448177337646484375', = window 92's endpoint g_b92, the W93 seam g_a93 bit-identical, + or - 1.29e-26) < Im s <= int(gB93) = 3 000 175 772 050 (the FLOOR - the endpoint g_b93 = 3 000 175 772 050.27080199711937376226281446697711909483531605286295266846764145189630466903363270603222190402448177337646484375 sits 0.27080199... above it, exact, robust to the 1.29e-26 radius) are all simple and on the line. Certificates: window93_b93.json (SNAPPED 19 999; certified 2026-11-15) + the pipeline verifier (CERTIFIED, turing_ok, points 34 082, sign_changes_inside = 19 999 = b - a, roser_failures_inside = 1 [the recorded and rescued exception above], end Rosser runs 45 / 43, K_conservative = 12, 0 cross-check failures, 0 undetermined Gram signs, max phase 4.10e-21 radius 2.61e-24) + the CE93 header (M = 60, C_R = 1, N_range = [691 008, 691 008], 32 workers, 34 082 evals in 2 569.1 s, twenty-eighth overlap run, resumed_from_cache = 905 263, and the bit-identical g_a93 == g_b92 SEAM AUDIT) + an independent raw-record recompute (separate code path, exact dyadic arithmetic: reproduced 15 924 blocks inside, changes = 19 999 = b - a, ONE recorded interior failure at exactly the recorded block, runs 45/43) + a sampled cross-check of 414 Gram-point signs against direct dps-60 Riemann-Siegel evaluations from a different engine (0 mismatches). Slice restriction (gB92, int(gB93)] is a SUBSET of the certified window, so its zeros inherit on-linedness; no RH CLAIM about the face above g_b93. -/
+def ce93WinClause : Prop :=
+    ∀ (ρ : ℂ), riemannZeta ρ = 0 → (gB92Lo : ℝ) < ρ.im →
+      ρ.im ≤ (tCE93 : ℝ) → ρ.re = 1 / 2
+
+/-- THE CORRECTED BAND (machine, data-dependent): with the cited slice clauses h1..h94 (window 93 contributes ONE clause for its (gB92, g_b93] portion - h94; W93 SNAPPED 19 999 - one recorded interior failure, determined and rescued), ALL zeros of zeta with Im s > WinC.tPT2 and Im s <= (tCE93 : R) lie on the line: h1-h2 cover window 1 (CE2, the Rosser-RESERVED slice + corrected full slice), h3-h44 cover windows 2..42, h44b fills the W1-W2 seam gap (tPT2, gB0], the re-anchored windows 43..93 enter as their certified (gB-prev, gB] slices (the slices are bit-identical at every seam; the re-cited full-slice clause carries the full recorded window) - windows 53..93 RE-CARRY the recorded Rosser-rescue records (W53, W54, W66, W69, W70, W73, W76, W77, W79, W81: one recorded failure each, all ultimately determined; W78: SNAPPED 19 999 with one recorded failure; W82: SNAPPED 19 999 with two recorded failures, both determined; W83: NON-SNAPPED 20 000 with three recorded blocks, all determined; W84: NON-SNAPPED 20 000 with one recorded interior failure, determined; W85: NON-SNAPPED 20 000 with one recorded interior failure, determined; W86: NON-SNAPPED 20 000 with two recorded interior failures, both determined; W87: SNAPPED 19 999 CLEAN - zero failures; W88: NON-SNAPPED 20 000 with one recorded interior failure, determined; W89: NON-SNAPPED 20 000 CLEAN - zero failures; W90: NON-SNAPPED 20 000 with two recorded interior failures, both determined; W91: NON-SNAPPED 20 000 CLEAN - zero failures; W92: NON-SNAPPED 20 000 CLEAN - zero failures; W93: SNAPPED 19 999 with one recorded interior failure, determined and rescued) and windows 80, 87, 89, 91 and 92 carry the CLEAN records (zero failures - W80 first since W74, W87 second, W89 third, W91 fourth, W92 fifth) - and h94 carries the window-93 (gB92, g_b93] slice. CUMULATIVE tally through window 93: 93 windows - 40 clean, 53 rescue; 78 total internal Rosser failures, ALL RECORDED. NO RH CLAIM about Im s > tCE93. -/
+theorem bandOfWindows93 (h1 : CE2.ce1WinClause)
+    (h2 : CE3.ce2WinClauseFull) (h3 : CE4.ce3WinClauseFull)
+    (h4 : CE5.ce4WinClauseFull) (h5 : CE6.ce5WinClauseFull)
+    (h6 : CE7.ce6WinClauseFull) (h7 : CE8.ce7WinClauseFull)
+    (h8 : CE9.ce8WinClauseFull) (h9 : CE10.ce9WinClauseFull)
+    (h10 : CE11.ce10WinClauseFull) (h11 : CE12.ce11WinClauseFull)
+    (h12 : CE13.ce12WinClauseFull) (h13 : CE14.ce13WinClauseFull)
+    (h14 : CE15.ce14WinClauseFull) (h15 : CE16.ce15WinClauseFull)
+    (h16 : CE17.ce16WinClauseFull) (h17 : CE18.ce17WinClauseFull)
+    (h18 : CE19.ce18WinClauseFull) (h19 : CE20.ce19WinClauseFull)
+    (h20 : CE21.ce20WinClauseFull) (h21 : CE22.ce21WinClauseFull)
+    (h22 : CE23.ce22WinClauseFull) (h23 : CE24.ce23WinClauseFull)
+    (h24 : CE25.ce24WinClauseFull) (h25 : CE26.ce25WinClauseFull)
+    (h26 : CE27.ce26WinClauseFull) (h27 : CE28.ce27WinClauseFull)
+    (h28 : CE29.ce28WinClauseFull) (h29 : CE30.ce29WinClauseFull)
+    (h30 : CE31.ce30WinClauseFull)
+    (h31 : CE32.ce31WinClauseFull)
+    (h32 : CE33.ce32WinClauseFull)
+    (h33 : CE34.ce33WinClauseFull)
+    (h34 : CE35.ce34WinClauseFull)
+    (h35 : CE36.ce35WinClauseFull)
+    (h36 : CE37.ce36WinClauseFull)
+    (h37 : CE38.ce37WinClauseFull)
+    (h38 : CE39.ce38WinClauseFull)
+    (h39 : CE40.ce39WinClauseFull)
+    (h40 : CE41.ce40WinClauseFull)
+    (h41 : ce41WinClauseFull)
+    (h42 : ce42WinClauseFull) (h43 : CE44.fillWinClauseFull) (h44 : CE44.ce43WinClauseFull) (h45 : CE45.ce44WinClauseFull) (h46 : CE46.ce45WinClauseFull) (h47 : CE47.ce46WinClauseFull) (h48 : CE48.ce47WinClauseFull) (h49 : CE49.ce48WinClauseFull) (h50 : CE50.ce49WinClauseFull) (h51 : CE51.ce50WinClauseFull) (h52 : CE52.ce51WinClauseFull) (h53 : CE53.ce52WinClauseFull) (h54 : CE54.ce53WinClauseFull) (h55 : CE55.ce54WinClauseFull) (h56 : CE56.ce55WinClauseFull) (h57 : CE57.ce56WinClauseFull) (h58 : CE58.ce57WinClauseFull) (h59 : CE59.ce58WinClauseFull) (h60 : CE60.ce59WinClauseFull) (h61 : CE61.ce60WinClauseFull) (h62 : CE62.ce61WinClauseFull) (h63 : CE63.ce62WinClauseFull) (h64 : CE64.ce63WinClauseFull) (h65 : CE65.ce64WinClauseFull) (h66 : CE66.ce65WinClauseFull) (h67 : CE67.ce66WinClauseFull) (h68 : CE68.ce67WinClauseFull) (h69 : CE69.ce68WinClauseFull) (h70 : CE70.ce69WinClauseFull) (h71 : CE71.ce70WinClauseFull) (h72 : CE72.ce71WinClauseFull) (h73 : CE73.ce72WinClauseFull) (h74 : CE74.ce73WinClauseFull) (h75 : CE75.ce74WinClauseFull) (h76 : CE76.ce75WinClauseFull) (h77 : CE77.ce76WinClauseFull) (h78 : CE78.ce77WinClauseFull) (h79 : CE79.ce78WinClauseFull) (h80 : CE80.ce79WinClauseFull) (h81 : CE81.ce80WinClauseFull) (h82 : CE82.ce81WinClauseFull) (h83 : CE83.ce82WinClauseFull) (h84 : CE84.ce83WinClauseFull) (h85 : CE85.ce84WinClauseFull) (h86 : CE86.ce85WinClauseFull) (h87 : CE87.ce86WinClauseFull) (h88 : CE88.ce87WinClauseFull) (h89 : CE89.ce88WinClauseFull) (h90 : CE90.ce89WinClauseFull) (h91 : CE91.ce90WinClauseFull) (h92 : CE92.ce91WinClauseFull) (h93 : ce92WinClauseFull) (h94 : ce93WinClause) :
+    ∀ (ρ : ℂ), riemannZeta ρ = 0 → WinC.tPT2 < ρ.im →
+      ρ.im ≤ (tCE93 : ℝ) → ρ.re = 1 / 2 := by
+  intro ρ hz ht htH
+  by_cases hseam1 : ρ.im ≤ (gA2Hi : ℝ)
+  · exact h1 ρ hz ht hseam1
+  · by_cases hseam2 : ρ.im ≤ (gB2Lo : ℝ)
+    · exact h2 ρ hz (not_le.mp hseam1) hseam2
+    · by_cases hseam3 : ρ.im ≤ (gB3Lo : ℝ)
+      · exact h3 ρ hz (not_le.mp hseam2) hseam3
+      · by_cases hseam4 : ρ.im ≤ (gB4Lo : ℝ)
+        · exact h4 ρ hz (not_le.mp hseam3) hseam4
+        · by_cases hseam5 : ρ.im ≤ (gB5Lo : ℝ)
+          · exact h5 ρ hz (not_le.mp hseam4) hseam5
+          · by_cases hseam6 : ρ.im ≤ (gB6Lo : ℝ)
+            · exact h6 ρ hz (not_le.mp hseam5) hseam6
+            · by_cases hseam7 : ρ.im ≤ (gB7Lo : ℝ)
+              · exact h7 ρ hz (not_le.mp hseam6) hseam7
+              · by_cases hseam8 : ρ.im ≤ (gB8Lo : ℝ)
+                · exact h8 ρ hz (not_le.mp hseam7) hseam8
+                · by_cases hseam9 : ρ.im ≤ (gB9Lo : ℝ)
+                  · exact h9 ρ hz (not_le.mp hseam8) hseam9
+                  · by_cases hseam10 : ρ.im ≤ (gB10Lo : ℝ)
+                    · exact h10 ρ hz (not_le.mp hseam9) hseam10
+                    · by_cases hseam11 : ρ.im ≤ (gB11Lo : ℝ)
+                      · exact h11 ρ hz (not_le.mp hseam10) hseam11
+                      · by_cases hseam12 : ρ.im ≤ (gB12Lo : ℝ)
+                        · exact h12 ρ hz (not_le.mp hseam11) hseam12
+                        · by_cases hseam13 : ρ.im ≤ (gB13Lo : ℝ)
+                          · exact h13 ρ hz (not_le.mp hseam12) hseam13
+                          · by_cases hseam14 : ρ.im ≤ (gB14Lo : ℝ)
+                            · exact h14 ρ hz (not_le.mp hseam13) hseam14
+                            · by_cases hseam15 : ρ.im ≤ (gB15Lo : ℝ)
+                              · exact h15 ρ hz (not_le.mp hseam14) hseam15
+                              · by_cases hseam16 : ρ.im ≤ (gB16Lo : ℝ)
+                                · exact h16 ρ hz (not_le.mp hseam15) hseam16
+                                · by_cases hseam17 : ρ.im ≤ (gB17Lo : ℝ)
+                                  · exact h17 ρ hz (not_le.mp hseam16) hseam17
+                                  · by_cases hseam18 : ρ.im ≤ (gB18Lo : ℝ)
+                                    · exact h18 ρ hz (not_le.mp hseam17) hseam18
+                                    · by_cases hseam19 : ρ.im ≤ (gB19Lo : ℝ)
+                                      · exact h19 ρ hz (not_le.mp hseam18) hseam19
+                                      · by_cases hseam20 : ρ.im ≤ (gB20Lo : ℝ)
+                                        · exact h20 ρ hz (not_le.mp hseam19) hseam20
+                                        · by_cases hseam21 : ρ.im ≤ (gB21Lo : ℝ)
+                                          · exact h21 ρ hz (not_le.mp hseam20) hseam21
+                                          · by_cases hseam22 : ρ.im ≤ (gB22Lo : ℝ)
+                                            · exact h22 ρ hz (not_le.mp hseam21) hseam22
+                                            · by_cases hseam23 : ρ.im ≤ (gB23Lo : ℝ)
+                                              · exact h23 ρ hz (not_le.mp hseam22) hseam23
+                                              · by_cases hseam24 : ρ.im ≤ (gB24Lo : ℝ)
+                                                · exact h24 ρ hz (not_le.mp hseam23) hseam24
+                                                · by_cases hseam25 : ρ.im ≤ (gB25Lo : ℝ)
+                                                  · exact h25 ρ hz (not_le.mp hseam24) hseam25
+                                                  · by_cases hseam26 : ρ.im ≤ (gB26Lo : ℝ)
+                                                    · exact h26 ρ hz (not_le.mp hseam25) hseam26
+                                                    · by_cases hseam27 : ρ.im ≤ (gB27Lo : ℝ)
+                                                      · exact h27 ρ hz (not_le.mp hseam26) hseam27
+                                                      · by_cases hseam28 : ρ.im ≤ (gB28Lo : ℝ)
+                                                        · exact h28 ρ hz (not_le.mp hseam27) hseam28
+                                                        · by_cases hseam29 : ρ.im ≤ (gB29Lo : ℝ)
+                                                          · exact h29 ρ hz (not_le.mp hseam28) hseam29
+                                                          · by_cases hseam30 : ρ.im ≤ (gB30Lo : ℝ)
+                                                            · exact h30 ρ hz (not_le.mp hseam29) hseam30
+                                                            · by_cases hseam31 : ρ.im ≤ (gB31Lo : ℝ)
+                                                              · exact h31 ρ hz (not_le.mp hseam30) hseam31
+                                                              · by_cases hseam32 : ρ.im ≤ (gB32Lo : ℝ)
+                                                                · exact h32 ρ hz (not_le.mp hseam31) hseam32
+                                                                · by_cases hseam33 : ρ.im ≤ (gB33Lo : ℝ)
+                                                                  · exact h33 ρ hz (not_le.mp hseam32) hseam33
+                                                                  · by_cases hseam34 : ρ.im ≤ (gB34Lo : ℝ)
+                                                                    · exact h34 ρ hz (not_le.mp hseam33) hseam34
+                                                                    · by_cases hseam35 : ρ.im ≤ (gB35Lo : ℝ)
+                                                                      · exact h35 ρ hz (not_le.mp hseam34) hseam35
+                                                                      · by_cases hseam36 : ρ.im ≤ (gB36Lo : ℝ)
+                                                                        · exact h36 ρ hz (not_le.mp hseam35) hseam36
+                                                                        · by_cases hseam37 : ρ.im ≤ (gB37Lo : ℝ)
+                                                                          · exact h37 ρ hz (not_le.mp hseam36) hseam37
+                                                                          · by_cases hseam38 : ρ.im ≤ (gB38Lo : ℝ)
+                                                                            · exact h38 ρ hz (not_le.mp hseam37) hseam38
+                                                                            · by_cases hseam39 : ρ.im ≤ (gB39Lo : ℝ)
+                                                                              · exact h39 ρ hz (not_le.mp hseam38) hseam39
+                                                                              · by_cases hseam40 : ρ.im ≤ (gB40Lo : ℝ)
+                                                                                · exact h40 ρ hz (not_le.mp hseam39) hseam40
+                                                                                · by_cases hseam41 : ρ.im ≤ (gB41Lo : ℝ)
+                                                                                  · exact h41 ρ hz (not_le.mp hseam40) hseam41
+                                                                                  · by_cases hseam42 : ρ.im ≤ (gB42Lo : ℝ)
+                                                                                    · exact h42 ρ hz (not_le.mp hseam41) hseam42
+                                                                                    · by_cases hseam43 : ρ.im ≤ (gB42BLo : ℝ)
+                                                                                      · exact h43 ρ hz (not_le.mp hseam42) hseam43
+                                                                                      · by_cases hseam44 : ρ.im ≤ (gB43Lo : ℝ)
+                                                                                        · exact h44 ρ hz (not_le.mp hseam43) hseam44
+                                                                                        · by_cases hseam45 : ρ.im ≤ (gB44Lo : ℝ)
+                                                                                          · exact h45 ρ hz (not_le.mp hseam44) hseam45
+                                                                                          · by_cases hseam46 : ρ.im ≤ (gB45Lo : ℝ)
+                                                                                            · exact h46 ρ hz (not_le.mp hseam45) hseam46
+                                                                                            · by_cases hseam47 : ρ.im ≤ (gB46Lo : ℝ)
+                                                                                              · exact h47 ρ hz (not_le.mp hseam46) hseam47
+                                                                                              · by_cases hseam48 : ρ.im ≤ (gB47Lo : ℝ)
+                                                                                                · exact h48 ρ hz (not_le.mp hseam47) hseam48
+                                                                                                · by_cases hseam49 : ρ.im ≤ (gB48Lo : ℝ)
+                                                                                                  · exact h49 ρ hz (not_le.mp hseam48) hseam49
+                                                                                                  · by_cases hseam50 : ρ.im ≤ (gB49Lo : ℝ)
+                                                                                                    · exact h50 ρ hz (not_le.mp hseam49) hseam50
+                                                                                                    · by_cases hseam51 : ρ.im ≤ (gB50Lo : ℝ)
+                                                                                                      · exact h51 ρ hz (not_le.mp hseam50) hseam51
+                                                                                                      · by_cases hseam52 : ρ.im ≤ (gB51Lo : ℝ)
+                                                                                                        · exact h52 ρ hz (not_le.mp hseam51) hseam52
+                                                                                                        · by_cases hseam53 : ρ.im ≤ (gB52Lo : ℝ)
+                                                                                                          · exact h53 ρ hz (not_le.mp hseam52) hseam53
+                                                                                                          · by_cases hseam54 : ρ.im ≤ (gB53Lo : ℝ)
+                                                                                                            · exact h54 ρ hz (not_le.mp hseam53) hseam54
+                                                                                                            · by_cases hseam55 : ρ.im ≤ (gB54Lo : ℝ)
+                                                                                                              · exact h55 ρ hz (not_le.mp hseam54) hseam55
+                                                                                                              · by_cases hseam56 : ρ.im ≤ (gB55Lo : ℝ)
+                                                                                                                · exact h56 ρ hz (not_le.mp hseam55) hseam56
+                                                                                                                · by_cases hseam57 : ρ.im ≤ (gB56Lo : ℝ)
+                                                                                                                  · exact h57 ρ hz (not_le.mp hseam56) hseam57
+                                                                                                                  · by_cases hseam58 : ρ.im ≤ (gB57Lo : ℝ)
+                                                                                                                    · exact h58 ρ hz (not_le.mp hseam57) hseam58
+                                                                                                                    · by_cases hseam59 : ρ.im ≤ (gB58Lo : ℝ)
+                                                                                                                      · exact h59 ρ hz (not_le.mp hseam58) hseam59
+                                                                                                                      · by_cases hseam60 : ρ.im ≤ (gB59Lo : ℝ)
+                                                                                                                        · exact h60 ρ hz (not_le.mp hseam59) hseam60
+                                                                                                                        · by_cases hseam61 : ρ.im ≤ (gB60Lo : ℝ)
+                                                                                                                          · exact h61 ρ hz (not_le.mp hseam60) hseam61
+                                                                                                                          · by_cases hseam62 : ρ.im ≤ (gB61Lo : ℝ)
+                                                                                                                            · exact h62 ρ hz (not_le.mp hseam61) hseam62
+                                                                                                                            · by_cases hseam63 : ρ.im ≤ (gB62Lo : ℝ)
+                                                                                                                              · exact h63 ρ hz (not_le.mp hseam62) hseam63
+                                                                                                                              · by_cases hseam64 : ρ.im ≤ (gB63Lo : ℝ)
+                                                                                                                                · exact h64 ρ hz (not_le.mp hseam63) hseam64
+                                                                                                                                · by_cases hseam65 : ρ.im ≤ (gB64Lo : ℝ)
+                                                                                                                                  · exact h65 ρ hz (not_le.mp hseam64) hseam65
+                                                                                                                                  · by_cases hseam66 : ρ.im ≤ (gB65Lo : ℝ)
+                                                                                                                                    · exact h66 ρ hz (not_le.mp hseam65) hseam66
+                                                                                                                                    · by_cases hseam67 : ρ.im ≤ (gB66Lo : ℝ)
+                                                                                                                                      · exact h67 ρ hz (not_le.mp hseam66) hseam67
+                                                                                                                                      · by_cases hseam68 : ρ.im ≤ (gB67Lo : ℝ)
+                                                                                                                                        · exact h68 ρ hz (not_le.mp hseam67) hseam68
+                                                                                                                                        · by_cases hseam69 : ρ.im ≤ (gB68Lo : ℝ)
+                                                                                                                                          · exact h69 ρ hz (not_le.mp hseam68) hseam69
+                                                                                                                                          · by_cases hseam70 : ρ.im ≤ (gB69Lo : ℝ)
+                                                                                                                                            · exact h70 ρ hz (not_le.mp hseam69) hseam70
+                                                                                                                                            · by_cases hseam71 : ρ.im ≤ (gB70Lo : ℝ)
+                                                                                                                                              · exact h71 ρ hz (not_le.mp hseam70) hseam71
+                                                                                                                                              · by_cases hseam72 : ρ.im ≤ (gB71Lo : ℝ)
+                                                                                                                                                · exact h72 ρ hz (not_le.mp hseam71) hseam72
+                                                                                                                                                · by_cases hseam73 : ρ.im ≤ (gB72Lo : ℝ)
+                                                                                                                                                  · exact h73 ρ hz (not_le.mp hseam72) hseam73
+                                                                                                                                                  · by_cases hseam74 : ρ.im ≤ (gB73Lo : ℝ)
+                                                                                                                                                    · exact h74 ρ hz (not_le.mp hseam73) hseam74
+                                                                                                                                                    · by_cases hseam75 : ρ.im ≤ (gB74Lo : ℝ)
+                                                                                                                                                      · exact h75 ρ hz (not_le.mp hseam74) hseam75
+                                                                                                                                                      · by_cases hseam76 : ρ.im ≤ (gB75Lo : ℝ)
+                                                                                                                                                        · exact h76 ρ hz (not_le.mp hseam75) hseam76
+                                                                                                                                                        · by_cases hseam77 : ρ.im ≤ (gB76Lo : ℝ)
+                                                                                                                                                          · exact h77 ρ hz (not_le.mp hseam76) hseam77
+                                                                                                                                                          · by_cases hseam78 : ρ.im ≤ (gB77Lo : ℝ)
+                                                                                                                                                            · exact h78 ρ hz (not_le.mp hseam77) hseam78
+                                                                                                                                                            · by_cases hseam79 : ρ.im ≤ (gB78Lo : ℝ)
+                                                                                                                                                              · exact h79 ρ hz (not_le.mp hseam78) hseam79
+                                                                                                                                                              · by_cases hseam80 : ρ.im ≤ (gB79Lo : ℝ)
+                                                                                                                                                                · exact h80 ρ hz (not_le.mp hseam79) hseam80
+                                                                                                                                                                · by_cases hseam81 : ρ.im ≤ (gB80Lo : ℝ)
+                                                                                                                                                                  · exact h81 ρ hz (not_le.mp hseam80) hseam81
+                                                                                                                                                                  · by_cases hseam82 : ρ.im ≤ (gB81Lo : ℝ)
+                                                                                                                                                                    · exact h82 ρ hz (not_le.mp hseam81) hseam82
+                                                                                                                                                                    · by_cases hseam83 : ρ.im ≤ (gB82Lo : ℝ)
+                                                                                                                                                                      · exact h83 ρ hz (not_le.mp hseam82) hseam83
+                                                                                                                                                                      · by_cases hseam84 : ρ.im ≤ (gB83Lo : ℝ)
+                                                                                                                                                                        · exact h84 ρ hz (not_le.mp hseam83) hseam84
+                                                                                                                                                                        · by_cases hseam85 : ρ.im ≤ (gB84Lo : ℝ)
+                                                                                                                                                                          · exact h85 ρ hz (not_le.mp hseam84) hseam85
+                                                                                                                                                                          · by_cases hseam86 : ρ.im ≤ (gB85Lo : ℝ)
+                                                                                                                                                                            · exact h86 ρ hz (not_le.mp hseam85) hseam86
+                                                                                                                                                                            · by_cases hseam87 : ρ.im ≤ (gB86Lo : ℝ)
+                                                                                                                                                                              · exact h87 ρ hz (not_le.mp hseam86) hseam87
+                                                                                                                                                                              · by_cases hseam88 : ρ.im ≤ (gB87Lo : ℝ)
+                                                                                                                                                                                · exact h88 ρ hz (not_le.mp hseam87) hseam88
+                                                                                                                                                                                · by_cases hseam89 : ρ.im ≤ (gB88Lo : ℝ)
+                                                                                                                                                                                  · exact h89 ρ hz (not_le.mp hseam88) hseam89
+                                                                                                                                                                                  · by_cases hseam90 : ρ.im ≤ (gB89Lo : ℝ)
+                                                                                                                                                                                    · exact h90 ρ hz (not_le.mp hseam89) hseam90
+                                                                                                                                                                                    · by_cases hseam91 : ρ.im ≤ (gB90Lo : ℝ)
+                                                                                                                                                                                      · exact h91 ρ hz (not_le.mp hseam90) hseam91
+                                                                                                                                                                                      · by_cases hseam92 : ρ.im ≤ (gB91Lo : ℝ)
+                                                                                                                                                                                        · exact h92 ρ hz (not_le.mp hseam91) hseam92
+                                                                                                                                                                                        · by_cases hseam93 : ρ.im ≤ (gB92Lo : ℝ)
+                                                                                                                                                                                          · exact h93 ρ hz (not_le.mp hseam92) hseam93
+                                                                                                                                                                                          · exact h94 ρ hz (not_le.mp hseam93) htH
+
+/-! ### 3.  The  machine-verified  re-anchoring
+-/
+/-- THE 93-WINDOW CENSUS (machine, from the band + WinC.allOnLineUpTo): all zeros of the (data-independent) zeta set q with Im s > WinC.tPT2 and Im s <= (tCE93 : R) lie on the line, given the zero-hypothesis (hZPT2 : zeros above tPT2; hqz : the set is a ZERO SET - every member is a zeta zero; hW1..hW94 : the 94 verified window-slice clauses - the cited slices + the RE-CITED full slices for the re-anchored windows 43..93 (bit-identical seams, recorded data) incl. the W53..W92 Rosser records + hW94 : the window-93 terminal slice (SNAPPED 19 999, one recorded interior failure - determined and rescued)). This is the finite-height closure through the corrected w1-w93 band (W42b fill) re-anchored to all of the certified NINETY-THIRD window (SNAPPED 19 999); census 1 879 982 over (g_a1, g_b93] - the 1 600 000 CERTIFIED-ZERO MARK (CROSSED in W80 [0389]) carries margin 279 982; the 1 700 000 CERTIFIED-ZERO MARK (CROSSED in W85 [0396]) carries margin 179 982; the 1 800 000 CERTIFIED-ZERO MARK (CROSSED in W90 [0401]) carries margin 79 982; the 1 840 000 CERTIFIED-ZERO MARK (CROSSED in W91 [0402]) carries margin 39 982; the 1 860 000 CERTIFIED-ZERO MARK (CROSSED in W92 [0403]) carries margin 19 982; the 1 870 000 mark carries 9 982; the 1 880 000 mark is 18 ahead (compute at that window); the 1 900 000 mark is 20 018 ahead; the 2 000 000 mark is 120 018 ahead. NO RH CLAIM about the face above tCE93. -/
+theorem allOnLineUpToCE93 (q : ZeroSet)
+    (hZPT2 : WinC.allOnLineUpTo q WinC.tPT2)
+    (hW1 : CE2.ce1WinClause) (hW2 : CE3.ce2WinClauseFull)
+    (hW3 : CE4.ce3WinClauseFull) (hW4 : CE5.ce4WinClauseFull)
+    (hW5 : CE6.ce5WinClauseFull) (hW6 : CE7.ce6WinClauseFull)
+    (hW7 : CE8.ce7WinClauseFull) (hW8 : CE9.ce8WinClauseFull)
+    (hW9 : CE10.ce9WinClauseFull) (hW10 : CE11.ce10WinClauseFull)
+    (hW11 : CE12.ce11WinClauseFull) (hW12 : CE13.ce12WinClauseFull)
+    (hW13 : CE14.ce13WinClauseFull) (hW14 : CE15.ce14WinClauseFull)
+    (hW15 : CE16.ce15WinClauseFull) (hW16 : CE17.ce16WinClauseFull)
+    (hW17 : CE18.ce17WinClauseFull) (hW18 : CE19.ce18WinClauseFull)
+    (hW19 : CE20.ce19WinClauseFull) (hW20 : CE21.ce20WinClauseFull)
+    (hW21 : CE22.ce21WinClauseFull) (hW22 : CE23.ce22WinClauseFull)
+    (hW23 : CE24.ce23WinClauseFull) (hW24 : CE25.ce24WinClauseFull)
+    (hW25 : CE26.ce25WinClauseFull) (hW26 : CE27.ce26WinClauseFull)
+    (hW27 : CE28.ce27WinClauseFull) (hW28 : CE29.ce28WinClauseFull)
+    (hW29 : CE30.ce29WinClauseFull)
+    (hW30 : CE31.ce30WinClauseFull)
+    (hW31 : CE32.ce31WinClauseFull)
+    (hW32 : CE33.ce32WinClauseFull)
+    (hW33 : CE34.ce33WinClauseFull)
+    (hW34 : CE35.ce34WinClauseFull)
+    (hW35 : CE36.ce35WinClauseFull)
+    (hW36 : CE37.ce36WinClauseFull)
+    (hW37 : CE38.ce37WinClauseFull)
+    (hW38 : CE39.ce38WinClauseFull)
+    (hW39 : CE40.ce39WinClauseFull)
+    (hW40 : CE41.ce40WinClauseFull)
+    (hW41 : ce41WinClauseFull)
+    (hW42 : ce42WinClauseFull) (hW43 : CE44.fillWinClauseFull) (hW44 : CE44.ce43WinClauseFull) (hW45 : CE45.ce44WinClauseFull) (hW46 : CE46.ce45WinClauseFull) (hW47 : CE47.ce46WinClauseFull) (hW48 : CE48.ce47WinClauseFull) (hW49 : CE49.ce48WinClauseFull) (hW50 : CE50.ce49WinClauseFull) (hW51 : CE51.ce50WinClauseFull) (hW52 : CE52.ce51WinClauseFull) (hW53 : CE53.ce52WinClauseFull) (hW54 : CE54.ce53WinClauseFull) (hW55 : CE55.ce54WinClauseFull) (hW56 : CE56.ce55WinClauseFull) (hW57 : CE57.ce56WinClauseFull) (hW58 : CE58.ce57WinClauseFull) (hW59 : CE59.ce58WinClauseFull) (hW60 : CE60.ce59WinClauseFull) (hW61 : CE61.ce60WinClauseFull) (hW62 : CE62.ce61WinClauseFull) (hW63 : CE63.ce62WinClauseFull) (hW64 : CE64.ce63WinClauseFull) (hW65 : CE65.ce64WinClauseFull) (hW66 : CE66.ce65WinClauseFull) (hW67 : CE67.ce66WinClauseFull) (hW68 : CE68.ce67WinClauseFull) (hW69 : CE69.ce68WinClauseFull) (hW70 : CE70.ce69WinClauseFull) (hW71 : CE71.ce70WinClauseFull) (hW72 : CE72.ce71WinClauseFull) (hW73 : CE73.ce72WinClauseFull) (hW74 : CE74.ce73WinClauseFull) (hW75 : CE75.ce74WinClauseFull) (hW76 : CE76.ce75WinClauseFull) (hW77 : CE77.ce76WinClauseFull) (hW78 : CE78.ce77WinClauseFull) (hW79 : CE79.ce78WinClauseFull) (hW80 : CE80.ce79WinClauseFull) (hW81 : CE81.ce80WinClauseFull) (hW82 : CE82.ce81WinClauseFull) (hW83 : CE83.ce82WinClauseFull) (hW84 : CE84.ce83WinClauseFull) (hW85 : CE85.ce84WinClauseFull) (hW86 : CE86.ce85WinClauseFull) (hW87 : CE87.ce86WinClauseFull) (hW88 : CE88.ce87WinClauseFull) (hW89 : CE89.ce88WinClauseFull) (hW90 : CE90.ce89WinClauseFull) (hW91 : CE91.ce90WinClauseFull) (hW92 : CE92.ce91WinClauseFull) (hW93 : ce92WinClauseFull) (hW94 : ce93WinClause)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0) :
+    WinC.allOnLineUpTo q (tCE93 : ℝ) := by
+  have hband := bandOfWindows93 hW1 hW2 hW3 hW4 hW5 hW6 hW7 hW8 hW9 hW10 hW11 hW12 hW13 hW14 hW15 hW16 hW17 hW18 hW19 hW20 hW21 hW22 hW23 hW24 hW25 hW26 hW27 hW28 hW29 hW30 hW31 hW32 hW33 hW34 hW35 hW36 hW37 hW38 hW39 hW40 hW41 hW42 hW43 hW44 hW45 hW46 hW47 hW48 hW49 hW50 hW51 hW52 hW53 hW54 hW55 hW56 hW57 hW58 hW59 hW60 hW61 hW62 hW63 hW64 hW65 hW66 hW67 hW68 hW69 hW70 hW71 hW72 hW73 hW74 hW75 hW76 hW77 hW78 hW79 hW80 hW81 hW82 hW83 hW84 hW85 hW86 hW87 hW88 hW89 hW90 hW91 hW92 hW93 hW94
+  intro ρ hρ ht htH
+  by_cases hmid : ρ.im ≤ WinC.tPT2
+  · exact hZPT2 ρ hρ ht hmid
+  · exact hband ρ (hqz ρ hρ) (not_le.mp hmid) htH
+
+/-- THE NINETY-THIRD RE-ANCHORED TERMINAL FACE (machine, the NAMED residual for the absolute clause, 0281 form - lane M5, the direct-attack reduction route (b)): what remains open at the NINETY-THIRD certified window (SNAPPED 19 999, ONE recorded interior Rosser failure - determined and rescued at m = 4; census 1 879 982 over (g_a1, g_b93]) is the assertion that every zeta zero of the (data-independent) zero set q with Im s > (tCE93 : R) = 3 000 175 772 050 lies on the line - i.e. the absolute clause [S1] and A1 (no data-dependent bound on the S-at-zeros and DN walk) above the new lower bound. Frontier 439 250 above H0: the 435 000 UNIT MILESTONE was CROSSED in THIS WINDOW (margin 4 250 - a regular round crossing, not a predicted milestone); the 430 000 mark (crossed W92 [0403]) carries 9 250; the 425 000 mark (crossed W90 [0401], the FOURTH PREDICTION of the series) carries 14 250; the 400 000 mark (crossed W85 [0396], third prediction) carries 39 250; the 375 000 mark (crossed W80, second prediction) carries 64 250; the 350 000 mark (crossed W74, first prediction) carries 89 250; the 325 000 and 300 000 marks carry 114 250 and 139 250; the next round mark 440 000 is 750 ahead (less than one 4 673 step); the 450 000 round mark is 10 750 ahead; the 1 700 000 CERTIFIED-ZERO MARK (crossed W85) carries margin 179 982; the 1 800 000 CERTIFIED-ZERO MARK (CROSSED in W90 [0401]) carries margin 79 982; the 1 840 000 mark (CROSSED in W91 [0402]) carries margin 39 982; the 1 860 000 mark (CROSSED in W92 [0403]) carries margin 19 982; the 1 870 000 mark carries 9 982; the 1 880 000 mark is 18 ahead; the 1 900 000 mark is 20 018 ahead; the 2 000 000 mark is 120 018 ahead. The increment tCE93 - tCE92 = 4 673 (the usual step - W93 is a SNAP but the floor still advances by 4 673: the exact endpoint lo advances by 4 672.7015..., floor increment 4 673; the five recorded 4 672 occurrences remain w45, w53, w65, w77 [SNAP], w86 [SNAP]); no pattern claim beyond the recorded data. The face is RE-ANCHORED (the exact iff below proves no strength is lost). NO RH CLAIM: this is the open object, stated at the new frontier. -/
+def terminalFaceCE93 (q : ZeroSet) : Prop :=
+    ∀ (ρ : ℂ), ρ ∈ q.Z → (tCE93 : ℝ) < ρ.im → ρ.re = 1 / 2
+
+/-- MONOTONICITY (machine, no data): shrinking the lower bound (tCE89 -> ... -> tCE92 -> tCE93) leaves the face IMPLICATOR - anything true above tCE92 is true above tCE93. The re-anchor cannot help the face; only the band grows. (This is the 'no strength lost' direction, used by the iff below.) -/
+theorem faceCE92_implies_faceCE93 (q : ZeroSet)
+    (hface : CE92.terminalFaceCE92 q) :
+    terminalFaceCE93 q := by
+  intro ρ hρ ht
+  exact hface ρ hρ (by linarith [tCE92_lt_tCE93, ht])
+
+/-- EXACT EQUIVALENCE (machine, no new assumptions beyond the cited window-data slices hW93, hW94): terminalFaceCE93 q <-> terminalFaceCE92 q. The re-anchor adds no strength and loses none - what was open at tCE92 is (exactly) what is open at tCE93, and the slice family (gB92Lo, tCE93] covers the moved band. This is the 0288 iff re-cast at the new frontier (CE2-CE92 pattern). The forward direction splits on 'Im s <= tCE93': the band slice (gB92Lo, tCE93] is handled by the verified window slices hW93, hW94 (the W92 slice is NON-SNAPPED 20 000, CLEAN - zero failures, re-cited in full at gB92; the W93 slice is SNAPPED 19 999 with one recorded interior failure - determined and rescued), the part above tCE93 is exactly the old face; the reverse is the monotonicity above. NO RH CLAIM: this theorem is an equivalence between two open hypotheses. -/
+theorem terminalFaceCE93_iff_faceCE92 (q : ZeroSet)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (hW93 : ce92WinClauseFull) (hW94 : ce93WinClause) :
+    terminalFaceCE93 q ↔ CE92.terminalFaceCE92 q := by
+  constructor
+  · intro hface ρ hρ ht
+    by_cases hmid : ρ.im ≤ (tCE93 : ℝ)
+    · by_cases hseam93 : ρ.im ≤ (gB92Lo : ℝ)
+      · exact hW93 ρ (hqz ρ hρ) (by linarith [ht, CE92.gB91Lo_lt_tCE92, tCE92_lt_tCE93]) hseam93
+      · exact hW94 ρ (hqz ρ hρ) (not_le.mp hseam93) hmid
+    · exact hface ρ hρ (not_le.mp hmid)
+  · exact faceCE92_implies_faceCE93 q
+
+/-- THE MAIN SPLIT AT THE NEW FRONTIER (machine, the 0288 form): RH q <-> (allOnLineUpTo q tCE93) x (terminalFaceCE93 q) - finite-height closure (now through the corrected w1-w93 band with the W42b fill, re-anchored windows 53..93 all bit-identical at their seams; window 93 certified SNAPPED at 19 999 with one recorded Rosser failure - determined and rescued) AND the absolute clause above tCE93. Both sides are named, both are tracked, only the face is open. NO RH CLAIM: the split is a tautological reformulation of the RH definition at the new frontier (tCE93 - tPT2 = 439 250 - the 435 000 UNIT MILESTONE was CROSSED in THIS WINDOW [margin 4 250]; census 1 879 982 - the 1 880 000 CERTIFIED-ZERO MARK is 18 ahead). -/
+theorem rh_split_at_CE93 (q : ZeroSet) :
+    RH q ↔ WinC.allOnLineUpTo q (tCE93 : ℝ) ∧ terminalFaceCE93 q := by
+  constructor
+  · intro hRH
+    exact ⟨fun ρ hρ him himH => hRH ρ hρ, fun ρ hρ himgt => hRH ρ hρ⟩
+  · rintro ⟨hCensus, hFace⟩ ρ hρ
+    by_cases hpos : 0 < ρ.im
+    · by_cases hle : ρ.im ≤ (tCE93 : ℝ)
+      · exact hCensus ρ hρ hpos hle
+      · exact hFace ρ hρ (not_le.mp hle)
+    · have hneg : ρ.im < 0 := by
+        have hle0 : ρ.im ≤ 0 := not_lt.mp hpos
+        have hne0 : ρ.im ≠ 0 := q.nonReal ρ hρ
+        exact lt_of_le_of_ne hle0 hne0
+      have hst : star ρ ∈ q.Z := q.conj ρ hρ
+      have hstpos : 0 < (star ρ).im := by
+        have h : (star ρ).im = -ρ.im := by rfl
+        rw [h]
+        exact neg_pos.mpr hneg
+      have hstRe : (star ρ).re = 1 / 2 := by
+        by_cases hle : (star ρ).im ≤ (tCE93 : ℝ)
+        · exact hCensus _ hst hstpos hle
+        · exact hFace _ hst (not_le.mp hle)
+      have hreEq : (star ρ).re = ρ.re := by rfl
+      simpa [hreEq] using hstRe
+
+/-- THE RE-ANCHORED RH (machine, the 0288 form at tCE93): assuming the zero-hypothesis (hZPT2 : all zeros of the set above tPT2; hqz : the SET is a ZERO SET - every member is a zeta zero; hW1..hW94 : the 94 verified window-slice clauses - windows 1..93, incl. the re-anchored 53..93 with recorded Rosser-rescue data (W53, W54, W66, W69, W70, W73, W76, W77, W79, W81: one recorded failure each - all ultimately determined; W78: SNAPPED 19 999, one recorded failure; W82: SNAPPED 19 999, two recorded failures - both determined; W83: NON-SNAPPED 20 000, three recorded blocks - all determined; W84: NON-SNAPPED 20 000, one recorded block - determined; W85: NON-SNAPPED 20 000, one recorded block - determined; W86: NON-SNAPPED 20 000, two recorded blocks - both determined; W87: SNAPPED 19 999, CLEAN - zero failures; W88: NON-SNAPPED 20 000, one recorded interior block - determined; W89: NON-SNAPPED 20 000, CLEAN - zero failures; W90: NON-SNAPPED 20 000, two recorded interior blocks - both determined; W91: NON-SNAPPED 20 000, CLEAN - zero failures; W92: NON-SNAPPED 20 000, CLEAN - zero failures; W93: SNAPPED 19 999, one recorded interior block - determined and rescued)), RH is equivalent to the NAMED terminal face above tCE93 - the finite-height part is DISCHARGED by the cited window data (the corrected w1-w93 band: window 1 [CE2, Rosser-RESERVED slice + corrected full slice], windows 2..42 [CE2-CE42], the W1-W2 seam gap (tPT2, gB0] by the W42b fill, and the re-anchored (gB-prev, gB] slices for windows 43..93, all of them bit-identical at their seams). This is the direct-attack reduction: RH is a finite verified census (machine-auditable) AND one named absolute clause. NO RH CLAIM. -/
+theorem rh_reanchored_CE93 (q : ZeroSet)
+    (hZPT2 : WinC.allOnLineUpTo q WinC.tPT2)
+    (hW1 : CE2.ce1WinClause) (hW2 : CE3.ce2WinClauseFull)
+    (hW3 : CE4.ce3WinClauseFull) (hW4 : CE5.ce4WinClauseFull)
+    (hW5 : CE6.ce5WinClauseFull) (hW6 : CE7.ce6WinClauseFull)
+    (hW7 : CE8.ce7WinClauseFull) (hW8 : CE9.ce8WinClauseFull)
+    (hW9 : CE10.ce9WinClauseFull) (hW10 : CE11.ce10WinClauseFull)
+    (hW11 : CE12.ce11WinClauseFull) (hW12 : CE13.ce12WinClauseFull)
+    (hW13 : CE14.ce13WinClauseFull) (hW14 : CE15.ce14WinClauseFull)
+    (hW15 : CE16.ce15WinClauseFull) (hW16 : CE17.ce16WinClauseFull)
+    (hW17 : CE18.ce17WinClauseFull) (hW18 : CE19.ce18WinClauseFull)
+    (hW19 : CE20.ce19WinClauseFull) (hW20 : CE21.ce20WinClauseFull)
+    (hW21 : CE22.ce21WinClauseFull) (hW22 : CE23.ce22WinClauseFull)
+    (hW23 : CE24.ce23WinClauseFull) (hW24 : CE25.ce24WinClauseFull)
+    (hW25 : CE26.ce25WinClauseFull) (hW26 : CE27.ce26WinClauseFull)
+    (hW27 : CE28.ce27WinClauseFull) (hW28 : CE29.ce28WinClauseFull)
+    (hW29 : CE30.ce29WinClauseFull)
+    (hW30 : CE31.ce30WinClauseFull)
+    (hW31 : CE32.ce31WinClauseFull)
+    (hW32 : CE33.ce32WinClauseFull)
+    (hW33 : CE34.ce33WinClauseFull)
+    (hW34 : CE35.ce34WinClauseFull)
+    (hW35 : CE36.ce35WinClauseFull)
+    (hW36 : CE37.ce36WinClauseFull)
+    (hW37 : CE38.ce37WinClauseFull)
+    (hW38 : CE39.ce38WinClauseFull)
+    (hW39 : CE40.ce39WinClauseFull)
+    (hW40 : CE41.ce40WinClauseFull)
+    (hW41 : ce41WinClauseFull)
+    (hW42 : ce42WinClauseFull) (hW43 : CE44.fillWinClauseFull) (hW44 : CE44.ce43WinClauseFull) (hW45 : CE45.ce44WinClauseFull) (hW46 : CE46.ce45WinClauseFull) (hW47 : CE47.ce46WinClauseFull) (hW48 : CE48.ce47WinClauseFull) (hW49 : CE49.ce48WinClauseFull) (hW50 : CE50.ce49WinClauseFull) (hW51 : CE51.ce50WinClauseFull) (hW52 : CE52.ce51WinClauseFull) (hW53 : CE53.ce52WinClauseFull) (hW54 : CE54.ce53WinClauseFull) (hW55 : CE55.ce54WinClauseFull) (hW56 : CE56.ce55WinClauseFull) (hW57 : CE57.ce56WinClauseFull) (hW58 : CE58.ce57WinClauseFull) (hW59 : CE59.ce58WinClauseFull) (hW60 : CE60.ce59WinClauseFull) (hW61 : CE61.ce60WinClauseFull) (hW62 : CE62.ce61WinClauseFull) (hW63 : CE63.ce62WinClauseFull) (hW64 : CE64.ce63WinClauseFull) (hW65 : CE65.ce64WinClauseFull) (hW66 : CE66.ce65WinClauseFull) (hW67 : CE67.ce66WinClauseFull) (hW68 : CE68.ce67WinClauseFull) (hW69 : CE69.ce68WinClauseFull) (hW70 : CE70.ce69WinClauseFull) (hW71 : CE71.ce70WinClauseFull) (hW72 : CE72.ce71WinClauseFull) (hW73 : CE73.ce72WinClauseFull) (hW74 : CE74.ce73WinClauseFull) (hW75 : CE75.ce74WinClauseFull) (hW76 : CE76.ce75WinClauseFull) (hW77 : CE77.ce76WinClauseFull) (hW78 : CE78.ce77WinClauseFull) (hW79 : CE79.ce78WinClauseFull) (hW80 : CE80.ce79WinClauseFull) (hW81 : CE81.ce80WinClauseFull) (hW82 : CE82.ce81WinClauseFull) (hW83 : CE83.ce82WinClauseFull) (hW84 : CE84.ce83WinClauseFull) (hW85 : CE85.ce84WinClauseFull) (hW86 : CE86.ce85WinClauseFull) (hW87 : CE87.ce86WinClauseFull) (hW88 : CE88.ce87WinClauseFull) (hW89 : CE89.ce88WinClauseFull) (hW90 : CE90.ce89WinClauseFull) (hW91 : CE91.ce90WinClauseFull) (hW92 : CE92.ce91WinClauseFull) (hW93 : ce92WinClauseFull) (hW94 : ce93WinClause)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0) :
+    RH q ↔ terminalFaceCE93 q := by
+  have hcensus := allOnLineUpToCE93 q hZPT2 hW1 hW2 hW3 hW4 hW5 hW6 hW7 hW8 hW9 hW10 hW11 hW12 hW13 hW14 hW15 hW16 hW17 hW18 hW19 hW20 hW21 hW22 hW23 hW24 hW25 hW26 hW27 hW28 hW29 hW30 hW31 hW32 hW33 hW34 hW35 hW36 hW37 hW38 hW39 hW40 hW41 hW42 hW43 hW44 hW45 hW46 hW47 hW48 hW49 hW50 hW51 hW52 hW53 hW54 hW55 hW56 hW57 hW58 hW59 hW60 hW61 hW62 hW63 hW64 hW65 hW66 hW67 hW68 hW69 hW70 hW71 hW72 hW73 hW74 hW75 hW76 hW77 hW78 hW79 hW80 hW81 hW82 hW83 hW84 hW85 hW86 hW87 hW88 hW89 hW90 hW91 hW92 hW93 hW94 hqz
+  have hsplit := rh_split_at_CE93 q
+  constructor
+  · exact fun hRH => (hsplit.mp hRH).2
+  · exact fun hFace => hsplit.mpr ⟨hcensus, hFace⟩
+
+/-- M5  ·  THE  FINAL  NAMED  STEP  AT  THE  NEW  FRONTIER:
+    given  the  cited  census  inputs  and  a  closing  of
+    the  re-anchored  face,  all-heights  RH  holds.  NO  RH
+    CLAIM:  no  closing  is  supplied.  -/
+theorem rh_of_terminalFaceCE93 (q : ZeroSet)
+    (hZPT2 : WinC.allOnLineUpTo q WinC.tPT2)
+    (hW1 : CE2.ce1WinClause) (hW2 : CE3.ce2WinClauseFull)
+    (hW3 : CE4.ce3WinClauseFull) (hW4 : CE5.ce4WinClauseFull)
+    (hW5 : CE6.ce5WinClauseFull) (hW6 : CE7.ce6WinClauseFull)
+    (hW7 : CE8.ce7WinClauseFull) (hW8 : CE9.ce8WinClauseFull)
+    (hW9 : CE10.ce9WinClauseFull) (hW10 : CE11.ce10WinClauseFull)
+    (hW11 : CE12.ce11WinClauseFull) (hW12 : CE13.ce12WinClauseFull)
+    (hW13 : CE14.ce13WinClauseFull) (hW14 : CE15.ce14WinClauseFull)
+    (hW15 : CE16.ce15WinClauseFull) (hW16 : CE17.ce16WinClauseFull)
+    (hW17 : CE18.ce17WinClauseFull) (hW18 : CE19.ce18WinClauseFull)
+    (hW19 : CE20.ce19WinClauseFull) (hW20 : CE21.ce20WinClauseFull)
+    (hW21 : CE22.ce21WinClauseFull) (hW22 : CE23.ce22WinClauseFull)
+    (hW23 : CE24.ce23WinClauseFull) (hW24 : CE25.ce24WinClauseFull)
+    (hW25 : CE26.ce25WinClauseFull) (hW26 : CE27.ce26WinClauseFull)
+    (hW27 : CE28.ce27WinClauseFull) (hW28 : CE29.ce28WinClauseFull)
+    (hW29 : CE30.ce29WinClauseFull)
+    (hW30 : CE31.ce30WinClauseFull)
+    (hW31 : CE32.ce31WinClauseFull)
+    (hW32 : CE33.ce32WinClauseFull)
+    (hW33 : CE34.ce33WinClauseFull)
+    (hW34 : CE35.ce34WinClauseFull)
+    (hW35 : CE36.ce35WinClauseFull)
+    (hW36 : CE37.ce36WinClauseFull)
+    (hW37 : CE38.ce37WinClauseFull)
+    (hW38 : CE39.ce38WinClauseFull)
+    (hW39 : CE40.ce39WinClauseFull)
+    (hW40 : CE41.ce40WinClauseFull)
+    (hW41 : ce41WinClauseFull)
+    (hW42 : ce42WinClauseFull) (hW43 : CE44.fillWinClauseFull) (hW44 : CE44.ce43WinClauseFull) (hW45 : CE45.ce44WinClauseFull) (hW46 : CE46.ce45WinClauseFull) (hW47 : CE47.ce46WinClauseFull) (hW48 : CE48.ce47WinClauseFull) (hW49 : CE49.ce48WinClauseFull) (hW50 : CE50.ce49WinClauseFull) (hW51 : CE51.ce50WinClauseFull) (hW52 : CE52.ce51WinClauseFull) (hW53 : CE53.ce52WinClauseFull) (hW54 : CE54.ce53WinClauseFull) (hW55 : CE55.ce54WinClauseFull) (hW56 : CE56.ce55WinClauseFull) (hW57 : CE57.ce56WinClauseFull) (hW58 : CE58.ce57WinClauseFull) (hW59 : CE59.ce58WinClauseFull) (hW60 : CE60.ce59WinClauseFull) (hW61 : CE61.ce60WinClauseFull) (hW62 : CE62.ce61WinClauseFull) (hW63 : CE63.ce62WinClauseFull) (hW64 : CE64.ce63WinClauseFull) (hW65 : CE65.ce64WinClauseFull) (hW66 : CE66.ce65WinClauseFull) (hW67 : CE67.ce66WinClauseFull) (hW68 : CE68.ce67WinClauseFull) (hW69 : CE69.ce68WinClauseFull) (hW70 : CE70.ce69WinClauseFull) (hW71 : CE71.ce70WinClauseFull) (hW72 : CE72.ce71WinClauseFull) (hW73 : CE73.ce72WinClauseFull) (hW74 : CE74.ce73WinClauseFull) (hW75 : CE75.ce74WinClauseFull) (hW76 : CE76.ce75WinClauseFull) (hW77 : CE77.ce76WinClauseFull) (hW78 : CE78.ce77WinClauseFull) (hW79 : CE79.ce78WinClauseFull) (hW80 : CE80.ce79WinClauseFull) (hW81 : CE81.ce80WinClauseFull) (hW82 : CE82.ce81WinClauseFull) (hW83 : CE83.ce82WinClauseFull) (hW84 : CE84.ce83WinClauseFull) (hW85 : CE85.ce84WinClauseFull) (hW86 : CE86.ce85WinClauseFull) (hW87 : CE87.ce86WinClauseFull) (hW88 : CE88.ce87WinClauseFull) (hW89 : CE89.ce88WinClauseFull) (hW90 : CE90.ce89WinClauseFull) (hW91 : CE91.ce90WinClauseFull) (hW92 : CE92.ce91WinClauseFull) (hW93 : ce92WinClauseFull) (hW94 : ce93WinClause)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (hFace : terminalFaceCE93 q) :
+    RH q :=
+  (rh_reanchored_CE93 q hZPT2 hW1 hW2 hW3 hW4 hW5 hW6 hW7 hW8 hW9 hW10 hW11 hW12 hW13 hW14 hW15 hW16 hW17 hW18 hW19 hW20 hW21 hW22 hW23 hW24 hW25 hW26 hW27 hW28 hW29 hW30 hW31 hW32 hW33 hW34 hW35 hW36 hW37 hW38 hW39 hW40 hW41 hW42 hW43 hW44 hW45 hW46 hW47 hW48 hW49 hW50 hW51 hW52 hW53 hW54 hW55 hW56 hW57 hW58 hW59 hW60 hW61 hW62 hW63 hW64 hW65 hW66 hW67 hW68 hW69 hW70 hW71 hW72 hW73 hW74 hW75 hW76 hW77 hW78 hW79 hW80 hW81 hW82 hW83 hW84 hW85 hW86 hW87 hW88 hW89 hW90 hW91 hW92 hW93 hW94 hqz).mpr hFace
+
+/-- M5  ×  M2  ·  the  0290  lane  closing  lands  DIRECTLY  at
+    the  new  frontier.  -/
+theorem terminalFaceCE93_of_thetaInf (q : ZeroSet)
+    (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
+    (hInf : ThetaInf.thetaInfImpliesAllOnLine)
+    (hC : ThetaInf.thetaInfConjecture) :
+    terminalFaceCE93 q := by
+  intro ρ hρ ht
+  have hall := hInf hC
+  exact hall ρ (hqz ρ hρ)
+
+end CE93
