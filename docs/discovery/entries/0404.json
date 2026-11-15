@@ -1,0 +1,22 @@
+{
+  "id": 0404,
+  "ts": "2026-11-15T05:00:00Z",
+  "kind": "discovery",
+  "title": "FrontierCE92: the endpoint is pushed to the CE92 CENSUS frontier - H = tCE92 = tPT2 + 434 577 = 3 000 175 767 377 - the endpoint frontier is now driven by the CERTIFIED CENSUS (92 windows, 1 859 983 zeros), not by the cited Platt-Trudgian record, and the re-anchored terminal face ALONE discharges the endpoint's hWin residual leg at the frontier (the two RH decompositions agree) - NO RH CLAIM",
+  "status": "gated",
+  "lane": "M5",
+  "unit": 118,
+  "facts": [
+    "ROLE: RHEnd.rh_program78_frontierH is the ARBITRARY-FRONTIER form of the endpoint: given a frontier H with the allOnLineUpTo census at H (zero-set premises, the named on-line sliver record below 707/50, [Z78]), RH follows from the residual legs hs1 (zero-side witness: Qside >= devProg on every off-pair above H), hs3 (S3 definition-side wire: Qside <= BwireP + MrP) and the hWin residual face (off-pair exclusion of (H, inf) x (0, 1/200)). The strongest in-tree instantiation before this unit was H = WinC.tPT2 = 3 000 175 332 800 (the cited Platt-Trudgian growth-wire frontier [Z-PT2], arXiv:2004.09765 - rh_program78_frontier_PT2).",
+    "Formal module formal/RhAttack/FrontierCE92.lean (namespace FrontierCE92): (a) ce92AbovePT2 - WinC.tPT2 < (CE92.tCE92 : R) with the EXACT margin (CE92.tCE92 : R) - WinC.tPT2 = 434 577 (norm_num): the in-tree CERTIFIED census frontier sits strictly above the cited Platt-Trudgian frontier; (b) ce92PT2Margin - the margin identity; (c) rh_program78_frontier_CE92 - THE ENDPOINT AT THE CENSUS FRONTIER: the same endpoint holds with H = tCE92 = 3 000 175 767 377 = tPT2 + 434 577; the census input is CE92.allOnLineUpToCE92 (tPT2 plus the 93 verified window-slice clauses); the residue (hs1, hs3, hWin) now lives STRICTLY ABOVE tCE92; (d) terminalFaceCE92_elim_hWin - the NINETY-SECOND re-anchored terminal face (all zeros of the zero set q with Im > tCE92 on the line) ALONE discharges the hWin residual face at tCE92: the CE census-iff and the endpoint squeeze AGREE at the frontier; the negative-height half runs through the ZeroSet symmetry fields (q.conj / star, the HFE-after-HCJ pattern of WinC.noOffPairBelowPT); (e) face_above_frontier_no_offPair - the face statement re-derived in the endpoint's off-pair language; (f) ce92AbovePT2 machinery names per the module.",
+    "SIGNIFICANCE: the ENDPOINT FRONTIER IS NOW DRIVEN BY THE CERTIFIED CENSUS, not by the cited external record - every additional certified window mechanically raises the endpoint frontier (the CE lane's re-anchors keep feeding the endpoint); the absolute clause above the census frontier is the ONLY residual for BOTH decompositions simultaneously (they agree at the frontier). This is the route-(b) wiring of the census into the endpoint squeeze, in-tree and machine-checked.",
+    "Build: RhAttack.FrontierCE92 green (8859 jobs); probe-checked all public names (FrontierCE92.ce92AbovePT2, ce92PT2Margin, terminalFaceCE92_elim_hWin, face_above_frontier_no_offPair, rh_program78_frontier_CE92) via a temporary probe module, build (8860 jobs), then deleted.",
+    "NO RH CLAIM: the endpoint at H = tCE92 is the SAME conditional object as at H = tPT2 with a stronger (census-driven) census input and a strictly higher frontier; the residual (hs1, hs3, hWin) above 3 000 175 767 377 remains open; the terminal face remains the named open object."
+  ],
+  "provenance": {
+    "formal_module": "formal/RhAttack/FrontierCE92.lean",
+    "pipeline": "n/a (formal wiring unit - no new window run; the W93 window run overlapped this unit in the overlap pipeline)",
+    "run_dir": "/home/jsmille/Projects/rh-missing-tail/tmp/ce2/ce1_window_H0_v1"
+  },
+  "gated_by": "formal/RhAttack/FrontierCE92.lean (machine-checked)"
+}
