@@ -1,0 +1,24 @@
+{
+  "id": 0414,
+  "ts": "2026-11-16T15:20:00Z",
+  "kind": "discovery",
+  "title": "SIs: Ismail's explicit finite-height |S(T)| bound enters the tree as NAMED INPUTS (no axioms) with an in-tree arithmetic closure to the frontier pin |S(tPT2)| <= 6 (Zenodo 23301655 v3, Theorem 1.1 row T_opt = 3e12); new Bernoulli-floor lemma (1 + x/n)^n <= exp x and the exact rational bracket 29 < log(tPT2) < 34/10 pinned by 400k- to 600k-bit-free bignum chains - NO RH CLAIM",
+  "status": "gated",
+  "lane": "S-at-zeros / named-input lane",
+  "unit": 128,
+  "facts": [
+    "ROLE: the terminal-face program (RHEnd.rh_program78_frontierH) needs the S-function controlled at the frontier height. This module ingests Ismail's EXPLICIT bound - |S(T)| <= c1 log T + c2 log log T + c3 for all T >= e, with the paper's row whose optimum sits at T_opt = 3e12 (covering tPT2 = 3 000 175 332 800 and every certified census frontier beyond it) - following the house named-input pattern (Z78 externalZeroFree78, W2Beyond3 A1 clause): the analytic fact is a `def ... : Prop` INPUT, and everything downstream is IN-TREE arithmetic. No axioms anywhere in the module.",
+    "NAMED INPUTS (Part B): [IS-S] ismailSBound (S : R -> R) : Prop - the data-free gauge Sbound T := c1 log T + c2 log log T + c3 with the domain condition e <= T; [IS-Z] ismailSAtZeros (q : ZeroSet) (S : R -> R) : Prop - the zero-side variant consumed at the witness step. Consume like [Z78]: instantiate as a theorem hypothesis of the endpoint form.",
+    "ROW CONSTANTS (Part A, exact Q): c1 = 134791/10^6, c2 = 159606/10^6, c3 = 1505817/10^6 (rounded UP from the paper's c1rig/c2rig/c3rig at 10^-8; pinRoundingUp(Strict) proves both the non-strict and strict upgrades). c3 = 2380817/10^6 - 7/8 (pinC3N). The paper's own 3e12 evaluation 5.914293 is recorded (pinM3e12) and dominated by the in-tree gauge at 3e12.",
+    "ARITHMETIC CLOSURE (Parts C+D+E, all LEAN-PROVEN): (1) sboundMon - the gauge is increasing on [e, inf) (c1, c2 nonneg, log monotone), so one pin at the frontier covers EVERY height above it. (2) NEW protected lemma expBernoulli: (1 + x/n)^n <= exp x for x >= 0, n >= 1 - from 1 + u <= exp u powered, with the e^{-x} <= 1/(1-x) inverse pin. (3) UPPER bracket: log tPT2 <= 29 via (1 + x/n) Bernoulli e >= (101/100)^100 with the EXACT bignum 101^100 > 27*10^199 (chained through (8217/5000)^2 to keep every norm_num comparison <= 200 digits - the 600-digit one-shot isDefEq deterministically times out at the default 200k-heartbeat kernel budget). (4) LOWER bracket: log 29 < 34/10 via (1017/1000)^200 > 29 with the exact bignum 1017^100 > 539*10^298 (100-digit base, 300-digit comparison) and log log tPT2 < 34/10 via the same pin and log-le-log monotonicity. (5) FRONTIER PIN: pinBracketValue = c1*29 + c2*(34/10) + c3 = 14893541/2500000 < 6 (pinBracketLt6), hence frontierS_pin: ismailSBound S ==> |S tPT2| <= 6.",
+    "LEAN ENGINERING NOTES (for future bignum pins): file-level `set_option maxHeartbeats 4000000` + `set_option maxRecDepth 1000000` raise the deterministic kernel isDefEq budget (200000 at defaults) and def-check recursion; norm_num on mixed real monomials 27/10*10^200 fails with 'don't know how to synthesize placeholder' while the pure-rational power form (p/q)^n works - chain through small rational squares/powers to stay under 300 digits; `show P by t` (not `:= by t`) is the Lean 4.33 syntax; `rw` auto-closes rfl goals in 4.33 so trailing norm_num in a show-block is a 'No goals' error; doc comments must not precede doc comments (parser: expected 'lemma').",
+    "Build: RhAttack.SIs green (541 KB olean); full default tree green (8735 jobs, exit 0).",
+    "CONCURRENCY: window 98 (from the W97 seam) completed and CERTIFIED while this unit reached green - b-a = 20 000 full requested width, sign_changes_inside = 20 000, rosser_failures_inside = 3 (all determined; unions [398701,398703], [408245,408247], [408862,408864] at offset 123631553e5, each need 2, m = 64 - union bisection running), seam bit-identical to W97's g_b; decode tCE98 = 3 000 175 795 414 (increment 4 673), gB98Lo = 75 004 394 885 356/25 (= 3 000 175 795 414.24, margin 0.005408 < 1), frontier margin tCE98 - tPT2 = 462 614 (455 000 mark: margin 7 614), census through W98 = 1 979 979 (20 021 to 2M).",
+    "NO RH CLAIM: [IS-S]/[IS-Z] are NAMED INPUTS (external analytic facts to be consumed at the witness step); the in-tree content is arithmetic consequences of them - the hs1/hs3 legs of the terminal face remain open."
+  ],
+  "provenance": {
+    "pipeline": "window 98 certified (code/verify_window.py: CERTIFIED true) + Ismail Zenodo 23301655 v3 (Theorem 1.1, row T_opt = 3e12)",
+    "formal_module": "formal/RhAttack/SIs.lean"
+  },
+  "gated_by": "formal/RhAttack/SIs.lean (machine-checked)"
+}
