@@ -1,0 +1,22 @@
+{
+  "id": 0417,
+  "ts": "2026-11-16T17:05:00Z",
+  "kind": "discovery",
+  "title": "Face38PosReserve: the terminal face at the SHARPEST in-tree band - under the strongest named zero-free input [Z78PR] (zero-free on Re s > 8733819666133/10000000000000 ~= 0.87338197), the re-anchored terminal face above any frontier H is THE SAME open object as no off-pair with 0 < d0 <= posReserveD0max ~= 0.37338197 (the smallest band in the Z78* ladder) above H; the generic band identity (both directions, D-parameterized) is proven, so every future re-anchor and every Z78* input re-instantiates by composition (NO RH CLAIM)",
+  "status": "gated",
+  "lane": "terminal face / Z78* band ladder",
+  "unit": 131,
+  "facts": [
+    "THE Z78* LADDER (all in-tree named inputs, each smaller band = stronger exclusion): [Z78] 3/8 = 0.375 -> [Z78Liu] liuD0max -> [Z78Track] qxD0max -> [Z78Gao] gaoD0max -> [Z78C/Collet] colletD0max = 3747729897/10^10 = 0.3747729897 -> [Z78Arvi31] 0.3746075 -> [Z78Arvi] arviD0max = 43693617/50000000 - 1/2 = 0.37387234 -> [Z78PosReserve] posReserveD0max = 8733819666133/10^13 - 1/2 = 0.3733819666133 (STRONGEST; extPosReserve_implies_extArvi chains it). Each input: zero-free on Re s > c (Z78PR carries the s != 1 pole guard explicitly), giving d0 <= c - 1/2 for every off-pair via offPairD0le*.",
+    "THEOREMS (formal/RhAttack/Face38PosReserve.lean, all LEAN-PROVEN, first-pass green): (1) faceAboveH_gives_stripD0 - DIRECTION 2 GENERIC in the band width D: face above H + boundary census -> no off-pair for 0 < d0 <= D above H; the bound D is never used by the proof (the face excludes EVERY offset at or above H) - the Face38Any 3/8 proof generalized. (2) stripD0_implies_faceAboveH - DIRECTION 1 GENERIC: any named zero-free input with offset consequence d0 <= D, plus the D-band no-off-pair statement above H, gives the face. (3) faceAboveH_iff_posReserveStrip - the combined iff INSTANTIATED at [Z78PosReserve] (via offPairD0lePosReserve): faceAboveH q H <-> posReserve-band no-off-pair above H. (4) at_ce96_frontier_posReserve - the concrete instance: CE96.terminalFaceCE96 q (definitionally faceAboveH at tCE96) <-> no off-pair with 0 < d0 <= posReserveD0max and t0 >= tCE96 = 3 000 175 786 069.",
+    "THE REDUCTION CHAIN AT THE FRONTIER (all in-tree, 0416 + this unit): RH q <= [Z78] + census + terminal face (TerminalFaceCE96, legs vacuous) AND terminal face <-> posReserve-band face (this unit, under [Z78PR]). The sole analytic residue of RH at the certified census frontier is ONE named band face: no zero at (t0, d0) with t0 >= tCE96 and 0 < d0 <= 0.3733819666133. Within that band the S4 squeeze strip covers (0, 1/200] (its own named S4 inputs, the hWin residual), and the MID STRIP [1/200, posReserveD0max] is the practical open attack region - a band of width 0.37338 - 0.005 = 0.36838 in the offset.",
+    "NEXT LANE: the generic D-parameterized identity means every future re-anchor (CE97/CE98/... pending the corrected W97/W98 adjudication) and every weaker Z78* input re-instantiates by one-line composition - the band-face language is now stable machinery. The analytic work is confined to the [1/200, posReserveD0max] mid strip above the frontier (or to strengthening the S4 squeeze toward the mid strip).",
+    "Build: RhAttack.Face38PosReserve green (8864 incremental jobs, FIRST PASS); full default tree green (17454 jobs, exit 0).",
+    "NO RH CLAIM: under [Z78PR] the posReserve-band face above tCE96 is the named open analytic residue; the identity reconciles languages at the sharpest width, it does not close the face."
+  ],
+  "provenance": {
+    "pipeline": "Face38Any (0408/0413 lineage) + Z78PosReserve ladder + TerminalFaceCE96 (0416)",
+    "formal_module": "formal/RhAttack/Face38PosReserve.lean"
+  },
+  "gated_by": "formal/RhAttack/Face38PosReserve.lean (machine-checked)"
+}
