@@ -1,0 +1,23 @@
+{
+  "id": 0415,
+  "ts": "2026-11-16T17:05:00Z",
+  "kind": "discovery",
+  "title": "SIsA1: the A1 clause (|DN| <= K on the zero grid) is discharged under the named input [IS-S] - the reverse S->DN conversion |d| <= |sDefect d| + 1/8 + the increasing-gauge composition give the single data-free K = Sbound(x_M) + 1/8, and W2B3.a1_universal_o1 then delivers the S1-vs-Rsum oscillation bound (Sbound(x_M) + 1/8)·(17/8) with K read off Ismail's bound alone - NO RH CLAIM",
+  "status": "gated",
+  "lane": "S-at-zeros / named-input lane",
+  "unit": 129,
+  "facts": [
+    "ROLE: W2B3.a1_universal_wire / a1_universal_o1 closed the far-side kernel HALF of the S1-vs-Rsum oscillation under the walk-side A1 clause (|DN N0 Nas j| <= K on the zero grid); the data-free universal K was that module's open item (the measured K = 2.615067 / certified K = 31047116350.923088 ledger constants cover only the certified (10^7, 3e10] band). This module supplies the universal K from the named input [IS-S] (SIs, 0414): Ismail's explicit |S(T)| <= c1 log T + c2 log log T + c3 for T >= e.",
+    "THEOREMS (formal/RhAttack/SIsA1.lean, namespace SIsA1, all LEAN-PROVEN): (1) dn_pt_sPlusShift / dn_le_sPlusShift - the REVERSE S->DN conversion: |d| = |sDefect d + 1/8| <= |sDefect d| + 1/8 (triangle; mirror of W2SAtZeros.sDefect_le_dnPlusShift, which did DN -> S). (2) sgrid_dn_bound - the increasing-gauge composition: an S-defect bound by Sbound(x_j) at each grid node lifts to |d_j| <= Sbound(x_M) + 1/8 over any ascending grid x_j in the gauge domain (via SIs.sboundMon). (3) ismail_sgrid_dn - the named-input bridge: [IS-S] itself gives |d_j| <= Sbound(x_j) + 1/8 at each node (single hypothesis: the RVM identification |S(x_j)| = |sDefect (DN N0 Nas j)| at the grid nodes, the exact 1/8-shift identity of W2SAtZeros.rvmShiftCore; the O(1/T) RvM count remainder is a data-side note immaterial at frontier scale). (4) boundPos: the gauge is strictly positive on [e, inf) (c1 log T, c2 log log T, c3; log T >= 1, log log T >= 0). (5) a1_o1_from_ismail - THE O(1) CONSEQUENCE: for any ascending zero grid x_0 = g1 <= ... <= x_M in the gauge domain (frontier start g1 >= 2t), the A1-triple (hA1_0, hA1M, hA1) is discharged by [IS-S] + identification with K := Sbound(x_M) + 1/8, and W2B3.a1_universal_o1 delivers |S1Sum - RSum| <= (Sbound(x_M) + 1/8)·(17/8) - the oscillation amplitude read off the named input alone, no measured ledger K needed.",
+    "SCALE: at the frontier (grid starting at tPT2 = 3 000 175 332 800, top x_M at the current census frontier where Sbound(x_M) < 6 by SIs.pinBracketLt6 + monotonicity over a frontier-scale span) the amplitude is < (6 + 1/8)·(17/8) = 49/8 · 17/8 = 833/64 ~ 12.9 - a named-input O(1) constant for the kernel-half oscillation at the frontier (versus the certified ledger K = 31047116350.92 which gives an absurd 6.9e10 - the named input is the point).",
+    "FORMALIZING NOTE: the grid-top chain x j <= x M is taken as an explicit premise (hinc) of a1_o1_from_ismail - the house partLeHead idiom in W2Beyond3 is a PRIVATE lemma, and the nat-subtraction induction for the general form was deferred (the premise is the trivial consequence of hxinc at the consumer).",
+    "Build: RhAttack.SIsA1 green (8744 incremental jobs); full default tree green (17454 jobs, exit 0).",
+    "CONCURRENCY: window 98 union adjudication in progress - first scan found the three union endpoints themselves near-zero (recorded gram balls < 1e-6) with no interior flips, so the zeros sit at/just outside the gram endpoints; an extended-margin scan [g_lo - 1e-3, g_hi + 1e-3], 192 steps, dps-80 / dps-300 refinement, is running (expect 2/2/2). W97 corrected audit Phase C still walking.",
+    "NO RH CLAIM: [IS-S] is a named input; a1_o1_from_ismail is an in-tree consequence of it + the W2B3 wire. The hs1/hs3 endpoint legs remain the open object at the frontier."
+  ],
+  "provenance": {
+    "pipeline": "SIs (0414) + W2Beyond3 A1 wire (E8 atoms, E4 wBound)",
+    "formal_module": "formal/RhAttack/SIsA1.lean"
+  },
+  "gated_by": "formal/RhAttack/SIsA1.lean (machine-checked)"
+}
