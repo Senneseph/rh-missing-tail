@@ -1,0 +1,23 @@
+{
+  "id": 0416,
+  "ts": "2026-11-16T15:55:00Z",
+  "kind": "discovery",
+  "title": "TerminalFaceCE96: the endpoint form of the whole program - under the re-anchored terminal face at the census frontier, hs1/hs3 are VACUOUS (no off-pair at or above the frontier: the face above, the boundary-inclusive census at) and hWin is the face itself, so [Z78] + census + zero-set premises + terminalFaceCE96 q --> RH q; the sole analytic residue left for RH at the certified frontier is THE TERMINAL FACE ITSELF (NO RH CLAIM - the face is a named input)",
+  "status": "gated",
+  "lane": "terminal face / endpoint assembly",
+  "unit": 130,
+  "facts": [
+    "THEOREMS (formal/RhAttack/TerminalFaceCE96.lean, all LEAN-PROVEN): (1) terminalFaceCE96_no_offPair_at_or_above - under terminalFaceCE96 q + the census clause WinC.allOnLineUpTo q tCE96, there is no off-pair (t0, d0) with t0 >= tCE96 and d0 > 0, at EVERY offset (no window restriction): the ABOVE half is FrontierCE96.face_above_frontier_no_offPair (the face + ZeroSet conj/star symmetry); the AT boundary (t0 = tCE96) is the census itself, which is BOUNDARY-INCLUSIVE (0 < rho.im, rho.im <= H -> on the line), with the negative-height half at -tCE96 run through q.conj + star. (2) rh_from_terminalFaceCE96 - THE PROTOTYPE ENDPOINT: under [Z78] (Z78.externalZeroFree78), hqz0 (q a subset of the actual zeros), the named sliver record honline below 707/50, and the CE96 census (hZPT2 + the 97 window-slice clauses hW1..hW97 + hqzCensus), the terminal face ALONE gives RH q: the engine is FrontierCE96.rh_program78_frontier_CE96 with hs1/hs3 instantiated VACUOUSLY via (1) and hWin via FrontierCE96.terminalFaceCE96_elim_hWin.",
+    "MEANING: the two RH decompositions (the CE census-iff and the endpoint squeeze) are now shown to AGREE in the strongest sense at the frontier - the re-anchored terminal face and the endpoint's residual legs are the SAME open content, and the legs are EMPTY once the face holds. RH at the certified census frontier tCE96 = 3 000 175 786 069 reduces to a single named analytic face: every zero q with Im > tCE96 lies on the line. Everything else (the census below, the zero-set structure, [Z78], the on-line sliver) is in-tree or externally cited named data.",
+    "NEXT: the CE97 / CE98 re-anchors (gated on the corrected W97/W98 adjudication evidence - audits still running) re-instantiate EXACTLY this form one/two windows higher; the terminal-face endpoint is stable machinery, not frontier-specific.",
+    "Formalizing notes: the vacuity instances use absurd hoff (hno ...) (the goal is the Qside inequality, not False); the census boundary clause is <=-inclusive (WinC.allOnLineUpTo), which is what closes the t0 = tCE96 boundary without a separate lemma.",
+    "Build: RhAttack.TerminalFaceCE96 green (8864 incremental jobs); full default tree green (17454 jobs, exit 0).",
+    "CONCURRENCY: W97 corrected audit Phase C still walking (~14h at current contention); W98 audit Phase A running; W98 union v2 extended-margin scan running (the first scan found the union endpoints themselves near-zero - recorded gram balls < 1e-6 - with no interior flips, so the zeros sit at/just outside the gram endpoints); W99 pipeline window launched from the W98 seam (a = 12363155417109, b_requested = 12363155437109, 6 workers).",
+    "NO RH CLAIM: terminalFaceCE96 q is a named input (an unproven face); rh_from_terminalFaceCE96 is an implication FROM it. The analytic closure of the terminal face remains the open object of the program."
+  ],
+  "provenance": {
+    "pipeline": "FrontierCE96 (0413) + CE96 census (0412)",
+    "formal_module": "formal/RhAttack/TerminalFaceCE96.lean"
+  },
+  "gated_by": "formal/RhAttack/TerminalFaceCE96.lean (machine-checked)"
+}
