@@ -356,6 +356,15 @@ theorem frontierS_pin (S : ℝ → ℝ) (hIS : ismailSBound S) :
     mul_le_mul_of_nonneg_right hll0 hc2,
     pinBracketLt6]
 
+/-- The BRIDGE [IS-S] --> [IS-Z] (one line, the zero-height form is a
+    restriction of the all-real form): if |S T| <= Sbound T for ALL
+    T >= e, then at every zero height rho.im >= e of any zero set q the
+    same bound holds - [IS-Z] is not an independent input, it is
+    [IS-S] restricted to the zero locus. -/
+theorem ismailSAtZeros_of_ismailSBound (q : ZeroSet) (S : ℝ → ℝ)
+    (hIS : ismailSBound S) : ismailSAtZeros q S :=
+  fun ρ hρ hpos hT => hIS (ρ.im) hT
+
 end SIs
 
 end
