@@ -13,8 +13,10 @@ line (the "critical line") in the complex plane. The program's claim is not
 is a **two-part machine-checked architecture**:
 
 **(A) A certified census of zeta zeros just above the previous world-record
-height.** 100 consecutive "windows" of ~20,000 zeros each — 2 000 000 zeros in
-all, from height ~3.00017×10¹² up to 3,000,175,800,092 (the round 2 000 000 mark lands exactly in the 21-point W100 tail) — have been located and
+height.** 101 consecutive "windows" of ~20,000 zeros each — 2 020 000 zeros in
+all, from height ~3.00017×10¹² up to 3,000,175,804,765 (the 2 000 000 program
+target landed exactly in the 21-point W100 tail; W101 is the first
+post-target-extension window, one recorded flag adjudication-confirmed) — have been located and
 **independently machine-certified as lying on the critical line**, by a purpose-
 built Python certification pipeline whose output records are bit-stable,
 re-verifiable from a separate verifier program, and audited by independent
@@ -22,11 +24,11 @@ high-precision recomputation.
 
 **(B) A machine-checked logical skeleton (Lean 4 + mathlib) that reduces
 "prove RH" to a small, precisely named list of remaining obligations.**
-≈276 formal modules, zero `axiom`, zero `sorry`, full build 17,454 jobs green
+≈295 formal modules, zero `axiom`, zero `sorry`, full build 17,454 jobs green
 (re-built daily). The skeleton takes the certified census as in-tree input and
 derives, step by step, that **the entire residual analytic content of RH above
 the certified frontier is a single named geometric fact** — "every zero above
-height 3,000,175,786,069 is on the line" (the *terminal face*) — and that this
+height 3,000,175,804,765 is on the line" (the *terminal face*) — and that this
 fact further reduces to **two precisely-stated squeeze conditions** on possible
 off-line zeros. Every theorem in the chain carries an explicit `NO RH CLAIM`
 label: nothing is asserted that the machine has not checked.
@@ -63,12 +65,14 @@ and audit the individual zero records.
 ## 3. The impressive, specific, checkable facts
 
 ### Computation pillar (the census)
-- **2 000 000 zeros on the line, certified, in the window program
-  W1…W100**, covering (tPT2, tCE100] with
-  tCE100 = 3,000,175,800,092 — a new certified frontier **above the
+- **2 020 000 zeros on the line, certified, in the window program
+  W1…W101**, covering (tPT2, tCE101] with
+  tCE101 = 3,000,175,804,765 — a new certified frontier **above the
   Platt–Trudgian world-record height of 3×10¹²** (the certified band rises
-  from the cited frontier tPT2 = 3,000,175,332,800 to tCE100, a margin of
-  467,292; the 2 000 000 certified-zero mark lands exactly in W100).
+  from the cited frontier tPT2 = 3,000,175,332,800 to tCE101, a margin of
+  471,965 — the 470 000 unit round mark crossed in W101; the 2 000 000
+  certified-zero program target landed exactly in W100, and W101 extends the
+  census to 2 020 000 as the first post-target-extension window).
 - Each window is a self-contained bit-stable record: exact rational
   (scaled-integer) Gram-point values, sign walks of the zeta-Z function at
   the certified height, prime-theoretic (Rosser) cross-checks, per-zero
@@ -82,10 +86,10 @@ and audit the individual zero records.
   W98: the 3 flagged unions each contain the predicted zeros — 5/5/5 — a stale pre-reboot audit run had misread them as zero-fresh; the durable re-adjudication of 2026-11-17 re-counted them from scratch, confirmed the pipeline record, and the erratum is committed).
   These adjudications are exactly the kind of thing an outside investigator
   can replicate with the scripts. (Both adjudications are complete and pinned: W97 fresh 6/5/5, W98 fresh 5/5/5, all eight control spans pass, verdict JSONs in the artifact record).
-- The 2,000,000 certified-zero mark **landed exactly in Window 100** (the 21-point tail: 1 999 979 + 21 = 2 000 000, margin 0).
+- The 2,000,000 certified-zero mark **landed exactly in Window 100** (the 21-point tail: 1 999 979 + 21 = 2 000 000, margin 0); Window 101 (the first post-target-extension window) carries one recorded prime-theoretic flag, **determined, rescued, and independently adjudication-confirmed (fresh 4/4, no near-zero touch, 4/4 control spans pass — verdict ALL SPANS RESOLVED)**.
 
 ### Formal pillar (the Lean skeleton)
-- **286 RhAttack modules, zero axioms, zero `sorry`.** Full build:
+- **290 RhAttack modules, zero axioms, zero `sorry`.** Full build:
   17,454 jobs, green, repeated daily. Lean 4.33.1 + mathlib.
 - The endpoint engine (`RHEnd`) states the whole program as one family of
   implications: *census + named external inputs + terminal face ⇒ RH*,

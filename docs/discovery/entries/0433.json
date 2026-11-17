@@ -1,0 +1,17 @@
+{
+ "id": "0433",
+ "ts": "2026-11-17T08:15:00Z",
+ "kind": "erratum-followup",
+ "title": "0424 ERRATUM COMPLETED: the stale W98 'over-prediction / zero fresh zeros' wording that survived in the generator PHRASE TABLES (WR/IFFREC/WINREC2/SLICENOTE[98] + FACTS[99].widthprev_desc) is corrected; CE98/CE99/CE100 regenerated so no module in the tree asserts the supersededed reading anymore (full build green 17 454 jobs)",
+ "status": "committed",
+ "lane": "generator / in-tree wording integrity (W98 erratum completion)",
+ "unit": 137,
+ "facts": [
+  "DEFECT: the 0424 erratum corrected the FACTS[98]-driven wording (faildesc, verif_extra, fail_phrase, band_fail, rescued_note, prov_fail) and the FRONTIER slidetails, but the STATIC per-window phrase tables in scripts/formal/gen_cen.py - WR[98], IFFREC[98], WINREC2[98], SLICENOTE[98] and FACTS[99].widthprev_desc - still carried the pre-reboot reading 'the rescue probe's FOUND 5 union counts adjudicated as over-predictions - zero fresh zeros in the flagged unions'. Because each new CE{N} module re-cites W98 verbatim via these tables, CE98.lean (4 spots), CE99.lean (3 spots) and CE100.lean (2 spots) all asserted the SUPERSEDED reading - a direct contradiction of the 0424 adjudication (W98 fresh 5/5/5, rescues REAL) committed in 361a6a8.",
+  "FIX: the five static phrases now state the adjudicated verdict ('RE-CONFIRMED by the 0424 fresh-mpmath adjudication - fresh 5 / 5 / 5, no near-zero touch' style); CE98.lean was corrected in-tree (4 exact-match replacements) and CE99.lean/CE100.lean were REGENERATED from the corrected CE98.lean via the durable generators (diff-guarded: only the W98 phrase lines changed).",
+  "AUDIT: after the regeneration, a tree-wide grep for 'over-prediction' leaves ONLY the intentional erratum-quote contexts (the 0424 erratum narrative in CE98.lean's own header and the IFFREC[98] 'stale pre-reboot reading is an audited erratum' note) - no module asserts the stale reading as fact. Targeted build of CE98/CE99/CE100 green (8 866 jobs); this fix is carried into the CE101 package build (full tree green 17 454 jobs).",
+  "LESSON: an erratum that corrects a FACTUAL reading must sweep BOTH the data fields (FACTS) AND the static per-narrative phrase tables; re-citation mechanics copy stale static text forward into every future module until the table itself is fixed."
+ ],
+ "no_rh_claim": true,
+ "supersedes_context": "completes the 0424 erratum (commit 361a6a8)"
+}

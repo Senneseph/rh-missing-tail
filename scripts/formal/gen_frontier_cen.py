@@ -13,7 +13,8 @@ import sys
 import gen_cen
 
 ROOT = gen_cen.ROOT
-UNITW = {97: "NINETY-SEVENTH", 98: "NINETY-EIGHTH", 99: "NINETY-NINTH", 100: "ONE-HUNDREDTH"}
+UNITW = {97: "NINETY-SEVENTH", 98: "NINETY-EIGHTH", 99: "NINETY-NINTH", 100: "ONE-HUNDREDTH",
+         101: "ONE-HUNDRED-FIRST"}
 
 FRONTR = {
     98: dict(
@@ -54,6 +55,23 @@ FRONTR = {
                   "200 000 @ CE42B, ... 460 000 @ CE98, 465 000 @ CE99) was tCE - tPT2 in units."),
         slidetail=("W99 NON-SNAPPED 20 000 CLEAN; W100 TAIL 21 (b - a = 21), CLEAN - the final "
                    "short window of the 2 000 000 census program"),
+    ),
+    101: dict(
+        entry="0431",
+        hdr_summary=("the 470 000 UNIT ROUND MARK was crossed at CE101 [0431], margin 1 965 - a "
+                     "regular round crossing; the 2 020 000 CERTIFIED-ZERO mark lands exactly at "
+                     "CE101 (the first 20 000-mark of the post-target extension); the 2 000 000 "
+                     "program target had landed at CE100 [0421] - W101 is the first post-target-"
+                     "extension window"),
+        abovept2=("This is the 470 000-unit round-mark crossing (margin 1 965 - a regular round "
+                  "crossing, not one of the series' PREDICTED milestones) recorded at CE101 (0431): "
+                  "the unit-milestone series (175 000 @ CE38, 200 000 @ CE42B, ... 455 000 @ CE97, "
+                  "460 000 @ CE98, 465 000 @ CE99, 470 000 @ CE101) was tCE - tPT2 in units. (CE100 "
+                  "was the TAIL window that landed the 2 000 000 census program target [0421]; the "
+                  "crossing lands in the first post-target full window, CE101.)"),
+        slidetail=("W100 TAIL 21 (b - a = 21), CLEAN - the landed 2 000 000 census program target "
+                   "[0421]; W101 NON-SNAPPED 20 000, ONE recorded interior Rosser failure - "
+                   "determined and rescued, adjudication-confirmed (fresh 4 / 4 - 0431)"),
     ),
 }
 

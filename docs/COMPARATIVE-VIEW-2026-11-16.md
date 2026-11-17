@@ -21,9 +21,9 @@ Gordon–Möller era; Turing's method in general)**
 
 | | They | This project |
 |---|---|---|
-| Zero count verified | up to ~10²⁰ zeros (height ≈ 7×10²⁰) | **2 000 000 certified zeros exactly** (the W100 tail lands the mark with margin 0; the count is deliberate — see below) |
-| Height | the record *is* H₀ = 3,000,175,332,800 (Platt–Trudgian) | H₀ is our **starting point**; the certified frontier is at H₀ + 467,292 = 3,000,175,800,092 (tCE100) |
-| Granularity | monolithic computation; the published output is a height | **98 independently re-verifiable window certificates**, each re-certifiable by a standalone verifier program from the file alone |
+| Zero count verified | up to ~10²⁰ zeros (height ≈ 7×10²⁰) | **2 020 000 certified zeros** (the 2 000 000 program target landed exactly in the W100 tail, margin 0; W101 extends post-target to 2 020 000 — the count structure is deliberate — see below) |
+| Height | the record *is* H₀ = 3,000,175,332,800 (Platt–Trudgian) | H₀ is our **starting point**; the certified frontier is at H₀ + 471,965 = 3,000,175,804,765 (tCE101) |
+| Granularity | monolithic computation; the published output is a height | **101 independently re-verifiable window certificates**, each re-certifiable by a standalone verifier program from the file alone |
 | Error discipline | explicit analytic bounds taken from the literature | Hardy Z(t) evaluated in **ball (interval) arithmetic** (Arb, rounding enclosed) with an independent second code path; plus a separate high-precision mpmath audit layer (60–300 digits, independent re-walks) |
 | Relation to RH | "RH is true up to height T" (a fact) | the census is an **in-tree input to the endpoint theorem** — it is a datum of the proof architecture, not merely a record |
 
@@ -47,13 +47,13 @@ own certificate re-verified in our environment — documented in
 
 | | Murphy (Oct 2026) | This project |
 |---|---|---|
-| Certified zeros | one window: 20,000 zeros, span ≈ 4,671 in height just above H₀ | **100 continuous windows: 2 000 000 zeros, span 467,292 ≈ 100× the span**, from the same H₀ (W1-W97 ≈ 20 000 zeros each, W98/W99 = 20 000, W100 = the 21-point tail) |
+| Certified zeros | one window: 20,000 zeros, span ≈ 4,671 in height just above H₀ | **101 continuous windows: 2 020 000 zeros, span 471,965 ≈ 101× the span**, from the same H₀ (W1–W97 ≈ 20 000 zeros each, W98/W99 = 20 000, W100 = the 21-point tail [2 000 000 target], W101 = 20 000, one recorded flag rescued and adjudication-confirmed fresh 4/4) |
 | Lean content | the Riemann–Siegel *remainder bound* as a machine-checked component theorem | the **entire endpoint architecture**: RH ⇐ census + terminal face; terminal face ⇐ posReserve-band face; band face ⇐ two named squeeze faces; plus the named-input lanes (Z78* ladder, Ismail |S| bound → |S(tPT2)| ≤ 6 → data-free A1 constants) |
 | Audit layer | positive/negative controls, calibrations, independent reproduction | per-window independent audits at multiple precisions **with documented adjudications** (e.g. W97's 3 flagged unions each contain exactly the predicted zeros — 6/5/5; W98's 3 flagged unions each contain the predicted zeros — 5/5/5; a stale pre-reboot audit run had misread W98's spans as zero-fresh, and the durable 2026-11-17 re-adjudication superseded that reading — erratum committed) |
 
 So the relationship is **continuation and extension, not independent
 discovery** — the reviewer should be told exactly that. It is precisely this
-lineage (Murphy's 1 window → 100 windows + full reduction skeleton) that makes
+lineage (Murphy's 1 window → 101 windows + full reduction skeleton) that makes
 the project noteworthy: it is the visible, in-progress *generalization* of a
 freshly published 2026 result, done publicly in one repository.
 
@@ -138,7 +138,7 @@ finding is a fact about the published constant; no RH claim.
    provenance pinned (merge identity, zenodo DOI), each admitted under the
    no-axiom discipline, each converted into in-tree theorems.
 5. **It is one person + machines, fully reproducible from one git repository**
-   (794 commits; 415 numbered discovery entries; build evidence quoted in
+   (809 commits; 431 numbered discovery entries; build evidence quoted in
    commits; every module labeled NO RH CLAIM). That combination — one
    repository, an open problem, a machine-checked reduction — is, to our
    knowledge, without precedent.
@@ -147,7 +147,7 @@ finding is a fact about the published constant; no RH claim.
 
 - No analytic breakthrough: the squeeze faces are open by construction — that
   is the remaining work, correctly identified.
-- 2 000 000 certified zeros is far below 10²⁰; the trade is count for height
+- 2 020 000 certified zeros is far below 10²⁰; the trade is count for height
   + unit-level re-verifiability + logical integration.
 - The numerical layer is interval-enclosed ball arithmetic plus independent
   high-precision re-walks — rigorous as computation, and deliberately *not*
