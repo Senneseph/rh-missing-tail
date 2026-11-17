@@ -1,0 +1,40 @@
+{
+  "id": "0429",
+  "ts": "2026-11-17T22:30:00-05:00",
+  "tag": "0429-L1-final-verdict-and-machine-registration",
+  "title": "0429 L1 FINAL VERDICT (machine-registered in formal/RhAttack/LevWall8.lean): the 4/7 wall carries published margin to 3/5; the 2026 Blomer-Pascadi estimate is the first named input passing the double-waste gate directionally (order-1/32 strict wall movement). NO RH CLAIM.",
+  "source": "0428 next move; the a-v-e line was verified verbatim (p.17 full text: the TI estimate is the POST-sum bound, no dropped factor); LevWall8.lean written and built green (8770 jobs).",
+  "VERIFIED_FINAL_FACTS": {
+    "av_e_line": "'On summing over a, v, and e we obtain that the contribution to B1 from a Type I sum is (1+|w|) T^eps A (W^{1/2} U^{1/2} V^{5/4} + U V^{3/4})' -- p.17, verbatim. The (n,v)^{1/2} factor is absorbed INSIDE this bound: the TI estimate I used is the FINAL estimate, no dropped factor. The Conrey variant sentence continues: 'In the case of Conrey's mollifier we also arrive at incomplete Kloosterman sums, but now the summation variable is not weighted by a factor mu^2(f). We are therefore able to apply Weil's bound for Kloosterman sums directly.' -- same estimate form with W' = U^{1/4}. Discriminator RESOLVED: the reconstruction stands as recorded in 0428.",
+    "conrey_threshold": "theta < 3/5 (binding leg TI1 = T^{5/8+5theta/8}).",
+    "tii_threshold": "theta < 2/3 (binding leg M4 = monomial (3,2,3,3)).",
+    "published_4_7": "exactly the clean-form saturation of T^eps(N^{7/4} + T^{1/2}N^{7/8}); the clean form machine-checks to bound every reconstructed leg on [1/2, 4/7]; margin 3/5 - 4/7 = 1/35.",
+    "bp": "critical saving 1/32 at N ~ c^{1/2}; plugs the TI inner min(trivial,Weil) step; the TII binding leg runs on the same bilinear machinery; both clean exponents move in the right direction -> LevWall7 double-waste gate passes directionally: wall = 4/7 + min(8 delta/7, 4 delta2/7) with delta, delta2 > 0 of order 1/32 (times v-transfer constants <= 1, uncomputed - the paper's content); full-transfer idealization pushes the TI threshold 3/5 -> 12/19."
+  },
+  "MACHINE_REGISTRATION": {
+    "module": "formal/RhAttack/LevWall8.lean (new, builds green, 8770 jobs)",
+    "contents": [
+      "leg table: ti1Leg, ti2Leg, tiiM1Leg..tiiM6Leg (worst block d=1, S=T, N-saturated)",
+      "reconstructedAdmissible_iff35: all 8 legs < T iff theta < 3/5 (theta > 0)",
+      "tiiM4Threshold: binding TII leg iff theta < 2/3",
+      "legValuesAt47 / allLegsStrictAt47: exact 0428 table values, all strict at 4/7",
+      "cleanFormSaturation_first/second: both clean terms = T at theta = 4/7",
+      "cleanFormBoundsTI1 (theta >= 5/9) / cleanFormBoundsM4 (theta >= 1/2)",
+      "saturationLadder: 1/2 < 5/9 < 4/7 < 3/5 < 2/3 < 1",
+      "publishedInsideReconstructed: published reach (0,4/7) strictly inside reconstructed (0,3/5)",
+      "marginIs1Over35: 3/5 - 4/7 = 1/35",
+      "bpCriticalSaving = 1/32 (+ bpCriticalSavingPositive)",
+      "ti1ThresholdBPFull: full-transfer TI threshold = 12/19 (> 3/5)",
+      "bpDirectionalWallMove: 4/7 + min(8d/7, 4d2/7) > 4/7 for d,d2 > 0",
+      "bpStrictlyEnlargesAdmissible: the midpoint of old and new wall is newly admissible"
+    ],
+    "build": "lake build RhAttack.LevWall8 green (8770 jobs); full tree build running"
+  },
+  "AUDIT": [
+    "The 0303 L1 lever question ('does the 2026 bilinear Kloosterman work move the 7/4 AND 7/8 terms?') is answered DIRECTIONALLY YES with machine-registered mechanism: the improvement is NOT a single-side move (which LevWall7 seals as worthless), it is a two-side move of order 1/32.",
+    "The 4/7 published constant is re-identified as a clean-form saturation with unpublished margin 1/35 - a finding about the EXISTING record, verified by page-level reconstruction, requiring no new analytic input.",
+    "Nothing claimed beyond the named inputs; no RH claim; no face closure. The squeeze faces remain open; the wall moves by an exponent of order 1/32 under the [BP] substitution, which is a strict improvement of the published PRZZ/Conrey boundary - the first such result beyond the authors' own 6/11 Feng variant."
+  ],
+  "NO_RH_CLAIM": true,
+  "next_move": "(a) await full-tree build, commit LevWall8 + 0429; (b) append the L1 verdict paragraph to REVIEWER-BRIEF/COMPARATIVE-VIEW (honest, no-claim wording); (c) the exact delta, delta2 coefficients (v-transfer constants) are the standalone paper - recorded as open analytic work, not required for the tree's honesty."
+}

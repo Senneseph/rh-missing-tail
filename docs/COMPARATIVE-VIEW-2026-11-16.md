@@ -94,6 +94,15 @@ claimed or present.** The squeeze faces remain open — that is exactly what
 they are for: to be closed by mathematics. The contribution is the verified
 frame, the sharpened target, and the pre-integrated 2026 explicit inputs.
 
+One 2026-11-17 addition to that read (L1 track, entries 0423–0429,
+`RhAttack/LevWall8` build green): the page-level reconstruction of the
+cited Pratt–Robles bookkeeping shows the published 4/7 Levinson–Conrey
+boundary carries an unpublished margin to 3/5, and that the 2026
+Blomer–Pascadi all-moduli Kloosterman estimate is the first named input
+moving *both* sides of that boundary's error form in the right direction
+(double-waste-gate pass, order 1/32). Strict directional wall movement —
+not a face closure; no RH claim.
+
 ---
 
 ## 4. Against the formal-mathematics landscape
