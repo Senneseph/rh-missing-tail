@@ -14,7 +14,8 @@ import gen_cen
 
 ROOT = gen_cen.ROOT
 UNITW = {97: "NINETY-SEVENTH", 98: "NINETY-EIGHTH", 99: "NINETY-NINTH", 100: "ONE-HUNDREDTH",
-         101: "ONE-HUNDRED-FIRST", 102: "ONE-HUNDRED-SECOND", 103: "ONE-HUNDRED-THIRD"}
+         101: "ONE-HUNDRED-FIRST", 102: "ONE-HUNDRED-SECOND", 103: "ONE-HUNDRED-THIRD",
+         104: "ONE-HUNDRED-FOURTH"}
 
 FRONTR = {
     98: dict(
@@ -108,6 +109,29 @@ FRONTR = {
         slidetail=("W102 SNAPPED 19 999 (the requested 20 000 snapped back one gram at the b-end), "
                    "CLEAN; W103 SNAPPED 19 997 (the requested 20 000 snapped back three grams at the "
                    "b-end), CLEAN"),
+    ),
+    104: dict(
+        entry="0437",
+        hdr_summary=("the 485 000 UNIT ROUND MARK was crossed at CE104 [0437], margin 982 (a regular "
+                     "round crossing - the expected window noted in the 0436 record, hit); the 2 060 "
+                     "000 CERTIFIED-ZERO mark was CROSSED IN THIS WINDOW (margin 19 996); W104 is the "
+                     "FULL-width 20 000 window with ONE recorded Rosser failure - determined and "
+                     "rescued, adjudication-confirmed (fresh 6 / 6 - 0437); the increment returned to "
+                     "the STANDARD 4 673 after the consecutive SNAP pair"),
+        abovept2=("This is the 485 000-unit round-mark crossing (margin 982 - a regular round "
+                  "crossing, whose expected window W104 was noted in the 0436 record) recorded at "
+                  "CE104 (0437): the unit-milestone series (175 000 @ CE38, 200 000 @ CE42B, ... "
+                  "470 000 @ CE101, 475 000 @ CE102, 480 000 @ CE103, 485 000 @ CE104) was tCE - "
+                  "tPT2 in units. (CE100 was the TAIL window that LANDED the 2 000 000 census program "
+                  "target [0421]; the post-target extension continues: CE101 (full 20 000, one "
+                  "rescued failure, adjudication-confirmed fresh 4/4), CE102 (SNAPPED 19 999, "
+                  "CLEAN), CE103 (SNAPPED 19 997, CLEAN; 2 040 000 crossed mid-window), CE104 (full "
+                  "20 000, one rescued failure, adjudication-confirmed fresh 6/6; 2 060 000 "
+                  "crossed).)"),
+        slidetail=("W103 SNAPPED 19 997 (the requested 20 000 snapped back three grams at the "
+                   "b-end), CLEAN (the 2 040 000 census mark crossed mid-window); W104 NON-SNAPPED "
+                   "20 000, ONE recorded interior Rosser failure - determined and rescued, "
+                   "adjudication-confirmed (fresh 6 / 6 - 0437)"),
     ),
 }
 
