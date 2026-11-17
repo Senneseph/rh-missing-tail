@@ -185,7 +185,7 @@ current state and RH**, with the largest of those facts (the zero-free
 half-plane inputs) already backed by externally audited tracker records.
 It is not a proof. It is, in our judgment, the most precisely isolated and
 machine-verified formulation of the remaining problem that currently exists,
-and it is the kind of artifact an expert can either extend or refuted within
+and it is the kind of artifact an expert can either extend or refute within
 days of the clone command, not months of reverse-engineering.
 
 *Prepared 2026-11-16. Repository: `rh-missing-tail` (git, 794 commits).
