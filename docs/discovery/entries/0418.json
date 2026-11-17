@@ -1,5 +1,5 @@
 {
-  "id": 0418,
+  "id": "0418",
   "ts": "2026-11-16T18:15:00Z",
   "kind": "discovery",
   "title": "CE97 + FrontierCE97 GREEN (the tenth re-anchor past tPT2 in this stretch): window 97 (SNAPPED 19 997, b = 12 363 155 397 109, THREE recorded interior Rosser failures - all determined and rescued) certified 2026-11-16; frontier tCE97 = 3 000 175 790 741 (gap 457 941 above tPT2; the 455 000 unit round mark crossed at W97, margin 2 941); census 1 959 979 (the 1 940 000 certified-zero mark crossed at W97); the re-anchored CE97 band/iff/endpoint theorem suite and the FrontierCE97 endpoint wiring (rh_program78_frontier_CE97, terminalFaceCE97_elim_hWin) built and machine-checked; TerminalSqueeze (the endpoint form from band faces) also committed; durable in-repo generators (scripts/formal/gen_cen.py, gen_frontier_cen.py) replace the /tmp scripts lost in the 2026-11-16 reboot; independent fresh-mpmath union-span adjudication tool (scripts/audit/union_span_check.py) running on the W97 triple (NO RH CLAIM)",

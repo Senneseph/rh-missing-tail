@@ -1,0 +1,22 @@
+{
+  "id": "0432",
+  "ts": "2026-11-17T23:50:00-05:00",
+  "tag": "0432-L1b-a-literature-verdict",
+  "title": "0432 L1b(a) LITERATURE VERDICT (negative): no known estimate beats the critical-length Weil level for the ONE-VARIABLE (even mu-weighted) Kloosterman step at composite moduli; every known 2024-2026 improvement is BILINEAR in both variables. The 0430 wall verdict is reinforced; the required shape of a future L1b input is identified.",
+  "source": "L1b structural follow-up recorded in 0430; bounded literature sweep 2026-11-17 (web, primary-abstract level).",
+  "SWEEP_RESULTS": [
+    "Blomer-Pascadi 2026 (GFA, arXiv:2607.24311): bilinear forms via quadratic characters - c^{-1/32} at critical length - BILINEAR, all moduli (the [BP] of 0425-0430).",
+    "Pascadi 2026 (GFA, doi 10.1007/s00039-026-00746-0): NON-ABELIAN AMPLIFICATION - bilinear Type II sums of Kloosterman sums with composite moduli, Fourier analysis on SL2(Z/cZ), non-abelian amplification; non-trivial for all moduli except near-primes at length sqrt(c), saving c^{-1/12} for products of two same-size primes - BILINEAR.",
+    "Milicevic-Qin-Wu 2025/2026 (arXiv:2511.07550): power-saving bilinear estimates for general bilinear forms with Kloosterman sums modulo arbitrary q, including BOTH variables shorter than the Polya-Vinogradov range; first-moments of twisted L-functions - BILINEAR (complements/independently parallels BP-2026).",
+    "Kerr-Shparlinski-Wu 2022 (arXiv:2204.05038): bilinear forms with Kloosterman sums, Type II incomplete-Kloosterman estimates, one-variable-from-arbitrary-sequence estimates - BILINEAR core.",
+    "Semenova 2021 (Izv. Math. 101:140, doi 10.1070/im9168) + Korolev 2010/2017 (Kloosterman sums with multiplicative coefficients): SHORT-sum (length below the critical regime) estimates for weighted/one-variable Kloosterman sums, modulo PRIME (and prime power, via prime-power extension results) - the wrong REGIME for the binding step (which sits at critical length F' ~ v^{1/2} in the v-weighted worst blocks) and the wrong MODULUS class (prime, not general composite).",
+    "Blomer-Milicevic 2026 (arXiv:2608.21346): products of shifted Kloosterman sums to ODD PRIME POWER moduli - wrong modulus class, product-level (not single-sum) regime."
+  ],
+  "VERDICT": [
+    "(a) NO published estimate - prime-modulus or any-modulus, 2010-2026 - beats the Weil critical-length level c^{1/2+o(1)} for a ONE-VARIABLE Kloosterman (or mu-weighted exponential, completed) sum at fixed (a,b) and general composite modulus c. The 2026 advances (BP, non-abelian amplification, MQW, KSW) are uniformly BILINEAR: their power savings over Weil require both coefficient ranges to carry length ~ c^{1/2}.",
+    "(b) The binding Type I step of the Conrey/PR extraction (0428/0430) is exactly a one-variable step with the degenerate axis (a-range <= T^{1/16} in every block) - so no known input improves it: THE WALL STANDS (0430 confirmed at the literature level, entry 0432).",
+    "(c) The required shape of a future L1b input, for the record: EITHER (i) a power saving over the critical-length one-variable Kloosterman level at general composite moduli (open - would be a standalone major result; the mu-weight structure of the sum is the only exploitable non-generic feature), OR (ii) a re-decomposition of the Type I sum in which the Kloosterman step is genuinely two-variable with both axes of length ~ c^{1/2} (the a-axis is structurally bounded by the hDelta bookkeeping A = N1N2/(d^2 T^{1-eps}) - this would need a different decomposition, e.g. before the hDelta completion), OR (iii) an improvement on the Deshouillers-Iwaniec seven-monomial endpoint itself (the Type II side) that moves the 7/4-side clean exponent... which is not possible from the Type II side alone (double waste: the 7/4 side is sourced by Type I). (iii) is therefore excluded by LevWall7; (i) and (ii) are the live structural questions."
+  ],
+  "NO_RH_CLAIM": true,
+  "next_move": "none for this item (closed at literature level); the live items are W101 completion (CE101 lane, in flight) and the long-term L1b(i)/(ii) structural questions (research-grade, out of session scope)."
+}
