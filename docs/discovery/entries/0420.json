@@ -1,0 +1,19 @@
+{
+  "id": 0420,
+  "ts": "2026-11-17T03:05:00Z",
+  "kind": "discovery",
+  "title": "CE99 + FrontierCE99 GREEN (the twelfth re-anchor past tPT2): window 99 (NON-SNAPPED 20 000, CLEAN - zero interior Rosser failures) certified; frontier tCE99 = 3 000 175 800 087 (gap 467 287 above tPT2; the 465 000 unit round mark crossed at W99, margin 2 287); census 1 999 979 (the 1 980 000 certified-zero mark crossed at W99) - 21 zeros short of the 2 000 000 program target (NO RH CLAIM)",
+  "status": "gated",
+  "lane": "formal CE-series / census frontier",
+  "unit": 134,
+  "facts": [
+    "WINDOW 99 (Murphy pipeline, our run 2026-11-16, post-2026-11-16-reboot, seeded from the W98 cache tail: resumed_from_cache = 32 737, 33 387 fresh evals in 146.1 s - the fastest window of the run, logged for provenance): NON-SNAPPED 20 000, CLEAN (a = 12 363 155 417 109 = b98 bit-identical seam, b = 12 363 155 437 109); verifier CERTIFIED: true, points_checked = 33 387, sign_changes_inside = 20 000 (= b - a), rosser_failures_inside = 0 (a CLEAN window - the 43rd clean window of the overlap pipeline), turing_ok = true, K_conservative = 12, end Rosser runs 49 / 46.",
+    "ENDPOINT (exact exponent -86 dyadic, bit-identical seam to g_b98): g_b99 = [232127359238935715418942513750545622351, -86, 16777217, -110], center 3000175800087.1805166069926931049037... (fract 0.180516606992693104903701..., exact -86 dyadic terminator); certified radius ~4.7e-14; gB99Lo = 300017580008718 / 100, exact sub-cent margin 0.0005166069926931049037 - the TWENTIETH sub-cent case (5.17e-4); no CASING.",
+    "FRONTIER ARITHMETIC (machine, in CE99.lean): tCE99 - tCE98 = 4673; tCE99 - tPT2 = 467 287; the 465 000 UNIT ROUND MARK was CROSSED IN WINDOW 99 (margin 2 287 - regular round crossing); 460 000 (crossed W98 [0419]) carries 7 287; next mark 470 000 is 2 713 ahead (less than one full step - compute at that window, do not pre-announce).",
+    "CENSUS (pipeline data): cumulative 1 999 979 over (g_a1, g_b99]; the 1 980 000 CERTIFIED-ZERO MARK CROSSED in WINDOW 99 (margin 19 979 - first crossing of that mark); 2 000 000 is 21 ahead - exactly the length of the tail window W100 (b - a = 21), computed at window 100, not pre-announced.",
+    "FORMAL (RhAttack.CE99, green): bandOfWindows99 (h1..h100), allOnLineUpToCE99 (100 slice clauses), terminalFaceCE99 + terminalFaceCE99_iff_faceCE98 (exact re-anchor equivalence), the four endpoint theorems refreshed; milestone theorems carried through frontierPast460k + frontierPast465k CROSSED IN THIS WINDOW; the 350 000 carried chain grows to 25 face increments (22 x 4 673 + 3 x 4 672 = 116 822: 350 465 -> 467 287).",
+    "FORMAL (RhAttack.FrontierCE99, green): ce99AbovePT2 / ce99PT2Margin (margin 467 287), terminalFaceCE99_elim_hWin, face_above_frontier_no_offPair, rh_program78_frontier_CE99 (the endpoint at H = tCE99; the residual legs live strictly above tCE99).",
+    "ADJUDICATION: WINDOW 99 is CLEAN (zero interior Rosser failure blocks) - there are no rescue spans to adjudicate; the window's CERTIFIED status stands on the verifier's full sign-change count (20 000 = b - a) plus the W98-seam bit-identity audit.",
+    "HONESTY: NO RH CLAIM: CE99/FrontierCE99 are exact machine-checked re-anchors at a strictly higher certified frontier; the residual legs remain NAMED open legs; pipeline data, not in-tree arithmetic."
+  ]
+}

@@ -103,10 +103,10 @@ def main():
         spans.append({"kind": "union", "gram_span": [u1, u2], "heights": [float(g[u1]), float(g[u2])],
                       "pipeline_need": E["need"], "pipeline_found": E["found"],
                       "fresh_zeros": z, "near_zero_touch": toc, "min_abs_z": float(mabs),
-                      "status": st, "block": failures[i]["block"] if i < len(failures) else None})
+                      "status": st, "block": E.get("block")})
         print(st, [u1, u2], "pipeline", E["found"], "/", E["need"], "fresh", z, flush=True)
     # controls: unflagged interior blocks of length > 1
-    failed_blocks = [tuple(E["block"]) for E in failures]
+    failed_blocks = [tuple(E["block"]) if E.get("block") else (E["j"], E["k"]) for E in failures]
     cands = []
     for j, k in zip(good, good[1:]):
         if a <= j and k <= b and k > j + 1 and (j, k) not in failed_blocks:

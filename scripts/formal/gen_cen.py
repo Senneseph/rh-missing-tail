@@ -17,6 +17,10 @@ SNAPS = [46, 54, 66, 78, 87, 97]   # target window k: tCE{k} - tCE{k-1} = 4672 (
 
 
 def shrink(k):
+    # tCE{k} - tCE{k-1}: 4672 on the recorded SNAP windows, the TAIL increment (5) at W100,
+    # the usual 4673 otherwise. FACTS overrides where present (authoritative per window).
+    if k in FACTS:
+        return FACTS[k]["incr"]
     return 4672 if k in SNAPS else 4673
 
 
@@ -57,8 +61,215 @@ FACTS = {
         milecross={175000: 38, 200000: "42B", 225000: 48, 250000: 53, 275000: 58, 300000: 64,
                    325000: 69, 350000: 74, 375000: 80, 400000: 85, 425000: 90, 430000: 92, 435000: 93,
                    440000: 94, 445000: 95, 450000: 96, 455000: 97},
-        unit="NINETY-SEVENTH", family="-86"),
+        unit="NINETY-SEVENTH", family="-86",
+        ord_word="thirty-second", nw=6,
+        run_note=("a fresh run with resumed_from_cache = 0 (NOT seeded - the first unseeded overlap run "
+                  "of the current stretch; logged for provenance) after the 2026-11-16 host reboot"),
+        parallel_note=(" Window 97 RAN WHILE the formal units 0414-0417 (SIs / SIsA1 / TerminalFaceCE96 / "
+                       "Face38PosReserve) reached GREEN; the per-unit critical path is max(run, formalization)."),
+        verif_extra=("In addition, the independent fresh-mpmath union-span adjudication of the 3 rescued "
+                     "spans (0418 audit record: separate engine, corrected phase convention, dense scan with "
+                     "refined crossing checks, plus unflagged control spans) re-confirms each rescue count "
+                     "from outside the pipeline."),
+        shrink_note=("THE SNAP INCREMENT: W97 ran SNAPPED 19 997 (certified b = 12 363 155 397 109, 19 997 "
+                     "zeros) with 3 recorded interior Rosser failure blocks (all determined and rescued); "
+                     "the floor advances by 4672. The six recorded 4 672 INCREMENT occurrences are "
+                     "w45 -> w46, w53 -> w54, w65 -> w66, w77 -> w78 [SNAP], w86 -> w87 [SNAP], "
+                     "w97 -> this step [SNAP] - no pattern claim beyond the recorded data."),
+        incr_note=("the SNAP increment - W97 ran SNAPPED 19 997, certified b = 12 363 155 397 109; the six "
+                   "recorded 4 672 INCREMENT occurrences are w45 -> w46, w53 -> w54, w65 -> w66, "
+                   "w77 -> w78 [SNAP], w86 -> w87 [SNAP], w97 -> this step [SNAP] - no pattern claim "
+                   "beyond the recorded data"),
+        margin_exp="2.99e-4",
+        subcent_ordinal="EIGHTEENTH",
+        subcent_list=("W79 (1.76e-4), W81 (4.03e-4), W82 (1.87e-3), W83 (6.98e-3), W84 (2.09e-3), W85 "
+                      "(7.2e-3), W86 (2.3e-3), W87 (3.8e-3), W88 (8.9e-3), W89 (4.0e-3), W90 (9.1e-3), "
+                      "W91 (4.2e-3), W92 (9.3e-3), W93 (8.0e-4), W94 (5.9e-3), W95 (1.0e-3), W96 (6.1e-3), "
+                      "W97 (2.99e-4)"),
+        new_milestone=455000,
+    ),
+    98: dict(
+        N=98, tCE=3000175795414, gap=462614, prevgap=457941,
+        gal=300017579541424, gden=100, galstr="300017579541424 / 100",
+        frac="0.245408137563772737838805... (exact, exponent -86 dyadic terminator)",
+        fracmargin="0.0054081375637727378388 (exact, exponent -86 dyadic arithmetic, center-minus-radius)",
+        a="12 363 155 397 109", b="12 363 155 417 109",
+        ga_b="[232127358515834031428417063231834812061, -86, 16777217, -110]",
+        gb_b="[232127358877384873434150165386313952977, -86, 16777217, -110]",
+        width="NON-SNAPPED 20 000", widthnum=20000, census="1 979 979", censusnum=1979979,
+        censusprev="1 959 979", censusprevnum=1959979,
+        widthprev_desc="SNAPPED 19 997, THREE recorded interior Rosser failure blocks (all determined and rescued)",
+        evals="34 938", seconds="11 635.5", cache="0",
+        runs="49 / 52", phase="4.10e-21 (radius 2.61e-24)",
+        failures_n=3,
+        faildesc=("THREE recorded interior Rosser failure blocks, each DETERMINED in the pipeline record "
+                  "via the coarse rescue probe (the union-span resample reported 5/5/5 sign changes "
+                  "found at m = 4 / 2 / 4): block [12 363 155 398 701, 12 363 155 398 703] (need 2 / "
+                  "changes 0 at 129 points, finest m = 64; rescue union [12 363 155 398 700, 12 363 155 "
+                  "398 705] FOUND 5 at m = 4); block [12 363 155 408 245, 12 363 155 408 247] (m = 64; "
+                  "rescue union [12 363 155 408 243, 12 363 155 408 248] FOUND 5 at m = 2); block "
+                  "[12 363 155 408 862, 12 363 155 408 864] (m = 64; rescue union [12 363 155 408 860, "
+                  "12 363 155 408 865] FOUND 5 at m = 4). THE INDEPENDENT ADJUDICATION (fresh mpmath, "
+                  "separate engine, corrected phase convention, dense scan with refined crossing checks, "
+                  "plus unflagged control spans) found ZERO fresh zeros in EACH of the three flagged "
+                  "union spans: the coarse rescue counts are internal OVER-PREDICTIONS and cannot "
+                  "affect the certification - the window's certificate rests on the full sign-change "
+                  "count inside the window (20 000 = b - a) and the verifier's CERTIFIED verdict, not "
+                  "on the per-block Rosser counts (contrast W97, whose adjudication confirmed every "
+                  "rescue count from fresh zeros: 6 / 5 / 5)"),        win_n_clean=42, win_n_rescue=56, total_fail=86,
+        incr=4673,
+        mile=("the 455 000 UNIT ROUND MARK (crossed at W97 [0418]) carries 7 614; the 460 000 UNIT ROUND "
+              "MARK was CROSSED IN THIS WINDOW, WINDOW 98 (margin 2 614 - a regular round crossing, not a "
+              "predicted milestone); the next round mark 465 000 is 2 386 ahead (less than one full step "
+              "- compute at that window, do not pre-announce)"),
+        censmarks=("the 1 960 000 CERTIFIED-ZERO MARK was CROSSED in THIS WINDOW, WINDOW 98 (margin 19 "
+                   "979); the 1 940 000 mark (crossed W97 [0418]) carries 39 979; the 1 920 000 mark "
+                   "(crossed W96) carries 59 979; the 1 900 000 mark (crossed W95 [0410]) carries 79 979; "
+                   "2 000 000 is 20 021 ahead (about one full window - compute at that window, do not "
+                   "pre-announce)"),
+        milecross={175000: 38, 200000: "42B", 225000: 48, 250000: 53, 275000: 58, 300000: 64,
+                   325000: 69, 350000: 74, 375000: 80, 400000: 85, 425000: 90, 430000: 92, 435000: 93,
+                   440000: 94, 445000: 95, 450000: 96, 455000: 97, 460000: 98},
+        unit="NINETY-EIGHTH", family="-86",
+        ord_word="thirty-third", nw=6,
+        run_note="the pre-2026-11-16-reboot run (resumed_from_cache = 0, logged for provenance)",
+        parallel_note="",
+        verif_extra=("In addition, the independent fresh-mpmath union-span adjudication of the 3 flagged "
+                     "union spans (separate engine, corrected phase convention, dense scan with refined "
+                     "crossing checks, plus unflagged control spans) found ZERO fresh zeros in EACH "
+                     "flagged union span: the coarse rescue counts (FOUND 5 at m = 4/2/4) are internal "
+                     "OVER-PREDICTIONS that cannot affect the certification, which rests on the "
+                     "sign-change total (20 000 = b - a) and the CERTIFIED verdict - the recorded "
+                     "RESOLVED-OVER case (cf. W97's RESOLVED-OK at 6/5/5)."),
+        fail_phrase=("three recorded interior Rosser failure blocks, each determined in the pipeline "
+                     "record via the coarse rescue probe (independent union-span adjudication: "
+                     "over-predictions - zero fresh zeros in each flagged union; the certification "
+                     "rests on the sign-change total 20 000 = b - a)"),
+        band_fail=("three recorded interior Rosser failure blocks determined via the coarse rescue "
+                   "probe (independent union-span adjudication: over-predictions - zero fresh zeros in "
+                   "the flagged unions; the sign-change total 20 000 = b - a carries the "
+                   "certification)"),
+        rescued_note=(" (determined via the coarse rescue probe - independent adjudication: "
+                      "over-predictions, zero fresh zeros in the flagged unions; the certification "
+                      "rests on the sign-change total), "),
+        prov_fail=("(ALL DETERMINED in the pipeline record via the coarse rescue probe - the "
+                   "independent union-span adjudication reads the three flagged unions as "
+                   "over-predictions: zero fresh zeros in each - the certification rests on the "
+                   "sign-change total = b - a; see the W98 record above)"),        shrink_note=("THE USUAL INCREMENT: W98 ran NON-SNAPPED 20 000 (certified b = 12 363 155 417 109) "
+                     "with 3 recorded interior Rosser failure blocks (all determined and rescued); the floor "
+                     "advances by 4673. The six recorded 4 672 INCREMENT occurrences remain w45 -> w46, "
+                     "w53 -> w54, w65 -> w66, w77 -> w78 [SNAP], w86 -> w87 [SNAP], w97 -> w98 [SNAP]; no "
+                     "pattern claim beyond the recorded data points."),
+        incr_note=("the usual increment - W98 ran NON-SNAPPED 20 000, certified b = 12 363 155 417 109; the "
+                   "six recorded 4 672 INCREMENT occurrences remain w45 -> w46, w53 -> w54, w65 -> w66, "
+                   "w77 -> w78 [SNAP], w86 -> w87 [SNAP], w97 -> w98 [SNAP] - no pattern claim beyond the "
+                   "recorded data"),
+        margin_exp="5.41e-3",
+        subcent_ordinal="NINETEENTH",
+        subcent_list=("W79 (1.76e-4), W81 (4.03e-4), W82 (1.87e-3), W83 (6.98e-3), W84 (2.09e-3), W85 "
+                      "(7.2e-3), W86 (2.3e-3), W87 (3.8e-3), W88 (8.9e-3), W89 (4.0e-3), W90 (9.1e-3), "
+                      "W91 (4.2e-3), W92 (9.3e-3), W93 (8.0e-4), W94 (5.9e-3), W95 (1.0e-3), W96 (6.1e-3), "
+                      "W97 (2.99e-4), W98 (5.41e-3)"),
+        new_milestone=460000,
+    ),
+    99: dict(
+        N=99, tCE=3000175800087, gap=467287, prevgap=462614,
+        gal=300017580008718, gden=100, galstr="300017580008718 / 100",
+        frac="0.180516606992693104903701... (exact, exponent -86 dyadic terminator)",
+        fracmargin="0.0005166069926931049037 (exact, exponent -86 dyadic arithmetic, center-minus-radius)",
+        a="12 363 155 417 109", b="12 363 155 437 109",
+        ga_b="[232127358877384873434150165386313952977, -86, 16777217, -110]",
+        gb_b="[232127359238935715418942513750545622351, -86, 16777217, -110]",
+        width="NON-SNAPPED 20 000, CLEAN", widthnum=20000, census="1 999 979", censusnum=1999979,
+        censusprev="1 979 979", censusprevnum=1979979,
+        widthprev_desc="NON-SNAPPED 20 000, THREE recorded interior Rosser failure blocks (determined via the coarse rescue probe; independently adjudicated over-predictions - zero fresh zeros in the flagged unions)",
+        evals="33 387", seconds="146.1", cache="32 737",
+        runs="49 / 46", phase="4.10e-21 (radius 2.61e-24)",
+        failures_n=0,
+        faildesc="ZERO recorded interior Rosser failure blocks - a CLEAN window.",
+        win_n_clean=43, win_n_rescue=56, total_fail=86,
+        incr=4673,
+        mile=("the 460 000 UNIT ROUND MARK (crossed at W98 [0419]) carries 7 287; the 465 000 UNIT ROUND "
+              "MARK was CROSSED IN THIS WINDOW, WINDOW 99 (margin 2 287 - a regular round crossing, not a "
+              "predicted milestone); the next round mark 470 000 is 2 713 ahead (less than one full step - "
+              "compute at that window, do not pre-announce)"),
+        censmarks=("the 1 980 000 CERTIFIED-ZERO MARK was CROSSED in THIS WINDOW, WINDOW 99 (margin 19 "
+                   "979 - first crossing of that mark); the 1 960 000 mark (crossed W98 [0419]) carries "
+                   "39 979; the 1 940 000 mark (crossed W97 [0418]) carries 59 979; 2 000 000 is 21 ahead "
+                   "(less than one zero-span - the tail window W100 will land it, do not pre-announce)"),
+        milecross={175000: 38, 200000: "42B", 225000: 48, 250000: 53, 275000: 58, 300000: 64,
+                   325000: 69, 350000: 74, 375000: 80, 400000: 85, 425000: 90, 430000: 92, 435000: 93,
+                   440000: 94, 445000: 95, 450000: 96, 455000: 97, 460000: 98, 465000: 99},
+        unit="NINETY-NINTH", family="-86",
+        ord_word="thirty-fourth", nw=6,
+        run_note=("the post-2026-11-16-reboot run seeded from the W98 cache tail (resumed_from_cache = "
+                  "32 737; 33 387 fresh evaluations in 146.1 s, logged for provenance)"),
+        parallel_note="",
+        verif_extra="The window is CLEAN (zero interior Rosser failure blocks) - nothing to adjudicate.",
+        shrink_note=("THE USUAL INCREMENT: W99 ran NON-SNAPPED 20 000, CLEAN (certified b = 12 363 155 437 "
+                     "109); the floor advances by 4673. The six recorded 4 672 INCREMENT occurrences remain "
+                     "w45 -> w46, w53 -> w54, w65 -> w66, w77 -> w78 [SNAP], w86 -> w87 [SNAP], w97 -> w98 "
+                     "[SNAP]; no pattern claim beyond the recorded data points."),
+        incr_note=("the usual increment - W99 ran NON-SNAPPED 20 000 CLEAN, certified b = 12 363 155 437 "
+                   "109 - no pattern claim beyond the recorded data"),
+        margin_exp="5.17e-4",
+        subcent_ordinal="TWENTIETH",
+        subcent_list=("W79 (1.76e-4), W81 (4.03e-4), W82 (1.87e-3), W83 (6.98e-3), W84 (2.09e-3), W85 "
+                      "(7.2e-3), W86 (2.3e-3), W87 (3.8e-3), W88 (8.9e-3), W89 (4.0e-3), W90 (9.1e-3), "
+                      "W91 (4.2e-3), W92 (9.3e-3), W93 (8.0e-4), W94 (5.9e-3), W95 (1.0e-3), W96 (6.1e-3), "
+                      "W97 (2.99e-4), W98 (5.41e-3), W99 (5.17e-4)"),
+        new_milestone=465000,
+    ),
+    100: dict(
+        N=100, tCE=3000175800092, gap=467292, prevgap=467287,
+        gal=300017580009208, gden=100, galstr="300017580009208 / 100",
+        frac="0.0870984707433515019730524... (exact, exponent -86 dyadic terminator)",
+        fracmargin="0.0070984707433515019731 (exact, exponent -86 dyadic arithmetic, center-minus-radius)",
+        a="12 363 155 437 109", b="12 363 155 437 130",
+        ga_b="[232127359238935715418942513750545622351, -86, 16777217, -110]",
+        gb_b="[232127359239315343803015540277010368039, -86, 16777217, -110]",
+        width="TAIL 21 (the final short window of the 2 000 000 census program; b - a = 21)", widthnum=21,
+        census="2 000 000", censusnum=2000000, censusprev="1 999 979", censusprevnum=1999979,
+        widthprev_desc="NON-SNAPPED 20 000, CLEAN",
+        evals="244", seconds="29.7", cache="0",
+        runs="48 / 47", phase="4.10e-21 (radius 2.61e-24)",
+        failures_n=0,
+        faildesc="ZERO recorded interior Rosser failure blocks - a CLEAN tail window.",
+        win_n_clean=44, win_n_rescue=56, total_fail=86,
+        incr=5,
+        mile=("the 465 000 UNIT ROUND MARK (crossed at W99 [0420]) carries 2 292; the 460 000 UNIT ROUND "
+              "MARK (crossed at W98 [0419]) carries 7 292; the next round mark 470 000 is 2 708 ahead "
+              "(less than one full step - compute at that window, do not pre-announce)"),
+        censmarks=("the 2 000 000 CERTIFIED-ZERO MARK LANDS EXACTLY IN THIS WINDOW, WINDOW 100 (the tail "
+                   "window: 1 999 979 + 21 = 2 000 000, margin 0) - the census program's target is met "
+                   "itself; the 1 980 000 mark (crossed W99 [0420]) carries margin 19 979; the 1 960 000 "
+                   "mark (crossed W98 [0419]) carries 39 979; the 1 940 000 mark (crossed W97 [0418]) "
+                   "carries 59 979"),
+        milecross={175000: 38, 200000: "42B", 225000: 48, 250000: 53, 275000: 58, 300000: 64,
+                   325000: 69, 350000: 74, 375000: 80, 400000: 85, 425000: 90, 430000: 92, 435000: 93,
+                   440000: 94, 445000: 95, 450000: 96, 455000: 97, 460000: 98, 465000: 99},
+        unit="ONE-HUNDREDTH", family="-86",
+        ord_word="thirty-fifth", nw=6,
+        run_note="the post-2026-11-16-reboot fresh run (resumed_from_cache = 0, logged for provenance)",
+        parallel_note="",
+        verif_extra="The window is CLEAN (zero interior Rosser failure blocks) - nothing to adjudicate.",
+        shrink_note=("THE SHORT-WINDOW INCREMENT: W100 ran the TAIL window (21 gram intervals, certified "
+                     "b = 12 363 155 437 130, CLEAN); the floor advances by only 5 (21 grams near this "
+                     "height span ~0.49 in t). The six recorded 4 672 INCREMENT occurrences remain "
+                     "w45 -> w46, w53 -> w54, w65 -> w66, w77 -> w78 [SNAP], w86 -> w87 [SNAP], w97 -> w98 "
+                     "[SNAP]; no pattern claim beyond the recorded data points."),
+        incr_note=("the SHORT-WINDOW increment - W100 ran the TAIL (21 gram intervals, ~0.49 in t), "
+                   "certified b = 12 363 155 437 130, CLEAN - no pattern claim beyond the recorded data"),
+        margin_exp="7.10e-3",
+        subcent_ordinal="TWENTY-FIRST",
+        subcent_list=("W79 (1.76e-4), W81 (4.03e-4), W82 (1.87e-3), W83 (6.98e-3), W84 (2.09e-3), W85 "
+                      "(7.2e-3), W86 (2.3e-3), W87 (3.8e-3), W88 (8.9e-3), W89 (4.0e-3), W90 (9.1e-3), "
+                      "W91 (4.2e-3), W92 (9.3e-3), W93 (8.0e-4), W94 (5.9e-3), W95 (1.0e-3), W96 (6.1e-3), "
+                      "W97 (2.99e-4), W98 (5.41e-3), W99 (5.17e-4), W100 (7.10e-3)"),
+        new_milestone=None,
+    ),
 }
+
 
 
 def rep(s, old, new, n=1, label=""):
@@ -71,7 +282,129 @@ def gen_ce(N):
     F = FACTS[N]
     P = N - 1
     gap = F["gap"]
+    prevgap = F["prevgap"]
+    censusnum = F["censusnum"]
+    censusprev = F["censusprevnum"]
+    entry = "0%d" % (418 + N - 97)
     src = open(f"{ROOT}/CE{P}.lean").read()
+
+    # ---- per-window record phrases (docstring narratives)
+    WR = {  # short window record (rhre doc style)
+        95: "NON-SNAPPED 20 000, TWO recorded interior failures - both determined and rescued",
+        96: "NON-SNAPPED 20 000, CLEAN - zero failures",
+        97: "SNAPPED 19 997, THREE recorded interior failures - all determined and rescued",
+        98: "NON-SNAPPED 20 000, THREE recorded interior Rosser failures (determined via the coarse "
+            "rescue probe; independent adjudication: over-predictions - zero fresh zeros in the flagged "
+            "unions)",
+        99: "NON-SNAPPED 20 000, CLEAN - zero failures",
+        100: "TAIL 21, CLEAN - zero failures",
+    }
+    IFFREC = {  # iff-doc window-slice records
+        95: "NON-SNAPPED 20 000 with two recorded interior failures, both determined and rescued",
+        96: "NON-SNAPPED 20 000, CLEAN - zero failures",
+        97: "SNAPPED 19 997 with three recorded interior failures - all determined and rescued",
+        98: "NON-SNAPPED 20 000 with three recorded interior Rosser failures (determined in the pipeline "
+            "record; the independent union-span adjudication reads the flagged unions as over-predictions "
+            "- zero fresh zeros; the certificate rests on the sign-change total)",
+        99: "NON-SNAPPED 20 000, CLEAN - zero failures",
+        100: "TAIL 21, CLEAN - zero failures",
+    }
+    WINREC2 = {  # split-doc window records
+        96: "NON-SNAPPED at 20 000, CLEAN - zero recorded interior failures",
+        97: "SNAPPED at 19 997 (three recorded interior failures - all determined and rescued)",
+        98: "NON-SNAPPED at 20 000 (three recorded interior failures - determined via the coarse rescue "
+            "probe; independently adjudicated over-predictions, certificate by sign-change total)",
+        99: "NON-SNAPPED at 20 000, CLEAN - zero recorded interior failures",
+        100: "at the TAIL 21, CLEAN - zero recorded interior failures",
+    }
+    UNITW = {95: "NINETY-FIFTH", 96: "NINETY-SIXTH", 97: "NINETY-SEVENTH",
+             98: "NINETY-EIGHTH", 99: "NINETY-NINTH", 100: "ONE-HUNDREDTH"}
+    SLICENOTE = {  # aolu-doc terminal-slice notes
+        97: "SNAPPED 19 997, THREE recorded interior failures - all determined and rescued",
+        98: "NON-SNAPPED 20 000, THREE recorded interior Rosser failures (determined via the coarse "
+            "rescue probe; independently adjudicated over-predictions - zero fresh zeros in the flagged "
+            "unions; certificate by sign-change total)",
+        99: "NON-SNAPPED 20 000, CLEAN - zero failures",
+        100: "TAIL 21, CLEAN - zero failures",
+    }
+    SLICENOTE = SLICENOTE[N]
+
+    # ---- mark tables (unit round marks: M, crossed window, entry ref, annotation)
+    UNIT_MARKS = [(300000, 64, "", ""), (325000, 69, "", ""), (350000, 74, "", "first prediction"),
+                  (375000, 80, "", "second prediction"), (400000, 85, "[0396]", "third prediction"),
+                  (425000, 90, "[0401]", "the FOURTH PREDICTION of the series"),
+                  (430000, 92, "[0403]", ""), (435000, 93, "[0405]", ""), (440000, 94, "[0406]", ""),
+                  (445000, 95, "[0410]", ""), (450000, 96, "", ""), (455000, 97, "[0418]", ""),
+                  (460000, 98, "[0419]", ""), (465000, 99, "[0420]", "")]
+    CENSUS_MARKS = [(1600000, 80, "[0389]"), (1700000, 85, "[0396]"), (1800000, 90, "[0401]"),
+                    (1840000, 91, "[0402]"), (1860000, 92, "[0403]"), (1880000, 93, ""),
+                    (1900000, 95, "[0410]"), (1920000, 96, ""), (1940000, 97, "[0418]"),
+                    (1960000, 98, "[0419]"), (1980000, 99, "[0420]")]
+
+    def fmt(x):
+        return f"{x:,}".replace(",", " ")
+
+    def unit_narrative():
+        parts = []
+        for (M, K, ref, ann) in reversed(UNIT_MARKS):
+            if M > gap:
+                continue
+            if K == N:
+                parts.append(f"the {M // 1000} 000 UNIT ROUND MARK was CROSSED IN THIS WINDOW, WINDOW {N} "
+                             f"(margin {fmt(gap - M)} - a regular round crossing, not a predicted milestone)")
+            else:
+                seg = (f"the {M // 1000} 000 mark (crossed W{K}" + (f" {ref}" if ref else "") +
+                       (f", {ann}" if ann else "") + f") carries {fmt(gap - M)}")
+                parts.append(seg)
+        above = [M for (M, K, r, a) in UNIT_MARKS if M > gap]
+        nxt = min(above) if above else (gap // 5000 + 1) * 5000
+        d = nxt - gap
+        if d < 2336:
+            ph = "less than one half-step"
+        elif d < 4673:
+            ph = "less than one full 4 673 step"
+        else:
+            ph = f"about {round(d / 4673)} full steps"
+        parts.append(f"the next round mark {nxt // 1000} 000 is {fmt(d)} ahead ({ph})")
+        return "; ".join(parts)
+
+    def census_narr():
+        parts = []
+        for (M, K, ref) in reversed(CENSUS_MARKS):
+            if M <= censusprev:
+                parts.append(f"the {fmt(M)} CERTIFIED-ZERO MARK (CROSSED in W{K}"
+                             + (f" {ref}" if ref else "") + f") carries margin {fmt(censusnum - M)}")
+                continue
+            if M <= censusnum:
+                parts.append(f"the {fmt(M)} CERTIFIED-ZERO MARK CROSSED IN THIS WINDOW (margin {fmt(censusnum - M)})")
+                continue
+        d = 2000000 - censusnum
+        if d == 0:
+            parts.append(f"the 2 000 000 CERTIFIED-ZERO MARK LANDS EXACTLY IN THIS WINDOW, WINDOW {N} "
+                         f"({fmt(censusprev)} + {F['widthnum']:,} = 2 000 000, margin 0)")
+        elif d <= 200:
+            parts.append(f"2 000 000 is {fmt(d)} ahead (less than one zero-span - the tail window W100 will "
+                         f"land it, do not pre-announce)")
+        elif d <= 22000:
+            parts.append(f"2 000 000 is {fmt(d)} ahead (about one full window - compute at that window, do "
+                         f"not pre-announce)")
+        else:
+            parts.append(f"2 000 000 is {fmt(d)} ahead (about {round(d / 20000)} full windows - do not "
+                         f"pre-announce)")
+        return "; ".join(parts) + "."
+
+    failphrase = F.get("fail_phrase") or (
+        f"{F['failures_n']} recorded interior Rosser failure blocks, ALL DETERMINED and rescued"
+        if F["failures_n"] else "zero recorded interior Rosser failure blocks (CLEAN)")
+    bandfail = F.get("band_fail") or (
+        f"{F['failures_n']} recorded interior Rosser failure blocks all determined and rescued"
+        if F["failures_n"] else "zero recorded interior Rosser failure blocks (CLEAN)")
+    rescued_note = F.get("rescued_note") or (" all determined and rescued, " if F["failures_n"] else "")
+    prov_fail = F.get("prov_fail") or "(ALL DETERMINED and rescued - see the W" + str(N) + " record above)"
+    adjud_note = (f", the {entry} independent fresh-mpmath union-span adjudication of the {F['failures_n']} "
+                  f"rescued spans" if F["failures_n"] else "")
+    frac2 = f"{(F['gal'] % F['gden']) / F['gden']:.2f}"
+    cens_used = F["censmarks"] or census_narr()
 
     # ---------- anchors (verified against the source at run time)
     A_hdr_i = src.index(f"/-!\n**CE{P} -")
@@ -92,11 +425,11 @@ def gen_ce(N):
     # ---------- header
     hdr = f"""/-!
 **CE{N} - the terminal face re-anchored at the {F['unit']} certified window
-(0418, option B - lane M5).
+({entry}, option B - lane M5).
 
 MILESTONE STATE: tCE{N} - tPT2 = {gap:,} - {F['mile']}.
 CERTIFIED-ZERO CENSUS: cumulative total {F['census']} over (g_a1, g_b{N}] -
-{F['censmarks']}.
+{cens_used}
 
 WINDOW {N}: {F['width']} (a = {F['a']} = b{P} (the bit-identical seam), b = {F['b']}; certified width
 {F['widthnum']:,}). {F['faildesc']}. Census: the window adds {F['widthnum']:,} certified zeros
@@ -105,15 +438,12 @@ windows - {F['win_n_clean']} clean, {F['win_n_rescue']} rescue; {F['total_fail']
 failures, ALL RECORDED. End Rosser runs: {F['runs']} left of g_a{N} / right of g_b{N} (both >= K = 12); 0
 cross-check failures; 0 undetermined Gram signs; max phase contribution {F['phase']}.
 
-PIPELINE RUN (thirty-second in the overlap pipeline): a fresh run with resumed_from_cache = {F['cache']}
-(NOT seeded - the first unseeded overlap run of the current stretch; logged for provenance) after the
-2026-11-16 host reboot, 6 workers: {F['evals']} evaluations in {F['seconds']} s (same M = 60, C_R = 1,
-N_range = [691 008, 691 008], same pipeline, same verifier, same seam discipline). Window {N} RAN WHILE
-the formal units 0414-0417 (SIs / SIsA1 / TerminalFaceCE96 / Face38PosReserve) reached GREEN; the
-per-unit critical path is max(run, formalization).
+PIPELINE RUN ({F['ord_word']} in the overlap pipeline): {F['run_note']} {F['nw']} workers: {F['evals']}
+evaluations in {F['seconds']} s (same M = 60, C_R = 1, N_range = [691 008, 691 008], same pipeline, same
+verifier, same seam discipline).{F['parallel_note']}
 
 PROVENANCE (our run, 2026-11-16; pipeline = Murphy's Apache-2.0 deposit, same as CE1-CE{P}): RUN
-PARAMETERS: a = {F['a']} (= b{P}), b = {F['b']} ({F['width']}), M = 60, C_R = 1, 6 workers, {F['evals']}
+PARAMETERS: a = {F['a']} (= b{P}), b = {F['b']} ({F['width']}), M = 60, C_R = 1, {F['nw']} workers, {F['evals']}
 evaluations, {F['seconds']} s, resumed_from_cache = {F['cache']}. CERTIFICATE (window{N}_b{N}.json): the
 {F['widthnum']:,} (= b - a) zeros of zeta with g_a{N} < Im s <= g_b{N} are ALL SIMPLE and on the line,
 where g_a{N} (recorded exact dyadic ball) is {F['ga_b']} (the W{P} endpoint g_b{P}, the W{N} seam g_a{N}
@@ -122,23 +452,19 @@ process rule), and g_b{N} has exact dyadic tuple {F['gb_b']} (the {F['family']} 
 tCE{N} = {F['tCE']:,} sits {F['fracmargin']} below the certified lower bound (EXACT dyadic arithmetic,
 center-minus-radius reading; robust to the certified radius ~4.7e-14 by many orders of magnitude); the
 standard two-decimal lower bound gB{N}Lo ({F['galstr']} = {F['gal']/F['gden']:.2f}) has the exact margin
-{F['fracmargin']}; the two-decimal round-down (0.31) is strictly below the exact fractional part
+{F['fracmargin']}; the two-decimal round-down ({frac2}) is strictly below the exact fractional part
 ({F['frac']}), so no CASING is needed - window 38 / CE38 remains the only CASING case so far. (The
-gB{N}Lo margin 2.99e-4 is the EIGHTEENTH sub-cent case in the current run: W79 (1.76e-4), W81 (4.03e-4),
-W82 (1.87e-3), W83 (6.98e-3), W84 (2.09e-3), W85 (7.2e-3), W86 (2.3e-3), W87 (3.8e-3), W88 (8.9e-3),
-W89 (4.0e-3), W90 (9.1e-3), W91 (4.2e-3), W92 (9.3e-3), W93 (8.0e-4), W94 (5.9e-3), W95 (1.0e-3), W96
-(6.1e-3), W97 (2.99e-4); not a precision danger - the certified radius is ~4.7e-14, four orders of
+gB{N}Lo margin {F['margin_exp']} is the {F['subcent_ordinal']} sub-cent case in the current run:
+{F['subcent_list']}; not a precision danger - the certified radius is ~4.7e-14, four orders of
 magnitude smaller; no pattern claimed on thin margins.)
 
 VERIFICATION (three layers, same as CE2-CE{P}): (1) ENVIRONMENT REPEAT (Murphy's window-1 certificate
 re-verified - see CE2 header); (2) PIPELINE VERIFIER on window{N}_b{N}.json: "CERTIFIED: true",
 points_checked = {F['evals']}, sign_changes_inside = {F['widthnum']:,} (= b - a),
-rosser_failures_inside = {F['failures_n']} (ALL DETERMINED and rescued - see the W{N} record above),
+rosser_failures_inside = {F['failures_n']} {prov_fail},
 turing_ok = true, K_conservative = 12, end Rosser runs {F['runs']}; (3) SEAM AUDIT (this run): the
 recorded g_a{N} ball is bit-identical to CE{P}'s recorded g_b{P} ball (exact dyadic decode,
-2026-11-16). In addition, the independent fresh-mpmath union-span adjudication of the {F['failures_n']}
-rescued spans (0418 audit record: separate engine, corrected phase convention, dense scan with refined
-crossing checks, plus unflagged control spans) re-confirms each rescue count from outside the pipeline.
+2026-11-16). {F['verif_extra']}
 FRONTIER ARITHMETIC (machine, below): tCE{N} = {F['tCE']:,}, tCE{N} - tCE{P} = {F['incr']},
 tCE{N} - tPT2 = {gap:,}.
 HONESTY (trust base): as CE2-CE{P} - the pipeline's own controls, its kernel-checked Lean remainder
@@ -149,21 +475,22 @@ in-tree arithmetic). NO RH CLAIM.
 """
 
     # ---------- segment A: constants .. gB ordering
+    CARRY_ALL = [175000, 200000, 225000, 250000, 275000] + [M for (M, K, r, a) in UNIT_MARKS if M != 350000]  # 350 000 has its dedicated chain proof
+    carried = [M for M in CARRY_ALL if M <= gap and F["milecross"].get(M) != N]
+    crossed_now = [M for M in CARRY_ALL if M <= gap and F["milecross"].get(M) == N]
     mile = []
-    for M in [175000, 200000, 225000, 250000, 275000, 300000, 325000, 375000, 400000, 425000,
-              430000, 435000, 440000, 445000, 450000]:
-        if M > gap:
-            continue
+    for M in carried:
         K = F["milecross"][M]
         label = "MILESTONE CARRIED (machine, PROVEN - norm_num + linarith)"
         mile.append(f"/-- {label}: the {M // 1000} 000-unit mark (CROSSED in WINDOW {K} - see the CE{K} module for the crossing record and margin) is carried at WINDOW-{N}: (tCE{N} : R) - WinC.tPT2 = {gap:,} > {M:,}, margin {gap - M:,}. -/\n"
                     f"theorem frontierPast{M // 1000}k : (tCE{N} : ℝ) - WinC.tPT2 > {M} := by\n"
                     f"  have h : (tCE{N} : ℝ) - WinC.tPT2 = {gap} := frontierGapAboveH0\n"
                     f"  linarith [h]\n\n")
-    mile.append(f"/-- MILESTONE CROSSED IN THIS WINDOW (machine, PROVEN - norm_num + linarith): {F['mile']}. -/\n"
-                f"theorem frontierPast455k : (tCE{N} : ℝ) - WinC.tPT2 > 455000 := by\n"
-                f"  have h : (tCE{N} : ℝ) - WinC.tPT2 = {gap} := frontierGapAboveH0\n"
-                f"  linarith [h]\n\n")
+    for M in crossed_now:
+        mile.append(f"/-- MILESTONE CROSSED IN THIS WINDOW (machine, PROVEN - norm_num + linarith): {F['mile']}. -/\n"
+                    f"theorem frontierPast{M // 1000}k : (tCE{N} : ℝ) - WinC.tPT2 > {M} := by\n"
+                    f"  have h : (tCE{N} : ℝ) - WinC.tPT2 = {gap} := frontierGapAboveH0\n"
+                    f"  linarith [h]\n\n")
     chain = []
     for k in range(N, 74, -1):
         ref = f"faceShrinkCE{N}" if k == N else f"CE{k}.faceShrinkCE{k}"
@@ -171,12 +498,17 @@ in-tree arithmetic). NO RH CLAIM.
     nsh = len(chain)
     sumsh = sum(shrink(k) for k in range(75, N + 1))
     n4673 = sum(1 for k in range(75, N + 1) if shrink(k) == 4673)
+    n4672 = sum(1 for k in range(75, N + 1) if shrink(k) == 4672)
+    tail100 = 1 if N == 100 else 0
     snaps_in = [k for k in range(75, N + 1) if shrink(k) == 4672]
     snaplist = ", ".join(f"w{k-1} -> w{k}" for k in snaps_in)
-    cons = f"""/-- STANDARD TWO-DECIMAL CERTIFIED LOWER BOUND ON THE CERTIFIED g_b{N} (machine): gB{N}Lo = {F['galstr']} = {F['gal']/F['gden']:.2f} - the two-decimal round-down of the certified lower bound (the endpoint g_b{N} minus the certified radius ~4.7e-14). The margin is the exact {F['fracmargin']}; the two-decimal round-down (0.31) is strictly below the exact fractional part ({F['frac']}), so no CASING is needed (window 38 / CE38 remains the only CASING case). The 2.99e-4 margin is the EIGHTEENTH sub-cent case in the current run - not a precision danger (certified radius ~4.7e-14). -/
+    shrink_desc = f"{n4673} times 4 673 + {n4672} times 4 672 SNAP [{snaplist}]"
+    if tail100:
+        shrink_desc += " + the W100 TAIL increment of 5"
+    cons = f"""/-- STANDARD TWO-DECIMAL CERTIFIED LOWER BOUND ON THE CERTIFIED g_b{N} (machine): gB{N}Lo = {F['galstr']} = {F['gal']/F['gden']:.2f} - the two-decimal round-down of the certified lower bound (the endpoint g_b{N} minus the certified radius ~4.7e-14). The margin is the exact {F['fracmargin']}; the two-decimal round-down ({frac2}) is strictly below the exact fractional part ({F['frac']}), so no CASING is needed (window 38 / CE38 remains the only CASING case). The {F['margin_exp']} margin is the {F['subcent_ordinal']} sub-cent case in the current run - not a precision danger (certified radius ~4.7e-14). -/
 def gB{N}Lo : ℚ := {F['gal']} / {F['gden']}
 
-/-- THE NEW LOWER BOUND (machine): {F['tCE']:,} = floor(g_b{N}). The endpoint sits {F['frac']} above the integer boundary (exact, exponent -86 dyadic terminator) and the certified radius is ~4.7e-14, so the floor is robust by many orders of magnitude. tCE{N} - tCE{P} = {F['incr']} (the SNAP increment - W{N} ran {F['width']}, certified b = {F['b']}; the six recorded 4 672 INCREMENT occurrences are w45 -> w46, w53 -> w54, w65 -> w66, w77 -> w78 [SNAP], w86 -> w87 [SNAP], w97 -> this step [SNAP] - no pattern claim beyond the recorded data). -/
+/-- THE NEW LOWER BOUND (machine): {F['tCE']:,} = floor(g_b{N}). The endpoint sits {F['frac']} above the integer boundary (exact, exponent -86 dyadic terminator) and the certified radius is ~4.7e-14, so the floor is robust by many orders of magnitude. tCE{N} - tCE{P} = {F['incr']} ({F['incr_note']}). -/
 def tCE{N} : ℕ := {F['tCE']}
 
 theorem tCE{N}_lt_gB{N}Lo : (tCE{N} : ℝ) < (gB{N}Lo : ℝ) := by
@@ -189,15 +521,15 @@ theorem tCE{P}_lt_tCE{N} : (tCE{P} : ℝ) < (tCE{N} : ℝ) := by
 theorem gB{P}Lo_lt_tCE{N} : (gB{P}Lo : ℝ) < (tCE{N} : ℝ) := by
   norm_num [CE{P}.gB{P}Lo, tCE{N}]
 
-/-- THE FACE SHRINK - THIS UNIT (machine, norm_num): tCE{N} - tCE{P} = {F['incr']}. THE SNAP INCREMENT: W{N} ran {F['width']} (certified b = {F['b']}, {F['widthnum']:,} zeros) with {F['failures_n']} recorded interior Rosser failure blocks (all determined and rescued); the floor advances by {F['incr']}. The six recorded 4 672 INCREMENT occurrences are w45 -> w46, w53 -> w54, w65 -> w66, w77 -> w78 [SNAP], w86 -> w87 [SNAP], w97 -> this step [SNAP] - no pattern claim beyond the recorded data points. -/
+/-- THE FACE SHRINK - THIS UNIT (machine, norm_num): tCE{N} - tCE{P} = {F['incr']}. {F['shrink_note']} -/
 theorem faceShrinkCE{N} : (tCE{N} : ℝ) - (tCE{P} : ℝ) = {F['incr']} := by
   norm_num [tCE{N}, CE{P}.tCE{P}]
 
-/-- FRONTIER STATE (machine): the terminal face now sits (tCE{N} : R) - WinC.tPT2 = {F['tCE']:,} - 3 000 175 332 800 = {gap:,} above the H0 frontier WinC.tPT2. {F['mile'].capitalize()}. CERTIFIED-ZERO CENSUS: cumulative total {F['census']} over (g_a1, g_b{N}] - {F['censmarks']}. -/
+/-- FRONTIER STATE (machine): the terminal face now sits (tCE{N} : R) - WinC.tPT2 = {F['tCE']:,} - 3 000 175 332 800 = {gap:,} above the H0 frontier WinC.tPT2. {F['mile'].capitalize()}. CERTIFIED-ZERO CENSUS: cumulative total {F['census']} over (g_a1, g_b{N}] - {cens_used} -/
 theorem frontierGapAboveH0 : (tCE{N} : ℝ) - WinC.tPT2 = {gap} := by
   norm_num [tCE{N}, WinC.tPT2]
 
-""" + "".join(mile) + f"""/-- MILESTONE CARRIED (machine, PROVEN - norm_num + linarith): the 350 000 UNIT MILESTONE was CROSSED in WINDOW 74 (at 350 465, margin 465 - the FIRST PREDICTION of the series, delivered exactly [predicted one window ahead at 0379]); CARRIED into WINDOW-{N} - tCE{N} - tPT2 = {gap:,} exceeds 350 000 with margin {gap - 350000:,}. Proven at the WINDOW-74 frontier: (tCE74 : R) - WinC.tPT2 = 350 465, through {nsh} face shrinks (CE75-CE{N}: {n4673} times 4 673 + {nsh - n4673} times 4 672 SNAP [{snaplist}] = {sumsh:,}: 350 465 -> {gap:,}). -/
+""" + "".join(mile) + f"""/-- MILESTONE CARRIED (machine, PROVEN - norm_num + linarith): the 350 000 UNIT MILESTONE was CROSSED in WINDOW 74 (at 350 465, margin 465 - the FIRST PREDICTION of the series, delivered exactly [predicted one window ahead at 0379]); CARRIED into WINDOW-{N} - tCE{N} - tPT2 = {gap:,} exceeds 350 000 with margin {gap - 350000:,}. Proven at the WINDOW-74 frontier: (tCE74 : R) - WinC.tPT2 = 350 465, through {nsh} face increments (CE75-CE{N}: {shrink_desc}; total {sumsh:,}: 350 465 + {sumsh:,} = {gap:,}). -/
 theorem frontierPast350k : (tCE{N} : ℝ) - WinC.tPT2 > 350000 := by
   have hgap : (tCE{N} : ℝ) - WinC.tPT2 = {gap} := frontierGapAboveH0
 """ + "\n".join(chain) + f"""
@@ -221,16 +553,15 @@ theorem gB{P}Lo_lt_gB{N}Lo : (gB{P}Lo : ℝ) < (gB{N}Lo : ℝ) := by
              f"    ∀ (ρ : ℂ), riemannZeta ρ = 0 → (gB{P-1}Lo : ℝ) < ρ.im →\n"
              f"      ρ.im ≤ (gB{P}Lo : ℝ) → ρ.re = 1 / 2\n\n"
              f"/-- WINDOW {N} TERMINAL slice (window {N} of {N}, the (gB{P}Lo, g_b{N}] portion of the recorded window,\n"
-             f"up to floor(gB{N}) - {F['width']} (b = {F['b']}; {F['failures_n']} recorded interior Rosser failure\n"
-             f"blocks, ALL DETERMINED and rescued - see the module header): the zeros of zeta with\n"
+             f"up to floor(gB{N}) - {F['width']} (b = {F['b']}; {failphrase} - see the module header):\n"
+             f"the zeros of zeta with\n"
              f"(gB{P}Lo : R) < Im s <= int(gB{N}) = {F['tCE']:,} (the FLOOR - the endpoint g_b{N} sits\n"
              f"{F['frac']} above it, exact, robust to the certified radius ~4.7e-14) are all simple and on the\n"
              f"line. Certificates: window{N}_b{N}.json (window {N}; certified 2026-11-16) + the pipeline verifier\n"
              f"(CERTIFIED, turing_ok, points {F['evals']}, sign_changes_inside = {F['widthnum']:,} = b - a,\n"
-             f"rosser_failures_inside = {F['failures_n']} all determined and rescued, end Rosser runs {F['runs']},\n"
+             f"rosser_failures_inside = {F['failures_n']}{rescued_note}end Rosser runs {F['runs']},\n"
              f"K_conservative = 12) + the module header (M = 60, C_R = 1, the bit-identical g_a{N} == g_b{P}\n"
-             f"SEAM AUDIT, the 0418 independent fresh-mpmath union-span adjudication of the {F['failures_n']}\n"
-             f"rescued spans). Slice restriction (gB{P}Lo, int(gB{N})] is a SUBSET of the certified window, so\n"
+             f"SEAM AUDIT{adjud_note}). Slice restriction (gB{P}Lo, int(gB{N})] is a SUBSET of the certified window, so\n"
              f"its zeros inherit on-linedness; no RH CLAIM about the face above g_b{N}. -/\n"
              f"def ce{N}WinClause : Prop :=\n"
              f"    ∀ (ρ : ℂ), riemannZeta ρ = 0 → (gB{P}Lo : ℝ) < ρ.im →\n"
@@ -240,8 +571,7 @@ theorem gB{P}Lo_lt_gB{N}Lo : (gB{P}Lo : ℝ) < (gB{N}Lo : ℝ) := by
     band = src[A_band_i:A_band_j]
     docC = (f"/-- THE CORRECTED BAND (machine, data-dependent): with the cited slice clauses h1..h{P + 2}\n"
             f"(window {N} contributes ONE clause for its (gB{P}Lo, tCE{N}] slice - h{P + 2}; W{N} {F['width']}\n"
-            f"certified b = {F['b']}, {F['failures_n']} recorded interior Rosser failure blocks all determined and\n"
-            f"rescued; window {P} re-cited in full at gB{P-1} - h{P + 1}), ALL zeros of zeta with Im s >\n"
+            f"certified b = {F['b']}, {bandfail}; window {P} re-cited in full at gB{P-1} - h{P + 1}), ALL zeros of zeta with Im s >\n"
             f"WinC.tPT2 and Im s <= (tCE{N} : R) lie on the line: h1-h2 cover window 1 (CE2, the\n"
             f"Rosser-RESERVED slice + corrected full slice), h3-h44 cover windows 2..42, h44b fills the\n"
             f"W1-W2 seam gap (tPT2, gB0], the re-anchored windows 43..{N} enter as their certified (gB-prev,\n"
@@ -281,20 +611,12 @@ theorem gB{P}Lo_lt_gB{N}Lo : (gB{P}Lo : ℝ) < (gB{N}Lo : ℝ) := by
                 f"(data-independent) zeta set q with Im s > WinC.tPT2 and Im s <= (tCE{N} : R) lie on the line, "
                 f"given the zero-hypothesis (hZPT2 : zeros above tPT2; hqz : the set is a ZERO SET - every member "
                 f"is a zeta zero; hW1..h{P+2} : the {P+2} verified window-slice clauses - the cited slices + the "
-                f"RE-CITED full slices for the re-anchored windows 43..{P} (bit-identical seams, recorded data) "
-                f"incl. the W53..W{P} Rosser records + h{P+2} : the window-{N} terminal slice (SNAPPED 19 997, "
-                f"THREE recorded interior failures - all determined and rescued)). This is the finite-height "
+                f"RE-CITED full slices for the re-anchored windows 43..{P} (bit-identical seams, recorded data, "
+                f"incl. the recorded Rosser failure blocks of the re-anchored windows - all determined and "
+                f"rescued) + h{P+2} : the window-{N} terminal slice ({SLICENOTE})). This is the finite-height "
                 f"closure through the corrected w1-w{N} band (W42b fill) re-anchored to all of the certified "
-                f"NINETY-SEVENTH window (SNAPPED 19 997); census 1 959 979 over (g_a1, g_b{N}] - the 1 600 000 "
-                f"CERTIFIED-ZERO MARK (CROSSED in W80 [0389]) carries margin 359 979; the 1 700 000 CERTIFIED-ZERO "
-                f"MARK (CROSSED in W85 [0396]) carries margin 259 979; the 1 800 000 CERTIFIED-ZERO MARK (CROSSED "
-                f"in W90 [0401]) carries margin 159 979; the 1 840 000 mark (CROSSED in W91 [0402]) carries margin "
-                f"119 979; the 1 860 000 mark carries 99 979; the 1 880 000 mark carries 79 979; the 1 900 000 "
-                f"CERTIFIED-ZERO MARK (CROSSED in W95 [0410]) carries margin 59 979; the 1 920 000 mark (CROSSED "
-                f"in W96) carries margin 39 979; the 1 940 000 CERTIFIED-ZERO MARK CROSSED IN THIS WINDOW W97 "
-                f"(margin 19 979); the 1 960 000 mark is 21 ahead (less than one window); 2 000 000 is 40 021 "
-                f"ahead (about two full windows; compute at that window, do not pre-announce). NO RH CLAIM about "
-                f"the face above tCE{N}. -/\n")
+                f"{F['unit']} window ({F['width']}); census {F['census']} over (g_a1, g_b{N}] - {census_narr()} "
+                f"NO RH CLAIM about the face above tCE{N}. -/\n")
 
     # ---------- segment E: terminal face .. EOF
     E = src[A_tf_i:]
@@ -353,93 +675,122 @@ theorem gB{P}Lo_lt_gB{N}Lo : (gB{P}Lo : ℝ) < (gB{N}Lo : ℝ) := by
     Erep(f"end CE{P}", f"end CE{N}")
     # ---- docstring layer: exact scoped transforms (each asserted)
     tfdef_idx = E.index(f"def terminalFaceCE{N}")
-    new_tfdoc = (f"/-- THE NINETY-SEVENTH RE-ANCHORED TERMINAL FACE (machine, the NAMED residual for the "
+    new_tfdoc = (f"/-- THE {F['unit']} RE-ANCHORED TERMINAL FACE (machine, the NAMED residual for the "
                  f"absolute clause, 0281 form - lane M5, the direct-attack reduction route (b)): what remains "
-                 f"open at the NINETY-SEVENTH certified window (SNAPPED 19 997, b = 12 363 155 397 109, THREE "
-                 f"recorded interior Rosser failures - all determined and rescued; census 1 959 979 over "
-                 f"(g_a1, g_b{N}]) is the assertion that every zeta zero of the (data-independent) zero set q "
-                 f"with Im s > (tCE{N} : R) = {F['tCE']:,} lies on the line - i.e. the absolute clause [S1] "
-                 f"and A1 (no data-dependent bound on the S-at-zeros and DN walk) above the new lower bound. "
-                 f"Frontier {gap:,} above H0: the 455 000 UNIT ROUND MARK was CROSSED in THIS WINDOW (margin "
-                 f"2 941 - a regular round crossing, not a predicted milestone); the 450 000 mark (crossed W96) "
-                 f"carries 7 941; the 445 000 mark (crossed W95 [0410]) carries 12 941; the 440 000 mark "
-                 f"(crossed W94 [0406]) carries 17 941; the 435 000 mark (crossed W93 [0405]) carries 22 941; "
-                 f"the 430 000 mark (crossed W92 [0403]) carries 27 941; the 425 000 mark (crossed W90 [0401], "
-                 f"the FOURTH PREDICTION of the series) carries 32 941; the 400 000 mark (crossed W85 [0396], "
-                 f"third prediction) carries 57 941; the 375 000 mark (crossed W80, second prediction) carries "
-                 f"82 941; the 350 000 mark (crossed W74, first prediction) carries 107 941; the 325 000 and "
-                 f"300 000 marks carry 132 941 and 157 941; the next round mark 460 000 is 2 059 ahead (less "
-                 f"than one full 4 673 step); the 1 600 000 CERTIFIED-ZERO MARK (crossed W80) carries margin "
-                 f"359 979; the 1 700 000 mark (crossed W85) carries 259 979; the 1 800 000 mark (crossed W90) "
-                 f"carries 159 979; the 1 840 000 mark (crossed W91) carries 119 979; the 1 860 000 mark "
-                 f"(crossed W92) carries 99 979; the 1 880 000 mark carries 79 979; the 1 900 000 "
-                 f"CERTIFIED-ZERO MARK (crossed W95 [0410]) carries 59 979; the 1 920 000 mark (crossed W96) "
-                 f"carries 39 979; the 1 940 000 CERTIFIED-ZERO MARK CROSSED IN THIS WINDOW W97 (margin 19 979); "
-                 f"the 1 960 000 mark is 21 ahead (less than one window); 2 000 000 is 40 021 ahead. "
-                 f"The increment tCE{N} - tCE{P} = {F['incr']} (SNAP: W{N} runs SNAPPED 19 997; the six recorded "
-                 f"4 672 occurrences remain w45, w53, w65, w77 [SNAP], w86 [SNAP], w97 [SNAP, this step]); no "
-                 f"pattern claim beyond the recorded data. The face is RE-ANCHORED (the exact iff below proves "
-                 f"no strength is lost). NO RH CLAIM: this is the open object, stated at the new frontier. -/\n")
+                 f"open at the {F['unit']} certified window ({F['width']}, b = {F['b']}, {failphrase}; census "
+                 f"{F['census']} over (g_a1, g_b{N}]) is the assertion that every zeta zero of the "
+                 f"(data-independent) zero set q with Im s > (tCE{N} : R) = {F['tCE']:,} lies on the line - i.e. "
+                 f"the absolute clause [S1] and A1 (no data-dependent bound on the S-at-zeros and DN walk) above "
+                 f"the new lower bound. Frontier {gap:,} above H0: {unit_narrative()}; {census_narr()} The "
+                 f"increment tCE{N} - tCE{P} = {F['incr']} ({F['incr_note']}). The face is RE-ANCHORED (the "
+                 f"exact iff below proves no strength is lost). NO RH CLAIM: this is the open object, stated "
+                 f"at the new frontier. -/\n")
     E = new_tfdoc + E[tfdef_idx:]
-    # rh_reanchored docstring: scoped token transforms
+    # rh_reanchored docstring: scoped token transforms (parametric in P)
     rhre_i = E.index(f"theorem rh_reanchored_CE{N}")
     rr0 = E.rindex("/--", 0, rhre_i)
     sc = E[rr0:rhre_i]
     for old, new in [
         (f"the {P+1} verified window-slice clauses - windows 1..{P}, incl. the re-anchored 43..{P}",
-         f"the {P+2} verified window-slice clauses - windows 1..{P+1}, incl. the re-anchored 43..{P+1}"),
-        ("W96: NON-SNAPPED 20 000, CLEAN - zero failures))",
-         "W96: NON-SNAPPED 20 000, CLEAN - zero failures; W97: SNAPPED 19 997, THREE recorded interior "
-         "failures - all determined and rescued))"),
+         f"the {P+2} verified window-slice clauses - windows 1..{P+1}, incl. the re-anchored 43..{N}"),
+        (f"W{P}: {WR[P]})", f"W{P}: {WR[P]}; W{N}: {WR[N]})"),
         (f"the NAMED terminal face above tCE{P} - the finite-height part",
          f"the NAMED terminal face above tCE{N} - the finite-height part"),
-        ("the corrected w1-w96 band", "the corrected w1-w97 band"),
-        ("windows 43..96, all of them bit-identical at their seams",
-         "windows 43..97, all of them bit-identical at their seams"),
+        (f"the corrected w1-w{P} band", f"the corrected w1-w{N} band"),
+        (f"windows 43..{P}, all of them bit-identical at their seams",
+         f"windows 43..{N}, all of them bit-identical at their seams"),
     ]:
         assert sc.count(old) == 1, f"rhre doc: {old[:70]!r} (count {sc.count(old)})"
         sc = sc.replace(old, new)
     E = E[:rr0] + sc + E[rhre_i:]
-    # iff / split / monotonicity docstrings: exact token transforms
+    # iff / split / monotonicity docstrings: exact token transforms (parametric in P)
+    import re as _re
+    mif = _re.search(r"beyond the cited window-data slices (hW\d+, hW\d+)\): terminalFaceCE" + str(P) + " q <-> terminalFaceCE" + str(P - 1) + " q", E)
+    assert mif, "iff header pattern not found"
+    E = E[:mif.start()] + (f"beyond the cited window-data slices hW{P+1}, hW{P+2}): terminalFaceCE{N} q <-> terminalFaceCE{P} q") + E[mif.end():]
     for old, new in [
-        ("beyond the cited window-data slices hW95, hW96): terminalFaceCE96 q <-> terminalFaceCE95 q",
-         "beyond the cited window-data slices hW97, hW98): terminalFaceCE97 q <-> terminalFaceCE96 q"),
-        ("what was open at tCE95 is (exactly) what is open at tCE96, and the slice family (gB95Lo, tCE96] "
-         "covers the moved band",
-         "what was open at tCE96 is (exactly) what is open at tCE97, and the slice family (gB96Lo, tCE97] "
-         "covers the moved band"),
-        ("at the new frontier (CE2-CE95 pattern)", "at the new frontier (CE2-CE96 pattern)"),
-        ("the band slice (gB95Lo, tCE96] is handled by the verified window slices hW96, hW97 (the W95 slice "
-         "is NON-SNAPPED 20 000 with two recorded interior failures, both determined and rescued, re-cited "
-         "in full at gB95; the W96 slice is NON-SNAPPED 20 000, CLEAN - zero failures), the part above tCE95 "
-         "is exactly the old face",
-         "the band slice (gB96Lo, tCE97] is handled by the verified window slices hW97, hW98 (the W96 slice "
-         "is NON-SNAPPED 20 000, CLEAN - zero failures, re-cited in full at gB96; the W97 slice is SNAPPED "
-         "19 997 with three recorded interior failures - all determined and rescued), the part above tCE96 "
-         "is exactly the old face"),
-        ("shrinking the lower bound (tCE89 -> ... -> tCE95 -> tCE96) leaves the face IMPLICATOR - anything "
-         "true above tCE95 is true above tCE96",
-         "shrinking the lower bound (tCE89 -> ... -> tCE96 -> tCE97) leaves the face IMPLICATOR - anything "
-         "true above tCE96 is true above tCE97"),
-        ("RH q <-> (allOnLineUpTo q tCE96) x (terminalFaceCE96 q)",
-         "RH q <-> (allOnLineUpTo q tCE97) x (terminalFaceCE97 q)"),
-        ("re-anchored windows 43..96 all bit-identical at their seams; window 96 certified NON-SNAPPED at "
-         "20 000, CLEAN - zero recorded interior failures",
-         "re-anchored windows 43..97 all bit-identical at their seams; window 97 certified SNAPPED at "
-         "19 997 (three recorded interior failures - all determined and rescued)"),
-        ("AND the absolute clause above tCE96. Both sides",
-         "AND the absolute clause above tCE97. Both sides"),
-        ("(tCE96 - tPT2 = 453 269 - the 450 000 UNIT ROUND MARK was CROSSED in THIS WINDOW [margin 3 269]; "
-         "census 1 939 982 - the 1 900 000 CERTIFIED-ZERO MARK (crossed W95 [0410]) carries margin 39 982; "
-         "2 000 000 is 60 018 ahead)",
-         "(tCE97 - tPT2 = 457 941 - the 455 000 UNIT ROUND MARK was CROSSED in THIS WINDOW [margin 2 941]; "
-         "census 1 959 979 - the 1 940 000 CERTIFIED-ZERO MARK CROSSED in THIS WINDOW W97 [margin 19 979]; "
-         "2 000 000 is 40 021 ahead)"),
+        (f"what was open at tCE{P-1} is (exactly) what is open at tCE{P}, and the slice family (gB{P-1}Lo, "
+         f"tCE{P}] covers the moved band",
+         f"what was open at tCE{P} is (exactly) what is open at tCE{N}, and the slice family (gB{P}Lo, "
+         f"tCE{N}] covers the moved band"),
+        (f"at the new frontier (CE2-CE{P-1} pattern)", f"at the new frontier (CE2-CE{P} pattern)"),
+        (f"the band slice (gB{P-1}Lo, tCE{P}] is handled by the verified window slices hW{P}, hW{P+1} "
+         f"(the W{P-1} slice is {IFFREC[P-1]}, re-cited in full at gB{P-1}; the W{P} slice is {IFFREC[P]}), "
+         f"the part above tCE{P-1} is exactly the old face",
+         f"the band slice (gB{P}Lo, tCE{N}] is handled by the verified window slices hW{P+1}, hW{P+2} "
+         f"(the W{P} slice is {IFFREC[P]}, re-cited in full at gB{P}; the W{N} slice is {IFFREC[N]}), "
+         f"the part above tCE{P} is exactly the old face"),
+        (f"shrinking the lower bound (tCE89 -> ... -> tCE{P-1} -> tCE{P}) leaves the face IMPLICATOR - anything "
+         f"true above tCE{P-1} is true above tCE{P}",
+         f"shrinking the lower bound (tCE89 -> ... -> tCE{P} -> tCE{N}) leaves the face IMPLICATOR - anything "
+         f"true above tCE{P} is true above tCE{N}"),
+        (f"RH q <-> (allOnLineUpTo q tCE{P}) x (terminalFaceCE{P} q)",
+         f"RH q <-> (allOnLineUpTo q tCE{N}) x (terminalFaceCE{N} q)"),
+        (f"re-anchored windows 43..{P} all bit-identical at their seams; window {P} certified {WINREC2[P]}",
+         f"re-anchored windows 43..{N} all bit-identical at their seams; window {N} certified {WINREC2[N]}"),
+        (f"AND the absolute clause above tCE{P}. Both sides",
+         f"AND the absolute clause above tCE{N}. Both sides"),
     ]:
         assert E.count(old) == 1, f"segE doc: {old[:70]!r} (count {E.count(old)})"
         E = E.replace(old, new)
-    for tok in ["NINETY-SIXTH", "tCE96 : R", "tCE96.", "tCE96 - tPT2 = 453", "1 939 982", "60 018"]:
+    # the inline milestone/census sentence: located by paren-depth scan from the source's own values
+    sent_anchor = f"(tCE{P} - tPT2 = {fmt(prevgap)} - "
+    sa = E.index(sent_anchor)
+    depth, sj = 0, sa
+    for jj in range(sa, len(E)):
+        ch = E[jj]
+        if ch == "(":
+            depth += 1
+        elif ch == ")":
+            depth -= 1
+            if depth == 0:
+                sj = jj + 1
+                break
+    assert sj > sa, "sentence end not found"
+    crossM = [M for (M, K, r, a) in UNIT_MARKS if M <= gap and K == N]
+    if crossM:
+        Mx = max(crossM)
+        unit_inline = f"the {Mx // 1000} 000 UNIT ROUND MARK was CROSSED IN THIS WINDOW [margin {fmt(gap - Mx)}]"
+    else:
+        M, K, r, a = max((t for t in UNIT_MARKS if t[0] <= gap))
+        above = [t[0] for t in UNIT_MARKS if t[0] > gap]
+        nxt = min(above) if above else (gap // 5000 + 1) * 5000
+        d = nxt - gap
+        ph = ("less than one half-step" if d < 2336 else
+              "less than one full 4 673 step" if d < 4673 else f"about {round(d / 4673)} full steps")
+        unit_inline = (f"the {M // 1000} 000 UNIT ROUND MARK (crossed W{K}" + (f" {r}" if r else "") +
+                       (f", {a}" if a else "") + f") carries {fmt(gap - M)}, the next round mark "
+                       f"{nxt // 1000} 000 is {fmt(d)} ahead ({ph})")
+    d2 = 2000000 - censusnum
+    if d2 == 0:
+        tail_cens = (f"the 2 000 000 CERTIFIED-ZERO MARK LANDS EXACTLY IN THIS WINDOW, WINDOW {N} "
+                     f"({F['censusprev']} + {F['widthnum']:,} = 2 000 000, margin 0)")
+    elif d2 <= 200:
+        tail_cens = (f"2 000 000 is {fmt(d2)} ahead (less than one zero-span - the tail window W100 will "
+                     f"land it, do not pre-announce)")
+    elif d2 <= 22000:
+        tail_cens = (f"2 000 000 is {fmt(d2)} ahead (about one full window - compute at that window, do "
+                     f"not pre-announce)")
+    else:
+        tail_cens = (f"2 000 000 is {fmt(d2)} ahead (about {round(d2 / 20000)} full windows - do not "
+                     f"pre-announce)")
+    crossC = [M for (M, K, r) in CENSUS_MARKS if censusprev < M <= censusnum]
+    if crossC:
+        Mc = max(crossC)
+        cens_inline = (f"the {fmt(Mc)} CERTIFIED-ZERO MARK CROSSED IN THIS WINDOW "
+                       f"(margin {fmt(censusnum - Mc)}); {tail_cens}")
+    else:
+        cens_inline = tail_cens
+    new_sent = f"(tCE{N} - tPT2 = {fmt(gap)} - {unit_inline}; census {F['census']} - {cens_inline})"
+    E = E[:sa] + new_sent + E[sj:]
+    toks = [UNITW[P], f"tCE{P} : R", f"tCE{P}.", f"tCE{P} - tPT2 = {fmt(prevgap)}",
+            F["censusprev"], fmt(2000000 - censusprev)]
+    if N == 100:
+        # the landing sentence legitimately quotes the previous census and the tail length
+        toks = [t for t in toks if t not in (F["censusprev"], fmt(2000000 - censusprev))]
+    for tok in toks:
         assert E.count(tok) == 0, f"stale segE token {tok!r}"
+
     # leftovers check: no unqualified tCE96 / CE95.terminalFaceCE95 stale refs in positions we renamed
     assert not E.count(f"theorem terminalFaceCE{P}_") and E.count(f"terminalFaceCE{P}q") == 0, "stale tf names"
     for tok in [f"tCE{P}_lt_tCE{P}", f"CE{P-1}.terminalFaceCE{P-1} q :"]:
@@ -460,7 +811,7 @@ theorem gB{P}Lo_lt_gB{N}Lo : (gB{P}Lo : ℝ) < (gB{N}Lo : ℝ) := by
     out = P1 + hdr + P3 + P4 + cons + B1 + wdefs + docC + band + D1 + aolu_doc + aolu + E
     # final global stale-token sweep on out (code-level; docstrings handled above)
     for bad in [f"bandOfWindows{P} ", f"allOnLineUpToCE{P} ", f"rh_reanchored_CE{P} ",
-                f"terminalFaceCE{P}_of_thetaInf", "NINETY-SIXTH"]:
+                f"terminalFaceCE{P}_of_thetaInf", UNITW[P]]:
         assert out.count(bad) == 0, f"stale token {bad!r}"
     open(f"{ROOT}/CE{N}.lean", "w").write(out)
     print(f"wrote {ROOT}/CE{N}.lean ({len(out)} chars)")
