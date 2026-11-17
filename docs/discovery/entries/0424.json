@@ -1,0 +1,29 @@
+{
+  "id": 0424,
+  "ts": "2026-11-17T10:45:00Z",
+  "lane": "M3",
+  "kind": "discovery",
+  "title": "ERRATUM + PIN: durable independent re-adjudication (2026-11-17) of W98 SUPERSEDES the stale pre-reboot 'zero zeros / over-prediction' reading - W98's three flagged unions RE-COUNTED FROM FRESH EVALUATION contain the predicted zeros (fresh 5/5/5; min |Z| 1.79e-05 / 2.24e-04 / 6.13e-05; no near-zero touch; 4/4 controls; verdict ALL SPANS RESOLVED); W97 verdict pinned in the same artifact; both public docs corrected and the commit trail carries the erratum - NO RH CLAIM",
+  "status": "gated",
+  "unit": 136,
+  "facts": [
+    "WHAT HAPPENED: before the 2026-11-16 reboot, an early (non-durable, /tmp-resident) audit run of the W98 flagged union spans produced a 'zero fresh zeros - internal over-prediction' reading, and that reading was carried into the committed comparative view (8b81f0c) and reviewer brief (813e732), and - after the durable adjudication tool was rebuilt post-reboot - into the first CE98-100 generation (2174c7e) and the wording-precision commit (69ee609), which described W98's blocks as 'determined at the finest grid (m = 64); the rescue probe's FOUND 5 union counts adjudicated as over-predictions'.",
+    "THE CORRECTING EVIDENCE: the durable in-repo adjudication tool (scripts/audit/union_span_check.py: separate mpmath engine, corrected phase convention, dense scan with refined crossing checks, plus unflagged control spans) was run on window98_b98.json on this box on 2026-11-17 (fresh process, untracked artifacts under tmp/ce2/ce1_window_H0_v1/). Result: [12 363 155 398 700, 398 705] pipeline 5 / FRESH 5; [12 363 155 408 243, 408 248] pipeline 5 / FRESH 5; [12 363 155 408 860, 408 865] pipeline 5 / FRESH 5 - each RESOLVED-OK (independent confirm of rescue count); min |Z| 1.79e-05 / 2.24e-04 / 6.13e-05; no near-zero touch within 1e-40; 4/4 unflagged control spans pass (2/2, 3/3, 3/3, 2/2); verdict: ALL SPANS RESOLVED - window sign-change total = b - a, CERTIFIED by verifier. W97, re-run to completion in the same session: fresh 6/5/5, min |Z| 7.56e-05 / 7.28e-05 / 8.17e-05, 4/4 controls - RESOLVED-OK. So the pipeline's W98 rescue record (FOUND 5 at m = 4/2/4) is CONFIRMED real - exactly the W97 situation.",
+    "WHY THE STALE READING WAS PLAUSIBLE BUT WRONG: the pre-reboot audit run predates the phase-convention correction and the schema fix (the durable tool's documented history includes a KeyError: 'block' schema crash and a corrected phase convention); a phase-convention error in a fresh-count scan can miss a sign-change pair by flipping it, so a zero-fresh result from that run was an audit defect, not a certificate property. The durable tool's control-span mechanism (unflagged spans must be counted at >= need) is what makes the corrected reading trustworthy: all 8 control spans across W97/W98 behave exactly as they must.",
+    "CORRECTIONS COMMITTED HERE: (1) scripts/formal/gen_cen.py FACTS[98] faildesc/verif_extra/fail_phrase/band_fail/rescued_note/prov_fail rewritten to the confirmed wording with the exact adjudication numbers + the in-record ERRATUM; table entries WR/IFFREC/WINREC2/SLICENOTE for 98 and the W99 widthprev_desc corrected; (2) scripts/formal/gen_frontier_cen.py W98/W99 slidetails corrected; (3) CE98/CE99/CE100 + FrontierCE98-99-100 regenerated, lake build green (17454 jobs); (4) docs/COMPARATIVE-VIEW-2026-11-16.md and docs/REVIEWER-BRIEF-2026-11-16.md corrected (the 'self-correcting' section now records that the audit layer caught a defect in the audit layer itself); (5) 0419.json rewritten with the pinned W97 + W98 verdicts and the erratum.",
+    "CERTIFICATES UNAFFECTED: nothing in the certification chain rested on the per-block rescue reading. The W98 certificate is the verifier CERTIFIED on the full sign-change count 20 000 = b - a plus the end runs 49/52 >= 12; the rescue blocks (W97 and W98) are bookkeeping of the Rosser condition's interior determinations. What changed is the DOCUMENTED adjudication status of those bookkeeping blocks: 'contradictory independent reading' (false) is replaced by 'independently re-confirmed from fresh evaluation' (true) - a strictly stronger and now fully evidenced record.",
+    "PROCESS NOTE: this is the audit layer working as designed - a second independent run disagreed with a first one, the durable tooling won (it has the control spans and the corrected phase convention), and the erratum is committed in-tree with the commit trail showing the superseded claims. Both the old and new readings remain visible in git history; no document silently changed."
+  ],
+  "files": [
+    "tmp/ce2/ce1_window_H0_v1/window97_union_adjudication.json (untracked artifact - PINNED 2026-11-17)",
+    "tmp/ce2/ce1_window_H0_v1/window98_union_adjudication.json (untracked artifact - PINNED 2026-11-17)",
+    "scripts/formal/gen_cen.py (W98 wording corrected + erratum)",
+    "scripts/formal/gen_frontier_cen.py (W98/W99 slidetails corrected)",
+    "formal/RhAttack/CE98.lean, CE99.lean, CE100.lean (regenerated, green)",
+    "formal/RhAttack/FrontierCE98.lean, FrontierCE99.lean, FrontierCE100.lean (regenerated, green)",
+    "docs/COMPARATIVE-VIEW-2026-11-16.md (W98 corrected, erratum recorded)",
+    "docs/REVIEWER-BRIEF-2026-11-16.md (W98 corrected, both adjudications pinned)",
+    "docs/discovery/entries/0419.json (rewritten with pinned verdicts)",
+    "docs/discovery/entries/0423.json (L1 literature sweep - the next analytic lever)"
+  ]
+}

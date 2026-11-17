@@ -79,12 +79,9 @@ and audit the individual zero records.
   Window 97 and Window 98 each carried 3 internal prime-theoretic flags, and
   **independent re-computation adjudicated all 6** (W97: the 3 flagged unions
   each contain exactly the predicted zeros — 6/5/5 — found by bisection;
-  W98: the 3 flagged spans contain *zero* zeros — the internal check
-  over-predicted; verified by fresh 60–100-digit scans plus control spans).
+  W98: the 3 flagged unions each contain the predicted zeros — 5/5/5 — a stale pre-reboot audit run had misread them as zero-fresh; the durable re-adjudication of 2026-11-17 re-counted them from scratch, confirmed the pipeline record, and the erratum is committed).
   These adjudications are exactly the kind of thing an outside investigator
-  can replicate with the scripts. (W97 adjudication: complete, machine verdict pinned —
-  fresh 6/5/5, all four control spans pass. W98 adjudication: running on the same
-  box, verdict JSON to follow.)
+  can replicate with the scripts. (Both adjudications are complete and pinned: W97 fresh 6/5/5, W98 fresh 5/5/5, all eight control spans pass, verdict JSONs in the artifact record).
 - The 2,000,000 certified-zero mark **landed exactly in Window 100** (the 21-point tail: 1 999 979 + 21 = 2 000 000, margin 0).
 
 ### Formal pillar (the Lean skeleton)

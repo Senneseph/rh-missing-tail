@@ -49,7 +49,7 @@ own certificate re-verified in our environment — documented in
 |---|---|---|
 | Certified zeros | one window: 20,000 zeros, span ≈ 4,671 in height just above H₀ | **100 continuous windows: 2 000 000 zeros, span 467,292 ≈ 100× the span**, from the same H₀ (W1-W97 ≈ 20 000 zeros each, W98/W99 = 20 000, W100 = the 21-point tail) |
 | Lean content | the Riemann–Siegel *remainder bound* as a machine-checked component theorem | the **entire endpoint architecture**: RH ⇐ census + terminal face; terminal face ⇐ posReserve-band face; band face ⇐ two named squeeze faces; plus the named-input lanes (Z78* ladder, Ismail |S| bound → |S(tPT2)| ≤ 6 → data-free A1 constants) |
-| Audit layer | positive/negative controls, calibrations, independent reproduction | per-window independent audits at multiple precisions **with documented adjudications** (e.g. W97's 3 flagged unions each contain exactly the predicted zeros — 6/5/5; W98's 3 flagged spans contain *zero* zeros — internal over-prediction, independently confirmed) |
+| Audit layer | positive/negative controls, calibrations, independent reproduction | per-window independent audits at multiple precisions **with documented adjudications** (e.g. W97's 3 flagged unions each contain exactly the predicted zeros — 6/5/5; W98's 3 flagged unions each contain the predicted zeros — 5/5/5; a stale pre-reboot audit run had misread W98's spans as zero-fresh, and the durable 2026-11-17 re-adjudication superseded that reading — erratum committed) |
 
 So the relationship is **continuation and extension, not independent
 discovery** — the reviewer should be told exactly that. It is precisely this
@@ -117,9 +117,12 @@ frame, the sharpened target, and the pre-integrated 2026 explicit inputs.
    from one Lean component theorem to the complete endpoint reduction.
 3. **Its method is demonstrably self-correcting**: the W97/W98 adjudications
    (internal prime-theoretic flags → independent re-computation → confirmed
-   zeros 6/5/5 or confirmed over-prediction) are public, script-reproducible
-   demonstrations that the audit layer catches real discrepancies instead of
-   asserting cleanliness.
+   zeros 6/5/5 and 5/5/5) are public, script-reproducible demonstrations, and
+   the audit layer caught a defect in the audit layer itself: a stale
+   pre-reboot audit run had misread W98's flagged spans as zero-fresh;
+   the durable re-adjudication re-counted them from scratch, confirmed the
+   pipeline record, and the erratum is committed — the machinery prefers the
+   re-computation over its own stale output.
 4. **It is a living absorption of the 2026 external frontier** — tracker
    zero-free records, Ismail's S-bound, Murphy's pipeline — each with
    provenance pinned (merge identity, zenodo DOI), each admitted under the
