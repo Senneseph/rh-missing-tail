@@ -1,0 +1,29 @@
+{
+  "id": "0430",
+  "ts": "2026-11-17T23:45:00-05:00",
+  "tag": "0430-L1-transfer-audit-refutes-BP-transfer",
+  "title": "0430 L1 TRANSFER AUDIT (supersedes 0429's directional-claim): the Blomer-Pascadi substitution does NOT transfer in the Conrey/Pratt-Robles extraction - the a-range A = N1N2/(d^2 T^{1-eps}) <= T^eps in EVERY block, the bilinear axis BP needs is degenerate, the binding Kloosterman step is one-variable (Weil-sharp), delta = delta2 = 0, THE WALL STANDS. The 3/5 margin finding (fact about the published constant) is unaffected. Machine-registered in RhAttack/LevWall8 section 5.",
+  "supersedes": "0429 claim 'LevWall7 double-waste gate passes directionally for the [BP] substitution, order-1/32 wall movement'. That claim assumed the 1/32 critical saving transfers through the v-summation; the mechanism audit below shows the transfer is structurally zero in this extraction.",
+  "VERBATIM_EVIDENCE": {
+    "inner_TI_line_p17": "The inner sum (over f1, f1 is the f/h^2 decomposition variable, f1 ~ F/h^2, (f1,dev)=1) 'is trivially << F/h^2. By Weil's bound for Kloosterman sums [26], the inner sum is also << T^eps v^{1/2} (n,v)(1 + F v^{-1}). Taking the minimum of these two bounds and using the inequality min(x,y) <= (xy)^{1/2}, we have << F^{1/2} v^{1/4} (1 + F^{1/2} v^{-1/2}) (n,v)^{1/2} T^eps.'",
+    "a_line_p15_image": "Let hD = a, A = DH_d/d = N1 N2 / (d^2 T^{1-eps})  [image-verified 2026-11-17]",
+    "constraints": "m1 m2 <= T^{1+eps} (p.12); M <= T^{1/2+eps}(N2/N1)^{1/2} (p.13 A_{2,0} display, image); N1, N2 <= N = T^theta; hence S = N1 N2 <= T^{1+o(1)} in every dyadic block; d >= 1.",
+    "bp_theorem_0425": "BP Theorem 1.1 is a BILINEAR estimate: c > 0, N in [1,c], intervals I, J with |I|,|J| <= N; the c^{-1/32+o(1)} saving appears at the critical length N ~ c^{1/2} - i.e. it REQUIRES both coefficient ranges to carry length ~ c^{1/2}."
+  },
+  "AUDIT_LOGIC": [
+    "1. In every block of the Conrey decomposition, the a-range A = S/(d^2 T^{1-eps}) satisfies A <= T^{o(1)} (T-exponent s - 1 <= 0 for S = T^s, s <= 1). The a-axis is essentially bounded (0 or 1 dyadic term).",
+    "2. The binding Type I Kloosterman step (p.17) is a sum over ONE variable (f1 ~ F/h^2) with the other bilinear axis being exactly that bounded a-range. A one-variable Kloosterman/exponential sum is Weil-sharp at v^{1/2+o(1)}.",
+    "3. Specializing BP to a unit second range (|J| = 1): c^{1+o(1)} * ||alpha|| * (N^{1/8}/c^{3/32} + ...) at N = c^{1/2} gives c^{31/32+o(1)} - machine: 31/32 > 1/2, i.e. the unit-axis BP form is WORSE than the Weil level it would need to beat. (LevWall8.unitAxisBPWorseThanWeil.)",
+    "4. Therefore the 1/32 critical saving has no axis to act on in this extraction: transfer = 0, delta = delta2 = 0, and the LevWall7 min-form boundary degenerates to the published wall: 4/7 + min(0,0) = 4/7 (LevWall8.wallStandsUnderActualTransfer).",
+    "5. The Type II side (Deshouillers-Iwaniec, seven monomials, binding (3,2,3,3) at threshold 2/3) runs on D-I's own range conditions (the b-axis B = W = U^{1/4} is non-degenerate) - even if BP improved it, a one-side improvement of a NON-BINDING leg moves nothing (LevWall7 double waste: improving only the T^{1/2}N^{7/8} side while the binding N^{7/4}-side leg stays at 3/5... precisely: the wall needs BOTH clean exponents to move; the 7/4-side clean exponent is sourced by the TI binding leg, whose transfer is refuted in 3-4). Wall: no movement."
+  ],
+  "WHAT_STANDS": [
+    "The 4/7 = clean-form saturation with unpublished margin 1/35 (0428/0429) - a fact about the PUBLISHED constant, no input needed.",
+    "The full verbatim bookkeeping (0426-0429) including the A-line correction.",
+    "LevWall8 sections 1-4 as the hypothetical-improvement arithmetic (what a non-degenerate two-side input would buy: 4/7 + min(8d/7, 4d2/7); full-transfer TI threshold 12/19).",
+    "Section 5 (new, this entry): aRangeIsBoundedEverywhere, unitAxisBPExponent31Over32, unitAxisBPWorseThanWeil, axisMismatch, wallStandsUnderActualTransfer - all machine-proven."
+  ],
+  "L1b_OPEN_STRUCTURAL_QUESTION": "A future two-side wall movement would require an input acting on the BINDING (Type I) leg with a LIVE bilinear axis: either (a) a different decomposition of the TI sum where the inner Kloosterman step keeps a two-variable range of length ~ c^{1/2}, or (b) a new all-moduli estimate for ONE-VARIABLE Kloosterman sums beyond Weil (open - no such estimate exists at the critical length), or (c) a coefficient structure that makes the a-axis range large (the a = hD structure forces A <= T^eps - this is structural, not tuning). Recorded as the next structural lever; no claim that any of these is feasible.",
+  "NO_RH_CLAIM": true,
+  "machines": "formal/RhAttack/LevWall8.lean section 5 (rebuild green, 8770 jobs targeted); full tree build to follow."
+}

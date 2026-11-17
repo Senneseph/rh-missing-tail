@@ -94,14 +94,15 @@ claimed or present.** The squeeze faces remain open — that is exactly what
 they are for: to be closed by mathematics. The contribution is the verified
 frame, the sharpened target, and the pre-integrated 2026 explicit inputs.
 
-One 2026-11-17 addition to that read (L1 track, entries 0423–0429,
+One 2026-11-17 addition to that read (L1 track, entries 0423–0430,
 `RhAttack/LevWall8` build green): the page-level reconstruction of the
 cited Pratt–Robles bookkeeping shows the published 4/7 Levinson–Conrey
-boundary carries an unpublished margin to 3/5, and that the 2026
-Blomer–Pascadi all-moduli Kloosterman estimate is the first named input
-moving *both* sides of that boundary's error form in the right direction
-(double-waste-gate pass, order 1/32). Strict directional wall movement —
-not a face closure; no RH claim.
+boundary carries an unpublished margin to 3/5. The 2026 Blomer–Pascadi
+all-moduli Kloosterman estimate was audited as a wall input and found NOT
+to transfer in this extraction (the a-range is bounded, so the bilinear
+axis its 1/32 saving needs is degenerate and the binding Kloosterman step
+is one-variable, Weil-sharp — entry 0430): the wall stands. The margin
+finding is a fact about the published constant; no RH claim.
 
 ---
 

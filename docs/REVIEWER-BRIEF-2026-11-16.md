@@ -172,23 +172,23 @@ work has combined — and every artifact is in one git repository.
   combination is the design; neither alone is a proof of the other's
   territory.
 
-**L1 track status (2026-11-17, discovery entries 0423–0429).** The
+**L1 track status (2026-11-17, discovery entries 0423–0430).** The
 Levinson–Conrey asymptotic track (the 4/7 wall in
 `RhAttack/LevWall{6,7,8}`) received a page-level deep read of the cited
 source (Pratt–Robles, arXiv:1706.04593, the paper PRZZ delegates its
-term bookkeeping to). Three findings, all machine-registered in the new
-module `RhAttack/LevWall8` (build green): (i) the published 4/7 is exactly
-the saturation point of the quoted clean error form
+term bookkeeping to). Findings, all machine-registered in the new module
+`RhAttack/LevWall8` (build green): (i) the published 4/7 is exactly the
+saturation point of the quoted clean error form
 T^eps(N^{7/4} + T^{1/2}N^{7/8}); the full worst-block reconstruction admits
 θ < 3/5 — i.e. the published constant carries an unpublished margin of 1/35;
-(ii) the 2026 Blomer–Pascadi all-moduli bilinear Kloosterman estimate plugs
-exactly at the Type-I inner step and, because the Type-II binding leg runs on
-the same bilinear machinery, moves *both* clean exponents in the right
-direction — the first named input that passes the in-tree double-waste gate
-(LevWall7) directionally, for a strict wall movement of order 1/32 with the
-exact transfer coefficients left as stated open analytic work; (iii) no face
-closure and no RH claim — the wall moves by an exponent, which is a strict
-improvement of the published boundary, not a solution.
+(ii) the 2026 Blomer–Pascadi all-moduli Kloosterman estimate was audited as
+a wall input and found NOT to transfer in this extraction: the a-range
+A = N1N2/(d²T^{1−ε}) is ≤ T^ε in every block, so the bilinear axis the 1/32
+critical saving needs is degenerate, the binding Kloosterman step is
+one-variable (Weil-sharp), and the wall stands (entry 0430); a future
+two-side movement would need a non-degenerate-axis input at the binding
+Type-I step — recorded as the open follow-up L1b. No RH claim; the wall is
+unmoved, and the margin finding is a fact about the published constant.
 
 ---
 

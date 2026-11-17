@@ -90,20 +90,23 @@ AUDITED  JUDGMENT  (0428  entry,  record  level):
       constant  is  a  conservative  clean-form  constant
       with  an  unpublished  margin  of  3/5  -  4/7  =
       1/35.
-  *  THE  BP  SUBSTITUTION:  [BP]  improves  the  Type  I
-      inner  min(trivial,  Weil)  step  by  the  critical
-      saving  1/32;  the  Type  II  binding  leg
-      (monomial  (3,2,3,3),  threshold  2/3)  runs  on  the
-      SAME  bilinear  Kloosterman  machinery.  Both  clean
-      exponents  therefore  move  in  the  right  direction
-      -  the  LevWall7  double-waste  gate  passes
-      DIRECTIONALLY:  the  wall  moves  strictly  by
-      4/7  +  min(8 delta/7,  4 delta2/7)  with  delta,
-      delta2  >  0  of  order  the  1/32  critical
-      saving  times  (as-yet-uncomputed)  v-summation
-      transfer  constants  <=  1.  The  EXACT  coefficients
-      are  the  content  of  the  L1  paper  (the  a-v-e
-      v-transfer  computation  -  0428  next  move).
+  *  THE  BP  SUBSTITUTION  AUDITED  (0430):  [BP]
+      saves  c^{-1/32+o(1)}  at  the  critical  length
+      in  ITS  BILINEAR  range  -  but  the  a-range
+      A  =  N1N2/(d^2 T^{1-eps})  <=  T^eps  in  every
+      block  (the  image-verified  A-line  plus  m1m2
+      <=  T^{1+eps},  hence  S  =  N1N2  <=  T^{1+o(1)}),
+      so  the  bilinear  axis  [BP]  needs  is
+      degenerate  and  the  transfer  is  ZERO  (section
+      5):  the  binding  Type  I  Kloosterman  step  is
+      one-variable  and  Weil-sharp.  WALL  UNMOVED.
+      The  full-transfer  idealization  (section  4,
+      threshold  12/19)  is  kept  as  the  HYPOTHETICAL
+      arithmetic  of  what  a  non-degenerate  two-side
+      input  would  buy;  extracting  one  (a  different
+      decomposition  with  a  live  bilinear  axis,  or  a
+      two-variable  input  at  the  Type  I  step)  is
+      the  recorded  open  follow-up  (L1b).
 
 MACHINE-VERIFIED  CONTENT  (this  file,  no  RH  claim):
   1.  the  reconstructed  LEG  TABLE  (0428  calculation,
@@ -121,20 +124,27 @@ MACHINE-VERIFIED  CONTENT  (this  file,  no  RH  claim):
       the  published  reach  [0,  4/7)  sits  INSIDE  the
       reconstructed  admissible  set  [0,  3/5),  margin
       exactly  1/35;
-  4.  the  BP  DIRECTIONAL  STATEMENT:  critical  saving
-      1/32  positive;  full-transfer  idealization  of
-      TI1  pushes  the  Type  I  threshold  to  12/19;  and
-      (via  LevWall7)  ANY  pair  delta,  delta2  >  0  of
-      clean-exponent  improvements  moves  the  wall
-      strictly  beyond  4/7  -  the  double-waste  gate
-      passes  directionally  for  the  [BP]  substitution.
+  4.  the  BP  TRANSFER  AUDIT  (0430):  critical  saving
+      1/32  positive  (cited);  full-transfer
+      idealization  of  TI1  pushes  the  Type  I
+      threshold  to  12/19  (HYPOTHETICAL  arithmetic);
+      but  the  a-range  is  <=  T^eps  in  every  block
+      (aRangeIsBoundedEverywhere),  the  unit-axis  [BP]
+      form  is  c^{31/32}  -  WORSE  than  Weil's  c^{1/2}
+      (unitAxisBPWorseThanWeil),  the  axes  mismatch
+      (axisMismatch),  and  the  wall  stands  at  4/7
+      under  the  actual  transfer  (wallStandsUnderActualTransfer).
 
 NO  RH  CLAIM.  This  unit  REGISTERS  the  L1  verdict:
 the  4/7  wall  carries  published  margin  (to  3/5)  and
-the  2026  all-moduli  Kloosterman  estimate  is  the  first
-known  input  that  moves  BOTH  clean  exponents  in  the
-right  direction  -  a  strict  directional  wall
-movement  of  order  1/32,  not  a  face  closure.  -/
+the  2026  all-moduli  Kloosterman  estimate  was  the  first
+named  candidate  to  move  both  clean  exponents  -  but
+the  TRANSFER  AUDIT  of  section  5  (0430)  refutes  the
+transfer  in  this  extraction:  the  a-range  A  =
+N1N2/(d^2 T^{1-eps})  is  bounded  (<=  T^eps)  in  every
+block,  so  the  bilinear  axis  BP  needs  is  degenerate  -
+the  binding  Kloosterman  step  is  one-variable  (Weil-
+sharp),  δ  =  δ2  =  0,  and  THE  WALL  STANDS.  -/
 
 namespace LevWall8
 
@@ -344,8 +354,10 @@ theorem publishedInsideReconstructed (θ : ℝ) (hθ : 0 < θ)
 theorem marginIs1Over35 : (3 : ℚ) / 5 - 4 / 7 = 1 / 35 := by
   norm_num
 
-/-! ### 4.  The  [BP]  substitution  (0425,  0428)  -
-    directional  wall  movement
+/-! ### 4.  The  [BP]  substitution  arithmetic  (0425,
+    0428)  -  the  HYPOTHETICAL  improvement  regime
+    (the  arithmetic  is  true;  the  TRANSFER  itself  is
+    refuted  in  section  5  -  0430  audit)
 -/
 /-- [BP-CRITICAL]  (named  cited  input  -  Blomer-
     Pascadi  2026  Theorem  1.1,  arXiv:2607.24311,
@@ -400,30 +412,30 @@ theorem bpRaisesTI1Threshold : (3 : ℚ) / 5 < 12 / 19 := by
   norm_num
 
 /-- (PROVEN,  machine)  THE  DIRECTIONAL  DOUBLE-WASTE
-    GATE  FOR  [BP]:  if  the  [BP]  substitution  moves
-    BOTH  clean  exponents  in  the  right  direction
-    (delta  >  0  on  the  T^{1/2}N^{7/8}  side  -  the
-    Type  II  binding  leg  runs  on  the  same  bilinear
-    machinery  -  and  delta2  >  0  on  the  N^{7/4}
-    side  -  the  Type  I  binding  leg  is  where  [BP]
-    plugs  in),  then  the  wall  moves  STRICTLY  beyond
-    4/7:  it  sits  at  4/7  +  min(8 delta/7,  4 delta2/7)
-    with  min  >  0  (LevWall7  min-form  boundary).
-    This  is  the  first  named  input  (0300  sweep:
-    none  existed)  that  passes  the  double-waste  gate
-    directionally.  -/
+    GATE  (pure  arithmetic,  HYPOTHETICAL):  for  ANY
+    pair  delta,  delta2  >  0  of  clean-exponent
+    improvements  the  wall  would  sit  at  4/7  +
+    min(8 delta/7,  4 delta2/7)  >  4/7  (LevWall7
+    min-form  boundary).  AUDIT  (section  5,  0430):
+    the  [BP]  substitution  supplies  NO  such  pair  in
+    this  extraction  -  the  a-range  is  bounded,  the
+    bilinear  axis  is  degenerate,  delta  =  delta2  =
+    0.  This  lemma  remains  the  correct  description  of
+    what  a  FUTURE  (non-degenerate-axis)  input  would
+    buy.  -/
 theorem bpDirectionalWallMove (δ δ2 : ℝ) (hδ : 0 < δ) (hδ2 : 0 < δ2) :
     (4 : ℝ) / 7 + min (8 * δ / 7) (4 * δ2 / 7) > 4 / 7 := by
   have hmin : 0 < min (8 * δ / 7) (4 * δ2 / 7) := lt_min (by linarith) (by linarith)
   linarith [hmin]
 
-/-- (PROVEN,  machine)  the  DIRECTIONAL  RECONSTRUCTION:
-    for  delta,  delta2  >  0  the  midpoint  of  the
-    published  wall  and  the  new  wall  is  newly
-    admissible  under  the  improved  exponents  -  the
-    admissible  set  STRICTLY  ENLARGES  for  the  [BP]
-    substitution  (via  the  LevWall7  min-form
-    boundary).  -/
+/-- (PROVEN,  machine)  the  DIRECTIONAL  RECONSTRUCTION
+    (HYPOTHETICAL  arithmetic):  for  delta,  delta2  >  0
+    the  midpoint  of  the  published  wall  and  the  new
+    wall  is  newly  admissible  under  the  improved
+    exponents  (via  the  LevWall7  min-form  boundary).
+    As  with  bpDirectionalWallMove:  TRUE  arithmetic,
+    but  the  [BP]  substitution  does  not  supply  such
+    a  pair  in  this  extraction  (section  5).  -/
 theorem bpStrictlyEnlargesAdmissible (δ δ2 : ℝ) (hδ : 0 < δ) (hδ2 : 0 < δ2) :
     LevWall7.improvedAdmissible δ δ2
         ((4 / 7) / 2 + (4 / 7 + min (8 * δ / 7) (4 * δ2 / 7)) / 2) := by
@@ -441,5 +453,98 @@ theorem bpStrictlyEnlargesAdmissible (δ δ2 : ℝ) (hδ : 0 < δ) (hδ2 : 0 < �
     have h : 0 < min (8 * δ / 7) (4 * δ2 / 7) := hpos
     nlinarith [h]
   linarith [hA]
+
+/-! ### 5.  THE  TRANSFER  AUDIT  (0430)  -  the  [BP]
+    substitution  does  NOT  transfer  in  this
+    extraction
+
+PROVENANCE  of  the  audit:  the  verbatim  A-line  (p.  15,
+image-verified  2026-11-17):  "Let  hΔ  =  a,  A  =  DH_d/d  =
+N1 N2 / (d^2 T^{1-eps})";  the  verbatim  constraint  (p.  12
+image  +  p.  13  A_{2,0}  display):  m1 m2  <=  T^{1+eps}
+and  M  <=  T^{1/2+eps}(N2/N1)^{1/2},  hence  S  =  N1 N2  <=
+T^{1+o(1)}  in  every  dyadic  block;  d  >=  1.  Therefore
+the  a-range  A  is  bounded  up  to  T^eps  in  EVERY
+block.  The  [BP]  theorem  (0425  verbatim:  "c  >  0,
+N  in  [1,c],  intervals  I,  J  with  |I|,  |J|  <=  N")
+saves  over  Weil  at  the  critical  length  N  ~  c^{1/2}
+-  a  saving  that  requires  BOTH  bilinear  axes  to
+carry  range.  In  the  binding  Type  I  step  (p.  17
+verbatim,  0430  pin):  the  inner  sum  is  in  ONE
+variable  (f1  ≍  F/h^2)  with  the  OTHER  axis  being
+exactly  the  bounded  a-range  (a  <=  A  <=  T^eps)  -
+a  one-variable  Kloosterman  /  exponential  sum  is
+Weil-sharp  (c^{1/2+o(1)}):  the  [BP]  unit-axis
+specialization  (one  interval  of  length  1)  gives
+c^{31/32+o(1)},  which  is  the  WORSE  of  the  two
+arithmetic  facts  below.  Conclusion  (docstring  level,
+the  v/T-exponent  translation  is  analytic  prose):
+the  bilinear  axis  [BP]  needs  is  degenerate  (length
+<=  T^eps,  not  ~  v^{1/2});  the  transfer  is  ZERO;
+δ  =  δ2  =  0;  THE  WALL  STANDS.  The  3/5  margin
+finding  (section  3)  is  unaffected  -  it  is  a  fact
+about  the  published  constant,  not  about  any
+input.  -/
+
+/-- THE  A-RANGE  EXONENT  FACT:  with  S  =  N1 N2  =
+    T^{s}  (any  block  of  the  decomposition,  s  <=  1
+    +  o(1))  and  d  >=  1,  the  a-range  is
+    A  =  S / (d^2  T^{1-eps})  -  its  T-exponent  is
+    s  -  1  +  O(eps)  <=  0:  A  <=  T^eps  in  every
+    block  (named  structural  input  of  the  audit,
+    from  the  image-verified  A-line  +  constraints).
+    -/
+def aRangeExponent (s : ℚ) : ℚ := s - 1
+
+/-- (PROVEN,  machine)  for  every  block  (s  <=  1,
+    m1 m2  <=  T^{1+eps}  hence  S  =  N1 N2  <=
+    T^{1+o(1)})  the  a-range  T-exponent  is  <=  0:
+    the  a-axis  is  bounded  (<=  T^eps)  EVERYWHERE  in
+    the  decomposition.  -/
+theorem aRangeIsBoundedEverywhere (s : ℚ) (hs : s <= 1) :
+    aRangeExponent s <= 0 := by
+  simp only [aRangeExponent]
+  linarith
+
+/-- (PROVEN,  machine)  the  [BP]  UNIT-AXIS  ARITHMETIC:
+    specializing  the  [BP]  bound  (0425  verbatim)  to
+    one  coefficient  range  of  length  1  leaves
+    c^{1+o(1)} · ||α|| · (N^{1/8}/c^{3/32}  +  ...);
+    at  the  critical  length  N  =  c^{1/2}  the
+    leading  term  is  c^{1 + 1/16  -  3/32}  =
+    c^{31/32}  -  and  31/32  >  1/2,  so  the  unit-axis
+    [BP]  form  is  STRICTLY  WORSE  than  the  Weil level
+    c^{1/2}  it  would  have  to  beat.  A  one-variable
+    Kloosterman  step  cannot  consume  the  1/32.  -/
+theorem unitAxisBPExponent31Over32 : (1 : ℚ) + 1 / 16 - 3 / 32 = 31 / 32 := by
+  norm_num
+theorem unitAxisBPWorseThanWeil (v : ℝ) (hv : 1 < v) :
+    v ^ (1 / 2 : ℝ) < v ^ (31 / 32 : ℝ) := by
+  have hexp : (1 / 2 : ℝ) < (31 / 32 : ℝ) := by norm_num
+  exact Real.rpow_lt_rpow_of_exponent_lt hv hexp
+
+/-- (PROVEN,  machine)  the  AXIS  MISMATCH  (the
+    arithmetic  core  of  the  audit):  the  [BP]
+    critical  saving  needs  a  bilinear  axis  of  T-
+exponent  >=  1/2  (length  ~  v^{1/2}  in  the
+    modulus  scale)  while  the  only  candidate  axis
+    in  the  binding  Type  I  step  -  the  a-range  -
+    has  T-exponent  <=  0  in  every  block:
+    1/2  >  0  -  the  axes  mismatch,  transfer  =  0.
+    -/
+theorem axisMismatch (s : ℚ) (hs : s <= 1) :
+    (1 : ℚ) / 2 > aRangeExponent s := by
+  simp only [aRangeExponent]
+  linarith
+
+/-- THE  WALL  STANDS  (0430  verdict,  machine  form):
+    under  the  actual  [BP]  transfer  in  this
+    extraction  (δ  =  δ2  =  0)  the  LevWall7  min-form
+    boundary  degenerates  to  the  published  wall
+    itself:  4/7  +  min(8·0/7,  4·0/7)  =  4/7.
+    -/
+theorem wallStandsUnderActualTransfer :
+    (4 : ℚ) / 7 + min (8 * (0 : ℚ) / 7) (4 * (0 : ℚ) / 7) = 4 / 7 := by
+  norm_num
 
 end LevWall8
