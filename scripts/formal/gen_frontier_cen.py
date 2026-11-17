@@ -14,7 +14,7 @@ import gen_cen
 
 ROOT = gen_cen.ROOT
 UNITW = {97: "NINETY-SEVENTH", 98: "NINETY-EIGHTH", 99: "NINETY-NINTH", 100: "ONE-HUNDREDTH",
-         101: "ONE-HUNDRED-FIRST", 102: "ONE-HUNDRED-SECOND"}
+         101: "ONE-HUNDRED-FIRST", 102: "ONE-HUNDRED-SECOND", 103: "ONE-HUNDRED-THIRD"}
 
 FRONTR = {
     98: dict(
@@ -89,6 +89,25 @@ FRONTR = {
         slidetail=("W101 NON-SNAPPED 20 000, ONE recorded interior Rosser failure - determined and "
                    "rescued, adjudication-confirmed (fresh 4 / 4 - 0431); W102 SNAPPED 19 999 (the "
                    "requested 20 000 snapped back one gram at the b-end), CLEAN"),
+    ),
+    103: dict(
+        entry="0436",
+        hdr_summary=("the 480 000 UNIT ROUND MARK was crossed at CE103 [0436], margin 1 309 - a regular "
+                     "round crossing; the 2 040 000 CERTIFIED-ZERO mark was CROSSED IN THIS WINDOW "
+                     "(margin 19 996); W103 is the SNAPPED 19 997 CLEAN window (the EIGHTH recorded "
+                     "4 672 increment and the SECOND CONSECUTIVE: w101 -> w102, w102 -> w103 - both "
+                     "SNAP-family)"),
+        abovept2=("This is the 480 000-unit round-mark crossing (margin 1 309 - a regular round "
+                  "crossing, not one of the series' PREDICTED milestones) recorded at CE103 (0436): "
+                  "the unit-milestone series (175 000 @ CE38, 200 000 @ CE42B, ... 470 000 @ CE101, "
+                  "475 000 @ CE102, 480 000 @ CE103) was tCE - tPT2 in units. (CE100 was the TAIL "
+                  "window that LANDED the 2 000 000 census program target [0421]; the post-target "
+                  "extension continues: CE101 (full 20 000, one rescued failure, adjudication-confirmed), "
+                  "CE102 (SNAPPED 19 999, CLEAN), CE103 (SNAPPED 19 997, CLEAN, the 2 040 000 census "
+                  "mark crossed).)"),
+        slidetail=("W102 SNAPPED 19 999 (the requested 20 000 snapped back one gram at the b-end), "
+                   "CLEAN; W103 SNAPPED 19 997 (the requested 20 000 snapped back three grams at the "
+                   "b-end), CLEAN"),
     ),
 }
 
