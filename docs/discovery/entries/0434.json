@@ -1,0 +1,23 @@
+{
+ "id": "0434",
+ "ts": "2026-11-17T14:00:00Z",
+ "kind": "discovery",
+ "title": "CE102 + FrontierCE102 + TerminalFaceCE102 + TerminalSqueezeCE102 GREEN - the second post-target-extension window: W102 (SNAPPED 19 999 - the requested 20 000 snapped back one gram at the b-end - CLEAN, zero recorded failures) carries the census to 2 039 999; frontier tCE102 = 3 000 175 809 437 (gap 476 637 above H0 - the 475 000 UNIT ROUND MARK CROSSED IN THIS WINDOW, margin 1 637); the SEVENTH recorded 4 672 increment (w101 -> w102, SNAP family); the 2 040 000 mark is 1 zero ahead (next window - not pre-announced); terminal face re-anchored EXACTLY at tCE102 (NO RH CLAIM)",
+ "status": "gated",
+ "lane": "formal CE-series / census frontier (post-target extension)",
+ "unit": 138,
+ "facts": [
+  "WINDOW 102 (Murphy pipeline, our run 2026-11-17, 34 040 evals in 4784.8 s, resumed_from_cache = 0): requested 20 000 window SNAPPED back one gram at the b-end (logged in the record: a_requested = 12 363 155 457 130 = b101 bit-identical seam, b_requested = 12 363 155 477 130, certified b = 12 363 155 477 129; b - a = 19 999), CLEAN - zero recorded interior Rosser failure blocks. Verifier: CERTIFIED = true, sign_changes_inside = 19 999 (= b - a), turing_ok = true, K_conservative = 12, end Rosser runs 48 / 45, max phase contribution [4.08e-21 +/- 1.67e-24]. No adjudication needed (no flagged blocks); the SNAP is a recorded pipeline endpoint adjustment, and the certificate rests on the sign-change total as usual.",
+  "CENSUS (pipeline data): 2 020 000 + 19 999 = 2 039 999 over (g_a1, g_b102]. The 2 040 000 CERTIFIED-ZERO mark is 1 zero ahead - it lands at the start of the NEXT window; per the series convention this is NOT pre-announced (the generated module says 'do not pre-announce'). The 2 020 000 mark (W101 [0431]) carries 19 999; the 2 000 000 program target (W100 [0421]) carries 39 999.",
+  "ENDPOINT (exact exponent -86 dyadic family): g_b102 = [232127359962398950167637379246955296117, -86, 16777217, -110], center 3000175809437.7236678416844995204769021... (verify-radius 5.00e-13); tCE102 = 3 000 175 809 437 (floor); gB102Lo = 300017580943772 / 100 with exact sub-cent margin 0.0036678416844995204769 (3.67e-3 - the TWENTY-THIRD sub-cent case).",
+  "FRONTIER ARITHMETIC (machine, in CE102.lean): tCE102 - tCE101 = 4 672 - the SEVENTH recorded 4 672 INCREMENT of the series (w45 -> w46, w53 -> w54, w65 -> w66, w77 -> w78 [SNAP], w86 -> w87 [SNAP], w97 -> w98 [SNAP], w101 -> w102 [SNAP]); recorded increment series through W102: 22 x 4 673 + 7 x 4 672 + 5 (W100 TAIL) = 126 172: 350 465 -> 476 637; no pattern claim beyond the recorded data. tCE102 - tPT2 = 476 637; the 475 000 UNIT ROUND MARK was CROSSED IN THIS WINDOW (margin 1 637 - a regular round crossing, not a predicted milestone); the next round mark 480 000 is 3 363 ahead (less than one full 4 673 step).",
+  "FORMAL (all four modules green; targeted build 8 875 jobs, FULL TREE green 17 454 jobs): RhAttack.CE102 (bandOfWindows102 over h1..h103 - h102 = W101 FULL slice re-cite (with its adjudication-confirmed rescue wording), h103 = W102 terminal SNAP slice; allOnLineUpToCE102; terminalFaceCE102 + terminalFaceCE102_iff_faceCE101; frontierPast475k (the crossing theorem); carried chain frontierPast{k}k through 475k). RhAttack.FrontierCE102 (ce102AbovePT2, ce102PT2Margin = 476 637, terminalFaceCE102_elim_hWin, face_above_frontier_no_offPair, rh_program78_frontier_CE102 with the 2 039 999 census). RhAttack.TerminalFaceCE102 (103 window-slice clauses + hqzCensus). RhAttack.TerminalSqueezeCE102 (103-clause assembly).",
+  "WHY IT MATTERS (honestly): no analytic face movement - the terminal face above tCE102 is the SAME named open object (iff chain). What it does: (1) the certified frontier is now 476 637 above H0 with 2 039 999 certified zeros; (2) the SNAPPED-window + near-miss-mark mechanics are now machine-driven in-tree for the post-target phase (the '2 040 000 is 1 zero ahead - do not pre-announce' discipline is generator-enforced); (3) the 4 672 increment series gains its seventh recorded data point (still recorded-data-only, no pattern claim).",
+  "HONESTY: NO RH CLAIM. The analytic residue is unchanged (terminal face above tCE102 + named inputs); the census is pipeline data + verifier + (where applicable) fresh-mpmath adjudications, not in-tree arithmetic; the L1 4/7 wall stands [0430]."
+ ],
+ "no_rh_claim": true,
+ "pins": [
+  "tmp/ce2/ce1_window_H0_v1/window102_b102.json",
+  "tmp/ce2/ce1_window_H0_v1/window102_b102.verify.json"
+ ]
+}

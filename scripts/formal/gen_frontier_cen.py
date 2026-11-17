@@ -14,7 +14,7 @@ import gen_cen
 
 ROOT = gen_cen.ROOT
 UNITW = {97: "NINETY-SEVENTH", 98: "NINETY-EIGHTH", 99: "NINETY-NINTH", 100: "ONE-HUNDREDTH",
-         101: "ONE-HUNDRED-FIRST"}
+         101: "ONE-HUNDRED-FIRST", 102: "ONE-HUNDRED-SECOND"}
 
 FRONTR = {
     98: dict(
@@ -72,6 +72,23 @@ FRONTR = {
         slidetail=("W100 TAIL 21 (b - a = 21), CLEAN - the landed 2 000 000 census program target "
                    "[0421]; W101 NON-SNAPPED 20 000, ONE recorded interior Rosser failure - "
                    "determined and rescued, adjudication-confirmed (fresh 4 / 4 - 0431)"),
+    ),
+    102: dict(
+        entry="0434",
+        hdr_summary=("the 475 000 UNIT ROUND MARK was crossed at CE102 [0434], margin 1 637 - a "
+                     "regular round crossing; the census is 2 039 999 (the 2 040 000 mark is 1 zero "
+                     "ahead - do not pre-announce); W102 is the SNAPPED 19 999 CLEAN window (the "
+                     "SEVENTH recorded 4 672 increment: w101 -> w102)"),
+        abovept2=("This is the 475 000-unit round-mark crossing (margin 1 637 - a regular round "
+                  "crossing, not one of the series' PREDICTED milestones) recorded at CE102 (0434): "
+                  "the unit-milestone series (175 000 @ CE38, 200 000 @ CE42B, ... 460 000 @ CE98, "
+                  "465 000 @ CE99, 470 000 @ CE101, 475 000 @ CE102) was tCE - tPT2 in units. (CE100 "
+                  "was the TAIL window that landed the 2 000 000 census program target [0421]; the "
+                  "post-target extension continues: CE101 (full 20 000, one rescued failure, "
+                  "adjudication-confirmed) and CE102 (SNAPPED 19 999, CLEAN).)"),
+        slidetail=("W101 NON-SNAPPED 20 000, ONE recorded interior Rosser failure - determined and "
+                   "rescued, adjudication-confirmed (fresh 4 / 4 - 0431); W102 SNAPPED 19 999 (the "
+                   "requested 20 000 snapped back one gram at the b-end), CLEAN"),
     ),
 }
 

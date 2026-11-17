@@ -342,6 +342,66 @@ FACTS = {
                       "W97 (2.99e-4), W98 (5.41e-3), W99 (5.17e-4), W100 (7.10e-3), W101 (2.21e-3)"),
         new_milestone=470000,
     ),
+    102: dict(
+        N=102, tCE=3000175809437, gap=476637, prevgap=471965,
+        gal=300017580943772, gden=100, galstr="300017580943772 / 100",
+        frac="0.7236678416844995204769021... (exact, exponent -86 dyadic terminator)",
+        fracmargin="0.0036678416844995204769 (exact, exponent -86 dyadic arithmetic, center-minus-radius)",
+        a="12 363 155 457 130", b="12 363 155 477 129",
+        ga_b="[232127359600866185766845147095826895749, -86, 16777217, -110]",
+        gb_b="[232127359962398950167637379246955296117, -86, 16777217, -110]",
+        width=("SNAPPED 19 999 (the requested 20 000 window was snapped back one gram at the b-end: "
+               "b_requested = 12 363 155 477 130, certified b = 12 363 155 477 129, b - a = 19 999)"),
+        widthnum=19999,
+        census="2 039 999", censusnum=2039999, censusprev="2 020 000", censusprevnum=2020000,
+        widthprev_desc=("NON-SNAPPED 20 000, ONE recorded interior Rosser failure - determined and "
+                        "rescued, adjudication-confirmed (fresh 4 / 4 - the 0431 independent union-span "
+                        "adjudication)"),
+        evals="34 040", seconds="4784.8", cache="0",
+        runs="48 / 45", phase="4.08e-21 (radius 1.67e-24)",
+        failures_n=0,
+        faildesc=("ZERO recorded interior Rosser failure blocks - a CLEAN snap window (the requested "
+                  "20 000 was snapped back exactly one gram at the b-end, logged as b_requested in the "
+                  "window record; the sign-change total equals b - a = 19 999)."),
+        win_n_clean=45, win_n_rescue=57, total_fail=87,
+        incr=4672,
+        mile=("the 475 000 UNIT ROUND MARK was CROSSED IN THIS WINDOW, WINDOW 102 (margin 1 637 - a "
+              "regular round crossing, not a predicted milestone); the 470 000 UNIT ROUND MARK (crossed "
+              "at W101 [0431]) carries 6 637; the 465 000 UNIT ROUND MARK (crossed at W99 [0420]) carries "
+              "11 637; the next round mark 480 000 is 3 363 ahead (less than one full 4 673 step)"),
+        censmarks=("the 2 020 000 CERTIFIED-ZERO MARK (crossed at W101 [0431]) carries margin 19 999; "
+                   "the 2 000 000 CERTIFIED-ZERO MARK LANDED at WINDOW 100 [0421] (the census program's "
+                   "target; carries margin 39 999); the 1 980 000 CERTIFIED-ZERO MARK (crossed at "
+                   "W99 [0420]) carries margin 59 999; the 2 040 000 mark is 1 zero ahead (it lands at "
+                   "the start of the NEXT window - do not pre-announce)"),
+        milecross={175000: 38, 200000: "42B", 225000: 48, 250000: 53, 275000: 58, 300000: 64,
+                   325000: 69, 350000: 74, 375000: 80, 400000: 85, 425000: 90, 430000: 92, 435000: 93,
+                   440000: 94, 445000: 95, 450000: 96, 455000: 97, 460000: 98, 465000: 99, 470000: 101,
+                   475000: 102},
+        unit="ONE-HUNDRED-SECOND", family="-86",
+        ord_word="thirty-seventh", nw=6,
+        run_note="the 2026-11-17 fresh run (resumed_from_cache = 0, logged for provenance)",
+        parallel_note="",
+        verif_extra=("The window is CLEAN (zero interior Rosser failure blocks) - nothing to adjudicate. "
+                     "The SNAP is a recorded pipeline endpoint adjustment (b_requested = 12 363 155 "
+                     "477 130 snapped to b = 12 363 155 477 129, exactly one gram), logged in the "
+                     "window record; the certificate rests on the sign-change total b - a = 19 999."),
+        shrink_note=("W102: the requested 20 000 window was SNAPPED back one gram at the b-end "
+                     "(19 999 certified), CLEAN. The floor advances by 4 672 - the SEVENTH recorded 4 "
+                     "672 INCREMENT: w45 -> w46, w53 -> w54, w65 -> w66, w77 -> w78 [SNAP], w86 -> "
+                     "w87 [SNAP], w97 -> w98 [SNAP], w101 -> w102 [SNAP]; no pattern claim beyond the "
+                     "recorded data points."),
+        incr_note=("a recorded 4 672 increment (the seventh occurrence; the window was SNAPPED 19 999) - "
+                   "certified b = 12 363 155 477 129, CLEAN - no pattern claim beyond the recorded data"),
+        margin_exp="3.67e-3",
+        subcent_ordinal="TWENTY-THIRD",
+        subcent_list=("W79 (1.76e-4), W81 (4.03e-4), W82 (1.87e-3), W83 (6.98e-3), W84 (2.09e-3), W85 "
+                      "(7.2e-3), W86 (2.3e-3), W87 (3.8e-3), W88 (8.9e-3), W89 (4.0e-3), W90 (9.1e-3), "
+                      "W91 (4.2e-3), W92 (9.3e-3), W93 (8.0e-4), W94 (5.9e-3), W95 (1.0e-3), W96 (6.1e-3), "
+                      "W97 (2.99e-4), W98 (5.41e-3), W99 (5.17e-4), W100 (7.10e-3), W101 (2.21e-3), "
+                      "W102 (3.67e-3)"),
+        new_milestone=475000,
+    ),
 }
 
 
@@ -375,6 +435,8 @@ def gen_ce(N):
         101: "NON-SNAPPED 20 000, ONE recorded interior Rosser failure - determined and rescued; the "
              "0431 fresh-mpmath adjudication RE-CONFIRMS the rescue count (fresh 4 / 4, no near-zero "
              "touch)",
+        102: "SNAPPED 19 999 (the requested 20 000 snapped back one gram at the b-end), CLEAN - zero "
+             "recorded interior failures",
     }
     IFFREC = {  # iff-doc window-slice records
         95: "NON-SNAPPED 20 000 with two recorded interior failures, both determined and rescued",
@@ -389,6 +451,8 @@ def gen_ce(N):
         101: "NON-SNAPPED 20 000 with one recorded interior Rosser failure (determined; the rescue "
              "union FOUND 4 RE-CONFIRMED by the 0431 fresh-mpmath adjudication - fresh 4 / 4, no "
              "near-zero touch; the certificate rests on the sign-change total)",
+        102: "SNAPPED 19 999 (the requested 20 000 snapped back one gram at the b-end), CLEAN - zero "
+             "recorded interior failures",
     }
     WINREC2 = {  # split-doc window records
         96: "NON-SNAPPED at 20 000, CLEAN - zero recorded interior failures",
@@ -400,9 +464,12 @@ def gen_ce(N):
         100: "at the TAIL 21, CLEAN - zero recorded interior failures",
         101: "NON-SNAPPED at 20 000 (one recorded interior failure - determined and rescued; the 0431 "
              "adjudication re-confirms fresh 4 / 4; certificate by sign-change total)",
+        102: "SNAPPED at 19 999 (the requested 20 000 snapped back one gram at the b-end), CLEAN - "
+             "zero recorded interior failures",
     }
     UNITW = {95: "NINETY-FIFTH", 96: "NINETY-SIXTH", 97: "NINETY-SEVENTH",
-             98: "NINETY-EIGHTH", 99: "NINETY-NINTH", 100: "ONE-HUNDREDTH", 101: "ONE-HUNDRED-FIRST"}
+             98: "NINETY-EIGHTH", 99: "NINETY-NINTH", 100: "ONE-HUNDREDTH", 101: "ONE-HUNDRED-FIRST",
+             102: "ONE-HUNDRED-SECOND"}
     SLICENOTE = {  # aolu-doc terminal-slice notes
         97: "SNAPPED 19 997, THREE recorded interior failures - all determined and rescued",
         98: "NON-SNAPPED 20 000, THREE recorded interior Rosser failures (determined at m = 64; the "
@@ -413,6 +480,8 @@ def gen_ce(N):
         101: "NON-SNAPPED 20 000, ONE recorded interior Rosser failure - determined and rescued; the "
              "0431 fresh-mpmath adjudication RE-CONFIRMS the rescue count (fresh 4 / 4, no near-zero "
              "touch; certificate by sign-change total)",
+        102: "SNAPPED 19 999 (the requested 20 000 snapped back one gram at the b-end), CLEAN - zero "
+             "recorded interior failures",
     }
     SLICENOTE = SLICENOTE[N]
 
@@ -423,11 +492,12 @@ def gen_ce(N):
                   (430000, 92, "[0403]", ""), (435000, 93, "[0405]", ""), (440000, 94, "[0406]", ""),
                   (445000, 95, "[0410]", ""), (450000, 96, "", ""), (455000, 97, "[0418]", ""),
                   (460000, 98, "[0419]", ""), (465000, 99, "[0420]", ""),
-                  (470000, 101, "[0431]", "")]
+                  (470000, 101, "[0431]", ""), (475000, 102, "[0434]", "")]
     CENSUS_MARKS = [(1600000, 80, "[0389]"), (1700000, 85, "[0396]"), (1800000, 90, "[0401]"),
                     (1840000, 91, "[0402]"), (1860000, 92, "[0403]"), (1880000, 93, ""),
                     (1900000, 95, "[0410]"), (1920000, 96, ""), (1940000, 97, "[0418]"),
-                    (1960000, 98, "[0419]"), (1980000, 99, "[0420]"), (2000000, 100, "[0421]")]
+                    (1960000, 98, "[0419]"), (1980000, 99, "[0420]"), (2000000, 100, "[0421]"),
+                    (2020000, 101, "[0431]")]
 
     def fmt(x):
         return f"{x:,}".replace(",", " ")
@@ -485,9 +555,10 @@ def gen_ce(N):
                          f"target; margin at WINDOW {N}: {fmt(-d)}) - the frontier extension continues beyond "
                          f"the target (post-target phase, no new program claim)")
             if censusnum % 20000 == 0:
+                pos = ("the first 20 000-mark" if censusnum == 2020000 else "another 20 000-mark")
                 parts.append(f"the {fmt(censusnum)} CERTIFIED-ZERO MARK LANDS EXACTLY IN THIS WINDOW, WINDOW "
-                             f"{N} ({fmt(censusprev)} + {F['widthnum']:,} = {fmt(censusnum)}, margin 0) - the "
-                             f"first 20 000-mark of the post-target extension")
+                             f"{N} ({fmt(censusprev)} + {F['widthnum']:,} = {fmt(censusnum)}, margin 0) - "
+                             f"{pos} of the post-target extension")
         return "; ".join(parts) + "."
 
     failphrase = F.get("fail_phrase") or (
@@ -881,9 +952,10 @@ theorem gB{P}Lo_lt_gB{N}Lo : (gB{P}Lo : ℝ) < (gB{N}Lo : ℝ) := by
         landed = (f"the 2 000 000 CERTIFIED-ZERO MARK LANDED at WINDOW 100 [0421] (the census program's "
                   f"target; margin at WINDOW {N}: {fmt(censusnum - 2000000)})")
         if censusnum % 20000 == 0:
+            pos = ("the first 20 000-mark" if censusnum == 2020000 else "another 20 000-mark")
             cens_inline = (f"the {fmt(censusnum)} CERTIFIED-ZERO MARK LANDS EXACTLY IN THIS WINDOW, "
                            f"WINDOW {N} ({fmt(censusprev)} + {F['widthnum']:,} = {fmt(censusnum)}, "
-                           f"margin 0) - the first 20 000-mark of the post-target extension; {landed}; "
+                           f"margin 0) - {pos} of the post-target extension; {landed}; "
                            f"the frontier extension continues beyond the target (post-target phase, no new "
                            f"program claim)")
         else:
