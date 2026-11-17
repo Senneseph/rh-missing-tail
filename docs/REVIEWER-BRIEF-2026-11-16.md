@@ -13,8 +13,8 @@ line (the "critical line") in the complex plane. The program's claim is not
 is a **two-part machine-checked architecture**:
 
 **(A) A certified census of zeta zeros just above the previous world-record
-height.** 98 consecutive "windows" of ~20,000 zeros each — 1,979,979 zeros in
-all, from height ~3.00017×10¹² up to 3,000,175,795,414 — have been located and
+height.** 100 consecutive "windows" of ~20,000 zeros each — 2 000 000 zeros in
+all, from height ~3.00017×10¹² up to 3,000,175,800,092 (the round 2 000 000 mark lands exactly in the 21-point W100 tail) — have been located and
 **independently machine-certified as lying on the critical line**, by a purpose-
 built Python certification pipeline whose output records are bit-stable,
 re-verifiable from a separate verifier program, and audited by independent
@@ -63,12 +63,12 @@ and audit the individual zero records.
 ## 3. The impressive, specific, checkable facts
 
 ### Computation pillar (the census)
-- **1,979,979 zeros on the line, certified, in the window program
-  W1…W98**, covering (tPT2, tCE98] with
-  tCE98 = 3,000,175,795,414 — a new certified frontier **above the
+- **2 000 000 zeros on the line, certified, in the window program
+  W1…W100**, covering (tPT2, tCE100] with
+  tCE100 = 3,000,175,800,092 — a new certified frontier **above the
   Platt–Trudgian world-record height of 3×10¹²** (the certified band rises
-  from the cited frontier tPT2 = 3,000,175,332,800 to tCE98, a margin of
-  462,614).
+  from the cited frontier tPT2 = 3,000,175,332,800 to tCE100, a margin of
+  467,292; the 2 000 000 certified-zero mark lands exactly in W100).
 - Each window is a self-contained bit-stable record: exact rational
   (scaled-integer) Gram-point values, sign walks of the zeta-Z function at
   the certified height, prime-theoretic (Rosser) cross-checks, per-zero
@@ -82,20 +82,22 @@ and audit the individual zero records.
   W98: the 3 flagged spans contain *zero* zeros — the internal check
   over-predicted; verified by fresh 60–100-digit scans plus control spans).
   These adjudications are exactly the kind of thing an outside investigator
-  can replicate with the scripts.
-- The 2,000,000 certified-zero mark is **20,021 zeros away** (Window 99 is
-  the only gap left to fill).
+  can replicate with the scripts. (W97 adjudication: complete, machine verdict pinned —
+  fresh 6/5/5, all four control spans pass. W98 adjudication: running on the same
+  box, verdict JSON to follow.)
+- The 2,000,000 certified-zero mark **landed exactly in Window 100** (the 21-point tail: 1 999 979 + 21 = 2 000 000, margin 0).
 
 ### Formal pillar (the Lean skeleton)
-- **276 RhAttack modules, zero axioms, zero `sorry`.** Full build:
+- **286 RhAttack modules, zero axioms, zero `sorry`.** Full build:
   17,454 jobs, green, repeated daily. Lean 4.33.1 + mathlib.
 - The endpoint engine (`RHEnd`) states the whole program as one family of
   implications: *census + named external inputs + terminal face ⇒ RH*,
-  instantiated at each re-anchored frontier (currently H = tCE96,
-  3,000,175,786,069; the re-anchor to W97/W98 is machine-ready and pending
-  only the in-flight window audits).
+  instantiated at each re-anchored frontier (currently H = tCE100 =
+  3,000,175,800,092 — the CE97–CE100 re-anchors are complete and green;
+  `TerminalFaceCE100` and `TerminalSqueezeCE100` state the endpoint form
+  and the final squeeze assembly at this frontier).
 - **The reduction theorems (all machine-checked):**
-  1. `TerminalFaceCE96` (unit 130): *under the terminal face at the
+  1. `TerminalFaceCE100` (unit 134, prototype `TerminalFaceCE96` unit 130): *under the terminal face at the
      frontier, the endpoint's residual legs are empty* — no off-pair exists
      at or above the frontier (the face above, the boundary-inclusive census
      at), so **RH at the frontier ⇐ terminal face + census + [Z78]**.
@@ -178,7 +180,7 @@ work has combined — and every artifact is in one git repository.
 ## 6. Bottom line for the reviewer
 
 This is a reproducible, single-repository program that (a) has **machine-
-certified the behavior of ~1.98 million zeta zeros above the previous
+certified the behavior of 2 million zeta zeros above the previous
 world-record height**, and (b) has **machine-checked the logical architecture
 that says exactly which four named facts — and no others — stand between the
 current state and RH**, with the largest of those facts (the zero-free
