@@ -102,9 +102,10 @@ FACTS = {
         evals="34 938", seconds="11 635.5", cache="0",
         runs="49 / 52", phase="4.10e-21 (radius 2.61e-24)",
         failures_n=3,
-        faildesc=("THREE recorded interior Rosser failure blocks, each DETERMINED in the pipeline record "
-                  "via the coarse rescue probe (the union-span resample reported 5/5/5 sign changes "
-                  "found at m = 4 / 2 / 4): block [12 363 155 398 701, 12 363 155 398 703] (need 2 / "
+        faildesc=("THREE recorded interior Rosser failure blocks, each DETERMINED at the finest grid "
+                  "(m = 64; the shortfall is a genuine sign-count deficiency, not a numerical "
+                  "artifact); the pipeline's rescue probe on the widened adjacent union recorded "
+                  "'FOUND 5' sign changes, at m = 4 / 2 / 4: block [12 363 155 398 701, 12 363 155 398 703] (need 2 / "
                   "changes 0 at 129 points, finest m = 64; rescue union [12 363 155 398 700, 12 363 155 "
                   "398 705] FOUND 5 at m = 4); block [12 363 155 408 245, 12 363 155 408 247] (m = 64; "
                   "rescue union [12 363 155 408 243, 12 363 155 408 248] FOUND 5 at m = 2); block "
@@ -112,8 +113,8 @@ FACTS = {
                   "12 363 155 408 865] FOUND 5 at m = 4). THE INDEPENDENT ADJUDICATION (fresh mpmath, "
                   "separate engine, corrected phase convention, dense scan with refined crossing checks, "
                   "plus unflagged control spans) found ZERO fresh zeros in EACH of the three flagged "
-                  "union spans: the coarse rescue counts are internal OVER-PREDICTIONS and cannot "
-                  "affect the certification - the window's certificate rests on the full sign-change "
+                  "union spans: the rescue probe's FOUND 5 counts are internal OVER-PREDICTIONS "
+                  "relative to the fresh evaluation, and cannot affect the certification - the window's certificate rests on the full sign-change "
                   "count inside the window (20 000 = b - a) and the verifier's CERTIFIED verdict, not "
                   "on the per-block Rosser counts (contrast W97, whose adjudication confirmed every "
                   "rescue count from fresh zeros: 6 / 5 / 5)"),        win_n_clean=42, win_n_rescue=56, total_fail=86,
@@ -137,25 +138,26 @@ FACTS = {
         verif_extra=("In addition, the independent fresh-mpmath union-span adjudication of the 3 flagged "
                      "union spans (separate engine, corrected phase convention, dense scan with refined "
                      "crossing checks, plus unflagged control spans) found ZERO fresh zeros in EACH "
-                     "flagged union span: the coarse rescue counts (FOUND 5 at m = 4/2/4) are internal "
-                     "OVER-PREDICTIONS that cannot affect the certification, which rests on the "
+                     "flagged union span: the rescued probe FOUND 5 counts (at m = 4/2/4) are internal "
+                     "OVER-PREDICTIONS relative to the fresh evaluation that cannot affect the "
+                     "certification, which rests on the "
                      "sign-change total (20 000 = b - a) and the CERTIFIED verdict - the recorded "
                      "RESOLVED-OVER case (cf. W97's RESOLVED-OK at 6/5/5)."),
-        fail_phrase=("three recorded interior Rosser failure blocks, each determined in the pipeline "
-                     "record via the coarse rescue probe (independent union-span adjudication: "
-                     "over-predictions - zero fresh zeros in each flagged union; the certification "
-                     "rests on the sign-change total 20 000 = b - a)"),
-        band_fail=("three recorded interior Rosser failure blocks determined via the coarse rescue "
-                   "probe (independent union-span adjudication: over-predictions - zero fresh zeros in "
+        fail_phrase=("three recorded interior Rosser failure blocks, each determined at the finest "
+                     "grid (m = 64); the rescue probe's FOUND 5 counts on the widened unions were "
+                     "independently adjudicated as over-predictions (zero fresh zeros in each flagged "
+                     "union); the certification rests on the sign-change total 20 000 = b - a"),
+        band_fail=("three recorded interior Rosser failure blocks (determined at m = 64; the rescue "
+                   "probe's FOUND 5 union counts adjudicated as over-predictions - zero fresh zeros in "
                    "the flagged unions; the sign-change total 20 000 = b - a carries the "
                    "certification)"),
-        rescued_note=(" (determined via the coarse rescue probe - independent adjudication: "
-                      "over-predictions, zero fresh zeros in the flagged unions; the certification "
-                      "rests on the sign-change total), "),
-        prov_fail=("(ALL DETERMINED in the pipeline record via the coarse rescue probe - the "
-                   "independent union-span adjudication reads the three flagged unions as "
-                   "over-predictions: zero fresh zeros in each - the certification rests on the "
-                   "sign-change total = b - a; see the W98 record above)"),        shrink_note=("THE USUAL INCREMENT: W98 ran NON-SNAPPED 20 000 (certified b = 12 363 155 417 109) "
+        rescued_note=(" (determined at m = 64 - the rescue probe's FOUND 5 union counts adjudicated "
+                      "as over-predictions, zero fresh zeros in the flagged unions; the "
+                      "certification rests on the sign-change total), "),
+        prov_fail=("(ALL DETERMINED at the finest grid m = 64 - the rescue probe's FOUND 5 union "
+                   "counts were independently adjudicated as over-predictions: zero fresh zeros in "
+                   "each flagged union - the certification rests on the sign-change total = b - a; "
+                   "see the W98 record above)"),        shrink_note=("THE USUAL INCREMENT: W98 ran NON-SNAPPED 20 000 (certified b = 12 363 155 417 109) "
                      "with 3 recorded interior Rosser failure blocks (all determined and rescued); the floor "
                      "advances by 4673. The six recorded 4 672 INCREMENT occurrences remain w45 -> w46, "
                      "w53 -> w54, w65 -> w66, w77 -> w78 [SNAP], w86 -> w87 [SNAP], w97 -> w98 [SNAP]; no "
@@ -182,7 +184,7 @@ FACTS = {
         gb_b="[232127359238935715418942513750545622351, -86, 16777217, -110]",
         width="NON-SNAPPED 20 000, CLEAN", widthnum=20000, census="1 999 979", censusnum=1999979,
         censusprev="1 979 979", censusprevnum=1979979,
-        widthprev_desc="NON-SNAPPED 20 000, THREE recorded interior Rosser failure blocks (determined via the coarse rescue probe; independently adjudicated over-predictions - zero fresh zeros in the flagged unions)",
+        widthprev_desc="NON-SNAPPED 20 000, THREE recorded interior Rosser failure blocks (determined at m = 64; the rescue probe's FOUND 5 union counts adjudicated as over-predictions - zero fresh zeros in the flagged unions)",
         evals="33 387", seconds="146.1", cache="32 737",
         runs="49 / 46", phase="4.10e-21 (radius 2.61e-24)",
         failures_n=0,
@@ -293,9 +295,9 @@ def gen_ce(N):
         95: "NON-SNAPPED 20 000, TWO recorded interior failures - both determined and rescued",
         96: "NON-SNAPPED 20 000, CLEAN - zero failures",
         97: "SNAPPED 19 997, THREE recorded interior failures - all determined and rescued",
-        98: "NON-SNAPPED 20 000, THREE recorded interior Rosser failures (determined via the coarse "
-            "rescue probe; independent adjudication: over-predictions - zero fresh zeros in the flagged "
-            "unions)",
+        98: "NON-SNAPPED 20 000, THREE recorded interior Rosser failures (determined at m = 64; the "
+            "rescue probe's FOUND 5 union counts adjudicated as over-predictions - zero fresh zeros "
+            "in the flagged unions)",
         99: "NON-SNAPPED 20 000, CLEAN - zero failures",
         100: "TAIL 21, CLEAN - zero failures",
     }
@@ -303,17 +305,18 @@ def gen_ce(N):
         95: "NON-SNAPPED 20 000 with two recorded interior failures, both determined and rescued",
         96: "NON-SNAPPED 20 000, CLEAN - zero failures",
         97: "SNAPPED 19 997 with three recorded interior failures - all determined and rescued",
-        98: "NON-SNAPPED 20 000 with three recorded interior Rosser failures (determined in the pipeline "
-            "record; the independent union-span adjudication reads the flagged unions as over-predictions "
-            "- zero fresh zeros; the certificate rests on the sign-change total)",
+        98: "NON-SNAPPED 20 000 with three recorded interior Rosser failures (determined at m = 64; "
+            "the rescue probe's FOUND 5 union counts adjudicated as over-predictions - zero fresh "
+            "zeros; the certificate rests on the sign-change total)",
         99: "NON-SNAPPED 20 000, CLEAN - zero failures",
         100: "TAIL 21, CLEAN - zero failures",
     }
     WINREC2 = {  # split-doc window records
         96: "NON-SNAPPED at 20 000, CLEAN - zero recorded interior failures",
         97: "SNAPPED at 19 997 (three recorded interior failures - all determined and rescued)",
-        98: "NON-SNAPPED at 20 000 (three recorded interior failures - determined via the coarse rescue "
-            "probe; independently adjudicated over-predictions, certificate by sign-change total)",
+        98: "NON-SNAPPED at 20 000 (three recorded interior failures - determined at m = 64; the "
+            "rescue probe's FOUND 5 union counts adjudicated as over-predictions; certificate by "
+            "sign-change total)",
         99: "NON-SNAPPED at 20 000, CLEAN - zero recorded interior failures",
         100: "at the TAIL 21, CLEAN - zero recorded interior failures",
     }
@@ -321,9 +324,9 @@ def gen_ce(N):
              98: "NINETY-EIGHTH", 99: "NINETY-NINTH", 100: "ONE-HUNDREDTH"}
     SLICENOTE = {  # aolu-doc terminal-slice notes
         97: "SNAPPED 19 997, THREE recorded interior failures - all determined and rescued",
-        98: "NON-SNAPPED 20 000, THREE recorded interior Rosser failures (determined via the coarse "
-            "rescue probe; independently adjudicated over-predictions - zero fresh zeros in the flagged "
-            "unions; certificate by sign-change total)",
+        98: "NON-SNAPPED 20 000, THREE recorded interior Rosser failures (determined at m = 64; the "
+            "rescue probe's FOUND 5 union counts adjudicated as over-predictions - zero fresh zeros "
+            "in the flagged unions; certificate by sign-change total)",
         99: "NON-SNAPPED 20 000, CLEAN - zero failures",
         100: "TAIL 21, CLEAN - zero failures",
     }

@@ -27,9 +27,10 @@ FRONTR = {
                   "CE96, 455 000 @ CE97, 460 000 @ CE98) was tCE - tPT2 in units."),
         slidetail=("W97 SNAPPED 19 997, THREE recorded interior Rosser\n"
                    "failures - all determined, adjudication-confirmed (fresh 6/5/5); W98 "
-                   "NON-SNAPPED 20 000, THREE recorded interior Rosser failures (determined\n"
-                   "via the coarse rescue probe; independent adjudication: over-predictions -\n"
-                   "zero fresh zeros in the flagged unions; certificate by sign-change total)"),
+                   "NON-SNAPPED 20 000, THREE recorded interior Rosser failures\n"
+                   "(determined at m = 64; the rescue probe's FOUND 5 union counts adjudicated\n"
+                   "as over-predictions - zero fresh zeros in the flagged unions; certificate by\n"
+                   "sign-change total)"),
     ),
     99: dict(
         entry="0420",
@@ -41,9 +42,9 @@ FRONTR = {
                   "(0420): the unit-milestone series (175 000 @ CE38, 200 000 @ CE42B, ... "
                   "455 000 @ CE97, 460 000 @ CE98, 465 000 @ CE99) was tCE - tPT2 in units."),
         slidetail=("W98 NON-SNAPPED 20 000, THREE recorded interior Rosser\n"
-                   "failures (determined via the coarse rescue probe; independent adjudication: "
-                   "over-\npredictions - zero fresh zeros in the flagged unions; certificate by "
-                   "sign-change total);\nW99 NON-SNAPPED 20 000 CLEAN"),
+                   "failures (determined at m = 64; the rescue probe's FOUND 5 union counts\n"
+                   "adjudicated as over-predictions - zero fresh zeros in the flagged\n"
+                   "unions; certificate by sign-change total); W99 NON-SNAPPED 20 000 CLEAN"),
     ),
     100: dict(
         entry="0421",

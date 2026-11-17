@@ -153,9 +153,10 @@ the 99 verified window-slice clauses - windows 1..98, the corrected w1-w98
 band with the W42b fill, re-anchored 43..98 bit-identical at their seams;
 W95 NON-SNAPPED 20 000 with two recorded interior failures, both determined
 and rescued; W96 NON-SNAPPED 20 000 CLEAN; W97 SNAPPED 19 997, THREE recorded interior Rosser
-failures - all determined, adjudication-confirmed (fresh 6/5/5); W98 NON-SNAPPED 20 000, THREE recorded interior Rosser failures (determined
-via the coarse rescue probe; independent adjudication: over-predictions -
-zero fresh zeros in the flagged unions; certificate by sign-change total)),
+failures - all determined, adjudication-confirmed (fresh 6/5/5); W98 NON-SNAPPED 20 000, THREE recorded interior Rosser failures
+(determined at m = 64; the rescue probe's FOUND 5 union counts adjudicated
+as over-predictions - zero fresh zeros in the flagged unions; certificate by
+sign-change total)),
 RH q follows from the residual legs hs1 / hs3 (the zero-side witness and the
 S3 definition-side wire at the ONE concrete scale Qside) restricted to
 t0 >= tCE98, plus the hWin residual face at tCE98. The engine is
