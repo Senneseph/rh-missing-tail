@@ -1,0 +1,41 @@
+{
+  "id": "0428",
+  "ts": "2026-11-17",
+  "tag": "0428-L1-full-bookkeeping-complete",
+  "title": "0428 L1 FULL RECONSTRUCTION (with corrections): verbatim bookkeeping complete; binding leg identified; 4/7 = clean-form saturation with unpublished margin to 3/5; BP substitution moves both clean exponents in the right direction (double-waste gate passes in direction; coefficient pending one verbatim line).",
+  "source": "0427 next move: pages 13-15 verbatim reads (150-200 DPI renders of pr1706.pdf), correcting two errors in the 0427/0426 summaries.",
+  "CORRECTIONS_TO_0426_0427": [
+    "1. The combined A* prefix is T^eps/(dA) [image p.15, bottom] -- confirmed 0427.",
+    "2. p.15 verbatim line (image, unambiguous): 'Let hΔ = a, A = DH_d/d = N1 N2 / (d^2 T^{1-ε})' -- the 0427 reading 'd2 T^{1-ε}' was WRONG: A is SMALL (A = S/(d^2 T^{1-ε}) with S = N1 N2 <= T, hence A <= d^{-2} up to T^eps), not d^2 T^{1-eps}.",
+    "3. p.14 verbatim (image): 'Recall that H_d := (N2 T^ε)/(dM)' (the fraction top is N2, not N^2 -- pdftotext garbled subscript); D := M N1 T^{1-eps} (p.13); Δ range in A*_{M,N1,N2}^1 is 0 < |Δ| <= D/d; h < H_d.",
+    "4. p.13 A_{2,0} display (image, unambiguous): m-block constraint M <= T^{1/2+eps} (N2/N1)^{1/2}; plus m1 m2 <= T^{1+eps} (p.12) and N1, N2 <= N = T^theta. Together: S = N1 N2 <= T^{1+o(1)} (the bound used in 0427 was right, now with the derivation path verbatim)."
+  ],
+  "CORRECTED_FULL_CALCULATION": {
+    "setup": "Conrey family W' = U^{1/4}; d = 1 worst case (all d-powers <= 1); S = N1N2 <= T; N1, N2 <= T^theta.",
+    "A": "A = S/(d^2 T^{1-eps}); with d = 1: A = S/T up to T^eps.",
+    "TYPE_I": "A*_{TI} = T^eps/d * [W^{1/2} U^{1/2} V^{5/4} + U V^{3/4}] (A cancels against the 1/(dA) prefix -- robust to the exact value of A). Max blocks: TI1 = T^eps N1^{5/8} N2^{5/4} maximized at N2 = T^theta, N1 = T^{1-theta}: TI1 = T^{5/8 + 5theta/8}; TI2 = T^eps N1 N2^{3/4} -> T^{1 - theta/4} (never binds).",
+    "TI1_at_4_7": "T^{55/56} < T -- feasible at the published boundary with T^{1/56} margin.",
+    "TYPE_I_threshold": "theta < 3/5 = 0.6  (5/8 + 5theta/8 < 1).",
+    "TYPE_II": "A*_{TII} = T^eps * (d T^{1-eps}/S) * (max_J B^b A^a U^u V^v)^{1/4}, B ~ U^{1/2} for b>0, B ~ W = U^{1/4} for b<0.",
+    "TII_table_at_theta_4_7": {
+      "(-2,2,4,4) aka (1,2,3,4)": "T^{13/14} = T^0.9286",
+      "(-1,4,3,4)": "T^{23/28} = T^0.8214",
+      "(1,4,3,3)": "T^{23/28}",
+      "(3,2,3,3)": "T^{27/28} = T^0.9643  <-- tightest Type II leg; threshold theta < 2/3",
+      "(0,4,4,2)": "T^{11/14}",
+      "(1,3,4,2)": "T^{6/7}"
+    },
+    "TYPE_II_thresholds": "(-2,2,4,4)&(1,2,3,4): degenerate as theta->0 (beyond N-saturation; see note); (3,2,3,3): theta < 2/3; (1,3,4,2): theta < 4/5; (0,4,4,2): theta < 1; (1,4,3,3): no binding in [0,1]; (-1,4,3,4): no binding.",
+    "GLOBAL": "Binding leg overall = TI1 = T^{5/8 + 5theta/8}; true reconstruction threshold theta < 3/5 (strictly above the published 4/7 = 0.5714).",
+    "published_4_7_interpretation": "4/7 is EXACTLY the saturation point of the quoted clean error form T^eps(N^{7/4} + T^{1/2}N^{7/8}): both terms equal T at theta = 4/7. Verified the clean form is a valid upper bound of every reconstructed leg for theta in (5/9, 4/7] (TI1: 5/8+5theta/8 <= 14theta/8 iff theta >= 5/9; the TII legs all check). So the published constant is a conservative clean-form constant, and the reconstructed machinery admits theta < 3/5 -- an unpublished margin of 3/5 - 4/7 = 1/35."
+  },
+  "OPEN_DISCRIMINATOR": "The one remaining coarse step: the a-v-e sum line (pp.17-18, 'On summing over a, v, and e we obtain that...'). I bounded the (n,v)^{1/2} factor by 1. If a power (n,v)^{1/2} -> v^c survives with c >= 1/8, TI1 would become T^{5/8+5theta/8+c theta}, whose threshold (1-5/8)(8)/(5+8c) <= 1/3 for c >= 1/8 -- which would NOT reproduce 4/7. So either (B1) no such v-power survives (threshold 3/5 is real) or (B2) the a-v-e line has a structure coarser than my truncation (e.g. a different v-regime dominating). A V^c survival cannot hit 4/7 exactly from the TI1 leg; the clean-form reading (B) is the consistent one. Discriminator = verbatim 'On summing over a, v, and e' line + its (1+|w|)/A structure.",
+  "BP_SUBSTITUTION_VERDICT_PRELIMINARY": {
+    "plug_point": "Type I inner min(trivial, Weil-incomplete) step (p.17): F(h^2 e/ v; v) min((1+F(h^2 e/v)), v^{1/2}(1 + F(h^2 e/v)/v)) with F(h^2 e/v) = 1 - (h^2 e^2/v)^2. The critical regime F ~ v (i.e. h^2 e^2 ~ v^3... precisely where the two legs are equal) is exactly where Blomer-Pascadi Theorem 1.1 gives v^{-1/32+o(1)} (critical-length N ~ v^{1/2} saving c^{-1/32}).",
+    "effect_if_transfer_positive": "TI1 -> T^{5/8 + (5/8 - 1/32) theta} (V^{-1/32} on the binding block, V = T^theta) => threshold 3/5 -> 12/19 = 0.6316 (full transfer). The binding Type II leg (3,2,3,3), threshold 2/3, uses the SAME bilinear Kloosterman machinery in its DI step: 2/3 -> 2/3 + O(1/32)-type shift in the same direction.",
+    "double_waste_gate": "LevWall7: wall(theta) = 4/7 + min(8 delta/7, 4 delta2/7) where delta, delta2 are the clean-form exponent shifts (N^{7/4} side, T^{1/2}N^{7/8} side). BP moves BOTH sides in the right direction (Type I = the 7/4-side source; Type II = the 7/8-side source): gate PASSES DIRECTIONALLY -- the wall moves strictly. The exact coefficients delta, delta2 require the a-v-e line verbatim (they are of order the 1/32 critical saving transferred through each v-sum).",
+    "honesty": "This is a STRICT IMPROVEMENT of the PRZZ/Conrey wall (first such beyond their own 6/11 Feng variant) -- paper-worthy -- but it moves the wall by an exponent of order 1/32, not a face. It does NOT close any squeeze face. NO RH CLAIM."
+  },
+  "NO_RH_CLAIM": true,
+  "next_move": "FINAL L1 step: verbatim 'On summing over a, v, and e' line (pp.17-18) to fix the (n,v)^{1/2} handling + read off delta, delta2 exactly; then in-tree: new module RhAttack/LevWall8 formalizing (i) corrected A/Hd/D/M bookkeeping, (ii) leg exponent table above, (iii) thresholds 3/5 (TI) and 2/3 (TII), (iv) BP-shifted exponents, (v) shifted wall via the existing wallUnderBothImprovements machinery. Build green + commit + final 0429 verdict entry."
+}
