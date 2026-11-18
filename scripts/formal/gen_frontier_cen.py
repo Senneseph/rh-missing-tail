@@ -15,7 +15,7 @@ import gen_cen
 ROOT = gen_cen.ROOT
 UNITW = {97: "NINETY-SEVENTH", 98: "NINETY-EIGHTH", 99: "NINETY-NINTH", 100: "ONE-HUNDREDTH",
          101: "ONE-HUNDRED-FIRST", 102: "ONE-HUNDRED-SECOND", 103: "ONE-HUNDRED-THIRD",
-         104: "ONE-HUNDRED-FOURTH", 105: "ONE-HUNDRED-FIFTH", 106: "ONE-HUNDRED-SIXTH", 107: "ONE-HUNDRED-SEVENTH", 108: "ONE-HUNDRED-EIGHTH", 109: "ONE-HUNDRED-NINTH", 110: "ONE-HUNDRED-TENTH", 111: "ONE-HUNDRED-ELVENTH", 112: "ONE-HUNDRED-TWELFTH", 113: "ONE-HUNDRED-THIRTEENTH"}
+         104: "ONE-HUNDRED-FOURTH", 105: "ONE-HUNDRED-FIFTH", 106: "ONE-HUNDRED-SIXTH", 107: "ONE-HUNDRED-SEVENTH", 108: "ONE-HUNDRED-EIGHTH", 109: "ONE-HUNDRED-NINTH", 110: "ONE-HUNDRED-TENTH", 111: "ONE-HUNDRED-ELVENTH", 112: "ONE-HUNDRED-TWELFTH", 113: "ONE-HUNDRED-THIRTEENTH", 114: "ONE-HUNDRED-FOURTEENTH"}
 
 FRONTR = {
     98: dict(
@@ -366,6 +366,36 @@ FRONTR = {
                    "and rescued, adjudication-confirmed (fresh 4/4, 5/5, 4/4); W113 SNAPPED 19 "
                    "999 (one-gram b-end snap), ONE recorded interior Rosser failure - determined "
                    "and rescued, adjudication-confirmed (fresh 5/5)"),
+    ),
+    114: dict(
+        entry="0447",
+        hdr_summary=("the 530 000 UNIT ROUND MARK was crossed at CE114 [0447], margin 2 711 (the "
+                     "expected window of the 0446 record, hit); the 2 260 000 CERTIFIED-ZERO mark "
+                     "was CROSSED IN THIS WINDOW (margin 19 993 - the 0446 prediction, hit); W114 "
+                     "is the FULL-width window with ONE recorded interior Rosser failure - "
+                     "determined, rescued on a five-glyph union, adjudication-confirmed (fresh "
+                     "4/4 - TWELFTH W97-family protocol cycle); the endpoint record stays in the "
+                     "exponent -85 dyadic family (fourth recorded -85 endpoint)"),
+        abovept2=("This is the 530 000-unit round-mark crossing (margin 2 711) recorded at CE114 "
+                  "(0447): the unit-margin series now stands at 532 711 above tPT2 (the 500 000 "
+                  "milestone [0440] carries 32 711). (CE100 was the TAIL window that LANDED the 2 "
+                  "000 000 census program target [0421]; the post-target extension continues: "
+                  "CE101 (full 20 000, fresh 4/4), CE102 (SNAPPED 19 999, CLEAN), CE103 (SNAPPED "
+                  "19 997, CLEAN; 2 040 000 crossed mid-window), CE104 (full 20 000, fresh 6/6; 2 "
+                  "060 000 crossed), CE105 (full 20 000, fresh 4/4; 2 080 000 crossed), CE106 "
+                  "(full 20 000, fresh 5/5; 2 100 000 crossed), CE107 (SNAPPED 19 999, fresh 4/4; "
+                  "2 120 000 crossed; 500 000 unit mark, margin 1), CE108 (full 20 000, three "
+                  "failures - first multi-failure window - fresh 5/5 on each; 2 140 000 "
+                  "crossed), CE109 (full 20 000, fresh 5/5; 2 160 000 + 505 000 crossed), CE110 "
+                  "(SNAPPED 19 999, CLEAN; 2 180 000 + 510 000 crossed), CE111 (full 20 000, "
+                  "CLEAN; 2 200 000 + 515 000 crossed), CE112 (full 20 000, three failures - "
+                  "fresh 4/4, 5/5, 4/4; 2 220 000 + 520 000 crossed), CE113 (SNAPPED 19 999, "
+                  "fresh 5/5; 2 240 000 + 525 000 crossed), CE114 (full 20 000, fresh 4/4; 2 260 "
+                  "000 + 530 000 crossed).)"),
+        slidetail=("W113 SNAPPED 19 999 (one-gram b-end snap), ONE recorded interior Rosser "
+                   "failure - determined and rescued, adjudication-confirmed (fresh 5/5); W114 "
+                   "FULL 20 000, ONE recorded interior Rosser failure - determined and rescued, "
+                   "adjudication-confirmed (fresh 4/4)"),
     ),
 }
 
