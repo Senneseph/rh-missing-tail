@@ -684,6 +684,85 @@ FACTS = {
                       "W102 (3.67e-3), W103 (7.84e-3), W104 (2.94e-3), W105 (8.05e-3), W106 (3.16e-3)"),
         new_milestone=495000,
     ),
+    107: dict(
+        N=107, tCE=3000175832801, gap=500001, prevgap=495328,
+        gal=300017583280146, gden=100, galstr="300017583280146 / 100",
+        frac="0.4646163998655371313429814... (exact, exponent -86 dyadic terminator)",
+        fracmargin="0.0046163998655371313429 (exact, exponent -86 dyadic arithmetic, center-minus-radius)",
+        a="12 363 155 557 126", b="12 363 155 577 125",
+        ga_b="[29015920176068510637939018079792260365, -83, 16777217, -110]",
+        gb_b="[232127361770080849399610031874487488647, -86, 16777217, -110]",
+        width="SNAPPED 19 999 (the requested 20 000 window snapped back one gram at the b-end), ONE recorded interior Rosser failure - determined and rescued",
+        widthnum=19999,
+        census="2 139 995", censusnum=2139995, censusprev="2 119 996", censusprevnum=2119996,
+        widthprev_desc=("FULL-width 20 000 (no snap), ONE recorded interior Rosser failure - "
+                        "determined, rescued, adjudication-confirmed (fresh 5 / 5 - 0439; the "
+                        "2 100 000 census mark crossed in the window)"),
+        evals="34 167", seconds="4927.5", cache="0",
+        runs="48 / 48", phase="4.10e-21 (radius 2.61e-24)",
+        failures_n=1,
+        faildesc=("ONE recorded interior Rosser failure block [12 363 155 575 003, 12 363 155 "
+                  "575 005] - DETERMINED (129 points, m = 64) and RESCUED on the union span "
+                  "[12 363 155 575 002, 12 363 155 575 006] (need 4, found 4); the independent "
+                  "fresh-mpmath adjudication (0440) RE-CONFIRMS the rescue count (fresh 4 / 4, no "
+                  "near-zero touch, min |Z| 4.54e-4) and all 4 control spans pass (3/3, 2/2, 2/2, "
+                  "5/5)."),
+        fail_phrase=("one recorded interior Rosser failure block, DETERMINED and RESCUED - the 0440 "
+                     "fresh-mpmath adjudication RE-CONFIRMS the rescue count (fresh 4 / 4, no "
+                     "near-zero touch, 4/4 control spans pass)"),
+        band_fail=("one recorded interior Rosser failure block - determined and rescued, the rescue "
+                   "union RE-CONFIRMED by the 0440 fresh-mpmath adjudication (fresh 4 / 4, no "
+                   "near-zero touch; all four control spans pass)"),
+        rescued_note=(" (the single block DETERMINED and RESCUED - the 0440 adjudication re-confirms "
+                      "fresh 4 / 4, no near-zero touch; all four control spans pass)"),
+        verif_extra=("In addition, the independent fresh-mpmath union-span adjudication (0440) "
+                     "re-counts the rescued union [12 363 155 575 002, 12 363 155 575 006] from a "
+                     "fresh evaluation: fresh 4 / 4 (need 4), no near-zero touch (min |Z| 4.54e-4), "
+                     "and all 4 unflagged control spans pass (3/3, 2/2, 2/2, 5/5) - verdict ALL "
+                     "SPANS RESOLVED; the window sign-change total equals b - a = 19 999."),
+        win_n_clean=46, win_n_rescue=61, total_fail=91,
+        incr=4673,
+        mile=("the 500 000 UNIT ROUND MARK was CROSSED IN THIS WINDOW, WINDOW 107, with margin 1 - "
+              "the LARGEST unit milestone of the program (half a million units above H0), landed "
+              "with the smallest unit margin recorded for a post-target round mark; the 495 000 "
+              "mark (crossed at W106 [0439]) carries 5 001; the 490 000 mark (crossed at W105 "
+              "[0438]) carries 10 001; the next round mark 505 000 is 4 999 ahead (beyond one "
+              "standard 4 673 step under either recorded increment family; expected at W109, entry "
+              "0442)"),
+        censmarks=("the 2 120 000 CERTIFIED-ZERO MARK was CROSSED IN THIS WINDOW, WINDOW 107 (margin "
+                   "19 995); the 2 100 000 mark (W106 [0439]) carries 19 995; the 2 080 000 mark "
+                   "(W105 [0438]) carries 39 995; the 2 140 000 mark is 5 zeros ahead (expected at "
+                   "W108, entry 0441); the census offset moved from -4 to -5 with this one-gram "
+                   "snap (inherited originally from the W103 three-gram snap on top of W102's one-"
+                   "gram snap) - recorded data, no pattern claim"),
+        milecross={175000: 38, 200000: "42B", 225000: 48, 250000: 53, 275000: 58, 300000: 64,
+                   325000: 69, 350000: 74, 375000: 80, 400000: 85, 425000: 90, 430000: 92, 435000: 93,
+                   440000: 94, 445000: 95, 450000: 96, 455000: 97, 460000: 98, 465000: 99, 470000: 101,
+                   475000: 102, 480000: 103, 485000: 104, 490000: 105, 495000: 106, 500000: 107},
+        unit="ONE-HUNDRED-SEVENTH", family="-86",
+        ord_word="forty-second", nw=6,
+        run_note="the 2026-11-17 fresh run (resumed_from_cache = 0, logged for provenance)",
+        parallel_note="",
+        shrink_note=("W107: the FOURTH recorded snap window (the snap family so far: W97 19 997, "
+                     "W102 19 999, W103 19 997, W107 19 999 - recorded data, no pattern claim). The "
+                     "floor advances by the STANDARD 4 673 despite the snapped width (the "
+                     "endpoint fraction drops from .763 to .465). The 500 000 UNIT ROUND MARK - "
+                     "the largest unit milestone of the program - CROSSED WITH MARGIN 1. The snap "
+                     "is a recorded pipeline endpoint adjustment; the certificate rests on the "
+                     "sign-change total b - a = 19 999, and the single recorded failure is "
+                     "determined and rescued."),
+        incr_note=("the standard 4 673 increment (the floor advanced a full step despite the one-"
+                   "gram snap width; recorded data, no pattern claim)"),
+        margin_exp="4.62e-3",
+        subcent_ordinal="TWENTY-EIGHTH",
+        subcent_list=("W79 (1.76e-4), W81 (4.03e-4), W82 (1.87e-3), W83 (6.98e-3), W84 (2.09e-3), W85 "
+                      "(7.2e-3), W86 (2.3e-3), W87 (3.8e-3), W88 (8.9e-3), W89 (4.0e-3), W90 (9.1e-3), "
+                      "W91 (4.2e-3), W92 (9.3e-3), W93 (8.0e-4), W94 (5.9e-3), W95 (1.0e-3), W96 (6.1e-3), "
+                      "W97 (2.99e-4), W98 (5.41e-3), W99 (5.17e-4), W100 (7.10e-3), W101 (2.21e-3), "
+                      "W102 (3.67e-3), W103 (7.84e-3), W104 (2.94e-3), W105 (8.05e-3), W106 (3.16e-3), "
+                      "W107 (4.62e-3)"),
+        new_milestone=500000,
+    ),
 }
 
 
@@ -730,6 +809,9 @@ def gen_ce(N):
         106: "NON-SNAPPED 20 000, ONE recorded interior Rosser failure - determined and rescued; the "
              "0439 fresh-mpmath adjudication RE-CONFIRMS the rescue count (fresh 5 / 5, no near-zero "
              "touch, 4/4 control spans pass)",
+        107: "SNAPPED 19 999 (one-gram b-end snap), ONE recorded interior Rosser failure - determined "
+             "and rescued; the 0440 fresh-mpmath adjudication RE-CONFIRMS the rescue count (fresh 4 "
+             "/ 4, no near-zero touch, 4/4 control spans pass)",
     }
     IFFREC = {  # iff-doc window-slice records
         95: "NON-SNAPPED 20 000 with two recorded interior failures, both determined and rescued",
@@ -757,6 +839,10 @@ def gen_ce(N):
         106: "NON-SNAPPED 20 000 with one recorded interior Rosser failure (determined; the rescue "
              "union FOUND 5 RE-CONFIRMED by the 0439 fresh-mpmath adjudication - fresh 5 / 5, no "
              "near-zero touch; the certificate rests on the sign-change total)",
+        107: "SNAPPED 19 999 (one-gram b-end snap) with one recorded interior Rosser failure "
+             "(determined; the rescue union FOUND 4 RE-CONFIRMED by the 0440 fresh-mpmath "
+             "adjudication - fresh 4 / 4, no near-zero touch; the certificate rests on the sign-"
+             "change total)",
     }
     WINREC2 = {  # split-doc window records
         96: "NON-SNAPPED at 20 000, CLEAN - zero recorded interior failures",
@@ -778,11 +864,14 @@ def gen_ce(N):
              "adjudication re-confirms fresh 4 / 4; certificate by sign-change total)",
         106: "NON-SNAPPED at 20 000 (one recorded interior failure - determined and rescued; the 0439 "
              "adjudication re-confirms fresh 5 / 5; certificate by sign-change total)",
+        107: "SNAPPED at 19 999 (one-gram b-end snap; one recorded interior failure - determined and "
+             "rescued; the 0440 adjudication re-confirms fresh 4 / 4; certificate by sign-change "
+             "total)",
     }
     UNITW = {95: "NINETY-FIFTH", 96: "NINETY-SIXTH", 97: "NINETY-SEVENTH",
              98: "NINETY-EIGHTH", 99: "NINETY-NINTH", 100: "ONE-HUNDREDTH", 101: "ONE-HUNDRED-FIRST",
              102: "ONE-HUNDRED-SECOND", 103: "ONE-HUNDRED-THIRD", 104: "ONE-HUNDRED-FOURTH",
-             105: "ONE-HUNDRED-FIFTH", 106: "ONE-HUNDRED-SIXTH"}
+             105: "ONE-HUNDRED-FIFTH", 106: "ONE-HUNDRED-SIXTH", 107: "ONE-HUNDRED-SEVENTH"}
     SLICENOTE = {  # aolu-doc terminal-slice notes
         97: "SNAPPED 19 997, THREE recorded interior failures - all determined and rescued",
         98: "NON-SNAPPED 20 000, THREE recorded interior Rosser failures (determined at m = 64; the "
@@ -806,6 +895,9 @@ def gen_ce(N):
         106: "NON-SNAPPED 20 000, ONE recorded interior Rosser failure - determined and rescued; the "
              "0439 fresh-mpmath adjudication RE-CONFIRMS the rescue count (fresh 5 / 5, no near-zero "
              "touch; certificate by sign-change total)",
+        107: "SNAPPED 19 999 (one-gram b-end snap), ONE recorded interior Rosser failure - determined "
+             "and rescued; the 0440 fresh-mpmath adjudication RE-CONFIRMS the rescue count (fresh 4 "
+             "/ 4, no near-zero touch; certificate by sign-change total)",
     }
     SLICENOTE = SLICENOTE[N]
 
@@ -818,13 +910,13 @@ def gen_ce(N):
                   (460000, 98, "[0419]", ""), (465000, 99, "[0420]", ""),
                   (470000, 101, "[0431]", ""), (475000, 102, "[0434]", ""),
                   (480000, 103, "[0436]", ""), (485000, 104, "[0437]", ""),
-                  (490000, 105, "[0438]", ""), (495000, 106, "[0439]", ""), (500000, 107, "[0440]", "")]
+                  (490000, 105, "[0438]", ""), (495000, 106, "[0439]", ""), (500000, 107, "[0440]", ""), (505000, 109, "[0442]", "")]
     CENSUS_MARKS = [(1600000, 80, "[0389]"), (1700000, 85, "[0396]"), (1800000, 90, "[0401]"),
                     (1840000, 91, "[0402]"), (1860000, 92, "[0403]"), (1880000, 93, ""),
                     (1900000, 95, "[0410]"), (1920000, 96, ""), (1940000, 97, "[0418]"),
                     (1960000, 98, "[0419]"), (1980000, 99, "[0420]"), (2000000, 100, "[0421]"),
                     (2020000, 101, "[0431]"), (2040000, 103, "[0436]"), (2060000, 104, "[0437]"),
-                    (2080000, 105, "[0438]"), (2100000, 106, "[0439]"), (2120000, 107, "[0440]")]
+                    (2080000, 105, "[0438]"), (2100000, 106, "[0439]"), (2120000, 107, "[0440]"), (2140000, 108, "[0441]")]
 
     def fmt(x):
         return f"{x:,}".replace(",", " ")
