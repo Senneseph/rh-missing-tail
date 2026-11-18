@@ -15,7 +15,7 @@ import gen_cen
 ROOT = gen_cen.ROOT
 UNITW = {97: "NINETY-SEVENTH", 98: "NINETY-EIGHTH", 99: "NINETY-NINTH", 100: "ONE-HUNDREDTH",
          101: "ONE-HUNDRED-FIRST", 102: "ONE-HUNDRED-SECOND", 103: "ONE-HUNDRED-THIRD",
-         104: "ONE-HUNDRED-FOURTH", 105: "ONE-HUNDRED-FIFTH", 106: "ONE-HUNDRED-SIXTH", 107: "ONE-HUNDRED-SEVENTH", 108: "ONE-HUNDRED-EIGHTH", 109: "ONE-HUNDRED-NINTH", 110: "ONE-HUNDRED-TENTH"}
+         104: "ONE-HUNDRED-FOURTH", 105: "ONE-HUNDRED-FIFTH", 106: "ONE-HUNDRED-SIXTH", 107: "ONE-HUNDRED-SEVENTH", 108: "ONE-HUNDRED-EIGHTH", 109: "ONE-HUNDRED-NINTH", 110: "ONE-HUNDRED-TENTH", 111: "ONE-HUNDRED-ELVENTH"}
 
 FRONTR = {
     98: dict(
@@ -284,6 +284,31 @@ FRONTR = {
                    "and rescued, adjudication-confirmed (fresh 5 / 5 - 0442); W110 SNAPPED 19 999 "
                    "(one-gram b-end snap), CLEAN - zero interior Rosser failure blocks (nothing "
                    "to adjudicate; certificate by sign-change total)"),
+    ),
+    111: dict(
+        entry="0444",
+        hdr_summary=("the 515 000 UNIT ROUND MARK was crossed at CE111 [0444], margin 3 692 (the "
+                     "expected window of the 0443 record, hit); the 2 200 000 CERTIFIED-ZERO mark "
+                     "was CROSSED IN THIS WINDOW (margin 19 994 - the 0443 prediction, hit); W111 "
+                     "is the FULL-width window and CLEAN - zero interior Rosser failure blocks, "
+                     "nothing to adjudicate (second consecutive clean window after W110); the "
+                     "floor increment is a recorded 4 672 (endpoint fraction rose .036 -> .971)"),
+        abovept2=("This is the 515 000-unit round-mark crossing (margin 3 692) recorded at CE111 "
+                  "(0444): the unit-margin series now stands at 518 692 above tPT2 (the 500 000 "
+                  "milestone [0440] carries 13 692). (CE100 was the TAIL window that LANDED the 2 "
+                  "000 000 census program target [0421]; the post-target extension continues: "
+                  "CE101 (full 20 000, fresh 4/4), CE102 (SNAPPED 19 999, CLEAN), CE103 (SNAPPED "
+                  "19 997, CLEAN; 2 040 000 crossed mid-window), CE104 (full 20 000, fresh 6/6; 2 "
+                  "060 000 crossed), CE105 (full 20 000, fresh 4/4; 2 080 000 crossed), CE106 "
+                  "(full 20 000, fresh 5/5; 2 100 000 crossed), CE107 (SNAPPED 19 999, fresh 4/4; "
+                  "2 120 000 crossed; 500 000 unit mark, margin 1), CE108 (full 20 000, three "
+                  "failures - first multi-failure window - fresh 5/5 on each; 2 140 000 "
+                  "crossed), CE109 (full 20 000, fresh 5/5; 2 160 000 + 505 000 crossed), CE110 "
+                  "(SNAPPED 19 999, CLEAN; 2 180 000 + 510 000 crossed), CE111 (full 20 000, "
+                  "CLEAN; 2 200 000 + 515 000 crossed).)"),
+        slidetail=("W110 SNAPPED 19 999 (one-gram b-end snap), CLEAN - zero interior Rosser "
+                   "failure blocks (certificate by sign-change total); W111 FULL 20 000, CLEAN - "
+                   "zero interior Rosser failure blocks (second consecutive clean window)"),
     ),
 }
 
