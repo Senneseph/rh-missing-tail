@@ -15,7 +15,7 @@ import gen_cen
 ROOT = gen_cen.ROOT
 UNITW = {97: "NINETY-SEVENTH", 98: "NINETY-EIGHTH", 99: "NINETY-NINTH", 100: "ONE-HUNDREDTH",
          101: "ONE-HUNDRED-FIRST", 102: "ONE-HUNDRED-SECOND", 103: "ONE-HUNDRED-THIRD",
-         104: "ONE-HUNDRED-FOURTH", 105: "ONE-HUNDRED-FIFTH"}
+         104: "ONE-HUNDRED-FOURTH", 105: "ONE-HUNDRED-FIFTH", 106: "ONE-HUNDRED-SIXTH"}
 
 FRONTR = {
     98: dict(
@@ -154,6 +154,30 @@ FRONTR = {
                    "and rescued, adjudication-confirmed (fresh 6 / 6 - 0437); W105 NON-SNAPPED "
                    "20 000, ONE recorded interior Rosser failure - determined and rescued, "
                    "adjudication-confirmed (fresh 4 / 4 - 0438)"),
+    ),
+    106: dict(
+        entry="0439",
+        hdr_summary=("the 495 000 UNIT ROUND MARK was crossed at CE106 [0439], margin 328 (the "
+                     "expected window of the 0438 record, hit); the 2 100 000 CERTIFIED-ZERO mark "
+                     "was CROSSED IN THIS WINDOW (margin 19 996); W106 is the FULL-width 20 000 "
+                     "window with ONE recorded Rosser failure - determined and rescued, "
+                     "adjudication-confirmed (fresh 5 / 5 - 0439); the endpoint record moved to the "
+                     "exponent -83 dyadic family (first recorded appearance)"),
+        abovept2=("This is the 495 000-unit round-mark crossing (margin 328 - a regular round "
+                  "crossing, whose expected window W106 was noted in the 0438 record) recorded at "
+                  "CE106 (0439): the unit-milestone series (175 000 @ CE38, 200 000 @ CE42B, ... "
+                  "485 000 @ CE104, 490 000 @ CE105, 495 000 @ CE106) was tCE - tPT2 in units. "
+                  "(CE100 was the TAIL window that LANDED the 2 000 000 census program target "
+                  "[0421]; the post-target extension continues: CE101 (full 20 000, "
+                  "adjudication-confirmed fresh 4/4), CE102 (SNAPPED 19 999, CLEAN), CE103 "
+                  "(SNAPPED 19 997, CLEAN; 2 040 000 crossed mid-window), CE104 (full 20 000, "
+                  "adjudication-confirmed fresh 6/6; 2 060 000 crossed), CE105 (full 20 000, "
+                  "adjudication-confirmed fresh 4/4; 2 080 000 crossed), CE106 (full 20 000, "
+                  "adjudication-confirmed fresh 5/5; 2 100 000 crossed).)"),
+        slidetail=("W105 NON-SNAPPED 20 000, ONE recorded interior Rosser failure - determined "
+                   "and rescued, adjudication-confirmed (fresh 4 / 4 - 0438); W106 NON-SNAPPED "
+                   "20 000, ONE recorded interior Rosser failure - determined and rescued, "
+                   "adjudication-confirmed (fresh 5 / 5 - 0439)"),
     ),
 }
 
