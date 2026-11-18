@@ -15,7 +15,7 @@ import gen_cen
 ROOT = gen_cen.ROOT
 UNITW = {97: "NINETY-SEVENTH", 98: "NINETY-EIGHTH", 99: "NINETY-NINTH", 100: "ONE-HUNDREDTH",
          101: "ONE-HUNDRED-FIRST", 102: "ONE-HUNDRED-SECOND", 103: "ONE-HUNDRED-THIRD",
-         104: "ONE-HUNDRED-FOURTH", 105: "ONE-HUNDRED-FIFTH", 106: "ONE-HUNDRED-SIXTH", 107: "ONE-HUNDRED-SEVENTH", 108: "ONE-HUNDRED-EIGHTH", 109: "ONE-HUNDRED-NINTH"}
+         104: "ONE-HUNDRED-FOURTH", 105: "ONE-HUNDRED-FIFTH", 106: "ONE-HUNDRED-SIXTH", 107: "ONE-HUNDRED-SEVENTH", 108: "ONE-HUNDRED-EIGHTH", 109: "ONE-HUNDRED-NINTH", 110: "ONE-HUNDRED-TENTH"}
 
 FRONTR = {
     98: dict(
@@ -259,6 +259,31 @@ FRONTR = {
                    "the first multi-failure window; W109 NON-SNAPPED 20 000, ONE recorded interior "
                    "Rosser failure - determined and rescued, adjudication-confirmed (fresh 5 / 5 "
                    "- 0442)"),
+    ),
+    110: dict(
+        entry="0443",
+        hdr_summary=("the 510 000 UNIT ROUND MARK was crossed at CE110 [0443], margin 4 020 (the "
+                     "expected window of the 0442 record, hit); the 2 180 000 CERTIFIED-ZERO mark "
+                     "was CROSSED IN THIS WINDOW (margin 19 994 - the 0442 prediction, hit); W110 "
+                     "is the one-gram SNAP window (19 999) and CLEAN - zero interior Rosser "
+                     "failure blocks, nothing to adjudicate (the first clean window since W103); "
+                     "census offset moved from -5 to -6"),
+        abovept2=("This is the 510 000-unit round-mark crossing (margin 4 020) recorded at CE110 "
+                  "(0443): the unit-margin series now stands at 514 020 above tPT2 (the 500 000 "
+                  "milestone [0440] carries 9 020). (CE100 was the TAIL window that LANDED the 2 "
+                  "000 000 census program target [0421]; the post-target extension continues: "
+                  "CE101 (full 20 000, fresh 4/4), CE102 (SNAPPED 19 999, CLEAN), CE103 (SNAPPED "
+                  "19 997, CLEAN; 2 040 000 crossed mid-window), CE104 (full 20 000, fresh 6/6; 2 "
+                  "060 000 crossed), CE105 (full 20 000, fresh 4/4; 2 080 000 crossed), CE106 "
+                  "(full 20 000, fresh 5/5; 2 100 000 crossed), CE107 (SNAPPED 19 999, fresh 4/4; "
+                  "2 120 000 crossed; 500 000 unit mark, margin 1), CE108 (full 20 000, three "
+                  "failures - first multi-failure window - fresh 5/5 on each; 2 140 000 "
+                  "crossed), CE109 (full 20 000, fresh 5/5; 2 160 000 + 505 000 crossed), CE110 "
+                  "(SNAPPED 19 999, CLEAN; 2 180 000 + 510 000 crossed).)"),
+        slidetail=("W109 NON-SNAPPED 20 000, ONE recorded interior Rosser failure - determined "
+                   "and rescued, adjudication-confirmed (fresh 5 / 5 - 0442); W110 SNAPPED 19 999 "
+                   "(one-gram b-end snap), CLEAN - zero interior Rosser failure blocks (nothing "
+                   "to adjudicate; certificate by sign-change total)"),
     ),
 }
 
