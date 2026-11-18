@@ -13,11 +13,11 @@ line (the "critical line") in the complex plane. The program's claim is not
 is a **two-part machine-checked architecture**:
 
 **(A) A certified census of zeta zeros just above the previous world-record
-height.** 108 consecutive "windows" of ~20,000 zeros each — 2 159 995 zeros in
-all, from height ~3.00017×10¹² up to 3,000,175,837,474 (the 2 000 000
-target landed exactly in the 21-point W100 tail; W101–W108 are post-target
-windows: six recorded flags adjudication-confirmed (fresh 4/4, 6/6, 4/4,
-5/5, 4/4, 5/5×3), with recorded snaps, the 2 040 000 through 2 140 000 marks crossed, the frontier standing past the 500 000-unit milestone (W108 is the first multi-failure window: three failures, all adjudication-confirmed) — have been located and
+height.** 109 consecutive "windows" of ~20,000 zeros each — 2 179 995 zeros in
+all, from height ~3.00017×10¹² up to 3,000,175,842,147 (the 2 000 000
+target landed exactly in the 21-point W100 tail; W101–W109 are post-target
+windows: seven recorded flags adjudication-confirmed (fresh 4/4, 6/6, 4/4,
+5/5, 4/4, 5/5×3, 5/5), with recorded snaps, the 2 040 000 through 2 160 000 marks crossed, the 500 000 milestone and 505 000 marks crossed, the frontier past the 500 000-unit milestone — have been located and
 **independently machine-certified as lying on the critical line**, by a purpose-
 built Python certification pipeline whose output records are bit-stable,
 re-verifiable from a separate verifier program, and audited by independent
@@ -25,11 +25,11 @@ high-precision recomputation.
 
 **(B) A machine-checked logical skeleton (Lean 4 + mathlib) that reduces
 "prove RH" to a small, precisely named list of remaining obligations.**
-≈323 formal modules, zero `axiom`, zero `sorry`, full build 17,454 jobs green
+≈327 formal modules, zero `axiom`, zero `sorry`, full build 17,454 jobs green
 (re-built daily). The skeleton takes the certified census as in-tree input and
 derives, step by step, that **the entire residual analytic content of RH above
 the certified frontier is a single named geometric fact** — "every zero above
-height 3,000,175,837,474 is on the line" (the *terminal face*) — and that this
+height 3,000,175,842,147 is on the line" (the *terminal face*) — and that this
 fact further reduces to **two precisely-stated squeeze conditions** on possible
 off-line zeros. Every theorem in the chain carries an explicit `NO RH CLAIM`
 label: nothing is asserted that the machine has not checked.
@@ -66,18 +66,18 @@ and audit the individual zero records.
 ## 3. The impressive, specific, checkable facts
 
 ### Computation pillar (the census)
-- **2 159 995 zeros on the line, certified, in the window program
-  W1…W108**, covering (tPT2, tCE108] with
-  tCE108 = 3,000,175,837,474 — the certified frontier stands PAST the
-  **500 000-unit milestone** (504,674 above the cited frontier; the milestone
-  itself crossed in W107 with margin 1), **above the Platt–Trudgian world-
-record height of 3×10¹²** (the certified band rises from the cited frontier
-  tPT2 = 3,000,175,332,800 to tCE108; the 2 040 000, 2 060 000, 2 080 000,
-  2 100 000, 2 120 000 and 2 140 000 certified-zero marks crossed in W103
-  (mid-window), W104, W105, W106, W107 and W108; W108 is the first multi-
-failure window — three failures, all adjudication-confirmed — the 2 000 000
-  program target landed exactly in W100, and W101–W108 extend the census to
-  2 159 995 as the post-target extension).
+- **2 179 995 zeros on the line, certified, in the window program
+  W1…W109**, covering (tPT2, tCE109] with
+  tCE109 = 3,000,175,842,147 — the certified frontier stands PAST the
+  **500 000-unit milestone** (509,347 above the cited frontier; the milestone
+  crossed in W107 with margin 1, the 505 000 mark crossed in W109), **above
+  the Platt–Trudgian world-record height of 3×10¹²** (the certified band
+  rises from the cited frontier tPT2 = 3,000,175,332,800 to tCE109; the 2
+  040 000, 2 060 000, 2 080 000, 2 100 000, 2 120 000, 2 140 000 and 2 160
+  000 certified-zero marks crossed in W103 (mid-window), W104–W109; W108 is
+  the first multi-failure window — three failures, all adjudication-confirmed
+  — the 2 000 000 program target landed exactly in W100, and W101–W109
+  extend the census to 2 179 995 as the post-target extension).
 - Each window is a self-contained bit-stable record: exact rational
   (scaled-integer) Gram-point values, sign walks of the zeta-Z function at
   the certified height, prime-theoretic (Rosser) cross-checks, per-zero
@@ -96,10 +96,10 @@ flags); Window 103 is a clean three-gram snap (certified 19 997, zero flags)
 in which the 2 040 000 certified-zero mark was crossed (margin 19 996);
 Window 104 is the full-width 20 000 window with one recorded flag, determined
 and rescued, independently adjudication-confirmed (fresh 6/6, 4/4 control
-spans); Window 105 is the same shape (adjudication-confirmed fresh 4/4); Window 106 is the same shape again (adjudication-confirmed fresh 5/5); Window 107 is the one-gram SNAP window (19 999) with one recorded flag, determined and rescued, adjudication-confirmed fresh 4/4; Window 108 is the FULL-width window with THREE recorded flags (first multi-failure window), all determined and rescued, adjudication-confirmed fresh 5/5 on each.
+spans); Window 105 is the same shape (adjudication-confirmed fresh 4/4); Window 106 is the same shape again (adjudication-confirmed fresh 5/5); Window 107 is the one-gram SNAP window (19 999) with one recorded flag, determined and rescued, adjudication-confirmed fresh 4/4; Window 108 is the FULL-width window with THREE recorded flags (first multi-failure window), all determined and rescued, adjudication-confirmed fresh 5/5 on each; Window 109 is the FULL-width window with one recorded flag, determined and rescued, adjudication-confirmed fresh 5/5 (the 505 000 mark crossed).
 
 ### Formal pillar (the Lean skeleton)
-- **318 RhAttack modules, zero axioms, zero `sorry`.** Full build:
+- **322 RhAttack modules, zero axioms, zero `sorry`.** Full build:
   17,454 jobs, green, repeated daily. Lean 4.33.1 + mathlib.
 - The endpoint engine (`RHEnd`) states the whole program as one family of
   implications: *census + named external inputs + terminal face ⇒ RH*,

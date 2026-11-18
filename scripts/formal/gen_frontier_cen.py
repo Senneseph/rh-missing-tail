@@ -15,7 +15,7 @@ import gen_cen
 ROOT = gen_cen.ROOT
 UNITW = {97: "NINETY-SEVENTH", 98: "NINETY-EIGHTH", 99: "NINETY-NINTH", 100: "ONE-HUNDREDTH",
          101: "ONE-HUNDRED-FIRST", 102: "ONE-HUNDRED-SECOND", 103: "ONE-HUNDRED-THIRD",
-         104: "ONE-HUNDRED-FOURTH", 105: "ONE-HUNDRED-FIFTH", 106: "ONE-HUNDRED-SIXTH", 107: "ONE-HUNDRED-SEVENTH", 108: "ONE-HUNDRED-EIGHTH"}
+         104: "ONE-HUNDRED-FOURTH", 105: "ONE-HUNDRED-FIFTH", 106: "ONE-HUNDRED-SIXTH", 107: "ONE-HUNDRED-SEVENTH", 108: "ONE-HUNDRED-EIGHTH", 109: "ONE-HUNDRED-NINTH"}
 
 FRONTR = {
     98: dict(
@@ -230,6 +230,35 @@ FRONTR = {
                    "NON-SNAPPED 20 000, THREE recorded interior Rosser failures - all determined "
                    "and rescued, adjudication-confirmed (fresh 5 / 5 on each - 0441) - the first "
                    "multi-failure window of the program"),
+    ),
+    109: dict(
+        entry="0442",
+        hdr_summary=("the 505 000 UNIT ROUND MARK was crossed at CE109 [0442], margin 4 347 (the "
+                     "smallest carry-on record, 326 at the W108 seam, landed exactly as predicted "
+                     "within this window under either recorded increment family); the 2 160 000 "
+                     "CERTIFIED-ZERO mark was CROSSED IN THIS WINDOW (margin 19 995 - the 0441 "
+                     "prediction, hit); W109 is the FULL-width 20 000 window with ONE recorded "
+                     "Rosser failure - determined and rescued, adjudication-confirmed (fresh 5 / "
+                     "5 - 0442); the endpoint record introduces the exponent -84 dyadic family "
+                     "(first recorded appearance)"),
+        abovept2=("This is the 505 000-unit round-mark crossing (margin 4 347) recorded at CE109 "
+                  "(0442): the unit-margin series now stands at 509 347 above tPT2 (the 500 000 "
+                  "milestone [0440] carries 9 347). (CE100 was the TAIL window that LANDED the 2 "
+                  "000 000 census program target [0421]; the post-target extension continues: "
+                  "CE101 (full 20 000, adjudication-confirmed fresh 4/4), CE102 (SNAPPED 19 999, "
+                  "CLEAN), CE103 (SNAPPED 19 997, CLEAN; 2 040 000 crossed mid-window), CE104 (full "
+                  "20 000, adjudication-confirmed fresh 6/6; 2 060 000 crossed), CE105 (full 20 "
+                  "000, adjudication-confirmed fresh 4/4; 2 080 000 crossed), CE106 (full 20 000, "
+                  "adjudication-confirmed fresh 5/5; 2 100 000 crossed), CE107 (SNAPPED 19 999, "
+                  "adjudication-confirmed fresh 4/4; 2 120 000 crossed; 500 000 unit mark crossed, "
+                  "margin 1), CE108 (full 20 000, first multi-failure window - three failures, "
+                  "adjudication-confirmed fresh 5/5 on each; 2 140 000 crossed), CE109 (full 20 "
+                  "000, adjudication-confirmed fresh 5/5; 2 160 000 crossed; 505 000 crossed).)"),
+        slidetail=("W108 NON-SNAPPED 20 000, THREE recorded interior Rosser failures - all "
+                   "determined and rescued, adjudication-confirmed (fresh 5 / 5 on each - 0441) - "
+                   "the first multi-failure window; W109 NON-SNAPPED 20 000, ONE recorded interior "
+                   "Rosser failure - determined and rescued, adjudication-confirmed (fresh 5 / 5 "
+                   "- 0442)"),
     ),
 }
 
