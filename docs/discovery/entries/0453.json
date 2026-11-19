@@ -23,5 +23,6 @@
   "tmp/ce2/ce1_window_H0_v1/window120_b120.json",
   "tmp/ce2/ce1_window_H0_v1/window120_b120.verify.json",
   "tmp/ce2/ce1_window_H0_v1/window120_union_adjudication.json"
- ]
+ ],
+ "erratum_addendum": "Point-in-time note (superseded at W121, entry 0454): the statement 'the -84 family is the FIFTH AND LAST recorded post-target endpoint family' was correct AS OF W120. Window W121 (0454) attests a SIXTH post-target endpoint family (exponent -82), extending the record to -86, -85, -84, -83, -79, -82. Recorded data, no pattern claim."
 }

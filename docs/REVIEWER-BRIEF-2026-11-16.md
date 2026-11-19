@@ -13,14 +13,15 @@ line (the "critical line") in the complex plane. The program's claim is not
 is a **two-part machine-checked architecture**:
 
 **(A) A certified census of zeta zeros just above the previous world-record
-height.** 120 consecutive "windows" of ~20,000 zeros each — 2 399 993 zeros in
-all, from height ~3.00017×10¹² up to 3,000,175,893,549 (the 2 000 000
-target landed exactly in the 21-point W100 tail; W101–W120 are post-target
-windows: fifteen recorded flags adjudication-confirmed (fresh 4/4, 6/6,
+height.** 121 consecutive "windows" of ~20,000 zeros each — 2 419 993 zeros in
+all, from height ~3.00017×10¹² up to 3,000,175,898,222 (the 2 000 000
+target landed exactly in the 21-point W100 tail; W101–W121 are post-target
+windows: sixteen recorded flags adjudication-confirmed (fresh 4/4, 6/6,
 4/4, 5/5, 4/4, 5/5×3, 5/5, 4/4/5/5/4/4 in W112, 5/5 in W113, 4/4 in W114,
 4/4, 4/4 in W116 — first two-failure window of the series, 5/5 on a wide
-six-glyph union in W117, 7/7 + 4/4 in W120 — second two-failure window,
-with the first four-gram failure block), W110-W111, W115, W118 and W119 five CLEAN windows, the 2 040 000 through 2 380 000 marks crossed, the frontier past the 500 000-unit milestone (560 749 above H0) — have been located and
+six-glyph union in W117, 7/7 + 4/4 in W120 — second two-failure window
+with the first four-gram failure block, 5/5 + 5/5 on wide six-glyph unions
+in W121 — third two-failure window), W110-W111, W115, W118 and W119 five CLEAN windows, the 2 040 000 through 2 400 000 marks crossed, the frontier past the 500 000-unit milestone (565 422 above H0) — have been located and
 **independently machine-certified as lying on the critical line**, by a purpose-
 built Python certification pipeline whose output records are bit-stable,
 re-verifiable from a separate verifier program, and audited by independent
