@@ -15,7 +15,7 @@ import gen_cen
 ROOT = gen_cen.ROOT
 UNITW = {97: "NINETY-SEVENTH", 98: "NINETY-EIGHTH", 99: "NINETY-NINTH", 100: "ONE-HUNDREDTH",
          101: "ONE-HUNDRED-FIRST", 102: "ONE-HUNDRED-SECOND", 103: "ONE-HUNDRED-THIRD",
-         104: "ONE-HUNDRED-FOURTH", 105: "ONE-HUNDRED-FIFTH", 106: "ONE-HUNDRED-SIXTH", 107: "ONE-HUNDRED-SEVENTH", 108: "ONE-HUNDRED-EIGHTH", 109: "ONE-HUNDRED-NINTH", 110: "ONE-HUNDRED-TENTH", 111: "ONE-HUNDRED-ELVENTH", 112: "ONE-HUNDRED-TWELFTH", 113: "ONE-HUNDRED-THIRTEENTH", 114: "ONE-HUNDRED-FOURTEENTH", 115: "ONE-HUNDRED-FIFTEENTH", 116: "ONE-HUNDRED-SEVENTEENTH"}
+         104: "ONE-HUNDRED-FOURTH", 105: "ONE-HUNDRED-FIFTH", 106: "ONE-HUNDRED-SIXTH", 107: "ONE-HUNDRED-SEVENTH", 108: "ONE-HUNDRED-EIGHTH", 109: "ONE-HUNDRED-NINTH", 110: "ONE-HUNDRED-TENTH", 111: "ONE-HUNDRED-ELVENTH", 112: "ONE-HUNDRED-TWELFTH", 113: "ONE-HUNDRED-THIRTEENTH", 114: "ONE-HUNDRED-FOURTEENTH", 115: "ONE-HUNDRED-FIFTEENTH", 116: "ONE-HUNDRED-SEVENTEENTH", 117: "ONE-HUNDRED-EIGHTEENTH"}
 
 FRONTR = {
     98: dict(
@@ -458,6 +458,40 @@ FRONTR = {
         slidetail=("W115 FULL 20 000, CLEAN - zero interior Rosser failure blocks; W116 FULL 20 "
                    "000, TWO recorded interior Rosser failure blocks - both determined and "
                    "rescued, adjudication-confirmed (fresh 4/4, 4/4)"),
+    ),
+    117: dict(
+        entry="0450",
+        hdr_summary=("the 545 000 UNIT ROUND MARK was crossed at CE117 [0450], margin 1 730 (the "
+                     "expected window of the 0449 record, hit); the 2 320 000 CERTIFIED-ZERO mark "
+                     "was CROSSED IN THIS WINDOW (margin 19 993 - the 0449 prediction, hit); W117 "
+                     "is the FULL-width window with ONE recorded interior Rosser failure - "
+                     "determined, rescued on a WIDE SIX-GLYPH union (5/5 - one gram wider than "
+                     "the usual rescue spans), adjudication-confirmed (fresh 5/5 - FOURTEENTH "
+                     "W97-family protocol cycle); the endpoint record stays in the exponent -86 "
+                     "dyadic family (third consecutive)"),
+        abovept2=("This is the 545 000-unit round-mark crossing (margin 1 730) recorded at CE117 "
+                  "(0450): the unit-margin series now stands at 546 730 above tPT2 (the 500 000 "
+                  "milestone [0440] carries 46 730). (CE100 was the TAIL window that LANDED the 2 "
+                  "000 000 census program target [0421]; the post-target extension continues: "
+                  "CE101 (full 20 000, fresh 4/4), CE102 (SNAPPED 19 999, CLEAN), CE103 (SNAPPED "
+                  "19 997, CLEAN; 2 040 000 crossed mid-window), CE104 (full 20 000, fresh 6/6; 2 "
+                  "060 000 crossed), CE105 (full 20 000, fresh 4/4; 2 080 000 crossed), CE106 "
+                  "(full 20 000, fresh 5/5; 2 100 000 crossed), CE107 (SNAPPED 19 999, fresh 4/4; "
+                  "2 120 000 crossed; 500 000 unit mark, margin 1), CE108 (full 20 000, three "
+                  "failures - first multi-failure window - fresh 5/5 on each; 2 140 000 "
+                  "crossed), CE109 (full 20 000, fresh 5/5; 2 160 000 + 505 000 crossed), CE110 "
+                  "(SNAPPED 19 999, CLEAN; 2 180 000 + 510 000 crossed), CE111 (full 20 000, "
+                  "CLEAN; 2 200 000 + 515 000 crossed), CE112 (full 20 000, three failures - "
+                  "fresh 4/4, 5/5, 4/4; 2 220 000 + 520 000 crossed), CE113 (SNAPPED 19 999, "
+                  "fresh 5/5; 2 240 000 + 525 000 crossed), CE114 (full 20 000, fresh 4/4; 2 260 "
+                  "000 + 530 000 crossed), CE115 (full 20 000, CLEAN; 2 280 000 + 535 000 "
+                  "crossed), CE116 (full 20 000, two failures - fresh 4/4, 4/4; 2 300 000 + 540 "
+                  "000 crossed), CE117 (full 20 000, one failure on a wide six-glyph union - "
+                  "fresh 5/5; 2 320 000 + 545 000 crossed).)"),
+        slidetail=("W116 FULL 20 000, TWO recorded interior Rosser failure blocks - both "
+                   "determined and rescued (fresh 4/4, 4/4); W117 FULL 20 000, ONE recorded "
+                   "interior Rosser failure - determined, rescued on a wide six-glyph union "
+                   "(fresh 5/5)"),
     ),
 }
 
