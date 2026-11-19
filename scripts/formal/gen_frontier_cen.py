@@ -15,7 +15,7 @@ import gen_cen
 ROOT = gen_cen.ROOT
 UNITW = {97: "NINETY-SEVENTH", 98: "NINETY-EIGHTH", 99: "NINETY-NINTH", 100: "ONE-HUNDREDTH",
          101: "ONE-HUNDRED-FIRST", 102: "ONE-HUNDRED-SECOND", 103: "ONE-HUNDRED-THIRD",
-         104: "ONE-HUNDRED-FOURTH", 105: "ONE-HUNDRED-FIFTH", 106: "ONE-HUNDRED-SIXTH", 107: "ONE-HUNDRED-SEVENTH", 108: "ONE-HUNDRED-EIGHTH", 109: "ONE-HUNDRED-NINTH", 110: "ONE-HUNDRED-TENTH", 111: "ONE-HUNDRED-ELVENTH", 112: "ONE-HUNDRED-TWELFTH", 113: "ONE-HUNDRED-THIRTEENTH", 114: "ONE-HUNDRED-FOURTEENTH", 115: "ONE-HUNDRED-FIFTEENTH", 116: "ONE-HUNDRED-SEVENTEENTH", 117: "ONE-HUNDRED-EIGHTEENTH"}
+         104: "ONE-HUNDRED-FOURTH", 105: "ONE-HUNDRED-FIFTH", 106: "ONE-HUNDRED-SIXTH", 107: "ONE-HUNDRED-SEVENTH", 108: "ONE-HUNDRED-EIGHTH", 109: "ONE-HUNDRED-NINTH", 110: "ONE-HUNDRED-TENTH", 111: "ONE-HUNDRED-ELVENTH", 112: "ONE-HUNDRED-TWELFTH", 113: "ONE-HUNDRED-THIRTEENTH", 114: "ONE-HUNDRED-FOURTEENTH", 115: "ONE-HUNDRED-FIFTEENTH", 116: "ONE-HUNDRED-SEVENTEENTH", 117: "ONE-HUNDRED-EIGHTEENTH", 118: "ONE-HUNDRED-NINETEENTH"}
 
 FRONTR = {
     98: dict(
@@ -492,6 +492,39 @@ FRONTR = {
                    "determined and rescued (fresh 4/4, 4/4); W117 FULL 20 000, ONE recorded "
                    "interior Rosser failure - determined, rescued on a wide six-glyph union "
                    "(fresh 5/5)"),
+    ),
+    118: dict(
+        entry="0451",
+        hdr_summary=("the 550 000 UNIT ROUND MARK was crossed at CE118 [0451], margin 1 403 (the "
+                     "expected window of the 0450 record, hit); the 2 340 000 CERTIFIED-ZERO mark "
+                     "was CROSSED IN THIS WINDOW (margin 19 993 - the 0450 prediction, hit); W118 "
+                     "is the FULL-width window and CLEAN - zero interior Rosser failure blocks, "
+                     "nothing to adjudicate (FOURTH clean window of the post-target series: W110, "
+                     "W111, W115, W118); the endpoint record stays in the exponent -86 dyadic "
+                     "family - FOURTH CONSECUTIVE -86 endpoint (W115, W116, W117, W118)"),
+        abovept2=("This is the 550 000-unit round-mark crossing (margin 1 403) recorded at CE118 "
+                  "(0451): the unit-margin series now stands at 551 403 above tPT2 (the 500 000 "
+                  "milestone [0440] carries 51 403). (CE100 was the TAIL window that LANDED the 2 "
+                  "000 000 census program target [0421]; the post-target extension continues: "
+                  "CE101 (full 20 000, fresh 4/4), CE102 (SNAPPED 19 999, CLEAN), CE103 (SNAPPED "
+                  "19 997, CLEAN; 2 040 000 crossed mid-window), CE104 (full 20 000, fresh 6/6; 2 "
+                  "060 000 crossed), CE105 (full 20 000, fresh 4/4; 2 080 000 crossed), CE106 "
+                  "(full 20 000, fresh 5/5; 2 100 000 crossed), CE107 (SNAPPED 19 999, fresh 4/4; "
+                  "2 120 000 crossed; 500 000 unit mark, margin 1), CE108 (full 20 000, three "
+                  "failures - first multi-failure window - fresh 5/5 on each; 2 140 000 "
+                  "crossed), CE109 (full 20 000, fresh 5/5; 2 160 000 + 505 000 crossed), CE110 "
+                  "(SNAPPED 19 999, CLEAN; 2 180 000 + 510 000 crossed), CE111 (full 20 000, "
+                  "CLEAN; 2 200 000 + 515 000 crossed), CE112 (full 20 000, three failures - "
+                  "fresh 4/4, 5/5, 4/4; 2 220 000 + 520 000 crossed), CE113 (SNAPPED 19 999, "
+                  "fresh 5/5; 2 240 000 + 525 000 crossed), CE114 (full 20 000, fresh 4/4; 2 260 "
+                  "000 + 530 000 crossed), CE115 (full 20 000, CLEAN; 2 280 000 + 535 000 "
+                  "crossed), CE116 (full 20 000, two failures - fresh 4/4, 4/4; 2 300 000 + 540 "
+                  "000 crossed), CE117 (full 20 000, one failure on a wide six-glyph union - "
+                  "fresh 5/5; 2 320 000 + 545 000 crossed), CE118 (full 20 000, CLEAN; 2 340 000 "
+                  "+ 550 000 crossed).)"),
+        slidetail=("W117 FULL 20 000, ONE recorded interior Rosser failure - determined, rescued "
+                   "on a wide six-glyph union (fresh 5/5); W118 FULL 20 000, CLEAN - zero "
+                   "interior Rosser failure blocks (certificate by sign-change total)"),
     ),
 }
 
