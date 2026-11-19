@@ -1428,7 +1428,7 @@ FACTS = {
                    475000: 102, 480000: 103, 485000: 104, 490000: 105, 495000: 106, 500000: 107,
                    505000: 109, 510000: 110, 515000: 111, 520000: 112, 525000: 113, 530000: 114,
                    535000: 115, 540000: 116},
-        unit="ONE-HUNDRED-SEVENTEENTH", family="-86",
+        unit="ONE-HUNDRED-SIXTEENTH", family="-86",
         ord_word="fifty-first", nw=6,
         run_note="the 2026-11-18 fresh run (resumed_from_cache = 0, logged for provenance)",
         parallel_note="",
@@ -1510,7 +1510,7 @@ FACTS = {
                    475000: 102, 480000: 103, 485000: 104, 490000: 105, 495000: 106, 500000: 107,
                    505000: 109, 510000: 110, 515000: 111, 520000: 112, 525000: 113, 530000: 114,
                    535000: 115, 540000: 116, 545000: 117},
-        unit="ONE-HUNDRED-EIGHTEENTH", family="-86",
+        unit="ONE-HUNDRED-SEVENTEENTH", family="-86",
         ord_word="fifty-second", nw=6,
         run_note="the 2026-11-18/19 fresh run (resumed_from_cache = 0, logged for provenance)",
         parallel_note="",
@@ -1579,7 +1579,7 @@ FACTS = {
                    475000: 102, 480000: 103, 485000: 104, 490000: 105, 495000: 106, 500000: 107,
                    505000: 109, 510000: 110, 515000: 111, 520000: 112, 525000: 113, 530000: 114,
                    535000: 115, 540000: 116, 545000: 117, 550000: 118},
-        unit="ONE-HUNDRED-NINETEENTH", family="-86",
+        unit="ONE-HUNDRED-EIGHTEENTH", family="-86",
         ord_word="fifty-third", nw=6,
         run_note="the 2026-11-18/19 fresh run (resumed_from_cache = 0, logged for provenance)",
         parallel_note="",
@@ -1646,7 +1646,7 @@ FACTS = {
                    475000: 102, 480000: 103, 485000: 104, 490000: 105, 495000: 106, 500000: 107,
                    505000: 109, 510000: 110, 515000: 111, 520000: 112, 525000: 113, 530000: 114,
                    535000: 115, 540000: 116, 545000: 117, 550000: 118, 555000: 119},
-        unit="ONE-HUNDRED-TWENTIETH", family="-85",
+        unit="ONE-HUNDRED-NINETEENTH", family="-85",
         ord_word="fifty-fourth", nw=6,
         run_note="the 2026-11-19 fresh run (resumed_from_cache = 0, logged for provenance)",
         parallel_note="",
@@ -1868,7 +1868,7 @@ def gen_ce(N):
              102: "ONE-HUNDRED-SECOND", 103: "ONE-HUNDRED-THIRD", 104: "ONE-HUNDRED-FOURTH",
              105: "ONE-HUNDRED-FIFTH", 106: "ONE-HUNDRED-SIXTH", 107: "ONE-HUNDRED-SEVENTH", 108: "ONE-HUNDRED-EIGHTH",
              109: "ONE-HUNDRED-NINTH",
-             110: "ONE-HUNDRED-TENTH", 111: "ONE-HUNDRED-ELVENTH", 112: "ONE-HUNDRED-TWELFTH", 113: "ONE-HUNDRED-THIRTEENTH", 114: "ONE-HUNDRED-FOURTEENTH", 115: "ONE-HUNDRED-FIFTEENTH", 116: "ONE-HUNDRED-SEVENTEENTH", 117: "ONE-HUNDRED-EIGHTEENTH", 118: "ONE-HUNDRED-NINETEENTH", 119: "ONE-HUNDRED-TWENTIETH"}
+             110: "ONE-HUNDRED-TENTH", 111: "ONE-HUNDRED-ELVENTH", 112: "ONE-HUNDRED-TWELFTH", 113: "ONE-HUNDRED-THIRTEENTH", 114: "ONE-HUNDRED-FOURTEENTH", 115: "ONE-HUNDRED-FIFTEENTH", 116: "ONE-HUNDRED-SIXTEENTH", 117: "ONE-HUNDRED-SEVENTEENTH", 118: "ONE-HUNDRED-EIGHTEENTH", 119: "ONE-HUNDRED-NINETEENTH"}
     SLICENOTE = {  # aolu-doc terminal-slice notes
         97: "SNAPPED 19 997, THREE recorded interior failures - all determined and rescued",
         98: "NON-SNAPPED 20 000, THREE recorded interior Rosser failures (determined at m = 64; the "
