@@ -15,7 +15,7 @@ import gen_cen
 ROOT = gen_cen.ROOT
 UNITW = {97: "NINETY-SEVENTH", 98: "NINETY-EIGHTH", 99: "NINETY-NINTH", 100: "ONE-HUNDREDTH",
          101: "ONE-HUNDRED-FIRST", 102: "ONE-HUNDRED-SECOND", 103: "ONE-HUNDRED-THIRD",
-         104: "ONE-HUNDRED-FOURTH", 105: "ONE-HUNDRED-FIFTH", 106: "ONE-HUNDRED-SIXTH", 107: "ONE-HUNDRED-SEVENTH", 108: "ONE-HUNDRED-EIGHTH", 109: "ONE-HUNDRED-NINTH", 110: "ONE-HUNDRED-TENTH", 111: "ONE-HUNDRED-ELVENTH", 112: "ONE-HUNDRED-TWELFTH", 113: "ONE-HUNDRED-THIRTEENTH", 114: "ONE-HUNDRED-FOURTEENTH", 115: "ONE-HUNDRED-FIFTEENTH", 116: "ONE-HUNDRED-SIXTEENTH", 117: "ONE-HUNDRED-SEVENTEENTH", 118: "ONE-HUNDRED-EIGHTEENTH", 119: "ONE-HUNDRED-NINETEENTH", 120: "ONE-HUNDRED-TWENTIETH", 121: "ONE-HUNDRED-TWENTY-FIRST", 122: "ONE-HUNDRED-TWENTY-SECOND", 123: "ONE-HUNDRED-TWENTY-THIRD", 124: "ONE-HUNDRED-TWENTY-FOURTH", 125: "ONE-HUNDRED-TWENTY-FIFTH"}
+         104: "ONE-HUNDRED-FOURTH", 105: "ONE-HUNDRED-FIFTH", 106: "ONE-HUNDRED-SIXTH", 107: "ONE-HUNDRED-SEVENTH", 108: "ONE-HUNDRED-EIGHTH", 109: "ONE-HUNDRED-NINTH", 110: "ONE-HUNDRED-TENTH", 111: "ONE-HUNDRED-ELVENTH", 112: "ONE-HUNDRED-TWELFTH", 113: "ONE-HUNDRED-THIRTEENTH", 114: "ONE-HUNDRED-FOURTEENTH", 115: "ONE-HUNDRED-FIFTEENTH", 116: "ONE-HUNDRED-SIXTEENTH", 117: "ONE-HUNDRED-SEVENTEENTH", 118: "ONE-HUNDRED-EIGHTEENTH", 119: "ONE-HUNDRED-NINETEENTH", 120: "ONE-HUNDRED-TWENTIETH", 121: "ONE-HUNDRED-TWENTY-FIRST", 122: "ONE-HUNDRED-TWENTY-SECOND", 123: "ONE-HUNDRED-TWENTY-THIRD", 124: "ONE-HUNDRED-TWENTY-FOURTH", 125: "ONE-HUNDRED-TWENTY-FIFTH", 126: "ONE-HUNDRED-TWENTY-SIXTH"}
 
 FRONTR = {
     98: dict(
@@ -821,6 +821,56 @@ FRONTR = {
                    "determined and rescued (fresh 4/4, 7/7 on the second eight-glyph union); "
                    "W125 FULL 20 000, ONE recorded interior Rosser failure block - four-gram "
                    "(second of the series), determined and rescued (fresh 5/5)"),
+    ),
+    126: dict(
+        entry="0459",
+        hdr_summary=("the 585 000 UNIT ROUND MARK was crossed at CE126 [0459], margin 3 786 - "
+                     "exactly the expected window of the 0458 schedule (585000, 126, [0459]); "
+                     "the 2 500 000 CERTIFIED-ZERO mark was CROSSED IN THIS WINDOW (margin 19 "
+                     "992 - one zero below the usual 19 993, the difference being the one-gram "
+                     "snap; as tabled); W126 is the ONE-GRAM SNAP window (requested 20 000, "
+                     "certified 19 999 - the SIXTH snap of the post-target series) with ONE "
+                     "recorded interior Rosser failure - standard three-gram, determined, "
+                     "rescued 4/4 on a five-glyph union, adjudication-confirmed (fresh 4/4 - "
+                     "TWENTY-FIRST W97-family protocol cycle); the STANDARD 4 673 floor "
+                     "increment holds despite the snap; the endpoint record rotates back to "
+                     "the exponent -84 dyadic family"),
+        abovept2=("This is the 585 000-unit round-mark crossing (margin 3 786) recorded at "
+                  "CE126 (0459): the unit-margin series now stands at 588 786 above tPT2 (the "
+                  "500 000 milestone [0440] carries 88 786). (CE100 was the TAIL window that "
+                  "LANDED the 2 000 000 census program target [0421]; the post-target extension "
+                  "continues: "
+                  "CE101 (full 20 000, fresh 4/4), CE102 (SNAPPED 19 999, CLEAN), CE103 (SNAPPED "
+                  "19 997, CLEAN; 2 040 000 crossed mid-window), CE104 (full 20 000, fresh 6/6; 2 "
+                  "060 000 crossed), CE105 (full 20 000, fresh 4/4; 2 080 000 crossed), CE106 "
+                  "(full 20 000, fresh 5/5; 2 100 000 crossed), CE107 (SNAPPED 19 999, fresh 4/4; "
+                  "2 120 000 crossed; 500 000 unit mark, margin 1), CE108 (full 20 000, three "
+                  "failures - first multi-failure window - fresh 5/5 on each; 2 140 000 "
+                  "crossed), CE109 (full 20 000, fresh 5/5; 2 160 000 + 505 000 crossed), CE110 "
+                  "(SNAPPED 19 999, CLEAN; 2 180 000 + 510 000 crossed), CE111 (full 20 000, "
+                  "CLEAN; 2 200 000 + 515 000 crossed), CE112 (full 20 000, three failures - "
+                  "fresh 4/4, 5/5, 4/4; 2 220 000 + 520 000 crossed), CE113 (SNAPPED 19 999, "
+                  "fresh 5/5; 2 240 000 + 525 000 crossed), CE114 (full 20 000, fresh 4/4; 2 260 "
+                  "000 + 530 000 crossed), CE115 (full 20 000, CLEAN; 2 280 000 + 535 000 "
+                  "crossed), CE116 (full 20 000, two failures - fresh 4/4, 4/4; 2 300 000 + 540 "
+                  "000 crossed), CE117 (full 20 000, one failure on a wide six-glyph union - "
+                  "fresh 5/5; 2 320 000 + 545 000 crossed), CE118 (full 20 000, CLEAN; 2 340 000 "
+                  "+ 550 000 crossed), CE119 (full 20 000, CLEAN; 2 360 000 + 555 000 crossed), "
+                  "CE120 (full 20 000, two failures including the first four-gram block - fresh "
+                  "7/7 + 4/4; 2 380 000 + 560 000 crossed), CE121 (full 20 000, two failures on "
+                  "wide six-glyph unions - fresh 5/5, 5/5; 2 400 000 + 565 000 crossed), CE122 "
+                  "(full 20 000, two failures - fresh 4/4 + 6/6 on the first seven-glyph union; "
+                  "2 420 000 + 570 000 crossed), CE123 (full 20 000, one failure fresh 4/4, "
+                  "SUB-STANDARD 4 672 increment; 2 440 000 crossed; 575 000 NOT crossed - 233 "
+                  "ahead), CE124 (full 20 000, two failures - fresh 4/4 + 7/7 on the second "
+                  "eight-glyph union; 2 460 000 + 575 000 crossed), CE125 (full 20 000, one "
+                  "four-gram failure fresh 5/5 - second four-gram of the series; 2 480 000 + "
+                  "580 000 crossed), CE126 (SNAPPED 19 999, one failure fresh 4/4; 2 500 000 + "
+                  "585 000 crossed).)"),
+        slidetail=("W125 FULL 20 000, ONE recorded interior Rosser failure block - four-gram "
+                   "(second of the series), determined and rescued (fresh 5/5); W126 ONE-GRAM "
+                   "SNAP 19 999, ONE recorded interior Rosser failure block - determined and "
+                   "rescued (fresh 4/4)"),
     ),
 }
 
