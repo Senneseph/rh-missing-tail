@@ -13,17 +13,18 @@ line (the "critical line") in the complex plane. The program's claim is not
 is a **two-part machine-checked architecture**:
 
 **(A) A certified census of zeta zeros just above the previous world-record
-height.** 124 consecutive "windows" of ~20,000 zeros each — 2 479 993 zeros in
-all, from height ~3.00017×10¹² up to 3,000,175,912,240 (the 2 000 000
-target landed exactly in the 21-point W100 tail; W101–W124 are post-target
-windows: twenty-six recorded flags adjudication-confirmed (fresh 4/4, 6/6,
+height.** 125 consecutive "windows" of ~20,000 zeros each — 2 499 993 zeros in
+all, from height ~3.00017×10¹² up to 3,000,175,916,913 (the 2 000 000
+target landed exactly in the 21-point W100 tail; W101–W125 are post-target
+windows: twenty-seven recorded flags adjudication-confirmed (fresh 4/4, 6/6,
 4/4, 5/5, 4/4, 5/5×3, 5/5, 4/4/5/5/4/4 in W112, 5/5 in W113, 4/4 in W114,
 4/4, 4/4 in W116 — first two-failure window of the series, 5/5 on a wide
 six-glyph union in W117, 7/7 + 4/4 in W120 — second two-failure window
 with the first four-gram failure block, 5/5 + 5/5 on wide six-glyph unions
 in W121 — third two-failure window, 4/4 + 6/6 in W122 — fourth two-failure
 window with the series' first seven-glyph union, 4/4 in W123, 4/4 + 7/7 in W124 —
-fifth two-failure window with the series' second eight-glyph union), W110-W111, W115, W118 and W119 five CLEAN windows, the 2 040 000 through 2 460 000 marks crossed, the frontier past the 500 000-unit milestone (579 440 above H0) — have been located and
+fifth two-failure window with the series' second eight-glyph union, 5/5 on
+the second four-gram block in W125), W110-W111, W115, W118 and W119 five CLEAN windows, the 2 040 000 through 2 480 000 marks crossed, the frontier past the 500 000-unit milestone (584 113 above H0) — have been located and
 **independently machine-certified as lying on the critical line**, by a purpose-
 built Python certification pipeline whose output records are bit-stable,
 re-verifiable from a separate verifier program, and audited by independent
@@ -31,11 +32,11 @@ high-precision recomputation.
 
 **(B) A machine-checked logical skeleton (Lean 4 + mathlib) that reduces
 "prove RH" to a small, precisely named list of remaining obligations.**
-≈380 formal modules, zero `axiom`, zero `sorry`, full build 17,454 jobs green
+≈381 formal modules, zero `axiom`, zero `sorry`, full build 17,454 jobs green
 (re-built daily). The skeleton takes the certified census as in-tree input and
 derives, step by step, that **the entire residual analytic content of RH above
 the certified frontier is a single named geometric fact** — "every zero above
-height 3,000,175,912,240 is on the line" (the *terminal face*) — and that this
+height 3,000,175,916,913 is on the line" (the *terminal face*) — and that this
 fact further reduces to **two precisely-stated squeeze conditions** on possible
 off-line zeros. Every theorem in the chain carries an explicit `NO RH CLAIM`
 label: nothing is asserted that the machine has not checked.
@@ -72,24 +73,24 @@ and audit the individual zero records.
 ## 3. The impressive, specific, checkable facts
 
 ### Computation pillar (the census)
-- **2 479 993 zeros on the line, certified, in the window program
-  W1…W124**, covering (tPT2, tCE124] with
-  tCE124 = 3,000,175,912,240 — the certified frontier stands PAST the
-  **500 000-unit milestone** (579,440 above the cited frontier; the
+- **2 499 993 zeros on the line, certified, in the window program
+  W1…W125**, covering (tPT2, tCE125] with
+  tCE125 = 3,000,175,916,913 — the certified frontier stands PAST the
+  **500 000-unit milestone** (584,113 above the cited frontier; the
   milestone crossed in W107 with margin 1, then 505k, 510k, 515k, 520k,
-  525k, 530k, 535k, 540k, 545k, 550k, 555k, 560k, 565k, 570k, 575k in
-  W109-W124 - the 575k crossing (margin 4 440) landed exactly as the
-  corrected 0456 schedule predicted; the 580k round mark is 560 ahead,
-  tabled W125), **above the Platt–Trudgian world-record
+  525k, 530k, 535k, 540k, 545k, 550k, 555k, 560k, 565k, 570k, 575k, 580k
+  in W109-W125 - the 580k crossing (margin 4 113) landed exactly as the
+  0457 schedule predicted; the 585k round mark is 887 ahead, tabled
+  W126), **above the Platt–Trudgian world-record
   height of 3×10¹²** (the certified band rises from the cited frontier
-  tPT2 = 3,000,175,332,800 to tCE124; the 2 040 000 through 2 460 000
-  certified-zero marks crossed in W103 (mid-window) and W104–W124; W108
+  tPT2 = 3,000,175,332,800 to tCE125; the 2 040 000 through 2 480 000
+  certified-zero marks crossed in W103 (mid-window) and W104–W125; W108
   and W112 are the two three-failure windows, W116, W120, W121, W122 and
   W124 the five two-failure windows — all adjudication-confirmed; W110,
   W111, W115, W118 and W119 are the five clean windows so far, no
   adjudication needed; the 2 000 000 program
-  target landed exactly in W100, and W101–W124 extend the census to
-  2 479 993 as the post-target extension).
+  target landed exactly in W100, and W101–W125 extend the census to
+  2 499 993 as the post-target extension).
 - Each window is a self-contained bit-stable record: exact rational
   (scaled-integer) Gram-point values, sign walks of the zeta-Z function at
   the certified height, prime-theoretic (Rosser) cross-checks, per-zero
@@ -108,10 +109,10 @@ flags); Window 103 is a clean three-gram snap (certified 19 997, zero flags)
 in which the 2 040 000 certified-zero mark was crossed (margin 19 996);
 Window 104 is the full-width 20 000 window with one recorded flag, determined
 and rescued, independently adjudication-confirmed (fresh 6/6, 4/4 control
-spans); Window 105 is the same shape (adjudication-confirmed fresh 4/4); Window 106 is the same shape again (adjudication-confirmed fresh 5/5); Window 107 is the one-gram SNAP window (19 999) with one recorded flag, determined and rescued, adjudication-confirmed fresh 4/4; Window 108 is the FULL-width window with THREE recorded flags (first multi-failure window), all determined and rescued, adjudication-confirmed fresh 5/5 on each; Window 109 is the FULL-width window with one recorded flag, determined and rescued, adjudication-confirmed fresh 5/5 (the 505 000 mark crossed); Window 110 is the one-gram SNAP window (19 999) and CLEAN - zero recorded failures, no adjudication needed (the 510 000 mark crossed); Window 111 is the FULL-width window and CLEAN (second consecutive clean window, the 515 000 mark crossed); Window 112 is the FULL-width window with THREE recorded failures - all determined, rescued, adjudication-confirmed fresh (4/4, 5/5, 4/4) (the 520 000 mark crossed; second multi-failure window); Window 113 is the one-gram SNAP window (19 999) with one recorded failure, determined and rescued, adjudication-confirmed fresh 5/5 (the 525 000 mark crossed); Window 114 is the FULL-width window with one recorded failure, determined and rescued, adjudication-confirmed fresh 4/4 (the 530 000 mark crossed); Window 115 is the FULL-width window and CLEAN - zero recorded failures, no adjudication needed (the 535 000 mark crossed); Window 116 is the FULL-width window with two recorded failures - both determined, rescued, adjudication-confirmed fresh 4/4 and 4/4 (the 540 000 mark crossed); Window 117 is the FULL-width window with one failure - determined, rescued on a wide six-glyph union, adjudication-confirmed fresh 5/5 (the 545 000 mark crossed); Window 118 is the FULL-width window and CLEAN - zero recorded failures, no adjudication needed (the 550 000 mark crossed); Window 119 is the FULL-width window and CLEAN - zero recorded failures, no adjudication needed (the 555 000 mark crossed); Window 120 is the FULL-width window with two failures - including the first four-gram failure block, rescued 7/7 + 4/4, adjudication-confirmed (the 560 000 mark crossed); Window 121 is the FULL-width window with two failures - both determined, rescued on wide six-glyph unions, adjudication-confirmed fresh 5/5 + 5/5 (the 565 000 mark crossed, margin 422 - smallest since the W107 milestone); Window 122 is the FULL-width window with two failures - both determined, rescued 4/4 and 6/6 (the series' first seven-glyph union), adjudication-confirmed (the 570 000 mark crossed, margin 95 - the smallest unit-margin crossing since the W107 milestone); Window 123 is the FULL-width window with one failure - determined, rescued 4/4 on a five-glyph union, adjudication-confirmed (the 2 440 000 mark crossed; SUB-STANDARD 4 672 floor increment, so the 575 000 mark is NOT crossed - 233 ahead, tabled W124); Window 124 is the FULL-width window with two failures - both determined, rescued 4/4 (five-glyph union) and 7/7 (the series' SECOND eight-glyph union, tied with W120 for the widest span), adjudication-confirmed (the 575 000 and 2 460 000 marks crossed, margins 4 440 / 19 993 - exactly as the corrected 0456 schedule predicted).
+spans); Window 105 is the same shape (adjudication-confirmed fresh 4/4); Window 106 is the same shape again (adjudication-confirmed fresh 5/5); Window 107 is the one-gram SNAP window (19 999) with one recorded flag, determined and rescued, adjudication-confirmed fresh 4/4; Window 108 is the FULL-width window with THREE recorded flags (first multi-failure window), all determined and rescued, adjudication-confirmed fresh 5/5 on each; Window 109 is the FULL-width window with one recorded flag, determined and rescued, adjudication-confirmed fresh 5/5 (the 505 000 mark crossed); Window 110 is the one-gram SNAP window (19 999) and CLEAN - zero recorded failures, no adjudication needed (the 510 000 mark crossed); Window 111 is the FULL-width window and CLEAN (second consecutive clean window, the 515 000 mark crossed); Window 112 is the FULL-width window with THREE recorded failures - all determined, rescued, adjudication-confirmed fresh (4/4, 5/5, 4/4) (the 520 000 mark crossed; second multi-failure window); Window 113 is the one-gram SNAP window (19 999) with one recorded failure, determined and rescued, adjudication-confirmed fresh 5/5 (the 525 000 mark crossed); Window 114 is the FULL-width window with one recorded failure, determined and rescued, adjudication-confirmed fresh 4/4 (the 530 000 mark crossed); Window 115 is the FULL-width window and CLEAN - zero recorded failures, no adjudication needed (the 535 000 mark crossed); Window 116 is the FULL-width window with two recorded failures - both determined, rescued, adjudication-confirmed fresh 4/4 and 4/4 (the 540 000 mark crossed); Window 117 is the FULL-width window with one failure - determined, rescued on a wide six-glyph union, adjudication-confirmed fresh 5/5 (the 545 000 mark crossed); Window 118 is the FULL-width window and CLEAN - zero recorded failures, no adjudication needed (the 550 000 mark crossed); Window 119 is the FULL-width window and CLEAN - zero recorded failures, no adjudication needed (the 555 000 mark crossed); Window 120 is the FULL-width window with two failures - including the first four-gram failure block, rescued 7/7 + 4/4, adjudication-confirmed (the 560 000 mark crossed); Window 121 is the FULL-width window with two failures - both determined, rescued on wide six-glyph unions, adjudication-confirmed fresh 5/5 + 5/5 (the 565 000 mark crossed, margin 422 - smallest since the W107 milestone); Window 122 is the FULL-width window with two failures - both determined, rescued 4/4 and 6/6 (the series' first seven-glyph union), adjudication-confirmed (the 570 000 mark crossed, margin 95 - the smallest unit-margin crossing since the W107 milestone); Window 123 is the FULL-width window with one failure - determined, rescued 4/4 on a five-glyph union, adjudication-confirmed (the 2 440 000 mark crossed; SUB-STANDARD 4 672 floor increment, so the 575 000 mark is NOT crossed - 233 ahead, tabled W124); Window 124 is the FULL-width window with two failures - both determined, rescued 4/4 (five-glyph union) and 7/7 (the series' SECOND eight-glyph union, tied with W120 for the widest span), adjudication-confirmed (the 575 000 and 2 460 000 marks crossed, margins 4 440 / 19 993 - exactly as the corrected 0456 schedule predicted); Window 125 is the FULL-width window with one failure - the SECOND FOUR-GRAM FAILURE BLOCK of the series (the first was W120), determined, rescued 5/5 on a six-glyph union, adjudication-confirmed (the 580 000 and 2 480 000 marks crossed, margins 4 113 / 19 993 - exactly as the 0457 schedule predicted).
 
 ### Formal pillar (the Lean skeleton)
-- **375 RhAttack modules, zero axioms, zero `sorry`.** Full build:
+- **376 RhAttack modules, zero axioms, zero `sorry`.** Full build:
   17,454 jobs, green, repeated daily. Lean 4.33.1 + mathlib.
 - The endpoint engine (`RHEnd`) states the whole program as one family of
   implications: *census + named external inputs + terminal face ⇒ RH*,
