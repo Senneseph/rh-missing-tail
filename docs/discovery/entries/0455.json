@@ -23,5 +23,10 @@
   "tmp/ce2/ce1_window_H0_v1/window122_b122.json",
   "tmp/ce2/ce1_window_H0_v1/window122_b122.verify.json",
   "tmp/ce2/ce1_window_H0_v1/window122_union_adjudication.json"
- ]
+ ],
+ "erratum_addendum": {
+  "ts": "2026-11-19T20:30:00Z",
+  "kind": "prediction-row correction",
+  "note": "The generator mark-table row staged in this entry, (575000, 123, [0456]), was an ARITHMETIC SLIP at staging time: 575 000 stood 4 905 above tCE122 (570 095), which exceeds a single standard 4 673 floor step, so the 575 000 round mark could NOT have been crossed in W123 in any increment scenario. W123 (entry 0456) landed with a SUB-STANDARD 4 672 increment (tCE123 = 3 000 175 907 567, gap 574 767) and did NOT cross 575 000 (233 ahead), confirming the slip. The row is corrected in the current generator tables to (575000, 124, [0457]). The companion census row (2420000, 122) was correct and landed as recorded. No other facts of this entry are affected. NO RH CLAIM unchanged."
+ }
 }
