@@ -1,0 +1,27 @@
+{
+  "id": "0465",
+  "ts": "2026-11-23T19:31:32Z",
+  "kind": "discovery",
+  "title": "CE132 + FrontierCE132 + TerminalFaceCE132 + TerminalSqueezeCE132 GREEN - W132 is the FULL-width CLEAN window (zero recorded interior Rosser failure blocks, certificate by sign-change total) - the SIXTH clean window of the post-target series (W110, W111, W115, W118, W119, W132) - the 615 000 UNIT ROUND MARK and the 2 620 000 CERTIFIED-ZERO mark were CROSSED IN THIS WINDOW, both exactly as the 0464 schedule predicted - the FIRST resumed run of the series (resumed_from_cache = 32 290 after the 2026-11-20 kill; checkpoint resume by design); census 2 639 992; frontier tCE132 = 3 000 175 949 624 (gap 616 824 above H0 - standard 4 673 increment, eighth consecutive standard step); the endpoint record ROTATES from -84 to the -81 dyadic family (seven families attested so far); terminal face re-anchored EXACTLY at tCE132 (NO RH CLAIM)",
+  "status": "gated",
+  "lane": "formal CE-series / census frontier (post-target extension)",
+  "unit": 169,
+  "no_rh_claim": true,
+  "facts": [
+    "WINDOW 132 (Murphy pipeline, our resumed run 2026-11-23; 34 081 evals in 373.3 s, resumed_from_cache = 32 290 - the 2026-11-20 run was killed at the session boundary and the window was resumed from its checkpoint cache by design; the FIRST resumed run of the series, logged for provenance): a = 12 363 156 057 122 = b131 (bit-identical seam - equal to the W131 g_b record), b = 12 363 156 077 122, FULL-width 20 000 window (no snap). Verifier: CERTIFIED = true, sign_changes_inside = 20 000 = b - a, turing_ok = true, K_conservative = 12, end Rosser runs 46 / 45, max phase contribution [4.08e-21 +/- 1.67e-24].",
+    "CLEAN window: ZERO recorded interior Rosser failure blocks - the SIXTH clean window of the post-target series (W110, W111, W115, W118, W119, W132) - nothing to adjudicate; the W97-family adjudication cycle does not apply (no rescue); the certificate rests on the sign-change total b - a = 20 000.",
+    "MILESTONES: the 615 000 UNIT ROUND MARK was crossed in this window (margin 1 824 - exactly the expected window of the 0464 schedule: (615000, 132, [0465])); the 2 620 000 CERTIFIED-ZERO MARK (the 2.62-million round mark of the census lane) was crossed in this window (margin 19 992 - the one-zero offset of the W126 one-gram snap continues to carry through the census count; as tabled). Next marks now tabled: 620 000 unit (3 176 ahead, expected W133, entry 0466) and 2 640 000 certified-zero (8 ahead, expected W133, entry 0466).",
+    "CENSUS 2 639 992 (2 619 992 + 20 000). FRONTIER tCE132 = 3 000 175 949 624 (gap 616 824 above H0; prevgap 612 151) - the STANDARD 4 673 floor increment, EIGHTH CONSECUTIVE standard increment (recorded data, no pattern claim). Recorded increment series CE74 -> CE132 (58 increments): 50 x 4 673 + 7 x 4 672 + 5 (the W100 TAIL) = 266 359: 350 465 -> 616 824.",
+    "ENDPOINT RECORD: the g_b record ROTATES from -84 (W131) to the -81 dyadic family (W132: [7253980337774926747575862946772790767, -81, 16777217, -110]) - SEVEN dyadic families attested so far (recorded data, no pattern claim). gB132Lo = 300017594962414 / 100, frac = 0.1412525387777109567906936..., exact sub-cent margin 75711323422166212934743 / 60446290980731458735308800 = 0.0012525387777109567906... (FIFTY-THIRD sub-cent case; margin_exp 1.25e-3).",
+    "BUILD: RhAttack.CE132 targeted green (8898 jobs); full tree green (17454 jobs, zero errors on new files; the pre-existing W2Telescope doc-string linter warnings are unchanged). Formal modules generated: CE132.lean (166 579 chars), FrontierCE132.lean (17 808), TerminalFaceCE132.lean (12 231, hypothesis run hZPT2 + 133 window clauses + hqzCensus), TerminalSqueezeCE132.lean (15 690, clause run 133).",
+    "TERMINAL STATE: the terminal face above tCE132 remains the named open object. NO RH CLAIM. NO MILESTONE CLAIM BEYOND THE RECORDED DATA. The terminal face's zero-exclusion claim above 3 000 175 949 624 is the named open object; this lane is frontier/record work only."
+  ],
+  "pins": [
+    "tmp/ce2/ce1_window_H0_v1/window132_b132.json",
+    "tmp/ce2/ce1_window_H0_v1/window132_b132.verify.json",
+    "formal/RhAttack/CE132.lean",
+    "formal/RhAttack/FrontierCE132.lean",
+    "formal/RhAttack/TerminalFaceCE132.lean",
+    "formal/RhAttack/TerminalSqueezeCE132.lean"
+  ]
+}
