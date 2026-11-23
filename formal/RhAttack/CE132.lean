@@ -159,12 +159,12 @@ windows - 53 clean, 88 rescue; 120 total internal Rosser
 failures, ALL RECORDED. End Rosser runs: 46 / 45 left of g_a132 / right of g_b132 (both >= K = 12); 0
 cross-check failures; 0 undetermined Gram signs; max phase contribution 4.08e-21 (radius 1.67e-24).
 
-PIPELINE RUN (one hundred thirty-second in the overlap pipeline): the 2026-11-23 resumed run (resumed_from_cache = 32 290 - the 2026-11-20 run was killed at the session boundary and the window resumed from its checkpoint cache by design; the FIRST resumed run of the series, logged for provenance) 6 workers: 34 081
+PIPELINE RUN (one hundred thirty-second in the overlap pipeline): the 2026-11-23 resumed run (resumed_from_cache = 32 290 - the 2026-11-20 run was killed at the session boundary and the window resumed from its checkpoint cache by design; the FIRST resumed run of the series, logged for provenance) 8 workers: 34 081
 evaluations in 373.3 s (same M = 60, C_R = 1, N_range = [691 008, 691 008], same pipeline, same
 verifier, same seam discipline).
 
 PROVENANCE (our run, 2026-11-16; pipeline = Murphy's Apache-2.0 deposit, same as CE1-CE131): RUN
-PARAMETERS: a = 12 363 156 057 122 (= b131), b = 12 363 156 077 122 (FULL 20 000 (no snap), CLEAN - zero interior Rosser failure blocks), M = 60, C_R = 1, 6 workers, 34 081
+PARAMETERS: a = 12 363 156 057 122 (= b131), b = 12 363 156 077 122 (FULL 20 000 (no snap), CLEAN - zero interior Rosser failure blocks), M = 60, C_R = 1, 8 workers, 34 081
 evaluations, 373.3 s, resumed_from_cache = 32 290. CERTIFICATE (window132_b132.json): the
 20,000 (= b - a) zeros of zeta with g_a132 < Im s <= g_b132 are ALL SIMPLE and on the line,
 where g_a132 (recorded exact dyadic ball) is [58031842611811703651938244891747991453, -84, 16777217, -110] (the W131 endpoint g_b131, the W132 seam g_a132

@@ -1,0 +1,29 @@
+{
+  "id": "0466",
+  "ts": "2026-11-23T21:40:00Z",
+  "kind": "discovery",
+  "title": "CE133 + FrontierCE133 + TerminalFaceCE133 + TerminalSqueezeCE133 GREEN - W133 is the FIRST autonomous-lane window (launched by the lane supervisor after the W132 publication session) - ONE recorded interior Rosser failure block, determined and rescued on a six-glyph union (fresh 5/5, cacheless fresh-grid adjudication; TWENTY-SEVENTH W97-family protocol cycle) - the 620 000 UNIT ROUND MARK and the 2 640 000 CERTIFIED-ZERO mark were CROSSED IN THIS WINDOW, both exactly as the 0465 schedule predicted; census 2 659 992; frontier tCE133 = 3 000 175 954 297 (gap 621 497 above H0 - standard 4 673 increment, ninth consecutive standard step); the endpoint record ROTATES from -81 back to the -86 dyadic family (the most frequent family in W95-W133: 21 of 39 windows); terminal face re-anchored EXACTLY at tCE133 (NO RH CLAIM)",
+  "status": "gated",
+  "lane": "formal CE-series / census frontier (post-target extension)",
+  "unit": 170,
+  "no_rh_claim": true,
+  "facts": [
+    "WINDOW 133 (the FIRST autonomous-lane window - launched by the lane supervisor after the W132 publication session; clean fresh run, no cache; 34 139 evals in 3351.4 s, 8 workers): a = 12 363 156 077 122 = b132 (bit-identical seam), b = 12 363 156 097 122, FULL-width 20 000 window (no snap). Verifier: CERTIFIED = true, sign_changes_inside = 20 000 = b - a, turing_ok = true, K_conservative = 12, end Rosser runs 42 / 44, max phase contribution [4.10e-21 +/- 2.61e-24].",
+    "ONE recorded interior Rosser failure block: the two-gram block [93704, 93706] (need 2, changes 0, determined at m = 64) - determined and rescued on a six-glyph union [93702, 93707] (fresh 5/5 by the lane supervisor's cacheless fresh-grid adjudication: m = 8/gram, min_abs_z 5.05e-3, zero near-zero touch; three control blocks 2/2, minimum control min_abs_z 3.67e-3); the TWENTY-SEVENTH W97-family protocol cycle. Recorded per-window Rosser failure counts W101-W133: 1,0,0,1,1,1,1,3,1,0,0,3,1,1,0,2,0,0,2,2,2,1,2,1,1,2,1,1,2,1,0,1.",
+    "MILESTONES: the 620 000 UNIT ROUND MARK was crossed in this window (margin 1 497 - exactly the expected window of the 0465 schedule: (620000, 133, [0466])); the 2 640 000 CERTIFIED-ZERO MARK (the 2.64-million round mark of the census lane) was crossed in this window (margin 19 992 - the one-zero offset of the W126 one-gram snap continues to carry through the census count; as tabled). Next marks now tabled: 625 000 unit (3 503 ahead, expected W134, entry 0467) and 2 660 000 certified-zero (8 ahead, expected W134, entry 0467).",
+    "CENSUS 2 659 992 (2 639 992 + 20 000). FRONTIER tCE133 = 3 000 175 954 297 (gap 621 497 above H0; prevgap 616 824) - the STANDARD 4 673 floor increment, NINTH CONSECUTIVE standard increment (recorded data, no pattern claim). Recorded increment series CE74 -> CE133 (59 increments): 51 x 4 673 + 7 x 4 672 + 5 (the W100 TAIL) = 271 032: 350 465 -> 621 497.",
+    "ENDPOINT RECORD: the g_b record ROTATES from the -81 dyadic family (W132) back to the -86 dyadic family (W133: [232127371170348497216161496432656622587, -86, 16777217, -110]) - the MOST FREQUENT family in W95-W133 (21 of 39 windows); seven families attested so far (recorded data, no pattern claim). gB133Lo = 300017595429707 / 100, frac = 0.0763520764852968756589978..., exact sub-cent margin 12286702833987741427237763 / 1934281311383406679529881600 = 0.0063520764852968756589... (FIFTY-FOURTH sub-cent case; margin_exp 6.35e-3).",
+    "BUILD: RhAttack.CE133 targeted green (8899 jobs); full tree green (17454 jobs, zero errors on new files; the pre-existing W2Telescope doc-string linter warnings are unchanged). Formal modules generated: CE133.lean (168 953 chars), FrontierCE133.lean (18 023), TerminalFaceCE133.lean (12 284, hypothesis run hZPT2 + 134 window clauses + hqzCensus), TerminalSqueezeCE133.lean (15 731, clause run 134). PROVENANCE FIX: the W132 publication (0465) recorded '6 workers'; the resumed W132 run was executed with 8 workers - corrected in CE132.lean (regenerated and rebuilt green).",
+    "TERMINAL STATE: the terminal face above tCE133 remains the named open object. NO RH CLAIM. NO MILESTONE CLAIM BEYOND THE RECORDED DATA. The terminal face's zero-exclusion claim above 3 000 175 954 297 is the named open object; this lane is frontier/record work only. The autonomous lane supervisor (tmp/ce2/lane/run_lane.py) is live and will continue W134+ in the background; the formal publication of completed windows remains a session step."
+  ],
+  "pins": [
+    "tmp/ce2/ce1_window_H0_v1/window133_b133.json",
+    "tmp/ce2/ce1_window_H0_v1/window133_b133.verify.json",
+    "tmp/ce2/ce1_window_H0_v1/window133_b133.adjudication.json",
+    "tmp/ce2/lane/w133/AUTO.json",
+    "formal/RhAttack/CE133.lean",
+    "formal/RhAttack/FrontierCE133.lean",
+    "formal/RhAttack/TerminalFaceCE133.lean",
+    "formal/RhAttack/TerminalSqueezeCE133.lean"
+  ]
+}
