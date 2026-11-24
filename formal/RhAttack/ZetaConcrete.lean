@@ -542,4 +542,50 @@ theorem rh_program78_qz_continuumAnchor_PT2
   RHEnd.rh_program78_stripfront_mach_unifiedContinuumAnchor_PT2 qz hzF hqzQz honline
     Qside hPT2 hOffC
 
+/-! ## 12.  honline, Phase 1: the orbit argument (pure logic) -/
+
+/-- The slice of non-real zeros with `0 < im < T`, for a height `T`. -/
+def zetaSlice (T : ℝ) : Set ℂ :=
+  {σ | riemannZeta σ = 0 ∧ σ.im ≠ 0 ∧ 0 < σ.im ∧ σ.im < T}
+
+/-- A SUBSINGLETON slice cannot contain an off-line zero: if `ρ` were in
+    the slice with `ρ.re ≠ 1/2`, then `star (1 - ρ)` —  a zero by the
+    functional-equation pairing (`zetaFeZero`) followed by conjugation
+    closure (`zetaConjZero`) — would be a DISTINCT element of the same
+    slice (`im (star (1 - ρ)) = im ρ ∈ (0, T)`), contradicting
+    subsingularity.  Hence every element of a subsingleton slice lies on
+    the critical line.  No numerical input: the slice cardinality
+    ("exactly one zero below T") is the sole remaining hypothesis and is
+    the target of the subsequent phases of the honline project (see
+    `docs/ONLINE-FORMALIZATION-SCOPE.md`). -/
+theorem zetaSliceSubsingletonOnLine (T : ℝ)
+    (hsub : Set.Subsingleton (zetaSlice T)) :
+    ∀ (ρ : ℂ), ρ ∈ zetaSlice T → ρ.re = 1 / 2 := by
+  intro ρ ⟨hρ, him, hlo, hhi⟩
+  by_contra hoff
+  -- `1 - ρ` is a non-real zero (functional equation + non-real pairing)
+  have hfe : riemannZeta (1 - ρ) = 0 := zetaFeZero ρ hρ him
+  have himfe : (1 - ρ).im ≠ 0 := by
+    by_contra h'
+    rw [sub_im, one_im] at h'
+    simp at h'
+    contradiction
+  -- `star (1 - ρ)` is a zero (conjugation closure)
+  have hstarfe : riemannZeta (star (1 - ρ)) = 0 := zetaConjZero (1 - ρ) hfe himfe
+  -- it sits in the same slice (im (star (1 - ρ)) = im ρ)
+  have himstar : (star (1 - ρ)).im = ρ.im := by simp
+  have hlo2 : 0 < (star (1 - ρ)).im := by rwa [himstar]
+  have hstarimne : (star (1 - ρ)).im ≠ 0 := ne_of_gt hlo2
+  have hhi2 : (star (1 - ρ)).im < T := by rwa [himstar]
+  have hmem2 : star (1 - ρ) ∈ zetaSlice T := ⟨hstarfe, hstarimne, hlo2, hhi2⟩
+  -- and is DISTINCT from `ρ` (equality would force ρ.re = 1/2)
+  have hne : star (1 - ρ) ≠ ρ := by
+    intro h
+    have := congr_arg (fun z => z.re) h
+    rw [show (star (1 - ρ)).re = (1 - ρ).re by simp, sub_re, one_re] at this
+    have : ρ.re = 1 / 2 := by linarith [this]
+    exact hoff this
+  have h := hsub ⟨hρ, him, hlo, hhi⟩ hmem2
+  exact hne h.symm
+
 end ZetaConcrete
