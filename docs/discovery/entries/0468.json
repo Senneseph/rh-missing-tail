@@ -1,0 +1,29 @@
+{
+  "id": "0468",
+  "ts": "2026-11-24T07:35:00Z",
+  "kind": "discovery",
+  "title": "CE135 + FrontierCE135 + TerminalFaceCE135 + TerminalSqueezeCE135 GREEN - W135 is the FULL-width window with TWO recorded interior Rosser failure blocks, both determined and rescued (fresh 4/4 on a five-glyph union + fresh 7/7 on an eight-glyph union - the FIRST eight-glyph union of the series; fresh grid at least doubles the pipeline rescue m: m = 16 / 32; TWENTY-EIGHTH + TWENTY-NINTH W97-family protocol cycles) - the 630 000 UNIT ROUND MARK and the 2 680 000 CERTIFIED-ZERO mark were CROSSED IN THIS WINDOW, both exactly as the 0467 schedule predicted; the SUB-STANDARD 4 672 floor increment returns (EIGHTH such step of the series; first since W123); census 2 699 992; frontier tCE135 = 3 000 175 963 642 (gap 630 842 above H0); the endpoint record ROTATES from -84 back to the -81 dyadic family; terminal face re-anchored EXACTLY at tCE135 (NO RH CLAIM)",
+  "status": "gated",
+  "lane": "formal CE-series / census frontier (post-target extension)",
+  "unit": 172,
+  "no_rh_claim": true,
+  "facts": [
+    "WINDOW 135 (autonomous-lane window, launched by the lane supervisor; clean fresh run, no cache; 33 771 evals in 3288.2 s, 8 workers): a = 12 363 156 117 122 = b134 (bit-identical seam), b = 12 363 156 137 122, FULL-width 20 000 window (no snap). Verifier: CERTIFIED = true, sign_changes_inside = 20 000 = b - a, turing_ok = true, K_conservative = 12, end Rosser runs 45 / 47, max phase contribution [4.10e-21 +/- 2.61e-24].",
+    "TWO recorded interior Rosser failure blocks (two-gram blocks [4084, 4086] and [7735, 7737], need 2 each, determined at m = 64) - both determined and rescued: the first on a five-glyph union [4083, 4087] (fresh 4/4 at fresh m = 16, min_abs_z 4.08e-3), the second on an EIGHT-glyph union [7731, 7738] (fresh 7/7 at fresh m = 32, min_abs_z 6.52e-4) - the FIRST eight-glyph union of the series; zero near-zero touch on both; three control blocks 2/2 (minimum control min_abs_z 2.96e-2). The fresh grid is at least TWICE the pipeline's rescue m (the lane adjudicator's m=8 baseline first MISSED two of the seven zeros of the second union at m = 8 - 5 found vs 7 needed - which is exactly what the gate exists to catch; the m-rule was corrected to max(8, 2 x pipeline m) after the flag). TWENTY-EIGHTH + TWENTY-NINTH W97-family protocol cycles. Recorded per-window Rosser failure counts W101-W135: 1,0,0,1,1,1,1,3,1,0,0,3,1,1,0,2,0,0,2,2,2,1,2,1,1,2,1,1,2,1,0,1,0,2.",
+    "MILESTONES: the 630 000 UNIT ROUND MARK was crossed in this window (margin 842 - exactly the expected window of the 0467 schedule: (630000, 135, [0468])); the 2 680 000 CERTIFIED-ZERO MARK (the 2.68-million round mark of the census lane) was crossed in this window (margin 19 992 - the one-zero offset of the W126 one-gram snap continues to carry through the census count; as tabled). Next marks now tabled: 635 000 unit (4 158 ahead, expected W136, entry 0469) and 2 700 000 certified-zero (8 ahead, expected W136, entry 0469).",
+    "CENSUS 2 699 992 (2 679 992 + 20 000). FRONTIER tCE135 = 3 000 175 963 642 (gap 630 842 above H0; prevgap 626 170) - a SUB-STANDARD 4 672 floor increment (the EIGHTH sub-standard step of the series; first since W123 - eleven standard increments in between; recorded data, no pattern claim). Recorded increment series CE74 -> CE135 (61 increments): 52 x 4 673 + 8 x 4 672 + 5 (the W100 TAIL) = 280 377: 350 465 -> 630 842.",
+    "ENDPOINT RECORD: the g_b record ROTATES from the -84 dyadic family (W134) back to the -81 dyadic family (W135: [7253980371670318116900218845878157909, -81, 16777217, -110]) - seven families attested so far (recorded data, no pattern claim). gB135Lo = 300017596364294 / 100, frac = 0.9465503399418194376156935..., exact sub-cent margin 395943754145925300107853 / 60446290980731458735308800 = 0.0065503399418194376156... (FIFTY-SIXTH sub-cent case; margin_exp 6.55e-3).",
+    "BUILD: RhAttack.CE135 targeted green (8901 jobs); full tree green (17454 jobs, zero errors on new files; the pre-existing W2Telescope doc-string linter warnings are unchanged). Formal modules generated: CE135.lean (173 602 chars), FrontierCE135.lean (18 210), TerminalFaceCE135.lean (12 390, hypothesis run hZPT2 + 136 window clauses + hqzCensus), TerminalSqueezeCE135.lean (15 813, clause run 136).",
+    "TERMINAL STATE: the terminal face above tCE135 remains the named open object. NO RH CLAIM. NO MILESTONE CLAIM BEYOND THE RECORDED DATA. The terminal face's zero-exclusion claim above 3 000 175 963 642 is the named open object; this lane is frontier/record work only."
+  ],
+  "pins": [
+    "tmp/ce2/ce1_window_H0_v1/window135_b135.json",
+    "tmp/ce2/ce1_window_H0_v1/window135_b135.verify.json",
+    "tmp/ce2/ce1_window_H0_v1/window135_b135.adjudication.json",
+    "tmp/ce2/lane/w135/AUTO.json",
+    "formal/RhAttack/CE135.lean",
+    "formal/RhAttack/FrontierCE135.lean",
+    "formal/RhAttack/TerminalFaceCE135.lean",
+    "formal/RhAttack/TerminalSqueezeCE135.lean"
+  ]
+}
