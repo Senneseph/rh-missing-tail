@@ -42,6 +42,43 @@ Let `T0 := 707/50`. Take `ρ ∈ qz.Z` with `0 < |ρ.im| < T0`.
 Steps 1 and 3 are pure logic over the already-proven `ZeroSet` fields;
 the entire remaining work is step 2.
 
+## Phase status (milestones, in order)
+
+- **Phase 1a (strip)** — DONE: `ZetaConcrete.zetaNontrivialInStrip`
+  (`0 < ρ.re < 1` for every non-real zero).
+- **Phase 1b (right-side explicit engine)** — DONE:
+  `OnlineZeta.zetaDirichletTail` — for `1 < Re s` and `0 < N`,
+  `‖ζ s − Σ_{n ≤ N} n^{−s}‖ ≤ N^{1−σ} / (σ − 1)` (explicit
+  Dirichlet-series tail bound, locally derived; no such bound in the
+  pinned build).
+- **Phase 1c (left-side FE transport)** — DONE:
+  `OnlineZetaFE.zetaFEtransport` + `OnlineZetaFE.zetaTailTransportLeft`
+  — explicit bound for `‖ζ s‖` at `Re s < 0` via Mathlib's functional
+  equation `ζ(1−s) = 2(2π)^{−s} Γ(s) cos(πs/2) ζ(s)`.
+- **Phase 1c.1 (critical-line Gamma constants)** — DONE:
+  `OnlineZetaGamma.gammaHalfItExact` —
+  `‖Γ(1/2 + it)‖ = sqrt(π / cosh(π t))` (exactly, via Euler reflection
+  + `Γ(conj s) = conj(Γ s)`), with decay corollary
+  `gammaHalfItDecay`: `‖Γ(1/2 + it)‖ ≤ sqrt(2π) · e^{−π|t|/2}`.
+  These are the constants the disk-count machinery uses to control the
+  completed zeta factor on a circle about the first zero.
+- **Phase 2 (in-strip explicit engine)** — IN PROGRESS. Done so far:
+  `OnlineZetaEta.etaIdentity` — for `Re s > 1`,
+  `η(s) = (1 − 2^{1−s}) · ζ(s)` with `η(s) = Σ (−1)^{n−1} n^{−s}`
+  (even/odd split of the Dirichlet series, `tsum_even_add_odd`, local
+  `cpowMulRealNonneg` product law for `x, y ≥ 0` real bases and complex
+  exponent). Remaining Phase 2 sub-lemmas: (i) extend the identity to
+  `0 < Re s ≤ 1` by identity theorem over the connected domain
+  `Re s > 0`, `s ≠ 1`; (ii) explicit eta-series truncation bound
+  (Euler transform) on the band `0 < Re s ≤ 1`, `|Im s| < T0`.
+  Engine candidate (E-1) Euler-transformed eta series (see decision note
+  below).
+- **Phase 3 (disk count)** — after Phase 2: Jensen circular mean with a
+  rigorous error band not crossing an integer, plus a bounded numerical
+  sign-change assertion in `(14, 14.2)` from the Phase 2 engine.
+- **Assembly** — after Phase 3: `#S(T0) = 1` and the orbit argument
+  (`ZetaConcrete.zetaSliceSubsingletonOnLine`) discharge `honline`.
+
 ## Step 2: what the count needs, audited against pinned Mathlib v4.33.1
 
 **Available in the pinned build (read-only infrastructure):**
@@ -210,7 +247,7 @@ derived locally (Bernoulli-polynomial form, classical).
 **A4. Riemann–Siegel: NOT in the pinned build** (no
 `riemannSiegel` / `Zfun` / theta machinery anywhere in `Mathlib`).
 
-**Engine decision (open, Phase 1 input).** Two self-contained
+**Engine decision (input to Phase 2).** Two self-contained
 candidates for rigorous ζ-evaluation in the band `0 < Re s ≤ 1`,
 `t ∈ (0, 30)`:
 - **(E-1) Euler-transformed eta series:** `ζ(s) = η(s) / (1 - 2^{1-s})`
