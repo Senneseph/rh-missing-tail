@@ -3432,6 +3432,93 @@ FACTS = {
                       "(5.75e-3), W128 (8.52e-4), W129 (5.95e-3), W130 (1.05e-3), W131 (6.15e-3), W132 (1.25e-3), W133 (6.35e-3), W134 (1.45e-3), W135 (6.55e-3), W136 (1.65e-3), W137 (6.75e-3), W138 (1.85e-3)"),
         new_milestone=None,
     ),
+    139: dict(
+        N=139, tCE=3000175982334, gap=649534, prevgap=644861,
+        gal=300017598233468, gden=100, galstr="300017598233468 / 100",
+        frac="0.6869436190202805787733461... (exact, exponent -86 dyadic terminator)",
+        fracmargin="0.0069436190202805787733 (exact, exponent -86 dyadic arithmetic, center-minus-radius)",
+        a="12 363 156 197 122", b="12 363 156 217 122",
+        ga_b="[232127372978102703370719619474066643469, -86, 16777217, -110]",
+        gb_b="[232127373339653544538808986808488080273, -86, 16777217, -110]",
+        width=("FULL 20 000 (no snap), TWO recorded interior Rosser failure blocks - both "
+               "determined and rescued (fresh 4/4 on a five-glyph union + fresh 5/5 on a "
+               "six-glyph union; the THIRTY-THIRD + THIRTY-FOURTH W97-family protocol "
+               "cycles)"),
+        widthnum=20000,
+        census="2 779 992", censusnum=2779992, censusprev="2 759 992", censusprevnum=2759992,
+        widthprev_desc=("FULL 20 000, ONE recorded interior Rosser failure block - determined "
+                        "and rescued (fresh 4/4 on a five-glyph union; the THIRTY-SECOND "
+                        "W97-family protocol cycle) (0472)"),
+        evals="34 547", seconds="3510.5", cache="0",
+        runs="44 / 51", phase="4.10e-21 (radius 2.61e-24)",
+        failures_n=2,
+        faildesc=("TWO recorded interior Rosser failure blocks (machine-derived per-window "
+                  "counts W101-W139: 1,0,0,1,1,1,1,3,1,0,0,3,1,1,0,2,1,0,0,2,2,2,1,2,1,1,2,1,1,"
+                  "2,1,0,1,0,2,0,2,1,2 - canonical per 0471) - both determined and rescued: "
+                  "the first (three-gram block) on a five-glyph union (fresh 4/4, min_abs_z "
+                  "4.85e-3), the second (three-gram block) on a six-glyph union (fresh 5/5, "
+                  "min_abs_z 1.04e-2); zero near-zero touch on both; three control blocks "
+                  "2/2; the THIRTY-THIRD and THIRTY-FOURTH W97-family protocol cycles"),
+        verif_extra=("The window is NOT clean - TWO recorded interior Rosser failure blocks, "
+                     "both determined and rescued (fresh 4/4 on a five-glyph union at fresh m = "
+                     "16 + fresh 5/5 on a six-glyph union at fresh m = 16 - the fresh grid at "
+                     "least doubles the pipeline's rescue m = 8; min_abs_z 4.85e-3 / 1.04e-2, "
+                     "zero near-zero touch; three control blocks 2/2, min_abs_z 1.01e-1 / "
+                     "2.74e-2 / 1.55e-1). Certificate by sign-change total b - a = 20 000 = "
+                     "sign_changes_inside, verified independently (CERTIFIED, turing_ok)."),
+        win_n_clean=55, win_n_rescue=94, total_fail=128,
+        incr=4673,
+        incr_note=("the STANDARD 4 673 floor increment (fourth consecutive standard step "
+                   "after W135's sub-standard 4 672; recorded data, no pattern claim)"),
+        mile=("the 645 000 UNIT ROUND MARK was CROSSED IN THIS WINDOW, WINDOW 139 (margin "
+              "4 534 - the rescheduled landing of the 0469 table's (645000, 138) prediction "
+              "per 0472: W138 landed 139 short and the mark landed one window later); the "
+              "640 000 mark (W137 [0471]) carries 9 534; the 635 000 mark (W136 [0469]) "
+              "carries 14 534; the 630 000 mark (W135 [0468]) carries 19 534; the 500 000 "
+              "milestone (W107 [0440]) carries 149 534; the next round mark 650 000 is 466 "
+              "ahead (expected at W140, entry 0474)"),
+        censmarks=("the 2 760 000 CERTIFIED-ZERO MARK was CROSSED IN THIS WINDOW, WINDOW 139 "
+                   "(margin 19 992 - exactly the expected window of the 0472 schedule, hit); "
+                   "the 2 740 000 mark (W138 [0472]) carries 39 992; the 2 720 000 mark "
+                   "(W137 [0471]) carries 59 992; the 2 780 000 mark is 8 zeros ahead "
+                   "(expected at W140, entry 0474) - recorded data, no pattern claim"),
+        milecross={175000: 38, 200000: "42B", 225000: 48, 250000: 53, 275000: 58, 300000: 64,
+                   325000: 69, 350000: 74, 375000: 80, 400000: 85, 425000: 90, 430000: 92, 435000: 93,
+                   440000: 94, 445000: 95, 450000: 96, 455000: 97, 460000: 98, 465000: 99, 470000: 101,
+                   475000: 102, 480000: 103, 485000: 104, 490000: 105, 495000: 106, 500000: 107,
+                   505000: 109, 510000: 110, 515000: 111, 520000: 112, 525000: 113, 530000: 114,
+                   535000: 115, 540000: 116, 545000: 117, 550000: 118, 555000: 119, 560000: 120,
+                   565000: 121, 570000: 122, 575000: 124, 580000: 125, 585000: 126, 590000: 127,
+                   595000: 128, 600000: 129, 605000: 130, 610000: 131, 615000: 132, 620000: 133,
+                   625000: 134, 630000: 135, 635000: 136, 640000: 137, 645000: 139},
+        unit="ONE-HUNDRED-THIRTY-NINTH", family="-86",
+        ord_word="one hundred thirty-ninth", nw=8,
+        run_note=("an autonomous-lane window (launched by the lane supervisor; fresh run, "
+                  "no cache)"),
+        parallel_note="",
+        shrink_note=("W139: FULL-width 20 000, TWO recorded interior Rosser failure blocks - "
+                     "both determined and rescued (fresh 4/4 on a five-glyph union + fresh 5/5 "
+                     "on a six-glyph union; the THIRTY-THIRD + THIRTY-FOURTH W97-family "
+                     "protocol cycles). The floor advances by the STANDARD 4 673; the "
+                     "endpoint record HOLDS the -86 dyadic family (second consecutive -86 "
+                     "window; the most frequent family in the series - 24 of 43 "
+                     "family-recorded windows; recorded data, no pattern claim). Recorded "
+                     "increment series CE74 -> CE139 (65 increments): 56 x 4 673 + "
+                     "8 x 4 672 + 5 (the W100 TAIL) = 299 069: 350 465 -> 649 534."),
+        margin_exp="6.94e-3",
+        subcent_ordinal="SIXTIETH",
+        subcent_list=("W79 (1.76e-4), W81 (4.03e-4), W82 (1.87e-3), W83 (6.98e-3), W84 (2.09e-3), W85 "
+                      "(7.2e-3), W86 (2.3e-3), W87 (3.8e-3), W88 (8.9e-3), W89 (4.0e-3), W90 (9.1e-3), "
+                      "W91 (4.2e-3), W92 (9.3e-3), W93 (8.0e-4), W94 (5.9e-3), W95 (1.0e-3), W96 (6.1e-3), "
+                      "W97 (2.99e-4), W98 (5.41e-3), W99 (5.17e-4), W100 (7.10e-3), W101 (2.21e-3), "
+                      "W102 (3.67e-3), W103 (7.84e-3), W104 (2.94e-3), W105 (8.05e-3), W106 (3.16e-3), "
+                      "W107 (4.62e-3), W108 (9.72e-3), W109 (4.83e-3), W110 (6.29e-3), W111 (1.39e-3), "
+                      "W112 (6.50e-3), W113 (7.96e-3), W114 (3.06e-3), W115 (8.17e-3), W116 (3.27e-3), "
+                      "W117 (8.37e-3), W118 (3.48e-3), W119 (8.58e-3), W120 (3.68e-3), W121 (8.79e-3), "
+                      "W122 (3.89e-3), W123 (9.0e-3), W124 (4.09e-3), W125 (9.19e-3), W126 (6.50e-4), W127 "
+                      "(5.75e-3), W128 (8.52e-4), W129 (5.95e-3), W130 (1.05e-3), W131 (6.15e-3), W132 (1.25e-3), W133 (6.35e-3), W134 (1.45e-3), W135 (6.55e-3), W136 (1.65e-3), W137 (6.75e-3), W138 (1.85e-3), W139 (6.94e-3)"),
+        new_milestone=645000,
+    ),
 }
 
 
@@ -3568,6 +3655,9 @@ def gen_ce(N):
         138: "FULL 20 000, ONE recorded interior Rosser failure block - determined and "
              "rescued (fresh 4/4 on a five-glyph union); THIRTY-SECOND W97-family protocol "
              "cycle",
+        139: "FULL 20 000, TWO recorded interior Rosser failure blocks - both determined "
+             "and rescued (fresh 4/4 on a five-glyph union + fresh 5/5 on a six-glyph "
+             "union); THIRTY-THIRD + THIRTY-FOURTH W97-family protocol cycles",
     }
     IFFREC = {  # iff-doc window-slice records
         95: "NON-SNAPPED 20 000 with two recorded interior failures, both determined and rescued",
@@ -3673,6 +3763,8 @@ def gen_ce(N):
              "rescued (fresh 4/4 five-glyph + fresh 4/4 five-glyph, both adjudication-confirmed)",
         138: "FULL 20 000, ONE recorded interior Rosser failure block - determined and rescued "
              "(fresh 4/4 five-glyph, adjudication-confirmed)",
+        139: "FULL 20 000, TWO recorded interior Rosser failure blocks - both determined and "
+             "rescued (fresh 4/4 five-glyph + fresh 5/5 six-glyph, both adjudication-confirmed)",
     }
     WINREC2 = {  # split-doc window records
         96: "NON-SNAPPED at 20 000, CLEAN - zero recorded interior failures",
@@ -3761,13 +3853,15 @@ def gen_ce(N):
              "(4/4 on a five-glyph union, 4/4 on a five-glyph union), adjudication-confirmed",
         138: "FULL 20 000, ONE recorded interior failure - determined and rescued (4/4 on a "
              "five-glyph union), adjudication-confirmed",
+        139: "FULL 20 000, TWO recorded interior failures - both determined and rescued "
+             "(4/4 on a five-glyph union, 5/5 on a six-glyph union), adjudication-confirmed",
     }
     UNITW = {95: "NINETY-FIFTH", 96: "NINETY-SIXTH", 97: "NINETY-SEVENTH",
              98: "NINETY-EIGHTH", 99: "NINETY-NINTH", 100: "ONE-HUNDREDTH", 101: "ONE-HUNDRED-FIRST",
              102: "ONE-HUNDRED-SECOND", 103: "ONE-HUNDRED-THIRD", 104: "ONE-HUNDRED-FOURTH",
              105: "ONE-HUNDRED-FIFTH", 106: "ONE-HUNDRED-SIXTH", 107: "ONE-HUNDRED-SEVENTH", 108: "ONE-HUNDRED-EIGHTH",
              109: "ONE-HUNDRED-NINTH",
-             110: "ONE-HUNDRED-TENTH", 111: "ONE-HUNDRED-ELVENTH", 112: "ONE-HUNDRED-TWELFTH", 113: "ONE-HUNDRED-THIRTEENTH", 114: "ONE-HUNDRED-FOURTEENTH", 115: "ONE-HUNDRED-FIFTEENTH", 116: "ONE-HUNDRED-SIXTEENTH", 117: "ONE-HUNDRED-SEVENTEENTH", 118: "ONE-HUNDRED-EIGHTEENTH", 119: "ONE-HUNDRED-NINETEENTH", 120: "ONE-HUNDRED-TWENTIETH", 121: "ONE-HUNDRED-TWENTY-FIRST", 122: "ONE-HUNDRED-TWENTY-SECOND", 123: "ONE-HUNDRED-TWENTY-THIRD", 124: "ONE-HUNDRED-TWENTY-FOURTH", 125: "ONE-HUNDRED-TWENTY-FIFTH", 126: "ONE-HUNDRED-TWENTY-SIXTH", 127: "ONE-HUNDRED-TWENTY-SEVENTH", 128: "ONE-HUNDRED-TWENTY-EIGHTH", 129: "ONE-HUNDRED-TWENTY-NINTH", 130: "ONE-HUNDRED-THIRTIETH", 131: "ONE-HUNDRED-THIRTY-FIRST", 132: "ONE-HUNDRED-THIRTY-SECOND", 133: "ONE-HUNDRED-THIRTY-THIRD", 134: "ONE-HUNDRED-THIRTY-FOURTH", 135: "ONE-HUNDRED-THIRTY-FIFTH", 136: "ONE-HUNDRED-THIRTY-SIXTH", 137: "ONE-HUNDRED-THIRTY-SEVENTH", 138: "ONE-HUNDRED-THIRTY-EIGHTH"}
+             110: "ONE-HUNDRED-TENTH", 111: "ONE-HUNDRED-ELVENTH", 112: "ONE-HUNDRED-TWELFTH", 113: "ONE-HUNDRED-THIRTEENTH", 114: "ONE-HUNDRED-FOURTEENTH", 115: "ONE-HUNDRED-FIFTEENTH", 116: "ONE-HUNDRED-SIXTEENTH", 117: "ONE-HUNDRED-SEVENTEENTH", 118: "ONE-HUNDRED-EIGHTEENTH", 119: "ONE-HUNDRED-NINETEENTH", 120: "ONE-HUNDRED-TWENTIETH", 121: "ONE-HUNDRED-TWENTY-FIRST", 122: "ONE-HUNDRED-TWENTY-SECOND", 123: "ONE-HUNDRED-TWENTY-THIRD", 124: "ONE-HUNDRED-TWENTY-FOURTH", 125: "ONE-HUNDRED-TWENTY-FIFTH", 126: "ONE-HUNDRED-TWENTY-SIXTH", 127: "ONE-HUNDRED-TWENTY-SEVENTH", 128: "ONE-HUNDRED-TWENTY-EIGHTH", 129: "ONE-HUNDRED-TWENTY-NINTH", 130: "ONE-HUNDRED-THIRTIETH", 131: "ONE-HUNDRED-THIRTY-FIRST", 132: "ONE-HUNDRED-THIRTY-SECOND", 133: "ONE-HUNDRED-THIRTY-THIRD", 134: "ONE-HUNDRED-THIRTY-FOURTH", 135: "ONE-HUNDRED-THIRTY-FIFTH", 136: "ONE-HUNDRED-THIRTY-SIXTH", 137: "ONE-HUNDRED-THIRTY-SEVENTH", 138: "ONE-HUNDRED-THIRTY-EIGHTH", 139: "ONE-HUNDRED-THIRTY-NINTH"}
     SLICENOTE = {  # aolu-doc terminal-slice notes
         97: "SNAPPED 19 997, THREE recorded interior failures - all determined and rescued",
         98: "NON-SNAPPED 20 000, THREE recorded interior Rosser failures (determined at m = 64; the "
@@ -3851,6 +3945,8 @@ def gen_ce(N):
              "(4/4, 4/4), adjudication-confirmed",
         138: "FULL 20 000, ONE recorded interior failure - determined and rescued (4/4), "
              "adjudication-confirmed",
+        139: "FULL 20 000, TWO recorded interior failures - both determined and rescued "
+             "(4/4, 5/5), adjudication-confirmed",
     }
     SLICENOTE = SLICENOTE[N]
 
