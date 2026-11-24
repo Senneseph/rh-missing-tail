@@ -1,0 +1,37 @@
+{
+ "id": "0475",
+ "ts": "2026-11-24T15:52:00Z",
+ "kind": "discovery",
+ "status": "gated",
+ "lane": "formal CE-series / census frontier (post-target extension)",
+ "unit": 178,
+ "no_rh_claim": true,
+ "title": "0475: CE141 lane GREEN - W141 FULL-width 20 000, THREE recorded interior Rosser failure blocks - all determined and rescued (fresh 4/4 on each four-glyph union; the THIRTY-SIXTH + THIRTY-SEVENTH + THIRTY-EIGHTH W97-family protocol cycles) - 655 000 UNIT MARK crossed in-window (margin 3 880 - 0474 schedule hit) + 2 800 000 CENSUS MARK crossed (margin 19 992 - 0474 schedule hit) - STANDARD 4 673 floor increment (sixth consecutive standard step) - census 2 819 992 - tCE141 = 3 000 175 991 680 (gap 658 880; 58 x 4 673 + 8 x 4 672 + 5 = 308 415; 350 465 + 308 415 = 658 880) - endpoint record REVISITS the -83 dyadic family (second -83 window; first was W106) - gB141Lo = 300017599168055 / 100, exact sub-cent margin 345 203 189 431 329 775 646 053 / 48 357 032 784 585 166 988 247 040 = 0.0071386346422266553250..., SIXTY-SECOND sub-cent case - W141 lane FLAG session-adjudicated (control-span grid-coarseness miss; pipeline Rosser determination independently confirmed at m = 16..128; control grid floor raised to 32) - CE141 formal (142 window clauses) + terminal face re-anchored at tCE141 - targeted build 8 915 jobs, full tree 17 454 jobs - NO RH CLAIM (terminal face above tCE141 remains the same named open object; L1 4/7 wall stands [0430]; L1b closed [0432][0435]).",
+ "facts": [
+  "WINDOW 141 (autonomous-lane window, launched by the lane supervisor; clean fresh run, no cache; 34 885 evals in 3559.9 s, 8 workers): a = 12 363 156 237 122 = b140 (bit-identical seam, seam_ok), b = 12 363 156 257 122, FULL-width 20 000 window (no snap). Verifier: CERTIFIED = true, sign_changes_inside = 20 000 = b - a, turing_ok = true, K_conservative = 12, end Rosser runs 46 / 49, max phase contribution [4.10e-21 +/- 2.61e-24], remainder basis kernel-checked RSInt.rs_Z_C0' (3/5 t^-3/4, t>=4250), blocks_inside = 15 825.",
+  "THREE recorded interior Rosser failure blocks (rosser_failures_inside = 3; machine-derived per-window counts W101-W141: 1,0,0,1,1,1,1,3,1,0,0,3,1,1,0,2,1,0,0,2,2,2,1,2,1,1,2,1,1,2,1,0,1,0,2,0,2,1,2,1,3 - canonical per 0471), all determined and rescued. Block 1 [12 363 156 240 473, 12 363 156 240 475], Block 2 [12 363 156 246 531, 12 363 156 246 533], Block 3 [12 363 156 247 898, 12 363 156 247 900] (all two-gram, need 2 / changes 0 / 129 points at pipeline m = 64), each on a four-glyph union (need 4 / found 4 at pipeline m = 4); fresh cacheless adjudication 4/4 on each at fresh m = 8 (at least double the pipeline's rescue m), min_abs_z = 0.005552753821471218 / 0.02270401433589601 / 0.00605846378796098, zero near-zero touch on all three, all RESOLVED-OK; three control blocks 2/2. The THIRTY-SIXTH, THIRTY-SEVENTH and THIRTY-EIGHTH W97-family protocol cycles.",
+  "the 655 000 UNIT ROUND MARK was CROSSED IN THIS WINDOW, WINDOW 141 (margin 3 880 - exactly the expected window of the 0474 schedule, hit); the 650 000 mark (W140 [0474]) carries 8 880; the 645 000 mark (W139 [0473]) carries 13 880; the 640 000 mark (W137 [0471]) carries 18 880; the 500 000 milestone (W107 [0440]) carries 158 880. The 2 800 000 CERTIFIED-ZERO MARK was CROSSED IN THIS WINDOW, WINDOW 141 (margin 19 992 - exactly the expected window of the 0474 schedule, hit; the 2.80-million round mark of the census lane); census now 2 819 992; the 2 780 000 mark (W140 [0474]) carries 39 992; the 2 760 000 mark (W139 [0473]) carries 59 992; the 2 820 000 mark is 8 zeros ahead (expected W142, entry 0477). Recorded data, no pattern claim.",
+  "STANDARD 4 673 floor increment (sixth consecutive standard step after W135's sub-standard 4 672; recorded data, no pattern claim). Recorded increment series CE74 -> CE141 (67 increments): 58 x 4 673 + 8 x 4 672 + 5 (the W100 TAIL) = 308 415: 350 465 -> 658 880.",
+  "endpoint record REVISITS the -83 dyadic family (g_a = W140's g_b, bit-identical seam; g_b = [29015921757844403351520683061688761825, -83, 16777217, -110]) - the second -83 window of the series (the first was W106); seven distinct families attested so far; the -86 family remains the most frequent (24 of the 45 family-recorded windows W97-W141; recorded data, no pattern claim).",
+  "sub-cent case: g_b center 3000175991680.5571386346422266553250532... (exact, exponent -83 dyadic terminator); the sub-cent margin is 0.0071386346422266553250... = 345 203 189 431 329 775 646 053 / 48 357 032 784 585 166 988 247 040 (exact, machine-derived; denominator 5 x 2^83) - the SIXTY-SECOND sub-cent case of the series.",
+  "W141 LANE FLAG (session-adjudicated, same day; full account in 0474): the autonomous lane FLAGged W141 before certification because one CONTROL span [12 363 156 237 082, 12 363 156 237 084) showed fresh_zeros = 0 against the pipeline's Rosser-determined need = 2 at the base fresh grid m = 8. Session fine-grid re-scan: 2 sign changes found and STABLE at m = 16, 32, 64, 128 (crossings converging to t ~ 3000175986998.544 / 3000175986998.561, spacing ~0.017), near_zero_touch = 0 at every grid, max interval radius ~3e-19 - a tight double-zero pair inside a single m = 8 grid interval (spacing ~0.029); the pipeline's Rosser determination was independently CONFIRMED. Mechanical fix: fresh_union_check.py control grid raised from m to max(m, 32) (gate direction safe: a coarser miss can only false-FLAG, never false-advance). Re-adjudication: auto_advance_ok = true (3 unions fresh 4/4 + 3 controls 2/2 at m = 32, min_abs_z 9.33e-4 / 2.79e-4 / 1.58e-2). FLAG archived at w141/FLAG-ORIGINAL.json; session record at w141/ADJUDICATION-SESSION.json; the supervisor then CERTIFIED + recorded W141 (census 2 819 992, gap 658 880, incr 4 673, clean=False).",
+  "FORMAL: CE141.lean + FrontierCE141.lean + TerminalFaceCE141.lean (hZPT2 + 142 window clauses + hqzCensus) + TerminalSqueezeCE141.lean (142-clause run) generated by the durable generators from the machine-derived facts (derive_facts_132.py 141, method re-validated against W131: ALL PASSES). Targeted build RhAttack.CE141 + Frontier/Terminal modules: 8 915 jobs, 0 errors. Full tree: 17 454 jobs, 0 errors. Terminal face RE-ANCHORED at tCE141 = 3 000 175 991 680.",
+  "lane M5 status (0289 menu): the certified in-tree census frontier stands at tCE141 = tPT2 + 658 880; W142 in flight (a = 12 363 156 257 122, b = 12 363 156 277 122). Next tabled marks: 660 000 unit mark (1 120 ahead, expected W142/[0477]) + 2 820 000 certified-zero mark (8 ahead, expected W142/[0477]).",
+  "NO RH CLAIM: the terminal face above tCE141 (no off-line zero with positive height above 3 000 175 991 680) remains the same named open object; nothing in this entry excludes a single off-line zero above tCE141. The [Z78] record anchor in tree is #ELEVEN (Z78ContinuumAnchor, PR #141 continuum-anchor, MERGED a0a02126, adopted 0470/89a0c0b)."
+ ],
+ "pins": [
+  "tmp/ce2/ce1_window_H0_v1/window141_b141.json",
+  "tmp/ce2/ce1_window_H0_v1/window141_b141.verify.json",
+  "tmp/ce2/ce1_window_H0_v1/window141_b141.adjudication.json",
+  "tmp/ce2/lane/w141/AUTO.json",
+  "tmp/ce2/lane/w141/adjudication.json",
+  "tmp/ce2/lane/w141/FLAG-ORIGINAL.json",
+  "tmp/ce2/lane/w141/ADJUDICATION-SESSION.json",
+  "tmp/ce2/ce1_window_H0_v1/code/w141_rescan.log",
+  "tmp/ce2/ce1_window_H0_v1/code/w141_control_rescan.py",
+  "formal/RhAttack/CE141.lean",
+  "formal/RhAttack/FrontierCE141.lean",
+  "formal/RhAttack/TerminalFaceCE141.lean",
+  "formal/RhAttack/TerminalSqueezeCE141.lean"
+ ]
+}
