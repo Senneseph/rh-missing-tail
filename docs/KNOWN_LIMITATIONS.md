@@ -462,6 +462,31 @@ the machine wire and names the residue:
      `rh_program78_stripfront_mach_unifiedContinuumAnchor_PT2`),
      full tree green (17454 jobs); TEN/EIGHTH modules remain in the
      tree as predecessor refs (in-place supersession convention).
+     STATUS NOTE (0476, 2026-11-24): the CONNECTIVE LAYER advanced -
+     `formal/RhAttack/ZetaConcrete.lean` (545 lines, 13 theorems + 2
+     defs) concretizes the abstract B0 `ZeroSet` on the ACTUAL non-real
+     zeros of Mathlib's `riemannZeta` (qz.Z = {ρ | riemannZeta ρ = 0 ∧
+     ρ.im ≠ 0}): ALL FIVE structural fields (nonReal, conj, fe, finite
+     + the hqz field of the endpoint) are PROVEN in-tree with NO new
+     axioms. The `conj` field (closure under complex conjugation) is
+     the hard part and closes via the Mellin-transform definition of
+     the completed zeta: the a = 0 Hurwitz FE-pair has a real-valued
+     modified kernel (proved locally), and a real kernel +
+     `Complex.cpow_conj` + the Bochner integral commuting with the
+     ℝ-linear isometry `star` (`ContinuousLinearMap.integral_comp_comm`)
+     give `star (mellin f s) = mellin f (star s)` ⇒
+     `star (completedRiemannZeta₀ s) = completedRiemannZeta₀ (star s)`
+     ⇒ `riemannZeta (star s) = star (riemannZeta s)` for all s
+     (`ZetaConcrete.zetaConjSymm`) ⇒ non-real zeros close under
+     conjugation (`zetaConjZero`). The B25 endpoint is instantiated at
+     `qz` as `ZetaConcrete.rh_program78_qz_continuumAnchor_PT2` with
+     `hqz` DISCHARGED (`ZetaConcrete.hqzQz`); the four remaining named
+     inputs are unchanged: `hzF` (the [Z78] #ELEVEN continuum-anchor
+     record), `honline` (on-line below 707/50), `hPT2` (the
+     Platt-Trudgian wire up to tPT2), `hOffC` (the terminal face above
+     the frontier - the NAMED OPEN RESEARCH OBJECT). The residual
+     endpoint gap is now FOUR named components, not five. NO RH claim;
+     full tree green (17454 jobs).
      STATUS NOTE (0256,
      2026-11-01): the [Z78] record layer ADVANCED AGAIN: board record
      `closest-fraction-contact` (PR #103, Joseph Bebel) MERGED
