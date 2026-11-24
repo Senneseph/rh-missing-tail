@@ -159,7 +159,7 @@ open scoped Topology
 **CE143 - the terminal face re-anchored at the ONE-HUNDRED-FORTY-THIRD certified window
 (0464, option B - lane M5).
 
-MILESTONE STATE: tCE143 - tPT2 = 668,226 - no unit round mark crossed in this window; the 660 000 mark (W142 [0477]) carries 8 226; the 655 000 mark (W141 [0475]) carries 13 226; the 650 000 mark (W140 [0474]) carries 18 226; the 500 000 milestone (W107 [0440]) carries 168 226; the next round mark 665 000 is 3 226 ahead (expected at W144, entry 0479).
+MILESTONE STATE: tCE143 - tPT2 = 668,226 - the 665 000 UNIT ROUND MARK was CROSSED IN THIS WINDOW, WINDOW 143 (margin 3 226 - exactly the expected window of the 0477 schedule, hit); the 660 000 mark (W142 [0477]) carries 8 226; the 655 000 mark (W141 [0475]) carries 13 226; the 650 000 mark (W140 [0474]) carries 18 226; the 500 000 milestone (W107 [0440]) carries 168 226; the next round mark 670 000 is 1 774 ahead (expected at W144, entry 0479).
 CERTIFIED-ZERO CENSUS: cumulative total 2 859 992 over (g_a1, g_b143] -
 the 2 840 000 CERTIFIED-ZERO MARK was CROSSED IN THIS WINDOW, WINDOW 143 (margin 19 992 - exactly the expected window of the 0477 schedule, hit); the 2 820 000 mark (W142 [0477]) carries 39 992; the 2 800 000 mark (W141 [0475]) carries 59 992; the 2 860 000 mark is 8 zeros ahead (expected at W144, entry 0479) - recorded data, no pattern claim
 
@@ -229,7 +229,7 @@ theorem gB142Lo_lt_tCE143 : (gB142Lo : ℝ) < (tCE143 : ℝ) := by
 theorem faceShrinkCE143 : (tCE143 : ℝ) - (tCE142 : ℝ) = 4673 := by
   norm_num [tCE143, CE142.tCE142]
 
-/-- FRONTIER STATE (machine): the terminal face now sits (tCE143 : R) - WinC.tPT2 = 3,000,176,001,026 - 3 000 175 332 800 = 668,226 above the H0 frontier WinC.tPT2. No unit round mark crossed in this window; the 660 000 mark (w142 [0477]) carries 8 226; the 655 000 mark (w141 [0475]) carries 13 226; the 650 000 mark (w140 [0474]) carries 18 226; the 500 000 milestone (w107 [0440]) carries 168 226; the next round mark 665 000 is 3 226 ahead (expected at w144, entry 0479). CERTIFIED-ZERO CENSUS: cumulative total 2 859 992 over (g_a1, g_b143] - the 2 840 000 CERTIFIED-ZERO MARK was CROSSED IN THIS WINDOW, WINDOW 143 (margin 19 992 - exactly the expected window of the 0477 schedule, hit); the 2 820 000 mark (W142 [0477]) carries 39 992; the 2 800 000 mark (W141 [0475]) carries 59 992; the 2 860 000 mark is 8 zeros ahead (expected at W144, entry 0479) - recorded data, no pattern claim -/
+/-- FRONTIER STATE (machine): the terminal face now sits (tCE143 : R) - WinC.tPT2 = 3,000,176,001,026 - 3 000 175 332 800 = 668,226 above the H0 frontier WinC.tPT2. The 665 000 unit round mark was crossed in this window, window 143 (margin 3 226 - exactly the expected window of the 0477 schedule, hit); the 660 000 mark (w142 [0477]) carries 8 226; the 655 000 mark (w141 [0475]) carries 13 226; the 650 000 mark (w140 [0474]) carries 18 226; the 500 000 milestone (w107 [0440]) carries 168 226; the next round mark 670 000 is 1 774 ahead (expected at w144, entry 0479). CERTIFIED-ZERO CENSUS: cumulative total 2 859 992 over (g_a1, g_b143] - the 2 840 000 CERTIFIED-ZERO MARK was CROSSED IN THIS WINDOW, WINDOW 143 (margin 19 992 - exactly the expected window of the 0477 schedule, hit); the 2 820 000 mark (W142 [0477]) carries 39 992; the 2 800 000 mark (W141 [0475]) carries 59 992; the 2 860 000 mark is 8 zeros ahead (expected at W144, entry 0479) - recorded data, no pattern claim -/
 theorem frontierGapAboveH0 : (tCE143 : ℝ) - WinC.tPT2 = 668226 := by
   norm_num [tCE143, WinC.tPT2]
 

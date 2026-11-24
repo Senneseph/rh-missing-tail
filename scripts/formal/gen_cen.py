@@ -3730,7 +3730,7 @@ FACTS = {
               "655 000 mark (W141 [0475]) carries 8 553; the 650 000 mark (W140 [0474]) "
               "carries 13 553; the 645 000 mark (W139 [0473]) carries 18 553; the 640 000 "
               "mark (W137 [0471]) carries 23 553; the 500 000 milestone (W107 [0440]) "
-              "carries 163 553; the next round mark 665 000 is 3 226 ahead "
+              "carries 163 553; the next round mark 665 000 is 1 447 ahead "
               "(expected at W143, entry 0478)"),
         censmarks=("the 2 820 000 CERTIFIED-ZERO MARK was CROSSED IN THIS WINDOW, WINDOW 142 "
                    "(margin 19 992 - exactly the expected window of the 0475 schedule, "
@@ -3807,11 +3807,12 @@ FACTS = {
         incr=4673,
         incr_note=("the STANDARD 4 673 floor increment (eighth consecutive standard step "
                    "after W135's sub-standard 4 672; recorded data, no pattern claim)"),
-        mile=("no unit round mark crossed in this window; the 660 000 mark (W142 [0477]) "
-              "carries 8 226; the 655 000 mark (W141 [0475]) carries 13 226; the 650 000 "
-              "mark (W140 [0474]) carries 18 226; the 500 000 milestone (W107 [0440]) "
-              "carries 168 226; the next round mark 665 000 is 3 226 ahead (expected at "
-              "W144, entry 0479)"),
+        mile=("the 665 000 UNIT ROUND MARK was CROSSED IN THIS WINDOW, WINDOW 143 (margin "
+              "3 226 - exactly the expected window of the 0477 schedule, hit); the "
+              "660 000 mark (W142 [0477]) carries 8 226; the 655 000 mark (W141 [0475]) "
+              "carries 13 226; the 650 000 mark (W140 [0474]) carries 18 226; the 500 000 "
+              "milestone (W107 [0440]) carries 168 226; the next round mark 670 000 is "
+              "1 774 ahead (expected at W144, entry 0479)"),
         censmarks=("the 2 840 000 CERTIFIED-ZERO MARK was CROSSED IN THIS WINDOW, WINDOW 143 "
                    "(margin 19 992 - exactly the expected window of the 0477 schedule, "
                    "hit); the 2 820 000 mark (W142 [0477]) carries 39 992; the 2 800 000 "
@@ -3827,7 +3828,7 @@ FACTS = {
                    565000: 121, 570000: 122, 575000: 124, 580000: 125, 585000: 126, 590000: 127,
                    595000: 128, 600000: 129, 605000: 130, 610000: 131, 615000: 132, 620000: 133,
                    625000: 134, 630000: 135, 635000: 136, 640000: 137, 645000: 139, 650000: 140, 655000: 141,
-                   660000: 142},
+                   660000: 142, 665000: 143},
         unit="ONE-HUNDRED-FORTY-THIRD", family="-86",
         ord_word="one hundred forty-third", nw=8,
         run_note=("an autonomous-lane window (launched by the lane supervisor; fresh run, "
@@ -3852,7 +3853,7 @@ FACTS = {
                       "W117 (8.37e-3), W118 (3.48e-3), W119 (8.58e-3), W120 (3.68e-3), W121 (8.79e-3), "
                       "W122 (3.89e-3), W123 (9.0e-3), W124 (4.09e-3), W125 (9.19e-3), W126 (6.50e-4), W127 "
                       "(5.75e-3), W128 (8.52e-4), W129 (5.95e-3), W130 (1.05e-3), W131 (6.15e-3), W132 (1.25e-3), W133 (6.35e-3), W134 (1.45e-3), W135 (6.55e-3), W136 (1.65e-3), W137 (6.75e-3), W138 (1.85e-3), W139 (6.94e-3), W140 (2.04e-3), W141 (7.14e-3), W142 (2.24e-3), W143 (7.33e-3)"),
-        new_milestone=2840000,
+        new_milestone=665000,
     ),
 }
 
