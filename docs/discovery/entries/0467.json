@@ -1,0 +1,28 @@
+{
+  "id": "0467",
+  "ts": "2026-11-24T07:10:00Z",
+  "kind": "discovery",
+  "title": "CE134 + FrontierCE134 + TerminalFaceCE134 + TerminalSqueezeCE134 GREEN - W134 is the FULL-width CLEAN window (zero recorded interior Rosser failure blocks, certificate by sign-change total) - the SEVENTH clean window of the post-target series (W110, W111, W115, W118, W119, W132, W134) - the 625 000 UNIT ROUND MARK and the 2 660 000 CERTIFIED-ZERO mark were CROSSED IN THIS WINDOW, both exactly as the 0466 schedule predicted - the SECOND autonomous-lane window (first attempt SIGTERM'd 20 s in by a hang-watchdog baseline bug; the window resumed from its checkpoint cache - resumed_from_cache = 256; the watchdog bug was fixed after the fact); census 2 679 992; frontier tCE134 = 3 000 175 958 970 (gap 626 170 above H0 - standard 4 673 increment, tenth consecutive standard step); the endpoint record ROTATES from -86 to the -84 dyadic family; terminal face re-anchored EXACTLY at tCE134 (NO RH CLAIM)",
+  "status": "gated",
+  "lane": "formal CE-series / census frontier (post-target extension)",
+  "unit": 171,
+  "no_rh_claim": true,
+  "facts": [
+    "WINDOW 134 (the SECOND autonomous-lane window, launched by the lane supervisor; the FIRST launch attempt was SIGTERM'd 20 s in by a hang-watchdog baseline bug - epoch-0 mtime reference - and this run RESUMED FROM ITS CHECKPOINT CACHE, resumed_from_cache = 256, by design; the watchdog bug was fixed after the fact; 33 425 evals in 3277.0 s, 8 workers): a = 12 363 156 097 122 = b133 (bit-identical seam), b = 12 363 156 117 122, FULL-width 20 000 window (no snap). Verifier: CERTIFIED = true, sign_changes_inside = 20 000 = b - a, turing_ok = true, K_conservative = 12, end Rosser runs 42 / 46, max phase contribution [4.08e-21 +/- 1.67e-24].",
+    "CLEAN window: ZERO recorded interior Rosser failure blocks - the SEVENTH clean window of the post-target series (W110, W111, W115, W118, W119, W132, W134) - nothing to adjudicate; the certificate rests on the sign-change total b - a = 20 000.",
+    "MILESTONES: the 625 000 UNIT ROUND MARK was crossed in this window (margin 1 170 - exactly the expected window of the 0466 schedule: (625000, 134, [0467])); the 2 660 000 CERTIFIED-ZERO MARK (the 2.66-million round mark of the census lane) was crossed in this window (margin 19 992 - the one-zero offset of the W126 one-gram snap continues to carry through the census count; as tabled). Next marks now tabled: 630 000 unit (3 830 ahead, expected W135, entry 0468) and 2 680 000 certified-zero (8 ahead, expected W135, entry 0468).",
+    "CENSUS 2 679 992 (2 659 992 + 20 000). FRONTIER tCE134 = 3 000 175 958 970 (gap 626 170 above H0; prevgap 621 497) - the STANDARD 4 673 floor increment, TENTH CONSECUTIVE standard increment (recorded data, no pattern claim). Recorded increment series CE74 -> CE134 (60 increments): 52 x 4 673 + 7 x 4 672 + 5 (the W100 TAIL) = 275 705: 350 465 -> 626 170.",
+    "ENDPOINT RECORD: the g_b record ROTATES from the -86 dyadic family (W133) to the -84 dyadic family (W134: [58031842882974834622238656502757221023, -84, 16777217, -110]) - seven families attested so far (recorded data, no pattern claim). gB134Lo = 300017595897001 / 100, frac = 0.0114513435399995464058553..., exact sub-cent margin 701826671454539592212871 / 483570327845851669882470400 = 0.0014513435399995464058... (FIFTY-FIFTH sub-cent case; margin_exp 1.45e-3).",
+    "BUILD: RhAttack.CE135 targeted green (8901 jobs, includes CE134); full tree green (17454 jobs, zero errors on new files; the pre-existing W2Telescope doc-string linter warnings are unchanged). Formal modules generated: CE134.lean (170 417 chars), FrontierCE134.lean (18 197), TerminalFaceCE134.lean (12 337, hypothesis run hZPT2 + 135 window clauses + hqzCensus), TerminalSqueezeCE134.lean (15 772, clause run 135).",
+    "TERMINAL STATE: the terminal face above tCE134 remains the named open object. NO RH CLAIM. NO MILESTONE CLAIM BEYOND THE RECORDED DATA. The terminal face's zero-exclusion claim above 3 000 175 958 970 is the named open object; this lane is frontier/record work only."
+  ],
+  "pins": [
+    "tmp/ce2/ce1_window_H0_v1/window134_b134.json",
+    "tmp/ce2/ce1_window_H0_v1/window134_b134.verify.json",
+    "tmp/ce2/lane/w134/AUTO.json",
+    "formal/RhAttack/CE134.lean",
+    "formal/RhAttack/FrontierCE134.lean",
+    "formal/RhAttack/TerminalFaceCE134.lean",
+    "formal/RhAttack/TerminalSqueezeCE134.lean"
+  ]
+}
