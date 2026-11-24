@@ -24,6 +24,18 @@ with `offPair q t0 d0 := ∃ ρ ∈ q.Z, ρ.re ≠ 1/2 ∧ |ρ.im| = t0 ∧ |ρ.
 `posReserveUpper = 8733819666133/10000000000000` and
 `posReserveD0max = posReserveUpper − 1/2 = 0.3733819666133` (`Z78PosReserve.lean:95-101`).
 
+POST-0470 (2026-11-24): the in-tree terminal endpoint is now the ELEVEN shape
+`rh_program78_stripfront_mach_unifiedContinuumAnchor_PT2` with
+`continuumAnchorUpper = 9908119238306612133369374975000622988619121777878229799765263366946606045502455625911569003364955967645745531862430068266267717/11345012023616779600791582323373494582287250283647959965785871011074347975117040113347744503437234376916434871293982689424818700`
+(127/128-digit exact rational, ≈ 0.87334585610671857680118, the upper Farey
+neighbour of the degree-nine continuum contact - the board best as of the
+2026-11-24 fire-time sweep, 3.611050648894313e-05 below the TENTH anchor)
+and
+`continuumAnchorD0max = continuumAnchorUpper − 1/2`
+(`Z78ContinuumAnchor.lean`); the TEN, NINE and EIGHTH constants survive as
+predecessor refs (modules and B22/B23/B24 lineages stay in the tree by the
+in-place supersession convention).
+
 POST-0256 (2026-11-01): the in-tree terminal endpoint is now the TEN shape
 `rh_program78_stripfront_mach_unifiedFractionContact_PT2` with
 `fractionContactUpper = 2804966284017490358030969257914123810640482798488248385236764587735806455694206308975383836842958115341512355256943573632654341/3211614609922119834694179379888743028634953588197852962423516288191911449231164741438582626063161096341458934143644085157872271`
@@ -43,10 +55,10 @@ premises. Per-premise audit:
 |---|---------|-------|--------|--------------------|
 | 0 | `q : ZeroSet` / `hqz` | `q` is the actual Mathlib zero set; `hqz` its definitional property | satisfied definitionally | none needed (instantiate with the actual set) |
 | 1 | `honline` | on-line for `0 < |Im| < 707/50 = 14.14` | satisfied by trivial data (first few zeros; any published stream, e.g. Platt) | cited; subsumed by the hPT2 record |
-| 2 | `hzF` | **zero-free** `∀ s, θ < s.re → s ≠ 1 → ζ s ≠ 0` at the in-tree θ | **EXTERNAL CLASSICAL RECORD** — board TEN (`closest-fraction-contact`, θ = 2804966284017490358030969257914123810640482798488248385236764587735806455694206308975383836842958115341512355256943573632654341/3211614609922119834694179379888743028634953588197852962423516288191911449231164741438582626063161096341458934143644085157872271 ≈ 0.8733819666132075199290267786, the closest declarable fraction above the method-contact), **ADOPTED 0256 (MERGED 2026-11-01T12:23:55Z, merge 8b1a0167)**; in-tree absorption in `Z78FractionContact.lean` (B24); NINE (`positive-gap-contact-return`, θ = 0.87338196661320752) and EIGHTH (`positive-reserve-selected-gap`, θ = 0.8733819666133) remain as predecessor refs in `Z78GapContact.lean` / `Z78PosReserve.lean` | B6 adoption pipeline (fired 0256: fire-time stage C 236/236 kernel-clean, stage D all clean, full tree green; `tmp/b6audit/prestage103/firetime/`). **Next candidate (B25, same runbook): first MERGED record with θ < 2804966284017490358030969257914123810640482798488248385236764587735806455694206308975383836842958115341512355256943573632654341/3211614609922119834694179379888743028634953588197852962423516288191911449231164741438582626063161096341458934143644085157872271. Board re-audit at 0256: NO merged record sits below TEN** (runner-up `saddle-closure-selected-gap` is T + 9.732e-22, weaker) — the ladder idles at the family contact until the board moves |
+| 2 | `hzF` | **zero-free** `∀ s, θ < s.re → s ≠ 1 → ζ s ≠ 0` at the in-tree θ | **EXTERNAL CLASSICAL RECORD** — board ELEVEN (`continuum-anchor`, θ = 9908119238306612133369374975000622988619121777878229799765263366946606045502455625911569003364955967645745531862430068266267717/11345012023616779600791582323373494582287250283647959965785871011074347975117040113347744503437234376916434871293982689424818700 ≈ 0.87334585610671857680118, the current board best - continuum marked-anchor family, upper Farey neighbour of the degree-nine continuum contact), **ADOPTED 0470 (MERGED 2026-11-13T08:28:53Z, merge a0a02126)**; in-tree absorption in `Z78ContinuumAnchor.lean` (B25); TEN (`closest-fraction-contact`, θ ≈ 0.8733819666132075199), NINE (`positive-gap-contact-return`, θ = 0.87338196661320752) and EIGHTH (`positive-reserve-selected-gap`, θ = 0.8733819666133) remain as predecessor refs in `Z78FractionContact.lean` / `Z78GapContact.lean` / `Z78PosReserve.lean` | B6 adoption pipeline (fired 0470: fire-time stage C 632/632 kernel-clean, stage D all clean, full tree green; `tmp/b6audit/prestage141/firetime/`). **Next candidate (B26, same runbook): first MERGED record with θ < continuumAnchorUpper. Board state at 0470: the companion `continuum-exact-contact` (same ranked fraction, exact degree-nine root contact, MERGED 2026-11-15) is NOT a smaller θ; `marked-anchor-induction` (0.8733468) is 9.4389e-07 above ELEVEN - no merged record sits below ELEVEN as of the fire-time sweep** |
 | 3 | `hPT2` | **on-line data** `∀ ρ ∈ zeros, 0 < Im ρ ≤ 3,000,175,332,800 → Re ρ = 1/2` | satisfied by published rigorous computation | Platt–Trudgian arXiv:2004.09765 Thm 1 (12,363,153,437,138 zeros, interval arithmetic, independently verifies Platt tPT). Already CITED in-tree (`WinCount.lean` section D, Z78 pattern). In-house H1 3e10 fleet data = SCREEN-level fill with the 2026-09-29 forensic correction on the mcert column (`VALIANT-EFFORT-FORENSICS.md` §5) — an independent cross-check, NOT a certificate |
 | 4 | `Qside` | one concrete zero-side scale (measured \|ζ\| fill under the A4.3 residual wire) | engine parameter; INERT under the 0126 endpoint shape (the S1/S3 strip faces dissolved into the exclusion face — §3) | kept for signature stability; supplies nothing to discharge |
-| 5 | `hOffCPT2` | **no off-pair** on `[tPT2, ∞) × (0, fractionContactD0max]` (TEN bound (d0max) ≈ 0.3733819666132075199290267786; NINE shape: 0.37338196661320752; EIGHTH shape: 0.3733819666133) | **THE TERMINAL FACE.** Open. | see §4 |
+| 5 | `hOffCPT2` | **no off-pair** on `[tPT2, ∞) × (0, continuumAnchorD0max]` (ELEVEN bound (d0max) ≈ 0.37334585610671857680118; TEN shape: ≈ 0.3733819666132075199290267786; NINE shape: 0.37338196661320752; EIGHTH shape: 0.3733819666133) | **THE TERMINAL FACE.** Open. | see §4 |
 
 ## 3. What the in-body squeeze proves (B10 audit, RHEnd.lean)
 
@@ -112,15 +124,17 @@ conditional into an unconditional `¬ offPair` needs exactly one more ingredient
    frontier/record extension above tPT2 — the external record layer (0126 route A,
    the B6-board family). Everything else is mechanical relative to this.
 2. **hzF** — adopt the strongest MERGED board [Z78]-class record. **ADOPTED at
-   #TEN (0256):** PR #103 `closest-fraction-contact` MERGED
-   2026-11-01T12:23:55Z (merge 8b1a0167) at the exact 127/127-digit rational
-   2804966284017490358030969257914123810640482798488248385236764587735806455694206308975383836842958115341512355256943573632654341/3211614609922119834694179379888743028634953588197852962423516288191911449231164741438582626063161096341458934143644085157872271; fire-time replay clean (stage C 236/236, stage D all gates at the
-   exact rational); in-tree successor `Z78FractionContact.lean` (B24, 13
-   theorems, terminal `rh_program78_stripfront_mach_unifiedFractionContact_PT2`);
+   #ELEVEN (0470):** PR #141 `continuum-anchor` MERGED
+   2026-11-13T08:28:53Z (merge a0a02126) at the exact 127/128-digit rational
+   9908119238306612133369374975000622988619121777878229799765263366946606045502455625911569003364955967645745531862430068266267717/11345012023616779600791582323373494582287250283647959965785871011074347975117040113347744503437234376916434871293982689424818700; fire-time replay clean (stage C 632/632, stage D all gates at the
+   exact rational); in-tree successor `Z78ContinuumAnchor.lean` (B25, 12
+   theorems + 6 named defs, terminal
+   `rh_program78_stripfront_mach_unifiedContinuumAnchor_PT2`);
    full tree green. B10.1-style margins are schedule-independent so the record
-   layer is orthogonal to (c). Next adoption (B25) fires on the first MERGED
-   record below θ = 2804966284017490358030969257914123810640482798488248385236764587735806455694206308975383836842958115341512355256943573632654341/3211614609922119834694179379888743028634953588197852962423516288191911449231164741438582626063161096341458934143644085157872271 — same runbook; board idle at the family contact
-   (no merged record below TEN as of 0256).
+   layer is orthogonal to (c). Next adoption (B26) fires on the first MERGED
+   record below θ = 9908119238306612133369374975000622988619121777878229799765263366946606045502455625911569003364955967645745531862430068266267717/11345012023616779600791582323373494582287250283647959965785871011074347975117040113347744503437234376916434871293982689424818700 — same runbook; board state at 0470: no merged record below ELEVEN (the companion
+   `continuum-exact-contact` shares the ranked fraction; `marked-anchor-induction`
+   is 9.4389e-07 above).
 3. **hPT2 / honline** — provenance-complete (Platt–Trudgian citation in tree;
    in-house screen data as cross-check). Optional hardening: pinned zero-stream
    checksums. Low priority; does not gate.

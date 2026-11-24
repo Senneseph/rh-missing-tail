@@ -143,6 +143,7 @@ import RhAttack.Z78DensityRefined
 import RhAttack.Z78ArviDensity
 import RhAttack.Z78PosReserve
 import RhAttack.Z78FractionContact
+import RhAttack.Z78ContinuumAnchor
 import RhAttack.W2Beyond0
 import RhAttack.A1Growth
 import RhAttack.W2Telescope
@@ -3827,102 +3828,109 @@ theorem rh_program78_stripfront_mach_unifiedGao_PT2_ofFineChain (q : ZeroSet)
     hOffCPT2
 
 
+
 /-!
-**Part  B24  -  the  tracker  board  moved  AGAIN:  [Z78FractionContact]
-supersedes  [Z78GapContact].**
+**Part  B25  -  the  tracker  board  moved  AGAIN:  [Z78ContinuumAnchor]
+supersedes  [Z78FractionContact].**
 
 The  B6  section-8  mechanism  (demonstrated  in  0133,  0142,  0162,
-0195,  0200,  0203,  0211,  0235,  0254)  runs  a  TENTH  time.  The
-merge-time  catalogue  pull  carries  PR  #103
-closest-fraction-contact  2804966284017490.../3211614609922119...
-(0.8733819666132075199...,  127/128-digit  exact  rational;  Joseph
-Bebel,  merged  2026-11-01T12:23:55Z  (merge  commit
-8b1a0167c8e324099884152181e3fb2206510e88))  -  the  current  BOARD  BEST  (second:
-saddle-closure-selected-gap,  T  +  9.732e-22),  an  all-moduli
-Dirichlet  nonvanishing  statement  whose  boundary  is  the  closest
-declarable  fraction  above  the  method-limiting  contact  (777  -
-sqrt  1081) / 852.  This  program  second-party  replayed  it  in  full
-(Stage  C:  independent  per-module  kernel  compilation,  236/236
-kernel-clean  against  the  NINTH  frozen  olean  root  +  gao5_replay
-deps,  lean  4.34.1;  identity  vs  NINTH  src:  202  byte-identical
-/  33  differs  /  1  new;  the  D1  union  D2  rebuild  set  (77)
-fresh,  plus  two  tip  modules;  Stage  D:  D1  canonical  Main.lean
-compile  rc=0;  #print  axioms  (fire-time,  merged  tree):
-Candidate.bound,  Qrh.PositiveGap.bound,
-Qrh.PositiveGap.beta_le_theta  all  =  [propext,  Classical.choice,
+0195,  0200,  0203,  0211,  0235,  0254,  0256)  runs  an  ELEVENTH  time.
+The  fire-time  catalogue  sweep  (2026-11-24;  56  records)  carries
+PR  #141  continuum-anchor  9908119238306612.../1134501202361677...
+(0.8733458561067185768...,  127/128-digit  exact  rational;  Joseph
+Bebel,  merged  2026-11-13T08:28:53Z  (merge  commit
+a0a0212652c3e97c36c917ee7b671e6c27a6d0fc))  -  the  current  BOARD  BEST  (companion:
+continuum-exact-contact  at  the  same  ranked  fraction  with  the  exact
+degree-nine  root  contact  below  it;  third:  marked-anchor-induction
+at  0.8733468),  an  all-moduli  Dirichlet  nonvanishing  statement
+extending  Sil's  PR137  coupled  marked-anchor  induction  with  zero
+stage  decrement,  finite  approximation  to  the  continuum  source
+curve,  an  averaged  physical  floor,  and  the  complete  certified
+return.  This  program  second-party  replayed  it  in  full  (Stage  C:
+independent  per-module  kernel  compilation,  631/631
+kernel-clean  against  the  TENTH  merged  olean  root  +  gao5_replay
+deps,  lean  4.34.1;  the  cone  is  self-contained  -  no  predecessor
+cross-imports;  Stage  D:  D1  canonical  Main.lean  compile;  #print
+axioms  (fire-time):  Candidate.bound  =  [propext,  Classical.choice,
 Quot.sound]  -  standard  class  only;  D3  zeta-consequence  (q=1)  at
-the  exact  rational  rc=0;  D4  sweep:  0  sorry  /  0  admit  /  0
-axiom  decls  /  0  native_decide  /  3  zeta-mention  files  in  the
-238-file  tree;  all  seven  predecessor  prefix  trees
-byte-identical  at  the  merge  commit  -  see  the  module  header  for
-the  complete  provenance  record).
-[Z78FractionContact]  is  the  strongest:  the  all-Dirichlet
-zero-free  half-plane  at  fractionContactUpper  =  2804966284017490.../3211614609922119...  =
-0.8733819666132075199...,  a  STRICT  STRENGTHENING  of
-[Z78GapContact]  (extFractionContact_implies_extGapContact;
-transitively  of  [Z78PosReserve],  [Z78ArviDensity],
-[Z78DensityRefined],  [Z78FineChain],  [Z78SIL32],  [Z78C],  [Z78G],
-[Z78T],  [Z78L],  [Z78]).  Zeros  of  an  actual  set  sit  in
-[1  -  fractionContactUpper,  fractionContactUpper],  so  every
-off-pair  satisfies  d0  <=  fractionContactD0max  =
-fractionContactUpper  -  1/2  =  0.373381966613207519...
-<  gapContactD0max  (offPairD0leFractionContact,  sharp).  The  open
-face  shrinks  from  (0,  gapContactD0max]  to  (0,
-fractionContactD0max],  the  [Z78FractionContact]-sharp  strip
-interior,  and  the  slice  (fractionContactD0max,
-gapContactD0max]  of  the  B23  face  is  closed  IN  BODY  from
-[Z78FractionContact]  itself.  The  step  removes  gapContactD0max
--  fractionContactD0max  =  1424616466408719580963882...237 /
-2007259131201324896683863...000  =  7.097e-20  of  face  width  -  the
-frontier  keeps  converging;  the  mechanism  is  unchanged  in  kind
-and  this  is  again  the  smallest  single  in-tree  face  shrink  of
-the  B-part  series  to  date.  No  RH  claim:  the  face  is  a
-zero-exclusion  statement  in  the  unverified  region;  the  input
-class  is  unchanged  in  kind  -  an  external  zero-free  half-plane,
-still  0.373381966613207519...  away  from  1/2  -  and  the  chain
-stays  a  REPEATABLE  MECHANISM  (B6  packet  section  8,  now
-demonstrated  on  a  TENTH  supersession):  a  newer  verified
-snapshot  of  the  tracker  frontier  supersedes  this  part
-mechanically.
+the  exact  rational;  D4  sweep:  0  sorry  /  0  admit  /  0  axiom
+decls  /  0  native_decide  in  the  633-file  tree  -  see  the
+module  header  for  the  complete  provenance  record).
+[Z78ContinuumAnchor]  is  the  strongest:  the  all-Dirichlet
+zero-free  half-plane  at  continuumAnchorUpper  =  9908119238306612.../
+1134501202361677...  =
+0.8733458561067185768...,  a  STRICT  STRENGTHENING  of
+[Z78FractionContact]  (extContinuumAnchor_implies_extFractionContact;
+transitively  of  [Z78GapContact],  [Z78PosReserve],
+[Z78ArviDensity],  [Z78DensityRefined],  [Z78FineChain],  [Z78SIL32],
+[Z78C],  [Z78G],  [Z78T],  [Z78L],  [Z78]).  Zeros  of  an  actual  set
+sit  in  [1  -  continuumAnchorUpper,  continuumAnchorUpper],  so
+every  off-pair  satisfies  d0  <=  continuumAnchorD0max  =
+continuumAnchorUpper  -  1/2  =  0.3733458561067185768...
+<  fractionContactD0max  (offPairD0leContinuumAnchor,  sharp).  The
+open  face  shrinks  from  (0,  fractionContactD0max]  to  (0,
+continuumAnchorD0max],  the  [Z78ContinuumAnchor]-sharp  strip
+interior,  and  the  slice  (continuumAnchorD0max,
+fractionContactD0max]  of  the  B24  face  is  closed  IN  BODY  from
+[Z78ContinuumAnchor]  itself.  The  step  removes
+fractionContactD0max  -  continuumAnchorD0max  =
+3.61105064889431278419825e-05  of  face  width  -  the  LARGEST
+in-tree  face  shrink  since  the  B17  step  (7.779897e-4)  and  by
+far  the  largest  of  the  dense-ladder  era:  it  breaks  the
+method-contact  plateau  that  the  NINTH  (9.248e-14)  and  TENTH
+(7.097e-20)  steps  had  reached  -  a  factor  of  ~5e14  over  the
+TENTH  step  -  because  a  genuinely  different  method  family
+(the  continuum  marked-anchor  lineage)  has  overtaken  the
+closest-fraction  family;  the  mechanism  is  unchanged  in  kind
+and  the  chain  stays  a
+REPEATABLE  MECHANISM  (B6  packet  section  8,  now  demonstrated  on
+an  ELEVENTH  supersession):  a  newer  verified  snapshot  of  the
+tracker  frontier  supersedes  this  part  mechanically.  No  RH
+claim:  the  face  is  a  zero-exclusion  statement  in  the
+unverified  region;  the  input  class  is  unchanged  in  kind  -  an
+external  zero-free  half-plane,  still
+0.3733458561067185768...  away  from  1/2  -  and  the  gap  to  1/2
+is  the  open  research  object  (the  terminal  face  family),  not  a
+claim.
 -/
 
-/--  B24.1  THE  OUTER  SLICE  OF  THE  pre-B24  FACE  IS  CLOSED  IN
-    BODY  FROM  [Z78FractionContact]:  for  an  actual-set  zero  set,
-    no  off-pair  with  d0  >  fractionContactD0max  (of  any  height
-    t0  >  0):  offPairD0leFractionContact  already  bounds  every
-    off-pair  to  d0  <=  fractionContactD0max.  In  particular  the
-    slice  (fractionContactD0max,  gapContactD0max]  of  the  B23
-    face  (and  a  fortiori  (fractionContactD0max,  sil32D0max],
-    (fractionContactD0max,  colletD0max],  (fractionContactD0max,
-    gaoD0max],  (fractionContactD0max,  qxD0max],
-    (fractionContactD0max,  3/8])  needs  no  face  at  all.  No  RH
+/--  B25.1  THE  OUTER  SLICE  OF  THE  pre-B25  FACE  IS  CLOSED  IN
+    BODY  FROM  [Z78ContinuumAnchor]:  for  an  actual-set  zero  set,
+    no  off-pair  with  d0  >  continuumAnchorD0max  (of  any  height
+    t0  >  0):  offPairD0leContinuumAnchor  already  bounds  every
+    off-pair  to  d0  <=  continuumAnchorD0max.  In  particular  the
+    slice  (continuumAnchorD0max,  gapContactD0max]  of  the  B23
+    face  (and  a  fortiori  (continuumAnchorD0max,  sil32D0max],
+    (continuumAnchorD0max,  colletD0max],  (continuumAnchorD0max,
+    gaoD0max],  (continuumAnchorD0max,  qxD0max],
+    (continuumAnchorD0max,  3/8])  needs  no  face  at  all.  No  RH
     claim.  -/
-theorem rhend_sliceFractionContactExcl (q : ZeroSet)
-    (hzF : Z78FractionContact.externalZeroFree78FractionContact)
+theorem rhend_sliceContinuumAnchorExcl (q : ZeroSet)
+    (hzF : Z78ContinuumAnchor.externalZeroFree78ContinuumAnchor)
     (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
     (t0 d0 : ℝ) (ht0 : 0 < t0) (hd0 : 0 < d0)
-    (hC : Z78FractionContact.fractionContactD0max < d0) :
+    (hC : Z78ContinuumAnchor.continuumAnchorD0max < d0) :
     ¬ offPair q t0 d0 := by
   intro hp
-  have hle := Z78FractionContact.offPairD0leFractionContact q hzF hqz t0 d0
+  have hle := Z78ContinuumAnchor.offPairD0leContinuumAnchor q hzF hqz t0 d0
     ht0 hd0 hp
   linarith
 
-/--  B24.2  THE  DENSITY-SPLIT-UNIFIED  ENDPOINT:  the  B12
+/--  B25.2  THE  DENSITY-SPLIT-UNIFIED  ENDPOINT:  the  B12
     endpoint  with  the  external  input  upgraded
-    [Z78]  ->  [Z78FractionContact]  and  the  face  shrunk  to
-    0  <  d0  <=  fractionContactD0max  (the
-    [Z78FractionContact]-sharp  strip  interior,
-    fractionContactD0max  =  fractionContactUpper  -  1/2  =
+    [Z78]  ->  [Z78ContinuumAnchor]  and  the  face  shrunk  to
+    0  <  d0  <=  continuumAnchorD0max  (the
+    [Z78ContinuumAnchor]-sharp  strip  interior,
+    continuumAnchorD0max  =  continuumAnchorUpper  -  1/2  =
     0.373381966613207519...).  Above  H,  any  off-pair  has
-    d0  <=  fractionContactD0max  BY  [Z78FractionContact]
-    (offPairD0leFractionContact)  before  the  face  is  applied  -  the
+    d0  <=  continuumAnchorD0max  BY  [Z78ContinuumAnchor]
+    (offPairD0leContinuumAnchor)  before  the  face  is  applied  -  the
     d0  <=  1/2  split  of  B11  stays  away  in  the  S1/S3
     legs  and  in  the  S4-covered  leg;  the  far  region  (d0
     >  1/2)  is  closed  by  the  [Z78]  derived  from
-    [Z78FractionContact].  No  RH  claim.  -/
-theorem rh_program78_stripfront_mach_unifiedFractionContact (q : ZeroSet)
-    (hzF : Z78FractionContact.externalZeroFree78FractionContact)
+    [Z78ContinuumAnchor].  No  RH  claim.  -/
+theorem rh_program78_stripfront_mach_unifiedContinuumAnchor (q : ZeroSet)
+    (hzF : Z78ContinuumAnchor.externalZeroFree78ContinuumAnchor)
     (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
     (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) → (|ρ.im| : ℝ) <
       (707 : ℝ) / 50 → ρ.re = 1 / 2)
@@ -3930,27 +3938,27 @@ theorem rh_program78_stripfront_mach_unifiedFractionContact (q : ZeroSet)
     (H : ℝ) (hH : 1000 ≤ H)
     (hPT : WinC.allOnLineUpTo q H)
     (hOffC : ∀ (t0 d0 : ℝ), H ≤ t0 → 0 < d0 →
-      d0 ≤ Z78FractionContact.fractionContactD0max → ¬ offPair q t0 d0) :
+      d0 ≤ Z78ContinuumAnchor.continuumAnchorD0max → ¬ offPair q t0 d0) :
     RH q := by
   have hz78 : Z78.externalZeroFree78 :=
-    Z78FractionContact.extFractionContact_implies_ext78 hzF
+    Z78FractionContact.extContinuumAnchor_implies_ext78 hzF
   refine S4A.rh_from_regime_closures q Qside Z78P12.MfP devProg
     Z78P12.BwireP (fun p => MrLift p.1 p.2) floProg
     ?_ ?_ ?_ ?_ ?_ ?_
   · --  S1  witness  leg:  below  H  =  vacuous  (the  record);
-      --  above  H:  [Z78FractionContact]  bounds  d0  to
-      --  fractionContactD0max,  the  face  kills.
+      --  above  H:  [Z78ContinuumAnchor]  bounds  d0  to
+      --  continuumAnchorD0max,  the  face  kills.
     intro t0 d0 ht0 hd0 hp
     by_cases hle : t0 ≤ H
     · exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
         (le_of_lt ht0) hle) d0 hp)
-    · have hL : d0 ≤ Z78FractionContact.fractionContactD0max :=
-        Z78FractionContact.offPairD0leFractionContact q hzF hqz t0 d0
+    · have hL : d0 ≤ Z78ContinuumAnchor.continuumAnchorD0max :=
+        Z78ContinuumAnchor.offPairD0leContinuumAnchor q hzF hqz t0 d0
         ht0 hd0 hp
       exact False.elim ((hOffC t0 d0
         (le_of_lt (not_le.mp hle)) hd0 hL) hp)
   · --  S2  leg:  covered  =  in  body;  low  band  =  vacuous
-      --  below  H;  far  =  [Z78]  (from  [Z78FractionContact]).
+      --  below  H;  far  =  [Z78]  (from  [Z78ContinuumAnchor]).
     intro t0 d0 ht0 hd0 hp
     by_cases hd0h : d0 ≤ (1 / 2 : ℝ)
     · by_cases ht0k : 1000 ≤ t0
@@ -3961,79 +3969,79 @@ theorem rh_program78_stripfront_mach_unifiedFractionContact (q : ZeroSet)
     · exact False.elim (Z78P12.offPairFarEmpty q hz78 hqz t0 d0
         (not_le.mp hd0h) hp)
   · --  S3  leg:  below  H  =  vacuous  (the  record);  above  H:
-      --  [Z78FractionContact]  bounds  d0  to
-      --  fractionContactD0max,  the  face  kills.
+      --  [Z78ContinuumAnchor]  bounds  d0  to
+      --  continuumAnchorD0max,  the  face  kills.
     intro t0 d0 ht0 hd0 hp
     by_cases hle : t0 ≤ H
     · exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
         (le_of_lt ht0) hle) d0 hp)
-    · have hL : d0 ≤ Z78FractionContact.fractionContactD0max :=
-        Z78FractionContact.offPairD0leFractionContact q hzF hqz t0 d0
+    · have hL : d0 ≤ Z78ContinuumAnchor.continuumAnchorD0max :=
+        Z78ContinuumAnchor.offPairD0leContinuumAnchor q hzF hqz t0 d0
         ht0 hd0 hp
       exact False.elim ((hOffC t0 d0
         (le_of_lt (not_le.mp hle)) hd0 hL) hp)
   · --  S4  covered:  below  H  =  vacuous  (the  record);
-      --  above  H:  [Z78FractionContact]  bounds  d0  to
-      --  fractionContactD0max,  the  face  kills.
+      --  above  H:  [Z78ContinuumAnchor]  bounds  d0  to
+      --  continuumAnchorD0max,  the  face  kills.
     intro t0 d0 ht0 hd0 hd0u hp
     by_cases hle : t0 ≤ H
     · exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
         (by linarith [ht0]) hle) d0 hp)
-    · have hL : d0 ≤ Z78FractionContact.fractionContactD0max :=
-        Z78FractionContact.offPairD0leFractionContact q hzF hqz t0 d0
+    · have hL : d0 ≤ Z78ContinuumAnchor.continuumAnchorD0max :=
+        Z78ContinuumAnchor.offPairD0leContinuumAnchor q hzF hqz t0 d0
         (show 0 < t0 from by linarith [ht0]) hd0 hp
       exact False.elim ((hOffC t0 d0
         (le_of_lt (not_le.mp hle)) hd0 hL) hp)
   · --  S4  low:  covered  low  band  below  H;  the  d0  <= 1/2  part
       --  of  the  low  band  is  vacuous  (the  record)  below  H;
-      --  above  H  the  face  covers  (fractionContactD0max  <  1/2).
+      --  above  H  the  face  covers  (continuumAnchorD0max  <  1/2).
     intro t0 d0 ht0 ht0u hd0 hd0u hp
     by_cases hle : t0 ≤ H
     · exact False.elim ((WinC.noOffLineBelowPT q H hPT t0
         (le_of_lt ht0) hle) d0 hp)
-    · have hL : d0 ≤ Z78FractionContact.fractionContactD0max :=
-        Z78FractionContact.offPairD0leFractionContact q hzF hqz t0 d0
+    · have hL : d0 ≤ Z78ContinuumAnchor.continuumAnchorD0max :=
+        Z78ContinuumAnchor.offPairD0leContinuumAnchor q hzF hqz t0 d0
         ht0 hd0 hp
       exact False.elim ((hOffC t0 d0
         (le_of_lt (not_le.mp hle)) hd0 hL) hp)
-  · --  S4  far:  [Z78]  (from  [Z78FractionContact]).
+  · --  S4  far:  [Z78]  (from  [Z78ContinuumAnchor]).
     intro t0 d0 ht0 hd0 hd0f hp
     exact False.elim (Z78P12.offPairFarEmpty q hz78 hqz t0 d0
       hd0f hp)
 
-/--  B24.3  THE  DENSITY-SPLIT  ENDPOINT  AT  THE  PLATT-TRUDGIAN
+/--  B25.3  THE  DENSITY-SPLIT  ENDPOINT  AT  THE  PLATT-TRUDGIAN
     FRONTIER  (the  [Z-PT2]  instantiation):  the  entire  named
     residue  lives  STRICTLY  ABOVE  3,000,175,332,800,  as  ONE
     zero-exclusion  face  (no  off-pair  in  0  <  d0  <=
-    fractionContactD0max  above  the  frontier  -  the
-    [Z78FractionContact]-sharp  strip  interior)  plus
-    [Z78FractionContact]  itself  (which  closes  d0  >
-    fractionContactD0max  in  body).  No  RH  claim.  -/
-theorem rh_program78_stripfront_mach_unifiedFractionContact_PT2 (q : ZeroSet)
-    (hzF : Z78FractionContact.externalZeroFree78FractionContact)
+    continuumAnchorD0max  above  the  frontier  -  the
+    [Z78ContinuumAnchor]-sharp  strip  interior)  plus
+    [Z78ContinuumAnchor]  itself  (which  closes  d0  >
+    continuumAnchorD0max  in  body).  No  RH  claim.  -/
+theorem rh_program78_stripfront_mach_unifiedContinuumAnchor_PT2 (q : ZeroSet)
+    (hzF : Z78ContinuumAnchor.externalZeroFree78ContinuumAnchor)
     (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
     (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) → (|ρ.im| : ℝ) <
       (707 : ℝ) / 50 → ρ.re = 1 / 2)
     (Qside : ℝ × ℝ → ℝ)
     (hPT2 : WinC.allOnLineUpTo q WinC.tPT2)
     (hOffCPT2 : ∀ (t0 d0 : ℝ), WinC.tPT2 ≤ t0 → 0 < d0 →
-      d0 ≤ Z78FractionContact.fractionContactD0max → ¬ offPair q t0 d0) :
+      d0 ≤ Z78ContinuumAnchor.continuumAnchorD0max → ¬ offPair q t0 d0) :
     RH q :=
-  rh_program78_stripfront_mach_unifiedFractionContact q hzF hqz honline
+  rh_program78_stripfront_mach_unifiedContinuumAnchor q hzF hqz honline
     Qside WinC.tPT2 (by norm_num [WinC.tPT2]) hPT2 hOffCPT2
 
-/--  B24.4  THE  0142  GAO  ENDPOINT  AS  A  THEOREM  OF  THE
-    [Z78FractionContact]  ENDPOINT  (in  body):  given  the
-    [Z78FractionContact]  input  and  its  terminal  face  hOffC  on
-    0  <  d0  <=  fractionContactD0max,  the  older  five-step-form
+/--  B25.4  THE  0142  GAO  ENDPOINT  AS  A  THEOREM  OF  THE
+    [Z78ContinuumAnchor]  ENDPOINT  (in  body):  given  the
+    [Z78ContinuumAnchor]  input  and  its  terminal  face  hOffC  on
+    0  <  d0  <=  continuumAnchorD0max,  the  older  five-step-form
     endpoint  follows  --  the  gao  face  (0  <  d0  <=  gaoD0max)
-    splits  into  the  fractionContactD0max  half  (the  hOffC  face)
-    and  the  slice  (fractionContactD0max,  gaoD0max]  (closed  in
-    body  from  [Z78FractionContact]).  The  0142  terminal
-    statement  is  thus  a  THEOREM  of  the  B24  one.  No  RH  claim.
+    splits  into  the  continuumAnchorD0max  half  (the  hOffC  face)
+    and  the  slice  (continuumAnchorD0max,  gaoD0max]  (closed  in
+    body  from  [Z78ContinuumAnchor]).  The  0142  terminal
+    statement  is  thus  a  THEOREM  of  the  B25  one.  No  RH  claim.
     -/
-theorem rh_program78_stripfront_mach_unifiedGao_ofFractionContact (q : ZeroSet)
-    (hzF : Z78FractionContact.externalZeroFree78FractionContact)
+theorem rh_program78_stripfront_mach_unifiedGao_ofContinuumAnchor (q : ZeroSet)
+    (hzF : Z78ContinuumAnchor.externalZeroFree78ContinuumAnchor)
     (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
     (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) → (|ρ.im| : ℝ) <
       (707 : ℝ) / 50 → ρ.re = 1 / 2)
@@ -4041,32 +4049,32 @@ theorem rh_program78_stripfront_mach_unifiedGao_ofFractionContact (q : ZeroSet)
     (H : ℝ) (hH : 1000 ≤ H)
     (hPT : WinC.allOnLineUpTo q H)
     (hOffC : ∀ (t0 d0 : ℝ), H ≤ t0 → 0 < d0 →
-      d0 ≤ Z78FractionContact.fractionContactD0max → ¬ offPair q t0 d0) :
+      d0 ≤ Z78ContinuumAnchor.continuumAnchorD0max → ¬ offPair q t0 d0) :
     RH q := by
   have hzG : Z78Gao.externalZeroFree78Gao :=
-    Z78FractionContact.extFractionContact_implies_extGao hzF
+    Z78FractionContact.extContinuumAnchor_implies_extGao hzF
   apply rh_program78_stripfront_mach_unifiedGao q hzG hqz
     honline Qside H hH hPT
   intro t0 d0 ht0 hd0 hd0G hp
-  by_cases hleC : d0 ≤ Z78FractionContact.fractionContactD0max
+  by_cases hleC : d0 ≤ Z78ContinuumAnchor.continuumAnchorD0max
   · exact False.elim ((hOffC t0 d0 ht0 hd0 hleC) hp)
-  · exact False.elim (rhend_sliceFractionContactExcl q hzF hqz t0 d0
+  · exact False.elim (rhend_sliceContinuumAnchorExcl q hzF hqz t0 d0
       (by linarith [ht0, hH]) hd0 (not_le.mp hleC) hp)
 
-/--  B24.5  THE  [Z-PT2]  INSTANCE  OF  B24.4  (the  0142
-    terminal  statement  at  tPT2  is  a  theorem  of  the  B24
+/--  B25.5  THE  [Z-PT2]  INSTANCE  OF  B25.4  (the  0142
+    terminal  statement  at  tPT2  is  a  theorem  of  the  B25
     endpoint  with  the  [Z-PT2]  record).  No  RH  claim.  -/
-theorem rh_program78_stripfront_mach_unifiedGao_PT2_ofFractionContact (q : ZeroSet)
-    (hzF : Z78FractionContact.externalZeroFree78FractionContact)
+theorem rh_program78_stripfront_mach_unifiedGao_PT2_ofContinuumAnchor (q : ZeroSet)
+    (hzF : Z78ContinuumAnchor.externalZeroFree78ContinuumAnchor)
     (hqz : ∀ ρ ∈ q.Z, riemannZeta ρ = 0)
     (honline : ∀ ρ ∈ q.Z, 0 < (|ρ.im| : ℝ) → (|ρ.im| : ℝ) <
       (707 : ℝ) / 50 → ρ.re = 1 / 2)
     (Qside : ℝ × ℝ → ℝ)
     (hPT2 : WinC.allOnLineUpTo q WinC.tPT2)
     (hOffCPT2 : ∀ (t0 d0 : ℝ), WinC.tPT2 ≤ t0 → 0 < d0 →
-      d0 ≤ Z78FractionContact.fractionContactD0max → ¬ offPair q t0 d0) :
+      d0 ≤ Z78ContinuumAnchor.continuumAnchorD0max → ¬ offPair q t0 d0) :
     RH q :=
-  rh_program78_stripfront_mach_unifiedGao_ofFractionContact q hzF hqz
+  rh_program78_stripfront_mach_unifiedGao_ofContinuumAnchor q hzF hqz
     honline Qside WinC.tPT2 (by norm_num [WinC.tPT2]) hPT2
     hOffCPT2
 

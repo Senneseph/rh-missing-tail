@@ -432,7 +432,37 @@ the machine wire and names the residue:
      (1.7e-4, 1.8e-4), as exact Q statements), and the strict
      product lemma (t4LD_productStrict: the measured joint count
      of 0 points carries a strict margin, not a knife touch). Full
-     tree green (17454 jobs), no RH claim. STATUS NOTE (0256,
+     tree green (17454 jobs), no RH claim. STATUS NOTE (0470,
+     2026-11-24): the [Z78] record layer ADVANCED AGAIN - and the
+     method family CHANGED: board record `continuum-anchor` (PR #141,
+     Joseph Bebel) MERGED 2026-11-13T08:28:53Z (merge a0a02126) at the
+     exact 127/128-digit rational 9908119238306612133369374975000622988619121777878229799765263366946606045502455625911569003364955967645745531862430068266267717
+     / 11345012023616779600791582323373494582287250283647959965785871011074347975117040113347744503437234376916434871293982689424818700
+     = 0.8733458561067185768... - 3.611050648894313e-05 below the TENTH
+     anchor, the LARGEST in-tree face shrink since the B17 step
+     (7.779897e-4) and a factor of ~5e14 over the TENTH step: the
+     closest-fraction method-contact plateau (NINE 9.248e-14, TENTH
+     7.097e-20 at the contact (777 - sqrt(1081))/852) is BROKEN by a
+     genuinely different method family - continuum marked-anchor
+     induction (extending Sil's PR137 with zero stage decrement, finite
+     approximation to the continuum source curve, an averaged physical
+     floor, and the complete certified return; the submitted rational
+     is the upper Farey neighbour of the degree-nine contact with the
+     256-character declaration limit; exact-root nonvanishing is not
+     asserted); fire-time replay clean (stage C 632/632 kernel-clean,
+     self-contained cone, snapshot 632/632 byte-identical; stage D:
+     canonical compile rc=0, axioms = standard class only [propext,
+     Classical.choice, Quot.sound], zeta-consequence (q=1) at the
+     EXACT 127/128-digit rational rc=0 (tip-direct probe - the replay
+     root carries a stale predecessor Main.olean), static sweep 0
+     sorry / 0 admit / 0 axiom decls / 0 native_decide over the
+     633-file tree); in-tree successor B25
+     (`formal/RhAttack/Z78ContinuumAnchor.lean`, 12 theorems + 6 named
+     defs, terminal endpoint
+     `rh_program78_stripfront_mach_unifiedContinuumAnchor_PT2`),
+     full tree green (17454 jobs); TEN/EIGHTH modules remain in the
+     tree as predecessor refs (in-place supersession convention).
+     STATUS NOTE (0256,
      2026-11-01): the [Z78] record layer ADVANCED AGAIN: board record
      `closest-fraction-contact` (PR #103, Joseph Bebel) MERGED
      2026-11-01T12:23:55Z (merge 8b1a0167) at the exact 127/127-digit

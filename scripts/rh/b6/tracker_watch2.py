@@ -35,10 +35,10 @@ CATALOGUE = 'https://gtimg.github.io/QuasiRiemannTracker/catalogue.json'
 PULLS = 'https://api.github.com/repos/GTimG/QuasiRiemannTracker/pulls?state=open&per_page=100'
 LEADER = 'https://bigospeedrun.com/other/quasi-riemann'
 # [Z78FractionContact] closest-fraction-contact PR #103 (0256; was positive-gap-contact-return PR #101, 0254; was positive-reserve-selected-gap PR #99, 0235)
-ADOPTED_EX = Fraction(int('2804966284017490358030969257914123810640482798488248385236764587735806455694206308975383836842958115341512355256943573632654341'), int('3211614609922119834694179379888743028634953588197852962423516288191911449231164741438582626063161096341458934143644085157872271'))  # exact T
+ADOPTED_EX = Fraction(int('9908119238306612133369374975000622988619121777878229799765263366946606045502455625911569003364955967645745531862430068266267717'), int('11345012023616779600791582323373494582287250283647959965785871011074347975117040113347744503437234376916434871293982689424818700'))  # exact T (0470: #ELEVEN continuum-anchor, supersedes #TEN)
 ADOPTED = float(ADOPTED_EX)          # display / float fallback only
-ADOPTED_RAT = '2804966284017490358030969257914123810640482798488248385236764587735806455694206308975383836842958115341512355256943573632654341/3211614609922119834694179379888743028634953588197852962423516288191911449231164741438582626063161096341458934143644085157872271'
-ADOPTED_ID = 'closest-fraction-contact'
+ADOPTED_RAT = '9908119238306612133369374975000622988619121777878229799765263366946606045502455625911569003364955967645745531862430068266267717/11345012023616779600791582323373494582287250283647959965785871011074347975117040113347744503437234376916434871293982689424818700'
+ADOPTED_ID = 'continuum-anchor'
 SEEN_PRS = os.path.join(T, 'watcher_seen_prs.json')
 ALERT = os.path.join(T, 'WATCHER_ALERT.json')
 
@@ -210,11 +210,11 @@ def main():
     if stronger:
         print(f'[watch] !!! B6 FIRES: {len(stronger)} MERGED record(s) '
               f'strictly below the adopted face:')
-        for v, rid, m in stronger:
+        for v, ex, rid, m in stronger:
             print(f'[watch]     {v:.12f}  {rid}  merged={m}')
         alert(1, f'{len(stronger)} merged record(s) below the anchor; '
-                 f'top {stronger[0][0]:.12f} ({stronger[0][1]})',
-              [{'theta': v, 'id': i, 'merged': m} for v, i, m in stronger])
+                 f'top {stronger[0][0]:.12f} ({stronger[0][2]})',
+              [{'theta': v, 'id': i, 'merged': m} for v, ex, i, m in stronger])
         sys.exit(10)
     pending = []
     if pr_flags:

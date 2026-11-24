@@ -597,6 +597,35 @@ residual-pin structure.
 
 CORRECTION to the earlier pre-stage note (this turn's first version
 
+**B6-FIRED-ELEVEN (0470, 2026-11-24):** the board record
+`continuum-anchor` (PR #141, Joseph Bebel) MERGED
+2026-11-13T08:28:53Z (merge a0a02126) at the exact 127/128-digit rational
+9908119238306612133369374975000622988619121777878229799765263366946606045502455625911569003364955967645745531862430068266267717
+/ 11345012023616779600791582323373494582287250283647959965785871011074347975117040113347744503437234376916434871293982689424818700
+(≈ 0.8733458561067185768...; 3.611050648894313e-05 below TEN - the
+LARGEST in-tree face shrink since the B17 step 7.779897e-4; the
+method-contact plateau of NINE/TENTH is broken).  Fire-time sweep:
+56 records, 3 merged records below the TEN anchor (continuum-anchor,
+continuum-exact-contact at the same ranked fraction with the exact
+degree-nine root contact, marked-anchor-induction at 0.8733468).
+Fire-time replay 100% clean (stage C 632/632 kernel-clean - self-
+contained cone, snapshot 632/632 byte-identical, hard-linked TENTH
+root, lean 4.34.1; stage D: canonical rc=0, axioms standard class
+[propext, Classical.choice, Quot.sound], zeta-consequence at the
+EXACT rational rc=0 via a tip-direct probe (the replay root carries
+a stale predecessor Main.olean - recorded as a probe-design note),
+sweep 0/0/0/0 over 633 files).  In-tree successor: `Z78ContinuumAnchor.lean`
+(B25, 12 theorems + 6 named defs; proof bodies byte-faithful from the
+TENTH module, mechanically renamed) + RHEnd Part B25 in place of B24;
+full tree green (17454 jobs); zero warnings on new files.  METHOD-
+FAMILY CONTENT: the ladder's last two steps sat at the closest-
+fraction contact (777 - sqrt(1081))/852; this step comes from the
+continuum marked-anchor family (Sil PR137 extension: zero stage
+decrement, continuum source curve, averaged physical floor, complete
+certified return) - the repeatable-mechanism claim demonstrated at a
+method-family boundary, not within a family.  Watcher re-anchored to
+the ELEVEN rational.  No RH claim.  (B6-FIRED-TEN (0256): see below.)
+
 **B6-FIRED-TEN (0256, 2026-11-01):** the board record
 `closest-fraction-contact` (PR #103, Joseph Bebel) MERGED
 2026-11-01T12:23:55Z (merge 8b1a0167) at the exact 127/127-digit rational
