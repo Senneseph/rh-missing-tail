@@ -15,7 +15,7 @@ import gen_cen
 ROOT = gen_cen.ROOT
 UNITW = {97: "NINETY-SEVENTH", 98: "NINETY-EIGHTH", 99: "NINETY-NINTH", 100: "ONE-HUNDREDTH",
          101: "ONE-HUNDRED-FIRST", 102: "ONE-HUNDRED-SECOND", 103: "ONE-HUNDRED-THIRD",
-         104: "ONE-HUNDRED-FOURTH", 105: "ONE-HUNDRED-FIFTH", 106: "ONE-HUNDRED-SIXTH", 107: "ONE-HUNDRED-SEVENTH", 108: "ONE-HUNDRED-EIGHTH", 109: "ONE-HUNDRED-NINTH", 110: "ONE-HUNDRED-TENTH", 111: "ONE-HUNDRED-ELVENTH", 112: "ONE-HUNDRED-TWELFTH", 113: "ONE-HUNDRED-THIRTEENTH", 114: "ONE-HUNDRED-FOURTEENTH", 115: "ONE-HUNDRED-FIFTEENTH", 116: "ONE-HUNDRED-SIXTEENTH", 117: "ONE-HUNDRED-SEVENTEENTH", 118: "ONE-HUNDRED-EIGHTEENTH", 119: "ONE-HUNDRED-NINETEENTH", 120: "ONE-HUNDRED-TWENTIETH", 121: "ONE-HUNDRED-TWENTY-FIRST", 122: "ONE-HUNDRED-TWENTY-SECOND", 123: "ONE-HUNDRED-TWENTY-THIRD", 124: "ONE-HUNDRED-TWENTY-FOURTH", 125: "ONE-HUNDRED-TWENTY-FIFTH", 126: "ONE-HUNDRED-TWENTY-SIXTH", 127: "ONE-HUNDRED-TWENTY-SEVENTH", 128: "ONE-HUNDRED-TWENTY-EIGHTH", 129: "ONE-HUNDRED-TWENTY-NINTH", 130: "ONE-HUNDRED-THIRTIETH", 131: "ONE-HUNDRED-THIRTY-FIRST", 132: "ONE-HUNDRED-THIRTY-SECOND", 133: "ONE-HUNDRED-THIRTY-THIRD", 134: "ONE-HUNDRED-THIRTY-FOURTH", 135: "ONE-HUNDRED-THIRTY-FIFTH", 136: "ONE-HUNDRED-THIRTY-SIXTH"}
+         104: "ONE-HUNDRED-FOURTH", 105: "ONE-HUNDRED-FIFTH", 106: "ONE-HUNDRED-SIXTH", 107: "ONE-HUNDRED-SEVENTH", 108: "ONE-HUNDRED-EIGHTH", 109: "ONE-HUNDRED-NINTH", 110: "ONE-HUNDRED-TENTH", 111: "ONE-HUNDRED-ELVENTH", 112: "ONE-HUNDRED-TWELFTH", 113: "ONE-HUNDRED-THIRTEENTH", 114: "ONE-HUNDRED-FOURTEENTH", 115: "ONE-HUNDRED-FIFTEENTH", 116: "ONE-HUNDRED-SIXTEENTH", 117: "ONE-HUNDRED-SEVENTEENTH", 118: "ONE-HUNDRED-EIGHTEENTH", 119: "ONE-HUNDRED-NINETEENTH", 120: "ONE-HUNDRED-TWENTIETH", 121: "ONE-HUNDRED-TWENTY-FIRST", 122: "ONE-HUNDRED-TWENTY-SECOND", 123: "ONE-HUNDRED-TWENTY-THIRD", 124: "ONE-HUNDRED-TWENTY-FOURTH", 125: "ONE-HUNDRED-TWENTY-FIFTH", 126: "ONE-HUNDRED-TWENTY-SIXTH", 127: "ONE-HUNDRED-TWENTY-SEVENTH", 128: "ONE-HUNDRED-TWENTY-EIGHTH", 129: "ONE-HUNDRED-TWENTY-NINTH", 130: "ONE-HUNDRED-THIRTIETH", 131: "ONE-HUNDRED-THIRTY-FIRST", 132: "ONE-HUNDRED-THIRTY-SECOND", 133: "ONE-HUNDRED-THIRTY-THIRD", 134: "ONE-HUNDRED-THIRTY-FOURTH", 135: "ONE-HUNDRED-THIRTY-FIFTH", 136: "ONE-HUNDRED-THIRTY-SIXTH", 137: "ONE-HUNDRED-THIRTY-SEVENTH"}
 
 FRONTR = {
     98: dict(
@@ -1441,7 +1441,68 @@ FRONTR = {
                    "determined and rescued (fresh 4/4 five-glyph + fresh 7/7 "
                    "eight-glyph); W136 FULL 20 000, CLEAN - zero recorded interior "
                    "failures"),
+    ),    137: dict(
+        entry="0471",
+        hdr_summary=("the 640 000 UNIT ROUND MARK was crossed at CE137 [0471], margin 188 - exactly"
+                     "the expected window of the 0469 schedule (640000, 137, [0471]); the 2 720 000"
+                     "CERTIFIED-ZERO mark (the 2.72-million round mark of the census lane) was"
+                     "CROSSED IN THIS WINDOW (margin 19 992; as tabled); W137 is the FULL-width"
+                     "window with TWO recorded interior Rosser failure blocks - both determined and"
+                     "rescued (fresh 4/4 on a five-glyph union + fresh 4/4 on a five-glyph union;"
+                     "the fresh grid at least doubles the pipeline’s rescue m: fresh m = 8 / 8);"
+                     "the STANDARD 4 673 floor increment (second consecutive standard step after"
+                     "W135’s sub-standard 4 672); the endpoint record ROTATES from -86 back to the"
+                     "-84 dyadic family (a revisited family - seven distinct families attested so"
+                     "far, recorded data, no pattern claim)"),
+        abovept2=("This is the 620 000-unit round-mark crossing (margin 1 497) recorded at CE133"
+                  "(0466): the unit-margin series now stands at 621 497 above tPT2 (the 500 000"
+                  "milestone [0440] carries 121 497; the census lane crossed its 2 640 000 round"
+                  "mark in the same window). (CE100 was the TAIL window that LANDED the 2 000"
+                  "000 census program target [0421]; the post-target extension continues: CE101"
+                  "(full 20 000, fresh 4/4), CE102 (SNAPPED 19 999, CLEAN), CE103 (SNAPPED 19"
+                  "997, CLEAN; 2 040 000 crossed mid-window), CE104 (full 20 000, fresh 6/6; 2"
+                  "060 000 crossed), CE105 (full 20 000, fresh 4/4; 2 080 000 crossed), CE106"
+                  "(full 20 000, fresh 5/5; 2 100 000 crossed), CE107 (SNAPPED 19 999, fresh"
+                  "4/4; 2 120 000 crossed; 500 000 unit mark, margin 1), CE108 (full 20 000,"
+                  "three failures - first multi-failure window - fresh 5/5 on each; 2 140 000"
+                  "crossed), CE109 (full 20 000, fresh 5/5; 2 160 000 + 505 000 crossed), CE110"
+                  "(SNAPPED 19 999, CLEAN; 2 180 000 + 510 000 crossed), CE111 (full 20 000,"
+                  "CLEAN; 2 200 000 + 515 000 crossed), CE112 (full 20 000, three failures -"
+                  "fresh 4/4, 5/5, 4/4; 2 220 000 + 520 000 crossed), CE113 (SNAPPED 19 999,"
+                  "fresh 5/5; 2 240 000 + 525 000 crossed), CE114 (full 20 000, fresh 4/4; 2 260"
+                  "000 + 530 000 crossed), CE115 (full 20 000, CLEAN; 2 280 000 + 535 000"
+                  "crossed), CE116 (full 20 000, two failures - fresh 4/4, 4/4; 2 300 000 + 540"
+                  "000 crossed), CE117 (full 20 000, one failure on a wide six-glyph union -"
+                  "fresh 5/5; 2 320 000 + 545 000 crossed), CE118 (full 20 000, CLEAN; 2 340 000"
+                  "+ 550 000 crossed), CE119 (full 20 000, CLEAN; 2 360 000 + 555 000 crossed),"
+                  "CE120 (full 20 000, two failures including the first four-gram block - fresh"
+                  "7/7 + 4/4; 2 380 000 + 560 000 crossed), CE121 (full 20 000, two failures on"
+                  "wide six-glyph unions - fresh 5/5, 5/5; 2 400 000 + 565 000 crossed), CE122"
+                  "(full 20 000, two failures - fresh 4/4 + 6/6 on the first seven-glyph union;"
+                  "2 420 000 + 570 000 crossed), CE123 (full 20 000, one failure fresh 4/4,"
+                  "SUB-STANDARD 4 672 increment; 2 440 000 crossed; 575 000 NOT crossed - 233"
+                  "ahead), CE124 (full 20 000, two failures - fresh 4/4 + 7/7 on the second"
+                  "eight-glyph union; 2 460 000 + 575 000 crossed), CE125 (full 20 000, one"
+                  "four-gram failure fresh 5/5 - second four-gram of the series; 2 480 000 + 580"
+                  "000 crossed), CE126 (SNAPPED 19 999, one failure fresh 4/4; 2 500 000 + 585"
+                  "000 crossed), CE127 (full 20 000, two failures - fresh 4/4 + 5/5, including"
+                  "the third four-gram of the series; 2 520 000 + 590 000 crossed), CE128 (full"
+                  "20 000, one failure fresh 5/5; 2 540 000 + 595 000 crossed), CE129 (full 20"
+                  "000, one failure fresh 4/4; 2 560 000 + 600 000 crossed), CE130 (full 20 000,"
+                  "two failures - fresh 7/7 + 4/4, including the fourth four-gram of the series;"
+                  "2 580 000 + 605 000 crossed), CE131 (full 20 000, one failure fresh 6/6 on a"
+                  "seven-glyph union; 2 600 000 + 610 000 crossed), CE132 (full 20 000, CLEAN; 2"
+                  "620 000 + 615 000 crossed), CE133 (full 20 000, one failure fresh 5/5 on a"
+                  "six-glyph union; 2 640 000 + 620 000 crossed), CE134 (full 20 000, CLEAN; 2"
+                  "660 000 + 625 000 crossed), CE135 (full 20 000, two failures fresh 4/4"
+                  "five-glyph + 7/7 eight-glyph; 2 680 000 + 630 000 crossed), CE136 (full 20"
+                  "000, CLEAN; 2 700 000 + 635 000 crossed), CE137 (full 20 000, two failures"
+                  "fresh 4/4 five-glyph + 4/4 five-glyph; 2 720 000 + 640 000 crossed)."),
+        slidetail=("W136 FULL 20 000, CLEAN - zero recorded interior failures; W137 FULL 20 000,"
+                   "TWO recorded interior Rosser failure blocks - both determined and rescued"
+                   "(fresh 4/4 five-glyph + fresh 4/4 five-glyph)"),
     ),
+
 }
 
 

@@ -3941,7 +3941,7 @@ theorem rh_program78_stripfront_mach_unifiedContinuumAnchor (q : ZeroSet)
       d0 ≤ Z78ContinuumAnchor.continuumAnchorD0max → ¬ offPair q t0 d0) :
     RH q := by
   have hz78 : Z78.externalZeroFree78 :=
-    Z78FractionContact.extContinuumAnchor_implies_ext78 hzF
+    Z78ContinuumAnchor.extContinuumAnchor_implies_ext78 hzF
   refine S4A.rh_from_regime_closures q Qside Z78P12.MfP devProg
     Z78P12.BwireP (fun p => MrLift p.1 p.2) floProg
     ?_ ?_ ?_ ?_ ?_ ?_
@@ -4052,7 +4052,7 @@ theorem rh_program78_stripfront_mach_unifiedGao_ofContinuumAnchor (q : ZeroSet)
       d0 ≤ Z78ContinuumAnchor.continuumAnchorD0max → ¬ offPair q t0 d0) :
     RH q := by
   have hzG : Z78Gao.externalZeroFree78Gao :=
-    Z78FractionContact.extContinuumAnchor_implies_extGao hzF
+    Z78ContinuumAnchor.extContinuumAnchor_implies_extGao hzF
   apply rh_program78_stripfront_mach_unifiedGao q hzG hqz
     honline Qside H hH hPT
   intro t0 d0 ht0 hd0 hd0G hp
