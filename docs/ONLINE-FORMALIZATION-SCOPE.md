@@ -132,10 +132,97 @@ the entire remaining work is step 2.
   `etaStrip s = (1 − 2^{1−s}) · ζ(s)`** — the Phase 2.0 identity
   extended to the whole strip `0 < Re s` (except `s = 1`) by the identity
   theorem `AnalyticOnNhd.eqOn_of_preconnected_of_frequently_eq`.
-  Remaining Phase 2 sub-lemmas: (ii) explicit eta-series truncation bound
-  (Euler transform) on the band `0 < Re s ≤ 1`, `|Im s| < T0`.
-  Engine candidate (E-1) Euler-transformed eta series (see decision note
-  below).
+  **Phase 2.3 (explicit evaluation/truncation half) — IN PROGRESS.**
+  New module `formal/RhAttack/OnlineZetaEta5.lean` (committed GREEN at
+  Sections 1–2; the full Section 3–4 draft is preserved at
+  `tmp/OnlineZetaEta5-draft-sections34.lean` and is the immediate next
+  work — see "Phase 2.3 handoff" below).
+
+  **Section 1 (kernel + Mellin transform) — DONE, green:**
+  `etaKernel t := 1/(e^t+1)`, `etaKernelC t := (etaKernel t : ℂ)`,
+  `etaIntegral s := mellin etaKernelC s`.
+  `etaKernel_continuousOn`, `etaKernel_locInt`,
+  `etaKernel_Oexp : etaKernelC =O[atTop] exp(-·)`,
+  `etaKernel_O1 : etaKernelC =O[𝓝[>] 0] const 1`,
+  `etaIntegral_convergent` (Mellin convergence for `0 < Re s` via
+  `mellinConvergent_of_isBigO_rpow_exp`),
+  `etaIntegral_differentiableAt` (holomorphic at every `0 < Re s` via
+  `mellin_differentiableAt_of_isBigO_rpow_exp`).
+
+  **Section 2 (Laplace building block) — DONE, green:**
+  `mellin_expNeg_eq_GammaIntegral` (`mellin (exp(-·)) s =
+  Complex.GammaIntegral s`) and
+  `laplace_n (s) (hs : 0 < s.re) (n) (hn : 0 < n) : ∫₀^∞ t^{s-1}
+  e^{-nt} dt = Complex.Gamma s · (n:ℂ)^{-s}` (Mellin scaling
+  `mellin_comp_mul_left` + `Complex.Gamma_eq_integral`).
+
+  **Section 3 (Fubini step at `1 < Re s`) — DRAFTED, not yet green.**
+  Target: `etaIntegral_eq_Gamma_etaSeries (h1 : 1 < s.re) : etaIntegral
+  s = Complex.Gamma s · etaSeries s`. Draft components (all in the tmp
+  draft file): `laplaceTerm`, `etaKernelCcpow_integrableOn_Ioi`,
+  `tsumAltExp`, `laplaceTermNormIntegral`, `laplaceTermIntegral`,
+  `laplaceTermNormSummable`, `etaIntegral_eq_Gamma_etaSeries` (Fubini
+  via `integral_tsum`).
+
+  **Section 4 (explicit truncation bound, all `0 < Re s`) — DRAFTED.**
+  Target: `etaStripTruncationBound (hs : 0 < s.re) (N) (hN : 1 ≤ N) :
+  ‖etaStrip s − etaPartial s N‖ ≤ (2 + ‖s‖/s.re) · (N:ℝ)^{-s.re}`
+  (Phase 2.1 `etaTailBound` + `etaStripTendsto` + a limit-of-sequence
+  ≤ eventual-bound argument via `Filter.eventually_atTop`).
+
+  **Phase 2.3 handoff (exact error ledger at pause).** The draft failed
+  its first full build with these localized errors (fixes identified):
+  1. `Complex.GammaIntegral_convergent` takes `s` IMPLICIT: use
+     `Complex.GammaIntegral_convergent hs`, not `(s hs)`.
+  2. `tsum_smul` does NOT exist in this Mathlib. Use
+     `Summable.tsum_mul_left (a) (hf : Summable f L) : ∑' i, a * f i =
+     a * ∑' i, f i` (Mathlib/Topology/Algebra/InfiniteSum/Ring.lean:55)
+     after a pointwise `smul_eq_mul` bridge, or `congr_arg (fun F =>
+     ∑' n, F n)` + pointwise equality (no summability needed).
+  3. The bare root name `AEStronglyMeasurable` fails elaboration; use
+     `MeasureTheory.AEStronglyMeasurable` (or `open MeasureTheory`).
+     `MeasurableOn` no longer exists in this Mathlib version — use
+     `aestronglyMeasurable_indicator_iff` (root name, exposed) +
+     `ContinuousOn.aestronglyMeasurable` (IntegrableOn.lean:760,
+     restricted-measure form) for "continuous on the set" measurability.
+  4. Verified usable lemmas: `summable_geometric_iff_norm_lt_one`,
+     `tsum_geometric_of_norm_lt_one`, `tsum_add`, `tsum_zero`,
+     `tsum_congr`, `tsum_coe_ne_top_iff_summable` (ENNReal),
+     `summable_nat_rpow {p} : Summable (fun n => (n:ℝ)^p) ↔ p < -1`,
+     `integral_rpow_mul_exp_neg_mul_rpow` (MeasureTheory/Integral/
+     Gamma.lean: `∫₀^∞ x^q e^{-b x^p} = b^{-(q+1)/p} (1/p) Γ((q+1)/p)`
+     with `0 < p`, `-1 < q`, `0 < b`), `Real.Gamma_eq_integral`,
+     `integral_indicator`, `integral_const_mul`, `setIntegral_congr`,
+     `IntegrableOn.congr_fun`, `HasFiniteIntegral.mono`,
+     `norm_cpow_eq_rpow_re_of_pos`, `Real.norm_eq_abs`,
+     `Real.cpow_neg`/`Complex.cpow_neg`, `Real.one_rpow`,
+     `Complex.GammaIntegral_convergent` (both ℝ and ℂ forms),
+     `Real.GammaIntegral_convergent`, `ContinuousOn.const_cpow`,
+     `Tendsto.sub_const`, `Filter.eventually_atTop`,
+     `abs_lt.mp`, `Complex.norm_add_le'`.
+  5. `norm_cpow_ofNat` and `norm_cpow_eq_rpow_re_of_pos` verified for
+     the norm identities; `Real.exp_neg_lt_one` for `e^{-t} < 1`.
+
+  **Next session, in order:**
+  1. Restore `OnlineZetaEta5.lean` from the green committed state (it
+     already is — only Sections 1–2).
+  2. Re-append Sections 3–4 from
+     `tmp/OnlineZetaEta5-draft-sections34.lean` (everything after
+     `/-! ## 3. The Fubini step`), applying fixes 1–2 from the ledger.
+  3. Iterate `lake build RhAttack.OnlineZetaEta5` until green; then
+     `lake build RhAttack` + `lake build` full.
+  4. Delete any probe files; `grep -c "sorry\\|admit"` → 0;
+     commit + push (house rule).
+  5. Then: Phase 2.3.2 — the Euler-transformed series itself (Δ^k
+     terms, 2^{-K} remainder) — or fold the truncation bound +
+     Fubini identity into the Phase 3 disk-count plan (the scope's
+     Phase 3 entry).
+
+  After Phase 2.3 completes: **Phase 3 (disk count)** — Jensen
+  circular mean with a rigorous error band not crossing an integer,
+  plus a bounded numerical sign-change assertion in `(14, 14.2)` from
+  the Phase 2 engine. Then **Assembly**: `#S(T0) = 1` + orbit argument
+  (`ZetaConcrete.zetaSliceSubsingletonOnLine`) discharge `honline`.
 - **Phase 3 (disk count)** — after Phase 2: Jensen circular mean with a
   rigorous error band not crossing an integer, plus a bounded numerical
   sign-change assertion in `(14, 14.2)` from the Phase 2 engine.
