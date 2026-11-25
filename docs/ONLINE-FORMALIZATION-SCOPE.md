@@ -81,11 +81,36 @@ the entire remaining work is step 2.
   `OnlineZeta` rpow facts), and `etaPartialSumsCauchy` — the eta partial
   sums form a `CauchySeq` for `0 < Re s` (the conditional-convergence
   witness needed before any `tsum` is defined in the strip).
-  Remaining Phase 2 sub-lemmas: (i) extend the identity to
-  `0 < Re s ≤ 1` by identity theorem over the connected domain
-  `Re s > 0`, `s ≠ 1` (the `etaPartialSumsCauchy` limit is the
-  `η` value the theorem evaluates); (ii) explicit eta-series truncation
-  bound (Euler transform) on the band `0 < Re s ≤ 1`, `|Im s| < T0`.
+  **Phase 2.2a (strip eta function, sequential limit) — DONE:**
+  `OnlineZetaEta3` (green, no `sorry`/`admit`/axioms) —
+  `etaStrip (s : ℂ) : ℂ := if 0 < s.re then atTop.limUnder (fun N ↦ etaPartial s N)
+  else 0` — the strip eta function as the SEQUENTIAL limit of the partial
+  sums (for `Re s > 1` this agrees with the tsum `etaSeries`, see below).
+  KEY FORMAL FINDING: for `0 < Re s ≤ 1` the eta series is NOT `Summable`
+  in the Mathlib sense — `Summable`/`∑'` is the unconditional Finset-net
+  notion, and Riemann's rearrangement theorem makes that net non-Cauchy
+  for conditionally convergent series (thinning the positive terms past
+  any `N₀` makes it diverge; at `s = 1/2` the odd-index partial sums grow
+  like `(1/2)·ln N`). So the strip eta value must be the `limUnder` of the
+  ordinal-indexed partial sums, not a `∑'` tsum. Consequences:
+  (a) `etaStripTendsto` — convergence for `0 < Re s` via
+  `CauchySeq.tendsto_limUnder`; (b) `etaStripAgreesEtaSeries` — for
+  `Re s > 1` (absolute convergence) the sequential limit equals the tsum
+  `etaSeries`, so the Phase 2.0 identity `etaIdentity` applies to
+  `etaStrip` on `Re s > 1` (proved with `HasSum.tendsto_sum_nat`,
+  `tendsto_atTop_atTop_of_monotone`, `Filter.Tendsto.limUnder_eq`,
+  `HasSum.tsum_eq`); (c) `etaStrip_of_nonpos_re` — inert `else` branch.
+  Remaining Phase 2 sub-lemmas: (i) local uniform convergence of the
+  eta partial sums on compacts in `0 < Re s` (from `etaTailBound`),
+  differentiability/analyticity of `etaStrip` (Weierstrass route via
+  `TendstoLocallyUniformlyOn.differentiableOn` +
+  `DifferentiableOn.analyticOnNhd`), then the identity theorem over the
+  connected domain `Re s > 0`, `s ≠ 1`
+  (`AnalyticOnNhd.eqOn_of_preconnected_of_frequently_eq`, with
+  `analyticOn_riemannZeta` for the zeta side) to get
+  `etaStrip s = (1 − 2^{1−s}) · ζ(s)` for `0 < Re s`, `s ≠ 1`;
+  (ii) explicit eta-series truncation bound (Euler transform) on the band
+  `0 < Re s ≤ 1`, `|Im s| < T0`.
   Engine candidate (E-1) Euler-transformed eta series (see decision note
   below).
 - **Phase 3 (disk count)** — after Phase 2: Jensen circular mean with a

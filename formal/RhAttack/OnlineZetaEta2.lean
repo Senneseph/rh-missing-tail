@@ -272,9 +272,9 @@ through `Summable`:
 
 NO RH CLAIM. NO NEW AXIOMS. -/
 
-private noncomputable def etaTerm (s : ℂ) (n : ℕ) : ℂ := (-1 : ℂ) ^ (n - 1) * (1 / (n : ℂ) ^ s)
+noncomputable def etaTerm (s : ℂ) (n : ℕ) : ℂ := (-1 : ℂ) ^ (n - 1) * (1 / (n : ℂ) ^ s)
 
-private noncomputable def etaPartial (s : ℂ) (N : ℕ) : ℂ := ∑ n ∈ Finset.range (N + 1), etaTerm s n
+noncomputable def etaPartial (s : ℂ) (N : ℕ) : ℂ := ∑ n ∈ Finset.range (N + 1), etaTerm s n
 
 private noncomputable def altPartial (m : ℕ) : ℂ := ∑ k ∈ Finset.range (m + 1), (-1 : ℂ) ^ k
 
