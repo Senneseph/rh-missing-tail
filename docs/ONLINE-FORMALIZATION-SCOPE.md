@@ -67,10 +67,25 @@ the entire remaining work is step 2.
   `η(s) = (1 − 2^{1−s}) · ζ(s)` with `η(s) = Σ (−1)^{n−1} n^{−s}`
   (even/odd split of the Dirichlet series, `tsum_even_add_odd`, local
   `cpowMulRealNonneg` product law for `x, y ≥ 0` real bases and complex
-  exponent). Remaining Phase 2 sub-lemmas: (i) extend the identity to
+  exponent).
+  **Phase 2.1 (conditional convergence on `0 < Re s`) — DONE:**
+  `OnlineZetaEta2` (green, no `sorry`/`admit`/axioms) —
+  `abelSummation` (finite Abel/partial-summation identity, pure algebra),
+  `etaDiffBound` (mean-value bound
+  `‖n^{−s} − (n+1)^{−s}‖ ≤ ‖s‖ · n^{−(Re s + 1)}` for `0 < Re s`, `0 < n`,
+  via `HasDerivAt.cpow_const` + `norm_sub_le_integral_of_norm_deriv_le_of_le`),
+  `etaTailBound` (`‖P_M − P_N‖ ≤ (2 + ‖s‖/Re s) · N^{−Re s}` for
+  `1 ≤ N ≤ M`, by Abel decomposition + integral test via
+  `AntitoneOn.summable_of_integrableOn_Ioi` and
+  `AntitoneOn.tsum_comp_add_le_integral` with the local
+  `OnlineZeta` rpow facts), and `etaPartialSumsCauchy` — the eta partial
+  sums form a `CauchySeq` for `0 < Re s` (the conditional-convergence
+  witness needed before any `tsum` is defined in the strip).
+  Remaining Phase 2 sub-lemmas: (i) extend the identity to
   `0 < Re s ≤ 1` by identity theorem over the connected domain
-  `Re s > 0`, `s ≠ 1`; (ii) explicit eta-series truncation bound
-  (Euler transform) on the band `0 < Re s ≤ 1`, `|Im s| < T0`.
+  `Re s > 0`, `s ≠ 1` (the `etaPartialSumsCauchy` limit is the
+  `η` value the theorem evaluates); (ii) explicit eta-series truncation
+  bound (Euler transform) on the band `0 < Re s ≤ 1`, `|Im s| < T0`.
   Engine candidate (E-1) Euler-transformed eta series (see decision note
   below).
 - **Phase 3 (disk count)** — after Phase 2: Jensen circular mean with a
