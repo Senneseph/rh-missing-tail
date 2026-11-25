@@ -100,17 +100,40 @@ the entire remaining work is step 2.
   `etaStrip` on `Re s > 1` (proved with `HasSum.tendsto_sum_nat`,
   `tendsto_atTop_atTop_of_monotone`, `Filter.Tendsto.limUnder_eq`,
   `HasSum.tsum_eq`); (c) `etaStrip_of_nonpos_re` — inert `else` branch.
-  Remaining Phase 2 sub-lemmas: (i) local uniform convergence of the
-  eta partial sums on compacts in `0 < Re s` (from `etaTailBound`),
-  differentiability/analyticity of `etaStrip` (Weierstrass route via
+  **Phase 2.2b (local uniform convergence on balls) — DONE:**
+  `OnlineZetaEta3` (green) — `etaPartialSumsUniformCauchyOn` /
+  `etaPartialSumsUniformOn`: for `0 < s₀.re`, the eta partial sums are
+  uniformly Cauchy (hence converge uniformly) on
+  `Metric.ball s₀ (s₀.re / 2)`, from `etaTailBound` with the radius bound
+  `r < s.re` on the ball (`ballReStrict`).
+  **Phase 2.2c (analyticity + strip identity) — DONE:**
+  `OnlineZetaEta4` (green, no `sorry`/`admit`/axioms) —
+  (a) `etaPartialDifferentiableOn` — each partial sum
+  `etaPartial · N` is differentiable on `0 < Re s` (termwise, via
+  `OnlineZetaEta2.etaTermDifferentiableOn` + `DifferentiableOn.fun_sum`);
+  (b) `etaPartialTendstoLocallyUniformlyOn` + `etaStripDifferentiableOn`
+  + `etaStripAnalyticOnNhd` — `etaStrip` is differentiable, hence
+  analytic, on `U = {s : 0 < s.re, s ≠ 1}` (Weierstrass route via
   `TendstoLocallyUniformlyOn.differentiableOn` +
-  `DifferentiableOn.analyticOnNhd`), then the identity theorem over the
-  connected domain `Re s > 0`, `s ≠ 1`
-  (`AnalyticOnNhd.eqOn_of_preconnected_of_frequently_eq`, with
-  `analyticOn_riemannZeta` for the zeta side) to get
-  `etaStrip s = (1 − 2^{1−s}) · ζ(s)` for `0 < Re s`, `s ≠ 1`;
-  (ii) explicit eta-series truncation bound (Euler transform) on the band
-  `0 < Re s ≤ 1`, `|Im s| < T0`.
+  `analyticOnNhd_iff_differentiableOn`);
+  (c) `etaZetaFunAnalyticOnNhd` — `s ↦ (1 − 2^{1−s}) · ζ(s)` is analytic
+  on `U` (`differentiable_twoPow` via `differentiable_const_cpow_of_neZero`,
+  `analyticOn_riemannZeta` on `{1}ᶜ`, product rule);
+  (d) `isPathConnected_reGEOneSdiffOne`,
+  `isPathConnected_reBandSdiffOne`, `isPathConnected_isPreconnected`,
+  `isPreconnected_U` — `U` is preconnected (straight segments from `2` in
+  `{1 ≤ Re s}` and from `1/2` in the band `{0 < Re s ≤ 1}`, glued at
+  `1 + i`, the segment arithmetic in `hleg` done in `re`/`im` coordinates
+  with `field_simp` + `div_lt_one`/`one_lt_div`);
+  (e) `etaFreqEq` — the identity holds frequently at `2` in `𝓝[≠] 2`
+  (punctured-neighborhood filter, `NeBot` via `inf_eq_bot_iff` + a
+  ball-point argument, `frequently_iff_neBot`);
+  (f) **`etaIdentityStrip` — for `0 < Re s` and `s ≠ 1`,
+  `etaStrip s = (1 − 2^{1−s}) · ζ(s)`** — the Phase 2.0 identity
+  extended to the whole strip `0 < Re s` (except `s = 1`) by the identity
+  theorem `AnalyticOnNhd.eqOn_of_preconnected_of_frequently_eq`.
+  Remaining Phase 2 sub-lemmas: (ii) explicit eta-series truncation bound
+  (Euler transform) on the band `0 < Re s ≤ 1`, `|Im s| < T0`.
   Engine candidate (E-1) Euler-transformed eta series (see decision note
   below).
 - **Phase 3 (disk count)** — after Phase 2: Jensen circular mean with a
