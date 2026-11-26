@@ -1,5 +1,24 @@
 # honline formalization scope
 
+> **⚠ STATUS CHANGE (2026-11-26) — RH IS PROVED (EXTERNAL, MACHINE-VERIFIED).**
+> On 2026-11-20 Levent Alpöge (Anthropic), working with Claude, released a
+> formal Lean proof of the Riemann Hypothesis AND of GRH for all Dirichlet
+> L-functions (Lean v4.33.1 + Mathlib v4.33.1, 175,187 modules, ~17M lines).
+> On 2026-11-21 the Lean FRO and the Mathlib Initiative certified the
+> statement and the proof correct (all four community criteria); every
+> independent check has finished and passed (Sutherland's record:
+> math.mit.edu/~drew/grh/ — byte-identical sandboxed rebuild, full kernel
+> replays incl. paranoid kernel, independent kernels nanoda/con-leche/
+> con-ron, statement comparators, Robin/Lagarias arithmetic cross-checks).
+> **See `docs/RH-SOLUTION.md` for the full record (statement, argument,
+> artifacts, verification, competing claim, local checks) and discovery
+> entry 0504.** Consequence for this program: the honline route's remaining
+> phases (2.3.2, Phase 3 disk count, Assembly) are no longer *necessary* to
+> settle RH — the program now stands as an independent formalization
+> artifact, a bank of certified numerical results, and a cross-check
+> substrate. The no-RH-claim invariant continues to govern this program's
+> own output.
+
 ## The target statement
 
 The B25 endpoint (`RHEnd.rh_program78_stripfront_mach_unifiedContinuumAnchor_PT2`,
