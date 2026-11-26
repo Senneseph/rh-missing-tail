@@ -132,11 +132,17 @@ the entire remaining work is step 2.
   `etaStrip s = (1 − 2^{1−s}) · ζ(s)`** — the Phase 2.0 identity
   extended to the whole strip `0 < Re s` (except `s = 1`) by the identity
   theorem `AnalyticOnNhd.eqOn_of_preconnected_of_frequently_eq`.
-  **Phase 2.3 (explicit evaluation/truncation half) — IN PROGRESS.**
-  New module `formal/RhAttack/OnlineZetaEta5.lean` (committed GREEN at
-  Sections 1–2; the full Section 3–4 draft is preserved at
-  `tmp/OnlineZetaEta5-draft-sections34.lean` and is the immediate next
-  work — see "Phase 2.3 handoff" below).
+  **Phase 2.3 (explicit evaluation/truncation half) — DONE, green
+  (discovery 0503).** New module
+  `formal/RhAttack/OnlineZetaEta5.lean` is fully green: 820 lines, 15
+  theorems, 0 `sorry` / 0 `admit` / 0 axiom. Section 3 delivers
+  `etaIntegral_eq_Gamma_etaSeries` (at `1 < Re s`, the kernel's Mellin
+  transform equals `Gamma(s) · etaSeries s`, Fubini via
+  `hasSum_integral_of_summable_integral_norm`) and Section 4 delivers
+  `etaStripTruncationBound` (explicit `N^{-Re s}` tail bound on all
+  `0 < Re s`). The draft's error ledger is superseded by the verified
+  fix list in discovery 0503; the original draft remains preserved at
+  `tmp/OnlineZetaEta5-draft-sections34.lean`.
 
   **Section 1 (kernel + Mellin transform) — DONE, green:**
   `etaKernel t := 1/(e^t+1)`, `etaKernelC t := (etaKernel t : ℂ)`,
@@ -156,22 +162,43 @@ the entire remaining work is step 2.
   e^{-nt} dt = Complex.Gamma s · (n:ℂ)^{-s}` (Mellin scaling
   `mellin_comp_mul_left` + `Complex.Gamma_eq_integral`).
 
-  **Section 3 (Fubini step at `1 < Re s`) — DRAFTED, not yet green.**
-  Target: `etaIntegral_eq_Gamma_etaSeries (h1 : 1 < s.re) : etaIntegral
-  s = Complex.Gamma s · etaSeries s`. Draft components (all in the tmp
-  draft file): `laplaceTerm`, `etaKernelCcpow_integrableOn_Ioi`,
-  `tsumAltExp`, `laplaceTermNormIntegral`, `laplaceTermIntegral`,
-  `laplaceTermNormSummable`, `etaIntegral_eq_Gamma_etaSeries` (Fubini
-  via `integral_tsum`).
+  **Section 3 (Fubini step at `1 < Re s`) — DONE, green:**
+  `etaKernelCcpow_integrableOn_Ioi` (domination bound on the
+  cpow-lifted kernel), `tsumAltExp` (pointwise kernel expansion
+  `1/(e^t+1) = ∑' n, ...` as a geometric series at `x = e^{-t}`,
+  `‖x‖ < 1`), `laplaceTermNormIntegral`
+  (`∫ ‖laplaceTerm s n‖ = Γ(Re s)·n^{−Re s}` for `n ≥ 1`, `0` for
+  `n = 0`, via `Real.integral_rpow_mul_exp_neg_mul_Ioi` with
+  `a = 1`, `b = n`), `laplaceTermIntegral`
+  (`∫ laplaceTerm s n = Γ(s)·(n:ℂ)^{-s}`, indicator form +
+  `integral_smul` + `laplace_n`), `laplaceTermNormSummable` (via
+  `Real.summable_nat_rpow` at exponent `−Re s < −1`),
+  `laplaceTerm_integrable` (`integrable_indicator_iff` +
+  `MellinConvergent.comp_mul_left` scaling of the `exp(-·)` base +
+  `const_smul`), and `etaIntegral_eq_Gamma_etaSeries` (Fubini via
+  `hasSum_integral_of_summable_integral_norm` + `tsum_mul_left` +
+  `Complex.cpow_neg` for `(n:ℂ)^{-s} = 1/(n:ℂ)^s`).
 
-  **Section 4 (explicit truncation bound, all `0 < Re s`) — DRAFTED.**
-  Target: `etaStripTruncationBound (hs : 0 < s.re) (N) (hN : 1 ≤ N) :
+  **Section 4 (explicit truncation bound, all `0 < Re s`) — DONE,
+  green:** `etaStripTruncationBound (hs : 0 < s.re) (N) (hN : 1 ≤ N) :
   ‖etaStrip s − etaPartial s N‖ ≤ (2 + ‖s‖/s.re) · (N:ℝ)^{-s.re}`
-  (Phase 2.1 `etaTailBound` + `etaStripTendsto` + a limit-of-sequence
-  ≤ eventual-bound argument via `Filter.eventually_atTop`).
+  (Phase 2.1 `etaTailBound` + `etaStripTendsto` + `Tendsto.sub_const`
+  + `continuous_norm`, then by_contra + gap/2 ball: a limit-distance
+  exceeding the eventual bound `B` would put all sufficiently large
+  partial sums inside a radius-`gap/2` ball of the limit, contradicting
+  the eventual `B`-bound, via `Filter.eventually_atTop.mp` +
+  `Metric.mem_ball`).
 
-  **Phase 2.3 handoff (exact error ledger at pause).** The draft failed
-  its first full build with these localized errors (fixes identified):
+  **Phase 2.3 handoff (exact error ledger at pause) — SUPERSEDED by
+  discovery 0503.** The ledger below is the historical record of the
+  draft's first failed build (discovery 0501). The green build (0503)
+  shows which fixes actually landed and which names did not exist in
+  this pinned Mathlib (in particular
+  `Real.integral_rpow_mul_exp_neg_mul_Ioi` replaced the drafted
+  `integral_rpow_mul_exp_neg_mul_rpow`, and `ContinuousOn.cpow`
+  replaced `ContinuousOn.const_cpow`). Original ledger — the draft
+  failed its first full build with these localized errors (fixes
+  identified):
   1. `Complex.GammaIntegral_convergent` takes `s` IMPLICIT: use
      `Complex.GammaIntegral_convergent hs`, not `(s hs)`.
   2. `tsum_smul` does NOT exist in this Mathlib. Use
@@ -203,20 +230,13 @@ the entire remaining work is step 2.
   5. `norm_cpow_ofNat` and `norm_cpow_eq_rpow_re_of_pos` verified for
      the norm identities; `Real.exp_neg_lt_one` for `e^{-t} < 1`.
 
-  **Next session, in order:**
-  1. Restore `OnlineZetaEta5.lean` from the green committed state (it
-     already is — only Sections 1–2).
-  2. Re-append Sections 3–4 from
-     `tmp/OnlineZetaEta5-draft-sections34.lean` (everything after
-     `/-! ## 3. The Fubini step`), applying fixes 1–2 from the ledger.
-  3. Iterate `lake build RhAttack.OnlineZetaEta5` until green; then
-     `lake build RhAttack` + `lake build` full.
-  4. Delete any probe files; `grep -c "sorry\\|admit"` → 0;
-     commit + push (house rule).
-  5. Then: Phase 2.3.2 — the Euler-transformed series itself (Δ^k
-     terms, 2^{-K} remainder) — or fold the truncation bound +
-     Fubini identity into the Phase 3 disk-count plan (the scope's
-     Phase 3 entry).
+  **Next (after Phase 2.3 completion, discovery 0503):**
+  1. Phase 2.3.2 — the Euler-transformed series itself (Δ^k terms,
+     2^{-K} remainder) — or fold the truncation bound + Fubini
+     identity into the Phase 3 disk-count plan (the scope's Phase 3
+     entry).
+  2. House rules unchanged: `lake build RhAttack` + full `lake build`
+     green before commit; `sorry`/`admit` → 0; commit + push.
 
   After Phase 2.3 completes: **Phase 3 (disk count)** — Jensen
   circular mean with a rigorous error band not crossing an integer,
