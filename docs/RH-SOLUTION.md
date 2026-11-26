@@ -270,8 +270,17 @@ verified on this machine (124 GB RAM, 32 cores, 239 GB free disk):
   The declaration counts (1,468,418 solution / 51,692 challenge) exactly
   reproduce Sutherland's independent record.
 - **nanoda** (second independent Rust kernel, `ammkrn/nanoda_lib` v0.4.32,
-  built locally): run started on the unpacked export; result appended here
-  on completion (log: `/tmp/rh-verify/nanoda_run.log`).
+  built locally): **PASS.** Output (2026-11-26, this machine, 32 threads):
+  > Checked 1484733 declarations with no typechecker errors, 1 pretty
+  > printer errors: [ "Unable to print axioms", ]
+  > (exit 0)
+
+  The single "pretty printer error" is cosmetic (the axioms' names could not
+  be pretty-printed); it is not a typechecking failure. Both independent
+  kernels on this machine (con-leche, nanoda) accept the full byte-verified
+  export, independently reproducing the core of the community verification;
+  con-leche's `--compare` additionally confirms the five theorems are exactly
+  the challenge statements justified by the solution.
 
 ## 7. Relation to this worktree's honline program
 
