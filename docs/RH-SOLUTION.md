@@ -1,5 +1,15 @@
 # RH-SOLUTION — the Riemann Hypothesis is proved (2026-11-20)
 
+> **PROGRAM NOTE (owner directive, 2026-11-26; discovery 0505).** This
+> document is a **historical record of an external event only**. Per the
+> owner's explicit directive the honline program **ignores the Alpöge
+> approach as its own route and does not stop because of it**: OUR
+> SOLUTION (the independent honline program in this worktree) continues
+> — Phase 2.3.2 (Euler-transformed η-series) is complete and green
+> (see `docs/ONLINE-FORMALIZATION-SCOPE.md`), and Phase 3 (disk count) +
+> Assembly are the next increments. Nothing below changes the program's
+> plan, invariants, or success criteria.
+
 **Status: SOLVED and machine-verified.** On **20 November 2026**, Levent Alpöge
 (Anthropic), working with Claude (an unreleased Anthropic model), released a
 formal proof of the Riemann Hypothesis — and of the Generalized Riemann

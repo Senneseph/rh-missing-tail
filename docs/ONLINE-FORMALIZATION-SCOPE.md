@@ -1,23 +1,18 @@
 # honline formalization scope
 
-> **⚠ STATUS CHANGE (2026-11-26) — RH IS PROVED (EXTERNAL, MACHINE-VERIFIED).**
-> On 2026-11-20 Levent Alpöge (Anthropic), working with Claude, released a
-> formal Lean proof of the Riemann Hypothesis AND of GRH for all Dirichlet
-> L-functions (Lean v4.33.1 + Mathlib v4.33.1, 175,187 modules, ~17M lines).
-> On 2026-11-21 the Lean FRO and the Mathlib Initiative certified the
-> statement and the proof correct (all four community criteria); every
-> independent check has finished and passed (Sutherland's record:
-> math.mit.edu/~drew/grh/ — byte-identical sandboxed rebuild, full kernel
-> replays incl. paranoid kernel, independent kernels nanoda/con-leche/
-> con-ron, statement comparators, Robin/Lagarias arithmetic cross-checks).
-> **See `docs/RH-SOLUTION.md` for the full record (statement, argument,
-> artifacts, verification, competing claim, local checks) and discovery
-> entry 0504.** Consequence for this program: the honline route's remaining
-> phases (2.3.2, Phase 3 disk count, Assembly) are no longer *necessary* to
-> settle RH — the program now stands as an independent formalization
-> artifact, a bank of certified numerical results, and a cross-check
-> substrate. The no-RH-claim invariant continues to govern this program's
-> own output.
+> **⚠ PROGRAM DIRECTION (owner directive, 2026-11-26) — THE HONLINE PROGRAM CONTINUES.**
+> The external Alpöge/Claude announcement (2026-11-20, Lean v4.33.1,
+> ~17M lines) is **not our approach and is not the basis for this program**.
+> Per the owner's explicit directive we do **not** treat that external
+> artifact as a reason to stop, re-prioritize around it, or rebrand this
+> program's remaining phases: **we keep working towards OUR SOLUTION.**
+> The honline route is a different approach (online/eta-transform
+> formalization from the B25 endpoint, with our own engine theorems and
+> our own Phase 3 disk count), and the months of work already committed
+> to it are not being abandoned. `docs/RH-SOLUTION.md` is retained as a
+> historical record of the external event only (discovery entry 0504); it
+> does not govern this program's plan. The no-RH-claim invariant
+> continues to govern this program's own output.
 
 ## The target statement
 
@@ -249,18 +244,38 @@ the entire remaining work is step 2.
   5. `norm_cpow_ofNat` and `norm_cpow_eq_rpow_re_of_pos` verified for
      the norm identities; `Real.exp_neg_lt_one` for `e^{-t} < 1`.
 
-  **Next (after Phase 2.3 completion, discovery 0503):**
-  1. Phase 2.3.2 — the Euler-transformed series itself (Δ^k terms,
-     2^{-K} remainder) — or fold the truncation bound + Fubini
-     identity into the Phase 3 disk-count plan (the scope's Phase 3
-     entry).
-  2. House rules unchanged: `lake build RhAttack` + full `lake build`
-     green before commit; `sorry`/`admit` → 0; commit + push.
+  **Phase 2.3.2 — DONE (discovery 0505).**
+  `formal/RhAttack/OnlineZetaEta6.lean` (36 theorems/defs, green):
+  the Euler-transformed η-series with explicit Δ^k terms and a
+  2^{-K} remainder, built on the green Phase 2.3 module
+  (`OnlineZetaEta5.lean`). Key results:
+  - `deltaEta s k = ∑_{j<k+1} (-1)^j C(k,j) (j+1)^{-s}` (the Δ^k
+    terms), `etaEuler s K = ∑_{k<K} 2^{-(k+1)} Δ^k a_1`.
+  - Kernel split
+    `x/(1+x) = x · ∑_{k<K} (1-x)^k/2^{k+1} + 2^{-K} x(1-x)^K/(1+x)`
+    with `x = e^{-t}` (`etaKernel_split`), integrability of both pieces
+    (`eulerKernelPart_integrableOn`, `etaRemKernel_integrableOn`).
+  - Fubini identity
+    `etaIntegral = Γ · etaEuler + etaRemK`
+    (`etaIntegral_eq_Gamma_etaEuler_plus_rem`).
+  - Remainder bound
+    `‖etaRemK s K‖ ≤ 2^{-K} (1/(Re s + K) + e^{-1})`
+    (`etaRemK_norm_bound`).
+  - **Engine theorem** (`etaEuler_engine_bound`), for `0 < Re s ≤ 1`
+    and `1 - 2^{1-s} ≠ 0`:
+    `‖ζ(s) - etaEuler(s,K)/(1-2^{1-s})‖ ≤
+     2^{-K} (1/(Re s + K) + e^{-1}) / (‖Γ(s)‖ ·
+     ‖1 - 2^{1-s}‖)` — the explicit 2^{-K} error the Phase 3
+    disk count consumes.
+  House rules held: `lake build RhAttack.OnlineZetaEta6` 0 errors,
+  full `lake build` green (17454 jobs), `sorry`/`admit`/axioms = 0.
 
-  After Phase 2.3 completes: **Phase 3 (disk count)** — Jensen
-  circular mean with a rigorous error band not crossing an integer,
-  plus a bounded numerical sign-change assertion in `(14, 14.2)` from
-  the Phase 2 engine. Then **Assembly**: `#S(T0) = 1` + orbit argument
+  **Next:** **Phase 3 (disk count)** — Jensen circular mean with a
+  rigorous error band not crossing an integer, plus a bounded numerical
+  sign-change assertion in `(14, 14.2)` from the Phase 2 engine (the
+  Phase 3 hook identity `‖sin z‖² = sin²(Re z) +
+  sinh²(Im z)` is already staged in `OnlineZetaEta6.lean`). Then
+  **Assembly**: `#S(T0) = 1` + orbit argument
   (`ZetaConcrete.zetaSliceSubsingletonOnLine`) discharge `honline`.
 - **Phase 3 (disk count)** — after Phase 2: Jensen circular mean with a
   rigorous error band not crossing an integer, plus a bounded numerical
