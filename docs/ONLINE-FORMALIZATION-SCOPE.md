@@ -354,15 +354,73 @@ arithmetic in Lean):**
 
 **Work breakdown (phases, each ending in a green commit):**
 
-- **Phase 0 — exact statement audit.** Read the exact pinned statements
-  of `MeromorphicOn.circleAverage_log_norm`,
-  `circleIntegral_sub_inv_smul_of_differentiable_on_off_countable`,
-  `circleIntegral_div_sub_of_differentiable_on_off_countable`; pin down
-  which one yields an EXACT integer count for ζ (entire, so no pole
-  bookkeeping) and what hypotheses (differentiability on the disk,
-  off-countable zero set, no boundary zeros) must be supplied. Output:
-  a one-page ledger of the exact lemmas + a local `countZerosDisk`
-  statement.
+- **Phase 0 — exact statement audit — DONE (discovery 0506).**
+  Exact pinned statements read off the v4.33.1 sources:
+
+  1. **Jensen** (`.lake/packages/mathlib/Mathlib/Analysis/Complex/JensenFormula.lean:309`):
+     `MeromorphicOn.circleAverage_log_norm (hR : R ≠ 0)
+      (h₁f : MeromorphicOn f (closedBall c |R|)) :
+      circleAverage (log ‖f ·‖) c R =
+      ∑ᴰ u, divisor f (closedBall c |R|) u * log (R * ‖c - u‖⁻¹)
+      + divisor f (closedBall c |R|) c * log R +
+      log ‖meromorphicTrailingCoeffAt f c‖`.
+      Gives the log-averaged Jensen identity; the RHS coefficients are
+      `log(R/‖c-u‖)`, so Jensen alone does NOT read off a bare
+      integer count — the count comes from the argument principle.
+  2. **Circle integral, Cauchy kernel** (`CauchyIntegral.lean:532`):
+     `circleIntegral_sub_inv_smul_of_differentiable_on_off_countable
+      {R c w} {f : ℝ → E} {s} (hs : s.Countable)
+      (hw : w ∈ ball c R) (hc : ContinuousOn f (closedBall c R))
+      (hd : ∀ x ∈ ball c R \ s, DifferentiableAt ℬ f x) :
+      (∮ z in C(c, R), (z - w)⁻¹ • f z) = (2 * π * I : ℬ) • f w`.
+      This is the residue unit: with `f := const m` it gives
+      `∮ m/(z - w) = 2πi · m` for a multiplicity `m`.
+  3. **Divided form** (`CauchyIntegral.lean:572`):
+     `circleIntegral_div_sub_of_differentiable_on_off_countable ... :
+      (∮ z in C(c, R), f z / (z - w)) = 2 * π * I * f w`.
+  4. **Holomorphic ⇒ zero integral** (`CauchyIntegral.lean:440`):
+     `circleIntegral_eq_zero_of_differentiable_on_off_countable
+      (h0 : 0 ≤ R) {f : ℝ → E} {s} (hs : s.Countable)
+      (hc : ContinuousOn f (closedBall c R))
+      (hd : ∀ z ∈ ball c R \ s, DifferentiableAt ℬ f z) :
+      (∮ z in C(c, R), f z) = 0`.
+      Kills the non-singular part `g'/g` of the logarithmic derivative.
+  5. **Zero/pole extraction** (`Meromorphic/FactorizedRational.lean:296`):
+     `MeromorphicOn.extract_zeros_poles (h₁f : MeromorphicOn f U)
+      (h₂f : ∀ u : U, meromorphicOrderAt f u ≠ ⊥)
+      (h₃f : (divisor f U).support.Finite) :
+      ∃ g, AnalyticOnNhd ℬ g U ∧ (∀ u : U, g u ≠ 0) ∧
+      f =ᵠ[codiscreteWithin U] (∏ᴰ u, (· - u) ^ divisor f U u) • g`.
+      With the finite support on the compact ball (Jensen's
+      `locallyFinsuppWithin.finiteSupport (isCompact_closedBall ..)`),
+      the finprod is a genuine finite product — the local factor
+      `φ(z) = ∏_{u ∈ F} (z - u)^{D u}`.
+  6. **Confirmed absent** (grepped, empty): no argument principle of any
+     shape, no `windingNumber`, no zero-order API for holomorphic
+     functions in the pinned build. `meromorphicOrderAt` / `divisor`
+     (`Mathlib/Analysis/Meromorphic/Order.lean`,
+     `ValueDistribution`) are available and used by Jensen.
+
+  **Local `countZerosDisk` statement** (to be proved in
+  `formal/RhAttack/OnlineZetaDisk.lean`, Phase 0.5):
+
+      `theorem countZerosDisk {R : ℝ} (hR : 0 < R) {c : ℬ} {f : ℬ → ℬ}
+        (hcont : ContinuousOn f (closedBall c R))
+        (hdif : ∀ z ∈ ball c R, DifferentiableAt ℬ f z)
+        (hnozero : ∀ z ∫ circle c R, f z ≠ 0) :
+        (∮ z in C(c, R), deriv f z / f z) =
+          2 * π * I * (zeroCount f (closedBall c R) : ℬ)`
+
+  where `zeroCount f U := ∑ᴰ u, divisor f U u` is a well-defined
+  integer (locally finite support on a compact set). Proof route
+  (fixed from the ledger above): entire-on-disk ⇒
+  `MeromorphicOn` with no poles ⇒ `extract_zeros_poles` gives
+  `f = φ · g` (`g` analytic, `g ≠ 0`); on the circle
+  `f'/f = g'/g + ∑_{u ∈ F} D u / (z - u)`; the `g'/g` part
+  integrates to 0 by (4); each residue term integrates to
+  `2πi · D u` by (2) with `f := const (D u : ℬ)`; sum.
+  For ζ the hypotheses are: entire (Mathlib), no zero on the
+  explicit circle (assertion N2 of the plan).
 - **Phase 1 — explicit ζ evaluation engine.** Local lemmas:
   `zetaDirichletTail (s, N) : |ζ s - Σ_{n≤N} n^{-s}| ≤ B(s,N)` with
   `B` an explicit closed-form bound for `Re s ≥ 1 + ε`; the
