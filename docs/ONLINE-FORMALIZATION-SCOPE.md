@@ -76,8 +76,9 @@ the entire remaining work is step 2.
   `gammaHalfItDecay`: `‖Γ(1/2 + it)‖ ≤ sqrt(2π) · e^{−π|t|/2}`.
   These are the constants the disk-count machinery uses to control the
   completed zeta factor on a circle about the first zero.
-- **Phase 1d (left-region explicit Gamma bound)** — IN PROGRESS
-  (discovery 0508 = foundation DONE):
+- **Phase 1d (left-region explicit Gamma bound)** — DONE
+  (discovery 0508 = foundation; discovery 0509 = real-Gamma bound +
+  region corollary):
   `formal/RhAttack/OnlineZetaGammaBound.lean` (green, 0 real warnings —
   one pre-existing `maxHeartbeats` style lint shared with the committed
   sibling modules):
@@ -95,11 +96,28 @@ the entire remaining work is step 2.
     with the a.e. integral equality through
     `integral_congr_ae` + `ae_restrict_iff'` over
     `volume.restrict (Ioi 0)`.
-  - Next in this phase: the explicit REAL-Gamma upper bound on
-    `[1, P]` (split `∫₀^1 + ∫₁^A + ∫_A^∞` with the tail controlled by
-    `tPowExpTailBound`), then the region corollary
-    `‖Γ z‖ ≤ B(P)` for `z.re ∈ [1, P]` feeding the FE-transport
-    constants of `zetaTailTransportLeft`.
+  - `expIoc1A` / `expNegHalfIoi` — the two elementary exponential
+    integrals (FTC; the `Ioi` one via
+    `intervalIntegral_tendsto_integral_Ioi` +
+    `tendsto_nhds_unique`).
+  - `gammaTailInteq (q : ℝ) (_hq : 0 < q) (A : ℝ) (hA : 1 ≤ A)` —
+    the one-step integration-by-parts identity on `[1, A]`:
+    `∫₁ᴬ e^{-t} t^q = e^{-1} − e^{-A}A^q + q ∫₁ᴬ e^{-t} t^{q−1}`.
+  - `rpowIntervalIntegral (q : ℝ) (hq : −1 < q) (a b : ℝ) (ha : 0 < a)
+    (hab : a ≤ b)` — `∫_a^b x^q = (b^{q+1} − a^{q+1})/(q+1)`.
+  - `realGammaBound (p : ℝ) (A : ℝ) (hp : 1 ≤ p) (hA1 : 1 ≤ A)
+    (hA2 : 2(p−1) ≤ A)` — the explicit real-Gamma upper bound
+    `Γ p ≤ 1 + e^{-1} A^{p−1} + 2(2(p−1))^{p−1} e^{−(p−1)} e^{−A/2}`
+    (integral split `0..1` + `1..A` + `A..∞`; `p = 1` case separate).
+  - `cGammaBoundRe {z : ℂ} (hz : 1 ≤ z.re)` — the region corollary
+    `‖Γ z‖ ≤` closed form in `z.re` alone (cutoff
+    `A := max 1 (2(z.re−1))`), combining `cGammaLeRealGammaRe` +
+    `realGammaBound`. This is the EXPLICIT computable bound for
+    `‖Γ(1−s)‖` that `zetaTailTransportLeft` needs on the left arc of
+    the disk circle. Phase 1d is COMPLETE; the module is green with
+    0 warnings (the pre-existing unscoped-`maxHeartbeats` lint was
+    removed — the Lean 4.33.1 default of 100000 heartbeats is
+    already looser than the old 40000 cap).
 - **Phase 2 (in-strip explicit engine)** — IN PROGRESS. Done so far:
   `OnlineZetaEta.etaIdentity` — for `Re s > 1`,
   `η(s) = (1 − 2^{1−s}) · ζ(s)` with `η(s) = Σ (−1)^{n−1} n^{−s}`
