@@ -76,6 +76,30 @@ the entire remaining work is step 2.
   `gammaHalfItDecay`: `‖Γ(1/2 + it)‖ ≤ sqrt(2π) · e^{−π|t|/2}`.
   These are the constants the disk-count machinery uses to control the
   completed zeta factor on a circle about the first zero.
+- **Phase 1d (left-region explicit Gamma bound)** — IN PROGRESS
+  (discovery 0508 = foundation DONE):
+  `formal/RhAttack/OnlineZetaGammaBound.lean` (green, 0 real warnings —
+  one pre-existing `maxHeartbeats` style lint shared with the committed
+  sibling modules):
+  - `tPowExpTailBound (a t : ℝ) (ha : 0 ≤ a) (ht : 2a ≤ t) :
+    t^a e^{-t} ≤ (2a)^a e^{-a} e^{-t/2}` — the pointwise engine for the
+    real-Gamma tail, from `log u ≤ u − 1` at `u = t/(2a) ≥ 1` (the
+    case `a = 0` handled separately via `0^0 = 1` and `e^{-t} ≤
+    e^{-t/2}` for `t ≥ 0`).
+  - `cGammaLeRealGammaRe {z : ℂ} (hz : 0 < z.re) :
+    ‖Γ z‖ ≤ Γ(z.re)` — the complex-to-real reduction: Euler integral
+    `Γ z = ∫₀^∞ e^{-x} x^{z−1} dx` (pinned Mathlib `Gamma_eq_integral`),
+    `norm_integral_le_integral_norm`, and the pointwise identity
+    `‖e^{-x}(x:ℂ)^{z−1}‖ = e^{-x} x^{z.re−1}` for `x > 0` via
+    `cpow_def_of_ne_zero` + `ofReal_log` + `norm_exp` + `‖exp(Iu)‖ = 1`,
+    with the a.e. integral equality through
+    `integral_congr_ae` + `ae_restrict_iff'` over
+    `volume.restrict (Ioi 0)`.
+  - Next in this phase: the explicit REAL-Gamma upper bound on
+    `[1, P]` (split `∫₀^1 + ∫₁^A + ∫_A^∞` with the tail controlled by
+    `tPowExpTailBound`), then the region corollary
+    `‖Γ z‖ ≤ B(P)` for `z.re ∈ [1, P]` feeding the FE-transport
+    constants of `zetaTailTransportLeft`.
 - **Phase 2 (in-strip explicit engine)** — IN PROGRESS. Done so far:
   `OnlineZetaEta.etaIdentity` — for `Re s > 1`,
   `η(s) = (1 − 2^{1−s}) · ζ(s)` with `η(s) = Σ (−1)^{n−1} n^{−s}`
@@ -272,7 +296,9 @@ the entire remaining work is step 2.
 
   **Next:** the disk-count program, now that its ENGINE is done
   (Phase 0.5 `countZerosDisk`, discovery 0507): Phase 1 (explicit ζ
-  evaluation lemmas feeding the engine), then the numerical assertions
+  evaluation lemmas feeding the engine — the Gamma-bound foundation is
+  in, discovery 0508; the explicit real-Gamma bound on `[1, P]` is the
+  next increment), then the numerical assertions
   N1 (disk count = 1) + N2 (boundary separation) + N3 (annulus band
   nonvanishing), then **Assembly**: `#S(T0) = 1` + orbit argument
   (`ZetaConcrete.zetaSliceSubsingletonOnLine`) discharge `honline`.
