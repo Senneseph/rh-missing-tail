@@ -270,12 +270,11 @@ the entire remaining work is step 2.
   House rules held: `lake build RhAttack.OnlineZetaEta6` 0 errors,
   full `lake build` green (17454 jobs), `sorry`/`admit`/axioms = 0.
 
-  **Next:** **Phase 3 (disk count)** — Jensen circular mean with a
-  rigorous error band not crossing an integer, plus a bounded numerical
-  sign-change assertion in `(14, 14.2)` from the Phase 2 engine (the
-  Phase 3 hook identity `‖sin z‖² = sin²(Re z) +
-  sinh²(Im z)` is already staged in `OnlineZetaEta6.lean`). Then
-  **Assembly**: `#S(T0) = 1` + orbit argument
+  **Next:** the disk-count program, now that its ENGINE is done
+  (Phase 0.5 `countZerosDisk`, discovery 0507): Phase 1 (explicit ζ
+  evaluation lemmas feeding the engine), then the numerical assertions
+  N1 (disk count = 1) + N2 (boundary separation) + N3 (annulus band
+  nonvanishing), then **Assembly**: `#S(T0) = 1` + orbit argument
   (`ZetaConcrete.zetaSliceSubsingletonOnLine`) discharge `honline`.
 - **Phase 3 (disk count)** — after Phase 2: Jensen circular mean with a
   rigorous error band not crossing an integer, plus a bounded numerical
@@ -421,6 +420,44 @@ arithmetic in Lean):**
   `2πi · D u` by (2) with `f := const (D u : ℬ)`; sum.
   For ζ the hypotheses are: entire (Mathlib), no zero on the
   explicit circle (assertion N2 of the plan).
+- **Phase 0.5 — `countZerosDisk` (circular argument principle) — DONE
+  (discovery 0507).**
+  `formal/RhAttack/OnlineZetaDisk.lean` (843 lines, 15 theorems/defs,
+  green, 0 warnings):
+  - **Main theorem** `countZerosDisk (hR : 0 < R)`
+    `(hA : AnalyticOnNhd ℂ f (closedBall c |R|))`
+    `(hnozero : ∀ z ∈ sphere c |R|, f z ≠ 0)`
+    `(hnotop : ∀ u ∈ closedBall c |R|, meromorphicOrderAt f u ≠ ⊤) :
+    (∮ z in C(c, |R|), deriv f z / f z) =
+    (2 * Real.pi * Complex.I : ℂ) * (zeroCount c |R| f : ℂ)` — the N1
+    engine: for entire `f` (hence ζ) this is `2πi` times the zero count
+    with multiplicity.
+  - `phiDisk` / `phiDisk_eq_finset` — the local factor
+    `φ(z) = ∏_{u ∈ F} (z - u)^{D u}` as a finprod, equal to the finite
+    product over the finite support `F` (`finprod_eq_finsetProd_of_mulSupport_subset`).
+  - `finset_prod_differentiableAt` / `finset_prod_analyticAt` — Finset
+    induction with `HasDerivAt.mul` / `AnalyticAt.zpow` (no
+    `Finset.hasDerivAt_prod` exists in the pinned build).
+  - `finset_prod_logDeriv` — the derivative-of-product computation
+    `(∏(w-u)^{d u})'/∏(w-u)^{d u} = ∑ d u / (z - u)`, via the product
+    rule, `HasDerivAt.comp_sub_const` for the shifted zpow derivative,
+    and field/ring normalization.
+  - `accPt_closedBall` — every point of a positive-radius closed ball
+    is an accumulation point (explicit stepping; the
+    `min(ε, 4R)/4` overshoot case needs the exact collinear distance
+    computation `dist(c, w) = |‖c - z‖ - t|` and the `4R` slack).
+  - Proof route as audited in Phase 0: `extract_zeros_poles` +
+    `eventuallyEq_nhdsNE_of_eventuallyEq_codiscreteWithin` (the
+    meromorphic `codiscreteWithin` bridge, requiring `AccPt z (𝓟 U)`)
+    + `HasDerivAt.congr_of_eventuallyEq` +
+    `circleIntegral.integral_congr` / `integral_add` /
+    `integral_fun_sum` + `circleIntegral_eq_zero_of_differentiable_on_off_countable`
+    (kills `∮ g'/g`) + `circleIntegral_div_sub_of_differentiable_on_off_countable`
+    (each residue term `= 2πi · D u`) + `finsum_eq_finsetSum_of_support_subset`
+    for the `zeroCount` bridge.
+  House rules held: `lake build RhAttack.OnlineZetaDisk` 0 errors / 0
+  warnings (8706 jobs), full `lake build` green (17454 jobs),
+  `sorry`/`admit`/axioms = 0.
 - **Phase 1 — explicit ζ evaluation engine.** Local lemmas:
   `zetaDirichletTail (s, N) : |ζ s - Σ_{n≤N} n^{-s}| ≤ B(s,N)` with
   `B` an explicit closed-form bound for `Re s ≥ 1 + ε`; the

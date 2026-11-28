@@ -1,0 +1,20 @@
+{
+  "id": "0506",
+  "ts": "2026-11-27T10:00:00Z",
+  "kind": "discovery",
+  "status": "active",
+  "lane": "honline program (OUR SOLUTION) - Phase 0 exact-statement audit + Phase 0.5 setup",
+  "unit": 193,
+  "no_rh_claim": true,
+  "title": "0506: Phase 0 exact-statement audit (pinned Mathlib v4.33.1) DONE. Read off the exact statements for Jensen (circleAverage_log_norm), the circle-integral residue units (circleIntegral_sub_inv_smul / circleIntegral_div_sub / circleIntegral_eq_zero_of_differentiable_on_off_countable), and zero/pole extraction (MeromorphicOn.extract_zeros_poles); confirmed NO argument principle, no windingNumber, no bare integer zero-count API exists in the pinned build. Fixed the local countZerosDisk statement and proof route; created formal/RhAttack/OnlineZetaDisk.lean (setup module, 7 lemmas, green).",
+  "facts": [
+    "PHASE 0 AUDIT (pinned Mathlib v4.33.1, read-only). (1) Jensen: MeromorphicOn.circleAverage_log_norm (JensenFormula.lean:309) gives the log-averaged Jensen identity with RHS coefficients log(R/‖c-u‖) - Jensen alone does NOT read off a bare integer count. (2) Residue units (CauchyIntegral.lean:532/572/440): circleIntegral_sub_inv_smul_of_differentiable_on_off_countable (∮ (z-w)^-1 • f z = 2πi • f w), circleIntegral_div_sub_of_differentiable_on_off_countable (∮ f z/(z-w) = 2πi f w), circleIntegral_eq_zero_of_differentiable_on_off_countable (∮ f z = 0 when holomorphic off a countable set). (3) Extraction (FactorizedRational.lean:296): MeromorphicOn.extract_zeros_poles gives f =ᶠ[codiscreteWithin U] (∏ᴰ u, (·-u)^(divisor f U u)) • g with g analytic and nonzero; finite support on the compact ball makes the finprod a genuine finite product. (4) Confirmed absent (grepped, empty): no argument_principle of any shape, no windingNumber, no zero-order API for holomorphic functions in the pinned build.",
+    "CONSEQUENCE - THE COUNT GOES THROUGH A DISK, NOT A RECTANGLE. Center a disk D = disk (1/2 + (T0/2)I) R with R = sqrt(1/4 + (T0/2)^2) + delta so D contains the whole strip slice; three bounded numerical assertions (N1 disk count = 1 via the circular argument principle, N2 no zero on the circle, N3 no zero in the annulus band above T0) then give #S(T0) = 1. The circular argument principle must be built locally from the residue units above (estimated cost: modest).",
+    "LOCAL STATEMENT FIXED (recorded in docs/ONLINE-FORMALIZATION-SCOPE.md): countZerosDisk (hR : 0 < R) {c f} (hA : AnalyticOnNhd f (closedBall c R)) (hnozero : nonzero on the circle) : (∮ z in C(c, |R|), deriv f z / f z) = 2 * pi * I * (zeroCount c |R| f : ℂ), with zeroCount c R f := finsum (fun u => divisor f (closedBall c |R|) u). Proof route: MeromorphicOn.extract_zeros_poles + finite support + HasDerivAt.congr_of_eventuallyEq (via the codiscreteWithin-bridge eventuallyEq_nhdsNE_of_eventuallyEq_codiscreteWithin) + integral_congr + integral_fun_sum + the residue units.",
+    "PHASE 0.5 SETUP MODULE COMMITTED: formal/RhAttack/OnlineZetaDisk.lean (104 lines): zeroCount + analyticOnNhd_closedBall_meromorphicOn + divisor_closedBall_finiteSupport + analyticOnNhd_closedBall_continuousOn + analyticOnNhd_closedBall_differentiableAt_ball/closedBall + divisor_nonneg_of_analyticAt. lake build RhAttack.OnlineZetaDisk green, full lake build green (17454 jobs), 0 sorry/admit/axioms. House rules held."
+  ],
+  "pins": [
+    "docs/ONLINE-FORMALIZATION-SCOPE.md",
+    "formal/RhAttack/OnlineZetaDisk.lean"
+  ]
+}
