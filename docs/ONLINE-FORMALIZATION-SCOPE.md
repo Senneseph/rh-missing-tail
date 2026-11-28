@@ -332,13 +332,32 @@ the entire remaining work is step 2.
   `C := 1/2 + 7.07·I`, `R := sqrt(1/4 + 7.07²) + 1/100` and proves the
   strip-slice ⊂ disk containment, the `Re s ∈ (−6.6, 7.6)` /
   `Im s < T0 + 3/100` / `Im s > −1` ranges, and the N3 band width
-  `3/100`; **increment 2 NEXT**: the first explicit ζ evaluation arc
-  on the circle — the `Re s > 1` Dirichlet side — feeding N2 (no zero
-  on the circle) and N1 (disk count = 1)), then the numerical
-  assertions N1 (disk count = 1) + N2 (boundary separation) + N3
-  (annulus band nonvanishing), then **Assembly**: `#S(T0) = 1` + orbit
-  argument (`ZetaConcrete.zetaSliceSubsingletonOnLine`) discharge
-  `honline`.
+  `3/100`);
+
+  **Phase 1 increment 2 — DONE (discovery 0511).** First explicit ζ
+  evaluation arc on the disk circle, `Re s > 1` Dirichlet side:
+  `formal/RhAttack/OnlineZetaEta7.lean` proves
+  `etaRemK_norm_bound_right (hs : 1 < s.re) (K : ℕ)` — the
+  Phase 2.3.2 Euler-transform remainder
+  `‖etaRemK s K‖ ≤ 2^{-K}·(1/(Re s + K) + (2·Re s)^{Re s−1} e^{−1}
+  + 2 (2·Re s)^{Re s−1} e^{−2 Re s})`, via the piecewise majorant
+  `t^{σ+K−1}` on `(0,1]`, `(2σ)^{σ−1} e^{−t}` on `(1,2σ)`,
+  `(2σ)^{σ−1} e^{−σ} e^{−t/2}` on `[2σ,∞)` (σ := Re s > 1) and the
+  explicit integral `1/(σ+K) + (2σ)^{σ−1} e^{−1} + 2 (2σ)^{σ−1}
+  e^{−2σ}`. On the `Re s > 1` arc this makes `ζ(s)` = finite explicit
+  sum − bounded remainder, feeding N2 via the
+  `|ζ(s)| ≥ |partial sum| − tail` separation. Module green, 0 errors
+  0 warnings.
+
+  **Phase 1 increment 3 NEXT:** the explicit lower bound
+  `|ζ(s)| ≥ m > 0` on the full circle (arc by arc: `Re s > 1` via the
+  increment 2 separation with the Euler/Dirichlet partial sum, `0 <
+  Re s ≤ 1` via the Phase 2.3.2 `etaEuler_engine_bound` +
+  `(1−2^{1−s})^{−1}` normalization, `Re s < 0` via the FE transport
+  `OnlineZetaFE.zetaFEtransport` + `cGammaBoundRe`), giving N2
+  (no zero on the circle) and N1 (disk count = 1) + N3 (annulus band
+  nonvanishing), then **Assembly**: `#S(T0) = 1` + orbit argument
+  (`ZetaConcrete.zetaSliceSubsingletonOnLine`) discharge `honline`.
 - **Phase 3 (disk count)** — after Phase 2: Jensen circular mean with a
   rigorous error band not crossing an integer, plus a bounded numerical
   sign-change assertion in `(14, 14.2)` from the Phase 2 engine.
