@@ -312,14 +312,33 @@ the entire remaining work is step 2.
   House rules held: `lake build RhAttack.OnlineZetaEta6` 0 errors,
   full `lake build` green (17454 jobs), `sorry`/`admit`/axioms = 0.
 
+  **Phase 1d increment 2 — DONE (discovery 0509).** Explicit
+  real-Gamma bound + region corollary in
+  `OnlineZetaGammaBound.lean`: `realGammaBound (p) (A) (hp : 1 ≤ p)
+  (hA1 : 1 ≤ A) (hA2 : 2(p−1) ≤ A)` : `Γ p ≤ 1 + e^{-1} A^{p−1} +
+  2(2(p−1))^{p−1} e^{−(p−1)} e^{−A/2}` (integral split `0..1` + `1..A`
+  + `A..∞`; IBP on `[1,A]`; tail via `tPowExpTailBound` +
+  `∫_A^∞ e^{-t/2} = 2e^{-A/2}`; the `p = 1` case separate) and
+  `cGammaBoundRe {z} (hz : 1 ≤ z.re)` — the closed-form bound for
+  `‖Γ z‖` in `z.re` alone (cutoff `A := max 1 (2(z.re−1))`).
+  Supporting lemmas: `expIoc1A`, `expNegHalfIoi`, `gammaTailInteq`,
+  `rpowIntervalIntegral`. Module green, 0 errors 0 warnings.
+
   **Next:** the disk-count program, now that its ENGINE is done
   (Phase 0.5 `countZerosDisk`, discovery 0507): Phase 1 (explicit ζ
-  evaluation lemmas feeding the engine — the Gamma-bound foundation is
-  in, discovery 0508; the explicit real-Gamma bound on `[1, P]` is the
-  next increment), then the numerical assertions
-  N1 (disk count = 1) + N2 (boundary separation) + N3 (annulus band
-  nonvanishing), then **Assembly**: `#S(T0) = 1` + orbit argument
-  (`ZetaConcrete.zetaSliceSubsingletonOnLine`) discharge `honline`.
+  evaluation lemmas feeding the engine — **increment 1 DONE, discovery
+  0510**: the concrete disk geometry module
+  `formal/RhAttack/OnlineZetaDiskGeom.lean` fixes `T0 := 707/50`,
+  `C := 1/2 + 7.07·I`, `R := sqrt(1/4 + 7.07²) + 1/100` and proves the
+  strip-slice ⊂ disk containment, the `Re s ∈ (−6.6, 7.6)` /
+  `Im s < T0 + 3/100` / `Im s > −1` ranges, and the N3 band width
+  `3/100`; **increment 2 NEXT**: the first explicit ζ evaluation arc
+  on the circle — the `Re s > 1` Dirichlet side — feeding N2 (no zero
+  on the circle) and N1 (disk count = 1)), then the numerical
+  assertions N1 (disk count = 1) + N2 (boundary separation) + N3
+  (annulus band nonvanishing), then **Assembly**: `#S(T0) = 1` + orbit
+  argument (`ZetaConcrete.zetaSliceSubsingletonOnLine`) discharge
+  `honline`.
 - **Phase 3 (disk count)** — after Phase 2: Jensen circular mean with a
   rigorous error band not crossing an integer, plus a bounded numerical
   sign-change assertion in `(14, 14.2)` from the Phase 2 engine.
